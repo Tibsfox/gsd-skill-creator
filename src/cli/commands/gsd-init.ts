@@ -98,6 +98,18 @@ function warn(msg: string, stats: Stats): void {
 }
 
 /**
+ * Assert that resolvedPath is contained within root.
+ * Prevents path traversal attacks via malicious manifest entries.
+ */
+export function assertContained(resolvedPath: string, root: string): void {
+  const normalizedRoot = path.resolve(root) + path.sep;
+  const normalizedTarget = path.resolve(resolvedPath);
+  if (!normalizedTarget.startsWith(normalizedRoot) && normalizedTarget !== path.resolve(root)) {
+    throw new Error(`Path traversal blocked: ${resolvedPath} escapes project root`);
+  }
+}
+
+/**
  * Resolve the package root and source directory for project-claude files.
  * When running from dist/cli/commands/gsd-init.js → package root is 3 levels up.
  * When running via tsx src/cli/commands/gsd-init.ts → same relative structure.
@@ -105,6 +117,9 @@ function warn(msg: string, stats: Stats): void {
 function resolveSourceDir(): string {
   const thisFile = fileURLToPath(import.meta.url);
   const packageRoot = path.resolve(path.dirname(thisFile), '..', '..', '..');
+  if (!existsSync(path.join(packageRoot, 'package.json'))) {
+    throw new Error(`Invalid package root: ${packageRoot} (no package.json found)`);
+  }
   return path.join(packageRoot, 'project-claude');
 }
 
@@ -119,6 +134,7 @@ async function installStandalone(
 ): Promise<void> {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = await readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -158,6 +174,7 @@ async function installSkillDir(
 ): Promise<void> {
   const sourceBase = path.join(sourceDir, entry.source);
   const targetBase = path.join(projectRoot, entry.target);
+  assertContained(targetBase, projectRoot);
 
   if (!existsSync(sourceBase)) {
     warn(`Skill source directory missing: ${entry.source}`, stats);
@@ -211,6 +228,7 @@ async function installHookScript(
 ): Promise<void> {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = await readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -255,6 +273,7 @@ async function installClaudeMd(
 ): Promise<void> {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
   const legacyThreshold = entry.legacyThreshold || 100;
 
   const sourceContent = await readFileSafe(sourcePath);
@@ -308,6 +327,7 @@ async function installExtension(
 ): Promise<void> {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
   const marker = entry.marker!;
 
   const fragmentContent = await readFileSafe(sourcePath);
@@ -378,6 +398,7 @@ async function installSettings(
 ): Promise<void> {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = await readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -729,61 +750,213 @@ function validateInstallation(
 
 async function uninstallIntegration(
   projectRoot: string,
+  sourceDir: string,
+  manifest: Manifest,
   opts: Options,
 ): Promise<number> {
   const prefix = opts.dryRun ? '[DRY RUN] ' : '';
-  console.log(`${prefix}Uninstalling integration components...\n`);
+  log(`${prefix}Uninstalling integration components...\n`, opts.quiet);
 
-  const integrationTargets = {
-    dirs: [
-      '.claude/commands/sc',
-      '.claude/commands/wrap',
-      '.claude/skills/gsd-workflow',
-      '.claude/skills/skill-integration',
-      '.claude/skills/session-awareness',
-      '.claude/skills/security-hygiene',
-    ],
-    files: [
-      '.claude/agents/observer.md',
-      '.claude/agents/gsd-executor.md',
-      '.claude/agents/gsd-verifier.md',
-      '.claude/agents/gsd-planner.md',
-      '.claude/hooks/session-state.sh',
-      '.claude/hooks/validate-commit.sh',
-      '.claude/hooks/phase-boundary-check.sh',
-      '.planning/skill-creator.json',
-    ],
-  };
+  // Build target lists dynamically from manifest
+  const filesToRemove: string[] = [];
+  const dirsToRemove: string[] = [];
+
+  // Standalone files
+  if (manifest.files.standalone) {
+    for (const entry of manifest.files.standalone) {
+      const target = entry.target;
+      // If the target has a parent dir inside .claude/skills/ or .claude/teams/, track the dir
+      const parentDir = path.dirname(target);
+      if (parentDir !== '.' && (
+        parentDir.startsWith('.claude/skills/') ||
+        parentDir.startsWith('.claude/teams/') ||
+        parentDir.startsWith('.claude/commands/')
+      ) && !parentDir.endsWith('/sc') && !parentDir.endsWith('/wrap') && !parentDir.endsWith('/gsd') && !parentDir.endsWith('/commands')) {
+        // Single-file skill/team dirs — track parent for cleanup
+        if (!dirsToRemove.includes(parentDir)) {
+          dirsToRemove.push(parentDir);
+        }
+      } else {
+        filesToRemove.push(target);
+      }
+    }
+  }
+
+  // Skill directories (multi-file)
+  if (manifest.files.skills) {
+    for (const entry of manifest.files.skills) {
+      dirsToRemove.push(entry.target);
+    }
+  }
+
+  // Hook scripts
+  if (manifest.files.hookScripts) {
+    for (const entry of manifest.files.hookScripts) {
+      filesToRemove.push(entry.target);
+    }
+  }
+
+  // CLAUDE.md — warn but don't remove
+  // (handled separately below)
+
+  // Settings — handled separately (merge removal)
+  // Extensions — handled separately (marker strip)
+
+  // Integration config
+  filesToRemove.push('.planning/skill-creator.json');
 
   let removed = 0;
   let notFound = 0;
   let skipped = 0;
 
-  for (const dir of integrationTargets.dirs) {
+  // Remove directories
+  for (const dir of dirsToRemove) {
     const fullPath = path.join(projectRoot, dir);
+    assertContained(fullPath, projectRoot);
     if (existsSync(fullPath)) {
       if (!opts.dryRun) {
         await fs.rm(fullPath, { recursive: true, force: true });
       }
-      console.log(`  ${pc.red('-')} removed:   ${dir}/`);
+      log(`  ${pc.red('-')} removed:   ${dir}/`, opts.quiet);
       removed++;
     } else {
-      console.log(`  ${pc.dim('.')} not found: ${dir}/`);
+      log(`  ${pc.dim('.')} not found: ${dir}/`, opts.quiet);
       notFound++;
     }
   }
 
-  for (const file of integrationTargets.files) {
+  // Remove standalone files
+  for (const file of filesToRemove) {
     const fullPath = path.join(projectRoot, file);
+    assertContained(fullPath, projectRoot);
     if (existsSync(fullPath)) {
       if (!opts.dryRun) {
         await fs.unlink(fullPath);
       }
-      console.log(`  ${pc.red('-')} removed:   ${file}`);
+      log(`  ${pc.red('-')} removed:   ${file}`, opts.quiet);
       removed++;
     } else {
-      console.log(`  ${pc.dim('.')} not found: ${file}`);
+      log(`  ${pc.dim('.')} not found: ${file}`, opts.quiet);
       notFound++;
+    }
+  }
+
+  // Strip extension markers from target files (don't delete the files)
+  if (manifest.files.extensions) {
+    for (const entry of manifest.files.extensions) {
+      const targetPath = path.join(projectRoot, entry.target);
+      assertContained(targetPath, projectRoot);
+      const marker = entry.marker!;
+      const startMarker = `<!-- ${marker} START -->`;
+      const endMarker = `<!-- ${marker} END -->`;
+
+      const content = await readFileSafe(targetPath);
+      if (content !== null) {
+        const startIdx = content.indexOf(startMarker);
+        const endIdx = content.indexOf(endMarker);
+        if (startIdx !== -1 && endIdx !== -1) {
+          const before = content.substring(0, startIdx);
+          const after = content.substring(endIdx + endMarker.length);
+          const cleaned = (before + after).replace(/\n{3,}/g, '\n\n').trimEnd() + '\n';
+          if (!opts.dryRun) {
+            await fs.writeFile(targetPath, cleaned);
+          }
+          log(`  ${pc.red('-')} stripped:  ${entry.target} [${marker}]`, opts.quiet);
+          removed++;
+        } else {
+          log(`  ${pc.dim('.')} no marker: ${entry.target} [${marker}]`, opts.quiet);
+          notFound++;
+        }
+      }
+    }
+  }
+
+  // Remove merged hooks from settings.json
+  if (manifest.files.settings || manifest.files.settingsHooks) {
+    const settingsPath = path.join(projectRoot, '.claude', 'settings.json');
+    const settingsContent = await readFileSafe(settingsPath);
+    if (settingsContent !== null) {
+      try {
+        const settings = JSON.parse(settingsContent) as Record<string, unknown>;
+        let changed = false;
+
+        // Collect all hook commands we installed
+        const ourCommands = new Set<string>();
+        for (const settingsEntry of [manifest.files.settings, manifest.files.settingsHooks]) {
+          if (!settingsEntry) continue;
+          const srcPath = path.join(sourceDir, settingsEntry.source);
+          const srcContent = await readFileSafe(srcPath);
+          if (srcContent) {
+            try {
+              const src = JSON.parse(srcContent) as Record<string, unknown>;
+              const srcHooks = src.hooks as Record<string, Array<{ hooks?: Array<{ command: string }> }>> | undefined;
+              if (srcHooks) {
+                for (const groups of Object.values(srcHooks)) {
+                  for (const group of groups) {
+                    const cmd = group.hooks?.[0]?.command;
+                    if (cmd) ourCommands.add(cmd);
+                  }
+                }
+              }
+            } catch { /* ignore parse errors */ }
+          }
+        }
+
+        // Remove our hooks from target settings
+        const targetHooks = settings.hooks as Record<string, Array<{ hooks?: Array<{ command: string }> }>> | undefined;
+        if (targetHooks) {
+          for (const [event, groups] of Object.entries(targetHooks)) {
+            const filtered = groups.filter(
+              (group: { hooks?: Array<{ command: string }> }) => {
+                const cmd = group.hooks?.[0]?.command;
+                return !cmd || !ourCommands.has(cmd);
+              },
+            );
+            if (filtered.length !== groups.length) {
+              changed = true;
+              if (filtered.length === 0) {
+                delete targetHooks[event];
+              } else {
+                targetHooks[event] = filtered;
+              }
+            }
+          }
+          // If hooks object is now empty, remove it
+          if (Object.keys(targetHooks).length === 0) {
+            delete settings.hooks;
+          }
+        }
+
+        // Remove statusLine if it was ours
+        if ((settings as Record<string, unknown>).statusLine) {
+          const settingsEntry = manifest.files.settings;
+          if (settingsEntry) {
+            const srcPath = path.join(sourceDir, settingsEntry.source);
+            const srcContent = await readFileSafe(srcPath);
+            if (srcContent) {
+              try {
+                const src = JSON.parse(srcContent) as Record<string, unknown>;
+                if (src.statusLine) {
+                  delete (settings as Record<string, unknown>).statusLine;
+                  changed = true;
+                }
+              } catch { /* ignore */ }
+            }
+          }
+        }
+
+        if (changed) {
+          if (!opts.dryRun) {
+            await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2) + '\n');
+          }
+          log(`  ${pc.red('-')} cleaned:   .claude/settings.json (hooks removed)`, opts.quiet);
+          removed++;
+        } else {
+          log(`  ${pc.dim('=')} current:   .claude/settings.json (no our hooks found)`, opts.quiet);
+        }
+      } catch {
+        log(`  ${pc.yellow('⚠')} skipped:   .claude/settings.json (invalid JSON)`, opts.quiet);
+      }
     }
   }
 
@@ -795,28 +968,38 @@ async function uninstallIntegration(
       if (!opts.dryRun) {
         await fs.unlink(hookPath);
       }
-      console.log(`  ${pc.red('-')} removed:   .git/hooks/post-commit`);
+      log(`  ${pc.red('-')} removed:   .git/hooks/post-commit`, opts.quiet);
       removed++;
     } else {
-      console.log(`  ${pc.yellow('~')} skipped:   .git/hooks/post-commit (not ours)`);
+      log(`  ${pc.yellow('~')} skipped:   .git/hooks/post-commit (not ours)`, opts.quiet);
       skipped++;
     }
   } else {
-    console.log(`  ${pc.dim('.')} not found: .git/hooks/post-commit`);
+    log(`  ${pc.dim('.')} not found: .git/hooks/post-commit`, opts.quiet);
     notFound++;
   }
 
-  console.log('');
-  console.log(`  Preserved: .planning/patterns/ (observation data)`);
-  console.log('');
-  console.log(`${prefix}Uninstall complete: ${removed} removed, ${notFound} not found, ${skipped} skipped`);
+  // CLAUDE.md warning
+  const claudeMdPath = path.join(projectRoot, 'CLAUDE.md');
+  if (existsSync(claudeMdPath)) {
+    log(`  ${pc.yellow('~')} warning:   CLAUDE.md was installed by gsd-init — review manually`, opts.quiet);
+  }
+
+  log('', opts.quiet);
+  log(`  Preserved: .planning/patterns/ (observation data)`, opts.quiet);
+  log('', opts.quiet);
+  log(`${prefix}Uninstall complete: ${removed} removed, ${notFound} not found, ${skipped} skipped`, opts.quiet);
 
   return 0;
 }
 
 // --- Main entry point ---
 
-export async function gsdInitCommand(args: string[]): Promise<number> {
+export interface GsdInitOverrides {
+  sourceDir?: string;
+}
+
+export async function gsdInitCommand(args: string[], overrides?: GsdInitOverrides): Promise<number> {
   const dryRun = args.includes('--dry-run');
   const force = args.includes('--force');
   const quiet = args.includes('--quiet');
@@ -856,7 +1039,7 @@ Examples:
   }
 
   const projectRoot = process.cwd();
-  const sourceDir = resolveSourceDir();
+  const sourceDir = overrides?.sourceDir ?? resolveSourceDir();
   const claudeDir = path.join(projectRoot, '.claude');
   const opts: Options = { dryRun, force, quiet };
   const stats: Stats = { installed: 0, updated: 0, current: 0, warnings: 0 };
@@ -884,7 +1067,7 @@ Examples:
   }
 
   if (uninstall) {
-    return uninstallIntegration(projectRoot, opts);
+    return uninstallIntegration(projectRoot, sourceDir, manifest, opts);
   }
 
   const prefix = dryRun ? pc.yellow('[DRY RUN] ') : '';
