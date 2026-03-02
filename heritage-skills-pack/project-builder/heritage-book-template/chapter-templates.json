@@ -1,0 +1,51 @@
+[
+  {
+    "contentType": "skill-documentation",
+    "title": "Skill Documentation Chapter",
+    "guidanceNotes": "Documents a specific heritage skill with step-by-step instructions, materials lists, safety notes, and cultural context. Draws on Try Session content from the Skill Hall rooms. Always include the tradition of origin with nation-specific attribution (e.g., 'Anishinaabe birchbark biting' not 'Indigenous craft'). For Inuit skills, note the IQ principle context if applicable. Include cross-references to canonical works using the Bibliography Engine.",
+    "requiredFields": ["title", "tradition", "nationAttribution", "skillSteps", "materialsRequired", "safetyNotes", "culturalContext", "bibliographyRefs"],
+    "estimatedPages": 8,
+    "culturalAttributionRequired": true
+  },
+  {
+    "contentType": "interview-transcript",
+    "title": "Interview Transcript Chapter",
+    "guidanceNotes": "A lightly edited transcript of an oral history interview. Preserve the knowledge holder's own language, idiom, and cadence — do not paraphrase. For Inuktitut content, preserve syllabics (ᐃᓄᒃᑎᑐᑦ) in their original form. Include a consent documentation note at the chapter opening. For First Nations and Inuit transcripts, note that the OCAP Access principle requires the knowledge holder to have reviewed and approved this transcript before publication. Foxfire method: student-interviewer introductions are preserved in the transcript, not edited out.",
+    "requiredFields": ["interviewerName", "knowledgeHolderName", "knowledgeHolderNation", "interviewDate", "consentProtocolId", "knowledgeHolderApprovalDate", "transcriptText"],
+    "estimatedPages": 12,
+    "culturalAttributionRequired": true,
+    "ocapReviewRequired": true
+  },
+  {
+    "contentType": "photo-essay",
+    "title": "Photo Essay Chapter",
+    "guidanceNotes": "A visual narrative documenting heritage skills, community life, or geographic/seasonal context. Each photograph requires a caption with nation-specific attribution where the subject is an Indigenous person or community context. Obtain explicit photographic consent — separate from interview consent. For Inuit and First Nations photography, check whether the community has photography protocols for ceremonial or sacred contexts.",
+    "requiredFields": ["title", "tradition", "photos", "captionsWithAttribution", "photographicConsentDocumented"],
+    "estimatedPages": 10,
+    "culturalAttributionRequired": true
+  },
+  {
+    "contentType": "cultural-context",
+    "title": "Cultural Context Chapter",
+    "guidanceNotes": "Provides historical, geographic, and community context for the skills documented in the Heritage Book. For Appalachian context: include specific regional geography (ridge and valley geography, specific counties), migration history (Scots-Irish, German, English settler communities), and economic history. For First Nations context: use nation-specific names (Anishinaabe, Haudenosaunee, Cree, Dene), acknowledge traditional territory, and reference OCAP framing for knowledge ownership. For Inuit context: use the four regional groups accurately (Nunavut Inuit, Nunavik Inuit, Inuvialuit, Labrador Inuit) and note which IQ principles are relevant to the skills documented.",
+    "requiredFields": ["title", "tradition", "geographicContext", "historicalContext", "communityContext", "sovereigntyNotes"],
+    "estimatedPages": 6,
+    "culturalAttributionRequired": true
+  },
+  {
+    "contentType": "how-to-guide",
+    "title": "How-To Guide Chapter",
+    "guidanceNotes": "A practical instructional guide for replicating a heritage skill. Distinct from skill-documentation in that it is written for the learner to follow directly, not as archival documentation. Include safety notes at every step where physical risk exists. For Indigenous skills: always acknowledge that the full depth of a traditional skill requires community mentorship and relationship — the written guide is a starting point, not a substitute for learning in community. Follow Try Session step format from the Skill Hall rooms.",
+    "requiredFields": ["title", "tradition", "difficulty", "estimatedTime", "materialsRequired", "steps", "safetyNotes", "communityMentorshipNote"],
+    "estimatedPages": 8,
+    "culturalAttributionRequired": true
+  },
+  {
+    "contentType": "ontological-bridge",
+    "title": "Ontological Bridge Chapter",
+    "guidanceNotes": "A teaching chapter that surfaces the epistemological tension between Western scientific/taxonomic frameworks and Indigenous knowledge systems. Following the OntologicalBridge pattern from Rooms 13 and 30, this chapter does not resolve the tension — it presents both frameworks honestly and treats the tension itself as educational. Example tensions to explore: SUMO's classification of a qajaq as a WaterVehicle (object) vs Inuit understanding of the qajaq as an extension of self and a relationship tool; Linnaean taxonomy of plant species vs Anishinaabe relational knowledge of plant kinship networks. Nation-specific attribution is mandatory — name the specific tradition providing the Indigenous perspective.",
+    "requiredFields": ["title", "tradition", "westernFramework", "indigenousFramework", "nationAttribution", "teachingPoint", "discussionQuestions"],
+    "estimatedPages": 5,
+    "culturalAttributionRequired": true
+  }
+]
