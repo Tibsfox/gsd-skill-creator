@@ -1175,6 +1175,14 @@ async function main() {
       break;
     }
 
+    case 'curl':
+    case 'cu': {
+      const { curlCommand } = await import('./cli/commands/curl.js');
+      const exitCode = await curlCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'event':
     case 'ev': {
       const { eventCommand } = await import('./cli/commands/event.js');
