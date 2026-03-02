@@ -40,12 +40,12 @@ import { describe, it, expect, vi } from 'vitest';
 import { loadGateTemplate } from './gate-templates.js';
 import { loadGateConfig } from './gate-loader.js';
 import { verifyTeachForwardChain } from './teach-forward.js';
-import { computeMilestoneScope } from '../../orchestrator/state/milestone-scope.js';
-import type { ProjectState } from '../../orchestrator/state/types.js';
-import { teamTransition, isValidTeamTransition } from '../../teams/team-lifecycle.js';
+import { computeMilestoneScope } from '../orchestrator/state/milestone-scope.js';
+import type { ProjectState } from '../orchestrator/state/types.js';
+import { teamTransition, isValidTeamTransition } from '../teams/team-lifecycle.js';
 import { EmbeddingCache } from '../../embeddings/embedding-cache.js';
-import { redactHeaders } from '../../curl/auth.js';
-import type { TeamConfig } from '../../types/team.js';
+import { redactHeaders } from '../../tools/curl/auth.js';
+import type { TeamConfig } from '../../core/types/team.js';
 
 // ============================================================================
 // GATE-04: Gate templates contain behavioral gate definitions

@@ -3,9 +3,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { teamDissolveCommand } from './team-dissolve.js';
-import { TeamStore } from '../../teams/team-store.js';
-import { TeamLifecycleManager } from '../../teams/team-lifecycle.js';
-import type { TeamConfig } from '../../types/team.js';
+import { TeamStore } from '../../../services/teams/team-store.js';
+import { TeamLifecycleManager } from '../../../services/teams/team-lifecycle.js';
+import type { TeamConfig } from '../../../core/types/team.js';
 
 describe('teamDissolveCommand', () => {
   let tempDir: string;

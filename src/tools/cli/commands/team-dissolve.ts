@@ -6,8 +6,8 @@
  * JSONL event log entries.
  */
 
-import { TeamStore, getTeamsBasePath } from '../../teams/team-store.js';
-import { TeamLifecycleManager } from '../../teams/team-lifecycle.js';
+import { TeamStore, getTeamsBasePath } from '../../../services/teams/team-store.js';
+import { TeamLifecycleManager } from '../../../services/teams/team-lifecycle.js';
 
 /**
  * Show help text for the team dissolve command.
