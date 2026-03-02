@@ -1,0 +1,44 @@
+{
+  "id": "first-circuit",
+  "title": "Your First Circuit: Ohm's Law in Action",
+  "description": "Build a voltage divider, measure node voltages, and trace current through series and parallel resistors. Concepts from 3 wings are explored using the MNA lab extension.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Connect two resistors in series (R1=1kΩ, R2=2kΩ) between a 9V source and ground. Calculate the expected voltage at the midpoint using the voltage divider formula V_mid = Vin * R2/(R1+R2).",
+      "expectedOutcome": "V_mid = 9V * 2000/3000 = 6V. KVL confirms: 3V drops across R1, 6V drops across R2.",
+      "hint": "The voltage divider formula works because both resistors carry identical current in series",
+      "conceptsExplored": ["elec-ohms-law-fundamentals"]
+    },
+    {
+      "instruction": "Add a 100nF capacitor in parallel with R2. Describe what happens to V_mid at DC steady-state vs. during a voltage step transient.",
+      "expectedOutcome": "At DC steady-state the capacitor blocks DC current so V_mid = 6V unchanged. During a voltage step the capacitor initially looks like a short circuit, pulling V_mid low then charging to 6V with time constant τ = R_thevenin * C.",
+      "hint": "Find R_thevenin by shorting the voltage source -- R1 and R2 are then in parallel",
+      "conceptsExplored": ["elec-passive-component-behavior"]
+    },
+    {
+      "instruction": "Replace R1 with a forward-biased silicon diode. Predict V_mid now. What is the diode voltage drop? How does this change the voltage divider calculation?",
+      "expectedOutcome": "A silicon diode drops approximately 0.6-0.7V (Shockley equation with room-temperature thermal voltage ~26mV). V_mid = 9V - 0.65V = 8.35V (diode not in series with R2 but between supply and R2-to-ground).",
+      "hint": "A forward-biased diode is a nonlinear element -- it cannot be solved with the linear voltage divider formula",
+      "conceptsExplored": ["elec-diode-rectification", "elec-ohms-law-fundamentals"]
+    },
+    {
+      "instruction": "Build a common-emitter BJT amplifier with a 2N2222 transistor. Set collector current to 1mA with Ic = beta * Ib. Calculate the base resistor needed if Vbe = 0.65V and beta = 200.",
+      "expectedOutcome": "Ib = 1mA/200 = 5µA. Vbe = 0.65V so V_Rbase = 9V - 0.65V = 8.35V. Rbase = 8.35V/5µA = 1.67MΩ. Use 1.5MΩ standard value.",
+      "conceptsExplored": ["elec-transistor-amplifiers"]
+    },
+    {
+      "instruction": "Connect an op-amp in inverting configuration with Rf=10kΩ, Rin=1kΩ. Calculate the gain. Apply the golden rules to verify the virtual ground at the inverting input.",
+      "expectedOutcome": "Gain = -Rf/Rin = -10. With a 0.1V input the output is -1V. Virtual ground: op-amp drives output to keep V- = V+ = 0V (golden rule 2: no current into inputs).",
+      "hint": "The negative sign means phase inversion -- the output swings opposite to the input",
+      "conceptsExplored": ["elec-opamp-configurations"]
+    },
+    {
+      "instruction": "Write the C code for a microcontroller blink: toggle GPIO pin every 500ms using a delay loop. Identify which part of your code is the 'critical section' where interrupts could cause timing errors.",
+      "expectedOutcome": "The toggle+delay loop runs in 1-second periods. The critical section is the read-modify-write on the GPIO output register -- an interrupt between the read and write could corrupt the bit value.",
+      "hint": "Modern MCUs have atomic bit-set/bit-clear registers (e.g., BSRR on STM32) to avoid this race condition",
+      "conceptsExplored": ["elec-microcontroller-interfacing"]
+    }
+  ]
+}
