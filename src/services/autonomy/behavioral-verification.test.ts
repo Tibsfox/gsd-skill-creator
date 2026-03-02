@@ -42,6 +42,10 @@ import { loadGateConfig } from './gate-loader.js';
 import { verifyTeachForwardChain } from './teach-forward.js';
 import { computeMilestoneScope } from '../../orchestrator/state/milestone-scope.js';
 import type { ProjectState } from '../../orchestrator/state/types.js';
+import { teamTransition, isValidTeamTransition } from '../../teams/team-lifecycle.js';
+import { EmbeddingCache } from '../../embeddings/embedding-cache.js';
+import { redactHeaders } from '../../curl/auth.js';
+import type { TeamConfig } from '../../types/team.js';
 
 // ============================================================================
 // GATE-04: Gate templates contain behavioral gate definitions
@@ -475,7 +479,7 @@ describe('RCFX-01: computeMilestoneScope returns milestone-relative position', (
 });
 
 // ============================================================================
-// VERIF-03 Summary
+// VERIF-03 Summary (Phase 529)
 // ============================================================================
 
 // VERIF-03: Adversarial proof confirmed. Each behavioral test above was
@@ -484,3 +488,244 @@ describe('RCFX-01: computeMilestoneScope returns milestone-relative position', (
 // - GATE-06: Fails when validation accepts invalid milestone_type (success would be true)
 // - CTX-03: Fails when chain reports wrong gap numbers (gap array mismatch)
 // - RCFX-01: Fails when scope calculation is hardcoded (wrong index for phase 498)
+
+// ============================================================================
+// TEAM-01 (Phase 507): teamTransition() rejects invalid state transitions
+// ============================================================================
+// Shape-only pattern: VERIFICATION.md cited "35 tests in team-lifecycle.test.ts"
+// (count evidence) without demonstrating specific from/to pairs input/output.
+// This describe block proves the state machine rejects invalid transitions
+// and is NOT a constant function that always accepts.
+describe('TEAM-01 (Phase 507): teamTransition() enforces valid lifecycle transitions', () => {
+  const baseConfig: TeamConfig = {
+    name: 'test-team',
+    leadAgentId: 'agent-001',
+    createdAt: new Date().toISOString(),
+    members: [{ agentId: 'agent-001', name: 'lead', agentType: 'executor' }],
+    lifecycleState: 'FORMING',
+  };
+
+  it('allows FORMING->ACTIVE (normal activation)', () => {
+    const result = teamTransition({ ...baseConfig, lifecycleState: 'FORMING' }, 'ACTIVE', 'activate');
+    expect(result.lifecycleState).toBe('ACTIVE');
+  });
+
+  it('allows FORMING->DISSOLVED (abort shortcut)', () => {
+    const result = teamTransition({ ...baseConfig, lifecycleState: 'FORMING' }, 'DISSOLVED', 'abort');
+    expect(result.lifecycleState).toBe('DISSOLVED');
+  });
+
+  it('allows ACTIVE->DISSOLVING (begin dissolution)', () => {
+    const result = teamTransition({ ...baseConfig, lifecycleState: 'ACTIVE' }, 'DISSOLVING', 'dissolve');
+    expect(result.lifecycleState).toBe('DISSOLVING');
+  });
+
+  it('allows DISSOLVING->DISSOLVED (complete dissolution)', () => {
+    const result = teamTransition({ ...baseConfig, lifecycleState: 'DISSOLVING' }, 'DISSOLVED', 'complete');
+    expect(result.lifecycleState).toBe('DISSOLVED');
+  });
+
+  it('does not mutate the original config (pure function)', () => {
+    const original = { ...baseConfig, lifecycleState: 'FORMING' as const };
+    teamTransition(original, 'ACTIVE', 'activate');
+    expect(original.lifecycleState).toBe('FORMING');
+  });
+
+  it('rejects DISSOLVED->ACTIVE (terminal state has no outgoing transitions)', () => {
+    expect(() =>
+      teamTransition({ ...baseConfig, lifecycleState: 'DISSOLVED' }, 'ACTIVE', 'reactivate'),
+    ).toThrow(/Invalid team lifecycle transition/);
+  });
+
+  it('rejects ACTIVE->DISSOLVED (must go through DISSOLVING)', () => {
+    expect(() =>
+      teamTransition({ ...baseConfig, lifecycleState: 'ACTIVE' }, 'DISSOLVED', 'skip-dissolving'),
+    ).toThrow(/Invalid team lifecycle transition/);
+  });
+
+  it('rejects ACTIVE->FORMING (backwards transition forbidden)', () => {
+    expect(() =>
+      teamTransition({ ...baseConfig, lifecycleState: 'ACTIVE' }, 'FORMING', 'revert'),
+    ).toThrow(/Invalid team lifecycle transition/);
+  });
+
+  it('error message names the source state and lists allowed targets', () => {
+    expect(() =>
+      teamTransition({ ...baseConfig, lifecycleState: 'ACTIVE' }, 'DISSOLVED', 'skip'),
+    ).toThrow(/from ACTIVE/);
+  });
+
+  describe('adversarial proof', () => {
+    // Proof: these tests distinguish real validation from a stub that always returns ok.
+    // A constant implementation that always applies the transition (no validation)
+    // would cause the rejection tests above to fail.
+    it('DISSOLVED->ACTIVE MUST throw (constant-true implementation would pass invalid transition)', () => {
+      // This test is the adversarial oracle:
+      // if isValidTeamTransition always returned true, teamTransition would not throw here.
+      expect(isValidTeamTransition('DISSOLVED', 'ACTIVE')).toBe(false);
+    });
+
+    it('ACTIVE->DISSOLVED MUST be invalid (bypassing DISSOLVING step would silently pass)', () => {
+      expect(isValidTeamTransition('ACTIVE', 'DISSOLVED')).toBe(false);
+    });
+
+    it('FORMING->ACTIVE MUST be valid (sanity check -- adversarial proof is not over-restrictive)', () => {
+      expect(isValidTeamTransition('FORMING', 'ACTIVE')).toBe(true);
+    });
+  });
+});
+
+// ============================================================================
+// QUAL-05 (Phase 504): EmbeddingCache.get() blocks cross-method cache poisoning
+// ============================================================================
+// Shape-only pattern: VERIFICATION.md cited "10 tests verify method-aware caching,
+// cross-method poisoning prevention" (count only, no specific input/output).
+// This describe block proves that requesting a cached entry under a different
+// method (model vs heuristic) correctly returns null rather than poisoning.
+describe('QUAL-05 (Phase 504): EmbeddingCache blocks cross-method cache poisoning', () => {
+  const embedding: number[] = [0.1, 0.2, 0.3];
+  const skillName = 'test-skill';
+  const content = 'test content';
+
+  it('returns embedding on cache hit with same method', () => {
+    const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-1.json');
+    cache.set(skillName, content, embedding, 'model');
+    const result = cache.get(skillName, content, 'model');
+    expect(result).toEqual(embedding);
+  });
+
+  it('returns null when method differs (model stored, heuristic requested -- cross-method poisoning blocked)', () => {
+    const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-2.json');
+    cache.set(skillName, content, embedding, 'model');
+    const result = cache.get(skillName, content, 'heuristic');
+    expect(result).toBeNull();
+  });
+
+  it('returns null when method differs (heuristic stored, model requested -- cross-method poisoning blocked)', () => {
+    const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-3.json');
+    cache.set(skillName, content, embedding, 'heuristic');
+    const result = cache.get(skillName, content, 'model');
+    expect(result).toBeNull();
+  });
+
+  it('returns embedding for pre-migration entries (no method stored, method requested -- backward compat)', () => {
+    const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-4.json');
+    cache.set(skillName, content, embedding); // no method stored
+    const result = cache.get(skillName, content, 'model');
+    expect(result).toEqual(embedding);
+  });
+
+  it('returns embedding when no method requested (no restriction applies)', () => {
+    const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-5.json');
+    cache.set(skillName, content, embedding, 'model');
+    const result = cache.get(skillName, content); // no method argument
+    expect(result).toEqual(embedding);
+  });
+
+  describe('adversarial proof', () => {
+    // Proof: if EmbeddingCache.get() ignored the method parameter entirely (always returning
+    // the cached embedding regardless of method), the cross-method-poisoning test above
+    // would return the embedding instead of null -- causing the test to fail.
+    it('cross-method miss MUST return null -- not the stored embedding (adversarial oracle)', () => {
+      const cache = new EmbeddingCache('1.0.0', '/tmp/test-qual05-adv.json');
+      cache.set(skillName, content, embedding, 'model');
+      // If method were ignored, this would return embedding (poisoning). It must return null.
+      const poisonAttempt = cache.get(skillName, content, 'heuristic');
+      expect(poisonAttempt).toBeNull();
+      // And same-method access still works (verifies the entry exists, not a cache miss for other reasons)
+      const legitAccess = cache.get(skillName, content, 'model');
+      expect(legitAccess).toEqual(embedding);
+    });
+  });
+});
+
+// ============================================================================
+// CURL-02 (Phase 522): redactHeaders() redacts credential headers in debug output
+// ============================================================================
+// Shape-only pattern: VERIFICATION.md cited "20 auth tests verify all paths"
+// (count only) without demonstrating specific input/output for auth header
+// redaction (the security-critical function).
+// This describe block proves redactHeaders() correctly replaces sensitive
+// header values with [REDACTED] regardless of key case.
+describe('CURL-02 (Phase 522): redactHeaders() replaces credential headers with [REDACTED]', () => {
+  it('redacts Authorization header (canonical case)', () => {
+    const result = redactHeaders({ Authorization: 'Bearer secret-token-xyz' });
+    expect(result).toEqual({ Authorization: '[REDACTED]' });
+  });
+
+  it('redacts authorization header (lowercase key -- case-insensitive)', () => {
+    const result = redactHeaders({ authorization: 'Basic abc123' });
+    expect(result).toEqual({ authorization: '[REDACTED]' });
+  });
+
+  it('redacts AUTHORIZATION header (uppercase key -- case-insensitive)', () => {
+    const result = redactHeaders({ AUTHORIZATION: 'Bearer token' });
+    expect(result).toEqual({ AUTHORIZATION: '[REDACTED]' });
+  });
+
+  it('redacts Cookie header', () => {
+    const result = redactHeaders({ Cookie: 'session=abc; user=xyz' });
+    expect(result).toEqual({ Cookie: '[REDACTED]' });
+  });
+
+  it('redacts Proxy-Authorization header', () => {
+    const result = redactHeaders({ 'Proxy-Authorization': 'Basic dXNlcjpwYXNz' });
+    expect(result).toEqual({ 'Proxy-Authorization': '[REDACTED]' });
+  });
+
+  it('does not redact non-sensitive headers', () => {
+    const result = redactHeaders({ 'Content-Type': 'application/json' });
+    expect(result).toEqual({ 'Content-Type': 'application/json' });
+  });
+
+  it('handles mixed sensitive and non-sensitive headers correctly', () => {
+    const result = redactHeaders({
+      Authorization: 'Bearer secret-token',
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    expect(result).toEqual({
+      Authorization: '[REDACTED]',
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+  });
+
+  it('returns empty object for empty input', () => {
+    const result = redactHeaders({});
+    expect(result).toEqual({});
+  });
+
+  it('does not mutate input headers object', () => {
+    const input = { Authorization: 'Bearer secret' };
+    redactHeaders(input);
+    expect(input.Authorization).toBe('Bearer secret');
+  });
+
+  describe('adversarial proof', () => {
+    // Proof: if redactHeaders() returned headers unchanged (no redaction), the
+    // Authorization-header test above would receive 'Bearer secret-token-xyz'
+    // instead of '[REDACTED]' -- causing the test to fail.
+    it('Authorization value MUST be [REDACTED] -- not the original secret (adversarial oracle)', () => {
+      const secret = 'Bearer my-secret-api-key-12345';
+      const result = redactHeaders({ Authorization: secret });
+      // Must NOT contain the original secret
+      expect(result.Authorization).not.toBe(secret);
+      // Must be exactly [REDACTED]
+      expect(result.Authorization).toBe('[REDACTED]');
+    });
+
+    it('non-sensitive header value MUST be preserved -- adversarial proof is not over-redacting', () => {
+      const result = redactHeaders({ 'X-Custom-Header': 'public-value' });
+      expect(result['X-Custom-Header']).toBe('public-value');
+    });
+  });
+});
+
+// ============================================================================
+// VERIF-02 Adversarial Proof Summary (Phase 534)
+// ============================================================================
+// Each behavioral test block above was verified to fail under deliberate sabotage:
+// - TEAM-01: Fails when teamTransition() applies all transitions without validation (invalid transitions do not throw)
+// - QUAL-05: Fails when EmbeddingCache.get() ignores method parameter (cross-method poison attempt returns embedding instead of null)
+// - CURL-02: Fails when redactHeaders() returns headers unchanged (Authorization header retains original secret value)
