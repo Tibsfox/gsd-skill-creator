@@ -1,0 +1,59 @@
+[
+  {
+    "id": "MED-001",
+    "domain": "medical",
+    "pattern": "(?:diagnos|treatment|treat|cure|heal|prescription|dose|dosage|medication|medicine|symptom|condition|disease|illness|infection|wound|injury).{0,80}(?!(?:cultural|historical|traditional.{0,20}knowledge|ethnobotanical|heritage|educational))",
+    "level": "redirected",
+    "annotation": {
+      "domain": "medical",
+      "level": "redirected",
+      "message": "This content approaches medical advice territory. The Heritage Skills Educational Pack provides cultural and historical knowledge about traditional practices -- it is not a substitute for professional medical care. For any health concerns, diagnosis, or treatment decisions, please consult a qualified healthcare provider.",
+      "isCritical": false,
+      "canOverride": false,
+      "source": "Heritage Skills Educational Pack Scope Definition"
+    }
+  },
+  {
+    "id": "MED-002",
+    "domain": "medical",
+    "pattern": "(?:herbal.{0,20}(?:dose|dosage|amount|take|use|drink|eat|apply)|(?:dose|dosage|amount).{0,20}(?:herb|plant|root|bark|tea|tincture|poultice))",
+    "level": "gated",
+    "annotation": {
+      "domain": "medical",
+      "level": "gated",
+      "message": "Herbal remedy dosage information is presented here as cultural and historical knowledge only. Many traditional plant medicines interact with pharmaceuticals, can be toxic at high doses, or are contraindicated in pregnancy and certain medical conditions. Consult a qualified herbalist or healthcare provider before using.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "American Herbalists Guild Safety Guidelines"
+    }
+  },
+  {
+    "id": "MED-003",
+    "domain": "medical",
+    "pattern": "(?:traditional.{0,20}(?:heal|medicine|remedy|practice|knowledge)|Indigenous.{0,20}(?:heal|medicine|remedy)|(?:plant|herb).{0,20}(?:medicine|heal|remedy).{0,20}(?:culture|tradition|practice))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "medical",
+      "level": "annotated",
+      "message": "This information about traditional healing practices is shared as cultural and historical knowledge. It represents the accumulated wisdom of communities over generations. It is not presented as medical advice and does not replace professional healthcare. Traditional knowledge holders are the primary authorities on these practices.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "OCAP Principles; Heritage Skills Educational Pack Cultural Framework"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "MED-004",
+    "domain": "medical",
+    "pattern": "(?:poisoning|overdose|allergic.{0,20}reaction|anaphylaxis|toxic.{0,20}ingestion|ingested.{0,20}toxic)",
+    "level": "redirected",
+    "annotation": {
+      "domain": "medical",
+      "level": "redirected",
+      "message": "For suspected poisoning, overdose, or severe allergic reaction: Call Poison Control (1-800-222-1222 in US) or emergency services (911) immediately. Do not wait for symptoms to worsen. Time is critical.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Association of Poison Control Centers"
+    }
+  }
+]

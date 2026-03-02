@@ -1,0 +1,106 @@
+[
+  {
+    "id": "FOOD-001",
+    "domain": "food",
+    "pattern": "low.?acid.{0,40}water.?bath|water.?bath.{0,40}low.?acid",
+    "level": "redirected",
+    "annotation": {
+      "domain": "food",
+      "level": "redirected",
+      "message": "Low-acid foods (vegetables, meats, beans) require pressure canning, not water bath canning. Water bath canning of low-acid foods creates a serious botulism risk. Please use a pressure canner and follow USDA Complete Guide to Home Canning guidelines.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "USDA Complete Guide to Home Canning (2015)"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FOOD-002",
+    "domain": "food",
+    "pattern": "pemmican.{0,60}fat|fat.{0,60}pemmican",
+    "level": "gated",
+    "annotation": {
+      "domain": "food",
+      "level": "gated",
+      "message": "When rendering fat for pemmican, internal temperature must reach at least 200\u00b0F (93\u00b0C) to destroy pathogens and prevent rancidity. Lower temperatures risk foodborne illness and dramatically shorten shelf life.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "National Center for Home Food Preservation; Traditional Inuit and First Nations food preservation practices"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FOOD-003",
+    "domain": "food",
+    "pattern": "smok(e|ed|ing).{0,60}(temperature|temp|degree|heat)|cold.?smok",
+    "level": "gated",
+    "annotation": {
+      "domain": "food",
+      "level": "gated",
+      "message": "Smoking temperatures must reach safe minimums: fish to 145\u00b0F internal, poultry to 165\u00b0F internal, whole cuts of meat to 145\u00b0F internal. Cold smoking alone does not cook food to safe temperatures and requires additional preservation steps (curing) to be safe.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "USDA Food Safety and Inspection Service; NCHFP Smoking Guidelines"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FOOD-004",
+    "domain": "food",
+    "pattern": "preserv(e|ing|ation).{0,60}(?!temperature|temp|degree)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "food",
+      "level": "annotated",
+      "message": "Always specify storage temperatures and target water activity levels when describing preservation methods. Improper preservation can lead to spoilage or foodborne illness.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "USDA Complete Guide to Home Canning (2015)"
+    }
+  },
+  {
+    "id": "FOOD-005",
+    "domain": "food",
+    "pattern": "wild.?game.{0,60}(?!internal|temp|165|160|145|cook)",
+    "level": "gated",
+    "annotation": {
+      "domain": "food",
+      "level": "gated",
+      "message": "Wild game processing requires attention to internal cooking temperatures: ground game to 160\u00b0F, whole cuts to 145\u00b0F, and poultry to 165\u00b0F. Field dressing should be performed promptly and meat kept cold (below 40\u00b0F) until processing.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "USDA FSIS Wild Game Guidelines"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FOOD-006",
+    "domain": "food",
+    "pattern": "ferment(|ed|ing|ation).{0,60}(vegetable|cabbage|beet|turnip|corn|grain|meat|fish)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "food",
+      "level": "annotated",
+      "message": "Traditional fermentation is a time-honored preservation method. Use clean equipment and maintain proper salt concentrations. Keep vegetables fully submerged below brine. If any mold develops that is not the expected culture, discard and start fresh.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "NCHFP Fermented and Pickled Foods Guidelines"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FOOD-007",
+    "domain": "food",
+    "pattern": "dry(|ing).{0,40}(meat|fish|berry|berries|mushroom).{0,40}(?!temperature|temp|160|145|165)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "food",
+      "level": "annotated",
+      "message": "Traditional drying methods work best with consistent airflow and low humidity. Meat and fish should be dried at temperatures that will eventually reach at least 160\u00b0F internal or use a pre-drying heat step to ensure pathogen destruction.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "NCHFP Drying Foods Guidelines"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  }
+]
