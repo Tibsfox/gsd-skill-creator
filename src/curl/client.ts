@@ -6,9 +6,13 @@
  * auth header injection, and credential-redacted debug output.
  */
 
+import { fetch as undiciFetch } from 'undici';
+import type { Dispatcher } from 'undici';
 import { validateUrl } from './security.js';
 import { buildAuthHeaders, buildDigestAuth, redactHeaders, computeDigestResponse } from './auth.js';
-import type { CurlRequest, CurlResponse } from './types.js';
+import { createProxyDispatcher } from './proxy.js';
+import { createCertAgent } from './certs.js';
+import type { CurlRequest, CurlResponse, CurlRequestOptions } from './types.js';
 
 /**
  * Parse WWW-Authenticate: Digest challenge header into params.
@@ -34,7 +38,7 @@ function parseDigestChallenge(header: string): Record<string, string> {
  * 3. For Digest auth: handles 401 challenge-response automatically
  * 4. Returns typed CurlResponse with optional redacted debug output
  */
-export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
+export async function httpRequest(req: CurlRequest, opts?: CurlRequestOptions): Promise<CurlResponse> {
   // SSRF security gate -- must pass before any fetch
   const validation = await validateUrl(req.url);
   if (!validation.allowed) {
@@ -51,6 +55,14 @@ export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
   // Build request headers
   const headers = new Headers(req.headers);
 
+  // Inject cookies from cookie jar if present
+  if (opts?.cookieJar) {
+    const cookieHeader = opts.cookieJar.buildCookieHeader(req.url);
+    if (cookieHeader) {
+      headers.set('Cookie', cookieHeader);
+    }
+  }
+
   // Inject auth headers (for non-digest, or digest with pre-supplied challenge params)
   if (req.auth) {
     const authHeaders = await buildAuthHeaders(req.auth, req.method, req.url);
@@ -58,6 +70,19 @@ export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
       headers.set(k, v);
     }
   }
+
+  // Build dispatcher for proxy or cert config
+  let dispatcher: Dispatcher | undefined;
+  if (opts?.proxy) {
+    dispatcher = createProxyDispatcher(opts.proxy);
+  } else if (opts?.cert) {
+    dispatcher = createCertAgent(opts.cert);
+  }
+
+  // Choose fetch: undici with dispatcher, or globalThis.fetch for backward compat
+  const doFetch = dispatcher
+    ? (url: string, init: RequestInit) => undiciFetch(url, { ...init, dispatcher } as Parameters<typeof undiciFetch>[1])
+    : globalThis.fetch;
 
   // Execute fetch
   const fetchOpts: RequestInit = {
@@ -68,7 +93,7 @@ export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
     redirect: req.followRedirects === false ? 'manual' : 'follow',
   };
 
-  let response = await globalThis.fetch(req.url, fetchOpts);
+  let response = await doFetch(req.url, fetchOpts);
 
   // Digest auth challenge-response: if 401 with WWW-Authenticate: Digest, retry
   if (response.status === 401 && req.auth?.type === 'digest') {
@@ -100,7 +125,7 @@ export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
         retryHeaders.set(k, v);
       }
 
-      response = await globalThis.fetch(req.url, {
+      response = await doFetch(req.url, {
         ...fetchOpts,
         headers: retryHeaders,
       });
@@ -130,26 +155,26 @@ export async function httpRequest(req: CurlRequest): Promise<CurlResponse> {
 }
 
 /** GET convenience method. */
-export async function httpGet(url: string, opts?: Partial<CurlRequest>): Promise<CurlResponse> {
-  return httpRequest({ url, method: 'GET', ...opts });
+export async function httpGet(url: string, reqOpts?: Partial<CurlRequest>, opts?: CurlRequestOptions): Promise<CurlResponse> {
+  return httpRequest({ url, method: 'GET', ...reqOpts }, opts);
 }
 
 /** POST convenience method. */
-export async function httpPost(url: string, opts?: Partial<CurlRequest>): Promise<CurlResponse> {
-  return httpRequest({ url, method: 'POST', ...opts });
+export async function httpPost(url: string, reqOpts?: Partial<CurlRequest>, opts?: CurlRequestOptions): Promise<CurlResponse> {
+  return httpRequest({ url, method: 'POST', ...reqOpts }, opts);
 }
 
 /** PUT convenience method. */
-export async function httpPut(url: string, opts?: Partial<CurlRequest>): Promise<CurlResponse> {
-  return httpRequest({ url, method: 'PUT', ...opts });
+export async function httpPut(url: string, reqOpts?: Partial<CurlRequest>, opts?: CurlRequestOptions): Promise<CurlResponse> {
+  return httpRequest({ url, method: 'PUT', ...reqOpts }, opts);
 }
 
 /** DELETE convenience method. */
-export async function httpDelete(url: string, opts?: Partial<CurlRequest>): Promise<CurlResponse> {
-  return httpRequest({ url, method: 'DELETE', ...opts });
+export async function httpDelete(url: string, reqOpts?: Partial<CurlRequest>, opts?: CurlRequestOptions): Promise<CurlResponse> {
+  return httpRequest({ url, method: 'DELETE', ...reqOpts }, opts);
 }
 
 /** PATCH convenience method. */
-export async function httpPatch(url: string, opts?: Partial<CurlRequest>): Promise<CurlResponse> {
-  return httpRequest({ url, method: 'PATCH', ...opts });
+export async function httpPatch(url: string, reqOpts?: Partial<CurlRequest>, opts?: CurlRequestOptions): Promise<CurlResponse> {
+  return httpRequest({ url, method: 'PATCH', ...reqOpts }, opts);
 }
