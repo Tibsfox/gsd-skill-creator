@@ -7,7 +7,7 @@
  * via allowedLabels parameter.
  */
 
-import natural from 'natural';
+import { BayesClassifier } from '../../../nlp/naive-bayes.js';
 import type { GsdCommandMetadata } from '../discovery/types.js';
 import { augmentUtterances } from './utterance-augmenter.js';
 
@@ -28,12 +28,12 @@ import { augmentUtterances } from './utterance-augmenter.js';
  * ```
  */
 export class GsdBayesClassifier {
-  private classifier: natural.BayesClassifier;
+  private classifier: BayesClassifier;
   private trained: boolean = false;
   private commandLabels: Set<string> = new Set();
 
   constructor() {
-    this.classifier = new natural.BayesClassifier();
+    this.classifier = new BayesClassifier();
   }
 
   /**
@@ -54,7 +54,7 @@ export class GsdBayesClassifier {
    */
   train(commands: GsdCommandMetadata[]): void {
     // Reset classifier for fresh training
-    this.classifier = new natural.BayesClassifier();
+    this.classifier = new BayesClassifier();
     this.commandLabels.clear();
 
     for (const command of commands) {
@@ -88,11 +88,8 @@ export class GsdBayesClassifier {
       return [];
     }
 
-    // Get raw classifications from natural
-    const raw = this.classifier.getClassifications(input) as Array<{
-      label: string;
-      value: number;
-    }>;
+    // Get raw classifications
+    const raw = this.classifier.getClassifications(input);
 
     // Filter by allowed labels if provided
     let filtered = allowedLabels

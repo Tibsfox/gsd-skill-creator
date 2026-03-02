@@ -144,27 +144,29 @@ else
   BRANCH_JSON="\"${BRANCH_RAW}\""
 fi
 
-# --- Build array JSON helper ---
+# --- Build array JSON helper (Bash 3.2 compatible — no nameref) ---
 build_json_array() {
-  local -n arr=$1
-  if [ ${#arr[@]} -eq 0 ]; then
+  if [ $# -eq 0 ]; then
     echo "[]"
     return
   fi
   local result="["
-  for i in "${!arr[@]}"; do
-    if [ "$i" -gt 0 ]; then
+  local first=true
+  for item in "$@"; do
+    if [ "$first" = true ]; then
+      first=false
+    else
       result+=","
     fi
-    result+="\"${arr[$i]}\""
+    result+="\"${item}\""
   done
   result+="]"
   echo "$result"
 }
 
-STAGED_JSON=$(build_json_array STAGED_FILES)
-UNSTAGED_JSON=$(build_json_array UNSTAGED_FILES)
-UNTRACKED_JSON=$(build_json_array UNTRACKED_FILES)
+STAGED_JSON=$([ ${#STAGED_FILES[@]} -gt 0 ] && build_json_array "${STAGED_FILES[@]}" || echo "[]")
+UNSTAGED_JSON=$([ ${#UNSTAGED_FILES[@]} -gt 0 ] && build_json_array "${UNSTAGED_FILES[@]}" || echo "[]")
+UNTRACKED_JSON=$([ ${#UNTRACKED_FILES[@]} -gt 0 ] && build_json_array "${UNTRACKED_FILES[@]}" || echo "[]")
 
 # --- Output JSON ---
 cat <<ENDJSON

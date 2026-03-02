@@ -404,6 +404,132 @@ After archival, the AI still handles:
 
 </step>
 
+<step name="bump_versions">
+
+Bump version numbers in all manifest files to match the milestone version.
+
+**Convert milestone version to semver:**
+
+The milestone version (e.g., "v1.35") needs conversion to semver format:
+- `v1.35` -> `1.35.0`
+- `v2.0` -> `2.0.0`
+- `v1.35.1` -> `1.35.1` (patch versions pass through)
+
+```bash
+# Strip 'v' prefix, ensure 3-part semver
+MILESTONE_VERSION="${VERSION#v}"
+if [[ "$MILESTONE_VERSION" =~ ^[0-9]+\.[0-9]+$ ]]; then
+  SEMVER="${MILESTONE_VERSION}.0"
+else
+  SEMVER="$MILESTONE_VERSION"
+fi
+echo "Bumping versions to: $SEMVER"
+```
+
+**Bump package.json:**
+
+```bash
+# Use node for safe JSON editing (preserves formatting)
+node -e "
+const fs = require('fs');
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+pkg.version = '${SEMVER}';
+fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+console.log('package.json: ' + pkg.version);
+"
+```
+
+**Bump Cargo.toml (if exists):**
+
+```bash
+if [ -f src-tauri/Cargo.toml ]; then
+  sed -i "0,/^version = \".*\"/s//version = \"${SEMVER}\"/" src-tauri/Cargo.toml
+  echo "Cargo.toml bumped to ${SEMVER}"
+fi
+```
+
+**Bump tauri.conf.json (if exists):**
+
+```bash
+if [ -f src-tauri/tauri.conf.json ]; then
+  node -e "
+  const fs = require('fs');
+  const conf = JSON.parse(fs.readFileSync('src-tauri/tauri.conf.json', 'utf8'));
+  conf.version = '${SEMVER}';
+  fs.writeFileSync('src-tauri/tauri.conf.json', JSON.stringify(conf, null, 2) + '\n');
+  console.log('tauri.conf.json: ' + conf.version);
+  "
+fi
+```
+
+**Report:**
+
+```
+Version bump complete:
+- package.json: ${SEMVER}
+- Cargo.toml: ${SEMVER} (if present)
+- tauri.conf.json: ${SEMVER} (if present)
+```
+
+</step>
+
+<step name="documentation_review">
+
+Full documentation review before pushing to remote. Every version change must verify
+that all public-facing documentation reflects the release accurately.
+
+**Mandatory files to review and update:**
+
+1. **README.md** — Version references, test counts, feature descriptions
+2. **CLAUDE.md** — Test counts, key file locations, dependency references
+3. **project-claude/CLAUDE.md** — Test counts, key file locations
+4. **CHANGELOG.md** — Add release entry with Added/Changed/Fixed/Removed sections
+5. **docs/RELEASE-HISTORY.md** — Add version row to table, update header stats
+6. **docs/FILE-STRUCTURE.md** — Update "Last updated" version, add new directories
+7. **docs/release-notes/v[X.Y]/README.md** — Create release notes with summary, changes, and test results
+
+**Conditional reviews (check if relevant):**
+
+8. **docs/TROUBLESHOOTING.md** — Add entries for any new failure modes fixed or introduced
+9. **docs/FEATURES.md** — Update if capabilities changed
+10. **docs/GETTING-STARTED.md** — Update if install steps or prerequisites changed
+11. **docs/DEVELOPMENT.md** — Update if build process or dev workflow changed
+
+**Get current test count:**
+
+```bash
+npm test -- --reporter=json 2>&1 | node -e "
+  const chunks = []; process.stdin.on('data', c => chunks.push(c));
+  process.stdin.on('end', () => {
+    const m = Buffer.concat(chunks).toString().match(/\"numTotalTests\":(\d+).*?\"numPassedTests\":(\d+)/);
+    if (m) console.log('Total: ' + m[1] + ', Passed: ' + m[2]);
+  });
+"
+```
+
+**Checklist:**
+
+- [ ] All version number references updated (search for old version string)
+- [ ] Test counts reflect latest run
+- [ ] New files/directories documented in FILE-STRUCTURE.md
+- [ ] CHANGELOG.md has release entry
+- [ ] Release notes created in docs/release-notes/v[X.Y]/
+- [ ] RELEASE-HISTORY.md table has new version row
+- [ ] No stale references to removed dependencies or changed APIs
+- [ ] README.md project stats line updated
+
+**Verification command:**
+
+```bash
+# Search for stale version references
+OLD_VERSION="$(git log --format=%s -1 | grep -oP '\d+\.\d+\.\d+' || echo '')"
+if [ -n "$OLD_VERSION" ]; then
+  grep -r "$OLD_VERSION" README.md CLAUDE.md docs/ project-claude/CLAUDE.md 2>/dev/null || echo "No stale references found"
+fi
+```
+
+</step>
+
 <step name="reorganize_roadmap_and_delete_originals">
 
 After `milestone complete` has archived, reorganize ROADMAP.md with milestone groupings, then delete originals:
@@ -753,6 +879,9 @@ Milestone completion is successful when:
 - [ ] STATE.md updated with fresh project reference
 - [ ] Git tag created (v[X.Y])
 - [ ] Milestone commit made (includes archive files and deletion)
+- [ ] Documentation review completed (README, CLAUDE.md, CHANGELOG, release notes, troubleshooting)
+- [ ] All version references updated across docs (no stale version strings)
+- [ ] Release notes created at docs/release-notes/v[X.Y]/README.md
 - [ ] Requirements completion checked against REQUIREMENTS.md traceability table
 - [ ] Incomplete requirements surfaced with proceed/audit/abort options
 - [ ] Known gaps recorded in MILESTONES.md if user proceeded with incomplete requirements

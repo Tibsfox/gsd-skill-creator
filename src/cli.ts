@@ -1316,6 +1316,14 @@ async function main() {
       break;
     }
 
+    case 'gsd-init':
+    case 'gi': {
+      const { gsdInitCommand } = await import('./tools/cli/commands/gsd-init.js');
+      const exitCode = await gsdInitCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'export':
     case 'ex': {
       const { exportCommand } = await import('./tools/cli/commands/export.js');
@@ -1603,6 +1611,7 @@ Commands:
   export, ex        Export skill for other platforms (--portable, --platform)
   publish, pub      Package a skill as .tar.gz for distribution
   install, inst     Install a skill from local file or remote URL
+  gsd-init, gi      Install GSD skill-creator integration into a project
   mcp-server        Start MCP server for skill browsing/installation
   session, sess     Manage session continuity (save, restore, handoff)
   purge, pg         Compact and clean observation JSONL files

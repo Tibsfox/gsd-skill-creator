@@ -13,5 +13,22 @@ export default defineConfig({
       'project-claude/**',
       'node_modules/**',
     ],
+    coverage: {
+      provider: 'v8',
+      include: ['.college/**/*.ts'],
+      exclude: [
+        '.college/**/*.test.ts',
+        '.college/**/*.integration.test.ts',
+        '.college/departments/test-department/**',
+      ],
+      reporter: ['text', 'text-summary', 'json-summary'],
+      reportsDirectory: '.college/coverage',
+      thresholds: {
+        statements: 85,
+        branches: 85,
+        functions: 85,
+        lines: 85,
+      },
+    },
   },
 });

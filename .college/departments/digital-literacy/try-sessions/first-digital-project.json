@@ -1,0 +1,38 @@
+{
+  "id": "first-digital-project",
+  "title": "Your First Digital Project: Build and Publish a Personal Website",
+  "description": "Create a simple personal website from scratch, practicing digital foundations, communication, copyright, safety, and algorithmic awareness. Touches concepts from all 5 wings.",
+  "estimatedMinutes": 45,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Before building anything, read the hardware and networks concepts. When you visit a website, what happens? Trace the complete journey: your browser sends an HTTP request -> DNS resolves the domain -> server responds with HTML -> browser renders it. Draw this sequence on paper.",
+      "expectedOutcome": "You understand that a website is just files served from a computer, transmitted over a network using HTTP/HTTPS protocols",
+      "hint": "Right-click any webpage -> View Page Source to see the raw HTML your browser received",
+      "conceptsExplored": ["diglit-hardware-components", "diglit-networks-internet"]
+    },
+    {
+      "instruction": "Search for free website builders and evaluate three sources that appear in your results. Read the search strategies and source credibility concepts. Which search operators would help you find unbiased reviews? How do you identify sponsored results from organic results?",
+      "expectedOutcome": "You can distinguish paid/sponsored results from organic results, and apply SIFT to evaluate technology recommendations",
+      "hint": "Try site:reddit.com website builder for peer recommendations, and compare to the results from the first search",
+      "conceptsExplored": ["diglit-search-strategies", "diglit-source-credibility"]
+    },
+    {
+      "instruction": "Build a simple page (using a website builder or basic HTML). Add images. Read the copyright and attribution concept before searching for images. Where can you legally get free-to-use images? Add proper attribution to any Creative Commons images you use.",
+      "expectedOutcome": "You know how to find CC-licensed images, understand what attribution is required, and can apply it correctly",
+      "hint": "Creative Commons Search (search.creativecommons.org) and Unsplash offer clearly licensed images",
+      "conceptsExplored": ["diglit-copyright-attribution", "diglit-digital-media-creation"]
+    },
+    {
+      "instruction": "Review your site's privacy settings. Read the privacy management concept. If using a website builder: what data does the platform collect about your visitors? Does it set third-party cookies? Is there a way to add a privacy policy?",
+      "expectedOutcome": "You understand that website builders often add third-party trackers by default, and can identify the data implications of your platform choice",
+      "hint": "Install Privacy Badger or uBlock Origin and see how many trackers your site loads",
+      "conceptsExplored": ["diglit-privacy-management", "diglit-data-collection"]
+    },
+    {
+      "instruction": "Your published website will appear in search engine results. Read the digital footprint concept. What information on your site might you regret sharing in 10 years? What does your site say about you to a future employer or university admissions officer? Revise accordingly.",
+      "expectedOutcome": "You understand that publishing creates a permanent digital footprint, and can make informed decisions about what to include",
+      "conceptsExplored": ["diglit-digital-footprint"]
+    }
+  ]
+}

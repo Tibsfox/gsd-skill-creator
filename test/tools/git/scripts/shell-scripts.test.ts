@@ -297,19 +297,20 @@ describe('shellcheck (SCRIPT-05)', () => {
     }
   })();
 
+  // Fix: batch shellcheck into single invocation to avoid repeated npx overhead + timeout on CI
+  // Credit: jacoblewisau (https://github.com/Tibsfox/gsd-skill-creator/pull/21)
   it.skipIf(!hasShellcheck)('all scripts pass shellcheck', { timeout: 30000 }, () => {
     const scripts = fs.readdirSync(SCRIPTS_DIR).filter((f) => f.endsWith('.sh'));
     expect(scripts.length).toBeGreaterThanOrEqual(4);
 
-    for (const script of scripts) {
-      const scriptPath = path.join(SCRIPTS_DIR, script);
-      const result = execSync(`npx shellcheck "${scriptPath}" 2>&1`, {
-        encoding: 'utf-8',
-        stdio: ['pipe', 'pipe', 'pipe'],
-      });
-      // shellcheck returns empty string on success
-      expect(result.trim()).toBe('');
-    }
+    // Single shellcheck invocation with all scripts to avoid repeated npx overhead
+    const scriptPaths = scripts.map((s) => `"${path.join(SCRIPTS_DIR, s)}"`).join(' ');
+    const result = execSync(`npx shellcheck ${scriptPaths} 2>&1`, {
+      encoding: 'utf-8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+    // shellcheck returns empty string on success
+    expect(result.trim()).toBe('');
   });
 });
 

@@ -1,0 +1,43 @@
+{
+  "id": "first-meal",
+  "title": "Your First Meal: Simple Pasta with Tomato Sauce",
+  "description": "Cook a complete meal from scratch while learning food science, safety, and technique fundamentals. This session touches concepts from 5 different wings of the Culinary Arts department.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Before you begin, read the food safety temperature danger zone concept. Understand why we keep cold ingredients refrigerated until ready to use and why perishable food must not sit out for more than 2 hours.",
+      "expectedOutcome": "You understand the 40-140F danger zone and the 2-hour rule for perishable ingredients",
+      "hint": "The 2-hour rule applies to all perishable ingredients -- take them out only when you are ready to cook",
+      "conceptsExplored": ["cook-temperature-danger-zone"]
+    },
+    {
+      "instruction": "Fill a large pot with water and bring it to a rolling boil (100C/212F). While waiting, read about wet heat methods -- why does pasta need a full rolling boil rather than a gentle simmer?",
+      "expectedOutcome": "You understand that boiling at 100C provides enough energy to quickly gelatinize the starch in pasta, preventing sticking and ensuring even cooking",
+      "hint": "Starch gelatinization requires sufficient temperature and water -- a simmer would cook pasta unevenly",
+      "conceptsExplored": ["cook-wet-heat-methods", "cook-starch-gelatinization"]
+    },
+    {
+      "instruction": "While the water heats, mince garlic and heat olive oil in a pan over medium-high heat. Saute the garlic until golden (about 1 minute at 190-230C). Read about dry heat methods and the Maillard reaction -- what creates that golden color and aroma?",
+      "expectedOutcome": "You understand that dry heat above 140C triggers Maillard reactions between amino acids and sugars, creating complex flavor and aroma compounds",
+      "hint": "The Maillard reaction requires both amino acids and heat above 140C -- garlic contains both",
+      "conceptsExplored": ["cook-dry-heat-methods", "cook-maillard-reaction"]
+    },
+    {
+      "instruction": "Add crushed tomatoes to the garlic pan and reduce heat to a simmer. Read about macronutrient roles and preparation-nutrition effects -- why does cooking tomatoes in olive oil actually improve nutrition?",
+      "expectedOutcome": "You understand that cooking increases lycopene bioavailability in tomatoes, and the olive oil provides fat needed for absorbing fat-soluble vitamins",
+      "conceptsExplored": ["cook-macronutrient-roles", "cook-preparation-nutrition"]
+    },
+    {
+      "instruction": "Season the sauce with salt, adding a small pinch at a time and tasting between additions. Read about meal planning -- why is it valuable to plan meals around seasonal produce and batch cooking?",
+      "expectedOutcome": "You understand that incremental seasoning prevents over-salting, and meal planning reduces food waste by 25-30% while ensuring nutritional balance",
+      "hint": "You can always add more salt but cannot remove it -- taste after each addition",
+      "conceptsExplored": ["cook-meal-planning"]
+    },
+    {
+      "instruction": "Drain the pasta when al dente, combine with the sauce, and serve immediately. Refrigerate any leftovers within 2 hours. Review what you learned about safe storage times for cooked leftovers.",
+      "expectedOutcome": "You have completed a safe, nutritious meal using concepts from food science, technique, nutrition, safety, and home economics wings",
+      "conceptsExplored": ["cook-temperature-danger-zone", "cook-safe-storage-times"]
+    }
+  ]
+}
