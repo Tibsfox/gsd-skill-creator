@@ -26,12 +26,12 @@ Requirements for College Expansion milestone. Each maps to roadmap phases.
 
 ### Dynamic Mapping
 
-- [ ] **MAP-01**: Mapping schema (JSON) defines virtual departments by composing flat subjects
-- [ ] **MAP-02**: Default mapping ships with at least 6 virtual department groupings (Sciences, Computing, Humanities, Arts, etc.)
-- [ ] **MAP-03**: Educational track definitions support prerequisite ordering and recommended sequences through multiple subjects
-- [ ] **MAP-04**: User-created custom mappings are stored in `.college/mappings/user/` and loaded by the explorer
-- [ ] **MAP-05**: Mapping changes take effect without restart (hot-reload)
-- [ ] **MAP-06**: Adding a new subject requires only a new directory — no code changes, no mapping updates required
+- [x] **MAP-01**: Mapping schema (JSON) defines virtual departments by composing flat subjects
+- [x] **MAP-02**: Default mapping ships with at least 6 virtual department groupings (Sciences, Computing, Humanities, Arts, etc.)
+- [x] **MAP-03**: Educational track definitions support prerequisite ordering and recommended sequences through multiple subjects
+- [x] **MAP-04**: User-created custom mappings are stored in `.college/mappings/user/` and loaded by the explorer
+- [x] **MAP-05**: Mapping changes take effect without restart (hot-reload)
+- [x] **MAP-06**: Adding a new subject requires only a new directory — no code changes, no mapping updates required
 
 ### Cross-References
 
@@ -96,12 +96,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SPEC-03 | Phase 23 | Complete |
 | SPEC-04 | Phase 23 | Complete |
 | SPEC-05 | Phase 23 | Complete |
-| MAP-01 | Phase 24 | Pending |
-| MAP-02 | Phase 24 | Pending |
-| MAP-03 | Phase 24 | Pending |
-| MAP-04 | Phase 24 | Pending |
-| MAP-05 | Phase 24 | Pending |
-| MAP-06 | Phase 24 | Pending |
+| MAP-01 | Phase 24 | Complete |
+| MAP-02 | Phase 24 | Complete |
+| MAP-03 | Phase 24 | Complete |
+| MAP-04 | Phase 24 | Complete |
+| MAP-05 | Phase 24 | Complete |
+| MAP-06 | Phase 24 | Complete |
 | XREF-01 | Phase 25 | Pending |
 | XREF-02 | Phase 25 | Pending |
 | XREF-03 | Phase 25 | Pending |
