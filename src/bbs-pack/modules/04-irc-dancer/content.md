@@ -2,4 +2,72 @@
 
 > **Tier**: 2 | **Safety Mode**: Annotate
 
-> Content populated in Phase 520
+## Overview
+
+Internet Relay Chat (IRC) is the real-time counterpart to FidoNet's store-and-forward messaging. Where Module 3 described messages traveling as binary packets exchanged during scheduled phone calls with delivery times measured in hours, IRC delivers messages instantly across a network of connected servers. Created by Jarkko Oikarinen in 1988, IRC became the dominant real-time communication platform for BBS communities transitioning to the Internet in the mid-1990s. The protocol is defined by RFC 1459, which specifies a text-based message format, channel operations, and client-server communication that remains in use today. -- RFC 1459
+
+This module dissects the IRC protocol through two lenses: the RFC specification that defines the message format and commands, and the Dancer IRC bot source code that demonstrates how a real-world program processes the IRC protocol stream. Dancer (version 4.16, by Bjorn Reese and Daniel Stenberg) is a GPL-licensed IRC bot whose C source provides primary material for protocol dissection -- its parsing, flood protection, and command dispatch code illustrate practical IRC engineering. The annotated Dancer source excerpts in `data/bbs/dancer-irc/` are referenced throughout this module as educational text corpus (never compiled). -- RFC 1459; Dancer 4.16 source
+
+## Topics
+
+### Topic 1: IRC Message Format
+
+Every IRC message follows the format defined in RFC 1459 Section 2.3.1: an optional prefix (preceded by a colon), a command, optional parameters, and an optional trailing parameter (also preceded by a colon). The complete grammar is: `[:prefix SPACE] command [SPACE params] [SPACE :trailing]`. Each message is terminated by CR-LF (0x0D 0x0A) and must not exceed 512 bytes including the terminator. The prefix identifies the message origin: for server-to-client messages, it is the sending server's name or the sender's full identity in `nick!user@host` format. The command is either an alphabetic string (like PRIVMSG, JOIN, PART) or a 3-digit numeric reply code (like 001 for RPL_WELCOME). Parameters are space-separated, with a maximum of 15. The trailing parameter (everything after the final colon) may contain spaces, which is how message text is transmitted. -- RFC 1459, Section 2.3.1: Message format
+
+### Topic 2: Client Registration
+
+When an IRC client connects to a server, it must complete a registration handshake before it can join channels or send messages. Registration requires two commands: NICK (to set the desired nickname) and USER (to provide username, hostname, servername, and real name). The server responds with a sequence of numeric replies: 001 (RPL_WELCOME, confirming the connection), 002 (RPL_YOURHOST, server identification), 003 (RPL_CREATED, server creation date), and 004 (RPL_MYINFO, server version and supported modes). If the requested nickname is already in use, the server sends 433 (ERR_NICKNAMEINUSE) and the client must choose a different name. The PASS command can optionally precede NICK/USER to authenticate with a server password. A bot like Dancer must handle this entire registration sequence before it can begin its normal channel operations. -- RFC 1459, Section 4.1: Connection Registration
+
+### Topic 3: Channel Operations
+
+Channels are the named group communication spaces of IRC, identified by a leading "#" character (e.g., #bbs-discussion). Users join channels with the JOIN command and leave with PART. The TOPIC command sets or retrieves a channel's topic line. NAMES returns the list of users currently in a channel, with operator status indicated by a "@" prefix and voice by "+". LIST shows all public channels on the server. When a user joins a channel, the server broadcasts a JOIN message to all channel members. Each channel maintains a member list and mode settings that control its behavior. Channel names are case-insensitive and can be up to 200 characters long. The channel's founder or operators control who can join, speak, and change settings. -- RFC 1459, Section 1.3: Channels
+
+### Topic 4: PRIVMSG and NOTICE
+
+PRIVMSG is the primary message delivery command in IRC, used to send text to both channels and individual users. The syntax is `PRIVMSG <target> :<message text>`, where target is a channel name (#channel) or a nickname. When sent to a channel, all members receive the message. The NOTICE command has identical syntax but carries a critical semantic difference: clients must NEVER automatically reply to a NOTICE. This rule prevents infinite message loops between bots -- if bot A sends a PRIVMSG to bot B and bot B auto-replies with a PRIVMSG, bot A might auto-reply again, creating a loop. NOTICE breaks the loop because neither bot should respond to it. IRC bots like Dancer use NOTICE for all automated responses (error messages, help text, status reports) and only respond to PRIVMSG as a trigger. -- RFC 1459, Section 4.4.1: PRIVMSG; Section 4.4.2: NOTICE
+
+### Topic 5: Channel Modes
+
+Channel modes control the behavior and access rules of an IRC channel. The MODE command sets and clears modes using +/- syntax: `MODE #channel +m` sets moderated mode, `MODE #channel -m` clears it. Key modes include: +o (grant operator status to a user), +v (grant voice -- ability to speak in moderated channels), +b (set a ban mask), +m (moderated -- only operators and voiced users can speak), +k (require a key/password to join), +l (set a user limit), +n (no external messages -- only channel members can send to the channel), +t (only operators can change the topic), +i (invite-only), +s (secret -- hidden from LIST), and +p (private). Multiple modes can be set in a single command: `MODE #channel +ob nick nick!*@*.bad.host` grants operator to a user and bans a host pattern simultaneously. -- RFC 1459, Section 4.2.3: Channel modes
+
+### Topic 6: IRC Operators and KICK/BAN
+
+Channel operators (ops, marked with "@" before their nickname) have authority to manage channel membership and behavior. The KICK command removes a user from a channel: `KICK #channel nick :reason`. The user can rejoin unless a ban is in place. Bans use nick!user@host mask patterns with wildcards: `*!*@*.evil.isp.net` bans everyone from a particular ISP, `baduser!*@*` bans a specific nickname regardless of host, and `*!~badident@*` bans a specific ident. The ban list is checked against the full `nick!user@host` string of anyone attempting to join. IRC also has server-level operators (IRCops) who have network-wide privileges: they can kill connections, set server bans (K-lines), and link/delink servers. The distinction between channel operators (local channel authority) and IRC operators (network-wide authority) is fundamental to IRC's governance model. -- RFC 1459, Section 4.2.3: Channel modes; Section 4.1.5: OPER
+
+### Topic 7: CTCP Protocol
+
+The Client-To-Client Protocol (CTCP) extends IRC's messaging layer by embedding structured queries within PRIVMSG messages. A CTCP message is delimited by ASCII SOH characters (0x01): `PRIVMSG nick :\x01VERSION\x01` sends a VERSION query. The receiving client parses the SOH-delimited content, processes the CTCP command, and responds via NOTICE (never PRIVMSG, per the auto-reply rule). Standard CTCP commands include: VERSION (request client software version), PING (round-trip latency measurement, includes a timestamp), ACTION (the /me command: `\x01ACTION waves\x01` displays as "* nick waves"), TIME (request local time), and FINGER (request user information). CTCP is entirely a client-side convention -- the IRC server sees only a normal PRIVMSG containing SOH-delimited text. Bots like Dancer respond to CTCP VERSION and CTCP PING queries as part of their standard IRC interaction. -- RFC 1459
+
+### Topic 8: Dancer Bot Architecture
+
+Dancer is an event-driven IRC bot written in C by Bjorn Reese and Daniel Stenberg (of curl fame). The main event loop (see `data/bbs/dancer-irc/dancer-main.c` for the annotated excerpt) follows a standard Unix network programming pattern: initialize data structures, connect to the IRC server, register with NICK/USER, then enter a select() loop that monitors the server socket for incoming data. When data arrives, Dancer reads a line from the socket buffer, passes it to the IRC message parser, and dispatches the parsed command to the appropriate handler function. Signal handling (SIGHUP for rehash, SIGTERM for shutdown) is integrated into the event loop. This architecture -- read line, parse, dispatch, handle -- is the canonical pattern for IRC bot design and applies equally to modern bots written in any language. -- Dancer 4.16 source; data/bbs/dancer-irc/dancer-main.c
+
+### Topic 9: IRC Message Parsing in C
+
+Dancer's IRC message parser (see `data/bbs/dancer-irc/parse-irc.c` for the annotated excerpt) implements the RFC 1459 message format grammar in C. The parser processes each incoming line character by character: if the line begins with a colon, the prefix is extracted (everything up to the first space). The next token is the command (alphabetic string or numeric). Remaining tokens are parameters, split on spaces, until either the maximum parameter count (15) is reached or a colon is encountered (introducing the trailing parameter, which includes all remaining text including spaces). This parsing is critical for correctness: a bug that fails to handle the trailing colon correctly would truncate multi-word messages, and a buffer overflow in parameter handling could be exploited by a malicious server or user. Dancer's parser demonstrates defensive C programming: bounds checking on string operations, null-termination verification, and careful pointer arithmetic. -- RFC 1459, Section 2.3.1: Message format; data/bbs/dancer-irc/parse-irc.c
+
+### Topic 10: Flood Protection Algorithm
+
+IRC servers and bots must defend against flood attacks -- rapid-fire messages intended to disconnect the target or disrupt channel operation. Dancer's flood protection (see `data/bbs/dancer-irc/flood-protection.c` for the annotated excerpt) implements per-source rate limiting. For each user that sends commands to the bot, Dancer tracks the number of messages received within a sliding time window. When the message rate exceeds a configurable threshold, the bot ignores further messages from that source for a penalty period. This is more effective than a global rate limit because it allows the bot to continue serving well-behaved users while throttling only the flood source. The algorithm is conceptually similar to a token bucket: each source accumulates tokens over time and spends them on each message. When the bucket is empty, messages are dropped. IRC servers implement similar flood protection at the protocol level, often with a "penalty" system where each command adds to a per-client timer and the client is throttled or disconnected if the timer exceeds a limit. -- data/bbs/dancer-irc/flood-protection.c
+
+### Topic 11: Command Dispatch Pattern
+
+Dancer's command dispatch system (see `data/bbs/dancer-irc/command-dispatch.c` for the annotated excerpt) uses a function pointer table to route parsed IRC commands to their handler functions. The dispatch table is an array of structs, where each struct contains a command string (like "PRIVMSG", "JOIN", "KICK"), a function pointer to the handler, and metadata (minimum parameter count, privilege level required). When the parser extracts a command from an incoming message, the dispatcher iterates through the table, comparing the command string against each entry. On match, it verifies the parameter count and caller's privilege level, then calls the handler function with the parsed message data. This pattern makes the bot extensible: adding support for a new IRC command requires only adding a new entry to the dispatch table and writing the handler function. The same pattern appears in command-line argument parsing, HTTP request routing, and protocol handling across many languages. -- data/bbs/dancer-irc/command-dispatch.c
+
+### Topic 12: Contrasting IRC with FidoNet
+
+IRC and FidoNet represent opposite design philosophies for networked communication, and contrasting them illuminates fundamental tradeoffs in distributed systems. IRC is **real-time**: messages are delivered instantly but are ephemeral -- if you are not connected when a message is sent, you never see it. FidoNet is **store-and-forward**: messages are persisted and eventually delivered, but latency is measured in hours or days. IRC uses a **centralized server topology**: clients connect to servers, and servers form a spanning tree. FidoNet uses a **mesh of autonomous nodes** that dial each other on schedule. IRC requires **always-on network connectivity** (persistent TCP connections), while FidoNet operates over **temporary dial-up links**. IRC scales to massive real-time audiences (thousands of users in a single channel) but has no persistence. FidoNet scales to massive message archives with full persistence but cannot support real-time conversation. The BBS-to-Internet transition saw communities move from FidoNet echomail to IRC channels, trading persistence and offline access for immediacy and real-time interaction. -- RFC 1459; FTS-0001
+
+## Learn Mode Depth Markers
+
+### Level 1: Practical
+
+> IRC delivers messages in real time. Users join channels (#channel) with JOIN, send messages with PRIVMSG, and leave with PART. NOTICE is like PRIVMSG but must never trigger an auto-reply -- this prevents bot message loops. IRC bots like Dancer sit in channels and respond to commands. -- RFC 1459
+
+### Level 2: Reference
+
+> See RFC 1459 for the complete IRC protocol specification including message format, channel modes, client registration numerics, and CTCP embedding. The Dancer 4.16 source (data/bbs/dancer-irc/) provides annotated C code demonstrating event-loop architecture, message parsing, flood protection, and command dispatch. -- RFC 1459; Dancer 4.16 source
+
+### Level 3: Technical
+
+> IRC message format: `[:prefix SPACE] command [SPACE params] [SPACE :trailing]` CR-LF, max 512 bytes. Prefix: `nick!user@host`. Max 15 parameters. CTCP: SOH-delimited within PRIVMSG, responded via NOTICE. Registration: NICK + USER, server replies 001-004. Channel modes: +o (op), +v (voice), +b (ban mask nick!user@host), +m (moderated), +k (key), +l (limit), +n (no external), +t (topic lock), +i (invite), +s (secret). Dancer dispatch: function pointer table struct { char *cmd; handler_func fn; int min_params; int priv_level; }. Flood protection: per-source sliding window rate limiter with configurable threshold and penalty. -- RFC 1459, Section 2.3.1: Message format; data/bbs/dancer-irc/parse-irc.c
