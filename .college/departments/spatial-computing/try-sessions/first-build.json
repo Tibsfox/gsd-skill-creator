@@ -1,0 +1,45 @@
+{
+  "id": "first-build",
+  "title": "Your First Redstone Build: A 2-Input AND Gate",
+  "description": "Build a working AND gate from redstone dust, levers, and a redstone torch. Explore spatial coordinates, block placement rules, and Boolean logic through hands-on construction.",
+  "estimatedMinutes": 20,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Place a 5x3 flat stone platform starting at coordinates 0,64,0. Use F3 to verify your position. The platform should extend from X=0 to X=4, Z=0 to Z=2, all at Y=64.",
+      "expectedOutcome": "You have a flat 5x3 stone surface visible in the F3 debug screen at Y=64. You understand that all redstone circuitry must be placed on a solid block surface.",
+      "hint": "F3 shows XYZ as block coordinates. The block you are standing on is one below your feet position.",
+      "conceptsExplored": ["spatial-coordinate-navigation"]
+    },
+    {
+      "instruction": "Place two levers at X=0,Z=0 and X=0,Z=2 (left and right inputs). These are your A and B inputs. Place redstone dust in a line from each lever toward the center at X=2.",
+      "expectedOutcome": "Two separate redstone lines run from the levers toward the center. Activating either lever alone powers only its own line -- the lines do not yet interact.",
+      "hint": "Redstone dust carries signal up to 15 blocks before needing a repeater. Keep your circuit small.",
+      "conceptsExplored": ["spatial-signal-propagation"]
+    },
+    {
+      "instruction": "Place a redstone torch on the side of a solid block at X=3,Z=1. The torch should be powered OFF when either input line reaches it. Place both redstone lines so they converge at this block.",
+      "expectedOutcome": "When BOTH levers are ON, the block at X=3,Z=1 receives power from both sides, which extinguishes the torch. When either lever is OFF, the torch stays lit.",
+      "hint": "A redstone torch on a block inverts the block's power state. An active block (powered from any side) turns off its attached torch.",
+      "conceptsExplored": ["spatial-logic-gates-redstone"]
+    },
+    {
+      "instruction": "Extend a redstone wire from the torch output to a lamp at X=4,Z=1. Test all four input combinations (OFF/OFF, ON/OFF, OFF/ON, ON/ON) and record whether the lamp lights.",
+      "expectedOutcome": "Lamp lights only when BOTH levers are ON -- this is AND gate behavior. Truth table: 0,0=0 | 1,0=0 | 0,1=0 | 1,1=1.",
+      "hint": "Draw the truth table before testing. If results do not match, check that both input lines actually reach the torch block.",
+      "conceptsExplored": ["spatial-logic-gates-redstone", "spatial-circuit-timing"]
+    },
+    {
+      "instruction": "Add a 2-tick repeater (right-click twice) between each lever and the central block. Observe whether the gate still works. Measure the signal delay with a stopwatch.",
+      "expectedOutcome": "The gate still functions correctly but now has a 0.2-second delay (2 repeater ticks x 0.1s each). You have built a timed AND gate with signal amplification for longer circuits.",
+      "hint": "Repeaters both amplify (reset signal to strength 15) and delay (1-4 ticks = 0.1-0.4 seconds)",
+      "conceptsExplored": ["spatial-circuit-timing", "spatial-signal-propagation"]
+    },
+    {
+      "instruction": "Build a second AND gate adjacent to the first. Connect both AND gate outputs into a single OR gate (two redstone lines merging at one point). You now have an A AND B OR C AND D circuit.",
+      "expectedOutcome": "A 4-input programmable logic structure. Combining AND and OR gates is the foundation of all combinational logic -- the same principles used in electronic circuits and CPU arithmetic units.",
+      "hint": "OR is just two lines merging -- redstone dust naturally ORs two inputs by combining their signals",
+      "conceptsExplored": ["spatial-logic-gates-redstone", "spatial-structural-principles"]
+    }
+  ]
+}
