@@ -55,3 +55,34 @@ export interface CurlSecurityResult {
   reason?: string;
   resolvedIp?: string;
 }
+
+export interface CurlCookie {
+  domain: string;
+  includeSubdomains: boolean;
+  path: string;
+  secure: boolean;
+  expiry: number;       // Unix timestamp; 0 = session cookie
+  name: string;
+  value: string;
+  httpOnly?: boolean;   // Lines starting with #HttpOnly_
+}
+
+export interface CurlProxyConfig {
+  url: string;          // http://proxy:8080 or socks5://proxy:1080
+  username?: string;
+  password?: string;
+}
+
+export interface CurlCertConfig {
+  caBundle?: string;       // Path to CA bundle PEM file
+  clientCert?: string;     // Path to client certificate PEM
+  clientKey?: string;      // Path to client key PEM
+  pinSha256?: string;      // Expected SHA-256 fingerprint
+  rejectUnauthorized?: boolean;  // false = curl --insecure
+}
+
+export interface CurlRequestOptions {
+  proxy?: CurlProxyConfig;
+  cert?: CurlCertConfig;
+  cookieJar?: import('./cookies.js').CurlCookieJar;
+}
