@@ -28,6 +28,11 @@ export const nutritionForFitness: RosettaConcept = {
       targetId: 'nutr-meal-planning',
       description: 'Fitness nutrition applies general nutrition planning principles to athletic performance contexts',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'nutr-macronutrients',
+      description: 'Nutrition for fitness relies on macronutrient timing -- carbohydrates fuel exercise, protein enables muscle repair, understanding macros is prerequisite to optimizing performance nutrition',
+    },
   ],
   complexPlanePosition: {
     real: 0.65,

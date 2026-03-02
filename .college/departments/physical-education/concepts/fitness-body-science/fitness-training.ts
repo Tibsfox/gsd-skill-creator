@@ -20,7 +20,7 @@ export const fitnessTraining: RosettaConcept = {
   relationships: [
     {
       type: 'cross-reference',
-      targetId: 'mb-diaphragmatic-breathing',
+      targetId: 'mb-breath-diaphragmatic',
       description: 'Diaphragmatic breathing regulates intensity and supports recovery during fitness training',
     },
     {

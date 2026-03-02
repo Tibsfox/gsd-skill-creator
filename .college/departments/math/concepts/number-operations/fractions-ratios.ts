@@ -21,6 +21,11 @@ export const fractionsRatios: RosettaConcept = {
       targetId: 'math-data-representation',
       description: 'Ratios and percentages are the language of data comparison and statistical displays',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'math-ratios',
+      description: 'The mathematics department concept math-ratios covers proportional reasoning as abstract algebra; the math (MATH-101) department applies ratios as computational tools -- two registers of the same concept',
+    },
   ],
   complexPlanePosition: {
     real: 0.6,

@@ -21,6 +21,11 @@ export const functions: RosettaConcept = {
       targetId: 'math-coordinate-geometry',
       description: 'Functions are visualized on the coordinate plane as graphs',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'math-euler-formula',
+      description: "Euler's formula e^(i*pi)+1=0 is the complex function that unifies the mathematics department's core concepts; the math (MATH-101) department's functions wing provides the functional reasoning foundation",
+    },
   ],
   complexPlanePosition: {
     real: 0.4,
