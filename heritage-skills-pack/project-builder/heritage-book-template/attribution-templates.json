@@ -1,0 +1,59 @@
+[
+  {
+    "type": "author",
+    "requiredFields": ["name", "role", "consent"],
+    "consentRequirements": "Author consent is presumed via voluntary contribution. Document if explicit consent was obtained.",
+    "exampleAttribution": {
+      "type": "author",
+      "name": "Sarah Buckley",
+      "role": "Lead researcher and author",
+      "consent": "documented"
+    }
+  },
+  {
+    "type": "community",
+    "requiredFields": ["name", "nation", "role", "consent"],
+    "consentRequirements": "Community attribution requires community-level consent through the appropriate governance body (band council, tribal council, Inuit organization). The community name must identify the specific nation or community — not a pan-Indigenous label. OCAP Ownership principle applies: the knowledge belongs to the community, and attribution alone does not constitute permission to use restricted knowledge.",
+    "exampleAttribution": {
+      "type": "community",
+      "name": "Garden River First Nation",
+      "nation": "Anishinaabe (Ojibwe)",
+      "role": "Community knowledge partner and content reviewer",
+      "consent": "community-endorsed"
+    }
+  },
+  {
+    "type": "elder",
+    "requiredFields": ["name", "nation", "role", "consent"],
+    "consentRequirements": "Elder attribution requires documented individual consent. Nation field is required — always use the specific nation name (e.g., 'Inuit (Kivalliq)' not 'Indigenous elder'). If the elder prefers not to be named, use 'Inuit elder, [region]' with their explicit consent for that phrasing.",
+    "exampleAttribution": {
+      "type": "elder",
+      "name": "Pitseolak Iqaluk",
+      "nation": "Inuit (Nunavut, Kivalliq region)",
+      "role": "Knowledge keeper and qajaq-building instructor",
+      "consent": "documented"
+    }
+  },
+  {
+    "type": "tradition-bearer",
+    "requiredFields": ["name", "role", "consent"],
+    "consentRequirements": "Tradition-bearer attribution requires documented individual consent. For Indigenous tradition bearers, nation field is required. For Appalachian tradition bearers, region and community context is appropriate.",
+    "exampleAttribution": {
+      "type": "tradition-bearer",
+      "name": "Merle Hensley",
+      "role": "Appalachian basket-weaving tradition bearer, Ashe County, North Carolina",
+      "consent": "documented"
+    }
+  },
+  {
+    "type": "institution",
+    "requiredFields": ["name", "role", "consent"],
+    "consentRequirements": "Institutional attribution should reference any permissions, licenses, or endorsement documentation. For Indigenous institutions (ITK, FNIGC, tribal governments), note the specific authorization document.",
+    "exampleAttribution": {
+      "type": "institution",
+      "name": "Inuit Tapiriit Kanatami (ITK)",
+      "role": "National Inuit Strategy on Research (NISR) framework guidance",
+      "consent": "community-endorsed"
+    }
+  }
+]
