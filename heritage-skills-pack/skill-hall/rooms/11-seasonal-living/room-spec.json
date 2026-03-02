@@ -1,0 +1,72 @@
+{
+  "id": "room-11-seasonal-living",
+  "room": 11,
+  "domain": "seasonal-living",
+  "title": "Seasonal Living",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Season", "Agriculture", "WeatherProcess", "HeritageSkill", "Predicting"],
+  "sumoFile": ["Weather.kif", "heritage-domain-ontology.kif"],
+  "safetyDomains": ["arctic-survival", "food"],
+  "trySessions": [
+    "seasonal-11-planting-calendar-beginner",
+    "seasonal-11-caribou-migration-beginner",
+    "seasonal-11-birchbark-harvest-beginner"
+  ],
+  "description": "Room 11 covers seasonal living traditions across Appalachian, First Nations, and Inuit cultures — the accumulated knowledge of how communities read the land, sky, and animal behavior to organize their lives around the rhythms of the natural year.\n\nAppalachian seasonal calendar: Appalachian farming is organized around a seasonal calendar developed from European almanac traditions blended with empirical observation of the specific Appalachian climate. The Scots-Irish, English, and German settlers who built the Appalachian farming tradition brought the almanac with them — the Farmers' Almanac and home almanac tradition codified planting guidance into portable, shareable form. Key practices include: planting by signs (timing planting activities according to the moon's phase and zodiac sign — new moon to full moon for above-ground crops, full to new for root crops; water signs favorable for leafy crops, earth signs for roots, fire signs barren); frost date awareness (Appalachian elevation creates highly variable frost dates — a valley farm at 1200 feet may have a last-frost date three to four weeks earlier than a farm on the same ridge at 3000 feet); natural phenological indicators (plant corn when oak leaves are the size of a squirrel's ear; plant beans when locust trees bloom; note when katydids stop singing to anticipate first frost); and the Appalachian preservation cycle that runs from June strawberries through November butchering season — root cellars, dry storage, salt curing, smoking, and canning each serving their season. This calendar represents empirical ecological knowledge accumulated through generations of Appalachian farming practice.\n\nFirst Nations seasonal rounds: the First Nations of the eastern woodlands and boreal forest organized their lives around precise seasonal calendars tied to ecological events, not calendar dates. The Anishinaabe sugar bush season opens when maple sap runs — late winter/early spring when nights are below freezing and days are above, typically March in the Great Lakes region. The sugar bush is a place as well as a season: families return to the same maple stands for generations, maintaining multi-generational relationships with specific trees. The Haudenosaunee Three Sisters agricultural calendar synchronizes three companion crops: plant corn when oak leaves are the size of a squirrel's ear; plant beans when corn is knee-high; plant squash to shade the ground and retain moisture. Together, corn, beans, and squash form a mutualistic system — corn provides structure for bean vines, beans fix nitrogen, squash deters weeds and retains soil moisture. Cree and Dene trapping seasons follow the fur-bearing animal cycle: beaver and muskrat active in fall; lynx, wolf, and marten in deep winter; beaver again in spring at break-up. Birchbark harvest: Anishinaabe and Cree knowledge of a narrow 3-4 week window in late spring when sap is running and the cambium layer is hydrated, allowing bark to be peeled cleanly without damaging the tree — a seasonal ecological knowledge critical to birchbark canoe and container construction. Seasonal rounds carry both ecological knowledge (Level 1) and spiritual dimensions (Level 2 — acknowledged, not prescribed); specific seasonal ceremonies are Level 3 and are referred to nation-specific sources.\n\nInuit Arctic seasonal cycle: in Inuit Qaujimajatuqangit (IQ), the Arctic year has six seasons rather than four — each defined by ecological transitions rather than astronomical events: Ukiuq (deep winter — sea ice fully formed, aglu seal hunting, iglu camps, qulliq the central technology of warmth and light); Upingaksaaq (late winter/early spring — return of the sun above the horizon, best sea-ice travel conditions, maupok seal hunting on ice, qajaq preparation); Upirnganniit (spring/break-up — sea ice deteriorating, open-water hunting begins, beluga and narwhal, waterfowl return); Aujaq (summer — midnight sun, open water, caribou on tundra, Arctic char fishing, gathering); Ukiaksaaq (early fall — freeze-up begins, southward caribou migration, critical harvest season for hides and meat); Ukiaq (fall — freeze-up complete, ice travel resumes, seal hunting at breathing holes). Sea ice safety is integral to the seasonal cycle: new ice must be tested carefully (minimum 4 inches for foot travel, 8-12 for snowmobile, 12+ for vehicles); coastal ice is affected by tides and is less predictable than lake ice. The Bathurst and Beverly caribou herds are key landmarks of the annual cycle, with the southward fall migration defining Ukiaksaaq. Cross-reference Room 14 (Arctic Living) for complete ice safety and hypothermia protocols.",
+  "modules": [
+    {
+      "id": "seasonal-11-appalachian-planting-calendar",
+      "title": "Appalachian Planting Calendar and Almanac Traditions",
+      "tradition": "appalachian",
+      "description": "Appalachian moon phase planting guide: new moon to full moon for above-ground crops (leafy vegetables, fruits), full to new for below-ground crops (roots, bulbs, potatoes). Zodiac sign guidance: water signs (Cancer, Scorpio, Pisces) favorable for planting; fire signs (Aries, Leo, Sagittarius) barren; earth signs (Taurus, Virgo, Capricorn) good for root crops. Frost date mapping: Appalachian elevation creates extreme variability — valley bottoms frost earlier than slopes, ridge tops frost latest. Natural phenological indicators: plant corn when oak leaves are the size of a squirrel's ear; plant beans when locust trees bloom; plant squash after dogwood blossoms fall. Farmers' Almanac and home almanac traditions; generational farm calendars. Heritage attribution: Scots-Irish and German settler tradition brought to the central and southern Appalachians from the 1700s onward.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Agriculture", "Predicting", "HeritageSkill"]
+    },
+    {
+      "id": "seasonal-11-appalachian-preservation-cycle",
+      "title": "Appalachian Seasonal Preservation Cycle",
+      "tradition": "appalachian",
+      "description": "The Appalachian preservation calendar runs from June through November. June: strawberries and early vegetables — first canning of the season. July-August: summer vegetables, pickling cucumbers, beans, and tomatoes — peak pickling season; drying herbs. September: apples, late tomatoes, peppers — peak canning season; apple butter making. October: root vegetables harvested and stored in root cellars; late apples; winter squash cured and stored. November: butchering season — hogs and cattle processed after first hard frost when temperatures stay consistently below 40°F; salt pork, sausage, and cured hams. Root cellar design: buried or semi-buried structure using earth's thermal mass to maintain 32-40°F through the storage season. Smokehouse season runs parallel to butchering. Food storage annotation: root cellar management, regular inspection for spoilage, canning safety (pressure canning for low-acid foods).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Agriculture", "HeritageSkill"]
+    },
+    {
+      "id": "seasonal-11-fn-sugar-bush",
+      "title": "Anishinaabe Sugar Bush: Maple Sap Season",
+      "tradition": "first-nations",
+      "description": "Anishinaabe sugar bush (ziisbaakdoke — making sugar): the maple sap season opens in late winter/early spring when nights are below freezing and days above. Typically late February to April in the Great Lakes region, somewhat later farther north. Families travel to established sugar bush sites, maintaining multi-generational relationships with specific maple stands. Tap selection: only sugar maple (Acer saccharum) and red maple are tapped — birch taps for birch sap are a separate practice. Sap collection: traditional wooden or birchbark collection vessels; modern metal or plastic taps and tubing. Reduction: maple sap is approximately 2% sugar and must be reduced by boiling to 66-67% sugar for syrup — approximately 40 gallons of sap per gallon of syrup. Further reduction produces maple cream, maple candy, and maple sugar. The sugar bush is both a productive season and a community gathering with dimensions that connect to Anishinaabe spiritual and relational life. The ceremonial and spiritual dimensions are Level 2 — acknowledged here without specific protocols. Nation attribution: Anishinaabe (Ojibwe, Odawa, Potawatomi communities across the Great Lakes region).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Agriculture", "HeritageSkill"]
+    },
+    {
+      "id": "seasonal-11-fn-seasonal-rounds",
+      "title": "First Nations Seasonal Rounds: Three Sisters, Trapping, and Birchbark",
+      "tradition": "first-nations",
+      "description": "Haudenosaunee Three Sisters planting calendar: corn planted when oak leaves are the size of a squirrel's ear; beans planted when corn is knee-high; squash planted with beans to provide ground cover. The Three Sisters companion planting system encodes deep knowledge of inter-species ecology — corn provides structure, beans fix nitrogen, squash retains soil moisture. Harvest timing: corn at grain maturity; beans at pod-fill; squash before first frost. The planting and harvest seasons are associated with community ceremonial life at Level 2-3 (ceremonial specifics not included). Cree and Dene trapping seasons: fall trapping (beaver, muskrat, otter, mink) begins at freeze-up; winter trapping runs through January-February (lynx, marten, wolf); spring trapping at break-up for beaver. The trap line is both an economic and a relational system — Cree and Dene trapping protocols carry spiritual dimensions acknowledged at Level 2. Birchbark harvest: Anishinaabe and Cree knowledge of the brief late-spring harvest window (late May to mid-June in the Great Lakes; later in boreal territories) when cambium is active and bark peels cleanly. Spiritual connections to seasonal rounds acknowledged at Level 2. Nation attributions: Haudenosaunee (Three Sisters), Anishinaabe and Cree (sugar bush, birchbark harvest), Cree and Dene (trapping seasons).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Agriculture", "HeritageSkill", "Predicting"]
+    },
+    {
+      "id": "seasonal-11-inuit-six-seasons",
+      "title": "Inuit Six-Season Framework: Ukiuq through Ukiaq",
+      "tradition": "inuit",
+      "description": "The IQ six-season framework organizes the Arctic year by ecological transitions rather than astronomical events: (1) Ukiuq (deep winter, November-February): sea ice fully formed, aglu seal hunting at breathing holes, iglu camps, qulliq central to warmth and light. (2) Upingaksaaq (late winter/early spring, March-April): return of the sun, best sea-ice travel conditions, maupok hunting of basking seals, qajaq preparation. (3) Upirnganniit (spring/break-up, May-June): ice deteriorating and dangerous, open-water hunting begins, beluga and narwhal, waterfowl return. (4) Aujaq (summer, July-August): open water, midnight sun, caribou hunting on tundra, Arctic char fishing, gathering crowberries and cloudberries. (5) Ukiaksaaq (early fall, August-September): freeze-up begins, southward caribou migration — critical harvest season for hides and meat, food caching for winter. (6) Ukiaq (fall/freeze-up, October-November): freeze-up complete, ice travel resumes, seal hunting at breathing holes resumes. Sea ice safety is integral to this cycle — each seasonal transition carries specific ice hazards. Cross-reference Room 14 (Arctic Living) for complete ice safety and cold-weather protocols. This module is gated because winter and freeze-up transitions involve arctic-survival considerations. Nation attribution: Inuit (Nunavut, Nunavik, Inuvialuit, Nunatsiavut regions).",
+      "safetyLevel": "gated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Season", "HeritageSkill", "Predicting"]
+    },
+    {
+      "id": "seasonal-11-inuit-migration",
+      "title": "Inuit Seasonal Migration Knowledge: Caribou, Beluga, and Migratory Birds",
+      "tradition": "inuit",
+      "description": "Caribou migration timing: the Bathurst herd (Nunavut barrenlands) and Beverly herd make southward fall migrations in August-September and northward spring migrations in May-June. Communities in the migration path prepare for weeks of intensive hunting, hide processing, and caching. Inuit knowledge of migration routes encodes multi-generational observation of specific ridgelines, river crossings, and landscape features that herds follow. Multiple indicator systems: landscape landmarks (inherited territorial knowledge), weather patterns (northwest winds in late August often precede caribou movement), other animals (wolves and ravens tracking herds), and sign on the ground. Beluga whale migration: beluga herds follow coastal routes predictably — Inuit umiaq hunters positioned at known choke points during migration. Migratory bird seasons: eider ducks and snow geese arrive in spring (Upirnganniit), providing eggs for collection and birds for harvest. Arctic terns signal the return of extended light. Seasonal ecological knowledge systems: reading animal behavior and landscape sign as a probability estimate for species arrival. Nation attribution: Inuit. Note: the Bathurst herd has declined significantly in recent decades — from near half a million to fewer than 20,000 animals — affecting the seasonal calendar of communities whose subsistence and cultural life depend on this migration.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Predicting", "HeritageSkill"]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-11-appalachian-planting-calendar",
+    "sumoTerm": "Agriculture",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianPlantingCalendar Agriculture)",
+    "naturalLanguage": "An Appalachian planting calendar is an agricultural system: a structured schedule for planting, cultivation, and harvest activities timed to Appalachian seasonal conditions, including moon phase guidance, frost date knowledge, and empirical phenological indicators of seasonal timing.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-season",
+    "sumoTerm": "Season",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageSeasonalRound Season)",
+    "naturalLanguage": "A heritage seasonal round is a season-organized schedule of activities: the annual cycle of community activities (planting, harvesting, hunting, trapping, preserving) organized by the ecological seasons of a specific territory and tradition.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-inuit-six-seasons",
+    "sumoTerm": "Season",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitSixSeasons Season)",
+    "naturalLanguage": "The Inuit six-season framework (Ukiuq through Ukiaq) is a seasonal classification system that divides the Arctic year into six ecologically distinct periods based on sea ice, light conditions, wildlife availability, and travel conditions -- a finer-grained seasonal model than the four-season European framework, organized around what is happening ecologically rather than astronomical events.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-sugar-bush-season",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SugarBushHarvest HeritageSkill)",
+    "naturalLanguage": "Sugar bush harvesting is an Anishinaabe heritage skill: the seasonal practice of tapping maple trees during the brief spring sap run, collecting sap, and reducing it to syrup and sugar -- a seasonal food source encoding knowledge of maple ecology, weather reading, and reduction technique transmitted across generations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-three-sisters-planting",
+    "sumoTerm": "Agriculture",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ThreeSistersPlanting Agriculture)",
+    "naturalLanguage": "Three Sisters planting is a Haudenosaunee agricultural system: the companion planting of corn, beans, and squash in a mutualistic arrangement where each plant supports the others -- corn provides structure for bean vines, beans fix nitrogen, squash shades the ground to retain moisture and discourage weeds.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-weather-reading",
+    "sumoTerm": "Predicting",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWeatherReading Predicting)",
+    "naturalLanguage": "Traditional weather reading (Appalachian almanac signs, animal behavior indicators, cloud formation reading) is a predicting activity: the interpretation of observable natural indicators to forecast near-term weather conditions and seasonal transitions, using accumulated empirical knowledge rather than meteorological instruments.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-birchbark-harvest-timing",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkHarvestTiming HeritageSkill)",
+    "naturalLanguage": "Birchbark harvest timing is an Anishinaabe and Cree heritage skill: the knowledge of the 3-4 week window in late spring when birch sap is running and the cambium layer is active, allowing bark to be peeled cleanly without damaging the tree -- a seasonal ecological knowledge critical to birchbark canoe and container construction.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-caribou-migration-knowledge",
+    "sumoTerm": "Predicting",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CaribouMigrationKnowledge Predicting)",
+    "naturalLanguage": "Caribou migration knowledge is an Inuit heritage prediction skill: knowledge of when specific herds (Bathurst, Beverly, and others) will pass through specific territories, informed by multi-generational observation of migration patterns, landscape features, and seasonal indicators including weather signs and animal behavior.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-root-cellar",
+    "sumoTerm": "StationaryArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass RootCellar StationaryArtifact)",
+    "naturalLanguage": "A root cellar is a stationary artifact: a buried or partly buried storage structure that uses the earth's thermal mass to maintain temperatures near freezing year-round, preserving root vegetables, apples, and other produce through the Appalachian winter season.",
+    "ontologicalBridge": null
+  }
+]
