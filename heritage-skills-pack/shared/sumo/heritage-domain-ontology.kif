@@ -1,0 +1,310 @@
+;; Heritage Domain Ontology for Heritage Skills Educational Pack
+;; Extends: Merge.kif, MILO
+;; Version: 1.0
+;; Created: 2026-03-02
+;;
+;; This ontology formally grounds all 14 rooms of the Heritage Skills Educational
+;; Pack within the Suggested Upper Merged Ontology (SUMO). It defines classes and
+;; relations that describe heritage knowledge, cultural practices, and traditional
+;; skills in a way that is interoperable with the broader SUMO knowledge graph.
+;;
+;; Central design principle: this ontology does NOT force Western ontological
+;; categories onto Indigenous knowledge systems. Where tensions exist between
+;; SUMO classifications and Indigenous epistemologies, those tensions are
+;; surfaced explicitly in the Ontological Tension Layer (ontological-bridges.json)
+;; rather than resolved by flattening one framework onto the other.
+;;
+;; Parent ontologies referenced:
+;;   Merge.kif   -- SUMO top-level ontology (Entity, Process, Attribute, Relation)
+;;   MILO        -- Mid-Level Ontology (Artifact, Text, NormativeAttribute, etc.)
+;;
+;; =============================================================================
+;; CLASS DEFINITIONS
+;; =============================================================================
+
+;; -----------------------------------------------------------------------------
+;; HeritageSkill
+;; Parent: IntentionalProcess (Merge.kif)
+;; A skilled activity practiced by humans with intention, transmitted across
+;; generations within a cultural tradition.
+;; -----------------------------------------------------------------------------
+
+(subclass HeritageSkill IntentionalProcess)
+(documentation HeritageSkill EnglishLanguage "A practiced skill transmitted across
+generations within a cultural tradition, learned through direct instruction,
+observation, and practice. Heritage skills are intentional human activities
+(hence subclass of IntentionalProcess) that carry cultural meaning beyond
+their functional purpose. Examples include birchbark canoe construction,
+water-bath canning, pemmican making, igloo building, and quillwork.")
+
+(format HeritageSkill EnglishLanguage "%1 is a heritage skill")
+
+;; -----------------------------------------------------------------------------
+;; TraditionalProcess
+;; Parent: IntentionalProcess (Merge.kif)
+;; A process that follows established traditional methods passed down through
+;; cultural practice rather than written instruction.
+;; -----------------------------------------------------------------------------
+
+(subclass TraditionalProcess IntentionalProcess)
+(documentation TraditionalProcess EnglishLanguage "A process following traditional
+methods passed down through cultural practice, oral instruction, and embodied
+demonstration rather than written manuals or formal education. Traditional
+processes are characterized by their continuity with past practice and their
+grounding in specific cultural and ecological contexts. Examples include
+traditional hide tanning, sap-to-syrup processing, and traditional fish smoking.")
+
+(format TraditionalProcess EnglishLanguage "%1 is a traditional process")
+
+;; TraditionalProcess and HeritageSkill frequently co-occur: a HeritageSkill
+;; is typically realized through one or more TraditionalProcesses.
+(subclass HeritageSkill TraditionalProcess)
+
+;; -----------------------------------------------------------------------------
+;; CulturalPractice
+;; Parent: SocialInteraction (Merge.kif)
+;; A culturally-embedded activity that carries community significance beyond
+;; its practical function.
+;; -----------------------------------------------------------------------------
+
+(subclass CulturalPractice SocialInteraction)
+(documentation CulturalPractice EnglishLanguage "A culturally-embedded activity
+with community significance that goes beyond its practical function. Cultural
+practices are social in nature (hence subclass of SocialInteraction) because
+they are performed within and for a community, and their meaning is collectively
+held. Examples include the tobacco offering before birchbark canoe construction,
+the Aajiiqatigiinniq (consensus decision-making) practice of Inuit communities,
+and the communal canning gatherings of Appalachian tradition.")
+
+(format CulturalPractice EnglishLanguage "%1 is a cultural practice")
+
+;; -----------------------------------------------------------------------------
+;; IndigenousKnowledgeSystem
+;; Parent: Proposition (Merge.kif)
+;; A coherent body of knowledge maintained by Indigenous peoples through
+;; collective memory, oral tradition, and practice.
+;; -----------------------------------------------------------------------------
+
+(subclass IndigenousKnowledgeSystem Proposition)
+(documentation IndigenousKnowledgeSystem EnglishLanguage "A coherent body of
+knowledge maintained by Indigenous peoples through collective memory, oral
+tradition, ceremony, and embodied practice. Indigenous knowledge systems are
+relational rather than taxonomic -- they situate human beings in networks of
+obligation and relationship with the land, animals, and community rather than
+classifying the world as an array of discrete objects. Examples include Inuit
+Qaujimajatuqangit (IQ), Anishinaabe ecological knowledge, and Haudenosaunee
+agricultural science. NOTE: This class is a SUMO-level description of a concept
+whose full nature cannot be captured by SUMO -- see ontological-bridges.json
+for explicit tension points.")
+
+(format IndigenousKnowledgeSystem EnglishLanguage "%1 is an indigenous knowledge system")
+
+;; -----------------------------------------------------------------------------
+;; KnowledgeKeeper
+;; Parent: Human (Merge.kif)
+;; A person recognized by their community as holding, practicing, and
+;; transmitting traditional knowledge.
+;; -----------------------------------------------------------------------------
+
+(subclass KnowledgeKeeper Human)
+(documentation KnowledgeKeeper EnglishLanguage "A person recognized by their
+community as holding, practicing, and transmitting traditional knowledge.
+Knowledge keepers are not self-appointed -- their recognition comes from
+the community whose knowledge they hold. The role carries obligations as
+well as authority: a knowledge keeper is responsible for transmitting
+knowledge accurately and appropriately to the next generation. Examples
+include Inuit elders who hold traditional ecological and survival knowledge,
+Anishinaabe medicine people who hold plant knowledge, and Appalachian
+craft masters who hold traditional woodworking and textile skills.")
+
+(format KnowledgeKeeper EnglishLanguage "%1 is a knowledge keeper")
+
+;; -----------------------------------------------------------------------------
+;; MaterialCulture
+;; Parent: Artifact (MILO)
+;; A physical object that carries cultural meaning beyond its functional role.
+;; -----------------------------------------------------------------------------
+
+(subclass MaterialCulture Artifact)
+(documentation MaterialCulture EnglishLanguage "A physical object that carries
+cultural meaning beyond its functional role as a tool or material good.
+Material culture objects are Artifacts (deliberately made or significantly
+modified by humans) that also function as expressions of cultural identity,
+skill, and knowledge transmission. Examples include the birchbark canoe
+(which is both a watercraft and a teaching about relationship with the
+birch tree), Inuit qulliq (both a lamp and a symbol of the women's knowledge
+tradition), and Appalachian split-oak baskets (both containers and evidence
+of woodcraft mastery).")
+
+(format MaterialCulture EnglishLanguage "%1 is a material culture object")
+
+;; -----------------------------------------------------------------------------
+;; SeasonalRound
+;; Parent: TimeInterval (Merge.kif)
+;; A culturally-defined seasonal cycle that organizes the pattern of human
+;; activity in relation to the land and its rhythms.
+;; -----------------------------------------------------------------------------
+
+(subclass SeasonalRound TimeInterval)
+(documentation SeasonalRound EnglishLanguage "A culturally-defined seasonal cycle
+that organizes the pattern of human activity in relation to the land, its
+resources, and its rhythms. The seasonal round is not a calendar imposed on
+the land -- it is a pattern of relationships that emerges from the land. Each
+season within a seasonal round brings specific activities, responsibilities,
+and knowledge requirements. Indigenous seasonal rounds often have 4-8 named
+seasons based on ecological markers (ice breakup, berry ripening, caribou
+migration) rather than astronomical divisions. NOTE: The Western view of
+SeasonalRound as a TimeInterval captures only the temporal aspect -- see
+ontological-bridges.json for the fuller Indigenous view.")
+
+(format SeasonalRound EnglishLanguage "%1 is a seasonal round")
+
+;; -----------------------------------------------------------------------------
+;; OralTradition
+;; Parent: LinguisticExpression (Merge.kif)
+;; Knowledge transmitted and preserved through spoken word, story, song,
+;; and performance rather than writing.
+;; -----------------------------------------------------------------------------
+
+(subclass OralTradition LinguisticExpression)
+(documentation OralTradition EnglishLanguage "Knowledge transmitted and preserved
+through spoken word, story, song, ceremony, and performance rather than writing.
+Oral traditions are not simply the spoken version of information that could be
+written -- they are epistemological systems in their own right, in which the
+act of transmission (the telling, the listening, the context) is as important
+as the content transmitted. Examples include the oral histories of Appalachian
+communities, the traditional ecological knowledge encoded in Inuit stories about
+animal behavior, and the ceremonial songs that encode Haudenosaunee agricultural
+knowledge.")
+
+(format OralTradition EnglishLanguage "%1 is an oral tradition")
+
+;; -----------------------------------------------------------------------------
+;; HeritageDocument
+;; Parent: Text (MILO)
+;; A document that preserves, records, or transmits heritage knowledge.
+;; -----------------------------------------------------------------------------
+
+(subclass HeritageDocument Text)
+(documentation HeritageDocument EnglishLanguage "A document that preserves,
+records, or transmits heritage knowledge. Heritage documents include published
+books (such as the Foxfire series for Appalachian traditions), field recordings
+of oral histories, museum exhibition materials, and community-produced guides.
+All HeritageDocuments in this pack are subject to fair-use analysis and
+creator-first citation requirements. Community-produced heritage documents
+from Indigenous knowledge holders are governed by OCAP principles.")
+
+(format HeritageDocument EnglishLanguage "%1 is a heritage document")
+
+;; -----------------------------------------------------------------------------
+;; CommunityProtocol
+;; Parent: NormativeAttribute (MILO)
+;; Community-defined rules governing who may access, use, or transmit
+;; specific knowledge.
+;; -----------------------------------------------------------------------------
+
+(subclass CommunityProtocol NormativeAttribute)
+(documentation CommunityProtocol EnglishLanguage "Community-defined rules
+governing who may access, use, transmit, or reproduce specific knowledge,
+objects, or practices. Community protocols are NormativeAttributes -- they
+define what is appropriate and obligatory within a cultural context -- but
+they are set by communities, not by external authorities. Examples include
+protocols governing the use of sacred plants (which may limit who may harvest
+or use them), protocols governing the transmission of clan songs (which may
+restrict teaching to clan members), and protocols governing the reproduction
+of ceremonial designs. The Heritage Skills pack implements community protocols
+through the Cultural Sovereignty Warden's four-level classification system.")
+
+(format CommunityProtocol EnglishLanguage "%1 is a community protocol")
+
+;; =============================================================================
+;; RELATION DEFINITIONS
+;; =============================================================================
+
+;; -----------------------------------------------------------------------------
+;; transmitsKnowledge
+;; Domain: KnowledgeKeeper, Range: HeritageSkill
+;; The relationship between a knowledge keeper and a heritage skill they teach.
+;; -----------------------------------------------------------------------------
+
+(instance transmitsKnowledge BinaryPredicate)
+(domain transmitsKnowledge 1 KnowledgeKeeper)
+(range transmitsKnowledge HeritageSkill)
+(documentation transmitsKnowledge EnglishLanguage "The relationship between a
+knowledge keeper and a heritage skill they transmit to the next generation.
+This relation captures the social and intentional act of teaching -- a knowledge
+keeper actively transmits knowledge through demonstration, instruction, and
+guided practice. The relation is asymmetric: the knowledge keeper has recognized
+authority to transmit; the learner does not yet have that authority. Over time,
+the learner may become a knowledge keeper themselves and come to stand in this
+relation to new learners.")
+
+(format transmitsKnowledge EnglishLanguage "%1 transmits knowledge of %2")
+
+;; -----------------------------------------------------------------------------
+;; governedBy
+;; Domain: CulturalPractice, Range: CommunityProtocol
+;; The relationship between a cultural practice and the protocol that regulates it.
+;; -----------------------------------------------------------------------------
+
+(instance governedBy BinaryPredicate)
+(domain governedBy 1 CulturalPractice)
+(range governedBy CommunityProtocol)
+(documentation governedBy EnglishLanguage "The relationship between a cultural
+practice and the community protocol that governs access to, performance of, or
+transmission of that practice. Not all cultural practices are governed by formal
+protocols -- some are freely shared. But many practices, especially those with
+ceremonial, sacred, or proprietary dimensions, are governed by community protocols
+that determine who may participate, observe, document, or teach the practice.
+The Heritage Skills pack respects this relation by implementing the Cultural
+Sovereignty Warden's four-level classification system.")
+
+(format governedBy EnglishLanguage "%1 is governed by %2")
+
+;; -----------------------------------------------------------------------------
+;; seasonOf
+;; Domain: HeritageSkill, Range: SeasonalRound
+;; The relationship between a heritage skill and the seasonal round in which
+;; it is traditionally practiced.
+;; -----------------------------------------------------------------------------
+
+(instance seasonOf BinaryPredicate)
+(domain seasonOf 1 HeritageSkill)
+(range seasonOf SeasonalRound)
+(documentation seasonOf EnglishLanguage "The relationship between a heritage skill
+and the seasonal round or season within a seasonal round during which that skill
+is traditionally practiced. This relation captures the ecological grounding of
+heritage skills -- most traditional skills are practiced at specific times of
+year because they depend on the availability of seasonal materials (ramps in
+spring, berries in summer, caribou in fall), the ecological conditions required
+for the process (ice thickness for winter travel, frost for root cellaring),
+or the social calendar of the community (sugaring time, canning time, fishing
+season).")
+
+(format seasonOf EnglishLanguage "%1 is practiced during %2")
+
+;; -----------------------------------------------------------------------------
+;; materialFrom
+;; Domain: MaterialCulture, Range: Substance
+;; The relationship between a material culture object and the substance from
+;; which it is primarily made.
+;; -----------------------------------------------------------------------------
+
+(instance materialFrom BinaryPredicate)
+(domain materialFrom 1 MaterialCulture)
+(range materialFrom Substance)
+(documentation materialFrom EnglishLanguage "The relationship between a material
+culture object and the primary substance from which it is made. This relation
+connects the material world to the knowledge of materials that is central to
+heritage skills. A birchbark canoe is materialFrom birch (Substance), a qulliq
+is materialFrom soapstone, a split-oak basket is materialFrom white oak. The
+choice of material in traditional crafts is never arbitrary -- it encodes
+knowledge of material properties (birch bark's flexibility and waterproofing),
+ecological relationship (the harvest protocols for taking bark without killing
+the tree), and cultural meaning (what this material means in this tradition).")
+
+(format materialFrom EnglishLanguage "%1 is made from %2")
+
+;; =============================================================================
+;; END OF HERITAGE DOMAIN ONTOLOGY
+;; =============================================================================
