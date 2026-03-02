@@ -1,0 +1,165 @@
+# Electronics Department Chipset Configuration
+# Migrated from src/electronics-pack/chipset.yaml (Phase 23)
+# Original: 14 skills and 5 agents for the electronics educational curriculum
+# HH chapter references (Horowitz & Hill, Art of Electronics 3rd Ed.) are preserved.
+
+name: electronics
+version: 0.1.0
+description: "Electronics Department -- routes queries across 15 modules (4 tiers) covering circuit foundations through applied embedded systems"
+
+skills:
+  - id: circuit-fundamentals
+    name: Circuit Fundamentals
+    description: "Voltage, current, resistance, Ohm's law, KVL/KCL, power, series/parallel circuits"
+    triggers: [voltage, current, resistance, ohm, kirchhoff, power, series, parallel, divider]
+    module: 01-the-circuit
+    hh_chapters: ["1.2"]
+    tier: 1
+
+  - id: passive-components
+    name: Passive Components
+    description: "Capacitors, inductors, RC/RL/RLC filters, resonance, Thevenin/Norton, impedance"
+    triggers: [capacitor, inductor, RC, RL, RLC, filter, resonance, thevenin, norton, impedance]
+    module: 02-passive-components
+    hh_chapters: ["1.4", "1.7"]
+    tier: 1
+
+  - id: signal-analysis
+    name: Signal Analysis
+    description: "AC signals, frequency response, Bode plots, decibels, noise, coupling, spectrum"
+    triggers: [AC, frequency, bode, decibel, dB, noise, signal, coupling, spectrum, waveform]
+    module: 03-the-signal
+    hh_chapters: ["1.5", "1.7", "8.11"]
+    tier: 1
+
+  - id: diode-circuits
+    name: Diode Circuits
+    description: "Diode I-V curves, rectification, Zener, LEDs, Shockley equation, clamping, bridge"
+    triggers: [diode, rectifier, zener, LED, shockley, clamping, bridge, I-V curve]
+    module: 04-diodes
+    hh_chapters: ["1.6"]
+    tier: 2
+
+  - id: transistor-circuits
+    name: Transistor Circuits
+    description: "BJT/MOSFET amplifiers, common-emitter, emitter-follower, current mirrors, gain"
+    triggers: [transistor, BJT, MOSFET, amplifier, common-emitter, emitter-follower, current-mirror, beta, gain]
+    module: 05-transistors
+    hh_chapters: ["Ch.2", "Ch.3"]
+    tier: 2
+
+  - id: op-amp-circuits
+    name: Op-Amp Circuits
+    description: "Operational amplifiers, inverting/non-inverting, integrator, differentiator, comparator, active filters"
+    triggers: [op-amp, operational amplifier, inverting, non-inverting, integrator, differentiator, comparator, golden rules, active filter]
+    module: 06-op-amps
+    hh_chapters: ["Ch.4", "Ch.6"]
+    tier: 2
+
+  - id: power-supply-design
+    name: Power Supply Design
+    description: "Linear/switching regulators, buck/boost, LDO, ripple, thermal management, battery charging"
+    triggers: [power supply, regulator, buck, boost, switching, linear, 7805, LDO, ripple, thermal, battery]
+    module: 07-power-supplies
+    hh_chapters: ["Ch.9"]
+    tier: 2
+
+  - id: logic-gate-design
+    name: Logic Gate Design
+    description: "Boolean algebra, combinational logic, CMOS construction, truth tables, K-maps, De Morgan's"
+    triggers: [logic gate, boolean, AND, OR, NOT, NAND, NOR, XOR, CMOS, truth table, K-map, de morgan]
+    module: 07a-logic-gates
+    hh_chapters: ["10.1", "10.2"]
+    tier: 3
+
+  - id: sequential-logic
+    name: Sequential Logic
+    description: "Flip-flops, counters, registers, state machines, clocks, latches, memory"
+    triggers: [flip-flop, counter, register, state machine, clock, latch, moore, mealy, SRAM, memory]
+    module: 08-sequential-logic
+    hh_chapters: ["10.3", "10.4", "10.5"]
+    tier: 3
+
+  - id: data-conversion
+    name: Data Conversion
+    description: "ADC/DAC architectures, sampling theorem, Nyquist, quantization, aliasing"
+    triggers: [ADC, DAC, sampling, nyquist, quantization, R-2R, SAR, sigma-delta, aliasing]
+    module: 09-data-conversion
+    hh_chapters: ["Ch.13"]
+    tier: 3
+
+  - id: dsp-fundamentals
+    name: DSP Fundamentals
+    description: "FIR/IIR filters, FFT/DFT, convolution, windowing, fixed-point arithmetic"
+    triggers: [DSP, FIR, IIR, FFT, DFT, filter design, convolution, windowing, fixed-point]
+    module: 10-dsp
+    hh_chapters: ["13.5"]
+    tier: 3
+
+  - id: microcontroller-systems
+    name: Microcontroller Systems
+    description: "MCU architecture, GPIO, UART/SPI/I2C, interrupts, PWM, Arduino/ESP32"
+    triggers: [microcontroller, MCU, GPIO, UART, SPI, I2C, interrupt, PWM, Arduino, ESP32]
+    module: 11-microcontrollers
+    hh_chapters: ["Ch.14", "Ch.15"]
+    tier: 4
+
+  - id: sensor-actuator-systems
+    name: Sensor & Actuator Systems
+    description: "Wheatstone bridge, H-bridge, stepper motors, thermocouples, instrumentation amplifiers"
+    triggers: [sensor, actuator, Wheatstone, H-bridge, stepper, thermocouple, optocoupler, strain gauge, instrumentation amplifier]
+    module: 12-sensors-actuators
+    hh_chapters: ["Ch.2", "Ch.5", "Ch.12"]
+    tier: 4
+
+  - id: industrial-and-applied
+    name: Industrial & Applied Electronics
+    description: "PLC/ladder logic, off-grid/solar power, PCB design and layout"
+    triggers: [PLC, ladder logic, off-grid, solar, MPPT, PCB, layout, Gerber, PID, Modbus, NEC]
+    modules: [13-plc, 14-off-grid-power, 15-pcb-design]
+    hh_chapters: ["Ch.9", "Ch.12", "IEC 61131-3"]
+    tier: 4
+
+agents:
+  - id: EL-1
+    name: circuit-instructor
+    role: "Foundation instructor for voltage/current/resistance, passive components, and signals"
+    skills: [circuit-fundamentals, passive-components, signal-analysis]
+    tier: 1
+
+  - id: EL-2
+    name: semiconductor-instructor
+    role: "Semiconductor device instructor for diodes and transistors"
+    skills: [diode-circuits, transistor-circuits]
+    tier: 2
+
+  - id: EL-3
+    name: analog-systems-instructor
+    role: "Analog system design instructor for op-amps and power supplies"
+    skills: [op-amp-circuits, power-supply-design]
+    tier: 2
+
+  - id: EL-4
+    name: digital-instructor
+    role: "Digital and mixed-signal instructor for logic, data conversion, and DSP"
+    skills: [logic-gate-design, sequential-logic, data-conversion, dsp-fundamentals]
+    tier: 3
+
+  - id: EL-5
+    name: systems-instructor
+    role: "Applied systems instructor and safety warden liaison"
+    skills: [microcontroller-systems, sensor-actuator-systems, industrial-and-applied]
+    tier: 4
+
+topology:
+  type: pipeline
+  description: "Tiered learning progression: EL-1 (foundations) feeds into EL-2/EL-3 (active devices) which feed into EL-4 (digital) which feeds into EL-5 (applied systems)"
+  flow:
+    - from: EL-1
+      to: [EL-2, EL-3]
+    - from: EL-2
+      to: [EL-4]
+    - from: EL-3
+      to: [EL-4]
+    - from: EL-4
+      to: [EL-5]
