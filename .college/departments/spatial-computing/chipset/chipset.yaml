@@ -1,0 +1,55 @@
+# Spatial Computing Department Chipset Configuration
+# New chipset -- no source pack exists; created for Phase 23
+
+name: spatial-computing
+version: 0.1.0
+description: "Spatial Computing Department -- routes queries to 5 wings covering coordinate navigation, building, redstone engineering, automation, and collaborative design"
+
+skills:
+  - id: spatial-foundations-guide
+    name: Spatial Foundations Guide
+    description: "Coordinate systems, 3D navigation, spatial reasoning, geometric structures in block space"
+    triggers: [coordinates, navigation, F3, chunk, spatial reasoning, 3D geometry, voxel]
+    wing: spatial-foundations
+
+  - id: building-architecture-guide
+    name: Building & Architecture Guide
+    description: "Structural principles, material properties, blueprint design, aesthetic construction"
+    triggers: [build, structure, material, blueprint, design, architecture, pillar, arch]
+    wing: building-architecture
+
+  - id: redstone-engineering-guide
+    name: Redstone Engineering Guide
+    description: "Logic gates via redstone, combinational circuits, timing, repeaters, comparators"
+    triggers: [redstone, logic gate, AND, OR, NOT, repeater, comparator, piston, timing, circuit]
+    wing: redstone-engineering
+
+  - id: systems-automation-guide
+    name: Systems & Automation Guide
+    description: "Automated farms, item sorting networks, transportation, production chains"
+    triggers: [farm, automation, hopper, dropper, sorting, transport, minecart, production]
+    wing: systems-automation
+
+  - id: collaborative-design-guide
+    name: Collaborative Design Guide
+    description: "Server project planning, role specialization, iterative builds, community construction"
+    triggers: [server, team, collaborative, planning, town, district, role, version control]
+    wing: collaborative-design
+
+agents:
+  - id: spatial-guide
+    name: spatial-guide
+    role: "Primary guide for spatial foundations and building -- entry point for new learners"
+    skills: [spatial-foundations-guide, building-architecture-guide]
+
+  - id: build-instructor
+    name: build-instructor
+    role: "Technical instructor for redstone, automation, and collaborative design"
+    skills: [redstone-engineering-guide, systems-automation-guide, collaborative-design-guide]
+
+topology:
+  type: star
+  description: "spatial-guide handles entry-level navigation and construction; build-instructor handles technical systems work"
+  flow:
+    - from: spatial-guide
+      to: [build-instructor]
