@@ -1,0 +1,45 @@
+{
+  "roomId": "room-01-building-shelter",
+  "room": 1,
+  "culturalRules": [
+    {
+      "id": "ROOM01-CULT-001",
+      "domain": "building-shelter",
+      "tradition": "appalachian",
+      "concept": "log cabin construction techniques",
+      "level": 1,
+      "note": "Appalachian log cabin construction is colonial heritage (Scots-Irish, English, German settlers). It is appropriate to attribute this tradition historically and to note that settlers often learned from and adapted Indigenous construction practices in different regions. Technique content (notching, chinking) is Level 1 publicly shared.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM01-CULT-002",
+      "domain": "building-shelter",
+      "tradition": "first-nations",
+      "concept": "wigwam frame construction",
+      "level": 1,
+      "nationAttribution": "Anishinaabe",
+      "note": "Wigwam frame construction and covering methods are Level 1 publicly shared knowledge. The Anishinaabe wigwam (waabooz-wajiw or jiimaan-wajiw in Anishinaabemowin) is well-documented in educational materials authorized by Anishinaabe communities. Always attribute to Anishinaabe, not generic 'First Nations'.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM01-CULT-003",
+      "domain": "building-shelter",
+      "tradition": "first-nations",
+      "concept": "Haudenosaunee longhouse",
+      "level": 2,
+      "nationAttribution": "Haudenosaunee (Iroquois Confederacy)",
+      "note": "The longhouse is both a physical structure (Level 1 educational content) and a symbol of Haudenosaunee governance and cosmology (Level 2 contextually shared). The physical construction is publicly documented. The governance and spiritual dimensions of 'Longhouse People' identity require Haudenosaunee attribution and contextual framing. Do not reduce the longhouse to a physical structure without acknowledging its community and identity dimensions.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM01-CULT-004",
+      "domain": "building-shelter",
+      "tradition": "inuit",
+      "concept": "tupiq summer tent and igloo cross-reference",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "Tupiq construction is Level 1 publicly shared Inuit knowledge. Igloo construction is covered in full in Room 14 (Arctic Living) where CRITICAL CO safety rules apply. This room introduces dome geometry only. Do not reproduce full igloo construction steps here.",
+      "action": "include"
+    }
+  ]
+}

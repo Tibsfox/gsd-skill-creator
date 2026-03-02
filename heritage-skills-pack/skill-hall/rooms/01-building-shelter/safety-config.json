@@ -1,0 +1,40 @@
+{
+  "roomId": "room-01-building-shelter",
+  "room": 1,
+  "isCritical": false,
+  "primarySafetyDomains": ["structural", "fire"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM01-GATE-001",
+      "description": "Structural load-bearing requirements for log construction",
+      "trigger": "log cabin construction, notching, wall assembly, roof framing",
+      "action": "GATE -- confirm load path from roof to foundation; saddle notches must seat fully (no gaps); green wood shrinks -- plan for settling; do not use rotted or checked logs for structural members"
+    },
+    {
+      "id": "ROOM01-GATE-002",
+      "description": "Structural integrity for any shelter frame",
+      "trigger": "any shelter construction (wigwam, longhouse, tupiq, dome)",
+      "action": "GATE -- verify frame stability before adding covering; pole joints must resist lateral wind load; cover material must not add unexpected point loads to frame"
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM01-ANN-001",
+      "description": "Fire safety for stone chimney and hearth construction",
+      "trigger": "stone chimney, fireplace, hearth, open fire in shelter",
+      "action": "ANNOTATE -- stone chimney requires proper flue sizing; firebox must be isolated from combustible framing with non-combustible material; maintain clearances from wood framing (minimum 2 inches); cap chimney to prevent moisture entry and animal ingress"
+    },
+    {
+      "id": "ROOM01-ANN-002",
+      "description": "CO awareness for enclosed shelter fire",
+      "trigger": "fire, stove, or heat source in any enclosed shelter",
+      "action": "ANNOTATE -- any combustion source in an enclosed shelter produces CO; ensure adequate ventilation; this is a high-level awareness note -- see Room 14 (Arctic Living) for full CO safety protocol in igloo and enclosed snow shelter scenarios"
+    }
+  ],
+  "safetyNotes": {
+    "structuralSettling": "Green (freshly cut) logs shrink and settle as they dry. Log cabin builders must account for settling above doors and windows with 'settling spaces' filled with insulation. Failure to account for settling can cause doors to bind or structural racking.",
+    "notchIntegrity": "A saddle notch must bear the full weight of the log above it. The saddle must seat the lower log fully -- no rocking or gaps. A log that can rock on its notch will eventually fail under load or frost heaving.",
+    "fireSafety": "Stone chimney construction requires understanding of flue draft, firebox geometry, and isolation of combustible framing. See a qualified mason before constructing a functional chimney."
+  }
+}
