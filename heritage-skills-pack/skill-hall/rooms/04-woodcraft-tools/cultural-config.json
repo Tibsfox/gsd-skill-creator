@@ -1,0 +1,45 @@
+{
+  "roomId": "room-04-woodcraft-tools",
+  "room": 4,
+  "culturalRules": [
+    {
+      "id": "ROOM04-CULT-001",
+      "domain": "woodcraft-tools",
+      "tradition": "appalachian",
+      "concept": "Appalachian whittling and woodcraft",
+      "level": 1,
+      "note": "Appalachian woodcraft traditions (whittling, coopering, chair-making, handle-making) are colonial settler heritage. This is appropriate to present as historical craft knowledge with Scots-Irish, German, and English heritage attribution. These traditions are Level 1 publicly shared knowledge with no cultural sovereignty restrictions.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM04-CULT-002",
+      "domain": "woodcraft-tools",
+      "tradition": "first-nations",
+      "concept": "snowshoe frame carving and paddle carving",
+      "level": 1,
+      "nationAttribution": "Dene, Cree, Anishinaabe",
+      "note": "Snowshoe frame carving and paddle carving are Level 1 publicly shared knowledge. The Dene, Cree, and Anishinaabe all have documented snowshoe traditions, with regional variations in frame shape and lacing patterns. Attribution must be nation-specific -- do not use generic 'First Nations snowshoe' without specifying which nation's tradition. Toboggan construction (Cree/Dene) is also Level 1 publicly shared.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM04-CULT-003",
+      "domain": "woodcraft-tools",
+      "tradition": "inuit",
+      "concept": "ulu handle crafting and snow tools",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "Ulu construction and use is Level 1 publicly shared Inuit knowledge, extensively documented in museum collections and community-authorized educational materials. The ulu's design (curved blade, top-mounted handle) reflects functional optimization for cutting while wearing mittens. Snow knife (pana) and sled runner construction are similarly Level 1. Attribution: Inuit (specific regional attribution where relevant -- Greenlandic Inuit, Yup'ik, Inupiat).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM04-CULT-004",
+      "domain": "woodcraft-tools",
+      "tradition": "first-nations",
+      "concept": "tool-making as spiritual practice (potential Level 2)",
+      "level": 2,
+      "nationAttribution": "Dene, Cree",
+      "note": "For some Dene and Cree traditions, the making of tools (particularly items for hunting) may involve prayer, intention-setting, or protocol dimensions beyond the physical craft. Where this is documented in community-authorized sources, it should be acknowledged at Level 2 (contextually shared) with appropriate nation attribution. Do not assume spiritual dimensions are absent; do not presume to describe specific protocols. If a learner asks about the spiritual dimensions of tool-making in specific traditions, refer them to community sources.",
+      "action": "acknowledge-level-2"
+    }
+  ]
+}
