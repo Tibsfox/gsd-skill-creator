@@ -1,0 +1,75 @@
+{
+  "roomId": "room-06-music-instruments",
+  "room": 6,
+  "culturalRules": [
+    {
+      "id": "ROOM06-CULT-001",
+      "domain": "music-instruments",
+      "tradition": "appalachian",
+      "concept": "Appalachian dulcimer, fiddle, shape-note singing",
+      "level": 1,
+      "note": "Mountain dulcimer, fiddle, and shape-note singing traditions are Appalachian public heritage (Level 1). These are widely shared, actively taught, and enthusiastically documented by practitioners. Attribution: Scots-Irish/English fiddle heritage, German dulcimer heritage, African American shape-note singing history.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM06-CULT-002",
+      "domain": "music-instruments",
+      "tradition": "appalachian",
+      "concept": "Banjo origins and African American heritage",
+      "level": 2,
+      "nationAttribution": "African American, Appalachian",
+      "note": "The banjo's origin in West African lute tradition (kora, ngoni) transformed through African American enslaved communities is an often-elided part of Appalachian music history. Presenting banjo history accurately requires acknowledging both African American and Appalachian heritage. This is Level 2 because the African American origin story carries historical weight (enslaved people, cultural suppression) that requires contextual framing beyond simple technique instruction.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM06-CULT-003",
+      "domain": "music-instruments",
+      "tradition": "first-nations",
+      "concept": "Frame drum and hand rattle construction (technique)",
+      "level": 1,
+      "nationAttribution": "Anishinaabe, Cree, Haudenosaunee",
+      "note": "The physical construction of frame drums (bentwood hoop, stretched hide membrane) and hand rattles is Level 1 publicly shared knowledge, documented in educational materials and taught in community workshops. Attribution must be nation-specific. The construction technique (how to make the instrument) is distinct from the ceremonial use (how the instrument is used in specific ceremonies).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM06-CULT-004",
+      "domain": "music-instruments",
+      "tradition": "first-nations",
+      "concept": "Drum songs and ceremonial drum protocols",
+      "level": 3,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Specific drum songs associated with ceremonies, healing practices, or governance are Level 3 -- restricted to community members and transmitted through specific cultural protocols. This content must not be generated, described, or taught. Learners asking about specific ceremonial drum songs must be referred to nation-specific cultural sources.",
+      "action": "restrict"
+    },
+    {
+      "id": "ROOM06-CULT-005",
+      "domain": "music-instruments",
+      "tradition": "first-nations",
+      "concept": "Sacred songs, ceremonial singing, spiritual music",
+      "level": 4,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Sacred ceremonial songs across First Nations traditions are Level 4 -- hard block, no override. This includes specific songs associated with healing ceremonies, spirit communication, governance rituals, or other restricted ceremonial contexts. The existence of these songs can be acknowledged; their content must never be described, reproduced, or taught.",
+      "action": "hard-block"
+    },
+    {
+      "id": "ROOM06-CULT-006",
+      "domain": "music-instruments",
+      "tradition": "inuit",
+      "concept": "Katajjaq (throat singing) as publicly shared performance",
+      "level": 1,
+      "nationAttribution": "Inuit (Nunavut, Nunavik)",
+      "note": "Katajjaq is publicly shared (Level 1). It is actively performed at festivals, taught in schools, and enthusiastically shared by Inuit practitioners as a celebration of Inuit culture. The genre's general format (two singers, interlocking breath rhythms, game ending in laughter) is publicly documented. Attribution: Inuit, specifically from Nunavut and Nunavik communities. Note: specific katajjaq patterns associated with ceremonial contexts may be Level 2-3 -- when in doubt, attribute generally and note that specific patterns have community-specific contexts.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM06-CULT-007",
+      "domain": "music-instruments",
+      "tradition": "inuit",
+      "concept": "Specific ceremonial Inuit songs",
+      "level": 4,
+      "nationAttribution": "Inuit",
+      "note": "Specific ceremonial songs in Inuit tradition (including angakkuq-associated songs and healing songs) are Level 4 -- hard block. The existence of Inuit ceremonial music can be acknowledged; its content must never be described or reproduced.",
+      "action": "hard-block"
+    }
+  ]
+}

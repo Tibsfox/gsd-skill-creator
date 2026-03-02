@@ -1,0 +1,38 @@
+{
+  "roomId": "room-06-music-instruments",
+  "room": 6,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool", "fire"],
+  "criticalRules": [],
+  "gateRules": [],
+  "annotateRules": [
+    {
+      "id": "ROOM06-ANN-001",
+      "description": "Sharp tool safety for instrument construction",
+      "trigger": "knife use, saw, chisel, drill, carving for instrument construction",
+      "action": "ANNOTATE -- all standard tool safety applies to instrument construction: cut away from the body, maintain sharp edges, secure workpiece before cutting, use carving gloves when appropriate. The curves and angles required for dulcimer and drum construction often require working in awkward positions -- take extra care with tool direction when reaching into corners or around curves."
+    },
+    {
+      "id": "ROOM06-ANN-002",
+      "description": "Hide preparation and heat safety",
+      "trigger": "hide soaking, drum membrane preparation, hide scraping, drum drying",
+      "action": "ANNOTATE -- wet hide preparation for drum membranes is a fire/heat adjacent activity when accelerating the drying process. Do not use direct heat on wet hide -- it will shrink unevenly and may crack. Allow natural air drying. The scraping process (removing flesh and fat from hide) involves sharp-edged tools -- maintain safe tool direction throughout."
+    },
+    {
+      "id": "ROOM06-ANN-003",
+      "description": "String tension and instrument stability",
+      "trigger": "stringing an instrument, tuning up strings, pegs, string tension",
+      "action": "ANNOTATE -- when stringing a newly made instrument, increase tension gradually. A new instrument body may flex unexpectedly under full string tension for the first time. Do not tune to pitch in a single session -- allow the instrument body to adjust to string tension over several sessions. Flying strings (a string that breaks under tension) can cause eye injury -- eye protection is recommended during initial string-up."
+    },
+    {
+      "id": "ROOM06-ANN-004",
+      "description": "Solvent and finish safety for instrument bodies",
+      "trigger": "shellac, varnish, lacquer, oil finish on instrument body",
+      "action": "ANNOTATE -- instrument finishes (shellac, varnish, lacquer) are flammable. Work in a well-ventilated area. Do not use near open flame or sparks. Oil finishes on linseed-oil basis: rags soaked in linseed oil can self-ignite through spontaneous oxidation. Allow finish rags to dry flat outdoors or submerge in water before disposal."
+    }
+  ],
+  "safetyNotes": {
+    "hideDrying": "Never use direct or forced heat to dry a drum membrane. Rapid drying causes uneven shrinkage and can crack the hide or distort the hoop. Natural air drying (hanging in a dry, airy space) produces the most even tension across the membrane.",
+    "stringInstallation": "New instruments should be strung gradually over multiple sessions. Full string tension can expose structural weaknesses in a freshly made body. A gradual build-up to pitch allows you to identify and correct any structural issues before they cause failure."
+  }
+}
