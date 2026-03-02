@@ -1,0 +1,51 @@
+{
+  "id": "plant-09-dye-plants-beginner",
+  "title": "Appalachian Dye Plant Basics",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "description": "Learn the basics of Appalachian natural dye plants — from safe identification of common dye species to understanding how mountain families created lasting color from the forest and garden. Covers the most accessible and historically significant Appalachian dye plants, basic mordant chemistry, and the traditional dye process. Natural dye knowledge is publicly shared cultural heritage (Level 1) that connects Appalachian fiber arts to forest and garden plant knowledge.",
+  "prerequisites": ["plant-09-safe-id-beginner"],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Common Appalachian dye plants and their colors: bloodroot (Sanguinaria canadensis) — bright orange-red dye from the rhizome and roots; black walnut hull (Juglans nigra) — rich brown to dark brown from the green hulls of fresh walnuts, one of the most lightfast natural dyes; goldenrod (Solidago species) — clear yellow dye from the flowering tops, extremely common in Appalachian meadows and roadsides; pokeberry (Phytolacca americana) — vivid magenta to purple-pink dye from the ripe berries, historically important but not lightfast; sumac (Rhus glabra) — tans and grays from the seed heads and bark. Each plant produces different colors depending on mordant used.",
+      "safetyNote": "Bloodroot and pokeberry are toxic if ingested. Bloodroot sap and root are skin and mucous membrane irritants — wear gloves when handling roots or extracting dye. Pokeberry juice is a skin irritant and the entire plant (roots, stems, leaves, berries) is toxic if eaten. Handle all dye plant material with care and wash hands thoroughly after handling.",
+      "culturalContext": "Appalachian families have used forest and garden dye plants for generations, creating a rich palette from locally available plants. This knowledge was part of the complete textile tradition — growing or gathering fiber plants, spinning, weaving or knitting, and dyeing created a self-sufficient clothing system. Mountain women were often the primary practitioners of natural dyeing, and this knowledge was passed through families and communities.",
+      "sumoMapping": "CulturalPractice"
+    },
+    {
+      "order": 2,
+      "instruction": "Safe identification of key dye plants using multiple markers: Bloodroot — white flowers with yellow stamens in early spring before leaves fully emerge; distinctive deeply lobed, rounded leaves; bright orange-red sap when rhizome is cut (distinctive but use gloves). Black walnut — compound leaves with 11-23 leaflets, distinctive strong smell when leaves are crushed; large round nuts with green outer hull in fall; staining dark brown sap in hulls. Goldenrod — clusters of small yellow flowers in late summer on arching stems, alternate lance-shaped leaves, found in meadows and roadsides. Pokeberry — large herbaceous plant to 3m, smooth magenta-red stems in mature plants, white flowers in summer, dark purple-black berries in clusters in fall. Use multiple markers for all species.",
+      "safetyNote": "Always use multi-marker identification for dye plants. Some dye plants have toxic look-alikes or have toxic parts alongside useful parts. Elderberries (useful in other contexts) can be confused with pokeweed berries — both form dark berry clusters but pokeberry has a distinctive magenta stem, and elderberries grow on woody shrubs while pokeweed is herbaceous. When in doubt, don't harvest.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Mordants and fixatives — the chemistry of color fastness: a mordant is a metallic salt that binds the dye to the fiber, making it more permanent. This session covers only safer mordant options. Alum (potassium aluminum sulfate) — the most widely used traditional mordant, generally safe, bright colors; dissolve in hot water before adding fiber. Iron from old iron nails or iron sulfate — darkens and saddens colors, good for greens and blacks; use old nails in an iron pot or purchase iron mordant. Copper from old copper pennies (pre-1982) or copper sulfate — shifts colors toward green; use sparingly as copper compounds have some toxicity at higher concentrations.",
+      "safetyNote": "Some traditional mordants are toxic and are not covered in this beginner session: chrome (potassium dichromate) is a carcinogen and should be avoided; tin (stannous chloride) requires careful handling and disposal. This session uses only alum, iron, and copper — safer choices appropriate for beginner home practice. Dispose of all dye baths and mordant solutions according to local regulations — do not pour heavy metal mordants down drains or into waterways.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 4,
+      "instruction": "The basic dye process step by step: (1) Harvest and prepare plant material — fresh hulls for black walnut, dried flowering tops for goldenrod, roots for bloodroot (wear gloves). (2) Create the dye bath: place plant material in a large non-aluminum pot, cover with water, and simmer for 30-60 minutes; strain out plant material. (3) Mordant the fiber: wet fiber thoroughly, add to mordant solution, heat gently for 45-60 minutes; remove and rinse. (4) Dye: add mordanted fiber to the warm dye bath, heat gently and maintain temperature for 45-60 minutes, stirring occasionally. (5) Rinse and dry: rinse fiber in water of similar temperature to avoid felting wool, dry in shade away from direct sunlight.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 5,
+      "instruction": "Color exploration — how mordants change color: the same dye plant produces different colors depending on the mordant used. Black walnut + alum = warm medium brown; black walnut + iron = very dark brown to near-black. Goldenrod + alum = bright clear yellow; goldenrod + iron = olive-green; goldenrod + copper = gold-green. Bloodroot + alum = orange; bloodroot + iron = dark rust. This is one of the exciting aspects of natural dyeing — you can create a range of colors from the same plant material by varying the mordant. Keeping a sample notebook is part of the tradition.",
+      "culturalContext": "Appalachian dyers developed sophisticated knowledge of color chemistry through observation and experiment over generations, without formal chemistry education. The knowledge of which plants produce lasting color, which mordants fix them, and how to combine them was a form of applied science embedded in cultural practice.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "Sustainable harvesting of dye plants: some traditional dye plants have been overharvested in certain regions. Guidelines for sustainable harvest: goldenrod is abundant — harvest flowering tops from established patches, leave 50% unharvested; do not pull roots. Black walnut hulls are best collected from fallen nuts on the ground — no harvesting from the tree required. Bloodroot is increasingly rare in some areas due to overharvesting for medicinal use — harvest sparingly if at all; consider purchasing from sustainable cultivated sources. Pokeberry is abundant and considered a weed in most areas — harvest berries in fall freely. Learn which plants are rare in your region before harvesting.",
+      "safetyNote": "Bloodroot (Sanguinaria canadensis) is listed as a plant of concern in some states and provinces. Check your regional conservation status before harvesting. When in doubt, use cultivated sources.",
+      "culturalContext": "Sustainable harvest has always been part of Appalachian gathering traditions — taking no more than you need, leaving enough for the plant to regenerate and for others who may gather after you. This principle connects natural dyeing to the broader ethic of respectful land use.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "Manufacturing"
+}
