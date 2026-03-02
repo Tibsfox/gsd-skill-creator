@@ -1,0 +1,44 @@
+{
+  "id": "first-program",
+  "title": "Your First Program: Number Guessing Game",
+  "description": "Write a complete, working program from scratch while learning computational thinking, variables, control flow, and input/output. This session touches concepts from all 5 wings of the Coding department.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Before writing code, design the algorithm on paper. What steps does a number guessing game need? Read the sequential thinking concept -- write out each step as a numbered instruction for the computer, precise enough that no judgment is needed.",
+      "expectedOutcome": "You have a written algorithm: (1) pick secret number, (2) get user guess, (3) compare, (4) give hint, (5) repeat until correct",
+      "hint": "Think about what information the computer needs to remember between guesses -- that information needs a variable",
+      "conceptsExplored": ["code-sequential-thinking", "code-decomposition"]
+    },
+    {
+      "instruction": "Now implement step 1: pick a secret number between 1 and 100. In Python: import random; secret = random.randint(1, 100). What kind of data type is 'secret'? Read the variables and data types concept.",
+      "expectedOutcome": "You understand that secret is an integer, and that integers support comparison operations (>, <, ==) that booleans and strings do not",
+      "hint": "Try: print(type(secret)) to confirm the data type",
+      "conceptsExplored": ["code-variables-data-types"]
+    },
+    {
+      "instruction": "Implement the guessing loop: get input, convert to integer, compare to secret. Use if/elif/else to give hints. Read the control flow concept -- identify where you are using selection (if/else) and iteration (while loop).",
+      "expectedOutcome": "You have a working loop that reads guesses, compares to secret, and prints 'Too high', 'Too low', or 'Correct!'",
+      "hint": "In Python: guess = int(input('Your guess: ')). The int() conversion is required because input() returns a string",
+      "conceptsExplored": ["code-control-flow", "code-input-output"]
+    },
+    {
+      "instruction": "Your program likely has a bug or two. Read the debugging strategies concept. Now deliberately break your code (remove the int() conversion) and observe the error. Read the error message carefully -- does it tell you where and what went wrong?",
+      "expectedOutcome": "You understand that error messages are information, not accusations -- they tell you exactly what went wrong and where to look",
+      "hint": "TypeError: '>' not supported between instances of 'str' and 'int' -- the error is telling you the types don't match",
+      "conceptsExplored": ["code-debugging-strategies"]
+    },
+    {
+      "instruction": "Improve the program: add a guess counter, a maximum guess limit, and a 'play again' option. This is iterative development -- you have a working v1, now add features. Read the iterative development concept.",
+      "expectedOutcome": "You have built a complete interactive program with multiple features, each added in a testable increment",
+      "hint": "Add a counter variable: guesses = 0, then guesses += 1 inside the loop. Check if guesses >= max_guesses",
+      "conceptsExplored": ["code-iterative-development", "code-variables-data-types"]
+    },
+    {
+      "instruction": "Finally, think about computing ethics: this game is harmless, but what if your code collected personal data? What if the 'random' number was not truly random? Read the computing ethics concept and consider what ethical obligations you would have if this were a real application.",
+      "expectedOutcome": "You understand that ethical thinking is a developer responsibility from the first line of code, not an afterthought",
+      "conceptsExplored": ["code-computing-ethics"]
+    }
+  ]
+}

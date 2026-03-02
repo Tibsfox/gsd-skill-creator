@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CollegeMappingFile",
+  "description": "Defines named virtual department groupings for the College explorer",
+  "type": "object",
+  "required": ["name", "description", "virtualDepartments"],
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "virtualDepartments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "subjects"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "subjects": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
