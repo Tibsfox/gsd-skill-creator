@@ -1,3 +1,11 @@
+---
+module: HD-04
+title: "Julia Sets and Fatou Sets"
+textbook_chapters: [29]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Julia Sets and Fatou Sets IS the emergent dynamical-plane partition (Ch 29, Part IX: Emergence). renderJulia() IS the Julia set — the emergent partition of the complex plane into chaotic and stable regions for a fixed parameter."
+---
+
 # HD-04: Julia Sets and Fatou Sets
 
 ## Overview
