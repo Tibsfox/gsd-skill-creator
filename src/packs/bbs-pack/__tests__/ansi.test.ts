@@ -15,7 +15,7 @@ import { tokenizeAnsi } from '../shared/ansi.js';
 import { decodeCp437 } from '../shared/cp437.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fixtureDir = join(__dirname, '../../../data/bbs/fixtures');
+const fixtureDir = join(__dirname, '../../../../data/bbs/fixtures');
 
 // ============================================================================
 // Plain Text

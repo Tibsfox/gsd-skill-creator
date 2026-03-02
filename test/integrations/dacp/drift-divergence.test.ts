@@ -10,9 +10,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { calculateDriftScore as assemblerDriftScore } from '../../src/dacp/types.js';
-import { calculateDriftScore as analyzerDriftScore } from '../../src/dacp/retrospective/drift.js';
-import type { HandoffOutcome } from '../../src/dacp/types.js';
+import { calculateDriftScore as assemblerDriftScore } from '../../../src/integrations/dacp/types.js';
+import { calculateDriftScore as analyzerDriftScore } from '../../../src/integrations/dacp/retrospective/drift.js';
+import type { HandoffOutcome } from '../../../src/integrations/dacp/types.js';
 
 /** Shared test fixture: moderate-drift handoff outcome */
 const MODERATE_DRIFT_OUTCOME: HandoffOutcome = {

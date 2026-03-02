@@ -105,12 +105,12 @@ describe('Sample Content', () => {
 
 describe('WordPress Migration Readiness', () => {
   it('migration module exports migrateAllContent function', async () => {
-    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    const { migrateAllContent } = await import('../../../src/integrations/site/wordpress/index');
     expect(typeof migrateAllContent).toBe('function');
   });
 
   it('MigrateResult interface has required fields', async () => {
-    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    const { migrateAllContent } = await import('../../../src/integrations/site/wordpress/index');
     const mockAdapter = {
       async fetchPosts() { return []; },
       async fetchPages() { return []; },
