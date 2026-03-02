@@ -1,0 +1,51 @@
+{
+  "roomId": "room-08-pottery-clay",
+  "room": 8,
+  "isCritical": false,
+  "primarySafetyDomains": ["fire", "chemical", "structural"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM08-GATE-001",
+      "description": "Fire gate for kiln operation",
+      "trigger": "kiln firing, lighting kiln, wood firing, gas kiln, electric kiln startup",
+      "action": "GATE -- before firing a kiln: (1) confirm all work inside the kiln is completely dry (green ware must be bone dry -- wet clay explodes when heated rapidly, damaging other work and potentially cracking the kiln); (2) verify kiln lid/door closure and kiln furniture placement -- no shelves or posts bearing load they cannot support; (3) clear combustibles from kiln exterior for minimum 18 inches; (4) never fire a kiln unattended -- kiln temperatures of 1800-2300 degrees F require monitoring throughout the firing; (5) confirm exit path from kiln area is clear in case of fire; (6) do not look directly into a firing kiln without appropriate eye protection (shade 3-5 welding safety glasses or kiln goggles)"
+    },
+    {
+      "id": "ROOM08-GATE-002",
+      "description": "Structural gate for kiln construction and refractory installation",
+      "trigger": "building a kiln, installing firebrick, groundhog kiln construction, kiln arch construction",
+      "action": "GATE -- kiln construction requires understanding of refractory materials (firebrick, castable refractory, kiln wash), arch geometry (a kiln arch must support its own weight plus the weight of the kiln load in compression, not in bending), and flue design for proper draft. A collapsed kiln arch during firing is a serious fire and burn hazard -- the refractory materials are at 1800-2300 degrees F and will cause severe burns on contact. Consult an established kiln design reference (e.g., Daniel Rhodes 'Kilns: Design, Construction and Operation') and inspect kiln structure for cracks, movement, or spalling before every firing."
+    },
+    {
+      "id": "ROOM08-GATE-003",
+      "description": "Thermal shock gate for kiln loading and cooling",
+      "trigger": "loading kiln, unloading kiln, opening kiln, rushing the cool, cooling too fast",
+      "action": "GATE -- do not open a fired kiln until it has cooled to at least 300 degrees F (typically 12-24 hours after reaching peak temperature, depending on kiln mass and firing temperature). Opening too soon causes thermal shock to the ware (cracking and shattering of finished pieces) and exposes the operator to radiant heat and steam from any residual moisture. Do not pour water on a hot kiln or kiln components to accelerate cooling -- thermal shock to refractory firebrick can crack kiln walls, shortening kiln life and creating structural hazards. Allow the kiln to cool with the damper slightly open for controlled cooling."
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM08-ANN-001",
+      "description": "Chemical safety for ceramic glazes and colorants",
+      "trigger": "glaze, colorant, oxide, lead glaze, barium carbonate, manganese dioxide, ceramic chemicals",
+      "action": "ANNOTATE -- ceramic colorants and glaze chemicals include toxic materials that require careful handling. Barium carbonate (used in some matte glazes as a flux) is toxic if ingested and moderately toxic by inhalation of dust. Manganese dioxide (used as a colorant) produces toxic fumes and dust -- weigh in a well-ventilated area and wear a NIOSH-rated N95 particulate respirator. Lead glazes are prohibited for food-use pottery in most jurisdictions because lead leaches into food, especially acidic foods (fruit juices, tomato sauces). Handle all dry glaze materials with a dust mask; weigh in a well-ventilated area or outdoors. Never use lead-containing glazes on food-contact surfaces. Test finished fired glazes for lead and cadmium leaching before using on food or beverage vessels."
+    },
+    {
+      "id": "ROOM08-ANN-002",
+      "description": "Silica dust hazard for dry clay mixing and sanding bisqueware",
+      "trigger": "dry clay mixing, mixing dry clay, sanding bisqueware, grinding pottery, dry clay dust",
+      "action": "ANNOTATE -- dry clay contains free crystalline silica (primarily quartz) that is hazardous when inhaled. Repeated inhalation of silica dust causes silicosis -- a permanent, progressive, and irreversible lung disease. Always wet-mix dry clay ingredients; do not dry-mix clay powders without respiratory protection. Do not sand bisqueware dry -- wet-sand with water lubrication. Wear a NIOSH-rated particulate respirator (N95 minimum) if working with dry clay or dry glaze materials. Keep the work area damp and clean up clay dust with wet methods (wet mop or damp cloth), never dry sweeping."
+    },
+    {
+      "id": "ROOM08-ANN-003",
+      "description": "Soapstone carving dust annotation -- talc and potential asbestos content",
+      "trigger": "soapstone carving, grinding soapstone, sanding soapstone, carving steatite",
+      "action": "ANNOTATE -- soapstone (steatite) is composed primarily of talc, which may include chrysotile (asbestos) mineral in some geological formations. Asbestos fibers, when inhaled, cause mesothelioma and asbestosis -- serious and irreversible lung diseases. When carving, filing, or sanding soapstone: (1) work wet -- keep the stone and tools wet throughout to capture dust; (2) work in a well-ventilated area or outdoors; (3) wear a NIOSH N95 dust mask at minimum; (4) source soapstone from a verified supplier who routinely tests material for asbestos content; (5) do not use heat to soften or accelerate soapstone carving -- the material should be worked cold and wet."
+    }
+  ],
+  "safetyNotes": {
+    "dryWare": "Clay ware must be completely bone dry before kiln firing. Even slight residual moisture turns to steam at 212 degrees F and can cause an explosive fracture of the piece, damaging other work in the kiln and potentially cracking the kiln itself. Allow hand-built pieces to dry slowly and completely -- typically 48-72 hours minimum in a dry, airy space. Thicker walls and complex forms take longer. When in doubt, allow more drying time.",
+    "leadFreeGlazes": "Lead glazes, once common in traditional pottery worldwide, are now prohibited for food-use vessels in most jurisdictions due to lead leaching. The alkaline glazes of the Appalachian tradition (wood ash, Albany slip, feldspar) are lead-free and safe for food use when properly fired to maturity at cone 10. Always verify the food-safety status of any commercial or studio glaze before using on food or beverage vessels."
+  }
+}
