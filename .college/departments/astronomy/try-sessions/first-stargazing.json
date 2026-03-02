@@ -1,0 +1,38 @@
+{
+  "id": "first-stargazing",
+  "title": "Your First Stargazing: Finding Your Way Around the Night Sky",
+  "description": "Go outside on a clear night and learn to navigate the sky using the Big Dipper and Polaris as anchors. This session requires a clear night and 30 minutes away from bright lights.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read about constellation navigation and Earth-sky geometry. Before going outside, understand why all stars appear to circle Polaris during the night. What causes this? What does it reveal about the relationship between the celestial sphere and Earth's rotation?",
+      "expectedOutcome": "You understand that the apparent rotation of the night sky reflects Earth's actual rotation, and Polaris marks Earth's rotational axis projected onto the sky",
+      "hint": "The celestial poles are directly above Earth's geographic poles -- from the North Pole, Polaris would be directly overhead",
+      "conceptsExplored": ["astro-earth-sky-geometry", "astro-constellation-navigation"]
+    },
+    {
+      "instruction": "Go outside after full dark (at least 30 minutes after sunset, away from bright lights). Allow 10-15 minutes for your eyes to dark-adapt -- do not look at your phone screen during this time. Look north and find the Big Dipper (Ursa Major). Identify its bowl and handle.",
+      "expectedOutcome": "You have found the Big Dipper and can identify its 7 main stars",
+      "hint": "In spring and summer, the Big Dipper is high in the sky; in fall and winter it is lower. If you cannot find it, look north and scan for 4 stars in a rough rectangle -- the bowl",
+      "conceptsExplored": ["astro-constellation-navigation"]
+    },
+    {
+      "instruction": "Use the two pointer stars of the Big Dipper's bowl (Merak and Dubhe -- the far edge from the handle) to find Polaris: draw a line from Merak through Dubhe and extend it about 5 fist-widths. Polaris is the moderately bright star at the end of Ursa Minor's (Little Dipper's) handle.",
+      "expectedOutcome": "You can reliably find Polaris from the Big Dipper and understand its role as the fixed point of the northern sky",
+      "hint": "Polaris is NOT the brightest star in the sky -- it is only moderately bright. Its significance is position, not brightness.",
+      "conceptsExplored": ["astro-constellation-navigation"]
+    },
+    {
+      "instruction": "Now find one more constellation appropriate to the season. Read about moon phases -- if the Moon is visible tonight, identify its phase: is it waxing or waning? More or less than half lit? What does the lit portion tell you about where the Sun is relative to Earth and Moon?",
+      "expectedOutcome": "You can identify the Moon's current phase and explain its geometric meaning",
+      "hint": "The lit side of the Moon always faces the Sun -- so you can determine roughly where the Sun is even at night from the Moon's phase and position",
+      "conceptsExplored": ["astro-constellation-navigation", "astro-moon-phases"]
+    },
+    {
+      "instruction": "Read about stellar physics. Look at the stars around you -- do you notice any color differences? Some stars are reddish (cooler, e.g. Betelgeuse in Orion in winter), some are bluish-white (hotter, e.g. Rigel). What does color tell us about a star's surface temperature?",
+      "expectedOutcome": "You can observe stellar color variation and connect it to stellar classification and surface temperature",
+      "conceptsExplored": ["astro-stellar-physics"]
+    }
+  ]
+}
