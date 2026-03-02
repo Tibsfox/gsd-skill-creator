@@ -1,0 +1,72 @@
+{
+  "id": "room-04-woodcraft-tools",
+  "room": 4,
+  "domain": "woodcraft-tools",
+  "title": "Woodcraft & Tools",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Tool", "CuttingDevice", "Artifact", "HeritageSkill", "Manufacturing"],
+  "sumoFile": ["engineering.kif", "heritage-domain-ontology.kif"],
+  "description": "Room 04 covers woodcraft and tool-making traditions across three cultural traditions: Appalachian, First Nations (Dene, Cree, Anishinaabe), and Inuit.\n\nAppalachian woodcraft draws on the Scots-Irish, English, and German immigrant woodworking culture brought to the central and southern Appalachian mountains from the 1700s onward. Whittling — shaping wood with a simple knife — is the foundational Appalachian woodcraft skill. A sharp knife, a piece of green wood, and knowledge of four basic cuts (push cut, pull cut, stop cut, pare cut) can produce everything from butter spreaders and spoons to chair rungs and tool handles. Basswood, white pine, and butternut are the beginner-friendly species; butternut and walnut for decorative pieces; tulip poplar for utilitarian work; locust for outdoor use. Chair-making in the Appalachian tradition includes the ladder-back style with steam-bent rungs and split oak splint seats, and the Windsor style with steam-bent back bows and turned spindles. Coopering (making barrels, buckets, and other staved vessels) and handle-making (fitting hatchet, drawknife, and tool handles to the hand) round out the Appalachian woodcraft tradition. The Foxfire volumes document this tradition through first-person accounts of Appalachian craftspeople who transmitted these skills across generations.\n\nFirst Nations woodcraft in Room 04 focuses on Dene and Cree snowshoe frame carving, Cree paddle carving, and Cree/Dene toboggan construction. Dene snowshoe frame carving selects white birch or larch — straight-grained, knot-free in the bend areas — and bends the frame by cold-bending green wood or steam-bending. The frame shape encodes generations of ecological knowledge: the elongated Dene frame for open terrain and deep dry boreal snow, the Cree long frame for muskeg country, the Anishinaabe bear paw for dense forest movement. Babiche (rawhide, cleaned and dehaired, cut in continuous strips) is the traditional lacing material — it shrinks tight as it dries to create a resilient weight-distributing deck. Cree single-piece paddle carving shapes a single billet of wood into blade and shaft; blade shape varies for river versus lake use. Cree and Dene toboggan construction steam-bends thin boards of birch or spruce into a curl at the front, with rawhide lashing holding the structure. Nation attribution: snowshoe frames — Dene, Cree, Anishinaabe; paddle — Cree; toboggan — Cree and Dene.\n\nInuit woodcraft in Room 04 covers ulu handle crafting, snow knife (pana) construction, and sled runner shaping. The ulu is the iconic Inuit curved-blade knife used for processing food, cleaning hides, and cutting sewing materials. Its curved blade (concave edge, top-mounted handle) allows a rocking cutting motion on a matching curved cutting board; the handle ergonomics are designed for use while wearing mittens or mitten liners. Handle materials include caribou leg bone, caribou antler, driftwood, and occasionally walrus ivory. Regional variations in blade curvature distinguish Greenlandic Inuit, Yup'ik, Inupiat, and Canadian Inuit designs. The snow knife (pana) is used for cutting snow blocks for igloo construction — its blade (bone, antler, or metal) is shaped for efficient block cutting in wind-packed snow; the handle is shaped for cold-weather grip. Sled runner shaping (qamutik runners) uses wood or, in traditional practice, frozen peat/moss compressed over wood — runner surface preparation is essential for cold-temperature sliding efficiency. Nation attribution: Inuit (with regional variants noted throughout).",
+  "safetyDomains": ["tool"],
+  "trySessions": [
+    "woodcraft-04-whittling-beginner",
+    "woodcraft-04-snowshoe-geometry-beginner",
+    "woodcraft-04-ulu-handle-beginner"
+  ],
+  "modules": [
+    {
+      "id": "woodcraft-04-appalachian-whittling",
+      "title": "Appalachian Whittling: Basic Cuts and Wood Selection",
+      "tradition": "appalachian",
+      "description": "The foundational Appalachian woodcraft skill: shaping wood with a simple knife. Covers the four basic cuts (push cut, pull cut, stop cut, pare cut), beginner wood selection (basswood, white pine, butternut), knife safety (always cut away from the body), and introductory projects from butter spreaders to spoons. Scots-Irish, German, and English heritage documented through the Foxfire series.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing", "CuttingDevice"]
+    },
+    {
+      "id": "woodcraft-04-appalachian-chair",
+      "title": "Appalachian Chair-Making, Handle-Making, and Coopering",
+      "tradition": "appalachian",
+      "description": "Advanced Appalachian woodcraft: ladder-back chair construction (steam-bent rungs, split oak splint seat), Windsor chair variations, handle-making (fitting hatchet and drawknife handles to the user's hand), and coopering basics (staved barrel and bucket construction). Drawknife and spokeshave use, including shaving horse technique. Scots-Irish and German heritage in Appalachian furniture and tool-making traditions.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing", "Artifact"]
+    },
+    {
+      "id": "woodcraft-04-fn-snowshoe-carving",
+      "title": "First Nations Snowshoe Frame Carving: Dene, Cree, and Anishinaabe",
+      "tradition": "first-nations",
+      "description": "Snowshoe frame carving traditions from Dene, Cree, and Anishinaabe nations. White birch and larch selection (grain reading, knot avoidance in bend areas), cold-bending and steam-bending technique, frame shapes suited to specific snow conditions and terrain (elongated Dene frame, Cree long frame, Anishinaabe bear paw), cross-member fitting, and babiche (rawhide) lacing patterns. Binding design and snowshoe use principles. Nation attribution: Dene (Northwest Territories, Yukon, northern BC/Alberta), Cree, Anishinaabe.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing", "Artifact"]
+    },
+    {
+      "id": "woodcraft-04-fn-paddle-carving",
+      "title": "Cree Single-Piece Paddle Carving",
+      "tradition": "first-nations",
+      "description": "Cree tradition of carving a single-blade canoe paddle from a single piece of wood. Billet selection and species choice, blank layout (blade and shaft from one piece), carving sequence (rough shaping, intermediate work, finish), blade shape variations for river versus lake use, and finishing. The Cree paddle tradition reflects intimate knowledge of the waterways of Cree territory. Nation attribution: Cree. Cross-reference with toboggan construction (thin birch or spruce boards, steam-bent front curl, rawhide lashing) as related Cree and Dene woodcraft.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing", "Tool"]
+    },
+    {
+      "id": "woodcraft-04-inuit-ulu",
+      "title": "Inuit Ulu Handle Crafting",
+      "tradition": "inuit",
+      "description": "The anatomy and handle-fitting of the ulu, the iconic Inuit curved-blade knife. Blade anatomy (curved crescent, concave edge, top-mounted handle), handle materials (caribou leg bone, caribou antler, driftwood, walrus ivory), handle fitting for mitten use (slot or groove fit, interference or wedge attachment), and the matching curved cutting board. Regional variations in blade curvature: Greenlandic Inuit (wider, shallower curve), Yup'ik and Inupiat (deeper curve, pointed ends), Canadian Inuit designs. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "CuttingDevice", "Artifact"]
+    },
+    {
+      "id": "woodcraft-04-inuit-snow-tools",
+      "title": "Inuit Snow Knife (Pana) and Sled Runner Construction",
+      "tradition": "inuit",
+      "description": "Inuit snow tools for winter living. Snow knife (pana): blade shaped from bone, antler, or metal for cutting wind-packed snow blocks for igloo construction; handle shaped for cold-weather grip. Sled runner (qamutik) construction: runner materials (wood, or in traditional practice frozen peat/moss over wood), runner surface preparation for cold-temperature sliding. Overview of qamutik sled construction (lashed cross-members, no nails — allows flex over rough terrain). Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "CuttingDevice", "Manufacturing"]
+    }
+  ]
+}

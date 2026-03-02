@@ -1,0 +1,82 @@
+[
+  {
+    "heritageConceptId": "room-04-ulu",
+    "sumoTerm": "CuttingDevice",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Ulu CuttingDevice)",
+    "naturalLanguage": "An ulu is a cutting device: a bladed tool designed to perform cutting operations, in this case with a curved blade mounted on a top handle for use while wearing mittens in arctic conditions."
+  },
+  {
+    "heritageConceptId": "room-04-ulu",
+    "sumoTerm": "Tool",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Ulu Tool)",
+    "naturalLanguage": "An ulu is a tool -- a physical artifact designed to augment human capability for a specific task. The ulu's curved blade and top-mounted handle are optimized for the butchering and processing tasks central to Inuit food preparation and hide working."
+  },
+  {
+    "heritageConceptId": "room-04-whittling-knife",
+    "sumoTerm": "CuttingDevice",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WhittlingKnife CuttingDevice)",
+    "naturalLanguage": "A whittling knife is a cutting device: a short-bladed, sharp-edged knife designed for the removal of small amounts of material from wood by a series of controlled cuts."
+  },
+  {
+    "heritageConceptId": "room-04-snowshoe",
+    "sumoTerm": "Artifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalSnowshoe Artifact)",
+    "naturalLanguage": "A traditional snowshoe is an artifact: a human-made object designed to distribute the wearer's weight over a larger snow surface, enabling travel over deep snow that would otherwise be impassable."
+  },
+  {
+    "heritageConceptId": "room-04-snowshoe-construction",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SnowshoeConstruction Manufacturing)",
+    "naturalLanguage": "Building a traditional snowshoe is a manufacturing process: selecting and shaping the frame material, forming the frame to the correct geometry, and weaving or lashing the lacings to create the weight-distributing deck."
+  },
+  {
+    "heritageConceptId": "room-04-snowshoe-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SnowshoeConstruction HeritageSkill)",
+    "naturalLanguage": "Snowshoe construction is a heritage skill of the Dene, Cree, and Anishinaabe peoples, encoding knowledge of wood species selection, frame geometry suited to specific snow conditions, and babiche (rawhide) lacing patterns."
+  },
+  {
+    "heritageConceptId": "room-04-cree-paddle",
+    "sumoTerm": "Tool",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CreeWoodPaddle Tool)",
+    "naturalLanguage": "A Cree wood paddle is a tool: a manufactured implement for propelling a canoe through water by applying force against the water with the blade."
+  },
+  {
+    "heritageConceptId": "room-04-ulu-handle-crafting",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass UluHandleCrafting HeritageSkill)",
+    "naturalLanguage": "Crafting an ulu handle is an Inuit heritage skill: selecting appropriate bone, antler, or wood; shaping the handle to the user's hand dimensions; fitting the curved blade securely; and finishing the handle surface for grip while wearing mittens."
+  },
+  {
+    "heritageConceptId": "room-04-pana",
+    "sumoTerm": "CuttingDevice",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Pana CuttingDevice)",
+    "naturalLanguage": "A pana (snow knife) is a cutting device used for cutting snow blocks for igloo construction. Its blade is shaped to cut blocks from wind-packed snow efficiently, with a handle designed for use in cold conditions."
+  },
+  {
+    "heritageConceptId": "room-04-appalachian-whittling",
+    "sumoTerm": "TraditionalProcess",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianWhittling TraditionalProcess)",
+    "naturalLanguage": "Appalachian whittling is a traditional process: a wood-shaping practice transmitted through the Scots-Irish, German, and English settler communities of the Appalachian region, encoding knowledge of wood selection, blade technique, and form development across generations."
+  }
+]
