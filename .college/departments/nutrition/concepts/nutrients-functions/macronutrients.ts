@@ -19,6 +19,11 @@ export const macronutrients: RosettaConcept = {
       targetId: 'nutr-digestion-body-systems',
       description: 'Macronutrients are broken down by the digestive system -- understanding digestion explains how nutrients are absorbed and used',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'cook-macronutrient-roles',
+      description: 'Culinary arts applies macronutrient ratios directly in recipe design -- protein, fat, and carbohydrate balance determines dish texture, satiety, and flavor',
+    },
   ],
   complexPlanePosition: {
     real: 0.8,
