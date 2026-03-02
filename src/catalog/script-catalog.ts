@@ -160,6 +160,13 @@ export class ScriptCatalog {
   /**
    * Add a single entry with provenance enforcement.
    * Rejects entries with empty skill_source or script_path (SAFE-03 + SLIB-04).
+   *
+   * SAFE-03 (DACP): Catalog entry rejection returns explicit error, never throws
+   * Attack scenario: A caller passes an entry with empty skill_source. If
+   * addEntry throws, the caller's error handling may differ from what the
+   * explicit return value contract guarantees.
+   * Consequence of absence: Silent catalog corruption or inconsistent error
+   * handling across catalog consumers.
    */
   addEntry(entry: ScriptCatalogEntry): void {
     if (!entry.skill_source || entry.skill_source.trim() === '') {
