@@ -1,0 +1,579 @@
+[
+  {
+    "id": "nation-lummi",
+    "name": "Lummi Nation",
+    "alternateNames": ["Lhaq'temish", "People of the Sea"],
+    "languageFamily": "Salishan",
+    "language": "Lummi (Lhéchalosem / Straits Salish)",
+    "traditionalTerritories": "Northern Puget Sound, San Juan Islands, and adjacent Canadian waters including the southern Gulf Islands. Traditional reef net fishing grounds span the international boundary near Point Roberts and the San Juan Islands.",
+    "culturalNotes": "The Lummi Nation is one of the northernmost Coast Salish peoples in Washington State. Lummi traditional economy centered on reef net fishing — a sophisticated technique unique to the Lummi and Saanich peoples for intercepting sockeye salmon at reef locations. Lummi territory is bisected by the US-Canada border, and traditional fishing grounds near Point Roberts and the southern Gulf Islands reflect relationships predating colonial boundaries.",
+    "heritageSkillRelevance": [
+      "Reef net fishing — a Lummi and Saanich technology using cedar pole frameworks and net systems to intercept salmon without active pursuit",
+      "Ocean-going canoe construction — cedar dugout canoes for inter-village travel and trade",
+      "Wool weaving from mountain goat wool — traditional Salish weaving practices",
+      "Clam and shellfish harvesting and preservation",
+      "Cedar bark basketry and mat weaving",
+      "Smoked and dried salmon preparation for winter storage",
+      "Inter-tribal trade networks spanning Puget Sound"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.lummi-nsn.gov/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Every Salish Sea nation is listed individually — the Lummi Nation (Lhaq'temish) is a distinct people with distinct language and protocols, not a subdivision of a generic 'Coast Salish' category. Reef net fishing has specific family and community ownership protocols at Level 2. Ceremony and spirit practices are Level 3-4."
+  },
+  {
+    "id": "nation-saanich",
+    "name": "Saanich (W̱SÁNEĆ)",
+    "alternateNames": ["W̱SÁNEĆ", "WSANEC", "Saanich Peninsula peoples"],
+    "languageFamily": "Salishan",
+    "language": "SENĆOŦEN",
+    "traditionalTerritories": "Saanich Peninsula on southern Vancouver Island and the adjacent Gulf Islands (British Columbia). Cross-border relationship with reef net locations in the San Juan Islands (Washington State).",
+    "culturalNotes": "The W̱SÁNEĆ (Saanich) peoples include four member nations: Tsartlip (W̱JOȽEȽP), Tsawout (SȾÁUTW̱), Tseycum (W̱SIȽEM), and Pauquachin (BOḰEĆEN). W̱SÁNEĆ territory spans the international border, with reef net sites in both Canadian and US waters. SENĆOŦEN is one of the most distinct Salishan languages, with a unique orthography designed by community members.",
+    "heritageSkillRelevance": [
+      "Reef net fishing at traditional locations shared with Lummi Nation — inter-nation cooperative technology",
+      "Ocean canoe construction and navigation through Gulf Islands waterways",
+      "SENĆOŦEN language revitalization (publicly shared educational programs)",
+      "Camas root harvesting and preparation on traditional prairie sites",
+      "Cedar bark harvesting and weaving — mats, baskets, rope",
+      "Shellfish harvesting and cultivation at traditional clam gardens",
+      "Mountain goat wool weaving traditions"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.wsanec.ca/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "W̱SÁNEĆ is a distinct Salishan people — not the same as Musqueam, Squamish, or other Salishan nations. The four W̱SÁNEĆ member nations each maintain distinct protocols. Reef net fishing sites carry family ownership rights at Level 2. Content builders must name the specific W̱SÁNEĆ member nation when relevant."
+  },
+  {
+    "id": "nation-musqueam",
+    "name": "Musqueam (xʷməθkʷəy̓əm)",
+    "alternateNames": ["xʷməθkʷəy̓əm", "Musqueam Indian Band"],
+    "languageFamily": "Salishan",
+    "language": "hən̓q̓əmin̓əm̓ (Downriver Halkomelem)",
+    "traditionalTerritories": "Lower Fraser River delta including the site of present-day Vancouver, BC. Traditional territories encompass the mouth of the Fraser River, the Fraser delta marshes, and portions of the Strait of Georgia.",
+    "culturalNotes": "Musqueam traditional territory sits at the junction of the Fraser River and the Strait of Georgia — one of the richest salmon environments on the Northwest Coast. The Musqueam are among the most prominent nations whose unceded traditional territories underlie the city of Vancouver. The xʷməθkʷəy̓əm have been involved in landmark land title cases and fisheries cases throughout the twentieth and twenty-first centuries.",
+    "heritageSkillRelevance": [
+      "Fraser River salmon harvesting — reef nets, weirs, and traditional nets at Fraser mouth locations",
+      "Coho and chinook salmon processing and preservation for winter storage",
+      "Cedar bark weaving — Musqueam have a distinct weaving tradition",
+      "hən̓q̓əmin̓əm̓ language revitalization (publicly shared programs through Musqueam Language and Culture Department)",
+      "Sturgeon fishing in the lower Fraser — traditional practices with size and season protocols",
+      "Camas and wapato harvesting in Fraser delta wetlands",
+      "Saltwater and riverine canoe construction for different water environments"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.musqueam.bc.ca/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Musqueam (xʷməθkʷəy̓əm) is a distinct nation with distinct language and protocols from neighboring Squamish and Tsleil-Waututh. Use the full name xʷməθkʷəy̓əm when referencing cultural attribution. Do not aggregate as 'Coast Salish' — this obscures the specificity of Musqueam cultural knowledge."
+  },
+  {
+    "id": "nation-squamish",
+    "name": "Squamish (Sḵwx̱wú7mesh)",
+    "alternateNames": ["Sḵwx̱wú7mesh Úxwumixw", "Squamish Nation"],
+    "languageFamily": "Salishan",
+    "language": "Sḵwx̱wú7mesh sníchim",
+    "traditionalTerritories": "Head of Howe Sound, Burrard Inlet, and the Squamish River watershed in British Columbia. Traditional territories include Whistler and the coastal mountains north of Vancouver.",
+    "culturalNotes": "The Squamish Nation (Sḵwx̱wú7mesh Úxwumixw) occupies a unique geographic position bridging saltwater and mountain environments — Howe Sound opens to the Strait of Georgia while the Squamish River watershed extends deep into the Coast Mountains. Squamish people are both Saltwater People and Mountain People in their ecological range. The Squamish Nation is among the most active in language revitalization on the Northwest Coast.",
+    "heritageSkillRelevance": [
+      "Cedar dugout canoe construction for Howe Sound navigation",
+      "Mountain resource use — mountain goat wool, cedar from coastal valleys",
+      "Salmon harvesting on the Squamish River — chinook, coho, pink, chum",
+      "Sḵwx̱wú7mesh sníchim language revitalization (publicly shared resources)",
+      "Cedar bark weaving — basketry and mat production",
+      "High-country travel — snowshoes, packing techniques for mountain terrain",
+      "Trade relationships with Interior peoples over mountain passes"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.squamish.net/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Squamish (Sḵwx̱wú7mesh) is a distinct Salishan nation — not a subdivision of a broader 'Coast Salish' category. The nation has both coastal and mountain aspects of their traditional territory. Spiritual practices and ceremony are Level 3-4. Public language and cultural programs are Level 1."
+  },
+  {
+    "id": "nation-tsleil-waututh",
+    "name": "Tsleil-Waututh (səl̓ilw̓ətaʔɬ)",
+    "alternateNames": ["səl̓ilw̓ətaʔɬ", "People of the Inlet"],
+    "languageFamily": "Salishan",
+    "language": "hən̓q̓əmin̓əm̓ (Downriver Halkomelem)",
+    "traditionalTerritories": "Burrard Inlet and the Indian Arm fjord on the North Shore of the Lower Mainland, British Columbia. Traditional marine territory extending into the Strait of Georgia.",
+    "culturalNotes": "Tsleil-Waututh, meaning 'People of the Inlet,' have been the primary stewards of Burrard Inlet since time immemorial. The nation's traditional practices were deeply shaped by the sheltered waters of Indian Arm and the rich marine environment of Burrard Inlet. Tsleil-Waututh have been active in pipeline and marine environment stewardship cases related to their traditional marine territories.",
+    "heritageSkillRelevance": [
+      "Burrard Inlet marine harvesting — clams, herring spawn, salmon",
+      "Canoe construction for sheltered inlet and fjord navigation",
+      "Cedar bark weaving and basketry — Halkomelem weaving traditions",
+      "Herring spawn preservation — dried herring roe on kelp (a shared Coast Salish practice)",
+      "Shellfish harvesting and clam garden cultivation",
+      "Marine mammal relationships — historical seal and sea lion practices",
+      "hən̓q̓əmin̓əm̓ language learning resources (shared with Musqueam)"
+    ],
+    "communityAuthorizedResources": [
+      "https://twnation.ca/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Tsleil-Waututh (səl̓ilw̓ətaʔɬ) is a distinct nation from neighboring Musqueam and Squamish — they share the Burrard Inlet region but have distinct identities, protocols, and governance. Do not conflate or aggregate."
+  },
+  {
+    "id": "nation-tsawwassen",
+    "name": "Tsawwassen First Nation",
+    "alternateNames": ["Tsawwassen"],
+    "languageFamily": "Salishan",
+    "language": "hən̓q̓əmin̓əm̓ (Downriver Halkomelem)",
+    "traditionalTerritories": "Tsawwassen Point and the shoreline south of the Fraser delta in British Columbia. Traditional territories include Roberts Bank and the adjacent waters of Boundary Bay.",
+    "culturalNotes": "Tsawwassen territory sits at the southwest corner of the Fraser delta, facing the Strait of Georgia and the US-Canada border zone of Boundary Bay. Tsawwassen signed a landmark treaty in 2009 — one of the few comprehensive modern treaties in British Columbia. The treaty has provided important self-governance mechanisms while maintaining distinct Tsawwassen cultural identity.",
+    "heritageSkillRelevance": [
+      "Fraser delta and Boundary Bay salmon fishing — chinook, sockeye, pink salmon",
+      "Saltwater shellfish harvesting — Tsawwassen Point has significant clam and crab habitat",
+      "Cedar canoe navigation in open waters of the Strait of Georgia",
+      "Wetland plant harvesting — cattail, bulrush, and delta grasses for weaving",
+      "Waterfowl hunting in Fraser delta marshes",
+      "Traditional marine harvesting at Roberts Bank tidal flats",
+      "Camas root gathering at traditional prairie sites"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.tsawwassenfirstnation.com/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Tsawwassen is a distinct nation with its own governance and treaty relationship. Do not aggregate with neighboring nations as a generic 'Coast Salish' group."
+  },
+  {
+    "id": "nation-semiahmoo",
+    "name": "Semiahmoo First Nation",
+    "alternateNames": ["Semiahmoo", "Samahmo"],
+    "languageFamily": "Salishan",
+    "language": "Saanich Straits dialect (related to Lummi Lhéchalosem)",
+    "traditionalTerritories": "Semiahmoo Bay on both sides of the US-Canada border — White Rock area (BC) and Blaine area (WA). Traditional territory spans the international boundary.",
+    "culturalNotes": "The Semiahmoo are a small but distinct nation whose traditional territory at Semiahmoo Bay is bisected by the 49th parallel boundary. Semiahmoo Bay was a significant camas gathering location and a point of inter-tribal trade. The US-Canada border directly disrupts traditional connections between Semiahmoo communities on both sides.",
+    "heritageSkillRelevance": [
+      "Camas root harvesting at Semiahmoo Bay prairie sites",
+      "Semiahmoo Bay shellfish harvesting — clams, oysters, crab",
+      "Salmon fishing at Semiahmoo Bay river mouths",
+      "Cedar canoe travel between Canadian and American portions of traditional territory",
+      "Inter-tribal trade at Semiahmoo Bay — exchange point between Lummi, Saanich, and Nooksack peoples",
+      "Duck and waterfowl hunting in bay marshes"
+    ],
+    "communityAuthorizedResources": [
+      "https://semiahmoo.ca/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Semiahmoo is a distinct nation whose territory spans the US-Canada border. Do not aggregate as 'Coast Salish.' Cross-border territorial issues are documented in the cross-border-sovereignty notes for this module."
+  },
+  {
+    "id": "nation-nooksack",
+    "name": "Nooksack Tribe",
+    "alternateNames": ["Nooksack", "Nootsack"],
+    "languageFamily": "Salishan",
+    "language": "Nooksack (Lhéchalosem-related; distinct dialect)",
+    "traditionalTerritories": "Nooksack River valley in northwestern Washington State, from the Canadian border south to Bellingham Bay. Traditional territories encompass three forks of the Nooksack River and Mount Baker (Kweq' Smánit).",
+    "culturalNotes": "The Nooksack Tribe is a river people whose traditional economy centered on the three forks of the Nooksack River system and the resources of the Cascade foothills. Nooksack language is closely related to but distinct from Lummi Lhéchalosem and Saanich SENĆOŦEN — a reminder that the Salishan language family encompasses significant internal diversity. Mount Baker (Kweq' Smánit) is a sacred landmark in Nooksack territory.",
+    "heritageSkillRelevance": [
+      "Nooksack River salmon harvesting — chinook, coho, pink, and chum runs",
+      "Freshwater weir and net construction for river fishing",
+      "Cedar canoe construction for river travel — shorter, shallower drafts than ocean canoes",
+      "Camas and wapato harvesting in Nooksack River lowland meadows",
+      "Deer and elk hunting in foothills and Cascade slopes",
+      "Berry picking and preservation at subalpine elevations",
+      "Mountain plant knowledge — huckleberry, salal, elderberry"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.nooksacktribe.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Nooksack is a distinct nation — a river people in the Salishan family, not to be conflated with coastal Lummi or island Saanich peoples. Do not aggregate as 'Coast Salish.'"
+  },
+  {
+    "id": "nation-snohomish",
+    "name": "Snohomish (Sduhubš)",
+    "alternateNames": ["Sduhubš", "Snohomish people"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Northern dialect)",
+    "traditionalTerritories": "Snohomish River valley and Puget Sound shoreline from the mouth of the Snohomish River to northern Puget Sound. Now part of the federally recognized Tulalip Tribes (as a constituent tribe).",
+    "culturalNotes": "The Snohomish are one of the constituent peoples of the Tulalip Tribes, which was established by the 1855 Point Elliott Treaty. Prior to the treaty period, the Snohomish occupied the Snohomish River delta and estuary, one of the most productive salmon and shellfish environments in Puget Sound. The Tulalip Tribes includes Snohomish, Snoqualmie, and Skykomish peoples — each with distinct historical identities.",
+    "heritageSkillRelevance": [
+      "Snohomish River salmon fishing — particularly the large chinook runs at river mouth",
+      "Estuary shellfish harvesting at the Snohomish River delta",
+      "Cedar canoe construction for Puget Sound travel",
+      "Lushootseed language learning (shared with other Puget Sound nations through Tulalip programs)",
+      "Wapato (arrowhead) harvesting in Snohomish River lowlands",
+      "Cattail mat weaving for house covering and transportation",
+      "Intermarriage and trade relationships across Puget Sound"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.tulaliptribes-nsn.gov/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "The Snohomish are a distinct people within the Tulalip Tribes. Do not conflate individual constituent peoples with the Tulalip Tribes as a collective, and do not aggregate as generic 'Coast Salish.'"
+  },
+  {
+    "id": "nation-snoqualmie",
+    "name": "Snoqualmie Tribe",
+    "alternateNames": ["Snoqualmie", "Sdukwalbixw"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Northern dialect)",
+    "traditionalTerritories": "Snoqualmie River valley in western Washington, from the Cascade foothills to the confluence with the Snohomish River. Includes the Snoqualmie Falls (Snoqualmie Pass area) — a sacred site.",
+    "culturalNotes": "The Snoqualmie Tribe is a federally recognized tribe whose traditional territory centers on the Snoqualmie River system. Snoqualmie Falls (Salish: qʷuʔqʷuʔ) is one of the most significant cultural and spiritual sites in Lushootseed-speaking territory. The Snoqualmie were historically part of the trading network between coastal Puget Sound peoples and the Cascade interior peoples.",
+    "heritageSkillRelevance": [
+      "Snoqualmie River salmon fishing — steelhead and chinook at falls and lower river",
+      "Cedar canoe travel through Snoqualmie River system",
+      "Mountain plant harvesting — huckleberry, salal, fern root at Cascade elevations",
+      "Camas root harvesting in Snoqualmie Valley lowlands",
+      "Deer and elk hunting in Cascade foothills",
+      "Trade corridor navigation — traditional routes over Snoqualmie Pass to interior peoples",
+      "Lushootseed language revitalization programs"
+    ],
+    "communityAuthorizedResources": [
+      "https://snoqualmietribe.us/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Snoqualmie is a distinct nation with federal recognition separate from the Tulalip Tribes. Do not aggregate with neighboring Lushootseed-speaking peoples as undifferentiated 'Coast Salish.'"
+  },
+  {
+    "id": "nation-duwamish",
+    "name": "Duwamish Tribe",
+    "alternateNames": ["Duwamish", "Dkhw'Duw'Absh", "People of the Inside"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Duwamish dialect)",
+    "traditionalTerritories": "Duwamish River valley and Elliott Bay at the southern end of Puget Sound, underlying the city of Seattle. Traditional territory encompasses what is now Seattle, Bellevue, and the Duwamish River corridor.",
+    "culturalNotes": "The Duwamish Tribe is the original people of the territory now called Seattle. Despite their history and treaty participation (Point Elliott, 1855), the Duwamish Tribe does not currently have federal recognition — an ongoing political and legal situation. Chief Seattle (Si'ahl) was a Duwamish and Suquamish leader. The tribe actively maintains cultural programs and land claims.",
+    "heritageSkillRelevance": [
+      "Elliott Bay and Duwamish River salmon fishing — historically one of the most productive locations in Puget Sound",
+      "Tidal flat shellfish harvesting at Elliott Bay",
+      "Cedar canoe construction for Elliott Bay navigation",
+      "Wapato harvesting in Duwamish River lowland wetlands",
+      "Lushootseed language preservation efforts",
+      "Camas root harvesting on Duwamish prairie lands",
+      "Trade relationships with Suquamish people across Puget Sound"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.duwamishtribe.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "The Duwamish Tribe is a distinct people with a complex federal recognition status. Do not assume federal recognition status determines cultural validity. Do not aggregate as generic 'Coast Salish' or 'Lushootseed people.'"
+  },
+  {
+    "id": "nation-puyallup",
+    "name": "Puyallup Tribe of the Puyallup Reservation",
+    "alternateNames": ["Puyallup", "Steilacoom", "Spuyaləpabš"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Southern dialect)",
+    "traditionalTerritories": "Puyallup River valley and the southern Puget Sound shoreline including Commencement Bay, Pierce County, Washington. Traditional territory includes what is now Tacoma and the Puyallup River delta.",
+    "culturalNotes": "The Puyallup Tribe is one of the larger tribes in the Puget Sound region, with significant urban reservation lands in the Tacoma area. The Puyallup have been prominent in fisheries rights litigation and the broader fishing rights movement in the Pacific Northwest. Commencement Bay was historically one of the premier salmon harvesting locations in southern Puget Sound.",
+    "heritageSkillRelevance": [
+      "Puyallup River salmon fishing — all five Pacific salmon species present historically",
+      "Commencement Bay shellfish harvesting",
+      "Cedar canoe construction for southern Puget Sound navigation",
+      "Prairie camas harvesting — the Puyallup River lowlands had extensive camas prairies",
+      "Lushootseed language revitalization programs",
+      "Wapato and cattail harvesting in Puyallup River delta wetlands",
+      "Trade network participation — Puyallup Valley was a major trade corridor"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.puyallup-tribe.com/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Puyallup is a distinct nation. The Steilacoom were historically related but are a distinct group not currently federally recognized. Do not aggregate as 'Coast Salish.' Weaving traditions (Room 17) are specific to Puyallup practice."
+  },
+  {
+    "id": "nation-nisqually",
+    "name": "Nisqually Indian Tribe",
+    "alternateNames": ["Nisqually", "Squalli-absch"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Southern dialect)",
+    "traditionalTerritories": "Nisqually River valley from Mount Rainier (Tahoma) to the Nisqually delta on southern Puget Sound, and the Nisqually tidal flats.",
+    "culturalNotes": "The Nisqually River originates on Mount Rainier glaciers and flows to southern Puget Sound — the Nisqually people have lived at this watershed for thousands of years. The Nisqually have been prominent in fisheries rights history: Frank's Landing (near the delta) was a central site of the fishing rights movement in the 1960s-1970s. Billy Frank Jr. (1931-2014), Nisqually tribal leader and fisheries activist, is a central figure in Pacific Northwest environmental justice history.",
+    "heritageSkillRelevance": [
+      "Nisqually River salmon fishing — the Nisqually River is prime steelhead and chinook habitat",
+      "Nisqually delta shellfish harvesting — historically among the most productive tidal flats in Puget Sound",
+      "Cedar canoe construction for delta and Puget Sound travel",
+      "Camas root harvesting on the Nisqually prairie — one of the most significant camas sites in the region",
+      "Fern root harvesting and preparation — bracken fern root was an important starch source",
+      "Deer and elk hunting in the Nisqually River foothills",
+      "Lushootseed language preservation"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.nisqually-nsn.gov/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Nisqually is a distinct nation. The Nisqually River watershed bridges coastal and mountain environments — the nation has relationships with both Puget Sound coastal peoples and Cascade peoples. Do not aggregate as 'Coast Salish.'"
+  },
+  {
+    "id": "nation-skokomish",
+    "name": "Skokomish Indian Tribe (Twana)",
+    "alternateNames": ["Skokomish", "Twana", "Steh-chass"],
+    "languageFamily": "Salishan",
+    "language": "Twana (Skokomish; a distinct Salishan language)",
+    "traditionalTerritories": "Hood Canal on the Olympic Peninsula, Washington — the narrow fjord running north-south between the Olympic Mountains and the Kitsap Peninsula. Includes the Skokomish River delta at the southern end of Hood Canal.",
+    "culturalNotes": "The Skokomish (Twana people) occupy a unique environment on Hood Canal — a glacially carved fjord with distinctive marine ecology. Hood Canal oysters, Dungeness crab, and salmon are central to the traditional economy. Twana is a distinct Salishan language with its own vocabulary and structure, not mutually intelligible with Lushootseed. The Skokomish River delta is among the most ecologically significant river-estuary systems on the Olympic Peninsula.",
+    "heritageSkillRelevance": [
+      "Hood Canal oyster harvesting and cultivation — a central Skokomish food tradition",
+      "Dungeness crab harvesting in Hood Canal waters",
+      "Skokomish River salmon fishing — chinook and chum runs at the canal head",
+      "Cedar canoe construction for Hood Canal navigation",
+      "Twana language preservation and revitalization",
+      "Cattail and tule mat weaving for house covering",
+      "Olympic Peninsula forest plant knowledge — fern, salal, salmonberry"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.skokomish.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Skokomish (Twana) is a distinct nation with a distinct language — not mutually intelligible with Lushootseed. Do not aggregate with Puget Sound Lushootseed peoples as undifferentiated 'Coast Salish.'"
+  },
+  {
+    "id": "nation-quinault",
+    "name": "Quinault Indian Nation",
+    "alternateNames": ["Quinault", "Kwi-nail-t"],
+    "languageFamily": "Salishan",
+    "language": "Quinault (Southwestern Coast Salish; endangered)",
+    "traditionalTerritories": "Quinault River valley and the northern Olympic Peninsula Pacific coast, Washington. Includes Quinault Lake, the Quinault River corridor, and the Pacific Ocean shoreline.",
+    "culturalNotes": "The Quinault Indian Nation occupies a temperate rainforest environment on the western Olympic Peninsula — one of the wettest ecosystems in the continental US. The Quinault Indian Nation includes not only Quinault people but also Queets, Quileute, Hoh, Chehalis, Chinook, and Cowlitz peoples relocated to the reservation. The Quinault River watershed is a major salmon and steelhead ecosystem in the Olympic Peninsula rain shadow.",
+    "heritageSkillRelevance": [
+      "Quinault River salmon fishing — chinook, coho, and steelhead in the large river system",
+      "Pacific Ocean surf fishing and marine mammal relationships (historic)",
+      "Temperate rainforest plant knowledge — Sitka spruce root baskets, red alder bark medicine",
+      "Cedar dugout ocean-going canoe construction for Pacific Coast travel",
+      "Wapato and skunk cabbage root harvesting in Quinault River lowlands",
+      "Quinault language documentation efforts",
+      "Olympic Peninsula shellfish and tidal flat harvesting"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.quinaultindiannation.com/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Quinault Indian Nation encompasses multiple peoples and is a distinct political entity. Do not conflate with neighboring Quileute or Makah peoples. The Quinault River ocean-going tradition reflects Pacific Coast, not Puget Sound, practices."
+  },
+  {
+    "id": "nation-quileute",
+    "name": "Quileute Tribe",
+    "alternateNames": ["Quileute", "Kwi-dí-tchat"],
+    "languageFamily": "Chimakuan (language isolate family)",
+    "language": "Quileute (Chimakuan language — not Salishan)",
+    "traditionalTerritories": "La Push and the Quillayute River valley on the northern Olympic Peninsula Pacific coast, Washington.",
+    "culturalNotes": "The Quileute are notable for speaking a Chimakuan language — unrelated to the surrounding Salishan languages of neighboring peoples. This linguistic distinctiveness reflects a deep, independent cultural identity. The Quileute are Pacific Ocean whale hunters and ocean-going canoe builders with a tradition closely related to the Makah. La Push is the only all-weather harbor on the outer Olympic Peninsula.",
+    "heritageSkillRelevance": [
+      "Pacific Ocean whale hunting — traditional practice; current whale relationships are cultural and observational, not active hunting",
+      "Ocean-going dugout canoe construction for Pacific surf travel",
+      "Quillayute River salmon fishing — all five Pacific salmon species",
+      "Halibut and bottomfish fishing on the Pacific continental shelf",
+      "Sitka spruce root basket weaving — Olympic Peninsula coastal tradition",
+      "Quileute language revitalization programs",
+      "Marine mammal observation and relationship knowledge"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.quileutenation.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Quileute is NOT a Salishan people — their Chimakuan language is unrelated to neighboring Salishan languages. Do not aggregate with Coast Salish peoples. Do not aggregate as 'Native American' or 'Indigenous peoples.' Whale hunting protocols are Level 3-4."
+  },
+  {
+    "id": "nation-makah",
+    "name": "Makah Tribe (Qʷidiččaʔatx̌)",
+    "alternateNames": ["Qʷidiččaʔatx̌", "Cape Flattery people", "People of the Point"],
+    "languageFamily": "Wakashan (Nootkan branch)",
+    "language": "Makah (Qʷiqʷidiččaq)",
+    "traditionalTerritories": "Cape Flattery at the northwestern tip of the Olympic Peninsula, Washington — the intersection of the Pacific Ocean and the Strait of Juan de Fuca. Traditional marine territory extending offshore.",
+    "culturalNotes": "The Makah are the only US tribe with treaty-protected whale hunting rights (Article 4, Treaty of Neah Bay, 1855). Though geographically in Washington State, the Makah speak a Wakashan language — closely related to Nuu-chah-nulth of Vancouver Island. This linguistic connection reflects the close cultural and trade relationships between Makah and Vancouver Island peoples across the Strait of Juan de Fuca. The 1970 Ozette archaeological excavations recovered extraordinary cultural material including over 55,000 artifacts.",
+    "heritageSkillRelevance": [
+      "Ocean-going dugout canoe construction — Makah canoes designed for Pacific Ocean conditions",
+      "Whale hunting — treaty-protected right; current status is culturally and politically complex",
+      "Halibut fishing using traditional hooks and line technology",
+      "Ozette-style basketry — distinctive Makah plaited cedar bark work",
+      "Makah language revitalization (one of the few US Indigenous languages with an immersion program)",
+      "Seal and sea otter relationships (historical; now observation-based)",
+      "Marine mammal harpooning technology — publicly documented historical technique"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.makah.com/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Makah is a Wakashan-speaking people, not Salishan — their linguistic and cultural affiliation is with Vancouver Island Nuu-chah-nulth, not with neighboring Quinault or Quileute. Do not aggregate as 'Coast Salish.' Whale hunting is Level 3-4 for ceremonial and protocol content. Treaty rights are legally and politically active."
+  },
+  {
+    "id": "nation-klallam",
+    "name": "Klallam (S'Klallam) — three communities",
+    "alternateNames": ["Klallam", "Clallam", "S'Klallam", "Nłəʔkeʔim"],
+    "languageFamily": "Salishan",
+    "language": "Klallam (Northern Straits Salish)",
+    "traditionalTerritories": "Olympic Peninsula north shore from Discovery Bay to the Elwha River, Washington State. Three federally recognized communities: Port Gamble S'Klallam, Lower Elwha Klallam, and Jamestown S'Klallam.",
+    "culturalNotes": "The Klallam peoples occupy the north shore of the Olympic Peninsula facing the Strait of Juan de Fuca — a position that made them important participants in the waterway trade networks between Puget Sound, Victoria, and Vancouver Island. Three federally recognized Klallam tribes maintain distinct governance: Port Gamble S'Klallam on Hood Canal, Lower Elwha Klallam at the Elwha River, and Jamestown S'Klallam near Dungeness Spit. The Elwha River dam removal project (2011-2014) was a landmark tribal-led environmental restoration.",
+    "heritageSkillRelevance": [
+      "Elwha River salmon fishing — restoration of salmon runs after dam removal is a living heritage story",
+      "Strait of Juan de Fuca navigation by cedar canoe",
+      "Klallam language revitalization (collaborative program across three Klallam communities)",
+      "Dungeness crab harvesting at Dungeness Spit and adjacent waters",
+      "Clam and shellfish harvesting on north Olympic Peninsula beaches",
+      "Elk and deer hunting in Olympic Peninsula forests",
+      "Cedar bark weaving — basketry and mat traditions"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.pgst.nsn.us/",
+      "https://www.elwha.org/",
+      "https://www.jamestownsnation.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "The three S'Klallam communities are distinct federally recognized tribes with distinct governance — do not aggregate as a single entity, and do not aggregate as 'Coast Salish.' Reference specific community (Port Gamble, Lower Elwha, or Jamestown) when the context is specific."
+  },
+  {
+    "id": "nation-suquamish",
+    "name": "Suquamish Tribe",
+    "alternateNames": ["Suquamish", "Dsuq̓wəbš", "People of the Clear Salt Water"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Northern dialect)",
+    "traditionalTerritories": "Western shore of Puget Sound on the Kitsap Peninsula, Washington. Traditional territory includes Port Madison Bay and the water routes across central Puget Sound.",
+    "culturalNotes": "The Suquamish Tribe occupies the western shore of Puget Sound, facing Seattle across the water. Chief Seattle (Si'ahl) was a Duwamish and Suquamish leader whose legacy is central to both tribes' histories. The Suquamish participated in the Point Elliott Treaty of 1855. Port Madison has been a significant cultural and trade site.",
+    "heritageSkillRelevance": [
+      "Central Puget Sound navigation by cedar canoe — cross-sound trade routes",
+      "Port Madison salmon fishing and shellfish harvesting",
+      "Lushootseed language learning (shared with neighboring Lushootseed peoples)",
+      "Camas root harvesting on Kitsap Peninsula prairies",
+      "Cedar bark weaving and mat production",
+      "Elk and deer hunting in Kitsap Peninsula forests",
+      "Trade canoe navigation connecting Suquamish, Duwamish, and Hood Canal peoples"
+    ],
+    "communityAuthorizedResources": [
+      "https://suquamish.nsn.us/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Suquamish is a distinct nation — not to be conflated with Duwamish despite shared history under Chief Seattle. Do not aggregate as 'Coast Salish.'"
+  },
+  {
+    "id": "nation-muckleshoot",
+    "name": "Muckleshoot Indian Tribe",
+    "alternateNames": ["Muckleshoot", "Smulkamish"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Southern and Northern dialects — mixed community)",
+    "traditionalTerritories": "White and Green River valleys in the Cascade foothills east of Auburn and Kent, Washington State.",
+    "culturalNotes": "The Muckleshoot Indian Tribe was established by the 1855 Medicine Creek and Point Elliott Treaties, drawing together peoples of the White and Green River watersheds. The tribe is a river people bridging the Puget Sound lowlands and the Cascade foothills — their traditional economy connected prairie camas harvesting, river salmon fishing, and mountain resource use.",
+    "heritageSkillRelevance": [
+      "White and Green River salmon fishing — chinook, coho, and steelhead in Cascade foothill rivers",
+      "Camas root harvesting in Puget lowland prairies",
+      "Cedar canoe travel on the Green and White River systems",
+      "Huckleberry and mountain berry picking at Cascade elevations",
+      "Lushootseed language revitalization",
+      "Fern root harvesting — a major starch source in Puget Sound indigenous food systems",
+      "Trade connections between Puget Sound coastal peoples and Cascade interior"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.muckleshoot.nsn.us/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Muckleshoot is a distinct nation that bridges coastal and mountain ecological zones. Do not aggregate as 'Coast Salish' or conflate with neighboring Lushootseed peoples."
+  },
+  {
+    "id": "nation-tulalip",
+    "name": "Tulalip Tribes",
+    "alternateNames": ["Tulalip", "Sduhubš + Sdukwalbixw + Sk̓aləxid — Snohomish, Snoqualmie, Skykomish constituent peoples"],
+    "languageFamily": "Salishan",
+    "language": "Lushootseed (Northern dialect)",
+    "traditionalTerritories": "Tulalip Bay on the Puget Sound shoreline north of Everett, Washington, and the Snohomish River delta. The Tulalip Reservation encompasses traditional territories of several constituent peoples.",
+    "culturalNotes": "The Tulalip Tribes is a federally recognized tribe comprised of the treaty signatories of the 1855 Point Elliott Treaty — primarily Snohomish, Snoqualmie, and Skykomish peoples. Tulalip has developed extensive cultural programs including language revitalization for Lushootseed (one of the larger Lushootseed programs in the region), a cultural resources department, and a museum.",
+    "heritageSkillRelevance": [
+      "Snohomish River and Puget Sound salmon fishing — major chinook fishery historically",
+      "Tulalip Bay shellfish harvesting and clam gardens",
+      "Cedar canoe construction for Puget Sound travel",
+      "Lushootseed language immersion and revitalization programs (publicly accessible learning resources)",
+      "Wapato and cattail harvesting in Snohomish delta wetlands",
+      "Cedar bark weaving — basketry, mat, and cordage production",
+      "Traditional arts programs — carving, weaving, beading (publicly shared)"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.tulaliptribes-nsn.gov/"
+    ],
+    "roomConnections": [15, 16, 17, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Tulalip Tribes is a distinct governing entity; when relevant, name specific constituent peoples (Snohomish, Snoqualmie, Skykomish). Do not aggregate as generic 'Coast Salish.'"
+  },
+  {
+    "id": "nation-chehalis",
+    "name": "Chehalis Tribe (Upper and Lower)",
+    "alternateNames": ["Chehalis", "Che-ha-lis", "Qʷay'ail'ič (Chehalis)"],
+    "languageFamily": "Salishan",
+    "language": "Upper Chehalis and Lower Chehalis (Southwest Coast Salish — distinct dialects)",
+    "traditionalTerritories": "Chehalis River valley in southwestern Washington State, from the Cascade foothills to Grays Harbor. Two distinct communities: Confederated Tribes of the Chehalis Reservation (lower river) and Upper Chehalis (upper river and Chehalis area).",
+    "culturalNotes": "The Chehalis River system is one of the major drainage systems of southwestern Washington, flowing to Grays Harbor on the Pacific coast. Upper and Lower Chehalis are linguistically distinct though related Salishan languages. The Chehalis River salmon runs were among the largest in southwest Washington before major dams and habitat loss in the twentieth century.",
+    "heritageSkillRelevance": [
+      "Chehalis River salmon fishing — chinook and coho runs in a major southwest Washington river system",
+      "Grays Harbor saltwater shellfish harvesting (Lower Chehalis)",
+      "Cedar canoe travel on the Chehalis River and Grays Harbor",
+      "Camas root harvesting in Chehalis River valley prairies",
+      "Elk and deer hunting in Coast Range and Willapa Hills",
+      "Upper Chehalis and Lower Chehalis language documentation efforts",
+      "Swamp and wetland plant knowledge — skunk cabbage, wapato, cattail"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.chehalistribe.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Upper and Lower Chehalis are distinct communities — do not treat as one. Do not aggregate with neighboring Quinault or Nisqually as 'Coast Salish.'"
+  },
+  {
+    "id": "nation-chinook-lower",
+    "name": "Chinook Indian Nation (Lower Chinook — Shoalwater Bay)",
+    "alternateNames": ["Chinook", "Shoalwater Bay Tribe", "Lower Chinook"],
+    "languageFamily": "Chinookan",
+    "language": "Chinook (Lower Chinook; not the Chinook Jargon trade language)",
+    "traditionalTerritories": "Columbia River estuary and Willapa Bay (Shoalwater Bay), Washington. Lower Chinook territory encompasses the river mouth on both Oregon and Washington shores.",
+    "culturalNotes": "The Lower Chinook are distinct from the many other Chinookan-speaking peoples along the Columbia River. The Chinook Indian Nation (including Shoalwater Bay Tribe) does not currently have federal recognition despite a long recognition effort. The Chinook were a central trading nation — Chinook Jargon (a trade pidgin) spread throughout the Pacific Northwest as a direct result of Chinook trading networks. Lower Chinook are river mouth people, not interior river peoples.",
+    "heritageSkillRelevance": [
+      "Columbia River estuary salmon fishing — one of the largest salmon fisheries in North America historically",
+      "Willapa Bay (Shoalwater Bay) shellfish harvesting — historically rich oyster and clam beds",
+      "Ocean-going canoe construction for Columbia Bar navigation — one of the most dangerous river bars on the Pacific",
+      "Chinook trade networks — trade canoe travel throughout the Pacific Northwest",
+      "Wapato harvesting at Columbia River backwater sloughs",
+      "Dried eulachon (candlefish) oil extraction and trade",
+      "Lower Chinook language documentation"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.chinooknation.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Lower Chinook is a Chinookan-speaking people — distinct from both Coast Salish peoples and from Upper Chinook and other Chinookan peoples upstream on the Columbia. Do not aggregate as 'Coast Salish.' Federal recognition status does not diminish cultural validity."
+  },
+  {
+    "id": "nation-cowlitz",
+    "name": "Cowlitz Indian Tribe",
+    "alternateNames": ["Cowlitz", "Kawlic"],
+    "languageFamily": "Salishan",
+    "language": "Cowlitz (Taidnapam — Upper Cowlitz; Lower Cowlitz — two distinct languages)",
+    "traditionalTerritories": "Cowlitz River valley in southwestern Washington State, from the Cascade slopes to the Columbia River. The Cowlitz River joins the Columbia at Kelso/Longview.",
+    "culturalNotes": "The Cowlitz Indian Tribe encompasses two distinct language groups: Upper Cowlitz (Taidnapam, a Sahaptin-speaking people) and Lower Cowlitz (a Salishan-speaking people). This internal diversity reflects the Cowlitz River as a trade and travel corridor between Cascade interior peoples and Columbia River coastal peoples. The Cowlitz achieved federal recognition in 2000 after more than 70 years of effort.",
+    "heritageSkillRelevance": [
+      "Cowlitz River salmon fishing — significant chinook and steelhead runs historically",
+      "Columbia River fishing at the Cowlitz River confluence",
+      "Cedar canoe travel on the Cowlitz and Columbia rivers",
+      "Trade corridor navigation — Cowlitz River was a major route between the coast and the Cascades",
+      "Camas root harvesting in Cowlitz River valley prairies",
+      "Upper Cowlitz (Taidnapam) plateau food traditions — camas, cous (biscuitroot), pine nuts",
+      "Elk and deer hunting in Cascade foothills and forests"
+    ],
+    "communityAuthorizedResources": [
+      "https://www.cowlitz.org/"
+    ],
+    "roomConnections": [15, 16, 18],
+    "seasonalPattern": "coastal",
+    "culturalSovereigntyNotes": "Cowlitz encompasses two distinct language communities — do not treat as homogeneous. Taidnapam (Upper Cowlitz) have Plateau cultural connections in addition to coastal connections. Do not aggregate as 'Coast Salish.'"
+  }
+]

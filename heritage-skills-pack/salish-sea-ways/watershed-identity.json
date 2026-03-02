@@ -1,0 +1,63 @@
+{
+  "id": "watershed-identity-framework",
+  "version": "1.0",
+  "description": "The watershed identity framework for the Salish Sea Ways module. Organizes heritage skill content by the ecological and cultural relationship between peoples and their primary water environment — saltwater (Puget Sound, Strait of Georgia, Pacific coast) or river-mountain (Columbia Plateau, Cascade Range). The salmon run connects all watershed peoples — the biological thread from ocean to mountain stream and back.",
+  "saltwaterPeoples": {
+    "id": "saltwater-peoples",
+    "watershedType": "saltwater",
+    "description": "Nations whose primary identity and heritage skills center on the saltwater environment of Puget Sound, the Strait of Georgia, Vancouver Island, and Pacific coastal waters. These peoples are Saltwater People — their material culture, food systems, ceremony, and trade networks are shaped by tidal rhythms, saltwater fish, kelp forests, and ocean-going canoe travel.",
+    "characteristicPractices": [
+      "reef net fishing",
+      "ocean-going canoe construction",
+      "kelp harvesting and ocean plant knowledge",
+      "marine mammal relationships",
+      "intertidal shellfish cultivation (clam gardens)",
+      "herring spawn on kelp harvesting",
+      "saltwater navigation and inter-village trade"
+    ],
+    "representativeNations": [
+      "Lummi",
+      "Saanich (W̱SÁNEĆ)",
+      "Musqueam (xʷməθkʷəy̓əm)",
+      "Makah (Qʷidiččaʔatx̌)",
+      "Nuu-chah-nulth"
+    ],
+    "heritageSkillRooms": [15, 16, 17, 18]
+  },
+  "riverMountainPeoples": {
+    "id": "river-mountain-peoples",
+    "watershedType": "river-mountain",
+    "description": "Nations whose primary identity centers on the river corridors and mountain slopes of the Cascade Range and Columbia Plateau, connected to the Salish Sea through salmon runs. These peoples are River People and Mountain People — their material culture, food systems, and seasonal round are shaped by river salmon runs, plateau root foods, and mountain ecology. They are distinct from Saltwater People though the salmon creates a shared bond.",
+    "characteristicPractices": [
+      "Columbia and Plateau river salmon fishing with nets, weirs, and dip nets",
+      "root foods harvesting (camas, bitterroot, cous/biscuitroot, wapato)",
+      "plateau food preservation — drying, smoking, pit cooking",
+      "mountain plant knowledge and high-elevation berry harvesting",
+      "interior river canoe construction",
+      "horse culture (adopted by many plateau peoples by the 1700s)",
+      "Columbia Plateau trade network participation"
+    ],
+    "representativeNations": [
+      "Yakama Nation",
+      "Umatilla (CTUIR)",
+      "Spokane Tribe",
+      "Confederated Tribes of Colville"
+    ],
+    "heritageSkillRooms": [15, 16]
+  },
+  "sharedSalmonBond": {
+    "description": "The salmon run connects all watershed peoples — the salmon born in mountain streams swim to the ocean and return. This shared relationship is the ecological and cultural thread running through all Salish Sea heritage. When chinook salmon leave the Yakama River headwaters as juvenile fish, swim 600 miles to the Pacific Ocean, and return three to five years later, they carry nutrients from the ocean to the mountain stream. The salmon's journey is the journey of the watershed itself.",
+    "educationalNote": "Do not assume a person's watershed affiliation. The reconnecting descendant terminology guide provides context for how to approach ancestry investigation. A person may have both coastal and interior connections. Watershed identity is a starting framework for heritage learning — not a fixed identity that defines or limits who can learn what.",
+    "heritageSkillRooms": [16]
+  },
+  "contentHooks": {
+    "culturalSovereigntyWardenDomain": "salish-sea",
+    "reconnectingPathwayLink": "reconnecting-terminology",
+    "roomMapping": {
+      "15": "saltwater",
+      "16": "shared",
+      "17": "saltwater",
+      "18": "saltwater"
+    }
+  }
+}
