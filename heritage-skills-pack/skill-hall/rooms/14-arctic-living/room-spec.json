@@ -1,0 +1,91 @@
+{
+  "id": "room-14-arctic-living",
+  "room": 14,
+  "domain": "arctic-living",
+  "title": "Arctic Living",
+  "traditions": ["inuit", "first-nations"],
+  "sumoClasses": ["Shelter", "Clothing", "ArcticSurvival", "HeritageSkill", "MaterialCulture", "ConstructionProcess", "Manufacturing"],
+  "sumoFile": ["Geography.kif", "heritage-domain-ontology.kif"],
+  "description": "SAFETY-CRITICAL ROOM. Arctic Living covers the full spectrum of Inuit-primary survival and material culture knowledge, with Dene cross-reference throughout. Errors in arctic survival guidance can be lethal within hours: CO poisoning from enclosed shelters, hypothermia from inadequate clothing or wet conditions, ice breakthrough from poor ice travel judgment, and frostbite from unprotected cold exposure. Every enclosed-shelter scenario in this room includes mandatory CO warning. Every cold-exposure activity is gated by hypothermia recognition. Ice travel is gated by thickness verification. Frostbite prevention is annotated throughout. Igloo construction covers block-cutting geometry with the snow knife (ulu variants), the ascending spiral pattern, catenary dome physics, the cold-trap entrance, the raised sleeping platform, and interior ventilation requirements. Combined igloo complexes are referenced as advanced content. The caribou clothing cycle (~300 hours from hunt to finished parka) is the signature ontological bridge showcase: a manufacturing process in SUMO terms, but an embodiment of Pilimmaksarniq (developing skills through practice and observation) and Pijitsirniq (serving the community through skilled work) in Inuit Qaujimajatuqangit. The cycle covers fall hunt timing for the best hides, hide preparation (fleshing, scraping, brain-tanning or smoke-tanning), inner parka construction (hair inward), outer parka (hair outward against wind), pants, kamik boots, and mittens. The qulliq soapstone lamp is covered from raw soapstone selection and carving through wick preparation from arctic cotton grass, flame management, and critical ventilation requirements for enclosed-space use. Snow goggles (ilgaak) address UV protection in high-glare arctic conditions. The qamutik (dog sled) covers frame lashing and runner design. Waterproof sewing covers sinew preparation and the crimped stitch technique that makes sealskin garments water-resistant. Dene cross-references appear throughout: snowshoe designs for boreal forest travel, hide clothing traditions, and toboggan construction for overland transport. All content in this room is Level 1 (publicly shared); hunting spiritual practices are acknowledged at Level 2 but not reproduced — the spiritual relationship between hunter, animal, and community is noted with respect and referred to community knowledge keepers.",
+  "safetyDomains": ["arctic-survival", "tool", "fire"],
+  "trySessions": [
+    {
+      "$ref": "try-sessions/igloo-block-cutting-geometry.json"
+    },
+    {
+      "$ref": "try-sessions/caribou-hair-properties.json"
+    },
+    {
+      "$ref": "try-sessions/qulliq-lamp-operation.json"
+    },
+    {
+      "$ref": "try-sessions/waterproof-stitch-technique.json"
+    }
+  ],
+  "modules": [
+    {
+      "id": "arctic-14-igloo-construction",
+      "title": "Igloo Construction",
+      "tradition": "inuit",
+      "description": "GATED. The engineering and practice of igloo construction: snow quality selection, block-cutting with snow knife or ulu, the ascending spiral technique, catenary dome geometry, cold-trap entrance design, interior platform construction, and critical ventilation requirements. CO WARNING mandatory on all enclosed-shelter content.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["ConstructionProcess", "Shelter", "HeritageSkill"]
+    },
+    {
+      "id": "arctic-14-caribou-clothing",
+      "title": "Caribou Clothing Cycle",
+      "tradition": "inuit",
+      "description": "GATED. The complete ~300-hour caribou clothing cycle from hunt to finished parka. Embodies Pilimmaksarniq (developing skills through practice and observation) and Pijitsirniq (serving the community through skilled work). Covers hide preparation, inner parka, outer parka, pants, kamik boots, and mittens. Ontological bridge showcase: Manufacturing (SUMO) vs. Living Knowledge (IQ).",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Manufacturing", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "arctic-14-qulliq-lamp",
+      "title": "Qulliq Soapstone Lamp",
+      "tradition": "inuit",
+      "description": "GATED. The qulliq soapstone oil lamp: raw soapstone selection, carving for oil pooling, arctic cotton grass wick preparation, seal oil fuel management, flame adjustment, and critical ventilation requirements for enclosed-space use. CO and fire safety gates mandatory.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "arctic-14-snow-travel",
+      "title": "Snow and Ice Travel",
+      "tradition": "inuit",
+      "description": "GATED. Arctic travel knowledge: snow goggles (ilgaak) for UV protection, qamutik (dog sled) frame and runner design, ice travel safety with mandatory ice thickness gates, and route-finding on sea ice. Ice thickness verification gated on every travel-on-ice scenario.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Transportation", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "arctic-14-waterproof-sewing",
+      "title": "Waterproof Sewing Technique",
+      "tradition": "inuit",
+      "description": "Inuit waterproof stitching: sinew preparation from caribou or seal, the crimped stitch that compresses hide fibers to create a watertight seal, testing waterproofness, and repair techniques. Critical survival skill — wet clothing in arctic conditions means hypothermia.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "arctic-14-dene-cross-reference",
+      "title": "Dene Arctic and Subarctic Skills",
+      "tradition": "first-nations",
+      "description": "Dene cross-reference module: snowshoe designs for boreal forest travel (Dene/Athabascan traditions), hide clothing construction and decoration, toboggan design for overland transport, and comparative notes on Dene vs. Inuit solutions to shared cold-climate challenges. Attribution to Dene peoples required throughout.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Transportation", "MaterialCulture"]
+    }
+  ],
+  "ontologicalBridges": [
+    {
+      "id": "bridge-03-clothing-cycle",
+      "title": "Caribou Clothing: Manufacturing or Living Knowledge?",
+      "sumoView": "Clothing -> WearableItem -> Artifact -> Object -> Physical -> Entity. A manufacturing process converting raw animal hide into functional garments through stages: butchering, fleshing, scraping, brain-tanning or smoke-tanning, cutting, and sewing. The finished parka is an Artifact with thermal insulation properties derived from the hollow-shaft structure of caribou hair.",
+      "indigenousView": "The caribou clothing cycle (~300 hours from hunt to finished parka) embodies Pilimmaksarniq (the concept of developing skills through practice and observation) and Pijitsirniq (the concept of serving the community and the environment). Each stitch carries knowledge passed from mother to daughter across generations. The caribou that gave its life requires that nothing be wasted — every part of the animal serves a purpose. The parka is not insulation; it is the visible evidence of 300 hours of community investment in one person's survival, and the living record of everything the maker's mother and grandmother knew.",
+      "tradition": "inuit",
+      "teachingPoint": "SUMO counts the object; Inuit Qaujimajatuqangit counts the relationships. A parka is not just insulation — it is evidence of 300 hours of community investment in one person's survival. The SUMO view can model the thermal properties of caribou hair and optimize for insulation value. IQ situates the same object in a web of obligation, skill transmission, and reciprocal relationship with the animal. Both are true. The learner who sees only the artifact misses the IQ principles encoded in every seam. The learner who sees only the IQ principles cannot explain why the garment works."
+    }
+  ]
+}
