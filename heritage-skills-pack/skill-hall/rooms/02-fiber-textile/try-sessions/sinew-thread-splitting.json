@@ -1,0 +1,56 @@
+{
+  "id": "fiber-02-sinew-splitting-beginner",
+  "title": "Sinew Thread Preparation: Splitting Caribou Back Sinew",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn how Inuit sewers prepare caribou back sinew into sewing thread — splitting the sinew bundles to the right diameter, managing moisture to maintain working pliability, and threading through a bone or metal needle. Understand why sinew thread properties make it ideal for cold-climate sewing. Note: Waterproof seam techniques for qajaq construction are covered in Room 14 (Arctic Living).",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand why sinew thread. Sinew is the tendon and connective tissue fiber from animals — in Inuit tradition, most commonly the long back sinew (dorsal tendon) running along either side of a caribou's spine. When dry, sinew is extremely strong — stronger than comparably sized cotton thread. When damp, sinew swells, closing stitch holes and making seams more watertight. This combination of dry strength and wet sealing makes sinew ideal for sewing garments that must perform in wet, cold conditions.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The development of sinew thread reflects deep ecological knowledge. Inuit sewers knew the specific properties of sinew from different animals (caribou, bearded seal, beluga whale) and from different parts of the body (back sinew, leg sinew). Different applications required different sinew diameters and strength properties. An experienced sewer chose sinew for a specific garment part based on the load that seam would carry.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn sourcing and initial preparation. Back sinew is removed in strips along the spine immediately after a successful hunt. Fresh sinew is slippery and must be dried before splitting — hang strips in a cool, dry place until they are hard and rigid. Dried sinew stores for months or years without degradation. Before use, dried sinew must be slightly re-moistened to restore working pliability — hold it briefly in the mouth or wrap it in a damp cloth for a few minutes.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "Practice splitting sinew. Dried back sinew is composed of parallel fibers that split cleanly along their length when properly dried. Find the end of a dried strip and use the fingernails or a thin bone tool to start a split. Once started, the split follows the fiber direction naturally — pull the two halves apart with controlled, steady tension to produce a strand of consistent diameter. Multiple successive splits produce thread of different thicknesses.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Match thread diameter to application. Thick sinew (unsplit or split once) for structural seams bearing load — boot soles, carrying bag straps, snow knife handles. Medium sinew (split 2-3 times) for general garment seams — parka body, pants, hood attachment. Fine sinew (split many times, nearly transparent) for decorative work and fine detail stitching on clothing. Selecting the right diameter for each part of a garment is a core component of the sewer's skill.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "An Inuit sewer manages sinew thread of multiple diameters simultaneously in a single garment. The structural seams (where the sole of a boot meets the upper, or where the hood meets the parka body) use heavier thread; the decorative border stitching uses the finest possible thread. This differentiation reflects sophisticated understanding of load paths and aesthetic proportion — knowledge that cannot be transmitted through instruction alone, only through apprenticeship and practice.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Learn threading technique. Traditional sewing needles are made from bird bone (for fine work), mammal leg bone, or metal obtained through trade. The eye of a bone needle is made by drilling a small hole — the sinew thread is licked to a fine point and inserted through the eye with patience, pulling with slow steady tension. Modern metal needles have larger eyes that accommodate sinew more easily. Thread only as much sinew as you can use before it dries out — typically 30-40 cm at a time.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Manage moisture while sewing. Sinew thread must stay slightly moist to remain supple during sewing. Inuit sewers traditionally held the working thread length in the mouth between stitches to maintain moisture. If sinew dries out mid-seam, it becomes brittle and can snap under tension. If it becomes too wet, it stretches and the seam loses tension when dry. The right moisture level is a tactile judgment developed through experience.",
+      "safetyNote": "Tool safety annotation: bone needles are extremely sharp and thin. Keep the supporting hand (holding the hide or fabric) positioned so that a needle that slips goes into the workpiece, not the hand. Traditional Inuit thimbles (made from ringed seal skin) protect the pushing finger — use a thimble or finger cot when sustained sewing with a bone needle."
+    },
+    {
+      "order": 7,
+      "instruction": "Understand the waterproof seam cross-reference. The specialized waterproof stitch used for qajaq deck seams — where sinew thread must form a water-tight bond under paddling conditions — is covered in Room 14 (Arctic Living) as part of the Arctic Living module. That session includes the specific stitch type (a running stitch pulled tight so the sinew swells into the needle holes), the survival context of watercraft construction, and the safety notes appropriate for cold-water environment sewing applications.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Waterproof sinew stitching is one of the most remarkable achievements in traditional textile technology. A properly stitched qajaq seam can hold water pressure from external waves without leaking. The same technique applies to waterproof boot construction (kamik) and amauti construction. Room 14 covers the watercraft application; this room covers the foundational thread preparation and general garment sewing techniques that underlie both applications.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
