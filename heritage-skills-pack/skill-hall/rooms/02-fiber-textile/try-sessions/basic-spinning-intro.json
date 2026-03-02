@@ -1,0 +1,52 @@
+{
+  "id": "fiber-02-spinning-beginner",
+  "title": "Basic Spinning: From Fiber to Yarn on a Drop Spindle",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the fundamental hand-spinning sequence used in Appalachian textile tradition: preparing wool roving, loading a drop spindle, drafting the fiber, and applying twist to create yarn. This session uses a drop spindle — the simplest spinning tool — as a gateway to understanding the wheel spinning traditions of the Appalachian region.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand Appalachian spinning heritage. Hand-spinning was essential in colonial Appalachian households — wool was the primary warm-season fiber, and families could not purchase cloth except through barter or cash that was rarely available. Scots-Irish and German immigrants brought spinning traditions that were adapted to local sheep breeds and conditions. The great wheel (for wool) and flax wheel (for linen) were household essentials from the 1700s through the early 20th century.",
+      "culturalContext": "Spinning was primarily women's work in colonial Appalachian households, though men maintained the wheels and sheared the sheep. A skilled spinner could produce several hundred yards of yarn per day on a great wheel. The Foxfire books document many Appalachian women who learned spinning from their mothers and grandmothers and continued the practice well into the 20th century.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn fiber preparation. Wool must be cleaned, combed or carded, and formed into a continuous roving (a loose, untwisted preparation of fibers aligned roughly parallel) before spinning. Commercial roving is prepared for you; traditional preparation involves washing the fleece (scouring), picking apart clumps, and carding on hand cards — two paddle-shaped tools with wire teeth — to align the fibers into a consistent thickness suitable for drafting.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "Understand the drop spindle. A drop spindle has two parts: the shaft (a wooden rod) and the whorl (a disc that acts as a flywheel, maintaining spin momentum). The spindle is loaded by starting a leader yarn — a short length of pre-spun yarn tied to the shaft and looped through a notch near the top. The leader gives the new fiber something to attach to and begin the transfer of twist.",
+      "safetyNote": "Equipment safety annotation: the whorl of a drop spindle is a weighted disc that rotates at speed. If the spindle drops and the yarn breaks, the spindle can fall and spin unpredictably. Keep feet clear of the spindle's fall zone. When stopping work, always park the spindle by winding the yarn up the shaft."
+    },
+    {
+      "order": 4,
+      "instruction": "Practice drafting. Hold the roving loosely in the supply hand. Pull a short section of fiber gently away from the main supply with the drafting hand — this is 'drafting', the controlled drawing out of fiber to create a consistent diameter before twist is applied. The gap between the supply hand and the twist front is the 'drafting triangle'. Control of this triangle — keeping it consistent — is the core skill of spinning.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 5,
+      "instruction": "Apply twist. Allow the spindle to drop and spin (releasing the pinch of the drafting hand briefly). Twist travels up from the spindle into the drafted zone. The fiber locks together under twist to create yarn. When enough twist has built up, wind the yarn onto the shaft, re-engage the leader, and repeat. The rhythm of draft-twist-wind is the fundamental sequence of all hand-spinning.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "Understand Z-twist and S-twist. Most Western spinning applies Z-twist — the spindle spins clockwise when viewed from the top, creating a right-hand twist in the yarn. Plying (twisting two singles together to make a balanced yarn) uses S-twist (counter-clockwise) to balance the original twist. Understanding twist direction matters when combining handspun with other fibers or when designing a balanced two-ply yarn.",
+      "culturalContext": "Different world spinning traditions use different default twist directions. The choice becomes structurally important when two spinners' yarns are woven or knitted together — unbalanced twist causes a finished cloth to bias (pull diagonally). Appalachian spinners working from memory often describe the twist direction by gesture rather than by name, passing the knowledge through demonstration.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 7,
+      "instruction": "Understand the path from spindle to great wheel. The great wheel and walking wheel use the same drafting-and-twisting principle at far greater speed. The spinner walks backward away from the wheel to draft, then walks forward to wind on the twist. A skilled spinner with a great wheel can produce the same yarn in a fraction of the time a drop spindle requires. Understanding how the drop spindle works makes learning wheel spinning faster — many Appalachian spinning teachers start students on the drop spindle for exactly this reason.",
+      "culturalContext": "The transition from drop spindle to great wheel is not a change of technique — it is a scaling up of the same physical principle. Both tools create yarn by simultaneously drafting and twisting fiber. The great wheel simply externalizes the spinning motion and increases the speed dramatically. Many Appalachian families owned both: the great wheel for producing quantity, the smaller flax wheel for finer work.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
