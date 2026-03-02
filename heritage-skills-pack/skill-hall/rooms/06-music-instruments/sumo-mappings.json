@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-06-appalachian-dulcimer",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianDulcimer MusicalInstrument)",
+    "naturalLanguage": "An Appalachian mountain dulcimer is a musical instrument: a fretted string instrument played by plucking or strumming, whose construction and tuning are specific to the Appalachian mountain tradition.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-banjo",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Banjo MusicalInstrument)",
+    "naturalLanguage": "A banjo is a musical instrument with a circular membrane head and 4-5 strings, derived from West African lute instruments (kora, ngoni) and developed into its current form through African American communities in the American South.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-frame-drum",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass FrameDrum MusicalInstrument)",
+    "naturalLanguage": "A frame drum is a musical instrument: a single-headed drum in which the playing head is attached to a shallow circular hoop frame, used across Anishinaabe, Cree, and many other First Nations musical traditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-frame-drum-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass FrameDrumConstruction HeritageSkill)",
+    "naturalLanguage": "Frame drum construction is a heritage skill: the process of selecting and preparing the hoop, soaking and stretching the hide membrane, and lashing the membrane to the hoop — knowledge transmitted within First Nations communities across generations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-katajjaq",
+    "sumoTerm": "Singing",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Katajjaq Singing)",
+    "naturalLanguage": "Katajjaq (Inuit throat singing) is a form of singing: a vocal performance practice in which two singers face each other and produce interlocking rhythmic breath patterns, continuing until one singer laughs or loses the rhythm.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-qilaut",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qilaut MusicalInstrument)",
+    "naturalLanguage": "A qilaut (Inuit frame drum) is a musical instrument: a large single-headed frame drum held in one hand and struck on the inside edge of the rim with a short stick, used in Inuit drum dance traditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-shape-note-singing",
+    "sumoTerm": "Music",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ShapeNoteSinging Music)",
+    "naturalLanguage": "Shape-note singing (Sacred Harp) is a musical tradition: a community vocal practice using a notation system where different note shapes indicate solfege syllables, enabling community members without formal music training to read and sing four-part harmony.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-dulcimer-making",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass DulcimerMaking HeritageSkill)",
+    "naturalLanguage": "Mountain dulcimer making is an Appalachian heritage skill: constructing the fretted hourglass-shaped body, installing the tuning pegs, placing the frets, and stringing the instrument — knowledge transmitted in the Appalachian mountain tradition.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-wooden-flute",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWoodenFlute MusicalInstrument)",
+    "naturalLanguage": "A traditional wooden flute (as made in many First Nations traditions) is a musical instrument: a tubular wind instrument with finger holes cut to produce a scale, constructed from a hollowed branch or drilled cylinder of wood.",
+    "ontologicalBridge": null
+  }
+]
