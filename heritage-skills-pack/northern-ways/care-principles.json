@@ -1,0 +1,35 @@
+{
+  "framework": "CARE",
+  "fullName": "Collective Benefit, Authority to Control, Responsibility, Ethics",
+  "origin": "Global Indigenous Data Alliance (GIDA)",
+  "year": 2019,
+  "summary": "The CARE Principles for Indigenous Data Governance were developed by the Global Indigenous Data Alliance and first published in 2019. They complement the FAIR data principles (Findability, Accessibility, Interoperability, Reusability) by centering Indigenous Peoples' rights and interests in data ecosystems. While FAIR describes technical openness, CARE ensures that openness does not come at the cost of Indigenous sovereignty.",
+  "principles": [
+    {
+      "id": "CARE-C",
+      "name": "Collective Benefit",
+      "definition": "Data ecosystems shall be designed and function in ways that enable Indigenous peoples to derive benefit from the data. Indigenous peoples should benefit from knowledge generated about them, their lands, and their cultures. Benefits may include improved governance and citizen engagement, informed policy decisions, improved quality of services, economic development, and cultural programs.",
+      "heritagePackMapping": "The Heritage Skills pack creates collective benefit for Indigenous communities through the creator-first purchasing model: every resource link for First Nations and Inuit content prioritizes community-owned publishers, cultural center gift shops, Indigenous-owned businesses, and community educational programs. When learners purchase from foxfire.org, Inuit-owned publishers, or nation cultural centers, economic benefit flows back to the knowledge-holding communities. The pack also benefits communities by directing curious learners toward cultural centers and educational programs, building sustainable community-to-learner relationships rather than extractive content consumption."
+    },
+    {
+      "id": "CARE-A",
+      "name": "Authority to Control",
+      "definition": "Indigenous peoples' rights and interests in Indigenous data must be recognized and their authority to control such data be empowered. Indigenous peoples should be empowered to determine how their data is governed. This includes the right of Indigenous peoples to govern data ecosystems according to their own protocols and the need to recognize these rights in law and policy.",
+      "heritagePackMapping": "Authority to control is operationalized in the Heritage Skills pack through the Cultural Sovereignty Warden (Component 03), which implements OCAP®, IQ, and CARE frameworks as enforcement logic. Level 4 (Sacred/Ceremonial) content cannot be included regardless of what any external source says — the community's authority to protect sacred knowledge is encoded as a hard block with no override path. Level 3 content requires explicit community authorization documentation before inclusion. Levels 1 and 2 follow published community educational content with proper attribution. This architecture treats Indigenous authority not as a preference but as a system constraint."
+    },
+    {
+      "id": "CARE-R",
+      "name": "Responsibility",
+      "definition": "Those working with Indigenous data have a responsibility to share how data is used to support Indigenous peoples' self-determination and collective benefit. Responsible use of Indigenous data must include meaningful and equitable collaboration, cultural humility, respect for Indigenous protocols, and ongoing community engagement.",
+      "heritagePackMapping": "The Heritage Skills pack takes responsibility through several mechanisms: (1) Transparent provenance — every piece of Indigenous content has documented source, authorization pathway, and cultural sovereignty level. (2) Knowledge keeper directory — the pack actively directs learners to community resources, accepting responsibility for ensuring learners know where to go for deeper, community-authorized learning. (3) Ongoing review protocol — pack maintainers are responsible for updating content if a community withdraws authorization or requests modification. (4) The pack explicitly teaches these frameworks (OCAP®, CARE, IQ) to learners, creating educational responsibility by ensuring users understand the ethical structure behind the content they access."
+    },
+    {
+      "id": "CARE-E",
+      "name": "Ethics",
+      "definition": "Indigenous peoples' rights and wellbeing should be the primary concern at all stages of the data life cycle and across the data ecosystem. This requires consultation and engagement with Indigenous peoples and communities, recognition of Indigenous rights and governance frameworks, and ongoing obligations that extend beyond legal compliance into genuine ethical commitment.",
+      "heritagePackMapping": "The ethics principle is expressed in the Heritage Skills pack's founding commitments: (1) Cultural sovereignty is non-negotiable — no commercial or educational justification can override a community's right to protect its knowledge. (2) The pack was designed with the IQ principles as its ethical backbone for Inuit content and OCAP® as its backbone for First Nations content — these are not add-ons but structural design constraints. (3) The pack acknowledges that it is an imperfect and partial representation, not a complete or authoritative source — it is a starting point for learning, always directing learners to community sources for deeper engagement. (4) Pack maintainers commit to responding to community requests for modification or removal of content as an ongoing ethical obligation, not a one-time compliance check."
+    }
+  ],
+  "relationshipToOCAP": "CARE and OCAP® are complementary frameworks. OCAP® (developed 1998, by First Nations Information Governance Centre) is the foundational framework for Canadian First Nations data sovereignty. CARE (developed 2019, by Global Indigenous Data Alliance) extends these principles to a global Indigenous data governance context and adds explicit attention to collective benefit and ethical obligations of data users. The Heritage Skills pack applies both: OCAP® for all First Nations content specifically, CARE as the broader framework governing all Indigenous content including Inuit.",
+  "applicationToHeritageSkillsPack": "Pack maintainers should review the CARE principles when making any decision about: adding new Indigenous content, updating existing content, accepting community-contributed content, or making the pack available in new contexts. CARE provides the ethical question to ask before OCAP® provides the operational answer."
+}
