@@ -1,0 +1,128 @@
+[
+  {
+    "heritageConceptId": "room-13-birchbark-canoe",
+    "sumoTerm": "WaterVehicle",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkCanoe WaterVehicle)",
+    "naturalLanguage": "A birchbark canoe is a kind of water vehicle — a craft designed to transport people or goods across water surfaces.",
+    "ontologicalBridge": "bridge-01-birchbark-canoe"
+  },
+  {
+    "heritageConceptId": "room-13-birchbark-canoe",
+    "sumoTerm": "Canoe",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkCanoe Canoe)",
+    "naturalLanguage": "A birchbark canoe is a specific type of canoe, classified by its construction material (birchbark) and the traditional knowledge system of the nations that developed it.",
+    "ontologicalBridge": "bridge-01-birchbark-canoe"
+  },
+  {
+    "heritageConceptId": "room-13-qajaq",
+    "sumoTerm": "Kayak",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qajaq Kayak)",
+    "naturalLanguage": "A qajaq is a specific type of kayak — a skin-on-frame, closed-deck, single-person watercraft traditionally used by Inuit peoples for hunting and travel in arctic coastal environments.",
+    "ontologicalBridge": "bridge-13-qajaq-extension"
+  },
+  {
+    "heritageConceptId": "room-13-qajaq",
+    "sumoTerm": "WaterVehicle",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qajaq WaterVehicle)",
+    "naturalLanguage": "A qajaq is a kind of water vehicle optimized for solo arctic coastal travel, with a closed deck that allows the paddler to execute rolling recovery maneuvers.",
+    "ontologicalBridge": "bridge-13-qajaq-extension"
+  },
+  {
+    "heritageConceptId": "room-13-umiak",
+    "sumoTerm": "WaterVehicle",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Umiak WaterVehicle)",
+    "naturalLanguage": "An umiak is a large open water vehicle used by Inuit communities for group travel, whaling, and cargo transport. Hide-on-frame construction supports multiple paddlers and substantial cargo.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-canoe-construction",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkCanoeConstruction Manufacturing)",
+    "naturalLanguage": "Building a birchbark canoe is a manufacturing process involving the selection, preparation, and assembly of natural materials into a functional watercraft.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-canoe-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkCanoeConstruction HeritageSkill)",
+    "naturalLanguage": "Building a birchbark canoe is also a heritage skill — a traditional process encoding generations of ecological knowledge, spiritual relationship, and communal identity.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-birchbark-harvesting",
+    "sumoTerm": "MaterialCulture",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkHarvesting MaterialCulture)",
+    "naturalLanguage": "Harvesting birchbark for canoe construction is part of material culture — the traditional knowledge governing which trees to select, when to harvest (spring, when the sap runs), how to remove bark without killing the tree, and how to offer acknowledgment to the birch.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-sealskin-covering",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SealskinCovering Manufacturing)",
+    "naturalLanguage": "Preparing and attaching sealskin covering to a qajaq frame is a manufacturing process: the hide is cleaned, stretched, dried, cut to pattern, and sewn with waterproof stitching onto the frame.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-sealskin-covering",
+    "sumoTerm": "MaterialCulture",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SealskinCovering MaterialCulture)",
+    "naturalLanguage": "Sealskin preparation is traditional material culture — the knowledge of which seals yield the best hides, how to prepare them for different purposes, and the waterproof stitching techniques that make the difference between survival and capsizing.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-paddle-design",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalPaddle Artifact)",
+    "naturalLanguage": "A traditional paddle — whether the single-blade of the birchbark canoe paddler or the double-blade of the qajaq paddler — is an artifact: a human-made object designed for a specific function.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-paddle-design",
+    "sumoTerm": "Tool",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalPaddle Tool)",
+    "naturalLanguage": "A traditional paddle is also a tool — it is the primary instrument by which a paddler propels and steers a watercraft. Its shape, length, and material are optimized for the specific watercraft and conditions it is used with.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-rolling-technique",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass QajaqRollingTechnique HeritageSkill)",
+    "naturalLanguage": "Qajaq rolling (eskimo rolling) is a heritage skill: the ability to right a capsized qajaq while remaining sealed in the cockpit. It requires extensive practice and embodies the intimate relationship between paddler and craft that the qajaq tradition represents.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-rolling-technique",
+    "sumoTerm": "IntentionalProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass QajaqRollingTechnique IntentionalProcess)",
+    "naturalLanguage": "Qajaq rolling is an intentional process — a deliberate sequence of body movements and paddle strokes executed to recover from a capsized position. Its development required centuries of community experimentation and knowledge transmission.",
+    "ontologicalBridge": null
+  }
+]
