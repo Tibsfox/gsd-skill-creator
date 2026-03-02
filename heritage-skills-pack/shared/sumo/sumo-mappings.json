@@ -1,0 +1,380 @@
+[
+  {
+    "heritageConceptId": "room-01-building",
+    "sumoTerm": "ConstructionProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalBuilding ConstructionProcess)",
+    "naturalLanguage": "Traditional building methods are a kind of construction process.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-building",
+    "sumoTerm": "Shelter",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalShelter Shelter)",
+    "naturalLanguage": "Traditionally built shelters — cabins, longhouses, and snow shelters — are a kind of shelter.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-building",
+    "sumoTerm": "ArchitecturalStructure",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageStructure ArchitecturalStructure)",
+    "naturalLanguage": "Heritage structures built using traditional methods are a kind of architectural structure.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-fiber",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWeaving Manufacturing)",
+    "naturalLanguage": "Traditional weaving and fiber arts are a kind of manufacturing process.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-fiber",
+    "sumoTerm": "Fabric",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalTextile Fabric)",
+    "naturalLanguage": "Traditionally woven or worked textiles are a kind of fabric.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-fiber",
+    "sumoTerm": "Thread",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalThread Thread)",
+    "naturalLanguage": "Handspun or traditionally processed fiber — sinew, plant fiber, wool — is a kind of thread.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-03-animals",
+    "sumoTerm": "Animal",
+    "sumoFile": "Merge.kif",
+    "mappingType": "related",
+    "kifStatement": "(related HeritageAnimalKnowledge Animal)",
+    "naturalLanguage": "Heritage animal knowledge concerns animals as the subject of traditional practice.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-03-animals",
+    "sumoTerm": "Hunting",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalHunting Hunting)",
+    "naturalLanguage": "Traditional hunting practices are a kind of hunting.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-03-animals",
+    "sumoTerm": "AnimalHusbandry",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalAnimalHusbandry AnimalHusbandry)",
+    "naturalLanguage": "Traditional animal husbandry practices are a kind of animal husbandry.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-04-woodcraft",
+    "sumoTerm": "WoodworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWoodcraft WoodworkingProcess)",
+    "naturalLanguage": "Traditional woodcraft — carving, splitting, bending — is a kind of woodworking process.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-04-woodcraft",
+    "sumoTerm": "Tool",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWoodworkingTool Tool)",
+    "naturalLanguage": "Traditional woodworking tools — drawknives, adzes, crooked knives — are a kind of tool.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-04-woodcraft",
+    "sumoTerm": "CuttingTool",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalCuttingTool CuttingTool)",
+    "naturalLanguage": "Traditional cutting tools used in woodcraft are a kind of cutting tool.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-food",
+    "sumoTerm": "FoodPreservation",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalFoodPreservation FoodPreservation)",
+    "naturalLanguage": "Traditional food preservation methods — canning, smoking, drying, fermenting — are a kind of food preservation.",
+    "ontologicalBridge": "bridge-02-food-preservation"
+  },
+  {
+    "heritageConceptId": "room-05-food",
+    "sumoTerm": "Cooking",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalCooking Cooking)",
+    "naturalLanguage": "Traditional cooking methods passed down through cultural practice are a kind of cooking.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-food",
+    "sumoTerm": "FermentingFood",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalFoodFermentation FermentingFood)",
+    "naturalLanguage": "Traditional food fermentation practices are a kind of fermenting food process.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-music",
+    "sumoTerm": "MusicalInstrument",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalInstrument MusicalInstrument)",
+    "naturalLanguage": "Traditional instruments — fiddles, drums, flutes, jaw harps — are a kind of musical instrument.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-music",
+    "sumoTerm": "Singing",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalSinging Singing)",
+    "naturalLanguage": "Traditional singing practices within cultural traditions are a kind of singing.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-06-music",
+    "sumoTerm": "MakingMusic",
+    "sumoFile": "Music.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalMusicMaking MakingMusic)",
+    "naturalLanguage": "Traditional music-making practices — drum dancing, fiddle playing, hand games — are a kind of making music.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-metalwork",
+    "sumoTerm": "MetalworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalMetalworking MetalworkingProcess)",
+    "naturalLanguage": "Traditional metalworking — blacksmithing, tinsmithing — is a kind of metalworking process.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-metalwork",
+    "sumoTerm": "Forging",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalForging Forging)",
+    "naturalLanguage": "Traditional forging of metal objects — hinges, nails, tools — is a kind of forging.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-metalwork",
+    "sumoTerm": "Metal",
+    "sumoFile": "engineering.kif",
+    "mappingType": "related",
+    "kifStatement": "(related TraditionalMetalworkMaterial Metal)",
+    "naturalLanguage": "Traditional metalwork uses metal as its primary material.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-pottery",
+    "sumoTerm": "PotteryMaking",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalPotteryMaking PotteryMaking)",
+    "naturalLanguage": "Traditional pottery making using hand-building or wheel techniques is a kind of pottery making.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-pottery",
+    "sumoTerm": "Clay",
+    "sumoFile": "MILO",
+    "mappingType": "related",
+    "kifStatement": "(related TraditionalPotteryMaterial Clay)",
+    "naturalLanguage": "Traditional pottery uses clay as its primary material.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-pottery",
+    "sumoTerm": "Kiln",
+    "sumoFile": "MILO",
+    "mappingType": "related",
+    "kifStatement": "(related TraditionalFiring Kiln)",
+    "naturalLanguage": "Traditional pottery firing uses a kiln or equivalent firing structure.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-09-plants",
+    "sumoTerm": "Plant",
+    "sumoFile": "Trees.kif",
+    "mappingType": "related",
+    "kifStatement": "(related HeritageEthnobotany Plant)",
+    "naturalLanguage": "Heritage plant knowledge concerns plants as the subject of traditional practice.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-09-plants",
+    "sumoTerm": "Foraging",
+    "sumoFile": "Trees.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalForaging Foraging)",
+    "naturalLanguage": "Traditional plant foraging practices are a kind of foraging.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-09-plants",
+    "sumoTerm": "Ethnobotany",
+    "sumoFile": "Trees.kif",
+    "mappingType": "equivalent",
+    "kifStatement": "(equivalent HeritageEthnobotany Ethnobotany)",
+    "naturalLanguage": "Heritage plant knowledge is equivalent to ethnobotany — the study of how cultures use plants.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-community",
+    "sumoTerm": "SocialInteraction",
+    "sumoFile": "People.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CulturalPractice SocialInteraction)",
+    "naturalLanguage": "Cultural practices are a kind of social interaction.",
+    "ontologicalBridge": "bridge-05-community-governance"
+  },
+  {
+    "heritageConceptId": "room-10-community",
+    "sumoTerm": "GovernmentOrganization",
+    "sumoFile": "People.kif",
+    "mappingType": "related",
+    "kifStatement": "(related IndigenousGovernance GovernmentOrganization)",
+    "naturalLanguage": "Indigenous governance systems are related to government organizations but not reducible to them.",
+    "ontologicalBridge": "bridge-05-community-governance"
+  },
+  {
+    "heritageConceptId": "room-10-community",
+    "sumoTerm": "Ceremony",
+    "sumoFile": "People.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageRitual Ceremony)",
+    "naturalLanguage": "Heritage ceremonies and rituals are a kind of ceremony.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-seasonal",
+    "sumoTerm": "SeasonalCycle",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SeasonalRound SeasonalCycle)",
+    "naturalLanguage": "A traditional seasonal round is a kind of seasonal cycle.",
+    "ontologicalBridge": "bridge-04-seasonal-round"
+  },
+  {
+    "heritageConceptId": "room-11-seasonal",
+    "sumoTerm": "Agriculture",
+    "sumoFile": "Weather.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalAgriculture Agriculture)",
+    "naturalLanguage": "Traditional seasonal agriculture practices are a kind of agriculture.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-11-seasonal",
+    "sumoTerm": "Weather",
+    "sumoFile": "Weather.kif",
+    "mappingType": "related",
+    "kifStatement": "(related SeasonalLiving Weather)",
+    "naturalLanguage": "Seasonal living practices are related to weather patterns that govern seasonal transitions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-history",
+    "sumoTerm": "NarrativeText",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageNarrative NarrativeText)",
+    "naturalLanguage": "Heritage oral histories and community narratives are a kind of narrative text.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-history",
+    "sumoTerm": "OralHistory",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageOralHistory OralHistory)",
+    "naturalLanguage": "Heritage oral histories are a kind of oral history.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-history",
+    "sumoTerm": "Recording",
+    "sumoFile": "MILO",
+    "mappingType": "related",
+    "kifStatement": "(related HeritageDocumentation Recording)",
+    "naturalLanguage": "Heritage documentation and archiving is related to recording.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-13-northern-watercraft",
+    "sumoTerm": "WaterVehicle",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWatercraft WaterVehicle)",
+    "naturalLanguage": "Traditional watercraft — birchbark canoes, qajaqs, umiaks — are a kind of water vehicle.",
+    "ontologicalBridge": "bridge-01-birchbark-canoe"
+  },
+  {
+    "heritageConceptId": "room-13-northern-watercraft",
+    "sumoTerm": "Canoe",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkCanoe Canoe)",
+    "naturalLanguage": "The birchbark canoe is a kind of canoe.",
+    "ontologicalBridge": "bridge-01-birchbark-canoe"
+  },
+  {
+    "heritageConceptId": "room-13-northern-watercraft",
+    "sumoTerm": "Kayak",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qajaq Kayak)",
+    "naturalLanguage": "The qajaq (Inuit kayak) is a kind of kayak.",
+    "ontologicalBridge": "bridge-01-birchbark-canoe"
+  },
+  {
+    "heritageConceptId": "room-14-arctic-living",
+    "sumoTerm": "Shelter",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Igloo Shelter)",
+    "naturalLanguage": "The igloo is a kind of shelter.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-arctic-living",
+    "sumoTerm": "Clothing",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CaribouClothing Clothing)",
+    "naturalLanguage": "Caribou-skin clothing — parkas, pants, kamik boots — is a kind of clothing.",
+    "ontologicalBridge": "bridge-03-clothing-cycle"
+  },
+  {
+    "heritageConceptId": "room-14-arctic-living",
+    "sumoTerm": "ArcticSurvival",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalArcticLiving ArcticSurvival)",
+    "naturalLanguage": "Traditional arctic living practices are a kind of arctic survival knowledge.",
+    "ontologicalBridge": null
+  }
+]
