@@ -11,8 +11,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { build } from '../../src/site/build';
-import { runAudit } from '../../src/site/audit';
+import { build } from '../../../src/integrations/site/build';
+import { runAudit } from '../../../src/integrations/site/audit';
 
 /* ---- Fixtures ---- */
 

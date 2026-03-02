@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { migrateAllContent } from '../../../src/site/wordpress/migrate';
-import type { MigrateAdapter } from '../../../src/site/wordpress/migrate';
-import type { WpPost } from '../../../src/site/wordpress/wp-sync';
+import { migrateAllContent } from '../../../../src/integrations/site/wordpress/migrate';
+import type { MigrateAdapter } from '../../../../src/integrations/site/wordpress/migrate';
+import type { WpPost } from '../../../../src/integrations/site/wordpress/wp-sync';
 
 /* ---- Fixtures ---- */
 

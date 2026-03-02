@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { decodeCp437, CP437_TO_UNICODE } from '../shared/cp437.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fixtureDir = join(__dirname, '../../../data/bbs/fixtures');
+const fixtureDir = join(__dirname, '../../../../data/bbs/fixtures');
 
 // ============================================================================
 // CP437 Lookup Table

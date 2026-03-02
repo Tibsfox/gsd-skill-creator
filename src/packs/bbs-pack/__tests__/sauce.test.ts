@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { extractSauce } from '../shared/sauce.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fixtureDir = join(__dirname, '../../../data/bbs/fixtures');
+const fixtureDir = join(__dirname, '../../../../data/bbs/fixtures');
 
 // ============================================================================
 // Edge Cases

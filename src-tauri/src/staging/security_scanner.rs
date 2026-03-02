@@ -582,7 +582,7 @@ mod tests {
         PathBuf::from(manifest_dir)
             .parent()
             .unwrap()
-            .join("tests")
+            .join("test")
             .join("fixtures")
             .join("security-patterns")
             .join(name)
