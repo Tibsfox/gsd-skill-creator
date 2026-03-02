@@ -1183,6 +1183,14 @@ async function main() {
       break;
     }
 
+    case 'web':
+    case 'we': {
+      const { webCommand } = await import('./cli/commands/web.js');
+      const exitCode = await webCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'event':
     case 'ev': {
       const { eventCommand } = await import('./cli/commands/event.js');
