@@ -1,0 +1,35 @@
+{
+  "framework": "OCAP",
+  "fullName": "Ownership, Control, Access, Possession",
+  "origin": "First Nations Information Governance Centre (FNIGC)",
+  "version": "Current (established 1998, updated ongoing)",
+  "summary": "OCAP® defines First Nations' rights to govern how information about their communities, cultures, and knowledge systems is collected, protected, used, and shared. It was developed by the First Nations Information Governance Centre and is a registered trademark. The principles apply to all data and information relating to First Nations peoples.",
+  "principles": [
+    {
+      "id": "OCAP-O",
+      "name": "Ownership",
+      "definition": "A community or group owns information collectively in the same way that an individual owns their personal information. No external researcher, institution, educational program, or commercial entity may assume ownership of First Nations knowledge, cultural content, or community data.",
+      "implementationGuidance": "All First Nations content in the Heritage Skills pack is explicitly attributed to the originating nation, not to the pack, its authors, or the GSD project. Content is presented as belonging to the community from which it originates. The pack is a window to community knowledge, not a repository that claims that knowledge. When content is drawn from published works, the nation source is credited alongside the publication author. Users are directed to purchase from community-connected sources, reinforcing that economic benefit flows to knowledge owners."
+    },
+    {
+      "id": "OCAP-C",
+      "name": "Control",
+      "definition": "First Nations have the right to control how information about their people and communities is collected, used, and disseminated. This includes control over research design, who can access information, how it is stored, and how it may be used.",
+      "implementationGuidance": "The Heritage Skills pack does not include content that a nation has not authorized for public educational use. Content classification (Levels 1-4) operationalizes control: Level 1 content is publicly shared by the community; Level 2 is shared with educational framing but directs learners to community sources; Level 3 acknowledges existence only and redirects; Level 4 is a hard block. The Cultural Sovereignty Warden enforces these controls algorithmically. Pack updates that add First Nations content require documentation of the community authorization or published-source pathway for that content."
+    },
+    {
+      "id": "OCAP-A",
+      "name": "Access",
+      "definition": "First Nations people must have access to information and data about their own communities and themselves, and they manage who else can access that information. Access is not just about the right to see — it includes the right to determine the terms under which others may access.",
+      "implementationGuidance": "The pack creates access pathways to community resources rather than attempting to fully replicate community knowledge within its own system. For each nation's content area, the Knowledge Keepers Directory provides links to the community's own educational resources, ensuring learners can access knowledge directly from source communities. Learners are encouraged to visit cultural centers, purchase from community publishers, and engage with community educational programs. The pack is a bridge to access, not a substitute for it."
+    },
+    {
+      "id": "OCAP-P",
+      "name": "Possession",
+      "definition": "While ownership describes the relationship of a people to their cultural knowledge, possession is about the practical mechanism for maintaining control. Possession refers to the physical custody and control of data. A community can own data they do not possess, but possession without ownership creates risk of misuse.",
+      "implementationGuidance": "The Heritage Skills pack does not store or maintain databases of First Nations cultural knowledge beyond the published reference data it cites. Raw field notes, interviews, unpublished community knowledge, or data provided in trust by community members are not incorporated into pack content. The pack maintains documented provenance for all First Nations content: source publication, date, author, and publication pathway. This audit trail ensures that if a community contests the inclusion of content, the pack has a transparent record to review."
+    }
+  ],
+  "legalNote": "OCAP® is a registered trademark of the First Nations Information Governance Centre (FNIGC). The OCAP® principles are the intellectual property of the FNIGC and the First Nations communities it represents. Use of the term OCAP® in this framework document is for educational and attribution purposes, acknowledging the FNIGC as the authoritative source of these principles. For the authoritative OCAP® documentation, visit fnigc.ca.",
+  "applicationToHeritageSkillsPack": "The Heritage Skills pack applies OCAP® as a design constraint, not merely a disclosure. Every architectural decision about how First Nations content is included, attributed, referenced, and sold-toward has been filtered through these four principles. Pack maintainers must re-apply this framework whenever new First Nations content is considered for inclusion."
+}
