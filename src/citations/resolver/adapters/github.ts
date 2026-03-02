@@ -1,9 +1,23 @@
+// SAFE namespace: Citations subsystem (src/citations/)
+// Citations uses SAFE-01 through SAFE-06 for citation pipeline safety.
+// IMPORTANT: src/interpreter/, src/engines/, src/dacp/, src/catalog/ use
+// an independent SAFE-01 through SAFE-06 numbering for DACP safety.
+// These are SEPARATE namespaces with NO shared semantics.
+// See src/interpreter/context-builder.ts for the DACP namespace disambiguation.
+
 /**
  * GitHub resolver adapter.
  *
  * Resolves citations for GitHub repositories using the GitHub REST API.
  * Supports URL-based repo lookup, CITATION.cff parsing, and repository
  * search. SAFE-01 compliant: fetches metadata only, never repository contents.
+ *
+ * SAFE-01 (CIT): Metadata-only fetch
+ * Attack scenario: A citation resolver fetches full repository file trees or
+ * raw source code instead of just metadata. This exposes private repository
+ * contents and creates a data exfiltration vector through the citation pipeline.
+ * Consequence of absence: Full repository content could be embedded in
+ * citation records, leaking confidential code or data to citation consumers.
  *
  * API docs: https://docs.github.com/en/rest
  */

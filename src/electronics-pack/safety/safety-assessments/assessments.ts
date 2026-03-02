@@ -4,6 +4,13 @@
  * Per-module assessment definitions and completion tracking.
  * Gate modules require 70% passing score, Redirect modules require 80%.
  * All questions use positive framing aligned with the Safety Warden.
+ *
+ * SAFE-07 (EP): Safety assessment gate
+ * Attack scenario: A user accesses hazardous-voltage (Redirect-mode) module
+ * content without demonstrating safety knowledge. They proceed with
+ * high-voltage work without knowing critical safety practices.
+ * Consequence of absence: Redirect-mode module content accessible without
+ * safety verification, defeating the purpose of the Redirect safety level.
  */
 
 import type { SafetyAssessment } from '../warden.js';
