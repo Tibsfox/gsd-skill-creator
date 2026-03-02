@@ -1,0 +1,39 @@
+{
+  "id": "first-design",
+  "title": "Your First Engineering Design: Build It, Break It, Improve It",
+  "description": "Complete a mini engineering design challenge using household materials. This session practices the design process, structural thinking, and iterative improvement.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Design challenge: build the tallest freestanding tower you can from 10 index cards (or equivalent paper) and tape. Read about the engineering design process: what are the phases and why is defining requirements the first step?",
+      "expectedOutcome": "You can state the design requirements (tallest freestanding tower from given materials) and identify constraints (material limits) and resources (tape, cards)",
+      "hint": "A requirement is something the design MUST do; a constraint is something it CANNOT violate; resources are what you have available",
+      "conceptsExplored": ["engr-engineering-design-process", "engr-requirements-specifications"]
+    },
+    {
+      "instruction": "Before building, sketch 3 different tower designs. Consider: triangular base vs square base? Solid walls vs open frame? Read about structural loads and structural forms: why is the triangle the strongest shape?",
+      "expectedOutcome": "You can explain that triangles are rigid (cannot deform without changing side lengths) while squares can collapse, making triangular structures stronger",
+      "hint": "A triangular frame distributes load through tension and compression in members; a square frame can shear (collapse to a parallelogram)",
+      "conceptsExplored": ["engr-structural-forms", "engr-structural-loads"]
+    },
+    {
+      "instruction": "Build your first design. Test it: does it stand? How tall is it? Apply a gentle horizontal force. Read about failure modes: how did it fail (buckling, toppling, hinge formation)?",
+      "expectedOutcome": "You can identify and name the failure mode (e.g., buckling of thin walls, toppling due to narrow base) and explain why it occurred structurally",
+      "hint": "Tall thin structures buckle; narrow-base structures topple; weak joints hinge — each failure reveals a design improvement",
+      "conceptsExplored": ["engr-failure-modes"]
+    },
+    {
+      "instruction": "Rebuild with one improvement based on your failure analysis. Read about rapid prototyping: why is it better to build-test-improve quickly rather than planning the perfect design upfront?",
+      "expectedOutcome": "Your improved tower is taller or more stable, and you can articulate the specific change made and why it should address the observed failure mode",
+      "hint": "Rapid iteration reveals failures you couldn't predict — physical prototypes contain information that sketches miss",
+      "conceptsExplored": ["engr-rapid-prototyping"]
+    },
+    {
+      "instruction": "Measure your final tower height and compare to classmates or your initial goal. Read about tradeoff analysis: what tradeoffs did you make between height, stability, and material usage?",
+      "expectedOutcome": "You can identify at least one design tradeoff (e.g., adding a wide base improves stability but uses material that could add height) and justify your final design choices",
+      "hint": "Every design decision involves tradeoffs — there is no free improvement. Width vs height, material per joint vs structural connections all trade off",
+      "conceptsExplored": ["engr-tradeoff-analysis"]
+    }
+  ]
+}

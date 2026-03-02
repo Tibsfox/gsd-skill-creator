@@ -1,0 +1,39 @@
+{
+  "id": "first-puzzle",
+  "title": "Your First Problem-Solving Session: From Stuck to Solved",
+  "description": "Work through a real problem using structured problem-solving strategies. This session practices defining problems, applying strategies, and evaluating solutions.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Think of a problem you are currently stuck on — personal, academic, or practical. Write it down in one sentence. Read about problem definition: is your sentence describing the symptom or the actual problem?",
+      "expectedOutcome": "You can restate the problem more precisely, distinguishing the root cause from the surface symptom using at least one 'Why?' question",
+      "hint": "Ask 'Why is this a problem?' and 'Why does that happen?' iteratively — each answer gets closer to the real issue",
+      "conceptsExplored": ["prob-problem-definition"]
+    },
+    {
+      "instruction": "List the constraints (what you cannot change) and resources (what you have available) for your problem. Read about constraints and resources: how do constraints actually help rather than just limit you?",
+      "expectedOutcome": "You can list at least 3 constraints and 3 resources, and explain why knowing constraints focuses solution generation rather than just limiting it",
+      "hint": "Constraints like 'no budget' force creative solutions; knowing you have 'one hour' tells you what scale of solution is feasible",
+      "conceptsExplored": ["prob-constraints-resources"]
+    },
+    {
+      "instruction": "Decompose the problem into smaller sub-problems. Read about decomposition: how many pieces can you break this into? Can you solve each piece separately?",
+      "expectedOutcome": "You have broken the problem into at least 2-3 sub-problems that feel more manageable than the whole",
+      "hint": "A complex problem is a set of simpler problems — solving them individually and recombining the solutions is often easier than tackling the whole at once",
+      "conceptsExplored": ["prob-decomposition"]
+    },
+    {
+      "instruction": "Set a timer for 5 minutes and brainstorm as many possible solutions as you can — no judging, just generating. Read about brainstorming: what happens to quality when you focus on quantity first?",
+      "expectedOutcome": "You have generated at least 6-8 candidate solutions and noticed that later ideas (after the obvious ones are exhausted) are often more creative",
+      "hint": "Suspend judgment during ideation — even absurd ideas can spark practical ones. Evaluate only after you stop generating",
+      "conceptsExplored": ["prob-brainstorming"]
+    },
+    {
+      "instruction": "Review your solutions and select the most promising one. Try it (or plan to). Evaluate the result. Read about evaluation and iteration: if the solution fails, what do you do next?",
+      "expectedOutcome": "You have selected and evaluated a solution, and can articulate what you learned from the outcome (whether it worked or not) and what you would try next",
+      "hint": "A failed attempt is information — it rules out one approach and reveals constraints you didn't know about",
+      "conceptsExplored": ["prob-evaluation-iteration", "prob-trial-error"]
+    }
+  ]
+}

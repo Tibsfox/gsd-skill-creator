@@ -1,0 +1,39 @@
+{
+  "id": "first-reaction",
+  "title": "Your First Chemical Reaction: Kitchen Chemistry",
+  "description": "Observe real chemical reactions using household materials. This session spans matter properties, chemical reactions, and acids/bases.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Examine a glass of water, a handful of salt, and a cracker. Read about states of matter and physical vs chemical properties: which properties can you observe without changing the substance?",
+      "expectedOutcome": "You can list physical properties (color, state, density) and chemical properties (flammability, reactivity) and understand the difference",
+      "hint": "Physical properties can be observed without changing what the substance IS; chemical properties describe what reactions it undergoes",
+      "conceptsExplored": ["chem-physical-chemical-properties", "chem-states-of-matter"]
+    },
+    {
+      "instruction": "Add a teaspoon of baking soda to a cup. Add a tablespoon of vinegar. Observe carefully for 30 seconds. Read about chemical reactions: what evidence of a chemical change do you observe?",
+      "expectedOutcome": "You observe bubbling (CO2 gas produced), temperature change, and a new substance — identifying these as signs of a chemical reaction, not just a physical change",
+      "hint": "Signs of chemical change: gas produced, color change, heat given off or absorbed, new smell, precipitate forms",
+      "conceptsExplored": ["chem-reaction-types"]
+    },
+    {
+      "instruction": "The baking soda is a base; vinegar is an acid. Read about acids and bases: what is the pH scale and where do these substances fall on it?",
+      "expectedOutcome": "You understand that acids have pH < 7, bases have pH > 7, and neutral is 7. Vinegar is ~pH 3 (acidic), baking soda solution is ~pH 8-9 (basic)",
+      "hint": "Lemon juice, vinegar, and stomach acid are acids. Baking soda, bleach, and soap are bases. Water is neutral at pH 7",
+      "conceptsExplored": ["chem-acids-bases"]
+    },
+    {
+      "instruction": "Let the reaction mixture sit and observe what remains. Write a word equation: baking soda + vinegar → carbon dioxide + water + sodium acetate. Read about balancing equations: why must atoms be conserved?",
+      "expectedOutcome": "You understand that atoms are rearranged (not created or destroyed) in chemical reactions, and that balanced equations show conservation of mass",
+      "hint": "Count atoms on each side — they must match. Matter cannot be created or destroyed, only rearranged",
+      "conceptsExplored": ["chem-balancing-equations"]
+    },
+    {
+      "instruction": "Touch the mixture: is it warmer or cooler than room temperature? Read about thermochemistry: what is an exothermic vs endothermic reaction?",
+      "expectedOutcome": "You can identify this reaction as slightly endothermic (absorbs heat, making it cooler) and understand the difference between exothermic and endothermic processes",
+      "hint": "Exothermic reactions release heat (feel warm — like burning); endothermic reactions absorb heat (feel cool — like ice packs)",
+      "conceptsExplored": ["chem-thermochemistry"]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "first-study-session",
+  "title": "Your First Study Session: Applying Evidence-Based Learning to Real Content",
+  "description": "Design and execute a study session using retrieval practice and spaced repetition principles. You will also audit your current study habits against the research evidence.",
+  "estimatedMinutes": 20,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read about memory science and retrieval practice. Then assess your current study habits honestly: Do you mostly re-read notes or highlight text? Or do you test yourself without looking at the material? Most students use ineffective strategies without knowing it.",
+      "expectedOutcome": "You have an honest assessment of your current study habits and understand which are supported by research",
+      "hint": "Common but ineffective strategies: re-reading, highlighting, summarizing without retrieving, cramming the night before. Effective but harder-feeling: retrieval practice, spaced repetition, interleaving",
+      "conceptsExplored": ["learn-memory-science", "learn-retrieval-practice"]
+    },
+    {
+      "instruction": "Choose any topic you are currently learning (or have learned recently). Read your notes once, then close them. Write everything you can remember on a blank page -- do not peek. This is retrieval practice. Read about spaced repetition while you check what you missed.",
+      "expectedOutcome": "You have experienced retrieval practice firsthand and noticed what you actually remembered vs. what felt familiar but wasn't retained",
+      "hint": "The uncomfortable gaps you found ARE the learning -- now you know exactly what to study next",
+      "conceptsExplored": ["learn-retrieval-practice", "learn-spaced-repetition"]
+    },
+    {
+      "instruction": "Read about metacognition and the illusion of knowing. Now review your retrieval attempt: rate each item 1-3 (1 = I knew this well, 2 = partially, 3 = I thought I knew but didn't). This is metacognitive calibration -- how accurate were your predictions about what you knew?",
+      "expectedOutcome": "You can identify gaps between what you felt you knew and what you actually retrieved, developing metacognitive calibration",
+      "hint": "If you rated items as '1 -- I knew this well' but couldn't retrieve them, you are experiencing the illusion of knowing from familiarity",
+      "conceptsExplored": ["learn-metacognition"]
+    },
+    {
+      "instruction": "Read about growth mindset. Reframe the items you couldn't retrieve: instead of 'I failed at this,' say 'This is what I need to practice next.' Design a spaced repetition schedule for the 3 hardest items: review today, tomorrow, in 4 days, in 9 days.",
+      "expectedOutcome": "You have converted a retrieval gap into a study plan using spaced repetition timing",
+      "hint": "The exact timing matters less than the principle: increasing intervals with each successful recall",
+      "conceptsExplored": ["learn-growth-mindset", "learn-spaced-repetition"]
+    },
+    {
+      "instruction": "Read about study environment design. Audit your current study space: Are your phone notifications off? Is the environment temperature and light optimal? What is the biggest source of distraction? Design one specific environmental change to implement for your next study session.",
+      "expectedOutcome": "You have identified your primary environmental distraction and committed to one concrete change",
+      "conceptsExplored": ["learn-study-environment"]
+    }
+  ]
+}

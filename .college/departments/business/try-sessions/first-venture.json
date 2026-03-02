@@ -1,0 +1,39 @@
+{
+  "id": "first-venture",
+  "title": "Your First Business Venture: From Idea to Plan",
+  "description": "Design a simple business concept and analyze it through key frameworks. This session spans economics, business structures, marketing, and ethics.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Choose a simple business idea (lemonade stand, lawn service, tutoring, online service). Who is your customer and what problem does your business solve for them? Read about supply and demand: how do you know if demand exists for your idea?",
+      "expectedOutcome": "You can describe your target customer, their unmet need, and explain how you would test whether demand exists before investing",
+      "hint": "Ask potential customers before building — test the assumption of demand with a simple conversation or survey",
+      "conceptsExplored": ["bus-supply-demand"]
+    },
+    {
+      "instruction": "Set a price for your product or service. Read about market structures: are you in a competitive market (where you must match prices) or do you have room to charge a premium? Justify your price.",
+      "expectedOutcome": "You can position your business in a market structure and explain how competition constrains or enables your pricing",
+      "hint": "A commodity business (like mowing lawns) is price-takers; a differentiated service (tutoring with specific expertise) has pricing power",
+      "conceptsExplored": ["bus-market-structures"]
+    },
+    {
+      "instruction": "Decide on a legal structure: sole proprietorship, LLC, or partnership. Read about business structures: what are the liability and tax implications of each choice?",
+      "expectedOutcome": "You can explain why a solo simple business would likely be a sole proprietorship, and why liability protection becomes important as stakes grow",
+      "hint": "Sole proprietorship: simplest, no protection. LLC: separates personal and business liability. Partnership: shared ownership, requires agreement",
+      "conceptsExplored": ["bus-sole-proprietorship", "bus-corporations-llcs"]
+    },
+    {
+      "instruction": "Apply the 4 Ps to your business: Product (what exactly are you offering?), Price (what will you charge?), Place (how will customers find you?), Promotion (how will you let them know?). Read about marketing fundamentals.",
+      "expectedOutcome": "You have completed a 4 Ps analysis and can explain how each element supports the others coherently",
+      "hint": "All 4 Ps must be consistent — a premium product at a premium price needs premium promotion and distribution",
+      "conceptsExplored": ["bus-marketing-fundamentals"]
+    },
+    {
+      "instruction": "Identify one potential ethical dilemma your business could face (a misleading claim, unfair pricing, environmental impact). Read about business ethics: how would the stakeholder framework and shareholder framework differ in resolving it?",
+      "expectedOutcome": "You can describe an ethical dilemma and contrast how shareholder-first thinking and stakeholder thinking would each approach the resolution",
+      "hint": "Shareholder theory prioritizes profit; stakeholder theory balances customers, employees, community, and environment — they often agree but sometimes diverge",
+      "conceptsExplored": ["bus-business-ethics"]
+    }
+  ]
+}

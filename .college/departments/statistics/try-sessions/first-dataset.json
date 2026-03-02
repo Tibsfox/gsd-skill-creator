@@ -1,0 +1,39 @@
+{
+  "id": "first-dataset",
+  "title": "Your First Dataset: From Numbers to Decisions",
+  "description": "Collect a small dataset, analyze it, and make a decision based on evidence. This session spans accounting basics, descriptive statistics, and financial literacy.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Record your last 5-10 purchases or estimate your weekly spending in 5 categories (food, transport, entertainment, clothing, other). Read about budgeting: does your spending pattern match your actual priorities?",
+      "expectedOutcome": "You have a simple personal spending dataset and can identify which categories consume the most and least of your budget",
+      "hint": "Most people are surprised to find their actual spending doesn't match their stated priorities — the data reveals the gap",
+      "conceptsExplored": ["stat-budgeting"]
+    },
+    {
+      "instruction": "Calculate the mean (average) and range of your spending amounts. Read about descriptive statistics: what do mean and range tell you that a list of numbers does not?",
+      "expectedOutcome": "You can calculate mean and range and explain that mean shows the center of the data while range shows the spread",
+      "hint": "If your mean daily spend is $15 but range is $0-$60, that tells you spending is highly variable, not consistent",
+      "conceptsExplored": ["stat-descriptive-stats"]
+    },
+    {
+      "instruction": "If you invest $100 today at 5% annual interest, how much will you have in 10 years? Use the compound interest formula: FV = PV × (1 + r)^n. Read about compound interest: why does time matter so much?",
+      "expectedOutcome": "You can calculate compound growth and understand that even small amounts grow significantly over long periods",
+      "hint": "FV = 100 × (1.05)^10 = $162.89. After 20 years it would be $265.33 — time doubles the gain",
+      "conceptsExplored": ["stat-compound-interest"]
+    },
+    {
+      "instruction": "Imagine you must decide between two options with uncertain outcomes. Assign probabilities: Option A has 70% chance of earning $50, 30% chance of $0. Read about basic probability and expected value: which option is mathematically better?",
+      "expectedOutcome": "You can calculate expected value: E(A) = 0.7 × $50 + 0.3 × $0 = $35, and understand this as the average outcome over many repetitions",
+      "hint": "Expected value = sum of (each outcome × its probability). The option with higher EV is better on average",
+      "conceptsExplored": ["stat-basic-probability", "stat-expected-value-risk"]
+    },
+    {
+      "instruction": "Look at a simple income statement structure: Revenue − Expenses = Net Income. If your revenue is $1000 and expenses are $750, calculate net income. Read about the income statement: why is net income not the same as cash?",
+      "expectedOutcome": "You can calculate net income and understand that non-cash items (depreciation, timing differences) mean profit and cash are different concepts",
+      "hint": "A business can be profitable on paper while running out of cash — timing of payments and receipts creates this gap",
+      "conceptsExplored": ["stat-income-statement"]
+    }
+  ]
+}

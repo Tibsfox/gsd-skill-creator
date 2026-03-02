@@ -37,3 +37,6 @@ export type {
   TryStep,
   TrySessionState,
 } from './try-session-runner.js';
+
+// Dynamic Mapping Layer types
+export type { VirtualDepartment, MappingFile, EducationalTrack, TrackFile } from './types.js';
