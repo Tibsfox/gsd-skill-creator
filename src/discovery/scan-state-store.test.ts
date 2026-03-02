@@ -169,7 +169,7 @@ describe('ScanStateStore', () => {
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
     // Save empty state first
-    await store.save({ version: 1, sessions: {}, excludeProjects: [] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: [] });
     await store.addExclude('project-a');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toContain('project-a');
@@ -180,7 +180,7 @@ describe('ScanStateStore', () => {
     createTmpDir();
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
-    await store.save({ version: 1, sessions: {}, excludeProjects: ['project-a'] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: ['project-a'] });
     await store.addExclude('project-a');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toEqual(['project-a']);
@@ -193,6 +193,7 @@ describe('ScanStateStore', () => {
     const store = new ScanStateStore(statePath);
     await store.save({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: ['project-a', 'project-b'],
     });
@@ -206,7 +207,7 @@ describe('ScanStateStore', () => {
     createTmpDir();
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
-    await store.save({ version: 1, sessions: {}, excludeProjects: ['project-a'] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: ['project-a'] });
     await store.removeExclude('project-x');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toEqual(['project-a']);
@@ -224,6 +225,7 @@ describe('ScanStateStore', () => {
     // Save again with only 1 session
     const singleSession = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'project-c:sess-003': {
           fileMtime: 1706200000000,
@@ -249,6 +251,7 @@ describe('ScanStateStore', () => {
 
     const state1 = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'proj:sess-1': {
           fileMtime: 1000,
@@ -261,6 +264,7 @@ describe('ScanStateStore', () => {
 
     const state2 = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'proj:sess-2': {
           fileMtime: 2000,

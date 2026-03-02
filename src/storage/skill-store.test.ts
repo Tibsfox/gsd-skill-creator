@@ -340,6 +340,8 @@ describe('SkillStore budget enforcement', () => {
                 charCount: 20000,
                 budgetLimit: 15000,
                 overriddenAt: new Date().toISOString(),
+                usagePercent: (20000 / 15000) * 100,
+                overrideDate: new Date().toISOString(),
               },
             },
           },

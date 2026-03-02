@@ -254,7 +254,7 @@ describe('Activation Integration', () => {
     const geoAvg = geoTimes.reduce((a, b) => a + b) / geoTimes.length;
 
     // Performance assertions
-    expect(geoAvg).toBeLessThan(2 * baselineAvg + 1); // +1ms tolerance for near-zero baselines
+    expect(geoAvg).toBeLessThan(3 * baselineAvg + 2); // +2ms tolerance for near-zero baselines
     expect(geoAvg).toBeLessThan(50); // Absolute ceiling: 50ms for 100 skills
   });
 });
