@@ -1,0 +1,132 @@
+{
+  "id": "seasonal-arctic",
+  "name": "Arctic Seasonal Round",
+  "description": "The seasonal cycle of the Inuit — shaped by sea ice, Arctic light, and the rhythms of marine and terrestrial mammals. In the Arctic, the distinction between 'seasons' is not four but many: the Inuit recognize detailed transitional periods tied to ice conditions, animal behavior, and the sun's position above or below the horizon.",
+  "traditions": ["inuit"],
+  "applicableNations": ["inuit"],
+  "applicableRegions": ["Inuvialuit", "Nunavut", "Nunavik", "Nunatsiavut"],
+  "seasons": [
+    {
+      "name": "Siku (Sea Ice) Season / Dark Period",
+      "westernMonths": ["November", "December", "January"],
+      "ecologicalMarkers": [
+        "Sea ice forms and thickens — becomes safe for travel at 10-15 cm (walking), 30+ cm (snowmobile/qamutiik)",
+        "Polar night — in the high Arctic, the sun does not rise above the horizon",
+        "Ringed seals (natsiq) maintain breathing holes (aglu) through the ice",
+        "Arctic fox (tiriganiaq) active and trappable"
+      ],
+      "activities": [
+        "Aglu hunting — lying in wait at seal breathing holes using a rod to detect the seal",
+        "Qallunaat (snow house / iglu) construction at hunting camps",
+        "Qulliq (seal-oil lamp) construction and maintenance — the lamp is the source of heat and light in the iglu",
+        "Dog team (qimmit) travel on sea ice",
+        "Arctic fox trapping",
+        "Qamutiik (sled) construction and repair"
+      ],
+      "heritageSkillRooms": [1, 3, 14],
+      "culturalContext": "The dark period is paradoxically a season of intense activity for seal hunters. Moving to sea ice camps, constructing igluit (plural of iglu), and hunting seals at their breathing holes in darkness and extreme cold required mastery of all Arctic survival skills. The qulliq was not just a lamp — it was the technology that made habitation of the Arctic possible."
+    },
+    {
+      "name": "Ukiuq (Deep Winter) / Solstice Period",
+      "westernMonths": ["January", "February"],
+      "ecologicalMarkers": [
+        "Coldest temperatures of the year",
+        "Sea ice at maximum thickness and extent",
+        "Polar bear (nanuq) dens on land — females with cubs",
+        "Sun begins to return above the horizon in late January"
+      ],
+      "activities": [
+        "Continued seal hunting at aglu (breathing holes)",
+        "Polar bear hunting using dog teams (traditional method now largely ceremonial)",
+        "Kamik (sealskin boot) construction and repair — wet boots in Arctic conditions are life-threatening",
+        "Sinew sewing — watertight seams for outer garments",
+        "Amauti (women's parka) construction and repair",
+        "Storytelling and throat singing (katajjaq) in the iglu during long nights",
+        "Building snow windbreaks and improving iglu insulation"
+      ],
+      "heritageSkillRooms": [2, 3, 6, 14],
+      "culturalContext": "Deep winter is the season of the iglu, the qulliq, and the community gathered around the lamp. Throat singing (katajjaq) was traditionally a women's practice, performed in pairs, as entertainment during long winter confinement. It is Level 1-2 — publicly demonstrated and shared, but cultural context is required."
+    },
+    {
+      "name": "Upirngaksaaq (Early Spring) / Return of the Sun",
+      "westernMonths": ["March", "April"],
+      "ecologicalMarkers": [
+        "Sun returns above the horizon — 24-hour darkness ends",
+        "Sea ice still thick and solid — best travel conditions",
+        "Ringed seals begin hauling out to bask on ice",
+        "Bearded seals (ugjuk) appear at ice edges"
+      ],
+      "activities": [
+        "Maupok hunting — still-hunting basking seals on sea ice (requires extreme patience and camouflage movement)",
+        "Qajaq launching after winter storage — sealskin skin must be rehydrated and checked",
+        "Longer qamutiik (sled) trips made possible by good light and firm ice",
+        "Walrus (aiviq) hunting at floe edges",
+        "Harp seal hunting during migration (Nunatsiavut, Nunavik)",
+        "Harvesting marine plants and invertebrates exposed at low tide"
+      ],
+      "heritageSkillRooms": [3, 13, 14],
+      "culturalContext": "Spring brings the return of light and the season's best sea-ice travel conditions before break-up. This is the peak season for qajaq use and open-water hunting. The qajaq is perhaps the pinnacle achievement of Arctic material culture — a individually-fitted craft that is an extension of the hunter's body."
+    },
+    {
+      "name": "Upirngaaq (Spring) / Break-Up",
+      "westernMonths": ["May", "June"],
+      "ecologicalMarkers": [
+        "Sea ice begins to deteriorate and break up",
+        "Arctic char begin upstream migration",
+        "Eider ducks, Arctic terns, and snow geese arrive",
+        "Muskox calves born on the tundra"
+      ],
+      "activities": [
+        "Sea mammal hunting from qajaq and umiak at floe edges before break-up makes ice travel dangerous",
+        "Beluga whale (qilalugaq) hunting — community drive hunts using umiaq",
+        "Waterfowl hunting — eider duck and geese",
+        "Char fishing at river mouths as fish begin migration",
+        "Gathering of edible coastal plants — sea purslane, Labrador tea",
+        "Muktuk (beluga skin and blubber) preparation and preservation"
+      ],
+      "heritageSkillRooms": [3, 5, 13, 14],
+      "culturalContext": "The beluga whale drive hunt is one of the most community-intensive heritage skills in Inuit culture, requiring the coordination of multiple umiaq and families working together — a direct expression of Piliriqatigiinniq (IQ-06: working together for a common purpose). Muktuk is both a food and a critical source of Vitamin C in the traditional Arctic diet."
+    },
+    {
+      "name": "Aujaq (Summer) / Open Water",
+      "westernMonths": ["July", "August"],
+      "ecologicalMarkers": [
+        "Open water — sea ice absent",
+        "Midnight sun in the high Arctic",
+        "Caribou accessible on tundra",
+        "Arctic char at peak activity"
+      ],
+      "activities": [
+        "Caribou hunting on the tundra — driving herds into water for qajaq-based hunting",
+        "Caribou hide preparation — critical timing as summer hides are thinner and best for clothing",
+        "Arctic char fishing at weirs (stone fish traps built across river shallows)",
+        "Narwhal hunting — Nunavut, Nunavik",
+        "Gathering crowberries, cloudberries, and sea vegetables",
+        "Umiak travel along coastlines — summer travel mode",
+        "Drying meat and fish on racks (pipsi — caribou jerky)"
+      ],
+      "heritageSkillRooms": [2, 3, 5, 13],
+      "culturalContext": "Summer caribou hunting provided a second major source of food and the most important source of clothing material. Caribou hides taken in July and August have short hair and are ideal for inner garments. Hides taken in fall have longer hair for outer garments. This seasonal precision in material gathering reflects deep ecological knowledge."
+    },
+    {
+      "name": "Ukiaksaaq (Early Winter Freeze-Up)",
+      "westernMonths": ["September", "October"],
+      "ecologicalMarkers": [
+        "Temperatures dropping below freezing consistently",
+        "Sea and lakes beginning to freeze",
+        "Caribou herds moving toward winter range",
+        "First snows arrive"
+      ],
+      "activities": [
+        "Final caribou hunting of the season",
+        "Food cache preparation — storing preserved meat and fish under rocks for winter",
+        "Iglu construction training and practice as conditions allow",
+        "Dog team preparation — checking harnesses, repairing qamutiik",
+        "Moving from summer tent camps to more substantial winter shelters",
+        "Gathering materials for winter craft work — sinew, skins, antler, bone"
+      ],
+      "heritageSkillRooms": [1, 3, 4, 11],
+      "culturalContext": "Freeze-up is the transition period between open water and solid-ice seasons. It can be the most dangerous time of year for travel — ice is forming but not yet safe. The knowledge of when ice is thick enough for travel was literally life-or-death knowledge, passed from experienced hunters to younger generations through direct mentorship (Pilimmaksarniq)."
+    }
+  ]
+}

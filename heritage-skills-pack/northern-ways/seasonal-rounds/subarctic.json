@@ -1,0 +1,129 @@
+{
+  "id": "seasonal-subarctic",
+  "name": "Subarctic Seasonal Round",
+  "description": "The seasonal cycle of the boreal forest and subarctic transition zone — the world of the Cree, Innu, Attikamek, and Dene. Defined by caribou migration, freeze-up and break-up, and the demands of survival in a land of long winters and brief, intense summers.",
+  "traditions": ["first-nations"],
+  "applicableNations": ["cree", "innu", "attikamek", "dene"],
+  "seasons": [
+    {
+      "name": "Goose Break / Spring Hunt",
+      "westernMonths": ["April", "May"],
+      "ecologicalMarkers": [
+        "Canada geese and snow geese fly north in massive flocks",
+        "River and lake ice begins to break up ('les glaces')",
+        "Ptarmigan change from winter white to mottled brown",
+        "Caribou begin moving north to calving grounds"
+      ],
+      "activities": [
+        "Goose hunting — a major spring harvest for Cree communities (Eeyou/Eeyouch)",
+        "Goose camp setup — families move to traditional goose-hunting grounds",
+        "Goose plucking, smoking, and preserving",
+        "Watching for caribou movement northward",
+        "Repairing and launching birchbark canoes after winter storage",
+        "Setting beaver traps as beaver become active at break-up"
+      ],
+      "heritageSkillRooms": [3, 5, 13],
+      "culturalContext": "Spring goose break is one of the most important cultural events in Eeyou (Cree of northern Quebec) life. Families leave permanent communities to travel to traditional goose-hunting territories, maintaining multi-generational connections to specific hunting grounds. This is a Level 1 heritage skill area — goose camp practices are publicly shared by Eeyou communities."
+    },
+    {
+      "name": "Open Water / Fishing Season",
+      "westernMonths": ["June", "July"],
+      "ecologicalMarkers": [
+        "Lakes and rivers fully open",
+        "Black flies at peak (insects define subarctic summer)",
+        "Caribou calves born on the tundra/barren grounds transition",
+        "Brook trout and pike active near surface"
+      ],
+      "activities": [
+        "Intensive fishing — whitefish, Arctic char, lake trout, pike, walleye depending on region",
+        "Fish smoking and drying for winter storage — large quantities processed",
+        "Birchbark harvesting for canoe repair and container construction",
+        "Gathering berries as they ripen — cloudberries (bakeapple), blueberries, Labrador tea",
+        "Moose hunting and hide preparation begins",
+        "Canoe travel along river systems — summer travel mode"
+      ],
+      "heritageSkillRooms": [5, 9, 13],
+      "culturalContext": "Summer is the most active season for travel, fishing, and food production. The window is short — even in July, frost can occur at night in the deep subarctic. Fish smoking and drying during this period provided a critical portion of the winter food supply."
+    },
+    {
+      "name": "Berry Moon / Caribou Season",
+      "westernMonths": ["August", "September"],
+      "ecologicalMarkers": [
+        "Caribou begin moving south from barren grounds (Chipewyan, Innu)",
+        "Wild berries — Labrador tea, cloudberries, crowberries — reach peak",
+        "First frost arrives",
+        "Lakes and rivers begin to cool — fishing shifts to deep water"
+      ],
+      "activities": [
+        "Caribou hunting as herds move through",
+        "Caribou hide preparation — scraping, stretching, brain-tanning",
+        "Pemmican preparation — mixing dried lean caribou meat, rendered fat, dried berries",
+        "Berry picking and preservation — dried, used in pemmican",
+        "Collecting spruce gum for canoe repair while still traveling",
+        "Setting up fall camps at traditional locations"
+      ],
+      "heritageSkillRooms": [2, 3, 5, 9],
+      "culturalContext": "The fall caribou hunt was the single most important food-getting event of the year for many subarctic peoples. A successful hunt could provide the majority of a family's winter protein and fat, plus hide for clothing and shelter. Pemmican making — combining dried meat, rendered fat, and berries — was a critical preservation technique."
+    },
+    {
+      "name": "Freeze-Up / Trapping Season",
+      "westernMonths": ["October", "November"],
+      "ecologicalMarkers": [
+        "Ponds and small lakes freeze first",
+        "River systems freeze progressively from edges",
+        "Snow arrives and deepens",
+        "Moose enter rut and are more visible"
+      ],
+      "activities": [
+        "Setting trap lines for beaver, muskrat, marten, mink, otter, lynx",
+        "Moose hunting — fall rut makes bulls vulnerable to calling",
+        "Moose hide preparation",
+        "Snowshoe construction and repair — essential for all winter movement",
+        "Building and preparing winter shelter — canvas or hide tent with stove for trappers",
+        "Toboggan construction and preparation for winter hauling"
+      ],
+      "heritageSkillRooms": [1, 2, 3, 4],
+      "culturalContext": "Freeze-up marks the transition from water travel to land and snow travel. The ability to read ice safety and navigate by snowshoe became survival skills. Trap line management required extensive knowledge of animal behavior and the subarctic ecosystem."
+    },
+    {
+      "name": "Deep Winter",
+      "westernMonths": ["December", "January", "February"],
+      "ecologicalMarkers": [
+        "Temperatures can reach -40°C/-40°F or colder",
+        "Snow depth at maximum — 1-2 meters in boreal forest",
+        "Ptarmigan congregate in spruce groves",
+        "Moose yard up in dense spruce cover"
+      ],
+      "activities": [
+        "Running and checking trap lines by snowshoe and toboggan",
+        "Ice fishing on frozen lakes — jigging for whitefish and lake trout",
+        "Ptarmigan snaring",
+        "Hide tanning and sewing in camp",
+        "Moccasin and snowshoe webbing repair",
+        "Storytelling and teaching — winter camp evenings",
+        "Firewood management — keeping the fire is survival"
+      ],
+      "heritageSkillRooms": [1, 2, 4, 5, 12],
+      "culturalContext": "Deep winter in the subarctic is the most demanding season. Skill in the cold — reading weather, managing fire, maintaining equipment, navigating in whiteout conditions — was the difference between survival and death. Heritage skills in this context are not leisurely hobbies; they are the technology of survival."
+    },
+    {
+      "name": "Late Winter / Hunger Moon",
+      "westernMonths": ["March"],
+      "ecologicalMarkers": [
+        "Days lengthening noticeably",
+        "Cached food supplies running low ('hunger moon')",
+        "Moose become accessible on crusted snow (moose sink, hunters on snowshoes do not)",
+        "First signs of spring migration birds"
+      ],
+      "activities": [
+        "Intensive moose hunting on crusted snow — critical period for food resupply",
+        "Continuing trap line work",
+        "Snowshoe travel at maximum efficiency on hardened crust",
+        "Repairing equipment in anticipation of spring travel",
+        "Setting snares for snowshoe hares at population peak years"
+      ],
+      "heritageSkillRooms": [3, 4, 9],
+      "culturalContext": "The period of late winter before geese returned was historically the most difficult — the 'hunger months.' Heritage skills at this time were about knowing where to find food when conventional supply was exhausted. The ability to hunt moose on snowshoes in crusted-snow conditions was a critical survival skill."
+    }
+  ]
+}

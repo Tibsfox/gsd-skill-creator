@@ -1,0 +1,54 @@
+{
+  "id": "nation-inuit",
+  "name": "Inuit",
+  "note": "Inuit is not a single nation but a group of related peoples across four recognized regions in Canada. This reference covers the four Canadian Inuit regions. 'Inuit' means 'the people' in Inuktitut; the singular is 'Inuk.' The term 'Eskimo' is considered outdated and offensive in Canada.",
+  "regions": [
+    {
+      "name": "Inuvialuit",
+      "territory": "Western Arctic — Inuvialuit Settlement Region (ISR) in the Mackenzie Delta, northwestern Northwest Territories, and northern Yukon",
+      "population": "Approximately 5,600 Inuvialuit beneficiaries",
+      "governance": "Inuvialuit Regional Corporation (IRC) — irc.inuvialuit.com",
+      "heritageSkillNotes": "Beluga whale (qilalugaq) hunting using traditional umiak drives, bearded seal hunting, caribou hunting. Distinctive Inuvialuit ivory and antler carving. Muktuk (beluga skin and blubber) preparation. Snow house construction adapted to western Arctic conditions. Parkas of caribou skin with distinctive Inuvialuit style."
+    },
+    {
+      "name": "Nunavut",
+      "territory": "Central and Eastern Arctic — the territory of Nunavut (created 1999), Canada's largest territory",
+      "population": "Approximately 39,000 Inuit (majority of Nunavut's population)",
+      "governance": "Nunavut Tunngavik Inc. (NTI) — tunngavik.com; Government of Nunavut",
+      "heritageSkillNotes": "Iglu (igloo / snow house) construction — the most sophisticated snow shelter architecture in the world. Qajaq (kayak) construction using driftwood and seal skin — individual fit, essential for hunting. Umiak (large open skin boat) for community travel and hunting. Throat singing (katajjaq) — the musical form unique to Inuit. Harpoon construction and sea mammal hunting. Amauti (women's parka with baby pouch). Sealskin clothing construction. Inukshuk stone markers."
+    },
+    {
+      "name": "Nunavik",
+      "territory": "Northern Quebec — the Inuit homeland in the northern third of Quebec, above the 55th parallel",
+      "population": "Approximately 14,000 Nunavik Inuit",
+      "governance": "Makivvik Corporation — makivvik.ca; Kativik Regional Government",
+      "heritageSkillNotes": "Caribou hunting — Nunavik is on the migration routes of the Rivière-aux-Feuilles and Rivière-George caribou herds. Snow goose harvesting in spring migration. Arctic char fishing in rivers and lakes. Traditional camp construction. Parka and boot construction using caribou and seal skin. Dog team travel (qimmit — sled dogs)."
+    },
+    {
+      "name": "Nunatsiavut",
+      "territory": "Labrador Inuit homeland — the northern coastal region of Labrador",
+      "population": "Approximately 6,500 Nunatsiavut Inuit",
+      "governance": "Nunatsiavut Government — nunatsiavut.com — self-governing Inuit region in Canada",
+      "heritageSkillNotes": "Sealskin clothing construction (Labrador traditions include distinctive style variations). Sod house (Labrador turf house tradition — distinct from snow iglu). Seal hunting on sea ice. Char fishing in Labrador rivers. Contact history with Moravian missionaries created unique cultural blending including Germanic-influenced music."
+    }
+  ],
+  "sharedFramework": "Inuit Qaujimajatuqangit (IQ) — the comprehensive Inuit knowledge system and ethical framework, shared across all four regions",
+  "languageFamily": "Inuit-Yupik-Unangan (Eskimo-Aleut)",
+  "languages": [
+    "Inuktitut (Eastern Arctic, Nunavik, Nunatsiavut) — including multiple dialects",
+    "Inuinnaqtun (Western Nunavut)",
+    "Inuvialuktun (Western Arctic)"
+  ],
+  "sharedHeritagePractices": [
+    "Qamutiik (sled) construction using bone, wood, and hide lashings",
+    "Snow knife (pana) use for cutting snow blocks",
+    "Waterproof sealskin and bearded seal boot (kamik) construction",
+    "Qulliq (seal-oil lamp) operation and maintenance",
+    "Sinew sewing using bone needles — watertight seams are life-saving technology",
+    "Sea mammal hunting (seal, walrus, beluga, narwhal, bowhead) using harpoon and float technology",
+    "Arctic plant and lichen knowledge — limited but critical for survival and nutrition (crowberries, cloudberries, Labrador tea)"
+  ],
+  "roomConnections": [1, 2, 3, 5, 11, 13, 14],
+  "seasonalPattern": "arctic",
+  "culturalSovereigntyNotes": "Qajaq and iglu construction, kamik sewing, and qulliq operation are Level 1 with regional attribution (specify the region, not just 'Inuit'). Throat singing (katajjaq) is Level 1-2 — publicly demonstrated but belongs to specific Inuit women's traditions; cultural context required. Shamanic practices (angakkuit) are Level 4 — hard block. Throat singing ceremonies with spiritual intent are Level 3. Always use regional specificity: Nunavut Inuit practices may differ from Inuvialuit or Nunavik practices."
+}
