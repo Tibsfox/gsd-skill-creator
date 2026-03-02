@@ -1,0 +1,44 @@
+{
+  "id": "log-first-proof",
+  "title": "Your First Logical Proof",
+  "description": "Work through a classic logic puzzle and build your first formal argument using natural deduction.",
+  "estimatedMinutes": 25,
+  "steps": [
+    {
+      "step": 1,
+      "title": "A classic puzzle",
+      "instruction": "Read the puzzle: On an island, everyone is either a knight (always tells truth) or a knave (always lies). You meet two people. A says: 'At least one of us is a knave.' B says nothing. What are A and B?",
+      "prompt": "Before reasoning formally: what is your gut answer? Write it down."
+    },
+    {
+      "step": 2,
+      "title": "Set up the cases",
+      "instruction": "There are 4 possible combinations: (A=knight, B=knight), (A=knight, B=knave), (A=knave, B=knight), (A=knave, B=knave). Evaluate each.",
+      "prompt": "What does A's statement mean in each case? Is the statement true or false for each combination? Write out all four."
+    },
+    {
+      "step": 3,
+      "title": "Apply the knight/knave rules",
+      "instruction": "A knight's statement must be TRUE. A knave's statement must be FALSE. Eliminate combinations that contradict these rules.",
+      "prompt": "Which combinations are consistent? Which are eliminated? What must be true of A and B?"
+    },
+    {
+      "step": 4,
+      "title": "Write the argument in standard form",
+      "instruction": "Write your conclusion as a numbered argument: Premise 1, Premise 2, ... Therefore: Conclusion.",
+      "prompt": "Draft the argument in standard form. Include the rule you used at each step."
+    },
+    {
+      "step": 5,
+      "title": "Identify the argument type",
+      "instruction": "Was this deductive or inductive? Valid or sound? What inference rule did you apply at the key step?",
+      "prompt": "Name the reasoning type and explain why this argument is valid (or check if it is)."
+    },
+    {
+      "step": 6,
+      "title": "Reflect and extend",
+      "instruction": "You just did logical reasoning. The same method applies to evaluating claims, debugging code, and reading arguments.",
+      "prompt": "Where in your life could you use this kind of systematic case analysis? Give one example."
+    }
+  ]
+}

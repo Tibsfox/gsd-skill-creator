@@ -1,0 +1,44 @@
+{
+  "id": "envr-first-ecosystem",
+  "title": "Map an Ecosystem Near You",
+  "description": "Observe and analyze the ecological system in a place you can access.",
+  "estimatedMinutes": 30,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Choose a local ecosystem",
+      "instruction": "Pick a local ecosystem you can visit or observe: a park, backyard, urban street, pond, forest edge, beach.",
+      "prompt": "Describe the ecosystem. What biome is it in? What are the dominant abiotic conditions (soil type, moisture, light, temperature range)?"
+    },
+    {
+      "step": 2,
+      "title": "List the producers",
+      "instruction": "Identify at least 3 plant species (or algae, if aquatic). These are your primary producers -- the base of the food web.",
+      "prompt": "What plants do you see? Try to identify them by name. Estimate their relative abundance."
+    },
+    {
+      "step": 3,
+      "title": "Trace a food chain",
+      "instruction": "Find evidence of at least one herbivore and one predator. Trace a food chain from producer to top consumer.",
+      "prompt": "Write your food chain: Producer → Herbivore → Predator. What trophic levels are present?"
+    },
+    {
+      "step": 4,
+      "title": "Spot a human impact",
+      "instruction": "Look for signs of human impact: pollution, invasive species, habitat fragmentation, noise, altered water flow.",
+      "prompt": "Describe one human impact you observe. How is it affecting the ecosystem?"
+    },
+    {
+      "step": 5,
+      "title": "Identify an ecosystem service",
+      "instruction": "What does this ecosystem do for the surrounding area? Air purification? Flood control? Carbon storage? Recreation?",
+      "prompt": "Name at least two ecosystem services provided by this location. Would anyone notice if they were lost?"
+    },
+    {
+      "step": 6,
+      "title": "Suggest one improvement",
+      "instruction": "If you could make one change to improve the health of this ecosystem, what would it be?",
+      "prompt": "Describe your proposed change and explain the ecological reasoning behind it."
+    }
+  ]
+}

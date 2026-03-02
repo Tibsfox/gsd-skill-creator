@@ -1,0 +1,44 @@
+{
+  "id": "lang-first-conversation",
+  "title": "Your First Real Conversation",
+  "description": "Have a simple but real conversation in your target language using survival phrases.",
+  "estimatedMinutes": 20,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Choose a target language",
+      "instruction": "Pick a language you want to explore. We will focus on a 5-minute survival conversation script.",
+      "prompt": "What language are you exploring today? (Or pick one: Spanish, French, Japanese, Mandarin, Arabic)"
+    },
+    {
+      "step": 2,
+      "title": "Learn the greeting exchange",
+      "instruction": "A minimal conversation has: greeting, name exchange, how-are-you, and farewell. Learn these 8 phrases in your chosen language.",
+      "prompt": "Practice the greeting exchange out loud: Hello / My name is ___ / Nice to meet you / How are you? / I am well, thank you / And you? / I am also well / Goodbye"
+    },
+    {
+      "step": 3,
+      "title": "Notice the phonemes",
+      "instruction": "Find one sound in these phrases that does not exist in your native language. Listen to a native speaker recording.",
+      "prompt": "What is the unfamiliar sound? Describe where in your mouth you think it is produced."
+    },
+    {
+      "step": 4,
+      "title": "Record yourself",
+      "instruction": "Record yourself saying the 8-phrase exchange. Listen back.",
+      "prompt": "What surprised you when you heard yourself? What sounds natural? What sounds foreign?"
+    },
+    {
+      "step": 5,
+      "title": "Add one question",
+      "instruction": "Learn to ask and answer: 'Where are you from?' in your target language.",
+      "prompt": "Write the phrase, its IPA transcription if you can find it, and your answer: 'I am from ___'"
+    },
+    {
+      "step": 6,
+      "title": "Reflect on the experience",
+      "instruction": "A full conversation has happened -- even if short.",
+      "prompt": "What was harder than expected? What was easier? What is one thing you want to learn next?"
+    }
+  ]
+}

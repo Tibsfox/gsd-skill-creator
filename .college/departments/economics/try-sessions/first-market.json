@@ -1,0 +1,44 @@
+{
+  "id": "econ-first-market",
+  "title": "Map a Market You Know",
+  "description": "Apply supply and demand thinking to a market from your everyday life.",
+  "estimatedMinutes": 20,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Choose a market",
+      "instruction": "Pick a market you interact with regularly: coffee shops in your city, ride-sharing, apartments in a neighborhood, concert tickets.",
+      "prompt": "What market are you analyzing? Who are the buyers? Who are the sellers?"
+    },
+    {
+      "step": 2,
+      "title": "Identify demand factors",
+      "instruction": "What makes buyers want more or less of this good/service? List at least 3 demand factors.",
+      "prompt": "How would each factor shift demand? (e.g., 'If income rises, demand for restaurant meals increases')"
+    },
+    {
+      "step": 3,
+      "title": "Identify supply factors",
+      "instruction": "What makes sellers willing to produce more or less? Think about costs, technology, number of sellers.",
+      "prompt": "List 3 supply factors. How would each shift supply?"
+    },
+    {
+      "step": 4,
+      "title": "Find a recent price change",
+      "instruction": "Has the price in your chosen market changed recently? Try to explain it using supply and demand.",
+      "prompt": "Did supply shift, demand shift, or both? Draw a quick sketch of the curves and the shift if you can."
+    },
+    {
+      "step": 5,
+      "title": "Spot the opportunity cost",
+      "instruction": "What is the opportunity cost of buying in this market? What are you giving up?",
+      "prompt": "Write the opportunity cost for a typical buyer in this market."
+    },
+    {
+      "step": 6,
+      "title": "Identify a market failure (if any)",
+      "instruction": "Does your market have externalities? Public goods problems? Information asymmetry?",
+      "prompt": "Describe any market failure you see. Does anything prevent the market from being efficient?"
+    }
+  ]
+}
