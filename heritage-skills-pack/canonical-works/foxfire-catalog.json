@@ -1,0 +1,173 @@
+[
+  {
+    "id": "foxfire-series",
+    "title": "The Foxfire Book Series",
+    "authors": ["Eliot Wigginton", "Foxfire Students"],
+    "tradition": "appalachian",
+    "isbn": null,
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books (Publisher)", "url": "https://www.penguinrandomhouse.com/series/FOX/the-foxfire-book-series", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/lists/foxfire-book-series", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "The definitive 12-volume series documenting Appalachian mountain heritage skills, crafts, and traditions through student-elder interviews conducted by the Foxfire program in Rabun Gap, Georgia.",
+    "volumeRefs": [
+      { "volume": 1, "title": "The Foxfire Book", "year": 1972, "relevantRooms": [1, 4, 5, 7] },
+      { "volume": 2, "title": "Foxfire 2", "year": 1973, "relevantRooms": [1, 4, 6, 8] },
+      { "volume": 3, "title": "Foxfire 3", "year": 1975, "relevantRooms": [3, 4, 5, 7] },
+      { "volume": 4, "title": "Foxfire 4", "year": 1977, "relevantRooms": [1, 4, 6, 12] },
+      { "volume": 5, "title": "Foxfire 5", "year": 1979, "relevantRooms": [1, 3, 7, 12] },
+      { "volume": 6, "title": "Foxfire 6", "year": 1980, "relevantRooms": [4, 6, 7, 12] },
+      { "volume": 7, "title": "Foxfire 7", "year": 1982, "relevantRooms": [5, 7, 8, 12] },
+      { "volume": 8, "title": "Foxfire 8", "year": 1984, "relevantRooms": [5, 8, 11, 12] },
+      { "volume": 9, "title": "Foxfire 9", "year": 1986, "relevantRooms": [5, 6, 7, 12] },
+      { "volume": 10, "title": "Foxfire 10", "year": 1993, "relevantRooms": [1, 2, 5, 12] },
+      { "volume": 11, "title": "Foxfire 11", "year": 1999, "relevantRooms": [3, 5, 9, 12] },
+      { "volume": 12, "title": "Foxfire 12", "year": 2004, "relevantRooms": [10, 11, 12] }
+    ],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-christmas",
+    "title": "A Foxfire Christmas: Appalachian Memories and Traditions",
+    "authors": ["Eliot Wigginton", "Foxfire Students"],
+    "tradition": "appalachian",
+    "isbn": "9780385419772",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/books/121498/a-foxfire-christmas-by-eliot-wigginton/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/p/books/a-foxfire-christmas-appalachian-memories-and-traditions-foxfire-fund-inc/10434", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Appalachian holiday traditions, decorations, recipes, and memories collected from mountain communities. Essential reference for Room 11 seasonal living content.",
+    "relevantRooms": [11, 5, 12],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-25-years",
+    "title": "Foxfire: 25 Years",
+    "authors": ["Eliot Wigginton"],
+    "tradition": "appalachian",
+    "isbn": "9780385415774",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/books/121499/foxfire-25-years-by-eliot-wigginton/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "A retrospective anthology celebrating 25 years of the Foxfire project, combining historical context with the best selections from the series.",
+    "relevantRooms": [12, 10],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-appalachian-cookery",
+    "title": "The Foxfire Book of Appalachian Cookery",
+    "authors": ["Linda Garland Page", "Eliot Wigginton"],
+    "tradition": "appalachian",
+    "isbn": "9780807842102",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "UNC Press", "url": "https://www.uncpress.org/book/9780807842102/the-foxfire-book-of-appalachian-cookery/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/p/books/the-foxfire-book-of-appalachian-cookery-linda-garland-page/9782", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Regional recipes and food preservation methods from Appalachian mountain communities, including canning, smoking, drying, and traditional cooking techniques.",
+    "relevantRooms": [5, 12],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-toys-games",
+    "title": "Foxfire Book of Toys and Games",
+    "authors": ["Linda Garland Page", "Hilton Smith"],
+    "tradition": "appalachian",
+    "isbn": "9780807842065",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "UNC Press", "url": "https://www.uncpress.org/book/9780807842065/foxfire-book-of-toys-and-games/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Traditional Appalachian toys, games, and playthings made from wood and natural materials, with patterns and instructions for crafting them.",
+    "relevantRooms": [4, 10, 12],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-wood-stove-cookery",
+    "title": "Foxfire Book of Wood Stove Cookery",
+    "authors": ["Jane Cooper"],
+    "tradition": "appalachian",
+    "isbn": "9780385142755",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Traditional wood stove and open-fire cooking techniques from Appalachian mountain tradition, including recipes adapted for modern practitioners.",
+    "relevantRooms": [5, 1],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-mtn-music",
+    "title": "Foxfire 6: Shoemaking, 100 Toys and Games, Gourd Banjos and Dulcimers",
+    "authors": ["Eliot Wigginton", "Foxfire Students"],
+    "tradition": "appalachian",
+    "isbn": "9780385127974",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/books/122009/foxfire-6-by-eliot-wigginton/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/p/books/foxfire-6/6826", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Music instrument construction including gourd banjos and dulcimers, traditional Appalachian footwear, and hand-crafted toys. Companion to the main series for Room 6 content.",
+    "relevantRooms": [6, 4, 2],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-ironmaking",
+    "title": "Foxfire 5: Ironmaking, Blacksmithing, Flintlock Rifles, and Quilting",
+    "authors": ["Eliot Wigginton", "Foxfire Students"],
+    "tradition": "appalachian",
+    "isbn": "9780385127943",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/books/122006/foxfire-5-by-eliot-wigginton/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/p/books/foxfire-5/6823", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Traditional Appalachian ironmaking, blacksmithing, gunsmithing, and quilting techniques. Core reference for Room 7 (Metalwork) and Room 2 (Fiber) content.",
+    "relevantRooms": [7, 2, 12],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-soap-and-leather",
+    "title": "Foxfire 2: Ghost Stories, Spring Wild Plant Foods, Spinning and Weaving",
+    "authors": ["Eliot Wigginton", "Foxfire Students"],
+    "tradition": "appalachian",
+    "isbn": "9780385022538",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Anchor Books", "url": "https://www.penguinrandomhouse.com/books/121999/foxfire-2-by-eliot-wigginton/", "isCreatorDirect": false, "priority": 2 },
+      { "vendor": "Bookshop.org", "url": "https://bookshop.org/p/books/foxfire-2/6820", "isCreatorDirect": false, "priority": 3 }
+    ],
+    "fairUseCompliant": true,
+    "description": "Wild plant foods, spinning, weaving, and Appalachian folk stories. Key reference for Room 9 (Plants) and Room 2 (Fiber) content.",
+    "relevantRooms": [9, 2, 5, 12],
+    "knowledgeSource": "published-book"
+  },
+  {
+    "id": "foxfire-heritage-magazine",
+    "title": "Foxfire Magazine Archive",
+    "authors": ["Foxfire Students", "Foxfire Fund"],
+    "tradition": "appalachian",
+    "purchaseLinks": [
+      { "vendor": "Foxfire.org", "url": "https://www.foxfire.org/shop/", "isCreatorDirect": true, "priority": 1 },
+      { "vendor": "Foxfire Digital Archive", "url": "https://www.foxfire.org/archives/", "isCreatorDirect": true, "priority": 2 }
+    ],
+    "fairUseCompliant": true,
+    "description": "The original Foxfire student magazine (1966 onward) that preceded the book series. Contains primary interviews with Appalachian elders on heritage skills not fully covered in the books.",
+    "relevantRooms": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    "knowledgeSource": "community-program"
+  }
+]
