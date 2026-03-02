@@ -1,0 +1,48 @@
+{
+  "id": "smithing-07-tong-work-beginner",
+  "title": "Basic Tong Work: Gripping and Moving Hot Metal",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the fundamentals of blacksmithing tong work -- the skill of gripping, moving, and positioning hot metal at the forge and anvil. Understand tong types, correct grip technique, and how to test tong fit before taking a heat.",
+  "prerequisites": ["smithing-07-heat-colors-beginner"],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Tong anatomy: tongs consist of two reins (long handles), pivot pin, and jaws. The jaw geometry determines what stock shape and size the tong grips. Common jaw types: flat jaw (flat bar stock), bolt jaw (round stock with a V-groove), box jaw (square stock), pick-up tong (flat stock, spring-loaded). Identify a pair of flat jaw tongs and a pair of bolt jaw tongs if available.",
+      "safetyNote": "Fire gate: before handling any tongs that have been near the forge, verify they are cool. Tong reins that have been hanging near the fire pot may be hot enough to burn through a light glove.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Matching tongs to stock: the first rule of tong selection is that the tong jaw must fit the stock before it is hot. Test the fit cold: close the tong jaws on your cold stock. The jaws should grip the stock securely with the reins approximately parallel (not spread wide or crossed). If the reins are spread wide, the jaws are too small. If the reins cross, the jaws are too large.",
+      "safetyNote": "Fire gate: a workpiece that slips from tongs at cherry red heat is an immediate burn and fire hazard. It will burn through wood floor boards, ignite any combustibles it rolls across, and cannot be picked up with bare hands. Test tong grip before every heat.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "The tong grip: hold the tongs in the non-dominant hand (opposite the hammer hand). Close the jaws on the stock with a firm squeeze. The reins should be nearly parallel. With the grip established, take the stock to the forge fire -- the jaws grip the stock; you are not 'holding it open' with hand pressure, the tong geometry is doing the work.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Moving metal from forge to anvil: when the stock reaches working temperature, remove it from the fire smoothly in one motion -- don't pause in the fire bed or bump the tuyere. Move directly to the anvil -- forge to anvil should take no more than 2-3 seconds. You have limited time before the heat drops below working temperature. Have your first hammer blow planned before you take the stock out of the fire.",
+      "safetyNote": "Fire gate: the path from forge to anvil must be clear of obstacles and people before every heat. A stumble or obstruction while carrying hot metal is extremely dangerous. Designate a clear path and keep it clear.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Reading when the heat is 'gone': watch the metal color as you work. When it drops from cherry red to dark red, most hammer work should stop -- the metal is becoming difficult to move and continuing to hammer can damage the grain structure (over-working cold steel creates internal cracks). Return the piece to the fire. One heat = one work session at the anvil.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Tong adjustment: if available tongs don't fit your stock, tongs can be heated and the jaws adjusted to fit. Heat the jaw area to orange, grip the stock in the tong jaw, and close the jaws firmly -- the hot tong jaw deforms to the stock shape. Cool slowly. This 'matching' technique is how Appalachian smiths customized tongs to specific stock sizes.",
+      "culturalContext": "The ability to modify tongs to fit new stock is one of the self-sufficiency skills of the Appalachian blacksmith tradition. A smith who can make and modify their own tools is not dependent on commercial tooling supply. The Foxfire volumes document smiths who made all their own tongs, hammers, and struck tools from raw iron.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}

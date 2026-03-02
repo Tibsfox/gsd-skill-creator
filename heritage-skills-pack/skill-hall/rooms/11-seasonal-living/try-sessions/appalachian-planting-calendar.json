@@ -1,0 +1,49 @@
+{
+  "id": "seasonal-11-planting-calendar-beginner",
+  "title": "Appalachian Planting Calendar: Signs, Moon, and Frost",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the Appalachian planting calendar -- the traditional system of timing planting activities according to moon phase, zodiac sign, frost dates, and natural indicators. Understand how this calendar was developed from European almanac tradition and refined by generations of empirical observation in the Appalachian climate.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The Appalachian planting calendar: overview. The Appalachian farming year is organized by a seasonal calendar that combines European almanac tradition with empirical observations specific to the Appalachian climate. Key components: (1) Moon phase planting: new moon to full moon = 'above ground' crops (leafy vegetables, fruits); full moon to new moon = 'below ground' crops (roots, bulbs). (2) Zodiac sign planting: each 2-3 day period, the moon passes through a zodiac sign; some signs are favorable for planting, others not. (3) Frost dates: vary dramatically by elevation in Appalachian terrain. Write down the three components of the Appalachian planting calendar.",
+      "culturalContext": "Appalachian almanac traditions (Farmers' Almanac, Old Farmer's Almanac, homemade almanacs passed within families) represent the codified version of seasonal knowledge that was transmitted orally in pre-literate communities. The almanac made this knowledge portable and shareable. The Foxfire volumes document older Appalachian farmers who kept mental almanacs and could recite planting rules without reference to a written source -- the almanac was an external memory for knowledge that had been internal for generations.",
+      "sumoMapping": "Agriculture"
+    },
+    {
+      "order": 2,
+      "instruction": "Moon phase gardening: divide the lunar month into quarters. First quarter (new to half): plant leafy crops (lettuce, spinach, kale, herbs). Second quarter (half to full): plant fruiting crops (tomatoes, peppers, squash, beans). Third quarter (full to half): plant root crops (carrots, beets, turnips, potatoes). Fourth quarter (half to new): do not plant -- rest the soil, weed, compost. Apply this framework to a specific planting: when would you plant tomatoes using moon phase guidance?",
+      "culturalContext": "Moon phase gardening has been practiced across cultures for millennia. The Appalachian tradition draws primarily on European almanac practice brought by Scots-Irish and German settlers, but parallel practices exist in First Nations and Inuit seasonal traditions -- each tradition develops its own framework for reading the moon's influence on planting and activity timing.",
+      "sumoMapping": "Agriculture"
+    },
+    {
+      "order": 3,
+      "instruction": "Zodiac sign guidance: the signs are grouped by category: Water signs (Cancer, Scorpio, Pisces) -- excellent for planting leafy crops and root crops respectively; Earth signs (Taurus, Virgo, Capricorn) -- good for root crops; Fire signs (Aries, Leo, Sagittarius) -- barren, not ideal for planting; Air signs (Gemini, Libra, Aquarius) -- good for flowers and some fruits. Look up today's zodiac sign and determine whether it is a favorable planting day.",
+      "culturalContext": "The zodiac sign planting system is documented across multiple Appalachian sources including the Foxfire volumes. While the scientific basis is contested, the empirical tradition represents accumulated observations over many generations. In a community without weather forecasting or soil testing, almanac-based timing reduced the risk of planting too early (killing frost) or too late (shortened growing season).",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Frost date mapping: Appalachian elevation creates extreme frost date variability. A valley farm at 1200 feet elevation may have a last-frost date of April 15; a farm on the same ridge at 3000 feet may have a last-frost date of May 15 -- a full month difference. Find the approximate frost dates for an Appalachian farm at 2500 feet elevation and calculate the length of the frost-free growing season.",
+      "sumoMapping": "Agriculture"
+    },
+    {
+      "order": 5,
+      "instruction": "Natural indicators: traditional Appalachian farmers used natural indicators as planting signals alongside the almanac. Some documented indicators: plant corn when oak leaves are the size of a squirrel's ear; plant potatoes on Good Friday or St. Patrick's Day (religious calendar integration); plant beans when locust trees bloom; plant squash after the last chance of frost (when dogwood blossoms fall). Write down two natural indicators and the crops they signal.",
+      "culturalContext": "Natural phenological indicators (planting timing based on plant flowering or animal behavior) represent empirical ecological knowledge encoded as memorable rules. Haudenosaunee agricultural tradition uses the same oak-leaf indicator for corn planting that Appalachian farmers also use -- suggesting either convergent discovery or historical exchange of agricultural knowledge between settler and Indigenous farming communities in the region.",
+      "sumoMapping": "Predicting"
+    },
+    {
+      "order": 6,
+      "instruction": "The seasonal preservation calendar: the Appalachian harvest season extends from June through November. Typical schedule: June (strawberries, early vegetables, begin canning); July-August (summer vegetables, pickling, drying herbs); September (apples, tomatoes, late vegetables -- peak canning season); October (root vegetables to root cellar, late apples); November (butchering season -- hogs after first frost when temperatures stay below 40 degrees F). Sketch a monthly calendar showing which preservation activities peak in which month.",
+      "safetyNote": "Food storage annotation: root cellar temperature target is 32-40 degrees F with high humidity. Items below 32 degrees F freeze; items above 40 degrees F deteriorate more quickly. Check the root cellar weekly through the storage season. For canning: follow USDA tested recipes and processing times -- do not adjust times based on guesswork. Low-acid vegetables require pressure canning. See Room 05 (Food/Preservation) for full canning safety.",
+      "sumoMapping": "Agriculture"
+    }
+  ]
+}

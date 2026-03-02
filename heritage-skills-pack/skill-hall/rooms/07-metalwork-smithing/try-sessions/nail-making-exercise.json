@@ -1,0 +1,48 @@
+{
+  "id": "smithing-07-nail-making-beginner",
+  "title": "Nail Making: Drawing Out and Heading",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn nail making -- one of the traditional introductory exercises in Appalachian blacksmithing. Making a hand-forged nail requires drawing out a taper, cutting to length, and heading -- three fundamental blacksmithing operations in a single simple project.",
+  "prerequisites": ["smithing-07-heat-colors-beginner", "smithing-07-tong-work-beginner"],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Historical context: wrought iron nails were one of the most important manufactures in early Appalachian settlement. Before machine-cut nails (1790s) and wire nails (1880s), all nails were hand-forged by blacksmiths or by home smiths using nail rods and a heading tool. A family building a house or barn needed thousands of nails. Thomas Jefferson operated a nail-making manufactory at Monticello -- nail-making was that economically important.",
+      "safetyNote": "Fire gate: nail making occurs at the forge. Verify all gate conditions before beginning: workspace clear, quench bucket ready, leather protective equipment on.",
+      "culturalContext": "Appalachian smiths made nails continuously -- 'nail rod' (thin iron rod rolled to nail-making diameter) was imported to the mountains and cut into short lengths for nail stock. The ability to make your own nails was a form of economic self-sufficiency. The scarcity of nails in early settlement explains why early Appalachian structures used wooden pegs and notched joinery wherever possible.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Stock selection: a standard nail uses square rod stock approximately 1/4 inch x 1/4 inch. Cut a length of approximately 4 inches (this makes a common 8-penny nail equivalent). The drawing operation will taper the last 1 inch of the rod to the nail point, leaving approximately 3 inches for the shank and head.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Drawing the taper: heat the last 1.5 inches of the rod to cherry red. At the anvil face, position the hot end of the rod at a 45-degree angle to the anvil face and strike with firm blows while rotating the rod 90 degrees between every 2-3 blows. This draws the metal out into a square taper. Repeat as needed, taking fresh heats when the color drops. Target: a 4-sided taper about 1 inch long tapering to a point.",
+      "safetyNote": "Fire gate: hammer work at cherry red heat. Keep the non-tong hand clear of the hammer's work zone. Scale knocked off the metal during hammer work can cause skin burns -- eye protection required.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Notching for cut: when the taper is complete, heat the rod to cherry red and score it across the anvil edge or hardy (a cutting tool in the anvil's hardy hole) at the nail length position -- do not cut all the way through, just score to 3/4 depth. Leave the piece attached -- you will head it while still attached and then snap off the nail.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "The heading tool: insert the scored nail blank through the hole in a nail header (or a heading plate -- a piece of metal with a hole drilled to match the nail shank). The taper end hangs below, the shank and future head are above. The scored notch sits at the header surface. Strike the nail shank where it projects above the header repeatedly to spread the top of the nail into a head.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "Snap and finish: with the head formed, rap the shank sharply sideways against the header to snap the nail free at the scored notch. Inspect your nail: it should have a roughly square shank, a tapered point, and a four-sided (or eight-sided) head. Imperfections are normal for a first nail. The Appalachian tradition considers nail-making a complete introduction to the three core blacksmithing operations: drawing, cutting, and upsetting (heading).",
+      "culturalContext": "The Foxfire volumes document a living tradition of Appalachian blacksmiths who could produce nails rapidly enough to supply a small construction project. A skilled nail-maker could produce 10-15 nails per hour. The transition to machine-cut nails in the early 1800s made this skill economically obsolete but it survives as a demonstration craft and as an introduction to forge work for new smiths.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
