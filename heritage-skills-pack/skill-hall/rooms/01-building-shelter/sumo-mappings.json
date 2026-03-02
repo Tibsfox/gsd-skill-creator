@@ -1,0 +1,92 @@
+[
+  {
+    "heritageConceptId": "room-01-log-cabin",
+    "sumoTerm": "Building",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass LogCabin Building)",
+    "naturalLanguage": "A log cabin is a kind of building -- a structure providing shelter and enclosing space for human habitation or use.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-log-cabin",
+    "sumoTerm": "StationaryArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass LogCabin StationaryArtifact)",
+    "naturalLanguage": "A log cabin is a stationary artifact: a manufactured physical object fixed in place, constructed from natural timber materials.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-log-cabin-construction",
+    "sumoTerm": "ConstructionProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass LogCabinConstruction ConstructionProcess)",
+    "naturalLanguage": "Building a log cabin is a construction process: a deliberate sequence of activities that transforms raw timber into a functional shelter structure.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-log-cabin-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass LogCabinConstruction HeritageSkill)",
+    "naturalLanguage": "Appalachian log cabin construction is a heritage skill encoding generational knowledge of timber selection, notching techniques, and construction sequencing specific to the central and southern Appalachian tradition.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-wigwam",
+    "sumoTerm": "Building",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Wigwam Building)",
+    "naturalLanguage": "An Anishinaabe wigwam is a kind of building -- a constructed shelter providing protection from weather and a defined interior space for habitation.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-wigwam-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WigwamConstruction HeritageSkill)",
+    "naturalLanguage": "Wigwam construction is an Anishinaabe heritage skill, encoding knowledge of sapling selection, bending and lashing techniques, and covering materials appropriate to season and location.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-haudenosaunee-longhouse",
+    "sumoTerm": "Building",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HaudenosauneeLonghouse Building)",
+    "naturalLanguage": "A Haudenosaunee longhouse is a kind of building -- a long, barrel-vaulted structure housing multiple family units within a shared interior space organized along a central aisle.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-catenary-dome",
+    "sumoTerm": "StationaryArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CatenaryDome StationaryArtifact)",
+    "naturalLanguage": "A catenary dome shelter -- whether igloo, wigwam, or quinzhee -- is a stationary artifact whose structural stability derives from the catenary arch: the natural curve of a chain hanging under its own weight, inverted as a compression arch.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-tupiq",
+    "sumoTerm": "Building",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Tupiq Building)",
+    "naturalLanguage": "An Inuit tupiq (summer tent) is a kind of building -- a portable, skin-covered shelter supported by a framework of driftwood or whalebone poles, designed for seasonal use on the land.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-01-traditional-shelter-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalShelterConstruction HeritageSkill)",
+    "naturalLanguage": "Traditional shelter construction across Appalachian, First Nations, and Inuit traditions is a heritage skill: knowledge-intensive activities transmitted through apprenticeship and community practice across generations.",
+    "ontologicalBridge": null
+  }
+]
