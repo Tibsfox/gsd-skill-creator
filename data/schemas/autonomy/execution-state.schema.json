@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/autonomy/execution-state.schema.json",
+  "description": "Autonomy execution state: top-level persisted state for autonomous milestone execution, tracking state machine status, completed subversions, checkpoints, transitions, and context budget.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number",
+      "description": "Schema version for forward compatibility",
+      "default": 1
+    },
+    "milestone": {
+      "type": "string",
+      "description": "Milestone identifier (e.g., 'v1.53')"
+    },
+    "milestone_type": {
+      "type": "string",
+      "description": "Optional milestone type for gate template selection"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "INITIALIZED",
+        "RUNNING",
+        "CHECKPOINTING",
+        "PAUSED",
+        "COMPLETING",
+        "DONE",
+        "FAILED"
+      ],
+      "description": "Current state machine status"
+    },
+    "current_subversion": {
+      "type": "number",
+      "description": "Current subversion being executed"
+    },
+    "total_subversions": {
+      "type": "number",
+      "description": "Total subversions in this milestone",
+      "default": 100
+    },
+    "started_at": {
+      "type": "string",
+      "description": "ISO timestamp when execution started"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO timestamp of last state update"
+    },
+    "completed_subversions": {
+      "type": "array",
+      "description": "Array of completed subversion records",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "subversion": {
+            "type": "number",
+            "description": "Subversion number"
+          },
+          "started_at": {
+            "type": "string",
+            "description": "ISO timestamp when this subversion started"
+          },
+          "completed_at": {
+            "type": "string",
+            "description": "ISO timestamp when this subversion completed"
+          },
+          "phase_results": {
+            "type": "object",
+            "description": "Map of phase name to pass/fail result",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          },
+          "artifacts_produced": {
+            "type": "array",
+            "description": "Optional list of artifact paths produced",
+            "items": {
+              "type": "string"
+            }
+          },
+          "gate_results": {
+            "type": "array",
+            "description": "Optional gate results from verification",
+            "items": {
+              "$ref": "#/$defs/gate_result"
+            }
+          }
+        },
+        "required": [
+          "subversion",
+          "started_at",
+          "completed_at",
+          "phase_results"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "description": "Subversion numbers where checkpoints occurred",
+      "default": [],
+      "items": {
+        "type": "number"
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "description": "Full transition history for audit",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "enum": [
+              "INITIALIZED",
+              "RUNNING",
+              "CHECKPOINTING",
+              "PAUSED",
+              "COMPLETING",
+              "DONE",
+              "FAILED"
+            ],
+            "description": "State before the transition"
+          },
+          "to": {
+            "type": "string",
+            "enum": [
+              "INITIALIZED",
+              "RUNNING",
+              "CHECKPOINTING",
+              "PAUSED",
+              "COMPLETING",
+              "DONE",
+              "FAILED"
+            ],
+            "description": "State after the transition"
+          },
+          "trigger": {
+            "type": "string",
+            "description": "What triggered this transition"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "ISO timestamp of the transition"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional metadata record for debugging",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "trigger",
+          "timestamp"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "current_phase": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "prepare",
+            "execute",
+            "verify",
+            "journal"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Current phase within the active subversion (null if between subversions)",
+      "default": null
+    },
+    "context_budget": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "estimated_tokens": {
+              "type": "number",
+              "description": "Estimated tokens currently used in context"
+            },
+            "max_tokens": {
+              "type": "number",
+              "description": "Maximum token budget for the context window"
+            },
+            "usage_percent": {
+              "type": "number",
+              "description": "Current usage as a percentage (0-100)"
+            },
+            "threshold_percent": {
+              "type": "number",
+              "description": "Percentage threshold that triggers context exhaustion",
+              "default": 80
+            },
+            "last_measured_at": {
+              "type": "string",
+              "description": "ISO timestamp of last measurement"
+            }
+          },
+          "required": [
+            "estimated_tokens",
+            "max_tokens",
+            "usage_percent"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Current context budget tracking (null if not yet measured)",
+      "default": null
+    },
+    "last_error": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Last error message if status is FAILED (null otherwise)",
+      "default": null
+    },
+    "resume_from": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Subversion to resume from after PAUSED state (null if not resuming)",
+      "default": null
+    }
+  },
+  "required": [
+    "milestone",
+    "status",
+    "current_subversion",
+    "started_at",
+    "updated_at"
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "gate_result": {
+      "type": "object",
+      "properties": {
+        "gate_name": {
+          "type": "string"
+        },
+        "gate_type": {
+          "type": "string",
+          "enum": [
+            "per_subversion",
+            "checkpoint",
+            "half_transition",
+            "graduation",
+            "summary"
+          ]
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checked_path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "gate_name",
+        "gate_type",
+        "passed",
+        "message"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

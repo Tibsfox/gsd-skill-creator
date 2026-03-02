@@ -256,6 +256,7 @@ pub struct ProxiedRequest {
 }
 
 /// The response returned to the agent after credential headers are stripped.
+#[derive(Debug)]
 pub struct ProxiedResponse {
     pub status: u16,
     pub headers: Vec<(String, String)>,

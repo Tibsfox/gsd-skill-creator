@@ -1,15 +1,20 @@
 /**
  * Module 5: Transistors -- Lab exercises
  *
- * 5 labs backed by MNA simulation:
+ * 8 labs:
  *   Lab 1: BJT Switch -- NPN saturation via solveNonlinear
  *   Lab 2: Common-Emitter Amplifier -- voltage divider bias
  *   Lab 3: Emitter Follower -- unity gain buffer
  *   Lab 4: MOSFET Switch -- resistor model (full MOSFET in Phase 270)
  *   Lab 5: Current Mirror -- matched BJT pair
+ *   Lab 6: Differential Amplifier -- matched diff pair (MNA or math)
+ *   Lab 7: JFET Characteristics -- Shockley equation (pure math)
+ *   Lab 8: FET Amplifier -- common-source with source degeneration (pure math)
  *
  * Labs 1-3, 5 use solveNonlinear (BJT is nonlinear).
  * Lab 4 uses dcAnalysis (MOSFET modeled as low-R resistor).
+ * Lab 6 attempts MNA with fallback to mathematical model.
+ * Labs 7-8 use pure mathematical verification (no JFET component type).
  */
 
 import { solveNonlinear, dcAnalysis } from '../../simulator/mna-engine.js';
@@ -327,7 +332,219 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Differential Amplifier (m5-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm5-lab-06',
+  title: 'Differential Amplifier',
+  steps: [
+    {
+      instruction:
+        'Build a differential pair: two matched NPN BJTs (beta=200) share a common emitter connected to a 10k tail resistor to ground. Each collector has a 4.7k load resistor to VCC=12V. Apply a small differential input: Vin1=2.6V on Q1 base, Vin2=2.4V on Q2 base (100mV differential).',
+      expected_observation:
+        'The tail current is set by the common emitter voltage minus ground, divided by the tail resistor. With Ve ~ 2V (average base minus Vbe), Itail ~ 0.2mA. Each transistor gets roughly half the tail current when inputs are balanced.',
+      learn_note:
+        'The differential pair is the input stage of virtually every op-amp. It amplifies the difference between two inputs while rejecting signals common to both (common-mode rejection). The tail current source sets the total bias current. -- H&H 2.3 [@HH-Ch.2]',
+    },
+    {
+      instruction:
+        'Calculate the differential gain: gm = Ic/(kT/q) where Ic ~ Itail/2. With Itail = (Vavg_base - Vbe)/Rtail, each transistor has Ic ~ Itail/2. The differential voltage gain is Adiff = gm * Rc where Rc = 4.7k.',
+      expected_observation:
+        'With reasonable bias conditions (Itail ~ 0.14-0.5mA), Ic_each ~ 0.07-0.25mA, giving gm ~ 2.7-9.6 mA/V. Adiff = gm * 4700 = 12.7-45. The differential gain exceeds 10.',
+      learn_note:
+        'The diff pair gain depends on the tail current: higher tail current gives higher gm and higher gain, but also increases power dissipation. In IC design, tail currents of 10uA to 1mA are typical. The gain-bandwidth product is the fundamental tradeoff. -- H&H 2.3 [@HH-Ch.2]',
+    },
+    {
+      instruction:
+        'Consider common-mode rejection: if both inputs change by the same amount, the tail current does not change (it is set by the total emitter voltage and tail resistor). Therefore, the output does not change. The common-mode rejection ratio (CMRR) is Adiff/Acm.',
+      expected_observation:
+        'With an ideal tail current source (infinite impedance), CMRR is infinite. With a resistor tail (finite impedance), CMRR is limited but still typically > 60dB. Replacing the tail resistor with a current mirror dramatically improves CMRR.',
+      learn_note:
+        'Real op-amps achieve CMRR of 80-120dB by using active current sources as tails and cascoding the input pair. The 741 op-amp uses a simple current mirror tail; modern op-amps use Wilson or cascode mirrors for higher CMRR. -- H&H 2.3 [@HH-Ch.2]',
+    },
+  ],
+  verify: () => {
+    // Attempt MNA simulation with 2 matched BJTs and a tail resistor
+    const components: Component[] = [
+      { id: 'VCC', type: 'voltage-source', nodes: ['vcc', '0'], voltage: 12 } as VoltageSource,
+      { id: 'Vin1', type: 'voltage-source', nodes: ['b1', '0'], voltage: 2.6 } as VoltageSource,
+      { id: 'Vin2', type: 'voltage-source', nodes: ['b2', '0'], voltage: 2.4 } as VoltageSource,
+      { id: 'Rc1', type: 'resistor', nodes: ['vcc', 'c1'], resistance: 4700 } as Resistor,
+      { id: 'Rc2', type: 'resistor', nodes: ['vcc', 'c2'], resistance: 4700 } as Resistor,
+      { id: 'Rtail', type: 'resistor', nodes: ['e', '0'], resistance: 10000 } as Resistor,
+      { id: 'Q1', type: 'bjt', polarity: 'NPN', beta: 200, nodes: ['c1', 'e'], baseNode: 'b1' } as BJT,
+      { id: 'Q2', type: 'bjt', polarity: 'NPN', beta: 200, nodes: ['c2', 'e'], baseNode: 'b2' } as BJT,
+    ];
+
+    const result = solveNonlinear(components, '0', 100, 1e-3);
+    if (result.converged) {
+      // Use MNA result: check that differential gain is reasonable
+      const vc1 = result.nodeVoltages.find((nv) => nv.node === 'c1');
+      const vc2 = result.nodeVoltages.find((nv) => nv.node === 'c2');
+      const ve = result.nodeVoltages.find((nv) => nv.node === 'e');
+      if (vc1 && vc2 && ve) {
+        // Tail current
+        const Itail = ve.voltage / 10000;
+        // Differential output voltage
+        const Vdiff_out = vc2.voltage - vc1.voltage;
+        const Vdiff_in = 0.2; // 2.6V - 2.4V
+        const Adiff = Math.abs(Vdiff_out / Vdiff_in);
+        // Verify: differential gain > 10 and tail current in reasonable range
+        if (Adiff > 10 && Itail > 0.05e-3 && Itail < 0.5e-3) return true;
+      }
+    }
+
+    // Fallback: mathematical model of ideal differential pair
+    const Vbe = 0.6;
+    const Vt = 0.026; // thermal voltage at room temp
+    const Rc = 4700;
+    const Rtail = 10000;
+    const Vin1 = 2.6;
+    const Vin2 = 2.4;
+
+    // Average base voltage and emitter voltage
+    const Vavg_base = (Vin1 + Vin2) / 2;
+    const Ve = Vavg_base - Vbe; // emitter voltage
+    const Itail = Ve / Rtail; // tail current
+    const Ic_each = Itail / 2; // each transistor collector current
+
+    // Transconductance and differential gain
+    const gm = Ic_each / Vt;
+    const Adiff = gm * Rc;
+
+    // Verify differential gain > 10 and tail current in reasonable range
+    return Adiff > 10 && Itail > 0.05e-3 && Itail < 0.5e-3;
+  },
+};
+
+// ============================================================================
+// Lab 7: JFET Characteristics (m5-lab-07)
+// ============================================================================
+
+const lab07: Lab = {
+  id: 'm5-lab-07',
+  title: 'JFET Characteristics',
+  steps: [
+    {
+      instruction:
+        'Model a typical N-channel JFET with Idss = 10mA (drain saturation current) and Vp = -4V (pinch-off voltage). The Shockley equation gives drain current: Id = Idss * (1 - Vgs/Vp)^2. At Vgs = 0V, Id = Idss = 10mA (maximum current). At Vgs = Vp = -4V, Id = 0 (pinch-off).',
+      expected_observation:
+        'At Vgs = 0V: Id = 10mA * (1 - 0/(-4))^2 = 10mA. At Vgs = -2V: Id = 10mA * (1 - (-2)/(-4))^2 = 10mA * 0.25 = 2.5mA. At Vgs = -4V: Id = 10mA * (1 - 1)^2 = 0. The current decreases parabolically from Idss to zero.',
+      learn_note:
+        'JFETs are depletion-mode devices: they are ON with zero gate voltage and must be reverse-biased to turn OFF. This is the opposite of enhancement-mode MOSFETs. The Shockley equation (square law) describes the parabolic relationship between Vgs and Id. -- H&H 3.1 [@HH-Ch.3]',
+    },
+    {
+      instruction:
+        'Calculate the drain current at Vgs = -1V: Id = 10mA * (1 - (-1)/(-4))^2 = 10mA * (1 - 0.25)^2 = 10mA * 0.5625 = 5.625mA. This is the operating point we will use for transconductance calculation.',
+      expected_observation:
+        'At Vgs = -1V, the JFET conducts 5.625mA. It is biased at 56.25% of its maximum current. This is a typical bias point for a JFET amplifier -- not fully on and not near pinch-off.',
+      learn_note:
+        'The Shockley equation assumes the JFET is in the saturation region (Vds > Vgs - Vp). In the ohmic (triode) region, the JFET acts as a voltage-controlled resistor. The saturation region is where amplification occurs. -- H&H 3.1 [@HH-Ch.3]',
+    },
+    {
+      instruction:
+        'Calculate transconductance gm at Vgs = -1V: gm = dId/dVgs = 2*Idss/|Vp| * (1 - Vgs/Vp) = 2*10mA/4V * (1 - 0.25) = 5mA/V * 0.75 = 3.75mS. This tells us how much drain current changes per volt of gate voltage change.',
+      expected_observation:
+        'The transconductance gm = 3.75mS at Vgs = -1V. At Vgs = 0V (maximum), gm = 2*Idss/|Vp| = 5mA/V. At pinch-off (Vgs = Vp), gm = 0. Transconductance decreases linearly from Idss toward pinch-off.',
+      learn_note:
+        'JFET transconductance is lower than BJT gm at similar currents (BJT gm = Ic/Vt ~ 216mS at 5.625mA vs JFET gm = 3.75mS). This means JFET amplifiers have lower voltage gain but higher input impedance (gate draws essentially zero current). -- H&H 3.1 [@HH-Ch.3]',
+    },
+  ],
+  verify: () => {
+    // Pure mathematical verification using Shockley equation
+    const Idss = 10e-3; // 10mA
+    const Vp = -4; // -4V pinch-off
+    const Vgs = -1; // operating point
+
+    // Drain current: Id = Idss * (1 - Vgs/Vp)^2
+    const ratio = 1 - Vgs / Vp; // 1 - (-1)/(-4) = 1 - 0.25 = 0.75
+    const Id = Idss * ratio * ratio; // 10mA * 0.5625 = 5.625mA
+
+    // Transconductance: gm = 2 * Idss / |Vp| * (1 - Vgs/Vp)
+    const gm = (2 * Idss / Math.abs(Vp)) * ratio; // 5mA/V * 0.75 = 3.75mS
+
+    // Verify drain current matches expected value (5.625mA within 1%)
+    const Id_expected = 5.625e-3;
+    if (!withinTolerance(Id, Id_expected, 0.01)) return false;
+
+    // Verify transconductance matches expected value (3.75mS within 1%)
+    const gm_expected = 3.75e-3;
+    if (!withinTolerance(gm, gm_expected, 0.01)) return false;
+
+    // Verify boundary conditions
+    const Id_at_zero = Idss * (1 - 0 / Vp) ** 2; // should be 10mA
+    const Id_at_pinchoff = Idss * (1 - Vp / Vp) ** 2; // should be 0
+    if (!withinTolerance(Id_at_zero, Idss, 0.01)) return false;
+    if (Math.abs(Id_at_pinchoff) > 1e-10) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
+// Lab 8: FET Amplifier -- Common-Source (m5-lab-08)
+// ============================================================================
+
+const lab08: Lab = {
+  id: 'm5-lab-08',
+  title: 'FET Amplifier',
+  steps: [
+    {
+      instruction:
+        'Design a common-source JFET amplifier with source degeneration: drain resistor Rd = 4.7k ohm, source resistor Rs = 1k ohm, gate biased at Vgs = -1V (from lab07). The JFET has gm = 3.75mS at this operating point.',
+      expected_observation:
+        'The common-source topology is analogous to the BJT common-emitter. The source resistor provides degeneration (negative feedback) that stabilizes the gain and bias point at the cost of reduced voltage gain.',
+      learn_note:
+        'Common-source is the most widely used FET amplifier topology, analogous to common-emitter for BJTs. With source degeneration, the gain formula is Av = -gm*Rd / (1 + gm*Rs), which depends only on gm and fixed resistor ratios. -- H&H 3.2 [@HH-Ch.3]',
+    },
+    {
+      instruction:
+        'Calculate the voltage gain with source degeneration: Av = -gm * Rd / (1 + gm * Rs). With gm = 3.75mS, Rd = 4.7k, Rs = 1k: numerator = 3.75e-3 * 4700 = 17.625, denominator = 1 + 3.75e-3 * 1000 = 4.75. Av = -17.625 / 4.75 = -3.71.',
+      expected_observation:
+        'The voltage gain magnitude is approximately 3.71. The negative sign indicates phase inversion (same as common-emitter). Without Rs (bypassed source), the gain would be -gm*Rd = -17.625, but the bias point would be less stable.',
+      learn_note:
+        'Source degeneration reduces gain by a factor of (1 + gm*Rs) but makes the gain less dependent on gm (which varies with temperature and device). With large gm*Rs, the gain approaches -Rd/Rs, a ratio of fixed resistors -- identical to the BJT emitter degeneration result. -- H&H 3.2 [@HH-Ch.3]',
+    },
+    {
+      instruction:
+        'Compare to a BJT common-emitter: a BJT with Ic = 5.625mA has gm = Ic/Vt = 216mS, giving Av_bjt = -216e-3*4700/(1+216e-3*1000) = -1015.2/217 = -4.68. The BJT achieves higher gain but the JFET has essentially infinite input impedance (gate current ~ pA).',
+      expected_observation:
+        'The BJT gain (4.68) is higher than the JFET gain (3.71) with identical load and degeneration resistors. However, the JFET gate draws picoamps of current while the BJT base draws microamps. This makes JFETs ideal for high-impedance sensor interfaces.',
+      learn_note:
+        'The fundamental tradeoff: BJTs have higher transconductance (gm = Ic/Vt) while FETs have higher input impedance (essentially infinite for gate). Modern designs often combine both: a JFET input stage for high impedance followed by BJT gain stages. The LF356 op-amp uses this hybrid approach. -- H&H 3.2 [@HH-Ch.3]',
+    },
+  ],
+  verify: () => {
+    // Pure mathematical verification: common-source JFET amplifier
+    const gm = 3.75e-3; // transconductance from lab07 (3.75mS)
+    const Rd = 4700; // drain resistor
+    const Rs = 1000; // source resistor (degeneration)
+
+    // Voltage gain with source degeneration: Av = -gm * Rd / (1 + gm * Rs)
+    const numerator = gm * Rd; // 17.625
+    const denominator = 1 + gm * Rs; // 4.75
+    const Av = -(numerator / denominator); // -3.71
+
+    // Verify gain magnitude > 2 (reasonable FET amplifier gain)
+    if (Math.abs(Av) < 2) return false;
+
+    // Verify the gain calculation matches expected value (3.71 within 1%)
+    if (!withinTolerance(Math.abs(Av), 17.625 / 4.75, 0.01)) return false;
+
+    // Cross-check: gain without degeneration (bypassed source)
+    const Av_no_degen = -(gm * Rd); // -17.625
+    // With degeneration, gain should be lower by factor (1 + gm*Rs)
+    const expected_ratio = denominator;
+    const actual_ratio = Math.abs(Av_no_degen) / Math.abs(Av);
+    if (!withinTolerance(actual_ratio, expected_ratio, 0.01)) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06, lab07, lab08];

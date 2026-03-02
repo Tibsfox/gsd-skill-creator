@@ -1,0 +1,71 @@
+version: "1.0"
+milestone: "{milestone}"
+milestone_type: implementation
+gates:
+  per_subversion:
+    - name: source-code
+      description: "Source code artifact for each subversion"
+      path_pattern: "src/**/*.ts"
+      min_size_bytes: 100
+      blocking: false
+      content_checks: []
+      applies_when: "has_source_changes"
+    - name: test-file
+      description: "Test file accompanies source changes"
+      path_pattern: "src/**/*.test.ts"
+      min_size_bytes: 100
+      blocking: false
+      content_checks:
+        - pattern: "(describe|it|test)\\("
+          required: true
+          description: "Must contain test definitions"
+      applies_when: "has_source_changes"
+  checkpoint:
+    - name: checkpoint-verification
+      description: "Verification checkpoint every 10 subversions"
+      path_pattern: ".planning/{milestone_dir}/checkpoints/checkpoint-{subversion}.md"
+      min_size_bytes: 500
+      blocking: true
+      content_checks:
+        - pattern: "([Tt]est|[Pp]ass|[Ff]ail|[Vv]erified)"
+          required: true
+          description: "Must contain verification results"
+  half_transition:
+    - name: midpoint-integration
+      description: "Midpoint integration verification"
+      path_pattern: ".planning/{milestone_dir}/midpoint-report.md"
+      min_size_bytes: 1500
+      blocking: true
+      content_checks:
+        - pattern: "([Ii]ntegration|[Ww]iring|[Cc]onnected)"
+          required: true
+          description: "Must describe integration status"
+  graduation:
+    - name: graduation-report
+      description: "Final implementation report"
+      path_pattern: ".planning/{milestone_dir}/graduation-report.md"
+      min_size_bytes: 2000
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have headings"
+        - pattern: "([Cc]omplete|[Ss]hipped|[Dd]elivered)"
+          required: true
+          description: "Must confirm completion"
+  summary:
+    - name: summary-md
+      description: "SUMMARY.md verification at phase completion (RC-11 fix)"
+      path_pattern: ".planning/phases/{phase_dir}/*-SUMMARY.md"
+      min_size_bytes: 500
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have at least one heading"
+        - pattern: "([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)"
+          required: true
+          description: "Must describe accomplishments"
+        - pattern: "([Cc]ommit|[Tt]ask)"
+          required: true
+          description: "Must reference commits or tasks"

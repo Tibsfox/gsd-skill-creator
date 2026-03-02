@@ -35,7 +35,10 @@ export interface FeedEntry {
 // Constants
 // ============================================================================
 
-/** Maximum number of entries displayed in the feed (REQ-AF-02). */
+/** @justification Type: Accepted heuristic. 8 entries fills the available
+ * vertical space in the dashboard panel at standard viewport height (1080px).
+ * More entries require scrolling which defeats at-a-glance monitoring purpose.
+ * REQ-AF-02. */
 const MAX_ENTRIES = 8;
 
 /** Unicode shape indicators for each entity type. */

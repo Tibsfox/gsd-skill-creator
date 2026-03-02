@@ -1,0 +1,78 @@
+version: "1.0"
+milestone: "{milestone}"
+milestone_type: pedagogical
+gates:
+  per_subversion:
+    - name: teaching-note
+      description: "Teaching note artifact for each subversion"
+      path_pattern: ".planning/{milestone_dir}/teaching-notes/{subversion}-*.md"
+      min_size_bytes: 500
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have at least one heading"
+        - pattern: "([Ff]inding|[Oo]bservation|[Ii]nsight|[Pp]attern)"
+          required: true
+          description: "Must contain substantive findings"
+    - name: learning-journal
+      description: "Learning journal entry for each subversion"
+      path_pattern: ".planning/{milestone_dir}/learning-journals/{subversion}-*.md"
+      min_size_bytes: 300
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have at least one heading"
+  checkpoint:
+    - name: checkpoint-synthesis
+      description: "Mini-synthesis at checkpoint intervals"
+      path_pattern: ".planning/{milestone_dir}/checkpoints/checkpoint-{subversion}.md"
+      min_size_bytes: 1000
+      blocking: true
+      content_checks:
+        - pattern: "([Ss]ynthesis|[Ss]ummary|[Ff]indings)"
+          required: true
+          description: "Must contain synthesis content"
+  half_transition:
+    - name: midpoint-report
+      description: "Midpoint synthesis report"
+      path_pattern: ".planning/{milestone_dir}/midpoint-report.md"
+      min_size_bytes: 2000
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+.*[Mm]idpoint"
+          required: true
+          description: "Must have midpoint heading"
+        - pattern: "([Pp]rogress|[Ss]tatus|[Ff]indings)"
+          required: true
+          description: "Must contain progress or findings"
+  graduation:
+    - name: graduation-synthesis
+      description: "Final graduation synthesis"
+      path_pattern: ".planning/{milestone_dir}/graduation-synthesis.md"
+      min_size_bytes: 3000
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have headings"
+        - pattern: "([Cc]onclusion|[Rr]ecommendation|[Ff]inding)"
+          required: true
+          description: "Must contain conclusions or recommendations"
+  summary:
+    - name: summary-md
+      description: "SUMMARY.md verification at phase completion (RC-11 fix)"
+      path_pattern: ".planning/phases/{phase_dir}/*-SUMMARY.md"
+      min_size_bytes: 500
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have at least one heading"
+        - pattern: "([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)"
+          required: true
+          description: "Must describe accomplishments"
+        - pattern: "([Cc]ommit|[Tt]ask)"
+          required: true
+          description: "Must reference commits or tasks"

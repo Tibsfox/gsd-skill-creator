@@ -24,7 +24,16 @@
 // Types
 // ============================================================================
 
-/** Configuration for the budget manager. */
+/**
+ * Configuration for the budget manager.
+ *
+ * @justification Type: Accepted heuristic
+ * headroomPercent defaults to 5% -- reserves a small burst-mode pool without
+ * starving individual engine allocations. At 5%, a 100K-token budget yields
+ * 5K headroom tokens, enough for ~2 burst-mode spends before contention.
+ * Lower values risk immediate exceeded callbacks during burst; higher values
+ * waste effective budget on rarely-used headroom.
+ */
 export interface BudgetConfig {
   /** Total token budget across all engines. */
   totalBudget: number;

@@ -1,3 +1,11 @@
+---
+module: HD-08
+title: "Skill-Creator as a Dynamical System"
+textbook_chapters: [32, 33]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Skill-Creator as a Dynamical System IS the Synthesis application (Ch 32–33, Part X: Synthesis). classifySkillDynamics() and classifyFatouJulia() IS the Through-Line made computational: skills on the complex plane, evaluated with all prior dynamics from Ch 1 through Ch 31."
+---
+
 # HD-08: Skill-Creator as a Dynamical System
 
 ## Overview

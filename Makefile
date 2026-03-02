@@ -1,4 +1,4 @@
-.PHONY: all build test lint clean desktop desktop-build desktop-test rust-check rust-test man verify help
+.PHONY: all build test lint clean desktop desktop-build desktop-test rust-check rust-test man verify test-hooks help
 
 # Default target
 all: build test
@@ -48,8 +48,12 @@ man:
 	scdoc < extra/man/skill-creator.1.scd > extra/man/skill-creator.1
 	scdoc < extra/man/sc-config.5.scd > extra/man/sc-config.5
 
+# Hook tests (BATS)
+test-hooks:
+	npx bats .claude/hooks/tests/*.bats
+
 # Full verification
-verify: lint rust-check test desktop-test
+verify: lint rust-check test desktop-test test-hooks
 	@echo "All checks passed."
 
 # Help
@@ -66,4 +70,5 @@ help:
 	@echo "  rust-test     Cargo test"
 	@echo "  clean         Remove build artifacts"
 	@echo "  man           Compile man pages (requires scdoc)"
+	@echo "  test-hooks    Run BATS hook tests"
 	@echo "  verify        Run all verification checks"

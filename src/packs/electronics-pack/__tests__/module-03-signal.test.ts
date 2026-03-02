@@ -1,8 +1,8 @@
 /**
  * Module 3: The Signal — Test Suite
  *
- * Validates all 5 labs in Module 3 covering AC signals, impedance,
- * Bode plots, decibels, signal coupling, and noise.
+ * Validates all 6 labs in Module 3 covering AC signals, impedance,
+ * Bode plots, decibels, noise, and signal sources.
  *
  * Labs:
  *   m3-lab-01: Oscilloscope Basics (transient RC charging)
@@ -10,6 +10,7 @@
  *   m3-lab-03: Impedance Calculator (pure math + AC cross-check)
  *   m3-lab-04: Decibel Scale (cascaded RC AC analysis)
  *   m3-lab-05: Noise Floor (Johnson noise calculation)
+ *   m3-lab-06: Signal Sources and Waveform Types (RMS, crest factor)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -20,8 +21,8 @@ import { labs } from '../modules/03-the-signal/labs.js';
 // ============================================================================
 
 describe('Module 3: The Signal — structure', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 6 labs', () => {
+    expect(labs).toHaveLength(6);
   });
 
   it('each lab has a non-empty title, id, and steps array', () => {
@@ -42,7 +43,7 @@ describe('Module 3: The Signal — structure', () => {
     }
   });
 
-  it('all 5 verify() calls return true', () => {
+  it('all 6 verify() calls return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }
@@ -213,5 +214,55 @@ describe('Lab 5: Noise Floor (m3-lab-05)', () => {
     const Vn_10k_20kBW = Math.sqrt(4 * k_B * T * 10000 * 20000);
     const ratio2 = Vn_10k_20kBW / Vn_10k;
     expect(Math.abs(ratio2 - Math.SQRT2) / Math.SQRT2).toBeLessThan(0.01);
+  });
+});
+
+// ============================================================================
+// Lab 6: Signal Sources and Waveform Types (m3-lab-06)
+// ============================================================================
+
+describe('Lab 6: Signal Sources and Waveform Types (m3-lab-06)', () => {
+  const lab6 = () => labs.find((l) => l.id === 'm3-lab-06');
+
+  it('exists with correct id and title', () => {
+    const lab = lab6();
+    expect(lab).toBeDefined();
+    expect(lab!.title).toContain('Signal Sources');
+  });
+
+  it('has at least 3 LabSteps', () => {
+    const lab = lab6();
+    expect(lab).toBeDefined();
+    expect(lab!.steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- waveform RMS and crest factor validation', () => {
+    const lab = lab6();
+    expect(lab).toBeDefined();
+    expect(lab!.verify()).toBe(true);
+  });
+
+  it('waveform RMS values match physics', () => {
+    const Vpeak = 1;
+    // Sine: Vrms = Vpeak / sqrt(2)
+    expect(Math.abs(Vpeak / Math.SQRT2 - 0.7071)).toBeLessThan(0.001);
+    // Square: Vrms = Vpeak
+    expect(Vpeak).toBe(1.0);
+    // Triangle: Vrms = Vpeak / sqrt(3)
+    expect(Math.abs(Vpeak / Math.sqrt(3) - 0.5774)).toBeLessThan(0.001);
+  });
+});
+
+// ============================================================================
+// Safety warden routing for new labs
+// ============================================================================
+
+describe('Safety warden routing for new labs', () => {
+  it('lab06 (signal sources, 1V peak) routes through safety warden as Annotate', async () => {
+    const { checkSafety, SafetyMode } = await import('../safety/warden.js');
+    const result = checkSafety('03-the-signal', 1);
+    expect(result.allowed).toBe(true);
+    expect(result.mode).toBe(SafetyMode.Annotate);
+    expect(result.assessmentRequired).toBe(false);
   });
 });

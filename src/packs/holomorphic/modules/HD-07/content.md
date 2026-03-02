@@ -1,3 +1,11 @@
+---
+module: HD-07
+title: "From Dynamics to Deep Learning"
+textbook_chapters: [31]
+textbook_chapters_confidence: low
+textbook_chapters_note: "From Dynamics to Deep Learning has a low-confidence connection to Ch 31 (Part IX: Emergence) which covers neural networks and learning dynamics as emergent phenomena. The module's treatment of training as iteration is an analogy from dynamics to learning, not a strict identity connection. See docs/foundations/curriculum-alignment.md."
+---
+
 # HD-07: From Dynamics to Deep Learning
 
 ## Overview

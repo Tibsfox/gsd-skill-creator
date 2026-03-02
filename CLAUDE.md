@@ -37,6 +37,20 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `packaging/` -- Distro packaging (debian/, rpm/)
 - `scripts/` -- Utility scripts (bootstrap, dashboard server, bin/)
 
+## src/ Module Layout
+
+71 module directories under `src/`, organized into 6 conceptual domain groups.
+Directories are flat under `src/` (e.g., `src/types/`, `src/cli/`).
+
+| Group | Count | Modules |
+|-------|-------|---------|
+| **core** | 20 | activation, application, calibration, components, composition, conflicts, engines, events, fs, holomorphic, hooks, identifiers, initialization, knowledge, plane, roles, staging, storage, types, utils |
+| **packs** | 12 | amiga, aminet, brainstorm, bundles, chipset, citations, den, dogfood, electronics-pack, retro, simulation, vtm |
+| **tools** | 12 | agents, capabilities, catalog, discovery, embeddings, evaluator, learn, learning, observation, skill-workflows, validation, workflows |
+| **platform** | 8 | cli, commands, console, dashboard, launcher, site, styles, terminal |
+| **services** | 15 | agc, cloud-ops, dacp, detection, disclosure, integration, interpreter, mcp, orchestrator, portability, retrieval, safety, security, services, upstream |
+| **integrations** | 4 | git, teams, test, testing |
+
 ## Commit Convention
 
 - Conventional Commits: `<type>(<scope>): <subject>`

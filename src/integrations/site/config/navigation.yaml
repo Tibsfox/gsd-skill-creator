@@ -27,6 +27,16 @@ sections:
     items:
       - label: Skill Creator
         url: /skills/skill-creator/
+  - id: releases
+    label: Releases
+    items:
+      - label: All Releases
+        url: /releases/
+  - id: docs
+    label: Documentation
+    items:
+      - label: All Documentation
+        url: /docs/
   - id: reference
     label: Reference
     items:

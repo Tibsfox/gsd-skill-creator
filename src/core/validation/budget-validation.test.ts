@@ -4,6 +4,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {
   BudgetValidator,
+  BudgetExceededError,
   BudgetSeverity,
   BudgetCheckResult,
   SkillBudgetInfo,
@@ -1204,5 +1205,47 @@ describe('BudgetValidator.loadFromConfig() (BF-01, BT-01)', () => {
     delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
     const validator = BudgetValidator.loadFromConfig();
     expect(validator.getCumulativeBudgetForProfile('gsd-planner')).toBe(15500);
+  });
+});
+
+// ============================================================================
+// BudgetExceededError tests
+// ============================================================================
+
+describe('BudgetExceededError', () => {
+  const mockResult: BudgetCheckResult = {
+    valid: false,
+    severity: 'error',
+    usagePercent: 133.3,
+    charCount: 20000,
+    budget: 15000,
+    message: 'Exceeds 15,000 character budget by 5,000 chars',
+    suggestions: ['Reduce description length'],
+  };
+
+  it('extends Error', () => {
+    const err = new BudgetExceededError('my-skill', mockResult);
+    expect(err).toBeInstanceOf(Error);
+  });
+
+  it('sets name to BudgetExceededError', () => {
+    const err = new BudgetExceededError('my-skill', mockResult);
+    expect(err.name).toBe('BudgetExceededError');
+  });
+
+  it('carries skillName and budgetResult', () => {
+    const err = new BudgetExceededError('my-skill', mockResult);
+    expect(err.skillName).toBe('my-skill');
+    expect(err.budgetResult).toBe(mockResult);
+    expect(err.budgetResult.charCount).toBe(20000);
+    expect(err.budgetResult.budget).toBe(15000);
+    expect(err.budgetResult.severity).toBe('error');
+  });
+
+  it('message includes skill name and char counts', () => {
+    const err = new BudgetExceededError('my-skill', mockResult);
+    expect(err.message).toContain('my-skill');
+    expect(err.message).toContain('20,000');
+    expect(err.message).toContain('15,000');
   });
 });

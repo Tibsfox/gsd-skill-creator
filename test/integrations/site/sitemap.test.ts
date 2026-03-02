@@ -113,4 +113,28 @@ describe('generateHtaccess', () => {
     const htaccess = generateHtaccess(makeSite());
     expect(htaccess).toContain('404.html');
   });
+
+  it('routes agent discovery files to root', () => {
+    const htaccess = generateHtaccess(makeSite());
+    expect(htaccess).toContain('llms\\.txt');
+    expect(htaccess).toContain('llms-full\\.txt');
+    expect(htaccess).toContain('AGENTS\\.md');
+  });
+
+  it('has static file existence check', () => {
+    const htaccess = generateHtaccess(makeSite());
+    expect(htaccess).toContain('RewriteCond %{REQUEST_FILENAME} -f');
+  });
+
+  it('extracts WP subdirectory from wordpress.url', () => {
+    const site = makeSite();
+    site.wordpress = {
+      url: 'https://example.com/blog',
+      api: 'https://example.com/blog/wp-json/wp/v2',
+      comments_enabled: true,
+      comments_moderation: true,
+    };
+    const htaccess = generateHtaccess(site);
+    expect(htaccess).toContain('/blog');
+  });
 });

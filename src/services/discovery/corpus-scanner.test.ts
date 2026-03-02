@@ -3,6 +3,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync
 import { join } from 'path';
 import os from 'os';
 import { CorpusScanner } from './corpus-scanner.js';
+import { SCAN_SCHEMA_VERSION } from './scan-state-store.js';
 import type { SessionInfo, ParsedEntry } from './types.js';
 
 // ============================================================================
@@ -580,5 +581,84 @@ describe('CorpusScanner', () => {
     expect(stats3.newSessions).toBe(1);
     expect(stats3.modifiedSessions).toBe(0);
     expect(stats3.skippedSessions).toBe(4);
+  });
+
+  // Test 16: schemaVersion mismatch re-processes all sessions
+  it('schemaVersion mismatch re-processes all sessions as new', async () => {
+    const { claudeBaseDir, statePath } = setup();
+
+    createTestProject(claudeBaseDir, 'project-a', [
+      { sessionId: 'sess-001', fileMtime: 1000 },
+      { sessionId: 'sess-002', fileMtime: 2000 },
+    ]);
+
+    // First scan (sets watermarks)
+    const scanner1 = new CorpusScanner({ claudeBaseDir, statePath });
+    await scanner1.scan(noopProcessor);
+
+    // Manually write state with old schemaVersion (0 = pre-versioning)
+    const stateRaw = JSON.parse(readFileSync(statePath, 'utf-8'));
+    stateRaw.schemaVersion = 0; // Simulate pre-versioning state
+    writeFileSync(statePath, JSON.stringify(stateRaw), 'utf-8');
+
+    // Second scan: should re-process all sessions because schemaVersion mismatches
+    const processedIds: string[] = [];
+    const scanner2 = new CorpusScanner({ claudeBaseDir, statePath });
+    const stats = await scanner2.scan(async (session: SessionInfo) => {
+      processedIds.push(session.sessionId);
+    });
+
+    expect(processedIds).toHaveLength(2);
+    expect(processedIds).toContain('sess-001');
+    expect(processedIds).toContain('sess-002');
+    expect(stats.newSessions).toBe(2);
+  });
+
+  // Test 17: schemaVersion is updated in saved state after scan
+  it('schemaVersion is updated to SCAN_SCHEMA_VERSION after scan', async () => {
+    const { claudeBaseDir, statePath } = setup();
+
+    createTestProject(claudeBaseDir, 'project-a', [
+      { sessionId: 'sess-001', fileMtime: 1000 },
+    ]);
+
+    // Write state with old schemaVersion
+    mkdirSync(stateDir, { recursive: true });
+    writeFileSync(statePath, JSON.stringify({
+      version: 1,
+      schemaVersion: 0,
+      sessions: {},
+      excludeProjects: [],
+    }), 'utf-8');
+
+    const scanner = new CorpusScanner({ claudeBaseDir, statePath });
+    await scanner.scan(noopProcessor);
+
+    // Verify persisted state has updated schemaVersion
+    const raw = JSON.parse(readFileSync(statePath, 'utf-8'));
+    expect(raw.schemaVersion).toBe(SCAN_SCHEMA_VERSION);
+  });
+
+  // Test 18: matching schemaVersion does NOT clear watermarks
+  it('matching schemaVersion does not trigger re-processing', async () => {
+    const { claudeBaseDir, statePath } = setup();
+
+    createTestProject(claudeBaseDir, 'project-a', [
+      { sessionId: 'sess-001', fileMtime: 1000 },
+    ]);
+
+    // First scan
+    const scanner1 = new CorpusScanner({ claudeBaseDir, statePath });
+    await scanner1.scan(noopProcessor);
+
+    // Second scan with same schemaVersion -- should skip all
+    const processedIds: string[] = [];
+    const scanner2 = new CorpusScanner({ claudeBaseDir, statePath });
+    const stats = await scanner2.scan(async (session: SessionInfo) => {
+      processedIds.push(session.sessionId);
+    });
+
+    expect(processedIds).toHaveLength(0);
+    expect(stats.skippedSessions).toBe(1);
   });
 });

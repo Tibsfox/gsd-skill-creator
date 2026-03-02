@@ -38,7 +38,9 @@ export interface GantryData {
 // Constants
 // ============================================================================
 
-/** Maximum number of cells rendered in the gantry strip. */
+/** @justification Type: Accepted heuristic. Mirrors MAX_CELLS from gantry-data.ts --
+ * 8-cell limit for the gantry strip at standard viewport width.
+ * @see src/dashboard/gantry-data.ts for primary justification */
 const MAX_CELLS = 8;
 
 // ============================================================================
