@@ -1,0 +1,48 @@
+{
+  "name": "Default College Mapping",
+  "description": "Standard virtual department groupings for the College explorer. Ships with the framework.",
+  "virtualDepartments": [
+    {
+      "id": "sciences",
+      "name": "Sciences",
+      "description": "Natural sciences exploring the physical, chemical, and biological world",
+      "subjects": ["physics", "chemistry", "science", "astronomy", "environmental", "nature-studies"]
+    },
+    {
+      "id": "computing",
+      "name": "Computing",
+      "description": "Digital skills, programming, data, and emerging technologies",
+      "subjects": ["coding", "data-science", "digital-literacy", "electronics", "spatial-computing", "cloud-systems", "technology"]
+    },
+    {
+      "id": "humanities",
+      "name": "Humanities",
+      "description": "Human culture, history, language, and philosophical inquiry",
+      "subjects": ["history", "geography", "philosophy", "theology", "languages", "reading", "writing", "communication"]
+    },
+    {
+      "id": "arts",
+      "name": "Arts",
+      "description": "Creative expression through visual arts, music, and culinary craft",
+      "subjects": ["art", "music", "culinary-arts"]
+    },
+    {
+      "id": "quantitative",
+      "name": "Quantitative",
+      "description": "Mathematics, statistics, logic, and formal reasoning",
+      "subjects": ["math", "mathematics", "statistics", "logic", "problem-solving", "critical-thinking"]
+    },
+    {
+      "id": "social-applied",
+      "name": "Social and Applied",
+      "description": "Social sciences, economics, psychology, wellness, and applied life skills",
+      "subjects": ["economics", "psychology", "business", "home-economics", "nutrition", "physical-education", "learning", "mind-body"]
+    },
+    {
+      "id": "engineering-trades",
+      "name": "Engineering and Trades",
+      "description": "Engineering disciplines, materials science, and skilled trades",
+      "subjects": ["engineering", "materials", "trades"]
+    }
+  ]
+}
