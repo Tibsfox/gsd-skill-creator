@@ -1,0 +1,54 @@
+{
+  "id": "building-01-notch-cutting-beginner",
+  "title": "Log Cabin Notch Cutting: Saddle and V-Notch",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the two primary log notch types used in Appalachian log cabin construction -- the saddle notch and the V-notch. Understand how notch geometry creates self-draining, load-bearing connections between horizontal logs.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "ConstructionProcess",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand why notches matter: log cabins are joined at corners by notches cut into the logs. The notch transfers vertical load from the wall above through each corner to the foundation.",
+      "culturalContext": "Appalachian log cabin construction draws on traditions brought by Scots-Irish, German, and English settlers to the central and southern Appalachians from the 1700s onward. These traditions were shaped by the forest resources available -- primarily white oak, chestnut, and tulip poplar -- and by the skills settlers developed for working without sawmills or hardware stores.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn the saddle notch: the most common Appalachian notch. Cut a rounded saddle in the bottom of the upper log to fit snugly over the rounded top of the lower log. The saddle faces DOWN -- this allows rain to shed outward rather than collect in the notch joint.",
+      "safetyNote": "Structural gate: a saddle notch must seat fully -- no rocking or gaps. A log that can rock on its notch will eventually fail under load. Check each notch for full, stable seating before continuing the wall course above it.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn the V-notch: cut matching 60-degree V-cuts in top and bottom of mating logs. V-notch is self-aligning and highly stable. Less tolerant of poorly fitted cuts than saddle notch. Common in German-heritage Appalachian building.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Understand wood selection for structural logs: use straight-grained, sound timber. Avoid logs with large knots at the notch location -- knots are stress concentrators. Green (freshly cut) logs are easier to notch but will shrink; leave settling space above door and window frames.",
+      "safetyNote": "Structural gate: plan for log settling. Green logs shrink 3-5% across the grain as they dry. Doors and windows must have 'settling spaces' above the frame, filled with compressible insulation, or they will bind as the wall settles.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Learn chinking: the gap between logs is filled with chinking -- historically clay-moss-grass mixtures, later lime mortar, today often modern chink material. Good chinking is the difference between a drafty cabin and a warm one.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Understand the stone chimney: a functional fireplace requires a stone or masonry chimney. The firebox (the fire chamber) must be isolated from combustible wood framing with non-combustible stone or brick -- minimum 2-inch clearance on all sides.",
+      "safetyNote": "Fire safety annotation: stone chimney construction requires understanding flue sizing (the flue must draw correctly to prevent smoke and CO from entering the room), isolation of firebox from wood framing, and proper cap to keep rain and animals out. This session introduces concepts only. Consult a qualified mason before building a functional chimney.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 7,
+      "instruction": "Understand the cabin raising in community context: cabin raising was a community event in Appalachian tradition -- neighbors gathered to raise the walls in a single day, combining labor to complete work no single family could do alone.",
+      "culturalContext": "The 'cabin raising' is one of the most documented forms of Appalachian community mutual aid. Families contributed labor to each other's cabin raisings, clearing and harvest days, and other intensive work events. This reciprocal community labor network enabled settlement of the region without the wage labor or machinery that would develop later.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
