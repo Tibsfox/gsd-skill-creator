@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-02T13:26:21.350Z"
+last_updated: "2026-03-02T06:14:00.000Z"
 progress:
   total_phases: 14
   completed_phases: 14
-  total_plans: 17
-  completed_plans: 17
+  total_plans: 18
+  completed_plans: 18
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Skills are discovered from real patterns and proved against mathematical foundations
-**Current focus:** v1.49.10 College Expansion — Phase 24 plan 01 complete, dynamic mapping layer implemented
+**Current focus:** v1.49.10 College Expansion — Phase 25 plan 01 complete, cross-reference network implemented
 
 ## Current Position
 
-Phase: 24 of 27 (Dynamic Mapping Layer)
+Phase: 25 of 27 (Cross-Reference Network)
 Plan: 1 of 1 in current phase (plan complete)
-Status: Phase 24 Plan 01 complete — MappingLoader, 7 virtual departments, 4 tracks, 18 passing tests
-Last activity: 2026-03-02 — Completed 24-01-PLAN.md (mapping layer: 10 files, 18 tests passing, MAP-01 through MAP-06 all satisfied)
+Status: Phase 25 Plan 01 complete — XRefRegistry (63 edges), DepChainValidator, XREF-02 concept links, 19 passing tests
+Last activity: 2026-03-02 — Completed 25-01-PLAN.md (cross-reference network: 8 files created, 6 modified, 19 tests passing, XREF-01 through XREF-05 all satisfied)
 
-Progress: ███░░░░░░░ 50% (3/6 phases complete)
+Progress: ████░░░░░░ 67% (4/6 phases complete)
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Progress: ███░░░░░░░ 50% (3/6 phases complete)
 | Phase 22-foundational-subject-migration P04 | 14 | 2 tasks | 128 files |
 | Phase 23-specialized-pack-integration P01 | 55 | 5 tasks | 87 files |
 | Phase 24-dynamic-mapping-layer P01 | ~20 | 3 tasks | 10 files |
+| Phase 25-cross-reference-network P01 | ~35 | 3 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,10 @@ Progress: ███░░░░░░░ 50% (3/6 phases complete)
 - [Phase 24-dynamic-mapping-layer]: MappingLoader uses lazy loading (ensureLoaded) — no file watcher, reload() is explicit and test-friendly
 - [Phase 24-dynamic-mapping-layer]: default.json has 7 groups; tracks.json has 4 tracks; user/ directory holds user-created custom JSON mappings
 - [Phase 24-dynamic-mapping-layer]: VirtualDepartment, MappingFile, EducationalTrack, TrackFile types exported from both .college/college/types.ts and .college/mappings/index.ts
+- [Phase 25-cross-reference-network]: DepChainValidator starts chain traversal at depth=1 (not 0) so "5 nodes in chain" correctly triggers max-depth error with depth=5 > MAX_DEPTH=4
+- [Phase 25-cross-reference-network]: pe-fitness-training.ts had wrong mind-body concept ID (mb-diaphragmatic-breathing vs actual mb-breath-diaphragmatic) -- corrected inline
+- [Phase 25-cross-reference-network]: ALL_XREF_EDGES = 63 edges (6+4+4+3+3+3+3+3+2+3+2+1+2+1+4+2+1+2+3+2+1+2+1+3+2 = 63), derived from YAML; do NOT hardcode this number
+- [Phase 25-cross-reference-network]: CrossReferenceResolver.resolveAll() uses domain field of target concept (not a 'department' field) -- stub concepts need domain set to the department string
 
 ### Pending Todos
 
@@ -105,6 +110,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-02
-Stopped at: Completed 24-01-PLAN.md — Phase 24 Plan 01 complete (dynamic mapping layer: 10 files, 18 tests passing, MAP-01 through MAP-06 all satisfied)
+Stopped at: Completed 25-01-PLAN.md — Phase 25 Plan 01 complete (cross-reference network: 8 files created, 6 modified, 19 tests passing, XREF-01 through XREF-05 all satisfied)
 Resume file: None
-Next action: Continue to Phase 25 (cross-reference layer) or other pending phases
+Next action: Continue to Phase 26 (safety phase) or other pending phases

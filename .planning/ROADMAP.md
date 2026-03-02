@@ -53,7 +53,7 @@ Full details: `.planning/milestones/v1.49.9-ROADMAP.md`
 - [x] **Phase 22: Foundational Subject Migration** — Convert all 35 foundational packs to college department format in three tier batches (completed 2026-03-02)
 - [x] **Phase 23: Specialized Pack Integration** — Integrate electronics, spatial-computing, and cloud-systems with domain-specific features preserved (completed 2026-03-02)
 - [x] **Phase 24: Dynamic Mapping Layer** — JSON schema, default groupings, educational tracks, user custom views, hot-reload (completed 2026-03-02)
-- [ ] **Phase 25: Cross-Reference Network** — Import 48 dependency-graph edges, cross-department links, Complex Plane positioning
+- [x] **Phase 25: Cross-Reference Network** — Import 63 dependency-graph edges, cross-department links, DepChainValidator, XREF-01 through XREF-05 satisfied (completed 2026-03-02)
 - [ ] **Phase 26: Safety Extensions** — SafetyBoundary definitions for chemistry, electronics, physical-education, nutrition
 - [ ] **Phase 27: Test Suite and Verification** — Discovery, loading, cross-references, mappings, safety, performance
 
@@ -119,7 +119,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 25-01: Import 48 dependency-graph edges, new cross-department links, Complex Plane positioning, depth/cycle validation
+- [x] 25-01: XRefRegistry (63 dep-graph edges), XREF-02 concept links (nutrition↔culinary-arts, pe↔mind-body, math↔mathematics), DepChainValidator (max depth 4 + cycle detection), performance test (41 depts in ~2ms), 19 tests passing (completed 2026-03-02)
 
 ### Phase 26: Safety Extensions
 **Goal**: Chemistry, electronics, physical-education, and nutrition departments have SafetyBoundary definitions that integrate with the existing 3-mode Safety Warden
@@ -163,6 +163,6 @@ Plans:
 | 22. Foundational Subject Migration | 4/4 | Complete    | 2026-03-02 | 2026-03-02 |
 | 23. Specialized Pack Integration | v1.49.10 | Complete    | 2026-03-02 | - |
 | 24. Dynamic Mapping Layer | v1.49.10 | Complete    | 2026-03-02 | 2026-03-02 |
-| 25. Cross-Reference Network | v1.49.10 | 0/1 | Not started | - |
+| 25. Cross-Reference Network | v1.49.10 | 1/1 | Complete | 2026-03-02 |
 | 26. Safety Extensions | v1.49.10 | 0/1 | Not started | - |
 | 27. Test Suite and Verification | v1.49.10 | 0/1 | Not started | - |
