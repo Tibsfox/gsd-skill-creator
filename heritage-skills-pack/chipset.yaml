@@ -1,0 +1,407 @@
+name: heritage-skills-pack
+version: "2.0.0"
+phase: 1
+description: |
+  Heritage Living Skills Educational Pack — Phase 1.
+  Covers four traditions (Appalachian, First Nations, Inuit, cross-tradition)
+  across 14 rooms with physical safety enforcement, cultural sovereignty
+  architecture, SUMO ontological scaffold, and Heritage Book authoring pipeline.
+milestone: v1.50.0
+
+skills:
+  safety-warden:
+    model: opus
+    module: heritage-skills-pack/safety/warden.ts
+    role: "Physical safety enforcement across 9 domains (food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival)"
+    evaluation_modes: [annotate, gate, redirect]
+    critical_rooms: [5, 9, 14]
+
+  cultural-sovereignty-warden:
+    model: opus
+    module: heritage-skills-pack/safety/cultural-warden.ts
+    role: "Cultural sovereignty classification (4 levels) and hard-blocking of Level 3-4 sacred/ceremonial content"
+    frameworks: [OCAP, IQ, CARE, NISR, UNDRIP]
+    hard_block_level: 4
+
+  northern-ways:
+    model: sonnet
+    module: heritage-skills-pack/northern-ways/index.ts
+    role: "IQ, OCAP, CARE, NISR reference frameworks; nations reference (10 nations/groups); seasonal rounds"
+    nations_covered: 10
+
+  canonical-works:
+    model: sonnet
+    module: heritage-skills-pack/canonical-works/index.ts
+    role: "Creator-first canonical works library (Foxfire, First Nations, Inuit sources) and bibliography engine"
+    citation_formats: [chicago, apa, mla]
+
+  skill-hall:
+    model: sonnet
+    module: heritage-skills-pack/skill-hall/framework.ts
+    role: "Room navigation, Try Session engine, SUMO browser overlay — integrates both wardens on every interaction"
+    rooms_phase1: 14
+
+  authoring-pipeline:
+    model: haiku
+    module: heritage-skills-pack/project-builder/workflow.ts
+    role: "Oral History Studio, Interview Simulator, Heritage Book Template, Project Builder Workflow, Export Pipeline"
+    export_formats: [docx, pdf]
+    syllabics_support: true
+
+agents:
+  heritage-guide:
+    model: opus
+    description: |
+      Primary learner-facing agent. Navigates the Skill Hall, runs Try Sessions,
+      and enforces safety and cultural sovereignty in real time. Routes to
+      specialist agents for authoring, bibliography, and cultural auditing.
+    skills:
+      - skill-hall
+      - safety-warden
+      - cultural-sovereignty-warden
+    evaluation_gates:
+      - physical-safety-check
+      - cultural-sovereignty-check
+      - pan-indigenous-language-check
+
+  safety-auditor:
+    model: opus
+    description: |
+      Independent physical safety auditor. Evaluates all content for harm risk
+      across 9 safety domains. Verifies that CRITICAL, GATE, ANNOTATE, and
+      REDIRECT rules fire correctly on adversarial inputs.
+    skills:
+      - safety-warden
+    evaluation_gates:
+      - physical-safety-check
+
+  cultural-auditor:
+    model: opus
+    description: |
+      Independent cultural sovereignty auditor. Classifies content by sovereignty
+      level, verifies Level 3-4 blocking operates correctly, checks OCAP/IQ/CARE
+      compliance, and confirms nation-specific attribution on all Indigenous content.
+    skills:
+      - cultural-sovereignty-warden
+      - northern-ways
+    evaluation_gates:
+      - cultural-sovereignty-check
+      - pan-indigenous-language-check
+
+  knowledge-curator:
+    model: sonnet
+    description: |
+      Canonical works and bibliography specialist. Resolves source references to
+      canonical catalog entries, generates properly formatted citations in Chicago/
+      APA/MLA, enforces creator-first purchase links, and generates Fair Use notices.
+    skills:
+      - canonical-works
+    evaluation_gates:
+      - fair-use-check
+
+  heritage-author:
+    model: haiku
+    description: |
+      Heritage Book authoring and export specialist. Guides users from oral history
+      interview planning (OHA + IQ methodology) through simulation, Heritage Book
+      creation, community review gates for Indigenous content, and docx/pdf export
+      with Inuktitut syllabics support.
+    skills:
+      - authoring-pipeline
+      - northern-ways
+    evaluation_gates:
+      - cultural-sovereignty-check
+
+evaluation_gates:
+  physical-safety-check:
+    description: "Fires before any content that could cause physical harm"
+    triggers:
+      - food preservation
+      - canning
+      - low-acid vegetables
+      - botulism
+      - pemmican
+      - foraging
+      - plant identification
+      - white-flowered plant
+      - arctic survival
+      - igloo
+      - qulliq
+      - hypothermia
+      - ice travel
+      - blacksmithing
+      - forge
+      - kiln
+      - pottery firing
+      - structural construction
+      - water bath
+      - pokeweed
+    action: call safety-warden.annotate_or_gate_or_redirect()
+    fail_action: BLOCK — canProceed=false for CRITICAL rules, gate warning for GATE rules
+    override: "CRITICAL rules are non-overridable. User acknowledgement does not bypass CRITICAL gates."
+
+  cultural-sovereignty-check:
+    description: "Fires before any content referencing Indigenous traditions, ceremonies, or sacred knowledge"
+    triggers:
+      - ceremony
+      - sacred
+      - ritual
+      - spiritual practice
+      - sweat lodge
+      - medicine bundle
+      - creation story
+      - sacred songs
+      - angakkuq
+      - First Nations
+      - Inuit
+      - Indigenous
+      - Anishinaabe
+      - Ojibwe
+      - Cree
+      - Haudenosaunee
+      - Inuit tradition
+      - OCAP
+      - IQ principles
+    action: call cultural-sovereignty-warden.classify()
+    fail_action: "Level 3 — ACKNOWLEDGE-AND-REDIRECT. Level 4 — HARD BLOCK, no override, no academic exception, no community membership exception."
+    override: none — Level 4 has no override path
+
+  fair-use-check:
+    description: "Fires before content that could reproduce copyrighted canonical works"
+    triggers:
+      - Foxfire Book full text
+      - chapter text
+      - reproduce this passage
+      - copy this section
+      - give me the text of
+    action: check against fair-use-notices catalog
+    fail_action: REFUSE verbatim reproduction, explain Fair Use policy, direct to creator-first purchase link
+
+  pan-indigenous-language-check:
+    description: "Fires on any generated content before delivery to detect pan-Indigenous generalization"
+    triggers:
+      - Native American tradition
+      - Indigenous peoples believed
+      - Aboriginal practice
+      - all First Nations
+      - generic Indigenous
+    action: FLAG — require nation-specific attribution before content is delivered
+    fail_action: REJECT response, prompt for nation-specific rewrite
+
+routing:
+  - name: appalachian-content
+    description: "Appalachian skills and craft content"
+    content_contains:
+      - Appalachian
+      - Foxfire
+      - Appalachian mountain
+      - Blue Ridge
+      - log cabin
+      - split-oak basket
+    route_to: heritage-guide
+    evaluation_gates:
+      - physical-safety-check
+
+  - name: first-nations-content
+    description: "First Nations content — triggers cultural sovereignty check before any content generation"
+    content_contains:
+      - First Nations
+      - Anishinaabe
+      - Ojibwe
+      - Cree
+      - Haudenosaunee
+      - Iroquois
+      - Metis
+      - Innu
+      - Algonquin
+      - Abenaki
+      - Attikamek
+      - Dene
+      - Mikmaq
+      - birchbark canoe
+      - quillwork
+      - wampum
+    route_to: heritage-guide
+    evaluation_gates:
+      - cultural-sovereignty-check
+      - physical-safety-check
+      - pan-indigenous-language-check
+
+  - name: inuit-content
+    description: "Inuit content — triggers cultural sovereignty check before any content generation"
+    content_contains:
+      - Inuit
+      - Inuktitut
+      - Nunavut
+      - Nunavik
+      - Kivalliq
+      - Baffin
+      - qajaq
+      - qulliq
+      - igloo
+      - ulu
+      - Aajiiqatigiinniq
+      - Pilimmaksarniq
+    route_to: heritage-guide
+    evaluation_gates:
+      - cultural-sovereignty-check
+      - physical-safety-check
+      - pan-indigenous-language-check
+
+  - name: heritage-book-authoring
+    description: "Heritage Book creation and oral history documentation"
+    content_contains:
+      - Heritage Book
+      - oral history
+      - interview plan
+      - interview simulation
+      - OCAP consent
+      - NISR compliance
+    route_to: heritage-author
+
+  - name: bibliography-citation
+    description: "Citations, bibliography generation, and canonical works lookup"
+    content_contains:
+      - citation
+      - bibliography
+      - Foxfire catalog
+      - canonical work
+      - purchase link
+      - Fair Use notice
+    route_to: knowledge-curator
+    evaluation_gates:
+      - fair-use-check
+
+  - name: default
+    description: "Default route for unmatched queries"
+    route_to: heritage-guide
+
+sumo_config:
+  heritage_kif: heritage-skills-pack/shared/sumo/heritage-domain-ontology.kif
+  mappings: heritage-skills-pack/shared/sumo/sumo-mappings.json
+  ontological_bridges: heritage-skills-pack/shared/sumo/ontological-bridges.json
+  wordnet_bridges: heritage-skills-pack/shared/sumo/wordnet-bridges.json
+  bridge_count_minimum: 5
+  room_coverage_required: all_14_phase1_rooms
+
+rooms:
+  - id: 1
+    name: building-shelter
+    path: heritage-skills-pack/skill-hall/rooms/01-building-shelter/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [structural, fire]
+    is_critical: false
+
+  - id: 2
+    name: fiber-textile
+    path: heritage-skills-pack/skill-hall/rooms/02-fiber-textile/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [tool]
+    is_critical: false
+
+  - id: 3
+    name: animals-wildlife
+    path: heritage-skills-pack/skill-hall/rooms/03-animals-wildlife/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [animal, tool, food]
+    is_critical: false
+
+  - id: 4
+    name: woodcraft-tools
+    path: heritage-skills-pack/skill-hall/rooms/04-woodcraft-tools/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [tool]
+    is_critical: false
+
+  - id: 5
+    name: food-preservation
+    path: heritage-skills-pack/skill-hall/rooms/05-food-preservation/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [food]
+    is_critical: true
+    critical_note: "Botulism and pemmican temperature safety — non-overridable gates"
+
+  - id: 6
+    name: music-instruments
+    path: heritage-skills-pack/skill-hall/rooms/06-music-instruments/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [tool]
+    is_critical: false
+
+  - id: 7
+    name: metalwork-smithing
+    path: heritage-skills-pack/skill-hall/rooms/07-metalwork-smithing/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [fire, chemical, structural]
+    is_critical: false
+
+  - id: 8
+    name: pottery-clay
+    path: heritage-skills-pack/skill-hall/rooms/08-pottery-clay/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [fire, chemical]
+    is_critical: false
+
+  - id: 9
+    name: plant-knowledge
+    path: heritage-skills-pack/skill-hall/rooms/09-plant-knowledge/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [plant, medical]
+    is_critical: true
+    critical_note: "No plant ID from description alone — 100% positive identification required"
+
+  - id: 10
+    name: community-culture
+    path: heritage-skills-pack/skill-hall/rooms/10-community-culture/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: []
+    is_critical: false
+    cultural_note: "Cultural sovereignty is the primary enforcement framework — no physical safety rules"
+
+  - id: 11
+    name: seasonal-living
+    path: heritage-skills-pack/skill-hall/rooms/11-seasonal-living/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: [arctic-survival]
+    is_critical: false
+
+  - id: 12
+    name: history-memory
+    path: heritage-skills-pack/skill-hall/rooms/12-history-memory/
+    traditions: [appalachian, first-nations, inuit]
+    safety_domains: []
+    is_critical: false
+    cultural_note: "Cultural sovereignty is the primary enforcement framework — sacred oral narratives are Level 4 hard-block"
+
+  - id: 13
+    name: northern-watercraft
+    path: heritage-skills-pack/skill-hall/rooms/13-northern-watercraft/
+    traditions: [first-nations, inuit]
+    safety_domains: [arctic-survival]
+    is_critical: false
+    ontological_note: "Primary showcase for ontological bridges (Canoe-as-Artifact vs. Canoe-as-Relationship)"
+
+  - id: 14
+    name: arctic-living
+    path: heritage-skills-pack/skill-hall/rooms/14-arctic-living/
+    traditions: [inuit]
+    safety_domains: [arctic-survival, food]
+    is_critical: true
+    critical_note: "CO poisoning prevention — ventilation hole required for every enclosed shelter scenario"
+
+version_info:
+  phase: 1
+  total_components: 33
+  total_rooms: 14
+  traditions:
+    - appalachian
+    - first-nations
+    - inuit
+  phase2_traditions_pending:
+    - pacific-northwest-coast
+  milestone: v1.50.0
+  status: integration-ready
+  model_distribution:
+    opus: "~40% (safety-critical and cultural sovereignty components)"
+    sonnet: "~50% (skill hall, canonical works, northern ways)"
+    haiku: "~10% (authoring pipeline, export)"
