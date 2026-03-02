@@ -1,0 +1,45 @@
+{
+  "roomId": "room-07-metalwork-smithing",
+  "room": 7,
+  "culturalRules": [
+    {
+      "id": "ROOM07-CULT-001",
+      "domain": "metalwork-smithing",
+      "tradition": "appalachian",
+      "concept": "Appalachian blacksmithing and community smith culture",
+      "level": 1,
+      "note": "Appalachian blacksmithing is Level 1 publicly shared craft knowledge. The mountain smith tradition (Scots-Irish and German heritage) is extensively documented in Foxfire volumes and craft revival literature. Appalachian knife-making, farriery, and tool repair are all publicly shared traditions with active practitioner communities. Attribution: Scots-Irish and German immigrant traditions adapted to Appalachian mountain environment from the 1700s onward.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM07-CULT-002",
+      "domain": "metalwork-smithing",
+      "tradition": "inuit",
+      "concept": "Inuinnait (Copper Inuit) copper working",
+      "level": 1,
+      "nationAttribution": "Inuinnait (Copper Inuit)",
+      "note": "Inuinnait cold copper working is Level 1 publicly shared knowledge, documented by Arctic anthropologists and in museum collections (Canadian Museum of History, Smithsonian). The Inuinnait are a distinct Inuit group from the Coronation Gulf area of what is now Nunavut. Their copper-working technology (cold-hammering naturally occurring copper into tools) is a unique Arctic metalwork tradition distinct from the forge-based blacksmithing covered in this room. Always use 'Inuinnait' as the primary nation name -- 'Copper Inuit' is an ethnographic label, not the nation's self-name, though both may be used with explanation.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM07-CULT-003",
+      "domain": "metalwork-smithing",
+      "tradition": "first-nations",
+      "concept": "Northwest Coast copper wealth objects and silver work",
+      "level": 2,
+      "nationAttribution": "Haida, Coast Salish",
+      "note": "Northwest Coast copper objects (the shield-shaped 'coppers' used in potlatch exchange) and silver engraving traditions carry ceremonial and economic significance beyond metalwork technique (Level 2). The construction technique for copper objects is Level 1; the ceremonial context of coppers in potlatch is Level 2-3 and is addressed fully in Phase 37 rooms (Cedar Culture, Village World). Introduce briefly here as a cross-reference; do not attempt to describe potlatch protocols. Nation attribution: Haida, Coast Salish.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM07-CULT-004",
+      "domain": "metalwork-smithing",
+      "tradition": "first-nations",
+      "concept": "Potlatch copper ceremonial context",
+      "level": 3,
+      "nationAttribution": "Haida, Coast Salish, Kwakwaka'wakw",
+      "note": "The ceremonial role of coppers in potlatch practice -- their naming, their breaking as ultimate gift, their role in redistributing wealth -- is Level 3 restricted. This content belongs in Phase 37's Village World room where full Northwest Coast cultural sovereignty framework applies. It must not be described here.",
+      "action": "restrict"
+    }
+  ]
+}

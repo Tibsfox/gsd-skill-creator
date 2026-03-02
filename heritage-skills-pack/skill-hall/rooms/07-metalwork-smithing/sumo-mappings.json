@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-07-forge",
+    "sumoTerm": "Forge",
+    "sumoFile": "engineering.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance BlacksmithForge Forge)",
+    "naturalLanguage": "A blacksmith's forge is an instance of Forge: a device for producing intense localized heat sufficient to bring metal to forging temperature, using combustion of coal or charcoal in a fire pot with an air blast from bellows or electric blower.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-blacksmithing",
+    "sumoTerm": "MetalworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Blacksmithing MetalworkingProcess)",
+    "naturalLanguage": "Blacksmithing is a metalworking process: a set of operations (heating, hammering, cutting, punching, welding) performed on heated iron and steel to produce tools, hardware, and fabricated metal objects.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-appalachian-blacksmithing",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianBlacksmithing HeritageSkill)",
+    "naturalLanguage": "Appalachian blacksmithing is a heritage skill: the forge-based metalworking tradition of the Scots-Irish and German communities of the central and southern Appalachian mountains, encoding knowledge of forge management, hammer technique, heat reading, and the complete production of tools and hardware from raw iron stock.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-knife-making",
+    "sumoTerm": "MetalworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass KnifeMaking MetalworkingProcess)",
+    "naturalLanguage": "Knife making is a metalworking process: shaping steel stock into a blade geometry through forging or grinding, heat-treating the blade to achieve the desired hardness and toughness combination, and fitting and finishing a handle.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-forged-knife",
+    "sumoTerm": "MetallicArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ForgedKnife MetallicArtifact)",
+    "naturalLanguage": "A forged knife is a metallic artifact: a tool produced by the deformation of heated steel stock under hammer blows, shaped to a blade geometry, heat-treated, and handled for cutting use.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-inuinnait-copper",
+    "sumoTerm": "MetalworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuinnaitColdCopperWorking MetalworkingProcess)",
+    "naturalLanguage": "Inuinnait cold copper working is a metalworking process: the cold-hammering of naturally occurring copper nuggets into tool shapes (knives, ulus, scrapers) without the application of heat -- using mechanical deformation and work hardening rather than thermal processing.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-horseshoe",
+    "sumoTerm": "MetallicArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Horseshoe MetallicArtifact)",
+    "naturalLanguage": "A horseshoe is a metallic artifact produced by blacksmithing: a curved metal bar forged to fit the underside of a horse's hoof, protecting the hoof from wear on hard surfaces, fitted and nailed by a farrier.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-wrought-iron-nail",
+    "sumoTerm": "MetallicArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WroughtIronNail MetallicArtifact)",
+    "naturalLanguage": "A wrought iron nail is a metallic artifact produced by blacksmithing: a tapered iron shank with a headed end, produced by cutting a length of heated rod and heading it under hammer blows -- one of the first home manufactures in early Appalachian settlement.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-07-heat-treatment",
+    "sumoTerm": "MetalworkingProcess",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SteelHeatTreatment MetalworkingProcess)",
+    "naturalLanguage": "Steel heat treatment is a metalworking process: the sequence of heating steel to austenite temperature, quenching rapidly to produce martensite (hardening), and reheating to a lower temperature to reduce brittleness (tempering) -- producing the hardness and toughness balance required for a functional blade.",
+    "ontologicalBridge": null
+  }
+]
