@@ -11,8 +11,9 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-// Module under test
-const verify = require(join(process.env.HOME!, '.claude/get-shit-done/bin/lib/verify.cjs'));
+// Module under test — use project-local copy
+const projectRoot = join(__dirname, '..', '..');
+const verify = require(join(projectRoot, '.claude/get-shit-done/bin/lib/verify.cjs'));
 const { cmdVerifyBatchDetection } = verify;
 
 // ============================================================================

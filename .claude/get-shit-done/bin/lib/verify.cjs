@@ -858,6 +858,355 @@ function cmdVerifyTestQuality(cwd, planFilePath, raw) {
   output(result, raw);
 }
 
+// ============================================================================
+// Pacing Advisory
+// ============================================================================
+
+function cmdVerifyPacing(cwd, raw) {
+  const planningDir = path.join(cwd, '.planning');
+  if (!fs.existsSync(planningDir)) {
+    output({ advisory_only: true, error: '.planning/ directory not found', status: 'error', checks: [], report: 'Error: .planning/ directory not found' }, raw);
+    return;
+  }
+
+  // Read STATE.md for session metrics
+  const statePath = path.join(planningDir, 'STATE.md');
+  const stateContent = safeReadFile(statePath) || '';
+
+  // Read config.json for pacing budget settings
+  const configPath = path.join(planningDir, 'config.json');
+  let pacingConfig = { maxSubversionsPerSession: 5, minContextWindowsPerSubversion: 2 };
+  try {
+    const configRaw = safeReadFile(configPath);
+    if (configRaw) {
+      const parsed = JSON.parse(configRaw);
+      if (parsed.pacing) {
+        if (parsed.pacing.maxSubversionsPerSession !== undefined) {
+          pacingConfig.maxSubversionsPerSession = parsed.pacing.maxSubversionsPerSession;
+        }
+        if (parsed.pacing.minContextWindowsPerSubversion !== undefined) {
+          pacingConfig.minContextWindowsPerSubversion = parsed.pacing.minContextWindowsPerSubversion;
+        }
+      }
+    }
+  } catch { /* use defaults */ }
+
+  // Extract phase count from Performance Metrics table
+  const metricsMatch = stateContent.match(/\|\s*Phase\s*\|/i);
+  let phaseCount = 0;
+  if (metricsMatch) {
+    const tableStart = metricsMatch.index;
+    const tableSection = stateContent.slice(tableStart);
+    const rows = tableSection.split('\n').filter(line => line.match(/^\|\s*\d+/));
+    phaseCount = rows.length;
+  }
+
+  // Run budget check
+  const checks = [];
+  let overallStatus = 'pass';
+
+  // Check 1: Session budget
+  const budgetExceeded = phaseCount > pacingConfig.maxSubversionsPerSession;
+  checks.push({
+    name: 'session-budget',
+    status: budgetExceeded ? 'warn' : 'pass',
+    detail: budgetExceeded
+      ? `${phaseCount} phases in session exceeds budget of ${pacingConfig.maxSubversionsPerSession}`
+      : `${phaseCount} phases in session within budget of ${pacingConfig.maxSubversionsPerSession}`,
+  });
+  if (budgetExceeded) overallStatus = 'warn';
+
+  // Check 2: Context depth (check if STATE.md exists and has milestone info)
+  const hasMilestone = /milestone:/i.test(stateContent);
+  checks.push({
+    name: 'context-depth',
+    status: hasMilestone ? 'pass' : 'warn',
+    detail: hasMilestone
+      ? 'STATE.md contains milestone context'
+      : 'STATE.md missing milestone context',
+  });
+  if (!hasMilestone) overallStatus = 'warn';
+
+  // Build report
+  const reportLines = [
+    '=== Pacing Advisory Report ===',
+    '',
+    `Phases in session: ${phaseCount}`,
+    `Budget limit: ${pacingConfig.maxSubversionsPerSession}`,
+    '',
+  ];
+  for (const check of checks) {
+    const tag = check.status === 'pass' ? '[PASS]' : '[WARN]';
+    reportLines.push(`${tag} ${check.name}: ${check.detail}`);
+  }
+  reportLines.push('');
+  reportLines.push(`Overall: ${overallStatus.toUpperCase()}`);
+  const report = reportLines.join('\n');
+
+  output({
+    advisory_only: true,
+    checks,
+    report,
+    status: overallStatus,
+  }, raw);
+}
+
+// ============================================================================
+// Batch Detection Advisory
+// ============================================================================
+
+function cmdVerifyBatchDetection(cwd, raw) {
+  const phasesDir = path.join(cwd, '.planning', 'phases');
+  if (!fs.existsSync(phasesDir)) {
+    output({ advisory_only: true, error: '.planning/phases/ directory not found', overallStatus: 'error', heuristics: {}, report: 'Error: .planning/phases/ directory not found' }, raw);
+    return;
+  }
+
+  // Scan for SUMMARY.md files and extract timestamps
+  const timestamps = [];
+  try {
+    const entries = fs.readdirSync(phasesDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const phaseDir = path.join(phasesDir, entry.name);
+      const files = fs.readdirSync(phaseDir);
+      const summaries = files.filter(f => f.endsWith('-SUMMARY.md'));
+
+      for (const summary of summaries) {
+        const content = safeReadFile(path.join(phaseDir, summary)) || '';
+        const fm = extractFrontmatter(content);
+        if (fm.completed) {
+          const ts = new Date(fm.completed.replace(/^["']|["']$/g, ''));
+          if (!isNaN(ts.getTime())) {
+            timestamps.push({ file: path.join(entry.name, summary), time: ts.getTime(), duration: fm.duration || '' });
+          }
+        }
+      }
+    }
+  } catch { /* empty phases dir */ }
+
+  timestamps.sort((a, b) => a.time - b.time);
+
+  // Heuristic 1: Timestamp clustering (multiple within 60 seconds)
+  let clusterCount = 0;
+  for (let i = 1; i < timestamps.length; i++) {
+    if (timestamps[i].time - timestamps[i - 1].time < 60000) {
+      clusterCount++;
+    }
+  }
+  const clusterDetected = clusterCount >= 2;
+
+  // Heuristic 2: Session compression (many summaries in short window)
+  let compressionDetected = false;
+  if (timestamps.length >= 3) {
+    const totalSpanMinutes = (timestamps[timestamps.length - 1].time - timestamps[0].time) / 60000;
+    const avgMinutesPerSummary = totalSpanMinutes / timestamps.length;
+    compressionDetected = avgMinutesPerSummary < 2 && timestamps.length > 2;
+  }
+
+  // Heuristic 3: Duration uniformity (all durations suspiciously similar)
+  const durations = timestamps.map(t => t.duration).filter(Boolean);
+  let uniformityDetected = false;
+  if (durations.length >= 3) {
+    const uniqueDurations = new Set(durations);
+    uniformityDetected = uniqueDurations.size === 1;
+  }
+
+  // Heuristic 4: Volume check (too many summaries for reasonable work)
+  const volumeDetected = timestamps.length > 10;
+
+  const heuristics = {
+    timestampClustering: {
+      detected: clusterDetected,
+      severity: clusterDetected ? 'warn' : 'none',
+      details: clusterDetected
+        ? `${clusterCount} pairs of summaries within 60 seconds of each other`
+        : 'No timestamp clustering detected',
+    },
+    sessionCompression: {
+      detected: compressionDetected,
+      severity: compressionDetected ? 'warn' : 'none',
+      details: compressionDetected
+        ? `${timestamps.length} summaries with very short average spacing`
+        : 'Session timing appears normal',
+    },
+    durationUniformity: {
+      detected: uniformityDetected,
+      severity: uniformityDetected ? 'info' : 'none',
+      details: uniformityDetected
+        ? 'All summaries report identical duration'
+        : 'Duration values vary (expected)',
+    },
+    volume: {
+      detected: volumeDetected,
+      severity: volumeDetected ? 'info' : 'none',
+      details: `${timestamps.length} summaries found`,
+    },
+  };
+
+  // Determine overall status
+  let overallStatus = 'pass';
+  const detectedCount = Object.values(heuristics).filter(h => h.detected).length;
+  if (detectedCount >= 3) overallStatus = 'critical';
+  else if (detectedCount >= 1 && (clusterDetected || compressionDetected)) overallStatus = 'warn';
+
+  // Build report
+  const reportLines = [
+    '=== Batch Detection Advisory Report ===',
+    '',
+    `Summaries analyzed: ${timestamps.length}`,
+    '',
+  ];
+  for (const [name, h] of Object.entries(heuristics)) {
+    const tag = h.detected ? `[${h.severity.toUpperCase()}]` : '[PASS]';
+    reportLines.push(`${tag} ${name}: ${h.details}`);
+  }
+  reportLines.push('');
+  reportLines.push(`Overall: ${overallStatus.toUpperCase()}`);
+  const report = reportLines.join('\n');
+
+  output({
+    advisory_only: true,
+    heuristics,
+    report,
+    overallStatus,
+  }, raw);
+}
+
+// ============================================================================
+// Lessons Chain Advisory
+// ============================================================================
+
+function cmdVerifyLessonsChain(cwd, raw) {
+  const phasesDir = path.join(cwd, '.planning', 'phases');
+  if (!fs.existsSync(phasesDir)) {
+    output({ advisory_only: true, error: '.planning/phases/ directory not found', overallStatus: 'error', chainIntegrity: {}, catalog: {}, report: 'Error: .planning/phases/ directory not found' }, raw);
+    return;
+  }
+
+  // Scan summaries for lessons-learned sections
+  const phaseLessons = [];
+  try {
+    const entries = fs.readdirSync(phasesDir, { withFileTypes: true });
+    const sortedEntries = entries.filter(e => e.isDirectory()).map(e => e.name).sort();
+
+    for (const dirName of sortedEntries) {
+      const phaseDir = path.join(phasesDir, dirName);
+      const files = fs.readdirSync(phaseDir);
+      const summaries = files.filter(f => f.endsWith('-SUMMARY.md'));
+
+      for (const summary of summaries) {
+        const content = safeReadFile(path.join(phaseDir, summary)) || '';
+
+        // Extract lessons section
+        const lessonsMatch = content.match(/##\s*(?:Lessons\s+Learned|Lessons|Key\s+Lessons)([\s\S]*?)(?=\n##\s|\n---|\n$|$)/i);
+        const lessons = [];
+        if (lessonsMatch) {
+          const lessonsText = lessonsMatch[1];
+          const bulletItems = lessonsText.match(/^[\s]*[-*]\s+(.+)/gm) || [];
+          for (const item of bulletItems) {
+            lessons.push(item.replace(/^[\s]*[-*]\s+/, '').trim());
+          }
+        }
+
+        // Check for references to prior phases/milestones
+        const priorRefs = [];
+        const phaseRefPattern = /(?:Phase|phase)\s+(\d+)/g;
+        const milestoneRefPattern = /(?:v\d+\.\d+(?:\.\d+)?)/g;
+        let match;
+        while ((match = phaseRefPattern.exec(content)) !== null) {
+          priorRefs.push(`Phase ${match[1]}`);
+        }
+        while ((match = milestoneRefPattern.exec(content)) !== null) {
+          priorRefs.push(match[0]);
+        }
+
+        phaseLessons.push({
+          phase: dirName,
+          file: summary,
+          lessons,
+          priorReferences: [...new Set(priorRefs)],
+          hasLessons: lessons.length > 0,
+        });
+      }
+    }
+  } catch { /* empty phases dir */ }
+
+  // Chain integrity: check that lessons reference prior work
+  const totalWithLessons = phaseLessons.filter(p => p.hasLessons).length;
+  const totalWithRefs = phaseLessons.filter(p => p.priorReferences.length > 0).length;
+  const totalPhases = phaseLessons.length;
+
+  let integrityStatus = 'intact';
+  if (totalPhases === 0) {
+    integrityStatus = 'incomplete';
+  } else if (totalWithLessons === 0) {
+    integrityStatus = 'broken';
+  } else if (totalWithLessons < totalPhases * 0.5) {
+    integrityStatus = 'incomplete';
+  }
+
+  const chainIntegrity = {
+    totalPhases,
+    phasesWithLessons: totalWithLessons,
+    phasesWithPriorReferences: totalWithRefs,
+    status: integrityStatus,
+  };
+
+  // Build catalog: count unique lessons, find recurring patterns
+  const allLessons = phaseLessons.flatMap(p => p.lessons);
+  const uniqueCount = new Set(allLessons).size;
+
+  // Simple recurring pattern detection: look for repeated words across lessons
+  const wordCounts = {};
+  for (const lesson of allLessons) {
+    const words = lesson.toLowerCase().split(/\s+/).filter(w => w.length > 4);
+    for (const word of words) {
+      wordCounts[word] = (wordCounts[word] || 0) + 1;
+    }
+  }
+  const recurringPatterns = Object.entries(wordCounts)
+    .filter(([, count]) => count >= 3)
+    .map(([word]) => word)
+    .slice(0, 5);
+
+  const catalog = {
+    totalLessons: allLessons.length,
+    uniqueLessons: uniqueCount,
+    recurringPatterns,
+    byPhase: phaseLessons.map(p => ({ phase: p.phase, count: p.lessons.length })),
+  };
+
+  // Build report
+  const reportLines = [
+    '=== Lessons Chain Integrity Report ===',
+    '',
+    `Phases analyzed: ${totalPhases}`,
+    `Phases with lessons: ${totalWithLessons}`,
+    `Phases with prior references: ${totalWithRefs}`,
+    '',
+    `Chain integrity: ${integrityStatus.toUpperCase()}`,
+    '',
+    '--- Catalog ---',
+    `Total lessons: ${allLessons.length}`,
+    `Unique lessons: ${uniqueCount}`,
+    recurringPatterns.length > 0
+      ? `Recurring patterns: ${recurringPatterns.join(', ')}`
+      : 'No recurring patterns detected',
+    '',
+    `Overall: ${integrityStatus.toUpperCase()}`,
+  ];
+  const report = reportLines.join('\n');
+
+  output({
+    advisory_only: true,
+    chainIntegrity,
+    catalog,
+    report,
+    overallStatus: integrityStatus,
+  }, raw);
+}
+
 module.exports = {
   cmdVerifySummary,
   cmdVerifyPlanStructure,
@@ -869,4 +1218,7 @@ module.exports = {
   cmdValidateConsistency,
   cmdValidateHealth,
   cmdVerifyTestQuality,
+  cmdVerifyPacing,
+  cmdVerifyBatchDetection,
+  cmdVerifyLessonsChain,
 };
