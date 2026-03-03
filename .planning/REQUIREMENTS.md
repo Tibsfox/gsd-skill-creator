@@ -23,7 +23,7 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 - [x] **EVAL-02**: Aggregate benchmark produces configuration x model matrix without breaking existing per-configuration output
 - [x] **EVAL-03**: Grader receives model capability profile and produces model-specific improvement hints
 - [x] **EVAL-04**: thresholds.json defines per-chip pass rate thresholds with configurable defaults
-- [ ] **EVAL-05**: Eval viewer gains model filter dropdown with side-by-side comparison and threshold-relative display
+- [x] **EVAL-05**: Eval viewer gains model filter dropdown with side-by-side comparison and threshold-relative display
 - [x] **EVAL-06**: Legacy benchmarks without model field display correctly (backward compatible)
 
 ### MCP Infrastructure
@@ -58,7 +58,7 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 - [ ] **IMP-01**: Every lifecycle method has an integration test verifying auto-invocation (not just unit correctness)
 - [ ] **IMP-02**: Inter-wave integration review gate at each wave boundary assessing cross-wave connections
 - [x] **IMP-03**: Threshold registry (thresholds.md) documents every hardcoded numeric value with rationale and file:line
-- [ ] **IMP-04**: Test-to-source ratio tracked per wave in verification reports (target >=3:1)
+- [x] **IMP-04**: Test-to-source ratio tracked per wave in verification reports (target >=3:1)
 - [x] **IMP-05**: v1.49.14 deferred items cross-referenced (ADVN-03 cost analysis, ADVN-04 auto PR, EREG-01 private registries)
 - [ ] **IMP-06**: Pure-function enforcement for all scoring and routing logic (no I/O in hot paths)
 - [ ] **IMP-07**: Append-only pattern applied to mesh event logs (reuse v1.49.14 health.jsonl pattern)
@@ -109,7 +109,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EVAL-02 | Phase 51 | Complete |
 | EVAL-03 | Phase 51 | Complete |
 | EVAL-04 | Phase 51 | Complete |
-| EVAL-05 | Phase 51 | Pending |
+| EVAL-05 | Phase 51 | Complete |
 | EVAL-06 | Phase 51 | Complete |
 | MCP-01 | Phase 52 | Pending |
 | MCP-02 | Phase 52 | Pending |
@@ -132,7 +132,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | IMP-01 | Phase 52 | Pending |
 | IMP-02 | Phase 53 | Pending |
 | IMP-03 | Phase 50 | Complete (50-03) |
-| IMP-04 | Phase 51 | Pending |
+| IMP-04 | Phase 51 | Complete (51-03) |
 | IMP-05 | Phase 50 | Complete (50-01) |
 | IMP-06 | Phase 53 | Pending |
 | IMP-07 | Phase 52 | Pending |

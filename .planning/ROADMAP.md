@@ -86,7 +86,7 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
 ## Phases
 
 - [x] **Phase 50: Model Abstraction** - ModelChip interface, OpenAI-compatible and Anthropic chips, ChipRegistry, CLI integration, backward compatibility (COMPLETE 2026-03-03)
-- [ ] **Phase 51: Multi-Model Evaluation** - Benchmark schema extension, grader cross-model calibration, thresholds.json, eval viewer model filter
+- [x] **Phase 51: Multi-Model Evaluation** - Benchmark schema extension, grader cross-model calibration, thresholds.json, eval viewer model filter (COMPLETE 2026-03-03)
 - [ ] **Phase 52: MCP Infrastructure** - Local LLM MCP Wrapper, Mesh Discovery Service, DACP mesh transport, fidelity adaptation
 - [ ] **Phase 53: Mesh Orchestration** - Mesh Coordinator agent, VTM mesh-aware wave planning, cross-model optimization, cost-aware routing
 - [ ] **Phase 54: Context & Integration** - Context preservation, transcript summarizer, mesh git worktrees, Skill Creator MCP Server
@@ -120,12 +120,12 @@ Plans:
   3. The grader produces model-specific improvement hints when it knows a model's capability profile — a known-limitation case yields different guidance for Claude vs a smaller local model
   4. Legacy benchmark files without a model field display correctly in the viewer — no regressions for existing benchmark history
   5. Test-to-source ratio for this phase is tracked and reported in the verification record, targeting >=3:1
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 51-01-PLAN.md — Eval types, Zod schemas (ModelBenchmarkRun, MultiModelBenchmark), ThresholdsConfigLoader
-- [ ] 51-02-PLAN.md — MultiModelBenchmarkRunner, ModelAwareGrader with capability-driven hints
-- [ ] 51-03-PLAN.md — EvalViewer formatting engine, CLI eval command, thresholds.md update, IMP-04 tracking
+- [x] 51-01-PLAN.md — Eval types, Zod schemas (ModelBenchmarkRun, MultiModelBenchmark), ThresholdsConfigLoader
+- [x] 51-02-PLAN.md — MultiModelBenchmarkRunner, ModelAwareGrader with capability-driven hints
+- [x] 51-03-PLAN.md — EvalViewer formatting engine, CLI eval command, thresholds.md update, IMP-04 tracking
 
 ### Phase 52: MCP Infrastructure
 **Goal**: Two machines can communicate via DACP-over-MCP with provenance tracking, and mesh nodes register, advertise capabilities, and are evicted when unhealthy
