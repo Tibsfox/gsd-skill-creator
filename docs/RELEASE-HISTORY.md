@@ -1,17 +1,19 @@
 # Release History
 
-58 milestones shipped across 507 phases, 1,219 plans, ~564K LOC, and 22,820 tests.
+60 milestones shipped across 517 phases, 1,255 plans, ~575K LOC, and 23,330 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
-| [v1.49.12](release-notes/v1.49.12/) | Heritage Skills Educational Pack | 2026-03-02 | 12 | 45 | |
-| v1.49.11 | gsd-init Hardening | 2026-03-02 | — | — | |
-| v1.49.10 | College Expansion | 2026-03-02 | 6 | 9 | |
-| v1.49.9 | Learn Kung Fu | 2026-03-01 | 11 | 11 | |
-| v1.49.8 | Cooking With Claude | 2026-03-01 | 11 | 45 | |
-| v1.49.7 | Optional tmux with Graceful Degradation | 2026-03-01 | — | — | |
+| [v1.49.14](release-notes/v1.49.14/) | Dependency Health Monitor & Progressive Internalization Engine | 2026-03-03 | 6 | 26 | [retro](release-notes/v1.49.14/RETROSPECTIVE.md), [lessons](release-notes/v1.49.14/LESSONS-LEARNED.md) |
+| [v1.49.13](release-notes/v1.49.13/) | Skill Usage Telemetry & Adaptive Pipeline | 2026-03-03 | 4 | 10 | [retro](release-notes/v1.49.13/RETROSPECTIVE.md), [lessons](release-notes/v1.49.13/LESSONS-LEARNED.md) |
+| [v1.49.12](release-notes/v1.49.12/) | Heritage Skills Educational Pack | 2026-03-02 | 12 | 45 | [retro](release-notes/v1.49.12/RETROSPECTIVE.md), [lessons](release-notes/v1.49.12/LESSONS-LEARNED.md) |
+| [v1.49.11](release-notes/v1.49.11/) | gsd-init Hardening | 2026-03-02 | — | — | |
+| [v1.49.10](release-notes/v1.49.10/) | College Expansion | 2026-03-02 | 6 | 9 | |
+| [v1.49.9](release-notes/v1.49.9/) | Learn Kung Fu | 2026-03-01 | 11 | 11 | [retro](release-notes/v1.49.9/RETROSPECTIVE.md), [lessons](release-notes/v1.49.9/LESSONS-LEARNED.md) |
+| [v1.49.8](release-notes/v1.49.8/) | Cooking With Claude | 2026-03-01 | 11 | 45 | [retro](release-notes/v1.49.8/RETROSPECTIVE.md), [lessons](release-notes/v1.49.8/LESSONS-LEARNED.md) |
+| [v1.49.7](release-notes/v1.49.7/) | Optional tmux with Graceful Degradation | 2026-03-01 | — | — | |
 | [v1.49.6](release-notes/v1.49.6/) | macOS Compatibility & Dependency Hardening | 2026-03-01 | — | — | |
 | [v1.49.5](release-notes/v1.49.5/) | Project Filesystem Reorganization | 2026-02-27 | 8 | 17 | [retro](release-notes/v1.49.5/RETROSPECTIVE.md), [lessons](release-notes/v1.49.5/LESSONS-LEARNED.md) |
 | [v1.49.4](release-notes/v1.49.4/) | Filesystem Management Strategy | 2026-02-27 | 3 | 7 | |
