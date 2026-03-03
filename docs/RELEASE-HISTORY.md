@@ -1,6 +1,6 @@
 # Release History
 
-57 milestones shipped across 535 phases, 1,182 plans, ~564K LOC, and 21,002+ tests.
+63 milestones shipped across 539 phases, 1,186 plans, ~260K LOC TS, and 23,234+ tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
