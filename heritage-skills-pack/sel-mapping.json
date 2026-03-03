@@ -1,0 +1,191 @@
+{
+  "id": "neighbors-path-sel-mapping",
+  "version": "1.0.0",
+  "culturalSovereigntyLevel": 1,
+  "framingStatement": "The Neighbors Path teaches social and emotional intelligence through the practices of Salish Sea peoples — practices developed over thousands of years before modern educational psychology named and systematized what they were doing. This document maps those heritage practices to the CASEL SEL framework so that educators can recognize the alignment and integrate the pack into curricula that require SEL competency coverage. Heritage wisdom is the source. The CASEL framework is a contemporary lens that makes the heritage content legible to educational administrators and curriculum planners.",
+  "educatorNote": "If you are an educator integrating this pack into formal curricula: the Neighbors Path content meets SEL competency requirements because it teaches real social-emotional skills — not because it was designed with CASEL in mind. When presenting this content to students, lead with the heritage context (Salish Sea practices, specific nation attributions, the historical and ecological grounding). The SEL framework is scaffolding for the curriculum plan, not the lesson. Students will engage more deeply with the heritage framing than with abstract competency language.",
+  "heritageFramework": {
+    "id": "neighbors-path-framework",
+    "name": "Neighbors Path",
+    "source": "Village World (Room 18) — Salish Sea emotional intelligence curriculum",
+    "tradition": "first-nations",
+    "nationAttribution": "Coast Salish (Musqueam/xʷməθkʷəy̓əm, Stó:lō, Squamish/Sḵwx̱wú7mesh, Lummi/Lhaq'temish, Saanich/WSÁNEĆ), Kwakwaka'wakw, Nuu-chah-nulth",
+    "culturalSovereigntyNote": "The practices described here are Level 1 publicly shared knowledge — the social mechanics and historical context of Salish Sea inter-community relationships. Level 3-4 ceremonial protocols are not reproduced.",
+    "coreComponents": [
+      {
+        "id": "neighbor-map",
+        "title": "The Neighbor Map",
+        "description": "Understanding oneself within a network of relationships. Every village existed within a web of connections — trade, marriage, ceremony, water. No community acted without considering those relationships.",
+        "heritageSource": "Salish Sea village network structure. Nation attribution: Coast Salish (Musqueam, Stó:lō, Squamish, Lummi, WSÁNEĆ), Kwakwaka'wakw, Nuu-chah-nulth, Heiltsuk.",
+        "roomModule": "village-18-neighbor-map"
+      },
+      {
+        "id": "potlatch-as-technology",
+        "title": "Potlatch as Technology",
+        "description": "Understanding how social systems manage wealth, status, and obligation. The potlatch gift economy redistributed wealth, resolved conflicts, and maintained community relationships through strategic generosity.",
+        "heritageSource": "Potlatch gift economy mechanics (Level 1 publicly shared framing). Nation attribution: Kwakwaka'wakw, Coast Salish, Heiltsuk, Nuu-chah-nulth, Haida.",
+        "roomModule": "village-18-potlatch-technology"
+      },
+      {
+        "id": "brothers-fight",
+        "title": "When Brothers Fight",
+        "description": "Understanding conflict as happening within ongoing relationships, not outside them. Inter-village conflict in the Salish Sea occurred between communities that were simultaneously allies, trading partners, and relatives.",
+        "heritageSource": "Documented Salish Sea inter-community relationship patterns. Nation attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw, Nuu-chah-nulth.",
+        "roomModule": "village-18-brothers-fight"
+      },
+      {
+        "id": "emotional-weather",
+        "title": "Emotional Weather",
+        "description": "Using natural world metaphors from the Salish Sea environment to name and understand emotional states. Anger as storm, competition as tide, generosity as salmon run, grief as fog.",
+        "heritageSource": "Ecological metaphor framework using observable Salish Sea natural phenomena. Nation attribution: Coast Salish (source ecology). These are not ceremonial teachings — they are ecological metaphors.",
+        "roomModule": "village-18-emotional-weather"
+      },
+      {
+        "id": "making-right",
+        "title": "Making Things Right",
+        "description": "Repair protocols focused on restoration, not punishment. The question is not who was right but what was broken and what will restore the relationship. Documented Salish Sea protocols: public acknowledgment, scaled compensation, witness validation, forward direction.",
+        "heritageSource": "Documented Salish Sea conflict resolution and restoration protocols. Nation attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw.",
+        "roomModule": "village-18-making-right"
+      },
+      {
+        "id": "reef-net-model",
+        "title": "The Reef Net Model",
+        "description": "Cooperative protocols that enable productive work even among people with complicated relationships. The reef net fishing station required multi-family coordination with agreed governance protocols.",
+        "heritageSource": "Lummi/Lhaq'temish and Saanich/WSÁNEĆ reef net station governance protocols (cross-reference Room 16).",
+        "roomModule": "village-18-reef-net-model"
+      }
+    ]
+  },
+  "selFramework": {
+    "id": "casel-framework",
+    "name": "CASEL SEL Framework",
+    "fullName": "Collaborative for Academic, Social, and Emotional Learning",
+    "url": "https://casel.org/",
+    "version": "2020 (updated framework)",
+    "organizationNote": "CASEL is a research organization that defines and promotes social-emotional learning in educational settings. The CASEL framework was formalized in 1994. It provides vocabulary and assessment criteria that many school districts use to evaluate curricula.",
+    "competencies": [
+      {
+        "id": "self-awareness",
+        "name": "Self-Awareness",
+        "casselDefinition": "The ability to understand one's own emotions, thoughts, and values and how they influence behavior across contexts."
+      },
+      {
+        "id": "self-management",
+        "name": "Self-Management",
+        "casselDefinition": "The ability to manage one's emotions, thoughts, and behaviors effectively in different situations and to achieve goals and aspirations."
+      },
+      {
+        "id": "social-awareness",
+        "name": "Social Awareness",
+        "casselDefinition": "The ability to understand the perspectives of and empathize with others, including those from diverse backgrounds, cultures, and contexts."
+      },
+      {
+        "id": "relationship-skills",
+        "name": "Relationship Skills",
+        "casselDefinition": "The ability to establish and maintain healthy and supportive relationships and to effectively navigate settings with diverse individuals and groups."
+      },
+      {
+        "id": "responsible-decision-making",
+        "name": "Responsible Decision-Making",
+        "casselDefinition": "The ability to make caring and constructive choices about personal behavior and social interactions across diverse situations."
+      }
+    ]
+  },
+  "mappings": [
+    {
+      "id": "neighbor-map-to-social-awareness",
+      "heritageComponent": "neighbor-map",
+      "heritageDescription": "The Neighbor Map teaches learners to understand themselves within a web of relationships. In the Salish Sea village world, no community acted without considering its obligations and connections to neighboring communities. The Neighbor Map makes these connections visible — who are your neighbors, what connects you, what do you owe each other?",
+      "casselCompetency": "social-awareness",
+      "alignmentRationale": "CASEL's Social Awareness competency includes perspective-taking and recognizing one's position within diverse social networks. The Neighbor Map teaches exactly this — but through a specific heritage context that grounds abstract social concepts in real historical relationships and ecological place.",
+      "educatorApplicationNote": "Present the Neighbor Map as a Salish Sea practice first. The CASEL alignment is a planning tool for your curriculum map, not a lesson element. Students will engage more deeply if they understand they are learning how Lummi and Stó:lō communities understood their relationships — not if they feel they are completing a 'social awareness exercise.'",
+      "nationAttribution": "Coast Salish (Musqueam/xʷməθkʷəy̓əm, Stó:lō, Squamish/Sḵwx̱wú7mesh, Lummi/Lhaq'temish, Saanich/WSÁNEĆ), Kwakwaka'wakw, Nuu-chah-nulth, Heiltsuk",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "emotional-weather-to-self-awareness",
+      "heritageComponent": "emotional-weather",
+      "heritageDescription": "The Emotional Weather framework uses natural metaphors from the Salish Sea environment to name emotional states. Anger is storm on the Sound — real, powerful, passes, leaves a changed landscape. Competition is tide — comes and goes on its own schedule. Generosity is salmon run — abundance that benefits everyone when shared. Grief is fog — real, makes navigation hard, eventually lifts. These metaphors are grounded in ecological observation, not abstraction.",
+      "casselCompetency": "self-awareness",
+      "alignmentRationale": "CASEL's Self-Awareness competency includes identifying one's own emotions. The Emotional Weather framework provides a culturally grounded vocabulary for naming emotional states — one that is accessible to younger learners (7-12) without condescending vocabulary. The Salish Sea ecological metaphors are vivid, specific, and connected to real natural patterns.",
+      "educatorApplicationNote": "These metaphors are respectful use of Salish Sea ecological patterns — they are not ceremony or sacred knowledge. They are explicitly described in Room 18 as ecological metaphor, not ceremonial teaching. Present them as Coast Salish-context emotional vocabulary.",
+      "nationAttribution": "Coast Salish (source ecology and environmental framing)",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "emotional-weather-to-self-management",
+      "heritageComponent": "emotional-weather",
+      "heritageDescription": "The Emotional Weather framework does not just name emotions — it frames them as natural phenomena that can be anticipated and prepared for. Knowing anger is coming (like a storm) allows preparation. Knowing competition has a tide-schedule allows working with it rather than against it. The framework teaches emotional regulation through environmental metaphor.",
+      "casselCompetency": "self-management",
+      "alignmentRationale": "CASEL's Self-Management competency includes managing emotions and behaviors. The Emotional Weather framework's framing of emotions as natural phenomena (rather than failures or weaknesses) supports regulation by normalizing emotional states. 'You can't stop a storm but you can prepare' is a different relationship to anger than 'anger is bad and should be suppressed.'",
+      "educatorApplicationNote": "The self-management application is secondary to the heritage context. Teach the Emotional Weather framework as Coast Salish ecological observation. The self-management alignment is for your lesson planning documentation.",
+      "nationAttribution": "Coast Salish (source ecology and environmental framing)",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "brothers-fight-to-social-awareness",
+      "heritageComponent": "brothers-fight",
+      "heritageDescription": "The Brothers metaphor teaches that conflict between neighboring communities occurs within ongoing relationships — not outside them. Inter-village conflict in the Salish Sea happened between communities that were simultaneously allies, trading partners, and relatives-by-marriage. Understanding that the 'enemy' is also your cousin, trading partner, and ceremonial neighbor is a sophisticated perspective-taking practice.",
+      "casselCompetency": "social-awareness",
+      "alignmentRationale": "CASEL's Social Awareness competency includes taking others' perspectives and understanding diverse viewpoints. The Brothers metaphor teaches perspective-taking in a specific historical context — understanding the viewpoint of a neighboring community with whom you have complex, multi-layered relationships. This is more sophisticated than abstract perspective-taking exercises.",
+      "educatorApplicationNote": "The brothers metaphor does not romanticize conflict. Be explicit: Coast Salish inter-community conflict was real, sometimes violent, and serious. The point is not that conflict was soft but that it occurred within ongoing relationships. The structural reality — you have cousins across the boundary — changes how you pursue conflict.",
+      "nationAttribution": "Coast Salish (Stó:lō, Lummi/Lhaq'temish), Kwakwaka'wakw, Nuu-chah-nulth",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "making-right-to-responsible-decision-making",
+      "heritageComponent": "making-right",
+      "heritageDescription": "The Making Things Right framework focuses on restoration, not punishment. The question asked is not 'who was right and who should be punished?' but 'what happened, what was broken, and what will restore the relationship?' Documented Salish Sea protocols include public acknowledgment, compensation scaled to harm severity, witness validation, and a forward direction that permanently closes the grievance.",
+      "casselCompetency": "responsible-decision-making",
+      "alignmentRationale": "CASEL's Responsible Decision-Making competency includes evaluating consequences and taking responsibility. The Making Things Right framework teaches exactly this — but frames it as restoration of relationship rather than abstract 'responsibility.' The restorative framing is both culturally accurate and pedagogically more effective than punitive frameworks.",
+      "educatorApplicationNote": "Making Things Right directly supports restorative justice approaches that many school districts are implementing. You may be able to cross-reference this content with your school's existing restorative practices framework. Lead with the Salish Sea context — the compensatory protocols, the role of witnesses, the forward direction.",
+      "nationAttribution": "Coast Salish (Stó:lō, Lummi/Lhaq'temish), Kwakwaka'wakw",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "making-right-to-relationship-skills",
+      "heritageComponent": "making-right",
+      "heritageDescription": "The Making Things Right framework also teaches the skills of relationship repair — specific actions (acknowledge, compensate, witness, close forward) that restore damaged relationships. These are not abstract principles but documented practices with specific mechanics.",
+      "casselCompetency": "relationship-skills",
+      "alignmentRationale": "CASEL's Relationship Skills competency includes repairing relationships. Making Things Right provides a concrete, heritage-grounded repair sequence that students can learn and apply. The sequence (public acknowledgment → scaled compensation → witness → forward direction) is memorable and actionable.",
+      "educatorApplicationNote": "The repair sequence maps directly to many therapeutic and restorative practice frameworks. When teaching this, emphasize that these are specific cultural practices attributed to specific nations — not universal principles that all cultures share independently.",
+      "nationAttribution": "Coast Salish (Stó:lō, Lummi/Lhaq'temish), Kwakwaka'wakw",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "potlatch-to-responsible-decision-making",
+      "heritageComponent": "potlatch-as-technology",
+      "heritageDescription": "The potlatch gift economy teaches that decisions about resource distribution have social consequences. Receiving creates obligation; status is built by giving more than you received; wealth redistribution through generosity builds community resilience. Every potlatch decision — what to give, when to host, how much — is a responsible decision within an explicit social accounting system.",
+      "casselCompetency": "responsible-decision-making",
+      "alignmentRationale": "CASEL's Responsible Decision-Making competency includes considering the consequences of actions on others and on the community. The potlatch gift economy makes these consequences explicit and public — the social accounting is visible. Students can analyze potlatch decisions using CASEL's decision-making framework: what are the options, what are the consequences for the community, what is the ethical choice?",
+      "educatorApplicationNote": "The criminalization history (1884-1951 ban) is integral context and must be included. Presenting potlatch-as-technology without the criminalization history misrepresents the practice. The ban specifically targeted the economic self-sufficiency the gift economy provided — understanding this adds depth to the 'responsible decision-making' alignment.",
+      "nationAttribution": "Kwakwaka'wakw, Coast Salish, Heiltsuk, Nuu-chah-nulth, Haida",
+      "culturalSovereigntyLevel": 1
+    },
+    {
+      "id": "reef-net-to-relationship-skills",
+      "heritageComponent": "reef-net-model",
+      "heritageDescription": "The Reef Net Model demonstrates cooperative protocols that enable productive work among families who may not always agree. The reef net station required synchronized action across family groups — designated positions, timed coordination, agreed harvest division, protocols for changed conditions. The model generalizes: structured cooperation protocols enable people to work together even when their relationship is complicated.",
+      "casselCompetency": "relationship-skills",
+      "alignmentRationale": "CASEL's Relationship Skills competency includes working collaboratively and practicing teamwork. The Reef Net Model provides a concrete, heritage-grounded example of high-stakes cooperation with explicit governance protocols. Students can analyze: what made the cooperation work, what protocols were needed, how conflicts of interest were managed.",
+      "educatorApplicationNote": "The Reef Net Model connects directly to Room 16 (Salmon World) content. If students have studied salmon ecology and reef net technology, this mapping extends that knowledge into social practice. The governance protocols — agreed roles, harvest division, condition protocols — are the social-emotional curriculum embedded in the fishing practice.",
+      "nationAttribution": "Lummi/Lhaq'temish, Saanich/WSÁNEĆ",
+      "culturalSovereigntyLevel": 1
+    }
+  ],
+  "implementationGuidance": {
+    "curriculumIntegration": {
+      "approach": "Lead with heritage content. Reference CASEL alignment in lesson plans and curriculum documentation, not in student-facing materials.",
+      "lessonStructure": "Heritage context first → skill or practice → reflection on what the practice teaches → optional: connection to contemporary life",
+      "assessmentNote": "SEL competencies can be assessed through the Badge System (neighbors-path badges Explorer through Keeper). Explorer: can describe the practice. Apprentice: can demonstrate it. Journeyman: can explain the relationships between practices. Keeper: can teach it with cultural sensitivity."
+    },
+    "gradeLevel": {
+      "elementary": "Emotional Weather metaphors (K-5), Neighbor Map (3-5), simplified Making Things Right (3-5)",
+      "middle": "Full Neighbor Map, Brothers Fight framing, Making Things Right repair sequence (6-8)",
+      "secondary": "Potlatch-as-Technology, Reef Net Model, full historical context including criminalization (9-12)"
+    },
+    "culturalSovereigntyInPractice": "All lesson plans must include specific nation attribution. 'Coast Salish' is acceptable when multiple Coast Salish nations share a practice. 'First Nations' or 'Indigenous' alone is not acceptable — it erases the specific nations whose practices are being taught.",
+    "communityConnection": "If possible, invite Coast Salish or other Salish Sea nation educators or cultural practitioners to engage with students. This is supplementary to, not a replacement for, educator preparation with the content."
+  },
+  "acknowledgement": "The social-emotional practices documented in this mapping are the intellectual and cultural heritage of the Coast Salish, Kwakwaka'wakw, Nuu-chah-nulth, Heiltsuk, Lummi/Lhaq'temish, and Saanich/WSÁNEĆ nations, among others of the Salish Sea. These practices were not 'discovered' by modern educational psychology. They are documented, living practices of specific peoples in a specific place. The CASEL framework provides a useful vocabulary for educators; it does not explain or authorize these practices."
+}
