@@ -23,3 +23,9 @@ export type {
   ProxyConfig,
   AgentIsolationState,
 } from './security.js';
+
+// v1.50.13 Hindsight Corrections — enforcement type re-exports
+export type { PacingConfig, PacingResult, ArtifactTimestamp, PacingStatus } from '../validation/pacing-gate/index.js';
+export { DEFAULT_PACING_CONFIG } from '../validation/pacing-gate/index.js';
+export type { BatchDetectionConfig, BatchDetectionResult, DepthMarker, DepthMarkerCategory, BatchHeuristicResult } from '../validation/batch-detection/index.js';
+export { DEFAULT_BATCH_DETECTION_CONFIG } from '../validation/batch-detection/index.js';
