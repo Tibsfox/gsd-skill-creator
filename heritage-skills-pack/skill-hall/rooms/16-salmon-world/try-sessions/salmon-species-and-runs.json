@@ -1,0 +1,54 @@
+{
+  "id": "salmon-16-species-runs-beginner",
+  "title": "The Five Salmon Nations: Species and Seasonal Runs",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "safetyLevel": "standard",
+  "culturalLevel": 1,
+  "prerequisites": [],
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand why salmon species knowledge is the foundation of the Salish Sea salmon economy.",
+      "nationAttribution": "Coast Salish, Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Nuu-chah-nulth",
+      "culturalContext": "Different salmon species arrive at different times and occupy different ecological niches. Knowing which species runs when and where is the foundation of the salmon economy. Salish Sea nations developed detailed knowledge of each species over generations — knowledge that enabled multi-season harvest and preservation. The salmon economy did not depend on a single species or a single run; it was built on diversity. A community that understood all five species and their timing had access to salmon from spring through late fall.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn Chinook (King) salmon: Oncorhynchus tshawytscha — the largest Pacific salmon.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "culturalContext": "Chinook (also called King) is the largest Pacific salmon, with the highest fat content of any species. Spring Chinook runs arrive from March through June; fall Chinook follow in August through November. The fat content of Chinook made it the most prized species for drying and smoking — fat preserves flavor and caloric density. Coast Salish and Nuu-chah-nulth communities with access to Chinook runs built significant trade networks around dried Chinook. The fish can exceed 50 pounds (22 kg); catches of large Chinook were significant economic events.",
+      "sumoMapping": "Animal"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn Sockeye (Red) salmon: Oncorhynchus nerka — and Coho (Silver) salmon: Oncorhynchus kisutch.",
+      "nationAttribution": "Coast Salish, Lummi (Lhaq'temish)",
+      "culturalContext": "Sockeye (also called Red) has brilliant red flesh with high oil content and runs primarily in summer (June through August). The vivid red color comes from carotenoid pigments in the krill and shrimp Sockeye eat in the ocean. Sockeye was a major dried salmon trade item — its oil content made it excellent for preservation and its flavor was distinctive and prized. Coho (Silver) runs in fall (September through November) with bright silver flanks and excellent table quality. Coho are mid-sized salmon (8-12 pounds typical) that run in many small coastal streams accessible to Lummi and Coast Salish fishing sites.",
+      "sumoMapping": "Animal"
+    },
+    {
+      "order": 4,
+      "instruction": "Learn Pink (Humpy) salmon: Oncorhynchus gorbuscha — and Chum (Dog) salmon: Oncorhynchus keta.",
+      "nationAttribution": "Coast Salish, Stó:lō",
+      "culturalContext": "Pink (Humpy) is the smallest and most abundant Pacific salmon. Males develop a distinctive humped back during spawning. Pink salmon run on a strict two-year cycle — even years produce large runs in many rivers; odd years are lighter. Pinks run in July and August and were dried in large quantities for winter storage. Chum (Dog) salmon run late (October through December), with lower fat content than Chinook or Sockeye but excellent for drying whole for winter storage — this is the origin of the 'Dog' name, not a pejorative but a reference to their use as dog food in northern communities where large quantities were required for sled dogs.",
+      "sumoMapping": "FoodPreservation"
+    },
+    {
+      "order": 5,
+      "instruction": "Study the salmon seasonal calendar: which species runs when across the year.",
+      "culturalContext": "The staggered runs of the five species create a salmon season that spans from early spring through late fall. Spring Chinook open the season. Summer brings Sockeye and Pinks (in even years). Fall brings Coho and the tail of Chinook. Late fall brings Chum. Salish Sea communities organized the fishing season around this calendar — different techniques (reef nets, weirs, dip nets, spears) were appropriate for different species, different seasons, and different locations. Knowledge of the seasonal calendar was not just ecological information; it was the organizing principle of the annual round of work and community movement.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Understand how species diversity creates the multi-season salmon economy.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Stó:lō, Nuu-chah-nulth",
+      "culturalContext": "No single species dominates the Salish Sea salmon calendar — the staggered runs of all five species give communities access to fresh salmon from spring through late fall, with each species suited to different preservation and storage methods. Chinook and Sockeye for premium dried and smoked products; Pink and Chum for bulk winter storage; Coho for immediate consumption and shorter-term preservation. This ecological diversity is part of what made the Salish Sea one of the most productive fishing regions on earth. The salmon economy was built on knowing all five species, not on dependence on any single one.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "roomId": "room-16-salmon-world",
+  "room": 16,
+  "culturalRules": [
+    {
+      "id": "ROOM16-CULT-001",
+      "domain": "salmon-world",
+      "tradition": "first-nations",
+      "concept": "salmon fishing techniques (reef net, weir, smoking, drying)",
+      "level": 1,
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Stó:lō, Nlaka'pamux, Nuu-chah-nulth, Coast Salish",
+      "note": "Salmon fishing techniques are Level 1 publicly shared knowledge documented in museum collections and community-authorized educational materials. Each technique must be attributed to the specific nations who developed it — reef net technology to Lummi and Saanich specifically, not generically to 'coastal First Nations'.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM16-CULT-002",
+      "domain": "salmon-world",
+      "tradition": "first-nations",
+      "concept": "reef net (xwelmexw) technology",
+      "level": 1,
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich)",
+      "note": "Reef net technology is a specific innovation of the Lummi and Saanich peoples, developed for the reef channels of the San Juan Islands and Gulf Islands. It must not be attributed to generic 'Northwest Coast peoples' or 'Salish peoples' — the specific attribution to Lummi and Saanich is required. The cooperative social organization required to operate a reef net station (multiple families, defined roles, shared protocols) is Level 1 publicly documented knowledge.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM16-CULT-003",
+      "domain": "salmon-world",
+      "tradition": "first-nations",
+      "concept": "First Salmon Ceremony (general significance and structure)",
+      "level": 1,
+      "ceremonialLevel": 3,
+      "nationAttribution": "Coast Salish, Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Nuu-chah-nulth",
+      "note": "The general significance of the First Salmon Ceremony — that communities greet the first salmon of the season with ceremony, that the first fish is welcomed, cooked, shared communally, and its bones returned to the water — is Level 1 publicly shared educational content across multiple nations. This general structure is appropriate to discuss. Specific ceremonial protocols (songs, prayers, preparation methods, who performs specific roles) are Level 3 community-restricted knowledge and must be redirected to specific nations' cultural centers and cultural offices. Always maintain the Level 1/Level 3 boundary clearly in content.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM16-CULT-004",
+      "domain": "salmon-world",
+      "tradition": "first-nations",
+      "concept": "First Salmon Ceremony specific protocols (songs, prayers, specific preparation)",
+      "level": 3,
+      "nationAttribution": "Coast Salish, Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Nuu-chah-nulth",
+      "note": "Specific ceremonial protocols — songs, prayers, the specific preparation and handling of the first fish, who speaks and what is said — are Level 3 community-restricted knowledge. Redirect learners to nation-specific cultural centers: Lummi Nation Cultural Department, WSÁNEĆ School Board, Coast Salish Nation cultural offices. Never attempt to document or reproduce these protocols.",
+      "action": "acknowledge-and-redirect"
+    },
+    {
+      "id": "ROOM16-CULT-005",
+      "domain": "salmon-world",
+      "tradition": "first-nations",
+      "concept": "Salmon's Promise (pact between humans and Salmon People, used as learning metaphor)",
+      "level": 1,
+      "nationAttribution": "Coast Salish, Lummi (Lhaq'temish), Nuu-chah-nulth",
+      "note": "The general concept of a reciprocal pact between human communities and the Salmon People — that if humans honor the salmon, the salmon will return — is widely shared in publicly accessible educational contexts. This module uses this general understanding as a learning metaphor (the return journey of knowledge). It does not reproduce specific ceremonial content or claim to document the full spiritual relationship. Framing: the metaphor illuminates the pattern (reciprocity, return, relationship) without appropriating the ceremony.",
+      "action": "include"
+    }
+  ]
+}
