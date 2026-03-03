@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
-status: in_progress
-stopped_at: Completed 52-01-PLAN.md
-last_updated: "2026-03-03T17:54:25Z"
-last_activity: 2026-03-03 — Plan 52-01 (LLM MCP Wrapper with 4 tools, connection pool, request queue) executed
+status: Plan 52-02 executed — Mesh Discovery Service with heartbeat monitoring, auto-eviction, and append-only event log
+stopped_at: Completed 52-02-PLAN.md
+last_updated: "2026-03-03T17:58:11.456Z"
+last_activity: 2026-03-03 — Plan 52-02 (Mesh Discovery Service with heartbeat monitoring and auto-eviction) executed
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 9
+  completed_plans: 8
   percent: 47
 ---
 
@@ -24,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 52 (MCP Infrastructure) — IN PROGRESS (1 of 4 plans done)
-Plan: 52-01 complete
-Status: Plan 52-01 executed — LlmMcpWrapper with 4 MCP tools, per-chip request queue, connection pool
-Last activity: 2026-03-03 — Plan 52-01 (LLM MCP Wrapper with connection pool and request queue) executed
+Phase: 52 (MCP Infrastructure) — IN PROGRESS (2 of 4 plans done)
+Plan: 52-02 complete
+Status: Plan 52-02 executed — Mesh Discovery Service with heartbeat monitoring, auto-eviction (IMP-01), and append-only event log (IMP-07)
+Last activity: 2026-03-03 — Plan 52-02 (Mesh Discovery Service with heartbeat monitoring and auto-eviction) executed
 
 ```
 Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases done)
@@ -37,8 +37,8 @@ Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 7 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03; Phase 52: 52-01)
-- Tests added this milestone: 324 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03 + 41 from Plan 52-01)
+- Plans complete: 8 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03; Phase 52: 52-01, 52-02)
+- Tests added this milestone: 380 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03 + 41 from Plan 52-01 + 56 from Plan 52-02)
 - Duration 50-01: 7 min
 - Duration 50-02: 4 min
 - Duration 50-03: 12 min
@@ -46,6 +46,7 @@ Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases
 - Duration 51-02: 5 min (328s)
 - Duration 51-03: 9 min (549s)
 - Duration 52-01: 4 min (271s)
+- Duration 52-02: 7 min
 
 ## Accumulated Context
 
@@ -59,6 +60,14 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 52-02
+
+- evictStale(now?) pure core + startMonitoring() wrapper: separates deterministic logic from timer lifecycle -- unit tests call evictStale() directly; integration tests use vi.useFakeTimers() to verify auto-invocation (IMP-01)
+- IMP-07 verified via functional accumulation test (3 writes accumulate) + static source inspection (source.toContain('fs.appendFile(')) -- vi.spyOn on ESM node:fs/promises is forbidden in Vitest v4
+- Evicted nodes remain in Map with status='evicted' -- excluded from listHealthy() but visible in listAll() for audit; only deregister() fully removes a node
+- startMonitoring() idempotent restart: clears existing interval before setting new one; prevents interval leak on misconfigured callers
+- MeshEventLog path bound at construction -- write() and readAll() share logPath; prevents accidental log switching mid-session
 
 ### Key Decisions from Plan 52-01
 
@@ -150,11 +159,12 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 | IMP-07 | Phase 52 | Wave 3 transport layer |
 | IMP-02 | Phase 53 | Wave 3→4 boundary review gate |
 | IMP-06 | Phase 53 | Scoring and routing pure functions |
+| Phase 52-mcp-infrastructure P02 | 7 | 2 tasks | 7 files |
 
 ## Session Continuity
 
-Last session: 2026-03-03T17:54:25Z
-Stopped at: Completed 52-01-PLAN.md
+Last session: 2026-03-03T17:58:11.452Z
+Stopped at: Completed 52-02-PLAN.md
 
-Phase 52 in progress (1 of 4 plans done). Next: execute 52-02-PLAN.md (Mesh Discovery).
-To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute `52-02-PLAN.md`.
+Phase 52 in progress (2 of 4 plans done). Next: execute 52-03-PLAN.md (DACP Transport).
+To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute `52-03-PLAN.md`.

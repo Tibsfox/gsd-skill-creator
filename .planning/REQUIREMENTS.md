@@ -30,8 +30,8 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 
 - [x] **MCP-01**: Local LLM MCP Wrapper exposes llm.chat, llm.models, llm.health, llm.capabilities tools
 - [x] **MCP-02**: LLM Wrapper handles connection pooling, request queuing, and capability probing
-- [ ] **MCP-03**: Mesh Discovery Service supports node registration, deregistration, heartbeat monitoring, and health reporting
-- [ ] **MCP-04**: Discovery Service marks nodes unhealthy after 3 missed heartbeats and removes them from routing pool
+- [x] **MCP-03**: Mesh Discovery Service supports node registration, deregistration, heartbeat monitoring, and health reporting
+- [x] **MCP-04**: Discovery Service marks nodes unhealthy after 3 missed heartbeats and removes them from routing pool
 - [ ] **MCP-05**: DACP mesh transport sends bundles between nodes via MCP with provenance tracking (origin, hops, timestamps)
 - [ ] **MCP-06**: Fidelity adaptation adjusts bundle compression based on transport conditions (full local, standard mesh, compressed remote)
 
@@ -55,13 +55,13 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 
 ### Iterative Improvement
 
-- [ ] **IMP-01**: Every lifecycle method has an integration test verifying auto-invocation (not just unit correctness)
+- [x] **IMP-01**: Every lifecycle method has an integration test verifying auto-invocation (not just unit correctness)
 - [ ] **IMP-02**: Inter-wave integration review gate at each wave boundary assessing cross-wave connections
 - [x] **IMP-03**: Threshold registry (thresholds.md) documents every hardcoded numeric value with rationale and file:line
 - [x] **IMP-04**: Test-to-source ratio tracked per wave in verification reports (target >=3:1)
 - [x] **IMP-05**: v1.49.14 deferred items cross-referenced (ADVN-03 cost analysis, ADVN-04 auto PR, EREG-01 private registries)
 - [ ] **IMP-06**: Pure-function enforcement for all scoring and routing logic (no I/O in hot paths)
-- [ ] **IMP-07**: Append-only pattern applied to mesh event logs (reuse v1.49.14 health.jsonl pattern)
+- [x] **IMP-07**: Append-only pattern applied to mesh event logs (reuse v1.49.14 health.jsonl pattern)
 
 ## v2 Requirements
 
@@ -113,8 +113,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EVAL-06 | Phase 51 | Complete |
 | MCP-01 | Phase 52 | Complete (52-01) |
 | MCP-02 | Phase 52 | Complete (52-01) |
-| MCP-03 | Phase 52 | Pending |
-| MCP-04 | Phase 52 | Pending |
+| MCP-03 | Phase 52 | Complete |
+| MCP-04 | Phase 52 | Complete |
 | MCP-05 | Phase 52 | Pending |
 | MCP-06 | Phase 52 | Pending |
 | MESH-01 | Phase 53 | Pending |
@@ -129,13 +129,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CTXT-04 | Phase 54 | Pending |
 | CTXT-05 | Phase 54 | Pending |
 | CTXT-06 | Phase 54 | Pending |
-| IMP-01 | Phase 52 | Pending |
+| IMP-01 | Phase 52 | Complete |
 | IMP-02 | Phase 53 | Pending |
 | IMP-03 | Phase 50 | Complete (50-03) |
 | IMP-04 | Phase 51 | Complete (51-03) |
 | IMP-05 | Phase 50 | Complete (50-01) |
 | IMP-06 | Phase 53 | Pending |
-| IMP-07 | Phase 52 | Pending |
+| IMP-07 | Phase 52 | Complete |
 
 **Coverage:**
 - v1 requirements: 37 total
