@@ -1,0 +1,52 @@
+{
+  "roomId": "room-15-cedar-culture",
+  "room": 15,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool", "structural", "marine"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM15-GATE-001",
+      "description": "Tool GATE — carving tools (adze, drawknife, crooked knife)",
+      "trigger": "adze, drawknife, crooked knife, carving tool use",
+      "action": "GATE -- include tool safety: always adze away from body, secure the workpiece, keep adze and drawknife blades covered when not in use, seek hands-on instruction before first use of traditional carving tools"
+    },
+    {
+      "id": "ROOM15-GATE-002",
+      "description": "Structural GATE — longhouse construction",
+      "trigger": "longhouse post, beam, roof construction, structural assembly",
+      "action": "GATE -- structural safety: large cedar posts and beams require proper lifting technique and temporary support; do not work under unsupported structural members; post holes require proper depth (1/3 post length minimum) for stability"
+    },
+    {
+      "id": "ROOM15-GATE-003",
+      "description": "Marine GATE — canoe launch and paddling",
+      "trigger": "canoe launch, paddling, water entry, reef net fishing, marine activity",
+      "action": "GATE -- marine safety required: wear PFD at all times on or near water, buddy system required (never paddle alone), know the 1-10-1 cold water rule (1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness), check weather and tidal conditions before launch"
+    },
+    {
+      "id": "ROOM15-GATE-004",
+      "description": "Marine GATE — cold water immersion",
+      "trigger": "capsizing, swamping, falling from canoe, water immersion",
+      "action": "GATE -- cold water immersion response: 1-10-1 rule applies; do not remove clothing; stay with the vessel; use HELP position (Heat Escape Lessening Posture) to reduce heat loss; signal for assistance immediately"
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM15-ANN-001",
+      "description": "Tool ANNOTATE — bark harvesting tools (knife, bone wedge)",
+      "trigger": "bark harvesting, scoring cedar bark, knife work",
+      "action": "ANNOTATE -- score bark vertically with sharp knife, cut away from body, keep blade covered when moving between cuts"
+    },
+    {
+      "id": "ROOM15-ANN-002",
+      "description": "Tool ANNOTATE — rope-making tools (splitting tools)",
+      "trigger": "bark splitting, fiber processing, inner bark tools",
+      "action": "ANNOTATE -- splitting tools are sharp; control direction of split by maintaining even tension; wear gloves for initial splitting steps"
+    }
+  ],
+  "safetyNotes": {
+    "toolSafety": "Traditional cedar carving tools — adze, drawknife, crooked knife, froe — are extremely sharp and require specific body mechanics for safe use. Always adze away from the body with the workpiece firmly secured. Drawknife pulls toward the body; keep body clear of the blade path and maintain controlled pressure. Seek hands-on instruction from an experienced carver before first use. Blade guards required when tools are not in active use. Knife work for bark scoring: always cut parallel to the trunk grain and away from the body.",
+    "structuralSafety": "Longhouse-scale cedar construction involves members too large and heavy for solo handling. Large corner posts (20+ cm diameter, 3-5 metres long) require a team and proper lifting technique — back straight, legs driving, coordinated movement on a count. Never work under an unsupported structural member. Post holes must be at minimum one-third of the post length in depth for adequate stability. Ridge beams require temporary support structures (shoring) before permanent connections are made.",
+    "marineSafety": "The Salish Sea and outer Pacific coast are cold water environments year-round. Cold water shock causes an involuntary gasping reflex upon immersion — even strong swimmers can inhale water within seconds. The 1-10-1 rule applies: approximately 1 minute to control breathing, 10 minutes of meaningful movement before muscle failure, 1 hour to unconsciousness in very cold water. PFD required at all times on or near water. Never paddle alone — buddy system is non-negotiable. Check weather and tidal conditions before every launch. In capsizing: stay with the vessel, do not remove clothing, use HELP position (knees to chest, elbows tight to body) to slow heat loss."
+  }
+}
