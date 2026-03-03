@@ -14,7 +14,7 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 - [x] **CHIP-02**: System provides OpenAI-compatible chip covering Ollama, vLLM, and LM Studio via single parameterized implementation
 - [x] **CHIP-03**: System provides Anthropic chip wrapping existing API behind ModelChip interface
 - [x] **CHIP-04**: ChipRegistry discovers available chips from chipset.json, validates connectivity, and maps role names to chip instances
-- [ ] **CHIP-05**: CLI `test run` gains `--chip` for per-run model execution and `--grader-chip` for per-run grader selection enabling asymmetric evaluation (originally spec'd as `run_eval`/`improve_description` -- mapped to actual CLI commands, see Plan 50-03 mapping note)
+- [x] **CHIP-05**: CLI `test run` gains `--chip` for per-run model execution and `--grader-chip` for per-run grader selection enabling asymmetric evaluation (originally spec'd as `run_eval`/`improve_description` -- mapped to actual CLI commands, see Plan 50-03 mapping note)
 - [x] **CHIP-06**: Absence of chipset.json preserves current behavior (backward compatible)
 
 ### Multi-Model Evaluation
@@ -57,7 +57,7 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 
 - [ ] **IMP-01**: Every lifecycle method has an integration test verifying auto-invocation (not just unit correctness)
 - [ ] **IMP-02**: Inter-wave integration review gate at each wave boundary assessing cross-wave connections
-- [ ] **IMP-03**: Threshold registry (thresholds.md) documents every hardcoded numeric value with rationale and file:line
+- [x] **IMP-03**: Threshold registry (thresholds.md) documents every hardcoded numeric value with rationale and file:line
 - [ ] **IMP-04**: Test-to-source ratio tracked per wave in verification reports (target >=3:1)
 - [x] **IMP-05**: v1.49.14 deferred items cross-referenced (ADVN-03 cost analysis, ADVN-04 auto PR, EREG-01 private registries)
 - [ ] **IMP-06**: Pure-function enforcement for all scoring and routing logic (no I/O in hot paths)
@@ -103,7 +103,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CHIP-02 | Phase 50 | Complete (50-01) |
 | CHIP-03 | Phase 50 | Complete (50-01) |
 | CHIP-04 | Phase 50 | Complete |
-| CHIP-05 | Phase 50 | Pending |
+| CHIP-05 | Phase 50 | Complete (50-03) |
 | CHIP-06 | Phase 50 | Complete |
 | EVAL-01 | Phase 51 | Pending |
 | EVAL-02 | Phase 51 | Pending |
@@ -131,7 +131,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CTXT-06 | Phase 54 | Pending |
 | IMP-01 | Phase 52 | Pending |
 | IMP-02 | Phase 53 | Pending |
-| IMP-03 | Phase 50 | Pending |
+| IMP-03 | Phase 50 | Complete (50-03) |
 | IMP-04 | Phase 51 | Pending |
 | IMP-05 | Phase 50 | Complete (50-01) |
 | IMP-06 | Phase 53 | Pending |
@@ -144,4 +144,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 — CHIP-05 text updated to reflect actual CLI command names (run_eval -> test run, improve_description -> --grader-chip on test run)*
+*Last updated: 2026-03-03 — CHIP-05 and IMP-03 marked complete (50-03 executed)*

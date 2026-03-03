@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
-status: Plan 50-01 executed — ModelChip interface, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
-stopped_at: Completed 50-02-PLAN.md
-last_updated: "2026-03-03T16:49:26.512Z"
-last_activity: 2026-03-03 — Plan 50-01 (ModelChip type foundation) executed
+status: Plan 50-03 executed — ChipTestRunner, chip CLI command, --chip/--grader-chip flags, thresholds.md
+stopped_at: Completed 50-03-PLAN.md
+last_updated: "2026-03-03T17:04:00.000Z"
+last_activity: 2026-03-03 — Plan 50-03 (CLI integration and asymmetric evaluation) executed
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -23,23 +23,24 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 50 (Model Abstraction) — in progress (Plans 01-02 complete)
-Plan: 50-02 complete, ready for 50-03
-Status: Plan 50-02 executed — ChipFactory, ChipRegistry, CHIP-06 backward compatibility
-Last activity: 2026-03-03 — Plan 50-02 (ChipRegistry and ChipFactory) executed
+Phase: 50 (Model Abstraction) — COMPLETE (all 3 plans done)
+Plan: 50-03 complete, Phase 50 done
+Status: Plan 50-03 executed — ChipTestRunner, chip CLI command, --chip/--grader-chip flags, thresholds.md
+Last activity: 2026-03-03 — Plan 50-03 (CLI integration and asymmetric evaluation) executed
 
 ```
-Progress: [█████████░] 93% (2 of 3 plans in Phase 50 done)
+Progress: [██████████] 100% (3 of 3 plans in Phase 50 done)
 ```
 
 ## Performance Metrics
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 2/? (50-01, 50-02)
-- Tests added this milestone: 96 (65 from Plan 01 + 31 from Plan 02)
+- Plans complete: 3/3 (Phase 50 complete: 50-01, 50-02, 50-03)
+- Tests added this milestone: 137 (65 from Plan 01 + 31 from Plan 02 + 41 from Plan 03)
 - Duration 50-01: 7 min
 - Duration 50-02: 4 min
+- Duration 50-03: 12 min
 
 ## Accumulated Context
 
@@ -53,6 +54,15 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 50-03
+
+- ChipTestRunner delegates to standard TestRunner for backward compat path -- no logic duplication
+- Grader prompt includes test.prompt + test.expected + chip response -- grader has full context for activation judgment
+- GRADER_MAX_TOKENS=512 -- grader always returns compact JSON; keeps grading latency low
+- Malformed grader JSON falls back to keyword matching, never throws -- asymmetric eval always completes
+- --chip/--grader-chip wired in handleRun (test.ts), not cli.ts -- minimal change, no refactoring of test command architecture
+- thresholds.md at project root (not .planning/) -- user-facing transparency document per IMP-03
 
 ### Key Decisions from Plan 50-02
 
@@ -106,7 +116,8 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 
 ## Session Continuity
 
-Last session: 2026-03-03T16:49:26.509Z
-Stopped at: Completed 50-02-PLAN.md
+Last session: 2026-03-03T17:04:00.000Z
+Stopped at: Completed 50-03-PLAN.md
 
-To resume: read `.planning/ROADMAP.md` Phase Details, then run `/gsd:plan-phase 50` for Plan 50-03.
+Phase 50 complete. Next: Phase 51 (Multi-Model Evaluation).
+To resume: read `.planning/ROADMAP.md` Phase Details, then run `/gsd:plan-phase 51`.

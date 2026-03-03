@@ -85,7 +85,7 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
 
 ## Phases
 
-- [ ] **Phase 50: Model Abstraction** - ModelChip interface, OpenAI-compatible and Anthropic chips, ChipRegistry, CLI integration, backward compatibility
+- [x] **Phase 50: Model Abstraction** - ModelChip interface, OpenAI-compatible and Anthropic chips, ChipRegistry, CLI integration, backward compatibility (COMPLETE 2026-03-03)
 - [ ] **Phase 51: Multi-Model Evaluation** - Benchmark schema extension, grader cross-model calibration, thresholds.json, eval viewer model filter
 - [ ] **Phase 52: MCP Infrastructure** - Local LLM MCP Wrapper, Mesh Discovery Service, DACP mesh transport, fidelity adaptation
 - [ ] **Phase 53: Mesh Orchestration** - Mesh Coordinator agent, VTM mesh-aware wave planning, cross-model optimization, cost-aware routing
@@ -103,12 +103,12 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
   3. A workspace without chipset.json runs all existing evals identically to before this phase (backward compatibility enforced)
   4. ChipRegistry reports the health and capabilities of each configured backend — user can query which chips are available and what each can do
   5. A threshold registry document (thresholds.md) exists at project root capturing every hardcoded numeric constant introduced in this phase with rationale and file:line reference
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans executed (COMPLETE)
 
 Plans:
 - [x] 50-01-PLAN.md — ModelChip types, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
-- [ ] 50-02-PLAN.md — ChipRegistry, ChipFactory, chipset.json discovery, backward compatibility
-- [ ] 50-03-PLAN.md — CLI chip command, --chip/--grader-chip flags, ChipTestRunner, thresholds.md
+- [x] 50-02-PLAN.md — ChipRegistry, ChipFactory, chipset.json discovery, backward compatibility
+- [x] 50-03-PLAN.md — CLI chip command, --chip/--grader-chip flags, ChipTestRunner, thresholds.md
 
 ### Phase 51: Multi-Model Evaluation
 **Goal**: The same skill can be benchmarked across multiple models simultaneously, with per-model pass rates and threshold-relative status visible in the eval viewer
