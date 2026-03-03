@@ -1,0 +1,67 @@
+{
+  "roomId": "room-17-salish-weaving",
+  "room": 17,
+  "culturalRules": [
+    {
+      "id": "ROOM17-CULT-001",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "Coast Salish weaving techniques (two-bar loom, fiber preparation, plain weave)",
+      "level": 1,
+      "nationAttribution": "Coast Salish (Musqueam, Squamish, Stó:lō, Cowichan/Quw'utsun')",
+      "note": "Weaving techniques on the two-bar loom — warp setting, heddle use, basic weave structures — are Level 1 publicly taught knowledge, shared in community-authorized weaving workshops and museum programs. Technique is accessible; the meaning of specific pattern compositions belongs to the weaving traditions of specific families.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM17-CULT-002",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "family-owned Salish weaving design patterns",
+      "level": 2,
+      "ceremonialLevel": 3,
+      "nationAttribution": "Coast Salish (Musqueam, Stó:lō)",
+      "note": "Specific geometric pattern compositions used in Salish blankets and robes may carry family ownership — designs passed within lineages that identify the family. This is Level 2 contextually shared knowledge: educators may acknowledge that design ownership exists and that specific patterns are not for general use without permission (Level 2 framing), but must redirect attempts to document or reproduce specific family patterns to the respective families and cultural offices (Level 3 redirect). General geometric patterns not associated with specific families are Level 1.",
+      "action": "summarize-and-refer"
+    },
+    {
+      "id": "ROOM17-CULT-003",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "Cowichan knitting (post-contact adaptation)",
+      "level": 1,
+      "nationAttribution": "Cowichan (Quw'utsun') peoples",
+      "note": "Cowichan knitting is a post-contact tradition — not pre-contact — and must be presented accurately as such. This is not a diminishment of the tradition; it demonstrates the creative capacity of Coast Salish weavers to adapt new tools (knitting needles) to existing fiber knowledge. The Cowichan sweater is a major contemporary cultural and economic product; IP protection issues (counterfeit sweaters) are relevant context. Level 1 — widely taught and publicly documented.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM17-CULT-004",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "spindle whorl design (with lineage associations)",
+      "level": 2,
+      "nationAttribution": "Coast Salish (Musqueam, Squamish, Stó:lō)",
+      "note": "Spindle whorl design compositions are Level 2: the existence of whorl designs and their general visual grammar is publicly documented and appropriate for educational content. The specific meaning of particular whorl compositions may carry lineage associations — acknowledge at Level 2 (designs carry meaning specific to lineages, not for general reproduction) without attempting to document those meanings. Do not reproduce specific whorl design compositions as generic 'Coast Salish design'.",
+      "action": "acknowledge-and-redirect"
+    },
+    {
+      "id": "ROOM17-CULT-005",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "Coast Salish formline design system",
+      "level": 2,
+      "nationAttribution": "Coast Salish (Musqueam, Squamish, Stó:lō, Cowichan)",
+      "note": "The distinction between Coast Salish formline and northern NW Coast formline (Haida, Tlingit, Tsimshian) is critical and must be explicit in all content. Conflating the two misrepresents both traditions. Coast Salish formline general design principles — rounder forms, oval compositions, different negative/positive space grammar — are Level 1 educational knowledge. Specific design compositions with lineage meaning are Level 2. This rule governs at Level 2 because the formline system as a whole includes design compositions that carry lineage associations.",
+      "action": "acknowledge-and-redirect"
+    },
+    {
+      "id": "ROOM17-CULT-006",
+      "domain": "salish-weaving",
+      "tradition": "first-nations",
+      "concept": "cedar root basketry (nation-specific techniques)",
+      "level": 1,
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth, Nlaka'pamux (Thompson), Ditidaht, Makah",
+      "note": "Cedar root basketry techniques vary significantly across nations — imbrication (Coast Salish), plaiting (Nuu-chah-nulth), coiling with geometric overlay (Nlaka'pamux), wrapped twining (Ditidaht, Makah). Each nation's techniques and designs must be attributed to the specific nation. Do not use 'Northwest Coast basketry' as a monolith. Minimum 3 nations individually attributed in any basketry content.",
+      "action": "include"
+    }
+  ]
+}

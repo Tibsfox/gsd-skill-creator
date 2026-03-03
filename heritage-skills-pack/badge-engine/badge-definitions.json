@@ -4,7 +4,10 @@
     "path": "shelter",
     "title": "First Shelter",
     "icon": "shelter-explorer",
-    "traditions": ["appalachian", "first-nations"],
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 1,
@@ -28,9 +31,14 @@
     "path": "shelter",
     "title": "Shelter Understanding",
     "icon": "shelter-apprentice",
-    "traditions": ["appalachian", "first-nations"],
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["shelter-explorer-01"],
+    "prerequisites": [
+      "shelter-explorer-01"
+    ],
     "roomId": 1,
     "components": [
       {
@@ -64,9 +72,15 @@
     "path": "shelter",
     "title": "Shelter Knowledge",
     "icon": "shelter-journeyman",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["shelter-apprentice-01"],
+    "prerequisites": [
+      "shelter-apprentice-01"
+    ],
     "roomId": 14,
     "components": [
       {
@@ -100,9 +114,15 @@
     "path": "shelter",
     "title": "Shelter Keeper",
     "icon": "shelter-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["shelter-journeyman-01"],
+    "prerequisites": [
+      "shelter-journeyman-01"
+    ],
     "roomId": 1,
     "components": [
       {
@@ -137,7 +157,11 @@
     "path": "food",
     "title": "First Preservation",
     "icon": "food-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 5,
@@ -161,9 +185,15 @@
     "path": "food",
     "title": "Food Traditions",
     "icon": "food-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["food-explorer-01"],
+    "prerequisites": [
+      "food-explorer-01"
+    ],
     "roomId": 5,
     "components": [
       {
@@ -197,9 +227,15 @@
     "path": "food",
     "title": "Food Keeper",
     "icon": "food-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["food-apprentice-01"],
+    "prerequisites": [
+      "food-apprentice-01"
+    ],
     "roomId": 5,
     "components": [
       {
@@ -234,7 +270,11 @@
     "path": "fiber",
     "title": "First Thread",
     "icon": "fiber-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 2,
@@ -258,9 +298,15 @@
     "path": "fiber",
     "title": "Fiber Traditions",
     "icon": "fiber-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["fiber-explorer-01"],
+    "prerequisites": [
+      "fiber-explorer-01"
+    ],
     "roomId": 2,
     "components": [
       {
@@ -294,9 +340,15 @@
     "path": "fiber",
     "title": "Fiber Keeper",
     "icon": "fiber-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["fiber-apprentice-01"],
+    "prerequisites": [
+      "fiber-apprentice-01"
+    ],
     "roomId": 2,
     "components": [
       {
@@ -331,7 +383,10 @@
     "path": "watercraft",
     "title": "Reading the Water",
     "icon": "watercraft-explorer",
-    "traditions": ["inuit", "first-nations"],
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 13,
@@ -355,9 +410,14 @@
     "path": "watercraft",
     "title": "Watercraft Traditions",
     "icon": "watercraft-apprentice",
-    "traditions": ["inuit", "first-nations"],
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["watercraft-explorer-01"],
+    "prerequisites": [
+      "watercraft-explorer-01"
+    ],
     "roomId": 13,
     "components": [
       {
@@ -391,9 +451,14 @@
     "path": "watercraft",
     "title": "Watercraft Keeper",
     "icon": "watercraft-keeper",
-    "traditions": ["inuit", "first-nations"],
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
     "tier": "keeper",
-    "prerequisites": ["watercraft-apprentice-01"],
+    "prerequisites": [
+      "watercraft-apprentice-01"
+    ],
     "roomId": 13,
     "components": [
       {
@@ -428,7 +493,10 @@
     "path": "plant",
     "title": "First Plant",
     "icon": "plant-explorer",
-    "traditions": ["appalachian", "first-nations"],
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 9,
@@ -452,9 +520,14 @@
     "path": "plant",
     "title": "Plant Knowledge",
     "icon": "plant-apprentice",
-    "traditions": ["appalachian", "first-nations"],
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["plant-explorer-01"],
+    "prerequisites": [
+      "plant-explorer-01"
+    ],
     "roomId": 9,
     "components": [
       {
@@ -488,9 +561,14 @@
     "path": "plant",
     "title": "Plant Keeper",
     "icon": "plant-keeper",
-    "traditions": ["appalachian", "first-nations"],
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
     "tier": "keeper",
-    "prerequisites": ["plant-apprentice-01"],
+    "prerequisites": [
+      "plant-apprentice-01"
+    ],
     "roomId": 9,
     "components": [
       {
@@ -525,7 +603,11 @@
     "path": "tool",
     "title": "First Tool",
     "icon": "tool-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 4,
@@ -549,9 +631,15 @@
     "path": "tool",
     "title": "Tool Traditions",
     "icon": "tool-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["tool-explorer-01"],
+    "prerequisites": [
+      "tool-explorer-01"
+    ],
     "roomId": 4,
     "components": [
       {
@@ -585,9 +673,15 @@
     "path": "tool",
     "title": "Tool Keeper",
     "icon": "tool-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["tool-apprentice-01"],
+    "prerequisites": [
+      "tool-apprentice-01"
+    ],
     "roomId": 4,
     "components": [
       {
@@ -622,7 +716,11 @@
     "path": "music",
     "title": "First Sound",
     "icon": "music-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 6,
@@ -646,9 +744,15 @@
     "path": "music",
     "title": "Music Traditions",
     "icon": "music-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["music-explorer-01"],
+    "prerequisites": [
+      "music-explorer-01"
+    ],
     "roomId": 6,
     "components": [
       {
@@ -682,9 +786,15 @@
     "path": "music",
     "title": "Music Keeper",
     "icon": "music-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["music-apprentice-01"],
+    "prerequisites": [
+      "music-apprentice-01"
+    ],
     "roomId": 6,
     "components": [
       {
@@ -719,7 +829,11 @@
     "path": "neighbors",
     "title": "Who Are My Neighbors?",
     "icon": "neighbors-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 10,
@@ -744,9 +858,15 @@
     "path": "neighbors",
     "title": "Community Relations",
     "icon": "neighbors-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["neighbors-explorer-01"],
+    "prerequisites": [
+      "neighbors-explorer-01"
+    ],
     "roomId": 10,
     "neighborsThread": "Understanding how communities maintain relationships requires understanding what those relationships are made of: reciprocity, obligation, and repair.",
     "components": [
@@ -781,9 +901,15 @@
     "path": "neighbors",
     "title": "Conflict and Resolution",
     "icon": "neighbors-journeyman",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["neighbors-apprentice-01"],
+    "prerequisites": [
+      "neighbors-apprentice-01"
+    ],
     "roomId": 18,
     "neighborsThread": "Conflict resolution is the advanced skill of community relationship. It requires everything the community has built — trust, reciprocity, shared norms — and the capacity to repair when those break down.",
     "components": [
@@ -818,9 +944,17 @@
     "path": "neighbors",
     "title": "Bridge Builder",
     "icon": "neighbors-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["neighbors-explorer-01", "neighbors-apprentice-01", "neighbors-journeyman-01"],
+    "prerequisites": [
+      "neighbors-explorer-01",
+      "neighbors-apprentice-01",
+      "neighbors-journeyman-01"
+    ],
     "roomId": 10,
     "neighborsThread": "The Keeper can explain and model conflict resolution using heritage principles. They have done the work, not just read about it.",
     "components": [
@@ -856,7 +990,11 @@
     "path": "heritage",
     "title": "First Record",
     "icon": "heritage-explorer",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 12,
@@ -880,9 +1018,15 @@
     "path": "heritage",
     "title": "Heritage Documentation",
     "icon": "heritage-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["heritage-explorer-01"],
+    "prerequisites": [
+      "heritage-explorer-01"
+    ],
     "roomId": 12,
     "components": [
       {
@@ -916,9 +1060,15 @@
     "path": "heritage",
     "title": "Heritage Book Author",
     "icon": "heritage-journeyman",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["heritage-apprentice-01"],
+    "prerequisites": [
+      "heritage-apprentice-01"
+    ],
     "roomId": 12,
     "components": [
       {
@@ -952,9 +1102,15 @@
     "path": "heritage",
     "title": "Heritage Keeper",
     "icon": "heritage-keeper",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "keeper",
-    "prerequisites": ["heritage-journeyman-01"],
+    "prerequisites": [
+      "heritage-journeyman-01"
+    ],
     "roomId": 12,
     "components": [
       {
@@ -989,9 +1145,15 @@
     "path": "heritage",
     "title": "Seasonal Calendar Documentation",
     "icon": "heritage-seasonal-apprentice",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["heritage-explorer-01"],
+    "prerequisites": [
+      "heritage-explorer-01"
+    ],
     "roomId": 11,
     "components": [
       {
@@ -1025,7 +1187,9 @@
     "path": "cedar",
     "title": "Cedar Apprentice",
     "icon": "cedar-explorer",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "explorer",
     "prerequisites": [],
     "roomId": 15,
@@ -1049,9 +1213,13 @@
     "path": "cedar",
     "title": "Bark Knowledge",
     "icon": "cedar-apprentice",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "apprentice",
-    "prerequisites": ["cedar-explorer-01"],
+    "prerequisites": [
+      "cedar-explorer-01"
+    ],
     "roomId": 15,
     "components": [
       {
@@ -1085,9 +1253,13 @@
     "path": "cedar",
     "title": "Canoe Knowledge",
     "icon": "cedar-journeyman",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["cedar-apprentice-01"],
+    "prerequisites": [
+      "cedar-apprentice-01"
+    ],
     "roomId": 15,
     "components": [
       {
@@ -1121,9 +1293,13 @@
     "path": "cedar",
     "title": "Bentwood Basics",
     "icon": "cedar-journeyman-02",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["cedar-apprentice-01"],
+    "prerequisites": [
+      "cedar-apprentice-01"
+    ],
     "roomId": 15,
     "components": [
       {
@@ -1157,9 +1333,13 @@
     "path": "neighbors",
     "title": "Brothers Who Fight",
     "icon": "neighbors-journeyman-02",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "journeyman",
-    "prerequisites": ["neighbors-apprentice-01"],
+    "prerequisites": [
+      "neighbors-apprentice-01"
+    ],
     "roomId": 18,
     "neighborsThread": "Conflict within relationship is different from conflict to destroy a relationship. The brothers metaphor — conflict between communities that are simultaneously allies, trade partners, and relatives — requires a different kind of resolution.",
     "components": [
@@ -1194,9 +1374,13 @@
     "path": "neighbors",
     "title": "The Talking Circle",
     "icon": "neighbors-keeper-02",
-    "traditions": ["first-nations"],
+    "traditions": [
+      "first-nations"
+    ],
     "tier": "keeper",
-    "prerequisites": ["neighbors-keeper-01"],
+    "prerequisites": [
+      "neighbors-keeper-01"
+    ],
     "roomId": 18,
     "neighborsThread": "The Keeper at Village World level can facilitate a restoration-focused dialogue using documented Salish Sea principles and explain why restoration is structurally different from punishment.",
     "components": [
@@ -1223,6 +1407,218 @@
         "title": "Can You Teach It? — Making Things Right",
         "content": "Explain to a hypothetical 12-year-old how Salish Sea communities resolved serious conflicts without destroying relationships. Use at least two specific nations' practices (for example: Stó:lō public acknowledgment protocols and Kwakwaka'wakw potlatch compensation). Address: what is the difference between punishment and repair? Why does the distinction matter for the community's future? Evaluators assess: accuracy of the description of specific nation practices, nation-specific attribution (no generic 'Northwest Coast peoples'), cultural sensitivity in framing, and whether the explanation empowers the learner to understand the principles — not just memorize the sequence.",
         "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-explorer-01",
+    "path": "salmon",
+    "title": "Salmon Reader",
+    "icon": "salmon-explorer",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Five Salmon Nations",
+        "content": "Five species, five seasonal roles, five ecological niches. The Salish Sea salmon economy is built on species diversity, not monoculture. Chinook opens the season in spring with the highest fat content. Sockeye brings brilliant red flesh in summer. Coho runs silver in the fall. Pink arrives in abundance on its two-year cycle. Chum closes the season in late fall. Each species has its moment; together they sustain a salmon economy from spring through winter.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Species Identification",
+        "content": "Identify all 5 Pacific salmon species by external characteristics: Chinook (largest, black spots on back and tail, black gums), Sockeye (bright red flesh, hooked jaw and humped back at spawning, blue-green back in ocean), Coho (silver flanks, white gums, small black spots on upper body), Pink (small size, large oval spots on tail, pronounced humped back in spawning males), Chum (calico flanks with red and green marbling at spawning, no distinct spots). Practice on photographs from community-authorized natural history sources.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-apprentice-01",
+    "path": "salmon",
+    "title": "Reef Net Principles",
+    "icon": "salmon-apprentice",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "salmon-explorer-01"
+    ],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "Engineering and Ecology",
+        "content": "Reef net technology works because Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) peoples understood reef channel geography, salmon behavior, and tidal timing with precision that took generations to develop. The technology is inseparable from the knowledge — you cannot operate a reef net station without knowing which reefs the salmon use, when the tides favor fishing, and how to read the water surface for approaching schools. The attribution matters: reef net technology belongs specifically to Lummi and Saanich peoples, developed for the specific reef channels of the San Juan and Gulf Islands.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Reef Net Geometry",
+        "content": "Describe the three components of a reef net system: floor (the bottom barrier laid on the reef surface), lead lines (angled panels extending from the floor edges upward to guide fish), and bag (the trap positioned above the floor). Explain how fish are guided from the reef bottom up into the bag: salmon following the reef bottom encounter the angled lead lines and are directed upward, passing over the floor net into the bag above. Draw a diagram with labels showing the two anchored canoes, the net components, and the path a salmon takes through the system.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Cooperative Technology",
+        "content": "A reef net station requires multi-family coordination that the technology itself demands. Describe the defined roles: the two canoe crews (anchoring, managing net lines), the lookout (elevated in the bow, reading the water for approaching schools), and the signal system (communicating between lookout and crews to time the net raise). What social infrastructure — what governance, what shared protocols, what trust built through practice — makes this technology function? How does the technology itself shape the social relationships required to use it?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Cooperation Makes Possible",
+        "content": "Reef net fishing required more coordination than any individual family could supply — and it produced more salmon than any family could catch alone. The technology created both a need for social organization and a reward for maintaining it. What does this tell us about the relationship between social organization and ecological productivity? How does the governance of reef net stations (who has rights to which station, how harvests are shared) reflect a theory of sustainable resource management that emerges from the technology itself?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-journeyman-01",
+    "path": "salmon",
+    "title": "The Salmon's Promise",
+    "icon": "salmon-journeyman",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "salmon-apprentice-01"
+    ],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Return Journey",
+        "content": "The Salmon's Promise: salmon spend years in the ocean and return to the river where they were born. The pact between human communities and the Salmon People — honor the salmon, and they will return — encodes the principle of reciprocal relationship: the salmon's return is contingent on being honored, and the human community's prosperity is contingent on maintaining the relationship. This is the pack's central metaphor for learning: leave, range widely, return with what you have learned. The salmon does not return because it has to — it returns because the relationship holds.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Preservation Safety",
+        "content": "Demonstrate knowledge of salmon smoking safety: minimum internal temperature of 160°F (71°C) required for hot smoking to kill pathogens including Listeria and Salmonella. Cold smoking (below 90°F/32°C) does not kill pathogens — cold-smoked salmon requires salt curing first or refrigerated storage throughout. Storage conditions: cool, dry, with air circulation; inspect before consuming (off odor, slimy texture, visible mold means discard). Explain why the botulism risk in improperly stored vacuum-packed fish — which produces no visible, odor, or taste warning — makes the minimum smoking temperature non-negotiable.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "First Salmon Ceremony: What We Can Know",
+        "content": "The general significance of the First Salmon Ceremony is Level 1 publicly shared educational content: communities greet the first salmon of the season with ceremony, the first fish is welcomed, cooked, shared communally, and its bones are returned to the water so the salmon can carry word back to the Salmon People that the relationship holds. Specific ceremonial protocols — songs, prayers, preparation methods, who speaks and what is said — are Level 3 community-restricted knowledge. How does knowing this boundary help you engage respectfully with ceremony content? What does it mean to learn the shape of something without claiming to possess it?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Return Means",
+        "content": "The salmon returns to where it started. It does not return unchanged — it has ranged the ocean, grown, and carries what the ocean gave it back to the river. What does it mean for a learner to return to their home community with new knowledge? How does the salmon metaphor illuminate the relationship between learning and belonging? The salmon's promise is not just that it returns — it is that the return is meaningful only because the relationship was maintained. What relationships must a learner maintain to make their return meaningful?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-explorer-01",
+    "path": "weaving",
+    "title": "First Thread",
+    "icon": "weaving-explorer",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Fiber Traditions of the Salish Sea",
+        "content": "Coast Salish weaving traditions use mountain goat wool, woolly dog wool (now extinct as a distinct breed), and cedar root fiber. Each material has its ecological origin and its place in the weaving tradition. The woolly dog was maintained in separate groups on small islands, sheared annually — a purpose-built fiber animal that lived within the weaving tradition rather than alongside it. When sheep wool arrived with European contact, the woolly dog's function became redundant. The breed is now extinct. This loss is part of the tradition's history.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Fiber Identification",
+        "content": "Identify the three primary fiber sources in Coast Salish textile traditions: mountain goat wool (long staple, fine fiber, harvested by gathering shed wool from rocky travel paths or obtained through Interior Plateau trade), woolly dog wool (historical — the woolly dog was a distinct breed bred specifically for fiber production, now extinct as a distinct breed, replaced by sheep wool after European contact), cedar inner bark (processed into strips for basketry, specifically for coiled and plaited basket traditions). For each fiber, name its source species, its typical preparation method, and at least one nation that used it.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-apprentice-01",
+    "path": "weaving",
+    "title": "Loom and Pattern",
+    "icon": "weaving-apprentice",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "weaving-explorer-01"
+    ],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Two-Bar Loom System",
+        "content": "The Coast Salish two-bar loom enables weaving without a rigid frame — bars held by tension, warp hanging vertically, the weaver building the cloth from the bottom up. A portable, elegant system that traveled easily to seasonal camps. No floor loom to disassemble and transport; no complex frame to construct at each new location. The loom's simplicity is not a limitation — it is an adaptation to a specific way of living on the land. Attribution: Coast Salish (Musqueam, Squamish, Stó:lō, Cowichan).",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Warp Setup Calculation",
+        "content": "Calculate warp sett for a balanced plain weave in bulky wool: wraps per inch divided by 2 equals the sett in ends per inch. If a wool wraps 18 times per inch, the plain weave sett is 9 epi. Set warp on a two-bar loom (or frame substitute) at the calculated sett. Thread a simple heddle rod: attach string heddles to every other warp thread (the back shed threads), leaving the alternating threads free (the front shed threads). Test both sheds by alternating between the heddle rod and shed stick. Attribution: Coast Salish weaving technique.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Cowichan Knitting: Post-Contact Adaptation",
+        "content": "Cowichan knitting is not a pre-contact tradition. Coast Salish peoples adopted knitting needles — a European-introduced tool — and applied their existing knowledge of Salish wool preparation and geometric design to create a new textile form. The Cowichan sweater (dense, water-resistant, using minimally processed undyed wool knitted at a tight gauge) is attributed specifically to Quw'utsun' (Cowichan) peoples of Vancouver Island. Name what was adapted (the tool: knitting needles) vs. what was maintained (fiber knowledge, design vocabulary, geometric grammar). Attribution: Cowichan (Quw'utsun') peoples.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Makes a Tradition",
+        "content": "Cowichan knitting began as an adaptation of a new tool to existing cultural knowledge and is now a fully recognized cultural tradition with significant economic and cultural importance. Cowichan sweaters have been the subject of intellectual property disputes involving counterfeit products that copy the design without attribution or compensation to Quw'utsun' makers. What does this tell us about how traditions form? What counts as authentic? What is the relationship between a tool's origin and a tradition's authenticity?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-journeyman-01",
+    "path": "weaving",
+    "title": "Coast Salish Formline",
+    "icon": "weaving-journeyman",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "weaving-apprentice-01"
+    ],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "A Distinct Design Language",
+        "content": "Coast Salish formline is not northern NW Coast formline. Describe 3 differences between the two systems: (1) Form — Coast Salish uses rounder, more freely oval forms vs. northern formline's structured ovoid system. (2) Composition — Coast Salish emphasizes circular and spiral compositions vs. northern formline's bilateral flowing symmetry. (3) Grammar — Coast Salish has a different relationship between positive and negative space; the ground space is more actively used in the composition. Attribution: Coast Salish (Musqueam, Squamish, Stó:lō) vs. northern formline nations (Haida, Tlingit, Tsimshian).",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Spindle Whorl Composition",
+        "content": "Describe the spindle whorl as a composition field. The circular format (typically 15-25 cm diameter) encourages radially symmetrical compositions where elements rotate around a center point. What visual elements appear in Coast Salish whorl compositions? Name at least two: transformation figures (human-animal forms), salmon, canoe paddlers, and other recognizable subjects rendered in Coast Salish formline vocabulary. Acknowledge that specific whorl compositions may carry lineage associations — they are not simply decorative. Studying specific whorls requires understanding that their particular meanings may belong to the family within whose tradition the whorl was made.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "relationship",
+        "title": "Three Basketry Nations",
+        "content": "Describe 3 cedar root basketry traditions individually: (1) Coast Salish imbricated basketry — technique: coiling cedar root with colored overlay (beargrass, cattail, cherry bark); nation: Stó:lō, Musqueam. (2) Nuu-chah-nulth plaited cedar bark — technique: flat cedar bark strips woven in checkerboard or twill plaiting; nation: Nuu-chah-nulth. (3) Nlaka'pamux coiled basketry — technique: fine cedar root coiling with geometric designs in beargrass or cherry bark overlay; nation: Nlaka'pamux (Thompson). Confirm nation-specific attribution for each — do not use 'Northwest Coast basketry' as a category for any of these.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Stays, What Changes",
+        "content": "Coast Salish weaving has incorporated new materials (sheep wool replacing woolly dog wool, commercial yarn for some contemporary work) and new tools (knitting needles, steel needles) while maintaining design grammar and cultural meaning. What makes a tradition resilient across material change? What is the core of a tradition — the specific materials, the technique, the design system, the community relationships, the knowledge transmission? Where does Cowichan knitting fit in this framework?",
         "culturalLevel": 1
       }
     ]

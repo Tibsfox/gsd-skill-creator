@@ -1,0 +1,31 @@
+{
+  "roomId": "room-17-salish-weaving",
+  "room": 17,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool"],
+  "criticalRules": [],
+  "gateRules": [],
+  "annotateRules": [
+    {
+      "id": "ROOM17-ANN-001",
+      "description": "Cedar root splitting tools",
+      "trigger": "splitting cedar root, preparing cedar root, cedar root processing",
+      "action": "ANNOTATE -- root splitting: cedar root is split using a bone awl or knife to initiate the split, then controlled by hand tension. Keep splitting tools directed away from the body. Wet roots are more pliable and safer to split than dry."
+    },
+    {
+      "id": "ROOM17-ANN-002",
+      "description": "Spindle tension and wrist strain",
+      "trigger": "spindle whorl, spinning, drop spindle, hand spinning",
+      "action": "ANNOTATE -- spindle use: sustained hand-spinning can cause repetitive strain in the wrist and forearm. Take breaks every 20-30 minutes. The drop spindle puts the weight of the wool and spindle on the twist — maintain consistent grip tension to avoid strain."
+    },
+    {
+      "id": "ROOM17-ANN-003",
+      "description": "Loom construction tools (knife, awl)",
+      "trigger": "loom construction, bar cutting, lashing, awl use",
+      "action": "ANNOTATE -- construction tools: knife cuts for loom bar preparation should go away from the body; awl use for lashing holes — brace the workpiece on a stable surface."
+    }
+  ],
+  "safetyNotes": {
+    "toolSafety": "Cedar root splitting and loom construction involve sharp tools. For cedar root splitting: use a bone awl or knife to initiate the split at the root end, then control the split progression by applying hand tension to both sides of the split root. Always direct splitting tools away from the body. Wet roots split more safely and evenly than dry roots. For loom bar preparation: knife cuts should go away from the body with the workpiece braced securely. Awl use for lashing holes should be done on a stable surface with the workpiece held firmly. Seek hands-on instruction from an experienced craftsperson before attempting these techniques independently."
+  }
+}

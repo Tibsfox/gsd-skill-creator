@@ -1,0 +1,55 @@
+{
+  "id": "weaving-17-two-bar-loom-beginner",
+  "title": "The Coast Salish Two-Bar Loom: Setup and First Pass",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "safetyLevel": "standard",
+  "culturalLevel": 1,
+  "prerequisites": [],
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand the two-bar loom in context: what makes it distinct from other loom types.",
+      "nationAttribution": "Coast Salish (Musqueam, Squamish, Stó:lō, Cowichan)",
+      "culturalContext": "The two-bar loom is the traditional Coast Salish weaving system. Unlike the European four-shaft floor loom or the Haudenosaunee finger-weaving (no loom at all), the two-bar loom uses simple bars held apart by tension. The design is elegant: no rigid frame to transport, easy to set up in seasonal camps, and capable of producing complex textiles. The top bar attaches to a fixed point above (a rafter, a tree branch, or a purpose-built support). The bottom bar hangs below, kept taut by weights or by lashing to the weaver's belt.",
+      "sumoMapping": "Artifact"
+    },
+    {
+      "order": 2,
+      "instruction": "Identify the four components of the two-bar loom: top bar, bottom bar, warp threads, and weft threads.",
+      "culturalContext": "The top bar (fixed or tied high) anchors the warp at the upper end. The bottom bar (weighted or tied low) anchors the warp at the lower end and keeps it under tension. The warp threads run vertically between the two bars — these are the structural threads that give the cloth its strength. The weft threads run horizontally, interlacing with the warp to create the cloth surface. On the two-bar loom, the warp hangs vertically and the weaver passes the weft through horizontally, building the cloth from the bottom upward.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn warp measurement and sett calculation: how to determine the correct number of warp ends per inch for a balanced plain weave.",
+      "culturalContext": "The sett — number of warp ends per inch — determines the textile's density. Salish blanket warp is typically set at 8-12 epi (ends per inch) for a bulky wool. The sett is calculated from the yarn's wraps per inch: divide wraps per inch by 2 for plain weave sett. For example, a wool that wraps 20 times per inch has a plain weave sett of 10 epi. To measure the warp length: add the desired finished length plus take-up (approximately 10-15% for a plain weave) plus lashing allowance at both bars. Warp threads are measured and cut to consistent length before attaching to the bars."
+    },
+    {
+      "order": 4,
+      "instruction": "Understand the heddle rod: how it separates alternate warp ends to create the two sheds needed for weaving.",
+      "culturalContext": "Coast Salish weavers used a heddle rod to separate warp ends into two sheds — the openings through which the weft passes. Without a heddle, a weaver must pick up alternate warp ends by hand for every pass, which is slow and inconsistent. The heddle rod has loops of string (the heddles) attached to every other warp thread (the back shed threads). Pulling the heddle rod forward opens the back shed. A shed stick inserted in the natural shed opens the front shed. Alternating between the two sheds produces plain weave. This two-shed system is the foundation of all the complex weave structures built in Salish textile traditions."
+    },
+    {
+      "order": 5,
+      "instruction": "Learn about the fiber: mountain goat wool and the historical woolly dog.",
+      "nationAttribution": "Coast Salish, Musqueam",
+      "culturalContext": "Mountain goat wool and woolly dog wool were chosen for Salish blankets because of their long staple length and relatively fine fiber. Both fibers have natural crimp that allows them to interlock during spinning, producing a stable yarn. The woolly dog (now extinct as a distinct breed) was maintained separately from other dogs specifically for this purpose — one of the earliest documented selective breeding programs for textile fiber in North America. Woolly dogs were kept on small islands to prevent cross-breeding with other dogs, and sheared annually. When sheep arrived via European contact, the woolly dog's function became redundant. The breed is now extinct as a distinct breed — a loss that is both ecological and cultural.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Practice the first weaving pass: open the shed, pass the weft, beat gently, open the alternate shed, repeat.",
+      "culturalContext": "The first pass establishes the rhythm: open the shed, pass the weft (leaving a slight arc so it does not pull the warp inward at the edges), close, beat gently with a weaving sword or shed stick, open the other shed, pass the weft back. Coast Salish weaving is worked from the bottom of the loom up. Family design patterns are built from the bottom edge — the weaver knows where they are going before they begin. The edges (the selvedges) are controlled by the slight arc in the weft on each pass — this is the most critical technique for beginners to develop.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 7,
+      "instruction": "Acknowledge family design patterns: understand the distinction between technique (Level 1) and design ownership (Level 2-3).",
+      "culturalContext": "Specific design compositions in Salish weaving may carry family ownership — patterns passed within specific lineages that identify the family. This session covers plain weave structure: the technical foundation of all Salish weaving. Design composition is a separate study that must be approached with the specific family or cultural office whose tradition you are learning from. General geometric patterns are the shared visual vocabulary of Coast Salish weaving; specific pattern compositions that identify a family are not for general use without that family's permission and guidance.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
