@@ -1,0 +1,91 @@
+{
+  "id": "room-15-cedar-culture",
+  "room": 15,
+  "domain": "cedar-culture",
+  "title": "Cedar Culture",
+  "traditions": ["first-nations"],
+  "sumoClasses": ["Artifact", "WaterVehicle", "Canoe", "HeritageSkill", "MaterialCulture", "Plant"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "description": "Room 15 explores western red cedar material culture across Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah nations — the four primary cedar peoples of the Pacific Northwest Coast. Cedar is not background to this room; cedar is the room's foundation and its teacher.\n\nThe Cedar Teaching places Grandmother Cedar — Xpey' in Lekwungen and Coast Salish languages — at the center of everything. The origin story is widely shared and community-authorized for educational contexts: a generous man who gave everything to everyone was transformed by the Creator into cedar, as a continuing gift to the people. Grandmother Cedar is not metaphor but relationship. The man who gave everything is still giving — in every plank, every basket strip, every canoe, every longhouse, every rope. To work with cedar is to continue receiving that gift.\n\nThe Law of the Bark is the ethical framework that follows from this relationship: take only what you need, ask permission before you begin, never take so much that you kill the tree, close the wound when you are done, and express gratitude (the forms of expression are Level 3-4; the practice of expressing gratitude is Level 1). The Law of the Bark encodes both ecological wisdom and relational ethics in a single phrase — it is the practical application of what the Cedar Teaching means.\n\nWestern red cedar (*Thuja plicata*) grows along the Pacific coast from California to Alaska, reaching over 60 metres in the right conditions. It is identified by its scale-like, overlapping leaves, fibrous reddish-brown bark that strips vertically, strongly buttressed base, and aromatic wood with natural rot resistance. Climate change — increased drought stress, elevated bark beetle pressure, and warmer winters — is affecting cedar health across its range. Sustainable harvest timing (spring, when sap runs and bark separates cleanly from sapwood) is part of the traditional ecological knowledge of all four nations.\n\nFrom cedar, Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah people have made: canoes (ocean-going, river, and racing forms, each nation-specific in design), bentwood boxes (from a single kerfed plank, steam-bent, used for storage, cooking with hot rocks, and trade), longhouses (post-and-beam community dwellings of extraordinary scale), rope and cordage (inner bark twisted into three-strand rope for lashing, fishing gear, nets), baskets and woven textiles (inner bark prepared into fine weaving strips), and ceremonial and artistic objects (totem poles, house posts, and masks that carry lineage and clan history — Level 2-3 content with appropriate referral protocols).\n\nThe cedar canoe presents Room 15's primary ontological bridge. SUMO correctly classifies the cedar canoe as Canoe → WaterVehicle → TransportationDevice → Device → Artifact. Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah traditions understand the cedar canoe as a living being completing a transformation that Grandmother Cedar began — not manufactured, but released. Both views are true. They answer different questions. Marine Safety domain requirements apply to all canoe content in this room.\n\nAll canoe and watercraft activities carry cold water safety requirements. The Salish Sea and the outer Pacific coast are cold: the 1-10-1 rule applies (approximately 1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness). PFD required at all times on or near water. Buddy system required. No solo paddling.",
+  "safetyDomains": ["tool", "structural", "marine"],
+  "trySessions": [
+    "cedar-15-ecology-identity-beginner",
+    "cedar-15-bark-harvesting-beginner",
+    "cedar-15-canoe-types-beginner"
+  ],
+  "modules": [
+    {
+      "id": "cedar-15-ecology",
+      "title": "Cedar Ecology",
+      "tradition": "first-nations",
+      "description": "Western red cedar (*Thuja plicata*) identification: scale-like, overlapping leaves that lie flat, fibrous reddish-brown bark that peels vertically, strongly buttressed base flaring out at ground level, aromatic reddish-brown heartwood with natural rot resistance. Range from northern California to southeast Alaska, west of the Cascade crest, typically below 1,500 metres elevation. Growth patterns: slow in youth, potentially reaching 60+ metres and 3+ metres diameter at maturity over 500-1,000 years. Climate threats: increased summer drought stress leading to dieback in eastern portions of the range, rising bark beetle (Thuja bark beetle) pressure, warmer winters reducing snowpack that feeds spring moisture. Sustainable harvest zones: spring, when sap flows in the phloem and inner bark separates cleanly from sapwood without tearing. Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah are the primary cedar peoples of the Pacific Northwest Coast, each with distinct territory and tradition built around western red cedar.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "MaterialCulture"]
+    },
+    {
+      "id": "cedar-15-teaching",
+      "title": "The Cedar Teaching",
+      "tradition": "first-nations",
+      "description": "Grandmother Cedar — Xpey' in Lekwungen and Coast Salish languages — is the philosophical foundation of Pacific Northwest Coast cedar culture. The Cedar Teaching origin story is widely shared in community-authorized educational materials: a generous man who gave everything away to everyone, who had nothing left, was transformed by the Creator into cedar — so that he could continue giving forever. Bark for weaving. Wood for canoes. Planks for longhouses. Roots for baskets. Rope for lashing. The man who gave everything is still giving. Grandmother Cedar is not metaphor but relationship: to work with cedar is to receive the ongoing gift, and the Law of the Bark specifies how to receive it with respect. The specific ceremony protocols for beginning cedar work are Level 3-4 and not reproduced here. The story of what cedar is — relationship, gift, responsibility — is Level 1 publicly shared knowledge integral to understanding any cedar material culture content in this room.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["CulturalPractice", "HeritageSkill"]
+    },
+    {
+      "id": "cedar-15-bark-harvesting",
+      "title": "Bark Harvesting",
+      "tradition": "first-nations",
+      "description": "Inner bark (bast/phloem) harvesting for weaving and rope-making: working in spring when sap flows and the inner bark separates cleanly from sapwood. Technique: two vertical score cuts from base upward, bottom horizontal cut to establish the strip, peeling upward in a continuous controlled motion, separating inner bark from sapwood without tearing. Strip width limited to never exceed one-third of the tree's circumference per the Law of the Bark — the ethical and ecological constraint that ensures the tree survives harvest. Outer bark removal for construction and waterproofing (caulking, roof surface). Tools: sharp knife for scoring, hands for peeling controlled strips. Tool safety annotated for knife work. Nation attribution: Coast Salish (Xpey' relationship as primary philosophical framework), Nuu-chah-nulth (extensive bark harvesting traditions for weaving and rope). All bark harvesting begins with the Law of the Bark as the operational framework.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["MaterialCulture", "HeritageSkill", "IntentionalProcess"]
+    },
+    {
+      "id": "cedar-15-canoe-types",
+      "title": "Canoe Types",
+      "tradition": "first-nations",
+      "description": "Four nation-specific cedar canoe traditions individually attributed: Coast Salish racing and paddling canoe (long, narrow, typically 30-40 feet, high-prow design optimized for speed and competitive paddling in coastal waters). Coast Salish shovel-nose river canoe (flat bottom, blunt squared ends for stability in river current and shallow water travel, easily poled or paddled). Nuu-chah-nulth ocean-going canoe (higher bow to handle open Pacific swell, wider beam for offshore stability — this is the canoe designed for whale hunting far offshore in the open Pacific, requiring maximum stability and seakeeping). Kwakwaka'wakw northern-style canoe (distinctive upturned bow for coastal sea conditions, handling the chop of the Inside Passage). Makah ocean-going canoe (used specifically for Cape Flattery offshore whale hunting in some of the most demanding open-ocean conditions on the Pacific Coast). Marine safety domain required for all canoe and watercraft content: cold water, PFD, buddy system, 1-10-1 rule, weather and tidal condition check before launch. SUMO bridge present: cedar canoe as WaterVehicle and Artifact (SUMO) vs. living being completing Grandmother Cedar's transformation (Salish Sea nations). Both views are true.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "Canoe", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "cedar-15-bentwood-box",
+      "title": "Bentwood Box",
+      "tradition": "first-nations",
+      "description": "The bentwood box is made from a single western red cedar plank, kerfed at three corners and bent into a four-sided box. Physics of kerf-bending: a series of parallel saw cuts or adze cuts, 70-80% through the plank depth on the interior face, reduce the effective thickness and allow the wood to bend at the kerf location when steamed. Steam softens the lignin binding the cellulose fibers — the wood becomes temporarily pliable, bends without splitting at the kerf, and holds its new shape as it cools. Steaming technique: steam box (wood box with wet heat source) or wet blanket draped over the plank above a heat source. Kerfed corners are bent sequentially; the fourth corner is joined by drilling and lashing, pegging, or a combination. Bottom is attached separately. Functional uses: waterproof food storage, hot-rock cooking (stones heated in fire, transferred to box with water), trade goods container. Ceremonial uses involve clan and lineage design on exterior surfaces — Level 2-3 content with referral to nation cultural centers. Tool safety GATE for adze and drawknife. Attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth all developed bentwood box traditions with regional design variations.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Artifact", "Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "cedar-15-longhouse",
+      "title": "Longhouse",
+      "tradition": "first-nations",
+      "description": "Post-and-beam construction: large cedar corner posts set deep in the ground (minimum one-third post length for structural stability), ridge beam and purlin system supporting the roof frame, cedar planks split with mauls and wedges (not sawn) for wall and roof cladding. Cedar plank splitting follows the grain: a froe or wedge started with a maul runs down the straight grain, producing wide flat planks from a round log by splitting rather than sawing. Community living architecture: multiple family compartments arranged along interior walls, central open area, fire pits for cooking and warmth, smoke holes in the roof for ventilation. Traditional longhouses reach 20-60 metres in length depending on the community's size and resources. Village layout: longhouses arranged facing a beach landing, allowing canoe access, with totem poles and house posts as clan and lineage identifiers. culturalLevel 2 because longhouse designs — their dimensions, internal layout, and associated carvings — carry specific clan and lineage information belonging to the families who built them. Structural GATE for construction: post-and-beam principles, post hole depth, temporary support of structural members. Nation attribution: Coast Salish (sxwayxway house, longhouse traditions), Kwakwaka'wakw (big house/dlugwe traditions).",
+      "safetyLevel": "gated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Artifact", "ConstructionProcess", "HeritageSkill"]
+    },
+    {
+      "id": "cedar-15-cedar-rope",
+      "title": "Cedar Rope",
+      "tradition": "first-nations",
+      "description": "Inner bark processing for rope-making: dried bark strips twisted together using the thigh-rolling technique (two strips laid parallel, rolled in the same direction on the thigh, then folded and allowed to twist back on each other — the Z-twist and S-twist combine into a stable two-strand rope). Wet bark can be used immediately by folding and twisting, producing temporary-use cordage. Three-strand braided rope for heavier loads: three two-strand ropes braided together for increased strength and load distribution. Applications: lashing for canoe construction (thwarts, gunwales, ribs), longhouse framing (post and beam connections, plank lashing), fishing gear (net frames, line), net construction (cedar rope nets for salmon and herring). Tool annotation for splitting tools used in initial bark preparation. Nation attribution: Coast Salish (inner bark weaving and rope traditions documented extensively), Nuu-chah-nulth (rope for marine and fishing applications).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Artifact", "Manufacturing", "MaterialCulture"]
+    }
+  ],
+  "ontologicalBridges": [
+    {
+      "id": "bridge-15-cedar-canoe",
+      "title": "The Cedar Canoe: Artifact or Living Being?",
+      "sumoView": "Canoe -> WaterVehicle -> TransportationDevice -> Device -> Artifact -> Object -> Physical -> Entity. A watercraft constructed by splitting, adzing, and steam-bending a single western red cedar log. Classified by material composition (cedar), function (water transport), and construction method (dugout).",
+      "indigenousView": "The cedar canoe is not manufactured — it is released from the cedar tree, which is itself Grandmother Cedar, the being who gave everything. When a carver works on a canoe, they are continuing the cedar's offering. The canoe carries the spirit of the tree into the water. Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah traditions each understand the cedar canoe not as a tool that humans make from wood, but as a being that cedar becomes through relationship with skilled hands. Launching a new canoe is ceremony — an acknowledgment of this becoming.",
+      "tradition": "first-nations",
+      "teachingPoint": "SUMO correctly classifies the cedar canoe as an Artifact — it is a human-made object for water transport. The Salish Sea nations see the same object as a living being completing a transformation that Grandmother Cedar began. Both are true. They answer different questions: WHAT it is (artifact, classification) versus WHAT it means (relationship, responsibility, continuity). The carver who knows only the SUMO view can build a canoe. The carver who understands the cedar's gift knows why the canoe must be treated with care long after it is built."
+    }
+  ]
+}

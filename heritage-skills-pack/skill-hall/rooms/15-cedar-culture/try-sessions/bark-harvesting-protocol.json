@@ -1,0 +1,54 @@
+{
+  "id": "cedar-15-bark-harvesting-beginner",
+  "title": "The Law of the Bark: Harvesting Protocol",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the practical protocol for harvesting western red cedar inner bark within the constraints of the Law of the Bark. Understand tree selection, harvest area assessment, knife technique, and the inner vs. outer bark distinction.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Select the right tree: look for healthy trees with straight grain, no large branches for the first 6 feet of trunk, a crown that looks full and healthy, and not in a grove of fewer than 5 trees.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "culturalContext": "Experienced harvesters do not take bark from any tree they encounter — they select carefully. A straight-grained lower trunk means the bark strips will run clean and not tear. A healthy crown means the tree has sufficient resources to recover from bark removal. Small groves (fewer than 5 trees) represent a fragile cluster where removing bark from even one tree could compromise the group. The Law of the Bark begins before the knife comes out: the first act is looking, not cutting.",
+      "sumoMapping": "IntentionalProcess"
+    },
+    {
+      "order": 2,
+      "instruction": "Apply the Law of the Bark: mark out no more than one-third of the tree's circumference as your harvest area.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "culturalContext": "Experienced harvesters visually assess what the tree can give without harm. Walk around the tree and identify the best-grained section — this will be your harvest strip. The one-third limit is not arbitrary: it reflects generations of observation that trees harvested within this limit consistently survive and recover. Beyond one-third, the ring of living phloem around the trunk is too disrupted to sustain itself. A harvester who takes more than one-third is not just breaking a rule — they are ending that tree's future generosity. Mark your strip mentally or with a light chalk mark before cutting.",
+      "sumoMapping": "IntentionalProcess"
+    },
+    {
+      "order": 3,
+      "instruction": "Prepare for knife work: position your body, check the blade, and plan the scoring cuts before making the first cut.",
+      "safetyNote": "ANNOTATE -- Always score bark with the knife cutting parallel to the trunk grain and away from your body. Keep the blade covered when repositioning. A sharp knife requires less force and gives more control — a dull knife requires force that makes the cut unpredictable. Body position: stand beside the tree, never in front of the blade's travel path. Both hands on the knife handle or one hand bracing on the tree, never in the cut's path.",
+      "sumoMapping": "IntentionalProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Execute the harvesting motion: two vertical score cuts defining the strip width, a bottom horizontal cut to start the separation, then peel upward in a continuous controlled motion.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "culturalContext": "Score the two vertical lines from base to the height you need (typically 1-3 metres for weaving strips). Cut deep enough to reach the inner bark but not into the sapwood beneath it — you are scoring through the outer bark to the phloem layer below. The bottom horizontal cut connects the two vertical cuts at the base. From this starting point, use your hands to peel the inner bark upward in a continuous motion — you are separating phloem from sapwood by leveraging the strip's own length. Spring timing makes this possible: sap running in the phloem lubricates the separation. In drier conditions the bark tears and wounds worse.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 5,
+      "instruction": "Distinguish inner bark from outer bark: learn which is which, and which is used for weaving vs. construction.",
+      "culturalContext": "The bark you harvest has two layers with different properties and uses. Inner bark (bast or phloem): pale tan or creamy color, flexible and fibrous when fresh, dries to a light brown. This is the weaving material — stripped into thin sheets, processed into fine weaving strips for baskets and textiles, or twisted into rope. It is the living tissue that transports sugars from leaves to roots. Outer bark: reddish-brown, corky, protective. Used for construction (waterproofing seams, roofing material) and historically for container liners and insulation. In harvesting, you peel inner bark attached to outer bark together, then separate them for different uses. The inner bark is what the Law of the Bark refers to when it speaks of the tree's gift.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Close the harvest: cover the exposed sapwood area, leave no tools behind, and express gratitude in the way appropriate to your relationship with these traditions.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "culturalContext": "After removing bark, the tree's sapwood is exposed to insects, fungi, and drying. Experienced harvesters cover this wound: loose bark pieces placed back over the exposed area, moss packed in where available, or a cloth cover in a temporary sense. The goal is to reduce direct sun and air exposure to the wound while the tree begins forming callous tissue. Leave no tools, no debris, nothing behind that does not belong. The specific forms of expressing gratitude to the tree — the words, the offerings, the practices — are Level 3-4 and belong to community protocol. The practice of expressing gratitude is Level 1: it is part of the Law of the Bark, integral to completing the harvest. This is not ceremony described here — it is acknowledgment that gratitude belongs.",
+      "sumoMapping": "MaterialCulture"
+    }
+  ]
+}
