@@ -1,0 +1,57 @@
+{
+  "id": "salmon-16-reef-net-beginner",
+  "title": "Reef Net Technology: Lummi and Saanich Cooperative Fishing",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "prerequisites": [],
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Read the marine safety gate before engaging with reef net content.",
+      "safetyNote": "GATE — Marine safety required for reef net content: reef net fishing is conducted from two anchored canoes on the water. PFD required for all persons on or near water. Buddy system required. Cold water shock — the gasping reflex upon cold water immersion — can incapacitate even strong swimmers within seconds of immersion in water below 15°C (59°F). Know the 1-10-1 rule: approximately 1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness in cold water. Check tidal conditions and weather before deployment. Never conduct reef net activities alone."
+    },
+    {
+      "order": 2,
+      "instruction": "Understand reef net geography — why reef channels are the key to this technology.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich)",
+      "culturalContext": "Reef net fishing exploits a specific geography: shallow reef channels where the reef bottom comes close enough to the surface to allow a net to lie on the bottom. Salmon traveling the Salish Sea follow these channels because reefs concentrate the small fish salmon eat. Lummi and Saanich peoples identified these locations over generations of careful observation — specific reef channels in the San Juan Islands and Gulf Islands became established fishing grounds with defined rights and governance. This geographic knowledge — which reefs, which tidal conditions, which seasons — is inseparable from the technology itself.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn the three-part net geometry: floor, lead lines, and bag.",
+      "culturalContext": "The reef net has three structural components that work together as a system. The floor is the bottom net, laid along the reef surface to intercept salmon traveling close to the bottom. The two lead lines are angled panels extending from the edges of the floor upward at an angle — they guide fish that encounter them upward and over the floor net. The bag is the trap: positioned above and behind the floor, it receives the fish that have been guided up by the lead lines. The physics is elegant: salmon following the reef bottom encounter the angled lead lines, are guided upward, and pass over the floor net into the bag above. The net shape works with salmon behavior, not against it.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 4,
+      "instruction": "Study the two-canoe system — anchoring, positioning, and crew roles.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich)",
+      "culturalContext": "Reef net operation requires two canoes working as a single system. The canoes are anchored on either side of the reef channel, spanning the net between them across the channel. Each canoe carries a crew with defined roles: anchoring and positioning, managing the net lines, and watching the water. Coordination protocols developed over generations define these roles clearly. This is not ad-hoc cooperation — it is engineered social organization. A reef net station operated by one family or one crew is incomplete; the technology structurally requires partnership between families and the protocols that make partnership reliable.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Learn the lookout's role — reading the water surface for approaching salmon schools.",
+      "culturalContext": "The lookout stands in the bow of one canoe, elevated as high as possible, reading the water surface for the distinctive shimmering shadow of an approaching salmon school. This requires specific ecological knowledge: how schools appear in different water conditions (choppy vs. calm, sun angle, turbidity), how tidal timing affects salmon movement and water visibility, and how to distinguish a salmon school from other underwater features. The lookout's reading of the water is the critical input that determines when the signal is given. Years of practice develop the ability to read the water confidently.",
+      "sumoMapping": "IntentionalProcess"
+    },
+    {
+      "order": 6,
+      "instruction": "Understand the moment of harvest — the signal and the coordinated net raise.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich)",
+      "culturalContext": "When the school is positioned over the net floor, the lookout gives the signal and both canoe crews raise the net simultaneously. The timing is critical — too early and fish escape over the lip before entering the bag; too late and the school has passed. The coordinated raise requires practiced synchronization between crews. Multi-family reef net stations operated through defined governance: who had rights to which station was established through long-standing family and clan rights; how harvests were shared was governed by protocols developed over generations. The technology and its governance were inseparable.",
+      "sumoMapping": "IntentionalProcess"
+    },
+    {
+      "order": 7,
+      "instruction": "Understand the sustainability design built into reef net technology.",
+      "culturalContext": "Reef nets, like weirs, are designed with built-in passage: the net spans the channel but does not seal it completely. Some fish always pass. This is not a design failure or an accidental gap — it reflects the same ecological understanding that governs the First Salmon Ceremony. The technology is designed for long-term relationship with the salmon runs, not maximum extraction in any single season. Lummi and Saanich governance of reef net stations included protocols for how many fish to take, when to stop fishing for the day, and how to maintain the salmon run across generations. The technology cannot be separated from these governance structures.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}

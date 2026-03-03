@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-17-salish-blanket",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SalishBlanket Artifact)",
+    "naturalLanguage": "A Salish blanket woven on a two-bar loom from mountain goat wool and woolly dog wool is an artifact — a human-made textile object. SUMO classifies it by material composition (fiber) and manufacturing process (weaving).",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-blanket-weaving",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SalishBlanketWeaving Manufacturing)",
+    "naturalLanguage": "Weaving a Salish blanket on a two-bar loom is a manufacturing process — setting the warp at a defined sett, interlacing weft threads, managing tension, and building the cloth from the bottom up.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-blanket-weaving",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SalishBlanketWeaving HeritageSkill)",
+    "naturalLanguage": "Salish blanket weaving is also a heritage skill — encoding knowledge of fiber preparation, dye plants, design composition, and the two-bar loom system passed within Coast Salish weaving families.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-cedar-basket",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarRootBasket Artifact)",
+    "naturalLanguage": "A cedar root basket is an artifact — a human-made container woven from prepared cedar root using coiling, plaiting, or twining techniques depending on the nation.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-cedar-root-preparation",
+    "sumoTerm": "MaterialCulture",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarRootPreparation MaterialCulture)",
+    "naturalLanguage": "Preparing cedar roots for basketry — harvesting from young cedars, splitting, scraping, sizing — is traditional material culture encoding knowledge of which roots to harvest, when to harvest, and how to process for different basket types.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-two-bar-loom",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TwoBarLoom Artifact)",
+    "naturalLanguage": "A Coast Salish two-bar loom is an artifact — a weaving tool consisting of two horizontal bars held apart by tension, with warp threads hanging vertically between them.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-formline-design",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CoastSalishFormline CulturalPractice)",
+    "naturalLanguage": "Coast Salish formline design is a cultural practice — a systematic visual design grammar distinct from northern NW Coast formline, expressed primarily on spindle whorls, house posts, and ceremonial objects.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-cowichan-sweater",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CowichanSweater Artifact)",
+    "naturalLanguage": "A Cowichan sweater is an artifact — a dense, water-resistant knitted garment produced from minimally processed Salish wool using knitting needles (post-contact tool) and pre-contact design traditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-17-cowichan-sweater",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CowichanKnitting HeritageSkill)",
+    "naturalLanguage": "Cowichan knitting is a heritage skill — a post-contact adaptation that integrated European knitting technique with Coast Salish fiber knowledge and design tradition, producing a new textile form specific to Quw'utsun' (Cowichan) people.",
+    "ontologicalBridge": null
+  }
+]
