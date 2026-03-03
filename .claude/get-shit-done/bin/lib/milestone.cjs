@@ -377,7 +377,71 @@ function cmdMilestoneComplete(cwd, version, options, raw) {
   output(result, raw);
 }
 
+function cmdMilestoneReview(cwd, milestoneId, raw) {
+  if (!milestoneId) {
+    error('milestone ID required. Usage: gsd-tools milestone review <id>');
+  }
+
+  const planningDir = path.join(cwd, '.planning');
+  if (!fs.existsSync(planningDir)) {
+    output({ created: false, reason: '.planning/ directory not found' }, raw);
+    return;
+  }
+
+  // Default review milestone config (matches TypeScript DEFAULT_REVIEW_MILESTONE_CONFIG)
+  const config = {
+    type: 'review',
+    pacing: {
+      maxSubversionsPerSession: 5,
+      minContextWindowsPerSubversion: 2,
+      mandatoryRetrospective: true,
+      mandatoryLessonsLearned: true,
+      sequentialOnly: true,
+    },
+    chain: {
+      requiresPriorLessons: true,
+      feedForwardEnforced: true,
+      patternPromotionThreshold: 3,
+      catalogScope: 'milestone-series',
+    },
+    scoring: {
+      rubric: ['completeness', 'depth', 'connections', 'honesty'],
+      minimumScore: 3.0,
+    },
+  };
+
+  const configPath = path.join(planningDir, `review-config-${milestoneId}.json`);
+  if (fs.existsSync(configPath)) {
+    output({ created: false, reason: 'already exists', milestoneId }, raw);
+    return;
+  }
+
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+  const now = new Date().toISOString();
+  const state = {
+    milestoneId,
+    currentState: 'LOAD',
+    config,
+    transitions: [],
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  const statePath = path.join(planningDir, `review-state-${milestoneId}.json`);
+  fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
+
+  output({
+    created: true,
+    milestoneId,
+    configPath: `review-config-${milestoneId}.json`,
+    statePath: `review-state-${milestoneId}.json`,
+    config,
+  }, raw);
+}
+
 module.exports = {
   cmdRequirementsMarkComplete,
   cmdMilestoneComplete,
+  cmdMilestoneReview,
 };
