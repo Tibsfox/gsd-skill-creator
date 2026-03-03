@@ -7,6 +7,7 @@
  * Usage:
  * ```typescript
  * import { ModelBenchmarkRun, ThresholdsConfigLoader, DEFAULT_PASS_RATE_THRESHOLD } from './eval/index.js';
+ * import { MultiModelBenchmarkRunner, ModelAwareGrader } from './eval/index.js';
  * ```
  */
 
@@ -35,3 +36,17 @@ export {
   // DEFAULT_PASS_RATE_THRESHOLD re-exported from thresholds-config.ts as well
   // (types.ts is canonical source; thresholds-config.ts re-exports it)
 } from './thresholds-config.js';
+
+// MultiModelBenchmarkRunner and its constants (Plan 51-02)
+export {
+  MultiModelBenchmarkRunner,
+  BENCHMARK_PASS_ACCURACY_THRESHOLD,
+} from './multi-model-benchmark.js';
+
+// ModelAwareGrader, ModelCapabilityProfile interface, and its constants (Plan 51-02)
+export {
+  ModelAwareGrader,
+  LOCAL_SMALL_CONTEXT_THRESHOLD,
+  CLOUD_CONTEXT_THRESHOLD,
+  type ModelCapabilityProfile,
+} from './model-aware-grader.js';
