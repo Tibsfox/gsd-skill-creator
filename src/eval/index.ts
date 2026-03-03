@@ -50,3 +50,10 @@ export {
   CLOUD_CONTEXT_THRESHOLD,
   type ModelCapabilityProfile,
 } from './model-aware-grader.js';
+
+// EvalViewer and its constants (Plan 51-03)
+export {
+  EvalViewer,
+  VIEWER_PASS_RATE_GREEN_THRESHOLD,
+  VIEWER_PASS_RATE_YELLOW_THRESHOLD,
+} from './eval-viewer.js';
