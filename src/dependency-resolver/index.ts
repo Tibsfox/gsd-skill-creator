@@ -8,3 +8,5 @@ export type {
   DryRunResult,
 } from './types.js';
 export { ManifestBackup, createBackup } from './manifest-backup.js';
+export { ProposalDryRunner, runProposalDryRun } from './proposal-dry-runner.js';
+export { HITLApprovalGate, presentForApproval, formatProposal } from './hitl-approval-gate.js';
