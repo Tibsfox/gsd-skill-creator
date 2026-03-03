@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
-status: Plan 52-02 executed — Mesh Discovery Service with heartbeat monitoring, auto-eviction, and append-only event log
-stopped_at: Completed 52-02-PLAN.md
-last_updated: "2026-03-03T17:58:11.456Z"
-last_activity: 2026-03-03 — Plan 52-02 (Mesh Discovery Service with heartbeat monitoring and auto-eviction) executed
+status: Plan 52-03 executed — DACP mesh transport with provenance tracking, fidelity-adaptive compression, and multi-hop relay
+stopped_at: Completed 52-03-PLAN.md
+last_updated: "2026-03-03T18:10:00.000Z"
+last_activity: 2026-03-03 — Plan 52-03 (DACP Mesh Transport with provenance tracking and fidelity adaptation) executed
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 47
 ---
 
@@ -24,21 +24,21 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 52 (MCP Infrastructure) — IN PROGRESS (2 of 4 plans done)
-Plan: 52-02 complete
-Status: Plan 52-02 executed — Mesh Discovery Service with heartbeat monitoring, auto-eviction (IMP-01), and append-only event log (IMP-07)
-Last activity: 2026-03-03 — Plan 52-02 (Mesh Discovery Service with heartbeat monitoring and auto-eviction) executed
+Phase: 52 (MCP Infrastructure) — IN PROGRESS (3 of 4 plans done)
+Plan: 52-03 complete
+Status: Plan 52-03 executed — DACP mesh transport with provenance tracking (origin + immutable hop accumulation), fidelity-adaptive gzip compression, and multi-hop relay
+Last activity: 2026-03-03 — Plan 52-03 (DACP Mesh Transport with provenance tracking and fidelity adaptation) executed
 
 ```
-Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases done)
+Progress: [█████████░] 94% (9 of ~10 plans across Phase 52 done, 3 of 4 in this phase)
 ```
 
 ## Performance Metrics
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 8 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03; Phase 52: 52-01, 52-02)
-- Tests added this milestone: 380 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03 + 41 from Plan 52-01 + 56 from Plan 52-02)
+- Plans complete: 9 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03; Phase 52: 52-01, 52-02, 52-03)
+- Tests added this milestone: 441 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03 + 41 from Plan 52-01 + 56 from Plan 52-02 + 61 from Plan 52-03)
 - Duration 50-01: 7 min
 - Duration 50-02: 4 min
 - Duration 50-03: 12 min
@@ -47,6 +47,7 @@ Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases
 - Duration 51-03: 9 min (549s)
 - Duration 52-01: 4 min (271s)
 - Duration 52-02: 7 min
+- Duration 52-03: 5 min
 
 ## Accumulated Context
 
@@ -60,6 +61,15 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 52-03
+
+- addHop() immutability enforced by TDD test: returns new header via spread + new array; original.hops.length === 0 after addHop -- hard contract for safe concurrent relay
+- gzipSync (synchronous): DACP bundles bounded at 100KB; sync keeps compressBundle/decompressBundle pure, simplifies TransportResult type surface
+- same-node rule before latency in assessTransportCondition: identity check is a correctness guarantee (not style) -- co-located processes may report non-zero latency
+- TransportResult carries both parsed ProvenanceHeader and provenanceSerialized string: callers building TransportPayload need string; callers inspecting provenance need object -- avoids double-serialize
+- relay() re-assesses transport condition per leg: each segment may traverse a different network; optimal compression assessed fresh for each hop
+- Existing MeshEventType for transport events: extending closed MeshEventTypeSchema from Plan 02 would require schema migration; payload.type='transport-send' is minimal-impact
 
 ### Key Decisions from Plan 52-02
 
@@ -160,11 +170,12 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 | IMP-02 | Phase 53 | Wave 3→4 boundary review gate |
 | IMP-06 | Phase 53 | Scoring and routing pure functions |
 | Phase 52-mcp-infrastructure P02 | 7 | 2 tasks | 7 files |
+| Phase 52 P03 | 5min | 2 tasks | 7 files |
 
 ## Session Continuity
 
-Last session: 2026-03-03T17:58:11.452Z
-Stopped at: Completed 52-02-PLAN.md
+Last session: 2026-03-03T18:06:19.415Z
+Stopped at: Completed 52-03-PLAN.md
 
-Phase 52 in progress (2 of 4 plans done). Next: execute 52-03-PLAN.md (DACP Transport).
-To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute `52-03-PLAN.md`.
+Phase 52 in progress (3 of 4 plans done). Next: execute 52-04-PLAN.md (final Phase 52 plan, if any) or proceed to Phase 53.
+To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute the next plan.

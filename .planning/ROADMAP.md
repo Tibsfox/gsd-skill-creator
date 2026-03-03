@@ -87,7 +87,7 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
 
 - [x] **Phase 50: Model Abstraction** - ModelChip interface, OpenAI-compatible and Anthropic chips, ChipRegistry, CLI integration, backward compatibility (COMPLETE 2026-03-03)
 - [x] **Phase 51: Multi-Model Evaluation** - Benchmark schema extension, grader cross-model calibration, thresholds.json, eval viewer model filter (COMPLETE 2026-03-03)
-- [ ] **Phase 52: MCP Infrastructure** - Local LLM MCP Wrapper, Mesh Discovery Service, DACP mesh transport, fidelity adaptation
+- [x] **Phase 52: MCP Infrastructure** - Local LLM MCP Wrapper, Mesh Discovery Service, DACP mesh transport, fidelity adaptation (completed 2026-03-03)
 - [ ] **Phase 53: Mesh Orchestration** - Mesh Coordinator agent, VTM mesh-aware wave planning, cross-model optimization, cost-aware routing
 - [ ] **Phase 54: Context & Integration** - Context preservation, transcript summarizer, mesh git worktrees, Skill Creator MCP Server
 
@@ -138,7 +138,7 @@ Plans:
   4. Bundle size adapts to transport conditions — a bundle sent over a slow link is measurably more compressed than one sent locally
   5. Every lifecycle method with automatic behavior (heartbeat expiry, stale node eviction) has an integration test verifying auto-invocation — not just unit correctness
   6. Mesh event logs use append-only writes (`fs.appendFile`) — no overwrite possible by construction
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 52-01-PLAN.md — LLM MCP Wrapper: 4 MCP tools (llm.chat, llm.health, llm.capabilities, llm.models), connection pooling, request queuing
@@ -178,6 +178,6 @@ Plans:
 |-------|----------------|--------|-----------|
 | 50. Model Abstraction | 3/3 | Complete    | 2026-03-03 |
 | 51. Multi-Model Evaluation | 3/3 | Complete    | 2026-03-03 |
-| 52. MCP Infrastructure | 2/3 | In Progress|  |
+| 52. MCP Infrastructure | 3/3 | Complete   | 2026-03-03 |
 | 53. Mesh Orchestration | 0/? | Not started | - |
 | 54. Context & Integration | 0/? | Not started | - |

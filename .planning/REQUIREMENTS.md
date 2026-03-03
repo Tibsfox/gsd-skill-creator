@@ -32,8 +32,8 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 - [x] **MCP-02**: LLM Wrapper handles connection pooling, request queuing, and capability probing
 - [x] **MCP-03**: Mesh Discovery Service supports node registration, deregistration, heartbeat monitoring, and health reporting
 - [x] **MCP-04**: Discovery Service marks nodes unhealthy after 3 missed heartbeats and removes them from routing pool
-- [ ] **MCP-05**: DACP mesh transport sends bundles between nodes via MCP with provenance tracking (origin, hops, timestamps)
-- [ ] **MCP-06**: Fidelity adaptation adjusts bundle compression based on transport conditions (full local, standard mesh, compressed remote)
+- [x] **MCP-05**: DACP mesh transport sends bundles between nodes via MCP with provenance tracking (origin, hops, timestamps)
+- [x] **MCP-06**: Fidelity adaptation adjusts bundle compression based on transport conditions (full local, standard mesh, compressed remote)
 
 ### Mesh Orchestration
 
@@ -115,8 +115,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MCP-02 | Phase 52 | Complete (52-01) |
 | MCP-03 | Phase 52 | Complete |
 | MCP-04 | Phase 52 | Complete |
-| MCP-05 | Phase 52 | Pending |
-| MCP-06 | Phase 52 | Pending |
+| MCP-05 | Phase 52 | Complete |
+| MCP-06 | Phase 52 | Complete |
 | MESH-01 | Phase 53 | Pending |
 | MESH-02 | Phase 53 | Pending |
 | MESH-03 | Phase 53 | Pending |
