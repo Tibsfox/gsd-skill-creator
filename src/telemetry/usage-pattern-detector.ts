@@ -23,6 +23,12 @@ const DEFAULT_CONFIG: Required<PatternDetectorConfig> = {
   deadSkillSessionThreshold: 30,
   budgetCasualtyMinSessions: 5,
   budgetCasualtySkipRate: 0.5,
+  correctionMagnetMinLoads: 5,
+  correctionMagnetRate: 0.3,
+  scoreDriftMinEvents: 10,
+  scoreDriftMinDrop: 0.15,
+  loadNeverActivateMinLoads: 5,
+  loadNeverActivateMinScore: 0.5,
 };
 
 interface SkillAccumulator {
@@ -30,6 +36,8 @@ interface SkillAccumulator {
   scoredScores: number[];
   loadedSessions: Set<string>;
   skippedSessions: Set<string>;
+  correctionSessions: Set<string>;
+  scoredEventsChronological: Array<{ timestamp: string; score: number }>;
 }
 
 export class UsagePatternDetector {
@@ -80,6 +88,8 @@ export class UsagePatternDetector {
           scoredScores: [],
           loadedSessions: new Set<string>(),
           skippedSessions: new Set<string>(),
+          correctionSessions: new Set<string>(),
+          scoredEventsChronological: [],
         };
         accMap.set(skillName, acc);
       }
@@ -91,12 +101,16 @@ export class UsagePatternDetector {
         const acc = getOrCreate(event.skillName);
         acc.scoredSessions.add(event.sessionId);
         acc.scoredScores.push(event.score);
+        acc.scoredEventsChronological.push({ timestamp: event.timestamp, score: event.score });
       } else if (event.type === 'skill-loaded') {
         const acc = getOrCreate(event.skillName);
         acc.loadedSessions.add(event.sessionId);
       } else if (event.type === 'skill-budget-skipped') {
         const acc = getOrCreate(event.skillName);
         acc.skippedSessions.add(event.sessionId);
+      } else if (event.type === 'skill-correction') {
+        const acc = getOrCreate(event.skillName);
+        acc.correctionSessions.add(event.sessionId);
       }
     }
 
@@ -155,6 +169,50 @@ export class UsagePatternDetector {
       }
     }
 
+    // Step 8: correction magnet detection (PTRN-04)
+    const correctionMagnets: string[] = [];
+    for (const [skillName, acc] of accMap) {
+      const loadCount = acc.loadedSessions.size;
+      if (loadCount >= this.config.correctionMagnetMinLoads) {
+        const correctionRate = acc.correctionSessions.size / loadCount;
+        if (correctionRate > this.config.correctionMagnetRate) {
+          correctionMagnets.push(skillName);
+        }
+      }
+    }
+
+    // Step 9: score drift detection (PTRN-05)
+    const scoreDriftSkills: string[] = [];
+    for (const [skillName, acc] of accMap) {
+      const chronological = [...acc.scoredEventsChronological].sort(
+        (a, b) => a.timestamp.localeCompare(b.timestamp)
+      );
+      if (chronological.length < this.config.scoreDriftMinEvents) continue;
+
+      const mid = Math.floor(chronological.length / 2);
+      const earlyHalf = chronological.slice(0, mid);
+      const recentHalf = chronological.slice(mid);
+
+      const earlyAvg = earlyHalf.reduce((s, e) => s + e.score, 0) / earlyHalf.length;
+      const recentAvg = recentHalf.reduce((s, e) => s + e.score, 0) / recentHalf.length;
+
+      if (recentAvg < earlyAvg * (1 - this.config.scoreDriftMinDrop)) {
+        scoreDriftSkills.push(skillName);
+      }
+    }
+
+    // Step 10: load-but-never-activate detection (PTRN-06)
+    const loadNeverActivateSkills: string[] = [];
+    for (const [skillName, acc] of accMap) {
+      if (acc.loadedSessions.size < this.config.loadNeverActivateMinLoads) continue;
+      if (acc.correctionSessions.size > 0) continue; // had corrections = was activated
+      const hasHighScore = acc.scoredEventsChronological.some(
+        e => e.score >= this.config.loadNeverActivateMinScore
+      );
+      if (hasHighScore) continue; // scored well = was relevant
+      loadNeverActivateSkills.push(skillName);
+    }
+
     const report: PatternReport = {
       type: 'report',
       totalSessions,
@@ -162,6 +220,9 @@ export class UsagePatternDetector {
       highValueSkills,
       deadSkills,
       budgetCasualties,
+      correctionMagnets,
+      scoreDriftSkills,
+      loadNeverActivateSkills,
     };
 
     return report;

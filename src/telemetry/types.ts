@@ -34,8 +34,16 @@ export interface SkillLoadedEvent {
   timestamp: string; // ISO 8601
 }
 
+/** Emitted when a user provides a correction in a session where the skill was loaded. */
+export interface SkillCorrectionEvent {
+  type: 'skill-correction';
+  skillName: string;
+  sessionId: string;
+  timestamp: string; // ISO 8601
+}
+
 /** Union of all usage event types. Discriminated by the `type` field. */
-export type UsageEvent = SkillScoredEvent | SkillBudgetSkippedEvent | SkillLoadedEvent;
+export type UsageEvent = SkillScoredEvent | SkillBudgetSkippedEvent | SkillLoadedEvent | SkillCorrectionEvent;
 
 /** Configuration for the EventStore. */
 export interface EventStoreConfig {
@@ -100,6 +108,21 @@ export interface PatternReport {
    * in at least budgetCasualtyMinSessions sessions.
    */
   budgetCasualties: string[];
+  /**
+   * Skills loaded frequently but followed by user corrections.
+   * Requires correction rate above threshold across a minimum number of loaded sessions.
+   */
+  correctionMagnets: string[];
+  /**
+   * Skills whose average score has declined significantly over time.
+   * Requires sufficient scored events for meaningful trend analysis.
+   */
+  scoreDriftSkills: string[];
+  /**
+   * Skills loaded into context but that show no evidence of influencing output
+   * (never scored above threshold, never triggered corrections).
+   */
+  loadNeverActivateSkills: string[];
 }
 
 /**
@@ -138,4 +161,34 @@ export interface PatternDetectorConfig {
    * a budget casualty. Default: 0.5 (50%).
    */
   budgetCasualtySkipRate?: number;
+  /**
+   * A skill must be loaded in at least this many sessions before it can be a
+   * correction magnet. Default: 5.
+   */
+  correctionMagnetMinLoads?: number;
+  /**
+   * Minimum correction rate (correctionSessions / loadSessions) to qualify as a
+   * correction magnet. Default: 0.3 (30%).
+   */
+  correctionMagnetRate?: number;
+  /**
+   * Minimum number of scored events for a skill before score-drift analysis runs.
+   * Default: 10.
+   */
+  scoreDriftMinEvents?: number;
+  /**
+   * Minimum relative drop between early and recent average score to flag as drift.
+   * Default: 0.15 (15% drop). Example: earlyAvg=0.8, recentAvg < 0.8×0.85=0.68 → drift.
+   */
+  scoreDriftMinDrop?: number;
+  /**
+   * A skill must be loaded in at least this many sessions before load-never-activate
+   * analysis runs. Default: 5.
+   */
+  loadNeverActivateMinLoads?: number;
+  /**
+   * If a skill was ever scored above this threshold, it is considered "active" and
+   * excluded from load-never-activate. Default: 0.5.
+   */
+  loadNeverActivateMinScore?: number;
 }
