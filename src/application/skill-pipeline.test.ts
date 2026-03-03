@@ -237,6 +237,23 @@ describe('createEmptyContext', () => {
     expect(ctx.getReport()).toBe(customReport);
     expect(ctx.getReport().totalTokens).toBe(100);
   });
+
+  it('should generate a sessionId string by default', () => {
+    const ctx = createEmptyContext();
+    expect(typeof ctx.sessionId).toBe('string');
+    expect(ctx.sessionId.length).toBeGreaterThan(0);
+  });
+
+  it('should generate unique sessionIds for each call', () => {
+    const ctx1 = createEmptyContext();
+    const ctx2 = createEmptyContext();
+    expect(ctx1.sessionId).not.toBe(ctx2.sessionId);
+  });
+
+  it('should respect sessionId override', () => {
+    const ctx = createEmptyContext({ sessionId: 'my-fixed-session' } as Partial<PipelineContext>);
+    expect(ctx.sessionId).toBe('my-fixed-session');
+  });
 });
 
 describe('SkillPipeline integration', () => {
@@ -393,5 +410,24 @@ describe('SkillPipeline integration', () => {
 
     expect(pipeline.getStageNames()).toEqual(['score', 'resolve', 'budget-check', 'load']);
     expect(order).toEqual(['score', 'resolve', 'budget-check', 'load']);
+  });
+
+  it('should preserve sessionId through all stages', async () => {
+    const pipeline = new SkillPipeline();
+    const seenIds: string[] = [];
+
+    pipeline.addStage({
+      name: 'observe',
+      process: async (ctx) => {
+        seenIds.push(ctx.sessionId);
+        return ctx;
+      },
+    });
+
+    const ctx = createEmptyContext({ sessionId: 'fixed-session-id' } as Partial<PipelineContext>);
+    await pipeline.process(ctx);
+
+    expect(seenIds).toHaveLength(1);
+    expect(seenIds[0]).toBe('fixed-session-id');
   });
 });
