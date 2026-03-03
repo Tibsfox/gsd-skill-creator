@@ -26,7 +26,8 @@ export class BudgetStage implements PipelineStage {
     private tokenCounter: TokenCounter,
     private profile: BudgetProfile,
     private skillStore: SkillStore,
-    private contextWindowSize: number = 200_000
+    private contextWindowSize: number = 200_000,
+    private highValueSkills?: ReadonlySet<string>,
   ) {}
 
   async process(context: PipelineContext): Promise<PipelineContext> {
@@ -112,7 +113,16 @@ export class BudgetStage implements PipelineStage {
     };
 
     await processTier(criticalSkills, 'critical');
-    await processTier(standardSkills, 'standard');
+
+    // ADAPT-05: within the standard tier, high-value skills load before unranked skills
+    const orderedStandardSkills = this.highValueSkills && this.highValueSkills.size > 0
+      ? [
+          ...standardSkills.filter(s => this.highValueSkills!.has(s.name)),
+          ...standardSkills.filter(s => !this.highValueSkills!.has(s.name)),
+        ]
+      : standardSkills;
+
+    await processTier(orderedStandardSkills, 'standard');
     await processTier(optionalSkills, 'optional');
 
     // Replace resolvedSkills with kept skills (already in tier order)
