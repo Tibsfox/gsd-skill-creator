@@ -11,6 +11,8 @@ import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, Mode
 import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';
 import type { CorrectionConfig } from '../retrieval/types.js';
 import { EmbeddingService } from '../embeddings/embedding-service.js';
+import type { EventStore } from '../telemetry/index.js';
+import { TelemetryStage } from '../telemetry/index.js';
 
 /**
  * Optional configuration for enabling retrieval-augmented features.
@@ -58,6 +60,7 @@ export class SkillApplicator {
     budgetProfile?: BudgetProfile,
     modelProfile?: string,
     retrievalConfig?: RetrievalConfig,
+    eventStore?: EventStore,
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -109,6 +112,10 @@ export class SkillApplicator {
     }
 
     this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
+
+    if (eventStore) {
+      this.pipeline.addStage(new TelemetryStage(eventStore));
+    }
   }
 
   // Initialize by indexing all enabled skills
