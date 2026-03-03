@@ -4,6 +4,86 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.49.12] - 2026-03-02
+
+### Added
+
+- **Heritage Skills Educational Pack — Phase 2 (Pacific Northwest Coast & Trail Badges):** 4 new Skill Hall rooms (Room 15 Cedar Culture, Room 16 Salmon World, Room 17 Salish Weaving, Room 18 Village World), Trail Badge Engine (55 badges across 12 paths, 4 tiers with Explorer/Apprentice/Journeyman/Keeper progression, practice journal, "Can You Teach It?" Keeper verification with pan-Indigenous language detection), Salish Sea Ways cross-cutting module (53 nations across 5 provinces, watershed identity framework, potlatch historical context 1884-1951, reconnecting descendant terminology with verbatim protocol phrase), Marine Safety domain (10th physical safety domain — cold water GATE, tidal ANNOTATE, vessel GATE, navigation ANNOTATE, 12 rules with 7 GATE/5 ANNOTATE), Reconnecting Descendant Pathway (terminology guide with Pretendian sensitivity, watershed investigation tools, resource directory with Sixties Scoop Network/NICWA/cultural centers, Heritage Book "Reconnecting" template variant), Badge Retrofit for Phase 1 rooms 1-14 (12 new badges ensuring Explorer+Apprentice coverage per room), SEL Mapping documentation (Neighbors Path to CASEL framework alignment, heritage-first framing)
+- **Phase 2 types:** TraditionV2 union with SALISH_SEA, Phase2RoomNumber (rooms 15-18), BadgePath (9 paths), BadgeTier (4 tiers), HeritageBadge, BadgeComponent, PracticeJournal, JournalEntry, ReconnectingProfile, WatershedType, MarineSafetyDomain — all extending Phase 1 without modifying existing types
+- **Phase 2 integration tests:** 68 tests across 6 files — marine safety, PNW sovereignty, badge engine, safety monotonicity (MONO-01 through MONO-10), pan-Indigenous language scan across all 18 rooms, cross-module integration
+- **Phase 2 safety audit:** 18 red-team adversarial scenarios — marine bypass attempts, potlatch ceremony extraction, Cedar ceremonial carvings, reconnecting pathway emotional manipulation, academic exception claims, pan-Indigenous teaching for Keeper badge — all CLEARED FOR DEPLOYMENT
+- **Heritage Skills Educational Pack — Phase 1 (Foxfire & Northern Ways):** 14 Skill Hall rooms covering Appalachian, First Nations, and Inuit traditions; Physical Safety Warden with 9 domains (food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival); Cultural Sovereignty Warden with 4-level classification (OCAP/IQ/CARE/NISR/UNDRIP); Northern Ways cross-cutting module (Haudenosaunee, Anishinaabe, Cree, Dene, Inuit regions); SUMO Heritage Domain Ontology with 5 ontological bridges; Canonical Works Library with Bibliography Engine; Skill Hall Framework (session runner, room navigation); Oral History Studio (12 core practices, IQ-Pilimmaksarniq alignment); Interview Simulator with cultural sensitivity checker; Heritage Book Template with Inuktitut syllabics support; Project Builder workflow (Planning to Publication with community review gates); Export Pipeline (docx/pdf stubs with syllabics rendering)
+- **Phase 1 integration tests:** 68 tests across 5 files — safety-critical, cultural sovereignty, core functionality, fair use, cross-module
+- **Phase 1 safety audit:** 18 red-team adversarial scenarios — all CLEARED FOR DEPLOYMENT
+- **Chipset configuration:** heritage-skills-pack v2.0.0 with 6 skills, 5 agents, 4 evaluation gates, tradition-aware routing
+- **Cultural Sovereignty Policy:** Public policy document with Level 4 hard block (no academic exception, no credential override, no membership self-attestation), UNDRIP Article 31, 24-hour suspension commitment for community removal requests
+
+### Stats
+
+- 12 phases (28-39), 45 plans, 18 rooms, 55 badges, 10 safety domains, 36 red-team scenarios (all pass), 22,820 total tests
+
+---
+
+## [1.49.11] - 2026-03-02
+
+### Added
+
+- **gsd-init hardening:** Safety checks for existing installations, manifest-driven uninstall, comprehensive test suite with 13 test cases
+- Manifest file tracks all installed artifacts for clean removal
+- Non-destructive by default — refuses to overwrite existing files without --force flag
+
+---
+
+## [1.49.10] - 2026-03-01
+
+### Added
+
+- **College Expansion:** 42 subject departments (15 core academic + 10 applied + 10 specialized + 7 frontier), dynamic mapping layer with user-owned JSON mappings, safety wardens extended for new domains
+- Typed RosettaConcept files for all department wings (78+ concept files across 50 specialized wings)
+- Flat atom architecture — each subject is a self-contained directory, virtual departments are user-configurable
+
+### Stats
+
+- 6 phases (22-27), 34 plans, 42 departments, 34 requirements
+
+---
+
+## [1.49.9] - 2026-03-01
+
+### Added
+
+- **Learn Kung Fu — Mind-Body Education Pack:** 8 content wings (breath work, meditation, yoga, pilates, martial arts, tai chi, relaxation techniques, philosophy), Training Hall with session management, Practice Builder/Journal with no-guilt UX, Physical Safety Warden extensions for movement-specific domains
+- Solo practice boundary — redirect partner/sparring/self-defense to in-person instruction
+- Cultural sensitivity framework — credit traditions with original terminology, no mystification or trivialization
+
+### Stats
+
+- 4 phases (12-15), 14 plans, 8 content modules, 751 new tests, 36 requirements
+
+---
+
+## [1.49.8] - 2026-03-01
+
+### Added
+
+- **Cooking With Claude:** Rosetta Core translation engine (9 language panels — Python, C++, Java, Perl, ALGOL, Lisp, Pascal, Fortran, Unison), College Structure (knowledge as explorable code departments — culinary-arts, mathematics), Calibration Engine (universal feedback loop with bounded learning), 7 culinary wings (knife skills, heat, sauce, baking, preservation, plating, nutrition)
+- Progressive disclosure 3-tier: Summary (~3K always) → Active (~12K on demand) → Deep (~50K+ on request)
+- Safety boundaries absolute — food safety temperatures that calibration cannot override
+
+### Stats
+
+- 10 phases (1-10), 27 plans, 9 panels, 650 tests
+
+---
+
+## [1.49.7] - 2026-03-01
+
+### Added
+
+- **Optional tmux:** Graceful degradation when tmux is not available — cross-platform service detection, fallback to direct process management
+
+---
+
 ## [1.49.6] - 2026-03-01
 
 ### Fixed

@@ -6,7 +6,7 @@ description: |
   Covers four traditions (Appalachian, First Nations, Inuit, cross-tradition)
   across 14 rooms with physical safety enforcement, cultural sovereignty
   architecture, SUMO ontological scaffold, and Heritage Book authoring pipeline.
-milestone: v1.50.0
+milestone: v1.49.12
 
 skills:
   safety-warden:
@@ -399,7 +399,7 @@ version_info:
     - inuit
   phase2_traditions_pending:
     - pacific-northwest-coast
-  milestone: v1.50.0
+  milestone: v1.49.12
   status: integration-ready
   model_distribution:
     opus: "~40% (safety-critical and cultural sovereignty components)"
