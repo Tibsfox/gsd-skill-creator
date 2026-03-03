@@ -82,6 +82,13 @@ export class TelemetryStage implements PipelineStage {
       }
     }
 
+    // Enforce 90-day retention automatically (INTG-03)
+    try {
+      await this.store.pruneOlderThan(90);
+    } catch (err) {
+      console.warn('[TelemetryStage] Failed to prune old events:', err);
+    }
+
     return context;
   }
 }
