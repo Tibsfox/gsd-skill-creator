@@ -19,12 +19,12 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 
 ### Multi-Model Evaluation
 
-- [ ] **EVAL-01**: Benchmark schema gains `model` field per run with per-model summary breakdowns
+- [x] **EVAL-01**: Benchmark schema gains `model` field per run with per-model summary breakdowns
 - [ ] **EVAL-02**: Aggregate benchmark produces configuration x model matrix without breaking existing per-configuration output
 - [ ] **EVAL-03**: Grader receives model capability profile and produces model-specific improvement hints
-- [ ] **EVAL-04**: thresholds.json defines per-chip pass rate thresholds with configurable defaults
+- [x] **EVAL-04**: thresholds.json defines per-chip pass rate thresholds with configurable defaults
 - [ ] **EVAL-05**: Eval viewer gains model filter dropdown with side-by-side comparison and threshold-relative display
-- [ ] **EVAL-06**: Legacy benchmarks without model field display correctly (backward compatible)
+- [x] **EVAL-06**: Legacy benchmarks without model field display correctly (backward compatible)
 
 ### MCP Infrastructure
 
@@ -105,12 +105,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CHIP-04 | Phase 50 | Complete |
 | CHIP-05 | Phase 50 | Complete (50-03) |
 | CHIP-06 | Phase 50 | Complete |
-| EVAL-01 | Phase 51 | Pending |
+| EVAL-01 | Phase 51 | Complete |
 | EVAL-02 | Phase 51 | Pending |
 | EVAL-03 | Phase 51 | Pending |
-| EVAL-04 | Phase 51 | Pending |
+| EVAL-04 | Phase 51 | Complete |
 | EVAL-05 | Phase 51 | Pending |
-| EVAL-06 | Phase 51 | Pending |
+| EVAL-06 | Phase 51 | Complete |
 | MCP-01 | Phase 52 | Pending |
 | MCP-02 | Phase 52 | Pending |
 | MCP-03 | Phase 52 | Pending |

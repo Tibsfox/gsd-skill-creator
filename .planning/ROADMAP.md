@@ -103,7 +103,7 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
   3. A workspace without chipset.json runs all existing evals identically to before this phase (backward compatibility enforced)
   4. ChipRegistry reports the health and capabilities of each configured backend — user can query which chips are available and what each can do
   5. A threshold registry document (thresholds.md) exists at project root capturing every hardcoded numeric constant introduced in this phase with rationale and file:line reference
-**Plans:** 3/3 plans executed (COMPLETE)
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 50-01-PLAN.md — ModelChip types, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
@@ -120,7 +120,12 @@ Plans:
   3. The grader produces model-specific improvement hints when it knows a model's capability profile — a known-limitation case yields different guidance for Claude vs a smaller local model
   4. Legacy benchmark files without a model field display correctly in the viewer — no regressions for existing benchmark history
   5. Test-to-source ratio for this phase is tracked and reported in the verification record, targeting >=3:1
-**Plans**: TBD
+**Plans:** 1/3 plans executed
+
+Plans:
+- [ ] 51-01-PLAN.md — Eval types, Zod schemas (ModelBenchmarkRun, MultiModelBenchmark), ThresholdsConfigLoader
+- [ ] 51-02-PLAN.md — MultiModelBenchmarkRunner, ModelAwareGrader with capability-driven hints
+- [ ] 51-03-PLAN.md — EvalViewer formatting engine, CLI eval command, thresholds.md update, IMP-04 tracking
 
 ### Phase 52: MCP Infrastructure
 **Goal**: Two machines can communicate via DACP-over-MCP with provenance tracking, and mesh nodes register, advertise capabilities, and are evicted when unhealthy
@@ -166,8 +171,8 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 50. Model Abstraction | 2/3 | In Progress|  |
-| 51. Multi-Model Evaluation | 0/? | Not started | - |
+| 50. Model Abstraction | 3/3 | Complete    | 2026-03-03 |
+| 51. Multi-Model Evaluation | 1/3 | In Progress|  |
 | 52. MCP Infrastructure | 0/? | Not started | - |
 | 53. Mesh Orchestration | 0/? | Not started | - |
 | 54. Context & Integration | 0/? | Not started | - |

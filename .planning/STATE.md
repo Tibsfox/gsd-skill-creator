@@ -2,15 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
-status: Plan 50-03 executed — ChipTestRunner, chip CLI command, --chip/--grader-chip flags, thresholds.md
-stopped_at: Completed 50-03-PLAN.md
-last_updated: "2026-03-03T17:04:00.000Z"
-last_activity: 2026-03-03 — Plan 50-03 (CLI integration and asymmetric evaluation) executed
+status: Plan 51-01 executed — eval type system (Zod schemas, ThresholdsConfigLoader, EVAL-06 backward compat)
+stopped_at: Completed 51-01-PLAN.md
+last_updated: "2026-03-03T17:21:09.745Z"
+last_activity: 2026-03-03 — Plan 51-01 (multi-model eval types and thresholds config) executed
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -23,24 +24,25 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 50 (Model Abstraction) — COMPLETE (all 3 plans done)
-Plan: 50-03 complete, Phase 50 done
-Status: Plan 50-03 executed — ChipTestRunner, chip CLI command, --chip/--grader-chip flags, thresholds.md
-Last activity: 2026-03-03 — Plan 50-03 (CLI integration and asymmetric evaluation) executed
+Phase: 51 (Multi-Model Evaluation) — In Progress (1 of 3 plans done)
+Plan: 51-01 complete
+Status: Plan 51-01 executed — eval type system (Zod schemas, ThresholdsConfigLoader, EVAL-06 backward compat)
+Last activity: 2026-03-03 — Plan 51-01 (multi-model eval types and thresholds config) executed
 
 ```
-Progress: [██████████] 100% (3 of 3 plans in Phase 50 done)
+Progress: [█████████░] 92% (4 of 6 plans across active phases done)
 ```
 
 ## Performance Metrics
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 3/3 (Phase 50 complete: 50-01, 50-02, 50-03)
-- Tests added this milestone: 137 (65 from Plan 01 + 31 from Plan 02 + 41 from Plan 03)
+- Plans complete: 4 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01)
+- Tests added this milestone: 191 (137 from Phase 50 + 54 from Plan 51-01)
 - Duration 50-01: 7 min
 - Duration 50-02: 4 min
 - Duration 50-03: 12 min
+- Duration 51-01: 4 min (258s)
 
 ## Accumulated Context
 
@@ -54,6 +56,14 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 51-01
+
+- model field uses z.string().default('unknown') not optional -- parsed objects always have model string set, eliminating undefined checks in all downstream consumers
+- THRESHOLD_EQUALITY_TOLERANCE = 0.001 absorbs IEEE 754 rounding in pass rate ratios (7/10 = 0.6999...) without masking meaningful differences at 100-test scale
+- DEFAULT_PASS_RATE_THRESHOLD canonical in types.ts, re-exported from thresholds-config.ts per plan spec
+- ThresholdsConfigLoader requires explicit loadFromFile() before getThresholdForChip() -- matches ChipRegistry two-step pattern; callers control IO timing
+- CHIP-06 pattern applied to ThresholdsConfigLoader: only ENOENT silently returns default; EACCES/malformed JSON/Zod failures all propagate
 
 ### Key Decisions from Plan 50-03
 
@@ -116,8 +126,8 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 
 ## Session Continuity
 
-Last session: 2026-03-03T17:04:00.000Z
-Stopped at: Completed 50-03-PLAN.md
+Last session: 2026-03-03T17:21:09.742Z
+Stopped at: Completed 51-01-PLAN.md
 
-Phase 50 complete. Next: Phase 51 (Multi-Model Evaluation).
-To resume: read `.planning/ROADMAP.md` Phase Details, then run `/gsd:plan-phase 51`.
+Phase 51 in progress. Next: Plan 51-02 (grader calibration and multi-model benchmark runner).
+To resume: read `.planning/ROADMAP.md` Phase 51 details, then execute `51-02-PLAN.md`.
