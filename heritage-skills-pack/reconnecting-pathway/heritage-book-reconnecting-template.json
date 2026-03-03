@@ -1,0 +1,114 @@
+{
+  "id": "heritage-book-reconnecting-variant",
+  "culturalSovereigntyLevel": 1,
+  "version": "1.0.0",
+  "variantTitle": "Homecoming Journal",
+  "variantDescription": "The Homecoming Journal is a Heritage Book variant designed for people investigating their ancestral connections after a separation. It provides structure for documenting what you know, what you are looking for, what you have found, who you have spoken with, and what the land tells you. It is a living document — meant to be added to over months and years, not completed in one sitting.",
+  "emotionalFraming": "This document is for you. It does not need to prove anything. It does not need to be shared. It is a place to hold what you are learning and feeling as you investigate your ancestry. Write in it honestly. The goal is not to arrive at a tidy conclusion but to document a real process — with its uncertainties, its unexpected turns, and its moments of recognition.",
+  "frontMatter": {
+    "titlePage": {
+      "fields": [
+        "Your name",
+        "Date begun",
+        "Nation(s) under investigation",
+        "What brought you to this investigation"
+      ]
+    },
+    "dedicationPage": {
+      "guidanceNote": "Optional: a dedication to the family members whose stories you are trying to recover. To those who could not tell you, to those who did not know, to those who tried."
+    },
+    "openingStatement": {
+      "guidanceNote": "A brief statement of where you are starting from. What do you know as you begin? What are you uncertain about? What do you hope to find? This does not need to be polished — write it in your own voice."
+    }
+  },
+  "chapters": [
+    {
+      "contentType": "narrative",
+      "title": "What I Know",
+      "guidanceNotes": "Document what you know about your ancestry at the start of your investigation. Family stories. Fragments. Things that were said once and never repeated. Names, places, dates if you have them. The gaps are as important as the facts — note what is missing and why it might be.",
+      "requiredFields": [
+        "Known family history",
+        "Geographic origins (as specific as possible)",
+        "Family oral traditions or stories",
+        "Documents you have found"
+      ],
+      "estimatedPages": 5,
+      "culturalAttributionRequired": false,
+      "reconnectingGuidance": "Write what you actually know, not what you hope is true. The distinction matters — to you and to any community you may approach. 'My grandmother told me we were Coast Salish but I cannot verify this' is more honest and more useful than 'I am Coast Salish.'"
+    },
+    {
+      "contentType": "narrative",
+      "title": "What I Am Looking For",
+      "guidanceNotes": "Document your specific questions. What would you most like to know? What records are you looking for? What communities are you hoping to connect with? What would 'success' look like for this investigation?",
+      "requiredFields": [
+        "Specific ancestry questions",
+        "Records being sought",
+        "Community connections hoped for",
+        "Personal goals for this investigation"
+      ],
+      "estimatedPages": 3,
+      "culturalAttributionRequired": false,
+      "reconnectingGuidance": "Be specific. 'I want to know if I have Indigenous ancestry' is less useful than 'I am trying to determine whether my great-grandmother on my father's side was Lummi or Stó:lō.' The more specific your questions, the more useful the resource directory and watershed investigation tool become."
+    },
+    {
+      "contentType": "narrative",
+      "title": "What I Have Found",
+      "guidanceNotes": "A running record of your discoveries. Add to this chapter over time. Include: documents found, conversations had, what community members have shared with you (with their permission to document), watershed investigation results, language words learned.",
+      "requiredFields": [
+        "Documentary discoveries (with sources)",
+        "Community conversations (with permission)",
+        "Watershed investigation notes",
+        "Corrections to earlier understanding"
+      ],
+      "estimatedPages": 15,
+      "culturalAttributionRequired": true,
+      "reconnectingGuidance": "Date each entry. Your understanding will change as you learn more. Dating entries lets you trace how your knowledge developed. When a community member shares something with you, get their permission before documenting it. Some things are shared in conversation but not for writing down."
+    },
+    {
+      "contentType": "interview-transcript",
+      "title": "Who I Have Spoken With",
+      "guidanceNotes": "Oral history entries for conversations with family members, community contacts, cultural center staff, or others who have shared knowledge with you. Follow the Interview Methodology protocols from the Oral History Studio.",
+      "requiredFields": [
+        "Interviewee name (or description if anonymous)",
+        "Date of conversation",
+        "Key information shared",
+        "Questions asked",
+        "Permission to document (obtained verbally or in writing)"
+      ],
+      "estimatedPages": 10,
+      "culturalAttributionRequired": true,
+      "ocapReviewRequired": true,
+      "reconnectingGuidance": "Not all conversations become written records. Some community members will share information with you verbally but not for documentation. Respect this. The OCAP principle of Access means that community members retain the right to determine what is documented and shared. Ask before you write. If told no, honor it."
+    },
+    {
+      "contentType": "narrative",
+      "title": "What the Land Tells Me",
+      "guidanceNotes": "Document your relationship with the land connected to your ancestral heritage — visits to traditional territories, observations of the places connected to the nations you are investigating, your own response to the landscape. This chapter is optional but often becomes the most personal.",
+      "requiredFields": [
+        "Places visited",
+        "Observations of landscape and ecology",
+        "Personal response and reflection",
+        "Any guidance from community members about these places"
+      ],
+      "estimatedPages": 5,
+      "culturalAttributionRequired": true,
+      "reconnectingGuidance": "The land of the Salish Sea — the sound, the rivers, the mountains, the forest — is not neutral background. It is the source of the cultures you are investigating. Being physically present in traditional territories is not required for cultural reconnection, but for many people it becomes a turning point. If you visit, do so with permission where permission is required. Some sacred sites and reserved lands require permission to enter."
+    }
+  ],
+  "backMatter": {
+    "resourceLog": {
+      "guidanceNote": "A running list of organizations contacted, websites visited, and documents accessed. Include dates and outcomes. This becomes your research log."
+    },
+    "glossary": {
+      "guidanceNote": "Terms you have learned along the way — both from the terminology guide and from your own investigation. Include nation-specific terms where possible."
+    },
+    "acknowledgements": {
+      "guidanceNote": "Optional: acknowledge the people who have helped your investigation. Be specific about what each person shared. This section is especially important if you ever share the document beyond personal use."
+    }
+  },
+  "exportNotes": {
+    "personalUse": "This document is primarily for your own use. It does not need to meet Heritage Book publication standards.",
+    "sharingGuidance": "Before sharing this document with anyone — family members, community organizations, researchers — review Chapter 4 (interviews) for OCAP compliance. Information shared with you in confidence should not be published without re-obtaining permission.",
+    "formatNote": "Export via the Heritage Book pipeline (docx/pdf). Syllabics rendering is available if your investigation involves Inuktitut or other syllabic-script languages."
+  }
+}
