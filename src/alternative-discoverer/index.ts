@@ -10,3 +10,5 @@ export { ForkFinder, findForks } from './fork-finder.js';
 export { EquivalentSearcher, searchEquivalents } from './equivalent-searcher.js';
 export { InternalizationFlagger, flagInternalizationCandidates } from './internalization-flagger.js';
 export type { UsageAnalysisInput } from './internalization-flagger.js';
+export { DiscoveryOrchestrator, discoverAlternatives } from './discovery-orchestrator.js';
+export type { DiscoveryReport } from './discovery-orchestrator.js';
