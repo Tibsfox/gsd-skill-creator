@@ -110,16 +110,16 @@ describe('ChipTestRunner backward compatibility', () => {
       'user'
     );
 
-    // Should not throw (standard TestRunner path -- note: may fail if no real skill exists,
-    // so we test the code path via the registry flag, not the actual result).
-    // The key verification: when registry is not configured, ChipTestRunner
-    // creates a standard TestRunner internally. We verify it doesn't try to use chip.chat().
-    const chip = makeChip();
-    // chip.chat should never be called when registry is not configured
-    await expect(
-      runner.runForSkill('git-workflow', {})
-    ).rejects.toThrow(); // TestRunner will fail (no real skill files) but chip.chat was not called
-    expect(chip.chat).not.toHaveBeenCalled();
+    // The key verification: when no chip option is specified, ChipTestRunner
+    // creates a standard TestRunner internally (not chip execution path).
+    // With mocked stores, the standard TestRunner runs and returns a result.
+    const result = await runner.runForSkill('git-workflow', {});
+
+    // Result should not have chipName (standard TestRunner path)
+    expect((result as { chipName?: string }).chipName).toBeUndefined();
+    expect((result as { graderChipName?: string }).graderChipName).toBeUndefined();
+    // testStore.list was called (standard path used the store)
+    expect(testStore.list).toHaveBeenCalledWith('git-workflow');
   });
 
   it('returns result without chipName when no chip used', async () => {
