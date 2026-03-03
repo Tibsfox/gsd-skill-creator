@@ -1,0 +1,54 @@
+{
+  "id": "village-18-neighbor-map-beginner",
+  "title": "The Neighbor Map: Who Was Connected to Whom",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "safetyLevel": "standard",
+  "culturalLevel": 1,
+  "prerequisites": [],
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Read this introduction to the Salish Sea as a network of interconnected communities. What surprises you about how many connections existed between villages?",
+      "culturalContext": "Before colonization, the communities of the Salish Sea existed within an extensive web of relationships. No community was an island — every community had marriage ties to other communities, trade routes connecting it to distant peoples, and ceremonial relationships that bound communities across language boundaries. The Coast Salish nations — Musqueam (xʷməθkʷəy̓əm), Stó:lō, Squamish (Sḵwx̱wú7mesh), Lummi (Lhaq'temish), and Saanich/WSÁNEĆ — occupied the core of this network. The Kwakwaka'wakw nations to the north, the Nuu-chah-nulth on the west coast of Vancouver Island, and the Heiltsuk further north all maintained active relationships with Salish Sea communities. These relationships were not casual — they were maintained through repeated exchange, enforced by social obligation, and tracked across generations.",
+      "nationAttribution": "Coast Salish (Musqueam, Stó:lō, Squamish, Lummi, Saanich/WSÁNEĆ), Kwakwaka'wakw, Nuu-chah-nulth, Heiltsuk",
+      "sumoMapping": "Group"
+    },
+    {
+      "order": 2,
+      "instruction": "Examine how marriage ties created cross-nation relationships. Why would a high-status family deliberately arrange marriages across national boundaries?",
+      "culturalContext": "High-status marriages regularly crossed nation boundaries. A Lummi (Lhaq'temish) family might have cousins at WSÁNEĆ (Saanich) through a grandmother's marriage. A Kwakwaka'wakw family might have relatives among Heiltsuk neighbors. These marriage ties were intentional relationship-building: you do not make war on your cousins. Arranging a marriage with a neighboring community's high-status family created a bond of shared kinship — a relationship that both communities had invested in and would not lightly destroy. The children of these marriages belonged to networks on both sides. Marriage was diplomacy by another name.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Kwakwaka'wakw, Heiltsuk",
+      "sumoMapping": "SocialInteraction"
+    },
+    {
+      "order": 3,
+      "instruction": "Trace the documented trade routes of the Salish Sea. What moved between communities, and what does the movement of goods tell us about the relationships?",
+      "culturalContext": "Specific documented trade flows: eulachon oil ('grease') produced by Nuu-chah-nulth and other coastal groups was rendered and traded inland along established 'grease trails' — the fat-rich eulachon was a critical caloric resource that coastal communities could produce in surplus and interior communities needed. Stó:lō river salmon from the Fraser River traded to Interior Plateau communities for deer meat and obsidian. Cedar products — canoes, boxes, planks — traded from cedar-rich coastal areas to communities in areas with less or different timber. Copper pieces from northern sources traded south along the coast. The specific goods moved tell us about comparative ecological advantage: coastal communities had eulachon and cedar; interior communities had deer, obsidian, and other resources. Trade was how communities accessed what their own environment did not produce.",
+      "nationAttribution": "Nuu-chah-nulth, Stó:lō, Coast Salish",
+      "sumoMapping": "SocialInteraction"
+    },
+    {
+      "order": 4,
+      "instruction": "Examine the reef net fishing grounds shared between Lummi and WSÁNEĆ families. What does sharing a fishing ground across a political boundary require?",
+      "culturalContext": "The reef net stations of the San Juan Islands were shared between Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) families — across what is now an international border between the United States and Canada, but before colonization was a shared fishing area governed by established protocols. Access rights to specific reef net stations were inherited and maintained through ongoing relationship maintenance: attending each other's ceremonies, honoring gift obligations, maintaining the personal relationships between families. The protocols governing who fished where and when were not enforced by a central authority — they were maintained by the web of mutual obligation and relationship. When relationships were honored, the protocols held. This is what 'governance by relationship' looks like in practice.",
+      "nationAttribution": "Lummi (Lhaq'temish), WSÁNEĆ (Saanich)",
+      "sumoMapping": "SocialInteraction"
+    },
+    {
+      "order": 5,
+      "instruction": "Think through how the Neighbor Map creates constraints on conflict. If community A wanted to raid community B, what questions would the network force them to consider?",
+      "culturalContext": "A community embedded in the Salish Sea relationship network cannot simply attack a neighbor without considering: which of my relatives live there (whose children would become casualties), which trade routes pass through that territory (whose goods would be cut off), which ceremony relationships would be severed (whose obligations would go unmet), which fishing grounds would be lost (whose seasonal harvest depends on access now at risk). The map does not prevent conflict — it creates structure around conflict. Violence happens within these relationships, not outside them. This is the structural basis for the 'brothers who fight' framing: conflict between neighboring communities in the Salish Sea was almost always conflict between people who were simultaneously connected to each other in multiple other ways.",
+      "sumoMapping": "Group"
+    },
+    {
+      "order": 6,
+      "instruction": "Create your own Neighbor Map. Place one Salish Sea community at center. Add at least three neighboring communities with labeled connection types. Identify one relationship that would constrain conflict between any two communities on your map.",
+      "culturalContext": "Community relationship mapping exercise: choose one Salish Sea community (Musqueam, Stó:lō, Lummi, WSÁNEĆ, Kwakwaka'wakw, Heiltsuk, or Nuu-chah-nulth). Place it at the center of your map. For each neighboring community you add, label the connection type: marriage ties (which families are connected), trade routes (what moves along this connection), ceremony relationships (shared ceremony traditions or cross-community ceremony attendance), and fishing ground access (shared or negotiated access to specific fishing areas). Then identify one pair of communities on your map and describe specifically why their web of connections would constrain — not prevent — conflict between them. The constraint is always relational, never abstract.",
+      "nationAttribution": "Coast Salish (Musqueam, Stó:lō, Squamish, Lummi, Saanich/WSÁNEĆ), Kwakwaka'wakw, Heiltsuk, Nuu-chah-nulth",
+      "sumoMapping": "IntentionalProcess"
+    }
+  ]
+}
