@@ -59,11 +59,13 @@ vi.mock('../../chips/chip-registry.js', () => {
 // ============================================================================
 
 vi.mock('../../eval/thresholds-config.js', () => ({
-  ThresholdsConfigLoader: vi.fn().mockImplementation(() => ({
-    loadFromFile: vi.fn().mockResolvedValue({ version: 1, defaultPassRate: 0.75, chips: {} }),
-    getThresholdForChip: vi.fn().mockReturnValue(0.75),
-    getStatus: vi.fn().mockReturnValue('above'),
-  })),
+  ThresholdsConfigLoader: vi.fn().mockImplementation(function () {
+    return {
+      loadFromFile: vi.fn().mockResolvedValue({ version: 1, defaultPassRate: 0.75, chips: {} }),
+      getThresholdForChip: vi.fn().mockReturnValue(0.75),
+      getStatus: vi.fn().mockReturnValue('above'),
+    };
+  }),
 }));
 
 // ============================================================================
@@ -102,35 +104,43 @@ const mockBenchmark = {
 };
 
 vi.mock('../../eval/multi-model-benchmark.js', () => ({
-  MultiModelBenchmarkRunner: vi.fn().mockImplementation(() => ({
-    benchmarkSkill: vi.fn().mockResolvedValue(mockBenchmark),
-  })),
+  MultiModelBenchmarkRunner: vi.fn().mockImplementation(function () {
+    return {
+      benchmarkSkill: vi.fn().mockResolvedValue(mockBenchmark),
+    };
+  }),
 }));
 
 // ============================================================================
 // Mock ChipTestRunner
 // ============================================================================
 
-vi.mock('../../chips/chip-test-runner.js', () => ({
-  ChipTestRunner: vi.fn().mockImplementation(() => ({
-    runForSkill: vi.fn().mockResolvedValue({
-      skillName: 'test-skill',
-      runAt: '2026-03-03T00:00:00Z',
-      duration: 1000,
-      metrics: {
-        total: 10, passed: 8, failed: 2, accuracy: 80.0, falsePositiveRate: 5.0,
-        truePositives: 4, trueNegatives: 4, falsePositives: 1, falseNegatives: 1,
-        edgeCaseCount: 0, precision: 0.8, recall: 0.8, f1Score: 0.8,
-      },
-      passed: true,
-      hints: [],
-      results: [],
-      positiveResults: [],
-      negativeResults: [],
-      edgeCaseResults: [],
+vi.mock('../../chips/chip-test-runner.js', () => {
+  const mockResult = {
+    skillName: 'test-skill',
+    runAt: '2026-03-03T00:00:00Z',
+    duration: 1000,
+    metrics: {
+      total: 10, passed: 8, failed: 2, accuracy: 80.0, falsePositiveRate: 5.0,
+      truePositives: 4, trueNegatives: 4, falsePositives: 1, falseNegatives: 1,
+      edgeCaseCount: 0, precision: 0.8, recall: 0.8, f1Score: 0.8,
+    },
+    passed: true,
+    hints: [],
+    results: [],
+    positiveResults: [],
+    negativeResults: [],
+    edgeCaseResults: [],
+  };
+
+  return {
+    ChipTestRunner: vi.fn().mockImplementation(function () {
+      return {
+        runForSkill: vi.fn().mockResolvedValue(mockResult),
+      };
     }),
-  })),
-}));
+  };
+});
 
 // Helper to configure mock registry state
 async function setRegistryState(isConfigured: boolean, chipList: string[] = ['ollama']) {
