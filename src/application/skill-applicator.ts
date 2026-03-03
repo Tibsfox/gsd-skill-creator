@@ -6,13 +6,13 @@ import { ConflictResolver } from './conflict-resolver.js';
 import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-session.js';
 import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../types/application.js';
 import { DEFAULT_CONFIG } from '../types/application.js';
-import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
+import { SkillPipeline, createEmptyContext, type PipelineStage } from './skill-pipeline.js';
 import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage } from './stages/index.js';
 import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';
 import type { CorrectionConfig } from '../retrieval/types.js';
 import { EmbeddingService } from '../embeddings/embedding-service.js';
-import type { EventStore } from '../telemetry/index.js';
-import { TelemetryStage } from '../telemetry/index.js';
+import type { EventStore, PatternReport } from '../telemetry/index.js';
+import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
 
 /**
  * Optional configuration for enabling retrieval-augmented features.
@@ -61,6 +61,7 @@ export class SkillApplicator {
     modelProfile?: string,
     retrievalConfig?: RetrievalConfig,
     eventStore?: EventStore,
+    patternReport?: PatternReport,
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -94,6 +95,21 @@ export class SkillApplicator {
         retrievalConfig.correctionConfig,
       );
       this.pipeline.insertAfter('score', correctionStage);
+    }
+
+    // Wire ScoreAdjuster when pattern report is available (INTG-04 / ADAPT-01 pipeline wiring)
+    if (patternReport && patternReport.type === 'report') {
+      const adjuster = new ScoreAdjuster();
+      const scoreAdjustStage: PipelineStage = {
+        name: 'score-adjust',
+        process: async (context) => {
+          if (!context.earlyExit) {
+            context.scoredSkills = adjuster.adjust(context.scoredSkills, patternReport);
+          }
+          return context;
+        },
+      };
+      this.pipeline.insertBefore('resolve', scoreAdjustStage);
     }
 
     if (modelProfile) {
