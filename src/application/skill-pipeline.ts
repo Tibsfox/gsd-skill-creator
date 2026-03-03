@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import type { ScoredSkill, ConflictResult, SkippedSkill, BudgetWarning } from '../types/application.js';
 import type { SkillIndexEntry } from '../storage/skill-index.js';
 import type { SessionReport } from './skill-session.js';
@@ -33,6 +34,9 @@ export interface PipelineContext {
 
   // Model profile for model-aware filtering (set by caller, read-only to stages)
   readonly modelProfile?: string;   // Active model profile name: 'quality' | 'balanced' | 'budget'
+
+  // Session identifier for telemetry correlation (set by caller, read-only to stages)
+  readonly sessionId: string;
 
   // Control flag -- stages check this, runner ignores it
   earlyExit: boolean;
@@ -131,6 +135,7 @@ export function createEmptyContext(
     budgetWarnings: [],
     contentCache: new Map(),
     modelProfile: undefined,
+    sessionId: randomUUID(),
     earlyExit: false,
     getReport: () => ({
       activeSkills: [],
