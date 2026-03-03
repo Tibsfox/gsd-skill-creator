@@ -120,7 +120,7 @@ Plans:
   3. The grader produces model-specific improvement hints when it knows a model's capability profile — a known-limitation case yields different guidance for Claude vs a smaller local model
   4. Legacy benchmark files without a model field display correctly in the viewer — no regressions for existing benchmark history
   5. Test-to-source ratio for this phase is tracked and reported in the verification record, targeting >=3:1
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 - [ ] 51-01-PLAN.md — Eval types, Zod schemas (ModelBenchmarkRun, MultiModelBenchmark), ThresholdsConfigLoader
@@ -172,7 +172,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 50. Model Abstraction | 3/3 | Complete    | 2026-03-03 |
-| 51. Multi-Model Evaluation | 1/3 | In Progress|  |
+| 51. Multi-Model Evaluation | 2/3 | In Progress|  |
 | 52. MCP Infrastructure | 0/? | Not started | - |
 | 53. Mesh Orchestration | 0/? | Not started | - |
 | 54. Context & Integration | 0/? | Not started | - |
