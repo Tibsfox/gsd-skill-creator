@@ -1,14 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.49.15
-milestone_name: Self-Improving Mesh Architecture
-status: in_progress
-last_updated: "2026-03-03T16:40:05Z"
+milestone: v1.49
+milestone_name: milestone
+status: Plan 50-01 executed — ModelChip interface, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
+stopped_at: Completed 50-02-PLAN.md
+last_updated: "2026-03-03T16:49:26.512Z"
+last_activity: 2026-03-03 — Plan 50-01 (ModelChip type foundation) executed
 progress:
   total_phases: 5
   completed_phases: 0
-  total_plans: 1
-  completed_plans: 1
+  total_plans: 3
+  completed_plans: 2
 ---
 
 # Project State
@@ -21,22 +23,23 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 50 (Model Abstraction) — in progress (Plan 01 complete)
-Plan: 50-01 complete, ready for 50-02
-Status: Plan 50-01 executed — ModelChip interface, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
-Last activity: 2026-03-03 — Plan 50-01 (ModelChip type foundation) executed
+Phase: 50 (Model Abstraction) — in progress (Plans 01-02 complete)
+Plan: 50-02 complete, ready for 50-03
+Status: Plan 50-02 executed — ChipFactory, ChipRegistry, CHIP-06 backward compatibility
+Last activity: 2026-03-03 — Plan 50-02 (ChipRegistry and ChipFactory) executed
 
 ```
-Progress: [----------] 0/5 phases complete (Plan 1 of Phase 50 done)
+Progress: [█████████░] 93% (2 of 3 plans in Phase 50 done)
 ```
 
 ## Performance Metrics
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 1/? (50-01)
-- Tests added this milestone: 65 (35 schema + 15 OpenAI-compatible + 15 Anthropic)
+- Plans complete: 2/? (50-01, 50-02)
+- Tests added this milestone: 96 (65 from Plan 01 + 31 from Plan 02)
 - Duration 50-01: 7 min
+- Duration 50-02: 4 min
 
 ## Accumulated Context
 
@@ -50,6 +53,13 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 50-02
+
+- ChipsetFileSchema roles uses z.object partial() -- Zod v4 z.record(z.enum()) enforces all keys present; partial object schema gives correct subset-of-roles semantics
+- ChipRegistry state committed atomically in loadFromFile() -- new Maps built fully before assignment to prevent partial state on validation failure
+- createChipRegistry() factory separate from file loading -- callers control when loadFromFile() is called (critical for CLI flag path and test mock timing)
+- CHIP-06: only ENOENT is silently swallowed; other fs errors propagate as-is
 
 ### Key Decisions from Plan 50-01
 
@@ -96,7 +106,7 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 
 ## Session Continuity
 
-Last session: 2026-03-03 — Executed Plan 50-01 (ModelChip type foundation)
-Stopped at: Completed 50-01-PLAN.md
+Last session: 2026-03-03T16:49:26.509Z
+Stopped at: Completed 50-02-PLAN.md
 
-To resume: read `.planning/ROADMAP.md` Phase Details, then run `/gsd:plan-phase 50` for Plan 50-02.
+To resume: read `.planning/ROADMAP.md` Phase Details, then run `/gsd:plan-phase 50` for Plan 50-03.

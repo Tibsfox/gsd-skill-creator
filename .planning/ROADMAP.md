@@ -103,7 +103,7 @@ Phases 1-27 completed across five milestones. See MILESTONES.md for full accompl
   3. A workspace without chipset.json runs all existing evals identically to before this phase (backward compatibility enforced)
   4. ChipRegistry reports the health and capabilities of each configured backend — user can query which chips are available and what each can do
   5. A threshold registry document (thresholds.md) exists at project root capturing every hardcoded numeric constant introduced in this phase with rationale and file:line reference
-**Plans:** 3 plans
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] 50-01-PLAN.md — ModelChip types, OpenAI-compatible chip, Anthropic chip, IMP-05 cross-reference
@@ -166,7 +166,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 50. Model Abstraction | 1/3 | In progress | - |
+| 50. Model Abstraction | 2/3 | In Progress|  |
 | 51. Multi-Model Evaluation | 0/? | Not started | - |
 | 52. MCP Infrastructure | 0/? | Not started | - |
 | 53. Mesh Orchestration | 0/? | Not started | - |

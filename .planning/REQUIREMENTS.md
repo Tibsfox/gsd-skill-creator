@@ -13,9 +13,9 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 - [x] **CHIP-01**: System provides abstract ModelChip interface with chat(), health(), and capabilities() methods
 - [x] **CHIP-02**: System provides OpenAI-compatible chip covering Ollama, vLLM, and LM Studio via single parameterized implementation
 - [x] **CHIP-03**: System provides Anthropic chip wrapping existing API behind ModelChip interface
-- [ ] **CHIP-04**: ChipRegistry discovers available chips from chipset.json, validates connectivity, and maps role names to chip instances
+- [x] **CHIP-04**: ChipRegistry discovers available chips from chipset.json, validates connectivity, and maps role names to chip instances
 - [ ] **CHIP-05**: CLI `test run` gains `--chip` for per-run model execution and `--grader-chip` for per-run grader selection enabling asymmetric evaluation (originally spec'd as `run_eval`/`improve_description` -- mapped to actual CLI commands, see Plan 50-03 mapping note)
-- [ ] **CHIP-06**: Absence of chipset.json preserves current behavior (backward compatible)
+- [x] **CHIP-06**: Absence of chipset.json preserves current behavior (backward compatible)
 
 ### Multi-Model Evaluation
 
@@ -102,9 +102,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CHIP-01 | Phase 50 | Complete (50-01) |
 | CHIP-02 | Phase 50 | Complete (50-01) |
 | CHIP-03 | Phase 50 | Complete (50-01) |
-| CHIP-04 | Phase 50 | Pending |
+| CHIP-04 | Phase 50 | Complete |
 | CHIP-05 | Phase 50 | Pending |
-| CHIP-06 | Phase 50 | Pending |
+| CHIP-06 | Phase 50 | Complete |
 | EVAL-01 | Phase 51 | Pending |
 | EVAL-02 | Phase 51 | Pending |
 | EVAL-03 | Phase 51 | Pending |
