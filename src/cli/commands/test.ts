@@ -24,6 +24,8 @@ import { parseScope, getSkillsBasePath, type SkillScope } from '../../types/scop
 import type { TestExpectation, TestDifficulty, TestCase } from '../../types/testing.js';
 import { access } from 'fs/promises';
 import { join } from 'path';
+import { createChipRegistry } from '../../chips/chip-registry.js';
+import { ChipTestRunner } from '../../chips/chip-test-runner.js';
 
 /**
  * Check if running in CI environment.
@@ -847,6 +849,9 @@ async function handleRun(args: string[], scope: SkillScope): Promise<number> {
   const threshold = parseNumericFlag(args, 'threshold');
   const minAccuracy = parseNumericFlag(args, 'min-accuracy');
   const maxFalsePositive = parseNumericFlag(args, 'max-false-positive');
+  // CHIP-05: --chip selects execution model, --grader-chip selects grader model
+  const chipName = parseFlag(args, 'chip');
+  const graderChipName = parseFlag(args, 'grader-chip');
 
   // Validate args
   if (!skillName && !runAll) {
@@ -860,6 +865,8 @@ async function handleRun(args: string[], scope: SkillScope): Promise<number> {
     p.log.message('  --threshold=N            Activation threshold (default: 0.75)');
     p.log.message('  --min-accuracy=N         Fail if accuracy below N%');
     p.log.message('  --max-false-positive=N   Fail if FPR above N%');
+    p.log.message('  --chip=NAME              Execute tests against a chip (model backend)');
+    p.log.message('  --grader-chip=NAME       Grade responses using a chip (asymmetric eval)');
     return 1;
   }
 
@@ -894,8 +901,19 @@ async function handleRun(args: string[], scope: SkillScope): Promise<number> {
     skillsToTest = [skillName];
   }
 
-  // Run tests
-  const runner = new TestRunner(testStore, skillStore, resultStore, scope);
+  // Run tests -- use ChipTestRunner when --chip flag is present (CHIP-05)
+  // Without --chip, standard TestRunner is used (backward compatible)
+  let runner: TestRunner | ChipTestRunner;
+  if (chipName) {
+    const registry = createChipRegistry();
+    await registry.loadFromFile();
+    runner = new ChipTestRunner(registry, testStore, skillStore, resultStore, scope);
+    if (!outputMode) {
+      p.log.message(pc.dim(`Using chip: ${chipName}${graderChipName ? ` (graded by: ${graderChipName})` : ''}`));
+    }
+  } else {
+    runner = new TestRunner(testStore, skillStore, resultStore, scope);
+  }
   const allResults: TestRunResult[] = [];
   let hasFailures = false;
 
@@ -920,6 +938,8 @@ async function handleRun(args: string[], scope: SkillScope): Promise<number> {
       const result = await runner.runForSkill(skill, {
         threshold: threshold ?? 0.75,
         storeResults: true,
+        ...(chipName ? { chip: chipName } : {}),
+        ...(graderChipName ? { graderChip: graderChipName } : {}),
       });
 
       // Regression detection: compare to previous run (before this one)

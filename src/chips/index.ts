@@ -45,3 +45,7 @@ export { createChip, CHIPSET_FILE_VERSION, HEALTH_CHECK_PARALLEL_LIMIT } from '.
 // ChipRegistry
 export { ChipRegistry, createChipRegistry, ChipsetFileSchema } from './chip-registry.js';
 export type { ChipsetFile } from './chip-registry.js';
+
+// ChipTestRunner
+export { ChipTestRunner, GRADER_MAX_TOKENS, GRADER_TEMPERATURE } from './chip-test-runner.js';
+export type { ChipRunOptions, ChipTestRunResult } from './chip-test-runner.js';
