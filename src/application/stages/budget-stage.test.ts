@@ -268,3 +268,137 @@ describe('BudgetStage', () => {
     expect(result.contentCache.has('optional-skill')).toBe(false);
   });
 });
+
+// ---------------------------------------------------------------------------
+// ADAPT-05: High-value skill priority ordering within standard tier
+// ---------------------------------------------------------------------------
+
+describe('BudgetStage — ADAPT-05 high-value priority ordering', () => {
+  const BASE_WINDOW = 10_000;
+
+  // Budget that fits all 3 skills of 1000 tokens each (30% of 10_000 = 3_000 tokens)
+  const priorityProfile: BudgetProfile = {
+    name: 'priority-test',
+    budgetPercent: 0.30,
+    hardCeilingPercent: 0.50,
+    tiers: {
+      critical: [],
+      standard: ['hv-skill-1', 'hv-skill-2', 'unranked-skill'],
+      optional: [],
+    },
+    thresholds: { warn50: false, warn80: false, warn100: false },
+  };
+
+  // Budget that only fits 2 standard-tier skills at 1000 tokens each (20% of 10_000 = 2_000 tokens)
+  const tightProfile: BudgetProfile = {
+    name: 'tight-test',
+    budgetPercent: 0.20,
+    hardCeilingPercent: 0.30,
+    tiers: {
+      critical: [],
+      standard: ['hv-skill-1', 'hv-skill-2', 'unranked-skill', 'first-skill', 'second-skill', 'third-skill'],
+      optional: [],
+    },
+    thresholds: { warn50: false, warn80: false, warn100: false },
+  };
+
+  const mockTC = {
+    count: vi.fn().mockResolvedValue({ count: 1000, source: 'estimate', confidence: 'medium' }),
+    calculateBudget: vi.fn((size: number, pct: number) => Math.floor(size * pct)),
+  } as any;
+
+  const mockStore = {
+    read: vi.fn().mockImplementation((name: string) =>
+      Promise.resolve({ body: `content-for-${name}`, data: {} })
+    ),
+  } as any;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockTC.count.mockResolvedValue({ count: 1000, source: 'estimate', confidence: 'medium' });
+  });
+
+  it('high-value skills load before unranked skills when budget is tight', async () => {
+    const highValueSkills = new Set(['hv-skill-1', 'hv-skill-2']);
+    const stage = new BudgetStage(mockTC, tightProfile, mockStore, BASE_WINDOW, highValueSkills);
+
+    const ctx = createEmptyContext({
+      resolvedSkills: [
+        { name: 'unranked-skill', score: 0.9, matchType: 'intent' as const },  // highest score but unranked
+        { name: 'hv-skill-1', score: 0.7, matchType: 'intent' as const },
+        { name: 'hv-skill-2', score: 0.6, matchType: 'intent' as const },
+      ],
+    });
+
+    const result = await stage.process(ctx);
+
+    // Budget = 20% of 10_000 = 2_000 tokens, each skill = 1000 tokens → only 2 fit
+    // High-value skills (hv-skill-1, hv-skill-2) should load; unranked-skill should be budget-skipped
+    const loadedNames = result.resolvedSkills.map(s => s.name);
+    expect(loadedNames).toContain('hv-skill-1');
+    expect(loadedNames).toContain('hv-skill-2');
+
+    const skippedNames = result.budgetSkipped.map(s => s.name);
+    expect(skippedNames).toContain('unranked-skill');
+  });
+
+  it('all skills load when budget is sufficient regardless of highValueSkills', async () => {
+    const highValueSkills = new Set(['hv-skill-1']);
+    const stage = new BudgetStage(mockTC, priorityProfile, mockStore, BASE_WINDOW, highValueSkills);
+
+    const ctx = createEmptyContext({
+      resolvedSkills: [
+        { name: 'hv-skill-1', score: 0.9, matchType: 'intent' as const },
+        { name: 'hv-skill-2', score: 0.7, matchType: 'intent' as const },
+        { name: 'unranked-skill', score: 0.5, matchType: 'intent' as const },
+      ],
+    });
+
+    const result = await stage.process(ctx);
+
+    // Budget = 30% of 10_000 = 3_000 tokens, 3 skills × 1000 = 3_000 → all fit
+    expect(result.resolvedSkills).toHaveLength(3);
+    expect(result.budgetSkipped).toHaveLength(0);
+  });
+
+  it('backward compat: no highValueSkills param → original order preserved', async () => {
+    // No highValueSkills parameter — behavior identical to pre-ADAPT-05
+    const stage = new BudgetStage(mockTC, tightProfile, mockStore, BASE_WINDOW);
+
+    const ctx = createEmptyContext({
+      resolvedSkills: [
+        { name: 'first-skill', score: 0.9, matchType: 'intent' as const },
+        { name: 'second-skill', score: 0.7, matchType: 'intent' as const },
+        { name: 'third-skill', score: 0.5, matchType: 'intent' as const },
+      ],
+    });
+
+    const result = await stage.process(ctx);
+
+    // Budget fits 2 skills: first two in original order load, third is skipped
+    const loadedNames = result.resolvedSkills.map(s => s.name);
+    expect(loadedNames).toContain('first-skill');
+    expect(loadedNames).toContain('second-skill');
+    expect(result.budgetSkipped.map(s => s.name)).toContain('third-skill');
+  });
+
+  it('empty highValueSkills set → original order preserved', async () => {
+    const highValueSkills = new Set<string>(); // empty
+    const stage = new BudgetStage(mockTC, tightProfile, mockStore, BASE_WINDOW, highValueSkills);
+
+    const ctx = createEmptyContext({
+      resolvedSkills: [
+        { name: 'first-skill', score: 0.9, matchType: 'intent' as const },
+        { name: 'second-skill', score: 0.7, matchType: 'intent' as const },
+        { name: 'third-skill', score: 0.5, matchType: 'intent' as const },
+      ],
+    });
+
+    const result = await stage.process(ctx);
+
+    const loadedNames = result.resolvedSkills.map(s => s.name);
+    expect(loadedNames).toContain('first-skill');
+    expect(loadedNames).toContain('second-skill');
+    expect(result.budgetSkipped.map(s => s.name)).toContain('third-skill');
+  });
+});
