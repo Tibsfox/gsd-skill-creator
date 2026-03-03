@@ -10,3 +10,5 @@ export type {
 export { EventStore } from './event-store.js';
 export { TelemetryStage } from './telemetry-stage.js';
 export { UsagePatternDetector } from './usage-pattern-detector.js';
+export { ScoreAdjuster } from './score-adjuster.js';
+export type { ScoreAdjusterConfig } from './score-adjuster.js';
