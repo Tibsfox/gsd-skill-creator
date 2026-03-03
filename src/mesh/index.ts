@@ -1,8 +1,11 @@
 /**
- * Mesh Discovery module barrel exports.
+ * Mesh module barrel exports.
  *
- * Re-exports all public types, schemas, constants, and service classes
- * for the mesh node discovery and heartbeat monitoring layer.
+ * Re-exports all public types, schemas, constants, and service classes for:
+ * - Mesh node discovery and heartbeat monitoring (Plan 02)
+ * - DACP bundle provenance tracking (Plan 03)
+ * - Fidelity-adaptive compression (Plan 03)
+ * - Mesh bundle transport with routing and relay (Plan 03)
  */
 
 // Types and schemas
@@ -44,3 +47,37 @@ export {
 } from './discovery.js';
 
 export type { RegisterNodeInput } from './discovery.js';
+
+// Provenance tracking
+export {
+  ProvenanceHeaderSchema,
+  createProvenanceHeader,
+  addHop,
+  getTotalHops,
+  serializeProvenance,
+  parseProvenance,
+} from './provenance.js';
+
+export type { ProvenanceHeader, HopEntry } from './provenance.js';
+
+// Fidelity adapter
+export {
+  TransportConditionSchema,
+  assessTransportCondition,
+  compressBundle,
+  decompressBundle,
+  // IMP-03 constants
+  LOCAL_LATENCY_THRESHOLD_MS,
+  MESH_LATENCY_THRESHOLD_MS,
+} from './fidelity-adapter.js';
+
+export type { TransportCondition, CompressionResult } from './fidelity-adapter.js';
+
+// Mesh transport
+export {
+  TransportResultSchema,
+  MeshTransport,
+  createMeshTransport,
+} from './transport.js';
+
+export type { TransportResult, TransportPayload, ReceiveResult } from './transport.js';
