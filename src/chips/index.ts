@@ -38,3 +38,10 @@ export type {
 // Chip implementations
 export { OpenAICompatibleChip } from './openai-compatible-chip.js';
 export { AnthropicChip } from './anthropic-chip.js';
+
+// ChipFactory
+export { createChip, CHIPSET_FILE_VERSION, HEALTH_CHECK_PARALLEL_LIMIT } from './chip-factory.js';
+
+// ChipRegistry
+export { ChipRegistry, createChipRegistry, ChipsetFileSchema } from './chip-registry.js';
+export type { ChipsetFile } from './chip-registry.js';
