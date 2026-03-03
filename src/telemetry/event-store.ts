@@ -25,6 +25,9 @@ export class EventStore {
   /**
    * Append a single usage event as a JSONL line.
    *
+   * Privacy: events contain only skill names, scores, token counts, and session IDs.
+   * Never write user message content, intent queries, file paths, or transcripts.
+   *
    * After appending, checks the file size. If it exceeds the ceiling,
    * reads all events, drops the oldest half, and rewrites atomically.
    * Writes are serialized through writeQueue to prevent corruption.
@@ -87,6 +90,34 @@ export class EventStore {
     } catch {
       return 0;
     }
+  }
+
+  /**
+   * Remove events older than `days` days from the store.
+   *
+   * Reads all events, filters to those whose timestamp is within the retention
+   * window, and rewrites atomically. Returns the number of pruned events.
+   * Returns 0 if nothing was pruned (including when the file does not exist).
+   */
+  async pruneOlderThan(days: number): Promise<number> {
+    const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+    const events = await this.read();
+    const kept = events.filter(e => e.timestamp >= cutoff);
+
+    if (kept.length === events.length) {
+      return 0;
+    }
+
+    const tempPath = join(
+      tmpdir(),
+      `skill-events-prune-${Date.now()}-${Math.random().toString(36).slice(2)}.jsonl`,
+    );
+
+    const content = kept.map(e => JSON.stringify(e)).join('\n') + '\n';
+    await writeFile(tempPath, content, 'utf-8');
+    await rename(tempPath, this.filePath);
+
+    return events.length - kept.length;
   }
 
   /**
