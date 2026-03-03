@@ -180,3 +180,112 @@ describe('Privacy boundary', () => {
     }
   });
 });
+
+describe('EventStore.pruneOlderThan()', () => {
+  it('returns 0 when store is empty (file does not exist)', async () => {
+    const store = makeStore();
+    const pruned = await store.pruneOlderThan(90);
+    expect(pruned).toBe(0);
+  });
+
+  it('returns 0 and keeps all events when all are within the retention window', async () => {
+    const store = makeStore();
+    // Append 3 recent events
+    await store.append(scoredEvent('skill-a'));
+    await store.append(loadedEvent('skill-b'));
+    await store.append(skippedEvent('skill-c'));
+
+    const pruned = await store.pruneOlderThan(90);
+
+    expect(pruned).toBe(0);
+    const remaining = await store.read();
+    expect(remaining).toHaveLength(3);
+  });
+
+  it('prunes old events and returns the correct count', async () => {
+    const store = makeStore();
+    const oldTs = '2020-01-01T00:00:00.000Z';
+    const newTs = new Date().toISOString();
+
+    // Write 2 old + 2 new events directly to control timestamps
+    const { writeFile } = await import('fs/promises');
+    const filePath = join(testDir, 'events.jsonl');
+    const lines = [
+      JSON.stringify({ type: 'skill-scored', skillName: 'old-a', score: 0.8, matchType: 'intent', sessionId: 'sess-1', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'old-b', tokenCount: 400, sessionId: 'sess-2', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-scored', skillName: 'new-c', score: 0.7, matchType: 'intent', sessionId: 'sess-3', timestamp: newTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'new-d', tokenCount: 300, sessionId: 'sess-4', timestamp: newTs }),
+    ].join('\n') + '\n';
+    await writeFile(filePath, lines, 'utf-8');
+
+    const pruned = await store.pruneOlderThan(90);
+
+    expect(pruned).toBe(2);
+    const remaining = await store.read();
+    expect(remaining).toHaveLength(2);
+    expect(remaining.every(e => e.timestamp === newTs)).toBe(true);
+  });
+
+  it('prunes all events when all are older than the cutoff', async () => {
+    const store = makeStore();
+    const oldTs = '2020-01-01T00:00:00.000Z';
+
+    const { writeFile } = await import('fs/promises');
+    const filePath = join(testDir, 'events.jsonl');
+    const lines = [
+      JSON.stringify({ type: 'skill-scored', skillName: 'a', score: 0.5, matchType: 'intent', sessionId: 'sess-1', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'b', tokenCount: 200, sessionId: 'sess-2', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-budget-skipped', skillName: 'c', reason: 'budget_exceeded', estimatedTokens: 800, sessionId: 'sess-3', timestamp: oldTs }),
+    ].join('\n') + '\n';
+    await writeFile(filePath, lines, 'utf-8');
+
+    const pruned = await store.pruneOlderThan(90);
+
+    expect(pruned).toBe(3);
+    const remaining = await store.read();
+    expect(remaining).toHaveLength(0);
+  });
+
+  it('keeps exactly the events within the window', async () => {
+    const store = makeStore();
+    const oldTs = '2020-06-15T12:00:00.000Z';
+    const newTs = new Date().toISOString();
+
+    const { writeFile } = await import('fs/promises');
+    const filePath = join(testDir, 'events.jsonl');
+    const lines = [
+      JSON.stringify({ type: 'skill-scored', skillName: 'old-1', score: 0.6, matchType: 'intent', sessionId: 's1', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-scored', skillName: 'old-2', score: 0.7, matchType: 'intent', sessionId: 's2', timestamp: oldTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'new-1', tokenCount: 100, sessionId: 's3', timestamp: newTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'new-2', tokenCount: 200, sessionId: 's4', timestamp: newTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'new-3', tokenCount: 300, sessionId: 's5', timestamp: newTs }),
+    ].join('\n') + '\n';
+    await writeFile(filePath, lines, 'utf-8');
+
+    const pruned = await store.pruneOlderThan(90);
+
+    expect(pruned).toBe(2);
+    const remaining = await store.read();
+    expect(remaining).toHaveLength(3);
+    expect(remaining.map(e => e.skillName).sort()).toEqual(['new-1', 'new-2', 'new-3'].sort());
+  });
+
+  it('pruneOlderThan(0) prunes all events (cutoff is effectively now)', async () => {
+    const store = makeStore();
+    // Events with a past timestamp — pruneOlderThan(0) uses cutoff = now,
+    // so any event with timestamp < now will be pruned.
+    const pastTs = '2025-01-01T00:00:00.000Z';
+
+    const { writeFile } = await import('fs/promises');
+    const filePath = join(testDir, 'events.jsonl');
+    const lines = [
+      JSON.stringify({ type: 'skill-scored', skillName: 'x', score: 0.5, matchType: 'intent', sessionId: 's1', timestamp: pastTs }),
+      JSON.stringify({ type: 'skill-loaded', skillName: 'y', tokenCount: 100, sessionId: 's2', timestamp: pastTs }),
+    ].join('\n') + '\n';
+    await writeFile(filePath, lines, 'utf-8');
+
+    const pruned = await store.pruneOlderThan(0);
+
+    expect(pruned).toBe(2);
+  });
+});
