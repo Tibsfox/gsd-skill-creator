@@ -45,7 +45,7 @@ export interface EventStoreConfig {
    * Maximum file size in bytes before rotation trims oldest entries.
    * Default: 10 MB (10_485_760 bytes).
    */
-  maxSizeBytes: number;
+  maxSizeBytes?: number;
 }
 
 /** Default maximum event store size: 10 MB. */
