@@ -18,6 +18,7 @@ import { budgetEstimateCommand } from './cli/commands/budget-estimate.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
+import { chipCommand } from './cli/commands/chip.js';
 import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
 import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
 import { mcpServerCommand } from './cli/commands/mcp-server.js';
@@ -223,6 +224,12 @@ async function main() {
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'chip': {
+      const exitCode = await chipCommand(args.slice(1));
+      process.exitCode = exitCode;
       break;
     }
 
