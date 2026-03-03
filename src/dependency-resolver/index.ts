@@ -10,3 +10,4 @@ export type {
 export { ManifestBackup, createBackup } from './manifest-backup.js';
 export { ProposalDryRunner, runProposalDryRun } from './proposal-dry-runner.js';
 export { HITLApprovalGate, presentForApproval, formatProposal } from './hitl-approval-gate.js';
+export { RollbackEngine, rollback } from './rollback-engine.js';
