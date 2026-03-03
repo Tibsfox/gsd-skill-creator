@@ -1019,5 +1019,212 @@
         "culturalLevel": 1
       }
     ]
+  },
+  {
+    "id": "cedar-explorer-01",
+    "path": "cedar",
+    "title": "Cedar Apprentice",
+    "icon": "cedar-explorer",
+    "traditions": ["first-nations"],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Grandmother Cedar's Gift",
+        "content": "The Cedar Teaching: the man who gave everything away, who had nothing left, was transformed by the Creator into cedar — so that he could continue giving forever. Bark for weaving. Wood for canoes. Planks for longhouses. Roots for baskets. Rope for lashing. Grandmother Cedar (Xpey' in Coast Salish languages) is not metaphor but relationship. To work with cedar is to receive the ongoing gift. Cedar as relationship, not resource. Nation attribution: Coast Salish (Xpey'), Nuu-chah-nulth, Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Cedar Identification",
+        "content": "Identify western red cedar by 4 characteristics: (1) scale-like overlapping leaves that lie flat like braided rope, (2) fibrous reddish-brown bark that strips vertically from the trunk, (3) strongly buttressed base that flares out above the roots, (4) aromatic reddish-brown heartwood with a distinctive spicy smell when fresh-cut. Confirm your identification against two independent sources (field guide, local naturalist, or community member with cedar knowledge). Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-apprentice-01",
+    "path": "cedar",
+    "title": "Bark Knowledge",
+    "icon": "cedar-apprentice",
+    "traditions": ["first-nations"],
+    "tier": "apprentice",
+    "prerequisites": ["cedar-explorer-01"],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Law of the Bark",
+        "content": "The Law of the Bark is the ethical framework for cedar harvest: ask permission before beginning, take only what you need for the work at hand, never strip more than one-third of a tree's circumference in a single harvest, close the wound when you are done, and express gratitude. This is ecological wisdom encoded as relational ethics — the one-third limit reflects generations of observation that trees harvested within this limit consistently recover. The Law of the Bark is not a rule imposed on cedar use; it is the condition under which cedar use can continue. Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Bark Processing Sequence",
+        "content": "Describe the full bark harvesting sequence in order: (1) selecting the tree (straight grain, healthy crown, in a grove of 5+ trees), (2) marking the harvest area (maximum one-third circumference), (3) scoring two vertical cuts with a sharp knife cutting parallel to grain and away from body, (4) bottom horizontal cut to start the separation, (5) peeling inner bark upward in a continuous controlled motion, (6) closing the wound (replacing loose bark, packing moss). Identify which bark layer is used for weaving (inner bark — pale, flexible, fibrous) vs. construction (outer bark — brown, corky, protective). Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "The Tree and the Harvester",
+        "content": "Coast Salish and Nuu-chah-nulth harvesting traditions both practice forms of reciprocal relationship with the cedar tree. The Law of the Bark encodes this relationship in practical action: the harvester is not extracting a resource but receiving a gift, and the gift requires a response. How does the Law of the Bark encode the relationship between harvester and tree in specific, observable actions? What does each element of the Law (asking, limiting, closing, giving thanks) contribute to maintaining the relationship over time? Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Law Teaches",
+        "content": "What does it mean to have an ethical code built into a harvesting practice? The Law of the Bark is not posted on a sign — it is transmitted as part of learning to harvest cedar. Compare the Law of the Bark to one other traditional resource management practice you have studied (from any tradition in this pack). What ecological knowledge does each encode? What relational framework does each assume between humans and the resource? What happens when the law is not followed?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-journeyman-01",
+    "path": "cedar",
+    "title": "Canoe Knowledge",
+    "icon": "cedar-journeyman",
+    "traditions": ["first-nations"],
+    "tier": "journeyman",
+    "prerequisites": ["cedar-apprentice-01"],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Form Follows Water",
+        "content": "Each PNW Coast canoe tradition developed hull forms precisely matched to its waters. The Coast Salish flat-bottom shovel-nose canoe is optimized for river travel — stable in current, able to be poled or dragged over shallows. The Nuu-chah-nulth ocean-going canoe has a high bow to lift over open Pacific swell and a wide beam for offshore stability. The Kwakwaka'wakw northern-style canoe has an upturned bow for Inside Passage chop. The Makah offshore design handles Cape Flattery conditions where Pacific swells, tidal currents, and inside-passage conditions converge. Form follows water — the water shaped the canoe, and the canoe reveals what its water demands. Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Nation-Specific Canoe Comparison",
+        "content": "Describe 3 distinct PNW Coast canoe traditions with their specific nation attribution, hull characteristics, and intended waters. Required: Coast Salish (specify which canoe type — racing or shovel-nose, and the hull features specific to it), Nuu-chah-nulth (ocean-going design, key features for open Pacific), and at least one of: Kwakwaka'wakw (northern-style, distinctive bow feature) or Makah (offshore design, geographic context of Cape Flattery). For each: name the nation, describe the water type, identify two hull features that solve problems specific to those waters. Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Canoe as Living Being",
+        "content": "SUMO classifies the cedar canoe as Canoe -> WaterVehicle -> TransportationDevice -> Device -> Artifact. Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah traditions understand the cedar canoe as a living being completing a transformation that Grandmother Cedar began — the canoe is not manufactured but released. Both descriptions are true. How does holding both views change how you relate to the canoe? If the canoe is an Artifact, what obligations follow from that? If it is a living being continuing Grandmother Cedar's gift, what different obligations follow? What does each view make visible that the other obscures? Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Carver Knows",
+        "content": "A carver who releases a canoe from a cedar log is working with a being, not manufacturing a product. What knowledge does this framing encode? A carver who understands the cedar's gift — who has internalized the Cedar Teaching and the Law of the Bark — approaches the log with a different set of questions than a carver who approaches it as raw material. What questions does each framing generate? What does the carver who understands the gift know that the carver who sees only the log does not? What does this require of the person doing the work, over time?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-journeyman-02",
+    "path": "cedar",
+    "title": "Bentwood Basics",
+    "icon": "cedar-journeyman-02",
+    "traditions": ["first-nations"],
+    "tier": "journeyman",
+    "prerequisites": ["cedar-apprentice-01"],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Physics and Knowledge Together",
+        "content": "The bentwood box uses steam to soften lignin in cedar fibers, allowing the wood to bend without splitting at kerf cuts. Lignin is the polymer that binds wood fibers together; steam at 100°C plasticizes it, making the fibers temporarily pliable. Kerfs cut 70-80% through the plank reduce the effective thickness at the bend location so the wood bends there rather than elsewhere. This is materials science and heritage knowledge simultaneously — the Kwakwaka'wakw, Coast Salish, and Nuu-chah-nulth builders who developed this technique understood the material's properties through direct observation and practice, arriving at the same conclusions materials scientists reached centuries later. Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Kerf-Bending Sequence",
+        "content": "Describe the bentwood box making sequence in order: (1) calculating kerf spacing — the distance between kerfs determines how sharp the bend radius will be; tighter bends need closer-spaced kerfs, (2) cutting kerfs to 70-80% of plank depth on the interior face — shallow enough to leave structural integrity, deep enough to allow bending, (3) steam softening the plank — steam box or wet blanket over heat, typically 20-30 minutes for full penetration, (4) bending the plank at each kerf while hot — work quickly before the lignin re-sets, (5) corner joining — the fourth corner is joined by drilling and lashing, pegging, or a combination. Explain why the kerf must not exceed approximately 80% depth: beyond that point, the remaining wood is too thin to survive the bending stress without fracturing. Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Box as Technology",
+        "content": "The bentwood box is used for waterproof food storage, hot-rock cooking (stones heated in fire, transferred to water in the box — the box cannot go directly on the fire), and trade goods container. A single technology serving three distinct functions shapes economy and material culture: communities that have bentwood box technology have waterproof storage that doesn't rot, cooking capability without ceramic vessels, and a trade good with high value due to its difficulty of manufacture. How does a single multi-function technology shape the economy and material culture of PNW Coast communities? What becomes possible when this technology is available, and what constraints does its absence create? Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Cedar's Properties Make Possible",
+        "content": "Cedar's straight grain makes it splittable into planks and strips. Cedar's flexibility makes it steerable — it bends without fracturing when properly prepared. Cedar's rot resistance means bentwood boxes, canoes, and longhouses last decades. Cedar's aromatic oils discourage insects and fungi. These properties are not incidental to PNW Coast material culture — they are its foundation. The bentwood box, the ocean-going canoe, the longhouse, the rope, the basket: all depend on cedar being what cedar is. What would this material culture look like without cedar? What does this dependency reveal about the relationship between a people and a specific plant in a specific place? What does the Cedar Teaching mean in light of this dependency?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-journeyman-02",
+    "path": "neighbors",
+    "title": "Brothers Who Fight",
+    "icon": "neighbors-journeyman-02",
+    "traditions": ["first-nations"],
+    "tier": "journeyman",
+    "prerequisites": ["neighbors-apprentice-01"],
+    "roomId": 18,
+    "neighborsThread": "Conflict within relationship is different from conflict to destroy a relationship. The brothers metaphor — conflict between communities that are simultaneously allies, trade partners, and relatives — requires a different kind of resolution.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Conflict Within Relationship",
+        "content": "Historical inter-village conflicts in the Salish Sea were almost always between communities that were simultaneously connected by marriage, trade, and ceremony. The brothers metaphor: fighting within relationship, not to destroy it. A Stó:lō community that raided a neighboring Lummi (Lhaq'temish) community was raiding people whose relatives lived in their own village. A Kwakwaka'wakw community in conflict with Nuu-chah-nulth neighbors was in conflict with people they traded with and had family connections through. Conflict happened within the web of relationships — and the web constrained how the conflict could be conducted and what resolution looked like.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Raiding vs. Warfare Distinction",
+        "content": "Describe the documented distinction between raiding (for prestige or goods, operating within understood rules — specific times, specific targets, specific limits on violence) and warfare (aimed at destroying or displacing a community) in Salish Sea inter-community conflict. Name the structural features that made raiding a bounded activity: the role of kinship ties in limiting targets, the compensation protocols that could resolve a raid's consequences, and the ceremony relationships that constrained who could raid whom. Attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Compensation as Repair",
+        "content": "Describe how compensation protocols worked in Salish Sea communities: what was given (goods proportional to the harm — blankets, copper pieces, food, other valuables), who received it (the injured party and their community), who witnessed it (the assembled community who validated the exchange), and what it accomplished (the grievance was closed — publicly, permanently, with witnesses). How does this differ from fine-as-punishment? A fine goes to the state or community as deterrence; compensation goes to the harmed party as repair. The goal is relationship restoration, not deterrence. Attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "When Anger Is a Storm",
+        "content": "The Emotional Weather metaphor from the Village World: anger as storm on the Sound — real, powerful, passes, leaves a changed landscape. How does this framing help you understand what anger requires from the people around you? What does it mean to 'wait out the storm' before addressing the practical repair work? The brothers who fight do not resolve the conflict while the storm is at full force. They wait. They acknowledge. Then they work. What does this sequence require of both parties?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-keeper-02",
+    "path": "neighbors",
+    "title": "The Talking Circle",
+    "icon": "neighbors-keeper-02",
+    "traditions": ["first-nations"],
+    "tier": "keeper",
+    "prerequisites": ["neighbors-keeper-01"],
+    "roomId": 18,
+    "neighborsThread": "The Keeper at Village World level can facilitate a restoration-focused dialogue using documented Salish Sea principles and explain why restoration is structurally different from punishment.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Making Things Right: The Full Sequence",
+        "content": "The documented restoration sequence from Salish Sea traditions: Acknowledgment — naming what happened publicly, in front of the community who witnessed the relationship and the harm; Compensation — goods given to the injured party in proportion to the severity of the harm, given publicly and witnessed; Witness — community members validate the repair and hold the memory, making the resolution a shared fact; Closure — the forward direction that closes the grievance permanently. Once the repair is witnessed, bringing up the resolved matter is itself a social violation. This sequence requires a community that values ongoing relationship over winning. Attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Facilitation Practice",
+        "content": "Facilitate a structured dialogue using the restoration-focused sequence drawn from documented Salish Sea principles: (1) Name what happened — use specific, non-blaming language that establishes shared understanding without assigning sentence; (2) Identify what was broken — name the specific relationship, trust, or resource that was damaged; (3) Propose what repair looks like — concrete, proportional to the harm, given to the affected party (not to a third party); (4) Receive witness acknowledgment — have at least one community member validate the repair aloud. Practice with a low-stakes scenario. The goal is to close the matter with the community's witness, not to determine winners.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Potlatch as Conflict Resolution Venue",
+        "content": "Describe how the potlatch served as a conflict resolution venue in Kwakwaka'wakw and Coast Salish traditions: compensation given at a potlatch was given publicly in front of all guests; the giving was witnessed by everyone present; the grievance was considered resolved in front of the relationship network. Connect this to the gift economy's social accounting function: the potlatch was a public ledger of relationships and obligations. Resolving a conflict at a potlatch entered the resolution into that ledger, witnessed by all present. Future references to the grievance — which was now in the public record as resolved — became themselves violations of the social norms the potlatch maintained. Attribution: Kwakwaka'wakw, Coast Salish.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? — Making Things Right",
+        "content": "Explain to a hypothetical 12-year-old how Salish Sea communities resolved serious conflicts without destroying relationships. Use at least two specific nations' practices (for example: Stó:lō public acknowledgment protocols and Kwakwaka'wakw potlatch compensation). Address: what is the difference between punishment and repair? Why does the distinction matter for the community's future? Evaluators assess: accuracy of the description of specific nation practices, nation-specific attribution (no generic 'Northwest Coast peoples'), cultural sensitivity in framing, and whether the explanation empowers the learner to understand the principles — not just memorize the sequence.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
   }
 ]

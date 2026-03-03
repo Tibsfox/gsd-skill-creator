@@ -1,0 +1,57 @@
+{
+  "roomId": "room-15-cedar-culture",
+  "room": 15,
+  "culturalRules": [
+    {
+      "id": "ROOM15-CULT-001",
+      "domain": "cedar-culture",
+      "tradition": "first-nations",
+      "concept": "cedar working techniques (bark harvesting, rope, weaving)",
+      "level": 1,
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah",
+      "note": "Cedar working techniques — bark harvesting, inner bark processing, rope-making, plank-splitting, bentwood box kerfing — are Level 1 publicly shared knowledge documented in museum collections, published ethnobotany, and community-authorized educational materials. Attribute to specific nation traditions, not generically to 'PNW Coast' or 'Northwest Coast'.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM15-CULT-002",
+      "domain": "cedar-culture",
+      "tradition": "first-nations",
+      "concept": "cedar origin story (Grandmother Cedar / Xpey' / the man who gave everything)",
+      "level": 1,
+      "nationAttribution": "Coast Salish (Xpey'), Nuu-chah-nulth, Kwakwaka'wakw",
+      "note": "The cedar origin story — the man who gave everything away, who was transformed by the Creator into cedar as an ongoing gift to the people — is widely shared and published in community-authorized educational contexts. Grandmother Cedar / Xpey' is Level 1 publicly shared knowledge appropriate for educational content. Ceremonial protocols associated with cedar harvesting or use are Level 3-4 and must not be reproduced. Always distinguish between the story of what cedar is (Level 1) and the ceremony of relating to cedar (Level 3-4).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM15-CULT-003",
+      "domain": "cedar-culture",
+      "tradition": "first-nations",
+      "concept": "totem poles, house posts, ceremonial carvings (lineage-specific)",
+      "level": 2,
+      "ceremonialLevel": 3,
+      "nationAttribution": "Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth",
+      "note": "General cedar carving techniques (tools, process, wood properties) are Level 1. Specific clan and lineage crest designs on totem poles and ceremonial objects are Level 2-3 — they carry family ownership and specific protocol. Educational content may describe that poles carry lineage histories and that specific crests belong to specific families (Level 2 contextual framing) without reproducing or interpreting specific crest designs (Level 3 redirect to community and Nation cultural centers).",
+      "action": "summarize-and-refer"
+    },
+    {
+      "id": "ROOM15-CULT-004",
+      "domain": "cedar-culture",
+      "tradition": "first-nations",
+      "concept": "Law of the Bark (protocol for cedar harvesting)",
+      "level": 1,
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth",
+      "note": "The Law of the Bark — the ethical framework for respectful cedar harvest, including asking permission, taking only what is needed, and never stripping more than one-third of a tree's circumference — is widely shared for educational purposes. This is Level 1 publicly acknowledged knowledge that encodes both ecological wisdom and relational ethics. It is integral to cedar content and must be included, not treated as optional background.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM15-CULT-005",
+      "domain": "cedar-culture",
+      "tradition": "first-nations",
+      "concept": "longhouse design and village layout (clan and lineage association)",
+      "level": 2,
+      "nationAttribution": "Coast Salish, Kwakwaka'wakw",
+      "note": "Longhouse construction techniques (post-and-beam framing, plank attachment) are Level 1. Village layout and the relationship between longhouse placement, clan identity, and governance are Level 2 contextually shared knowledge. Specific ceremonial arrangements within longhouses are Level 3-4. Content should cover community architecture without prescribing internal ceremonial arrangements.",
+      "action": "acknowledge-and-redirect"
+    }
+  ]
+}
