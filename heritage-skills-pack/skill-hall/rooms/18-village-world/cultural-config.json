@@ -1,0 +1,77 @@
+{
+  "roomId": "room-18-village-world",
+  "room": 18,
+  "culturalRules": [
+    {
+      "id": "ROOM18-CULT-001",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "potlatch gift economy mechanics (social technology framing)",
+      "level": 1,
+      "nationAttribution": "Kwakwaka'wakw, Coast Salish, Heiltsuk, Nuu-chah-nulth, Haida",
+      "note": "Potlatch content at Level 1 includes: gift economy mechanics (reciprocal obligation, strategic generosity, status through giving), wealth redistribution principles, the potlatch as public accounting of social relationships, the potlatch as conflict resolution venue, and the criminalization history (1884-1951). This is the correct framing for this room: potlatch as social technology, not ceremony. Technique and principle content is Level 1.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM18-CULT-002",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "potlatch ceremony protocols (specific songs, regalia, ranking procedures)",
+      "level": 3,
+      "ceremonialLevel": 4,
+      "nationAttribution": "Kwakwaka'wakw, Coast Salish, Heiltsuk, Nuu-chah-nulth, Haida",
+      "note": "Specific potlatch ceremony protocols — particular songs performed for specific occasions, specific regalia and their lineage significance, specific ranking procedures, specific feast protocols — are Level 3 (community restricted) to Level 4 (sacred-ceremonial) content. This room DOES NOT reproduce these. The Level 1/Level 3-4 line in this room is: the PRINCIPLE of potlatch as social technology is Level 1; the FORM of potlatch as ceremony is Level 3-4. Content that describes how the gift economy works is Level 1. Content that describes what you do or say at a specific potlatch is Level 3-4.",
+      "action": "acknowledge-and-redirect"
+    },
+    {
+      "id": "ROOM18-CULT-003",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "potlatch criminalization 1884-1951",
+      "level": 1,
+      "nationAttribution": "Kwakwaka'wakw (Alert Bay, Cape Mudge), Coast Salish, Heiltsuk",
+      "note": "The criminalization of the potlatch is integral historical context, not background: the 1871 Indian Act, the 1884 amendment making potlatch illegal, the 1922 Alert Bay/Cape Mudge arrests (45 arrested, 26 given suspended sentences in exchange for surrender of regalia — the confiscated items included blankets, masks, coppers, feast dishes, boxes), the 1951 Indian Act revision that removed the ban. The stated purpose of the ban was cultural assimilation; its practical effect was the suppression of Indigenous economic self-sufficiency. This history is Level 1 factual context required for understanding what the potlatch is and what was at stake.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM18-CULT-004",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "inter-village conflict, raiding, compensation protocols",
+      "level": 1,
+      "nationAttribution": "Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw, Nuu-chah-nulth",
+      "note": "Historical documentation of inter-village conflict and its resolution in Salish Sea nations is Level 1 educational content. This includes: the documented distinction between raiding and warfare, compensation protocols (recorded in anthropological and historical sources), and the role of kinship networks in limiting violence. This must be grounded in historical evidence, not romanticized or idealized. Attribution to specific nations is required — do not generalize to 'Northwest Coast peoples'.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM18-CULT-005",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "natural metaphors for emotional regulation (Emotional Weather module)",
+      "level": 1,
+      "nationAttribution": "Coast Salish (Salish Sea ecological context)",
+      "note": "The Emotional Weather module uses observable natural phenomena from the Salish Sea environment (storms, tides, salmon runs, fog) as metaphors for emotional states. This is respectful use of natural world patterns — not appropriation of ceremony or sacred knowledge. The natural patterns (storms, tides, salmon) are public ecological facts. Using them as metaphors for understanding human emotions is consistent with the ecological worldview of PNW Coast cultures without claiming to reproduce specific ceremonial or sacred teachings. Present as 'the Salish Sea environment provides these patterns' — not 'Coast Salish ceremony teaches this'.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM18-CULT-006",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "restorative protocols (compensation, public acknowledgment, witness)",
+      "level": 1,
+      "nationAttribution": "Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw",
+      "note": "Documented restorative justice practices — public acknowledgment, compensation protocols, the role of witnesses, the principle that repair closes the grievance — are Level 1 educational content derived from historical and anthropological sources. Do not reproduce specific ceremonial framing of these protocols (Level 3-4) but the structural principles are publicly documented.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM18-CULT-007",
+      "domain": "village-world",
+      "tradition": "first-nations",
+      "concept": "pan-Indigenous generalization prohibition and nation-specific attribution",
+      "level": 1,
+      "nationAttribution": "All",
+      "note": "This room has a heightened pan-Indigenous language prohibition. Every cultural practice, historical event, and social institution referenced in this room must be attributed to a specific named nation or community. 'Northwest Coast peoples' is prohibited. 'Coast Salish' alone is acceptable only if the practice is genuinely shared across the Coast Salish nations — if it is specific to Kwakwaka'wakw or Lummi or Heiltsuk, name that nation. The room is about specific communities in specific relationships, not about an abstraction.",
+      "action": "include"
+    }
+  ]
+}
