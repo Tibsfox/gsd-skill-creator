@@ -138,7 +138,12 @@ Plans:
   4. Bundle size adapts to transport conditions — a bundle sent over a slow link is measurably more compressed than one sent locally
   5. Every lifecycle method with automatic behavior (heartbeat expiry, stale node eviction) has an integration test verifying auto-invocation — not just unit correctness
   6. Mesh event logs use append-only writes (`fs.appendFile`) — no overwrite possible by construction
-**Plans**: TBD
+**Plans:** 3 plans
+
+Plans:
+- [x] 52-01-PLAN.md — LLM MCP Wrapper: 4 MCP tools (llm.chat, llm.health, llm.capabilities, llm.models), connection pooling, request queuing
+- [ ] 52-02-PLAN.md — Mesh Discovery Service: node registration, heartbeat monitoring, auto-eviction, append-only event log
+- [ ] 52-03-PLAN.md — DACP mesh transport: provenance tracking, fidelity-adaptive compression, multi-hop relay
 
 ### Phase 53: Mesh Orchestration
 **Goal**: VTM wave plans route tasks to mesh nodes based on capability and cost, with automatic failover and model-specific optimization output
@@ -172,7 +177,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 50. Model Abstraction | 3/3 | Complete    | 2026-03-03 |
-| 51. Multi-Model Evaluation | 2/3 | In Progress|  |
-| 52. MCP Infrastructure | 0/? | Not started | - |
+| 51. Multi-Model Evaluation | 3/3 | Complete    | 2026-03-03 |
+| 52. MCP Infrastructure | 1/3 | In progress | - |
 | 53. Mesh Orchestration | 0/? | Not started | - |
 | 54. Context & Integration | 0/? | Not started | - |

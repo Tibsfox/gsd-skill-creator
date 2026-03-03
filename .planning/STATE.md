@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.49
 milestone_name: milestone
-status: Plan 51-03 executed — EvalViewer and CLI eval command (Phase 51 complete)
-stopped_at: Completed 51-03-PLAN.md
-last_updated: "2026-03-03T17:34:32.000Z"
-last_activity: 2026-03-03 — Plan 51-03 (eval viewer CLI command with multi-model support) executed
+status: in_progress
+stopped_at: Completed 52-01-PLAN.md
+last_updated: "2026-03-03T17:54:25Z"
+last_activity: 2026-03-03 — Plan 52-01 (LLM MCP Wrapper with 4 tools, connection pool, request queue) executed
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
-  percent: 100
+  total_plans: 7
+  completed_plans: 7
+  percent: 47
 ---
 
 # Project State
@@ -24,27 +24,28 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 51 (Multi-Model Evaluation) — COMPLETE (3 of 3 plans done)
-Plan: 51-03 complete
-Status: Plan 51-03 executed — EvalViewer and CLI eval command (Phase 51 complete)
-Last activity: 2026-03-03 — Plan 51-03 (eval viewer CLI command with multi-model support) executed
+Phase: 52 (MCP Infrastructure) — IN PROGRESS (1 of 4 plans done)
+Plan: 52-01 complete
+Status: Plan 52-01 executed — LlmMcpWrapper with 4 MCP tools, per-chip request queue, connection pool
+Last activity: 2026-03-03 — Plan 52-01 (LLM MCP Wrapper with connection pool and request queue) executed
 
 ```
-Progress: [██████████] 100% (6 of 6 plans across active phases done)
+Progress: [████░░░░░░] 47% (7 of ~15 plans across all phases done)
 ```
 
 ## Performance Metrics
 
 - Phases defined: 5 (Phases 50-54)
 - Requirements mapped: 37/37
-- Plans complete: 6 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03)
-- Tests added this milestone: 283 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03)
+- Plans complete: 7 (Phase 50: 50-01, 50-02, 50-03; Phase 51: 51-01, 51-02, 51-03; Phase 52: 52-01)
+- Tests added this milestone: 324 (137 from Phase 50 + 54 from Plan 51-01 + 45 from Plan 51-02 + 47 from Plan 51-03 + 41 from Plan 52-01)
 - Duration 50-01: 7 min
 - Duration 50-02: 4 min
 - Duration 50-03: 12 min
 - Duration 51-01: 4 min (258s)
 - Duration 51-02: 5 min (328s)
 - Duration 51-03: 9 min (549s)
+- Duration 52-01: 4 min (271s)
 
 ## Accumulated Context
 
@@ -58,6 +59,15 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 - Phase 52 = Wave 3: MCP Infrastructure (LLM Wrapper, Mesh Discovery, DACP transport, fidelity adaptation)
 - Phase 53 = Wave 4: Mesh Orchestration (Coordinator agent, VTM planning, cross-model optimization, cost routing)
 - Phase 54 = Wave 5: Context & Integration (context preservation, git worktrees, Skill Creator MCP Server)
+
+### Key Decisions from Plan 52-01
+
+- Per-chip queue uses Map<string, Promise<void>> chain -- each new request awaits the previous promise for that chip, ensuring FIFO serial execution without a heavy queue library
+- Different-chip requests are fully parallel -- queue keyed per chip, chip-a and chip-b never block each other
+- QueuedPromise pattern: _result slot on promise object passes data out of .then() chain without extra closure captures
+- Timeout uses AbortController + clearTimeout in finally -- no timer leaks on success, abort fires at requestTimeoutMs
+- LlmToolRequestSchema chipName is optional -- omitting it queries all chips via registry bulk methods
+- LlmChatRequest requires chipName explicitly -- no implicit role fallback at MCP layer (callers name the chip)
 
 ### Key Decisions from Plan 51-03
 
@@ -143,8 +153,8 @@ v1.49.15 Self-Improving Mesh Architecture — "The Space Between"
 
 ## Session Continuity
 
-Last session: 2026-03-03T17:34:32.000Z
-Stopped at: Completed 51-03-PLAN.md
+Last session: 2026-03-03T17:54:25Z
+Stopped at: Completed 52-01-PLAN.md
 
-Phase 51 complete (all 3 plans done). Next milestone: Phase 52 (Wave 3: MCP Infrastructure).
-To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute `52-01-PLAN.md`.
+Phase 52 in progress (1 of 4 plans done). Next: execute 52-02-PLAN.md (Mesh Discovery).
+To resume: read `.planning/ROADMAP.md` Phase 52 details, then execute `52-02-PLAN.md`.

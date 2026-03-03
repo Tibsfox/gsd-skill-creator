@@ -28,8 +28,8 @@ Requirements for v1.49.15 release. Each maps to roadmap phases.
 
 ### MCP Infrastructure
 
-- [ ] **MCP-01**: Local LLM MCP Wrapper exposes llm.chat, llm.models, llm.health, llm.capabilities tools
-- [ ] **MCP-02**: LLM Wrapper handles connection pooling, request queuing, and capability probing
+- [x] **MCP-01**: Local LLM MCP Wrapper exposes llm.chat, llm.models, llm.health, llm.capabilities tools
+- [x] **MCP-02**: LLM Wrapper handles connection pooling, request queuing, and capability probing
 - [ ] **MCP-03**: Mesh Discovery Service supports node registration, deregistration, heartbeat monitoring, and health reporting
 - [ ] **MCP-04**: Discovery Service marks nodes unhealthy after 3 missed heartbeats and removes them from routing pool
 - [ ] **MCP-05**: DACP mesh transport sends bundles between nodes via MCP with provenance tracking (origin, hops, timestamps)
@@ -111,8 +111,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EVAL-04 | Phase 51 | Complete |
 | EVAL-05 | Phase 51 | Complete |
 | EVAL-06 | Phase 51 | Complete |
-| MCP-01 | Phase 52 | Pending |
-| MCP-02 | Phase 52 | Pending |
+| MCP-01 | Phase 52 | Complete (52-01) |
+| MCP-02 | Phase 52 | Complete (52-01) |
 | MCP-03 | Phase 52 | Pending |
 | MCP-04 | Phase 52 | Pending |
 | MCP-05 | Phase 52 | Pending |
@@ -144,4 +144,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 — CHIP-05 and IMP-03 marked complete (50-03 executed)*
+*Last updated: 2026-03-03 — MCP-01, MCP-02 marked complete (52-01 executed)*
