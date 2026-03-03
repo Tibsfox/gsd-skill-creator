@@ -1,0 +1,26 @@
+# Review Milestone Configuration
+# Default settings for review-type milestones.
+# Matches DEFAULT_REVIEW_MILESTONE_CONFIG from review-config.ts.
+
+type: review
+
+pacing:
+  maxSubversionsPerSession: 5
+  minContextWindowsPerSubversion: 2
+  mandatoryRetrospective: true
+  mandatoryLessonsLearned: true
+  sequentialOnly: true
+
+chain:
+  requiresPriorLessons: true
+  feedForwardEnforced: true
+  patternPromotionThreshold: 3
+  catalogScope: milestone-series
+
+scoring:
+  rubric:
+    - completeness
+    - depth
+    - connections
+    - honesty
+  minimumScore: 3.0
