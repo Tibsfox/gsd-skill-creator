@@ -1,0 +1,52 @@
+{
+  "roomId": "room-16-salmon-world",
+  "room": 16,
+  "isCritical": false,
+  "primarySafetyDomains": ["food", "tool", "marine"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM16-GATE-001",
+      "description": "Food GATE — salmon smoking temperatures",
+      "trigger": "salmon smoking, smoke house, smoking temperatures, food storage, dried salmon, salt-cured",
+      "action": "GATE -- food safety: salmon must reach minimum internal temperature of 160°F (71°C) during hot smoking. Cold smoking (below 90°F) does not kill pathogens — cold-smoked products require either salt curing first or refrigerated storage. Inspect for spoilage before consuming stored smoked salmon: off odor, slimy texture, or visible mold are discard signals."
+    },
+    {
+      "id": "ROOM16-GATE-002",
+      "description": "Food GATE — salmon storage safety",
+      "trigger": "storing smoked salmon, dried salmon storage, fish preservation storage",
+      "action": "GATE -- storage safety: properly smoked and dried salmon stored in a cool, dry location with air circulation lasts 1-2 weeks at room temperature, several months if vacuum sealed and refrigerated. Do not store in airtight containers without drying fully first (moisture enables mold). Botulism is a risk in improperly sealed vacuum-packed fish."
+    },
+    {
+      "id": "ROOM16-GATE-003",
+      "description": "Marine GATE — reef net fishing on water",
+      "trigger": "reef net, canoe fishing, paddling, water activity, reef net station",
+      "action": "GATE -- marine safety: reef net fishing requires two anchored canoes on the water. PFD required for all persons on or near water. Buddy system mandatory. Cold water shock: 1-10-1 rule (1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness in cold water). Check tidal conditions and weather before deployment."
+    },
+    {
+      "id": "ROOM16-GATE-004",
+      "description": "Marine GATE — cold water immersion response",
+      "trigger": "capsizing, falling from canoe, water immersion during fishing",
+      "action": "GATE -- cold water response: 1-10-1 rule applies. Do not remove clothing. Stay with the vessel. Use HELP position. Signal for assistance immediately."
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM16-ANN-001",
+      "description": "Tool ANNOTATE — filleting knives",
+      "trigger": "filleting salmon, knife work, salmon processing",
+      "action": "ANNOTATE -- knife safety: use a sharp, flexible filleting knife. Cut away from your body. Stabilize the fish on a non-slip surface. Keep fingers clear of the knife path. A sharp knife requires less force and is safer than a dull one."
+    },
+    {
+      "id": "ROOM16-ANN-002",
+      "description": "Tool ANNOTATE — weir construction tools",
+      "trigger": "stake driving, weir construction, woven branch",
+      "action": "ANNOTATE -- tool safety: driving stakes requires a maul or mallet; wear gloves to prevent blisters and splinters; inspect stakes for splits before driving."
+    }
+  ],
+  "safetyNotes": {
+    "foodSafety": "Salmon must reach minimum internal temperature of 160°F (71°C) during hot smoking. Cold smoking does not kill pathogens and requires additional curing or refrigeration. Botulism risk in improperly sealed vacuum-packed fish is real and produces no visible, odor, or taste warning.",
+    "toolSafety": "Sharp filleting knives require proper grip, stable cutting surface, and cut direction away from body. Weir stake driving requires gloves and mallet inspection.",
+    "marineSafety": "Reef net fishing from canoes carries cold water immersion risk. PFD required, buddy system mandatory, 1-10-1 cold water rule applies, tidal and weather conditions must be checked before any water activity."
+  }
+}
