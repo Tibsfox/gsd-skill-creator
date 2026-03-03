@@ -8,6 +8,7 @@
 
 import type { DependencyRecord, Ecosystem } from '../dependency-auditor/types.js';
 import type { ConflictFinding } from './types.js';
+export type { ConflictFinding };
 
 // ─── Version parsing helpers ──────────────────────────────────────────────────
 
