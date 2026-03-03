@@ -6,7 +6,7 @@
  * and never blocks verification (advisory_only: true always).
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -67,19 +67,31 @@ function createFixture(opts: {
   return tmpDir;
 }
 
-/** Captures output from cmdVerifyTestQuality by intercepting console */
+/** Captures JSON output by mocking process.stdout.write and process.exit */
 function captureOutput(fn: () => void): any {
   let captured = '';
-  const origLog = console.log;
-  const origErr = console.error;
-  console.log = (msg: string) => { captured += msg; };
-  console.error = (msg: string) => { captured += msg; };
+  const origExit = process.exit;
+  const origWrite = process.stdout.write;
+
+  // Mock process.exit to prevent test runner from exiting
+  process.exit = vi.fn(() => { throw new Error('EXIT_0'); }) as any;
+
+  // Mock stdout.write to capture JSON output
+  process.stdout.write = vi.fn((chunk: any) => {
+    captured += typeof chunk === 'string' ? chunk : chunk.toString();
+    return true;
+  }) as any;
+
   try {
     fn();
+  } catch (e: any) {
+    // Swallow the EXIT_0 error thrown by our mock
+    if (!e.message?.includes('EXIT_0')) throw e;
   } finally {
-    console.log = origLog;
-    console.error = origErr;
+    process.exit = origExit;
+    process.stdout.write = origWrite;
   }
+
   try {
     return JSON.parse(captured);
   } catch {
@@ -103,10 +115,15 @@ describe('cmdVerifyTestQuality', () => {
 
   it('returns advisory warnings for shape-only evidence (only existsSync assertions)', () => {
     const testContent = `
-import { describe, it, expect } from 'vitest';
+import { describe, it, assert } from 'vitest';
 describe('check', () => {
   it('file exists', () => {
-    expect(fs.existsSync('/path/to/file')).toBe(true);
+    const exists = fs.existsSync('/path/to/file');
+    assert(exists, 'file should exist');
+  });
+  it('has enough lines', () => {
+    const lineCount = content.split('\\n').length;
+    assert(lineCount > 10);
   });
 });
 `;
