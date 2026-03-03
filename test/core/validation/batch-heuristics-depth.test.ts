@@ -33,7 +33,9 @@ describe('checkContentDepth', () => {
   });
 
   it('returns detected=true when only 1 of 4 categories is found (< 50%)', () => {
-    const content = 'I was looking at the src/core/types.ts file.';
+    // Only matches specific-path: 'src/core/types.ts'
+    // Does NOT match struggle-note, genuine-question, or personalized-observation
+    const content = 'The file src/core/types.ts exports several interfaces.';
     const result = checkContentDepth(config, 'artifact.md', content);
     expect(result.detected).toBe(true);
   });
