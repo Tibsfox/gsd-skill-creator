@@ -12,13 +12,13 @@ import { DEFAULT_BATCH_DETECTION_CONFIG } from '../../../src/core/validation/bat
 import type { ArtifactTimestamp } from '../../../src/core/validation/pacing-gate/pacing-types.js';
 import type { BatchHeuristicResult } from '../../../src/core/validation/batch-detection/batch-types.js';
 
-/** Helper to create ArtifactTimestamp fixtures with offset seconds */
+/** Helper to create ArtifactTimestamp fixtures with offset seconds (supports sub-second precision) */
 function makeArtifact(path: string, offsetSeconds: number, sessionId = 'session-1', subversionId = 'sv-1'): ArtifactTimestamp {
-  const base = new Date('2026-03-01T12:00:00.000Z');
-  base.setSeconds(base.getSeconds() + offsetSeconds);
+  const baseMs = new Date('2026-03-01T12:00:00.000Z').getTime();
+  const offsetMs = Math.round(offsetSeconds * 1000);
   return {
     path,
-    createdAt: base.toISOString(),
+    createdAt: new Date(baseMs + offsetMs).toISOString(),
     sessionId,
     subversionId,
   };
