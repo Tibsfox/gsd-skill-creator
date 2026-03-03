@@ -177,4 +177,14 @@ All 63 requirements implemented: conformance matrix (5), foundation audit T0 (8)
 
 ---
 
-**Total: 806 requirements across 28 milestones, all implemented.**
+## v1.49.12 Heritage Skills Educational Pack (47 total)
+
+All 47 requirements implemented across 2 phases:
+
+**Phase 1 — Foxfire & Northern Ways:** Foundation types (FOUND-01), Safety Warden 9 domains (SAFE-01 through SAFE-02), Cultural Sovereignty Warden 4-level (CULT-01), Northern Ways cross-cutting (CULT-02), Canonical Works + Bibliography (LIB-01, LIB-02), Skill Hall Framework (HALL-01), SUMO Ontology (ONTO-01), 14 rooms (ROOM-01 through ROOM-14), Oral History Studio (DOC-01), Interview Simulator (DOC-02), Heritage Book Template (DOC-03), Project Builder (DOC-04), Export Pipeline (DOC-05), Integration tests + safety audit (INTG-01 through INTG-03, INTG-05).
+
+**Phase 2 — Pacific Northwest Coast & Trail Badges:** Badge Engine types (BADGE-01), Salish Sea Ways (CULT-02), Marine Safety 10th domain (SAFE-03), Trail Badge Engine (BADGE-02, BADGE-03), 4 PNW rooms (ROOM-15 through ROOM-18), Reconnecting Descendant Pathway (RECON-01 through RECON-03), Badge Retrofit rooms 1-14 (BADGE-04), SEL Mapping (NEIGH-01, NEIGH-02), Cultural enforcement verification (CULT-03, CULT-04), Safety monotonicity (SAFE-04, SAFE-05), Phase 2 integration + audit (INTG-04, INTG-05).
+
+---
+
+**Total: 853 requirements across 29 milestones, all implemented.**
