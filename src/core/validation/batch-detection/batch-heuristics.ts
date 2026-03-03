@@ -6,7 +6,7 @@
  *              BatchDetectionResult by the batch runner (Phase 558-03).
  * @module core/validation/batch-detection
  */
-import type { BatchDetectionConfig, BatchHeuristicResult } from './batch-types.js';
+import type { BatchDetectionConfig, BatchHeuristicResult, DepthMarkerCategory } from './batch-types.js';
 import type { ArtifactTimestamp } from '../pacing-gate/pacing-types.js';
 
 /**
@@ -88,6 +88,84 @@ export function detectSessionCompression(
     details: detected
       ? `Session compression: ${completedSubversions}/${sessionBudget} subversions completed (exceeds budget)`
       : `Session pacing: ${completedSubversions}/${sessionBudget} subversions completed (within budget)`,
+    artifacts: [],
+  };
+}
+
+/**
+ * Check content depth: scans artifact text for depth markers
+ * and warns when too few categories are represented.
+ *
+ * Each DepthMarker pattern is applied as a regex. The function
+ * counts distinct categories found and warns when fewer than
+ * half of all configured categories are present.
+ */
+export function checkContentDepth(
+  config: BatchDetectionConfig,
+  artifactPath: string,
+  artifactContent: string
+): BatchHeuristicResult {
+  const foundCategories = new Set<DepthMarkerCategory>();
+
+  for (const marker of config.depthMarkers) {
+    const regex = new RegExp(marker.pattern, 'i');
+    if (regex.test(artifactContent)) {
+      foundCategories.add(marker.category);
+    }
+  }
+
+  // Get unique categories from config
+  const allCategories = [...new Set(config.depthMarkers.map((m) => m.category))];
+  const missingCategories = allCategories.filter((c) => !foundCategories.has(c));
+  const found = [...foundCategories];
+
+  // Warn if fewer than half of categories are represented
+  const detected = found.length < allCategories.length / 2;
+
+  return {
+    detected,
+    severity: detected ? 'warn' : 'info',
+    details: `Content depth: found [${found.join(', ')}], missing [${missingCategories.join(', ')}]`,
+    artifacts: [artifactPath],
+  };
+}
+
+/**
+ * Detect template similarity: computes token-overlap ratio between
+ * artifact and template content, flagging near-identical copies.
+ *
+ * Tokens are whitespace-split, lowercased, trimmed words.
+ * Ratio = |intersection| / |union| (Jaccard similarity).
+ * Detected when ratio > threshold.
+ */
+export function detectTemplateSimilarity(
+  artifactContent: string,
+  templateContent: string,
+  threshold: number
+): BatchHeuristicResult {
+  const tokenize = (text: string): Set<string> => {
+    const tokens = text
+      .toLowerCase()
+      .split(/\s+/)
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0);
+    return new Set(tokens);
+  };
+
+  const artifactTokens = tokenize(artifactContent);
+  const templateTokens = tokenize(templateContent);
+
+  // Union and intersection
+  const union = new Set([...artifactTokens, ...templateTokens]);
+  const intersection = new Set([...artifactTokens].filter((t) => templateTokens.has(t)));
+
+  const ratio = union.size === 0 ? 0 : intersection.size / union.size;
+  const detected = ratio > threshold;
+
+  return {
+    detected,
+    severity: detected ? 'warn' : 'info',
+    details: `Template similarity: ${ratio.toFixed(2)} (threshold: ${threshold.toFixed(2)})`,
     artifacts: [],
   };
 }
