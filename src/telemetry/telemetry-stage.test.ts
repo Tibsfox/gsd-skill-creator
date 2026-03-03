@@ -12,6 +12,7 @@ function makeMockStore(): { store: EventStore; calls: unknown[] } {
     }),
     read: vi.fn(async () => []),
     getFileSizeBytes: vi.fn(async () => 0),
+    pruneOlderThan: vi.fn(async () => 0),
   } as unknown as EventStore;
   return { store, calls };
 }
@@ -134,6 +135,7 @@ describe('TelemetryStage', () => {
       append: vi.fn().mockRejectedValue(new Error('disk full')),
       read: vi.fn(async () => []),
       getFileSizeBytes: vi.fn(async () => 0),
+      pruneOlderThan: vi.fn(async () => 0),
     } as unknown as EventStore;
     const failingStage = new TelemetryStage(failingStore);
 
@@ -155,6 +157,23 @@ describe('TelemetryStage', () => {
     // earlyExit with data — should still emit
     const scored = calls.filter((e: unknown) => (e as SkillScoredEvent).type === 'skill-scored');
     expect(scored).toHaveLength(1);
+  });
+
+  it('calls pruneOlderThan(90) after appending events (INTG-03)', async () => {
+    const ctx = createEmptyContext({
+      scoredSkills: [{ name: 'a', score: 0.5, matchType: 'intent' }],
+    });
+    await stage.process(ctx);
+
+    expect((mockStore.pruneOlderThan as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith(90);
+  });
+
+  it('does not throw when pruneOlderThan rejects', async () => {
+    (mockStore.pruneOlderThan as ReturnType<typeof vi.fn>).mockRejectedValueOnce(new Error('prune fail'));
+    const ctx = createEmptyContext({
+      scoredSkills: [{ name: 'a', score: 0.5, matchType: 'intent' }],
+    });
+    await expect(stage.process(ctx)).resolves.toBeDefined();
   });
 
   it('does not read user content fields from context', async () => {
