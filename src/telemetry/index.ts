@@ -12,3 +12,6 @@ export { TelemetryStage } from './telemetry-stage.js';
 export { UsagePatternDetector } from './usage-pattern-detector.js';
 export { ScoreAdjuster } from './score-adjuster.js';
 export type { ScoreAdjusterConfig } from './score-adjuster.js';
+export { CachePromoter } from './cache-promoter.js';
+export type { PromoteResult } from './cache-promoter.js';
+export { AdaptiveSuggestions } from './adaptive-suggestions.js';
