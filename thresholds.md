@@ -14,3 +14,10 @@ Updated each phase per IMP-03.
 | HEALTH_CHECK_PARALLEL_LIMIT | 10 | Prevent overwhelming local hardware with concurrent health probes. Ollama and similar run on same machine as the tool. | src/chips/chip-factory.ts:26 |
 | GRADER_MAX_TOKENS | 512 | Grader responses are structured JSON, never need more than a few hundred tokens. Keeping this low reduces latency for the grading step. | src/chips/chip-test-runner.ts:35 |
 | GRADER_TEMPERATURE | 0.0 | Deterministic grading for reproducible evaluation. Grader output must be stable across identical inputs. | src/chips/chip-test-runner.ts:38 |
+
+## Phase 51: Multi-Model Evaluation
+
+| Constant | Value | Rationale | File:Line |
+|----------|-------|-----------|-----------|
+| DEFAULT_PASS_RATE_THRESHOLD | 0.75 | Default pass rate for chips without a per-chip override. 75% is a conservative quality bar: below it indicates significant correctness issues; above it with no override provides a safe baseline for new chip configurations. | src/eval/types.ts:34 |
+| THRESHOLD_EQUALITY_TOLERANCE | 0.001 | Floating-point tolerance for 'at' threshold comparisons. Pass rates are computed as ratios (e.g., 7/10 = 0.6999... in IEEE 754). A tolerance of 0.001 absorbs rounding without masking meaningful differences. | src/eval/thresholds-config.ts:32 |
