@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-18-potlatch",
+    "sumoTerm": "SocialInteraction",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Potlatch SocialInteraction)",
+    "naturalLanguage": "A potlatch is a social interaction — a structured event in which participants engage in gift exchange, public acknowledgment of relationships, and social accounting. SUMO's SocialInteraction correctly captures its intersubjective character.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-potlatch",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PotlatchHosting HeritageSkill)",
+    "naturalLanguage": "Hosting a potlatch is a heritage skill — requiring knowledge of protocol, social relationships, resource accumulation, and the gift economy mechanics that govern how wealth is distributed and what obligations are created.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-gift-economy",
+    "sumoTerm": "IntentionalProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass GiftEconomyExchange IntentionalProcess)",
+    "naturalLanguage": "Gift exchange in a reciprocal economy is an intentional process — gifts are given strategically, received with obligation, and tracked as part of an ongoing social accounting. The process encodes social relationships and creates binding commitments.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-conflict-resolution",
+    "sumoTerm": "CommunicativeAct",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ConflictResolutionProtocol CommunicativeAct)",
+    "naturalLanguage": "Conflict resolution in Salish Sea traditions is fundamentally a communicative act — public acknowledgment of what happened, expression of responsibility, and the giving of compensation that completes the repair.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-compensation-protocol",
+    "sumoTerm": "SocialInteraction",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CompensationProtocol SocialInteraction)",
+    "naturalLanguage": "Compensation protocols — giving goods to the injured party to resolve a grievance — are social interactions encoding the principle that harm is repaired within relationship, not by external punishment.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-village-network",
+    "sumoTerm": "Group",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass VillageNetwork Group)",
+    "naturalLanguage": "The network of interconnected villages in the Salish Sea is a Group — a collection of distinct communities connected by marriage, trade, ceremony, and water, operating within understood relationship structures.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-emotional-weather",
+    "sumoTerm": "IntentionalProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass EmotionalWeatherAwareness IntentionalProcess)",
+    "naturalLanguage": "Recognizing emotional states through natural metaphor — storm as anger, tide as competition — is an intentional process of analogy-making that maps observable natural patterns onto internal experiences.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-reef-net-cooperation",
+    "sumoTerm": "SocialInteraction",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ReefNetCooperation SocialInteraction)",
+    "naturalLanguage": "The cooperative social organization of reef net fishing — defined roles, shared protocols, harvest division — is a structured social interaction that functions as a model for cooperation protocols across other domains.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-18-reef-net-cooperation",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ReefNetCooperationProtocols HeritageSkill)",
+    "naturalLanguage": "The governance protocols that enable multi-family reef net station operation — rights to stations, harvest division, absence protocols — are heritage knowledge encoding generations of cooperative social design.",
+    "ontologicalBridge": null
+  }
+]
