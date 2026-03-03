@@ -50,6 +50,7 @@
  *   milestone complete <version>       Archive milestone, create MILESTONES.md
  *     [--name <name>]
  *     [--archive-phases]               Move phase dirs to milestones/vX.Y-phases/
+ *   milestone review <id>              Create review-type milestone with default config
  *
  * Validation:
  *   validate consistency               Check phase numbering, disk/roadmap sync
@@ -84,6 +85,9 @@
  *   verify commits <h1> [h2] ...      Batch verify commit hashes
  *   verify artifacts <plan-file>       Check must_haves.artifacts
  *   verify key-links <plan-file>       Check must_haves.key_links
+ *   verify pacing                     Check session pacing enforcement advisory
+ *   verify batch-detection             Run batch detection heuristic advisory
+ *   verify lessons-chain               Validate lessons-learned chain integrity
  *
  * Template Fill:
  *   template fill summary --phase N    Create pre-filled SUMMARY.md
@@ -339,8 +343,14 @@ async function main() {
         verify.cmdVerifyKeyLinks(cwd, args[2], raw);
       } else if (subcommand === 'test-quality') {
         verify.cmdVerifyTestQuality(cwd, args[2], raw);
+      } else if (subcommand === 'pacing') {
+        verify.cmdVerifyPacing(cwd, raw);
+      } else if (subcommand === 'batch-detection') {
+        verify.cmdVerifyBatchDetection(cwd, raw);
+      } else if (subcommand === 'lessons-chain') {
+        verify.cmdVerifyLessonsChain(cwd, raw);
       } else {
-        error('Unknown verify subcommand. Available: plan-structure, phase-completeness, references, commits, artifacts, key-links, test-quality');
+        error('Unknown verify subcommand. Available: plan-structure, phase-completeness, references, commits, artifacts, key-links, test-quality, pacing, batch-detection, lessons-chain');
       }
       break;
     }
@@ -461,8 +471,10 @@ async function main() {
           milestoneName = nameArgs.join(' ') || null;
         }
         milestone.cmdMilestoneComplete(cwd, args[2], { name: milestoneName, archivePhases }, raw);
+      } else if (subcommand === 'review') {
+        milestone.cmdMilestoneReview(cwd, args[2], raw);
       } else {
-        error('Unknown milestone subcommand. Available: complete');
+        error('Unknown milestone subcommand. Available: complete, review');
       }
       break;
     }
