@@ -1,88 +1,236 @@
 {
   "shelter": {
-    "rooms": [1, 14],
+    "rooms": [
+      1,
+      14
+    ],
     "description": "Building and shelter traditions from Appalachian log construction to Arctic igloo engineering",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "badgesByRoom": {
-      "1": ["shelter-explorer-01", "shelter-apprentice-01", "shelter-keeper-01"],
-      "14": ["shelter-journeyman-01"]
+      "1": [
+        "shelter-explorer-01",
+        "shelter-apprentice-01",
+        "shelter-keeper-01"
+      ],
+      "14": [
+        "shelter-journeyman-01"
+      ]
     }
   },
   "food": {
-    "rooms": [5, 16],
-    "description": "Food preservation and salmon economy — from Appalachian canning to reef net technology",
-    "traditions": ["appalachian", "first-nations", "inuit", "salish-sea"],
+    "rooms": [
+      5,
+      14,
+      16
+    ],
+    "description": "Food preservation and salmon economy \u2014 from Appalachian canning to reef net technology",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "5": ["food-explorer-01", "food-apprentice-01", "food-keeper-01"],
-      "16": ["food-salmon-journeyman-01"]
+      "5": [
+        "food-explorer-01",
+        "food-apprentice-01",
+        "food-keeper-01"
+      ],
+      "16": [
+        "food-salmon-journeyman-01"
+      ],
+      "14": [
+        "food-arctic-explorer-01",
+        "food-arctic-apprentice-01"
+      ]
     }
   },
   "fiber": {
-    "rooms": [2, 17],
+    "rooms": [
+      2,
+      17
+    ],
     "description": "Textile traditions from quillwork and sinew to Coast Salish two-bar loom and cedar bark weaving",
-    "traditions": ["appalachian", "first-nations", "inuit", "salish-sea"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "2": ["fiber-explorer-01", "fiber-apprentice-01", "fiber-keeper-01"],
-      "17": ["fiber-salish-journeyman-01"]
+      "2": [
+        "fiber-explorer-01",
+        "fiber-apprentice-01",
+        "fiber-keeper-01"
+      ],
+      "17": [
+        "fiber-salish-journeyman-01"
+      ]
     }
   },
   "watercraft": {
-    "rooms": [13, 15, 16],
+    "rooms": [
+      13,
+      15,
+      16
+    ],
     "description": "Watercraft traditions from birchbark canoe and qajaq to Northwest Coast ocean-going canoes",
-    "traditions": ["first-nations", "inuit", "salish-sea"],
+    "traditions": [
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "13": ["watercraft-explorer-01", "watercraft-apprentice-01", "watercraft-keeper-01"],
-      "15": ["watercraft-cedar-journeyman-01"],
-      "16": ["watercraft-reef-net-journeyman-01"]
+      "13": [
+        "watercraft-explorer-01",
+        "watercraft-apprentice-01",
+        "watercraft-keeper-01"
+      ],
+      "15": [
+        "watercraft-cedar-journeyman-01"
+      ],
+      "16": [
+        "watercraft-reef-net-journeyman-01"
+      ]
     }
   },
   "plant": {
-    "rooms": [9, 15],
+    "rooms": [
+      9,
+      15
+    ],
     "description": "Plant knowledge from Anishinaabe woodland medicine to cedar ecology and sustainable harvest",
-    "traditions": ["appalachian", "first-nations", "salish-sea"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "9": ["plant-explorer-01", "plant-apprentice-01", "plant-keeper-01"],
-      "15": ["plant-cedar-journeyman-01"]
+      "9": [
+        "plant-explorer-01",
+        "plant-apprentice-01",
+        "plant-keeper-01"
+      ],
+      "15": [
+        "plant-cedar-journeyman-01"
+      ]
     }
   },
   "tool": {
-    "rooms": [4, 7, 15],
+    "rooms": [
+      4,
+      7,
+      15
+    ],
     "description": "Tool traditions from whittling and ulu to blacksmithing and cedar adze work",
-    "traditions": ["appalachian", "first-nations", "inuit", "salish-sea"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "4": ["tool-explorer-01", "tool-apprentice-01", "tool-keeper-01"],
-      "7": ["tool-smithing-journeyman-01"],
-      "15": ["tool-adze-journeyman-01"]
+      "4": [
+        "tool-explorer-01",
+        "tool-apprentice-01",
+        "tool-keeper-01"
+      ],
+      "7": [
+        "tool-smithing-explorer-01",
+        "tool-smithing-apprentice-01",
+        "tool-smithing-journeyman-01"
+      ],
+      "15": [
+        "tool-adze-journeyman-01"
+      ]
     }
   },
   "music": {
-    "rooms": [6],
+    "rooms": [
+      6
+    ],
     "description": "Musical traditions from banjo and dulcimer to frame drum and katajjaq",
-    "traditions": ["appalachian", "first-nations", "inuit"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
     "badgesByRoom": {
-      "6": ["music-explorer-01", "music-apprentice-01", "music-keeper-01"]
+      "6": [
+        "music-explorer-01",
+        "music-apprentice-01",
+        "music-keeper-01"
+      ]
     }
   },
   "neighbors": {
-    "rooms": [10, 12, 18],
+    "rooms": [
+      10,
+      12,
+      18
+    ],
     "description": "Social intelligence: community relations, conflict resolution, potlatch-as-technology, emotional intelligence",
-    "traditions": ["appalachian", "first-nations", "inuit", "salish-sea"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "10": ["neighbors-explorer-01", "neighbors-apprentice-01", "neighbors-keeper-01"],
-      "12": ["neighbors-oral-history-journeyman-01"],
-      "18": ["neighbors-journeyman-01"]
+      "10": [
+        "neighbors-explorer-01",
+        "neighbors-apprentice-01",
+        "neighbors-keeper-01",
+        "neighbors-community-explorer-01"
+      ],
+      "12": [
+        "neighbors-oral-history-journeyman-01"
+      ],
+      "18": [
+        "neighbors-journeyman-01"
+      ]
     }
   },
   "heritage": {
-    "rooms": [3, 8, 10, 11, 12],
+    "rooms": [
+      3,
+      8,
+      10,
+      11,
+      12
+    ],
     "description": "Heritage documentation: oral history, family interviews, Heritage Book authoring, community attribution",
-    "traditions": ["appalachian", "first-nations", "inuit", "salish-sea"],
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit",
+      "salish-sea"
+    ],
     "badgesByRoom": {
-      "3": ["heritage-animals-explorer-01"],
-      "8": ["heritage-pottery-explorer-01"],
-      "10": ["heritage-explorer-01"],
-      "11": ["heritage-seasonal-apprentice-01"],
-      "12": ["heritage-apprentice-01", "heritage-journeyman-01", "heritage-keeper-01"]
+      "3": [
+        "heritage-animals-explorer-01",
+        "heritage-animals-apprentice-01"
+      ],
+      "8": [
+        "heritage-pottery-explorer-01",
+        "heritage-pottery-apprentice-01"
+      ],
+      "10": [
+        "heritage-explorer-01"
+      ],
+      "11": [
+        "heritage-seasonal-explorer-01",
+        "heritage-seasonal-apprentice-01"
+      ],
+      "12": [
+        "heritage-apprentice-01",
+        "heritage-journeyman-01",
+        "heritage-keeper-01"
+      ]
     }
   }
 }
