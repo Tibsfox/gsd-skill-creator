@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { mkdtemp, rm, readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -6,8 +6,9 @@ import {
   SkillCreatorMcpServer,
   SKILL_CREATOR_TOOLS,
   createSkillCreatorMcpServer,
+  createSkillCreatorMcpServerFromDeps,
 } from './skill-creator-mcp.js';
-import type { SkillCreatorMcpConfig, McpEvalResult } from './skill-creator-mcp.js';
+import type { SkillCreatorMcpConfig, McpEvalResult, SkillCreatorDeps } from './skill-creator-mcp.js';
 
 // ============================================================================
 // Mock helpers
@@ -720,5 +721,278 @@ describe('createSkillCreatorMcpServer', () => {
   it('returned server has working listTools', () => {
     const server = createSkillCreatorMcpServer();
     expect(server.listTools()).toHaveLength(10);
+  });
+});
+
+// ============================================================================
+// SkillCreatorDeps-based handlers (skill.create, skill.eval, skill.grade)
+// ============================================================================
+
+function makeDeps(overrides: Partial<SkillCreatorDeps> = {}): SkillCreatorDeps {
+  const mockSkillStore = {
+    create: vi.fn().mockResolvedValue({ path: '/mock/skills/test-skill/SKILL.md', metadata: {}, body: '' }),
+    list: vi.fn().mockResolvedValue([]),
+    exists: vi.fn().mockResolvedValue(false),
+  };
+  const mockTestStore = {
+    add: vi.fn().mockResolvedValue({ id: 'mock-id', prompt: 'test', expected: 'positive' }),
+    list: vi.fn().mockResolvedValue([]),
+  };
+  const mockResultStore = {
+    list: vi.fn().mockResolvedValue([]),
+  };
+  const mockChipTestRunner = {
+    runForSkill: vi.fn().mockResolvedValue({
+      metrics: { total: 5, passed: 4, failed: 1, accuracy: 0.8, f1Score: 0.85, precision: 0.88, recall: 0.82 },
+      results: [
+        { testId: 't1', passed: true, explanation: 'Good', prompt: 'p1', expected: 'positive' },
+        { testId: 't2', passed: false, explanation: 'Off-topic', prompt: 'p2', expected: 'positive' },
+      ],
+      hints: ['Improve coverage'],
+      chipName: 'test-chip',
+    }),
+  };
+  const mockGrader = {
+    buildCapabilityProfile: vi.fn().mockResolvedValue({
+      model: 'test-chip',
+      tier: 'cloud' as const,
+      maxContextLength: 200000,
+      supportsTools: true,
+      supportsStreaming: true,
+      modelCount: 1,
+    }),
+    generateModelHints: vi.fn().mockReturnValue(['Hint from grader']),
+  };
+  const mockRegistry = {
+    get: vi.fn().mockReturnValue({ name: 'test-chip' }),
+    list: vi.fn().mockReturnValue(['test-chip']),
+    isConfigured: vi.fn().mockReturnValue(true),
+  };
+  const mockLifecycleResolver = {
+    resolve: vi.fn().mockResolvedValue('draft'),
+    listAll: vi.fn().mockResolvedValue([]),
+  };
+
+  return {
+    registry: mockRegistry as any,
+    chipTestRunner: mockChipTestRunner as any,
+    grader: mockGrader as any,
+    benchmarkRunner: { benchmarkSkill: vi.fn().mockResolvedValue({ skillName: '', models: [], runs: [] }) } as any,
+    skillStore: mockSkillStore as any,
+    testStore: mockTestStore as any,
+    resultStore: mockResultStore as any,
+    lifecycleResolver: mockLifecycleResolver as any,
+    scope: 'project' as const,
+    ...overrides,
+  };
+}
+
+describe('SkillCreatorDeps-based handlers', () => {
+  // -------------------------------------------------------------------------
+  // skill.create via deps
+  // -------------------------------------------------------------------------
+  describe('skill.create with SkillCreatorDeps', () => {
+    it('returns JSON with created:true and path', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.create', {
+        skillName: 'test-skill',
+        description: 'A test skill',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.created).toBe(true);
+      expect(data.path).toContain('SKILL.md');
+    });
+
+    it('calls skillStore.create with skillName and metadata containing name field', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.create', {
+        skillName: 'my-skill',
+        description: 'desc',
+      });
+
+      expect((deps.skillStore as any).create).toHaveBeenCalledWith(
+        'my-skill',
+        expect.objectContaining({ name: 'my-skill', description: 'desc' }),
+        expect.any(String),
+      );
+    });
+
+    it('adds a starter test case via testStore.add', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.create', {
+        skillName: 'my-skill',
+        description: 'desc',
+      });
+
+      expect((deps.testStore as any).add).toHaveBeenCalledWith(
+        'my-skill',
+        expect.objectContaining({ prompt: expect.any(String), expected: 'positive' }),
+      );
+    });
+
+    it('returns isError:true when skillStore.create throws', async () => {
+      const deps = makeDeps({
+        skillStore: {
+          create: vi.fn().mockRejectedValue(new Error('Invalid skill name')),
+          list: vi.fn().mockResolvedValue([]),
+          exists: vi.fn().mockResolvedValue(false),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.create', {
+        skillName: 'bad-name',
+        description: 'desc',
+      });
+
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('Invalid skill name');
+    });
+
+    it('does not return "Would" placeholder text', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.create', {
+        skillName: 'test-skill',
+        description: 'A test skill',
+      });
+      expect(result.content[0].text).not.toContain('Would');
+      expect(() => JSON.parse(result.content[0].text)).not.toThrow();
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.eval via deps
+  // -------------------------------------------------------------------------
+  describe('skill.eval with SkillCreatorDeps', () => {
+    it('returns JSON containing metrics and results keys', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.eval', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('metrics');
+      expect(data).toHaveProperty('results');
+      expect(data.metrics.total).toBe(5);
+      expect(data.metrics.passed).toBe(4);
+    });
+
+    it('passes chipName as chip option to runForSkill', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.eval', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect((deps.chipTestRunner as any).runForSkill).toHaveBeenCalledWith(
+        'test-skill',
+        expect.objectContaining({ chip: 'test-chip' }),
+      );
+    });
+
+    it('returns isError:true when chipTestRunner.runForSkill throws', async () => {
+      const deps = makeDeps({
+        chipTestRunner: {
+          runForSkill: vi.fn().mockRejectedValue(new Error('Chip not found: bad-chip')),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.eval', {
+        skillName: 'test-skill',
+        chipName: 'bad-chip',
+      });
+
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('Chip not found');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.grade via deps
+  // -------------------------------------------------------------------------
+  describe('skill.grade with SkillCreatorDeps', () => {
+    it('returns JSON with profile, hints, and results', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('profile');
+      expect(data).toHaveProperty('hints');
+      expect(data).toHaveProperty('results');
+      expect(data.profile.tier).toBe('cloud');
+      expect(data.hints).toContain('Hint from grader');
+    });
+
+    it('passes graderChip to runForSkill options', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+        graderChip: 'grader-chip',
+      });
+
+      expect((deps.chipTestRunner as any).runForSkill).toHaveBeenCalledWith(
+        'test-skill',
+        expect.objectContaining({ chip: 'test-chip', graderChip: 'grader-chip' }),
+      );
+    });
+
+    it('calls buildCapabilityProfile with chipName and registry', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect((deps.grader as any).buildCapabilityProfile).toHaveBeenCalledWith(
+        'test-chip',
+        deps.registry,
+      );
+    });
+
+    it('returns isError:true when chipTestRunner throws in skill.grade', async () => {
+      const deps = makeDeps({
+        chipTestRunner: {
+          runForSkill: vi.fn().mockRejectedValue(new Error('Runner failed')),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBe(true);
+    });
+
+    it('works without graderChip (keyword matching path)', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+        // no graderChip
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('metrics');
+    });
   });
 });
