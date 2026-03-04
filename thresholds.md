@@ -26,3 +26,24 @@ Updated each phase per IMP-03.
 | CLOUD_CONTEXT_THRESHOLD | 100000 | Context length at or above which a model is classified as 'cloud' tier. At 100K+ tokens, the model has full context capacity typical of cloud-hosted models like Claude. | src/eval/model-aware-grader.ts:38 |
 | VIEWER_PASS_RATE_GREEN_THRESHOLD | 0.75 | Pass rate at or above this value is displayed green in the eval viewer. Matches DEFAULT_PASS_RATE_THRESHOLD: green = passing the quality bar. | src/eval/eval-viewer.ts:27 |
 | VIEWER_PASS_RATE_YELLOW_THRESHOLD | 0.50 | Pass rate at or above this value (but below green) is displayed yellow. Below 50% the model fails more than it passes, displayed red. Provides a three-band visual signal for model quality. | src/eval/eval-viewer.ts:36 |
+
+## Phase 52: MCP Infrastructure
+
+| Constant | Value | Rationale | File:Line |
+|----------|-------|-----------|-----------|
+| DEFAULT_HEARTBEAT_INTERVAL_MS | 30000 | 30s heartbeat frequency for mesh nodes. Balances freshness against network overhead. | src/mesh/types.ts:17 |
+| MAX_MISSED_HEARTBEATS | 3 | Three missed heartbeats (90s) before eviction. Tolerates brief network blips while detecting dead nodes quickly. | src/mesh/types.ts:20 |
+| DEFAULT_CHECK_INTERVAL_MS | 10000 | 10s eviction check interval. Frequent enough to catch stale nodes within one heartbeat period. | src/mesh/types.ts:23 |
+| MESH_EVENT_LOG_VERSION | 1 | Schema version for mesh event log format. Increment on breaking changes for forward compatibility. | src/mesh/types.ts:26 |
+| LOCAL_LATENCY_THRESHOLD_MS | 5 | Latency below 5ms classified as 'local' transport condition. Local IPC/loopback is typically sub-millisecond. | src/mesh/fidelity-adapter.ts |
+| MESH_LATENCY_THRESHOLD_MS | 100 | Latency 5-100ms classified as 'mesh' (LAN). Above 100ms classified as 'remote' (WAN). | src/mesh/fidelity-adapter.ts |
+
+## Phase 53: Mesh Orchestration
+
+| Constant | Value | Rationale | File:Line |
+|----------|-------|-----------|-----------|
+| CAPABILITY_WEIGHT | 0.4 | Weight for capability match in total routing score. Capability is critical: a node that can't run the chip scores 0 on this dimension. | src/mesh/scoring.ts:24 |
+| LOAD_WEIGHT | 0.2 | Weight for load factor in total routing score. Load is a tie-breaker: all else equal, prefer less loaded nodes. | src/mesh/scoring.ts:30 |
+| PERFORMANCE_WEIGHT | 0.4 | Weight for historical pass rate in total routing score. Performance matters as much as capability: reliable nodes preferred. | src/mesh/scoring.ts:37 |
+| LOCAL_PASS_RATE_THRESHOLD | 0.70 | Local pass rate threshold for cost-aware routing. At 70%+, local execution preferred to save cost. Below this, cloud preferred due to insufficient local quality. | src/mesh/routing-policy.ts:28 |
+| MARGINAL_PASS_RATE_THRESHOLD | 0.50 | Pass rate below which a model is classified as 'failing'. Below 50%, the model fails more than it passes. | src/mesh/multi-model-optimizer.ts:24 |
