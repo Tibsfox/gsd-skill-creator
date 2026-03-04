@@ -14,10 +14,51 @@ import { join } from 'node:path';
 import type { ChipRegistry } from '../chips/chip-registry.js';
 import { OperationTracker } from './operation-tracker.js';
 import { SkillWorkspace } from './skill-workspace.js';
+import type { SkillLifecycleResolver } from './lifecycle-resolver.js';
+import type { SkillScope } from '../types/scope.js';
 
 // ============================================================================
 // Dependency injection types (narrow interfaces for testability)
 // ============================================================================
+
+/**
+ * Full dependency set for SkillCreatorMcpServer.
+ * Used by createSkillCreatorMcpServer() factory and for testing with mock deps.
+ */
+export interface SkillCreatorDeps {
+  /** Chip registry for resolving model chips */
+  registry: ChipRegistry;
+  /** Chip test runner for running skill evaluations */
+  chipTestRunner: {
+    runForSkill(name: string, opts?: { chip?: string; graderChip?: string }): Promise<McpEvalResult>;
+  };
+  /** Model-aware grader */
+  grader: {
+    buildCapabilityProfile(chipName: string, registry: ChipRegistry): Promise<McpCapabilityProfile | null>;
+    generateModelHints(tests: Array<{ prompt: string; explanation: string }>, profile: McpCapabilityProfile | null): string[];
+  };
+  /** Multi-model benchmark runner */
+  benchmarkRunner: {
+    benchmarkSkill(name: string, chips: string[], grader?: string): Promise<McpBenchmarkResult>;
+  };
+  /** Skill store for filesystem operations */
+  skillStore: {
+    list(): Promise<string[]>;
+    exists(skillName: string): Promise<boolean>;
+  };
+  /** Test store for test case management */
+  testStore: {
+    list(skillName: string): Promise<unknown[]>;
+  };
+  /** Result store for historical run data */
+  resultStore: {
+    list(skillName: string): Promise<unknown[]>;
+  };
+  /** Lifecycle resolver for deriving skill state from stores */
+  lifecycleResolver: SkillLifecycleResolver;
+  /** Scope for skill storage paths */
+  scope: SkillScope;
+}
 
 /** Eval run result shape */
 export interface McpEvalResult {
