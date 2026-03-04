@@ -27,7 +27,6 @@ function makeTestCase(overrides: Partial<TestCase> = {}): TestCase {
     prompt: 'How do I commit my changes?',
     expected: 'positive',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
     ...overrides,
   };
 }
@@ -68,7 +67,12 @@ function makeRegistry(chips: Record<string, ModelChip> = {}): ChipRegistry {
 // Mock stores
 // ============================================================================
 
-function makeTestStore(tests: TestCase[] = [makeTestCase()]): object {
+interface MockTestStore {
+  list: ReturnType<typeof vi.fn>;
+  count: ReturnType<typeof vi.fn>;
+}
+
+function makeTestStore(tests: TestCase[] = [makeTestCase()]): MockTestStore {
   return {
     list: vi.fn().mockResolvedValue(tests),
     count: vi.fn().mockResolvedValue(tests.length),
@@ -116,8 +120,9 @@ describe('ChipTestRunner backward compatibility', () => {
     const result = await runner.runForSkill('git-workflow', {});
 
     // Result should not have chipName (standard TestRunner path)
-    expect((result as { chipName?: string }).chipName).toBeUndefined();
-    expect((result as { graderChipName?: string }).graderChipName).toBeUndefined();
+    const chipResult = result as { chipName?: string; graderChipName?: string };
+    expect(chipResult.chipName).toBeUndefined();
+    expect(chipResult.graderChipName).toBeUndefined();
     // testStore.list was called (standard path used the store)
     expect(testStore.list).toHaveBeenCalledWith('git-workflow');
   });

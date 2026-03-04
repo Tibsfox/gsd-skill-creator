@@ -8,6 +8,7 @@ export default defineConfig({
     exclude: [
       'dist/**',
       'desktop/**',
+      'tests/ipc-commands.test.ts',
       '.claude/**',
       'project-claude/**',
       'node_modules/**',
