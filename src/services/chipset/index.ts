@@ -30,3 +30,12 @@ export type {
   MuseValidationResult,
   VoiceStyle,
 } from './muse-schema-validator.js';
+
+// Muse plane engine
+export { MusePlaneEngine } from './muse-plane-engine.js';
+export type {
+  MusePlanePosition,
+  MuseDistance,
+  MuseActivation,
+  CartesianPosition,
+} from './muse-plane-types.js';
