@@ -2,10 +2,13 @@
  * Mesh module barrel exports.
  *
  * Re-exports all public types, schemas, constants, and service classes for:
- * - Mesh node discovery and heartbeat monitoring (Plan 02)
- * - DACP bundle provenance tracking (Plan 03)
- * - Fidelity-adaptive compression (Plan 03)
- * - Mesh bundle transport with routing and relay (Plan 03)
+ * - Mesh node discovery and heartbeat monitoring (Phase 52, Plan 02)
+ * - DACP bundle provenance tracking (Phase 52, Plan 03)
+ * - Fidelity-adaptive compression (Phase 52, Plan 03)
+ * - Mesh bundle transport with routing and relay (Phase 52, Plan 03)
+ * - Routing types, scoring, and cost-aware policy (Phase 53, Plan 01)
+ * - MeshCoordinator with dispatch and failover (Phase 53, Plan 02)
+ * - Wave planner and multi-model optimizer (Phase 53, Plan 03)
  */
 
 // Types and schemas
@@ -81,3 +84,72 @@ export {
 } from './transport.js';
 
 export type { TransportResult, TransportPayload, ReceiveResult } from './transport.js';
+
+// Routing types (Phase 53, Plan 01)
+export {
+  RoutingRequestSchema,
+  NodeScoreSchema,
+  RoutingDecisionSchema,
+} from './routing-types.js';
+
+export type {
+  RoutingRequest,
+  NodeScore,
+  RoutingDecision,
+} from './routing-types.js';
+
+// Scoring (Phase 53, Plan 01)
+export {
+  scoreNode,
+  rankNodes,
+  selectWithFallback,
+  // IMP-03 constants
+  CAPABILITY_WEIGHT,
+  LOAD_WEIGHT,
+  PERFORMANCE_WEIGHT,
+} from './scoring.js';
+
+// Routing policy (Phase 53, Plan 01)
+export {
+  applyCostPolicy,
+  // IMP-03 constants
+  LOCAL_PASS_RATE_THRESHOLD,
+} from './routing-policy.js';
+
+// Coordinator (Phase 53, Plan 02)
+export {
+  MeshCoordinator,
+  createMeshCoordinator,
+  DispatchResultSchema,
+} from './coordinator.js';
+
+export type { DispatchResult, PipelineStage, PipelineResult } from './coordinator.js';
+
+// Wave planner (Phase 53, Plan 03)
+export {
+  WaveTaskSchema,
+  AnnotatedTaskSchema,
+  MeshWavePlanSchema,
+  planMeshWave,
+} from './wave-planner.js';
+
+export type {
+  WaveTask,
+  AnnotatedTask,
+  MeshWavePlan,
+} from './wave-planner.js';
+
+// Multi-model optimizer (Phase 53, Plan 03)
+export {
+  ModelGuidanceSchema,
+  MultiModelReportSchema,
+  generateModelGuidance,
+  generateMultiModelReport,
+  deriveTier,
+  deriveStatus,
+  buildRecommendations,
+  // IMP-03 constants
+  MARGINAL_PASS_RATE_THRESHOLD,
+} from './multi-model-optimizer.js';
+
+export type { ModelGuidance, MultiModelReport, Tier, Status } from './multi-model-optimizer.js';
