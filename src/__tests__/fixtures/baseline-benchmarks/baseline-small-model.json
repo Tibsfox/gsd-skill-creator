@@ -1,0 +1,40 @@
+{
+  "skillName": "baseline-skill",
+  "benchmarkedAt": "2026-03-01T00:00:00.000Z",
+  "models": [
+    {
+      "model": "small-local",
+      "runCount": 5,
+      "passRate": 0.60,
+      "avgAccuracy": 58.5,
+      "avgF1": 0.55,
+      "thresholdStatus": "below"
+    }
+  ],
+  "runs": [
+    {
+      "skillName": "baseline-skill",
+      "model": "small-local",
+      "runAt": "2026-03-01T00:01:00.000Z",
+      "duration": 1200,
+      "metrics": {
+        "total": 10,
+        "passed": 6,
+        "failed": 4,
+        "accuracy": 60,
+        "falsePositiveRate": 0,
+        "truePositives": 6,
+        "trueNegatives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 4,
+        "edgeCaseCount": 2,
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1Score": 0.75
+      },
+      "passed": true,
+      "hints": ["Consider shorter prompts for constrained context"]
+    }
+  ],
+  "legacyRunCount": 0
+}
