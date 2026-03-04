@@ -9,6 +9,7 @@
  * - Routing types, scoring, and cost-aware policy (Phase 53, Plan 01)
  * - MeshCoordinator with dispatch and failover (Phase 53, Plan 02)
  * - Wave planner and multi-model optimizer (Phase 53, Plan 03)
+ * - Context types, transcript summarizer, and result ingestion (Phase 54, Plan 01)
  */
 
 // Types and schemas
@@ -153,3 +154,32 @@ export {
 } from './multi-model-optimizer.js';
 
 export type { ModelGuidance, MultiModelReport, Tier, Status } from './multi-model-optimizer.js';
+
+// Context types (Phase 54, Plan 01)
+export {
+  DecisionRecordSchema,
+  ContextSummarySchema,
+  MeshExecutionResultSchema,
+  GsdStateEntrySchema,
+} from './context-types.js';
+
+export type {
+  DecisionRecord,
+  ContextSummary,
+  MeshExecutionResult,
+  GsdStateEntry,
+} from './context-types.js';
+
+// Transcript summarizer (Phase 54, Plan 01)
+export {
+  MAX_DIGEST_LENGTH,
+  extractDecisions,
+  compressSteps,
+  summarizeTranscript,
+} from './transcript-summarizer.js';
+
+// Result ingestion (Phase 54, Plan 01)
+export {
+  buildContextSummary,
+  ingestMeshResult,
+} from './result-ingestion.js';
