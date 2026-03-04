@@ -84,3 +84,19 @@ export type { LimitationMatchResult } from './limitation-registry.js';
 // Calibration store (Phase 58, Plan 03)
 export { CalibrationStore, CalibrationFileSchema } from './calibration-store.js';
 export type { CalibrationFile } from './calibration-store.js';
+
+// Convergence detector (Phase 59, Plan 01)
+export { ConvergenceDetector, detectDivergence } from './convergence-detector.js';
+export type { DivergenceResult } from './convergence-detector.js';
+
+// Variant generator (Phase 59, Plan 01)
+export { VariantGenerator } from './variant-generator.js';
+
+// Optimization driver (Phase 59, Plan 02)
+export { OptimizationDriver } from './optimization-driver.js';
+export type {
+  OptimizationOptions,
+  OptimizationResult,
+  IterationRecord,
+  StopReason,
+} from './optimization-driver.js';
