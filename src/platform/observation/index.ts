@@ -32,3 +32,6 @@ export type { LineageEntry, LineageChain, ArtifactType, PipelineStage } from '..
 export { normalizeObservationTier, DEFAULT_DETERMINISM_CONFIG, DEFAULT_PROMOTION_DETECTOR_CONFIG, PROMOTABLE_TOOL_NAMES } from '../../core/types/observation.js';
 export { DEFAULT_SCRIPT_GENERATOR_CONFIG, DEFAULT_GATEKEEPER_CONFIG } from '../../core/types/observation.js';
 export { DEFAULT_DRIFT_MONITOR_CONFIG } from '../../core/types/observation.js';
+
+export { PhotonEmitter } from './photon-emitter.js';
+export type { PhotonPath, PhotonEcho, PhotonBatch } from '../../core/types/photon.js';
