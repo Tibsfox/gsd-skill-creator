@@ -12,7 +12,12 @@
  *   CLOUD_CONTEXT_THRESHOLD = 100000      -- at or above this, model is cloud-tier
  */
 
+import { z } from 'zod';
 import type { ChipRegistry } from '../chips/chip-registry.js';
+import { CapabilityClassifier, CapabilityClassSchema } from './capability-classifier.js';
+import type { CapabilityClass } from './capability-classifier.js';
+import { LimitationRegistry } from './limitation-registry.js';
+import type { CalibrationStore } from './calibration-store.js';
 
 // ============================================================================
 // IMP-03: Threshold constants (model-aware-grader level)
@@ -214,4 +219,197 @@ export class ModelAwareGrader {
 
     return hints;
   }
+
+  // ========================================================================
+  // Extended grading methods (Phase 58 -- Grader Calibration)
+  // ========================================================================
+
+  /**
+   * Build a full grading context for calibrated grading.
+   * Returns GradingContext with model_context populated from chip capabilities,
+   * classifier, limitation registry, and calibration store.
+   *
+   * @returns GradingContext with modelContext (or null if chip not found)
+   */
+  async buildGradingContext(
+    chipName: string,
+    basePrompt: string,
+    registry: ChipRegistry,
+    classifier: CapabilityClassifier,
+    limitationRegistry: LimitationRegistry,
+    calibrationStore: CalibrationStore,
+  ): Promise<GradingContext> {
+    const profile = await this.buildCapabilityProfile(chipName, registry);
+    if (!profile) {
+      return { basePrompt, modelContext: null };
+    }
+
+    const capabilityClass = classifier.classifyFromProfile(profile);
+    const knownLimitations = limitationRegistry.getLimitations(capabilityClass);
+    const calibrationAdjustments = calibrationStore.getAdjustment(capabilityClass);
+
+    return {
+      basePrompt,
+      modelContext: {
+        chipName,
+        capabilityClass,
+        knownLimitations,
+        calibrationAdjustments,
+      },
+    };
+  }
+
+  /**
+   * Enhanced prompt enrichment that includes known limitations and calibration.
+   * If modelContext is null, returns basePrompt unchanged (backward compat).
+   */
+  enrichGradingPromptWithContext(context: GradingContext): string {
+    if (!context.modelContext) return context.basePrompt;
+
+    const mc = context.modelContext;
+    const limStr = mc.knownLimitations.length > 0
+      ? ` Known limitations: ${mc.knownLimitations.join(', ')}.`
+      : '';
+    const adjStr = mc.calibrationAdjustments.passRateAdjustment !== 0
+      ? ` Pass rate adjustment: ${mc.calibrationAdjustments.passRateAdjustment > 0 ? '+' : ''}${mc.calibrationAdjustments.passRateAdjustment}.`
+      : '';
+
+    const enrichment =
+      `Model: ${mc.chipName} (class: ${mc.capabilityClass}).${limStr}${adjStr} ` +
+      `Consider model capabilities when judging response quality.`;
+
+    return `${context.basePrompt}\n${enrichment}`;
+  }
+
+  /**
+   * Generate calibrated hints with model_specific and applicable_to metadata.
+   */
+  generateCalibratedHints(
+    failedTests: Array<{ prompt: string; explanation: string }>,
+    context: GradingContext,
+  ): CalibratedHint[] {
+    const hints: CalibratedHint[] = [];
+    const capClass = context.modelContext?.capabilityClass;
+
+    if (capClass) {
+      // Model-specific hints based on capability class
+      switch (capClass) {
+        case 'small':
+          hints.push({
+            text: 'Simplify output format to reduce JSON formatting failures',
+            modelSpecific: true,
+            applicableTo: ['small'],
+          });
+          hints.push({
+            text: 'Use shorter, focused prompts to stay within context limits',
+            modelSpecific: true,
+            applicableTo: ['small', 'medium'],
+          });
+          break;
+        case 'medium':
+          hints.push({
+            text: 'Avoid deeply nested JSON structures',
+            modelSpecific: true,
+            applicableTo: ['small', 'medium'],
+          });
+          break;
+        case 'large':
+          hints.push({
+            text: 'Provide explicit instructions for subtle nuance requirements',
+            modelSpecific: true,
+            applicableTo: ['large'],
+          });
+          break;
+        case 'cloud':
+          // Cloud gets generic prompt-specificity hint
+          hints.push({
+            text: 'Improve prompt specificity and skill description clarity',
+            modelSpecific: false,
+            applicableTo: ['small', 'medium', 'large', 'cloud'],
+          });
+          break;
+      }
+    }
+
+    // Generic hints from failed test explanations
+    const seen = new Set<string>();
+    for (const test of failedTests) {
+      if (!seen.has(test.explanation)) {
+        seen.add(test.explanation);
+        hints.push({
+          text: test.explanation,
+          modelSpecific: false,
+          applicableTo: ['small', 'medium', 'large', 'cloud'],
+        });
+      }
+    }
+
+    return hints;
+  }
+
+  /**
+   * Assess whether a failure matches a known limitation.
+   * Returns discount factor from calibration (0 = no discount, 1 = full discount).
+   */
+  assessLimitationMatch(
+    failureDescription: string,
+    context: GradingContext,
+    limitationRegistry: LimitationRegistry,
+  ): { limitationMatch: boolean; limitation?: string; discountFactor: number } {
+    if (!context.modelContext) {
+      return { limitationMatch: false, discountFactor: 0 };
+    }
+
+    const match = limitationRegistry.matchFailure(
+      failureDescription,
+      context.modelContext.capabilityClass,
+    );
+
+    if (!match.matched) {
+      return { limitationMatch: false, discountFactor: 0 };
+    }
+
+    const weight = context.modelContext.calibrationAdjustments.knownLimitationWeight;
+    return {
+      limitationMatch: true,
+      limitation: match.limitation,
+      discountFactor: weight * match.confidence,
+    };
+  }
 }
+
+// ============================================================================
+// Grading Context Schemas (Phase 58)
+// ============================================================================
+
+export const CalibrationAdjustmentSchema = z.object({
+  passRateAdjustment: z.number().min(-0.25).max(0.25).default(0),
+  knownLimitationWeight: z.number().min(0).max(1).default(0),
+  lastUpdated: z.string().datetime(),
+});
+
+export type CalibrationAdjustment = z.infer<typeof CalibrationAdjustmentSchema>;
+
+export const ModelContextSchema = z.object({
+  chipName: z.string(),
+  capabilityClass: CapabilityClassSchema,
+  knownLimitations: z.array(z.string()),
+  calibrationAdjustments: CalibrationAdjustmentSchema,
+});
+
+export type ModelContext = z.infer<typeof ModelContextSchema>;
+
+export const GradingContextSchema = z.object({
+  basePrompt: z.string(),
+  modelContext: ModelContextSchema.nullable(),
+});
+
+export type GradingContext = z.infer<typeof GradingContextSchema>;
+
+export const CalibratedHintSchema = z.object({
+  text: z.string(),
+  modelSpecific: z.boolean(),
+  applicableTo: z.array(CapabilityClassSchema),
+});
+
+export type CalibratedHint = z.infer<typeof CalibratedHintSchema>;
