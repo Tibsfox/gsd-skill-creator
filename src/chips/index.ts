@@ -33,11 +33,20 @@ export type {
   ChatOptions,
   ChipRole,
   ModelChip,
+  ErrorCategory,
 } from './types.js';
 
 // Chip implementations
 export { OpenAICompatibleChip } from './openai-compatible-chip.js';
 export { AnthropicChip } from './anthropic-chip.js';
+
+// HttpClient
+export { HttpClient, classifyError } from './http-client.js';
+export type { HttpClientConfig, HttpResult } from './http-client.js';
+
+// OllamaDiscovery and HealthStateMachine
+export { OllamaDiscovery, HealthStateMachine } from './ollama-discovery.js';
+export type { OllamaModel, DiscoveryResult, HealthState, HealthTransition } from './ollama-discovery.js';
 
 // ChipFactory
 export { createChip, CHIPSET_FILE_VERSION, HEALTH_CHECK_PARALLEL_LIMIT } from './chip-factory.js';
