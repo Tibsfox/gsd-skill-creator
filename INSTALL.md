@@ -1,6 +1,6 @@
 # Installation Guide
 
-This guide covers installing the Dynamic Skill Creator for use with Claude Code.
+This guide covers installing the GSD Skill Creator for use with Claude Code.
 
 ## Table of Contents
 
@@ -131,7 +131,7 @@ npm install /path/to/gsd-skill-creator
 # Option B: Add to package.json manually
 {
   "dependencies": {
-    "dynamic-skill-creator": "file:/path/to/gsd-skill-creator"
+    "gsd-skill-creator": "file:/path/to/gsd-skill-creator"
   }
 }
 # Then run: npm install
@@ -140,7 +140,7 @@ npm install /path/to/gsd-skill-creator
 cd /path/to/gsd-skill-creator
 npm link
 cd /path/to/your/project
-npm link dynamic-skill-creator
+npm link gsd-skill-creator
 ```
 
 ---
@@ -360,7 +360,7 @@ your-project/
 │   └── ...                     # Other planning files
 │
 ├── node_modules/
-│   └── dynamic-skill-creator/   # If installed as dependency
+│   └── gsd-skill-creator/   # If installed as dependency
 │
 └── gsd-skill-creator/                # If cloned locally
     ├── dist/                    # Compiled JavaScript
@@ -541,7 +541,7 @@ git stash pop
 cat package.json | grep version
 
 # Or via npm
-npm list dynamic-skill-creator
+npm list gsd-skill-creator
 ```
 
 ---
@@ -552,7 +552,7 @@ npm list dynamic-skill-creator
 
 ```bash
 cd /path/to/gsd-skill-creator
-npm unlink -g dynamic-skill-creator
+npm unlink -g gsd-skill-creator
 # Or just: npm unlink
 ```
 
@@ -560,7 +560,7 @@ npm unlink -g dynamic-skill-creator
 
 ```bash
 # If installed as dependency
-npm uninstall dynamic-skill-creator
+npm uninstall gsd-skill-creator
 
 # Remove from package.json (if manually added)
 # Edit package.json and remove the entry
