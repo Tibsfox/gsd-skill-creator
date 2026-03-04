@@ -22,6 +22,9 @@ import { z } from 'zod';
 import { ChipConfigSchema } from './types.js';
 import type { ModelChip, ChipRole, ChipHealth, ChipCapabilities } from './types.js';
 import { createChip } from './chip-factory.js';
+import { HttpClient } from './http-client.js';
+import { OllamaDiscovery } from './ollama-discovery.js';
+import type { DiscoveryResult } from './ollama-discovery.js';
 
 // ============================================================================
 // ChipsetFile schema
@@ -203,6 +206,30 @@ export class ChipRegistry {
   // --------------------------------------------------------------------------
   // Health and capabilities reporting
   // --------------------------------------------------------------------------
+
+  /**
+   * Discover models from a live endpoint and auto-register chips.
+   * Probes Ollama /api/tags first, falls back to /v1/models.
+   */
+  async discover(baseUrl: string): Promise<DiscoveryResult> {
+    const httpClient = new HttpClient({ maxRetries: 0, timeoutMs: 5000 });
+    const discovery = new OllamaDiscovery(httpClient);
+    const result = await discovery.discover(baseUrl);
+
+    if (result.available) {
+      for (const model of result.models) {
+        const chip = createChip({
+          name: model.name,
+          type: 'openai-compatible',
+          baseUrl,
+          defaultModel: model.name,
+        });
+        this.register(model.name, chip);
+      }
+    }
+
+    return result;
+  }
 
   /**
    * Run health checks on all registered chips in parallel.
