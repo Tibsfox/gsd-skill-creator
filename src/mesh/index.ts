@@ -253,3 +253,20 @@ export type {
   McpCapabilityProfile,
   McpBenchmarkResult,
 } from './skill-creator-mcp.js';
+
+// Task tracker (Phase 57, Plan 01)
+export { TaskTracker } from './task-tracker.js';
+
+export type { TaskState, StateTransitionRecord } from './task-tracker.js';
+
+// Mesh executor (Phase 57, Plans 02-03)
+export { MeshExecutor } from './executor.js';
+
+export type {
+  WaveExecutionOptions,
+  TaskExecutionResult,
+  WaveExecutionResult,
+  ExecutorPipelineStage,
+  PipelineExecutionResult,
+  ParallelExecutionResult,
+} from './executor.js';
