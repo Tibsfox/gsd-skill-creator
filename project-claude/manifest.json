@@ -333,6 +333,12 @@
         "target": ".claude/skills/alignment-guide",
         "description": "Alignment guide skill (token-efficient format patterns)",
         "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/hypervisor",
+        "target": ".claude/skills/hypervisor",
+        "description": "Hypervisor skill (agent lifecycle management)",
+        "files": ["SKILL.md", "spawn-templates/chain-review.md", "spawn-templates/phase-execute.md", "spawn-templates/phase-plan.md", "spawn-templates/debug.md", "resource-log.md"]
       }
     ],
     "hookScripts": [
@@ -360,6 +366,11 @@
         "source": "hooks/context-pressure.sh",
         "target": ".claude/hooks/context-pressure.sh",
         "description": "PostToolUse hook: context pressure monitoring (warnings only)"
+      },
+      {
+        "source": "hooks/agent-lifecycle.sh",
+        "target": ".claude/hooks/agent-lifecycle.sh",
+        "description": "PostToolUse hook: agent lifecycle event logging"
       }
     ],
     "claudeMd": {

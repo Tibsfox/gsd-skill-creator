@@ -41,15 +41,14 @@ Three layers of inline error correction, inspired by digital signal processing:
 
 See `project-claude/specs/shift-register-format.md` for the chain history format spec.
 
-## Context Memory (OS Memory Layer)
+## Process Management (Hypervisor)
 
-Treats the context window like system RAM with a 6-tier memory hierarchy (L0-L5):
+Agent lifecycle management as OS-style hypervisor:
 
-- **context-memory skill** -- `.claude/skills/context-memory/` task shaping, demand paging, storyline attachment, GC checklist
-- **alignment-guide skill** -- `.claude/skills/alignment-guide/` token-efficient format patterns (tables > prose)
-- **context-pressure hook** -- `.claude/hooks/context-pressure.sh` PostToolUse monitoring (warnings only, never blocks)
+- **hypervisor skill** -- `.claude/skills/hypervisor/` 5 kernel ops (spawn, schedule, migrate, snapshot, reap), process state machine, scheduling policies
+- **agent-lifecycle hook** -- `.claude/hooks/agent-lifecycle.sh` PostToolUse event logging (spawn/shutdown/milestone)
 
-See `docs/context-memory/memory-hierarchy.md` for the full 6-tier hierarchy spec.
+See `project-claude/skills/hypervisor/SKILL.md` for the full process management spec.
 
 ## Commit Convention
 

@@ -41,6 +41,15 @@ Three layers of inline error correction, inspired by digital signal processing:
 
 See `project-claude/specs/shift-register-format.md` for the chain history format spec.
 
+## Process Management (Hypervisor)
+
+Agent lifecycle management as OS-style hypervisor:
+
+- **hypervisor skill** -- `.claude/skills/hypervisor/` 5 kernel ops (spawn, schedule, migrate, snapshot, reap), process state machine, scheduling policies
+- **agent-lifecycle hook** -- `.claude/hooks/agent-lifecycle.sh` PostToolUse event logging (spawn/shutdown/milestone)
+
+See `project-claude/skills/hypervisor/SKILL.md` for the full process management spec.
+
 ## Commit Convention
 
 - Conventional Commits: `<type>(<scope>): <subject>`
