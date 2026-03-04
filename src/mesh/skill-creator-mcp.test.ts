@@ -740,6 +740,15 @@ function makeDeps(overrides: Partial<SkillCreatorDeps> = {}): SkillCreatorDeps {
   };
   const mockResultStore = {
     list: vi.fn().mockResolvedValue([]),
+    getLatest: vi.fn().mockResolvedValue({
+      results: [
+        { testId: 't1', passed: true, explanation: 'Good', prompt: 'p1', expected: 'positive' },
+        { testId: 't2', passed: false, explanation: 'Off-topic', prompt: 'p2', expected: 'positive' },
+        { testId: 't3', passed: false, explanation: 'Wrong domain', prompt: 'p3', expected: 'negative' },
+      ],
+      hints: ['Improve coverage', 'Narrow activation scope'],
+      metrics: { total: 3, passed: 1, failed: 2, accuracy: 33 },
+    }),
   };
   const mockChipTestRunner = {
     runForSkill: vi.fn().mockResolvedValue({
@@ -993,6 +1002,333 @@ describe('SkillCreatorDeps-based handlers', () => {
       expect(result.isError).toBeUndefined();
       const data = JSON.parse(result.content[0].text);
       expect(data).toHaveProperty('metrics');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.compare via deps (Task 1)
+  // -------------------------------------------------------------------------
+  describe('skill.compare with SkillCreatorDeps', () => {
+    it('calls benchmarkRunner.benchmarkSkill and returns per-chip results', async () => {
+      const deps = makeDeps({
+        benchmarkRunner: {
+          benchmarkSkill: vi.fn().mockResolvedValue({
+            skillName: 'test-skill',
+            benchmarkedAt: '2026-03-04T00:00:00Z',
+            models: [
+              { model: 'chip-a', runCount: 1, passRate: 0.8, avgAccuracy: 80, avgF1: 0.82, thresholdStatus: 'above' as const },
+              { model: 'chip-b', runCount: 1, passRate: 0.6, avgAccuracy: 60, avgF1: 0.63, thresholdStatus: 'below' as const },
+            ],
+            runs: [],
+            legacyRunCount: 0,
+          }),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.compare', {
+        skillName: 'test-skill',
+        chips: ['chip-a', 'chip-b'],
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skillName).toBe('test-skill');
+      expect(data.chips).toEqual(['chip-a', 'chip-b']);
+      expect(data.models).toHaveLength(2);
+      expect(data.models[0].model).toBe('chip-a');
+    });
+
+    it('calls benchmarkRunner.benchmarkSkill with skillName and chips args', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.compare', {
+        skillName: 'my-skill',
+        chips: ['chip-x'],
+      });
+
+      expect((deps.benchmarkRunner as any).benchmarkSkill).toHaveBeenCalledWith('my-skill', ['chip-x']);
+    });
+
+    it('returns isError:true when benchmarkRunner throws', async () => {
+      const deps = makeDeps({
+        benchmarkRunner: {
+          benchmarkSkill: vi.fn().mockRejectedValue(new Error('Benchmark failed')),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.compare', {
+        skillName: 'test-skill',
+        chips: ['chip-a'],
+      });
+
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('Benchmark failed');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.analyze via deps (Task 1)
+  // -------------------------------------------------------------------------
+  describe('skill.analyze with SkillCreatorDeps', () => {
+    it('returns JSON with issues containing falseNegatives and falsePositives', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.analyze', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('issues');
+      expect(data.issues).toHaveProperty('falseNegatives');
+      expect(data.issues).toHaveProperty('falsePositives');
+      // p2 failed with expected=positive → falseNegative
+      expect(data.issues.falseNegatives).toHaveLength(1);
+      // p3 failed with expected=negative → falsePositive
+      expect(data.issues.falsePositives).toHaveLength(1);
+    });
+
+    it('returns hints from resultStore snapshot', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.analyze', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.hints).toContain('Improve coverage');
+    });
+
+    it('returns isError:true when resultStore.getLatest returns null', async () => {
+      const deps = makeDeps({
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.analyze', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('test-skill');
+    });
+
+    it('calls resultStore.getLatest with skillName', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.analyze', {
+        skillName: 'my-skill',
+        chipName: 'chip-x',
+      });
+
+      expect((deps.resultStore as any).getLatest).toHaveBeenCalledWith('my-skill');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.optimize via deps (Task 1)
+  // -------------------------------------------------------------------------
+  describe('skill.optimize with SkillCreatorDeps', () => {
+    it('returns JSON with hints and failureCount', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.optimize', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('hints');
+      expect(data).toHaveProperty('failureCount');
+      expect(data.hints).toContain('Hint from grader');
+    });
+
+    it('includes skillName, chipName, and targetPassRate in response', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.optimize', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+        targetPassRate: 0.9,
+      });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skillName).toBe('test-skill');
+      expect(data.chipName).toBe('test-chip');
+      expect(data.targetPassRate).toBe(0.9);
+    });
+
+    it('defaults targetPassRate to 0.75 when not specified', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.optimize', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.targetPassRate).toBe(0.75);
+    });
+
+    it('calls grader.generateModelHints with failed tests and profile', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.optimize', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect((deps.grader as any).generateModelHints).toHaveBeenCalledWith(
+        expect.arrayContaining([expect.objectContaining({ prompt: expect.any(String) })]),
+        expect.anything(),
+      );
+    });
+
+    it('returns isError:true when resultStore.getLatest returns null', async () => {
+      const deps = makeDeps({
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.optimize', {
+        skillName: 'test-skill',
+        chipName: 'test-chip',
+      });
+
+      expect(result.isError).toBe(true);
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.package via deps (Task 2)
+  // -------------------------------------------------------------------------
+  describe('skill.package with SkillCreatorDeps', () => {
+    it('returns JSON with manifest containing mesh_hints', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.package', {
+        skillName: 'test-skill',
+        version: '1.0.0',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('manifest');
+      expect(data.manifest).toHaveProperty('mesh_hints');
+    });
+
+    it('returns SkillPackage with variants and benchmarks arrays', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.package', {
+        skillName: 'test-skill',
+        version: '2.0.0',
+        description: 'A packaged skill',
+      });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('variants');
+      expect(data).toHaveProperty('benchmarks');
+      expect(Array.isArray(data.variants)).toBe(true);
+      expect(Array.isArray(data.benchmarks)).toBe(true);
+    });
+
+    it('manifest.name matches skillName', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.package', {
+        skillName: 'my-packaged-skill',
+        version: '1.0.0',
+      });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.manifest.name).toBe('my-packaged-skill');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.benchmark via deps (Task 2)
+  // -------------------------------------------------------------------------
+  describe('skill.benchmark with SkillCreatorDeps', () => {
+    it('returns mean/p50/p95 stats per chip', async () => {
+      const deps = makeDeps({
+        benchmarkRunner: {
+          benchmarkSkill: vi.fn().mockResolvedValue({
+            skillName: 'test-skill',
+            benchmarkedAt: '2026-03-04T00:00:00Z',
+            models: [
+              { model: 'chip-a', runCount: 1, passRate: 0.8, avgAccuracy: 80, avgF1: 0.8, thresholdStatus: 'above' as const },
+            ],
+            runs: [
+              { skillName: 'test-skill', model: 'chip-a', runAt: '2026-03-04T00:00:00Z', duration: 100,
+                metrics: { total: 5, passed: 4, failed: 1, accuracy: 80, f1Score: 0.8, precision: 0.8, recall: 0.8 },
+                passed: true, hints: [] },
+            ],
+            legacyRunCount: 0,
+          }),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.benchmark', {
+        skillName: 'test-skill',
+        chips: ['chip-a'],
+        iterations: 2,
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('iterations');
+      expect(data.iterations).toBe(2);
+      expect(data).toHaveProperty('chips');
+      const chipStats = data.chips.find((c: { chip: string }) => c.chip === 'chip-a');
+      expect(chipStats).toBeDefined();
+      expect(chipStats).toHaveProperty('mean');
+      expect(chipStats).toHaveProperty('p50');
+      expect(chipStats).toHaveProperty('p95');
+    });
+
+    it('defaults to 3 iterations when not specified', async () => {
+      const benchmarkSkill = vi.fn().mockResolvedValue({
+        skillName: 'test-skill',
+        benchmarkedAt: '2026-03-04T00:00:00Z',
+        models: [],
+        runs: [],
+        legacyRunCount: 0,
+      });
+      const deps = makeDeps({ benchmarkRunner: { benchmarkSkill } as any });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.benchmark', {
+        skillName: 'test-skill',
+        chips: ['chip-a'],
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.iterations).toBe(3);
+      expect(benchmarkSkill).toHaveBeenCalledTimes(3);
+    });
+
+    it('returns isError:true when benchmarkRunner throws', async () => {
+      const deps = makeDeps({
+        benchmarkRunner: {
+          benchmarkSkill: vi.fn().mockRejectedValue(new Error('Benchmark error')),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.benchmark', {
+        skillName: 'test-skill',
+        chips: ['chip-a'],
+      });
+
+      expect(result.isError).toBe(true);
     });
   });
 });
