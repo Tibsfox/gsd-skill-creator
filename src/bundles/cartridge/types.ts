@@ -131,7 +131,7 @@ export const CartridgeSchema = z.object({
   story: StoryArcSchema,
   chipset: CartridgeChipsetSchema,
   dependencies: z.array(z.string()).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 }).passthrough();
 
 export type Cartridge = z.infer<typeof CartridgeSchema>;
