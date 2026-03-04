@@ -32,10 +32,10 @@ Plans:
 
 ### Phase 600: Review v1.26
 
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
-- [ ] 600-01-PLAN.md -- Pattern evaluation, feed-forward assessment, 8-dimension scoring
+- [x] 600-01-PLAN.md -- Pattern evaluation, feed-forward assessment, 8-dimension scoring
 
 **Goal:** Evaluate v1.26 against the 13+1 pattern framework and 21 feed-forward items. Score across 8 dimensions with full evidence breadth from 94 commits. Track P11 forward-only (1 fix commit) and P6 composition growth. Write comprehensive review document.
 
@@ -80,8 +80,8 @@ Plans:
 
 | Phase | Name | Plans | Dependencies | Wave |
 |-------|------|-------|-------------|------|
-| 599 | 1/1 | Complete   | 2026-03-04 | 1 |
-| 600 | Review v1.26 | 1 | 599 | 2 |
+| 599 | 1/1 | Complete    | 2026-03-04 | 1 |
+| 600 | 1/1 | Complete    | 2026-03-04 | 2 |
 | 601 | Reflection + Chain | 1 | 600 | 3 |
 
 **Total:** 3 phases, 3 plans, 17 requirements
@@ -91,8 +91,8 @@ Plans:
 
 | Phase | Status | Plans | Completed |
 |-------|--------|-------|-----------|
-| 599 | PENDING | 0/1 | |
-| 600 | PENDING | 0/1 | |
+| 599 | COMPLETE | 1/1 | 2026-03-04 |
+| 600 | COMPLETE | 1/1 | 2026-03-04 |
 | 601 | PENDING | 0/1 | |
 
 ---
