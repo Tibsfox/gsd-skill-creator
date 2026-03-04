@@ -47,19 +47,19 @@ export class SkillWorkspace {
    * @returns Array of workspace entries sorted by name
    */
   async listSkills(): Promise<SkillWorkspaceEntry[]> {
-    let entries: Awaited<ReturnType<typeof readdir>>;
+    let dirNames: string[];
     try {
-      entries = await readdir(this.skillsDir, { withFileTypes: true });
+      dirNames = await readdir(this.skillsDir);
     } catch {
       return [];
     }
 
     const results: SkillWorkspaceEntry[] = [];
 
-    for (const entry of entries) {
-      if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
+    for (const name of dirNames) {
+      if (name.startsWith('.')) continue;
 
-      const skillDir = join(this.skillsDir, entry.name);
+      const skillDir = join(this.skillsDir, name);
       const skillPath = join(skillDir, 'SKILL.md');
 
       try {
@@ -74,7 +74,7 @@ export class SkillWorkspace {
         const testedModels = history.filter((h) => h.to === 'tested').length;
 
         results.push({
-          name: entry.name,
+          name,
           status: tracker.getState(),
           testedModels,
           lastModified: fileStat.mtime.toISOString(),

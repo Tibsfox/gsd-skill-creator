@@ -75,8 +75,8 @@ function mockBenchmarkRunner() {
 // ============================================================================
 
 describe('SKILL_CREATOR_TOOLS', () => {
-  it('returns 8 tools', () => {
-    expect(SKILL_CREATOR_TOOLS).toHaveLength(8);
+  it('returns 10 tools', () => {
+    expect(SKILL_CREATOR_TOOLS).toHaveLength(10);
   });
 
   it('each tool has name, description, and inputSchema', () => {
@@ -99,6 +99,8 @@ describe('SKILL_CREATOR_TOOLS', () => {
     expect(names).toContain('skill.optimize');
     expect(names).toContain('skill.package');
     expect(names).toContain('skill.benchmark');
+    expect(names).toContain('skill.status');
+    expect(names).toContain('skill.list');
   });
 });
 
@@ -527,6 +529,114 @@ describe('SkillCreatorMcpServer', () => {
   });
 
   // ==========================================================================
+  // skill.status — wired handler
+  // ==========================================================================
+
+  describe('skill.status', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-status-'));
+    });
+
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns state and history for existing skill', async () => {
+      const { mkdirSync } = await import('node:fs');
+      const { OperationTracker } = await import('./operation-tracker.js');
+
+      const skillDir = join(skillsDir, 'my-skill');
+      mkdirSync(skillDir, { recursive: true });
+
+      // Set up tracker state
+      const tracker = new OperationTracker(skillDir);
+      await tracker.load();
+      tracker.advance('tested');
+      await tracker.save();
+
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.status', { skillName: 'my-skill' });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.name).toBe('my-skill');
+      expect(data.state).toBe('tested');
+      expect(data.history).toHaveLength(1);
+    });
+
+    it('returns draft state for skill with no status file', async () => {
+      const { mkdirSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'new-skill'), { recursive: true });
+
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.status', { skillName: 'new-skill' });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.state).toBe('draft');
+      expect(data.history).toHaveLength(0);
+    });
+  });
+
+  // ==========================================================================
+  // skill.list — wired handler
+  // ==========================================================================
+
+  describe('skill.list', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-list-'));
+    });
+
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns array of skills with metadata', async () => {
+      const { mkdirSync, writeFileSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'alpha'), { recursive: true });
+      mkdirSync(join(skillsDir, 'beta'), { recursive: true });
+      writeFileSync(join(skillsDir, 'alpha', 'SKILL.md'), '# Alpha', 'utf-8');
+      writeFileSync(join(skillsDir, 'beta', 'SKILL.md'), '# Beta', 'utf-8');
+
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.list', {});
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.total).toBe(2);
+      expect(data.skills).toHaveLength(2);
+      expect(data.skills[0].name).toBe('alpha');
+    });
+
+    it('filters skills by name when filter provided', async () => {
+      const { mkdirSync, writeFileSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'alpha-skill'), { recursive: true });
+      mkdirSync(join(skillsDir, 'beta-skill'), { recursive: true });
+      writeFileSync(join(skillsDir, 'alpha-skill', 'SKILL.md'), '# Alpha', 'utf-8');
+      writeFileSync(join(skillsDir, 'beta-skill', 'SKILL.md'), '# Beta', 'utf-8');
+
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.list', { filter: 'alpha' });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.total).toBe(1);
+      expect(data.skills[0].name).toBe('alpha-skill');
+    });
+
+    it('returns empty array for empty skills directory', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.list', {});
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.total).toBe(0);
+      expect(data.skills).toEqual([]);
+    });
+  });
+
+  // ==========================================================================
   // Error handling — all handlers catch and return isError
   // ==========================================================================
 
@@ -565,7 +675,8 @@ describe('SkillCreatorMcpServer', () => {
         mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
 
         const tools = ['skill.create', 'skill.eval', 'skill.grade', 'skill.compare',
-          'skill.analyze', 'skill.optimize', 'skill.package', 'skill.benchmark'];
+          'skill.analyze', 'skill.optimize', 'skill.package', 'skill.benchmark',
+          'skill.status', 'skill.list'];
 
         const argsMap: Record<string, unknown> = {
           'skill.create': { skillName: 'new-skill', description: 'desc' },
@@ -576,6 +687,8 @@ describe('SkillCreatorMcpServer', () => {
           'skill.optimize': { skillName: 'test-skill', chipName: 'gpt-4' },
           'skill.package': { skillName: 'test-skill', version: '1.0.0' },
           'skill.benchmark': { skillName: 'test-skill', chips: ['gpt-4'] },
+          'skill.status': { skillName: 'test-skill' },
+          'skill.list': {},
         };
 
         for (const tool of tools) {
@@ -606,6 +719,6 @@ describe('createSkillCreatorMcpServer', () => {
 
   it('returned server has working listTools', () => {
     const server = createSkillCreatorMcpServer();
-    expect(server.listTools()).toHaveLength(8);
+    expect(server.listTools()).toHaveLength(10);
   });
 });
