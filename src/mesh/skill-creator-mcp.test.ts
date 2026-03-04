@@ -1331,4 +1331,232 @@ describe('SkillCreatorDeps-based handlers', () => {
       expect(result.isError).toBe(true);
     });
   });
+
+  // -------------------------------------------------------------------------
+  // skill.status via deps (Task 1 — Plan 56-04)
+  // -------------------------------------------------------------------------
+  describe('skill.status with SkillCreatorDeps', () => {
+    it('returns JSON with name and status fields from lifecycleResolver.resolve', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('tested'),
+          listAll: vi.fn().mockResolvedValue([]),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.status', {
+        skillName: 'my-skill',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('name', 'my-skill');
+      expect(data).toHaveProperty('status', 'tested');
+    });
+
+    it('calls lifecycleResolver.resolve with the skillName', async () => {
+      const deps = makeDeps();
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.status', { skillName: 'target-skill' });
+
+      expect((deps.lifecycleResolver as any).resolve).toHaveBeenCalledWith('target-skill');
+    });
+
+    it('returns isError:true for nonexistent skill (lifecycleResolver.resolve throws)', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockRejectedValue(new Error('Skill not found: ghost-skill')),
+          listAll: vi.fn().mockResolvedValue([]),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.status', {
+        skillName: 'ghost-skill',
+      });
+
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('ghost-skill');
+    });
+
+    it('returns all known lifecycle states without error', async () => {
+      const states: Array<'draft' | 'tested' | 'graded' | 'optimized' | 'packaged'> = [
+        'draft', 'tested', 'graded', 'optimized', 'packaged',
+      ];
+      for (const state of states) {
+        const deps = makeDeps({
+          lifecycleResolver: {
+            resolve: vi.fn().mockResolvedValue(state),
+            listAll: vi.fn().mockResolvedValue([]),
+          } as any,
+        });
+        const server = createSkillCreatorMcpServerFromDeps(deps);
+        const result = await server.handleToolCall('skill.status', { skillName: 'skill-x' });
+        expect(result.isError).toBeUndefined();
+        const data = JSON.parse(result.content[0].text);
+        expect(data.status).toBe(state);
+      }
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // skill.list via deps (Task 1 — Plan 56-04)
+  // -------------------------------------------------------------------------
+  describe('skill.list with SkillCreatorDeps', () => {
+    it('returns JSON with skills array and count from lifecycleResolver.listAll', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'skill-a', status: 'draft' },
+            { name: 'skill-b', status: 'tested' },
+          ]),
+        } as any,
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.list', {});
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data).toHaveProperty('skills');
+      expect(data).toHaveProperty('count', 2);
+      expect(Array.isArray(data.skills)).toBe(true);
+      expect(data.skills).toHaveLength(2);
+    });
+
+    it('each skill entry has name, status, testedModels, and lastModified fields', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'skill-a', status: 'tested' },
+          ]),
+        } as any,
+        resultStore: {
+          list: vi.fn().mockResolvedValue([
+            { chipName: 'gpt-4', runAt: '2026-03-04T00:00:00Z' },
+            { chipName: 'gpt-4', runAt: '2026-03-04T01:00:00Z' },
+            { chipName: 'claude-3', runAt: '2026-03-04T02:00:00Z' },
+          ]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.list', {});
+
+      const data = JSON.parse(result.content[0].text);
+      const skill = data.skills[0];
+      expect(skill).toHaveProperty('name', 'skill-a');
+      expect(skill).toHaveProperty('status', 'tested');
+      expect(skill).toHaveProperty('testedModels');
+      expect(skill).toHaveProperty('lastModified');
+      // 2 unique chip names (gpt-4 and claude-3)
+      expect(skill.testedModels).toBe(2);
+    });
+
+    it('filter returns only skills whose name contains the filter string', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'auth-skill', status: 'draft' },
+            { name: 'search-skill', status: 'tested' },
+            { name: 'auth-validator', status: 'graded' },
+          ]),
+        } as any,
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.list', { filter: 'auth' });
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.count).toBe(2);
+      expect(data.skills.every((s: { name: string }) => s.name.includes('auth'))).toBe(true);
+    });
+
+    it('calls lifecycleResolver.listAll', async () => {
+      const deps = makeDeps({
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.list', {});
+
+      expect((deps.lifecycleResolver as any).listAll).toHaveBeenCalled();
+    });
+
+    it('calls resultStore.list for each skill to get testedModels and lastModified', async () => {
+      const listMock = vi.fn().mockResolvedValue([]);
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'skill-one', status: 'draft' },
+            { name: 'skill-two', status: 'tested' },
+          ]),
+        } as any,
+        resultStore: {
+          list: listMock,
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      await server.handleToolCall('skill.list', {});
+
+      expect(listMock).toHaveBeenCalledWith('skill-one');
+      expect(listMock).toHaveBeenCalledWith('skill-two');
+    });
+
+    it('returns lastModified from last result runAt when results exist', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'skill-a', status: 'tested' },
+          ]),
+        } as any,
+        resultStore: {
+          list: vi.fn().mockResolvedValue([
+            { chipName: 'gpt-4', runAt: '2026-03-01T00:00:00Z' },
+            { chipName: 'gpt-4', runAt: '2026-03-04T12:00:00Z' },
+          ]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.list', {});
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skills[0].lastModified).toBe('2026-03-04T12:00:00Z');
+    });
+
+    it('returns testedModels=0 and lastModified=undefined when no results exist', async () => {
+      const deps = makeDeps({
+        lifecycleResolver: {
+          resolve: vi.fn().mockResolvedValue('draft'),
+          listAll: vi.fn().mockResolvedValue([
+            { name: 'fresh-skill', status: 'draft' },
+          ]),
+        } as any,
+        resultStore: {
+          list: vi.fn().mockResolvedValue([]),
+          getLatest: vi.fn().mockResolvedValue(null),
+        } as any,
+      });
+      const server = createSkillCreatorMcpServerFromDeps(deps);
+      const result = await server.handleToolCall('skill.list', {});
+
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skills[0].testedModels).toBe(0);
+      expect(data.skills[0].lastModified).toBeUndefined();
+    });
+  });
 });
