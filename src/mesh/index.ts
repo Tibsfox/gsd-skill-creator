@@ -11,6 +11,7 @@
  * - Wave planner and multi-model optimizer (Phase 53, Plan 03)
  * - Context types, transcript summarizer, and result ingestion (Phase 54, Plan 01)
  * - Mesh worktree manager and proxy committer (Phase 54, Plan 02)
+ * - Skill manifest and packager (Phase 54, Plan 03)
  */
 
 // Types and schemas
@@ -203,3 +204,23 @@ export {
 } from './proxy-committer.js';
 
 export type { ProxyCommitResult, Artifact } from './proxy-committer.js';
+
+// Skill manifest (Phase 54, Plan 03)
+export {
+  TestedModelSchema,
+  MeshHintsSchema,
+  SkillManifestSchema,
+  buildSkillManifest,
+} from './skill-manifest.js';
+
+export type { TestedModel, MeshHints, SkillManifest } from './skill-manifest.js';
+
+// Skill packager (Phase 54, Plan 03)
+export {
+  VariantEntrySchema,
+  BenchmarkEntrySchema,
+  SkillPackageSchema,
+  packageSkill,
+} from './skill-packager.js';
+
+export type { VariantEntry, BenchmarkEntry, SkillPackage } from './skill-packager.js';
