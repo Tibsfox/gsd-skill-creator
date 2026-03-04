@@ -1,9 +1,74 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { mkdtemp, rm, readFile, stat } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import {
   SkillCreatorMcpServer,
   SKILL_CREATOR_TOOLS,
   createSkillCreatorMcpServer,
 } from './skill-creator-mcp.js';
+import type { SkillCreatorMcpConfig, McpEvalResult } from './skill-creator-mcp.js';
+
+// ============================================================================
+// Mock helpers
+// ============================================================================
+
+function mockChipRegistry(chips: string[] = ['gpt-4']) {
+  return {
+    get: (name: string) => (chips.includes(name) ? { name } : undefined),
+    list: () => chips,
+    isConfigured: () => true,
+  } as any;
+}
+
+function mockEvalResult(overrides?: Partial<McpEvalResult>): McpEvalResult {
+  return {
+    metrics: {
+      accuracy: 85,
+      total: 10,
+      passed: 8,
+      failed: 2,
+      f1Score: 0.88,
+      precision: 0.9,
+      recall: 0.85,
+    },
+    results: [
+      { testId: 't1', passed: true, explanation: 'Correct', prompt: 'test prompt', expected: 'positive' },
+      { testId: 't2', passed: false, explanation: 'Off-topic', prompt: 'bad prompt', expected: 'positive' },
+    ],
+    hints: ['Consider improving domain coverage'],
+    duration: 1200,
+    ...overrides,
+  };
+}
+
+function mockEvalRunner(result?: McpEvalResult) {
+  return {
+    runForSkill: async () => result ?? mockEvalResult(),
+  };
+}
+
+function mockGrader() {
+  return {
+    buildCapabilityProfile: async (chipName: string) => ({
+      model: chipName,
+      tier: 'cloud' as const,
+      maxContextLength: 200000,
+      supportsTools: true,
+    }),
+    generateModelHints: () => ['Focus on prompt specificity'],
+  };
+}
+
+function mockBenchmarkRunner() {
+  return {
+    benchmarkSkill: async (name: string, chips: string[]) => ({
+      skillName: name,
+      models: chips.map((c) => ({ model: c, passRate: 0.8, avgAccuracy: 80, avgF1: 0.85 })),
+      runs: chips.map((c) => ({ model: c, passed: true, metrics: { accuracy: 80 } })),
+    }),
+  };
+}
 
 // ============================================================================
 // SKILL_CREATOR_TOOLS
@@ -38,7 +103,7 @@ describe('SKILL_CREATOR_TOOLS', () => {
 });
 
 // ============================================================================
-// SkillCreatorMcpServer
+// SkillCreatorMcpServer — schema validation
 // ============================================================================
 
 describe('SkillCreatorMcpServer', () => {
@@ -49,179 +114,477 @@ describe('SkillCreatorMcpServer', () => {
     });
   });
 
-  describe('handleToolCall', () => {
-    it('dispatches skill.create correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.create', {
-        skillName: 'test-skill',
-        description: 'A test skill',
-      });
-      expect(result.content).toHaveLength(1);
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.eval correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.eval', {
-        skillName: 'test-skill',
-        chipName: 'gpt-4',
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-      expect(result.content[0].text).toContain('gpt-4');
-    });
-
-    it('dispatches skill.grade correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.grade', {
-        skillName: 'test-skill',
-        chipName: 'gpt-4',
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.compare correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.compare', {
-        skillName: 'test-skill',
-        chips: ['gpt-4', 'llama-7b'],
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.analyze correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.analyze', {
-        skillName: 'test-skill',
-        chipName: 'gpt-4',
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.optimize correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.optimize', {
-        skillName: 'test-skill',
-        chipName: 'gpt-4',
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.package correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.package', {
-        skillName: 'test-skill',
-        version: '1.0.0',
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
-    it('dispatches skill.benchmark correctly', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.benchmark', {
-        skillName: 'test-skill',
-        chips: ['gpt-4', 'llama-7b'],
-      });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
-    });
-
+  describe('handleToolCall — validation', () => {
     it('returns error content for unknown tool', async () => {
       const server = new SkillCreatorMcpServer();
       const result = await server.handleToolCall('skill.nonexistent', {});
-      expect(result.content[0].type).toBe('text');
       expect(result.content[0].text).toContain('Unknown tool');
-      expect(result.content[0].text).toContain('skill.nonexistent');
+      expect(result.isError).toBe(true);
     });
 
     it('validates args against inputSchema and returns error for invalid args', async () => {
       const server = new SkillCreatorMcpServer();
-      // skill.create requires skillName and description (both strings)
       const result = await server.handleToolCall('skill.create', {
-        skillName: 123, // should be string
+        skillName: 123,
       });
-      expect(result.content[0].type).toBe('text');
       expect(result.content[0].text.toLowerCase()).toContain('validation');
     });
 
     it('response format matches MCP { content: [{ type, text }] }', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.create', {
-        skillName: 'test',
-        description: 'test desc',
-      });
-      expect(result).toHaveProperty('content');
-      expect(Array.isArray(result.content)).toBe(true);
-      expect(result.content[0]).toHaveProperty('type');
-      expect(result.content[0]).toHaveProperty('text');
-      expect(typeof result.content[0].text).toBe('string');
+      let skillsDir: string;
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-fmt-'));
+      try {
+        const server = new SkillCreatorMcpServer({ skillsDir });
+        const result = await server.handleToolCall('skill.create', {
+          skillName: 'test',
+          description: 'test desc',
+        });
+        expect(result).toHaveProperty('content');
+        expect(Array.isArray(result.content)).toBe(true);
+        expect(result.content[0]).toHaveProperty('type');
+        expect(result.content[0]).toHaveProperty('text');
+        expect(typeof result.content[0].text).toBe('string');
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
+    });
+  });
+
+  // ==========================================================================
+  // skill.create — wired handler
+  // ==========================================================================
+
+  describe('skill.create', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-create-'));
     });
 
-    it('skill.create accepts optional template parameter', async () => {
-      const server = new SkillCreatorMcpServer();
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('creates skill directory with SKILL.md, test-cases.json, manifest', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.create', {
+        skillName: 'my-skill',
+        description: 'A test skill',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.created).toBe(true);
+      expect(data.files).toContain('SKILL.md');
+      expect(data.files).toContain('test-cases.json');
+      expect(data.files).toContain('skill-manifest.json');
+
+      // Verify files exist on disk
+      await expect(stat(join(skillsDir, 'my-skill', 'SKILL.md'))).resolves.toBeTruthy();
+      await expect(stat(join(skillsDir, 'my-skill', 'test-cases.json'))).resolves.toBeTruthy();
+      await expect(stat(join(skillsDir, 'my-skill', 'skill-manifest.json'))).resolves.toBeTruthy();
+    });
+
+    it('returns JSON result, not "Would" string', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir });
       const result = await server.handleToolCall('skill.create', {
         skillName: 'test-skill',
         description: 'A test skill',
-        template: 'basic',
       });
-      expect(result.content[0].type).toBe('text');
-      expect(result.content[0].text).toContain('test-skill');
+      expect(result.content[0].text).not.toContain('Would');
+      expect(() => JSON.parse(result.content[0].text)).not.toThrow();
     });
 
-    it('skill.eval accepts optional testCases parameter', async () => {
-      const server = new SkillCreatorMcpServer();
+    it('initializes OperationTracker in draft state', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      await server.handleToolCall('skill.create', {
+        skillName: 'tracked-skill',
+        description: 'Track this',
+      });
+
+      const statusJson = await readFile(join(skillsDir, 'tracked-skill', '.skill-status.json'), 'utf-8');
+      const status = JSON.parse(statusJson);
+      expect(status.state).toBe('draft');
+    });
+  });
+
+  // ==========================================================================
+  // skill.eval — wired handler
+  // ==========================================================================
+
+  describe('skill.eval', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-eval-'));
+    });
+
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns structured scores from eval runner', async () => {
+      const config: SkillCreatorMcpConfig = {
+        skillsDir,
+        chipRegistry: mockChipRegistry(),
+        evalRunner: mockEvalRunner(),
+      };
+      const server = new SkillCreatorMcpServer(config);
+
+      // Create skill dir so tracker can save
+      const { mkdirSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
+
       const result = await server.handleToolCall('skill.eval', {
         skillName: 'test-skill',
         chipName: 'gpt-4',
-        testCases: 10,
       });
-      expect(result.content[0].type).toBe('text');
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skillName).toBe('test-skill');
+      expect(data.chipName).toBe('gpt-4');
+      expect(data.metrics.accuracy).toBe(85);
+      expect(data.testCount).toBe(2);
     });
 
-    it('skill.grade accepts optional graderChip parameter', async () => {
-      const server = new SkillCreatorMcpServer();
+    it('returns isError:true for invalid chipName', async () => {
+      const config: SkillCreatorMcpConfig = {
+        skillsDir,
+        chipRegistry: mockChipRegistry(['gpt-4']),
+        evalRunner: mockEvalRunner(),
+      };
+      const server = new SkillCreatorMcpServer(config);
+      const result = await server.handleToolCall('skill.eval', {
+        skillName: 'test-skill',
+        chipName: 'nonexistent-chip',
+      });
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('Chip not found');
+    });
+
+    it('returns isError:true when no chip registry configured', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir });
+      const result = await server.handleToolCall('skill.eval', {
+        skillName: 'test-skill',
+        chipName: 'gpt-4',
+      });
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('registry');
+    });
+  });
+
+  // ==========================================================================
+  // skill.grade — wired handler
+  // ==========================================================================
+
+  describe('skill.grade', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-grade-'));
+    });
+
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns per-test grades from grader', async () => {
+      const config: SkillCreatorMcpConfig = {
+        skillsDir,
+        chipRegistry: mockChipRegistry(),
+        grader: mockGrader(),
+      };
+      const server = new SkillCreatorMcpServer(config);
+
+      // Create skill dir for tracker
+      const { mkdirSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
+
       const result = await server.handleToolCall('skill.grade', {
         skillName: 'test-skill',
         chipName: 'gpt-4',
-        graderChip: 'claude-3-opus',
       });
-      expect(result.content[0].type).toBe('text');
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.skillName).toBe('test-skill');
+      expect(data.chipName).toBe('gpt-4');
+      expect(data.profile.tier).toBe('cloud');
+      expect(data.hints).toContain('Focus on prompt specificity');
     });
 
-    it('skill.optimize accepts optional targetPassRate parameter', async () => {
-      const server = new SkillCreatorMcpServer();
+    it('returns isError:true when no grader configured', async () => {
+      const server = new SkillCreatorMcpServer({ skillsDir, chipRegistry: mockChipRegistry() });
+      const result = await server.handleToolCall('skill.grade', {
+        skillName: 'test-skill',
+        chipName: 'gpt-4',
+      });
+      expect(result.isError).toBe(true);
+    });
+  });
+
+  // ==========================================================================
+  // skill.compare — wired handler
+  // ==========================================================================
+
+  describe('skill.compare', () => {
+    it('returns comparison matrix across chips', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-compare-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          chipRegistry: mockChipRegistry(['gpt-4', 'llama-7b']),
+          evalRunner: mockEvalRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+        const result = await server.handleToolCall('skill.compare', {
+          skillName: 'test-skill',
+          chips: ['gpt-4', 'llama-7b'],
+        });
+
+        expect(result.isError).toBeUndefined();
+        const data = JSON.parse(result.content[0].text);
+        expect(data.comparison).toHaveLength(2);
+        expect(data.comparison[0].chipName).toBe('gpt-4');
+        expect(data.comparison[1].chipName).toBe('llama-7b');
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
+    });
+
+    it('returns zero metrics for unknown chips in comparison', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-compare2-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          chipRegistry: mockChipRegistry(['gpt-4']),
+          evalRunner: mockEvalRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+        const result = await server.handleToolCall('skill.compare', {
+          skillName: 'test-skill',
+          chips: ['gpt-4', 'unknown-chip'],
+        });
+
+        const data = JSON.parse(result.content[0].text);
+        expect(data.comparison[1].metrics.accuracy).toBe(0);
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
+    });
+  });
+
+  // ==========================================================================
+  // skill.analyze — wired handler
+  // ==========================================================================
+
+  describe('skill.analyze', () => {
+    it('returns categorized failure patterns', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-analyze-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          chipRegistry: mockChipRegistry(),
+          evalRunner: mockEvalRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+        const result = await server.handleToolCall('skill.analyze', {
+          skillName: 'test-skill',
+          chipName: 'gpt-4',
+        });
+
+        expect(result.isError).toBeUndefined();
+        const data = JSON.parse(result.content[0].text);
+        expect(data.totalTests).toBe(2);
+        expect(data.failedTests).toBe(1);
+        expect(data.patterns).toHaveProperty('false-negative');
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
+    });
+  });
+
+  // ==========================================================================
+  // skill.optimize — wired handler
+  // ==========================================================================
+
+  describe('skill.optimize', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-optimize-'));
+    });
+
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns prompt modification suggestions', async () => {
+      const { mkdirSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
+
+      const config: SkillCreatorMcpConfig = {
+        skillsDir,
+        chipRegistry: mockChipRegistry(),
+        evalRunner: mockEvalRunner(),
+      };
+      const server = new SkillCreatorMcpServer(config);
       const result = await server.handleToolCall('skill.optimize', {
         skillName: 'test-skill',
         chipName: 'gpt-4',
-        targetPassRate: 0.9,
+        targetPassRate: 0.95,
       });
-      expect(result.content[0].type).toBe('text');
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.suggestions.length).toBeGreaterThan(0);
+      expect(data.targetPassRate).toBe(0.95);
+    });
+  });
+
+  // ==========================================================================
+  // skill.package — wired handler
+  // ==========================================================================
+
+  describe('skill.package', () => {
+    let skillsDir: string;
+
+    beforeEach(async () => {
+      skillsDir = await mkdtemp(join(tmpdir(), 'mcp-package-'));
     });
 
-    it('skill.package accepts optional description parameter', async () => {
-      const server = new SkillCreatorMcpServer();
+    afterEach(async () => {
+      await rm(skillsDir, { recursive: true, force: true });
+    });
+
+    it('returns bundle info with manifest', async () => {
+      const { mkdirSync } = await import('node:fs');
+      mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
+
+      const server = new SkillCreatorMcpServer({ skillsDir });
       const result = await server.handleToolCall('skill.package', {
         skillName: 'test-skill',
-        version: '2.0.0',
-        description: 'Updated skill',
+        version: '1.0.0',
       });
-      expect(result.content[0].type).toBe('text');
+
+      expect(result.isError).toBeUndefined();
+      const data = JSON.parse(result.content[0].text);
+      expect(data.version).toBe('1.0.0');
+      expect(data.manifest.name).toBe('test-skill');
+    });
+  });
+
+  // ==========================================================================
+  // skill.benchmark — wired handler
+  // ==========================================================================
+
+  describe('skill.benchmark', () => {
+    it('returns mean/p50/p95 stats with benchmark runner', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-bench-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          benchmarkRunner: mockBenchmarkRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+        const result = await server.handleToolCall('skill.benchmark', {
+          skillName: 'test-skill',
+          chips: ['gpt-4'],
+        });
+
+        expect(result.isError).toBeUndefined();
+        const data = JSON.parse(result.content[0].text);
+        expect(data.models[0].passRate).toBe(0.8);
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
     });
 
-    it('skill.benchmark accepts optional iterations parameter', async () => {
-      const server = new SkillCreatorMcpServer();
-      const result = await server.handleToolCall('skill.benchmark', {
-        skillName: 'test-skill',
-        chips: ['gpt-4'],
-        iterations: 5,
+    it('runs multi-iteration eval when no benchmark runner', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-bench2-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          chipRegistry: mockChipRegistry(),
+          evalRunner: mockEvalRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+        const result = await server.handleToolCall('skill.benchmark', {
+          skillName: 'test-skill',
+          chips: ['gpt-4'],
+          iterations: 3,
+        });
+
+        expect(result.isError).toBeUndefined();
+        const data = JSON.parse(result.content[0].text);
+        expect(data.chips[0].iterations).toBe(3);
+        expect(data.chips[0].mean).toBe(85);
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
+    });
+  });
+
+  // ==========================================================================
+  // Error handling — all handlers catch and return isError
+  // ==========================================================================
+
+  describe('error handling', () => {
+    it('catches exceptions in handlers and returns isError:true', async () => {
+      const config: SkillCreatorMcpConfig = {
+        skillsDir: '/nonexistent/path/that/will/fail',
+        chipRegistry: mockChipRegistry(),
+        evalRunner: {
+          runForSkill: async () => { throw new Error('eval exploded'); },
+        },
+      };
+      const server = new SkillCreatorMcpServer(config);
+      const result = await server.handleToolCall('skill.eval', {
+        skillName: 'test',
+        chipName: 'gpt-4',
       });
-      expect(result.content[0].type).toBe('text');
+      expect(result.isError).toBe(true);
+      expect(result.content[0].text).toContain('eval exploded');
+    });
+
+    it('no handler returns "Would" string text', async () => {
+      const skillsDir = await mkdtemp(join(tmpdir(), 'mcp-nowould-'));
+      try {
+        const config: SkillCreatorMcpConfig = {
+          skillsDir,
+          chipRegistry: mockChipRegistry(['gpt-4', 'llama-7b']),
+          evalRunner: mockEvalRunner(),
+          grader: mockGrader(),
+          benchmarkRunner: mockBenchmarkRunner(),
+        };
+        const server = new SkillCreatorMcpServer(config);
+
+        // Create skill dir
+        const { mkdirSync } = await import('node:fs');
+        mkdirSync(join(skillsDir, 'test-skill'), { recursive: true });
+
+        const tools = ['skill.create', 'skill.eval', 'skill.grade', 'skill.compare',
+          'skill.analyze', 'skill.optimize', 'skill.package', 'skill.benchmark'];
+
+        const argsMap: Record<string, unknown> = {
+          'skill.create': { skillName: 'new-skill', description: 'desc' },
+          'skill.eval': { skillName: 'test-skill', chipName: 'gpt-4' },
+          'skill.grade': { skillName: 'test-skill', chipName: 'gpt-4' },
+          'skill.compare': { skillName: 'test-skill', chips: ['gpt-4'] },
+          'skill.analyze': { skillName: 'test-skill', chipName: 'gpt-4' },
+          'skill.optimize': { skillName: 'test-skill', chipName: 'gpt-4' },
+          'skill.package': { skillName: 'test-skill', version: '1.0.0' },
+          'skill.benchmark': { skillName: 'test-skill', chips: ['gpt-4'] },
+        };
+
+        for (const tool of tools) {
+          const result = await server.handleToolCall(tool, argsMap[tool]);
+          expect(result.content[0].text).not.toContain('Would');
+        }
+      } finally {
+        await rm(skillsDir, { recursive: true, force: true });
+      }
     });
   });
 });
@@ -236,17 +599,13 @@ describe('createSkillCreatorMcpServer', () => {
     expect(server).toBeInstanceOf(SkillCreatorMcpServer);
   });
 
+  it('accepts config parameter', () => {
+    const server = createSkillCreatorMcpServer({ skillsDir: '/tmp/test' });
+    expect(server).toBeInstanceOf(SkillCreatorMcpServer);
+  });
+
   it('returned server has working listTools', () => {
     const server = createSkillCreatorMcpServer();
     expect(server.listTools()).toHaveLength(8);
-  });
-
-  it('returned server has working handleToolCall', async () => {
-    const server = createSkillCreatorMcpServer();
-    const result = await server.handleToolCall('skill.create', {
-      skillName: 'factory-test',
-      description: 'From factory',
-    });
-    expect(result.content[0].text).toContain('factory-test');
   });
 });
