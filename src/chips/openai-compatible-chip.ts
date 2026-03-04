@@ -5,8 +5,7 @@
  * Compatible with any OpenAI-compatible endpoint: Ollama, vLLM, LM Studio,
  * local llama.cpp servers, etc.
  *
- * Uses native fetch (Node 18+). No axios or other HTTP dependencies.
- * All network errors are caught and converted to structured responses.
+ * Uses HttpClient for all HTTP operations — retry, timeout, streaming, error classification.
  */
 
 import type {
@@ -23,6 +22,9 @@ import {
   DEFAULT_MAX_TOKENS,
   DEFAULT_TEMPERATURE,
 } from './types.js';
+import { HttpClient } from './http-client.js';
+import { OllamaDiscovery } from './ollama-discovery.js';
+import type { DiscoveryResult } from './ollama-discovery.js';
 
 // ============================================================================
 // OpenAI API response shapes (internal -- not exported)
@@ -62,6 +64,8 @@ export class OpenAICompatibleChip implements ModelChip {
   private readonly baseUrl: string;
   private readonly apiKey?: string;
   private readonly defaultModel: string;
+  private readonly httpClient: HttpClient;
+  private readonly healthClient: HttpClient;
 
   /**
    * Create an OpenAI-compatible chip.
@@ -80,55 +84,73 @@ export class OpenAICompatibleChip implements ModelChip {
     this.baseUrl = config.baseUrl.replace(/\/$/, ''); // strip trailing slash
     this.apiKey = config.apiKey;
     this.defaultModel = config.defaultModel;
+
+    // Main client: retries on transient failures
+    this.httpClient = new HttpClient({
+      maxRetries: 3,
+      baseDelayMs: 500,
+      maxDelayMs: 8000,
+      timeoutMs: DEFAULT_TIMEOUT_MS,
+    });
+
+    // Health client: no retries for fast failure detection
+    this.healthClient = new HttpClient({
+      maxRetries: 0,
+      timeoutMs: DEFAULT_TIMEOUT_MS,
+    });
   }
 
   /**
    * Send a chat completion request to {baseUrl}/v1/chat/completions.
-   *
-   * @param messages - Conversation messages to send
-   * @param options - Optional overrides for model, temperature, maxTokens
-   * @returns Parsed ChatResponse
-   * @throws Error on HTTP error or unrecoverable network failure
+   * Supports optional streaming via options.stream.
    */
   async chat(messages: ChatMessage[], options?: ChatOptions): Promise<ChatResponse> {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
-
     const model = options?.model ?? this.defaultModel;
     const body = {
       model,
       messages,
       temperature: options?.temperature ?? DEFAULT_TEMPERATURE,
       max_tokens: options?.maxTokens ?? DEFAULT_MAX_TOKENS,
+      ...(options?.stream ? { stream: true } : {}),
     };
 
-    const headers: Record<string, string> = {
-      'content-type': 'application/json',
-    };
+    const headers: Record<string, string> = {};
     if (this.apiKey) {
       headers['authorization'] = `Bearer ${this.apiKey}`;
     }
 
-    let response: Response;
-    try {
-      response = await fetch(`${this.baseUrl}/v1/chat/completions`, {
-        method: 'POST',
+    // Streaming path
+    if (options?.stream) {
+      const result = await this.httpClient.stream(
+        `${this.baseUrl}/v1/chat/completions`,
+        body,
         headers,
-        body: JSON.stringify(body),
-        signal: controller.signal,
-      });
-    } finally {
-      clearTimeout(timeoutId);
+      );
+      if (!result.ok || !result.data) {
+        throw new Error(
+          `OpenAI-compatible chip '${this.name}' stream failed: ${result.error ?? 'unknown'}`,
+        );
+      }
+      return {
+        ...result.data,
+        model,
+      };
     }
 
-    if (!response.ok) {
-      const text = await response.text().catch(() => '');
+    // Standard path
+    const result = await this.httpClient.post<OpenAIChatCompletionResponse>(
+      `${this.baseUrl}/v1/chat/completions`,
+      body,
+      headers,
+    );
+
+    if (!result.ok || !result.data) {
       throw new Error(
-        `OpenAI-compatible chip '${this.name}' chat failed: HTTP ${response.status} - ${text}`,
+        `OpenAI-compatible chip '${this.name}' chat failed: ${result.error ?? `HTTP ${result.status}`}`,
       );
     }
 
-    const data = await response.json() as OpenAIChatCompletionResponse;
+    const data = result.data;
     return {
       content: data.choices[0].message.content,
       model: data.model,
@@ -141,79 +163,61 @@ export class OpenAICompatibleChip implements ModelChip {
 
   /**
    * Check endpoint health by GETting {baseUrl}/v1/models.
-   *
-   * @returns ChipHealth with availability, latency, and timestamp
+   * Uses no-retry client for fast failure detection.
    */
   async health(): Promise<ChipHealth> {
     const lastChecked = new Date().toISOString();
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
     const start = Date.now();
 
-    try {
-      const response = await fetch(`${this.baseUrl}/v1/models`, {
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
+    const result = await this.healthClient.get(`${this.baseUrl}/v1/models`);
+    const latencyMs = Date.now() - start;
 
-      const latencyMs = Date.now() - start;
-
-      if (!response.ok) {
-        return { available: false, latencyMs: null, lastChecked };
-      }
-
+    if (result.ok) {
       return { available: true, latencyMs, lastChecked };
-    } catch {
-      clearTimeout(timeoutId);
-      return { available: false, latencyMs: null, lastChecked };
     }
+
+    return { available: false, latencyMs: null, lastChecked };
   }
 
   /**
    * Query available models from {baseUrl}/v1/models.
-   *
-   * Falls back to single-model list using config.defaultModel if endpoint
-   * is unavailable or returns an error.
-   *
-   * @returns ChipCapabilities with model list and feature flags
    */
   async capabilities(): Promise<ChipCapabilities> {
     const fallback: ChipCapabilities = {
       models: [this.defaultModel],
       maxContextLength: DEFAULT_MAX_TOKENS,
-      supportsStreaming: false,
+      supportsStreaming: true,
       supportsTools: false,
     };
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+    const result = await this.healthClient.get<OpenAIModelsResponse>(
+      `${this.baseUrl}/v1/models`,
+    );
 
-    try {
-      const response = await fetch(`${this.baseUrl}/v1/models`, {
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        return fallback;
-      }
-
-      const data = await response.json() as OpenAIModelsResponse;
-      const models = data.data.map((m) => m.id);
-
-      // Derive max context from first model that reports it, default 4096
-      const maxContextLength =
-        data.data.find((m) => m.context_length != null)?.context_length ?? DEFAULT_MAX_TOKENS;
-
-      return {
-        models,
-        maxContextLength,
-        supportsStreaming: false,
-        supportsTools: false,
-      };
-    } catch {
-      clearTimeout(timeoutId);
+    if (!result.ok || !result.data) {
       return fallback;
     }
+
+    const data = result.data;
+    const models = data.data.map((m) => m.id);
+    const maxContextLength =
+      data.data.find((m) => m.context_length != null)?.context_length ?? DEFAULT_MAX_TOKENS;
+
+    return {
+      models,
+      maxContextLength,
+      supportsStreaming: true,
+      supportsTools: false,
+    };
+  }
+
+  /**
+   * Probe an endpoint and discover available models.
+   * Tries Ollama /api/tags first, falls back to /v1/models.
+   */
+  static async discover(baseUrl: string): Promise<DiscoveryResult> {
+    const httpClient = new HttpClient({ maxRetries: 0, timeoutMs: 5000 });
+    const discovery = new OllamaDiscovery(httpClient);
+    return discovery.discover(baseUrl);
   }
 }

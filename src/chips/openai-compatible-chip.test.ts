@@ -189,7 +189,7 @@ describe('OpenAICompatibleChip.health()', () => {
 
     const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('http://localhost:11434/v1/models');
-    expect(init?.method).toBeUndefined(); // Default GET
+    expect(init?.method).toMatch(/^GET$/i); // HttpClient sends explicit GET
   });
 });
 
@@ -223,7 +223,7 @@ describe('OpenAICompatibleChip.capabilities()', () => {
 
     expect(caps.models).toEqual(['llama3']); // config.defaultModel
     expect(caps.maxContextLength).toBe(4096);
-    expect(caps.supportsStreaming).toBe(false);
+    expect(caps.supportsStreaming).toBe(true);
     expect(caps.supportsTools).toBe(false);
   });
 
