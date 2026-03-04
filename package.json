@@ -1,6 +1,6 @@
 {
   "name": "dynamic-skill-creator",
-  "version": "1.49.15",
+  "version": "1.49.16",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -17,6 +17,7 @@
     "build": "tsc",
     "dev": "tsx src/cli.ts",
     "test": "vitest",
+    "test:integration": "vitest run --include '**/*.integration.test.ts'",
     "setup:claude": "skill-creator gsd-init",
     "setup:claude:force": "skill-creator gsd-init --force",
     "setup:claude:check": "skill-creator gsd-init --dry-run",

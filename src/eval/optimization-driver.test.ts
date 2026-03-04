@@ -197,7 +197,7 @@ describe('OptimizationDriver', () => {
     const { result } = createDriver(
       script,
       { chipA: 0.75, chipB: 0.75 },
-      { wallTimeoutMs: 1 }, // 1ms timeout — will expire immediately after first iteration
+      { wallTimeoutMs: 0 }, // 0ms timeout — triggers immediately on >= check
     );
     const r = await result;
 
