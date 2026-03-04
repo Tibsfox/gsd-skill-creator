@@ -57,3 +57,30 @@ export {
   VIEWER_PASS_RATE_GREEN_THRESHOLD,
   VIEWER_PASS_RATE_YELLOW_THRESHOLD,
 } from './eval-viewer.js';
+
+// Grading context schemas and calibrated hints (Phase 58)
+export {
+  CalibrationAdjustmentSchema,
+  ModelContextSchema,
+  GradingContextSchema,
+  CalibratedHintSchema,
+} from './model-aware-grader.js';
+
+export type {
+  CalibrationAdjustment,
+  ModelContext,
+  GradingContext,
+  CalibratedHint,
+} from './model-aware-grader.js';
+
+// Capability classifier (Phase 58, Plan 01)
+export { CapabilityClassifier, CapabilityClassSchema } from './capability-classifier.js';
+export type { CapabilityClass } from './capability-classifier.js';
+
+// Limitation registry (Phase 58, Plan 01)
+export { LimitationRegistry } from './limitation-registry.js';
+export type { LimitationMatchResult } from './limitation-registry.js';
+
+// Calibration store (Phase 58, Plan 03)
+export { CalibrationStore, CalibrationFileSchema } from './calibration-store.js';
+export type { CalibrationFile } from './calibration-store.js';
