@@ -321,6 +321,18 @@
         "target": ".claude/skills/quick-scan",
         "description": "Quick-scan skill (Layer 3 DSP error correction)",
         "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/context-memory",
+        "target": ".claude/skills/context-memory",
+        "description": "Context memory skill (task shaping and demand paging)",
+        "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/alignment-guide",
+        "target": ".claude/skills/alignment-guide",
+        "description": "Alignment guide skill (token-efficient format patterns)",
+        "files": ["SKILL.md"]
       }
     ],
     "hookScripts": [
@@ -343,6 +355,11 @@
         "source": "hooks/branch-guard.sh",
         "target": ".claude/hooks/branch-guard.sh",
         "description": "PreToolUse hook: branch safety warnings (Layer 1 DSP)"
+      },
+      {
+        "source": "hooks/context-pressure.sh",
+        "target": ".claude/hooks/context-pressure.sh",
+        "description": "PostToolUse hook: context pressure monitoring (warnings only)"
       }
     ],
     "claudeMd": {
