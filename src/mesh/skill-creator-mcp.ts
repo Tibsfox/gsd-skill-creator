@@ -979,6 +979,38 @@ class SkillCreatorDepsMcpServer extends SkillCreatorMcpServer {
         }
       }
 
+      case 'skill.status': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleStatus(parseResult.data as z.infer<typeof SkillStatusInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.list': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleList(parseResult.data as z.infer<typeof SkillListInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
       default:
         return super.handleToolCall(toolName, args);
     }
@@ -1157,6 +1189,39 @@ class SkillCreatorDepsMcpServer extends SkillCreatorMcpServer {
     }
     const stats = computeIterationStats(allRuns, args.chips);
     return mcpSuccess({ iterations, chips: stats });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.status
+  // --------------------------------------------------------------------------
+
+  private async depsHandleStatus(
+    args: z.infer<typeof SkillStatusInputSchema>,
+  ): Promise<McpToolResponse> {
+    const status = await this.d.lifecycleResolver.resolve(args.skillName);
+    return mcpSuccess({ name: args.skillName, status });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.list
+  // --------------------------------------------------------------------------
+
+  private async depsHandleList(
+    args: z.infer<typeof SkillListInputSchema>,
+  ): Promise<McpToolResponse> {
+    let skills = await this.d.lifecycleResolver.listAll();
+    if (args.filter) {
+      skills = skills.filter((s) => s.name.includes(args.filter!));
+    }
+    const enriched = await Promise.all(
+      skills.map(async (s) => {
+        const results = await this.d.resultStore.list(s.name) as Array<{ chipName?: string; runAt?: string }>;
+        const testedModels = new Set(results.map((r) => r.chipName).filter(Boolean)).size;
+        const lastModified = results.length > 0 ? results[results.length - 1].runAt : undefined;
+        return { ...s, testedModels, lastModified };
+      }),
+    );
+    return mcpSuccess({ skills: enriched, count: enriched.length });
   }
 }
 
