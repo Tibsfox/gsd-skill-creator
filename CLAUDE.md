@@ -5,9 +5,9 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 ## Tech Stack
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
-- **Build:** `npm run build` or `make build`
+- **Build:** `npm run build`
 - **Test:** `npm test` or `make test` (Vitest, 23,234+ tests)
-- **Lint:** `npm run lint` or `make lint`
+- **Lint:** `npm run lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
 
@@ -17,7 +17,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
 - `.claude/agents/` -- GSD executor, verifier, planner subagents
 - `.claude/commands/gsd/` -- GSD command definitions
-- `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
+- `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary, branch guard)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
 - `src/` -- TypeScript library and CLI (domain-grouped)
 - `src/core/` -- Core infrastructure (types, utils, fs, events, hooks, storage, validation, safety, security)
@@ -26,30 +26,30 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src/platform/` -- Platform services (calibration, console, dashboard, observation, retro, staging, terminal)
 - `src/services/` -- Agent orchestration (agents, brainstorm, chipset, detection, discovery, orchestrator, teams, workflows)
 - `src/integrations/` -- External integrations (amiga, aminet, cloud-ops, dacp, den, site, upstream)
-- `src/core/fs/xdg.ts` -- XDG Base Directory utility
 - `src-tauri/` -- Rust backend (Tauri)
-- `src-tauri/src/xdg.rs` -- Rust XDG utility
 - `desktop/` -- Vite webview frontend
+- `.college/` -- College Structure: Rosetta Core, panels, 42 departments, calibration
 - `docs/` -- 158+ markdown files, canonical documentation
-- `config/` -- Unified configuration (templates, crews, evaluation, profiles)
-- `data/` -- Static data (schemas, chipset definitions, citations, domain data)
-- `extra/` -- Linux system integration (man pages, completions, .desktop, systemd)
-- `packaging/` -- Distro packaging (debian/, rpm/)
-- `scripts/` -- Utility scripts (bootstrap, dashboard server, bin/)
 
-## src/ Module Layout
+## Error Correction (DSP 3-Layer System)
 
-71 module directories under `src/`, organized into 6 conceptual domain groups.
-Directories are flat under `src/` (e.g., `src/types/`, `src/cli/`).
+Three layers of inline error correction, inspired by digital signal processing:
 
-| Group | Count | Modules |
-|-------|-------|---------|
-| **core** | 20 | activation, application, calibration, components, composition, conflicts, engines, events, fs, holomorphic, hooks, identifiers, initialization, knowledge, plane, roles, staging, storage, types, utils |
-| **packs** | 12 | amiga, aminet, brainstorm, bundles, chipset, citations, den, dogfood, electronics-pack, retro, simulation, vtm |
-| **tools** | 12 | agents, capabilities, catalog, discovery, embeddings, evaluator, learn, learning, observation, skill-workflows, validation, workflows |
-| **platform** | 8 | cli, commands, console, dashboard, launcher, site, styles, terminal |
-| **services** | 15 | agc, cloud-ops, dacp, detection, disclosure, integration, interpreter, mcp, orchestrator, portability, retrieval, safety, security, services, upstream |
-| **integrations** | 4 | git, teams, test, testing |
+- **Layer 1: Deterministic hooks** (zero-token) -- `validate-commit.sh` blocks sensitive files in commits; `branch-guard.sh` warns on branch safety violations
+- **Layer 2: Checkpoint assertions** -- `.claude/skills/checkpoint-assertions/` auto-activates during GSD phases, provides pre-commit/post-phase/pre-push checklists
+- **Layer 3: Quick-scan** -- `.claude/skills/quick-scan/` auto-activates after commits, 5-point CRC checklist (scope/magnitude/intent/tests/forbidden)
+
+See `project-claude/specs/shift-register-format.md` for the chain history format spec.
+
+## Context Memory (OS Memory Layer)
+
+Treats the context window like system RAM with a 6-tier memory hierarchy (L0-L5):
+
+- **context-memory skill** -- `.claude/skills/context-memory/` task shaping, demand paging, storyline attachment, GC checklist
+- **alignment-guide skill** -- `.claude/skills/alignment-guide/` token-efficient format patterns (tables > prose)
+- **context-pressure hook** -- `.claude/hooks/context-pressure.sh` PostToolUse monitoring (warnings only, never blocks)
+
+See `docs/context-memory/memory-hierarchy.md` for the full 6-tier hierarchy spec.
 
 ## Commit Convention
 
@@ -63,12 +63,12 @@ Directories are flat under `src/` (e.g., `src/types/`, `src/cli/`).
 
 - Check project state: read `.planning/STATE.md` and `.planning/ROADMAP.md`
 - Install project-claude files: `node project-claude/install.cjs`
-- Run full verification: `make verify`
 - GSD skills and hooks handle workflow guidance automatically
 - Strict boundary: `src/` never imports `desktop/@tauri-apps/api`; `desktop/` never imports Node.js modules
 
 ## Important Notes
 
+- **NEVER commit or push .planning/ files** -- they are local-only. A PreToolUse hook blocks this, but do not attempt it. Do not `git add .planning/`, do not include .planning paths in commits.
 - This is a self-modifying system -- the security-hygiene skill handles safety
-- `.planning/patterns/` should be in `.gitignore`
+- `.planning/` is in `.gitignore` -- respect it
 - Skills load automatically based on context -- no explicit invocation needed
