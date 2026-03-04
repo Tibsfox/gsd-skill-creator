@@ -105,6 +105,20 @@ export const ChipHealthSchema = z.object({
 export type ChipHealth = z.infer<typeof ChipHealthSchema>;
 
 // ============================================================================
+// ErrorCategory
+// ============================================================================
+
+/**
+ * Classification of HTTP/network errors returned by HttpClient.
+ *
+ * - network: Connection refused, DNS failure, or other transport errors
+ * - timeout: Request exceeded configured timeoutMs (AbortError)
+ * - model: 4xx client errors (bad request, not found, auth)
+ * - rate-limit: 429 Too Many Requests
+ */
+export type ErrorCategory = 'network' | 'timeout' | 'model' | 'rate-limit';
+
+// ============================================================================
 // ChatOptions
 // ============================================================================
 
@@ -118,6 +132,8 @@ export const ChatOptionsSchema = z.object({
   temperature: z.number().min(0).max(2).optional(),
   /** Maximum tokens to generate */
   maxTokens: z.number().int().positive().optional(),
+  /** Whether to use SSE streaming for this request */
+  stream: z.boolean().optional(),
 });
 
 /** TypeScript type for chat options */
