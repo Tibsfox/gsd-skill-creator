@@ -512,10 +512,16 @@ function installGitHook() {
     return;
   }
 
-  // Check for .git directory
+  // Check for .git directory (not a file — worktrees have .git as a file)
   const gitDir = path.join(projectRoot, '.git');
   if (!fs.existsSync(gitDir)) {
     warn('Not a git repository (.git/ not found)');
+    return;
+  }
+  const gitStat = fs.statSync(gitDir);
+  if (!gitStat.isDirectory()) {
+    log('  ~ skipped:   .git/hooks/post-commit (git worktree — hooks managed by main worktree)');
+    stats.current++;
     return;
   }
 
@@ -630,14 +636,21 @@ function validateInstallation() {
     missing++;
   }
 
-  // Check git hook
-  const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
-  if (fs.existsSync(hookPath)) {
-    log('  ✓ post-commit hook');
+  // Check git hook (skip if .git is a file — worktree case)
+  const gitDirForCheck = path.join(projectRoot, '.git');
+  const isWorktree = fs.existsSync(gitDirForCheck) && fs.statSync(gitDirForCheck).isFile();
+  if (isWorktree) {
+    log('  ~ skipped:   post-commit hook (git worktree — hooks in main worktree)');
     ok++;
   } else {
-    log('  ✗ post-commit hook — missing: .git/hooks/post-commit');
-    missing++;
+    const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+    if (fs.existsSync(hookPath)) {
+      log('  ✓ post-commit hook');
+      ok++;
+    } else {
+      log('  ✗ post-commit hook — missing: .git/hooks/post-commit');
+      missing++;
+    }
   }
 
   // Check .gitignore
