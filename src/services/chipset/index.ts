@@ -39,3 +39,16 @@ export type {
   MuseActivation,
   CartesianPosition,
 } from './muse-plane-types.js';
+
+// Muse loader and registry
+export { MuseLoader } from './muse-loader.js';
+export type { LoadedMuse, MuseRegistry } from './muse-loader.js';
+
+// Muse visibility
+export { VisibilityEngine } from './muse-visibility-engine.js';
+export type {
+  VisibilityLevel,
+  VisibilityRule,
+  VisibilityContext,
+  VisibilityDecision,
+} from './muse-visibility.js';
