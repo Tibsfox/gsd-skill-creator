@@ -23,14 +23,14 @@ import type { SkillScope } from '../types/scope.js';
 
 /**
  * Full dependency set for SkillCreatorMcpServer.
- * Used by createSkillCreatorMcpServer() factory and for testing with mock deps.
+ * Used by createSkillCreatorMcpServerFromDeps() factory and for testing with mock deps.
  */
 export interface SkillCreatorDeps {
   /** Chip registry for resolving model chips */
   registry: ChipRegistry;
   /** Chip test runner for running skill evaluations */
   chipTestRunner: {
-    runForSkill(name: string, opts?: { chip?: string; graderChip?: string }): Promise<McpEvalResult>;
+    runForSkill(name: string, opts?: { chip?: string; graderChip?: string; storeResults?: boolean }): Promise<ChipTestRunResult>;
   };
   /** Model-aware grader */
   grader: {
@@ -41,13 +41,15 @@ export interface SkillCreatorDeps {
   benchmarkRunner: {
     benchmarkSkill(name: string, chips: string[], grader?: string): Promise<McpBenchmarkResult>;
   };
-  /** Skill store for filesystem operations */
+  /** Skill store for filesystem and lifecycle operations */
   skillStore: {
+    create(skillName: string, metadata: { name: string; description: string }, body: string): Promise<{ path: string }>;
     list(): Promise<string[]>;
     exists(skillName: string): Promise<boolean>;
   };
   /** Test store for test case management */
   testStore: {
+    add(skillName: string, input: { prompt: string; expected: string; description?: string }): Promise<unknown>;
     list(skillName: string): Promise<unknown[]>;
   };
   /** Result store for historical run data */
@@ -60,7 +62,7 @@ export interface SkillCreatorDeps {
   scope: SkillScope;
 }
 
-/** Eval run result shape */
+/** Eval run result shape (used by config-based evalRunner) */
 export interface McpEvalResult {
   metrics: {
     accuracy: number;
@@ -80,6 +82,32 @@ export interface McpEvalResult {
   }>;
   hints: string[];
   duration: number;
+}
+
+/** ChipTestRunner result shape (used by deps-based chipTestRunner) */
+export interface ChipTestRunResult {
+  metrics: {
+    accuracy: number;
+    total: number;
+    passed: number;
+    failed: number;
+    f1Score: number;
+    precision: number;
+    recall: number;
+    [key: string]: number;
+  };
+  results: Array<{
+    testId: string;
+    passed: boolean;
+    explanation: string;
+    prompt: string;
+    expected: string;
+    [key: string]: unknown;
+  }>;
+  hints: string[];
+  chipName?: string;
+  graderChipName?: string;
+  duration?: number;
 }
 
 /** Capability profile shape for grading */
@@ -717,4 +745,172 @@ export class SkillCreatorMcpServer {
  */
 export function createSkillCreatorMcpServer(config?: SkillCreatorMcpConfig): SkillCreatorMcpServer {
   return new SkillCreatorMcpServer(config);
+}
+
+// ============================================================================
+// SkillCreatorDepsMcpServer — deps-based server with real pipeline handlers
+// ============================================================================
+
+/**
+ * MCP server variant that wires skill.create, skill.eval, and skill.grade to
+ * real pipeline operations via the injected SkillCreatorDeps.
+ *
+ * All other handlers (compare, analyze, optimize, package, benchmark, status,
+ * list) delegate to the base SkillCreatorMcpServer implementation.
+ */
+class SkillCreatorDepsMcpServer extends SkillCreatorMcpServer {
+  private readonly d: SkillCreatorDeps;
+
+  constructor(deps: SkillCreatorDeps) {
+    // Pass a minimal config so base class schema/validation machinery works.
+    // Handlers for create/eval/grade will be overridden in handleToolCall.
+    super({ skillsDir: '.claude/skills' });
+    this.d = deps;
+  }
+
+  override async handleToolCall(toolName: string, args: unknown): Promise<McpToolResponse> {
+    // Route the 3 wired tools to real pipeline handlers; everything else falls
+    // through to the base class (which handles validation + stubs).
+    switch (toolName) {
+      case 'skill.create': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleCreate(parseResult.data as z.infer<typeof SkillCreateInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.eval': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleEval(parseResult.data as z.infer<typeof SkillEvalInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.grade': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleGrade(parseResult.data as z.infer<typeof SkillGradeInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      default:
+        return super.handleToolCall(toolName, args);
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.create
+  // --------------------------------------------------------------------------
+
+  private async depsHandleCreate(
+    args: z.infer<typeof SkillCreateInputSchema>,
+  ): Promise<McpToolResponse> {
+    const body =
+      `## Skill: ${args.template ?? 'basic'}\n\n` +
+      `This skill was created via skill.create.\n\n${args.description}`;
+
+    const skill = await this.d.skillStore.create(
+      args.skillName,
+      { name: args.skillName, description: args.description },
+      body,
+    );
+
+    // Add a starter test case so skill.eval has something to run
+    await this.d.testStore.add(args.skillName, {
+      prompt: `Describe what ${args.skillName} does`,
+      expected: 'positive',
+      description: 'Auto-generated starter test',
+    });
+
+    return mcpSuccess({ created: true, path: skill.path });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.eval
+  // --------------------------------------------------------------------------
+
+  private async depsHandleEval(
+    args: z.infer<typeof SkillEvalInputSchema>,
+  ): Promise<McpToolResponse> {
+    const result = await this.d.chipTestRunner.runForSkill(args.skillName, {
+      chip: args.chipName,
+      storeResults: true,
+    });
+
+    return mcpSuccess({
+      metrics: result.metrics,
+      results: result.results,
+      chipName: result.chipName,
+      hints: result.hints,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.grade
+  // --------------------------------------------------------------------------
+
+  private async depsHandleGrade(
+    args: z.infer<typeof SkillGradeInputSchema>,
+  ): Promise<McpToolResponse> {
+    const result = await this.d.chipTestRunner.runForSkill(args.skillName, {
+      chip: args.chipName,
+      graderChip: args.graderChip,
+      storeResults: true,
+    });
+
+    const profile = await this.d.grader.buildCapabilityProfile(args.chipName, this.d.registry);
+
+    const failedTests = result.results
+      .filter((r) => !r.passed)
+      .map((r) => ({ prompt: String(r.prompt), explanation: String(r.explanation) }));
+
+    const hints = this.d.grader.generateModelHints(failedTests, profile);
+
+    return mcpSuccess({
+      profile,
+      hints,
+      results: result.results,
+      metrics: result.metrics,
+    });
+  }
+}
+
+/**
+ * Create a new MCP server with real pipeline handlers for skill.create,
+ * skill.eval, and skill.grade via injected SkillCreatorDeps.
+ *
+ * All other tools (compare, analyze, optimize, package, benchmark, status, list)
+ * use the standard SkillCreatorMcpServer implementation.
+ */
+export function createSkillCreatorMcpServerFromDeps(
+  deps: SkillCreatorDeps,
+): SkillCreatorMcpServer {
+  return new SkillCreatorDepsMcpServer(deps);
 }
