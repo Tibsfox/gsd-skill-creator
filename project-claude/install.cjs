@@ -608,6 +608,9 @@ function validateInstallation() {
     { name: 'context-memory skill', path: '.claude/skills/context-memory/SKILL.md' },
     { name: 'alignment-guide skill', path: '.claude/skills/alignment-guide/SKILL.md' },
     { name: 'context-pressure hook', path: '.claude/hooks/context-pressure.sh' },
+    // Hypervisor components
+    { name: 'hypervisor skill', path: '.claude/skills/hypervisor/SKILL.md' },
+    { name: 'agent-lifecycle hook', path: '.claude/hooks/agent-lifecycle.sh' },
     // Dashboard
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
@@ -674,6 +677,7 @@ function validateInstallation() {
     '.claude/hooks/validate-commit.sh',
     '.claude/hooks/phase-boundary-check.sh',
     '.claude/hooks/branch-guard.sh',
+    '.claude/hooks/agent-lifecycle.sh',
   ];
   for (const hookScript of hookScripts) {
     const fullPath = path.join(projectRoot, hookScript);
@@ -710,6 +714,7 @@ function uninstallIntegration() {
       '.claude/skills/quick-scan',
       '.claude/skills/context-memory',
       '.claude/skills/alignment-guide',
+      '.claude/skills/hypervisor',
     ],
     files: [
       '.claude/agents/observer.md',
@@ -721,6 +726,7 @@ function uninstallIntegration() {
       '.claude/hooks/phase-boundary-check.sh',
       '.claude/hooks/branch-guard.sh',
       '.claude/hooks/context-pressure.sh',
+      '.claude/hooks/agent-lifecycle.sh',
       '.planning/skill-creator.json',
     ],
   };
