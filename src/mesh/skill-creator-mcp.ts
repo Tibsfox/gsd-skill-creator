@@ -16,6 +16,8 @@ import { OperationTracker } from './operation-tracker.js';
 import { SkillWorkspace } from './skill-workspace.js';
 import type { SkillLifecycleResolver } from './lifecycle-resolver.js';
 import type { SkillScope } from '../types/scope.js';
+import { packageSkill } from './skill-packager.js';
+import { generateMultiModelReport } from './multi-model-optimizer.js';
 
 // ============================================================================
 // Dependency injection types (narrow interfaces for testability)
@@ -39,7 +41,7 @@ export interface SkillCreatorDeps {
   };
   /** Multi-model benchmark runner */
   benchmarkRunner: {
-    benchmarkSkill(name: string, chips: string[], grader?: string): Promise<McpBenchmarkResult>;
+    benchmarkSkill(name: string, chips: string[], grader?: string): Promise<McpMultiModelBenchmark>;
   };
   /** Skill store for filesystem and lifecycle operations */
   skillStore: {
@@ -55,6 +57,7 @@ export interface SkillCreatorDeps {
   /** Result store for historical run data */
   resultStore: {
     list(skillName: string): Promise<unknown[]>;
+    getLatest(skillName: string): Promise<McpTestRunSnapshot | null>;
   };
   /** Lifecycle resolver for deriving skill state from stores */
   lifecycleResolver: SkillLifecycleResolver;
@@ -123,6 +126,44 @@ export interface McpBenchmarkResult {
   skillName: string;
   models: Array<{ model: string; passRate: number; avgAccuracy: number; avgF1: number }>;
   runs: Array<{ model: string; passed: boolean; metrics: { accuracy: number } }>;
+}
+
+/** TestRunSnapshot shape for resultStore.getLatest() */
+export interface McpTestRunSnapshot {
+  results: Array<{
+    testId: string;
+    passed: boolean;
+    prompt: string;
+    expected: string;
+    explanation?: string;
+    [key: string]: unknown;
+  }>;
+  hints?: string[];
+  [key: string]: unknown;
+}
+
+/** Full multi-model benchmark result shape returned by MultiModelBenchmarkRunner */
+export interface McpMultiModelBenchmark {
+  skillName: string;
+  benchmarkedAt: string;
+  models: Array<{
+    model: string;
+    runCount: number;
+    passRate: number;
+    avgAccuracy: number;
+    avgF1: number;
+    thresholdStatus: string;
+  }>;
+  runs: Array<{
+    skillName: string;
+    model: string;
+    runAt: string;
+    duration: number;
+    metrics: { accuracy: number; total: number; passed: number; failed: number; f1Score: number; precision: number; recall: number };
+    passed: boolean;
+    hints: string[];
+  }>;
+  legacyRunCount: number;
 }
 
 /** Configuration for the MCP server with injectable dependencies */
@@ -298,6 +339,44 @@ function mcpSuccess(data: unknown): McpToolResponse {
 
 function mcpError(message: string): McpToolResponse {
   return { content: [{ type: 'text', text: message }], isError: true };
+}
+
+// ============================================================================
+// Benchmark iteration statistics helpers
+// ============================================================================
+
+/** Return the value at percentile p (0-100) of a sorted array. */
+function percentile(sorted: number[], p: number): number {
+  if (sorted.length === 0) return 0;
+  const idx = Math.ceil((p / 100) * sorted.length) - 1;
+  return sorted[Math.max(0, Math.min(idx, sorted.length - 1))];
+}
+
+/**
+ * Aggregate per-chip accuracy statistics across multiple benchmark iterations.
+ *
+ * For each chip, collects accuracy values from all runs where run.model === chip,
+ * then computes mean, p50, p95, min, and max.
+ */
+function computeIterationStats(
+  runs: McpMultiModelBenchmark[],
+  chips: string[],
+): Array<{ chip: string; mean: number; p50: number; p95: number; min: number; max: number }> {
+  return chips.map((chip) => {
+    const accuracies = runs
+      .flatMap((r) => r.runs.filter((run) => run.model === chip).map((run) => run.metrics.accuracy))
+      .sort((a, b) => a - b);
+    const mean =
+      accuracies.length > 0 ? accuracies.reduce((s, v) => s + v, 0) / accuracies.length : 0;
+    return {
+      chip,
+      mean,
+      p50: percentile(accuracies, 50),
+      p95: percentile(accuracies, 95),
+      min: accuracies[0] ?? 0,
+      max: accuracies[accuracies.length - 1] ?? 0,
+    };
+  });
 }
 
 // ============================================================================
@@ -820,6 +899,86 @@ class SkillCreatorDepsMcpServer extends SkillCreatorMcpServer {
         }
       }
 
+      case 'skill.compare': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleCompare(parseResult.data as z.infer<typeof SkillCompareInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.analyze': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleAnalyze(parseResult.data as z.infer<typeof SkillAnalyzeInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.optimize': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleOptimize(parseResult.data as z.infer<typeof SkillOptimizeInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.package': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandlePackage(parseResult.data as z.infer<typeof SkillPackageInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
+      case 'skill.benchmark': {
+        const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
+        if (!tool) return mcpError(`Unknown tool: ${toolName}`);
+        const parseResult = tool.inputSchema.safeParse(args);
+        if (!parseResult.success) {
+          return mcpError(
+            `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+          );
+        }
+        try {
+          return await this.depsHandleBenchmark(parseResult.data as z.infer<typeof SkillBenchmarkInputSchema>);
+        } catch (err) {
+          return mcpError(err instanceof Error ? err.message : String(err));
+        }
+      }
+
       default:
         return super.handleToolCall(toolName, args);
     }
@@ -899,6 +1058,105 @@ class SkillCreatorDepsMcpServer extends SkillCreatorMcpServer {
       results: result.results,
       metrics: result.metrics,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.compare
+  // --------------------------------------------------------------------------
+
+  private async depsHandleCompare(
+    args: z.infer<typeof SkillCompareInputSchema>,
+  ): Promise<McpToolResponse> {
+    const benchmark = await this.d.benchmarkRunner.benchmarkSkill(args.skillName, args.chips);
+    return mcpSuccess({
+      skillName: args.skillName,
+      chips: args.chips,
+      models: benchmark.models,
+      runs: benchmark.runs,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.analyze
+  // --------------------------------------------------------------------------
+
+  private async depsHandleAnalyze(
+    args: z.infer<typeof SkillAnalyzeInputSchema>,
+  ): Promise<McpToolResponse> {
+    const latest = await this.d.resultStore.getLatest(args.skillName);
+    if (!latest) {
+      throw new Error(`No eval results for skill '${args.skillName}'`);
+    }
+
+    const failures = latest.results.filter((r) => !r.passed);
+    const issues = {
+      falseNegatives: failures
+        .filter((r) => r.expected === 'positive')
+        .map((r) => ({ prompt: r.prompt, explanation: r.explanation ?? '' })),
+      falsePositives: failures
+        .filter((r) => r.expected === 'negative')
+        .map((r) => ({ prompt: r.prompt, explanation: r.explanation ?? '' })),
+    };
+
+    return mcpSuccess({ issues, hints: latest.hints ?? [] });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.optimize
+  // --------------------------------------------------------------------------
+
+  private async depsHandleOptimize(
+    args: z.infer<typeof SkillOptimizeInputSchema>,
+  ): Promise<McpToolResponse> {
+    const latest = await this.d.resultStore.getLatest(args.skillName);
+    if (!latest) {
+      throw new Error(`No eval results for skill '${args.skillName}'`);
+    }
+
+    const profile = await this.d.grader.buildCapabilityProfile(args.chipName, this.d.registry);
+
+    const failedTests = latest.results
+      .filter((r) => !r.passed)
+      .map((r) => ({ prompt: r.prompt, explanation: String(r.explanation ?? '') }));
+
+    const hints = this.d.grader.generateModelHints(failedTests, profile);
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      chipName: args.chipName,
+      targetPassRate: args.targetPassRate ?? 0.75,
+      hints,
+      failureCount: failedTests.length,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.package
+  // --------------------------------------------------------------------------
+
+  private async depsHandlePackage(
+    args: z.infer<typeof SkillPackageInputSchema>,
+  ): Promise<McpToolResponse> {
+    const report = generateMultiModelReport(args.skillName, []);
+    const pkg = packageSkill(args.skillName, args.version, args.description ?? '', report);
+    return mcpSuccess(pkg);
+  }
+
+  // --------------------------------------------------------------------------
+  // Real handler: skill.benchmark
+  // --------------------------------------------------------------------------
+
+  private async depsHandleBenchmark(
+    args: z.infer<typeof SkillBenchmarkInputSchema>,
+  ): Promise<McpToolResponse> {
+    const iterations = args.iterations ?? 3;
+    const allRuns: McpMultiModelBenchmark[] = [];
+    for (let i = 0; i < iterations; i++) {
+      const run = await this.d.benchmarkRunner.benchmarkSkill(args.skillName, args.chips);
+      allRuns.push(run);
+    }
+    const stats = computeIterationStats(allRuns, args.chips);
+    return mcpSuccess({ iterations, chips: stats });
   }
 }
 
