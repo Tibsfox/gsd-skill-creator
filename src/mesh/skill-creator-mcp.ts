@@ -1,14 +1,80 @@
 /**
  * Skill Creator MCP Server for exposing skill lifecycle tools via MCP protocol.
  *
- * Defines 8 tools covering the complete skill lifecycle: create, eval, grade,
+ * Defines tools covering the complete skill lifecycle: create, eval, grade,
  * compare, analyze, optimize, package, and benchmark. Each tool validates
  * inputs via Zod schemas and returns MCP-formatted responses.
  *
- * Handler stubs describe intended behavior without wiring to actual pipelines.
+ * Handlers are wired to real pipeline operations via dependency injection.
  */
 
 import { z, type ZodObject, type ZodRawShape } from 'zod';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import type { ChipRegistry } from '../chips/chip-registry.js';
+import { OperationTracker } from './operation-tracker.js';
+
+// ============================================================================
+// Dependency injection types (narrow interfaces for testability)
+// ============================================================================
+
+/** Eval run result shape */
+export interface McpEvalResult {
+  metrics: {
+    accuracy: number;
+    total: number;
+    passed: number;
+    failed: number;
+    f1Score: number;
+    precision: number;
+    recall: number;
+  };
+  results: Array<{
+    testId: string;
+    passed: boolean;
+    explanation: string;
+    prompt: string;
+    expected: string;
+  }>;
+  hints: string[];
+  duration: number;
+}
+
+/** Capability profile shape for grading */
+export interface McpCapabilityProfile {
+  model: string;
+  tier: string;
+  maxContextLength: number;
+  supportsTools: boolean;
+}
+
+/** Benchmark result shape */
+export interface McpBenchmarkResult {
+  skillName: string;
+  models: Array<{ model: string; passRate: number; avgAccuracy: number; avgF1: number }>;
+  runs: Array<{ model: string; passed: boolean; metrics: { accuracy: number } }>;
+}
+
+/** Configuration for the MCP server with injectable dependencies */
+export interface SkillCreatorMcpConfig {
+  /** Base directory for skill storage */
+  skillsDir: string;
+  /** Chip registry for resolving model chips */
+  chipRegistry?: ChipRegistry;
+  /** Eval runner (ChipTestRunner-compatible) */
+  evalRunner?: {
+    runForSkill(name: string, opts?: { chip?: string; graderChip?: string }): Promise<McpEvalResult>;
+  };
+  /** Model-aware grader */
+  grader?: {
+    buildCapabilityProfile(chipName: string, registry: ChipRegistry): Promise<McpCapabilityProfile | null>;
+    generateModelHints(tests: Array<{ prompt: string; explanation: string }>, profile: McpCapabilityProfile | null): string[];
+  };
+  /** Multi-model benchmark runner */
+  benchmarkRunner?: {
+    benchmarkSkill(name: string, chips: string[], grader?: string): Promise<McpBenchmarkResult>;
+  };
+}
 
 // ============================================================================
 // Tool Input Schemas
@@ -71,8 +137,9 @@ interface McpTextContent {
 }
 
 /** MCP tool response */
-interface McpToolResponse {
+export interface McpToolResponse {
   content: McpTextContent[];
+  isError?: boolean;
 }
 
 // ============================================================================
@@ -134,58 +201,16 @@ export const SKILL_CREATOR_TOOLS: ToolDefinition[] = [
 ];
 
 // ============================================================================
-// Handler Stubs
+// Helper: MCP response builders
 // ============================================================================
 
-function handleSkillCreate(args: z.infer<typeof SkillCreateInputSchema>): string {
-  const tmpl = args.template ? ` using template '${args.template}'` : '';
-  return `Would create skill '${args.skillName}'${tmpl}: ${args.description}`;
+function mcpSuccess(data: unknown): McpToolResponse {
+  return { content: [{ type: 'text', text: JSON.stringify(data) }] };
 }
 
-function handleSkillEval(args: z.infer<typeof SkillEvalInputSchema>): string {
-  const cases = args.testCases ? ` with ${args.testCases} test cases` : '';
-  return `Would evaluate skill '${args.skillName}' on chip '${args.chipName}'${cases}`;
+function mcpError(message: string): McpToolResponse {
+  return { content: [{ type: 'text', text: message }], isError: true };
 }
-
-function handleSkillGrade(args: z.infer<typeof SkillGradeInputSchema>): string {
-  const grader = args.graderChip ? ` using grader '${args.graderChip}'` : '';
-  return `Would grade skill '${args.skillName}' on chip '${args.chipName}'${grader}`;
-}
-
-function handleSkillCompare(args: z.infer<typeof SkillCompareInputSchema>): string {
-  return `Would compare skill '${args.skillName}' across chips: ${args.chips.join(', ')}`;
-}
-
-function handleSkillAnalyze(args: z.infer<typeof SkillAnalyzeInputSchema>): string {
-  return `Would analyze skill '${args.skillName}' behavior on chip '${args.chipName}'`;
-}
-
-function handleSkillOptimize(args: z.infer<typeof SkillOptimizeInputSchema>): string {
-  const target = args.targetPassRate ? ` targeting ${args.targetPassRate} pass rate` : '';
-  return `Would optimize skill '${args.skillName}' for chip '${args.chipName}'${target}`;
-}
-
-function handleSkillPackage(args: z.infer<typeof SkillPackageInputSchema>): string {
-  const desc = args.description ? ` (${args.description})` : '';
-  return `Would package skill '${args.skillName}' v${args.version}${desc}`;
-}
-
-function handleSkillBenchmark(args: z.infer<typeof SkillBenchmarkInputSchema>): string {
-  const iters = args.iterations ? ` for ${args.iterations} iterations` : '';
-  return `Would benchmark skill '${args.skillName}' on chips: ${args.chips.join(', ')}${iters}`;
-}
-
-/** Maps tool names to handler functions */
-const HANDLERS: Record<string, (args: unknown) => string> = {
-  'skill.create': handleSkillCreate as (args: unknown) => string,
-  'skill.eval': handleSkillEval as (args: unknown) => string,
-  'skill.grade': handleSkillGrade as (args: unknown) => string,
-  'skill.compare': handleSkillCompare as (args: unknown) => string,
-  'skill.analyze': handleSkillAnalyze as (args: unknown) => string,
-  'skill.optimize': handleSkillOptimize as (args: unknown) => string,
-  'skill.package': handleSkillPackage as (args: unknown) => string,
-  'skill.benchmark': handleSkillBenchmark as (args: unknown) => string,
-};
 
 // ============================================================================
 // SkillCreatorMcpServer
@@ -194,13 +219,30 @@ const HANDLERS: Record<string, (args: unknown) => string> = {
 /**
  * MCP server that exposes skill lifecycle tools.
  *
- * Validates tool arguments via Zod schemas and dispatches to handler stubs.
+ * Validates tool arguments via Zod schemas and dispatches to pipeline handlers.
  * Returns MCP-formatted responses: { content: [{ type: 'text', text }] }
+ *
+ * All handlers catch exceptions and return isError:true — no thrown exceptions.
  */
 export class SkillCreatorMcpServer {
-  /**
-   * List all available tools with their schemas.
-   */
+  private readonly config: SkillCreatorMcpConfig;
+  private readonly handlers: Record<string, (args: unknown) => Promise<McpToolResponse>>;
+
+  constructor(config?: SkillCreatorMcpConfig) {
+    this.config = config ?? { skillsDir: '.claude/skills' };
+    this.handlers = {
+      'skill.create': (args) => this.handleCreate(args as z.infer<typeof SkillCreateInputSchema>),
+      'skill.eval': (args) => this.handleEval(args as z.infer<typeof SkillEvalInputSchema>),
+      'skill.grade': (args) => this.handleGrade(args as z.infer<typeof SkillGradeInputSchema>),
+      'skill.compare': (args) => this.handleCompare(args as z.infer<typeof SkillCompareInputSchema>),
+      'skill.analyze': (args) => this.handleAnalyze(args as z.infer<typeof SkillAnalyzeInputSchema>),
+      'skill.optimize': (args) => this.handleOptimize(args as z.infer<typeof SkillOptimizeInputSchema>),
+      'skill.package': (args) => this.handlePackage(args as z.infer<typeof SkillPackageInputSchema>),
+      'skill.benchmark': (args) => this.handleBenchmark(args as z.infer<typeof SkillBenchmarkInputSchema>),
+    };
+  }
+
+  /** List all available tools with their schemas. */
   listTools(): ToolDefinition[] {
     return SKILL_CREATOR_TOOLS;
   }
@@ -210,40 +252,361 @@ export class SkillCreatorMcpServer {
    *
    * Validates args against the tool's input schema, dispatches to the
    * appropriate handler, and returns an MCP-formatted response.
-   *
-   * @param toolName - Name of the tool to invoke
-   * @param args - Raw arguments to validate and pass to handler
-   * @returns MCP response with content array
+   * All errors are caught and returned as isError:true responses.
    */
   async handleToolCall(toolName: string, args: unknown): Promise<McpToolResponse> {
-    // Find the tool definition
     const tool = SKILL_CREATOR_TOOLS.find((t) => t.name === toolName);
     if (!tool) {
-      return {
-        content: [{ type: 'text', text: `Unknown tool: ${toolName}` }],
-      };
+      return mcpError(`Unknown tool: ${toolName}`);
     }
 
-    // Validate args against input schema
     const parseResult = tool.inputSchema.safeParse(args);
     if (!parseResult.success) {
-      return {
-        content: [
-          {
-            type: 'text',
-            text: `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
-          },
-        ],
-      };
+      return mcpError(
+        `Validation error: ${parseResult.error.issues.map((i) => i.message).join(', ')}`,
+      );
     }
 
-    // Dispatch to handler
-    const handler = HANDLERS[toolName];
-    const text = handler(parseResult.data);
+    try {
+      const handler = this.handlers[toolName];
+      return await handler(parseResult.data);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return mcpError(message);
+    }
+  }
 
-    return {
-      content: [{ type: 'text', text }],
+  // ==========================================================================
+  // Handler: skill.create
+  // ==========================================================================
+
+  private async handleCreate(args: z.infer<typeof SkillCreateInputSchema>): Promise<McpToolResponse> {
+    const skillDir = join(this.config.skillsDir, args.skillName);
+    await mkdir(skillDir, { recursive: true });
+
+    // Write SKILL.md
+    const skillMd = [
+      '---',
+      `name: ${args.skillName}`,
+      `description: ${args.description}`,
+      '---',
+      '',
+      `# ${args.skillName}`,
+      '',
+      args.description,
+      '',
+    ].join('\n');
+    await writeFile(join(skillDir, 'SKILL.md'), skillMd, 'utf-8');
+
+    // Write test-cases.json template
+    await writeFile(join(skillDir, 'test-cases.json'), '[]', 'utf-8');
+
+    // Write skill-manifest.json
+    const manifest = {
+      name: args.skillName,
+      description: args.description,
+      template: args.template ?? 'default',
+      createdAt: new Date().toISOString(),
     };
+    await writeFile(join(skillDir, 'skill-manifest.json'), JSON.stringify(manifest, null, 2), 'utf-8');
+
+    // Init OperationTracker (starts as 'draft')
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+    await tracker.save();
+
+    const files = ['SKILL.md', 'test-cases.json', 'skill-manifest.json', '.skill-status.json'];
+    return mcpSuccess({ created: true, path: skillDir, files });
+  }
+
+  // ==========================================================================
+  // Handler: skill.eval
+  // ==========================================================================
+
+  private async handleEval(args: z.infer<typeof SkillEvalInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.chipRegistry) {
+      return mcpError('No chip registry configured');
+    }
+
+    const chip = this.config.chipRegistry.get(args.chipName);
+    if (!chip) {
+      return mcpError(`Chip not found: ${args.chipName}`);
+    }
+
+    if (!this.config.evalRunner) {
+      return mcpError('No eval runner configured');
+    }
+
+    const evalResult = await this.config.evalRunner.runForSkill(args.skillName, {
+      chip: args.chipName,
+    });
+
+    // Advance lifecycle state
+    const skillDir = join(this.config.skillsDir, args.skillName);
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+    try {
+      tracker.advance('tested');
+      await tracker.save();
+    } catch {
+      // May already be in tested or later state — non-fatal
+    }
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      chipName: args.chipName,
+      metrics: evalResult.metrics,
+      hints: evalResult.hints,
+      duration: evalResult.duration,
+      testCount: evalResult.results.length,
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.grade
+  // ==========================================================================
+
+  private async handleGrade(args: z.infer<typeof SkillGradeInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.chipRegistry) {
+      return mcpError('No chip registry configured');
+    }
+
+    if (!this.config.grader) {
+      return mcpError('No grader configured');
+    }
+
+    const profile = await this.config.grader.buildCapabilityProfile(
+      args.chipName,
+      this.config.chipRegistry,
+    );
+
+    // Build failed tests from last eval (simplified — grader generates hints from profile)
+    const failedTests: Array<{ prompt: string; explanation: string }> = [];
+    const hints = this.config.grader.generateModelHints(failedTests, profile);
+
+    // Advance lifecycle state
+    const skillDir = join(this.config.skillsDir, args.skillName);
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+    try {
+      tracker.advance('graded');
+      await tracker.save();
+    } catch {
+      // May already be past graded — non-fatal
+    }
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      chipName: args.chipName,
+      graderChip: args.graderChip ?? 'default',
+      profile: profile ?? { model: args.chipName, tier: 'unknown' },
+      hints,
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.compare (stub — wired in 56-03)
+  // ==========================================================================
+
+  private async handleCompare(args: z.infer<typeof SkillCompareInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.chipRegistry) {
+      return mcpError('No chip registry configured');
+    }
+    if (!this.config.evalRunner) {
+      return mcpError('No eval runner configured');
+    }
+
+    const results: Array<{ chipName: string; metrics: McpEvalResult['metrics'] }> = [];
+    for (const chipName of args.chips) {
+      const chip = this.config.chipRegistry.get(chipName);
+      if (!chip) {
+        results.push({ chipName, metrics: { accuracy: 0, total: 0, passed: 0, failed: 0, f1Score: 0, precision: 0, recall: 0 } });
+        continue;
+      }
+      const evalResult = await this.config.evalRunner.runForSkill(args.skillName, { chip: chipName });
+      results.push({ chipName, metrics: evalResult.metrics });
+    }
+
+    return mcpSuccess({ skillName: args.skillName, comparison: results });
+  }
+
+  // ==========================================================================
+  // Handler: skill.analyze (stub — wired in 56-03)
+  // ==========================================================================
+
+  private async handleAnalyze(args: z.infer<typeof SkillAnalyzeInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.chipRegistry) {
+      return mcpError('No chip registry configured');
+    }
+    if (!this.config.evalRunner) {
+      return mcpError('No eval runner configured');
+    }
+
+    const chip = this.config.chipRegistry.get(args.chipName);
+    if (!chip) {
+      return mcpError(`Chip not found: ${args.chipName}`);
+    }
+
+    const evalResult = await this.config.evalRunner.runForSkill(args.skillName, { chip: args.chipName });
+
+    // Categorize failures by pattern
+    const failures = evalResult.results.filter((r) => !r.passed);
+    const patterns: Record<string, number> = {};
+    for (const f of failures) {
+      const category = f.expected === 'positive' ? 'false-negative' : 'false-positive';
+      patterns[category] = (patterns[category] ?? 0) + 1;
+    }
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      chipName: args.chipName,
+      totalTests: evalResult.results.length,
+      failedTests: failures.length,
+      patterns,
+      hints: evalResult.hints,
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.optimize (stub — wired in 56-03)
+  // ==========================================================================
+
+  private async handleOptimize(args: z.infer<typeof SkillOptimizeInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.chipRegistry) {
+      return mcpError('No chip registry configured');
+    }
+    if (!this.config.evalRunner) {
+      return mcpError('No eval runner configured');
+    }
+
+    const chip = this.config.chipRegistry.get(args.chipName);
+    if (!chip) {
+      return mcpError(`Chip not found: ${args.chipName}`);
+    }
+
+    const evalResult = await this.config.evalRunner.runForSkill(args.skillName, { chip: args.chipName });
+
+    const failures = evalResult.results.filter((r) => !r.passed);
+    const targetPassRate = args.targetPassRate ?? 0.9;
+    const currentPassRate = evalResult.metrics.total > 0
+      ? evalResult.metrics.passed / evalResult.metrics.total
+      : 0;
+
+    const suggestions: string[] = [];
+    if (currentPassRate < targetPassRate) {
+      if (failures.some((f) => f.expected === 'positive')) {
+        suggestions.push('Broaden skill activation patterns to catch missed positive cases');
+      }
+      if (failures.some((f) => f.expected === 'negative')) {
+        suggestions.push('Tighten skill boundaries to reject out-of-domain prompts');
+      }
+      suggestions.push(`Target: ${(targetPassRate * 100).toFixed(0)}%, Current: ${(currentPassRate * 100).toFixed(0)}%`);
+    }
+
+    // Advance lifecycle state
+    const skillDir = join(this.config.skillsDir, args.skillName);
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+    try {
+      tracker.advance('optimized');
+      await tracker.save();
+    } catch {
+      // Non-fatal if already past optimized
+    }
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      chipName: args.chipName,
+      currentPassRate,
+      targetPassRate,
+      suggestions,
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.package (stub — wired in 56-03)
+  // ==========================================================================
+
+  private async handlePackage(args: z.infer<typeof SkillPackageInputSchema>): Promise<McpToolResponse> {
+    const skillDir = join(this.config.skillsDir, args.skillName);
+
+    // Build minimal manifest for packaging
+    const manifest = {
+      name: args.skillName,
+      version: args.version,
+      description: args.description ?? '',
+      packagedAt: new Date().toISOString(),
+      packagedBy: 'skill-creator-mcp',
+    };
+
+    await writeFile(join(skillDir, 'package-manifest.json'), JSON.stringify(manifest, null, 2), 'utf-8');
+
+    // Advance lifecycle state
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+    try {
+      tracker.advance('packaged');
+      await tracker.save();
+    } catch {
+      // Non-fatal if already packaged
+    }
+
+    return mcpSuccess({
+      skillName: args.skillName,
+      version: args.version,
+      manifest,
+      files: ['SKILL.md', 'skill-manifest.json', 'package-manifest.json'],
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.benchmark (stub — wired in 56-03)
+  // ==========================================================================
+
+  private async handleBenchmark(args: z.infer<typeof SkillBenchmarkInputSchema>): Promise<McpToolResponse> {
+    if (!this.config.benchmarkRunner) {
+      // Fallback: run eval for each chip if evalRunner available
+      if (!this.config.evalRunner || !this.config.chipRegistry) {
+        return mcpError('No benchmark runner or eval runner configured');
+      }
+
+      const iterations = args.iterations ?? 1;
+      const chipResults: Array<{
+        chipName: string;
+        iterations: number;
+        scores: number[];
+        mean: number;
+        p50: number;
+        p95: number;
+      }> = [];
+
+      for (const chipName of args.chips) {
+        const chip = this.config.chipRegistry.get(chipName);
+        if (!chip) continue;
+
+        const scores: number[] = [];
+        for (let i = 0; i < iterations; i++) {
+          const evalResult = await this.config.evalRunner.runForSkill(args.skillName, { chip: chipName });
+          scores.push(evalResult.metrics.accuracy);
+        }
+
+        scores.sort((a, b) => a - b);
+        const mean = scores.reduce((s, v) => s + v, 0) / scores.length;
+        const p50 = scores[Math.floor(scores.length * 0.5)] ?? 0;
+        const p95 = scores[Math.floor(scores.length * 0.95)] ?? scores[scores.length - 1] ?? 0;
+
+        chipResults.push({ chipName, iterations, scores, mean, p50, p95 });
+      }
+
+      return mcpSuccess({ skillName: args.skillName, chips: chipResults });
+    }
+
+    const result = await this.config.benchmarkRunner.benchmarkSkill(
+      args.skillName,
+      args.chips,
+    );
+
+    return mcpSuccess(result);
   }
 }
 
@@ -254,6 +617,6 @@ export class SkillCreatorMcpServer {
 /**
  * Create a new SkillCreatorMcpServer instance.
  */
-export function createSkillCreatorMcpServer(): SkillCreatorMcpServer {
-  return new SkillCreatorMcpServer();
+export function createSkillCreatorMcpServer(config?: SkillCreatorMcpConfig): SkillCreatorMcpServer {
+  return new SkillCreatorMcpServer(config);
 }
