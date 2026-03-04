@@ -1,0 +1,68 @@
+# data/chipset/schema/muse-schema.yaml
+# JSON Schema (draft-07) extension for muse chipset definitions.
+# Extends chipset-schema.yaml with orientation, vocabulary, voice fields.
+
+$schema: "http://json-schema.org/draft-07/schema#"
+title: "GSD Muse Chipset Extension"
+description: "Extends chipset schema with muse-specific fields: orientation on the complex plane, vocabulary, voice profile, and activation patterns"
+type: object
+
+# These properties are OPTIONAL extensions — existing chipsets need no changes
+properties:
+  museType:
+    type: string
+    enum: [system, user, community]
+    description: "Muse classification: system (built-in), user (custom), community (shared)"
+
+  orientation:
+    type: object
+    description: "Position on the complex plane in polar coordinates"
+    required: [angle, magnitude]
+    properties:
+      angle:
+        type: number
+        minimum: 0
+        maximum: 6.283185307179586
+        description: "Angle in radians [0, 2π)"
+      magnitude:
+        type: number
+        minimum: 0
+        maximum: 1.0
+        description: "Distance from origin [0, 1]"
+
+  vocabulary:
+    type: array
+    items:
+      type: string
+    maxItems: 100
+    description: "Domain vocabulary that this muse understands and uses"
+
+  voice:
+    type: object
+    description: "Voice profile guiding tone and style (descriptive, not prescriptive)"
+    required: [tone, style]
+    properties:
+      tone:
+        type: string
+        minLength: 1
+        description: "Voice tone descriptor (e.g. 'warm-creative', 'precise-disciplined')"
+      style:
+        type: string
+        enum: [narrative, technical, conversational, observational, welcoming]
+        description: "Communication style"
+      signature:
+        type: string
+        description: "Identifying phrase pattern"
+
+  activationPatterns:
+    type: array
+    items:
+      type: string
+    maxItems: 20
+    description: "Regex patterns that trigger this muse's activation"
+
+  composableWith:
+    type: array
+    items:
+      type: string
+    description: "IDs of other muses this one composes well with"
