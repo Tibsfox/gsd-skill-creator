@@ -604,6 +604,10 @@ function validateInstallation() {
     { name: 'checkpoint-assertions skill', path: '.claude/skills/checkpoint-assertions/SKILL.md' },
     { name: 'quick-scan skill', path: '.claude/skills/quick-scan/SKILL.md' },
     { name: 'branch-guard hook', path: '.claude/hooks/branch-guard.sh' },
+    // Context memory components
+    { name: 'context-memory skill', path: '.claude/skills/context-memory/SKILL.md' },
+    { name: 'alignment-guide skill', path: '.claude/skills/alignment-guide/SKILL.md' },
+    { name: 'context-pressure hook', path: '.claude/hooks/context-pressure.sh' },
     // Dashboard
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
@@ -704,6 +708,8 @@ function uninstallIntegration() {
       '.claude/skills/security-hygiene',
       '.claude/skills/checkpoint-assertions',
       '.claude/skills/quick-scan',
+      '.claude/skills/context-memory',
+      '.claude/skills/alignment-guide',
     ],
     files: [
       '.claude/agents/observer.md',
@@ -714,6 +720,7 @@ function uninstallIntegration() {
       '.claude/hooks/validate-commit.sh',
       '.claude/hooks/phase-boundary-check.sh',
       '.claude/hooks/branch-guard.sh',
+      '.claude/hooks/context-pressure.sh',
       '.planning/skill-creator.json',
     ],
   };
