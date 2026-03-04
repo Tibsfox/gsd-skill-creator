@@ -29,3 +29,17 @@ export type { PacingConfig, PacingResult, ArtifactTimestamp, PacingStatus } from
 export { DEFAULT_PACING_CONFIG } from '../validation/pacing-gate/index.js';
 export type { BatchDetectionConfig, BatchDetectionResult, DepthMarker, DepthMarkerCategory, BatchHeuristicResult } from '../validation/batch-detection/index.js';
 export { DEFAULT_BATCH_DETECTION_CONFIG } from '../validation/batch-detection/index.js';
+
+// v1.50.46 Photon — Layer 0 DSP measurement types
+export {
+  PHOTON_PATH_TYPES,
+  PhotonPathSchema,
+  PhotonEchoSchema,
+  PhotonBatchSchema,
+} from './photon.js';
+
+export type {
+  PhotonPath,
+  PhotonEcho,
+  PhotonBatch,
+} from './photon.js';
