@@ -1,0 +1,40 @@
+{
+  "skillName": "baseline-skill",
+  "benchmarkedAt": "2026-03-01T00:00:00.000Z",
+  "models": [
+    {
+      "model": "cloud-tier",
+      "runCount": 5,
+      "passRate": 0.95,
+      "avgAccuracy": 94.2,
+      "avgF1": 0.93,
+      "thresholdStatus": "above"
+    }
+  ],
+  "runs": [
+    {
+      "skillName": "baseline-skill",
+      "model": "cloud-tier",
+      "runAt": "2026-03-01T00:01:00.000Z",
+      "duration": 3500,
+      "metrics": {
+        "total": 10,
+        "passed": 9,
+        "failed": 1,
+        "accuracy": 90,
+        "falsePositiveRate": 0,
+        "truePositives": 9,
+        "trueNegatives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "edgeCaseCount": 2,
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1Score": 0.947
+      },
+      "passed": true,
+      "hints": []
+    }
+  ],
+  "legacyRunCount": 0
+}
