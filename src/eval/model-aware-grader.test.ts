@@ -10,8 +10,11 @@ import {
   LOCAL_SMALL_CONTEXT_THRESHOLD,
   CLOUD_CONTEXT_THRESHOLD,
 } from './model-aware-grader.js';
-import type { ModelCapabilityProfile } from './model-aware-grader.js';
+import type { ModelCapabilityProfile, GradingContext, CalibrationAdjustment } from './model-aware-grader.js';
 import type { ChipRegistry } from '../chips/chip-registry.js';
+import { CapabilityClassifier } from './capability-classifier.js';
+import { LimitationRegistry } from './limitation-registry.js';
+import { CalibrationStore } from './calibration-store.js';
 
 // ============================================================================
 // Helpers
@@ -387,5 +390,191 @@ describe('ModelAwareGrader.generateModelHints', () => {
 
     // Both tier-specific (context/tools) and generic (from test explanations) hints present
     expect(hints.length).toBeGreaterThanOrEqual(2);
+  });
+});
+
+// ============================================================================
+// ModelAwareGrader -- buildGradingContext (Phase 58)
+// ============================================================================
+
+describe('ModelAwareGrader.buildGradingContext', () => {
+  const grader = new ModelAwareGrader();
+  const classifier = new CapabilityClassifier();
+  const limitationRegistry = new LimitationRegistry();
+
+  function makeCalStore(): CalibrationStore {
+    return new CalibrationStore('/tmp/test-cal.json');
+  }
+
+  it('returns valid GradingContext with model_context', async () => {
+    const registry = makeRegistry({
+      'tiny-llm': {
+        models: ['tiny-1b'],
+        maxContextLength: 4096,
+        supportsStreaming: false,
+        supportsTools: false,
+      },
+    });
+    const store = makeCalStore();
+
+    const ctx = await grader.buildGradingContext(
+      'tiny-llm', 'Grade this', registry, classifier, limitationRegistry, store,
+    );
+
+    expect(ctx.basePrompt).toBe('Grade this');
+    expect(ctx.modelContext).not.toBeNull();
+    expect(ctx.modelContext!.chipName).toBe('tiny-llm');
+    expect(ctx.modelContext!.capabilityClass).toBe('small');
+    expect(ctx.modelContext!.knownLimitations.length).toBeGreaterThan(0);
+  });
+
+  it('returns null modelContext when chip not found', async () => {
+    const registry = makeRegistry({});
+    const store = makeCalStore();
+
+    const ctx = await grader.buildGradingContext(
+      'unknown', 'Grade this', registry, classifier, limitationRegistry, store,
+    );
+
+    expect(ctx.modelContext).toBeNull();
+  });
+});
+
+// ============================================================================
+// ModelAwareGrader -- enrichGradingPromptWithContext (Phase 58)
+// ============================================================================
+
+describe('ModelAwareGrader.enrichGradingPromptWithContext', () => {
+  const grader = new ModelAwareGrader();
+
+  it('includes known limitations in prompt', () => {
+    const ctx: GradingContext = {
+      basePrompt: 'Grade this',
+      modelContext: {
+        chipName: 'tiny-llm',
+        capabilityClass: 'small',
+        knownLimitations: ['json-formatting', 'context-overflow'],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const result = grader.enrichGradingPromptWithContext(ctx);
+    expect(result).toContain('json-formatting');
+    expect(result).toContain('context-overflow');
+  });
+
+  it('returns base prompt when modelContext is null (backward compat)', () => {
+    const ctx: GradingContext = { basePrompt: 'Grade this', modelContext: null };
+    expect(grader.enrichGradingPromptWithContext(ctx)).toBe('Grade this');
+  });
+
+  it('includes capability class in enriched prompt', () => {
+    const ctx: GradingContext = {
+      basePrompt: 'Grade this',
+      modelContext: {
+        chipName: 'test',
+        capabilityClass: 'medium',
+        knownLimitations: [],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const result = grader.enrichGradingPromptWithContext(ctx);
+    expect(result).toContain('medium');
+  });
+});
+
+// ============================================================================
+// ModelAwareGrader -- generateCalibratedHints (Phase 58)
+// ============================================================================
+
+describe('ModelAwareGrader.generateCalibratedHints', () => {
+  const grader = new ModelAwareGrader();
+
+  it('returns hints with modelSpecific metadata for small model', () => {
+    const ctx: GradingContext = {
+      basePrompt: '',
+      modelContext: {
+        chipName: 'tiny',
+        capabilityClass: 'small',
+        knownLimitations: ['json-formatting'],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const hints = grader.generateCalibratedHints([], ctx);
+    const specificHints = hints.filter((h) => h.modelSpecific);
+    expect(specificHints.length).toBeGreaterThan(0);
+    expect(specificHints[0].applicableTo).toContain('small');
+  });
+
+  it('cloud model gets generic hint', () => {
+    const ctx: GradingContext = {
+      basePrompt: '',
+      modelContext: {
+        chipName: 'claude',
+        capabilityClass: 'cloud',
+        knownLimitations: [],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const hints = grader.generateCalibratedHints([], ctx);
+    expect(hints.some((h) => !h.modelSpecific)).toBe(true);
+  });
+
+  it('includes failed test explanations as generic hints', () => {
+    const ctx: GradingContext = { basePrompt: '', modelContext: null };
+    const failedTests = [{ prompt: 'Q1', explanation: 'Failed the test' }];
+
+    const hints = grader.generateCalibratedHints(failedTests, ctx);
+    expect(hints.some((h) => h.text === 'Failed the test')).toBe(true);
+  });
+});
+
+// ============================================================================
+// ModelAwareGrader -- assessLimitationMatch (Phase 58)
+// ============================================================================
+
+describe('ModelAwareGrader.assessLimitationMatch', () => {
+  const grader = new ModelAwareGrader();
+  const limitationRegistry = new LimitationRegistry();
+
+  it('detects JSON formatting failure on small model', () => {
+    const ctx: GradingContext = {
+      basePrompt: '',
+      modelContext: {
+        chipName: 'tiny',
+        capabilityClass: 'small',
+        knownLimitations: ['json-formatting'],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0.5, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const result = grader.assessLimitationMatch('Failed to parse JSON output', ctx, limitationRegistry);
+    expect(result.limitationMatch).toBe(true);
+    expect(result.limitation).toBe('json-formatting');
+    expect(result.discountFactor).toBeGreaterThan(0);
+  });
+
+  it('returns no match for cloud model', () => {
+    const ctx: GradingContext = {
+      basePrompt: '',
+      modelContext: {
+        chipName: 'claude',
+        capabilityClass: 'cloud',
+        knownLimitations: [],
+        calibrationAdjustments: { passRateAdjustment: 0, knownLimitationWeight: 0, lastUpdated: new Date().toISOString() },
+      },
+    };
+
+    const result = grader.assessLimitationMatch('Failed to parse JSON output', ctx, limitationRegistry);
+    expect(result.limitationMatch).toBe(false);
+  });
+
+  it('returns no match when modelContext is null', () => {
+    const ctx: GradingContext = { basePrompt: '', modelContext: null };
+    const result = grader.assessLimitationMatch('anything', ctx, limitationRegistry);
+    expect(result.limitationMatch).toBe(false);
   });
 });
