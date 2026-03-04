@@ -7,6 +7,19 @@ on:
     branches: [main]
 
 jobs:
+  private-files:
+    name: Block private files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for .planning files
+        run: |
+          if git ls-tree -r --name-only HEAD | grep -q '^\.planning/'; then
+            echo "::error::.planning/ files detected — these are private and must not be pushed"
+            git ls-tree -r --name-only HEAD | grep '^\.planning/'
+            exit 1
+          fi
+
   audit:
     name: Security Audit
     runs-on: ubuntu-latest
