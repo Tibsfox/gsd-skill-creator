@@ -47,3 +47,9 @@ Updated each phase per IMP-03.
 | PERFORMANCE_WEIGHT | 0.4 | Weight for historical pass rate in total routing score. Performance matters as much as capability: reliable nodes preferred. | src/mesh/scoring.ts:37 |
 | LOCAL_PASS_RATE_THRESHOLD | 0.70 | Local pass rate threshold for cost-aware routing. At 70%+, local execution preferred to save cost. Below this, cloud preferred due to insufficient local quality. | src/mesh/routing-policy.ts:28 |
 | MARGINAL_PASS_RATE_THRESHOLD | 0.50 | Pass rate below which a model is classified as 'failing'. Below 50%, the model fails more than it passes. | src/mesh/multi-model-optimizer.ts:24 |
+
+## Phase 54: Context & Integration
+
+| Constant | Value | Rationale | File:Line |
+|----------|-------|-----------|-----------|
+| MAX_DIGEST_LENGTH | 2000 | Maximum transcript digest length to prevent bloated state entries. 2000 chars captures key decisions without overwhelming downstream consumers. | src/mesh/transcript-summarizer.ts:13 |
