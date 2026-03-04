@@ -12,6 +12,7 @@ import type { CorrectionConfig } from './corrective-rag.js';
 
 function createMockContext(overrides: Partial<PipelineContext> = {}): PipelineContext {
   return {
+    sessionId: 'test-session',
     intent: 'test query',
     file: undefined,
     context: undefined,

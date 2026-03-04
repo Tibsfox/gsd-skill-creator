@@ -61,7 +61,7 @@ export class SkillLifecycleResolver {
     // Cast to Record<string, unknown> since TestRunSnapshot type does not
     // declare chipName/graderChipName (they are present in JSON from ChipTestRunResult).
     const graded = results.some(
-      (r) => (r as Record<string, unknown>).graderChipName !== undefined,
+      (r) => (r as unknown as Record<string, unknown>).graderChipName !== undefined,
     );
 
     if (!graded) {
