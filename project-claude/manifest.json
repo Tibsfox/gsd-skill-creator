@@ -309,6 +309,18 @@
         "target": ".claude/skills/security-hygiene",
         "description": "Security hygiene for self-modifying systems skill",
         "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/checkpoint-assertions",
+        "target": ".claude/skills/checkpoint-assertions",
+        "description": "Checkpoint assertions skill (Layer 2 DSP error correction)",
+        "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/quick-scan",
+        "target": ".claude/skills/quick-scan",
+        "description": "Quick-scan skill (Layer 3 DSP error correction)",
+        "files": ["SKILL.md"]
       }
     ],
     "hookScripts": [
@@ -326,6 +338,11 @@
         "source": "hooks/phase-boundary-check.sh",
         "target": ".claude/hooks/phase-boundary-check.sh",
         "description": "PostToolUse hook: detect phase boundary writes"
+      },
+      {
+        "source": "hooks/branch-guard.sh",
+        "target": ".claude/hooks/branch-guard.sh",
+        "description": "PreToolUse hook: branch safety warnings (Layer 1 DSP)"
       }
     ],
     "claudeMd": {

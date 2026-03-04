@@ -594,6 +594,10 @@ function validateInstallation() {
     { name: 'session-state hook', path: '.claude/hooks/session-state.sh' },
     { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.sh' },
     { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.sh' },
+    // DSP error correction components
+    { name: 'checkpoint-assertions skill', path: '.claude/skills/checkpoint-assertions/SKILL.md' },
+    { name: 'quick-scan skill', path: '.claude/skills/quick-scan/SKILL.md' },
+    { name: 'branch-guard hook', path: '.claude/hooks/branch-guard.sh' },
     // Dashboard
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
@@ -652,6 +656,7 @@ function validateInstallation() {
     '.claude/hooks/session-state.sh',
     '.claude/hooks/validate-commit.sh',
     '.claude/hooks/phase-boundary-check.sh',
+    '.claude/hooks/branch-guard.sh',
   ];
   for (const hookScript of hookScripts) {
     const fullPath = path.join(projectRoot, hookScript);
@@ -684,6 +689,8 @@ function uninstallIntegration() {
       '.claude/skills/skill-integration',
       '.claude/skills/session-awareness',
       '.claude/skills/security-hygiene',
+      '.claude/skills/checkpoint-assertions',
+      '.claude/skills/quick-scan',
     ],
     files: [
       '.claude/agents/observer.md',
@@ -693,6 +700,7 @@ function uninstallIntegration() {
       '.claude/hooks/session-state.sh',
       '.claude/hooks/validate-commit.sh',
       '.claude/hooks/phase-boundary-check.sh',
+      '.claude/hooks/branch-guard.sh',
       '.planning/skill-creator.json',
     ],
   };
