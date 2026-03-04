@@ -12,6 +12,8 @@ export default defineConfig({
       '.claude/**',
       'project-claude/**',
       'node_modules/**',
+      '**/*.integration.test.ts',
+      '**/*.system.test.ts',
     ],
     coverage: {
       provider: 'v8',
