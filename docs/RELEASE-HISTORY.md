@@ -1,11 +1,14 @@
 # Release History
 
-60 milestones shipped across 517 phases, 1,255 plans, ~575K LOC, and 23,330 tests.
+63 milestones shipped across 527 phases, 1,287 plans, ~607K LOC, and 24,092 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.49.17](release-notes/v1.49.17/) | The Space Between | 2026-03-04 | — | — | |
+| [v1.49.16](release-notes/v1.49.16/) | Muse Integration & MCP Pipeline | 2026-03-04 | 5 | 13 | |
+| [v1.49.15](release-notes/v1.49.15/) | Self-Improving Mesh Architecture | 2026-03-04 | 5 | 19 | |
 | [v1.49.14](release-notes/v1.49.14/) | Dependency Health Monitor & Progressive Internalization Engine | 2026-03-03 | 6 | 26 | [retro](release-notes/v1.49.14/RETROSPECTIVE.md), [lessons](release-notes/v1.49.14/LESSONS-LEARNED.md) |
 | [v1.49.13](release-notes/v1.49.13/) | Skill Usage Telemetry & Adaptive Pipeline | 2026-03-03 | 4 | 10 | [retro](release-notes/v1.49.13/RETROSPECTIVE.md), [lessons](release-notes/v1.49.13/LESSONS-LEARNED.md) |
 | [v1.49.12](release-notes/v1.49.12/) | Heritage Skills Educational Pack | 2026-03-02 | 12 | 45 | [retro](release-notes/v1.49.12/RETROSPECTIVE.md), [lessons](release-notes/v1.49.12/LESSONS-LEARNED.md) |
