@@ -234,15 +234,20 @@ export type { SkillLifecycleState, StateTransition } from './operation-tracker.j
 export { SkillWorkspace } from './skill-workspace.js';
 export type { SkillWorkspaceEntry } from './skill-workspace.js';
 
+// Lifecycle resolver (Phase 56, Plan 01 + Plan 04)
+export { SkillLifecycleResolver } from './lifecycle-resolver.js';
+
 // Skill Creator MCP Server (Phase 54, Plan 04 + Phase 56)
 export {
   SkillCreatorMcpServer,
   SKILL_CREATOR_TOOLS,
   createSkillCreatorMcpServer,
+  createSkillCreatorMcpServerFromDeps,
 } from './skill-creator-mcp.js';
 
 export type {
   SkillCreatorMcpConfig,
+  SkillCreatorDeps,
   McpToolResponse,
   McpEvalResult,
   McpCapabilityProfile,
