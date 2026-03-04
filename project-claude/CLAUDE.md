@@ -17,7 +17,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
 - `.claude/agents/` -- GSD executor, verifier, planner subagents
 - `.claude/commands/gsd/` -- GSD command definitions
-- `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
+- `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary, branch guard)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
 - `src/` -- TypeScript library and CLI (domain-grouped)
 - `src/core/` -- Core infrastructure (types, utils, fs, events, hooks, storage, validation, safety, security)
@@ -30,6 +30,16 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, 42 departments, calibration
 - `docs/` -- 158+ markdown files, canonical documentation
+
+## Error Correction (DSP 3-Layer System)
+
+Three layers of inline error correction, inspired by digital signal processing:
+
+- **Layer 1: Deterministic hooks** (zero-token) -- `validate-commit.sh` blocks sensitive files in commits; `branch-guard.sh` warns on branch safety violations
+- **Layer 2: Checkpoint assertions** -- `.claude/skills/checkpoint-assertions/` auto-activates during GSD phases, provides pre-commit/post-phase/pre-push checklists
+- **Layer 3: Quick-scan** -- `.claude/skills/quick-scan/` auto-activates after commits, 5-point CRC checklist (scope/magnitude/intent/tests/forbidden)
+
+See `project-claude/specs/shift-register-format.md` for the chain history format spec.
 
 ## Commit Convention
 
@@ -48,6 +58,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 ## Important Notes
 
+- **NEVER commit or push .planning/ files** -- they are local-only. A PreToolUse hook blocks this, but do not attempt it. Do not `git add .planning/`, do not include .planning paths in commits.
 - This is a self-modifying system -- the security-hygiene skill handles safety
-- `.planning/patterns/` should be in `.gitignore`
+- `.planning/` is in `.gitignore` -- respect it
 - Skills load automatically based on context -- no explicit invocation needed
