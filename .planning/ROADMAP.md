@@ -142,8 +142,8 @@ Plans:
 
 Plans:
 - [x] 52-01-PLAN.md — LLM MCP Wrapper: 4 MCP tools (llm.chat, llm.health, llm.capabilities, llm.models), connection pooling, request queuing
-- [ ] 52-02-PLAN.md — Mesh Discovery Service: node registration, heartbeat monitoring, auto-eviction, append-only event log
-- [ ] 52-03-PLAN.md — DACP mesh transport: provenance tracking, fidelity-adaptive compression, multi-hop relay
+- [x] 52-02-PLAN.md — Mesh Discovery Service: node registration, heartbeat monitoring, auto-eviction, append-only event log
+- [x] 52-03-PLAN.md — DACP mesh transport: provenance tracking, fidelity-adaptive compression, multi-hop relay
 
 ### Phase 53: Mesh Orchestration
 **Goal**: VTM wave plans route tasks to mesh nodes based on capability and cost, with automatic failover and model-specific optimization output
@@ -156,7 +156,13 @@ Plans:
   4. The cost routing policy favors local execution when local pass rate exceeds the configured threshold — user can confirm routing decisions from routing_policy.json
   5. An inter-wave integration review document exists for the Wave 3 → Wave 4 boundary, assessing cross-wave connections and confirming the mesh coordinator can use all Wave 3 transport primitives
   6. All scoring and routing logic is pure functions — no I/O in hot paths, fully testable without mocks
-**Plans**: TBD
+**Plans:** 4 plans
+
+Plans:
+- [ ] 53-01-PLAN.md — Routing types, pure scoring functions, cost-aware routing policy (MESH-01, MESH-05, IMP-06)
+- [ ] 53-02-PLAN.md — MeshCoordinator agent, parallel/pipeline dispatch, automatic failover (MESH-01, MESH-02, MESH-04)
+- [ ] 53-03-PLAN.md — VTM mesh-aware wave planner, multi-model optimizer for model-specific guidance (MESH-03, MESH-06)
+- [ ] 53-04-PLAN.md — Barrel exports, inter-wave integration review, thresholds.md update (IMP-02, IMP-06)
 
 ### Phase 54: Context & Integration
 **Goal**: A multi-wave distributed workflow produces complete git history with mesh provenance, context summaries integrated into GSD state, and the full pipeline is invocable from claude.ai
@@ -178,6 +184,6 @@ Plans:
 |-------|----------------|--------|-----------|
 | 50. Model Abstraction | 3/3 | Complete    | 2026-03-03 |
 | 51. Multi-Model Evaluation | 3/3 | Complete    | 2026-03-03 |
-| 52. MCP Infrastructure | 3/3 | Complete   | 2026-03-03 |
-| 53. Mesh Orchestration | 0/? | Not started | - |
+| 52. MCP Infrastructure | 3/3 | Complete    | 2026-03-03 |
+| 53. Mesh Orchestration | 0/4 | In progress | - |
 | 54. Context & Integration | 0/? | Not started | - |
