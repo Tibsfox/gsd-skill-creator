@@ -12,6 +12,7 @@
  * - Context types, transcript summarizer, and result ingestion (Phase 54, Plan 01)
  * - Mesh worktree manager and proxy committer (Phase 54, Plan 02)
  * - Skill manifest and packager (Phase 54, Plan 03)
+ * - Skill Creator MCP Server (Phase 54, Plan 04)
  */
 
 // Types and schemas
@@ -224,3 +225,10 @@ export {
 } from './skill-packager.js';
 
 export type { VariantEntry, BenchmarkEntry, SkillPackage } from './skill-packager.js';
+
+// Skill Creator MCP Server (Phase 54, Plan 04)
+export {
+  SkillCreatorMcpServer,
+  SKILL_CREATOR_TOOLS,
+  createSkillCreatorMcpServer,
+} from './skill-creator-mcp.js';
