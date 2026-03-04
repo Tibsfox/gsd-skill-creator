@@ -1,0 +1,70 @@
+# data/chipset/schema/muse-schema.yaml
+# JSON Schema (draft-07) YAML extension for muse chipset configurations.
+# All properties are optional — fully backward compatible with chipset-schema.yaml.
+# Existing chipsets validate unchanged when these fields are absent.
+
+$schema: "http://json-schema.org/draft-07/schema#"
+title: "GSD Muse Chipset Extension"
+description: "Optional muse-specific fields extending the base chipset schema. All optional."
+type: object
+properties:
+  museType:
+    type: string
+    enum: [system, user, community]
+    description: "Muse type discriminator. Presence marks this as a muse chipset."
+
+  orientation:
+    type: object
+    description: "Position on the complex plane (polar coordinates)."
+    required: [angle, magnitude]
+    properties:
+      angle:
+        type: number
+        minimum: 0
+        maximum: 6.2831853071795864
+        description: "Angular position in radians [0, 2π]."
+      magnitude:
+        type: number
+        minimum: 0
+        maximum: 1.0
+        description: "Radial distance from origin [0, 1]. 1.0 = unit circle boundary."
+    additionalProperties: false
+
+  vocabulary:
+    type: array
+    description: "Domain-specific terms and concepts this muse works with."
+    maxItems: 100
+    items:
+      type: string
+
+  voice:
+    type: object
+    description: "Communication style profile for this muse."
+    required: [tone, style]
+    properties:
+      tone:
+        type: string
+        description: "Character tone (e.g., warm-creative, precise-disciplined)."
+      style:
+        type: string
+        enum: [narrative, technical, conversational, observational, welcoming]
+        description: "Communication style category."
+      signature:
+        type: string
+        description: "Optional catchphrase or signature expression."
+    additionalProperties: false
+
+  activationPatterns:
+    type: array
+    description: "Regex patterns that trigger this muse's involvement."
+    maxItems: 20
+    items:
+      type: string
+
+  composableWith:
+    type: array
+    description: "Muse IDs this muse can be composed with."
+    items:
+      type: string
+
+additionalProperties: true
