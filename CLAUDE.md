@@ -31,7 +31,6 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
 - Imperative mood, lowercase, no period, subject <72 chars
 - A PreToolUse hook enforces this automatically
-- Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` on all commits
 
 ## Quick Reference
 
