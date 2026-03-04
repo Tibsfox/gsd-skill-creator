@@ -13,6 +13,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { ChipRegistry } from '../chips/chip-registry.js';
 import { OperationTracker } from './operation-tracker.js';
+import { SkillWorkspace } from './skill-workspace.js';
 
 // ============================================================================
 // Dependency injection types (narrow interfaces for testability)
@@ -126,6 +127,14 @@ const SkillBenchmarkInputSchema = z.object({
   iterations: z.number().optional(),
 });
 
+const SkillStatusInputSchema = z.object({
+  skillName: z.string(),
+});
+
+const SkillListInputSchema = z.object({
+  filter: z.string().optional(),
+});
+
 // ============================================================================
 // MCP Response Types
 // ============================================================================
@@ -156,7 +165,7 @@ interface ToolDefinition {
 // SKILL_CREATOR_TOOLS
 // ============================================================================
 
-/** All 8 skill creator MCP tools with their schemas */
+/** All 10 skill creator MCP tools with their schemas */
 export const SKILL_CREATOR_TOOLS: ToolDefinition[] = [
   {
     name: 'skill.create',
@@ -197,6 +206,16 @@ export const SKILL_CREATOR_TOOLS: ToolDefinition[] = [
     name: 'skill.benchmark',
     description: 'Benchmark a skill across multiple chips with optional iteration count',
     inputSchema: SkillBenchmarkInputSchema,
+  },
+  {
+    name: 'skill.status',
+    description: 'Get lifecycle state and history for a named skill',
+    inputSchema: SkillStatusInputSchema,
+  },
+  {
+    name: 'skill.list',
+    description: 'List all known skills with name, status, tested models, and last modified',
+    inputSchema: SkillListInputSchema,
   },
 ];
 
@@ -239,6 +258,8 @@ export class SkillCreatorMcpServer {
       'skill.optimize': (args) => this.handleOptimize(args as z.infer<typeof SkillOptimizeInputSchema>),
       'skill.package': (args) => this.handlePackage(args as z.infer<typeof SkillPackageInputSchema>),
       'skill.benchmark': (args) => this.handleBenchmark(args as z.infer<typeof SkillBenchmarkInputSchema>),
+      'skill.status': (args) => this.handleStatus(args as z.infer<typeof SkillStatusInputSchema>),
+      'skill.list': (args) => this.handleList(args as z.infer<typeof SkillListInputSchema>),
     };
   }
 
@@ -607,6 +628,42 @@ export class SkillCreatorMcpServer {
     );
 
     return mcpSuccess(result);
+  }
+
+  // ==========================================================================
+  // Handler: skill.status
+  // ==========================================================================
+
+  private async handleStatus(args: z.infer<typeof SkillStatusInputSchema>): Promise<McpToolResponse> {
+    const skillDir = join(this.config.skillsDir, args.skillName);
+    const tracker = new OperationTracker(skillDir);
+    await tracker.load();
+
+    // Verify skill exists by checking if we got a non-default state or status file loaded
+    const state = tracker.getState();
+    const history = tracker.getHistory();
+
+    return mcpSuccess({
+      name: args.skillName,
+      state,
+      history,
+    });
+  }
+
+  // ==========================================================================
+  // Handler: skill.list
+  // ==========================================================================
+
+  private async handleList(args: z.infer<typeof SkillListInputSchema>): Promise<McpToolResponse> {
+    const workspace = new SkillWorkspace(this.config.skillsDir);
+    let skills = await workspace.listSkills();
+
+    if (args.filter) {
+      const filterLower = args.filter.toLowerCase();
+      skills = skills.filter((s) => s.name.toLowerCase().includes(filterLower));
+    }
+
+    return mcpSuccess({ skills, total: skills.length });
   }
 }
 

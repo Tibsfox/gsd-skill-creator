@@ -226,9 +226,25 @@ export {
 
 export type { VariantEntry, BenchmarkEntry, SkillPackage } from './skill-packager.js';
 
-// Skill Creator MCP Server (Phase 54, Plan 04)
+// Operation tracker (Phase 56, Plan 01)
+export { OperationTracker } from './operation-tracker.js';
+export type { SkillLifecycleState, StateTransition } from './operation-tracker.js';
+
+// Skill workspace (Phase 56, Plan 01)
+export { SkillWorkspace } from './skill-workspace.js';
+export type { SkillWorkspaceEntry } from './skill-workspace.js';
+
+// Skill Creator MCP Server (Phase 54, Plan 04 + Phase 56)
 export {
   SkillCreatorMcpServer,
   SKILL_CREATOR_TOOLS,
   createSkillCreatorMcpServer,
+} from './skill-creator-mcp.js';
+
+export type {
+  SkillCreatorMcpConfig,
+  McpToolResponse,
+  McpEvalResult,
+  McpCapabilityProfile,
+  McpBenchmarkResult,
 } from './skill-creator-mcp.js';
