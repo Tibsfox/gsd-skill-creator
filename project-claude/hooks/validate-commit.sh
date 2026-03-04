@@ -7,8 +7,26 @@
 INPUT=$(cat)
 CMD=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null)
 
+# Block git add of .planning files
+if [[ "$CMD" =~ git[[:space:]]+add ]] && [[ "$CMD" =~ \.planning ]]; then
+  echo '{"decision": "block", "reason": ".planning/ files are local-only and must never be committed. Remove .planning from your git add command."}'
+  exit 2
+fi
+
 # Only check git commit commands
 if [[ "$CMD" =~ ^git[[:space:]]+commit ]]; then
+  # Block if .planning files are staged
+  STAGED_PLANNING=$(git diff --cached --name-only 2>/dev/null | grep '^\.planning/' || true)
+  if [ -n "$STAGED_PLANNING" ]; then
+    echo '{"decision": "block", "reason": ".planning/ files are staged. Run git reset HEAD .planning/ first. Planning docs are local-only and must never be pushed."}'
+    exit 2
+  fi
+  # Block commits with sensitive files staged
+  STAGED_SENSITIVE=$(git diff --cached --name-only 2>/dev/null | grep -E '(^|/)(\.(env|env\.[^/]*)|credentials\.[^/]*|secrets\.[^/]*|.*\.(pem|key|p12))$' || true)
+  if [ -n "$STAGED_SENSITIVE" ]; then
+    echo "{\"decision\": \"block\", \"reason\": \"Sensitive files staged for commit: ${STAGED_SENSITIVE}. Unstage them with git reset HEAD <file>.\"}"
+    exit 2
+  fi
   # Extract message from -m flag using sed (portable, no grep -P)
   # Try double-quoted -m first
   MSG=$(echo "$CMD" | sed -n 's/.*-m "\([^"]*\)".*/\1/p' 2>/dev/null)
