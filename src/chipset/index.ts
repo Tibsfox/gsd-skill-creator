@@ -15,3 +15,4 @@ export * as blitter from './blitter/index.js';
 export * as teams from './teams/index.js';
 export * as exec from './exec/index.js';
 export * as integration from './integration/index.js';
+export * from './muse-schema-validator.js';
