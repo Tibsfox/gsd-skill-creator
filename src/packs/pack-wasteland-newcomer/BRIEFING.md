@@ -20,13 +20,26 @@ This pack walks you through:
 ## For Whom?
 
 You're perfect for this pack if you:
-- Are curious about distributed work economies
-- Want to contribute to real projects
+- Are curious (that's all you need to start)
+- Want to explore how the Wasteland works
 - Like learning by doing
-- Are okay with some technical setup (Dolt + Git commands)
-- Can handle constructive feedback
+- Are willing to ask questions when stuck
+- Have a few hours of free time
 
-If you're not technical, you can still do this! We'll walk you through every command.
+**You do NOT need:**
+- Deep technical knowledge
+- Prior experience with Dolt or Git
+- Perfect code or writing
+- Confidence about what you're doing
+
+We'll walk you through every command. Your curiosity is enough.
+
+**What will happen:**
+- You'll start exploring (just because it's interesting)
+- You'll do some real work (and be surprised you could)
+- You'll help someone else (and realize you know something)
+- You'll make friends (who were also just curious once)
+- You'll teach (without planning to)
 
 ## What You'll Learn
 
