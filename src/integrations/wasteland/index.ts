@@ -184,3 +184,12 @@ export {
   getMetaLearningInsights,
   feedbackToPatternEngine,
 } from './feedback-integrator.js';
+
+export {
+  linearDecay,
+  exponentialDecay,
+  stepDecay,
+  simulateDecay,
+  recommendDecayCurve,
+} from './decay-simulator.js';
+export type { RigType, DecayCurveType, DecayInput, CurveProjection, DecaySimulationResult } from './decay-simulator.js';
