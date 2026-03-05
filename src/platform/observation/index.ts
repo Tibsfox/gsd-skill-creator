@@ -16,6 +16,10 @@ export { PromotionGatekeeper } from './promotion-gatekeeper.js';
 export { DriftMonitor } from './drift-monitor.js';
 export { FeedbackBridge } from './feedback-bridge.js';
 export { LineageTracker } from './lineage-tracker.js';
+export { SequenceRecorder, DEFAULT_RECORDER_CONFIG } from './sequence-recorder.js';
+export type { SequenceRecord, SequenceRecorderConfig, OperationType, ClusterId, FailureRisk } from './sequence-recorder.js';
+export { PatternAnalyzer } from './pattern-analyzer.js';
+export type { DetectedPattern, ClusterReassignment, HubCapacityReport } from './pattern-analyzer.js';
 
 // Types
 export type { SessionStartData, SessionEndData } from './session-observer.js';
@@ -32,6 +36,11 @@ export type { LineageEntry, LineageChain, ArtifactType, PipelineStage } from '..
 export { normalizeObservationTier, DEFAULT_DETERMINISM_CONFIG, DEFAULT_PROMOTION_DETECTOR_CONFIG, PROMOTABLE_TOOL_NAMES } from '../../core/types/observation.js';
 export { DEFAULT_SCRIPT_GENERATOR_CONFIG, DEFAULT_GATEKEEPER_CONFIG } from '../../core/types/observation.js';
 export { DEFAULT_DRIFT_MONITOR_CONFIG } from '../../core/types/observation.js';
+
+export { translateTransition, formatAdvice } from './cluster-translator.js';
+export type { MediationAdvice } from './cluster-translator.js';
+export { adviseRouting, formatRoutingAdvice } from './routing-advisor.js';
+export type { CapabilityVector, RoutingAdvice } from './routing-advisor.js';
 
 export { PhotonEmitter } from './photon-emitter.js';
 export type { PhotonPath, PhotonEcho, PhotonBatch } from '../../core/types/photon.js';
