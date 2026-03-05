@@ -1,0 +1,354 @@
+{
+  "metadata": {
+    "id": "wasteland-newcomer",
+    "title": "Find Your First Wasteland Win",
+    "description": "A 3-hour mission to claim and complete your first Wasteland task. Perfect for newcomers who want to earn their first stamps and experience the federation work economy.",
+    "type": "mission",
+    "category": "getting-started",
+    "author": "MapleFoxyBells",
+    "version": "1.0.0",
+    "created_at": "2026-03-05T08:00:00Z",
+    "updated_at": "2026-03-05T08:00:00Z",
+    "passion_alignment": ["completers", "explorers"],
+    "estimated_duration": {
+      "min_hours": 2,
+      "max_hours": 4
+    },
+    "difficulty": "beginner"
+  },
+  "mission": {
+    "goal": "Claim one open Wasteland task, complete it, and earn your first validator stamp",
+    "scope": "Includes: browsing wanted board, understanding task structure, claiming, submitting completion. Excludes: advanced validation, multi-phase tasks, specialized skills.",
+    "success_criteria": [
+      "You have a Dolt fork of hop/wl-commons",
+      "You are registered as a rig in the commons",
+      "You have claimed an open wanted task",
+      "You have submitted a completion with evidence",
+      "You have received feedback from a validator"
+    ]
+  },
+  "roles": [
+    {
+      "id": "wasteland-scout",
+      "title": "Wasteland Scout",
+      "description": "You are exploring the Wasteland for the first time. Your job: find open work, claim it, do it well, and submit with pride.",
+      "complex_plane_position": {
+        "real": 0.6,
+        "imaginary": 0.7
+      },
+      "responsibilities": [
+        "Browse the wanted board",
+        "Understand what makes a good task",
+        "Do the work thoroughly",
+        "Submit with clear evidence",
+        "Learn from validator feedback"
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1-setup",
+      "title": "Phase 1: Setup Your Wasteland Home",
+      "description": "Install Dolt, create your local commons, and register as a rig",
+      "estimated_duration_minutes": 30,
+      "sequence": 1,
+      "objectives": [
+        "Install Dolt on your system",
+        "Create a DoltHub account and authenticate",
+        "Fork and clone the commons",
+        "Register yourself as a rig"
+      ],
+      "instructions": "## Phase 1: Setup Your Wasteland Home\n\n### Step 1a: Install Dolt\n\nDolt is the database engine that powers the Wasteland. It works like git, but for SQL.\n\n**macOS:**\n```bash\nbrew install dolt\n```\n\n**Linux:**\n```bash\ncurl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | bash\n```\n\nVerify:\n```bash\ndolt version\n```\n\n### Step 1b: Create a DoltHub Account\n\nGo to [dolthub.com](https://www.dolthub.com/) and sign up. Then authenticate locally:\n\n```bash\ndolt login\n```\n\nThis opens a browser. Authorize and your credentials are saved.\n\n### Step 1c: Fork and Clone\n\nGo to [dolthub.com/repositories/hop/wl-commons](https://www.dolthub.com/repositories/hop/wl-commons) and click **Fork** to create `your-org/wl-commons`.\n\nThen clone:\n```bash\nmkdir -p ~/.hop/commons\ndolt clone your-org/wl-commons ~/.hop/commons/hop/wl-commons\ncd ~/.hop/commons/hop/wl-commons\ndolt remote add upstream https://doltremoteapi.dolthub.com/hop/wl-commons\n```\n\n### Step 1d: Register as a Rig\n\n```bash\ncd ~/.hop/commons/hop/wl-commons\ndolt sql -q \"INSERT INTO rigs (handle, display_name, dolthub_org, owner_email, gt_version, trust_level, rig_type, registered_at, last_seen) VALUES ('YourHandle', 'Your Display Name', 'your-org', 'you@example.com', 'mvr-0.1', 1, 'human', NOW(), NOW()) ON DUPLICATE KEY UPDATE last_seen = NOW()\"\ndolt add .\ndolt commit -m \"Register rig: YourHandle\"\ndolt push origin main\n```\n\n## You're In!\n\nYou now have a Wasteland home and are registered as a rig.",
+      "resources": [
+        {
+          "type": "url",
+          "label": "Dolt Installation Guide",
+          "path_or_url": "https://docs.dolthub.com/reference/cli/install"
+        },
+        {
+          "type": "url",
+          "label": "DoltHub Account Creation",
+          "path_or_url": "https://www.dolthub.com/"
+        }
+      ],
+      "exit_points": [
+        {
+          "label": "Installation fails on your system",
+          "safe_retreat": "Ask for help in #setup channel. Sam (0.50, 0.50) can help troubleshoot."
+        },
+        {
+          "label": "Dolt or DoltHub feels overwhelming",
+          "safe_retreat": "Take a break. Come back to this. It gets easier. Sam is here."
+        }
+      ],
+      "checkpoint": {
+        "question": "Are you registered as a rig in your local commons?",
+        "success_criteria": [
+          "You have dolt version installed",
+          "You have authenticated with DoltHub",
+          "Your fork exists at your-org/wl-commons",
+          "Your rig is in the rigs table (check: dolt sql -q 'SELECT * FROM rigs WHERE handle = \"YourHandle\"')"
+        ]
+      }
+    },
+    {
+      "id": "phase-2-browse",
+      "title": "Phase 2: Browse the Wanted Board",
+      "description": "See what work is available and pick something that interests you",
+      "estimated_duration_minutes": 20,
+      "sequence": 2,
+      "objectives": [
+        "Pull the latest wanted board from upstream",
+        "Query open tasks",
+        "Identify a task that matches your interests and skill level",
+        "Understand what success looks like for that task"
+      ],
+      "instructions": "## Phase 2: Browse the Wanted Board\n\n### Pull Latest\n\n```bash\ncd ~/.hop/commons/hop/wl-commons\ndolt pull upstream main\n```\n\n### Query Open Tasks\n\n```bash\ndolt sql -r tabular -q \"\n  SELECT id, title, status, effort_level, posted_by\n  FROM wanted\n  WHERE status = 'open'\n  ORDER BY priority ASC\n\"\n```\n\n### Pick a Task\n\nLook for:\n- **Effort level:** Start with `small` or `medium`\n- **Your interests:** Tasks that match what you like to do\n- **Your skills:** Something you can realistically complete\n\nExample good first tasks:\n- Writing documentation\n- Creating a simple tool\n- Reviewing and organizing information\n- Design or creative work\n- Testing or quality feedback\n\n### Understand Success\n\nFor the task you picked, read its description carefully:\n- What is the deliverable?\n- What format should it be in?\n- Are there any requirements or constraints?\n- Who will validate it, and what are they looking for?\n\n## You're Ready to Claim!\n\nYou know what's available and what you want to work on.",
+      "resources": [
+        {
+          "type": "command",
+          "label": "Query Wanted Board",
+          "path_or_url": "dolt sql -r tabular -q 'SELECT id, title, status, effort_level FROM wanted WHERE status = \"open\"'"
+        }
+      ],
+      "exit_points": [
+        {
+          "label": "No tasks match your interests",
+          "safe_retreat": "Check back later. New tasks get posted regularly. Sam can suggest tasks suited to your strengths."
+        },
+        {
+          "label": "All tasks feel too hard",
+          "safe_retreat": "That's okay. Pick the smallest task and start there. You'll learn as you go."
+        }
+      ],
+      "checkpoint": {
+        "question": "Do you have a task in mind that you want to claim?",
+        "success_criteria": [
+          "You have pulled upstream main",
+          "You can list open wanted tasks",
+          "You have chosen a specific task ID (e.g., 'w-com-001')",
+          "You understand what the task requires"
+        ]
+      }
+    },
+    {
+      "id": "phase-3-claim",
+      "title": "Phase 3: Claim Your Task",
+      "description": "Signal to the community that you're working on this task",
+      "estimated_duration_minutes": 10,
+      "sequence": 3,
+      "objectives": [
+        "Claim your chosen task",
+        "Update your local commons",
+        "Push the claim to the network"
+      ],
+      "instructions": "## Phase 3: Claim Your Task\n\nClaiming tells everyone you're working on this. It prevents duplicate effort.\n\n### Step 3a: Update the Database\n\nReplace `w-com-001` with your actual task ID and `YourHandle` with your rig handle:\n\n```bash\ncd ~/.hop/commons/hop/wl-commons\ndolt sql -q \"UPDATE wanted SET claimed_by='YourHandle', status='claimed', updated_at=NOW() WHERE id='w-com-001' AND status='open'\"\n```\n\n### Step 3b: Commit and Push\n\n```bash\ndolt add .\ndolt commit -m \"Claim: w-com-001\"\ndolt push origin main\n```\n\n## You've Claimed It!\n\nYour claim is recorded. Now you own this task.",
+      "resources": [
+        {
+          "type": "command",
+          "label": "Claim a Task",
+          "path_or_url": "dolt sql -q \"UPDATE wanted SET claimed_by='YourHandle', status='claimed', updated_at=NOW() WHERE id='w-com-001'\""
+        }
+      ],
+      "exit_points": [
+        {
+          "label": "Push fails (merge conflict)",
+          "safe_retreat": "Pull first: `dolt pull upstream main`, resolve conflicts, then push again."
+        }
+      ],
+      "checkpoint": {
+        "question": "Is your claim recorded in the commons?",
+        "success_criteria": [
+          "You have run the UPDATE command",
+          "You have committed the change",
+          "You have pushed to origin",
+          "Your claim is reflected in upstream (check: dolt sql -q 'SELECT * FROM wanted WHERE id = \"w-com-001\"')"
+        ]
+      }
+    },
+    {
+      "id": "phase-4-work",
+      "title": "Phase 4: Do the Work",
+      "description": "Build, research, write, design — whatever the task requires",
+      "estimated_duration_minutes": 120,
+      "sequence": 4,
+      "objectives": [
+        "Complete the task according to its requirements",
+        "Create clear, high-quality work",
+        "Prepare evidence of completion"
+      ],
+      "instructions": "## Phase 4: Do the Work\n\nThis is your time to shine. The task description tells you what to build.\n\n### Tips for Success\n\n1. **Read requirements carefully** — understand the acceptance criteria\n2. **Work step by step** — break the task into small pieces\n3. **Quality over speed** — validators reward good work\n4. **Document as you go** — keep notes of what you did\n5. **Ask questions** — if something's unclear, use the #help channel\n\n### Types of Work\n\n- **Code:** Create or improve a program or feature\n- **Documentation:** Write clear, helpful guides or docs\n- **Research:** Investigate something and summarize findings\n- **Design:** Create mockups, specifications, or visual work\n- **Testing:** Try something and give detailed feedback\n- **Review:** Read and comment on someone else's work\n\n### Prepare Evidence\n\nWhen you're done, you'll need proof:\n- A pull request link\n- A commit hash\n- A file path\n- A description of what you did\n\n## You've Built Something!\n\nNow prepare to submit.",
+      "resources": [
+        {
+          "type": "url",
+          "label": "Wasteland MVR Protocol",
+          "path_or_url": "./RESOURCES/mvr-protocol.md"
+        }
+      ],
+      "exit_points": [
+        {
+          "label": "Stuck on the work",
+          "safe_retreat": "Post in #help. Describe what you're stuck on. Community will help. Sam (0.50, 0.50) can guide you."
+        },
+        {
+          "label": "Realized the task is too hard",
+          "safe_retreat": "That's okay. You learned something. Abandon this task, claim a different one, and try again."
+        }
+      ],
+      "checkpoint": {
+        "question": "Is your work ready to submit?",
+        "success_criteria": [
+          "Your work meets the task requirements",
+          "You have evidence (link, commit, file path, or description)",
+          "You've tested it if it's code",
+          "You're proud of what you've done"
+        ]
+      }
+    },
+    {
+      "id": "phase-5-submit",
+      "title": "Phase 5: Submit Your Completion",
+      "description": "Log your evidence and move the task to review",
+      "estimated_duration_minutes": 10,
+      "sequence": 5,
+      "objectives": [
+        "Create a completion record",
+        "Submit evidence of your work",
+        "Move the task to in_review status"
+      ],
+      "instructions": "## Phase 5: Submit Your Completion\n\n### Step 5a: Prepare Evidence\n\nYou need one of:\n- A pull request URL: `https://github.com/your-org/your-repo/pull/123`\n- A commit hash: `abc1234567890def`\n- A file path: `docs/my-guide.md`\n- A description: \"I researched X and found Y\"\n\n### Step 5b: Create a Completion Record\n\nReplace the values with your actual task, handle, and evidence:\n\n```bash\ncd ~/.hop/commons/hop/wl-commons\nCOMP_ID=\"c-$(openssl rand -hex 5)\"\ndolt sql -q \"INSERT INTO completions (id, wanted_id, completed_by, evidence, completed_at) VALUES ('$COMP_ID', 'w-com-001', 'YourHandle', 'https://your-evidence-link', NOW())\"\n```\n\n### Step 5c: Update Status and Push\n\n```bash\ndolt sql -q \"UPDATE wanted SET status='in_review', updated_at=NOW() WHERE id='w-com-001'\"\ndolt add .\ndolt commit -m \"Complete: w-com-001\"\ndolt push origin main\n```\n\n## Submitted!\n\nYour completion is in review. A validator will look at it soon.",
+      "resources": [
+        {
+          "type": "command",
+          "label": "Create Completion",
+          "path_or_url": "dolt sql -q \"INSERT INTO completions (id, wanted_id, completed_by, evidence, completed_at) VALUES ('c-xxxxx', 'w-com-001', 'YourHandle', 'evidence-url', NOW())\""
+        }
+      ],
+      "exit_points": [
+        {
+          "label": "Push fails",
+          "safe_retreat": "Pull upstream first, resolve conflicts, try again."
+        }
+      ],
+      "checkpoint": {
+        "question": "Is your completion submitted?",
+        "success_criteria": [
+          "You have created a completion record",
+          "You have provided clear evidence",
+          "The task status is now 'in_review'",
+          "Your completion is visible in the commons"
+        ]
+      }
+    },
+    {
+      "id": "phase-6-celebrate",
+      "title": "Phase 6: Get Your Stamp & Celebrate",
+      "description": "A validator reviews your work and gives you feedback",
+      "estimated_duration_minutes": 0,
+      "sequence": 6,
+      "objectives": [
+        "Receive validator feedback",
+        "Get your first stamp",
+        "Reflect on what you learned"
+      ],
+      "instructions": "## Phase 6: Get Your Stamp & Celebrate\n\nYou've done it! Now a validator (trust_level 2+) will review your completion.\n\n### What Happens Next\n\n1. **Review** — A validator examines your work\n2. **Stamp** — They assign a rating:\n   ```json\n   {\"quality\": 4, \"reliability\": 5, \"creativity\": 3}\n   ```\n3. **Feedback** — They post comments and suggestions\n4. **Passbook** — Your stamp goes in your chain of achievements\n\n### Stamps\n\nStamps are multi-dimensional ratings:\n- **Quality** — How well you did the work\n- **Reliability** — Did you follow through and meet requirements?\n- **Creativity** — Did you bring new ideas or do it in a novel way?\n\nEach dimension is rated 1-5. Over time, your stamps build a reputation.\n\n### You've Earned Your First Stamp!\n\nYou're now a contributor in the Wasteland. Your work is on the record. You can claim bigger tasks, validator roles, and more challenging work.\n\n## Reflect\n\nBefore you move to your next task:\n1. What did you learn?\n2. What was hard? What was easy?\n3. What would you do differently next time?\n4. What task should you claim next?\n\n## Next Steps\n\n- **Claim another task** — Choose something bigger or different\n- **Become a validator** — Help others by reviewing their work\n- **Build your own task** — Post a wanted item for others to claim\n- **Join the community** — Chat in #learning, #help, #celebrate\n\n**Welcome to the Wasteland!**",
+      "resources": [
+        {
+          "type": "url",
+          "label": "Passbook System",
+          "path_or_url": "./RESOURCES/passbook-guide.md"
+        }
+      ],
+      "exit_points": [],
+      "checkpoint": {
+        "question": "How do you feel about your first Wasteland achievement?",
+        "success_criteria": [
+          "You have received validator feedback",
+          "You have a stamp in your chain",
+          "You understand what you learned",
+          "You know what to do next"
+        ]
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "type": "checkpoint",
+      "prompt": "At the end of each phase, you'll answer a checkpoint question to verify you're ready to move forward.",
+      "success_indicators": [
+        "You understand the objectives",
+        "You have completed the required steps",
+        "You're confident moving to the next phase"
+      ],
+      "feedback_template": "Great work completing Phase X! You've successfully [specific achievement]. Here's what you learned: [key takeaway]."
+    },
+    {
+      "type": "reflection",
+      "prompt": "After completing the full mission, reflect on your journey: What did you learn? What was hardest? What are you proud of?",
+      "success_indicators": [
+        "You can articulate what you learned",
+        "You recognize challenges you overcame",
+        "You identify what to do next"
+      ],
+      "feedback_template": "Your reflection shows thoughtful engagement with the work. You demonstrate understanding by [specific example]."
+    }
+  ],
+  "safe_reversibility": {
+    "entry_point": "Start at Phase 1: Setup Your Wasteland Home. No prior knowledge required.",
+    "exit_points": [
+      {
+        "phase": 1,
+        "label": "Installation or setup is blocking you",
+        "next_step": "Post in #setup channel. Get help from the community. No judgment — technical setup can be tricky."
+      },
+      {
+        "phase": 2,
+        "label": "No tasks match your interests or skill level",
+        "next_step": "Check back later. New tasks posted regularly. Talk to Sam at (0.50, 0.50) for recommendations."
+      },
+      {
+        "phase": 3,
+        "label": "You realized you don't want to do this task",
+        "next_step": "Abandon this task gracefully (dolt update wanted set status = 'open' where id = ...). Claim a different one."
+      },
+      {
+        "phase": 4,
+        "label": "The work is harder than expected",
+        "next_step": "Ask for help in #help. Break it into smaller pieces. It's okay to take time. Sam is here."
+      },
+      {
+        "phase": 5,
+        "label": "Validation feedback is critical or discouraging",
+        "next_step": "Remember: every expert was once a beginner. Use feedback to improve. Try again. Sam (0.50, 0.50) is your safe place."
+      }
+    ],
+    "refuge_point": "Sam (0.50, 0.50) — the center of the complex plane, always available for help, guidance, or just to listen. When overwhelmed, return to center.",
+    "graceful_failure": "If you get stuck or want to stop: (1) That's completely okay. (2) Abandon your claimed task gracefully. (3) Reflect on what you learned. (4) Take a break. (5) Try a different pack or a smaller task next time. There is no penalty for learning."
+  },
+  "resources": {
+    "documentation": [
+      {
+        "title": "Getting Started with the Wasteland",
+        "path": "docs/wasteland-getting-started.md"
+      },
+      {
+        "title": "Wasteland MVR Protocol",
+        "path": "./RESOURCES/mvr-protocol.md"
+      }
+    ],
+    "tools": [
+      "dolt",
+      "A text editor or IDE"
+    ],
+    "external_links": [
+      {
+        "title": "DoltHub",
+        "url": "https://www.dolthub.com/"
+      },
+      {
+        "title": "Dolt Documentation",
+        "url": "https://docs.dolthub.com/"
+      }
+    ]
+  }
+}

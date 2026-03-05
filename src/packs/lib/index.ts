@@ -1,0 +1,12 @@
+/**
+ * Pack Infrastructure Library
+ *
+ * Exports:
+ * - Type schemas for pack documents and progress
+ * - PackLoader for loading packs from disk
+ * - PackCLI for creating and managing packs
+ */
+
+export * from './pack-types';
+export { PackLoader } from './pack-loader';
+export { PackCLI } from './pack-cli';
