@@ -64,10 +64,10 @@ dolt login
 
 This opens a browser. Authorize, and your credentials are saved locally.
 
-Verify:
+Verify your credentials are active:
 ```bash
-dolt creds check
-# Success. User: your-username, Email: you@example.com
+dolt creds ls
+# * <credential-id>  (the asterisk marks the active credential)
 ```
 
 ---
