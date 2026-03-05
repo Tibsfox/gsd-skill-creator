@@ -248,5 +248,5 @@ For the mathematical foundations that packs draw on:
 [Eight-Layer Progression](foundations/eight-layer-progression.md).
 
 For the framework that produces these packs:
-[Agentic Programming](principles/agentic-programming.md) and the
+[Agentic Programming](docs/principles/agentic-programming.md) and the
 [Skills-and-Agents report](https://tibsfox.com/Skills-and-Agents/).
