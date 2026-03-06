@@ -15,7 +15,7 @@
  * All JSON output uses sorted keys for deterministic, git-diff-friendly output.
  */
 
-import { mkdir, writeFile, readFile, readdir, rename, open } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rename, open, unlink } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import type {
@@ -269,7 +269,6 @@ export class StateManager {
 
   /** Clear a hook assignment by deleting the hook file. */
   async clearHook(agentId: string): Promise<void> {
-    const { unlink } = await import('node:fs/promises');
     try {
       await unlink(this.hookPath(agentId));
     } catch {
