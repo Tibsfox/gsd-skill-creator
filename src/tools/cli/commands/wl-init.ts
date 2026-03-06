@@ -16,7 +16,7 @@ import pc from 'picocolors';
 import * as os from 'node:os';
 import { saveConfig } from '../../../integrations/wasteland/config.js';
 import { createClient } from '../../../integrations/wasteland/dolthub-client.js';
-import { sqlEscape } from '../../../integrations/wasteland/sql-escape.js';
+import { sqlEscape, screenForInjection } from '../../../integrations/wasteland/sql-escape.js';
 import type { HopConfig } from '../../../integrations/wasteland/config.js';
 
 // ============================================================================
@@ -179,13 +179,20 @@ export async function wlInitCommand(
 
   // 4. Generate registration SQL — all string values route through sqlEscape()
   const sql = [
-    `-- Register rig: ${handle}`,
+    `-- Register rig: ${sqlEscape(handle)}`,
     `INSERT INTO rigs (handle, display_name, type, dolthub_org, email, joined_at)`,
     `VALUES ('${sqlEscape(handle)}', '${sqlEscape(display_name)}', '${sqlEscape(type)}', '${sqlEscape(dolthub_org)}', '${sqlEscape(email)}', '${new Date().toISOString()}');`,
   ].join('\n');
 
   // 5. Execute path (--execute)
   if (executeMode) {
+    const warnings = screenForInjection(sql);
+    if (warnings.length > 0) {
+      console.error(pc.red('Injection pattern detected in generated SQL:'));
+      for (const w of warnings) console.error(pc.red(`  - ${w}`));
+      return 1;
+    }
+
     const client = createClient({
       upstream: 'hop/wl-commons',
       fork,
