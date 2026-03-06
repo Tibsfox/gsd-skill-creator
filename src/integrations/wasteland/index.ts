@@ -193,3 +193,32 @@ export {
   recommendDecayCurve,
 } from './decay-simulator.js';
 export type { RigType, DecayCurveType, DecayInput, CurveProjection, DecaySimulationResult } from './decay-simulator.js';
+
+// Stamp Validator
+export {
+  parseEvidence,
+  scoreQuality,
+  scoreReliability,
+  scoreCreativity,
+  computeValence,
+  computeConfidence,
+  classifySeverity,
+  generateStampId,
+  generateMessage,
+  parseTags,
+  buildStamp,
+  toSQL,
+  toSQLScript,
+  validate as validateCompletions,
+  createDoltHubProvider,
+} from './stamp-validator.js';
+export type {
+  WantedItem,
+  CompletionRecord,
+  EvidenceSignals,
+  Valence,
+  StampRecommendation,
+  ValidatorConfig,
+  ValidationResult,
+  ValidationDataProvider,
+} from './stamp-validator.js';
