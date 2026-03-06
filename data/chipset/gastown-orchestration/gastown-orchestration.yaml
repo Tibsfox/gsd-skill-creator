@@ -1,0 +1,239 @@
+# ==========================================================================
+# Gastown Orchestration Chipset Definition
+# ==========================================================================
+# Multi-agent orchestration chipset absorbing steveyegge/gastown patterns
+# into the GSD chipset architecture. Maps Gastown's production-tested
+# coordination (Mayor/Witness/Polecat/Refinery) to hardware equivalents
+# (Northbridge/PMU/ALU/DMA) and declares all agent topologies, skills,
+# communication channels, and dispatch configuration.
+#
+# Token budget: skills sum to ~1.0 (relative weights).
+# Actual token allocation = weight * base_budget (default 10,000).
+# All required + recommended weights must sum <= 1.0 to fit budget.
+
+# ==========================================================================
+# Header — Chipset Identity
+# ==========================================================================
+
+header:
+  name: gastown-orchestration
+  version: 1.0.0
+  archetype: multi-agent-orchestration
+  description: >-
+    Production multi-agent orchestration chipset based on Gastown patterns.
+    Coordinates 1-30 agents via mayor/witness/polecat/refinery topology
+    with GUPP propulsion, sling dispatch, and filesystem-based communication.
+  provenance: steveyegge/gastown
+
+# ==========================================================================
+# Skills — Required and Recommended Skill Manifest
+# ==========================================================================
+# Token budget weights are relative fractions (0.0 - 1.0).
+# Required skills: agent-topology (0.25), gupp-propulsion (0.18),
+#   beads-persistence (0.18), sling-dispatch (0.18) = 0.79
+# Recommended skills: convoy-batch (0.09), formula-microcode (0.09) = 0.18
+# Total: 0.97 — within 1.0 budget ceiling.
+
+skills:
+  required:
+    - name: agent-topology
+      domain: orchestration
+      description: >-
+        Hierarchical agent supervision and coordination.
+        Maps Mayor (Northbridge), Witness (PMU), Refinery (DMA),
+        Polecat (ALU) roles to hardware-equivalent patterns.
+      token_budget_weight: 0.25
+
+    - name: gupp-propulsion
+      domain: orchestration
+      description: >-
+        Interrupt-driven work execution with enforcement.
+        GUPP (Gas Town Universal Propulsion Principle) ensures agents
+        act on hooked work immediately — physics over politeness.
+      token_budget_weight: 0.18
+
+    - name: beads-persistence
+      domain: infrastructure
+      description: >-
+        Git-backed durable state for agents and work items.
+        Every work item is a bead with lifecycle tracking,
+        persisted to filesystem for crash recovery.
+      token_budget_weight: 0.18
+
+    - name: sling-dispatch
+      domain: workflow
+      description: >-
+        Work dispatch pipeline with batch and formula modes.
+        Routes beads to polecats via hooks, supports parallel
+        dispatch up to max_parallel limit.
+      token_budget_weight: 0.18
+
+  recommended:
+    - name: convoy-batch
+      domain: workflow
+      description: >-
+        Batch work coordination across multiple agents.
+        Groups related beads into convoys for aggregate
+        progress tracking and coordinated completion.
+      token_budget_weight: 0.09
+
+    - name: formula-microcode
+      domain: workflow
+      description: >-
+        TOML-based workflow templates for repeatable operations.
+        Formulas define multi-step agent workflows as
+        declarative microcode sequences.
+      token_budget_weight: 0.09
+
+# ==========================================================================
+# Agents — Topology Configuration
+# ==========================================================================
+# Topology: mayor-witness-polecat (leader-worker with observer)
+#
+# Mayor = Northbridge: coordinates cross-rig routing, owns convoys
+# Witness = PMU: monitors polecat health, detects stalls, reports metrics
+# Refinery = DMA: sequential merge queue processing, deterministic
+# Polecat Pool = ALU: ephemeral workers, dynamic count, max 30
+
+agents:
+  topology: mayor-witness-polecat
+  agents:
+    - name: mayor
+      role: mayor
+      skills:
+        - agent-topology
+        - sling-dispatch
+        - convoy-batch
+
+    - name: witness
+      role: witness
+      skills:
+        - agent-topology
+        - gupp-propulsion
+
+    - name: refinery
+      role: refinery
+      skills:
+        - beads-persistence
+        - sling-dispatch
+
+    - name: polecat-pool
+      role: polecat
+      count: 5
+      skills:
+        - gupp-propulsion
+        - beads-persistence
+
+# ==========================================================================
+# Communication — Inter-Agent Channels
+# ==========================================================================
+# Filesystem-based bus architecture. No tmux dependency.
+#
+# mail = PCIe (async durable): persistent messages between agents
+# nudge = SMI (sync immediate): lightweight pings for GUPP enforcement
+# hook = MMIO (pull-based): work assignment state registers
+# handoff = Bus Reset (cycling): ownership transfer for merge queue
+
+communication:
+  channels:
+    - name: mail
+      type: mail
+      filesystem_path: state/mail/
+      behavior: >-
+        Async durable messaging. Messages persisted to
+        state/mail/{recipient}/{timestamp}-{sender}.json.
+        Used for work assignments, status reports, and
+        coordination directives between agents.
+
+    - name: nudge
+      type: nudge
+      filesystem_path: state/nudge/
+      behavior: >-
+        Sync immediate pings. Lightweight signals for
+        GUPP enforcement and heartbeat checks. Non-durable,
+        consumed on read. Deacon sends periodic nudges to
+        detect stalled agents.
+
+    - name: hook
+      type: hook
+      filesystem_path: state/hooks/
+      behavior: >-
+        Pull-based work assignment registers. Each agent
+        has a hook file (state/hooks/{agentId}.json) that
+        tracks assigned work. Agents poll their hook to
+        discover new assignments.
+
+    - name: handoff
+      type: handoff
+      filesystem_path: state/merge-queue/
+      behavior: >-
+        Cycling ownership transfer for merge processing.
+        When a polecat completes work, it creates a merge
+        request. The refinery processes the queue sequentially,
+        one handoff at a time.
+
+# ==========================================================================
+# Dispatch — Sling Work Distribution
+# ==========================================================================
+# Sling is the instruction dispatch unit. It routes beads (work items)
+# to available polecats through hooks. Supports single dispatch,
+# batch dispatch (convoy), and formula-driven dispatch (microcode).
+
+dispatch:
+  strategy: sling
+  max_parallel: 10
+  batch_threshold: 3
+  formula_support: true
+
+# ==========================================================================
+# Evaluation — Quality Gates
+# ==========================================================================
+# Pre-deploy checks that must pass before agents begin work.
+# agent_identity: every agent must have a valid identity bead (block)
+# gupp_response_time: agents must respond to hooks within 30s (warn)
+# hook_durability: hook state must survive across sessions (block)
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: agent_identity
+        threshold: 100
+        action: block
+
+      - check: gupp_response_time
+        threshold: 30
+        action: warn
+
+      - check: hook_durability
+        threshold: 100
+        action: block
+
+# ==========================================================================
+# Runtime — Hardware Abstraction Layer (HAL)
+# ==========================================================================
+# Provider capabilities matrix. The chipset adapts its behavior
+# based on which runtime is available.
+
+runtime:
+  providers:
+    - name: claude_code
+      capabilities:
+        - subagent_spawn
+        - filesystem_access
+        - git_operations
+        - hook_injection
+        - tool_use
+
+    - name: codex
+      capabilities:
+        - subagent_spawn
+        - filesystem_access
+        - git_operations
+        - sandbox_execution
+
+    - name: gemini
+      capabilities:
+        - subagent_spawn
+        - filesystem_access
+        - git_operations
+        - tool_use
