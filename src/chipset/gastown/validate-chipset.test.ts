@@ -205,6 +205,17 @@ describe('validateChipset', () => {
     const skills = data.skills as Record<string, unknown>;
     skills.recommended = [];
 
+    // Also remove references to recommended skills from agents
+    // (convoy-batch was recommended and referenced by mayor)
+    const agents = data.agents as Record<string, unknown>;
+    const agentList = agents.agents as Array<Record<string, unknown>>;
+    for (const agent of agentList) {
+      const agentSkills = agent.skills as string[];
+      agent.skills = agentSkills.filter(
+        (s) => s !== 'convoy-batch' && s !== 'formula-microcode',
+      );
+    }
+
     const result = validateChipset(toYaml(data), SCHEMA_PATH);
     expect(result.valid).toBe(true);
     expect(result.errors).toHaveLength(0);
