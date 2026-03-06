@@ -1,0 +1,284 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gastown Orchestration Chipset Configuration",
+  "description": "Validates the gastown-orchestration.yaml chipset definition for multi-agent orchestration with mayor/witness/polecat topology, GUPP hooks, sling dispatch, and filesystem-based communication.",
+  "type": "object",
+  "required": ["header", "skills", "agents", "communication", "dispatch", "evaluation", "runtime"],
+  "additionalProperties": false,
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "Chipset identity and metadata.",
+      "required": ["name", "version", "archetype", "description", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Chipset identifier (e.g., 'gastown-orchestration')."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version (major.minor.patch)."
+        },
+        "archetype": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Chipset archetype (e.g., 'multi-agent-orchestration')."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable chipset description."
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Origin or source reference for this chipset."
+        }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "description": "Skill manifest declaring required and recommended skills.",
+      "required": ["required", "recommended"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "array",
+          "description": "Skills that must be loaded for the chipset to function.",
+          "items": {
+            "$ref": "#/definitions/skill_entry"
+          }
+        },
+        "recommended": {
+          "type": "array",
+          "description": "Skills that enhance but are not essential.",
+          "items": {
+            "$ref": "#/definitions/skill_entry"
+          }
+        }
+      }
+    },
+    "agents": {
+      "type": "object",
+      "description": "Agent topology configuration.",
+      "required": ["topology", "agents"],
+      "additionalProperties": false,
+      "properties": {
+        "topology": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Topology pattern name (e.g., 'mayor-witness-polecat')."
+        },
+        "agents": {
+          "type": "array",
+          "description": "Agent definitions in the topology.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "role", "skills"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Agent name."
+              },
+              "role": {
+                "type": "string",
+                "enum": ["mayor", "witness", "refinery", "polecat", "crew"],
+                "description": "Agent role in the Gastown topology."
+              },
+              "skills": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "description": "Skills this agent uses."
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "Number of instances to spawn (default 1, hard max 30)."
+              }
+            }
+          }
+        }
+      }
+    },
+    "communication": {
+      "type": "object",
+      "description": "Inter-agent communication configuration.",
+      "required": ["channels"],
+      "additionalProperties": false,
+      "properties": {
+        "channels": {
+          "type": "array",
+          "description": "Available communication channels.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "filesystem_path", "behavior"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Channel name."
+              },
+              "type": {
+                "type": "string",
+                "enum": ["mail", "nudge", "hook", "handoff"],
+                "description": "Channel type."
+              },
+              "filesystem_path": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Filesystem path for this channel's state."
+              },
+              "behavior": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Channel behavior description."
+              }
+            }
+          }
+        }
+      }
+    },
+    "dispatch": {
+      "type": "object",
+      "description": "Work dispatch configuration.",
+      "required": ["strategy", "max_parallel", "batch_threshold", "formula_support"],
+      "additionalProperties": false,
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Dispatch strategy (e.g., 'sling', 'round-robin')."
+        },
+        "max_parallel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30,
+          "description": "Maximum parallel work items."
+        },
+        "batch_threshold": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum batch size before dispatching."
+        },
+        "formula_support": {
+          "type": "boolean",
+          "description": "Whether formula-based dispatch is supported."
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation gates.",
+      "required": ["gates"],
+      "additionalProperties": false,
+      "properties": {
+        "gates": {
+          "type": "object",
+          "required": ["pre_deploy"],
+          "additionalProperties": false,
+          "properties": {
+            "pre_deploy": {
+              "type": "array",
+              "description": "Pre-deploy quality gate checks.",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["check", "threshold", "action"],
+                "additionalProperties": false,
+                "properties": {
+                  "check": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Check identifier."
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Pass/fail threshold."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": ["block", "warn", "log"],
+                    "description": "Action on failure."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "description": "Runtime provider configuration.",
+      "required": ["providers"],
+      "additionalProperties": false,
+      "properties": {
+        "providers": {
+          "type": "array",
+          "description": "Available runtime providers.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "capabilities"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Provider name (e.g., 'claude', 'codex', 'gemini')."
+              },
+              "capabilities": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "description": "List of capabilities this provider supports."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "skill_entry": {
+      "type": "object",
+      "required": ["name", "domain", "description", "token_budget_weight"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Skill name (kebab-case)."
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Domain this skill belongs to."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable description."
+        },
+        "token_budget_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Relative token budget weight (0.0 - 1.0)."
+        }
+      }
+    }
+  }
+}
