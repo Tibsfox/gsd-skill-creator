@@ -174,6 +174,26 @@ The Gastown chipset ships as:
 - TypeScript types, a 4-stage validator, and a crash-recoverable StateManager
 - 108 tests across 7 test files
 
+### What Lives Where
+
+The two chipsets are complementary layers, not alternatives. Amiga manages resources within a single agent context — memory, output, I/O, lifecycle. Gastown coordinates between multiple agents — who works on what, how they communicate, when work is done. A system can use both: Amiga governs what happens inside each agent, Gastown governs what happens between them.
+
+| Concern | Amiga Chipset | Gastown Chipset |
+|---------|---------------|-----------------|
+| Context/memory management | Agnus | — |
+| Code generation/output | Denise | — |
+| File I/O, API calls | Paula | — |
+| Routing, lifecycle | Gary | — |
+| Agent dispatch | — | Sling |
+| Agent retirement | — | Done |
+| Multi-agent coordination | — | Mayor |
+| Task execution | — | Polecat |
+| Health monitoring | — | Witness |
+| Merge queue processing | — | Refinery |
+| Async messaging | — | Mail |
+| Sync signaling | — | Nudge |
+| Work assignment | — | Hook |
+
 **Gastown is not a dependency.** The chipset is an independent implementation of Gastown's coordination patterns expressed in gsd-skill-creator's native formats. If Gastown disappeared tomorrow, the chipset would continue to work. But if you run Gastown alongside gsd-skill-creator, the 10-document integration guide in `docs/gastown-integration/` explains how they interoperate and where the trust boundaries lie.
 
 > **See also:** [Gastown Integration Guide](gastown-integration/README.md) — architecture overview, concept mapping, trust boundary model, setup instructions, agent topology, communication channels, dispatch/retirement pipelines, upstream intelligence, multi-instance operation, and GSD milestone workflow.
