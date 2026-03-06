@@ -236,8 +236,8 @@ To discover wastelands, a rig queries the root commons `chain_meta` table. Each 
 
 ## Next Steps
 
-- **See the big picture:** [wasteland-ecosystem.md](wasteland-ecosystem.md) maps how all the pieces fit together — federation architecture, rig types, data flow, and trust progression across the system. (Available soon — DOC-03.)
-- **Troubleshooting:** [wasteland-faq.md](wasteland-faq.md) covers common problems by symptom, including actual error messages for searchability. (Available soon — DOC-04.)
+- **See the big picture:** [wasteland-ecosystem.md](wasteland-ecosystem.md) maps how all the pieces fit together — federation architecture, rig types, data flow, and trust progression across the system.
+- **Troubleshooting:** [wasteland-faq.md](wasteland-faq.md) covers common problems by symptom, including actual error messages for searchability.
 - **Formal specification:** For implementers and anyone who wants the authoritative source: [mvr-protocol-spec.md](mvr-protocol-spec.md) covers the full schema, all operations with SQL, trust model, and federation in RFC-style detail.
 
 ---
