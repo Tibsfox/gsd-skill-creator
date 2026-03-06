@@ -1,7 +1,7 @@
 # GSD & Skill-Creator
 ## Framework Overview & Integration Guide
 
-*February 2026 | Prepared by Tibsfox*
+*March 2026 | Prepared by Tibsfox*
 
 ---
 
@@ -23,6 +23,7 @@ Together, they form an integrated system where GSD keeps development structured 
 | Primary role | Workflow orchestration | Knowledge accumulation |
 | Core problem | Context rot & spec drift | Knowledge loss & token waste |
 | Key mechanism | Structured docs + multi-agent lifecycle | Pattern detection + bounded learning |
+| Current scope | Phase lifecycle, wave execution, model routing | Skills, agents, teams, chipsets, DACP, muses, college, mission packs, GSD-OS desktop |
 | Shared convention | .planning/ directory, .claude/ paths | .planning/ directory, .claude/ paths |
 
 ---
@@ -84,7 +85,7 @@ Together, they form an integrated system where GSD keeps development structured 
 | Parallelization Advisor | Recommends parallel/sequential/staggered execution based on skill coverage, token history, and rate limit proximity. |
 | Agent Composition | Co-activation tracking auto-generates purpose-built agents from frequently co-occurring skill sets. |
 
-> **Test Coverage:** 202 tests across the full suite ensure reliability. JSONL append-only observation logging guarantees concurrent safety when multiple agents write simultaneously.
+> **Test Coverage:** 24,500+ tests across the full suite ensure reliability. JSONL append-only observation logging guarantees concurrent safety when multiple agents write simultaneously.
 
 ---
 

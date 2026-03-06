@@ -30,7 +30,7 @@ reading_levels:
     - "Five educational layers connected by progressive disclosure and the Amiga Principle"
     - "Design philosophy: proof before assertion, learning through building, humane flow"
 created_by_phase: "v1.34-327"
-last_verified: "2026-02-25"
+last_verified: "2026-03-06"
 ---
 
 # tibsfox.com — Learning to Work Effectively with AI
@@ -38,8 +38,8 @@ last_verified: "2026-02-25"
 This is an educational ecosystem. It contains a 923-page mathematics textbook, a detailed
 analysis of agentic programming, a 75-country energy efficiency study, a complete software
 framework with documentation, and a cloud infrastructure curriculum built using NASA systems
-engineering methodology. These resources were produced over 32 development milestones spanning
-278 phases, and they share a design philosophy that is worth making visible: proof before
+engineering methodology. These resources were produced over 65 development milestones spanning
+541+ phases, and they share a design philosophy that is worth making visible: proof before
 assertion, learning through building, and systems that support rather than shame.
 
 The resources here grew from a single question: what happens when you take AI-assisted
@@ -149,8 +149,8 @@ development repeatable and improvable.
 
 The primary resource is the [GSD Skill Creator Documentation](https://tibsfox.com/Tibsfox/gsd-skill-creator/),
 146 pages covering getting started, core concepts, features, architecture, workflows, CLI
-reference, API reference, extensions, and troubleshooting. The documentation is currently
-hosted on WordPress and being migrated to this version-controlled docs/ directory.
+reference, API reference, extensions, and troubleshooting. The canonical documentation source
+is this version-controlled docs/ directory.
 
 The framework implements the principles from Layer 2 as concrete machinery. Skills are the
 unit of learned behavior. Agents compose skills into role-based actors. Teams coordinate
