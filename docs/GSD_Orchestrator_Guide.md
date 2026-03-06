@@ -6,6 +6,8 @@
 
 ---
 
+> **See also:** For the modern multi-agent coordination approach using the Mayor-coordinator pattern from the Gastown chipset, see [gastown-integration/05-agent-topology.md](gastown-integration/05-agent-topology.md).
+
 ## What Is It?
 
 The GSD Orchestrator is a master coordination layer introduced in gsd-skill-creator v1.7 that sits between the user and the full GSD command ecosystem. Instead of requiring users to memorize which `/gsd:` command to run at any given point in their project, the Orchestrator classifies what the user wants to do and routes them to the right GSD command automatically.

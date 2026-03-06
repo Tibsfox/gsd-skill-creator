@@ -1,3 +1,5 @@
+> **Context:** These documents are domain-specific educational content from the [OpenStack Cloud Platform pack (v1.33)](../release-notes/v1.33/README.md), built using NASA Systems Engineering standards.
+
 # Systems Administrator's Guide -- GSD OpenStack Cloud Platform (NASA SE Edition)
 
 ## 1. Introduction

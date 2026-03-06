@@ -1,3 +1,5 @@
+> **Note:** The canonical version of this document is [meta/filesystem-contracts.md](meta/filesystem-contracts.md).
+
 # Filesystem Contracts -- GSD OpenStack Cloud Platform (NASA SE Edition)
 
 This document establishes filesystem contracts for the GSD OpenStack Cloud Platform (NASA SE Edition). Every phase in the v1.33 roadmap writes output to specific directories. No phase should create directories not listed here. No two phases should write to the same file without explicit dependency.

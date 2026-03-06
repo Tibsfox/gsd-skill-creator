@@ -1,3 +1,5 @@
+> **Context:** These documents are domain-specific educational content from the [OpenStack Cloud Platform pack (v1.33)](../release-notes/v1.33/README.md), built using NASA Systems Engineering standards.
+
 # Cinder Operations Manual -- Block Storage Service Procedures
 
 **Service:** OpenStack Cinder (Block Storage)

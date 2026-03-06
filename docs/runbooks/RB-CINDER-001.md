@@ -1,3 +1,5 @@
+> **Context:** These runbooks are domain-specific educational content from the [OpenStack Cloud Platform pack (v1.33)](../release-notes/v1.33/README.md), built using NASA Systems Engineering standards.
+
 RUNBOOK: RB-CINDER-001 -- Volume Creation Failure Diagnosis
 SE Phase Reference: NPR 7123.1 SS 3.2 Process 9
 Last Verified Against: OpenStack 2024.2 (Dalmatian), 2026-02-23

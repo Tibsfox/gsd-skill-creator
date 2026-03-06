@@ -19,4 +19,4 @@ last_verified: "2026-02-25"
 
 # Code of Conduct
 
-*Content will be added in Phase 332 — Improvement Cycle.*
+*This section is part of the 5-layer documentation structure. Content is maintained in the top-level docs/ files. See [docs/index.md](../index.md) for the documentation map.*
