@@ -6,4 +6,8 @@ export {
   VectorFieldPainter,
   LSystemRenderer,
   FourierDecomposer,
+  SetVisualizer,
+  FunctorBridge,
+  TreeGrowth,
+  MagneticField,
 } from './sims/index.js';

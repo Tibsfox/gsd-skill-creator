@@ -4,3 +4,7 @@ export { TideSimulator } from './tide-simulator.js';
 export { VectorFieldPainter } from './vector-field.js';
 export { LSystemRenderer } from './l-system-renderer.js';
 export { FourierDecomposer } from './fourier-decomposer.js';
+export { SetVisualizer } from './set-visualizer.js';
+export { FunctorBridge } from './functor-bridge.js';
+export { TreeGrowth } from './tree-growth.js';
+export { MagneticField } from './magnetic-field.js';
