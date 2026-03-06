@@ -2,7 +2,7 @@
 
 Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code. It observes your usage patterns, suggests skills when workflows repeat, and manages skills throughout their lifecycle. This guide covers installation, a quickstart tutorial, and navigation to deeper tutorials.
 
-**New in v1.4:** Agent Teams support -- create, validate, and deploy multi-agent teams with leader-worker, pipeline, or swarm topologies. See the [Team Creation Tutorial](tutorials/team-creation.md) and [GSD Teams Guide](GSD-TEAMS.md).
+Agent Teams support is available — create, validate, and deploy multi-agent teams with leader-worker, pipeline, or swarm topologies. See the [Team Creation Tutorial](tutorials/team-creation.md) and [GSD Teams Guide](GSD-TEAMS.md).
 
 For a complete feature overview, see the [README](../README.md).
 
@@ -57,7 +57,7 @@ npm install && npm run build && npm link
 > ```
 > skill-creator --version
 > ```
-> You should see the version number (e.g., `1.2.0`).
+> You should see the current version number.
 
 ### 2. Create your first skill
 
@@ -220,4 +220,4 @@ If you encounter a bug or have a feature request:
 
 ---
 
-*Getting Started Guide for Dynamic Skill Creator*
+*Getting Started Guide for GSD Skill Creator*
