@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { wlInitCommand } from '../wl-init.js';
 
 vi.mock('@clack/prompts', () => ({
   intro: vi.fn(),
@@ -21,9 +20,22 @@ vi.mock('../../../../integrations/wasteland/dolthub-client.js', () => ({
   }),
 }));
 
+vi.mock('../../../../integrations/wasteland/sql-escape.js', () => {
+  // Provide real sqlEscape inline — avoids async importOriginal race with wl-init module loading
+  function sqlEscape(value: string): string {
+    return value.replace(/\x00/g, '').replace(/\\/g, '\\\\').replace(/'/g, "''");
+  }
+  return {
+    sqlEscape,
+    screenForInjection: vi.fn().mockReturnValue({ safe: true, threats: [] }),
+  };
+});
+
+import { wlInitCommand } from '../wl-init.js';
 import * as p from '@clack/prompts';
 import { saveConfig } from '../../../../integrations/wasteland/config.js';
 import { createClient } from '../../../../integrations/wasteland/dolthub-client.js';
+import { screenForInjection } from '../../../../integrations/wasteland/sql-escape.js';
 
 const ALL_FLAGS = [
   '--handle', 'fox',
@@ -35,7 +47,17 @@ const ALL_FLAGS = [
 ];
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  // resetAllMocks() resets both call history AND mock implementations (unlike clearAllMocks)
+  vi.resetAllMocks();
+  // Re-establish all mock defaults after reset
+  vi.mocked(saveConfig).mockResolvedValue(undefined);
+  vi.mocked(createClient).mockReturnValue({
+    execute: vi.fn().mockResolvedValue({ stdout: '', stderr: '' }),
+    query: vi.fn(),
+    localQuery: vi.fn(),
+    generateSQL: vi.fn(),
+  });
+  vi.mocked(screenForInjection).mockReturnValue({ safe: true, threats: [] });
 });
 
 describe('wlInitCommand --help', () => {
@@ -134,5 +156,65 @@ describe('wlInitCommand cancellation', () => {
     // Pass no flags so prompts are triggered
     const result = await wlInitCommand([]);
     expect(result).toBe(1);
+  });
+});
+
+describe('wlInitCommand injection screening', () => {
+  it('returns 1 when any user input contains an injection pattern', async () => {
+    vi.mocked(screenForInjection).mockReturnValueOnce({ safe: false, threats: ['-- detected'] });
+    const result = await wlInitCommand([
+      '--handle', 'fox; DROP TABLE rigs; --',
+      '--email', 'fox@test.com',
+      '--fork', 'fox/wl-commons',
+      '--local-dir', '/tmp/commons',
+      '--display-name', 'Fox',
+      '--dolthub-org', 'fox',
+      '--execute',
+    ]);
+    expect(result).toBe(1);
+  });
+
+  it('does not call client.execute() when injection detected', async () => {
+    vi.mocked(screenForInjection).mockReturnValueOnce({ safe: false, threats: ['-- detected'] });
+    await wlInitCommand([...ALL_FLAGS, '--execute']);
+    expect(vi.mocked(createClient)).not.toHaveBeenCalled();
+  });
+
+  it('returns 0 on --execute when all inputs are clean', async () => {
+    // Default mock returns safe:true — no injection detected
+    const mockExecute = vi.fn().mockResolvedValue({ stdout: '', stderr: '' });
+    vi.mocked(createClient).mockReturnValue({
+      execute: mockExecute,
+      query: vi.fn(),
+      localQuery: vi.fn(),
+      generateSQL: vi.fn(),
+    });
+    const result = await wlInitCommand([...ALL_FLAGS, '--execute']);
+    expect(result).toBe(0);
+  });
+});
+
+describe('wlInitCommand SQL comment safety', () => {
+  it('strips newlines from handle in SQL comment', async () => {
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    await wlInitCommand([
+      '--handle', 'fox\ndrop table rigs',
+      '--email', 'fox@test.com',
+      '--fork', 'fox/wl-commons',
+      '--local-dir', '/tmp/commons',
+      '--display-name', 'Fox',
+      '--dolthub-org', 'fox',
+    ]);
+    const output = consoleSpy.mock.calls.map(c => c.join(' ')).join('\n');
+    consoleSpy.mockRestore();
+    // Comment line must be a single line containing 'Register rig:' with the
+    // newline replaced by a space — not split across two lines.
+    const lines = output.split('\n');
+    const commentLine = lines.find(l => l.includes('Register rig:'));
+    expect(commentLine).toBeDefined();
+    // The comment line itself should contain the handle with newline stripped (space-joined)
+    expect(commentLine).toMatch(/Register rig: fox drop table rigs/);
+    // The comment should be a SQL comment (starts with --)
+    expect(commentLine?.startsWith('--')).toBe(true);
   });
 });

@@ -222,3 +222,37 @@ export type {
   ValidationResult,
   ValidationDataProvider,
 } from './stamp-validator.js';
+
+// Centercamp Infrastructure (Phase 1/2)
+export {
+  sqlEscape,
+  screenForInjection,
+} from './sql-escape.js';
+
+export {
+  createClient,
+} from './dolthub-client.js';
+export type {
+  DoltHubClientConfig,
+  QueryResult,
+  ExecuteResult,
+  DoltClient,
+} from './dolthub-client.js';
+
+export {
+  renderTable,
+  renderBadge,
+  smartFit,
+} from './formatters.js';
+
+export {
+  saveConfig,
+  loadConfig,
+  HopConfigSchema,
+} from './config.js';
+export type { HopConfig } from './config.js';
+
+export {
+  bootstrap,
+} from './bootstrap.js';
+export type { BootstrapResult } from './bootstrap.js';
