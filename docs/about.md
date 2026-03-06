@@ -23,17 +23,17 @@ reading_levels:
     - "GSD: structured workflow system solving context rot, spec drift, and agent coordination"
     - "Skill Creator: adaptive learning layer solving knowledge loss and token waste"
     - "Together: a self-reinforcing system where structure and learning compound"
-    - "Ten design principles proven across 42 milestones"
+    - "Ten design principles proven across 65 milestones"
 created_by_phase: "v1.34-329"
-last_verified: "2026-02-25"
+last_verified: "2026-03-06"
 ---
 
 # About tibsfox, GSD, and Skill Creator
 
 This project exists at the intersection of two ideas: that AI-assisted development is a
 discipline worth taking seriously, and that the tools supporting it should get better every
-time they are used. What started as a skill management utility has grown across 42 milestones,
-389 phases, and over 513,000 lines of code into a comprehensive ecosystem for building,
+time they are used. What started as a skill management utility has grown across 65 milestones,
+541+ phases, and over 632,000 lines of code into a comprehensive ecosystem for building,
 learning, and teaching with AI. This page explains who built it, why, and the principles
 that guide its design.
 
@@ -49,7 +49,7 @@ skill exchange concepts, documentation standards).
 
 The connecting thread across all this work is a commitment to proof before assertion. Every
 claim is backed by something you can read, run, or verify. The mathematics textbook shows its
-derivations. The framework has 12,761 passing tests. The educational content includes
+derivations. The framework has 24,500+ passing tests. The educational content includes
 interactive labs, not just descriptions. This is not an accident. It reflects a belief that
 the most useful educational content is the kind that invites verification rather than demanding
 trust.
@@ -125,7 +125,7 @@ generates more observations. The flywheel turns.
 
 ## Design Principles
 
-Ten design principles have emerged and been proven across the project's 42 milestones. These
+Ten design principles have emerged and been proven across the project's 65 milestones. These
 are not aspirational statements. Each was adopted because a concrete problem demanded it, and
 each has been validated through implementation.
 
@@ -181,13 +181,13 @@ The project's scale provides context for its claims.
 
 | Metric           | Value     |
 |------------------|-----------|
-| Milestones shipped | 33      |
-| Phases completed   | 325     |
-| Plans executed     | 852     |
-| Lines of code      | ~416K   |
-| Tests passing      | 12,761  |
+| Milestones shipped | 65      |
+| Phases completed   | 541+    |
+| Plans executed     | 1,312+  |
+| Lines of code      | ~632K   |
+| Tests passing      | 24,500+ |
 | Educational packs  | 35+     |
-| Skills defined     | 50+     |
+| Skills defined     | 80+     |
 | Agents defined     | 60+     |
 | Teams defined      | 15+     |
 

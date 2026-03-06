@@ -1,3 +1,5 @@
+> **Note:** This document is preserved as historical record. The canonical release notes are at [release-notes/v1.8.1/README.md](release-notes/v1.8.1/README.md). The package was renamed from `dynamic-skill-creator` to `gsd-skill-creator` in v1.49.17.
+
 # Release Notes: v1.8.1 - Audit Remediation
 
 **Release Date:** February 12, 2026  
