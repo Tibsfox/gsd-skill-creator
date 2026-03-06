@@ -13,7 +13,8 @@
 
 import * as yaml from 'js-yaml';
 import * as fs from 'node:fs';
-import Ajv from 'ajv';
+import _Ajv from 'ajv';
+const Ajv = _Ajv.default ?? _Ajv;
 
 // ===========================================================================
 // Types
@@ -162,7 +163,7 @@ function validateSchema(
   const valid = validate(data);
 
   if (!valid && validate.errors) {
-    const errors = validate.errors.map((e) => {
+    const errors = validate.errors.map((e: { instancePath?: string; message?: string }) => {
       const path = e.instancePath || '/';
       return `Schema violation at ${path}: ${e.message}`;
     });
