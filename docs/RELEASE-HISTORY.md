@@ -1,14 +1,14 @@
 # Release History
 
-65 milestones shipped across 527+ phases, 1,287+ plans, ~632K LOC, and 24,500+ tests.
+65 milestones shipped across 541+ phases, 1,312+ plans, ~632K LOC, and 24,500+ tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
-| [v1.49.19](release-notes/v1.49.19/) | Gastown Chipset Integration | 2026-03-06 | — | — | |
-| [v1.49.18](release-notes/v1.49.18/) | Space Between Observatory | 2026-03-06 | — | — | |
-| [v1.49.17](release-notes/v1.49.17/) | The Space Between | 2026-03-04 | — | — | |
+| [v1.49.19](release-notes/v1.49.19/) | Gastown Chipset Integration | 2026-03-06 | 5 | 10 | |
+| [v1.49.18](release-notes/v1.49.18/) | Space Between Observatory | 2026-03-06 | 5 | 11 | |
+| [v1.49.17](release-notes/v1.49.17/) | The Space Between | 2026-03-04 | 4 | 4 | |
 | [v1.49.16](release-notes/v1.49.16/) | Muse Integration & MCP Pipeline | 2026-03-04 | 5 | 13 | |
 | [v1.49.15](release-notes/v1.49.15/) | Self-Improving Mesh Architecture | 2026-03-04 | 5 | 19 | |
 | [v1.49.14](release-notes/v1.49.14/) | Dependency Health Monitor & Progressive Internalization Engine | 2026-03-03 | 6 | 26 | [retro](release-notes/v1.49.14/RETROSPECTIVE.md), [lessons](release-notes/v1.49.14/LESSONS-LEARNED.md) |
