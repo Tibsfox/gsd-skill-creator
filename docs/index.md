@@ -38,7 +38,7 @@ last_verified: "2026-03-06"
 This is an educational ecosystem. It contains a 923-page mathematics textbook, a detailed
 analysis of agentic programming, a 75-country energy efficiency study, a complete software
 framework with documentation, and a cloud infrastructure curriculum built using NASA systems
-engineering methodology. These resources were produced over 65 development milestones spanning
+engineering methodology. These resources were produced over 85 development milestones spanning
 541+ phases, and they share a design philosophy that is worth making visible: proof before
 assertion, learning through building, and systems that support rather than shame.
 
@@ -148,9 +148,7 @@ ecosystem: documentation for the GSD Skill Creator, the system that makes AI-ass
 development repeatable and improvable.
 
 The primary resource is the [GSD Skill Creator Documentation](https://tibsfox.com/Tibsfox/gsd-skill-creator/),
-146 pages covering getting started, core concepts, features, architecture, workflows, CLI
-reference, API reference, extensions, and troubleshooting. The canonical documentation source
-is this version-controlled docs/ directory.
+covering getting started, core concepts, features, architecture, workflows, CLI reference, API reference, extensions, and troubleshooting. The canonical documentation source is this version-controlled docs/ directory. Documentation is synchronized to the tibsfox.com WordPress site via an MCP server integration, making updates available to the community for learning and reference.
 
 The framework implements the principles from Layer 2 as concrete machinery. Skills are the
 unit of learned behavior. Agents compose skills into role-based actors. Teams coordinate

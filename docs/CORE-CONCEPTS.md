@@ -146,14 +146,14 @@ This chipset drives the boot sequence animation in the GSD-OS Desktop, where Agn
 
 ### Gastown Orchestration Model (v1.49.19)
 
-The second chipset, absorbing patterns from [steveyegge/gastown](https://github.com/steveyegge/gastown) — a Go-based multi-agent workspace orchestration system. Where the Amiga model coordinates 4 specialized processors, the Gastown model coordinates an entire town of agents through a CPU hardware metaphor.
+The second chipset, absorbing patterns from [steveyegge/gastown](https://github.com/steveyegge/gastown) — a Go-based multi-agent workspace orchestration system. Where the Amiga model coordinates 4 specialized processors, the Gastown model coordinates an entire town of agents through a CPU hardware metaphor. Each Gastown "rig" is a complete autonomous coordination instance with its own Mayor (per-rig agent), Polecats (workers), Witness (observer), and Refinery (merge queue). A user's project can run multiple rigs in parallel — different teams working on different subsystems, each with their own mayor coordinating independently. Skill Creator's agent chipset can wire up and manage multiple rigs from a unified mission control dashboard, simplifying the complexity of the wiring harness that connects the dashboard control surface to distributed rig management features.
 
 | Component | Role | Hardware Analog |
 |-----------|------|-----------------|
-| **Mayor** (Northbridge) | Coordinates all work. Never builds. | CPU coordinator |
-| **Polecats** (ALU Pool) | Execute work items. 1-30 ephemeral agents. | Arithmetic Logic Units |
-| **Witness** (PMU) | Monitors agent health. Never acts on code. | Performance Monitoring Unit |
-| **Refinery** (DMA) | Sequential merge queue for deterministic integration. | Direct Memory Access |
+| **Mayor** (Northbridge) | Per-rig coordinator. Never builds. Manages a single rig's workflow. | CPU coordinator |
+| **Polecats** (ALU Pool) | Execute work items. 1-30 ephemeral agents per rig. | Arithmetic Logic Units |
+| **Witness** (PMU) | Monitors agent health within a rig. Never acts on code. | Performance Monitoring Unit |
+| **Refinery** (DMA) | Sequential merge queue for deterministic integration per rig. | Direct Memory Access |
 
 **Communication channels** map to hardware bus types:
 
