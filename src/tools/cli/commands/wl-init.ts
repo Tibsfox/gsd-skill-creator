@@ -177,22 +177,28 @@ export async function wlInitCommand(
     mvr_version: '0.1',
   };
 
-  // 4. Generate registration SQL — all string values route through sqlEscape()
+  // 4. Screen user-supplied inputs for injection patterns — individually,
+  //    not on the assembled SQL (which contains intentional -- comments and
+  //    SQL keywords). Pattern from wl-done.ts:207-214.
+  const userInputs: Record<string, string> = { handle, display_name, email, dolthub_org, type, fork };
+  for (const [field, value] of Object.entries(userInputs)) {
+    const { safe, threats } = screenForInjection(value);
+    if (!safe) {
+      console.error(pc.red(`Injection pattern detected in ${field}:`));
+      for (const t of threats) console.error(pc.red(`  - ${t}`));
+      return 1;
+    }
+  }
+
+  // 5. Generate registration SQL — all string values route through sqlEscape()
   const sql = [
-    `-- Register rig: ${sqlEscape(handle)}`,
+    `-- Register rig: ${handle.replace(/[\r\n]/g, ' ')}`,
     `INSERT INTO rigs (handle, display_name, type, dolthub_org, email, joined_at)`,
     `VALUES ('${sqlEscape(handle)}', '${sqlEscape(display_name)}', '${sqlEscape(type)}', '${sqlEscape(dolthub_org)}', '${sqlEscape(email)}', '${new Date().toISOString()}');`,
   ].join('\n');
 
-  // 5. Execute path (--execute)
+  // 6. Execute path (--execute)
   if (executeMode) {
-    const warnings = screenForInjection(sql);
-    if (warnings.length > 0) {
-      console.error(pc.red('Injection pattern detected in generated SQL:'));
-      for (const w of warnings) console.error(pc.red(`  - ${w}`));
-      return 1;
-    }
-
     const client = createClient({
       upstream: 'hop/wl-commons',
       fork,
@@ -216,7 +222,7 @@ export async function wlInitCommand(
     }
   }
 
-  // 6. Default path (dry-run — no --execute)
+  // 7. Default path (dry-run — no --execute)
   if (jsonMode) {
     console.log(JSON.stringify({ status: 'ready', sql, config }, null, 2));
   } else {
