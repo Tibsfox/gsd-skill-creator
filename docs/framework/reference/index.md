@@ -17,4 +17,4 @@ last_verified: "2026-02-25"
 
 # Reference
 
-*Content will be added in a future phase.*
+*This section is part of the 5-layer documentation structure. Content is maintained in the top-level docs/ files. See [docs/index.md](../../index.md) for the documentation map.*
