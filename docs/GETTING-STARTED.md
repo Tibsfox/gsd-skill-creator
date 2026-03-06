@@ -204,7 +204,7 @@ Common issues covered:
 
 If you encounter a bug or have a feature request:
 
-1. Check [existing issues](https://github.com/anthropics/skill-creator/issues) first
+1. Check [existing issues](https://github.com/Tibsfox/gsd-skill-creator/issues) first
 2. Include the following in your report:
    - skill-creator version (`skill-creator --version`)
    - Node.js version (`node --version`)
