@@ -21,6 +21,7 @@
 import pc from 'picocolors';
 import { bootstrap } from '../../../integrations/wasteland/bootstrap.js';
 import { renderTable, renderBadge, smartFit } from '../../../integrations/wasteland/formatters.js';
+import { sqlEscape } from '../../../integrations/wasteland/sql-escape.js';
 
 // ============================================================================
 // Help text
@@ -166,13 +167,13 @@ export async function wlBrowseCommand(
 
   const conditions: string[] = [];
   if (statusFilter) {
-    conditions.push(`COALESCE(status,'open') = '${statusFilter}'`);
+    conditions.push(`COALESCE(status,'open') = '${sqlEscape(statusFilter)}'`);
   }
   if (effortFilter) {
-    conditions.push(`effort_level = '${effortFilter}'`);
+    conditions.push(`effort_level = '${sqlEscape(effortFilter)}'`);
   }
   if (tagFilter) {
-    conditions.push(`JSON_CONTAINS(tags, JSON_QUOTE('${tagFilter}'))`);
+    conditions.push(`JSON_CONTAINS(tags, JSON_QUOTE('${sqlEscape(tagFilter)}'))`);
   }
 
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';

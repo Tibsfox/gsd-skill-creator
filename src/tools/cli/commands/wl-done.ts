@@ -139,7 +139,10 @@ export async function wlDoneCommand(
   if (!wantedId) {
     // Query the user's claimed/open items and show a selector
     const claimedResult = await client.query(
-      `SELECT id, title FROM wanted WHERE claimed_by = '${config.handle}' AND status IN ('open', 'claimed')`,
+      client.generateSQL(
+        `SELECT id, title FROM wanted WHERE claimed_by = ? AND status IN ('open', 'claimed')`,
+        [config.handle],
+      ),
     );
     if (claimedResult.rows.length === 0) {
       console.error(pc.red('No claimed items found for your handle. Use --wanted-id to specify one directly.'));
@@ -158,7 +161,10 @@ export async function wlDoneCommand(
 
   // 5. Pre-check: verify the item exists
   const preCheckResult = await client.query(
-    `SELECT id, title, status, claimed_by FROM wanted WHERE id = '${wantedId}'`,
+    client.generateSQL(
+      `SELECT id, title, status, claimed_by FROM wanted WHERE id = ?`,
+      [wantedId],
+    ),
   );
 
   if (preCheckResult.rows.length === 0) {

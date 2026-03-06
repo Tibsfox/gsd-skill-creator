@@ -154,9 +154,10 @@ describe('wlDoneCommand completion ID format', () => {
     // generateSQL is called; check that the first argument to first generateSQL call has a matching ID
     const bootstrapResult = vi.mocked(bootstrap).mock.results[0]?.value as Promise<{ client: { generateSQL: ReturnType<typeof vi.fn> } }>;
     const resolved = await bootstrapResult;
-    // The first value passed to generateSQL for the INSERT should be the completion ID
-    const firstCallValues: string[] = vi.mocked(resolved.client.generateSQL).mock.calls[0]?.[1] ?? [];
-    expect(firstCallValues[0]).toMatch(/^c-fox-[0-9a-f]{10}$/);
+    // The pre-check query is now the first generateSQL call (after SEC-02 fix).
+    // The INSERT INTO completions is the second call (index 1).
+    const insertCallValues: string[] = vi.mocked(resolved.client.generateSQL).mock.calls[1]?.[1] ?? [];
+    expect(insertCallValues[0]).toMatch(/^c-fox-[0-9a-f]{10}$/);
   });
 });
 
@@ -201,9 +202,10 @@ describe('wlDoneCommand evidence handling', () => {
     consoleSpy.mockRestore();
     const bootstrapResult = vi.mocked(bootstrap).mock.results[0]?.value as Promise<{ client: { generateSQL: ReturnType<typeof vi.fn> } }>;
     const resolved = await bootstrapResult;
-    // Evidence is the 4th value (index 3) in the INSERT values array
-    const firstCallValues: string[] = vi.mocked(resolved.client.generateSQL).mock.calls[0]?.[1] ?? [];
-    expect(firstCallValues[3]).toBe('https://github.com/pr/99');
+    // Evidence is the 4th value (index 3) in the INSERT values array.
+    // The INSERT is the second generateSQL call (index 1) after the pre-check query.
+    const insertCallValues: string[] = vi.mocked(resolved.client.generateSQL).mock.calls[1]?.[1] ?? [];
+    expect(insertCallValues[3]).toBe('https://github.com/pr/99');
   });
 });
 
