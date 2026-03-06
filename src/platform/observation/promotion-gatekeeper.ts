@@ -1,3 +1,104 @@
+/**
+ * promotion-gatekeeper.ts — Pattern Intelligence: Promotion Quality Gates
+ *
+ * WHAT THIS MODULE DOES
+ * ---------------------
+ * PromotionGatekeeper evaluates PromotionCandidate objects against configurable
+ * quality thresholds. Each candidate passes up to 6 gates. The gate result
+ * includes the approved/rejected decision, reasoning text for each gate,
+ * evidence (actual scores vs thresholds), and an optional audit trail entry.
+ *
+ * WHY QUALITY GATES EXIST
+ * -----------------------
+ * Promotion is irreversible without manual intervention. A promoted script
+ * runs in place of a live tool call — if the script is wrong, it produces
+ * incorrect results silently. Quality gates are the safeguard.
+ *
+ * This is Hemlock's role in the system — from CENTERCAMP-PERSONAL-JOURNAL:
+ * "It is better to spend an hour validating the foundation than weeks fixing the collapse."
+ * Gatekeeper is that hour of validation, applied systematically to every candidate.
+ *
+ * THE 6 GATES
+ * -----------
+ * Gates 1-3 are always evaluated (no report required):
+ *
+ *   Gate 1 — Determinism: candidate.operation.determinism >= minDeterminism
+ *     The operation must be reliably deterministic. A semi-deterministic operation
+ *     that occasionally varies its output should not be promoted.
+ *
+ *   Gate 2 — Confidence: candidate.compositeScore >= minConfidence
+ *     The composite score (frequency + determinism + token savings) must be high enough.
+ *     This is the holistic quality threshold.
+ *
+ *   Gate 3 — Observation count: observationCount >= minObservations
+ *     We must have seen this operation enough times to be confident in its determinism.
+ *     A single deterministic observation is not sufficient evidence.
+ *
+ * Gates 4-6 are conditional (only when config threshold is set AND BenchmarkReport provided):
+ *
+ *   Gate 4 — F1 score: report.metrics.f1Score >= minF1
+ *     Calibration metric from benchmark runs. Requires active benchmarking.
+ *
+ *   Gate 5 — Accuracy: report.metrics.accuracy >= minAccuracy
+ *     Overall prediction accuracy from benchmarks.
+ *
+ *   Gate 6 — MCC: calculateMCC(...) >= minMCC
+ *     Matthews Correlation Coefficient — more robust than F1 for imbalanced datasets.
+ *
+ * All gates must pass for approval. One failure = rejection.
+ *
+ * REASONING AND EVIDENCE
+ * ----------------------
+ * Every gate produces a reasoning string: "Determinism 0.950 >= 0.9 threshold: passed"
+ * The evidence object records actual vs threshold values for every evaluated gate.
+ *
+ * Together, reasoning and evidence make rejection decisions transparent and debuggable.
+ * If a candidate is rejected, the caller can read the reasoning to understand why
+ * and adjust thresholds or wait for more data.
+ *
+ * This reflects the principle from CENTERCAMP-PERSONAL-JOURNAL:
+ * "Showing Your Work Is the Gift."
+ * The gatekeeper doesn't just say "rejected" — it says exactly why,
+ * with the numbers that drove the decision.
+ *
+ * AUDIT TRAIL
+ * -----------
+ * When a PatternStore is provided, every decision is persisted to 'decisions' category.
+ * The stored record includes: approved, reasoning, evidence, candidateToolName,
+ * candidateInputHash, timestamp.
+ *
+ * This audit trail enables:
+ * - Reviewing historical promotion decisions
+ * - Debugging why specific operations were rejected
+ * - Monitoring gate pass rates over time
+ * - Satisfying compliance requirements
+ *
+ * The PatternStore is optional — if not provided, decisions are not persisted.
+ * This allows lightweight usage without storage overhead.
+ *
+ * GATE FAILURE BEHAVIOR
+ * ---------------------
+ * Gates are evaluated in order. When a gate fails, passed = false, but evaluation
+ * continues through all remaining gates. The final decision considers all gate
+ * results, not just the first failure.
+ *
+ * This "continue on failure" approach provides complete diagnostic information:
+ * the caller knows which gates failed, not just that the first one did.
+ *
+ * SATISFIES
+ * ---------
+ * GATE-01: Configurable thresholds for each gate
+ * GATE-02: Default thresholds (from DEFAULT_GATEKEEPER_CONFIG)
+ * GATE-03: Calibration metric gates (F1, accuracy, MCC) when BenchmarkReport provided
+ * GATE-04: Reasoning + evidence + audit trail on every decision
+ *
+ * @see PromotionDetector (promotion-detector.ts) — produces candidates evaluated here
+ * @see ScriptGenerator (script-generator.ts) — receives approved candidates
+ * @see DEFAULT_GATEKEEPER_CONFIG (core/types/observation.ts) — default thresholds
+ * @see CENTERCAMP-PERSONAL-JOURNAL.md — "Hemlock: Check the Foundation" on why
+ *   rigorous validation matters before promotion
+ */
+
 import type {
   PromotionCandidate,
   GatekeeperConfig,
@@ -25,6 +126,7 @@ import { PatternStore } from '../../core/storage/pattern-store.js';
  */
 export class PromotionGatekeeper {
   private config: GatekeeperConfig;
+  /** Optional PatternStore for audit trail persistence. Null = no audit trail. */
   private store: PatternStore | null;
 
   constructor(
@@ -37,6 +139,16 @@ export class PromotionGatekeeper {
 
   /**
    * Evaluate a promotion candidate against configured thresholds.
+   *
+   * Evaluation is exhaustive: all gates are checked even after a failure.
+   * This provides complete diagnostic information rather than stopping at first failure.
+   *
+   * The returned GatekeeperDecision includes:
+   *   approved: boolean — true only if all evaluated gates passed
+   *   reasoning: string[] — one entry per gate, with pass/fail and actual values
+   *   evidence: GatekeeperEvidence — actual vs threshold values for all gates
+   *   candidate: the evaluated PromotionCandidate (for correlation)
+   *   timestamp: ISO string when evaluation occurred
    *
    * @param candidate - The promotion candidate to evaluate
    * @param report - Optional BenchmarkReport for calibration metric gates
@@ -54,6 +166,7 @@ export class PromotionGatekeeper {
     const observationCount = candidate.operation.score.observationCount;
 
     // Gate 1: Determinism check (GATE-01)
+    // Is this operation reliably deterministic?
     if (determinism >= this.config.minDeterminism) {
       reasoning.push(
         `Determinism ${determinism.toFixed(3)} >= ${this.config.minDeterminism} threshold: passed`
@@ -66,6 +179,7 @@ export class PromotionGatekeeper {
     }
 
     // Gate 2: Confidence (compositeScore) check (GATE-01)
+    // Is the holistic quality score high enough?
     if (compositeScore >= this.config.minConfidence) {
       reasoning.push(
         `Confidence ${compositeScore.toFixed(3)} >= ${this.config.minConfidence} threshold: passed`
@@ -78,6 +192,7 @@ export class PromotionGatekeeper {
     }
 
     // Gate 3: Observation count check (GATE-02)
+    // Have we seen this operation enough times to trust the determinism score?
     if (observationCount >= this.config.minObservations) {
       reasoning.push(
         `Observations ${observationCount} >= ${this.config.minObservations} threshold: passed`
@@ -89,7 +204,7 @@ export class PromotionGatekeeper {
       passed = false;
     }
 
-    // Build evidence (GATE-04)
+    // Build evidence record — actual values vs thresholds for all gates
     const evidence: GatekeeperEvidence = {
       determinism,
       compositeScore,
@@ -99,7 +214,8 @@ export class PromotionGatekeeper {
       thresholdMinObservations: this.config.minObservations,
     };
 
-    // Gate 4: F1 score check (GATE-03) -- only when threshold configured AND report provided
+    // Gate 4: F1 score check (GATE-03) — only when threshold configured AND report provided
+    // F1 score requires active benchmarking — not available in passive observation mode
     if (this.config.minF1 !== undefined && report) {
       const f1Score = report.metrics.f1Score;
       evidence.f1Score = f1Score;
@@ -116,7 +232,7 @@ export class PromotionGatekeeper {
       }
     }
 
-    // Gate 5: Accuracy check (GATE-03) -- only when threshold configured AND report provided
+    // Gate 5: Accuracy check (GATE-03) — only when threshold configured AND report provided
     if (this.config.minAccuracy !== undefined && report) {
       const accuracy = report.metrics.accuracy;
       evidence.accuracy = accuracy;
@@ -133,7 +249,8 @@ export class PromotionGatekeeper {
       }
     }
 
-    // Gate 6: MCC check (GATE-03) -- only when threshold configured AND report provided
+    // Gate 6: MCC check (GATE-03) — only when threshold configured AND report provided
+    // MCC is more robust than F1 for imbalanced promotion/rejection distributions
     if (this.config.minMCC !== undefined && report) {
       const mcc = calculateMCC(
         report.metrics.truePositives,
@@ -163,7 +280,7 @@ export class PromotionGatekeeper {
       timestamp: new Date().toISOString(),
     };
 
-    // Persist decision for audit trail (GATE-04)
+    // Persist decision for audit trail (GATE-04) — only if store was provided
     if (this.store) {
       await this.store.append('decisions', {
         approved: decision.approved,
