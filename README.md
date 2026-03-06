@@ -120,14 +120,16 @@ The chipset architecture means that building a complex agent system -- one with 
 
 The Gastown chipset, absorbed from [steveyegge/gastown](https://github.com/steveyegge/gastown), provides a coordination model for multi-agent workspaces. Where the Amiga chipset manages resources within a single agent context, Gastown manages the orchestration of multiple agents working in parallel across a shared codebase.
 
-**Agent topology** -- Four specialized roles coordinate work:
+**Multi-rig architecture** -- A Gastown "rig" is a complete autonomous coordination instance. Each rig has its own Mayor (the per-rig coordinator), Polecats (workers), Witness (observer), and Refinery (merge queue). A user's project can run multiple rigs in parallel — different teams working on different subsystems, each with their own mayor coordinating independently. Skill Creator's agent chipset can wire up and manage multiple rigs from a unified mission control dashboard, simplifying the wiring harness complexity that connects the dashboard control surface to distributed rig management features.
+
+**Agent topology** -- Four specialized roles coordinate work within each rig:
 
 | Role | Function |
 |------|----------|
-| **Mayor** | Coordinator -- plans work, assigns tasks, resolves conflicts |
-| **Polecat** | Executor -- ephemeral autonomous worker, one per task |
-| **Witness** | Observer -- monitors agent health, validates outputs |
-| **Refinery** | Merge queue -- sequential deterministic integration of parallel work |
+| **Mayor** | Per-rig coordinator -- plans work, assigns tasks, resolves conflicts within one rig |
+| **Polecat** | Executor -- ephemeral autonomous worker, one per task, within one rig |
+| **Witness** | Observer -- monitors agent health within a rig, validates outputs |
+| **Refinery** | Merge queue -- sequential deterministic integration of parallel work per rig |
 
 **Communication channels** -- Three messaging primitives cover different coordination needs:
 
@@ -335,7 +337,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-65 milestones shipped (v1.0-v1.49.19 + v1.8.1 patch) | 541+ phases | 1,312+ plans | ~632K LOC TypeScript, Rust, GLSL, Bash & Python | 24,500+ tests
+85 milestones shipped (v1.0-v1.50.43) | 541+ phases | 1,312+ plans | ~632K LOC TypeScript, Rust, GLSL, Bash & Python | 24,500+ tests
 
 ---
 

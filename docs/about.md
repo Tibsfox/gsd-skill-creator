@@ -23,7 +23,7 @@ reading_levels:
     - "GSD: structured workflow system solving context rot, spec drift, and agent coordination"
     - "Skill Creator: adaptive learning layer solving knowledge loss and token waste"
     - "Together: a self-reinforcing system where structure and learning compound"
-    - "Ten design principles proven across 65 milestones"
+    - "Ten design principles proven across 85 milestones"
 created_by_phase: "v1.34-329"
 last_verified: "2026-03-06"
 ---
@@ -32,7 +32,7 @@ last_verified: "2026-03-06"
 
 This project exists at the intersection of two ideas: that AI-assisted development is a
 discipline worth taking seriously, and that the tools supporting it should get better every
-time they are used. What started as a skill management utility has grown across 65 milestones,
+time they are used. What started as a skill management utility has grown across 85 milestones,
 541+ phases, and over 632,000 lines of code into a comprehensive ecosystem for building,
 learning, and teaching with AI. This page explains who built it, why, and the principles
 that guide its design.
@@ -125,7 +125,7 @@ generates more observations. The flywheel turns.
 
 ## Design Principles
 
-Ten design principles have emerged and been proven across the project's 65 milestones. These
+Ten design principles have emerged and been proven across the project's 85 milestones. These
 are not aspirational statements. Each was adopted because a concrete problem demanded it, and
 each has been validated through implementation.
 
@@ -181,7 +181,7 @@ The project's scale provides context for its claims.
 
 | Metric           | Value     |
 |------------------|-----------|
-| Milestones shipped | 65      |
+| Milestones shipped | 85      |
 | Phases completed   | 541+    |
 | Plans executed     | 1,312+  |
 | Lines of code      | ~632K   |

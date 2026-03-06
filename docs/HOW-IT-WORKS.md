@@ -217,12 +217,15 @@ gsd-skill-creator supports multiple agent team topologies, each optimized for a 
 This pattern works well for milestones where a single coordinator (Lab Director) can see the full picture and delegate execution to Flight Ops. Used extensively during the Unit Circle chain (50 milestones).
 
 **The Gastown pattern** (Multi-agent workspace orchestration):
-- **Mayor** — Coordinator. Singleton. Reads GSD plans, creates work items (beads), groups them into convoys (batches), and dispatches them to workers. More than one mayor causes split-brain.
-- **Polecat** — Executor. 1-30 workers. Each polecat receives a single work item via the hook mechanism, executes it in an isolated workspace, and returns the result. Polecats are ephemeral — they spin up, do work, and retire.
-- **Witness** — Observer. Monitors agent health, detects stuck hooks, validates work output. At least one witness per deployment.
-- **Refinery** — Merge queue. Receives completed work from polecats and merges it to the target branch in FIFO order. One refinery per target branch. Deterministic ordering prevents merge conflicts.
 
-This pattern excels at high-parallelism workloads where many independent tasks can run simultaneously. The Gastown mission pack used 10 parallel polecats across 5 waves.
+Each Gastown "rig" is a complete autonomous coordination instance. A user's project can run multiple rigs in parallel — different teams working on different subsystems, each with their own mayor coordinating independently. Skill Creator's agent chipset wires multiple rigs into a unified mission control dashboard for simplified management of the wiring harness connecting the control surface to distributed rig features.
+
+- **Mayor** — Per-rig coordinator. Singleton within one rig. Reads GSD plans, creates work items (beads), groups them into convoys (batches), and dispatches them to workers within that rig. One mayor per rig prevents split-brain within a rig. Multiple rigs each have their own mayor without conflict.
+- **Polecat** — Executor. 1-30 workers per rig. Each polecat receives a single work item via the hook mechanism, executes it in an isolated workspace, and returns the result. Polecats are ephemeral — they spin up, do work, and retire within their assigned rig.
+- **Witness** — Observer. Monitors agent health within a rig, detects stuck hooks, validates work output. At least one witness per rig.
+- **Refinery** — Merge queue. Receives completed work from polecats and merges it to the target branch in FIFO order. One refinery per rig/target branch combination. Deterministic ordering prevents merge conflicts.
+
+This pattern excels at high-parallelism workloads where many independent tasks can run simultaneously, and particularly at managing multiple parallel rigs through a unified control surface. The Gastown mission pack used 10 parallel polecats across 5 waves in a single rig; scaling to multiple rigs multiplies this capacity.
 
 **Communication channels** connect agents within a team:
 
