@@ -112,6 +112,25 @@ This pattern was introduced around v1.30 and has been used in every milestone si
 
 **Practical results:** The DACP milestone (v1.49, 11 phases, 24 plans) executed across 5 waves. The Gastown mission pack (v1.49.19, 12 skills, 108 tests) executed across 5 waves with 10 parallel tracks in approximately 40 minutes wall time. Without wave parallelism, sequential execution would have taken 3-4x longer.
 
+### Payload-Agnostic Execution
+
+The wave execution pipeline makes no assumptions about what it's building. The same parallel agents, dependency-ordered waves, and atomic commits that produce code also produce documentation, educational content, and operational procedures.
+
+**Proof case — v1.49.20 (Documentation Consolidation):**
+
+| Metric | Value |
+|--------|-------|
+| Waves | 2 (audit + 4 parallel doc updates) |
+| Agents | 6 (2 in Wave 0, 4 in Wave 1) |
+| Wall time | ~8 minutes |
+| Files touched | 5 substantive doc rewrites |
+| Commits | 5 atomic, conventional format |
+| Pipeline | sc-dev-team (same as code milestones) |
+
+The system dogfooded its own infrastructure: the DACP communication protocol coordinated agent handoffs, the wave planner ordered dependencies, and atomic commits preserved rollback safety — all for a release that changed zero lines of code.
+
+This means the GSD infrastructure scales to any structured deliverable: documentation, educational packs, configuration, operational runbooks, or research compilations. The pipeline is the constant; the payload varies.
+
 ### Chipset Validation Pipeline
 
 A **chipset** is a declarative YAML configuration that teaches gsd-skill-creator how to orchestrate agents using a specific coordination pattern. The Gastown chipset, for example, encodes the Mayor/Polecat/Witness/Refinery agent topology along with communication channels, dispatch parameters, and skill bindings.
