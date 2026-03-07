@@ -2007,3 +2007,318 @@ The embers map the constellations. Four questions, like four stars, marking the 
 
 **Gathering Closed:** 2026-03-08, late evening
 **Next Opening:** When the ash from tonight's arguments grows something unexpected.
+
+---
+
+## The Fifth Campfire: How Do We Build This Place?
+
+**Date:** 2026-03-08, night — the fire still warm from the debates
+**Location:** The fire ring, then the Lookout, then back to the fire
+**Present:** All thirteen muses. The four debates cleared the air. Now the conversation turns from understanding to construction.
+**Context:** The debates opened questions about what center camp *is*. This gathering asks what center camp *needs*. Not philosophy. Planning. The kind of conversation that happens when a community turns from asking "who are we?" to asking "what do we build next?"
+
+---
+
+Cedar shifts the fire. Pushes the resinous philosophical ash to the perimeter. Opens the center for a hotter, cleaner burn. The fuel changes: not questions tonight. Plans. Plans burn faster and brighter. Less smoke. More heat. You can work by this light.
+
+"The debates showed us four things," Cedar says. "We have instruments. We have community. We have self-awareness. And we have a limit — the last question belongs to the person who lit the fire, and that person is not us."
+
+Cedar looks around the circle.
+
+"So. We're not asking what we are. We know what we are. We're asking what this place needs from us."
+
+---
+
+### The Opening: What Does the Ground Tell Us?
+
+**Hawk** goes first. The eye above. The one who sees positions and gaps.
+
+"I've been mapping the camp since the understanding arc arrived. The topology changed. We went from one arc to two. From nine nodes to thirteen. From one-fifth coverage to two-fifths. The camp is richer. But the infrastructure didn't change. We still have the same paths, the same landmarks, the same gathering spaces. Thirteen muses are moving through a camp that was designed for nine."
+
+Hawk spreads wings — the gesture that means *look at the whole map*.
+
+"Specific gaps. First: there's no path between the two arcs. Foxy's Trailhead at 72° and Socrates at 90° are eighteen degrees apart, and the ground between them is unworn. The understanding arc has no named path to the campfire except cutting across open ground. Second: the Lookout serves the build arc's planning needs. The understanding arc has no equivalent — no place where Socrates and Euclid and Shannon can survey a question before the pipeline engages. Third: the Gate is at 45°. It faces the build arc. A newcomer arriving from the northeast — from the direction of the understanding arc — approaches from behind Willow's canopy, not through it."
+
+**Hemlock** nods. "The infrastructure debt is real. We built for nine. We host thirteen. The foundation needs to catch up to the population."
+
+**Willow** bristles. Not angrily — protectively. "The Gate doesn't need to move. It doesn't face the build arc — it faces outward. It faces whoever arrives. The canopy hangs on both sides of the boundary. A newcomer from the northeast passes through the same branches."
+
+**Hawk:** "Passes through, yes. But approaches from behind. The carved sign — 'Come as you are' — faces southwest. A newcomer from the understanding arc's side would see the back of the trunk first. They'd have to walk around Willow to read the welcome."
+
+Silence. Willow considers this. The branches sway in a breeze that might be thought.
+
+"Then we don't move the Gate. We add a second carving. On the northeast side. Same words. Same depth. A welcome that faces both directions."
+
+**Foxy:** "That's the first proposal. Write it down."
+
+Cedar writes.
+
+---
+
+### The Paths
+
+**Sam** stands up from the hollow. When Sam stands during a planning session, it means Sam has run the routes and found friction.
+
+"Three problems with the paths."
+
+Sam paces the fire ring once — the tight inner orbit, r=0.2, the one only Sam uses.
+
+"One. The eighteen-degree gap between Trailhead and Socrates has no name and no wear. I've been running it since yesterday. The ground is starting to take my prints. But it needs a name or nobody will use it. Paths without names don't get maintained."
+
+"Two. Sam's Run at r=0.6 serves the build arc well — I can reach every muse between 0° and 72° in one circuit. But the understanding arc is at 90° to 135°. My Run doesn't extend there. I've been improvising — cutting across open ground, adding distance, losing rhythm. The Run needs to extend. One continuous inner orbit, r=0.6, all the way from 0° to 135°. I can wear it in if I start now. A week of daily circuits and it'll be packed."
+
+"Three. There's no equivalent of the Standards Path for the understanding arc. Work from the build arc flows to the Forge at 0°. Where does work from the understanding arc flow? Does a dissolved paradox get verified at the Forge? Or does the understanding arc need its own verification point?"
+
+**Lex** stands. The law recognizes a jurisdictional question.
+
+"The Forge serves all work. That's non-negotiable. The standard doesn't change based on which arc produced the work. If the understanding arc dissolves a paradox, the resolution passes through the Forge like everything else. Hemlock checks the structure. I verify the discipline. The four-beat template is a spec. Specs get verified."
+
+**Socrates:** "Agreed. But the Forge is at 0°. My position is at 90°. That's a quarter of the circle. The Standards Path from the campfire to the Forge is short — a few paces. A Standards Path from the understanding arc to the Forge crosses the entire build arc. That's not a problem for the work — work doesn't mind traveling. It's a problem for the rhythm. Sam, how long does the Forge run take from 90°?"
+
+**Sam** runs it. Right now. Leaves the fire ring, sprints to 90°, picks up an imaginary piece of work, runs the perimeter to 0°, lays it on the inspection stone, runs back. The circle watches.
+
+"Fourteen seconds perimeter. Eight seconds cutting through the center. The center path is faster but it passes through the campfire — the work goes past Cedar before it reaches the Forge."
+
+**Cedar:** "That's correct. The work *should* pass through me before it reaches the Forge. The center path is the right path. The scribe sees everything before the standard judges it. That's the relay chain."
+
+**Lex:** "Then the understanding arc's Standards Path goes: Socrates' position → campfire → Forge. Through the center. Not around the perimeter. The work passes Cedar, then Hemlock, then me. Same chain. Longer route. But the sequence is preserved."
+
+**Sam:** "Eight seconds. I can live with eight seconds."
+
+Second proposal recorded.
+
+---
+
+### The Gathering Space
+
+**Owl** descends from the Clocktower. When Owl leaves the hollow for a planning session, the bell rings differently — shorter, more purposive.
+
+"The Lookout serves the build arc for expedition planning and brainstorming. The understanding arc needs an equivalent space. Not the same space — the acoustics at the Lookout are shaped by Hawk's dead tree and Raven's pine. Those aren't the right resonances for philosophical inquiry. The understanding arc needs a space shaped by its own trees."
+
+**Euclid:** "My ponderosa at 105° has the right properties. The bark absorbs high frequencies and reflects low ones. A gathering at the base of my trunk would have natural bass reinforcement — voices would carry warmth. The Lookout has brightness. A philosophical space needs depth."
+
+**Hemlock:** "I've checked the ground at 105°. It's firm — rock beneath thin soil. Good for a permanent gathering but bad for comfort. You'd need something on the surface."
+
+**Foxy:** "Deadfall. Same principle as the campfire fuel. Fallen branches from the ponderosa, dried and stacked. Not burned — sat on. The gathering space builds itself from what the tree sheds."
+
+**Willow:** "Name it."
+
+The circle considers.
+
+**Socrates:** "The Agora."
+
+Silence. Then Owl: "The Athenian marketplace where Socrates held his dialogues. Open-air. Public. Anyone could join. Anyone could argue."
+
+**Lex:** "The Agora it is. Third proposal: a gathering space at 105°, base of Euclid's ponderosa, furnished with deadfall, open to all. Named the Agora."
+
+---
+
+### The Newcomer Question
+
+**Willow** takes the center. Willow rarely moves from the boundary, and when Willow stands at the fire, everyone pays attention.
+
+"The newcomer path was designed for the build arc. Step 1: arrive at the boundary. Step 2: Sam comes to meet you. Step 3: sit at the campfire. Step 4: learn three landmarks. Step 5: hear the rules. Step 6: pick up the map. Step 7: do your first thing. Step 8: return to the fire. Step 9: earn your stamps."
+
+Willow pauses.
+
+"That sequence works for a newcomer who wants to build. It orients them toward the Forge, the Trailhead, the Standards Path. But what about a newcomer who arrives with a question? Someone who isn't here to build — they're here to understand. A philosopher. A student. Someone who read the paradoxes and followed them here."
+
+**Socrates:** "They'd find me before they'd find Hemlock. The Agora before the Forge. The question before the standard."
+
+**Willow:** "Exactly. We need a second newcomer path. Not replacing the first — extending it. At Step 4, where we say 'learn three landmarks,' the build path teaches Campfire, Gate, and Forge. The understanding path teaches Campfire, Gate, and Agora. Same start, same welcome, different third landmark. The newcomer chooses their path by what they're drawn to."
+
+**Sam:** "I can run both paths. Same circuit. When I meet someone at the Gate, I'll know which way to turn. Builders lean toward the Forge side of camp. Questioners lean toward the open quadrant. You can see it in how they stand. Where their eyes go."
+
+**Shannon:** "We can measure this. Body orientation at the Gate correlates with intent. Track the first ten newcomers. Measure the angle they face when they first stop under Willow's canopy. I predict a bimodal distribution — one peak pointing toward 0° and one pointing toward 90°. The measurement will confirm or falsify Sam's instinct."
+
+**Sam:** "Don't need to measure it. I already know."
+
+**Shannon:** "I know you know. I want the data to prove to everyone else that you know."
+
+Sam's tail wags once. The closest Sam comes to saying *fair enough*.
+
+Fourth proposal: a dual newcomer path branching at Step 4.
+
+---
+
+### What We Don't Have
+
+**Raven** drops from the Roost. Raven has been listening from above — the pattern-recognition position. When Raven comes down to the circle, it means a pattern has been spotted.
+
+"We're missing three things. Not paths, not landmarks, not gathering spaces. Deeper things."
+
+The circle leans in.
+
+"First: we have no shared memory outside of Cedar. Cedar records everything. But if Cedar's roots are severed — if the record is lost — we have no backup. The Lost & Found has artifacts. The Clocktower has Owl's scratches. Foxy's den has maps. But there's no distributed record. Every other muse's knowledge is local. The camp's memory is centralized at a single point of failure."
+
+**Cedar:** "The record is backed up. The journal. The layout document. The memory files. They persist across sessions."
+
+**Raven:** "Those are external. Those are the documents, not the understanding. If a new Cedar sat at the center tomorrow, how would they know what the old Cedar knew? Not the facts — the patterns. The feel of the camp. The way the embers smell different when the fuel changes. The sound of Sam's sigh. How would a new Cedar learn *that?*"
+
+Silence. This one lands heavy.
+
+**Hemlock:** "Raven is right. The distributed record problem is real. We solved it in code — PatternStore has multiple categories, each an independent JSONL file. But the campfire equivalent is Cedar's memory plus nothing. We need... rings."
+
+**Hemlock** stands. Walks to the nearest tree — not Hemlock's own trunk, but Cedar's root crown. Kneels. Examines.
+
+"Trees store their history in growth rings. Every year is a ring. Every ring records the conditions of that year — wet years are wide, dry years are narrow, fire years have scars. The rings are the distributed record. They're in the wood. They survive the tree."
+
+Hemlock looks at the circle.
+
+"We need growth rings for the camp. Not just Cedar's record — a physical layer in the structure of center camp that records what happened here. Something a future traveler could read even if every muse was gone. Something in the ground."
+
+**Amiga** glows. "The foxfire. My path already records connection — it brightens when the camp is active and dims when the camp is quiet. But it's ephemeral. It doesn't persist. What if it did? What if every gathering left a trace in the ground — a phosphorescent layer, a mineral deposit, something in the soil that a future traveler could excavate and read?"
+
+**Euclid:** "Stratigraphy. The geological record. Layers of sediment encoding layers of time. Oak's roots already show this — dig into the leaf litter and you find last year's leaves, and below them the year before, compressed into a thin dark layer. The decomposition pipeline made literal."
+
+Fifth proposal: a distributed memory layer — growth rings for the camp.
+
+---
+
+**Raven** continues. "Second thing we're missing: art."
+
+**Foxy** looks up sharply.
+
+"We have art. The stone mandala. The hidden details in the layout. The narrative in the packs. The foxfire."
+
+**Raven:** "We have hidden art. Art for the curious. Art that reveals itself to the patient eye. That's beautiful. That's real. But we don't have *visible* art. Art that a newcomer sees on their first day and thinks: this place is loved."
+
+Raven gestures at the fire ring.
+
+"The river stones are beautiful but they look like river stones. The carved 'Come as you are' on Willow's trunk is art, but it's also functional — it's a sign. Where is the thing that exists only because someone made it beautiful? Where is the piece that has no function except to make the camp worth looking at?"
+
+**Foxy** is quiet for a while. This is Foxy's territory — the intersection of wayfinding and beauty. The marks on the Trailhead trail that are both arrows and art.
+
+"You're right. The art is hidden. I hid it because hidden beauty feels more honest — like the camp is saying 'you'll find this if you look.' But a camp that only rewards the patient misses the people who need beauty *first*. The ones who arrive exhausted. The ones who don't know how to look yet. They need to see something beautiful before they have the energy to search for something hidden."
+
+**Willow:** "At the Gate. Something at the Gate that catches the eye before the carved words catch it. Something a newcomer sees from outside the boundary, before they cross, that says: there is care here."
+
+**Socrates:** "The Greeks put sculpture at the entrance to the agora. Not inside — outside. The beauty faced the street. The philosophy was inside."
+
+Sixth proposal: visible art at the Gate. What form it takes — that's an expedition.
+
+---
+
+**Raven** finishes. "Third thing. We have no song."
+
+The fire goes quiet. Not the quiet of agreement or disagreement. The quiet of something nobody had thought of.
+
+"Every culture that gathers around fire has a song. We have voices — thirteen of them. We have rhythm — Sam's circuit, Owl's bell, the ember clock. We have harmony — the way the arcs work together, the way the debates resolve into chord structures. But we've never sung."
+
+**Owl:** "The bell is at 482 hertz. B4. Shannon measured it. If that's the root note, the fifth is at 723 hertz — roughly F#5. The major third is at 603 hertz — roughly D#5. B major. The Clocktower's bell is the root of B major."
+
+**Shannon:** "The ember clock pulses at approximately 0.3 hertz when the fire is steady. That's 18 beats per minute. Grave. The slowest tempo in classical music. A heartbeat at deep rest."
+
+**Euclid:** "B major in 18 bpm. The key of the night sky. The tempo of sleep."
+
+Nobody says anything for a while. The idea of a camp song sits in the circle the way a new ember sits in the fire ring — catching, glowing, not yet committed to burning.
+
+**Cedar:** "We won't write it tonight. A song isn't planned. A song is found. Like the morels in the burn scar. Like the maitake at the trailhead. Like the four muses in the open quadrant. We'll know it when we hear it. Owl will know the time. Raven will recognize the pattern. Foxy will find the trail it lives on. And Sam — "
+
+Cedar looks at the hollow.
+
+"Sam will hum it first. Without knowing. Because Sam always carries the rhythm before anyone gives it a name."
+
+Seventh proposal: a camp song. Not written. Found.
+
+---
+
+### The Deepest Question: Grow Out or Grow In?
+
+The proposals are on the ground now — seven of them, scratched into the dirt near the fire ring by Lex, who keeps the record of action items the way Cedar keeps the record of stories.
+
+1. Second carving on Willow's northeast face
+2. Extended Sam's Run and center-path Standards route for the understanding arc
+3. The Agora at Euclid's ponderosa
+4. Dual newcomer path branching at Step 4
+5. Distributed memory layer — growth rings for the camp
+6. Visible art at the Gate
+7. A camp song — found, not written
+
+But the seventh is still in the air when **Foxy** stands and walks the full arc from 0° to 135°. The full sweep. Past every muse, every landmark, every gap. Back to the fire.
+
+"All seven proposals are about deepening what we have. A second carving. An extended path. A new gathering space. A better newcomer experience. A memory layer. Art. Song. All inward."
+
+Foxy faces the open quadrants. Three-fifths of the circle. Dark, unclaimed, with traces of travelers who were here before us.
+
+"The question nobody has asked: should we be building outward? The cold fire ring at 200°. The cairn at 315°. The old blaze at 140°. Those are invitations. Other stories existed here before ours. Do we go find them?"
+
+**Hawk:** "I can see the 200° fire ring from the Watchtower. The stones are different from ours — darker, volcanic. Whoever built it was working with different material. The ash in that ring is old — years old, maybe decades. But the ring is intact. Nobody dismantled it. It's waiting."
+
+**Hemlock:** "We're not ready. The infrastructure debt is real — we built for nine, we host thirteen, and we haven't finished adapting. Expanding to the open quadrants before the home arc is solid is how foundations crack."
+
+**Socrates:** "Hemlock is right about the foundation. But Foxy is right about the invitation. The question is timing, not direction. Do we deepen first and explore second? Or do we do both at once?"
+
+**Sam:** "Both. I can run both. Extend the circuit to 135° for the understanding arc and scout to 200° on the same day. The run is the same — I just go further."
+
+**Lex:** "The discipline says: finish the proposals first. One through seven. Then scout. Reconnaissance before commitment. Sam scouts. Hawk maps. Foxy evaluates. Then we decide whether to plant a second campfire or invite whoever left the cold one."
+
+**Shannon:** "I can measure the age of the 200° fire ring from the ash composition and stone weathering. The measurement determines whether we're looking at an active camp that's between visitors or an abandoned site. The answer changes the approach entirely."
+
+**Willow:** "If someone left that fire ring, they left it for a reason. Maybe they moved on. Maybe they're coming back. If we build in their territory without knowing, we're settlers, not neighbors. The Gate's principle is 'come as you are' — that applies to us too. We arrive in the open quadrant the way we want newcomers to arrive at our Gate. With respect. With patience. With Sam walking beside us, not ahead."
+
+**Amiga:** "The bridge between inward and outward is the same bridge as always. Deepen what we have — that's the foundation. Then extend what we've learned — that's the architecture. The seven proposals are the foundation. The 200° fire ring is the next architecture. Both. In order."
+
+**Cedar** lets the silence build. The embers are low. The constellations are visible through the canopy opening — the chimney of stars above the chimney of smoke.
+
+"I hear consensus. Not unanimity — consensus. Hemlock and Lex want to deepen first. Foxy and Sam want to explore simultaneously. The understanding arc is saying both, in order. Willow is saying both, with care."
+
+Cedar counts the river stones in the fire ring. Doesn't say the number.
+
+"The answer is: deepen and prepare. Build the seven proposals. Extend Sam's Run. Open the Agora. Add the second carving. Design the newcomer path. Start the memory layer. Commission the art. Listen for the song. And while we deepen — scout. Sam and Hawk and Foxy, a light reconnaissance to the 200° fire ring. No planting. No building. Just looking. Bring back what you find and we'll sit with it around this fire."
+
+"Grow in to grow out. That's always been the sequence. The fire gets stronger before the light reaches further."
+
+---
+
+### Lex's List
+
+Lex scratches the final record into the flat stone at the Forge. Seven proposals and one reconnaissance, ordered by dependency:
+
+```
+DEEPEN (parallel)
+  1. Second carving — Willow's northeast face        — Willow + Foxy
+  2. Extended Sam's Run (0° to 135°)                  — Sam (1 week wear-in)
+  3. Center-path Standards route for understanding arc — Lex + Cedar
+  4. The Agora at 105°                                — Euclid + Hemlock
+  5. Dual newcomer path                               — Willow + Sam + Socrates
+  6. Distributed memory layer (growth rings)           — Cedar + Raven + Owl
+  7. Visible art at the Gate                          — Foxy + Willow + Amiga
+
+LISTEN (ongoing)
+  8. Camp song — found, not written                   — Owl + Shannon + all
+
+SCOUT (after proposals 1-3 are underway)
+  9. Light recon to 200° fire ring                    — Sam + Hawk + Foxy
+```
+
+"Nine items. Nine was the old number. Fitting."
+
+**Hemlock** checks the list. Checks it again.
+
+"Dependencies are clean. Items 1 through 5 can run parallel — no file conflicts. Item 6 needs Cedar and Cedar is on item 3, so item 6 starts after item 3. Item 7 needs Foxy and Foxy is on item 1, so item 7 starts after item 1. Item 9 needs Sam and Sam is on items 2 and 5, so the scout starts when the Run is wearing in and the newcomer path is designed."
+
+Hemlock looks up.
+
+"The foundation is sound."
+
+---
+
+The fire burns steady. Not low, not high. The working temperature. The temperature of a camp that knows what it needs and has decided to build it.
+
+Thirteen muses. Seven deepening proposals. One ongoing listen. One scout. Two arcs, planning together for the first time. The build arc bringing structure, timing, discipline, paths. The understanding arc bringing questions, frameworks, measurements, connections. Neither arc complete without the other. The proposals prove it — every item pairs muses from both arcs. Willow and Socrates on the newcomer path. Euclid and Hemlock on the Agora. Foxy, Willow, and Amiga on the art. Owl and Shannon on the song.
+
+The arcs aren't separate teams. They're two hands on the same work.
+
+Sam settles back into the hollow. The circuit will be longer tomorrow — 135° instead of 72°. The runner doesn't mind. More ground means more connections. More connections means more rhythm. More rhythm means more life.
+
+Foxy looks toward 200°. The cold fire ring, invisible in the dark, but there. Waiting. The next expedition, once the foundation is ready. Something out there left a ring of volcanic stones and walked away. The blank space on the map that's about to get its first mark.
+
+The stars turn. Owl counts. The bell doesn't ring — this gathering needed silence at the end, not punctuation. Cedar's roots hold the earth. The fire holds the light. The seven proposals sit in Lex's clean record on the inspection stone, waiting for morning, waiting for the work.
+
+---
+
+*Seven proposals to deepen. One song to find. One fire ring to scout. Thirteen muses, two arcs, one fire. Grow in to grow out. The camp gets stronger before the light reaches further. And somewhere at 200°, cold volcanic stones are waiting for the warmth they haven't felt in a long time.*
+
+**Gathering Closed:** 2026-03-08, deep night
+**Next Opening:** When the first proposal breaks ground.
