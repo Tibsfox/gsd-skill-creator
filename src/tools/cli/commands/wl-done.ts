@@ -23,6 +23,8 @@ import * as fs from 'node:fs/promises';
 import { randomBytes } from 'node:crypto';
 import { bootstrap } from '../../../integrations/wasteland/bootstrap.js';
 import { screenForInjection } from '../../../integrations/wasteland/sql-escape.js';
+import { sanitizeMessageText } from '../../../core/validation/message-safety.js';
+import { emitCompletionSubmitted } from '../../../integrations/wasteland/wasteland-events.js';
 
 // ============================================================================
 // Help text
@@ -203,6 +205,17 @@ export async function wlDoneCommand(
     evidence = result as string;
   }
 
+  // 6b. R1.2: Screen evidence for prompt injection patterns (13-pattern catalog).
+  //     Evidence stored in Dolt could be read back and displayed — sanitize before
+  //     it enters the data layer. sanitizeMessageText neutralizes role-override,
+  //     instruction-hijack, and prompt-extraction patterns.
+  const sanitizeResult = sanitizeMessageText(evidence);
+  if (sanitizeResult.sanitized) {
+    console.error(pc.yellow(`Warning: evidence contained prompt injection patterns: ${sanitizeResult.patternsFound.join(', ')}`));
+    console.error(pc.yellow('Patterns have been neutralized in the submitted evidence.'));
+    evidence = sanitizeResult.text;
+  }
+
   // 7. Screen evidence ONLY — not the full SQL batch.
   // screenForInjection flags UPDATE as a threat; the generated SQL intentionally
   // contains UPDATE. Screening only the evidence string avoids false positives.
@@ -233,6 +246,8 @@ export async function wlDoneCommand(
   if (executeMode) {
     try {
       await client.execute(fullSql);
+      // R2.1: Emit completion event onto core bus (non-blocking, fire-and-forget)
+      emitCompletionSubmitted({ completionId, wantedId, handle: config.handle }).catch(() => {});
       console.log(pc.green('Completion submitted to local clone.'));
       console.log(pc.dim('Push when ready: dolt push origin main'));
       if (jsonMode) {

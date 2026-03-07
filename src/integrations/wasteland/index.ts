@@ -257,6 +257,15 @@ export {
 } from './bootstrap.js';
 export type { BootstrapResult } from './bootstrap.js';
 
+// Wasteland Events (R2.1 — core event bus integration)
+export {
+  emitScanComplete,
+  emitTrustEscalation,
+  emitStampIssued,
+  emitCompletionSubmitted,
+} from './wasteland-events.js';
+export type { WastelandEventOptions } from './wasteland-events.js';
+
 // Trust Tier Escalation
 export {
   buildContributorRules,

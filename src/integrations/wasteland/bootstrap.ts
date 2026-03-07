@@ -20,6 +20,7 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import * as os from 'node:os';
+import { resolve as resolvePath } from 'node:path';
 import { loadConfig } from './config.js';
 import { createClient } from './dolthub-client.js';
 import type { HopConfig } from './config.js';
@@ -78,8 +79,13 @@ export async function bootstrap(
   // 2. Resolve wasteland entry — v2.0 single-wasteland access pattern
   const wl = config.wastelands[0];
 
-  // 3. Resolve ~ in local_dir before passing to createClient (SEC-01 safe)
-  const localDir = wl.local_dir.replace('~', os.homedir());
+  // 3. Resolve ~ in local_dir and canonicalize to absolute path.
+  //    R1.1: resolvePath() eliminates traversal sequences (../) and guarantees
+  //    an absolute path. Null-byte check prevents path truncation attacks.
+  const localDir = resolvePath(wl.local_dir.replace('~', os.homedir()));
+  if (localDir.includes('\0')) {
+    throw new Error('Invalid local_dir in config: path contains null byte');
+  }
 
   // 4. Create the DoltHub client
   const client = createClient({ upstream: wl.upstream, fork: wl.fork, localDir, branch: 'main' });

@@ -14,6 +14,7 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import * as os from 'node:os';
+import { resolve as resolvePath } from 'node:path';
 import { saveConfig } from '../../../integrations/wasteland/config.js';
 import { createClient } from '../../../integrations/wasteland/dolthub-client.js';
 import { sqlEscape, screenForInjection } from '../../../integrations/wasteland/sql-escape.js';
@@ -158,7 +159,12 @@ export async function wlInitCommand(
   }
 
   // 3. Build HopConfig
-  const resolvedLocalDir = local_dir.replace('~', os.homedir());
+  //    R1.1: resolvePath() canonicalizes and eliminates traversal sequences.
+  const resolvedLocalDir = resolvePath(local_dir.replace('~', os.homedir()));
+  if (resolvedLocalDir.includes('\0')) {
+    console.error(pc.red('Invalid local-dir: path contains null byte'));
+    return 1;
+  }
   const config: HopConfig = {
     handle,
     display_name,
