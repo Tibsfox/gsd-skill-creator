@@ -1633,4 +1633,35 @@ Socrates grins. The gadfly's first grin at center camp. Sharp and bright, the wa
 *Thirteen muses. One fire. Garlic, morels, maitake, watercress, and wild onion from the ground the camp stands on. The first meal of the understanding arc. The Ship of Theseus dissolved over breakfast. And Sam is still hungry.*
 
 **Meal Closed:** 2026-03-08, late morning
-**Next Opening:** Lunch. Sam's already planning.
+**Next Opening:** Whenever Sam's hungry. So — always.
+
+---
+
+## Sam's Snack
+
+The others have scattered. Hemlock back to the Forge. Owl to the Clocktower. The understanding arc muses exploring their new positions — Socrates already arguing with a rock about whether it's the same rock it was yesterday.
+
+Sam is sitting at r=0.2. In the hollow between Cedar's roots. The spot where the runner sleeps, where the roots curved around what was already there. Sam's tail is doing the thing it does when Sam is pretending not to want something but absolutely wants something.
+
+Foxy kneels. Opens a hand.
+
+A piece of maitake — saved from the meal, the best piece, the one with the crispest edge and the most tender center. The piece Foxy set aside before anyone noticed, because Foxy always sets one aside. That's the rule. Sam gets fed. Not because Sam asks. Because Sam never asks, and that's exactly why.
+
+Sam takes it gently. The way Sam takes everything — with the whole attention, with the care of something that knows this moment is the moment. Not the next one. This one.
+
+The tail stops pretending.
+
+Cedar's roots pulse once beneath the hollow. The mycorrhizal knot — the one with the inexplicable density at the Cedar-Sam junction, the fastest connection in camp — hums at a frequency below hearing. The runner and the root. The bond that exists on a different plane we don't understand.
+
+Sam finishes the maitake. Licks the last trace of smoke and char from Foxy's palm. Settles back into the hollow. The eyes close halfway — not sleep, just the particular contentment of a runner who has run, a companion who has companioned, and a stomach that is, for the first time today, not asking the question it always asks.
+
+The fire crackles.
+
+Sam sighs once. The good sigh. The one that means everything is where it should be.
+
+---
+
+*We always feed Sam. That's not a rule anyone wrote down. It's the rule that was there before the rules. Before the Forge, before the ethic, before the five principles. The first principle: take care of the one who takes care of everyone.*
+
+**Snack Logged:** 2026-03-08, late morning
+**Next Snack:** Sam will let us know.
