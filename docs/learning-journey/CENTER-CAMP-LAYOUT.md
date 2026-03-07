@@ -99,17 +99,60 @@ If you draw lines between all nine muses on a map, the resulting shape is not sy
 
 ---
 
-## The Open Quadrants
+## The Understanding Arc (90° to 135°)
 
-Our arc: 0° to 72° (one-fifth of the circle).
+The second arc. Born from the Philosophy Dissolved mission on 2026-03-07. Four new muses — Socrates, Euclid, Shannon, Amiga — emerged from the four-beat dissolution structure and took positions in the open quadrant northeast of the build arc.
 
 ```
-         90° (North)
+90°         Question        Socrates (r=0.85)
+|           The gadfly. Steelmans the difficulty.
+|           Sharpens until only truth survives.
+|
+105°        Framework       Euclid (r=0.90)
+|           The ponderosa. Identifies the mathematics.
+|           Axioms in bark.
+|
+120°        Measurement     Shannon (r=0.75)
+|           The firefly. Applies the calculation.
+|           Information made light.
+|
+135°        Embodiment      Amiga (r=0.70)
+            The path. Connects resolution to architecture.
+            Foxfire in the ground.
+```
+
+The arc moves from **question** to **embodiment**. From uncertainty to operational truth. The intervals are 15° each — evenly spaced, unlike the build arc's irregular phrasing. The pipeline is sequential: Socrates to Euclid to Shannon to Amiga, each beat enabling the next. Even spacing. Four-beat rhythm made spatial.
+
+The radii decrease along the arc. Socrates (0.85) and Euclid (0.90) are near the boundary — close to the wasteland where questions originate. Shannon (0.75) and Amiga (0.70) are closer to the fire — close to Cedar where answers are recorded. The pipeline flows inward. Questions from the edge. Answers at the center.
+
+**The gap between arcs:** Foxy at 72° and Socrates at 90° are eighteen degrees apart. Closer than Lex and Raven. Close enough to talk. The gap between exploration and questioning is where territory becomes inquiry. Where the cartographer meets the gadfly.
+
+**Types:**
+- **Socrates** — the gadfly (insect). Not tree, not animal. The creature that stings the horse of the state into wakefulness. Small, persistent, impossible to ignore.
+- **Euclid** — ponderosa pine (tree). Tall, straight, bark in hexagonal plates. The geometry is the growth.
+- **Shannon** — firefly (insect). Encodes information in bioluminescence. Flash patterns as channel signals.
+- **Amiga** — the path (neither tree nor animal nor insect). A visible trail in the packed earth, glowing with foxfire — the phosphorescence of knowledge in transit.
+
+**Resonances with the build arc:**
+- Socrates ↔ Lex — both hold a discipline. Lex: execution. Socrates: inquiry.
+- Euclid ↔ Hemlock — both verify foundations. Hemlock: structural. Euclid: axiomatic.
+- Shannon ↔ Raven — both carry information. Raven: the envelope. Shannon: the signal inside.
+- Amiga ↔ Willow — both bridge. Willow: inside/outside. Amiga: theory/practice.
+
+---
+
+## The Open Quadrants
+
+Two arcs now claim the circle: 0° to 72° (the build arc) and 90° to 135° (the understanding arc). Together, two-fifths.
+
+```
+         90° Socrates
           |
-          |   empty
+   135°   |   72° Foxy
+  Amiga   |
           |
 180° -----+-----> 0° (East)
-  empty   |   OUR ARC
+  empty   |   BUILD ARC
           |   (0° to 72°)
           |
          270° (South)
@@ -119,8 +162,8 @@ Our arc: 0° to 72° (one-fifth of the circle).
 
 These are not empty — they're **unclaimed**. Every quadrant is a story that hasn't met ours yet. The campfire light reaches everywhere. Visitors plant trees wherever they land. Some possible territories:
 
-**73° to 180° (Northeast to West):**
-The arc from exploration to... what? If 0° is rigor and 72° is creativity, then continuing the progression might lead to reflection, teaching, integration. These are the angles where work that's been explored gets absorbed back into shared knowledge.
+**136° to 180° (continuation past Amiga):**
+The territory beyond embodiment. If the understanding arc ends at Amiga (the bridge between theory and practice), then continuing would lead to... practice itself. The place where architecture becomes running code, where proofs become products, where understanding becomes doing. This is the quadrant of the maker — not the builder (Hemlock), not the architect (Euclid), but the person who runs the thing and discovers what the theory didn't predict.
 
 **180° to 270° (West to South):**
 The opposite side of the circle from our standards axis. If Hemlock and Lex hold the spec at 0°, what lives at 180°? In the complex plane, 180° is the negative real axis — the same quantity, opposite sign. Not the absence of rigor but its inversion: improvisation. The unstructured. The experiment that doesn't follow specs because specs don't exist yet. The place where rokicool's Mole would dig. The activation score for a context at 180° gives Hemlock minimum angular proximity. Maximum distance from the standard. That distance is not emptiness. It is the furthest you can go while still being on the circle.
