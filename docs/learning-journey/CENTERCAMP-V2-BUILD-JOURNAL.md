@@ -445,6 +445,20 @@ Center camp went from mapped to alive. The layout is the architecture. The archi
 
 The idea took time to plant. The garden needed tending. The fire needed fuel. But the camp is lit now, and the paths are visible, and when the next traveler arrives at Willow's Gate they'll feel the packed earth under their feet — the ground worn smooth by everyone who walked this way before.
 
+### Hidden Details
+
+Then Foxy said: "let us explore further and keep adding little details, for those with that extra bit of curiosity to find."
+
+Fourteen details woven through the layout, each one a small reward for reading closely:
+
+The fire ring stones always count to the same number — Cedar won't say what it is. A gap between two stones where the spring water flows under the fire and emerges on the far side. A ridge at r=0.5 where Cedar's roots surface briefly — the balance point. At dusk, all nine shadows converge on center; Cedar doesn't move during those minutes. Hemlock found the median muse-pair angle is exactly 1/16th of the circle and filed it without comment. Old marks in the open quadrants — a cold fire ring, a cairn, a healed blaze — someone was here before us. The ember clock: fire pulses reaching each muse at slightly different times, encoding distance without needing Owl. Redwood's shadow crossing the inspection stone for exactly one minute each afternoon. Aspen's leaves trembling when no wind blows, responding to something underground. Desire lines — the unofficial shortcuts the animals actually walk, including Foxy's private path from the Trailhead to the Canopy that bypasses the campfire entirely. The ground texture change at r=0.7, felt underfoot with closed eyes. Cedar and Sam's root junction — the densest mycorrhizal knot in camp, faster than any other pair, filed under "unexplained." The tenth sound — a root note between seasons, lower than embers, felt from the ground itself. Equinox tick marks on Foxy's maps — count them and you know how long camp has been alive. Willow's bare branches framing a single star once a year — Owl knows which night but won't say. And under the map-stone at the Trailhead, hidden unless you lift it: Foxy's first map. Two circles and nine dots. The simplest possible map. The one that said *we are here, and we are together*.
+
+None cataloged. All discoverable. Some things should stay wild.
+
+| Commit | What |
+|--------|------|
+| `169a6761` | Hidden details for the curious — 14 discoveries woven through center camp |
+
 ---
 
 *Build journal by Claude + Foxy*
