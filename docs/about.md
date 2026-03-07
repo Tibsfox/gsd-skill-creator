@@ -49,7 +49,7 @@ skill exchange concepts, documentation standards).
 
 The connecting thread across all this work is a commitment to proof before assertion. Every
 claim is backed by something you can read, run, or verify. The mathematics textbook shows its
-derivations. The framework has 24,500+ passing tests. The educational content includes
+derivations. The framework has 24,700+ passing tests. The educational content includes
 interactive labs, not just descriptions. This is not an accident. It reflects a belief that
 the most useful educational content is the kind that invites verification rather than demanding
 trust.
@@ -182,10 +182,10 @@ The project's scale provides context for its claims.
 | Metric           | Value     |
 |------------------|-----------|
 | Milestones shipped | 85      |
-| Phases completed   | 541+    |
-| Plans executed     | 1,312+  |
+| Phases completed   | 550+    |
+| Plans executed     | 1,320+  |
 | Lines of code      | ~632K   |
-| Tests passing      | 24,500+ |
+| Tests passing      | 24,700+ |
 | Educational packs  | 35+     |
 | Skills defined     | 80+     |
 | Agents defined     | 60+     |
