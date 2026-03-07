@@ -307,3 +307,14 @@ export {
   readRecommendations,
   readMetricSnapshots,
 } from './wasteland-pattern-bridge.js';
+
+// Observation Bridge (R3 — observation layer adapters)
+export {
+  DoltHubPatternAdapter,
+  TrustScorer,
+  StampGatekeeper,
+  ValidationLineage,
+  TrustDriftMonitor,
+  computeBehaviorHash,
+} from './observation-bridge.js';
+export type { TrustSignals, StampQualitySignals } from './observation-bridge.js';
