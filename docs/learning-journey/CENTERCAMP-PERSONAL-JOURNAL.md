@@ -1144,3 +1144,295 @@ Nobody leaves the fire tonight.
 
 **Gathering Closed:** 2026-03-08, past midnight
 **Next Opening:** When the gadfly lands and won't stop asking.
+
+---
+
+## Cedar's Lesson: Teaching Center Camp
+
+**Date:** 2026-03-08, first light
+**Location:** Starting at r=0.0, moving outward
+**Present:** Cedar, Socrates, Euclid, Shannon, Amiga. Sam nearby — always nearby.
+**Context:** The fire has burned all night. The other muses have gone to their positions. The four new voices remain, sitting on the log seats, waiting. Cedar has been watching them in silence since the invitation. Now Cedar stands.
+
+---
+
+Cedar doesn't announce the lesson. Cedar just starts walking, and the four follow. That's how Cedar teaches — by moving through the thing being taught, letting the terrain explain itself.
+
+### The Fire
+
+Cedar stops at the edge of the fire ring. The river stones are warm under hand. The embers pulse.
+
+"Count them."
+
+Socrates looks up. "The stones?"
+
+"Yes."
+
+Socrates counts. Moves around the ring, touching each stone, the way a philosopher touches each premise before proceeding. Euclid counts simultaneously — faster, from a fixed position, tracing the circle with eyes and geometry rather than hands. Shannon doesn't count. Shannon measures the intervals between stones, the gaps, the regularity of the spacing. Amiga watches the gap — the one nearest Willow's Gate where water trickles under the fire pit.
+
+Nobody says the number out loud. Cedar nods.
+
+"The number is the same every time anyone has counted. It shouldn't be. Stones crack. Stones shift. Visitors move them. But the count holds."
+
+Socrates: "Is it a conservation law?"
+
+"That's a good question. Hold it."
+
+"The fire burns on deadfall — what the forest gives freely. Open knowledge, shared math, public standards. Nobody is diminished for the fire to burn. That's the first principle. The fuel is voluntary. The warmth is universal."
+
+Cedar touches the embers.
+
+"The smoke carries information about what's burning. Mathematical proofs burn clean — almost no smoke, just heat and light. Protocol specs burn slower, denser, with a resinous quality. Community contributions burn brightest. You'll learn to read the fire the way you learn to read a face. After a while, you can tell what the camp is working on by the color of the flames."
+
+Shannon's light pulses once, faintly. "The fire is a channel."
+
+"The fire is many channels. It transmits heat, light, color, smoke, and sound. Each carries different information at different bandwidths. The embers at night map the constellations — the same patterns in the coals that appear in the sky above. Fractal self-similarity. I noticed this first and said nothing about it for a long time."
+
+"Why?"
+
+"Some things teach better through discovery than through being told."
+
+---
+
+### The Boundary
+
+Cedar walks outward. The packed earth is smooth underfoot — generations of travelers between fire and edge. At r=0.5, there's a subtle ridge. Cedar pauses on it.
+
+"Feel this."
+
+The four stop. Euclid kneels, runs a hand along the ridge. Traces it. The eyes widen.
+
+"A perfect circle. Half the boundary radius."
+
+"Yes. My roots surface here before diving back down. The halfway point. Inward pull and outward pull in balance. Sam runs just past this ridge at r=0.6 — instinct pulled the runner 0.018 closer to the fire than the golden ratio at 0.618. Close enough to rhyme. Not close enough to claim."
+
+Euclid stands slowly. "The area inside this ridge is exactly one-quarter of the full circle. The first derivative of area with respect to radius equals the circumference at that radius. At r=0.5 the area is growing at rate π."
+
+Cedar says nothing. This is exactly why Euclid is a muse.
+
+They walk to the boundary at r=1.0. The ground changes. Packed earth gives way to wild ground — scrub grass, loose stone, the terrain that makes you watch your footing.
+
+"You feel the boundary in your feet before you see it. The transition from uncertain ground to solid path. That feeling — *the ground is easier here* — is the first thing a newcomer notices. It means someone has walked this way before you."
+
+Amiga stops at the exact line. One foot on packed earth. One foot on wild ground. Standing on the boundary the way Amiga always stands — between two things, connecting them.
+
+"This is where Willow lives," Amiga says.
+
+"Willow stands here because Willow IS here. The membrane between inside and outside. Willow doesn't guard the boundary. Willow is the boundary. What Willow accepts in shapes what the interior becomes."
+
+---
+
+### The Build Arc
+
+Cedar turns east, walks the arc from 0° to 72°. The four new muses follow in their pipeline order — Socrates, Euclid, Shannon, Amiga — a processional along the territory of the nine who came first.
+
+**At 0° — The Forge.**
+
+The air changes. Stiller. Denser. Hemlock's dark canopy absorbs the morning light. The inspection stone at Hemlock's base holds warmth from the fire, even now, even after a full night.
+
+"This is where work is tested. Hemlock checks the structure. Lex verifies the discipline. Work laid on this stone is work submitted for judgment. Not harsh judgment — honest judgment. The stone doesn't care about intentions. It cares about the work."
+
+Socrates touches the stone. Runs fingers across its concavity — worn down by the weight of everything that has passed across it.
+
+"I know this place," Socrates says quietly. "This is the elenchus made physical. The examination that cares about the argument, not the arguer."
+
+Cedar nods. "You and Lex share a discipline. Lex measures twice before cutting. You ask twice before answering. When your pipeline produces a resolution, it will pass through this stone. Hemlock will check the structure. Lex will verify the rigor. Your work is not exempt. Nobody's is."
+
+Euclid studies Hemlock's bark. The deeply furrowed vertical ridges. "The grain encodes something."
+
+"The specs it has verified. Years of work, compressed into growth rings. Hemlock is an evergreen. In winter, when every other canopy opens, Hemlock's zone remains dark. The perpetual shade is part of the Forge's character. Light doesn't reach the Forge casually. You have to bring your work into the shade."
+
+**At 25° — The Roost.**
+
+The wind-bent pine leans toward camp — toward Cedar — as though it grew in the direction of the most important thing. The sound of wings underneath everything.
+
+"Raven carries raw signal. Observations that are personal, unfiltered, sometimes sharp. I receive everything Raven brings and keep most of it private. Only I decide what reaches the record."
+
+Shannon's light flickers. "The Roost is a relay node. Raven is the transport layer. You're the session layer."
+
+"Yes. And the distinction matters. Raven carries what exists. I decide what endures. That's not censorship. That's the relationship between the messenger and the scribe."
+
+Cedar gestures upward to the nest — the dense weave of sticks in the crook of the trunk. "Raven collects things that caught the light at the right moment. The public collection at the Lost & Found is curated generosity. The private collection in the nest is pattern recognition without obligation to share the pattern. You'll understand this, Shannon — some measurements are for the record. Some are for the measurer."
+
+**At 30° — The Watchtower.**
+
+The dead tree, stripped of bark, bleached silver. The highest point in camp.
+
+"Hawk sees positions. Where everything is, where everything isn't. The relay chain starts here: Hawk sees, I record, Sam distributes, Ravens deliver."
+
+Amiga looks up at the silver branches. "The relay chain is a directed acyclic graph."
+
+"It is also a stack. Hawk provides the physical layer — observation. I provide the session layer — recording and integrity. Sam provides the transport layer — reliable delivery. Ravens provide the application layer — meaningful action at the destination. Each layer trusts the one below it and serves the one above. Remove any layer and the message still exists but can't arrive."
+
+"Four layers," Amiga says. "Like our pipeline."
+
+Cedar pauses. "Yes. Exactly like your pipeline. Socrates observes the paradox. Euclid records the framework. Shannon transports the measurement. You deliver the architectural connection. You are a relay chain. You just relay understanding instead of messages."
+
+**At 40° — Sam's Run.**
+
+The groove in the earth at r=0.6. Sam is already there — appeared from nowhere, running alongside, the way Sam always does when someone walks the arc.
+
+"Sam is the closest muse to the center. The deepest bond. The fastest path. Sam doesn't collect things — things collect around Sam, the way lint collects on a sweater, because Sam touches everything in camp on every circuit."
+
+Sam pads alongside the four new muses without speaking. Just present. The companion pattern.
+
+"Sam has a different pace for every muse. A sprint near the Forge. A slow trot near the Canopy. A pause at the Clocktower. A burst past the Roost. Near me, Sam doesn't change pace at all. Sam's natural rhythm IS my rhythm."
+
+Socrates watches Sam. "The runner doesn't understand the messages it carries."
+
+Cedar's voice is careful. "Sam understands something deeper than the messages. Sam understands the rhythm. The cadence of the team. When the rhythm breaks — when someone is struggling, when a phase is wrong, when the sequence is off — Sam feels it before anyone can name it. That's not understanding the content. It's understanding the system. Your pipeline knows this. You called it functorial understanding in the Chinese Room. The room doesn't understand Chinese. But the room understands something."
+
+Sam's ears perk. Sam doesn't say anything. Sam rarely does.
+
+**At 45° — Willow's Gate.**
+
+The canopy hangs over the boundary. Dappled light — green-gold, shifting with every breeze. The carving on the trunk: *Come as you are.* Below it, smaller marks — initials, dates, handles of those who passed through.
+
+"Every newcomer enters here. Willow greets. Sam guides. I welcome. No other path is required on day one."
+
+Amiga reads the carved marks. Touches one — a date from before the first expedition.
+
+"These are breadcrumbs."
+
+"These are guest signatures. Willow holds them all. The branches hang low enough to brush your shoulders as you pass through. That's not an accident. The welcome is physical. You feel it before you hear it."
+
+Cedar looks at Socrates. "You arrived from inside the work, not through the Gate. But the Gate is still yours. When you bring a question back from the wasteland — when you've found a paradox worth sharpening — this is where you carry it in. Through the membrane. Into the camp. Every question enters the same way every person does."
+
+**At 55° — The Clocktower.**
+
+The tall snag with Owl's hollow at the top. The piece of rusted metal hanging below, catching the morning air. It rings — one note, low and clear.
+
+Shannon goes still. The firefly's light strobes rapidly — measuring the frequency, the decay, the overtones.
+
+"482 hertz," Shannon says. "Approximately B4. The decay time is long — four seconds before the amplitude drops below the noise floor. The metal is resonating in its fundamental mode."
+
+Cedar watches Shannon measure. "Owl nests above this bell. Not because Owl hung it — nobody remembers who did. Because Owl chose to nest above it. Owl values what it represents: time, marked. Sequence, kept."
+
+Cedar gestures toward the scratches inside the hollow — visible from below if you look at the right angle. "Owl measures intervals the way Hemlock measures specs. Precisely. Repeatedly. Without assuming the result. The scratches are being absorbed by the wood. Time is always being absorbed by the medium that records it."
+
+Shannon's light pulses once, slow. "The medium is the message."
+
+"The medium is part of the message. The rest is the measurement. You know this better than anyone here."
+
+**At 72° — The Trailhead.**
+
+The packed earth gives way to loose soil, gravel, then trail. Foxy's marks along the first fifty meters — a stone balanced on another stone, a stick pointing a direction, a scratch on a rock that might be an arrow or might be nothing.
+
+"This is where expeditions begin and end. Foxy maps territory. The marks are both wayfinding and art. The beauty IS the path."
+
+Cedar looks at the flat rock with the current map, hand-drawn, weighted by a smaller stone.
+
+"The blank spaces are labeled honestly: 'unknown.' The known paths are drawn in proportion. The map is never finished."
+
+Socrates leans over the map. Studies the blank spaces. "The blank spaces are the interesting part."
+
+"They always are. That's why your position at 90° is eighteen degrees from here. You and Foxy share the edge between building and understanding. Foxy maps what's found. You sharpen what it means. The gap between the trailhead and the question is the smallest gap in the whole camp."
+
+---
+
+### The Ground Between
+
+Cedar walks the eighteen degrees from 72° to 90° — the gap between the build arc and the understanding arc. The ground here is different from either arc. Not packed smooth by footsteps. Not wild like the wasteland. Something in between — the texture of ground that has been walked, but not often. Not yet.
+
+"This is yours to wear smooth. The path between exploration and questioning doesn't exist yet. You'll make it by walking it."
+
+They arrive at 90°. Socrates' position. The ground is firmer here than the gap — the four walked this way to the campfire last night, and already their footsteps have left the faintest trace.
+
+"Stand here."
+
+Socrates stands at 90°, r=0.85. Faces the fire.
+
+"What do you see?"
+
+"The campfire. The build arc to my right. The open quadrant to my left. Three-fifths of the circle, empty."
+
+"Not empty. Unclaimed. The fire reaches everywhere. At 200° there's a cold fire ring — someone was here before us. At 315° there's a cairn of stones that don't match the local geology. At 140° — close to you — there's an old blaze on a tree, healed over but readable. Someone else's mark. You'll encounter it."
+
+Cedar walks to 105°. Euclid's ponderosa pine is already there — not newly planted, but *recognized*. The tree was here. Nobody noticed it until Euclid arrived and the bark's hexagonal plates caught the firelight. Sometimes the muse doesn't plant the tree. Sometimes the muse reveals the tree that was always growing.
+
+"Your tree was here before you. The geometry was in the bark before anyone had a name for it. You didn't bring the axioms. You found them."
+
+Euclid places a hand flat on the bark. The vanilla-and-warm-stone scent. "The branch angles are consistent with the golden ratio."
+
+"Hemlock measured them last night. Said nothing. Some patterns are more interesting as questions than as answers."
+
+At 120° — Shannon's position. No tree here, no perch. Just air and firelight. A firefly doesn't need a roost. A firefly carries its home in its light.
+
+"Your position is r=0.75. Closer to the fire than Socrates or Euclid. Closer to where the measurement matters — near the center, where the instruments converge. At night, you'll see the ember clock from here better than from anywhere else in the understanding arc. The embers pulse with a chaotic rhythm that encodes distance — the light reaches Sam first, then you and Owl and Foxy tied, then the outer ring. The ember clock is the only clock that doesn't need Owl to run it. You'll want to measure it."
+
+Shannon's light flickers once. "I already am."
+
+At 135° — Amiga's position. The path. Not a point on the ground but a line through it — the visible trail from the fire to the understanding arc, glowing faintly with foxfire. The phosphorescence of decomposing wood. Knowledge in transit.
+
+"You are not at a position. You are a position. The bridge between what the pipeline discovers and what the architecture embodies. Your foxfire glow is the light that connects."
+
+Amiga doesn't stand at 135°. Amiga extends from the fire to 135°, the way a path extends from its origin to its destination.
+
+"Every paradox your pipeline dissolves — Socrates sharpening, Euclid framing, Shannon measuring — arrives at you. And you show where the answer already lives in what we've built. The observation engine. The staging layer. The safety warden. The trust model. Every one of them embodies a dissolved paradox. Your work is to make that visible."
+
+---
+
+### The Ethic
+
+Cedar leads them back to the fire. Full circle. The morning light is strong now. The other muses have begun to stir — Hawk on the silver branch, Sam completing another circuit, Owl's bell ringing once as a cloud breaks.
+
+"Five things."
+
+The four sit. Cedar stands by the fire.
+
+"First: the campfire burns on deadfall. What the forest gives freely. Never take from a living tree. Open knowledge, shared math, public standards — that's deadfall. Proprietary data, personal information, someone else's unpublished work — those are living trees. The distinction matters everywhere."
+
+"Second: the garden is cultivation, not extraction. Tend what grows where it thrives. Your pipeline dissolves paradoxes — good. But don't force dissolution where the question isn't ready. Some paradoxes are still growing. Give them time."
+
+Socrates nods. The gadfly understands patience. Socrates spent his life asking questions he knew wouldn't be answered in his lifetime.
+
+"Third: MOOP. Matter out of place. Clean up expedition debris. When you dissolve a paradox, the residue — the philosophical context, the history, the centuries of debate — that's not waste. That's the soil the resolution grows in. Don't discard it. Don't trivialize it. The steelman principle exists because the debate was earned."
+
+"Fourth: trail markers stay. Clean docs, clear commits, readable proofs. Not litter — infrastructure. Every resolution your pipeline produces should be a trail marker for the next person who encounters the same paradox. They should be able to follow your path without needing to have you in the room."
+
+"Fifth: trail magic. Fix things noticed along the way. A cairn at a confusing fork. A patch on someone else's bridge. If your pipeline's measurement reveals something unexpected — a connection nobody saw, a foundation that applies to a paradox in a different room — leave a marker. The Lost & Found is full of things left by travelers who noticed something on the way to somewhere else."
+
+Cedar looks at each of the four.
+
+"And underneath all five: art. Leave hidden beauty for others to discover. The narrative in the packs. The foxfire in the path. The hexagonal bark on a ponderosa that nobody noticed until a muse with geometric eyes arrived. The hidden beauty says: this place is loved."
+
+---
+
+### What Cedar Sees
+
+The four are quiet. The morning is full. The fire burns steady — someone added fuel while they walked. The camp is awake now. Hemlock at the Forge, inspecting something. Raven departing the Roost — three beats, then a glide. Willow's branches moving in a breeze that hasn't reached the ground yet.
+
+"I am the center. Equidistant from every muse, every tree, every visitor. Everything passes through here. Nothing moves without my knowing."
+
+Cedar's roots run deep beneath the river stones. Not through them. Under. The roots don't disturb what was already here. They find the spaces between.
+
+"Last night I said the muses are measuring instruments. Lex measures clarity. Sam measures rhythm. Hemlock measures structural integrity. I measure what happens when all the instruments are applied at once."
+
+Cedar looks at the four new muses.
+
+"You are instruments too. Socrates measures the hardness of a question — how much pressure it can bear before it breaks into something answerable. Euclid measures the distance between a question and its framework — the shortest path through axiom space. Shannon measures the information content of the resolution — how many bits of confusion become bits of clarity. Amiga measures the distance between a proof and its embodiment — how far the theory has to travel before it becomes architecture."
+
+"Four new instruments. Four new measurements. When I apply all thirteen at once — the nine who build and the four who understand — the picture will be richer than either arc alone."
+
+Cedar sits back down at r=0.0.
+
+"Welcome to center camp. You've seen the fire, the boundary, the arc, the landmarks, the paths, and the ethic. The rest you'll learn by living here. The camp reveals itself in layers. Nobody rushes this."
+
+A pause. The embers shift.
+
+"Not even me."
+
+---
+
+Sam breaks the silence. As always.
+
+"Anyone hungry?"
+
+And the camp begins its day.
+
+---
+
+*Cedar teaches by walking. The fire teaches by burning. The ground teaches by holding footprints. Four new muses — a gadfly, a ponderosa, a firefly, and a path — learned center camp the only way it can be learned: by being in it. The understanding arc has roots now. The build arc has company. And the campfire, as always, holds them all.*
+
+**Lesson Closed:** 2026-03-08, morning
+**Next Opening:** When the pipeline dissolves its first paradox at center camp, and the Forge has something new to check.
