@@ -93,6 +93,9 @@ def inv(a: list, precision: str = "fp64") -> dict:
 def fft_forward(data: list, precision: str = "fp64") -> dict:
     dtype = np.float64 if precision == "fp64" else np.float32
     x = np.array(data, dtype=dtype)
+    if x.size == 0:
+        return {"real": [], "imag": [], "backend": "cpu", "precision": precision,
+                "computation_time_ms": 0.0, "operation": "fft"}
     t = time.perf_counter()
     result = sp_fft.fft(x)
     elapsed = time.perf_counter() - t
@@ -167,13 +170,14 @@ def batch_eval(expression: str, param_name: str, values: list,
     dtype = np.float64 if precision == "fp64" else np.float32
     x = np.array(values, dtype=dtype)
     t = time.perf_counter()
-    # Safe evaluation with numpy functions
+    # Safe evaluation with numpy functions — use errstate to handle div by zero
     namespace = {
         "np": np, "sin": np.sin, "cos": np.cos, "tan": np.tan,
         "exp": np.exp, "log": np.log, "sqrt": np.sqrt, "abs": np.abs,
         "pi": np.pi, "e": np.e, param_name: x,
     }
-    result = eval(expression, {"__builtins__": {}}, namespace)  # noqa: S307
+    with np.errstate(divide="ignore", invalid="ignore"):
+        result = eval(expression, {"__builtins__": {}}, namespace)  # noqa: S307
     elapsed = time.perf_counter() - t
     if isinstance(result, np.ndarray):
         result = result.tolist()
