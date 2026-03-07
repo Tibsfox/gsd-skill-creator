@@ -24,6 +24,8 @@ from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
 from .chips import algebrus, fourier, vectora, statos, symbex
+from .config import load_config, MathCoprocessorConfig
+from .streams import StreamManager
 from .vram import VRAMManager
 from . import gpu
 
@@ -31,7 +33,9 @@ logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
 log = logging.getLogger("math-coprocessor")
 
 app = Server("gsd-math-coprocessor")
-vram = VRAMManager()
+config = load_config()
+vram = VRAMManager(budget_mb=config.vram_budget_mb)
+streams = StreamManager(config=config.coexistence)
 
 # --- Chip registry ---
 CHIPS = {
@@ -274,6 +278,11 @@ async def list_tools() -> list[Tool]:
             description="Current VRAM utilization",
             inputSchema={"type": "object", "properties": {}},
         ),
+        Tool(
+            name="math.streams",
+            description="CUDA stream isolation status",
+            inputSchema={"type": "object", "properties": {}},
+        ),
     ]
 
 
@@ -289,8 +298,29 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
 
 def _dispatch(name: str, args: dict) -> dict:
     """Route F-line instruction to the correct chip."""
-    precision = args.pop("precision", "fp64")
+    precision = args.pop("precision", None) or config.default_precision
 
+    # Check chip enabled
+    chip_name = name.split(".")[0] if "." in name else name
+    if chip_name in CHIPS and not config.is_chip_enabled(chip_name):
+        return {"error": f"Chip '{chip_name}' is disabled in config"}
+
+    # Acquire stream slot for concurrency control
+    if not streams.acquire():
+        return {"error": "Max concurrent math operations reached", "limit": streams.config.max_concurrent_ops}
+
+    try:
+        result = _execute(name, args, precision)
+        # Sync stream after operation if configured
+        if streams.config.sync_after_op:
+            streams.synchronize()
+        return result
+    finally:
+        streams.release()
+
+
+def _execute(name: str, args: dict, precision: str) -> dict:
+    """Execute the actual chip operation."""
     match name:
         # ALGEBRUS
         case "algebrus.gemm":
@@ -338,14 +368,25 @@ def _dispatch(name: str, args: dict) -> dict:
         case "math.capabilities":
             return {
                 "chips": {
-                    name: chip.capabilities()
-                    for name, chip in CHIPS.items()
+                    cname: {
+                        **chip.capabilities(),
+                        "enabled": config.is_chip_enabled(cname),
+                    }
+                    for cname, chip in CHIPS.items()
                 },
                 "gpu": gpu.get_gpu_info().__dict__ if gpu.cuda_available() else {"available": False},
                 "vram": vram.utilization,
+                "streams": streams.status,
+                "config": {
+                    "default_precision": config.default_precision,
+                    "thermal_limit_c": config.thermal_limit_c,
+                },
             }
         case "math.vram":
             return vram.utilization
+
+        case "math.streams":
+            return streams.status
 
         case _:
             return {"error": f"Unknown operation: {name}"}
@@ -354,14 +395,25 @@ def _dispatch(name: str, args: dict) -> dict:
 async def main():
     """Run the MCP server over stdio."""
     log.info("Starting GSD Math Co-Processor MCP Server")
+    log.info(f"Config: {config.name} v{config.version} (budget={config.vram_budget_mb}MB)")
+
     gpu_info = gpu.get_gpu_info()
     if gpu_info.available:
         log.info(f"GPU: {gpu_info.name} ({gpu_info.free_memory_mb}MB free)")
+        streams.initialize()
+        if streams.has_dedicated_stream:
+            log.info("CUDA stream isolation: active")
     else:
         log.info("No GPU — running in CPU fallback mode")
 
+    enabled = [n for n in CHIPS if config.is_chip_enabled(n)]
+    tools = await list_tools()
+    log.info(f"Chips enabled: {', '.join(enabled)} ({len(tools)} tools)")
+
     async with stdio_server() as (read_stream, write_stream):
         await app.run(read_stream, write_stream, app.create_initialization_options())
+
+    streams.destroy()
 
 
 def run():

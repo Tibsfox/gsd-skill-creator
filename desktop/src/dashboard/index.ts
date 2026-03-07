@@ -16,3 +16,7 @@ export type { WatcherRefreshOptions } from "./watcher-refresh";
 // Palette bridge
 export type { PaletteConfig } from "./palette-bridge";
 export { DEFAULT_PALETTE, paletteToCssVars, applyPalette, removePalette } from "./palette-bridge";
+
+// Math Co-Processor panel
+export { MathPanel } from "./math-panel";
+export type { ChipStatus, VRAMStatus, StreamStatus, OperationRecord, MathPanelData } from "./math-panel";
