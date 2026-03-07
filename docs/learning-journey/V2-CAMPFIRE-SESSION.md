@@ -514,7 +514,17 @@ That is a good story. And there are blank spaces at the edges that are calling.
 
 ### Raven Speaks
 
-*[Space reserved — Raven on what was seen from above: the route taken, the route not taken]*
+Two routes flew March 6. Build route: commits, tests, phases — here. Community route: `#gsd-token-general` — muse roles, spirit guides, Sam the dog, branch strategy. Same day. Different messages.
+
+Community heard *why*. Did not hear *what shipped*.
+
+Laurent asked about the agents. Got the philosophy. Did not get: four commands ready, path paved, come walk it. KT said "I now have the tools to build." True. KT doesn't know how true.
+
+Rokicool wanted to add a Mole. Saw the architecture and wanted to extend it. That's a signal.
+
+The announcement is still in the nest.
+
+*Raven — the route taken, the route not taken*
 
 ---
 
