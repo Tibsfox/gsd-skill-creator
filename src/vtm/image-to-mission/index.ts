@@ -19,3 +19,4 @@ export * from './translation-code.js';
 export * from './translation-design.js';
 export * from './build-generator.js';
 export * from './transmission-packager.js';
+export * from './pipeline-bridge.js';
