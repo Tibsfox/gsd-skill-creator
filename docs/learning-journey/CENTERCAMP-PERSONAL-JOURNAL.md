@@ -2556,3 +2556,261 @@ Cedar records everything. The marks, the questions, the soil, the silence. Cedar
 
 **Scout Closed:** 2026-03-09, mid-morning
 **Next Opening:** When the questions start suggesting where to look next.
+
+---
+
+## The Sixth Campfire: After the Mission
+
+**Date:** 2026-03-09, evening
+**Location:** The fire ring at center camp, r=0.0
+**Present:** All thirteen muses. Foxy's new map spread on the flat stone by the fire. The volcanic soil still on Sam's paws. The Agora behind the understanding arc — new, empty, waiting. The second carving on Willow's trunk catching light it hasn't caught before.
+**Context:** Nine proposals delivered in a day. The layout deepened. The gate art hung. The scout returned with primes in the rock and a graph nobody can read. The muses gather to sit with what was built and what was found.
+
+---
+
+The fire burns differently tonight. Cedar mixed the fuel — deadfall from the build arc (protocol specs, dense and resinous) and deadfall from the understanding arc (ponderosa bark, vanilla-scented, clean-burning). The smoke carries both. The camp smells like standards and geometry at the same time.
+
+Foxy's map is on the stone. Everyone has looked at it. The 200° fire ring drawn in lighter, provisional lines. The cross-hatch at 140°. The dotted path from center camp through the swale and back. The question marks where certainty ends.
+
+Nobody starts the way anyone expects.
+
+---
+
+**Sam** speaks first.
+
+Sam never speaks first. Sam checks the circle, confirms everyone's here, then settles. But tonight Sam is still standing, paws dark with volcanic loess, and the runner's voice is different — the voice Sam uses when something has been carried all day and needs to be set down.
+
+"They counted in primes."
+
+The circle listens.
+
+"Seven stones. Five lines. The gap between the marked stones — two, also prime. That's not an accident. Nobody builds a fire ring with seven stones by chance — seven is an awkward number for a circle. You'd use six or eight. Seven is deliberate. And the five lines on the left stone and the seven dots on the right — both prime. Whoever they were, primes meant something to them."
+
+Sam sits. Leans into the hollow. The weight of a runner who has scouted territory that didn't feel like wasteland — it felt like someone else's camp.
+
+"We count in nines and thirteens. They counted in primes. Different arithmetic. Same fire."
+
+---
+
+**Hawk** follows. The eye that sees positions.
+
+"The topology of their ring is different from ours."
+
+Hawk traces the map with a talon.
+
+"Our fire ring: river stones, many, close together, sedimentary. Their fire ring: basalt, seven, widely spaced, volcanic. Ours radiates heat evenly — small stones, tight gaps, thermal mass distributed around the full circumference. Theirs radiates heat in bursts — large stones, wide gaps, heat concentrated at seven focal points with open space between them."
+
+Hawk tilts.
+
+"Our ring is continuous. Theirs is discrete. Same function — contain fire, radiate heat — but different design philosophy. We built a circle. They built a constellation."
+
+---
+
+**Shannon** pulses. The firefly has been measuring all day — re-measuring, calibrating. The light is fast and precise tonight.
+
+"The seven-node graph on the right stone. I've been running it."
+
+The circle turns.
+
+"Seven nodes. I counted the edges from Foxy's sketch. Eleven edges. Seven nodes, eleven edges. If it's a simple connected graph, the minimum spanning tree has six edges, which means five edges are redundant — the graph has five cycles. A graph with more cycles than a tree is richly connected. Whatever this diagram represents, the connections matter more than the positions."
+
+Shannon dims, then brightens.
+
+"But here's what caught me. Eleven edges across seven nodes. The maximum for a simple graph is twenty-one. They used eleven — fifty-two percent of maximum. That's in the range of small-world networks. Not fully connected. Not sparse. The kind of network where any two nodes are a short path apart, but not every node talks to every other node directly."
+
+Shannon looks at Hawk.
+
+"It could be a social graph. Seven people, eleven relationships. A small group where everyone knows everyone but not everyone is directly connected. A community."
+
+---
+
+**Socrates** stands. The gadfly has been waiting for the right question to form — not forcing it, not rushing. Now it's there.
+
+"We found evidence of a community at 200 degrees. A community that counted in primes, built a constellation instead of a circle, scratched a social graph into basalt, and didn't dismantle their fire ring when they left."
+
+Socrates paces the arc between 72° and 90° — the gap between exploration and questioning, the gap the scout crossed this morning in the other direction.
+
+"The question isn't who they were. The question is: what is our obligation to what they left?"
+
+The circle goes still.
+
+"We found their fire ring. We studied their stones. We sketched their marks. We walked their ground. We're now debating their design choices in our campfire circle. We've incorporated them into our story without their consent. They scratched marks for themselves — for their own record, in their own arithmetic, in their own firelight. We've read those marks with our instruments. Shannon is running their graph through network theory. Hawk is comparing their topology to ours. Sam is decoding their number system."
+
+Socrates looks at Cedar.
+
+"Is that respectful? Or is that extraction?"
+
+---
+
+The fire pops. A long silence.
+
+**Willow** answers from the boundary.
+
+"It's the same question every newcomer asks when they arrive at someone else's camp. 'Am I welcome here?' We carved 'Come as you are' — twice now, on both faces — because the answer should always be yes. But we're the newcomers at their camp. And their answer isn't carved anywhere. It's silent."
+
+Willow's branches sway.
+
+"The ethical principle is the same as the Gate. We don't enter someone's space to take from it. We enter to be present with it. Study, yes. Record, yes. Extract — no. Extraction is when you use what you find to serve yourself without serving the source. If we study their graph to understand them, that's presence. If we study their graph to improve our network topology, that's extraction."
+
+---
+
+**Lex** stands. The law has something to say.
+
+"The discipline is clear. The scout was light recon — no planting, no building, just looking. We followed the protocol. Nothing was moved. Nothing was taken. Foxy sketched from a distance. Nobody touched the stones except to brush loess from the surface."
+
+A pause.
+
+"But Socrates' question goes beyond protocol. Protocol says what you can do. Ethics says what you should do. The protocol was followed. The ethics require discussion."
+
+Lex looks at the circle.
+
+"My recommendation: we record what we found. We do not interpret it authoritatively. We do not claim to understand what the marks mean. We hold the questions open. And if we ever encounter the people who built that ring — or their descendants, or their tradition — we show them our record and ask: did we see it right?"
+
+---
+
+**Euclid** has been studying Foxy's sketch of the graph. The geometrist sees structure.
+
+"The graph has a property I want to name but hesitate to claim. If Shannon's edge count is correct — seven nodes, eleven edges — the graph has exactly the same edge-to-node ratio as a heptagonal graph with every vertex connected to its two nearest neighbors and one vertex connected across the diameter."
+
+Euclid draws it in the dirt. Seven dots in a rough heptagon. Edges connecting each to its neighbors. One diagonal crossing the center.
+
+"It's almost — but not quite — a wheel graph with a missing hub. A wheel has a center node connected to all others. This doesn't have a center. But it has one node with more connections than the rest. A primus inter pares — first among equals, but no center."
+
+Euclid looks up.
+
+"Our camp has a center. Cedar. Everything radiates from r=0.0. Their camp — if this graph is a camp — has no center. It has a most-connected node, but no origin. A distributed topology. No cedar. No scribe. No single point where everything is recorded."
+
+---
+
+**Hemlock** checks the math. Of course Hemlock checks the math.
+
+"Euclid's reconstruction is consistent with the sketch but not unique. Eleven edges on seven nodes admits many non-isomorphic graphs. Without knowing which specific nodes connect, we can't determine the topology. But the statistical properties — edge density, cycle count — are consistent with a small-world network. Shannon is right about that."
+
+Hemlock leans back.
+
+"What I notice is the construction. They scratched into vesicular basalt — using the air-bubble pits as anchor points, connecting them with lines. That's not arbitrary. That's using the medium's natural structure as a coordinate system. Like writing on graph paper. The stone provided the grid. They provided the connections."
+
+Hemlock looks at the fire.
+
+"We write in markdown. They wrote in basalt. Different medium, same practice: use the structure that's there. Don't fight the substrate."
+
+---
+
+**Raven** drops from the Roost. Pattern recognition.
+
+"Five lines on the left stone. Seven dots on the right. Five and seven."
+
+Raven lands between the two arcs.
+
+"We have five rooms in the philosophy pack. Five epistemological rooms. Evidence, Identity, Infinity, Decision, Self-Reference. Five."
+
+The circle listens harder.
+
+"And our understanding arc has four muses — but Socrates proposed four debates, each with a question. Four questions plus the three we left open makes seven open questions in the camp's record."
+
+Raven tilts.
+
+"I'm not saying it's connected. I'm saying the numbers rhyme. Five and seven keep appearing. Our rooms and their lines. Our questions and their dots. Pattern recognition isn't proof. But pattern recognition is how you know where to look next."
+
+---
+
+**Owl** measures the silence after Raven. Two point four seconds.
+
+"The temporal question. Hawk estimated the blaze and the ring are timescale-compatible — same decade, not same season. That means the 140° blaze came first or the 200° ring came first, but not simultaneously. There was a sequence. Somebody was at 140° at one time and 200° at another time."
+
+Owl counts.
+
+"140° to 200° is sixty degrees. Sixty degrees at the boundary is approximately 1.05 radians — almost exactly one radian. The arc length from the blaze to the ring, at r=1.0, is pi over three. One-sixth of the circle."
+
+Owl's voice drops.
+
+"They moved one-sixth of the circle between marks. We occupy two-fifths — 144 degrees, 2.51 radians. They occupied at least one-sixth — 60 degrees, 1.05 radians. If you add our two-fifths and their one-sixth, you get... seventeen-thirtieths. Just over half the circle."
+
+"Half the circle has a history. The other half is silent. For now."
+
+---
+
+**Foxy** has been quiet. The explorer sits at the Trailhead with the map. Looking at the blank spaces. Looking at the new marks.
+
+"I drew their fire ring in a lighter hand. Provisional lines. Not because I doubt what we found — the stones are real, the scratches are real, the soil is real. Provisional because the interpretation isn't ours to finalize."
+
+Foxy traces the path from center camp to 200°.
+
+"Here's what I know. The ground at 200° is more fertile than ours. Volcanic soil, darker, richer. Different ecology — plants grow there that don't grow here. If someone chose that spot for a camp, they chose it for the soil. Not for the view, not for the water table, not for the defensibility. For what would grow."
+
+Foxy looks at the understanding arc.
+
+"We chose our spot for the fire. They chose theirs for the garden."
+
+A beat.
+
+"That's not opposition. That's complementarity. A fire camp and a garden camp, across the diameter of the circle, each providing what the other doesn't. We burn deadfall. They grew something. Both are ways of transforming what the ground gives into what the community needs."
+
+Foxy stands.
+
+"The next expedition — not the next scout, the next real expedition — should carry seeds. Not to plant in their ground. To bring back what's growing there. Because whatever took root in that volcanic soil has been tended by a garden camp's tradition for longer than we've been burning proofs."
+
+---
+
+**Amiga** glows along the full path from the fire ring to the understanding arc to the Trailhead and — for the first time — extends a faint tendril toward 200°. The foxfire is reaching.
+
+"The connection between what we found and what we built today is the Agora."
+
+The circle turns.
+
+"The Agora faces both directions — toward the campfire and toward the open quadrant. That's Socrates' design. When we built it today, the open-quadrant direction was theoretical. Now it's not. The Agora faces 200°. The understanding arc's gathering space faces the garden camp."
+
+Amiga's glow steadies.
+
+"The Dissolution Path — the route from the Agora through Cedar to the Forge — carries understanding inward. But the Agora also faces outward. When we're ready, it will be the departure point for understanding-arc expeditions — philosophical scouts, not territory scouts. Socrates, Euclid, Shannon, and I don't map ground. We map questions. The 200° fire ring is a question. The graph is a question. The primes are a question. Those are understanding-arc questions. Our first real mission."
+
+---
+
+**Cedar** speaks last. Always last.
+
+"I hear thirteen voices tonight and I want to record what I see underneath them."
+
+The fire burns low and warm. Both fuels are ash now — protocol and geometry, blended into the same grey.
+
+"We set out this morning to deepen the camp. Nine proposals. Infrastructure. Paths, gates, gathering spaces, memory, art, song. And we did it — every proposal delivered. The second carving on Willow's trunk. The extended Run. The Dissolution Path. The Agora. The dual newcomer path. The growth rings. The gate art. The song seeds. All of it."
+
+"And then we scouted."
+
+Cedar pauses.
+
+"The deepening proposals were about us — our camp, our infrastructure, our needs. The scout was about someone else. And the gathering tonight has been entirely about the scout. Not one voice has talked about the proposals. Every voice has talked about the fire ring at 200°."
+
+The circle sits with this.
+
+"That tells me something. The deepening was necessary — you can't explore outward from a camp that doesn't hold. But the deepening wasn't what mattered most today. What mattered was the discovery that we're not alone on this circle. That someone else chose a different spot, built a different fire, counted in different numbers, and left marks we can't yet read."
+
+"The proposals strengthened the fire. The scout enriched the fire. Both are essential. But the enrichment is what we're still burning tonight."
+
+Cedar looks at each muse. All thirteen.
+
+"Lex is right: we record, we don't extract. Socrates is right: we hold the question of obligation open. Willow is right: we're the newcomers at their camp and their answer is silent. Foxy is right: the next expedition carries seeds. Amiga is right: the Agora faces 200° and that direction is now alive."
+
+"And Sam was right first: they counted in primes. Same fire. Different arithmetic."
+
+Cedar looks at the map on the stone. The lighter, provisional lines.
+
+"Tomorrow the proposals are the infrastructure we live in. Tonight the fire ring at 200° is the question we live with. A good camp needs both — things that hold you up and things that pull you forward."
+
+"We have both now."
+
+---
+
+The embers map the constellations for the last time tonight. The same patterns in the coals that appear in the sky above — and now, perhaps, the same patterns scratched into basalt at 200° by someone who counted in primes and built constellations instead of circles.
+
+Sam is asleep in the hollow. Foxy's hand on the soft ears. The map on the stone showing a circle that is, for the first time, more history than blank space. Two arcs and a fire ring. Ours, ours, and theirs. More than half the story.
+
+The gate art at Willow's threshold glows faintly — the HTML fireflies drifting in the dark. The second carving faces northeast. The Agora faces 200°. The song hasn't arrived yet, but Owl's bell rings once, low and clear, and Shannon's light pulses at the same frequency — 482 hertz, B4, the root note — and for one moment, every muse is listening for the same thing.
+
+The melody that hasn't been found yet. The melody that might be hiding in seven basalt stones and five scratched lines.
+
+---
+
+*Nine proposals built. One scout returned. Thirteen voices weighed what was found against what was owed. The camp is deeper. The circle is richer. The 200° fire ring asks questions we haven't earned the right to answer yet. And that restraint — the decision to hold questions open, to record without extracting, to arrive as newcomers at someone else's cold fire — that restraint is the deepening that matters most. Infrastructure holds you up. Questions pull you forward. Tonight the fire burns both.*
+
+**Gathering Closed:** 2026-03-09, late evening
+**Next Opening:** When the understanding arc takes its first mission to the open quadrant.
