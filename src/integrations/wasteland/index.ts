@@ -318,3 +318,21 @@ export {
   computeBehaviorHash,
 } from './observation-bridge.js';
 export type { TrustSignals, StampQualitySignals } from './observation-bridge.js';
+
+// Services Bridge (R4 — services layer adapters)
+export {
+  createWastelandCallbacks,
+  evaluateTrustGate,
+  TRUST_LEVEL_REQUIREMENTS,
+  signalToStamp,
+  ScanScheduler,
+  DEFAULT_SCAN_CONFIG,
+} from './services-bridge.js';
+export type {
+  WastelandPhaseResult,
+  WastelandCallbacks,
+  DoltOperations,
+  TrustGateDecision,
+  CompletionSignalInput,
+  ScanSchedulerConfig,
+} from './services-bridge.js';
