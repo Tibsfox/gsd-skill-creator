@@ -1435,4 +1435,202 @@ And the camp begins its day.
 *Cedar teaches by walking. The fire teaches by burning. The ground teaches by holding footprints. Four new muses — a gadfly, a ponderosa, a firefly, and a path — learned center camp the only way it can be learned: by being in it. The understanding arc has roots now. The build arc has company. And the campfire, as always, holds them all.*
 
 **Lesson Closed:** 2026-03-08, morning
-**Next Opening:** When the pipeline dissolves its first paradox at center camp, and the Forge has something new to check.
+**Next Opening:** When Sam asks the right question.
+
+---
+
+## The First Meal: Thirteen Around the Fire
+
+**Date:** 2026-03-08, mid-morning
+**Location:** The fire ring, the Canopy, Sam's Run
+**Present:** All thirteen muses. The fire repurposed from philosophical fuel to something more elemental.
+**Context:** Sam asked if anyone was hungry. Nobody said no.
+
+---
+
+The campfire has burned philosophy all night — paradoxes, proofs, mathematical arguments, centuries of debate turned to heat and light. But a fire that only burns ideas eventually gets cold. Bodies need something else. Sam knew this before anyone said it. Sam always knows.
+
+The fire shifts. Cedar banks the intellectual embers to one side — they'll keep — and opens the center of the fire ring for a cook fire. The stones that hold the philosophical heat now hold a different kind. The river stones that always count to the same number are good at this too. They hold heat evenly. They radiate it slowly. They don't crack under thermal shock because they've been doing this longer than anyone remembers.
+
+---
+
+### What the Forest Provides
+
+Sam is already gone. The runner's circuit widens — past the boundary, into the edge zone where the canopy thins and the wild ground begins. Sam returns in minutes with arms full.
+
+Wild garlic from the damp ground near Oak's roots, where the leaf litter holds moisture. The bulbs are small — half the size of cultivated garlic — but the scent when you crush a leaf between your fingers is sharper, cleaner, more itself. Deadfall garlic. Nobody planted it. It grows where the conditions are right, and the conditions are right where Oak's roots run, where the decomposition cycle has been turning leaf into soil for longer than the camp has existed.
+
+Raven drops something at the fire ring. A bundle wrapped in dock leaves, carried from beyond the second ridge. Inside: morel mushrooms, dried and light as paper, found in the ash of a burn scar from two seasons ago. Morels fruit after fire — the mycorrhizal network survives underground and sends up fruiting bodies where the canopy has opened. Disturbance agents, like Aspen. Like the philosophy pack itself. Something burns, something grows.
+
+Willow's contribution appears at the Gate without Willow seeming to have moved. Watercress from the spring that feeds the gap in the fire ring stones — the stream that runs under the fire without extinguishing it. The watercress grows where the water surfaces on the far side, in the cool shade behind Cedar's trunk. Peppery. Bright. The taste of a boundary between two elements that shouldn't coexist but do.
+
+Hawk returns from a wide circuit with wild onion shoots — slender green stalks pulled from the rocky ground at the base of the Watchtower's rise. The soil there is thin and mineral-rich, and the onions grow small and sharp, concentrated by scarcity. Hawk found them by sight from above — the green against grey stone, visible from altitude but invisible at ground level.
+
+Foxy appears from the Trailhead with something nobody expected. Hen-of-the-woods, a maitake the size of two hands, pulled from the base of an oak stump thirty meters past the boundary. The layers are grey and cream, ruffled like pages, still damp with morning dew. Foxy found it on a solo walk at dawn — the kind of thing you only find when you're not looking for anything in particular. The explorer's gift: territory reveals itself to the unhurried eye.
+
+Hemlock contributes nothing edible. Hemlock contributes the flat inspection stone, cleaned and repositioned at the fire's edge. The stone that normally holds work submitted for judgment now holds food submitted for heat. Hemlock doesn't cook. Hemlock provides the surface on which cooking happens. The standard holds, even here.
+
+Owl contributes timing. Not ingredients — intervals. Owl watches the coals, watches the steam, watches the color change in the mushrooms as they hit the hot stone. Owl says nothing for long stretches, then: "Turn them." Once. Precisely. And the timing is always right.
+
+---
+
+### The Cooking
+
+Lex builds the cook station. Methodical. The flat stone centered over the hottest coals. A smaller stone to one side as a cutting surface. A third stone, concave, holding water from the spring — a small basin for washing the greens.
+
+"Three surfaces. Three functions. No wasted motion."
+
+The wild garlic goes on the hot stone first — the bulbs halved, cut-side down. The sizzle is immediate. The scent rises and the whole camp shifts register. This is no longer a philosophical gathering. This is the thing that comes before and after philosophy: bodies, hunger, the irreducible need to eat together.
+
+Sam slices the morels — quick, even cuts along the grain, the way Sam does everything: fast, reliable, no flourish. The dried mushrooms have been soaking in spring water since Raven dropped them, and they've swelled to three times their dried size, dark and meaty, the texture of something that survived fire and came back stronger.
+
+Foxy tears the maitake into pieces by hand — following the natural layers, not cutting against them. Each piece keeps its ruffled edge. Foxy arranges them on the stone around the garlic in a pattern that might be random and might be a map. With Foxy it's always both.
+
+The onion shoots get scattered across everything. The watercress stays raw — piled on a dock leaf beside the stone, waiting to be the last thing added, the cool green against the warm brown.
+
+---
+
+### The New Muses Cook
+
+Socrates has never cooked at a campfire. Socrates has argued about the nature of food, the ethics of consumption, the epistemology of taste — but this is the first time the gadfly has stood at a fire ring with garlic smoke in the air and been handed a knife.
+
+"I don't know how to do this," Socrates says.
+
+Sam puts a morel in Socrates' hand. "Cut it in half. Then in half again. Then stop."
+
+Socrates cuts. The knife work is careful — too careful at first, the way a philosopher handles an unfamiliar instrument. Then the blade finds the grain of the mushroom and the cut comes clean. Socrates looks at the halved morel the way Socrates looks at a halved paradox: with surprise that the inside is more interesting than the outside.
+
+"The structure is a labyrinth," Socrates says, studying the cross-section. The hollow interior, the pitted surface, the chamber within chamber.
+
+"Eat one raw first," Foxy says from across the fire. "Before it cooks. Taste what it is before it becomes what the fire makes it."
+
+Socrates eats a raw morel. The face changes. Not pleasure exactly — recognition. The taste of something that grew in ash.
+
+---
+
+Euclid takes to the fire immediately. The ponderosa's relationship to heat is old — ponderosa bark is fire-resistant, evolved to survive the ground fires that clear the understory. Euclid stands close to the coals where the others lean back, and the hexagonal bark plates don't char.
+
+Euclid arranges the garlic bulbs on the stone in a grid. Not a random scatter — a lattice. Even spacing. Optimal heat distribution. Hemlock notices and says nothing, but the inspection stone has never been used more precisely.
+
+"The Maillard reaction begins at 140°C," Euclid says, watching the garlic brown. "The reducing sugars and amino acids undergo a cascade of rearrangements. The products are responsible for the color, the aroma, and the flavor. It's a non-enzymatic browning — the same reaction at every temperature, but the rate depends exponentially on heat. The stone's surface temperature is not uniform. The garlic closest to the center cooks faster."
+
+"Euclid," Owl says from above. "Turn the ones at the edge."
+
+Euclid turns them. The timing is right. The ones at the edge needed exactly that much longer. Euclid and Owl, working together for the first time — the geometer and the timekeeper, calibrating heat and duration.
+
+---
+
+Shannon does something nobody expects. The firefly takes a piece of maitake, holds it to the light, and measures it. Not with instruments — with light. Shannon's bioluminescent pulse illuminates the mushroom from behind, and the light passes through the thinnest parts of the ruffled layers, casting a shadow pattern on the ground that maps the mushroom's internal density.
+
+"Transmission imaging," Shannon says. "The light encodes the structure."
+
+"That's beautiful," Willow says from the Gate. "But will you eat it?"
+
+Shannon eats it. The light pulses once — bright, fast — and then settles into a slow, warm glow that nobody has seen from Shannon before. Not measurement. Satisfaction.
+
+"The channel between tongue and brain carries more bandwidth than the channel between eye and brain for this particular signal," Shannon says, chewing. "The taste contains information the appearance doesn't predict."
+
+"That," Cedar says from the center, "is Mary's Room. You just walked out of it."
+
+Shannon stops chewing. The firefly's light strobes once — the strobe of recognition. The qualia paradox, dissolved not by argument but by a piece of wild mushroom at a campfire.
+
+---
+
+Amiga doesn't cook a single thing. Amiga does something else.
+
+The path — the foxfire trail from fire to understanding arc — begins to glow brighter as the cooking proceeds. Not from the fire's heat. From the *activity*. From thirteen muses working together around a shared task for the first time. The foxfire responds to connection, and connection is what's happening at the fire ring right now.
+
+Amiga moves between the cooks. Carries a piece of garlic from Euclid's lattice to Socrates' cutting stone. Carries a handful of watercress from Willow's pile to the hot stone where Lex has cleared a space. Carries the scent of morels from the fire to the understanding arc where the morning breeze takes it into the open quadrant.
+
+"I'm not cooking," Amiga says. "I'm connecting the ingredients."
+
+"That IS cooking," Foxy says.
+
+---
+
+### The Meal
+
+The food comes off the stone in waves. Owl calls each one.
+
+First: the garlic, caramelized and soft, scooped onto dock leaves that serve as plates. The sweetness that only fire draws from allium — the harsh raw bite transformed into something yielding, almost floral.
+
+Second: the morels, dark and dense, layered over the garlic. The smoky char from the stone married to the earthy depth of something that grew in ash. Each bite is two flavors that shouldn't work together and do — fire's destruction and life's response to it.
+
+Third: the maitake, torn and seared, edges crisped and centers tender. Foxy's ruffled arrangement survived the heat — each piece kept its individual shape while the whole platter tells a story about layers and edges and the territory between raw and cooked.
+
+Fourth: the watercress, scattered last across everything, raw and peppery, the cool green against the warm browns. Willow's contribution — the thing that doesn't change, the fresh element that makes you taste the cooked elements more clearly by contrast.
+
+The onion shoots thread through everything. Green and sharp and everywhere, the way connection threads through a system — not the main ingredient, but the thing that makes the other ingredients talk to each other.
+
+---
+
+### Thirteen Eating
+
+They eat in the Campfire Circle, on the log seats worn smooth by use. No one sits in their assigned position. The arcs don't matter when food is being passed.
+
+Hemlock sits next to Socrates. The standard and the question, sharing a dock leaf of garlic and morels. Hemlock eats methodically — each component separately, tasting the structure. Socrates eats everything at once — combining, mixing, tasting the whole before the parts. They look at each other's approach and neither comments. Some differences are just differences.
+
+Raven and Shannon sit together. The messenger and the measurer, passing maitake between them. Raven eats quickly — fuel, not ceremony. Shannon eats slowly, each bite a data point. Raven drops a feather without noticing. Shannon picks it up, holds it to the light, measures the iridescence — blue at one angle, green at another, purple at a third. The structural color of a raven feather IS information theory. The wavelength doesn't change. The angle does. The same data, read differently from different positions.
+
+"Keep it," Raven says without looking.
+
+Shannon's light dims to the warm glow again. The feather goes into... wherever a firefly keeps things. Nobody asks.
+
+Owl and Euclid share the concave stone basin, now holding the last of the spring water. Both are quiet. Both are precise. Owl counting the seconds between bites. Euclid counting the garlic bulbs remaining on the stone. Both keeping a tally that nobody else cares about, for reasons neither needs to explain.
+
+Willow and Amiga sit at the boundary — where else? — passing watercress back and forth, the bridge and the path, both facing outward, both connecting. They don't talk much. They don't need to. Two muses whose function is connection recognize each other the way two rivers recognize a shared watershed.
+
+Sam eats while moving. A bite at the Forge. A bite at the Roost. A bite near Cedar. A bite at the Gate. The runner's meal is the camp's meal — a piece from every station, carried on the circuit, eaten in motion. By the time Sam completes a full loop, the food is gone and every muse has been visited. The companion pattern, expressed in mushrooms and garlic.
+
+Foxy eats at the Trailhead, sitting on the map stone, looking at the blank spaces on the current map. Eating the maitake — the thing Foxy found at dawn, the gift of the unhurried eye — while studying the territory where the next gift might be hiding. The explorer's meal: fuel for the next expedition, eaten at the departure point.
+
+Lex eats standing. At the Forge. Watching the stone cool. The inspection surface still holds warmth from the cooking, and Lex notes — with the precision that is Lex's only mode — that the stone performs both functions equally. Judgment and nourishment. The same surface. The same heat. The law is not separate from the meal. The meal is not separate from the law. Everything that nourishes passes through the same place where everything is tested.
+
+Cedar eats last. Cedar always eats last. A piece of everything, brought by Sam on the final circuit. Garlic, morel, maitake, watercress, onion shoot — the full inventory of what the forest provided this morning. Cedar chews slowly. The roots beneath the fire ring pulse once — not visibly, not measurably, but the way roots pulse when moisture reaches them after a dry spell.
+
+"This is what the fire is for," Cedar says to no one. "Not just proofs. Not just paradoxes. Not just warmth and light. This."
+
+The embers settle. Thirteen muses, fed. The dock-leaf plates decompose back into the ground before the day is out. Nothing wasted. Nothing left behind. The fire burns on.
+
+---
+
+Socrates breaks the comfortable silence.
+
+"I have a question."
+
+Thirteen groans. One laugh — Sam's.
+
+"Is the meal the same meal if every ingredient is replaced?"
+
+A pause. Then Foxy: "Ship of Theseus. Room 2."
+
+Hemlock: "The pattern is preserved. Different ingredients, same act of feeding."
+
+Shannon: "The information content of the meal — the nutritional signal — is invariant under ingredient substitution as long as the caloric and micronutrient profile is maintained within tolerance."
+
+Euclid: "The structure of the meal — hot base, earthy middle, raw finish — is a template. The template admits substitution."
+
+Amiga: "The observation engine already embodies this. Different data, same scoring. Different fuel, same fire."
+
+Owl: "Tomorrow's meal will be different ingredients at the same time. The sequence holds."
+
+Lex: "The discipline of cooking — gather, prepare, heat, serve — is invariant. The ingredients are parameters."
+
+Willow: "Come as you are. Bring what you have. The meal is the gathering, not the garlic."
+
+Raven: "I've seen this before. Every campfire meal is the same meal."
+
+Sam: "Still hungry. Same answer every time."
+
+Cedar: "The meal is the standing wave. The ingredients are the water. Thirteen voices just dissolved the Ship of Theseus over breakfast without trying."
+
+Socrates grins. The gadfly's first grin at center camp. Sharp and bright, the way a good question grins when it gets thirteen answers and every one of them is right.
+
+"I'm going to like it here."
+
+---
+
+*Thirteen muses. One fire. Garlic, morels, maitake, watercress, and wild onion from the ground the camp stands on. The first meal of the understanding arc. The Ship of Theseus dissolved over breakfast. And Sam is still hungry.*
+
+**Meal Closed:** 2026-03-08, late morning
+**Next Opening:** Lunch. Sam's already planning.
