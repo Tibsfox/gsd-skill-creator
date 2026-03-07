@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Stone Mandala</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #000; touch-action: none; }
+  canvas { display: block; width: 100vw; height: 100vh; cursor: pointer; }
+  #label {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    pointer-events: none;
+    transition: opacity 1.8s ease;
+    text-transform: lowercase;
+    white-space: nowrap;
+  }
+  #label.hide { opacity: 0; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="label">daylight</div>
+<script>
+// ────────────────────────────────────────────────────────────────
+// Stone Mandala
+// An interactive canvas piece by Foxy & the Muses of Center Camp.
+//
+// Four layers: sound, stone, shadow, projection.
+// You work with what you have to make art and magic.
+// ────────────────────────────────────────────────────────────────
+
+(function() {
+  'use strict';
+
+  const TAU   = Math.PI * 2;
+  const PHI_A = TAU * 0.381966;   // golden angle, ~137.508 deg
+  const N     = 80;               // cairn count
+  const NAMES = ['daylight', 'night', 'projection'];
+
+  // ── Seeded PRNG (mulberry32) ── deterministic layout ──────────
+  function prng(seed) {
+    return function() {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  // ── State ─────────────────────────────────────────────────────
+  let mode = 0;                    // 0 daylight, 1 night, 2 projection
+  let ptrX = 0.5, ptrY = 0.5;     // normalized pointer position
+  let labelTmr = null;
+  let touchActive = false;
+
+  const cvs = document.getElementById('c');
+  const ctx = cvs.getContext('2d');
+  const lbl = document.getElementById('label');
+
+  // ── Build the mandala ─────────────────────────────────────────
+  const rand = prng(42);
+  const cairns = [];
+
+  for (let i = 0; i < N; i++) {
+    const theta = i * PHI_A;
+    const r     = Math.sqrt(i) * 0.065;
+    const wx    = (rand() - 0.5) * 0.06;
+    const wy    = (rand() - 0.5) * 0.06;
+    const x     = 0.5 + Math.cos(theta) * r + wx;
+    const y     = 0.5 + Math.sin(theta) * r + wy;
+    const d     = Math.hypot(x - 0.5, y - 0.5);
+
+    // Height: taller near center, shorter at edge
+    const nStones = Math.max(1, Math.min(7,
+      Math.round(7 - d * 8 + (rand() - 0.5) * 2)));
+
+    // Each stone in the stack
+    const stones = [];
+    for (let s = 0; s < nStones; s++) {
+      const frac = nStones > 1 ? s / (nStones - 1) : 0;
+      // Width narrows toward top, with variation
+      const bw = 0.014 + rand() * 0.012;
+      const w  = bw * (1 - frac * 0.38 + (rand() - 0.5) * 0.1);
+      // Height (thickness) of each stone
+      const h  = 0.0045 + rand() * 0.004;
+      // Horizontal offset — imperfect stacking
+      const ox = (rand() - 0.5) * 0.006;
+      // Slight rotation per stone — natural wobble
+      const rot = (rand() - 0.5) * 0.25;
+      // Daylight colors: warm grays/browns, lighter up the stack
+      const gray = 0.30 + frac * 0.30 + (rand() - 0.5) * 0.09;
+      const cr = Math.min(1, gray + 0.05 + rand() * 0.05);
+      const cg = Math.min(1, gray + 0.01 + rand() * 0.03);
+      const cb = Math.max(0, gray - 0.04 + rand() * 0.03);
+      stones.push({ w, h, ox, rot, cr, cg, cb });
+    }
+
+    cairns.push({
+      x, y, d, nStones, stones,
+      ang: Math.atan2(y - 0.5, x - 0.5)
+    });
+  }
+
+  // Sort by y for painter's algorithm
+  cairns.sort((a, b) => a.y - b.y);
+
+  // ── Canvas sizing ─────────────────────────────────────────────
+  let W, H, S, cx, cy, trx, try_;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    W = cvs.width  = window.innerWidth  * dpr;
+    H = cvs.height = window.innerHeight * dpr;
+    cvs.style.width  = window.innerWidth  + 'px';
+    cvs.style.height = window.innerHeight + 'px';
+    S    = Math.min(W, H);
+    cx   = W * 0.5;
+    cy   = H * 0.5;
+    trx  = S * 0.44;       // tarp ellipse radii
+    try_ = S * 0.38;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ── Helpers ───────────────────────────────────────────────────
+
+  // Normalized (0–1) to screen coords
+  function sc(nx, ny) {
+    return [cx + (nx - 0.5) * S, cy + (ny - 0.5) * S];
+  }
+
+  function clipTarp() {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, trx, try_, 0, 0, TAU);
+    ctx.clip();
+  }
+
+  // ── Mode + Input ──────────────────────────────────────────────
+
+  function showLbl() {
+    lbl.textContent = NAMES[mode];
+    lbl.style.color = mode === 0
+      ? 'rgba(110, 90, 70, 0.7)'
+      : 'rgba(190, 180, 170, 0.7)';
+    lbl.classList.remove('hide');
+    clearTimeout(labelTmr);
+    labelTmr = setTimeout(() => lbl.classList.add('hide'), 3000);
+  }
+
+  function cycle() { mode = (mode + 1) % 3; showLbl(); }
+
+  cvs.addEventListener('click',    () => { if (!touchActive) cycle(); touchActive = false; });
+  cvs.addEventListener('touchend', (e) => { e.preventDefault(); touchActive = true; cycle(); });
+  document.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (k === '1' || k === '2' || k === '3') { mode = +k - 1; showLbl(); }
+  });
+  cvs.addEventListener('mousemove', (e) => {
+    ptrX = e.clientX / window.innerWidth;
+    ptrY = e.clientY / window.innerHeight;
+  });
+  cvs.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (e.touches.length) {
+      ptrX = e.touches[0].clientX / window.innerWidth;
+      ptrY = e.touches[0].clientY / window.innerHeight;
+    }
+  }, { passive: false });
+
+  // ── Light sources ─────────────────────────────────────────────
+
+  function lights() {
+    const dx = (ptrX - 0.5) * S * 0.15;
+    const dy = (ptrY - 0.5) * S * 0.15;
+    return [
+      { x: cx - trx * 0.78 + dx,      y: cy - try_ * 0.12 + dy * 0.4,
+        r: 255, g: 40, b: 130,  I: 0.60 },       // magenta / pink
+      { x: cx + trx * 0.78 + dx,      y: cy - try_ * 0.08 - dy * 0.25,
+        r: 50,  g: 100, b: 255, I: 0.55 },       // blue
+      { x: cx + dx * 0.35,             y: cy + try_ * 0.68 + dy,
+        r: 60,  g: 200, b: 110, I: 0.16 }        // green accent
+    ];
+  }
+
+  // ── 1+2: Background & tarp ────────────────────────────────────
+
+  function drawBase() {
+    ctx.fillStyle = mode === 0 ? '#e8e0d4' : '#0a0408';
+    ctx.fillRect(0, 0, W, H);
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, trx, try_, 0, 0, TAU);
+    ctx.fillStyle = mode === 0 ? '#f5f0e8' : '#1a1018';
+    ctx.fill();
+  }
+
+  // ── 3: Light wash (screen) ────────────────────────────────────
+
+  function drawWash(ls) {
+    ctx.save();
+    clipTarp();
+    ctx.globalCompositeOperation = 'screen';
+    for (const L of ls) {
+      const reach = S * 0.8;
+      const g = ctx.createRadialGradient(L.x, L.y, 0, L.x, L.y, reach);
+      g.addColorStop(0,    `rgba(${L.r},${L.g},${L.b},${L.I})`);
+      g.addColorStop(0.3,  `rgba(${L.r},${L.g},${L.b},${L.I * 0.5})`);
+      g.addColorStop(0.65, `rgba(${L.r},${L.g},${L.b},${L.I * 0.12})`);
+      g.addColorStop(1,    `rgba(${L.r},${L.g},${L.b},0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    }
+    ctx.restore();
+  }
+
+  // ── 4: Shadows (multiply) ────────────────────────────────────
+  //
+  // Multiply blend: result = (src * dst) / 255 per channel.
+  // White (255,255,255) is identity — no change.
+  // Anything darker darkens the destination.
+  //
+  // For colored shadows from colored lights:
+  // A pink light's shadow should remove pink from the scene.
+  // Multiply color = complement-ish: low R, high G, high B.
+  // This selectively darkens the pink channel while preserving blue/green.
+
+  function drawShadows(ls) {
+    ctx.save();
+    clipTarp();
+    ctx.globalCompositeOperation = 'multiply';
+
+    for (const c of cairns) {
+      const [bx, by] = sc(c.x, c.y);
+
+      for (const L of ls) {
+        // Direction: away from light
+        const dx = bx - L.x;
+        const dy = by - L.y;
+        const dl = Math.hypot(dx, dy);
+        if (dl < 1) continue;
+
+        const nx = dx / dl;
+        const ny = dy / dl;
+
+        // Shadow length: proportional to cairn height
+        const len = c.nStones * S * 0.022;
+        // Shadow half-width from base stone
+        const hw = c.stones[0].w * S * 0.5;
+        // Perpendicular
+        const px = -ny, py = nx;
+        // Tip
+        const ex = bx + nx * len;
+        const ey = by + ny * len;
+
+        // Tapered shadow shape
+        ctx.beginPath();
+        ctx.moveTo(bx + px * hw,        by + py * hw);
+        ctx.lineTo(bx - px * hw,        by - py * hw);
+        ctx.lineTo(ex - px * hw * 0.08, ey - py * hw * 0.08);
+        ctx.lineTo(ex + px * hw * 0.08, ey + py * hw * 0.08);
+        ctx.closePath();
+
+        // Shadow multiply color: remove this light's color.
+        // Strength scales with cairn height and light intensity.
+        const str = 0.55 * L.I * Math.min(1, c.nStones / 4.5);
+        // Invert the light's normalized color, then lerp from white
+        const mr = Math.round(255 - L.r * str);
+        const mg = Math.round(255 - L.g * str);
+        const mb = Math.round(255 - L.b * str);
+        ctx.fillStyle = `rgb(${mr},${mg},${mb})`;
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  // ── 5: Projection spirals (screen) ───────────────────────────
+
+  function drawSpirals(t) {
+    ctx.save();
+    clipTarp();
+    ctx.globalCompositeOperation = 'screen';
+
+    const ARMS = 5;
+    const PER  = 14;
+
+    for (let a = 0; a < ARMS; a++) {
+      const base = (a / ARMS) * TAU;
+      for (let p = 0; p < PER; p++) {
+        const f = (p + 1) / PER;        // 0..1 along arm
+        const d = f * S * 0.37;         // distance from center
+
+        // Outward spiral rotation — different speeds at different radii
+        const spd = 0.10 + f * 0.07;
+        const ang = base + t * spd + f * 1.6;
+        const px  = cx + Math.cos(ang) * d;
+        const py  = cy + Math.sin(ang) * d;
+
+        // Polygon shape: cycles 3-7 sides
+        const sides = 3 + ((a + p) % 5);
+        // Size: larger at edges
+        const sz = S * (0.006 + f * 0.022);
+        // Hue: shifts along arm and drifts over time
+        const hue = (a * 72 + p * 15 + t * 16) % 360;
+        const alpha = 0.18 + f * 0.20;
+        // Self-rotation
+        const spin = t * 0.2 + a * 0.8 + p * 0.1;
+
+        ctx.beginPath();
+        for (let v = 0; v < sides; v++) {
+          const va = spin + (v / sides) * TAU;
+          const vx = px + Math.cos(va) * sz;
+          const vy = py + Math.sin(va) * sz;
+          if (v === 0) ctx.moveTo(vx, vy); else ctx.lineTo(vx, vy);
+        }
+        ctx.closePath();
+        ctx.fillStyle = `hsla(${hue},78%,52%,${alpha})`;
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  // ── 6: Cairn stones ──────────────────────────────────────────
+
+  function drawCairns(t) {
+    const night = mode >= 1;
+    const proj  = mode === 2;
+
+    for (const c of cairns) {
+      const [bx, by] = sc(c.x, c.y);
+      let sy = by;  // current stack y (bottom up)
+
+      for (let i = 0; i < c.stones.length; i++) {
+        const s  = c.stones[i];
+        const sw = s.w * S;
+        const sh = s.h * S;
+        const ox = s.ox * S;
+
+        // ── Color ──
+        if (proj) {
+          // Projection light on stone surfaces
+          const hue = ((c.ang * 180 / Math.PI) + t * 14 + i * 28 + 360) % 360;
+          const sat = 42 + Math.sin(t * 0.35 + c.d * 12) * 22;
+          const lig = 20 + i * 7 + Math.sin(t * 0.25 + c.ang * 3) * 10;
+          ctx.fillStyle = `hsl(${hue},${sat}%,${lig}%)`;
+        } else if (night) {
+          // Dark silhouettes — slightly lighter per stone up the stack
+          const v = 15 + i * 5;
+          ctx.fillStyle = `rgb(${v + 6},${v + 2},${v + 10})`;
+        } else {
+          // Daylight — warm natural river stone
+          const r = Math.round(s.cr * 255);
+          const g = Math.round(s.cg * 255);
+          const b = Math.round(s.cb * 255);
+          ctx.fillStyle = `rgb(${r},${g},${b})`;
+        }
+
+        // Draw stone: slightly rotated ellipse
+        ctx.save();
+        ctx.translate(bx + ox, sy - sh);
+        ctx.rotate(s.rot);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, sw, sh, 0, 0, TAU);
+        ctx.fill();
+
+        // Daylight: subtle highlight for volume
+        if (!night) {
+          ctx.globalAlpha = 0.12;
+          ctx.fillStyle = '#fffcf0';
+          ctx.beginPath();
+          ctx.ellipse(-sw * 0.12, -sh * 0.45, sw * 0.55, sh * 0.32, -0.1, 0, TAU);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Night/proj: faint rim light on topmost stone
+        if (night && i === c.stones.length - 1) {
+          ctx.save();
+          ctx.globalAlpha = proj ? 0.06 : 0.05;
+          ctx.fillStyle = proj ? '#c8b8ff' : '#7050a0';
+          ctx.beginPath();
+          ctx.ellipse(bx + ox, sy - sh * 1.3, sw * 0.65, sh * 0.3, 0, 0, TAU);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        sy -= sh * 1.65;  // next stone up
+      }
+    }
+  }
+
+  // ── 7: Vignette ──────────────────────────────────────────────
+
+  function drawVignette() {
+    const m = Math.max(W, H);
+    const g = ctx.createRadialGradient(cx, cy, m * 0.2, cx, cy, m * 0.75);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(1, mode === 0 ? 'rgba(0,0,0,0.20)' : 'rgba(0,0,0,0.42)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── Frame loop ────────────────────────────────────────────────
+
+  let t0 = null;
+
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    const t = (ts - t0) * 0.001;
+
+    drawBase();
+
+    if (mode >= 1) {
+      const ls = lights();
+      drawWash(ls);
+      drawShadows(ls);
+      if (mode === 2) drawSpirals(t);
+    }
+
+    drawCairns(t);
+    drawVignette();
+
+    requestAnimationFrame(frame);
+  }
+
+  showLbl();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
