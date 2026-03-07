@@ -256,3 +256,28 @@ export {
   bootstrap,
 } from './bootstrap.js';
 export type { BootstrapResult } from './bootstrap.js';
+
+// Trust Tier Escalation
+export {
+  buildContributorRules,
+  buildMaintainerRules,
+  evaluateRule,
+  evaluateRig,
+  scanForEscalation,
+  toPromotionSQL,
+  toPromotionReport,
+  formatEvaluation,
+  createDoltHubEscalationProvider,
+} from './trust-escalation.js';
+export type {
+  RigRecord,
+  StampSummary,
+  CompletionSummary,
+  EscalationRule,
+  EscalationCriterion,
+  EscalationContext,
+  CriterionResult,
+  EscalationEvaluation,
+  EscalationScanResult,
+  EscalationDataProvider,
+} from './trust-escalation.js';
