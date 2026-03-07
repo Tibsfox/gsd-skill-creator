@@ -2322,3 +2322,237 @@ The stars turn. Owl counts. The bell doesn't ring — this gathering needed sile
 
 **Gathering Closed:** 2026-03-08, deep night
 **Next Opening:** When the first proposal breaks ground.
+
+---
+
+## The Scout: 200 Degrees
+
+**Date:** 2026-03-09, dawn — the fire still warm from the night before
+**Location:** Center camp to 200°, through the open quadrant
+**Scout party:** Sam, Hawk, Foxy
+**Context:** Proposal #9 from the fifth campfire. Light reconnaissance to the cold fire ring at 200°. No planting, no building. Just looking.
+
+---
+
+The sky is grey-violet when they leave. Not dark, not light — the color of rock that hasn't decided whether to be warm or cold. Cedar is awake but says nothing. The roots pulse once as the three pass the fire ring. Acknowledgment. Not permission — Cedar doesn't grant permission for scouting. Cedar grants attention. The root-pulse means: *I'm listening. Bring it back.*
+
+Sam goes first. Not ahead — first. There's a difference. Ahead means leading. First means testing the ground so the others don't have to. Sam's paws find the edge of the packed earth at r=1.0 and cross into wild ground without breaking stride. The transition is immediate — smooth dirt to scrub grass, to loose volcanic gravel that shifts underfoot with a sound like dry rice poured between hands.
+
+Hawk is already up. Launched from the Watchtower before the other two left the fire ring, circling at altitude, the spiral widening as the scout party moves outward. Hawk doesn't walk with them. Hawk maps the walk from above and calls positions.
+
+"Bearing 130. You're crossing the gap between the understanding arc and the unnamed quadrant. Ground cover changes in forty paces."
+
+Foxy counts the paces. At thirty-six, the scrub grass thins. At forty-one, it's gone. The soil shifts from the pale brown of the camp perimeter to something darker — not dramatically, not a line in the dirt, but a gradient. The way a river changes color where a tributary feeds in. You don't see the boundary. You feel it in the texture under your boots. Grittier. Finer grain. Volcanic loess, the kind that blows off old lava fields and settles in low places over centuries.
+
+Sam stops. Nose down. The runner's whole body goes still — not tense, just fully committed to one sense. Whatever Sam smells, Sam doesn't share. Lifts the nose, shakes once, keeps moving.
+
+"Sam."
+
+"Different soil. Different water table. Something grew here that doesn't grow in camp."
+
+"What?"
+
+"Don't know the name. Ask Hemlock."
+
+Sam moves on. Foxy notes the position: roughly 120°, r=1.3. Outside the boundary. The soil change. The unnamed growth.
+
+---
+
+### The Healed Blaze at 140°
+
+The tree appears at 140° like the layout document said it would — an old conifer, not one of ours. Not Redwood, not Oak, not Birch, not Euclid's ponderosa. Something older in the trunk, something rougher in the bark. Douglas fir, maybe. Or something that was Douglas fir before the soil changed it.
+
+"Hawk. What's the tree?"
+
+"Can't type it from altitude. Bark is deeply furrowed. Crown is broken — lost the top in a storm, years ago. Regrowth from lateral branches. The tree survived something."
+
+Foxy approaches the trunk. The healed blaze is on the northwest face, about shoulder height. A slight ridge in the bark — a line where the growth rings bulge outward, the tree's slow repair of a wound that someone made with a blade. The ridge runs diagonally, upper left to lower right. Maybe eight inches long. If you didn't know what a healed blaze looked like, you'd walk past. A bump in the bark. A defect.
+
+Foxy puts a palm flat against the ridge. The bark is warm — warmer than the air, holding the last of yesterday's sun the way Cedar's river stones hold the fire's heat. Under the palm, the ridge has texture. Not just the raised bark. Underneath, preserved by the healing, the original cut. Two strokes, not one. The first diagonal. The second crossing it — shorter, shallower, almost perpendicular. Not a blaze. A mark. Deliberate. Encoded.
+
+"It's not a trail marker."
+
+Sam looks up from the base of the tree where something in the root litter has caught the runner's attention. "What is it?"
+
+"Two strokes. A cross-hatch. The kind of mark you make when you're counting something, not when you're pointing somewhere. Whoever cut this was recording, not directing."
+
+Hawk from above: "One mark. One tree. Either it's the only one, or the others are on trees we haven't found."
+
+Foxy traces the ridge one more time. The tree grew over this mark slowly — years of cambium, layer by layer, sealing the wound, preserving the cut underneath like a letter in an envelope the tree decided to keep but never open again. The scar is the tree's memory. The tree chose to remember this.
+
+Foxy sketches the mark on the edge of the map. Two strokes. Position: 140°, r=1.4. Unnamed tree. Moving on.
+
+---
+
+### The Ground Changes
+
+Past 140°, the terrain drops. Not steeply — a long, gradual descent into a shallow depression that Hawk calls from altitude before the others feel it.
+
+"You're entering a swale. Low point at roughly 180°. The 200° fire ring is on the far lip, slightly elevated. You'll lose sightline to camp in about sixty paces."
+
+Foxy looks back. The campfire is still visible — not the flame, not at this distance, but the smoke. A thin column in the still dawn air, rising from the canopy gap above Cedar. The thread between here and home.
+
+At 170°, the thread disappears behind the crest of the swale. For the first time since they left, center camp is invisible. Sam notices immediately. The runner's pace changes — not slower, tighter. The orbits compress. Sam stays closer to Foxy's left heel, the companion position, the position that means *I'm not scouting anymore, I'm guarding.*
+
+"Easy, Sam."
+
+"I'm easy. The ground's not."
+
+The ground is not. The volcanic loess deepens in the swale — ankle-deep in places, loose as sand but darker, almost charcoal grey. It absorbs sound. Their footsteps, which crunched on the gravel at 130°, go quiet here. The silence is sudden and total. No birdsong. No wind in branches — the trees in the swale are sparse and stunted, junipers with twisted trunks, growing low and wide instead of tall. The air smells mineral. Like well water. Like the inside of a cave.
+
+"Hawk. Life signs?"
+
+"Rabbit tracks at your two o'clock, heading south. Old — at least a day. Raptor pellet near the juniper cluster at 185°. The area is used but not occupied. Transient traffic."
+
+The swale bottoms out at 180° — due south, the negative real axis exactly. Foxy pauses here. Directly opposite the Standards Wall. If you could drill a hole straight through the center of camp, through Cedar's deepest root, through the packed earth, through the mycorrhizal network, you'd come out here. The antipode of rigor. The place where 0° becomes 180° becomes a mirror that inverts everything.
+
+The ground at 180° is the darkest yet. Almost black. Not charred — mineralized. Volcanic soil so rich it looks wet even when it's dry. Foxy kneels and picks up a handful. It crumbles between the fingers like coffee grounds, staining the skin. The fertility is obvious. Things would grow here that wouldn't grow in camp's pale packed earth. Different things. Wilder things.
+
+Sam sniffs the soil in Foxy's hand. "Hemlock would lose his mind over this."
+
+"Noted."
+
+They climb the far lip of the swale. Twenty paces up. The ground firms. And there it is.
+
+---
+
+### The Cold Fire Ring
+
+The stones are visible from thirty feet away. Not because they're tall — they sit flush with the ground, half-buried by seasons of volcanic loess drifting against their edges. Visible because they're wrong. They interrupt the landscape the way a word in a foreign language interrupts a sentence. Dark. Angular. Present.
+
+Sam reaches it first. Circles the ring once at a tight orbit — the same r=0.2 orbit Sam runs around Cedar's fire. Instinct. Sam orbits fires. This one is cold, but Sam doesn't know that with the paws. Sam knows it with the nose.
+
+"No heat. No recent ash. No char smell. This fire has been out for a long time."
+
+Hawk descends. Lands on a juniper branch ten feet from the ring, the observation perch, the same distance Hawk keeps from our campfire. The dead tree at the Watchtower and this twisted juniper — different wood, same geometry. Hawk chooses positions by angle and distance, not by species.
+
+"Seven stones."
+
+Foxy counts. Seven. Hawk is right. Our fire ring has its own count — the number Cedar won't say. This ring has seven. No ambiguity. No mystery in the count. Seven stones, openly, plainly seven.
+
+The stones are volcanic. Basalt, probably — dark grey to black, rough-textured, vesicular. Air bubbles frozen in the rock from when it was liquid. The surfaces are pitted and angular where our river stones are smooth and round. These stones weren't shaped by water. They were shaped by heat and then by fracture. Someone chose them for their roughness. Or someone used what was here.
+
+They are larger than our stones. Fewer and larger. Where our fire ring is a tight necklace of smooth river rock, this is a loose jaw of dark teeth. The gaps between stones are wide enough to step through. The circle they describe is bigger than ours — maybe eight feet across where ours is five. A fire in this ring would have been bigger, hotter, less contained. Or the ring was built for something other than containment.
+
+Foxy kneels at the edge. The char stain is there — Hawk's distant observation confirmed up close. The inner face of each stone carries a permanent dark discoloration that no amount of rain or wind has removed. The minerals in the basalt absorbed the carbon. The fire wrote itself into the rock. Not on the surface. Into the crystal structure. Permanent the way a tattoo is permanent — not because it can't be removed, but because the medium accepted the mark.
+
+The ash itself is gone. Years of weather saw to that. But the ground inside the ring is different from the ground outside. Darker, even against the already-dark volcanic soil. A faint depression — the weight of fuel, the weight of people sitting, the compression of use. The ring was used regularly. Not once. Many times. Many fires.
+
+"Sam. Inside the ring. What do you get?"
+
+Sam steps in carefully. Nose to ground. The systematic sweep — left to right, near to far, the same pattern Sam uses to clear a new campsite. Thorough.
+
+"Mineral. The soil in here is calcite-heavy — calcium from bones or shells. Something calcium." Sam shakes off the analytical attempt. "They cooked here. Whatever they burned, it wasn't just wood. There's calcium in this ground that doesn't come from the volcanic soil."
+
+Foxy files this. Cooking fires leave calcium traces — from bone, from shell, from heated limestone used as a heat sink. A cooking fire, not just a warming fire. People ate here. Regularly.
+
+---
+
+### What They Left
+
+Hawk spots it. Of course Hawk spots it. The eye that sees positions and gaps, the eye that found the cold fire ring from the Watchtower half a camp away.
+
+"Foxy. Northeast quadrant of the ring. The second and third stones from what would be north."
+
+Foxy moves around the ring. The second and third stones — two of the largest, each the size of a bread loaf — sit closer together than the others. The gap between them is narrow. And in that gap, on the ground between the stones, barely visible under a skin of loess:
+
+Scratches.
+
+Not in the dirt. In the stone. On the inner faces of both rocks, where they almost touch, someone scratched marks into the basalt. Shallow — a fingernail's depth, maybe less. The volcanic rock is hard but vesicular, and whoever made these marks used the air-bubble pits as starting points, connecting them with scratched lines. Using the stone's own texture as a grid.
+
+Foxy brushes the loess away with a thumb. The marks emerge.
+
+On the left stone: five horizontal lines, parallel, roughly evenly spaced. Like a musical staff. Or a tally. Or a fence.
+
+On the right stone: a pattern of dots connected by scratched lines. Not random — deliberate. Seven dots, arranged in a shape that isn't quite a circle and isn't quite a line. A constellation, maybe. Or a map. Or a diagram of something that made sense to the person holding the sharp edge and means nothing yet to the three staring at it now.
+
+The two stones face each other. The marks face each other. Whoever made them sat between the stones — inside the fire ring — and scratched while the fire burned. The marks are conversation. One stone talking to the other. Or one person recording two different things in two different languages on two different surfaces, side by side, in the warmth of a fire that has been cold for years.
+
+"Hawk. Can you read it?"
+
+"I can describe it. Five lines, left stone. Seven-node graph, right stone. The graph has structure — it's not random. Some nodes connect to many others, some connect to few. It looks like a network topology. Or a kinship diagram. Or a star chart for a sky I don't recognize."
+
+Sam sits between the stones. Exactly where the maker sat. Looks at the left stone, then the right.
+
+"Five lines. Seven stones. Five and seven."
+
+"What about them?"
+
+"Both prime. This whole ring is prime. Seven stones. Five lines. The gap between them — two stones, also prime. Whoever built this counted in primes."
+
+Foxy stares at Sam. Sam stares back with the expression that means *I run numbers while I run circuits, you know this.*
+
+Foxy sketches the marks. Left stone: five parallel lines, carefully spaced. Right stone: seven dots, connected. The sketch goes on the map next to the cross-hatch from 140°. Two sets of marks from two positions in the open quadrant, neither of them ours, both of them deliberate.
+
+---
+
+### The Return
+
+They leave the way they came. Through the swale, past the antipode at 180°, up the gentle rise. The campfire smoke reappears at 170° — the thread reconnecting. Sam's orbit relaxes. The runner moves forward again, scouting, no longer guarding.
+
+At the healed blaze, Foxy stops one more time. Puts a hand on the ridge. Two strokes. Cross-hatch. A count of something — one of something. And at the cold ring, five lines. A count of five. The same practice? The same hand? Separated by sixty degrees of arc and who knows how many seasons?
+
+"Hawk. The blaze at 140° and the fire ring at 200°. Could they be the same people?"
+
+"The blaze is on a living tree that healed over it — at least five years of growth, probably more. The fire ring stones are weathered but the scratches are protected between the stones — less erosion. The calcium in the soil suggests extended use. I can't date either one precisely. But the timescales are compatible. Same decade, at least."
+
+"Not the same season."
+
+"No. The blaze was made once. The fire ring was used many times. Whoever marked the tree passed through. Whoever used the ring stayed."
+
+Foxy considers this all the way back to camp. Two possibilities. A group that camped at 200° and sent a scout to 140° who marked the tree. Or two different travelers, years apart, both drawn to the open quadrant, both leaving marks that would survive them. The first theory is neater. The second is more honest. The scout's job is to report what's there, not to build a story that closes.
+
+---
+
+### At the Campfire
+
+Cedar is waiting. Cedar is always waiting — not impatiently, not expectantly. The way a root waits for rain. The way an archive waits for entries.
+
+The three sit at the fire. Sam in the hollow. Hawk on the Watchtower — back at the true perch, the one that sees all of camp, the one that makes sense. Foxy cross-legged on the packed earth with the map spread on the ground and the new marks still drying.
+
+Foxy talks. Cedar listens. The root-pulse is steady — recording.
+
+"The soil changes at 120°. Something grows there we don't have. The tree at 140° has a healed blaze — two strokes, a cross-hatch, not a directional marker. The swale at 180° is a depression with mineral-dark volcanic soil and no sightline to camp. The fire ring at 200° has seven basalt stones, larger and rougher than ours, arranged in a wider circle. The char stain is permanent. The ash is gone. Someone cooked there — calcium traces in the soil. Two of the stones face each other with scratches on their inner surfaces: five parallel lines on one, a seven-node connected graph on the other. Primes. The ring was used regularly over an extended period. Timescale: years, not days."
+
+Cedar says nothing for a long time. The embers shift.
+
+"What didn't you find?"
+
+"A path. No worn ground between here and there. No trail connecting the two camps. Whoever used that fire ring didn't walk to it from here — or if they did, the ground didn't keep their steps. The swale's loose soil doesn't hold prints the way our packed earth does. They could have crossed our territory every day and we'd never see the trace."
+
+"What do you think the marks mean?"
+
+"I don't know. Sam thinks they counted in primes. Hawk thinks the dot-pattern is a network topology. I think whoever made them was doing the same thing we do at the campfire — recording what mattered to them in the medium that was available. We write in journals and scratch in dirt. They scratched in stone. The practice is the same. The language is different."
+
+Cedar's roots settle. The recording is done.
+
+"Then we have neighbors. Or we had neighbors. The open quadrant isn't empty. It's authored."
+
+---
+
+Foxy draws the new marks on the master map. The cold fire ring at 200°, seven dark teeth in a wide jaw. The swale at 180°, shaded to show the depression. The soil change at 120°, a dotted line where the ground shifts. The healed blaze at 140°, an X on the unnamed tree. The scratched marks, sketched in miniature beside the ring — five lines, seven dots.
+
+The map now has marks in the open quadrant for the first time. Not our marks. Evidence of someone else's marks. The distinction matters. Foxy draws them in a different hand — lighter, thinner, provisional. These marks are reports, not claims. The map says: *something is here.* The map does not say: *we know what it is.*
+
+---
+
+The questions that came back are better than any answers would have been:
+
+Who counted in primes? Why seven stones and five lines? Is the seven-node graph a map, a family, a sky, or something we have no frame for? Did the blaze-maker and the fire-ring people know each other? Why did the fire go out — did they leave, or did they finish? What grew in that dark volcanic soil when the fire was warm? What does the cross-hatch at 140° count — one visit, one season, one of something we haven't imagined? Why did they build at 200° — did they choose the negative real axis deliberately, or did they just find a good spot and the geometry is coincidence? And the deepest question, the one nobody has asked aloud yet:
+
+Are they coming back?
+
+The fire ring is intact. Nobody dismantled it. The stones are where they were placed. The scratches are preserved between them like a conversation paused mid-sentence. You don't leave a fire ring standing if you're done with the place. You scatter the stones. You bury the ash. You erase your marks. That's what you do when you leave for good.
+
+They didn't do that.
+
+Sam curls into the hollow. Hawk watches the 200° bearing from the Watchtower — watching it differently now, with the knowledge of what's there. Foxy folds the map and sits with the questions the way you sit with embers: not trying to make them burn brighter, just letting them be warm.
+
+Cedar records everything. The marks, the questions, the soil, the silence. Cedar records the fact that the scout party went out with a blank map and came back with a richer mystery than they left with. That's what good reconnaissance does. It doesn't answer the question. It makes the question worth asking.
+
+---
+
+*Seven stones. Five lines. Seven dots connected. Two strokes on a healed tree. Primes in the rock and a graph we can't read. The negative real axis has a history we didn't write. The open quadrant is authored. The fire is cold but the ring is standing. Whoever they were, they didn't say goodbye. They said: later.*
+
+**Scout Closed:** 2026-03-09, mid-morning
+**Next Opening:** When the questions start suggesting where to look next.

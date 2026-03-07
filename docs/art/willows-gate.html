@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willow's Gate — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .scene {
+    position: relative;
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    max-width: 800px;
+    max-height: 800px;
+  }
+
+  svg.gate {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* ── Firefly particles ── */
+  .firefly {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: drift linear infinite, glow ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(12px, -18px) scale(1.2); }
+    50%  { transform: translate(-8px, -30px) scale(0.8); }
+    75%  { transform: translate(15px, -12px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  @keyframes glow {
+    0%   { opacity: 0.1; }
+    100% { opacity: 0.9; }
+  }
+
+  /* ── Gentle sway for willow branches ── */
+  @keyframes sway-left {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-1.8deg); }
+  }
+  @keyframes sway-right {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(1.8deg); }
+  }
+  @keyframes sway-gentle {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-1.2deg); }
+  }
+
+  .branch-left  { animation: sway-left 6s ease-in-out infinite; transform-origin: top left; }
+  .branch-right { animation: sway-right 6s ease-in-out infinite; transform-origin: top right; }
+  .branch-center { animation: sway-gentle 8s ease-in-out infinite; transform-origin: top center; }
+
+  .branch-left-slow  { animation: sway-left 9s ease-in-out infinite; transform-origin: top left; }
+  .branch-right-slow { animation: sway-right 9s ease-in-out infinite; transform-origin: top right; }
+  .branch-center-slow { animation: sway-gentle 11s ease-in-out infinite; transform-origin: top center; }
+
+  /* ── Firelight flicker on the warm side ── */
+  @keyframes firelight {
+    0%, 100% { opacity: 0.35; }
+    30%      { opacity: 0.45; }
+    60%      { opacity: 0.30; }
+    80%      { opacity: 0.50; }
+  }
+
+  @keyframes starlight {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 0.40; }
+  }
+
+  /* ── Light dapple animation ── */
+  @keyframes dapple {
+    0%, 100% { opacity: 0.12; }
+    33%      { opacity: 0.22; }
+    66%      { opacity: 0.08; }
+  }
+
+  /* ── Breathing glow for the welcome text ── */
+  @keyframes text-breathe {
+    0%, 100% { opacity: 0.75; }
+    50%      { opacity: 0.95; }
+  }
+
+  .welcome-text {
+    animation: text-breathe 5s ease-in-out infinite;
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+<svg class="gate" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- ── Gradients ── -->
+
+    <!-- The threshold gradient: warm camp (left/bottom) to cool wasteland (right/top) -->
+    <radialGradient id="threshold" cx="50%" cy="65%" r="55%">
+      <stop offset="0%"   stop-color="#2a1a08" stop-opacity="0.9"/>
+      <stop offset="40%"  stop-color="#1a1520" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Warm firelight glow from below-center -->
+    <radialGradient id="fireGlow" cx="50%" cy="80%" r="50%">
+      <stop offset="0%"   stop-color="#d4890a" stop-opacity="0.5"/>
+      <stop offset="30%"  stop-color="#b5650a" stop-opacity="0.3"/>
+      <stop offset="60%"  stop-color="#6b3a10" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cool starlight glow from above -->
+    <radialGradient id="starGlow" cx="50%" cy="15%" r="50%">
+      <stop offset="0%"   stop-color="#8fa8c8" stop-opacity="0.25"/>
+      <stop offset="40%"  stop-color="#4a5a70" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Unit circle boundary glow -->
+    <radialGradient id="circleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="85%"  stop-color="transparent"/>
+      <stop offset="93%"  stop-color="#c8a050" stop-opacity="0.06"/>
+      <stop offset="97%"  stop-color="#8090a8" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+
+    <!-- Branch wood gradient - warm side -->
+    <linearGradient id="woodWarm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#5a3a1a"/>
+      <stop offset="100%" stop-color="#3a2510"/>
+    </linearGradient>
+
+    <!-- Branch wood gradient - cool side -->
+    <linearGradient id="woodCool" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#3a4a4a"/>
+      <stop offset="100%" stop-color="#2a3535"/>
+    </linearGradient>
+
+    <!-- Leaf cluster warm -->
+    <radialGradient id="leafWarm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#7a8a30" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4a5520" stop-opacity="0.15"/>
+    </radialGradient>
+
+    <!-- Leaf cluster cool -->
+    <radialGradient id="leafCool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#506858" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#304838" stop-opacity="0.15"/>
+    </radialGradient>
+
+    <!-- Dappled light spots -->
+    <radialGradient id="dappleWarm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#e8b840" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#e8b840" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="dappleCool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#a0b8d0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a0b8d0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ground path gradient -->
+    <linearGradient id="groundPath" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#8fa8c8" stop-opacity="0.15"/>
+      <stop offset="50%"  stop-color="#c8a050" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#d4890a" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Text gradient: cool to warm across the words -->
+    <linearGradient id="textGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#b0c8d8"/>
+      <stop offset="35%"  stop-color="#c8b898"/>
+      <stop offset="100%" stop-color="#d8b060"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="wideGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clip for the arch opening -->
+    <clipPath id="archClip">
+      <ellipse cx="400" cy="420" rx="140" ry="220"/>
+    </clipPath>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--              BACKGROUND LAYERS              -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Deep night sky -->
+  <rect width="800" height="800" fill="#0a0a0f"/>
+
+  <!-- Star field — scattered points of light -->
+  <g opacity="0.6">
+    <circle cx="120" cy="80"  r="1" fill="#c8d8e8"/>
+    <circle cx="230" cy="45"  r="0.7" fill="#e0e8f0"/>
+    <circle cx="340" cy="120" r="0.8" fill="#b0c0d0"/>
+    <circle cx="510" cy="65"  r="1.1" fill="#d0d8e0"/>
+    <circle cx="620" cy="95"  r="0.6" fill="#a8b8c8"/>
+    <circle cx="700" cy="50"  r="0.9" fill="#c0d0e0"/>
+    <circle cx="155" cy="160" r="0.5" fill="#d8e0e8"/>
+    <circle cx="670" cy="170" r="0.7" fill="#b8c8d8"/>
+    <circle cx="80"  cy="130" r="0.8" fill="#c8d0d8"/>
+    <circle cx="450" cy="30"  r="1.0" fill="#d0dce8"/>
+    <circle cx="570" cy="140" r="0.6" fill="#c0ccd8"/>
+    <circle cx="290" cy="180" r="0.5" fill="#b8c4d0"/>
+    <circle cx="750" cy="120" r="0.7" fill="#d0d8e0"/>
+    <circle cx="50"  cy="60"  r="0.9" fill="#c8d4e0"/>
+    <circle cx="380" cy="75"  r="0.6" fill="#b0bcc8"/>
+  </g>
+
+  <!-- Starlight glow from above -->
+  <rect width="800" height="800" fill="url(#starGlow)" style="animation: starlight 7s ease-in-out infinite;"/>
+
+  <!-- Firelight glow from below -->
+  <rect width="800" height="800" fill="url(#fireGlow)" style="animation: firelight 4s ease-in-out infinite;"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--           UNIT CIRCLE GEOMETRY              -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- The unit circle at r=1.0, centered on the gate -->
+  <g opacity="0.08">
+    <circle cx="400" cy="400" r="300" fill="none" stroke="#a0a8b0" stroke-width="0.5" stroke-dasharray="4,8"/>
+  </g>
+
+  <!-- 45-degree line — the axis of the gate -->
+  <line x1="400" y1="400" x2="612" y2="188" stroke="#a0a8b0" stroke-width="0.3" opacity="0.05" stroke-dasharray="2,6"/>
+
+  <!-- Subtle circle boundary glow -->
+  <circle cx="400" cy="400" r="300" fill="url(#circleGlow)" opacity="0.5"/>
+
+  <!-- Faint cardinal markers on the circle -->
+  <g opacity="0.06" fill="#a0a8b0">
+    <circle cx="700" cy="400" r="2"/> <!-- 0 degrees -->
+    <circle cx="400" cy="100" r="2"/> <!-- 90 degrees -->
+    <circle cx="100" cy="400" r="2"/> <!-- 180 degrees -->
+    <circle cx="400" cy="700" r="2"/> <!-- 270 degrees -->
+    <!-- 45 degrees — the gate position, slightly brighter -->
+    <circle cx="612" cy="188" r="3" opacity="2"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--            THE PATH / GROUND                -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Ground path approaching the gate — gentle curve -->
+  <path d="M 400 800 Q 400 700 400 650 Q 398 600 400 560"
+        fill="none" stroke="url(#groundPath)" stroke-width="80"
+        stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Subtle stones on the path -->
+  <g opacity="0.12">
+    <ellipse cx="385" cy="750" rx="12" ry="5" fill="#4a4a50" transform="rotate(-8, 385, 750)"/>
+    <ellipse cx="420" cy="710" rx="8"  ry="4" fill="#3a3a40" transform="rotate(12, 420, 710)"/>
+    <ellipse cx="395" cy="670" rx="10" ry="4" fill="#454550" transform="rotate(-3, 395, 670)"/>
+    <ellipse cx="410" cy="630" rx="7"  ry="3" fill="#3a3a42" transform="rotate(8, 410, 630)"/>
+    <ellipse cx="390" cy="600" rx="9"  ry="3" fill="#404048" transform="rotate(-5, 390, 600)"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--         THE GATE — TRUNK AND ARCH           -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Left trunk — the camp side (warm) -->
+  <g class="branch-left" style="animation-delay: -0.5s;">
+    <path d="M 280 750 Q 275 600 270 480 Q 268 400 280 320 Q 290 260 310 220"
+          fill="none" stroke="#4a2a12" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+    <!-- Bark texture lines -->
+    <path d="M 280 740 Q 276 620 272 500 Q 270 420 278 340"
+          fill="none" stroke="#3a2010" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+    <path d="M 285 730 Q 280 600 276 490 Q 274 410 282 330"
+          fill="none" stroke="#5a3818" stroke-width="1" stroke-linecap="round" opacity="0.2"/>
+  </g>
+
+  <!-- Right trunk — the wasteland side (cool) -->
+  <g class="branch-right" style="animation-delay: -0.5s;">
+    <path d="M 520 750 Q 525 600 530 480 Q 532 400 520 320 Q 510 260 490 220"
+          fill="none" stroke="#3a4038" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 520 740 Q 524 620 528 500 Q 530 420 522 340"
+          fill="none" stroke="#2a3028" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+    <path d="M 515 730 Q 520 600 524 490 Q 526 410 518 330"
+          fill="none" stroke="#4a5048" stroke-width="1" stroke-linecap="round" opacity="0.2"/>
+  </g>
+
+  <!-- The arch — where the two trunks meet -->
+  <path d="M 310 220 Q 350 160 400 148 Q 450 160 490 220"
+        fill="none" stroke="#3a3028" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Secondary arch layer for depth -->
+  <path d="M 315 230 Q 355 175 400 165 Q 445 175 485 230"
+        fill="none" stroke="#2a2520" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--     HANGING WILLOW BRANCHES — LEFT SIDE     -->
+  <!--           (warm, firelit, golden)           -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <g class="branch-left" style="animation-delay: -1s;">
+    <!-- Main hanging branch -->
+    <path d="M 290 300 Q 260 380 240 480 Q 230 540 235 580"
+          fill="none" stroke="#4a3018" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <!-- Leaves / tendrils -->
+    <path d="M 255 400 Q 240 440 230 490" fill="none" stroke="#5a6828" stroke-width="2" opacity="0.5"/>
+    <path d="M 248 430 Q 235 465 228 510" fill="none" stroke="#6a7830" stroke-width="1.5" opacity="0.4"/>
+    <path d="M 260 380 Q 245 420 238 470" fill="none" stroke="#5a6a28" stroke-width="1.5" opacity="0.45"/>
+  </g>
+
+  <g class="branch-left-slow" style="animation-delay: -3s;">
+    <path d="M 285 280 Q 250 340 225 430 Q 210 500 215 560"
+          fill="none" stroke="#4a3018" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 240 370 Q 222 420 210 470" fill="none" stroke="#5a6828" stroke-width="2" opacity="0.4"/>
+    <path d="M 235 400 Q 218 445 208 490" fill="none" stroke="#6a7830" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <g class="branch-left" style="animation-delay: -2s;">
+    <path d="M 295 340 Q 270 410 260 500 Q 255 550 260 600"
+          fill="none" stroke="#4a3018" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 270 430 Q 258 470 252 520" fill="none" stroke="#5a6828" stroke-width="1.5" opacity="0.4"/>
+    <path d="M 265 460 Q 255 495 250 540" fill="none" stroke="#687a2e" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <!-- Outer left branches — further from gate -->
+  <g class="branch-left-slow" style="animation-delay: -4s;">
+    <path d="M 275 260 Q 220 320 185 430 Q 170 510 180 580"
+          fill="none" stroke="#3a2812" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 210 380 Q 192 430 182 480" fill="none" stroke="#4a5a22" stroke-width="1.5" opacity="0.35"/>
+    <path d="M 200 420 Q 185 465 178 510" fill="none" stroke="#5a6a2a" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--    HANGING WILLOW BRANCHES — RIGHT SIDE     -->
+  <!--        (cool, silver-blue, starlit)         -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <g class="branch-right" style="animation-delay: -1.5s;">
+    <path d="M 510 300 Q 540 380 560 480 Q 570 540 565 580"
+          fill="none" stroke="#384840" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 545 400 Q 560 440 570 490" fill="none" stroke="#486050" stroke-width="2" opacity="0.5"/>
+    <path d="M 552 430 Q 565 465 572 510" fill="none" stroke="#507058" stroke-width="1.5" opacity="0.4"/>
+    <path d="M 540 380 Q 555 420 562 470" fill="none" stroke="#486850" stroke-width="1.5" opacity="0.45"/>
+  </g>
+
+  <g class="branch-right-slow" style="animation-delay: -3.5s;">
+    <path d="M 515 280 Q 550 340 575 430 Q 590 500 585 560"
+          fill="none" stroke="#384840" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 560 370 Q 578 420 590 470" fill="none" stroke="#486050" stroke-width="2" opacity="0.4"/>
+    <path d="M 565 400 Q 582 445 592 490" fill="none" stroke="#507058" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <g class="branch-right" style="animation-delay: -2.5s;">
+    <path d="M 505 340 Q 530 410 540 500 Q 545 550 540 600"
+          fill="none" stroke="#384840" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 530 430 Q 542 470 548 520" fill="none" stroke="#486050" stroke-width="1.5" opacity="0.4"/>
+    <path d="M 535 460 Q 545 495 550 540" fill="none" stroke="#507858" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <!-- Outer right branches -->
+  <g class="branch-right-slow" style="animation-delay: -5s;">
+    <path d="M 525 260 Q 580 320 615 430 Q 630 510 620 580"
+          fill="none" stroke="#304038" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 590 380 Q 608 430 618 480" fill="none" stroke="#405840" stroke-width="1.5" opacity="0.35"/>
+    <path d="M 600 420 Q 615 465 622 510" fill="none" stroke="#486848" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   HANGING BRANCHES — TOP / CANOPY CENTER    -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <g class="branch-center" style="animation-delay: -1s;">
+    <path d="M 370 165 Q 365 220 355 300 Q 348 360 350 400"
+          fill="none" stroke="#3a3520" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 360 250 Q 350 290 345 340" fill="none" stroke="#4a5a28" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <g class="branch-center-slow" style="animation-delay: -2s;">
+    <path d="M 400 148 Q 400 210 400 290 Q 400 340 398 380"
+          fill="none" stroke="#3a3520" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+    <path d="M 400 230 Q 398 270 396 320" fill="none" stroke="#4a5a28" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <g class="branch-center" style="animation-delay: -3.5s;">
+    <path d="M 430 165 Q 435 220 445 300 Q 452 360 450 400"
+          fill="none" stroke="#3a3a28" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 440 250 Q 450 290 455 340" fill="none" stroke="#485a30" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <!-- Short inner canopy wisps -->
+  <g class="branch-center-slow" style="animation-delay: -4.5s;">
+    <path d="M 350 180 Q 342 230 340 270" fill="none" stroke="#3a3520" stroke-width="1.5" opacity="0.35"/>
+    <path d="M 450 180 Q 458 230 460 270" fill="none" stroke="#3a3a28" stroke-width="1.5" opacity="0.35"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--          DAPPLED LIGHT THROUGH LEAVES       -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Warm dapples — left/lower -->
+  <g style="animation: dapple 5s ease-in-out infinite;">
+    <circle cx="310" cy="450" r="20" fill="url(#dappleWarm)"/>
+  </g>
+  <g style="animation: dapple 7s ease-in-out infinite; animation-delay: -2s;">
+    <circle cx="350" cy="520" r="15" fill="url(#dappleWarm)"/>
+  </g>
+  <g style="animation: dapple 6s ease-in-out infinite; animation-delay: -4s;">
+    <circle cx="280" cy="380" r="18" fill="url(#dappleWarm)"/>
+  </g>
+  <g style="animation: dapple 8s ease-in-out infinite; animation-delay: -1s;">
+    <circle cx="370" cy="580" r="22" fill="url(#dappleWarm)"/>
+  </g>
+  <g style="animation: dapple 5.5s ease-in-out infinite; animation-delay: -3s;">
+    <circle cx="330" cy="350" r="12" fill="url(#dappleWarm)"/>
+  </g>
+
+  <!-- Cool dapples — right/upper -->
+  <g style="animation: dapple 6s ease-in-out infinite; animation-delay: -1s;">
+    <circle cx="490" cy="450" r="20" fill="url(#dappleCool)"/>
+  </g>
+  <g style="animation: dapple 8s ease-in-out infinite; animation-delay: -3s;">
+    <circle cx="450" cy="520" r="15" fill="url(#dappleCool)"/>
+  </g>
+  <g style="animation: dapple 7s ease-in-out infinite; animation-delay: -5s;">
+    <circle cx="520" cy="380" r="18" fill="url(#dappleCool)"/>
+  </g>
+  <g style="animation: dapple 5s ease-in-out infinite; animation-delay: -2.5s;">
+    <circle cx="430" cy="580" r="22" fill="url(#dappleCool)"/>
+  </g>
+  <g style="animation: dapple 6.5s ease-in-out infinite; animation-delay: -4s;">
+    <circle cx="470" cy="350" r="12" fill="url(#dappleCool)"/>
+  </g>
+
+  <!-- Mixed dapples in the center — the transition zone -->
+  <g style="animation: dapple 9s ease-in-out infinite; animation-delay: -2s;">
+    <circle cx="400" cy="400" r="25" fill="url(#dappleWarm)" opacity="0.5"/>
+    <circle cx="400" cy="400" r="25" fill="url(#dappleCool)" opacity="0.5"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--        LEAF CLUSTERS / CANOPY MASS          -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Warm side leaf masses -->
+  <g class="branch-left" style="animation-delay: -0.5s;" opacity="0.6">
+    <ellipse cx="240" cy="320" rx="40" ry="25" fill="url(#leafWarm)" transform="rotate(-15, 240, 320)"/>
+    <ellipse cx="220" cy="400" rx="35" ry="20" fill="url(#leafWarm)" transform="rotate(-10, 220, 400)"/>
+    <ellipse cx="250" cy="260" rx="30" ry="18" fill="url(#leafWarm)" transform="rotate(-20, 250, 260)"/>
+  </g>
+
+  <!-- Cool side leaf masses -->
+  <g class="branch-right" style="animation-delay: -0.5s;" opacity="0.6">
+    <ellipse cx="560" cy="320" rx="40" ry="25" fill="url(#leafCool)" transform="rotate(15, 560, 320)"/>
+    <ellipse cx="580" cy="400" rx="35" ry="20" fill="url(#leafCool)" transform="rotate(10, 580, 400)"/>
+    <ellipse cx="550" cy="260" rx="30" ry="18" fill="url(#leafCool)" transform="rotate(20, 550, 260)"/>
+  </g>
+
+  <!-- Top canopy mass -->
+  <g class="branch-center-slow" style="animation-delay: -1s;" opacity="0.5">
+    <ellipse cx="370" cy="180" rx="35" ry="22" fill="url(#leafWarm)" transform="rotate(-5, 370, 180)"/>
+    <ellipse cx="430" cy="180" rx="35" ry="22" fill="url(#leafCool)" transform="rotate(5, 430, 180)"/>
+    <ellipse cx="400" cy="160" rx="30" ry="18" fill="url(#leafWarm)" opacity="0.5"/>
+    <ellipse cx="400" cy="160" rx="30" ry="18" fill="url(#leafCool)" opacity="0.5"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--           THE THRESHOLD — LOOKING IN        -->
+  <!--     What you see through the arch: warmth   -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Warm glow visible through the archway — the campfire within -->
+  <g clip-path="url(#archClip)">
+    <ellipse cx="400" cy="520" rx="120" ry="100" fill="#d4890a" opacity="0.08"/>
+    <ellipse cx="400" cy="550" rx="80" ry="60" fill="#e8a020" opacity="0.06"/>
+    <ellipse cx="400" cy="560" rx="40" ry="30" fill="#f0c040" opacity="0.05"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--              THE WELCOME TEXT                -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- "Come as you are" — integrated into the gate threshold -->
+  <g class="welcome-text" filter="url(#textShadow)">
+    <!-- The text follows a gentle upward arc through the gate opening -->
+    <defs>
+      <path id="textArc" d="M 300 530 Q 400 500 500 530"/>
+    </defs>
+    <text font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="4"
+          fill="url(#textGradient)" opacity="0.85">
+      <textPath href="#textArc" startOffset="50%" text-anchor="middle">
+        Come as you are
+      </textPath>
+    </text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--         FIREFLIES / AMBIENT PARTICLES       -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Warm fireflies — camp side -->
+  <g filter="url(#softGlow)">
+    <circle cx="320" cy="480" r="1.5" fill="#e8c040" opacity="0"
+      style="animation: glow 3s ease-in-out infinite alternate, drift 12s linear infinite; animation-delay: -1s;">
+      <animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="290" cy="550" r="1.2" fill="#e8b030" opacity="0"
+      style="animation: glow 4s ease-in-out infinite alternate, drift 15s linear infinite; animation-delay: -3s;">
+      <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" begin="-1.5s"/>
+    </circle>
+    <circle cx="350" cy="420" r="1.8" fill="#f0c848" opacity="0"
+      style="animation: glow 3.5s ease-in-out infinite alternate, drift 10s linear infinite; animation-delay: -5s;">
+      <animate attributeName="opacity" values="0;0.7;0" dur="3.5s" repeatCount="indefinite" begin="-2s"/>
+    </circle>
+    <circle cx="310" cy="620" r="1.3" fill="#e0b838" opacity="0"
+      style="animation: drift 14s linear infinite; animation-delay: -7s;">
+      <animate attributeName="opacity" values="0;0.5;0" dur="5s" repeatCount="indefinite" begin="-3s"/>
+    </circle>
+  </g>
+
+  <!-- Cool fireflies — wasteland side -->
+  <g filter="url(#softGlow)">
+    <circle cx="480" cy="480" r="1.5" fill="#90b8d8" opacity="0"
+      style="animation: drift 13s linear infinite; animation-delay: -2s;">
+      <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" begin="-1s"/>
+    </circle>
+    <circle cx="510" cy="550" r="1.2" fill="#80a8c8" opacity="0"
+      style="animation: drift 11s linear infinite; animation-delay: -4s;">
+      <animate attributeName="opacity" values="0;0.5;0" dur="5s" repeatCount="indefinite" begin="-2.5s"/>
+    </circle>
+    <circle cx="450" cy="420" r="1.8" fill="#a0c0d8" opacity="0"
+      style="animation: drift 14s linear infinite; animation-delay: -6s;">
+      <animate attributeName="opacity" values="0;0.7;0" dur="3s" repeatCount="indefinite" begin="-1s"/>
+    </circle>
+    <circle cx="490" cy="620" r="1.3" fill="#88b0c8" opacity="0"
+      style="animation: drift 16s linear infinite; animation-delay: -8s;">
+      <animate attributeName="opacity" values="0;0.4;0" dur="6s" repeatCount="indefinite" begin="-3.5s"/>
+    </circle>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--     FINE ROOTS AT THE BASE OF THE TRUNKS    -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <g opacity="0.4">
+    <!-- Left roots -->
+    <path d="M 280 740 Q 260 760 230 770" fill="none" stroke="#3a2512" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 278 750 Q 255 770 240 780" fill="none" stroke="#3a2512" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 282 745 Q 300 770 320 775" fill="none" stroke="#3a2512" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Right roots -->
+    <path d="M 520 740 Q 540 760 570 770" fill="none" stroke="#2a3530" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 522 750 Q 545 770 560 780" fill="none" stroke="#2a3530" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 518 745 Q 500 770 480 775" fill="none" stroke="#2a3530" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--          SUBTLE GROUND VEGETATION           -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <g opacity="0.25">
+    <!-- Warm side grass tufts -->
+    <path d="M 200 770 Q 205 750 200 730" fill="none" stroke="#4a5a20" stroke-width="1.5"/>
+    <path d="M 205 772 Q 212 748 208 728" fill="none" stroke="#5a6a28" stroke-width="1"/>
+    <path d="M 210 770 Q 218 752 215 735" fill="none" stroke="#4a5a20" stroke-width="1"/>
+
+    <path d="M 160 775 Q 163 758 158 740" fill="none" stroke="#4a5a20" stroke-width="1.5"/>
+    <path d="M 165 777 Q 170 756 166 738" fill="none" stroke="#5a6a28" stroke-width="1"/>
+
+    <!-- Cool side grass tufts -->
+    <path d="M 600 770 Q 595 750 600 730" fill="none" stroke="#406048" stroke-width="1.5"/>
+    <path d="M 595 772 Q 588 748 592 728" fill="none" stroke="#487050" stroke-width="1"/>
+    <path d="M 590 770 Q 582 752 585 735" fill="none" stroke="#406048" stroke-width="1"/>
+
+    <path d="M 640 775 Q 637 758 642 740" fill="none" stroke="#406048" stroke-width="1.5"/>
+    <path d="M 635 777 Q 630 756 634 738" fill="none" stroke="#487050" stroke-width="1"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--       ADDITIONAL DEPTH — INNER GLOW         -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Very soft warm glow just inside the arch -->
+  <ellipse cx="400" cy="450" rx="100" ry="140" fill="#d4890a" opacity="0.04"
+    style="animation: firelight 6s ease-in-out infinite;"/>
+
+  <!-- Subtle mist/atmosphere at the base -->
+  <ellipse cx="400" cy="720" rx="250" ry="40" fill="#1a1520" opacity="0.3"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--        45-DEGREE MARKER — SUBTLE            -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Small geometric acknowledgment of the 45-degree position -->
+  <g opacity="0.07" transform="translate(400, 400)">
+    <!-- Tiny 45-degree angle marker -->
+    <path d="M 20 0 A 20 20 0 0 0 14.14 -14.14" fill="none" stroke="#a0a8b0" stroke-width="0.5"/>
+    <text x="22" y="-18" font-family="Georgia, serif" font-size="7" fill="#a0a8b0">45</text>
+  </g>
+
+</svg>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--     HTML FIREFLY PARTICLES (CSS animated)  -->
+<!-- ═══════════════════════════════════════════ -->
+
+<!-- Warm particles -->
+<div class="firefly" style="left: 32%; top: 55%; background: #e8c040; animation-duration: 11s, 3s; animation-delay: -2s, -1s; box-shadow: 0 0 4px #e8c040;"></div>
+<div class="firefly" style="left: 28%; top: 65%; background: #e0b030; animation-duration: 14s, 4s; animation-delay: -5s, -2s; box-shadow: 0 0 3px #e0b030;"></div>
+<div class="firefly" style="left: 38%; top: 72%; background: #f0c848; animation-duration: 9s, 3.5s; animation-delay: -3s, -1.5s; box-shadow: 0 0 5px #f0c848;"></div>
+
+<!-- Cool particles -->
+<div class="firefly" style="left: 62%; top: 55%; background: #90b8d8; animation-duration: 12s, 4s; animation-delay: -4s, -2s; box-shadow: 0 0 4px #90b8d8;"></div>
+<div class="firefly" style="left: 68%; top: 65%; background: #80a8c8; animation-duration: 10s, 5s; animation-delay: -6s, -3s; box-shadow: 0 0 3px #80a8c8;"></div>
+<div class="firefly" style="left: 58%; top: 72%; background: #a0c0d8; animation-duration: 15s, 3s; animation-delay: -8s, -1s; box-shadow: 0 0 5px #a0c0d8;"></div>
+
+</div>
+
+</body>
+</html>

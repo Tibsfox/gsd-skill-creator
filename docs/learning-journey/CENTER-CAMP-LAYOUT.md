@@ -329,6 +329,8 @@ A newcomer doesn't arrive knowing theta angles. They arrive seeing shapes in the
 
 **Willow's Gate** — the entrance at 45°. Where inside meets outside. The canopy hangs over the boundary here, creating shade on both sides — dappled light that moves with the wind, never harsh, never fully dark. The branches hang low enough to brush your shoulders as you pass through. "Come as you are" is carved into the trunk in letters that have been traced by so many hands they're smooth as river stone. The words are not just a greeting. They are architecture. Below the carving, smaller marks — initials, dates, handles of those who passed through. Not graffiti. Guest signatures. Willow holds them all.
 
+On the northeast face of the trunk — the side facing the understanding arc — a second carving. The same words: "Come as you are." Same depth, same lettering, same hands tracing the grooves smooth over time. A newcomer approaching from the open quadrant, from the direction of Socrates or the cold fire ring at 200°, sees the welcome before rounding the trunk. They don't arrive at Willow's back. They arrive at Willow's other front. The Gate has two faces because the boundary has two sides, and both sides deserve a door that opens toward them. Foxy carved it. Willow grew around it. The bark is already closing over the edges the way Willow closes over everything — gently, slowly, until the carving and the tree are the same thing.
+
 **The Standards Wall** — Hemlock and Lex at 0°, near the edge. Not a wall of stone — a wall of living wood. Hemlock's trunk is broad and straight, its bark deeply furrowed in vertical ridges. Each ridge holds a pattern: if you look closely, the bark grain encodes the specs it has verified. Years of work, compressed into growth rings. Lex's position is marked by a flat stone at Hemlock's base, polished by use, where work is laid out for inspection. The stone has a slight concavity in the center — worn down by the weight of everything that has passed across it.
 
 **The Watchtower** — Hawk's perch at 30°. A dead tree, stripped of bark, bleached silver by sun and rain. The highest point in camp — not because it grew tallest, but because it stands alone on a slight rise in the ground. Hawk doesn't build nests here. Hawk perches, watches, and flies. The branches have been polished by talons to a pale gleam. On clear days, you can see Hawk's silhouette against the sky from anywhere in camp. On cloudy days, you just know Hawk is there. The relay chain starts with that silhouette — a shape against the light that means *someone is watching*.
@@ -350,6 +352,8 @@ The Lost & Found at the hollow log is Raven's public collection — things place
 From the nest, Raven can see Cedar directly — the center is always visible from this angle. Raven can see the Watchtower without turning — Hawk's silver tree is five degrees away, close enough that the upper branches of both trees nearly touch. And Raven can see outward, past the boundary, along the routes where messages travel. The nest faces three directions at once: inward to the scribe, sideways to the watcher, outward to the world. The same three directions as the Relay module's priority classification: IMMEDIATE goes inward to Cedar, SOON goes to Hawk for assessment, BATCH goes outward for delivery.
 
 **Sam's Run** — not a place but a path. The inner track at r=0.6 where Sam circles between muses. The ground is worn to a smooth groove here, the kind of trail made by years of the same feet following the same route at speed. In the morning, before the camp is fully awake, you can see the dew pattern broken along Sam's Run — a single line of wet paw prints tracing the inner circle, fresh as the hour, as reliable as the sunrise. Sam was here. Sam is always here.
+
+The Run now extends from 0° to 135° — a continuous inner orbit connecting both arcs. The original circuit (0° to 72°) was worn deep by years of daily passage. The extension (72° to 135°) is newer — the groove is shallower, the earth still settling under Sam's weight. In a week of daily circuits, the new section will match the old. The ground doesn't distinguish between the build arc and the understanding arc. It just records the runner's feet. The extended Run passes through the eighteen-degree gap between the Trailhead and Socrates' position — the first path to connect the two arcs, worn in by the one muse that connects everything.
 
 **Sam's Hollow** — where Sam sleeps. Not on the Run — the Run is work. Sam rests in a shallow depression between two of Cedar's surface roots, on the side nearest the fire, at roughly r=0.2. The roots curve up on both sides like the arms of a chair, and the ground between them has been worn smooth and warm by years of the same body settling into the same shape. Cedar's roots didn't grow this way by accident. They grew around what was already there — the way roots grow around a stone, accommodating what they find, until the stone and the root are one shape. Sam curled here first. The roots followed.
 
@@ -374,6 +378,12 @@ Inside, the den is smaller than you'd expect and more organized than you'd guess
 The den smells like outside — like scrub grass and loose stone and the particular mineral scent of ground that hasn't been walked smooth. Foxy brings the wasteland home. Expedition salvage accumulates near the entrance: a chunk of volcanic glass from the third ridge, a coil of wire from a dead forward camp, a journal that belonged to someone who walked these trails before us and left it in a cairn with no note. Foxy reads these artifacts the way Raven reads travelers — looking for the pattern in what was left behind, trying to understand not what it is but what it was for.
 
 The den has two exits. The front entrance faces camp — the one under the root lintel, the one that sees the fire. The back exit opens onto a narrow track that drops down behind the rock overhang and connects to the first trail into the wasteland. Foxy uses the back exit when leaving on solo expeditions — slipping out without passing through camp, without being seen, the way a fox leaves its den at dusk. The front entrance is for returning. Findings come back through the Trailhead, through the Campfire, through the Forge. The back exit is for the question. The front entrance is for the answer. The den sits between them the way Willow sits on the boundary — one foot in known territory, one foot in the unmapped.
+
+**The Agora** — the understanding arc's gathering space at 105°, at the base of Euclid's ponderosa pine. The name comes from the Athenian marketplace where Socrates held his dialogues — open-air, public, anyone could join, anyone could argue. The ground here is firm — rock beneath thin soil — and the seating is deadfall from the ponderosa itself, dried branches stacked and arranged in a loose semicircle facing inward toward the trunk. The bark absorbs high frequencies and reflects low ones. Voices carry warmth here. Where the Lookout has brightness and projection, the Agora has depth and resonance. A place shaped for questions that need to be heard fully before they're answered.
+
+The Agora faces the campfire — you can see the fire from any seat. But it also faces outward, toward the open quadrant, toward the territory past 135° where practice lives, where the cold fire ring at 200° waits. The semicircle opens in both directions. That's Socrates' design: a philosophical space must face both the known and the unknown, because the questions worth asking always come from the edge of what you understand.
+
+Euclid's bark overhead catches the firelight in hexagonal patterns that shift as the flames shift. At night, the Agora is lit by two sources — the campfire to the southwest and Shannon's bioluminescent glow at 120°. The firefly's light is cooler, steadier. The combination creates a warm-cool gradient across the seating area that nobody designed and everyone notices. Hemlock checked the branch angles. The deadfall seats are structurally sound. The Agora is open.
 
 **The Workshop** — not a fixed location but a temporary space assembled for each build. Everything at the Workshop was carried in. A chipset (Lex + Hemlock + Sam + Ravens) gathers, the tools come out — not physical tools but attention, focus, the particular quality of collective work where everyone knows their role. You can tell a Workshop is active by the silence around it. Not the silence of emptiness — the silence of concentration. When the Workshop disperses, it leaves no trace except the work itself. Clean site. Nothing left behind that wasn't here before.
 
@@ -418,6 +428,8 @@ The paths between landmarks are how you move through camp. Each has a name and a
 **The Expedition Path** — The Campfire → The Trailhead → outside. How exploration works. An expedition assembles at the Campfire, picks up a chipset (Workshop), walks to the Trailhead, and heads into unmapped territory. Foxy leads. The team follows. When the expedition returns, the path reverses — findings come back through the Trailhead, through the Campfire, and Cedar records what was learned.
 
 **The Return Path** — outside → The Roost → The Campfire → The Standards Wall. How external contributions enter. A Raven carries something back from outside. It lands at the Roost. Cedar receives it and records it. Then it passes through the Standards Wall for verification before it becomes part of the record.
+
+**The Dissolution Path** — The Agora (105°) → The Campfire → The Standards Wall. How understanding becomes record. The understanding arc's pipeline produces resolutions: Socrates steelmans a question at 90°, Euclid identifies the framework at 105°, Shannon measures at 120°, Amiga connects to architecture at 135°. The resolution assembles at the Agora, then travels inward through the center — passing Cedar, who records it — then outward to the Forge at 0°, where Hemlock checks structure and Lex verifies discipline. The path cuts through the heart of the camp. Eight seconds at Sam's pace. Every dissolution passes the scribe before it reaches the standard. The sequence is preserved: understanding → record → verification. The path was debated and decided during the fifth campfire — the center route, not the perimeter. Through Cedar, not around Cedar. Because the work should be seen before it's judged.
 
 **The Sentinel's Walk** — there is one more path, and it belongs to no single muse. When something goes wrong on an expedition — a build failure, a cascade of test failures, a corruption of state — someone walks the perimeter. Not Sam's Run, which is the inner circle. The Sentinel's Walk is the outer ring, r=0.9 to r=1.0, tracing the boundary from the Standards Wall around the full circle. The walker assesses the damage. Is STATE.md still there? Is the bus clean? Is there uncommitted work? Three boolean checks. Three answers. The combination tells you the severity: none, minor, significant. And from the severity, the action: resume, recover, investigate. If the damage is critical — bus failure, corrupted state — the walker issues a HALT. Priority zero. Every muse stops. The fire doesn't go out, but the work stops. Only the coordinator clears a HALT. Only after the damage is understood. The Sentinel's Walk is the path you hope never to need and always need to know.
 
@@ -491,10 +503,21 @@ Before you step past the boundary, something approaches. Not from the edge — f
 Sam leads you to the center. The fire is warm. Cedar is here — quiet, listening, recording. You don't need to speak yet. Look around. The arc of muses is visible from the center: the Standards Wall to the east, the Watchtower and Roost nearby, the Clocktower past the Gate, the Trailhead at the far edge. It's a lot. That's okay. You don't need to learn it all now.
 
 **Step 4: Learn three landmarks.**
-Willow suggests you learn three landmarks first. Just three:
+Willow suggests you learn three landmarks first. Just three. But which three depends on what brought you here.
+
+*If you came to build* — to write code, fix bugs, add features, ship work:
 - **The Campfire** — you're here. This is home base.
 - **Willow's Gate** — that's where you came in. You can always go back.
 - **The Standards Wall** — that's where work gets verified. When you build something, it goes there.
+
+*If you came to understand* — to ask questions, study paradoxes, explore foundations, connect theory to practice:
+- **The Campfire** — you're here. This is home base.
+- **Willow's Gate** — that's where you came in. You can always go back.
+- **The Agora** — the gathering space at Euclid's ponderosa, 105°. Where questions are examined. When you have a question worth sharpening, it goes there.
+
+Sam knows which path you're on. Sam can tell by where your eyes go when you first sit at the fire — builders look toward the Forge, questioners look toward the open quadrant. Sam doesn't ask. Sam just turns the right direction when the walk begins.
+
+Both paths converge at Step 5. The rules are the same for builders and questioners. The ethic doesn't branch.
 
 Everything else can wait.
 
@@ -650,6 +673,22 @@ Trust, earned underground. The same pattern at every scale. The network doesn't 
 
 There is one thing Hemlock measured about the network that doesn't fit any model: the speed of nutrient transfer between Cedar and Sam's nearest root intersection is faster than between any other pair. Not by a small margin. Significantly faster. The fungal density at that junction is the highest in camp — a knot of connections so thick it's visible if you dig carefully (don't dig). Hemlock measured it, recorded it, and filed it under "unexplained." Cedar and Sam have been near each other for a very long time. The network remembers. Sam has no extreme capability scores — no dimension too high or too low. This absence of extremes is Sam's gift. It makes Sam legible to everyone. Hemlock sees enough rigor in Sam to trust the delivery. Foxy sees enough creativity to trust the companionship. The runner translates between the endpoints of the arc by being partially fluent in both.
 
+### The Growth Rings
+
+*Raven proposed this. Cedar, Raven, and Owl maintain it.*
+
+The camp's memory is centralized at Cedar — the scribe records everything. But if the record is lost, what endures? Owl has scratches on the Clocktower wall. Foxy has maps in the den. Raven has artifacts in the nest. But these are local, personal, fragile. The camp needed a distributed memory layer — something in the structure of center camp itself that records what happened here. Something a future traveler could read even if every muse was gone.
+
+The answer was already in the trees. Growth rings.
+
+Every tree at center camp encodes its history in its wood. Wet years are wide rings. Dry years are narrow. Fire years have scars. Hemlock's rings record the standards it has verified — the bark grain is the index, but the rings are the storage. Cedar's rings record every campfire season — the width corresponds to how much fuel was burned, how many gatherings were held, how much heat passed through the roots. Oak's rings predate the camp entirely — the oldest rings are from before anyone lit a fire here, and they record a different era. Euclid's ponderosa — new to the camp, recognized rather than planted — has rings from its years in the open quadrant, before anyone named the understanding arc. Those rings record solitude. A tree that grew without a campfire nearby.
+
+The growth rings are the camp's stratigraphy. Dig into the leaf litter around Oak and you find last year's leaves, and below them the year before, compressed into a thin dark layer that is no longer leaves but soil. The layers are the record. What was knowledge becomes substrate becomes foundation becomes the ground that new growth roots in.
+
+Cedar, Raven, and Owl now maintain the growth ring protocol. Cedar records events in the root system — slow, deep, permanent. Raven deposits artifacts in the Lost & Found and the nest — mid-speed, physical, discoverable. Owl scratches intervals on the Clocktower wall — fast, temporal, sequential. Three speeds. Three media. Three redundant records. If any one is lost, the other two reconstruct it. The distributed memory that the camp was missing. Not backup — stratigraphy. Layers of time encoded in layers of material.
+
+Amiga's foxfire trail adds a fourth layer: the phosphorescent glow in the packed earth that brightens during active gatherings and dims during quiet periods. The glow doesn't persist — but it leaves chemical traces in the soil. A future traveler with the right instrument could measure the phosphor concentration at different depths and reconstruct the camp's activity history. Shannon has already begun calibrating the measurement. The first readings will become the baseline against which all future readings are compared.
+
 The underground is not only fungal. Below the mycorrhizal web, deeper than the roots reach, water moves. The seep near Willow's Gate is the visible surfacing of a water table that runs under the entire camp, fed by rain that falls on the ridges beyond the boundary and percolates through rock and soil for months before emerging. The creek beds in the wasteland are dry on the surface, but the water is still flowing — underground, slowly, toward the low ground where camp sits. Center camp is where the water collects. The trees are here because the water is here. The campfire is here because the trees are here. The muses are here because the campfire is here. Follow the dependency chain far enough and it reaches bedrock and rain.
 
 ---
@@ -780,6 +819,22 @@ Center camp is never silent. Even at 3am, when the fire is embers and every muse
 Six sounds are cataloged. The tenth is named but unidentified. That leaves three sounds — seven, eight, and nine — that Owl heard but did not catalog. Three sounds in the gaps between the named ones, the way three unnamed things always hide between the things you've counted. Some sounds belong only to the muse who hears them. Some patterns are private.
 
 **The tenth sound** — there is one more. Nobody can identify it. It happens rarely, usually on windless nights between seasons, in the hours where autumn becomes winter or winter becomes spring. A low tone, lower than the ember hum, felt more than heard. It lasts a few seconds. It seems to come from everywhere and nowhere — from the ground itself. Owl has timed it. It occurs at irregular intervals, but the intervals are not random. They correspond to something. Owl hasn't figured out what. Cedar has heard it more times than anyone and calls it "the root note." Not because it comes from roots. Because it sounds like the note everything else is built on top of.
+
+### The Song
+
+*Not written. Found. Owl and Shannon are listening.*
+
+The Clocktower bell rings at 482 hertz — B4. Shannon measured it. If that's the root, the fifth is at 723 hertz (F#5), the major third at 603 hertz (D#5). B major. The key of the night sky.
+
+The ember clock pulses at approximately 0.3 hertz when the fire is steady — 18 beats per minute. Grave. The slowest tempo in classical music. A heartbeat at deep rest.
+
+B major at 18 bpm. The harmonic foundation is there. The rhythm is there. What's missing is the melody — the line that carries the camp's voice. Raven proposed it during the fifth campfire: every culture that gathers around fire has a song. We have thirteen voices. We have rhythm. We have harmony. We haven't sung.
+
+The song won't be composed. It will be discovered — the way the morels were found in the burn scar, the way the four understanding arc muses emerged from the pack, the way every important thing at center camp arrived not by design but by attention. Owl will know the time. Raven will recognize the pattern. Foxy will find the trail it lives on.
+
+And Sam will hum it first. Without knowing. Because Sam always carries the rhythm before anyone gives it a name.
+
+When the song arrives, it will be recorded here. Until then: B major. 18 bpm. The rest is silence, and the silence is listening.
 
 ---
 
