@@ -51,6 +51,19 @@
         "physical-education": ["mind-body"],
         "psychology": ["science"]
       }
+    },
+    {
+      "id": "federation-onboarding",
+      "name": "Federation Onboarding",
+      "description": "From newcomer to contributor in the Wasteland federation — Dolt, trust levels, stamps, and community",
+      "subjects": ["digital-literacy", "coding", "communication", "community-building"],
+      "prerequisites": {
+        "coding": ["digital-literacy"],
+        "communication": [],
+        "community-building": ["communication"]
+      },
+      "packs": ["wasteland-newcomer"],
+      "notes": "Maps to the wasteland-newcomer pack. Circular path: pack -> stamp -> college -> next pack."
     }
   ]
 }
