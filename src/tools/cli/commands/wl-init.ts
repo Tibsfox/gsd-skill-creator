@@ -18,6 +18,7 @@ import { resolve as resolvePath } from 'node:path';
 import { saveConfig } from '../../../integrations/wasteland/config.js';
 import { createClient } from '../../../integrations/wasteland/dolthub-client.js';
 import { sqlEscape, screenForInjection } from '../../../integrations/wasteland/sql-escape.js';
+import { hasFlag, getFlagValue } from '../../../integrations/wasteland/cli-utils.js';
 import type { HopConfig } from '../../../integrations/wasteland/config.js';
 
 // ============================================================================
@@ -44,26 +45,6 @@ Options:
 Creates ~/.hop/config.json with wasteland connection settings.
 By default, prints SQL for review. Use --execute to apply locally.
 `;
-
-// ============================================================================
-// Flag helpers
-// ============================================================================
-
-/**
- * Return true when any of the named flags appear in the args array.
- * Handles both --flag and -f (first char) forms.
- */
-function hasFlag(args: string[], ...flags: string[]): boolean {
-  return flags.some(f => args.includes(`--${f}`) || args.includes(`-${f.charAt(0)}`));
-}
-
-/**
- * Return the value following --flag in the args array, or undefined when absent.
- */
-function getFlagValue(args: string[], flag: string): string | undefined {
-  const idx = args.indexOf(`--${flag}`);
-  return idx !== -1 ? args[idx + 1] : undefined;
-}
 
 // ============================================================================
 // Command

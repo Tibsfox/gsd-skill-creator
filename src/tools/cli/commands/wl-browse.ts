@@ -22,6 +22,7 @@ import pc from 'picocolors';
 import { bootstrap } from '../../../integrations/wasteland/bootstrap.js';
 import { renderTable, renderBadge, smartFit } from '../../../integrations/wasteland/formatters.js';
 import { sqlEscape } from '../../../integrations/wasteland/sql-escape.js';
+import { hasFlag, getFlagValue, extractPositionalArgs } from '../../../integrations/wasteland/cli-utils.js';
 
 // ============================================================================
 // Help text
@@ -65,53 +66,6 @@ const STATUSES = ['open', 'claimed', 'submitted', 'in_review', 'completed', 'wit
 const EFFORTS = ['trivial', 'small', 'medium', 'large', 'epic'];
 
 // ============================================================================
-// Flag helpers
-// ============================================================================
-
-/**
- * Return true when any of the named flags appear in the args array.
- * Handles both --flag and -f (first char) forms.
- */
-function hasFlag(args: string[], ...flags: string[]): boolean {
-  return flags.some(f => args.includes(`--${f}`) || args.includes(`-${f.charAt(0)}`));
-}
-
-/**
- * Return the value following --flag in the args array, or undefined when absent.
- */
-function getFlagValue(args: string[], flag: string): string | undefined {
-  const idx = args.indexOf(`--${flag}`);
-  return idx !== -1 ? args[idx + 1] : undefined;
-}
-
-/**
- * Extract positional args — everything that is not a flag (--foo) or a
- * value following a known flag.
- */
-function extractPositionalArgs(args: string[]): string[] {
-  const positionals: string[] = [];
-  const flagsWithValues = new Set(['--status', '--effort', '--tag']);
-  let i = 0;
-  while (i < args.length) {
-    const arg = args[i]!;
-    if (arg.startsWith('--')) {
-      // Skip flag and its value if this flag takes a value
-      if (flagsWithValues.has(arg)) {
-        i += 2; // skip flag + value
-      } else {
-        i += 1; // boolean flag, skip only the flag
-      }
-    } else if (arg.startsWith('-')) {
-      i += 1; // short flag, skip
-    } else {
-      positionals.push(arg);
-      i += 1;
-    }
-  }
-  return positionals;
-}
-
-// ============================================================================
 // Command
 // ============================================================================
 
@@ -146,7 +100,7 @@ export async function wlBrowseCommand(
   let tagFilter = getFlagValue(args, 'tag');
 
   // 4. Smart positional arg detection
-  const positionals = extractPositionalArgs(args);
+  const positionals = extractPositionalArgs(args, new Set(['--status', '--effort', '--tag']));
   for (const pos of positionals) {
     if (STATUSES.includes(pos)) {
       statusFilter = pos;

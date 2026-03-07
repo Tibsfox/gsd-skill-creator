@@ -23,6 +23,7 @@ import * as fs from 'node:fs/promises';
 import { randomBytes } from 'node:crypto';
 import { bootstrap } from '../../../integrations/wasteland/bootstrap.js';
 import { screenForInjection } from '../../../integrations/wasteland/sql-escape.js';
+import { hasFlag, getFlagValue, extractPositionalArgs } from '../../../integrations/wasteland/cli-utils.js';
 import { sanitizeMessageText } from '../../../core/validation/message-safety.js';
 import { emitCompletionSubmitted } from '../../../integrations/wasteland/wasteland-events.js';
 
@@ -53,46 +54,6 @@ Generates an INSERT INTO completions + UPDATE wanted SET status='in_review'
 SQL batch. Without --execute, prints SQL for review (SEC-03).
 With --execute, applies locally — no auto-push.
 `;
-
-// ============================================================================
-// Flag helpers
-// ============================================================================
-
-/**
- * Return true when any of the named flags appear in the args array.
- * Handles both --flag and -f (first char) forms.
- */
-function hasFlag(args: string[], ...flags: string[]): boolean {
-  return flags.some(f => args.includes(`--${f}`) || args.includes(`-${f.charAt(0)}`));
-}
-
-/**
- * Return the value following --flag in the args array, or undefined when absent.
- */
-function getFlagValue(args: string[], flag: string): string | undefined {
-  const idx = args.indexOf(`--${flag}`);
-  return idx !== -1 ? args[idx + 1] : undefined;
-}
-
-/**
- * Extract positional arguments (values not preceded by a --flag key).
- * Skips flag names (--foo) and their associated values.
- */
-function extractPositionalArgs(args: string[]): string[] {
-  const positionals: string[] = [];
-  let i = 0;
-  while (i < args.length) {
-    if (args[i].startsWith('-')) {
-      // Skip flag and its value if the next token doesn't start with -
-      i++;
-      if (i < args.length && !args[i].startsWith('-')) i++;
-    } else {
-      positionals.push(args[i]);
-      i++;
-    }
-  }
-  return positionals;
-}
 
 // ============================================================================
 // Command

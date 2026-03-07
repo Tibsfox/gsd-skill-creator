@@ -17,6 +17,7 @@
 import pc from 'picocolors';
 import { bootstrap } from '../../../integrations/wasteland/bootstrap.js';
 import { renderTable, renderBadge } from '../../../integrations/wasteland/formatters.js';
+import { hasFlag, getFlagValue, extractPositionalArgs } from '../../../integrations/wasteland/cli-utils.js';
 
 // ============================================================================
 // Help text
@@ -44,44 +45,6 @@ Examples:
   wl status --full                # Show own rig with all history
   wl status hop --json            # Machine-readable output for hop rig
 `;
-
-// ============================================================================
-// Flag helpers
-// ============================================================================
-
-/**
- * Return true when any of the named flags appear in the args array.
- */
-function hasFlag(args: string[], ...flags: string[]): boolean {
-  return flags.some(f => args.includes(`--${f}`) || args.includes(`-${f.charAt(0)}`));
-}
-
-/**
- * Return the value following --flag in the args array, or undefined when absent.
- */
-function getFlagValue(args: string[], flag: string): string | undefined {
-  const idx = args.indexOf(`--${flag}`);
-  return idx !== -1 ? args[idx + 1] : undefined;
-}
-
-/**
- * Extract positional arguments — args that don't start with '-' and aren't
- * values following a flag (i.e. not preceded by a '--key' token).
- */
-function extractPositionalArgs(args: string[]): string[] {
-  const positionals: string[] = [];
-  for (let i = 0; i < args.length; i++) {
-    const arg = args[i]!;
-    if (!arg.startsWith('-')) {
-      // Check that the previous token was not a flag expecting a value
-      const prev = args[i - 1];
-      if (!prev || !prev.startsWith('--')) {
-        positionals.push(arg);
-      }
-    }
-  }
-  return positionals;
-}
 
 // ============================================================================
 // Command
