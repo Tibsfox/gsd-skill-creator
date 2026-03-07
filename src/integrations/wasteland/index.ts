@@ -343,3 +343,18 @@ export type { WantedEntry, WantedSearchCriteria, WantedDataProvider } from './wa
 
 export { PackSessionDriver } from './pack-session-driver.js';
 export type { PhaseCompletion, PackProgress } from './pack-session-driver.js';
+
+// Federation Dashboard (R6 — topology, metrics, health)
+export {
+  buildFederationTopology,
+  computeRigMetrics,
+  computeFederationHealth,
+} from './federation-dashboard.js';
+export type {
+  FederationNode,
+  FederationEdge,
+  FederationTopology,
+  FederationTopologyInput,
+  RigMetrics,
+  FederationHealth,
+} from './federation-dashboard.js';
