@@ -297,3 +297,13 @@ export type {
   EscalationScanResult,
   EscalationDataProvider,
 } from './trust-escalation.js';
+
+// Pattern Bridge (R2.3 — wasteland → PatternStore storage)
+export {
+  storeFeedback,
+  storeRecommendation,
+  storeMetricSnapshot,
+  readFeedback,
+  readRecommendations,
+  readMetricSnapshots,
+} from './wasteland-pattern-bridge.js';
