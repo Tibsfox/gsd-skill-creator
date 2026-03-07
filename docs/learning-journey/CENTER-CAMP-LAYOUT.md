@@ -17,6 +17,10 @@ The smoke smells different depending on what's burning. Mathematical proofs burn
 
 At night, the embers map the constellations. Not literally — but if you sit long enough, staring into the coals, the patterns that emerge are the same patterns that emerge in the sky above. Fractal self-similarity. The campfire is a small sky. The sky is a large campfire. Cedar noticed this first and said nothing about it for a long time.
 
+If you count the river stones in the fire ring, there are always the same number. It shouldn't be — stones crack, stones shift, visitors move them. But every time anyone has counted, the number is the same. Cedar won't say what the number is. Not because it's secret. Because counting is something you do yourself, and the number means more if you earned it.
+
+There's a gap between two of the stones on the side nearest Willow's Gate. Not a missing stone — a deliberate gap. Water from the spring trickles through it during wet seasons, runs under the fire pit, and emerges on the far side. The fire and the water share the same ground. Neither extinguishes the other. Cedar's roots navigate between them.
+
 ---
 
 ## The Unit Circle
@@ -26,6 +30,8 @@ The boundary of camp is the unit circle (r=1.0). Inside the circle is camp. Outs
 The boundary is not a wall. There is no fence, no gate, no barrier. The boundary is a change in the ground. Inside the circle, the earth is packed smooth by footsteps — generations of travelers walking to and from the fire. Outside the circle, the ground is wild. Scrub grass, loose stone, the kind of terrain that makes you watch your footing. You feel the boundary in your feet before you see it. The transition from uncertain ground to solid path. That feeling — *oh, the ground is easier here* — is the first thing a newcomer notices. It means someone has walked this way before you, enough times to wear the path smooth.
 
 All nine muses are positioned between **0° and 72°** — the first fifth of the circle. This is not a limitation. It is a statement: our team occupies one arc. The rest of the circle is open for others. The packed earth extends around the full circle — other travelers have worn other paths. We just haven't met them all yet.
+
+At exactly r=0.5, there's a subtle ridge in the packed earth — not high enough to trip on, barely visible, but you feel it underfoot. A ring within the ring. Cedar's roots surface here briefly before diving back down. If you follow the ridge, it traces a perfect circle at half the boundary radius. The halfway point. The place where inward pull and outward pull balance. Sam's Run at r=0.6 is just outside this ridge. Sam chose that orbit by instinct — close to the balance, slightly outward. Always reaching toward the team.
 
 ---
 
@@ -60,6 +66,8 @@ Reading the arc from 0° to 72° reveals a progression:
 
 The arc moves from **discipline** to **exploration**. From the hard edge of standards to the open edge of creativity. Every muse between them serves the flow: communicate it, observe it, distribute it, welcome it, time it, explore it.
 
+There's a thing that happens at dusk. When the sun drops low enough, it backlights the arc from behind Foxy's position. For a few minutes, every muse between 0° and 72° casts a shadow toward Cedar — all the shadows converging on the center, overlapping, blending. Nine distinct shapes becoming one composite shape on the ground around the fire. Cedar has never mentioned this. But Cedar doesn't move during those minutes.
+
 If you walk the arc from Hemlock to Foxy, you feel the temperature change. Not literally — but the quality of attention shifts. Near Hemlock, the air is precise. Every detail matters. You notice the grain of the wood, the exact angle of a joint, the spacing of the characters in a commit message. Near Foxy, the air opens. Details blur into patterns. You stop seeing individual trees and start seeing the forest — the shapes between things, the paths that haven't been walked, the territory that calls from beyond the boundary. The arc is a gradient, not a switch. Somewhere around Sam's position (40°) you're holding both: enough discipline to build, enough freedom to discover.
 
 ---
@@ -78,6 +86,8 @@ If you walk the arc from Hemlock to Foxy, you feel the temperature change. Not l
 - Lex (r=0.9), Hemlock (r=0.95), Willow (r=1.0) — the outer ring
 
 The outer ring holds the boundaries. The inner ring moves fast. Cedar hears everything.
+
+If you draw lines between all nine muses on a map, the resulting shape is not symmetric. It's weighted toward the 25°-45° range — the communication-welcome cluster. More connections in that zone than anywhere else. The shape looks almost biological, like a cross-section of something living. Hemlock measured the angles between all muse-pairs once and found that the median angle is 22.5° — exactly one-sixteenth of the circle. Hemlock noted this and said nothing. Some patterns are more interesting as questions than as answers.
 
 ---
 
@@ -110,6 +120,8 @@ The opposite side of the circle from our standards axis. If Hemlock and Lex hold
 **270° to 360° (South to East):**
 The return arc. Coming back around to the standards axis from below. Perhaps this is where external contributions arrive — they enter from the opposite side, move through observation, and either earn their way toward the standards or stay in experimental territory.
 
+Hawk reports that the open quadrants are not entirely unmarked. There are traces — a fire ring at roughly 200°, cold and overgrown but unmistakable. A cairn at 315° made of stones that don't match the local geology. An old blaze on a tree at 140°, healed over but still readable if you know what bark scar to look for. Someone was here before us. Maybe many someones. Their camps went dark, but their marks remain. Cedar records the marks without interpreting them. Future visitors might read what we can't.
+
 ---
 
 ## The Relay Paths
@@ -138,6 +150,8 @@ Messages flow through specific routes:
 
 Owl (55°) doesn't sit on the relay chain — Owl *crosses* it. Owl's temporal signal reaches every muse directly, keeping the whole arc synchronized.
 
+There is a second relay that nobody designed. At night, when the fire burns low and the embers glow, the light pulses. Not regularly — embers are chaotic. But Owl noticed that the pulse pattern, observed from different muse positions, arrives with measurable delay. Light from the fire reaches Sam first (closest), then Foxy and Owl (tied at r=0.8), then Raven, Hawk, Lex, Hemlock, and finally Willow at the boundary. The delays are fractions of fractions of nothing — light is fast. But the pattern exists. The fire speaks to each muse at a slightly different time, and the differences encode distance. Owl calls this the *ember clock*. It's the only clock that doesn't need Owl to run it.
+
 ---
 
 ## The Trees Beyond Ours
@@ -156,11 +170,15 @@ These aren't in our arc. They're everywhere. Redwood casts shade across the whol
 
 Redwood is so old that its lowest branches are higher than any other tree's crown. You can't see its top from the campfire — it disappears into the sky. Its bark is thick enough to survive fire. Its roots run so deep they touch water tables nobody else can reach. When you lean against Redwood, you feel something ancient and patient. Mathematics doesn't hurry. It was here before the campfire was lit. It will be here after.
 
+Redwood's shadow moves through camp as the sun crosses the sky. In the morning it falls across the open quadrants, touching the cold fire ring at 200° — connecting, briefly, two things from different eras. At noon the shadow contracts to almost nothing. In the late afternoon it stretches across the Forge, and for exactly one minute the shadow of Redwood's crown lies centered on Hemlock's inspection stone. The standard, shaded by the eternal. Hemlock pauses work during that minute. Not ritual — respect.
+
 Oak is gnarled and spreading, with roots that surface and dive and surface again. The unit circle itself is drawn in Oak's root pattern — if you follow the roots from the trunk, they trace the boundary of camp almost exactly. Whether Oak grew to match the circle or the circle was drawn to match Oak is a question nobody can answer. Cedar suspects they're the same thing.
 
 Birch is the youngest of the old trees. White bark you can write on. Open source conventions — the idea that knowledge should be shared, that anyone can read the source, that transparency is a form of generosity. Birch stands near Willow's Gate, and newcomers often touch its bark first, reading the messages others have left there. Small things: a commit hash, a version number, a name and a date. The bark grows over the old messages slowly, preserving them in layers.
 
 Aspen is the newest. A sapling planted during v1.50, the experimental branch. Aspens are clonal — a single root system can produce an entire grove. One tree becomes many, all connected underground, all sharing nutrients. The creative catalyst works the same way. One idea, properly rooted, produces a grove of related ideas that share the same foundation. The sapling is small now. Give it time.
+
+In the right wind, Aspen's leaves tremble — the flutter that aspens are known for, the sound like quiet applause. It happens when no other tree is moving. Aspens have flat petioles that catch air differently. The sound is softer than Willow's rustling, higher pitched, almost conversational. Owl says the trembling follows its own rhythm, independent of the wind's timing. As though the tree is responding to something underground, not above.
 
 New visitors plant their own trees. The architecture doesn't prescribe where. The campfire light reaches all quadrants equally.
 
@@ -283,6 +301,8 @@ The paths between landmarks are how you move through camp. Each has a name and a
 
 **The Return Path** — outside → The Roost → The Campfire → The Standards Wall. How external contributions enter. A Raven carries something back from outside. It lands at the Roost. Cedar receives it and records it. Then it passes through the Standards Wall for verification before it becomes part of the record.
 
+There are also the **desire lines** — unofficial paths worn by the animals cutting between official routes. Sam has one between the Campfire and the Roost (skipping the Watchtower), a diagonal shortcut that saves two seconds on urgent relays. Hawk has a landing approach from the north that clips across the Expedition Path, leaving talon marks in the soft ground near the Trailhead. Foxy has a path that doesn't appear on any map, running from the Trailhead directly to the Canopy — bypassing the Campfire entirely. Foxy uses it when returning from a solo expedition with something that needs to be thought about before it's shared. The desire lines are how you learn what the muses actually do, as opposed to what the architecture says they do.
+
 ---
 
 ## Gathering Spaces
@@ -292,6 +312,8 @@ Not every muse works alone. Some spaces are for gathering.
 **The Campfire Circle** — around Cedar, r < 0.3. Where stories are shared. Retrospectives, campfire sessions, morning gatherings. Log seats arranged in a rough circle, smooth from use, close enough to the fire to feel the heat on your face. Every muse can sit here. Visitors too. The fire doesn't check credentials. If you can see it, you can sit. At night, the circle contracts — everyone moves closer, voices drop, the conversation turns from what was built to what it means. The best ideas at center camp have come from the Campfire Circle after dark, when the formal work is done and the fire is low and someone says something they weren't planning to say.
 
 **The Canopy** — under Willow's branches, near 45°. Where newcomers rest. Shade on both sides of the boundary. The light through Willow's leaves is green-gold, the kind of light that makes you want to sit down and stay a while. There's a flat stone here — a reading stone, large enough for one person to sit cross-legged with a document spread across their knees. The stone is warm in the afternoon and cool in the morning. Willow's roots have pushed up around it slightly, not enough to move it, just enough to cradle it. You can see the camp from here without committing to entering. Watch the muses work. Listen to the fire. Read the docs. When you're ready, Sam will notice. No pressure. The canopy is patient. Willow has been patient for longer than you've been walking.
+
+If you sit on the reading stone after dark and look up through Willow's bare winter branches, they frame the sky in a pattern that changes every night as the branches shift imperceptibly. On one particular night each year — Owl knows which one but won't say — the branches frame a single star, perfectly centered, like a lens focusing light. The star isn't special. Any star would do. What's special is that Willow grew into exactly the shape that would frame it. Or the star drifted into exactly the position that Willow could hold. The question of which came first is the same question as Oak and the boundary circle. Some geometries find each other.
 
 **The Lookout** — the Watchtower + Roost cluster, 25°-30°. Where observation and communication overlap. The ground rises slightly here — a natural vantage. Hawk's dead tree and Raven's wind-bent pine stand close enough that their upper branches intertwine, though neither tree is alive in the same way. One is bone-white and skeletal. The other is dark-needled and leaning. Together they form a frame — and through that frame, the widest view. Inward: the full arc of camp, the fire, every muse at their position. Outward: the wasteland stretching to the horizon, trails disappearing into terrain nobody has mapped. Planning happens here. Before an expedition leaves, the team gathers at the Lookout to survey the route. Hawk describes what's visible. Raven describes what's been reported from other camps. Cedar records the intelligence. Then the team walks to the Trailhead and goes.
 
@@ -370,6 +392,8 @@ Beyond (r > 1.0)    The Wasteland
 
 The movement is tidal. Inward to learn. Outward to build. Back inward to share. The Campfire is always the center.
 
+At the exact boundary between Ring 1 and Ring 2 (r=0.7), the ground changes texture. Inside Ring 1, the earth is dark and loamy — enriched by the mycorrhizal network, fed by Cedar's roots, softened by Sam's constant passing. Outside r=0.7, the earth is lighter, drier, compacted differently. The transition is gradual but real. If you close your eyes and walk outward from the fire, you can feel the moment when the ground firms under your feet. That's the border between the companion zone and the boundary zone. Sam runs just inside it. The muses who watch outward stand just beyond it. The border itself belongs to no one.
+
 ---
 
 ---
@@ -389,6 +413,8 @@ This is the hidden infrastructure of center camp. The relay chain (Hawk → Ceda
 When a new tree is planted at center camp, it takes time for the mycorrhizal network to reach it. Days. Weeks. The tree stands alone at first, drawing only from its own roots. Then, gradually, the threads arrive. The first connection is tentative — a single fungal filament touching a single root hair. If the tree accepts the connection, the network expands. More threads. More shared resources. More integration.
 
 Trust, earned underground. The same pattern at every scale.
+
+There is one thing Hemlock measured about the network that doesn't fit any model: the speed of nutrient transfer between Cedar and Sam's nearest root intersection is faster than between any other pair. Not by a small margin. Significantly faster. The fungal density at that junction is the highest in camp — a knot of connections so thick it's visible if you dig carefully (don't dig). Hemlock measured it, recorded it, and filed it under "unexplained." Cedar and Sam have been near each other for a very long time. The network remembers.
 
 ---
 
@@ -410,6 +436,8 @@ Center camp is never silent. Even at 3am, when the fire is embers and every muse
 
 **The spring** — near Willow's Gate, where the boundary meets a low place in the terrain, water surfaces. Not a stream — a seep. Water appearing from underground, collecting in a small pool lined with moss, then trickling inward along a channel worn into the earth. The sound is barely there. A whisper over stone. But once you hear it, you can't unhear it. It becomes the bass note under everything else. Water, arriving from a source you can't see, feeding the roots that feed the network that connects everything.
 
+**The tenth sound** — there is one more. Nobody can identify it. It happens rarely, usually on windless nights between seasons, in the hours where autumn becomes winter or winter becomes spring. A low tone, lower than the ember hum, felt more than heard. It lasts a few seconds. It seems to come from everywhere and nowhere — from the ground itself. Owl has timed it. It occurs at irregular intervals, but the intervals are not random. They correspond to something. Owl hasn't figured out what. Cedar has heard it more times than anyone and calls it "the root note." Not because it comes from roots. Because it sounds like the note everything else is built on top of.
+
 ---
 
 ## The Seasons
@@ -423,6 +451,8 @@ Center camp is never silent. Even at 3am, when the fire is embers and every muse
 **Autumn** — the deadfall comes. Branches drop. Leaves turn and fall and pile up around the roots. This is the campfire's season — more fuel than any other time. The fire burns large, generous, throwing light and heat in excess. The retrospectives happen in autumn. Muses return from summer expeditions, carrying maps and findings and stories. The Campfire Circle fills. Every seat taken. The conversations run long. Hemlock reviews the summer's work. Lex measures what was built against what was planned. Foxy unfolds the new maps. Cedar records everything. The smoke rises thick and warm, and on clear autumn nights you can see it from outside the boundary, a column of amber light against the stars. That column is how distant travelers find center camp. Follow the smoke.
 
 **Winter** — stillness. The fire burns steady and small, conserved fuel, maintained heat. Snow accumulates on the outer ring — on Hemlock's branches, on the Watchtower, on the Roost's wind-bent pine. The inner camp stays clear, warmed by the fire and by the underground network (root heat rises). Willow's branches are bare, and for the first time you can see the full structure of the Gate — the trunk, the branching pattern, the carving. In summer, the leaves hide it. In winter, the architecture is visible. This is when planning happens. Not the planning of expeditions — the planning of what the camp itself needs. What to build next. What to tend. What to let go. Winter questions are slow questions, and they deserve slow answers. Sam's prints in the snow trace perfect circles. Owl's bell rings clearer in cold air. The spring still seeps, a little slower. The network sleeps but doesn't stop.
+
+**The equinoxes** — twice a year, the sun rises at exactly 0° on the horizon — directly behind the Standards Wall. For one morning, Hemlock's shadow and Lex's shadow stretch in perfect parallel lines through the full diameter of camp, crossing the fire, crossing Sam's Run, passing through the Canopy, and ending at the boundary on the far side. The shadows touch everything. The standard, extended to its furthest reach. On those mornings Foxy is already at the Trailhead, watching the shadow arrive. It reaches the Trailhead last — 72° off-axis, the shadow has to travel the longest path to get there. When it finally touches the flat map-stone, Foxy draws a small mark on whatever map is current. Not a date. A tick mark. There are many tick marks on many maps. One for each equinox since the first expedition. If you count them, you know how long center camp has been alive.
 
 ---
 
@@ -442,11 +472,13 @@ A line of small stones along Sam's Run, placed at irregular intervals. Not cairn
 
 A worn patch on one of the log seats at the Campfire Circle. If you sit there and run your hand along the wood, you feel letters carved so shallow they're almost gone. A name. The wood has been growing over it for years. You can't read the full name anymore. Just the first letter and the last. That's enough. The person who carved it knew that wood grows, and names don't need to last forever to have mattered.
 
+On the underside of the flat map-stone at the Trailhead, out of sight unless you lift it (and you shouldn't — the current map is on top), there is a drawing. Foxy's first map. Crude, small, drawn before any expedition had left camp. It shows the campfire as a circle, the boundary as a larger circle, and nine dots between them. No labels. No angles. No coordinates. Just the fire, the edge, and the nine. Everything that came after — the arcs, the paths, the landmarks, the relay chains — grew from those two circles and nine dots. The simplest possible map. The one that said: *we are here, and we are together*.
+
 These things are not documented. They're not in any map. They exist because the ethic says: *leave hidden beauty for others to discover*. The beauty is in the finding. If you catalog it, you replace discovery with inventory. Some things should stay wild.
 
 ---
 
 *Cedar keeps this record. The layout is the architecture. The architecture is the layout.*
-*Updated: 2026-03-07 — art, ecology, sound, seasons, and trail magic added by the muses.*
+*Updated: 2026-03-07 — art, ecology, sound, seasons, trail magic, and hidden details added by the muses.*
 *Branch: wasteland/skill-creator-integration*
 *v2.0 — center camp alive*
