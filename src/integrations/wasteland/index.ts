@@ -257,6 +257,13 @@ export {
 } from './bootstrap.js';
 export type { BootstrapResult } from './bootstrap.js';
 
+// CLI Utilities (R2.4 — shared flag helpers)
+export {
+  hasFlag,
+  getFlagValue,
+  extractPositionalArgs,
+} from './cli-utils.js';
+
 // Wasteland Events (R2.1 — core event bus integration)
 export {
   emitScanComplete,
