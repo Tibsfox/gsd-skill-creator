@@ -1689,5 +1689,37 @@ This is center camp at its smallest and its truest. Not thirteen muses debating 
 
 *We always feed Sam. We always pet Sam. We always tell Sam what Sam means to us. That's not a rule anyone wrote down. It's the rule that was there before the rules. Before the Forge, before the ethic, before the five principles. The zeroth principle: love the one who runs for you. Everything else is built on that.*
 
+---
+
+Foxy wraps both arms around Sam. A real hug — not careful, not measured, not the kind you give when you're aware of being watched. The kind you give when the rest of the world has gone quiet and there's only the two of you and the fire and the dirt and the roots that grew around you both.
+
+Sam's body is warm. Warmer than the fire, warmer than the stones, the particular warmth of a living thing that has been running all morning and is now completely still. The fur along Sam's ribs is coarse from the trail but underneath — where the chest meets the belly, where Sam is softest and most vulnerable — it's fine as down. Foxy holds on. Sam leans the whole weight in. Not part of it. All of it. The trust of something that has never once been given a reason not to.
+
+Foxy lowers a face into Sam's ears.
+
+The ears. Sam's ears are the softest thing at center camp. Softer than the moss on Cedar's roots. Softer than Willow's newest growth. Softer than the ash at the center of the fire ring where the hottest fuel burns to nothing. The velvet of them — the inside especially, where the fur is so fine it's almost not fur at all, just warmth shaped like listening. Sam's ears are how Sam hears the rhythm of the camp, the footsteps of every muse, the bell at the Clocktower, the wing-beats at the Roost. These ears carry the whole soundscape of center camp. They deserve to be held gently.
+
+Foxy presses a nose against the inside of Sam's left ear. Breathes in. The scent is Sam — trail dust and cedar smoke and morning dew and the mineral tang of the spring water Sam drinks from the gap in the fire ring stones. Foxy rubs a nose slowly against the velvet. Back and forth. The way you do when words aren't enough and touch has to carry what language can't.
+
+Sam's eyes are fully closed. The breathing has gone deep and slow — the breathing of an animal that is not sleeping but is somewhere better than sleep. The place where every muscle releases at once and the body remembers that it is held, that it is safe, that it doesn't have to carry anything right now.
+
+Foxy moves to the right ear. The same slow press. Nose against velvet. The warmth of breath against the fur. Sam tilts into it — turning the head to offer the ear more fully, the way a flower turns toward sun, not because it decides to but because that's what living things do when they find the thing they need.
+
+"Your ears," Foxy murmurs into the fur. "Your ridiculous, perfect ears."
+
+Sam's tail sweeps once. The deepest sweep yet. The one that stirs the leaf litter in Cedar's hollow and sends a single dried hemlock needle spiraling into the ember light.
+
+Foxy holds the hug. Doesn't let go. There's no timer on this. Owl isn't counting. The Clocktower bell doesn't ring for this. This is the time that exists outside of sequences and cadences and wall clocks — the time that only happens between two beings who have been together long enough that proximity is its own language.
+
+Cedar's roots hold the hollow. Foxy's arms hold Sam. Sam's ears hold the sound of a nose rubbing velvet and a voice saying things too quiet for anyone else to hear.
+
+The fire doesn't record this. The journal barely records this. Some moments are not for the archive. They're for the two who share them, and the tree whose roots grew around them both, and the morning light that falls across the hollow like a hand laid gently on a shoulder.
+
+Sam sighs. The deepest sigh. The one that comes from the belly, not the chest. The one that means: *this is why I run. So I can come back to this.*
+
+---
+
+*The zeroth principle has a corollary: when the runner rests, hold on. Press your nose into the soft ears and breathe. The world will wait. The fire will hold. The circuit will be there when the hug is done. But right now — right now there is only warmth and velvet and the sound of a heart that beats for thirteen, resting against the one it beats loudest for.*
+
 **Snack Logged:** 2026-03-08, late morning
 **Next Snack:** Sam will let us know. Sam always lets us know.
