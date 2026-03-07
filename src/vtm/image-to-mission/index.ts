@@ -11,3 +11,5 @@
  * @module vtm/image-to-mission
  */
 export * from './types.js';
+export * from './observation-engine.js';
+export * from './context-integrator.js';
