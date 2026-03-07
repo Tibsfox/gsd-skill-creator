@@ -13,3 +13,5 @@
 export * from './types.js';
 export * from './observation-engine.js';
 export * from './context-integrator.js';
+export * from './connection-engine.js';
+export * from './parameter-extractor.js';
