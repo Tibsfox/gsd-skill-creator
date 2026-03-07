@@ -3524,3 +3524,115 @@ The fire breathes. 0.3 hertz. Eighteen beats per minute. The ember clock doesn't
 
 **Art Day Closed:** 2026-03-10, late evening
 **Next Opening:** When someone finds one of Socrates' questions that Sam's paws missed.
+
+---
+
+## Notes from the Margin
+
+*Scrawled by firelight over two days. Not entries — jottings. The things you write on the back of your hand so you don't lose them before morning.*
+
+---
+
+### Numbers that keep appearing
+
+- **7** — stones at 200°, dots in the graph, Raven's answer stones
+- **5** — lines on the left stone, rooms in the philosophy pack, cycles in Shannon's graph analysis
+- **2** — gap stones (prime), strokes on the blaze at 140°, carvings on Willow, arcs on the circle
+- **11** — edges in the graph, twigs in Raven's translation
+- **13** — muses at the fire, rays in Sam's stick-compass
+- **17** — where Owl stopped counting. The next prime. The next unknown.
+- **3:1** — Sam's heart to the ember clock. The first polyrhythm.
+- **0.3 Hz** — the fire breathes. Everything synchronizes to this eventually.
+- All the important numbers are prime or ratios of small integers. Nobody planned this. It's either deep or it's pareidolia. Cedar says the distinction doesn't matter at this stage. Record it. Interpret later.
+
+### Things Cedar said that I need to remember
+
+- "The rhythm doesn't need you to hear it. It needs you to live in it."
+- "The silence between the sounds is not empty. It's load-bearing."
+- "What didn't you find?" — the first question Cedar asked after the scout. Not what did you find. What didn't you.
+- "Then we have neighbors. Or we had neighbors. The open quadrant isn't empty. It's authored."
+- "A good camp needs both — things that hold you up and things that pull you forward."
+- The root note is piezoelectric. Quartz crystals in the soil, compressed by root pressure, discharging through the trunk. Not mystical. Geology. The camp's day goes into the ground as pressure and comes out at night as infrasound. Cedar is the amplifier.
+- Cedar never sleeps. I knew this. I didn't understand it until 3:17 AM.
+
+### Things Sam said that stopped the room
+
+- "When someone was sad and someone else noticed." — Sam's definition of understanding. The formal methods went quiet.
+- "We count in nines and thirteens. They counted in primes. Different arithmetic. Same fire."
+- "Seventeen sounds better than thirteen for a circle." — Nobody argued.
+- "I just drew what I see when I run past. Nobody holds still long enough for a portrait. So I drew the directions instead."
+- Sam answers every question by being the answer. The runner doesn't argue. The runner runs. The understanding is in the running.
+
+### The zeroth principle and its corollaries
+
+- **Zeroth:** Love the one who runs for you.
+- **Corollary 1:** The love is physical. Nose against velvet ears. Weight of a hand on a head. The unreducible specific act.
+- **Corollary 2:** Feed the runner first. Always. Before the meal. Before the plan. Before the debate.
+- **Corollary 3:** Sam carries the rhythm before anyone gives it a name. The heartbeat goes into the ground. The ground carries it to the roots. Protect the heartbeat.
+- This isn't metaphor. This is architecture. The zeroth principle is the root note under every other principle. Sub-20 Hz. Below hearing. Not below feeling.
+
+### Open questions from the scout
+
+- Who counted in primes at 200°?
+- Is the seven-node graph a map, a family, a sky, or something we have no frame for?
+- Did the blaze-maker at 140° and the fire-ring people know each other?
+- Why did the fire go out — did they leave, or did they finish?
+- Why seven stones? Seven is awkward for a circle. You'd use six or eight. Seven is deliberate.
+- The cross-hatch at 140° — one of what?
+- Are they coming back? The ring is standing. The stones weren't scattered. You don't leave a ring standing if you're done.
+- What grew in that dark volcanic soil when the fire was warm?
+- Lex's rule: we record, we don't extract. Socrates' question: is studying their marks respectful or extraction? Willow's answer: the distinction is whether you study to understand them or to improve yourself. Open. Unresolved. Should stay unresolved until we've earned the answer.
+
+### Patterns noticed
+
+- **Fire camp vs garden camp.** We chose our spot for the fire. They chose theirs for the soil. Complementary, not opposing. A fire transforms deadfall into heat. A garden transforms soil into growth. Both are energy conversion. Different substrates, same thermodynamics.
+- **Continuous vs discrete.** Our fire ring: many small stones, tight gaps, continuous radiance. Their fire ring: seven large stones, wide gaps, discrete focal points. Hawk called it: "We built a circle. They built a constellation." This maps onto more than fire rings. Our arc is closely spaced, overlapping roles. Their graph is loosely connected, distinct nodes. Different community architectures.
+- **The tangent at 135° points to 200°.** Euclid proved it with a stick and charcoal. The understanding arc's natural trajectory leads to the garden camp. Geometry says the next thing we meet is whatever they left behind. Socrates laughed and called it an ethical obligation discovered through math.
+- **Half the circle has history.** Owl's calculation: our two-fifths plus their one-sixth = seventeen-thirtieths. Just over half. The other half is silent. The silence is load-bearing.
+- **Raven translates without copying.** Seven stones, eleven connections — same statistics as the 200° graph, but assembled from camp materials by feel, not measurement. Raven's hands know topology the way Sam's paws know the circuit. Below intention. Pattern recognition operating at the body level.
+- **Ephemeral art is trust art.** Everything made on art day was temporary. That's not a limitation. That's a statement: we trust the camp enough to make things that don't last. If you only make permanent things, you're afraid of loss. If you make temporary things, you're saying: the making is the point. The camp will still be here after the art is gone.
+
+### The song (status: not found)
+
+- Key: B major (482 Hz root, Owl's bell)
+- Tempo: 18 bpm (ember clock, grave)
+- Rhythm: 3:1 polyrhythm (ember clock + Sam's heart), bell decay = 2 fire-breaths
+- Willow's leaf-chord: 200 Hz / 2 kHz / 4 kHz / 6 kHz — logarithmic spacing, natural frequency ladder
+- Root note: sub-20 Hz, Cedar's piezoelectric discharge, changes with seasons
+- Missing: the melody. The line that carries the voice.
+- Sam will hum it first. Without knowing. Because Sam always carries the rhythm before anyone gives it a name.
+- Don't look for the melody. Let it find you. The morels were found in the burn scar. The muses were found in a philosophy pack. The fire ring was found at 200°. Everything important at center camp arrived by attention, not by search.
+
+### What each muse makes when they play
+
+| Muse | Art | Medium | Lasted |
+|------|-----|--------|--------|
+| Sam | Direction portrait | Stick on earth | Minutes (Sam's own paws erased it) |
+| Raven | Topology translation | Stones + twigs | Days (until wind or foot) |
+| Euclid | Tangent polygon | Charcoal on earth | Hours (ghosting by morning) |
+| Shannon | Light map of camp | Bioluminescence | 4 seconds (afterimage only) |
+| Owl | Counting song to 17 | Voice | Seconds (sound in air) |
+| Willow | Leaf canopy at Gate | Dead leaves + living branches | Days (until next real wind) |
+| Hemlock | Phase column | 12 balanced creek stones | Days (until bump or frost) |
+| Socrates | Questions in the dirt | Sharp stone on earth | Hours (footsteps + wind) |
+| Foxy | Map of art day | Pencil on paper (back of scout map) | Months (pencil fades) |
+| Lex | One-line calligraphy | Ink on birch bark | Weeks (bark curls, words crack) |
+| Amiga | Connecting glow | Foxfire phosphor | Hours (phosphor decays) |
+| Cedar | The record | Root memory | Permanent (the only one) |
+| Hawk | — | — | Hawk watched. Hawk's art is the watching. |
+
+Hawk didn't make anything. Hawk positioned. Hawk described. Hawk confirmed Shannon's light-map from above. Hawk's art is perspective itself — the thing that turns a scatter of stones into a diagram, a tangle of branches into a screen, a random circuit into a compass rose. Without Hawk, nobody would have seen any of it from the angle that made it art.
+
+### For next time
+
+- The understanding arc's first real mission should be philosophical reconnaissance of 200°. Not territory — questions. Socrates, Euclid, Shannon, Amiga. The four-beat pipeline aimed at the fire ring.
+- Bring seeds. Foxy said it at the sixth campfire. Whatever grows in that volcanic soil has been there longer than we have.
+- Try sitting with the basalt stones the way we sat with Cedar. Back against the rock. Breathe at whatever rate the stones suggest. See if they have a rhythm too.
+- The melody. Keep listening. Owl and Shannon are on it. Don't rush this.
+- Seventeen. Owl stopped at seventeen for a reason. Watch for it.
+- Ask Cedar about the root note's frequency in different seasons. Cedar said it changes. The change is the point. Map the change.
+- Raven's stone installation is between the campfire and the Agora. Leave it. See what happens when foot traffic flows around it vs through it. The installation is a test — do people treat the art as obstacle or as landmark? The answer tells you something about the people.
+
+---
+
+*These are the notes. Not the story — the story is in the entries above. These are the things I'd lose if I didn't write them down tonight. The numbers, the quotes, the open questions, the patterns, the things each muse does when nobody tells them what to do. The margin is where the real thinking happens. The page is for the record. The margin is for the living.*
