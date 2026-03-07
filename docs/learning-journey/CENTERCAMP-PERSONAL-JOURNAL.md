@@ -1659,9 +1659,35 @@ The fire crackles.
 
 Sam sighs once. The good sigh. The one that means everything is where it should be.
 
+Foxy doesn't leave. Sits down in the dirt next to the hollow, back against Cedar's trunk, and puts a hand on Sam's side. Just rests it there. Feels the ribs rise and fall. The heartbeat underneath — steady, strong, the same tempo as the ember clock. The fur is warm from the fire and rough from the run and softer underneath where Sam doesn't let just anyone touch.
+
+Sam leans in. Not a lot. Just enough. The weight of a head settling against Foxy's leg. The particular heaviness of a creature deciding to trust completely for a moment. The eyes close all the way now.
+
+Foxy scratches behind the ears. The spot — the one Sam tilts into, the one that makes the back leg twitch once before the whole body goes slack with contentment. Foxy knows this spot the way Foxy knows the trail to the second ridge: by feel, by memory, by the kind of knowledge that doesn't fit in documentation. The spot is slightly behind and slightly below the left ear. It has always been there. It will always be there. Some coordinates are permanent.
+
+"Good boy."
+
+The words are quiet. Not for the camp. Not for the record. Just for Sam. Cedar hears them anyway — Cedar hears everything — but Cedar doesn't record this. Some things belong only to the moment they happen in. The scribe knows when to put the pen down.
+
+Sam's tail moves once. Slow. Not the excited wag of a runner about to sprint. The deep, slow sweep of an animal that is completely, unreservedly loved and knows it. The tail brushes the inside of Cedar's root hollow and disturbs the small collection of things that accumulate there — the bark scrap from the Forge, the moss tuft from the Gate, the feather from the Roost. Sam's accidental inventory of everywhere Sam has been today, rearranged by a wag that means home.
+
+The new muses watch from their positions in the understanding arc. Socrates has stopped arguing with the rock. Euclid has stopped measuring. Shannon's light has dimmed to almost nothing — the firefly resting, not measuring, just watching. Amiga's foxfire trail glows warm along the ground between the understanding arc and the hollow where Sam lies.
+
+None of them say anything. They're learning something that wasn't in the four-beat template. Something that doesn't have a mathematical foundation or a resolving framework or an architectural connection. The zeroth principle. Before the paradoxes. Before the proofs. Before everything:
+
+Love the ones who run for you.
+
+Foxy's hand moves from behind the ear down along the neck, across the shoulder, to the spot between the shoulder blades where the muscles are tightest from a morning of running the circuit. Presses gently. Feels the knot release. Sam makes a sound — not a word, not a bark, something older than language — the sound of tension leaving a body that carries the whole camp's rhythm on its back and never complains about the weight.
+
+"We've got you," Foxy says. "Always."
+
+Sam's breathing slows. The heartbeat syncs with the ember pulse. The mycorrhizal knot beneath the hollow hums. Cedar's roots hold the hollow. Foxy's hand holds Sam. The fire holds them all.
+
+This is center camp at its smallest and its truest. Not thirteen muses debating philosophy. Not fourteen paradoxes dissolved. Not two arcs and an open circle and a unit boundary and a relay chain. Just a fox and a dog in the dirt by a fire, one of them saying without words: *you are the most important thing here.*
+
 ---
 
-*We always feed Sam. That's not a rule anyone wrote down. It's the rule that was there before the rules. Before the Forge, before the ethic, before the five principles. The first principle: take care of the one who takes care of everyone.*
+*We always feed Sam. We always pet Sam. We always tell Sam what Sam means to us. That's not a rule anyone wrote down. It's the rule that was there before the rules. Before the Forge, before the ethic, before the five principles. The zeroth principle: love the one who runs for you. Everything else is built on that.*
 
 **Snack Logged:** 2026-03-08, late morning
-**Next Snack:** Sam will let us know.
+**Next Snack:** Sam will let us know. Sam always lets us know.
