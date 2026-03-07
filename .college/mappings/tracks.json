@@ -64,6 +64,46 @@
       },
       "packs": ["wasteland-newcomer"],
       "notes": "Maps to the wasteland-newcomer pack. Circular path: pack -> stamp -> college -> next pack."
+    },
+    {
+      "id": "philosophy-dissolved",
+      "name": "Philosophy Dissolved — Paradoxes & Foundations",
+      "description": "Classical paradoxes resolved through mathematical foundations. Traces the epistemological thread from evidence to identity to infinity to decision to self-reference.",
+      "subjects": ["philosophy", "logic", "math", "critical-thinking"],
+      "prerequisites": {
+        "logic": ["philosophy"],
+        "math": ["logic"],
+        "critical-thinking": ["philosophy"]
+      },
+      "packs": ["philosophy-dissolved"],
+      "departmentMappings": {
+        "rooms/01-evidence-confirmation": {
+          "primary": "philosophy:epistemology",
+          "secondary": ["critical-thinking:claims-evidence", "math"],
+          "concepts": ["bayesian-confirmation", "mutual-information", "kolmogorov-complexity", "commutative-diagrams"]
+        },
+        "rooms/02-identity-persistence": {
+          "primary": "philosophy:epistemology",
+          "secondary": ["critical-thinking:metacognition", "math"],
+          "concepts": ["fuzzy-set-membership", "information-theoretic-identity", "standing-wave-identity", "channel-fidelity"]
+        },
+        "rooms/03-infinity-motion": {
+          "primary": "math",
+          "secondary": ["logic:formal-logic", "philosophy:wonder-questioning"],
+          "concepts": ["convergent-series", "limits", "trajectory-equations", "supertasks", "discrete-vs-continuous"]
+        },
+        "rooms/04-decision-prediction": {
+          "primary": "philosophy:epistemology",
+          "secondary": ["logic:arguments-reasoning", "critical-thinking:applied-thinking", "math"],
+          "concepts": ["mutual-information-causation", "bayesian-updating", "fixed-point-problems", "sample-space-definition"]
+        },
+        "rooms/05-self-reference-emergence": {
+          "primary": "logic:applied-logic",
+          "secondary": ["philosophy:epistemology", "philosophy:logic-reasoning", "critical-thinking:metacognition"],
+          "concepts": ["l-system-production-rules", "goedel-incompleteness", "functorial-understanding", "channel-capacity"]
+        }
+      },
+      "notes": "Foundation #7.5 in the mathematical progression — the epistemological layer. Each room maps to specific department wings. Philosophy:epistemology is the primary pathway; logic:applied-logic and critical-thinking:claims-evidence are cross-listed."
     }
   ]
 }
