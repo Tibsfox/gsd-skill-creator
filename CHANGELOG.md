@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.49.21] - 2026-03-07
+
+### Added
+
+- **Image to Mission Pipeline:** 4-wave creative translation pipeline that extracts intent from images and produces executable build specifications. Observation engine (4-layer visual analysis: literal, spatial, relational, mood), context integrator (freeform text parser with process insight extraction), connection engine (cross-image linker, visual-context bridge, synthesis orchestrator), parameter extractor (color/geometry/material/feel with reference tables), translation engines (Canvas, React/JSX, Three.js, CSS, SVG, palette, markdown layout), build generator (ordered atomic steps with philosophy annotations), transmission packager (5 self-containment checks, JSON + markdown serialization), pipeline bridge (complexity scoring 0-12, routing, override detection, vision-to-mission handoff)
+- **14 Zod schemas:** ImageInput through TransmissionPackage, following existing VTM pattern
+- **image-to-mission skill definition:** domain skill with activation triggers, observation protocol, output format selection, safety boundaries
+- **253 tests** across 11 files — types, observation, context, connection, parameters, translation (code + design), build generation, transmission, pipeline bridge, integration
+
+### Stats
+
+- 5 waves (0-4 + 4A), 6 commits, 11 source files, 253 tests, 24,700+ total tests
+
+---
+
 ## [1.49.12] - 2026-03-02
 
 ### Added
