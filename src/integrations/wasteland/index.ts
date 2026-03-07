@@ -336,3 +336,10 @@ export type {
   CompletionSignalInput,
   ScanSchedulerConfig,
 } from './services-bridge.js';
+
+// Educational Layer (R5 — newcomer onboarding)
+export { WantedRegistry } from './wanted-registry.js';
+export type { WantedEntry, WantedSearchCriteria, WantedDataProvider } from './wanted-registry.js';
+
+export { PackSessionDriver } from './pack-session-driver.js';
+export type { PhaseCompletion, PackProgress } from './pack-session-driver.js';
