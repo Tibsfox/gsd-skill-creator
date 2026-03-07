@@ -16,6 +16,7 @@
 
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { resolve as resolvePath } from 'node:path';
 import { sqlEscape } from './sql-escape.js';
 
 const execFileAsync = promisify(execFile);
@@ -113,6 +114,14 @@ interface DoltHubResponse {
  * @returns A DoltClient instance ready to query and execute.
  */
 export function createClient(config: DoltHubClientConfig): DoltClient {
+  // R1.1: Canonicalize and validate localDir at client creation.
+  // resolvePath() eliminates traversal sequences and guarantees an absolute path.
+  // All downstream execFile calls use this validated path as cwd.
+  const resolvedDir = resolvePath(config.localDir);
+  if (resolvedDir.includes('\0')) {
+    throw new Error('Invalid localDir: path contains null byte');
+  }
+
   const branch = config.branch ?? 'main';
 
   async function localQuery(sql: string): Promise<QueryResult> {
@@ -120,7 +129,7 @@ export function createClient(config: DoltHubClientConfig): DoltClient {
     const { stdout } = await execFileAsync(
       'dolt',
       ['sql', '-q', sql, '-r', 'json'],
-      { cwd: config.localDir, timeout: 30000 },
+      { cwd: resolvedDir, timeout: 30000 },
     );
     const parsed = JSON.parse(stdout) as { rows?: Record<string, string>[] };
     return { rows: parsed.rows ?? [], source: 'local' };
@@ -168,7 +177,7 @@ export function createClient(config: DoltHubClientConfig): DoltClient {
     const { stdout, stderr } = await execFileAsync(
       'dolt',
       ['sql', '-q', sql],
-      { cwd: config.localDir, timeout: 30000 },
+      { cwd: resolvedDir, timeout: 30000 },
     );
     return { stdout, stderr };
   }
