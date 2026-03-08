@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gsd-math-coprocessor": {
+      "command": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/math-coprocessor/.venv/bin/python",
+      "args": ["-m", "math-coprocessor"],
+      "cwd": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator",
+      "env": {
+        "MATH_COPROCESSOR_CONFIG": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/data/chipset/math-coprocessor.yaml"
+      }
+    }
+  }
+}
