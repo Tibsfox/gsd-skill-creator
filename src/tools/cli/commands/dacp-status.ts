@@ -43,14 +43,13 @@ Options:
 
 interface DacpStatusData {
   total_handoffs: number;
-  bundled_handoffs: number;
+  total_bundles_assembled: number;
   avg_drift_score: number;
   last_retrospective: string;
 }
 
 interface DriftEntry {
   handoff_type: string;
-  pattern?: string; // backward compat alias
   score: number;
   fidelity_level: number;
   recommendation: string;
@@ -59,7 +58,6 @@ interface DriftEntry {
 
 interface Recommendation {
   handoff_type: string;
-  pattern?: string; // backward compat alias
   action: string;
   from: number;
   to: number;
@@ -183,7 +181,7 @@ export async function dacpStatusCommand(args: string[]): Promise<number> {
   const fidelityDist = calculateFidelityDistribution(driftEntries);
 
   const totalHandoffs = status?.total_handoffs ?? driftEntries.length;
-  const bundledHandoffs = status?.bundled_handoffs ?? 0;
+  const bundledHandoffs = status?.total_bundles_assembled ?? 0;
   const avgDrift = status?.avg_drift_score ?? 0;
   const scriptCount = scripts?.length ?? 0;
   const schemaCount = schemas?.length ?? 0;
@@ -253,7 +251,7 @@ export async function dacpStatusCommand(args: string[]): Promise<number> {
     for (const action of pendingActions) {
       const arrow =
         action.action === 'promote' ? '\u2191' : '\u2193';
-      const actionType = action.handoff_type ?? action.pattern ?? 'unknown';
+      const actionType = action.handoff_type ?? 'unknown';
       p.log.message(
         `  ${arrow} ${actionType} \u2192 Level ${action.to} (${action.reason})`,
       );

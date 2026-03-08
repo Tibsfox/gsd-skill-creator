@@ -60,21 +60,21 @@ import { dacpStatusCommand } from './dacp-status.js';
 
 const mockStatusJson = JSON.stringify({
   total_handoffs: 47,
-  bundled_handoffs: 24,
+  total_bundles_assembled: 24,
   avg_drift_score: 0.08,
   last_retrospective: '2026-02-27T10:00:00.000Z',
 });
 
 const mockDriftScoresJsonl = [
-  '{"pattern":"planner->executor:schema-task","score":0.45,"fidelity_level":2,"recommendation":"promote","timestamp":"2026-02-27T10:00:00.000Z"}',
-  '{"pattern":"executor->verifier:test-handoff","score":0.12,"fidelity_level":1,"recommendation":"maintain","timestamp":"2026-02-27T09:50:00.000Z"}',
-  '{"pattern":"planner->executor:schema-task","score":0.38,"fidelity_level":2,"recommendation":"promote","timestamp":"2026-02-27T09:40:00.000Z"}',
-  '{"pattern":"executor->verifier:test-handoff","score":0.04,"fidelity_level":1,"recommendation":"maintain","timestamp":"2026-02-27T09:30:00.000Z"}',
+  '{"handoff_type":"planner->executor:schema-task","score":0.45,"fidelity_level":2,"recommendation":"promote","timestamp":"2026-02-27T10:00:00.000Z"}',
+  '{"handoff_type":"executor->verifier:test-handoff","score":0.12,"fidelity_level":1,"recommendation":"maintain","timestamp":"2026-02-27T09:50:00.000Z"}',
+  '{"handoff_type":"planner->executor:schema-task","score":0.38,"fidelity_level":2,"recommendation":"promote","timestamp":"2026-02-27T09:40:00.000Z"}',
+  '{"handoff_type":"executor->verifier:test-handoff","score":0.04,"fidelity_level":1,"recommendation":"maintain","timestamp":"2026-02-27T09:30:00.000Z"}',
 ].join('\n');
 
 const mockRecommendationsJson = JSON.stringify([
   {
-    pattern: 'planner->executor:schema-task',
+    handoff_type: 'planner->executor:schema-task',
     action: 'promote',
     from: 2,
     to: 3,

@@ -52,8 +52,7 @@ Examples:
 
 interface DriftHistoryEntry {
   bundle_id: string;
-  handoff_type: string;
-  pattern?: string; // backward compat alias
+  pattern: string;
   score: number;
   fidelity_level: number;
   recommendation: string;
@@ -178,7 +177,7 @@ export async function dacpHistoryCommand(args: string[]): Promise<number> {
 
   // Parse and filter
   const allEntries = parseJsonl(content);
-  const filtered = allEntries.filter((e) => (e.handoff_type ?? e.pattern) === pattern);
+  const filtered = allEntries.filter((e) => e.pattern === pattern);
 
   if (filtered.length === 0) {
     if (json) {

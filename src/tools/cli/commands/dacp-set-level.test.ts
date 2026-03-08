@@ -61,7 +61,7 @@ import { dacpSetLevelCommand } from './dacp-set-level.js';
 // ── Fixtures ─────────────────────────────────────────────────────────
 
 const existingOverrides = {
-  'other-pattern': { level: 1, set_at: '2026-02-26T12:00:00.000Z' },
+  'other-pattern': { level: 1, assembled_at: '2026-02-26T12:00:00.000Z' },
 };
 
 // ── Tests ────────────────────────────────────────────────────────────
@@ -113,7 +113,7 @@ describe('dacpSetLevelCommand', () => {
     expect(writtenContent['planner->executor:task-assignment']).toBeDefined();
     expect(writtenContent['planner->executor:task-assignment'].level).toBe(3);
     expect(
-      writtenContent['planner->executor:task-assignment'].set_at,
+      writtenContent['planner->executor:task-assignment'].assembled_at,
     ).toBeDefined();
 
     // Verify confirmation message
@@ -225,7 +225,7 @@ describe('dacpSetLevelCommand', () => {
     const output = JSON.parse(String(jsonCalls[0][0]));
     expect(output).toHaveProperty('pattern');
     expect(output).toHaveProperty('level');
-    expect(output).toHaveProperty('set_at');
+    expect(output).toHaveProperty('assembled_at');
 
     consoleSpy.mockRestore();
   });

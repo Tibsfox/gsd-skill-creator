@@ -51,7 +51,7 @@ Examples:
 
 interface FidelityOverride {
   level: number;
-  set_at: string;
+  assembled_at: string;
   reason?: string;
 }
 
@@ -132,7 +132,7 @@ export async function dacpSetLevelCommand(args: string[]): Promise<number> {
 
   // Add/update override
   const setAt = new Date().toISOString();
-  overrides[pattern] = { level: parsedLevel, set_at: setAt };
+  overrides[pattern] = { level: parsedLevel, assembled_at: setAt };
 
   // Write back
   await writeFile(overridesPath, JSON.stringify(overrides, null, 2), 'utf-8');
@@ -141,7 +141,7 @@ export async function dacpSetLevelCommand(args: string[]): Promise<number> {
   if (json) {
     console.log(
       JSON.stringify(
-        { pattern, level: parsedLevel, set_at: setAt },
+        { pattern, level: parsedLevel, assembled_at: setAt },
         null,
         2,
       ),
