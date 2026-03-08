@@ -198,28 +198,34 @@ export function signalToStamp(
     error: 0.5,
   };
 
-  const severityMap: Record<string, 'info' | 'warning' | 'critical'> = {
-    success: 'info',
-    failure: 'warning',
-    timeout: 'warning',
-    error: 'critical',
+  const severityMap: Record<string, 'leaf' | 'branch' | 'root'> = {
+    success: 'leaf',
+    failure: 'branch',
+    timeout: 'branch',
+    error: 'root',
   };
 
   const valence = valenceMap[signal.status] ?? valenceMap['error']!;
   const confidence = confidenceMap[signal.status] ?? 0.5;
-  const severity = severityMap[signal.status] ?? 'warning';
+  const severity = severityMap[signal.status] ?? 'root';
 
   return {
-    stampId: `auto-${signal.operationId}`,
+    id: `auto-${signal.operationId}`,
     wantedId: context.wantedId,
     author: 'system',
+    subject: context.handle,
     valence,
     confidence,
     severity,
+    context_id: signal.operationId,
+    context_type: 'completion',
+    skill_tags: ['automated', signal.status],
     message: signal.error
       ? `Automated stamp: ${signal.status} — ${signal.error}`
       : `Automated stamp: ${signal.status} for ${context.handle}`,
-    tags: ['automated', signal.status],
+    prev_stamp_hash: null,
+    completionId: signal.operationId,
+    wantedTitle: `Wanted ${context.wantedId}`,
   };
 }
 

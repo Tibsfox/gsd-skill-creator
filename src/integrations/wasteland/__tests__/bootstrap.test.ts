@@ -47,8 +47,9 @@ const { execFile } = await import('node:child_process');
 beforeEach(() => {
   vi.clearAllMocks();
   // Restore default execFile mock: success
-  vi.mocked(execFile).mockImplementation((_cmd, _args, _opts, cb) => {
-    (cb as (err: null, stdout: string, stderr: string) => void)(null, '', '');
+  (vi.mocked(execFile) as any).mockImplementation((_cmd: any, _args: any, _opts: any, cb: any) => {
+    cb(null, '', '');
+    return {} as any;
   });
 });
 
@@ -63,7 +64,7 @@ describe('bootstrap()', () => {
   });
 
   it('returns BootstrapResult with client equal to createClient() return value', async () => {
-    const mockClient = vi.mocked(createClient).mock.results[0]?.value ?? (createClient as ReturnType<typeof vi.fn>)();
+    const mockClient = vi.mocked(createClient).mock.results[0]?.value ?? (createClient as any)();
     const result = await bootstrap(['--offline']);
     // createClient was called — result.client is its return value
     expect(result.client).toBeDefined();
@@ -105,8 +106,9 @@ describe('bootstrap()', () => {
   });
 
   it('when dolt pull throws, returns synced=false and does not rethrow', async () => {
-    vi.mocked(execFile).mockImplementation((_cmd, _args, _opts, cb) => {
-      (cb as (err: Error, stdout: string, stderr: string) => void)(new Error('merge conflict'), '', '');
+    (vi.mocked(execFile) as any).mockImplementation((_cmd: any, _args: any, _opts: any, cb: any) => {
+      cb(new Error('merge conflict'), '', '');
+      return {} as any;
     });
     const result = await bootstrap([]);
     expect(result.synced).toBe(false);

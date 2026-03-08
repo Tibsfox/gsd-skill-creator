@@ -115,14 +115,14 @@ describe('signalToStamp', () => {
     };
 
     const stamp = signalToStamp(signal, context);
-    expect(stamp.stampId).toBe('auto-op-001');
+    expect(stamp.id).toBe('auto-op-001');
     expect(stamp.wantedId).toBe('w-001');
     expect(stamp.valence.quality).toBe(0.8);
     expect(stamp.valence.reliability).toBe(0.9);
     expect(stamp.confidence).toBe(0.85);
-    expect(stamp.severity).toBe('info');
-    expect(stamp.tags).toContain('automated');
-    expect(stamp.tags).toContain('success');
+    expect(stamp.severity).toBe('leaf');
+    expect(stamp.skill_tags).toContain('automated');
+    expect(stamp.skill_tags).toContain('success');
   });
 
   it('converts failure signal to negative stamp', () => {
@@ -136,7 +136,7 @@ describe('signalToStamp', () => {
     expect(stamp.valence.quality).toBe(0.3);
     expect(stamp.valence.reliability).toBe(0.2);
     expect(stamp.confidence).toBe(0.75);
-    expect(stamp.severity).toBe('warning');
+    expect(stamp.severity).toBe('branch');
   });
 
   it('converts error signal with message', () => {
@@ -148,7 +148,7 @@ describe('signalToStamp', () => {
     };
 
     const stamp = signalToStamp(signal, context);
-    expect(stamp.severity).toBe('critical');
+    expect(stamp.severity).toBe('root');
     expect(stamp.confidence).toBe(0.5);
     expect(stamp.message).toContain('Dolt connection refused');
   });
@@ -162,7 +162,7 @@ describe('signalToStamp', () => {
 
     const stamp = signalToStamp(signal, context);
     expect(stamp.valence.reliability).toBe(0.1);
-    expect(stamp.severity).toBe('warning');
+    expect(stamp.severity).toBe('branch');
   });
 });
 

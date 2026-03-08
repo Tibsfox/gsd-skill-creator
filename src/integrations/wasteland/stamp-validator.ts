@@ -13,6 +13,7 @@
  */
 
 import { randomBytes } from 'node:crypto';
+import { sqlEscape } from './sql-escape.js';
 
 // ============================================================================
 // Types
@@ -453,11 +454,6 @@ export function buildStamp(
 // SQL Generator
 // ============================================================================
 
-/** Escape a string for SQL single-quote context */
-function sqlEscape(value: string): string {
-  return value.replace(/'/g, "''");
-}
-
 /**
  * Generate the SQL statements for a stamp validation.
  * Returns INSERT for stamp, UPDATE for completion, UPDATE for wanted.
@@ -640,7 +636,7 @@ export function createDoltHubProvider(
     async getLastStampHash(subjectHandle: string) {
       const sql = `
         SELECT block_hash FROM stamps
-        WHERE subject = '${subjectHandle.replace(/'/g, "''")}'
+        WHERE subject = '${sqlEscape(subjectHandle)}'
         ORDER BY created_at DESC LIMIT 1
       `;
       const result = await query(sql);

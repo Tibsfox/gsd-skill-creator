@@ -17,6 +17,8 @@
  *           30+ days at level 2, requires maintainer approval flag
  */
 
+import { sqlEscape } from './sql-escape.js';
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -339,6 +341,9 @@ export function createDoltHubEscalationProvider(
 
   return {
     async getRigs(minTrustLevel = 0, maxTrustLevel = 3) {
+      if (!Number.isFinite(minTrustLevel) || !Number.isFinite(maxTrustLevel)) {
+        throw new Error('Trust levels must be finite numbers');
+      }
       const rows = await query(
         `SELECT handle, trust_level, rig_type, registered_at FROM rigs WHERE trust_level >= ${minTrustLevel} AND trust_level <= ${maxTrustLevel} ORDER BY handle`
       );
@@ -351,7 +356,7 @@ export function createDoltHubEscalationProvider(
     },
 
     async getStampSummary(handle: string) {
-      const escaped = handle.replace(/'/g, "''");
+      const escaped = sqlEscape(handle);
 
       const [received, issued] = await Promise.all([
         query(`
@@ -381,7 +386,7 @@ export function createDoltHubEscalationProvider(
     },
 
     async getCompletionSummary(handle: string) {
-      const escaped = handle.replace(/'/g, "''");
+      const escaped = sqlEscape(handle);
       const rows = await query(`
         SELECT
           COUNT(*) as total,
@@ -475,7 +480,7 @@ export function toPromotionSQL(evaluation: EscalationEvaluation): string {
     return `-- ${evaluation.handle}: NOT ELIGIBLE for trust level ${evaluation.targetLevel}`;
   }
 
-  const escaped = evaluation.handle.replace(/'/g, "''");
+  const escaped = sqlEscape(evaluation.handle);
   const criteriaNote = evaluation.criteria
     .map(c => `${c.name}: ${c.actual}`)
     .join(', ');

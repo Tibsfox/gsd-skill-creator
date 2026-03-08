@@ -358,3 +358,26 @@ export type {
   RigMetrics,
   FederationHealth,
 } from './federation-dashboard.js';
+
+// Agent Role Converter (R7 — skill-creator ↔ wasteland format bridge)
+export {
+  convertToWastelandRole,
+  convertFromWastelandRole,
+  validateWastelandRole,
+  serializeWastelandRole,
+} from './agent-role-converter.js';
+export type {
+  WastelandRoleFrontmatter,
+  WastelandRoleFile,
+} from './agent-role-converter.js';
+
+// Agent Submission Workflow (R7 — skill-creator → wasteland federation)
+export {
+  AgentSubmissionWorkflow,
+  DEFAULT_SUBMISSION_CONFIG,
+} from './agent-submission-workflow.js';
+export type {
+  SubmissionConfig,
+  SubmissionResult,
+  PendingSubmission,
+} from './agent-submission-workflow.js';

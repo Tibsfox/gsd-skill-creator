@@ -62,7 +62,7 @@ describe('DACP CLI Commands', () => {
       join(dacpDir, 'retrospective', 'status.json'),
       JSON.stringify({
         total_handoffs: 15,
-        bundled_handoffs: 10,
+        total_bundles_assembled: 10,
         avg_drift_score: 0.18,
         last_retrospective: new Date().toISOString(),
       }),

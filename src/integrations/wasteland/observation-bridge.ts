@@ -19,11 +19,12 @@ import { PatternStore } from '../../core/storage/pattern-store.js';
 import { PromotionEvaluator } from '../../platform/observation/promotion-evaluator.js';
 import type { PromotionResult, EvaluationContext } from '../../platform/observation/promotion-evaluator.js';
 import { PromotionGatekeeper } from '../../platform/observation/promotion-gatekeeper.js';
-import type { GatekeeperConfig, GatekeeperDecision } from '../../core/types/observation.js';
+import type { GatekeeperConfig, GatekeeperDecision, PipelineStage } from '../../core/types/observation.js';
 import { LineageTracker } from '../../platform/observation/lineage-tracker.js';
 import type { LineageEntry, ArtifactType } from '../../core/types/observation.js';
 import { DriftMonitor } from '../../platform/observation/drift-monitor.js';
 import type { DemotionDecision } from '../../core/types/observation.js';
+import type { BenchmarkReport } from '../../platform/calibration/benchmark-reporter.js';
 
 // ============================================================================
 // R3.1: DoltHub Pattern Adapter
@@ -268,19 +269,24 @@ export class StampGatekeeper {
     };
 
     // Build optional benchmark report from signals
-    const report = (signals.f1Score !== undefined || signals.accuracy !== undefined)
+    const report: BenchmarkReport | undefined = (signals.f1Score !== undefined || signals.accuracy !== undefined)
       ? {
+          correlation: 0,
           metrics: {
             f1Score: signals.f1Score ?? 0,
             accuracy: signals.accuracy ?? 0,
+            precision: 0,
+            recall: 0,
+            falsePositiveRate: 0,
             truePositives: 0,
             trueNegatives: 0,
             falsePositives: 0,
             falseNegatives: 0,
           },
-          toolName: 'stamp-validation',
-          totalSamples: signals.completionCount,
-          timestamp: new Date().toISOString(),
+          dataPoints: signals.completionCount,
+          dateRange: { from: new Date().toISOString(), to: new Date().toISOString() },
+          currentThreshold: 0.5,
+          recommendations: [],
         }
       : undefined;
 
@@ -312,7 +318,7 @@ export class ValidationLineage {
     const entry: LineageEntry = {
       artifactId: completionId,
       artifactType: 'observation' as ArtifactType,
-      stage: 'completion-submit',
+      stage: 'completion-submit' as PipelineStage,
       inputs: [wantedId],
       outputs: [],
       metadata: { handle, wantedId },
@@ -326,7 +332,7 @@ export class ValidationLineage {
     const entry: LineageEntry = {
       artifactId: stampId,
       artifactType: 'pattern' as ArtifactType,
-      stage: 'stamp-validation',
+      stage: 'stamp-validation' as PipelineStage,
       inputs: [completionId],
       outputs: [],
       metadata: { author },
@@ -346,7 +352,7 @@ export class ValidationLineage {
     const entry: LineageEntry = {
       artifactId: escalationId,
       artifactType: 'decision' as ArtifactType,
-      stage: 'trust-escalation',
+      stage: 'trust-escalation' as PipelineStage,
       inputs: triggeringStampIds,
       outputs: [],
       metadata: { handle, fromLevel, toLevel },

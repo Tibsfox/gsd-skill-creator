@@ -165,9 +165,11 @@ export function evaluateSPRT(record: FeedbackRecord): SPRTResult {
   const failCount = n - successCount;
 
   let llr = 0;
-  if (currentRate > 0 && currentRate < 1 && baseRate > 0 && baseRate < 1) {
-    llr = successCount * Math.log(currentRate / baseRate) +
-          failCount * Math.log((1 - currentRate) / (1 - baseRate));
+  if (n > 0 && baseRate > 0) {
+    const safeCurrentRate = Math.min(Math.max(currentRate, 1e-10), 1 - 1e-10);
+    const safeBaseRate = Math.min(Math.max(baseRate, 1e-10), 1 - 1e-10);
+    llr = successCount * Math.log(safeCurrentRate / safeBaseRate) +
+          failCount * Math.log((1 - safeCurrentRate) / (1 - safeBaseRate));
   }
 
   let decision: SPRTResult['decision'] = 'continue-sampling';
@@ -268,8 +270,15 @@ function approximatePValue(absT: number, df: number): number {
   // This is a simplified approximation
   if (df <= 0) return 1;
 
+  // For small degrees of freedom, the t-distribution has heavier tails than
+  // normal, so a pure normal approximation over-reports significance.
+  // Apply a Cornish-Fisher correction factor to inflate the critical value.
+  if (df < 30) {
+    const correction = 1 + (1 / (4 * df));
+    absT = absT / correction;
+  }
+
   // Using a standard normal approximation for large df
-  // For small df, this is less accurate but reasonable for our purposes
   const z = absT;
 
   // Abramowitz and Stegun approximation for standard normal CDF
