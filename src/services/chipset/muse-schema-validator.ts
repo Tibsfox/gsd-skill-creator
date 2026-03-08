@@ -12,7 +12,7 @@ import type { PlanePosition } from '../../core/types/mfe-types.js';
 
 export type MuseType = 'system' | 'user' | 'community';
 export type VoiceStyle = 'narrative' | 'technical' | 'conversational' | 'observational' | 'welcoming';
-export type MuseId = 'foxy' | 'lex' | 'hemlock' | 'sam' | 'cedar' | 'willow';
+export type MuseId = 'foxy' | 'lex' | 'hemlock' | 'sam' | 'cedar' | 'willow' | 'raven' | 'hawk' | 'owl';
 
 export interface MuseOrientation {
   angle: number;

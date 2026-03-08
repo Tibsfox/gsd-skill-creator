@@ -20,6 +20,9 @@ const MUSE_VOCAB: Record<string, string[]> = {
   sam: ['curiosity', 'exploration', 'hypothesis', 'experiment', 'discovery', 'wonder', 'question', 'prototype'],
   cedar: ['timeline', 'integrity', 'observation', 'record', 'pattern', 'continuity', 'memory', 'witness'],
   willow: ['welcome', 'guide', 'comfort', 'clarity', 'warmth', 'invitation', 'accessibility', 'kindness'],
+  raven: ['pattern', 'echo', 'recurrence', 'structural', 'signal', 'noise', 'rhyming', 'detection'],
+  hawk: ['position', 'relay', 'formation', 'coverage', 'gap', 'awareness', 'connection', 'flock'],
+  owl: ['temporal', 'synchronization', 'sequence', 'cadence', 'momentum', 'clock', 'timing', 'schedule'],
 };
 
 function computeHash(timestamp: string, source: string, category: string, content: string): string {

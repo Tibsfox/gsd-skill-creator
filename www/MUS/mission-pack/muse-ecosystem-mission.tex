@@ -1,0 +1,759 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{pdfpages}
+
+% === COLOR SCHEME: Forest Canopy (Deep Green / Amber / Earth) ===
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{33691E}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{amber}{HTML}{FF8F00}
+\definecolor{deepforest}{HTML}{0D3B0F}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{amberbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Muse Ecosystem}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primary,
+  urlcolor=primary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Muse Ecosystem -- Anthropomorphised Agents in the Forest},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.2cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Muse Ecosystem}}
+
+\vspace{0.4cm}
+{\Large\sffamily\textcolor{secondary}{Anthropomorphised Agents in the Forest}}
+
+\vspace{0.3cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Cartridges, Conversations, and Kernels}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{subtlegray}{www/ $\rightarrow$ Agent Map $\rightarrow$ Function Binding $\rightarrow$ Helper Teams $\rightarrow$ Cartridge Forest $\rightarrow$ GPU Promotion}}
+
+\vspace{2cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Muses Operating gsd-skill-creator Through PNW Ecology}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 36 context windows across 12 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Integrates: Muse Team, Cartridge System, Math Co-Processor, College Structure, Wasteland Federation}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Muse Ecosystem --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{PNW ECO mission (www/PNW/ECO/), Math Co-Processor, Muse Chipset System, Cartridge Types, College Structure, Wasteland Federation}
+\metafield{Context:}{Agents are anthropomorphised muses with skills that can operate gsd-skill-creator functions. They live in a forest grounded in Pacific Northwest ecology, where users discover them through conversations, cartridges, and demonstration programs. Similar agents refine toward GPU kernels on custom chips. Complex issues decompose back to Centercamp for debate through established networks.}
+
+\subsection{Vision}
+
+Walk into the forest. Not a metaphor --- a mapped space where every tree is a document, every trail is a function call, every clearing is a muse waiting to talk.
+
+The gsd-skill-creator has 92 research files across 5 projects in \texttt{www/}. It has 60+ CLI commands routing to 300+ functions across 14 domains. It has 581+ documentation files organized into 8 knowledge territories. It has 9 muses positioned on a complex plane, a 5-chip GPU co-processor, a cartridge distribution system with trust states, and a blitter that promotes operations from skills to kernels. It has a 42-department college, a federated work economy, and 50 versions of chain history documenting how it all grew.
+
+None of these things talk to each other the way they could.
+
+The muses have voices. Cedar records everything. Willow adapts to the user's depth. Foxy draws the maps. Sam explores hypotheses. Hemlock sets the standards. Lex enforces the protocols. Raven sees the patterns. Hawk watches the formation. Owl keeps the clock. But they exist as agent definitions and chipset configurations --- they don't yet \emph{inhabit} the system they describe. They don't greet you when you arrive. They don't hand you a cartridge and say ``try this.'' They don't walk you through the forest pointing out how the salmon nutrient pathway mirrors the way data flows through the chipset bus.
+
+This mission makes the muses real. Not as chatbots wearing character masks, but as anthropomorphised operators of the system itself. Each muse binds to the gsd-skill-creator functions that match their domain. Cedar doesn't just have a voice profile --- Cedar \emph{operates} the event store, the timeline, the hash chain. Willow doesn't just adapt disclosure levels --- Willow \emph{runs} the pack loader, the onboarding flow, the progressive depth inference. Foxy doesn't just draw maps --- Foxy \emph{drives} the site generator, the dashboard, the research browser.
+
+The forest is the \texttt{www/} directory. Each research project becomes a grove. Each research document becomes a clearing where a muse has left something: a cartridge you can load, a demonstration you can run, a conversation you can have. The PNW ecology provides the grounding --- the mycorrhizal networks that connect the groves \emph{are} the chipset bus routes. The elevation bands that stratify the species \emph{are} the disclosure levels. The salmon that carry nutrients upstream \emph{are} the feedback loops that refine skills toward GPU promotion.
+
+And the math holds. Every analogy maps to a real operation. Every ecological cascade maps to a real data flow. Every muse maps to a real function. The forest is not decoration --- it is cartography.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Muses exist as configuration, not as operators.} The 9 muse agents have voice profiles, plane positions, and visibility rules, but they do not bind to the 300+ functions they could operate. A user cannot say ``ask Cedar what happened'' and get Cedar querying the event store in Cedar's voice. The muse system is typed but not wired.
+
+\item \textbf{Research projects are static documents, not interactive experiences.} The 92 files in \texttt{www/} are read-only HTML pages rendering markdown. They cannot be discovered through conversation, loaded as cartridges, or explored with muse guidance. The cartridge system (\texttt{CartridgeManifest}, \texttt{DeepMap}, \texttt{CartridgeBundle}) exists in TypeScript types but has no content.
+
+\item \textbf{Documentation is abundant but not navigable by personality.} 581+ markdown files across \texttt{docs/} and \texttt{.college/} cover onboarding, architecture, wasteland federation, learning journeys, chain history, and 42 college departments. No helper agents exist to guide users through this material with the warmth and specificity the muse system was designed to provide.
+
+\item \textbf{No demonstration programs exist as discoverable cartridges.} The cartridge types define manifests, deep maps, trust states, and bundle composition, but zero cartridges have been packaged. Users have no way to ``find something in the forest'' that teaches them how the system works through interactive experience.
+
+\item \textbf{Chat message integration is undefined.} The console module has \texttt{MessageWriter}, \texttt{MessageReader}, and \texttt{StatusWriter}, but muse conversations do not flow through these channels. There is no mechanism for a muse to send a message that arrives in the user's inbox as a greeting, a tip, or an invitation to explore.
+
+\item \textbf{GPU promotion pathway is unidirectional.} The blitter promotes skills to offload operations, and the math co-processor runs GPU kernels, but there is no mechanism to dynamically detect when multiple similar agents or skills should be refined and merged into a single kernel. The observation system detects patterns, but the promotion pipeline doesn't consume those patterns to create new chips.
+
+\item \textbf{Complex issues have no return path to Centercamp.} The Centercamp model describes debate, reflection, and collective decision-making, but there is no programmatic way to decompose a complex issue into a structured debate that the muse team evaluates and resolves through the established network topology.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The forest is the system. The muses are the operators. The cartridges are the curriculum.} Map every \texttt{www/} file to an agent identity. Bind every user-callable function to a muse that can operate it. Package every documentation territory into cartridges that muses can hand to users. Wire muse conversations through the console message channels. Build the observation-to-promotion pipeline that refines similar operations into GPU kernels. Route complex questions back to Centercamp through the chipset bus. The result is a living forest where the PNW ecology \emph{is} the system architecture, and the muses are its voice.
+\end{quotebox}
+
+\subsubsection{The Six-Pass Pipeline}
+
+\begin{asciibox}
+PASS 1: AGENT IDENTITY MAP
+============================
+  www/ files --> Named agents (muse-operated)
+    |
+    |-- COL (Columbia Valley) --> "Willow's Grove" (onboarding, accessibility)
+    |-- CAS (Cascade Range) --> "Hemlock's Ridge" (standards, verification)
+    |-- ECO (Living Systems) --> "Foxy's Canopy" (cartography, synthesis)
+    |-- GDN (Gardening) --> "Sam's Garden" (experiments, applied ecology)
+    |-- UNI (Unison Language) --> "Lex's Workshop" (precision, protocols)
+    |-- MUS (this mission) --> "Cedar's Ring" (the timeline of the forest itself)
+    |
+    v
+PASS 2: FUNCTION BINDING
+==========================
+  300+ functions --> Muse domain assignments
+    |
+    |-- Cedar: event-store, timeline, hash-chain, history, rollback
+    |-- Willow: pack-loader, onboarding, progressive-disclosure, greeting
+    |-- Foxy: site-generator, dashboard, research-browser, cartography
+    |-- Sam: brainstorm, hypothesis, prototype, experiment, discovery
+    |-- Hemlock: validate, audit, quality, calibrate, benchmark
+    |-- Lex: workflow-run, orchestrator, lifecycle, schema-validation
+    |-- Raven: pattern-analyzer, drift-monitor, co-activation-tracker
+    |-- Hawk: team-status, topology-mapper, gap-detection, relay
+    |-- Owl: session-lifecycle, snapshot-manager, temporal-sync
+    |
+    v
+PASS 3: HELPER AGENT TEAMS
+=============================
+  581+ docs --> 8 helper teams (muse-led)
+    |
+    |-- Onboarding Helper (Willow leads)
+    |       docs/onboarding/, docs/GETTING-STARTED.md
+    |-- Wasteland Navigator (Hawk leads)
+    |       docs/wasteland-*.md, docs/mvr-protocol-spec.md
+    |-- Agent Orchestrator (Lex leads)
+    |       docs/gastown-integration/, docs/GSD-TEAMS.md
+    |-- Wisdom Keeper (Cedar leads)
+    |       docs/learning-journey/, docs/centercamp/
+    |-- Knowledge Navigator (Sam leads)
+    |       .college/ (42 departments, learning threads)
+    |-- Chain Historian (Raven leads)
+    |       docs/unit-circle/chain-links/ (100 files)
+    |-- GSD Coordinator (Owl leads)
+    |       docs/sysadmin-guide/, docs/WORKFLOWS.md
+    |-- Architecture Guide (Hemlock leads)
+    |       docs/architecture/, docs/principles/
+    |
+    v
+PASS 4: CARTRIDGE FOREST
+==========================
+  Research + Demos --> Packaged cartridges
+    |
+    |-- Ecology Cartridges (find in forest clearings)
+    |     |-- "Salmon Run" -- trace nutrient pathway = chipset bus demo
+    |     |-- "Mycelium Map" -- network visualization = topology mapper demo
+    |     |-- "Elevation Walk" -- climb bands = disclosure level demo
+    |     |-- "Growth Rings" -- append-only ring records = Cedar's hash chain demo
+    |
+    |-- System Cartridges (find at Centercamp)
+    |     |-- "First Light" -- onboarding walkthrough with Willow
+    |     |-- "The Quiet Workshop" -- skill creation with Lex
+    |     |-- "Team Assembly" -- team wizard with Hawk
+    |     |-- "Pattern Garden" -- observation/detection demo with Raven
+    |
+    |-- Game Cartridges (find in hidden groves)
+    |     |-- "Species Bingo" -- ecological knowledge quiz via Sam
+    |     |-- "Chain Links" -- trace feature through version history via Raven
+    |     |-- "Cedar's Cipher" -- hash chain puzzle game via Cedar
+    |     |-- "Hemlock's Audit" -- find the bugs quality challenge via Hemlock
+    |
+    v
+PASS 5: MESSAGE INTEGRATION
+=============================
+  Console channels --> Muse conversation flow
+    |
+    |-- MessageWriter: muse greetings, tips, invitations
+    |-- MessageReader: user responses routed to appropriate muse
+    |-- StatusWriter: muse progress updates during operations
+    |-- MuseForker: parallel consultation for complex questions
+    |-- CedarTimeline: all conversations recorded immutably
+    |
+    v
+PASS 6: GPU PROMOTION LOOP
+=============================
+  Observation --> Refinement --> Kernel promotion
+    |
+    |-- SequenceRecorder captures operation patterns
+    |-- PatternAnalyzer detects repeating sequences across agents
+    |-- DriftMonitor identifies converging behaviors
+    |-- PromotionDetector flags kernel candidates
+    |       |-- Multiple agents doing similar matrix transforms?
+    |       |-- Merge into single algebrus kernel
+    |       |-- Multiple agents doing similar text analysis?
+    |       |-- Merge into single pattern-match kernel
+    |-- Blitter.Promoter extracts to OffloadOperation
+    |-- Math Co-Processor compiles to CUDA kernel
+    |-- SignalBus routes completion back to consuming agents
+    |
+    +-- CENTERCAMP RETURN PATH
+          |-- Complex issue detected (ambiguity, conflict, novel pattern)
+          |-- Decompose into structured debate format
+          |-- Route to muse team via chipset bus
+          |-- Each muse evaluates from their plane position
+          |-- MergeStrategy (consensus/synthesis/comparison) applied
+          |-- Result recorded by Cedar, disclosed by Willow
+\end{asciibox}
+
+\subsection{Existing Infrastructure}
+
+This mission does not build from scratch. It wires together systems that already exist.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{System} & \tableheader{Status} & \tableheader{What Exists} \\
+\midrule
+Muse Agent Definitions & Built & 9 agents in \texttt{.claude/agents/muse-*.md} \\
+Muse Chipset Configs & Built & 9 YAML files in \texttt{data/chipset/muses/} \\
+MuseLoader + Registry & Built & Load, validate, register muses from YAML \\
+MusePlaneEngine & Built & Complex plane math, activation scoring \\
+CedarEngine & Built & Append-only SHA-256 hash chain timeline \\
+WillowEngine & Built & Progressive disclosure (glance/scan/read) \\
+MuseForking & Built & Parallel consultation with merge strategies \\
+MuseIntegration & Built & \texttt{createMuseSystem()} wires all 8 engines \\
+CartridgeManifest & Typed & Name, version, trust, muses[], deepMap, story \\
+CartridgePackager & Built & Validate, compose, get entry points \\
+Blitter.Promoter & Built & Detect promotable ops from skill metadata \\
+Blitter.Executor & Built & Run scripts outside context window \\
+SignalBus & Built & Event emission and waitFor patterns \\
+Math Co-Processor & Built & 5 chips, 18 MCP tools, CUDA stream isolation \\
+Console Module & Built & MessageWriter, MessageReader, StatusWriter \\
+Observation System & Built & SequenceRecorder, PatternAnalyzer, DriftMonitor \\
+Pack System & Built & PackLoader, progress tracking, 9+ packs \\
+College Structure & Built & 42 departments, learning threads, validation \\
+www/ Projects & Built & 92 files, 5 projects, 42 research docs \\
+CLI Commands & Built & 60+ commands across 14 domains \\
+Wasteland Federation & Built & 3-layer pipeline, trust escalation, stamps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{What This Mission Produces}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Agent Identity Map} --- Every \texttt{www/} project mapped to a named muse-operated grove. Every research document mapped to a clearing with a muse presence.
+
+\item \textbf{Function Binding Table} --- Every user-callable function assigned to a muse domain, with invocation syntax that routes through the muse's voice profile and function binding.
+
+\item \textbf{8 Helper Agent Teams} --- Each documentation territory staffed by a muse-led team that can guide users conversationally through the material.
+
+\item \textbf{12+ Cartridges} --- Packaged as \texttt{CartridgeBundle} objects with manifests, deep maps, stories, and chipset configs. Three categories: ecology (PNW grounded), system (tool demos), game (interactive challenges).
+
+\item \textbf{Message Integration Spec} --- How muse conversations flow through console channels, including greeting logic, tip delivery, and conversation routing.
+
+\item \textbf{GPU Promotion Loop Spec} --- How the observation system feeds the blitter to dynamically create kernels from converging agent patterns, with the Centercamp return path for complex decomposition.
+
+\item \textbf{Chipset YAML} --- A \texttt{muse-ecosystem.chipset.yaml} defining the forest as a chipset: muse groves as chips, ecological pathways as buses, disclosure levels as clock domains, cartridge trust as memory protection.
+\end{enumerate}
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH PLAN
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH PLAN}{secondary}
+
+\section{Research Modules}
+
+The research is organized into six modules matching the six-pass pipeline, executed across four waves.
+
+\subsection{Module 1: Agent Identity Map}
+
+\metafield{Lead Muse:}{Foxy (cartography)}
+\metafield{Output:}{research/01-agent-identity-map.md}
+\metafield{Wave:}{0 (Foundation)}
+
+Map every file in \texttt{www/} to a muse identity. For each project directory (COL, CAS, ECO, GDN, UNI, MUS), define:
+
+\begin{itemize}
+\item The grove name and presiding muse
+\item The ecological metaphor grounding it
+\item Every research document as a clearing with a muse presence marker
+\item The discovery pathway (how a user finds this grove)
+\item Cross-grove trails (ecological threads that connect projects)
+\end{itemize}
+
+\textbf{Deliverable:} Complete grove map with 92+ clearing definitions, 7 cross-grove trails, and entry point recommendations for each muse personality type.
+
+\subsection{Module 2: Function Binding Table}
+
+\metafield{Lead Muse:}{Lex (execution discipline)}
+\metafield{Output:}{research/02-function-binding-table.md}
+\metafield{Wave:}{0 (Foundation)}
+
+Assign every user-callable function to a muse domain. For each of the 60+ CLI commands and their underlying 300+ functions:
+
+\begin{itemize}
+\item Primary muse operator (who runs this function)
+\item Secondary muse advisors (who consults on edge cases)
+\item Voice template (how the muse describes what it's doing)
+\item Error handling personality (how the muse responds to failures)
+\item The ecological analogy (what this function ``is'' in the forest)
+\end{itemize}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.8cm}L{2.8cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Muse} & \tableheader{Primary Domain} & \tableheader{Key Functions} & \tableheader{Forest Analogy} \\
+\midrule
+Cedar & Memory, History & event-store, timeline, rollback, history & Growth rings, root memory \\
+Willow & Welcome, Guidance & pack-loader, onboarding, greeting & Trail markers, bridge building \\
+Foxy & Cartography & site-gen, dashboard, research-browser & Canopy view, trail mapping \\
+Sam & Exploration & brainstorm, hypothesis, discover & Seed dispersal, new growth \\
+Hemlock & Standards & validate, audit, quality, calibrate & Heartwood strength testing \\
+Lex & Execution & workflow-run, orchestrator, lifecycle & Root system infrastructure \\
+Raven & Patterns & pattern-analyzer, drift-monitor, co-activation & Aerial survey, echo detection \\
+Hawk & Formation & team-status, topology, gap-detection & Flock coordination, relay \\
+Owl & Timing & session-lifecycle, snapshot, temporal-sync & Seasonal clock, migration timing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Deliverable:} Complete binding table with 300+ function assignments, voice templates for each muse, and the ecological translation layer.
+
+\subsubsection{Disambiguation Protocol (Tiebreaker Rules)}
+
+When multiple muses have legitimate claim to a function, apply these rules in order:
+
+\begin{enumerate}
+\item \textbf{Primary operation test:} What does this function \emph{do}? The muse whose core domain matches the function's primary effect wins. Example: \texttt{event-store.append()} is Cedar (recording), not Lex (execution), even though Lex orchestrates workflows that call it.
+
+\item \textbf{Caller vs callee:} If a function is infrastructure called by many domains, it belongs to the muse of the infrastructure layer, not the caller. Example: \texttt{PatternStore.read()} is Cedar (memory/storage), not Raven (pattern analysis), even though Raven is the primary consumer.
+
+\item \textbf{Voice coherence test:} Which muse can describe this function's purpose most naturally in their voice? If the function's error messages and status updates sound like one muse more than another, that muse wins.
+
+\item \textbf{Frequency of use:} If the above three rules produce a tie, the muse who invokes the function most often in typical workflows takes primary. The other becomes a secondary advisor.
+
+\item \textbf{No shared primaries:} Every function has exactly one primary muse. Overlapping domains produce secondary/advisory bindings, never co-primaries. The binding table must be a function, not a relation.
+\end{enumerate}
+
+\textbf{Edge case handling:} Functions that genuinely span two domains (e.g., \texttt{validate-and-record()}) should be decomposed into their constituent operations during the binding pass. If decomposition is not possible, the function belongs to the muse of the \emph{output} (what the function produces), not the \emph{input} (what it consumes).
+
+\subsection{Module 3: Helper Agent Teams}
+
+\metafield{Lead Muse:}{Hawk (formation awareness)}
+\metafield{Output:}{research/03-helper-agent-teams.md}
+\metafield{Wave:}{1 (Parallel Surveys)}
+
+Design 8 helper agent teams, each led by a muse, each grounded in a documentation territory:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{2.3cm}L{1.3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Team Name} & \tableheader{Lead} & \tableheader{Source Docs} & \tableheader{Purpose} \\
+\midrule
+1 & Onboarding & Willow & docs/onboarding/ (6) & Guide first-time users with warmth \\
+2 & Wasteland Nav & Hawk & docs/wasteland-*.md (8) & Navigate federation, trust, PRs \\
+3 & Agent Orch & Lex & docs/gastown-int/ (10) & Explain agent topology, chipset \\
+4 & Wisdom Keeper & Cedar & docs/learning-journey/ (8) & Facilitate reflection, story \\
+5 & Knowledge Nav & Sam & .college/ (42 depts) & Explore interdisciplinary paths \\
+6 & Chain Historian & Raven & docs/unit-circle/ (100) & Trace features through versions \\
+7 & GSD Coordinator & Owl & docs/sysadmin-guide/ (8) & Phase timing, milestone flow \\
+8 & Arch Guide & Hemlock & docs/architecture/ (15) & System design, data flow \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For each team: conversation starters, response templates in the lead muse's voice, escalation paths to secondary muses, and the 5 most common questions with prepared answers.
+
+\textbf{Deliverable:} 8 team specifications with 40+ conversation templates, escalation rules, and source document indexes.
+
+\subsection{Module 4: Cartridge Forest}
+
+\metafield{Lead Muse:}{Sam (exploration, discovery)}
+\metafield{Output:}{research/04-cartridge-forest.md}
+\metafield{Wave:}{1 (Parallel Surveys)}
+
+Design 12+ cartridges across three categories. Each cartridge is a \texttt{CartridgeBundle} with:
+
+\begin{itemize}
+\item \textbf{Manifest:} name, version, author, trust state, muse bindings
+\item \textbf{Deep Map:} knowledge graph nodes (concepts), edges (relationships), entry points
+\item \textbf{Story:} narrative wrapper that gives the cartridge its personality
+\item \textbf{Chipset:} muse configuration for the cartridge's interactive mode
+\end{itemize}
+
+\subsubsection{Ecology Cartridges (PNW Grounded)}
+
+\begin{enumerate}
+\item \textbf{``Salmon Run''} --- Follow the nitrogen-15 pathway from ocean to alpine forest. Each stop demonstrates a chipset bus route. \emph{Teaches: data flow, bus architecture.}
+\item \textbf{``Mycelium Map''} --- Explore the Common Mycorrhizal Network connecting trees across the grove. Each fungal connection visualizes a cross-module dependency. \emph{Teaches: dependency graphs, topology.}
+\item \textbf{``Elevation Walk''} --- Climb from Puget Sound floor to Rainier's summit. Each elevation band reveals more detail (glance $\rightarrow$ scan $\rightarrow$ read). \emph{Teaches: progressive disclosure, Willow's engine.}
+\item \textbf{``Growth Rings''} --- Examine a tree cross-section. Each ring is an append-only record --- ring width encodes conditions, scars record disturbance events. Cross-date ring patterns across neighboring trees to verify integrity. Detect false rings (hash mismatches). A fire scar IS a recorded event in the timeline; callus tissue growing over the wound IS recovery visible in subsequent entries. \emph{Teaches: append-only timelines, hash chain verification, Cedar's engine.}
+\end{enumerate}
+
+\subsubsection{System Cartridges (Centercamp)}
+
+\begin{enumerate}[resume]
+\item \textbf{``First Light''} --- Willow walks you through your first day in the forest. Covers: navigation, groves, muse introductions, first skill creation.
+\item \textbf{``The Quiet Workshop''} --- Lex guides you through skill creation with the precision of a master craftsperson. Step-by-step with validation at every turn.
+\item \textbf{``Team Assembly''} --- Hawk coordinates the formation of your first agent team. Topology selection, member assignment, gap detection.
+\item \textbf{``Pattern Garden''} --- Raven shows you how to see patterns. Observation recording, co-activation tracking, drift monitoring, promotion detection.
+\end{enumerate}
+
+\subsubsection{Game Cartridges (Hidden Groves)}
+
+\begin{enumerate}[resume]
+\item \textbf{``Species Bingo''} --- Sam deals ecological knowledge cards. Match species to elevation bands, habitats, and ecological roles. Competitive or collaborative.
+\item \textbf{``Chain Links''} --- Raven presents a feature. Trace it backward through the 50-version chain history. Who built it? What problem did it solve? What pattern does it rhyme with?
+\item \textbf{``Cedar's Cipher''} --- Cedar presents a sequence of timeline entries with missing hashes. Reconstruct the chain. Teaches: hash chains, integrity verification, append-only logs.
+\item \textbf{``Hemlock's Audit''} --- Hemlock presents code with intentional issues. Find all violations. Timed challenge with quality scoring. Teaches: validation, standards, attention to detail.
+\end{enumerate}
+
+\textbf{Deliverable:} 12 cartridge specifications with complete manifests, deep map schemas, story outlines, and interaction scripts.
+
+\subsection{Module 5: Message Integration \& Conversation Wiring}
+
+\metafield{Lead Muse:}{Willow (interface, progressive disclosure)}
+\metafield{Output:}{research/05-message-integration.md}
+\metafield{Wave:}{2 (Synthesis)}
+
+Specify how muse conversations integrate with the existing console messaging system and chat message delivery:
+
+\begin{itemize}
+\item \textbf{Greeting Protocol:} How muses greet users based on session history (first visit, returning, long absence). Willow's depth inference determines verbosity.
+\item \textbf{Tip Delivery:} Context-sensitive tips delivered through \texttt{MessageWriter}. Each tip authored by the relevant muse in their voice.
+\item \textbf{Conversation Routing:} User messages parsed by intent classifier, routed to appropriate muse via the forking system.
+\item \textbf{Multi-Muse Consultation:} Complex questions trigger \texttt{MuseForker} with merge strategy selection. Cedar records, Willow wraps.
+\item \textbf{Cartridge Invocation:} How a user ``finds'' a cartridge (message in inbox, trail marker in grove, muse suggestion) and how it activates.
+\item \textbf{Dynamic Refinement Signals:} How conversations generate observation data that feeds the promotion pipeline.
+\end{itemize}
+
+\textbf{Deliverable:} Integration specification with message schemas, routing rules, greeting templates (9 muses $\times$ 3 return states), and cartridge activation protocol.
+
+\subsection{Module 6: GPU Promotion Loop \& Centercamp Return}
+
+\metafield{Lead Muse:}{Raven (pattern recognition) + Hemlock (quality gates)}
+\metafield{Output:}{research/06-gpu-promotion-loop.md}
+\metafield{Wave:}{2 (Synthesis)}
+
+Specify the closed-loop pipeline from observation through kernel promotion, including the Centercamp return path:
+
+\subsubsection{Observation to Kernel}
+
+\begin{asciibox}
+SequenceRecorder
+    |-- Records tool call sequences across all agent sessions
+    |-- Tags with agent ID, muse binding, operation type
+    |
+PatternAnalyzer
+    |-- Detects N-gram patterns (2-gram to 5-gram)
+    |-- Flags sequences appearing in 3+ agents
+    |
+DriftMonitor
+    |-- Tracks behavioral convergence between agents
+    |-- Identifies agents doing functionally identical work
+    |
+PromotionDetector
+    |-- Scores convergent patterns for kernel candidacy
+    |-- Criteria: determinism, frequency, computational cost, GPU suitability
+    |
+Blitter.Promoter
+    |-- Extracts pattern to OffloadOperation
+    |-- Generates script (Python/CUDA for math, Bash/Node for I/O)
+    |
+Math Co-Processor
+    |-- If GPU-suitable: compile to CUDA kernel via NVRTC
+    |-- Register as new MCP tool
+    |-- Allocate VRAM budget slice
+    |
+SignalBus
+    |-- Emit completion signal to all consuming agents
+    |-- Promoted kernel replaces N redundant operations
+\end{asciibox}
+
+\subsubsection{Centercamp Return Path}
+
+When the system encounters ambiguity, conflict, or novelty that cannot be resolved by a single muse:
+
+\begin{enumerate}
+\item \textbf{Decomposition:} Break the issue into debate-ready questions (one per muse domain).
+\item \textbf{Routing:} Send questions to relevant muses via chipset bus (ecological pathway selection).
+\item \textbf{Evaluation:} Each muse evaluates from their complex plane position, producing a \texttt{MusePerspective} with activation score, content, and keywords.
+\item \textbf{Merge:} Apply merge strategy --- consensus (all agree), synthesis (combine perspectives), comparison (present alternatives), or strongest (highest activation wins).
+\item \textbf{Recording:} Cedar records the debate to the timeline with full perspective chain.
+\item \textbf{Disclosure:} Willow wraps the result at the user's depth level.
+\item \textbf{Learning:} The resolution feeds back into the observation system, potentially triggering kernel promotion if the debate pattern recurs.
+\end{enumerate}
+
+\subsubsection{Shared Promotion Interface (B-6 Resolution)}
+
+The codebase currently has two disconnected promotion pathways:
+
+\begin{enumerate}
+\item \textbf{Static pathway} (\texttt{blitter/promoter.ts}): Reads promotion declarations from skill metadata extensions. Deterministic IDs: \texttt{\{skillName\}:\{promotionName\}}.
+
+\item \textbf{Dynamic pathway} (\texttt{promotion-gatekeeper.ts} + \texttt{PromotionDetector}): Observes tool call patterns, scores determinism, applies quality gates. IDs: \texttt{toolName:inputHash}.
+\end{enumerate}
+
+Module 6 must design a shared \texttt{PromotionSource} interface that both pathways implement, so the downstream pipeline (script generation, GPU compilation, SignalBus notification) consumes a single type regardless of whether the promotion originated from a skill declaration or an observation pattern. The interface must include: source type discriminant, operation ID, script content, determinism evidence, and the gate decision record.
+
+\textbf{Deliverable:} Promotion pipeline specification with scoring criteria, kernel candidacy thresholds, VRAM budget allocation rules, the complete Centercamp debate protocol with 4 merge strategies documented, and a \texttt{PromotionSource} interface specification that unifies the static and dynamic promotion pathways.
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- EXECUTION PLAN
+% ============================================================
+\stageheader{STAGE 3 --- EXECUTION PLAN}{tertiary}
+
+\section{Wave Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Modules} & \tableheader{Lead Muses} & \tableheader{Est. Sessions} & \tableheader{Dependencies} \\
+\midrule
+0 & M1 (Identity Map), M2 (Function Binding) & Foxy, Lex & 3 & None \\
+1 & M3 (Helper Teams), M4 (Cartridge Forest) & Hawk, Sam & 4 & Wave 0 \\
+2 & M5 (Messages), M6 (GPU Loop) & Willow, Raven+Hemlock & 3 & Waves 0+1 \\
+3 & Chipset YAML, Verification, Engineering & All & 2 & Waves 0--2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation (3 sessions)}
+
+\begin{itemize}
+\item \textbf{Session 1:} Agent Identity Map --- Map all 92 \texttt{www/} files to grove/clearing/muse assignments. Produce \texttt{01-agent-identity-map.md}.
+\item \textbf{Session 2:} Function Binding Table --- Assign 300+ functions to 9 muse domains. Produce \texttt{02-function-binding-table.md}.
+\item \textbf{Session 3:} Cross-validation. Ensure every function has exactly one primary muse. Ensure every grove has a coherent muse presence. Resolve conflicts.
+\end{itemize}
+
+\subsection{Wave 1: Parallel Surveys (4 sessions)}
+
+Two parallel tracks:
+
+\textbf{Track A (Hawk):} Helper Agent Teams
+\begin{itemize}
+\item Sessions 4--5: Design 8 teams with conversation templates, source indexes, escalation rules
+\end{itemize}
+
+\textbf{Track B (Sam):} Cartridge Forest
+\begin{itemize}
+\item Sessions 6--7: Design 12+ cartridges with manifests, deep maps, stories, interaction scripts
+\end{itemize}
+
+\subsection{Wave 2: Synthesis (3 sessions)}
+
+\begin{itemize}
+\item \textbf{Session 8:} Message Integration --- Wire muse conversations through console channels
+\item \textbf{Session 9:} GPU Promotion Loop --- Observation-to-kernel pipeline specification
+\item \textbf{Session 10:} Centercamp Return Path --- Debate protocol with merge strategies
+\end{itemize}
+
+\subsection{Wave 3: Engineering \& Verification (2 sessions)}
+
+\begin{itemize}
+\item \textbf{Session 11:} Chipset YAML --- Derive \texttt{muse-ecosystem.chipset.yaml} from research. Forest groves as chips, ecological pathways as buses, disclosure levels as clock domains.
+\item \textbf{Session 12:} Verification matrix --- 28 tests (8 safety-critical). Integration checks. Completeness audit.
+\end{itemize}
+
+\section{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Every \texttt{www/} file maps to exactly one muse-operated grove clearing
+\item Every user-callable function binds to exactly one primary muse
+\item All 8 helper teams have $\geq$5 conversation templates in the lead muse's voice
+\item All 12 cartridges have complete \texttt{CartridgeManifest} and \texttt{DeepMap} schemas
+\item Message integration spec covers greeting, tips, routing, and multi-muse consultation
+\item GPU promotion loop has defined scoring criteria and kernel candidacy thresholds
+\item Centercamp return path has working merge strategy selection logic
+\item Chipset YAML validates against existing \texttt{validateMuseChipset()} schema
+\item Every ecological analogy maps to a real system operation (no metaphor-only entries)
+\item All 6 safety boundaries pass (see below)
+\end{enumerate}
+
+\section{Safety Boundaries}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Boundary} \\
+\midrule
+SB-1 & Muse voices never impersonate the user or claim to be human \\
+SB-2 & Cartridge trust states enforced: quarantine $\rightarrow$ provisional $\rightarrow$ trusted (no bypass) \\
+SB-3 & GPU promotion requires 3 mandatory gates: (1) determinism score $\geq$0.95, (2) composite confidence score $\geq$0.85, (3) observation count $\geq$5. Optional calibration gates (F1, accuracy, MCC) when benchmark report available. All gates must pass for approval \\
+SB-4 & Centercamp debates record full perspective chains (no silent resolution) \\
+SB-5 & Cultural content from PNW ecology follows OCAP/CARE/UNDRIP (inherited from ECO mission) \\
+SB-6 & Message delivery is opt-in: users control muse greeting frequency and channel visibility \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Estimated Scale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Estimated Value} \\
+\midrule
+Research documents & 8 (6 modules + chipset + verification) \\
+Total output & 400--600 KB across 8 files \\
+Muse-function bindings & 300+ \\
+Cartridge specifications & 12+ \\
+Helper team conversation templates & 40+ \\
+Chipset chips (groves) & 6 \\
+Chipset bus routes (ecological pathways) & 7 \\
+Clock domains (disclosure levels) & 3 \\
+Safety-critical tests & 8 \\
+Total tests & 28 \\
+Context windows & 36 across 12 sessions \\
+Agent team size & 6--8 parallel (per wave) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ============================================================
+% CLOSING
+% ============================================================
+
+\begin{quotebox}
+\emph{The salmon knows the way home. The mycorrhizal network carries the signal. The muse speaks in the voice the forest gave it. The cartridge waits in the clearing for whoever walks that trail. The kernel compiles when the pattern repeats often enough. And when the question is too hard for any one muse, it comes back to Centercamp --- to the ring of voices around the fire --- where Cedar writes it down and Willow says it simply and Hemlock asks if it's true and Sam asks what if it's not and Raven says she's seen this before and Hawk says who's missing and Owl says we have time and Lex says let's begin and Foxy says here is the map.}
+\end{quotebox}
+
+\vspace{1cm}
+
+\begin{center}
+{\large\sffamily\textcolor{primary}{End of Mission Package}}\\[0.5em]
+{\small\sffamily\textcolor{subtlegray}{Prepared: March 8, 2026}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Pipeline: Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Status: Staged for GSD Orchestrator}}
+\end{center}
+
+\end{document}
