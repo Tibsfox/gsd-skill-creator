@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Unison Language — Content-Addressed Code from the Future</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>The Unison Language</h1>
+    <div class="subtitle">Content-Addressed Code from the Future &mdash; A Deep Research Study</div>
+    <div class="tags">
+      <span>Language Design</span>
+      <span>Distributed Systems</span>
+      <span>Developer Tooling</span>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=language-core">Language Core</a>
+      <a href="page.html?doc=type-system">Type System</a>
+      <a href="page.html?doc=tooling">Tooling</a>
+      <a href="page.html?doc=distributed">Distributed</a>
+      <a href="page.html?doc=ecosystem">Ecosystem</a>
+      <a href="page.html?doc=synthesis">Synthesis</a>
+      <a href="page.html?doc=schemas">Schemas</a>
+      <a href="page.html?doc=sources">Sources</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      We're used to thinking of a program as a thing that describes what a single OS process will do.
+      Unison starts with the premise that no matter how many nodes a computation occupies,
+      it should be expressible via a single program.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">28</span><span class="stat-label">Verified Sources</span></div>
+      <div class="stat"><span class="stat-value">23K</span><span class="stat-label">Words</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Cascades Traced</span></div>
+      <div class="stat"><span class="stat-value">2026-03-08</span><span class="stat-label">Date</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=language-core" class="card" style="text-decoration:none;color:inherit">
+        <h3>Module 1: Language Core</h3>
+        <div class="meta"><span class="tag tag-core">Core</span> 01-language-core.md <span class="word-count">2,907 words</span></div>
+        <p>Content-addressed code via SHA3-512 hashing. How names become metadata, builds disappear, and dependencies become immutable. The foundational innovation.</p>
+      </a>
+
+      <a href="page.html?doc=type-system" class="card" style="text-decoration:none;color:inherit">
+        <h3>Module 2: Type System &amp; Abilities</h3>
+        <div class="meta"><span class="tag tag-types">Types</span> 02-type-system-abilities.md <span class="word-count">3,677 words</span></div>
+        <p>Bidirectional type inference meets algebraic effects. Abilities track side effects at the type level. Comparative analysis with Koka, Eff, and OCaml 5.</p>
+      </a>
+
+      <a href="page.html?doc=tooling" class="card" style="text-decoration:none;color:inherit">
+        <h3>Module 3: Tooling &amp; Workflow</h3>
+        <div class="meta"><span class="tag tag-tooling">Tooling</span> 03-tooling-workflow.md <span class="word-count">2,571 words</span></div>
+        <p>UCM as unified REPL, package manager, build tool, and VCS. Scratch file watch loop, semantic merge, Unison Share, and MCP integration.</p>
+      </a>
+
+      <a href="page.html?doc=distributed" class="card" style="text-decoration:none;color:inherit">
+        <h3>Module 4: Distributed Computing</h3>
+        <div class="meta"><span class="tag tag-distributed">Distributed</span> 04-distributed-computing.md <span class="word-count">2,761 words</span></div>
+        <p>Code mobility from content-addressing. Typed remote execution, Unison Cloud, and deployment-as-a-function-call. Zero YAML, zero containers.</p>
+      </a>
+
+      <a href="page.html?doc=ecosystem" class="card" style="text-decoration:none;color:inherit">
+        <h3>Module 5: Ecosystem &amp; Adoption</h3>
+        <div class="meta"><span class="tag tag-ecosystem">Ecosystem</span> 05-ecosystem-adoption.md <span class="word-count">3,551 words</span></div>
+        <p>Unison Share, community metrics, adoption barriers, comparison with Haskell and Erlang/OTP. The 2026 roadmap and what must change.</p>
+      </a>
+
+      <a href="page.html?doc=synthesis" class="card" style="text-decoration:none;color:inherit">
+        <h3>Cross-Module Synthesis</h3>
+        <div class="meta"><span class="tag tag-synthesis">Synthesis</span> 06-synthesis.md <span class="word-count">4,748 words</span></div>
+        <p>The content-addressing cascade: one decision &rarr; build elimination &rarr; non-breaking renames &rarr; code mobility &rarr; typed distribution. Implications and unknowns.</p>
+      </a>
+    </div>
+
+    <h2>Reference Documents</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=schemas" class="card" style="text-decoration:none;color:inherit">
+        <h3>Document Conventions &amp; Schemas</h3>
+        <div class="meta"><span class="tag tag-reference">Reference</span> 00-shared-schemas.md <span class="word-count">1,068 words</span></div>
+        <p>Section header format, citation conventions, source quality ratings, cross-reference schema, and Minecraft mapping format used across all modules.</p>
+      </a>
+
+      <a href="page.html?doc=sources" class="card" style="text-decoration:none;color:inherit">
+        <h3>Source Index</h3>
+        <div class="meta"><span class="tag tag-reference">Reference</span> 00-source-index.md <span class="word-count">1,717 words</span></div>
+        <p>28 verified sources: official Unison docs, GitHub repo, academic papers, conference talks, community analyses. Quality-rated and dated.</p>
+      </a>
+
+      <a href="mission.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission Pack (PDF)</h3>
+        <div class="meta">Original mission package</div>
+        <p>The original research brief and mission package that initiated this deep study of the Unison programming language.</p>
+      </a>
+    </div>
+
+    <h2>The Content-Addressing Cascade</h2>
+    <p>One architectural decision creates a chain of consequences that touches every aspect of the system:</p>
+
+    <table>
+      <thead>
+        <tr><th>Cascade</th><th>Pathway</th><th>Modules</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>C-01</strong></td>
+          <td>Hash identity &rarr; Immutable definitions &rarr; No build step &rarr; Ecosystem-wide compilation cache</td>
+          <td><span class="tag tag-core">Core</span><span class="tag tag-tooling">Tooling</span></td>
+        </tr>
+        <tr>
+          <td><strong>C-02</strong></td>
+          <td>Names as metadata &rarr; Non-breaking renames &rarr; Semantic merge &rarr; Structural VCS</td>
+          <td><span class="tag tag-core">Core</span><span class="tag tag-tooling">Tooling</span></td>
+        </tr>
+        <tr>
+          <td><strong>C-03</strong></td>
+          <td>Hash-identified code &rarr; On-demand sync &rarr; Code mobility &rarr; Typed remote execution</td>
+          <td><span class="tag tag-core">Core</span><span class="tag tag-distributed">Distributed</span></td>
+        </tr>
+        <tr>
+          <td><strong>C-04</strong></td>
+          <td>Algebraic abilities &rarr; Effect tracking &rarr; Typed network boundaries &rarr; Safe distribution</td>
+          <td><span class="tag tag-types">Types</span><span class="tag tag-distributed">Distributed</span></td>
+        </tr>
+        <tr>
+          <td><strong>C-05</strong></td>
+          <td>All consequences &rarr; Unfamiliar workflow &rarr; Adoption friction &rarr; Ecosystem chicken-and-egg</td>
+          <td><span class="tag tag-ecosystem">Ecosystem</span><span class="tag tag-synthesis">Synthesis</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Module Architecture</h2>
+
+    <table>
+      <thead>
+        <tr><th>Module</th><th>Focus</th><th>Key Concepts</th><th>Dependencies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Language Core</td>
+          <td>SHA3-512, de Bruijn indices, codebase DB, immutable defs</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Type System &amp; Abilities</td>
+          <td>Bidirectional inference, algebraic effects, handlers</td>
+          <td>Module 1</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Tooling &amp; Workflow</td>
+          <td>UCM, scratch files, semantic merge, Unison Share</td>
+          <td>Modules 1, 2</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Distributed Computing</td>
+          <td>Code mobility, Cloud.run, typed deployment</td>
+          <td>Modules 1, 2, 3</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Ecosystem &amp; Adoption</td>
+          <td>Unison Share, community, barriers, roadmap</td>
+          <td>Modules 1&ndash;4</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Synthesis</td>
+          <td>Cascade tracing, implications, open questions</td>
+          <td>All modules</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Unison Language Research &middot; 2026-03-08 &middot; gsd-skill-creator</p>
+    <p>Core value: One architectural decision &mdash; content-addressed code &mdash; and the cascade of consequences it creates.</p>
+  </footer>
+</body>
+</html>
