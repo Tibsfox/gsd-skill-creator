@@ -211,6 +211,12 @@ class TestS05SymbexSandboxing:
         with pytest.raises(Exception):
             cpu.symbex_eval("getattr(__builtins__, '__import__')('os')", "x", [1.0])
 
+    def test_mro_traversal_blocked(self):
+        """Verify __class__.__mro__ attribute traversal is blocked."""
+        malicious = "[c for c in ().__class__.__bases__[0].__subclasses__()]"
+        with pytest.raises((ValueError, Exception)):
+            cpu.batch_eval(malicious, "x", [1.0])
+
     def test_safe_expression_works(self):
         """Valid math expression should still work in sandbox."""
         result = cpu.symbex_eval("sin(x) + cos(x)", "x", [0.0, 1.0, 2.0])

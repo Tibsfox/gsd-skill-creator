@@ -23,11 +23,20 @@ from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
-from .chips import algebrus, fourier, vectora, statos, symbex
-from .config import load_config, MathCoprocessorConfig
-from .streams import StreamManager
-from .vram import VRAMManager
-from . import gpu
+try:
+    # Try relative imports first (when run as package)
+    from .chips import algebrus, fourier, vectora, statos, symbex
+    from .config import load_config, MathCoprocessorConfig
+    from .streams import StreamManager
+    from .vram import VRAMManager
+    from . import gpu
+except ImportError:
+    # Fallback to absolute imports (when run directly in wasteland)
+    from chips import algebrus, fourier, vectora, statos, symbex
+    from config import load_config, MathCoprocessorConfig
+    from streams import StreamManager
+    from vram import VRAMManager
+    import gpu
 
 logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
 log = logging.getLogger("math-coprocessor")

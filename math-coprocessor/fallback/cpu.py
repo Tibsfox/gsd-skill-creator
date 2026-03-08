@@ -6,11 +6,56 @@ This mirrors the 68881's F-line trap: if no FPU is present, the OS
 emulates the instruction in software.
 """
 
+import ast
 import time
 import numpy as np
 from scipy import linalg as la
 from scipy import fft as sp_fft
 from scipy import stats as sp_stats
+
+
+# AST node types allowed in safe expressions. ast.Attribute is NOT included,
+# which blocks __class__.__mro__ traversal and all attribute access.
+_ALLOWED_NODES = frozenset({
+    ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Name,
+    ast.Call, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow, ast.USub,
+    ast.Mod, ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.Gt, ast.LtE,
+    ast.GtE, ast.List, ast.Tuple, ast.Index, ast.Subscript, ast.Slice,
+    ast.Load, ast.BoolOp, ast.And, ast.Or, ast.IfExp, ast.FloorDiv,
+})
+
+
+def safe_eval(expression: str, namespace: dict):
+    """Evaluate a math expression using an AST allowlist.
+
+    Rejects any node type not in _ALLOWED_NODES, which means:
+    - No attribute access (blocks __class__.__mro__ traversal)
+    - No imports, no exec, no assignments
+    - Function calls only to names present in namespace
+    """
+    try:
+        tree = ast.parse(expression, mode="eval")
+    except SyntaxError as exc:
+        raise ValueError(f"Invalid expression syntax: {exc}") from exc
+
+    for node in ast.walk(tree):
+        if type(node) not in _ALLOWED_NODES:
+            raise ValueError(
+                f"Disallowed expression node: {type(node).__name__}"
+            )
+        # For function calls, only allow names that exist in the namespace
+        if isinstance(node, ast.Call):
+            if not isinstance(node.func, ast.Name):
+                raise ValueError(
+                    "Only direct function calls are allowed (no attribute calls)"
+                )
+            if node.func.id not in namespace:
+                raise ValueError(
+                    f"Unknown function: {node.func.id!r}"
+                )
+
+    code = compile(tree, filename="<safe_eval>", mode="eval")
+    return eval(code, {"__builtins__": {}}, namespace)  # noqa: S307
 
 
 def _result(data, precision: str, computation_time: float, op: str):
@@ -177,7 +222,7 @@ def batch_eval(expression: str, param_name: str, values: list,
         "pi": np.pi, "e": np.e, param_name: x,
     }
     with np.errstate(divide="ignore", invalid="ignore"):
-        result = eval(expression, {"__builtins__": {}}, namespace)  # noqa: S307
+        result = safe_eval(expression, namespace)
     elapsed = time.perf_counter() - t
     if isinstance(result, np.ndarray):
         result = result.tolist()
@@ -221,7 +266,7 @@ def monte_carlo(expression: str, param_ranges: dict, n_paths: int = 10000,
     }
     for name, (lo, hi) in param_ranges.items():
         namespace[name] = rng.uniform(lo, hi, size=n_paths).astype(dtype)
-    results = eval(expression, {"__builtins__": {}}, namespace)  # noqa: S307
+    results = safe_eval(expression, namespace)
     if isinstance(results, np.ndarray):
         stats = {
             "mean": float(np.mean(results)),
@@ -283,7 +328,7 @@ def symbex_verify(expression: str, param_name: str, values: list,
         "exp": np.exp, "log": np.log, "sqrt": np.sqrt, "abs": np.abs,
         "pi": np.pi, "e": np.e, param_name: x,
     }
-    result = eval(expression, {"__builtins__": {}}, namespace)  # noqa: S307
+    result = safe_eval(expression, namespace)
     if isinstance(result, np.ndarray):
         result_arr = result
     else:

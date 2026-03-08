@@ -82,16 +82,24 @@ class VRAMManager:
             return alloc
 
     def free(self, alloc: VRAMAllocation):
-        """Free a workspace allocation."""
+        """Free a workspace allocation. No-ops silently if already freed."""
         with self._lock:
+            # Find the allocation in tracking first — guards against double-free
+            key_to_delete = None
+            for k, v in self._allocations.items():
+                if v is alloc:
+                    key_to_delete = k
+                    break
+            if key_to_delete is None:
+                log.warning(
+                    f"free() called on untracked allocation '{alloc.label}' -- ignoring"
+                )
+                return
+            # Safe to free now
             if alloc.backend == "gpu" and alloc.ptr is not None:
                 gpu.cuda_free(alloc.ptr)
             self._allocated -= alloc.size_bytes
-            # Remove from tracking
-            for k, v in list(self._allocations.items()):
-                if v is alloc:
-                    del self._allocations[k]
-                    break
+            del self._allocations[key_to_delete]
 
     def free_all(self):
         """Free all allocations."""
