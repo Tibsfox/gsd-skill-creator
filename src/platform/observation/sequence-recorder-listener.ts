@@ -95,5 +95,6 @@ export function initializeSequenceRecorder(
 ): SequenceRecorder {
   const recorder = new SequenceRecorder(bus, store, config);
   recorder.start();
+  recorder.startPhaseCompleteListener();
   return recorder;
 }

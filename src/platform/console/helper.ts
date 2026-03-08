@@ -87,7 +87,7 @@ function jsonResponse(
   statusCode: number,
   body: Record<string, unknown>,
 ): void {
-  res.setHeader('access-control-allow-origin', '*');
+  res.setHeader('access-control-allow-origin', 'http://localhost:1420');
   res.setHeader('content-type', 'application/json; charset=utf-8');
   res.writeHead(statusCode);
   res.end(JSON.stringify(body));

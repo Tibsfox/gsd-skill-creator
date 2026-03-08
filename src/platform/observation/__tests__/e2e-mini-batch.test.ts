@@ -431,9 +431,6 @@ describe('E2E Mini-Batch: 2 agents, 3 phases, 100+ signals', () => {
 
   it('CSV sample rows match expected format for pattern mining', async () => {
     // Emit specific operations for deterministic CSV validation.
-    // Note: "design-api" contains "sign" which matches the CERTIFY pattern
-    // (/certify|approve|sign/i) before the DESIGN pattern is checked. This is
-    // a known quirk of the current classifier — test asserts actual behavior.
     bus.emit(createCompletionSignal(makeResult('agent-alpha:analyze-codebase')));
     bus.emit(createCompletionSignal(makeResult('agent-beta:propose-api')));
     bus.emit(createCompletionSignal(makeResult('agent-alpha:build-sequence-recorder')));

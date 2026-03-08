@@ -48,11 +48,9 @@
  * is saying: "I don't know what this is, but BUILD is the safest guess at 0.3
  * confidence (below the risk-prediction threshold)."
  *
- * Known quirk: the '/certify|approve|sign/i' pattern matches before
- * '/design|architect/i' because "design" contains the substring "sign".
- * This causes design-related operations to classify as CERTIFY instead of DESIGN.
- * Documented in e2e-mini-batch.test.ts. Low-priority fix: use word boundaries (\bsign\b).
- * See BATCH-3-RETROSPECTIVE.md, Willow's debrief, for the full classifier analysis.
+ * Former quirk (fixed): '/certify|approve|sign/i' matched before '/design|architect/i'
+ * because "design" contains "sign". Fixed by reordering DESIGN before CERTIFY and
+ * using word boundary \bsign\b. See BATCH-3-RETROSPECTIVE.md, Willow's debrief.
  *
  * Design principle: "Honest Uncertainty Over Confident Wrongness"
  * (CENTERCAMP-PERSONAL-JOURNAL, Part III, Philosophy 2)
@@ -79,9 +77,10 @@
  * "First run: 8 steps. Second run: 6 steps (ratio 0.75). Third run: 5 steps (ratio 0.625)."
  * Ratio < 1.0 = the agent is learning. This is the signature of skill acquisition.
  *
- * NOTE: completeArc() is not yet called at phase boundaries — this is an
- * outstanding item from Batch 3. Wire it at phase transitions for full compression
- * tracking. See BATCH-3-RETROSPECTIVE.md "What Didn't Work" for details.
+ * completeArc() is wired at phase boundaries via startPhaseCompleteListener(),
+ * which subscribes to 'phase-complete' events on the SignalBus. When a phase
+ * completes, all active arcs are finalized and their step counts recorded to
+ * arcHistory for compression ratio tracking. Wired in Batch 3 retro item #7.
  *
  * DESIGN DECISIONS
  * ----------------
@@ -174,16 +173,28 @@ export interface SequenceRecorderConfig {
  * connecting cluster. This is intentionally conservative: bridge-zone is
  * the safest default (minimal capability-gap risk with either neighbor cluster).
  *
- * Extend this map when adding new agents. See BATCH-3-RETROSPECTIVE.md for
- * instructions on reading coordinates from agent-positions.csv.
+ * Extended with all 15 profiled agents (Batch 3 retro item #6). Assignments
+ * match routing-advisor.ts inferClusterFromName(). Extend when adding new agents.
  */
 const DEFAULT_CLUSTER_MAP: Record<string, ClusterId> = {
+  // Creative Nexus — exploration, synthesis, creative work
   'foxy': 'creative-nexus',
   'cedar': 'creative-nexus',
+  // Bridge Zone — translation, connection, coordination
   'willow': 'bridge-zone',
   'sam': 'bridge-zone',
+  'gsd-orchestrator': 'bridge-zone',
+  'gsd-planner': 'bridge-zone',
+  'observer': 'bridge-zone',
+  'codebase-navigator': 'bridge-zone',
+  'changelog-generator': 'bridge-zone',
+  // Rigor Spine — verification, standards, precise work
   'hemlock': 'rigor-spine',
   'lex': 'rigor-spine',
+  'gsd-executor': 'rigor-spine',
+  'gsd-verifier': 'rigor-spine',
+  'photon': 'rigor-spine',
+  'doc-linter': 'rigor-spine',
 };
 
 /**
@@ -222,10 +233,10 @@ export const DEFAULT_RECORDER_CONFIG: SequenceRecorderConfig = {
  * Operation classification patterns in priority order.
  * Each entry: [regex, OperationType, confidence].
  *
- * CRITICAL ORDERING NOTE: More specific patterns must come before more generic ones.
- * The classifier iterates in order and returns on first match. The current "sign"
- * substring bug exists because CERTIFY's regex fires on "design" before DESIGN's
- * regex gets a chance. Fix: use word boundaries (\bsign\b) or reorder patterns.
+ * ORDERING: More specific patterns before more generic ones. The classifier
+ * iterates in order and returns on first match. DESIGN is checked before
+ * CERTIFY because "design" contains "sign" — word boundaries on "sign"
+ * prevent the substring false-match (fixed in Batch 3 retro item #4).
  *
  * Confidence values reflect classification certainty:
  * - 0.9: unambiguous keywords (scout, validate)
@@ -236,11 +247,11 @@ export const DEFAULT_RECORDER_CONFIG: SequenceRecorderConfig = {
 const CLASSIFY_PATTERNS: [RegExp, OperationType, number][] = [
   [/scout|recon/i, 'SCOUT', 0.9],
   [/validate|verify|test/i, 'VALIDATE', 0.9],
-  [/certify|approve|sign/i, 'CERTIFY', 0.8],  // NOTE: "sign" matches before "design" — see classifier quirk
+  [/design|architect/i, 'DESIGN', 0.7],
+  [/certify|approve|\bsign\b/i, 'CERTIFY', 0.8],
   [/govern|standard/i, 'GOVERN', 0.8],
   [/analyze|audit|inspect/i, 'ANALYZE', 0.8],
   [/propose|plan/i, 'PROPOSE', 0.8],
-  [/design|architect/i, 'DESIGN', 0.7],
   [/build|implement|create/i, 'BUILD', 0.7],
 ];
 
@@ -262,6 +273,7 @@ export class SequenceRecorder {
   private store: PatternStore;
   private config: SequenceRecorderConfig;
   private listener: ((signal: CompletionSignal) => void) | null = null;
+  private phaseCompleteListener: ((signal: CompletionSignal) => void) | null = null;
   /** Current step count per arc (sequenceId → step count). Resets on arc completion. */
   private arcSteps: Map<string, number> = new Map();
   /** Historical step counts per agent (agent → [stepCount1, stepCount2, ...]).
@@ -290,13 +302,54 @@ export class SequenceRecorder {
   }
 
   /**
-   * Unregister listener from SignalBus. Idempotent.
+   * Unregister all listeners from SignalBus. Idempotent.
    * Call during application shutdown to allow clean teardown.
    */
   stop(): void {
-    if (!this.listener) return;
-    this.bus.off('completion', this.listener);
-    this.listener = null;
+    if (this.listener) {
+      this.bus.off('completion', this.listener);
+      this.listener = null;
+    }
+    this.stopPhaseCompleteListener();
+  }
+
+  /**
+   * Subscribe to 'phase-complete' events on the SignalBus.
+   * When fired, completes all active arcs — moving their step counts into
+   * arcHistory so future runs can compute compression ratios.
+   *
+   * This closes the Batch 3 gap: completeArc() is now called at phase
+   * boundaries, enabling measurable learning detection across phase runs.
+   *
+   * Idempotent: safe to call multiple times.
+   */
+  startPhaseCompleteListener(): void {
+    if (this.phaseCompleteListener) return;
+    this.phaseCompleteListener = () => {
+      this.completeAllArcs();
+    };
+    this.bus.on('phase-complete', this.phaseCompleteListener);
+  }
+
+  /**
+   * Unregister the phase-complete listener. Idempotent.
+   */
+  stopPhaseCompleteListener(): void {
+    if (!this.phaseCompleteListener) return;
+    this.bus.off('phase-complete', this.phaseCompleteListener);
+    this.phaseCompleteListener = null;
+  }
+
+  /**
+   * Complete all active arcs, recording step counts to arcHistory.
+   * Called by the phase-complete listener. Visible for testing.
+   */
+  completeAllArcs(): void {
+    for (const [sequenceId, steps] of this.arcSteps.entries()) {
+      if (steps === 0) continue;
+      const agent = sequenceId.replace(/^arc-/, '');
+      this.completeArc(sequenceId, agent);
+    }
   }
 
   /**
@@ -450,10 +503,11 @@ export class SequenceRecorder {
   }
 
   /**
-   * Call when an arc completes to record its final step count for compression tracking.
-   * This is the missing piece from Batch 3 — wire this at phase boundaries.
+   * Record an arc's final step count for compression tracking.
+   * Called automatically at phase boundaries via startPhaseCompleteListener(),
+   * or manually for explicit arc completion.
    *
-   * When called, moves the current step count to arcHistory for the agent,
+   * Moves the current step count to arcHistory for the agent,
    * enabling future ratio calculations via computeCompression().
    * Resets the arc's step counter so the next arc starts fresh.
    */

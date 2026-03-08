@@ -90,9 +90,9 @@
  * GLOB PATTERN CONVERSION
  * -----------------------
  * globToFindPattern() handles the mismatch between glob and find syntax.
- * Glob patterns often start with "**/" (any directory depth).
- * find -name doesn't understand "**/" — it takes just the basename pattern.
- * The conversion strips leading "**/" for find compatibility.
+ * Glob patterns often start with "** /" (any directory depth).
+ * find -name doesn't understand "** /" — it takes just the basename pattern.
+ * The conversion strips leading "** /" for find compatibility.
  *
  * This is a simplified conversion. Complex glob patterns (character classes,
  * alternation) may not translate correctly. The dry-run validation catches
