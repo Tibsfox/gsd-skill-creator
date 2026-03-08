@@ -1,0 +1,362 @@
+# Unison Translation Chipset Configuration
+# Derived from www/UNI/ research (28,693 words, 5 modules, 28 sources).
+# Enables GSD agents to understand, write, translate, and deploy Unison code
+# using content-addressed knowledge backed by the deep research study.
+
+schema_version: "1.0"
+
+chipset:
+  name: unison-translation
+  description: >
+    Unison language translation and development chipset. Provides
+    content-addressed code understanding, ability/effect system
+    reference, UCM workflow guidance, distributed computing patterns,
+    and cross-language translation. Derived from 5-module research
+    study with 28 verified sources and full verification pass.
+    6 skills, 4 agents, 1 team. Total token budget: 8.0%.
+  version: "1.0.0"
+  project: gsd-skill-creator
+  created: "2026-03-08"
+  updated: "2026-03-08"
+
+# ==========================================================================
+# Skills — Each backed by a research module
+# ==========================================================================
+
+skills:
+  - name: unison-language-core
+    source: www/UNI/research/01-language-core.md
+    token_budget: "2.0%"
+    priority: 80
+    team: unison-dev
+    agents: [unison-architect]
+    enabled: true
+    dependencies: []
+    description: >
+      Content-addressed code model: SHA3-512 hashing, de Bruijn
+      canonicalization, append-only codebase, build elimination.
+      Covers the foundational "big idea" and its consequences.
+
+  - name: unison-type-system
+    source: www/UNI/research/02-type-system-abilities.md
+    token_budget: "2.0%"
+    priority: 75
+    team: unison-dev
+    agents: [unison-architect]
+    enabled: true
+    dependencies: [unison-language-core]
+    description: >
+      Ability system (algebraic effects), bidirectional type inference,
+      structural vs unique types, built-in abilities (IO, Exception,
+      Abort, Stream, Store, Remote), handler mechanics, effect system
+      comparison across 6 languages x 8 dimensions.
+
+  - name: unison-tooling
+    source: www/UNI/research/03-tooling-workflow.md
+    token_budget: "1.5%"
+    priority: 70
+    team: unison-dev
+    agents: [unison-workflow]
+    enabled: true
+    dependencies: [unison-language-core]
+    description: >
+      UCM commands and workflow, projects/branches, scratch file
+      pipeline, watch expressions, MCP server integration, LSP,
+      Desktop app. Full scratch-to-publish pipeline reference.
+
+  - name: unison-distributed
+    source: www/UNI/research/04-distributed-computing.md
+    token_budget: "1.5%"
+    priority: 65
+    team: unison-dev
+    agents: [unison-cloud-specialist]
+    enabled: true
+    dependencies: [unison-language-core, unison-type-system]
+    description: >
+      Code mobility, Unison Cloud architecture, BYOC deployment,
+      typed RPC, distributed data structures (Seq, OrderedTable,
+      streaming). Includes deployment examples and infrastructure
+      comparison. Cloud platform is PROPRIETARY.
+
+  - name: unison-ecosystem
+    source: www/UNI/research/05-ecosystem-adoption.md
+    token_budget: "0.5%"
+    priority: 50
+    team: unison-dev
+    agents: [unison-workflow]
+    enabled: true
+    dependencies: []
+    description: >
+      Ecosystem metrics, Unison Share, community assessment,
+      adoption barriers (7 identified), related language comparison,
+      2026 roadmap. All metrics source-attributed with dates.
+
+  - name: unison-synthesis
+    source: www/UNI/research/06-synthesis.md
+    token_budget: "0.5%"
+    priority: 60
+    team: unison-dev
+    agents: [unison-architect]
+    enabled: true
+    dependencies:
+      - unison-language-core
+      - unison-type-system
+      - unison-tooling
+      - unison-distributed
+      - unison-ecosystem
+    description: >
+      Cross-module cascade narrative: how content-addressing
+      produces 7 emergent properties across all domains. Gap
+      analysis with 6 identified unknowns. Loaded for complex
+      questions requiring cross-cutting understanding.
+
+# ==========================================================================
+# Agents — Specialized Unison development roles
+# ==========================================================================
+
+agents:
+  - name: unison-architect
+    description: >
+      Understands Unison's content-addressed architecture at depth.
+      Explains how hashing, canonicalization, and the codebase model
+      create emergent properties. Handles language design questions,
+      ability system guidance, and cross-language comparison.
+    skills:
+      - unison-language-core
+      - unison-type-system
+      - unison-synthesis
+    team: unison-dev
+    model: opus
+    tools: "Read, Glob, Grep, WebFetch"
+
+  - name: unison-workflow
+    description: >
+      Guides developers through UCM workflow, project setup, code
+      organization, and publishing. Knows the scratch-to-publish
+      pipeline, editor integration, and MCP server capabilities.
+      Provides ecosystem context for library selection.
+    skills:
+      - unison-tooling
+      - unison-ecosystem
+    team: unison-dev
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: unison-cloud-specialist
+    description: >
+      Handles distributed computing patterns: deployment, typed RPC,
+      BYOC setup, distributed data structures. Knows the boundary
+      between MIT-licensed language and proprietary cloud platform.
+      Marks vendor claims appropriately.
+    skills:
+      - unison-distributed
+      - unison-language-core
+    team: unison-dev
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep, WebFetch"
+
+  - name: unison-translator
+    description: >
+      Translates code patterns between Unison and other languages
+      (Haskell, TypeScript, Rust, Python, Erlang). Maps concepts:
+      monads → abilities, build systems → content-addressing,
+      containers → code mobility, package managers → Unison Share.
+      Uses all skills for comprehensive translation context.
+    skills:
+      - unison-language-core
+      - unison-type-system
+      - unison-tooling
+      - unison-distributed
+    team: unison-dev
+    model: opus
+    tools: "Read, Write, Glob, Grep"
+
+# ==========================================================================
+# Team
+# ==========================================================================
+
+teams:
+  - name: unison-dev
+    description: >
+      Unison language development and translation team. Provides
+      comprehensive Unison knowledge from content-addressed
+      architecture through distributed deployment.
+    topology: router
+    lead_agent: unison-architect
+    members:
+      - unison-architect
+      - unison-workflow
+      - unison-cloud-specialist
+      - unison-translator
+    resource_locks:
+      - "www/UNI/**"
+    sync_points:
+      - event: "translation-complete"
+        action: "Signal that code translation is ready for review"
+      - event: "deployment-plan-ready"
+        action: "Signal that Unison Cloud deployment plan is drafted"
+    message_bus: ".planning/artifacts/unison-dev/"
+
+# ==========================================================================
+# Routing — Intent-based dispatch
+# ==========================================================================
+
+routing:
+  rules:
+    - intent_pattern: "unison.*content.?address|hash.*code|codebase.*database|build.*eliminat"
+      team: unison-dev
+      agents: [unison-architect]
+      skills: [unison-language-core, unison-synthesis]
+      priority: 80
+      description: "Content-addressed architecture and foundational concepts"
+
+    - intent_pattern: "abilit|algebraic.*effect|handler|monadic|effect.*system|type.*system.*unison"
+      team: unison-dev
+      agents: [unison-architect]
+      skills: [unison-type-system]
+      priority: 75
+      description: "Ability system, algebraic effects, type inference, handler mechanics"
+
+    - intent_pattern: "ucm|codebase.*manager|scratch.*file|unison.*share|publish.*unison|unison.*project"
+      team: unison-dev
+      agents: [unison-workflow]
+      skills: [unison-tooling]
+      priority: 70
+      description: "UCM workflow, project management, publishing, MCP server"
+
+    - intent_pattern: "unison.*cloud|byoc|deploy.*unison|remote.*abilit|typed.*rpc|code.*mobil"
+      team: unison-dev
+      agents: [unison-cloud-specialist]
+      skills: [unison-distributed]
+      priority: 65
+      description: "Distributed computing, Unison Cloud, BYOC, deployment"
+
+    - intent_pattern: "translate.*unison|unison.*from|convert.*to.*unison|port.*to.*unison|haskell.*unison|typescript.*unison"
+      team: unison-dev
+      agents: [unison-translator]
+      skills: [unison-language-core, unison-type-system, unison-tooling]
+      priority: 85
+      description: "Cross-language translation to/from Unison"
+
+    - intent_pattern: "unison.*ecosystem|unison.*adopt|unison.*barrier|unison.*communit|unison.*roadmap"
+      team: unison-dev
+      agents: [unison-workflow]
+      skills: [unison-ecosystem]
+      priority: 50
+      description: "Ecosystem assessment, adoption analysis, community metrics"
+
+    - intent_pattern: "unison"
+      team: unison-dev
+      agents: [unison-architect]
+      skills: [unison-language-core]
+      priority: 10
+      description: "General Unison catch-all routes to architect"
+
+  default_team: unison-dev
+
+  disambiguation:
+    - patterns: ["abilit|effect", "type.*system"]
+      strategy: specificity
+      winner: "unison-type-system for effect/ability questions, unison-language-core for general type questions"
+      rationale: >
+        Abilities are Module 2 (type-system); general language questions
+        about types, hashing, and storage are Module 1 (language-core).
+
+    - patterns: ["deploy|cloud", "translat|convert"]
+      strategy: priority
+      winner: "unison-translator for cross-language work, unison-cloud-specialist for deployment"
+      rationale: >
+        Translation involves mapping concepts across languages;
+        deployment involves Unison Cloud/BYOC infrastructure.
+
+    - patterns: ["ucm|workflow", "ecosystem|share"]
+      strategy: specificity
+      winner: "unison-tooling for UCM mechanics, unison-ecosystem for community/adoption"
+      rationale: >
+        UCM workflow is Module 3 (tooling); ecosystem assessment
+        is Module 5 (ecosystem). Both handled by unison-workflow agent.
+
+# ==========================================================================
+# Safety Gates — Inherited from research verification
+# ==========================================================================
+# The underlying research passed all 5 safety gates (07-verification.md):
+#   SC-SRC: PASS — all citations traceable to official/professional sources
+#   SC-NUM: PASS — all metrics source-attributed with dates
+#   SC-ADV: PASS — no advocacy, factual presentation
+#   SC-VND: PASS — vendor claims tagged [VENDOR-CLAIM]
+#   SC-OSS: PASS — MIT language vs proprietary Cloud distinguished
+#
+# Agents using this chipset MUST:
+#   1. Propagate [VENDOR-CLAIM] tags on Unison Computing self-reported claims
+#   2. Distinguish MIT-licensed language from proprietary Cloud platform
+#   3. Present Unison factually without advocating for or against adoption
+#   4. Note that community metrics are point-in-time (early 2026)
+#   5. Acknowledge gap analysis findings (Section S.3) when relevant
+
+# ==========================================================================
+# Translation Patterns — Cross-language concept mapping
+# ==========================================================================
+# These mappings guide the unison-translator agent:
+#
+# Haskell → Unison:
+#   IO monad         → IO ability
+#   Monad transformers → Ability composition (union, not stack)
+#   do-notation      → Direct-style effectful code
+#   cabal/stack      → UCM + Unison Share
+#   Hackage          → Unison Share
+#   .hs files        → Codebase database (no files)
+#   build step       → None (eliminated)
+#
+# TypeScript → Unison:
+#   npm/yarn         → lib.install + Unison Share
+#   package.json     → None (content-addressed deps)
+#   try/catch        → Exception ability + handlers
+#   async/await      → IO ability (direct style)
+#   Docker + K8s     → deployHttp (function call)
+#   .ts files        → Codebase database
+#   tsc              → None (eliminated)
+#
+# Rust → Unison:
+#   Cargo            → UCM (no build step)
+#   crates.io        → Unison Share
+#   Result<T,E>      → Exception ability
+#   trait             → Ability (for effect-like patterns)
+#   ownership        → GC (no ownership model)
+#   compile time     → Zero (content-addressed)
+#
+# Erlang/OTP → Unison:
+#   Actor model      → Abilities + Remote
+#   gen_server       → Ability handlers
+#   hot code reload  → Hash-based (automatic)
+#   BEAM VM          → Unison runtime
+#   message passing  → Typed RPC
+#   OTP supervisor   → Unison Cloud service graph
+
+# ==========================================================================
+# Budget
+# ==========================================================================
+
+budget:
+  ceiling_percent: 40
+  headroom_percent: 32
+  skill_budgets:
+    unison-language-core: "2.0%"
+    unison-type-system: "2.0%"
+    unison-tooling: "1.5%"
+    unison-distributed: "1.5%"
+    unison-ecosystem: "0.5%"
+    unison-synthesis: "0.5%"
+  team_budgets:
+    unison-dev: "8.0%"
+  loading_order:
+    # Level 0: No dependencies
+    - unison-language-core
+    - unison-ecosystem
+    # Level 1: Depends on language-core
+    - unison-type-system
+    - unison-tooling
+    # Level 2: Depends on core + type-system
+    - unison-distributed
+    # Level 3: Depends on all modules
+    - unison-synthesis
+  total_allocated: "8.0%"
