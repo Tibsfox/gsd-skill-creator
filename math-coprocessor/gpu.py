@@ -152,17 +152,88 @@ def cuda_free(ptr: ctypes.c_void_p):
 
 
 def cuda_memcpy_h2d(dst: ctypes.c_void_p, src, size: int):
-    """Host to device."""
+    """Host to device. Wraps src as c_void_p to prevent 64-bit truncation."""
     if _cudart:
-        _cudart.cudaMemcpy(dst, src, ctypes.c_size_t(size), 1)
+        _cudart.cudaMemcpy(dst, ctypes.c_void_p(src), ctypes.c_size_t(size), 1)
 
 
 def cuda_memcpy_d2h(dst, src: ctypes.c_void_p, size: int):
-    """Device to host."""
+    """Device to host. Wraps dst as c_void_p to prevent 64-bit truncation."""
     if _cudart:
-        _cudart.cudaMemcpy(dst, src, ctypes.c_size_t(size), 2)
+        _cudart.cudaMemcpy(ctypes.c_void_p(dst), src, ctypes.c_size_t(size), 2)
 
 
 def cuda_synchronize():
     if _cudart:
         _cudart.cudaDeviceSynchronize()
+
+
+# cuFFT constants
+CUFFT_C2C = 0x29
+CUFFT_Z2Z = 0x69
+CUFFT_FORWARD = -1
+CUFFT_INVERSE = 1
+
+
+# cuFFT plan management
+def cufft_plan_1d(n: int, fft_type: int) -> cufftHandle | None:
+    """Create a 1D FFT plan."""
+    if _cufft is None:
+        return None
+    plan = cufftHandle()
+    status = _cufft.cufftPlan1d(ctypes.byref(plan), n, fft_type, 1)
+    return plan if status == 0 else None
+
+
+def cufft_exec_z2z(plan: cufftHandle, d_in, d_out, direction: int) -> bool:
+    if _cufft is None:
+        return False
+    return _cufft.cufftExecZ2Z(plan, d_in, d_out, direction) == 0
+
+
+def cufft_exec_c2c(plan: cufftHandle, d_in, d_out, direction: int) -> bool:
+    if _cufft is None:
+        return False
+    return _cufft.cufftExecC2C(plan, d_in, d_out, direction) == 0
+
+
+def cufft_destroy(plan: cufftHandle):
+    if _cufft and plan:
+        _cufft.cufftDestroy(plan)
+
+
+# cuRAND constants
+CURAND_RNG_PSEUDO_DEFAULT = 100
+
+
+# cuRAND generator management
+def curand_create(rng_type: int = CURAND_RNG_PSEUDO_DEFAULT) -> curandGenerator_t | None:
+    if _curand is None:
+        return None
+    gen = curandGenerator_t()
+    status = _curand.curandCreateGenerator(ctypes.byref(gen), rng_type)
+    return gen if status == 0 else None
+
+
+def curand_set_seed(gen: curandGenerator_t, seed: int):
+    if _curand and gen:
+        _curand.curandSetPseudoRandomGeneratorSeed(gen, ctypes.c_ulonglong(seed))
+
+
+def curand_generate_uniform_double(gen: curandGenerator_t, ptr: ctypes.c_void_p, n: int) -> bool:
+    """Generate n uniform doubles on GPU. n must be even."""
+    if _curand and gen:
+        return _curand.curandGenerateUniformDouble(gen, ptr, ctypes.c_size_t(n)) == 0
+    return False
+
+
+def curand_generate_uniform(gen: curandGenerator_t, ptr: ctypes.c_void_p, n: int) -> bool:
+    """Generate n uniform floats on GPU. n must be even."""
+    if _curand and gen:
+        return _curand.curandGenerateUniform(gen, ptr, ctypes.c_size_t(n)) == 0
+    return False
+
+
+def curand_destroy(gen: curandGenerator_t):
+    if _curand and gen:
+        _curand.curandDestroyGenerator(gen)
