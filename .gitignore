@@ -60,6 +60,14 @@ assets/*.mp4
 assets/*.png
 !assets/.gitkeep
 
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
 # User-local config
 .sc-config.json
 
