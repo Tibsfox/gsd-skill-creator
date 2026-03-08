@@ -72,15 +72,23 @@ function makeResult(overrides: Partial<OffloadResult> = {}): OffloadResult {
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   return {
     sessionId: overrides.sessionId ?? 'session-001',
-    startedAt: overrides.startedAt ?? '2026-01-01T00:00:00Z',
-    endedAt: overrides.endedAt ?? '2026-01-01T01:00:00Z',
+    startTime: overrides.startTime ?? 0,
+    endTime: overrides.endTime ?? 3600000,
     durationMinutes: overrides.durationMinutes ?? 60,
-    toolCalls: overrides.toolCalls ?? 10,
-    filesRead: overrides.filesRead ?? [],
-    filesWritten: overrides.filesWritten ?? [],
-    commandsRun: overrides.commandsRun ?? [],
-    topPatterns: overrides.topPatterns ?? [],
-    engagementScore: overrides.engagementScore ?? 0.8,
+    source: overrides.source ?? 'startup',
+    reason: overrides.reason ?? 'other',
+    metrics: overrides.metrics ?? {
+      userMessages: 5,
+      assistantMessages: 5,
+      toolCalls: 10,
+      uniqueFilesRead: 3,
+      uniqueFilesWritten: 2,
+      uniqueCommandsRun: 4,
+    },
+    topCommands: overrides.topCommands ?? [],
+    topFiles: overrides.topFiles ?? [],
+    topTools: overrides.topTools ?? [],
+    activeSkills: overrides.activeSkills ?? [],
     ...overrides,
   };
 }
@@ -207,24 +215,17 @@ describe('Honest Uncertainty: Classifier Default', () => {
 
   it('classifier quirk is documented and testable: "sign" matches before "design"', () => {
     // This test exists to document a known uncertainty in the system.
-    // The classifier has a known quirk: "sign" inside "design" matches CERTIFY
-    // before DESIGN gets a chance to match.
-    //
-    // This is honest: the quirk is documented in sequence-recorder.ts AND in
-    // e2e-mini-batch.test.ts. We don't pretend it doesn't exist.
-    // Foxy's teaching: "The most rigorous thing is reality. If it works, it works."
-    // See: BATCH-3-RETROSPECTIVE.md, Willow's debrief, for the full analysis.
+    // Former quirk (fixed): "sign" inside "design" used to match CERTIFY.
+    // Fixed by reordering DESIGN before CERTIFY and using \bsign\b word boundary.
+    // The test now verifies the correct behavior.
 
     const signal = createCompletionSignal(makeResult({
-      operationId: 'foxy:design-layout',  // contains "sign" → triggers CERTIFY quirk
+      operationId: 'foxy:design-layout',
     }));
     const result = recorder.classify(signal);
 
-    // Document the known behavior (not the intended behavior)
-    // This is honest uncertainty in documentation form: we know this exists
-    expect(result.type).toBe('CERTIFY');  // Known quirk — "sign" in "design"
-    expect(result.confidence).toBe(0.8);  // CERTIFY confidence
-    // See sequence-recorder.ts: fix is word boundary (\bsign\b)
+    expect(result.type).toBe('DESIGN');
+    expect(result.confidence).toBe(0.7);
   });
 });
 
@@ -310,7 +311,10 @@ describe('Honest Uncertainty: Rate Limiter Transparency', () => {
     // See rate-limiter.ts: "Anomalies are reported via AnomalyReport, not thrown."
 
     const observations: SessionObservation[] = [
-      makeObservation({ sessionId: 'session-001', toolCalls: 200 }),  // tool-call-spike
+      makeObservation({ sessionId: 'session-001', metrics: {
+        userMessages: 5, assistantMessages: 5, toolCalls: 200,
+        uniqueFilesRead: 3, uniqueFilesWritten: 2, uniqueCommandsRun: 4,
+      } }),  // high tool-call count
     ];
     const report = detectAnomalies(observations);
 

@@ -4,8 +4,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { PackDocumentSchema, type PackDocument } from './pack-types';
-import { PackLoader } from './pack-loader';
+import { PackDocumentSchema, type PackDocument } from './pack-types.js';
+import { PackLoader } from './pack-loader.js';
 
 export class PackCLI {
   private loader: PackLoader;
@@ -129,7 +129,7 @@ export class PackCLI {
 
 **Type:** ${options.type}
 **Author:** ${options.author}
-**Duration:** ${packScaffold.estimated_duration?.min_hours}-${packScaffold.estimated_duration?.max_hours} hours
+**Duration:** ${packScaffold.metadata?.estimated_duration?.min_hours}-${packScaffold.metadata?.estimated_duration?.max_hours} hours
 
 ## Overview
 
@@ -182,7 +182,7 @@ Scaffold created. Edit PACK.json to define phases, objectives, and assessments.
     const packs = this.loader.listPacks();
 
     return Promise.all(
-      packs.map(async id => {
+      packs.map(async (id: string) => {
         try {
           const pack = await this.loader.loadPack(id);
           return {

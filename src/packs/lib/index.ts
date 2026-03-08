@@ -7,6 +7,6 @@
  * - PackCLI for creating and managing packs
  */
 
-export * from './pack-types';
-export { PackLoader } from './pack-loader';
-export { PackCLI } from './pack-cli';
+export * from './pack-types.js';
+export { PackLoader } from './pack-loader.js';
+export { PackCLI } from './pack-cli.js';

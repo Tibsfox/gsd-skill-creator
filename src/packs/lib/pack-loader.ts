@@ -4,7 +4,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { PackDocumentSchema, PackProgressSchema, type PackDocument, type PackProgress } from './pack-types';
+import { PackDocumentSchema, PackProgressSchema, type PackDocument, type PackProgress } from './pack-types.js';
 
 export class PackLoader {
   private packsDir: string;

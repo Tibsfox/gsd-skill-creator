@@ -288,8 +288,8 @@ describe('Separation of Concerns: Module Isolation Across 23 Observation Modules
     // Cedar's role: verify all connections are documented and real.
 
     const standaloneStore = new PatternStore(tmpDir);
-    await standaloneStore.append('test-category', { value: 'standalone-proof' });
-    const records = await standaloneStore.read('test-category');
+    await standaloneStore.append('events', { value: 'standalone-proof' });
+    const records = await standaloneStore.read('events');
 
     expect(records.length).toBe(1);
     expect((records[0].data as Record<string, unknown>).value).toBe('standalone-proof');

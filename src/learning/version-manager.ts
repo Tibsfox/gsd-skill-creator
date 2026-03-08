@@ -1,8 +1,8 @@
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 import { SkillVersion } from '../core/types/learning.js';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 export interface RollbackResult {
   success: boolean;
@@ -26,10 +26,11 @@ export class VersionManager {
   }
 
   /**
-   * Run a git command in the work directory
+   * Run a git command in the work directory.
+   * Accepts an array of arguments (no shell interpolation).
    */
-  private async git(command: string): Promise<string> {
-    const { stdout } = await execAsync(command, {
+  private async git(...args: string[]): Promise<string> {
+    const { stdout } = await execFileAsync('git', args, {
       encoding: 'utf8',
       cwd: this.workDir,
     });
@@ -44,7 +45,7 @@ export class VersionManager {
 
     try {
       const stdout = await this.git(
-        `git log --format="%H|%h|%ai|%s" --follow -- "${skillPath}"`
+        'log', '--format=%H|%h|%ai|%s', '--follow', '--', skillPath
       );
 
       if (!stdout.trim()) {
@@ -88,7 +89,7 @@ export class VersionManager {
     const skillPath = `${this.skillsDir}/${skillName}/SKILL.md`;
 
     try {
-      return await this.git(`git show ${hash}:"${skillPath}"`);
+      return await this.git('show', `${hash}:${skillPath}`);
     } catch (err) {
       const error = err as { message?: string };
       if (error.message?.includes('does not exist') || error.message?.includes('invalid object name')) {
@@ -120,14 +121,14 @@ export class VersionManager {
       }
 
       // Checkout the file at target version
-      await this.git(`git checkout ${targetHash} -- "${skillPath}"`);
+      await this.git('checkout', targetHash, '--', skillPath);
 
       // Stage the change
-      await this.git(`git add "${skillPath}"`);
+      await this.git('add', skillPath);
 
       // Commit the rollback
       const commitMessage = `rollback(${skillName}): revert to ${targetHash.slice(0, 7)}`;
-      await this.git(`git commit -m "${commitMessage}"`);
+      await this.git('commit', '-m', commitMessage);
 
       // Get new hash
       const newHash = await this.getCurrentHash(skillName);
@@ -154,7 +155,7 @@ export class VersionManager {
     const skillPath = `${this.skillsDir}/${skillName}/SKILL.md`;
 
     try {
-      return await this.git(`git diff ${hash1} ${hash2} -- "${skillPath}"`);
+      return await this.git('diff', hash1, hash2, '--', skillPath);
     } catch (err) {
       const error = err as { message?: string };
       throw new Error(`Failed to compare versions: ${error.message}`);
@@ -168,7 +169,7 @@ export class VersionManager {
     const skillPath = `${this.skillsDir}/${skillName}/SKILL.md`;
 
     try {
-      const stdout = await this.git(`git log -1 --format="%H" -- "${skillPath}"`);
+      const stdout = await this.git('log', '-1', '--format=%H', '--', skillPath);
       return stdout.trim() || null;
     } catch {
       return null;

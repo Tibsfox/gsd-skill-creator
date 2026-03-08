@@ -352,10 +352,10 @@ describe('Sustainable Pace: Storage Health Under Use', () => {
     const writes = 20;
 
     for (let i = 0; i < writes; i++) {
-      await store.append('sequential-test', { n: i });
+      await store.append('events', { n: i });
     }
 
-    const records = await store.read('sequential-test');
+    const records = await store.read('events');
     expect(records.length).toBe(writes);
   });
 });

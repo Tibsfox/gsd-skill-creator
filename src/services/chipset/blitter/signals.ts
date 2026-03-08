@@ -104,16 +104,17 @@ export class SignalBus {
   }
 
   /**
-   * Emit a completion signal, notifying all registered listeners.
+   * Emit a signal, notifying all registered listeners for the given event type.
    *
    * Persistent listeners (on) are called first, then one-time
    * listeners (once) are called and removed.
    *
    * @param signal - The completion signal to broadcast
+   * @param event - Event type to emit on (defaults to 'completion' for backward compatibility)
    */
-  emit(signal: CompletionSignal): void {
+  emit(signal: CompletionSignal, event: string = 'completion'): void {
     // Notify persistent listeners
-    const persistent = this.listeners.get('completion');
+    const persistent = this.listeners.get(event);
     if (persistent) {
       for (const cb of persistent) {
         cb(signal);
@@ -121,12 +122,12 @@ export class SignalBus {
     }
 
     // Notify and remove once-listeners
-    const oneTime = this.onceListeners.get('completion');
+    const oneTime = this.onceListeners.get(event);
     if (oneTime) {
       for (const cb of oneTime) {
         cb(signal);
       }
-      this.onceListeners.delete('completion');
+      this.onceListeners.delete(event);
     }
   }
 
