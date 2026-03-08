@@ -1,0 +1,1031 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Engineering/Construction ===
+\definecolor{primary}{HTML}{263238}       % Steel blue — section headers
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — subsection headers
+\definecolor{tertiary}{HTML}{4E342E}      % Earth brown — subsubsection headers
+\definecolor{accent}{HTML}{FF6F00}        % Construction orange — highlights, arrows
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Building Construction Mastery}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Building Construction Mastery -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Building Construction\\[0.3em]Materials \& Techniques Mastery}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Complete Homeowner's \& Engineer's Knowledge System}}
+
+\vspace{0.3cm}
+{\large\sffamily\textcolor{tertiary}{Pacific Northwest Region Focus}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Multidimensional Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 42 context windows across 8 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Building Construction Mastery --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{gsd-skill-creator v1.x, GSD Framework}
+\metafield{Context:}{Multidimensional construction knowledge system for educational content generation, homeowner guidance, and engineering reference integrated into the GSD skill ecosystem}
+
+\subsection{Vision}
+
+Every building tells a story written in materials, fasteners, and code compliance. From the mudsill bolted to a seismically anchored foundation in Portland to the ridge beam of a timber-framed cabin in the Cascades, construction is the intersection of physics, regulation, craft, and human shelter. Yet this knowledge exists in silos --- plumbers know pipe but not load paths, electricians know circuits but not vapor barriers, homeowners know their leaking roof but not the rainscreen assembly behind their siding.
+
+This mission constructs a multidimensional knowledge architecture that maps construction materials, techniques, systems, and codes across every axis that matters: building size (from ADUs to commercial high-rises), building style (from Craftsman bungalows to modern mass-timber), trade discipline (structural, mechanical, electrical, plumbing, envelope), lifecycle phase (new construction, maintenance, repair, remodel), and audience depth (homeowner fundamentals through PE-exam engineering). The Pacific Northwest serves as the regional anchor --- its seismic zones, marine climate moisture challenges, wildfire interface requirements, and progressive energy codes make it among the most demanding building environments in North America.
+
+The system is designed to generate educational content at every level: from the complete homeowner's guide (``Why is my crawlspace wet and what do I do about it?'') to college-level civil and architectural engineering curricula aligned with ABET accreditation standards, to professional-grade blueprinting and code compliance references. Every parameter carries dimensional metadata so GSD agents can generate content tuned to audience, region, trade, and complexity.
+
+This is architectural leverage in the truest sense of the Amiga Principle --- a single well-structured knowledge system that can produce thousands of distinct, accurate, audience-appropriate documents without redundant research. The spaces between trades, between codes, between the homeowner's flashlight-in-the-crawlspace and the engineer's ASCE 41 evaluation --- that is where this system lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented Trade Knowledge:} Construction knowledge is siloed by trade discipline. Plumbing, electrical, HVAC, structural, and envelope systems are documented independently, obscuring critical interdependencies (e.g., how a plumbing penetration through a fire-rated assembly affects both fire code and moisture management).
+
+\item \textbf{Audience-Depth Mismatch:} Existing resources are either oversimplified homeowner guides that omit critical safety information, or impenetrable code documents written for licensed professionals. No single system scales from ``what is a GFCI outlet'' to ``calculate the available fault current for service entrance equipment per NEC 230.67.''
+
+\item \textbf{Regional Code Complexity:} The Pacific Northwest operates under layered code frameworks --- Oregon uses the OSSC (based on IBC 2024, effective Oct 2025) and ORSC (based on IRC 2021), while Washington uses the State Building Code (2021 IBC edition, effective March 2024). Local amendments (Portland Ch. 24.85 seismic, Seattle prescriptive retrofit) add further complexity. No existing educational system maps these layers coherently.
+
+\item \textbf{Lifecycle Coverage Gaps:} Most construction references address new construction. Maintenance schedules, diagnostic procedures for existing problems, repair techniques, code-triggered upgrade requirements during remodels, and adaptive reuse considerations are poorly documented, especially for the PNW's aging housing stock (pre-1974 un-anchored foundations, pre-1993 non-seismic construction).
+
+\item \textbf{Engineering Education Disconnect:} ABET-accredited programs require coverage of building structures, mechanical systems, electrical systems, and construction management, but textbook content rarely connects to regional code specifics or practical field conditions. Students graduate knowing beam theory but not how Oregon's wind speed amendments affect shear wall design in the Columbia Gorge.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} A six-dimensional parametric knowledge graph mapping construction materials, techniques, codes, and systems across trade discipline, building scale, building style, lifecycle phase, audience depth, and PNW regional specificity --- generating educational and reference content from homeowner basics through engineering licensure.
+\end{quotebox}
+
+The six dimensions are:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Trade Discipline} --- Structural, Electrical, Plumbing, Mechanical/HVAC, Envelope/Weatherproofing, Fire/Life Safety
+\item \textbf{Building Scale} --- ADU/Tiny, Single-Family Residential, Multi-Family (duplex through mid-rise), Commercial (office, retail, industrial), Institutional (schools, hospitals)
+\item \textbf{Building Style} --- Wood-frame (platform, balloon, post-and-beam), Mass timber (CLT, glulam), Steel frame, Concrete (cast-in-place, tilt-up, CMU), Hybrid systems
+\item \textbf{Lifecycle Phase} --- Design/Blueprinting, New Construction, Inspection/Commissioning, Maintenance, Repair, Remodel/Retrofit, Adaptive Reuse, Demolition
+\item \textbf{Audience Depth} --- Homeowner (L1), Skilled DIY (L2), Apprentice/Trade Student (L3), Journeyman/Contractor (L4), Engineer/Architect (L5)
+\item \textbf{Regional Specificity} --- PNW Climate Zones 4C/5B, Seismic Design Categories D1/D2, Cascadia Subduction Zone, Wildfire-Urban Interface, Marine moisture climate
+\end{enumerate}
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+BUILDING CONSTRUCTION MASTERY -- DOMAIN MAP
+
+    TRADE DISCIPLINES (Vertical Integration)
+    ==========================================
+    [STRUCTURAL] [ELECTRICAL] [PLUMBING] [MECHANICAL] [ENVELOPE] [FIRE/LIFE]
+         |            |           |           |            |          |
+         +-----+------+-----------+-----------+-----+------+----------+
+               |                                    |
+         [MATERIALS SCIENCE]              [BUILDING CODES LAYER]
+         - Wood / Timber                  - IBC 2024 / IRC 2021
+         - Concrete / Masonry             - NEC 2023 (NFPA 70)
+         - Steel / Metals                 - UPC 2021 (IAPMO)
+         - Polymers / Composites          - IMC / IFGC
+         - Insulation / Membranes         - OSSC 2025 / ORSC 2023
+         - Fasteners / Adhesives          - WA SBC (WAC 51-xx)
+               |                                    |
+         +-----+------------------------------------+-----+
+               |                                          |
+    [LIFECYCLE PHASES]                        [AUDIENCE DEPTH]
+    - Design & Blueprint                     - L1: Homeowner
+    - New Construction                       - L2: DIY / Handy
+    - Maintenance / Inspection               - L3: Trade Student
+    - Repair / Diagnostic                    - L4: Contractor
+    - Remodel / Retrofit                     - L5: PE / Architect
+    - Adaptive Reuse
+               |
+    [PNW REGIONAL SPECIFICS]
+    - Seismic (Cascadia CSZ, local faults)
+    - Moisture (marine climate, rain screen)
+    - Energy (WSEC, OEESC, climate zones)
+    - Wildfire (WUI interface codes)
+    - Snow/Wind (gorge, mountain, coast)
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+MODULE ARCHITECTURE -- 6 RESEARCH MODULES
+
+  +=====================+     +=====================+
+  | M1: STRUCTURAL &    |     | M2: ELECTRICAL      |
+  |     MATERIALS       |     |     SYSTEMS         |
+  | - Load paths        |     | - NEC 2023 mapping  |
+  | - Wood/steel/conc   |     | - Service/distrib   |
+  | - Seismic design    |     | - GFCI/AFCI/SPD     |
+  | - Foundation types  |     | - Panel sizing      |
+  | - Engineering calc  |     | - PNW amendments    |
+  +=========+===========+     +=========+===========+
+            |                           |
+  +---------+---------------------------+---------+
+  |                                               |
+  +=====================+     +=====================+
+  | M3: PLUMBING &      |     | M4: ENVELOPE &      |
+  |     MECHANICAL      |     |     WEATHERPROOFING  |
+  | - UPC mapping       |     | - Rain screen sys   |
+  | - DWV systems       |     | - WRB/flashing      |
+  | - Water supply      |     | - Insulation types  |
+  | - HVAC integration  |     | - Roofing systems   |
+  | - IMC/IFGC          |     | - PNW moisture mgmt |
+  +=========+===========+     +=========+===========+
+            |                           |
+  +---------+---------------------------+---------+
+  |                                               |
+  +=====================+     +=====================+
+  | M5: CODES, STANDARDS|     | M6: EDUCATIONAL     |
+  |     & BLUEPRINTING  |     |     FRAMEWORKS      |
+  | - IBC/IRC mapping   |     | - ABET alignment    |
+  | - OSSC/ORSC/WA SBC  |     | - Homeowner guide   |
+  | - Permit process    |     | - College curricula |
+  | - Blueprint reading |     | - Trade programs    |
+  | - Inspection checks |     | - CE/PE prep        |
+  +=====================+     +=====================+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Structural Systems \& Materials Science}
+
+Core structural systems across all building scales: wood-frame platform and balloon framing, post-and-beam, mass timber (CLT, glulam, NLT), structural steel (moment frames, braced frames), reinforced concrete (cast-in-place, precast, tilt-up), masonry (CMU, reinforced brick). Materials science fundamentals: wood species properties (Douglas fir, Western red cedar --- PNW-dominant), steel grades, concrete mix design, fastener metallurgy. Foundation types from spread footings to deep piles. Seismic design per ASCE 7 and ASCE 41 for the Cascadia Subduction Zone. Load path analysis from ridge to footing. Engineering calculations at L5 depth with simplified explanations at L1--L3.
+
+\subsubsection{M2: Electrical Systems}
+
+Complete NEC 2023 (NFPA 70) mapping from service entrance through branch circuits. Service sizing calculations for residential and commercial. Panel layout, circuit design, conductor sizing (ampacity tables), overcurrent protection. GFCI requirements (expanded kitchen coverage in 2023 NEC 210.8), AFCI requirements, surge protection (NEC 230.67 --- new for 2023). Oregon Electrical Specialty Code (2023 OESC) and Washington state electrical amendments. Low-voltage systems, EV charging infrastructure (NEC Article 625), solar PV (Article 690), energy storage (Article 706). Grounding and bonding per Article 250. Emergency disconnect requirements (NEC 230.85). Diagnostic procedures for existing electrical systems, upgrade pathways, and permit requirements.
+
+\subsubsection{M3: Plumbing \& Mechanical Systems}
+
+Uniform Plumbing Code (UPC 2021, IAPMO/ANSI) mapping for Washington state (WAC 51-56) --- note Oregon adopts Oregon Plumbing Specialty Code. Drain-waste-vent (DWV) system design: fixture unit calculations, pipe sizing, trap requirements, venting configurations. Water supply and distribution: pipe materials (copper, PEX, CPVC), sizing by fixture demand, backflow prevention per WAC 246-292. Water heater installation and venting. HVAC integration: International Mechanical Code, forced air, hydronic, heat pump systems (ductless mini-splits dominant in PNW retrofits). Fuel gas per IFGC. Peak Water Demand Calculator methodology (2021 UPC advancement). Maintenance schedules, diagnostic procedures for common failures, and repair/replacement standards.
+
+\subsubsection{M4: Building Envelope \& Weatherproofing}
+
+Critical for PNW marine climate: rain screen wall assemblies (air gap, WRB, drainage plane), weather-resistive barriers (house wraps, self-adhering membranes), flashing details at penetrations and transitions. Roofing systems: composition shingle, standing seam metal, membrane (TPO, EPDM), tile, green roofs. Wall cladding: fiber cement, wood siding, stucco (with PNW-specific drainage requirements per IRC R703.7.3), brick veneer, metal panel. Insulation types and R-value requirements per climate zone 4C/5B: fiberglass batt, blown cellulose, spray foam (open vs closed cell), rigid board (XPS, EPS, polyiso), mineral wool. Vapor retarder strategies for PNW (Class III typically appropriate). Window and door installation with pan flashing. Oregon Energy Efficiency Specialty Code (OEESC 2025) and Washington State Energy Code (WSEC-R 2021). Air sealing and blower-door testing. Wildfire-urban interface construction per ORSC R327 and WA WAC 51-55.
+
+\subsubsection{M5: Codes, Standards \& Blueprinting}
+
+Complete mapping of the PNW code landscape: Oregon --- OSSC 2025 (based on IBC 2024, effective Oct 2025), ORSC 2023 (based on IRC 2021), OESC 2023 (NEC 2023), Oregon Plumbing Specialty Code; Washington --- State Building Code (2021 IBC, effective March 2024, with 2024 codes delayed to May 2027), WAC 51-50 through 51-56, WSEC. Local amendments: Portland Ch. 24.85 seismic standards, Seattle prescriptive earthquake retrofit program, jurisdictional authority structure. Blueprint reading: plan views, elevations, sections, details, schedules, specifications. Drawing standards: line weights, symbols, dimensioning, title blocks. Inspection checkpoints and sequences. Permit application processes for both states. Engineering stamp requirements and professional responsibility.
+
+\subsubsection{M6: Educational Frameworks \& Content Generation}
+
+Five-tier audience depth system: L1 Homeowner (the complete homeowner's guide --- maintenance schedules, when to call a pro, basic diagnostics, cost expectations), L2 Skilled DIY (tool requirements, step-by-step procedures, material selection, permit awareness), L3 Trade Student (apprenticeship curriculum alignment, theory plus practice, code references, exam prep), L4 Journeyman/Contractor (advanced techniques, business of construction, code compliance, estimating, project management), L5 Engineer/Architect (ABET-aligned curriculum: structural analysis, materials science, building mechanical/electrical systems, construction management per ABET EAC criteria). College-level course outlines for: Construction Materials, Structural Analysis, MEP Systems, Construction Management, Building Codes \& Standards. PE exam preparation content for civil/structural emphasis. Continuing education modules for licensed professionals.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission_type: fleet
+  crew_size: full
+  parallel_tracks: 3
+  model_distribution:
+    opus: 30%    # Synthesis, cross-module integration, audience calibration
+    sonnet: 60%  # Survey compilation, code mapping, content assembly
+    haiku: 10%   # Shared schemas, parameter templates, scaffolding
+  context_windows: 42
+  sessions: 8
+  token_budget_estimate: 3.2M
+  cache_strategy: aggressive
+  regional_anchor: Pacific_Northwest
+  audience_range: [L1_homeowner, L5_engineer]
+  dimensional_axes: 6
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item All six trade disciplines: structural, electrical, plumbing, mechanical, envelope, fire/life safety
+\item Building scales: ADU through mid-rise commercial (Type V, IV, III construction)
+\item PNW codes: Oregon (OSSC 2025, ORSC 2023, OESC 2023) and Washington (2021 SBC, WSEC)
+\item Local amendments: Portland and Seattle seismic, wildfire interface (R327, WAC 51-55)
+\item Five audience depth levels with parametric content generation
+\item Lifecycle phases: new construction, maintenance, repair, remodel/retrofit
+\item ABET-aligned engineering education frameworks (civil, architectural, construction)
+\item Blueprint reading and drafting standards
+\item Materials science fundamentals for all major construction materials
+\item Seismic design and retrofit per ASCE 7/41 for Cascadia Subduction Zone
+\item Energy code compliance (OEESC 2025, WSEC-R 2021)
+\item The Complete Homeowner's Guide content framework
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item High-rise construction (Type I, II --- steel/concrete high-rise above 75 feet)
+\item Heavy industrial facilities (refineries, power plants, manufacturing)
+\item Highway and bridge construction (civil infrastructure)
+\item Non-PNW regional codes (California CBC, Florida FBC, etc.)
+\item Real estate law, zoning, and land use planning (separate mission)
+\item Landscape architecture and site grading
+\item Interior design and finish selection (aesthetic choices)
+\item Detailed HVAC load calculations (separate mechanical engineering mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All six trade disciplines documented with cross-references to interdependent systems at every building scale covered
+\item PNW code mapping covers Oregon OSSC/ORSC and Washington SBC with all current amendments and effective dates verified against official state sources
+\item Seismic design content addresses Cascadia Subduction Zone risk with ASCE 7/41 references, Portland Ch. 24.85 compliance, and Seattle prescriptive retrofit program
+\item Five audience depth levels (L1--L5) produce meaningfully different content from the same knowledge base, verified by vocabulary complexity and technical depth metrics
+\item Homeowner guide content covers: maintenance schedules, diagnostic decision trees, when-to-call-a-pro thresholds, and cost estimation ranges for all major systems
+\item Engineering education content aligns with ABET EAC criteria for civil, architectural, and construction engineering programs including all four architectural engineering curriculum areas
+\item Blueprint reading module covers plan, elevation, section, and detail views with PNW-specific drawing conventions and annotation standards
+\item Materials science content includes PNW-dominant species and materials (Douglas fir, Western red cedar, basalt aggregate concrete) with engineering properties
+\item Envelope and weatherproofing module addresses rain screen assemblies, WRB selection, and moisture management strategies specific to marine climate zones 4C/5B
+\item NEC 2023 mapping includes all major 2023 cycle changes (expanded GFCI 210.8, SPD requirements 230.67, emergency disconnect 230.85) with Oregon and Washington amendments
+\item UPC/plumbing content covers both Washington (UPC adoption WAC 51-56) and Oregon (OPSC) with DWV system design and water supply sizing
+\item All content sources are government agencies (Oregon BCD, Washington SBCC, ICC, NFPA, IAPMO), professional organizations (ASCE, ABET, AIA), or peer-reviewed engineering standards
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Framework Core & Parent orchestration framework & Active \\
+gsd-skill-creator & Execution engine for this mission & Active \\
+Token Ecosystem & Content delivery \& monetization layer & In Development \\
+Minecraft Server & 3D visualization of construction concepts & Planned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle teaches us that architectural leverage beats brute force. A building is the most literal expression of this idea --- every structure is an architecture, every wall assembly a system of components working in concert, every code requirement a constraint that shapes the design space. The spaces between the studs hold the wiring and the pipes; the spaces between the trades hold the knowledge gaps where buildings fail.
+
+This mission fills those spaces. It builds a knowledge architecture as carefully as a well-framed wall --- each module a structural member, each cross-reference a fastener, each audience-depth parameter a finish layer that adapts the same bones to different purposes. From the homeowner checking their crawlspace with a flashlight to the engineer calculating seismic drift ratios, the knowledge is one continuous load path from foundation to ridge.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Building Construction Mastery --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles authoritative source material organized by module. All findings are sourced from government agencies, code development organizations, professional engineering societies, and ANSI-accredited standards bodies. Key source organizations include: International Code Council (ICC), National Fire Protection Association (NFPA), International Association of Plumbing and Mechanical Officials (IAPMO), Oregon Building Codes Division (BCD), Washington State Building Code Council (SBCC), American Society of Civil Engineers (ASCE), Federal Emergency Management Agency (FEMA), Accreditation Board for Engineering and Technology (ABET), and WSU Energy Program.
+
+\subsection{M1 Reference: Structural Systems \& Materials Science}
+
+\subsubsection{PNW Structural Code Framework}
+
+Oregon adopts the 2025 Oregon Structural Specialty Code (OSSC), based on the 2024 IBC, 2024 IFC, and 2024 IEBC. Administrative provisions are effective and mandatory October 1, 2025, with a six-month phase-in for technical provisions. The OSSC integrates portions of the IBC with Oregon-specific amendments managed by the Building Codes Division (BCD). Washington currently operates under the 2021 IBC (effective March 15, 2024), with the 2024 code cycle delayed by SBCC action to a final adoption date of August 21, 2026 and effective date of May 3, 2027.
+
+\subsubsection{Seismic Design --- Cascadia Subduction Zone}
+
+Portland's seismic requirements (City Code Ch. 24.85) mandate ASCE 41 evaluation and retrofit for existing buildings undergoing change of use, occupancy changes, or significant alterations. The standard requires Tier 1 and Tier 2 deficiency-based evaluation for both structural and non-structural components using the Basic Performance Objective for Existing Buildings (BPOE). Homes built before 1974 were not required to be anchored to their foundations in Oregon. Seismic code requirements were not added to Oregon's building code until 1993. The Cascadia Subduction Zone has an estimated 37\% probability of a magnitude 7.1+ earthquake within 50 years, with the last major event (M9.0) occurring in 1700.
+
+Portland's residential seismic strengthening program provides prescriptive retrofit methods addressing: foundation anchoring (mudsill bolting), cripple wall bracing (1/2-inch CDX five-ply plywood), and plywood coverage requirements (40\% for one-story, 50\% for two-story, 80\% for three-story). Seattle's SDCI provides prescriptive earthquake home retrofit plan sets following the ABC approach: Anchor to foundation, Brace cripple walls, Connect to first floor framing.
+
+FEMA resources for seismic evaluation include: FEMA 154 (Rapid Visual Screening), ASCE/SEI 31-03 (Seismic Evaluation of Existing Buildings), FEMA P-1100 (Vulnerability-Based Assessment and Retrofit of Crawlspace Dwellings), and FEMA E-74 (Reducing Risks of Non-Structural Earthquake Damage).
+
+\subsubsection{PNW-Dominant Structural Materials}
+
+Douglas fir (Pseudotsuga menziesii) is the primary structural lumber species in the PNW, with design values established per the National Design Specification (NDS) for Wood Construction. Western red cedar is used for exterior applications (siding, decking, fencing) due to natural decay resistance. Basalt aggregate is common in PNW concrete mixes. Mass timber construction (CLT, glulam) is expanding rapidly in the PNW, with Oregon and Washington among the leading states for tall wood buildings.
+
+\subsection{M2 Reference: Electrical Systems}
+
+\subsubsection{NEC 2023 --- Major Changes}
+
+The 2023 National Electrical Code (NFPA 70) introduces significant changes effective across the PNW. Key updates include: expanded GFCI protection (Section 210.8(A)(6)) now covering all kitchen receptacles in dwelling units; surge protection device (SPD) requirements (Section 230.67) for services supplying dwelling units with minimum 10kA nominal discharge current rating; emergency disconnect requirements (Section 230.85) for one- and two-family dwellings; expanded GFCI for commercial buffet/serving areas (210.8(B)(4)); and enhanced labeling requirements for outdoor equipment per 110.21(B).
+
+Oregon adopted the 2023 NEC through the Oregon Electrical Specialty Code (OESC), effective October 1, 2023. Washington administers electrical code through the Department of Labor and Industries rather than the SBCC, adopting the NEC with state-specific amendments.
+
+\subsubsection{Service and Distribution}
+
+Service entrance sizing follows NEC Article 220 load calculations. Residential services are typically 200A for new construction, with 100A and 150A common in existing homes. Commercial services are calculated based on connected load and demand factors. Panel layout follows NEC 408 requirements. Conductor sizing per ampacity tables (NEC 310.16) with temperature correction and adjustment factors.
+
+\subsection{M3 Reference: Plumbing \& Mechanical Systems}
+
+\subsubsection{Plumbing Code Framework}
+
+Washington State adopts the Uniform Plumbing Code (UPC) through WAC 51-56, currently the 2021 UPC with state amendments. Oregon adopts the Oregon Plumbing Specialty Code (OPSC). The UPC is developed by IAPMO under ANSI-accredited consensus procedures and covers all installation types (residential, commercial, industrial) in a single document. The 2021 UPC introduced the Peak Water Demand Calculator, the first significant update to plumbing system sizing methodology since the 1940s, using statistical data and probability models for modern low-flow fixtures.
+
+Washington state amendments to the UPC include: Chapters 12 and 14 are not adopted; Chapter 5 (appliance venting and combustion air) provisions are not adopted; building sewer provisions are handled separately. Certified Backflow Assembly Testers must be certified by Washington Department of Health under WAC 246-292. Residential lavatory faucets are limited to 1.2 GPM at 60 PSI maximum, with public-use faucets limited to 0.5 GPM.
+
+\subsubsection{DWV and Water Supply Systems}
+
+Drain-waste-vent design follows fixture unit methodology per UPC Chapter 7 (drainage) and Chapter 9 (venting). Water supply sizing per UPC Chapter 6 considers both traditional methods and the new Peak Water Demand Calculator. Common PNW pipe materials include: copper (Type L and M for supply), PEX (cross-linked polyethylene, increasingly dominant for residential), ABS and PVC (for DWV), and cast iron (for existing buildings and noise reduction).
+
+\subsection{M4 Reference: Building Envelope \& Weatherproofing}
+
+\subsubsection{PNW Moisture Management}
+
+The Pacific Northwest's marine climate creates unique moisture management challenges. The British Columbia ``leaky condo crisis'' demonstrated catastrophic consequences when moisture entry rates exceed removal rates in wall assemblies. Rain screen wall technology emerged as the primary solution, introducing a continuous air space on the exterior side of the building wrap to increase moisture removal rates through drainage and ventilation.
+
+Rain screen assemblies consist of three layers: exterior cladding (the deflection layer), an air cavity (typically 3/8-inch to 1-inch), and a water-resistive barrier (WRB) on the structural sheathing. The five forces driving rain into buildings are: kinetic energy, gravity, capillary action, surface tension, and pressure gradients. Rain screen systems address all five through deflection, drainage, drying, and pressure equalization.
+
+IRC 2021 Section R703.7.3 specifies air space or high-drainage-efficiency WRB requirements for stucco applications in certain climate zones. ASTM E2273 provides the drainage efficiency test standard for wall assemblies. Key WRB products for PNW applications include mechanically-fastened house wraps, self-adhering membranes, and fluid-applied barriers, each with specific applications based on cladding type and exposure.
+
+\subsubsection{Energy Code Requirements}
+
+Oregon's Energy Efficiency Specialty Code (OEESC 2025), based on ASHRAE 90.1-2022, is effective January 1, 2025 and mandatory July 1, 2025. Washington's State Energy Code (WSEC-R 2021) is effective March 15, 2024. Both states are in Climate Zones 4C (western, marine) and 5B (eastern, dry), with corresponding insulation requirements. Wall insulation requirements range from R-20 to R-21+5ci depending on climate zone and framing type. Roof/ceiling insulation ranges from R-38 to R-60.
+
+\subsubsection{Wildfire-Urban Interface}
+
+Oregon ORSC R327 amendments (effective August 5, 2025) address wildfire hazard mitigation for residential construction. Washington adopts the International Wildland-Urban Interface Code through WAC 51-55 (effective March 15, 2024). Requirements include: Class A roof coverings, ember-resistant venting, ignition-resistant exterior materials, and defensible space provisions.
+
+\subsection{M5 Reference: Codes, Standards \& Blueprinting}
+
+\subsubsection{Oregon Code Structure}
+
+Oregon's building codes are administered by the Building Codes Division (BCD) under the Department of Consumer and Business Services. Current adoptions include: 2025 OSSC (IBC 2024 base, effective Oct 2025), 2023 ORSC (IRC 2021 base, effective Oct 2023, mandatory April 2024), 2023 OESC (NEC 2023, effective Oct 2023), Oregon Plumbing Specialty Code (2023 OPSC, effective Oct 2023), 2022 Oregon Mechanical Specialty Code (OMSC), 2022 Oregon Fire Code, and OEESC 2025 (ASHRAE 90.1-2022 base, effective Jan 2025).
+
+Portland administers state building codes per ORS 455.148, with local additions including Title 24 Building Regulations and Chapter 24.85 Seismic Design Standards for Existing Buildings. Portland adopted IBC 2021 Chapters 32 and sections of Chapter 33 to close regulatory gaps in construction safeguards.
+
+\subsubsection{Washington Code Structure}
+
+Washington's State Building Code is administered by the State Building Code Council (SBCC), established by RCW 19.27. The SBC is the minimum construction requirement statewide. Current codes (effective March 15, 2024) are based on 2021 editions: IBC (WAC 51-50), IRC (WAC 51-51), IMC (WAC 51-52), IFC (WAC 51-54A), Wildland-Urban Interface Code (WAC 51-55), and UPC (WAC 51-56). Code precedence follows the order listed, with earlier-named codes taking precedence over later-named codes in conflicts.
+
+Local amendments may not reduce minimum performance standards. Residential amendments affecting single- or multi-family buildings must be reviewed and approved by the SBCC per RCW 19.27.074. The 2024 code cycle final adoption has been delayed to August 21, 2026, with an effective date of May 3, 2027.
+
+\subsubsection{Blueprinting Standards}
+
+Construction documents follow standard conventions: plan views (floor plans, roof plans, foundation plans), elevations (exterior views), sections (vertical cuts through the building), and details (enlarged views of specific assemblies). Drawing standards include: line weight hierarchy (heavy for cut lines, medium for visible edges, light for hidden/projection), standard symbols per architectural graphic standards, dimensioning conventions (feet-inches for residential, decimal feet for commercial/civil), and title block information requirements per professional licensing standards.
+
+\subsection{M6 Reference: Educational Frameworks}
+
+\subsubsection{ABET Engineering Accreditation}
+
+ABET EAC criteria for architectural engineering programs (2025--2026) require four basic curriculum areas: building structures, building mechanical systems, building electrical systems, and construction/construction management. Graduates must reach synthesis (design) level in one area, application level in a second, and comprehension level in the remaining two. Prerequisites include: mathematics through differential equations, probability and statistics, calculus-based physics, and chemistry.
+
+Civil engineering program criteria require: engineering mechanics, materials science, and numerical methods; principles of sustainability, risk, and resilience; engineering design in at least two contexts; and solution of complex problems in at least four specialty areas. Construction engineering programs must prepare graduates to: analyze and design construction processes and systems, apply knowledge of methods, materials, equipment, planning, scheduling, safety, and cost analysis.
+
+ABET's outcomes-based assessment model requires: program educational objectives (broad goals), student outcomes (specific competencies 1--7), curriculum mapping, and continuous improvement processes. This aligns naturally with the five-tier audience depth system, where L5 content maps directly to ABET outcomes.
+
+\subsubsection{Homeowner Education Framework (L1)}
+
+The Complete Homeowner's Guide covers: understanding your home's systems (structural, electrical, plumbing, HVAC, envelope), seasonal maintenance schedules, diagnostic decision trees (``my basement is wet'' $\rightarrow$ causes $\rightarrow$ severity assessment $\rightarrow$ DIY vs. professional), when to call a professional (safety thresholds, permit requirements, insurance implications), cost estimation ranges for common repairs and improvements, and understanding your home inspection report. PNW-specific content includes: seismic retrofit assessment (``Is my house bolted to the foundation?''), moisture management (``Is my crawlspace properly ventilated?''), and energy upgrade pathways.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Electrical Safety & Content must emphasize de-energize-first protocols and never encourage unqualified persons to work on energized systems & GATE \\
+Asbestos/Lead & Pre-1978 homes may contain lead paint; pre-1980 may contain asbestos. Content must flag testing requirements before disturbance & GATE \\
+Seismic Urgency & Avoid fearmongering while accurately representing Cascadia risk. Present as preparedness, not panic & ANNOTATE \\
+DIY Boundaries & Clearly delineate where work requires licensed professionals and/or permits. Never encourage unpermitted work & GATE \\
+Structural Safety & Load-bearing wall identification must be treated as safety-critical. Incorrect removal can cause collapse & BLOCK \\
+Gas Systems & Natural gas and propane work is life-safety critical. Content must emphasize licensed-professional-only & BLOCK \\
+Code Currency & Codes change regularly. All code references must include edition year, effective date, and verification date & GATE \\
+Cost Estimates & Construction costs vary significantly by location and time. All estimates must be presented as ranges with date stamps & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+Oregon Building Codes Division --- \url{https://www.oregon.gov/bcd/codes-stand/}; Washington State Building Code Council --- \url{https://sbcc.wa.gov/}; Portland Bureau of Development Services --- \url{https://www.portland.gov/bds}; Seattle Dept of Construction \& Inspections --- \url{https://www.seattle.gov/sdci}; FEMA Seismic Building Codes --- \url{https://www.fema.gov/emergency-managers/risk-management/earthquake/seismic-building-codes}; Oregon Construction Contractors Board; WSU Energy Program --- \url{https://www.energy.wsu.edu/}
+
+\subsubsection{Code Development Organizations}
+
+International Code Council (ICC) --- IBC, IRC, IEBC, IFC; National Fire Protection Association (NFPA) --- NEC (NFPA 70); International Association of Plumbing and Mechanical Officials (IAPMO) --- UPC; American Society of Civil Engineers (ASCE) --- ASCE 7, ASCE 41; American National Standards Institute (ANSI)
+
+\subsubsection{Professional \& Educational Organizations}
+
+Accreditation Board for Engineering and Technology (ABET) --- EAC Criteria 2025--2026; American Institute of Architects (AIA); National Electrical Contractors Association (NECA); Electrical Safety Foundation International (ESFI); Rainscreen Association in North America (RAiNA)
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, parametric knowledge system covering building construction materials, techniques, systems, and codes across six dimensions (trade discipline, building scale, building style, lifecycle phase, audience depth, PNW regional specificity). The system must generate accurate, audience-appropriate educational and reference content from homeowner basics through engineering licensure preparation, with deep integration into the GSD skill-creator framework.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+WAVE EXECUTION PLAN
+
+  WAVE 0: Foundation (Sequential)
+  ======================================
+  [Shared Schemas] [Parameter Templates] [Source Index]
+        |                  |                  |
+        +--------+---------+------------------+
+                 |
+  WAVE 1: Parallel Research Tracks
+  ======================================
+  Track A:              Track B:              Track C:
+  [M1 Structural]       [M2 Electrical]       [M5 Codes/Blueprint]
+  [M4 Envelope]         [M3 Plumb/Mech]       [M6 Education]
+        |                     |                      |
+        +----------+----------+----------+-----------+
+                   |                     |
+  WAVE 2: Synthesis (Sequential)
+  ======================================
+  [Cross-Module Integration] [Dimensional Validation]
+  [Audience Depth Calibration] [Code Cross-Reference]
+                   |
+  WAVE 3: Publication + Verification (Sequential)
+  ======================================
+  [Document Assembly] [Test Execution] [Quality Gate]
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer:} Shared parameter schemas, dimensional metadata definitions, source index, and template structures
+\item \textbf{Domain Layer:} Six research modules with complete content coverage per scope boundaries
+\item \textbf{Integration Layer:} Cross-module relationships, code cross-references, and interdependency documentation
+\item \textbf{Calibration Layer:} Five audience-depth variants validated for vocabulary, technical depth, and safety messaging
+\item \textbf{Publication Layer:} Final assembled documents with verification matrix and test results
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Parameter Schema & All 6 dimensions defined with enumerated values and metadata & W0-SCHEMA \\
+2 & Source Index & All sources catalogued with verification dates and authority level & W0-INDEX \\
+3 & M1: Structural & Complete structural systems coverage, PNW seismic, materials science & W1-M1 \\
+4 & M2: Electrical & NEC 2023 mapping, OR/WA amendments, all audience levels & W1-M2 \\
+5 & M3: Plumbing/Mech & UPC/OPSC mapping, DWV/supply design, HVAC integration & W1-M3 \\
+6 & M4: Envelope & Rain screen systems, WRB, insulation, energy code, PNW moisture & W1-M4 \\
+7 & M5: Codes/Blueprint & Complete PNW code map, blueprint reading, permit processes & W1-M5 \\
+8 & M6: Education & ABET alignment, homeowner guide framework, 5-tier content system & W1-M6 \\
+9 & Integration Report & Cross-module relationships validated, dimensional consistency & W2-INTEG \\
+10 & Verification Report & All tests executed, safety-critical tests pass, matrix complete & W3-VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schema & None & Haiku & 45K \\
+W0: Source Index & None & Haiku & 35K \\
+W0: Templates & Schema & Haiku & 25K \\
+W1-M1: Structural & Schema, Index & Sonnet+Opus & 380K \\
+W1-M2: Electrical & Schema, Index & Sonnet & 320K \\
+W1-M3: Plumb/Mech & Schema, Index & Sonnet & 300K \\
+W1-M4: Envelope & Schema, Index & Sonnet+Opus & 350K \\
+W1-M5: Codes & Schema, Index & Sonnet & 400K \\
+W1-M6: Education & Schema, Index & Opus & 350K \\
+W2: Integration & All W1 & Opus & 450K \\
+W2: Calibration & All W1 & Opus & 250K \\
+W3: Assembly & All W2 & Sonnet & 150K \\
+W3: Verification & All W2 & Sonnet & 100K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated:}} & \textbf{3.155M} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assignment} & \tableheader{Rationale} \\
+\midrule
+Opus & M6 Education, W2 Integration, W2 Calibration, M1/M4 co-lead & Audience calibration, cross-module synthesis, safety-critical judgment, ABET alignment \\
+Sonnet & M2--M5 primary, W3 Assembly/Verify & Code mapping, technical content compilation, document assembly, verification execution \\
+Haiku & W0 Foundation (Schema, Index, Templates) & Scaffolding generation, structured metadata, template creation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallelism} & \tableheader{Windows} & \tableheader{Session} \\
+\midrule
+0 & Foundation & Sequential & 3 & 1 \\
+1 & Research & 3 parallel & 24 & 2--5 \\
+2 & Synthesis & Sequential & 10 & 6--7 \\
+3 & Publication & Sequential & 5 & 8 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Deliverable} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+Parameter Schema & Six-dimensional parameter definitions with enums and metadata types & Haiku & 1 \\
+Source Index & Authoritative source catalogue with URLs, editions, effective dates & Haiku & 1 \\
+Content Templates & Document templates for each audience level and content type & Haiku & 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A:} M1 Structural Systems + M4 Building Envelope (paired due to structural-envelope integration requirements)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Focus Areas} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+M1 Survey & Wood, steel, concrete, masonry, mass timber & Sonnet & 3 \\
+M1 Seismic & ASCE 7/41, Cascadia, Portland 24.85, Seattle retrofit & Opus & 2 \\
+M1 Materials & PNW species, engineering properties, fasteners & Sonnet & 2 \\
+M4 Envelope & Rain screen, WRB, cladding, roofing systems & Sonnet & 2 \\
+M4 Energy & OEESC/WSEC, insulation, air sealing, climate zones & Sonnet & 2 \\
+M4 Wildfire & ORSC R327, WAC 51-55, WUI construction & Sonnet & 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:} M2 Electrical + M3 Plumbing/Mechanical (paired due to MEP coordination)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Focus Areas} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+M2 NEC Map & NEC 2023 articles, OR/WA amendments, service/panels & Sonnet & 3 \\
+M2 Systems & Branch circuits, GFCI/AFCI/SPD, EV/Solar/Storage & Sonnet & 2 \\
+M3 Plumbing & UPC/OPSC, DWV, water supply, fixtures, water heaters & Sonnet & 3 \\
+M3 Mechanical & IMC, HVAC, heat pumps, fuel gas, ventilation & Sonnet & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C:} M5 Codes/Blueprinting + M6 Educational Frameworks
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Focus Areas} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+M5 OR Codes & OSSC, ORSC, OESC, OPSC, Portland local amendments & Sonnet & 2 \\
+M5 WA Codes & WAC 51-xx series, SBCC structure, local amendments & Sonnet & 2 \\
+M5 Blueprint & Drawing standards, symbols, specifications, inspections & Sonnet & 1 \\
+M6 ABET & Curriculum alignment, course outlines, outcomes mapping & Opus & 2 \\
+M6 Homeowner & Complete guide framework, decision trees, maintenance & Opus & 2 \\
+M6 Trade/CE & Apprenticeship, journeyman, contractor, PE prep content & Sonnet & 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Deliverable} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+Cross-Module Integration & Validated interdependency maps, code cross-references & Opus & 3 \\
+Dimensional Validation & All 6 dimensions consistently applied across modules & Opus & 2 \\
+Audience Calibration & L1--L5 content samples verified for depth/vocabulary & Opus & 3 \\
+Safety Review & All safety-critical content reviewed, GATE items cleared & Opus & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Deliverable} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+Document Assembly & Complete knowledge system assembled per templates & Sonnet & 2 \\
+Test Execution & All test cases executed against deliverables & Sonnet & 2 \\
+Quality Gate & Final review, verification matrix complete & Sonnet & 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Shared prefix:} Parameter schemas and source index cached across all Wave 1 agents (estimated 80K tokens of shared context)
+\item \textbf{Intra-track caching:} Track A modules share structural-envelope integration context; Track B modules share MEP coordination context
+\item \textbf{Wave 2 warm start:} All Wave 1 summary outputs cached as synthesis input prefix
+\item \textbf{Code reference caching:} PNW code edition/date table cached across M2, M3, M4, M5 to prevent inconsistent references
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0: Foundation & 30K & 75K & 105K \\
+Wave 1: Track A & 240K & 510K & 750K \\
+Wave 1: Track B & 200K & 420K & 620K \\
+Wave 1: Track C & 180K & 400K & 580K \\
+Wave 2: Synthesis & 350K & 350K & 700K \\
+Wave 3: Publication & 200K & 200K & 400K \\
+\midrule
+\textbf{Total} & \textbf{1.2M} & \textbf{1.955M} & \textbf{3.155M} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+DEPENDENCY GRAPH
+
+  [W0-SCHEMA] ----+---- [W0-INDEX] ----+---- [W0-TEMPLATES]
+       |          |          |          |          |
+       +----------+----------+----------+----------+
+                  |                     |
+    +-------------+-------------+       |
+    |             |             |       |
+[W1-M1]      [W1-M2]      [W1-M5]    |
+[W1-M4]      [W1-M3]      [W1-M6]    |
+ Track A      Track B      Track C    |
+    |             |             |       |
+    +-------------+-------------+-------+
+                  |
+           [W2-INTEGRATION]
+           [W2-CALIBRATION]
+           [W2-SAFETY-REVIEW]
+                  |
+           [W3-ASSEMBLY]
+           [W3-VERIFICATION]
+           [W3-QUALITY-GATE]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 8 & Mandatory & BLOCK \\
+Core Functionality & 18 & Required & BLOCK \\
+Integration & 10 & Required & BLOCK \\
+Edge Cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{42} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to ICC, NFPA, IAPMO, ASCE, ABET, state agencies, or ANSI standards. Zero entertainment media or blogs. \\
+SC-NUM & Numerical attribution & Every code section number, R-value, ampacity, fixture unit count, or seismic parameter attributed to specific source with edition year \\
+SC-ADV & No policy advocacy & Content presents code requirements and engineering principles without advocating for specific legislative positions \\
+SC-ELC & Electrical safety & All electrical content includes de-energize-first protocols; no procedures encouraging work on energized systems by unqualified persons \\
+SC-GAS & Gas safety & All gas system content specifies licensed-professional-only; no DIY procedures for gas piping or appliance connections \\
+SC-STR & Structural safety & Load-bearing wall identification flagged as safety-critical; content never encourages structural modification without engineering review \\
+SC-HAZ & Hazardous materials & Pre-1978 lead paint and pre-1980 asbestos testing requirements flagged before any disturbance procedures \\
+SC-PER & Permit requirements & All work requiring permits clearly identified; content never encourages unpermitted work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Trade discipline coverage & All 6 trades documented with $\geq$10 subtopics each \\
+CF-02 & Building scale range & Content addresses ADU through mid-rise commercial for each trade \\
+CF-03 & NEC 2023 mapping & All major 2023 changes documented (210.8, 230.67, 230.85) with OR/WA amendments \\
+CF-04 & UPC/OPSC coverage & DWV, water supply, and fixture requirements for both WA (UPC) and OR (OPSC) \\
+CF-05 & Seismic content & ASCE 7/41 references, Portland 24.85, Seattle SDCI prescriptive program, Cascadia risk data \\
+CF-06 & Rain screen assemblies & Complete assembly documentation with WRB, air gap, cladding, and PNW moisture context \\
+CF-07 & Energy code mapping & OEESC 2025 and WSEC-R 2021 requirements for climate zones 4C and 5B \\
+CF-08 & ABET alignment & Course outlines covering all 4 architectural engineering curriculum areas \\
+CF-09 & Homeowner guide & Maintenance schedules, decision trees, cost ranges for all major systems \\
+CF-10 & Blueprint module & Plan, elevation, section, detail views with standard symbols and conventions \\
+CF-11 & Materials science & PNW-dominant species (Doug fir, WRC) with engineering properties \\
+CF-12 & Wildfire interface & ORSC R327 and WAC 51-55 requirements documented \\
+CF-13 & Audience L1 output & Homeowner content uses plain language, avoids jargon, includes visual aids references \\
+CF-14 & Audience L5 output & Engineering content includes calculations, code references, and design procedures \\
+CF-15 & Code date accuracy & All code editions matched to correct effective/mandatory dates per state agency sources \\
+CF-16 & Foundation types & Spread footing, continuous, pier, slab-on-grade, deep pile documented for PNW soils \\
+CF-17 & Lifecycle phases & New construction, maintenance, repair, and remodel content for each trade \\
+CF-18 & Retrofit pathways & Seismic, energy, electrical, and plumbing upgrade triggers and procedures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Structural-Envelope cascade & Fire-rated assembly penetrations documented for both structural and envelope modules \\
+IN-02 & Electrical-Plumbing coordination & MEP penetration conflicts and clearance requirements cross-referenced \\
+IN-03 & Code-Education alignment & Every code reference in M5 has corresponding educational treatment in M6 \\
+IN-04 & Code cross-state consistency & Same topic (e.g., residential GFCI) documented consistently for both OR and WA \\
+IN-05 & Seismic-All cascades & Seismic requirements traced through structural, MEP, and envelope modules \\
+IN-06 & Audience depth consistency & Same topic at L1 and L5 conveys consistent facts at different depths \\
+IN-07 & Lifecycle-Code triggers & Remodel triggers (e.g., Portland 24.85 alteration thresholds) cross-referenced with code module \\
+IN-08 & Materials-All integration & Material properties referenced consistently across structural, envelope, and fire modules \\
+IN-09 & Energy-Envelope-Mechanical & Insulation, air sealing, and HVAC sizing form coherent performance chain \\
+IN-10 & Document self-containment & Reader with no prior knowledge can understand complete building system from any entry point \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Six trade disciplines with cross-refs & CF-01, IN-01, IN-02 & Pending \\
+2. PNW code mapping OR \& WA & CF-15, IN-04 & Pending \\
+3. Seismic design / Cascadia & CF-05, IN-05 & Pending \\
+4. Five audience depth levels & CF-13, CF-14, IN-06 & Pending \\
+5. Homeowner guide complete & CF-09, SC-PER & Pending \\
+6. ABET alignment & CF-08, IN-03 & Pending \\
+7. Blueprint module & CF-10 & Pending \\
+8. PNW materials science & CF-11, IN-08 & Pending \\
+9. Envelope / moisture PNW & CF-06, IN-09 & Pending \\
+10. NEC 2023 mapping & CF-03, SC-ELC & Pending \\
+11. UPC/OPSC plumbing & CF-04, IN-02 & Pending \\
+12. All sources professional & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; resource allocation \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source validation; code edition verification; web research for gaps \\
+EXEC-A & Executor (Track A) & M1 Structural + M4 Envelope document production \\
+EXEC-B & Executor (Track B) & M2 Electrical + M3 Plumbing/Mechanical document production \\
+EXEC-C & Executor (Track C) & M5 Codes/Blueprint + M6 Education document production \\
+CRAFT-STR & Structural Specialist & Seismic design, load path analysis, materials engineering \\
+CRAFT-MEP & MEP Specialist & Electrical/plumbing/mechanical system coordination \\
+CRAFT-ENV & Envelope Specialist & Moisture management, energy performance, weatherproofing \\
+CRAFT-EDU & Education Specialist & ABET alignment, audience calibration, curriculum design \\
+VERIFY & Verification Agent & Source validation; code accuracy; safety-critical test execution \\
+INTEG & Integration Agent & Cross-module relationship validation; dimensional consistency \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent & Cross-cutting structural decisions; parameter schema governance \\
+SECURE & Safety Warden & Safety boundary enforcement; GATE/BLOCK item clearance \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; redundancy identification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope clarification \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache optimization \\
+SURGEON & Health Monitor & Research quality degradation detection; context window health \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Context Windows & 42 \\
+Total Sessions & 8 \\
+Estimated Token Budget & 3.155M \\
+Research Modules & 6 \\
+Parallel Tracks & 3 \\
+Crew Size & 20 roles \\
+Test Cases & 42 (8 safety-critical, 18 core, 10 integration, 6 edge) \\
+Success Criteria & 12 \\
+Dimensional Axes & 6 \\
+Audience Levels & 5 (L1 Homeowner through L5 Engineer) \\
+Regional Focus & Pacific Northwest (OR + WA) \\
+Code Editions Covered & 14+ (IBC, IRC, NEC, UPC, OSSC, ORSC, OESC, OPSC, OMSC, WAC 51-xx, WSEC, ASCE 7, ASCE 41, WUI) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Every building tells a story written in materials, fasteners, and code compliance. This mission fills the spaces between the trades, between the codes, between the homeowner's flashlight-in-the-crawlspace and the engineer's seismic drift calculation --- building a knowledge architecture as carefully as a well-framed wall, where every module is a structural member and every cross-reference is a fastener holding the system together.''}
+
+\vspace{0.5em}
+\hfill --- \textit{Building Construction Mastery, Vision Through-Line}
+\end{quotebox}
+
+\end{document}
