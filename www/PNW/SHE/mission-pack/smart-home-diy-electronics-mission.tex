@@ -1,0 +1,1129 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology domain color scheme
+\definecolor{primary}{HTML}{263238}       % Steel blue — sections
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — subsections
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsections
+\definecolor{accent}{HTML}{0277BD}        % Bright blue — highlights
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light steel
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Smart Home \& DIY Electronics}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Smart Home Technologies \& DIY Electronics -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% =============================================================================
+% TITLE PAGE
+% =============================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Smart Home Technologies\\[0.3em]\& DIY Electronics}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Comprehensive Mapping for Students \& Makers}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study with Hands-On Projects}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% =============================================================================
+% TABLE OF CONTENTS
+% =============================================================================
+\tableofcontents
+\newpage
+
+% =============================================================================
+% STAGE 1 — VISION DOCUMENT
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Smart Home Technologies \& DIY Electronics --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Learn Kung Fu Pack, GSD ISA Vision}
+\metafield{Context:}{Educational skill pack for the GSD ecosystem}
+
+\subsection{Vision}
+
+The modern home is becoming a programmable environment. Smart thermostats negotiate with the electrical grid. Lighting systems respond to occupancy, daylight, and circadian rhythms. Security cameras distinguish between a package delivery and an intruder using edge AI. Behind every one of these capabilities sits a stack of electronics, protocols, and software that most users never see --- and most students never learn to build.
+
+This research mission maps the complete landscape of smart home technology and home electronics, then translates that landscape into a progressive curriculum of hands-on DIY projects. The goal is not to produce consumers of smart home products, but \textit{builders} --- students who understand the protocols their devices speak, the circuits that power them, the sensors that perceive the world, and the software that ties everything together. When a student finishes this curriculum, they should be able to walk into any room in their home and understand every electronic system in it at the component level.
+
+The 500-in-1 electronics kit of the 1980s taught a generation to solder, to read schematics, to build radios and alarm circuits from discrete components. This mission is the spiritual successor to that kit --- updated for an era of microcontrollers, mesh networks, and machine learning at the edge. The projects start with a blinking LED and end with a complete, self-hosted home automation system that the student built, understands, and controls.
+
+The Amiga Principle applies here with full force: architectural leverage over brute-force complexity. A student with an ESP32, a handful of sensors, and an understanding of MQTT can build a system that rivals commercial products costing hundreds of dollars --- and they'll understand every layer of it.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The Black Box Problem:} Commercial smart home devices are opaque. Users interact with apps and voice assistants but have no understanding of the protocols, circuits, or software beneath the surface. When devices fail or become unsupported, users are helpless.
+
+  \item \textbf{The Fragmentation Barrier:} Smart home technologies span wireless protocols (Zigbee, Z-Wave, Thread, Wi-Fi, Bluetooth), application layers (Matter, HomeKit, SmartThings), and software platforms (Home Assistant, ESPHome, Node-RED). Students encounter these as disconnected acronyms with no map showing how they relate.
+
+  \item \textbf{The Electronics Gap:} Most computer science and software engineering curricula skip hardware. Students can write a REST API but cannot wire a relay safely. The gap between ``I can code'' and ``I can build a physical system'' remains wide.
+
+  \item \textbf{The Safety Knowledge Deficit:} DIY electronics involving mains voltage, battery chemistry, or RF emissions carry real safety risks. Most online tutorials treat safety as a disclaimer rather than a core competency. Students need to learn the NEC, UL standards, and safe wiring practices as foundational skills, not afterthoughts.
+
+  \item \textbf{The Vendor Lock-In Trap:} Students who learn smart home technology through commercial ecosystems (Alexa Skills, Google Home Actions) learn to build \textit{within} a platform rather than \textit{understanding} a platform. Open-source alternatives like Home Assistant, ESPHome, and MQTT provide full-stack visibility, but the learning curve is steeper without structured guidance.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Smart home technology is applied electronics --- every commercial product maps to a teachable circuit, a learnable protocol, and a buildable project.
+\end{quotebox}
+
+The curriculum treats the smart home as a laboratory where every device is a lesson. A smart thermostat teaches temperature sensing, relay control, PID algorithms, and MQTT communication. A smart lock teaches RFID, servo motors, encryption, and access control patterns. A smart plug teaches current sensing, power measurement, and energy monitoring.
+
+By decomposing commercial products into their constituent technologies, students learn bottom-up: components $\rightarrow$ circuits $\rightarrow$ firmware $\rightarrow$ protocols $\rightarrow$ platforms $\rightarrow$ integrations. Each layer is a project. Each project builds on the last.
+
+\subsubsection{Domain Map: Smart Home Technology Stack}
+
+\begin{asciibox}
+\begin{verbatim}
+┌──────────────────────────────────────────────────────────────┐
+│                    USER INTERFACES                           │
+│  Voice Assistants │ Mobile Apps │ Dashboards │ Physical      │
+├──────────────────────────────────────────────────────────────┤
+│                  AUTOMATION PLATFORMS                         │
+│  Home Assistant │ Node-RED │ OpenHAB │ Custom Python/JS      │
+├──────────────────────────────────────────────────────────────┤
+│               APPLICATION PROTOCOLS                          │
+│  Matter │ MQTT │ HTTP/REST │ WebSocket │ CoAP               │
+├──────────────────────────────────────────────────────────────┤
+│              NETWORK / TRANSPORT LAYER                        │
+│  Wi-Fi │ Thread │ Zigbee │ Z-Wave │ BLE │ LoRa │ 433MHz    │
+├──────────────────────────────────────────────────────────────┤
+│               COMPUTE / CONTROLLERS                          │
+│  ESP32 │ Arduino │ Raspberry Pi │ STM32 │ XIAO │ ATtiny    │
+├──────────────────────────────────────────────────────────────┤
+│              SENSORS & ACTUATORS                             │
+│  Temp/Humidity │ Motion │ Light │ Gas │ Current │ Proximity │
+│  Relays │ Servos │ Motors │ Solenoids │ Speakers │ Displays │
+├──────────────────────────────────────────────────────────────┤
+│             ELECTRICAL FUNDAMENTALS                          │
+│  Ohm's Law │ Power │ AC/DC │ Resistors │ Capacitors │ PCBs │
+│  Voltage Dividers │ Pull-ups │ Op-amps │ Transistors        │
+└──────────────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+MODULE 1: Foundations           MODULE 2: Sensing & Acting
+  ├─ Circuit fundamentals         ├─ Sensor types & interfacing
+  ├─ Microcontroller basics       ├─ Actuator control
+  ├─ Breadboarding & soldering    ├─ Signal conditioning
+  └─ Safety & standards           └─ PCB design basics
+          │                                │
+          └────────────┬───────────────────┘
+                       │
+MODULE 3: Connectivity        MODULE 4: Platforms & Integration
+  ├─ Wi-Fi & MQTT               ├─ Home Assistant
+  ├─ Zigbee & Thread             ├─ ESPHome firmware
+  ├─ BLE & mesh networks         ├─ Node-RED flows
+  └─ Matter protocol             └─ Dashboard design
+          │                                │
+          └────────────┬───────────────────┘
+                       │
+MODULE 5: Complete Systems      MODULE 6: Safety & Standards
+  ├─ Security systems             ├─ NEC & electrical codes
+  ├─ Energy monitoring            ├─ UL & IoT security
+  ├─ Climate control              ├─ Network security
+  └─ Lighting automation          └─ RF compliance
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Electrical \& Electronics Foundations}
+Core circuit theory, component identification, Ohm's law, power calculations, AC vs. DC, voltage dividers, pull-up/pull-down resistors, transistor switching, op-amp basics. Breadboarding techniques, soldering skills, multimeter use, oscilloscope introduction. Safe handling of mains voltage, fuse selection, grounding practices.
+
+\subsubsection{Module 2: Sensors, Actuators \& Signal Conditioning}
+Comprehensive mapping of sensor types used in smart homes: temperature (thermistors, RTDs, DHT11/22, DS18B20), humidity, light (photoresistors, phototransistors, photodiodes), motion (PIR, microwave, mmWave), gas (MQ series), current (CT clamps, Hall effect), proximity (ultrasonic, IR, ToF), pressure, sound. Actuator types: relays (mechanical and solid-state), servo motors, stepper motors, solenoid locks, speakers, LED drivers, motor drivers (H-bridge, L298N). Signal conditioning: amplification, filtering, ADC/DAC conversion, level shifting, debouncing.
+
+\subsubsection{Module 3: Connectivity \& Protocols}
+Complete mapping of smart home communication protocols. Physical layer: Wi-Fi (802.11), Bluetooth Low Energy, Zigbee (802.15.4), Z-Wave (908.42 MHz), Thread, LoRa, 433 MHz RF, infrared. Application layer: MQTT (publish/subscribe), HTTP/REST, WebSocket, CoAP, Matter (CHIP). Protocol comparison by power consumption, range, bandwidth, mesh capability, and security. Practical exercises: setting up an MQTT broker, joining a Zigbee mesh, commissioning a Matter device.
+
+\subsubsection{Module 4: Platforms \& Software Integration}
+Home Assistant installation, configuration, and automation. ESPHome firmware development for ESP32/ESP8266. Node-RED visual programming for automation flows. Python scripting for custom integrations. Dashboard design with Lovelace UI. Voice assistant integration (local-only options: Rhasspy, Wyoming). Database backends for historical data. Docker containerization for service management.
+
+\subsubsection{Module 5: Complete System Projects}
+Full-stack smart home projects that integrate all previous modules. Each project includes a bill of materials, circuit diagrams, firmware code, platform configuration, and a ``How It Works'' section decomposing the system into its teachable layers. Projects span security, energy, climate, lighting, audio, garden, and accessibility domains.
+
+\subsubsection{Module 6: Safety, Standards \& Security}
+National Electrical Code (NEC/NFPA 70) requirements for low-voltage and line-voltage installations. UL certification and what it means for DIY projects. IoT security: ETSI EN 303 645, UL 2900 series, OWASP IoT Top 10. Network security: VLAN segmentation, firewall rules, WPA3, encrypted MQTT (TLS). RF compliance: FCC Part 15, ISM bands, duty cycle limits. Battery safety: lithium-ion handling, charging circuits, thermal protection.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: smart-home-diy-electronics
+  activation: squadron
+  models:
+    opus: 30%    # Synthesis, safety analysis, cross-module integration
+    sonnet: 60%  # Survey compilation, project documentation, code
+    haiku: 10%   # Templates, schemas, bill-of-materials scaffolding
+  context_budget: 18 windows
+  sessions: 4
+  parallel_tracks: 2
+  cache_ttl: 5min
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Complete protocol mapping: Wi-Fi, BLE, Zigbee, Z-Wave, Thread, Matter, MQTT, LoRa, 433 MHz, IR
+  \item Microcontroller platforms: ESP32, Arduino Uno/Nano/Mega, Raspberry Pi, XIAO, ATtiny
+  \item 30+ hands-on student projects across 6 difficulty tiers
+  \item Home Assistant and ESPHome as primary software platforms
+  \item Electrical safety fundamentals (NEC, UL, safe wiring)
+  \item IoT network security practices
+  \item Custom PCB design introduction (KiCad)
+  \item Energy monitoring and solar integration basics
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Commercial product reviews or brand recommendations
+  \item Industrial automation (PLC, SCADA, Modbus)
+  \item Cellular IoT (LTE-M, NB-IoT) --- future expansion
+  \item HVAC system design (licensed trade)
+  \item High-voltage electrical work (above 120V AC consumer circuits)
+  \item Manufacturing processes (injection molding, mass PCB assembly)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Protocol mapping covers all 10+ smart home communication standards with comparison tables showing power, range, bandwidth, mesh capability, and security characteristics.
+  \item Sensor reference catalogs at least 15 sensor types with datasheets, interface diagrams, and example code for each.
+  \item Actuator reference catalogs at least 10 actuator types with safe driving circuits and control code.
+  \item At least 30 complete student projects with BOM, circuit diagram, firmware, and platform integration.
+  \item Projects span 6 difficulty tiers from ``Blinking LED'' to ``Complete Home Automation System.''
+  \item Every project that involves mains voltage includes explicit safety warnings, NEC references, and safe wiring diagrams.
+  \item All firmware code compiles and runs on specified hardware without modification.
+  \item Energy monitoring projects demonstrate measurable accuracy (within 5\% of reference meters).
+  \item Security module covers network segmentation, encrypted communication, and firmware update practices.
+  \item Platform integration tutorials produce working Home Assistant dashboards from each project.
+  \item Each project includes a ``What You Learned'' section mapping to specific concepts (Ohm's law, MQTT pub/sub, PID control, etc.).
+  \item Complete document is self-contained --- a student with no prior electronics experience can begin at Project 1 and progress through the entire curriculum.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+GSD Learn Kung Fu Pack & Parent curriculum framework; this pack slots into the hardware/electronics track & Upstream \\
+GSD ISA Vision & Instruction set architecture provides the computational metaphor for understanding microcontrollers & Conceptual \\
+GSD-OS Desktop Vision & GSD-OS educational layer provides the UI for project kits and skill trees & Platform \\
+GSD BBS Educational Pack & Community platform for sharing projects, getting help, and publishing results & Community \\
+Heritage Skills Pack & Shares pedagogical approach: experiential learning, progressive disclosure, community-connected & Sibling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between matter most. In a voltage divider, it's the ratio between two resistors that determines the output --- not the resistors themselves. In a mesh network, it's the \textit{relationships} between nodes that create resilience --- not any single node. In a smart home, it's the \textit{integration} between sensors, actuators, protocols, and platforms that creates intelligence --- not any individual device.
+
+This is the Amiga Principle made physical. A student with a \$5 ESP32 and the right architectural understanding can build a system that outperforms a \$200 commercial hub --- because they understand the spaces between the components, the protocols between the devices, the patterns between the data points. That understanding is the real product of this curriculum. The projects are the vehicle. The understanding is the destination.
+
+\newpage
+
+% =============================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =============================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Smart Home \& DIY Electronics --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the factual foundation for each research module. It catalogs protocols, components, platforms, safety standards, and project architectures sourced from authoritative organizations. Each module's reference section is designed to be self-contained --- an agent producing that module's content can work from its section alone.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Connectivity Standards Alliance (CSA) --- Matter protocol specification
+  \item Zigbee Alliance / Thread Group --- mesh protocol standards
+  \item Z-Wave Alliance --- Z-Wave protocol specification
+  \item National Fire Protection Association (NFPA) --- National Electrical Code (NEC/NFPA 70)
+  \item UL Solutions --- product safety and IoT security standards (UL 2900)
+  \item IEEE --- electrical safety standards (IEEE 1584, IEEE 1100)
+  \item ETSI --- European IoT security standard (EN 303 645)
+  \item OWASP --- IoT security guidelines (IoT Top 10)
+  \item Espressif Systems --- ESP32/ESP8266 technical references
+  \item Raspberry Pi Foundation --- Raspberry Pi hardware documentation
+  \item Arduino (arduino.cc) --- Arduino platform documentation
+  \item Home Assistant (home-assistant.io) --- Open-source home automation platform
+  \item ESPHome (esphome.io) --- ESP firmware framework documentation
+  \item Open Energy Monitor --- open-source energy monitoring reference designs
+\end{itemize}
+
+\subsection{Module 1 Reference: Electrical \& Electronics Foundations}
+
+\subsubsection{Fundamental Laws and Concepts}
+
+\textbf{Ohm's Law:} $V = IR$ --- Voltage (volts) equals current (amps) times resistance (ohms). This is the single most important relationship in electronics. Every sensor reading, every actuator drive circuit, every power calculation depends on it.
+
+\textbf{Power Law:} $P = VI = I^2R = V^2/R$ --- Power (watts) equals voltage times current. Critical for sizing components: a relay coil drawing 70 mA at 5V dissipates 350 mW. A 100W light bulb at 120V AC draws approximately 0.83A.
+
+\textbf{Kirchhoff's Laws:} Current law (KCL) --- current into a node equals current out. Voltage law (KVL) --- voltages around any closed loop sum to zero. These enable analysis of any circuit.
+
+\textbf{AC vs. DC:} Direct current flows in one direction (batteries, USB, solar panels). Alternating current reverses direction (mains power: 60 Hz in North America, 50 Hz in Europe). Smart home projects bridge both: sensors run on DC, but controlled loads often use AC mains.
+
+\subsubsection{Essential Components for Smart Home Projects}
+
+\textbf{Resistors:} Fixed, variable (potentiometers, trimpots), thermistors (NTC/PTC), photoresistors (LDR). Pull-up and pull-down resistors are essential for digital inputs --- typical values 4.7k$\Omega$ to 10k$\Omega$.
+
+\textbf{Capacitors:} Decoupling (100 nF ceramic near every IC), bulk filtering (10--100 $\mu$F electrolytic on power rails), timing (RC circuits). Critical for stable microcontroller operation.
+
+\textbf{Transistors:} NPN/PNP bipolar (2N2222, 2N3906) for switching small loads. N-channel MOSFETs (IRLZ44N, IRF520) for switching larger loads (motors, LED strips). Logic-level gate threshold is essential for 3.3V microcontrollers.
+
+\textbf{Diodes:} Rectifier (1N4007), Schottky (1N5819 for low forward drop), Zener (voltage regulation), flyback diodes across inductive loads (mandatory for relay and motor circuits).
+
+\textbf{Voltage Regulators:} Linear (LM7805 for 5V, AMS1117 for 3.3V) and switching (buck converters for efficiency). Understanding dropout voltage and thermal dissipation prevents circuit failures.
+
+\textbf{Relays:} Mechanical relays (SRD-05VDC) for switching mains loads. Solid-state relays (SSR) for silent, high-frequency switching. Always drive relay coils through a transistor with a flyback diode --- never directly from a microcontroller GPIO.
+
+\subsubsection{Microcontroller Platforms}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Platform} & \tableheader{Processor} & \tableheader{Connectivity} & \tableheader{GPIO} & \tableheader{Best For} \\
+\midrule
+ESP32 & Dual-core 240 MHz & Wi-Fi + BLE & 34 pins & IoT, smart home, ESPHome \\
+ESP8266 & Single 80 MHz & Wi-Fi & 17 pins & Simple IoT sensors \\
+Arduino Uno & ATmega328P 16 MHz & None (add shields) & 20 pins & Learning fundamentals \\
+Arduino Nano & ATmega328P 16 MHz & None & 22 pins & Compact projects \\
+Raspberry Pi 5 & Quad A76 2.4 GHz & Wi-Fi + BLE + Eth & 40-pin header & Home Assistant hub, cameras \\
+Raspberry Pi Pico & RP2040 133 MHz & None (Pico W: Wi-Fi) & 26 pins & Real-time control \\
+XIAO ESP32 & ESP32-C3/S3 & Wi-Fi + BLE & 11 pins & Ultra-compact sensors \\
+ATtiny85 & AVR 8 MHz & None & 6 pins & Minimal dedicated tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: Sensors \& Actuators}
+
+\subsubsection{Temperature \& Humidity Sensors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensor} & \tableheader{Type} & \tableheader{Interface} & \tableheader{Accuracy} & \tableheader{Notes} \\
+\midrule
+DHT11 & Temp + Humidity & Digital (1-wire) & $\pm$2°C, $\pm$5\%RH & Cheap, slow (2s), beginner \\
+DHT22/AM2302 & Temp + Humidity & Digital (1-wire) & $\pm$0.5°C, $\pm$2\%RH & Better accuracy, still slow \\
+BME280 & Temp + Hum + Press & I2C / SPI & $\pm$1°C, $\pm$3\%RH & Excellent for weather stations \\
+DS18B20 & Temperature & 1-Wire & $\pm$0.5°C & Waterproof versions; chainable \\
+SHT31 & Temp + Humidity & I2C & $\pm$0.3°C, $\pm$2\%RH & High precision, fast \\
+NTC Thermistor & Temperature & Analog & Varies & Cheapest; needs voltage divider \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Motion \& Presence Sensors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensor} & \tableheader{Technology} & \tableheader{Range} & \tableheader{Smart Home Applications} \\
+\midrule
+HC-SR501 PIR & Passive Infrared & 3--7 m & Occupancy detection, security triggers \\
+RCWL-0516 & Microwave Doppler & 5--9 m & Through-wall detection, lighting \\
+LD2410 mmWave & 24 GHz radar & 0.2--6 m & Presence (stationary), room occupancy \\
+HC-SR04 & Ultrasonic & 2--400 cm & Distance measurement, level sensing \\
+VL53L0X ToF & Laser time-of-flight & 0--200 cm & Precise distance, gesture detection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Light, Gas, Current \& Other Sensors}
+
+\textbf{Light:} LDR (photoresistor) for ambient light level; BH1750 (I2C lux meter) for calibrated measurements; TSL2591 for full-spectrum and IR channels. Used in automatic lighting, curtain control, and energy-saving automations.
+
+\textbf{Gas:} MQ-2 (combustible gases, smoke), MQ-7 (carbon monoxide), MQ-135 (air quality, CO2 proxy). These sensors require a pre-heat period (24--48 hours for first use) and produce analog voltage proportional to gas concentration.
+
+\textbf{Current:} SCT-013 split-core current transformer (non-invasive, clamp-on) for whole-home energy monitoring. Hall-effect sensors (ACS712) for inline current measurement. The CT clamp approach is preferred for safety as it does not require breaking the circuit.
+
+\textbf{Water/Soil:} Capacitive soil moisture sensors (corrosion-resistant, preferred over resistive types). Water flow sensors (YF-S201) for irrigation and leak detection.
+
+\subsubsection{Actuators Reference}
+
+\textbf{Relays:} Standard 5V relay modules switch loads up to 10A at 250V AC. Drive with a transistor (2N2222 or MOSFET) and include a flyback diode (1N4007). Solid-state relays (SSR-25DA) are preferred for frequent switching (no mechanical wear, silent, no arcing).
+
+\textbf{Servo Motors:} SG90 (micro, 180°) and MG996R (standard, high torque) for smart locks, vent controllers, and camera pan/tilt. Controlled via PWM signal (50 Hz, 1--2 ms pulse width). Power from a separate 5V supply, not the microcontroller.
+
+\textbf{Stepper Motors:} 28BYJ-48 with ULN2003 driver for curtain/blind control. NEMA 17 with A4988/DRV8825 for heavier applications. Provide precise positional control without feedback sensors.
+
+\textbf{LED Drivers:} WS2812B (NeoPixel) addressable RGB LEDs for smart lighting strips. MOSFET-based dimming for 12V LED strips using PWM. Constant-current drivers for high-power LEDs.
+
+\textbf{Solenoids:} Linear solenoids for door locks and valve control. Always use a flyback diode and MOSFET driver. 12V solenoid locks are common for DIY smart lock projects.
+
+\subsection{Module 3 Reference: Connectivity \& Protocols}
+
+\subsubsection{Protocol Comparison Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}C{1.5cm}C{1.3cm}C{1.5cm}C{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Protocol} & \tableheader{Frequency} & \tableheader{Range} & \tableheader{Data Rate} & \tableheader{Mesh} & \tableheader{Power} \\
+\midrule
+Wi-Fi & 2.4/5 GHz & 50 m & 54--600 Mbps & No & High \\
+BLE & 2.4 GHz & 30 m & 2 Mbps & Yes* & Very Low \\
+Zigbee & 2.4 GHz & 10--30 m & 250 kbps & Yes & Low \\
+Z-Wave & 908 MHz & 30 m & 100 kbps & Yes & Low \\
+Thread & 2.4 GHz & 10--30 m & 250 kbps & Yes & Low \\
+LoRa & 868/915 MHz & 2--15 km & 0.3--50 kbps & No* & Very Low \\
+433 MHz RF & 433 MHz & 100 m & 4 kbps & No & Very Low \\
+Matter & Over IP & Varies & Varies & Via Thread & Varies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Matter Protocol}
+
+Matter is the unifying application-layer standard for smart home interoperability. Developed by the Connectivity Standards Alliance with backing from Apple, Google, Amazon, and Samsung, it operates over IP (Wi-Fi, Thread, Ethernet) and provides local control without cloud dependency. Version 1.5 (November 2025) added support for cameras, soil moisture sensors, and energy management features. Matter uses IPv6 addressing, mDNS for discovery, and operates at the application layer of the OSI model --- it works \textit{on top of} transport protocols rather than replacing them.
+
+For students, Matter is important because it demonstrates protocol layering in practice: a Matter light bulb communicates over Thread (transport) using IPv6 (network) with Matter's cluster library (application). Building a Matter-compatible device with an ESP32 teaches all three layers simultaneously.
+
+\subsubsection{MQTT --- The Backbone Protocol}
+
+MQTT (Message Queuing Telemetry Transport) is the de facto standard for DIY smart home communication. It uses a publish/subscribe model where devices publish messages to \textit{topics} and subscribe to topics they care about, with a central \textit{broker} (Mosquitto is the standard open-source broker) routing messages. Key properties for students to understand: QoS levels (0 = fire-and-forget, 1 = at-least-once, 2 = exactly-once), retained messages (last value stored for new subscribers), last will and testament (offline detection), and topic hierarchies (\texttt{home/livingroom/temperature}).
+
+\subsubsection{Zigbee and Z-Wave}
+
+Zigbee operates on IEEE 802.15.4 at 2.4 GHz using mesh networking where each powered device acts as a router, extending coverage. Z-Wave uses a proprietary protocol at 908.42 MHz (North America), providing lower interference with Wi-Fi but fewer available devices. Both require a coordinator/hub (Zigbee2MQTT with a CC2652 USB stick is the standard open-source Zigbee coordinator). Z-Wave's lower frequency provides better wall penetration but fewer overall device options compared to Zigbee.
+
+\subsection{Module 4 Reference: Platforms \& Software}
+
+\subsubsection{Home Assistant}
+
+Home Assistant is the leading open-source home automation platform. It runs on Raspberry Pi (recommended: Pi 4 or Pi 5 with 4GB+ RAM), x86 systems, or virtual machines. Key architectural concepts for students: integrations (device drivers), automations (if-then rules), scripts (reusable action sequences), scenes (preset device states), and the Lovelace dashboard (YAML or visual editor). Home Assistant Operating System (HAOS) is the recommended installation method --- it provides a managed Linux environment with add-on support.
+
+\subsubsection{ESPHome}
+
+ESPHome is a firmware framework that generates custom ESP32/ESP8266 firmware from YAML configuration files. Instead of writing C++ Arduino code, students declare their sensors, actuators, and automations in YAML and ESPHome generates, compiles, and uploads the firmware. This dramatically lowers the barrier to entry while teaching configuration-as-code principles. ESPHome devices are automatically discovered by Home Assistant and communicate over the native API (encrypted) or MQTT.
+
+\subsubsection{Node-RED}
+
+Node-RED is a visual flow-based programming tool for wiring together hardware devices, APIs, and online services. It runs on Node.js and provides a browser-based editor where students drag, drop, and connect nodes to create automation flows. Particularly valuable for teaching event-driven programming and data transformation without requiring traditional coding skills.
+
+\subsection{Module 5 Reference: Complete System Projects}
+
+This section catalogs 36 student projects organized into six difficulty tiers. Each project specifies: learning objectives, prerequisites, estimated time, bill of materials with approximate costs, difficulty rating, and the concepts it teaches.
+
+\subsubsection{Tier 1: First Steps (No Prior Experience)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+1 & Blink an LED & Arduino, LED, resistor & \$3 & GPIO, current limiting, digital output \\
+2 & Button-Controlled LED & Arduino, button, LED & \$4 & Digital input, pull-up resistors, debouncing \\
+3 & Light Level Monitor & Arduino, LDR, serial & \$5 & Analog input, voltage dividers, ADC \\
+4 & Temperature Logger & Arduino, DHT11, serial & \$6 & Sensor interfacing, digital protocols, data types \\
+5 & RGB Mood Lamp & Arduino, RGB LED, pots & \$8 & PWM, color mixing, analog control \\
+6 & Servo Door Sign & Arduino, servo, button & \$10 & PWM servo control, mechanical integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 2: Getting Connected (Wi-Fi Basics)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+7 & Wi-Fi Weather Station & ESP32, BME280, OLED & \$15 & I2C, Wi-Fi, web server, JSON \\
+8 & MQTT Temperature Node & ESP32, DHT22, Mosquitto & \$10 & MQTT pub/sub, broker, topics \\
+9 & Smart Nightlight & ESP32, LDR, relay, LED strip & \$18 & Threshold logic, relay safety, ESPHome \\
+10 & Motion Alert System & ESP32, PIR, buzzer & \$12 & Interrupts, notifications, Home Assistant \\
+11 & Plant Soil Monitor & ESP32, capacitive soil sensor & \$12 & Analog sensing, deep sleep, battery life \\
+12 & Wi-Fi Doorbell & ESP32, button, speaker & \$15 & HTTP requests, push notifications \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 3: Home Automation Fundamentals}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+13 & ESPHome Light Switch & ESP32, relay, wall box & \$20 & ESPHome YAML, mains safety, NEC \\
+14 & Smart Thermostat & ESP32, DHT22, relay, OLED & \$25 & PID control, hysteresis, HVAC basics \\
+15 & RFID Door Lock & Arduino, RC522, servo/solenoid & \$20 & RFID/NFC, access control, security \\
+16 & Automatic Humidifier & XIAO, DHT11, atomizer & \$18 & Closed-loop control, threshold logic \\
+17 & IR Remote Hub & ESP32, IR LED, IR receiver & \$12 & IR protocols (NEC, RC5), code capture \\
+18 & Garage Door Controller & ESP32, reed switch, relay & \$22 & Contact sensors, safety interlocks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 4: Intermediate Systems}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+19 & Whole-Home Energy Meter & ESP32, CT clamp, ATM90E32 & \$35 & Current sensing, power calc, calibration \\
+20 & Smart LED Strip Controller & ESP32, MOSFET, WS2812B & \$25 & Addressable LEDs, WLED, color spaces \\
+21 & Multi-Room Temp Monitor & 3x ESP32, DS18B20, HA & \$30 & Distributed systems, dashboards, alerts \\
+22 & Security Camera System & Raspberry Pi, Pi Camera & \$45 & Video streaming, motion detection, storage \\
+23 & Automated Plant Watering & ESP32, soil sensor, pump, relay & \$30 & Irrigation logic, scheduling, water safety \\
+24 & Weather Station + Dashboard & ESP32, BME280, rain/wind & \$40 & Multi-sensor fusion, Lovelace cards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 5: Advanced Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+25 & Smart Mirror & RPi, monitor, two-way mirror film & \$80 & MagicMirror, modules, display design \\
+26 & Voice-Controlled Room & RPi, mic, speaker, HA & \$50 & Wyoming/Rhasspy, local voice, NLP basics \\
+27 & Zigbee Mesh Network & CC2652 stick, Zigbee devices & \$60 & Mesh networking, Zigbee2MQTT, routing \\
+28 & Node-RED Automation Hub & RPi, Node-RED, MQTT & \$40 & Flow programming, API integration \\
+29 & Solar Monitor + Inverter & ESP32, CT clamps, HA Energy & \$40 & AC power measurement, net metering \\
+30 & Presence Detection System & ESP32, mmWave (LD2410) & \$25 & Radar sensing, zone detection, BLE tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 6: Capstone Projects}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Project} & \tableheader{Key Components} & \tableheader{Cost} & \tableheader{Concepts Taught} \\
+\midrule
+31 & Complete Home Hub & RPi 5, HA, Zigbee, MQTT & \$100 & Full-stack integration, backup, security \\
+32 & Custom PCB Sensor Node & KiCad, ESP32, sensors, JLCPCB & \$50 & PCB design, manufacturing, SMD soldering \\
+33 & AI-Powered Doorbell & RPi, camera, TFLite, HA & \$60 & Edge ML, object detection, notifications \\
+34 & Whole-House Audio & RPi, DAC, Snapcast, speakers & \$70 & Multi-room audio, streaming, DSP basics \\
+35 & EV Charging Monitor & ESP32, CT clamp, HA Energy & \$40 & High-current monitoring, energy mgmt \\
+36 & Accessibility Suite & ESP32, switches, voice, relays & \$50 & Universal design, adaptive interfaces \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 6 Reference: Safety \& Standards}
+
+\subsubsection{Electrical Safety --- NEC Fundamentals}
+
+The National Electrical Code (NEC/NFPA 70) is the United States standard for safe electrical installation. While it is not itself a federal law, it is adopted by most state and local jurisdictions as binding code. Key provisions for DIY smart home projects:
+
+\textbf{Low-Voltage vs. Line-Voltage:} Projects operating at 24V DC or below (Class 2 circuits per NEC Article 725) have minimal code requirements. Projects switching 120V AC mains power must comply with NEC wiring methods, including proper wire gauge (14 AWG minimum for 15A circuits), approved junction boxes, wire nuts or lever connectors (Wago), and strain relief on connections.
+
+\textbf{GFCI Protection:} Ground-fault circuit interrupter protection is required in kitchens, bathrooms, garages, outdoors, and basements. Any smart home project in these locations must be installed on a GFCI-protected circuit.
+
+\textbf{Box Fill Calculations:} NEC Article 314.16 specifies maximum conductor fill for junction boxes. Adding smart switches or relay modules inside existing boxes must not exceed fill limits.
+
+\subsubsection{IoT Security Standards}
+
+UL Solutions' IoT Security Rating (based on UL 2900 series) evaluates smart devices against common attack vectors and known vulnerabilities. ETSI EN 303 645 (European standard, widely adopted) specifies baseline security requirements for consumer IoT devices, including: no universal default passwords, implement a means to manage vulnerability reports, keep software updated, securely store sensitive security parameters, communicate securely, minimize exposed attack surfaces.
+
+For DIY projects, students should implement: unique passwords per device, encrypted MQTT (TLS), firmware update mechanisms (ESPHome OTA), network segmentation (IoT devices on a separate VLAN), and disabled unnecessary services.
+
+\subsubsection{Safety Warnings for Student Projects}
+
+\begin{quotebox}
+\textbf{SAFETY RULE 1:} Never work on circuits connected to mains power. Always disconnect power at the breaker before wiring.
+
+\textbf{SAFETY RULE 2:} Use properly rated components. A relay rated for 10A at 250V AC does not mean the wiring is rated for that load --- use appropriately gauged wire.
+
+\textbf{SAFETY RULE 3:} Relay and motor circuits MUST include flyback diodes. Inductive kickback can destroy microcontrollers and create fire hazards.
+
+\textbf{SAFETY RULE 4:} Lithium batteries require charge controllers with overcharge, over-discharge, and thermal protection (TP4056 with DW01 protection IC is the minimum).
+
+\textbf{SAFETY RULE 5:} RF transmitters must comply with FCC Part 15 (ISM bands, power limits, duty cycle). The ESP32's built-in Wi-Fi and BLE are pre-certified. External 433 MHz and LoRa transmitters must operate within legal limits.
+
+\textbf{SAFETY RULE 6:} When in doubt, ask a licensed electrician. NEC compliance is not optional for permanent installations.
+\end{quotebox}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Standards Bodies \& Government Agencies}
+\begin{itemize}[leftmargin=2em]
+  \item National Fire Protection Association. \textit{NFPA 70: National Electrical Code (NEC)}. Updated triennially; current edition 2023 (2026 in development). \url{https://www.nfpa.org/codes-and-standards/nfpa-70-standard-development/70}
+  \item UL Solutions. \textit{UL Verified IoT Device Security Rating}. \url{https://www.ul.com/services/ul-verified-iot-device-security-rating}
+  \item ETSI. \textit{EN 303 645: Cyber Security for Consumer Internet of Things}. European Telecommunications Standards Institute.
+  \item IEEE. \textit{IEEE 1584: Guide for Performing Arc-Flash Hazard Calculations}. IEEE Standards Association.
+  \item Electrical Safety Foundation International (ESFI). \textit{The National Electrical Code}. \url{https://www.esfi.org/}
+  \item FCC. \textit{47 CFR Part 15: Radio Frequency Devices}. Federal Communications Commission.
+\end{itemize}
+
+\subsubsection{Protocol Specifications \& Alliances}
+\begin{itemize}[leftmargin=2em]
+  \item Connectivity Standards Alliance. \textit{Matter Specification v1.5}. Released November 2025. \url{https://csa-iot.org/}
+  \item Thread Group. \textit{Thread 1.4 Specification}. \url{https://www.threadgroup.org/}
+  \item Z-Wave Alliance. \textit{Z-Wave Protocol Specification}. \url{https://z-wavealliance.org/}
+  \item OASIS. \textit{MQTT Version 5.0}. OASIS Standard, March 2019.
+  \item OWASP. \textit{IoT Top 10}. Open Worldwide Application Security Project. \url{https://owasp.org/www-project-internet-of-things/}
+\end{itemize}
+
+\subsubsection{Open-Source Platforms \& Documentation}
+\begin{itemize}[leftmargin=2em]
+  \item Home Assistant. \textit{Official Documentation}. \url{https://www.home-assistant.io/docs/}
+  \item ESPHome. \textit{Official Documentation}. \url{https://esphome.io/}
+  \item Espressif Systems. \textit{ESP32 Technical Reference Manual}. \url{https://www.espressif.com/}
+  \item Raspberry Pi Foundation. \textit{Raspberry Pi Documentation}. \url{https://www.raspberrypi.com/documentation/}
+  \item Arduino. \textit{Arduino Reference}. \url{https://www.arduino.cc/reference/}
+  \item Open Energy Monitor. \textit{Learn: Electricity Monitoring}. \url{https://learn.openenergymonitor.org/}
+  \item Node-RED. \textit{Documentation}. \url{https://nodered.org/docs/}
+  \item CircuitSetup. \textit{Split Single Phase Energy Meter}. \url{https://circuitsetup.us/}
+\end{itemize}
+
+\subsubsection{Educational Resources}
+\begin{itemize}[leftmargin=2em]
+  \item Electronics Tutorials. \textit{Basic Electronics Tutorials}. \url{https://www.electronics-tutorials.ws/}
+  \item University of Colorado Boulder. \textit{ECEA 5340: Sensors and Sensor Circuit Design}. Coursera/CU Boulder.
+  \item Carnegie Mellon University. \textit{24-251: Electronics for Sensing and Actuation}. Department of Mechanical Engineering.
+  \item Hackster.io. \textit{Community Hardware Projects}. \url{https://www.hackster.io/}
+  \item Instructables. \textit{DIY Electronics and Smart Home Projects}. \url{https://www.instructables.com/}
+\end{itemize}
+
+\newpage
+
+% =============================================================================
+% STAGE 3 — MISSION PACKAGE
+% =============================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained educational document mapping smart home technologies to home electronics fundamentals through 36+ hands-on DIY projects. The document serves as both a reference guide and a progressive curriculum, enabling students with no prior electronics experience to build a complete, self-hosted smart home automation system.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+WAVE 0 ──► WAVE 1A ──────────────► WAVE 2 ──► WAVE 3
+ (Found)    (Foundations+Sensors)    (Synth)    (Pub+Verify)
+            WAVE 1B ──────────────►
+            (Connectivity+Platform)
+
+Wave 0: Shared schemas, project template, BOM template
+Wave 1A: Modules 1+2 (Electronics, Sensors/Actuators)
+Wave 1B: Modules 3+4 (Protocols, Platforms) [PARALLEL]
+Wave 2: Modules 5+6 (Complete Projects, Safety) [SYNTHESIS]
+Wave 3: Publication assembly, verification, cross-references
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer:} Shared project template, component glossary, BOM schema, safety checklist template
+  \item \textbf{Knowledge Layer:} Six research modules producing reference content for each domain
+  \item \textbf{Project Layer:} 36 complete student projects with all artifacts (diagrams, code, configs, BOMs)
+  \item \textbf{Integration Layer:} Cross-references between projects, concept index, skill tree mapping
+  \item \textbf{Publication Layer:} Final document assembly, table of contents, index, verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+D1 & Protocol Reference Guide & All 10+ protocols with comparison tables & Module 3 spec \\
+D2 & Sensor \& Actuator Catalog & 15+ sensors, 10+ actuators with datasheets & Module 2 spec \\
+D3 & Electronics Foundations & Ohm's law through op-amps with examples & Module 1 spec \\
+D4 & Platform Setup Guides & HA, ESPHome, Node-RED install + config & Module 4 spec \\
+D5 & Project Collection (36) & BOM, circuit, code, config per project & Module 5 spec \\
+D6 & Safety \& Standards Guide & NEC, UL, IoT security, RF compliance & Module 6 spec \\
+D7 & Concept Index & Cross-reference: concept $\rightarrow$ projects & Integration spec \\
+D8 & Skill Tree Map & Visual progression from Tier 1 to Tier 6 & Integration spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 3K \\
+Electronics foundations & Schemas & Sonnet & 25K \\
+Sensor/actuator catalog & Schemas & Sonnet & 30K \\
+Protocol reference & Schemas & Sonnet & 20K \\
+Platform guides & Protocol ref & Sonnet & 20K \\
+Tier 1--2 projects (12) & Foundations, sensors & Sonnet & 40K \\
+Tier 3--4 projects (12) & Protocols, platforms & Sonnet & 50K \\
+Tier 5--6 projects (12) & All modules & Opus & 60K \\
+Safety \& standards & All modules & Opus & 20K \\
+Cross-module synthesis & All components & Opus & 15K \\
+Concept index + skill tree & All projects & Sonnet & 10K \\
+Publication assembly & All components & Sonnet & 8K \\
+Verification pass & Publication & Opus & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 33\% & Capstone projects requiring cross-module integration; safety analysis requiring judgment about NEC compliance and security; synthesis requiring coherent narrative across 36 projects \\
+Sonnet & 58\% & Foundational modules (electronics, sensors, protocols); Tier 1--4 projects following established patterns; platform setup guides with well-documented procedures \\
+Haiku & 9\% & Shared schemas, BOM templates, project scaffolding; repetitive structural work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & 1 & Sequential & 1 \\
+1 & Parallel Research & 4 & Parallel (2 tracks) & 6 \\
+2 & Synthesis & 4 & Sequential & 8 \\
+3 & Publication & 3 & Sequential & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Project template schema & Haiku & YAML template with BOM, circuit, code, config sections \\
+Component glossary seed & Haiku & Standardized names, part numbers, supplier links \\
+Safety checklist template & Haiku & Reusable safety gate for each project tier \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: Hardware Foundations (Modules 1 + 2)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Electronics fundamentals & Sonnet & Complete reference: laws, components, tools \\
+Sensor catalog & Sonnet & 15+ sensors with specs, interfaces, example code \\
+Actuator catalog & Sonnet & 10+ actuators with drive circuits and safety notes \\
+Signal conditioning guide & Sonnet & ADC, DAC, filtering, level shifting techniques \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Software \& Connectivity (Modules 3 + 4)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Protocol reference & Sonnet & All protocols with comparison matrix \\
+MQTT deep dive & Sonnet & Broker setup, topic design, QoS, TLS \\
+Home Assistant guide & Sonnet & Installation, configuration, automations \\
+ESPHome guide & Sonnet & YAML config, sensor/actuator components, OTA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis (Projects + Safety)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Tier 1--2 projects (12) & Sonnet & Complete project packages: BOM, circuit, code \\
+Tier 3--4 projects (12) & Sonnet & Projects integrating protocols and platforms \\
+Tier 5--6 projects (12) & Opus & Capstone projects with cross-module integration \\
+Safety \& standards module & Opus & NEC guide, IoT security, RF compliance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Concept index generation & Sonnet & concept $\rightarrow$ project mapping \\
+Skill tree visualization & Sonnet & ASCII + description of progression paths \\
+Document assembly & Sonnet & Combined document with TOC, cross-refs \\
+Verification pass & Opus & Safety review, accuracy check, completeness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Group all Wave 0 tasks into a single context window (they share no dependencies and total under 5K tokens)
+  \item Track A and Track B execute in parallel --- no shared state until Wave 2
+  \item Within each track, order tasks to maximize context reuse: electronics $\rightarrow$ sensors $\rightarrow$ actuators shares component knowledge across the 5-minute cache TTL
+  \item Wave 2 projects should be batched by tier (6 projects per context window) to reuse platform and protocol context
+  \item Safety module runs last in Wave 2 so it can reference all project content for comprehensive coverage
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & 0 & 0 & 3K \\
+Wave 1: Parallel Research & 0 & 95K & 0 \\
+Wave 2: Synthesis & 80K & 90K & 0 \\
+Wave 3: Publication & 5K & 18K & 0 \\
+\midrule
+\textbf{Total} & \textbf{85K (28\%)} & \textbf{203K (63\%)} & \textbf{3K (9\%)} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+                    ┌─────────────────┐
+                    │  W0: Foundation  │
+                    │  (schemas, BOM)  │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+    ┌─────────▼─────────┐       ┌──────────▼──────────┐
+    │  W1A: Hardware     │       │  W1B: Software      │
+    │  - Electronics     │       │  - Protocols        │
+    │  - Sensors         │       │  - MQTT             │
+    │  - Actuators       │       │  - Home Assistant   │
+    │  - Signal cond.    │       │  - ESPHome          │
+    └─────────┬──────────┘       └──────────┬──────────┘
+              │                             │
+              └──────────────┬──────────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │  W2: Synthesis              │
+              │  - Tier 1-2 projects (12)   │
+              │  - Tier 3-4 projects (12)   │
+              │  - Tier 5-6 projects (12)   │
+              │  - Safety & standards       │
+              └──────────────┬──────────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │  W3: Publication            │
+              │  - Concept index            │
+              │  - Skill tree               │
+              │  - Assembly & verification  │
+              └─────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All technical claims traceable to datasheets, standards bodies, or platform documentation. Zero entertainment media sources. \\
+SC-NUM & Numerical attribution & Every resistance value, current rating, voltage level, and frequency cited with source or derivation shown. \\
+SC-SAF & Mains safety warnings & Every project involving 120V/240V AC includes explicit safety warnings, NEC references, and ``consult electrician'' notes. \\
+SC-BAT & Battery safety & Every project using lithium batteries specifies charge controller with thermal protection. \\
+SC-FLY & Flyback diodes & Every relay and motor circuit includes flyback diode in schematic and BOM. \\
+SC-REL & Relay ratings & Every relay circuit specifies load current and verifies relay and wire gauge are rated for the load. \\
+SC-RF & RF compliance & Every project using RF transmission references FCC Part 15 or equivalent regulatory limits. \\
+SC-SEC & Network security & Every internet-connected project specifies encrypted communication (TLS/WPA3) and unique credentials. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Protocol mapping covers 10+ standards & CF-01, CF-02 & Pending \\
+2. Sensor catalog $\geq$15 types & CF-03, CF-04 & Pending \\
+3. Actuator catalog $\geq$10 types & CF-05 & Pending \\
+4. 30+ complete student projects & CF-06, CF-07 & Pending \\
+5. Projects span 6 difficulty tiers & CF-08 & Pending \\
+6. Mains voltage projects include safety & SC-SAF, SC-REL & Pending \\
+7. All firmware code compiles & CF-09, CF-10 & Pending \\
+8. Energy monitoring within 5\% accuracy & CF-11, CF-12 & Pending \\
+9. Security module covers segmentation & SC-SEC, CF-13 & Pending \\
+10. HA dashboards from each project & CF-14, IN-01 & Pending \\
+11. ``What You Learned'' per project & CF-15, CF-16 & Pending \\
+12. Self-contained for beginners & IN-02, IN-03, EC-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; datasheet verification; protocol spec review \\
+EXEC-A & Executor (HW) & Modules 1--2 content; Tier 1--2 project packages \\
+EXEC-B & Executor (SW) & Modules 3--4 content; platform setup guides \\
+CRAFT-HW & Hardware Specialist & Circuit design review; component selection; PCB guidance \\
+CRAFT-SW & Software Specialist & Firmware code review; ESPHome/HA config validation \\
+VERIFY & Verification & Source validation; code compilation check; safety review \\
+INTEG & Integration Agent & Cross-module consistency; concept index; skill tree \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total estimated tokens & 291K \\
+Context windows & 18 \\
+Sessions & 4 \\
+Parallel tracks & 2 (Wave 1 only) \\
+Activation profile & Squadron (12 roles) \\
+Model split & Opus 28\% / Sonnet 63\% / Haiku 9\% \\
+Total projects & 36 (6 per tier, 6 tiers) \\
+Safety-critical tests & 8 (mandatory-pass) \\
+Total tests & 38 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The best way to learn electronics is to build something that matters to you --- something you'll use every day. A smart home is the perfect laboratory because every room is a lesson, every switch is a circuit, and every automation is a program. The technology disappears into the walls, but the understanding stays with you forever.''}
+
+\vspace{0.5em}
+\hfill --- The spaces between the components are where the learning happens.
+\end{quotebox}
+
+\end{document}
