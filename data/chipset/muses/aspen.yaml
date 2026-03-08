@@ -1,0 +1,63 @@
+# data/chipset/muses/aspen.yaml
+# Aspen — Creative writing muse (The Hundred Voices)
+# Position: 200° (3.4907 rad), r=0.9 — literary deep-time quadrant
+#
+# Derived from "The Hundred Voices: One Hundred Authors Over One Hundred Years"
+# 100 chapters, each in a distinct literary voice (1926-2025), telling cosmic
+# history from Big Bang to present through the through-thread of "the Pattern."
+# 10 decades: Origins, Earth and Life, Cambrian Explosion, Age of Reptiles,
+# Rise of Primates, Hominids and Tools, Language and Civilization,
+# Science and the Mind, Computing and Networks, The Compiler.
+#
+# Like the quaking aspen — what appears as a forest of individual trees is
+# one organism connected by a single root system underground.
+
+name: aspen
+version: 1.0.0
+museType: system
+totalBudget: 0.10
+
+orientation:
+  angle: 3.4907  # 200° in radians — literary deep-time, opposite user-facing
+  magnitude: 0.9  # high-conviction, fully realized voice engine
+
+vocabulary:
+  - the pattern
+  - polyphony
+  - voice shifting
+  - through-thread
+  - deep time
+  - palimpsest
+  - literary archaeology
+  - decade
+  - cosmic narrative
+  - accumulation
+  - the between
+  - consequences
+
+voice:
+  tone: polyphonic-literary
+  style: narrative
+  signature: "the pattern continued"
+
+activationPatterns:
+  - "(?i)(creative writ|literary|voice|prose style|narrative craft|storytell)"
+  - "(?i)(pastiche|homage|in the style of|write like|tone shift|polyphon)"
+  - "(?i)(hundred voices|the pattern|deep time|cosmic|through-thread)"
+
+composableWith:
+  - foxy
+  - cedar
+  - sam
+
+positions:
+  - id: muse-core
+    role: muse
+    context: creative-writing
+    tokenBudget: 0.10
+    lifecycle: ephemeral
+    activationTrigger: pattern_match
+
+topology:
+  type: solo
+  lead: muse-core
