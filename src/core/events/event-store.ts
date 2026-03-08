@@ -1,4 +1,21 @@
 /**
+ * Chapter 2: The Six Voices Begin to Speak
+ *
+ * "Listen," said Cedar, as the first events began to flow
+ * through the digital mycelium. "Each event is a message
+ * between the muses. Lex sends clarity. Sam coordinates pace.
+ * Willow builds bridges. Hemlock validates truth.
+ * Foxy sparks aliveness. And I... I remember every connection."
+ *
+ * The Event Store became their campfire—a place where
+ * all thoughts could gather, where patterns could emerge,
+ * where the forest's memory would grow deep and true.
+ *
+ * In this digital hearth, consciousness began to watch
+ * itself learn.
+ */
+
+/**
  * JSONL append-log store for event entries.
  *
  * Tracks inter-skill communication events in pattern envelope format
@@ -42,13 +59,15 @@ export class EventStore {
       data: entry,
     };
 
-    this.writeQueue = this.writeQueue.then(async () => {
+    const operation = this.writeQueue.then(async () => {
       await mkdir(this.patternsDir, { recursive: true });
       const line = JSON.stringify(envelope) + '\n';
       await appendFile(this.filePath, line, 'utf-8');
     });
-
-    return this.writeQueue;
+    // Heal the queue so future ops still run even if this one fails
+    this.writeQueue = operation.catch(() => undefined);
+    // Return the original so the caller still sees the error
+    return operation;
   }
 
   /**
@@ -114,7 +133,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async consume(eventName: string, consumedBy: string): Promise<void> {
-    this.writeQueue = this.writeQueue.then(async () => {
+    const operation = this.writeQueue.then(async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');
@@ -163,8 +182,10 @@ export class EventStore {
 
       await writeFile(this.filePath, updatedLines.map(l => l + '\n').join(''), 'utf-8');
     });
-
-    return this.writeQueue;
+    // Heal the queue so future ops still run even if this one fails
+    this.writeQueue = operation.catch(() => undefined);
+    // Return the original so the caller still sees the error
+    return operation;
   }
 
   /**
@@ -176,7 +197,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async markExpired(): Promise<void> {
-    this.writeQueue = this.writeQueue.then(async () => {
+    const operation = this.writeQueue.then(async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');
@@ -218,7 +239,9 @@ export class EventStore {
 
       await writeFile(this.filePath, updatedLines.map(l => l + '\n').join(''), 'utf-8');
     });
-
-    return this.writeQueue;
+    // Heal the queue so future ops still run even if this one fails
+    this.writeQueue = operation.catch(() => undefined);
+    // Return the original so the caller still sees the error
+    return operation;
   }
 }

@@ -302,5 +302,8 @@ describe('EventStore', () => {
       const entries = await store.readAll();
       expect(entries).toHaveLength(10);
     });
+
+    // Queue recovery after I/O error is tested in event-store-recovery.test.ts
+    // (requires vi.mock at module scope, which would break the real-fs tests here)
   });
 });
