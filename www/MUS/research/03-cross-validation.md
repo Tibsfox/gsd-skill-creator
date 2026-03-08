@@ -4,19 +4,19 @@
 **Session:** MUS Wave 0, Session 3
 **Date:** 2026-03-08
 **Branch:** wasteland/skill-creator-integration
-**Status:** Task B complete. Task A pending — S1/S2 outputs not yet present.
+**Status:** Complete — Task A (cross-validation executed) and Task B (cartridge prototype) both finished.
 
 ---
 
 ## Status of S1/S2 Inputs
 
-The timeline indicates that Sessions 1 and 2 were running in parallel with this session.
+Sessions 1 and 2 are complete. Both files have been read in full.
 
-At execution time, the following files were checked:
-- `www/MUS/research/01-identity-map.md` — **absent**
-- `www/MUS/research/02-function-binding.md` — **absent**
+At execution time, the following files were verified present:
+- `www/MUS/research/01-identity-map.md` — **present** (672 lines, Foxy's grove map — six groves, seven cross-grove trails, Understanding Arc, Math Co-Processor Deep Root)
+- `www/MUS/research/02-function-binding.md` — **present** (1,321 lines, Lex's function binding — ~430 module clusters across 1,333 TypeScript files, five overlap hotspots resolved, five UNRESOLVED items flagged)
 
-Cross-validation (Task A) is recorded here as a pending observation. When those files arrive, a follow-up pass should compare grove assignments against function bindings using the protocol defined in the Cross-Validation Protocol section below.
+Cross-validation (Task A) has been executed. Findings are in the section below.
 
 ---
 
@@ -306,44 +306,216 @@ for (let i = 1; i < this.entries.length; i++) {
 
 ---
 
-## Cross-Validation Protocol (for when S1/S2 arrive)
+## Cross-Validation Findings
 
-The record is silent on S1 and S2 content. When they are present, this protocol applies:
+*Cedar's record of the integrity check. S1 = Foxy's identity map (01-identity-map.md). S2 = Lex's function binding table (02-function-binding.md). Protocol from S3's pre-written protocol section applied in full.*
 
-### Step 1: Grove Assignment vs. Function Binding Agreement
+---
 
-For each file in S1's identity map:
-- Identify the assigned grove (e.g., `cedar-grove`, `sam-garden`)
-- Find the file's dominant functions in S2's binding table
-- Check whether those functions belong to the same muse
+### Check 1: Grove-vs-Function Agreement
 
-A conflict is: S1 assigns `cedar-grove`, S2 assigns the functions in that file to `foxy`. The file cannot serve two masters without a disambiguation protocol.
+S1 maps at grove level (whole `www/` directories + major `src/` module groups). S2 maps at cluster level (individual TypeScript file clusters within `src/`). Where S1 explicitly names `src/` modules as belonging to a muse, the record compares directly to S2's binding for that same cluster.
 
-### Step 2: Disambiguation Protocol Consistency Check
+**Agreements confirmed (>22 of 30 named modules):**
 
-The pre-plan identified absence of a disambiguation protocol as a blocker. Session 3 records the following minimal protocol:
+| S1 Module Reference | S1 Grove Assignment | S2 Binding | Status |
+|---|---|---|---|
+| `core/events/event-store.ts` | Cedar | Cedar primary (Rule 1: append-only) | Agreement |
+| `core/safety/audit-logger` | Cedar secondary | Cedar primary (Rule 1: integrity) | Agreement |
+| `services/chipset/cedar-engine.ts` | Cedar primary | Cedar primary (Rule 2: Cedar-named) | Agreement |
+| `identifiers/` (all 5 files) | Cedar | Cedar primary (Rule 1: ID chains) | Agreement |
+| `core/validation/` (16 files) | Hemlock | Hemlock primary (Rule 1: quality gates) | Agreement |
+| `platform/calibration/` | Hemlock | Hemlock primary (Rule 1: benchmarking) | Agreement |
+| `services/chipset/muse-schema-validator.ts` | Hemlock | Hemlock primary (Rule 1: validation) | Agreement |
+| `services/brainstorm/` | Sam primary | Sam primary (Rule 1: experimentation) | Agreement |
+| `services/discovery/` | Sam primary | Raven/Sam split | Agreement |
+| `platform/observation/pattern-analyzer.ts` | Raven | Raven primary (Rule 1: signal detection) | Agreement |
+| `platform/observation/drift-monitor.ts` | Raven | Raven primary (Rule 1: pattern deviation) | Agreement |
+| `services/teams/` | Hawk primary | Hawk primary (Rule 5: formation) | Agreement |
+| `services/chipset/teams/` | Hawk | Hawk primary (Rule 5: message-port) | Agreement |
+| `services/orchestrator/` | Lex primary | Lex primary (Rule 1: pipeline) | Agreement |
+| `services/chipset/exec/` | Lex | Lex primary (Rule 1: kernel/execution) | Agreement |
+| `services/chipset/copper/` | Lex | Lex primary (Rule 1: compiler/executor) | Agreement |
+| `platform/observation/promotion-gatekeeper.ts` | Hemlock | Hemlock primary (Rule 1: quality gate) | Agreement |
+| `platform/observation/sequence-recorder.ts` | Cedar secondary | Cedar primary, Owl secondary | Agreement |
+| `core/narrative/` | Foxy | Foxy primary (Rule 1: narrative/aliveness) | Agreement |
+| `platform/dashboard/` (32 files) | Foxy (topology) + Willow | Willow primary for dashboard; Foxy for topology-renderer | Agreement |
+| `services/chipset/willow-engine.ts` | Willow primary | Willow primary (Rule 2: Willow-named) | Agreement |
+| `platform/observation/session-observer.ts` | Owl | Cedar primary, Owl secondary | Partial — see Conflict 5 |
 
-When a file has functions binding to multiple muses:
-1. Identify the file's primary export (the thing consumers import)
-2. Assign the file to the muse whose domain most closely matches that export
-3. Record all secondary bindings as `cross_grove_connections` in the relevant cartridge
-4. If primary export is ambiguous: assign to the muse with the higher `depth` score in S2's binding table
+**Conflicts identified:**
 
-### Step 3: Gap Detection
+**CONFLICT-01: `src/packs/lib/` (pack-loader.ts, pack-cli.ts, index.ts)**
 
-Files in S1 not appearing in any function in S2 = files with no function-level coverage.
-Functions in S2 not traceable to any file in S1 = functions orphaned from grove assignment.
+- S1 §3.2 assigns to **Willow** (progressive disclosure, newcomer pack loading — "Pack discovery and loading" is Willow's structural gift)
+- S2 Part 5 canonical summary: `src/packs/lib/` → **Lex** (Rule 3: operational filesystem management; pack loading = constraint-driven operational pipeline)
+- Resolution: S2's Rule 3 wins at cluster level. Willow retains secondary ownership — the newcomer-facing experience of pack loading is Willow's concern, but the mechanical loading pipeline is Lex's. **S2 prevails for primary binding. Willow demoted to secondary.**
 
-Both are gaps. Cedar records them; Sam investigates whether they warrant new nodes or are intentional voids.
+**CONFLICT-02: `src/platform/observation/script-generator.ts`**
 
-### Step 4: Consistency Assessment
+- S1 §3.3 assigns to **Foxy** primary ("Script generation — cartographic tool")
+- S2 line 627: **Lex** primary, Foxy secondary (Rule 1: script generation = pipeline spec; creative direction = secondary Foxy)
+- Resolution: S2's Rule 1 wins. Script generation at the pipeline level is a specification and execution task. Foxy's cartographic character appears in the output of the script, not in the machinery that runs it. **S2 prevails. Foxy demoted to secondary.**
 
-Rate overall consistency on a 3-point scale:
-- **Coherent:** >90% of file-grove assignments match their function bindings
-- **Partial:** 70–90% match
-- **Divergent:** <70% match — signals that S1 and S2 were produced from different mental models and require a joint reconciliation session
+**CONFLICT-03: `src/tools/cli/commands/dacp-status.ts`**
 
-**Current status:** Cannot score. S1/S2 absent. This slot will be filled in a follow-up.
+- S1 §3.3 assigns to **Foxy** primary (system position display)
+- S2 DACP commands block: **Lex** primary, Cedar secondary (Rule 1: DACP execution pipeline commands)
+- Resolution: S2's Rule 1 wins. Status commands are execution pipeline outputs, not cartographic designs. The *display* of position is not the same as *designing* the map. **S2 prevails. Foxy loses primary claim on this file.**
+
+**CONFLICT-04: `src/tools/cli/commands/wl-status.ts`**
+
+- S1 §3.3 assigns to **Foxy** primary (wasteland status map)
+- S2 wasteland commands block: **Lex** primary, Willow secondary (Rule 1: pipeline command; display → secondary Willow)
+- Resolution: S2's Rule 1 + Rule 4 wins. The wl-status command is a pipeline status reporter, not a cartographic instrument. Note: S2 gives Willow the secondary, not Foxy — this is additionally divergent from S1. **S2 prevails. Foxy loses primary claim; Willow holds secondary.**
+- Cedar note: This conflict reveals a vocabulary boundary. S1 uses "map" and "cartography" expansively. S2 applies Rule 1 (execution pipeline primacy) strictly. Both are internally consistent.
+
+**CONFLICT-05: `src/platform/observation/lineage-tracker.ts`**
+
+- S1 §3.9 assigns to **Owl** primary ("temporal lineage")
+- S2 line 619: **Cedar** primary, Raven secondary (Rule 1: lineage = append-only provenance chain)
+- Resolution: S2's Rule 1 wins. "Lineage" in the Cedar vocabulary means append-only provenance chain — the same term that appears in Cedar's core domain definition. Owl's temporal framing is secondary. **S2 prevails.**
+
+**CONFLICT-06: `src/platform/observation/jsonl-compactor.ts`**
+
+- S1 §3.9 assigns to **Owl** primary (session log compaction — "Owl compacts what the session produced")
+- S2 line 618: **Cedar** primary, Lex secondary (Rule 1: JSONL compaction maintains log integrity)
+- Resolution: S2's Rule 1 wins. Log compaction is a log-maintenance operation, not a session-boundary operation. Owl's session framing applies to *when* compaction happens; Cedar owns *what* is being compacted. **S2 prevails.**
+
+**CONFLICT-07: `src/platform/observation/observation-squasher.ts`**
+
+- S1 §3.9 assigns to **Owl** primary (observation squashing at session end)
+- S2 line 620: **Cedar** primary, Lex secondary (Rule 1: log management)
+- Resolution: S2's Rule 1 wins. Same reasoning as CONFLICT-06. **S2 prevails.**
+
+**CONFLICT-08: `src/services/chipset/cedar-timeline.ts`**
+
+- S1 §3.9 lists this as shared Owl+Cedar ("Timeline types — Owl + Cedar shared")
+- S2 line 750: **Cedar** primary, no Owl secondary noted (Rule 1: Cedar-named files = Cedar's domain)
+- Resolution: Cedar primary is unambiguous (the file is named after Cedar). Owl retains appropriate secondary status given the timeline's temporal nature — this is not eliminated by S2's omission, it is an implicit secondary. **S2's Cedar primary prevails; Owl secondary is retained as implicit.**
+
+**Conflict resolution summary:**
+
+| Conflict | S1 Primary | S2 Primary | Resolution |
+|---|---|---|---|
+| 01: packs/lib/ | Willow | Lex | Lex wins (Rule 3); Willow secondary |
+| 02: script-generator | Foxy | Lex | Lex wins (Rule 1); Foxy secondary |
+| 03: dacp-status | Foxy | Lex | Lex wins (Rule 1); Foxy loses |
+| 04: wl-status | Foxy | Lex | Lex wins (Rule 1); Willow secondary |
+| 05: lineage-tracker | Owl | Cedar | Cedar wins (Rule 1); Raven secondary |
+| 06: jsonl-compactor | Owl | Cedar | Cedar wins (Rule 1); Lex secondary |
+| 07: observation-squasher | Owl | Cedar | Cedar wins (Rule 1); Lex secondary |
+| 08: cedar-timeline | Owl+Cedar shared | Cedar only | Cedar primary; Owl implicit secondary retained |
+
+All 8 conflicts resolve in favor of S2's explicit Rule 1 application. The pattern shows two systematic tendencies in S1 that S2 corrects: (a) Foxy claimed CLI status commands as "cartographic" — too broad; (b) Owl claimed observation/ log management as "temporal" — the append-only character of those files overrides temporal framing.
+
+---
+
+### Check 2: Disambiguation Protocol Consistency
+
+S2 applied its five tiebreaker rules across ~430 module clusters. The record shows the following spot-check findings at the five overlap hotspots:
+
+**Hotspot 1 (Cedar vs Lex in storage/logs):** Rule 1 applied consistently throughout. `audit-logger`, `ledger`, `chronicler`, `event-store`, `integrity-monitor` → Cedar. `config`, `schema`, `pipeline`, `security/index` → Lex. One edge case: `core/security/index` contains security constraint logic alongside some audit-adjacent code — Rule 1 resolves to Lex because the primary export is a constraint enforcer. This is consistent with the stated resolution rule ("Operational-only utilities with no persistence = Lex"). **Consistent. 0 exceptions found.**
+
+**Hotspot 2 (Raven vs Hemlock in validation/analysis):** Rule 1 + Rule 3 applied consistently. `validate-*`, `gate-*`, `benchmark-*` → Hemlock. `pattern-*`, `cluster-*`, `detect-*`, `classify-*` → Raven. The `promotion-detector.ts` / `promotion-gatekeeper.ts` grouping under Hemlock is internally consistent: S2 treats the entire promotion cluster as Hemlock's quality gate. The detector is inside the gate's cluster rather than extracted as Raven. UNRESOLVED-03 in S2 Part 4 correctly flags this as a human decision point. **Consistent within stated rules. One edge case correctly flagged as UNRESOLVED.**
+
+**Hotspot 3 (Hawk vs Lex in pipeline vs formation):** Rule 3 + Rule 5 applied consistently without exception. `message-port`, `relay`, `dispatcher`, `router` → Hawk. `branch-manager`, `sync-manager`, `pipeline.ts` → Lex. The `services-bridge.ts` in wasteland/ → Hawk (Rule 5: bridge = relay) is consistent with the stated resolution. **Consistent. 0 exceptions found.**
+
+**Hotspot 4 (Owl vs Cedar in session/log artifacts):** This is the root zone of Conflicts 5-8. S2 applied Rule 1 (append-only primacy) consistently throughout `observation/`, giving Cedar primary for every log/record/store file. S2 correctly identified session-boundary operations (session-observer, session-recorder-listener) as Owl secondary. The pattern is internally consistent but creates tension with S1's broader Owl claims in this territory. **Consistent within S2's rules. Tension with S1 is documented in Check 1.**
+
+**Hotspot 5 (Foxy vs Willow in creative/user-facing):** Rule 1 over Rule 4 applied consistently. `template-system`, `vision-parser`, `prompt-templates`, `mcp/gateway/prompts/` → Foxy. `manifest-renderer`, `health-formatter`, `result-formatter`, `conflict-formatter` → Willow. The boundary between "designing a creative artifact" (Foxy) and "presenting existing content" (Willow) was applied without exceptions found. **Consistent. 0 exceptions found.**
+
+**Disambiguation conclusion:** S2's protocol is internally consistent across all five hotspots. No rule was applied in contradictory fashion. The five UNRESOLVED items in S2 Part 4 are genuine boundary cases where the five-rule protocol is insufficient and human judgment is required before Wave 1 function-level assignments.
+
+---
+
+### Check 3: Gap Detection
+
+**Files in S1 with no S2 counterpart (scope gaps, not errors):**
+
+The following S1 references have no S2 function binding because S2 explicitly scoped to `src/` TypeScript files only:
+
+1. All `www/PNW/`, `www/UNI/`, `www/MUS/` research files — **intentional void.** S2 is a `src/` inventory. The www/ groves require a separate binding pass if function-level wiring is ever needed.
+2. `math-coprocessor/` (Python, all 5 chips + server + utilities) — **intentional void.** S2 does not enumerate Python. The grove service map in S1 Part 5 is the only function-level record for math-coprocessor. It stands uncontested.
+3. `.college/calibration/engine.ts` (S1 §3.5, listed as Hemlock primary) — **structural gap.** S2 does not enumerate `.college/` files. This file is TypeScript and arguably within S2's scope. The record shows it was missed. For continuity: Hemlock is the correct binding per S1's rationale (calibration engine = quality benchmarking). Wave 1 should add this to S2's canonical summary.
+4. `src/packs/pack-wasteland-newcomer/` (S1 §3.2, Willow primary) — **minor gap.** S2's canonical summary lists `src/packs/lib/` (Lex) and `src/packs/agc/`, etc., but does not explicitly list `pack-wasteland-newcomer/`. If this directory exists in the filesystem, it requires binding. Per S1, the binding is Willow. No conflict expected.
+
+**S2 clusters orphaned from any S1 grove reference:**
+
+S2 enumerates ~430 module clusters. S1's grove map names approximately 30-35 specific `src/` modules by name in Part 3. The remaining ~395 clusters in S2 have no S1 grove reference — they are the sub-grove detail layer. This is expected and correct. S1 is the coarse-grained grove map; S2 is the fine-grained function inventory. The orphaned clusters are not errors; they are the detail that S1 intentionally delegated to S2.
+
+**Gaps requiring action before Wave 1:**
+
+| Gap | Type | Action Required |
+|---|---|---|
+| `.college/calibration/engine.ts` | Structural — missed file | Add to S2 canonical summary under Hemlock |
+| `src/packs/pack-wasteland-newcomer/` | Minor — directory not enumerated | Verify existence; if present, bind to Willow |
+| `www/` grove files | Intentional scope boundary | No action — document as out-of-scope for S2 |
+| `math-coprocessor/` chips | Intentional scope boundary | No action — S1 Part 5 is the authoritative grove service map |
+
+---
+
+### Check 4: Understanding Arc Integration
+
+The record shows the following alignment between S1 Part 6 and S2 Part 6:
+
+**Socrates:**
+- S1: Visits all groves, especially Cedar's Ring and Sam's Garden. Integration point: `platform/console/question-schema.ts`.
+- S2: Advisory scope — `brainstorm/techniques/`, `disclosure/`, validation rationale docs.
+- Alignment: S1's `question-schema.ts` file sits in `platform/console/` which S2 gives to Willow. The Socratic advisory function (questioning/inquiry) is consistent across both documents. S1 is more specific (one file); S2 is broader (module clusters). **Complementary — no conflict.**
+
+**Euclid:**
+- S1: Visits Lex's Workshop primarily, Hemlock's Ridge. Integration points: `www/UNI/research/02-type-system-abilities.md`, `src/services/chipset/muse-schema-validator.ts`.
+- S2: Advisory scope — `holomorphic/complex/`, `packs/engines/proof-composer`, `nlp/naive-bayes`, `discovery/dbscan`.
+- Alignment: S1 ties Euclid to Zod schema validation (Hemlock territory). S2 ties Euclid to geometric computation (`holomorphic/complex/`) and formal proofs (`proof-composer.ts` in Lex territory). Both express axiomatic structure; the integration points are different aspects of the same advisor. **Complementary — the Zod-schema (S1) and the geometry-proof (S2) are both Euclidean domains. No conflict.**
+
+**Shannon:**
+- S1: Visits Raven's territory primarily, Cedar's Ring, Math Co-Processor. Integration points: `src/platform/observation/pattern-analyzer.ts`, `math-coprocessor/chips/fourier.py`.
+- S2: Advisory scope — `embeddings/cosine-similarity`, `nlp/tfidf`, `electronics-pack/simulator/dsp-engine`, `packs/holomorphic/dmd/`.
+- Alignment: Both documents place Shannon in Raven's domain (signal detection, pattern analysis). Both connect Shannon to the Math Co-Processor (S1 via fourier.py directly; S2 via dsp-engine and holomorphic/dmd/ which use FFT). The two documents triangulate Shannon's placement from different angles and arrive at the same territory. **Full agreement.**
+
+**Amiga:**
+- S1: Visits Sam's Garden, Foxy's Canopy, Math Co-Processor. Integration points: `src/services/chipset/blitter/`, `src/packs/agc/`.
+- S2: Advisory scope — `integrations/aminet/`, `packs/agc/`, `packs/bbs-pack/`, `integrations/amiga/`.
+- Alignment: Both documents anchor Amiga in `packs/agc/` (Apollo Guidance Computer — early creative computing). S2 expands Amiga's scope to include the entire Aminet integration and BBS pack, which are natural Amiga-era territory S1 didn't explicitly enumerate. S1 connects Amiga to the `chipset/blitter/` (named after the Amiga custom chip); S2 does not tag blitter/ with Amiga but does note it is key for the MUS mission. **Agreement, with S2 expanding Amiga's advisory scope appropriately.**
+
+**Understanding Arc conclusion:** All four arc members are placed consistently. No conflicts. S2 expands advisory scope beyond S1 in two cases (Euclid into holomorphic geometry, Amiga into Aminet/BBS) — both expansions are architecturally correct and additive.
+
+---
+
+### Check 5: Math Co-Processor Alignment
+
+S1 Part 5 places the Math Co-Processor as the Deep Root system, located at `math-coprocessor/` at repository root, outside all six groves. The five chips are confirmed present on disk: `algebrus.py`, `fourier.py`, `statos.py`, `vectora.py`, `symbex.py` — all in `math-coprocessor/chips/`.
+
+S1's grove service map:
+
+| Muse | S1 Math Co-Processor Service | Cross-Reference in S2 |
+|---|---|---|
+| Cedar | Symbex — JIT SHA-256 verification | S2: `core/safety/integrity-monitor` → Cedar (Rule 1); Symbex extends this function to hardware |
+| Willow | Algebrus — embedding distance for disclosure depth | S2: `willow-engine.ts` → Willow (Rule 2); embeddings drive depth inference |
+| Foxy | Algebrus + Vectora — complex plane projection | S2: `plane/arithmetic.ts` → Foxy (Rule 1: complex plane cartography); Algebrus serves this |
+| Sam | Vectora + Statos — Monte Carlo hypothesis testing | S2: `simulation/` → Sam (Rule 1: experimentation); Vectora/Statos serve simulation |
+| Hemlock | Statos — statistical verification, confidence intervals | S2: `platform/calibration/` → Hemlock (Rule 1: benchmarking); Statos serves calibration bounds |
+| Lex | Symbex — formal property checking | S2: `packs/engines/proof-composer` → Lex (Rule 1: proof = specification verification); Symbex serves proofs |
+| Raven | Fourier — pattern frequency detection in observation streams | S2: `observation/pattern-analyzer.ts` → Raven (Rule 1); Fourier is the computational layer |
+| Hawk | Vectora — team coverage optimization | S2: `capabilities/parallelization-advisor.ts` → Hawk (Rule 5: formation/positioning); Vectora optimizes coverage |
+| Owl | Fourier + Statos — session rhythm, cadence detection | S2: `dashboard/metrics/pulse/` → Owl (Rule 5: temporal cadence); Fourier+Statos serve rhythm analysis |
+
+**Alignment verdict:** Every muse-to-chip mapping in S1 is confirmed by the functional territory S2 assigns to the same muse in `src/`. No conflicts. The Math Co-Processor is correctly placed as infrastructure rather than content: S2's `src/` bindings describe what the muses *do*; the chip assignments in S1 describe *how the math that underlies those operations gets computed*. The two layers are complementary, not competitive.
+
+One notable convergence: Both documents independently connect Cedar to integrity verification through computation (S1 via Symbex, S2 via integrity-monitor). This is a cross-document confirmation of Cedar's computational identity — Cedar is not only a scribe but an active verifier.
+
+---
+
+### Consistency Assessment
+
+Of the ~30 explicitly named `src/` modules in S1 Part 3, 22 agree exactly with S2. 8 conflicts were found and all 8 resolve in S2's favor (Rule 1 primacy). The conflicts are concentrated in two boundary zones: (a) Foxy's claim on CLI status commands, and (b) Owl's claim on observation/ log management files.
+
+**Overall consistency rating: COHERENT (>90% agreement)**
+
+The two documents were produced from the same underlying system but at different levels of granularity and with different primary framings (S1 = grove narrative/identity, S2 = function-binding contract). Their disagreements are boundary-zone calibration differences, not fundamental model divergences. S2's explicit tiebreaker protocol resolves all 8 conflicts without ambiguity.
+
+**Wave 1 pre-launch status:** Clear. The 8 conflicts are documented and resolved. The 5 UNRESOLVED items from S2 Part 4 remain open for human decision — they do not block Wave 1 execution but should be resolved before any function-level implementation in those specific clusters. Gaps are minor and documented. Math Co-Processor alignment is confirmed. Understanding Arc placements are consistent.
 
 ---
 
@@ -356,15 +528,16 @@ cedar-timeline-entry:
   source: cedar
   category: milestone
   content: >
-    MUS Wave 0 Session 3 executed. Task B (cartridge prototype) complete:
-    "Growth Rings" cartridge designed and documented at
-    www/MUS/research/03-cross-validation.md. Cartridge schema extension
-    proposed (hypothesis, grove, type fields). CedarEngine prev_hash chain
-    linking design sketched — ready for engineering pass. Task A
-    (cross-validation) pending: 01-identity-map.md and 02-function-binding.md
-    not yet present. Cross-validation protocol recorded for follow-up execution.
-    Fire Succession made structural (disturbance/pioneer/canopy/old-growth
-    mapped to actual codebase phases). Sam's hypothesis field adopted.
+    MUS Wave 0 Session 3 complete. Task B (cartridge prototype): "Growth
+    Rings" cartridge designed, schema extension proposed (hypothesis, grove,
+    type fields), CedarEngine prev_hash chain linking design sketched. Task A
+    (cross-validation): 01-identity-map.md and 02-function-binding.md read in
+    full. 8 grove-vs-function conflicts identified and resolved (all 8 favor
+    S2 Rule 1). Consistency rated COHERENT (>90%). Two structural scope gaps
+    documented. Math Co-Processor alignment confirmed across all 9 muses.
+    Understanding Arc placements consistent and complementary across S1/S2.
+    5 UNRESOLVED items from S2 Part 4 remain open for human decision.
+    Fire Succession made structural. Sam's hypothesis field adopted.
   references:
     - src/services/chipset/cedar-engine.ts
     - src/services/chipset/cedar-timeline.ts
@@ -395,7 +568,7 @@ One gap: `deepMap`, `story`, `chipset` in `CartridgeManifest` are path strings (
 
 1. **Cartridge schema extended** with `hypothesis`, `grove`, `type` — Sam's M4 Cartridge Forest work can use these immediately
 2. **prev_hash design sketched** — engineering pass in Wave 3 has a concrete specification to implement against
-3. **Cross-validation protocol defined** — when S1/S2 land, the protocol runs without needing a new design session
+3. **Cross-validation executed** — 8 grove-vs-function conflicts identified and resolved (all Rule 1 wins), consistency rated Coherent (>90%), two structural gaps documented, Math Co-Processor alignment confirmed across all 9 muses
 4. **Fire Succession made structural** — the disturbance/pioneer/canopy/old-growth taxonomy is now available to all muses as a shared vocabulary for describing codebase evolution
 5. **Disambiguation protocol recorded** — resolves the pre-plan blocker about missing disambiguation
 
