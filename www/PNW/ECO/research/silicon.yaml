@@ -1,0 +1,565 @@
+# silicon.yaml
+# PNW Living Systems Math Co-Processor Chipset
+# GPU-accelerated ecological computation engines for Pacific Northwest bioregion
+#
+# Maps the full PNW vertical gradient — 14,410 ft (Mt. Rainier summit) to
+# -930 ft (Puget Sound maximum depth) — onto a 383-block Minecraft coordinate
+# space using 5 specialized math engines running on consumer GPU hardware.
+#
+# Scale: 40.05 ft per Minecraft block
+# Coordinate origin: sea level = y=-41, summit = y=319, bedrock = y=-64
+
+chipset:
+  name: pnw-living-systems
+  version: 1.0.0
+  description: >
+    Five GPU math engines for computing PNW ecological dynamics across the full
+    15,340-foot vertical gradient from Puget Sound seabed to Mt. Rainier summit.
+    Each engine maps a distinct mathematical domain to ecological process —
+    elevation gradients, watershed topology, population dynamics, fractal
+    branching, and spatial projection.
+
+gpu:
+  target: rtx-4060-ti
+  vram_total: 8GB
+  compute_capability: "8.9"  # Ada Lovelace (AD106)
+  cuda_cores: 4352
+  memory_bandwidth: 288 GB/s
+  notes: >
+    All engines designed for single-GPU execution within 8GB VRAM budget.
+    Concurrent engine execution uses CUDA stream isolation to prevent
+    memory contention. Peak combined allocation: ~5.2 GB.
+
+coordinate_system:
+  vertical_range_ft: 15340
+  summit_ft: 14410        # Mt. Rainier
+  seabed_ft: -930         # Puget Sound max depth
+  total_blocks: 383       # Minecraft Y range: -64 to 319
+  scale_factor: 40.05     # ft per block (15340 / 383)
+  sea_level_y: -41        # Minecraft Y at 0 ft elevation
+  summit_y: 319           # Minecraft Y at 14,410 ft
+  bedrock_y: -64          # Minecraft Y at -930 ft (Puget Sound floor)
+
+clock_domains:
+  description: >
+    Six clock domains mapping to PNW elevation bands. Each domain represents
+    a distinct ecological tempo — from the slow geological time of deep marine
+    sediment to the rapid freeze-thaw cycles of the alpine zone.
+  domains:
+    - id: deep-marine
+      elevation_ft: [-930, -200]
+      minecraft_y: [-64, -46]
+      clock_hz: 0.001
+      description: >
+        Benthic processes, sediment accumulation, deep-water circulation.
+        Slowest ecological clock — decadal to centennial timescales.
+
+    - id: shallow-marine
+      elevation_ft: [-200, 0]
+      minecraft_y: [-46, -41]
+      clock_hz: 0.01
+      description: >
+        Tidal cycles, nearshore currents, eelgrass and kelp dynamics.
+        Diurnal and lunar tidal rhythms dominate.
+
+    - id: lowland
+      elevation_ft: [0, 3000]
+      minecraft_y: [-41, 34]
+      clock_hz: 1.0
+      description: >
+        Temperate forest succession, riparian dynamics, urban-wildland interface.
+        Seasonal clock with annual growth rings as primary signal.
+
+    - id: montane
+      elevation_ft: [3000, 5000]
+      minecraft_y: [34, 84]
+      clock_hz: 0.5
+      description: >
+        Montane conifer forest, snow-driven hydrology, mycorrhizal networks.
+        6-month growing season compresses biological activity.
+
+    - id: subalpine
+      elevation_ft: [5000, 9500]
+      minecraft_y: [84, 196]
+      clock_hz: 0.25
+      description: >
+        Subalpine meadows, krummholz, snowpack persistence.
+        3-4 month growing season, century-scale tree establishment.
+
+    - id: alpine
+      elevation_ft: [9500, 14410]
+      minecraft_y: [196, 319]
+      clock_hz: 0.1
+      description: >
+        Glacial, periglacial, and fellfield environments.
+        Extreme diurnal temperature swings, millennial glacial cycles.
+
+# ---------------------------------------------------------------------------
+# Engine Definitions
+# ---------------------------------------------------------------------------
+
+engines:
+
+  # =========================================================================
+  # Engine 1: Elevation Gradient Calculator
+  # =========================================================================
+  - name: elevation-gradient
+    type: field-compute
+    version: 1.0.0
+    description: >
+      Maps the full PNW vertical range — 14,410 ft summit to -930 ft seabed
+      (15,340 ft total) — onto a 383-block Minecraft Y-axis. Computes
+      environmental lapse rates, precipitation gradients, snow line position,
+      and treeline dynamics as continuous functions of elevation.
+
+    input_parameters:
+      - name: elevation_ft
+        type: float
+        range: [-930.0, 14410.0]
+        description: Real-world elevation in feet above/below sea level
+
+      - name: latitude
+        type: float
+        range: [40.4, 59.7]
+        description: Latitude in decimal degrees (Cape Mendocino to Yakutat)
+
+      - name: aspect
+        type: float
+        range: [0.0, 360.0]
+        description: Slope aspect in degrees from north (affects solar radiation)
+
+      - name: date_of_year
+        type: int
+        range: [1, 366]
+        description: Julian day for seasonal lapse rate adjustment
+
+    output_format:
+      minecraft_y:
+        type: int
+        range: [-64, 319]
+        formula: "round((elevation_ft / 40.05) - 41)"
+
+      temperature_c:
+        type: float
+        description: "Estimated temperature via environmental lapse rate (~3.5F/1000ft dry, ~3.0F/1000ft wet side)"
+
+      precipitation_mm:
+        type: float
+        description: "Orographic precipitation estimate at given elevation and aspect"
+
+      snow_probability:
+        type: float
+        range: [0.0, 1.0]
+        description: "Probability of snow cover given elevation, date, and latitude"
+
+      elevation_band:
+        type: string
+        enum: [deep-marine, shallow-marine, intertidal, riparian-estuary, lowland-forest, canadian-montane, subalpine-hudsonian, arctic-alpine]
+        description: "Ecological zone classification"
+
+    gpu_requirements:
+      vram_mb: 256
+      cuda_streams: 1
+      kernel: elevation_lapse_rate
+      block_size: [256, 1, 1]
+      grid_strategy: "1D grid over elevation sample points"
+      estimated_throughput: "~50M elevation lookups/sec"
+
+    ecological_applications:
+      - Treeline position modeling under climate warming scenarios
+      - Snow line retreat projection (seasonal and decadal)
+      - Temperature inversion detection in valley systems
+      - Orographic precipitation shadow mapping (east vs west Cascades)
+      - Elevation-dependent species range shift prediction
+
+  # =========================================================================
+  # Engine 2: Watershed Topology Engine
+  # =========================================================================
+  - name: watershed-topology
+    type: graph-compute
+    version: 1.0.0
+    description: >
+      River network graph processing for PNW watershed systems. Models water
+      flow as a directed acyclic graph from headwater to ocean, computing
+      drainage area accumulation, confluence ordering (Strahler number), and
+      nutrient/sediment transport through the network. Primary systems: Puget
+      Sound basin, Columbia River tributaries, Olympic Peninsula streams.
+
+    input_parameters:
+      - name: dem_grid
+        type: float[N][M]
+        description: "Digital elevation model grid (elevation at each cell)"
+
+      - name: cell_size_ft
+        type: float
+        default: 40.05
+        description: "Grid cell size in feet (matches Minecraft block scale)"
+
+      - name: precipitation_grid
+        type: float[N][M]
+        description: "Precipitation input per cell (mm/day)"
+
+      - name: flow_direction
+        type: int[N][M]
+        description: "D8 flow direction encoding (1-8 compass directions)"
+        encoding: "1=E, 2=SE, 4=S, 8=SW, 16=W, 32=NW, 64=N, 128=NE"
+
+    output_format:
+      flow_accumulation:
+        type: int[N][M]
+        description: "Upstream cell count at each grid cell"
+
+      strahler_order:
+        type: int[N][M]
+        range: [0, 12]
+        description: "Stream order (Strahler classification)"
+
+      watershed_id:
+        type: int[N][M]
+        description: "Watershed basin assignment for each cell"
+
+      discharge_cfs:
+        type: float[N][M]
+        description: "Estimated discharge in cubic feet per second"
+
+      network_graph:
+        type: adjacency_list
+        description: "Directed graph of stream segments with attributes (length, gradient, order)"
+
+    gpu_requirements:
+      vram_mb: 1024
+      cuda_streams: 2
+      kernel: parallel_flow_accumulation
+      block_size: [16, 16, 1]
+      grid_strategy: "2D grid over DEM tiles, iterative convergence"
+      estimated_throughput: "~2M cells/sec (iterative propagation)"
+      notes: >
+        Flow accumulation requires iterative wavefront propagation — not
+        embarrassingly parallel. GPU advantage comes from parallel prefix
+        scan on sorted cell elevations and batched neighbor lookups.
+
+    ecological_applications:
+      - Salmon spawning habitat identification (stream order, gradient, temperature)
+      - Nutrient loading and sediment transport modeling
+      - Flood inundation mapping for riparian zone delineation
+      - Dam removal impact simulation (Elwha River model)
+      - Estuary salinity gradient computation (freshwater vs tidal mixing)
+      - Wildfire runoff and debris flow risk assessment
+
+  # =========================================================================
+  # Engine 3: Population Dynamics Solver
+  # =========================================================================
+  - name: population-dynamics
+    type: ode-solver
+    version: 1.0.0
+    description: >
+      Lotka-Volterra predator-prey and carrying capacity modeling for PNW
+      keystone species interactions. Solves coupled ordinary differential
+      equations using adaptive Runge-Kutta (RK45) on GPU. Supports multi-species
+      food web simulation with density-dependent terms and environmental forcing.
+
+    input_parameters:
+      - name: species_populations
+        type: float[S]
+        description: "Initial population vector for S species"
+
+      - name: interaction_matrix
+        type: float[S][S]
+        description: >
+          Lotka-Volterra interaction coefficients. Positive = mutualism/prey
+          benefit, negative = predation/competition. Diagonal = intrinsic
+          growth rate.
+
+      - name: carrying_capacities
+        type: float[S]
+        description: "Environmental carrying capacity per species"
+
+      - name: time_span
+        type: float[2]
+        description: "Simulation interval [t_start, t_end] in years"
+
+      - name: dt_max
+        type: float
+        default: 0.01
+        description: "Maximum time step in years for adaptive solver"
+
+      - name: environmental_forcing
+        type: float[S][T]
+        description: "Time-varying external forcing (temperature, habitat area, etc.)"
+        optional: true
+
+    output_format:
+      population_timeseries:
+        type: float[S][T]
+        description: "Population trajectory for each species over time"
+
+      equilibrium_points:
+        type: float[S]
+        description: "Detected stable equilibrium populations (if convergent)"
+
+      extinction_events:
+        type: list
+        description: "Species, time, and cause of population collapse events"
+
+      phase_portrait:
+        type: float[T][2]
+        description: "2D phase space trajectory for selected species pair"
+
+    gpu_requirements:
+      vram_mb: 512
+      cuda_streams: 1
+      kernel: rk45_adaptive_step
+      block_size: [128, 1, 1]
+      grid_strategy: "1D grid over independent simulation runs (ensemble)"
+      estimated_throughput: "~10K simulation-years/sec (10-species system)"
+      notes: >
+        GPU parallelism exploited across ensemble runs (Monte Carlo parameter
+        sweeps) rather than within a single ODE integration. Each CUDA thread
+        runs one independent parameter set.
+
+    ecological_applications:
+      - name: salmon-orca
+        description: >
+          Chinook salmon population drives Southern Resident killer whale
+          recovery. Models salmon run size as function of ocean conditions,
+          river temperature, and dam passage survival, then propagates to
+          orca calving rate and mortality.
+        species: [chinook_salmon, southern_resident_orca]
+        key_parameters: [ocean_productivity, river_temperature, dam_count]
+
+      - name: wolf-elk
+        description: >
+          Gray wolf reintroduction effects on elk browsing pressure and
+          consequent riparian vegetation recovery (trophic cascade). Based on
+          Olympic and North Cascades wolf recovery plans.
+        species: [gray_wolf, roosevelt_elk, black_cottonwood]
+        key_parameters: [wolf_pack_size, elk_density, browse_intensity]
+
+      - name: sea-otter-urchin-kelp
+        description: >
+          Three-trophic-level cascade. Sea otter predation controls urchin
+          populations, allowing kelp forest recovery. Kelp forests then
+          provide nursery habitat for rockfish and carbon sequestration.
+        species: [sea_otter, purple_urchin, bull_kelp]
+        key_parameters: [otter_density, urchin_grazing_rate, kelp_growth_rate]
+
+  # =========================================================================
+  # Engine 4: Fractal Geometry (L-systems)
+  # =========================================================================
+  - name: fractal-geometry
+    type: l-system
+    version: 1.0.0
+    description: >
+      Lindenmayer system engine for generating self-similar branching structures
+      at multiple scales. Models river dendritic networks, tree canopy
+      architecture, and mycorrhizal fungal networks using parametric L-system
+      grammars with stochastic production rules. Output is voxelized for
+      Minecraft block placement.
+
+    input_parameters:
+      - name: axiom
+        type: string
+        description: "L-system start symbol (e.g., 'F' for forward growth)"
+
+      - name: production_rules
+        type: list
+        description: >
+          Rewriting rules with optional stochastic weights.
+          Example: {predecessor: "F", successor: "F[+F]F[-F]F", weight: 0.7}
+
+      - name: iterations
+        type: int
+        range: [1, 12]
+        description: "Number of rewriting iterations (string length grows exponentially)"
+
+      - name: angle_deg
+        type: float
+        default: 25.0
+        description: "Branching angle for + and - symbols"
+
+      - name: segment_length
+        type: float
+        default: 1.0
+        description: "Length of each F segment in blocks"
+
+      - name: scale_factor
+        type: float
+        default: 0.7
+        description: "Length reduction per branching level"
+
+      - name: seed
+        type: int
+        description: "Random seed for stochastic rule selection"
+        optional: true
+
+    output_format:
+      voxel_list:
+        type: list
+        description: "List of (x, y, z, block_type) tuples for Minecraft placement"
+
+      branch_graph:
+        type: adjacency_list
+        description: "Tree structure of branches with length, diameter, angle attributes"
+
+      fractal_dimension:
+        type: float
+        description: "Estimated Hausdorff dimension of the generated structure"
+
+      total_length:
+        type: float
+        description: "Sum of all segment lengths (correlates to biomass or stream length)"
+
+    gpu_requirements:
+      vram_mb: 768
+      cuda_streams: 2
+      kernel: lsystem_parallel_rewrite
+      block_size: [512, 1, 1]
+      grid_strategy: "1D grid over string symbols, parallel rewrite pass"
+      estimated_throughput: "~100M symbols/sec rewrite, ~5M voxels/sec rasterize"
+      notes: >
+        L-system string rewriting is parallelized via prefix-sum allocation —
+        each symbol computes its successor length, then a parallel prefix scan
+        determines write offsets. Voxelization (turtle graphics to 3D grid)
+        runs as a separate kernel pass.
+
+    ecological_applications:
+      - name: river-dendrites
+        description: >
+          Generate realistic dendritic river networks matching observed PNW
+          drainage patterns. Strahler order emerges naturally from L-system
+          branching rules tuned to watershed data.
+        grammar: "F -> F[+F][-F]F"
+        iterations: 8
+        angle_deg: 30
+
+      - name: conifer-canopy
+        description: >
+          Douglas-fir and western red cedar crown architecture. Models
+          self-pruning, light competition, and the distinctive spire-shaped
+          silhouettes of PNW old-growth conifers.
+        grammar: "F -> FF-[-F+F+F]+[+F-F-F]"
+        iterations: 5
+        angle_deg: 22.5
+
+      - name: mycorrhizal-network
+        description: >
+          Underground fungal hyphal networks connecting tree root systems
+          (the "wood wide web"). Models nutrient transfer pathways between
+          mother trees and seedlings via common mycorrhizal networks.
+        grammar: "F -> F[+F]F[-F][F]"
+        iterations: 6
+        angle_deg: 45
+        notes: "3D growth with gravitropic bias toward horizontal spread"
+
+  # =========================================================================
+  # Engine 5: Spatial Projection
+  # =========================================================================
+  - name: spatial-projection
+    type: coordinate-transform
+    version: 1.0.0
+    description: >
+      Converts geographic coordinates (latitude/longitude/elevation) to
+      Minecraft block coordinates (x, y, z). The PNW bioregion spans roughly
+      Cape Mendocino (40.4N, 124.4W) to Yakutat, Alaska (59.7N, 139.5W),
+      from the Pacific coast to the east Cascades (~120W). Horizontal scale
+      matches vertical: 1 block = 40 ft in all axes.
+
+    input_parameters:
+      - name: latitude
+        type: float
+        range: [40.4, 59.7]
+        description: "Decimal degrees north"
+
+      - name: longitude
+        type: float
+        range: [-139.5, -120.0]
+        description: "Decimal degrees (negative = west)"
+
+      - name: elevation_ft
+        type: float
+        range: [-930.0, 14410.0]
+        description: "Elevation in feet (negative = below sea level)"
+
+      - name: origin_lat
+        type: float
+        default: 47.6062
+        description: "Projection origin latitude (default: Seattle)"
+
+      - name: origin_lon
+        type: float
+        default: -122.3321
+        description: "Projection origin longitude (default: Seattle)"
+
+      - name: datum
+        type: string
+        default: "WGS84"
+        description: "Geodetic datum for coordinate transformation"
+
+    output_format:
+      block_x:
+        type: int
+        description: "Minecraft X coordinate (east-west axis)"
+        formula: "round((lon - origin_lon) * cos(origin_lat * pi/180) * 364567 / 40.05)"
+        notes: "364,567 ft per degree longitude at 47.6N"
+
+      block_y:
+        type: int
+        range: [-64, 319]
+        description: "Minecraft Y coordinate (vertical axis)"
+        formula: "round((elevation_ft / 40.05) - 41)"
+
+      block_z:
+        type: int
+        description: "Minecraft Z coordinate (north-south axis)"
+        formula: "round((lat - origin_lat) * 364320 / 40.05)"
+        notes: "364,320 ft per degree latitude (nearly constant)"
+
+      chunk_x:
+        type: int
+        description: "Minecraft chunk X (block_x / 16)"
+
+      chunk_z:
+        type: int
+        description: "Minecraft chunk Z (block_z / 16)"
+
+      region_file:
+        type: string
+        description: "Minecraft region file name: r.{rx}.{rz}.mca"
+
+    gpu_requirements:
+      vram_mb: 128
+      cuda_streams: 1
+      kernel: lat_lon_to_block
+      block_size: [1024, 1, 1]
+      grid_strategy: "1D grid over coordinate points"
+      estimated_throughput: "~200M coordinate transforms/sec"
+      notes: >
+        Lightweight kernel — trigonometric correction for longitude
+        convergence is the only non-trivial computation. Batch transforms
+        of entire datasets (weather stations, species observations,
+        trail waypoints) benefit from GPU parallelism.
+
+    ecological_applications:
+      - Georeferencing species observation databases to Minecraft world
+      - Trail and road network overlay for human impact modeling
+      - Weather station data interpolation across the bioregion grid
+      - Wildfire perimeter mapping from satellite imagery coordinates
+      - Protected area boundary delineation (National Parks, Wilderness Areas)
+
+# ---------------------------------------------------------------------------
+# VRAM Budget Summary
+# ---------------------------------------------------------------------------
+#
+# Engine                  | VRAM (MB) | Streams | Notes
+# ------------------------|-----------|---------|------------------------------
+# elevation-gradient      |       256 |       1 | Lookup tables + lapse rate
+# watershed-topology      |      1024 |       2 | DEM tiles + flow grids
+# population-dynamics     |       512 |       1 | Ensemble ODE state vectors
+# fractal-geometry        |       768 |       2 | L-system strings + voxel grid
+# spatial-projection      |       128 |       1 | Coordinate transform buffers
+# ------------------------|-----------|---------|------------------------------
+# Total (concurrent max)  |     ~2688 |       7 | Well within 8GB budget
+# Peak with working mem   |     ~5200 |       7 | Includes scratch buffers
+#
+# Stream isolation via CUDA stream API prevents cross-engine memory contention.
+# Engines can run concurrently if combined VRAM stays under 8GB.
