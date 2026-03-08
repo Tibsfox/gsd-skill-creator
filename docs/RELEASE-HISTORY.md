@@ -1,12 +1,14 @@
 # Release History
 
-85 milestones shipped across 550+ phases, 1,320+ plans, ~632K LOC, and 24,700+ tests.
+87 milestones shipped across 550+ phases, 1,320+ plans, ~723K LOC, and 24,700+ tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
-| [v1.49.21](release-notes/v1.49.21/) | Image to Mission Pipeline | 2026-03-07 | 5 | 6 | |
+| [v1.49.23](release-notes/v1.49.23/) | Unison Language & Math Co-Processor Completion | 2026-03-08 | — | — | [retro](release-notes/v1.49.23/README.md), [lessons](release-notes/v1.49.23/README.md) |
+| [v1.49.22](release-notes/v1.49.22/) | PNW Research Series | 2026-03-07 | — | — | [retro](release-notes/v1.49.22/README.md), [lessons](release-notes/v1.49.22/README.md) |
+| [v1.49.21](release-notes/v1.49.21/) | Image to Mission Pipeline | 2026-03-07 | 5 | 6 | [retro](release-notes/v1.49.21/README.md), [lessons](release-notes/v1.49.21/README.md) |
 | [v1.49.20.1](release-notes/v1.49.20.1/) | Documentation Reflections | 2026-03-06 | 6 | 6 | |
 | [v1.49.20](release-notes/v1.49.20/) | Documentation Consolidation | 2026-03-06 | 6 | 6 | |
 | [v1.49.19](release-notes/v1.49.19/) | Gastown Chipset Integration | 2026-03-06 | 5 | 10 | |
