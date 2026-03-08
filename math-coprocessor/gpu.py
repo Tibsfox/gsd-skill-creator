@@ -237,3 +237,167 @@ def curand_generate_uniform(gen: curandGenerator_t, ptr: ctypes.c_void_p, n: int
 def curand_destroy(gen: curandGenerator_t):
     if _curand and gen:
         _curand.curandDestroyGenerator(gen)
+
+
+# =============================================================================
+# NVRTC — Runtime Compilation
+# =============================================================================
+
+_nvrtc = _load_lib("nvrtc")
+
+
+def nvrtc_available() -> bool:
+    """Check if NVRTC runtime compilation is available."""
+    return _nvrtc is not None
+
+
+def nvrtc_compile(source: str, options: list[str] | None = None) -> bytes | None:
+    """Compile CUDA C source to PTX using NVRTC.
+
+    Returns PTX bytes on success, None on failure.
+    """
+    if _nvrtc is None:
+        return None
+
+    prog = ctypes.c_void_p()
+    src = source.encode("utf-8")
+    err = _nvrtc.nvrtcCreateProgram(
+        ctypes.byref(prog), src, b"eval_kernel.cu",
+        0, None, None,
+    )
+    if err != 0:
+        log.warning(f"nvrtcCreateProgram failed (error={err})")
+        return None
+
+    try:
+        # Compile with options
+        opts = options or ["--use_fast_math"]
+        opt_bytes = [o.encode("utf-8") if isinstance(o, str) else o for o in opts]
+        opt_arr = (ctypes.c_char_p * len(opt_bytes))(*opt_bytes)
+        err = _nvrtc.nvrtcCompileProgram(prog, len(opt_bytes), opt_arr)
+        if err != 0:
+            # Try to get compilation log for debugging
+            log_size = ctypes.c_size_t()
+            _nvrtc.nvrtcGetProgramLogSize(prog, ctypes.byref(log_size))
+            if log_size.value > 1:
+                log_buf = (ctypes.c_char * log_size.value)()
+                _nvrtc.nvrtcGetProgramLog(prog, log_buf)
+                log.warning(f"NVRTC compile error: {bytes(log_buf).decode(errors='replace')}")
+            return None
+
+        # Get PTX size
+        ptx_size = ctypes.c_size_t()
+        _nvrtc.nvrtcGetPTXSize(prog, ctypes.byref(ptx_size))
+
+        # Get PTX
+        ptx = (ctypes.c_char * ptx_size.value)()
+        _nvrtc.nvrtcGetPTX(prog, ptx)
+
+        return bytes(ptx)
+    finally:
+        _nvrtc.nvrtcDestroyProgram(ctypes.byref(prog))
+
+
+# =============================================================================
+# CUDA Driver API — Module/Kernel Management
+# =============================================================================
+
+_cuda_driver = _load_lib("cuda")
+
+
+def driver_available() -> bool:
+    """Check if the CUDA driver API is available."""
+    return _cuda_driver is not None
+
+
+_driver_initialized = False
+
+
+def _ensure_driver_init():
+    """Initialize the CUDA driver API and ensure a context exists.
+
+    The driver API requires an active CUDA context. We force the runtime
+    API to create one by calling cudaFree(0), then cuInit for the driver.
+    This ensures both APIs share the same context.
+    """
+    global _driver_initialized
+    if _driver_initialized or _cuda_driver is None:
+        return
+    # Force the runtime API to create a context (lazy init)
+    if _cudart is not None:
+        _cudart.cudaFree(ctypes.c_void_p(0))
+    _cuda_driver.cuInit(0)
+    _driver_initialized = True
+
+
+def cu_module_load(ptx: bytes) -> ctypes.c_void_p | None:
+    """Load a PTX module via the CUDA driver API."""
+    if _cuda_driver is None:
+        return None
+    _ensure_driver_init()
+    module = ctypes.c_void_p()
+    err = _cuda_driver.cuModuleLoadData(ctypes.byref(module), ptx)
+    if err != 0:
+        log.warning(f"cuModuleLoadData failed (error={err})")
+        return None
+    return module
+
+
+def cu_module_get_function(module: ctypes.c_void_p, name: str) -> ctypes.c_void_p | None:
+    """Get a kernel function from a loaded module."""
+    if _cuda_driver is None:
+        return None
+    func = ctypes.c_void_p()
+    err = _cuda_driver.cuModuleGetFunction(
+        ctypes.byref(func), module, name.encode("utf-8"),
+    )
+    if err != 0:
+        log.warning(f"cuModuleGetFunction failed for '{name}' (error={err})")
+        return None
+    return func
+
+
+def cu_module_unload(module: ctypes.c_void_p):
+    """Unload a CUDA module."""
+    if _cuda_driver and module:
+        _cuda_driver.cuModuleUnload(module)
+
+
+def cu_launch_kernel(
+    func: ctypes.c_void_p,
+    grid_x: int, grid_y: int, grid_z: int,
+    block_x: int, block_y: int, block_z: int,
+    shared_mem: int,
+    stream: ctypes.c_void_p | None,
+    d_x: ctypes.c_void_p,
+    d_out: ctypes.c_void_p,
+    n: int,
+) -> bool:
+    """Launch eval_kernel(const T* x, T* out, int n) via the driver API."""
+    if _cuda_driver is None:
+        return False
+
+    # Build kernel parameter array: pointers to each argument value
+    arg_x = ctypes.c_void_p(d_x.value if isinstance(d_x, ctypes.c_void_p) else d_x)
+    arg_out = ctypes.c_void_p(d_out.value if isinstance(d_out, ctypes.c_void_p) else d_out)
+    arg_n = ctypes.c_int(n)
+
+    args = (ctypes.c_void_p * 3)(
+        ctypes.cast(ctypes.pointer(arg_x), ctypes.c_void_p),
+        ctypes.cast(ctypes.pointer(arg_out), ctypes.c_void_p),
+        ctypes.cast(ctypes.pointer(arg_n), ctypes.c_void_p),
+    )
+
+    err = _cuda_driver.cuLaunchKernel(
+        func,
+        ctypes.c_uint(grid_x), ctypes.c_uint(grid_y), ctypes.c_uint(grid_z),
+        ctypes.c_uint(block_x), ctypes.c_uint(block_y), ctypes.c_uint(block_z),
+        ctypes.c_uint(shared_mem),
+        ctypes.c_void_p(stream) if stream else ctypes.c_void_p(0),
+        args,
+        None,
+    )
+    if err != 0:
+        log.warning(f"cuLaunchKernel failed (error={err})")
+        return False
+    return True

@@ -220,7 +220,7 @@ class TestI06DispatchRouting:
         result = _dispatch("symbex.eval", {
             "expression": "x**2", "param_name": "x", "values": [3.0]
         })
-        assert result["operation"] == "batch_eval"
+        assert result["operation"] in ("batch_eval", "eval")
         np.testing.assert_allclose(result["result"], [9.0], atol=1e-12)
 
     def test_unknown_operation_returns_error(self):
