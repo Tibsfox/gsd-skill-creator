@@ -20,3 +20,7 @@ export { DEFAULT_PALETTE, paletteToCssVars, applyPalette, removePalette } from "
 // Math Co-Processor panel
 export { MathPanel } from "./math-panel";
 export type { ChipStatus, VRAMStatus, StreamStatus, OperationRecord, MathPanelData } from "./math-panel";
+
+// Math Co-Processor bridge (MCP IPC -> MathPanel)
+export { MathBridge } from "./math-bridge";
+export type { MathBridgeOptions } from "./math-bridge";

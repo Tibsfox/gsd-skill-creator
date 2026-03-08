@@ -109,6 +109,208 @@ def _gpu_gemm(a_list, b_list, precision="fp64"):
         _gpu.cublas_destroy(handle)
 
 
+# -- GPU solve (inlined cuSOLVER LU) --
+
+def _gpu_solve(a_list, b_list, precision="fp64"):
+    if not HAS_GPU or _gpu._cusolver is None:
+        return None
+    dtype = np.float32 if precision == "fp32" else np.float64
+    A = np.array(a_list, dtype=dtype)
+    B = np.array(b_list, dtype=dtype).reshape(-1, 1)
+    n = A.shape[0]
+    nrhs = 1
+    elem = A.itemsize
+    handle = _gpu.cusolver_create()
+    if handle is None:
+        return None
+    d_A = d_B = d_ipiv = d_info = d_work = None
+    try:
+        t = time.perf_counter()
+        Ac = np.ascontiguousarray(A.T.copy())
+        Bc = np.ascontiguousarray(B.T.copy())
+        d_A = _gpu.cuda_malloc(n * n * elem)
+        d_B = _gpu.cuda_malloc(n * nrhs * elem)
+        d_ipiv = _gpu.cuda_malloc(n * ctypes.sizeof(ctypes.c_int))
+        d_info = _gpu.cuda_malloc(ctypes.sizeof(ctypes.c_int))
+        if not all([d_A, d_B, d_ipiv, d_info]):
+            return None
+        _gpu.cuda_memcpy_h2d(d_A, Ac.ctypes.data, Ac.nbytes)
+        _gpu.cuda_memcpy_h2d(d_B, Bc.ctypes.data, Bc.nbytes)
+        lwork = ctypes.c_int(0)
+        if precision == "fp32":
+            _gpu._cusolver.cusolverDnSgetrf_bufferSize(handle, n, n, d_A, n, ctypes.byref(lwork))
+        else:
+            _gpu._cusolver.cusolverDnDgetrf_bufferSize(handle, n, n, d_A, n, ctypes.byref(lwork))
+        d_work = _gpu.cuda_malloc(lwork.value * elem)
+        if not d_work:
+            return None
+        if precision == "fp32":
+            _gpu._cusolver.cusolverDnSgetrf(handle, n, n, d_A, n, d_work, d_ipiv, d_info)
+        else:
+            _gpu._cusolver.cusolverDnDgetrf(handle, n, n, d_A, n, d_work, d_ipiv, d_info)
+        if precision == "fp32":
+            _gpu._cusolver.cusolverDnSgetrs(handle, 0, n, nrhs, d_A, n, d_ipiv, d_B, n, d_info)
+        else:
+            _gpu._cusolver.cusolverDnDgetrs(handle, 0, n, nrhs, d_A, n, d_ipiv, d_B, n, d_info)
+        _gpu.cuda_synchronize()
+        _gpu.cuda_memcpy_d2h(Bc.ctypes.data, d_B, Bc.nbytes)
+        elapsed = time.perf_counter() - t
+        return {"time_ms": elapsed * 1000}
+    except Exception:
+        return None
+    finally:
+        for p in [d_A, d_B, d_ipiv, d_info, d_work]:
+            if p:
+                _gpu.cuda_free(p)
+        _gpu.cusolver_destroy(handle)
+
+
+# -- GPU SVD (inlined cuSOLVER gesvd) --
+
+def _gpu_svd(a_list, precision="fp64"):
+    if not HAS_GPU or _gpu._cusolver is None:
+        return None
+    dtype = np.float32 if precision == "fp32" else np.float64
+    A = np.array(a_list, dtype=dtype)
+    m, n = A.shape
+    min_mn = min(m, n)
+    elem = A.itemsize
+    handle = _gpu.cusolver_create()
+    if handle is None:
+        return None
+    d_A = d_S = d_U = d_VT = d_work = d_info = None
+    try:
+        t = time.perf_counter()
+        Ac = np.ascontiguousarray(A.T.copy())
+        d_A = _gpu.cuda_malloc(m * n * elem)
+        d_S = _gpu.cuda_malloc(min_mn * elem)
+        d_U = _gpu.cuda_malloc(m * m * elem)
+        d_VT = _gpu.cuda_malloc(n * n * elem)
+        d_info = _gpu.cuda_malloc(ctypes.sizeof(ctypes.c_int))
+        if not all([d_A, d_S, d_U, d_VT, d_info]):
+            return None
+        _gpu.cuda_memcpy_h2d(d_A, Ac.ctypes.data, Ac.nbytes)
+        lwork = ctypes.c_int(0)
+        if precision == "fp32":
+            _gpu._cusolver.cusolverDnSgesvd_bufferSize(handle, m, n, ctypes.byref(lwork))
+        else:
+            _gpu._cusolver.cusolverDnDgesvd_bufferSize(handle, m, n, ctypes.byref(lwork))
+        d_work = _gpu.cuda_malloc(lwork.value * elem)
+        if not d_work:
+            return None
+        jobu = ord('A')
+        jobvt = ord('A')
+        if precision == "fp32":
+            _gpu._cusolver.cusolverDnSgesvd(
+                handle, jobu, jobvt, m, n, d_A, m, d_S, d_U, m, d_VT, n,
+                d_work, lwork.value, None, d_info)
+        else:
+            _gpu._cusolver.cusolverDnDgesvd(
+                handle, jobu, jobvt, m, n, d_A, m, d_S, d_U, m, d_VT, n,
+                d_work, lwork.value, None, d_info)
+        _gpu.cuda_synchronize()
+        elapsed = time.perf_counter() - t
+        return {"time_ms": elapsed * 1000}
+    except Exception:
+        return None
+    finally:
+        for p in [d_A, d_S, d_U, d_VT, d_work, d_info]:
+            if p:
+                _gpu.cuda_free(p)
+        _gpu.cusolver_destroy(handle)
+
+
+# -- GPU FFT (inlined cuFFT Z2Z) --
+
+def _gpu_fft(data_list, precision="fp64"):
+    if not HAS_GPU or _gpu._cufft is None:
+        return None
+    dtype = np.float64 if precision == "fp64" else np.float32
+    cdtype = np.complex128 if precision == "fp64" else np.complex64
+    x = np.array(data_list, dtype=dtype)
+    n = len(x)
+    if n == 0:
+        return None
+    x_complex = np.zeros(n, dtype=cdtype)
+    x_complex.real = x
+    x_complex = np.ascontiguousarray(x_complex)
+    elem_size = x_complex.itemsize
+    fft_type = _gpu.CUFFT_Z2Z if precision == "fp64" else _gpu.CUFFT_C2C
+    plan = _gpu.cufft_plan_1d(n, fft_type)
+    if plan is None:
+        return None
+    d_in = d_out = None
+    try:
+        t = time.perf_counter()
+        d_in = _gpu.cuda_malloc(n * elem_size)
+        d_out = _gpu.cuda_malloc(n * elem_size)
+        if not all([d_in, d_out]):
+            return None
+        _gpu.cuda_memcpy_h2d(d_in, x_complex.ctypes.data, x_complex.nbytes)
+        if precision == "fp64":
+            ok = _gpu.cufft_exec_z2z(plan, d_in, d_out, _gpu.CUFFT_FORWARD)
+        else:
+            ok = _gpu.cufft_exec_c2c(plan, d_in, d_out, _gpu.CUFFT_FORWARD)
+        if not ok:
+            return None
+        _gpu.cuda_synchronize()
+        result = np.empty(n, dtype=cdtype)
+        _gpu.cuda_memcpy_d2h(result.ctypes.data, d_out, result.nbytes)
+        elapsed = time.perf_counter() - t
+        return {"time_ms": elapsed * 1000}
+    except Exception:
+        return None
+    finally:
+        for p in [d_in, d_out]:
+            if p:
+                _gpu.cuda_free(p)
+        _gpu.cufft_destroy(plan)
+
+
+# -- GPU Monte Carlo (inlined cuRAND) --
+
+def _gpu_monte_carlo(n_paths, precision="fp64"):
+    if not HAS_GPU or _gpu._curand is None:
+        return None
+    dtype = np.float64 if precision == "fp64" else np.float32
+    elem = 8 if precision == "fp64" else 4
+    # 3 params, need even count per param
+    alloc_per = n_paths + (n_paths % 2)
+    total = 3 * alloc_per
+    gen = _gpu.curand_create()
+    if gen is None:
+        return None
+    d_rand = None
+    try:
+        t = time.perf_counter()
+        _gpu.curand_set_seed(gen, 42)
+        d_rand = _gpu.cuda_malloc(total * elem)
+        if not d_rand:
+            return None
+        if precision == "fp64":
+            ok = _gpu.curand_generate_uniform_double(gen, d_rand, total)
+        else:
+            ok = _gpu.curand_generate_uniform(gen, d_rand, total)
+        if not ok:
+            return None
+        _gpu.cuda_synchronize()
+        rand_host = np.empty(total, dtype=dtype)
+        _gpu.cuda_memcpy_d2h(rand_host.ctypes.data, d_rand, rand_host.nbytes)
+        # Scale and evaluate same expression as CPU benchmark
+        x = rand_host[0:n_paths] * 6.28
+        y = rand_host[alloc_per:alloc_per + n_paths] * 2
+        z = rand_host[2 * alloc_per:2 * alloc_per + n_paths] * 2 - 1
+        _ = np.sin(x) * np.exp(-y) + z
+        elapsed = time.perf_counter() - t
+        return {"time_ms": elapsed * 1000}
+    except Exception:
+        return None
+    finally:
+        if d_rand:
+            _gpu.cuda_free(d_rand)
+        _gpu.curand_destroy(gen)
+
+
 # -- CPU operation functions (inline, same as fallback/cpu.py) --
 
 def _cpu_gemm(a, b):
@@ -174,27 +376,55 @@ def bench_solve(n):
     a = np.random.randn(n, n).tolist()
     b = np.random.randn(n).tolist()
     cpu_ms = _time_fn(lambda: _cpu_solve(a, b))
-    return cpu_ms, None, 0.0
+    gpu_ms = None
+    vram = 0.0
+    if HAS_GPU:
+        r = _gpu_solve(a, b)
+        if r is not None:
+            vram = _vram_delta_mb(lambda: _gpu_solve(a, b))
+            gpu_ms = _time_fn(lambda: _gpu_solve(a, b))
+    return cpu_ms, gpu_ms, vram
 
 
 def bench_svd(n):
     """ALGEBRUS SVD: NxN decomposition."""
     a = np.random.randn(n, n).tolist()
     cpu_ms = _time_fn(lambda: _cpu_svd(a))
-    return cpu_ms, None, 0.0
+    gpu_ms = None
+    vram = 0.0
+    if HAS_GPU:
+        r = _gpu_svd(a)
+        if r is not None:
+            vram = _vram_delta_mb(lambda: _gpu_svd(a))
+            gpu_ms = _time_fn(lambda: _gpu_svd(a))
+    return cpu_ms, gpu_ms, vram
 
 
 def bench_fft(n):
     """FOURIER FFT: N-point forward transform."""
     data = np.random.randn(n).tolist()
     cpu_ms = _time_fn(lambda: _cpu_fft(data))
-    return cpu_ms, None, 0.0
+    gpu_ms = None
+    vram = 0.0
+    if HAS_GPU:
+        r = _gpu_fft(data)
+        if r is not None:
+            vram = _vram_delta_mb(lambda: _gpu_fft(data))
+            gpu_ms = _time_fn(lambda: _gpu_fft(data))
+    return cpu_ms, gpu_ms, vram
 
 
 def bench_monte_carlo(n_paths):
     """STATOS Monte Carlo: simulate n_paths."""
     cpu_ms = _time_fn(lambda: _cpu_monte_carlo(n_paths))
-    return cpu_ms, None, 0.0
+    gpu_ms = None
+    vram = 0.0
+    if HAS_GPU:
+        r = _gpu_monte_carlo(n_paths)
+        if r is not None:
+            vram = _vram_delta_mb(lambda: _gpu_monte_carlo(n_paths))
+            gpu_ms = _time_fn(lambda: _gpu_monte_carlo(n_paths))
+    return cpu_ms, gpu_ms, vram
 
 
 def bench_describe(n):
@@ -230,13 +460,16 @@ BENCHMARKS = [
     ("ALGEBRUS", "solve", "512x512", 512, bench_solve),
     ("ALGEBRUS", "SVD", "32x32", 32, bench_svd),
     ("ALGEBRUS", "SVD", "128x128", 128, bench_svd),
+    ("ALGEBRUS", "SVD", "512x512", 512, bench_svd),
     ("FOURIER", "FFT", "1024 pts", 1024, bench_fft),
     ("FOURIER", "FFT", "8192 pts", 8192, bench_fft),
     ("FOURIER", "FFT", "65536 pts", 65536, bench_fft),
     ("FOURIER", "FFT", "262144 pts", 262144, bench_fft),
+    ("FOURIER", "FFT", "1048576 pts", 1048576, bench_fft),
     ("STATOS", "Monte Carlo", "1K paths", 1000, bench_monte_carlo),
     ("STATOS", "Monte Carlo", "10K paths", 10000, bench_monte_carlo),
     ("STATOS", "Monte Carlo", "100K paths", 100000, bench_monte_carlo),
+    ("STATOS", "Monte Carlo", "1M paths", 1000000, bench_monte_carlo),
     ("STATOS", "describe", "10K pts", 10000, bench_describe),
     ("STATOS", "describe", "100K pts", 100000, bench_describe),
     ("STATOS", "describe", "1M pts", 1000000, bench_describe),

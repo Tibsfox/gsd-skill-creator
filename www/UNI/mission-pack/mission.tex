@@ -1,0 +1,918 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Technology ──────────────────────────────────────────
+\definecolor{primary}{HTML}{263238}       % Steel blue (sections)
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue (subsections)
+\definecolor{tertiary}{HTML}{37474F}      % Graphite (subsubsections)
+\definecolor{accent}{HTML}{0288D1}        % Highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% ── Section Formatting ────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ─────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers/Footers ──────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Unison Language}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Unison Language -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Unison Language\\[0.3em]Content-Addressed Code from the Future}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Language Design $\cdot$ Distributed Systems $\cdot$ Developer Tooling}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Unison Language --- Vision Guide}
+
+\metafield{Date:}{March 7, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{None (entry point)}
+\metafield{Context:}{Programming language research -- functional, content-addressed, distributed}
+
+\subsection{Vision}
+
+Unison asks a question so fundamental that most programmers have never thought to ask it: what if we stopped storing code as text files? What if definitions were identified not by fragile human-assigned names but by the cryptographic hash of their actual content --- their abstract syntax tree, their meaning? The implications cascade outward like ripples in water, touching everything from build systems to dependency management to distributed computing to the very nature of what it means to deploy software.
+
+Founded in 2013 by Paul Chiusano, R\'{u}nar Bjarnason, and Arya Irani, Unison represents a clean-sheet rethinking of the programming experience. The language is statically typed, purely functional, and descended from Haskell --- but smaller, simpler, and strict rather than lazy. Its effect system (called ``abilities'') draws from the Frank language's algebraic effects, offering a direct-style alternative to monadic composition that tracks side effects in the type system without the cognitive overhead of manipulating two layers of abstraction simultaneously. The Unison Codebase Manager (UCM) replaces the traditional edit-compile-run cycle with a collaborative dialogue between programmer and compiler.
+
+But the real revolution is architectural. Because every definition is content-addressed via 512-bit SHA3 hashes, code becomes location-independent. Computations can migrate between nodes in a distributed system with dependencies deployed on the fly. Serialization and deserialization happen without manual encoder/decoder layers. Version conflicts dissolve --- two ``versions'' of a library can coexist because they are simply different hashes. The diamond dependency problem, the bane of every package manager, becomes a non-issue. Unison 1.0 shipped in November 2025, and Unison Cloud BYOC went generally available in October 2025, making the language's distributed computing vision commercially real.
+
+This research mission will produce a comprehensive technical reference on Unison's design, implementation, ecosystem, and implications for the future of programming --- structured for the GSD ecosystem's multi-agent orchestration pattern.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{The Build Problem:} Traditional programming languages store code as text files, requiring complex build systems, incremental compilation heuristics, and dependency resolution that regularly fails. Unison eliminates builds entirely by storing type-checked ASTs in a content-addressed database, but the implications of this design for developer workflow, tooling, and ecosystem architecture are insufficiently documented in a single cohesive reference.
+
+  \item \textbf{The Effects Problem:} Managing computational side effects remains one of the hardest problems in programming language design. Monadic approaches (Haskell) are powerful but cognitively expensive; direct-style approaches (most imperative languages) provide no type-level tracking. Unison's ability system offers a middle path --- direct-style code with type-tracked effects --- but the design space, trade-offs, and comparison to alternatives requires systematic analysis.
+
+  \item \textbf{The Distribution Problem:} Distributed systems are built from dozens of technologies outside the programming language itself --- container orchestration, service meshes, serialization frameworks, configuration management. Unison's content-addressed code enables a radically different model where a single program describes an entire distributed system. The technical mechanisms enabling this, and their real-world constraints, need structured documentation.
+
+  \item \textbf{The Ecosystem Problem:} Unison's codebase-as-database model creates a fundamentally different ecosystem architecture than package registries like npm or crates.io. Unison Share, the UCM, and the project/branch model represent novel approaches to code sharing, versioning, and collaboration that deserve thorough examination alongside their limitations.
+
+  \item \textbf{The Adoption Problem:} Despite elegant design, Unison remains a niche language. Understanding the barriers to adoption --- ecosystem size, learning curve, tooling maturity, the closed-source nature of Unison Cloud --- is essential for evaluating where Unison fits in the broader landscape of programming language evolution.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Content-addressed code stored as ASTs in an append-only database, enabling zero-build development, algebraic effect tracking, and self-deploying distributed systems.
+
+Unison's core insight is that naming is metadata, not identity. When you write a function, the compiler hashes its syntax tree (with all dependencies replaced by their hashes and all named arguments replaced by positional references) to produce a unique 512-bit SHA3 identifier. This hash \emph{is} the function's identity. Human-readable names are stored separately and can be changed at any time without affecting any code that depends on the function. This is the ``big idea'' from which everything else flows: no builds (because definitions are immutable and cached at their hash), no dependency conflicts (because two different definitions simply have different hashes), perfect test caching (because deterministic tests need only re-run when their hash-identified dependencies change), and seamless code mobility (because a hash uniquely pins down a definition and all its transitive dependencies).
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+    ┌─────────────────────────────────────────────────────┐
+    │                  UNISON ECOSYSTEM                    │
+    ├──────────────┬──────────────┬────────────────────────┤
+    │  LANGUAGE    │   TOOLING    │    CLOUD PLATFORM      │
+    │              │              │                        │
+    │  ┌────────┐  │  ┌────────┐  │  ┌──────────────────┐  │
+    │  │Content │  │  │  UCM   │  │  │  Unison Cloud    │  │
+    │  │Address │──┤  │(CLI+UI)│  │  │  (BYOC / Public) │  │
+    │  │ Code   │  │  │        │  │  │                  │  │
+    │  └───┬────┘  │  └───┬────┘  │  └───────┬──────────┘  │
+    │  ┌───┴────┐  │  ┌───┴────┐  │  ┌───────┴──────────┐  │
+    │  │Ability │  │  │ Unison │  │  │  Typed RPC +     │  │
+    │  │System  │  │  │ Share  │  │  │  Typed Storage   │  │
+    │  │(Effects│  │  │(Code   │  │  │  + Adaptive      │  │
+    │  │ Types) │  │  │Hosting)│  │  │  Service Graph   │  │
+    │  └────────┘  │  └────────┘  │  └──────────────────┘  │
+    │              │              │                        │
+    │  Static      │  LSP + MCP   │  Deploy with a        │
+    │  Typing +    │  + Desktop   │  function call.       │
+    │  Inference   │  App         │  10-100x LOC savings. │
+    └──────────────┴──────────────┴────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  MODULE 1            MODULE 2           MODULE 3
+  Language Core       Type System &      Tooling &
+  (Content-Addressed  Abilities          Workflow
+   Code, Hashing,     (Static Types,     (UCM, Share,
+   AST Storage,       Inference,         LSP, MCP,
+   No-Build Model)    Algebraic Effects) Desktop App)
+       │                   │                  │
+       └────────┬──────────┘                  │
+                │                             │
+  MODULE 4      │         MODULE 5            │
+  Distributed   │         Ecosystem &         │
+  Computing     │         Adoption            │
+  (Cloud, BYOC, └─────────(Community,    ─────┘
+   Code Mobility,          Libraries,
+   Typed RPC)              Limitations)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Language Core --- Content-Addressed Code}
+The foundational ``big idea'': how code is stored as ASTs in a database rather than text files, the 512-bit SHA3 hashing scheme, the separation of names from identity, the implications for builds (they disappear), renaming (always non-breaking), test caching (deterministic tests never re-run unless dependencies change), and semantically-aware version control (no spurious merge conflicts from formatting or import ordering). Includes the append-only codebase model and how definitions are canonicalized before hashing.
+
+\subsubsection{Module 2: Type System and Abilities}
+Unison's static type system with bidirectional type inference, structural and unique types, pattern matching, and the ability system (algebraic effects). Covers how abilities track effects in function signatures, the handler mechanism, the relationship to the Frank language, comparison with monadic approaches (Haskell IO, Scala ZIO), and the trade-offs of direct-style effectful programming. Includes the \texttt{IO}, \texttt{Exception}, \texttt{Abort}, \texttt{Stream}, and \texttt{Store} abilities.
+
+\subsubsection{Module 3: Tooling and Developer Workflow}
+The Unison Codebase Manager (UCM) as both CLI and development environment. Scratch files, watch expressions, the add/update cycle, structured refactoring sessions, project/branch model, the UCM Desktop app, LSP integration, the MCP server for AI agent workflows, and the Local Codebase UI. Covers how the programmer-compiler dialogue differs from traditional edit-compile-run cycles.
+
+\subsubsection{Module 4: Distributed Computing and Unison Cloud}
+How content-addressed code enables self-deploying distributed systems. The \texttt{Remote} ability, typed RPC without serialization boilerplate, Adaptive Service Graph Compression, typed transactional storage, deployment-as-a-function-call, Unison Cloud public offering, and the BYOC (Bring Your Own Cloud) model launched October 2025. Covers the \texttt{Seq} distributed data structure, the streaming framework, and the ``program as distributed system'' paradigm.
+
+\subsubsection{Module 5: Ecosystem, Community, and Adoption}
+Unison Share as code hosting, the ecosystem of libraries, Unison Computing as a public benefit corporation, seed funding (\$9.75M), the community (Discord, Unison Forall conferences), 120+ contributors on GitHub, 6.5K stars. Covers adoption barriers, the closed-source Cloud platform trade-off, comparison to related languages (Haskell, Koka, Eff, Erlang), the 2025 roadmap (C FFI, improved record types, agentic computing framework), and the path to broader adoption.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  primary_model: opus
+  secondary_model: sonnet
+  utility_model: haiku
+  allocation:
+    opus: 30%    # Synthesis, cross-module integration,
+                 # vision narrative, adoption analysis
+    sonnet: 60%  # Module surveys, document assembly,
+                 # source verification, technical reference
+    haiku: 10%   # Shared schemas, templates, scaffolding
+  cache_strategy: aggressive
+  prompt_caching: enabled
+  session_budget: 18-24 context windows
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Complete technical analysis of content-addressed code architecture
+  \item Unison's type system and ability/effect system with code examples
+  \item UCM workflow, Unison Share, and developer tooling analysis
+  \item Unison Cloud and BYOC distributed computing model
+  \item Ecosystem assessment including libraries, community, and adoption trajectory
+  \item Comparison to related languages (Haskell, Koka, Eff, Erlang/OTP)
+  \item Unison 1.0 milestone analysis and 2026 roadmap items
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Full Unison language tutorial or learning guide
+  \item Performance benchmarking or runtime profiling
+  \item Unison Cloud pricing analysis or business model evaluation
+  \item Implementation details of the UCM Haskell codebase itself
+  \item Speculative features beyond the published roadmap
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Content-addressed code architecture documented with hash scheme, canonicalization process, and at least 3 code examples showing the same function under different names producing identical hashes
+  \item Build elimination mechanism explained with comparison to traditional incremental compilation approaches in $\geq$3 other languages
+  \item Ability system fully documented with all built-in abilities catalogued, at least 2 custom ability examples, and handler mechanics explained
+  \item Comparison table between Unison abilities, Haskell monads, Koka effects, and traditional exception handling covering $\geq$6 dimensions
+  \item UCM workflow documented end-to-end: scratch file $\rightarrow$ typecheck $\rightarrow$ add $\rightarrow$ update $\rightarrow$ publish, with structured refactoring sessions explained
+  \item Unison Cloud distributed computing model traced from content-addressed code $\rightarrow$ code mobility $\rightarrow$ typed RPC $\rightarrow$ self-deployment, with at least 1 complete deployment example
+  \item BYOC architecture documented including infrastructure requirements, setup process, and operational model
+  \item Unison Share ecosystem assessed with library count estimates, community metrics (stars, contributors, Discord activity), and growth trajectory
+  \item At least 5 concrete adoption barriers identified with evidence and potential mitigations
+  \item Cross-module synthesis connecting the content-addressed core to abilities, tooling, and distributed computing as emergent consequences of a single design decision
+  \item All numerical claims attributed to specific sources (GitHub, Unison blog, conference talks, or peer-reviewed publications)
+  \item Document self-contained: a reader with no prior Unison knowledge can understand the complete ecosystem from this reference alone
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Framework Vision & Parent ecosystem; Unison research supports multi-agent tool development & Active \\
+gsd-skill-creator & Execution engine for this mission package & Active \\
+Token Optimization Research & Unison's caching model parallels GSD prompt caching strategies & Active \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Unison embodies the Amiga Principle at the language design level: architectural leverage over brute force. Rather than adding yet another build tool, yet another package manager, yet another serialization framework on top of a fundamentally broken model of ``code as text files,'' Unison makes a single radical architectural choice --- content-addressed code --- and lets the solutions emerge naturally. No builds. No dependency hell. No serialization boilerplate. No spurious merge conflicts. Self-deploying distributed systems.
+
+This is the same pattern the GSD ecosystem pursues: instead of patching the symptoms of context degradation in AI-assisted development, redesign the architecture so the problems dissolve. Unison proves that when you have the courage to question the deepest assumptions --- even ones as universal as ``code is stored in files'' --- the resulting system can be not just incrementally better but categorically different. The spaces between definitions, the gaps where bugs and friction traditionally hide, simply close.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Unison Language --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from web research, official Unison documentation, and community sources. It is organized by research module and designed to be consumed by GSD agents during mission execution. Each module section provides the factual foundation that agents will expand into full deliverable sections.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Unison Computing (public benefit corp) --- official language and cloud documentation
+  \item GitHub (unisonweb/unison) --- open source repository, 6.5K stars, 120+ contributors
+  \item LWN.net --- independent technical analysis of Unison
+  \item SoftwareMill --- four-part technical evaluation series
+  \item InfoWorld --- industry coverage of Unison 1.0 launch
+  \item Academic references: Frank language paper (Lindley, McBride, McLaughlin) for ability system foundations
+\end{itemize}
+
+\subsection{Module 1 Reference: Language Core}
+
+\subsubsection{Content-Addressed Code}
+
+Unison's central innovation is identifying definitions by a SHA3-512 hash of their abstract syntax tree rather than by name. Before hashing, definitions are canonicalized: all named arguments are replaced by positional de Bruijn indices, and all references to other definitions are replaced by their hashes. This means two functions with identical structure but different variable names produce the same hash. For example, \texttt{funnyAdd x y = x + y + 1} and \texttt{amusingAdd a b = a + b + 1} hash identically because their canonical ASTs are structurally equivalent. However, \texttt{comicalAdd x y = y + x + 1} produces a different hash because the argument order differs in the AST.
+
+Names are stored as separate metadata in the codebase database. Renaming a definition changes only the metadata, never the hash. This means every downstream dependency continues to work because it references the hash, not the name.
+
+\subsubsection{The Codebase Database}
+
+Unison code is stored in a SQLite-backed, append-only database called the ``codebase.'' Definitions are stored as type-checked ASTs linked by hash. The database model ensures that once a definition is added, it is immutable. The codebase format includes a shared compilation cache, which means code is compiled exactly once at the moment it enters the database and never again.
+
+\subsubsection{Consequences of Content-Addressing}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Mechanism} \\
+\midrule
+Zero build times & Code is stored pre-compiled; the compilation cache is part of the codebase format \\
+Non-breaking renames & Names are metadata, not identity; renaming never changes hashes \\
+Perfect test caching & Deterministic tests re-run only when their hash-identified dependencies change \\
+Semantic version control & Merge conflicts from formatting, import order, or whitespace are impossible \\
+No dependency conflicts & Different ``versions'' are simply different hashes that coexist \\
+Code mobility & A hash uniquely pins a definition and all transitive dependencies, enabling transfer between nodes \\
+Typed serialization & Values identified by content hash can be persisted and unpersisted without manual encoders/decoders \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Unison uses 512-bit SHA3 hashes. According to Unison documentation, if one million unique definitions were generated every second, the first hash collision would be expected after approximately 100 quadrillion years.
+
+\subsubsection{Language Basics}
+
+Unison is a statically-typed, purely functional language with strict (eager) evaluation. Function arguments are separated by spaces rather than parentheses and commas. Loops are written via recursion. Pattern matching uses \texttt{match <expr> with <cases>} syntax. The language supports structural types (identified by structure) and unique types (identified by name). Unison has been in development since 2013 and reached version 1.0 in November 2025. The compiler and UCM are implemented in Haskell (99.6\% of the repository).
+
+\subsection{Module 2 Reference: Type System and Abilities}
+
+\subsubsection{Type System}
+
+Unison features bidirectional type inference based on the work of Dunfield and Krishnaswami. Type signatures are optional --- the compiler infers them --- but can be provided for documentation. The type system supports parametric polymorphism, structural and unique algebraic data types, and pattern matching with exhaustiveness checking.
+
+A function type \texttt{A -> B} is syntactic sugar for \texttt{A ->\{e\} B} where \texttt{e} is a set of abilities. A pure function has type \texttt{A ->\{\} B} (empty ability set). The type checker enforces that calls to functions requiring abilities \texttt{\{A1, A2\}} must occur in a context where those abilities are available.
+
+\subsubsection{Abilities (Algebraic Effects)}
+
+Abilities are Unison's implementation of algebraic effects, based on the Frank language by Sam Lindley, Conor McBride, and Craig McLaughlin. Key divergences from Frank: Unison uses ordinary polymorphic types for ability polymorphism, and an empty ability set explicitly disallows abilities (in Frank, it implies ability-polymorphic type). Unison uses a separate \texttt{handle} construct rather than overloading function application for ability handling.
+
+An ability declaration defines an interface of operations. For example, the \texttt{Abort} ability declares a single operation \texttt{Abort.abort} that terminates computation. A handler provides the implementation --- what actually happens when the effect is performed. This separation of interface from implementation enables swappable handlers: the same effectful code can run against a real database, an in-memory mock, or a test stub.
+
+\subsubsection{Built-in Abilities}
+
+Key abilities in the standard library include \texttt{IO} (system I/O), \texttt{Exception} (error handling with typed failure information), \texttt{Abort} (computation termination), \texttt{Stream} (value emission), and \texttt{Store} (mutable state via get/put). The \texttt{Remote} ability enables distributed computing in Unison Cloud contexts.
+
+\subsubsection{Direct Style vs. Monadic Style}
+
+Unison's abilities enable ``direct-style algebraic effects'' --- effectful code that reads like imperative code but with full type-level effect tracking. Unlike Haskell's monadic IO where programmers must think about two layers (constructing the computation and executing it), Unison programmers write sequential effectful code directly. The trade-off: delayed computations require explicit \texttt{'} (thunk) syntax, and \texttt{!} to force evaluation. Related languages with effect systems include Koka and Eff.
+
+\subsection{Module 3 Reference: Tooling and Workflow}
+
+\subsubsection{Unison Codebase Manager (UCM)}
+
+The UCM is the primary interface for working with Unison. It monitors scratch files (any \texttt{.u} file) via filesystem watch and responds to changes by parsing, typechecking, and presenting results. The workflow is: write code in a text editor, save, and the UCM reports results and offers to update the codebase. Commands include \texttt{add} (new definitions), \texttt{update} (changed definitions), \texttt{move} (rename), \texttt{find} (search), \texttt{view} (inspect source), \texttt{test} (run tests), and \texttt{run} (execute programs).
+
+The UCM also provides a codebase web server for the Local Codebase UI, runs watch expressions automatically, and manages projects and branches.
+
+\subsubsection{Projects and Branches}
+
+Introduced as a major codebase abstraction, projects represent libraries, applications, or services that can be shared and versioned. Each project has branches for concurrent workstreams, with a ``main'' branch by default. Projects support pull requests on Unison Share and structured dependency management.
+
+\subsubsection{UCM Desktop App}
+
+Released in January 2025, the UCM Desktop provides a rich graphical interface for browsing codebase structure, clicking through to source definitions, reading API docs, and exploring namespace trees. It renders Unison's computable documentation format with tooltips, inter-definition links, and evaluated code examples.
+
+\subsubsection{AI Agent Integration}
+
+An MCP (Model Context Protocol) server was added to the UCM in August 2025 to support AI coding workflows. The MCP server enables AI agents to typecheck Unison code, browse documentation, search Unison Share, and inspect project dependencies --- making Unison one of the first languages to build native AI agent tooling into its core development environment.
+
+\subsubsection{Editor Support}
+
+Unison provides LSP (Language Server Protocol) integration for VS Code with syntax highlighting, autocomplete, error highlighting, type-on-hover, and documentation previews. Other editors are supported via community contributions. Notably, code formatting is not a separate concern --- Unison pretty-prints stored definitions on display, so code is always consistently formatted.
+
+\subsection{Module 4 Reference: Distributed Computing}
+
+\subsubsection{Code Mobility}
+
+Because definitions are content-addressed, they can be transferred between nodes by shipping bytecode trees with hash references. The receiving node inspects incoming hashes, identifies any missing dependencies, and requests them on demand. This enables arbitrary computations to migrate across a cluster without pre-packaging or container shipping.
+
+\subsubsection{Unison Cloud}
+
+Unison Cloud is a commercial platform (operated by Unison Computing, a public benefit corp) that turns the content-addressed code model into a practical distributed computing platform. Key features: deployment via ordinary function calls (no containers, no YAML), typed RPC between services (no serialization boilerplate), typed transactional storage (persist any Unison value directly), and Adaptive Service Graph Compression (co-locating communicating services to reduce latency).
+
+Unison Cloud regularly achieves 10--100x reductions in lines of code compared to equivalent traditional distributed systems, according to Unison Computing.
+
+\subsubsection{BYOC (Bring Your Own Cloud)}
+
+Launched as generally available in October 2025, BYOC allows organizations to run Unison Cloud on their own infrastructure. Requirements: S3-compatible storage and the ability to launch containers. The control plane is lightweight and multi-tenant; Unison Computing never sees customer data or HTTP requests. Free for personal use (up to 10 nodes / 160 cores), with commercial licensing available.
+
+\subsubsection{Distributed Data Structures}
+
+Unison Cloud provides \texttt{Seq}, a distributed lazily-evaluated data structure spanning multiple nodes. A high-scale streaming framework with exactly-once processing was shipped in March 2025. \texttt{OrderedTable} provides typed transactional storage. These primitives compose into higher-level distributed data structures (sorted maps, linearized event logs, KNN indices for vector search) written in ordinary Unison code.
+
+\subsection{Module 5 Reference: Ecosystem and Adoption}
+
+\subsubsection{Unison Share}
+
+Unison Share is the code hosting platform for the Unison ecosystem. It hosts projects, enables code discovery via search, supports pull requests, and provides a web interface for browsing codebases. Code is published via the \texttt{push} UCM command and libraries installed via \texttt{lib.install} --- no separate package manager required.
+
+\subsubsection{Community Metrics (as of early 2026)}
+
+GitHub: 6.5K stars, 291 forks, 120+ contributors, 19,624 commits, 94 releases. Latest release: 1.0.1 (December 21, 2025). Active Discord community. Unison Forall conference held annually (2022, 2024). Unison Computing raised \$9.75M in seed funding from Amplify Partners, Uncork Capital, Good Growth Capital, and Bloomberg Beta.
+
+\subsubsection{Related Languages}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Language} & \tableheader{Effects} & \tableheader{Storage} & \tableheader{Evaluation} & \tableheader{Key Difference} \\
+\midrule
+Haskell & Monads & Text files & Lazy & Monadic effects, traditional build \\
+Koka & Effects & Text files & Strict & Effect handlers but file-based \\
+Eff & Effects & Text files & Strict & Research language, limited tooling \\
+Erlang/OTP & Actor model & BEAM files & Strict & Distribution via message passing \\
+Unison & Abilities & Database & Strict & Content-addressed code \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Adoption Barriers}
+
+Key barriers identified from community discussion and independent analysis: (1) Small ecosystem --- fewer libraries than established languages; (2) Learning curve --- functional programming + novel concepts like content-addressed code; (3) Unison Cloud is not open source, creating vendor dependency concerns; (4) Everything must be written in Unison (no FFI until planned C FFI lands); (5) Namespace/fork/merge workflows can be confusing; (6) Limited IDE support compared to mainstream languages.
+
+\subsubsection{Roadmap (2026)}
+
+Published roadmap items include: C FFI support, improved record types, improved library management, faster codebase sync, improved MCP server, new UCM Desktop capabilities, Cloud observability, agentic computing framework, and Kinesis on S3.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\midrule
+Vendor claims & LOC reduction claims (10--100x) are self-reported by Unison Computing; present as claimed, not verified & ANNOTATE \\
+Open source status & Language is MIT-licensed open source; Cloud platform is proprietary. Clearly distinguish. & GATE \\
+Competition framing & Present factual comparisons to other languages without advocacy for or against adoption & ANNOTATE \\
+Community metrics & GitHub stars and contributor counts are point-in-time snapshots; note date of measurement & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Primary Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Unison Language Official Documentation --- \url{https://www.unison-lang.org/docs/}
+  \item Unison GitHub Repository --- \url{https://github.com/unisonweb/unison}
+  \item ``The Big Idea'' --- \url{https://www.unison-lang.org/docs/the-big-idea/}
+  \item Announcing Unison 1.0 --- \url{https://www.unison-lang.org/unison-1-0/}
+  \item Unison Cloud BYOC Announcement --- \url{https://www.unison-lang.org/blog/cloud-byoc/}
+  \item Unison Cloud: Our Approach --- \url{https://www.unison.cloud/our-approach/}
+  \item Abilities Language Reference --- \url{https://www.unison-lang.org/docs/language-reference/abilities-and-ability-handlers/}
+  \item Abilities for the Monadically Inclined --- \url{https://www.unison-lang.org/docs/fundamentals/abilities/for-monadically-inclined/}
+  \item UCM Desktop and MCP Updates --- \url{https://www.unison-lang.org/blog/ucm0545/}
+\end{itemize}
+
+\subsubsection*{Independent Analysis}
+\begin{itemize}[leftmargin=2em]
+  \item LWN.net: ``Programming in Unison'' --- \url{https://lwn.net/Articles/978955/}
+  \item SoftwareMill: 4-part Unison evaluation series --- \url{https://softwaremill.com/trying-out-unison-part-1-code-as-hashes/}
+  \item InfoWorld: ``Futuristic Unison functional language debuts'' (Dec 2025) --- \url{https://www.infoworld.com/article/4100673/futuristic-unison-functional-language-debuts.html}
+  \item Renato Athaydes: ``A look at Unison: a revolutionary programming language'' --- \url{https://renato.athaydes.com/posts/unison-revolution.html}
+  \item Dave Thomas (pragdave): ``Abilities: a New Way to Inject Behavior and State'' --- \url{https://pragdave.me/discover/unison/2023-03-11-abilities/}
+\end{itemize}
+
+\subsubsection*{Academic Foundations}
+\begin{itemize}[leftmargin=2em]
+  \item Lindley, McBride, McLaughlin --- ``Do Be Do Be Do'' (Frank language, ability system foundation)
+  \item Dunfield, Krishnaswami --- Bidirectional typechecking for higher-rank polymorphism
+  \item Effects bibliography referenced by Unison documentation
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality technical reference on the Unison programming language covering its content-addressed code architecture, ability system, developer tooling, distributed computing model, and ecosystem. The reference must be self-contained, technically precise, and structured for both human readers and downstream GSD agent consumption.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE 0 (Foundation)    WAVE 1 (Parallel Research)     WAVE 2       WAVE 3
+  ┌──────────────────┐   ┌──────────────────────────┐   ┌────────┐   ┌────────┐
+  │ Shared schemas   │   │ TRACK A    │  TRACK B    │   │Synth-  │   │Publish │
+  │ Source index     │──>│ M1: Core   │  M3: Tools  │──>│esis +  │──>│  +     │
+  │ Template         │   │ M2: Types  │  M4: Distrib│   │Cross-  │   │Verify  │
+  │                  │   │            │  M5: Ecosys │   │module  │   │        │
+  └──────────────────┘   └──────────────────────────┘   └────────┘   └────────┘
+       Sequential              Parallel (2 tracks)       Sequential   Sequential
+       Haiku                   Sonnet + Opus             Opus         Sonnet
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Foundation:} Shared schemas, source index, document template, cross-reference conventions
+  \item \textbf{Research:} Five parallel-capable module surveys with source-backed findings
+  \item \textbf{Synthesis:} Cross-module integration connecting content-addressing to all downstream consequences
+  \item \textbf{Publication:} Final document assembly, verification, formatting, and delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Language Core Reference & Hash scheme, canonicalization, $\geq$3 code examples, comparison to 3+ build systems & Module 1 \\
+2 & Type System \& Abilities Reference & All built-in abilities, 2+ custom examples, handler mechanics, comparison table & Module 2 \\
+3 & Tooling Reference & End-to-end UCM workflow, project model, MCP server, Desktop app & Module 3 \\
+4 & Distributed Computing Reference & Code mobility mechanism, Cloud architecture, BYOC, deployment example & Module 4 \\
+5 & Ecosystem Assessment & Community metrics, library survey, 5+ adoption barriers, roadmap analysis & Module 5 \\
+6 & Cross-Module Synthesis & Unified narrative tracing content-addressing through all modules & Wave 2 \\
+7 & Final Publication & Formatted, verified, self-contained document with complete bibliography & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Shared Schemas & None & Haiku & 2K \\
+W0: Source Index & None & Haiku & 3K \\
+W1A: Language Core & W0 & Sonnet & 12K \\
+W1A: Type System & W0, M1 partial & Sonnet+Opus & 15K \\
+W1B: Tooling & W0 & Sonnet & 10K \\
+W1B: Distributed & W0, M1 partial & Sonnet+Opus & 14K \\
+W1B: Ecosystem & W0 & Sonnet & 8K \\
+W2: Synthesis & All W1 & Opus & 12K \\
+W3: Publication & W2 & Sonnet & 8K \\
+W3: Verification & W3 pub & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% (Synthesis, M2/M4 analysis) & Cross-module integration requires judgment about how content-addressing cascades into effects, tooling, and distribution; comparison analysis between effect systems requires nuanced PL theory understanding \\
+Sonnet & 60\% (Module surveys, publication) & Structured research compilation, document assembly, source verification, and technical reference writing are Sonnet's sweet spot \\
+Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven and low-complexity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 1 \\
+1 & Research & Parallel (2) & Sonnet+Opus & 8--12 \\
+2 & Synthesis & Sequential & Opus & 4--5 \\
+3 & Publication & Sequential & Sonnet & 3--4 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0.1 & Shared schemas & Section template, cross-reference format, citation style & Haiku \\
+0.2 & Source index & Validated URL list with quality ratings for all sources & Haiku \\
+0.3 & Document template & LaTeX skeleton with all section stubs & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A:} Language fundamentals (Modules 1 and 2)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A.1 & Content-addressed code deep dive & Hash scheme, canonicalization, examples & Sonnet \\
+1A.2 & Build elimination analysis & Comparison to Make, Cargo, Stack, Gradle & Sonnet \\
+1A.3 & Type system survey & Inference, structural/unique types, exhaustiveness & Sonnet \\
+1A.4 & Ability system analysis & All abilities, handlers, custom ability walkthrough & Opus \\
+1A.5 & Effect system comparison & Unison vs Haskell vs Koka vs Eff vs direct-style & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:} Tooling, distribution, and ecosystem (Modules 3, 4, 5)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1B.1 & UCM workflow documentation & End-to-end scratch-to-publish pipeline & Sonnet \\
+1B.2 & Developer tooling survey & Desktop, LSP, MCP, Local UI, editor support & Sonnet \\
+1B.3 & Code mobility mechanism & Content-hash transfer protocol, dependency deployment & Sonnet \\
+1B.4 & Unison Cloud architecture & Public cloud, BYOC, typed RPC, storage, streaming & Opus \\
+1B.5 & Ecosystem assessment & Share, community, libraries, adoption barriers & Sonnet \\
+1B.6 & Roadmap and trajectory & 2026 roadmap items, growth indicators & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Cross-module integration & Unified narrative: content-addressing $\rightarrow$ all consequences & Opus \\
+2.2 & Implications analysis & What Unison's design means for PL evolution & Opus \\
+2.3 & Gap identification & Missing evidence, unresolved questions, research limits & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Document assembly & Complete formatted reference document & Sonnet \\
+3.2 & Source verification & All citations checked, broken links flagged & Sonnet \\
+3.3 & Self-containment review & Verify document readable without prior Unison knowledge & Sonnet \\
+3.4 & Final formatting & Typography, diagrams, table of contents, bibliography & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Source index caching:} Wave 0 source index persists across all waves, eliminating redundant URL lookups
+  \item \textbf{Cross-reference caching:} Module hash-to-section mapping enables agents to reference completed modules without re-reading
+  \item \textbf{Schema reuse:} Shared schemas from Wave 0 are loaded once and reused by all Wave 1 agents
+  \item \textbf{Prompt caching:} System prompts with mission context cached for all agent invocations within a session
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0: Foundation & 3K & 5K & 8K \\
+Wave 1: Research & 40K & 59K & 99K \\
+Wave 2: Synthesis & 25K & 12K & 37K \\
+Wave 3: Publication & 20K & 12K & 32K \\
+\midrule
+\textbf{Total} & \textbf{88K} & \textbf{88K} & \textbf{176K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0.1 (Schemas) ──┬──> W1A.1 (Core) ──> W1A.2 (Build)
+  W0.2 (Sources) ──┤                          │
+  W0.3 (Template)──┤    W1A.3 (Types) ──> W1A.4 (Abilities) ──> W1A.5 (Comparison)
+                   │                                                     │
+                   │    W1B.1 (UCM) ──> W1B.2 (Dev Tools)              │
+                   ├──> W1B.3 (Mobility) ──> W1B.4 (Cloud)             │
+                   │    W1B.5 (Ecosystem) ──> W1B.6 (Roadmap)          │
+                   │         │                      │                    │
+                   │         └──────────┬───────────┘                    │
+                   │                    │                                │
+                   │              W2.1 (Integration) <───────────────────┘
+                   │              W2.2 (Implications)
+                   │              W2.3 (Gap Analysis)
+                   │                    │
+                   │              W3.1 (Assembly)
+                   │              W3.2 (Verification)
+                   │              W3.3 (Self-Containment)
+                   └───────────── W3.4 (Final Format)
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, numerical attribution, advocacy \\
+Core functionality & 14 & Required & BLOCK & All 12 success criteria \\
+Integration & 6 & Required & BLOCK & Cross-module connections \\
+Edge cases & 4 & Best-effort & LOG & Data gaps, temporal currency \\
+\midrule
+\textbf{Total} & \textbf{29} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to official docs, peer-reviewed work, or professional journalism. Zero blogs-as-primary-source. \\
+SC-NUM & Numerical attribution & Every metric (stars, contributors, funding, LOC claims) attributed to specific source with date \\
+SC-ADV & No advocacy & Document presents Unison factually without advocating for or against adoption \\
+SC-VND & Vendor claims marked & Self-reported claims from Unison Computing (e.g., 10--100x LOC reduction) clearly attributed as vendor claims \\
+SC-OSS & Open source vs proprietary & MIT-licensed language clearly distinguished from proprietary Cloud platform throughout \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Content-addressed architecture with 3+ code examples & CF-01, CF-02 & Pending \\
+2. Build elimination vs 3+ other languages & CF-03 & Pending \\
+3. All built-in abilities catalogued + 2 custom examples & CF-04, CF-05 & Pending \\
+4. Effect system comparison table ($\geq$6 dimensions) & CF-06 & Pending \\
+5. UCM end-to-end workflow documented & CF-07 & Pending \\
+6. Distributed computing chain traced & CF-08, CF-09 & Pending \\
+7. BYOC architecture documented & CF-10 & Pending \\
+8. Ecosystem assessed with metrics & CF-11 & Pending \\
+9. 5+ adoption barriers identified & CF-12 & Pending \\
+10. Cross-module synthesis present & IN-01, IN-02 & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Document self-contained & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research to fill gaps \\
+EXEC-A & Executor (Track A) & Document production for Modules 1 and 2 \\
+EXEC-B & Executor (Track B) & Document production for Modules 3, 4, and 5 \\
+CRAFT-PL & PL Theory Specialist & Ability system analysis, effect system comparison, type theory \\
+CRAFT-DIST & Distribution Specialist & Cloud architecture, code mobility, BYOC, distributed data structures \\
+VERIFY & Verification & Source validation; accuracy checking; claim attribution \\
+INTEG & Integration Agent & Cross-module relationship validation; synthesis support \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope clarification \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache optimization \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 \\
+Estimated Context Windows & 18--24 \\
+Estimated Sessions & 4--5 \\
+Token Budget & $\sim$176K total \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Safety-Critical Tests & 5 (all mandatory BLOCK) \\
+Total Tests & 29 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``We're used to thinking of a program as a thing that describes what a single OS process will do. Unison starts with the premise that no matter how many nodes a computation occupies, it should be expressible via a single program.''}
+
+\vspace{0.5em}
+\hfill --- The through-line: one radical architectural choice, and the solutions emerge.
+\end{quotebox}
+
+\end{document}
