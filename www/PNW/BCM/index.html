@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Construction Mastery &mdash; PNW Building Science</title>
+  <style>
+    :root {
+      --primary: #263238;
+      --secondary: #1565C0;
+      --tertiary: #4E342E;
+      --accent: #FF6F00;
+      --cream: #f8f6f0;
+      --mist: #e4e8e0;
+      --text: #2c2c2c;
+      --text-light: #5a5a5a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+      color: white;
+      padding: 2rem;
+      border-bottom: 4px solid var(--accent);
+    }
+    header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; }
+    header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
+    header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    header nav a {
+      color: white;
+      background: rgba(255,255,255,0.12);
+      padding: 0.35rem 0.8rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-family: system-ui, sans-serif;
+      transition: background 0.2s;
+    }
+    header nav a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+    header nav a.active { background: rgba(255,255,255,0.3); font-weight: 600; }
+
+    main {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--mist);
+    }
+    h3 { font-size: 1.15rem; color: var(--tertiary); margin: 1.8rem 0 0.6rem; }
+    p { margin: 0.8rem 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+      font-weight: 500;
+      font-family: system-ui, sans-serif;
+    }
+    td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--mist); }
+    tr:nth-child(even) { background: rgba(21, 101, 192, 0.05); }
+    tr:hover { background: rgba(21, 101, 192, 0.1); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+      padding: 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+    .card .meta { font-size: 0.82rem; color: var(--text-light); font-family: system-ui, sans-serif; }
+    .card p { font-size: 0.92rem; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      margin-right: 0.3rem;
+    }
+    .tag-struct { background: #efebe9; color: #4E342E; }
+    .tag-elec { background: #fff8e1; color: #f57f17; }
+    .tag-plumb { background: #e3f2fd; color: #1565c0; }
+    .tag-envelope { background: #e8f5e9; color: #2e7d32; }
+    .tag-codes { background: #fce4ec; color: #c62828; }
+    .tag-edu { background: #f3e5f5; color: #7b1fa2; }
+    .tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+    blockquote {
+      border-left: 3px solid var(--secondary);
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      background: rgba(21, 101, 192, 0.04);
+      font-style: italic;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+    }
+    .stat { text-align: center; }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+      font-family: system-ui, sans-serif;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: system-ui, sans-serif;
+    }
+
+    footer {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-top: 2px solid var(--mist);
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 1.2rem; }
+      header h1 { font-size: 1.3rem; }
+      main { padding: 1rem; }
+      .stats { flex-direction: column; gap: 0.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Building Construction Mastery</h1>
+    <div class="subtitle">Pacific Northwest Building Science &mdash; Oregon &amp; Washington Code Landscape</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="research/01-structural-systems.md">Structural</a>
+      <a href="research/02-electrical-systems.md">Electrical</a>
+      <a href="research/03-plumbing-mechanical.md">Plumbing/HVAC</a>
+      <a href="research/04-building-envelope.md">Envelope</a>
+      <a href="research/05-codes-standards-blueprinting.md">Codes</a>
+      <a href="research/06-educational-frameworks.md">Education</a>
+      <a href="research/09-verification-report.md">Verification</a>
+      <a href="mission-pack/index.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Six trades, five audience levels, two states, one bioregion. From the homeowner wondering
+      why their crawlspace is wet to the engineer calculating seismic base shear for the Cascadia
+      Subduction Zone &mdash; the same building science, expressed at the depth each reader needs.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Trade Disciplines</span></div>
+      <div class="stat"><span class="stat-value">103K</span><span class="stat-label">Words</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Research Documents</span></div>
+      <div class="stat"><span class="stat-value">41</span><span class="stat-label">Sources</span></div>
+      <div class="stat"><span class="stat-value">48/48</span><span class="stat-label">Tests Passed</span></div>
+      <div class="stat"><span class="stat-value">119</span><span class="stat-label">Safety Callouts</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="research/01-structural-systems.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Structural Systems &amp; Materials Science</h3>
+        <div class="meta"><span class="tag tag-struct">M1-ST</span> 13,186 words</div>
+        <p>Wood-frame, mass timber, steel, concrete. PNW materials (Douglas fir, WRC, basalt). ASCE 7-22 seismic design, load path analysis, Portland Ch. 24.85, Seattle SDCI.</p>
+      </a>
+
+      <a href="research/02-electrical-systems.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Electrical Systems</h3>
+        <div class="meta"><span class="tag tag-elec">M2-EL</span> 13,798 words</div>
+        <p>NEC 2023 complete mapping. GFCI expansion (210.8), SPD requirements (230.67), emergency disconnect (230.85). OESC 2023 and WA L&amp;I amendments.</p>
+      </a>
+
+      <a href="research/03-plumbing-mechanical.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Plumbing &amp; Mechanical Systems</h3>
+        <div class="meta"><span class="tag tag-plumb">M3-PM</span> 12,022 words</div>
+        <p>DWV design, water supply, HVAC integration. UPC 2021 via OPSC (OR) and WAC 51-56 (WA). Heat pump adoption, fuel gas safety, MEP coordination.</p>
+      </a>
+
+      <a href="research/04-building-envelope.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Building Envelope &amp; Weatherproofing</h3>
+        <div class="meta"><span class="tag tag-envelope">M4-BE</span> 11,081 words</div>
+        <p>Rain screen assemblies, WRB, roofing, cladding, insulation. PNW moisture science. OEESC 2025 and WSEC-R 2021 energy code. WUI requirements.</p>
+      </a>
+
+      <a href="research/05-codes-standards-blueprinting.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Codes, Standards &amp; Blueprinting</h3>
+        <div class="meta"><span class="tag tag-codes">M5-CS</span> 10,418 words</div>
+        <p>PNW code landscape (Oregon BCD, Washington SBCC). Blueprint reading (plan, elevation, section, detail). Permits, inspections, professional requirements.</p>
+      </a>
+
+      <a href="research/06-educational-frameworks.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Educational Frameworks</h3>
+        <div class="meta"><span class="tag tag-edu">M6-ED</span> 12,167 words</div>
+        <p>5-tier audience system (L1-L5). ABET EAC alignment. 5 college course outlines. Homeowner guide. Trade apprenticeship and PE exam frameworks.</p>
+      </a>
+    </div>
+
+    <h2>Foundation &amp; Verification</h2>
+
+    <div class="card-grid">
+      <a href="research/00-parameter-schema.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Parameter Schema</h3>
+        <div class="meta">00-parameter-schema.md &middot; 8,658 words</div>
+        <p>6-dimensional construction knowledge space: Trade Discipline, Building Scale, Building Style, Lifecycle Phase, Audience Depth, Regional Specificity.</p>
+      </a>
+
+      <a href="research/00-source-index.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Source Index</h3>
+        <div class="meta">00-source-index.md &middot; 4,761 words</div>
+        <p>41 authoritative sources: ICC, NFPA, IAPMO, ASCE, ABET, Oregon BCD, Washington SBCC, Portland BDS, Seattle SDCI, FEMA.</p>
+      </a>
+
+      <a href="research/00-content-templates.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Content Templates</h3>
+        <div class="meta">00-content-templates.md &middot; 7,521 words</div>
+        <p>L1-L5 audience templates with BLOCK/GATE/ANNOTATE safety callout system. Content transformation rules for multi-audience delivery.</p>
+      </a>
+
+      <a href="research/07-integration-report.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Integration Report</h3>
+        <div class="meta">07-integration-report.md &middot; 10/10 tests</div>
+        <p>Cross-module integration validation. 27/27 code references consistent. 6/6 dimensions verified. Integration grade: A.</p>
+      </a>
+
+      <a href="research/08-safety-review.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Safety Review</h3>
+        <div class="meta">08-safety-review.md &middot; 8/8 tests</div>
+        <p>Independent safety audit. 119 safety callouts verified. All 8 sensitivity areas cleared. Zero DIY gas procedures.</p>
+      </a>
+
+      <a href="research/09-verification-report.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Verification Report</h3>
+        <div class="meta">09-verification-report.md &middot; 48/48 tests</div>
+        <p>Final verification: 12 success criteria, 18 CF tests, 10 IN tests, 8 SC tests. All pass.</p>
+      </a>
+
+      <a href="mission-pack/index.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission Pack</h3>
+        <div class="meta">27-page mission brief (PDF)</div>
+        <p>The original BCM mission package defining scope, success criteria, wave plan, and safety requirements.</p>
+      </a>
+    </div>
+
+    <h2>Trade Discipline Coverage</h2>
+
+    <table>
+      <thead>
+        <tr><th>Module</th><th>Trade</th><th>Primary Codes</th><th>States</th><th>Key Feature</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>M1-ST</strong></td>
+          <td>Structural</td>
+          <td>IBC 2024/2021, ASCE 7-22, NDS</td>
+          <td>OR + WA</td>
+          <td>Complete seismic design procedure</td>
+        </tr>
+        <tr>
+          <td><strong>M2-EL</strong></td>
+          <td>Electrical</td>
+          <td>NEC 2023, OESC 2023, WA NEC</td>
+          <td>OR + WA</td>
+          <td>Full NEC 2023 change analysis</td>
+        </tr>
+        <tr>
+          <td><strong>M3-PM</strong></td>
+          <td>Plumbing/Mechanical</td>
+          <td>UPC 2021, OPSC 2023, IMC, IFGC</td>
+          <td>OR + WA</td>
+          <td>Heat pump integration, zero DIY gas</td>
+        </tr>
+        <tr>
+          <td><strong>M4-BE</strong></td>
+          <td>Envelope</td>
+          <td>IRC 2021, OEESC 2025, WSEC-R 2021</td>
+          <td>OR + WA</td>
+          <td>Rain screen design for marine climate</td>
+        </tr>
+        <tr>
+          <td><strong>M5-CS</strong></td>
+          <td>Codes/Standards</td>
+          <td>All ICC, NFPA, IAPMO codes</td>
+          <td>OR + WA + Portland + Seattle</td>
+          <td>Blueprint reading + permit process</td>
+        </tr>
+        <tr>
+          <td><strong>M6-ED</strong></td>
+          <td>Education</td>
+          <td>ABET EAC 2025-2026</td>
+          <td>National + PNW</td>
+          <td>5-tier audience system + ABET alignment</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Audience Levels</h2>
+
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Reader</th><th>Knowledge Goal</th><th>Safety Boundary</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>L1</strong></td>
+          <td>Homeowner</td>
+          <td>Understand systems, recognize problems, hire wisely</td>
+          <td>All repairs beyond basic maintenance require professionals</td>
+        </tr>
+        <tr>
+          <td><strong>L2</strong></td>
+          <td>Skilled DIY</td>
+          <td>Execute permitted projects correctly</td>
+          <td>Stop at license boundaries (panel, gas, structural)</td>
+        </tr>
+        <tr>
+          <td><strong>L3</strong></td>
+          <td>Trade Student</td>
+          <td>Master theory, code basis, calculation methods</td>
+          <td>Work only under licensed supervision</td>
+        </tr>
+        <tr>
+          <td><strong>L4</strong></td>
+          <td>Journeyman/Contractor</td>
+          <td>Code compliance at amendment level</td>
+          <td>PE/SE stamp boundaries; scope-of-license limits</td>
+        </tr>
+        <tr>
+          <td><strong>L5</strong></td>
+          <td>Engineer/Architect</td>
+          <td>Design theory, calculation procedures, code analysis</td>
+          <td>Professional liability; standard of care</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>PNW Code Landscape</h2>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Oregon</th><th>Washington</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Building (IBC)</strong></td>
+          <td>OSSC 2025 (IBC 2024), Oct 2025</td>
+          <td>WAC 51-50 (IBC 2021), Mar 2024</td>
+        </tr>
+        <tr>
+          <td><strong>Residential (IRC)</strong></td>
+          <td>ORSC 2023 (IRC 2021), Oct 2023</td>
+          <td>WAC 51-51 (IRC 2021), Mar 2024</td>
+        </tr>
+        <tr>
+          <td><strong>Electrical (NEC)</strong></td>
+          <td>OESC 2023 (NEC 2023), Oct 2023</td>
+          <td>WA NEC 2023 via L&amp;I</td>
+        </tr>
+        <tr>
+          <td><strong>Plumbing (UPC)</strong></td>
+          <td>OPSC 2023 (UPC 2021), Oct 2023</td>
+          <td>WAC 51-56 (UPC 2021), Mar 2024</td>
+        </tr>
+        <tr>
+          <td><strong>Mechanical (IMC)</strong></td>
+          <td>OMSC 2022 (IMC), 2022</td>
+          <td>WAC 51-52 (IMC 2021), Mar 2024</td>
+        </tr>
+        <tr>
+          <td><strong>Energy</strong></td>
+          <td>OEESC 2025 (ASHRAE 90.1-2022), Jan 2025</td>
+          <td>WSEC-R 2021, Mar 2024</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Building Construction Mastery &middot; PNW Research Series &middot; gsd-skill-creator</p>
+    <p>Six trades, five depths, two states. The same building science for every reader.</p>
+  </footer>
+</body>
+</html>

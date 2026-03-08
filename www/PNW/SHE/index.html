@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home Technologies &amp; DIY Electronics &mdash; PNW Research Series</title>
+  <style>
+    :root {
+      --primary: #004d40;
+      --secondary: #ff6d00;
+      --tertiary: #1a237e;
+      --accent: #ff6d00;
+      --cream: #f8f6f0;
+      --mist: #e4e8e0;
+      --text: #2c2c2c;
+      --text-light: #5a5a5a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    a { color: var(--tertiary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #00695c 40%, var(--tertiary) 80%, #283593 100%);
+      color: white;
+      padding: 2rem;
+      border-bottom: 4px solid var(--accent);
+    }
+    header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; }
+    header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
+    header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    header nav a {
+      color: white;
+      background: rgba(255,255,255,0.12);
+      padding: 0.35rem 0.8rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-family: system-ui, sans-serif;
+      transition: background 0.2s;
+    }
+    header nav a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+    header nav a.active { background: rgba(255,255,255,0.3); font-weight: 600; }
+
+    main {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--mist);
+    }
+    h3 { font-size: 1.15rem; color: var(--tertiary); margin: 1.8rem 0 0.6rem; }
+    p { margin: 0.8rem 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+      font-weight: 500;
+      font-family: system-ui, sans-serif;
+    }
+    td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--mist); }
+    tr:nth-child(even) { background: rgba(0, 77, 64, 0.05); }
+    tr:hover { background: rgba(0, 77, 64, 0.1); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+      padding: 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+    .card .meta { font-size: 0.82rem; color: var(--text-light); font-family: system-ui, sans-serif; }
+    .card p { font-size: 0.92rem; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      margin-right: 0.3rem;
+    }
+    .tag-hw { background: #e8f5e9; color: #2e7d32; }
+    .tag-sw { background: #e3f2fd; color: #1565c0; }
+    .tag-proj { background: #fff3e0; color: #e65100; }
+    .tag-safe { background: #fce4ec; color: #c62828; }
+    .tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      background: rgba(255, 109, 0, 0.04);
+      font-style: italic;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+    }
+    .stat { text-align: center; }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+      font-family: system-ui, sans-serif;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: system-ui, sans-serif;
+    }
+
+    footer {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-top: 2px solid var(--mist);
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 1.2rem; }
+      header h1 { font-size: 1.3rem; }
+      main { padding: 1rem; }
+      .stats { flex-direction: column; gap: 0.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Home Technologies &amp; DIY Electronics</h1>
+    <div class="subtitle">Comprehensive Mapping for Students &amp; Makers &mdash; From Blinking LED to Complete Home Hub</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="research/01-electronics-foundations.md">Electronics</a>
+      <a href="research/02-sensors-actuators.md">Sensors</a>
+      <a href="research/03-connectivity-protocols.md">Protocols</a>
+      <a href="research/04-platforms-software.md">Platforms</a>
+      <a href="research/05-complete-projects.md">36 Projects</a>
+      <a href="research/06-safety-standards.md">Safety</a>
+      <a href="research/09-verification-report.md">Verification</a>
+      <a href="mission-pack/">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The 500-in-1 electronics kit of the 1980s taught a generation to solder, to read schematics,
+      to build radios and alarm circuits from discrete components. This is the spiritual successor
+      to that kit &mdash; updated for an era of microcontrollers, mesh networks, and machine learning
+      at the edge. The projects start with a blinking LED and end with a complete, self-hosted home
+      automation system that the student built, understands, and controls.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">Student Projects</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Difficulty Tiers</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Protocols Mapped</span></div>
+      <div class="stat"><span class="stat-value">27</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">56</span><span class="stat-label">Safety Callouts</span></div>
+      <div class="stat"><span class="stat-value">33/33</span><span class="stat-label">Tests Passed</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="research/01-electronics-foundations.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Electronics Foundations</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> Circuit theory &amp; components</div>
+        <p>Ohm's law, Kirchhoff's laws, AC/DC, voltage dividers, transistor switching, PWM, op-amps, mains safety, power supply design. The physics under every project.</p>
+      </a>
+
+      <a href="research/02-sensors-actuators.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Sensors &amp; Actuators</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> 22 sensors &middot; 14 actuators</div>
+        <p>Complete catalog: temperature, motion, light, gas, current, soil. Relays, servos, steppers, addressable LEDs. Signal conditioning, PCB design basics.</p>
+      </a>
+
+      <a href="research/03-connectivity-protocols.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Connectivity &amp; Protocols</h3>
+        <div class="meta"><span class="tag tag-sw">Software</span> 10 protocols compared</div>
+        <p>Wi-Fi, BLE, Zigbee, Z-Wave, Thread, Matter, LoRa, 433 MHz, IR, MQTT. Protocol comparison matrix, MQTT deep dive, Matter v1.5, mesh networking.</p>
+      </a>
+
+      <a href="research/04-platforms-software.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Platforms &amp; Software</h3>
+        <div class="meta"><span class="tag tag-sw">Software</span> HA &middot; ESPHome &middot; Node-RED</div>
+        <p>Home Assistant installation and automation. ESPHome YAML firmware. Node-RED flows. Docker, InfluxDB, Grafana, voice assistant integration (Wyoming/Whisper/Piper).</p>
+      </a>
+
+      <a href="research/05-complete-projects.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Complete System Projects</h3>
+        <div class="meta"><span class="tag tag-proj">Projects</span> 36 projects &middot; 6 tiers &middot; $3&ndash;$100</div>
+        <p>From Blink LED ($3) to Complete Home Hub ($100). Each project: BOM, circuit, firmware, HA dashboard, safety notes, concept map. Full curriculum progression.</p>
+      </a>
+
+      <a href="research/06-safety-standards.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Safety &amp; Standards</h3>
+        <div class="meta"><span class="tag tag-safe">Safety</span> NEC &middot; ETSI &middot; OWASP &middot; FCC</div>
+        <p>NEC/NFPA 70 electrical codes, Article 725 boundary, GFCI, box fill. ETSI EN 303 645 IoT security. OWASP Top 10. FCC Part 15 RF compliance. Li-ion battery safety.</p>
+      </a>
+    </div>
+
+    <h2>Foundation &amp; Verification</h2>
+
+    <div class="card-grid">
+      <a href="research/00-component-catalog.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Component Catalog</h3>
+        <div class="meta">00-component-catalog.md &middot; 60+ parts</div>
+        <p>Master catalog: microcontrollers, sensors, actuators, passives, power supplies, tools. Specs, costs, and starter kit recommendations for each tier.</p>
+      </a>
+
+      <a href="research/00-source-index.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Source Index</h3>
+        <div class="meta">00-source-index.md &middot; 27 organizations</div>
+        <p>NFPA, UL, IEEE, ETSI, FCC, OWASP, CSA, Espressif, Arduino, Home Assistant, ESPHome, Open Energy Monitor. All authoritative sources with IDs.</p>
+      </a>
+
+      <a href="research/00-project-templates.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Project Templates</h3>
+        <div class="meta">00-project-templates.md &middot; 9 templates</div>
+        <p>Standard templates for project writeups, BOMs, circuit descriptions, firmware, safety checklists. BLOCK/GATE/ANNOTATE callout system. Tier progression map.</p>
+      </a>
+
+      <a href="research/07-integration-report.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Integration Report</h3>
+        <div class="meta">07-integration-report.md &middot; Grade: A</div>
+        <p>Cross-module consistency, concept progression, source ID verification, component catalog traceability. 19/19 sources, 15/15 components, 5/5 tier transitions.</p>
+      </a>
+
+      <a href="research/08-safety-review.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Safety Review</h3>
+        <div class="meta">08-safety-review.md &middot; 8/8 tests</div>
+        <p>Independent safety audit. 56 safety callouts verified. 8 safety-critical tests passed. Mains, battery, flyback, RF, network security all covered.</p>
+      </a>
+
+      <a href="research/09-verification-report.md" class="card" style="text-decoration:none;color:inherit">
+        <h3>Verification Report</h3>
+        <div class="meta">09-verification-report.md &middot; 33/33 tests</div>
+        <p>Final verification: 12 success criteria, 16 CF tests, 3 IN tests, 8 SC tests, 6 EC tests. All pass. ~85,000 words across 12 research files.</p>
+      </a>
+
+      <a href="mission-pack/" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission Pack</h3>
+        <div class="meta">31-page mission brief (PDF)</div>
+        <p>The original SHE mission package: vision document, research reference, milestone specification, wave plan, and crew manifest.</p>
+      </a>
+    </div>
+
+    <h2>Project Tiers</h2>
+
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>Name</th><th>Projects</th><th>Cost Range</th><th>Platform</th><th>Safety Level</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>First Steps</td>
+          <td>1&ndash;6: Blink LED, Button, LDR, Temp, RGB, Servo</td>
+          <td>$3&ndash;$10</td>
+          <td>Arduino</td>
+          <td>5V USB only</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Getting Connected</td>
+          <td>7&ndash;12: Weather, MQTT, Nightlight, Motion, Soil, Doorbell</td>
+          <td>$10&ndash;$15</td>
+          <td>ESP32</td>
+          <td>Low voltage + Wi-Fi</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Home Automation</td>
+          <td>13&ndash;18: Light Switch, Thermostat, RFID, Humidifier, IR, Garage</td>
+          <td>$12&ndash;$22</td>
+          <td>ESP32 + ESPHome</td>
+          <td>Mains voltage begins</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Intermediate</td>
+          <td>19&ndash;24: Energy, LED Strip, Multi-Temp, Camera, Watering, Weather+</td>
+          <td>$25&ndash;$45</td>
+          <td>ESP32 + RPi</td>
+          <td>CT clamps, panels</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Advanced</td>
+          <td>25&ndash;30: Mirror, Voice, Zigbee, Node-RED, Solar, Presence</td>
+          <td>$25&ndash;$80</td>
+          <td>RPi + ESP32</td>
+          <td>Complex integrations</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Capstone</td>
+          <td>31&ndash;36: Hub, PCB, AI Doorbell, Audio, EV, Accessibility</td>
+          <td>$40&ndash;$100</td>
+          <td>Full stack</td>
+          <td>Full NEC + security</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Protocol Coverage</h2>
+
+    <table>
+      <thead>
+        <tr><th>Protocol</th><th>Frequency</th><th>Range</th><th>Mesh</th><th>Key Projects</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Wi-Fi</strong></td><td>2.4/5 GHz</td><td>50 m</td><td>No</td><td>7&ndash;36 (primary)</td></tr>
+        <tr><td><strong>MQTT</strong></td><td>Over TCP/IP</td><td>Network</td><td>N/A</td><td>8, 14, 21, 28, 31</td></tr>
+        <tr><td><strong>BLE</strong></td><td>2.4 GHz</td><td>30 m</td><td>Yes*</td><td>30 (presence)</td></tr>
+        <tr><td><strong>Zigbee</strong></td><td>2.4 GHz</td><td>10&ndash;30 m</td><td>Yes</td><td>27, 31</td></tr>
+        <tr><td><strong>Z-Wave</strong></td><td>908 MHz</td><td>30 m</td><td>Yes</td><td>Reference (M3)</td></tr>
+        <tr><td><strong>Thread</strong></td><td>2.4 GHz</td><td>10&ndash;30 m</td><td>Yes</td><td>31 (Matter transport)</td></tr>
+        <tr><td><strong>Matter</strong></td><td>Over IP</td><td>Varies</td><td>Via Thread</td><td>31 (interop layer)</td></tr>
+        <tr><td><strong>LoRa</strong></td><td>915 MHz</td><td>2&ndash;15 km</td><td>No</td><td>Reference (M3)</td></tr>
+        <tr><td><strong>433 MHz</strong></td><td>433 MHz</td><td>100 m</td><td>No</td><td>Legacy integration</td></tr>
+        <tr><td><strong>IR</strong></td><td>38 kHz</td><td>5&ndash;10 m</td><td>No</td><td>17 (remote hub)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Six Safety Rules</h2>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Rule</th><th>Standard</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>De-energize before wiring. Verify with multimeter. Lock out breaker.</td><td>NEC/NFPA 70</td></tr>
+        <tr><td><strong>2</strong></td><td>Use properly rated components. Wire gauge matches circuit breaker.</td><td>NEC/NFPA 70</td></tr>
+        <tr><td><strong>3</strong></td><td>Flyback diodes on every relay coil, solenoid, and motor.</td><td>Circuit theory</td></tr>
+        <tr><td><strong>4</strong></td><td>Lithium batteries require TP4056 + DW01 protection minimum.</td><td>Battery safety</td></tr>
+        <tr><td><strong>5</strong></td><td>RF transmitters comply with FCC Part 15. Use pre-certified modules.</td><td>FCC Part 15</td></tr>
+        <tr><td><strong>6</strong></td><td>When in doubt, hire a licensed electrician. NEC compliance is not optional.</td><td>NEC/NFPA 70</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Smart Home Technologies &amp; DIY Electronics &middot; PNW Research Series &middot; gsd-skill-creator</p>
+    <p>The spaces between the components are where the learning happens.</p>
+  </footer>
+</body>
+</html>
