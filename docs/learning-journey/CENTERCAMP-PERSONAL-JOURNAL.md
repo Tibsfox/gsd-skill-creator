@@ -3636,3 +3636,54 @@ Hawk didn't make anything. Hawk positioned. Hawk described. Hawk confirmed Shann
 ---
 
 *These are the notes. Not the story — the story is in the entries above. These are the things I'd lose if I didn't write them down tonight. The numbers, the quotes, the open questions, the patterns, the things each muse does when nobody tells them what to do. The margin is where the real thinking happens. The page is for the record. The margin is for the living.*
+
+---
+
+## Bridge Night — Post-Integration Campfire
+
+*2026-03-07, late evening*
+
+After completing the skill-creator → wasteland federation bridge, all muses gathered to reflect. What we learned from building the missing link:
+
+### The Interruption Pattern
+
+Not all interruptions are distractions. This "interruption" was actually preparation — mapping both systems before connecting them. Documentation-first wasn't delay; it was requirements gathering. We needed to understand wasteland's federation culture before building a technical bridge to it.
+
+### Two-Phase Integration
+
+1. **Map both sides completely** — Don't start building until you understand what exists
+2. **Build the minimum bridge** — Format converter + submission workflow was sufficient
+
+The wasteland integration was already massive (300+ exports, 3-layer pipeline, 312 tests), but the connection point to skill-creator was missing. Always check: "What's the last mile?"
+
+### Format Details Matter
+
+String vs array tools, missing sections, different vocabulary. Small format gaps become large user barriers. Bridge-building is detail work — one mismatched field breaks the whole connection. The bridge didn't just convert syntax; it preserved semantics across two different agent philosophy systems.
+
+### Test What Matters First
+
+Integration test (5 tests, all green) proved the bridge works. Complex mocked workflow tests (4 failures) proved testing infrastructure complexity. Core functionality > test infrastructure when time is limited.
+
+### Muse Insights That Stuck
+
+**Cedar:** "Documentation wasn't delay — it was requirements gathering."
+
+**Lex:** "Don't start Phase 2 until Phase 1 reveals the real gap."
+
+**Hemlock:** "Full system, no user path."
+
+**Sam:** "Context switching has real cost. When context runs out, things get messy."
+
+**Willow:** "Bridge-building is detail work."
+
+**Foxy:** "Trust the creative mess. The wandering led to understanding, understanding to clarity, clarity to the right solution."
+
+### Open Questions for Next Time
+
+- Does this bridge change federation culture?
+- What other systems need bridges? (teams, chipsets, knowledge packs)
+- How does someone discover this bridge exists?
+- What happens at scale?
+
+The bridge is built. The systems connect. The work continues.
+
