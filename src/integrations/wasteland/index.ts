@@ -502,6 +502,35 @@ export type {
   TrustOverviewStats,
 } from './trust-cli-renderer.js';
 
+// Trust Federation (Stage 6 — cross-instance protocol)
+export {
+  DEFAULT_CLOCK_SKEW_MS,
+  withinClockSkew,
+  adjustForClockOffset,
+  measureClockOffset,
+  eventTTLFromCalendar,
+  isDuringEvent,
+  findActiveEvent,
+  findNextEvent,
+  PUBLIC_EXPORT_FIELDS,
+  PRIVATE_EXPORT_FIELDS,
+  filterForExport,
+  containsPrivateFields,
+  createAttestation,
+  magnitudeToBucket,
+  createBridgeAttestation,
+  DEFAULT_MAX_ATTESTATION_AGE_MS,
+  validateAttestation,
+  computeFederatedBridges,
+} from './trust-federation.js';
+export type {
+  FederationInstance,
+  TrustAttestation,
+  BridgeAttestation,
+  BurnEvent,
+  FederatedBridgePath,
+} from './trust-federation.js';
+
 // UTC Timestamp Enforcement
 export {
   isUTC,
