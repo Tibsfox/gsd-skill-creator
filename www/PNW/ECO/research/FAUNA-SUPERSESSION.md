@@ -187,3 +187,157 @@ The session lead updates this table at each event close. The record of supersess
 ---
 
 *The record shows that continuity requires explicit action, not assumption. Supersession without witness is not supersession — it is deletion.*
+
+---
+
+## Consistency Verification Protocol
+
+**Added:** 2026-03-09
+**Raised by:** Socrates (Understanding Arc review)
+**Resolves:** Supersession archival does not verify consistency between old and new documents. A difference between a 2023 figure and a 2024 figure for the same metric is an update, not a contradiction. Two different figures for the same date IS a contradiction. The protocol must parse dates alongside figures.
+
+This section defines the consistency verification that runs **before** archival is executed for any supersession event. An INCONSISTENCY flag blocks archival until resolved. UPDATE and COVERAGE GAP are logged but non-blocking.
+
+---
+
+### 4.1 Numerical Claims Check
+
+For each species that appears in both the superseded ECO document and the superseding AVI/MAM document, extract all numerical claims — population estimates, range counts, mortality percentages, habitat area figures, prey biomass figures — and compare using the following decision table:
+
+| ECO figure | AVI/MAM figure | ECO date | AVI/MAM date | Verdict |
+|------------|----------------|----------|--------------|---------|
+| Same | Same | Same | Same | **CONSISTENT** — no action |
+| Same | Same | Different | Different | **CONSISTENT** — figure unchanged across dates |
+| Different | Different | Older | Newer | **UPDATE** — pass, log the change with both dates and both figures |
+| Different | Different | Same | Same | **INCONSISTENCY** — flag, block archival |
+| Different | Different | Present | Absent | **INCONSISTENCY** — flag, superseding doc must date its claims |
+| Different | Different | Absent | Present | **INCONSISTENCY** — flag, cannot verify temporal ordering without both dates |
+| Different | Different | Absent | Absent | **INCONSISTENCY** — flag, undated conflicting figures cannot be resolved |
+| Any | — | Any | — | **COVERAGE GAP** — species in ECO but absent from superseding doc |
+
+**Date parsing rules:**
+
+- "as of 2025" = year 2025. Compare at year granularity.
+- "2023-2024 surveys" = year 2024 (use latest bound).
+- "estimated 5,000-6,000 individuals" = figure is the range "5,000-6,000". Ranges match if both bounds match.
+- "approximately 35+ packs" = figure is "35+". Qualifiers ("approximately", "estimated", "~") are stripped for comparison; the base number must match.
+- If two figures differ only by qualifier (e.g., "approximately 200" vs. "~200"), verdict is CONSISTENT.
+
+**Scope:** Numerical claims check applies to every quantitative assertion in a species profile: population estimates, pack/colony/pod counts, range area, elevation limits, mortality rates, prey biomass, egg counts, migration distances, historical baseline figures.
+
+---
+
+### 4.2 Conservation Status Check
+
+For each species in both documents, compare conservation status fields across all listed authorities (Federal ESA, state WA, state OR, IUCN, NatureServe G-rank/S-rank).
+
+| ECO status | AVI/MAM status | Verdict |
+|------------|----------------|---------|
+| Same | Same | **CONSISTENT** — no action |
+| Different | Different | Check superseding doc for a **status change event citation** (e.g., "reclassified from Threatened to Endangered per USFWS 2025 Final Rule"). If citation present: **UPDATE** — pass, log. If no citation: **INCONSISTENCY** — flag |
+
+**Required citation elements for a status change event:**
+
+1. Authority that changed the status (e.g., USFWS, IUCN, WDFW, ODFW)
+2. Year or date of the change
+3. Direction of change (e.g., "uplisted from LC to VU", "delisted", "downlisted")
+
+A status difference without all three elements is an INCONSISTENCY.
+
+---
+
+### 4.3 Taxonomic Name Check
+
+For each species in both documents, compare the binomial name (genus + specific epithet) and any listed subspecies or ESU/DPS designations.
+
+| ECO name | AVI/MAM name | Verdict |
+|----------|--------------|---------|
+| Same | Same | **CONSISTENT** — no action |
+| Different | Different | Check superseding doc for a **taxonomic revision citation** with naming authority. If citation present (e.g., "reclassified per AOU 2024 supplement", "split per Chesser et al. 2025"): **UPDATE** — pass, log old name, new name, and authority. If no citation: **INCONSISTENCY** — flag |
+
+**Required citation elements for a taxonomic revision:**
+
+1. Naming authority (e.g., AOU/AOS Check-list Committee, ITIS, Mammal Diversity Database)
+2. Year of revision
+3. Nature of change (split, lump, reclassification, new combination)
+
+Common-name differences alone (e.g., "gray whale" vs. "grey whale") are not flagged if the binomial matches.
+
+---
+
+### 4.4 Execution Rules
+
+1. **Timing:** Consistency verification runs during Wave 4A of the superseding mission (AVI or MAM), before the supersession event is authorized.
+2. **Responsible agent:** The Wave 4 verification agent for the superseding mission executes the check. If no verification agent is assigned, the session lead executes it manually.
+3. **Input documents:** The ECO fauna file being superseded (`fauna-terrestrial.md` or `fauna-marine-aquatic.md`) and the corresponding AVI/MAM species profiles that replace it.
+4. **Output:** A Consistency Report (see template in Section 4.5) appended to or filed alongside the superseding mission's verification matrix.
+5. **Blocking rule:** Any row with verdict **INCONSISTENCY** blocks the supersession event. The superseding document must be corrected — either by adding the missing date/citation, or by correcting the figure — and the check re-run. Archival proceeds only when zero INCONSISTENCY rows remain.
+6. **Non-blocking verdicts:** **UPDATE** rows are logged in the report. They represent legitimate temporal changes and require no correction. **COVERAGE GAP** rows are logged and reviewed: the session lead decides whether the gap is intentional (species out of scope for the superseding mission) or an omission requiring a follow-up task.
+7. **Report retention:** The Consistency Report is a permanent artifact. It is committed alongside the supersession commit and stored in the superseding mission's research directory.
+
+---
+
+### 4.5 Consistency Report Template
+
+The verification agent fills out this table for each supersession event. One row per species per check type.
+
+```markdown
+# Consistency Report: [ECO file] vs. [AVI/MAM mission] Research
+
+**Supersession Event:** [Event 1 or Event 2]
+**ECO source:** `www/PNW/ECO/research/[filename]`
+**Superseding source:** `www/PNW/[AVI or MAM]/research/`
+**Verification agent:** [name]
+**Date:** [YYYY-MM-DD]
+
+## Summary
+
+| Verdict | Count |
+|---------|-------|
+| CONSISTENT | |
+| UPDATE | |
+| INCONSISTENCY | |
+| COVERAGE GAP | |
+
+**Blocking:** [Yes — N INCONSISTENCY rows / No — clear to proceed]
+
+## Numerical Claims
+
+| Species | Metric | ECO value | ECO date | AVI/MAM value | AVI/MAM date | Verdict | Notes |
+|---------|--------|-----------|----------|---------------|--------------|---------|-------|
+| | | | | | | | |
+
+## Conservation Status
+
+| Species | Authority | ECO status | AVI/MAM status | Change event cited? | Verdict | Notes |
+|---------|-----------|------------|----------------|---------------------|---------|-------|
+| | | | | | | |
+
+## Taxonomic Names
+
+| Species (ECO name) | AVI/MAM name | Revision cited? | Authority | Verdict | Notes |
+|---------------------|--------------|-----------------|-----------|---------|-------|
+| | | | | | |
+
+## Coverage Gaps
+
+| Species in ECO | Present in AVI/MAM? | Intentional exclusion? | Notes |
+|----------------|---------------------|------------------------|-------|
+| | | | |
+
+## Resolution Log
+
+| Row ref | Original verdict | Resolution | Resolved by | Date |
+|---------|-----------------|------------|-------------|------|
+| | | | | |
+```
+
+**Usage notes:**
+
+- One report per supersession event. Event 1 (AVI close) produces a report for bird profiles. Event 2 (MAM close) produces a report for marine mammal and aquatic profiles.
+- The Numerical Claims table may have multiple rows per species (one per metric). This is expected — a single species profile may contain population count, range area, mortality rate, and historical baseline, each needing its own comparison row.
+- The Resolution Log records how each INCONSISTENCY was resolved before archival proceeded. This is the audit trail that Socrates asked for: proof that differences were examined, not assumed away.
+
+---
+
+*A figure without a date is a claim without a witness. Two witnesses who disagree on what they saw on the same day require reconciliation. Two witnesses who saw different things on different days are both telling the truth.*
