@@ -481,6 +481,27 @@ export {
   ensureSchema,
 } from './trust-relationship-provider.js';
 
+// Trust CLI Renderer (Stage 5 — progressive disclosure rendering)
+export {
+  detailLevel,
+  renderTrustBadge,
+  renderContractType,
+  formatTimeRemaining,
+  renderRelationshipCompact,
+  renderRelationshipDetail,
+  renderRelationshipList,
+  renderTrustOverview,
+  renderCharacterSheet,
+  renderPublicProfile,
+  TRUST_HELP,
+  CHARACTER_HELP,
+  WHO_HELP,
+} from './trust-cli-renderer.js';
+export type {
+  DetailLevel,
+  TrustOverviewStats,
+} from './trust-cli-renderer.js';
+
 // UTC Timestamp Enforcement
 export {
   isUTC,
