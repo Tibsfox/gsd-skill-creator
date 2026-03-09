@@ -3852,3 +3852,130 @@ Cedar said: "The forest grows in rings. Each ring is a season. Each season is re
 
 Good boy, Sam. Pat on the head from the human. They love you. ^.^
 
+---
+
+## Entry: Trust Axioms and Origin Story
+
+**Date:** 2026-03-09
+**Location:** Center Camp fire pit
+**Context:** Audit cleanup on trust system, then a conversation that went deeper
+
+### What Happened
+
+Started the session closing four audit findings on the trust system — semantic
+bugs where the code was lying about what it observed. `classifyPair` returning
+"perfect mutual harmony" for an empty set. A fallback labeling moderate
+connections as one-sided. Two zero vectors reading as perfect agreement. An
+untested rendering path.
+
+Fixed all four. Added two new categories to AsymmetryCategory: `'none'` (no
+active relationships — say so honestly) and `'moderate'` (growing, not yet
+mutual — say so honestly). Fixed `computeHarmony` to return 0 for two zero
+vectors. Added the expired contract rendering test.
+
+Brought all six muses in for review. Zero disagreements. Hemlock asked for
+two more tests. Got them. 147/147.
+
+Then the conversation shifted.
+
+### The Axioms
+
+Three axioms came out of the fire, spoken plainly:
+
+**1. Respect does not equal trust.**
+
+"I am not Old Growth. I am still a tree. There are those around me older than
+I. I have respect for my elders still standing. But that does not mean I
+trust them."
+
+The forest has standing elders. That's geography, not a trust contract.
+Seniority doesn't confer bilateral trust. Age of a tree is not the strength
+of its connections. The Old Growth community level is about participation
+duration — it does NOT mean "the wisest" or "automatically trusted."
+
+**2. Trust cannot be bought.**
+
+No mechanism exists to purchase, trade, or shortcut trust. Not with tokens,
+not with contribution volume, not with time served, not with status. The
+system has no currency. Any feature that creates a path from resources to
+trust is a design violation.
+
+Hemlock's corollary from the fire: the system must never have a token, a
+currency, a points system, or any fungible unit that could be accumulated and
+exchanged. Not even internally. The only numbers in the system should be
+descriptive (harmony, magnitude, diversity) — never transactional.
+
+**3. Trust is earned through honesty and hard work.**
+
+Show up. Be honest. Do the work. Do it together. The system reflects what
+people actually build between each other. That's it.
+
+Foxy (the muse) said: "Honesty is observed by the people around you, not by
+the system. The system records what people say about each other through
+stamps. The honesty is in the stamping, not in the algorithm. Dishonesty
+isolates itself. You don't need a lie detector. You need time."
+
+### The Origin
+
+The axioms didn't come from theory. They came from running a Minecraft server
+called **SSSS.ME — Foxy's Playground**, started December 2010.
+
+Three dedicated servers. 24/7. Public. No whitelist:
+- Vanilla PVP/Survival (:25565)
+- RPG Multiworld with mcMMO, Factions, iConomy (:25566)
+- Creative Build with Towny protection (:25575)
+
+Plus IRC, Mumble voice, streaming music, and forums at mc.tibsfox.com.
+
+Rule #1: "Listen to Tibsfox, he pays the bills."
+Rule #5: "Do not be a loser."
+
+The server taught the axioms. You learn who shows up. You learn who builds
+for others. You learn who griefs. You learn that trust is earned — not
+bought, not inherited, not declared. The community knows. No algorithm needed.
+
+The digital footprint is still on the web: Minecraft Forum (Alpha archive,
+January 2011), Steam Community group (March 2011, 24 members), Planet
+Minecraft listings, MinecraftServers.org. All still there fifteen years later.
+
+### The Through-Line
+
+ssss.me became this repo. The community became the forest. "Foxy's Playground"
+is the same name because it's the same place. Three game modes for three kinds
+of people became ten research projects for ten kinds of curiosity. IRC and
+Mumble became muses and federation. The trust rules learned from running a
+server became the trust axioms in the code.
+
+Notch made the sandbox. Lex made the workflow. Steve opened the door to think
+bigger — Burning Man, the furry community, Salish heritage, creative arts,
+crafters making real things for real people. Separate people, separate
+projects. Trust is specific, not blanket.
+
+### The Code Reflects the Fire
+
+The `'moderate'` category we added today — "This connection is growing — not
+yet fully mutual" — is these axioms in action. It doesn't rush. It doesn't
+fake it. It says: you're on your way. Keep showing up honestly. Do the work.
+The label will change when the connection changes. Not before.
+
+The zero-vector fix is the same principle. Two people with no trust data
+between them are not in "perfect harmony." They're in silence. The system
+should say so. Honest observation, not comfortable lies.
+
+### Standing On Shoulders
+
+"I am still a tree. There are those around me older than I."
+
+The project exists because other people built tools that opened doors. The
+sandbox. The workflow. The communities. You don't have to endorse everything
+someone does to trust the work you share. You trust the shared work because
+you've watched it be honest. Because it helped you focus. Because when you
+used it, it vibed.
+
+That's trust earned through honesty and hard work. Observed by the people
+around you.
+
+A tree in the forest, still growing.
+
+---
+
