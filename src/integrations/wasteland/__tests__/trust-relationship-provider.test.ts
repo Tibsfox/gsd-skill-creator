@@ -4,6 +4,7 @@ import {
   TRUST_RELATIONSHIPS_DDL,
   CHARACTER_SHEETS_DDL,
   generateSchemaDDL,
+  ensureSchema,
   createDoltHubTrustProvider,
   computeEscalationBonus,
   relationshipToSQL,
@@ -102,13 +103,32 @@ describe('Schema DDL', () => {
     expect(CHARACTER_SHEETS_DDL).toContain("DEFAULT 'summary'");
   });
 
-  it('generateSchemaDDL returns all four tables', () => {
+  it('generateSchemaDDL returns all five tables', () => {
     const ddl = generateSchemaDDL();
     expect(ddl).toContain('rigs');
     expect(ddl).toContain('trust_contracts');
     expect(ddl).toContain('trust_relationships');
     expect(ddl).toContain('character_sheets');
+    expect(ddl).toContain('welcome_badges');
     expect(ddl).toContain('local-only');
+  });
+
+  it('trust_relationships DDL includes archived_at column', () => {
+    expect(TRUST_RELATIONSHIPS_DDL).toContain('archived_at');
+  });
+});
+
+describe('ensureSchema', () => {
+  it('executes all five DDL statements', async () => {
+    const mockClient = createMockClient();
+    await ensureSchema(mockClient);
+
+    expect(mockClient._executions).toHaveLength(5);
+    expect(mockClient._executions[0]).toContain('rigs');
+    expect(mockClient._executions[1]).toContain('trust_contracts');
+    expect(mockClient._executions[2]).toContain('trust_relationships');
+    expect(mockClient._executions[3]).toContain('character_sheets');
+    expect(mockClient._executions[4]).toContain('welcome_badges');
   });
 });
 
@@ -154,8 +174,19 @@ describe('createDoltHubTrustProvider', () => {
   });
 
   describe('removeRelationship', () => {
-    it('deletes from both tables', async () => {
+    it('archives by setting archived_at (soft delete)', async () => {
       await provider.removeRelationship('tc-pm-12345678');
+
+      expect(client._executions).toHaveLength(1);
+      expect(client._executions[0]).toContain('UPDATE trust_relationships');
+      expect(client._executions[0]).toContain('archived_at');
+      expect(client._executions[0]).toContain('tc-pm-12345678');
+    });
+  });
+
+  describe('purgeRelationship', () => {
+    it('hard deletes from both tables', async () => {
+      await provider.purgeRelationship('tc-pm-12345678');
 
       expect(client._executions).toHaveLength(2);
       expect(client._executions[0]).toContain('DELETE FROM trust_relationships');
@@ -242,6 +273,13 @@ describe('createDoltHubTrustProvider', () => {
 
       expect(client._queries[0]).toContain("from_handle = 'fox-042'");
       expect(client._queries[0]).toContain("to_handle = 'fox-042'");
+    });
+
+    it('query excludes archived relationships', async () => {
+      client._queryResults.push([]);
+      await provider.getRelationshipsForRig('fox-042');
+
+      expect(client._queries[0]).toContain('archived_at IS NULL');
     });
   });
 

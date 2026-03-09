@@ -302,6 +302,52 @@ describe('evaluateRig', () => {
     const ctx = makeContext({ rig: makeRig({ trust_level: 3 }) });
     expect(evaluateRig(ctx)).toBeNull();
   });
+
+  it('attaches escalation bonus to evaluation when provided', () => {
+    const ctx = makeContext({
+      rig: makeRig({ trust_level: 2 }),
+      stamps: makeStamps({
+        stampsReceived: 15,
+        stampsIssued: 7,
+        avgQualityReceived: 4.5,
+        uniqueValidators: 4,
+      }),
+      trustLevelChangedAt: '2026-01-01T00:00:00Z',
+      escalationBonus: 0.75,
+    });
+    const result = evaluateRig(ctx);
+
+    expect(result).not.toBeNull();
+    expect(result!.escalationBonus).toBe(0.75);
+  });
+
+  it('adds manual review note for borderline cases with high bonus', () => {
+    const ctx = makeContext({
+      rig: makeRig({ trust_level: 2 }),
+      stamps: makeStamps({
+        stampsReceived: 8, // below threshold of 10
+        stampsIssued: 7,
+        avgQualityReceived: 4.5,
+        uniqueValidators: 4,
+      }),
+      trustLevelChangedAt: '2026-01-01T00:00:00Z',
+      escalationBonus: 0.7,
+    });
+    const result = evaluateRig(ctx);
+
+    expect(result).not.toBeNull();
+    expect(result!.eligible).toBe(false);
+    expect(result!.recommendation).toContain('interpersonal trust bonus');
+    expect(result!.recommendation).toContain('manual review');
+  });
+
+  it('works without escalation bonus (backward compatibility)', () => {
+    const ctx = makeContext({ rig: makeRig({ trust_level: 1 }) });
+    const result = evaluateRig(ctx);
+
+    expect(result).not.toBeNull();
+    expect(result!.escalationBonus).toBeUndefined();
+  });
 });
 
 // ============================================================================
@@ -399,6 +445,27 @@ describe('scanForEscalation', () => {
     // registered_at is Jan 1 → 59 days at level 2, meets 30-day requirement
     expect(result.eligible).toHaveLength(1);
     expect(result.eligible[0].handle).toBe('rig-c');
+  });
+
+  it('passes escalation bonus from provider into evaluation', async () => {
+    const provider = makeMockProvider({
+      getRigs: async () => [
+        makeRig({ handle: 'rig-bonus', trust_level: 2, registered_at: '2026-01-01T00:00:00Z' }),
+      ],
+      getStampSummary: async () => makeStamps({
+        stampsReceived: 15,
+        stampsIssued: 7,
+        avgQualityReceived: 4.5,
+        uniqueValidators: 4,
+      }),
+      getTrustLevelChangedAt: async () => '2026-01-01T00:00:00Z',
+      getEscalationBonus: async () => 0.8,
+    });
+
+    const result = await scanForEscalation(provider, 2, new Date('2026-03-01T00:00:00Z'));
+
+    expect(result.eligible).toHaveLength(1);
+    expect(result.eligible[0].escalationBonus).toBe(0.8);
   });
 
   it('uses trustLevelChangedAt when provider returns it', async () => {
@@ -545,6 +612,21 @@ describe('formatEvaluation', () => {
     expect(output).toContain('1 → 2');
     expect(output).toContain('+ 3+ stamps');
     expect(output).toContain('+ Quality >= 3.0');
+  });
+
+  it('includes escalation bonus in output when present', () => {
+    const evaluation: EscalationEvaluation = {
+      handle: 'connected',
+      currentLevel: 2,
+      targetLevel: 3,
+      eligible: true,
+      criteria: [],
+      recommendation: 'ELIGIBLE',
+      escalationBonus: 0.72,
+    };
+
+    const output = formatEvaluation(evaluation);
+    expect(output).toContain('interpersonal trust bonus: 0.72');
   });
 
   it('formats ineligible evaluation with unmet criteria marked', () => {

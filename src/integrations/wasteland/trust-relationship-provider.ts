@@ -20,6 +20,7 @@
 import { sqlEscape } from './sql-escape.js';
 import { assertUTC } from './utc.js';
 import { RIGS_DDL } from './trust-escalation.js';
+import { WELCOME_BADGES_DDL } from './trust-registration.js';
 import type { DoltClient } from './dolthub-client.js';
 import type {
   TrustVector,
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS trust_relationships (
   from_label      VARCHAR(128) DEFAULT NULL,
   to_label        VARCHAR(128) DEFAULT NULL,
   visibility      VARCHAR(8) NOT NULL DEFAULT 'private',
+  archived_at     DATETIME DEFAULT NULL,
   PRIMARY KEY (contract_id),
   INDEX idx_from (from_handle),
   INDEX idx_to (to_handle),
@@ -120,7 +122,23 @@ export function generateSchemaDDL(): string {
     TRUST_RELATIONSHIPS_DDL,
     '',
     CHARACTER_SHEETS_DDL,
+    '',
+    WELCOME_BADGES_DDL,
   ].join('\n');
+}
+
+/**
+ * Ensure all trust system tables exist.
+ *
+ * Runs each CREATE TABLE IF NOT EXISTS statement against the client.
+ * Idempotent — safe to call on every startup.
+ */
+export async function ensureSchema(client: DoltClient): Promise<void> {
+  await client.execute(RIGS_DDL);
+  await client.execute(TRUST_CONTRACTS_DDL);
+  await client.execute(TRUST_RELATIONSHIPS_DDL);
+  await client.execute(CHARACTER_SHEETS_DDL);
+  await client.execute(WELCOME_BADGES_DDL);
 }
 
 // ============================================================================
@@ -132,8 +150,17 @@ export interface TrustRelationshipDataProvider {
   /** Store a trust relationship (contract + vectors). */
   saveRelationship(rel: TrustRelationship): Promise<void>;
 
-  /** Remove a trust relationship by contract ID. */
+  /**
+   * Remove a trust relationship by contract ID.
+   * Default action: archive (soft-delete). Use purgeRelationship for hard delete.
+   */
   removeRelationship(contractId: string): Promise<void>;
+
+  /**
+   * Hard-delete a trust relationship and its contract.
+   * Explicit participant choice — the data is gone forever.
+   */
+  purgeRelationship(contractId: string): Promise<void>;
 
   /** Get all relationships for a rig (both directions). */
   getRelationshipsForRig(handle: string): Promise<TrustRelationship[]>;
@@ -282,6 +309,15 @@ export function createDoltHubTrustProvider(
     },
 
     async removeRelationship(contractId: string): Promise<void> {
+      // Default action: archive (soft-delete). The memory persists.
+      const escaped = sqlEscape(contractId);
+      await client.execute(
+        `UPDATE trust_relationships SET archived_at = NOW() WHERE contract_id = '${escaped}'`,
+      );
+    },
+
+    async purgeRelationship(contractId: string): Promise<void> {
+      // Hard delete — explicit participant choice. Gone forever.
       const escaped = sqlEscape(contractId);
       await client.execute(`DELETE FROM trust_relationships WHERE contract_id = '${escaped}'`);
       await client.execute(`DELETE FROM trust_contracts WHERE id = '${escaped}'`);
@@ -295,7 +331,8 @@ export function createDoltHubTrustProvider(
                 c.auto_renew as c_auto_renew, c.renewal_count as c_renewal_count
          FROM trust_relationships r
          JOIN trust_contracts c ON r.contract_id = c.id
-         WHERE r.from_handle = '${escaped}' OR r.to_handle = '${escaped}'
+         WHERE (r.from_handle = '${escaped}' OR r.to_handle = '${escaped}')
+           AND r.archived_at IS NULL
          ORDER BY c.created_at DESC`,
       );
 
@@ -322,8 +359,9 @@ export function createDoltHubTrustProvider(
                 c.auto_renew as c_auto_renew, c.renewal_count as c_renewal_count
          FROM trust_relationships r
          JOIN trust_contracts c ON r.contract_id = c.id
-         WHERE (r.from_handle = '${a}' AND r.to_handle = '${b}')
-            OR (r.from_handle = '${b}' AND r.to_handle = '${a}')
+         WHERE ((r.from_handle = '${a}' AND r.to_handle = '${b}')
+            OR (r.from_handle = '${b}' AND r.to_handle = '${a}'))
+           AND r.archived_at IS NULL
          ORDER BY c.created_at DESC`,
       );
 

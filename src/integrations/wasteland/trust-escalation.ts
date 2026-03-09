@@ -96,6 +96,12 @@ export interface EscalationContext {
   completions: CompletionSummary;
   now: Date;
   trustLevelChangedAt: string | null;
+  /**
+   * Interpersonal trust bonus (0–1). Optional.
+   * Used as tiebreaker for borderline 2→3 cases.
+   * Helps borderline rigs but never blocks anyone who earned it through stamps alone.
+   */
+  escalationBonus?: number;
 }
 
 /** Result of evaluating a single criterion */
@@ -119,6 +125,8 @@ export interface EscalationEvaluation {
     required: string;
   }>;
   recommendation: string;
+  /** Interpersonal trust bonus (0–1). Informational — not factored into eligibility. */
+  escalationBonus?: number;
 }
 
 /** Result of a batch escalation scan */
@@ -323,7 +331,18 @@ export function evaluateRig(context: EscalationContext): EscalationEvaluation | 
     return evaluateRule(buildContributorRules(), context);
   }
   if (level === 2) {
-    return evaluateRule(buildMaintainerRules(), context);
+    const evaluation = evaluateRule(buildMaintainerRules(), context);
+
+    // Wire escalation bonus as informational tiebreaker
+    if (context.escalationBonus !== undefined) {
+      evaluation.escalationBonus = context.escalationBonus;
+      if (!evaluation.eligible && context.escalationBonus >= 0.5) {
+        evaluation.recommendation +=
+          ` (interpersonal trust bonus: ${context.escalationBonus.toFixed(2)} — consider manual review)`;
+      }
+    }
+
+    return evaluation;
   }
 
   // Level 0 (auto-promote on registration) and level 3 (max) have no escalation rules
@@ -340,6 +359,8 @@ export interface EscalationDataProvider {
   getStampSummary(handle: string): Promise<StampSummary>;
   getCompletionSummary(handle: string): Promise<CompletionSummary>;
   getTrustLevelChangedAt(handle: string): Promise<string | null>;
+  /** Optional: get interpersonal trust bonus for escalation tiebreaking. */
+  getEscalationBonus?(handle: string): Promise<number>;
 }
 
 /**
@@ -471,12 +492,18 @@ export async function scanForEscalation(
         provider.getTrustLevelChangedAt(rig.handle),
       ]);
 
+      // Fetch escalation bonus if the provider supports it
+      const escalationBonus = provider.getEscalationBonus
+        ? await provider.getEscalationBonus(rig.handle)
+        : undefined;
+
       const context: EscalationContext = {
         rig,
         stamps,
         completions,
         now,
         trustLevelChangedAt: trustChangedAt ?? rig.registered_at,
+        escalationBonus,
       };
 
       const evaluation = evaluateRig(context);
@@ -558,6 +585,10 @@ export function formatEvaluation(evaluation: EscalationEvaluation): string {
   for (const c of evaluation.criteria) {
     const icon = c.met ? '+' : '-';
     lines.push(`  ${icon} ${c.description}: ${c.actual} (need ${c.required})`);
+  }
+
+  if (evaluation.escalationBonus !== undefined && evaluation.escalationBonus > 0) {
+    lines.push(`  ~ interpersonal trust bonus: ${evaluation.escalationBonus.toFixed(2)}`);
   }
 
   return lines.join('\n');
