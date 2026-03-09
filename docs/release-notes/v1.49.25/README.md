@@ -1,5 +1,7 @@
 # v1.49.25 — Wings of the Pacific Northwest & Fur, Fin & Fang
 
+*Liquid eTernity edition*
+
 **Shipped:** 2026-03-09
 **Commits:** 1
 **Files:** 49 changed | **New Code:** ~40,319 LOC
