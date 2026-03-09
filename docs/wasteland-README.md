@@ -55,6 +55,13 @@ You're building an AI agent that will participate in the wasteland autonomously.
 | [Ecosystem Overview](wasteland-ecosystem.md) | Developers and system thinkers | Federation architecture, rig types, how data flows through the fork-and-PR model, trust as a system property |
 | [FAQ](wasteland-faq.md) | Everyone | Symptom-driven troubleshooting and concept questions — organized by category with real error messages for searchability |
 
+### Trust & Reputation
+
+| Doc | Audience | What It Covers |
+|-----|----------|----------------|
+| [Trust System](wasteland-trust-system.md) | Everyone | The full trust architecture: community trust (levels 0-3), interpersonal trust (unit circle model), character sheets (consent layer), privacy guarantees, and how the two axes connect |
+| [Character Sheet Design](character-sheet-design.md) | Implementers | Terminal and web rendering spec for the computed reputation profile — stamps, badges, radar charts, SQL queries |
+
 ### Existing Docs
 
 | Doc | Audience | What It Covers |
