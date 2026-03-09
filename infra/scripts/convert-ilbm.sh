@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # convert-ilbm.sh -- IFF/ILBM to PNG converter with palette metadata extraction
 #
 # Converts Amiga IFF/ILBM image files to modern formats (PNG, TIFF) while

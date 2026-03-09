@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # check-mod-updates.sh -- Read-only mod version checker
 #
 # Queries the Modrinth API for each mod in the installed mod manifest

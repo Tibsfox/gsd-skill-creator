@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2155 # variables used by sourced libs or in later phases
 # provision-vm.sh -- Master VM provisioning orchestrator
 #
 # Orchestrates the complete VM provisioning workflow following the
