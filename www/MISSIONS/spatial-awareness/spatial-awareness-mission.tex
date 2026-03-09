@@ -19,6 +19,7 @@
 \usepackage{array}
 \usepackage{parskip}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 \usepackage{graphicx}
 \usepackage{lastpage}
 
@@ -168,6 +169,33 @@ The applications are immediate and practical:
 \textbf{A kitchen in full dinner rush.} The line cook cannot see the servers. The servers cannot see the kitchen. But ``ORDER UP!'' cuts through the chaos --- a trained signal pattern that every server's brain has learned to extract from the noise. The signal does not need to be louder than the noise. It needs to be \textit{different} from the noise. The right spectral signature at the right moment reaches every agent in the system simultaneously.
 
 \textbf{A team of GSD agents working in parallel.} The supervisor agent needs to pause all work immediately --- a critical dependency has changed, a safety boundary has been crossed, a human has called for attention. The pause signal must reach every agent regardless of what they are currently doing, regardless of what tools they are using, regardless of how deep in their task they are. This is the chorus going silent. One signal. Every agent hears it. Every agent stops. No acknowledgment required. No round-trip. No consensus. Silence is instant.
+
+\vspace{0.5em}
+The phone by the pond was a proof of concept. The real application space is everywhere a sensor can reach --- and everyone already carries a phone full of sensors.
+
+\textbf{Walking through the forest with a USB microphone.} The laptop is in the pack, the mic clipped to the strap. Birdsong fills the canopy --- Swainson's thrush, Pacific wren, varied thrush. The system identifies each species from its spectral signature and lists them as icons on the page, a living field guide that populates itself from the forest's own broadcast. No button press, no query. The forest announces itself through the microphone and the page reflects what it hears. Passive sensing applied to biodiversity --- the AVI research atlas fed by real-time audio from a USB device.
+
+\textbf{DJ booth at the burn, syncing to neighboring camps.} Three sound camps within earshot. Your set needs to complement, not clash. A USB mic pointed outward captures the ambient beat --- 128 BPM from the camp to the east, 126 from the south. The system extracts tempo via onset detection and autocorrelation, feeds it to your DAW's sync. Your music locks to the playa's pulse. This is the frog chorus in reverse: instead of synchronizing to stop, you synchronize to \textit{play together}. Tempo sync emerging from local sensing, no coordinator, no shared clock.
+
+\textbf{A build agent that listens while it works.} The agent is compiling code, running tests, writing files. Simultaneously, a USB microphone feeds ambient audio into the passive sensor. The agent hears the environment change --- a door opens, background noise shifts. The spatial model updates without the agent pausing its primary task. It simply \textit{knows} the environment changed, the way a frog keeps calling while tracking every shadow and vibration around the pond.
+
+\textbf{A machinist operating a lathe, and it is loud.} The shop floor is 90 dB. Voice commands are useless. You cannot hear things correctly. But the USB mic on the CNC controller hears the tool chatter, bearing frequency, spindle harmonics. A shift in cutting sound means tool wear or workpiece movement. The system detects the anomaly through matched filtering --- the same technique that extracts ``ORDER UP!'' from kitchen chaos --- and sends a haptic alert to the operator's wrist. The signal cuts through noise not by being louder, but by being \textit{different}.
+
+\textbf{Driving in a car.} Road noise, engine, wind --- broadband interference. But a mic still hears the siren approaching (Doppler-shifted, rising pitch), the rhythmic thump of a flat tire, the acoustic change when a window cracks open. Hostile to human hearing but structured enough for matched-filter extraction.
+
+\textbf{A phone is already a sensor array.} Every phone carries a microphone, accelerometer, gyroscope, magnetometer, barometer, GPS, WiFi radio, Bluetooth radio, and camera. Connected over USB to a laptop, or running as a standalone node, it is a complete spatial awareness platform. No special hardware. No purchase required. The sensors are already in your pocket.
+
+\textbf{Phones as mesh nodes.} Multiple phones in proximity form a mesh network --- WiFi Direct, Bluetooth, or ad-hoc WiFi. Each phone senses its local environment (audio, motion, RF signal strength) and shares observations with nearby nodes. Link the mesh to a WiFi access point and the local sensing network bridges to the broader system. This is DIY infrastructure: the mesh you build with the phones around you \textit{is} the sensing network. Building the mesh is participating. Each node is a frog in the chorus --- sensing independently, coordinating through proximity, no central controller required.
+
+\textbf{Radios as broadcast channels.} Handheld radios, LoRa modules, Meshtastic devices, RTL-SDR dongles --- all accessible over USB. A radio is a long-range broadcast channel: the chorus's call reaching beyond the immediate pond. LoRa reaches 10+ kilometers on the playa. An RTL-SDR dongle is pure passive sensing --- listening to the RF environment without transmitting, the electronic equivalent of the frog feeling vibrations through the ground.
+
+\textbf{An art installation that breathes with the crowd.} Accelerometers on the playa detect footsteps, density, flow. Microphones capture ambient BPM from neighboring sound camps. The sensor data feeds a synthesis engine that generates a drone --- low, warm, shifting with the crowd's energy. WS2812B LED strips woven through the structure pulse in phase with the drone, colors drifting from deep amber to electric blue as density rises. The installation \textit{responds} to the humans around it without anyone pressing a button. The frogs do not just listen --- they sing back. Sensing is input. Synthesis is output. The chorus is both.
+
+\textbf{Laser skywriting from the spatial model.} A USB-connected ILDA galvo scanner projects geometric patterns onto fog, dust, or structure. The patterns are not pre-programmed --- they are derived from live sensor data. The geometry mapper's model of the environment becomes visible: walls of light showing constraint boundaries, pulsing nodes where agents are active, sweeping beams that track threat vectors. On the playa, the laser draws the shape of the mesh network in real time --- each phone node a projected point, connections traced as lines of light. The spatial model made literal. The frog's awareness of its pond, painted in coherent light across the desert sky.
+
+\textbf{DMX light rigs driven by the Frog Protocol.} When the chorus goes silent --- threat detected --- the LED fixtures dim to deep red, pulsing slowly. During ASSESS, amber scanning patterns sweep the space. PROBE sends a single sharp beam outward. CLASSIFY resolves to green (safe) or strobing red (danger). RESUME brings the full spectrum back, gradually, the way the frogs restart their calling. The Frog Protocol's five phases become a light show that anyone in the space can read without understanding the protocol. The light \textit{is} the protocol, made visible.
+
+There are many more use cases. Every environment where humans or machines operate has a signature --- acoustic, electromagnetic, vibrational --- and that signature changes when the environment changes. The question is not ``what can we connect to'' but ``what \textit{can't} we connect to.'' The answer: not much. USB is the bridge. The phone is already the sensor. The mesh is the chorus. And now the chorus sings back --- in sound, in light, in laser geometry projected onto whatever surface the world provides.
 
 \subsection{Problem Statement}
 
@@ -354,7 +382,7 @@ MODULE DECOMPOSITION — SPATIAL AWARENESS
 
 The ambient intelligence layer. This module enables agents to sense their operating environment without generating queries, tool calls, or any observable side effects. It reads ``echoes'' --- information already present in the computational environment: context window utilization, token budget state, filesystem timestamps, sibling agent output rates, error frequencies, and session timing. From these ambient signals, it constructs a spatial model of the agent's operational geometry --- how close are the resource walls, how crowded is the workspace, how healthy is the environment. This is the bat's sonar: build a map from what bounces back, without emitting a signal.
 
-The physical application is direct. A phone's microphone in a dark room captures ambient sound reflections. The Deep Audio Analyzer's spatial reasoning engine (from Release 1) processes these reflections to estimate wall distances, room dimensions, and obstacle positions. The Passive Sensor extends this to the computational domain, treating resource boundaries as walls, budget ceilings as ceilings, and peer agents as other objects in the space.
+The physical application is direct and universal. A USB microphone captures ambient sound --- birdsong in a forest, tool chatter on a shop floor, road noise in a car, music from neighboring camps. A phone connected over USB contributes its full sensor array: microphone, accelerometer, gyroscope, magnetometer, barometer, GPS, WiFi RSSI, Bluetooth proximity. An ESP32 over USB serial feeds temperature, humidity, motion, light. An RTL-SDR dongle listens to the RF spectrum without transmitting. Every USB device is a sensory organ; the Passive Sensor reads them all through the same interface contract (\texttt{sensor-interface.ts}), whether the signal source is a computational ambient signal or a physical device plugged into a USB port. Where there are uplinks --- WiFi, cellular, mesh radio --- the sensing extends beyond the local machine. Phones form mesh networks via WiFi Direct or Bluetooth, each node sensing independently and sharing observations through proximity. The mesh bridges to the broader system wherever an uplink exists. The sensor network grows organically: every phone that joins is another frog in the chorus.
 
 \subsubsection{M2: Threat Detection Engine}
 
@@ -500,17 +528,26 @@ media:
 \item File-system-based signal protocol (\texttt{.planning/CHORUS\_PAUSE}, \texttt{.planning/CHORUS\_RESUME})
 \item Integration with TOPO, FLIGHT, and CAPCOM crew roles
 \item Reference recording serves as conceptual test case for all protocols
+\item USB physical sensor interface: unified \texttt{sensor-interface.ts} contract supporting USB audio (microphone), USB serial (ESP32/Arduino), and USB bulk (RTL-SDR) device classes
+\item Phone-as-sensor-node: USB-tethered phone contributing mic, accelerometer, gyroscope, magnetometer, barometer, GPS, WiFi/BT RSSI to the passive sensor layer
+\item Mesh networking foundation: phone-to-phone sensing via WiFi Direct / Bluetooth, bridging to WiFi uplinks where available
+\item Physical application scenarios: birdsong species identification, BPM/tempo detection, industrial acoustic monitoring, automotive noise extraction
+\item Sensor-driven audio synthesis: real-time generative sound from spatial model data via USB audio output (cpal)
+\item LED control: WS2812B/NeoPixel strips via ESP32 serial, DMX-512 fixtures via USB-DMX adapter
+\item Laser projection: ILDA galvo scanner control via USB for spatial model visualization and image projection (with mandatory safety interlock)
+\item Output mapping engine: declarative sensor-to-output bindings, hot-reloadable configuration, multi-source blending
 \end{itemize}
 
 \subsubsection{Out of Scope}
 
 \begin{itemize}[leftmargin=2em]
-\item Actual hardware haptic feedback integration (phone vibration patterns --- future GSD-OS release)
-\item Real-time audio streaming for physical spatial sensing (requires Release 1 real-time extension)
-\item Network-distributed agent awareness across multiple machines (single-machine scope for v1)
+\item Haptic output via phone vibration motor (v1.1 --- v1.0 defines interface only; gamepad rumble is in scope via HID)
+\item Multi-hop mesh routing beyond direct WiFi/BT proximity (requires dedicated mesh protocol --- v2)
 \item Autonomous threat response without human approval for safety-critical situations
 \item Predictive threat modeling (threat anticipation from historical patterns --- v2 feature)
 \item Cross-mission spatial awareness (agents in different missions sensing each other)
+\item Custom phone app for standalone sensor node (v1.0 uses USB tether; standalone app is v1.1)
+\item Cellular/LTE uplink bridging (v1.0 scope is local WiFi mesh; WAN bridging is v2)
 \end{itemize}
 
 \subsection{Success Criteria}
@@ -665,6 +702,142 @@ File system state & Inode timestamps & What changed recently? Is the workspace s
 \end{tabularx}
 \end{center}
 
+\subsection{Physical Sensor Integration via USB}
+
+The computational passive sensor (context fill, token budget, error rates) and the physical passive sensor (microphone, accelerometer, RF receiver) share the same interface contract. The \texttt{sensor-interface.ts} abstraction defines a sensor as anything that produces ambient signals without requiring active queries. The backend implementation varies; the data flow does not.
+
+\subsubsection{USB Device Classes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Device} & \tableheader{USB Interface} & \tableheader{Cost} & \tableheader{Sensing Capability} \\
+\midrule
+USB microphone & Audio class & \$10--30 & Birdsong ID, room geometry, machine acoustics, beat detection, ambient noise floor \\
+Samsung Galaxy S25 Ultra (USB-C tethered) & ADB / serial & \$0 (dev device) & 4x mic array (beamforming capable), accelerometer, gyroscope, magnetometer, barometer, GPS (dual-freq L1+L5), WiFi 7 (tri-band), BT 5.4 (direction finding), UWB (precise ranging), 200MP camera, LiDAR-assisted ToF sensor, mmWave proximity, NFC, thermometer. The S25 Ultra is the most sensor-dense consumer device available --- a complete spatial awareness platform in a single USB-C connection. \\
+ESP32 / Arduino & USB serial & \$5--8 & Any I2C/SPI sensor: temp, humidity, PIR motion, ultrasonic range, light, soil moisture \\
+RTL-SDR dongle & USB bulk & \$25 & Passive RF spectrum 24 MHz--1.7 GHz. Pure listening, no transmission. \\
+LoRa / Meshtastic & USB serial & \$20--35 & Long-range broadcast (10+ km), RSSI, GPS, mesh telemetry \\
+USB gamepad & HID class & \$15 & Haptic output via rumble motors --- the covert communication tier physically realized \\
+\midrule
+\rowcolor{lightsecondary}
+\multicolumn{4}{l}{\textbf{\sffamily Output Devices --- The Chorus Sings Back}} \\
+\midrule
+USB audio interface & Audio class (output) & \$20--50 & Audio synthesis output to speakers/amplifiers. Generative soundscapes, reactive drones, spatial audio. The frog's reply \\
+USB-DMX adapter & USB serial & \$15--30 & Controls DMX-512 lighting fixtures: LED pars, moving heads, fog machines, strobes. Industry-standard protocol, 512 channels per universe \\
+ILDA laser controller & USB serial / bulk & \$40--100 & Galvo scanner control for laser image projection. Geometric patterns, text, spatial model visualization. Safety interlock required (Class 3B/4) \\
+WS2812B / NeoPixel via ESP32 & USB serial & \$8--15 & Addressable LED strips (60--144 LEDs/m). Individual pixel color/brightness. Driven via ESP32 serial commands from Rust backend \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Connection Architecture}
+
+The Tauri application's Rust backend (\texttt{src-tauri/}) accesses USB devices natively via the \texttt{serialport} and \texttt{cpal} (audio) crates. The data path is:
+
+\begin{asciibox}
+INPUT PATH (sensing):
+  USB device -> /dev/ttyUSBx or ALSA/PulseAudio
+             -> src-tauri/ Rust backend (serialport / cpal)
+             -> sensor-interface.ts (unified contract)
+             -> passive-sensor.ts (spatial model construction)
+             -> desktop/ webview (visualization)
+
+OUTPUT PATH (synthesis):
+  spatial model + sensor data
+             -> output-synthesis.ts (mapping engine)
+             -> src-tauri/ Rust backend
+             -> USB audio out (cpal) -> speakers/amplifiers
+             -> USB serial -> DMX adapter -> LED fixtures
+             -> USB serial -> ILDA controller -> laser galvos
+             -> USB serial -> ESP32 -> WS2812B LED strips
+\end{asciibox}
+
+\subsubsection{Reference Device: Samsung Galaxy S25 Ultra}
+
+The development and testing reference device is a Samsung Galaxy S25 Ultra, connected via USB-C. Its sensor capabilities map directly to Spatial Awareness modules:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{S25 Ultra Sensor} & \tableheader{SA Module} & \tableheader{Application} \\
+\midrule
+4x microphone array & M1 Passive Sensor & Beamforming for directional audio capture. Birdsong localization (which tree?), BPM extraction from specific direction, machine acoustic isolation from background \\
+UWB (Ultra-Wideband) & M3 Geometry Mapper & Centimeter-precision ranging to other UWB devices. Physical mesh node distance without GPS. Indoor positioning where GPS fails \\
+Dual-freq GPS (L1+L5) & M3 Geometry Mapper & Sub-meter outdoor positioning. Trail mapping while birdsong sensing. Playa coordinate grid \\
+WiFi 7 (tri-band) & M5 Comm Bus / M6 Chorus & High-bandwidth mesh backbone. 2.4 GHz for range, 5/6 GHz for throughput. Simultaneous uplink + mesh via multi-link operation \\
+BT 5.4 (direction finding) & M6 Chorus Protocol & Angle-of-arrival for proximity sensing. Know not just \textit{that} a node is nearby but \textit{where} it is. Trust verification through physical co-location \\
+Magnetometer & M1 Passive Sensor & Compass heading for directional audio. Magnetic anomaly detection (vehicles, infrastructure) \\
+Barometer & M1 Passive Sensor & Altitude/floor detection. Weather pressure changes. Elevation context for forest/mountain sensing \\
+ToF / LiDAR sensor & M3 Geometry Mapper & Direct distance measurement. Room mapping without acoustic analysis. Obstacle detection \\
+200MP camera & M1 Passive Sensor & Visual species ID (birds, plants). QR/barcode scanning for mesh node pairing. Environmental light level \\
+mmWave proximity & M2 Threat Detection & Close-range presence detection without camera. Gesture sensing for covert input \\
+NFC & M5 Comm Bus (covert) & Touch-to-pair for mesh nodes. Covert data exchange at contact range. Trust establishment through physical proximity \\
+Thermometer & M1 Passive Sensor & Ambient temperature monitoring. Thermal environment changes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The S25 Ultra alone provides 12+ independent sensing modalities through a single USB-C cable. Via ADB (Android Debug Bridge), all sensor streams are accessible from the Rust backend without requiring a custom Android app for initial development --- \texttt{adb shell dumpsys sensorservice} exposes real-time sensor data, and audio capture routes through standard USB audio class.
+
+For phone-as-sensor-node, the phone runs a lightweight app that exposes its sensors over USB serial or WiFi. Multiple phones form a mesh via WiFi Direct or Bluetooth, bridging to the system wherever a WiFi uplink exists. Each phone is an autonomous sensing node --- it does not require the central system to function. It senses, caches, and shares when connectivity allows. This is the frog calling regardless of whether anyone is listening.
+
+\subsection{Sensor-Driven Output Synthesis}
+
+The sensing pipeline is bidirectional. Data flows in from sensors; sound and light flow out through synthesis. The spatial model is not just a data structure --- it is a score that can be performed.
+
+\subsubsection{Audio Synthesis}
+
+Sensor data maps to synthesis parameters through configurable \textit{mappings}. A mapping binds a sensor stream (accelerometer magnitude, ambient BPM, threat level, crowd density) to a synthesis parameter (oscillator frequency, filter cutoff, reverb depth, volume envelope). The synthesis engine runs in the Rust backend using the \texttt{cpal} crate for audio output, with a WebAudio fallback in the browser.
+
+The output is not pre-recorded audio. It is generated in real time from the spatial model:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Ambient drone:} Low-frequency oscillator whose pitch tracks crowd density or environmental energy. Shifts slowly as the environment shifts.
+\item \textbf{Reactive percussion:} Onset detection from USB microphone input triggers synthesized percussion in the output stream --- the environment's rhythm echoed back.
+\item \textbf{Frog Protocol sonification:} Each protocol phase has an acoustic signature. SILENCE = fade to nothing. ASSESS = low pulsing tone. PROBE = sharp staccato. CLASSIFY = resolution chord (major for safe, minor for threat). RESUME = crescendo rebuild.
+\item \textbf{Spatial audio:} Multi-channel output pans sound sources based on the geometry mapper's spatial model. A threat detected to the east produces sound from the east speaker. The sound field mirrors the sensor field.
+\end{itemize}
+
+\subsubsection{LED Control}
+
+Addressable LED strips (WS2812B/NeoPixel) and DMX-512 fixtures are driven by the same mapping engine. Sensor values map to color, brightness, animation speed, and pattern selection.
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{DMX-512 protocol:} Industry-standard lighting control. USB-DMX adapters (ENTTEC Open DMX, DMXKing) expose 512 channels. Each LED fixture, moving head, fog machine, or strobe occupies a channel range. The Rust backend writes DMX frames at 44 Hz via USB serial.
+\item \textbf{Addressable LEDs:} WS2812B strips driven via ESP32 over USB serial. Each pixel independently addressable. Effects: color waves synced to audio BPM, threat-level color gradients, spatial model visualization (each pixel = a mesh node, brightness = signal strength).
+\item \textbf{Frog Protocol lighting:} The five protocol phases map to a lighting sequence visible to anyone in the space. The light installation becomes a readable display of system state without requiring a screen.
+\end{itemize}
+
+\subsubsection{Laser Projection}
+
+ILDA (International Laser Display Association) galvo scanners project geometric patterns via laser. USB-connected controllers (Etherdream, Helios DAC) accept point streams at 30K+ points per second.
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Spatial model projection:} The geometry mapper's constraint boundaries, agent positions, and mesh topology are rendered as laser geometry on fog, walls, or open air. The abstract data model becomes a physical light sculpture.
+\item \textbf{Laser image projection:} Vector graphics --- text, icons, patterns --- projected onto surfaces. Species silhouettes from the AVI atlas. Mesh network topology diagrams. The playa name of a new mesh node appearing in light when it joins.
+\item \textbf{Safety:} ILDA laser projectors are Class 3B or 4 devices. Hardware safety interlock required. Software enforces scan speed minimums (no static beam dwell), blanking zones for audience protection, and kill-switch integration. The \texttt{output-synthesis.ts} layer refuses to drive a laser without confirmed interlock status.
+\end{itemize}
+
+\subsubsection{Mapping Engine}
+
+The \texttt{output-synthesis.ts} module provides the binding between sensor streams and output devices:
+
+\begin{asciibox}
+interface OutputMapping {
+  source: SensorStream;     // accelerometer, bpm, threat_level, ...
+  target: OutputParameter;  // osc_freq, led_color, laser_x, dmx_ch3
+  transform: (value: number) => number;  // scaling, clamping, easing
+  range: [min: number, max: number];     // output bounds
+}
+\end{asciibox}
+
+Mappings are declarative and hot-reloadable. A JSON configuration file defines which sensors drive which outputs. Multiple sensors can drive the same output (additive blending). The same sensor can drive multiple outputs simultaneously (audio pitch + LED hue from the same accelerometer). This is the chorus: every frog hears every other frog. Every sensor feeds every output. The mapping decides the mix.
+
 \subsection{Safety and Sensitivity Considerations}
 
 \begin{center}
@@ -770,6 +943,8 @@ Wave 3: Verification + Publication (Sequential, Sonnet)
 8 & Integration Bridge & Sensor $\to$ threat $\to$ response $\to$ comm verified & 07-integration \\
 9 & Simulation Test Suite & 15 scenarios, 50 broadcast tests, state preservation & 08-test-suite \\
 10 & Skill Package & SKILL.md, chipset.yaml, Release 1 integration & 09-packaging \\
+11 & USB Device Layer & Rust cpal/serialport backend; device enumeration; hot-plug; ADB bridge & 10-usb-device \\
+12 & Output Synthesis Layer & Sensor$\to$output mapping engine; audio synthesis; DMX/LED/ILDA drivers & 11-output-synth \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -794,6 +969,8 @@ Chorus Coord & 06-chorus & 05-comm-bus & Opus & 20K \\
 Integration Bridge & 07-integration & All above & Opus & 15K \\
 Test Suite & 08-tests & All above & Sonnet & 12K \\
 Packaging & 09-packaging & All above & Sonnet & 5K \\
+USB Device Layer & 10-usb-device & 01-passive, 00-schemas & Sonnet & 15K \\
+Output Synthesis & 11-output-synth & 10-usb-device, 01-passive & Sonnet & 18K \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -808,7 +985,7 @@ Packaging & 09-packaging & All above & Sonnet & 5K \\
 \tableheader{Model} & \tableheader{Budget} & \tableheader{Assigned To} \\
 \midrule
 Opus & 33\% & Frog Protocol (judgment: when to escalate/de-escalate), Chorus Coordination (emergent behavior design), Integration Bridge (cross-module reasoning) \\
-Sonnet & 59\% & Passive Sensor, Threat Detection, Geometry Mapper, Comm Bus, Test Suite, Test Harness, Packaging \\
+Sonnet & 62\% & Passive Sensor, Threat Detection, Geometry Mapper, Comm Bus, Test Suite, Test Harness, Packaging, USB Device Layer, Output Synthesis \\
 Haiku & 8\% & Schemas, signal format definitions, scaffolding \\
 \bottomrule
 \end{tabularx}
@@ -826,7 +1003,7 @@ Haiku & 8\% & Schemas, signal format definitions, scaffolding \\
 \tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Parallelism} & \tableheader{Gate} \\
 \midrule
 0 & Foundation & 0A--0C & Sequential & Go/No-Go \\
-1 & Sensing + Communication & 1A--1E & 2 parallel tracks & Go/No-Go \\
+1 & Sensing + Communication + Output & 1A--1G & 2 parallel tracks & Go/No-Go \\
 2 & Protocol Integration & 2A--2B & Sequential & Go/No-Go \\
 3 & Verification & 3A--3D & Sequential & Final \\
 \bottomrule
@@ -863,6 +1040,7 @@ Haiku & 8\% & Schemas, signal format definitions, scaffolding \\
 1A & Passive Environmental Sensor (ambient reads, spatial model construction) & Sonnet & 15K & passive-sensor.ts \\
 1B & Threat Detection Engine (anomaly detection, correlation, threat scoring) & Sonnet & 20K & threat-engine.ts \\
 1C & Environmental Geometry Mapper (constraint walls, budget ceilings, headroom) & Sonnet & 15K & geometry-mapper.ts \\
+1F & USB Device Layer (Rust cpal + serialport crates, device enumeration, hot-plug, ADB bridge) & Sonnet & 15K & usb-device.rs \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -878,6 +1056,7 @@ Haiku & 8\% & Schemas, signal format definitions, scaffolding \\
 \midrule
 1D & Multi-Tier Communication Bus (covert, directed, broadcast channels) & Sonnet & 18K & comm-bus.ts \\
 1E & Chorus Coordination Protocol (distributed pause/resume, state snapshot, tempo sync) & Opus & 20K & chorus-proto.ts \\
+1G & Output Synthesis Layer (mapping engine, audio synth, DMX driver, LED serial, ILDA laser driver) & Sonnet & 18K & output-synthesis.ts \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -934,15 +1113,15 @@ Haiku & 8\% & Schemas, signal format definitions, scaffolding \\
 \tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
 \midrule
 Wave 0: Foundation & --- & 15K & 5K \\
-Wave 1: Sensing + Comm & 20K & 68K & --- \\
+Wave 1: Sensing + Comm + Output & 20K & 101K & --- \\
 Wave 2: Integration & 40K & --- & --- \\
 Wave 3: Verification & --- & 22K & --- \\
 \midrule
-\textbf{Totals} & \textbf{60K (33\%)} & \textbf{105K (59\%)} & \textbf{5K (3\%)} \\
+\textbf{Totals} & \textbf{60K (28\%)} & \textbf{138K (65\%)} & \textbf{5K (2\%)} \\
 \midrule
-\textbf{Buffer (5\%)} & \multicolumn{3}{c}{\textbf{9K}} \\
+\textbf{Buffer (5\%)} & \multicolumn{3}{c}{\textbf{10K}} \\
 \midrule
-\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{$\sim$179K tokens}} \\
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{$\sim$213K tokens}} \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -957,7 +1136,8 @@ Wave 3: Verification & --- & 22K & --- \\
          Track A                                Track B
     [1A: Passive Sensor]                   [1D: Comm Bus]
     [1B: Threat Detection]                 [1E: Chorus Proto]
-    [1C: Geometry Mapper]
+    [1C: Geometry Mapper]                  [1G: Output Synthesis]
+    [1F: USB Device Layer]
               |                                      |
               +------------------+-------------------+
                                  |
@@ -980,10 +1160,10 @@ Wave 3: Verification & --- & 22K & --- \\
 \rowcolor{primary}
 \tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
 \midrule
-Safety-critical & 6 & Mandatory & BLOCK \\
-Core functionality & 16 & Required & BLOCK \\
-Integration & 7 & Required & BLOCK \\
-Edge cases & 6 & Best-effort & LOG \\
+Safety-critical & 7 & Mandatory & BLOCK \\
+Core functionality & 22 & Required & BLOCK \\
+Integration & 10 & Required & BLOCK \\
+Edge cases & 9 & Best-effort & LOG \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -1003,6 +1183,7 @@ SC-BST & Broadcast storm prevention & No more than one broadcast signal per 5-se
 SC-PRI & Passive sensor privacy & Sensor does not log human behavior patterns beyond coordination needs \\
 SC-COR & Correlation requirement & Phase 1 (SILENCE) entry requires correlated signals from $\geq$2 sources \\
 SC-RES & Resume safety & No agent resumes work while a BLOCK-level threat is active \\
+SC-LAS & Laser safety interlock & ILDA output is hardware-interlocked; software kill-switch tested; blanking zones enforced \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -1032,6 +1213,12 @@ CF-13 & Covert invisibility & Non-recipients have zero log references to covert 
 CF-14 & State preservation & Zero work loss across pause/resume cycle \\
 CF-15 & Geometry accuracy & Resource constraints within 5\% per dimension \\
 CF-16 & Awareness overhead & $\leq$3\% of context window during normal operation \\
+CF-17 & USB audio device enumeration & cpal enumerates and opens USB audio stream within 2s \\
+CF-18 & USB serial device communication & serialport sends/receives from ESP32 at configured baud rate \\
+CF-19 & Audio synthesis output & Mapping engine generates audio signal from sensor stream within 50ms latency \\
+CF-20 & DMX frame output & USB-DMX adapter receives valid DMX-512 frames at $\geq$40 Hz \\
+CF-21 & LED strip control & ESP32 receives serial color commands; WS2812B pixels update within 1 frame \\
+CF-22 & ILDA laser safety interlock & Laser output refuses to engage without confirmed hardware interlock status \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -1052,6 +1239,9 @@ IN-04 & Comm Bus $\to$ Chorus & Broadcast pause triggers distributed silence \\
 IN-05 & Full cycle end-to-end & Anomaly injection $\to$ silence $\to$ assess $\to$ resume \\
 IN-06 & Release 1 integration & Deep Audio Analyzer spatial output feeds geometry mapper \\
 IN-07 & Crew manifest integration & TOPO, FLIGHT, CAPCOM correctly interact with protocols \\
+IN-08 & USB sensor $\to$ passive sensor pipeline & USB device data flows through sensor-interface.ts into passive sensor layer \\
+IN-09 & Sensor $\to$ output synthesis pipeline & Sensor data change produces corresponding audio/LED/laser output within 100ms \\
+IN-10 & Frog Protocol $\to$ light sequence & Protocol phase transitions drive correct LED/DMX color sequence \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -1071,6 +1261,9 @@ EC-03 & Scout failure during PROBE & Scout agent failure escalates threat level;
 EC-04 & Budget exhaustion mid-protocol & Frog Protocol completes gracefully even when budget hits zero \\
 EC-05 & Single-agent system & Protocols function correctly with only 1 agent (solo mode) \\
 EC-06 & Threat reclassification & Initially-threatening stimulus correctly reclassified as NEUTRAL after sustained non-threat behavior \\
+EC-07 & USB device hot-unplug & Graceful degradation when USB device disconnects during active sensing; no crash, sensor marked offline \\
+EC-08 & Output device hot-unplug & Audio/LED/laser output gracefully degrades when output device disconnects; remaining outputs continue \\
+EC-09 & Laser scan speed enforcement & ILDA driver enforces minimum scan speed; refuses static beam dwell even if mapping engine requests it \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -1134,15 +1327,15 @@ LOG & Chronicle Agent & Audit trail; protocol execution logs; threat history \\
 \rowcolor{primary}
 \tableheader{Metric} & \tableheader{Value} \\
 \midrule
-Total components & 11 (including schemas and test harness) \\
+Total components & 13 (including schemas, test harness, USB device layer, and output synthesis) \\
 Activation profile & Squadron (12 roles) \\
 Estimated context windows & 14--18 \\
 Estimated sessions & 4--5 \\
-Total token budget & $\sim$179K (plus 5\% buffer) \\
+Total token budget & $\sim$213K (plus 5\% buffer) \\
 Parallel tracks & 2 (Wave 1) \\
 Go/No-Go gates & 3 (Waves 0, 1, 2) \\
-Safety-critical tests & 6 (all mandatory-pass) \\
-Total tests & 35 \\
+Safety-critical tests & 7 (all mandatory-pass) \\
+Total tests & 48 \\
 \bottomrule
 \end{tabularx}
 \end{center}
