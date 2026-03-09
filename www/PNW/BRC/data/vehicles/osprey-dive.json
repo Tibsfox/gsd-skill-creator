@@ -1,0 +1,19 @@
+{
+  "name": "Osprey Dive",
+  "slug": "osprey-dive",
+  "pnw_species": {
+    "binomial": "Pandion haliaetus",
+    "common_name": "Osprey",
+    "taxonomy": "AVI",
+    "ecological_role": "Specialist fish-hunting raptor; precision dive from altitude; found near water throughout PNW; builds large platform nests"
+  },
+  "chipset_capability": "OSPREY + TAHOMA; precision observation; apex targeting; minimal footprint",
+  "chips_active": ["OSPREY", "TAHOMA"],
+  "activation_profile": "scout",
+  "movement_pattern": "High-altitude observation with precision dive capability. The Osprey Dive orbits above the city at maximum altitude, then plunges to exact coordinates with minimal disturbance — like the osprey hunting from 100 feet above the Salish Sea.",
+  "capacity": "Precision observation and apex skill targeting. Minimal footprint — arrives, completes targeted work, departs. No camp hosting capability.",
+  "trust_level_required": 2,
+  "max_passengers": 2,
+  "home_waters": "Altitude — operates above the city, descends only for targeted strikes",
+  "description": "The precision observation platform. With OSPREY (aerial survey) and TAHOMA (apex synthesis) chips, the Osprey Dive sees the whole city from altitude and can target specific locations with surgical precision. Minimal footprint means it doesn't disturb the camps it visits — like the osprey that barely ripples the water when it strikes. Best used for census runs, safety inspections, and apex skill verification."
+}

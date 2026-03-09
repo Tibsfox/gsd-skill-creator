@@ -1,0 +1,19 @@
+{
+  "name": "Orca Sled",
+  "slug": "orca-sled",
+  "pnw_species": {
+    "binomial": "Orcinus orca",
+    "common_name": "Orca (Killer whale)",
+    "taxonomy": "MAM",
+    "ecological_role": "Apex predator of Salish Sea; highly social, pod-based coordination; long-range migration across ocean basins"
+  },
+  "chipset_capability": "Full CEDAR chipset; all 8 chips; Fleet activation; deep-water traversal",
+  "chips_active": ["CEDAR", "RAVEN", "SALMON", "OSPREY", "TAHOMA", "HEMLOCK", "ORCA", "GEODUCK"],
+  "activation_profile": "fleet",
+  "movement_pattern": "Deep-water traversal; can reach any camp or open-playa location; highest mobility class. Like the transient orca pods that range across the entire Salish Sea, the Orca Sled moves freely between all camp clusters.",
+  "capacity": "Full multi-agent orchestration; can host temporary camp activities in open playa. Carries complete community ecosystem wherever it travels.",
+  "trust_level_required": 3,
+  "max_passengers": 8,
+  "home_waters": "Any — the Orca Sled has no home camp, only the open sea",
+  "description": "The most capable mobile platform in Virtual Black Rock City. Like the orca pods of the Salish Sea, it carries a complete community ecosystem wherever it goes — all 8 CEDAR chips active, full Fleet activation, capable of hosting temporary camp activities anywhere on the playa. The Orca Sled is the only vehicle that can operate in deep-water zones beyond the city perimeter."
+}

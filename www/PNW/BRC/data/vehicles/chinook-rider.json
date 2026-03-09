@@ -1,0 +1,19 @@
+{
+  "name": "Chinook Rider",
+  "slug": "chinook-rider",
+  "pnw_species": {
+    "binomial": "Oncorhynchus tshawytscha",
+    "common_name": "Chinook salmon",
+    "taxonomy": "ECO",
+    "ecological_role": "Largest Pacific salmon; epic upstream migration against strong currents; keystone nutrient transport from ocean to forest"
+  },
+  "chipset_capability": "SALMON + CEDAR + HEMLOCK; high-endurance; upstream problem navigation",
+  "chips_active": ["SALMON", "CEDAR", "HEMLOCK"],
+  "activation_profile": "patrol",
+  "movement_pattern": "High-endurance upstream navigation. The Chinook Rider excels at moving against resistance — solving dependency chains, navigating complex camp relationships, carrying heavy structural loads upstream. Like the chinook salmon that carries ocean nutrients hundreds of miles inland.",
+  "capacity": "Heavy structural transport; can carry camp materials, dependency payloads, and infrastructure components between camps. The workhorse of the fleet.",
+  "trust_level_required": 2,
+  "max_passengers": 5,
+  "home_waters": "River systems — follows the dependency streams between camps",
+  "description": "The endurance hauler of Virtual Black Rock City. With SALMON (upstream navigation), CEDAR (structural stability), and HEMLOCK (deep patience) chips, the Chinook Rider carries heavy loads against the current. Where the Raven Crawler is fast and light, the Chinook Rider is steady and strong — the salmon that returns upstream no matter the obstacle. Essential for camp build/strike operations and cross-city material transport."
+}

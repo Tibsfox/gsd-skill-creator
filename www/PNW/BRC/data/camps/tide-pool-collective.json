@@ -1,0 +1,44 @@
+{
+  "name": "Tide Pool Collective",
+  "slug": "tide-pool-collective",
+  "pnw_source": {
+    "species": "Intertidal zone ecology",
+    "common_name": "Salish Sea intertidal zone",
+    "taxonomy": "ECO",
+    "ecological_role": "High-diversity boundary ecosystem where marine and terrestrial worlds meet; organisms must withstand extreme exposure cycles — wave shock, desiccation, UV, predation — creating extraordinary resilience"
+  },
+  "description": "Medical, safety, emergency response, crisis intervention. Tide Pool Collective is the city's most safety-critical camp — the one you need when everything else fails. Like the intertidal zone where organisms survive the harshest boundary conditions, this camp exists at the edge between operational and crisis, providing professional emergency response that cannot be bypassed.",
+  "lead_skill": "tide-pool-medical",
+  "member_skills": [
+    {
+      "slug": "watershed-watch",
+      "role": "Safety monitoring, conflict de-escalation, ranger patrol"
+    },
+    {
+      "slug": "watershed-command",
+      "role": "Ranger headquarters coordination and incident management"
+    },
+    {
+      "slug": "columbia-gate",
+      "role": "Access control and perimeter identity verification"
+    },
+    {
+      "slug": "firefly-circuit",
+      "role": "Night safety illumination and wayfinding"
+    }
+  ],
+  "elevation_zone": "ELEV-INTERTIDAL",
+  "max_members": 8,
+  "min_members": 4,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "tidal-reach",
+    "geoduck-deep"
+  ],
+  "activation_requirements": {
+    "trust_level": 3,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-01", "SC-02", "SC-03"]
+  },
+  "notes": "Tide Pool Collective has the highest trust requirement (Level 3 — Old Growth) and the most safety tests of any camp. Its lead skill, Tide Pool Medical, is the single most safety-critical gate in the entire city: SC-01 mandates that emergency services cannot be bypassed. The camp also hosts Columbia Gate (SC-02) and Watershed Watch, making it the densest concentration of MANDATORY-PASS civic agents."
+}

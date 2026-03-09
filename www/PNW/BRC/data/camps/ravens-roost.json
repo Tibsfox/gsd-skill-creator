@@ -1,0 +1,40 @@
+{
+  "name": "Raven's Roost",
+  "slug": "ravens-roost",
+  "pnw_source": {
+    "species": "Corvus corax",
+    "common_name": "Common raven",
+    "taxonomy": "AVI",
+    "ecological_role": "Highly intelligent corvid with complex social communication; uses tools, caches food, and maintains long-term memory across vast territories"
+  },
+  "description": "Communications, documentation, information relay. Raven's Roost is the city's nervous system — where messages are composed, archived, and relayed across camps. Like the raven's legendary memory and social intelligence, this camp ensures nothing important is lost and every signal reaches its destination.",
+  "lead_skill": "raven-archive",
+  "member_skills": [
+    {
+      "slug": "ravens-welcome",
+      "role": "Greeting and orientation for new rigs entering the city"
+    },
+    {
+      "slug": "raven-broadcast",
+      "role": "Information relay and signal routing between camps"
+    },
+    {
+      "slug": "salish-press",
+      "role": "Media documentation, placement coordination, and public record"
+    }
+  ],
+  "elevation_zone": "ELEV-SUBALPINE",
+  "max_members": 6,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "raven-mirror",
+    "mycorrhizal-mandala"
+  ],
+  "activation_requirements": {
+    "trust_level": 1,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03"]
+  },
+  "notes": "Raven's Roost is the only camp whose lead skill (Raven Archive) carries a RECOMMENDED rather than MANDATORY-PASS safety classification. This is deliberate: documentation is vital but should never become a blocker. The raven watches, records, remembers — but never gates."
+}

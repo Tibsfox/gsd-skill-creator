@@ -1,0 +1,250 @@
+# CEDAR Chipset — Virtual Black Rock City
+# Maps PNW species archetypes to BRC operational roles
+# Domain: virtual-brc/config
+# Version: 1.0.0
+
+meta:
+  name: cedar-chipset
+  version: "1.0.0"
+  domain: virtual-brc
+  description: >
+    Eight-chip architecture for Virtual Black Rock City operations.
+    Each chip maps a Pacific Northwest keystone species to a BRC
+    infrastructure role. Named for the western red cedar — the tree
+    of life in Coast Salish tradition, the structural backbone of
+    the forest and the city.
+
+chips:
+  CEDAR:
+    name: Cedar
+    species: Thuja plicata (Western Red Cedar)
+    role: Structural stability, camp scaffolding, LNT
+    description: >
+      The load-bearing chip. Handles camp layout validation, structural
+      safety checks, and Leave No Trace enforcement. Like the cedar
+      that provides longhouse beams, canoe hulls, and bark rope — Cedar
+      is the chip you build everything on top of.
+    capabilities:
+      - camp-scaffolding
+      - structural-validation
+      - lnt-enforcement
+      - dependency-graph-integrity
+    safety_classification: MANDATORY-PASS
+
+  RAVEN:
+    name: Raven
+    species: Corvus corax (Common Raven)
+    role: Communication, observation, and message routing
+    description: >
+      The messenger chip. Routes messages between camps, broadcasts
+      city-wide announcements, and monitors the communication graph
+      for dead links. Like the raven that carries news across the
+      forest canopy, this chip ensures no camp is ever out of the loop.
+    capabilities:
+      - message-routing
+      - broadcast-announcements
+      - communication-health-check
+      - event-observation
+    safety_classification: RECOMMENDED
+
+  SALMON:
+    name: Salmon
+    species: Oncorhynchus tshawytscha (Chinook Salmon)
+    role: Navigation, upstream problem-solving, lifecycle management
+    description: >
+      The navigator chip. Handles pathfinding through the skill
+      registry, upstream dependency resolution, and agent lifecycle
+      transitions. Like the salmon that navigates thousands of miles
+      to return to its natal stream, this chip always finds the way
+      back to the source.
+    capabilities:
+      - skill-pathfinding
+      - upstream-dependency-resolution
+      - lifecycle-state-machine
+      - migration-routing
+    safety_classification: RECOMMENDED
+
+  OSPREY:
+    name: Osprey
+    species: Pandion haliaetus (Osprey)
+    role: Aerial observation, census, documentation
+    description: >
+      The observer chip. Provides high-altitude views of system state —
+      census counts, topology snapshots, and documentation generation.
+      Like the osprey that spots fish from two hundred feet, this chip
+      sees patterns invisible from ground level.
+    capabilities:
+      - system-census
+      - topology-snapshot
+      - documentation-generation
+      - anomaly-detection
+    safety_classification: RECOMMENDED
+
+  TAHOMA:
+    name: Tahoma
+    species: null (Mount Rainier / Tahoma)
+    role: Summit synthesis, apex skill promotion engine
+    description: >
+      The apex chip. Handles skill promotion decisions, trust level
+      advancement, and cross-domain synthesis. Named for the mountain
+      the Puyallup people call Tahoma — the summit that sees everything.
+      This chip operates at the highest trust level and makes the final
+      call on promotion.
+    capabilities:
+      - skill-promotion
+      - trust-level-advancement
+      - cross-domain-synthesis
+      - apex-decision-engine
+    safety_classification: RECOMMENDED
+
+  HEMLOCK:
+    name: Hemlock
+    species: Tsuga heterophylla (Western Hemlock)
+    role: Deep-time patience, dependency resolution
+    description: >
+      The patience chip. Manages long-running dependency resolution,
+      version compatibility checking, and deep-tree traversal of the
+      skill graph. Like the hemlock that waits decades in deep shade
+      for a canopy gap, this chip handles the slow, careful work that
+      other chips cannot rush.
+    capabilities:
+      - deep-dependency-resolution
+      - version-compatibility
+      - deep-graph-traversal
+      - long-running-task-management
+    safety_classification: RECOMMENDED
+
+  ORCA:
+    name: Orca
+    species: Orcinus orca (Southern Resident Orca)
+    role: Mobile traversal, mutant-vehicle transport layer
+    description: >
+      The transport chip. Handles mobile agent deployment, cross-camp
+      traversal, and payload delivery across the playa grid. Like the
+      orca pods that patrol the Salish Sea in coordinated hunting
+      formations, this chip moves agents and data where they need to go.
+    capabilities:
+      - mobile-agent-deployment
+      - cross-camp-traversal
+      - payload-delivery
+      - coordinated-movement
+    safety_classification: RECOMMENDED
+
+  GEODUCK:
+    name: Geoduck
+    species: Panopea generosa (Pacific Geoduck)
+    role: Deep persistence, Dolt commons root system
+    description: >
+      The persistence chip. Manages the deep storage layer — the Dolt
+      commons where skill definitions, trust ledgers, and topology
+      snapshots are committed for long-term retention. Like the geoduck
+      that burrows three feet into the substrate and lives for 168 years,
+      this chip ensures nothing important is ever lost.
+    capabilities:
+      - deep-storage-management
+      - trust-ledger-persistence
+      - topology-archival
+      - commons-root-operations
+    safety_classification: RECOMMENDED
+
+profiles:
+  scout:
+    description: >
+      Lightweight reconnaissance. Two chips for rapid assessment —
+      communication and navigation. Used for initial playa surveys,
+      skill discovery sweeps, and quick pathfinding before committing
+      heavier resources.
+    chips:
+      - RAVEN
+      - SALMON
+    use_cases:
+      - skill-discovery
+      - initial-assessment
+      - pathfinding
+    resource_class: light
+
+  patrol:
+    description: >
+      Standard operational profile. Four chips covering communication,
+      navigation, observation, and structural validation. The default
+      profile for most camp-level operations and routine city maintenance.
+    chips:
+      - RAVEN
+      - SALMON
+      - OSPREY
+      - CEDAR
+    use_cases:
+      - camp-operations
+      - routine-maintenance
+      - safety-patrol
+      - topology-audit
+    resource_class: standard
+
+  squadron:
+    description: >
+      Heavy operational profile. Six chips adding summit synthesis and
+      mobile transport to the patrol set. Used for cross-camp operations,
+      skill promotion workflows, and large-scale agent deployments.
+    chips:
+      - RAVEN
+      - SALMON
+      - OSPREY
+      - CEDAR
+      - TAHOMA
+      - ORCA
+    use_cases:
+      - cross-camp-operations
+      - skill-promotion
+      - large-scale-deployment
+      - multi-domain-synthesis
+    resource_class: heavy
+
+  fleet:
+    description: >
+      Full activation. All eight chips online. Used for city-wide
+      operations, deep dependency resolution, full census, and
+      end-of-event LNT cleanup sweeps. The fleet profile is the
+      only profile that activates deep persistence (GEODUCK) and
+      deep-time resolution (HEMLOCK).
+    chips:
+      - RAVEN
+      - SALMON
+      - OSPREY
+      - CEDAR
+      - TAHOMA
+      - ORCA
+      - HEMLOCK
+      - GEODUCK
+    use_cases:
+      - city-wide-operations
+      - deep-dependency-resolution
+      - full-census
+      - lnt-cleanup-sweep
+      - archival-operations
+    resource_class: full
+
+activation_rules:
+  default_profile: patrol
+  auto_escalation:
+    - trigger: cross_camp_request
+      from: patrol
+      to: squadron
+    - trigger: city_wide_event
+      from: squadron
+      to: fleet
+    - trigger: lnt_cleanup
+      from: any
+      to: fleet
+    - trigger: deep_dependency_detected
+      from: scout
+      to: patrol
+  safety_overrides:
+    - condition: safety_warden_active
+      require_chips:
+        - CEDAR
+      reason: "LNT and structural validation mandatory when warden is active"
+    - condition: promotion_requested
+      require_chips:
+        - TAHOMA
+        - CEDAR
+      reason: "Apex synthesis and structural validation required for promotion"

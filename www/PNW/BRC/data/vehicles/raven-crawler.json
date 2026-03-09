@@ -1,0 +1,19 @@
+{
+  "name": "Raven Crawler",
+  "slug": "raven-crawler",
+  "pnw_species": {
+    "binomial": "Corvus corax",
+    "common_name": "Common raven",
+    "taxonomy": "AVI",
+    "ecological_role": "Highly intelligent corvid; tool use, problem solving, rapid terrain adaptation; found from alpine to coastal zones"
+  },
+  "chipset_capability": "RAVEN + SALMON + OSPREY; message relay; rapid terrain adaptation",
+  "chips_active": ["RAVEN", "SALMON", "OSPREY"],
+  "activation_profile": "patrol",
+  "movement_pattern": "Rapid terrain adaptation; moves quickly between camps carrying messages and relay signals. Like the raven that flies between forest canopy and open meadow, this vehicle transitions between contexts without losing altitude.",
+  "capacity": "Message relay and signal broadcast; carries communication payloads between camps. Lightweight footprint — observation and relay, not construction.",
+  "trust_level_required": 2,
+  "max_passengers": 3,
+  "home_waters": "Canopy level — moves above camp structures, sees the whole city",
+  "description": "The reconnaissance and communication vehicle of Virtual Black Rock City. The Raven Crawler carries message relay capability (RAVEN chip), upstream navigation (SALMON chip), and aerial observation (OSPREY chip). It moves between camps faster than any other vehicle, trading capacity for speed — the raven's intelligence is in knowing what to carry and where."
+}

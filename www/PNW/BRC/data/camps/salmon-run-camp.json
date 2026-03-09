@@ -1,0 +1,45 @@
+{
+  "name": "Salmon Run Camp",
+  "slug": "salmon-run-camp",
+  "pnw_source": {
+    "species": "Oncorhynchus tshawytscha",
+    "common_name": "Chinook salmon",
+    "taxonomy": "ECO",
+    "ecological_role": "Keystone anadromous fish; lifecycle spans ocean to headwaters. Upstream migration drives nutrient cycling, feeds terrestrial ecosystems, and shapes river geomorphology"
+  },
+  "description": "Art grants, upstream problem-solving, creative navigation. Salmon Run Camp is where creative projects are born, funded, and navigated through obstacles. Like the Chinook salmon's impossible upstream journey, this camp specializes in moving work against the current — through dependency chains, review gates, and structural barriers.",
+  "lead_skill": "salmon-run-pool",
+  "member_skills": [
+    {
+      "slug": "nurse-log-guild",
+      "role": "Art grants and artist services; seeding creative projects"
+    },
+    {
+      "slug": "chinook-rider",
+      "role": "High-endurance upstream navigation and problem routing"
+    },
+    {
+      "slug": "chinook-transit",
+      "role": "Transportation and migration coordination between camps"
+    },
+    {
+      "slug": "cascade-ceremonies",
+      "role": "Special events coordination and celebration management"
+    }
+  ],
+  "elevation_zone": "ELEV-RIPARIAN",
+  "max_members": 7,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "salmon-ladder",
+    "estuary",
+    "nurse-log"
+  ],
+  "activation_requirements": {
+    "trust_level": 1,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03"]
+  },
+  "notes": "Salmon Run Camp has the strongest connection to the art installation system. Three of the twelve archetypes can emerge from this camp's work. The Salmon Ladder archetype — navigation through dependency chains — is the signature composition pattern, and it requires at least one member skill from Salmon Run and one from Cedar Grove to emerge."
+}

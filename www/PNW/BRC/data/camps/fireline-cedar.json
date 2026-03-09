@@ -1,0 +1,48 @@
+{
+  "name": "Fireline Cedar",
+  "slug": "fireline-cedar",
+  "pnw_source": {
+    "species": "Thuja plicata (fire ecology context)",
+    "common_name": "Western red cedar under prescribed burn",
+    "taxonomy": "COL",
+    "ecological_role": "Fire ecology in cedar forests: prescribed burns clear understory, recycle nutrients, trigger seed germination, and prevent catastrophic wildfire. Cedar bark is fire-resistant at maturity but vulnerable when young — fire management is a balance between destruction and renewal"
+  },
+  "description": "Burn perimeter, pyrotechnics safety, fire management. Fireline Cedar manages the most dangerous operation in the city: the burn itself. Like prescribed fire in Pacific Northwest forests — where controlled destruction prevents catastrophic loss and triggers renewal — this camp manages the boundary between creative destruction and safety, ensuring that when skills are promoted (burned), the perimeter holds.",
+  "lead_skill": "fireline-cedar-lead",
+  "member_skills": [
+    {
+      "slug": "burn-perimeter-support",
+      "role": "Burn perimeter establishment and safety line management"
+    },
+    {
+      "slug": "fire-succession-watch",
+      "role": "Post-burn monitoring and regeneration tracking"
+    },
+    {
+      "slug": "ember-patrol",
+      "role": "Spot-fire detection and containment response"
+    },
+    {
+      "slug": "ignition-sequencer",
+      "role": "Burn timing coordination and ignition chain management"
+    },
+    {
+      "slug": "ash-reader",
+      "role": "Post-burn assessment and nutrient cycling analysis"
+    }
+  ],
+  "elevation_zone": "ELEV-MONTANE",
+  "max_members": 8,
+  "min_members": 4,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "fire-succession",
+    "canopy-break"
+  ],
+  "activation_requirements": {
+    "trust_level": 3,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-01", "SC-03", "SC-04"]
+  },
+  "notes": "Fireline Cedar is the only camp with 5 member skills (the maximum for any non-medical camp). Fire management demands depth. The camp requires Level 3 trust (Old Growth) because burn operations are irreversible — skill promotion and deprecation cannot be undone. The fire-succession art installation archetype can only emerge when Fireline Cedar and Cedar Grove skills compose, reflecting the ecological truth that fire and growth are the same cycle."
+}

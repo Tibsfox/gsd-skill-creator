@@ -1,0 +1,45 @@
+{
+  "name": "Cedar Grove",
+  "slug": "cedar-grove",
+  "pnw_source": {
+    "species": "Thuja plicata",
+    "common_name": "Western red cedar",
+    "taxonomy": "COL",
+    "ecological_role": "Keystone conifer of Pacific Northwest old-growth forests; provides structural framework, wildlife habitat, and cultural significance to the entire forest ecosystem"
+  },
+  "description": "Structural build, camp planning, materials management. Cedar Grove is where the city's physical infrastructure takes shape — from camp scaffolding to permanent installations. Like old-growth cedar stands that define the architecture of the forest canopy, this camp provides the load-bearing structure that every other camp depends on.",
+  "lead_skill": "fireline-cedar",
+  "member_skills": [
+    {
+      "slug": "cascade-brigade",
+      "role": "Infrastructure build/strike; DPW sign-off authority"
+    },
+    {
+      "slug": "restoration-pass",
+      "role": "LNT execution and site restoration after burn"
+    },
+    {
+      "slug": "geoduck-watch",
+      "role": "Environmental monitoring and deep-persistence checks"
+    },
+    {
+      "slug": "cedar-canopy",
+      "role": "Camp setup assistance, structural mentoring, shade provision"
+    }
+  ],
+  "elevation_zone": "ELEV-MONTANE",
+  "max_members": 8,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "nurse-log",
+    "fire-succession",
+    "canopy-break"
+  ],
+  "activation_requirements": {
+    "trust_level": 2,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03", "SC-04"]
+  },
+  "notes": "Cedar Grove is the structural backbone camp. No other camp can build without Cascade Brigade (DPW) sign-off, and Cedar Grove is where that authority lives. The lead skill (Fireline Cedar) manages burn perimeter — a reminder that the same species that builds the framework also manages its controlled destruction."
+}

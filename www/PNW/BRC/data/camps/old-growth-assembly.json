@@ -1,0 +1,45 @@
+{
+  "name": "Old Growth Assembly",
+  "slug": "old-growth-assembly",
+  "pnw_source": {
+    "species": "Mixed old-growth canopy",
+    "common_name": "Olympic Peninsula old-growth forest",
+    "taxonomy": "COL",
+    "ecological_role": "Ancient forest ecosystem with multi-century trees; provides deep shade, complex vertical structure, massive carbon storage, and the highest biodiversity density in the Pacific Northwest"
+  },
+  "description": "Education, deep knowledge, mentoring, reference. Old Growth Assembly is Center Camp — the gathering place where knowledge lives in the long form. Like an old-growth forest where centuries of accumulated growth creates irreplaceable structure, this camp hosts the deep reference material, mentoring relationships, and educational programs that take time to produce and cannot be rushed.",
+  "lead_skill": "hemlock-reference",
+  "member_skills": [
+    {
+      "slug": "old-growth-archive",
+      "role": "Deep knowledge repository and long-term reference maintenance"
+    },
+    {
+      "slug": "marten-signal",
+      "role": "Telecommunications and signal routing through dense canopy"
+    },
+    {
+      "slug": "salish-gate",
+      "role": "Knowledge access control and educational intake"
+    },
+    {
+      "slug": "glacial-flow",
+      "role": "Slow-release resource distribution and patience management"
+    }
+  ],
+  "elevation_zone": "ELEV-LOWLAND",
+  "max_members": 8,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "mother-tree",
+    "nurse-log",
+    "mycorrhizal-mandala"
+  ],
+  "activation_requirements": {
+    "trust_level": 2,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03"]
+  },
+  "notes": "Old Growth Assembly is the BRC Center Camp equivalent — the heart of the city where people gather to share knowledge rather than build structures. The lead skill is Hemlock Reference (Playa Info), reflecting that western hemlock is the climax species in Pacific Northwest forests: the one that eventually dominates when disturbance stops. Three art installation archetypes can emerge here, the most of any camp, because deep knowledge is the richest substrate for emergent composition."
+}

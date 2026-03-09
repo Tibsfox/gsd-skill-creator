@@ -1,0 +1,40 @@
+{
+  "name": "Osprey Watch",
+  "slug": "osprey-watch",
+  "pnw_source": {
+    "species": "Pandion haliaetus",
+    "common_name": "Osprey",
+    "taxonomy": "AVI",
+    "ecological_role": "Fish-eating raptor with exceptional aerial vision; hunts by hovering and diving with precision from height. Nests on elevated platforms near water, providing unobstructed observation of vast territory"
+  },
+  "description": "Census, observation, aerial survey, data collection. Osprey Watch is the city's eyes — the camp that sees everything from above and translates raw observation into structured data. Like the osprey hunting from its elevated perch, this camp provides precision targeting of what matters across the entire playa.",
+  "lead_skill": "osprey-survey",
+  "member_skills": [
+    {
+      "slug": "osprey-landing",
+      "role": "Arrival processing, census intake, and rig registration"
+    },
+    {
+      "slug": "territory-mapping",
+      "role": "Surveying, cartography, and spatial data collection"
+    },
+    {
+      "slug": "tahomasEye",
+      "role": "Summit-level synthesis and apex observation"
+    }
+  ],
+  "elevation_zone": "ELEV-ALPINE",
+  "max_members": 6,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "whitebark-sentinel",
+    "canopy-break"
+  ],
+  "activation_requirements": {
+    "trust_level": 2,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03"]
+  },
+  "notes": "Osprey Watch operates at ELEV-ALPINE — the highest elevation zone of any camp. This is fitting: the osprey sees the whole city from its perch. Tahoma's Eye (the apex skill, equivalent to 'The Man') lives here, making this camp the observation summit. The territory-mapping skill feeds data to every other camp's planning function."
+}

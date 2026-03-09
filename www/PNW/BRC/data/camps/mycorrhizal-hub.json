@@ -1,0 +1,45 @@
+{
+  "name": "Mycorrhizal Hub",
+  "slug": "mycorrhizal-hub",
+  "pnw_source": {
+    "species": "Mycorrhizal fungal networks (CMN)",
+    "common_name": "Common mycorrhizal network",
+    "taxonomy": "ECO",
+    "ecological_role": "Underground fungal networks connecting tree root systems across the forest floor; enables nutrient transfer, chemical signaling, and resource sharing between trees that would otherwise compete — the 'Wood Wide Web'"
+  },
+  "description": "Co-learning, knowledge transfer, community connection. Mycorrhizal Hub is the invisible infrastructure of the city — the underground network that connects camps that don't know they're connected. Like the common mycorrhizal network that transfers carbon and nutrients between trees, this camp facilitates the exchange of knowledge, skills, and support between rigs across camp boundaries.",
+  "lead_skill": "mycorrhizal-hub-lead",
+  "member_skills": [
+    {
+      "slug": "spore-dispersal",
+      "role": "Knowledge seeding and cross-camp pollination"
+    },
+    {
+      "slug": "root-network",
+      "role": "Inter-camp connection maintenance and relationship mapping"
+    },
+    {
+      "slug": "canopy-gap-finder",
+      "role": "Identifying learning opportunities and unmet needs across camps"
+    },
+    {
+      "slug": "nurse-log-tender",
+      "role": "Mentoring coordination and new-rig onboarding support"
+    }
+  ],
+  "elevation_zone": "ELEV-LOWLAND",
+  "max_members": 8,
+  "min_members": 3,
+  "civic_dependency": "cascade-brigade",
+  "art_installations_possible": [
+    "mycorrhizal-mandala",
+    "mother-tree",
+    "estuary"
+  ],
+  "activation_requirements": {
+    "trust_level": 1,
+    "civic_signoff": "cascade-brigade",
+    "safety_tests": ["SC-03"]
+  },
+  "notes": "Mycorrhizal Hub is the only camp whose primary function is connection rather than production. It has the lowest trust requirement (Level 1 — Seedling) because the whole point is radical inclusion: anyone can participate in knowledge exchange. The stamp system (mycorrhizal marks) was named after this camp's ecological source, making it the spiritual home of the recognition economy."
+}
