@@ -1,0 +1,1068 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── COLOR SCHEME: Creature Arts / Nature-Craft ───
+\definecolor{primary}{HTML}{4A148C}       % Deep violet — biology meets craft
+\definecolor{secondary}{HTML}{1565C0}     % Rich blue — rendering/digital dimension
+\definecolor{tertiary}{HTML}{2E7D32}      % Forest green — organic life
+\definecolor{accent}{HTML}{7B1FA2}        % Purple accent
+\definecolor{lightprimary}{HTML}{F3E5F5}  
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── SECTION FORMATTING ───
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── ENVIRONMENTS ───
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ─── TABLES ───
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── HEADERS & FOOTERS ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Fur, Feathers \& Animation Arts}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── HYPERLINKS ───
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Fur, Feathers and Animation Arts -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ══════════════════════════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Fur, Feathers\\[0.3em]\& Animation Arts}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Biology, Craft, Fabrication \& Moving Image}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ══════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Fur, Feathers \& Animation Arts --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Pre-Mission}
+\metafield{Context:}{Cross-domain research spanning natural science, fabrication, digital rendering, and animation arts}
+\metafield{Activation Profile:}{Fleet}
+
+\subsection{Vision}
+
+The hair of a wolf and the feather of a hummingbird are not merely coverings --- they are the universe's most elaborate solutions to the engineering problems of insulation, camouflage, display, and flight. What makes them extraordinary is not just their function but their structure: keratin filaments organized at nanoscale into light-manipulating architectures that produce iridescence, structural blues, velvet blacks, and carotenoid oranges through physics alone. They are, in the most literal sense, living photonic crystals.
+
+This mission traces that deep structure from its biological source all the way through to the hands of makers: the costumer cutting faux fur on a kitchen table, the 3D artist building PBR shaders in Blender, the animation student shooting clay at 24 fps with a smartphone, the fursuit maker shaping upholstery foam with a heat gun, and the traditional animator inking cel sheets over a light table. The organizing insight is that all of these practices share a single root --- the attempt to render animal texture convincingly, whether for science, spectacle, storytelling, or play.
+
+The map this mission traces runs from biology through textile craft, through digital representation, through physical fabrication, through the moving image, through the handmade plush and the theatrical puppet, and back around to the biology again --- because the craft that best reproduces a feather's iridescent sheen is the one that understands why that sheen exists in the first place. The same equations appear at every scale.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The biology-craft gap:} Most fabricators working with fur and feather materials --- whether in fashion, costume, or animation --- lack systematic knowledge of the microscale structures (barbs, barbules, melanosomes, cortical cells) that create the textures and colors they are trying to replicate. This gap produces technically inferior results in both physical and digital work.
+
+  \item \textbf{The texture-rendering translation problem:} Physically based rendering (PBR) workflows for fur and feathers require understanding of subsurface scattering, anisotropic reflection, and structural color --- concepts that bridge biology and computer graphics but are rarely taught together. Most 3D artists learn texture workflows without the optics.
+
+  \item \textbf{The fragmented fursuit / costume fabrication knowledge base:} Techniques for building wearable animal costumes (foam carving, tape patterning, furring, tail armatures, ear construction, 3D-printed bases) are distributed across community wikis, forum threads, and video tutorials without a unified, cross-referenced technical reference.
+
+  \item \textbf{The animation arts continuity problem:} Traditional animation crafts --- cel painting, storyboarding, claymation, puppet armatures, stop-motion --- are often treated as historical relics rather than living disciplines. The connections between these crafts and modern hybrid workflows (phone-based stop motion, digital cel simulation) are underexplored.
+
+  \item \textbf{The plush-to-pattern translation gap:} Professional plush animal construction --- pattern drafting, gusset geometry, dart placement, jointing --- is taught primarily through reverse-engineering commercial toys, not through first-principles documentation. A systematic technical reference does not exist.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Texture Stack:} Every animal covering and every representation of animal covering operates on a stack from nanoscale biology through microscale structure through macroscale pattern through craft material through rendered or animated image. Understanding any layer is enhanced by understanding all layers.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+BIOLOGICAL FOUNDATION
+  Fur (mammals)         Feathers (birds)        Hair (mammals)
+  ├─ Keratin cortex     ├─ Rachis / barbs        ├─ Medulla
+  ├─ Melanosomes        ├─ Barbules / hooklets   ├─ Cortex
+  └─ Guard / underfur   └─ Structural color      └─ Cuticle scale
+         │                      │                      │
+         └──────────────────────┴──────────────────────┘
+                                │
+                    PHYSICS OF APPEARANCE
+              Pigmentation │ Structural Color │ Iridescence
+              Carotenoids  │ Melanin arrays   │ Thin-film optics
+                                │
+         ┌──────────────────────┼──────────────────────┐
+         │                      │                      │
+  DIGITAL RENDERING      PHYSICAL CRAFT         ANIMATION ARTS
+  PBR Materials          Sewing / Pattern       Cel / Stop Motion
+  Fur/Hair Shaders       Fursuit Building       Claymation / Puppet
+  Texture Maps           Plush Construction     Storyboard / Pencil
+  Blender/Unreal         3D Print / Foam        Phone Stop Motion
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE 1: BIOLOGICAL FOUNDATIONS         [CRAFT-BIO]
+  Fur anatomy, feather microstructure, melanin/pigment,
+  structural color physics, color pattern genetics
+
+MODULE 2: DIGITAL RENDERING              [CRAFT-RENDER]
+  PBR workflows, texture/bump/normal maps, fur shaders,
+  anisotropic reflection, hair rendering (Blender, Unreal)
+
+MODULE 3: TEXTILE CRAFT & PATTERN MAKING [CRAFT-SEW]
+  Faux/real fur sewing, pattern selection, pile direction,
+  seam techniques, fur coat construction, feather craft
+
+MODULE 4: FURSUIT & COSTUME FABRICATION  [CRAFT-SUIT]
+  Foam carving, tape patterning, 3D-printed bases, EVA,
+  tail armatures, ear construction, digitigrade padding,
+  resin heads, TPU flexible prints
+
+MODULE 5: ANIMATION ARTS                 [CRAFT-ANIM]
+  Stop motion (clay/puppet/phone), cel animation, ink
+  and paint, storyboarding, plush stop motion, armatures
+
+MODULE 6: PLUSH ANIMAL CONSTRUCTION      [CRAFT-PLUSH]
+  Pattern drafting, gusset geometry, jointing, stuffing,
+  fur fabric work, professional toy construction
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+mission:
+  id: fur-feathers-animation-arts-v1
+  profile: Fleet
+  modules: 6
+  waves: 4
+
+models:
+  opus:   [CRAFT-BIO synthesis, cross-module integration,
+           historical animation narrative, optics/physics]
+  sonnet: [CRAFT-SEW, CRAFT-SUIT, CRAFT-RENDER, CRAFT-PLUSH,
+           CRAFT-ANIM survey, bibliography, verification]
+  haiku:  [schemas, shared templates, source index]
+
+parallelism:
+  wave_1a: [CRAFT-BIO, CRAFT-RENDER]     # Parallel
+  wave_1b: [CRAFT-SEW, CRAFT-SUIT]       # Parallel
+  wave_1c: [CRAFT-ANIM, CRAFT-PLUSH]     # Parallel
+  wave_2:  [INTEG synthesis]             # Sequential
+  wave_3:  [publication + verification]  # Sequential
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Fur and feather biology: structure, color mechanisms, pigment science
+  \item 3D texture and rendering workflows for organic animal materials (PBR, bump, normal, displacement maps)
+  \item Sewing and pattern-making techniques for faux fur, real fur, and feather-trimmed garments
+  \item Fursuit and animal costume construction: foam, resin, TPU/PLA 3D printing, EVA
+  \item Structural apparatus: tails (wire/foam/delrin), ears (foam/EVA), digitigrade padding, moving jaws
+  \item Stop motion animation: claymation, puppet, cutout, phone-based, object motion
+  \item Traditional animation: cel painting, ink and paint, storyboarding, dope sheets, Leica reels
+  \item Plush/stuffed animal construction: pattern geometry, gussets, jointing, professional techniques
+  \item Animatronic and puppet construction fundamentals
+  \item Cross-domain connections (e.g., how feather optics inform PBR shaders; how pattern-making applies to plush and fursuit)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Live animal handling or taxidermy
+  \item Commercial fashion industry production at scale
+  \item Full CGI character rigging and animation beyond material/texture focus
+  \item Regulatory/legal aspects of real fur trade
+  \item Sound design and music for animation
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Fur and feather microstructure documented with reference to keratin anatomy, melanosomes, barb/barbule hierarchies, and structural color mechanisms (thin film, Mie scattering, photonic crystal).
+  \item Pigmentation systems catalogued: melanins (eu/pheomelanin), carotenoids, porphyrins, and structural color distinguished with physical mechanisms explained.
+  \item PBR material workflow for fur and feathers documented with specific map types (albedo, normal, roughness, displacement, AO) and their biological correspondences.
+  \item Fur rendering techniques for Blender and Unreal Engine documented including hair particle systems, anisotropic BSDF, and fur shader nodes.
+  \item Faux fur sewing techniques documented: pattern selection, pile direction, cutting methods, seam types, lining, and finishing (minimum 8 techniques).
+  \item Fursuit head construction documented for at least 3 base types (foam carve, 3D-printed PLA/TPU, resin), with tape-patterning method included.
+  \item Structural apparatus construction documented: tails (at minimum simple tube, foam-core, wire-armature variants), ears (EVA/upholstery foam), and moving jaw mechanism.
+  \item Stop motion animation techniques catalogued: claymation, puppet (armature types), cutout, pixilation, and phone-based workflow with apps.
+  \item Traditional cel animation pipeline documented end-to-end: storyboard through dope sheet through key/inbetween through inking through painting through photography.
+  \item Plush animal pattern geometry documented including gusset types, dart placement, limb attachment, head construction, and jointing methods.
+  \item Cross-domain synthesis identifies at least 5 explicit connections between biological structure and downstream craft/rendering practice.
+  \item Source bibliography includes at minimum: 3 peer-reviewed biology sources, 3 professional craft/animation organizations, and 5 practitioner technical references.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+The Space Between (Foxglove, 2026) & Vibration/wave through-line; keratin and light as physical geometry & Feeds into \\
+The Quark and the Compiler & Computing history as fabrication history; tools as self-examination & Parallel \\
+GSD Skill-Creator & Execution handoff; this package feeds directly & Downstream \\
+3D Rendering Pipeline Missions & PBR/shader research builds on Module 2 findings & Upstream \\
+Costuming \& Textile Research & Module 3 and 4 expand existing garment craft knowledge & Parallel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A feather is a solution to the same problem that a PBR shader solves: how to represent the interaction of light with a complex hierarchical surface using the minimum number of parameters. The biology arrived at this solution through 150 million years of selection pressure; the computer graphics industry arrived at it through 40 years of rendering research. Both produced the same answer --- a layered description of absorption, scattering, and reflection at multiple scales, with a background melanin layer and a foreground structural array.
+
+This is the Amiga Principle in action: architectural leverage over brute force. The hummingbird does not carry a pigment for every iridescent hue it displays. It carries one geometry --- hollow melanosomes in an organized lattice --- and lets physics generate the palette. The 3D artist does not texture-paint every highlight; she defines the roughness map and lets the renderer solve the light. The fursuit maker does not hand-trim every fur fiber; she controls the pattern, the pile direction, and the cut, and lets the material do the rest.
+
+The making of animal-textured objects --- whether digital, woven, foamed, animated, or stuffed --- is always a collaboration between the maker's intentions and the material's own physics. Understanding the physics is not mere academic background; it is the technical foundation that separates work that merely resembles an animal from work that convinces.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Fur, Feathers \& Animation Arts --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings organized by research module. Each module corresponds to a Wave 1 agent track. Agents should use their designated module section as primary reference and the cross-module synthesis in the Integration section as connective tissue.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item American Museum of Natural History (AMNH) --- fur and feather structure, conservation biology
+  \item Cornell Lab of Ornithology --- Bird Academy, avian coloration science
+  \item Frontiers in Cell and Developmental Biology --- peer-reviewed pigmentation research
+  \item Proceedings of the Royal Society B --- structural coloration studies
+  \item Animation World Network (AWN) --- stop motion and puppet animation practice
+  \item Walt Disney Family Museum --- cel animation history and technique
+  \item Toon Boom Learn Portal --- animation pipeline documentation
+  \item Matrices.net (fursuit wiki) --- fursuit construction community reference
+  \item WikiFur --- fursuit materials and techniques encyclopedia
+  \item FreePBR.com / TextureCan / 3DTextures.me --- PBR material libraries
+\end{itemize}
+
+\subsection{Module 1: Biological Foundations}
+
+\subsubsection{Fur Anatomy and Structure}
+
+Mammalian fur consists of two primary layers: coarse outer guard hairs that repel moisture and provide coloration, and a dense underfur that traps air for insulation. In cold-adapted species such as caribou and mountain goats, guard hairs may be hollow and depigmented, enhancing both insulation and UV reflectance. Color in fur derives from melanin produced by melanocytes and deposited as melanosomes into the cortical cells of each hair shaft. Two melanin types operate in combination: eumelanin (black to brown) and pheomelanin (yellow to reddish-brown). Their ratio, density, and spatial distribution within the cortex produce the full mammalian color palette.
+
+Hair microstructure from outside to inside: the cuticle (overlapping scale-like cells determining surface texture and luster), the cortex (melanin-bearing fibrous cells providing strength and color), and the medulla (hollow central channel contributing to insulation). The cuticle scale pattern determines how light reflects from individual hairs and is a primary determinant of fur ``shine'' or ``matte'' appearance.
+
+\subsubsection{Feather Anatomy and Hierarchy}
+
+Feathers grow from follicles as outgrowths of the avian epidermis. The central shaft (rachis) extends from the base (calamus/quill) outward. From the rachis, parallel barbs extend on both sides forming the vane. From each barb, barbules project, and on many feathers, microscopic hooklets on the barbules interlock adjacent barbules --- the mechanism that ``zips'' the feather into a coherent aerodynamic surface. This interlocking can be reset by preening.
+
+Feather types are functionally differentiated: contour feathers define body shape and flight surface; down feathers (lacking interlocking barbules) trap air for insulation; semiplume feathers are intermediate; filoplume feathers are sensory; bristles protect the face. The diversity of feather structure across species represents over 10,000 solutions to the same basic engineering problem.
+
+\subsubsection{Color Mechanisms: Pigments}
+
+The AMNH identifies two primary color mechanisms that commonly occur together: biopigmentation and structural color.
+
+Biopigments are chemical compounds independent of the keratin structure. Three groups dominate avian coloration: carotenoids (yellows, oranges, reds; acquired through diet from plants and their consumers --- the flamingo's pink derives from carotenoids in algae eaten by the brine shrimp it consumes); melanins (blacks, browns, red-browns, pale yellows; produced by melanocytes directly; also provide feathers with physical strength and UV resistance --- melanin-containing feathers are measurably stronger and more wear-resistant than unpigmented white feathers); and porphyrins (browns, reds, greens, and pinks; fluoresce red under UV light; produced by modifying amino acids).
+
+Preen oil from the uropygial gland can itself contain biopigments --- some birds apply a tinted oil that shifts the apparent color of white feathers.
+
+\subsubsection{Color Mechanisms: Structural Color}
+
+Structural color does not require chemical pigment. It results from physical interactions of light at the interfaces of biological materials with different refractive indices. Two main mechanisms operate in feathers:
+
+\textbf{Non-iridescent structural color} (blues and greens): Air-filled cavities in the barb rami scatter incident light via Mie scattering or coherent scattering, selectively reflecting short wavelengths. The indigo bunting's brilliant blue exists only in reflected light --- backlit, the feather appears brown, because the transmitted light is not scattered. Grinding a blue feather to powder destroys the structure and eliminates the color; grinding a red feather preserves the carotenoid pigment. This distinction is the simplest empirical test separating structural from pigment color.
+
+\textbf{Iridescent structural color}: Organized, finely laminated nanostructures in barbule cells create thin-film interference. Melanosomes (melanin organelles) are arranged in periodic arrays at scales matching the wavelength of visible light, producing interference patterns that shift with viewing angle. Hummingbird gorgets, peacock tail feathers, and birds-of-paradise display feathers all operate on this principle. The geometry of the melanosome array --- platelet, rod, hollow sphere, or spherical --- determines the specific iridescent hue.
+
+Melanin simultaneously functions as both a conventional pigment (absorbing broadband visible light) and as a nanostructural element (providing the periodic array required for structural color). In iridescent feathers, the two functions are inseparable.
+
+``Super-black'' plumage, recently documented in birds-of-paradise, is produced by vertically oriented spiky barbule microstructures that trap light through multiple internal reflections, absorbing more than 99.9\% of incident light --- a higher absorptance than most engineered black materials.
+
+\subsubsection{Color Pattern Formation}
+
+Macro-level pigment patterns (stripes, spots, countershading) arise from spatiotemporal modulation of melanin deposition during hair and feather growth, governed by reaction-diffusion mechanisms (Turing patterns). Micro-level patterns within a single feather (spots, chevrons, rings, stripes) similarly arise from melanocyte signaling during follicle development. The same mathematical framework describes both scales.
+
+\subsection{Module 2: Digital Rendering}
+
+\subsubsection{PBR Workflow Overview}
+
+Physically Based Rendering (PBR) models light interaction with surfaces using parameters that correspond to measurable physical properties. Standard PBR map types for organic materials:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Map Type} & \tableheader{Physical Meaning} & \tableheader{Biological Correspondence} \\
+\midrule
+Albedo / Base Color & Diffuse reflectance color & Pigment color, structural color hue \\
+Normal Map & Surface micro-normals & Cuticle scale orientation, barbule angle \\
+Roughness / Glossiness & Micro-surface smoothness & Cuticle scale regularity; wet vs. dry fur \\
+Displacement / Height & Geometry displacement & Fur pile depth, feather vane relief \\
+Ambient Occlusion & Self-shadowing & Dense underfur shadow; barb occlusion \\
+Specular / Metallic & Mirror-like reflection & Iridescent barbule; oil-slick wetness \\
+Subsurface Scattering & Light through thin material & Light through feather vane, thin ear fur \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Fur and Hair Rendering}
+
+Fur and hair rendering in Blender and Unreal Engine use particle-based or curve-based geometry for individual fiber simulation, combined with BSDF (Bidirectional Scattering Distribution Function) shaders that model the anisotropic reflectance of cylindrical fibers. Blender's Hair BSDF node includes melanin absorption, roughness, and radial/longitudinal tilt controls that map directly to hair cortex pigmentation, cuticle condition, and medulla structure.
+
+Microstructure-based feather appearance models (as documented in the computer graphics literature, ScienceDirect 2021) require going beyond simplified shaft-and-barb geometry. Accurate far-field appearance requires modeling barb substructure contributions: the aggregate scattering from barbule populations, not merely individual barb curves. Rendering individual barbs as NURBS or Bezier curves, the standard simplification, systematically misrepresents the total scattered light.
+
+\subsubsection{PBR Texture Resources}
+
+Free and commercial PBR fur/feather texture sets are available from FreePBR.com (stylized animal fur, feathers, beast fur sets at 2048x2048px with albedo, normal, roughness, displacement, metallic, and AO maps), TextureCan (adjustable fur with SBSAR format allowing color and curl adjustment), CGAxis (tileable cow/bear fur with V-Ray/Blender/Unreal presets), and Poliigon (studio-grade organic materials). All major texture sets are compatible with Blender, Maya, 3DS Max, Cinema 4D, Unity, and Unreal Engine using metalness/roughness PBR workflow.
+
+\subsection{Module 3: Textile Craft \& Pattern Making}
+
+\subsubsection{Fur Fabric Types}
+
+Faux fur types range from short-pile craft fur (avoid for professional work --- visible backing, poor drape) through medium-pile ``teddy'' and ``minky'' fabrics through long-pile luxury faux fur at 20+ dollar per yard (recommended minimum quality for visible results). Faux fur types include: straight pile, curly/swirl pile (Persian lamb effect), shag, and sculpted/tip-dyed varieties. Fabric selection determines pile direction management, cutting approach, and seam visibility.
+
+\subsubsection{Pattern Selection Principles}
+
+Successful faux fur garment patterns share key properties: minimal seam count (seams are not hidden by texture as in other fabrics), straight-cut or slight A-line silhouettes (avoids distortion of pile), cut-on sleeves (reduces shoulder seam complexity), and simple collar treatments. As documented by Kenneth D. King (FIT/Threads Magazine): avoid patch pockets, complex welts, and over-fitted silhouettes. The Fur Institute of Canada documents that professional fur coat construction requires 40--60 hours minimum, doubling for bespoke details.
+
+\subsubsection{Cutting Techniques}
+
+Faux fur must be cut backing-side up using a rotary cutter or single-edge razor blade (not scissors) to cut only the backing without severing pile fibers. Pattern pieces must be laid out respecting pile direction (all pieces oriented the same way unless deliberate contrast is intended). For real fur, the ``letting out'' technique cuts pelts diagonally into narrow strips and resews them to achieve length and thinness without bulk --- a technique unique to professional furriery.
+
+\subsubsection{Seam and Construction Techniques}
+
+Key faux fur sewing techniques:
+\begin{itemize}[noitemsep]
+  \item Use a long stitch (8--12mm) to avoid destroying pile fibers in the seam
+  \item After sewing, use a pin or seam ripper to pull trapped pile fibers out of the seamline
+  \item Do not press seams --- bulk management is handled by hand-tacking, not ironing
+  \item Double seam allowances (minimum 3/4 inch) to allow folding under without exposing backing
+  \item For structured garments: hair canvas (bias-cut) stabilizes upper back and front; herringbone tape stabilizes hems; woollen batting provides warmth between fur and lining layers
+  \item Lining is typically silk for luxury fur coats; smooth lining fabric allows the garment to slide on and off without catching underfur
+\end{itemize}
+
+\subsection{Module 4: Fursuit \& Costume Fabrication}
+
+\subsubsection{Head Base Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Base Type} & \tableheader{Properties} & \tableheader{Best For} \\
+\midrule
+Hand-carved foam & Lightweight, forgiving, low cost, no equipment & Beginners; first build \\
+3D-printed PLA & Rigid, symmetric, replicable, moving jaw capable & Moving jaws; production \\
+3D-printed TPU & Flexible like foam, symmetric like print & Durability + softness \\
+Resin cast & Smooth surface, realistic proportions & Realistic builds; small heads \\
+Expanding foam & Good for series production & Multiple identical heads \\
+Balaclava base & Cloth base with foam features added & Soft suits; partial builds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Foam Carving and Tape Patterning}
+
+The foundational fursuit construction method uses 1/2-inch upholstery foam for head shells and facial features, with 2--3 inch foam for muzzle, cheeks, and brow. Foam is shaped by cutting, heat-gun forming, and contact-cement bonding. Tape patterning (covering completed foam base in duct tape, drawing cut lines, cutting off panels, flattening) creates precise 2D patterns for the fur covering layer. All seams become seamlines in the fur fabric.
+
+EVA foam (craft foam, used for floor mats) is preferred for ears, structural elements, and details requiring heat-molding precision. Heat-gun application allows EVA to be shaped and cooled into permanent forms.
+
+\subsubsection{3D Printing for Fursuit Components}
+
+3D-printed fursuit components are produced in PLA (rigid, strong --- noses, eyelids, teeth, claws), Nylon (flexible, travel-safe --- full head bases), and TPU (flexible, foam-like --- full head bases; all-infill for maximum durability). PLA head bases with 3mm wall thickness are comparable in strength to resin. 3D models for fursuit head bases are available on Thingiverse and Cults3D in canine, feline, kemono, realistic, and fantastical species variants, many with integrated moving jaw hinges and ventilation holes.
+
+Digital sculpting workflow: sculpt in Nomad Sculpt (iPad) or Blender (desktop) at high polygon count for desired shape; retopologize for printability; add ventilation holes, strap attachment points, and jaw hinge geometry; export as STL; slice and print.
+
+\subsubsection{Body, Tail, and Structural Apparatus}
+
+Body construction uses commercial fur cut and sewn to a fitted pattern with a zipper back closure (concealed by snap-over fur flap). Padding shapes include foam inserts for shoulders, hips, and digitigrade leg illusion. Digitigrade padding extends behind the calf to create the illusion of a backward-bending knee joint.
+
+\textbf{Tails:} Simple tails are fabric tubes with sewn ends, stuffed with polyfill. Structured tails use internal armatures: Delrin rod (rigid), aluminum wire (poseable), or foam core (lightweight volume). Large bushy tails (squirrel, skunk) use aluminum support frames attached to internal harnesses worn by the performer. The ``zip-on tail technique'' (Matrices.net) installs a zipper at the base for clean attachment with smooth body-to-tail transition.
+
+\textbf{Ears:} Ear construction from upholstery foam or EVA foam. Cut ear shape with curved base to sit upright on head. Bevel outer edge to splay outward. Attach to head base and reinforce bond with felt strip and hot glue. Fur panels are cut and glued or sewn to cover.
+
+\textbf{Moving jaws:} Balaclava-based moving jaws use elastic sewn to chin, cheeks, and crown that opens the jaw when the wearer opens their mouth. Foam-and-hinge moving jaws use a physical hinge mechanism driven by head tilt. 3D-printed bases excel at moving jaw integration due to rigid hinge geometry.
+
+\subsection{Module 5: Animation Arts}
+
+\subsubsection{Stop Motion Overview}
+
+Stop motion animation captures objects in small incremental movements, photographing each position, then plays the sequence to create the illusion of motion. Standard frame rates: 24 fps (film), 30 fps (video); common practice shoots ``on twos'' (one unique frame per two fps) or ``on threes'' for slower movement, reducing required images by 50--67\%. One minute of animation at 24 fps on twos requires 720 unique frames.
+
+\textbf{Stop motion types:} Claymation (plasticine/clay figures); puppet animation (articulated puppets with armatures); cutout animation (flat paper/card elements); pixilation (live actors treated frame-by-frame); object motion (found objects, Lego, toys); and silhouette animation (backlit cutout shadows).
+
+\subsubsection{Claymation Techniques}
+
+Clay animation uses malleable material (plasticine preferred for professional work: Newplast/HUE, Jovi, Nara brands; Van Aken for color range). Clay figures may be built around aluminum wire armatures for structural support, or sculpted entirely from clay for maximum morphability. Armature wire gauge selection balances posability against fatigue breakage. Supplemental lightweight materials (Sculpey Ultralight baked onto wire; Plastezote foam padding) reduce figure weight. Clay under hot lights softens; working at lower temperatures or using a freezer to reset firmness is standard practice.
+
+\textbf{Mouth techniques:} Single clay mouth re-sculpted each frame (Will Vinton Claymation style); wire mouth bent and shaped each frame (Nightmare Before Christmas, Oogie Boogie); replacement mouth sets (Laika/Coraline method --- multiple unique mouth shapes 3D-printed for each phoneme or expression, swapped between frames for efficiency).
+
+\subsubsection{Puppet Animation}
+
+Professional stop motion puppets use ball-and-socket armatures (machined metal joints with adjustable friction --- expensive but durable), wire armatures (aluminum wire, inexpensive but fatigues and breaks), and plug-in wire armatures (modular design allowing limb replacement). Foam latex covering provides soft, painted skin. Silicone casting provides durable, realistic skin with better deformation properties.
+
+Puppet design must account for balance (large heads/small feet require weighted feet or tie-down rigs), gravity (puppets are posed on set, not suspended --- tie-down bolts through foot holes into set floor are standard), and scale (features must be large enough to animate with finger precision).
+
+\subsubsection{Smartphone Stop Motion}
+
+Modern smartphone stop motion workflow: fixed phone position (tripod/phone mount essential), consistent artificial lighting (avoid windows/sunlight --- shifting shadows destroy continuity), stop motion app (Stop Motion Studio, Dragonframe Mobile, Cloud Stop Motion), onion skin preview (overlay of previous frame on live view to guide incremental movement). Apps assemble frames into video at chosen fps and export directly.
+
+\subsubsection{Traditional Cel Animation Pipeline}
+
+Storyboarding (developed at Walt Disney Productions in the early 1930s) is the first step: sequences of hand-drawn panels showing scene composition, character positions, action, and transitions. The Leica reel (animatic) assembles storyboard panels with audio to establish timing and pacing before full animation begins.
+
+Key animation stages: animators draw key poses (keyframes); inbetweeners draw transitional frames; clean-up artists trace rough keys onto clean paper or directly onto cels. Cels (celluloid sheets, later acetate) receive inked outlines on front and acrylic paint on reverse. The float painting method --- keeping the brush slightly above the cel surface to let paint puddle --- produces even coverage without streaks.
+
+\textbf{Dope sheets (exposure sheets):} Technical blueprints specifying which cel goes on which frame, timing of each action, and camera instructions. Multiple cels (character layer, foreground element layer, special effect layer) are composited over static painted backgrounds and photographed on an animation camera.
+
+\textbf{Digital transition:} Xerography (Ub Iwerks, Disney, late 1950s) eliminated the inking stage by copying pencil drawings directly onto cels. Disney's CAPS system (1990, developed with Pixar) moved the entire ink-and-paint process to digital, eliminating acetate cels entirely. Current digital equivalents: TVPaint, Toon Boom Harmony, OpenToonz, Adobe Animate, Krita.
+
+\subsection{Module 6: Plush Animal Construction}
+
+\subsubsection{Pattern Geometry Fundamentals}
+
+Plush/stuffed animal patterns transform 3D animal forms into 2D fabric pieces that, when sewn, reassemble into the original volume. The core geometric challenge is the same as in cartography: flattening a curved surface without distortion. Solutions involve dart placement (removing wedges of fabric to create curves), gusset insertion (adding width in strategic zones), and panel subdivision (splitting complex surfaces into multiple flattened pieces).
+
+\textbf{Pattern development methods:}
+\begin{itemize}[noitemsep]
+  \item \textbf{Building from simple shapes:} Start with basic geometric volumes (sphere for head, cylinder for body/limbs) and modify
+  \item \textbf{Model wrapping:} Build a 3D prototype form (wire and wadding), wrap with fabric scraps, draw seam lines, cut off and flatten
+  \item \textbf{Reverse engineering:} Seam-rip a commercial toy to extract its pattern pieces as templates
+  \item \textbf{Digital conversion:} Tools such as Plushify.net convert 3D mesh models directly into flat sewing patterns
+\end{itemize}
+
+\subsubsection{Key Construction Elements}
+
+\textbf{Head gussets:} A gusset running over the top of the head (crown to nose) adds width and dome shape that flat-panel construction cannot achieve. Side gussets broaden the face.
+
+\textbf{Limb attachment:} Fixed-seam attachment (sewn directly to body) produces rigid poses. Jointed attachment uses button joints (simple, low-cost), lock-nut joints (more secure), or ball-socket joints (professional-grade, found in collectible teddy bears).
+
+\textbf{Fabric selection:} Minky/cuddle fabric (ultra-soft, minimal stretch, easiest for beginners); fleece (forgiving, minimal fraying); faux fur (high visual impact, requires pile management); felt (no fraying, suitable for small details, best in wool blend).
+
+\textbf{Stuffing:} Polyester fiberfill (standard); polypellets (for weighted feel); foam chunks (for firm shapes); combinations. Eyes: safety eyes (plastic, lock-nut attachment through fabric); embroidered eyes (child-safe); glass eyes (most realistic, used in collectible work).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
+\midrule
+Real fur sourcing & Ethical and legal complexities of real fur; faux fur alternatives widely available and technically equivalent for most craft applications & ANNOTATE \\
+Child safety (plush) & Safety eyes and small parts unsafe for children under 3; standards vary by jurisdiction & GATE \\
+Chemical safety & Contact cement (fursuit construction) requires ventilation; VOC exposure risk & GATE \\
+Intellectual property & Many fursuit/plush patterns are CC-licensed for personal use only; commercial production requires explicit permission from pattern designers & ANNOTATE \\
+Heat tools & Heat gun use on EVA foam requires ventilation; PLA 3D printing releases ultrafine particles & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+
+\begin{itemize}[noitemsep]
+  \item Prum, R.O. (1999). Anatomy, physics, and evolution of structural colors in birds. International Ornithology Congress. Yale University / Prum Lab.
+  \item Baron, J., Dhillon, D.S., Smith, N.A. (2021). Microstructure-based appearance rendering for feathers. \textit{Computers \& Graphics}, Elsevier. DOI:10.1016/j.cag.2021.
+  \item Inaba, M. \& Chuong, C.-M. (2020). Avian pigment pattern formation: developmental control of macro- and micro-level patterns. \textit{Frontiers in Cell and Developmental Biology}, 8, 620.
+  \item Shawkey, M. et al. (various). Melanin-based structural coloration of birds and biomimetic applications. \textit{PMC / NCBI}.
+  \item McCoy, D. et al. (2018). Super black feathers of birds-of-paradise. \textit{Nature Communications}.
+\end{itemize}
+
+\subsubsection{Government and Professional Organizations}
+
+\begin{itemize}[noitemsep]
+  \item AMNH (American Museum of Natural History). Fur and Feathers: Composition and Structure. amnh.org/research
+  \item Cornell Lab of Ornithology. How Birds Make Colorful Feathers. Bird Academy.
+  \item Fur Institute of Canada. Making a Coat: techniques and process overview. fur.ca
+  \item Animation World Network (AWN). The Advanced Art of Stop-Motion Animation.
+  \item Walt Disney Family Museum. Cel Animation: history and technique.
+\end{itemize}
+
+\subsubsection{Practitioner Technical References}
+
+\begin{itemize}[noitemsep]
+  \item Matrices.net (fursuit.livejournal.com). Fursuit building tutorials: foam head, tape patterning, furring.
+  \item WikiFur. Fursuit making: materials, components, maintenance. en.wikifur.com
+  \item fursuitmak.ing. Types of Fursuit Headbases; 3D Headbase Modeling Tutorial.
+  \item Threads Magazine. Sewing with Fake Fur: Pattern Selection, Construction, and Completion. Kenneth D. King.
+  \item Adobe Creative Cloud. Stop Motion Animation: types and techniques overview.
+  \item FreePBR.com. Feathers PBR, Stylized Animal Fur PBR, Beast Fur PBR texture sets.
+  \item Daros, S. Stop-Motion \& Claymation: Frame Rates, Materials, Techniques. scottdaros.com
+  \item Priebe, K.A. The Advanced Art of Stop-Motion Animation: Building Puppets, Part 1. AWN.
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Fur, Feathers \& Animation Arts --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, cross-referenced research document covering six interconnected domains --- biological foundations of fur and feather, digital PBR rendering, textile craft and pattern making, fursuit/costume fabrication, animation arts, and plush construction --- with explicit bridges between biological science and downstream craft and rendering practice.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  └─ HAIKU: Source index schema, shared terminology glossary,
+     module template, cross-reference schema
+
+WAVE 1: Parallel Research Tracks (3 simultaneous)
+  ├─ Track A: CRAFT-BIO (Opus) + CRAFT-RENDER (Sonnet)
+  ├─ Track B: CRAFT-SEW (Sonnet) + CRAFT-SUIT (Sonnet)
+  └─ Track C: CRAFT-ANIM (Sonnet) + CRAFT-PLUSH (Sonnet)
+
+WAVE 2: Integration + Synthesis
+  └─ OPUS: Cross-domain connections, through-line narrative,
+     5+ explicit biology-to-craft bridges, unified glossary
+
+WAVE 3: Publication + Verification
+  ├─ SONNET: Final document assembly, formatting
+  ├─ VERIFY: Source validation, numerical attribution check
+  └─ CAPCOM: Human review gate before delivery
+\end{asciibox}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Biological Foundations Module & Fur/feather anatomy, all pigment systems, structural color mechanisms documented with peer-reviewed citations & 1A \\
+2 & Digital Rendering Module & PBR map types, fur/hair shaders, texture resources catalogued & 1A \\
+3 & Textile Craft Module & 8+ sewing techniques, pattern selection, cutting methods documented & 1B \\
+4 & Fursuit Fabrication Module & 3 head base types, tape patterning, structural apparatus (tails/ears/jaws) documented & 1B \\
+5 & Animation Arts Module & 5 stop motion types, clay technique, puppet armatures, cel pipeline end-to-end documented & 1C \\
+6 & Plush Construction Module & 4 pattern methods, gusset/dart/joint types, fabric types documented & 1C \\
+7 & Integration Synthesis & 5+ cross-domain bridges identified and documented & 2 \\
+8 & Final Research Document & All modules unified, consistent voice, complete bibliography & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Schemas \& Index & None & Haiku & 4K \\
+CRAFT-BIO: Biology module & Wave 0 & Opus & 18K \\
+CRAFT-RENDER: Rendering module & Wave 0 & Sonnet & 12K \\
+CRAFT-SEW: Textile module & Wave 0 & Sonnet & 12K \\
+CRAFT-SUIT: Fursuit module & Wave 0 & Sonnet & 16K \\
+CRAFT-ANIM: Animation module & Wave 0 & Sonnet & 16K \\
+CRAFT-PLUSH: Plush module & Wave 0 & Sonnet & 12K \\
+INTEG: Synthesis & All Wave 1 & Opus & 14K \\
+VERIFY: Validation & All modules & Sonnet & 8K \\
+Final assembly & INTEG, VERIFY & Sonnet & 10K \\
+\midrule
+\multicolumn{3}{l}{\textbf{Estimated total token budget}} & \textbf{122K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & Biology synthesis, Integration & Complex physics/optics reasoning; cross-domain synthesis requires judgment; through-line construction \\
+Sonnet & All craft modules, Verification, Assembly & Survey compilation, structured content, document production, accuracy checking \\
+Haiku & Wave 0 schemas & Template and scaffolding generation; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{3cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Description} & \tableheader{Agents} & \tableheader{Mode} \\
+\midrule
+0 & Foundation: schemas, source index, glossary template & Haiku & Sequential \\
+1A & Biology + Rendering research tracks & CRAFT-BIO (Opus), CRAFT-RENDER (Sonnet) & Parallel \\
+1B & Textile + Fursuit research tracks & CRAFT-SEW (Sonnet), CRAFT-SUIT (Sonnet) & Parallel \\
+1C & Animation + Plush research tracks & CRAFT-ANIM (Sonnet), CRAFT-PLUSH (Sonnet) & Parallel \\
+2 & Cross-domain integration and synthesis & INTEG (Opus) & Sequential \\
+3 & Publication, verification, and delivery & VERIFY (Sonnet), EXEC (Sonnet), CAPCOM & Sequential \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Source index schema & JSON schema for source records & Haiku \\
+Module template & Markdown template for all 6 modules & Haiku \\
+Terminology glossary & Shared terms list: keratin, barbule, PBR, etc. & Haiku \\
+Cross-reference schema & Format for inter-module citation & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Biology and Rendering (Simultaneous):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Fur anatomy survey & Hair shaft, medulla, cortex, cuticle, pigmentation & CRAFT-BIO (Opus) \\
+Feather anatomy survey & Rachis, barbs, barbules, hooklets, feather types & CRAFT-BIO (Opus) \\
+Pigment science & Melanins, carotenoids, porphyrins with sources & CRAFT-BIO (Opus) \\
+Structural color physics & Thin film, Mie scatter, photonic crystal, iridescence & CRAFT-BIO (Opus) \\
+Color pattern genetics & Reaction-diffusion, melanocyte signaling & CRAFT-BIO (Opus) \\
+PBR map types & All 7 map types with biological correspondence & CRAFT-RENDER (Sonnet) \\
+Fur/hair shader survey & Blender Hair BSDF, Unreal XGen, anisotropic BSDF & CRAFT-RENDER (Sonnet) \\
+Feather rendering survey & Microstructure approaches, barbule scattering models & CRAFT-RENDER (Sonnet) \\
+Texture resource catalog & FreePBR, TextureCan, 3DTextures, Poliigon entries & CRAFT-RENDER (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Textile and Fursuit (Simultaneous):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Faux fur fabric types & Pile types, quality grades, sourcing & CRAFT-SEW (Sonnet) \\
+Pattern selection guide & A-line, minimal seam, cut-on sleeve principles & CRAFT-SEW (Sonnet) \\
+Cutting techniques & Backing-side cut, rotary, pile direction management & CRAFT-SEW (Sonnet) \\
+Seam techniques & Long stitch, pile extraction, no-press methods & CRAFT-SEW (Sonnet) \\
+Internal structure & Hair canvas, batting, interlining, silk lining & CRAFT-SEW (Sonnet) \\
+Head base type survey & Foam, PLA, TPU, resin, expanding foam, balaclava & CRAFT-SUIT (Sonnet) \\
+Foam carving method & Step-by-step with tape patterning & CRAFT-SUIT (Sonnet) \\
+3D printing for fursuits & Materials, settings, Thingiverse resources & CRAFT-SUIT (Sonnet) \\
+Structural apparatus & Tail variants, ear construction, moving jaw & CRAFT-SUIT (Sonnet) \\
+Body construction & Zipper, padding, digitigrade, zip-on tail & CRAFT-SUIT (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Animation and Plush (Simultaneous):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Stop motion types survey & 6 types with examples & CRAFT-ANIM (Sonnet) \\
+Claymation technique & Clay types, armatures, mouth methods & CRAFT-ANIM (Sonnet) \\
+Puppet armature types & Ball-socket, wire, plug-in; foam latex, silicone & CRAFT-ANIM (Sonnet) \\
+Phone stop motion workflow & Apps, tripod, lighting, frame rates & CRAFT-ANIM (Sonnet) \\
+Cel animation pipeline & Storyboard through photography, dope sheets & CRAFT-ANIM (Sonnet) \\
+Digital cel tools & TVPaint, Toon Boom, Krita, OpenToonz survey & CRAFT-ANIM (Sonnet) \\
+Plush pattern methods & 4 development methods documented & CRAFT-PLUSH (Sonnet) \\
+Gusset and dart geometry & Crown gusset, belly gusset, side panel variants & CRAFT-PLUSH (Sonnet) \\
+Limb and joint types & Fixed, button joint, lock-nut, ball-socket & CRAFT-PLUSH (Sonnet) \\
+Fabric and stuffing survey & Minky, fleece, fur, felt; polyfill, pellets, foam & CRAFT-PLUSH (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Integration Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Cross-domain bridge identification & 5+ explicit biology-to-craft/render connections & INTEG (Opus) \\
+Unified terminology reconciliation & Single glossary resolving module conflicts & INTEG (Opus) \\
+Through-line narrative & 2-page synthesis tying all modules to core concept & INTEG (Opus) \\
+Module cross-references & Inter-module citations formatted per Wave 0 schema & INTEG (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Source validation & All citations verified against source quality rules & VERIFY (Sonnet) \\
+Numerical attribution check & Every statistic/measurement traced to source & VERIFY (Sonnet) \\
+Safety check & IP notices, chemical safety notes, child safety flags & VERIFY (Sonnet) \\
+Document assembly & All modules unified into single publication & EXEC (Sonnet) \\
+Human review gate & User approves before final delivery & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 output (schemas, glossary) cached and prefixed to all Wave 1 agent prompts
+  \item Source bibliography seeded in Wave 0 to enable all agents to use consistent citation format without re-deriving
+  \item Each Wave 1 module is fully self-contained to enable parallel execution without inter-agent dependencies
+  \item Wave 2 INTEG receives all 6 modules as input; Opus context window is sized accordingly (18K+ available)
+  \item VERIFY receives final assembled document; no need to re-read individual modules
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+    |
+    +── [Wave 1A: CRAFT-BIO] ──+
+    |                           |
+    +── [Wave 1A: CRAFT-RENDER]─+
+    |                           |
+    +── [Wave 1B: CRAFT-SEW] ───+── [Wave 2: INTEG] ── [Wave 3: VERIFY]
+    |                           |                              |
+    +── [Wave 1B: CRAFT-SUIT] ──+                     [Wave 3: EXEC]
+    |                           |                              |
+    +── [Wave 1C: CRAFT-ANIM] ──+                     [Wave 3: CAPCOM]
+    |                           |
+    +── [Wave 1C: CRAFT-PLUSH] ─+
+
+Parallel: Waves 1A, 1B, 1C execute simultaneously
+Sequential gates: Wave 0 → Wave 1 → Wave 2 → Wave 3
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 20 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{39} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, professional organizations, or practitioner technical references. Zero entertainment media or unsourced claims. \\
+SC-NUM & Numerical attribution & Every measurement, percentage, or quantitative claim attributed to a specific named source \\
+SC-ADV & No policy advocacy & Content on real fur presents facts only; no advocacy for or against real fur use \\
+SC-IP & Intellectual property & All pattern and tutorial references note licensing restrictions (personal-use only vs. commercial) \\
+SC-SAF & Safety notices present & Chemical (contact cement, VOC), heat tool, and child safety (small parts) notices included where relevant \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Fur anatomy completeness & Guard hair, underfur, medulla, cortex, cuticle all documented \\
+CF-02 & Feather hierarchy completeness & Rachis, barb, barbule, hooklet all documented with function \\
+CF-03 & Pigment systems coverage & Melanin (eu/pheo), carotenoids, porphyrins all covered with examples \\
+CF-04 & Structural color mechanisms & Non-iridescent (Mie/coherent) and iridescent (thin film/interference) both documented \\
+CF-05 & Super-black mechanism & Birds-of-paradise microstructure mechanism documented \\
+CF-06 & PBR map coverage & All 7 map types documented with biological correspondence \\
+CF-07 & Fur shader documentation & Blender Hair BSDF parameters documented; Unreal equivalent noted \\
+CF-08 & Faux fur techniques count & At minimum 8 specific techniques documented \\
+CF-09 & Head base type coverage & Minimum 3 base types with pros/cons \\
+CF-10 & Tape patterning documented & Step-by-step tape patterning method present \\
+CF-11 & Tail variants documented & Simple tube, foam-core, wire-armature variants documented \\
+CF-12 & Stop motion types count & Minimum 5 types documented with named examples \\
+CF-13 & Claymation clay types & At least 3 clay brands/types with properties documented \\
+CF-14 & Cel animation pipeline & 7-stage pipeline (storyboard through photography) documented \\
+CF-15 & Dope sheet documented & Function and use of exposure/dope sheet explained \\
+CF-16 & Phone stop motion workflow & Apps, frame rate, lighting, and output documented \\
+CF-17 & Plush pattern methods & 4 development methods documented \\
+CF-18 & Gusset types documented & Crown, belly gusset, side panel all present \\
+CF-19 & Joint types documented & Fixed, button, lock-nut, ball-socket documented \\
+CF-20 & Fabric/stuffing options & Minimum 4 fabric types and 3 stuffing types documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Biology → Rendering bridge & Structural color mechanism (thin-film/Mie) explicitly connected to PBR map type or shader parameter \\
+IN-02 & Biology → Sewing bridge & Pile direction (guard hair directionality) connected to faux fur cutting/layout technique \\
+IN-03 & Biology → Fursuit bridge & Fur layer hierarchy (guard/underfur) connected to fursuit fur selection or trimming \\
+IN-04 & Biology → Animation bridge & Feather/fur color mechanism connected to how animators or texture artists replicate the effect \\
+IN-05 & Fursuit → Plush bridge & Tape patterning method noted as applicable to both fursuit and plush pattern development \\
+IN-06 & Cel → Stop Motion bridge & Principles of keyframe/inbetween explicitly connected to stop motion pose planning \\
+IN-07 & Cross-module consistency & Same material (e.g., faux fur) described consistently across textile, fursuit, and plush modules \\
+IN-08 & Document self-containment & All technical terms defined; bibliography complete; no unexplained references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Fur/feather microstructure documented & CF-01, CF-02 & Pending \\
+2. Pigmentation systems catalogued & CF-03, CF-04, CF-05 & Pending \\
+3. PBR map workflow documented & CF-06 & Pending \\
+4. Fur rendering techniques documented & CF-07 & Pending \\
+5. Faux fur sewing techniques (8+) & CF-08 & Pending \\
+6. Fursuit head construction (3 types) & CF-09, CF-10 & Pending \\
+7. Structural apparatus documented & CF-11 & Pending \\
+8. Stop motion techniques catalogued (5+) & CF-12, CF-13, CF-16 & Pending \\
+9. Cel animation pipeline documented & CF-14, CF-15 & Pending \\
+10. Plush pattern geometry documented & CF-17, CF-18, CF-19, CF-20 & Pending \\
+11. Cross-domain bridges (5+) & IN-01 through IN-06 & Pending \\
+12. Source bibliography complete & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate decisions; go/no-go \\
+PLAN & Planner & Wave decomposition; parallel track scheduling \\
+SCOUT & Research Agent & Web research; source gathering; gap filling \\
+EXEC & Executor $\times$2 & Document production; one per parallel track pair \\
+CRAFT-BIO & Biology Specialist & Feather/fur anatomy, color science, structural optics (Opus) \\
+CRAFT-RENDER & Rendering Specialist & PBR workflows, shader documentation, texture catalog \\
+CRAFT-SEW & Textile Specialist & Sewing, pattern making, fur garment construction \\
+CRAFT-SUIT & Fabrication Specialist & Fursuit/costume construction, structural apparatus \\
+CRAFT-ANIM & Animation Specialist & Stop motion, cel animation, storyboard, animation craft \\
+CRAFT-PLUSH & Plush Specialist & Stuffed animal construction, pattern geometry, jointing \\
+INTEG & Integration Agent & Cross-domain synthesis; 5+ bridge identification \\
+VERIFY & Verification & Source validation; SC-SRC, SC-NUM, SC-IP, SC-SAF \\
+CAPCOM & HITL Interface & Human review gate; the only channel to the researcher \\
+BUDGET & Resource Manager & Token budget tracking across 6 modules \\
+SURGEON & Health Monitor & Research quality monitoring; flag thin evidence \\
+LOG & Chronicle & Commit messages; wave summaries; audit trail \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions across modules \\
+SECURE & Security & Safety boundary enforcement (SC tests) \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; feeds INTEG \\
+RETRO & Retrospective & Post-wave analysis; lessons learned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Waves 1A, 1B, 1C) \\
+Total Waves & 4 (0 through 3) \\
+Crew Size & 21 roles \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Token Budget & 122K total \\
+Estimated Sessions & 4--6 Claude Code sessions \\
+Human Gates & 1 (CAPCOM review, Wave 3) \\
+Safety-Critical Tests & 5 (all mandatory-pass) \\
+Total Tests & 39 \\
+Success Criteria & 12 \\
+Cross-Domain Bridges Required & 5 minimum \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The hummingbird does not carry a pigment for every color it displays. It carries one geometry --- and lets physics generate the palette.''} 
+
+\vspace{0.5em}
+The same principle governs every craft in this mission. The fursuit maker controls pile direction, not individual fibers. The PBR artist controls roughness and normal, not individual photons. The claymation animator controls the armature, not every molecular bond in the clay. The cel painter controls the outline and the base color, not the psychology that makes a character feel alive.
+
+Understanding the deep structure --- whether in a barbule lattice or a pattern gusset --- is what allows a maker to work with the physics, not against it. That is the through-line: from nanoscale keratin to the animation camera, the universe is always doing most of the work. The artist's task is to set up the conditions under which it can.
+\end{quotebox}
+
+\end{document}

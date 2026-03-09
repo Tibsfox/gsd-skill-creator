@@ -10,7 +10,8 @@
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
-    { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' }
+    { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
+    { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' }
   ];
 
   // Detect current project from URL path
