@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fur, Feathers &amp; Animation Arts — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F9F5FF;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #4A148C 0%, #311B92 60%, #1565C0 100%);
+      padding: 3rem 2rem 2.5rem;
+      color: white;
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #CE93D8;
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    header p.subtitle {
+      font-size: 1.05rem;
+      color: #B39DDB;
+      margin-bottom: 0.3rem;
+    }
+    header p.meta {
+      font-size: 0.82rem;
+      color: #9575CD;
+      margin-top: 1rem;
+    }
+    .pipeline {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .pipeline span {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #E1BEE7;
+    }
+    .pipeline .arrow {
+      display: flex;
+      align-items: center;
+      color: #9575CD;
+      font-size: 1.1rem;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+    .files {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .files { grid-template-columns: 1fr; } }
+    .file-card {
+      background: #EDE7F6;
+      border: 1px solid #CE93D8;
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .file-card:hover {
+      background: #D1C4E9;
+      box-shadow: 0 4px 16px rgba(74,20,140,0.12);
+    }
+    .file-card .file-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #7B1FA2;
+      margin-bottom: 0.4rem;
+    }
+    .file-card h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #311B92;
+      margin-bottom: 0.3rem;
+    }
+    .file-card p {
+      font-size: 0.82rem;
+      color: #5c4a8a;
+      line-height: 1.5;
+    }
+    h2.section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.25rem;
+      color: #4A148C;
+      border-bottom: 2px solid #CE93D8;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .contents {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 700px) { .contents { grid-template-columns: 1fr; } }
+    .stage-block {
+      background: white;
+      border-left: 4px solid;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+    }
+    .stage-block.s1 { border-color: #4A148C; }
+    .stage-block.s2 { border-color: #1565C0; }
+    .stage-block.s3 { border-color: #2E7D32; }
+    .stage-block .stage-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .stage-block.s1 .stage-label { color: #4A148C; }
+    .stage-block.s2 .stage-label { color: #1565C0; }
+    .stage-block.s3 .stage-label { color: #2E7D32; }
+    .stage-block h4 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #1a1a2e;
+    }
+    .stage-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .stage-block ul li {
+      font-size: 0.78rem;
+      color: #444;
+      padding: 0.18rem 0;
+      line-height: 1.4;
+    }
+    .stage-block ul li::before {
+      content: "›  ";
+      color: #9E9E9E;
+    }
+    .usage-box {
+      background: white;
+      border: 1px solid #CE93D8;
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+    }
+    .usage-box ol {
+      padding-left: 1.2rem;
+    }
+    .usage-box ol li {
+      font-size: 0.88rem;
+      color: #333;
+      padding: 0.3rem 0;
+      line-height: 1.5;
+    }
+    .compile-box {
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+    .compile-box p {
+      color: #9575CD;
+      font-size: 0.78rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .compile-box code {
+      display: block;
+      color: #CE93D8;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    .quote-box {
+      background: #F3E5F5;
+      border-left: 4px solid #7B1FA2;
+      border-radius: 4px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .quote-box p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: #4A148C;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .quote-box cite {
+      display: block;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: #7B1FA2;
+      margin-top: 0.6rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #9575CD;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">GSD Research Mission Package</p>
+  <h1>Fur, Feathers &amp;<br>Animation Arts</h1>
+  <p class="subtitle">Biology · Craft · Fabrication · Moving Image</p>
+  <p class="meta">March 2026 &nbsp;|&nbsp; Fleet Profile &nbsp;|&nbsp; 31 Pages &nbsp;|&nbsp; 6 Modules &nbsp;|&nbsp; 39 Tests</p>
+  <div class="pipeline">
+    <span>Vision</span>
+    <span class="arrow">→</span>
+    <span>Research</span>
+    <span class="arrow">→</span>
+    <span>Mission</span>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="mission.pdf" download>
+      <div class="file-type">PDF Document</div>
+      <h3>Mission Package</h3>
+      <p>31-page complete pipeline: Vision Guide, Research Reference, and Mission Package with wave execution plan, crew manifest, and test plan.</p>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="file-type">LaTeX Source</div>
+      <h3>mission.tex</h3>
+      <p>Full XeLaTeX source. Recompile with three passes using XeLaTeX for table of contents, cross-references, and page count to resolve correctly.</p>
+    </a>
+  </div>
+
+  <h2 class="section-title">Contents by Stage</h2>
+  <div class="contents">
+    <div class="stage-block s1">
+      <div class="stage-label">Stage 1</div>
+      <h4>Vision Guide</h4>
+      <ul>
+        <li>5 core problem statements</li>
+        <li>Domain architecture ASCII diagram</li>
+        <li>6-module breakdown</li>
+        <li>Chipset configuration (YAML)</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line narrative</li>
+      </ul>
+    </div>
+    <div class="stage-block s2">
+      <div class="stage-label">Stage 2</div>
+      <h4>Research Reference</h4>
+      <ul>
+        <li>Module 1: Fur/feather biology, structural color, pigment science</li>
+        <li>Module 2: PBR rendering, fur shaders, texture resources</li>
+        <li>Module 3: Textile craft, sewing, pattern making</li>
+        <li>Module 4: Fursuit/costume fabrication, 3D printing</li>
+        <li>Module 5: Stop motion, cel animation, storyboarding</li>
+        <li>Module 6: Plush animal construction</li>
+        <li>Full bibliography (academic + practitioner)</li>
+      </ul>
+    </div>
+    <div class="stage-block s3">
+      <div class="stage-label">Stage 3</div>
+      <h4>Mission Package</h4>
+      <ul>
+        <li>Wave execution plan (4 waves, 3 parallel)</li>
+        <li>Component breakdown with token budgets</li>
+        <li>21-role Fleet crew manifest</li>
+        <li>39 tests (5 safety-critical)</li>
+        <li>Verification matrix</li>
+        <li>Dependency graph</li>
+        <li>Cache optimization strategy</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">How to Use This Package</h2>
+  <div class="usage-box">
+    <ol>
+      <li>Open <strong>mission.pdf</strong> and read the Stage 1 Vision Guide to orient yourself to the mission scope and 6-module architecture.</li>
+      <li>Hand the full PDF to your GSD Orchestrator (Claude Code with Skill-Creator active). Say: <em>"Execute this research mission."</em></li>
+      <li>The Orchestrator will activate Fleet profile, run Wave 0 (schemas), then dispatch parallel Wave 1 agents across three tracks.</li>
+      <li>Wave 2 (INTEG/Opus) synthesizes cross-domain connections. Wave 3 assembles and verifies the final document.</li>
+      <li>Approve the human review gate (CAPCOM) before final delivery.</li>
+      <li>The output is a comprehensive cross-referenced research document spanning biology, rendering, craft, fabrication, and animation arts.</li>
+    </ol>
+  </div>
+
+  <h2 class="section-title">Recompile the LaTeX</h2>
+  <div class="compile-box">
+    <p>Three passes required (TOC + cross-refs + lastpage)</p>
+    <code>
+      xelatex -interaction=nonstopmode mission.tex<br>
+      xelatex -interaction=nonstopmode mission.tex<br>
+      xelatex -interaction=nonstopmode mission.tex
+    </code>
+  </div>
+
+  <div class="quote-box">
+    <p>The hummingbird does not carry a pigment for every color it displays. It carries one geometry — and lets physics generate the palette. The same principle governs every craft in this mission. Understanding the deep structure — whether in a barbule lattice or a pattern gusset — is what allows a maker to work with the physics, not against it.</p>
+    <cite>— Through-line, Stage 1 Vision Guide</cite>
+  </div>
+
+</main>
+
+<footer>GSD Ecosystem · Miles Tiberius Foxglove · tibsfox.com · March 2026</footer>
+
+</body>
+</html>
