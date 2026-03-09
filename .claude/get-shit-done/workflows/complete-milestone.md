@@ -499,6 +499,82 @@ node "./.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs: update retrospect
 
 </step>
 
+<step name="write_release_notes">
+
+**Generate public release notes:**
+
+Create `docs/release-notes/v${VERSION}/README.md` with all required sections.
+
+```bash
+mkdir -p "docs/release-notes/v${VERSION}"
+```
+
+**Gather data from:**
+1. `.planning/RETROSPECTIVE.md` — latest milestone section (What Worked, What Was Inefficient, Key Lessons)
+2. `.planning/MILESTONES.md` — stats, accomplishments, phase count
+3. Git log — commit count, file changes, LOC
+4. SUMMARY.md / VERIFICATION.md files — key deliverables, test counts
+
+**Required sections (ALL mandatory):**
+
+```markdown
+# v{VERSION} — {Milestone Name}
+
+**Shipped:** {date}
+**Commits:** {count} | **Files:** {count} changed | **New Code:** ~{LOC} LOC
+**Tests:** {count}
+
+## Summary
+
+{1-3 sentence overview of what shipped and why it matters}
+
+## Key Features
+
+{Feature sections with specific stats, line counts, and architecture details}
+
+## Retrospective
+
+### What Worked
+- **{Specific aspect}.** {Why it worked}
+- {2-4 bullets total}
+
+### What Could Be Better
+- **{Specific concern}.** {What the gap is}
+- {1-3 bullets total}
+
+## Lessons Learned
+
+1. **{Insight title}.** {Specific, actionable takeaway}
+2. {2-4 items total, grounded in actual work}
+```
+
+**Validation — verify ALL sections exist before committing:**
+
+```bash
+FILE="docs/release-notes/v${VERSION}/README.md"
+MISSING=""
+grep -q "## Summary" "$FILE" || MISSING="${MISSING} Summary"
+grep -q "## Key Features" "$FILE" || MISSING="${MISSING} Key-Features"
+grep -q "## Retrospective" "$FILE" || MISSING="${MISSING} Retrospective"
+grep -q "### What Worked" "$FILE" || MISSING="${MISSING} What-Worked"
+grep -q "### What Could Be Better" "$FILE" || MISSING="${MISSING} What-Could-Be-Better"
+grep -q "## Lessons Learned" "$FILE" || MISSING="${MISSING} Lessons-Learned"
+if [ -n "$MISSING" ]; then
+  echo "RELEASE NOTES INCOMPLETE — missing sections:${MISSING}"
+  echo "Fix before proceeding."
+  exit 1
+else
+  echo "Release notes validated — all required sections present."
+fi
+```
+
+**Commit:**
+```bash
+node "./.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs(release-notes): add v${VERSION} release notes" --files "docs/release-notes/v${VERSION}/README.md"
+```
+
+</step>
+
 <step name="update_state">
 
 Most STATE.md updates were handled by `milestone complete`, but verify and update remaining fields:
@@ -759,6 +835,8 @@ Milestone completion is successful when:
 - [ ] Known gaps recorded in MILESTONES.md if user proceeded with incomplete requirements
 - [ ] RETROSPECTIVE.md updated with milestone section
 - [ ] Cross-milestone trends updated
+- [ ] Release notes created at docs/release-notes/v[X.Y]/README.md with all required sections (Summary, Key Features, Retrospective, Lessons Learned)
+- [ ] Release notes validated — all 6 mandatory sections present
 - [ ] User knows next step (/gsd:new-milestone)
 
 </success_criteria>
