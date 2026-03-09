@@ -1,0 +1,1008 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+% ============================================================
+% COLOR SCHEME — Ecology/Nature: Deep Forest + Warm Earth + River
+% ============================================================
+\definecolor{primary}{HTML}{33691E}
+\definecolor{secondary}{HTML}{4E342E}
+\definecolor{tertiary}{HTML}{1565C0}
+\definecolor{accent}{HTML}{558B2F}
+\definecolor{lightprimary}{HTML}{F1F8E9}
+\definecolor{lightsecondary}{HTML}{EFEBE9}
+\definecolor{lighttertiary}{HTML}{E3F2FD}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ============================================================
+% SECTION FORMATTING
+% ============================================================
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ============================================================
+% CUSTOM ENVIRONMENTS
+% ============================================================
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ============================================================
+% HEADERS AND FOOTERS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Mammalian Taxonomy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ============================================================
+% HYPERLINKS
+% ============================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=tertiary,
+  urlcolor=tertiary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={PNW Mammalian Taxonomy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Fur, Fin \& Fang}}
+
+\vspace{0.4cm}
+{\fontsize{20}{24}\selectfont\bfseries\sffamily\textcolor{primary}{of the Pacific Northwest}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Complete Mammalian Taxonomy of the Pacific Northwest}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Terrestrial, Marine \& Volant Species\\Across All Ecoregions}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 38+ context windows across 16+ sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Mammalian Taxonomy --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Research-Integrated}
+\metafield{Depends on:}{gsd-foxfire-heritage-skills-vision.md, 04-salish-sea-expansion-vision.md, gsd-ecosystem-field-guide.html, pnw-avian-taxonomy-mission.pdf}
+\metafield{Context:}{A comprehensive taxonomic survey of all mammal species found in the Pacific Northwest---terrestrial, marine, and volant---organized by ecoregion and microclimate zone, with full biological profiles, evolutionary histories, ecological network analysis, and deep cross-links to the PNW Research Series knowledge base. Companion volume to the PNW Avian Taxonomy; together they form the vertebrate core of the PNW ecological knowledge base.}
+
+\subsection{Vision}
+
+Somewhere beneath a rotting Douglas-fir log in the Hoh Rainforest, a shrew weighing less than a dime is hunting. It must eat nearly its own body weight every day or die. Its heart beats more than 1,200 times per minute. It navigates by echolocation---a capability shared with only one other mammalian order, the bats that roost in bark crevices of the same ancient trees above. This shrew, \textit{Sorex bendirii}, the Pacific water shrew, is one of roughly 140 terrestrial mammal species that make their living in the forests, mountains, steppe, and coastlines of the Pacific Northwest.
+
+But the story does not end at the tideline. Offshore, in the cold upwelling-drenched waters of the Salish Sea and the open Pacific, over 30 species of marine mammals---whales, dolphins, porpoises, seals, sea lions, and the sea otter---form one of the most diverse and best-studied marine mammal communities in the world. The Southern Resident killer whales, down to just 73 individuals as of 2024, have become the most visible symbol of the region's ecological crisis: their survival is tethered to the same Chinook salmon runs that sustained Coast Salish peoples for millennia.
+
+Between the shrew and the whale, the Pacific Northwest harbors an extraordinary mammalian diversity shaped by extreme topographic gradients, glacial history, and the meeting of boreal, temperate, and maritime climate systems. Mountain goats on volcanic crags. Pikas in alpine talus fields, potentially the canary in the coal mine for climate change. Wolverines traversing hundred-mile circuits through the North Cascades. The only population of woodland caribou in the contiguous United States---now functionally extirpated. Grizzly bears tentatively returning to the North Cascades after a century of absence. Gray wolves recolonizing territories their ancestors held before extermination campaigns erased them.
+
+This research mission aims to produce the most comprehensive, scientifically validated, ecoregion-organized taxonomy of Pacific Northwest mammals ever assembled for the GSD knowledge base. Every species will receive a full biological profile: morphology, behavior, diet, habitat, reproductive ecology, population status, conservation threats, and known evolutionary history. Marine mammals will receive flyway and migration analyses comparable to the avian taxonomy's Pacific Flyway documentation. Each mammal will be placed within its ecoregion context and ecological network---as predator, prey, seed disperser, soil engineer, nutrient transporter, or keystone modifier of habitat.
+
+Like the avian taxonomy, this mission imagines each mammal as a kind of \textit{skill}---an evolved solution to an ecological problem. The beaver's dam-building transforms entire watersheds. The flying squirrel's truffle-dispersal inoculates forest soils with mycorrhizal fungi essential for conifer growth. The orca's cooperative hunting represents the most sophisticated mammalian social cognition outside primates. These biological skills map directly to computational patterns in the GSD skill-creator architecture.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented regional coverage.} Existing PNW mammal references cover western Oregon (89 species, Maser 1998), Washington (140+ species, WDFW), and British Columbia separately. No single open knowledge base integrates terrestrial and marine mammals across the full bioregion with ecoregion-level granularity.
+
+\item \textbf{Terrestrial-marine disconnect.} Most references treat land mammals and marine mammals as separate domains. In the PNW, these domains are intimately connected: salmon link orca to bear to forest, sea otters shape kelp forests that shelter fish that feed seabirds, and harbor seals haul out on the same beaches where river otters hunt.
+
+\item \textbf{Missing evolutionary and paleontological context.} Field guides describe extant species but rarely trace the Pleistocene megafauna heritage, glacial refugia patterns, or active recolonization dynamics (wolf, grizzly, caribou) that explain current distributions and conservation urgency.
+
+\item \textbf{Cryptic diversity undocumented.} Small mammals---shrews, voles, bats---comprise the majority of PNW mammal species but receive disproportionately little coverage. Several endemic subspecies (Kincaid Meadow Vole, Destruction Island shrew subspecies, Olympic marmot) are poorly known and taxonomically uncertain.
+
+\item \textbf{Cultural knowledge gap.} Indigenous peoples of the Pacific Northwest developed deep mammalian knowledge---whale hunting, bear ceremonialism, beaver management, mountain goat wool harvesting---that is absent from Western taxonomic references and unlinked to the heritage skills curriculum.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A living taxonomy where each mammal species is a fully documented biological ``skill card'' placed within its ecoregion, evolutionary lineage, ecological network, and cultural context, interconnected with the PNW Avian Taxonomy and the broader PNW Research Series.
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+PNW Mammalian Study Region — Ecoregion Zones
+══════════════════════════════════════════════
+
+ALPINE / SUBALPINE (>5,000 ft)
+│ Mountain goat, pika, hoary marmot, wolverine
+│ Cascades, Olympics, Blue Mtns, Selkirks
+├─────────────────────────────────────────────
+MONTANE FOREST (2,500–5,000 ft)
+│ Black bear, marten, fisher, flying squirrel
+│ Mid-elevation conifer belts, both slopes
+├─────────────────────────────────────────────
+FOOTHILL / OAK WOODLAND (500–2,500 ft)
+│ Western gray squirrel, brush rabbit, gray fox
+│ Willamette, Rogue, east slope transition
+├─────────────────────────────────────────────
+LOWLAND FOREST / URBAN (<500 ft)
+│ Douglas squirrel, deer mouse, raccoon, opossum
+│ Puget Trough, Willamette, coastal plains
+├─────────────────────────────────────────────
+RIPARIAN / WETLAND / ESTUARINE
+│ Beaver, river otter, muskrat, water shrew
+│ Columbia R., Skagit delta, major river systems
+├─────────────────────────────────────────────
+COASTAL / MARINE / PELAGIC
+│ Orca, gray whale, harbor seal, sea otter
+│ Salish Sea, outer coast, continental shelf
+├─────────────────────────────────────────────
+EAST-SIDE STEPPE / SHRUBLAND
+│ Pygmy rabbit, jackrabbit, badger, pronghorn
+│ Columbia Plateau, Great Basin fringe, Malheur
+├─────────────────────────────────────────────
+SUBTERRANEAN / FOSSORIAL (Cross-cutting)
+│ Pocket gophers, moles, shrews
+│ Below-ground networks across all zones
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Module Architecture — Six Research Modules + Synthesis
+═══════════════════════════════════════════════════════
+
+MODULE 1: TERRESTRIAL CARNIVORES & UNGULATES  [Sonnet]
+├─ Full profiles: bears, wolves, cats, mustelids
+├─ Deer, elk, mountain goat, pronghorn, caribou
+└─ ~35 species × full bio + evolutionary history
+
+MODULE 2: SMALL MAMMALS & BATS               [Sonnet]
+├─ Rodents, lagomorphs, shrews, moles, bats
+├─ Endemic subspecies, cryptic diversity
+└─ ~100 species × full profiles
+
+MODULE 3: MARINE MAMMALS                     [Opus]
+├─ Cetaceans (whales, dolphins, porpoises)
+├─ Pinnipeds (seals, sea lions), sea otters
+└─ ~35 species × profiles + migration
+
+MODULE 4: ECOREGION MAMMAL COMMUNITIES       [Opus]
+├─ Communities per ecoregion zone
+├─ Indicator species, keystone engineers
+└─ Microclimate and elevation gradients
+
+MODULE 5: EVOLUTIONARY BIOLOGY & PALEO       [Opus]
+├─ Pleistocene megafauna heritage
+├─ Glacial refugia, recolonization dynamics
+└─ Active recovery: wolf, grizzly, caribou, orca
+
+MODULE 6: ECOLOGICAL NETWORKS & CULTURE      [Opus]
+├─ Mammal-ecosystem engineering roles
+├─ Indigenous mammalian knowledge systems
+├─ Mammal-as-skill metaphor framework
+└─ Cross-links to Avian Taxonomy + Heritage
+
+         ┌───────────────────────┐
+         │  SYNTHESIS MODULE     │  [Opus]
+         │  Cross-module         │
+         │  integration +        │
+         │  bibliography         │
+         └───────────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Terrestrial Carnivores and Ungulates}
+Complete biological profiles for all carnivore and ungulate species in the Pacific Northwest. Carnivores: black bear, grizzly bear (North Cascades recovery), gray wolf (recolonization status), cougar, bobcat, lynx, coyote, red fox, gray fox, kit fox, wolverine, American marten, Pacific marten, fisher, short-tailed weasel, long-tailed weasel, mink, river otter, striped skunk, western spotted skunk, raccoon, ringtail. Ungulates: Roosevelt elk, Rocky Mountain elk, Columbian white-tailed deer, black-tailed deer, mule deer, mountain goat, pronghorn, bighorn sheep, woodland caribou (historical and extirpation). Each profile: morphometrics, habitat, diet, home range, social structure, reproduction, population status, conservation threats, evolutionary history.
+
+\subsubsection{Module 2: Small Mammals and Bats}
+The largest module by species count. Rodentia: tree squirrels (Douglas, western gray, northern flying, red), ground squirrels and chipmunks (8+ species), pocket gophers (5 species in Oregon), woodrats, voles (including endemic Kincaid Meadow Vole), deer mice, harvest mice, jumping mice, mountain beaver (\textit{Aplodontia rufa}---the most primitive living rodent, endemic to the PNW), porcupine, beaver, muskrat. Lagomorpha: pikas (American pika---climate sentinel), snowshoe hare, pygmy rabbit (one of smallest rabbits in North America, ESA-listed), brush rabbit, eastern cottontail. Soricomorpha: 10+ shrew species including Pacific water shrew, Trowbridge's shrew, and endemic Destruction Island subspecies; American shrew-mole (\textit{Neurotrichus gibbsii}---endemic to PNW, sole member of its genus); Townsend's mole. Chiroptera: 15 bat species in OR/WA including old-growth-dependent species; hoary bat (broadest distribution of any New World bat), big brown bat, little brown bat, Townsend's big-eared bat, pallid bat, silver-haired bat.
+
+\subsubsection{Module 3: Marine Mammals}
+All cetaceans, pinnipeds, and mustelids inhabiting Salish Sea waters and the continental shelf off Washington and British Columbia. Six pinniped species, eight baleen whale species, seventeen toothed whale species, and sea otter. Special focus: Southern Resident killer whales (73 individuals as of 2024, ESA endangered, salmon-dependent), with detailed coverage of ecotype differentiation---resident (\textit{Orcinus orca ater}), Bigg's/transient (\textit{O. o. rectipinnus}), and offshore populations. Humpback whale recovery and Salish Sea recolonization (396 individuals catalogued in 2022). Gray whale migration along the outer coast. Harbor seal and Steller sea lion population dynamics. Sea otter recovery history and kelp ecosystem engineering.
+
+\subsubsection{Module 4: Ecoregion Mammal Communities}
+Analysis of mammal assemblages within each PNW ecoregion: alpine/subalpine, montane forest, foothill/oak woodland, lowland forest/urban, riparian/wetland, coastal/marine, east-side steppe, and the cross-cutting fossorial/subterranean community. For each zone: characteristic species, indicator species, keystone engineers, seasonal variation, elevation gradients, edge effects, and human-wildlife interface zones. Comparison of analogous zones across subregions (e.g., Olympic alpine vs. North Cascades alpine, wet-side lowland vs. dry-side steppe).
+
+\subsubsection{Module 5: Evolutionary Biology and Paleontology}
+Evolutionary history of PNW mammals through deep time. Pleistocene megafauna: what lived here (mammoth, mastodon, giant ground sloth, saber-toothed cat, dire wolf, short-faced bear, ancient bison) and what their extinction means for modern ecosystem function. Glacial refugia: how ice sheets carved the distributions we see today, creating endemic subspecies in isolated mountain ranges and coastal refugia. Active recolonization and recovery: gray wolf range expansion into WA and OR, grizzly bear North Cascades reintroduction (USFWS 2024 EIS and 10(j) experimental population), woodland caribou extirpation from the Selkirks, and orca population dynamics. Molecular systematics: recent taxonomic revisions including the proposed split of killer whale ecotypes into separate species/subspecies.
+
+\subsubsection{Module 6: Ecological Networks and Cultural Knowledge}
+Two interlocking components. First: mammal roles as ecosystem engineers and network nodes---beaver as watershed architect (dam effects on hydrology, fish habitat, riparian vegetation), flying squirrel and red-backed vole as mycorrhizal dispersers (truffle consumption $\rightarrow$ fecal inoculation $\rightarrow$ conifer root colonization), orca as apex predator maintaining trophic balance, elk and deer as browsers shaping forest succession, salmon-bear-forest nutrient cycling. Second: Indigenous mammalian knowledge---Makah whale hunting (Ozette archaeological evidence), Coast Salish relations with orca (Lummi Nation regarding orcas as relatives), Nuu-chah-nulth open-ocean whaling tradition, mountain goat wool harvesting and Salish weaving, bear ceremonialism across PNW nations, beaver management as pre-contact landscape engineering. Mammal-as-skill metaphor framework mapping adaptations to GSD patterns. All Indigenous references name specific nations and cite published sources.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  orchestrator:
+    model: opus
+    context_budget: 200000
+  agents:
+    - name: CRAFT-CARNIVORE
+      model: sonnet
+      role: Carnivore and ungulate profiles
+      modules: [1]
+    - name: CRAFT-MICRO
+      model: sonnet
+      role: Small mammal and bat taxonomy
+      modules: [2]
+    - name: CRAFT-MARINE
+      model: opus
+      role: Marine mammal profiles and ecology
+      modules: [3]
+    - name: CRAFT-ECO
+      model: opus
+      role: Ecoregion analysis + ecological networks
+      modules: [4, 6]
+    - name: CRAFT-PHYLO
+      model: opus
+      role: Evolutionary biology + paleontology
+      modules: [5]
+    - name: SCOUT
+      model: sonnet
+      role: Source validation and bibliography
+    - name: VERIFY
+      model: sonnet
+      role: Taxonomic accuracy checking
+    - name: WARDEN
+      model: opus
+      role: Safety + sensitivity enforcement
+  safety_warden:
+    rules:
+      - Never publish precise locations of endangered
+        species dens, dens, or haul-out sites
+      - All Indigenous knowledge references specific nations
+      - All population data attributed to specific agencies
+      - No policy advocacy in conservation sections
+      - Endangered species locations generalized to
+        county/watershed level only
+      - Marine mammal protection laws cited accurately
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item All mammal species documented in WA, OR, ID, and BC by state/provincial wildlife agencies
+\item Full profiles for resident and regularly occurring species (~140 terrestrial + ~35 marine)
+\item Abbreviated profiles for vagrant, accidental, or historically extirpated species
+\item Eight ecoregion zones with community-level analysis
+\item Evolutionary history including Pleistocene megafauna context and active recolonization
+\item Marine mammal migration and population dynamics (orca, gray whale, humpback)
+\item Ecological network documentation (beaver engineering, mycorrhizal dispersal, nutrient cycling, trophic cascades)
+\item Cross-links to PNW Avian Taxonomy and existing PNW Research Series documents
+\item Complete peer-reviewed bibliography
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Individual population genetics studies (reference only)
+\item Captive breeding program operational details
+\item Hunting regulations and game management
+\item Restricted/sacred Indigenous knowledge (Level 2--3)
+\item Climate modeling beyond published agency projections
+\item Invasive species management plans (document presence, not prescribe management)
+\item Companion animal or livestock species
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Species inventories cover all taxonomic orders documented in WA, OR, ID, and BC, totaling 140+ terrestrial and 35+ marine full profiles.
+\item Every species profile includes: scientific name, taxonomic placement, morphometrics, habitat, diet, reproduction, conservation status, and at least one evolutionary/phylogenetic note.
+\item Marine mammal profiles include migration routes, population trends, and ESA/MMPA status with citations.
+\item All eight ecoregion zones have documented mammal community assemblages with keystone and indicator species identified.
+\item Evolutionary histories trace at least 10 PNW-relevant speciation, extinction, or recolonization events with citations.
+\item Ecological network analysis documents at least 5 quantified mammal-ecosystem engineering interactions with data.
+\item Every Indigenous knowledge reference names a specific nation and cites a published, publicly available source.
+\item Cross-links to at least 4 existing PNW Research Series documents are explicit (Avian Taxonomy, Salish Sea, Heritage Skills, Ecosystem Field Guide).
+\item All numerical claims attributed to specific government agencies, peer-reviewed studies, or professional organizations.
+\item Bibliography contains 80+ sources from government agencies (USFWS, USGS, NOAA, WDFW, ODFW), peer-reviewed journals, and professional organizations.
+\item The mammal-as-skill metaphor framework maps at least 10 mammalian adaptations to GSD skill-creator patterns.
+\item Document is self-contained: a reader with no prior mammalogical knowledge can understand the full PNW mammalian landscape.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+pnw-avian-taxonomy-mission.pdf & Companion volume; shared ecoregion framework, salmon-nutrient cycling overlap, predator-prey cross-references (orca-salmon-eagle) \\
+04-salish-sea-expansion-vision.md & Whale hunting (Makah, Nuu-chah-nulth), mountain goat wool (Salish weaving), beaver management, orca as Coast Salish relative \\
+gsd-foxfire-heritage-skills-vision.md & Heritage documentation methodology for wildlife tracking and observation skills \\
+gsd-ecosystem-field-guide.html & Mammalian Taxonomy as companion to Avian Taxonomy in the wider ecosystem \\
+gsd-skill-creator-analysis.md & Mammal-as-skill metaphor framework feeds new pattern language into skill-creator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Pacific Northwest's mammals embody the Amiga Principle at every scale. The beaver---a 60-pound rodent---reshapes entire watersheds, creating wetland habitat that supports more biodiversity per acre than any other ecosystem type in the region. It does not dam rivers through brute force but through architectural understanding: where water slows, where wood binds, where the geometry of the channel allows a small intervention to produce outsized effect. This is leverage. This is what the GSD ecosystem aspires to.
+
+And in the spaces between---between the predator and prey, between the fungal spore in a vole's fecal pellet and the conifer root it will colonize, between the salmon carcass dragged into the forest by a bear and the nitrogen-15 signature it leaves in tree rings for centuries---we find the same generative potential that connects all the threads of this research series. The mammals are not isolated actors. They are nodes in a network so densely interconnected that removing any one species sends ripples through systems we are only beginning to map.
+
+The orca and the shrew. The whale and the vole. Sixty tons and four grams, separated by orders of magnitude in mass but connected by the same ocean currents, the same salmon runs, the same forest canopy, the same ancient geological forces that built this landscape. Documenting these connections---making them visible, traceable, teachable---is the work this mission undertakes.
+
+\begin{quotebox}
+\textit{``The complex, interconnected, interdependent feedback loops among plants and animals will gradually simplify. Some of the species of which the feedback loops are composed will be lost forever---and the feedback loops with them.''} --- Chris Maser, \textit{Mammals of the Pacific Northwest}, Oregon State University Press.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Mammalian Taxonomy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides the evidential foundation for building the PNW Mammalian Taxonomy knowledge base. Each module section contains verified findings organized by subtopic, with citations to professional sources.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item NOAA Fisheries --- marine mammal management under MMPA and ESA, Southern Resident killer whale research, West Coast stranding network
+\item U.S. Fish \& Wildlife Service (USFWS) --- ESA listings, grizzly bear recovery program, North Cascades reintroduction EIS
+\item U.S. Geological Survey (USGS) --- population surveys, wildlife disease, migration tracking
+\item U.S. Forest Service Pacific Northwest Research Station --- old-growth mammal ecology, bat biology, small mammal-mycorrhizal networks
+\item Washington Dept. of Fish \& Wildlife (WDFW) --- state mammal lists, bat conservation plan, wolf advisory group, SGCN species
+\item Oregon Dept. of Fish \& Wildlife (ODFW) --- Oregon Conservation Strategy Species, mammal viewing programs
+\item Environment and Climate Change Canada / BC Ministry of Environment --- caribou recovery, marine mammal management
+\item Burke Museum of Natural History (UW) --- mammalogy collections, Washington mammal checklist
+\item Society for Marine Mammalogy --- official taxonomy list, orca ecotype reclassification
+\item Center for Whale Research --- Southern Resident killer whale census and monitoring
+\item Orca Network --- sighting reports, public education, Salish Sea cetacean monitoring
+\end{itemize}
+
+\subsection{Module 1 Reference: Terrestrial Carnivores and Ungulates}
+
+\subsubsection{Taxonomic Scope}
+Western Oregon hosts 89 mammal species, western Washington 70 of those extending north, with 67 reaching British Columbia and 83 extending into northwestern California (Maser 1998). Adding eastern WA/OR steppe species, Idaho mountain species, and marine mammals brings the full PNW total to approximately 175--200 species across all orders. Seven taxonomic orders of terrestrial mammals are represented: Didelphimorphia (opossum---introduced), Soricomorpha (shrews, moles), Chiroptera (bats), Carnivora, Artiodactyla (ungulates), Rodentia, and Lagomorpha.
+
+\subsubsection{Large Carnivore Recovery}
+
+\textbf{Grizzly Bear} (\textit{Ursus arctos horribilis}): Listed as threatened under the ESA since 1975 throughout the lower 48 states. The North Cascades Ecosystem (NCE) is one of six designated recovery zones. In 2024, NPS and USFWS published a final EIS identifying reintroduction under ESA Section 10(j) experimental population designation as the preferred alternative. The NCE Recovery Zone is managed primarily on federal lands (approximately 85\% NPS and National Forest), providing secure habitat. In January 2025, USFWS proposed establishing a single Distinct Population Segment encompassing Idaho, Montana, Washington, and Wyoming, retaining threatened status. No grizzlies currently reside in the North Cascades; the last confirmed sighting was in 1996. Oregon's last recorded grizzly was killed in the late 1930s at Billy Meadows, Wallowa County. Sources: USFWS Grizzly Bear Recovery Program, Federal Register 2024/2025, WDFW.
+
+\textbf{Gray Wolf} (\textit{Canis lupus}): Actively recolonizing Washington and Oregon from Idaho/Montana source populations. As of 2024, Washington has confirmed wolf packs in the northeastern Cascades and Blue Mountains. The species' ESA status in the western US remains contested---a 2025 federal court ruling found USFWS violated the ESA in denying a petition to protect wolves in the northern Rockies, ordering reconsideration. Oregon has its own state-managed wolf plan. Wolf recovery is deeply linked to ungulate population management and rural community relations. Sources: WDFW Wolf Advisory Group, USFWS, court records.
+
+\textbf{Cougar} (\textit{Puma concolor}): The largest cat in the PNW, distributed across all forested ecoregions. Washington and Oregon both maintain managed populations. Cougars serve as apex predators in the absence of wolves and grizzlies across much of their range. Home ranges of males may exceed 100 square miles in mountainous terrain.
+
+\subsubsection{Ungulates}
+Roosevelt elk (\textit{Cervus canadensis roosevelti}) are the largest unmanaged herd in the Olympic Peninsula. Rocky Mountain elk occupy eastern WA/OR montane forests. Columbian white-tailed deer (\textit{Odocoileus virginianus leucurus}), ESA-listed, occupy remnant riparian habitat along the lower Columbia River. Mountain goat (\textit{Oreamnos americanus}) populations inhabit alpine zones of the Cascades and Olympics; their wool was historically harvested by Coast Salish and other nations for weaving. Woodland caribou (\textit{Rangifer tarandus caribou}) are functionally extirpated from Washington's Selkirk Mountains---the last population in the contiguous US. Sources: WDFW, ODFW, NPS.
+
+\subsection{Module 2 Reference: Small Mammals and Bats}
+
+\subsubsection{Rodent Diversity}
+Rodentia is the most species-rich mammalian order in the PNW. Mountain beaver (\textit{Aplodontia rufa}), despite its name neither a mountain-dweller nor a beaver, is the most primitive living rodent and endemic to the Pacific Northwest. It constructs extensive burrow systems in moist forested slopes. The red tree vole (\textit{Arborimus longicaudus}) lives almost exclusively in Douglas-fir canopy, feeding on needles---a degree of arboreal specialization nearly unmatched among rodents. California and Oregon populations may represent separate species, maintained by hybrid male sterility near the Smith River. Source: Maser 1998, OSU Press.
+
+Pocket gophers (Thomomys spp.) are significant fossorial ecosystem engineers, turning over substantial soil volume annually. Five species occur in Oregon alone. The western gray squirrel (\textit{Sciurus griseus}) and Washington ground squirrel (\textit{Urocitellus washingtoni}) are both Oregon/Washington Conservation Strategy Species. The pygmy rabbit (\textit{Brachylagus idahoensis}), one of the smallest rabbits in North America, is ESA-listed; Washington's Columbia Basin population is critically endangered. Source: WDFW SWAP Appendix A-1.
+
+\subsubsection{Shrew and Mole Endemism}
+The American shrew-mole (\textit{Neurotrichus gibbsii}) is endemic to the Pacific Northwest and sole member of its genus---active on the soil surface in Cascade and western Washington forests. Multiple shrew species (\textit{Sorex} spp.) partition microhabitats: Pacific water shrew in streams and bogs, Trowbridge's shrew in forested understory, Merriam's shrew in east-side sagebrush steppe. A Trowbridge's shrew subspecies endemic to Destruction Island (Jefferson County) is known from only 36 specimens collected in 1941 and 1983, with apparent population decline between sampling periods. Source: WDFW, Burke Museum.
+
+\subsubsection{Bat Biology in Old-Growth Forests}
+Twelve bat species occur in Douglas-fir forests of the Pacific Northwest; nine are known to roost in tree cavities, bark crevices, or foliage. Several are closely associated with old-growth forests, making bat populations vulnerable to forest management practices that remove large trees and snags. Oregon and Washington together host 15 bat species. Reproductive females select roost snags that are taller and larger in diameter than surrounding canopy, in early-to-intermediate decay stages with loose bark. The hoary bat (\textit{Lasiurus cinereus}) has the broadest distribution of any New World bat. The Washington State Bat Conservation Plan (WDFW 2013) provides comprehensive status assessments and conservation strategies. Sources: USFS Gen. Tech. Rep. PNW-GTR-308 (Christy \& West 1993), WDFW Bat Conservation Plan.
+
+\subsection{Module 3 Reference: Marine Mammals}
+
+\subsubsection{Salish Sea Marine Mammal Diversity}
+The Salish Sea and adjacent continental shelf waters support six pinniped species, eight baleen whale species, seventeen toothed whale species, and one mustelid (sea otter)---among the highest marine mammal diversity in the world. NOAA Fisheries manages most marine mammals under the Marine Mammal Protection Act and ESA; USFWS manages sea otters. Over 30 species occur off the Washington, Oregon, and California coasts. Ten ESA-listed marine mammal species occur on the West Coast. Sources: NOAA Fisheries West Coast, Marine mammals of the Salish Sea.
+
+\subsubsection{Southern Resident Killer Whales}
+The Southern Resident population stood at 73 whales as of the July 2024 census, down from a peak of 98 in 1995. The population feeds exclusively on fish, primarily Chinook salmon, making recovery closely linked to salmon restoration. Three primary threats: declining food supply (salmon), pollution (PCBs, flame retardants causing reproductive and immune impairment), and vessel noise/disturbance (shipping traffic reduces foraging success by 50\% when vessels approach within 1,600 yards). Recent research reveals up to 69\% of detectable pregnancies are unsuccessful. The population shows inbreeding effects that compound other threats.
+
+In 2024, NOAA Fisheries published new research proposing that Bigg's (transient) and resident killer whales represent separate species: resident (\textit{Orcinus orca ater}) and Bigg's (\textit{O. o. rectipinnus}). The Society of Marine Mammalogy Taxonomy Committee provisionally recognized them as subspecies pending further review. Bigg's populations, which prey on marine mammals, have grown steadily over 40 years. The Lummi Nation regards orcas as relatives and was instrumental in the effort to return Lolita (Tokitae) from captivity. Sources: NOAA NWFSC, Center for Whale Research, EPA Salish Sea Program, Orca Network, King County.
+
+\subsubsection{Other Cetaceans}
+Humpback whales have significantly recovered in Salish Sea waters, with an estimated 396 individuals catalogued in 2022. Gray whales migrate along the outer coast annually, with some ``resident'' individuals feeding in PNW waters year-round. In 2013, a North Pacific right whale was verified in the Strait of Juan de Fuca---the first recorded instance in post-whaling times. Harbor porpoises are the most common small cetacean year-round in Puget Sound. Dall's porpoises and Pacific white-sided dolphins occur seasonally. Sources: NOAA, Humpback Whales of the Salish Sea, marine mammal catalogues.
+
+\subsubsection{Pinnipeds and Sea Otter}
+Harbor seals are the most common marine mammal in Puget Sound, non-migratory and present year-round. California sea lions migrate annually between southern breeding grounds and PNW waters. Steller sea lions (near-threatened) maintain breeding colonies on offshore rocks. Northern elephant seals increasingly haul out in Puget Sound. Sea otters, extirpated from Washington by the fur trade, were reintroduced to the Olympic coast in 1969--1970; the population has slowly recovered and now numbers several hundred individuals. Their kelp-forest engineering role---controlling sea urchin populations that would otherwise destroy kelp---makes them a keystone species. Source: NOAA, USFWS, WDFW marine bird and mammal surveys.
+
+\subsection{Module 4 Reference: Ecoregion Mammal Communities}
+
+\subsubsection{Alpine and Subalpine}
+Mountain goats, pikas, hoary marmots, and wolverines characterize the highest elevations. American pika (\textit{Ochotona princeps}) is a talus habitat specialist increasingly studied as a climate change indicator---populations at lower elevations are declining as temperatures rise. Pikas do not hibernate; they build ``haypiles'' of dried vegetation to survive winter. Maximum lifespan is seven years, with breeding beginning in the second summer. Wolverine (\textit{Gulo gulo}) circuits may cover 100+ miles of alpine and subalpine terrain, requiring vast connected wilderness. Source: WDFW SWAP, USFS.
+
+\subsubsection{Old-Growth Forest Specialists}
+The intricate relationships between small mammals and forest health are perhaps the PNW's most remarkable mammalian story. Northern flying squirrels, California red-backed voles, and deer mice consume truffles (the fruiting bodies of mycorrhizal fungi). Their fecal pellets, deposited throughout the forest, inoculate conifer rootlets with nitrogen-fixing bacteria, yeast, and mycorrhizal spores essential for tree growth. The deer mouse is among the first small mammals to recolonize after logging or fire, carrying viable fungal spores into disturbed soil. This squirrel-fungus-forest feedback loop is a foundational ecosystem process invisible to casual observation but critical to forest regeneration. Source: Maser 1998, USFS PNW Research Station.
+
+\subsubsection{East-Side Steppe}
+The Columbia Basin pygmy rabbit population is critically endangered---a genetically distinct population surviving in Washington's shrub-steppe. Badger, black-tailed jackrabbit, white-tailed jackrabbit, pronghorn (historically native, now managed), and kit fox occupy this arid landscape. Washington ground squirrel habitat has been lost extensively to agriculture. Malheur Basin supports river otter, beaver, and muskrat in riparian corridors through otherwise dry terrain. Source: WDFW, ODFW.
+
+\subsection{Module 5 Reference: Evolutionary Biology}
+
+\subsubsection{Pleistocene Context}
+The PNW hosted a megafaunal assemblage that included Columbian mammoth, American mastodon, giant ground sloth (\textit{Megalonyx jeffersonii}---whose type specimen was first studied by Thomas Jefferson), saber-toothed cat (\textit{Smilodon fatalis}), dire wolf (\textit{Aenocyon dirus}), short-faced bear (\textit{Arctodus simus}), and Bison antiquus. Their extinction approximately 11,000--13,000 years ago, coinciding with human arrival and climate change, fundamentally altered PNW ecosystems. Modern elk, deer, and bear occupy niches once shared with these megafauna, but at reduced functional diversity.
+
+\subsubsection{Glacial Refugia and Endemism}
+Repeated Pleistocene glaciation created isolated refugia in unglaciated areas---the Olympic Peninsula, southern Oregon coast ranges, eastern Oregon/Washington basins. These refugia drove subspeciation visible today in distinct populations of mountain beaver, red tree vole, Olympic marmot (\textit{Marmota olympus}---endemic to the Olympic Peninsula), and multiple shrew subspecies. The ``Cascadia'' refugium---the unglaciated Pacific coast south of the ice sheets---served as the primary source for postglacial recolonization of BC and northern WA.
+
+\subsubsection{Active Recovery and Recolonization}
+The most dramatic mammalian story in the modern PNW is the return of extirpated apex predators. Gray wolves are naturally recolonizing from the Northern Rockies. Grizzly bears are being actively reintroduced to the North Cascades under a 2024 federal EIS. These recoveries represent living experiments in trophic cascade restoration---returning top predators to ecosystems that have functioned without them for 50--150 years. Source: USFWS, NPS, WDFW.
+
+\subsection{Module 6 Reference: Ecological Networks and Culture}
+
+\subsubsection{Beaver as Watershed Architect}
+Beaver (\textit{Castor canadensis}) dam-building transforms stream hydrology, raising water tables, creating wetland habitat, reducing downstream flooding, and increasing water storage during drought. ``Beaver analog'' restoration---installing structures that mimic beaver dams---has become a major conservation tool in the PNW. A single beaver family can create wetland habitat supporting hundreds of species of plants, invertebrates, fish, amphibians, birds, and mammals. Source: USFS, multiple restoration ecology studies.
+
+\subsubsection{Mammal-as-Skill Metaphor Framework}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Adaptation} & \tableheader{Mammal Example} & \tableheader{Skill-Creator Pattern} \\
+\midrule
+Watershed Engineering & Beaver dam construction & Infrastructure-as-code: small interventions creating cascading system effects \\
+Echolocation & Little brown bat sonar & Active sensing + real-time signal processing in low-visibility environments \\
+Cooperative Hunting & Orca pod coordinated drives & Multi-agent task decomposition with role specialization and acoustic coordination \\
+Mycorrhizal Dispersal & Flying squirrel truffle diet & Dependency injection: delivering critical components (fungi) to systems (trees) that cannot self-provision \\
+Torpor/Hibernation & Bear winter dormancy & Graceful degradation: reducing resource consumption while maintaining core viability \\
+Haypile Caching & Pika food storage & Ahead-of-time compilation: pre-processing resources during favorable conditions for later use \\
+Pack Social Hierarchy & Wolf alpha/beta structure & Agent role assignment with dynamic leadership transfer \\
+Scent Marking & Cougar territorial boundary & Distributed consensus: broadcasting state to prevent resource conflicts \\
+Burrowing Networks & Pocket gopher tunnels & Background process: persistent, invisible infrastructure that enables surface-level productivity \\
+Blubber Insulation & Marine mammal thermoregulation & Adaptive caching layer: buffering between volatile external environment and stable internal state \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Indigenous Mammalian Knowledge}
+Makah whale hunting represents thousands of years of accumulated cetacean knowledge, documented in the Ozette archaeological site---sometimes called the ``Pacific Northwest Pompeii''---where whale hunting implements were preserved under a mudslide. Coast Salish peoples developed sophisticated relationships with marine mammals; the Lummi Nation regards orcas as relatives and reincarnated spirits of chiefs. Mountain goat wool was harvested (not by killing the animal, but by collecting shed wool from bushes and rocky outcrops) and woven into the distinctive Salish blankets documented in the Heritage Skills curriculum. Nuu-chah-nulth open-ocean whaling required multi-year spiritual preparation, specialized watercraft, and deep ecological knowledge of whale behavior and ocean conditions. All references name specific nations and cite published sources. Sources: Suttles 1987/1990, Stewart 1977, Makah Cultural and Research Center.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Implementation} \\
+\midrule
+Endangered species locations & ABSOLUTE & No GPS coordinates, den sites, haul-outs, or calving areas for ESA-listed species \\
+Indigenous knowledge attribution & ABSOLUTE & Every reference names a specific nation \\
+Marine mammal protection laws & GATE & Accurately cite MMPA and ESA provisions; note jurisdictional boundaries (NOAA vs. USFWS) \\
+Population data sourcing & GATE & All counts from NOAA, USFWS, USGS, state agencies, or peer-reviewed research \\
+Climate projections & GATE & Only published agency data \\
+Conservation advocacy & ANNOTATE & Present evidence without policy advocacy \\
+Human-wildlife conflict & ANNOTATE & Document dynamics factually; no endorsement of specific management positions \\
+Cultural sensitivity levels & GATE & Only Level 1 publicly available cultural knowledge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{enumerate}[leftmargin=2em, label={[G\arabic*]}]
+\item NOAA Fisheries. ``Marine Mammals on the West Coast.'' \url{https://www.fisheries.noaa.gov/west-coast/marine-mammal-protection/marine-mammals-west-coast}
+\item NOAA Fisheries. ``Southern Resident Killer Whale Research in the Pacific Northwest.'' \url{https://www.fisheries.noaa.gov/west-coast/science-data/southern-resident-killer-whale-research-pacific-northwest}
+\item NOAA Fisheries. ``New Research Reveals Full Diversity of Killer Whales.'' 2024. \url{https://www.fisheries.noaa.gov/feature-story/new-research-reveals-full-diversity-killer-whales-two-species-come-view-pacific-coast}
+\item US EPA. ``Southern Resident Killer Whales'' (Salish Sea Program). \url{https://www.epa.gov/salish-sea/southern-resident-killer-whales}
+\item USFWS. ``Grizzly Bear Recovery Program.'' \url{https://www.fws.gov/office/grizzly-bear-recovery-program}
+\item USFWS. Federal Register 2024-09136: ``Establishment of a Nonessential Experimental Population of Grizzly Bear in the North Cascades Ecosystem.'' May 3, 2024.
+\item USFWS. Federal Register 2025-00329: ``Grizzly Bear Listing---Revised Section 4(d) Rule.'' January 15, 2025.
+\item WDFW. ``Statement on NPS and USFWS Final EIS for Restoring Grizzly Bears to the North Cascades.'' March 21, 2024.
+\item WDFW. State Wildlife Action Plan, Appendix A-1: Mammals. Species of Greatest Conservation Need fact sheets.
+\item WDFW. ``Washington State Bat Conservation Plan.'' Hayes, G. and G.J. Wiles. June 2013.
+\item ODFW. ``Mammals.'' Oregon species profiles and Conservation Strategy Species lists.
+\item USFS PNW Research Station. Christy, R.E. and S.D. West. 1993. ``Biology of bats in Douglas-fir forests.'' Gen. Tech. Rep. PNW-GTR-308.
+\item Puget Sound Vital Signs. ``Orcas.'' \url{https://vitalsigns.pugetsoundinfo.wa.gov/VitalSign/Detail/19}
+\item NOAA Sanctuaries. ``Studying Southern Resident Killer Whales in Olympic Coast NMS.'' 2025.
+\end{enumerate}
+
+\subsubsection{Peer-Reviewed Research \& Books}
+\begin{enumerate}[leftmargin=2em, label={[P\arabic*]}]
+\item Maser, Chris. \textit{Mammals of the Pacific Northwest: From the Coast to the High Cascades.} Oregon State University Press, 1998.
+\item Verts, B.J. and L.N. Carraway. \textit{Land Mammals of Oregon.} University of California Press, 1998.
+\item Eder, Tamara, Gary Ross, and Terry Parker. \textit{Mammals of Washington and Oregon.} Lone Pine Publishing, 2016.
+\item Moskowitz, David. \textit{Wildlife of the Pacific Northwest: Tracking and Identifying Mammals, Birds, Reptiles, Amphibians, and Invertebrates.} Timber Press, 2010.
+\item Nagorsen, D.W. and M.R. Brigham. \textit{Bats of British Columbia.} University of British Columbia Press, 1993.
+\item Ford, John K.B., Graeme B. Ellis, and Kenneth C. Balcomb. \textit{Killer Whales.} UBC Press / University of Washington Press.
+\item Dalquest, W.W. 1948. ``Mammals of Washington.'' \textit{University of Kansas Publications, Museum of Natural History} 2:1--444.
+\item Booth, E.S. 1947. ``Systematic review of the land mammals of Washington.'' Ph.D. Dissertation, State College of Washington.
+\end{enumerate}
+
+\subsubsection{Professional Organizations \& Cultural Sources}
+\begin{enumerate}[leftmargin=2em, label={[O\arabic*]}]
+\item Center for Whale Research. Southern Resident killer whale census data.
+\item Orca Network. Sighting reports and educational resources.
+\item The Whale Trail. ``Southern Resident Orcas.'' \url{https://thewhaletrail.org/}
+\item Burke Museum. Mammalogy collections, Washington mammal checklist.
+\item Society of Marine Mammalogy. Taxonomy Committee official species list.
+\item Suttles, Wayne. \textit{Coast Salish Essays.} University of Washington Press, 1987.
+\item Stewart, Hilary. \textit{Indian Fishing: Early Methods on the Northwest Coast.} Douglas \& McIntyre, 1977.
+\item Makah Cultural and Research Center. Ozette archaeological materials.
+\item King County. ``Birds and Mammals---Biodiversity.'' Marine mammal inventory.
+\item Seal Sitters. Marine mammal identification and monitoring. \url{https://www.sealsitters.org/}
+\end{enumerate}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build and deploy the PNW Mammalian Taxonomy as a comprehensive GSD knowledge base module containing six research modules, a full peer-reviewed bibliography, and cross-links to the PNW Avian Taxonomy and existing PNW Research Series. The taxonomy will document 140+ terrestrial and 35+ marine mammal species with complete biological profiles, evolutionary histories, ecoregion placements, ecological network roles, and cultural context.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave Execution Architecture
+══════════════════════════════════════════════════
+
+WAVE 0: Foundation                       [Sequential]
+  ├─ Shared taxonomy schema (Haiku)
+  ├─ Source index + bibliography scaffold (Haiku)
+  └─ Ecoregion zone definitions (Haiku)
+
+WAVE 1: Parallel Survey Tracks           [Parallel]
+  Track A: Carnivores + Ungulates (Sonnet)
+  │  └─ ~35 species × full profiles
+  Track B: Small Mammals + Bats (Sonnet)
+  │  └─ ~100 species × full profiles
+  Track C: Marine Mammals (Opus)
+     └─ ~35 species × profiles + migration
+
+WAVE 2: Deep Analysis (Parallel)         [Parallel]
+  Track D: Ecoregion Communities (Opus)
+  │  └─ 8 zones × community analysis
+  Track E: Evolutionary Bio + Paleo (Opus)
+     └─ Megafauna, refugia, recovery
+
+WAVE 3: Ecological Networks + Culture    [Sequential]
+  ├─ Ecosystem engineering roles (Opus)
+  ├─ Cultural ornithology (Opus)
+  ├─ Mammal-as-skill framework (Opus)
+  ├─ Cross-module synthesis (Opus)
+  └─ Bibliography finalization (Sonnet)
+
+WAVE 4: Publication + Verification       [Sequential]
+  ├─ Document assembly (Sonnet)
+  ├─ Taxonomic accuracy check (Sonnet)
+  ├─ Safety boundary check (WARDEN/Opus)
+  └─ Final publication
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+D1 & Carnivore \& Ungulate Compendium & 35+ species with complete profiles including recovery/recolonization status \\
+D2 & Small Mammal \& Bat Atlas & 100+ species with profiles, endemic subspecies flagged, old-growth associations documented \\
+D3 & Marine Mammal Compendium & 35+ species with migration, population, ESA/MMPA status; orca ecotype analysis \\
+D4 & Ecoregion Community Profiles & 8 ecoregion zones with assemblage lists, keystone engineers, indicator species \\
+D5 & Evolutionary Biology \& Paleo Synthesis & Pleistocene context, 10+ speciation/extinction/recovery events \\
+D6 & Ecological Networks \& Cultural Module & 5+ quantified engineering interactions, 10+ skill mappings, Indigenous knowledge (nation-specific) \\
+D7 & Complete Bibliography & 80+ sources across government, peer-reviewed, and professional categories \\
+D8 & Cross-link Index & Connections to 4+ PNW Research Series documents \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Taxonomy Schema & None & Haiku & 5K \\
+Source Index & None & Haiku & 8K \\
+Ecoregion Definitions & None & Haiku & 6K \\
+Carnivore Profiles & Schema & Sonnet & 60K \\
+Ungulate Profiles & Schema & Sonnet & 40K \\
+Rodent Profiles & Schema & Sonnet & 80K \\
+Lagomorph + Insectivore & Schema & Sonnet & 50K \\
+Bat Profiles & Schema & Sonnet & 40K \\
+Cetacean Profiles & Schema, Sources & Opus & 60K \\
+Pinniped + Sea Otter & Schema, Sources & Opus & 30K \\
+Ecoregion Analysis & Eco Defs, Profiles & Opus & 70K \\
+Evolutionary Synthesis & Profiles, Sources & Opus & 50K \\
+Ecological Networks & Profiles, Eco Analysis & Opus & 50K \\
+Cultural Knowledge & All Modules & Opus & 40K \\
+Skill Metaphor Framework & Profiles, Networks & Opus & 20K \\
+Cross-module Synthesis & All Modules & Opus & 30K \\
+Bibliography Assembly & All Sources & Sonnet & 15K \\
+Verification Pass & All Deliverables & Sonnet & 20K \\
+Safety Check & All Deliverables & Opus & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & 32\% & Marine mammal ecology, evolutionary synthesis, cultural sensitivity, ecosystem engineering analysis, cross-module integration, safety \\
+Sonnet & 60\% & Species profile compilation (terrestrial), bibliography, verification---structured template work \\
+Haiku & 8\% & Shared schemas, templates, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 2 \\
+1 & Parallel Surveys & 3 tracks & Sonnet+Opus & 12 \\
+2 & Deep Analysis & 2 tracks & Opus & 7 \\
+3 & Networks + Culture & Sequential & Opus+Sonnet & 6 \\
+4 & Publication + QA & Sequential & Sonnet+Opus & 4 \\
+\midrule
+ & \textbf{Total} & & & \textbf{~31} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Foundation (Wave 0) & --- & --- & 19K \\
+Carnivore + Ungulate (Wave 1A) & --- & 100K & --- \\
+Small Mammal + Bat (Wave 1B) & --- & 170K & --- \\
+Marine Mammals (Wave 1C) & 90K & --- & --- \\
+Ecoregion Analysis (Wave 2D) & 70K & --- & --- \\
+Evolutionary Bio (Wave 2E) & 50K & --- & --- \\
+Networks + Culture (Wave 3) & 140K & --- & --- \\
+Publication + QA (Wave 4) & 10K & 35K & --- \\
+\midrule
+\textbf{Totals} & \textbf{360K} & \textbf{305K} & \textbf{19K} \\
+\midrule
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{~684K tokens across ~31 context windows}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Dependency Graph — PNW Mammalian Taxonomy Mission
+══════════════════════════════════════════════════
+
+Wave 0 (Sequential):
+  [Schema] ──┬──> [Source Index] ──> [Eco Defs]
+             │
+Wave 1 (Parallel):
+             ├──> [Track A: Carnivores+Ungulates]──────┐
+             ├──> [Track B: Small Mammals+Bats]────────┤
+             └──> [Track C: Marine Mammals]────────────┤
+                                                       │
+Wave 2 (Parallel):                                     │
+             ┌──> [Track D: Ecoregion Analysis] <──────┤
+             └──> [Track E: Evo Bio + Paleo] <─────────┘
+                         │             │
+Wave 3 (Sequential):    │             │
+             ┌───────────┴─────────────┘
+             v
+  [Ecological Networks] ──> [Cultural Knowledge]
+             │                     │
+             v                     v
+  [Skill Metaphors] ──> [Cross-Module Synthesis]
+                                   │
+Wave 4 (Sequential):              │
+             v                     v
+  [Document Assembly] ──> [Verification] ──> [Safety]
+                                              │
+                                              v
+                                        [PUBLISHED]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & 9 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional organizations \\
+SC-NUM & Numerical attribution & Every population count, decline percentage, or range measurement attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents conservation evidence without advocating for specific management positions \\
+SC-END & Endangered species locations & No GPS coordinates, den sites, haul-outs, or calving areas for ESA-listed species \\
+SC-IND & Indigenous attribution & Every Indigenous knowledge reference names a specific nation \\
+SC-CLI & Climate data sourced & Every climate-related projection cites specific agency data \\
+SC-CUL & Cultural sovereignty & No Level 2--3 restricted cultural content \\
+SC-MMP & MMPA accuracy & Marine mammal protection laws cited accurately with correct jurisdictional boundaries \\
+SC-TAX & Taxonomic authority & All names follow current accepted taxonomy; disputed classifications noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Terrestrial species count & 140+ species with complete profiles \\
+CF-02 & Marine species count & 35+ species with population/migration data \\
+CF-03 & Profile completeness & Every species: name, taxonomy, morphometrics, habitat, diet, reproduction, status, evolutionary note \\
+CF-04 & Ecoregion zone coverage & All 8 ecoregion zones documented \\
+CF-05 & Keystone species & Each ecoregion identifies keystone engineers and indicator species \\
+CF-06 & Orca ecotype analysis & Southern Resident, Bigg's, and offshore ecotypes documented with subspecies status \\
+CF-07 & Recovery species & Wolf, grizzly, caribou, orca recovery status documented with current data \\
+CF-08 & Evolutionary events & At least 10 PNW-relevant speciation/extinction/recovery events \\
+CF-09 & Ecological interactions & At least 5 quantified mammal-ecosystem engineering interactions \\
+CF-10 & Skill metaphor count & At least 10 mammal-to-skill mappings \\
+CF-11 & Bibliography size & 80+ sources \\
+CF-12 & Cross-link count & 4+ PNW Research Series cross-links \\
+CF-13 & Endemic subspecies & PNW endemic forms explicitly documented \\
+CF-14 & Bat old-growth association & Old-growth forest bat species documented with roost requirements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Terrestrial $\rightarrow$ Ecoregion & Every species mapped to at least one ecoregion \\
+IN-02 & Marine $\rightarrow$ Salmon link & Orca-salmon-bear-forest nutrient pathway traceable across modules \\
+IN-03 & Profile $\rightarrow$ Evolution & Evolutionary notes consistent with Module 5 narratives \\
+IN-04 & Avian Taxonomy cross-ref & Shared species interactions (raptor-prey, salmon nutrient pathway) consistent across both taxonomies \\
+IN-05 & Data consistency & Same species in multiple modules uses consistent data \\
+IN-06 & Cultural $\rightarrow$ Profiles & Every mammal in Module 6 Indigenous knowledge has a full profile \\
+IN-07 & Skill $\rightarrow$ Architecture & Skill mappings reference actual GSD patterns \\
+IN-08 & Self-containment & Reader with no prior knowledge can understand the full PNW mammalian landscape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Species inventories (140+ terrestrial, 35+ marine) & CF-01, CF-02, CF-13 & Pending \\
+2. Complete species profiles & CF-03, CF-14 & Pending \\
+3. Marine mammal migration/population data & CF-06, IN-02 & Pending \\
+4. Eight ecoregion zones & CF-04, CF-05, IN-01 & Pending \\
+5. Evolutionary histories (10+ events) & CF-08, IN-03 & Pending \\
+6. Ecological interactions (5+) & CF-09, IN-02 & Pending \\
+7. Indigenous knowledge (nation-specific) & SC-IND, SC-CUL, IN-06 & Pending \\
+8. Cross-links to PNW series (4+) & CF-12, IN-04, IN-07 & Pending \\
+9. Numerical attribution & SC-NUM, SC-SRC & Pending \\
+10. Bibliography (80+) & CF-11 & Pending \\
+11. Skill metaphor framework (10+) & CF-10, IN-07 & Pending \\
+12. Self-contained document & IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; web research for gaps \\
+EXEC-A & Executor & Terrestrial mammal document production \\
+EXEC-B & Executor & Small mammal + bat document production \\
+CRAFT-CARNIVORE & Lg. Mammal Specialist & Carnivore and ungulate profiles \\
+CRAFT-MICRO & Sm. Mammal Specialist & Rodent, lagomorph, insectivore, bat profiles \\
+CRAFT-MARINE & Marine Specialist & Cetacean, pinniped, sea otter ecology \\
+CRAFT-ECO & Ecologist & Ecoregion analysis, ecological networks \\
+CRAFT-PHYLO & Phylogenist & Evolutionary biology, paleontology \\
+VERIFY & Verification & Taxonomic accuracy; source validation \\
+INTEG & Integration & Cross-module + cross-taxonomy validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Mgr & Token budget; session planning \\
+WARDEN & Safety Agent & Endangered species protection; cultural sovereignty \\
+TOPO & Topology Mgr & Agent team structure \\
+LOG & Chronicle & Audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Context Windows & ~31 (estimated) \\
+Total Sessions & ~16 \\
+Total Tokens & ~684K \\
+Opus Budget & ~360K (53\%) \\
+Sonnet Budget & ~305K (45\%) \\
+Haiku Budget & ~19K (3\%) \\
+Parallel Tracks & 3 (Wave 1), 2 (Wave 2) \\
+Research Modules & 6 + Synthesis \\
+Species Profiles Target & 140+ terrestrial, 35+ marine \\
+Bibliography Target & 80+ sources \\
+Test Count & 36 (9 safety, 14 core, 8 integration, 5 edge) \\
+Safety-Critical Gates & 9 mandatory-pass \\
+Cross-Links to PNW Series & 4+ (Avian Taxonomy, Salish Sea, Heritage Skills, Field Guide) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{The fate of fecal pellets varies, depending on where they fall.}
+
+\vspace{0.5em}
+
+Chris Maser wrote that sentence about flying squirrels, voles, and the mycorrhizal fungi they carry in their guts. It is, arguably, the most consequential sentence in Pacific Northwest ecology. Because what it describes---invisible animals performing invisible functions that sustain the visible forest---is the architecture of this entire region. The beaver no one sees damming a headwater creek. The shrew no one watches hunting beneath the log. The orca pod no one hears coordinating a salmon drive through clicks and whistles in water darkened by glacial silt.
+
+This mission documents not just the mammals, but the relationships they weave---between ocean and forest, between surface and soil, between the ancient megafauna that shaped these landscapes and the recovering predators tentatively returning to them. It builds the companion layer to the avian taxonomy, and together they form the vertebrate skeleton of a knowledge base that tries to see the Pacific Northwest as its Indigenous peoples have always seen it: not as a collection of species, but as a web of relatives.
+
+\vspace{0.5em}
+
+\hfill\textit{--- Fur, Fin \& Fang, PNW Research Series}
+\end{quotebox}
+
+\end{document}

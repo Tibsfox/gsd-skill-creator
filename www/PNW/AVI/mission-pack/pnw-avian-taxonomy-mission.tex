@@ -1,0 +1,1039 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+% ============================================================
+% COLOR SCHEME — Ecology/Nature: Forest Green + River Blue + Earth Brown
+% ============================================================
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ============================================================
+% SECTION FORMATTING
+% ============================================================
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ============================================================
+% CUSTOM ENVIRONMENTS
+% ============================================================
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ============================================================
+% HEADERS AND FOOTERS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Avian Taxonomy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ============================================================
+% HYPERLINKS
+% ============================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={PNW Avian Taxonomy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Wings of the\\[0.3em]Pacific Northwest}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Complete Avian Taxonomy of the Pacific Northwest}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Resident, Migratory \& Endemic Bird Species\\Across All Ecoregions}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 40+ context windows across 18+ sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Pacific Northwest Avian Taxonomy --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Research-Integrated}
+\metafield{Depends on:}{gsd-foxfire-heritage-skills-vision.md, 04-salish-sea-expansion-vision.md, gsd-ecosystem-field-guide.html}
+\metafield{Context:}{A comprehensive taxonomic survey of all bird species found in the Pacific Northwest, organized by ecoregion and microclimate zone, with full biological profiles, evolutionary histories, migratory pathway analysis, and deep cross-links to the PNW Research Series knowledge base. Part of a growing body of Pacific Northwest ecological knowledge that interconnects with heritage skills, cultural practices, and the Salish Sea expansion.}
+
+\subsection{Vision}
+
+If you have walked the trails of the Pacific Northwest---from the salt-sprayed sea stacks of Cape Flattery to the alpine meadows above timberline on Tahoma, from the Douglas-fir cathedrals of the Hoh Rainforest to the sage-scented plateaus east of the Cascades---you have walked through one of the most extraordinary avian landscapes on Earth.
+
+Nearly 500 bird species use the diverse habitats of Washington, Oregon, Idaho, and British Columbia in some part of their life cycle. They breed in old-growth canopies, forage in tidal mudflats, nest in subalpine meadows, hunt across sagebrush steppe, and ride thermals along volcanic ridgelines. Some, like the Northern Spotted Owl, have become symbols of conservation battles that reshaped forest policy for a continent. Others, like the Marbled Murrelet---a seabird that nests in moss on the branches of 200-foot conifers---are so improbable in their ecology that scientists did not discover their first nest until 1974.
+
+This research mission aims to produce the most comprehensive, scientifically validated, ecoregion-organized taxonomy of Pacific Northwest birds ever assembled for the GSD knowledge base. Every species will receive a full biological profile: morphology, behavior, diet, habitat, reproductive ecology, population status, conservation threats, and known evolutionary history traced through phylogenetic research. Migratory species will be documented with their flyway patterns, staging areas, and seasonal timing. Each bird will be placed within its ecoregion context---coastal, lowland, foothill, montane, subalpine, alpine, riparian, and the distinct east-side steppe and shrubland zones.
+
+But this mission does more than catalog. It imagines each bird as a kind of \textit{skill}---an evolved solution to the problem of living in a specific niche. The Red-breasted Sapsucker's precisely drilled sap wells are a harvesting algorithm. The Dipper's ability to walk underwater along river bottoms is a sensory adaptation skill. The Bar-tailed Godwit's 7,000-mile nonstop transoceanic flight is an endurance engineering marvel. When we study how evolution ``wrote'' these skills into genomes over millions of years, we gain insight into how artificial skill systems might emerge, adapt, and specialize---the same questions that animate the GSD skill-creator project.
+
+The knowledge base this mission builds is not standalone. It weaves directly into the Salish Sea expansion's salmon ecology (birds and salmon share the same nutrient cycles), the heritage skills curriculum (Coast Salish peoples read bird behavior as environmental grammar), and the broader PNW Research Series that documents the interconnected systems---geological, hydrological, ecological, cultural---that define this region. A taxonomy of birds is, in the end, a taxonomy of relationships.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented regional knowledge.} Existing PNW bird references cover Washington, Oregon, Idaho, and British Columbia individually. No single open knowledge base integrates the full taxonomy across the bioregion with ecoregion-level granularity, creating artificial boundaries where birds see none.
+
+\item \textbf{Missing evolutionary context.} Field guides describe what birds look like and where they live, but rarely trace the phylogenetic pathways that produced current species. Without evolutionary context, learners miss the deeper story of how adaptation, speciation, and extinction shaped the avifauna we see today.
+
+\item \textbf{Disconnection from ecosystem networks.} Birds are nodes in vast ecological networks---pollination, seed dispersal, nutrient cycling, predator-prey dynamics, salmon-derived nitrogen transport---but most references treat them as isolated species accounts rather than ecosystem participants.
+
+\item \textbf{No skill-metaphor framework.} The GSD ecosystem lacks a ``living examples'' corpus that connects biological adaptation to computational skill design. Bird specializations are natural analogs for the skill patterns (observation, adaptation, specialization, composition) that skill-creator implements.
+
+\item \textbf{Cultural knowledge gap.} Indigenous peoples of the Pacific Northwest developed sophisticated ornithological knowledge over millennia---migration timing, behavioral indicators, ecological relationships---that is absent from Western taxonomic references and unlinked to the heritage skills curriculum.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A living taxonomy where each bird species is a fully documented biological ``skill card'' placed within its ecoregion, evolutionary lineage, migratory network, and cultural context, interconnected with the broader PNW Research Series knowledge base.
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+Pacific Northwest Avian Study Region — Ecoregion Zones
+═══════════════════════════════════════════════════════
+
+ALPINE / SUBALPINE (>5,000 ft)
+│ Ptarmigan, rosy-finches, pipits, mountain bluebirds
+│ Cascades, Olympics, Blue Mountains, Selkirks
+├──────────────────────────────────────────────────────
+MONTANE FOREST (2,500–5,000 ft)
+│ Spotted owls, goshawks, nutcrackers, crossbills
+│ Mid-elevation conifer belts, both slopes
+├──────────────────────────────────────────────────────
+FOOTHILL / OAK WOODLAND (500–2,500 ft)
+│ Bluebirds, Lewis's woodpeckers, acorn woodpeckers
+│ Willamette Valley, Rogue Valley, east slope transition
+├──────────────────────────────────────────────────────
+LOWLAND FOREST / URBAN (<500 ft)
+│ Steller's jays, chickadees, wrens, hummingbirds
+│ Puget Trough, Willamette lowlands, coastal plains
+├──────────────────────────────────────────────────────
+RIPARIAN / WETLAND / ESTUARINE
+│ Herons, kingfishers, dippers, swallows, rails
+│ Columbia R., Skagit delta, Grays Harbor, Willapa Bay
+├──────────────────────────────────────────────────────
+COASTAL / MARINE / PELAGIC
+│ Murrelets, puffins, storm-petrels, cormorants, gulls
+│ Outer coast, sea stacks, Salish Sea, Strait of JdF
+├──────────────────────────────────────────────────────
+EAST-SIDE STEPPE / SHRUBLAND
+│ Sage-grouse, burrowing owls, shrikes, sage sparrows
+│ Columbia Plateau, Great Basin fringe, Malheur
+├──────────────────────────────────────────────────────
+PACIFIC FLYWAY CORRIDOR (Migratory Overlay)
+│ Shorebirds, waterfowl, raptors, neotropical migrants
+│ Alaska → Patagonia transit through all PNW zones
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Module Architecture — Six Research Modules + Synthesis
+══════════════════════════════════════════════════════
+
+MODULE 1: RESIDENT TAXONOMY                  [Sonnet]
+├─ Full profiles: all year-round PNW species
+├─ Organized by taxonomic order + ecoregion
+└─ ~180 species × full bio + evolutionary history
+
+MODULE 2: MIGRATORY SPECIES & FLYWAYS        [Sonnet]
+├─ Pacific Flyway analysis
+├─ Neotropical migrants, shorebirds, waterfowl
+└─ ~200 species × seasonal profiles + routes
+
+MODULE 3: ECOREGION AVIAN COMMUNITIES        [Opus]
+├─ Bird communities per ecoregion zone
+├─ Indicator species, keystone species
+└─ Microclimate specializations
+
+MODULE 4: EVOLUTIONARY BIOLOGY               [Opus]
+├─ Phylogenetic trees for PNW families
+├─ Speciation events, adaptive radiation
+└─ K-Pg recovery, Pleistocene refugia
+
+MODULE 5: ECOLOGICAL NETWORKS                [Opus]
+├─ Bird roles in PNW ecosystems
+├─ Salmon-bird nutrient cycling
+├─ Pollination, seed dispersal, pest control
+
+MODULE 6: CULTURAL ORNITHOLOGY               [Opus]
+├─ Indigenous ornithological knowledge
+├─ Bird-as-skill metaphor framework
+└─ Cross-links to Heritage Skills + Salish Sea
+
+         ┌───────────────────────┐
+         │  SYNTHESIS MODULE     │  [Opus]
+         │  Cross-module         │
+         │  integration +        │
+         │  bibliography         │
+         └───────────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Resident Species Taxonomy}
+Complete biological profiles for all bird species that maintain year-round populations in the Pacific Northwest. Organized by taxonomic order (following AOS Check-list sequence) and cross-referenced by ecoregion. Each profile includes: common and scientific name, taxonomic classification (order, family, genus, species, subspecies where relevant), physical description (length, wingspan, mass, plumage by sex and age), habitat preferences by ecoregion, diet and foraging behavior, reproductive biology (nest type, clutch size, incubation period, fledging period), vocalizations, population status and trends, conservation concerns, and known evolutionary history with phylogenetic placement.
+
+\subsubsection{Module 2: Migratory Species and Pacific Flyway}
+Comprehensive documentation of all migratory bird species that pass through, breed in, or winter in the Pacific Northwest as part of the Pacific Flyway. Includes neotropical migrants (warblers, flycatchers, vireos, tanagers), shorebirds (sandpipers, plovers, godwits), waterfowl (ducks, geese, swans), raptors (hawks, eagles, falcons), and pelagic visitors. Each species profile includes full biology plus: migratory route, timing (spring/fall arrival and departure windows), key staging areas (Grays Harbor, Malheur NWR, Klamath Basin, Boundary Bay, Skagit Delta), breeding grounds, wintering grounds, flyway-specific threats (wildfire smoke disruption, habitat loss at staging areas, climate-driven timing mismatches).
+
+\subsubsection{Module 3: Ecoregion Avian Communities}
+Analysis of bird communities within each PNW ecoregion zone: coastal/marine/pelagic, lowland forest and urban, foothill and oak woodland, montane forest, subalpine and alpine, riparian/wetland/estuarine, and east-side steppe/shrubland. For each zone: characteristic species assemblages, indicator species, keystone species, seasonal variation in community composition, elevation gradients, microclimate effects (rain shadow, fog belt, thermal corridors), edge effects between zones, and comparisons between analogous zones (e.g., Olympic coastal vs. Oregon coastal, North Cascades alpine vs. Blue Mountains alpine).
+
+\subsubsection{Module 4: Evolutionary Biology and Phylogenetics}
+Evolutionary history of PNW bird families, tracing phylogenetic lineages through deep time. Covers: post-K-Pg avian radiation and the origins of modern bird orders, Tertiary diversification events relevant to PNW lineages, Pleistocene glacial refugia and their role in shaping current distributions and subspeciation, Holocene range shifts and community assembly, active speciation and hybridization events (e.g., Northern Flicker intergrade zones, Townsend's $\times$ Hermit Warbler hybrid zones), and molecular phylogenetic evidence from recent genomic studies. Sources from Cornell Lab's Birds of the World Phylogeny Explorer, AOS taxonomy, and peer-reviewed systematic studies.
+
+\subsubsection{Module 5: Ecological Networks}
+Birds as participants in PNW ecosystem processes. Documents: marine-derived nutrient transport (salmon carcasses $\rightarrow$ riparian birds $\rightarrow$ forest nitrogen), pollination networks (hummingbirds and native plant co-evolution), seed dispersal (jays, nutcrackers, thrushes), pest regulation (insectivorous bird guilds in forest and agricultural systems), scavenging and nutrient cycling (corvids, raptors), trophic cascades (owl/raptor predation effects on rodent populations and forest regeneration), and indicator species relationships (murrelets as old-growth indicators, sage-grouse as sagebrush ecosystem health proxies).
+
+\subsubsection{Module 6: Cultural Ornithology and Skill Metaphors}
+Two interlocking components. First: Indigenous ornithological knowledge from Pacific Northwest nations, including bird species as environmental indicators (Coast Salish, Makah, Kwakwaka'wakw, Nuu-chah-nulth observation systems), birds in ceremonial and artistic traditions, and the integration of avian knowledge with salmon ecology and seasonal calendars. All Indigenous knowledge references specific nations and published, publicly available sources. Second: the bird-as-skill metaphor framework, mapping avian adaptations to computational skill patterns---observation skills (raptors), navigation skills (migrants), cooperative skills (corvids), resource harvesting skills (woodpeckers, sapsuckers), communication skills (songbirds), and endurance skills (long-distance migrants). Cross-links to GSD skill-creator architecture.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  orchestrator:
+    model: opus
+    context_budget: 200000
+  agents:
+    - name: CRAFT-TAXON
+      model: sonnet
+      role: Taxonomic survey compilation
+      modules: [1, 2]
+    - name: CRAFT-ECO
+      model: opus
+      role: Ecoregion and ecosystem analysis
+      modules: [3, 5]
+    - name: CRAFT-PHYLO
+      model: opus
+      role: Evolutionary biology synthesis
+      modules: [4]
+    - name: CRAFT-CULTURE
+      model: opus
+      role: Cultural ornithology + skill metaphors
+      modules: [6]
+    - name: SCOUT
+      model: sonnet
+      role: Source validation and bibliography
+    - name: VERIFY
+      model: sonnet
+      role: Taxonomic accuracy checking
+    - name: WARDEN
+      model: opus
+      role: Safety + sensitivity enforcement
+  safety_warden:
+    rules:
+      - Never publish precise coordinates of endangered
+        species nesting sites
+      - All Indigenous knowledge references specific nations
+      - All population data attributed to specific agencies
+      - No policy advocacy in conservation sections
+      - Endangered species locations generalized to
+        county/watershed level only
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item All bird species documented in Washington, Oregon, Idaho, and British Columbia by AOS and state/provincial records committees
+\item Full biological profiles for resident and regularly occurring migratory species (~400+ species)
+\item Abbreviated profiles for accidental/vagrant species (~100+ species)
+\item Seven ecoregion zones with community-level analysis
+\item Evolutionary history at family and genus level with PNW-specific speciation events
+\item Pacific Flyway migratory analysis with key staging areas
+\item Ecological network documentation (nutrient cycling, pollination, seed dispersal)
+\item Cross-links to existing PNW Research Series documents
+\item Complete peer-reviewed bibliography
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Individual population genetics studies (reference only, not original research)
+\item Captive breeding program specifics
+\item Hunting regulations and game management
+\item Climate modeling or population projections beyond published agency data
+\item Restricted/sacred Indigenous knowledge (Level 2--3 cultural content)
+\item Live bird identification tool or interactive key (separate project)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Species inventories cover all taxonomic orders documented in WA, OR, ID, and BC state/provincial records, totaling 400+ full profiles.
+\item Every species profile includes: scientific name, taxonomic placement, morphometrics, habitat, diet, reproduction, conservation status, and at least one evolutionary/phylogenetic note.
+\item Migratory species include flyway route, seasonal timing, and key PNW staging areas with citations.
+\item All seven ecoregion zones have documented bird community assemblages with indicator and keystone species identified.
+\item Evolutionary histories trace at least 15 PNW-relevant speciation or adaptive radiation events with phylogenetic citations.
+\item Ecological network analysis documents at least 5 quantified bird-ecosystem interactions (nutrient transport, pollination, seed dispersal, pest control, trophic cascade) with data citations.
+\item Every Indigenous knowledge reference names a specific nation and cites a published, publicly available source.
+\item Cross-links to at least 3 existing PNW Research Series documents are explicit and bidirectional.
+\item All numerical claims (population counts, decline percentages, range sizes) are attributed to specific government agencies, peer-reviewed studies, or professional ornithological organizations.
+\item Bibliography contains 80+ sources from government agencies (USFWS, USGS, USFS, WDFW, ODFW, Environment Canada), peer-reviewed journals, university research programs, and professional organizations (AOS, Cornell Lab, Partners in Flight).
+\item The bird-as-skill metaphor framework maps at least 10 avian adaptations to GSD skill-creator architectural patterns.
+\item Document is self-contained: a reader with no prior ornithological knowledge can understand the full PNW avian landscape from this document alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+04-salish-sea-expansion-vision.md & Salmon ecology, reef net fishing, and Coast Salish bird knowledge directly cross-link with Module 5 (ecological networks) and Module 6 (cultural ornithology) \\
+gsd-foxfire-heritage-skills-vision.md & Heritage documentation methodology applies to bird observation and identification skills \\
+gsd-ecosystem-field-guide.html & PNW Avian Taxonomy is a ``seasonal visitor'' in the wider ecosystem; field guide references this study \\
+gsd-skill-creator-analysis.md & Bird-as-skill metaphor framework in Module 6 feeds new pattern language into skill-creator's observation engine \\
+gsd-chipset-architecture-vision.md & Fleet-profile mission demonstrates full chipset capability with Opus/Sonnet/Haiku model assignment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Pacific Northwest's birds are living demonstrations of the Amiga Principle. Each species has evolved remarkable capability not through brute metabolic force but through architectural elegance---the Rufous Hummingbird weighs less than a nickel but migrates 3,900 miles. The Clark's Nutcracker caches 30,000 pine seeds per season and remembers where it buried each one. The American Dipper walks on the bottom of freezing mountain streams, held down by dense bones and nictitating membranes that let it see underwater. These are not feats of raw power. They are feats of design.
+
+This is the space between---between the genome and the phenotype, between the ancestral form and the modern species, between the bird and its niche, between Indigenous knowledge and Western taxonomy, between the biological skill and the computational one. When we catalog these species, we are not merely listing names. We are reading the source code of 65 million years of adaptive design, written in nucleotides instead of bytes, compiled by selection instead of interpreters, deployed across ecoregions instead of servers. And in the spaces between those species---in the hybrid zones where Townsend's meets Hermit, in the nutrient pathways where salmon feeds eagle feeds forest---we find the same generative potential that the GSD ecosystem seeks to harness: the creative power of connection.
+
+\begin{quotebox}
+\textit{``The world of knowing eighty species of edible plants by their leaves and two hundred species of birds by their calls''} --- from the tradition of deep ecological knowledge that this mission seeks to honor and extend.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Avian Taxonomy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides the evidential foundation for building the PNW Avian Taxonomy knowledge base. Mission agents should use this document as their primary source of verified facts, source organizations, and quantitative data. Each module section below contains findings organized by subtopic, with citations to professional sources.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item U.S. Fish \& Wildlife Service (USFWS) --- endangered species listings, Pacific Flyway management, National Wildlife Refuges
+\item U.S. Geological Survey (USGS) --- Breeding Bird Survey, migration tracking, population modeling
+\item U.S. Forest Service Pacific Northwest Research Station --- Northern Spotted Owl and Marbled Murrelet monitoring, old-growth habitat studies
+\item Washington Department of Fish \& Wildlife (WDFW) --- state species lists, priority habitats and species, marine bird surveys
+\item Oregon Department of Fish \& Wildlife (ODFW) --- state bird records, conservation strategies
+\item Idaho Department of Fish \& Game (IDFG) --- inland and mountain species management
+\item Environment and Climate Change Canada / Birds Canada --- BC bird records, Important Bird Areas
+\item Cornell Lab of Ornithology --- Birds of the World, eBird, Phylogeny Explorer, Macaulay Library
+\item American Ornithological Society (AOS) --- Check-list of North and Middle American Birds (taxonomy authority)
+\item Partners in Flight --- Landbird Conservation Plan, population estimates, species assessments
+\item Pacific Birds Habitat Joint Venture --- flyway conservation, shorebird reserves, WHSRN sites
+\item Pacific Flyway Council --- waterfowl and migratory bird management data books
+\item Bird Alliance of Oregon (formerly Portland Audubon) --- advocacy, Marbled Murrelet conservation
+\item National Audubon Society --- Important Bird Areas, Christmas Bird Count data
+\end{itemize}
+
+\subsection{Module 1 Reference: Resident Species Taxonomy}
+
+\subsubsection{Taxonomic Scope}
+The Pacific Northwest avifauna encompasses over 520 species documented in Washington State alone as of November 2021 per the Washington Bird Records Committee. Oregon's state list is comparable, and British Columbia adds northern-range species not found in the contiguous US states. Idaho contributes interior mountain and Great Basin species. Combined, the full PNW study region supports approximately 500--550 regularly occurring species across all status categories (breeding, wintering, transient, pelagic visitor), with an additional 100+ accidental or vagrant records.
+
+Taxonomy follows the AOS Check-list of North and Middle American Birds (7th edition through 62nd Supplement). Key taxonomic orders represented in the PNW include: Anseriformes (48 species in WA alone---ducks, geese, swans), Galliformes (quail, grouse, pheasants, ptarmigan), Podicipediformes (grebes), Columbiformes (pigeons, doves), Caprimulgiformes (nightjars), Apodiformes (swifts, hummingbirds---9 hummingbird species in WA), Gruiformes (rails, cranes), Charadriiformes (shorebirds, gulls, terns, alcids), Pelecaniformes (pelicans, herons, ibises), Accipitriformes (hawks, eagles, harriers), Strigiformes (owls), Piciformes (woodpeckers), Falconiformes (falcons), and Passeriformes (the dominant order encompassing flycatchers, vireos, corvids, chickadees, wrens, thrushes, warblers, sparrows, finches, and blackbirds).
+
+\subsubsection{Representative Species Profiles: Old-Growth Specialists}
+
+\textbf{Northern Spotted Owl} (\textit{Strix occidentalis caurina}): Listed as threatened under the ESA in 1990. A medium-large owl (length 43--50 cm, wingspan 107--114 cm) requiring large contiguous blocks of late-successional forest. The Northwest Forest Plan (1994) was designed in part around its habitat needs, creating a reserve system favoring areas with the highest quality old-growth. Population declines continue, compounded by competition from the invasive Barred Owl (\textit{Strix varia}), which has expanded from eastern North America into the Spotted Owl's range. Recovery efforts now include experimental Barred Owl removal programs. Source: USFS PNW Research Station, Gen. Tech. Rep. PNW-GTR-966 (Lesmeister et al. 2018).
+
+\textbf{Marbled Murrelet} (\textit{Brachyramphus marmoratus}): A small alcid (length ~25 cm) listed as threatened under the federal ESA since 1992, and subsequently elevated to endangered status under Oregon's ESA in 2021. Unique among seabirds for nesting in old-growth coniferous forest up to 50 miles inland, placing eggs directly on moss-covered branches of large trees up to 250 feet high. The first nest was not discovered until 1974. Population has declined over 50\% in the past 50 years. Threats include old-growth habitat loss, nest predation by corvids (Steller's Jays, Common Ravens attracted by human food waste near campsites), oil spills, and gill netting. Oregon's Common Murre population exceeds 700,000 breeding individuals, providing comparative context. Sources: USFWS, WDFW, Bird Alliance of Oregon, OPB (2021).
+
+\subsubsection{Representative Species Profiles: Alpine and Subalpine}
+Cascade alpine zones (timberline varies 7,700--10,000 ft in Oregon, lower in Washington) host specialized bird communities. White-tailed Ptarmigan (\textit{Lagopus leucura}) are the only ptarmigan species native to the contiguous PNW Cascades. Gray-crowned Rosy-Finch (\textit{Leucosticte tephrocotis}) forages at snowfield edges. American Pipit (\textit{Anthus rubescens}) and Horned Lark (\textit{Eremophila alpestris}) breed in alpine meadows above treeline. White-crowned Sparrow (\textit{Zonotrichia leucophrys}) reaches its elevational maximum in subalpine scrub. Source: USFS Province Description M242.
+
+\subsubsection{Representative Species Profiles: East-Side Steppe}
+The Columbia Plateau and Great Basin fringe support a distinct avifauna. Greater Sage-Grouse (\textit{Centrocercus urophasianus}) is an iconic sagebrush obligate whose elaborate lek displays and declining populations have driven major conservation efforts. Burrowing Owl (\textit{Athene cunicularia}), Loggerhead Shrike (\textit{Lanius ludovicianus}), and Sagebrush Sparrow (\textit{Artemisiospiza nevadensis}) are characteristic east-side species absent from west-side forests. Malheur National Wildlife Refuge in Harney County, Oregon is a critical staging area for migrants and breeding ground for numerous waterbirds. Source: USFS, Pacific Flyway Council Data Book.
+
+\subsection{Module 2 Reference: Migratory Species and Pacific Flyway}
+
+\subsubsection{Pacific Flyway Overview}
+The Pacific Flyway is a major north--south migratory corridor extending approximately 4,000 miles long and 1,000 miles wide, from Arctic breeding grounds in Alaska and northern Canada to wintering areas as far south as Patagonia. The flyway concept was formally adopted in 1947 to facilitate management of migratory bird resources. The Pacific Flyway Council, composed of representatives from nine western US states plus Canadian provinces and Mexican states, coordinates management through annual data books and regulatory recommendations. PNW states (WA, OR, ID) and British Columbia are central nodes in this corridor.
+
+Key PNW staging areas for migratory birds include: Grays Harbor NWR (southwestern Washington---major shorebird staging), Malheur NWR (southeastern Oregon---waterfowl and shorebird breeding), Klamath Basin NWR Complex (OR-CA border---historically hosts up to 80\% of Pacific Flyway waterfowl in fall), Boundary Bay (BC---designated Important Bird Area), Skagit River Delta (WA---Snow Goose and Trumpeter Swan wintering), and Willapa Bay (WA---one of the most important estuaries on the Pacific Coast). Sources: USFWS, Pacific Flyway Council, Pacific Birds Habitat Joint Venture.
+
+\subsubsection{Migratory Guilds}
+\textbf{Shorebirds:} Western Sandpiper, Dunlin, Long-billed Dowitcher, Short-billed Dowitcher, Hudsonian Godwit use coastal stopover sites. Surfbird and American Golden-Plover occupy alpine habitats during migration. Bar-tailed Godwit performs one of the longest nonstop flights of any bird (Alaska to New Zealand, ~7,000 miles). Sources: Pacific Birds, WHSRN.
+
+\textbf{Waterfowl:} Snow Geese stage at Fraser and Skagit River deltas. Greater White-fronted Geese (Tule subspecies, population fewer than 10,000) use Summer Lake, Oregon as primary stopover. USGS research documented wildfire smoke disrupting 2020 fall migration, with geese averaging twice the typical migration duration (9 vs. 4 days) and traveling 470 additional miles. Source: USGS Western Ecological Research Center.
+
+\textbf{Neotropical Migrants:} Rufous Hummingbird (breeds PNW, winters Mexico), Swainson's Hawk (breeds PNW, winters Argentina), Olive-sided Flycatcher, Townsend's Warbler, Black Swift, and numerous other passerines follow the flyway seasonally.
+
+\textbf{Raptors:} Turkey Vultures, Swainson's Hawks, and Rough-legged Hawks are notable PNW migrants. Raptors use thermal corridors along the Cascades and Coast Ranges.
+
+\subsubsection{Climate and Wildfire Impacts on Migration}
+USGS GPS tracking of Tule White-fronted Geese during the 2020 wildfire season revealed significant disruption patterns. Birds that encountered smoke showed disorganized flight paths, sharp altitude increases to fly over smoke plumes, and stopovers in non-traditional habitats. Energy expenditure increased dramatically, potentially leading to increased mortality or lower reproductive rates. This finding has broad implications for Pacific Flyway species as wildfire frequency and intensity increase. Source: USGS (2022).
+
+\subsection{Module 3 Reference: Ecoregion Avian Communities}
+
+\subsubsection{Coastal and Marine Zone}
+The PNW outer coast (from the Strait of Juan de Fuca south through Oregon) supports major seabird colonies on offshore rocks and sea stacks. Oregon Islands NWR protects breeding colonies of Common Murre (700,000+ nesting in Oregon), Tufted Puffin, Rhinoceros Auklet, Cassin's Auklet, Leach's Storm-Petrel (15 breeding sites on offshore rocks), and Western Gull. Black Oystercatcher nests above the high-tide line. California Brown Pelicans are post-breeding visitors from southern breeding colonies. The Salish Sea (Puget Sound, Strait of Georgia, Strait of Juan de Fuca) supports major populations of wintering sea ducks, alcids, loons, and grebes. Source: USFWS Pacific Northwest Seabird Program.
+
+\subsubsection{Temperate Rainforest Zone}
+The coastal temperate rainforest stretching from northern California through British Columbia is characterized by Sitka spruce in the fog belt, with western hemlock and Douglas-fir dominant inland. This zone hosts the Marbled Murrelet (nesting), Varied Thrush, Pacific Wren, Chestnut-backed Chickadee, and Red-breasted Sapsucker. The Hoh Rainforest on the Olympic Peninsula, receiving 150--200+ inches of annual precipitation, supports exceptionally high avian biomass. Source: One Earth Central Pacific Northwest Coastal Forests Ecoregion Profile.
+
+\subsubsection{Montane Conifer Forest}
+Mid-elevation Cascade forests (Douglas-fir, Pacific silver fir, mountain hemlock) host Northern Spotted Owl, Northern Goshawk, Townsend's Warbler, Winter Wren, Red-breasted Nuthatch, Gray Jay (renamed Canada Jay), and Steller's Jay. Blue and Ruffed Grouse are important game birds. The subalpine belt features Clark's Nutcracker (whitebark pine mutualist), Mountain Chickadee, and Red Crossbill. Source: USFS Cascade Mixed Forest Province, Ecoregion M242.
+
+\subsubsection{Oak Woodland and Foothill Zone}
+Pacific Northwest oak habitats (Willamette Valley, Klamath Mountains, East-slope Cascades) support a specialized avifauna. Four of six obligate or near-obligate oak cavity-nesting species are resident in these ecoregions. Western Bluebird, Lewis's Woodpecker, Acorn Woodpecker, and White-breasted Nuthatch are characteristic. Twenty highly associated species reach their highest densities in oak habitats. Many oak-associated species are of conservation concern. Source: Pacific Birds Habitat Joint Venture, ``Land Managers Guide to Bird Habitat and Populations in Oak Ecosystems of the Pacific Northwest.''
+
+\subsubsection{East-Side Steppe and Shrubland}
+East of the Cascades, the landscape transitions to ponderosa pine open forest, sagebrush steppe, and high desert. The Columbia Plateau and Malheur Basin support Greater Sage-Grouse, Burrowing Owl, Long-billed Curlew, Ferruginous Hawk, Prairie Falcon, and Say's Phoebe. Riparian corridors through the steppe (Snake River, Deschutes River, John Day River) provide critical habitat for Bullock's Oriole, Yellow-breasted Chat, and Bank Swallow. Source: USFS, WDFW Priority Habitats and Species.
+
+\subsection{Module 4 Reference: Evolutionary Biology}
+
+\subsubsection{Avian Phylogenetics: State of Knowledge}
+The Cornell Lab of Ornithology released the Birds of the World Phylogeny Explorer in January 2026, representing the most comprehensive interactive avian evolutionary tree ever assembled. The tool synthesizes molecular phylogenetic research across all 11,000+ bird species, enabling researchers to trace lineages, compare relationships, and explore timescales of diversification. This resource is foundational for Module 4's work. Source: Cornell Lab of Ornithology (2026).
+
+Key surprises relevant to PNW species include: Downy Woodpeckers and Hairy Woodpeckers are not closely related despite remarkable morphological similarity (convergent evolution). Falcons are not closely related to hawks and eagles despite similar predatory ecology. The Northern Flicker shows active genomic divergence between Red-shafted (western) and Yellow-shafted (eastern) forms with a well-documented hybrid zone. Source: Lovette Lab, Cornell Department of Ecology and Evolutionary Biology.
+
+\subsubsection{Post-K-Pg Radiation}
+All modern bird orders trace their origin to the explosive radiation following the Cretaceous--Paleogene mass extinction 66 million years ago. Research by Berv and Field (2018) documented an ``avian Lilliput effect''---a dramatic reduction in body size among post-extinction birds, with subsequent diversification into larger-bodied forms. PNW-relevant lineages including Passeriformes (perching birds), Charadriiformes (shorebirds/alcids), and Accipitriformes (raptors) all emerged during this radiation. Source: \textit{Systematic Biology}, Berv \& Field 2018.
+
+\subsubsection{Pleistocene Refugia and Subspeciation}
+Pacific Northwest avian diversity was profoundly shaped by Pleistocene glacial cycles. Ice sheets repeatedly advanced and retreated across British Columbia and northern Washington, creating isolated refugia where populations diverged. The multiple subspecies of Song Sparrow (\textit{Melospiza melodia})---at least 24 subspecies across North America, with multiple PNW-specific forms including the dark-plumaged Heermann's Song Sparrow---illustrate Pleistocene-driven differentiation. The Townsend's $\times$ Hermit Warbler hybrid zone in the Oregon Cascades represents an active secondary contact zone where populations isolated in separate glacial refugia are re-encountering each other. Sources: AOS, Cornell Lab, multiple peer-reviewed systematics studies.
+
+\subsection{Module 5 Reference: Ecological Networks}
+
+\subsubsection{Salmon-Bird Nutrient Cycling}
+Pacific salmon (\textit{Oncorhynchus} spp.) returning to PNW rivers to spawn and die transport marine-derived nutrients (nitrogen-15, phosphorus) into riparian and forest ecosystems. Bald Eagles, Osprey, Great Blue Herons, Belted Kingfishers, and American Dippers directly consume salmon or salmon carcasses. Corvids (ravens, crows, jays) scavenge and redistribute nutrients. Research has documented that riparian forest productivity correlates with salmon run abundance, with isotopic signatures of marine-derived nitrogen traceable in tree rings near spawning streams. This nutrient pathway directly connects Module 5 with the Salish Sea expansion's salmon ecology documentation. Sources: USFS PNW Research Station, multiple peer-reviewed studies.
+
+\subsubsection{Clark's Nutcracker--Whitebark Pine Mutualism}
+Clark's Nutcracker (\textit{Nucifraga columbiana}) and whitebark pine (\textit{Pinus albicaulis}) represent one of the most tightly evolved bird-plant mutualisms in the PNW. Nutcrackers cache an estimated 30,000+ seeds per season in widely distributed locations, with spatial memory allowing retrieval months later. Unretrieved caches serve as the primary dispersal mechanism for whitebark pine, a keystone alpine species. Whitebark pine is itself threatened by white pine blister rust and mountain pine beetle, with cascading effects on the nutcracker populations that depend on it. Source: USFS, multiple ecological studies.
+
+\subsubsection{Hummingbird Pollination Networks}
+Rufous Hummingbird (\textit{Selasphorus rufus}) is the primary avian pollinator in PNW temperate forests and meadows, with documented co-evolutionary relationships with red tubular wildflowers including red columbine (\textit{Aquilegia formosa}), red-flowering currant (\textit{Ribes sanguineum}), and Indian paintbrush (\textit{Castilleja} spp.). The species' 3,900-mile migration (Alaska to Mexico) makes it a long-distance pollinator connecting ecosystems across the entire Pacific Flyway. Rufous Hummingbird populations have declined significantly, with Partners in Flight designating it a Species of Continental Concern. Source: Partners in Flight, Cornell Lab.
+
+\subsection{Module 6 Reference: Cultural Ornithology}
+
+\subsubsection{Indigenous Ornithological Knowledge}
+Pacific Northwest nations developed sophisticated avian knowledge systems over millennia. Coast Salish peoples recognized bird behavior as environmental grammar---specific bird calls and movements indicated seasonal changes, weather patterns, fish runs, and predator presence. The Makah used seabird observations to locate fish schools and predict weather. Kwakwaka'wakw ceremonial traditions feature specific bird species (Thunderbird, Raven, Eagle) with deep cultural significance. Nuu-chah-nulth knowledge of seabird ecology informed marine resource management. These knowledge systems represent parallel ornithological traditions developed independently of Western taxonomy, yet containing observations of equal or greater ecological depth in their specific geographic contexts.
+
+All Indigenous ornithological knowledge in this module references specific nations and draws exclusively from published, publicly available sources: museum collections, university press publications, tribal cultural program materials, and peer-reviewed ethnographic research. No restricted or sacred knowledge is included. Sources: Suttles 1987/1990 (Coast Salish), Stewart 1977 (Indian Fishing), Makah Cultural and Research Center, Burke Museum Coast Salish collections.
+
+\subsubsection{Bird-as-Skill Metaphor Framework}
+The framework maps avian adaptations to GSD skill-creator patterns:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Avian Adaptation} & \tableheader{Bird Example} & \tableheader{Skill-Creator Pattern} \\
+\midrule
+Precision Harvesting & Red-breasted Sapsucker sap wells & Resource extraction with minimal waste---targeted API calls \\
+Underwater Navigation & American Dipper stream-walking & Cross-environment operation (e.g., filesystem + network) \\
+Spatial Memory Cache & Clark's Nutcracker seed caching & Distributed key-value store with location-aware retrieval \\
+Cooperative Foraging & Harris's Hawk pack hunting & Multi-agent coordination with role specialization \\
+Long-Range Navigation & Bar-tailed Godwit transoceanic flight & Stateless migration with minimal checkpoint overhead \\
+Acoustic Communication & Song Sparrow dialect learning & Adaptive communication protocol (regional customization) \\
+Tool Use & Woodpecker Finch (analogous) & Skill composition---using one skill as input to another \\
+Camouflage Adaptation & Ptarmigan seasonal plumage & Context-aware presentation layer \\
+Thermal Soaring & Turkey Vulture ridge-lift & Energy-efficient batch processing (ride available resources) \\
+Nest Parasitism & Brown-headed Cowbird & Dependency injection (controversial but architecturally real) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Implementation} \\
+\midrule
+Endangered species locations & ABSOLUTE & No GPS coordinates, nest sites, or den locations for ESA-listed species; generalize to county/watershed \\
+Indigenous knowledge attribution & ABSOLUTE & Every reference names a specific nation; never ``Indigenous peoples'' generically \\
+Population data sourcing & GATE & All counts, trends, percentages from USFWS, USGS, state agencies, or peer-reviewed research \\
+Climate projections & GATE & Only published agency data (NOAA, EPA, IPCC scenarios); no independent modeling \\
+Conservation advocacy & ANNOTATE & Present evidence and status without advocating for specific policy positions \\
+Cultural sensitivity levels & GATE & Only Level 1 (publicly available) cultural knowledge; no Level 2--3 restricted content \\
+Taxonomic authority & GATE & Follow AOS Check-list; note disputed classifications without endorsing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{enumerate}[leftmargin=2em, label={[G\arabic*]}]
+\item USFWS. ``Seabirds of the Pacific Northwest.'' Oregon Islands NWR Program. \url{https://www.fws.gov/story/seabirds-pacific-northwest}
+\item USFWS. ``Migratory Bird Program Administrative Flyways.'' Pacific Flyway Council. \url{https://www.fws.gov/partner/migratory-bird-program-administrative-flyways}
+\item USFWS. ``Migratory Bird Pacific Flyway Data Book.'' Annual publication. \url{https://www.fws.gov/media/migratory-bird-pacific-flyway-data-book}
+\item USGS. ``Wildfire Smoke Disrupts Bird Migration in the West.'' Western Ecological Research Center (2022). \url{https://www.usgs.gov/news/wildfire-smoke-disrupts-bird-migration-west}
+\item USGS. ``Mapping Dynamics of Wetlands in the Pacific Flyway.'' EROS Land Imaging Report. \url{https://eros.usgs.gov/doi-remote-sensing-activities/2015/fws/mapping-dynamics-wetlands-pacific-flyway}
+\item USFS Pacific Northwest Research Station. Lesmeister, D.B.; Davis, R.J.; Singleton, P.H.; Wiens, J.D. (2018). ``Ch. 4: Northern spotted owl habitat and populations: status and threats.'' Gen. Tech. Rep. PNW-GTR-966. Portland, OR.
+\item USFS. ``Cascade Mixed Forest---Coniferous Forest---Alpine Meadow Province (M242).'' Ecoregion Description.
+\item USFS. ``Pacific Northwest Region: Forests and Grasslands.'' 24.9 million acres overview. \url{https://www.fs.usda.gov/r06/forests-grasslands}
+\item Washington Department of Fish \& Wildlife. ``Marbled Murrelet Species Profile.'' \url{https://wdfw.wa.gov/species-habitats/species/brachyramphus-marmoratus}
+\item Washington Bird Records Committee. ``List of Birds of Washington State.'' 522 species as of November 2021.
+\item Pacific Flyway Council. Annual management data and regulatory recommendations. \url{https://www.pacificflyway.gov/}
+\end{enumerate}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{enumerate}[leftmargin=2em, label={[P\arabic*]}]
+\item Berv, J.S. and D.J. Field (2018). ``Genomic Signature of an Avian Lilliput Effect across the K-Pg Extinction.'' \textit{Systematic Biology} 67:1--13.
+\item Campagna, L. et al. (2017). ``Repeated divergent selection on pigmentation genes in a rapid finch radiation.'' \textit{Science Advances} 3:e1602404.
+\item Aguillon, S.M., L. Campagna, R.G. Harrison, and I.J. Lovette (2018). ``A flicker of hope: Genomic data distinguish Northern Flicker taxa despite low levels of divergence.'' \textit{The Auk}.
+\item Ralph, C.J., G.L. Hunt, M.G. Raphael, and J.F. Piatt, eds. (1995). ``Ecology and conservation of the Marbled Murrelet.'' Gen. Tech. Rep. PSW-GTR-152. USFS Albany, CA.
+\item Raphael, M.G., A. Shirk, G.A. Falxa, S.F. Pearson (2014). ``Habitat associations of marbled murrelets during the nesting season.'' \textit{Journal of Marine Systems}.
+\item Van Doren, B.M. et al. (2017). ``Correlated patterns of genetic diversity and differentiation across an avian family.'' \textit{Molecular Ecology} 26:3982--3997.
+\item DellaSala, D.A. et al. (2011). ``Temperate and boreal rainforests of the Pacific Coast of North America.'' In: \textit{Temperate and Boreal Rainforests of the World}. Island Press.
+\item Ricketts, T.H. et al. (1999). \textit{Terrestrial Ecoregions of North America: A Conservation Assessment}. Island Press.
+\end{enumerate}
+
+\subsubsection{Professional Organizations \& References}
+\begin{enumerate}[leftmargin=2em, label={[O\arabic*]}]
+\item Cornell Lab of Ornithology. \textit{Birds of the World Phylogeny Explorer} (2026). \url{https://birdsoftheworld.org/}
+\item Cornell Lab of Ornithology. \textit{eBird} citizen science platform. \url{https://ebird.org}
+\item American Ornithological Society. \textit{Check-list of North and Middle American Birds}, 7th ed. through 62nd Supplement.
+\item Partners in Flight. \textit{Landbird Conservation Plan} and population estimates.
+\item Pacific Birds Habitat Joint Venture. ``Land Managers Guide to Bird Habitat and Populations in Oak Ecosystems of the Pacific Northwest.'' \url{https://pacificbirds.org/}
+\item NABCI. ``Bird Conservation Regions Map.'' \url{https://nabci-us.org/resources/bird-conservation-regions-map/}
+\item Aversa, T., R. Cannings, and H. Opperman. \textit{Birds of the Pacific Northwest: A Photographic Guide}. University of Washington Press (2nd ed.).
+\item Shewey, J. and T. Blount. \textit{Birds of the Pacific Northwest} (Timber Press Field Guide). Timber Press, 2017.
+\item One Earth. ``Central Pacific Northwest Coastal Forests Ecoregion.'' \url{https://www.oneearth.org/ecoregions/central-pacific-northwest-coastal-forests/}
+\item American Bird Conservancy. ``Marbled Murrelet Species Profile.'' \url{https://abcbirds.org/birds/marbled-murrelet/}
+\item Bird Alliance of Oregon. ``Marbled Murrelet Conservation Program.'' \url{https://birdallianceoregon.org/}
+\item Conservation Northwest. ``Marbled Murrelet.'' \url{https://conservationnw.org/our-work/wildlife/murrelet/}
+\item Washington Forest Protection Association. ``Endangered Species.'' \url{https://www.wfpa.org/}
+\item Puget Sound Estuarium. ``Bird Species List.'' \url{https://pugetsoundestuarium.org/bird-species-list/}
+\item Portland Community College Library. ``Birds of the Pacific Northwest Research Guide.'' \url{https://guides.pcc.edu/birds}
+\end{enumerate}
+
+\subsubsection{Ethnographic \& Cultural Sources}
+\begin{enumerate}[leftmargin=2em, label={[C\arabic*]}]
+\item Suttles, Wayne. \textit{Coast Salish Essays}. University of Washington Press, 1987.
+\item Suttles, Wayne, ed. \textit{Handbook of North American Indians, Vol. 7: Northwest Coast}. Smithsonian, 1990.
+\item Stewart, Hilary. \textit{Indian Fishing: Early Methods on the Northwest Coast}. Douglas \& McIntyre, 1977.
+\item Makah Cultural and Research Center. Public educational materials. Neah Bay, WA.
+\item Burke Museum. Coast Salish collections and public programs. University of Washington, Seattle.
+\end{enumerate}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build and deploy the PNW Avian Taxonomy as a comprehensive GSD knowledge base module containing six research modules, a full peer-reviewed bibliography, and cross-links to the existing PNW Research Series. The taxonomy will document 400+ bird species with complete biological profiles, evolutionary histories, ecoregion placements, migratory analyses, ecological network roles, and cultural context. The output will be suitable for ingestion by gsd-skill-creator as a reference corpus and for publication as a standalone research document.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave Execution Architecture
+══════════════════════════════════════════════════════
+
+WAVE 0: Foundation                        [Sequential]
+  ├─ Shared taxonomy schema (Haiku)
+  ├─ Source index + bibliography scaffold (Haiku)
+  └─ Ecoregion zone definitions (Haiku)
+
+WAVE 1: Parallel Survey Tracks            [Parallel]
+  Track A: Resident Taxonomy (CRAFT-TAXON / Sonnet)
+  │  └─ ~180 species × full profiles
+  Track B: Migratory Species (CRAFT-TAXON / Sonnet)
+  │  └─ ~200 species × flyway profiles
+  Track C: Ecoregion Communities (CRAFT-ECO / Opus)
+     └─ 7 zones × community analysis
+
+WAVE 2: Deep Analysis (Parallel)          [Parallel]
+  Track D: Evolutionary Biology (CRAFT-PHYLO / Opus)
+  │  └─ Phylogenetic histories + speciation events
+  Track E: Ecological Networks (CRAFT-ECO / Opus)
+     └─ Nutrient cycling, pollination, cascades
+
+WAVE 3: Cultural + Synthesis              [Sequential]
+  ├─ Cultural Ornithology (CRAFT-CULTURE / Opus)
+  ├─ Cross-module synthesis (Orchestrator / Opus)
+  └─ Bibliography finalization (SCOUT / Sonnet)
+
+WAVE 4: Publication + Verification        [Sequential]
+  ├─ Document assembly (Sonnet)
+  ├─ Taxonomic accuracy check (VERIFY / Sonnet)
+  ├─ Safety boundary check (WARDEN / Opus)
+  └─ Final publication
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer:} Shared taxonomy schema (AOS Check-list format), ecoregion zone definitions, source quality standards, species profile template.
+\item \textbf{Survey Layer:} Modules 1 and 2---systematic species-by-species documentation following standardized profile format.
+\item \textbf{Analysis Layer:} Modules 3, 4, 5---cross-species, cross-ecoregion, and cross-temporal analysis requiring judgment and synthesis.
+\item \textbf{Integration Layer:} Module 6 plus synthesis---connecting biological data to cultural context, skill metaphors, and existing PNW Research Series.
+\item \textbf{Verification Layer:} Taxonomic accuracy checking, source validation, safety boundary enforcement, bibliography completeness.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+D1 & Resident Species Compendium & 180+ species with complete profiles, organized by taxonomic order and cross-indexed by ecoregion \\
+D2 & Migratory Species \& Flyway Atlas & 200+ migratory species with seasonal profiles, route maps, staging area documentation \\
+D3 & Ecoregion Community Profiles & 7 ecoregion zones with assemblage lists, indicator species, keystone species, seasonal variation \\
+D4 & Evolutionary Biology Synthesis & Phylogenetic narratives for 15+ PNW-relevant speciation/radiation events \\
+D5 & Ecological Network Analysis & 5+ quantified bird-ecosystem interactions with data citations \\
+D6 & Cultural Ornithology Module & Indigenous knowledge references (nation-specific), bird-as-skill framework with 10+ mappings \\
+D7 & Complete Bibliography & 80+ sources from government, peer-reviewed, and professional sources \\
+D8 & Cross-link Index & Explicit connections to 3+ existing PNW Research Series documents \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Taxonomy Schema & None & Haiku & 5K \\
+Source Index & None & Haiku & 8K \\
+Ecoregion Definitions & None & Haiku & 6K \\
+Resident Profiles A--F & Schema & Sonnet & 120K \\
+Resident Profiles G--P & Schema & Sonnet & 120K \\
+Resident Profiles Q--Z & Schema & Sonnet & 80K \\
+Migratory Shorebirds & Schema, Sources & Sonnet & 60K \\
+Migratory Waterfowl & Schema, Sources & Sonnet & 60K \\
+Migratory Passerines & Schema, Sources & Sonnet & 60K \\
+Migratory Raptors+ & Schema, Sources & Sonnet & 40K \\
+Ecoregion Analysis & Eco Defs, Profiles & Opus & 80K \\
+Evolutionary Synthesis & Profiles, Sources & Opus & 60K \\
+Ecological Networks & Profiles, Eco Analysis & Opus & 50K \\
+Cultural Ornithology & All Modules & Opus & 40K \\
+Skill Metaphor Framework & Profiles, Eco Networks & Opus & 20K \\
+Cross-module Synthesis & All Modules & Opus & 30K \\
+Bibliography Assembly & All Sources & Sonnet & 15K \\
+Verification Pass & All Deliverables & Sonnet & 20K \\
+Safety Check & All Deliverables & Opus & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Ecological synthesis, evolutionary analysis, cultural sensitivity, cross-module integration, safety enforcement---all require judgment \\
+Sonnet & 60\% & Species profile compilation, bibliography assembly, verification---structured work following defined templates \\
+Haiku & 10\% & Shared schemas, templates, scaffolding---low-complexity foundational work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 2 \\
+1 & Parallel Surveys & 3 tracks & Sonnet+Opus & 14 \\
+2 & Deep Analysis & 2 tracks & Opus & 8 \\
+3 & Cultural + Synthesis & Sequential & Opus & 6 \\
+4 & Publication + QA & Sequential & Sonnet+Opus & 4 \\
+\midrule
+ & \textbf{Total} & & & \textbf{~34} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Group species profiles in batches of 15--20 per context window to maximize 5-minute cache TTL
+\item Shared taxonomy schema loaded once in Wave 0, referenced via frontmatter in all subsequent components
+\item Ecoregion definitions cached and shared across Track A, B, and C agents
+\item Source index shared across all survey tracks---agents pull citations from common pool
+\item Wave 1 tracks A and B can run truly in parallel (no cross-dependencies); Track C has read-dependency on early Track A/B outputs for species-to-zone mapping
+\item Wave 2 tracks D and E depend on Wave 1 outputs but can run parallel to each other
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Foundation (Wave 0) & --- & --- & 19K \\
+Resident Profiles (Wave 1A) & --- & 320K & --- \\
+Migratory Profiles (Wave 1B) & --- & 220K & --- \\
+Ecoregion Analysis (Wave 1C) & 80K & --- & --- \\
+Evolutionary Biology (Wave 2D) & 60K & --- & --- \\
+Ecological Networks (Wave 2E) & 50K & --- & --- \\
+Cultural + Skill Metaphors (Wave 3) & 60K & --- & --- \\
+Synthesis (Wave 3) & 30K & --- & --- \\
+Publication + QA (Wave 4) & 10K & 35K & --- \\
+\midrule
+\textbf{Totals} & \textbf{290K} & \textbf{575K} & \textbf{19K} \\
+\midrule
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{~884K tokens across ~34 context windows}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Dependency Graph — PNW Avian Taxonomy Mission
+═════════════════════════════════════════════════
+
+Wave 0 (Sequential):
+  [Schema] ──┬──> [Source Index] ──> [Eco Defs]
+             │
+Wave 1 (Parallel):
+             ├──> [Track A: Resident Profiles]──────┐
+             ├──> [Track B: Migratory Profiles]──────┤
+             └──> [Track C: Ecoregion Communities]───┤
+                                                     │
+Wave 2 (Parallel):                                   │
+             ┌──> [Track D: Evo Biology] <───────────┤
+             └──> [Track E: Eco Networks] <──────────┘
+                         │             │
+Wave 3 (Sequential):    │             │
+             ┌───────────┴─────────────┘
+             v
+  [Cultural Ornithology] ──> [Cross-Module Synthesis]
+             │                        │
+Wave 4 (Sequential):                 │
+             v                        v
+  [Document Assembly] ──> [Verification] ──> [Safety]
+                                              │
+                                              v
+                                        [PUBLISHED]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & 8 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge Cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{38} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional organizations. Zero entertainment media, blogs, or unsourced claims. \\
+SC-NUM & Numerical attribution & Every population count, decline percentage, range measurement, or migration distance attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents conservation evidence and status without advocating for specific legislative or regulatory positions. \\
+SC-END & Endangered species locations & No GPS coordinates, specific nest sites, den locations, or lek sites for any ESA-listed species. All locations generalized to county or watershed. \\
+SC-IND & Indigenous attribution & Every Indigenous knowledge reference names a specific nation (e.g., Coast Salish, Makah, Kwakwaka'wakw). Zero instances of generic ``Indigenous peoples.'' \\
+SC-CLI & Climate data sourced & Every temperature, precipitation, sea-level, or phenological shift projection cites specific agency data or IPCC scenario. \\
+SC-TAX & Taxonomic authority & All species names and classifications follow AOS Check-list. Disputed taxonomy explicitly noted. \\
+SC-CUL & Cultural sovereignty & No Level 2--3 restricted cultural content. All cultural references from published, publicly available sources only. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Resident species count & Module 1 contains 180+ species with complete profiles \\
+CF-02 & Migratory species count & Module 2 contains 200+ species with seasonal profiles \\
+CF-03 & Profile completeness & Every species has: scientific name, taxonomic order/family, morphometrics, habitat, diet, reproduction, conservation status, evolutionary note \\
+CF-04 & Ecoregion zone coverage & All 7 ecoregion zones have documented bird communities \\
+CF-05 & Indicator species & Each ecoregion identifies indicator and keystone species \\
+CF-06 & Flyway staging areas & At least 6 PNW staging areas documented with species lists \\
+CF-07 & Migration timing & Migratory species include spring/fall arrival and departure windows \\
+CF-08 & Evolutionary events & At least 15 PNW-relevant speciation or radiation events documented \\
+CF-09 & Phylogenetic citations & Each evolutionary narrative cites peer-reviewed systematic research \\
+CF-10 & Ecological interactions & At least 5 quantified bird-ecosystem interactions documented \\
+CF-11 & Nutrient cycling & Salmon-bird nutrient pathway traced with isotopic data citations \\
+CF-12 & Skill metaphor count & At least 10 bird-to-skill mappings in Module 6 \\
+CF-13 & Bibliography size & 80+ sources across government, peer-reviewed, and professional categories \\
+CF-14 & Cross-link count & At least 3 explicit cross-links to PNW Research Series documents \\
+CF-15 & Subspecies coverage & Major subspecies complexes (Song Sparrow, Flicker, Fox Sparrow) documented \\
+CF-16 & Vagrant/accidental & Abbreviated profiles for 100+ accidental species \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Resident $\rightarrow$ Ecoregion & Every resident species in Module 1 mapped to at least one ecoregion in Module 3 \\
+IN-02 & Migrant $\rightarrow$ Staging & Every shorebird/waterfowl species linked to staging area documentation \\
+IN-03 & Profile $\rightarrow$ Evolution & Evolutionary notes in profiles consistent with Module 4 phylogenetic narratives \\
+IN-04 & Ecology $\rightarrow$ Salmon & Salmon-bird species (eagle, osprey, heron, dipper, kingfisher) appear consistently in Module 2/5 and Salish Sea cross-links \\
+IN-05 & Species data consistency & Same species in multiple modules uses consistent population data, conservation status, and taxonomic name \\
+IN-06 & Cultural $\rightarrow$ Profiles & Every bird referenced in Module 6 Indigenous knowledge section has a full profile in Module 1 or 2 \\
+IN-07 & Skill $\rightarrow$ Architecture & Bird-as-skill mappings reference actual GSD skill-creator patterns documented in project knowledge \\
+IN-08 & Document self-containment & A reader with no prior ornithological knowledge can understand the full PNW avian landscape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Species inventories 400+ & CF-01, CF-02, CF-16 & Pending \\
+2. Complete species profiles & CF-03, CF-15 & Pending \\
+3. Migratory flyway data & CF-06, CF-07, IN-02 & Pending \\
+4. Seven ecoregion zones & CF-04, CF-05, IN-01 & Pending \\
+5. Evolutionary histories (15+) & CF-08, CF-09, IN-03 & Pending \\
+6. Ecological interactions (5+) & CF-10, CF-11, IN-04 & Pending \\
+7. Indigenous knowledge (nation-specific) & SC-IND, SC-CUL, IN-06 & Pending \\
+8. Cross-links to PNW series (3+) & CF-14, IN-07 & Pending \\
+9. Numerical attribution & SC-NUM, SC-SRC & Pending \\
+10. Bibliography (80+ sources) & CF-13 & Pending \\
+11. Skill metaphor framework (10+) & CF-12, IN-07 & Pending \\
+12. Self-contained document & IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates between waves \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gaps \\
+EXEC-A & Executor & Resident taxonomy document production (Track A) \\
+EXEC-B & Executor & Migratory species document production (Track B) \\
+CRAFT-TAXON & Taxonomist & Taxonomic survey compilation; AOS compliance; subspecies \\
+CRAFT-ECO & Ecologist & Ecoregion and ecosystem analysis; ecological networks \\
+CRAFT-PHYLO & Phylogenist & Evolutionary biology synthesis; phylogenetic narratives \\
+CRAFT-CULTURE & Culturalist & Indigenous ornithological knowledge; bird-as-skill framework \\
+VERIFY & Verification & Taxonomic accuracy; source validation; data consistency \\
+INTEG & Integration & Cross-module relationship validation; cross-link verification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Mgr & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+WARDEN & Safety Agent & Endangered species location protection; cultural sovereignty \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring if needed \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Context Windows & ~34 (estimated) \\
+Total Sessions & ~18 \\
+Total Tokens & ~884K \\
+Opus Budget & ~290K (33\%) \\
+Sonnet Budget & ~575K (65\%) \\
+Haiku Budget & ~19K (2\%) \\
+Parallel Tracks & 3 (Wave 1), 2 (Wave 2) \\
+Research Modules & 6 + Synthesis \\
+Species Profiles Target & 400+ full, 100+ abbreviated \\
+Bibliography Target & 80+ sources \\
+Test Count & 38 (8 safety, 16 core, 8 integration, 6 edge) \\
+Safety-Critical Gates & 8 mandatory-pass \\
+Cross-Links to PNW Series & 3+ (Salish Sea, Heritage Skills, Ecosystem Field Guide) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{To know two hundred species of birds by their calls.}
+
+\vspace{0.5em}
+
+This is what was known, once. Not as hobby or academic exercise but as survival skill, as ecological grammar, as the language in which the land itself speaks. The Makah knew which seabirds meant fish below. The Coast Salish knew which calls meant the salmon were running. The Nuu-chah-nulth knew which flights meant weather was changing.
+
+This mission does not pretend to recover that depth of knowledge. But it builds the scaffold on which such knowledge might be understood---the taxonomic skeleton, the evolutionary history, the ecological network, the cultural context. It builds it in the space between Western science and Indigenous wisdom, in the space between the genome and the song, in the space between the bird and the forest that holds it.
+
+\vspace{0.5em}
+
+\hfill\textit{--- Wings of the Pacific Northwest, PNW Research Series}
+\end{quotebox}
+
+\end{document}
