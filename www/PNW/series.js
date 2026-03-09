@@ -7,7 +7,8 @@
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
     { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
-    { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' }
+    { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
+    { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' }
   ];
 
   // Detect current project from URL path
