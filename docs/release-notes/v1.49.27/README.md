@@ -1,4 +1,4 @@
-# v1.49.27 — Spatial Awareness: The Chorus Protocol
+# v1.49.27 — Spatial Awareness: The Chorus Protocol (Shiny Things Charf-Charf Edition)
 
 **Shipped:** 2026-03-09
 **Commits:** 6
