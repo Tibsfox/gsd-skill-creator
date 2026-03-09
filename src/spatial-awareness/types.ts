@@ -90,7 +90,7 @@ export const AmbientSignalSchema = z.object({
   unit: z.string().optional(),
   timestamp: z.number(),
   confidence: z.number().min(0).max(1).default(1),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 }).passthrough();
 export type AmbientSignal = z.infer<typeof AmbientSignalSchema>;
 
@@ -230,7 +230,7 @@ export const UsbDeviceSchema = z.object({
   connected: z.boolean().default(false),
   sampleRate: z.number().optional(),
   baudRate: z.number().optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 }).passthrough();
 export type UsbDevice = z.infer<typeof UsbDeviceSchema>;
 
