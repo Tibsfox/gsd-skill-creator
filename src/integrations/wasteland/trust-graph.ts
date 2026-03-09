@@ -47,7 +47,7 @@ export type AsymmetryCategory =
   | 'mutual'              // both sides similar in strength and character
   | 'one-sided'           // one side significantly stronger than the other
   | 'character-mismatch'  // similar strength but different character (angle divergence)
-  | 'bridge-potential'    // one or both sides have many other connections
+  | 'bridge-potential'    // detected by computeBridgePotential(), not the asymmetry classifier
   | 'multi-context';      // 2+ active contracts between the same pair
 
 /** Result of classifying a relationship's asymmetry. */

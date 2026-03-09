@@ -29,7 +29,6 @@ import {
 } from './trust-relationship.js';
 import type {
   GraphDiversity,
-  Bond,
 } from './trust-graph.js';
 import {
   classifyAsymmetry,

@@ -194,10 +194,13 @@ export function createContract(
  * Pushes expiresAt forward by TTL seconds and increments the renewal count.
  * The original createdAt is preserved — it marks when the relationship started.
  *
+ * Renewal is allowed at any time — early renewal extends from now,
+ * late renewal revives an expired contract. Either way, expiresAt
+ * resets to now + TTL.
+ *
  * Returns null if:
  *   - The contract is not auto-renewable
  *   - The contract has no TTL (permanent — nothing to renew)
- *   - The contract hasn't expired yet (early renewal is a no-op)
  */
 export function renewContract(
   contract: TrustContract,
