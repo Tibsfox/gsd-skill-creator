@@ -23,7 +23,8 @@
     "setup:claude:check": "skill-creator gsd-init --dry-run",
     "desktop:dev": "cd src-tauri && npx tauri dev",
     "desktop:build": "cd src-tauri && PKG_CONFIG_PATH=\"$(pwd)/.pkgconfig:${PKG_CONFIG_PATH:-}\" npx tauri build",
-    "desktop:test": "cd desktop && npx vitest run"
+    "desktop:test": "cd desktop && npx vitest run",
+    "docs:api": "npx typedoc"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",

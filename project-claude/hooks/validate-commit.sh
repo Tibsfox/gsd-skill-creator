@@ -32,6 +32,30 @@ if [[ "$CMD" =~ ^git[[:space:]]+commit ]]; then
       echo '{"decision": "block", "reason": "Commit message must follow Conventional Commits: <type>(<scope>): <subject>. Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore. Subject must be <=72 chars, lowercase, imperative mood, no trailing period."}'
       exit 2
     fi
+
+    # Wave commit marker validation (warning mode — log but don't block)
+    # Validates format when "Wave N:" lines are present in the commit body
+    BODY=$(echo "$MSG" | tail -n +2)
+    if echo "$BODY" | grep -qE '^Wave[[:space:]]'; then
+      PREV_WAVE=0
+      WAVE_FORMAT_OK=true
+      while IFS= read -r line; do
+        if echo "$line" | grep -qE '^Wave[[:space:]]'; then
+          if ! echo "$line" | grep -qE '^Wave [0-9]+: .+'; then
+            WAVE_FORMAT_OK=false
+          else
+            WAVE_NUM=$(echo "$line" | sed -n 's/^Wave \([0-9]*\):.*/\1/p')
+            if [ "$WAVE_NUM" -le "$PREV_WAVE" ] && [ "$PREV_WAVE" -gt 0 ]; then
+              WAVE_FORMAT_OK=false
+            fi
+            PREV_WAVE="$WAVE_NUM"
+          fi
+        fi
+      done <<< "$BODY"
+      if [ "$WAVE_FORMAT_OK" = false ]; then
+        echo "[WARNING] Wave commit markers should follow format: Wave <number>: <description> (numbers sequential)" >&2
+      fi
+    fi
   fi
 fi
 
