@@ -55,6 +55,10 @@ www/staging/*/
 !www/tools/
 !www/README.md
 
+# Local project data
+media/
+www/www.zip
+
 # User-local config
 .sc-config.json
 the-space-between-engine/package-lock.json
