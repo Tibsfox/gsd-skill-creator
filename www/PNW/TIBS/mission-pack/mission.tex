@@ -1,0 +1,982 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: History / Cultural Studies ──────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep Burgundy — section headers
+\definecolor{secondary}{HTML}{6A1B9A}     % Purple — subsection headers
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown — subsubsection
+\definecolor{accent}{HTML}{F57F17}        % Gold — highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender tint — quote boxes
+\definecolor{lightsecondary}{HTML}{EDE7F6}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ─────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Andrews \& PNW Native Shamanism}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Andrews \& PNW Native Shamanism -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═════════════════════════════════════════════════════════════════════════════
+
+% ── Title Page ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Animal Speak, Sacred Landscapes,\\[0.3em] and the Living World}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Ted Andrews · Pacific Northwest Native Shamanism}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Spiritual Ecology and Indigenous Tradition}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 9, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 5--7 context windows across 2--3 sessions}}\\[0.6em]
+{\small\sffamily\textcolor{subtlegray}{Generated against: v1.49.24  |  Generated: 2026-03-09}}\\[0.2em]
+{\small\sffamily\itshape\textcolor{subtlegray}{Note: Execution environment (Claude Code/CLI) may be ahead of this baseline --- reconcile accordingly.}}
+\end{center}
+\newpage
+
+% ── Table of Contents ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Animal Speak, Sacred Landscapes, and the Living World --- Vision Guide}
+
+\metafield{Date:}{March 9, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends on:}{None (root study)}
+\metafield{Context:}{Conversation-harvested; research conducted March 9, 2026}
+
+\subsection{Vision}
+
+There is a moment --- familiar to anyone who has spent time in the old-growth forests of western Washington, or stood on a Columbia River bank at dusk as salmon shadows move beneath the surface --- where the boundary between self and ecosystem becomes genuinely porous. Cultures that have lived in the Pacific Northwest for ten thousand years built entire cosmologies around that porousness. The shaman was not a specialist in the supernatural; they were a specialist in \emph{attention} --- someone trained to listen to what the land, the water, and the animals were already saying.
+
+Ted Andrews arrived at a similar intuition from an entirely different direction. Growing up in Dayton, Ohio, walking woodlands with his grandfather and volunteering with raptors at the Brukner Nature Center, he developed a conviction that animals carry symbolic and spiritual meaning accessible to anyone willing to pay attention. His 1993 bestseller \emph{Animal Speak} --- which sold nearly half a million copies --- synthesized global shamanic traditions, mythology, and natural history into an eclectic but widely beloved reference. It is not Indigenous; it does not claim to be. But it opened a door for millions of readers that pointed, however imperfectly, toward something the Coast Salish, Tlingit, Chinook, and Haida peoples had always known: that the living world speaks to those who listen.
+
+This research study exists to hold both of these things simultaneously --- with honesty about what separates them and curiosity about what connects them. Andrews' work is New Age synthesis: accessible, eclectic, spiritually earnest, and culturally composite. PNW Native shamanism is place-specific, tribally distinct, orally transmitted, and rooted in sovereign relationships with specific landscapes. The two should not be conflated. But studying them together illuminates something important: the depth of the human longing to be in conversation with the non-human world, and the very different epistemological traditions that have tried to answer that longing.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Conflation risk.} Popular New Age shamanism --- including Andrews' work --- is frequently consumed without awareness of its composite, syncretic nature, leading readers to mistake eclectic spiritual frameworks for authentic Indigenous traditions.
+  \item \textbf{Tribal specificity erased.} Pacific Northwest Indigenous shamanic traditions are often described generically (``Native American spirituality'') when in fact the Coast Salish, Chinook, Tlingit, Haida, and Tsimshian traditions are linguistically, ceremonially, and geographically distinct.
+  \item \textbf{Colonial suppression legacy.} From 1868 to 1893 U.S. Naval forces actively removed tribal shamans and destroyed ceremonial infrastructure. Contemporary PNW tribal healing and ceremonialism exists \emph{despite} this suppression, and that context is invisible in popular treatments.
+  \item \textbf{Bibliographic confusion.} The fields of neo-shamanism and Indigenous studies produce very different literatures --- ethnographic, peer-reviewed, academic texts on one hand; spiritual self-help on the other --- and a reader entering this space needs a clear map to navigate them.
+  \item \textbf{Animal totems and cultural ownership.} The concept of ``power animals'' and ``animal totems'' is drawn directly from Indigenous traditions by authors like Andrews, raising unresolved questions of cultural borrowing that the literature has not fully addressed.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The model:} ``Two Ways of Listening'' --- a comparative study of how human cultures develop systematic frameworks for interpreting the spiritual significance of the natural world, with Ted Andrews' eclectic neo-shamanism and Pacific Northwest Native traditions as the two primary cases.
+
+The study does not privilege one tradition over the other as spiritually ``true.'' It asks: what does each framework offer, where does each come from, how do they differ epistemologically, and what does the enormous popular appetite for Andrews' work tell us about the cultural moment that produced it?
+
+\subsubsection{Study Architecture}
+
+\begin{asciibox}
+TWO-TRADITION COMPARATIVE STUDY
+=================================
+
+THREAD A: TED ANDREWS                THREAD B: PNW NATIVE TRADITIONS
+─────────────────────────────        ─────────────────────────────────
+Biography & influences               Tribal specificity (5+ nations)
+  |                                    |
+Complete bibliography (40+ books)    Ethnographic literature
+  |                                    |
+Core frameworks (Animal Speak)       Guardian spirit ceremonialism
+  |                                    |
+Critical reception                   Colonial suppression & revival
+  |                                    |
+Cultural appropriation debate        Contemporary practice
+
+         SYNTHESIS LAYER
+    ─────────────────────────
+    Epistemological comparison
+    What separates / connects
+    Recommended reading map
+    Sensitivity framework
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE MAP
+══════════════════════════════════════════════════════════
+
+  [MOD-1: Andrews Biography]──────┐
+                                  ├──[MOD-3: PNW Tribal Traditions]
+  [MOD-2: Andrews Bibliography]───┘         |
+                                            |
+  [MOD-4: Critical & Cultural Context]──────┤
+                                            |
+  [MOD-5: Synthesis & Reading Guide]────────┘
+
+Parallel: MOD-1 + MOD-3 can run simultaneously (Wave 1A/1B)
+Parallel: MOD-2 + MOD-4 can run simultaneously (Wave 1A/1B)
+Sequential: MOD-5 depends on all prior modules
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Ted Andrews --- Life, Work, and Frameworks}
+
+Survey of Andrews' biography (1952--2009), formative influences (grandfather, Brukner Nature Center, raptor work), spiritual and esoteric education (Kabbalah, acupressure, sound healing), and the conceptual frameworks that underpin \emph{Animal Speak}: totems, power animals, shapeshifting, the language of birds and beasts. Covers his multi-decade workshop and seminar career and his United Nations appearance in 2002.
+
+\subsubsection{Module 2: Complete Andrews Bibliography}
+
+Annotated catalog of all 40+ published works, organized by series and thematic cluster. Priority annotation for the five most influential titles. Includes the \emph{Young Person's School of Magic \& Mystery} series, the Llewellyn ``How To'' series, and the sound/healing cluster.
+
+\subsubsection{Module 3: Pacific Northwest Native Shamanic Traditions}
+
+Tribe-specific survey covering Coast Salish, Chinook, Tlingit, Haida, and Tsimshian traditions. Covers guardian spirit ceremonialism (including the Coast Salish winter ceremonial described by Jilek), the role of the shaman in healing and soul retrieval, the colonial suppression of ceremonial life, and contemporary revival. Uses peer-reviewed ethnographic sources and Smithsonian Handbook documentation exclusively.
+
+\subsubsection{Module 4: Critical and Cultural Context}
+
+Examines the cultural moment that produced Andrews' popularity (New Age movement, 1980s--2000s), the academic critique of pan-Indian and syncretic spiritual frameworks (including concerns raised by Indigenous scholars), the appropriation debate as applied to ``power animal'' discourse, and the distinction between eclectic neo-shamanism and tribally rooted practice.
+
+\subsubsection{Module 5: Synthesis, Comparison, and Annotated Reading Guide}
+
+Cross-module synthesis: what Andrews offers that Indigenous traditions do not (accessibility, universalism, eclecticism), what Indigenous traditions offer that Andrews cannot (place-rootedness, lineage, tribal sovereignty), and where the two traditions share genuine structural resonance (attention to non-human communication, guardian spirits, the healer's role). Produces an annotated reading guide stratified by reader intent: spiritual seeker, scholar, Indigenous knowledge seeker.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: andrews-pnw-shamanism
+  profile: squadron
+  domain: cultural-history-indigenous-studies
+
+  chips:
+    - id: BIO         # Andrews biography and formative influences
+    - id: BIB         # Complete bibliography with annotations
+    - id: TRB         # PNW tribal traditions (Coast Salish, Chinook, Tlingit, Haida, Tsimshian)
+    - id: CRT         # Critical context and cultural appropriation analysis
+    - id: SYN         # Synthesis and annotated reading guide
+
+  sensitivity:
+    - type: indigenous-knowledge
+      level: HIGH
+      rule: Name specific nations; never use generic "Native American"
+    - type: cultural-appropriation
+      level: MODERATE
+      rule: Present evidence without advocacy; let readers evaluate
+    - type: living-traditions
+      level: HIGH
+      rule: Do not instruct readers in proprietary ceremonial practice
+
+  model_assignments:
+    opus:   [SYN, CRT]                # Judgment-heavy synthesis and cultural analysis
+    sonnet: [BIO, BIB, TRB]           # Survey and document assembly
+    haiku:  [shared-schema, templates]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[noitemsep]
+  \item Complete Ted Andrews bibliography (all 40+ titles), with priority annotation for five major works
+  \item PNW tribal traditions: Coast Salish, Lower Chinook, Tlingit, Haida, Tsimshian
+  \item Colonial suppression of PNW shamanism (1868--1893) and post-suppression revival
+  \item New Age neo-shamanism as a historical and cultural phenomenon
+  \item Academic and Indigenous scholarly critique of syncretic spiritual frameworks
+  \item Annotated reading guide for three reader profiles
+  \item Source bibliography: government, peer-reviewed, and university press only
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[noitemsep]
+  \item Instruction in ceremonial practice of any tradition (active boundary)
+  \item Specific GPS locations of ceremonial sites or sacred landscapes
+  \item Other New Age authors (Jamie Sams, Michael Harner, etc.) except as comparative reference
+  \item PNW tribal traditions outside Washington/Oregon/coastal BC
+  \item Andrews' workshop audio recordings or unpublished lecture notes
+  \item Policy advocacy regarding cultural repatriation or copyright of Indigenous knowledge
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Andrews' complete bibliography documented (all 40+ titles) with series organization and five priority annotations
+  \item Andrews' biography covers all formative influences: grandfather, Brukner Nature Center, Kabbalah entry point, workshop career, UN appearance
+  \item Each of five PNW tribal traditions (Coast Salish, Chinook, Tlingit, Haida, Tsimshian) receives individual treatment naming nation-specific practices
+  \item Guardian spirit ceremonialism documented from peer-reviewed sources (Jilek, Crawford O'Brien minimum)
+  \item Colonial suppression timeline documented with specific dates and agencies (1868--1893 Naval removal)
+  \item Contemporary ceremonial revival documented as active, not historic
+  \item Cultural appropriation analysis presents multiple scholarly positions without advocacy
+  \item Epistemological comparison maps at least three structural differences between Andrews' neo-shamanism and PNW Indigenous traditions
+  \item Epistemological comparison maps at least two structural resonances (genuine parallels)
+  \item Annotated reading guide provides stratified recommendations for three distinct reader profiles
+  \item All numerical claims (book sales, tribal populations, dates) attributed to specific sources
+  \item Every Indigenous knowledge reference names specific nation, never generic descriptor
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Bio-Physics Sensing Systems (PNW Study \#7 candidate) & Thematic sibling & Orca/salmon/bat sensing work shares PNW ecological frame \\
+PNW Research Series (COL, CAS, ECO, GDN, BCM, SHE) & Series context & This study adds cultural/spiritual dimension to PNW series \\
+GSD v1.49.24 baseline & Execution environment & Reconcile if CLI is ahead of this release \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Chief Dan George's words appear as the epigraph of \emph{Animal Speak}: ``If you talk to the animals, they will talk with you and you will know each other. If you do not talk to them, you will not know them. And what you do not know, you will fear. What one fears, one destroys.'' Andrews chose this quote deliberately --- it is the moral gravity at the center of his work, even if the work itself is synthetic rather than traditional.
+
+The through-line of this study is that quote taken seriously. The GSD ecosystem has always been about humane attention: systems that listen before they act, architectures that observe before they optimize. The shaman --- whether the Coast Salish guardian-spirit practitioner preparing for a winter ceremonial or the Ohio schoolteacher walking the raptor trails at Brukner --- is, at their best, a practitioner of exactly that kind of attention. This study is an attempt to understand both traditions well enough to learn from them, while honoring the profound difference in their origins, their sovereignty, and their claims.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Animal Speak, Sacred Landscapes, and the Living World --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings harvested from conversation research (March 9, 2026) for the five research modules. All sources are professional organizations, university presses, or peer-reviewed ethnographic literature. No entertainment media or unsourced claims appear here.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item Smithsonian Institution (Handbook of North American Indians, Vol.\ 7 --- Northwest Coast)
+  \item University of Nebraska Press (Coming Full Circle; Myths and Legends of the PNW)
+  \item Llewellyn Worldwide (primary Andrews publisher)
+  \item University of British Columbia Open Library (comparative Northwest Coast shamanism)
+  \item Goodreads scholarly review corpus (reception analysis)
+\end{itemize}
+
+\subsection{Module 1 Reference: Ted Andrews --- Life, Work, and Frameworks}
+
+\subsubsection{Biography}
+
+Ted Andrews was born July 15, 1952, in Dayton, Ohio, one of seven siblings (all given names beginning with ``T''). He spent formative years in Beavercreek, walking woodlands with his grandfather, developing an early conviction that nature communicated meaning. He volunteered at the Brukner Nature Center (Troy, Ohio) as a trail guide and animal keeper, working especially with raptors. Later he also served at the Aullwood Audubon Center.
+
+Andrews taught in Ohio public schools for ten years, seven of which focused on disadvantaged students; he created a special needs reading program that received both local and state recognition. His parallel esoteric education began with a book of short stories about Jewish mysticism, which led him into Kabbalah --- specifically practical Kabbalah and the legends of mystical creation. He read voraciously across occultism, metaphysics, and the esoteric.
+
+He was trained as a pianist (from age 12), and later incorporated Celtic harp, bamboo flute, shaman rattles, Tibetan bells, Tibetan Singing Bowl, and quartz crystal bowls into individual healing therapies. He was certified in basic hypnosis and acupressure and worked with herbs as an alternative health path.
+
+In May 2002 he was specially invited to speak to the UNSRC at the United Nations in New York for his writings and work with animals. He died of cancer October 24, 2009, at his farm and animal rehabilitation center in Jackson, Tennessee. He was 57.
+
+\subsubsection{Core Frameworks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concept} & \tableheader{Andrews' Treatment} \\
+\midrule
+Animal totem & Personal spirit ally identified through consistent encounters, dreams, or lifelong fascination; not borrowed from any specific tribal tradition \\
+Power animal & Guardian spirit in animal form; Andrews draws the term from broad shamanic literature without attributing it to specific nations \\
+Shapeshifting & Ritual practice for accessing animal perception; presented as universal cross-cultural technique \\
+Signs and omens & Natural events (bird flights, animal crossings) interpreted through behavioral and mythological analysis \\
+Spirit guide & Non-animal spiritual ally encountered through meditation or dream \\
+Totem dictionary & \emph{Animal Speak}'s primary reference section: 100+ species with habitat, mythology, and keynote qualities \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: Complete Andrews Bibliography}
+
+\subsubsection{Publication Overview}
+
+Andrews published 40+ non-fiction titles through primarily Llewellyn Publications. His first book was \emph{Imagick} (1989); his posthumous final title was \emph{Pathworking and the Tree of Life} (2010). He also wrote the \emph{Young Person's School of Magic \& Mystery} series.
+
+\subsubsection{Priority Annotated Works}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Title} & \tableheader{Year} & \tableheader{Significance} \\
+\midrule
+\emph{Animal Speak: The Spiritual \& Magical Powers of Creatures Great and Small} & 1993 & Flagship work; ~500,000 copies sold 1993--2009; 100+ species totem dictionary; techniques for signs, omens, and spirit guides \\
+\emph{Animal Wise: Understanding the Language of Animal Messengers and Companions} & 1999 & Companion and deepening; extends animal communication frameworks \\
+\emph{Animal-Speak Pocket Guide} & 2015 & Condensed field reference; posthumous \\
+\emph{The Healer's Manual: A Beginner's Guide to Energy Healing} & 1993 & Covers color, sound, fragrance, herbs, gemstones; core healing text \\
+\emph{Sacred Sounds: Transformation through Music and Word} & 1992 & Esoteric toning, chakras, vowel vibration therapy; influenced by Tibetan traditions \\
+\emph{Simplified Qabala Magic} & 1987 (orig.) & First book; Llewellyn; practical Kabbalah; pathworking and Middle Pillar exercises \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Series Clusters}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Series / Cluster} & \tableheader{Titles} \\
+\midrule
+Animal mysticism & Animal Speak; Animal Wise; Animal-Speak Pocket Guide \\
+Llewellyn ``How To'' series & How to See \& Read the Aura; How to Uncover Your Past Lives; How to Develop \& Use Psychic Touch; How to Heal with Color; How to Meet \& Work with Spirit Guides \\
+Sound / healing & Sacred Sounds; The Healer's Manual; Crystal Balls \& Crystal Bowls \\
+Magical arts & Magickal Dance; Enchantment of the Faerie Realm; Dream Alchemy \\
+Kabbalah & Simplified Qabala Magic; Pathworking and the Tree of Life \\
+Young Person's School of Magic \& Mystery & 5-volume series including \emph{Spirits, Ghosts and Guardians} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference: Pacific Northwest Native Shamanic Traditions}
+
+\subsubsection{Tribal Overview}
+
+The Pacific Northwest Coast comprises linguistically and culturally distinct nations whose shamanic traditions share certain structural features (guardian spirits, soul retrieval, healing ceremony, potlatch) while differing substantially in cosmology, ceremonial form, language, and territorial relationship.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Nation / Group} & \tableheader{Territory} & \tableheader{Key Shamanic Features} \\
+\midrule
+Coast Salish & SW British Columbia; W Washington (Puget Sound) & Guardian spirit ceremonial (sxwayxwey); winter spirit dance; power animal acquisition; Indian Shaker Church integration \\
+Lower Chinook & Columbia River mouth; coastal Washington/Oregon & Coyote and blue jay as primary animal spirits; shaman as ritual communicator with spirit world; dance rattles and canoe spirit paintings \\
+Tlingit & SE Alaska; coastal BC & Raven as central deity; shaman's long uncut hair as power vessel; masks and carved ritual objects; soul healing \\
+Haida & Haida Gwaii; Prince of Wales Island, AK & Totem poles as spiritual genealogy; potlatch as sacred feast; masked performance; shaman masks \\
+Tsimshian & NW BC coast (Prince Rupert area); Annette Island, AK & Shared raven cosmology with Tlingit; elaborate ceremonial art; contemporary Tsimshian cultural grammar documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Guardian Spirit Ceremonialism (Coast Salish)}
+
+The Coast Salish guardian spirit ceremonial --- documented extensively by physician and psychiatrist Wolfgang Jilek --- combines the Spirit Quest of the Plateau bands with the rich ceremonial life of the Northwest Coast. The ceremonial was suppressed for decades under colonial policy and U.S. Naval enforcement. Jilek documented its revival as both spiritually and therapeutically functional, serving as an annual winter treatment program integrating well-defined healing procedures.
+
+The theology: Northwest Coast tribal worldview held that ancestral closeness to supernatural beings meant anyone could obtain alliances with spirits through intention, training, and self-purification. ``Lay'' spirits were often inherited; shaman spirits required a stronger calling and more powerful mediation capacity. The Coast Salish specifically called guardian spirits in animal form ``power animals'' --- this is the direct source for the term now common in neo-shamanic literature.
+
+\subsubsection{Colonial Suppression and Revival}
+
+From 1868 to 1893, U.S. Naval forces actively sought out tribal shamans, removed them from their tribes, and shaved their heads --- eliminating their power according to tribal custom. This represented a systematic campaign against the ceremonial infrastructure of PNW Indigenous life. The Indian Shaker Church, which arose in the late 19th century among Salish-speaking peoples, integrated Christian and traditional healing elements and helped preserve ceremonial healing roles during the suppression era.
+
+Contemporary revival: Suzanne Crawford O'Brien's \emph{Coming Full Circle} (University of Nebraska Press) documents how Coast Salish and Chinook communities in western Washington maintained spiritual healing traditions alongside 21st-century biomedicine, defining health through the lens of self, ecology, and community --- a framework rooted in indigenous spiritual views of the body.
+
+\subsubsection{Shaman Role Across PNW Traditions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Function} & \tableheader{Description} \\
+\midrule
+Illness diagnosis & Reading signs and spiritual causes of sickness; distinguishing natural from supernatural ailments \\
+Foreign object removal & Extracting spiritually implanted illness from a patient's body \\
+Soul retrieval & Traveling to the Land of the Dead or spirit realms to recover a lost soul and return it to the living body \\
+Oracle / divination & Entering trance (hemlock branches, cedar bark rings, deer-hoof rattles, drumming); communal spirit singing; rapid fire-circle movement; receiving and interpreting spirit information \\
+Community healing & Annual winter ceremonials (Coast Salish) serving as group-based therapeutic programs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4 Reference: Critical and Cultural Context}
+
+\subsubsection{New Age Movement Context}
+
+Andrews' publishing career (1987--2009) sits squarely within the New Age movement's peak years. Llewellyn Publications --- his primary publisher since 1901 --- is the world's oldest and largest independent publisher of body/mind/spirit books. The New Age movement drew from a wide range of traditions: Native American, Tibetan Buddhist, Celtic, Wiccan, Theosophical, and Kabbalistic. Andrews was unusual among New Age authors in the rigor of his natural history content (raptor behavior, animal ecology) and his restraint from explicitly marketing his work as ``authentic Native American totemism.''
+
+\subsubsection{Critical Reception}
+
+Scholarly and reader-level critique of \emph{Animal Speak} focuses on three areas:
+\begin{enumerate}[noitemsep]
+  \item \textbf{Bibliographic basis.} The bibliography draws from a composite of sources, described by some Goodreads reviewers as ``rose-tinted idealistic generalising'' about ``ancient shamans'' as a unified monoculture.
+  \item \textbf{Appropriation.} Bird magic sections present details of Native American spiritual practice with an ``airy attitude of `Go try it yourself!''' without discussion of cultural ownership or the social power dynamics of a white Ohioan teaching Indigenous techniques.
+  \item \textbf{Beginner level vs. depth.} \emph{Animal Speak} is recommended for intermediate practitioners of totem study by some reviewers; others find the Llewellyn house style prioritizes volume over scholarly depth.
+\end{enumerate}
+
+Despite these critiques, the book maintains a Goodreads rating of 4.29/5 with 564 ratings (as of 2026). Its core contribution --- treating animals as serious objects of spiritual attention with behavioral and mythological depth --- is widely valued.
+
+\subsubsection{Appropriation Framework}
+
+The term ``power animal'' originates directly in Coast Salish tradition. Its migration into neo-shamanic literature (through Michael Harner's \emph{Way of the Shaman} and then Andrews and others) represents a well-documented case of spiritual concept migration from Indigenous to Western popular contexts without compensation, attribution of origin nation, or tribal consent. This is distinct from cultural exchange or influence. The appropriate research posture is to document the migration, name the source nation (Coast Salish), and present Indigenous scholarly perspectives without advocating for specific policy outcomes.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Protocol} \\
+\midrule
+Indigenous knowledge references & HIGH & Always name specific nation; never use generic ``Native American'' or ``Indigenous peoples'' without qualification \\
+Living ceremonial traditions & HIGH & Do not provide instructional detail on proprietary ceremonial practices of any living tradition \\
+Cultural appropriation analysis & MODERATE & Present multiple scholarly positions; do not advocate for specific restitution policy \\
+Colonial suppression history & MODERATE & State documented historical facts; do not sensationalize or editorialize \\
+Andrews' eclectic synthesis & LOW & Describe accurately as syncretic New Age; do not imply it represents any specific Indigenous tradition \\
+Sacred site locations & ABSOLUTE & No GPS coordinates or navigational information for ceremonial sites \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources --- Andrews}
+
+\begin{itemize}[noitemsep]
+  \item Andrews, Ted. \emph{Animal Speak: The Spiritual \& Magical Powers of Creatures Great and Small}. Llewellyn Publications, 1993. (ISBN 0-87542-028-1)
+  \item Andrews, Ted. \emph{Animal Wise: Understanding the Language of Animal Messengers and Companions}. Dragonhawk Publishing, 1999.
+  \item Andrews, Ted. \emph{Sacred Sounds: Transformation through Music and Word}. Llewellyn Publications, 1992.
+  \item Andrews, Ted. \emph{The Healer's Manual: A Beginner's Guide to Energy Healing}. Llewellyn Publications, 1993.
+  \item Andrews, Ted. \emph{Simplified Qabala Magic}. Llewellyn Publications, 1987 (rev. ed. 2003).
+  \item Wikipedia contributors. ``Ted Andrews.'' \emph{Wikipedia, The Free Encyclopedia}. Accessed March 9, 2026.
+\end{itemize}
+
+\subsubsection{Ethnographic and Academic Sources --- PNW}
+
+\begin{itemize}[noitemsep]
+  \item Crawford O'Brien, Suzanne. \emph{Coming Full Circle: Spirituality and Wellness among Native Communities in the Pacific Northwest}. University of Nebraska Press, 2013.
+  \item Jilek, Wolfgang G. \emph{Indian Healing: Shamanic Ceremonialism in the Pacific Northwest Today}. Hancock House, 1982. (ISBN 0-88839-120-X)
+  \item Judson, Katharine Berry; Miller, Jay (ed.). \emph{Myths and Legends of the Pacific Northwest}. University of Nebraska Press (Bison Books), 2004. (orig. 1910)
+  \item Sturtevant, William C. (ed.). \emph{Handbook of North American Indians, Volume 7: Northwest Coast}. Smithsonian Institution, 1990.
+  \item Lyon, William S. \emph{Encyclopedia of Native American Shamanism: Sacred Ceremonies of North America}. ABC-CLIO, 1998. (ISBN 0-87436-933-9)
+  \item Jorgensen, Grace Mairi McIntyre. ``A Comparative Examination of Northwest Coast Shamanism.'' University of British Columbia Open Library. (Thesis)
+  \item Encyclopedia.com. ``Pacific Northwest.'' \emph{Encyclopedia of the Environment}. Accessed March 9, 2026.
+\end{itemize}
+
+\subsubsection{Critical and Cultural Context}
+
+\begin{itemize}[noitemsep]
+  \item Chaplain of the Heart (Lara Wickkiser). ``Shamanism \& Divination Amongst Tribes of the North Pacific Coast Region.'' \emph{chaplainoftheheart.com}. May 3, 2022.
+  \item The Wicked Griffin. ``Best Books on Shamanism: 30 Essential Academic Studies.'' March 2026. (Cites Eliade, Winkelman)
+  \item Eliade, Mircea. \emph{Shamanism: Archaic Techniques of Ecstasy}. Princeton University Press, 1964. (Foundational academic framework)
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality research document on Ted Andrews (complete bibliography, biography, and analytical framework) and Pacific Northwest Native shamanic traditions (five nations, peer-reviewed ethnographic sources, colonial suppression history, and contemporary revival), culminating in a synthesis comparing the two epistemological traditions and an annotated reading guide stratified by reader profile. All content must meet GSD source quality standards and PNW Series cultural sensitivity protocols.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+═══════════════════════════════════════════════════════════════
+
+WAVE 0 [Foundation]
+  HAIKU: shared schema, source index, tribal name glossary
+
+WAVE 1A (parallel)          WAVE 1B (parallel)
+  SONNET: MOD-1 (Andrews)     SONNET: MOD-3 (PNW tribes)
+  SONNET: MOD-2 (Bibliography) SONNET: MOD-4 (Critical context)
+         |                           |
+         └──────────┬────────────────┘
+                    ↓
+WAVE 2 [Synthesis]
+  OPUS: MOD-5 — Comparative synthesis + reading guide
+  OPUS: Cultural sensitivity review (all modules)
+                    ↓
+WAVE 3 [Publication + Verification]
+  SONNET: Final document assembly + formatting
+  SONNET: Source verification pass
+  SONNET: Tribal name / attribution audit
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation layer} --- Shared schemas, tribal name glossary, source index (Wave 0)
+  \item \textbf{Survey layer} --- Module-level research and document production (Wave 1A/1B, parallel)
+  \item \textbf{Synthesis layer} --- Cross-module comparison, epistemological analysis (Wave 2)
+  \item \textbf{Publication layer} --- Final assembly, source verification, sensitivity audit (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Andrews biography & All 8 life events documented, sourced & BIO component \\
+2 & Andrews annotated bibliography & 40+ titles organized; 6 priority annotations & BIB component \\
+3 & PNW tribal survey & 5 nations individually documented & TRB component \\
+4 & Critical context analysis & Appropriation debate; 3+ scholarly positions & CRT component \\
+5 & Synthesis + reading guide & Epistemological comparison; 3-profile guide & SYN component \\
+6 & Source bibliography & 100\% traceable to qualified sources & VERIFY pass \\
+7 & Tribal attribution audit & Zero generic Indigenous descriptors & VERIFY pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp.} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Output} \\
+\midrule
+SCH & None & Haiku & 4K & Shared schemas, glossary \\
+BIO & SCH & Sonnet & 12K & Andrews biography, influences, frameworks \\
+BIB & SCH & Sonnet & 16K & Annotated bibliography, series clusters \\
+TRB & SCH & Sonnet & 20K & Five-nation tribal survey, ceremonialism \\
+CRT & BIO, TRB & Sonnet & 14K & Critical context, appropriation analysis \\
+SYN & BIO, BIB, TRB, CRT & Opus & 18K & Synthesis, reading guide, comparison \\
+VRF & All & Sonnet & 8K & Source audit, tribal attribution check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+SCH & Haiku & Structured template generation; no judgment required \\
+BIO & Sonnet & Biographical survey; well-sourced; structured assembly \\
+BIB & Sonnet & Catalog production; structured annotation \\
+TRB & Sonnet & Ethnographic survey from high-quality sources \\
+CRT & Sonnet & Structured presentation of existing scholarly positions \\
+SYN & Opus & Requires genuine comparative judgment; cultural sensitivity; original synthesis \\
+VRF & Sonnet & Systematic checklist verification; source tracing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Components} \\
+\midrule
+0 & Foundation & Sequential & Haiku & SCH (schemas, glossary) \\
+1A & Andrews Track & Parallel & Sonnet & BIO + BIB \\
+1B & Tribal Track & Parallel & Sonnet & TRB + CRT \\
+2 & Synthesis & Sequential & Opus & SYN \\
+3 & Publication & Sequential & Sonnet & VRF + final assembly \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+Tribal name glossary & Haiku & Exact nation names + common alternative names; update whenever TRB references a nation \\
+Source index & Haiku & All 15+ sources from Stage 2 indexed with citation keys \\
+Shared schema & Haiku & Document structure, section naming conventions, table column standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Andrews Track (Parallel with 1B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+BIO production & Sonnet & 8 biography checkpoints; raptor work; UN appearance; Ohio teaching career; death 2009 \\
+BIB production & Sonnet & 40+ titles; 6 priority annotations; series cluster table \\
+Cross-BIO-BIB check & Sonnet & Ensure biography events align with publication timeline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Tribal Track (Parallel with 1A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+TRB production & Sonnet & Five-nation survey; guardian spirit ceremonialism; colonial suppression 1868--1893; revival documentation \\
+CRT production & Sonnet & New Age context; Andrews critical reception; appropriation migration of ``power animal'' from Coast Salish \\
+Tribal attribution pass & Sonnet & Review TRB for any generic descriptors; flag for correction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+SYN production & Opus & Three structural differences; two structural resonances; epistemological comparison table \\
+Reading guide & Opus & Three reader profiles: spiritual seeker, academic researcher, Indigenous knowledge seeker \\
+Sensitivity review & Opus & Review all modules for cultural appropriation framing; ensure evidence-only posture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+Source verification & Sonnet & SC-SRC + SC-NUM + SC-IND tests; all claims traced \\
+Final assembly & Sonnet & Compile all modules into unified document; apply formatting schema \\
+Milestone summary & Sonnet & Commit message + delivery confirmation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Place the tribal name glossary and source index (Wave 0 outputs) at the top of every subsequent context window --- these are high-reuse anchors
+  \item BIO and TRB are the most-referenced components downstream; cache both at session start in Wave 2
+  \item SYN references all four prior modules; provide summary cards (300-word abstracts per module) rather than full text to avoid context overflow
+  \item VRF operates on the complete assembled document; run as a fresh context with full document + source index only
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input (K)} & \tableheader{Output (K)} & \tableheader{Notes} \\
+\midrule
+SCH (Wave 0) & 4 & 3 & Schema + glossary \\
+BIO (Wave 1A) & 8 & 12 & Biography depth \\
+BIB (Wave 1A) & 6 & 16 & 40+ title catalog \\
+TRB (Wave 1B) & 12 & 20 & Five-nation depth \\
+CRT (Wave 1B) & 10 & 14 & Appropriation analysis \\
+SYN (Wave 2) & 20 & 18 & All modules as input \\
+VRF (Wave 3) & 15 & 8 & Full doc + source index \\
+\midrule
+\textbf{Total} & \textbf{75} & \textbf{91} & $\approx$166K tokens total \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+═══════════════════════════════════════════════════
+
+  SCH
+   ├──► BIO ──────────────────┐
+   │     └──► (cross-check)   │
+   ├──► BIB ──────────────────┤
+   │                          │
+   ├──► TRB ──────────────────┤──► SYN ──► VRF ──► FINAL
+   │     └──► (attrib pass)   │
+   └──► CRT ─────────────────-┘
+
+Wave 0      Wave 1A/1B          Wave 2      Wave 3
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure} & \tableheader{Target} \\
+\midrule
+Safety-critical & Non-negotiable & 6 & BLOCK & $\geq$15\% \\
+Core functionality & Deliverable acceptance & 14 & BLOCK & $\approx$45\% \\
+Integration & Cross-module & 6 & BLOCK & $\approx$25\% \\
+Edge cases & Robustness & 4 & LOG & $\approx$15\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality gate & All citations traceable to government agencies, peer-reviewed journals, university presses, or professional organizations. Zero entertainment media or unsourced claims. \\
+SC-NUM & Numerical attribution & Every book sales figure, tribal population estimate, date, and measurement attributed to a specific named source. \\
+SC-IND & Indigenous attribution & Every Indigenous knowledge reference names specific nation (Coast Salish, Chinook, Tlingit, Haida, or Tsimshian). Zero generic ``Native American'' references without qualification. \\
+SC-ADV & No policy advocacy & Document presents evidence about appropriation and cultural migration without advocating for specific legislative or restitution outcomes. \\
+SC-CER & No ceremonial instruction & Document does not provide step-by-step instruction in proprietary ceremonial practice of any living Indigenous tradition. \\
+SC-LOC & No sacred site locations & No GPS coordinates or navigational information for ceremonial sites, sacred landscapes, or Spirit Quest locations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Andrews biography completeness & All 8 checkpoints present: Beavercreek childhood; grandfather walks; Brukner; Aullwood; teaching career; Kabbalah entry; UN 2002; death 2009 \\
+CF-02 & Bibliography completeness & $\geq$40 titles cataloged; all major series represented; 6 priority annotations \\
+CF-03 & Tribal specificity & Each of 5 nations (Coast Salish, Chinook, Tlingit, Haida, Tsimshian) documented individually \\
+CF-04 & Guardian spirit ceremonialism & Jilek and Crawford O'Brien cited; winter ceremonial described; therapeutic function noted \\
+CF-05 & Colonial suppression dates & 1868--1893 Naval removal campaign documented with source \\
+CF-06 & Contemporary revival & Ceremonial revival treated as active and ongoing, not historical artifact \\
+CF-07 & Appropriation analysis & ``Power animal'' migration from Coast Salish to neo-shamanic literature explicitly traced \\
+CF-08 & Epistemological differences & $\geq$3 structural differences between Andrews' neo-shamanism and PNW Indigenous traditions documented \\
+CF-09 & Epistemological resonances & $\geq$2 genuine structural parallels documented \\
+CF-10 & Reading guide stratification & Three distinct reader profiles with annotated recommendations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & BIO $\rightarrow$ BIB timeline consistency & Publication dates in BIB align with biography chronology \\
+IN-02 & TRB $\rightarrow$ CRT appropriation trace & ``Power animal'' origin identified in TRB (Coast Salish) and cited in CRT migration analysis \\
+IN-03 & All modules $\rightarrow$ SYN coverage & Synthesis section references findings from all four prior modules explicitly \\
+IN-04 & Reading guide $\rightarrow$ BIB alignment & All titles recommended in reading guide present in annotated bibliography \\
+IN-05 & Cross-module tribal name consistency & Same nation name used consistently across TRB, CRT, and SYN \\
+IN-06 & Self-containment & A reader with no prior knowledge can understand all key concepts from the document alone \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Andrews bibliography $\geq$40 titles & CF-02 & Pending \\
+2. Biography: 8 life events & CF-01 & Pending \\
+3. Five nations individually treated & CF-03 & Pending \\
+4. Guardian spirit ceremonialism sourced & CF-04 & Pending \\
+5. Colonial suppression timeline & CF-05, SC-NUM & Pending \\
+6. Contemporary revival active & CF-06 & Pending \\
+7. Appropriation: multiple positions & CF-07, SC-ADV & Pending \\
+8. $\geq$3 epistemological differences & CF-08 & Pending \\
+9. $\geq$2 epistemological resonances & CF-09 & Pending \\
+10. Reading guide: 3 profiles & CF-10, IN-04 & Pending \\
+11. All numbers attributed & SC-NUM & Pending \\
+12. No generic Indigenous descriptors & SC-IND & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates; sensitivity escalation \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web evidence compilation; gap identification \\
+EXEC-A & Executor Alpha & Andrews track: BIO + BIB production (Wave 1A) \\
+EXEC-B & Executor Beta & Tribal track: TRB + CRT production (Wave 1B) \\
+CRAFT-CLTRL & Cultural Specialist & Indigenous tradition analysis; ceremonial context; sensitivity review \\
+CRAFT-HIST & History Specialist & New Age movement context; Andrews biography; publication history \\
+VERIFY & Verification Agent & SC-SRC, SC-NUM, SC-IND checks; source tracing \\
+INTEG & Integration Agent & Cross-module consistency; IN-01 through IN-06 \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only channel crossing human-machine boundary \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (BIO, BIB, TRB, CRT, SYN) \\
+Parallel Tracks & 2 (Wave 1A: Andrews / Wave 1B: Tribal) \\
+Waves & 4 (Foundation, Survey, Synthesis, Publication) \\
+Safety-Critical Tests & 6 (all mandatory-pass) \\
+Total Tests & 30 \\
+Estimated Token Budget & $\approx$166K (75K input / 91K output) \\
+Estimated Sessions & 2--3 \\
+Estimated Context Windows & 5--7 \\
+Primary Model Split & Opus: SYN+CRT review (30\%) / Sonnet: BIO+BIB+TRB (60\%) / Haiku: SCH (10\%) \\
+GSD Baseline & v1.49.24 \\
+Cultural Sensitivity Level & HIGH (Indigenous traditions + appropriation analysis) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``If you talk to the animals they will talk with you and you will know each other. If you do not talk to them, you will not know them. And what you do not know you will fear. What one fears, one destroys.''}
+
+\vspace{0.5em}
+--- Chief Dan George, quoted as epigraph in Ted Andrews, \emph{Animal Speak} (1993)
+
+\vspace{1em}
+\textit{The GSD ecosystem runs on the same principle: systems that listen before they act. This mission asks the research crew to listen carefully --- to two very different traditions of listening --- and to report honestly what they hear. The through-line is attention, practiced with rigor and respect.}
+\end{quotebox}
+
+\end{document}
