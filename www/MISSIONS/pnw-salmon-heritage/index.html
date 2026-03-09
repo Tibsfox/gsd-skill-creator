@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNW Salmon Watershed Heritage — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1B5E20;
+    --river: #1565C0;
+    --earth: #4E342E;
+    --cedar: #2E7D32;
+    --salmon: #E65100;
+    --light-forest: #E8F5E9;
+    --light-river: #E3F2FD;
+    --bg: #FAFAFA;
+    --card: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--forest) 0%, var(--earth) 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1.5rem; font-size: 0.95rem; color: #A5D6A7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card { background: var(--card); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s; display: block; border-left: 4px solid var(--forest); }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--forest); margin-bottom: 0.5rem; }
+  .card .ext { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+  .card p { font-size: 0.85rem; margin-top: 0.5rem; }
+  .card.tex-card { border-left-color: var(--river); }
+  .card.tex-card h3 { color: var(--river); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--forest); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-forest); padding-bottom: 0.3rem; }
+  .contents { background: var(--light-forest); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .contents h3 { font-family: 'DM Sans', sans-serif; color: var(--forest); margin-bottom: 0.8rem; }
+  .contents ul { list-style: none; padding-left: 0; }
+  .contents li { padding: 0.3rem 0; font-size: 0.9rem; }
+  .contents li::before { content: "→ "; color: var(--cedar); font-weight: bold; }
+  .stage-label { font-family: 'DM Sans', sans-serif; font-weight: 700; }
+  .stage-1 { color: var(--forest); }
+  .stage-2 { color: var(--river); }
+  .stage-3 { color: var(--earth); }
+  .instructions { background: var(--light-river); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .instructions h3 { font-family: 'DM Sans', sans-serif; color: var(--river); margin-bottom: 0.8rem; }
+  .instructions ol { padding-left: 1.5rem; font-size: 0.9rem; }
+  .instructions li { margin-bottom: 0.5rem; }
+  .recompile { background: #263238; color: #E0E0E0; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; font-family: 'DejaVu Sans Mono', monospace; font-size: 0.85rem; overflow-x: auto; }
+  .recompile code { color: #A5D6A7; }
+  .quote { background: var(--light-forest); border-left: 4px solid var(--salmon); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; font-style: italic; }
+  .quote .attr { font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; }
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } .header h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Salmon People Heritage Watershed</h1>
+  <div class="subtitle">Pacific Northwest Coast Traditions & Taxonomy for gsd-skill-creator</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+  <div class="cards">
+    <a href="pnw-salmon-watershed-heritage-mission.pdf" download class="card">
+      <h3>Mission Package (PDF)</h3>
+      <span class="ext">.pdf — 28 pages</span>
+      <p>Complete three-stage pipeline: Vision, Research Reference, and Mission Package ready for GSD orchestration.</p>
+    </a>
+    <a href="pnw-salmon-watershed-heritage-mission.tex" download class="card tex-card">
+      <h3>LaTeX Source</h3>
+      <span class="ext">.tex — editable</span>
+      <p>Full XeLaTeX source for modification and recompilation. Requires DejaVu fonts.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <h3><span class="stage-label stage-1">Stage 1 — Vision Document</span></h3>
+    <ul>
+      <li>Salmon-as-taxonomy: five species organizing five knowledge domains</li>
+      <li>Watershed-to-nation-to-practice mapping architecture</li>
+      <li>Six research modules (Taxonomy, Cedar, Fishing, Stories, Reconnecting, Integration)</li>
+      <li>Chipset configuration with Cultural Sovereignty Warden</li>
+      <li>12 testable success criteria</li>
+    </ul>
+    <h3 style="margin-top: 1rem;"><span class="stage-label stage-2">Stage 2 — Research Reference</span></h3>
+    <ul>
+      <li>7 salmon species with dual taxonomy (Western + Indigenous)</li>
+      <li>12 watersheds mapped to specific nations</li>
+      <li>Cedar teachings and material culture from published sources</li>
+      <li>Indigenous fisheries management (Atlas et al. 2021, BioScience)</li>
+      <li>Reef net, weir, and trap technology documentation</li>
+      <li>Publicly shared stories with 4-level cultural sovereignty classification</li>
+      <li>Complete bibliography: NOAA, EPA, university press, peer-reviewed</li>
+    </ul>
+    <h3 style="margin-top: 1rem;"><span class="stage-label stage-3">Stage 3 — Mission Package</span></h3>
+    <ul>
+      <li>14 deliverables across 4 waves</li>
+      <li>Squadron activation profile (13 roles)</li>
+      <li>~149K tokens across ~18 context windows across ~9 sessions</li>
+      <li>32 tests (8 safety-critical, 14 core, 6 integration, 4 edge)</li>
+      <li>Complete verification matrix</li>
+    </ul>
+  </div>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <h3>How to Execute This Mission</h3>
+    <ol>
+      <li>Feed the PDF to <strong>gsd-skill-creator</strong> via Claude Code</li>
+      <li>The orchestrator reads the chipset configuration and activates Squadron profile</li>
+      <li>Wave 0 produces type schemas and source index</li>
+      <li>Wave 1 runs two parallel tracks (Taxonomy+Material | Stories+Pathway)</li>
+      <li>Wave 2 converges: fishing TEK needs taxonomy; integration needs all modules</li>
+      <li>Wave 3 synthesizes, audits safety, builds publication, and verifies</li>
+      <li>CAPCOM gate at each wave boundary for human review</li>
+    </ol>
+  </div>
+
+  <h2>Recompile LaTeX</h2>
+  <div class="recompile">
+    <code>xelatex -interaction=nonstopmode mission.tex</code><br>
+    <code>xelatex -interaction=nonstopmode mission.tex</code><br>
+    <code>xelatex -interaction=nonstopmode mission.tex</code><br><br>
+    Three passes required for TOC, cross-references, and page count.
+  </div>
+
+  <div class="quote">
+    "The right to use a river system comes with the responsibility to maintain a river system. The primary focus should be on what is left behind, not what is taken."
+    <div class="attr">— Heiltsuk Nation management principle (Housty et al. 2014)</div>
+  </div>
+</div>
+
+<div class="footer">
+  GSD Ecosystem — Heritage Skills Educational Pack — PNW Salmon Watershed Expansion<br>
+  Cultural Sovereignty: OCAP® + IQ + CARE + UNDRIP Article 31
+</div>
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unison Language — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #263238;
+      --secondary: #1565C0;
+      --tertiary: #37474F;
+      --accent: #0288D1;
+      --light-primary: #ECEFF1;
+      --light-secondary: #E3F2FD;
+      --bg: #FAFAFA;
+      --card-bg: #F0F2F4;
+      --card-hover: #E3E7EA;
+      --text: #212121;
+      --subtle: #757575;
+      --border: #BDBDBD;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .header-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.5px;
+    }
+
+    .header .subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .header .pipeline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.15);
+      display: inline-block;
+      padding: 0.4rem 1.5rem;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .file-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s, transform 0.15s;
+      border: 1px solid transparent;
+    }
+
+    .file-card:hover {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      border-color: var(--border);
+    }
+
+    .file-card .file-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-card .file-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .file-card .file-desc {
+      font-size: 0.85rem;
+      color: var(--subtle);
+      line-height: 1.4;
+    }
+
+    h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--light-primary);
+    }
+
+    .contents-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .contents-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--light-primary);
+      font-size: 0.95rem;
+    }
+
+    .contents-list .stage-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-right: 0.5rem;
+    }
+
+    .stage-1 { background: var(--primary); color: white; }
+    .stage-2 { background: var(--secondary); color: white; }
+    .stage-3 { background: var(--tertiary); color: white; }
+
+    .instructions {
+      background: var(--light-secondary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .instructions ol {
+      padding-left: 1.5rem;
+    }
+
+    .instructions li {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions code {
+      font-family: 'DM Sans Mono', 'DejaVu Sans Mono', monospace;
+      background: rgba(0,0,0,0.08);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .recompile {
+      background: var(--light-primary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .recompile pre {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 0.85rem;
+      background: var(--primary);
+      color: #E0E0E0;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin-top: 0.5rem;
+    }
+
+    .quote-block {
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 4px solid var(--accent);
+      background: var(--light-primary);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-block p {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--tertiary);
+    }
+
+    .footer {
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--subtle);
+      padding: 2rem;
+      border-top: 1px solid var(--light-primary);
+    }
+
+    @media (max-width: 600px) {
+      .file-cards { grid-template-columns: 1fr; }
+      .header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-label">GSD Research Mission Package</div>
+    <h1>The Unison Language</h1>
+    <div class="subtitle">Content-Addressed Code from the Future</div>
+    <div class="pipeline">Vision → Research → Mission</div>
+  </div>
+
+  <div class="container">
+
+    <div class="file-cards">
+      <a href="mission.pdf" download class="file-card">
+        <div class="file-icon">📄</div>
+        <div class="file-name">mission.pdf</div>
+        <div class="file-desc">Complete 25-page mission package. Vision, research reference, and execution plan.</div>
+      </a>
+      <a href="mission.tex" download class="file-card">
+        <div class="file-icon">📝</div>
+        <div class="file-name">mission.tex</div>
+        <div class="file-desc">LaTeX source. Modify and recompile with XeLaTeX.</div>
+      </a>
+    </div>
+
+    <h2>Contents</h2>
+    <ul class="contents-list">
+      <li><span class="stage-label stage-1">Stage 1</span> Vision Guide — problem statement, module architecture, success criteria, scope, chipset config</li>
+      <li><span class="stage-label stage-2">Stage 2</span> Research Reference — content-addressed code, type system & abilities, UCM tooling, distributed computing, ecosystem assessment</li>
+      <li><span class="stage-label stage-3">Stage 3</span> Mission Package — deliverables, wave execution plan, dependency graph, test plan, crew manifest</li>
+    </ul>
+
+    <h2>Research Modules</h2>
+    <ul class="contents-list">
+      <li><strong>Module 1:</strong> Language Core — content-addressed code, hashing, AST storage, zero-build model</li>
+      <li><strong>Module 2:</strong> Type System & Abilities — static types, inference, algebraic effects, handlers</li>
+      <li><strong>Module 3:</strong> Tooling & Workflow — UCM, Unison Share, LSP, MCP server, Desktop app</li>
+      <li><strong>Module 4:</strong> Distributed Computing — Unison Cloud, BYOC, code mobility, typed RPC</li>
+      <li><strong>Module 5:</strong> Ecosystem & Adoption — community, libraries, barriers, roadmap</li>
+    </ul>
+
+    <h2>Usage Instructions</h2>
+    <div class="instructions">
+      <ol>
+        <li>Review the <strong>Vision Guide</strong> (Stage 1) to understand scope and success criteria</li>
+        <li>Hand the PDF to <strong>gsd-skill-creator</strong> as the mission input</li>
+        <li>The skill-creator reads the <strong>Mission Package</strong> (Stage 3) to orchestrate execution</li>
+        <li>Agents consume the <strong>Research Reference</strong> (Stage 2) as their factual foundation</li>
+        <li>Wave execution proceeds: Foundation → Parallel Research → Synthesis → Publication</li>
+      </ol>
+    </div>
+
+    <h2>Recompiling the LaTeX</h2>
+    <div class="recompile">
+      <p style="font-size: 0.9rem;">If you modify <code>mission.tex</code>, recompile with three XeLaTeX passes:</p>
+      <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    </div>
+
+    <div class="quote-block">
+      <p>"We're used to thinking of a program as a thing that describes what a single OS process will do. Unison starts with the premise that no matter how many nodes a computation occupies, it should be expressible via a single program."</p>
+      <p style="font-style: normal; font-size: 0.85rem; margin-top: 0.5rem; color: #757575;">— The through-line: one radical architectural choice, and the solutions emerge.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Squadron Profile · 5 Modules · 12 Crew Roles · 18–24 Context Windows</p>
+    <p style="margin-top: 0.3rem;">Generated March 7, 2026 · GSD Ecosystem</p>
+  </div>
+
+</body>
+</html>

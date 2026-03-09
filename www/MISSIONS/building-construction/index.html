@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Construction Mastery — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #FF6F00;
+    --light-bg: #ECEFF1;
+    --card-bg: #37474F;
+    --card-hover: #455A64;
+    --text: #212121;
+    --light-text: #CFD8DC;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FAFAFA;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #37474F 50%, var(--tertiary) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  header .label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  header .subtitle {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-bottom: 0.25rem;
+  }
+  header .meta {
+    font-size: 0.85rem;
+    color: #90A4AE;
+    margin-top: 1rem;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: block;
+  }
+  .card:hover {
+    background: var(--card-hover);
+    transform: translateY(-2px);
+  }
+  .card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .card .name {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .card .desc {
+    font-size: 0.8rem;
+    color: var(--light-text);
+  }
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #BDBDBD;
+  }
+  .stage {
+    background: var(--light-bg);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .stage-label {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .stage p { font-size: 0.9rem; margin-top: 0.3rem; color: #455A64; }
+  ol, ul { padding-left: 1.5rem; }
+  ol li, ul li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  code {
+    background: var(--light-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    font-family: 'DejaVu Sans Mono', monospace;
+  }
+  .quote-box {
+    background: var(--light-bg);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #37474F;
+  }
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: #90A4AE;
+  }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Building Construction<br>Materials &amp; Techniques Mastery</h1>
+  <div class="subtitle">The Complete Homeowner's &amp; Engineer's Knowledge System</div>
+  <div class="subtitle" style="color:#FF6F00;">Pacific Northwest Region Focus</div>
+  <div class="meta">Fleet Profile &bull; 42 Context Windows &bull; 8 Sessions &bull; 3.155M Tokens &bull; March 8, 2026</div>
+</header>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <div class="icon">📄</div>
+      <div class="name">mission.pdf</div>
+      <div class="desc">Complete 29-page mission package — Vision, Research Reference, and Mission specs. Ready for GSD orchestrator.</div>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">mission.tex</div>
+      <div class="desc">LaTeX source — modify and recompile with XeLaTeX. Full template with Engineering color scheme.</div>
+    </a>
+  </div>
+
+  <h2>Contents Breakdown</h2>
+
+  <div class="stage">
+    <div class="stage-label">Stage 1 — Vision Document</div>
+    <p>Narrative vision, 5-point problem statement, six-dimensional core concept (trade × scale × style × lifecycle × audience × region), domain architecture diagrams, 6 research module specs, chipset configuration (Fleet profile), scope boundaries, 12 testable success criteria, through-line philosophy.</p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Stage 2 — Research Reference</div>
+    <p>Authoritative findings per module: PNW structural codes (OSSC 2025, WA SBC 2021 IBC), Cascadia seismic design (ASCE 7/41, Portland Ch. 24.85, Seattle SDCI), NEC 2023 mapping with OR/WA amendments, UPC/OPSC plumbing, rain screen &amp; moisture management, energy codes (OEESC 2025, WSEC-R 2021), wildfire-urban interface, ABET accreditation alignment, homeowner education framework. Complete source bibliography.</p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Stage 3 — Mission Package</div>
+    <p>Wave execution plan (4 waves, 3 parallel tracks), 20-role Fleet crew manifest, component breakdown with model assignments (30/60/10 Opus/Sonnet/Haiku), 3.155M token budget, dependency graph, cache optimization strategy, 42-test plan (8 safety-critical BLOCK, 18 core, 10 integration, 6 edge), verification matrix mapping all 12 success criteria.</p>
+  </div>
+
+  <h2>6 Research Modules</h2>
+  <ol>
+    <li><strong>Structural Systems &amp; Materials Science</strong> — Load paths, wood/steel/concrete/mass timber, PNW seismic design, foundation types, engineering calculations</li>
+    <li><strong>Electrical Systems</strong> — NEC 2023 complete mapping, service/distribution, GFCI/AFCI/SPD, EV/solar/storage, OR &amp; WA amendments</li>
+    <li><strong>Plumbing &amp; Mechanical</strong> — UPC/OPSC, DWV design, water supply, HVAC integration, heat pumps, fuel gas</li>
+    <li><strong>Building Envelope &amp; Weatherproofing</strong> — Rain screen assemblies, WRB, insulation, roofing, cladding, PNW moisture management, energy codes</li>
+    <li><strong>Codes, Standards &amp; Blueprinting</strong> — Complete PNW code landscape, blueprint reading, permit processes, inspection sequences</li>
+    <li><strong>Educational Frameworks</strong> — ABET alignment, 5-tier audience system (L1 Homeowner → L5 Engineer), college curricula, PE prep, homeowner's guide</li>
+  </ol>
+
+  <h2>Usage Instructions</h2>
+  <ol>
+    <li>Download <code>mission.pdf</code> and review all three stages</li>
+    <li>Feed the complete PDF to <strong>gsd-skill-creator</strong> via Claude Code</li>
+    <li>The orchestrator will execute Wave 0 → 1 → 2 → 3 per the mission spec</li>
+    <li>CAPCOM gates require human approval at wave boundaries</li>
+    <li>Safety-critical tests (SC-*) are mandatory-pass BLOCK gates</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol>
+    <li>Edit <code>mission.tex</code> as needed</li>
+    <li>Compile with XeLaTeX (three passes for cross-references):
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+    </li>
+    <li>Requires: TeX Live with XeLaTeX, DejaVu fonts, tcolorbox package</li>
+  </ol>
+
+  <div class="quote-box">
+    "Every building tells a story written in materials, fasteners, and code compliance. This mission fills the spaces between the trades, between the codes — building a knowledge architecture as carefully as a well-framed wall."
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem &bull; Vision → Research → Mission &bull; Built for gsd-skill-creator
+</div>
+
+</body>
+</html>
