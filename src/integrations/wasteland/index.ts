@@ -463,6 +463,24 @@ export type {
   OldGrowthAssessment,
 } from './trust-graph.js';
 
+// Trust Hardening (privacy guard, visibility, heartbeat scheduler)
+export {
+  PRIVATE_TABLES,
+  validateDoltPush,
+  canViewRelationship,
+  findRenewableContracts,
+  executeHeartbeatCycle,
+} from './trust-hardening.js';
+export type {
+  RenewalAttempt,
+  HeartbeatResult,
+} from './trust-hardening.js';
+
+// Trust Relationship Provider — ensureSchema
+export {
+  ensureSchema,
+} from './trust-relationship-provider.js';
+
 // UTC Timestamp Enforcement
 export {
   isUTC,
