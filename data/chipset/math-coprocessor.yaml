@@ -60,6 +60,9 @@ chips:
     cpu_fallback:
       - eval
       - verify
+    kernel_cache:
+      max_entries: 64
+      log_evictions: true
 
 # Inference coexistence — CUDA stream isolation settings.
 # Ensures math dispatches don't starve or interfere with LoRA inference.

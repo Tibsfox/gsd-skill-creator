@@ -4,7 +4,10 @@ The expression translator tests run without GPU.
 GPU execution tests are skipped if NVRTC/CUDA is unavailable.
 """
 
+import ctypes
 import math
+from unittest.mock import patch, MagicMock
+
 import pytest
 import numpy as np
 from math_coprocessor.jit import (
@@ -15,7 +18,12 @@ from math_coprocessor.jit import (
     jit_available,
     clear_cache,
     cache_stats,
+    set_cache_max,
     CudaTranslator,
+    CompiledKernel,
+    _kernel_cache,
+    _cache_get,
+    _cache_put,
 )
 
 
@@ -308,3 +316,164 @@ class TestSymbexChipGPUPath:
         assert caps["jit_available"] is True
         assert "eval" in caps["gpu_accelerated"]
         assert "verify" in caps["gpu_accelerated"]
+
+
+# =============================================================================
+# LRU Cache Eviction Tests (no GPU needed — tests cache logic directly)
+# =============================================================================
+
+class TestLRUCacheEviction:
+    """Unit tests for the LRU kernel cache eviction policy."""
+
+    def _make_kernel(self, expr: str, precision: str = "fp64") -> CompiledKernel:
+        """Create a mock CompiledKernel for cache testing."""
+        return CompiledKernel(
+            module=ctypes.c_void_p(id(expr)),
+            function=ctypes.c_void_p(0),
+            expression=expr,
+            precision=precision,
+        )
+
+    def setup_method(self):
+        """Reset cache state before each test."""
+        import math_coprocessor.jit as jit_mod
+        _kernel_cache.clear()
+        jit_mod._cache_hits = 0
+        jit_mod._cache_misses = 0
+        jit_mod._cache_evictions = 0
+        jit_mod._KERNEL_CACHE_MAX = 64
+
+    def test_cache_lru_eviction(self):
+        """Insert max+1 kernels; verify the oldest (LRU) is evicted."""
+        max_size = 4
+        set_cache_max(max_size)
+
+        # Fill cache to capacity
+        for i in range(max_size):
+            key = (f"x + {i}", "x", "fp64")
+            _cache_put(key, self._make_kernel(f"x + {i}"))
+
+        assert len(_kernel_cache) == max_size
+
+        # Insert one more — should evict the first (x + 0)
+        with patch("math_coprocessor.jit.gpu.cu_module_unload") as mock_unload:
+            overflow_key = (f"x + {max_size}", "x", "fp64")
+            _cache_put(overflow_key, self._make_kernel(f"x + {max_size}"))
+            mock_unload.assert_called_once()
+
+        assert len(_kernel_cache) == max_size
+        # First entry should be gone
+        assert ("x + 0", "x", "fp64") not in _kernel_cache
+        # New entry should be present
+        assert overflow_key in _kernel_cache
+
+        stats = cache_stats()
+        assert stats["evictions"] == 1
+
+    def test_cache_lru_refresh(self):
+        """Accessing a cached entry refreshes its LRU position, surviving eviction."""
+        max_size = 3
+        set_cache_max(max_size)
+
+        # Insert 3 kernels: k0, k1, k2
+        keys = []
+        for i in range(max_size):
+            key = (f"expr_{i}", "x", "fp64")
+            keys.append(key)
+            _cache_put(key, self._make_kernel(f"expr_{i}"))
+
+        # Access k0 — moves it to most-recent
+        result = _cache_get(keys[0])
+        assert result is not None
+
+        # Insert k3 — should evict k1 (now the LRU), NOT k0
+        with patch("math_coprocessor.jit.gpu.cu_module_unload"):
+            new_key = ("expr_3", "x", "fp64")
+            _cache_put(new_key, self._make_kernel("expr_3"))
+
+        # k0 survived (was refreshed), k1 was evicted
+        assert keys[0] in _kernel_cache
+        assert keys[1] not in _kernel_cache
+        assert keys[2] in _kernel_cache
+        assert new_key in _kernel_cache
+
+    def test_cache_eviction_unloads_module(self):
+        """Verify gpu.cu_module_unload() is called on the evicted kernel's module."""
+        set_cache_max(2)
+
+        k0 = self._make_kernel("evict_me")
+        k1 = self._make_kernel("keep_me")
+
+        _cache_put(("evict_me", "x", "fp64"), k0)
+        _cache_put(("keep_me", "x", "fp64"), k1)
+
+        with patch("math_coprocessor.jit.gpu.cu_module_unload") as mock_unload:
+            k2 = self._make_kernel("new_one")
+            _cache_put(("new_one", "x", "fp64"), k2)
+            # Should have unloaded k0's module
+            mock_unload.assert_called_once_with(k0.module)
+
+    def test_cache_stats_includes_metrics(self):
+        """Verify cache_stats() includes all new LRU metric fields."""
+        set_cache_max(8)
+
+        # Generate some hits and misses
+        key = ("x + 1", "x", "fp64")
+        _cache_put(key, self._make_kernel("x + 1"))
+
+        _cache_get(key)         # hit
+        _cache_get(key)         # hit
+        _cache_get(("nope", "x", "fp64"))  # miss
+
+        stats = cache_stats()
+        assert stats["cached_kernels"] == 1
+        assert stats["max_kernels"] == 8
+        assert stats["hits"] == 2
+        assert stats["misses"] == 1
+        assert stats["evictions"] == 0
+        assert stats["hit_rate"] == round(2 / 3, 3)
+        assert len(stats["entries"]) == 1
+
+    def test_clear_cache_resets_counters(self):
+        """Verify clear_cache() resets hit/miss/eviction counters."""
+        set_cache_max(2)
+
+        key = ("x", "x", "fp64")
+        _cache_put(key, self._make_kernel("x"))
+        _cache_get(key)  # hit
+
+        with patch("math_coprocessor.jit.gpu.cu_module_unload"):
+            clear_cache()
+
+        stats = cache_stats()
+        assert stats["cached_kernels"] == 0
+        assert stats["hits"] == 0
+        assert stats["misses"] == 0
+        assert stats["evictions"] == 0
+
+    def test_set_cache_max_enforces_minimum(self):
+        """set_cache_max(0) should clamp to 1."""
+        set_cache_max(0)
+        import math_coprocessor.jit as jit_mod
+        assert jit_mod._KERNEL_CACHE_MAX == 1
+
+    def test_cache_put_update_existing(self):
+        """Updating an existing key moves it to end without eviction."""
+        set_cache_max(2)
+
+        k0 = self._make_kernel("x + 0")
+        k1 = self._make_kernel("x + 1")
+        k0_updated = self._make_kernel("x + 0 updated")
+
+        _cache_put(("x + 0", "x", "fp64"), k0)
+        _cache_put(("x + 1", "x", "fp64"), k1)
+
+        # Update k0 — should NOT evict anything, just move to end
+        with patch("math_coprocessor.jit.gpu.cu_module_unload") as mock_unload:
+            _cache_put(("x + 0", "x", "fp64"), k0_updated)
+            mock_unload.assert_not_called()
+
+        assert len(_kernel_cache) == 2
+        # k0 should now be at the end (most recent)
+        keys = list(_kernel_cache.keys())
+        assert keys[-1] == ("x + 0", "x", "fp64")

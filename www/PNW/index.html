@@ -225,204 +225,496 @@
 
     <p>How the nine projects overlap. Each cell links to the most relevant document in that project for the given topic.</p>
 
-    <table>
+    <div class="matrix-filters" id="matrixFilters">
+      <button class="filter-chip active" data-col="col">COL</button>
+      <button class="filter-chip active" data-col="cas">CAS</button>
+      <button class="filter-chip active" data-col="eco">ECO</button>
+      <button class="filter-chip active" data-col="gdn">GDN</button>
+      <button class="filter-chip active" data-col="bcm">BCM</button>
+      <button class="filter-chip active" data-col="she">SHE</button>
+      <button class="filter-chip active" data-col="avi">AVI</button>
+      <button class="filter-chip active" data-col="mam">MAM</button>
+      <button class="filter-chip active" data-col="bps">BPS</button>
+      <span class="filter-separator"></span>
+      <button class="filter-util" id="filterAll">All</button>
+      <button class="filter-util" id="filterNone">None</button>
+    </div>
+
+    <table id="matrixTable">
       <thead>
         <tr>
           <th>Topic</th>
-          <th><span class="tag tag-col">COL</span></th>
-          <th><span class="tag tag-cas">CAS</span></th>
-          <th><span class="tag tag-eco">ECO</span></th>
-          <th><span class="tag tag-gdn">GDN</span></th>
-          <th><span class="tag tag-bcm">BCM</span></th>
-          <th><span class="tag tag-she">SHE</span></th>
-          <th><span class="tag tag-avi">AVI</span></th>
-          <th><span class="tag tag-mam">MAM</span></th>
-          <th><span class="tag tag-bps">BPS</span></th>
+          <th data-col="col"><span class="tag tag-col">COL</span></th>
+          <th data-col="cas"><span class="tag tag-cas">CAS</span></th>
+          <th data-col="eco"><span class="tag tag-eco">ECO</span></th>
+          <th data-col="gdn"><span class="tag tag-gdn">GDN</span></th>
+          <th data-col="bcm"><span class="tag tag-bcm">BCM</span></th>
+          <th data-col="she"><span class="tag tag-she">SHE</span></th>
+          <th data-col="avi"><span class="tag tag-avi">AVI</span></th>
+          <th data-col="mam"><span class="tag tag-mam">MAM</span></th>
+          <th data-col="bps"><span class="tag tag-bps">BPS</span></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="category-header" data-category-header="living-systems">
+          <td colspan="10"><span class="chevron">&#9660;</span> Living Systems</td>
+        </tr>
+        <tr data-category="living-systems">
           <td><strong>Flora</strong></td>
-          <td><a href="COL/page.html?doc=flora">800+ species</a></td>
-          <td><a href="CAS/page.html?doc=flora">By elevation</a></td>
-          <td><a href="ECO/page.html?doc=flora">41 profiled</a></td>
-          <td><a href="GDN/page.html?doc=native">36 garden</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td data-col="col"><a href="COL/page.html?doc=flora">800+ species</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=flora">By elevation</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=flora">41 profiled</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=native">36 garden</a></td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr data-category="living-systems">
           <td><strong>Fauna</strong></td>
-          <td><a href="COL/page.html?doc=fauna">244 species</a></td>
-          <td><a href="CAS/page.html?doc=fauna">By elevation</a></td>
-          <td><a href="ECO/page.html?doc=fauna-terrestrial">86 land</a> / <a href="ECO/page.html?doc=fauna-marine">39 marine</a></td>
-          <td><a href="GDN/page.html?doc=pest">Beneficials</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="AVI/page.html?doc=01a-anseriformes">250+ birds</a></td>
-          <td><a href="MAM/page.html?doc=01-carnivores-ungulates-compendium">169+ mammals</a></td>
-          <td><a href="BPS/page.html?doc=pnw-01-southern-resident-orca">6 species</a></td>
+          <td data-col="col"><a href="COL/page.html?doc=fauna">244 species</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=fauna">By elevation</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=fauna-terrestrial">86 land</a> / <a href="ECO/page.html?doc=fauna-marine">39 marine</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=pest">Beneficials</a></td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi"><a href="AVI/page.html?doc=01a-anseriformes">250+ birds</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=01-carnivores-ungulates-compendium">169+ mammals</a></td>
+          <td data-col="bps"><a href="BPS/page.html?doc=pnw-01-southern-resident-orca">6 species</a></td>
         </tr>
-        <tr>
+        <tr data-category="living-systems">
           <td><strong>Fungi</strong></td>
-          <td><a href="COL/page.html?doc=fungi">EMF/AMF/CMN</a></td>
-          <td><a href="CAS/page.html?doc=fungi">Ectomycorrhizal</a></td>
-          <td><a href="ECO/page.html?doc=fungi">23 species</a></td>
-          <td><a href="GDN/page.html?doc=soil">Soil biology</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td data-col="col"><a href="COL/page.html?doc=fungi">EMF/AMF/CMN</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=fungi">Ectomycorrhizal</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=fungi">23 species</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=soil">Soil biology</a></td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr data-category="living-systems">
           <td><strong>Aquatic</strong></td>
-          <td><a href="COL/page.html?doc=aquatic">51 fish</a></td>
-          <td><a href="CAS/page.html?doc=aquatic">Salmonids</a></td>
-          <td><a href="ECO/page.html?doc=fauna-marine">Marine systems</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="AVI/page.html?doc=02a-charadriiformes">Shorebirds</a></td>
-          <td><a href="MAM/page.html?doc=03-marine-mammal-compendium">38 marine</a></td>
-          <td><a href="BPS/page.html?doc=01-sonar-echo-delay">Sonar, biosonar</a></td>
+          <td data-col="col"><a href="COL/page.html?doc=aquatic">51 fish</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=aquatic">Salmonids</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=fauna-marine">Marine systems</a></td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi"><a href="AVI/page.html?doc=02a-charadriiformes">Shorebirds</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=03-marine-mammal-compendium">38 marine</a></td>
+          <td data-col="bps"><a href="BPS/page.html?doc=01-sonar-echo-delay">Sonar, biosonar</a></td>
         </tr>
-        <tr>
+        <tr data-category="living-systems">
           <td><strong>Climate</strong></td>
-          <td>&mdash;</td>
-          <td><a href="CAS/page.html?doc=threats">5 threat vectors</a></td>
-          <td><a href="ECO/page.html?doc=networks">Fire-succession</a></td>
-          <td><a href="GDN/page.html?doc=climate">Zones &amp; GDD</a></td>
-          <td>&mdash;</td>
-          <td><a href="SHE/research/02-sensors-actuators.md">Soil/weather sensors</a></td>
-          <td><a href="AVI/page.html?doc=02b-migratory-waterfowl-raptors-passerines">Migratory shifts</a></td>
-          <td><a href="MAM/page.html?doc=05-evolutionary-biology-paleontology">Range shifts</a></td>
-          <td>&mdash;</td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas"><a href="CAS/page.html?doc=threats">5 threat vectors</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=networks">Fire-succession</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=climate">Zones &amp; GDD</a></td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she"><a href="SHE/research/02-sensors-actuators.md">Soil/weather sensors</a></td>
+          <td data-col="avi"><a href="AVI/page.html?doc=02b-migratory-waterfowl-raptors-passerines">Migratory shifts</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=05-evolutionary-biology-paleontology">Range shifts</a></td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr data-category="living-systems">
           <td><strong>Networks</strong></td>
-          <td><a href="COL/page.html?doc=synthesis">3 cascades</a></td>
-          <td><a href="CAS/page.html?doc=networks">4 cascades</a></td>
-          <td><a href="ECO/page.html?doc=networks">5 pathways</a></td>
-          <td><a href="GDN/page.html?doc=synthesis">5 cascades</a></td>
-          <td>&mdash;</td>
-          <td><a href="SHE/research/03-connectivity-protocols.md">10 protocols</a></td>
-          <td><a href="AVI/page.html?doc=05-ecological-networks">Trophic webs</a></td>
-          <td><a href="MAM/page.html?doc=06-ecological-networks">Trophic cascades</a></td>
-          <td><a href="BPS/page.html?doc=06-interrelationships-atlas">Signal atlas</a></td>
+          <td data-col="col"><a href="COL/page.html?doc=synthesis">3 cascades</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=networks">4 cascades</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=networks">5 pathways</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=synthesis">5 cascades</a></td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she"><a href="SHE/research/03-connectivity-protocols.md">10 protocols</a></td>
+          <td data-col="avi"><a href="AVI/page.html?doc=05-ecological-networks">Trophic webs</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=06-ecological-networks">Trophic cascades</a></td>
+          <td data-col="bps"><a href="BPS/page.html?doc=06-interrelationships-atlas">Signal atlas</a></td>
         </tr>
-        <tr>
-          <td><strong>Heritage</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="ECO/page.html?doc=heritage">17+ nations</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="AVI/page.html?doc=06-cultural-ornithology">Indigenous TEK</a></td>
-          <td><a href="MAM/page.html?doc=07-cultural-knowledge">Cultural knowledge</a></td>
-          <td>&mdash;</td>
+        <tr class="category-header" data-category-header="built-environment">
+          <td colspan="10"><span class="chevron">&#9660;</span> Built Environment</td>
         </tr>
-        <tr>
+        <tr data-category="built-environment">
           <td><strong>Materials</strong></td>
-          <td><a href="COL/page.html?doc=flora">Douglas fir</a></td>
-          <td><a href="CAS/page.html?doc=flora">WRC, DF-L</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BCM/research/01-structural-systems.md">DF, WRC, basalt</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td data-col="col"><a href="COL/page.html?doc=flora">Douglas fir</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=flora">WRC, DF-L</a></td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm"><a href="BCM/research/01-structural-systems.md">DF, WRC, basalt</a></td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr data-category="built-environment">
           <td><strong>Seismic</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BCM/research/01-structural-systems.md">ASCE 7-22, CSZ</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm"><a href="BCM/research/01-structural-systems.md">ASCE 7-22, CSZ</a></td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr data-category="built-environment">
           <td><strong>Building Codes</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BCM/research/05-codes-standards-blueprinting.md">OR + WA codes</a></td>
-          <td><a href="SHE/research/06-safety-standards.md">NEC, FCC, ETSI</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm"><a href="BCM/research/05-codes-standards-blueprinting.md">OR + WA codes</a></td>
+          <td data-col="she"><a href="SHE/research/06-safety-standards.md">NEC, FCC, ETSI</a></td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps">&mdash;</td>
         </tr>
-        <tr>
+        <tr class="category-header" data-category-header="technology">
+          <td colspan="10"><span class="chevron">&#9660;</span> Technology</td>
+        </tr>
+        <tr data-category="technology">
           <td><strong>Electronics</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BCM/research/02-electrical-systems.md">NEC 2023</a></td>
-          <td><a href="SHE/research/01-electronics-foundations.md">Circuit theory</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BPS/page.html?doc=07-gpu-ml-pipeline">GPU/ML pipeline</a></td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm"><a href="BCM/research/02-electrical-systems.md">NEC 2023</a></td>
+          <td data-col="she"><a href="SHE/research/01-electronics-foundations.md">Circuit theory</a></td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps"><a href="BPS/page.html?doc=07-gpu-ml-pipeline">GPU/ML pipeline</a></td>
         </tr>
-        <tr>
+        <tr data-category="technology">
           <td><strong>IoT/Smart Home</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="SHE/research/05-complete-projects.md">36 projects</a></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="BPS/page.html?doc=14-radio-telemetry-coils">Telemetry</a></td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she"><a href="SHE/research/05-complete-projects.md">36 projects</a></td>
+          <td data-col="avi">&mdash;</td>
+          <td data-col="mam">&mdash;</td>
+          <td data-col="bps"><a href="BPS/page.html?doc=14-radio-telemetry-coils">Telemetry</a></td>
         </tr>
-        <tr>
+        <tr data-category="technology">
           <td><strong>Sensing/Physics</strong></td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
-          <td><a href="SHE/research/02-sensors-actuators.md">22 sensors</a></td>
-          <td><a href="AVI/page.html?doc=02b-migratory-waterfowl-raptors-passerines">Navigation</a></td>
-          <td><a href="MAM/page.html?doc=02c-soricomorpha-chiroptera">Echolocation</a></td>
-          <td><a href="BPS/page.html?doc=05-signal-processing-analogues">17 phenomena</a></td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco">&mdash;</td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she"><a href="SHE/research/02-sensors-actuators.md">22 sensors</a></td>
+          <td data-col="avi"><a href="AVI/page.html?doc=02b-migratory-waterfowl-raptors-passerines">Navigation</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=02c-soricomorpha-chiroptera">Echolocation</a></td>
+          <td data-col="bps"><a href="BPS/page.html?doc=05-signal-processing-analogues">17 phenomena</a></td>
         </tr>
-        <tr>
+        <tr class="category-header" data-category-header="meta">
+          <td colspan="10"><span class="chevron">&#9660;</span> Meta</td>
+        </tr>
+        <tr data-category="meta">
+          <td><strong>Heritage</strong></td>
+          <td data-col="col">&mdash;</td>
+          <td data-col="cas">&mdash;</td>
+          <td data-col="eco"><a href="ECO/page.html?doc=heritage">17+ nations</a></td>
+          <td data-col="gdn">&mdash;</td>
+          <td data-col="bcm">&mdash;</td>
+          <td data-col="she">&mdash;</td>
+          <td data-col="avi"><a href="AVI/page.html?doc=06-cultural-ornithology">Indigenous TEK</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=07-cultural-knowledge">Cultural knowledge</a></td>
+          <td data-col="bps">&mdash;</td>
+        </tr>
+        <tr data-category="meta">
           <td><strong>Verification</strong></td>
-          <td><a href="COL/page.html?doc=verification">7/7 safety</a></td>
-          <td><a href="CAS/page.html?doc=verification">7/7 safety</a></td>
-          <td><a href="ECO/page.html?doc=verification">6/6 safety</a></td>
-          <td><a href="GDN/page.html?doc=verification">24/24 tests</a></td>
-          <td><a href="BCM/research/09-verification-report.md">48/48 tests</a></td>
-          <td><a href="SHE/research/09-verification-report.md">33/33 tests</a></td>
-          <td><a href="AVI/page.html?doc=09-verification-matrix">38/38 tests</a></td>
-          <td><a href="MAM/page.html?doc=09-verification-matrix">36/36 tests</a></td>
-          <td><a href="BPS/page.html?doc=09-verification-matrix">12/12 tests</a></td>
+          <td data-col="col"><a href="COL/page.html?doc=verification">7/7 safety</a></td>
+          <td data-col="cas"><a href="CAS/page.html?doc=verification">7/7 safety</a></td>
+          <td data-col="eco"><a href="ECO/page.html?doc=verification">6/6 safety</a></td>
+          <td data-col="gdn"><a href="GDN/page.html?doc=verification">24/24 tests</a></td>
+          <td data-col="bcm"><a href="BCM/research/09-verification-report.md">48/48 tests</a></td>
+          <td data-col="she"><a href="SHE/research/09-verification-report.md">33/33 tests</a></td>
+          <td data-col="avi"><a href="AVI/page.html?doc=09-verification-matrix">38/38 tests</a></td>
+          <td data-col="mam"><a href="MAM/page.html?doc=09-verification-matrix">36/36 tests</a></td>
+          <td data-col="bps"><a href="BPS/page.html?doc=09-verification-matrix">12/12 tests</a></td>
         </tr>
-        <tr>
+        <tr data-category="meta">
           <td><strong>Mission PDF</strong></td>
-          <td><a href="COL/mission.html">View</a></td>
-          <td><a href="CAS/mission.html">View</a></td>
-          <td><a href="ECO/mission.html">View (2 PDFs)</a></td>
-          <td><a href="GDN/mission.html">View</a></td>
-          <td><a href="BCM/mission-pack/index.html">View</a></td>
-          <td><a href="SHE/mission-pack/">View</a></td>
-          <td><a href="AVI/mission.html">View</a></td>
-          <td><a href="MAM/mission.html">View</a></td>
-          <td><a href="BPS/mission.html">View</a></td>
+          <td data-col="col"><a href="COL/mission.html">View</a></td>
+          <td data-col="cas"><a href="CAS/mission.html">View</a></td>
+          <td data-col="eco"><a href="ECO/mission.html">View (2 PDFs)</a></td>
+          <td data-col="gdn"><a href="GDN/mission.html">View</a></td>
+          <td data-col="bcm"><a href="BCM/mission-pack/index.html">View</a></td>
+          <td data-col="she"><a href="SHE/mission-pack/">View</a></td>
+          <td data-col="avi"><a href="AVI/mission.html">View</a></td>
+          <td data-col="mam"><a href="MAM/mission.html">View</a></td>
+          <td data-col="bps"><a href="BPS/mission.html">View</a></td>
         </tr>
       </tbody>
     </table>
+
+    <div id="matrixCards" class="matrix-cards"></div>
+
+    <style>
+      /* -- Matrix filter chips -- */
+      .matrix-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        align-items: center;
+        margin: 1rem 0 0.5rem;
+        padding: 0.6rem 0.8rem;
+        background: white;
+        border: 1px solid var(--mist);
+        border-radius: 6px;
+      }
+      .filter-chip {
+        border: 2px solid var(--mist);
+        background: white;
+        color: var(--text-light);
+        padding: 0.25rem 0.65rem;
+        border-radius: 14px;
+        font-size: 0.78rem;
+        font-family: system-ui, sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s, border-color 0.15s;
+        letter-spacing: 0.03em;
+      }
+      .filter-chip:hover { border-color: var(--rock); }
+      .filter-chip.active[data-col="col"] { background: #e3f2fd; color: #1565c0; border-color: #1565c0; }
+      .filter-chip.active[data-col="cas"] { background: #eceff1; color: #37474f; border-color: #37474f; }
+      .filter-chip.active[data-col="eco"] { background: #e0f2f1; color: #00695c; border-color: #00695c; }
+      .filter-chip.active[data-col="gdn"] { background: #e8f5e9; color: #2e7d32; border-color: #2e7d32; }
+      .filter-chip.active[data-col="bcm"] { background: #e8eaf6; color: #263238; border-color: #263238; }
+      .filter-chip.active[data-col="she"] { background: #e0f2f1; color: #004d40; border-color: #004d40; }
+      .filter-chip.active[data-col="avi"] { background: #e3f2fd; color: #2c5282; border-color: #2c5282; }
+      .filter-chip.active[data-col="mam"] { background: #efebe9; color: #4a3728; border-color: #4a3728; }
+      .filter-chip.active[data-col="bps"] { background: #ede7f6; color: #4a148c; border-color: #4a148c; }
+      .filter-separator { width: 1px; height: 1.4rem; background: var(--mist); margin: 0 0.3rem; }
+      .filter-util {
+        border: 1px solid var(--mist);
+        background: transparent;
+        color: var(--text-light);
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-family: system-ui, sans-serif;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .filter-util:hover { background: var(--mist); }
+
+      /* -- Category header rows -- */
+      .category-header td {
+        background: var(--canopy);
+        color: white;
+        font-weight: 600;
+        font-family: system-ui, sans-serif;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        user-select: none;
+        letter-spacing: 0.02em;
+        border-bottom: none;
+      }
+      .category-header:hover td { background: var(--forest); }
+      .category-header .chevron {
+        display: inline-block;
+        font-size: 0.7rem;
+        margin-right: 0.4rem;
+        transition: transform 0.2s;
+      }
+      .category-header.collapsed .chevron { transform: rotate(-90deg); }
+
+      /* -- Hidden columns -- */
+      .col-hidden { display: none; }
+
+      /* -- Mobile card view -- */
+      .matrix-cards {
+        display: none;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+      .matrix-card {
+        background: white;
+        border: 1px solid var(--mist);
+        border-radius: 8px;
+        padding: 1.2rem;
+      }
+      .matrix-card h4 {
+        margin: 0 0 0.7rem;
+        font-size: 1rem;
+        font-family: system-ui, sans-serif;
+      }
+      .matrix-card-tag {
+        display: inline-block;
+        margin-bottom: 0.3rem;
+        margin-right: 0.2rem;
+      }
+      .matrix-card .card-topic {
+        font-size: 0.82rem;
+        margin: 0.25rem 0;
+        font-family: system-ui, sans-serif;
+      }
+      .matrix-card .card-topic strong {
+        color: var(--bark);
+        margin-right: 0.3rem;
+      }
+      .matrix-card .card-topic a { font-size: 0.82rem; }
+
+      @media (max-width: 768px) {
+        #matrixTable { display: none; }
+        .matrix-cards { display: grid; }
+        .matrix-filters { display: none; }
+      }
+    </style>
+
+    <script>
+    (function() {
+      'use strict';
+
+      var COLS = ['col','cas','eco','gdn','bcm','she','avi','mam','bps'];
+      var COL_LABELS = { col:'COL', cas:'CAS', eco:'ECO', gdn:'GDN', bcm:'BCM', she:'SHE', avi:'AVI', mam:'MAM', bps:'BPS' };
+      var CATEGORIES = ['living-systems','built-environment','technology','meta'];
+      var LS_COLS_KEY = 'pnw-matrix-cols';
+      var LS_CATS_KEY = 'pnw-matrix-cats';
+
+      // --- localStorage helpers (safe for file:// protocol) ---
+      function lsGet(key, fallback) {
+        try { var v = localStorage.getItem(key); return v !== null ? JSON.parse(v) : fallback; }
+        catch(e) { return fallback; }
+      }
+      function lsSet(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+      }
+
+      // --- State ---
+      var colVisible = lsGet(LS_COLS_KEY, null);
+      if (!colVisible) {
+        colVisible = {};
+        COLS.forEach(function(c) { colVisible[c] = true; });
+      }
+      var catExpanded = lsGet(LS_CATS_KEY, null);
+      if (!catExpanded) {
+        catExpanded = {};
+        CATEGORIES.forEach(function(c) { catExpanded[c] = true; });
+      }
+
+      // --- Column filtering ---
+      function applyColumnVisibility() {
+        COLS.forEach(function(col, idx) {
+          var headerCells = document.querySelectorAll('#matrixTable thead th[data-col="' + col + '"]');
+          var dataCells = document.querySelectorAll('#matrixTable tbody td[data-col="' + col + '"]');
+          var method = colVisible[col] ? 'remove' : 'add';
+          headerCells.forEach(function(el) { el.classList[method]('col-hidden'); });
+          dataCells.forEach(function(el) { el.classList[method]('col-hidden'); });
+
+          var chip = document.querySelector('.filter-chip[data-col="' + col + '"]');
+          if (chip) {
+            if (colVisible[col]) chip.classList.add('active');
+            else chip.classList.remove('active');
+          }
+        });
+
+        // Update category header colspan
+        var visibleCount = COLS.filter(function(c) { return colVisible[c]; }).length + 1;
+        document.querySelectorAll('.category-header td').forEach(function(td) {
+          td.setAttribute('colspan', visibleCount);
+        });
+
+        lsSet(LS_COLS_KEY, colVisible);
+      }
+
+      // --- Category toggles ---
+      function applyCategoryVisibility() {
+        CATEGORIES.forEach(function(cat) {
+          var header = document.querySelector('[data-category-header="' + cat + '"]');
+          var rows = document.querySelectorAll('[data-category="' + cat + '"]');
+          if (catExpanded[cat]) {
+            header.classList.remove('collapsed');
+            rows.forEach(function(r) { r.style.display = ''; });
+          } else {
+            header.classList.add('collapsed');
+            rows.forEach(function(r) { r.style.display = 'none'; });
+          }
+        });
+        lsSet(LS_CATS_KEY, catExpanded);
+      }
+
+      // --- Build mobile card view ---
+      function buildCardView() {
+        var container = document.getElementById('matrixCards');
+        var table = document.getElementById('matrixTable');
+        var headerRow = table.querySelector('thead tr');
+        var dataRows = table.querySelectorAll('tbody tr[data-category]');
+
+        // Collect topics per project
+        var projectData = {};
+        COLS.forEach(function(c) { projectData[c] = []; });
+
+        dataRows.forEach(function(row) {
+          var topicCell = row.querySelector('td:first-child');
+          if (!topicCell) return;
+          var topic = topicCell.textContent.trim();
+          COLS.forEach(function(col) {
+            var cell = row.querySelector('td[data-col="' + col + '"]');
+            if (!cell) return;
+            var links = cell.querySelectorAll('a');
+            if (links.length > 0) {
+              links.forEach(function(a) {
+                projectData[col].push({ topic: topic, text: a.textContent, href: a.getAttribute('href') });
+              });
+            }
+          });
+        });
+
+        var html = '';
+        COLS.forEach(function(col) {
+          if (projectData[col].length === 0) return;
+          html += '<div class="matrix-card">';
+          html += '<h4><span class="tag tag-' + col + '">' + COL_LABELS[col] + '</span></h4>';
+          projectData[col].forEach(function(item) {
+            html += '<div class="card-topic"><strong>' + item.topic + ':</strong> <a href="' + item.href + '">' + item.text + '</a></div>';
+          });
+          html += '</div>';
+        });
+
+        container.innerHTML = html;
+      }
+
+      // --- Event listeners ---
+      document.querySelectorAll('.filter-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          var col = this.getAttribute('data-col');
+          colVisible[col] = !colVisible[col];
+          applyColumnVisibility();
+        });
+      });
+
+      document.getElementById('filterAll').addEventListener('click', function() {
+        COLS.forEach(function(c) { colVisible[c] = true; });
+        applyColumnVisibility();
+      });
+
+      document.getElementById('filterNone').addEventListener('click', function() {
+        COLS.forEach(function(c) { colVisible[c] = false; });
+        applyColumnVisibility();
+      });
+
+      document.querySelectorAll('.category-header').forEach(function(header) {
+        header.addEventListener('click', function() {
+          var cat = this.getAttribute('data-category-header');
+          catExpanded[cat] = !catExpanded[cat];
+          applyCategoryVisibility();
+        });
+      });
+
+      // --- Initialize ---
+      applyColumnVisibility();
+      applyCategoryVisibility();
+      buildCardView();
+    })();
+    </script>
 
     <h2>Geographic Coverage</h2>
 
