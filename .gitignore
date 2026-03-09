@@ -32,6 +32,9 @@ data/citations/cache/
 extra/man/*.1
 extra/man/*.5
 
+# Generated API docs
+docs/api/
+
 # Coverage
 coverage/
 .college/coverage/
