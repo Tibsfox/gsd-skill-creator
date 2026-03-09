@@ -213,7 +213,7 @@ describe('issueWelcomeHomeBadge', () => {
 
   // SC: safety-critical — badge is NOT a stamp
   it('SC-4: badge has no quality field', () => {
-    const badge = issueWelcomeHomeBadge('fox-042', now) as Record<string, unknown>;
+    const badge = issueWelcomeHomeBadge('fox-042', now) as unknown as Record<string, unknown>;
     expect(badge).not.toHaveProperty('quality');
     expect(badge).not.toHaveProperty('reliability');
     expect(badge).not.toHaveProperty('creativity');
