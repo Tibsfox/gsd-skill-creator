@@ -46,6 +46,16 @@ Cascade Brigade manages both **build** (camp activation) and **strike** (camp de
 - **Build:** Validate structure → activate camp → register in city directory
 - **Strike:** Notify Restoration Pass → verify LNT completion → deactivate camp → archive
 
+## Playa Art Registration
+
+Cascade Brigade also reviews **open-playa art installations** before placement. At real Burning Man, large-scale artwork on the open playa must register through DPW for structural safety, burn clearance, and site placement. The same applies here:
+
+- **Camp-internal art:** No DPW review needed — managed by camp lead skill
+- **Open-playa art:** Requires Cascade Brigade structural review (integrity, safety, site, dependency risk)
+- **Burn art:** Requires Cascade Brigade AND Fireline Cedar sign-off
+
+DPW never says "don't build this." DPW says "build it safely."
+
 ## PNW Connection
 
 The Cascade Range is the structural backbone of the Pacific Northwest — the volcanic chain that creates rain shadows, defines watersheds, and separates coastal from interior ecosystems. Like the mountains that hold the geography together, Cascade Brigade holds the city's infrastructure together.

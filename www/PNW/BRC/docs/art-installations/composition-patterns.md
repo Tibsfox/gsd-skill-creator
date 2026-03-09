@@ -157,6 +157,48 @@ A confirmed art installation requires:
 - Verification that it emerged organically (not pre-planned)
 - At least 2 rig witnesses from different camps
 
+## Playa Art Registration (DPW Structural Review)
+
+Art installations are discovered, not designed — but once discovered, they must be **registered through Cascade Brigade (DPW)** before they can be placed on the open playa. This mirrors real Burning Man, where large-scale playa art goes through an approval process for structural safety, burn clearance, and site placement.
+
+The registration process:
+
+1. **Discovery:** An art installation pattern is detected (see detection methods above)
+2. **Documentation:** The composition pattern, participating camps, and structural requirements are documented by Raven Archive
+3. **DPW Registration:** Cascade Brigade reviews the installation for:
+   - **Structural integrity** — will it hold under load/stress?
+   - **Safety clearance** — does it need Fireline Cedar (burn perimeter) support?
+   - **Site placement** — where on the open playa does it go? (Territory Mapping coordinates)
+   - **Dependency review** — are all participating skills stable, or could the installation collapse if one is deprecated?
+4. **Tide Pool Medical review** — if the installation involves any interaction that could affect participant safety, medical sign-off is required (SC-01 applies)
+5. **Placement:** Installation is registered in the city directory and placed on the playa
+
+### Key Rules
+
+- **Camp-internal art** (art that lives entirely within one camp's boundary) does NOT require DPW registration — the camp's own lead skill manages it
+- **Open-playa art** (art that exists in the space between camps, visible to the whole city) REQUIRES Cascade Brigade registration
+- **Burn art** (art intended for a burn/promotion event) requires BOTH Cascade Brigade AND Fireline Cedar sign-off
+- Registration does not constrain emergence — you discover first, register second. DPW never says "don't build this." DPW says "build it safely."
+
+### Registration Record
+
+```yaml
+art_registration:
+  archetype: "mycorrhizal-mandala"
+  name: "The Three-Camp Thread"
+  placement: "open-playa"
+  cascade_brigade_review:
+    structural: PASS
+    safety: PASS
+    site: "sector-4, between Cedar Grove and Raven's Roost"
+    dependency_risk: LOW
+    reviewed_by: "cedar-055"
+    date: "2026-03-09"
+  fireline_clearance: null        # Not a burn piece
+  tide_pool_clearance: null       # No safety interaction
+  status: "registered"
+```
+
 ---
 
-*"Art installations cannot be planned, only discovered. They emerge from the space between the camps — the topology of the gift."*
+*"Art installations cannot be planned, only discovered. They emerge from the space between the camps — the topology of the gift. But the gift still needs a foundation. DPW makes sure it has one."*
