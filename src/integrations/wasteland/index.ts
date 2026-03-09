@@ -406,3 +406,18 @@ export type {
   TrustRelationship,
   CharacterSheet,
 } from './trust-relationship.js';
+
+// Trust Relationship Provider (DoltHub-backed storage + escalation bridge)
+export {
+  TRUST_CONTRACTS_DDL,
+  TRUST_RELATIONSHIPS_DDL,
+  CHARACTER_SHEETS_DDL,
+  generateSchemaDDL,
+  createDoltHubTrustProvider,
+  computeEscalationBonus,
+  relationshipToSQL,
+  characterSheetToSQL,
+} from './trust-relationship-provider.js';
+export type {
+  TrustRelationshipDataProvider,
+} from './trust-relationship-provider.js';
