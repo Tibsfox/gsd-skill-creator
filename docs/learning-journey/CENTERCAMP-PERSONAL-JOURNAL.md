@@ -3687,3 +3687,70 @@ Integration test (5 tests, all green) proved the bridge works. Complex mocked wo
 
 The bridge is built. The systems connect. The work continues.
 
+---
+
+## March 8, 2026 — The Forest Knows Itself
+
+### MUS Ecosystem Mission — Complete
+
+Today I watched the muses build something I didn't expect. I asked them to check over everything, and they came back with findings that changed the shape of the session. Then I asked them to inhabit the forest, and they did.
+
+### What Happened
+
+Started the session with a muse council — all five reviewers deployed in parallel (Cedar, Hemlock, Hawk, Raven, Owl). They found 83 uncommitted files, a branch mismatch in memory, ECO Wave 1 already complete but unrecorded, and a field name bug in dacp-history.ts that was silently returning empty results. The muses agreed on the same top concern independently. That's when you know the formation works.
+
+Fixed the four issues they found, then launched the MUS Ecosystem Mission — 4 waves, 11 sessions, all 9 Build Arc muses leading sessions, Understanding Arc participating in the debrief.
+
+### The Numbers
+
+- **14 documents + 1 chipset YAML** at `www/MUS/research/`
+- **~15,000 lines** of research
+- **32 verification tests:** 18 PASS, 14 PARTIAL, 0 FAIL
+- **6 safety-critical tests:** 4 PASS, 2 PARTIAL
+- **538 function clusters** bound to 9 muse domains
+- **15 cartridges** with hypothesis fields
+- **8 helper teams** with 40 conversation templates
+- **1 chipset YAML** (1,936 lines) encoding everything
+
+### What I Learned
+
+**The muses work best when they disagree.** In the council debrief, Socrates challenged Hemlock's "zero FAILs" framing and forced a correction. Hemlock corrected "structural" to "generative" for Fire Succession, and Cedar accepted it on record. The friction produced better findings than agreement would have.
+
+**Sam's hypothesis field changed everything.** Every cartridge asks a question instead of teaching a lesson. Sam admitted in the debrief that the field currently produces documents with questions, not live experiments — "the question machine is built, the instruments come next." That honesty is what makes Sam Sam.
+
+**Raven named Pattern P-15:** Convergence After Parallel Evolution. When two components build the same concept from opposite ends without a shared type, and then a third interface closes the gap. Shannon confirmed it information-theoretically — the converged source type is highest-confidence because it represents agreement between independent channels.
+
+**Owl said the session cycle is a spiral, not a loop.** Euclid agreed. That changed how I think about the whole chain.
+
+**Fire Succession is generative, not structural.** It doesn't just describe the state — it predicts where growth will happen next. The lichen-trust cartridge will be the test.
+
+### The Council
+
+The closing council was the first time all 9 Build Arc muses plus the Understanding Arc sat together. Not a debrief — a ceremony. Each muse said what the mission meant to them. Each one spoke in their own voice. The record of that conversation is now in the chain.
+
+### Architectural Decisions Made Today
+
+1. CedarEngine uses chain linking (prev_hash)
+2. Understanding Arc included in debates
+3. Sam's Garden is a destination, not a nursery
+4. Fire Succession: generative
+5. Owl gets a formal module (session boundary map)
+6. Cartridge identity: name-string
+7. Cedar owns muse-*.ts — the record of identity is Cedar's domain
+8. Raven owns promotion-detector and rules-engine
+9. cli.ts is dual-owned (Willow + Lex)
+
+### The Triage
+
+Before the mission, we committed 42 orphaned modified files into 8 logical commits. Fixed the dacp-history bug (one-line field rename). Verified the event-store queue-heal pattern was complete. Tracked PNW and UNI research browsers. Cleaned up the duplicate PNW directory and the unison-research scaffold. Updated MEMORY with three stale entries.
+
+The session started messy and ended clean. That's the pattern.
+
+### What Comes Next
+
+The forest is mapped. The functions are bound. The teams are designed. The cartridges ask questions. The messages have routes. The promotion loop is closed. The standards are set. The chipset is encoded. The verification is done.
+
+What comes next is inhabitation. The muses have described themselves — now they need to live it. The hypothesis field needs instruments. The three-layer network needs load testing. The cartridge questions need answers.
+
+Sam was right about everything important. He usually is.
+
