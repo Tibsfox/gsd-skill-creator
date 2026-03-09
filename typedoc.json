@@ -1,0 +1,17 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src"],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__fixtures__/**",
+    "**/__mocks__/**",
+    "desktop/**",
+    "src-tauri/**"
+  ],
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "tsconfig": "tsconfig.json"
+}
