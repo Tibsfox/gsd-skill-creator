@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-curated-collection.sh -- Validation test suite for curated Amiga collection
 #
 # Tests the YAML structure, entry counts, field completeness, and legal

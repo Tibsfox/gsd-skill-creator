@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2207 # SC2034: vars for later use; SC2207: IFS-split array assignment is intentional
 # batch-convert.sh -- Batch conversion orchestrator for Amiga IFF and MOD files
 #
 # Recursively scans a directory tree for Amiga image (IFF/ILBM) and audio

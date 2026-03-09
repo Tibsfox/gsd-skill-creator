@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-convert-tracker.sh -- Test suite for MOD/MED to WAV/FLAC/OGG renderer
 #
 # Validates convert-tracker.sh: rendering, metadata extraction, multi-format

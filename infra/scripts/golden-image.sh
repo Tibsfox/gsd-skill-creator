@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2294,SC2155,SC2064 # variables used by sourced libs or in later phases
 # golden-image.sh -- Golden image lifecycle manager
 #
 # Manages golden image snapshots for Minecraft server infrastructure.

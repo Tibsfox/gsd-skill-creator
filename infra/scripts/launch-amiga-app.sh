@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2011 # ls piped to xargs is intentional; filenames are controlled
 # launch-amiga-app.sh -- Amiga application profile launcher
 #
 # Merges base.uae + application-specific profile, substitutes runtime

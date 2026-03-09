@@ -12,6 +12,7 @@
 #   7. Bus loop config paths exist (warns if Phase 317 not yet executed)
 #   8. Budget ceiling not exceeded
 
+# shellcheck disable=SC2317 # pass/warn/fail are called indirectly
 set -euo pipefail
 
 CHIPSET_PATH="${1:-.chipset/openstack-nasa-se/chipset.yaml}"
@@ -42,8 +43,7 @@ if [ ! -f "$CHIPSET_PATH" ]; then
   exit 1
 fi
 
-python3 -c "import yaml; yaml.safe_load(open('$CHIPSET_PATH'))" 2>/dev/null
-if [ $? -eq 0 ]; then
+if python3 -c "import yaml; yaml.safe_load(open('$CHIPSET_PATH'))" 2>/dev/null; then
   pass "YAML syntax valid"
 else
   fail "YAML syntax invalid"

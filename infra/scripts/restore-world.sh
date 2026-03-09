@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # restore-world.sh -- Minecraft world restore from backup archive
 #
 # Restores a Minecraft world from a tar.gz backup archive with:

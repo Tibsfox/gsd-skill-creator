@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154 # variables assigned in sourced test framework
 # test-validate-world-layout.sh -- Test suite for world layout validator
 #
 # Tests validate-world-layout.sh against real YAML files and crafted

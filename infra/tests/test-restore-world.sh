@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # BACKUP_SCRIPT reserved for future use
 # test-restore-world.sh -- Test suite for restore-world.sh
 #
 # Tests the Minecraft world restore script with mock data:
@@ -294,7 +295,7 @@ test_restore_correctness() {
         --force \
         --no-service \
         --no-backup-current \
-        --world-dir "${TEMP_DIR}/target/world" 2>&1 >/dev/null
+        --world-dir "${TEMP_DIR}/target/world" >/dev/null 2>&1
 
     # level.dat should be from the backup (ORIGINAL_LEVEL_DATA)
     local level_content
@@ -323,7 +324,7 @@ test_permission_fix() {
         --force \
         --no-service \
         --no-backup-current \
-        --world-dir "${TEMP_DIR}/target/world" 2>&1 >/dev/null
+        --world-dir "${TEMP_DIR}/target/world" >/dev/null 2>&1
 
     # Check directory permissions (755)
     local dir_perms
@@ -351,7 +352,7 @@ test_safety_backup() {
         --force \
         --no-service \
         --minecraft-home "${TEMP_DIR}/mc-home" \
-        --world-dir "${TEMP_DIR}/target/world" 2>&1 >/dev/null
+        --world-dir "${TEMP_DIR}/target/world" >/dev/null 2>&1
 
     # Check that a pre-restore backup was created
     local safety_count
@@ -384,7 +385,7 @@ test_no_backup_current() {
         --no-service \
         --no-backup-current \
         --minecraft-home "${TEMP_DIR}/mc-home" \
-        --world-dir "${TEMP_DIR}/target/world" 2>&1 >/dev/null
+        --world-dir "${TEMP_DIR}/target/world" >/dev/null 2>&1
 
     # No pre-restore backup should exist
     local safety_count

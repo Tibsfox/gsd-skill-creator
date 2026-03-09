@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-uae-config.sh -- Test suite for Plan 182-02 scripts
 #
 # Tests: configure-uae-display.sh, configure-uae-audio.sh,
