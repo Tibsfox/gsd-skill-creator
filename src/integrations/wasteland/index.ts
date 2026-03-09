@@ -442,6 +442,27 @@ export type {
   RegistrationDataProvider,
 } from './trust-registration.js';
 
+// Trust Graph Intelligence (Unit Circle Model — graph algorithms)
+export {
+  classifyAsymmetry,
+  classifyPair,
+  detectBonds,
+  computeBridgePotential,
+  computeGraphDiversity,
+  oldGrowthConnectionFloor,
+  assessOldGrowthReadiness,
+  describeAsymmetry,
+  describeBridge,
+} from './trust-graph.js';
+export type {
+  AsymmetryCategory,
+  AsymmetryResult,
+  Bond,
+  BridgePath,
+  GraphDiversity,
+  OldGrowthAssessment,
+} from './trust-graph.js';
+
 // UTC Timestamp Enforcement
 export {
   isUTC,
