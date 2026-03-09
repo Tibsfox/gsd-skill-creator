@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034 # variables consumed by sourcing scripts
 # pkg-abstraction.sh -- Package manager abstraction layer
 #
 # Provides distribution-agnostic package management operations that dispatch

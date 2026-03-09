@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2155 # local+assign pattern acceptable for non-critical date values
 # vm-backend-kvm.sh -- KVM/libvirt VM provisioning backend
 #
 # Implements VM lifecycle operations for KVM via virsh/virt-install.

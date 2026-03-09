@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # verify-pipeline.sh -- End-to-end integration verification for the PXE-to-playing pipeline
 #
 # Validates the complete PXE boot -> VM provisioning -> Minecraft server pipeline

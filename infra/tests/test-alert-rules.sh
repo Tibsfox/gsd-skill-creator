@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-alert-rules.sh -- Test suite for Prometheus alert rules
 #
 # Validates minecraft-alerts.yaml structure, alert definitions, thresholds,

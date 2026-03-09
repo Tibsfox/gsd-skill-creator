@@ -356,7 +356,7 @@ else
     else
         error "dnsmasq configuration validation FAILED"
         error "The new config has NOT been activated (dnsmasq was NOT restarted)"
-        if [[ -f "${DNSMASQ_CONF_OUTPUT}.bak."* ]] 2>/dev/null; then
+        if compgen -G "${DNSMASQ_CONF_OUTPUT}.bak."* >/dev/null 2>&1; then
             error "Previous config backup available -- restore manually if needed"
         fi
         die "Fix the configuration issues and retry."

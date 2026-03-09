@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # calculate-budget.sh -- Resource budget calculator
 #
 # Reads a hardware profile YAML and computes VM resource allocations

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2015,SC2034 # SC2015: A&&B||C used intentionally; SC2034: result vars used in report generation
 # =============================================================================
 # End-to-End User Scenario Verification Script
 # =============================================================================
