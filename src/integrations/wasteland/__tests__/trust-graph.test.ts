@@ -93,6 +93,16 @@ describe('classifyAsymmetry', () => {
     expect(result.harmony).toBeGreaterThanOrEqual(0);
     expect(result.harmony).toBeLessThanOrEqual(1);
   });
+
+  it('classifies moderate when ratio and angle are decent but harmony is below mutual threshold', () => {
+    // Both similar angles (low delta), decent ratio, but not enough magnitude for mutual harmony
+    const rel = makeRel('a-001', 'b-001', 'event-scoped', 0.6, 0.6, 0.4, 0.4);
+    const result = classifyAsymmetry(rel);
+    expect(result.category).toBe('moderate');
+    expect(result.magnitudeRatio).toBeGreaterThanOrEqual(0.5);
+    expect(result.angleDelta).toBeLessThanOrEqual(Math.PI / 6);
+    expect(result.harmony).toBeLessThan(0.7);
+  });
 });
 
 describe('classifyPair', () => {
@@ -113,10 +123,11 @@ describe('classifyPair', () => {
     expect(result.category).toBe('mutual');
   });
 
-  it('returns default for empty relationships array', () => {
+  it('returns none for empty relationships array', () => {
     const result = classifyPair([], NOW);
-    expect(result.category).toBe('mutual');
-    expect(result.harmony).toBe(1);
+    expect(result.category).toBe('none');
+    expect(result.harmony).toBe(0);
+    expect(result.magnitudeRatio).toBe(0);
   });
 
   it('filters out expired relationships', () => {
@@ -527,9 +538,9 @@ describe('describeAsymmetry', () => {
     expect(desc).toContain('mag-ratio=');
   });
 
-  it('all 5 categories have Seedling descriptions', () => {
+  it('all 7 categories have Seedling descriptions', () => {
     const categories: Array<AsymmetryResult['category']> = [
-      'mutual', 'one-sided', 'character-mismatch', 'bridge-potential', 'multi-context',
+      'none', 'mutual', 'moderate', 'one-sided', 'character-mismatch', 'bridge-potential', 'multi-context',
     ];
     for (const cat of categories) {
       const result: AsymmetryResult = { category: cat, magnitudeRatio: 0.5, angleDelta: 0.3, harmony: 0.5 };

@@ -332,8 +332,9 @@ export function computeHarmony(rel: TrustRelationship): {
   const mB = rel.toVector.magnitude;
 
   // Magnitude ratio: smaller / larger (1.0 = equal)
+  // Two zero vectors have no trust to compare — ratio and harmony are 0, not 1
   const maxM = Math.max(mA, mB);
-  const magnitudeRatio = maxM === 0 ? 1 : Math.min(mA, mB) / maxM;
+  const magnitudeRatio = maxM === 0 ? 0 : Math.min(mA, mB) / maxM;
 
   // Angle delta in radians (max π/2 since both are in first quadrant)
   const angleDelta = Math.abs(rel.fromVector.theta - rel.toVector.theta);

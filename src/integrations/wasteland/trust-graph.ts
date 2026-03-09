@@ -38,13 +38,15 @@ import {
 // ============================================================================
 
 /**
- * The 5 categories of relationship asymmetry.
+ * The 7 categories of relationship asymmetry.
  *
  * These describe the character of the connection — not judgment, just
  * observation. Every category is normal and healthy in context.
  */
 export type AsymmetryCategory =
+  | 'none'                // no active relationships between the pair
   | 'mutual'              // both sides similar in strength and character
+  | 'moderate'            // decent ratio and angle alignment, but below mutual harmony threshold
   | 'one-sided'           // one side significantly stronger than the other
   | 'character-mismatch'  // similar strength but different character (angle divergence)
   | 'bridge-potential'    // detected by computeBridgePotential(), not the asymmetry classifier
@@ -92,8 +94,8 @@ export function classifyAsymmetry(rel: TrustRelationship): AsymmetryResult {
   } else if (harmony >= ASYMMETRY_THRESHOLDS.mutualHarmony) {
     category = 'mutual';
   } else {
-    // Moderate asymmetry — neither clearly one-sided nor clearly mutual
-    category = 'one-sided';
+    // Moderate asymmetry — decent ratio and angle, but below mutual harmony threshold
+    category = 'moderate';
   }
 
   return { category, magnitudeRatio, angleDelta, harmony };
@@ -112,7 +114,7 @@ export function classifyPair(
   const active = relationships.filter(r => isContractActive(r.contract, now));
 
   if (active.length === 0) {
-    return { category: 'mutual', magnitudeRatio: 1, angleDelta: 0, harmony: 1 };
+    return { category: 'none', magnitudeRatio: 0, angleDelta: 0, harmony: 0 };
   }
 
   if (active.length >= 2) {
@@ -455,7 +457,9 @@ export function describeAsymmetry(
   // Seedling/Sapling: plain language
   if (trustLevel < 3) {
     switch (result.category) {
+      case 'none': return 'No active connection between you.';
       case 'mutual': return 'This connection runs both ways equally.';
+      case 'moderate': return 'This connection is growing — not yet fully mutual.';
       case 'one-sided': return 'One side of this connection is stronger than the other.';
       case 'character-mismatch': return 'You trust each other, but for different reasons.';
       case 'multi-context': return 'You share more than one kind of connection.';

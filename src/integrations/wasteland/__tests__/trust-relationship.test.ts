@@ -280,6 +280,17 @@ describe('computeHarmony', () => {
     expect(h.angleDelta).toBeGreaterThan(1.0); // > 57°
     expect(h.harmony).toBeLessThan(0.3);
   });
+
+  it('returns zero harmony for two zero vectors', () => {
+    const rel = createRelationship(
+      'a-001', 'b-002', 'ephemeral',
+      0, 0, 0, 0,
+    );
+    const h = computeHarmony(rel);
+    expect(h.magnitudeRatio).toBe(0);
+    expect(h.angleDelta).toBe(0);
+    expect(h.harmony).toBe(0);
+  });
 });
 
 describe('getActiveRelationships', () => {

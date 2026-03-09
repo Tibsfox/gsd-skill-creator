@@ -170,6 +170,18 @@ describe('renderRelationshipCompact', () => {
 
     expect(output).toContain('expires in');
   });
+
+  it('shows [EXPIRED] tag for expired contracts', () => {
+    const rel = makeRel('fox-042', 'cedar-011', 'ephemeral', {
+      ttlSeconds: 60,
+    });
+    // Advance time past expiry
+    const later = new Date(now.getTime() + 120_000);
+    const output = renderRelationshipCompact(rel, 'seedling', later);
+
+    expect(output).toContain('EXPIRED');
+    expect(output).not.toContain('expires in');
+  });
 });
 
 // ============================================================================
