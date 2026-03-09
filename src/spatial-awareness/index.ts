@@ -167,6 +167,36 @@ export {
   createSimulatedBulkDevice,
 } from './usb-device.js';
 
+// Frog Protocol Controller
+export {
+  FrogProtocolController,
+  createFrogProtocol,
+  DEFAULT_FROG_CONFIG,
+} from './frog-protocol.js';
+
+export type {
+  FrogProtocolConfig,
+  PhaseTransition,
+  ProbeDispatch,
+  ProbeResult,
+  ClassificationResult,
+  FrogProtocolEvent,
+  FrogProtocolEventHandler,
+} from './frog-protocol.js';
+
+// Integration Bridge
+export {
+  SpatialAwarenessSystem,
+  createSpatialSystem,
+} from './integration.js';
+
+export type {
+  SpatialSystemConfig,
+  SpatialSystemStatus,
+  SpatialSystemEvent,
+  SpatialSystemEventHandler,
+} from './integration.js';
+
 // Test environment
 export {
   SimulatedEnvironment,
