@@ -6,6 +6,8 @@ import {
   createContract,
   isContractActive,
   contractTimeRemaining,
+  renewContract,
+  contractTotalDuration,
   createRelationship,
   computeHarmony,
   getActiveRelationships,
@@ -500,5 +502,197 @@ describe('formatRelationship', () => {
 
     const output = formatRelationship(rel, now);
     expect(output).toContain('EXPIRED');
+  });
+});
+
+// ============================================================================
+// Heartbeat Contract Renewal
+// ============================================================================
+
+describe('heartbeat renewal', () => {
+  const now = new Date('2026-08-25T20:00:00Z');
+
+  describe('createContract auto-renew defaults', () => {
+    it('ephemeral contracts default to auto-renew', () => {
+      const c = createContract('ephemeral', 900, now);
+      expect(c.autoRenew).toBe(true);
+      expect(c.renewalCount).toBe(0);
+    });
+
+    it('event-scoped contracts default to auto-renew', () => {
+      const c = createContract('event-scoped', undefined, now);
+      expect(c.autoRenew).toBe(true);
+    });
+
+    it('project-scoped contracts default to auto-renew', () => {
+      const c = createContract('project-scoped', undefined, now);
+      expect(c.autoRenew).toBe(true);
+    });
+
+    it('permanent contracts default to no auto-renew (nothing to renew)', () => {
+      const c = createContract('permanent', undefined, now);
+      expect(c.autoRenew).toBe(false);
+    });
+
+    it('long-term contracts default to no auto-renew', () => {
+      const c = createContract('long-term', undefined, now);
+      expect(c.autoRenew).toBe(false);
+    });
+
+    it('explicit override: disable auto-renew on ephemeral', () => {
+      const c = createContract('ephemeral', 900, now, false);
+      expect(c.autoRenew).toBe(false);
+    });
+
+    it('explicit override: enable auto-renew on long-term with custom TTL', () => {
+      const c = createContract('long-term', 365 * 86400, now, true);
+      expect(c.autoRenew).toBe(true);
+    });
+  });
+
+  describe('renewContract', () => {
+    it('renews an ephemeral contract at TTL boundary', () => {
+      const game = createContract('ephemeral', 900, now); // 15-min game
+      expect(game.autoRenew).toBe(true);
+
+      // 15 minutes later — game still going
+      const boundary = new Date(now.getTime() + 900 * 1000);
+      const renewed = renewContract(game, boundary);
+
+      expect(renewed).not.toBeNull();
+      expect(renewed!.renewalCount).toBe(1);
+      expect(renewed!.createdAt).toBe(game.createdAt); // original start preserved
+      expect(renewed!.id).toBe(game.id); // same contract
+      expect(renewed!.ttl).toBe(900); // same TTL
+
+      // New expiry is 15 minutes from the renewal point
+      const newExpiry = new Date(renewed!.expiresAt!);
+      expect(newExpiry.getTime()).toBe(boundary.getTime() + 900 * 1000);
+    });
+
+    it('supports multiple renewals (15-min game becomes all-night)', () => {
+      let contract = createContract('ephemeral', 900, now);
+      let t = now;
+
+      // Renew 12 times = 3 hours of 15-minute heartbeats
+      for (let i = 0; i < 12; i++) {
+        t = new Date(t.getTime() + 900 * 1000);
+        const renewed = renewContract(contract, t);
+        expect(renewed).not.toBeNull();
+        contract = renewed!;
+      }
+
+      expect(contract.renewalCount).toBe(12);
+      expect(contract.createdAt).toBe(now.toISOString()); // still the original start
+      expect(isContractActive(contract, t)).toBe(true);
+    });
+
+    it('returns null for non-renewable contracts', () => {
+      const permanent = createContract('permanent', undefined, now);
+      expect(renewContract(permanent, now)).toBeNull();
+    });
+
+    it('returns null for contracts with auto-renew disabled', () => {
+      const oneShot = createContract('ephemeral', 900, now, false);
+      const boundary = new Date(now.getTime() + 900 * 1000);
+      expect(renewContract(oneShot, boundary)).toBeNull();
+    });
+
+    it('expired contract that is not renewed stays expired', () => {
+      const game = createContract('ephemeral', 900, now);
+      const afterExpiry = new Date(now.getTime() + 1800 * 1000); // 30 min later
+
+      // The contract expired, but we can still renew it (heartbeat came late)
+      expect(isContractActive(game, afterExpiry)).toBe(false);
+
+      // If the heartbeat fires, it revives from "now"
+      const renewed = renewContract(game, afterExpiry);
+      expect(renewed).not.toBeNull();
+      expect(isContractActive(renewed!, afterExpiry)).toBe(true);
+    });
+  });
+
+  describe('contractTotalDuration', () => {
+    it('measures total elapsed time from creation', () => {
+      const contract = createContract('ephemeral', 900, now);
+      const later = new Date(now.getTime() + 3600 * 1000); // 1 hour later
+      expect(contractTotalDuration(contract, later)).toBeCloseTo(3600, 0);
+    });
+
+    it('works across multiple renewals', () => {
+      let contract = createContract('ephemeral', 900, now);
+      const renewed = renewContract(contract, new Date(now.getTime() + 900 * 1000));
+      const twoHoursLater = new Date(now.getTime() + 7200 * 1000);
+      expect(contractTotalDuration(renewed!, twoHoursLater)).toBeCloseTo(7200, 0);
+    });
+  });
+
+  describe('createRelationship with auto-renew', () => {
+    it('passes autoRenew through to contract', () => {
+      const rel = createRelationship(
+        'fox-042', 'stranger-999',
+        'ephemeral',
+        0.0, 0.15,
+        0.0, 0.1,
+        { ttlSeconds: 900, autoRenew: true, now },
+      );
+      expect(rel.contract.autoRenew).toBe(true);
+    });
+
+    it('can disable auto-renew explicitly', () => {
+      const rel = createRelationship(
+        'fox-042', 'stranger-999',
+        'ephemeral',
+        0.0, 0.15,
+        0.0, 0.1,
+        { ttlSeconds: 900, autoRenew: false, now },
+      );
+      expect(rel.contract.autoRenew).toBe(false);
+    });
+  });
+
+  describe('formatRelationship with renewal info', () => {
+    it('shows renewal indicator for auto-renew contracts', () => {
+      const rel = createRelationship(
+        'fox-042', 'owl-007',
+        'ephemeral',
+        0.0, 0.3,
+        0.0, 0.2,
+        { ttlSeconds: 900, now },
+      );
+      const output = formatRelationship(rel, now);
+      expect(output).toContain('♻');
+    });
+
+    it('shows renewal count after renewals', () => {
+      const rel = createRelationship(
+        'fox-042', 'owl-007',
+        'ephemeral',
+        0.0, 0.3,
+        0.0, 0.2,
+        { ttlSeconds: 900, now },
+      );
+      // Simulate 3 renewals
+      const boundary = new Date(now.getTime() + 900 * 1000);
+      let contract = rel.contract;
+      for (let i = 0; i < 3; i++) {
+        contract = renewContract(contract, new Date(boundary.getTime() + i * 900 * 1000))!;
+      }
+      const renewedRel = { ...rel, contract };
+      const output = formatRelationship(renewedRel, boundary);
+      expect(output).toContain('renewed 3×');
+    });
+
+    it('does not show renewal indicator for non-renewable contracts', () => {
+      const rel = createRelationship(
+        'fox-042', 'cedar-011',
+        'permanent',
+        1.0, 1.0,
+        1.0, 1.0,
+        { now },
+      );
+      const output = formatRelationship(rel, now);
+      expect(output).not.toContain('♻');
+    });
   });
 });

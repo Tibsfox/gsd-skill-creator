@@ -44,11 +44,13 @@ import {
  */
 export const TRUST_CONTRACTS_DDL = `
 CREATE TABLE IF NOT EXISTS trust_contracts (
-  id            VARCHAR(32) PRIMARY KEY,
+  id            VARCHAR(48) PRIMARY KEY,
   type          VARCHAR(16) NOT NULL,
   ttl_seconds   INT DEFAULT NULL,
   created_at    DATETIME NOT NULL,
-  expires_at    DATETIME DEFAULT NULL
+  expires_at    DATETIME DEFAULT NULL,
+  auto_renew    BOOLEAN NOT NULL DEFAULT FALSE,
+  renewal_count INT NOT NULL DEFAULT 0
 );`.trim();
 
 /**
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS trust_contracts (
  */
 export const TRUST_RELATIONSHIPS_DDL = `
 CREATE TABLE IF NOT EXISTS trust_relationships (
-  contract_id     VARCHAR(32) NOT NULL,
+  contract_id     VARCHAR(48) NOT NULL,
   from_handle     VARCHAR(64) NOT NULL,
   to_handle       VARCHAR(64) NOT NULL,
   from_time       FLOAT NOT NULL,
@@ -171,6 +173,8 @@ function rowToRelationship(
     ttl: contractRow.ttl_seconds ? parseInt(contractRow.ttl_seconds, 10) : null,
     createdAt: contractRow.created_at,
     expiresAt: contractRow.expires_at || null,
+    autoRenew: contractRow.auto_renew === '1' || contractRow.auto_renew === 'true',
+    renewalCount: contractRow.renewal_count ? parseInt(contractRow.renewal_count, 10) : 0,
   };
 
   return {
@@ -228,16 +232,19 @@ export function createDoltHubTrustProvider(
   return {
     async saveRelationship(rel: TrustRelationship): Promise<void> {
       const contractSQL = client.generateSQL(
-        `INSERT INTO trust_contracts (id, type, ttl_seconds, created_at, expires_at)
-         VALUES (?, ?, ?, ?, ?)
+        `INSERT INTO trust_contracts (id, type, ttl_seconds, created_at, expires_at, auto_renew, renewal_count)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
          ON DUPLICATE KEY UPDATE type = VALUES(type), ttl_seconds = VALUES(ttl_seconds),
-           expires_at = VALUES(expires_at)`,
+           expires_at = VALUES(expires_at), auto_renew = VALUES(auto_renew),
+           renewal_count = VALUES(renewal_count)`,
         [
           rel.contract.id,
           rel.contract.type,
           rel.contract.ttl !== null ? String(rel.contract.ttl) : '',
           rel.contract.createdAt,
           rel.contract.expiresAt ?? '',
+          rel.contract.autoRenew ? '1' : '0',
+          String(rel.contract.renewalCount),
         ],
       );
 
@@ -278,7 +285,8 @@ export function createDoltHubTrustProvider(
       const escaped = sqlEscape(handle);
       const { rows } = await client.query(
         `SELECT r.*, c.id as c_id, c.type as c_type, c.ttl_seconds as c_ttl,
-                c.created_at as c_created, c.expires_at as c_expires
+                c.created_at as c_created, c.expires_at as c_expires,
+                c.auto_renew as c_auto_renew, c.renewal_count as c_renewal_count
          FROM trust_relationships r
          JOIN trust_contracts c ON r.contract_id = c.id
          WHERE r.from_handle = '${escaped}' OR r.to_handle = '${escaped}'
@@ -292,6 +300,8 @@ export function createDoltHubTrustProvider(
           ttl_seconds: row.c_ttl,
           created_at: row.c_created,
           expires_at: row.c_expires,
+          auto_renew: row.c_auto_renew,
+          renewal_count: row.c_renewal_count,
         },
         row,
       ));
@@ -302,7 +312,8 @@ export function createDoltHubTrustProvider(
       const b = sqlEscape(handleB);
       const { rows } = await client.query(
         `SELECT r.*, c.id as c_id, c.type as c_type, c.ttl_seconds as c_ttl,
-                c.created_at as c_created, c.expires_at as c_expires
+                c.created_at as c_created, c.expires_at as c_expires,
+                c.auto_renew as c_auto_renew, c.renewal_count as c_renewal_count
          FROM trust_relationships r
          JOIN trust_contracts c ON r.contract_id = c.id
          WHERE (r.from_handle = '${a}' AND r.to_handle = '${b}')
@@ -317,6 +328,8 @@ export function createDoltHubTrustProvider(
           ttl_seconds: row.c_ttl,
           created_at: row.c_created,
           expires_at: row.c_expires,
+          auto_renew: row.c_auto_renew,
+          renewal_count: row.c_renewal_count,
         },
         row,
       ));
@@ -419,9 +432,9 @@ export function computeEscalationBonus(
 export function relationshipToSQL(rel: TrustRelationship): string {
   const c = rel.contract;
   const lines: string[] = [
-    `-- Trust: ${rel.from} ↔ ${rel.to} (${c.type})`,
-    `INSERT INTO trust_contracts (id, type, ttl_seconds, created_at, expires_at)`,
-    `VALUES ('${sqlEscape(c.id)}', '${sqlEscape(c.type)}', ${c.ttl !== null ? c.ttl : 'NULL'}, '${sqlEscape(c.createdAt)}', ${c.expiresAt ? `'${sqlEscape(c.expiresAt)}'` : 'NULL'});`,
+    `-- Trust: ${rel.from} ↔ ${rel.to} (${c.type}${c.autoRenew ? ', auto-renew' : ''})`,
+    `INSERT INTO trust_contracts (id, type, ttl_seconds, created_at, expires_at, auto_renew, renewal_count)`,
+    `VALUES ('${sqlEscape(c.id)}', '${sqlEscape(c.type)}', ${c.ttl !== null ? c.ttl : 'NULL'}, '${sqlEscape(c.createdAt)}', ${c.expiresAt ? `'${sqlEscape(c.expiresAt)}'` : 'NULL'}, ${c.autoRenew ? 1 : 0}, ${c.renewalCount});`,
     '',
     `INSERT INTO trust_relationships (contract_id, from_handle, to_handle, from_time, from_depth, to_time, to_depth, from_label, to_label, visibility)`,
     `VALUES ('${sqlEscape(c.id)}', '${sqlEscape(rel.from)}', '${sqlEscape(rel.to)}', ${rel.fromVector.sharedTime}, ${rel.fromVector.sharedDepth}, ${rel.toVector.sharedTime}, ${rel.toVector.sharedDepth}, ${rel.fromLabel ? `'${sqlEscape(rel.fromLabel)}'` : 'NULL'}, ${rel.toLabel ? `'${sqlEscape(rel.toLabel)}'` : 'NULL'}, '${sqlEscape(rel.visibility)}');`,

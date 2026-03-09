@@ -390,6 +390,8 @@ export {
   createContract,
   isContractActive,
   contractTimeRemaining,
+  renewContract,
+  contractTotalDuration,
   createRelationship,
   computeHarmony,
   getActiveRelationships,

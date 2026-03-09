@@ -130,6 +130,15 @@ export interface TrustContract {
   createdAt: string;
   /** When the contract expires (ISO 8601). null = never. */
   expiresAt: string | null;
+  /**
+   * Heartbeat renewal: if true, the contract auto-renews at TTL boundary
+   * when both participants are still active. If either stops participating,
+   * the contract expires naturally. A 15-minute game that becomes an
+   * all-night collaboration just keeps renewing.
+   */
+  autoRenew: boolean;
+  /** How many times this contract has been renewed (0 = never renewed). */
+  renewalCount: number;
 }
 
 /** Default TTLs for each contract type (in seconds). null = no default. */
@@ -147,11 +156,13 @@ const DEFAULT_TTLS: Record<TrustContractType, number | null> = {
  * @param type — the contract type
  * @param ttlSeconds — override TTL in seconds (null = permanent, undefined = use default)
  * @param now — current time (for testing)
+ * @param autoRenew — enable heartbeat renewal (default: true for ephemeral/event/project, false for permanent/long-term)
  */
 export function createContract(
   type: TrustContractType,
   ttlSeconds?: number | null,
   now: Date = new Date(),
+  autoRenew?: boolean,
 ): TrustContract {
   const ttl = ttlSeconds !== undefined ? ttlSeconds : DEFAULT_TTLS[type];
   const createdAt = now.toISOString();
@@ -159,13 +170,58 @@ export function createContract(
     ? new Date(now.getTime() + ttl * 1000).toISOString()
     : null;
 
+  // Default: auto-renew contracts that have a TTL (ephemeral, event, project).
+  // Permanent and long-term contracts don't expire, so renewal is meaningless.
+  const shouldAutoRenew = autoRenew !== undefined
+    ? autoRenew
+    : ttl !== null;
+
   return {
     id: generateContractId(type, now),
     type,
     ttl,
     createdAt,
     expiresAt,
+    autoRenew: shouldAutoRenew,
+    renewalCount: 0,
   };
+}
+
+/**
+ * Renew a contract for another TTL period (heartbeat renewal).
+ *
+ * Called when both participants are still active at TTL boundary.
+ * Pushes expiresAt forward by TTL seconds and increments the renewal count.
+ * The original createdAt is preserved — it marks when the relationship started.
+ *
+ * Returns null if:
+ *   - The contract is not auto-renewable
+ *   - The contract has no TTL (permanent — nothing to renew)
+ *   - The contract hasn't expired yet (early renewal is a no-op)
+ */
+export function renewContract(
+  contract: TrustContract,
+  now: Date = new Date(),
+): TrustContract | null {
+  if (!contract.autoRenew) return null;
+  if (contract.ttl === null) return null;
+
+  const newExpiresAt = new Date(now.getTime() + contract.ttl * 1000).toISOString();
+
+  return {
+    ...contract,
+    expiresAt: newExpiresAt,
+    renewalCount: contract.renewalCount + 1,
+  };
+}
+
+/**
+ * Total elapsed time since contract creation, including all renewals.
+ * Returns seconds.
+ */
+export function contractTotalDuration(contract: TrustContract, now: Date = new Date()): number {
+  const created = new Date(contract.createdAt).getTime();
+  return (now.getTime() - created) / 1000;
 }
 
 /**
@@ -239,6 +295,7 @@ export function createRelationship(
     toLabel?: string;
     visibility?: 'private' | 'mutual';
     ttlSeconds?: number | null;
+    autoRenew?: boolean;
     now?: Date;
   },
 ): TrustRelationship {
@@ -248,7 +305,7 @@ export function createRelationship(
     to,
     fromVector: computeVector(fromTime, fromDepth),
     toVector: computeVector(toTime, toDepth),
-    contract: createContract(type, options?.ttlSeconds, now),
+    contract: createContract(type, options?.ttlSeconds, now, options?.autoRenew),
     fromLabel: options?.fromLabel ?? null,
     toLabel: options?.toLabel ?? null,
     visibility: options?.visibility ?? 'private',
@@ -454,16 +511,21 @@ export function getPublicProfile(sheet: CharacterSheet): {
 
 /**
  * Generate a contract ID.
- * Format: tc-{type_prefix}-{timestamp_hex}
+ * Format: tc-{type_prefix}-{uuid}
+ *
+ * Uses crypto.randomUUID() for collision safety at any volume.
+ * The type prefix is preserved for human readability in logs.
  */
-function generateContractId(type: TrustContractType, now: Date): string {
+function generateContractId(type: TrustContractType, _now: Date): string {
   const prefix = type === 'permanent' ? 'pm'
     : type === 'long-term' ? 'lt'
     : type === 'event-scoped' ? 'ev'
     : type === 'project-scoped' ? 'pj'
     : 'ep';
-  const ts = now.getTime().toString(16).slice(-8);
-  return `tc-${prefix}-${ts}`;
+  const uuid = typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Math.random().toString(36).slice(2)}${Math.random().toString(36).slice(2)}`.slice(0, 32);
+  return `tc-${prefix}-${uuid}`;
 }
 
 /**
@@ -474,8 +536,13 @@ export function formatRelationship(rel: TrustRelationship, now: Date = new Date(
   const status = active ? 'ACTIVE' : 'EXPIRED';
   const harmony = computeHarmony(rel);
 
+  const renewTag = rel.contract.autoRenew ? ' ♻' : '';
+  const renewCount = rel.contract.renewalCount > 0
+    ? ` (renewed ${rel.contract.renewalCount}×)`
+    : '';
+
   const lines = [
-    `${rel.from} ↔ ${rel.to} — ${rel.contract.type} [${status}]`,
+    `${rel.from} ↔ ${rel.to} — ${rel.contract.type}${renewTag} [${status}]${renewCount}`,
     `  ${rel.from}: ${describeVector(rel.fromVector)}${rel.fromLabel ? ` "${rel.fromLabel}"` : ''}`,
     `  ${rel.to}: ${describeVector(rel.toVector)}${rel.toLabel ? ` "${rel.toLabel}"` : ''}`,
     `  harmony: ${harmony.harmony.toFixed(2)} (magnitude ratio: ${harmony.magnitudeRatio.toFixed(2)})`,

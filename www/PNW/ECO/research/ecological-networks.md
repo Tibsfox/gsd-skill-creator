@@ -288,6 +288,12 @@ The bus operates seasonally — nutrient pulses correspond to salmon run timing 
                     └─────────────────────────────┘
 ```
 
+## The River's Witness
+
+The River's Witness is the cross-series ecological thread connecting all PNW Living Systems Taxonomy research through the life cycle of Pacific salmon (*Oncorhynchus* spp.). Salmon are the only biological vectors that physically transport marine-derived nutrients from the deep Pacific into the heart of PNW terrestrial ecosystems. They appear in ECO (ecological networks, salmon nutrient pathway), AVI (osprey, bald eagle, dipper, kingfisher, corvids at carcass sites), and MAM (black bear, river otter, mink, marten, wolf, and all riparian predators). Any document in the PNW series that references salmon cites this thread by name.
+
+**Cross-series citations:** `www/PNW/AVI/research/salmon-thread-avi.md` | `www/PNW/MAM/research/salmon-thread-mam.md`
+
 ---
 
 ## Pathway 2: Kelp-Otter-Urchin Cascade
