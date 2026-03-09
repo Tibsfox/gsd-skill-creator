@@ -1,0 +1,209 @@
+name: spatial-awareness
+version: 2.0.0
+release: Paula Chipset Release 2
+description: >
+  Passive Sensing, Threat Assessment, and Coordinated Signaling
+  for Agent Systems — The Chorus Protocol.
+
+chips:
+  M1_PASSIVE_SENSOR:
+    name: Passive Environmental Sensor
+    file: passive-sensor.ts
+    class: PassiveEnvironmentalSensor
+    purpose: >
+      Reads ambient computational signals without making tool calls.
+      Builds ResourceDimension spatial model from sensor registry.
+      Detects anomalies via configurable thresholds.
+    inputs:
+      - SensorRegistry (context_fill, token_budget, error_rate)
+    outputs:
+      - SpatialModel
+      - AnomalyRecord[]
+    config: ThresholdConfig
+    safety: []
+
+  M2_THREAT_DETECTION:
+    name: Threat Detection Engine
+    file: threat-engine.ts
+    class: ThreatDetectionEngine
+    purpose: >
+      Probabilistic threat scoring with exponential moving average.
+      Multi-source correlation (≥2 sources to escalate).
+      Sliding window for trend analysis. ThreatEvent generation.
+    inputs:
+      - AmbientSignal
+    outputs:
+      - ThreatEvent
+      - ThreatLevel (NOMINAL | ELEVATED | HIGH | BLOCK)
+    config: ThreatEngineConfig
+    safety: []
+
+  M3_GEOMETRY_MAPPER:
+    name: Environmental Geometry Mapper
+    file: geometry-mapper.ts
+    class: EnvironmentalGeometryMapper
+    purpose: >
+      Constructs ResourceDimension model of the environment.
+      Tracks context headroom, budget remaining, rate limit proximity.
+      Constraint boundaries with time-to-hit estimates.
+    inputs:
+      - AmbientSignal
+    outputs:
+      - ResourceDimension[]
+      - ConstraintBoundary[]
+    config: GeometryConfig
+    safety: []
+
+  M4_FROG_PROTOCOL:
+    name: Frog Protocol Controller
+    file: frog-protocol.ts
+    class: FrogProtocolController
+    purpose: >
+      5-phase graduated response state machine.
+      BASELINE → SILENCE → ASSESS → PROBE → CLASSIFY → RESUME → BASELINE.
+      Scout-first probe dispatch. Human approval gate for BLOCK threats.
+    inputs:
+      - ThreatEvent
+    outputs:
+      - PhaseTransition
+      - ClassificationResult (THREAT | NEUTRAL | OPPORTUNITY)
+      - FrogProtocolEvent
+    config: FrogProtocolConfig
+    safety:
+      - SC-HUM: BLOCK threats require human approval
+      - SC-RES: No resume while BLOCK active and unapproved
+      - SC-COR: SILENCE requires ≥2 correlated sources
+
+  M5_COMM_BUS:
+    name: Multi-Tier Communication Bus
+    file: comm-bus.ts
+    class: CommBus
+    purpose: >
+      Three-tier messaging: COVERT (point-to-point, invisible),
+      DIRECTED (named recipients), BROADCAST (all agents).
+      Signal file protocol for filesystem coordination.
+    inputs:
+      - CoordinationMessage
+    outputs:
+      - Message delivery to subscribers
+      - CommBusStats
+    config: null
+    safety:
+      - CF-12: Zero missed broadcasts
+      - CF-13: Covert message invisibility
+
+  M6_CHORUS_COORDINATION:
+    name: Chorus Coordination Protocol
+    file: chorus-proto.ts
+    class: ChorusProtocol
+    purpose: >
+      Distributed pause/resume with state preservation (CF-14).
+      Scout-first re-engagement pattern (CF-08/CF-10).
+      No leader election — agents evaluate independently.
+      Tempo synchronization and heartbeat tracking.
+    inputs:
+      - CommBus
+    outputs:
+      - PauseResult (snapshots, propagation time)
+      - ResumeResult (scout-first, agents resumed)
+      - ChorusEvent
+    config: null
+    safety:
+      - CF-14: Zero work loss on pause/resume
+
+supporting_layers:
+  types:
+    file: types.ts
+    schemas:
+      - ThreatLevelSchema
+      - ThreatClassificationSchema
+      - FrogPhaseSchema
+      - CommTierSchema
+      - AmbientSignalSchema
+      - ThreatEventSchema
+      - CoordinationMessageSchema
+      - SpatialModelSchema
+      - OutputMappingSchema
+      - UsbDeviceSchema
+      - LaserInterlockStatusSchema
+
+  sensor_interface:
+    file: sensor-interface.ts
+    contracts:
+      - SensorStream
+      - OutputDevice
+      - SensorRegistry
+      - OutputRegistry
+      - UsbDeviceManager
+    implementations:
+      - ContextFillSensor
+      - TokenBudgetSensor
+      - ErrorRateSensor
+      - DefaultSensorRegistry
+      - DefaultOutputRegistry
+
+  usb_device:
+    file: usb-device.ts
+    purpose: USB device abstraction (audio, serial, bulk, HID)
+
+  output_synthesis:
+    file: output-synthesis.ts
+    class: OutputSynthesis
+    targets:
+      - audio_oscillator (CF-19)
+      - dmx_channel (CF-20, 512 channels, 44Hz)
+      - led_strip (CF-21, WS2812B)
+      - laser_ilda (CF-22, SC-LAS interlock)
+    phase_colors:
+      BASELINE: { rgb: [0, 128, 0], intensity: 0.3, pulse: 0 }
+      SILENCE: { rgb: [0, 0, 64], intensity: 0.1, pulse: 0 }
+      ASSESS: { rgb: [255, 165, 0], intensity: 0.6, pulse: 1 }
+      PROBE: { rgb: [255, 255, 0], intensity: 0.8, pulse: 2 }
+      CLASSIFY: { rgb: [255, 0, 0], intensity: 1.0, pulse: 4 }
+      RESUME: { rgb: [0, 255, 128], intensity: 0.5, pulse: 0.5 }
+
+  integration:
+    file: integration.ts
+    class: SpatialAwarenessSystem
+    purpose: >
+      Wires full pipeline: sensor → threat → protocol → comm → chorus → output.
+      Factory: createSpatialSystem(config, sensorRegistry).
+
+  test_env:
+    file: test-env.ts
+    class: SimulatedEnvironment
+    purpose: >
+      5-agent simulation with configurable noise and anomaly injection.
+      9 preset scenarios (nominal, failure types, cascading, noisy).
+
+test_coverage:
+  total_tests: 285
+  test_files: 12
+  wave_0:
+    files: [types.test.ts, sensor-interface.test.ts, test-env.test.ts]
+    tests: 56
+  wave_1a:
+    files: [wave1-track-a.test.ts]
+    tests: 62
+  wave_1b:
+    files: [comm-bus.test.ts, chorus-proto.test.ts, output-synthesis.test.ts]
+    tests: 78
+  wave_2:
+    files: [frog-protocol.test.ts, integration.test.ts]
+    tests: 48
+  wave_3:
+    files: [threat-simulation.test.ts, broadcast-reliability.test.ts, state-preservation.test.ts]
+    tests: 41
+    verification:
+      - "≥85% true positive rate across 15 threat scenarios"
+      - "≤10% false positive rate across nominal scenarios"
+      - "50-signal broadcast with zero missed (CF-12)"
+      - "10-cycle pause/resume with zero state loss (CF-14)"
+      - "Scout-first pattern verified across all cycles"
+
+dependencies:
+  runtime:
+    - zod: "^3.x"
+  build:
+    - typescript: "^5.x"
+    - vitest: "^3.x"
