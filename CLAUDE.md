@@ -32,6 +32,19 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - Imperative mood, lowercase, no period, subject <72 chars
 - A PreToolUse hook enforces this automatically
 
+## Wave Commit Markers
+
+When session boundaries force combining waves into a single commit, use this format:
+
+```
+feat(scope): summary of combined work
+
+Wave N: [what wave N delivered]
+Wave M: [what wave M delivered]
+```
+
+This preserves bisect intent in the commit message even when commit boundaries don't align with wave boundaries.
+
 ## Quick Reference
 
 - Check project state: read `.planning/STATE.md` and `.planning/ROADMAP.md`
