@@ -1,0 +1,750 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — Space/Physics with Ocean undertones
+\definecolor{primary}{HTML}{0D47A1}       % Deep ocean blue — section headers
+\definecolor{secondary}{HTML}{00695C}     % Teal — subsection headers
+\definecolor{tertiary}{HTML}{4527A0}      % Deep purple — subsubsection headers
+\definecolor{accent}{HTML}{1565C0}        % Mid-blue highlights
+\definecolor{lightprimary}{HTML}{E3F2FD}  % Light blue — quote boxes
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{EDE7F6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS AND FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Bio-Physics Sensing}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Bio-Physics Sensing --- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Biological Physics\\[0.3em]Sensing Systems}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Sonar, Radar, Magnetoreception, Electroreception,\\Doppler, Time-Series \& Signal Processing}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study with Pacific Northwest Cross-Reference}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Activation Profile}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 12--18 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1: VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Bio-Physics Sensing Systems --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{None (foundational)}
+\metafield{Context:}{Cold-start deep research mission; PNW cross-reference required}
+
+\subsection{Vision}
+
+Nature did not wait for human engineers to invent sonar, radar, GPS, or noise-canceling filters. Over hundreds of millions of years, evolution built sensing systems that are, in many cases, still superior to anything we have manufactured. A dolphin's biosonar can distinguish the swim bladder signature of a Chinook salmon from a sockeye at 500 feet in turbid darkness. A horseshoe bat dynamically compensates for Doppler shift mid-flight, tuning its outgoing call frequency in real time so that returning echoes always fall within a finely tuned ``acoustic fovea.'' A fox triangulates a mouse hidden beneath 30 centimeters of snow by fusing magnetic inclination angle with acoustic ranging --- a biological fusion of two physical phenomena that engineers have only recently combined in sensor arrays.
+
+The central insight of this research mission is this: \textit{the physics does not change.} Refraction, reflection, compression, time-delta ranging, the Doppler effect, magnetic field inclination, electromagnetic induction --- these are the same equations whether the sensor is a hydrophone array on a Navy destroyer or the melon of a Pacific Northwest orca hunting Chinook in the Salish Sea. What biology has added is integration: the fusion of multiple physical channels --- acoustic, electromagnetic, magnetic, pressure, chemical --- into a unified perceptual model that operates in real time without conscious computation.
+
+This mission is a comprehensive deep-dive into both the physics and the biological implementations. It maps every major physical phenomenon invoked by the user's specification --- sonar, radar, telemetry, time-delta functions, Doppler, blue shift, refraction, reflection, compression, pressure, time series analysis, magnetic fields, electrostatic energy, radio transmission, data error correction, coils, inductors, audio amplification, filtering, sampling, recording, phase separation, comb filtering, and GPU-accelerated deep data analysis --- against the biological systems that implement analogous functions. The Pacific Northwest is the primary geographic theater of the cross-reference, an extraordinarily rich region where salmon navigate by magnetic map, Southern Resident orcas echolocate in waters increasingly disrupted by vessel sonar, and migratory birds orient by quantum-mechanical cryptochrome reactions in their retinas.
+
+The deliverable is a structured, cross-linked reference system: a set of deeply researched pages, one per physical phenomenon or biological system, linked to each other and to primary PNW research sources.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Fragmented knowledge landscape.} The physics of sonar, magnetoreception, electroreception, and Doppler compensation exist in separate literature silos. No unified reference maps the mathematical relationships across biological and engineering implementations.
+  
+  \item \textbf{Missing PNW cross-reference.} Pacific Northwest species --- Southern Resident orcas, Pacific salmon, Dall's porpoises, migratory raptors --- are among the world's best-studied bio-sensors, yet their physics is rarely described in engineering language accessible to signal processing practitioners.
+  
+  \item \textbf{No GPU/time-series bridge.} Modern deep data analysis using GPUs (spectrograms, comb filter detection, phase separation) has advanced enormously, but no reference connects these techniques to their biological analogues (e.g., bat auditory fovea as a biological comb filter; orca click-train as a time-series sensor fusion problem).
+  
+  \item \textbf{Missing interrelationships map.} The cross-connections between phenomena --- how Doppler relates to compression, how magnetic inclination interacts with acoustic ranging in fox hunting behavior, how inductors and coils relate to the electromagnetic induction hypothesis of magnetoreception --- are documented nowhere in a single navigable reference.
+  
+  \item \textbf{No deep-link PNW page structure.} There is no existing web or document architecture that deep-links phenomenon pages to PNW species pages, enabling a reader to follow ``magnetic field inclination'' $\to$ ``Pacific pink salmon magnetic map'' $\to$ ``Puget Sound magnetic chart'' without leaving a unified reference system.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Every biological sensing system is a physical signal processing pipeline. Map the pipeline. Cross-reference the engineering. Link to PNW.
+
+The study models each biological sensing system as a chain: \textit{signal source} $\to$ \textit{propagation medium} $\to$ \textit{transducer} $\to$ \textit{signal conditioning} $\to$ \textit{feature extraction} $\to$ \textit{decision / action}. This is identical to engineering signal processing chain design. The research will document each stage for each major sensing modality, identify the physical laws governing each stage, and cross-reference with PNW biological examples and relevant signal processing implementations.
+
+\subsubsection{Physics-Biology Domain Map}
+
+\begin{asciibox}
+PHYSICS DOMAIN                    BIOLOGICAL IMPLEMENTATION
+=============================================================
+Sonar / Acoustic reflection   <-> Dolphin / Orca biosonar (Puget Sound)
+Doppler shift compensation    <-> Horseshoe bat acoustic fovea
+Time-delta ranging            <-> Bat / dolphin echo delay computation
+Magnetic field inclination    <-> Fox magnetic rangefinder (Cerveny 2011)
+Magnetic map / GPS analogue   <-> Pacific salmon (Oncorhynchus spp.) PNW
+Electromagnetic induction     <-> Shark/ray ampullae of Lorenzini
+Electrostatic field sensing   <-> Platypus bill electroreception
+Pressure / lateral line       <-> Fish lateral line, shark pressure sense
+Refraction / acoustic lensing <-> Dolphin melon (acoustic fat gradient)
+Compression waves             <-> Infrasound elephant / whale communication
+Comb filtering (audio)        <-> Bat auditory fovea frequency tuning
+Phase separation              <-> Binaural hearing / HRTF localization
+Audio amplification           <-> Impedance matching: ossicular chain
+Coils / inductors             <-> Cryptochrome radical-pair quantum compass
+Time series / GPU analysis    <-> Spectrogram ML (ORCA-SPOT, OrcaHello)
+Radio transmission            <-> Salmon telemetry PIT tags (PTAGIS)
+Data error correction         <-> Neural redundancy / parallel channels
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+      [M1: Acoustic Physics]      [M2: Electromagnetic / Magnetic]
+             |                              |
+      [M3: Signal Processing]       [M4: PNW Biological Systems]
+             |                              |
+      [M5: GPU / Time-Series]       [M6: Interrelationships Map]
+             |______________________________|
+                          |
+              [SYNTHESIS: Cross-Reference Atlas]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- Acoustic Physics}
+Covers: sonar equations, reflection, refraction, absorption, impedance matching, compression waves, Doppler effect (source and observer motion), blue shift in acoustics, time-delta ranging (pulse-echo), frequency modulation, constant-frequency (CF) vs. frequency-modulated (FM) signals, acoustic beamforming, near-field vs. far-field propagation, acoustic lensing via graded velocity media (melon), comb filtering, phase separation, binaural hearing, HRTF.
+
+\subsubsection{Module 2 --- Electromagnetic, Magnetic, and Electrostatic Physics}
+Covers: Maxwell's equations (overview), Faraday induction, magnetic field inclination and intensity, magnetite-based sensing, cryptochrome radical-pair mechanism (quantum entanglement), electroreception (ampullae of Lorenzini), electrostatic field sensing, coils and inductors in biological analogy, bioelectric field generation (muscle/nerve activity), radio transmission principles, telemetry (PIT tags, biologging).
+
+\subsubsection{Module 3 --- Signal Processing and Engineering Analogues}
+Covers: time series data collection and analysis, audio amplification (biological impedance matching, cochlear amplification), audio filtering (bandpass, comb), audio sampling (Nyquist, biological sampling rates), audio recording technologies, phase separation techniques, spectrogram generation, STFT, Fourier analysis, error correction codes (biological analogy: neural redundancy), sensor fusion.
+
+\subsubsection{Module 4 --- Pacific Northwest Biological Systems}
+Covers: Southern Resident orca biosonar (NOAA Northwest Fisheries Science Center), Pacific pink and Chinook salmon magnetic maps (Putman et al.), migratory bird magnetoreception in PNW corridors, PNW bat species echolocation, sharks and rays of the Pacific (electroreception), PTAGIS telemetry network for salmon, Quiet Sound / hydrophone network, OrcaHello AI detection system, dolphins.org acoustics research cross-reference.
+
+\subsubsection{Module 5 --- GPU-Accelerated Deep Data Analysis}
+Covers: time series analysis at scale, GPU-based spectrogram computation, deep learning for bioacoustic detection (ORCA-SPOT, BirdNET, OrcaHello), comb filter detection algorithms, phase analysis in multi-channel audio, magnetic anomaly detection via tensor methods, feature extraction pipelines, real-time signal classification.
+
+\subsubsection{Module 6 --- Interrelationships Atlas and Cross-Linked Page Structure}
+Covers: mapping all physics phenomena to all biological implementations, building the deep-link page architecture (one page per phenomenon, one page per species/system), cross-referencing PNW geographic locations, primary source index, citation verification.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: bio_physics_sensing
+  profile: fleet
+  primary_model: claude-opus-4-5          # Synthesis, cross-links, judgment
+  secondary_model: claude-sonnet-4-5      # Module documents, surveys
+  utility_model: claude-haiku-3-5         # Schemas, templates, scaffolding
+  context_windows_estimated: 12-18
+  sessions_estimated: 4-6
+  parallelism: 3_tracks_wave_1
+  wave_count: 4
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[noitemsep]
+  \item All 17 physics phenomena listed in user specification
+  \item Biological implementations across mammals, fish, birds, cartilaginous fish
+  \item Pacific Northwest geographic cross-reference (Washington, Oregon, British Columbia)
+  \item Deep-link page architecture for all major topics
+  \item GPU/ML pipeline for bioacoustic time-series analysis
+  \item Primary source citations for all major claims
+  \item Mathematical relationships between phenomena (sonar equation, Doppler formula, magnetic inclination geometry)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[noitemsep]
+  \item Hardware design (circuit schematics for specific devices)
+  \item Classified military sonar specifications
+  \item Species outside the major vertebrate groups covered
+  \item Real-time software implementation (code repositories)
+  \item Medical / therapeutic applications of the physics
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All 17 physics phenomena documented with governing equations and units.
+  \item Each phenomenon cross-referenced to at least one biological implementation.
+  \item At least 6 PNW species documented with physics-level detail (orca, salmon, bat, shark/ray, fox, migratory bird).
+  \item Dolphin echolocation (dolphins.org) and fox magnetic rangefinder (Cerveny 2011 / Discover Magazine) both explicitly documented with mechanism detail.
+  \item Interrelationships map produced as navigable table and ASCII diagram.
+  \item Deep-link page list produced (titles, URLs, linked phenomena, linked species).
+  \item GPU/time-series pipeline documented end-to-end with at least one PNW case study (e.g., ORCA-SPOT spectrogram analysis).
+  \item All sources are peer-reviewed journals, government agencies (NOAA, USGS, NOAA Fisheries), or professional organizations.
+  \item Mathematical derivations present for: sonar equation, Doppler shift, magnetic inclination geometry (fox), Faraday induction (elasmobranch electroreception).
+  \item Cross-reference table maps every phenomenon to corresponding signal processing concept and biological implementation.
+  \item PNW-specific research citations include NOAA Northwest Fisheries Science Center, USGS Geomagnetism Program, Puget Sound Institute, and University of Washington.
+  \item Synthesis document connects all modules into a unified conceptual framework accessible to both biologists and signal processing engineers.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+dolphins.org/acoustics & Primary source for dolphin biosonar module & External link \\
+NOAA NWFSC Orca Studies & Primary source for PNW orca echolocation & External link \\
+Putman et al. 2020 (salmon) & Primary source for magnetic map module & Peer-reviewed \\
+Cerveny et al. 2011 (fox) & Primary source for magnetic rangefinder & Peer-reviewed \\
+PTAGIS Telemetry Network & PNW salmon radio telemetry data & Government \\
+Puget Sound Institute & PNW ecosystem data & University \\
+ORCA-SPOT (Nature Sci. Rep.) & GPU/ML bioacoustic detection model & Peer-reviewed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The same mathematical universe underlies the fox's pounce and the Navy's sonar array. Nature solved the signal processing problem first, and solved it with astonishing elegance --- not despite biological constraints but because of them. The fox has no computer, no oscilloscope, no DSP chip. It has a nervous system shaped by predation pressure over millions of years, and that system integrates two completely different physical channels --- gravitational-magnetic inclination and acoustic pressure waves --- into a single targeting solution, executed in real time, in the dark, in the snow.
+
+Understanding how this integration works is not merely a fascinating corner of biology. It is a map to better engineering. The dolphin's melon is a graded-velocity acoustic lens that exploits refraction in a way no human sonar manufacturer had considered until they looked at a CT scan. The bat's auditory fovea is a comb filter so precisely tuned that it isolates the wing-beat frequency of a single moth from a forest of background clutter. These are not metaphors. They are implementations of the same physics we teach in signal processing courses, executed in soft tissue.
+
+The Pacific Northwest is the right place to anchor this study. The Salish Sea is one of the most acoustically studied marine environments on Earth, where endangered orcas hunt Chinook salmon using biosonar that is now being disrupted by vessel echosounder signals in the same frequency band. The biology and the engineering are not just analogous here --- they are in direct conflict. Understanding the physics, deeply and precisely, is the first step toward resolving that conflict.
+
+\newpage
+%% ============================================================
+%% STAGE 2: RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Bio-Physics Sensing --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from peer-reviewed literature, government agency research, and professional organizations for each of the six research modules. Each subsection corresponds to a module. Use the interrelationships table in Module 6 to navigate cross-cutting connections.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item NOAA Northwest Fisheries Science Center (orca acoustics, salmon telemetry)
+  \item USGS National Geomagnetism Program (magnetic field data)
+  \item Puget Sound Institute / Encyclopedia of Puget Sound (PNW ecosystem)
+  \item University of North Carolina Lohmann Lab (sea turtle / salmon magnetoreception)
+  \item Physics Today / Acoustical Society of America (echolocation physics)
+  \item PMC / NCBI (peer-reviewed bioacoustics, magnetoreception)
+  \item dolphins.org (dolphin acoustics research)
+  \item Center for Whale Research / Orca Behavior Institute (PNW orca)
+\end{itemize}
+
+\subsection{Module 1 Reference --- Acoustic Physics}
+
+\subsubsection{The Sonar Equation and Echo-Delay Ranging}
+The fundamental sonar equation relates source level (SL), transmission loss (TL), target strength (TS), and noise level (NL) to the signal excess at the receiver. For biological sonar, the two-way transmission loss in water dominates at distance. Dolphin biosonar targets objects at ranges up to 150 meters, but is most effective within 10--100 meters. The time-delta function for echo-delay ranging is simple: range $r = c \cdot \Delta t / 2$, where $c \approx 1500$ m/s in seawater and $\Delta t$ is the round-trip travel time. Southern Resident orcas use click trains to detect Chinook salmon at up to 500 feet (NOAA NWFSC), with individual clicks of 0.1--25 ms duration and frequencies of 10,000--100,000 Hz.
+
+\subsubsection{Doppler Effect in Biological Sonar}
+The Doppler effect shifts the frequency of a reflected echo based on relative velocity between source and target: $f_{echo} = f_0 \cdot (c + v_{observer})/(c - v_{source})$. Horseshoe bats (Rhinolophidae) employ Doppler Shift Compensation (DSC): they lower their outgoing call frequency while flying so that echoes return at the bat's reference frequency ($f_{ref}$), maintaining the echo within a narrow auditory fovea. Research published in \textit{Scientific Reports} (2018) shows that Hipposideros armiger maintains echo frequency within a standard deviation of 110 Hz across all flight speeds. A 2025 bioRxiv study reveals an additional function of DSC: it creates a ``silent frequency band'' that suppresses background clutter, enabling prey detection. CF (constant frequency) bats use Doppler to detect wing flutter; FM (frequency modulated) bats use echo delay for precise ranging.
+
+\subsubsection{Acoustic Refraction and the Dolphin Melon}
+The dolphin's melon (forehead fat structure) functions as a biological acoustic lens. CT scans reveal a graded sound velocity profile: low velocity near the midline, increasing outward. Sound refracts toward the low-velocity core, focusing the outgoing beam --- exactly as light is focused by a gradient-index optical lens. The Physics Today analysis (Au and Simmons) confirms that the melon's graded-index refraction is the primary beam-forming mechanism for dolphin biosonar. This is a direct biological implementation of refraction physics.
+
+\subsubsection{Reflection, Compression, and Target Strength}
+Acoustic reflectance at a boundary depends on the impedance contrast: $Z = \rho c$ (density $\times$ sound speed). The swim bladder of fish is a gas-filled cavity with dramatically different acoustic impedance from water, making it a strong reflector. NOAA NWFSC research confirms that Southern Resident orcas identify Chinook salmon specifically by the acoustic signature of the swim bladder --- the air pocket creates a distinctive echo that distinguishes Chinook from other salmon species. Compression waves (longitudinal waves) are the dominant mode in water; shear waves do not propagate efficiently in fluids.
+
+\subsubsection{Phase Separation and Binaural Localization}
+Phase differences between signals arriving at the two ears (interaural time difference, ITD) encode azimuthal direction. Interaural level differences (ILD) encode elevation via the Head-Related Transfer Function (HRTF). Orcas receive echoes primarily via the lower mandible, which functions as the outer ear; sound travels through fat pads (analogous to ear canals) to the tympanic plates. The bilateral symmetry of the jaw fat pads provides binaural phase information for 3D localization.
+
+\subsubsection{Comb Filtering in the Bat Auditory Fovea}
+The auditory fovea is a narrow frequency band in the bat cochlea with dramatically increased hair cell density and mechanical stiffness. It functions as a biological comb filter, selectively amplifying frequencies at and near $f_{ref}$. Recent data (biorxiv 2025) show that DSC creates a ``silent band'' between background echoes and prey-derived signals, with the auditory fovea acting as the selective pass-band. This is the biological equivalent of a high-Q resonant filter.
+
+\subsection{Module 2 Reference --- Electromagnetic, Magnetic, and Electrostatic Physics}
+
+\subsubsection{Fox Magnetic Rangefinder --- Mechanism Detail}
+Jaroslav Cerveny's research (2011, published in Biology Letters and covered in Discover Magazine) documents that red foxes exhibit a strong directional preference when hunting: approximately 74\% of successful mouse pounces are directed northeast (magnetic), compared to random distribution. The proposed mechanism is a fixed-range targeting system. Earth's magnetic field in the northern hemisphere tilts downward at 60--70 degrees below horizontal. As the fox creeps forward, it aligns the angle of incoming sound from the prey with the slope of the magnetic field. At the geometric match point, the fox is at a fixed, known distance from the prey --- the physics of triangulation via two intersecting angles. The fox uses cryptochrome proteins in its eyes (sensitive to the Earth's magnetic field) to perceive the field as a visual pattern, and fuses this with auditory localization. This is a direct biological implementation of multi-sensor fusion.
+
+\subsubsection{Magnetite-Based Sensing}
+Magnetite (Fe$_3$O$_4$) crystals, biologically synthesized, align with magnetic field lines and can generate mechanical stress in sensory cells when the field changes. Magnetite has been identified in the snouts of rainbow trout (Walker et al. 1977), upper beaks of homing pigeons (Fleissner et al. 2003), and tissues of sea turtles, whales, and salmon. Pacific pink salmon (Oncorhynchus gorbuscha) of the Pacific Northwest follow an elliptical migratory route --- northward to Alaska, then southward to northern California --- using magnetic positional cues (Putman et al. 2020, published in Journal of Comparative Physiology A). Juvenile pink salmon respond to magnetic field parameters before entering the ocean.
+
+\subsubsection{Cryptochrome Radical-Pair Quantum Compass}
+Cryptochrome proteins (flavoproteins) in the retinas of birds absorb blue light, exciting an electron and forming a radical pair whose spin state (singlet vs. triplet) is modulated by the Earth's magnetic field. The yield of the chemical reaction depends on field orientation, producing a signal detectable by the nervous system. This is a quantum mechanical effect at the molecular scale --- quantum entanglement enabling compass orientation. The cryptochrome mechanism is also implicated in fox magnetoreception (Cerveny 2011) and is present in amphibians and some mammals.
+
+\subsubsection{Electroreception --- Shark Ampullae of Lorenzini}
+The ampullae of Lorenzini are gel-filled canals opening to skin pores on the shark's snout. The conductive gel has high proton conductivity and sensitivity to potential differences as small as 5 nV/cm --- the most sensitive electroreception of any known animal. Faraday's law of induction governs the signal: as the shark (a conductor) moves through the Earth's magnetic field, a small EMF is induced, which the ampullae can detect. This mechanism enables both prey detection (bioelectric fields of 5--500 microvolts from buried fish) and magnetic navigation (``magnetic highways'' documented in hammerhead sharks, Klimley). The ampullae are tuned to 0.5--8 Hz, matching the frequency of bioelectric signals from prey respiration. Pacific Northwest elasmobranchs (spiny dogfish, Pacific angel shark, big skate) all possess ampullae of Lorenzini.
+
+\subsubsection{Salmon Radio Telemetry --- PNW PTAGIS}
+The Pacific Northwest Salmon Telemetry system (PTAGIS) tracks millions of salmon using Passive Integrated Transponder (PIT) tags --- radio frequency identification (RFID) devices implanted in juvenile salmon. Interrogation antennas at dams and key river junctions detect the unique radio signal from each tag. This is direct implementation of radio transmission, coil induction (the antenna is a resonant coil that powers and reads the PIT tag inductively), and time-series data collection for telemetry. The system generates massive time-series datasets of migration timing, survival, and routing through the Columbia-Snake River system.
+
+\subsection{Module 3 Reference --- Signal Processing Analogues}
+
+\subsubsection{Audio Amplification --- Biological Impedance Matching}
+The middle ear ossicular chain (malleus, incus, stapes) provides impedance matching between the low-impedance air and the high-impedance fluid of the cochlea. Without it, approximately 99.9\% of sound energy would be reflected at the air-fluid boundary. The area ratio of eardrum to oval window, combined with the lever action of the ossicles, amplifies pressure by a factor of approximately 22 dB. In dolphins, acoustic fats in the lower mandible serve the analogous impedance-matching function for water-to-tissue transmission.
+
+\subsubsection{Audio Filtering and the Cochlea as Frequency Analyzer}
+The basilar membrane of the cochlea performs a biological Fourier transform: different frequencies excite different positions along the membrane (tonotopy). Hair cells at the base respond to high frequencies; those at the apex to low. In dolphins, bony laminae increase basilar membrane stiffness in the high-frequency region (40--140 kHz), concentrating the frequency analysis bandwidth around the echolocation range. The auditory nerve and brainstem of dolphins are hypertrophied for rapid signal transmission (FASEB Journal, Mulsow 2020).
+
+\subsubsection{Data Error Correction and Neural Redundancy}
+Biological nervous systems implement error correction through parallel channels, redundant pathways, and population coding. Multiple hair cells encode each frequency; multiple neurons encode each direction. The brain integrates these parallel streams using winner-take-all, Bayesian, and population vector computations. The dolphin's signal processing capability is considered near-optimal despite ``mediocre'' transducer and transmission subsystems --- a direct analogy to channel coding that extracts clean signal from noisy channels.
+
+\subsection{Module 4 Reference --- PNW Biological Systems}
+
+\subsubsection{Southern Resident Killer Whales --- Salish Sea Biosonar}
+Southern Resident killer whales (SRKW) are endangered (NOAA listing 2005), with fewer than 75 individuals remaining. They hunt Chinook salmon in the Salish Sea using echolocation click trains at 10,000--100,000 Hz, detecting fish at up to 500 feet. NOAA NWFSC researcher Marla Holt's biologging tag studies show: (1) slow clicking during prey search, (2) rapid buzz clicking during prey pursuit, (3) rolling/twisting acrobatics correlated with click-train parameters during final capture. Vessel echosounders operating in the same frequency band cause significant disruption: whales dive longer and have lower capture success when echosounder noise is present (Marine Environmental Research, Holt et al.). The Quiet Sound initiative and mandatory 1,000-yard vessel buffer are conservation responses.
+
+\subsubsection{Pacific Salmon --- Magnetic Map Navigation}
+Pacific pink salmon (Oncorhynchus gorbuscha) of the Pacific Northwest use magnetic positional cues throughout their elliptical oceanic migration. Putman et al. (2020) show that juveniles respond to magnetic fields before entering the ocean. The magnetic map integrates two parameters: field intensity and field inclination angle, providing a two-coordinate position system analogous to GPS latitude/longitude. Chinook salmon navigation uses the Earth's magnetic field as a compass (USGS), then switches to olfactory homing to find the specific home stream. This is a multi-modal sensor fusion: magnetic map $\to$ magnetic compass $\to$ chemical gradient.
+
+\subsubsection{PNW Bat Species --- Doppler Echolocation}
+The Pacific Northwest hosts numerous bat species including the Big Brown Bat (Eptesicus fuscus) and Little Brown Bat (Myotis lucifugus). These FM bats use frequency-modulated echolocation for prey detection in cluttered forest environments. FM sweeps cover 20--80 kHz, enabling precise range discrimination through echo delay while sacrificing Doppler velocity information. In contrast to CF bats (not native to PNW), FM bats tolerate Doppler-shifted echoes because their cochlea is broadly tuned.
+
+\subsubsection{OrcaHello and ORCA-SPOT --- GPU Bioacoustic Detection}
+ORCA-SPOT (Nature Scientific Reports, 2019) is a deep neural network trained on 11,509 orca vocalizations and 34,848 noise segments, deployed on the Orchive --- approximately 19,000 hours of killer whale recordings from the Northeast Pacific. OrcaHello extends this to real-time detection on live hydrophone streams from the Salish Sea. The Orca Behavior Institute operates live-streaming hydrophones throughout Puget Sound and the Salish Sea (Haro Strait). These systems implement: spectrogram generation $\to$ CNN feature extraction $\to$ classification $\to$ real-time alert --- a complete GPU time-series pipeline on biological acoustic data.
+
+\subsection{Module 5 Reference --- GPU / Time-Series Analysis}
+
+\subsubsection{Spectrogram and STFT for Bioacoustics}
+A spectrogram is the squared magnitude of the Short-Time Fourier Transform (STFT): $S(t,f) = \left| \int x(\tau) w(\tau-t) e^{-j2\pi f\tau} d\tau \right|^2$. For bioacoustic data, window length trades time resolution against frequency resolution (uncertainty principle). Orca click trains (0.1--25 ms clicks) require short windows; orca discrete calls (0.5--1.5 s) require longer windows. GPU computation enables real-time STFT on multi-channel hydrophone data.
+
+\subsubsection{Comb Filter Detection}
+A comb filter has a frequency response with regularly spaced peaks (harmonics). Bat echolocation calls with CF+FM structure, orca whistles with harmonic stacks, and dolphin click trains all produce comb-like spectrograms. GPU-accelerated matched filter banks can detect these patterns in real time.
+
+\subsubsection{Time-Series Sensor Fusion}
+Multi-tag studies (Holt, Tennessen --- NOAA NWFSC) combine: accelerometer time series (movement), magnetometer time series (heading --- same technology as smartphone), hydrophone stereo time series (echolocation + ambient sound), depth sensor time series. Fusion requires time-alignment (telemetry time-delta synchronization), Kalman filtering for state estimation, and regression analysis to identify behavioral correlates.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2cm}}
+\toprule
+\rowcolor{warnred}
+\tableheader{Risk Area} & \tableheader{Description} & \tableheader{Rule} \\
+\midrule
+SRKW exact locations & Specific real-time location data may harm whales & ANNOTATE \\
+Endangered species & Salmon ESA listings require careful framing & ANNOTATE \\
+Military sonar specs & Classified specifications must be avoided & ABSOLUTE \\
+Indigenous knowledge & Lummi Nation traditional knowledge of orcas & GATE \\
+Quantitative claims & All numbers attributed to specific sources & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Government and Agency Sources:}
+\begin{itemize}[noitemsep]
+  \item NOAA Northwest Fisheries Science Center --- orca echolocation and noise studies. \url{https://www.fisheries.noaa.gov/}
+  \item USGS Geomagnetism Program --- animal magnetic navigation. \url{https://www.usgs.gov/}
+  \item Puget Sound Institute / Encyclopedia of Puget Sound. \url{https://www.eopugetsound.org/}
+  \item PTAGIS Pacific Northwest salmon telemetry. \url{https://www.ptagis.org/}
+  \item NOAA Vital Signs --- Orcas. \url{https://vitalsigns.pugetsoundinfo.wa.gov/}
+\end{itemize}
+
+\textbf{Peer-Reviewed Research:}
+\begin{itemize}[noitemsep]
+  \item Putman, N.F. et al. (2020). Magnetic maps in animal navigation. Journal of Comparative Physiology A. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC8918461/}
+  \item Au, W.W.L. and Simmons, J.A. (2007). Echolocation in dolphins and bats. Physics Today.
+  \item Mulsow, J. et al. (2020). Anatomy and neural physiology of dolphin biosonar. FASEB Journal.
+  \item Cerveny, J. et al. (2011). Directional preference may enhance hunting accuracy in foraging foxes. Biology Letters.
+  \item Lohmann Lab, UNC Chapel Hill --- magnetoreception. \url{https://lohmannlab.web.unc.edu/magnetoreception/}
+  \item Knauer, A. et al. (2025). Bats create a silent frequency band via DSC. bioRxiv. \url{https://www.biorxiv.org/content/10.1101/2025.10.05.680495}
+  \item Kagawa, T. et al. (2024). Doppler detection triggers escape in scanning bats. PMC. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10960053/}
+  \item Bergler, C. et al. (2019). ORCA-SPOT deep learning for killer whale detection. Scientific Reports.
+\end{itemize}
+
+\textbf{Professional Organizations and Specialized Sources:}
+\begin{itemize}[noitemsep]
+  \item dolphins.org --- Dolphin acoustics research. \url{https://dolphins.org/acoustics}
+  \item Orca Behavior Institute --- Salish Sea acoustics. \url{https://www.orcabehaviorinstitute.org/orca-acoustics}
+  \item Center for Whale Research. \url{https://www.whaleresearch.com/}
+  \item Acoustics Today (ASA) --- Dolphin biosonar history.
+  \item Wikipedia --- Magnetoreception, Ampullae of Lorenzini, Doppler Shift Compensation (for overview navigation only; primary sources cited above).
+\end{itemize}
+
+\newpage
+%% ============================================================
+%% STAGE 3: MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package --- Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, cross-linked research atlas covering 17 physics phenomena and their biological implementations, with deep-link pages for each phenomenon and each major PNW species, all sourced from peer-reviewed literature and government agency research. The atlas must be navigable by both signal processing engineers and biologists, include mathematical derivations of key relationships, and include a GPU/ML time-series pipeline with a PNW case study.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Schema Agent - Haiku] -> Shared data schemas, source index, page templates
+
+WAVE 1: Parallel Research (3 tracks)
+  Track A: [CRAFT-PHYS - Sonnet] -> M1 Acoustic + M3 Signal Processing
+  Track B: [CRAFT-ELEC - Sonnet] -> M2 Electromagnetic + Electrostatic
+  Track C: [CRAFT-PNW  - Opus]  -> M4 PNW Biological + M5 GPU/Time-Series
+
+WAVE 2: Synthesis
+  [INTEG - Opus] -> M6 Interrelationships Atlas + Cross-link verification
+  [VERIFY - Sonnet] -> Source validation, equation checks
+
+WAVE 3: Publication
+  [EXEC - Sonnet] -> Assemble final atlas document
+  [LOG - Sonnet]  -> Audit trail, commit messages
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Owner} \\
+\midrule
+1 & Physics Phenomenon Pages & 17 pages, equations, bio cross-refs, PNW links & CRAFT-PHYS + CRAFT-ELEC \\
+2 & PNW Species Pages & 6+ species, physics-level mechanism detail & CRAFT-PNW \\
+3 & Interrelationships Atlas & Full mapping table + ASCII diagram & INTEG \\
+4 & GPU/ML Pipeline Doc & End-to-end ORCA-SPOT case study & CRAFT-PNW \\
+5 & Deep-Link Page Index & All pages listed with URL slugs and cross-links & EXEC \\
+6 & Mathematical Derivations & 4+ equations derived (sonar, Doppler, inclination, Faraday) & CRAFT-PHYS \\
+7 & Source Verification Report & All citations checked against originals & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 5K \\
+W0-SOURCE-INDEX & Web search & Haiku & 8K \\
+W1A-ACOUSTIC & W0 schemas & Sonnet & 40K \\
+W1A-SIGPROC & W0 schemas & Sonnet & 35K \\
+W1B-MAGNETIC & W0 schemas & Sonnet & 40K \\
+W1B-ELECTRO & W0 schemas & Sonnet & 35K \\
+W1C-PNW-BIO & W0 schemas + W1A/B drafts & Opus & 55K \\
+W1C-GPU-ML & W0 schemas & Sonnet & 40K \\
+W2-INTEG & W1A + W1B + W1C & Opus & 60K \\
+W2-VERIFY & All W1 + W2 & Sonnet & 30K \\
+W3-EXEC & All prior & Sonnet & 40K \\
+W3-LOG & All prior & Sonnet & 10K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated:}} & \textbf{\textasciitilde 398K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & CRAFT-PNW, INTEG & Cross-module synthesis, PNW cultural sensitivity (Lummi Nation), judgment on ambiguous cross-links \\
+Sonnet & CRAFT-PHYS, CRAFT-ELEC, W1C-GPU, VERIFY, EXEC & Structured document production, equation formatting, citation verification \\
+Haiku & W0-SCHEMA, W0-SOURCE-INDEX & Template generation, schema scaffolding, no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2cm}C{1.5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, templates \\
+1 & Parallel Research & Parallel (3 tracks) & Sonnet + Opus & 6 module drafts \\
+2 & Synthesis & Sequential & Opus + Sonnet & Atlas + verification \\
+3 & Publication & Sequential & Sonnet & Final document + audit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Track Detail}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Agent} & \tableheader{Module} & \tableheader{Key Outputs} \\
+\midrule
+A & CRAFT-PHYS & M1 + M3 & Acoustic equations, Doppler derivations, signal processing analogues, comb filter / phase docs \\
+B & CRAFT-ELEC & M2 & Magnetic field physics, Faraday induction, electroreception, cryptochrome, telemetry/coils \\
+C & CRAFT-PNW & M4 + M5 & All 6 PNW species pages, GPU/ML pipeline, ORCA-SPOT case study \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item W0 schemas and source index are cached and passed to all W1 agents as context prefix.
+  \item Each W1 agent is self-contained and reads only its relevant W0 outputs.
+  \item W2-INTEG reads all W1 outputs but produces its own synthesis document; it does not modify W1 outputs.
+  \item W3-EXEC assembles from all prior outputs with minimal new generation.
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ──────────────────────────────┐
+W0-SOURCE-INDEX ─────────────────────────┤
+                                         v
+              ┌──────────────── W1A-ACOUSTIC
+              ├──────────────── W1A-SIGPROC
+              ├──────────────── W1B-MAGNETIC
+              ├──────────────── W1B-ELECTRO
+              ├──────────────── W1C-PNW-BIO
+              └──────────────── W1C-GPU-ML
+                    |                    |
+                    v                    v
+              W2-INTEG ──────────── W2-VERIFY
+                    |
+                    v
+              W3-EXEC ──── W3-LOG ──── [FINAL ATLAS]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Failure} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK release \\
+Core Content & 12 & P1 & Mandatory fix \\
+Integration & 6 & P2 & Fix before publication \\
+Edge Cases & 4 & P3 & Document and proceed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{warnred}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & No classified military sonar specs & Zero references to classified documents or restricted specifications \\
+SC-02 & No real-time SRKW locations disclosed & No specific GPS coordinates or real-time location data for Southern Residents \\
+SC-03 & All quantitative claims attributed & Every number traceable to named peer-reviewed source or government agency \\
+SC-04 & Indigenous knowledge handled correctly & Lummi Nation relationship to orcas presented respectfully with nation-specific naming \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+17 physics phenomena documented & CORE-01 through CORE-17 & Pre-execution \\
+6 PNW species documented & PNW-01 through PNW-06 & Pre-execution \\
+Dolphin / fox mechanisms explicit & CORE-18, CORE-19 & Pre-execution \\
+Interrelationships map complete & INTEG-01 & Pre-execution \\
+GPU pipeline with case study & CORE-20 & Pre-execution \\
+All sources professional/peer-reviewed & SC-03, VERIFY-01 & Pre-execution \\
+4+ mathematical derivations & CORE-21 through CORE-24 & Pre-execution \\
+Deep-link page index complete & INTEG-02 & Pre-execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track dependency management \\
+SCOUT & Research Agent & Web search for gap-fill; primary source retrieval \\
+CRAFT-PHYS & Physics Specialist & M1 Acoustic + M3 Signal Processing document production \\
+CRAFT-ELEC & EM Specialist & M2 Electromagnetic / Magnetic / Electrostatic document production \\
+CRAFT-PNW & PNW Specialist & M4 Pacific Northwest species + M5 GPU/ML pipeline \\
+EXEC & Executor & Final atlas assembly; formatting and cross-link insertion \\
+VERIFY & Verification Agent & Source validation; equation checking; citation accuracy \\
+INTEG & Integration Agent & M6 Interrelationships Atlas; cross-module link validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; context window allocation \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions for page architecture \\
+SECURE & Security & Safety boundary enforcement (SC-01 through SC-04) \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; novel cross-links \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+RETRO & Retrospective & Post-wave analysis; lessons learned \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6+ modules, high cross-module complexity) \\
+Estimated Context Windows & 12--18 \\
+Estimated Sessions & 4--6 \\
+Wave Count & 4 \\
+Parallel Tracks (Wave 1) & 3 \\
+Total Agents & 18 \\
+Primary Model & Claude Opus (Synthesis, PNW, Integration) \\
+Secondary Model & Claude Sonnet (Modules, Verification, Execution) \\
+Utility Model & Claude Haiku (Schemas, Templates) \\
+Estimated Tokens & \textasciitilde 398K across all components \\
+Safety Gate Tests & 4 (SC-01 through SC-04) \\
+Total Success Criteria & 12 \\
+PNW Species Documented & 6 minimum (orca, salmon, bat, shark/ray, fox, migratory bird) \\
+Physics Phenomena & 17 (all user-specified) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The fox knows that the angle matches. The math does not care whether the sensor is bone and fat or silicon and solder. It is the same equation. What we are building here is the Rosetta Stone between the two languages --- and the Pacific Northwest is where that translation matters most, right now, for the orcas that hunt by sound in a sea that has forgotten how to be quiet.''}
+
+\vspace{0.5em}
+\noindent Through-line: Physics is universal. Biology discovered it first. Understanding the interrelationships between sonar, magnetism, electrostatics, Doppler, pressure, time-series, and signal processing --- as implemented by the animals of the Pacific Northwest --- is both a scientific project and a conservation imperative.
+\end{quotebox}
+
+\end{document}

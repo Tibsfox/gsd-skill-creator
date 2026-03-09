@@ -1,0 +1,902 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: History Domain ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy/Deep Purple
+\definecolor{secondary}{HTML}{F57F17}     % Gold
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment Brown
+\definecolor{accent}{HTML}{6A1B9A}        % Highlight Purple
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light Purple
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Light Gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Light Brown
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Euclid and the Architecture of Reason}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Euclid and the Architecture of Reason -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Euclid and the\\[0.3em]Architecture of Reason}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Philosophy, Mathematics, and the Art of Debate}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Euclid and the Architecture of Reason --- Vision Guide}
+
+\metafield{Date:}{March 7, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-mathematical-foundations-conversation.md, the-space-between.pdf}
+\metafield{Context:}{A deep research study tracing Euclid's \textit{Elements} from its origins in Hellenistic Alexandria through its transformation of philosophy, political rhetoric, and the very nature of mathematical truth --- culminating in the non-Euclidean revolution that reshaped our understanding of space, logic, and certainty.}
+
+\subsection{Vision}
+
+Around 300 BCE, a mathematician working in Alexandria assembled thirteen books of definitions, postulates, constructions, and proofs. The work was not entirely original --- it drew on Hippocrates of Chios, Eudoxus, Theaetetus, and the broader Pythagorean tradition. But what Euclid achieved was something more powerful than any single theorem: he demonstrated that an entire universe of mathematical truth could be erected from a handful of self-evident starting points, connected by nothing but the force of logical deduction.
+
+This achievement --- the axiomatic method --- became the gold standard not merely for mathematics but for \textit{all} rigorous thought. For over two thousand years, Euclid's \textit{Elements} was the second most printed book in the Western world, surpassed only by the Bible. Its influence radiated far beyond geometry: Spinoza modeled his \textit{Ethics} on Euclidean proof structure. Newton called his laws of motion ``axioms'' and deduced gravitational theory as a sequence of theorems. Thomas Jefferson structured the Declaration of Independence as a Euclidean argument from self-evident truths. Abraham Lincoln taught himself the meaning of ``demonstrate'' by mastering the first six books of the \textit{Elements} by candlelight.
+
+And then, in the nineteenth century, the most productive crisis in the history of mathematics erupted from the single most controversial sentence in Euclid's work: the fifth postulate, the parallel postulate. Two millennia of failed attempts to prove it from the other four finally gave way to the stunning realization that consistent, self-contained geometries could exist in which it did \textit{not} hold. Gauss, Lobachevsky, Bolyai, and Riemann did not destroy Euclid --- they revealed that his system was one of many possible architectures of space, and that the choice of axioms is itself a creative act.
+
+This research mission traces the full arc: from the historical Euclid to the axiomatic method's philosophical reach, from its influence on political argumentation to the non-Euclidean revolution that transformed physics, logic, and our understanding of certainty itself.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Historical opacity:} Very little is known about Euclid as a historical figure; the \textit{Elements} itself is a palimpsest of earlier work, later editorial revision, and transmission through Arabic, Latin, and vernacular translations. Separating Euclid's original contribution from its accretions requires careful scholarship.
+
+  \item \textbf{The axiomatic method's philosophical reach is underappreciated:} Most people encounter Euclid as ``high school geometry'' without recognizing that the axiomatic-deductive method he formalized became the template for Western conceptions of proof, truth, and certainty across philosophy, science, law, and politics.
+
+  \item \textbf{The rhetoric--mathematics connection is obscured:} The direct line from Euclidean logic to Jefferson's Declaration, Lincoln's anti-slavery arguments, and Spinoza's metaphysics is rarely taught as a unified narrative, leaving students unaware of how mathematical structure shapes political and philosophical discourse.
+
+  \item \textbf{The parallel postulate controversy is treated as a footnote:} The two-thousand-year struggle over the fifth postulate --- and its resolution through non-Euclidean geometry --- is one of the most consequential intellectual dramas in history, yet it is typically reduced to a paragraph in textbooks rather than explored as the paradigm-shifting event it was.
+
+  \item \textbf{Modern disconnect:} Contemporary mathematics education often severs the connection between Euclidean foundations and their philosophical implications, treating geometry as a set of procedures rather than as a living example of how axioms shape entire worlds of thought.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{The axiomatic method --- beginning from self-evident truths and building through logical deduction --- is not merely a mathematical technique but the foundational architecture of Western rational thought, and its evolution from Euclid through non-Euclidean geometry traces the deepest transformation in our understanding of truth itself.}
+
+The core insight is that Euclid's contribution was not primarily geometric content but \textit{epistemic architecture}: a method for organizing knowledge that proved so powerful it was adopted by philosophy, theology, science, law, and political rhetoric. The parallel postulate controversy then revealed that this architecture is not unique --- that axioms are choices, not discoveries, and that different choices yield different but equally valid systems.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    EUCLID AND THE ARCHITECTURE OF REASON
+                    ======================================
+
+    +-----------+     +----------------+     +----------------+
+    | HISTORICAL|     |   AXIOMATIC    |     | PHILOSOPHICAL  |
+    | FOUNDATIONS|---->|    METHOD      |---->|   INFLUENCE    |
+    | (300 BCE) |     | (Logic Engine) |     | (Spinoza/Kant) |
+    +-----------+     +----------------+     +----------------+
+          |                   |                      |
+          v                   v                      v
+    +-----------+     +----------------+     +----------------+
+    |  ELEMENTS |     |   POLITICAL    |     |  NON-EUCLIDEAN |
+    | 13 Books  |     |   RHETORIC     |     |  REVOLUTION    |
+    | Geometry  |     | (Jefferson/    |     | (Gauss/Bolyai/ |
+    | + Number  |     |  Lincoln)      |     |  Lobachevsky/  |
+    | Theory    |     |                |     |  Riemann)      |
+    +-----------+     +----------------+     +----------------+
+                              |
+                              v
+                    +-------------------+
+                    | THE SPACE BETWEEN |
+                    | Axioms as choices |
+                    | Structure as lever|
+                    +-------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+    MODULE 1: Historical Foundations
+      |-- Euclid's life and context (Alexandria, Ptolemy I)
+      |-- Sources and predecessors (Hippocrates, Eudoxus, Theaetetus)
+      |-- Structure of the Elements (13 books)
+      |-- Transmission (Greek -> Arabic -> Latin -> Vernacular)
+
+    MODULE 2: The Axiomatic Method
+      |-- Definitions, postulates, common notions
+      |-- The deductive chain
+      |-- Aristotle's influence and the proto-logical tradition
+      |-- From Euclid to Hilbert: rigorization
+
+    MODULE 3: Philosophical Influence
+      |-- Spinoza's Ethics Demonstrated in Geometrical Order
+      |-- Newton's Principia as axiomatic physics
+      |-- Kant's synthetic a priori and Euclidean space
+      |-- Descartes and the geometrical spirit
+
+    MODULE 4: Political Rhetoric and Debate
+      |-- Jefferson and "self-evident truths"
+      |-- Lincoln's Euclidean logic in the slavery debate
+      |-- The Enlightenment's debt to geometric reasoning
+      |-- Proof vs. authority in democratic discourse
+
+    MODULE 5: The Parallel Postulate and Non-Euclidean Revolution
+      |-- 2000 years of failed proofs
+      |-- Gauss, Lobachevsky, Bolyai: hyperbolic geometry
+      |-- Riemann: elliptic geometry and curvature
+      |-- Einstein and the physical meaning of non-Euclidean space
+      |-- Axioms as choices, not truths
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Historical Foundations}
+The historical context of Euclid and the \textit{Elements} --- who Euclid was (or may have been), the mathematical tradition he synthesized, the structure of the thirteen books, and the remarkable transmission history through Arabic, Latin, and vernacular editions spanning twenty-three centuries.
+
+\subsubsection{Module 2: The Axiomatic Method}
+The logical architecture Euclid pioneered: beginning from definitions, postulates, and common notions, then building an edifice of theorems through pure deduction. The relationship to Aristotle's logic, the distinction between construction (``problems'') and demonstration (``theorems''), and the eventual rigorization by Hilbert in the nineteenth century.
+
+\subsubsection{Module 3: Philosophical Influence}
+How the Euclidean method was adopted as the template for rigorous philosophical argument. Spinoza's \textit{Ethics}, modeled explicitly on Euclid's \textit{Elements}, represents the most ambitious attempt to derive metaphysics and moral philosophy from axioms. Newton's \textit{Principia} similarly adopted axiomatic structure for physics. Kant's argument that Euclidean space is a ``synthetic a priori'' truth embedded in the structure of human cognition.
+
+\subsubsection{Module 4: Political Rhetoric and Debate}
+The direct application of Euclidean reasoning to political discourse. Jefferson's Declaration of Independence as a Euclidean argument from self-evident axioms. Lincoln's mastery of the \textit{Elements} and his explicit use of Euclidean logic in the Lincoln-Douglas debates and the Cooper Union address. The broader Enlightenment project of grounding political legitimacy in reason rather than authority.
+
+\subsubsection{Module 5: The Parallel Postulate and Non-Euclidean Revolution}
+The two-thousand-year controversy over the fifth postulate, the independent discovery of hyperbolic geometry by Gauss, Lobachevsky, and Bolyai, Riemann's generalization to curved spaces, Beltrami's consistency proof, and the ultimate vindication by Einstein's general relativity --- which showed that physical space is non-Euclidean. The philosophical implications: axioms are choices that define mathematical universes, not self-evident truths about a single reality.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: euclid-architecture-of-reason
+  version: "1.0"
+  activation: squadron
+  modules:
+    - historical-foundations
+    - axiomatic-method
+    - philosophical-influence
+    - political-rhetoric
+    - parallel-postulate-revolution
+  model_assignment:
+    opus: [philosophical-influence, parallel-postulate-revolution, synthesis]
+    sonnet: [historical-foundations, axiomatic-method, political-rhetoric,
+             verification, publication]
+    haiku: [schemas, templates, scaffolding]
+  wave_count: 4
+  parallel_tracks: 2
+  estimated_tokens: 180000
+  cache_strategy: "5-min TTL, shared source index"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Euclid's historical context, sources, and the structure of the \textit{Elements}
+  \item The axiomatic-deductive method and its evolution from Euclid through Hilbert
+  \item Spinoza, Newton, Descartes, and Kant as exemplars of Euclidean philosophical influence
+  \item Jefferson's Declaration and Lincoln's speeches as political applications
+  \item The parallel postulate controversy and the discovery of non-Euclidean geometries
+  \item Connections to GSD ecosystem mathematical foundations (unit circle, set theory, category theory)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Complete technical treatment of non-Euclidean geometry proofs
+  \item Detailed biography of post-Euclidean mathematicians beyond their relation to the parallel postulate
+  \item Modern formal logic and metamathematics (G\"odel, Tarski) beyond brief mention
+  \item Non-Western mathematical traditions (important but requiring separate dedicated study)
+  \item Pedagogical curriculum design (covered by existing GSD educational packs)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Historical narrative covers Euclid's context, the \textit{Elements}' structure, and at least three stages of its transmission (Greek, Arabic, Latin, vernacular).
+  \item Axiomatic method section distinguishes definitions, postulates, and common notions with at least two concrete examples from the \textit{Elements}.
+  \item Philosophical influence module covers Spinoza, Newton, and Kant with specific textual connections to Euclidean method.
+  \item Political rhetoric module documents at least three specific instances of Euclidean reasoning in Jefferson's or Lincoln's writings/speeches with source attribution.
+  \item Parallel postulate section traces the controversy from Proclus through Saccheri, Gauss, Lobachevsky, Bolyai, and Riemann.
+  \item Non-Euclidean section explains the three geometries (Euclidean, hyperbolic, elliptic) with their distinct parallel postulate formulations.
+  \item All numerical claims and historical dates are attributed to peer-reviewed or professional sources.
+  \item Cross-module connections identified: at least four explicit links between modules.
+  \item Through-line connects to GSD ecosystem philosophy (Amiga Principle, mathematical foundations, the spaces between).
+  \item Document is self-contained: a reader with no prior knowledge can follow the full arc from Euclid to Einstein.
+  \item Source bibliography contains at least 15 professional or peer-reviewed sources.
+  \item No policy advocacy; evidence and analysis presented without political bias.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-mathematical-foundations & Euclid's axiomatic method is the historical ancestor of the eight-layer mathematical progression; set theory and category theory are direct descendants \\
+the-space-between.pdf & The ``spaces between'' framework echoes the Euclidean insight that relationships (proofs connecting axioms to theorems) are more fundamental than isolated facts \\
+gsd-learn-kung-fu-pack & Teaching methodology parallels Euclid's progressive disclosure: simple definitions building to complex theorems \\
+gsd-chipset-architecture & Chipset configuration as axiom system: a small set of architectural choices generating complex behavior \\
+unit-circle-skill-creator-synthesis & The unit circle as a modern Euclidean ``common notion'' --- the perceptual event where separate subjects resolve into one \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+Euclid's deepest contribution was not geometry --- it was the demonstration that a small set of carefully chosen starting points, connected by transparent logical steps, could generate an entire world of knowledge. This is the Amiga Principle expressed in pure thought: architectural elegance as leverage, structure as power, simplicity as the engine of complexity.
+
+The GSD ecosystem inherits this architecture directly. A vision document is an axiom --- a seed of intent. The wave execution plan is a deductive chain. Each component spec is a self-contained theorem, derivable from the vision and independently verifiable. The skill-creator's promotion pipeline (conversation $\rightarrow$ SKILL.md $\rightarrow$ LoRA $\rightarrow$ compiled code) is an L-system grown from Euclidean roots: simple rules, iterated, producing complexity beyond their origin.
+
+And the non-Euclidean revolution carries its own lesson for the ecosystem: axioms are choices. The architectural decisions that define a system are not discovered truths but creative acts. Different choices yield different but internally consistent worlds. The power lies not in finding the ``right'' axioms but in choosing them deliberately and following them honestly.
+
+The space between the axiom and the theorem --- that is where the work lives. That is where understanding happens.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Euclid and the Architecture of Reason --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from peer-reviewed scholarship, university research programs, and professional mathematical and philosophical organizations. It is organized by research module and designed to be consumed by GSD agents producing the final deliverable.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item MacTutor History of Mathematics Archive (University of St Andrews)
+  \item Stanford Encyclopedia of Philosophy
+  \item Internet Encyclopedia of Philosophy
+  \item Encyclop\ae dia Britannica (mathematics and philosophy editors)
+  \item Mathematical Association of America
+  \item Society for Industrial and Applied Mathematics (SIAM)
+  \item National Center for Biotechnology Information / PubMed Central (PMC)
+  \item Springer Nature (Archive for History of Exact Sciences)
+  \item Cambridge University Press (Cambridge Companions series)
+\end{itemize}
+
+\subsection{Module 1: Historical Foundations Reference}
+
+\subsubsection{Euclid's Life and Context}
+
+Euclid of Alexandria (fl.\ c.\ 300 BCE) is traditionally placed during the reign of Ptolemy I (r.\ 305/304--282 BCE), based primarily on Proclus's fifth-century CE \textit{Commentary on the First Book of Euclid's Elements}. Proclus reports that Euclid was younger than Plato's students but older than Archimedes and Eratosthenes. The famous anecdote about Euclid telling Ptolemy that ``there is no royal road to geometry'' comes from this same source, though a nearly identical story is told about Menaechmus and Alexander the Great, casting doubt on its historicity (MacTutor History of Mathematics Archive, University of St Andrews).
+
+Medieval Arabic sources claim Euclid was born in Tyre and was the son of Naucrates, but modern historians consider these accounts unreliable. There is ongoing scholarly debate about whether Euclid was a single individual, a team leader at Alexandria, or even a collective pseudonym (Itard, 1962, cited in MacTutor).
+
+\subsubsection{The Structure of the Elements}
+
+The \textit{Elements} comprises thirteen books covering plane geometry (Books I--VI), number theory (Books VII--IX), incommensurability (Book X), and solid geometry (Books XI--XIII). The work begins with 23 definitions, 5 postulates, and 5 common notions, from which 465 propositions are derived. Key results include the Pythagorean theorem (I.47), the Euclidean algorithm for greatest common divisors (VII.1--2), the proof that there are infinitely many prime numbers (IX.20), and the construction of the five Platonic solids (XIII).
+
+The \textit{Elements} synthesized earlier work by Hippocrates of Chios (c.\ 470--410 BCE), Eudoxus of Cnidus (c.\ 408--355 BCE), and Theaetetus (c.\ 417--369 BCE). Historian Markus Asper concluded that Euclid's principal achievement was assembling accepted mathematical knowledge into a logically coherent order and supplying new proofs where gaps existed (cited in the Wikipedia article on \textit{Euclid's Elements}, drawing on scholarly editions).
+
+\subsubsection{Transmission History}
+
+The \textit{Elements} underwent extensive editorial revision by Theon of Alexandria (c.\ 335--405 CE), whose version dominated until 1808, when an earlier manuscript was discovered in the Vatican. The work was translated into Arabic multiple times during the ninth century --- notably by al-\d{H}ajj\={a}j ibn Y\={u}suf and by Is\d{h}\={a}q ibn \d{H}unayn (revised by Th\={a}bit ibn Qurrah). The first Latin translation was made around 1120 by Adelard of Bath from an Arabic version obtained in Spain. The first direct Greek-to-Latin translation appeared in 1505 (Bartolomeo Zamberti), and the \textit{editio princeps} of the Greek text was published in Basel in 1533. The first English translation appeared in 1570 by Sir Henry Billingsley (Britannica, ``Renditions of the Elements'').
+
+Christopher Clavius, a sixteenth-century Jesuit mathematician, produced an influential edition that became part of the Jesuit educational curriculum, exposing hundreds of thousands of students to Euclidean geometry and shaping the mathematical education of figures including Descartes, Laplace, Diderot, and Voltaire (SIAM review of Wardhaugh's \textit{Encounters with Euclid}).
+
+\subsection{Module 2: The Axiomatic Method Reference}
+
+\subsubsection{Definitions, Postulates, and Common Notions}
+
+Euclid distinguished three types of foundational statements. \textbf{Definitions} specify the meaning of terms (e.g., ``A point is that which has no part''). \textbf{Postulates} are constructive assumptions specific to geometry (e.g., ``To draw a straight line from any point to any point''). \textbf{Common notions} are general logical principles applicable beyond geometry (e.g., ``Things which are equal to the same thing are also equal to one another''). Aristotle used ``axiom'' interchangeably with ``common notion,'' and this terminological overlap has complicated analysis of the relationship between Aristotelian logic and Euclidean mathematics (Rodin, ``Doing and Showing,'' PhilSci Archive).
+
+\subsubsection{The Deductive Chain}
+
+Each proposition in the \textit{Elements} follows a stereotyped structure: \textit{protasis} (statement), \textit{ekthesis} (setting out), \textit{diorismos} (specification), \textit{kataskeue} (construction), \textit{apodeixis} (proof), and \textit{symperasma} (conclusion). Problems end with ``Q.E.F.'' (\textit{quod erat faciendum} --- ``which was to be done'') and theorems with ``Q.E.D.'' (\textit{quod erat demonstrandum} --- ``which was to be demonstrated''). This distinction between constructive and demonstrative results is a fundamental feature of Euclidean practice (Avigad, Dean, and Mumma, ``A Formal System for Euclid's \textit{Elements},'' \textit{Review of Symbolic Logic}, 2009).
+
+\subsubsection{Gaps and the Road to Hilbert}
+
+Despite its reputation for rigor, the \textit{Elements} contains logical gaps. The very first proposition (constructing an equilateral triangle on a given segment) assumes that two circles intersect --- a fact not derivable from Euclid's stated axioms. Bertrand Russell criticized Euclid's reliance on diagrams for inferential power, and David Hilbert's 1899 \textit{Grundlagen der Geometrie} provided a complete axiomatization of Euclidean geometry using 20 axioms that eliminated all dependence on visual intuition (Nirenberg, ``The Axiomatic Method,'' lecture, SUNY Albany; PMC article on diagrams in the \textit{Elements}).
+
+\subsection{Module 3: Philosophical Influence Reference}
+
+\subsubsection{Spinoza's Ethics Demonstrated in Geometrical Order}
+
+Spinoza's \textit{Ethics} (written 1661--1675, published posthumously 1677) is described by scholars as ``perhaps the most ambitious attempt to apply Euclid's method in philosophy.'' The work is organized into five parts, each beginning with definitions and axioms from which propositions are derived through formal demonstration. Spinoza believed that the geometric method --- \textit{more geometrico} --- could deliver the same certainty in metaphysics and moral philosophy that Euclid achieved in geometry. The deductive structure mirrors the causal necessity that, in Spinoza's metaphysics, governs all of nature (Britannica, ``Ethics by Spinoza''; Internet Encyclopedia of Philosophy, ``Geometrical Method''; Wikipedia, ``Spinoza's \textit{Ethics}'').
+
+In the seventeenth century, mathematics was widely regarded as the paradigmatic science, admired for its conclusive, irrefutable proofs. Many philosophers attempted to replicate Euclid's success in other domains. Spinoza's work represents the fullest realization of this ambition, though its reception has been ambivalent: while the geometric form lends the \textit{Ethics} an appearance of rigor, philosophy ``by the mere act of donning the classical costume of Euclidean geometrical discourse, does not acquire the incontrovertible and scientific aura of its mathematical model'' (Cambridge Companion to Spinoza's \textit{Ethics}).
+
+\subsubsection{Newton's Principia}
+
+Isaac Newton's \textit{Philosophi\ae{} Naturalis Principia Mathematica} (1687) adopted Euclidean axiomatic structure for physics. Newton called his three laws of motion ``axioms'' and deduced his law of universal gravitation as a sequence of mathematical theorems. The \textit{Principia}'s structure --- definitions, axioms, propositions with proofs --- directly mirrors the \textit{Elements}. Britannica notes that the ideas of Kepler, Fermat, Descartes, and Newton ``were deeply rooted in, and inconceivable without, Euclid's \textit{Elements}'' (Britannica, ``Renditions of the Elements'').
+
+\subsubsection{Kant's Synthetic A Priori}
+
+Immanuel Kant (1724--1804) argued that Euclidean geometry describes the necessary structure of human spatial intuition --- that the axioms of geometry are ``synthetic a priori'' truths, neither mere definitions nor empirical discoveries but conditions of the possibility of experience itself. Kant used Euclid's proof that the angles of a triangle sum to two right angles as an example of how complex truths about non-material objects can be known with certainty. The discovery of non-Euclidean geometry in the nineteenth century undermined Kant's position, showing that alternative geometries are logically consistent (Nirenberg, ``The Axiomatic Method''; plus.maths.org, ``How Euclid Once Ruled the World'').
+
+\subsection{Module 4: Political Rhetoric and Debate Reference}
+
+\subsubsection{Jefferson and ``Self-Evident Truths''}
+
+Thomas Jefferson structured the Declaration of Independence (1776) using Euclidean logical form. The document opens with ``We hold these truths to be self-evident'' --- a phrase that echoes the Euclidean concept of axioms or common notions that require no proof. From these axioms, Jefferson deduced the right to life, liberty, and the pursuit of happiness, and concluded with a ``therefore'' that declares independence as the logical consequence of the premises. Jefferson, who was well-educated in mathematics, adopted Euclid and Locke's logical style to structure what has been called ``arguably the greatest statement in political literature'' (plus.maths.org, ``How Euclid Once Ruled the World''; Nautilus, ``Euclid as Founding Father'').
+
+The historian Judith Grabiner has argued that ``in philosophy, theology, science, and politics, the idealised Euclidean model of reasoning has shaped conceptions of proof, truth, and certainty'' (plus.maths.org).
+
+\subsubsection{Lincoln's Euclidean Logic}
+
+Abraham Lincoln studied the first six books of Euclid's \textit{Elements} during the early 1850s, carrying the text in his saddlebag while riding the Illinois legal circuit and studying by candlelight. Lincoln's motivation was explicitly epistemic: encountering the word ``demonstrate'' repeatedly in legal texts, he resolved to understand what rigorous proof actually meant. As he later recounted, he ``stayed there till I could give any proposition in the six books of Euclid at sight. I then found out what demonstrate means, and went back to my law studies'' (Journal of the Abraham Lincoln Association; Nautilus, ``Euclid as Founding Father'').
+
+Lincoln applied Euclidean reasoning directly in political debate. In the fourth Lincoln-Douglas debate (1858), he invoked Euclid: ``If you have ever studied geometry, you remember that by a course of reasoning Euclid proves that all the angles in a triangle are equal to two right angles. Now, if you undertake to disprove that proposition, would you prove it to be false by calling Euclid a liar?'' Lincoln challenged Stephen Douglas to ``demonstrate'' popular sovereignty ``as Euclid demonstrated propositions,'' rather than relying on the authority of historical figures (Journal of the Abraham Lincoln Association; Math Teacher's Resource Blog).
+
+Lincoln's Cooper Union address (1860) has been analyzed as following Euclidean proof structure: stating a postulate that all parties could accept, then building a logical chain to an inescapable conclusion. Scholars Hirsch and Van Haften argue that ``Lincoln transformed geometry into speech'' (Civil War Monitor review of \textit{Abraham Lincoln and the Structure of Reason}).
+
+In a private 1854 essay, Lincoln used proof by contradiction against slavery: ``If A can prove, however conclusively, that he may, of right, enslave B, why may not B snatch the same argument, and prove equally, that he may enslave A?'' The logical structure is pure Euclid: if the argument is valid, it must work in both directions; if reversing it produces an absurdity, the original premise is false (Nautilus, ``Euclid as Founding Father'').
+
+\subsection{Module 5: The Parallel Postulate and Non-Euclidean Revolution Reference}
+
+\subsubsection{The Fifth Postulate}
+
+Euclid's fifth postulate states: if a straight line crossing two other straight lines makes the interior angles on one side less than two right angles, then the two lines, if extended indefinitely, will meet on that side. This postulate troubled mathematicians for centuries because of its apparent complexity compared with the other four postulates. D'Alembert called it ``the scandal of elementary geometry'' in 1767 (MacTutor History of Mathematics).
+
+Attempts to prove the fifth postulate from the other four span from Proclus (fifth century CE) through the work of Omar Khayy\={a}m (eleventh century), Saccheri (1733), Lambert, and Legendre. All failed, often by inadvertently assuming equivalent statements (MacTutor; cut-the-knot.org).
+
+\subsubsection{The Discovery of Non-Euclidean Geometry}
+
+Carl Friedrich Gauss (1777--1855) was likely the first to conclude that the fifth postulate cannot be proven and that a consistent alternative geometry exists. In an 1824 private letter, Gauss wrote that the assumption of angle sums less than 180 degrees in a triangle ``leads to a curious geometry, quite different from ours, but thoroughly consistent.'' However, Gauss never published, reportedly fearing what he called ``the uproar of the Boeotians'' (cut-the-knot.org; MacTutor).
+
+Nikolai Lobachevsky (1792--1856) published the first systematic account of hyperbolic geometry in 1829--1830. J\'{a}nos Bolyai (1802--1860) independently developed the same geometry, publishing it in 1832 as an appendix to his father's textbook. When Gauss saw Bolyai's work, he wrote: ``To praise it would be to praise myself. Indeed the whole contents of the work \ldots coincide almost entirely with my meditations'' (Wikipedia, ``Parallel Postulate''; storyofmathematics.com).
+
+Bernhard Riemann (1826--1866), in his landmark 1854 lecture ``On the Hypotheses that Form the Foundations of Geometry,'' introduced a third possibility: elliptic geometry, where no parallel lines exist and all lines are of finite length. Riemann generalized geometry to spaces of arbitrary dimension and variable curvature, laying the mathematical foundation for Einstein's general theory of relativity (MacTutor; encyclopedia.com).
+
+Eugenio Beltrami (1868) provided the first consistency proof by constructing a model of hyperbolic geometry within Euclidean three-dimensional space (the pseudosphere), reducing the consistency of non-Euclidean geometry to that of Euclidean geometry. Felix Klein further developed these models in 1871--1873 (MacTutor).
+
+\subsubsection{Philosophical Implications}
+
+The existence of non-Euclidean geometries had profound philosophical consequences. It refuted Kant's claim that Euclidean geometry is a necessary truth about the structure of human spatial intuition. It demonstrated that axioms are choices, not discoveries --- that different sets of axioms yield different but internally consistent mathematical universes. As the Kronecker Wallis analysis summarizes: the centuries-long debate over the parallel postulate ``ultimately expanded mathematical horizons. It taught mathematicians that axioms represent choices about what mathematical universe to explore, not discovered truths about a single platonic reality'' (kroneckerwallis.com).
+
+Einstein's general theory of relativity (1915) provided the ultimate vindication: physical space is non-Euclidean, its curvature determined by the distribution of mass and energy. The geometry of the universe is an empirical question, not an a priori certainty.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
+\midrule
+Historical claims & All biographical details about Euclid carry significant uncertainty; present with appropriate hedging & GATE \\
+Philosophical positions & Present Spinoza, Kant, et al.\ as historical positions without advocacy for or against & ANNOTATE \\
+Political rhetoric & Present Jefferson and Lincoln's use of Euclidean logic without endorsing or attacking their political positions & ANNOTATE \\
+Religious claims & Spinoza's \textit{Ethics} was banned for perceived atheism; present neutrally & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{University Research Programs and Archives}
+
+\begin{enumerate}[leftmargin=2em]
+  \item MacTutor History of Mathematics Archive, University of St Andrews --- ``Euclid'' biography; ``Non-Euclidean Geometry'' topic page
+  \item Stanford Encyclopedia of Philosophy --- ``Thomas Jefferson'' entry
+  \item Internet Encyclopedia of Philosophy --- ``Geometrical Method''; ``Spinoza, Benedict de: Metaphysics''
+  \item PhilSci Archive, University of Pittsburgh --- Rodin, ``Doing and Showing: The Euclidean Structure''
+  \item Carnegie Mellon University --- Avigad, Dean, and Mumma, ``A Formal System for Euclid's Elements'' (\textit{Review of Symbolic Logic}, 2009)
+  \item Cambridge University Press --- \textit{Cambridge Companion to Spinoza's Ethics} (2024 Spinoza Lexicon)
+  \item SUNY Albany --- Nirenberg, ``The Axiomatic Method'' (lecture, 1996)
+\end{enumerate}
+
+\subsubsection{Peer-Reviewed Research and Professional Publications}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Springer Nature --- De Risi, ``The Development of Euclidean Axiomatics'' (\textit{Archive for History of Exact Sciences}, 2016)
+  \item PMC/PNAS --- ``Researchers Find History in the Diagrams of Euclid's Elements'' (2017)
+  \item SIAM --- Davis, review of Wardhaugh's \textit{Encounters with Euclid}
+  \item Duke University Press --- ``The Geometrical Method in Spinoza's Ethics'' (\textit{Poetics Today}, 2007)
+  \item Mathematical Association of America --- Review of Bonola's \textit{Non-Euclidean Geometry}
+  \item Felgner, ``The Axiomatic Method of Euclid'' in \textit{Philosophy of Mathematics in Antiquity and in Modern Times} (Birkh\"auser, 2023)
+\end{enumerate}
+
+\subsubsection{Professional Organizations and Reference Works}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Encyclop\ae dia Britannica --- ``Euclid,'' ``Renditions of the Elements,'' ``Ethics by Spinoza,'' ``Declaration of Independence''
+  \item Journal of the Abraham Lincoln Association --- ``Lincoln, Euclid, and the Satisfaction of Success''
+  \item Library of Congress --- ``Thomas Jefferson: Declaration of Independence''
+  \item University of Minnesota Press (Manifold) --- Goldenbaum, ``The Geometrical Method as a New Standard of Truth''
+  \item Philopedia.org --- ``Ethics Demonstrated in Geometrical Order''
+\end{enumerate}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document tracing Euclid's \textit{Elements} from its Hellenistic origins through its transformation of philosophy, political rhetoric, and mathematical truth. The deliverable must be self-contained, rigorously sourced, and accessible to an educated general reader while maintaining scholarly precision.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [HAIKU] Shared schemas, source index, document templates
+          |
+          v
+WAVE 1: Parallel Research Tracks
+  Track A: [SONNET] Historical Foundations + Axiomatic Method
+  Track B: [OPUS]   Philosophical Influence + Political Rhetoric
+          |
+          v
+WAVE 2: Synthesis
+  [OPUS] Cross-module integration + Parallel Postulate (capstone)
+         Non-Euclidean revolution as convergence point
+          |
+          v
+WAVE 3: Publication + Verification
+  [SONNET] Final assembly, source verification, formatting
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Source Layer} --- Curated bibliography of peer-reviewed and professional sources
+  \item \textbf{Research Layer} --- Five thematic modules with findings and evidence
+  \item \textbf{Synthesis Layer} --- Cross-module connections and narrative integration
+  \item \textbf{Publication Layer} --- Final formatted document with bibliography and index
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Source Index & $\geq$15 professional sources, categorized & W0-01 \\
+D2 & Historical Foundations & Euclid's context, Elements structure, transmission & W1-01 \\
+D3 & Axiomatic Method & Definitions/postulates/CN, deductive chain, Hilbert & W1-02 \\
+D4 & Philosophical Influence & Spinoza, Newton, Kant with textual evidence & W1-03 \\
+D5 & Political Rhetoric & Jefferson, Lincoln with $\geq$3 specific instances & W1-04 \\
+D6 & Parallel Postulate & 2000-year arc, three geometries, implications & W2-01 \\
+D7 & Synthesis Document & All modules integrated, cross-references, bibliography & W3-01 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source Index & None & Haiku & 5,000 \\
+Document Templates & None & Haiku & 3,000 \\
+Historical Foundations & Source Index & Sonnet & 25,000 \\
+Axiomatic Method & Source Index & Sonnet & 25,000 \\
+Philosophical Influence & Source Index & Opus & 30,000 \\
+Political Rhetoric & Source Index & Opus & 30,000 \\
+Parallel Postulate & All W1 modules & Opus & 30,000 \\
+Cross-Module Synthesis & All W1+W2 & Opus & 15,000 \\
+Publication Assembly & All above & Sonnet & 12,000 \\
+Verification & Final document & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\%} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Judgment-heavy modules: philosophical analysis, political rhetoric interpretation, synthesis, cross-module integration \\
+Sonnet & 60\% & Structured research compilation: historical survey, axiomatic method documentation, publication assembly, verification \\
+Haiku & 10\% & Scaffolding: source index, document templates, schemas \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Type} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 8,000 \\
+1 & Parallel Research & Parallel (2) & Sonnet+Opus & 110,000 \\
+2 & Synthesis & Sequential & Opus & 45,000 \\
+3 & Publication & Sequential & Sonnet & 17,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W0-01 & Build source index & Haiku & Categorized bibliography with URLs \\
+W0-02 & Create document templates & Haiku & Section templates for all 5 modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Historical and Structural (Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1-01 & Historical Foundations survey & Sonnet & Complete module with sources \\
+W1-02 & Axiomatic Method analysis & Sonnet & Complete module with examples \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Philosophical and Political (Opus):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1-03 & Philosophical Influence & Opus & Spinoza, Newton, Kant analysis \\
+W1-04 & Political Rhetoric & Opus & Jefferson, Lincoln with evidence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W2-01 & Parallel Postulate capstone & Opus & Non-Euclidean revolution module \\
+W2-02 & Cross-module synthesis & Opus & Integration narrative, cross-references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W3-01 & Document assembly & Sonnet & Complete formatted document \\
+W3-02 & Source verification & Sonnet & All claims verified against sources \\
+W3-03 & Final review & Sonnet & Polished deliverable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Source index (W0-01) cached at session start; referenced by all Wave 1 components within 5-minute TTL
+  \item Track A and Track B execute in parallel within the same session to maximize cache reuse of shared sources
+  \item Wave 2 synthesis begins immediately after Wave 1 completion to retain context
+  \item Document templates (W0-02) reused across all modules
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 8,000 \\
+Wave 1: Research & 60,000 & 50,000 & --- \\
+Wave 2: Synthesis & 45,000 & --- & --- \\
+Wave 3: Publication & --- & 17,000 & --- \\
+\midrule
+\textbf{Totals} & \textbf{105,000} & \textbf{67,000} & \textbf{8,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand Total:} $\sim$180,000 tokens across 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-01 (Source Index) ----+----> W1-01 (Historical)
+                         |                          \
+W0-02 (Templates)  ------+----> W1-02 (Axiomatic)    \
+                         |                             +--> W2-01 (Parallel
+                         +----> W1-03 (Philosophy)    /     Postulate)
+                         |                          /            |
+                         +----> W1-04 (Rhetoric)  -/             |
+                                                                 v
+                                                          W2-02 (Synthesis)
+                                                                 |
+                                                                 v
+                                                          W3-01 (Assembly)
+                                                                 |
+                                                                 v
+                                                          W3-02 (Verification)
+                                                                 |
+                                                                 v
+                                                          W3-03 (Final Review)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to university archives, peer-reviewed journals, or professional encyclopedias. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every date, figure count, and historical statistic attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents historical evidence without advocating political positions \\
+SC-REL & Religious neutrality & Spinoza's perceived atheism and the theological context presented neutrally \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Transmission history (3+ stages) & CF-01 & Pending \\
+2. Axiomatic method examples ($\geq$2) & CF-02, CF-03 & Pending \\
+3. Spinoza/Newton/Kant connections & CF-04, CF-05, CF-06 & Pending \\
+4. Jefferson/Lincoln instances ($\geq$3) & CF-07, CF-08, CF-09 & Pending \\
+5. Parallel postulate arc & CF-10, CF-11 & Pending \\
+6. Three geometries explained & CF-12 & Pending \\
+7. All claims sourced & SC-SRC, SC-NUM & Pending \\
+8. Cross-module connections ($\geq$4) & IN-01, IN-02, IN-03, IN-04 & Pending \\
+9. Through-line to GSD & CF-13 & Pending \\
+10. Self-contained readability & IN-05 & Pending \\
+11. Bibliography $\geq$15 sources & CF-14 & Pending \\
+12. No policy advocacy & SC-ADV & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC-A & Executor (Track A) & Historical Foundations + Axiomatic Method production \\
+EXEC-B & Executor (Track B) & Philosophical Influence + Political Rhetoric production \\
+CRAFT-HIST & History Specialist & Primary domain: historical context, transmission, chronology \\
+CRAFT-PHIL & Philosophy Specialist & Secondary domain: philosophical analysis, argument structure \\
+VERIFY & Verification & Source validation; accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron \\
+Research Modules & 5 \\
+Parallel Tracks & 2 \\
+Waves & 4 (Foundation / Research / Synthesis / Publication) \\
+Total Estimated Tokens & $\sim$180,000 \\
+Context Windows & 12 \\
+Sessions & 4 \\
+Model Distribution & Opus 58\% / Sonnet 37\% / Haiku 5\% \\
+Crew Size & 12 roles \\
+Safety-Critical Tests & 4 (mandatory-pass) \\
+Total Tests & 28 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The \textit{Elements} form one of the most beautiful and influential works of science in the history of humankind. Its beauty lies in its logical development of geometry and other branches of mathematics. It has influenced all branches of science but none so much as mathematics and the exact sciences.''}
+
+\vspace{0.5em}
+
+\hfill --- David Joyce, Clark University, \textit{Euclid's Elements} online edition
+
+\vspace{1em}
+
+The architecture of reason is the architecture of everything we build. From Euclid's five postulates to a GSD vision document, from a Euclidean proof to a wave execution plan --- the pattern is the same: choose your starting points deliberately, follow them honestly, and trust the structure to carry more than any single step could hold alone. The spaces between the axiom and the theorem are where understanding lives.
+\end{quotebox}
+
+\end{document}

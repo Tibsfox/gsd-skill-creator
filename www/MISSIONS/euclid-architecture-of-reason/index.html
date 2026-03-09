@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Euclid and the Architecture of Reason — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  header {
+    background: linear-gradient(135deg, var(--primary), #6A1B9A);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+  header h1 { font-size: 2.2rem; margin: 0.5rem 0; }
+  header .subtitle { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1.1rem; margin-top: 0.3rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #D1C4E9;
+  }
+  .file-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(74,20,140,0.15); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); font-size: 1rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.4rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--tertiary); font-size: 1.1rem; margin: 1.2rem 0 0.5rem; }
+  ol, ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .stage-list { list-style: none; margin-left: 0; }
+  .stage-list li { padding: 0.6rem 0; border-bottom: 1px solid #E8E0F0; }
+  .stage-list .stage-tag { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; display: inline-block; padding: 2px 8px; border-radius: 3px; margin-right: 0.5rem; color: white; }
+  .stage-1 { background: var(--primary); }
+  .stage-2 { background: var(--secondary); color: var(--text) !important; }
+  .stage-3 { background: var(--tertiary); }
+  code { font-family: 'DM Mono', monospace; background: #EDE7F6; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; }
+  blockquote {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1rem 1.5rem; margin: 1.5rem 0; font-style: italic; border-radius: 0 6px 6px 0;
+  }
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; font-family: 'DM Sans', sans-serif; }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Euclid and the Architecture of Reason</h1>
+  <div class="subtitle">Philosophy, Mathematics, and the Art of Debate</div>
+</header>
+
+<div class="container">
+  <div class="files">
+    <a href="euclid-architecture-of-reason.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">Mission Package (PDF)</div>
+      <div class="desc">23-page complete pipeline — Vision → Research → Mission. Ready for GSD Orchestrator.</div>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <div class="name">LaTeX Source (.tex)</div>
+      <div class="desc">Editable source for modification and recompilation. XeLaTeX required.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="stage-list">
+    <li><span class="stage-tag stage-1">Stage 1</span> <strong>Vision Document</strong> — Narrative vision, problem statement, 5 research modules, chipset configuration, 12 success criteria, through-line to GSD ecosystem</li>
+    <li><span class="stage-tag stage-2">Stage 2</span> <strong>Research Reference</strong> — Detailed findings per module: Historical Foundations, Axiomatic Method, Philosophical Influence (Spinoza/Newton/Kant), Political Rhetoric (Jefferson/Lincoln), Parallel Postulate &amp; Non-Euclidean Revolution. Source bibliography with 15+ professional sources.</li>
+    <li><span class="stage-tag stage-3">Stage 3</span> <strong>Mission Package</strong> — Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, component breakdown with model assignments (Opus/Sonnet/Haiku), dependency graph, 28-test verification plan, token budget (~180k).</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <ol>
+    <li>Download the PDF mission package</li>
+    <li>Feed to <code>gsd-skill-creator</code> or load into a Claude Code context for execution</li>
+    <li>The package is self-contained — no additional context required</li>
+    <li>Wave 0 (Foundation) executes first, then Wave 1 parallel tracks, then synthesis and publication</li>
+    <li>CAPCOM gates at each wave boundary require human approval before proceeding</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>If you modify the <code>.tex</code> source:</p>
+  <ol>
+    <li>Requires XeLaTeX and the following packages: fontspec, tcolorbox, booktabs, tabularx, fancyhdr, hyperref, lastpage</li>
+    <li>Compile with three passes:
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+    </li>
+  </ol>
+
+  <blockquote>
+    The architecture of reason is the architecture of everything we build. From Euclid's five postulates to a GSD vision document — the pattern is the same: choose your starting points deliberately, follow them honestly, and trust the structure to carry more than any single step could hold alone.
+  </blockquote>
+</div>
+
+<footer>
+  GSD Ecosystem · March 7, 2026 · Vision → Research → Mission
+</footer>
+</body>
+</html>

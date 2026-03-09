@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wings of the Pacific Northwest — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --light-secondary: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.4rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1.5rem; font-size: 0.95rem; letter-spacing: 0.05em; opacity: 0.85; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); border: 1px solid #ddd; transition: transform 0.15s, box-shadow 0.15s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .file-card .name { font-size: 1.1rem; margin: 0.4rem 0; font-weight: 700; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 0.8rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--light-primary); }
+  .contents { list-style: none; }
+  .contents li { padding: 0.4rem 0; padding-left: 1.2rem; position: relative; font-size: 0.95rem; }
+  .contents li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  .stage-label { font-family: 'DM Sans', sans-serif; font-weight: 700; color: white; padding: 0.15rem 0.6rem; border-radius: 3px; font-size: 0.75rem; margin-right: 0.4rem; }
+  .s1 { background: var(--primary); }
+  .s2 { background: var(--secondary); }
+  .s3 { background: var(--tertiary); }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; font-size: 0.92rem; }
+  .instructions li { margin-bottom: 0.5rem; }
+  .instructions code { background: #fff; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; }
+  .quote .attribution { font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); margin-top: 0.6rem; }
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Wings of the Pacific Northwest</h1>
+  <div class="subtitle">A Complete Avian Taxonomy of the Pacific Northwest</div>
+  <div class="pipeline">Vision → Research → Mission &nbsp;|&nbsp; Full Pipeline Execution</div>
+</div>
+
+<div class="container">
+  <h2>Mission Package Files</h2>
+  <div class="files">
+    <a class="file-card" href="pnw-avian-taxonomy-mission.pdf" download>
+      <div class="label">PDF Document</div>
+      <div class="name">Mission Package (30 pages)</div>
+      <div class="desc">Complete three-stage pipeline: Vision Guide, Research Reference, and Mission Package with wave execution plan.</div>
+    </a>
+    <a class="file-card" href="pnw-avian-taxonomy-mission.tex" download>
+      <div class="label">LaTeX Source</div>
+      <div class="name">.tex Source File</div>
+      <div class="desc">XeLaTeX source for modification and recompilation. Requires DejaVu fonts and standard TeX packages.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage-label s1">Stage 1</span> <strong>Vision Guide</strong> — Narrative vision, problem statement, 6 research modules, chipset configuration, 12 success criteria, through-line</li>
+    <li><span class="stage-label s2">Stage 2</span> <strong>Research Reference</strong> — Source organizations, species profiles (old-growth, alpine, steppe), flyway data, ecoregion communities, evolutionary biology, ecological networks, cultural ornithology, bird-as-skill metaphor framework, safety considerations, 40+ source bibliography</li>
+    <li><span class="stage-label s3">Stage 3</span> <strong>Mission Package</strong> — Milestone spec, 8 deliverables, 19 components, 5-wave execution plan with 3 parallel tracks, token budget (~884K), dependency graph, 38-test plan (8 safety-critical), verification matrix, 17-role Fleet crew manifest</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Load the PDF into a fresh Claude Code context or GSD skill-creator session</li>
+      <li>The mission package is self-contained — all three stages are in one document</li>
+      <li>Begin with Wave 0 (Foundation) — create shared taxonomy schema, source index, and ecoregion definitions</li>
+      <li>Wave 1 launches three parallel tracks: resident taxonomy, migratory species, and ecoregion communities</li>
+      <li>Waves 2–4 proceed sequentially through analysis, synthesis, and verification</li>
+      <li>Human approval (CAPCOM) required at each wave boundary</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode pnw-avian-taxonomy-mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page count</li>
+    </ol>
+  </div>
+
+  <h2>PNW Research Series Cross-Links</h2>
+  <ul class="contents">
+    <li><strong>04-salish-sea-expansion-vision.md</strong> — Salmon ecology, reef net fishing, Coast Salish bird knowledge</li>
+    <li><strong>gsd-foxfire-heritage-skills-vision.md</strong> — Heritage documentation methodology for bird observation skills</li>
+    <li><strong>gsd-ecosystem-field-guide.html</strong> — Wider ecosystem context; this study as a "seasonal visitor"</li>
+  </ul>
+
+  <div class="quote">
+    To know two hundred species of birds by their calls. This is what was known, once. Not as hobby or academic exercise but as survival skill, as ecological grammar, as the language in which the land itself speaks.
+    <div class="attribution">— Wings of the Pacific Northwest, PNW Research Series</div>
+  </div>
+</div>
+
+<div class="footer">
+  GSD Research Mission Package &nbsp;|&nbsp; March 2026 &nbsp;|&nbsp; Fleet Activation Profile &nbsp;|&nbsp; ~884K tokens across ~34 context windows
+</div>
+
+</body>
+</html>

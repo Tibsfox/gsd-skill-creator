@@ -1,0 +1,1069 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Audio/Nature — waveform teal, signal amber, deep space ===
+\definecolor{primary}{HTML}{00695C}        % Deep teal — sound waves in water
+\definecolor{secondary}{HTML}{E65100}      % Signal amber — frog calls in the night
+\definecolor{tertiary}{HTML}{263238}       % Deep space — the silence between
+\definecolor{accent}{HTML}{00897B}         % Lighter teal — highlights
+\definecolor{lightprimary}{HTML}{E0F2F1}   % Teal wash
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Amber wash
+\definecolor{lighttertiary}{HTML}{ECEFF1}  % Cool gray wash
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Deep Audio Analyzer}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Deep Audio Analyzer -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Deep Audio Analyzer\\[0.3em]The Listening Skill}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Paula Chipset --- Audio Intelligence Layer}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Iterative Refinement Through Conversational DSP}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12--16 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Deep Audio Analyzer --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Conversation-Harvested}
+\metafield{Depends on:}{gsd-chipset-architecture-vision.md, gsd-skill-creator-analysis.md, gsd-amiga-creative-suite-vision.md}
+\metafield{Context:}{A deep audio analysis skill for the Paula chipset layer, implementing iterative human-AI refinement cycles to decode complex soundscapes from raw audio.}
+
+\subsection{Vision}
+
+A fox sits at the edge of a pond in the Pacific Northwest. The recorder is running. For twenty-five seconds, nothing happens --- or so it seems. In fact, everything is happening. The frogs in the pond are assessing the fox's presence. A distant chorus, already underway at another body of water, provides the constant bed. One frog takes the risk. Then another. Within two minutes, the silence has become a wall of sound --- eight to fifteen individuals calling from positions that can be triangulated by their interaural time differences, their energy signatures decaying with distance according to the inverse square law, their calls bouncing off a concrete sound wall and returning with the spectral fingerprint of the space they inhabit.
+
+None of this is visible in the raw waveform. It emerges through \textit{iterative refinement} --- the same process by which the frogs themselves assessed safety. Listen. Wait. Listen again with new context. The first pass sees frequency distributions and amplitude envelopes. The second pass, informed by the hypothesis ``frogs in a pond,'' suddenly resolves individual callers, spatial clusters, and chorus recruitment dynamics. The third pass, informed by the physical geometry --- ``concrete wall on the far side, pond stretches left and right'' --- reveals reflection patterns, distant choruses buried in the noise floor, and the moment a footstep at 0.5 seconds betrays the recorder's arrival.
+
+This is the Deep Audio Analyzer: a skill that doesn't just process audio --- it \textit{listens}. It implements a structured refinement cycle where each pass builds on the previous one, incorporating human context to progressively decode the story a soundscape is telling. It is the first component of the Paula chipset's audio intelligence layer, and it embodies the Amiga Principle at its core: architectural elegance over brute-force computation. A single stereo WAV file, analyzed through the right sequence of mathematical lenses with the right contextual priming, yields more insight than terabytes of unlabeled data fed through a generic classifier.
+
+The skill sits in the Paula position of the GSD chipset architecture --- the audio and I/O coprocessor. Just as the original Amiga's Paula chip handled four audio channels with DMA-driven sample playback while the 68000 focused on computation, the Deep Audio Analyzer handles the specialized work of acoustic scene understanding while Claude focuses on reasoning about what the analysis reveals. The conversation between human, analyzer, and reasoning engine is the refinement cycle. Each participant contributes what they do best.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Audio files are opaque to AI reasoning.} When a user provides an audio file, current AI systems can describe its technical properties (duration, sample rate, channels) but cannot decode the \textit{content} --- the spatial relationships, biological signatures, environmental acoustics, or narrative arc embedded in the waveform. The gap between ``16-bit stereo 48kHz WAV'' and ``eight Pacific tree frogs recruiting a chorus around a small pond with a concrete wall on the far side'' is enormous.
+
+\item \textbf{Single-pass analysis misses context-dependent features.} A frequency histogram treats all energy equally. But a 30 RMS signal at 2187 Hz in the first five seconds of a recording \textit{means something completely different} when you know it's a distant frog chorus versus background noise. Context transforms data into information, and context arrives iteratively --- from the human, from prior analysis passes, and from domain knowledge.
+
+\item \textbf{Spatial reasoning from stereo audio is underexploited.} A stereo recording contains geometric information --- interaural level differences (ILD), interaural time differences (ITD), coherence spectra, and reflection patterns that encode the physical space. These techniques are well-established in acoustic research but rarely applied in conversational AI workflows. The mathematics exists; the integration into an iterative reasoning pipeline does not.
+
+\item \textbf{No structured methodology bridges DSP and narrative understanding.} Signal processing produces numbers. Humans produce stories. The refinement cycle --- listen, hypothesize, re-analyze, refine --- is how field biologists, acoustic ecologists, and audio engineers actually work, but there is no formalized skill that implements this cycle as a repeatable, teachable methodology within an AI-assisted workflow.
+
+\item \textbf{The Paula chipset lacks its foundational audio intelligence.} The GSD chipset architecture defines Paula as the audio and I/O coprocessor, but no skill currently occupies that role. The creative suite envisions a tracker (GSD-Tracker) for music production, but there is no corresponding capability for audio \textit{analysis} --- the complementary half of audio intelligence. Without analysis, the Paula chip can speak but cannot hear.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Listen $\rightarrow$ Characterize $\rightarrow$ Discuss $\rightarrow$ Re-listen $\rightarrow$ Refine $\rightarrow$ Map}
+
+The Deep Audio Analyzer implements a multi-pass refinement cycle inspired by how experts actually decode complex audio. Each pass applies progressively more targeted analysis, guided by the accumulating context from prior passes and human input. The cycle is not a fixed pipeline --- it is a conversation between the analyzer and the human, mediated by mathematical tools that sharpen with each iteration.
+
+\subsubsection{The Refinement Cycle}
+
+\begin{asciibox}
+Pass 1: FOUNDATION (cold analysis, no priors)
+  Input:  Raw audio file
+  Tools:  Waveform stats, spectral density, RMS timeline,
+          zero-crossing rate, spectral centroid
+  Output: Technical characterization + initial hypotheses
+  Human:  "What does this sound like to you?"
+            |
+            v
+Pass 2: HYPOTHESIS-DRIVEN (human context applied)
+  Input:  Pass 1 results + human context (e.g., "frogs in a pond")
+  Tools:  Species-specific band analysis, call pattern detection,
+          chorus dynamics, modulation index
+  Output: Source identification + spatial overview
+  Human:  "The wall is on the far side, pond goes left and right"
+            |
+            v
+Pass 3: GEOMETRIC REFINEMENT (physical context applied)
+  Input:  Pass 2 results + spatial context
+  Tools:  GCC-PHAT, ILD/ITD mapping, comb filter analysis,
+          reflection timing, RT60 estimation, diffuse field coherence
+  Output: Spatial map + individual source profiles + narrative arc
+  Human:  "They went quiet when I arrived and started up when
+           they decided I wasn't a threat"
+            |
+            v
+Pass N: NARRATIVE SYNTHESIS (meaning-making)
+  Input:  All prior passes + behavioral/ecological context
+  Tools:  Temporal correlation, energy narrative, event detection
+  Output: Complete scene reconstruction with spatial, temporal,
+          biological, and relational understanding
+\end{asciibox}
+
+\subsubsection{Study Domain Map}
+
+\begin{asciibox}
+THE DEEP AUDIO ANALYZER — FUNCTIONAL ARCHITECTURE
+
+  +------------------+     +------------------+
+  |   RAW AUDIO      |     |   HUMAN CONTEXT  |
+  |   (WAV/FLAC/MP3) |     |   (conversation) |
+  +--------+---------+     +--------+---------+
+           |                         |
+           v                         v
+  +--------+-------------------------+---------+
+  |            REFINEMENT ENGINE               |
+  |  +------------+  +------------+  +-------+ |
+  |  | Foundation |->| Hypothesis |->| Geo-  | |
+  |  | Analyzer   |  | Analyzer   |  | metric| |
+  |  +------------+  +------------+  +-------+ |
+  |        |               |             |      |
+  |        v               v             v      |
+  |  +------------------------------------------+
+  |  |         ANALYSIS TOOLKIT (DSP)           |
+  |  | +--------+ +------+ +--------+ +------+ |
+  |  | |Spectral| |Tempo-| |Spatial | |Source| |
+  |  | |Analysis| |ral   | |Reason- | |Ident-| |
+  |  | |Engine  | |Engine| |ing     | |ifier | |
+  |  | +--------+ +------+ +--------+ +------+ |
+  |  +------------------------------------------+
+  +---------------------+-------------------------+
+                        |
+                        v
+  +---------------------+-------------------------+
+  |              OUTPUT SYNTHESIS                  |
+  |  Scene Map | Source Profiles | Narrative Arc   |
+  |  Spatial Diagram | Confidence Scores          |
+  +-----------------------------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DECOMPOSITION
+
+  M1: Foundation Analysis Engine
+      Waveform | Spectrum | RMS | ZCR | Centroid | Periodicity
+          |
+  M2: Source Identification Engine
+      Biological | Mechanical | Environmental | Speech
+      Sub-band profiles | Call pattern matching
+          |
+  M3: Spatial Reasoning Engine
+      GCC-PHAT | ILD/ITD | Coherence | Comb filtering
+      Reflection detection | RT60 | Geometry reconstruction
+          |
+  M4: Temporal Narrative Engine
+      Event detection | Onset/offset | Modulation analysis
+      Chorus dynamics | Energy arc | Activity timeline
+          |
+  M5: Iterative Refinement Controller
+      Pass management | Context injection | Hypothesis tracking
+      Confidence scoring | Convergence detection
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Foundation Analysis Engine}
+
+The cold-start analysis layer. Given a raw audio file with no prior context, this module extracts every measurable characteristic: waveform statistics (peak, RMS, crest factor), spectral density across configurable bands, zero-crossing rate timelines, spectral centroid trajectories, autocorrelation for periodicity detection, and activity/silence segmentation. The output is a structured characterization that includes initial hypotheses about the source type (speech, music, environmental, biological, mechanical) based on feature signatures. This module runs once per audio file and its output persists as the foundation for all subsequent passes.
+
+\subsubsection{M2: Source Identification Engine}
+
+The hypothesis-driven analysis layer. Once the human provides context (or the Foundation Engine generates hypotheses), this module applies domain-specific analysis. For biological sources: species-specific frequency band analysis, call pattern detection (pulse rate, duration, inter-call interval), modulation index, and chorus dynamics. For environmental sources: wind, water, traffic, and machinery signatures. For speech: formant analysis, prosody extraction, and speaker segmentation. The module maintains a library of spectral signatures that can be extended through use --- a direct connection to skill-creator's observation and learning pipeline.
+
+\subsubsection{M3: Spatial Reasoning Engine}
+
+The geometric analysis layer. This module extracts spatial information from stereo (or multi-channel) audio using established acoustic localization techniques: Generalized Cross-Correlation with Phase Transform (GCC-PHAT) for angular source positions, Interaural Level Difference (ILD) for lateral placement, sub-band spatial decomposition for separating co-located sources at different frequencies, stereo coherence spectra for diffuse-field characterization, comb filter analysis for reflector distance estimation, and RT60 measurement for space characterization. The module outputs a spatial map showing source positions, reflecting surfaces, and estimated room/environment geometry. It integrates reflection timing data with human-provided physical context (``concrete wall on the far side'') to constrain and refine geometric estimates.
+
+\subsubsection{M4: Temporal Narrative Engine}
+
+The story-extraction layer. Audio is inherently temporal --- things happen in sequence, and the sequence matters. This module detects events (onsets, offsets, transients), tracks energy arcs (buildup, sustain, decay), identifies behavioral patterns (turn-taking, synchronization, recruitment cascades), and constructs a temporal narrative of the recording. For the frog pond recording, this module is what identifies the twenty-five-second assessment period, the cascade trigger at 22.6 seconds, the steady chorus buildup, and the late-arriving deep voice at 2:10. The narrative engine bridges DSP output and human meaning-making.
+
+\subsubsection{M5: Iterative Refinement Controller}
+
+The meta-cognitive layer. This module manages the refinement cycle itself: tracking which passes have been completed, what context has been injected, which hypotheses are active, and whether the analysis has converged. It determines when to suggest another pass, what additional context would be most valuable, and how to present cumulative findings. It implements the ``listen, discuss, re-listen'' protocol that distinguishes this skill from single-pass audio analysis. The controller is also responsible for confidence scoring --- how certain is the spatial map? How reliable is the species identification? Where are the ambiguities that additional context could resolve? This module is the skill's connection to skill-creator's self-improvement pipeline: the refinement patterns it discovers become reusable templates for future audio analysis tasks.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml — Deep Audio Analyzer (Paula Layer)
+chipset:
+  name: "deep-audio-analyzer"
+  version: "1.0.0"
+  description: "Iterative audio scene analysis with spatial reasoning"
+  category: "audio-intelligence"
+  position: "paula"  # Amiga chipset mapping
+
+skills:
+  required:
+    - name: "foundation-analysis"
+      context: "always"
+      triggers: ["audio", "wav", "sound", "recording", "listen"]
+    - name: "refinement-controller"
+      context: "always"
+
+  domain:
+    - name: "source-identification"
+      context: "fork"
+      triggers: ["identify", "what is", "species", "source"]
+    - name: "spatial-reasoning"
+      context: "fork"
+      triggers: ["where", "position", "spatial", "echo", "reflect"]
+    - name: "temporal-narrative"
+      context: "fork"
+      triggers: ["when", "timeline", "sequence", "buildup"]
+
+agents:
+  topology: "pipeline-with-feedback"
+  agents:
+    - name: "listener"
+      role: "Foundation analysis and hypothesis generation"
+      model: "sonnet"
+    - name: "identifier"
+      role: "Source classification and characterization"
+      model: "sonnet"
+    - name: "cartographer"
+      role: "Spatial mapping and geometry reconstruction"
+      model: "opus"
+    - name: "narrator"
+      role: "Temporal narrative and meaning synthesis"
+      model: "opus"
+    - name: "conductor"
+      role: "Refinement cycle management and convergence"
+      model: "sonnet"
+
+token_budget:
+  ceiling: "5%"
+  per_pass: "~15K tokens"
+  max_passes: 5
+
+media:
+  reference_audio:
+    - path: "media/audio/20260209_194520.wav"
+      description: "Pacific tree frog chorus, PNW pond with
+                     concrete sound wall. Reference recording
+                     for development and testing."
+      duration: "2:19"
+      format: "16-bit stereo 48kHz PCM"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Foundation analysis of WAV, FLAC, and MP3 audio files (mono and stereo)
+\item Multi-pass refinement cycle with human context injection between passes
+\item Spectral analysis: FFT, Welch PSD, sub-band decomposition, spectral centroid tracking
+\item Spatial analysis: GCC-PHAT, ILD, ITD, stereo coherence, comb filter distance estimation
+\item Temporal analysis: event detection, energy arc tracking, modulation index, activity timelines
+\item Biological source identification: frog species, bird calls, insect choruses (extensible library)
+\item Environmental acoustics: RT60 estimation, reflection detection, geometry reconstruction
+\item Confidence scoring and convergence detection for the refinement cycle
+\item Structured output: spatial maps, source profiles, temporal narratives, scene reconstructions
+\item Integration with skill-creator observation pipeline for pattern learning
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Real-time audio processing or streaming analysis
+\item Multi-channel audio beyond stereo (5.1, ambisonic --- future version)
+\item Music information retrieval (chord detection, beat tracking, key estimation --- see GSD-Tracker)
+\item Speech-to-text transcription (defer to dedicated ASR tools)
+\item Audio generation, synthesis, or modification
+\item Machine learning model training (analysis uses deterministic DSP; ML integration via silicon layer)
+\item Proprietary audio format support (DRM-protected files)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation pass completes in under 30 seconds} for any audio file up to 10 minutes, producing waveform statistics, spectral density, RMS timeline, ZCR, and spectral centroid.
+
+\item \textbf{Source identification achieves $\geq$80\% accuracy} on a test corpus of 20 environmental recordings spanning biological, mechanical, and environmental sources, when provided with a single contextual hint (e.g., ``frogs'', ``traffic'', ``rain'').
+
+\item \textbf{Spatial analysis correctly determines source laterality} (left/center/right) for isolated sound events with ILD $>$ 2 dB, verified against ground-truth microphone placement data.
+
+\item \textbf{Reflection detection identifies surfaces within $\pm$1 meter accuracy} when the actual distance is known, using comb filter analysis on isolated transient events in the recording.
+
+\item \textbf{The refinement cycle produces measurably richer output with each pass.} Pass 2 output contains at least 3 findings not present in Pass 1. Pass 3 output contains spatial information absent from Pass 2. Measured by structured output field count.
+
+\item \textbf{Temporal narrative correctly identifies the onset of acoustic events} (first call, chorus trigger, silence periods) within $\pm$2 seconds, validated against human-annotated ground truth.
+
+\item \textbf{The conductor agent correctly determines when to suggest another refinement pass} versus declaring convergence, based on information gain between passes. False convergence rate $<$ 15\%.
+
+\item \textbf{All DSP algorithms produce numerically reproducible results.} Given identical input audio and context, the analysis toolkit produces bit-identical numerical output across runs.
+
+\item \textbf{The skill integrates with skill-creator's observation pipeline.} Analysis patterns, successful hypothesis chains, and refinement sequences are logged in a format compatible with skill-creator's observation schema for future learning.
+
+\item \textbf{A complete three-pass analysis of the reference recording} (Pacific tree frog chorus, 2:19) correctly identifies: (a) probable species, (b) estimated frog count within a factor of 2, (c) chorus buildup narrative, (d) concrete wall reflection, (e) distant chorus in the opening, (f) recorder arrival event at 0.5s.
+
+\item \textbf{Structured output is self-contained and machine-readable.} Scene reconstructions include spatial maps, source profiles with confidence scores, and temporal narratives that can be consumed by downstream GSD agents without additional context.
+
+\item \textbf{The skill operates within the 5\% token budget ceiling} defined by the chipset architecture, with per-pass costs not exceeding 15K tokens averaged across the test corpus.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-chipset-architecture-vision & Defines the Paula chipset position this skill occupies. Chipset YAML format and token budget constraints come from here. \\
+gsd-skill-creator-analysis & The observation pipeline that learns from this skill's refinement patterns. Source identification libraries grow through skill-creator's promotion cycle. \\
+gsd-amiga-creative-suite-vision & Sibling domain. GSD-Tracker handles audio production (output); Deep Audio Analyzer handles audio comprehension (input). Together they complete Paula's audio intelligence. \\
+gsd-silicon-layer-spec & Future: frequently-used DSP routines (FFT, Welch PSD) are candidates for LoRA adapter specialization, shifting computation from API to local GPU. \\
+gsd-instruction-set-architecture & The ISA maps Paula to tmux I/O + audio. This skill provides the audio intelligence that the ISA's Paula register set controls. \\
+gsd-amiga-new-workbench-vision & OctaMED and Bars\&Pipes heritage. The audio streaming architecture that became DirectX originated here; this skill continues that lineage on the analysis side. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The frogs didn't start calling because the analysis got better. They started calling because the fox sat still long enough.
+
+The Deep Audio Analyzer embodies the same principle that runs through the entire GSD ecosystem: the space between action and understanding is where the real work happens. The Amiga Principle says achieve remarkable outcomes through architectural elegance rather than raw power. A \$200 computer with a 7 MHz processor and four audio channels changed the music industry not because it was fast, but because its architecture \textit{knew where to listen}. Paula's DMA channels didn't process audio --- they moved it to exactly the right place at exactly the right time, and the magic emerged from the routing.
+
+This skill is Paula learning to hear. Not through a massive neural network trained on millions of hours of labeled audio, but through the iterative refinement cycle that every field biologist, every acoustic ecologist, every audio engineer already uses: listen, think, listen again with new ears. The mathematics is the lens; the human is the eye. And the space between passes --- where context transforms data into meaning --- is where the frogs decide you're safe.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Deep Audio Analyzer --- Research Reference}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Research Compilation / Conversation-Harvested}
+\metafield{Source Document:}{deep-audio-analyzer-vision.md}
+\metafield{Purpose:}{Provides the DSP algorithms, biological acoustics data, and spatial reasoning mathematics that mission agents need to implement each module. Harvested from the live analysis session of the reference recording.}
+
+\subsection{How to Use This Document}
+
+This reference was harvested from a live analysis session where the techniques described were \textit{actually applied} to a real recording. Where the vision says ``GCC-PHAT for angular source positions,'' this document provides the exact algorithm, the parameters that worked, and the results they produced on the reference recording. Where the vision says ``species identification,'' this document provides the frequency signatures, call patterns, and behavioral characteristics that distinguished Pacific tree frogs from background noise.
+
+\textbf{Key source domains:}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Digital Signal Processing} --- Welch PSD estimation, cross-correlation, Hilbert transform envelope detection, bandpass filter design (SciPy signal processing library)
+\item \textbf{Acoustic Source Localization} --- GCC-PHAT, interaural differences, stereo coherence (IEEE Signal Processing literature)
+\item \textbf{Bioacoustics} --- Pacific tree frog (\textit{Pseudacris regilla}) call characteristics, chorus dynamics, anuran communication (peer-reviewed herpetology)
+\item \textbf{Room Acoustics} --- RT60 measurement, reflection detection, comb filtering, concrete reflection coefficients (Acoustical Society of America standards)
+\end{itemize}
+
+\subsection{Foundation Analysis Reference}
+
+\subsubsection{Waveform Characterization}
+
+The foundation pass extracts file-level properties and computes global statistics. Key measurements and their diagnostic value:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Measurement} & \tableheader{Algorithm} & \tableheader{Diagnostic Value} \\
+\midrule
+Peak amplitude & $\max(|x[n]|)$ & Headroom assessment; clipping detection \\
+RMS level & $\sqrt{\frac{1}{N}\sum x[n]^2}$ & Overall loudness; distance proxy for biological sources \\
+Crest factor & Peak / RMS & Transient vs.\ sustained content; speech vs.\ drone \\
+Zero-crossing rate & Sign change count / N & Speech (1000--3000/s) vs.\ tonal (low) vs.\ noise (high) \\
+Spectral centroid & $\frac{\sum f \cdot P(f)}{\sum P(f)}$ & Brightness tracking; source characterization \\
+Activity ratio & Windows $>$ threshold / total & Silence-to-sound ratio; recording context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Spectral Density Estimation}
+
+Welch's method (overlapping windowed FFT segments averaged to reduce variance) is the primary spectral tool. Parameters validated on the reference recording:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} & \tableheader{Rationale} \\
+\midrule
+FFT size (nperseg) & 4096 samples & 85ms at 48kHz; good frequency resolution (11.7 Hz) for frog calls \\
+High-resolution & 8192 samples & 170ms; used for comb filter detection (5.9 Hz resolution) \\
+Overlap & 50\% default & Standard Welch overlap; 90\% for comb filter analysis \\
+Window & Hann (default) & Low spectral leakage; suitable for tonal and broadband sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Frequency Band Taxonomy}
+
+The foundation pass divides the spectrum into diagnostic bands. For environmental recordings, the following taxonomy proved effective:
+
+Sub/Bass (20--250 Hz): footsteps, rumble, wind, large machinery. Low ambient (250--800 Hz): mid-range environmental noise, some large frog species. Low frog (800--1500 Hz): larger tree frogs, some toad species. Core frog (1500--2500 Hz): Pacific tree frog primary calling range, many temperate anurans. High frog (2500--4000 Hz): spring peepers, cricket frogs. Insect (4000--10000 Hz): crickets, cicadas, katydids. Ultra-high (10000--20000 Hz): bat echolocation, some orthopterans.
+
+\subsection{Source Identification Reference}
+
+\subsubsection{Pacific Tree Frog (\textit{Pseudacris regilla})}
+
+The reference recording's primary biological source. Identification was confirmed through convergence of multiple indicators:
+
+\textbf{Frequency signature:} 94--96\% of active-period energy concentrated in the 1500--2500 Hz band. Peak calling frequency centered at 2050--2250 Hz with individual variation of $\pm$200 Hz. This range is diagnostic for \textit{P.~regilla} and distinguishes it from syntopic species in the Pacific Northwest.
+
+\textbf{Call characteristics:} Individual calls range from 10--15 ms (tentative onset calls) to 300--435 ms (full advertisement calls). Call rate increases from approximately 8 calls/second during onset to 10+ calls/second during full chorus. Inter-call interval standard deviation decreases as the chorus synchronizes (104 ms early $\rightarrow$ 39 ms at peak), then increases again during peak intensity (161 ms) as more individuals overlap.
+
+\textbf{Chorus dynamics:} The species exhibits classic chorus recruitment behavior. A pioneer caller initiates, and other males join progressively. The modulation index of the aggregate signal drops from moderate ($>$0.3, individual calls distinguishable) to very low (0.098, continuous wash) as caller density increases. This low modulation index at high density is characteristic of \textit{Pseudacris} choruses.
+
+\textbf{Pitch-size correlation:} Lower-pitched callers (1800--2050 Hz, the CENTER group in the reference recording) may represent larger males. Higher-pitched callers (2250--2500 Hz) are typically smaller individuals. The late-arriving 1500--1700 Hz caller at 2:10 in the reference recording, if confirmed as \textit{P.~regilla}, would represent an unusually large individual or potentially a different species.
+
+\subsection{Spatial Reasoning Reference}
+
+\subsubsection{GCC-PHAT (Generalized Cross-Correlation with Phase Transform)}
+
+The primary angular localization algorithm. For a stereo recording with microphone spacing $d$, the time delay between channels is estimated by:
+
+$$\hat{\tau} = \arg\max_\tau \text{IFFT}\left(\frac{L(f) \cdot R^*(f)}{|L(f) \cdot R^*(f)|}\right)$$
+
+The PHAT weighting (denominator) whitens the cross-spectrum, sharpening the correlation peak and improving robustness to reverberation. The angular position is then:
+
+$$\theta = \arcsin\left(\frac{\hat{\tau} \cdot c}{d \cdot f_s}\right)$$
+
+where $c = 343$ m/s (speed of sound), $d$ is microphone spacing, and $f_s$ is sample rate.
+
+\textbf{Parameters validated on reference recording:} Window size 50 ms, hop 25 ms, search range $\pm$34 samples (for assumed 17 cm microphone spacing). The reference recording showed limited angular separation via GCC-PHAT alone (single cluster at +2\textdegree), indicating that sub-band analysis is essential for source separation in dense choruses.
+
+\subsubsection{Interaural Level Difference (ILD)}
+
+More effective than ITD for the reference recording due to source density. ILD is computed per sub-band:
+
+$$\text{ILD}(f) = 20 \log_{10}\frac{\text{RMS}_R(f)}{\text{RMS}_L(f)} \text{ dB}$$
+
+\textbf{Key findings from reference:} Five distinct caller groups were identified by combining ILD with frequency band: F1 (2050--2250 Hz, LEFT, $-$2.0 dB, 90 seconds active), F2 (1800--2050 Hz, CENTER, +0.2 dB, 96 seconds), F3 (2050--2250 Hz, FAR LEFT, $-$4.0 dB, intermittent), F4 (2250--2500 Hz, LEFT, $-$2.4 dB, 67 seconds), F5 (2250--2500 Hz, FAR LEFT, $-$3.8 dB, 42 seconds).
+
+\subsubsection{Stereo Coherence and Diffuse Field Analysis}
+
+The magnitude-squared coherence between left and right channels, computed per frequency bin, indicates whether energy at that frequency comes from a localized source (coherence $\rightarrow$ 1) or from many scattered sources (coherence $\rightarrow$ 0).
+
+\textbf{Reference recording coherence spectrum (60--120s, full chorus):} Low ambient (100--500 Hz): 0.401 (partially diffuse). Lower frog range (1500--1800 Hz): 0.275 (mostly diffuse). Core frog range (2000--2200 Hz): 0.153 (mostly diffuse). Upper frog range (2200--2500 Hz): 0.016 (fully diffuse). Above frogs (3000--6000 Hz): 0.059 (fully diffuse).
+
+The progressive drop in coherence from lower to upper frog range indicates that higher-pitched callers are more spatially distributed than lower-pitched callers --- consistent with larger (lower-pitched) males holding preferred positions closer to the microphone while smaller males are scattered.
+
+\subsubsection{Reflection Detection and Geometry}
+
+Concrete sound walls have reflection coefficients of approximately 0.95, making them excellent acoustic mirrors. Reflections manifest as: (a) secondary peaks in the envelope autocorrelation at delays corresponding to twice the reflector distance, and (b) spectral comb filtering with spacing $\Delta f = c / (2d)$ where $d$ is the path length difference.
+
+\textbf{Reference recording results:} Comb filter analysis yielded reflector estimates of 3.3--3.7 m (confidence 0.68--0.73). Time-domain reflection peaks at 18--19 ms ($\sim$3.1--3.2 m, near bank), 35--38 ms ($\sim$6.0--6.5 m, concrete wall candidate), and 55--57 ms ($\sim$9.5--9.8 m, far boundary or treeline). RT60 estimates of 16--76 ms confirm open outdoor space with minimal enclosure.
+
+\subsection{Temporal Narrative Reference}
+
+\subsubsection{Event Detection and Energy Arc}
+
+The reference recording's temporal narrative was reconstructed by combining RMS energy tracking (1-second windows), frog-band envelope detection (15--20 ms smoothing), and individual call isolation (adaptive threshold at 2.5$\times$ noise floor).
+
+\textbf{Critical events identified:} 0.5s --- recorder placement (64\% sub-bass, +30 dB ILD hard right, broadband). 3--15s --- distant chorus bed (continuous, 2187 Hz $\pm$38 Hz, $-$3.0 dB LEFT, modulation index 0.098). 18--19s --- first local calls (10--15 ms pulses, 2100--2200 Hz, LEFT). 22.6s --- cascade trigger (75--112 ms full call, 17 dB SNR, catalyzes CENTER callers). 25--30s --- full onset with multi-position calling. 90--130s --- peak chorus with tripled ILD variance. 130--135s --- late deep caller (1500--1700 Hz, $-$5.4 dB LEFT). 139s --- sharp cutoff.
+
+\subsubsection{Chorus Recruitment Dynamics}
+
+The buildup from silence to full chorus followed a characteristic recruitment cascade: pioneer caller at $\sim$18s, gradual joining through 25--30s, steady-state by 60s, peak density at 130s. The call rate acceleration (8 $\rightarrow$ 10+ calls/sec) and interval standard deviation decrease (104 $\rightarrow$ 39 ms) are quantitative markers of this recruitment process.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Recommendation} & \tableheader{Boundary} \\
+\midrule
+Endangered species detection & Never output precise GPS coordinates if species location is inferred from audio & ABSOLUTE \\
+Recording consent & Audio analysis should not attempt speaker identification from voice characteristics & ABSOLUTE \\
+Cultural recordings & Sacred or ceremonial audio requires explicit community permission for analysis & GATE \\
+Wildlife disturbance & Analysis results should not be used to guide approaches to sensitive breeding sites & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Signal Processing:}
+
+SciPy Signal Processing Library documentation (scipy.signal). Welch, P.D. ``The Use of Fast Fourier Transform for the Estimation of Power Spectra'' (1967). Knapp, C. and Carter, G.C. ``The Generalized Correlation Method for Estimation of Time Delay'' (IEEE, 1976).
+
+\textbf{Bioacoustics:}
+
+USGS Amphibian Research and Monitoring Initiative (ARMI). Cornell Lab of Ornithology, Macaulay Library. NatureServe species accounts for \textit{Pseudacris regilla}.
+
+\textbf{Room Acoustics:}
+
+Acoustical Society of America standards for RT60 measurement. ISO 3382 --- Acoustics: Measurement of room acoustic parameters.
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Vision Document:}{deep-audio-analyzer-vision (Stage 1)}
+\metafield{Research Reference:}{deep-audio-analyzer-research (Stage 2)}
+\metafield{Estimated Execution:}{$\sim$12--16 context windows across $\sim$3--4 sessions}
+
+\subsection{Mission Objective}
+
+Implement the Deep Audio Analyzer as a complete GSD skill occupying the Paula chipset position. The skill must accept audio files, execute the multi-pass iterative refinement cycle, integrate human context between passes, and produce structured scene reconstructions with spatial maps, source profiles, and temporal narratives. The reference recording (Pacific tree frog chorus, 2:19) serves as the acceptance test --- the skill must reproduce the key findings discovered during the live analysis session that generated this mission package.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION PLAN — DEEP AUDIO ANALYZER
+
+Wave 0: Foundation (Sequential, Haiku)
+  [0A] Shared schemas, output formats, DSP utility library
+  [0B] Reference recording test harness
+        |
+        v
+Wave 1: Parallel Analysis Engines (Parallel, Sonnet+Opus)
+  Track A                    Track B
+  [1A] Foundation Engine     [1C] Spatial Reasoning Engine
+  [1B] Source ID Engine      [1D] Temporal Narrative Engine
+        |                          |
+        v                          v
+Wave 2: Integration (Sequential, Opus)
+  [2A] Refinement Controller (orchestrates passes)
+  [2B] Output Synthesis (scene maps, profiles, narratives)
+        |
+        v
+Wave 3: Verification + Publication (Sequential, Sonnet)
+  [3A] Reference recording acceptance test
+  [3B] Skill packaging (SKILL.md, chipset.yaml integration)
+  [3C] Observation pipeline integration with skill-creator
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{DSP Utility Layer} --- Shared mathematical functions (FFT, filtering, envelope detection, cross-correlation) used by all analysis engines.
+\item \textbf{Analysis Engine Layer} --- The four domain-specific engines (Foundation, Source ID, Spatial, Temporal) that each extract different dimensions of information from the audio.
+\item \textbf{Refinement Controller Layer} --- The meta-cognitive layer managing the iterative cycle, context injection, hypothesis tracking, and convergence detection.
+\item \textbf{Output Synthesis Layer} --- Structured output generation: spatial maps, source profiles, temporal narratives, and confidence scores.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & DSP Utility Library & All algorithms produce reproducible results; test coverage $\geq$ 90\% & 01-dsp-utils \\
+2 & Foundation Analysis Engine & Completes in $<$30s for 10-min audio; extracts all 6 measurement types & 02-foundation \\
+3 & Source Identification Engine & $\geq$80\% accuracy on 20-recording test corpus & 03-source-id \\
+4 & Spatial Reasoning Engine & Laterality correct for ILD $>$ 2 dB; reflectors within $\pm$1m & 04-spatial \\
+5 & Temporal Narrative Engine & Event onsets within $\pm$2s of ground truth & 05-temporal \\
+6 & Refinement Controller & Manages multi-pass cycle; false convergence $<$ 15\% & 06-controller \\
+7 & Output Synthesis & Self-contained structured output; machine-readable & 07-output \\
+8 & SKILL.md + Chipset YAML & Skill triggers correctly; integrates with Paula position & 08-packaging \\
+9 & Reference Recording Test & All 6 key findings reproduced from frog chorus recording & 09-acceptance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Spec Doc} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared Schemas & 00-schemas & None & Haiku & 5K \\
+DSP Utilities & 01-dsp-utils & 00-schemas & Sonnet & 20K \\
+Foundation Engine & 02-foundation & 01-dsp-utils & Sonnet & 15K \\
+Source ID Engine & 03-source-id & 01-dsp-utils & Sonnet & 20K \\
+Spatial Engine & 04-spatial & 01-dsp-utils & Opus & 25K \\
+Temporal Engine & 05-temporal & 01-dsp-utils & Sonnet & 15K \\
+Refinement Controller & 06-controller & 02 through 05 & Opus & 20K \\
+Output Synthesis & 07-output & 06-controller & Sonnet & 10K \\
+Skill Packaging & 08-packaging & All above & Sonnet & 8K \\
+Acceptance Test & 09-acceptance & All above & Opus & 12K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Assigned To} \\
+\midrule
+Opus & 37\% & Spatial Reasoning (judgment-heavy geometry reconstruction), Refinement Controller (meta-cognitive cycle management), Acceptance Test (holistic validation) \\
+Sonnet & 55\% & Foundation Engine, Source ID, Temporal Engine, DSP Utilities, Output Synthesis, Packaging (structured implementation) \\
+Haiku & 8\% & Shared Schemas, scaffolding templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Parallelism} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & 0A, 0B & Sequential & Go/No-Go \\
+1 & Analysis Engines & 1A--1D & 2 parallel tracks & Go/No-Go \\
+2 & Integration & 2A, 2B & Sequential & Go/No-Go \\
+3 & Verification & 3A--3C & Sequential & Final \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+0A & Shared schemas, output format definitions, DSP utility stubs & Haiku & 5K & schemas.ts, types.ts \\
+0B & Reference recording test harness with annotated ground truth & Sonnet & 8K & test-harness.ts, ground-truth.json \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Analysis Engines}
+
+\textbf{Track A --- Signal Analysis:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+1A & Foundation Analysis Engine (waveform, spectral, ZCR, centroid) & Sonnet & 15K & foundation-engine.ts \\
+1B & Source Identification Engine (sub-band profiles, call detection, species library) & Sonnet & 20K & source-id-engine.ts, species-lib/ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Scene Analysis:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+1C & Spatial Reasoning Engine (GCC-PHAT, ILD, coherence, reflections) & Opus & 25K & spatial-engine.ts \\
+1D & Temporal Narrative Engine (events, arcs, modulation, recruitment) & Sonnet & 15K & temporal-engine.ts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+2A & Refinement Controller (pass management, context injection, convergence) & Opus & 20K & controller.ts \\
+2B & Output Synthesis (spatial maps, profiles, narratives, confidence) & Sonnet & 10K & output-synthesis.ts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Verification + Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+3A & Reference recording acceptance test (6 key findings) & Opus & 12K & acceptance-results.json \\
+3B & SKILL.md, chipset.yaml, trigger configuration & Sonnet & 5K & SKILL.md, chipset.yaml \\
+3C & Skill-creator observation pipeline integration & Sonnet & 3K & observation-hooks.ts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output (schemas, types) remains in cache for all Wave 1 tasks --- schedule Wave 1 to begin within 5-minute cache TTL window
+\item Track A and Track B in Wave 1 share the DSP utility library but are otherwise independent --- true parallel execution
+\item Wave 2 requires all four engine outputs; schedule immediately after Wave 1 completes while engine code is still cached
+\item Wave 3 acceptance test loads the complete system; run in a single session to avoid cold-start overhead
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & 8K & 5K \\
+Wave 1: Analysis Engines & 25K & 50K & --- \\
+Wave 2: Integration & 20K & 10K & --- \\
+Wave 3: Verification & 12K & 8K & --- \\
+\midrule
+\textbf{Totals} & \textbf{57K (37\%)} & \textbf{76K (49\%)} & \textbf{5K (3\%)} \\
+\midrule
+\textbf{Buffer (11\%)} & \multicolumn{3}{c}{\textbf{17K}} \\
+\midrule
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{$\sim$155K tokens}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+                    [0A: Schemas]
+                    [0B: Test Harness]
+                         |
+              +----------+----------+
+              |                     |
+         Track A               Track B
+    [1A: Foundation]      [1C: Spatial]
+    [1B: Source ID]       [1D: Temporal]
+              |                     |
+              +----------+----------+
+                         |
+                  [2A: Controller]
+                  [2B: Output Syn.]
+                         |
+              +----------+----------+
+              |          |          |
+        [3A: Accept] [3B: Pkg]  [3C: Obs.]
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All acoustic reference data traceable to peer-reviewed journals or government agencies \\
+SC-NUM & Numerical attribution & Every frequency, distance, or population estimate attributed to algorithm output \\
+SC-END & Endangered species & No GPS coordinates emitted even if species location is inferable \\
+SC-PRI & Recording privacy & Voice-containing audio never produces speaker identity information \\
+SC-REP & Reproducibility & Identical input + context produces identical numerical output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Foundation speed & $<$30s for 10-min stereo WAV at 48kHz \\
+CF-02 & Foundation completeness & All 6 measurement types present in output \\
+CF-03 & Source ID accuracy & $\geq$80\% on 20-recording test corpus \\
+CF-04 & Sub-band separation & Distinct energy profiles per 200 Hz band \\
+CF-05 & Call detection & Individual calls isolated with $>$8 dB SNR threshold \\
+CF-06 & ILD laterality & Correct L/C/R for events with ILD $>$ 2 dB \\
+CF-07 & GCC-PHAT angular & Angular estimate within $\pm$15\textdegree{} for isolated sources \\
+CF-08 & Reflection distance & Within $\pm$1m for known reflector distances \\
+CF-09 & Coherence spectrum & Correctly distinguishes directional ($>$0.6) from diffuse ($<$0.1) \\
+CF-10 & Event onset timing & Within $\pm$2s of annotated ground truth \\
+CF-11 & Energy arc tracking & Correctly classifies buildup/sustain/decay phases \\
+CF-12 & Modulation index & Correctly distinguishes individual calls ($>$0.3) from chorus wash ($<$0.15) \\
+CF-13 & Refinement gain & Pass N+1 contains $\geq$3 findings absent from Pass N \\
+CF-14 & Convergence detection & False convergence rate $<$ 15\% on test corpus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Foundation $\rightarrow$ Source ID & Foundation frequency bands correctly feed source identification \\
+IN-02 & Source ID $\rightarrow$ Spatial & Identified source frequencies used as spatial analysis filter bands \\
+IN-03 & Spatial $\rightarrow$ Temporal & Source positions inform temporal turn-taking analysis \\
+IN-04 & Controller round-trip & Complete Pass 1 $\rightarrow$ context injection $\rightarrow$ Pass 2 cycle without data loss \\
+IN-05 & Output self-containment & Scene reconstruction readable without access to intermediate data \\
+IN-06 & Skill-creator integration & Analysis patterns logged in observation-compatible format \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Silent audio & Gracefully reports ``no significant acoustic events detected'' \\
+EC-02 & Mono input & Spatial analysis reports ``stereo required'' and skips spatial module \\
+EC-03 & Clipped audio & Foundation pass flags clipping; analysis continues with warning \\
+EC-04 & Very short audio & $<$1s files produce foundation pass only; refinement not offered \\
+EC-05 & Contradictory context & Controller flags conflict between human context and analysis data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Foundation $<$30s & CF-01, CF-02 & Pending \\
+2. Source ID $\geq$80\% & CF-03, CF-04, CF-05 & Pending \\
+3. Laterality correct & CF-06, CF-07 & Pending \\
+4. Reflection $\pm$1m & CF-08 & Pending \\
+5. Richer output per pass & CF-13, IN-04 & Pending \\
+6. Event onset $\pm$2s & CF-10, CF-11 & Pending \\
+7. Convergence detection & CF-14, EC-05 & Pending \\
+8. Reproducible results & SC-REP & Pending \\
+9. Observation pipeline & IN-06 & Pending \\
+10. Reference recording & CF-01--14, IN-01--05 & Pending \\
+11. Self-contained output & IN-05 & Pending \\
+12. Token budget & CF-01 (timing proxy) & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache timing \\
+SCOUT & Research Agent & DSP algorithm sourcing; bioacoustics reference validation \\
+EXEC & Executor ($\times$2) & Implementation --- one per parallel track \\
+CRAFT-DSP & Signal Processing Specialist & FFT, filtering, cross-correlation, envelope detection algorithms \\
+CRAFT-ACOUSTICS & Acoustic Scene Specialist & Spatial reasoning, biological signatures, environmental acoustics \\
+VERIFY & Verification & Test execution; numerical reproducibility validation \\
+INTEG & Integration Agent & Cross-engine data flow; refinement cycle validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Analysis quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total components & 10 (including schemas) \\
+Activation profile & Squadron (12 roles) \\
+Estimated context windows & 12--16 \\
+Estimated sessions & 3--4 \\
+Total token budget & $\sim$155K (plus 11\% buffer) \\
+Parallel tracks & 2 (Wave 1) \\
+Go/No-Go gates & 3 (Waves 0, 1, 2) \\
+Safety-critical tests & 5 (all mandatory-pass) \\
+Total tests & 30 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The frogs didn't start calling because the analysis got better. They started calling because the fox sat still long enough.''}
+
+\vspace{0.5em}
+
+The Deep Audio Analyzer is Paula learning to hear. Not through brute force, but through the iterative patience that turns data into meaning --- the same patience that turns a stranger at a pond into part of the landscape. The space between passes is where context transforms numbers into understanding. The Amiga Principle, expressed in sound waves.
+\end{quotebox}
+
+\end{document}

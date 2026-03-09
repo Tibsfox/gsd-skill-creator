@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beneath the Current — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0D47A1;--secondary:#00695C;--tertiary:#5D4037;--accent:#0277BD;--light-primary:#E3F2FD;--light-secondary:#E0F2F1;--bg:#FAFAFA;--card-bg:#E8EEF2;--text:#212121;--subtle:#757575}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:var(--bg);line-height:1.7}
+.header{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;padding:3rem 2rem;text-align:center}
+.header h1{font-size:2.4rem;margin-bottom:.5rem}
+.header .subtitle{font-family:'DM Sans',sans-serif;font-size:1.1rem;opacity:.9}
+.header .pipeline{font-family:'DM Sans',sans-serif;margin-top:1.5rem;font-size:.95rem;letter-spacing:.05em;opacity:.85}
+.container{max-width:800px;margin:0 auto;padding:2rem}
+.files{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:2rem 0}
+.file-card{background:var(--card-bg);border-radius:8px;padding:1.5rem;text-decoration:none;color:var(--text);border:1px solid #ddd;transition:transform .15s,box-shadow .15s;display:block}
+.file-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.file-card .label{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--primary);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.file-card .name{font-size:1.1rem;margin:.4rem 0;font-weight:700}
+.file-card .desc{font-size:.85rem;color:var(--subtle)}
+h2{font-family:'DM Sans',sans-serif;color:var(--primary);font-size:1.3rem;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:2px solid var(--light-primary)}
+.contents{list-style:none}
+.contents li{padding:.4rem 0 .4rem 1.2rem;position:relative;font-size:.95rem}
+.contents li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+.stage-label{font-family:'DM Sans',sans-serif;font-weight:700;color:white;padding:.15rem .6rem;border-radius:3px;font-size:.75rem;margin-right:.4rem}
+.s1{background:var(--primary)}.s2{background:var(--secondary)}.s3{background:var(--tertiary)}
+.instructions{background:var(--light-secondary);border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+.instructions ol{padding-left:1.5rem;font-size:.92rem}
+.instructions li{margin-bottom:.5rem}
+.instructions code{background:#fff;padding:.15rem .4rem;border-radius:3px;font-size:.85rem}
+.quote{background:var(--light-primary);border-left:4px solid var(--primary);padding:1.2rem 1.5rem;margin:2rem 0;border-radius:0 6px 6px 0;font-style:italic}
+.quote .attr{font-style:normal;font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--subtle);margin-top:.6rem}
+.footer{text-align:center;padding:2rem;color:var(--subtle);font-family:'DM Sans',sans-serif;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Beneath the Current</h1>
+<div class="subtitle">A Complete Aquatic Species Taxonomy of the Pacific Northwest</div>
+<div class="pipeline">Vision → Research → Mission &nbsp;|&nbsp; Full Pipeline Execution</div>
+</div>
+<div class="container">
+<h2>Mission Package Files</h2>
+<div class="files">
+<a class="file-card" href="pnw-aquatic-taxonomy-mission.pdf" download>
+<div class="label">PDF Document</div>
+<div class="name">Mission Package (17 pages)</div>
+<div class="desc">Complete three-stage pipeline: Vision Guide, Research Reference, and Mission Package with 6-wave execution plan.</div>
+</a>
+<a class="file-card" href="pnw-aquatic-taxonomy-mission.tex" download>
+<div class="label">LaTeX Source</div>
+<div class="name">.tex Source File</div>
+<div class="desc">XeLaTeX source for modification and recompilation.</div>
+</a>
+</div>
+<h2>Contents</h2>
+<ul class="contents">
+<li><span class="stage-label s1">Stage 1</span> <strong>Vision Guide</strong> — 7 research modules (salmonids, freshwater fish, marine fish, ancient lineages, keystone invertebrates, habitat zones, cultural ichthyology), 12 success criteria, through-line</li>
+<li><span class="stage-label s2">Stage 2</span> <strong>Research Reference</strong> — 28 ESA-listed salmon/steelhead ESUs, 253-species Salish Sea inventory, rockfish conservation crisis, lamprey/sturgeon/eulachon ancient lineages, invertebrate ecology, fish-as-skill metaphor framework (12 mappings), bibliography</li>
+<li><span class="stage-label s3">Stage 3</span> <strong>Mission Package</strong> — 8 deliverables, 6-wave execution plan with 3+2 parallel tracks, ~799K token budget, dependency graph, 40-test plan (9 safety-critical), 19-role Fleet crew manifest</li>
+</ul>
+<h2>PNW Research Series — Completing the Trophic Circle</h2>
+<ul class="contents">
+<li><strong>Wings of the Pacific Northwest</strong> (Avian) — Documents the birds that eat the fish</li>
+<li><strong>Fur, Fin &amp; Fang</strong> (Mammalian) — Documents the mammals that distribute the nutrients</li>
+<li><strong>Beneath the Current</strong> (Aquatic) — Documents the fish themselves: the ecological currency</li>
+<li><strong>04-salish-sea-expansion-vision.md</strong> — Reef nets, weirs, First Salmon ceremony, salmon economy</li>
+<li><strong>gsd-ecosystem-field-guide.html</strong> — The wider ecosystem that these three volumes serve</li>
+</ul>
+<h2>Usage</h2>
+<div class="instructions">
+<ol>
+<li>Load into Claude Code or GSD skill-creator; self-contained mission package</li>
+<li>Companion to <strong>Wings</strong> (avian) and <strong>Fur, Fin &amp; Fang</strong> (mammalian) — shared ecoregion framework</li>
+<li>Wave 0 Foundation, then 3 parallel survey tracks, then specialist + habitat + cultural + QA</li>
+<li>Recompile: <code>xelatex pnw-aquatic-taxonomy-mission.tex</code> (×3)</li>
+</ol>
+</div>
+<div class="quote">
+The space between the salmon and the forest is not empty. It is full of bears, eagles, fungi, nitrogen isotopes, treaty rights, dam turbines, court decisions, and the sound of a Lummi elder teaching a grandchild to read the tide.
+<div class="attr">— Beneath the Current, PNW Research Series</div>
+</div>
+</div>
+<div class="footer">GSD Research Mission Package &nbsp;|&nbsp; March 2026 &nbsp;|&nbsp; Fleet Profile &nbsp;|&nbsp; ~799K tokens across ~40 context windows</div>
+</body>
+</html>

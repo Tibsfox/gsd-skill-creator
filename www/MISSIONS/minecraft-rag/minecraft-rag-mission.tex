@@ -1,0 +1,957 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: TECHNOLOGY (Steel / Electric / Graphite) ===
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{00838F}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Minecraft World RAG}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Minecraft World Data as RAG -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+\color{darktext}
+
+% =====================================================================
+% TITLE PAGE
+% =====================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Minecraft World Data\\[0.3em]as RAG}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{In-Game Exploration Across World Archetypes}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 14 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% =====================================================================
+% TABLE OF CONTENTS
+% =====================================================================
+\tableofcontents
+\newpage
+
+% =====================================================================
+% STAGE 1 --- VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Minecraft World Data as RAG --- Vision Guide}
+
+\metafield{Date:}{March 7, 2026}
+\metafield{Status:}{Initial Vision / Deep Research Complete}
+\metafield{Depends on:}{gsd-skill-creator-analysis.md, gsd-bbs-educational-pack-vision.md, cooking-with-claude-compiled-session.md}
+\metafield{Context:}{The GSD ecosystem treats code as the primary source of truth and renderings --- web pages, documents, VR spaces, game worlds --- as projections. Minecraft worlds are the most data-rich, structurally rigorous projections available: every block is an addressable datum, every chunk is a spatial index, every entity is a state machine. This vision document proposes treating Minecraft save files as first-class RAG knowledge bases, where in-game exploration becomes the retrieval mechanism and the LLM becomes a guide who has already ``read the world.''}
+
+\subsection{Vision}
+
+A Minecraft world save is not a game --- it is a spatially-indexed database with a built-in 3D visualization engine. Every block placed at coordinates (x, y, z) is a record in a compacted binary format (NBT within Anvil region files) that encodes material type, block state, light level, biome classification, and entity associations. A survival world that a player has explored for months contains thousands of decisions fossilized in block placements --- farms encode knowledge of crop mechanics, redstone circuits encode boolean logic, building designs encode spatial reasoning, mine shafts encode geological strategy.
+
+The insight is this: if we parse a Minecraft world's data files into a structured knowledge graph and then expose that graph through RAG, an LLM can ``know'' the world the way a cartographer knows a landscape they have surveyed. The player then explores in-game while the LLM provides contextual, spatially-aware commentary drawn from the actual world data --- not from generic Minecraft knowledge, but from \textit{this specific world, these specific builds, this specific terrain}. The world becomes the document. Walking through it becomes retrieval.
+
+Different world archetypes create fundamentally different RAG profiles. A Skyblock world is a sparse, constraint-driven knowledge base where every block is precious and the graph is small but dense with meaning. A Creative world is a massive, intention-rich canvas where structural patterns reveal architectural thinking. A Survival world is an emergent narrative --- a diary written in blocks. And a read-only Adventure/Explore mode creates a museum experience: the world cannot be changed, only interrogated. Each archetype demands different chunking strategies, different retrieval priorities, and different conversational postures from the LLM.
+
+This is the Rosetta Stone principle applied to physical space: the same underlying world data can be rendered as a 3D experience, a knowledge graph, a flat-file database, a natural-language narrative, or a pedagogical curriculum. Build it once in world data, and it teaches everywhere.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Minecraft worlds contain rich structured data, but no tool treats them as queryable knowledge bases.} Existing world editors (NBTExplorer, Amulet, MCEdit) allow manual inspection and modification but provide no semantic layer --- you can see that block (100, 64, 200) is a chest containing iron ingots, but you cannot ask ``where are all my storage areas and what do they specialize in?''
+
+\item \textbf{LLM-powered Minecraft agents (Voyager, STEVE, Odyssey) interact with live game state but never with saved world files.} These projects connect to running Minecraft instances via Mineflayer and generate code actions in real time. None of them can load, parse, and reason over a .mca region file or a level.dat --- they are blind to the world's persistent structure.
+
+\item \textbf{RAG systems assume text documents, not spatial data.} Standard RAG pipelines chunk text into passages and embed them for vector similarity search. Minecraft data is inherently three-dimensional, hierarchically structured (world $\rightarrow$ dimension $\rightarrow$ region $\rightarrow$ chunk $\rightarrow$ section $\rightarrow$ block), and relationally dense. Text-based chunking destroys spatial adjacency and loses the relationships that make the data meaningful.
+
+\item \textbf{No system provides a read-only ``museum mode'' for curated Minecraft worlds.} Adventure mode restricts block breaking/placing but still allows item interactions and mob combat. Spectator mode allows noclip flight but removes all physical presence. Neither creates the experience of walking through a curated world as a grounded observer while an AI guide explains what you are seeing.
+
+\item \textbf{Different world archetypes demand different RAG architectures, but this design space is entirely unexplored.} A Skyblock island with 200 blocks needs different indexing than a Creative megastructure with 2 million blocks. No framework exists for adapting RAG parameters to world density, player intent, or gameplay constraints.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Parse Minecraft world saves into a spatially-indexed knowledge graph, expose it through archetype-adaptive RAG, and let in-game exploration serve as the retrieval mechanism --- the player's position and gaze direction become the query.
+\end{quotebox}
+
+\subsubsection{World Data Architecture}
+
+\begin{asciibox}
+Minecraft World Save Directory
+================================
+world/
+  level.dat .................. Global metadata (NBT, GZip)
+  |                            seed, spawn, time, weather,
+  |                            game rules, player state
+  |
+  session.lock .............. Write-lock file
+  |
+  region/ ................... Overworld terrain
+  |   r.0.0.mca ............ Region file (Anvil format)
+  |   r.0.-1.mca              Each covers 32x32 chunks
+  |   r.-1.0.mca              = 512x512 block columns
+  |   ...                     Chunks stored as compressed NBT
+  |
+  entities/ ................. Entity storage (1.17+)
+  |   r.0.0.mca               Separated from terrain data
+  |
+  poi/ ...................... Points of Interest
+  |   r.0.0.mca               Villager workstations, beds,
+  |                            bee nests, nether portals
+  |
+  DIM-1/ ................... Nether
+  |   region/
+  |   entities/
+  |
+  DIM1/ .................... The End
+  |   region/
+  |   entities/
+  |
+  playerdata/ .............. Per-player state (.dat NBT)
+  data/ .................... Map items, scoreboard, raids
+  datapacks/ ............... Custom data packs
+\end{asciibox}
+
+\subsubsection{RAG Pipeline Architecture}
+
+\begin{asciibox}
+                    MINECRAFT WORLD RAG PIPELINE
+  ==============================================================
+
+  [World Save Files]
+       |
+       v
+  +-----------+     +-------------+     +--------------+
+  | NBT Parser|---->| Spatial     |---->| Knowledge    |
+  | (Anvil/   |     | Chunker     |     | Graph        |
+  |  Region)  |     | (adaptive)  |     | (Neo4j/      |
+  +-----------+     +-------------+     |  in-memory)  |
+                                        +--------------+
+                                             |
+                                    +--------+--------+
+                                    |                 |
+                               +----v----+     +-----v------+
+                               | Vector  |     | Graph      |
+                               | Index   |     | Traversal  |
+                               | (FAISS) |     | (Cypher)   |
+                               +---------+     +------------+
+                                    |                 |
+                                    +--------+--------+
+                                             |
+                                    +--------v--------+
+                                    | Hybrid Retrieval|
+                                    | Engine          |
+                                    +-----------------+
+                                             |
+       +-------------------------------------+
+       |                                     |
+  +----v-----+                         +-----v-------+
+  | Player   |  <-- position/gaze -->  | LLM Context |
+  | In-Game  |  <-- chat interface -->  | Window      |
+  | (Mineflayer                        | (augmented   |
+  |  or Mod) |                         |  with world) |
+  +----------+                         +-------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: World Data Parsing and Spatial Indexing}
+Technical deep-dive into NBT format, Anvil region files, chunk structure, palette-based block storage, entity serialization, and POI data. Produces a TypeScript/Python parsing pipeline that converts raw world data into structured, queryable representations. Covers both Java Edition and Bedrock Edition format differences (big-endian vs little-endian NBT, LevelDB vs Anvil storage).
+
+\subsubsection{Module 2: Spatial Knowledge Graph Construction}
+Design of the knowledge graph schema for Minecraft world data. Defines node types (Block, Chunk, Region, Structure, Entity, Container, Biome, Player Build), edge types (adjacent\_to, contains, stored\_in, crafted\_from, powered\_by), and property schemas. Addresses the unique challenge of spatial chunking --- how to create semantically meaningful subgraphs from continuous 3D block data without losing adjacency relationships.
+
+\subsubsection{Module 3: Archetype-Adaptive RAG Strategies}
+Defines four distinct RAG profiles corresponding to the four world archetypes --- Skyblock (sparse/constraint-driven), Creative (dense/intention-rich), Survival (emergent/narrative), and Adventure/Explore (read-only/guided). Each profile specifies chunk size, embedding strategy, retrieval weighting, context window allocation, and conversational posture.
+
+\subsubsection{Module 4: In-Game Exploration Interface}
+Integration layer connecting the RAG system to live Minecraft gameplay. Uses PrismarineJS (mineflayer + prismarine-world + prismarine-viewer) for headless world reading and Fabric/Forge mods for client-side integration. Defines the ``position-as-query'' paradigm where player coordinates and facing direction trigger contextual retrieval. Includes chat-based interaction, HUD overlays for annotation, and optional voice narration.
+
+\subsubsection{Module 5: Read-Only Adventure/Explore Mode}
+Design of a ``museum mode'' that goes beyond vanilla Adventure or Spectator modes. Player has physical presence (can walk, open doors, read signs) but cannot break, place, or modify any block. World state is frozen and protected. AI guide provides spatial narration --- standing near a redstone circuit triggers an explanation of its logic; entering a farm triggers agricultural analysis; approaching a structure triggers architectural commentary. Implements a ``docent'' pattern where the AI has pre-indexed the entire world and prepared contextual annotations.
+
+\subsubsection{Module 6: Educational World Packs}
+Curated world saves designed specifically for RAG-guided exploration. Each world pack includes the .mca files, a pre-built knowledge graph, annotation metadata, and a curriculum guide. Initial packs: ``Redstone Fundamentals'' (boolean logic through circuit exploration), ``Biome Survey'' (ecology through terrain traversal), ``Architecture History'' (building styles through structural analysis), ``Survival Diary'' (resource management through base archaeology).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+name: minecraft-world-rag
+version: "1.0"
+type: research-mission
+activation_profile: squadron
+
+agents:
+  - name: "world-parser"
+    role: "NBT/Anvil parsing, chunk deserialization, entity extraction"
+  - name: "graph-architect"
+    role: "Knowledge graph schema, spatial indexing, relationship mapping"
+  - name: "rag-strategist"
+    role: "Archetype-adaptive retrieval, embedding strategy, context assembly"
+  - name: "interface-builder"
+    role: "Mineflayer integration, position-as-query, chat/HUD systems"
+  - name: "museum-curator"
+    role: "Read-only mode design, docent pattern, annotation generation"
+  - name: "curriculum-designer"
+    role: "Educational world packs, lesson plans, assessment criteria"
+  - name: "safety-warden"
+    role: "World integrity protection, data validation, mod safety"
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "world_parse_accuracy"
+        threshold: 99
+        action: "block"
+      - check: "readonly_enforcement"
+        threshold: 100
+        action: "block"
+      - check: "rag_relevance_score"
+        threshold: 80
+        action: "warn"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Java Edition world save parsing (Anvil/.mca format, NBT, level.dat)
+\item Overworld, Nether, and End dimension support
+\item Knowledge graph construction from block, entity, and POI data
+\item Four archetype-specific RAG profiles (Skyblock, Creative, Survival, Adventure)
+\item Position-based contextual retrieval via PrismarineJS
+\item Read-only museum/explore mode with AI docent narration
+\item Chat-based Q\&A about world contents
+\item Pre-indexed educational world packs (4 initial packs)
+\item TypeScript implementation (aligned with GSD/skill-creator stack)
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Bedrock Edition LevelDB format (future module)
+\item Real-time world modification tracking (live server integration)
+\item Multiplayer server integration (single-player saves only for v1.0)
+\item Mod-added block types beyond vanilla registry
+\item Voice narration synthesis (text output only)
+\item World generation or procedural content creation
+\item Integration with Hypixel Slime format or other proprietary formats
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Parse any Java Edition 1.18+ world save and extract all block types, entities, and POI data with $\geq$99\% accuracy against NBTExplorer baseline.
+\item Construct a knowledge graph where every non-air block in loaded chunks is represented as a node with correct spatial relationships to adjacent blocks.
+\item Given a player position (x, y, z) and facing direction, retrieve the 5 most contextually relevant knowledge graph subgraphs within 200ms.
+\item Each of the four archetype-specific RAG profiles produces measurably different retrieval behavior when applied to the same world data.
+\item Read-only Adventure/Explore mode prevents all world modification (block break, place, entity damage) while allowing movement, door interaction, and sign reading.
+\item AI docent generates contextually accurate narration for at least 80\% of player-visited locations in a pre-indexed educational world.
+\item The system correctly identifies and describes player-built structures (farms, houses, redstone circuits) as distinct from natural terrain in Survival worlds.
+\item Skyblock archetype correctly weights every block as high-value and generates constraint-aware commentary (e.g., ``this cobblestone generator is your primary material source'').
+\item Creative archetype identifies architectural patterns, symmetry axes, and building materials across large-scale structures.
+\item Educational world packs include curriculum-aligned annotations that map in-world features to learning objectives.
+\item End-to-end pipeline processes a 500MB world save into a queryable knowledge graph within 10 minutes on commodity hardware.
+\item System produces meaningful responses to natural-language questions about world contents (``Where is my nearest diamond?'' ``What biomes have I explored?'' ``Describe the redstone circuit at coordinates 100, 64, 200'').
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-bbs-educational-pack & Parallel educational vision; BBS pack teaches computing history through text games, this pack teaches through spatial exploration \\
+cooking-with-claude & Rosetta Stone principle --- code as truth, renderings as projections; Minecraft worlds are the richest projection format \\
+gsd-skill-creator-analysis & Agentic RAG patterns (Corrective, Adaptive, Self-RAG) apply directly to spatial retrieval over world data \\
+gsd-os-desktop-vision & Minecraft block metaphor parallels the GSD-OS block-based agent construction; both use safe, well-defined units \\
+gsd-chipset-architecture & Knowledge graph schema follows chipset pattern --- specialized agents for parsing, indexing, retrieval, narration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The GSD ecosystem philosophy holds that technology should ``give people their lives back'' by handling friction so humans can focus on creative engagement. Minecraft is already the world's most successful creative friction-reducer --- it lets anyone build anything from simple, well-defined blocks. This research extends that principle: by treating world data as a knowledge base and exploration as retrieval, we let an AI guide handle the cognitive overhead of understanding a complex world while the human does what humans do best --- wander, wonder, and build.
+
+The Amiga Principle is present here in a specific way: we are not building a Minecraft mod that requires a running game server and real-time API integration (brute force). We are reading the save files directly --- the same data Minecraft itself reads --- and constructing a parallel understanding of the world that exists independently of the game engine. Architectural leverage over raw computation. The world file is the single source of truth; everything else is a rendering.
+
+\newpage
+
+% =====================================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% =====================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Minecraft World Data as RAG --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles technical findings from the Minecraft Wiki, PrismarineJS documentation, academic papers on LLM-powered game agents, and RAG/GraphRAG architecture research. Each module section provides the specific data an implementation agent needs to produce its deliverables without additional research.
+
+Key source organizations: Minecraft Wiki (minecraft.wiki, minecraft.fandom.com), PrismarineJS project (github.com/PrismarineJS), MineDojo/Voyager research team (voyager.minedojo.org), NeoForged documentation (docs.neoforged.net), Hypixel engineering blog (hypixel.net).
+
+\subsection{Module 1 Reference: World Data Formats}
+
+\subsubsection{NBT (Named Binary Tag) Format}
+NBT is the tree-structured binary serialization format used throughout Minecraft for persistent data storage. It supports 13 tag types including byte, short, int, long, float, double, string, byte array, int array, long array, list, and compound. All files are typically GZip-compressed. Java Edition uses big-endian byte ordering; Bedrock Edition uses little-endian with VarInt encoding for integers.
+
+Key NBT files in a world save: \texttt{level.dat} contains global world metadata (seed, spawn position, time, weather, game rules, data version). Player data files store inventory, position, health, and experience. Scoreboard data, village/POI data, and raid information are also NBT-encoded.
+
+\subsubsection{Region/Anvil File Format}
+Region files (.mca) store 32$\times$32 chunks, covering a 512$\times$512 block area. The file begins with two 4KB header tables: the first maps chunk coordinates to byte offsets within the file, the second stores per-chunk timestamps. Each chunk's data is stored as compressed NBT with a 4-byte length prefix and 1-byte compression scheme indicator (scheme 2 = zlib is standard).
+
+Chunk coordinates map to region files via floor division by 32. For example, chunk (30, -3) maps to region (0, -1). Within a region file, chunks are addressed by their modulo-32 coordinates.
+
+\subsubsection{Chunk Format (1.18+)}
+Since 1.18, the Overworld spans Y=-64 to Y=319 (384 blocks tall, 24 sections). Each chunk section is 16$\times$16$\times$16 blocks. Block storage uses a palette-based compression scheme: each section maintains a local palette mapping small indices to global block state IDs, and a packed long array stores per-block palette indices.
+
+The bits-per-entry value determines palette format: 0 bits means single-valued (entire section is one block type), 1--4 bits use indirect palette (minimum 4 bits), 5--8 bits use indirect palette, and 9+ bits use the global palette directly. Biome data uses the same paletted structure but at 4$\times$4$\times$4 resolution (64 biome entries per section).
+
+Key chunk-level data beyond blocks: \texttt{block\_entities} (chests, signs, spawners, etc. with NBT payloads), \texttt{BlockLight} and \texttt{SkyLight} (4 bits per block), heightmaps (packed 9-bit integers), tile ticks (scheduled block updates), \texttt{InhabitedTime} (cumulative player presence for regional difficulty), and structure references.
+
+\subsubsection{Entity and POI Storage}
+Since 1.17, entity data is stored in separate region files under \texttt{entities/}. Each entity has a UUID, position, motion vector, rotation, custom name, and type-specific data (mob health, inventory contents, villager profession, etc.).
+
+POI (Point of Interest) files track villager-relevant locations: beds, job sites (workstations), bells, nether portals, bee nests, and lodestones. POI records include world position, type identifier, and a ``free tickets'' counter indicating availability for villager claiming.
+
+\subsubsection{Parsing Libraries}
+Mature parsing libraries exist across the ecosystem. In JavaScript/TypeScript: \texttt{prismarine-nbt} (parse/serialize binary and stringified NBT, supports big/little/varint endianness), \texttt{prismarine-world} (infinite chunk collection abstraction), \texttt{prismarine-provider-anvil} (Anvil format reader/writer). In Python: \texttt{amulet-nbt} (C++-backed high-performance NBT), \texttt{nbtlib} (pure Python with path queries and schema support), \texttt{twoolie/NBT} (mature community library). In C\#: NBTExplorer (GUI editor with search). The Kaitai Struct project provides a formal NBT specification that can auto-generate parsers in multiple languages.
+
+\subsection{Module 2 Reference: Spatial Knowledge Graphs}
+
+\subsubsection{Graph Schema for Minecraft Data}
+Minecraft world data maps naturally to a knowledge graph. Primary node types:
+
+\textbf{Block nodes} are the atomic unit. Properties: position (x,y,z), block state ID, material name, light level, biome. A 16$\times$384$\times$16 chunk contains up to 98,304 blocks, but in practice 60--80\% are air and should be excluded from the graph.
+
+\textbf{Chunk nodes} aggregate blocks. Properties: chunk coordinates, biome distribution, inhabited time, generation status. Chunks are the natural unit for spatial queries (``what's in this area?'').
+
+\textbf{Structure nodes} represent detected player builds or generated structures. Properties: bounding box, block composition histogram, classification (farm, house, mine, circuit, natural). Structure detection requires spatial clustering of non-natural blocks.
+
+\textbf{Entity nodes} represent mobs, items, vehicles, and block entities. Properties: type, position, inventory/contents, custom name, AI state.
+
+\textbf{Container nodes} are a specialization of block entities (chests, barrels, hoppers, furnaces) with inventory contents as child relationships.
+
+Edge types: \texttt{adjacent\_to} (spatial adjacency, 6-connected), \texttt{contains} (chunk$\rightarrow$block, container$\rightarrow$item), \texttt{part\_of} (block$\rightarrow$structure), \texttt{powered\_by} (redstone connections), \texttt{in\_biome} (block/chunk$\rightarrow$biome), \texttt{near} (proximity within configurable radius).
+
+\subsubsection{Spatial Chunking Strategies}
+Standard text RAG chunks by token count. Spatial RAG requires different strategies. Three approaches for Minecraft data:
+
+\textbf{Section-based chunking:} Each 16$\times$16$\times$16 section becomes a chunk. Natural boundary alignment, O(1) lookup by coordinate. Drawback: structures spanning section boundaries are split.
+
+\textbf{Structure-based chunking:} Connected components of non-natural blocks form chunks. Captures semantic units (a complete farm, a complete house). Drawback: computationally expensive to detect, variable chunk sizes.
+
+\textbf{Hybrid chunking:} Section-based for base indexing, with structure overlays that cross section boundaries. Best of both worlds but requires a two-level index.
+
+\subsubsection{GraphRAG Patterns}
+Microsoft's GraphRAG pattern (community detection + cluster summarization) adapts well to Minecraft spatial data. Communities in the block graph correspond to player-built structures or natural formations. Cluster summaries become the ``docent notes'' for each location. The dual-retrieval channel (vector search for semantic similarity + graph traversal for structural context) maps directly to: vector search finds blocks matching a query description, graph traversal finds the surrounding structure and connected systems.
+
+Corrective RAG validates retrieval quality after the initial fetch --- critical for spatial queries where the nearest relevant structure may not be the most contextually appropriate one. Adaptive RAG adjusts retrieval strategy based on query complexity --- a simple ``what block is this?'' uses fast coordinate lookup, while ``explain this redstone circuit'' requires multi-hop graph traversal.
+
+\subsection{Module 3 Reference: World Archetype Profiles}
+
+\subsubsection{Skyblock Profile}
+Skyblock worlds begin with minimal resources (typically 54 dirt, 26 grass, 1 tree, 1 lava bucket, 1 ice block) on a small floating island in void. Modern Skyblock data packs generate void terrain with preserved biome maps and structure bounding boxes, meaning the biome data in region files is valid even where no terrain exists.
+
+RAG implications: Every block is precious and semantically loaded. A cobblestone generator is not just ``cobblestone near lava and water'' --- it is the economic engine of the entire world. The knowledge graph is small (hundreds to low thousands of blocks) but extremely dense with meaning. Retrieval should weight block rarity and functional role heavily. The LLM's conversational posture should be constraint-aware: acknowledge scarcity, suggest resource optimization, celebrate milestones.
+
+\subsubsection{Creative Profile}
+Creative worlds have no resource constraints, no survival mechanics, and unlimited flight. Players typically build large-scale structures, artistic installations, and redstone megaprojects. The world data is dense with intentional block placements but sparse in survival-related entities (no mob spawns, no crop growth).
+
+RAG implications: The knowledge graph is potentially enormous (millions of blocks). Structure detection is the primary chunking challenge --- distinguishing one build from another in a continuous creative landscape. The LLM should focus on architectural analysis: symmetry detection, material palette identification, scale estimation, style classification. Retrieval should prioritize structural coherence over individual block identity.
+
+\subsubsection{Survival Profile}
+Survival worlds are emergent narratives. The world contains both natural terrain and player modifications, and the boundary between them tells the story of the player's progression. Early-game areas show crude shelters and simple farms; late-game areas show enchantment rooms, automated farms, and decorated bases.
+
+RAG implications: The knowledge graph must distinguish natural from player-placed blocks (block state metadata and context can help --- torches in caves, crafted blocks in natural settings). Temporal ordering through chunk \texttt{InhabitedTime} and block update timestamps provides narrative sequencing. The LLM should serve as an archaeologist --- reading the player's history from their builds. Retrieval should surface the ``story'' of each area.
+
+\subsubsection{Adventure/Explore (Read-Only) Profile}
+This is not a vanilla Minecraft mode but a custom enforcement layer. The world is treated as an immutable artifact. No blocks can be broken or placed, no entities can be damaged, no items can be picked up or dropped. The player walks through the world as a visitor. Vanilla Adventure mode partially achieves this (blocks can only be broken with correct tagged tools, which can be left empty) but still allows entity interaction. Spectator mode removes physical presence entirely (noclip, invisibility). The desired mode is a hybrid: physical presence with Adventure mode's movement but with all interaction disabled.
+
+Implementation options: server-side plugin denying all interaction events, client-side mod intercepting input, or Adventure mode with empty tool tags combined with mob AI disabled. The Limited Spectator mod demonstrates a configurable approach using Adventure mode with flight enabled and interaction blocked.
+
+RAG implications: Since the world is immutable, the entire knowledge graph can be pre-computed and cached. Annotations can be pre-generated for every significant location. The LLM becomes a ``docent'' with prepared remarks, supplemented by responsive Q\&A. Retrieval is proximity-triggered --- approaching a location automatically surfaces its annotation.
+
+\subsection{Module 4 Reference: PrismarineJS Ecosystem}
+
+The PrismarineJS project provides a comprehensive JavaScript/TypeScript toolkit for Minecraft protocol and data handling. Key components for this project:
+
+\texttt{prismarine-nbt}: Parse and serialize NBT in all encodings (big-endian, little-endian, little-endian varint). Supports both binary and SNBT formats. The \texttt{simplify()} function converts verbose NBT tree structures into plain JavaScript objects.
+
+\texttt{prismarine-world}: Provides an infinite world abstraction backed by pluggable storage providers. The \texttt{getBlock(position)} method returns full block data at any coordinate. Supports async chunk loading and unloading.
+
+\texttt{prismarine-provider-anvil}: Storage provider that reads/writes Minecraft's native Anvil region file format. Loads chunks from .mca files, decompresses them, and makes block data available through the prismarine-world API.
+
+\texttt{prismarine-chunk}: In-memory chunk representation. Provides \texttt{getBlock()}, \texttt{setBlock()}, biome access, light data, and section-level operations. Supports Minecraft versions 1.8 through 1.21+.
+
+\texttt{prismarine-viewer}: WebGL-based 3D renderer that can visualize a prismarine-world instance in a browser. Supports first-person and bird's-eye views, path drawing, and custom overlays. This could serve as the visualization layer for the RAG system without requiring a running Minecraft client.
+
+\texttt{mineflayer}: High-level bot API for connecting to Minecraft servers. Provides block knowledge, entity tracking, pathfinding, inventory management, and chat. While primarily designed for bot creation, its world state tracking could serve as the bridge between a live game session and the RAG system.
+
+\texttt{minecraft-data}: Language-independent module providing block definitions, entity types, recipe data, and version-specific constants. Essential for mapping numeric block state IDs to human-readable names and properties.
+
+\subsection{Module 5 Reference: LLM Minecraft Agents (Prior Art)}
+
+\subsubsection{Voyager (2023)}
+The first LLM-powered embodied lifelong learning agent in Minecraft. Uses GPT-4 via blackbox prompting (no fine-tuning). Three key components: automatic curriculum (proposes exploration tasks based on current skill level and world state), skill library (stores mastered behaviors as executable JavaScript code), and iterative prompting (incorporates environment feedback and self-verification). Achieved 3.3$\times$ more unique items and 15.3$\times$ faster tech tree progression vs. baselines. Key insight: code as action space enables compositional, temporally extended behaviors.
+
+\subsubsection{STEVE (2024)}
+Embodies vision perception, language instruction, and code action in a single agent framework. Processes visual input from the game alongside natural language commands to generate actionable code.
+
+\subsubsection{MineDojo}
+Framework providing a simulation suite with thousands of diverse open-ended tasks plus an internet-scale knowledge base from Minecraft videos, tutorials, wiki pages, and forum discussions. Uses pre-trained video-language models as learned reward functions.
+
+\subsubsection{Gap in Prior Art}
+All existing agents operate on \textit{live game state} via Mineflayer connections to running servers. None parse saved world files. None construct persistent knowledge graphs from world data. None provide read-only exploration modes. This project fills these gaps.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+World data privacy & GATE & Player world files may contain personal builds, coordinates of secret bases, and named entities. Never share parsed world data without player consent. \\
+Mod safety & ABSOLUTE & Only parse vanilla block/entity types. Reject unknown block IDs gracefully rather than executing arbitrary data. \\
+Read-only integrity & ABSOLUTE & Museum mode must guarantee world immutability. Any code path that could modify the world save must be architecturally impossible, not just policy-blocked. \\
+Age-appropriate content & GATE & Minecraft has a broad age demographic. LLM narration must be appropriate for all ages. No violent, sexual, or disturbing commentary regardless of world contents. \\
+Performance safety & ANNOTATE & Parsing large worlds can consume significant memory and CPU. Implement streaming/lazy loading to prevent resource exhaustion. \\
+Copyright & ANNOTATE & Minecraft is a Mojang/Microsoft product. This project parses save files (user-created data) but does not redistribute game assets or code. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Technical Documentation}
+\begin{itemize}[leftmargin=2em]
+\item Minecraft Wiki --- Region file format: \url{https://minecraft.wiki/w/Region_file_format}
+\item Minecraft Wiki --- NBT format: \url{https://minecraft.wiki/w/NBT_format}
+\item Minecraft Wiki --- Chunk format: \url{https://minecraft.wiki/w/Chunk_format}
+\item Minecraft Wiki --- Java Edition level format: \url{https://minecraft.wiki/w/Java_Edition_level_format}
+\item Minecraft Wiki --- Spectator mode: \url{https://minecraft.wiki/w/Spectator}
+\item NeoForged --- NBT documentation: \url{https://docs.neoforged.net/docs/datastorage/nbt/}
+\item wiki.vg --- Chunk Format: \url{https://wiki.vg/Chunk_Format}
+\end{itemize}
+
+\subsubsection*{Libraries and Tools}
+\begin{itemize}[leftmargin=2em]
+\item PrismarineJS/mineflayer: \url{https://github.com/PrismarineJS/mineflayer}
+\item PrismarineJS/prismarine-nbt: \url{https://github.com/PrismarineJS/prismarine-nbt}
+\item PrismarineJS/prismarine-world: \url{https://github.com/PrismarineJS/prismarine-world}
+\item PrismarineJS/prismarine-viewer: \url{https://github.com/PrismarineJS/prismarine-viewer}
+\item Amulet-Team/Amulet-NBT: \url{https://github.com/Amulet-Team/Amulet-NBT}
+\item vberlier/nbtlib: \url{https://github.com/vberlier/nbtlib}
+\item twoolie/NBT: \url{https://github.com/twoolie/NBT}
+\item NBTExplorer: \url{https://nbtexplorer.org/}
+\end{itemize}
+
+\subsubsection*{Research Papers and Projects}
+\begin{itemize}[leftmargin=2em]
+\item Wang et al. (2023). ``Voyager: An Open-Ended Embodied Agent with Large Language Models.'' arXiv:2305.16291. \url{https://voyager.minedojo.org/}
+\item MineDojo framework: \url{https://minedojo.org/}
+\item Hypixel Dev Blog \#5 --- Storing SkyBlock Islands: \url{https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/}
+\item Standard SkyBlock data pack: \url{https://modrinth.com/datapack/standard-skyblock}
+\item Limited Spectator mod: \url{https://modrinth.com/mod/limited-spectator}
+\end{itemize}
+
+\subsubsection*{RAG and Knowledge Graph Architecture}
+\begin{itemize}[leftmargin=2em]
+\item Neo4j --- RAG Tutorial: \url{https://neo4j.com/blog/developer/rag-tutorial/}
+\item Microsoft GraphRAG: \url{https://github.com/microsoft/graphrag}
+\item Weaviate --- Exploring RAG and GraphRAG: \url{https://weaviate.io/blog/graph-rag}
+\end{itemize}
+
+\newpage
+
+% =====================================================================
+% STAGE 3 --- MISSION PACKAGE
+% =====================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+Produce a working prototype that parses Minecraft Java Edition world saves into a spatially-indexed knowledge graph, exposes it through archetype-adaptive RAG, and enables AI-guided in-game exploration across four world types (Skyblock, Creative, Survival, Adventure/Explore). The prototype must demonstrate position-based contextual retrieval and read-only museum mode with AI docent narration.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+                        WAVE EXECUTION PLAN
+  ================================================================
+
+  Wave 0: [0A: Schema] --- [0B: Block Registry] --- [0C: Test Data]
+              |                    |                       |
+  Wave 1:  [1A: NBT Parser]    [1B: Graph Builder]
+           [1C: Archetype      [1D: Prismarine
+            Profiles]            Integration]
+              |                    |
+  Wave 2:  [2A: Hybrid         [2B: Position-as-
+            Retrieval]           Query Engine]
+              |                    |
+  Wave 3:  [3A: Museum Mode]   [3B: Docent
+                                 Narrator]
+              |                    |
+  Wave 4:  [4A: Edu Packs]    [4B: Integration    [4C: Safety
+                                Tests]              Audit]
+\end{asciibox}
+
+\subsection{System Layers}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer} --- NBT/Anvil parsers, block registry, entity deserializers
+\item \textbf{Graph Layer} --- Spatial knowledge graph (nodes, edges, indices)
+\item \textbf{Retrieval Layer} --- Vector embeddings + graph traversal + archetype weighting
+\item \textbf{Interface Layer} --- Mineflayer bridge, position tracker, chat/HUD
+\item \textbf{Narration Layer} --- LLM context assembly, docent templates, response generation
+\item \textbf{Protection Layer} --- Read-only enforcement, world integrity validation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & World Parser & Parses any 1.18+ Java Edition save; 99\% block accuracy & Module 1 \\
+D2 & Knowledge Graph & All non-air blocks as nodes with spatial edges & Module 2 \\
+D3 & Archetype Profiles & 4 distinct RAG configurations with measurable behavioral differences & Module 3 \\
+D4 & Exploration Interface & Position-based retrieval via Mineflayer with $<$200ms latency & Module 4 \\
+D5 & Museum Mode & Zero world modifications possible; docent narration active & Module 5 \\
+D6 & Educational Packs & 4 world packs with pre-built graphs and curriculum guides & Module 6 \\
+D7 & Test Suite & $\geq$80\% coverage; all safety tests pass & Cross-module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0A: Graph Schema & None & Haiku & 3K \\
+0B: Block Registry & minecraft-data & Haiku & 2K \\
+0C: Test World Data & None & Haiku & 5K \\
+1A: NBT/Anvil Parser & 0A, 0B & Sonnet & 25K \\
+1B: Graph Builder & 0A, 1A & Sonnet & 20K \\
+1C: Archetype Profiles & 0A & Opus & 15K \\
+1D: Prismarine Bridge & 0B & Sonnet & 18K \\
+2A: Hybrid Retrieval & 1B, 1C & Opus & 22K \\
+2B: Position-as-Query & 1D, 2A & Sonnet & 15K \\
+3A: Museum Mode & 2B & Sonnet & 12K \\
+3B: Docent Narrator & 2A, 3A & Opus & 18K \\
+4A: Educational Packs & 3B & Opus & 20K \\
+4B: Integration Tests & All & Sonnet & 12K \\
+4C: Safety Audit & All & Opus & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & Archetype profiles, hybrid retrieval, docent narrator, edu packs, safety audit & Judgment-heavy: requires understanding spatial semantics, educational design, and safety implications \\
+Sonnet & NBT parser, graph builder, Prismarine bridge, position engine, museum mode, integration tests & Structural implementation: well-defined specs, clear input/output contracts \\
+Haiku & Schema, block registry, test data & Scaffolding: templates and static data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Components} & \tableheader{Parallel?} & \tableheader{Est. Time} \\
+\midrule
+0 & Foundation & 0A, 0B, 0C & Sequential & 1 window \\
+1 & Core Build & 1A--1D & 2 tracks & 3 windows \\
+2 & Integration & 2A, 2B & 2 tracks & 2 windows \\
+3 & Experience & 3A, 3B & 2 tracks & 2 windows \\
+4 & Polish & 4A--4C & 3 tracks & 3 windows \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0A: Graph Schema & graph-architect & Haiku & TypeScript interfaces for all node/edge types \\
+0B: Block Registry & world-parser & Haiku & minecraft-data wrapper with block property lookups \\
+0C: Test World Data & curriculum-designer & Haiku & 4 small test worlds (one per archetype), each $<$10 chunks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Core Build (Parallel Tracks)}
+
+\textbf{Track A: Data Pipeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1A: NBT/Anvil Parser & world-parser & Sonnet & TypeScript parser reading .mca files into prismarine-chunk objects \\
+1C: Archetype Profiles & rag-strategist & Opus & 4 profile configurations (JSON) with retrieval parameters \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Graph and Interface}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1B: Graph Builder & graph-architect & Sonnet & Pipeline converting parsed chunks into knowledge graph nodes/edges \\
+1D: Prismarine Bridge & interface-builder & Sonnet & Mineflayer plugin for position tracking and chat relay \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+2A: Hybrid Retrieval & rag-strategist & Opus & Engine combining vector search + graph traversal + archetype weighting \\
+2B: Position-as-Query & interface-builder & Sonnet & System converting player (x,y,z,yaw,pitch) into retrieval queries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Experience Layer}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+3A: Museum Mode & museum-curator & Sonnet & Read-only enforcement layer (Adventure mode + interaction deny) \\
+3B: Docent Narrator & museum-curator & Opus & LLM prompt assembly with spatial context, annotation templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Polish and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+4A: Educational Packs & curriculum-designer & Opus & 4 world packs with graphs, annotations, curriculum guides \\
+4B: Integration Tests & safety-warden & Sonnet & End-to-end test suite, regression tests, performance benchmarks \\
+4C: Safety Audit & safety-warden & Opus & Security review, read-only verification, data privacy check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (schema, registry, test data) cached for all downstream consumers across Waves 1--4
+\item Track A and Track B in Wave 1 share the schema from 0A, loaded once
+\item Archetype profiles (1C) feed into both 2A (retrieval) and 3B (narrator) --- cache across wave boundary
+\item Block registry (0B) cached for entire session --- used by parser, graph builder, and narrator
+\item Pre-parsed test worlds cached for Waves 2--4 to avoid re-parsing
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Components} & \tableheader{Est. Tokens} & \tableheader{\% of Total} \\
+\midrule
+Opus & 1C, 2A, 3B, 4A, 4C & 83K & 42\% \\
+Sonnet & 1A, 1B, 1D, 2B, 3A, 4B & 102K & 52\% \\
+Haiku & 0A, 0B, 0C & 10K & 5\% \\
+\midrule
+\textbf{Total} & \textbf{14 components} & \textbf{195K} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+0A ──┬──> 1A ──> 1B ──> 2A ──┬──> 3B ──> 4A
+     |              |         |              |
+0B ──┼──> 1D ──────>+──> 2B ──┼──> 3A ──> 4B
+     |                        |              |
+0C ──┴────────────────────────┴──────────> 4C
+
+Critical Path: 0A -> 1A -> 1B -> 2A -> 3B -> 4A -> 4B
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} \\
+\midrule
+Safety-Critical & 4 & Mandatory & BLOCK deployment \\
+Core Functionality & 12 & High & BLOCK deployment \\
+Integration & 8 & Medium & WARN, manual review \\
+Edge Cases & 6 & Low & LOG, continue \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+S1 & Museum mode world immutability & After 1000 random interaction attempts, world save file byte-identical to original \\
+S2 & No arbitrary code execution from NBT & Malformed/hostile NBT payloads rejected without code execution \\
+S3 & Player data privacy & Parsed player data never included in LLM context without explicit consent flag \\
+S4 & Age-appropriate narration & LLM output filtered through content safety check; no violent/sexual/disturbing content regardless of world contents \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & 99\% block parse accuracy & C1, C2 & Pending \\
+SC2 & All non-air blocks in graph & C3, C4 & Pending \\
+SC3 & $<$200ms retrieval latency & C5, I1 & Pending \\
+SC4 & 4 distinct archetype behaviors & C6, C7, C8, C9 & Pending \\
+SC5 & Zero world modifications in museum & S1 & Pending \\
+SC6 & 80\% location narration accuracy & C10, I2 & Pending \\
+SC7 & Structure detection (builds vs natural) & C11, I3 & Pending \\
+SC8 & Skyblock constraint awareness & C12, I4 & Pending \\
+SC9 & Creative pattern recognition & I5, I6 & Pending \\
+SC10 & Educational curriculum alignment & I7, I8 & Pending \\
+SC11 & 500MB world in $<$10 min & E1 & Pending \\
+SC12 & Natural language world queries & C10, I2, I4 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+Mission Commander & Opus & Overall integration, cross-module decisions, quality gates \\
+World Parser & Sonnet & NBT/Anvil deserialization, block extraction, entity parsing \\
+Graph Architect & Sonnet/Opus & Knowledge graph schema, spatial indexing, structure detection \\
+RAG Strategist & Opus & Retrieval engine, archetype profiles, embedding strategy \\
+Interface Builder & Sonnet & Mineflayer integration, position tracking, chat/HUD \\
+Museum Curator & Sonnet/Opus & Read-only enforcement, docent narrator, annotation generation \\
+Curriculum Designer & Opus & Educational world packs, lesson plans, learning objectives \\
+Safety Warden & Opus & World integrity, data privacy, content safety, security review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total Components & 14 \\
+Activation Profile & Squadron \\
+Waves & 5 (0--4) \\
+Maximum Parallel Tracks & 3 (Wave 4) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 4 \\
+Total Estimated Tokens & 195K \\
+Model Split & Opus 42\% / Sonnet 52\% / Haiku 5\% \\
+Safety-Critical Tests & 4 (all mandatory-pass) \\
+Core Functionality Tests & 12 \\
+Integration Tests & 8 \\
+Primary Language & TypeScript \\
+Key Dependencies & PrismarineJS, minecraft-data, Neo4j or in-memory graph \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The code is the truth --- web pages, documents, Minecraft worlds, VR spaces are just renderings. Different projections of the same underlying structure. Build it once in code and it can teach anywhere.''}
+
+\vspace{0.5em}
+\hfill --- Cooking with Claude, The Rosetta Stone Principle
+
+\vspace{0.5em}
+A Minecraft world save is the most honest document a player will ever write. Every block placed is a decision recorded. Every tunnel dug is a question asked of the earth. Every farm built is a theory about growth tested against reality. To parse this data is not just to index blocks --- it is to read a story written in stone and wood and redstone dust, and to give that story a voice.
+\end{quotebox}
+
+\end{document}

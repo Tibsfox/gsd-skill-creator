@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial Awareness — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1A237E;
+  --secondary: #F57F17;
+  --tertiary: #37474F;
+  --light-primary: #E8EAF6;
+  --bg: #FAFAFA;
+  --card: #EDEDF4;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Libre Baskerville', serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--primary), var(--tertiary)); color: white; padding: 3rem 2rem; text-align: center; }
+.header h1 { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+.header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.85; margin-bottom: 0.5rem; }
+.header .tagline { font-style: italic; opacity: 0.7; font-size: 0.95rem; }
+.container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.file-card { background: var(--card); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); margin-bottom: 0.4rem; }
+.file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 1rem; margin-bottom: 0.3rem; }
+.file-card .desc { font-size: 0.8rem; color: var(--subtle); }
+h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+ol, ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+.quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; font-style: italic; }
+code { font-family: 'DejaVu Sans Mono', monospace; background: var(--card); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+.relation { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 6px; padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+.relation strong { color: var(--secondary); }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Spatial Awareness</h1>
+  <div class="subtitle">The Chorus Protocol — Paula Chipset Release 2</div>
+  <div class="tagline">Passive Sensing, Threat Assessment, and Coordinated Signaling for Agent Systems</div>
+</div>
+<div class="container">
+  <div class="files">
+    <a href="spatial-awareness-mission.pdf" download class="file-card">
+      <div class="label">PDF</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">33-page Vision → Research → Mission pipeline. Ready for GSD orchestrator.</div>
+    </a>
+    <a href="spatial-awareness-mission.tex" download class="file-card">
+      <div class="label">LaTeX Source</div>
+      <div class="name">.tex File</div>
+      <div class="desc">Editable XeLaTeX source. Recompile with three passes.</div>
+    </a>
+  </div>
+
+  <div class="relation">
+    <strong>Release sequence:</strong> This is Paula Chipset Release 2. It depends on and extends
+    <a href="deep-audio-analyzer-mission.pdf">Release 1: Deep Audio Analyzer</a> (The Listening Skill).
+    Release 1 teaches Paula to hear. Release 2 teaches Paula to be aware.
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3>Stage 1 — Vision Document</h3>
+  <ul>
+    <li>Vision narrative: the frog as agent, the fox as threat, the chorus as coordination</li>
+    <li>6 concrete problems (blind agents, centralized threat detection, binary response, uniform channels, no spatial model, no passive sensing)</li>
+    <li>Core concept: Silence → Detect → Assess → Probe → Classify → Adapt</li>
+    <li>The Frog Protocol: 5-phase graduated threat response</li>
+    <li>Three communication tiers: covert (haptic), directed (whisper), broadcast (order up)</li>
+    <li>6 research modules (Passive Sensor, Threat Detection, Geometry Mapper, Frog Protocol, Comm Bus, Chorus Coordination)</li>
+    <li>12 testable success criteria</li>
+  </ul>
+
+  <h3>Stage 2 — Research Reference</h3>
+  <ul>
+    <li>Distributed coordination without consensus (frog chorus as distributed system)</li>
+    <li>Broadcast protocols: file-system signaling, acknowledgment-free coordination</li>
+    <li>Signal detection in noisy environments (cocktail party problem, matched filtering)</li>
+    <li>Passive sensing and ambient intelligence (echolocation without emission)</li>
+    <li>Computational ambient signals taxonomy (context fill, budget, errors, timing)</li>
+    <li>Safety considerations (human approval gates, covert channel constraints, broadcast storm prevention)</li>
+  </ul>
+
+  <h3>Stage 3 — Mission Package</h3>
+  <ul>
+    <li>11 components across 4 waves with 2 parallel tracks</li>
+    <li>Squadron activation profile (12 crew roles, CRAFT-DIST + CRAFT-BIO)</li>
+    <li>~179K token budget (33% Opus, 59% Sonnet, 3% Haiku, 5% buffer)</li>
+    <li>35 tests (6 safety-critical, 16 core, 7 integration, 6 edge case)</li>
+    <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+  </ul>
+
+  <h2>The Frog Protocol — Quick Reference</h2>
+  <ol>
+    <li><strong>SILENCE</strong> — Distributed pause, no acknowledgment needed</li>
+    <li><strong>ASSESS</strong> — Scout agent characterizes the anomaly passively</li>
+    <li><strong>PROBE</strong> — Minimal test action by scout; others remain paused</li>
+    <li><strong>CLASSIFY</strong> — Threat / Neutral / Opportunity determination</li>
+    <li><strong>RESUME</strong> — Graduated re-engagement, scout first</li>
+  </ol>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Ensure <a href="deep-audio-analyzer-mission.pdf">Release 1</a> is available (spatial reasoning dependency)</li>
+    <li>Hand both PDFs to <code>gsd-skill-creator</code> via Claude Code</li>
+    <li>The orchestrator reads all three stages and begins Wave 0</li>
+    <li>CAPCOM requests go/no-go at each wave boundary</li>
+    <li>The reference recording (<code>media/audio/20260209_194520.wav</code>) serves as the conceptual model</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol>
+    <li><code>xelatex -interaction=nonstopmode spatial-awareness-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode spatial-awareness-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode spatial-awareness-mission.tex</code></li>
+  </ol>
+
+  <div class="quote">
+    "A signal molecule is a letter written in the dark. And yet the cell sends."
+    <br><br>
+    The frog's silence is not absence — it is the most information-dense signal in the chorus.
+  </div>
+</div>
+</body>
+</html>

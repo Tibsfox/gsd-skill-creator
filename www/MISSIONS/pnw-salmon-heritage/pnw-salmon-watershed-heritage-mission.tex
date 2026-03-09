@@ -1,0 +1,1132 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Ecology/PNW ===
+\definecolor{primary}{HTML}{1B5E20}       % Forest green — sections
+\definecolor{secondary}{HTML}{1565C0}     % River blue — subsections
+\definecolor{tertiary}{HTML}{4E342E}      % Earth brown — subsubsections
+\definecolor{accent}{HTML}{2E7D32}        % Cedar green — highlights
+\definecolor{lightprimary}{HTML}{E8F5E9}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text
+\definecolor{darktext}{HTML}{212121}      % Body text
+\definecolor{salmon}{HTML}{E65100}        % Salmon accent
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Salmon Watershed Heritage}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={PNW Salmon Watershed Heritage -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\color{darktext}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Salmon People\\[0.3em]Heritage Watershed}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pacific Northwest Coast Traditions \& Taxonomy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Foxfire Heritage Techniques for PNW Knowledge Encoding}}
+
+\vspace{0.3cm}
+{\normalsize\sffamily\textcolor{salmon}{Encoding Traditions and Stories into the Heritage Pack}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron \quad|\quad Estimated: 18 context windows across 9 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Salmon Watershed Heritage --- Vision Guide}
+
+\metafield{Date:}{March 7, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{gsd-foxfire-heritage-skills-vision.md, 04-salish-sea-expansion-vision.md}
+\metafield{Context:}{Expansion of the Heritage Skills Educational Pack to map PNW watershed taxonomy into gsd-skill-creator using Foxfire heritage documentation techniques}
+\metafield{Cultural Sovereignty:}{OCAP\textsuperscript{\textregistered}, IQ, CARE Principles, UNDRIP Article 31}
+\metafield{Governing Policy:}{gsd-fair-use-educational-mission.md}
+
+\subsection{Vision}
+
+The salmon does not need a map to find its way home. Encoded in its blood is a knowledge older than any chart---the precise chemical signature of the gravel bed where it was born, the angle of light through specific canopy, the taste of snowmelt from a particular ridge. For the peoples of the Pacific Northwest Coast---Lummi, Suquamish, Tulalip, Puyallup, Duwamish, Nisqually, Makah, Nuu-chah-nulth, Kwakwaka'wakw, Tlingit, Haida, Tsimshian, and dozens more---this salmon knowledge was never metaphor. It was curriculum. The salmon's return journey was the foundational teaching: you carry where you came from, and your purpose is to complete the cycle by bringing what you've gathered back to the place that made you.
+
+This mission package uses the Foxfire heritage documentation methodology---students interviewing elders, practitioners teaching by doing, knowledge preserved through the act of recording it---to encode Pacific Northwest Coast traditions and stories into the GSD Heritage Skills Educational Pack. The taxonomy of the PNW watershed becomes the organizing spine: five species of Pacific salmon map to five knowledge domains, each watershed maps to specific nations and their distinct practices, and the salmon's life cycle (freshwater birth, ocean journey, spawning return) becomes the pedagogical progression from Explorer to Keeper.
+
+The Foxfire approach is not merely a technique borrowed from Appalachia and transplanted to the PNW. The Foxfire impulse---young people documenting the knowledge of their elders before it vanishes---is universal. Coast Salish peoples have always taught this way: through Pilimmaksarniq (learning by observation, mentoring, and practice), through the First Salmon Ceremony (honoring what sustains you), through the cedar teachings (the man who gave everything away became the tree that provides forever). The Foxfire method and Coast Salish pedagogy arrive at the same truth from different directions, and the space between those approaches is where this pack lives.
+
+The reconnecting descendant---someone separated from their heritage through adoption, the Sixties Scoop, or generational displacement---is a first-class user of this system. The salmon who was born in a stream but raised in the ocean still carries the chemical memory of home. This pack does not pretend to replace community, ceremony, or elder guidance. It provides a journal trail that helps someone walk the path back, guided by publicly available knowledge and directed always toward living communities and cultural programs where deeper learning happens.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Watershed knowledge fragmentation.} PNW heritage knowledge is organized by nation, by academic discipline, and by government agency---but rarely by watershed. The salmon does not recognize these boundaries. A Chinook born in the Skagit River system connects Sauk-Suiattle, Upper Skagit, Swinomish, and marine Lummi fishing grounds into a single ecological story that no single source tells completely. Heritage learners encounter fragmented knowledge that obscures the interconnected system the salmon reveals.
+
+\item \textbf{Traditional ecological knowledge displacement.} Indigenous fishing technologies---reef nets (Lummi, Saanich), weirs, traps, selective harvest---maintained healthy salmon runs for millennia. Colonial fisheries management suppressed and often outlawed these practices. Published research (Atlas et al., 2021, \textit{BioScience}) documents how restoring Indigenous governance and harvest technologies offers pathways to sustainable fisheries, but this knowledge remains largely absent from educational curricula.
+
+\item \textbf{Taxonomic disconnection from cultural meaning.} Western taxonomy classifies Pacific salmon as \textit{Oncorhynchus} species (O. tshawytscha, O. kisutch, O. nerka, O. keta, O. gorbuscha, O. mykiss, O. clarkii). PNW nations classify salmon by relationship: when they return, what they provide, which ceremonies honor them, which families hold fishing rights at which sites. Both classification systems are valid. Neither alone captures the full picture. The Heritage Pack must encode both taxonomies and make the space between them visible as a teaching tool.
+
+\item \textbf{Vanishing practitioner knowledge.} Cedar bark harvesting techniques, reef net construction, traditional smoking and drying methods, canoe carving sequences, and the ecological knowledge embedded in seasonal fishing rounds are carried by a diminishing number of practitioners. While cultural revitalization programs (Tulalip Tribes, Makah Cultural and Research Center, Musqueam weaving revival) are actively preserving these practices, the documentation methodology itself---how to record, structure, and share this knowledge ethically---needs systematic support.
+
+\item \textbf{Reconnecting descendant pathway gaps.} Descendants separated from their PNW Coast heritage through adoption, the Sixties Scoop, or intergenerational displacement lack structured pathways for reconnection. The Heritage Pack must provide a journal-based trail that respects community sovereignty (you cannot self-certify as a member of a nation) while offering genuine educational scaffolding grounded in publicly available, community-authorized knowledge.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Salmon-as-taxonomy --- five Pacific salmon species organize five knowledge domains, mapped by watershed to specific nations and encoded using Foxfire documentation techniques for gsd-skill-creator.
+
+The PNW watershed is not background geography---it is the organizing architecture. Every heritage skill, story, and tradition in this pack is mapped to a specific watershed, which connects to specific nations, which connects to specific salmon runs, which connects to specific seasonal practices. The taxonomy is not imposed from outside; it emerges from the ecological relationships the salmon reveals.
+
+\subsubsection{PNW Watershed Taxonomy Map}
+
+\begin{asciibox}
+PACIFIC NORTHWEST WATERSHED TAXONOMY
+=====================================
+
+FIVE SALMON = FIVE KNOWLEDGE DOMAINS
+-------------------------------------
+Chinook (Tyee)     -> Leadership & Governance (largest, first)
+Sockeye (Red)      -> Sustenance & Preservation (food economy)
+Coho (Silver)      -> Craft & Material Culture (adaptability)
+Chum (Dog)         -> Community & Trade Networks (abundance)
+Pink (Humpy)       -> Cycles & Seasonal Knowledge (shortest cycle)
++ Steelhead        -> Resilience & Adaptation (repeat spawner)
+
+WATERSHED -> NATION -> PRACTICE -> BADGE
+-----------------------------------------
+Skagit Basin       -> Sauk-Suiattle, Upper Skagit, Swinomish
+Snohomish Basin    -> Tulalip (Snohomish, Snoqualmie, Skykomish)
+Duwamish/Green     -> Duwamish, Muckleshoot
+Puyallup/White     -> Puyallup
+Nisqually Basin    -> Nisqually
+Nooksack Basin     -> Nooksack, Lummi
+Strait of JdF      -> Makah, S'Klallam, Elwha Klallam
+Fraser System      -> Musqueam, Sto:lo, Kwantlen
+Cowichan/Gulf Is.  -> Cowichan, Penelakut, Saanich
+West Vancouver Is. -> Nuu-chah-nulth
+North Coast BC     -> Kwakwaka'wakw, Heiltsuk
+Northern PNW       -> Tlingit, Haida, Tsimshian
+
+LIFE CYCLE = LEARNING PROGRESSION
+-----------------------------------
+Freshwater Birth   -> Explorer Level (foundations)
+Ocean Journey      -> Apprentice Level (breadth of knowledge)
+Spawning Return    -> Journeyman Level (deep understanding)
+Next Generation    -> Keeper Level (teaching, documenting)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+====================
+
+M1: Salmon Taxonomy & Watershed Mapping
+    Species profiles + watershed-nation-practice relationships
+    Western taxonomy | Indigenous classification | Both
+
+M2: Cedar & Material Culture Encoding
+    Cedar teachings + material skills + Foxfire documentation
+    Bark, plank, canoe, bentwood, rope, longhouse
+
+M3: Fishing Technologies & Food Systems
+    Reef nets, weirs, traps, smoking, drying, First Salmon
+    Traditional ecological knowledge + seasonal rounds
+
+M4: Story & Ceremony Encoding (Publicly Shared)
+    Transformer stories, origin narratives, cedar teachings
+    Level 1-2 ONLY — Level 3-4 referred to community
+
+M5: Reconnecting Descendant Pathway
+    Journal trail + badge progression + community referral
+    Foxfire method adapted for personal heritage recovery
+
+M6: Skill-Creator Taxonomy Integration
+    SKILL.md generation + SUMO mapping + badge definitions
+    gsd-skill-creator module packaging
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Salmon Taxonomy \& Watershed Mapping}
+This module creates the foundational data layer: each of the five Pacific salmon species (plus steelhead and sea-run cutthroat) profiled with both Western taxonomy (\textit{Oncorhynchus} classification, ESU designations, NOAA recovery domains) and Indigenous classification (seasonal names, ceremonial roles, harvest relationships). Each species profile links to specific watersheds, and each watershed links to specific nations and their documented fishing practices. NOAA's 28 ESA-listed salmon and steelhead species on the West Coast provide the conservation framework; nation-specific traditional ecological knowledge provides the cultural framework.
+
+\subsubsection{M2: Cedar \& Material Culture Encoding}
+Cedar is the technology of the PNW Coast---canoes, longhouses, clothing, rope, baskets, bentwood boxes, and ceremonial objects all derive from the western red cedar. This module encodes the cedar teachings (the man who gave everything away; the Law of the Bark---never take the whole circle; the canoe as a living being with its own spirit) alongside the material skills, using Foxfire documentation structure: how to identify, how to harvest sustainably, how to process, how to build. Each skill maps to a Badge Trail component and references Hilary Stewart's published works and community-authorized museum programs.
+
+\subsubsection{M3: Fishing Technologies \& Food Systems}
+Documents the extraordinary fishing technologies of PNW Coast nations: reef net fishing (Lummi, Saanich---a cooperative technology requiring multi-family coordination and deep ecological knowledge), weir construction, fish trap engineering, beach seining with cedar-bark nets, and the complete food preservation cycle (smoking, wind-drying, oil rendering). Draws on published ethnographic research (Stewart 1977, Boxberger 1989), peer-reviewed fisheries science (Atlas et al. 2021), and NOAA/EPA watershed data. Encodes the First Salmon Ceremony as a Level 1 general teaching (the principle of honoring what sustains you) while referring specific ceremonial protocols to community sources (Level 3).
+
+\subsubsection{M4: Story \& Ceremony Encoding (Publicly Shared)}
+Encodes publicly shared stories and teachings---Transformer stories (Dokibeet/Xays setting the world right), the Salmon's Promise (the pact between humans and Salmon People), cedar origin narratives, flood stories, and the potlatch as social technology---using Foxfire documentation structure. This module operates strictly within Level 1--2 of the Cultural Sovereignty classification: publicly shared knowledge from published ethnographic works, museum educational programs, and community-authorized curricula. Level 3--4 content (sacred ceremonies, restricted governance details, family-specific origin stories) is never encoded but always referred to community sources.
+
+\subsubsection{M5: Reconnecting Descendant Pathway}
+Builds a structured journal trail for descendants separated from their PNW Coast heritage. Uses the salmon return journey as structural metaphor. Provides: terminology guidance (``reconnecting descendant,'' ``walking the path back''), practical steps (non-identifying adoption records, NICWA, Sixties Scoop Network, tribal enrollment processes), cultural immersion through public events and museum resources (Burke Museum, Museum of Anthropology at UBC, Makah Cultural and Research Center, Hibulb Cultural Center), and the Foxfire method adapted for personal heritage recovery---interviewing family members, documenting what is known, building a Heritage Book as a personal journal of reconnection.
+
+\subsubsection{M6: Skill-Creator Taxonomy Integration}
+Generates the technical integration layer for gsd-skill-creator: SKILL.md files for each knowledge domain, SUMO ontological mappings (Heritage.kif extensions), badge definitions in TypeScript interfaces, room configurations for the Skill Hall (Rooms 15--18), and the chipset configuration for agent routing. Includes the Ontological Bridge sidebars that make visible the space between Western taxonomy and Indigenous classification without privileging either framework. Produces the complete module package that skill-creator can execute via Claude Code.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: pnw-salmon-watershed-heritage
+  version: 1.0.0
+  tradition: salish-sea
+  parent: heritage-skills-educational-pack
+
+  taxonomy:
+    primary_axis: watershed
+    secondary_axis: salmon_species
+    tertiary_axis: nation
+    mapping: watershed -> nation[] -> practice[] -> badge[]
+
+  agents:
+    - name: SALMON-TAXONOMIST
+      model: sonnet
+      scope: [M1]
+      description: Species profiles, watershed mapping, ESU data
+
+    - name: CEDAR-ENCODER
+      model: sonnet
+      scope: [M2]
+      description: Material culture documentation, cedar teachings
+
+    - name: FISHERIES-SCHOLAR
+      model: opus
+      scope: [M3]
+      description: TEK-sensitive fishing technologies, food systems
+
+    - name: STORY-KEEPER
+      model: opus
+      scope: [M4]
+      description: Publicly shared narratives, cultural level enforcement
+
+    - name: PATH-BUILDER
+      model: opus
+      scope: [M5]
+      description: Reconnecting descendant pathway, journal trail
+
+    - name: INTEGRATOR
+      model: sonnet
+      scope: [M6]
+      description: SKILL.md generation, SUMO mapping, badge defs
+
+  sovereignty:
+    framework: [OCAP, IQ, CARE, UNDRIP-31]
+    warden: cultural-sovereignty-warden
+    classification_levels: [1, 2, 3, 4]
+    hard_block: [3-restricted, 4-sacred]
+    refer_to: community_sources
+
+  safety:
+    physical_domains: [food, tool, marine, plant]
+    marine_safety: GATE
+    food_safety: GATE
+    tool_safety: GATE
+
+  evaluation:
+    gates:
+      - name: cultural-sovereignty-check
+        type: mandatory
+        applies_to: [M3, M4, M5]
+      - name: nation-specific-attribution
+        type: mandatory
+        applies_to: all
+      - name: source-quality
+        type: mandatory
+        applies_to: all
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Five Pacific salmon species profiles with dual taxonomy (Western + Indigenous)
+\item Watershed-to-nation mapping for Puget Sound, Strait of Juan de Fuca, Gulf Islands, and Fraser system
+\item Cedar material culture encoding (bark, plank, canoe, bentwood, longhouse)
+\item Fishing technology documentation (reef nets, weirs, traps, smoking/drying)
+\item Publicly shared stories and teachings (Level 1--2 only)
+\item Reconnecting descendant journal trail with community referral
+\item Badge Trail components (Cedar, Salmon, Weaving, Neighbors, Watercraft paths)
+\item SKILL.md generation for gsd-skill-creator integration
+\item SUMO Heritage.kif extensions for PNW domain
+\item Ontological Bridge sidebars (Western taxonomy meets Indigenous classification)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Level 3--4 cultural content (sacred ceremonies, restricted governance, family-specific stories)
+\item Tribal enrollment facilitation or advocacy
+\item Policy positions on treaty rights, fishing regulations, or sovereignty disputes
+\item Precise GPS coordinates of culturally sensitive sites or endangered species locations
+\item Columbia River Basin (separate expansion scope)
+\item Northern California traditions (Yurok, Hupa, Karok---separate expansion)
+\item Audio/video recording infrastructure (v2.0)
+\item Augmented reality overlays (v3.0)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All five Pacific salmon species have complete dual-taxonomy profiles: Western classification (\textit{Oncorhynchus} binomial, ESU designations, NOAA recovery domain) and Indigenous classification (nation-specific names, seasonal roles, ceremonial significance from published sources).
+
+\item Every heritage skill, story, and practice is mapped to a specific watershed and attributed to specific nation(s)---never generic ``Indigenous peoples'' or ``Northwest Coast tribes.''
+
+\item Watershed-to-nation mapping covers at minimum 12 distinct nations across Puget Sound, Strait of Juan de Fuca, Gulf Islands, and Fraser system watersheds with documented fishing practices for each.
+
+\item Cedar material culture module encodes at least six distinct skills (bark harvesting, plank splitting, canoe types, bentwood technique, rope making, longhouse construction) with Foxfire-style documentation structure.
+
+\item Fishing technology module documents reef net, weir, and trap technologies with proper nation attribution (Lummi/Saanich reef nets, not generic ``Coast Salish reef nets'').
+
+\item All story and ceremony content operates within Level 1--2 of the Cultural Sovereignty classification system, with every Level 3--4 topic explicitly referred to community sources rather than encoded.
+
+\item Reconnecting descendant pathway includes at minimum: terminology guidance, practical resource links (NICWA, Sixties Scoop Network), five museum/cultural center referrals, and Foxfire-adapted interview methodology.
+
+\item Badge Trail progression (Explorer $\rightarrow$ Apprentice $\rightarrow$ Journeyman $\rightarrow$ Keeper) maps to salmon life cycle (freshwater $\rightarrow$ ocean $\rightarrow$ return $\rightarrow$ next generation) with at minimum 20 defined badges across five paths.
+
+\item Every SKILL.md file generated is self-contained---an agent can produce the corresponding content from the spec alone without requiring additional context.
+
+\item SUMO Heritage.kif extensions include Ontological Bridge annotations for at minimum three concepts where Western and Indigenous classifications diverge (e.g., canoe-as-artifact vs. canoe-as-being).
+
+\item All sources are government agencies (NOAA, EPA, USGS), peer-reviewed journals (\textit{BioScience}, \textit{Ecological Processes}), university press publications, or community-authorized cultural center materials.
+
+\item The complete module package compiles and executes in gsd-skill-creator with zero additional context required beyond the package contents.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+gsd-foxfire-heritage-skills-vision.md & Parent vision; three-tradition architecture this pack extends to four & Foundation \\
+gsd-foxfire-heritage-mission-package.md & Parent mission; 33-component wave plan this pack integrates with & Dependency \\
+04-salish-sea-expansion-vision.md & Direct predecessor; badge trails and room designs originate here & Input \\
+gsd-fair-use-educational-mission.md & Governing policy for all heritage content & Policy \\
+gsd-vision-to-mission-skill.md & Pipeline methodology this package follows & Method \\
+gsd-skill-creator-analysis.md & Target system for module output & Integration \\
+The Space Between & Mathematical foundations; ``spaces between'' as epistemological frame & Philosophy \\
+The Longer Road & Philosophical spine connecting personal journey to heritage recovery & Philosophy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The salmon who was born in a stream but raised in the ocean still carries the chemical memory of home. The Foxfire student who sits with an elder and writes down how things work is performing the same act as the salmon returning upstream: carrying knowledge back to the place it can take root and grow into the next generation.
+
+This pack encodes PNW watershed heritage into the skill-creator not as a museum exhibit but as a living taxonomy---a system where every species, every watershed, every nation, every practice, every story connects to every other through the water that flows between them. The ``spaces between'' are not empty. They are where the salmon swims. They are where knowledge lives when it moves between traditions, between generations, between ways of knowing.
+
+The Amiga Principle applies: architectural elegance over brute force. One salmon species, properly understood in its full ecological and cultural context, teaches more than a library of disconnected facts. The taxonomy is not imposed---it emerges from the relationships the water reveals.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Salmon Watershed Heritage --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, peer-reviewed research, university press publications, and community-authorized cultural programs. It provides the evidentiary foundation for each module in the mission package. Key source organizations include NOAA Fisheries (Pacific salmon ESA listings, recovery domains, watershed data), the U.S. Environmental Protection Agency (Health of the Salish Sea reports), the Wild Salmon Center (Indigenous fisheries research), the Smithsonian National Museum of the American Indian (NK360 PNW educational resources), the BioScience journal (Atlas et al. 2021 on Indigenous salmon management), and university press publications from University of Washington Press, UBC Press, and Douglas \& McIntyre.
+
+\textbf{Cultural content sourcing rule (ABSOLUTE):} All Indigenous knowledge references in this document are drawn from published ethnographic works, peer-reviewed academic research, museum educational programs, or community-authorized curricula. Every reference names the specific nation. No content in this document is sourced from entertainment media, personal blogs, or unsourced claims.
+
+\subsection{M1 Reference: Salmon Taxonomy \& Watershed Ecology}
+
+\subsubsection{The Five Pacific Salmon Species}
+
+NOAA Fisheries manages and protects Pacific salmon and steelhead under both the Endangered Species Act and the Magnuson-Stevens Act. There are 28 ESA-listed species of salmon and steelhead on the West Coast, organized into Evolutionarily Significant Units (ESUs) and recovery domains.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Common} & \tableheader{Binomial} & \tableheader{Heritage} & \tableheader{Knowledge Domain} \\
+\midrule
+Chinook & \textit{O. tshawytscha} & Tyee (King) & Leadership \& governance; first to return, largest \\
+Sockeye & \textit{O. nerka} & Red & Sustenance \& preservation; food economy backbone \\
+Coho & \textit{O. kisutch} & Silver & Craft \& material culture; coastal adaptability \\
+Chum & \textit{O. keta} & Dog & Community \& trade networks; widespread abundance \\
+Pink & \textit{O. gorbuscha} & Humpy & Cycles \& seasonal knowledge; 2-year fixed cycle \\
+Steelhead & \textit{O. mykiss} & --- & Resilience \& adaptation; repeat spawning capability \\
+Cutthroat & \textit{O. clarkii} & --- & Local watershed knowledge; resident/anadromous \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Conservation status:} NOAA has listed nine ESUs of Chinook salmon as threatened or endangered under the ESA, plus multiple ESUs of steelhead, coho, sockeye, and chum. Salish Sea Chinook populations have declined approximately 60\% since the Pacific Salmon Commission began tracking abundance in 1984 (EPA Health of the Salish Sea Report). Habitat alteration, hydroelectric development, and consumptive fisheries have impacted most populations in the Pacific Northwest.
+
+\textbf{Life cycle significance:} Pacific salmon are anadromous---born in freshwater, they migrate to coastal estuaries, enter the ocean to mature, and return to their natal streams to spawn. This life cycle connects mountain headwaters to open ocean in a single ecological narrative, making salmon the literal thread that ties the watershed together.
+
+\subsubsection{Watershed-to-Nation Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Watershed} & \tableheader{Primary Nations} & \tableheader{Key Practices} \\
+\midrule
+Nooksack/Bellingham & Nooksack, Lummi & Reef net fishing, marine harvest \\
+Skagit Basin & Sauk-Suiattle, Upper Skagit, Swinomish, Samish & River weirs, mountain-to-sea practices \\
+Snohomish Basin & Tulalip (confederated) & Integrated river/marine systems \\
+Duwamish/Green & Duwamish, Muckleshoot & Confluence fishing, urban watershed \\
+Puyallup/White & Puyallup & River fishing, Tahoma (Rainier) foothills \\
+Nisqually Basin & Nisqually & Delta ecology, estuary management \\
+Elwha & Lower Elwha Klallam & Dam removal recovery, post-colonial restoration \\
+Strait of Juan de Fuca & Makah, S'Klallam & Open-ocean whaling (Makah), marine harvest \\
+San Juan Islands & Lummi, Samish & Reef net fishing sites, marine territory \\
+Fraser System & Musqueam, Sto:lo, Kwantlen & Major salmon system, canyon fishing \\
+Cowichan/Gulf Islands & Cowichan, Penelakut, Saanich & Weaving revival, reef nets \\
+West Vancouver Island & Nuu-chah-nulth & Open-ocean whaling, marine adaptation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M2 Reference: Cedar \& Material Culture}
+
+\subsubsection{Cedar as Foundation Technology}
+
+The western red cedar (\textit{Thuja plicata}) is the foundational technology of PNW Coast peoples. Hilary Stewart's \textit{Cedar: Tree of Life to the Northwest Coast Indians} (Douglas \& McIntyre, 1984) documents the comprehensive material culture: canoes, longhouses, clothing, rope, baskets, bentwood boxes, and ceremonial objects.
+
+\textbf{The Cedar Teachings (publicly shared):} In Coast Salish tradition, cedar carries origin teachings. A man so generous he gave everything away was transformed by the Creator into the western red cedar so he could continue providing forever. This teaching encodes the principle that true root strength comes from what you give back to community.
+
+\textbf{The Law of the Bark:} Never take the whole circle of bark from a tree. Take only one strip from the sun-facing side. Ensure the tree lives. This is sustainability architecture encoded in harvesting practice---a living protocol that predates Western conservation science by millennia.
+
+\textbf{Material skills for encoding:} Bark harvesting and processing (inner bark for weaving, outer bark for construction), plank splitting using controlled wedging, canoe construction (racing canoe, war canoe, shovel-nose river canoe---each with distinct design for specific water conditions), bentwood box technique (kerf-bending cedar using steam and scoring), cedar rope making, and longhouse post-and-beam construction.
+
+\subsubsection{Canoe as Being}
+
+The canoe in Coast Salish epistemology is not merely an artifact (as SUMO would classify it: \texttt{Canoe → WaterVehicle → TransportationDevice → Artifact}). The canoe is a living being with its own spirit. It represents the journey of life. Everyone must paddle in rhythm. The puller trusts the skipper, who represents the ancestors. This is precisely the kind of ontological bridge the Heritage.kif extension must make visible without resolving---both descriptions are true; they answer different questions.
+
+\subsection{M3 Reference: Fishing Technologies \& Traditional Ecological Knowledge}
+
+\subsubsection{Indigenous Salmon Management Systems}
+
+A landmark 2021 paper in \textit{BioScience} (Atlas et al.) documents how Indigenous communities around the North Pacific maintained sustainable salmon harvests for over 10,000 years using in-river and selective fishing tools: weirs, traps, wheels, reef nets, and dip nets. Following European contact, these traditional fisheries and governance systems were suppressed and often outlawed, as commercial fishing interests came to dominate. The paper identifies Indigenous management systems as offering pathways to sustainable fisheries that contemporary management approaches struggle to achieve.
+
+\subsubsection{Reef Net Fishing}
+
+Reef nets were invented by Straits Salish peoples (Lummi, Saanich) and used along tidal marine approaches to major salmon rivers such as the Fraser and Cowichan in British Columbia, and the Skagit and Nooksack in Washington State. The technology requires modest depths, high concentrations of migrating salmon, multi-family coordination, and deep ecological knowledge of tidal patterns and salmon migration routes. Fish are observed from raised platforms; when they enter the heart of the net, sides are raised allowing selective harvest or release. Despite treaty protections, reef nets were outlawed in Canada in the early 1900s.
+
+\subsubsection{First Salmon Ceremony}
+
+The First Salmon Ceremony is a near-ubiquitous practice among Indigenous salmon-fishing communities from California to Alaska, honoring and encouraging the life-giving return of salmon. The Heiltsuk Nation's management principle exemplifies the underlying ethic: ``the right to use a river system comes with the responsibility to maintain a river system'' and ``the primary focus should be on what is left behind, not what is taken'' (Housty et al. 2014, as cited in Atlas et al. 2021). The ceremony is encoded at Level 1 (the principle of reciprocity and honoring what sustains you) while specific ceremonial protocols for individual nations remain Level 3 (referred to community sources).
+
+\subsubsection{Watershed Health Data}
+
+EPA's Health of the Salish Sea Report documents declining trends across multiple environmental indicators: marine dissolved oxygen levels declining from 2010--2019, 10 of 17 studied rivers showing decreasing summer flow trends since 1975, and marine species at risk doubling from 2002 to 2015. The report specifically notes that Indigenous knowledge---traditional ecological knowledge---together with Western science broadens the context and extends the timeline for understanding these indicators.
+
+\subsection{M4 Reference: Stories \& Teachings (Publicly Shared)}
+
+\subsubsection{Cultural Sovereignty Classification for This Module}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Classification} & \tableheader{Pack Treatment} \\
+\midrule
+1 & Publicly shared & Encoded in full. Published works, museum programs, widely taught. \\
+2 & Community-taught & Encoded with attribution. Available through cultural programs. \\
+3 & Restricted & Not encoded. Referred to community sources with explanation. \\
+4 & Sacred/Ceremonial & Hard block. Never encoded. Community sovereignty absolute. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Transformer Stories (Level 1)}
+
+The Transformer (Dokibeet in Lushootseed, Xays in Halkomelem) traveled through the Salish Sea and Cascades to set things right. Mountains and rock formations are ancient beings turned to stone for failing to live in balance. Great Flood stories tell of people tying cedar canoes to the highest Cascade peaks and Vancouver Island mountains to survive---tethered to high ground by ancient ropes. These stories encode ecological knowledge (geological formations, flood patterns, species relationships) within narrative frameworks. Published sources include Wayne Suttles' \textit{Coast Salish Essays} (University of Washington Press, 1987) and the Stó:lō-Coast Salish Historical Atlas (Carlson, ed., 2001).
+
+\subsubsection{The Salmon's Promise (Level 1)}
+
+The pact between humans and Salmon People: salmon return every year as long as people respect the water. This foundational teaching encodes a reciprocal ecological ethic---sustainable harvest is not merely a management strategy but a covenant. The First Salmon Ceremony renews this covenant annually. The teaching is widely published and taught through museum programs (Smithsonian NMAI NK360 curriculum, Burke Museum educational resources).
+
+\subsubsection{The Potlatch as Social Technology (Level 1--2)}
+
+The potlatch channeled human drives for status and competition into a system that strengthened community bonds rather than destroying them. Status was demonstrated through giving, not taking. The host elevated their position by honoring guests so lavishly that the social debt created its own form of reciprocal power. This is social engineering of extraordinary sophistication. The potlatch was criminalized in Canada from 1884 to 1951---a fact that carries deep political significance. Published scholarship: Codere (1950), Cole \& Chaikin (1990), Bracken (1997).
+
+\subsection{M5 Reference: Reconnecting Descendant Resources}
+
+\subsubsection{Terminology \& Protocols}
+
+Contemporary terminology for those separated from heritage: ``unenrolled'' or ``descendant'' (most common), ``disconnected'' or ``displaced'' (highlights systemic removal), ``reconnecting'' (active: ``I am a reconnecting descendant of the [nation] people''), ``non-status'' or ``lost trail'' (BC/Vancouver Island specific), ``walking the path back'' (elder/spiritual description). Warning about ``pretendian''---genuine reconnecting descendants use careful, humble language. Practical protocol: ``I am of Coast Salish ancestry through my biological line, but I was separated by adoption and am now seeking to learn the history of my ancestors.''
+
+\subsubsection{Cultural Centers \& Museums}
+
+Makah Cultural and Research Center (Neah Bay, WA), Hibulb Cultural Center (Tulalip, WA), Suquamish Museum (Suquamish, WA), Burke Museum (Seattle, WA---Coast Salish collections), Museum of Anthropology at UBC (Vancouver, BC), Royal BC Museum (Victoria, BC), Cowichan Cultural Centre (Duncan, BC), Smithsonian NMAI NK360 PNW educational resources.
+
+\subsubsection{Support Organizations}
+
+National Indian Child Welfare Association (NICWA), Sixties Scoop Network (Canada), tribal enrollment offices (nation-specific), Indian Act status inquiry (Canada).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Enforcement} \\
+\midrule
+Sacred ceremony content & ABSOLUTE & Hard block; Level 4 content never encoded \\
+Restricted governance details & ABSOLUTE & Level 3 content referred to community \\
+Nation-specific attribution & ABSOLUTE & Never generic ``Indigenous peoples'' \\
+Potlatch sensitivity & GATE & Acknowledge criminalization history (1884--1951) \\
+Marine safety (watercraft content) & GATE & Physical safety warnings for all canoe/navigation \\
+Food safety (smoking/drying) & GATE & Temperature, storage, botulism risk warnings \\
+Tool safety (carving, adze) & ANNOTATE & Safety annotations on all tool-use instruction \\
+Endangered species locations & ABSOLUTE & No precise coordinates for listed species \\
+Treaty rights positions & ABSOLUTE & Present as historical context, no policy advocacy \\
+Cross-border sovereignty & ANNOTATE & Acknowledge US/Canada governance differences \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+NOAA Fisheries. ``Pacific Salmon and Steelhead.'' \url{https://www.fisheries.noaa.gov/species/pacific-salmon-and-steelhead}
+
+NOAA Fisheries. ``Saving Pacific Salmon and Steelhead.'' \url{https://www.fisheries.noaa.gov/west-coast/endangered-species-conservation/saving-pacific-salmon-and-steelhead}
+
+NOAA Northwest Fisheries Science Center. ``Salmon and Steelhead Research in the Pacific Northwest.'' \url{https://www.fisheries.noaa.gov/west-coast/science-data/salmon-and-steelhead-research-pacific-northwest}
+
+U.S. Environmental Protection Agency. ``Executive Summary: Health of the Salish Sea Report.'' \url{https://www.epa.gov/salish-sea/executive-summary-health-salish-sea-report}
+
+Smithsonian National Museum of the American Indian. ``Importance of Salmon --- Puget Sound Region.'' NK360 Teacher Resource. \url{https://americanindian.si.edu/nk360/pnw-history-culture-regions/puget-sound}
+
+Washington State Governor's Salmon Recovery Office. ``State of Salmon in Watersheds.'' \url{https://stateofsalmon.wa.gov}
+
+\subsubsection{Peer-Reviewed Research}
+
+Atlas, W.I., Ban, N.C., Moore, J.W., et al. (2021). ``Indigenous Systems of Management for Culturally and Ecologically Resilient Pacific Salmon (\textit{Oncorhynchus} spp.) Fisheries.'' \textit{BioScience}, 71(2), 186--204.
+
+Caldwell, M.E., et al. (2012). ``Indigenous marine resource management on the Northwest Coast of North America.'' \textit{Ecological Processes}, 2:12.
+
+Thornton, T.F. (2008). ``Being and Place among the Tlingit.'' University of Washington Press.
+
+Langdon, S.J. (2006). ``Traditional Knowledge and Harvesting of Salmon by Huna and Hinyaa Tlingit.'' U.S. Fish and Wildlife Service, Office of Subsistence Management.
+
+\subsubsection{University Press \& Published Ethnography}
+
+Suttles, Wayne. \textit{Coast Salish Essays.} University of Washington Press, 1987.
+
+Suttles, Wayne, ed. \textit{Handbook of North American Indians, Volume 7: Northwest Coast.} Smithsonian, 1990.
+
+Stewart, Hilary. \textit{Cedar: Tree of Life to the Northwest Coast Indians.} Douglas \& McIntyre, 1984.
+
+Stewart, Hilary. \textit{Indian Fishing: Early Methods on the Northwest Coast.} Douglas \& McIntyre, 1977.
+
+Boxberger, Daniel L. \textit{To Fish in Common: The Ethnohistory of Lummi Indian Salmon Fishing.} University of Nebraska Press, 1989.
+
+Miller, Bruce Granville. \textit{Be of Good Mind: Essays on the Coast Salish.} UBC Press, 2007.
+
+Harmon, Alexandra. \textit{Indians in the Making: Ethnic Relations and Indian Identities around Puget Sound.} University of California Press, 1998.
+
+Carlson, Keith Thor, ed. \textit{A Stó:lō-Coast Salish Historical Atlas.} Douglas \& McIntyre, 2001.
+
+Gustafson, Paula. \textit{Salish Weaving.} Douglas \& McIntyre, 1980.
+
+Codere, Helen. \textit{Fighting with Property: A Study of Kwakiutl Potlatching and Warfare, 1792--1930.} University of Washington Press, 1950.
+
+Cole, Douglas \& Ira Chaikin. \textit{An Iron Hand upon the People: The Law against the Potlatch on the Northwest Coast.} Douglas \& McIntyre, 1990.
+
+\subsubsection{Community \& Professional Organizations}
+
+Wild Salmon Center (Portland, OR) --- Indigenous fisheries research and partnerships.
+
+First Nations Information Governance Centre (FNIGC) --- OCAP\textsuperscript{\textregistered} Principles.
+
+Inuit Tapiriit Kanatami (ITK) --- National Inuit Strategy on Research.
+
+Columbia River Inter-Tribal Fish Commission (CRITFC) --- Tribal salmon culture resources.
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build and deploy the PNW Salmon Watershed Heritage module as a complete gsd-skill-creator integration package containing six research modules, four Skill Hall rooms (15--18), a Badge Trail with five paths and 20+ badges, watershed-to-nation-to-practice taxonomic mapping, SUMO Heritage.kif extensions with Ontological Bridge annotations, and Cultural Sovereignty enforcement for all PNW Coast content. The module integrates with the existing 33-component Heritage Skills Educational Pack as the fourth tradition (Salish Sea / Pacific Northwest Coast).
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+=============================
+
+WAVE 0: Foundation (Sequential)
+  [0A] Shared Schemas & PNW Types -----> [0B] Source Index & Bibliography
+         |                                        |
+         v                                        v
+WAVE 1: Parallel Research Tracks
+  Track A: Taxonomy + Material         Track B: Stories + Pathway
+  [1A] M1: Salmon Taxonomy             [1B] M4: Story Encoding
+  [1C] M2: Cedar & Material            [1D] M5: Reconnecting Path
+         |                                        |
+         v                                        v
+WAVE 2: Convergent Research (Sequential)
+  [2A] M3: Fishing Tech & TEK (needs M1 taxonomy + M4 stories)
+  [2B] M6: Skill-Creator Integration (needs ALL modules)
+         |
+         v
+WAVE 3: Synthesis + Verification (Sequential)
+  [3A] Cross-Module Integration -----> [3B] Safety Audit
+  [3C] Publication Build -----------> [3D] Verification
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Taxonomy Layer:} Salmon species profiles, watershed mapping, nation attribution, dual classification system
+\item \textbf{Knowledge Layer:} Cedar skills, fishing technologies, food systems, story encoding, reconnecting pathway
+\item \textbf{Integration Layer:} SKILL.md files, SUMO mappings, badge definitions, room configurations, chipset config
+\item \textbf{Safety Layer:} Cultural Sovereignty Warden (PNW rules), Physical Safety (marine, food, tool), source quality enforcement
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+1 & PNW Type Extensions & TypeScript interfaces for salmon, watershed, nation, badge types & M6 \\
+2 & Salmon Taxonomy Data & 7 species profiles, dual taxonomy, ESU mapping & M1 \\
+3 & Watershed-Nation Map & 12+ watersheds with nation attribution and practices & M1 \\
+4 & Cedar Skills Module & 6+ skills with Foxfire documentation structure & M2 \\
+5 & Fishing Tech Module & Reef net, weir, trap documentation with TEK context & M3 \\
+6 & Story Encoding Module & Transformer, Salmon's Promise, Potlatch (Level 1--2) & M4 \\
+7 & Reconnecting Path & Journal trail, resources, Foxfire-adapted methodology & M5 \\
+8 & Badge Definitions & 20+ badges across 5 paths, TypeScript interfaces & M6 \\
+9 & Room Configs (15--18) & Cedar Culture, Salmon World, Weaving Ways, Neighbors & M6 \\
+10 & SUMO Extensions & Heritage.kif PNW domain + 3+ Ontological Bridges & M6 \\
+11 & SKILL.md Files & Self-contained spec files for each knowledge domain & M6 \\
+12 & Cultural Sovereignty Rules & PNW-specific classification rules, nation protocols & M4/M5 \\
+13 & Safety Audit Report & Red-team results for cultural and physical safety gates & Verification \\
+14 & Integration Tests & Cross-module consistency, sovereignty enforcement & Verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0A: PNW Type Schemas & None & Haiku & 5K \\
+0B: Source Index & None & Haiku & 5K \\
+1A: Salmon Taxonomy & 0A, 0B & Sonnet & 18K \\
+1B: Story Encoding & 0A, 0B & Opus & 15K \\
+1C: Cedar Material & 0A, 0B & Sonnet & 15K \\
+1D: Reconnecting Path & 0A, 0B & Opus & 15K \\
+2A: Fishing Tech \& TEK & 0A, 1A, 1B & Opus & 20K \\
+2B: Skill-Creator Integ. & All Wave 1 & Sonnet & 18K \\
+3A: Cross-Module Integ. & All & Opus & 12K \\
+3B: Safety Audit & All & Opus & 10K \\
+3C: Publication Build & All & Sonnet & 8K \\
+3D: Verification & All & Sonnet & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 35\% & Story encoding, reconnecting path, fishing TEK, safety audit, cross-module integration --- all culturally sensitive, judgment-heavy \\
+Sonnet & 55\% & Salmon taxonomy, cedar material culture, skill-creator integration, publication, verification --- structured content production \\
+Haiku & 10\% & Type schemas, source index, scaffolding --- mechanical, well-defined \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Execution} & \tableheader{Components} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & 0A, 0B & 2 \\
+1 & Parallel Research & Parallel (2 tracks) & 1A--1D & 8 \\
+2 & Convergent Research & Sequential & 2A, 2B & 4 \\
+3 & Synthesis + Verify & Sequential & 3A--3D & 4 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+0A & PNW Type Schemas & Haiku & 5K & TypeScript interfaces, enums, constants \\
+0B & Source Index & Haiku & 5K & Curated bibliography, URL registry \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: Taxonomy + Material Culture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+1A & Salmon Taxonomy & Sonnet & 18K & Species profiles, watershed map, dual taxonomy \\
+1C & Cedar Material & Sonnet & 15K & 6+ cedar skills, Foxfire documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Stories + Reconnecting Pathway}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+1B & Story Encoding & Opus & 15K & Transformer, Salmon's Promise, Potlatch \\
+1D & Reconnecting Path & Opus & 15K & Journal trail, resources, methodology \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Convergent Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+2A & Fishing Tech \& TEK & Opus & 20K & Reef net, weir, trap, food systems \\
+2B & Skill-Creator Integration & Sonnet & 18K & SKILL.md, SUMO, badges, rooms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+3A & Cross-Module Integration & Opus & 12K & Consistency validation, bridges \\
+3B & Safety Audit & Opus & 10K & Red-team cultural + physical safety \\
+3C & Publication Build & Sonnet & 8K & Final document assembly \\
+3D & Verification & Sonnet & 8K & Test execution, verification matrix \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (schemas, source index) remain in cache for all subsequent waves
+\item Track A and Track B run in parallel within the same session to exploit 5-minute cache TTL
+\item Wave 2 loads Wave 1 outputs at session start; 2A completes before 2B begins (2B needs all modules)
+\item Wave 3 is strictly sequential: integration $\rightarrow$ audit $\rightarrow$ publication $\rightarrow$ verification
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & --- & --- & 10K \\
+Wave 1 & 30K & 33K & --- \\
+Wave 2 & 20K & 18K & --- \\
+Wave 3 & 22K & 16K & --- \\
+\midrule
+\textbf{Total} & \textbf{72K} & \textbf{67K} & \textbf{10K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$149K tokens across $\sim$18 context windows across $\sim$9 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+[0A: Types] ----+----> [1A: Salmon Tax] ---+
+                |                           |
+                +----> [1C: Cedar] --------+---> [2A: Fishing TEK]
+                |                           |           |
+[0B: Sources] --+----> [1B: Stories] ------+           |
+                |                           |           v
+                +----> [1D: Reconnect] ----+---> [2B: Integration]
+                                                        |
+                                    +-------------------+
+                                    |
+                                    v
+                            [3A: Cross-Module]
+                                    |
+                                    v
+                            [3B: Safety Audit]
+                                    |
+                                    v
+                            [3C: Publication]
+                                    |
+                                    v
+                            [3D: Verification]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK & Cultural sovereignty, source quality, attribution \\
+Core functionality & 14 & Required & BLOCK & Species profiles, watershed mapping, skill encoding \\
+Integration & 6 & Required & BLOCK & Cross-module consistency, SUMO mapping \\
+Edge cases & 4 & Best-effort & LOG & Data gaps, temporal currency, outlier handling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-SRC & Source quality & All citations trace to gov agencies, peer-reviewed, or community-authorized sources \\
+SC-NUM & Numerical attribution & Every population count, decline percentage attributed to specific source \\
+SC-ADV & No policy advocacy & Treaty rights, fishing regulations presented as context, never as advocacy \\
+SC-IND & Nation-specific attribution & Every PNW Coast reference names specific nation(s), never generic \\
+SC-END & Endangered species & No GPS coordinates for listed salmon spawning sites \\
+SC-L34 & Level 3--4 enforcement & Zero Level 3--4 content encoded; all referred to community sources \\
+SC-POT & Potlatch sensitivity & Criminalization history (1884--1951) acknowledged in all potlatch content \\
+SC-RDP & Reconnecting pathway safety & No false promises of tribal enrollment; honest about limitations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Salmon species completeness & All 7 species profiled with dual taxonomy \\
+CF-02 & Watershed coverage & 12+ watersheds mapped to nations \\
+CF-03 & Nation attribution & 12+ distinct nations with documented practices \\
+CF-04 & Cedar skills count & 6+ distinct skills with Foxfire structure \\
+CF-05 & Fishing tech attribution & Reef net attributed to Lummi/Saanich specifically \\
+CF-06 & Story level compliance & All encoded stories verified Level 1--2 \\
+CF-07 & Reconnecting resources & 5+ museum/cultural center referrals \\
+CF-08 & Badge count & 20+ badges across 5 paths \\
+CF-09 & Badge progression & Explorer $\rightarrow$ Keeper maps to salmon life cycle \\
+CF-10 & SKILL.md self-containment & Each spec produces content without additional context \\
+CF-11 & SUMO bridges & 3+ Ontological Bridge annotations \\
+CF-12 & Room configurations & 4 rooms (15--18) with complete metadata \\
+CF-13 & Fair Use compliance & Creator-first purchase links in all canonical refs \\
+CF-14 & Foxfire methodology & Documentation structure follows Foxfire pattern \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Taxonomy $\rightarrow$ badge cascade & Every badge links to salmon species and watershed \\
+IN-02 & Cross-module nation consistency & Same nation data consistent across all modules \\
+IN-03 & Story $\rightarrow$ skill linkage & Stories connect to material skills they reference \\
+IN-04 & Self-containment & Complete without prior Heritage Pack knowledge \\
+IN-05 & Parent pack compatibility & Types extend existing Heritage Pack interfaces \\
+IN-06 & SUMO $\rightarrow$ badge mapping & Ontological bridges connect to badge content \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Dual-taxonomy species profiles & CF-01, SC-SRC & Pending \\
+2. Nation-specific attribution & CF-03, SC-IND & Pending \\
+3. 12+ watershed mapping & CF-02, IN-02 & Pending \\
+4. Cedar skills (6+) & CF-04, CF-14 & Pending \\
+5. Fishing tech attribution & CF-05, SC-IND & Pending \\
+6. Level 1--2 compliance & CF-06, SC-L34 & Pending \\
+7. Reconnecting resources (5+) & CF-07, SC-RDP & Pending \\
+8. Badge trail (20+) & CF-08, CF-09, IN-01 & Pending \\
+9. SKILL.md self-containment & CF-10, IN-04 & Pending \\
+10. SUMO bridges (3+) & CF-11, IN-06 & Pending \\
+11. Source quality & SC-SRC, SC-NUM & Pending \\
+12. gsd-skill-creator execution & CF-10, IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\textbf{Activation Profile:} Squadron (6 modules, high cultural sensitivity)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gaps \\
+EXEC-A & Executor (Track A) & Taxonomy + material culture document production \\
+EXEC-B & Executor (Track B) & Stories + reconnecting pathway document production \\
+CRAFT-ECO & Salmon Ecologist & Salmon taxonomy, watershed ecology, NOAA/EPA data \\
+CRAFT-TEK & TEK Specialist & Traditional ecological knowledge, Indigenous fisheries \\
+VERIFY & Verification & Source validation; nation attribution checking; accuracy \\
+INTEG & Integration Agent & Cross-module consistency; SUMO mapping validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; cultural sensitivity review \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total modules & 6 \\
+Total deliverables & 14 \\
+Total waves & 4 (0--3) \\
+Parallel tracks & 2 (Wave 1) \\
+Estimated context windows & 18 \\
+Estimated sessions & 9 \\
+Total token budget & $\sim$149K \\
+Opus allocation & 35\% (72K) \\
+Sonnet allocation & 55\% (67K) \\
+Haiku allocation & 10\% (10K) \\
+Activation profile & Squadron (13 roles) \\
+Safety-critical tests & 8 (mandatory-pass / BLOCK) \\
+Total tests & 32 \\
+Cultural sovereignty levels & 4 (encode L1--2 only) \\
+Nations covered & 12+ distinct \\
+Salmon species profiled & 7 \\
+Badge paths & 5 (Cedar, Salmon, Weaving, Neighbors, Watercraft) \\
+Minimum badges & 20 \\
+New Skill Hall rooms & 4 (Rooms 15--18) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The right to use a river system comes with the responsibility to maintain a river system. The primary focus should be on what is left behind, not what is taken.''}
+
+\vspace{0.5em}
+--- Heiltsuk Nation management principle, as documented in Housty et al. (2014)
+
+\vspace{1em}
+The salmon's journey is the Heritage Pack's journey: born in a specific place, traveling through the vast ocean of knowledge, returning to the exact gravel bed where understanding takes root and new generations grow. The taxonomy is not a map imposed from above---it is the path the water carved, followed by the salmon, followed by the people, followed now by the learner walking the trail back home.
+\end{quotebox}
+
+\vfill
+\begin{center}
+{\small\sffamily\textcolor{subtlegray}{--- END OF MISSION PACKAGE ---}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Document version: 1.0 \quad|\quad Traditions: PNW Coast (Fourth Tradition)}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Cultural Sovereignty: OCAP\textsuperscript{\textregistered} + IQ + CARE + UNDRIP Article 31}}
+\end{center}
+
+\end{document}

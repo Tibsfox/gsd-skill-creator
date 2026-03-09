@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft World Data as RAG — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: #212121; background: #fafafa; }
+  .header { background: linear-gradient(135deg, #263238 0%, #1565C0 50%, #37474F 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .header p { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.85; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .file-card { background: #eceff1; border: 1px solid #bdbdbd; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; text-decoration: none; display: block; color: #212121; transition: transform 0.15s, box-shadow 0.15s; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .file-card h3 { font-family: 'DM Sans', sans-serif; color: #263238; margin-bottom: 0.3rem; }
+  .file-card .meta { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #757575; }
+  h2 { font-family: 'DM Sans', sans-serif; color: #263238; margin: 2rem 0 1rem; font-size: 1.4rem; border-bottom: 2px solid #1565C0; padding-bottom: 0.3rem; }
+  .contents { list-style: none; padding: 0; }
+  .contents li { padding: 0.4rem 0; border-bottom: 1px solid #e0e0e0; font-size: 0.95rem; }
+  .contents li:last-child { border: none; }
+  .stage-label { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.8rem; display: inline-block; padding: 2px 8px; border-radius: 3px; margin-right: 0.5rem; color: white; }
+  .s1 { background: #263238; }
+  .s2 { background: #1565C0; }
+  .s3 { background: #37474F; }
+  .instructions { background: #e3f2fd; border-left: 4px solid #1565C0; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+  .instructions ol { padding-left: 1.2rem; }
+  .instructions li { margin: 0.4rem 0; font-size: 0.95rem; }
+  .quote { background: #e3f2fd; border: 1px solid #1565C0; border-radius: 6px; padding: 1.2rem; margin: 2rem 0; font-style: italic; text-align: center; }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: #eceff1; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Minecraft World Data as RAG</h1>
+  <p>In-Game Exploration Across World Archetypes — GSD Mission Package</p>
+</div>
+<div class="container">
+  <a href="minecraft-rag-mission.pdf" download class="file-card">
+    <h3>📄 minecraft-rag-mission.pdf</h3>
+    <p class="meta">25 pages • Complete Vision → Research → Mission pipeline • Ready for GSD Orchestrator</p>
+  </a>
+  <a href="minecraft-rag-mission.tex" download class="file-card">
+    <h3>📝 minecraft-rag-mission.tex</h3>
+    <p class="meta">LaTeX source • Recompile with XeLaTeX • Fully editable</p>
+  </a>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage-label s1">STAGE 1</span> Vision Document — Problem statement, core concept, 6 research modules, spatial architecture diagrams, 12 success criteria</li>
+    <li><span class="stage-label s2">STAGE 2</span> Research Reference — NBT/Anvil format deep-dive, spatial knowledge graph schema, 4 archetype profiles (Skyblock, Creative, Survival, Adventure), PrismarineJS ecosystem, Voyager/STEVE prior art, complete bibliography</li>
+    <li><span class="stage-label s3">STAGE 3</span> Mission Package — 14 components across 5 waves, Squadron activation profile, 195K token budget, dependency graph, 30 tests (4 safety-critical), crew manifest</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Load this mission package into a fresh Claude Code context</li>
+      <li>Activate gsd-skill-creator with Squadron profile</li>
+      <li>Execute Wave 0 (Foundation) first — schema, block registry, test worlds</li>
+      <li>Execute Waves 1–4 following the dependency graph and parallel tracks</li>
+      <li>All safety-critical tests (S1–S4) must pass before deployment</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Edit <code>minecraft-rag-mission.tex</code> as needed</li>
+      <li>Run three XeLaTeX passes: <code>xelatex -interaction=nonstopmode minecraft-rag-mission.tex</code></li>
+      <li>Requires: texlive-xetex, texlive-latex-extra, DejaVu fonts</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "A Minecraft world save is the most honest document a player will ever write. Every block placed is a decision recorded. Every tunnel dug is a question asked of the earth."
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD Math Co-Processor & Vector Engine — Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #00838F;
+    --light-bg: #ECEFF1;
+    --card-bg: #CFD8DC;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); line-height: 1.7; background: #FAFAFA; }
+  header { background: var(--primary); color: white; padding: 3rem 2rem; text-align: center; }
+  header h1 { font-family: 'DM Sans', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  header p { font-family: 'DM Sans', sans-serif; color: #B0BEC5; font-size: 1rem; }
+  header .pipeline { color: var(--accent); font-family: 'DM Sans', sans-serif; margin-top: 1rem; font-weight: 500; letter-spacing: 0.5px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .card h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .card .meta { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin: 2rem 0 1rem; font-size: 1.4rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.3rem; }
+  .stages { background: var(--light-bg); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .stages h4 { font-family: 'DM Sans', sans-serif; color: var(--secondary); margin-bottom: 0.5rem; }
+  .stages ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+  .stages li { margin-bottom: 0.3rem; font-size: 0.95rem; }
+  ol.instructions { margin-left: 1.5rem; }
+  ol.instructions li { margin-bottom: 0.8rem; font-size: 0.95rem; }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  .quote { border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 2rem 0; background: var(--light-bg); font-style: italic; border-radius: 0 6px 6px 0; }
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <p style="letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase;">GSD Research Mission Package</p>
+  <h1>The GSD Math Co-Processor & Vector Engine</h1>
+  <p>GPU-Accelerated Reasoning for Local AI Inference</p>
+  <p class="pipeline">Vision → Research → Mission</p>
+</header>
+
+<div class="container">
+  <div class="cards">
+    <a class="card" href="gsd-math-coprocessor-mission.pdf" download>
+      <h3>📄 Mission Package (PDF)</h3>
+      <p>Complete three-stage pipeline: Vision Guide, Research Reference, and Mission Package with wave execution plan.</p>
+      <p class="meta">26 pages · XeLaTeX · March 2026</p>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <h3>📝 LaTeX Source (.tex)</h3>
+      <p>Full source for recompilation and modification. Requires XeLaTeX with DejaVu fonts.</p>
+      <p class="meta">.tex · Editable · Recompilable</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="stages">
+    <h4>Stage 1 — Vision Document</h4>
+    <ul>
+      <li>The 68881-to-CUDA through-line and Amiga Principle</li>
+      <li>Five math chips: ALGEBRUS, FOURIER, VECTORA, STATOS, SYMBEX</li>
+      <li>The 68881 Protocol (F-line dispatch and concurrent execution)</li>
+      <li>VRAM budget coexistence with Silicon Layer inference</li>
+      <li>12 testable success criteria</li>
+    </ul>
+    <h4>Stage 2 — Research Reference</h4>
+    <ul>
+      <li>GPU architecture foundations (CUDA cores, Tensor Cores, SMs)</li>
+      <li>cuBLAS, cuSOLVER, cuSPARSE, cuFFT, cuFFTDx, cuRAND documentation</li>
+      <li>Custom CUDA kernel design patterns for VECTORA and STATOS</li>
+      <li>SymPhas 2.0 expression tree compilation for SYMBEX</li>
+      <li>LLM-generated CUDA kernels (CUDA-LLM, KernelBench research)</li>
+      <li>Inference coexistence via CUDA stream isolation</li>
+    </ul>
+    <h4>Stage 3 — Mission Package</h4>
+    <ul>
+      <li>Squadron activation (12 roles, 2 parallel tracks)</li>
+      <li>4-wave execution plan with dependency graph</li>
+      <li>Component breakdown with model assignments (Opus 36% / Sonnet 57% / Haiku 7%)</li>
+      <li>50 tests across 5 categories (safety-critical through edge cases)</li>
+      <li>Full crew manifest with CRAFT agent assignments</li>
+    </ul>
+  </div>
+
+  <h2>Usage</h2>
+  <ol class="instructions">
+    <li>Download the <strong>Mission Package PDF</strong> and review all three stages.</li>
+    <li>Load the PDF into a fresh Claude Code context with: <code>gsd new-project --from mission-package</code></li>
+    <li>The orchestrator reads the wave execution plan and deploys agents per the crew manifest.</li>
+    <li>Wave 0 builds the MCP scaffold and VRAM manager; Wave 1 builds chips in parallel; Wave 2 integrates; Wave 3 verifies.</li>
+    <li>Hardware requirement: NVIDIA CUDA-capable GPU (reference: RTX 4060 Ti 8GB).</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol class="instructions">
+    <li>Download the <strong>LaTeX Source</strong> file.</li>
+    <li>Ensure XeLaTeX and DejaVu fonts are installed: <code>sudo apt install texlive-xetex fonts-dejavu</code></li>
+    <li>Compile with three passes:
+      <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)
+    </li>
+  </ol>
+
+  <div class="quote">
+    "The CPU set up the work — wrote the copper lists, configured the blitter — and then the custom chips executed autonomously. The CPU was free to think about the next thing while the hardware did the grunt work."
+    <br><br>
+    The 68881 had eight registers and cost as much as the computer it plugged into. The RTX 4060 Ti has four thousand cores and costs three hundred dollars. The principle is the same. The scale is different. The opportunity is now.
+  </div>
+</div>
+
+<footer>
+  GSD Ecosystem · The Amiga Principle · March 2026
+</footer>
+</body>
+</html>
