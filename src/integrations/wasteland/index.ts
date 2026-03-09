@@ -425,6 +425,23 @@ export type {
   TrustRelationshipDataProvider,
 } from './trust-relationship-provider.js';
 
+// Trust Registration (Stage 4 — arrival + Welcome Home badge)
+export {
+  WELCOME_BADGES_DDL,
+  generateRigHandle,
+  validateDisplayName,
+  issueWelcomeHomeBadge,
+  register,
+  generateRegistrationSQL,
+  announceArrival,
+} from './trust-registration.js';
+export type {
+  WelcomeHomeBadge,
+  RegistrationInput,
+  RegistrationResult,
+  RegistrationDataProvider,
+} from './trust-registration.js';
+
 // UTC Timestamp Enforcement
 export {
   isUTC,
