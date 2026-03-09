@@ -17,6 +17,7 @@ import ast
 import ctypes
 import logging
 import time
+from collections import OrderedDict
 from dataclasses import dataclass
 
 import numpy as np
@@ -40,8 +41,45 @@ class CompiledKernel:
     precision: str
 
 
-# Kernel cache: (expression, param_name, precision) -> CompiledKernel
-_kernel_cache: dict[tuple[str, str, str], CompiledKernel] = {}
+# Kernel cache: LRU eviction via OrderedDict (most-recent at end).
+# Each cached kernel holds a loaded CUDA module consuming VRAM.
+_KERNEL_CACHE_MAX: int = 64  # Default, overridable via chipset config
+_kernel_cache: OrderedDict[tuple[str, str, str], CompiledKernel] = OrderedDict()
+_cache_hits: int = 0
+_cache_misses: int = 0
+_cache_evictions: int = 0
+
+
+def set_cache_max(max_entries: int) -> None:
+    """Set the maximum number of cached kernels (from config)."""
+    global _KERNEL_CACHE_MAX
+    _KERNEL_CACHE_MAX = max(1, max_entries)
+
+
+def _cache_get(key: tuple[str, str, str]) -> CompiledKernel | None:
+    """Get from cache, moving to most-recent position."""
+    global _cache_hits, _cache_misses
+    if key in _kernel_cache:
+        _kernel_cache.move_to_end(key)
+        _cache_hits += 1
+        return _kernel_cache[key]
+    _cache_misses += 1
+    return None
+
+
+def _cache_put(key: tuple[str, str, str], kernel: CompiledKernel) -> None:
+    """Insert into cache, evicting LRU if at capacity."""
+    global _cache_evictions
+    if key in _kernel_cache:
+        _kernel_cache.move_to_end(key)
+        _kernel_cache[key] = kernel
+        return
+    while len(_kernel_cache) >= _KERNEL_CACHE_MAX:
+        evict_key, evict_kernel = _kernel_cache.popitem(last=False)
+        gpu.cu_module_unload(evict_kernel.module)
+        _cache_evictions += 1
+        log.debug(f"LRU evict: {evict_key[0]} ({evict_key[2]})")
+    _kernel_cache[key] = kernel
 
 
 KERNEL_TEMPLATE = '''extern "C" __global__
@@ -173,7 +211,7 @@ def compile_kernel(expression: str, param_name: str, precision: str = "fp64") ->
     Returns None if JIT is unavailable or compilation fails.
     """
     cache_key = (expression, param_name, precision)
-    cached = _kernel_cache.get(cache_key)
+    cached = _cache_get(cache_key)
     if cached is not None:
         return cached
 
@@ -211,7 +249,7 @@ def compile_kernel(expression: str, param_name: str, precision: str = "fp64") ->
             module=module, function=function,
             expression=expression, precision=precision,
         )
-        _kernel_cache[cache_key] = kernel
+        _cache_put(cache_key, kernel)
         log.info(f"JIT compiled: {expression} ({precision})")
         return kernel
 
@@ -325,17 +363,26 @@ def verify_gpu(
 # =============================================================================
 
 def clear_cache():
-    """Release all cached kernels and free GPU modules."""
+    """Release all cached kernels and free GPU modules. Resets counters."""
+    global _cache_hits, _cache_misses, _cache_evictions
     for kernel in _kernel_cache.values():
         gpu.cu_module_unload(kernel.module)
     _kernel_cache.clear()
+    _cache_hits = 0
+    _cache_misses = 0
+    _cache_evictions = 0
     log.info("JIT kernel cache cleared")
 
 
 def cache_stats() -> dict:
-    """Return cache statistics."""
+    """Return cache statistics including LRU metrics."""
     return {
         "cached_kernels": len(_kernel_cache),
+        "max_kernels": _KERNEL_CACHE_MAX,
+        "hits": _cache_hits,
+        "misses": _cache_misses,
+        "evictions": _cache_evictions,
+        "hit_rate": round(_cache_hits / max(_cache_hits + _cache_misses, 1), 3),
         "entries": [
             {"expression": k[0], "param": k[1], "precision": k[2]}
             for k in _kernel_cache
