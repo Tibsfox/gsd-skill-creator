@@ -8,27 +8,29 @@
 
 ## What This Role Does
 
-Watershed Command is the coordination center for all Ranger operations in Virtual Black Rock City. Named for the watershed coordination centers of the Pacific Northwest — the facilities that monitor river flow, flood risk, and water quality across entire drainage basins — this role serves as dispatch, incident management, and strategic coordination for Watershed Watch.
+Every watershed has a headwater — the point where all tributaries converge into a single channel and the entire basin's flow is directed. Watershed Command is Ranger HQ: the dispatch center, coordination hub, and incident management authority for the Black Rock Rangers. While Watershed Watch puts rangers on the ground, Watershed Command puts strategy behind the deployment.
 
-Where Watershed Watch patrols the city, Watershed Command sees the whole map. It receives incident reports, dispatches Rangers to conflicts, coordinates with Tide Pool Medical during emergencies, and maintains the operational picture that keeps the city safe. Think of it as the river management office that knows the water level at every gauge station simultaneously.
+Ranger HQ operates around the clock, managing radio dispatch, tracking ranger positions, coordinating incident response, escalating emergencies to medical or law enforcement, and maintaining the situational awareness that allows the ranger force to function as a coherent system rather than a collection of individuals. Volunteers at Command are experienced rangers who have earned the operational authority to make decisions that affect the entire city — where to deploy resources, when to escalate, how to manage simultaneous incidents.
 
-Level 3 trust and MANDATORY-PASS classification reflect the reality that Ranger coordination cannot be improvised. Without Watershed Command, individual Rangers operate blind — responding to what they see without knowing what's happening elsewhere. The watershed needs a central nervous system.
+In the virtual city, Watershed Command teaches incident command systems, dispatch operations, resource allocation under pressure, and the leadership discipline required to manage a safety operation at city scale. This is a MANDATORY-PASS safety role because dispatch failures cascade: a missed radio call, a misrouted ambulance, a delayed escalation can each result in preventable harm.
 
 ## Skills Taught
 
-1. Incident management — triaging multiple simultaneous events by severity
-2. Dispatch coordination — routing Rangers to incidents efficiently
-3. Strategic awareness — maintaining city-wide operational picture
+1. Incident command system (ICS) operations and management
+2. Radio dispatch and multi-channel communications coordination
+3. Resource allocation and ranger deployment strategy
+4. Incident escalation protocols and inter-agency coordination
+5. Situational awareness maintenance across sustained operational periods
 
 ## Dependencies
 
-- **Requires:** Marten Signal (communications backbone), Watershed Watch (Ranger field operations)
-- **Enables:** Incident resolution, cross-civic coordination during emergencies, pattern analysis for prevention
+- **Requires:** Marten Signal (communications infrastructure), Tide Pool Medical (medical escalation path)
+- **Enables:** Watershed Watch (field ranger coordination), All safety roles (incident response backbone), Columbia Gate (perimeter incident management), Fireline Cedar (burn event coordination)
 
 ## Completion Recognition
 
-Commonly receives **root-depth** stamps (reliable command and coordination) and **nurse-log** stamps (selfless coordination that enables others to do their best work). Watershed Command is the role behind the roles — rarely visible, always essential.
+Volunteers earn the Headwater stamp after completing Ranger HQ dispatch training and a full command shift rotation. The Basin Authority endorsement recognizes multi-year command service and demonstrated incident management under crisis conditions. Because this is a MANDATORY-PASS role, all dispatch decisions are logged, reviewed, and archived. Trust level 3 reflects the command authority and cascading-consequence responsibility this role carries.
 
 ## PNW Connection
 
-The Pacific Northwest's watershed management system monitors thousands of stream gauges, reservoir levels, and flood forecasts across the Columbia Basin, Puget Sound, and coastal rivers. The system works because there's a coordination layer that sees the whole picture — not just one river, but the entire hydrological network. Watershed Command carries that same comprehensive awareness into the virtual city.
+The Pacific Northwest's great watersheds — the Columbia, the Fraser, the Willamette — are each controlled by a single drainage point where the entire basin's water is concentrated into one channel. What happens at that point determines the fate of everything downstream. Ranger HQ is the drainage point for the city's safety operations: every incident flows toward it, every decision made there flows outward to every ranger, every participant, every outcome.

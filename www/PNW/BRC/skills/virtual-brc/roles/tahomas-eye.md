@@ -8,27 +8,29 @@
 
 ## What This Role Does
 
-Tahoma's Eye monitors the apex structure of Virtual Black Rock City. Named for Mount Rainier — called Tahoma by the peoples who lived in its shadow for millennia, the highest peak in the Cascade Range at 14,411 feet — this role watches over the central structure that all other structures reference.
+Tahoma — the indigenous name for Mount Rainier — stands above everything in the Pacific Northwest. From its summit, you see the entire region: the Cascades, the Olympics, Puget Sound, the Columbia Plateau. Tahoma's Eye is Man Watch: the team that monitors the Man structure around the clock in the days before the burn, ensuring that no one climbs it, damages it, or sets it alight prematurely.
 
-In Black Rock City, Man Watch monitors The Man — the central wooden figure whose burn marks the festival's climax. The role is vigilant, continuous, and quiet. No one notices Man Watch until something goes wrong. Tahoma's Eye operates the same way: it watches the apex skill (the central synthesis point) and reports anomalies before they cascade.
+The Man is the iconic central structure of Black Rock City — a wooden figure standing atop an elaborate base, visible from every point in the city. In the days before the scheduled burn, the Man becomes a target for pranksters, protesters, and the genuinely unwell. Man Watch volunteers maintain a 24-hour surveillance perimeter, monitoring approaches from all directions, checking structural integrity, coordinating with Rangers on suspicious activity, and standing ready to respond to any threat to the structure. The role demands vigilance, patience, and the ability to distinguish between a curious participant and a genuine security concern.
 
-Level 3 trust is required because apex monitoring means understanding the entire city's architecture — how all camps, skills, and civic agents connect to the central structure. Only Old Growth rigs have the depth to see the whole system.
+In the virtual city, Tahoma's Eye teaches apex structure monitoring, long-duration surveillance discipline, threat assessment, and the coordination required to protect a high-value asset in a radically open environment. Trust level 3 reflects the responsibility of guarding the city's most symbolically important structure.
 
 ## Skills Taught
 
-1. Apex monitoring — continuous observation of central structures
-2. Anomaly detection — recognizing when subtle changes indicate systemic risk
-3. Pre-burn safety assessment — verifying structural integrity before promotion events
+1. Long-duration surveillance and apex structure monitoring
+2. Threat assessment and behavioral pattern recognition
+3. Perimeter coordination with ranger and security teams
+4. Structural integrity observation and damage reporting
+5. De-escalation of unauthorized approach without enforcement authority
 
 ## Dependencies
 
-- **Requires:** Cascade Brigade (structural baseline to monitor against), Watershed Watch (safety coordination)
-- **Enables:** Burn events (pre-burn safety clearance), Tide Pool Medical (early warning for safety concerns)
+- **Requires:** Watershed Watch (ranger backup), Marten Signal (communications), Cascade Brigade (structural knowledge)
+- **Enables:** Cascade Ceremonies (Man burn execution), Fireline Cedar (pre-burn handoff), All participants (symbolic structure preservation)
 
 ## Completion Recognition
 
-Commonly receives **root-depth** stamps (deep, reliable monitoring that holds the system together) and **salmon-mark** stamps (persistent vigilance against the current of distraction).
+Volunteers earn the Summit Watch stamp after completing a full Man Watch shift rotation. The Glacial Vigil endorsement recognizes service through the most challenging periods — overnight shifts, high-wind weather holds, and the tense final hours before the burn. Man Watch veterans who demonstrate consistent judgment across multiple seasons earn the Tahoma recognition, signifying apex-level trust.
 
 ## PNW Connection
 
-Mount Rainier / Tahoma stands at 14,411 feet — visible from 100+ miles in every direction. It is the reference point for the entire region. Climbers, pilots, and hikers orient by Tahoma. When the mountain is "out," the Pacific Northwest knows it. Tahoma's Eye carries that same centrality: the fixed point from which all other structures are measured.
+Mount Rainier is the most surveilled peak in the Pacific Northwest — not by cameras, but by every eye in the region. When Tahoma is visible, people stop and look. Its condition tells you about weather, season, and volcanic activity. The mountain watches the region and the region watches the mountain. Man Watch embodies this reciprocal surveillance: the team watches the Man, and the Man — lit from within, visible from everywhere — watches the city.
