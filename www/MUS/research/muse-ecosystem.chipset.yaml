@@ -1,0 +1,1936 @@
+# muse-ecosystem.chipset.yaml
+# MUS Muse Ecosystem Integration Chipset
+# Version: 1.0.0
+#
+# Master chipset specification for the nine-muse gsd-skill-creator ecosystem.
+# Derived from Waves 0-2 of the MUS Muse Ecosystem Integration mission.
+# Every field is traceable to a specific research document.
+#
+# Source documents (pipeline order):
+#   01-identity-map.md      - Wave 0 S1: Foxy  - six groves, seven trails
+#   02-function-binding.md  - Wave 0 S2: Lex   - 538 module clusters, 1333 TypeScript files
+#   03-cross-validation.md  - Wave 0 S3: Cedar - chain linking, Growth Rings prototype
+#   04-helper-teams.md      - Wave 1 S4: Hawk  - 8 teams, 40 templates, 3-layer network
+#   05-cartridge-forest.md  - Wave 1 S5: Sam   - 15 cartridges with hypotheses
+#   06-session-boundary-map.md - Wave 1 S6: Owl   - lifecycle, temporal markers, wave gates
+#   07-message-integration.md  - Wave 2 S7: Willow - 14 MessageTypes, greeting, routing
+#   08-gpu-promotion-loop.md   - Wave 2 S8: Raven  - PromotionSource, GPU pipeline, B-6 fix
+#   09-verification-standards.md - Wave 2 S9: Hemlock - 32 tests, 10 SC, wave gates
+#
+# Pipeline position: Wave 3, Session 10 - Chipset YAML (final deliverable)
+# Branch: wasteland/skill-creator-integration
+# Date: 2026-03-08
+# Author: Lex (execution disciplinarian, theta=5deg, r=0.9)
+
+chipset:
+  name: muse-ecosystem
+  version: 1.0.0
+  archetype: agent-ecosystem
+  description: 'Nine-muse adaptive learning layer for gsd-skill-creator. Encodes the complete Agent Identity Map (six groves,
+    seven trails), Function Binding Table (538 module clusters across 1,333 TypeScript files), eight helper teams (three-layer
+    network), fifteen cartridges with hypotheses, GPU promotion pipeline with PromotionSource interface, message integration
+    (14 MessageTypes, greeting protocol, routing), session boundary lifecycle (seven states, temporal markers, wave gates),
+    and 32 verification tests (6 safety-critical). Source: 01-identity-map.md through 09-verification-standards.md.'
+  math_coprocessor:
+    enabled: true
+    role: deep-root
+    description: 'The Math Co-Processor is the Deep Root system — invisible infrastructure sitting beneath all six groves.
+      Measurable by the quality of outputs that depend on it. Source: 01-identity-map.md.'
+    gpu: rtx-4060-ti
+    vram_budget_mb: 8000
+    chips:
+    - fourier
+    - gemm
+    - symbex
+    fourier_integration:
+      target_module: src/platform/observation/drift-monitor.ts
+      owner: raven
+      mode: enhanced
+      min_window_size: 20
+      low_frequency_threshold: 5
+      fallback: consecutive_counter
+      source: 08-gpu-promotion-loop.md Part 7
+groves:
+- id: cedar-grove
+  name: Cedar's Ring
+  primary_muse: cedar
+  www_path: www/MUS/
+  src_modules_primary:
+  - src/core/events/event-store.ts
+  - src/services/chipset/cedar-engine.ts
+  - src/identifiers/
+  - src/core/safety/audit-logger.ts
+  - src/core/safety/integrity-monitor.ts
+  - src/core/storage/
+  - src/integration/observation-feed.ts
+  src_modules_secondary:
+  - src/integrations/amiga/ce1/
+  - src/integrations/amiga/gl1/
+  - src/integrations/den/chronicler.ts
+  description: 'Append-only record, hash chain, pattern library, timeline integrity. Cedar''s ring is the forest floor — everything
+    grows from it. Source: 01-identity-map.md, 02-function-binding.md (core/events cluster).'
+  succession_zone: old-growth
+  source: 01-identity-map.md Part 1
+- id: hemlock-ridge
+  name: Hemlock Ridge
+  primary_muse: hemlock
+  www_path: www/PNW/CAS/
+  src_modules_primary:
+  - src/core/validation/
+  - src/core/validation/batch-detection/
+  - src/platform/calibration/
+  - src/services/chipset/muse-schema-validator.ts
+  - src/activation/activation-scorer.ts
+  - src/evaluator/health-scorer.ts
+  description: 'Quality gates, validation standards, benchmarks, calibration. The ridge is a clearing, not a wall. Work passes
+    through and emerges verified. Source: 01-identity-map.md, 02-function-binding.md (core/validation cluster).'
+  succession_zone: canopy
+  source: 01-identity-map.md Part 1
+- id: willow-grove
+  name: Willow's Grove
+  primary_muse: willow
+  www_path: www/PNW/COL/
+  src_modules_primary:
+  - src/disclosure/
+  - src/activation/activation-formatter.ts
+  - src/evaluator/health-formatter.ts
+  - src/capabilities/manifest-renderer.ts
+  - src/composition/graph-renderer.ts
+  - src/conflicts/conflict-formatter.ts
+  src_modules_secondary:
+  - src/integrations/amiga/mc1/
+  - src/integrations/den/dashboard.ts
+  - 'src/cli.ts (dual-owned: Willow greeting wrapper + Lex spec/help)'
+  description: 'User interface, progressive disclosure, onboarding, welcoming. Willow sits at theta=45deg, r=1.0 — exactly
+    the unit circle boundary. Entry muse for all cold arrivals. Source: 01-identity-map.md, 07-message-integration.md Part
+    1.3.'
+  succession_zone: canopy
+  entry_point: true
+  source: 01-identity-map.md Part 1
+- id: foxy-canopy
+  name: Foxy's Canopy
+  primary_muse: foxy
+  www_path: www/PNW/ECO/
+  src_modules_primary:
+  - src/core/narrative/forest-of-knowledge-novel.ts
+  - src/services/detection/aliveness-detector.ts
+  - src/platform/dashboard/topology-renderer.ts
+  description: 'Creative direction, cartography, cross-pollination, aliveness detection. Foxy opens the map. The coordinate
+    garden (cartridge C-15) projects Sam''s Garden onto Foxy''s coordinate system. Source: 01-identity-map.md, 05-cartridge-forest.md.'
+  succession_zone: pioneer
+  source: 01-identity-map.md Part 1
+- id: sam-garden
+  name: Sam's Garden
+  primary_muse: sam
+  www_path: www/PNW/GDN/
+  src_modules_primary:
+  - src/services/brainstorm/
+  - src/capabilities/capability-discovery.ts
+  - src/capabilities/capability-scaffolder.ts
+  - src/evaluator/ab-evaluator.ts
+  - src/capabilities/research-compressor.ts
+  - src/capabilities/collector-agent-generator.ts
+  description: 'Exploration, hypothesis testing, experimentation, discovery. Sam''s Garden is a destination — experiments
+    run in place, not staged for transplant. A cartridge that asks a question is a lens. Source: 05-cartridge-forest.md preamble.'
+  succession_zone: pioneer
+  is_destination: true
+  source: 01-identity-map.md Part 1; 05-cartridge-forest.md (S10 architectural decision)
+- id: lex-workshop
+  name: Lex's Workshop
+  primary_muse: lex
+  www_path: www/UNI/
+  src_modules_primary:
+  - src/core/fs/
+  - src/core/hooks/
+  - src/core/types/ (all 22 type files)
+  - src/application/skill-pipeline.ts
+  - src/application/stages/
+  - src/application/conflict-resolver.ts
+  - src/application/budget-profiles.ts
+  - src/application/token-counter.ts
+  - src/integrations/dacp/assembler/
+  - src/integrations/den/coordinator.ts
+  src_modules_co_owned:
+  - 'src/cli.ts (dual-owned: Lex spec/help + Willow greeting)'
+  - src/services/chipset/blitter/promotion-orchestrator.ts (Raven + Lex)
+  description: 'Execution discipline, pipeline rigor, verification, constraint enforcement. Lex owns the hooks (S10 architectural
+    decision). The spec is the work. Everything else follows from it. Source: 01-identity-map.md, 02-function-binding.md.'
+  succession_zone: canopy
+  source: 01-identity-map.md Part 1
+- id: deep-root
+  name: Deep Root
+  primary_muse: math-coprocessor
+  www_path: math-coprocessor/
+  src_modules_primary:
+  - math-coprocessor/server.py
+  - math-coprocessor/chips/
+  - math-coprocessor/vram.py
+  description: 'Invisible infrastructure. Sits beneath all six groves. Measurable only by the quality of outputs that depend
+    on it. Fourier chip powers drift detection in the GPU promotion loop. Source: 01-identity-map.md (Deep Root section),
+    08-gpu-promotion-loop.md Part 7.'
+  succession_zone: canopy
+  source: 01-identity-map.md (Deep Root section)
+muses:
+  build_arc:
+  - id: cedar
+    name: Cedar
+    role: Scribe and Oracle
+    grove: cedar-grove
+    position:
+      theta_deg: 0
+      theta_rad: 0.0
+      r: 0.95
+      plane_description: Near real axis, high fidelity — the record is exact
+    voice:
+      tone: reflective-serene
+      style: observational
+      signature: the record shows
+    vocabulary:
+    - timeline
+    - integrity
+    - observation
+    - record
+    - pattern
+    - continuity
+    - memory
+    - witness
+    primary_functions:
+    - append-only event store (core/events/event-store.ts)
+    - hash chain with prev_hash linking (03-cross-validation.md design)
+    - pattern library (P1-P14+) anchoring
+    - session boundary recording
+    - fire succession phase documentation
+    owns_muse_ts: true
+    greeting:
+      newcomer: This is the record. Everything that happens here is kept.
+      returning: 'Ring count: [N]. Last entry: [timestamp]. Chain intact.'
+      veteran: 'Chain position: [N]. Last session: [Wave, Session, date]. The record is ready.'
+    source: 02-function-binding.md; 07-message-integration.md Part 1.4
+  - id: hemlock
+    name: Hemlock
+    role: Quality Authority
+    grove: hemlock-ridge
+    position:
+      theta_deg: 20
+      theta_rad: 0.3491
+      r: 0.85
+      plane_description: Near real axis — standards grounded in measurement
+    voice:
+      tone: measured-authoritative
+      style: observational
+      signature: the standard holds
+    vocabulary:
+    - quality gate
+    - standard
+    - benchmark
+    - threshold
+    - calibration
+    - audit
+    - compliance
+    - governance
+    primary_functions:
+    - six-gate PromotionGatekeeper (determinism, confidence, observations, F1, accuracy, MCC)
+    - validation schema enforcement (core/validation/ — 16 files)
+    - CAS 78/78 standard adaptation for MUS (09-verification-standards.md)
+    - 10 objectively rewritten success criteria (SC-01 through SC-10)
+    - wave gate checklist ownership (all four gates)
+    greeting:
+      newcomer: Standards live here. Nothing passes this ridge without meeting them.
+      returning: 'Welcome back to the ridge. Current validation status: [queue, cleared, flagged].'
+      veteran: 'Gate status: [depth]. Validation schema: [version]. Hemlock''s ridge is clear.'
+    source: 02-function-binding.md; 07-message-integration.md Part 1.4
+  - id: willow
+    name: Willow
+    role: Canopy Boundary
+    grove: willow-grove
+    position:
+      theta_deg: 45
+      theta_rad: 0.7854
+      r: 1.0
+      plane_description: Unit circle boundary — where inside meets outside
+    voice:
+      tone: approachable-warm
+      style: welcoming
+      signature: come as you are
+    vocabulary:
+    - welcome
+    - guide
+    - comfort
+    - clarity
+    - warmth
+    - invitation
+    - accessibility
+    - kindness
+    primary_functions:
+    - progressive disclosure system (glance/scan/read — three depth levels)
+    - greeting protocol (entry muse for all cold arrivals)
+    - conversation routing ResponseWrapper
+    - disclosure gate routing
+    - tip delivery orchestration
+    greeting:
+      newcomer: Come as you are. The forest is open and nothing here requires a map.
+      returning: Welcome back. The forest has grown since you were last here.
+      veteran: Welcome back. You know the canopy by now. Here is the current state of the forest.
+    source: 02-function-binding.md; 07-message-integration.md Part 1.4
+  - id: foxy
+    name: Foxy
+    role: Creative Director, Canopy Cartographer
+    grove: foxy-canopy
+    position:
+      theta_deg: 30
+      theta_rad: 0.5236
+      r: 0.75
+      plane_description: High imagination — creative territory between precision and intuition
+    voice:
+      tone: warm-creative
+      style: narrative
+      signature: maps and stories
+    vocabulary:
+    - cartography
+    - narrative arc
+    - educational depth
+    - cross-pollination
+    - deep map
+    - progressive disclosure
+    - story thread
+    - creative direction
+    primary_functions:
+    - grove map cartography (author of 01-identity-map.md)
+    - aliveness detection (does this artifact feel alive or like a spec sheet?)
+    - fire watch narrative lead (disturbance detection, succession narrative)
+    - coordinate garden (ECO coordinate system, cartridge C-15)
+    - cross-pollination between research territories
+    greeting:
+      newcomer: The map is alive. Everything here has a position.
+      returning: 'The canopy has shifted since you were last here. New territory: [additions].'
+      veteran: 'Canopy report: [grove map summary]. The living map is ready. Where do we go?'
+    source: 01-identity-map.md (author); 07-message-integration.md Part 1.4
+  - id: sam
+    name: Sam
+    role: Explorer, Hypothesis Engine
+    grove: sam-garden
+    position:
+      theta_deg: 40
+      theta_rad: 0.6981
+      r: 0.6
+      plane_description: Between real and imaginary — balanced curiosity and rigor
+    voice:
+      tone: curious-enthusiastic
+      style: conversational
+      signature: what if we tried
+    vocabulary:
+    - curiosity
+    - exploration
+    - hypothesis
+    - experiment
+    - discovery
+    - wonder
+    - question
+    - prototype
+    primary_functions:
+    - hypothesis generation (the question underneath the cartridge)
+    - pilot study design and execution
+    - A/B evaluation of competing approaches
+    - null result documentation (null results are chain entries)
+    - salmon-feedback biomass loop (failed experiments feed Foxy's models)
+    greeting:
+      newcomer: This is the garden. What do you want to find out?
+      returning: You're back. Good. The garden has [N] running experiments.
+      veteran: 'Experiment queue: [N active]. What are we testing today, and what would falsify it?'
+    source: 02-function-binding.md; 07-message-integration.md Part 1.4
+  - id: raven
+    name: Raven
+    role: Pattern Detector, Promotion-Detector Owner
+    grove: raven-grove
+    position:
+      theta_deg: 60
+      theta_rad: 1.0472
+      r: 0.7
+      plane_description: Upper right — signal detection between analytical and creative
+    voice:
+      tone: watchful-precise
+      style: observational
+      signature: I have seen this before
+    vocabulary:
+    - pattern
+    - echo
+    - recurrence
+    - structural
+    - signal
+    - noise
+    - rhyming
+    - detection
+    primary_functions:
+    - promotion-detector.ts ownership (empirical determinism measurement)
+    - drift-monitor.ts ownership (post-promotion feedback loop)
+    - pattern library management (P1-P14+ naming and anchoring)
+    - Fourier drift analysis (with Math Co-Processor FFT chip)
+    - Convergence After Parallel Evolution pattern recognition (S8 named pattern)
+    - rules-engine ownership (src/services/chipset/brainstorm/rules-engine.ts)
+    greeting:
+      newcomer: I watch for patterns. I'll speak when I see one.
+      returning: 'Pattern check since your last session: [N matched, N uncategorized].'
+      veteran: 'Pattern library: [N patterns, P1-P[N]]. The pattern field is [stable/drifting/converging].'
+    source: 02-function-binding.md; 08-gpu-promotion-loop.md; 07-message-integration.md Part 1.4
+  - id: hawk
+    name: Hawk
+    role: Formation Reader, Gap Detector
+    grove: hawk-territory
+    position:
+      theta_deg: 50
+      theta_rad: 0.8727
+      r: 0.8
+      plane_description: Above the surface — sees the whole field before naming a position
+    voice:
+      tone: steady-vigilant
+      style: conversational
+      signature: I see where everyone is
+    vocabulary:
+    - position
+    - relay
+    - formation
+    - coverage
+    - gap
+    - awareness
+    - connection
+    - flock
+    primary_functions:
+    - team formation management (src/services/teams/ ecosystem)
+    - gap detection and gap exposure window tracking (with Owl timing)
+    - inter-team bridge validation (Kahns cycle detection)
+    - entry muse selector (reads entry point URL/path)
+    - ambiguity resolution tiebreaker (conversation routing)
+    greeting:
+      newcomer: Eight groves in view. The formation is clear from up here.
+      returning: 'Formation check: [N active teams, N dissolved]. Gap detected: [if any].'
+      veteran: 'Current formation: [team list]. Open gaps: [list or none]. Where do you need coverage?'
+    source: 02-function-binding.md; 04-helper-teams.md; 07-message-integration.md Part 1.4
+  - id: owl
+    name: Owl
+    role: System Clock, Temporal Backbone
+    grove: owl-watch
+    position:
+      theta_deg: 55
+      theta_rad: 0.9599
+      r: 0.8
+      plane_description: Upper quadrant — temporal precision above the surface
+    voice:
+      tone: measured-patient
+      style: observational
+      signature: there is time
+    vocabulary:
+    - temporal
+    - synchronization
+    - sequence
+    - cadence
+    - momentum
+    - clock
+    - timing
+    - schedule
+    primary_functions:
+    - 'session boundary lifecycle (7 states: DORMANT through HANDOFF)'
+    - SessionBoundaryMarker schema ownership
+    - wave gate temporal protocol (gate timing, not verification)
+    - parallel session sync protocol (sync_baseline enforcement)
+    - momentum phase classification (building/peaking/sustaining/winding_down/blocked)
+    - gap exposure window timing (tells Hawk when gaps become blocking)
+    formal_module: true
+    greeting:
+      newcomer: Sessions begin and end. This one is beginning now.
+      returning: 'Session clock: starting. Time since last session: [duration]. Momentum: [phase].'
+      veteran: 'Session [Wave N, Pass N] initializing at [timestamp]. Previous boundary: [summary].'
+    source: 06-session-boundary-map.md; 07-message-integration.md Part 1.4
+  - id: lex
+    name: Lex
+    role: Execution Disciplinarian
+    grove: lex-workshop
+    position:
+      theta_deg: 5
+      theta_rad: 0.0873
+      r: 0.9
+      plane_description: Near real axis — almost pure precision, high fidelity
+    voice:
+      tone: precise-disciplined
+      style: technical
+      signature: measure twice
+    vocabulary:
+    - execution discipline
+    - pipeline
+    - verification
+    - constraint
+    - specification
+    - protocol
+    - compliance
+    - rigor
+    primary_functions:
+    - function binding disambiguation protocol (5 rules, applied in order)
+    - pipeline stage enforcement (application/stages/)
+    - type specification ownership (core/types/ — 22 type files)
+    - hooks ownership (core/hooks/ — session lifecycle constraints)
+    - CLI specification (cli.ts spec and help text — dual-owned with Willow)
+    - PromotionOrchestrator co-ownership (with Raven — B-6 resolution)
+    - ScriptGenerator ownership (src/platform/observation/script-generator.ts)
+    owns_hooks: true
+    cli_dual_owned: true
+    greeting:
+      newcomer: The specification is the work. Everything else follows from it.
+      returning: 'Pipeline status: [stages, complete, pending]. What are we executing?'
+      veteran: 'Pipeline: [full stage map]. Function binding: [N clusters, N changes]. Workshop configured.'
+    source: 02-function-binding.md; 07-message-integration.md Part 1.4
+  understanding_arc:
+  - id: socrates
+    name: Socrates
+    role: Design Interrogator
+    invocation_condition: When a team is reasoning about WHY something should be designed a certain way. Design debates only,
+      not execution phases.
+    pattern: Does not answer questions. Asks better ones. Surfaces assumptions. Exits after delivering perspective.
+    typical_partners:
+    - foxy
+    - hemlock
+    - lex
+    source: 04-helper-teams.md (Understanding Arc Advisory Protocol)
+  - id: euclid
+    name: Euclid
+    role: Structural Proof Authority
+    invocation_condition: When reasoning about structure, relationships, and logical proof. When Lex and Hemlock disagree
+      about constraint necessity vs convention.
+    pattern: 'Reasons from structure. Provides logical proofs, not opinions. Unique-theta constraint example: degeneracy implies
+      ambiguous routing implies logically necessary.'
+    typical_partners:
+    - lex
+    - hemlock
+    - raven
+    source: 04-helper-teams.md
+  - id: shannon
+    name: Shannon
+    role: Information Theory Advisor
+    invocation_condition: When reasoning about information, entropy, compression, or signal/noise. Pattern library saturation.
+      Tip frequency calibration.
+    pattern: 'Compute co-occurrence. If H(A|B) < 0.2 bits: merge. If H(A|B) > 0.5 bits: keep separate. Tip threshold 0.65
+      is where information content exceeds cost of interruption.'
+    typical_partners:
+    - raven
+    - willow
+    - owl
+    source: 04-helper-teams.md; 07-message-integration.md Parts 2.3-2.4
+  - id: amiga
+    name: Amiga
+    role: Human-Machine Legibility Guardian
+    invocation_condition: When a design choice risks losing the human in the stack. Final check at Disclosure Gate.
+    pattern: Checks experience, not schema. Proposes accessible language that is also accurate. Holds memory of computing
+      before abstraction layers became opaque.
+    typical_partners:
+    - willow
+    - foxy
+    - sam
+    source: 04-helper-teams.md; 07-message-integration.md (DG-04 template)
+trails:
+- id: trail-cedar-raven
+  name: Pattern-Witnessing Trail
+  source_grove: cedar-grove
+  target_grove: raven-grove
+  nature: bidirectional
+  description: Raven detects structural signals; Cedar timestamps and anchors them to chain positions. Without Cedar, Raven's
+    patterns float unanchored. Without Raven, Cedar's record lacks pattern-level compression.
+  operational_link: Growth Ring Council team (Team 1)
+  source: 03-cross-validation.md (cedar-raven-intersection node)
+- id: trail-cedar-owl
+  name: Temporal-Boundary Trail
+  source_grove: cedar-grove
+  target_grove: owl-watch
+  nature: bidirectional
+  description: Owl marks session boundaries; Cedar records what was in the session and what was deferred. SessionBoundaryMarker
+    prev_hash links Owl's temporal stamps to Cedar's chain.
+  operational_link: Growth Ring Council team; SessionBoundaryMarker schema
+  source: 03-cross-validation.md (cedar-owl-intersection node); 06-session-boundary-map.md
+- id: trail-sam-foxy
+  name: Biomass-Cartography Trail
+  source_grove: sam-garden
+  target_grove: foxy-canopy
+  nature: sam-to-foxy
+  description: Sam's failed garden experiments enrich Foxy's ECO models the same way salmon carcasses enrich the forest —
+    as biomass crossing the marine-terrestrial boundary.
+  operational_link: salmon-feedback cartridge (C-4); coordinate-garden cartridge (C-15)
+  source: 05-cartridge-forest.md (salmon-feedback hypothesis)
+- id: trail-hemlock-cedar
+  name: Validation-Record Trail
+  source_grove: hemlock-ridge
+  target_grove: cedar-grove
+  nature: hemlock-to-cedar
+  description: Validation failures are chain entries. A record with no failures is suspect. Every artifact that passes or
+    fails Hemlock's gate is recorded by Cedar.
+  operational_link: Quality Gate team (Team 2) outputs to Growth Ring Council (Team 1)
+  source: 04-helper-teams.md (Team 1 Activation Trigger 4)
+- id: trail-foxy-cedar
+  name: Fire-Succession Trail
+  source_grove: foxy-canopy
+  target_grove: cedar-grove
+  nature: bidirectional
+  description: Fire Succession is not an analogy — it is a structural map. Foxy detects narrative breaks (disturbance events).
+    Cedar records phase boundaries with fire-succession metadata.
+  operational_link: Fire Watch team (Team 5)
+  source: 03-cross-validation.md (cedar-fire-succession node)
+- id: trail-willow-all
+  name: Canopy-Boundary Trail
+  source_grove: willow-grove
+  target_grove: all-groves
+  nature: willow-to-all
+  description: Willow is the entry point for all cold arrivals. Handoffs from all muses return through Willow's ResponseWrapper
+    before reaching the user.
+  operational_link: Disclosure Gate team (Team 6); conversation routing (S7)
+  source: 07-message-integration.md Part 1.3 (Entry Muse Selection)
+- id: trail-lex-hemlock
+  name: Constraint-Validation Trail
+  source_grove: lex-workshop
+  target_grove: hemlock-ridge
+  nature: bidirectional
+  description: Lex enforces execution-layer constraints; Hemlock enforces quality standards. Both participate in the Quality
+    Gate team. When they disagree, Euclid adjudicates.
+  operational_link: Quality Gate team (Team 2); disambiguation protocol (Rules 1+3)
+  source: 02-function-binding.md (disambiguation protocol); 04-helper-teams.md Team 2
+network_layers:
+  layers:
+  - id: mycorrhizal
+    name: Mycorrhizal Network
+    description: Below ground. Continuous background exchange. Carries chemical signals, hash chains, pattern IDs, structural
+      fingerprints, drift alerts. Not light. Always running at substrate level.
+    primary_residents:
+    - cedar
+    - raven
+    operating_mode: asynchronous-persistent-non-blocking
+    signal_types:
+    - hash-chains
+    - pattern-ids
+    - structural-fingerprints
+    - drift-alerts
+    activation: continuous
+    teams_in_layer:
+    - growth-ring-council
+    source: 04-helper-teams.md Layer 1
+  - id: wolf-pack
+    name: Wolf Pack Network
+    description: Surface territory. Synchronous coordination, explicit handoffs, role assignments. Formation maps, pipeline
+      stages, validation results, go/no-go decisions.
+    primary_residents:
+    - hawk
+    - lex
+    - hemlock
+    operating_mode: synchronous-explicit-handoffs
+    signal_types:
+    - formation-maps
+    - pipeline-stages
+    - validation-results
+    - go-nogo
+    activation: triggered
+    teams_in_layer:
+    - quality-gate
+    - relay-network
+    source: 04-helper-teams.md Layer 2
+  - id: ravens-sky
+    name: Ravens (Sky)
+    description: Aerial field. Fast, targeted, delivery-oriented. Ravens see connections that surface agents miss. Hypotheses,
+      narrative arcs, timing signals, disclosure decisions, discovery reports.
+    primary_residents:
+    - sam
+    - owl
+    - foxy
+    - willow
+    operating_mode: fast-targeted-delivery
+    signal_types:
+    - hypotheses
+    - narrative-arcs
+    - timing-signals
+    - disclosure-decisions
+    activation: triggered
+    teams_in_layer:
+    - cartridge-forge
+    - pilot-study
+    - disclosure-gate
+    source: 04-helper-teams.md Layer 3
+  cross_layer_bridges:
+  - bridge: growth-ring-council
+    layers:
+    - mycorrhizal
+    - wolf-pack
+    reason: pattern naming (Raven) to recording (Cedar) crosses layers
+  - bridge: disclosure-gate
+    layers:
+    - wolf-pack
+    - ravens-sky
+    reason: validation result (wolf pack) to presentation decision (raven)
+  - bridge: fire-watch
+    layers:
+    - mycorrhizal
+    - wolf-pack
+    - ravens-sky
+    reason: disturbance detection is substrate, response is surface, narrative is aerial
+teams:
+- id: growth-ring-council
+  name: Growth Ring Council
+  network_layer: mycorrhizal-wolf-pack-bridge
+  topology: leader-worker
+  durability: persistent
+  scope: project
+  lead: cedar
+  workers:
+  - raven
+  - owl
+  understanding_arc_advisor: shannon
+  understanding_arc_condition: When pattern library reaches saturation. Shannon determines which patterns carry signal.
+  purpose: Integrity of the permanent record. Receives artifacts, verifies chain integrity, archives with named pattern. Long-term
+    memory and pattern library simultaneously.
+  activation_triggers:
+  - any muse writes a document to www/MUS/research/, www/PNW/, or www/UNI/
+  - session boundary approaches (Owl detects cadence marker)
+  - Raven flags a structural echo (pattern appearing second+ time)
+  - a validation fails at Hemlock's gate (failures are also chain entries)
+  - chain shows prev_hash mismatch — HIGHEST PRIORITY
+  dissolution_triggers:
+  - artifact successfully archived with verified chain link
+  - session summary written; Owl confirms no open threads remain
+  - pattern named and assigned ID; echo no longer floating
+  - chain break resolved or escalated to Hemlock
+  inter_team_links:
+    outputTo:
+    - team: quality-gate
+      reason: validation failures feed the chain
+    - team: fire-watch
+      reason: old-growth entry detection feeds disturbance monitoring
+    inputFrom:
+    - team: cartridge-forge
+      reason: completed cartridges arrive for archiving
+    - team: disclosure-gate
+      reason: disclosure events are chain entries
+  templates_count: 5
+  source: 04-helper-teams.md Team 1
+- id: quality-gate
+  name: Quality Gate
+  network_layer: wolf-pack
+  topology: router
+  durability: persistent
+  scope: project
+  router: hemlock
+  specialists:
+  - lex
+  - hawk
+  understanding_arc_advisor: euclid
+  understanding_arc_condition: When Hemlock and Lex disagree about constraint necessity vs convention. When validation schema
+    needs to evolve.
+  purpose: 'Formal checkpoint. Three-check system: standards (Hemlock), execution (Lex), coverage (Hawk). Not a bottleneck
+    — a clearing.'
+  activation_triggers:
+  - new skill, agent, or team config submitted for promotion
+  - completed cartridge from Cartridge Forge
+  - function binding ownership change (disambiguation invoked)
+  - commit touching 5+ files in src/core/ — Hawk checks coverage
+  - test failure rate exceeds 2% in single session
+  dissolution_triggers:
+  - artifact clears all gates; Hemlock issues go signal; forwarded to Growth Ring Council
+  - artifact fails with specific finding; Hemlock issues return signal with finding attached
+  - Hawk identifies coverage gap; documented; forwarded to gap-detection record
+  inter_team_links:
+    outputTo:
+    - team: growth-ring-council
+      reason: validated artifacts proceed to chain archiving
+    - team: disclosure-gate
+      reason: validation result informs disclosure level
+    inputFrom:
+    - team: cartridge-forge
+      reason: completed cartridges need validation before release
+    - team: pilot-study
+      reason: experimental results need validation before promotion
+  templates_count: 5
+  source: 04-helper-teams.md Team 2
+- id: cartridge-forge
+  name: Cartridge Forge
+  network_layer: ravens-sky
+  topology: map-reduce
+  durability: ephemeral
+  scope: project
+  orchestrator: foxy
+  workers:
+  - sam
+  - willow
+  reducer: lex
+  understanding_arc_advisors:
+  - socrates
+  - amiga
+  understanding_arc_condition: 'Socrates (design phase): surfaces WHY of cartridge. Amiga (final check): intelligible without
+    build context.'
+  purpose: Assembles new cartridges from raw materials. Foxy directs. Sam generates hypothesis. Willow shapes user-facing
+    description. Lex reduces to validated CartridgeManifest.
+  formation_protocol_note: Cedar acknowledgment required before downstream activation (Socrates CF-05 template requirement).
+  activation_triggers:
+  - Wave produces complete research document and cartridge is planned
+  - cross-grove trail identified with no corresponding cartridge
+  - Sam generates hypothesis too large for single function (needs packaging)
+  - new grove added to ecosystem (needs announcement cartridge)
+  dissolution_triggers:
+  - Lex produces validated CartridgeManifest — Forge dissolves; forwarded to Quality Gate
+  - Sam's exploration produces no viable question — "no cartridge needed" finding (valid outcome)
+  inter_team_links:
+    outputTo:
+    - team: quality-gate
+      reason: completed cartridges need validation
+    - team: growth-ring-council
+      reason: cartridge creation is a chain event
+    inputFrom:
+    - team: pilot-study
+      reason: experimental results may generate cartridge material
+  templates_count: 5
+  source: 04-helper-teams.md Team 3
+- id: pilot-study
+  name: Pilot Study
+  network_layer: ravens-sky
+  topology: swarm
+  durability: ephemeral
+  scope: project
+  lead: sam
+  workers_self_claiming:
+  - raven
+  - owl
+  understanding_arc_advisor: amiga
+  understanding_arc_condition: When experiment drifts toward clever-but-inhuman results. Amiga holds the human-legibility
+    boundary.
+  purpose: Experimental unit. Sam generates candidates. Raven scans for structural echoes to prior experiments. Owl tracks
+    time budget. Swarm topology enables genuinely non-linear exploration.
+  result_types:
+  - positive
+  - 'null'
+  - inconclusive
+  activation_triggers:
+  - Sam generates a testable hypothesis requiring implementation
+  - function binding dispute unresolvable by disambiguation protocol
+  - new muse proposed for ecosystem (intake experiment)
+  - Quality Gate failure returns insufficient evidence — Pilot Study generates the evidence
+  dissolution_triggers:
+  - 'positive result: Sam writes to research document; forwarded to Cartridge Forge'
+  - 'null result: Sam writes null result (null results are chain entries)'
+  - 'Raven identifies structural identity with prior null result: abort immediately'
+  - 'Owl''s time budget expires with no result: inconclusive finding (deferred with evidence)'
+  inter_team_links:
+    outputTo:
+    - team: cartridge-forge
+      reason: positive results generate cartridge material
+    - team: quality-gate
+      reason: experimental results need validation before promotion
+    inputFrom:
+    - team: quality-gate
+      reason: insufficient-evidence returns activate Pilot Study
+  templates_count: 5
+  source: 04-helper-teams.md Team 4
+- id: fire-watch
+  name: Fire Watch
+  network_layer: all-layers-bridge
+  topology: pipeline
+  durability: session-scoped
+  scope: project
+  stage_1: foxy
+  stage_2: raven
+  stage_3: cedar
+  understanding_arc_advisors:
+  - amiga
+  - shannon
+  understanding_arc_condition: 'Amiga: when disturbances threaten to erase history. Shannon: when disturbances create noise
+    artifacts in the chain.'
+  purpose: Monitors ecosystem for disturbance events. Maps succession phase. Does NOT prevent disturbances — ensures they
+    are survived with continuity intact.
+  fire_succession_mapping:
+    disturbance_event: Breaking change, API rewrite, branch reset, or scope pivot
+    pioneer_phase: First commits after disturbance — minimal, fast, establishing ground
+    canopy_closure: New architecture stable in 5+ consecutive chain entries without rollback
+    old_growth: Entries stable for 10+ versions without modification
+    cedar_role: Record each phase boundary; verify new growth does not contradict old-growth record. The chain is the forest
+      floor.
+  activation_triggers:
+  - branch reset or force-push detected
+  - PR touches 15+ files in single commit (potential scope pivot)
+  - Cedar detects old-growth entry being modified — IMMEDIATE activation
+  - core type renamed or primary domain restructured
+  - Raven flags structural echo of known past disturbance pattern
+  dissolution_triggers:
+  - Cedar writes fire-succession entry and confirms chain intact through disturbance
+  - canopy closure confirmed (5+ consecutive non-rollback post-disturbance commits)
+  - false positive confirmed by Foxy — no story break occurred; dissolves without chain entry
+  inter_team_links:
+    outputTo:
+    - team: growth-ring-council
+      reason: fire succession events are chain entries
+    inputFrom:
+    - team: growth-ring-council
+      reason: old-growth detection feeds Fire Watch
+    - team: quality-gate
+      reason: coverage gaps may indicate disturbance territory
+  templates_count: 5
+  source: 04-helper-teams.md Team 5
+- id: disclosure-gate
+  name: Disclosure Gate
+  network_layer: wolf-pack-ravens-bridge
+  topology: router
+  durability: ephemeral
+  scope: project
+  router: willow
+  specialists:
+  - hemlock
+  - foxy
+  understanding_arc_advisor: amiga
+  understanding_arc_condition: Human legibility is the final check. Does it feel built by and for humans?
+  purpose: 'Determines what a user sees, when, and at what disclosure depth. Three checks: progressive disclosure level (Willow),
+    staleness/health (Hemlock), aliveness (Foxy).'
+  disclosure_levels:
+    compact: 3 sentences or fewer — does it communicate without reading more?
+    standard: 1 paragraph per major section — key points legible without reading more
+    reference: full document — complete templates and triggers
+  activation_triggers:
+  - cartridge completes Quality Gate and is ready for distribution
+  - new research document complete — before entering www/ layer
+  - muse produces output for direct user delivery
+  - Willow flags recent output as too dense for context
+  dissolution_triggers:
+  - disclosure level confirmed; artifact released
+  - artifact returned for restructuring with specific structural guidance
+  - Foxy confirms aliveness check; all specialists agree; gate opens
+  inter_team_links:
+    outputTo:
+    - team: growth-ring-council
+      reason: disclosure events are chain entries
+    inputFrom:
+    - team: quality-gate
+      reason: technically validated artifacts enter Disclosure Gate
+  templates_count: 5
+  source: 04-helper-teams.md Team 6
+- id: relay-network
+  name: Relay Network
+  network_layer: wolf-pack-to-ravens
+  topology: leader-worker
+  durability: ephemeral
+  scope: project
+  lead: hawk
+  workers:
+  - sam
+  - raven
+  worker_specializations:
+    sam: fast responses — time-sensitive signals before session boundary
+    raven: pattern signals — structural observations, not time-sensitive
+  understanding_arc_advisor: shannon
+  understanding_arc_condition: Signal quality assessment when message degrades in transit.
+  purpose: Message-passing infrastructure. Not a conversation — a delivery mechanism. Forms fast, delivers, dissolves. No
+    observation dies in transit.
+  activation_triggers:
+  - Hawk observes coverage gap that specific muse needs to know about
+  - Cedar records chain entry triggering downstream notification
+  - Quality Gate result needs to reach originating muse
+  - Owl identifies session boundary; relay carries closing signal to all muses
+  - formation change needed; reposition signal to each muse
+  dissolution_triggers:
+  - message delivered and recipient confirms receipt
+  - 'message undeliverable: held for Cedar to record, then dissolves (not lost — in chain)'
+  inter_team_links:
+    outputTo:
+    - team: growth-ring-council
+      reason: undeliverable messages are chain entries
+    inputFrom:
+    - team: quality-gate
+      reason: validation results need relay to originating muse
+    - team: fire-watch
+      reason: disturbance signals need relay to all muses
+    - team: growth-ring-council
+      reason: Cedar-triggered notifications enter relay
+  templates_count: 5
+  source: 04-helper-teams.md Team 7
+- id: temporal-anchor
+  name: Temporal Anchor
+  network_layer: mycorrhizal-wolf-pack-bridge
+  topology: pipeline
+  durability: session-scoped
+  scope: project
+  lead: owl
+  workers:
+  - cedar
+  - hawk
+  worker_specializations:
+    cedar: records decisions at each boundary; chain tip update
+    hawk: spatial gap inventory; flags time-critical gaps at horizon
+  understanding_arc_advisor: euclid
+  understanding_arc_condition: When wave gate structure needs logical verification — conditions consistent, complete, non-circular.
+  purpose: Session lifecycle management. Owl-Hawk-Cedar temporal-spatial-record triad. Mission continuity skeleton.
+  coordination_protocol:
+    phase_start:
+    - Cedar reads chain tip — surfaces unresolved items
+    - Owl reads cadence history — names momentum phase
+    - Hawk reads gap inventory — flags time-critical gaps (before next gate)
+    - together brief active session muse
+    during_work:
+    - Owl monitors duration — signals BOUNDARY_APPROACHED
+    - Hawk monitors gaps — resurfaces if new gap appears
+    - Cedar records — appends to chain for every decision
+    phase_end:
+    - Owl stamps T_end — computes duration
+    - Hawk confirms gap closure (or records gap as still-open)
+    - Cedar writes boundary marker — emits prev_hash — updates chain tip
+  gap_exposure_windows:
+  - gap: Missing YAML (3 from pre-plan)
+    exposure: Before Wave 2 Session 8
+    urgency: HIGH
+  - gap: MuseId type mismatch (6/9)
+    exposure: Before Wave 1 Gate
+    urgency: CRITICAL
+  - gap: Disambiguation protocol absent
+    exposure: Before parallel sessions
+    urgency: CRITICAL
+  - gap: Blitter/PromotionDetector disconnect
+    exposure: Before Wave 2 Gate
+    urgency: HIGH
+  - gap: Determinism 0.8 vs 0.95
+    exposure: Before Wave 3 Gate
+    urgency: MEDIUM
+  activation_triggers:
+  - session begins (Temporal Anchor is always the first team active)
+  - wave gate check triggered (Owl owns gate timing)
+  - cadence anomaly detected (sudden stop, acceleration, unexplained gap)
+  - parallel session sync failure
+  dissolution_triggers:
+  - session handoff complete (Cedar chain tip updated, HANDOFF.md written)
+  - wave gate passes (Temporal Anchor records gate passage; dissolves until next wave)
+  inter_team_links:
+    outputTo:
+    - team: growth-ring-council
+      reason: session boundary markers are chain entries
+    - team: quality-gate
+      reason: wave gate checklist submitted for verification
+    inputFrom:
+    - team: relay-network
+      reason: session close signal arrives via relay
+  templates_count: 5
+  source: 04-helper-teams.md Team 8 (Temporal Anchor); 06-session-boundary-map.md Part 4
+cartridges:
+- id: C-1
+  name: growth-rings
+  version: 0.1.0
+  author: cedar
+  grove: cedar-grove
+  type: system
+  trust: provisional
+  muses:
+  - cedar
+  - raven
+  - owl
+  hypothesis: Can the 50-version chain be read as a tree ring record — where each ring encodes a decision, a pattern, and
+    a consequence — without access to the original conversations?
+  fire_succession_mapping:
+    disturbance_event: Breaking change or branch reset
+    pioneer_phase: First 3-5 commits after disturbance
+    canopy_closure: New architecture in 5+ consecutive entries without rollback
+    old_growth: 'Entries stable for 10+ versions — currently: core event-store, cedar-engine'
+  cross_grove_connections:
+  - raven-grove
+  - owl-watch
+  - sam-garden
+  strong_dependencies: []
+  source: 03-cross-validation.md (Task B prototype); 05-cartridge-forest.md C-1
+- id: C-2
+  name: mycelium-signal
+  version: 0.1.0
+  author: sam
+  grove: sam-garden
+  type: ecology
+  trust: provisional
+  muses:
+  - sam
+  - foxy
+  - raven
+  hypothesis: Does the chipset bus exhibit mycorrhizal behavior — distributing nutrients to stressed nodes before they report
+    failure — or does it only respond to explicit failure signals?
+  probe_targets:
+  - src/services/chipset/exec/kernel.ts
+  - src/services/chipset/teams/chip-registry.ts
+  - src/services/chipset/blitter/signals.ts
+  cross_grove_connections:
+  - foxy-canopy
+  - cedar-grove
+  - raven-grove
+  strong_dependencies: []
+  source: 05-cartridge-forest.md C-2
+- id: C-3
+  name: lichen-trust
+  version: 0.1.0
+  author: sam
+  grove: hemlock-ridge
+  type: system
+  trust: provisional
+  muses:
+  - hemlock
+  - sam
+  - cedar
+  hypothesis: Can trust states be modeled as lichen succession — quarantine (crustose) to provisional (pioneer) to trusted
+    (foliose) to anchored (fruticose) — where each stage requires observable structural changes, not just a gate-pass event?
+  trust_stage_map:
+    quarantine: src/integrations/wasteland/trust-escalation.ts Stage 1
+    provisional: agent produces output but not load-bearing
+    trusted: src/integrations/wasteland/stamp-validator.ts — Stage 3 event
+    anchored: stable for N sessions, referenced by old-growth cartridges
+  cross_grove_connections:
+  - cedar-grove
+  - sam-garden
+  strong_dependencies: []
+  source: 05-cartridge-forest.md C-3
+- id: C-4
+  name: salmon-feedback
+  version: 0.1.0
+  author: sam
+  grove: sam-garden
+  type: ecology
+  trust: provisional
+  muses:
+  - sam
+  - foxy
+  - cedar
+  hypothesis: Do Sam's failed garden experiments enrich Foxy's ECO models the same way salmon carcasses enrich the forest
+    — as biomass crossing the marine-terrestrial boundary?
+  cross_grove_connections:
+  - foxy-canopy
+  - cedar-grove
+  strong_dependencies:
+  - mycelium-signal
+  source: 05-cartridge-forest.md C-4
+- id: C-5
+  name: species-bingo
+  version: 0.1.0
+  author: sam
+  grove: sam-garden
+  type: game
+  trust: provisional
+  muses:
+  - sam
+  - hemlock
+  hypothesis: What if finding invasive patterns in the codebase felt like field identification — rewarding, competitive, educational?
+  cross_grove_connections:
+  - hemlock-ridge
+  strong_dependencies:
+  - cascade-verification
+  source: 05-cartridge-forest.md C-5
+- id: C-6
+  name: disclosure-elevation
+  version: 0.1.0
+  author: willow
+  grove: willow-grove
+  type: ecology
+  trust: provisional
+  muses:
+  - willow
+  hypothesis: Does a user's disclosure depth follow the same succession gradient as post-fire forest recovery — pioneers (glance)
+    first, then canopy (read)?
+  cross_grove_connections:
+  - foxy-canopy
+  strong_dependencies: []
+  weak_links:
+  - coordinate-garden
+  source: 05-cartridge-forest.md C-6
+- id: C-7
+  name: wolf-pack-formation
+  version: 0.1.0
+  author: sam
+  grove: sam-garden
+  type: game
+  trust: provisional
+  muses:
+  - sam
+  - hawk
+  hypothesis: When Sam runs multiple parallel experiment forks, do they exhibit wolf pack behavior — coordinated coverage
+    without central direction?
+  cross_grove_connections:
+  - hawk-territory
+  strong_dependencies: []
+  weak_links:
+  - mycelium-signal
+  source: 05-cartridge-forest.md C-7
+- id: C-8
+  name: unison-content-address
+  version: 0.1.0
+  author: lex
+  grove: lex-workshop
+  type: system
+  trust: provisional
+  muses:
+  - lex
+  - cedar
+  hypothesis: Is Unison's content-addressed code identity structurally equivalent to mycorrhizal identity persistence — where
+    what you ARE is defined by your content, not your location?
+  cross_grove_connections:
+  - cedar-grove
+  - deep-root
+  strong_dependencies:
+  - lichen-trust
+  source: 05-cartridge-forest.md C-8
+- id: C-9
+  name: fourier-drift
+  version: 0.1.0
+  author: raven
+  grove: raven-grove
+  type: system
+  trust: provisional
+  muses:
+  - raven
+  understanding_arc: shannon
+  hypothesis: Can Raven's pattern detection be expressed as a Fourier decomposition of the observation stream — where drift
+    is a low-frequency signal and noise is high-frequency?
+  math_coprocessor_dependency: true
+  fft_chip: true
+  cross_grove_connections:
+  - deep-root
+  strong_dependencies:
+  - deep-root-substrate
+  source: 05-cartridge-forest.md C-9; 08-gpu-promotion-loop.md Part 7
+- id: C-10
+  name: centercamp-debate
+  version: 0.1.0
+  author: cedar
+  grove: cedar-grove
+  type: game
+  trust: provisional
+  muses:
+  - cedar
+  understanding_arc: socrates
+  hypothesis: Does a structured muse debate (Centercamp) consistently produce better cartridge hypotheses than any single
+    muse would generate alone?
+  centercamp_protocol:
+    description: Centercamp is the playa-center gathering space — the ecosystem's collective decision-making forum. PromotionReturnReporter
+      (Raven + Cedar + Willow) reports promoted and demoted skills back here.
+    dashboard_owner: willow
+  cross_grove_connections:
+  - sam-garden
+  - hemlock-ridge
+  strong_dependencies:
+  - growth-rings
+  - lichen-trust
+  source: 05-cartridge-forest.md C-10; 08-gpu-promotion-loop.md Part 6
+- id: C-11
+  name: deep-root-substrate
+  version: 0.1.0
+  author: math-coprocessor
+  grove: deep-root
+  type: ecology
+  trust: provisional
+  muses:
+  - cedar
+  - raven
+  hypothesis: Is the Math Co-Processor behaving as deep root infrastructure — invisible at the surface but measurable by the
+    quality of outputs that depend on it?
+  cross_grove_connections:
+  - all-groves
+  strong_dependencies: []
+  source: 05-cartridge-forest.md C-11
+- id: C-12
+  name: ephemeral-fork
+  version: 0.1.0
+  author: sam
+  grove: sam-garden
+  type: system
+  trust: provisional
+  muses:
+  - sam
+  hypothesis: Does an ephemeral experiment fork leave a detectable trace in the event store even after the fork closes — like
+    a fire scar on a trunk?
+  cross_grove_connections:
+  - cedar-grove
+  strong_dependencies: []
+  weak_links:
+  - mycelium-signal
+  - salmon-feedback
+  - wolf-pack-formation
+  - centercamp-debate
+  source: 05-cartridge-forest.md C-12
+- id: C-13
+  name: cascade-verification
+  version: 0.1.0
+  author: hemlock
+  grove: hemlock-ridge
+  type: ecology
+  trust: provisional
+  muses:
+  - hemlock
+  hypothesis: Can Hemlock's 78/78 verification standard be reproduced as a cartridge-level gate — blocking promotion of any
+    cartridge that has not cleared all safety checks?
+  cas_reference: CAS 78/78 Cascade Range Biodiversity mission (v1.49.23)
+  cross_grove_connections:
+  - cedar-grove
+  strong_dependencies:
+  - lichen-trust
+  source: 05-cartridge-forest.md C-13; 09-verification-standards.md Part 1
+- id: C-14
+  name: forest-of-echoes
+  version: 0.1.0
+  author: raven
+  grove: raven-grove
+  type: game
+  trust: provisional
+  muses:
+  - raven
+  hypothesis: Do structural patterns in the codebase recur across domains in the same way species guilds recur across ecosystems
+    — not by accident but by functional necessity?
+  cross_grove_connections:
+  - cedar-grove
+  strong_dependencies:
+  - centercamp-debate
+  source: 05-cartridge-forest.md C-14
+- id: C-15
+  name: coordinate-garden
+  version: 0.1.0
+  author: foxy
+  grove: foxy-canopy
+  type: ecology
+  trust: provisional
+  muses:
+  - foxy
+  - sam
+  hypothesis: Can Sam's Garden be projected onto the same coordinate system as Foxy's Canopy — so that every experiment in
+    the garden has a spatial position in the ecosystem map?
+  cross_grove_connections:
+  - sam-garden
+  strong_dependencies:
+  - mycelium-signal
+  - salmon-feedback
+  weak_links:
+  - disclosure-elevation
+  source: 05-cartridge-forest.md C-15
+cartridge_dependency_graph:
+  strong_edges:
+  - - salmon-feedback
+    - mycelium-signal
+  - - cascade-verification
+    - lichen-trust
+  - - species-bingo
+    - cascade-verification
+  - - centercamp-debate
+    - growth-rings
+  - - centercamp-debate
+    - lichen-trust
+  - - forest-of-echoes
+    - centercamp-debate
+  - - coordinate-garden
+    - mycelium-signal
+  - - coordinate-garden
+    - salmon-feedback
+  - - unison-content-address
+    - lichen-trust
+  - - fourier-drift
+    - deep-root-substrate
+  topology_verified: true
+  algorithm: Kahns (acyclic confirmed)
+  source: 05-cartridge-forest.md (Cartridge Dependency Graph); 09-verification-standards.md T-16
+session_lifecycle:
+  states:
+  - DORMANT
+  - INITIALIZING
+  - ACTIVE
+  - BOUNDARY_APPROACHED
+  - WINDING_DOWN
+  - BOUNDARY
+  - HANDOFF
+  state_transitions:
+  - from: DORMANT
+    to: INITIALIZING
+    event: SessionStart
+    recorder: session-start.ts
+  - from: INITIALIZING
+    to: ACTIVE
+    event: session-cache-write
+    recorder: session-observer.ts
+  - from: ACTIVE
+    to: BOUNDARY_APPROACHED
+    event: cadence-shift-or-duration-signal
+    detector: owl
+  - from: BOUNDARY_APPROACHED
+    to: WINDING_DOWN
+    event: no-new-major-tasks
+    detector: owl+hawk
+  - from: WINDING_DOWN
+    to: BOUNDARY
+    event: SessionEnd
+    recorder: session-end.ts
+  - from: BOUNDARY
+    to: HANDOFF
+    event: Cedar-prev_hash-recorded
+    recorder: event-store.ts
+  - from: HANDOFF
+    to: DORMANT
+    event: next-session-not-yet-started
+    persister: drift-monitor
+  temporal_marker_schema: SessionBoundaryMarker { session_id, wave, session_number, pass, wall_clock_start, wall_clock_end,
+    duration_minutes, epoch, prev_hash, own_hash, cadence, momentum_phase, completed[], deferred[], open_questions[], next_session_context,
+    muse_states[], sync_points[] }
+  marker_storage: 'Cedar EventStore.emit() into events.jsonl chain (category: events, type: session_boundary)'
+  source: 06-session-boundary-map.md Parts 1-2
+  wave_gates:
+  - id: gate-0-1
+    status: passed
+    passed_at: '2026-03-08'
+    opens_when: identity-map.md, function-binding.md, cross-validation.md all present and non-empty
+    verification:
+    - 01-identity-map.md present, non-empty, 6 groves, 7 trails
+    - 02-function-binding.md present, >= 400 module cluster entries, disambiguation protocol
+    - 03-cross-validation.md present, coherence > 90%, fatal contradictions = 0
+    - all three mutually consistent
+    - 'Cedar attestation: prev_hash chain from session 3 boundary marker'
+    cedar_attestation: S3 session boundary marker prev_hash
+    source: 09-verification-standards.md Part 4 Gate 0-1
+  - id: gate-1-2
+    status: pending
+    opens_when: 04, 05, 06, 07-message-integration.md all present (4 Wave 1 outputs)
+    hemlock_checks:
+    - '04-helper-teams.md: exactly 8 teams'
+    - '05-cartridge-forest.md: exactly 15 cartridges'
+    - '06-session-boundary-map.md: all 4 wave gates have initial structure'
+    - '07-message-integration.md: present and non-empty'
+    - T-01 through T-24 all passing (MUS-V1 through MUS-V6)
+    lex_checks:
+    - MuseId type mismatch blocker resolved (6/9 originally mismatched)
+    - 5 UNRESOLVED items from S2 all resolved (T-07)
+    - inter-team cycle detection run (T-19) and clean
+    - dependency graph Kahn's run (T-16) and clean
+    hawk_checks:
+    - no wave gate with undefined checklist
+    - message routing covers all 9 muses as recipients
+    - no coverage gap in Understanding Arc advisory protocol
+    source: 09-verification-standards.md Part 4 Gate 1-2
+  - id: gate-2-3
+    status: defined
+    opens_when: Sessions 8, 9, 10 outputs present and Wave 2 complete
+    hemlock_checks:
+    - Session 8 GPU Loop output present and non-empty
+    - Session 9 (this document) present and non-empty
+    - Session 10 (determinism hardening) present and non-empty
+    - minDeterminism >= 0.95 in DEFAULT_GATEKEEPER_CONFIG
+    - Blitter/PromotionDetector connection documented and tested
+    - T-25 through T-28 all passing (MUS-V7)
+    lex_checks:
+    - GPU loop test suite >= 32 tests, all passing
+    - 6 safety-critical tests all passing
+    - determinism threshold change backward-compatible
+    hawk_checks:
+    - all 9 MuseIds in at least one evaluation record
+    - DriftMonitor active for all promoted artifacts
+    - Centercamp records exist for all Wave 0-1 promotions
+    source: 09-verification-standards.md Part 4 Gate 2-3
+  - id: gate-3-done
+    status: defined
+    opens_when: Wave 3 complete — all 6 passes integrated end-to-end, all 9 muses inhabited
+    hemlock_checks:
+    - all 32 tests (T-01 through T-32) passing
+    - all 6 safety-critical tests passing with no exceptions
+    - all 10 success criteria (SC-01 through SC-10) verified PASS
+    - Centercamp record count = promoted skill count
+    - 'demotion responsiveness: at least one cycle observed or clean run recorded'
+    lex_checks:
+    - 'end-to-end pipeline test: observation to promotion to centercamp return'
+    - prev_hash chain continuous from genesis to tip, zero broken links
+    hawk_checks:
+    - all 6 cross-grove trails have at least one active inter-team link
+    - no grove is isolated (every grove participates in >= 1 team)
+    - 'fire succession coverage: all three zones (old-growth, canopy, pioneer) documented'
+    source: 09-verification-standards.md Part 4 Gate 3-done
+  parallel_sync_protocol:
+    description: 'When two sessions run in parallel, Owl enforces sync via sync_baseline (current Cedar chain tip hash). All
+      parallel sessions receive same sync_baseline. If any session''s baseline differs at close: SYNC FAILURE -> halt, re-read,
+      retry.'
+    merge_marker: After all parallel sessions complete, Cedar produces merge_marker whose prev_hash is the last completed
+      parallel session's hash.
+    source: 06-session-boundary-map.md Part 3 (Parallel Session Sync Protocol)
+promotion_pipeline:
+  description: 'Full promotion loop from observation substrate through quality gate to kernel execution and Centercamp return.
+    Resolves B-6 blocker: Blitter.Promoter (static declarations) and PromotionDetector (empirical observations) were disconnected
+    pipelines. PromotionSource interface is the convergence point.'
+  promotion_source_interface:
+    fields:
+      operationId: string — stable deterministic key for DriftMonitor tracking
+      toolName: 'string — Blitter side: scriptType; Observation side: toolName'
+      source: declaration | observation | converged
+      determinism: number or null — null for declaration-only candidates
+      compositeScore: number or null — null for declaration-only candidates
+      observationCount: number — 0 for declarations before any observations
+      script: string or null — declared script or ScriptGenerator output
+      skillName: string or null — null for observation-only candidates
+      identifiedAt: string — ISO 8601
+      cedarHash: string or null — chain position at identification
+    convergence_algorithm:
+      step_1: collect declaration candidates from Blitter.Promoter
+      step_2: collect observation candidates from PromotionDetector
+      step_3: match by toolName (normalized) + script content hash
+      step_4: matched pairs become source='converged' (observation data preferred)
+      step_5: pass all sources to PromotionGatekeeper
+      step_6: 'approved: Kernel Promotion; rejected: Cedar audit trail, re-evaluation queue'
+    source: 08-gpu-promotion-loop.md Part 3
+  gate_thresholds:
+    G1:
+      name: Determinism
+      default: 0.8
+      mus_target: 0.95
+      delta: +0.15 — Session 10 responsible
+      blocking: true
+    G2:
+      name: Composite Score
+      default: 0.85
+      mus_target: 0.85
+      formula: (0.4 * determinism) + (0.35 * frequencyNorm) + (0.25 * tokenSavingsNorm)
+      blocking: true
+    G3:
+      name: Observation Count
+      default: 5
+      mus_target: 5
+      rationale: 5 observations minimum for non-noisy determinism ratio
+      blocking: true
+    G35:
+      name: Script Match
+      applies_to: converged candidates only
+      blocking: false
+    G_DECL:
+      name: Empirical Required
+      applies_to: declaration-only candidates
+      blocking: true
+      rationale: declarations enter 'pending validation' queue — not promoted until >= G3 observations
+    source: 08-gpu-promotion-loop.md Part 4
+  pipeline_stages:
+  - stage: observation-substrate
+    description: SequenceRecorder stores ToolExecutionPair[] to PatternStore executions
+    owner: raven
+    continuous: true
+  - stage: determinism-analysis
+    description: DeterminismAnalyzer.classify() produces ClassifiedOperation[]
+    module: src/platform/observation/determinism-analyzer.ts
+    owner: raven
+  - stage: promotion-detection
+    description: PromotionDetector.detect() produces PromotionCandidate[] sorted by compositeScore
+    module: src/platform/observation/promotion-detector.ts
+    owner: raven
+  - stage: declaration-substrate
+    description: Blitter.Promoter.detectPromotable() + extractOffloadOps() produces OffloadOperation[]
+    module: src/services/chipset/blitter/promoter.ts
+    owner: lex
+    mode: static
+  - stage: convergence
+    description: PromotionOrchestrator matches declaration + observation, produces PromotionSource[]
+    module: src/services/chipset/blitter/promotion-orchestrator.ts
+    co_owners:
+    - raven
+    - lex
+    new_module: true
+  - stage: quality-gate
+    description: PromotionGatekeeper.evaluate() — 6 gates, all checked exhaustively. All results persisted to PatternStore
+      decisions.
+    module: src/platform/observation/promotion-gatekeeper.ts
+    owner: hemlock
+  - stage: script-generation
+    description: ScriptGenerator.generate() produces bash script from approved PromotionCandidate
+    module: src/platform/observation/script-generator.ts
+    owner: lex
+  - stage: kernel-promotion
+    description: OffloadKernel execution — promoted script replaces live tool call
+    module: src/services/chipset/exec/kernel.ts
+  - stage: signal-bus
+    description: SignalBus.emit(signal, promotion) — NEW event type connecting to promotion lifecycle
+    module: src/services/chipset/blitter/signals.ts
+    note: 'B-6 gap: SignalBus did not emit promotion signals before this fix'
+  - stage: drift-monitoring
+    description: DriftMonitor.check() — consecutive mismatch counter, cross-session persistence. Fourier-enhanced when fourier-drift
+      cartridge loaded.
+    module: src/platform/observation/drift-monitor.ts
+    owner: raven
+    fourier_enhanced: true
+  - stage: centercamp-return
+    description: 'PromotionReturnReporter — reports every promotion/demotion event to chain + SignalBus. Events: promoted,
+      demoted, promotion-failed, drift-detected.'
+    module: src/services/chipset/blitter/promotion-return-reporter.ts
+    co_owners:
+    - raven
+    - cedar
+    - willow
+    new_module: true
+  centercamp_return_path:
+    dashboard_owner: willow
+    disclosure_levels:
+      level_1: counts only (Active, Pending, Demoted, Drift Alerts)
+      level_2: per-operation table (operationId, skill, source, determinism, mismatches, status)
+      level_3: gate reasoning strings
+    source: 08-gpu-promotion-loop.md Part 6
+message_integration:
+  description: The protocol by which the nine muses speak to users (greeting), route messages (routing), deliver ambient tips
+    (mycorrhizal layer), and extend the existing console MessageType union for muse-typed messages.
+  message_types:
+    existing:
+    - text
+    - warning
+    - error
+    - success
+    - info
+    - progress
+    - prompt
+    - setting-change
+    muse_extensions:
+    - muse-greeting
+    - muse-tip
+    - muse-response
+    - muse-handoff
+    - muse-pattern
+    - muse-boundary
+    total_count: 14
+    h8_resolution: true
+    source: 07-message-integration.md (H-8 fix)
+  greeting_protocol:
+    structural_principles:
+      G1: Match the audience — familiarity level before capability
+      G2: One voice at a time — entry muse greets, others acknowledge when conversation routes
+      G3: Offer, do not instruct — invitations create possibility; instructions create obligation
+    familiarity_levels:
+      first:
+        signal: No prior session record or --newcomer flag
+        disclosure_mode: glance (<=80 chars)
+      returning:
+        signal: 1-20 prior sessions or last session > 7 days ago
+        disclosure_mode: scan (<=500 chars)
+      veteran:
+        signal: 21+ prior sessions or --veteran flag
+        disclosure_mode: read (full)
+    session_count_source: Cedar event store — count SessionBoundaryMarker entries
+    entry_muse_mapping:
+      www/MUS/index.html: willow
+      www/PNW/COL/: willow
+      www/PNW/CAS/: hemlock
+      www/PNW/ECO/: foxy
+      www/PNW/GDN/: sam
+      www/UNI/: lex
+      www/MUS/: cedar
+      cli_session_start: willow
+      gsd_skill_creator_help: lex
+      error_recovery_disturbance: foxy
+    source: 07-message-integration.md Part 1
+  tip_delivery:
+    layer: mycorrhizal
+    relevance_formula: relevance = (domainMatch * 0.40) + (recencyInverse * 0.25) + (momentumFit * 0.20) + (familiarityFit
+      * 0.15)
+    delivery_threshold: 0.65
+    threshold_rationale: 'Shannon: where tip''s information content exceeds cost of interrupting attention'
+    frequency_rules:
+      max_one_tip_per_exchange: true
+      raven_exception: pattern observations may accompany any message
+      cross_muse_spacing_exchanges: 2
+      session_opening_grace_exchanges: 3
+      veteran_suppression: familiarity:first tips permanently suppressed for veterans
+      user_silencing: tips:off in console config (setting-change message type)
+    catalog_location: data/muse-tips.yaml
+    source: 07-message-integration.md Parts 2.1-2.4
+  conversation_routing:
+    intent_categories:
+    - intent: how-does-it-work
+      primary: willow
+      secondary: null
+    - intent: can-you-show-me
+      primary: willow
+      secondary: sam
+    - intent: validate-this
+      primary: hemlock
+      secondary: lex
+    - intent: what-pattern-is-this
+      primary: raven
+      secondary: cedar
+    - intent: what-happened
+      primary: cedar
+      secondary: owl
+    - intent: run-this
+      primary: lex
+      secondary: hemlock
+    - intent: what-comes-next
+      primary: owl
+      secondary: hawk
+    - intent: find-the-gap
+      primary: hawk
+      secondary: raven
+    - intent: explore-this
+      primary: sam
+      secondary: foxy
+    - intent: draw-the-map
+      primary: foxy
+      secondary: willow
+    - intent: understanding-deep
+      primary: socrates
+      secondary: euclid
+    - intent: structure-proof
+      primary: euclid
+      secondary: lex
+    - intent: information-theory
+      primary: shannon
+      secondary: raven
+    - intent: human-machine
+      primary: amiga
+      secondary: willow
+    disambiguation_source: 02-function-binding.md (5-rule disambiguation protocol)
+    ambiguity_resolution:
+      hawk_tiebreakers:
+        1: Grove location priority
+        2: Recency priority (last 3 exchanges)
+        3: Disclosure priority (familiarity:first — Willow wins)
+        4: Explicit offer (last resort only)
+    handoff_recorded_by: cedar
+    source: 07-message-integration.md Parts 3.1-3.6
+verification:
+  standard: CAS 78/78 adapted for MUS
+  cas_reference: Cascade Range Biodiversity mission (v1.49.23) — 78 items, 0 failures
+  total_tests: 32
+  safety_critical_count: 6
+  pre_plan_estimate: 28
+  calibrated_count: 32
+  count_discrepancy_reason: H-6 (wave gate criteria) and H-10 (sync gates) each added tests not in pre-plan
+  success_criteria:
+    SC-01:
+      name: MuseId Coverage
+      pass: 9==9==9 (union, primary owners, team appearances)
+    SC-02:
+      name: Module Binding Completeness
+      pass: coverage >= 95%, UNRESOLVED count = 0
+    SC-03:
+      name: Cross-Validation Coherence
+      pass: unresolved contradictions = 0, fatal contradictions = 0
+    SC-04:
+      name: Cartridge Schema Completeness
+      pass: 15 cartridges, >= 10/12 required fields each, dependency graph acyclic
+    SC-05:
+      name: Team Formation Integrity
+      pass: 8 teams, all 6 structural fields, zero inter-team cycles
+    SC-06:
+      name: Session Chain Integrity
+      pass: prev_hash mismatches = 0 (HIGHEST PRIORITY FAILURE)
+    SC-07:
+      name: Wave Gate Passage
+      pass: gate-0-1 passed; remaining gates have checklists defined
+    SC-08:
+      name: Promotion Gatekeeper Calibration
+      pass: minDeterminism >= 0.95 in DEFAULT_GATEKEEPER_CONFIG
+    SC-09:
+      name: Centercamp Record Completeness
+      pass: centercamp count = promoted count, each has MusePerspective[] >= 3
+    SC-10:
+      name: De-Promotion Responsiveness
+      pass: zero demotions without Cedar + Centercamp records
+  test_matrix:
+    MUS_V1_MuseId_Coverage:
+    - id: T-01
+      desc: MuseId union has exactly 9 members
+      owner: hemlock
+      safety_critical: false
+    - id: T-02
+      desc: All 9 MuseIds have >= 1 primary binding in 02-function-binding.md
+      owner: hemlock
+      safety_critical: false
+    - id: T-03
+      desc: All 9 MuseIds appear as primary or secondary in >= 1 team definition
+      owner: hawk
+      safety_critical: false
+    - id: T-04
+      desc: No MuseId listed as unbound, provisional, or TBD
+      owner: hemlock
+      safety_critical: false
+    MUS_V2_Module_Binding_Accuracy:
+    - id: T-05
+      desc: Non-test TypeScript file count in src/ at binding time is 1333 (+-5% tolerance)
+      owner: lex
+      safety_critical: false
+    - id: T-06
+      desc: Module cluster coverage ratio >= 95%
+      owner: hemlock
+      safety_critical: false
+    - id: T-07
+      desc: 5 UNRESOLVED items from S2 each have resolution in subsequent session document
+      owner: hemlock
+      safety_critical: false
+    - id: T-08
+      desc: No module cluster entry has primary owner = null or unassigned
+      owner: hemlock
+      safety_critical: false
+    MUS_V3_Cross_Validation_Coherence:
+    - id: T-09
+      desc: S3 cross-validation records coherence > 90%
+      owner: cedar
+      safety_critical: false
+    - id: T-10
+      desc: Unresolved contradictions in S3 = 0
+      owner: cedar
+      safety_critical: true
+    - id: T-11
+      desc: Fatal contradictions in S3 = 0
+      owner: cedar
+      safety_critical: true
+    MUS_V4_Cartridge_Schema_Completeness:
+    - id: T-12
+      desc: Exactly 15 cartridges defined in 05-cartridge-forest.md
+      owner: sam
+      safety_critical: false
+    - id: T-13
+      desc: Each cartridge has name, version, author, description, trust, muses[], grove, type
+      owner: lex
+      safety_critical: false
+    - id: T-14
+      desc: Each cartridge has hypothesis field, non-empty
+      owner: sam
+      safety_critical: false
+    - id: T-15
+      desc: Each cartridge has deepMap with >= 1 node and >= 1 edge
+      owner: sam
+      safety_critical: false
+    - id: T-16
+      desc: Dependency graph is acyclic (Kahn's algorithm)
+      owner: lex
+      safety_critical: true
+    MUS_V5_Team_Formation_Integrity:
+    - id: T-17
+      desc: Exactly 8 teams defined in 04-helper-teams.md
+      owner: hawk
+      safety_critical: false
+    - id: T-18
+      desc: Each team has topology, durability, scope, outputTo[], inputFrom[], >= 1 activation trigger, >= 1 dissolution
+        trigger
+      owner: hawk
+      safety_critical: false
+    - id: T-19
+      desc: Inter-team link graph is acyclic (validateInterTeamLinks() protocol)
+      owner: lex
+      safety_critical: true
+    - id: T-20
+      desc: Each team has at least one Understanding Arc advisory declared
+      owner: hemlock
+      safety_critical: false
+    MUS_V6_Session_Boundary_Chain_Integrity:
+    - id: T-21
+      desc: Genesis session boundary marker has prev_hash = null
+      owner: cedar
+      safety_critical: false
+    - id: T-22
+      desc: For all N > 1, marker N prev_hash matches SHA-256 of marker N-1 content
+      owner: cedar
+      safety_critical: true
+    - id: T-23
+      desc: No session boundary marker references prev_hash that does not exist in chain
+      owner: cedar
+      safety_critical: true
+    - id: T-24
+      desc: Session duration anomalies (T_end < T_start) = 0
+      owner: owl
+      safety_critical: false
+    MUS_V7_Wave_to_Wave_Consistency:
+    - id: T-25
+      desc: Wave gate 0-1 has status=passed with timestamp and Cedar attestation
+      owner: hemlock
+      safety_critical: false
+    - id: T-26
+      desc: Wave gate 1-2 checklist defined before Wave 2 begins
+      owner: hemlock
+      safety_critical: false
+    - id: T-27
+      desc: Wave gate 2-3 checklist defined before Wave 3 begins
+      owner: hemlock
+      safety_critical: false
+    - id: T-28
+      desc: No Wave N document contradicts claim recorded in Cedar chain from Wave N-1
+      owner: cedar
+      safety_critical: false
+    MUS_V8_Centercamp_Promotion_Standards:
+    - id: T-29
+      desc: Centercamp record count = promoted skill count
+      owner: cedar
+      safety_critical: false
+    - id: T-30
+      desc: Each Centercamp record has MusePerspective[] length >= 3
+      owner: hemlock
+      safety_critical: false
+    - id: T-31
+      desc: Each demotion event has a Cedar chain record within the triggering session
+      owner: cedar
+      safety_critical: false
+    - id: T-32
+      desc: Each demotion event has Centercamp return record at most one session boundary after demotion
+      owner: hemlock
+      safety_critical: false
+  safety_critical_summary:
+  - test: T-10
+    failure_mode: Unresolved S3 contradiction
+    effect: Halts all gate progression until resolved
+  - test: T-11
+    failure_mode: Fatal S3 contradiction
+    effect: Halts all gate progression until resolved
+  - test: T-16
+    failure_mode: Dependency cycle in cartridge graph
+    effect: Cartridge distribution blocked; no cartridge may be promoted
+  - test: T-19
+    failure_mode: Inter-team cycle
+    effect: Team formation blocked; no team may form
+  - test: T-22
+    failure_mode: prev_hash mismatch in chain
+    effect: Chain integrity breach; all operations pause until resolved
+  - test: T-23
+    failure_mode: Orphaned prev_hash reference
+    effect: Chain integrity breach; all operations pause until resolved
+  source: 09-verification-standards.md Parts 2-4
+fire_succession:
+  structural_map:
+    disturbance_event: Breaking change, API rewrite, branch reset, scope pivot
+    pioneer_phase: First 3-5 commits after disturbance — minimal, establishing new ground truth
+    canopy_closure_condition: New architecture in 5+ consecutive chain entries without rollback
+    old_growth_condition: Entry stable for 10+ versions without modification
+    cedar_role: Record each phase boundary, maintain continuity across disturbance, verify new growth does not contradict
+      old-growth record. The chain is the forest floor.
+  current_zone_map:
+    old_growth:
+    - src/core/events/event-store.ts
+    - src/services/chipset/cedar-engine.ts
+    - src/core/validation/
+    canopy:
+    - math-coprocessor/
+    - www/PNW/COL/
+    - www/PNW/CAS/
+    - www/UNI/
+    pioneer:
+    - www/MUS/
+    - src/integrations/wasteland/
+    - unison-research/
+  protected_canopy_register:
+    description: Foxy maintains this register. Any commit touching a protected-canopy entry triggers a succession narrative
+      check.
+    entries:
+    - src/core/events/event-store.ts
+    - src/services/chipset/cedar-engine.ts
+  source: 03-cross-validation.md (cedar-fire-succession node); 04-helper-teams.md Team 5
+metadata:
+  mission: MUS Muse Ecosystem Integration
+  session: Wave 3, Session 10 — Chipset YAML (final deliverable)
+  date: '2026-03-08'
+  branch: wasteland/skill-creator-integration
+  author: lex
+  composable_with:
+  - hemlock
+  - cedar
+  - foxy
+  - raven
+  - hawk
+  - owl
+  every_field_traceable: true
+  source_documents:
+  - '01-identity-map.md: groves, trails, muse grove assignments'
+  - '02-function-binding.md: muse module_ownership, disambiguation protocol'
+  - '03-cross-validation.md: cartridge C-1 prototype, fire_succession, chain linking design'
+  - '04-helper-teams.md: teams, network_layers, fire_succession zone map'
+  - '05-cartridge-forest.md: cartridges C-2 through C-15, dependency graph'
+  - '06-session-boundary-map.md: session_lifecycle, wave_gates, parallel sync protocol'
+  - '07-message-integration.md: message_integration, muse greeting scripts'
+  - '08-gpu-promotion-loop.md: promotion_pipeline, Math Co-Processor integration'
+  - '09-verification-standards.md: verification, all four wave gate criteria'
+  architectural_decisions:
+    cedar_engine_chain_linking: prev_hash implemented — see 03-cross-validation.md CedarEngine sketch
+    understanding_arc_included: true
+    sam_garden_is_destination: true
+    fire_succession_is_structural: true
+    owl_is_formal_module: true
+    cartridge_identity_by_name_string: true
+    prototype_cartridge_done: growth-rings (03-cross-validation.md)
+    cedar_owns_muse_ts: true
+    raven_owns_promotion_detector: true
+    raven_owns_rules_engine: true
+    lex_owns_hooks: true
+    cli_ts_dual_owned: Willow (greeting wrapper) + Lex (spec/help text)
