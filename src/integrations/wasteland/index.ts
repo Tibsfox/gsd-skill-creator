@@ -381,3 +381,28 @@ export type {
   SubmissionResult,
   PendingSubmission,
 } from './agent-submission-workflow.js';
+
+// Trust Relationships (Unit Circle Model — interpersonal trust)
+export {
+  computeVector,
+  classifyVector,
+  describeVector,
+  createContract,
+  isContractActive,
+  contractTimeRemaining,
+  createRelationship,
+  computeHarmony,
+  getActiveRelationships,
+  getRelationshipsForRig,
+  aggregateTrustStrength,
+  createCharacterSheet,
+  getPublicProfile,
+  formatRelationship,
+} from './trust-relationship.js';
+export type {
+  TrustVector,
+  TrustContractType,
+  TrustContract,
+  TrustRelationship,
+  CharacterSheet,
+} from './trust-relationship.js';
