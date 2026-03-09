@@ -1,7 +1,9 @@
 # Virtual Black Rock City — Mission Staging
 
-**Status:** STAGED (read, reviewed, awaiting execution)
+**Status:** COMPLETE — all 5 waves, 73 files, 122/122 tests PASS
 **Date staged:** 2026-03-09
+**Date completed:** 2026-03-09
+**Commits:** `af161bc1` (W0), `3206b856` (W1A+1B), `af665da0` (W2), `f310db43` (W3)
 **Mission pack:** `mission-pack/vbrc_mission.pdf` (24 pages, 179KB)
 **Companion files:** `mission-pack/vbrc_index.html` (styled web view), `mission-pack/vbrc_mission.tex` (LaTeX source)
 
