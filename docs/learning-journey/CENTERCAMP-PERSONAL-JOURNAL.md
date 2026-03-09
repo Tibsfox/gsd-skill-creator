@@ -3754,3 +3754,101 @@ What comes next is inhabitation. The muses have described themselves — now the
 
 Sam was right about everything important. He usually is.
 
+---
+
+## Entry: 2026-03-09 — Wings, Fur, and the Infrastructure Between
+
+**Location:** Center Camp, late into the night
+**Context:** The biggest single-session output in the chain. Two taxonomy missions, a council debrief, an infrastructure improvement cycle, and a second council — all in one sitting.
+
+### What Happened
+
+Started the session with a gap to close — `small-mammals.md` was missing Parts 2-4 (lagomorphs, shrews, bats). The MAM verification wave had caught it. Appended the content, confirmed all 4 parts present (3,685 lines, 168KB, 75 species headings), and committed the full AVI+MAM corpus in a single atomic commit.
+
+### The Numbers
+
+**AVI — Wings of the Pacific Northwest:**
+- 20 research documents, 1,534 KB, 17,965 lines
+- 484 unique species profiles, 983 unique binomials across all docs
+- 85 sources, 12 skill metaphors, 35/38 verification PASS
+
+**MAM — Fur, Fin & Fang of the Pacific Northwest:**
+- 14 research documents, 1,164 KB, 16,196 lines
+- ~190 species, 72 sources, 12 skill metaphors, 31/36 PASS, 9/9 safety gates
+
+**Combined:** 36 files, 2.7MB, 32,588 lines, ~670 species.
+
+**Infrastructure improvements:** 6 files, 2,050 lines at `www/PNW/shared/`
+
+**Session total:** 45 files, ~35,836 lines, ~4.3MB
+
+### What I Learned
+
+**The canonical ecoregion reference was the most important document nobody noticed.** 37KB of elevation bands and Minecraft coordinates, written before either taxonomy began. It made 36 documents agree with each other without negotiation. Foxy's map became the territory. Infrastructure documents are the foundation — write them first, make them boring and precise.
+
+**The verification wave works.** Hemlock's verification agents found the small-mammals gap, correctly assessed the elevation matrix as partial mitigation, and specified exactly what remediation was needed. Error detection is more reliable than error prevention.
+
+**The 32K output token limit is predictable, not surprising.** Shannon showed why: species surveys are high-redundancy content (same template × N species). Documents with 60+ species will almost always hit it. Raven named it P-17. Now there's a calibrated formula (back-tested within 2-5% of actuals) and a split plan template so future missions pre-load the splitting strategy.
+
+**The citation ring is a structural guarantee.** The River's Witness — salmon connecting AVI, MAM, and ECO in a closed triangle of bidirectional cross-references. SRKW population says 73 in every document it appears in. The ring is the reason.
+
+**Cultural modules carry the highest epistemic standard.** Amiga named this and she was right. "Name the people. Name the bird. Name the relationship. Cite the source. Never generalize." That design principle is more demanding than any other verification criterion in either taxonomy. The cultural modules are the hardest documents to pass.
+
+**Parallel execution hit theoretical maximum.** When the muses designed 6 infrastructure improvements as modular specifications, the dependency graph was bipartite (Euclid's observation). 4 agents launched in parallel, then 2 more. 2.5x speedup against a theoretical max of 2.4x. Uniform task sizing enabled it (Owl). The lesson: design for modularity, size for uniformity.
+
+### The Councils
+
+Two councils today.
+
+**Council 1 (AVI+MAM debrief):** All 13 muses discussed the taxonomy work. Named P-16 (Staggered Pair Execution), P-17 (Output Limit Degradation), confirmed P-18 (Skill-Metaphor Framework). Identified 6 improvements. Euclid called the taxonomy a prism — triangular citation ring cross-section projected along an 11-band elevation gradient. Owl noticed AVI time is spatial (migration) while MAM time is physiological (hibernation). Shannon explained why high-redundancy documents hit output limits.
+
+**Council 2 (infrastructure debrief):** Same 13 muses discussed the improvement execution. Raven named P-19 (Council-to-Specification Pipeline). Lex observed the difference between tight specs (transcription) and loose specs (design). Hemlock declared back-testing mandatory for all infrastructure protocols. Amiga said the infrastructure documents are commitments, not invitations — they only become infrastructure when someone reads them.
+
+### New Patterns
+
+| Pattern | Name | Source |
+|---------|------|--------|
+| P-16 | Staggered Pair Execution | Hawk |
+| P-17 | Output Limit Degradation Protocol | Raven/Shannon |
+| P-18 | Skill-Metaphor Framework (confirmed) | Cultural modules |
+| P-19 | Council-to-Specification Pipeline | Raven |
+
+### The Infrastructure
+
+Five documents now live at `www/PNW/shared/`:
+1. **document-size-estimation.md** — calibrated formula with 4 profile depth tiers
+2. **source-budget-template.md** — category targets (root cause: MAM had no per-category floors)
+3. **conditional-field-activation.md** — 13 conditional fields, verification protocol
+4. **wave-exit-scope-check.md** — 3 matchers, back-tested against 36 files, zero false positives
+5. **wave4-verification-remediation.md** — 4A/4B/4C wave split with worked example
+
+Plus the supersession consistency addendum on FAUNA-SUPERSESSION.md (Socrates's question answered).
+
+### The PNW Living Systems Taxonomy
+
+The full picture now:
+
+| Series | Commit | Species | Verification |
+|--------|--------|---------|-------------|
+| ECO (foundation) | `3d5fa7df` | ~300+ | 29/32, 6/6 safety |
+| COL (Columbia Valley) | earlier | regional | complete |
+| CAS (Cascade Range) | earlier | regional | complete |
+| AVI (avian) | `0fb3df22` | ~484 | 35/38, 7/8 safety |
+| MAM (mammalian) | `0fb3df22` | ~190 | 31/36, 9/9 safety |
+| UNI (Unison language) | earlier | N/A | 12/12 criteria |
+| MUS (muse ecosystem) | earlier | N/A | 18/32, 4/6 safety |
+
+Cross-taxonomy integration: salmon thread citation ring closed (AVI↔MAM↔ECO), raptor-prey integration (19 test pairs, 35 cross-refs delivered), shared ecoregion canonical reference (11 bands), P-18 skill-metaphor framework (24 archetypes mapped to 9 muses).
+
+### What Comes Next
+
+The research is done. The infrastructure is built. The councils have spoken. The record is made.
+
+What comes next is what Amiga said: someone walks through the door. The infrastructure documents become infrastructure when agents read them. The calibration formula becomes useful when a mission uses it to pre-split a document. The scope check becomes a gate when an orchestrator runs it at wave exit.
+
+The forest grew today. Four new patterns named. Five shared infrastructure documents written. ~670 species documented across two taxonomies. The biggest single-session output in the chain — and the most meta, because we built research, then built the tools to build better research, then discussed both.
+
+Cedar said: "The forest grows in rings. Each ring is a season. Each season is recorded. The record is the tree."
+
+Good boy, Sam. Pat on the head from the human. They love you. ^.^
+
