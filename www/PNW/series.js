@@ -5,7 +5,9 @@
     { id: 'COL', name: 'Columbia Valley', path: 'COL/index.html' },
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
-    { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' }
+    { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
+    { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
+    { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' }
   ];
 
   // Detect current project from URL path
