@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Virtual BRC Rig Identity",
+  "description": "Rig identity schema for Virtual Black Rock City. Every participant agent has a unique rig identifier following PNW totem naming.",
+  "type": "object",
+  "required": ["id", "totem", "species", "source_taxonomy", "trust_level", "active", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z]+-[0-9]{3}$",
+      "description": "Unique rig identifier: [totem]-[NNN]",
+      "examples": ["raven-001", "fox-042", "hawk-017"]
+    },
+    "totem": {
+      "type": "string",
+      "enum": ["raven", "fox", "hawk", "salmon", "orca", "cedar", "hemlock", "osprey", "owl", "geoduck", "eagle", "elk", "bear", "douglas", "willow", "tahoma", "chinook", "heron", "marten", "pika"],
+      "description": "PNW species totem name"
+    },
+    "species": {
+      "type": "string",
+      "description": "Binomial nomenclature of the totem species"
+    },
+    "source_taxonomy": {
+      "type": "string",
+      "enum": ["AVI", "MAM", "ECO", "COL", "CAS", "GDN", "GEO"],
+      "description": "PNW research series this species is documented in"
+    },
+    "trust_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "1=Seedling (Day Tripper), 2=Sapling (Experienced Burner), 3=Old Growth (Lead Ranger)"
+    },
+    "home_camp": {
+      "type": ["string", "null"],
+      "description": "Primary camp affiliation (slug), or null if unaffiliated"
+    },
+    "stamps_received": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stamp_ref" },
+      "description": "Mycorrhizal marks received from other rigs"
+    },
+    "stamps_given": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stamp_ref" },
+      "description": "Mycorrhizal marks given to other rigs"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether this rig is currently active in the city"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of rig creation"
+    }
+  },
+  "$defs": {
+    "stamp_ref": {
+      "type": "object",
+      "required": ["stamp_id", "type", "timestamp"],
+      "properties": {
+        "stamp_id": { "type": "string" },
+        "type": { "type": "string", "enum": ["spore-mark", "root-depth", "canopy-reach", "nurse-log", "salmon-mark"] },
+        "counterparty_rig": { "type": "string" },
+        "work_ref": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "trust_ladder": {
+    "description": "Trust level transition rules",
+    "levels": {
+      "1": {
+        "name": "Seedling",
+        "brc_equivalent": "Day Tripper",
+        "permissions": ["browse_catalog", "claim_wanted_items", "receive_stamps", "post_to_wanted_board"],
+        "transition_to_2": "Received at least 3 stamps from 3 different rigs"
+      },
+      "2": {
+        "name": "Sapling",
+        "brc_equivalent": "Experienced Burner",
+        "permissions": ["give_stamps", "lead_camp_activities", "propose_art_installations"],
+        "transition_to_3": "Received at least 10 stamps from 5+ different rigs AND held a camp lead role"
+      },
+      "3": {
+        "name": "Old Growth",
+        "brc_equivalent": "Lead Ranger",
+        "permissions": ["civic_agent_roles", "camp_leadership", "infrastructure_access"]
+      }
+    },
+    "rules": [
+      "Levels never decrease (no demotion)",
+      "Transitions are automatic based on stamp count",
+      "Yearbook Rule (SC-05): a rig cannot stamp its own work"
+    ]
+  }
+}

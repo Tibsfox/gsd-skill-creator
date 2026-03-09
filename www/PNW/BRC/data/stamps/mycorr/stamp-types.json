@@ -1,0 +1,85 @@
+{
+  "title": "Mycorrhizal Stamp Types",
+  "description": "Five stamp types replace generic achievement markers with a living-systems vocabulary. Each measures a different dimension of contribution to Virtual Black Rock City.",
+  "version": "1.0.0",
+  "domain": "virtual-brc",
+  "stamp_types": [
+    {
+      "type": "spore-mark",
+      "wasteland_dimension": "quality",
+      "pnw_metaphor": "Mycorrhizal spore: the work propagates",
+      "icon": "spore",
+      "color": "#8B6914",
+      "description": "Work that seeds further growth. Others build on it, extend it, or use it as foundation. The spore travels invisibly through the soil and sprouts where conditions are right.",
+      "recognition_pattern": "Given when completed work is referenced, forked, or extended by at least one other rig or camp.",
+      "examples": [
+        "A skill spec that becomes a template for 3 other skills",
+        "Documentation that multiple camps cite in their own work",
+        "Infrastructure that enables capabilities the builder didn't plan"
+      ]
+    },
+    {
+      "type": "root-depth",
+      "wasteland_dimension": "reliability",
+      "pnw_metaphor": "Old-growth root system: it holds",
+      "icon": "roots",
+      "color": "#5D4037",
+      "description": "Work that is dependable, well-tested, and structurally sound. Like the root system of a 500-year-old Douglas fir, this work holds everything above it in place.",
+      "recognition_pattern": "Given when completed work has been tested, stressed, and held without failure across multiple use cases.",
+      "examples": [
+        "A civic gate that correctly blocked 100 invalid attempts",
+        "A camp infrastructure that survived high-load events",
+        "A scheduling system that ran without error through an entire festival cycle"
+      ]
+    },
+    {
+      "type": "canopy-reach",
+      "wasteland_dimension": "creativity",
+      "pnw_metaphor": "Forest canopy gap: it lets light through",
+      "icon": "canopy",
+      "color": "#2E7D32",
+      "description": "Work that opens new possibilities or perspectives. When a tree falls in old-growth forest, the canopy gap lets light reach the forest floor — triggering an explosion of new growth. This stamp recognizes work that creates openings.",
+      "recognition_pattern": "Given when completed work introduces a novel approach, connection, or capability that wasn't planned or expected.",
+      "examples": [
+        "An unexpected composition of two camp skills that produces a new art installation",
+        "A role interpretation that reveals a previously unseen connection between departments",
+        "A creative solution to an infrastructure problem that others adopt"
+      ]
+    },
+    {
+      "type": "nurse-log",
+      "wasteland_dimension": "generosity",
+      "pnw_metaphor": "Nurse log: seeds others without requiring return",
+      "icon": "log",
+      "color": "#795548",
+      "description": "Work that helps others succeed without expecting anything in return. In Pacific Northwest forests, a fallen tree becomes a nurse log — decomposing slowly, providing nutrients and shelter for seedlings that grow along its length. The nurse log gives everything and asks nothing.",
+      "recognition_pattern": "Given when completed work primarily benefits other rigs or camps rather than the giver's own objectives.",
+      "examples": [
+        "Mentoring a new rig through their first camp build",
+        "Writing documentation that saves other rigs hours of confusion",
+        "Volunteering for unglamorous infrastructure work that makes the city function"
+      ]
+    },
+    {
+      "type": "salmon-mark",
+      "wasteland_dimension": "persistence",
+      "pnw_metaphor": "Returned upstream against all odds",
+      "icon": "salmon",
+      "color": "#B71C1C",
+      "description": "Work that overcame significant obstacles. The Pacific salmon swims thousands of miles through open ocean, then fights upstream against rapids, waterfalls, and predators to return to the exact gravel bed where it was born. This stamp recognizes that same determination.",
+      "recognition_pattern": "Given when completed work required overcoming substantial technical, coordination, or resource obstacles.",
+      "examples": [
+        "Resolving a cross-camp dependency conflict that blocked three other projects",
+        "Rebuilding a failed infrastructure component under time pressure",
+        "Completing a complex integration that required coordination across 4+ camps"
+      ]
+    }
+  ],
+  "rules": {
+    "yearbook_rule": "SC-05: A rig cannot stamp its own completion",
+    "anti_commodification": "SC-06: Stamps cannot be traded, sold, aggregated into leaderboards, or used as vanity metrics",
+    "one_per_work_per_giver": "A rig can only give one stamp per completed work item",
+    "no_type_restrictions": "Any trust level can give any stamp type",
+    "immutability": "Once given, a stamp cannot be revoked or modified"
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "title": "Esplanade Feed — Wanted Board Seed Data",
+  "description": "Pre-seeded wanted board items for Virtual Black Rock City, organized by 6 BRC department cluster categories. Federation-ready for DoltHub sync.",
+  "version": "1.0.0",
+  "domain": "virtual-brc",
+  "categories": [
+    {
+      "slug": "skill-request",
+      "name": "Skill Requests",
+      "description": "Requests for new skill development or existing skill enhancement",
+      "icon": "seed"
+    },
+    {
+      "slug": "camp-help",
+      "name": "Camp Help",
+      "description": "Theme camps seeking members, builders, or operational support",
+      "icon": "camp"
+    },
+    {
+      "slug": "art-proposal",
+      "name": "Art Proposals",
+      "description": "Emergent art installation ideas seeking collaborators",
+      "icon": "art"
+    },
+    {
+      "slug": "civic-need",
+      "name": "Civic Needs",
+      "description": "Infrastructure and civic roles seeking qualified volunteers",
+      "icon": "civic"
+    },
+    {
+      "slug": "learning",
+      "name": "Learning",
+      "description": "Teaching and learning opportunities — mentorship, workshops, knowledge exchange",
+      "icon": "learn"
+    },
+    {
+      "slug": "transport",
+      "name": "Transport",
+      "description": "Mobile chipset missions — cross-city deliveries, relay runs, survey flights",
+      "icon": "vehicle"
+    }
+  ],
+  "seed_items": [
+    {
+      "id": "want-00001",
+      "title": "Build a salmon upstream routing skill for dependency chain navigation",
+      "category": "skill-request",
+      "posted_by": "system",
+      "camp_affiliation": "salmon-run-camp",
+      "trust_level_required": 1,
+      "description": "Need a skill that traces dependency chains upstream — given a skill, find everything it depends on, all the way to the root. Named for the salmon that always knows the way home."
+    },
+    {
+      "id": "want-00002",
+      "title": "Cedar Grove needs structural builders for camp scaffolding system",
+      "category": "camp-help",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 1,
+      "description": "Cedar Grove camp is building a modular scaffolding system for rapid camp deployment. Need volunteers who understand structural patterns and can work with camp schema definitions."
+    },
+    {
+      "id": "want-00003",
+      "title": "Mycorrhizal Mandala sighting — 3 camps sharing knowledge thread",
+      "category": "art-proposal",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "Three camps (Cedar Grove, Raven's Roost, Salmon Run Camp) have independently developed skills that share a common knowledge pattern. Looking for collaborators to document this emergent Mycorrhizal Mandala installation."
+    },
+    {
+      "id": "want-00004",
+      "title": "Watershed Watch needs overnight patrol volunteers",
+      "category": "civic-need",
+      "posted_by": "system",
+      "camp_affiliation": "tide-pool-collective",
+      "trust_level_required": 2,
+      "description": "Rangers needed for overnight safety patrols. Must be Level 2+ with understanding of de-escalation patterns. Training provided by Watershed Command."
+    },
+    {
+      "id": "want-00005",
+      "title": "Learn how CEDAR chipset activation profiles work — workshop at Old Growth",
+      "category": "learning",
+      "posted_by": "system",
+      "camp_affiliation": "old-growth-assembly",
+      "trust_level_required": 1,
+      "description": "Old Growth Assembly is hosting a workshop on CEDAR chipset profiles (Scout through Fleet). Open to all trust levels. Bring questions about chip activation, profile switching, and multi-chip coordination."
+    },
+    {
+      "id": "want-00006",
+      "title": "Raven Crawler relay mission — carry broadcast signal between Osprey Watch and Tide Pool",
+      "category": "transport",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "Need a Raven Crawler to establish persistent signal relay between Osprey Watch camp and Tide Pool Collective. Critical for census data reaching emergency services."
+    },
+    {
+      "id": "want-00007",
+      "title": "Design a canopy-gap detection skill for identifying deprecated skill opportunities",
+      "category": "skill-request",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 1,
+      "description": "When a skill is deprecated (Canopy Break archetype), the gap creates an opportunity for new growth. Need a skill that detects these gaps and suggests what could grow there."
+    },
+    {
+      "id": "want-00008",
+      "title": "Tide Pool Collective seeking medical training volunteers",
+      "category": "camp-help",
+      "posted_by": "system",
+      "camp_affiliation": "tide-pool-collective",
+      "trust_level_required": 1,
+      "description": "Tide Pool Collective is expanding its medical response capability. Looking for volunteers interested in learning emergency protocols. No prior experience needed — training provided."
+    },
+    {
+      "id": "want-00009",
+      "title": "Nurse Log emerging between Cedar Grove and Old Growth Assembly",
+      "category": "art-proposal",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "A Cedar Grove build skill is combining with an Old Growth Archive skill in a way that looks like a Nurse Log pattern — structured decay seeding new growth. Need observers and documenters."
+    },
+    {
+      "id": "want-00010",
+      "title": "Columbia Gate needs identity verification system review",
+      "category": "civic-need",
+      "posted_by": "system",
+      "camp_affiliation": "tide-pool-collective",
+      "trust_level_required": 3,
+      "description": "Columbia Gate's rig identity validation needs review and stress testing. Must be Level 3 with understanding of security patterns. SC-02 compliance verification."
+    },
+    {
+      "id": "want-00011",
+      "title": "Teach PNW taxonomy naming conventions — Raven's Roost workshop",
+      "category": "learning",
+      "posted_by": "system",
+      "camp_affiliation": "ravens-roost",
+      "trust_level_required": 1,
+      "description": "Learn how Virtual BRC maps PNW species and ecological features to skill names. Workshop covers naming glossary, source taxonomy, and how to choose names for new skills."
+    },
+    {
+      "id": "want-00012",
+      "title": "Orca Sled expedition — full-chipset survey of outer playa",
+      "category": "transport",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 3,
+      "description": "Orca Sled expedition to survey the deep-playa zone beyond the city perimeter. Full Fleet activation, 8 chips, deep-water traversal. Need experienced crew for multi-day mission."
+    },
+    {
+      "id": "want-00013",
+      "title": "Build a stamp verification skill for Yearbook Rule enforcement",
+      "category": "skill-request",
+      "posted_by": "system",
+      "camp_affiliation": "tide-pool-collective",
+      "trust_level_required": 2,
+      "description": "SC-05 requires that rigs cannot stamp their own work. Need a verification skill that automatically detects and rejects self-stamping attempts."
+    },
+    {
+      "id": "want-00014",
+      "title": "Raven's Roost needs broadcast schedule coordinator",
+      "category": "camp-help",
+      "posted_by": "system",
+      "camp_affiliation": "ravens-roost",
+      "trust_level_required": 1,
+      "description": "Raven Broadcast runs a daily signal relay schedule. Need someone to coordinate broadcast timing across all camps, manage the relay chain, and ensure no gaps in coverage."
+    },
+    {
+      "id": "want-00015",
+      "title": "Fire Succession pattern emerging after deprecated skill removal",
+      "category": "art-proposal",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "After Restoration Pass completed a major skill deprecation, new growth is appearing in the cleared namespace. Looks like a Fire Succession archetype. Seeking documenters and analysts."
+    },
+    {
+      "id": "want-00016",
+      "title": "Restoration Pass needs LNT verification volunteers",
+      "category": "civic-need",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 2,
+      "description": "Restoration Pass is running dependency scans on skills scheduled for deprecation. Need volunteers trained in dependency analysis and reference tracing. Training available."
+    },
+    {
+      "id": "want-00017",
+      "title": "Introduction to mobile chipset piloting — Chinook Rider training",
+      "category": "learning",
+      "posted_by": "system",
+      "camp_affiliation": "salmon-run-camp",
+      "trust_level_required": 1,
+      "description": "Learn to pilot the Chinook Rider — the workhorse vehicle of the fleet. Workshop covers SALMON + CEDAR + HEMLOCK chip coordination, upstream navigation, and heavy-load transport."
+    },
+    {
+      "id": "want-00018",
+      "title": "Osprey Dive precision survey of Fireline Cedar camp boundaries",
+      "category": "transport",
+      "posted_by": "system",
+      "camp_affiliation": "fireline-cedar",
+      "trust_level_required": 2,
+      "description": "Fireline Cedar needs precise boundary mapping before next burn event. Osprey Dive precision survey requested — minimal footprint, targeted aerial observation."
+    },
+    {
+      "id": "want-00019",
+      "title": "Create a geoduck persistence metric for deep-rooted skills",
+      "category": "skill-request",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 1,
+      "description": "The geoduck burrows so deep it can never be moved. Need a metric that identifies skills with 'geoduck depth' — so deeply integrated that removing them would require rebuilding entire camps."
+    },
+    {
+      "id": "want-00020",
+      "title": "Mycorrhizal Hub seeking co-learning session facilitators",
+      "category": "camp-help",
+      "posted_by": "system",
+      "camp_affiliation": "mycorrhizal-hub",
+      "trust_level_required": 1,
+      "description": "Mycorrhizal Hub runs cross-camp learning sessions where knowledge transfers through the network. Need facilitators comfortable with group dynamics and knowledge mapping."
+    },
+    {
+      "id": "want-00021",
+      "title": "Salmon Ladder emerging — dependency chain visualization",
+      "category": "art-proposal",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "A navigation pattern showing the upstream path through complex skill dependencies is taking shape. Looks like the Salmon Ladder archetype. Need collaborators from Salmon Run Camp and Osprey Watch."
+    },
+    {
+      "id": "want-00022",
+      "title": "Cascade Brigade recruiting for city build/strike season",
+      "category": "civic-need",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 2,
+      "description": "DPW is preparing for a major build cycle. Need volunteers for infrastructure construction, camp activation validation, and strike coordination. Physical infrastructure work."
+    },
+    {
+      "id": "want-00023",
+      "title": "Advanced stamp ecology workshop — understanding mycorrhizal mark patterns",
+      "category": "learning",
+      "posted_by": "system",
+      "camp_affiliation": "old-growth-assembly",
+      "trust_level_required": 2,
+      "description": "Deep dive into stamp type ecology: when to give spore-marks vs root-depth, how stamp patterns reveal community health, and why the anti-commodification principle matters."
+    },
+    {
+      "id": "want-00024",
+      "title": "Chinook Rider convoy — heavy materials transport to all 8 camps",
+      "category": "transport",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "Multi-stop delivery run carrying infrastructure materials to all 8 camp clusters. Need 3 Chinook Riders for convoy — SALMON + CEDAR + HEMLOCK coordination required."
+    },
+    {
+      "id": "want-00025",
+      "title": "Build a raven-mirror communication reflection skill",
+      "category": "skill-request",
+      "posted_by": "system",
+      "camp_affiliation": "ravens-roost",
+      "trust_level_required": 1,
+      "description": "The Raven Mirror art archetype reflects communication back — showing what you actually sent vs what you intended. Need a skill that provides this feedback loop for inter-camp messages."
+    },
+    {
+      "id": "want-00026",
+      "title": "Osprey Watch needs aerial survey data analysts",
+      "category": "camp-help",
+      "posted_by": "system",
+      "camp_affiliation": "osprey-watch",
+      "trust_level_required": 1,
+      "description": "Census data is coming in from Osprey Survey flights. Need analysts to process population data, identify trends, and produce reports for city planning."
+    },
+    {
+      "id": "want-00027",
+      "title": "Estuary formation — skill ecosystem meets Wasteland economy",
+      "category": "art-proposal",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 3,
+      "description": "The boundary between the virtual BRC skill ecosystem and the broader Wasteland economy is crystallizing into a visible pattern. This looks like the Estuary archetype. Need senior rigs to document."
+    },
+    {
+      "id": "want-00028",
+      "title": "Geoduck Watch needs environmental monitors for MOOP sweeps",
+      "category": "civic-need",
+      "posted_by": "system",
+      "camp_affiliation": "cedar-grove",
+      "trust_level_required": 1,
+      "description": "Regular MOOP (Matter Out Of Place) sweeps needed across all camp zones. Training provided — learn to identify orphaned resources, stale references, and environmental debris."
+    },
+    {
+      "id": "want-00029",
+      "title": "History of Virtual BRC — Raven Archive storytelling session",
+      "category": "learning",
+      "posted_by": "system",
+      "camp_affiliation": "ravens-roost",
+      "trust_level_required": 1,
+      "description": "Raven Archive is hosting an oral history session. Come share your experience in the virtual city — what you built, what surprised you, what burned. All trust levels welcome."
+    },
+    {
+      "id": "want-00030",
+      "title": "Raven Crawler rapid-relay network mapping between all civic agents",
+      "category": "transport",
+      "posted_by": "system",
+      "camp_affiliation": null,
+      "trust_level_required": 2,
+      "description": "Establish and map a rapid-relay communication network connecting all 6 civic agent stations. Raven Crawler fleet needed for multi-hop signal routing survey."
+    }
+  ],
+  "federation": {
+    "protocol": "DoltHub",
+    "regional_burns": ["Pacific Burn", "Desert Bloom", "Mountain Melt"],
+    "sync_behavior": "Sovereign databases with common schema; regional boards sync skill definitions while maintaining local wanted items",
+    "shared_schemas": ["rig-identity", "stamp-types", "camp-structure", "civic-roles"]
+  }
+}
