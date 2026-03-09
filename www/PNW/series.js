@@ -6,6 +6,8 @@
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
     { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
+    { id: 'BCM', name: 'Building', path: 'BCM/index.html' },
+    { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' }
