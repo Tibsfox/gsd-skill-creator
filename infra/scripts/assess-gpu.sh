@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # assess-gpu.sh -- GPU capability assessment module
 #
 # Reads a hardware-capabilities YAML and produces a gpu_assessment YAML

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2207 # SC2034: vars for later use; SC2207: IFS-split array assignment is intentional
 # generate-asset-catalog.sh -- Asset catalog YAML generator for converted Amiga files
 #
 # Reads .meta.yaml sidecar files produced by convert-ilbm.sh and convert-tracker.sh

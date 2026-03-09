@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034 # variables consumed by sourcing scripts
 # pkg-names.sh -- Package name mapping table
 #
 # Maps logical package names to distro-specific package names for dnf, apt,

@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034 # variables consumed by sourcing scripts
 # vm-common.sh -- Shared VM provisioning library
 #
 # Sourced by vm-backend-kvm.sh and vm-backend-vmware.sh.

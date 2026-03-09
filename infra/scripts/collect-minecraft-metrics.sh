@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2294 # variables used by sourced libs or in later phases
 # collect-minecraft-metrics.sh -- Custom Minecraft metrics collector
 #
 # Gathers six metric categories from the Minecraft server and outputs them

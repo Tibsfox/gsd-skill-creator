@@ -1,3 +1,4 @@
+# shellcheck disable=SC2024 # sudo redirect pattern used intentionally with fallback
 # fw-abstraction.sh -- Firewall abstraction layer
 #
 # Provides distribution-agnostic firewall management operations that dispatch

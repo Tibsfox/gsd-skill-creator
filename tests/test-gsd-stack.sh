@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used for assertion context
 set -euo pipefail
 
 # ==============================================================================
@@ -529,7 +530,7 @@ mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions
 touch "$GSD_STACK_DIR/history.jsonl"
 
 # Truncate history to empty
-> "$GSD_STACK_DIR/history.jsonl"
+true > "$GSD_STACK_DIR/history.jsonl"
 
 set +e
 output=$("$GSD_STACK" log 2>&1)
@@ -557,7 +558,7 @@ export GSD_STACK_DIR="$TEST_DIR/stack"
 mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
 
 # Write 5 test events
-cat > "$GSD_STACK_DIR/history.jsonl" <<'EVENTS'
+cat true > "$GSD_STACK_DIR/history.jsonl" <<'EVENTS'
 {"ts":"2026-02-12T15:00:00Z","event":"push","detail":"implement auth module"}
 {"ts":"2026-02-12T15:01:00Z","event":"poke","detail":"tmux: process stack"}
 {"ts":"2026-02-12T15:02:00Z","event":"pop","detail":"implement auth module"}
@@ -604,7 +605,7 @@ printf "${BOLD}Log --limit / -n Tests${RESET}\n"
 rm -rf "$TEST_DIR/stack"
 export GSD_STACK_DIR="$TEST_DIR/stack"
 mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
-> "$GSD_STACK_DIR/history.jsonl"
+true > "$GSD_STACK_DIR/history.jsonl"
 
 for i in $(seq -w 1 25); do
   echo "{\"ts\":\"2026-02-12T16:${i}:00Z\",\"event\":\"push\",\"detail\":\"event number $i\"}" >> "$GSD_STACK_DIR/history.jsonl"
@@ -631,7 +632,7 @@ assert_eq "log -n 5 shows 5 entries" "5" "$ts_count"
 
 # -- log -n 30 shows all 25 entries (not more) --
 # Re-write exactly 25 events (previous log calls added log_event entries)
-> "$GSD_STACK_DIR/history.jsonl"
+true > "$GSD_STACK_DIR/history.jsonl"
 for i in $(seq -w 1 25); do
   echo "{\"ts\":\"2026-02-12T16:${i}:00Z\",\"event\":\"push\",\"detail\":\"event number $i\"}" >> "$GSD_STACK_DIR/history.jsonl"
 done

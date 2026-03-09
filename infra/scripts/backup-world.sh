@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # backup-world.sh -- Automated Minecraft world backup with RCON quiesce
 #
 # Creates tar.gz archives of the Minecraft world directory with:

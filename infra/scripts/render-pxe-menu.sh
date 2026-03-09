@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # render-pxe-menu.sh -- Render template files by substituting ${VAR} placeholders
 #
 # A general-purpose template renderer that replaces ${VAR} placeholders with

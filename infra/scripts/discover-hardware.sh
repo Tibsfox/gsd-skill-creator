@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables consumed by sourcing scripts
 # discover-hardware.sh -- Hardware discovery and profile generation
 #
 # Queries Linux standard interfaces to detect CPU, RAM, storage, GPU,

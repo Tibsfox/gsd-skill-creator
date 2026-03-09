@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC1090 # test variables used for assertion context
 # test-vm-lifecycle.sh -- Test suite for VM lifecycle manager and provisioning orchestrator
 #
 # Tests vm-lifecycle.sh, provision-vm.sh, and vm-common.sh library against

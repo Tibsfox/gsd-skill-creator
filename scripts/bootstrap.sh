@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2015 # SC1091: sourced files checked separately; SC2015: A&&B||C used intentionally
 # =============================================================================
 # GSD-OS Bootstrap — The seed that grows the tree
 # =============================================================================

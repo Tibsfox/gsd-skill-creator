@@ -237,7 +237,7 @@ test_backup_filename_pattern() {
         --world-dir "${TEMP_DIR}/world" \
         --backup-dir "${TEMP_DIR}/backups" \
         --type daily \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local backup_file
     backup_file=$(find "${TEMP_DIR}/backups/daily" -name "minecraft-world-daily-*.tar.gz" -type f | head -1)
@@ -267,7 +267,7 @@ test_archive_integrity() {
         --world-dir "${TEMP_DIR}/world" \
         --backup-dir "${TEMP_DIR}/backups" \
         --type hourly \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local backup_file
     backup_file=$(find "${TEMP_DIR}/backups/hourly" -name "minecraft-world-hourly-*.tar.gz" -type f | head -1)
@@ -317,7 +317,7 @@ test_rotation_hourly() {
         --backup-dir "${TEMP_DIR}/backups" \
         --type hourly \
         --retention-hourly 24 \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local remaining
     remaining=$(find "${hourly_dir}" -maxdepth 1 -name "minecraft-world-hourly-*.tar.gz" -type f | wc -l)
@@ -353,7 +353,7 @@ test_rotation_daily() {
         --backup-dir "${TEMP_DIR}/backups" \
         --type daily \
         --retention-daily 7 \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local remaining
     remaining=$(find "${daily_dir}" -maxdepth 1 -name "minecraft-world-daily-*.tar.gz" -type f | wc -l)
@@ -389,7 +389,7 @@ test_rotation_weekly() {
         --backup-dir "${TEMP_DIR}/backups" \
         --type weekly \
         --retention-weekly 4 \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local remaining
     remaining=$(find "${weekly_dir}" -maxdepth 1 -name "minecraft-world-weekly-*.tar.gz" -type f | wc -l)
@@ -411,7 +411,7 @@ test_status_file() {
         --world-dir "${TEMP_DIR}/world" \
         --backup-dir "${TEMP_DIR}/backups" \
         --type hourly \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     local status_file="${TEMP_DIR}/backups/last-backup-status.yaml"
 
@@ -521,13 +521,13 @@ test_subdirectory_structure() {
         --world-dir "${TEMP_DIR}/world" \
         --backup-dir "${TEMP_DIR}/backups" \
         --type hourly \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     bash "${BACKUP_SCRIPT}" \
         --world-dir "${TEMP_DIR}/world" \
         --backup-dir "${TEMP_DIR}/backups" \
         --type daily \
-        --no-quiesce 2>&1 >/dev/null
+        --no-quiesce >/dev/null 2>&1
 
     TESTS_RUN=$(( TESTS_RUN + 1 ))
     if [[ -d "${TEMP_DIR}/backups/hourly" ]] && [[ -d "${TEMP_DIR}/backups/daily" ]]; then

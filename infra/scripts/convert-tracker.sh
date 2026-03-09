@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables used by sourced libs or in later phases
 # convert-tracker.sh -- MOD/MED to WAV/FLAC/OGG renderer with metadata extraction
 #
 # Renders Amiga tracker music files (MOD, MED, S3M, XM, IT) to modern audio

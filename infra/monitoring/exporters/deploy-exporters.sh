@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2294,SC2034 # eval used intentionally for command dispatch
 # deploy-exporters.sh -- Deploy Prometheus node_exporter and JMX exporter
 #
 # Installs and configures both exporters for Minecraft server monitoring:

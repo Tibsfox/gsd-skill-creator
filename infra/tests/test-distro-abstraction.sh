@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-distro-abstraction.sh -- Integration test for Phase 179 distro abstraction layer
 #
 # Validates all three Phase 179 library files work together correctly:

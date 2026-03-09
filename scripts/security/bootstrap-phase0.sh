@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091 # sourced files checked separately
 # =============================================================================
 # Bootstrap Phase 0 — Security Infrastructure Activation
 # =============================================================================

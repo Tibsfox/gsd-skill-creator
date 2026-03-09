@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2294 # eval used intentionally for command dispatch
 # deploy-minecraft.sh -- Minecraft Fabric server deployment orchestrator
 #
 # Transforms a bare VM (Java 21 installed, minecraft user created by kickstart

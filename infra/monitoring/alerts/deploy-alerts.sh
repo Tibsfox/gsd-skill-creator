@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2294 # eval used intentionally for command dispatch
 # deploy-alerts.sh -- Deploy Prometheus alerting rules for Minecraft server
 #
 # Validates alert rules YAML syntax (promtool or fallback), deploys rules

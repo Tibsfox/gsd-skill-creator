@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034 # test variables used for assertion context
 # test-batch-convert.sh -- Test suite for batch conversion and catalog generation
 #
 # Validates batch-convert.sh and generate-asset-catalog.sh: batch processing,

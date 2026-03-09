@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2294 # variables used by sourced libs or in later phases
 # check-minecraft-health.sh -- Minecraft server health check
 #
 # Validates all components of a running Minecraft deployment:

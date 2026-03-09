@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034,SC2046 # SC2034: PROJECT_ROOT for future use; SC2046: word splitting safe here
 # rapid-rebuild.sh -- Rapid server rebuild orchestrator
 #
 # Master rebuild orchestrator that handles both the fast path (golden image

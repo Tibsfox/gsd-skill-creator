@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2015 # A&&B||C pattern used intentionally throughout for pass/fail reporting
 # =============================================================================
 # e2e-deployment-verification.sh
 # End-to-End Deployment Verification Script
