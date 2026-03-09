@@ -18,6 +18,8 @@
  */
 
 import { sqlEscape } from './sql-escape.js';
+import { assertUTC } from './utc.js';
+import { RIGS_DDL } from './trust-escalation.js';
 import type { DoltClient } from './dolthub-client.js';
 import type {
   TrustVector,
@@ -107,7 +109,11 @@ CREATE TABLE IF NOT EXISTS character_sheets (
  */
 export function generateSchemaDDL(): string {
   return [
-    '-- Trust Relationship Schema (local-only — never push to upstream)',
+    '-- Trust System Schema (local-only — never push to upstream)',
+    '',
+    '-- Rigs table (anchor — participant identity)',
+    '',
+    RIGS_DDL,
     '',
     TRUST_CONTRACTS_DDL,
     '',
@@ -336,6 +342,7 @@ export function createDoltHubTrustProvider(
     },
 
     async saveCharacterSheet(sheet: CharacterSheet): Promise<void> {
+      assertUTC(sheet.updatedAt, 'character_sheets.updated_at');
       const sql = client.generateSQL(
         `INSERT INTO character_sheets
            (handle, display_name, icon, bio, home_camp,

@@ -275,6 +275,7 @@ export type { WastelandEventOptions } from './wasteland-events.js';
 
 // Trust Tier Escalation
 export {
+  RIGS_DDL,
   buildContributorRules,
   buildMaintainerRules,
   evaluateRule,

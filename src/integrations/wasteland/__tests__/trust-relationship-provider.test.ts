@@ -102,8 +102,9 @@ describe('Schema DDL', () => {
     expect(CHARACTER_SHEETS_DDL).toContain("DEFAULT 'summary'");
   });
 
-  it('generateSchemaDDL returns all three tables', () => {
+  it('generateSchemaDDL returns all four tables', () => {
     const ddl = generateSchemaDDL();
+    expect(ddl).toContain('rigs');
     expect(ddl).toContain('trust_contracts');
     expect(ddl).toContain('trust_relationships');
     expect(ddl).toContain('character_sheets');
@@ -182,6 +183,8 @@ describe('createDoltHubTrustProvider', () => {
           c_ttl: '',
           c_created: '2026-08-25T12:00:00Z',
           c_expires: '',
+          c_auto_renew: '0',
+          c_renewal_count: '0',
         },
       ]);
 
@@ -202,6 +205,35 @@ describe('createDoltHubTrustProvider', () => {
       client._queryResults.push([]);
       const rels = await provider.getRelationshipsForRig('lonely-001');
       expect(rels).toHaveLength(0);
+    });
+
+    it('round-trips autoRenew and renewalCount from storage', async () => {
+      client._queryResults.push([
+        {
+          contract_id: 'tc-ep-roundtrip',
+          from_handle: 'owl-007',
+          to_handle: 'fox-042',
+          from_time: '0.1',
+          from_depth: '0.3',
+          to_time: '0.2',
+          to_depth: '0.4',
+          from_label: '',
+          to_label: '',
+          visibility: 'private',
+          c_id: 'tc-ep-roundtrip',
+          c_type: 'ephemeral',
+          c_ttl: '900',
+          c_created: '2026-08-25T20:00:00Z',
+          c_expires: '2026-08-25T20:15:00Z',
+          c_auto_renew: '1',
+          c_renewal_count: '3',
+        },
+      ]);
+
+      const rels = await provider.getRelationshipsForRig('owl-007');
+      expect(rels).toHaveLength(1);
+      expect(rels[0].contract.autoRenew).toBe(true);
+      expect(rels[0].contract.renewalCount).toBe(3);
     });
 
     it('query includes both from_handle and to_handle conditions', async () => {

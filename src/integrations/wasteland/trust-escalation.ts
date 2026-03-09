@@ -21,6 +21,31 @@ import { sqlEscape } from './sql-escape.js';
 import { normalizeToUTC } from './utc.js';
 
 // ============================================================================
+// Schema DDL
+// ============================================================================
+
+/**
+ * SQL DDL for the rigs table.
+ *
+ * A rig is a participant in the forest. The rigs table is the anchor —
+ * stamps, relationships, character sheets, and badges all hang off the
+ * handle. trust_level starts at 1 (Registered) on arrival and never
+ * decreases. rig_uuid is stored internally for federation deduplication
+ * but is never surfaced as the participant's identity.
+ */
+export const RIGS_DDL = `
+CREATE TABLE IF NOT EXISTS rigs (
+  handle                 VARCHAR(64) PRIMARY KEY,
+  rig_uuid               VARCHAR(36) DEFAULT NULL,
+  trust_level            INT NOT NULL DEFAULT 1,
+  rig_type               VARCHAR(16) NOT NULL DEFAULT 'participant',
+  registered_at          DATETIME NOT NULL,
+  trust_level_changed_at DATETIME DEFAULT NULL,
+  last_seen              DATETIME DEFAULT NULL,
+  display_name           VARCHAR(128) DEFAULT NULL
+);`.trim();
+
+// ============================================================================
 // Types
 // ============================================================================
 
