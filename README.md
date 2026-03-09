@@ -323,7 +323,7 @@ All documentation lives in [`docs/`](docs/).
 | [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 65 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
-| [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) (87 versions) |
+| [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) (89 versions) |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
@@ -337,7 +337,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-88 milestones shipped (v1.0-v1.50.43) | 550+ phases | 1,320+ plans | ~743K LOC TypeScript, Rust, GLSL, Bash & Python | 24,700+ tests
+89 milestones shipped (v1.0-v1.50.43) | 550+ phases | 1,320+ plans | ~783K LOC TypeScript, Rust, GLSL, Bash & Python | 24,700+ tests
 
 ---
 
