@@ -400,6 +400,32 @@ describe('scanForEscalation', () => {
     expect(result.eligible).toHaveLength(1);
     expect(result.eligible[0].handle).toBe('rig-c');
   });
+
+  it('uses trustLevelChangedAt when provider returns it', async () => {
+    const provider = makeMockProvider({
+      getRigs: async () => [
+        makeRig({ handle: 'rig-d', trust_level: 2, registered_at: '2025-06-01T00:00:00Z' }),
+      ],
+      getStampSummary: async () => makeStamps({
+        stampsReceived: 15,
+        stampsIssued: 7,
+        avgQualityReceived: 4.5,
+        uniqueValidators: 4,
+      }),
+      // Promoted to level 2 only 10 days ago — NOT eligible despite being registered for months
+      getTrustLevelChangedAt: async () => '2026-02-19T00:00:00Z',
+    });
+
+    const result = await scanForEscalation(provider, 2, new Date('2026-03-01T00:00:00Z'));
+
+    // registered_at is June 1 (9 months ago) but trustLevelChangedAt is Feb 19 (10 days ago)
+    // 10 days < 30 day requirement → NOT eligible
+    expect(result.eligible).toHaveLength(0);
+    expect(result.notEligible).toHaveLength(1);
+    expect(result.notEligible[0].handle).toBe('rig-d');
+    const timeCriterion = result.notEligible[0].criteria.find(c => c.name === 'time_at_contributor');
+    expect(timeCriterion?.met).toBe(false);
+  });
 });
 
 // ============================================================================
@@ -407,7 +433,7 @@ describe('scanForEscalation', () => {
 // ============================================================================
 
 describe('toPromotionSQL', () => {
-  it('generates UPDATE for eligible rig', () => {
+  it('generates UPDATE for eligible rig with trust_level_changed_at', () => {
     const evaluation: EscalationEvaluation = {
       handle: 'desert-fox',
       currentLevel: 1,
@@ -421,6 +447,7 @@ describe('toPromotionSQL', () => {
 
     const sql = toPromotionSQL(evaluation);
     expect(sql).toContain('UPDATE rigs SET trust_level = 2');
+    expect(sql).toContain('trust_level_changed_at = NOW()');
     expect(sql).toContain("WHERE handle = 'desert-fox'");
     expect(sql).toContain('AND trust_level = 1');
     expect(sql).toContain('stamps_received: 5 stamps');

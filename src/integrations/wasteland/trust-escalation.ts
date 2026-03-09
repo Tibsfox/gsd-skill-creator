@@ -18,6 +18,7 @@
  */
 
 import { sqlEscape } from './sql-escape.js';
+import { normalizeToUTC } from './utc.js';
 
 // ============================================================================
 // Types
@@ -351,7 +352,7 @@ export function createDoltHubEscalationProvider(
         handle: r.handle,
         trust_level: parseInt(r.trust_level, 10),
         rig_type: r.rig_type,
-        registered_at: r.registered_at || null,
+        registered_at: r.registered_at ? normalizeToUTC(r.registered_at, 'rigs.registered_at') : null,
       }));
     },
 
@@ -381,7 +382,7 @@ export function createDoltHubEscalationProvider(
         avgReliabilityReceived: parseFloat(r.avg_r ?? '0') || 0,
         avgCreativityReceived: parseFloat(r.avg_c ?? '0') || 0,
         uniqueValidators: parseInt(r.unique_validators ?? '0', 10),
-        latestStampAt: r.latest || null,
+        latestStampAt: r.latest ? normalizeToUTC(r.latest, 'stamps.created_at') : null,
       };
     },
 
@@ -402,11 +403,13 @@ export function createDoltHubEscalationProvider(
       };
     },
 
-    async getTrustLevelChangedAt(_handle: string) {
-      // Dolt doesn't track when trust_level was last changed without
-      // querying commit history. Return null — time-at-level checks
-      // will use registered_at as fallback.
-      return null;
+    async getTrustLevelChangedAt(handle: string) {
+      const escaped = sqlEscape(handle);
+      const rows = await query(
+        `SELECT trust_level_changed_at FROM rigs WHERE handle = '${escaped}'`
+      );
+      const raw = rows[0]?.trust_level_changed_at;
+      return raw ? normalizeToUTC(raw, 'rigs.trust_level_changed_at') : null;
     },
   };
 }
@@ -488,7 +491,7 @@ export function toPromotionSQL(evaluation: EscalationEvaluation): string {
   return [
     `-- Promote ${evaluation.handle} to trust level ${evaluation.targetLevel}`,
     `-- Evidence: ${criteriaNote}`,
-    `UPDATE rigs SET trust_level = ${evaluation.targetLevel}, last_seen = NOW()`,
+    `UPDATE rigs SET trust_level = ${evaluation.targetLevel}, trust_level_changed_at = NOW(), last_seen = NOW()`,
     `WHERE handle = '${escaped}' AND trust_level = ${evaluation.currentLevel};`,
   ].join('\n');
 }

@@ -423,3 +423,12 @@ export {
 export type {
   TrustRelationshipDataProvider,
 } from './trust-relationship-provider.js';
+
+// UTC Timestamp Enforcement
+export {
+  isUTC,
+  assertUTC,
+  toUTCString,
+  parseUTC,
+  normalizeToUTC,
+} from './utc.js';
