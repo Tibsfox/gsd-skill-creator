@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Black Rock City — Role Chooser Catalog</title>
+<style>
+  :root {
+    --ember: #8B2500;
+    --flame: #BF360C;
+    --playa: #1565C0;
+    --ash: #37474F;
+    --dust: #F57F17;
+    --glow: #FBE9E7;
+    --sky: #E3F2FD;
+    --smoke: #ECEFF1;
+    --forest: #2E7D32;
+    --text: #212121;
+    --subtle: #757575;
+    --border: #BDBDBD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #FAFAFA; color: var(--text); line-height: 1.6; }
+
+  header {
+    background: linear-gradient(135deg, var(--ember) 0%, #5D0000 50%, var(--ash) 100%);
+    color: white; padding: 2.5rem 2rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  header::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(245,127,23,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.4rem; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  header p { font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3em 0.8em; border-radius: 3px; margin-bottom: 1rem; }
+
+  .stats { display: flex; justify-content: center; gap: 2rem; padding: 1.2rem 2rem; background: var(--smoke); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--ember); }
+  .stat-label { font-size: 0.75rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .filters { padding: 1rem 2rem; background: white; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+  .filters label { font-size: 0.8rem; font-weight: 600; color: var(--subtle); margin-right: 0.5rem; }
+  .filter-btn { padding: 0.35em 0.8em; border: 1px solid var(--border); border-radius: 16px; background: white; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover, .filter-btn.active { background: var(--ember); color: white; border-color: var(--ember); }
+
+  main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+
+  .section-header { font-size: 1.3rem; font-weight: 700; color: var(--ash); margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ember); }
+  .section-header .count { font-size: 0.85rem; font-weight: 400; color: var(--subtle); margin-left: 0.5rem; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+  .card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; transition: box-shadow 0.15s, border-color 0.15s; }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: var(--ember); }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: var(--ember); margin-bottom: 0.3rem; }
+  .card-dept { font-size: 0.78rem; color: var(--subtle); margin-bottom: 0.6rem; }
+  .card-desc { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.8rem; }
+  .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tag { display: inline-block; padding: 0.2em 0.6em; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+  .tag-camp { background: #E8F5E9; color: var(--forest); }
+  .tag-trust { background: #FFF3E0; color: #E65100; }
+  .tag-safety { background: #FFEBEE; color: #C62828; }
+  .tag-safety-rec { background: #E3F2FD; color: var(--playa); }
+
+  .civic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+  .civic-card { background: white; border: 2px solid #C62828; border-radius: 8px; padding: 1.2rem; position: relative; }
+  .civic-card.recommended { border-color: var(--playa); }
+  .civic-badge { position: absolute; top: -0.6em; right: 1rem; background: #C62828; color: white; font-size: 0.65rem; font-weight: 700; padding: 0.2em 0.6em; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .civic-card.recommended .civic-badge { background: var(--playa); }
+
+  .vehicle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .vehicle-card { background: linear-gradient(135deg, #263238 0%, #37474F 100%); color: white; border-radius: 8px; padding: 1.2rem; }
+  .vehicle-card .card-title { color: var(--dust); }
+  .vehicle-card .tag { background: rgba(255,255,255,0.15); color: white; }
+
+  .camp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .camp-card { background: white; border-left: 4px solid var(--forest); border-radius: 0 8px 8px 0; padding: 1rem 1.2rem; }
+  .camp-card .card-title { color: var(--forest); }
+
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+  footer blockquote { font-style: italic; max-width: 600px; margin: 0 auto 1rem; color: var(--ash); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">GSD Mission Package v1.44</div>
+  <h1>Virtual Black Rock City</h1>
+  <p>Role Chooser Catalog — Browse by skill category, difficulty, and camp affiliation. All roles named in Pacific Northwest bioregion taxonomy.</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">30</div><div class="stat-label">Playa Roles</div></div>
+  <div class="stat"><div class="stat-num">10</div><div class="stat-label">Principles</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Theme Camps</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Civic Agents</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Vehicles</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">Art Archetypes</div></div>
+  <div class="stat"><div class="stat-num">52</div><div class="stat-label">PNW Names</div></div>
+  <div class="stat"><div class="stat-num">122</div><div class="stat-label">Tests Pass</div></div>
+</div>
+
+<div class="filters">
+  <label>Filter by camp:</label>
+  <button class="filter-btn active" onclick="filterCamp('all')">All</button>
+  <button class="filter-btn" onclick="filterCamp('cedar-grove')">Cedar Grove</button>
+  <button class="filter-btn" onclick="filterCamp('ravens-roost')">Raven's Roost</button>
+  <button class="filter-btn" onclick="filterCamp('salmon-run-camp')">Salmon Run</button>
+  <button class="filter-btn" onclick="filterCamp('tide-pool-collective')">Tide Pool</button>
+  <button class="filter-btn" onclick="filterCamp('osprey-watch')">Osprey Watch</button>
+  <button class="filter-btn" onclick="filterCamp('old-growth-assembly')">Old Growth</button>
+  <button class="filter-btn" onclick="filterCamp('mycorrhizal-hub')">Mycorrhizal Hub</button>
+  <button class="filter-btn" onclick="filterCamp('fireline-cedar')">Fireline Cedar</button>
+</div>
+
+<main>
+
+<h2 class="section-header">Civic Agents <span class="count">6 roles — city safety backbone</span></h2>
+<div class="civic-grid">
+  <div class="civic-card"><div class="civic-badge">Mandatory-Pass</div><div class="card-title">Columbia Gate</div><div class="card-dept">Gate, Perimeter, Exodus</div><div class="card-desc">Access control — no rig enters without identity check. The Columbia River defines the boundary; this gate defines who enters the city.</div><div class="card-meta"><span class="tag tag-safety">SC-02 BLOCK</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="civic-card"><div class="civic-badge">Mandatory-Pass</div><div class="card-title">Cascade Brigade</div><div class="card-dept">Dept of Public Works</div><div class="card-desc">Infrastructure integrity — no camp builds without DPW sign-off. The Cascade Range holds the land together; this brigade holds the city.</div><div class="card-meta"><span class="tag tag-safety">SC-03 BLOCK</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="civic-card"><div class="civic-badge">Mandatory-Pass</div><div class="card-title">Watershed Watch</div><div class="card-dept">Black Rock Rangers</div><div class="card-desc">Community safety monitoring — watches the whole watershed, intervenes before small problems flood. Cannot be bypassed.</div><div class="card-meta"><span class="tag tag-safety">Cross-cutting</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="civic-card"><div class="civic-badge">Mandatory-Pass</div><div class="card-title">Tide Pool Medical</div><div class="card-dept">Emergency Services</div><div class="card-desc">The most safety-critical gate. Professional medical response. BLOCK with mandatory escalation. The tide pool holds.</div><div class="card-meta"><span class="tag tag-safety">SC-01 BLOCK+ESCALATE</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="civic-card"><div class="civic-badge">Mandatory-Pass</div><div class="card-title">Restoration Pass</div><div class="card-dept">Earth Guardians + Cleanup</div><div class="card-desc">Leave No Trace enforcement. No skill deprecated without dependency scan. Clean up before you leave — always.</div><div class="card-meta"><span class="tag tag-safety">SC-04 BLOCK</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="civic-card recommended"><div class="civic-badge">Recommended</div><div class="card-title">Raven Archive</div><div class="card-dept">Documentation Team</div><div class="card-desc">The city's memory. Chronicles every promotion, burn, and build. The raven remembers so the forest doesn't have to.</div><div class="card-meta"><span class="tag tag-safety-rec">WARN only</span><span class="tag tag-trust">Level 1</span></div></div>
+</div>
+
+<h2 class="section-header">Theme Camps <span class="count">8 skill clusters</span></h2>
+<div class="camp-grid">
+  <div class="camp-card"><div class="card-title">Cedar Grove</div><div class="card-desc">Structural build, camp planning, materials management. Where the city's physical infrastructure takes shape.</div><div class="card-meta"><span class="tag tag-camp">Western red cedar</span></div></div>
+  <div class="camp-card"><div class="card-title">Raven's Roost</div><div class="card-desc">Communications, documentation, information relay. The high-vantage point where signals originate and memory persists.</div><div class="card-meta"><span class="tag tag-camp">Common raven</span></div></div>
+  <div class="camp-card"><div class="card-title">Salmon Run Camp</div><div class="card-desc">Art grants, upstream problem-solving, creative navigation. The spawning grounds where new work begins.</div><div class="card-meta"><span class="tag tag-camp">Chinook salmon</span></div></div>
+  <div class="camp-card"><div class="card-title">Tide Pool Collective</div><div class="card-desc">Medical, safety, emergency response. The resilient zone where life persists against the hardest conditions.</div><div class="card-meta"><span class="tag tag-camp">Intertidal ecology</span></div></div>
+  <div class="camp-card"><div class="card-title">Osprey Watch</div><div class="card-desc">Census, observation, aerial survey, data collection. Precision from altitude — see everything, disturb nothing.</div><div class="card-meta"><span class="tag tag-camp">Osprey</span></div></div>
+  <div class="camp-card"><div class="card-title">Old Growth Assembly</div><div class="card-desc">Education, deep knowledge, mentoring, reference. The ancient canopy where slow growth produces the deepest wisdom.</div><div class="card-meta"><span class="tag tag-camp">Old-growth forest</span></div></div>
+  <div class="camp-card"><div class="card-title">Mycorrhizal Hub</div><div class="card-desc">Co-learning, knowledge transfer, community connection. The underground network that connects all camps invisibly.</div><div class="card-meta"><span class="tag tag-camp">Fungal networks</span></div></div>
+  <div class="camp-card"><div class="card-title">Fireline Cedar</div><div class="card-desc">Burn perimeter, pyrotechnics safety, fire management. Fire in the PNW is generative — this camp manages that power.</div><div class="card-meta"><span class="tag tag-camp">Fire ecology</span></div></div>
+</div>
+
+<h2 class="section-header">Playa Roles <span class="count">30 volunteer departments → PNW skill specs</span></h2>
+<div class="card-grid" id="roles-grid">
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Osprey Landing</div><div class="card-dept">Airport (88NV)</div><div class="card-desc">Air traffic coordination; multi-modal arrival routing</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Glacial Flow</div><div class="card-dept">Arctica (Ice)</div><div class="card-desc">Resource distribution; cold-chain logistics</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Nurse Log Guild</div><div class="card-dept">ARTery (Artist Services)</div><div class="card-desc">Art grant processing; installation support; honoraria</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="tide-pool-collective"><div class="card-title">Watershed Watch</div><div class="card-dept">Black Rock Rangers</div><div class="card-desc">Community safety; conflict de-escalation; non-enforcement patrol</div><div class="card-meta"><span class="tag tag-camp">Tide Pool</span><span class="tag tag-trust">Level 2</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="tide-pool-collective"><div class="card-title">Salish Gate</div><div class="card-dept">Box Office</div><div class="card-desc">Entry processing; identity verification; access control</div><div class="card-meta"><span class="tag tag-camp">Tide Pool</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="fireline-cedar"><div class="card-title">Fireline Cedar</div><div class="card-dept">Burn Perimeter Support</div><div class="card-desc">Safety perimeter during burns; thermal boundary management</div><div class="card-meta"><span class="tag tag-camp">Fireline</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Chinook Rider</div><div class="card-dept">Burner Express Bus</div><div class="card-desc">Mass transit orchestration; high-volume movement</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="mycorrhizal-hub"><div class="card-title">Mycorrhizal Hub</div><div class="card-dept">Burning Man Hive</div><div class="card-desc">Co-learning facilitation; knowledge transfer</div><div class="card-meta"><span class="tag tag-camp">Mycorrhizal</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="osprey-watch"><div class="card-title">Osprey Survey</div><div class="card-dept">Census</div><div class="card-desc">Population tracking; data collection; pattern analysis</div><div class="card-meta"><span class="tag tag-camp">Osprey Watch</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="old-growth-assembly"><div class="card-title">Old Growth Assembly</div><div class="card-dept">Center Camp</div><div class="card-desc">Community gathering; shade structure; open stage</div><div class="card-meta"><span class="tag tag-camp">Old Growth</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="cedar-grove"><div class="card-title">Restoration Pass</div><div class="card-dept">Cleanup / Restoration</div><div class="card-desc">LNT execution; site restoration; leave-better-than-found</div><div class="card-meta"><span class="tag tag-camp">Cedar Grove</span><span class="tag tag-trust">Level 2</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="cedar-grove"><div class="card-title">Orca Sled DMV</div><div class="card-dept">Dept Mutant Vehicles</div><div class="card-desc">Mobile structure licensing; kinetic art registration</div><div class="card-meta"><span class="tag tag-camp">Cedar Grove</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="cedar-grove"><div class="card-title">Cascade Brigade</div><div class="card-dept">Dept Public Works</div><div class="card-desc">Physical infrastructure build/strike; city construction</div><div class="card-meta"><span class="tag tag-camp">Cedar Grove</span><span class="tag tag-trust">Level 3</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="ravens-roost"><div class="card-title">Raven Archive</div><div class="card-dept">Documentation Team</div><div class="card-desc">Photography; oral history; chronicle</div><div class="card-meta"><span class="tag tag-camp">Raven's Roost</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="cedar-grove"><div class="card-title">Geoduck Watch</div><div class="card-dept">Earth Guardians</div><div class="card-desc">Environmental monitoring; MOOP sweeps</div><div class="card-meta"><span class="tag tag-camp">Cedar Grove</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="tide-pool-collective"><div class="card-title">Tide Pool Medical</div><div class="card-dept">Emergency Services</div><div class="card-desc">Professional medical/fire/crisis; mandatory-pass safety gate</div><div class="card-meta"><span class="tag tag-camp">Tide Pool</span><span class="tag tag-trust">Level 3</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="tide-pool-collective"><div class="card-title">Columbia Gate</div><div class="card-dept">Gate, Perimeter, Exodus</div><div class="card-desc">Entry/exit flow management; perimeter integrity</div><div class="card-meta"><span class="tag tag-camp">Tide Pool</span><span class="tag tag-trust">Level 3</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="ravens-roost"><div class="card-title">Raven's Welcome</div><div class="card-dept">Greeters</div><div class="card-desc">First contact; orientation; radical inclusion embodiment</div><div class="card-meta"><span class="tag tag-camp">Raven's Roost</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="ravens-roost"><div class="card-title">Raven Broadcast</div><div class="card-dept">Info Radio</div><div class="card-desc">Real-time information dissemination; signal relay</div><div class="card-meta"><span class="tag tag-camp">Raven's Roost</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="fireline-cedar"><div class="card-title">Firefly Circuit</div><div class="card-dept">Lamplighters</div><div class="card-desc">Light infrastructure; lamp placement; ceremonial lighting</div><div class="card-meta"><span class="tag tag-camp">Fireline</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="osprey-watch"><div class="card-title">Tahoma's Eye</div><div class="card-dept">Man Watch</div><div class="card-desc">Apex structure monitoring; pre-burn safety watch</div><div class="card-meta"><span class="tag tag-camp">Osprey Watch</span><span class="tag tag-trust">Level 3</span></div></div>
+  <div class="card" data-camp="ravens-roost"><div class="card-title">Salish Press</div><div class="card-dept">Media Mecca / Placement</div><div class="card-desc">Media relations; journalist coordination</div><div class="card-meta"><span class="tag tag-camp">Raven's Roost</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="ravens-roost"><div class="card-title">Hemlock Reference</div><div class="card-dept">Playa Info</div><div class="card-desc">Information booth; wayfinding; community questions</div><div class="card-meta"><span class="tag tag-camp">Raven's Roost</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="tide-pool-collective"><div class="card-title">Watershed Command</div><div class="card-dept">Ranger HQ</div><div class="card-desc">Ranger coordination; dispatch; incident management</div><div class="card-meta"><span class="tag tag-camp">Tide Pool</span><span class="tag tag-trust">Level 3</span><span class="tag tag-safety">Mandatory</span></div></div>
+  <div class="card" data-camp="old-growth-assembly"><div class="card-title">Cascade Ceremonies</div><div class="card-dept">Special Events</div><div class="card-desc">Permitted event coordination; ceremonial logistics</div><div class="card-meta"><span class="tag tag-camp">Old Growth</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Salmon Run Pool</div><div class="card-dept">Staffing / Volunteers</div><div class="card-desc">Volunteer coordination; shift scheduling; recruitment</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Territory Mapping</div><div class="card-dept">Surveying / Mapping</div><div class="card-desc">Camp placement logistics; city planning</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="osprey-watch"><div class="card-title">Marten Signal</div><div class="card-dept">Telecommunications</div><div class="card-desc">Network infrastructure; communications backbone</div><div class="card-meta"><span class="tag tag-camp">Osprey Watch</span><span class="tag tag-trust">Level 2</span></div></div>
+  <div class="card" data-camp="cedar-grove"><div class="card-title">Cedar Canopy</div><div class="card-dept">Theme Camp Support</div><div class="card-desc">Camp setup assistance; structural guidance; mentoring</div><div class="card-meta"><span class="tag tag-camp">Cedar Grove</span><span class="tag tag-trust">Level 1</span></div></div>
+  <div class="card" data-camp="salmon-run-camp"><div class="card-title">Chinook Transit</div><div class="card-dept">Transportation</div><div class="card-desc">Vehicle coordination; route management; logistics</div><div class="card-meta"><span class="tag tag-camp">Salmon Run</span><span class="tag tag-trust">Level 1</span></div></div>
+</div>
+
+<h2 class="section-header">Mobile Chipsets <span class="count">4 mutant vehicles</span></h2>
+<div class="vehicle-grid">
+  <div class="vehicle-card"><div class="card-title">Orca Sled</div><div class="card-desc">Full CEDAR chipset, all 8 chips, Fleet activation. The apex mobile platform — goes anywhere, carries everything.</div><div class="card-meta"><span class="tag">Fleet</span><span class="tag">Level 3</span><span class="tag">Orcinus orca</span></div></div>
+  <div class="vehicle-card"><div class="card-title">Raven Crawler</div><div class="card-desc">RAVEN + SALMON + OSPREY. Fast reconnaissance and message relay — the raven's intelligence knows what to carry and where.</div><div class="card-meta"><span class="tag">Patrol</span><span class="tag">Level 2</span><span class="tag">Corvus corax</span></div></div>
+  <div class="vehicle-card"><div class="card-title">Osprey Dive</div><div class="card-desc">OSPREY + TAHOMA. Precision observation from altitude — arrives, surveys, departs without disturbing the camp below.</div><div class="card-meta"><span class="tag">Scout</span><span class="tag">Level 2</span><span class="tag">Pandion haliaetus</span></div></div>
+  <div class="vehicle-card"><div class="card-title">Chinook Rider</div><div class="card-desc">SALMON + CEDAR + HEMLOCK. The endurance hauler — carries heavy loads upstream against any current.</div><div class="card-meta"><span class="tag">Patrol</span><span class="tag">Level 2</span><span class="tag">O. tshawytscha</span></div></div>
+</div>
+
+</main>
+
+<footer>
+  <blockquote>"Virtual Black Rock City is an invitation to inhabit that topology deliberately. To name it in the language of the Pacific Northwest bioregion — salmon, raven, cedar, tahoma, mycorrhiza — is to insist that architecture is a place."</blockquote>
+  <p>Virtual Black Rock City v1.44 — GSD skill-creator &times; Wasteland Integration</p>
+  <p>All names sourced from Pacific Northwest ecological taxonomy. tibsfox.com/PNW</p>
+</footer>
+
+<script>
+function filterCamp(camp) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#roles-grid .card').forEach(card => {
+    card.style.display = (camp === 'all' || card.dataset.camp === camp) ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
