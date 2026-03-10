@@ -231,6 +231,24 @@ The educational chain runs from a child coloring a fox (learning triangles and b
 
 ---
 
+## The Fractal Structure of This Document
+
+The same principle that governs the subjects of this research — self-similar pattern at every scale — governs the document itself. The cross-reference architecture operates at five nested scales, each echoing the same connective logic:
+
+1. **Term scale.** The glossary cross-maps 30+ terms to specific module sections. A reader encountering "opponent-process theory" in any module can trace it to Module A §3 for the neural mechanism, Module B §2 for the color psychology, and Module 06 Bridge A-B for the synthesis. Each term is a node with edges to every module where it operates.
+
+2. **Sentence scale.** Thirty-nine inline backreferences thread through Modules A–D, linking specific claims to their elaboration in other modules. A paragraph in Module A about V4 globs points to Module C's sacred geometry; a paragraph in Module C about Fibonacci spirals points to Module D's Phil Lewis catalog. The links are natural parenthetical extensions of the prose, not footnotes — they read as part of the argument.
+
+3. **Section scale.** Each major section closes with a bridge-forward sentence pointing to where its concept continues in another module. The fill-in mechanism (Module A §10) points to Bridge A-C. The fractal geometry section (Module C §4) points to Module 05's biological measurements. The section-level waypoints create a navigable trail through the document that a reader can follow in any direction.
+
+4. **Module scale.** Module 06 maps seven explicit bridges between the four research modules, plus the Animal Geometry Connection that integrates Module 05 across all four. Each bridge is a structural identity, not an analogy — the mathematics, the neural hardware, the cultural history, and the artistic practice converge on the same relationship from different directions.
+
+5. **Document scale.** The through-line — "the same pattern appears at every scale" — runs from the opening epigraph through every module and lands in this synthesis. The document's claim IS its structure: connection at every resolution, from a single glossary entry to the full nine-module arc.
+
+This is not a design choice imposed on the material. It is the material's own logic expressed in document form. A research study about fractal self-similarity that was not itself fractally cross-referenced would contradict its thesis. The three-pass editorial process that produced this architecture — content assembly, then cross-referencing, then structural verification — mirrors the three scales of natural fractal growth: the trunk, the branches, the twigs. Each pass refined at a finer resolution. The document converged on its own subject.
+
+---
+
 ## What This Research Means
 
 This synthesis chapter has mapped seven bridges: A-B (neural coding to color theory), A-C (V4 to sacred geometry), B-C (color proportion to geometric proportion), B-D (Fauvist color to Lewis), C-D (Fibonacci to organic subjects), A-D (the full perception loop), and the Animal Geometry Connection. Each bridge is a structural identity, not an analogy.

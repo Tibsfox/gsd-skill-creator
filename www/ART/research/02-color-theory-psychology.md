@@ -587,6 +587,8 @@ The festival-visionary art tradition — encompassing the live painting, large-s
 
 Phil Lewis's work is designed for these conditions. His pen-and-ink bases have the detail resolution needed for gallery-distance viewing. His digital color overlays have the saturation needed for UV and festival display. His compositions have the scale and density needed to fill peripheral vision. The work functions across multiple contexts — gallery wall, festival banner, coloring book page, screen wallpaper — because the underlying color relationships are based on the principles documented in this module: complementary contrast, warm-cool interplay, saturation as intensity control, value as structural framework.
 
+The lineage from Fauvist color liberation through Color Field painting to Phil Lewis's non-descriptive color use is traced in Module 06, Bridge B-D.
+
 ---
 
 ## 4. The Digital-Analog Synthesis

@@ -699,6 +699,8 @@ Birds combine bilateral symmetry with unique geometric features:
 | Mountain | Fractal | Self-similar terrain roughness, geological layering | Less applicable | Texture studies, layering, profile geometry |
 | Bird | Bilateral | Airfoil wing, feather tessellation, flock formations | Less applicable | Tessellation patterns, wing construction |
 
+Each geometric principle in this table is mapped to its cross-module connections — neural basis (Module A), color theory implications (Module B), mathematical foundations (Module C), and artistic practice (Module D) — in Module 06, "The Visible Grammar."
+
 ---
 
 ## From Biology to Brand: The Design Translation Pipeline

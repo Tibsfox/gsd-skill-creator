@@ -18,7 +18,7 @@ A geometric property in which a form can be divided by a single plane into two m
 
 ## Bioluminescence
 
-The production of light by a living organism through a chemical reaction, typically involving a substrate (luciferin) and an enzyme (luciferase). Bioluminescence occurs in deep-sea fish, jellyfish, fireflies, certain fungi, and many marine invertebrates. Unlike *structural color*, which manipulates external light, bioluminescence generates its own photons. Visionary artists draw on bioluminescence as a visual language for inner light — forms that glow from within rather than being illuminated from without.
+The production of light by a living organism through a chemical reaction, typically involving a substrate (luciferin) and an enzyme (luciferase). Bioluminescence occurs in deep-sea fish, jellyfish, fireflies, certain fungi, and many marine invertebrates. Unlike *structural color*, which manipulates external light, bioluminescence generates its own photons. Visionary artists draw on bioluminescence as a visual language for inner light — forms that glow from within rather than being illuminated from without. *(See Module 05, "The Jellyfish"; Module D §6, thematic catalog.)*
 
 ## Cardinal Directions (Color Space)
 
@@ -46,11 +46,11 @@ The photoreceptor cells in the human retina responsible for color vision under w
 
 ## Cool Colors
 
-Colors on the blue-green side of the color wheel — blue, cyan, green, violet — that are perceptually associated with recession, calm, shadow, water, and distance. Cool colors appear to recede in a composition, making them useful for backgrounds, atmospheric perspective, and spatial depth. The warm/cool distinction is not purely physical (wavelength) but perceptual and contextual: a warm violet beside a cool blue, the same violet beside an orange reads as cool. See also *warm colors*.
+Colors on the blue-green side of the color wheel — blue, cyan, green, violet — that are perceptually associated with recession, calm, shadow, water, and distance. Cool colors appear to recede in a composition, making them useful for backgrounds, atmospheric perspective, and spatial depth. The warm/cool distinction is not purely physical (wavelength) but perceptual and contextual: a warm violet beside a cool blue, the same violet beside an orange reads as cool. *(See Module B §2 for color psychology; Module A §13 for chromatic depth interaction; Module 06, Bridge A-B.)* See also *warm colors*.
 
 ## Countershading
 
-A natural coloring pattern in which an animal's dorsal (top) surface is darker than its ventral (underside), counteracting the shadow gradient cast by overhead light and making the animal appear flatter and less three-dimensional to predators or prey. Countershading is found across taxa — deer, sharks, penguins, caterpillars, foxes. In art and design, countershading is a lesson in value distribution: nature uses *value* gradients to cancel form, while artists use value gradients to reveal it. Understanding one teaches the other.
+A natural coloring pattern in which an animal's dorsal (top) surface is darker than its ventral (underside), counteracting the shadow gradient cast by overhead light and making the animal appear flatter and less three-dimensional to predators or prey. Countershading is found across taxa — deer, sharks, penguins, caterpillars, foxes. In art and design, countershading is a lesson in value distribution: nature uses *value* gradients to cancel form, while artists use value gradients to reveal it. Understanding one teaches the other. *(See Module 05, "The Fox"; Module B §2 for value and brightness effects.)*
 
 ## Cube
 
@@ -86,7 +86,7 @@ A geometric structure that exhibits *self-similarity* — the same or statistica
 
 ## Fractal Dimension
 
-A numerical measure of a fractal's geometric complexity, quantifying how detail changes with the scale at which it is measured. A smooth line has dimension 1, a filled plane has dimension 2; a fractal curve with a dimension of 1.26 (like the Koch snowflake) fills more space than a line but less than a plane. Fractal dimension can be measured for natural objects — coastlines, tree canopies, neural dendrites — and for artworks, providing a quantitative bridge between natural forms and artistic composition. Research has found that humans show consistent aesthetic preference for fractal dimensions in the range of 1.3 to 1.5, roughly matching the complexity of natural landscapes.
+A numerical measure of a fractal's geometric complexity, quantifying how detail changes with the scale at which it is measured. A smooth line has dimension 1, a filled plane has dimension 2; a fractal curve with a dimension of 1.26 (like the Koch snowflake) fills more space than a line but less than a plane. Fractal dimension can be measured for natural objects — coastlines, tree canopies, neural dendrites — and for artworks, providing a quantitative bridge between natural forms and artistic composition. Research has found that humans show consistent aesthetic preference for fractal dimensions in the range of 1.3 to 1.5, roughly matching the complexity of natural landscapes. *(See Module C §4 for mathematical definition; Module 05, "The Tree" and "The Mushroom" for biological measurements.)*
 
 ## Globs
 
@@ -122,7 +122,7 @@ A relay structure in the thalamus that receives visual signals from the *retinal
 
 ## Logarithmic Spiral
 
-A spiral curve in which the distance from the center increases by a constant factor for each equal angle of rotation. Unlike an Archimedean spiral (where spacing is constant), a logarithmic spiral grows exponentially and is *self-similar* — it looks the same at every scale. Logarithmic spirals appear in nautilus shells, hurricane arms, spiral galaxies, the flight paths of hawks approaching prey, and the arrangement of seeds in sunflower heads. When the growth factor equals the *golden ratio*, the result is the golden spiral, a special case frequently referenced in art and design. See also *golden ratio*, *phyllotaxis*.
+A spiral curve in which the distance from the center increases by a constant factor for each equal angle of rotation. Unlike an Archimedean spiral (where spacing is constant), a logarithmic spiral grows exponentially and is *self-similar* — it looks the same at every scale. Logarithmic spirals appear in nautilus shells, hurricane arms, spiral galaxies, the flight paths of hawks approaching prey, and the arrangement of seeds in sunflower heads. When the growth factor equals the *golden ratio*, the result is the golden spiral, a special case frequently referenced in art and design. *(See Module C §2.2 for golden spiral derivation; Module 05, "The Jellyfish" for biological application.)* See also *golden ratio*, *phyllotaxis*.
 
 ## Mandala
 
@@ -162,7 +162,7 @@ The five convex regular polyhedra — *tetrahedron*, *cube*, *octahedron*, *dode
 
 ## Psychedelic Art
 
-Art created to evoke, depict, or complement experiences associated with altered states of consciousness, particularly those induced by psychedelic substances. Psychedelic art typically features intense color saturation, intricate patterning, morphing or melting forms, *fractal* structures, *mandala* compositions, and dissolution of boundaries between figure and ground. Distinguished from *surrealism* (which draws on dreams and the unconscious through representational incongruity) and from *visionary art* (a broader category that includes psychedelic art but also spiritual, mystical, and contemplative work not necessarily related to substance experiences). The psychedelic art tradition runs from 1960s poster art (Wes Wilson, Victor Moscoso) through the digital era. See also *visionary art*, *surrealism*.
+Art created to evoke, depict, or complement experiences associated with altered states of consciousness, particularly those induced by psychedelic substances. Psychedelic art typically features intense color saturation, intricate patterning, morphing or melting forms, *fractal* structures, *mandala* compositions, and dissolution of boundaries between figure and ground. Distinguished from *surrealism* (which draws on dreams and the unconscious through representational incongruity) and from *visionary art* (a broader category that includes psychedelic art but also spiritual, mystical, and contemplative work not necessarily related to substance experiences). The psychedelic art tradition runs from 1960s poster art (Wes Wilson, Victor Moscoso) through the digital era. *(See Module D §1 for definition and distinction from visionary art; Module B §3.3 for art movements as color laboratories.)* See also *visionary art*, *surrealism*.
 
 ## Radial Symmetry
 
@@ -190,15 +190,15 @@ The intensity or purity of a color — how far it is from a neutral gray of the 
 
 ## Scale Invariance
 
-The property of a pattern or system that appears the same (or statistically equivalent) regardless of the scale at which it is examined. A coastline viewed from orbit, from a hillside, and from a kneeling position shows the same kind of jaggedness at every scale — this is scale invariance. Scale invariance is the defining characteristic of *fractals* and is related to *self-similarity*. In art, scale-invariant composition means the work rewards examination at every distance — from across the room to nose-against-the-paper. Phil Lewis's linework achieves this: the overall form reads at a distance, and finer patterns emerge as you approach. See also *fractal*, *self-similarity*.
+The property of a pattern or system that appears the same (or statistically equivalent) regardless of the scale at which it is examined. A coastline viewed from orbit, from a hillside, and from a kneeling position shows the same kind of jaggedness at every scale — this is scale invariance. Scale invariance is the defining characteristic of *fractals* and is related to *self-similarity*. In art, scale-invariant composition means the work rewards examination at every distance — from across the room to nose-against-the-paper. Phil Lewis's linework achieves this: the overall form reads at a distance, and finer patterns emerge as you approach. *(See Module C §4; Module D §4 for Lewis's scale-invariant linework; Module 05 for biological examples.)* See also *fractal*, *self-similarity*.
 
 ## Self-Similarity
 
-A property in which a part of a structure resembles the whole. A fern frond is self-similar: each leaflet is shaped like the entire frond, and each sub-leaflet like the leaflet. Self-similarity can be exact (mathematical fractals where each part is an identical scaled copy) or statistical (natural fractals where the pattern type, not the exact shape, repeats at different scales). Self-similarity is the mechanism by which simple growth rules produce complex forms — a single branching instruction repeated at progressively smaller scales generates a tree. See also *fractal*, *scale invariance*, *fractal dimension*.
+A property in which a part of a structure resembles the whole. A fern frond is self-similar: each leaflet is shaped like the entire frond, and each sub-leaflet like the leaflet. Self-similarity can be exact (mathematical fractals where each part is an identical scaled copy) or statistical (natural fractals where the pattern type, not the exact shape, repeats at different scales). Self-similarity is the mechanism by which simple growth rules produce complex forms — a single branching instruction repeated at progressively smaller scales generates a tree. *(See Module C §4 for mathematical treatment; Module 05, "The Tree" and "The Mushroom" for natural examples.)* See also *fractal*, *scale invariance*, *fractal dimension*.
 
 ## Structural Color
 
-Color produced not by pigments or dyes but by the physical microstructure of a surface — nanoscale ridges, layers, or crystals that selectively reflect, refract, or diffract specific wavelengths of light. Structural color is responsible for the iridescence of butterfly wings, the blue of blue jay feathers (which contain no blue pigment), the flash of opal, and the shimmering of beetle elytra. Unlike pigment color, structural color can shift with viewing angle (iridescence) and does not fade with time because it depends on geometry, not chemistry. Structural color demonstrates that color is not an intrinsic property of a surface but an interaction between surface architecture and light. See also *bioluminescence*.
+Color produced not by pigments or dyes but by the physical microstructure of a surface — nanoscale ridges, layers, or crystals that selectively reflect, refract, or diffract specific wavelengths of light. Structural color is responsible for the iridescence of butterfly wings, the blue of blue jay feathers (which contain no blue pigment), the flash of opal, and the shimmering of beetle elytra. Unlike pigment color, structural color can shift with viewing angle (iridescence) and does not fade with time because it depends on geometry, not chemistry. Structural color demonstrates that color is not an intrinsic property of a surface but an interaction between surface architecture and light. *(See Module 05, "The Bird" for biological examples; Module A §1-2 for how the visual system processes light.)* See also *bioluminescence*.
 
 ## Subtractive Color
 
@@ -214,7 +214,7 @@ An art movement originating in 1920s Paris (Andre Breton's 1924 manifesto) that 
 
 ## Tessellation
 
-A pattern of shapes that covers a plane with no gaps and no overlaps. Regular tessellations use a single type of regular polygon — only equilateral triangles, squares, and regular hexagons can tessellate the plane by themselves. Semi-regular tessellations combine two or more regular polygon types (there are exactly eight). Irregular and aperiodic tessellations (including Penrose tilings, which use the *golden ratio*) cover the plane without repeating. Tessellations are fundamental in Islamic geometric art, in M.C. Escher's transformation prints, in crystallography, and in any tiling pattern from bathroom floors to honeycomb. See also *tiling*.
+A pattern of shapes that covers a plane with no gaps and no overlaps. Regular tessellations use a single type of regular polygon — only equilateral triangles, squares, and regular hexagons can tessellate the plane by themselves. Semi-regular tessellations combine two or more regular polygon types (there are exactly eight). Irregular and aperiodic tessellations (including Penrose tilings, which use the *golden ratio*) cover the plane without repeating. Tessellations are fundamental in Islamic geometric art, in M.C. Escher's transformation prints, in crystallography, and in any tiling pattern from bathroom floors to honeycomb. *(See Module C §1 for Platonic solid tessellation; Module D §4 for tessellation in Lewis's compositions.)* See also *tiling*.
 
 ## Tetrahedron
 
@@ -250,4 +250,4 @@ A broad category of art that seeks to depict or evoke experiences beyond ordinar
 
 ## Warm Colors
 
-Colors on the red-orange-yellow side of the color wheel, perceptually associated with advance, energy, fire, sunlight, and proximity. Warm colors appear to come forward in a composition, making them effective for focal points, highlights, and foreground elements. The warm/cool distinction is relative and contextual — a warm gray reads as warm only against a cooler gray. Warm colors generally produce higher *arousal* than *cool colors* at equivalent saturation. See also *cool colors*, *color psychology*.
+Colors on the red-orange-yellow side of the color wheel, perceptually associated with advance, energy, fire, sunlight, and proximity. Warm colors appear to come forward in a composition, making them effective for focal points, highlights, and foreground elements. The warm/cool distinction is relative and contextual — a warm gray reads as warm only against a cooler gray. Warm colors generally produce higher *arousal* than *cool colors* at equivalent saturation. *(See Module B §2 for color psychology; Module A §13 for chromatic depth interaction; Module 06, Bridge A-B.)* See also *cool colors*, *color psychology*.
