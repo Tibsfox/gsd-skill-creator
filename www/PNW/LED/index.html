@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Lighting &amp; Controllers &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>LED Lighting &amp; Controllers</h1>
+    <div class="subtitle">DIY Electronics &middot; Microcontrollers &middot; Smart Lighting &middot; Instruments &amp; High-Speed Logic</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=m1-led-fundamentals">LED Basics</a>
+      <a href="page.html?doc=m2-arduino-led-control">Microcontrollers</a>
+      <a href="page.html?doc=m3-ws2812b-protocol">LED Protocols</a>
+      <a href="page.html?doc=m4-philips-hue-api">Smart Lighting</a>
+      <a href="page.html?doc=m5-mosfet-pwm-dimmers">DIY Controllers</a>
+      <a href="page.html?doc=m6-pov-physics">POV Displays</a>
+      <a href="page.html?doc=m7-oscilloscope-basics">Oscilloscopes</a>
+      <a href="page.html?doc=m8-plc-ladder-logic">PLC Control</a>
+      <a href="page.html?doc=00-glossary">Glossary</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      An LED is not a light source. It is a boundary condition &mdash; a place where electrons, coached into
+      higher energy states by a voltage differential, fall across a gap and surrender their borrowed energy
+      as photons. The oscilloscope, the multimeter, the color sensor, the PIC's CCP module, the RP2040's
+      PIO state machine: these are all different ways of standing at that boundary and asking: how bright?
+      how fast? what color? when?
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">34+</span><span class="stat-label">Reference Pages</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">MCU Platforms</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">LED Protocols</span></div>
+      <div class="stat"><span class="stat-value">80+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety Gates</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=m1-led-fundamentals" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: LED Electronics Fundamentals</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> 4 pages &middot; First principles</div>
+        <p>Forward voltage, I-V curves, Ohm's Law, current-limiting resistors, series/parallel wiring, constant-current drivers, strip power calculations, thermal management.</p>
+      </a>
+
+      <a href="page.html?doc=m2-arduino-led-control" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Microcontroller Programming</h3>
+        <div class="meta"><span class="tag tag-sw">Software</span> 6 pages &middot; 5 platforms</div>
+        <p>Arduino PWM, PIC MPLAB XC8 CCP module, Raspberry Pi pigpio, ESP32 LEDC, RP2040 PIO state machines. Cross-platform comparison with working code examples.</p>
+      </a>
+
+      <a href="page.html?doc=m3-ws2812b-protocol" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Addressable LED Protocols</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> 4 pages &middot; WS2812B &middot; APA102</div>
+        <p>WS2812B NZR 800 kHz protocol, APA102 SPI at 24 MHz, SK6812 RGBW, library comparison (NeoPixel, FastLED, WLED), power injection and strip wiring guide.</p>
+      </a>
+
+      <a href="page.html?doc=m4-philips-hue-api" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Smart Lighting &amp; Ambient Sensing</h3>
+        <div class="meta"><span class="tag tag-sw">Software</span> 4 pages &middot; Hue &middot; TCS34725</div>
+        <p>Philips Hue CLIP API v1/v2, diyHue bridge emulator, TCS34725 RGB color sensor, circadian rhythm CCT adaptation, Home Assistant automation pipeline.</p>
+      </a>
+
+      <a href="page.html?doc=m5-mosfet-pwm-dimmers" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: DIY Household LED Controllers</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> 4 pages &middot; BOM included</div>
+        <p>MOSFET PWM dimmers (IRLZ44N), WLED firmware on ESP8266/ESP32 with complete BOM, IR/RF remote control, power supply selection and sizing for LED installations.</p>
+      </a>
+
+      <a href="page.html?doc=m6-pov-physics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: High-Speed LED &amp; Persistence of Vision</h3>
+        <div class="meta"><span class="tag tag-adv">Advanced</span> 4 pages &middot; RP2040 PIO</div>
+        <p>POV display physics, APA102 vs WS2812B for high-speed switching, RP2040 dual-core PIO architecture, rotation sensing, polar image mapping, mechanical assembly and image preparation.</p>
+      </a>
+
+      <a href="page.html?doc=m7-oscilloscope-basics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M7: Oscilloscopes &amp; Measurement</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> 4 pages &middot; Nyquist &middot; ADC</div>
+        <p>Oscilloscope types and bandwidth, trigger modes, probe compensation, measuring PWM and WS2812B signals, Nyquist-Shannon theorem, DIY scope projects.</p>
+      </a>
+
+      <a href="page.html?doc=m8-plc-ladder-logic" class="card" style="text-decoration:none;color:inherit">
+        <h3>M8: PLC &amp; Industrial LED Control</h3>
+        <div class="meta"><span class="tag tag-ind">Industrial</span> 4 pages &middot; IEC 61131-3</div>
+        <p>PLC ladder logic for LED signaling, relay vs transistor output modules, Modbus RTU/TCP communication protocol, hybrid PLC + ESP32 architectures, industrial LED status panel design.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Forward voltage</td><td>M1, M2, M3, M7</td></tr>
+        <tr><td>PWM</td><td>M1, M2, M5, M6, M7</td></tr>
+        <tr><td>Current limiting</td><td>M1, M3, M5</td></tr>
+        <tr><td>WS2812B protocol</td><td>M3, M6, M7</td></tr>
+        <tr><td>APA102 / SPI</td><td>M3, M6, M7</td></tr>
+        <tr><td>RP2040 PIO</td><td>M2, M3, M6</td></tr>
+        <tr><td>Hue CLIP API</td><td>M4, M5</td></tr>
+        <tr><td>TCS34725 sensor</td><td>M4, M7</td></tr>
+        <tr><td>Nyquist theorem</td><td>M6, M7</td></tr>
+        <tr><td>MOSFET switching</td><td>M1, M5, M8</td></tr>
+        <tr><td>Safety / mains</td><td>M1, M5, M8</td></tr>
+        <tr><td>Oscilloscope</td><td>M3, M7</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Module Pages</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Pages</th>
+          <th>Key Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>M1: LED Electronics</td>
+          <td>
+            <a href="page.html?doc=m1-led-fundamentals">Fundamentals</a> &middot;
+            <a href="page.html?doc=m1-resistor-calculations">Resistor Calc</a> &middot;
+            <a href="page.html?doc=m1-current-drivers">Current Drivers</a> &middot;
+            <a href="page.html?doc=m1-thermal-management">Thermal</a>
+          </td>
+          <td>I-V curves, Ohm's Law, strip power</td>
+        </tr>
+        <tr>
+          <td>M2: Microcontrollers</td>
+          <td>
+            <a href="page.html?doc=m2-arduino-led-control">Arduino</a> &middot;
+            <a href="page.html?doc=m2-pic-xc8-pwm">PIC XC8</a> &middot;
+            <a href="page.html?doc=m2-raspberry-pi-gpio">RPi</a> &middot;
+            <a href="page.html?doc=m2-esp32-led">ESP32</a> &middot;
+            <a href="page.html?doc=m2-rp2040-pio">RP2040</a> &middot;
+            <a href="page.html?doc=m2-mcu-comparison">Comparison</a>
+          </td>
+          <td>PWM, CCP, pigpio, PIO code</td>
+        </tr>
+        <tr>
+          <td>M3: LED Protocols</td>
+          <td>
+            <a href="page.html?doc=m3-ws2812b-protocol">WS2812B</a> &middot;
+            <a href="page.html?doc=m3-apa102-spi">APA102</a> &middot;
+            <a href="page.html?doc=m3-led-libraries">Libraries</a> &middot;
+            <a href="page.html?doc=m3-power-injection">Power Injection</a>
+          </td>
+          <td>NZR timing, SPI frames, WLED</td>
+        </tr>
+        <tr>
+          <td>M4: Smart Lighting</td>
+          <td>
+            <a href="page.html?doc=m4-philips-hue-api">Hue API</a> &middot;
+            <a href="page.html?doc=m4-diyhue-wled">diyHue</a> &middot;
+            <a href="page.html?doc=m4-tcs34725-sensing">TCS34725</a> &middot;
+            <a href="page.html?doc=m4-circadian-adaptation">Circadian</a>
+          </td>
+          <td>CLIP v1/v2, color sensing, CCT</td>
+        </tr>
+        <tr>
+          <td>M5: DIY Controllers</td>
+          <td>
+            <a href="page.html?doc=m5-mosfet-pwm-dimmers">MOSFET Dimmer</a> &middot;
+            <a href="page.html?doc=m5-wled-setup">WLED Setup</a> &middot;
+            <a href="page.html?doc=m5-ir-rf-remote">IR/RF Remote</a> &middot;
+            <a href="page.html?doc=m5-power-supply-selection">Power Supplies</a>
+          </td>
+          <td>BOM, dimmer circuits, firmware, PSU</td>
+        </tr>
+        <tr>
+          <td>M6: POV / High-Speed</td>
+          <td>
+            <a href="page.html?doc=m6-pov-physics">POV Physics</a> &middot;
+            <a href="page.html?doc=m6-apa102-pov-design">APA102 POV</a> &middot;
+            <a href="page.html?doc=m6-rp2040-pov-architecture">RP2040 Architecture</a> &middot;
+            <a href="page.html?doc=m6-pov-image-preparation">Image Prep</a>
+          </td>
+          <td>Temporal integration, PIO code, assembly</td>
+        </tr>
+        <tr>
+          <td>M7: Oscilloscopes</td>
+          <td>
+            <a href="page.html?doc=m7-oscilloscope-basics">Basics</a> &middot;
+            <a href="page.html?doc=m7-measuring-led-signals">LED Signals</a> &middot;
+            <a href="page.html?doc=m7-nyquist-sampling">Nyquist/ADC</a> &middot;
+            <a href="page.html?doc=m7-diy-oscilloscopes">DIY Scopes</a>
+          </td>
+          <td>Bandwidth, trigger, probes</td>
+        </tr>
+        <tr>
+          <td>M8: PLC Control</td>
+          <td>
+            <a href="page.html?doc=m8-plc-ladder-logic">Ladder Logic</a> &middot;
+            <a href="page.html?doc=m8-hybrid-plc-esp32">Hybrid PLC+ESP32</a> &middot;
+            <a href="page.html?doc=m8-modbus-communication">Modbus</a> &middot;
+            <a href="page.html?doc=m8-industrial-led-panel">LED Panels</a>
+          </td>
+          <td>IEC 61131-3, Modbus, status panels</td>
+        </tr>
+        <tr>
+          <td>Reference</td>
+          <td>
+            <a href="page.html?doc=00-glossary">Glossary</a> &middot;
+            <a href="page.html?doc=00-source-index">Source Index</a>
+          </td>
+          <td>Terms, bibliography</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+LAYER 0: PHYSICS FOUNDATION [LED Electronics]
+  forward voltage, I-V curve, current limiting, p-n junction, photon emission
+
+LAYER 1: PASSIVE CONTROL [Resistors, Ohm's Law]
+  LED Electronics --&gt; PWM Fundamentals --&gt; Constant Current Drivers --&gt; Strip Power
+
+LAYER 2: MICROCONTROLLER PROGRAMMING
+  Arduino/AVR &lt;--&gt; PIC MPLAB XC8 &lt;--&gt; ESP32 &lt;--&gt; RP2040 PIO --&gt; High-Speed LED
+
+LAYER 3: ADDRESSABLE LED PROTOCOLS
+  WS2812B NZR --&gt; NeoPixel/FastLED --&gt; APA102 SPI --&gt; POV Displays --&gt; Color Rendering
+
+LAYER 4: SMART LIGHTING ECOSYSTEMS
+  Philips Hue CLIP API &lt;--&gt; diyHue &lt;--&gt; WLED &lt;--&gt; TCS34725 --&gt; Circadian Adaptation
+
+LAYER 5: HIGH-SPEED &amp; ADVANCED
+  APA102 + RP2040 PIO --&gt; POV Displays --&gt; Oscilloscope --&gt; PLC Industrial Control
+
+LAYER 6: INSTRUMENTS &amp; MEASUREMENT
+  Multimeters --&gt; Oscilloscopes --&gt; PWM/WS2812B Waveforms --&gt; Nyquist, ADC
+    </pre>
+  </main>
+
+  <footer>
+    <p>LED Lighting &amp; Controllers &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
