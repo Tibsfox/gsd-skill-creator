@@ -14,7 +14,8 @@
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
     { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
-    { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' }
+    { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' },
+    { id: 'VAV', name: 'Voxel as Vessel', path: 'VAV/index.html' }
   ];
 
   // Detect current project from URL path

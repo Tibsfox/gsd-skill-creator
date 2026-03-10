@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxel as Vessel — PNW Research Series</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Voxel as Vessel</h1>
+    <div class="subtitle">Ceph &middot; RAG &middot; Minecraft Block Storage &middot; Sovereign Worlds &middot; Signal Fidelity</div>
+    <nav>
+      <a href="index.html" class="active">overview</a>
+      <a href="page.html?doc=07-integration-synthesis">v1 synthesis</a>
+      <a href="page.html?doc=26-synthesis-v3">v3 synthesis</a>
+      <a href="page.html?doc=28-iterative-refinement-report">refinement</a>
+      <a href="page.html?doc=29-final-overview">final overview</a>
+      <a href="page.html?doc=08-bibliography">bibliography</a>
+      <a href="page.html?doc=00-glossary">glossary</a>
+      <a href="mission.html">mission</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every retrieval system is a world. Every world is a retrieval system. The question was
+      never whether Minecraft could store embeddings. The question was whether we were paying
+      attention when it already had. The Amiga Principle: the answer was always there. You just
+      had to pick up the controller.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">21</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">37</span><span class="stat-label">Research Files</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Missions</span></div>
+      <div class="stat"><span class="stat-value">116</span><span class="stat-label">Sources</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">PoC Experiments</span></div>
+    </div>
+
+    <h2>v1 &mdash; Ceph, RAG &amp; Minecraft Block Storage</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-ceph-rados-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Ceph / RADOS</h3>
+        <p>Object model, CRUSH algorithm, BlueStore, RGW S3 interface, pool design for voxel RAG</p>
+      </a>
+      <a href="page.html?doc=02-rag-pipeline-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: RAG Pipeline</h3>
+        <p>7 pipeline stages with voxel analogues, embedding models, hybrid search, advanced patterns</p>
+      </a>
+      <a href="page.html?doc=03-integration-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Integration Architecture</h3>
+        <p>Encoding scheme, storage hierarchy, spatial coordinate mapping, API surface design</p>
+      </a>
+      <a href="page.html?doc=04-minecraft-anvil-nbt-format" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Anvil / NBT Format</h3>
+        <p>Region files, chunk structure, NBT type system, palette compression, coordinate math</p>
+      </a>
+      <a href="page.html?doc=05-poc-implementation-plan" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: PoC Plan</h3>
+        <p>Python implementation spec, benchmarks, storage overhead analysis, library choices</p>
+      </a>
+      <a href="page.html?doc=06-spatial-embedding-mapping" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Spatial Mapping</h3>
+        <p>UMAP, PCA, Hilbert/Morton curves for embedding-to-voxel coordinate mapping</p>
+      </a>
+    </div>
+
+    <h2>v2 &mdash; Sovereign World Architecture</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=11-block-chunk-data" class="card" style="text-decoration:none;color:inherit">
+        <h3>M7: Block &amp; Chunk Data</h3>
+        <p>Palette compression, BPE calculation, RAG isomorphism formalization, wire-format examples</p>
+      </a>
+      <a href="page.html?doc=12-texture-resource-packs" class="card" style="text-decoration:none;color:inherit">
+        <h3>M8: Texture &amp; Resource Packs</h3>
+        <p>Atlas system, pack format versioning, PBR texture sets, namespace isolation</p>
+      </a>
+      <a href="page.html?doc=13-pcg-seed-manifold" class="card" style="text-decoration:none;color:inherit">
+        <h3>M9: PCG Seed Manifold</h3>
+        <p>LCG seed mechanics, noise function hierarchy, seed-space distance metric</p>
+      </a>
+      <a href="page.html?doc=14-multi-server-fabric" class="card" style="text-decoration:none;color:inherit">
+        <h3>M10: Multi-Server Fabric</h3>
+        <p>MultiPaper chunk ownership, Velocity proxy, HuskSync, server mesh topology</p>
+      </a>
+      <a href="page.html?doc=15-sovereign-world-openstack" class="card" style="text-decoration:none;color:inherit">
+        <h3>M11: Sovereign World on OpenStack</h3>
+        <p>SCS Domain Manager, tenant provisioning, ACL matrix, CephX keyrings</p>
+      </a>
+      <a href="page.html?doc=16-edge-topology-lod" class="card" style="text-decoration:none;color:inherit">
+        <h3>M12: Edge Topology &amp; LOD</h3>
+        <p>Torus topology, 4D simplex noise, level-of-detail rendering, CRUSH zone placement</p>
+      </a>
+      <a href="page.html?doc=17-backup-security-hotswap" class="card" style="text-decoration:none;color:inherit">
+        <h3>M13: Backup, Security &amp; Hot-Swap</h3>
+        <p>RBD mirroring, snapshot lifecycle, failover sequences, blast radius analysis</p>
+      </a>
+    </div>
+
+    <h2>v3 &mdash; Signal Fidelity &amp; Data Transmission</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=19-temporal-imaging" class="card" style="text-decoration:none;color:inherit">
+        <h3>M14: Temporal Imaging</h3>
+        <p>Nyquist/Shannon, TSR, CUP, deinterlacing, palette-as-frequency-budget formalization</p>
+      </a>
+      <a href="page.html?doc=20-color-fidelity" class="card" style="text-decoration:none;color:inherit">
+        <h3>M15: Color Fidelity</h3>
+        <p>ICC/DNG profiles, 7-step calibration, RAW pipeline, gamut mapping to palettes</p>
+      </a>
+      <a href="page.html?doc=21-audio-fidelity" class="card" style="text-decoration:none;color:inherit">
+        <h3>M16: Audio Fidelity</h3>
+        <p>Mic calibration, JACK signal path, spectral restoration, IRENE optical scanning</p>
+      </a>
+      <a href="page.html?doc=22-serialization-hpc" class="card" style="text-decoration:none;color:inherit">
+        <h3>M17: Serialization &amp; HPC</h3>
+        <p>FlatBuffers 81ns decode, InfiniBand RDMA, Reed-Solomon ECC, benchmark table</p>
+      </a>
+      <a href="page.html?doc=23-transport-taxonomy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M18: Transport Taxonomy</h3>
+        <p>Modems to fiber to IPoAC, bandwidth-latency Pareto front, DTN bundle protocol</p>
+      </a>
+      <a href="page.html?doc=24-backup-federation" class="card" style="text-decoration:none;color:inherit">
+        <h3>M19: Backup &amp; Federation</h3>
+        <p>3-2-1-1-0 rule, BorgBackup, Arrow Flight federation, cross-domain bridging</p>
+      </a>
+      <a href="page.html?doc=25-zero-trust-firewall" class="card" style="text-decoration:none;color:inherit">
+        <h3>M20: Zero Trust &amp; Firewall</h3>
+        <p>NIST 800-207, CISA 5-pillar maturity, 4-zone architecture, implicit deny-all</p>
+      </a>
+    </div>
+
+    <h2>Synthesis &amp; Cross-Mission</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=07-integration-synthesis" class="card" style="text-decoration:none;color:inherit">
+        <h3>v1 Synthesis</h3>
+        <p>Core isomorphism: Region = RADOS Object. 7-layer scale table.</p>
+      </a>
+      <a href="page.html?doc=26-synthesis-v3" class="card" style="text-decoration:none;color:inherit">
+        <h3>v3 Synthesis</h3>
+        <p>Frequency-domain unification. Extended isomorphism table across all 3 passes.</p>
+      </a>
+      <a href="page.html?doc=28-iterative-refinement-report" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4 Refinement Report</h3>
+        <p>Cross-ref audit, 3 PoC experiments, weak mapping assessment, safety consolidation</p>
+      </a>
+      <a href="page.html?doc=29-final-overview" class="card" style="text-decoration:none;color:inherit">
+        <h3>Final Overview</h3>
+        <p>Complete atlas summary: 21 modules, 5 missions, 116 sources, 3 PoC validations</p>
+      </a>
+      <a href="page.html?doc=08-bibliography" class="card" style="text-decoration:none;color:inherit">
+        <h3>Bibliography</h3>
+        <p>116 sources across 14 categories and 3 research passes</p>
+      </a>
+      <a href="page.html?doc=09-verification-matrix" class="card" style="text-decoration:none;color:inherit">
+        <h3>Verification Matrix</h3>
+        <p>v1: 12/12 SC + 4/4 safety. v2 + v3 matrices in final overview.</p>
+      </a>
+      <a href="page.html?doc=00-glossary" class="card" style="text-decoration:none;color:inherit">
+        <h3>Glossary</h3>
+        <p>Complete terminology across Ceph, Minecraft, RAG, sovereignty, signal fidelity</p>
+      </a>
+    </div>
+
+    <h2>Retrospectives</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=10-retrospective-m1" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1 Retrospective</h3>
+        <p>3-layer architecture validated, isomorphism confirmed, parallel execution proven</p>
+      </a>
+      <a href="page.html?doc=18-retrospective-m2" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2 Retrospective</h3>
+        <p>7-way parallel scaling, RAG isomorphism formalized, wire-format gap closed</p>
+      </a>
+      <a href="page.html?doc=27-retrospective-m3" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3 Retrospective</h3>
+        <p>Frequency-domain unification, all M2 forward lessons applied, 7/8 modules delivered</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Voxel as Vessel &mdash; PNW Research Series #14 &mdash; March 2026
+  </footer>
+</body>
+</html>
