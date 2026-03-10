@@ -428,6 +428,8 @@ The viewing context matters enormously. In a gallery, a viewer may stand before 
 
 Additionally, festival viewing often occurs under conditions of divided attention (music, social interaction, altered states). Under divided attention, the precision of peripheral filling-in decreases, but the basic mechanism persists. High-contrast, geometrically regular artwork remains perceptually accessible under divided attention because it demands less of the fill-in system -- it provides the answer rather than requiring the brain to guess.
 
+The perceptual consequences of fill-in for geometric art -- why repeating patterns feel complete and harmonious -- are mapped in Module 06, Bridge A-C.
+
 ---
 
 ## 11. Chromatic Adaptation and Color Constancy
