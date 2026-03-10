@@ -1,3 +1,11 @@
+/* TIBS — Traditions, Indigenous Knowledge & Bridge Studies
+ * Warm brown heritage theme: cedar, sage, amber
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* ── Palette ── */
 :root {
   --deep: #4A148C;
   --indigo: #311B92;
@@ -11,102 +19,35 @@
   --amber: #F57F17;
   --frost: #F3E5F5;
   --earth: #6D4C41;
-  --text: #212121;
-  --text-light: #5D4037;
+
+  /* Semantic overrides */
+  --page-bg: var(--cream);
+  --page-text: #212121;
+  --page-text-light: #5D4037;
+  --link: var(--signal);
+  --card-border: var(--mist);
+  --border: var(--mist);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--text);
-  background: var(--cream);
-  line-height: 1.7;
-}
-
-a { color: var(--signal); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
+/* ── Header (gradient + border only) ── */
 header {
   background: linear-gradient(135deg, var(--deep) 0%, var(--cedar) 50%, var(--sage) 100%);
-  color: white;
-  padding: 2rem;
   border-bottom: 4px solid var(--amber);
 }
-header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; }
-header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
-header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-header nav a {
-  color: white;
-  background: rgba(255,255,255,0.12);
-  padding: 0.35rem 0.8rem;
-  border-radius: 3px;
-  font-size: 0.85rem;
-  font-family: system-ui, sans-serif;
-  transition: background 0.2s;
-}
-header nav a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
-header nav a.active { background: rgba(255,255,255,0.3); font-weight: 600; }
 
-main {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: var(--deep);
-  margin: 2.5rem 0 1rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 2px solid var(--mist);
-}
-h3 { font-size: 1.15rem; color: var(--cedar); margin: 1.8rem 0 0.6rem; }
-h4 { font-size: 1rem; color: var(--text-light); margin: 1.2rem 0 0.4rem; }
-p { margin: 0.8rem 0; }
-
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-th {
-  background: var(--deep);
-  color: white;
-  padding: 0.5rem 0.8rem;
-  text-align: left;
-  font-weight: 500;
-  font-family: system-ui, sans-serif;
-}
-td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--mist); }
+/* ── Color overrides ── */
+h2 { color: var(--deep); border-bottom-color: var(--mist); }
+h3 { color: var(--cedar); }
+th { background: var(--deep); }
+td { border-bottom-color: var(--mist); }
 tr:nth-child(even) { background: rgba(93, 64, 55, 0.04); }
 tr:hover { background: rgba(93, 64, 55, 0.08); }
+blockquote { border-left-color: var(--amber); background: rgba(245, 127, 23, 0.06); }
+code { background: var(--mist); }
+pre { background: #2E1A0E; color: #CE93D8; }
+.stat-value { color: var(--deep); }
 
-ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
-li { margin: 0.3rem 0; }
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-.card {
-  background: white;
-  border: 1px solid var(--mist);
-  border-radius: 6px;
-  padding: 1.2rem;
-  transition: box-shadow 0.2s;
-}
-.card:hover { box-shadow: 0 2px 8px rgba(74,20,140,0.12); }
-.card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
-.card .meta { font-size: 0.82rem; color: var(--text-light); font-family: system-ui, sans-serif; }
-.card p { font-size: 0.92rem; }
-
-.tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 3px;
-  font-family: system-ui, sans-serif;
-  margin-right: 0.3rem;
-}
+/* ── Tags ── */
 .tag-bio { background: #FFF3E0; color: #E65100; }
 .tag-bib { background: #E8F5E9; color: #2E7D32; }
 .tag-trb { background: #E3F2FD; color: #0D47A1; }
@@ -117,31 +58,7 @@ li { margin: 0.3rem 0; }
 .tag-block { background: #FFEBEE; color: #C62828; }
 .tag-safety { background: #FFF8E1; color: #F57F17; border: 1px solid #FFD54F; }
 
-blockquote {
-  border-left: 3px solid var(--amber);
-  padding: 0.8rem 1.2rem;
-  margin: 1rem 0;
-  background: rgba(245, 127, 23, 0.06);
-  font-style: italic;
-}
-
-code {
-  font-family: 'SFMono-Regular', 'Consolas', monospace;
-  font-size: 0.85em;
-  background: var(--mist);
-  padding: 0.15rem 0.4rem;
-  border-radius: 3px;
-}
-pre {
-  background: #2E1A0E;
-  color: #CE93D8;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  font-size: 0.85rem;
-  margin: 1rem 0;
-}
-
+/* ── Special: sensitivity box ── */
 .sensitivity-box {
   background: #FFF8E1;
   border: 1px solid #FFD54F;
@@ -151,54 +68,9 @@ pre {
   margin: 1rem 0;
 }
 
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  padding: 1rem;
-  background: white;
-  border: 1px solid var(--mist);
-  border-radius: 6px;
-}
-.stat { text-align: center; }
-.stat-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--deep);
-  display: block;
-  font-family: system-ui, sans-serif;
-}
-.stat-label {
-  font-size: 0.78rem;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-family: system-ui, sans-serif;
-}
-
-footer {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-  border-top: 2px solid var(--mist);
-  font-size: 0.82rem;
-  color: var(--text-light);
-  font-family: system-ui, sans-serif;
-}
-
-.pdf-container {
-  width: 100%;
-  height: 80vh;
-  border: 1px solid var(--mist);
-  border-radius: 4px;
-  margin: 1rem 0;
-}
-
+/* ── Responsive ── */
 @media (max-width: 640px) {
   header { padding: 1.2rem; }
   header h1 { font-size: 1.3rem; }
   main { padding: 1rem; }
-  .stats { flex-direction: column; gap: 0.8rem; }
-  .card-grid { grid-template-columns: 1fr; }
 }

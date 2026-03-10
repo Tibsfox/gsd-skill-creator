@@ -1,0 +1,479 @@
+/*
+ * Tibsfox Brand Palette
+ * Derived from: Paintless Dog, 2016 — fox watercolor + ink
+ *
+ * The painting defines the visual language:
+ *   - Warm parchment paper as ground
+ *   - Fox orange/rust/amber as brand energy
+ *   - Ink black linework as structure
+ *   - Cool gray washes as depth
+ *   - Watercolor splatters as texture and life
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="/brand.css">       (from any depth)
+ *   <link rel="stylesheet" href="../brand.css">      (from PNW/PROJECT/)
+ *   <link rel="stylesheet" href="../../brand.css">   (adjust path as needed)
+ *
+ * Projects override --accent, --accent-light, --accent-dark
+ * for their unique identity while inheriting the brand foundation.
+ */
+
+/* ═══════════════════════════════════════════
+   1. BRAND FOUNDATION — from the painting
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* --- Ink & Structure (linework, ear tips, dark marks) --- */
+  --ink:            #2a2a2a;
+  --ink-soft:       #3d3d3d;
+  --charcoal:       #5a5a5a;
+  --stone:          #8a8884;
+
+  /* --- Parchment (paper ground, tea stains, washes) --- */
+  --parchment-deep: #c8b890;
+  --parchment:      #e8dcc8;
+  --parchment-light:#f0e8d8;
+  --parchment-pale: #f5f0e6;
+
+  /* --- Fox (fur spectrum, rust to bright) --- */
+  --fox-deep:       #9e4425;
+  --fox:            #c75b3a;
+  --fox-warm:       #d4823a;
+  --fox-bright:     #e89848;
+  --fox-light:      #f0c070;
+  --fox-pale:       #f8e4c0;
+
+  /* --- Amber (eyes, golden highlights) --- */
+  --amber:          #c9a030;
+  --amber-light:    #e0c060;
+
+  /* --- Muzzle & Whites (soft warm whites) --- */
+  --muzzle:         #f0e4d8;
+  --fur-white:      #f5ede4;
+
+  /* --- Cool (ear interior, ink washes, charcoal marks) --- */
+  --cool-dark:      #2a3a3a;
+  --cool:           #4a5a5a;
+  --cool-gray:      #7a8080;
+  --cool-light:     #b0b4b0;
+
+  /* --- Splatter (background texture, drips) --- */
+  --splatter:       #e8a050;
+  --splatter-light: #f0c888;
+  --splatter-pale:  #f8e8d0;
+
+  /* ═══════════════════════════════════════════
+     2. PNW CONTENT COLORS — the forest inside
+     ═══════════════════════════════════════════ */
+
+  --canopy:         #1a3a2a;
+  --forest:         #2d5a3a;
+  --meadow:         #4a7c3f;
+  --moss:           #7a9a5a;
+  --river:          #2a6496;
+  --deep-water:     #1b3a4b;
+  --rock:           #4a5568;
+  --soil:           #5c4033;
+  --bark:           #4a3728;
+  --salmon:         #c75b3a;  /* same as --fox, intentional */
+  --snow:           #d4dce8;
+
+  /* ═══════════════════════════════════════════
+     3. SEMANTIC TOKENS — role-based mapping
+     ═══════════════════════════════════════════ */
+
+  /* Page foundation */
+  --page-bg:        var(--parchment-pale);
+  --page-text:      var(--ink);
+  --page-text-light:var(--charcoal);
+
+  /* Cards & containers */
+  --card-bg:        #ffffff;
+  --card-border:    var(--parchment);
+  --card-shadow:    rgba(42, 42, 42, 0.08);
+
+  /* Brand accent (fox by default, projects override) */
+  --accent:         var(--fox);
+  --accent-light:   var(--fox-light);
+  --accent-dark:    var(--fox-deep);
+  --accent-pale:    var(--fox-pale);
+
+  /* Links */
+  --link:           var(--river);
+  --link-hover:     var(--deep-water);
+
+  /* Borders & dividers */
+  --border:         var(--parchment);
+  --border-light:   var(--parchment-light);
+
+  /* ═══════════════════════════════════════════
+     4. PROJECT ACCENT PALETTES
+     ═══════════════════════════════════════════
+
+     Apply via class on <html> or <body>:
+       <body class="project-eco">
+
+     Each project gets a gradient pair + accent set
+     that sits on the brand foundation.
+  ═══════════════════════════════════════════ */
+
+  /* ECO — tidal gradient, summit to sea */
+  --eco-accent:      #00695c;
+  --eco-accent-light:#4db6ac;
+  --eco-accent-dark: #004d40;
+  --eco-gradient:    linear-gradient(135deg, #4a5568 0%, #2d5a3a 35%, #1a5276 70%, #1b3a4b 100%);
+
+  /* COL — river blue, Columbia Valley */
+  --col-accent:      #1565c0;
+  --col-accent-light:#42a5f5;
+  --col-accent-dark: #0d47a1;
+  --col-gradient:    linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #42a5f5 100%);
+
+  /* CAS — alpine granite, Cascade Range */
+  --cas-accent:      #546e7a;
+  --cas-accent-light:#78909c;
+  --cas-accent-dark: #37474f;
+  --cas-gradient:    linear-gradient(135deg, #37474f 0%, #546e7a 50%, #78909c 100%);
+
+  /* AVI — sky blue, wings */
+  --avi-accent:      #2c5282;
+  --avi-accent-light:#63b3ed;
+  --avi-accent-dark: #1a365d;
+  --avi-gradient:    linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #63b3ed 100%);
+
+  /* MAM — earth brown, fur & fang */
+  --mam-accent:      #6d4c41;
+  --mam-accent-light:#8d6e63;
+  --mam-accent-dark: #4a3728;
+  --mam-gradient:    linear-gradient(135deg, #4a3728 0%, #6d4c41 50%, #8d6e63 100%);
+
+  /* GDN — leaf green, garden */
+  --gdn-accent:      #2e7d32;
+  --gdn-accent-light:#66bb6a;
+  --gdn-accent-dark: #1b5e20;
+  --gdn-gradient:    linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #66bb6a 100%);
+
+  /* BCM — steel blue, construction */
+  --bcm-accent:      #37474f;
+  --bcm-accent-light:#1565c0;
+  --bcm-accent-dark: #263238;
+  --bcm-gradient:    linear-gradient(135deg, #263238 0%, #37474f 50%, #1565C0 100%);
+
+  /* SHE — circuit teal-orange, smart home */
+  --she-accent:      #00695c;
+  --she-accent-light:#ff6d00;
+  --she-accent-dark: #004d40;
+  --she-gradient:    linear-gradient(135deg, #004d40 0%, #00695c 50%, #ff6d00 100%);
+
+  /* BPS — violet, bio-physics */
+  --bps-accent:      #6a1b9a;
+  --bps-accent-light:#7e57c2;
+  --bps-accent-dark: #4a148c;
+  --bps-gradient:    linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7e57c2 100%);
+
+  /* FFA — magenta-purple, furry fandom arts */
+  --ffa-accent:      #8e24aa;
+  --ffa-accent-light:#ab47bc;
+  --ffa-accent-dark: #6a1b9a;
+  --ffa-gradient:    linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%);
+
+  /* TIBS — warm brown, traditions */
+  --tibs-accent:     #6d4c41;
+  --tibs-accent-light:#8d6e63;
+  --tibs-accent-dark: #5d4037;
+  --tibs-gradient:   linear-gradient(135deg, #5d4037 0%, #6d4c41 50%, #8d6e63 100%);
+
+  /* LED — amber-gold, lighting */
+  --led-accent:      #e65100;
+  --led-accent-light:#f59e0b;
+  --led-accent-dark: #b45309;
+  --led-gradient:    linear-gradient(135deg, #b45309 0%, #e65100 50%, #f59e0b 100%);
+
+  /* SYS — terminal green, systems */
+  --sys-accent:      #2e7d32;
+  --sys-accent-light:#43a047;
+  --sys-accent-dark: #1b5e20;
+  --sys-gradient:    linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
+
+  /* VAV — indigo, voxel data */
+  --vav-accent:      #3949ab;
+  --vav-accent-light:#5c6bc0;
+  --vav-accent-dark: #283593;
+  --vav-gradient:    linear-gradient(135deg, #283593 0%, #3949ab 50%, #5c6bc0 100%);
+
+  /* ART — rose, visual art */
+  --art-accent:      #c2185b;
+  --art-accent-light:#e91e63;
+  --art-accent-dark: #880e4f;
+  --art-gradient:    linear-gradient(135deg, #880e4f 0%, #c2185b 50%, #e91e63 100%);
+
+  /* UNI — slate, unison language */
+  --uni-accent:      #546e7a;
+  --uni-accent-light:#607d8b;
+  --uni-accent-dark: #37474f;
+  --uni-gradient:    linear-gradient(135deg, #37474f 0%, #546e7a 50%, #607d8b 100%);
+
+  /* AWF — ecology green, clean air/water/food */
+  --awf-accent:      #1B5E20;
+  --awf-accent-light:#4CAF50;
+  --awf-accent-dark: #0D3B0F;
+  --awf-gradient:    linear-gradient(135deg, #0D3B0F 0%, #1B5E20 40%, #1565C0 100%);
+}
+
+/* ═══════════════════════════════════════════
+   5. PROJECT CLASS OVERRIDES
+   ═══════════════════════════════════════════ */
+
+.project-eco  { --accent: var(--eco-accent); --accent-light: var(--eco-accent-light); --accent-dark: var(--eco-accent-dark); }
+.project-col  { --accent: var(--col-accent); --accent-light: var(--col-accent-light); --accent-dark: var(--col-accent-dark); }
+.project-cas  { --accent: var(--cas-accent); --accent-light: var(--cas-accent-light); --accent-dark: var(--cas-accent-dark); }
+.project-avi  { --accent: var(--avi-accent); --accent-light: var(--avi-accent-light); --accent-dark: var(--avi-accent-dark); }
+.project-mam  { --accent: var(--mam-accent); --accent-light: var(--mam-accent-light); --accent-dark: var(--mam-accent-dark); }
+.project-gdn  { --accent: var(--gdn-accent); --accent-light: var(--gdn-accent-light); --accent-dark: var(--gdn-accent-dark); }
+.project-bcm  { --accent: var(--bcm-accent); --accent-light: var(--bcm-accent-light); --accent-dark: var(--bcm-accent-dark); }
+.project-she  { --accent: var(--she-accent); --accent-light: var(--she-accent-light); --accent-dark: var(--she-accent-dark); }
+.project-bps  { --accent: var(--bps-accent); --accent-light: var(--bps-accent-light); --accent-dark: var(--bps-accent-dark); }
+.project-ffa  { --accent: var(--ffa-accent); --accent-light: var(--ffa-accent-light); --accent-dark: var(--ffa-accent-dark); }
+.project-tibs { --accent: var(--tibs-accent); --accent-light: var(--tibs-accent-light); --accent-dark: var(--tibs-accent-dark); }
+.project-led  { --accent: var(--led-accent); --accent-light: var(--led-accent-light); --accent-dark: var(--led-accent-dark); }
+.project-sys  { --accent: var(--sys-accent); --accent-light: var(--sys-accent-light); --accent-dark: var(--sys-accent-dark); }
+.project-vav  { --accent: var(--vav-accent); --accent-light: var(--vav-accent-light); --accent-dark: var(--vav-accent-dark); }
+.project-art  { --accent: var(--art-accent); --accent-light: var(--art-accent-light); --accent-dark: var(--art-accent-dark); }
+.project-uni  { --accent: var(--uni-accent); --accent-light: var(--uni-accent-light); --accent-dark: var(--uni-accent-dark); }
+.project-awf  { --accent: var(--awf-accent); --accent-light: var(--awf-accent-light); --accent-dark: var(--awf-accent-dark); }
+
+/* ═══════════════════════════════════════════
+   6. SHARED BASE STYLES
+   ═══════════════════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--page-text);
+  background: var(--page-bg);
+  line-height: 1.7;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+/* --- Typography --- */
+
+h1 { font-size: 2rem; font-weight: 400; letter-spacing: 0.02em; }
+h2 {
+  font-size: 1.45rem;
+  color: var(--ink);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--parchment);
+}
+h3 { font-size: 1.15rem; color: var(--ink-soft); margin: 1.8rem 0 0.6rem; }
+h4 { font-size: 1rem; color: var(--charcoal); margin: 1.2rem 0 0.4rem; }
+p { margin: 0.8rem 0; }
+
+/* --- UI font (labels, tags, meta, nav) --- */
+.ui-text,
+.meta,
+.stat-label,
+.tag,
+footer,
+nav {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* --- Blockquote --- */
+blockquote {
+  border-left: 3px solid var(--fox-warm);
+  padding: 0.8rem 1.2rem;
+  margin: 1.5rem 0;
+  background: var(--splatter-pale);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* --- Stats row --- */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  padding: 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+}
+.stat { text-align: center; }
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--page-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Card grid --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.15s;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  box-shadow: 0 4px 16px var(--card-shadow);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.card h3 { margin: 0 0 0.3rem; font-size: 1.1rem; color: var(--ink); }
+.card .meta {
+  font-size: 0.82rem;
+  color: var(--page-text-light);
+  margin-bottom: 0.5rem;
+}
+.card p { font-size: 0.92rem; margin: 0; color: var(--page-text); }
+
+/* --- Accent bar on cards --- */
+.accent-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent-light));
+}
+
+/* --- Tags --- */
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 3px;
+  margin-right: 0.2rem;
+}
+
+/* --- Tables --- */
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+th {
+  background: var(--ink);
+  color: white;
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  font-weight: 500;
+  font-family: system-ui, sans-serif;
+}
+td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--parchment); }
+tr:nth-child(even) { background: var(--splatter-pale); }
+tr:hover { background: var(--parchment-light); }
+
+/* --- Code --- */
+code {
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 0.85em;
+  background: var(--parchment-light);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+pre {
+  background: var(--ink);
+  color: var(--parchment-light);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+/* --- Lists --- */
+ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin: 0.3rem 0; }
+
+/* --- Header (project pages) --- */
+header {
+  color: white;
+  padding: 2rem;
+}
+header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; }
+header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
+header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+header nav a {
+  color: white;
+  background: rgba(255,255,255,0.12);
+  padding: 0.35rem 0.8rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-family: system-ui, sans-serif;
+  transition: background 0.2s;
+}
+header nav a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+header nav a.active { background: rgba(255,255,255,0.3); font-weight: 600; }
+
+/* --- Main content --- */
+main {
+  max-width: var(--content-width, 52rem);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* --- PDF container --- */
+.pdf-container {
+  width: 100%;
+  height: 80vh;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+/* --- Footer --- */
+footer {
+  max-width: var(--content-width, 64rem);
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-top: 2px solid var(--parchment);
+  font-size: 0.82rem;
+  color: var(--page-text-light);
+}
+footer a { margin-right: 0.8rem; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  h1 { font-size: 1.5rem; }
+  .stats { flex-direction: column; gap: 0.8rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   7. TAG COLORS (per-project identity)
+   ═══════════════════════════════════════════ */
+
+.tag-eco  { background: #e0f2f1; color: #00695c; }
+.tag-col  { background: #e3f2fd; color: #1565c0; }
+.tag-cas  { background: #eceff1; color: #37474f; }
+.tag-avi  { background: #e3f2fd; color: #2c5282; }
+.tag-mam  { background: #efebe9; color: #4a3728; }
+.tag-gdn  { background: #e8f5e9; color: #2e7d32; }
+.tag-bcm  { background: #e8eaf6; color: #263238; }
+.tag-she  { background: #e0f2f1; color: #004d40; }
+.tag-bps  { background: #ede7f6; color: #4a148c; }
+.tag-ffa  { background: #f3e5f5; color: #6a1b9a; }
+.tag-tibs { background: #efebe9; color: #5d4037; }
+.tag-led  { background: #fff8e1; color: #b45309; }
+.tag-sys  { background: #e8f5e9; color: #1b5e20; }
+.tag-vav  { background: #e8eaf6; color: #283593; }
+.tag-art  { background: #fce4ec; color: #880e4f; }
+.tag-uni  { background: #e8eaf6; color: #37474f; }
+.tag-awf  { background: #e8f5e9; color: #1B5E20; }
+.tag-rel  { background: #fff3e0; color: #bf360c; }

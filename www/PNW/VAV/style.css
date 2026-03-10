@@ -1,225 +1,68 @@
-/* Voxel as Vessel — PNW Research Series #14 */
-/* Color: Deep space indigo (#1a1a2e) + Ceph teal (#00897B) + Voxel amber (#FFB300) */
+/* VAV — Voxel as Vessel: Data Architecture & Sovereign Worlds
+   Project palette and overrides — base layout from ../../brand.css */
 
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #30363d;
-  --text: #e6edf3;
-  --text-dim: #8b949e;
-  --accent: #00897B;
-  --accent-light: #4DB6AC;
-  --highlight: #FFB300;
-  --code-bg: #1a1a2e;
-  --link: #4DB6AC;
-  --link-hover: #FFB300;
+  /* --- Project palette: data / infrastructure --- */
+  --indigo: #3949ab;
+  --indigo-light: #5c6bc0;
+  --indigo-dark: #283593;
+  --teal: #00897B;
+  --teal-light: #4DB6AC;
+  --amber-vav: #FFB300;
+  --deep: #1a1a2e;
+  --slate: #e8eaf6;
+  --text: #212121;
+  --text-light: #546e7a;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: #f5f3fa;
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--indigo);
+  --card-border: #c5cae9;
+  --border: #c5cae9;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-}
-
+/* --- Header --- */
 header {
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
+  background: linear-gradient(135deg, var(--indigo-dark) 0%, var(--indigo) 40%, var(--teal) 100%);
+  border-bottom: 4px solid var(--indigo-light);
 }
 
-header h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--highlight);
-  letter-spacing: -0.5px;
-}
+/* --- Color overrides --- */
+h2 { color: var(--indigo); }
+h3 { color: var(--teal); }
+th { background: var(--indigo); }
+tr:nth-child(even) { background: rgba(57, 73, 171, 0.06); }
+tr:hover { background: rgba(57, 73, 171, 0.12); }
+blockquote { border-left-color: var(--teal); background: rgba(0, 137, 123, 0.05); }
+code { background: var(--slate); }
+pre { background: var(--deep); color: #e8eaf6; }
+.stat-value { color: var(--indigo); }
 
-.subtitle {
-  color: var(--accent-light);
-  font-size: 0.95rem;
-  margin-top: 0.3rem;
-}
+/* --- Card color overrides --- */
+.card h3 { color: var(--indigo); }
+.card:hover { border-color: var(--teal); }
 
-nav {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
+/* --- Tags --- */
+.tag-ceph { background: #e0f2f1; color: #00695c; }
+.tag-rag { background: #e8eaf6; color: #283593; }
+.tag-mc { background: #fff8e1; color: #f57f17; }
+.tag-sov { background: #f3e5f5; color: #6a1b9a; }
+.tag-signal { background: #e3f2fd; color: #1565c0; }
 
-nav a {
-  color: var(--text-dim);
-  text-decoration: none;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  transition: all 0.2s;
-}
-
-nav a:hover, nav a.active {
-  color: var(--highlight);
-  border-color: var(--highlight);
-  background: rgba(255, 179, 0, 0.08);
-}
-
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--highlight);
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-h2 {
-  color: var(--accent-light);
-  font-size: 1.3rem;
-  margin: 2rem 0 1rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.5rem;
-}
-
-h3 {
-  color: var(--text);
-  font-size: 1.1rem;
-  margin: 1.5rem 0 0.75rem;
-}
-
-blockquote {
-  border-left: 3px solid var(--accent);
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  background: var(--surface);
-  border-radius: 0 6px 6px 0;
-  color: var(--text-dim);
-  font-style: italic;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.25rem;
-  transition: border-color 0.2s;
-}
-
-.card:hover {
-  border-color: var(--accent);
-}
-
-.card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  color: var(--accent-light);
-}
-
-.card p {
-  font-size: 0.9rem;
-  color: var(--text-dim);
-}
-
-pre, code {
-  font-family: 'IBM Plex Mono', 'Fira Code', monospace;
-  background: var(--code-bg);
-  border-radius: 4px;
-}
-
-code {
-  padding: 0.15rem 0.4rem;
-  font-size: 0.88em;
-  color: var(--accent-light);
-}
-
-pre {
-  padding: 1rem 1.25rem;
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  margin: 1rem 0;
-  line-height: 1.5;
-}
-
-pre code {
-  padding: 0;
-  background: none;
-}
-
-a { color: var(--link); text-decoration: none; }
-a:hover { color: var(--link-hover); text-decoration: underline; }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-}
-
-th {
-  background: var(--accent);
-  color: white;
-  padding: 0.6rem 0.8rem;
-  text-align: left;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-td {
-  padding: 0.5rem 0.8rem;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-
-tr:hover td {
-  background: rgba(0, 137, 123, 0.05);
-}
-
+/* --- Status indicators --- */
 .pass { color: #4CAF50; font-weight: 600; }
 .fail { color: #f44336; font-weight: 600; }
-.pending { color: var(--highlight); font-weight: 600; }
+.pending { color: var(--amber-vav); font-weight: 600; }
 
-#content {
-  min-height: 60vh;
-}
-
-#content h1 { font-size: 1.5rem; color: var(--highlight); margin-bottom: 1rem; }
+/* --- Content rendering (page.html markdown) --- */
+#content h1 { font-size: 1.5rem; color: var(--indigo); margin-bottom: 1rem; }
 #content h2 { font-size: 1.2rem; }
 #content h3 { font-size: 1rem; }
 
-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  text-align: center;
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
 }

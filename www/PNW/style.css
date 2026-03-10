@@ -1,3 +1,10 @@
+/* PNW Hub — Forest canopy theme, project index
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
 :root {
   --canopy: #1a3a2a;
   --forest: #2d5a3a;
@@ -7,98 +14,69 @@
   --rock: #4a5568;
   --soil: #5c4033;
   --bark: #4a3728;
-  --cream: #f8f6f0;
   --mist: #e4e8e0;
-  --snow: #d4dce8;
-  --salmon: #c75b3a;
   --moss: #7a9a5a;
-  --text: #2c2c2c;
-  --text-light: #5a5a5a;
+  --salmon: #c75b3a;
+  --snow: #d4dce8;
+
+  /* Semantic overrides */
+  --page-bg: #f8f6f0;
+  --page-text: #2c2c2c;
+  --page-text-light: #5a5a5a;
+  --link: var(--river);
+  --link-hover: var(--deep);
+  --accent: var(--canopy);
+  --accent-light: var(--meadow);
+  --accent-dark: var(--canopy);
+  --card-bg: white;
+  --card-border: var(--mist);
+  --parchment: var(--mist);
+  --content-width: 60rem;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--text);
-  background: var(--cream);
-  line-height: 1.7;
-}
-
-a { color: var(--river); text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* ═══════════════════════════════════════════
+   2. HEADER — wider padding, larger h1
+   ═══════════════════════════════════════════ */
 
 header {
   background: linear-gradient(135deg, var(--canopy) 0%, var(--forest) 25%, var(--river) 55%, var(--deep) 80%, var(--rock) 100%);
-  color: white;
   padding: 2.5rem 2rem;
   border-bottom: 4px solid var(--moss);
 }
-header h1 { font-size: 2rem; font-weight: 400; letter-spacing: 0.02em; }
-header .subtitle { font-size: 1rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
+header h1 { font-size: 2rem; }
+header .subtitle { font-size: 1rem; }
 
-main {
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-}
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
 
 h2 {
-  font-size: 1.5rem;
   color: var(--canopy);
-  margin: 2.5rem 0 1rem;
+  border-bottom-color: var(--mist);
   padding-bottom: 0.3rem;
-  border-bottom: 2px solid var(--mist);
 }
-h3 { font-size: 1.15rem; color: var(--bark); margin: 1.8rem 0 0.6rem; }
-p { margin: 0.8rem 0; }
+h3 { color: var(--bark); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
 
 blockquote {
-  border-left: 3px solid var(--forest);
-  padding: 0.8rem 1.2rem;
-  margin: 1rem 0;
+  border-left-color: var(--forest);
   background: rgba(45, 90, 58, 0.05);
-  font-style: italic;
+  margin: 1rem 0;
 }
 
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-th {
-  background: var(--canopy);
-  color: white;
-  padding: 0.5rem 0.8rem;
-  text-align: left;
-  font-weight: 500;
-  font-family: system-ui, sans-serif;
-}
-td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--mist); }
+th { background: var(--canopy); }
+td { border-bottom-color: var(--mist); }
 tr:nth-child(even) { background: rgba(26, 58, 42, 0.06); }
 tr:hover { background: rgba(26, 58, 42, 0.12); }
 
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  padding: 1.2rem;
-  background: white;
-  border: 1px solid var(--mist);
-  border-radius: 6px;
-}
-.stat { text-align: center; }
-.stat-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--canopy);
-  display: block;
-  font-family: system-ui, sans-serif;
-}
-.stat-label {
-  font-size: 0.78rem;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-family: system-ui, sans-serif;
-}
+.stat-value { color: var(--canopy); }
+
+/* ═══════════════════════════════════════════
+   5. PROJECT GRID
+   ═══════════════════════════════════════════ */
 
 .project-grid {
   display: grid;
@@ -118,10 +96,14 @@ tr:hover { background: rgba(26, 58, 42, 0.12); }
 }
 .project-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); text-decoration: none; }
 .project-card h3 { margin: 0 0 0.3rem; font-size: 1.15rem; }
-.project-card .project-subtitle { font-size: 0.88rem; color: var(--text-light); font-style: italic; margin-bottom: 0.6rem; }
-.project-card .project-stats { font-size: 0.82rem; color: var(--text-light); font-family: system-ui, sans-serif; margin-bottom: 0.5rem; }
+.project-card .project-subtitle { font-size: 0.88rem; color: var(--page-text-light); font-style: italic; margin-bottom: 0.6rem; }
+.project-card .project-stats { font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.5rem; }
 .project-card p { font-size: 0.92rem; margin: 0; }
 .project-card .accent-bar { height: 4px; border-radius: 2px; margin-bottom: 1rem; }
+
+/* ═══════════════════════════════════════════
+   6. THREAD GRID
+   ═══════════════════════════════════════════ */
 
 .thread-grid {
   display: grid;
@@ -140,14 +122,10 @@ tr:hover { background: rgba(26, 58, 42, 0.12); }
 .thread .thread-links { margin-top: 0.6rem; font-size: 0.82rem; font-family: system-ui, sans-serif; }
 .thread .thread-links a { margin-right: 0.6rem; }
 
-.tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  padding: 0.12rem 0.45rem;
-  border-radius: 3px;
-  font-family: system-ui, sans-serif;
-  margin-right: 0.2rem;
-}
+/* ═══════════════════════════════════════════
+   7. TAGS — project-specific colors
+   ═══════════════════════════════════════════ */
+
 .tag-col { background: #e3f2fd; color: #1565c0; }
 .tag-cas { background: #eceff1; color: #37474f; }
 .tag-eco { background: #e0f2f1; color: #00695c; }
@@ -162,21 +140,17 @@ tr:hover { background: rgba(26, 58, 42, 0.12); }
 .tag-led { background: #fff8e1; color: #b45309; }
 .tag-sys { background: #E8F5E9; color: #1B5E20; }
 
-footer {
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-  border-top: 2px solid var(--mist);
-  font-size: 0.82rem;
-  color: var(--text-light);
-  font-family: system-ui, sans-serif;
-}
+/* ═══════════════════════════════════════════
+   8. FOOTER — wider to match main
+   ═══════════════════════════════════════════ */
+
+footer { max-width: 60rem; }
+
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════ */
 
 @media (max-width: 640px) {
-  header { padding: 1.2rem; }
-  header h1 { font-size: 1.4rem; }
-  main { padding: 1rem; }
-  .stats { flex-direction: column; gap: 0.8rem; }
   .project-grid { grid-template-columns: 1fr; }
   .thread-grid { grid-template-columns: 1fr; }
 }
