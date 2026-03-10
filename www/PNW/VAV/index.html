@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxel as Vessel — PNW Research Series</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Voxel as Vessel</h1>
+    <div class="subtitle">Ceph &middot; RAG &middot; Minecraft Block Storage &middot; Sovereign Worlds &middot; Signal Fidelity</div>
+    <nav>
+      <a href="index.html" class="active">overview</a>
+      <a href="page.html?doc=01-ceph-rados-architecture">ceph/rados</a>
+      <a href="page.html?doc=02-rag-pipeline-architecture">rag pipeline</a>
+      <a href="page.html?doc=03-integration-architecture">integration</a>
+      <a href="page.html?doc=04-minecraft-anvil-nbt-format">anvil/nbt</a>
+      <a href="page.html?doc=05-poc-implementation-plan">poc plan</a>
+      <a href="page.html?doc=06-spatial-embedding-mapping">spatial mapping</a>
+      <a href="page.html?doc=07-integration-synthesis">synthesis</a>
+      <a href="page.html?doc=08-bibliography">bibliography</a>
+      <a href="page.html?doc=09-verification-matrix">verification</a>
+      <a href="page.html?doc=10-retrospective-m1">retrospective</a>
+      <a href="page.html?doc=00-glossary">glossary</a>
+      <a href="mission.html">mission</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every retrieval system is a world. Every world is a retrieval system. The question was
+      never whether Minecraft could store embeddings. The question was whether we were paying
+      attention when it already had. The Amiga Principle: the answer was always there. You just
+      had to pick up the controller.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">21</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">11</span><span class="stat-label">Research Files</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Mission Passes</span></div>
+      <div class="stat"><span class="stat-value">80</span><span class="stat-label">Source Pages</span></div>
+      <div class="stat"><span class="stat-value">12/12</span><span class="stat-label">v1 Criteria</span></div>
+    </div>
+
+    <h2>v1 &mdash; Ceph, RAG &amp; Minecraft Block Storage</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-ceph-rados-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Ceph / RADOS</h3>
+        <p>Object model, CRUSH algorithm, BlueStore, RGW S3 interface, pool design for voxel RAG</p>
+      </a>
+      <a href="page.html?doc=02-rag-pipeline-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: RAG Pipeline</h3>
+        <p>7 pipeline stages with voxel analogues, embedding models, hybrid search, advanced patterns</p>
+      </a>
+      <a href="page.html?doc=03-integration-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Integration Architecture</h3>
+        <p>Encoding scheme, storage hierarchy, spatial coordinate mapping, API surface design</p>
+      </a>
+      <a href="page.html?doc=04-minecraft-anvil-nbt-format" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Anvil / NBT Format</h3>
+        <p>Region files, chunk structure, NBT type system, palette compression, coordinate math</p>
+      </a>
+      <a href="page.html?doc=05-poc-implementation-plan" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: PoC Plan</h3>
+        <p>Python implementation spec, benchmarks, storage overhead analysis, library choices</p>
+      </a>
+      <a href="page.html?doc=06-spatial-embedding-mapping" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Spatial Mapping</h3>
+        <p>UMAP, PCA, Hilbert/Morton curves for embedding-to-voxel coordinate mapping</p>
+      </a>
+    </div>
+
+    <h2>v2 &mdash; Sovereign World Architecture</h2>
+    <p style="color: var(--text-dim);">Modules M7&ndash;M13: Block/chunk data, texture packs, PCG seeds, multi-server fabric, OpenStack sovereignty, edge topology, backup/DR. <span class="pending">PENDING &mdash; Mission 2</span></p>
+
+    <h2>v3 &mdash; Signal Fidelity &amp; Data Transmission</h2>
+    <p style="color: var(--text-dim);">Modules M14&ndash;M21: Temporal imaging, color fidelity, audio restoration, serialization/HPC, transport taxonomy, backup/federation, zero trust. <span class="pending">PENDING &mdash; Mission 3</span></p>
+
+    <h2>Cross-Mission</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=07-integration-synthesis" class="card" style="text-decoration:none;color:inherit">
+        <h3>Integration Synthesis</h3>
+        <p>Cross-module consistency, the core isomorphism, through-line narrative</p>
+      </a>
+      <a href="page.html?doc=08-bibliography" class="card" style="text-decoration:none;color:inherit">
+        <h3>Bibliography</h3>
+        <p>Complete sourced bibliography across all three passes</p>
+      </a>
+      <a href="page.html?doc=09-verification-matrix" class="card" style="text-decoration:none;color:inherit">
+        <h3>Verification Matrix</h3>
+        <p>12 success criteria, 4 safety-critical tests, test status tracking</p>
+      </a>
+      <a href="page.html?doc=10-retrospective-m1" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission 1 Retrospective</h3>
+        <p>What worked, what could be better, lessons learned for missions 2&ndash;5</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Voxel as Vessel &mdash; PNW Research Series #14 &mdash; March 2026
+  </footer>
+</body>
+</html>
