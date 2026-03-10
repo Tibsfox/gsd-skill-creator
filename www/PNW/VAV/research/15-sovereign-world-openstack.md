@@ -479,7 +479,7 @@ The Ceph cluster stores only ciphertext — even a compromised OSD disk reveals 
 
 ### 6.5 TLS Between Sites
 
-For multi-site deployments with RBD mirroring (see M13), Ceph messenger v2 protocol provides mutual TLS authentication:
+For multi-site deployments with RBD mirroring (see M13 §5 for RBD mirroring and cross-site replication), Ceph messenger v2 protocol provides mutual TLS authentication:
 
 ```ini
 # ceph.conf — enable messenger v2 with TLS
