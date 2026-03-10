@@ -37,7 +37,7 @@
 
   // Inject styles
   var style = document.createElement('style');
-  style.textContent = '.series-bar{background:#1a2a1f;padding:0.4rem 1.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;align-items:center;font-family:system-ui,sans-serif;font-size:0.78rem}' +
+  style.textContent = '.series-bar{background:var(--ink, #2a2a2a);padding:0.4rem 1.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;align-items:center;font-family:system-ui,sans-serif;font-size:0.78rem}' +
     '.series-bar a{color:rgba(255,255,255,0.7);text-decoration:none;padding:0.2rem 0.6rem;border-radius:2px;transition:color 0.2s}' +
     '.series-bar a:hover{color:white;text-decoration:none}' +
     '.series-bar .series-home{color:rgba(255,255,255,0.9);font-weight:600;margin-right:0.5rem;border-right:1px solid rgba(255,255,255,0.2);padding-right:1rem}' +

@@ -1,33 +1,41 @@
+/* SYS — Terminal green theme, systems administration
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
 :root {
   --terminal: #00C853;
   --terminal-dim: #00A844;
   --teal: #00897B;
   --dark: #1B2631;
   --dark-mid: #263238;
-  --cream: #F5F7F0;
   --mist: #D5E1D0;
-  --signal: #00C853;
-  --text: #1B2631;
-  --text-light: #546E7A;
   --frost: #E8F5E9;
+
+  /* Semantic overrides */
+  --page-bg: #F5F7F0;
+  --page-text: #1B2631;
+  --page-text-light: #546E7A;
+  --link: var(--teal);
+  --link-hover: var(--teal);
+  --accent: var(--terminal);
+  --accent-light: var(--frost);
+  --accent-dark: #1B5E20;
+  --card-bg: white;
+  --card-border: var(--mist);
+  --card-shadow: rgba(0,200,83,0.12);
+  --border: var(--mist);
+  --parchment: var(--mist);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--text);
-  background: var(--cream);
-  line-height: 1.7;
-}
-
-a { color: var(--teal); text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* ═══════════════════════════════════════════
+   2. HEADER — dark terminal gradient
+   ═══════════════════════════════════════════ */
 
 header {
   background: linear-gradient(135deg, #0a0f14 0%, var(--dark) 50%, #0d2818 100%);
-  color: white;
-  padding: 2rem;
   border-bottom: 4px solid var(--terminal);
   position: relative;
   overflow: hidden;
@@ -41,117 +49,108 @@ header::before {
   pointer-events: none;
 }
 header > * { position: relative; z-index: 1; }
-header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; color: var(--terminal); }
-header .subtitle { font-size: 0.95rem; color: #80CBC4; margin-top: 0.3rem; font-style: italic; }
-header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+header h1 { color: var(--terminal); }
+header .subtitle { color: #80CBC4; }
 header nav a {
-  color: white;
   background: rgba(0,200,83,0.12);
-  padding: 0.35rem 0.8rem;
-  border-radius: 3px;
-  font-size: 0.82rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Courier New', monospace;
-  transition: background 0.2s;
   letter-spacing: 0.02em;
 }
-header nav a:hover { background: rgba(0,200,83,0.25); text-decoration: none; }
-header nav a.active { background: rgba(0,200,83,0.35); font-weight: 600; color: var(--terminal); }
+header nav a:hover { background: rgba(0,200,83,0.25); }
+header nav a.active { background: rgba(0,200,83,0.35); color: var(--terminal); }
 
-main {
-  max-width: 54rem;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-}
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
 
 h2 {
-  font-size: 1.5rem;
   color: var(--dark);
-  margin: 2.5rem 0 1rem;
+  border-bottom-color: var(--mist);
   padding-bottom: 0.3rem;
-  border-bottom: 2px solid var(--mist);
 }
-h3 { font-size: 1.15rem; color: var(--teal); margin: 1.8rem 0 0.6rem; }
-h4 { font-size: 1rem; color: var(--text-light); margin: 1.2rem 0 0.4rem; }
-p { margin: 0.8rem 0; }
+h3 { color: var(--teal); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
 
 blockquote {
   background: rgba(0,200,83,0.06);
   border-left: 4px solid var(--terminal);
   border-radius: 0 4px 4px 0;
   padding: 1.25rem 1.5rem;
-  margin: 1.5rem 0;
-  font-style: italic;
   color: var(--dark);
 }
 
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
 th {
   background: var(--dark);
   color: var(--terminal);
-  padding: 0.5rem 0.8rem;
-  text-align: left;
-  font-weight: 500;
   font-family: 'SFMono-Regular', 'Consolas', monospace;
   font-size: 0.85rem;
 }
-td { padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--mist); }
+td { border-bottom-color: var(--mist); }
 tr:nth-child(even) { background: rgba(0,200,83,0.04); }
 tr:hover { background: rgba(0,200,83,0.08); }
-
-ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
-li { margin: 0.3rem 0; }
 
 pre {
   background: var(--dark);
   color: var(--terminal);
   border-radius: 6px;
   padding: 1.25rem 1.5rem;
-  margin: 1rem 0;
-  overflow-x: auto;
   font-family: 'SFMono-Regular', 'Consolas', 'Courier New', monospace;
-  font-size: 0.88rem;
   line-height: 1.6;
   border-left: 3px solid var(--terminal);
 }
 code {
   background: rgba(0,200,83,0.1);
-  padding: 0.15rem 0.4rem;
-  border-radius: 3px;
   font-family: 'SFMono-Regular', 'Consolas', 'Courier New', monospace;
-  font-size: 0.88em;
   color: var(--dark);
 }
 pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
+/* ═══════════════════════════════════════════
+   5. CARDS — terminal hover glow
+   ═══════════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
 .card {
-  background: white;
-  border: 1px solid var(--mist);
+  border-color: var(--mist);
   border-radius: 6px;
   padding: 1.2rem;
-  transition: box-shadow 0.2s, border-color 0.2s;
   position: relative;
 }
 .card:hover { box-shadow: 0 2px 12px rgba(0,200,83,0.12); border-color: var(--terminal); }
-.card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
-.card .meta { font-size: 0.82rem; color: var(--text-light); font-family: system-ui, sans-serif; margin-bottom: 0.4rem; }
-.card p { font-size: 0.92rem; margin: 0; }
 
-.tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  padding: 0.12rem 0.5rem;
-  border-radius: 3px;
-  font-family: system-ui, sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* ═══════════════════════════════════════════
+   6. STATS — grid layout (differs from brand flex)
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
 }
+.stat {
+  background: white;
+  border: 1px solid var(--mist);
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--terminal);
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+}
+
+/* ═══════════════════════════════════════════
+   7. TAGS
+   ═══════════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 .tag-server { background: #E8F5E9; color: #2E7D32; }
 .tag-network { background: #E0F2F1; color: #00695C; }
 .tag-logs { background: #FFF3E0; color: #E65100; }
@@ -160,35 +159,9 @@ pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
 .tag-access { background: #E3F2FD; color: #0D47A1; }
 .tag-provenance { background: #FFF8E1; color: #F57F17; }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.75rem;
-  margin: 1.5rem 0;
-}
-.stat {
-  background: white;
-  border: 1px solid var(--mist);
-  border-radius: 6px;
-  padding: 0.8rem;
-  text-align: center;
-}
-.stat-value {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--terminal);
-  font-family: 'SFMono-Regular', 'Consolas', monospace;
-}
-.stat-label {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--text-light);
-  font-family: system-ui, sans-serif;
-  margin-top: 0.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+/* ═══════════════════════════════════════════
+   8. SPECIAL COMPONENTS
+   ═══════════════════════════════════════════ */
 
 .equation {
   background: white;
@@ -222,27 +195,14 @@ pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
 }
 .cross-links li a:hover { background: rgba(0,200,83,0.2); text-decoration: none; }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-light);
-  font-size: 0.82rem;
-  font-family: system-ui, sans-serif;
-  border-top: 2px solid var(--mist);
+.pdf-container {
+  border-color: var(--mist);
 }
 
-.pdf-container {
-  width: 100%;
-  height: 80vh;
-  border: 1px solid var(--mist);
-  border-radius: 4px;
-  margin: 1rem 0;
-}
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════ */
 
 @media (max-width: 640px) {
-  header { padding: 1.2rem; }
-  header h1 { font-size: 1.3rem; }
-  main { padding: 1rem; }
   .stats { grid-template-columns: repeat(3, 1fr); }
-  .card-grid { grid-template-columns: 1fr; }
 }
