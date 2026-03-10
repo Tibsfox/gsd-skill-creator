@@ -13,7 +13,8 @@
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
     { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
-    { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' }
+    { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
+    { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' }
   ];
 
   // Detect current project from URL path

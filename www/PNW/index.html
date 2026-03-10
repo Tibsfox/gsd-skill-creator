@@ -14,26 +14,27 @@
 
   <main>
     <blockquote>
-      Twelve research projects, one bioregion. From the Columbia Valley rainforest canopy to the
+      Thirteen research projects, one bioregion. From the Columbia Valley rainforest canopy to the
       backyard garden bed, from the mycorrhizal network beneath the soil to the structural
       engineering above it, from the smart thermostat on the wall to the ESP32 inside it,
       from the orca's biosonar to the fox's magnetic compass, from the cuticle scale to the
       roughness map, from the LED strip to the oscilloscope trace, from the guardian spirit
-      to the scholarly source &mdash;
+      to the scholarly source, from the server log to the trust-based firewall &mdash;
       each project maps a different layer of the same place. The salmon that feeds the forest,
       the elevation gradient that stratifies it, the birds that pollinate and disperse it,
       the mammals that shape its trophic structure, the physics that governs how they all
       sense their world, the crafts that render their textures in fabric and light,
       the traditions that teach how to listen, the gardener who tends a small piece of it,
-      the builder who shelters within it, and the maker who wires it all together &mdash; all part of the same story.
+      the builder who shelters within it, the maker who wires it all together,
+      and the sysadmin who stewards the infrastructure that connects it &mdash; all part of the same story.
     </blockquote>
 
     <div class="stats">
-      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Research Projects</span></div>
-      <div class="stat"><span class="stat-value">258</span><span class="stat-label">Research Files</span></div>
-      <div class="stat"><span class="stat-value">13 MB</span><span class="stat-label">Total Research</span></div>
-      <div class="stat"><span class="stat-value">750+</span><span class="stat-label">Sources Cited</span></div>
-      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Mission Packs</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Research Projects</span></div>
+      <div class="stat"><span class="stat-value">277</span><span class="stat-label">Research Files</span></div>
+      <div class="stat"><span class="stat-value">13.5 MB</span><span class="stat-label">Total Research</span></div>
+      <div class="stat"><span class="stat-value">870+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Mission Packs</span></div>
     </div>
 
     <h2>Research Projects</h2>
@@ -134,11 +135,19 @@
         <div class="project-stats">40 files &middot; 700 KB &middot; 80+ sources &middot; 4 safety gates</div>
         <p>From Ohm's Law to PLC ladder logic. 5 MCU platforms (Arduino, ESP32, RPi, PIC, RP2040), addressable LED protocols (WS2812B, APA102), smart lighting (Hue, WLED), MOSFET dimmers, POV displays, oscilloscope measurement, Nyquist sampling, Modbus communication. 8 modules, 34+ reference pages.</p>
       </a>
+
+      <a href="SYS/index.html" class="project-card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #1B2631, #00C853)"></div>
+        <h3>Systems Administration</h3>
+        <div class="project-subtitle">The Spaces In Between &mdash; Server Logs &middot; Network Transport &middot; Process Forensics &middot; Security</div>
+        <div class="project-stats">19 files &middot; 520 KB &middot; 123 sources &middot; 12/12 tests &middot; 5/5 safety</div>
+        <p>Every system leaves a trail. 7 core modules covering Linux server foundations, TCP/IP networking, structured logging, process forensics, data provenance, trust-based access control with 5-tier bandwidth model, and defensive security operations. Working PoC with trust-based throttling server. 79-term glossary, 20 cross-module bridges.</p>
+      </a>
     </div>
 
     <h2>Threads Across the Bioregion</h2>
 
-    <p>Nine threads connect the twelve projects. Each thread traces a single relationship system across the research series, linking specific documents where that thread appears.</p>
+    <p>Ten threads connect the thirteen projects. Each thread traces a single relationship system across the research series, linking specific documents where that thread appears.</p>
 
     <div class="thread-grid">
       <div class="thread">
@@ -263,14 +272,33 @@
           <span class="tag tag-led">LED</span> <a href="LED/page.html?doc=m8-plc-ladder-logic">PLC &mdash; ladder logic, Modbus, industrial control</a><br>
           <span class="tag tag-bcm">BCM</span> <a href="BCM/research/02-electrical-systems.md">Electrical &mdash; NEC 2023, branch circuits</a><br>
           <span class="tag tag-bps">BPS</span> <a href="BPS/page.html?doc=07-gpu-ml-pipeline">GPU/ML &mdash; signal processing pipeline</a><br>
-          <span class="tag tag-ffa">FFA</span> <a href="FFA/page.html?doc=02-digital-rendering">Rendering &mdash; PBR shaders, lighting models</a>
+          <span class="tag tag-ffa">FFA</span> <a href="FFA/page.html?doc=02-digital-rendering">Rendering &mdash; PBR shaders, lighting models</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=06-access-bandwidth">Access &mdash; trust-based throttling, anti-waste metrics</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=02-the-network">Network &mdash; TCP/IP, firewalls, mesh networking</a>
+        </div>
+      </div>
+
+      <div class="thread">
+        <h3>The Infrastructure Thread</h3>
+        <p>The plumbing beneath everything. Servers, networks, logs, and security that make information accessible. Every system leaves a trail &mdash; the sysadmin reads the truth and stewards the resources. The infrastructure already exists; the update is connecting what is already there differently.</p>
+        <div class="thread-links">
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=01-server-foundations">Server &mdash; Linux, processes, systemd, filesystems</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=02-the-network">Network &mdash; TCP/IP, DNS, routing, firewalls, mesh</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=03-the-logs">Logs &mdash; syslog, journald, structured logging, aggregation</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=06-access-bandwidth">Access &mdash; trust-based bandwidth, anti-waste, utility model</a><br>
+          <span class="tag tag-sys">SYS</span> <a href="SYS/page.html?doc=07-security-operations">Security &mdash; hardening, TLS, intrusion detection, privacy</a><br>
+          <span class="tag tag-she">SHE</span> <a href="SHE/page.html?doc=03-connectivity-protocols">Protocols &mdash; MQTT, networking, IoT connectivity</a><br>
+          <span class="tag tag-she">SHE</span> <a href="SHE/page.html?doc=04-platforms-software">Platforms &mdash; Docker, InfluxDB, Grafana</a><br>
+          <span class="tag tag-led">LED</span> <a href="LED/page.html?doc=m8-plc-ladder-logic">PLC &mdash; industrial control, Modbus/TCP</a><br>
+          <span class="tag tag-bps">BPS</span> <a href="BPS/page.html?doc=07-gpu-ml-pipeline">GPU/ML &mdash; server-side signal processing</a><br>
+          <span class="tag tag-bcm">BCM</span> <a href="BCM/research/02-electrical-systems.md">Electrical &mdash; NEC 2023, branch circuits, panel wiring</a>
         </div>
       </div>
     </div>
 
     <h2>Cross-Reference Matrix</h2>
 
-    <p>How the twelve projects overlap. Each cell links to the most relevant document in that project for the given topic.</p>
+    <p>How the thirteen projects overlap. Each cell links to the most relevant document in that project for the given topic.</p>
 
     <div class="matrix-filters" id="matrixFilters">
       <button class="filter-chip active" data-col="col">COL</button>
@@ -285,6 +313,7 @@
       <button class="filter-chip active" data-col="ffa">FFA</button>
       <button class="filter-chip active" data-col="tibs">TIBS</button>
       <button class="filter-chip active" data-col="led">LED</button>
+      <button class="filter-chip active" data-col="sys">SYS</button>
       <span class="filter-separator"></span>
       <button class="filter-util" id="filterAll">All</button>
       <button class="filter-util" id="filterNone">None</button>
@@ -306,11 +335,12 @@
           <th data-col="ffa"><span class="tag tag-ffa">FFA</span></th>
           <th data-col="tibs"><span class="tag tag-tibs">TIBS</span></th>
           <th data-col="led"><span class="tag tag-led">LED</span></th>
+          <th data-col="sys"><span class="tag tag-sys">SYS</span></th>
         </tr>
       </thead>
       <tbody>
         <tr class="category-header" data-category-header="living-systems">
-          <td colspan="13"><span class="chevron">&#9660;</span> Living Systems</td>
+          <td colspan="14"><span class="chevron">&#9660;</span> Living Systems</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Flora</strong></td>
@@ -326,6 +356,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Fauna</strong></td>
@@ -341,6 +372,7 @@
           <td data-col="ffa"><a href="FFA/page.html?doc=01-biological-foundations">Fur/feather biology</a></td>
           <td data-col="tibs"><a href="TIBS/page.html?doc=05-syn-synthesis">Animal symbolism</a></td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Fungi</strong></td>
@@ -356,6 +388,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Aquatic</strong></td>
@@ -371,6 +404,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Climate</strong></td>
@@ -386,6 +420,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led"><a href="LED/page.html?doc=m4-circadian-adaptation">Circadian lighting</a></td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="living-systems">
           <td><strong>Networks</strong></td>
@@ -401,9 +436,10 @@
           <td data-col="ffa"><a href="FFA/page.html?doc=07-integration-synthesis">10 bridges</a></td>
           <td data-col="tibs"><a href="TIBS/page.html?doc=05-syn-synthesis">5 epistemic links</a></td>
           <td data-col="led"><a href="LED/page.html?doc=m8-modbus-communication">Modbus, PLC</a></td>
+          <td data-col="sys"><a href="SYS/page.html?doc=02-the-network">TCP/IP, mesh</a></td>
         </tr>
         <tr class="category-header" data-category-header="built-environment">
-          <td colspan="13"><span class="chevron">&#9660;</span> Built Environment</td>
+          <td colspan="14"><span class="chevron">&#9660;</span> Built Environment</td>
         </tr>
         <tr data-category="built-environment">
           <td><strong>Materials</strong></td>
@@ -419,6 +455,7 @@
           <td data-col="ffa"><a href="FFA/page.html?doc=03-textile-craft">Textiles, fibers</a></td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="built-environment">
           <td><strong>Seismic</strong></td>
@@ -434,6 +471,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="built-environment">
           <td><strong>Building Codes</strong></td>
@@ -449,9 +487,10 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led"><a href="LED/page.html?doc=m5-power-supply-selection">PSU safety, NEC</a></td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr class="category-header" data-category-header="technology">
-          <td colspan="13"><span class="chevron">&#9660;</span> Technology</td>
+          <td colspan="14"><span class="chevron">&#9660;</span> Technology</td>
         </tr>
         <tr data-category="technology">
           <td><strong>Electronics</strong></td>
@@ -467,6 +506,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led"><a href="LED/page.html?doc=m1-led-fundamentals">LED fundamentals</a></td>
+          <td data-col="sys"><a href="SYS/page.html?doc=01-server-foundations">Server admin</a></td>
         </tr>
         <tr data-category="technology">
           <td><strong>IoT/Smart Home</strong></td>
@@ -482,6 +522,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led"><a href="LED/page.html?doc=m4-diyhue-wled">Hue, WLED</a></td>
+          <td data-col="sys"><a href="SYS/page.html?doc=02-the-network">Networking</a></td>
         </tr>
         <tr data-category="technology">
           <td><strong>Sensing/Physics</strong></td>
@@ -497,9 +538,10 @@
           <td data-col="ffa"><a href="FFA/page.html?doc=02-digital-rendering">PBR shaders</a></td>
           <td data-col="tibs">&mdash;</td>
           <td data-col="led"><a href="LED/page.html?doc=m7-oscilloscope-basics">Oscilloscopes</a></td>
+          <td data-col="sys"><a href="SYS/page.html?doc=04-process-forensics">Diagnostics</a></td>
         </tr>
         <tr class="category-header" data-category-header="meta">
-          <td colspan="13"><span class="chevron">&#9660;</span> Meta</td>
+          <td colspan="14"><span class="chevron">&#9660;</span> Meta</td>
         </tr>
         <tr data-category="meta">
           <td><strong>Heritage</strong></td>
@@ -515,6 +557,7 @@
           <td data-col="ffa">&mdash;</td>
           <td data-col="tibs"><a href="TIBS/page.html?doc=03-trb-tribal-traditions">5 PNW nations</a></td>
           <td data-col="led">&mdash;</td>
+          <td data-col="sys">&mdash;</td>
         </tr>
         <tr data-category="meta">
           <td><strong>Verification</strong></td>
@@ -530,6 +573,7 @@
           <td data-col="ffa"><a href="FFA/page.html?doc=09-verification-matrix">33/33 tests</a></td>
           <td data-col="tibs"><a href="TIBS/page.html?doc=07-verification-matrix">30/30 tests</a></td>
           <td data-col="led"><a href="LED/page.html?doc=00-source-index">80+ sources</a></td>
+          <td data-col="sys"><a href="SYS/page.html?doc=10-verification-matrix">12/12 tests</a></td>
         </tr>
         <tr data-category="meta">
           <td><strong>Mission Pack</strong></td>
@@ -545,6 +589,7 @@
           <td data-col="ffa"><a href="FFA/mission.html">View</a></td>
           <td data-col="tibs"><a href="TIBS/mission.html">View</a></td>
           <td data-col="led"><a href="LED/mission.html">View</a></td>
+          <td data-col="sys"><a href="SYS/mission.html">View</a></td>
         </tr>
       </tbody>
     </table>
@@ -590,6 +635,7 @@
       .filter-chip.active[data-col="ffa"] { background: #f3e5f5; color: #6a1b9a; border-color: #6a1b9a; }
       .filter-chip.active[data-col="tibs"] { background: #efebe9; color: #5d4037; border-color: #5d4037; }
       .filter-chip.active[data-col="led"] { background: #fff8e1; color: #b45309; border-color: #b45309; }
+      .filter-chip.active[data-col="sys"] { background: #E8F5E9; color: #1B5E20; border-color: #1B5E20; }
       .filter-separator { width: 1px; height: 1.4rem; background: var(--mist); margin: 0 0.3rem; }
       .filter-util {
         border: 1px solid var(--mist);
@@ -674,8 +720,8 @@
     (function() {
       'use strict';
 
-      var COLS = ['col','cas','eco','gdn','bcm','she','avi','mam','bps','ffa','tibs','led'];
-      var COL_LABELS = { col:'COL', cas:'CAS', eco:'ECO', gdn:'GDN', bcm:'BCM', she:'SHE', avi:'AVI', mam:'MAM', bps:'BPS', ffa:'FFA', tibs:'TIBS', led:'LED' };
+      var COLS = ['col','cas','eco','gdn','bcm','she','avi','mam','bps','ffa','tibs','led','sys'];
+      var COL_LABELS = { col:'COL', cas:'CAS', eco:'ECO', gdn:'GDN', bcm:'BCM', she:'SHE', avi:'AVI', mam:'MAM', bps:'BPS', ffa:'FFA', tibs:'TIBS', led:'LED', sys:'SYS' };
       var CATEGORIES = ['living-systems','built-environment','technology','meta'];
       var LS_COLS_KEY = 'pnw-matrix-cols';
       var LS_CATS_KEY = 'pnw-matrix-cats';
@@ -884,6 +930,11 @@
           <td>Universal &mdash; applies anywhere with 120V/60Hz or 5V/12V/24V DC</td>
           <td>8 research modules &mdash; from Ohm's Law to PLC ladder logic</td>
         </tr>
+        <tr>
+          <td><strong><a href="SYS/index.html">Systems Administration</a></strong></td>
+          <td>Universal &mdash; applies anywhere with Linux servers and TCP/IP networking</td>
+          <td>7 core modules + synthesis &mdash; server to security, trust-based access control</td>
+        </tr>
       </tbody>
     </table>
 
@@ -956,13 +1007,18 @@
           <td><a href="LED/index.html"><strong>LED Lighting &amp; Controllers</strong></a></td>
           <td>Instruments it all: oscilloscopes, microcontrollers, LED protocols, PLC logic &mdash; the maker's bench</td>
         </tr>
+        <tr>
+          <td>13</td>
+          <td><a href="SYS/index.html"><strong>Systems Administration</strong></a></td>
+          <td>Stewards the infrastructure: servers, networks, logs, security &mdash; every system leaves a trail, the sysadmin reads the truth</td>
+        </tr>
       </tbody>
     </table>
   </main>
 
   <footer>
     <p>Pacific Northwest Research Series &middot; gsd-skill-creator</p>
-    <p>The rainforest is the library. The Cascades are the index. The chipset is the catalog. The garden is the reading room. The physics is how it all listens. The wiring is the nervous system. The tradition is the thread. The bench is where it gets built.</p>
+    <p>The rainforest is the library. The Cascades are the index. The chipset is the catalog. The garden is the reading room. The physics is how it all listens. The wiring is the nervous system. The tradition is the thread. The bench is where it gets built. The server is the steward.</p>
   </footer>
 </body>
 </html>
