@@ -11,7 +11,9 @@
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
-    { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' }
+    { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
+    { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
+    { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' }
   ];
 
   // Detect current project from URL path
