@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYS — Trust-Based Access Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #1B2631;
+      --bg-card:  #1E2D3A;
+      --bg-row:   #233140;
+      --green:    #00C853;
+      --green-dim:#00C85380;
+      --cyan:     #00BCD4;
+      --yellow:   #FFD600;
+      --red:      #FF5252;
+      --orange:   #FF9800;
+      --text:     #B0BEC5;
+      --text-dim: #607D8B;
+      --border:   #2C3E50;
+      --mono:     'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    h1 span.dim { color: var(--text-dim); font-weight: 400; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 14px;
+    }
+
+    .card h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .full-width { grid-column: 1 / -1; }
+
+    /* Tier table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th {
+      text-align: left;
+      color: var(--text-dim);
+      font-weight: 400;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 10px;
+    }
+
+    td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    tr:hover td { background: var(--bg-row); }
+
+    .tier-owner   { color: var(--green); }
+    .tier-trusted { color: var(--cyan); }
+    .tier-known   { color: var(--yellow); }
+    .tier-visitor { color: var(--orange); }
+    .tier-unknown { color: var(--red); }
+
+    /* Bar chart */
+    .bar-container {
+      display: flex;
+      height: 24px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 8px 0;
+      background: var(--bg);
+    }
+
+    .bar-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--bg);
+      font-weight: 600;
+      min-width: 0;
+      transition: width 0.5s ease;
+    }
+
+    .bar-segment.owner   { background: var(--green); }
+    .bar-segment.trusted { background: var(--cyan); }
+    .bar-segment.known   { background: var(--yellow); }
+    .bar-segment.visitor { background: var(--orange); }
+    .bar-segment.unknown { background: var(--red); }
+
+    /* Log */
+    .log-entries {
+      max-height: 400px;
+      overflow-y: auto;
+      font-size: 11px;
+    }
+
+    .log-entry {
+      padding: 3px 0;
+      border-bottom: 1px solid #1B263100;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .log-entry:hover { background: var(--bg-row); }
+
+    .log-time { color: var(--text-dim); }
+    .log-status-ok { color: var(--green); }
+    .log-status-err { color: var(--red); }
+    .log-method { color: var(--text); }
+    .log-url { color: var(--green); }
+    .log-meta { color: var(--text-dim); }
+
+    /* Waste meter */
+    .waste-meter {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .waste-bar-track {
+      flex: 1;
+      height: 10px;
+      background: var(--bg);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .waste-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.5s ease, background 0.5s ease;
+    }
+
+    .waste-pct {
+      font-size: 20px;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    /* Principle box */
+    .principle {
+      background: var(--bg);
+      border-left: 3px solid var(--green);
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .principle strong { color: var(--green); }
+
+    /* Refresh indicator */
+    .refresh-bar {
+      height: 2px;
+      background: var(--green-dim);
+      margin-bottom: 16px;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .refresh-fill {
+      height: 100%;
+      background: var(--green);
+      width: 0%;
+      animation: fillUp 5s linear infinite;
+    }
+
+    @keyframes fillUp {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-dim);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SYS // Trust-Based Access Dashboard <span class="dim">— proof of concept</span></h1>
+
+  <div class="refresh-bar"><div class="refresh-fill" id="refreshFill"></div></div>
+
+  <div class="grid">
+
+    <!-- Uptime -->
+    <div class="card">
+      <h2>Server Uptime</h2>
+      <div class="stat-value" id="uptime">--</div>
+      <div class="stat-label">since server start</div>
+    </div>
+
+    <!-- Total Requests -->
+    <div class="card">
+      <h2>Total Requests</h2>
+      <div class="stat-value" id="totalRequests">--</div>
+      <div class="stat-label">served across all tiers</div>
+    </div>
+
+    <!-- Waste Ratio -->
+    <div class="card">
+      <h2>Anti-Waste Ratio</h2>
+      <div class="waste-meter">
+        <div class="waste-bar-track">
+          <div class="waste-bar-fill" id="wasteBarFill"></div>
+        </div>
+        <div class="waste-pct" id="wastePct">--</div>
+      </div>
+      <div class="stat-label">percentage of requests from unknown/bot tier</div>
+    </div>
+
+    <!-- Principle -->
+    <div class="card">
+      <h2>The Principle</h2>
+      <div class="principle">
+        <strong>Infrastructure is not free.</strong> The admin pays the bills. Trust controls
+        access speed, not just permission. 150 baud for unknowns is the digital "no junk mail" sign.
+        Quantify noise so the pipe carries signal.
+      </div>
+    </div>
+
+    <!-- Tier Table -->
+    <div class="card full-width">
+      <h2>Trust Tier Configuration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Label</th>
+            <th>Rate</th>
+            <th>Requests</th>
+            <th>Bandwidth Served</th>
+            <th>Share</th>
+          </tr>
+        </thead>
+        <tbody id="tierTableBody">
+          <tr><td colspan="6" style="color:var(--text-dim)">Loading...</td></tr>
+        </tbody>
+      </table>
+
+      <div class="bar-container" id="tierBar"></div>
+    </div>
+
+    <!-- Access Log -->
+    <div class="card full-width">
+      <h2>Recent Access Log <span style="color:var(--text-dim); text-transform:none; letter-spacing:0">(last 100)</span></h2>
+      <div class="log-entries" id="logEntries">
+        <div class="log-entry" style="color:var(--text-dim)">Waiting for requests...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    SYS Proof of Concept &mdash; Zero dependencies &mdash; Trust-based bandwidth control
+  </div>
+
+<script>
+  const REFRESH_MS = 5000;
+
+  const tierColors = {
+    owner:   'var(--green)',
+    trusted: 'var(--cyan)',
+    known:   'var(--yellow)',
+    visitor: 'var(--orange)',
+    unknown: 'var(--red)',
+  };
+
+  function formatRate(bps) {
+    if (bps === -1) return 'unlimited';
+    if (bps < 1024) return bps + ' B/s';
+    if (bps < 1048576) return (bps / 1024).toFixed(0) + ' KB/s';
+    return (bps / 1048576).toFixed(1) + ' MB/s';
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    let i = 0, val = bytes;
+    while (val >= 1024 && i < units.length - 1) { val /= 1024; i++; }
+    return val.toFixed(i === 0 ? 0 : 1) + ' ' + units[i];
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  async function refresh() {
+    try {
+      const res = await fetch('/_api/stats');
+      const data = await res.json();
+
+      // Uptime
+      document.getElementById('uptime').textContent = data.uptimeFormatted;
+
+      // Total requests
+      document.getElementById('totalRequests').textContent = data.totalRequests.toLocaleString();
+
+      // Waste ratio
+      const wastePct = (data.wasteRatio * 100).toFixed(1);
+      document.getElementById('wastePct').textContent = wastePct + '%';
+      const wasteBar = document.getElementById('wasteBarFill');
+      wasteBar.style.width = wastePct + '%';
+      wasteBar.style.background = data.wasteRatio > 0.5 ? 'var(--red)' :
+                                   data.wasteRatio > 0.2 ? 'var(--orange)' : 'var(--green)';
+
+      // Tier table
+      const tbody = document.getElementById('tierTableBody');
+      let rows = '';
+      const tierOrder = ['owner', 'trusted', 'known', 'visitor', 'unknown'];
+      const totalReqs = data.totalRequests || 1;
+
+      for (const tier of tierOrder) {
+        const t = data.tiers[tier];
+        if (!t) continue;
+        const share = ((t.requests / totalReqs) * 100).toFixed(1);
+        rows += `<tr>
+          <td class="tier-${tier}" style="font-weight:600">${tier}</td>
+          <td>${escapeHtml(t.label)}</td>
+          <td>${formatRate(t.bytesPerSecond)}</td>
+          <td>${t.requests.toLocaleString()}</td>
+          <td>${t.bytesServedFormatted}</td>
+          <td>${share}%</td>
+        </tr>`;
+      }
+      tbody.innerHTML = rows;
+
+      // Tier bar
+      const tierBar = document.getElementById('tierBar');
+      let barHtml = '';
+      for (const tier of tierOrder) {
+        const t = data.tiers[tier];
+        if (!t || t.requests === 0) continue;
+        const pct = (t.requests / totalReqs) * 100;
+        barHtml += `<div class="bar-segment ${tier}" style="width:${pct}%">${pct > 8 ? tier : ''}</div>`;
+      }
+      tierBar.innerHTML = barHtml || '<div style="width:100%;text-align:center;color:var(--text-dim);line-height:24px;font-size:10px">No requests yet</div>';
+
+      // Log entries
+      const logEl = document.getElementById('logEntries');
+      if (data.recentLogs.length === 0) {
+        logEl.innerHTML = '<div class="log-entry" style="color:var(--text-dim)">Waiting for requests...</div>';
+      } else {
+        let logHtml = '';
+        // Show newest first
+        for (let i = data.recentLogs.length - 1; i >= 0; i--) {
+          const e = data.recentLogs[i];
+          const statusClass = e.status < 400 ? 'log-status-ok' : 'log-status-err';
+          const time = e.timestamp ? e.timestamp.slice(11, 19) : '??:??:??';
+          const bps = e.bytesPerSecAllowed === -1 ? 'unlimited' : formatRate(e.bytesPerSecAllowed);
+          logHtml += `<div class="log-entry">` +
+            `<span class="log-time">${time}</span> ` +
+            `<span class="${statusClass}">${e.status}</span> ` +
+            `<span class="tier-${e.tier}">[${e.tier}]</span> ` +
+            `<span class="log-method">${e.method}</span> ` +
+            `<span class="log-url">${escapeHtml(e.url)}</span> ` +
+            `<span class="log-meta">${formatBytes(e.bytesServed)} @ ${bps} ${e.responseTimeMs}ms</span>` +
+            `</div>`;
+        }
+        logEl.innerHTML = logHtml;
+      }
+
+      // Restart refresh animation
+      const fill = document.getElementById('refreshFill');
+      fill.style.animation = 'none';
+      fill.offsetHeight; // reflow
+      fill.style.animation = '';
+
+    } catch (err) {
+      console.error('Dashboard refresh failed:', err);
+    }
+  }
+
+  // Initial load + interval
+  refresh();
+  setInterval(refresh, REFRESH_MS);
+</script>
+
+</body>
+</html>
