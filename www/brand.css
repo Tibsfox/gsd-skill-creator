@@ -212,6 +212,12 @@
   --uni-accent-light:#607d8b;
   --uni-accent-dark: #37474f;
   --uni-gradient:    linear-gradient(135deg, #37474f 0%, #546e7a 50%, #607d8b 100%);
+
+  /* AWF — ecology green, clean air/water/food */
+  --awf-accent:      #1B5E20;
+  --awf-accent-light:#4CAF50;
+  --awf-accent-dark: #0D3B0F;
+  --awf-gradient:    linear-gradient(135deg, #0D3B0F 0%, #1B5E20 40%, #1565C0 100%);
 }
 
 /* ═══════════════════════════════════════════
@@ -234,6 +240,7 @@
 .project-vav  { --accent: var(--vav-accent); --accent-light: var(--vav-accent-light); --accent-dark: var(--vav-accent-dark); }
 .project-art  { --accent: var(--art-accent); --accent-light: var(--art-accent-light); --accent-dark: var(--art-accent-dark); }
 .project-uni  { --accent: var(--uni-accent); --accent-light: var(--uni-accent-light); --accent-dark: var(--uni-accent-dark); }
+.project-awf  { --accent: var(--awf-accent); --accent-light: var(--awf-accent-light); --accent-dark: var(--awf-accent-dark); }
 
 /* ═══════════════════════════════════════════
    6. SHARED BASE STYLES
@@ -468,4 +475,5 @@ footer a { margin-right: 0.8rem; }
 .tag-vav  { background: #e8eaf6; color: #283593; }
 .tag-art  { background: #fce4ec; color: #880e4f; }
 .tag-uni  { background: #e8eaf6; color: #37474f; }
+.tag-awf  { background: #e8f5e9; color: #1B5E20; }
 .tag-rel  { background: #fff3e0; color: #bf360c; }
