@@ -111,14 +111,16 @@ fi
 # Check if release already exists
 if gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1; then
   echo "Release ${TAG} exists. Updating body..."
-  gh release edit "$TAG" --repo "$REPO" --notes "$(cat "$NOTES_FILE")"
+  gh release edit "$TAG" --repo "$REPO" \
+    --title "$(head -1 "$NOTES_FILE" | sed 's/^# //')" \
+    --notes "$(tail -n +2 "$NOTES_FILE")"
   echo ""
   echo "Updated: https://github.com/${REPO}/releases/tag/${TAG}"
 else
   echo "Creating release ${TAG}..."
   gh release create "$TAG" --repo "$REPO" \
-    --title "${TAG} $(head -1 "$NOTES_FILE" | sed 's/^# //')" \
-    --notes "$(cat "$NOTES_FILE")"
+    --title "$(head -1 "$NOTES_FILE" | sed 's/^# //')" \
+    --notes "$(tail -n +2 "$NOTES_FILE")"
   echo ""
   echo "Created: https://github.com/${REPO}/releases/tag/${TAG}"
 fi
