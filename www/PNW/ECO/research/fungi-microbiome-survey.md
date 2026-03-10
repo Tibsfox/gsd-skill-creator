@@ -491,6 +491,122 @@ Aggressive white-rot decomposer of hardwood. Pleurotus is notable for being one 
 
 ---
 
+### Cauliflower Mushroom (*Sparassis radicata*)
+
+**Taxonomy:** Polyporales > Sparassidaceae
+**Elevation Band:** ELEV-LOWLAND, ELEV-MONTANE
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-DECOMPOSER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Large, spectacular fruiting body resembling a head of cauliflower or brain coral, cream to tan in color. Typically 5-20 lbs but specimens up to 50 lbs have been documented. The western PNW species *S. radicata* is distinct from the eastern North American *S. crispa*. Parasitic on living Douglas-fir root systems, then saprotrophic after tree death.
+
+**Elevation Range:** Sea level to 4,000 ft (y=-41-59)
+**Distribution:** Throughout PNW conifer forests; found at the base of living and recently dead Douglas-fir.
+
+**Ecological Significance:**
+Causes brown cubical butt rot in living Douglas-fir, weakening the tree's structural base over years to decades. Despite being a pathogen, this decay process plays an important ecological role — hollow trees created by butt rot provide critical denning and nesting habitat for wildlife including black bears, raccoons, and cavity-nesting birds. The cycle of parasitism-to-saprotrophism bridges the living and dead wood ecosystems.
+
+**Threats:** Loss of old-growth Douglas-fir; habitat reduction from intensive forestry practices that remove infected trees.
+
+**SAFETY NOTE:** Edible and choice when young and fresh (firm, white flesh). Older specimens become tough and discolored. No dangerous look-alikes due to its unique cauliflower-like form, but always confirm identification with an experienced forager before consuming any wild fungus.
+
+**Cultural Significance:** Harvested as food by some PNW First Nations, though specific documentation is limited in ethnomycological literature.
+
+**Key Sources:** Trudell & Ammirati (2009); Siegel & Schwarz (2016); USFS forest pathology reports
+
+**Cross-Module References:**
+- See flora-survey: Douglas-fir (primary host tree)
+- See ecological-networks: Habitat creation via wood decay
+
+---
+
+### Chicken of the Woods (*Laetiporus conifericola*)
+
+**Taxonomy:** Polyporales > Fomitopsidaceae
+**Elevation Band:** ELEV-LOWLAND, ELEV-MONTANE
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-DECOMPOSER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Bright orange-yellow shelf brackets growing in dramatic, multi-tiered clusters on standing or fallen conifers. Soft and succulent when young, becoming chalky and brittle with age. The PNW species *L. conifericola* is distinct from the eastern *L. sulphureus* complex — a taxonomic separation recognized by Burdsall & Banik (2001).
+
+**Elevation Range:** Sea level to 4,500 ft (y=-41-71)
+**Distribution:** Throughout PNW on conifers including Douglas-fir, western hemlock, and Sitka spruce; also on hardwoods occasionally.
+
+**Ecological Significance:**
+Causes brown cubical heartwood rot in living and dead conifers. An important habitat creator — by hollowing out heartwood, it produces nesting cavities used by woodpeckers, owls, and other cavity-dependent species. The dramatic orange fruiting bodies are among the most visually striking fungi in PNW forests and serve as indicators of internal wood decay.
+
+**Threats:** Not threatened; common and widespread.
+
+**SAFETY NOTE:** Do NOT consume from conifers without expert identification — some PNW *Laetiporus* species on conifers cause gastrointestinal distress in some people. Always cook thoroughly. Never eat specimens growing on yew (*Taxus*) or eucalyptus, which may concentrate toxic compounds from the host wood.
+
+**Cultural Significance:** Not specifically documented in PNW ethnomycological literature.
+
+**Key Sources:** Siegel & Schwarz (2016) — *Mushrooms of Cascadia*; Burdsall & Banik (2001) — *Laetiporus* taxonomy revision
+
+**Cross-Module References:**
+- See flora-survey: Conifer hosts (Douglas-fir, western hemlock, Sitka spruce)
+- See fauna-terrestrial: Cavity-nesting birds (woodpeckers, owls)
+
+---
+
+### Lion's Mane (*Hericium abietis*)
+
+**Taxonomy:** Russulales > Hericiaceae
+**Elevation Band:** ELEV-LOWLAND, ELEV-MONTANE
+**Habitat:** HAB-OLD-GROWTH
+**Ecological Role:** ROLE-DECOMPOSER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** White, cascading teeth (spines) hanging from brackets on dead or dying conifers, creating a waterfall-like appearance. The PNW species *H. abietis* is conifer-specific and distinct from the more widely known *H. erinaceus*, which grows on hardwoods in eastern North America and Asia. An old-growth indicator strongly associated with large-diameter dead trees.
+
+**Elevation Range:** Sea level to 4,000 ft (y=-41-59)
+**Distribution:** Throughout PNW old-growth conifer forests; most common on large-diameter snags and logs of Douglas-fir and western hemlock.
+
+**Ecological Significance:**
+White-rot decomposer of dead conifer wood. Old-growth indicator species — its strong association with large-diameter dead trees means it is rare or absent in young, managed forests. The *Hericium* genus has attracted major medicinal research interest: compounds called hericenones and erinacines have been shown to promote nerve growth factor (NGF) synthesis, with implications for neurodegenerative disease research. While *H. abietis* is less studied than the cultivated *H. erinaceus*, it shares the genus-level biochemistry.
+
+**Threats:** Loss of old-growth habitat; removal of large-diameter snags and dead wood from managed forests.
+
+**Cultural Significance:** Not specifically documented in PNW ethnomycological literature, though medicinal use of *Hericium* species is well-documented in East Asian traditions.
+
+**Key Sources:** Trudell & Ammirati (2009); Stamets (2005) — *Mycelium Running*; NGF compound research (Mori et al., 2009)
+
+**Cross-Module References:**
+- See flora-survey: Conifer hosts (old-growth dependency)
+- See ecological-networks: Old-growth indicator species network
+
+---
+
+### Artist's Conk (*Ganoderma applanatum*)
+
+**Taxonomy:** Polyporales > Ganodermataceae
+**Elevation Band:** ELEV-LOWLAND, ELEV-MONTANE
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-DECOMPOSER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Perennial shelf (bracket) fungus with a hard, woody fruiting body. Brown upper surface with concentric growth zones; white pore surface that bruises brown instantly upon touch — hence "artist's conk," as people draw on the white surface. Grows a new pore layer each year, creating visible growth rings in cross-section (a "forest chronicle"). Individual fruiting bodies can persist for 50+ years on the same substrate.
+
+**Elevation Range:** Sea level to 5,000 ft (y=-41-84)
+**Distribution:** Throughout PNW on both living and dead hardwoods and conifers; one of the most common bracket fungi in PNW forests.
+
+**Ecological Significance:**
+White-rot decomposer that is both parasitic on living trees and saprotrophic on dead wood, bridging the living-to-dead wood transition. During sporulation, ejects billions of spores daily — visible as a brown cloud beneath the fruiting body. Related to reishi (*Ganoderma* spp.) but lacks the same concentration of bioactive triterpenoids. The perennial growth habit and extreme longevity of individual fruiting bodies make it a long-term recorder of forest conditions.
+
+**Threats:** Not threatened; extremely common and widespread.
+
+**Cultural Significance:** Some PNW First Nations used the smooth white pore surface as a drawing or recording medium. Dried fruiting bodies used as fire-starting tinder due to the ability of the spore-producing tissue to catch and hold a spark. (CULT-MATERIAL)
+
+**Key Sources:** Gilbertson & Ryvarden (1987); Siegel & Schwarz (2016)
+
+**Cross-Module References:**
+- See flora-survey: Tree hosts (hardwoods and conifers)
+- See fungi-microbiome: Reishi profile (related *Ganoderma* species)
+
+---
+
 ## 3. Lichens
 
 Lichens are symbiotic organisms composed of a fungal partner (mycobiont) and one or more photosynthetic partners (algae or cyanobacteria). PNW old-growth forests support extraordinary lichen diversity — canopy lichen biomass in old-growth Douglas-fir forests can exceed 1,000 kg/hectare.
@@ -576,6 +692,62 @@ Contains vulpinic acid, a bright yellow toxic compound — the species name "vul
 **Cross-Module References:**
 - See heritage-bridge: Interior nations — dye use
 - See flora-survey: Montane/subalpine conifers (substrate)
+
+---
+
+### Map Lichen (*Rhizocarpon geographicum*)
+
+**Taxonomy:** Rhizocarpales > Rhizocarpaceae
+**Elevation Band:** ELEV-ALPINE, ELEV-SUBALPINE
+**Habitat:** HAB-ALPINE-MEADOW, HAB-VOLCANIC
+**Ecological Role:** ROLE-PRIMARY-PRODUCER, ROLE-DECOMPOSER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Distinctive bright yellow-green crustose lichen with black margins (prothallus) forming a "map-like" pattern on exposed rock surfaces. THE alpine lichen — a pioneer organism on bare rock that initiates the long process of soil formation from stone. Extremely slow-growing (0.1-1 mm/year), which makes it invaluable for lichenometry — the science of dating rock surfaces by measuring lichen colony diameter. Some colonies estimated at 8,000+ years old, placing them among the oldest living organisms on Earth.
+
+**Elevation Range:** 5,000-14,000 ft (y=84-308)
+**Distribution:** Throughout PNW on exposed rock surfaces at high elevations; common on glacial moraines, talus slopes, and volcanic rock above treeline.
+
+**Ecological Significance:**
+Pioneer species on bare rock — begins the soil formation process through chemical weathering of rock substrates via oxalic acid secretion. Over centuries, the accumulated organic matter from lichen growth creates thin soil layers that enable moss colonization, then eventually vascular plants (primary succession). Used extensively in lichenometry to date glacial moraines, rockfall events, and building stones — growth curves calibrated for specific mountain ranges. The extreme longevity and slow growth rate make it a living record of landscape history.
+
+**Threats:** Air pollution (acid rain alters rock substrate chemistry); climate change affecting alpine habitats; physical disturbance of rock surfaces.
+
+**Cultural Significance:** Not specifically documented for PNW nations. Used historically in European lichenometry for archaeological dating.
+
+**Key Sources:** Brodo et al. (2001) — *Lichens of North America*; Nash (2008) — *Lichen Biology*; lichenometric dating studies (Innes, 1985)
+
+**Cross-Module References:**
+- See ecological-networks: Soil formation and alpine primary succession
+- See flora-survey: Alpine pioneer community succession
+
+---
+
+### Pixie Cup Lichen (*Cladonia* spp.)
+
+**Taxonomy:** Lecanorales > Cladoniaceae
+**Elevation Band:** ELEV-LOWLAND, ELEV-MONTANE, ELEV-SUBALPINE
+**Habitat:** HAB-SECOND-GROWTH, HAB-DISTURBED
+**Ecological Role:** ROLE-PRIMARY-PRODUCER, ROLE-NURSE
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Pioneer lichen on disturbed ground — logged areas, burned sites, roadcuts, and forest floor. Recognized by distinctive cup-shaped fruiting structures (podetia) that earn the "pixie cup" name. The *Cladonia* genus is extremely diverse, including reindeer lichens (*C. rangiferina*), British soldier lichen (*C. cristatella*), and hundreds of other species. Growth forms range from tiny goblets to sprawling mats of branching thalli. Some species contain cyanobacteria that fix atmospheric nitrogen, making them important for soil recovery after disturbance.
+
+**Elevation Range:** Sea level to 7,000 ft (y=-41-134)
+**Distribution:** Throughout PNW; most abundant on disturbed ground, rotting logs, thin soil over rock, and forest floor. Indicator of early succession following logging or fire.
+
+**Ecological Significance:**
+Pioneer and nurse species — among the first organisms to colonize disturbed ground, stabilizing soil and adding organic matter and fixed nitrogen. The nitrogen-fixing capability of cyanobacterial *Cladonia* species is important for soil recovery after disturbance events (fire, logging, volcanic deposition). Reindeer lichens (*C. rangiferina* group) form extensive ground cover in subalpine forests and serve as critical winter forage for caribou (historically present in PNW). *Cladonia* mats create microhabitats for invertebrates and seedling establishment.
+
+**Threats:** Generally secure due to pioneer habit; however, intensive site preparation after logging (herbicide application, mechanical scarification) can eliminate lichen cover before it contributes to soil recovery.
+
+**Cultural Significance:** Not specifically documented for PNW nations. Broadly significant across northern cultures — reindeer lichens are critical caribou/reindeer forage across the circumpolar region, supporting indigenous subsistence economies.
+
+**Key Sources:** Brodo et al. (2001); Goward et al. (1994) — *The Lichens of British Columbia*
+
+**Cross-Module References:**
+- See ecological-networks: Nitrogen fixation and pioneer succession
+- See flora-survey: Post-disturbance recovery and forest floor community
 
 ---
 
@@ -746,11 +918,11 @@ The Fungi/Microbiome chip (Myco-Chip) processes queries about mycorrhizal networ
 
 ### Total Fungi Survey Statistics
 
-- **Total species/communities profiled:** 25 species + 3 community types
+- **Total species/communities profiled:** 31 species + 3 community types
 - **Functional groups covered:** ECM, saprotrophic, lichen, soil microbiome, aquatic microbiome
 - **Elevation bands referenced:** All 8 (ELEV-ALPINE through ELEV-DEEP-MARINE)
-- **Safety disclaimers included:** 8 species-specific warnings + general preamble
-- **Culturally significant species:** 8+ with specific attributions
+- **Safety disclaimers included:** 10 species-specific warnings + general preamble
+- **Culturally significant species:** 10+ with specific attributions
 - **Conservation flagship species:** Agarikon (old-growth indicator)
 - **Applied mycology case studies:** 3 (mycoremediation, MycoBooms, rare fungi survey)
 

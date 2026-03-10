@@ -12,7 +12,7 @@
 |--------|-------|--------|
 | Total chips | 6 | chipset.yaml |
 | Total bus routes | 5 | chipset.yaml |
-| Total species registers | 189 | cross-module-merge.md |
+| Total species registers | 227 | cross-module-merge.md |
 | Hub species (cross-chip routing) | 31 | cross-module-merge.md |
 | Clock domains | 6 | chipset.yaml |
 | Cross-references (total) | ~494 | cross-module-merge.md §1 |
@@ -35,7 +35,7 @@
 | Attribute resolution time | Per-species lookup | Single shared load | O(1) vs O(n) |
 | Cross-chip habitat consistency | Risk of drift | Guaranteed (single source) | Eliminates conflicts |
 
-**Verification:** All 189 species reference HAB-* IDs, not inline descriptions. Zero inline habitat redefinitions found across 596KB of survey documents.
+**Verification:** All 227 species reference HAB-* IDs, not inline descriptions. Zero inline habitat redefinitions found across 677KB of survey documents.
 
 ### 2.2 Bus Contention — Lowland Domain Routing
 
@@ -76,7 +76,7 @@
 
 ### 2.4 Token Efficiency — Knowledge Tiering
 
-**Problem:** Loading all 189 species profiles for every query wastes tokens.
+**Problem:** Loading all 227 species profiles for every query wastes tokens.
 
 **Solution:** Three-tier knowledge loading (per PRD §4.7):
 

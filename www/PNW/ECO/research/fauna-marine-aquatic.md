@@ -2,7 +2,7 @@
 
 > **Module 3 — Aquatic and Marine Vertebrates and Invertebrates: Salmon, Freshwater Fish, Marine Mammals, Marine Fish, and Marine Invertebrates**
 >
-> This document profiles 65+ aquatic and marine species across all water-associated elevation bands of the PNW bioregion, from glacial headwater streams to deep Puget Sound basins and the open Pacific. Each profile uses the standardized template and attribute IDs from `shared-attributes.md`. Species are organized by habitat zone (freshwater to deep marine), then by taxonomic group within each zone.
+> This document profiles 61 aquatic and marine species across all water-associated elevation bands of the PNW bioregion, from glacial headwater streams to deep Puget Sound basins and the open Pacific. Each profile uses the standardized template and attribute IDs from `shared-attributes.md`. Species are organized by habitat zone (freshwater to deep marine), then by taxonomic group within each zone.
 >
 > **Design principle:** Every species references shared elevation bands, habitat types, and ecological roles by their canonical IDs. No attribute is redefined here.
 >
@@ -407,6 +407,61 @@ A PNW endemic found nowhere else on Earth — the sole living member of its genu
 
 ---
 
+### Threespine Stickleback (*Gasterosteus aculeatus*)
+
+**Taxonomy:** Gasterosteiformes > Gasterosteidae
+**Elevation Band:** ELEV-RIPARIAN, ELEV-LOWLAND
+**Habitat:** HAB-STREAM, HAB-WETLAND, HAB-ESTUARY
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Tiny fish, 2-3 in. Three sharp dorsal spines, bony lateral plates instead of scales. Both anadromous (marine-to-freshwater migrating) and resident freshwater populations coexist in PNW waterways. Males develop bright red throat coloring during breeding and build elaborate nests from plant material, glued with kidney secretions.
+
+**Elevation Range:** 0-2,000 ft (y=-41-9)
+**Distribution:** Throughout PNW from coastal estuaries to inland lakes and streams. Found in virtually every low-elevation waterway — ponds, ditches, estuaries, lakes, and slow streams. Both marine and freshwater forms throughout the range.
+
+**Ecological Significance:**
+One of the most important model organisms in evolutionary biology. PNW stickleback populations demonstrate rapid adaptive evolution — marine populations colonizing freshwater after glacial retreat (10,000-15,000 years ago) independently evolved reduced armor plating, altered body shape, and different feeding behavior in parallel across dozens of lake systems. This repeated evolution provides a natural laboratory for studying how genes produce adaptive change. The genetic basis for armor loss (Eda gene) was identified in PNW stickleback populations. Males build nests and provide sole parental care — guarding and fanning eggs for 7-10 days.
+
+**Threats:** Generally abundant and secure; some isolated lake populations are vulnerable to introduced predatory fish (bass, sunfish); wetland drainage reduces habitat for resident freshwater populations.
+
+**Cultural Significance:** Not specifically documented as a culturally significant food fish in PNW ethnographic literature.
+
+**Key Sources:** Bell & Foster (1994) — stickleback biology; Cresko et al. (2004) — parallel evolution in PNW sticklebacks; Colosimo et al. (2005) — Eda gene and armor loss
+
+**Cross-Module References:**
+- See ecological-networks: Wetland food web (model organism for evolution, freshwater-marine connectivity)
+
+---
+
+### Mountain Whitefish (*Prosopium williamsoni*)
+
+**Taxonomy:** Salmoniformes > Salmonidae
+**Elevation Band:** ELEV-RIPARIAN, ELEV-MONTANE
+**Habitat:** HAB-STREAM
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Game species | IUCN: LC
+
+**Description:** Medium salmonid, 12-18 in. Silvery with small mouth, rounded snout, and adipose fin (salmonid family marker). Feeds on benthic invertebrates — aquatic insect larvae, stoneflies, caddisflies — using a small, subterminal mouth adapted for bottom feeding.
+
+**Elevation Range:** 500-6,000 ft (y=-29-109)
+**Distribution:** Coldwater rivers and streams throughout the PNW interior — Columbia Basin, Snake River, upper Willamette tributaries, and east-slope Cascade streams. Often the most abundant native salmonid in rivers where trout and salmon receive more attention.
+
+**Ecological Significance:**
+The overlooked native salmonid of PNW rivers. Mountain whitefish are frequently the most numerically abundant salmonid in coldwater streams, yet receive a fraction of the research and management attention given to trout and salmon. Their abundance makes them significant consumers of benthic invertebrates and important prey for bull trout, river otters, and bald eagles. Whitefish are indicators of healthy coldwater stream habitat — they require clean gravel substrate for spawning and cold, well-oxygenated water year-round. Population declines in a river signal degrading water quality or habitat conditions that will soon affect trout and salmon.
+
+**Threats:** Water temperature increases from climate change and reduced riparian shade; habitat degradation; competition from non-native brook trout; sometimes killed by anglers who misidentify them or consider them undesirable.
+
+**Cultural Significance:** Not specifically documented as culturally distinct from trout and salmon in PNW ethnographic literature, though consumed as food fish.
+
+**Key Sources:** Wydoski & Whitney (2003) — inland fishes of Washington; McPhail (2007) — freshwater fishes of British Columbia; WDFW game fish management
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Bull trout (predator-prey relationship, shared cold-water habitat)
+- See ecological-networks: Montane Stream food web (most abundant native salmonid, coldwater indicator)
+
+---
+
 ## 3. Marine Mammals
 
 PNW marine waters support 30+ marine mammal species, from year-round residents (harbor seals, orcas) to seasonal migrants (gray whales, humpbacks). Marine mammals serve as apex predators, ecosystem engineers, and nutrient recyclers, linking pelagic food webs to nearshore and even terrestrial ecosystems. The Southern Resident killer whale population is the most endangered marine mammal in the PNW and one of the most closely monitored cetacean populations on Earth.
@@ -788,6 +843,257 @@ Apex flatfish predator of the continental shelf, consuming crab, other flatfish,
 
 ---
 
+### Pacific Sand Lance (*Ammodytes personatus*)
+
+**Taxonomy:** Perciformes > Ammodytidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-SAND-FLAT, HAB-PELAGIC
+**Ecological Role:** ROLE-SECONDARY-CONSUMER, ROLE-KEYSTONE
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Small, slender forage fish, 3-7 in, silvery with elongate body. Forms dense schools in nearshore waters by day, buries in clean sand substrate at night and during winter to avoid predators. Beach spawner — deposits eggs on coarse sand beaches at high tide.
+
+**Elevation Range:** 0 to -200 ft (y=-41--46)
+**Distribution:** Throughout PNW coastal and inland waters. Spawning beaches documented in San Juan Islands, Whidbey Island, and outer coast. Requires clean, unarmored sand/gravel beaches for spawning and burial habitat.
+
+**Ecological Significance:**
+Keystone forage fish and critical prey base for the Salish Sea food web. Sand lance are a primary prey species for SRKW Chinook salmon (Chinook eat sand lance), seabirds (rhinoceros auklets, pigeon guillemots, marbled murrelets), and marine mammals (harbor seals, humpback whales). Their dependence on clean beach substrate for spawning and burial makes them uniquely vulnerable to shoreline armoring (bulkheads, riprap), which eliminates spawning habitat. No commercial fishery exists, so population monitoring is limited — sand lance abundance may be declining undetected.
+
+**Threats:** Shoreline armoring (destroys spawning and burial habitat); beach nourishment with incompatible sediment; dredging; nearshore development; climate-driven changes in plankton prey.
+
+**Cultural Significance:** Not specifically documented as individual species; part of broader forage fish ecology supporting salmon and marine mammals central to Coast Salish food systems.
+
+**Key Sources:** Penttila (2007) — sand lance spawning habitat; WDFW forage fish surveys; Liedtke et al. (2013) — sand lance ecology
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Pacific herring (co-occurring forage fish), SRKW (Chinook prey chain depends on sand lance)
+- See ecological-networks: Salish Sea food web (keystone forage fish, beach spawner)
+
+---
+
+### Surf Smelt (*Hypomesus pretiosus*)
+
+**Taxonomy:** Osmeriformes > Osmeridae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-SAND-FLAT, HAB-PELAGIC
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Small, silvery forage fish, 6-10 in. Translucent green-silver back, silver sides. Beach spawner — eggs deposited on sand and fine gravel beaches at specific tidal elevations. Spawning occurs year-round in some locations, with peak activity in summer.
+
+**Elevation Range:** 0 to -150 ft (y=-41--45)
+**Distribution:** Throughout PNW coastal and inland waters. Spawning beaches concentrated in Puget Sound, San Juan Islands, and outer coast estuaries. Requires specific beach grain size and wave exposure for successful spawning.
+
+**Ecological Significance:**
+Important forage base for salmon (Chinook, coho), seabirds (terns, murres, auklets), lingcod, and marine mammals. Like sand lance, surf smelt depend on unarmored beaches for spawning. Smelt egg incubation requires specific substrate temperature and moisture — shoreline modifications that alter beach hydrology can eliminate spawning success. Surf smelt fill a complementary forage niche to herring and sand lance, with different spawning timing and habitat preferences that distribute forage fish availability across seasons.
+
+**Threats:** Shoreline armoring (loss of spawning beaches); beach nourishment with wrong grain size; increased wave energy from vessel wakes; nearshore habitat degradation.
+
+**Cultural Significance:** Traditional food fish for Coast Salish peoples. Beach seining for smelt documented at traditional harvest sites in Puget Sound and Strait of Georgia. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Penttila (2007) — forage fish spawning habitat; Quinn et al. — smelt ecology; WDFW forage fish management
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Pacific herring, Pacific sand lance (co-occurring forage fish forming prey base)
+- See ecological-networks: Salish Sea food web (forage fish prey base)
+
+---
+
+### Northern Anchovy (*Engraulis mordax*)
+
+**Taxonomy:** Clupeiformes > Engraulidae
+**Elevation Band:** ELEV-SHALLOW-MARINE, ELEV-DEEP-MARINE
+**Habitat:** HAB-PELAGIC
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Small pelagic schooling fish, 4-7 in. Blue-green back, silver sides with faint silver stripe. Large schools can number millions of individuals. Important plankton-to-predator energy transfer species.
+
+**Elevation Range:** 0 to -600 ft (y=-41--56)
+**Distribution:** Coastal waters from British Columbia to Baja California. Abundance in PNW waters varies dramatically with ocean temperature cycles — more abundant during warm-water (El Nino/positive PDO) phases.
+
+**Ecological Significance:**
+Key prey species connecting zooplankton to higher trophic levels. Northern anchovy are a primary food source for humpback whales (feeding aggregations in PNW driven by anchovy schools), seabirds, salmon, and marine fish. Population abundance is highly variable, linked to Pacific Decadal Oscillation (PDO) cycles — anchovy and sardine populations alternate in dominance on multi-decadal timescales. When anchovy are abundant, the entire marine food web benefits; when scarce, predators must shift to alternative prey or decline.
+
+**Threats:** Ocean temperature variability (PDO-driven population swings); competition with sardine for plankton resources; potential climate-driven shifts in distribution; bycatch in commercial fisheries.
+
+**Cultural Significance:** Not specifically documented as culturally significant in PNW ethnographic literature; part of broader marine food web supporting culturally important predator species.
+
+**Key Sources:** Chavez et al. (2003) — sardine-anchovy alternation; Litz et al. (2011) — anchovy ecology in the California Current; NOAA stock assessments
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Humpback whale (predator), Pacific herring (co-occurring forage fish)
+- See ecological-networks: Salish Sea food web (pelagic forage fish, PDO-linked)
+
+---
+
+### Yelloweye Rockfish (*Sebastes ruberrimus*)
+
+**Taxonomy:** Scorpaeniformes > Sebastidae
+**Elevation Band:** ELEV-DEEP-MARINE
+**Habitat:** HAB-REEF
+**Ecological Role:** ROLE-APEX-PREDATOR
+**Conservation Status:** Federal ESA: Threatened (Puget Sound/Georgia Basin DPS) | WA: Endangered | IUCN: VU
+
+**Description:** Large rockfish, 20-36 in, up to 40 lbs. Adults bright orange-yellow with ragged fins and prominent ridges above eyes. Juveniles dark with distinctive white lateral stripe. One of the longest-lived fish known — aged specimens exceed 150 years.
+
+**Elevation Range:** -80 to -900 ft (y=-43--64)
+**Distribution:** Deep rocky reefs throughout PNW. Puget Sound/Georgia Basin DPS listed under ESA. Extremely site-faithful — individuals occupy the same reef structure for decades.
+
+**Ecological Significance:**
+Top predator of deep rocky reef ecosystems and a living indicator of reef community age. Yelloweye rockfish take 15-20 years to reach reproductive maturity, making population recovery from overharvest extraordinarily slow — even under complete fishing closure, meaningful recovery requires multiple human generations. Their extreme longevity (100-150+ years) means individual fish alive today were born before Washington achieved statehood. Barotrauma (fatal gas bladder expansion when caught and brought to surface from depth) makes even catch-and-release mortality nearly 100% without descending devices.
+
+**Threats:** Historical and ongoing overfishing (recreational bycatch even in closed fisheries); extreme barotrauma mortality; slow maturation and reproduction; deep reef habitat disturbance.
+
+**Cultural Significance:** Not specifically documented in PNW ethnographic literature as a distinct cultural food fish.
+
+**Key Sources:** Love et al. (2002) — rockfish biology; Drake et al. (2010) — Puget Sound rockfish ESA review; NOAA ESA recovery plan
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Quillback rockfish, Copper rockfish (co-occurring rockfish assemblage)
+- See ecological-networks: Rocky Reef food web (ESA-listed apex reef predator, century-scale lifespan)
+
+---
+
+### Canary Rockfish (*Sebastes pinniger*)
+
+**Taxonomy:** Scorpaeniformes > Sebastidae
+**Elevation Band:** ELEV-DEEP-MARINE
+**Habitat:** HAB-REEF
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal ESA: Threatened (Puget Sound/Georgia Basin DPS) | WA: Endangered | IUCN: VU
+
+**Description:** Medium-large rockfish, 15-24 in. Bright orange body with gray mottling across back and three distinct gray stripes radiating from eyes. Named for canary-yellow coloring in some individuals. Long-lived — 75+ years.
+
+**Elevation Range:** -200 to -800 ft (y=-46--61)
+**Distribution:** Deep rocky reefs, typically 200-800 ft depth. Puget Sound/Georgia Basin DPS listed under ESA alongside yelloweye rockfish. Historically abundant in deep-water rockfish assemblages.
+
+**Ecological Significance:**
+A long-lived deep reef species whose population collapse illustrates the vulnerability of slow-growing marine fish to modern fishing pressure. Canary rockfish were once among the most abundant rockfish in the commercial trawl catch; severe overfishing in the late 20th century caused population crashes that triggered ESA listing. Recovery is limited by late maturity (age 10-15), long generation time, and continued bycatch mortality. Like yelloweye rockfish, canary rockfish populations integrate decades of environmental conditions — their decline signals long-term reef community degradation.
+
+**Threats:** Historical overfishing (primary cause of decline); bycatch in trawl and recreational fisheries; barotrauma; extremely slow recovery timeline; deep reef habitat disturbance.
+
+**Cultural Significance:** Not specifically documented in PNW ethnographic literature as a distinct cultural food fish.
+
+**Key Sources:** Love et al. (2002) — rockfish biology; Drake et al. (2010) — Puget Sound rockfish ESA review; NOAA ESA recovery plan
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Yelloweye rockfish (co-listed ESA species), Quillback rockfish (co-occurring deep reef)
+- See ecological-networks: Rocky Reef food web (ESA-listed deep reef species)
+
+---
+
+### Pacific Cod (*Gadus macrocephalus*)
+
+**Taxonomy:** Gadiformes > Gadidae
+**Elevation Band:** ELEV-SHALLOW-MARINE, ELEV-DEEP-MARINE
+**Habitat:** HAB-PELAGIC, HAB-SOFT-BOTTOM
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Medium-large gadid, 2-3 ft, up to 30 lbs. Brown-gray with dark spots, three dorsal fins, barbel on chin (typical cod appearance). Demersal — occupies soft-bottom habitat on the continental shelf and upper slope.
+
+**Elevation Range:** -30 to -900 ft (y=-42--64)
+**Distribution:** Throughout PNW continental shelf from Puget Sound to Alaska. Connects PNW fish communities to Bering Sea and North Pacific populations. Most abundant on soft mud and sand bottoms at 300-600 ft depth.
+
+**Ecological Significance:**
+Important commercial trawl and longline fishery species linking PNW marine ecosystems to broader North Pacific food webs. Pacific cod are generalist predators consuming polychaete worms, shrimp, crab, and small fish, and serve as prey for halibut, marine mammals, and sixgill sharks. Their broad depth range and generalist diet make them indicators of overall continental shelf productivity. Unlike the severely overfished Atlantic cod, Pacific cod populations have been managed more conservatively, though some stocks show declining trends.
+
+**Threats:** Commercial fishing pressure; climate-driven warming (Bering Sea stock collapses linked to marine heat waves); trawl habitat disturbance on soft bottoms; bycatch of non-target species in cod-directed fisheries.
+
+**Cultural Significance:** Not specifically documented as culturally significant in PNW ethnographic literature; primarily a commercial fishery species.
+
+**Key Sources:** Bakkala (1993) — Pacific cod biology; NOAA/NMFS stock assessments; Hurst et al. (2012) — climate effects on cod
+
+**Cross-Module References:**
+- See ecological-networks: Continental Shelf food web (commercial groundfish, North Pacific connectivity)
+
+---
+
+### Cabezon (*Scorpaenichthys marmoratus*)
+
+**Taxonomy:** Scorpaeniformes > Cottidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-REEF, HAB-KELP
+**Ecological Role:** ROLE-APEX-PREDATOR
+**Conservation Status:** Federal: Not listed | WA: Game species | IUCN: NE
+
+**Description:** The largest sculpin in the PNW — up to 25 lbs and 3 ft long. Mottled brown, green, or red coloring with large fleshy flap (cirrus) on snout. Broad head, scaleless body. Males guard bright green or blue-green egg masses on rocky substrate. WARNING: Cabezon eggs are toxic to humans — contain a dinogunellin toxin that causes severe gastrointestinal distress.
+
+**Elevation Range:** 0 to -200 ft (y=-41--46)
+**Distribution:** Rocky reefs, kelp forests, and tidepools from Alaska to Baja California. Common in PNW nearshore habitats. Territorial — adults defend rocky lairs.
+
+**Ecological Significance:**
+Apex predator of nearshore rocky reef and kelp forest habitats. Cabezon are ambush predators consuming crabs (including Dungeness), abalone, small fish, and other invertebrates. Male egg-guarding behavior (1-3 months attending the nest) makes them vulnerable during spawning season. Their large size and site fidelity make them a highly visible indicator species for divers assessing reef health. Despite being the largest sculpin, they are often overlooked in management — cabezon illustrate how non-commercial species play critical ecological roles.
+
+**Threats:** Recreational overfishing (important sport fish); commercial harvest in some areas; nest disturbance during egg-guarding period; kelp forest loss reducing habitat.
+
+**Cultural Significance:** Coast Salish food fish. Documented as a traditional food species in Coast Salish fisheries, harvested from nearshore reefs. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** O'Connell (1953) — cabezon life history; Lauth (1988) — sculpin ecology; Lamb & Edgell (2010)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Dungeness crab (prey), Lingcod (co-occurring reef predator)
+- See ecological-networks: Rocky Reef food web (largest sculpin, nearshore apex)
+
+---
+
+### Wolf-eel (*Anarrhichthys ocellatus*)
+
+**Taxonomy:** Perciformes > Anarhichadidae
+**Elevation Band:** ELEV-SHALLOW-MARINE, ELEV-DEEP-MARINE
+**Habitat:** HAB-REEF
+**Ecological Role:** ROLE-SECONDARY-CONSUMER, ROLE-KEYSTONE
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Large, elongate reef fish, 6-8 ft long. Not a true eel — a wolf-fish (family Anarhichadidae). Gray-brown with dark spots, powerful crushing jaws designed to break hard-shelled prey. Pairs mate for life and occupy the same rocky den for years, sometimes decades. Habituated pairs in popular dive sites allow divers remarkably close approach.
+
+**Elevation Range:** -20 to -700 ft (y=-42--58)
+**Distribution:** Rocky reefs from Alaska to southern California. Most common on reefs with abundant crevices and boulder habitat at 30-200 ft depth. Puget Sound and San Juan Islands support well-known den sites popular with divers.
+
+**Ecological Significance:**
+Reef keystone species — the primary predator of sea urchins, crabs, and hard-shelled mollusks on rocky reefs. Wolf-eel crushing jaws exert enormous force, allowing them to consume prey (especially sea urchins) that few other reef predators can handle. By controlling urchin populations on reefs, wolf-eels help prevent urchin overgrazing of algae and kelp. Their lifelong pair bonds and extreme den fidelity (same den for 10+ years) make them indicators of reef stability — the presence of a wolf-eel pair signals an intact reef community.
+
+**Threats:** Incidental capture in recreational and commercial fisheries; den habitat loss from bottom disturbance; diver harassment at habituated den sites; slow reproduction.
+
+**Cultural Significance:** Not specifically documented in PNW ethnographic literature.
+
+**Key Sources:** Barley & Bond (1988) — wolf-eel biology; Lamb & Edgell (2010); Seattle Aquarium dive survey records
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Red sea urchin (prey — urchin population control)
+- See ecological-networks: Rocky Reef food web (urchin predator, pair-bonded reef keystone)
+
+---
+
+### Spiny Dogfish (*Squalus suckleyi*)
+
+**Taxonomy:** Squaliformes > Squalidae
+**Elevation Band:** ELEV-SHALLOW-MARINE, ELEV-DEEP-MARINE
+**Habitat:** HAB-PELAGIC
+**Ecological Role:** ROLE-APEX-PREDATOR
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE (Pacific species recently split from Atlantic *S. acanthias*)
+
+**Description:** Small shark, 3-4 ft. Gray-brown above, white below. Two dorsal fins, each with a sharp venomous spine (hence "spiny"). No anal fin. The most abundant shark in PNW waters. Long-lived (70-100 years) with extremely slow reproduction — 2-year gestation period producing 1-15 live pups.
+
+**Elevation Range:** 0 to -700 ft (y=-41--58)
+**Distribution:** Throughout PNW coastal and inland waters from Alaska to Baja California. Common in Puget Sound — large schools patrol nearshore waters. *Squalus suckleyi* was recently recognized as a separate species from the Atlantic spiny dogfish (*S. acanthias*), a Pacific endemic.
+
+**Ecological Significance:**
+The most abundant shark in the northeastern Pacific, playing a critical role as a mid-level predator on herring, sand lance, squid, and other forage fish. Spiny dogfish school behavior allows them to exert significant predation pressure on forage fish populations, contributing to top-down control of the pelagic food web. Historically subjected to massive overharvest — millions killed annually in 20th century shark-liver oil fisheries and as bycatch, and marketed as "rock salmon" in British fish-and-chips. Their extremely slow reproduction (latest age at maturity of any shark — females mature at 35+ years) makes population recovery from overharvest a multi-generational process.
+
+**Threats:** Bycatch in commercial fisheries; historical overharvest (populations recovering); contaminant bioaccumulation; slow reproduction limits recovery rate.
+
+**Cultural Significance:** Coast Salish and Makah peoples used dogfish liver oil as a preservative, fuel, and trade commodity. Dogfish skin was used as sandpaper for woodworking (abrasive dermal denticles). (CULT-FOOD-MEDICINE, CULT-TEK)
+
+**Key Sources:** Ebert (2003) — sharks of the PNW; Taylor & Gallucci (2009) — Pacific spiny dogfish; WDFW shark management
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Pacific herring, Pacific sand lance (forage fish prey)
+- See ecological-networks: Salish Sea food web (most abundant PNW shark, mid-level predator)
+
+---
+
 ## 5. Marine Invertebrates
 
 PNW marine waters support an estimated 3,000+ invertebrate species, from microscopic zooplankton to giant Pacific octopus. Marine invertebrates form the prey base for most marine vertebrates, structure benthic habitats (mussels, barnacles, corals, sponges), and include keystone species whose presence or absence transforms entire communities. Several PNW invertebrates are commercially and culturally vital.
@@ -1145,16 +1451,325 @@ Living fossils — glass sponge reefs were a dominant feature of Jurassic seas, 
 
 ---
 
+### Acorn Barnacle (*Balanus glandula*)
+
+**Taxonomy:** Sessilia > Balanidae
+**Elevation Band:** ELEV-INTERTIDAL
+**Habitat:** HAB-ROCKY-INTERTIDAL
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Small sessile barnacle, 0.5-1 in diameter. White to gray conical shell with diamond-shaped opening. Cemented directly to rock substrate. Dominant high intertidal zone species — the first visible organism above the mussel band on rocky shores. Filter feeds by extending feathery cirri (modified legs) to capture plankton from wave wash.
+
+**Elevation Range:** 0 ft (y=-41)
+**Distribution:** Rocky shores throughout the PNW from Alaska to Baja California. Dominates the high intertidal zone on exposed and semi-exposed rocky coastline. Among the most abundant intertidal organisms on Earth within its range.
+
+**Ecological Significance:**
+THE barnacle of Robert Paine's foundational keystone species experiments at Tatoosh Island (Makah tribal territory). Acorn barnacles create substrate complexity in the high intertidal — their shells provide attachment surfaces and crevice habitat for small invertebrates, algae, and newly settled larvae. Barnacle cover mediates competitive interactions between mussels and algae, and barnacle abundance is controlled by predation from snails (*Nucella* species) and sea stars. Barnacle settlement patterns serve as indicators of larval supply and oceanographic conditions — barnacle recruitment is one of the longest-monitored marine ecological time series in the PNW.
+
+**Threats:** Generally abundant and secure; ocean acidification may affect shell formation; oil spills can smother intertidal barnacle zones.
+
+**Cultural Significance:** Not specifically documented as a food or material resource in PNW ethnographic literature.
+
+**Key Sources:** Paine (1966, 1974) — intertidal community ecology; Connell (1961) — barnacle competition; Menge et al. — long-term intertidal monitoring
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Ochre sea star (predation cascade), California mussel (competitive interaction)
+- See ecological-networks: Intertidal food web (dominant high-zone sessile organism, Paine experiments)
+
+---
+
+### Giant Acorn Barnacle (*Balanus nubilus*)
+
+**Taxonomy:** Sessilia > Balanidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-ROCKY-INTERTIDAL, HAB-WHARF-PILING
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** The world's largest barnacle — shell up to 6 in diameter and 4 in tall. White, heavily ribbed conical shell. PNW native. Found on rocks, pilings, and floating structures. Empty tests (shells) of dead individuals provide habitat for small fish, hermit crabs, and other invertebrates.
+
+**Elevation Range:** 0 to -80 ft (y=-41--43)
+**Distribution:** Low intertidal to shallow subtidal on rocky shores and human-made structures throughout PNW. Common on dock pilings, floating docks, and breakwaters in addition to natural rocky substrate.
+
+**Ecological Significance:**
+Ecosystem engineer through sheer size — giant acorn barnacle tests create significant three-dimensional habitat in the low intertidal and shallow subtidal. Empty shells serve as shelter for juvenile fish, small crabs, and a community of tiny invertebrates. Living barnacles are powerful filter feeders, processing substantial volumes of water and transferring planktonic energy to the benthic community. Their size makes them a dominant feature of the biofouling community on pilings and docks, providing habitat structure on otherwise smooth surfaces.
+
+**Threats:** Generally secure; biofouling removal from docks and pilings destroys habitat; pollution from marina operations; ocean acidification effects on shell growth.
+
+**Cultural Significance:** Coast Salish harvest documented. Giant barnacles were collected as food from intertidal rocks — the large body size made them worth harvesting unlike smaller barnacle species. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Kozloff (1993) — seashore life of the PNW; Barnes & Reese (1960) — barnacle biology; Lamb & Hanby (2005)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Acorn barnacle (smaller congener, competitive relationship)
+- See ecological-networks: Intertidal food web (world's largest barnacle, habitat engineer)
+
+---
+
+### Butter Clam (*Saxidomus gigantea*)
+
+**Taxonomy:** Venerida > Veneridae
+**Elevation Band:** ELEV-INTERTIDAL
+**Habitat:** HAB-SAND-FLAT
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Recreationally managed | IUCN: NE
+
+**Description:** Large bivalve, 4-5 in, heavy oval shell with concentric growth rings. White to gray exterior, smooth white interior. Lives buried 6-12 in deep in sand and gravel substrate. Long-lived — individual clams aged at 20+ years. Named for the rich, buttery flavor of the meat.
+
+**Elevation Range:** 0 ft (y=-41)
+**Distribution:** Sandy-gravel beaches throughout PNW from Alaska to California. Intertidal to shallow subtidal, common in protected bays and beaches of Puget Sound and Strait of Georgia.
+
+**Ecological Significance:**
+A First Food and central species in Coast Salish clam garden management — the world's oldest mariculture system. Archaeological middens across the Salish Sea contain billions of butter clam shells spanning 5,000+ years of continuous harvest, documenting the longest-duration human-shellfish relationship in the PNW. Butter clams are unusual in their capacity to retain paralytic shellfish poisoning (PSP) toxins — they bioaccumulate saxitoxin from harmful algal blooms and retain it far longer than other clam species, creating a food safety concern that Coast Salish peoples managed through traditional ecological knowledge of bloom timing and safe harvest periods.
+
+**Threats:** Harmful algal blooms (PSP toxin retention causes extended harvest closures); ocean acidification (shell formation); habitat disturbance from shoreline development; recreational overharvest at accessible beaches.
+
+**Cultural Significance:** Deeply significant for Coast Salish, Makah, and all coastal PNW nations. Clam gardens — rock walls built at specific tidal elevations to extend productive clam habitat — are the world's oldest documented mariculture systems, practiced by Saanich, Hul'qumi'num, Tla'amin, and other nations for millennia. Butter clam harvest was a year-round food source managed through traditional ecological knowledge of tides, seasons, and toxin risk. (CULT-FOOD-MEDICINE, CULT-TEK, CULT-MANAGEMENT)
+
+**Key Sources:** Groesbeck et al. (2014) — clam garden productivity; Deur et al. (2015) — Coast Salish clam management; WDFW shellfish management
+
+**Cross-Module References:**
+- See heritage-bridge: Clam Gardens (Coast Salish mariculture — direct link)
+- See fauna-marine-aquatic: Olympia oyster (co-managed shellfish), Manila clam (co-occurring harvest species)
+- See ecological-networks: Intertidal food web (First Food, mariculture keystone)
+
+---
+
+### Manila Clam (*Ruditapes philippinarum*)
+
+**Taxonomy:** Venerida > Veneridae
+**Elevation Band:** ELEV-INTERTIDAL
+**Habitat:** HAB-SAND-FLAT
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Recreationally managed | IUCN: NE
+
+**Description:** Small to medium bivalve, 2-3 in. Oval shell with distinctive radiating ribs crossed by concentric growth lines, creating a lattice pattern. Shell color variable — white, brown, or patterned. Lives shallowly buried (2-4 in deep) in sand and gravel. Introduced species — arrived from Japan accidentally with Pacific oyster seed shipments around the 1930s.
+
+**Elevation Range:** 0 ft (y=-41)
+**Distribution:** Intertidal sand and gravel beaches throughout Puget Sound, Strait of Georgia, and scattered outer coast locations. Now the most commonly harvested recreational clam species in Washington state, outnumbering native littleneck clams at many beaches.
+
+**Ecological Significance:**
+A successful non-native species that has become deeply integrated into PNW intertidal ecology and human harvest culture. Manila clams arrived accidentally with Japanese Pacific oyster (*Crassostrea gigas*) seed imports in the 1930s and rapidly colonized suitable intertidal habitat. Unlike many introduced species, Manila clams occupy a niche (shallow burial in mixed sand-gravel) that partially overlaps with but does not fully displace native littleneck clams. Their high abundance and accessibility make them the dominant recreational clam harvest species, reducing harvest pressure on native butter clams and littlenecks.
+
+**Threats:** Harmful algal blooms (PSP biotoxin closures); ocean acidification; habitat degradation from shoreline development; raccoon predation at some beaches.
+
+**Cultural Significance:** Now incorporated into Coast Salish harvest practices alongside native clam species. While not a traditional First Food, Manila clams have become part of contemporary tribal and recreational shellfish harvest for nearly a century. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Quayle (1964) — Manila clam introduction history; WDFW recreational shellfish management; Gillespie et al. (2012)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Butter clam, Olympia oyster (co-occurring intertidal shellfish)
+- See ecological-networks: Intertidal food web (introduced species, recreational harvest)
+
+---
+
+### Lewis's Moon Snail (*Neverita lewisii*)
+
+**Taxonomy:** Littorinimorpha > Naticidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-SAND-FLAT
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** The largest moon snail in the PNW — globular shell to 5 in diameter, tan to gray-brown. Enormous fleshy foot (when extended, much larger than the shell) plows through sand hunting buried clams. Creates distinctive "sand collar" egg masses — a ring of eggs embedded in a sand-and-mucus matrix that hardens into a collar-shaped structure. Named for Meriwether Lewis of the Lewis and Clark Expedition.
+
+**Elevation Range:** 0 to -60 ft (y=-41--42)
+**Distribution:** Sandy intertidal and shallow subtidal flats throughout PNW from Alaska to Baja California. Common on clam-bearing sand flats in Puget Sound and outer coast estuaries.
+
+**Ecological Significance:**
+The primary predator of burrowing bivalves on sandy flats. Lewis's moon snails hunt by plowing through sand, enveloping prey clams with their enormous foot, and drilling a neat, perfectly circular hole through the shell using a combination of acid secretion and radula rasping. The characteristic drill holes in beach-collected clam shells are almost always the work of moon snails. Moon snail predation is an important top-down control on clam populations, and their sand collar egg masses are a recognizable indicator of healthy sand flat communities.
+
+**Threats:** Generally secure; recreational harvest for shells; habitat disturbance from clam digging operations; ocean acidification may affect shell formation.
+
+**Cultural Significance:** Coast Salish peoples collected moon snail shells and recognized sand collar egg masses as part of beach ecology. Moon snail shells appear in Coast Salish art and collections. (CULT-TEK)
+
+**Key Sources:** Kozloff (1993); Kingsley-Smith et al. (2003) — naticid predation; Lamb & Hanby (2005)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Butter clam, Manila clam (prey species drilled by moon snails)
+- See ecological-networks: Intertidal food web (apex sand flat predator, drill-hole signature)
+
+---
+
+### Purple Sea Urchin (*Strongylocentrotus purpuratus*)
+
+**Taxonomy:** Camarodonta > Strongylocentrotidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-ROCKY-INTERTIDAL, HAB-KELP
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Medium sea urchin, 2-4 in diameter. Dense covering of short, sharp purple spines. Lives in rocky crevices and on exposed rock surfaces in the intertidal and shallow subtidal. Grazes on algae and kelp using a complex jaw apparatus (Aristotle's lantern) with five self-sharpening teeth.
+
+**Elevation Range:** 0 to -100 ft (y=-41--43)
+**Distribution:** Rocky shores from Alaska to Baja California. Abundant in PNW intertidal and shallow subtidal zones. Often found in dense aggregations on rocky reefs, especially where predators have been removed.
+
+**Ecological Significance:**
+The urchin barren driver of the PNW coast. When predators (sea otters, sunflower sea stars, wolf-eels) are present, purple urchin populations are held in check by predation and the "fear effect" (urchins hide in crevices). When predators are removed, purple urchins emerge from crevices and form grazing fronts that overgraze kelp forests down to bare rock — creating "urchin barrens" devoid of macroalgae and the hundreds of species kelp forests support. This trophic cascade is actively destroying PNW kelp forests following the loss of sunflower sea stars to SSWS (2013-present) and the historical extirpation of sea otters. Purple urchins are also a model organism — the first marine invertebrate to have its genome fully sequenced, providing foundational data for developmental biology.
+
+**Threats:** Not threatened (overabundant in many areas where predators are absent); their overabundance IS the threat to kelp forests; ocean acidification may affect larval development.
+
+**Cultural Significance:** Not specifically documented as a food species in PNW ethnographic literature (green urchin and red urchin preferred for uni harvest).
+
+**Key Sources:** Estes & Palmisano (1974) — otter-urchin-kelp cascade; Rogers-Bennett & Catton (2019) — urchin barrens; Sea Urchin Genome Sequencing Consortium (2006)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Red sea urchin (congener, kelp forest cascade), Sunflower sea star (predator lost to SSWS), Sea otter (historical predator), Wolf-eel (reef predator on urchins)
+- See ecological-networks: Kelp Forest Trophic Cascade (herbivore driving barren formation)
+
+---
+
+### Eccentric Sand Dollar (*Dendraster excentricus*)
+
+**Taxonomy:** Clypeasteroida > Dendrasteridae
+**Elevation Band:** ELEV-SHALLOW-MARINE
+**Habitat:** HAB-SAND-FLAT
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Flat, disc-shaped echinoderm, 2-4 in diameter. Gray-brown to lavender when alive (white when dead — the familiar beach shell). Five-petaled pattern on upper surface is off-center (hence "eccentric"). Covered in short, velvety spines used for burrowing and locomotion. Lives partially buried in sand, tilted at an angle to the current.
+
+**Elevation Range:** -5 to -120 ft (y=-41--44)
+**Distribution:** Sandy bottoms of protected bays and shallow coastal waters from Alaska to Baja California. Abundant in Puget Sound and Strait of Georgia. Forms dense beds (100+ per m2) on stable sandy substrate.
+
+**Ecological Significance:**
+Puget Sound indicator species — sand dollar abundance reflects the health of shallow sandy bay ecosystems. Dense sand dollar beds stabilize sandy substrate through their burrowing activity and provide food for sea stars, crabs, and flatfish that crush their tests for the gonads inside. Sand dollars feed on detritus, diatoms, and organic particles, transferring energy from the sand surface to the broader food web. Their orientation behavior (tilting into the current to maximize food capture) and dense aggregations create complex small-scale habitat structure on otherwise featureless sand flats. Washed-up sand dollar tests are among the most recognized marine organisms encountered by beachgoers.
+
+**Threats:** Generally secure; dredging and bottom trawling destroy sand dollar beds; sediment pollution can smother beds; ocean acidification may affect test formation.
+
+**Cultural Significance:** Not specifically documented as a food or material resource in PNW ethnographic literature.
+
+**Key Sources:** Merrill & Hobson (1970) — sand dollar ecology; Chia (1969) — sand dollar aggregation; Kozloff (1993)
+
+**Cross-Module References:**
+- See ecological-networks: Sand Flat food web (shallow bay indicator, detritivore)
+
+---
+
+### Opalescent Nudibranch (*Hermissenda opalescens*)
+
+**Taxonomy:** Nudibranchia > Facelinidae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-ROCKY-INTERTIDAL, HAB-KELP
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Small, spectacular sea slug, 1-3 in. Translucent body with bright orange cerata (finger-like projections along the back) tipped in electric blue-white. Orange stripe down the center of the back. One of the most visually striking intertidal organisms in the PNW — a living jewel of the tidepool.
+
+**Elevation Range:** 0 to -100 ft (y=-41--43)
+**Distribution:** Rocky intertidal and shallow subtidal throughout PNW from Alaska to Baja California. Found in tidepools, on dock pilings, and on kelp in the shallow subtidal.
+
+**Ecological Significance:**
+A key model organism in neuroscience — opalescent nudibranchs were central to foundational research on learning and memory at the cellular level. Their relatively simple nervous system (with large, identifiable neurons) allowed researchers to map specific cells responsible for associative learning, classical conditioning, and memory formation. Beyond their role in science, these nudibranchs display a remarkable defense strategy: they consume cnidarians (hydroids, anemones) and steal the unfired stinging cells (cnidocytes), transporting them intact through their digestive system to the tips of their cerata, where they deploy them as their own defense — a biological weapons theft called kleptocnidae.
+
+**Threats:** Generally secure; pollution from marina and industrial runoff; tidepool disturbance from foot traffic; collection for aquarium trade.
+
+**Cultural Significance:** Not specifically documented in PNW ethnographic literature.
+
+**Key Sources:** Avila (2006) — nudibranch biology; Frost et al. (1985) — *Hermissenda* learning and memory; Kozloff (1993)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Giant green anemone (cnidarian prey source for kleptocnidae)
+- See ecological-networks: Intertidal food web (neuroscience model organism, kleptocnidae defense)
+
+---
+
+### Blood Star (*Henricia leviuscula*)
+
+**Taxonomy:** Spinulosida > Echinasteridae
+**Elevation Band:** ELEV-INTERTIDAL, ELEV-SHALLOW-MARINE
+**Habitat:** HAB-ROCKY-INTERTIDAL
+**Ecological Role:** ROLE-SECONDARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Medium sea star, 4-8 in diameter. Bright red, orange, or sometimes yellow-orange. Five slender, evenly tapering arms. Smooth, fine-grained surface (unlike the rough, spiny texture of ochre stars). Sponge specialist — feeds by everting stomach over encrusting sponges and digesting them externally.
+
+**Elevation Range:** 0 to -200 ft (y=-41--46)
+**Distribution:** Rocky shores and shallow subtidal reefs from Alaska to Baja California. Common in the PNW low intertidal and shallow subtidal, often found on the undersides of rocks and ledges where sponges grow.
+
+**Ecological Significance:**
+A critically important SSWS survivor. While Sea Star Wasting Syndrome (2013-present) devastated ochre stars (80-90% mortality) and drove sunflower sea stars to near-extinction, blood stars largely survived the epidemic. Their relative resistance to SSWS makes them an indicator of rocky reef health in the post-SSWS era — where blood stars persist, the reef substrate community remains intact even as other sea star populations collapse. Blood star sponge predation controls encrusting sponge growth on rocky substrate, maintaining bare rock patches where other organisms can settle. In a PNW intertidal stripped of its keystone ochre stars, the persistence of blood stars provides ecological continuity.
+
+**Threats:** Sea Star Wasting Syndrome (affected but survived at higher rates than co-occurring species); ocean warming; habitat disturbance.
+
+**Cultural Significance:** Not specifically documented in PNW ethnographic literature.
+
+**Key Sources:** Hewson et al. (2014) — SSWS; Lambert (2000) — sea star ecology; Menge et al. — intertidal monitoring
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Ochre sea star, Sunflower sea star (co-occurring species devastated by SSWS)
+- See ecological-networks: Intertidal food web (SSWS survivor, sponge predator, post-wasting indicator)
+
+---
+
+### Goose Barnacle (*Pollicipes polymerus*)
+
+**Taxonomy:** Pedunculata > Pollicipedidae
+**Elevation Band:** ELEV-INTERTIDAL
+**Habitat:** HAB-ROCKY-INTERTIDAL
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: NE
+
+**Description:** Stalked barnacle, 2-3 in total length. Fleshy, flexible stalk (peduncle) topped by white calcareous plates protecting the feeding apparatus. Lives in dense clusters on the most wave-exposed rocky surfaces — a high-energy outer coast specialist. Filter feeds on plankton by extending feathery cirri into wave wash.
+
+**Elevation Range:** 0 ft (y=-41)
+**Distribution:** Wave-exposed rocky outer coast from British Columbia to Baja California. NOT found in protected inland waters (Puget Sound). Requires extreme wave energy — found only on the most exposed headlands, offshore rocks, and surge channels where wave force is greatest.
+
+**Ecological Significance:**
+A wave-energy indicator species — goose barnacle presence defines the most extreme wave-exposure zones on PNW rocky coastline. Their dense clusters (thousands per m2 on optimal surfaces) create habitat complexity on wave-battered rock, sheltering small invertebrates in the interstices between stalks. Goose barnacles filter enormous volumes of surf-zone water, converting planktonic energy to benthic biomass in the highest-energy intertidal zone. Their restriction to the outer coast makes them indicators of oceanic influence versus estuarine conditions.
+
+**Threats:** Generally secure in their wave-exposed habitat (inaccessibility is natural protection); oil spills can devastate exposed coast populations; harvest pressure in some areas (prized as delicacy — *percebes* — in European markets, but PNW harvest is limited).
+
+**Cultural Significance:** First Food — harvested by Makah and Nuu-chah-nulth peoples on the outer coast of Washington and Vancouver Island. Goose barnacle gathering required access to dangerous, wave-exposed rocks and was a skilled, physically demanding harvest activity. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Lewis (1975) — goose barnacle ecology; Barnes & Reese (1960); Kozloff (1993)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Acorn barnacle (sessile barnacle congener — different wave exposure niche)
+- See ecological-networks: Outer Coast Intertidal food web (wave-energy indicator, First Food)
+
+---
+
+### Pacific Oyster (*Magallana gigas*)
+
+**Taxonomy:** Ostreida > Ostreidae
+**Elevation Band:** ELEV-INTERTIDAL
+**Habitat:** HAB-ESTUARY, HAB-SAND-FLAT
+**Ecological Role:** ROLE-PRIMARY-CONSUMER
+**Conservation Status:** Federal: Not listed | WA: Commercially managed | IUCN: NE
+
+**Description:** Large oyster, 3-12 in (highly variable shape). Rough, deeply cupped shell with fluted edges. Gray-white exterior. Introduced from Japan to the PNW in the 1920s-1930s to replace collapsed native Olympia oyster populations. Now the dominant aquaculture oyster species in PNW estuaries.
+
+**Elevation Range:** 0 ft (y=-41)
+**Distribution:** Cultivated and feral populations in PNW estuaries from British Columbia to California. Willapa Bay (WA) is the largest oyster-producing estuary on the West Coast. Also present in Puget Sound, Grays Harbor, Tillamook Bay, and Coos Bay.
+
+**Ecological Significance:**
+Ocean acidification sentinel species — PNW oyster hatcheries were the first in the world to document catastrophic impacts of ocean acidification on commercial shellfish. Between 2005 and 2008, Whiskey Creek and other PNW hatcheries experienced repeated larval die-offs traced to upwelled low-pH water dissolving the thin calcium carbonate shells of newly formed oyster larvae. This discovery made PNW oyster growers the earliest commercial victims of ocean acidification, catalyzing research investment and monitoring infrastructure. Pacific oysters also provide ecological services: reef-forming in estuaries (creating habitat similar to native Olympia oyster), water filtration (each oyster filters 50+ gallons/day), and shoreline stabilization.
+
+**Threats:** Ocean acidification (larval sensitivity documented in PNW — the global canary in the coal mine); marine heat waves; introduced parasites and diseases (Norovirus monitoring); competition with and displacement of native Olympia oyster.
+
+**Cultural Significance:** Significant economic driver for PNW coastal communities. Tribal shellfish harvest rights affirmed by the Rafeedie Decision (1994, United States v. Washington — extending the Boldt Decision framework to shellfish). The Rafeedie Decision recognized treaty tribes' right to harvest shellfish from all usual and accustomed grounds, including commercial shellfish beds. (CULT-FOOD-MEDICINE, CULT-LEGAL)
+
+**Key Sources:** Barton et al. (2015) — ocean acidification and PNW shellfish; Dumbauld et al. (2009) — Pacific oyster ecology; Rafeedie Decision (1994)
+
+**Cross-Module References:**
+- See fauna-marine-aquatic: Olympia oyster (native oyster displaced by Pacific oyster introduction)
+- See heritage-bridge: Treaty Rights, Rafeedie Decision (shellfish sovereignty)
+- See ecological-networks: Estuary food web (introduced aquaculture species, acidification sentinel)
+
+---
+
 ## Summary Statistics
 
 | Group | Species Profiled | ESA Listed | Key Conservation Issues |
 |-------|-----------------|------------|------------------------|
 | **Pacific Salmon + Steelhead** | 6 | 20+ ESUs across species | Dam passage, habitat loss, hatchery impacts, 4 H's |
-| **Other Freshwater Fish** | 6 | 3 (Bull trout, Eulachon, Kootenai sturgeon) | Cold water loss, passage barriers, cultural food recovery |
+| **Other Freshwater Fish** | 8 | 3 (Bull trout, Eulachon, Kootenai sturgeon) | Cold water loss, passage barriers, cultural food recovery |
 | **Marine Mammals** | 8 | 3 (SRKW, Sea otter, Steller sea lion W. DPS) | Chinook decline, contaminants, vessel noise, kelp loss |
-| **Marine Fish** | 6 | 0 | Overharvest of long-lived species, kelp loss, deep basin threats |
-| **Marine Invertebrates** | 9 | 0 (Sunflower star under review) | SSWS, ocean acidification, urchin barrens, overharvest |
-| **Total** | **35** | **26+ ESUs/DPSs** | |
+| **Marine Fish** | 15 | 2 (Yelloweye rockfish, Canary rockfish — PS/Georgia Basin DPS) | Overharvest of long-lived species, forage fish beach habitat loss, kelp loss, deep basin threats |
+| **Marine Invertebrates** | 24 | 0 (Sunflower star under review) | SSWS, ocean acidification, urchin barrens, overharvest, clam garden conservation |
+| **Total** | **61** | **28+ ESUs/DPSs** | |
 
 ---
 
@@ -1168,7 +1783,7 @@ Living fossils — glass sponge reefs were a dominant feature of Jurassic seas, 
 | **Fungi-Microbiome** | Chytrid fungus shared context; Marine pathogens (SSWS); Mycorrhizal benefit from salmon-derived nutrients |
 | **Fauna-Terrestrial** | Salmon → bear nutrient transport; Salmon → eagle nutrient transport; Beaver → coho habitat engineering; Otter-mink prey overlap |
 | **Ecological Networks** | Marine-Derived Nutrient Transport (salmon as keystone vector); Kelp Forest Trophic Cascade (otter → urchin → kelp); Intertidal keystone dynamics; Salish Sea food web |
-| **Heritage Bridge** | First Salmon Ceremony; Reef Net Fishing; Makah Whaling; Grease Trails; Clam Gardens; Treaty Rights; Coast Salish Orca Protocol; Geoduck Lushootseed etymology |
+| **Heritage Bridge** | First Salmon Ceremony; Reef Net Fishing; Makah Whaling; Grease Trails; Clam Gardens; Treaty Rights; Coast Salish Orca Protocol; Geoduck Lushootseed etymology; Rafeedie Decision (shellfish treaty rights); Goose barnacle outer coast harvest (Makah, Nuu-chah-nulth) |
 
 ### Key Ecological Themes
 
@@ -1184,9 +1799,13 @@ Living fossils — glass sponge reefs were a dominant feature of Jurassic seas, 
 
 6. **Keystone concept born here:** Robert Paine's 1966 experiments at Tatoosh Island (Makah territory) — removing ochre sea stars and documenting mussel bed expansion — created the keystone species concept that transformed ecology. The PNW intertidal remains the world's best-studied keystone system.
 
+7. **Forage fish as the critical link:** Sand lance, surf smelt, herring, and anchovy form the energy bridge between plankton and every top predator in PNW marine ecosystems — orcas, whales, salmon, seabirds, and seals all depend on forage fish abundance. Unlike salmon, forage fish have no ESA protection and limited monitoring despite their keystone prey role. Sand lance and surf smelt are beach spawners whose reproduction depends on unarmored shorelines — every bulkhead, riprap wall, and beach modification eliminates spawning habitat for the species that feed everything else. The forage fish food web is the hidden foundation beneath the charismatic megafauna.
+
+8. **Mariculture and clam gardens:** Coast Salish clam gardens (rock walls built to extend productive intertidal habitat) represent the world's oldest documented mariculture systems, predating European aquaculture by millennia. Butter clam middens spanning 5,000+ years document continuous human-shellfish co-management. The Rafeedie Decision (1994) extended Boldt Decision treaty fishing rights to shellfish, affirming tribal co-management of clam, oyster, and geoduck resources. PNW shellfish management is inseparable from Indigenous food sovereignty.
+
 ---
 
-*Document version: 1.0*
+*Document version: 2.0*
 *Created for: PNW Living Systems Taxonomy & Chipset (ECO mission)*
 *Module: Fauna — Aquatic & Marine Reference (Phase 625)*
-*Species count: 35 (6 salmon/steelhead, 6 freshwater fish, 8 marine mammals, 6 marine fish, 9 marine invertebrates)*
+*Species count: 61 (6 salmon/steelhead, 8 freshwater fish, 8 marine mammals, 15 marine fish, 24 marine invertebrates)*
