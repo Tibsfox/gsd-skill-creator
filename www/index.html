@@ -4,48 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tibsfox — Research &amp; Documentation</title>
+  <link rel="stylesheet" href="brand.css">
   <style>
-    :root {
-      --canopy: #1a3a2a;
-      --forest: #2d5a3a;
-      --meadow: #4a7c3f;
-      --river: #2a6496;
-      --deep: #1b3a4b;
-      --rock: #4a5568;
-      --soil: #5c4033;
-      --bark: #4a3728;
-      --cream: #f8f6f0;
-      --mist: #e4e8e0;
-      --snow: #d4dce8;
-      --salmon: #c75b3a;
-      --moss: #7a9a5a;
-      --text: #2c2c2c;
-      --text-light: #5a5a5a;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      color: var(--text);
-      background: var(--cream);
-      line-height: 1.7;
-    }
-
-    a { color: var(--river); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
+    /* === Root page overrides === */
     header {
-      background: linear-gradient(135deg, var(--canopy) 0%, var(--forest) 25%, var(--river) 55%, var(--deep) 80%, var(--rock) 100%);
+      background: linear-gradient(135deg, var(--ink) 0%, var(--fox-deep) 20%, var(--fox) 45%, var(--fox-warm) 65%, var(--splatter) 85%, var(--parchment-deep) 100%);
       color: white;
-      padding: 3rem 2rem;
-      border-bottom: 4px solid var(--moss);
+      padding: 0;
+      border-bottom: 4px solid var(--fox-warm);
     }
-    header h1 { font-size: 2.4rem; font-weight: 400; letter-spacing: 0.02em; }
-    header .subtitle { font-size: 1.05rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
-    header nav { margin-top: 1rem; }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 2rem;
+      max-width: 68rem;
+      margin: 0 auto;
+    }
+    .brand-mark {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.3);
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .header-text h1 {
+      font-size: 2.4rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .header-text .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+    header nav {
+      margin-top: 0.8rem;
+    }
     header nav a {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.85);
       margin-right: 1.2rem;
       font-family: system-ui, sans-serif;
       font-size: 0.88rem;
@@ -54,7 +55,11 @@
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
     }
-    header nav a:hover { color: white; border-bottom-color: rgba(255,255,255,0.5); text-decoration: none; }
+    header nav a:hover {
+      color: white;
+      border-bottom-color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
 
     main {
       max-width: 64rem;
@@ -62,139 +67,58 @@
       padding: 2rem 1.5rem 4rem;
     }
 
-    h2 {
-      font-size: 1.5rem;
-      color: var(--canopy);
-      margin: 2.5rem 0 1rem;
-      padding-bottom: 0.3rem;
-      border-bottom: 2px solid var(--mist);
-    }
-    h3 { font-size: 1.15rem; color: var(--bark); margin: 0 0 0.3rem; }
-    p { margin: 0.8rem 0; }
-
-    blockquote {
-      border-left: 3px solid var(--forest);
-      padding: 0.8rem 1.2rem;
-      margin: 1.5rem 0;
-      background: rgba(45, 90, 58, 0.05);
-      font-style: italic;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
-      padding: 1.2rem;
-      background: white;
-      border: 1px solid var(--mist);
-      border-radius: 6px;
-    }
-    .stat { text-align: center; }
-    .stat-value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--canopy);
-      display: block;
-      font-family: system-ui, sans-serif;
-    }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-family: system-ui, sans-serif;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
-      margin: 1.5rem 0;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid var(--mist);
-      border-radius: 8px;
-      padding: 1.5rem;
-      transition: box-shadow 0.2s, transform 0.15s;
-      display: block;
-    }
-    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); text-decoration: none; }
-
-    .card .accent-bar { height: 4px; border-radius: 2px; margin-bottom: 1rem; }
-    .card .meta {
-      font-size: 0.82rem;
-      color: var(--text-light);
-      font-family: system-ui, sans-serif;
-      margin-bottom: 0.5rem;
-    }
-    .card p { font-size: 0.92rem; margin: 0; color: var(--text); }
-
-    .tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      padding: 0.12rem 0.45rem;
-      border-radius: 3px;
-      font-family: system-ui, sans-serif;
-      margin-right: 0.2rem;
-    }
-    .tag-eco { background: #e0f2f1; color: #00695c; }
-    .tag-col { background: #e3f2fd; color: #1565c0; }
-    .tag-cas { background: #eceff1; color: #37474f; }
-    .tag-gdn { background: #e8f5e9; color: #2e7d32; }
-    .tag-avi { background: #e3f2fd; color: #2c5282; }
-    .tag-mam { background: #efebe9; color: #4a3728; }
-    .tag-bcm { background: #e8eaf6; color: #263238; }
-    .tag-she { background: #e0f2f1; color: #004d40; }
-    .tag-bps { background: #ede7f6; color: #4a148c; }
-    .tag-ffa { background: #f3e5f5; color: #6a1b9a; }
-    .tag-tibs { background: #efebe9; color: #5d4037; }
-    .tag-led { background: #fff8e1; color: #b45309; }
-    .tag-sys { background: #E8F5E9; color: #1B5E20; }
-    .tag-vav { background: #e8eaf6; color: #283593; }
-    .tag-art { background: #fce4ec; color: #880e4f; }
-    .tag-uni { background: #e8eaf6; color: #37474f; }
-    .tag-rel { background: #fff3e0; color: #bf360c; }
-
     .section-intro {
       font-size: 0.95rem;
-      color: var(--text-light);
+      color: var(--charcoal);
       margin-bottom: 1rem;
     }
 
-    footer {
-      max-width: 64rem;
-      margin: 0 auto;
-      padding: 1.5rem;
-      border-top: 2px solid var(--mist);
-      font-size: 0.82rem;
-      color: var(--text-light);
-      font-family: system-ui, sans-serif;
+    /* Card accent bars use project-specific gradients (inline) */
+    .card:hover { text-decoration: none; }
+    .card h3 { color: var(--ink-soft); }
+
+    /* Stats: fox accent on the root page */
+    .stat-value { color: var(--fox); }
+
+    /* Source code card uses fox gradient */
+    .card-source .accent-bar {
+      background: linear-gradient(90deg, var(--fox-deep), var(--fox-warm)) !important;
     }
-    footer a { margin-right: 0.8rem; }
+
+    footer {
+      --content-width: 64rem;
+    }
 
     @media (max-width: 640px) {
-      header { padding: 1.2rem; }
-      header h1 { font-size: 1.6rem; }
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+      }
+      .brand-mark { width: 90px; height: 90px; }
+      .header-text h1 { font-size: 1.6rem; }
+      header nav { text-align: center; }
       main { padding: 1rem; }
-      .stats { flex-direction: column; gap: 0.8rem; }
-      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Tibsfox Research</h1>
-    <div class="subtitle">Pacific Northwest bioregion mapping, visual art science, language research, and 88 milestones of open-source craft</div>
-    <nav>
-      <a href="#pnw">PNW Series</a>
-      <a href="#resources">Additional Research</a>
-      <a href="#releases">Releases</a>
-      <a href="https://github.com/Tibsfox/gsd-skill-creator">GitHub</a>
-      <a href="https://tibsfox.com">tibsfox.com</a>
-    </nav>
+    <div class="header-inner">
+      <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
+      <div class="header-text">
+        <h1>Tibsfox Research</h1>
+        <div class="subtitle">Pacific Northwest bioregion mapping, visual art science, language research, and 88 milestones of open-source craft</div>
+        <nav>
+          <a href="#pnw">PNW Series</a>
+          <a href="#resources">Additional Research</a>
+          <a href="#releases">Releases</a>
+          <a href="https://github.com/Tibsfox/gsd-skill-creator">GitHub</a>
+          <a href="https://tibsfox.com">tibsfox.com</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -223,98 +147,98 @@
     </p>
 
     <div class="card-grid">
-      <a href="PNW/ECO/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/ECO/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #00695c, #4db6ac)"></div>
         <h3>ECO &mdash; Living Systems Taxonomy</h3>
         <div class="meta"><span class="tag tag-eco">Taxonomy</span> From Tahoma's Summit to the Salish Sea Floor</div>
         <p>Full ecosystem taxonomy across 8 elevation bands. Flora, fauna, fungi, ecological networks, heritage bridge, and derived GSD chipset.</p>
       </a>
 
-      <a href="PNW/COL/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/COL/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #1565c0, #42a5f5)"></div>
         <h3>COL &mdash; Columbia Valley Rainforest</h3>
         <div class="meta"><span class="tag tag-col">Biodiversity</span> 1,000+ species, 4 study zones</div>
         <p>Map biodiversity as a network of relationships &mdash; from the mycorrhizal web beneath the soil to the bald eagles circling above Bonneville Dam.</p>
       </a>
 
-      <a href="PNW/CAS/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/CAS/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #37474f, #78909c)"></div>
         <h3>CAS &mdash; Cascade Range Biodiversity</h3>
         <div class="meta"><span class="tag tag-cas">Biodiversity</span> Ridge to valley research</div>
         <p>The Vertical Wilderness &mdash; Cascade Mountain Range and foothills biodiversity from alpine tundra to valley floor.</p>
       </a>
 
-      <a href="PNW/AVI/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/AVI/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #2c5282, #63b3ed)"></div>
         <h3>AVI &mdash; Wings of the Pacific Northwest</h3>
         <div class="meta"><span class="tag tag-avi">Avian</span> 250+ species, 7 ecoregions</div>
         <p>A complete avian taxonomy from Tundra Swan to Townsend's Warbler. Migration routes, nesting ecology, and conservation status.</p>
       </a>
 
-      <a href="PNW/MAM/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/MAM/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #4a3728, #8d6e63)"></div>
         <h3>MAM &mdash; Fur, Fin &amp; Fang</h3>
         <div class="meta"><span class="tag tag-mam">Mammals</span> 169+ species, summit to seafloor</div>
         <p>Complete mammalian taxonomy of the Pacific Northwest. Predator-prey dynamics, trophic structure, and habitat connectivity.</p>
       </a>
 
-      <a href="PNW/GDN/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/GDN/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #2e7d32, #66bb6a)"></div>
         <h3>GDN &mdash; PNW Gardening</h3>
         <div class="meta"><span class="tag tag-gdn">Gardening</span> Western WA, OR &amp; Coastal BC</div>
         <p>Maritime PNW gardening from climate zones to pest management. 12-month calendar, native plant integration, soil science.</p>
       </a>
 
-      <a href="PNW/BCM/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/BCM/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #263238, #1565C0)"></div>
         <h3>BCM &mdash; Building Construction Mastery</h3>
         <div class="meta"><span class="tag tag-bcm">Building</span> Oregon &amp; Washington code landscape</div>
         <p>Six trade disciplines at five audience levels. NEC 2023, UPC 2021, ASCE 7-22 seismic design. Dual-state code mapping.</p>
       </a>
 
-      <a href="PNW/SHE/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/SHE/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #004d40, #ff6d00)"></div>
         <h3>SHE &mdash; Smart Home &amp; DIY Electronics</h3>
         <div class="meta"><span class="tag tag-she">Electronics</span> From blinking LED to complete home hub</div>
         <p>36 hands-on projects across 6 tiers. 22 sensors, 14 actuators, 10 protocols. Home Assistant, ESPHome, ESP32.</p>
       </a>
 
-      <a href="PNW/BPS/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/BPS/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #4a148c, #7e57c2)"></div>
         <h3>BPS &mdash; Bio-Physics Sensing Systems</h3>
         <div class="meta"><span class="tag tag-bps">Physics</span> Sonar, radar, magnetoreception, electroreception</div>
         <p>How animals sense their world &mdash; orca biosonar, fox magnetic compass, bat echolocation, Doppler processing, and time-series signal analysis.</p>
       </a>
 
-      <a href="PNW/FFA/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/FFA/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #6a1b9a, #ab47bc)"></div>
         <h3>FFA &mdash; Fur, Feathers &amp; Animation Arts</h3>
         <div class="meta"><span class="tag tag-ffa">Craft</span> Biology, craft, fabrication, moving image</div>
         <p>From cuticle scale to roughness map &mdash; the biology of fur and feather rendered as craft, fabrication, and animation art.</p>
       </a>
 
-      <a href="PNW/TIBS/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/TIBS/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #5d4037, #8d6e63)"></div>
         <h3>TIBS &mdash; Traditions &amp; Indigenous Knowledge</h3>
         <div class="meta"><span class="tag tag-tibs">Heritage</span> Animal Speak, sacred landscapes, the living world</div>
         <p>Ted Andrews, Pacific Northwest Native shamanism, and the bridge between traditional ecological knowledge and scholarly research.</p>
       </a>
 
-      <a href="PNW/LED/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/LED/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #b45309, #f59e0b)"></div>
         <h3>LED &mdash; LED Lighting &amp; Controllers</h3>
         <div class="meta"><span class="tag tag-led">Electronics</span> DIY, microcontrollers, smart lighting</div>
         <p>LED strip to oscilloscope trace. Microcontroller programming, smart lighting design, instruments, and high-speed logic.</p>
       </a>
 
-      <a href="PNW/SYS/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/SYS/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #1B5E20, #43A047)"></div>
         <h3>SYS &mdash; Systems Administration</h3>
         <div class="meta"><span class="tag tag-sys">Infrastructure</span> The spaces in between</div>
         <p>Server logs, network transport, process forensics, data provenance, access control, and security operations.</p>
       </a>
 
-      <a href="PNW/VAV/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="PNW/VAV/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #283593, #5c6bc0)"></div>
         <h3>VAV &mdash; Voxel as Vessel</h3>
         <div class="meta"><span class="tag tag-vav">Data</span> Ceph, RAG, Minecraft block storage</div>
@@ -329,7 +253,7 @@
     <h2 id="resources">Additional Research</h2>
 
     <div class="card-grid">
-      <a href="ART/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="ART/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #880e4f, #e91e63)"></div>
         <h3>ART &mdash; Shapes, Colors, Coloring Outside the Lines</h3>
         <div class="meta"><span class="tag tag-art">Visual Art</span> The phillewisart Edition &middot; 10 documents</div>
@@ -337,7 +261,7 @@
           the grammar outside the lines for two decades, in pen and ink and UV light.</p>
       </a>
 
-      <a href="UNI/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="UNI/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #37474f, #607d8b)"></div>
         <h3>UNI &mdash; The Unison Language</h3>
         <div class="meta"><span class="tag tag-uni">Language</span> Content-addressed code from the future &middot; 6 modules, 28 sources</div>
@@ -353,15 +277,15 @@
     </p>
 
     <div class="card-grid">
-      <a href="REL/index.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="REL/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #bf360c, #ff6e40)"></div>
         <h3>Full Release History</h3>
         <div class="meta"><span class="tag tag-rel">88 milestones</span> v1.0 &ndash; v1.49.x</div>
         <p>Foundation Era, Dashboard Era, Desktop Era, Platform Era, Research Era. Every milestone with GitHub release links.</p>
       </a>
 
-      <a href="https://github.com/Tibsfox/gsd-skill-creator" class="card" style="text-decoration:none;color:inherit">
-        <div class="accent-bar" style="background:linear-gradient(90deg, var(--canopy), var(--forest))"></div>
+      <a href="https://github.com/Tibsfox/gsd-skill-creator" class="card card-source">
+        <div class="accent-bar"></div>
         <h3>Source Code</h3>
         <div class="meta">Tibsfox/gsd-skill-creator</div>
         <p>TypeScript + Rust + GLSL. Tauri desktop app, Claude Code skills, GSD build system,
