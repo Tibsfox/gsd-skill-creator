@@ -1,10 +1,11 @@
-# v1.49.36 — Paintless Dog Brand System, AWF Living Systems Research, and the Root Landing Page
+# v1.49.36 — AWF Living Systems Research and the Root Landing Page
+
+### For Paintless Dog — who painted the fox that became the brand. The painting defines the visual language: warm parchment, fox orange, ink structure. Ten years later, it still sets the palette.
 
 **Shipped:** 2026-03-10
 **Commits:** 5 (+ merge commit)
 **Files:** 75 | **Lines:** +6,362 / -2,308 (net +4,054) | **New assets:** brand.css, tibsfox.png
 **Branch:** dev → main
-**Dedication:** For Paintless Dog — who painted the fox that became the brand. The painting defines the visual language: warm parchment, fox orange, ink structure. Eight years later, it still sets the palette.
 
 ## Summary
 
