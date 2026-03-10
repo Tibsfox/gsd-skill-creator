@@ -334,6 +334,34 @@ Fire-adapted species that resprouts vigorously from rhizomes after burning. Flow
 
 ---
 
+### Indian Paintbrush (*Castilleja* spp.)
+
+**Taxonomy:** Ericales > Orobanchaceae
+**Elevation Band:** ELEV-SUBALPINE
+**Habitat:** HAB-SUBALPINE-PARKLAND, HAB-ALPINE-MEADOW
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Hemiparasitic perennial herbs, 6-24 inches tall, with spectacular scarlet, orange, or magenta floral bracts that outshine the small, tubular true flowers hidden within. Multiple species occur in the PNW (notably *C. miniata* and *C. hispida*), collectively forming some of the most vivid displays in subalpine meadows. Bracts and upper leaves are the colorful structures; the actual flowers are greenish and inconspicuous.
+
+**Elevation Range:** 4,000-7,500 ft (y=59-146)
+**Distribution:** Throughout PNW subalpine meadows from British Columbia to Oregon; common on Mount Rainier, in the North Cascades, and Olympic subalpine parklands.
+
+**Ecological Significance:**
+A keystone pollinator plant of subalpine meadows — bright bracts attract hummingbirds (rufous and calliope), bumblebees, and butterflies. Hemiparasitic on grass and forb roots via haustorial connections, tapping host vascular tissue for water and nutrients without killing the host. This parasitism subtly alters competitive dynamics in meadow plant communities, suppressing dominant grasses and increasing overall species diversity. Mass blooms in July-August are a signature visual feature of PNW subalpine landscapes.
+
+**Threats:** Climate change reducing snowpack duration and altering meadow phenology; subalpine meadow encroachment by conifers; trampling from concentrated recreational use on popular trails.
+
+**Cultural Significance:** Several PNW nations used paintbrush species for dye (producing red-orange pigments from bracts) and in medicinal preparations. Nlaka'pamux and Secwepemc peoples used root and flower preparations for various ailments. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Pojar & MacKinnon (1994); Mathews (1999) — *Cascade-Olympic Natural History*; USFS PNW Research Station
+
+**Cross-Module References:**
+- See fauna-terrestrial: Rufous hummingbird, bumblebees (pollinator mutualism)
+- See ecological-networks: Pollinator Networks (subalpine meadow keystone)
+
+---
+
 ## 3. Montane Flora (ELEV-MONTANE: 3,000-5,000 ft / y=34-84)
 
 The rain-snow transition zone, home to dense silver fir forests and the montane meadows maintained by cold air drainage.
@@ -441,6 +469,62 @@ Dominant understory species in PNW conifer forests, vine maple creates dense sub
 **Cross-Module References:**
 - See fauna-terrestrial: Black-tailed deer, Roosevelt elk (browse species)
 - See fungi-microbiome-survey: Arbuscular mycorrhizal associations
+
+---
+
+### Grand Fir (*Abies grandis*)
+
+**Taxonomy:** Pinales > Pinaceae
+**Elevation Band:** ELEV-MONTANE, ELEV-LOWLAND
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER, ROLE-FOUNDATION
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Large conifer reaching 150-230 ft with a narrow, spire-like crown. Bark smooth and grayish on young trees, becoming thick and furrowed with age. Needles flat, arranged in two distinct horizontal rows on the twig (like a comb), dark green above with two white stomatal bands below. Crushed needles release a distinctive citrus-like fragrance — the most aromatic of all PNW firs.
+
+**Elevation Range:** 500-5,000 ft (y=-29-84)
+**Distribution:** Both west-side and east-side Cascades, distinguishing it from Pacific silver fir (primarily west-side). Ranges from southern British Columbia through western Montana, Oregon, and Washington. Most common in moist valleys and lower montane slopes.
+
+**Ecological Significance:**
+Grand fir occupies an important ecological niche as a mid-elevation species bridging lowland Douglas-fir forests and upper montane Pacific silver fir zones. On the east side of the Cascades, grand fir forests represent some of the most productive ecosystems, supporting high densities of white-tailed deer and elk. Moderate shade tolerance allows persistence in mixed-species stands. Significant timber species — the wood is light, straight-grained, and commercially important for lumber and pulp.
+
+**Threats:** Root diseases (laminated root rot, *Phellinus sulphurascens*); Douglas-fir tussock moth and western spruce budworm defoliation; fire exclusion leading to unnaturally dense stands susceptible to insect outbreaks and stand-replacing fire.
+
+**Cultural Significance:** Lummi and other Coast Salish peoples used grand fir pitch medicinally — applied as a poultice for wounds, burns, and skin infections, and taken internally for colds and respiratory ailments. Boughs used for bedding and spiritual cleansing. (CULT-FOOD-MEDICINE, CULT-SPIRITUAL)
+
+**Key Sources:** Franklin & Dyrness (1988); Foiles et al. (1990) — *Abies grandis* silvics; Pojar & MacKinnon (1994)
+
+**Cross-Module References:**
+- See fungi-microbiome-survey: Ectomycorrhizal networks (Abies associations)
+- See fauna-terrestrial: White-tailed deer, elk (east-side forest habitat)
+
+---
+
+### Western Larch (*Larix occidentalis*)
+
+**Taxonomy:** Pinales > Pinaceae
+**Elevation Band:** ELEV-MONTANE
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER, ROLE-FOUNDATION
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Tall, straight conifer reaching 100-180 ft — the only deciduous conifer in the PNW. Needles soft, pale green, in clusters of 15-30 on short spur shoots, turning brilliant gold before dropping in autumn. Bark on mature trees extremely thick (3-6 inches), deeply furrowed, cinnamon-red — among the most fire-resistant bark of any PNW tree. Oldest documented specimens exceed 900 years.
+
+**Elevation Range:** 2,000-5,500 ft (y=9-97)
+**Distribution:** East side of the Cascades and Blue Mountains of Oregon and Washington; extends into northern Idaho and western Montana. Absent from the wet west side — a strictly interior species requiring cold winters and relatively dry summers.
+
+**Ecological Significance:**
+The only deciduous conifer in the PNW, western larch creates a unique ecological dynamic: its annual needle drop provides a pulse of readily decomposable litter to forest floors otherwise dominated by slow-decaying conifer needles, significantly boosting soil nutrient cycling. Extremely fire-adapted — thick bark, high crown, and self-pruning lower branches allow mature trees to survive moderate surface fires that kill competitors. Post-fire, larch's shade intolerance and fast early growth make it an aggressive colonizer of burned sites. Autumn larch forests in the eastern Cascades are a major scenic attraction.
+
+**Threats:** Fire suppression leading to replacement by shade-tolerant grand fir and Douglas-fir; western larch casebearer (*Coleophora laricella*, an introduced pest); larch dwarf mistletoe; climate change potentially shifting suitable habitat upslope.
+
+**Cultural Significance:** Significant food and material resource for Ktunaxa (Kootenai) and Salish-Kootenai peoples. Cambium (inner bark) was harvested in spring as a food source — peeled, dried, and eaten or mixed with other foods. Sweet sap collected and used as a beverage and sweetener. Wood used for fuel and construction. (CULT-FOOD-MEDICINE, CULT-MATERIAL)
+
+**Key Sources:** Schmidt & Shearer (1990) — *Larix occidentalis* silvics; Franklin & Dyrness (1988); Turner (2014)
+
+**Cross-Module References:**
+- See ecological-networks: Fire Ecology (fire-adapted species, post-fire succession)
+- See heritage-bridge: Ktunaxa, Salish-Kootenai food traditions (cambium harvest)
 
 ---
 
@@ -802,6 +886,146 @@ Foundation species of the critically endangered oak woodland/prairie ecosystem. 
 
 ---
 
+### Pacific Dogwood (*Cornus nuttallii*)
+
+**Taxonomy:** Cornales > Cornaceae
+**Elevation Band:** ELEV-LOWLAND
+**Habitat:** HAB-SECOND-GROWTH, HAB-RIPARIAN
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | BC: Species at Risk (Blue List) | IUCN: LC
+
+**Description:** Deciduous tree reaching 30-60 ft with a graceful, layered branching pattern. Famous for large, showy "flowers" that are actually 4-6 white bracts surrounding a cluster of tiny true flowers. Produces bright red berry clusters in autumn. Bark smooth, gray-brown. British Columbia's official provincial flower (the floral emblem since 1956).
+
+**Elevation Range:** Sea level to 2,500 ft (y=-41-21)
+**Distribution:** From southern British Columbia through western Washington and Oregon to northern California; most common in the understory and edges of Douglas-fir and mixed hardwood forests. Range contracting northward due to disease.
+
+**Ecological Significance:**
+A significant understory tree whose abundant red berries provide high-fat autumn food for band-tailed pigeons, cedar waxwings, and other fruit-eating birds critical for pre-migration fattening. Dogwood anthracnose (*Discula destructiva*), a fungal disease first detected in the PNW in the 1980s, has caused widespread mortality — particularly in shaded, moist sites. The disease has fundamentally altered Pacific dogwood populations across its range, with some local populations experiencing >80% mortality. Surviving trees in sunnier, drier microsites may represent disease-resistant genotypes important for species recovery.
+
+**Threats:** Dogwood anthracnose (*Discula destructiva*) — the primary and severe threat since the 1980s; habitat loss from development; drought stress.
+
+**Cultural Significance:** Not specifically documented in PNW ethnobotany.
+
+**Key Sources:** Pojar & MacKinnon (1994); Byther & Davidson (1979) — dogwood anthracnose; BC Conservation Data Centre
+
+**Cross-Module References:**
+- See fauna-terrestrial: Band-tailed pigeon, cedar waxwing (fruit dispersal mutualism)
+- See fungi-microbiome-survey: *Discula destructiva* (anthracnose pathogen)
+
+---
+
+### Pacific Rhododendron (*Rhododendron macrophyllum*)
+
+**Taxonomy:** Ericales > Ericaceae
+**Elevation Band:** ELEV-LOWLAND
+**Habitat:** HAB-OLD-GROWTH, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Evergreen shrub to small tree, typically 6-20 ft tall (occasionally to 30 ft in old-growth understory), with large, leathery, dark green leaves and showy clusters of pink to rose-purple flowers in late spring. Washington's official state flower since 1892. Thick, twisted trunks and persistent evergreen canopy create dense, shaded understories.
+
+**Elevation Range:** Sea level to 3,000 ft (y=-41-34)
+**Distribution:** Coastal and lowland western PNW from British Columbia to northern California; most abundant in well-drained, acidic soils under conifer canopy. Particularly common in Douglas-fir and western hemlock forests on the west side of the Cascades.
+
+**Ecological Significance:**
+An indicator of old-growth and mature forest conditions in the PNW lowlands. Dense rhododendron understory creates thermal microhabitats — the evergreen canopy moderates temperature extremes at ground level, providing winter cover for small mammals and birds. Ericoid mycorrhizal associations allow rhododendron to thrive in the nutrient-poor, acidic soils typical under conifers where other shrubs struggle. Flowers provide nectar for native bumblebees and other pollinators during the late-spring gap between early and summer blooms.
+
+**Threats:** Generally secure; old-growth loss reduces optimal habitat; can be suppressed by dense salal or invasive species in disturbed sites; deer browse on young plants.
+
+**Cultural Significance:** Not specifically documented in PNW ethnobotany. The plant's leaves and nectar contain grayanotoxins (mildly toxic), which may have limited historical food or medicinal use.
+
+**Key Sources:** Franklin & Dyrness (1988); Pojar & MacKinnon (1994); Hitchcock & Cronquist (1973)
+
+**Cross-Module References:**
+- See fungi-microbiome-survey: Ericoid mycorrhizal associations (acidic soil specialists)
+- See ecological-networks: Pollinator Networks (late-spring nectar source)
+
+---
+
+### Cascara (*Frangula purshiana*)
+
+**Taxonomy:** Rosales > Rhamnaceae
+**Elevation Band:** ELEV-LOWLAND
+**Habitat:** HAB-SECOND-GROWTH, HAB-RIPARIAN
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Small deciduous tree or large shrub, 15-35 ft tall, with smooth, silvery-gray bark and prominently veined, elliptical leaves 2-6 inches long. Small greenish-yellow flowers in spring produce dark purple-black berries in late summer. The bark — thin, smooth, and distinctively gray — is the most commercially significant laxative plant material in North America.
+
+**Elevation Range:** Sea level to 2,500 ft (y=-41-21)
+**Distribution:** Throughout western PNW from British Columbia to northern California; typically found in forest edges, openings, riparian corridors, and second-growth forests. Scattered rather than dominant — rarely forming pure stands.
+
+**Ecological Significance:**
+Cascara berries are an important late-summer food source for birds (band-tailed pigeons, cedar waxwings, robins) and small mammals, who serve as seed dispersers. The tree frequently establishes in forest gaps and edges, contributing to early successional plant communities. Cascara bark was so extensively harvested in the 19th and 20th centuries for the pharmaceutical laxative trade that wild populations were significantly depleted in parts of its range — a cautionary example of overharvest of a native medicinal plant.
+
+**Threats:** Historical overharvest for pharmaceutical bark trade (populations have partially recovered since synthetic alternatives reduced demand); habitat conversion; deer browse.
+
+**Cultural Significance:** Widely used by Coast Salish, Quinault, and other PNW nations as a laxative and general tonic medicine — the English name "cascara sagrada" (sacred bark) was given by Spanish colonists who learned of the bark's properties from Indigenous peoples of the Pacific Northwest. Bark typically dried and aged for at least one year before use (fresh bark is too potent). One of the most widely traded medicinal plants in the PNW Indigenous trade network. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Turner (2014); Pojar & MacKinnon (1994); Moerman (1998) — *Native American Ethnobotany*
+
+**Cross-Module References:**
+- See heritage-bridge: Coast Salish, Quinault medicinal plant traditions
+- See ecological-networks: Seed Dispersal Networks (bird-dispersed species)
+
+---
+
+### Red Elderberry (*Sambucus racemosa*)
+
+**Taxonomy:** Dipsacales > Adoxaceae
+**Elevation Band:** ELEV-LOWLAND
+**Habitat:** HAB-RIPARIAN, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Deciduous shrub to small tree, 6-20 ft tall, with pinnately compound leaves (5-7 leaflets), clusters of creamy-white flowers in pyramid-shaped panicles, and conspicuous bright red berry clusters in mid-summer. Stems have thick, spongy pith. Berries contain cyanogenic glycosides when raw — TOXIC if consumed uncooked, but safely eaten after cooking or processing.
+
+**Elevation Range:** Sea level to 3,000 ft (y=-41-34)
+**Distribution:** Throughout western PNW from Alaska to northern California; common in riparian corridors, forest clearings, roadsides, and disturbed sites. A fast-growing pioneer species.
+
+**Ecological Significance:**
+An important wildlife food source — berries consumed by 30+ bird species (including band-tailed pigeons, cedar waxwings, Swainson's thrush, varied thrush, and robins), bears, and small mammals. Fast colonization of disturbed sites (clearcuts, landslides, burned areas) makes red elderberry an important early-successional species that provides food and cover before slower-growing trees establish. Flowers are visited by many pollinator species. The soft, pithy stems are excavated by cavity-nesting insects, which in turn attract woodpeckers and other insectivores.
+
+**Threats:** Generally secure; widely distributed and tolerant of disturbance. Invasive species competition on some disturbed sites.
+
+**Cultural Significance:** Coast Salish, Makah, and Quinault peoples used elderberries after cooking — typically steamed, boiled, or dried to neutralize cyanogenic glycosides. Raw berries were recognized as toxic and never consumed fresh. Bark and inner bark used medicinally as an emetic and purgative. Wood (lightweight, with hollow pith) used for making flutes, blowguns, and drinking straws. Elderberry wood fire drills documented among some nations. (CULT-FOOD-MEDICINE, CULT-MATERIAL)
+
+**Key Sources:** Pojar & MacKinnon (1994); Turner (2014); Elias & Dykeman (2009) — *Edible Wild Plants*
+
+**Cross-Module References:**
+- See fauna-terrestrial: Band-tailed pigeon, varied thrush, black bear (fruit consumer)
+- See heritage-bridge: Coast Salish, Makah, Quinault food processing traditions
+
+---
+
+### Kinnikinnick (*Arctostaphylos uva-ursi*)
+
+**Taxonomy:** Ericales > Ericaceae
+**Elevation Band:** ELEV-LOWLAND
+**Habitat:** HAB-DRY-FOREST, HAB-SECOND-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Low-growing, mat-forming evergreen groundcover, rarely exceeding 6 inches in height but spreading 3-6 ft across. Small, leathery, spatula-shaped leaves; tiny pink-white urn-shaped flowers; bright red berries (mealy, persistent through winter). Also known as bearberry — the Latin *uva-ursi* literally translates to "grape of the bear."
+
+**Elevation Range:** Sea level to 3,000 ft (y=-41-34)
+**Distribution:** Circumpolar species — throughout the PNW from coastal sand dunes to dry, open forests. Most common on well-drained, sandy or rocky soils in full sun. Found in the San Juan Islands, coastal bluffs, rain-shadow forests, and dry east-side ponderosa pine zones.
+
+**Ecological Significance:**
+Excellent erosion control species — dense mats stabilize sandy soils on coastal dunes and dry slopes. Berries persist through winter, providing food for grouse, bears, and small mammals when other food is scarce. Ericoid mycorrhizal associations allow colonization of nutrient-poor, acidic substrates. Drought-adapted leaves reduce water loss, making kinnikinnick an important ground layer species in dry PNW forests where few other groundcovers persist.
+
+**Threats:** Generally secure; widespread and circumpolar. Coastal dune habitat loss from development; invasive grass competition in some areas.
+
+**Cultural Significance:** Among the most widely used plants across ALL PNW and North American nations — the name "kinnikinnick" is from the Algonquin language meaning "smoking mixture." Leaves dried and mixed with tobacco (or used alone) for smoking by Salish, Yakama, Nez Perce, and many other nations across the continent. Berries eaten fresh or dried, though mealy and not highly flavored. Leaves used in medicinal teas for urinary tract ailments. The plant's pan-continental cultural significance — used from the Atlantic to the Pacific by dozens of distinct nations — makes it one of the most broadly shared ethnobotanical species in North America. (CULT-FOOD-MEDICINE, CULT-SPIRITUAL)
+
+**Key Sources:** Turner (2014); Moerman (1998); Pojar & MacKinnon (1994)
+
+**Cross-Module References:**
+- See heritage-bridge: Pan-continental smoking and medicinal traditions (Salish, Yakama, Nez Perce, and many others)
+- See ecological-networks: Coastal Dune Ecology (soil stabilization)
+
+---
+
 ### Camas (*Camassia quamash*)
 
 **Taxonomy:** Asparagales > Asparagaceae
@@ -975,6 +1199,64 @@ The dominant riparian understory shrub in western PNW. Dense salmonberry thicket
 **Cross-Module References:**
 - See fauna-terrestrial: Rufous hummingbird (nectar mutualism)
 - See heritage-bridge: Berry harvest traditions
+
+---
+
+### Lady Fern (*Athyrium filix-femina*)
+
+**Taxonomy:** Polypodiales > Athyriaceae
+**Elevation Band:** ELEV-RIPARIAN, ELEV-LOWLAND, ELEV-MONTANE
+**Habitat:** HAB-RIPARIAN, HAB-WETLAND
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Large deciduous fern with graceful, arching fronds reaching 2-5 ft tall from a stout, scaly rhizome. Fronds are bipinnate to tripinnate, finely dissected, giving a lacy, delicate appearance (hence "lady" fern). Fiddleheads (tightly coiled emerging fronds) appear in spring. Sori (spore clusters) are crescent- or horseshoe-shaped, a key identification feature distinguishing lady fern from similar species.
+
+**Elevation Range:** Sea level to 5,000 ft (y=-41-84)
+**Distribution:** Throughout PNW from coastal forests to montane stream corridors; one of the most widespread ferns in North America. Most abundant in moist, shaded riparian areas and wet forest understory.
+
+**Ecological Significance:**
+A reliable indicator of moist, nutrient-rich soils and riparian conditions. Dense lady fern colonies provide ground-level cover for amphibians (Pacific giant salamander, tailed frog) and small mammals. Rapidly decomposing deciduous fronds contribute to soil nutrient cycling in conifer-dominated forests. Spring fiddleheads are among the first green growth in PNW forests, providing food for elk, deer, and bears. The species' wide elevation range — from sea level riparian zones to montane stream banks — makes it a consistent thread linking PNW wet habitats across elevation bands.
+
+**Threats:** Generally secure; widespread and common. Sensitive to stream bank disturbance, forest canopy removal (desiccation), and invasive plant competition in riparian zones.
+
+**Cultural Significance:** Widespread food plant across PNW nations — fiddleheads eaten by Coast Salish, Makah, and Quinault peoples as a spring food source (harvested when tightly coiled, before fronds unfurl). Rhizomes used medicinally by several nations for various ailments. Fronds used as lining for food storage and cooking pits — layered between food and hot rocks in earth ovens. (CULT-FOOD-MEDICINE)
+
+**Key Sources:** Pojar & MacKinnon (1994); Turner (2014); Lellinger (1985) — *A Field Manual of the Ferns and Fern-Allies of the United States and Canada*
+
+**Cross-Module References:**
+- See fauna-terrestrial: Pacific giant salamander, tailed frog (riparian ground cover)
+- See heritage-bridge: Coast Salish, Makah, Quinault spring food traditions
+
+---
+
+### Maidenhair Fern (*Adiantum pedatum*)
+
+**Taxonomy:** Polypodiales > Pteridaceae
+**Elevation Band:** ELEV-RIPARIAN, ELEV-LOWLAND
+**Habitat:** HAB-RIPARIAN, HAB-OLD-GROWTH
+**Ecological Role:** ROLE-PRIMARY-PRODUCER
+**Conservation Status:** Federal: Not listed | WA: Not listed | IUCN: LC
+
+**Description:** Distinctive, elegant fern with a unique fan-shaped frond arrangement — each frond radiates pinnae (leaflets) in a horseshoe or half-circle pattern from the tip of a dark, wiry, polished stipe (stem). Stipes are jet black, smooth, and glossy. Pinnae are delicate, bright green, and tremble in the slightest breeze. Typically 1-2 ft tall. Grows in dense colonies on wet cliff faces, spray zones near waterfalls, and mossy rock outcrops in old-growth forest.
+
+**Elevation Range:** Sea level to 3,000 ft (y=-41-34)
+**Distribution:** Throughout western PNW in moist, shaded habitats; most abundant near waterfalls, seeps, wet rock faces, and along streams in old-growth forest. Requires persistent moisture and shade — disappears rapidly when canopy is removed.
+
+**Ecological Significance:**
+A strong indicator of undisturbed, moist old-growth forest conditions and persistent water sources. Maidenhair fern colonies mark seeps, springs, and spray zones that provide critical summer moisture in otherwise dry periods. The species' intolerance of canopy disturbance makes it useful as a forest health indicator — presence signals minimal recent disturbance. Dense colonies on wet cliffs create microhabitat for specialized invertebrates and bryophytes. The dark, wiry stipes are among the most distinctive plant structures in the PNW forest understory.
+
+**Threats:** Old-growth forest loss (primary threat — species requires persistent shade and moisture); stream bank disturbance; changes to water table or seep hydrology from logging roads or development.
+
+**Cultural Significance:** Highly significant to multiple PNW nations. Coast Salish weavers used the dark, glossy stems as black weft material in coiled baskets — the jet-black stipes create striking contrast patterns against lighter materials. Quinault and Makah peoples used stems for basket overlay patterns and decorative work. Fronds prepared as a hair wash by women of several nations (hence the common name "maidenhair"). Medicinal uses documented across multiple nations for respiratory ailments and as a general tonic. (CULT-MATERIAL, CULT-FOOD-MEDICINE)
+
+**Heritage Skills Cross-Reference:** Cedar Path (basket weaving materials)
+
+**Key Sources:** Turner (2014); Pojar & MacKinnon (1994); Stewart (1984) — *Cedar: Tree of Life* (basket material references)
+
+**Cross-Module References:**
+- See heritage-bridge: Coast Salish, Quinault, Makah basket weaving traditions (stipe material)
+- See ecological-networks: Old-Growth Indicator Species (moisture/disturbance sensitivity)
 
 ---
 
@@ -1225,10 +1507,13 @@ Indicator of rich, undisturbed forest soils with intact fungal communities. Seed
 | Avalanche lily | | X | | | | | | |
 | Glacier lily | | X | X | | | | | |
 | Bear grass | | X | X | | | | | |
+| Indian paintbrush | | X | | | | | | |
 | Pacific silver fir | | | X | | | | | |
 | Noble fir | | | X | X | | | | |
 | Western white pine | | | X | X | | | | |
 | Vine maple | | | X | X | | | | |
+| Grand fir | | | X | X | | | | |
+| Western larch | | | X | | | | | |
 | Douglas-fir | | | X | X | | | | |
 | Western red cedar | | | X | X | | | | |
 | Sitka spruce | | | | X | X | | | |
@@ -1241,12 +1526,19 @@ Indicator of rich, undisturbed forest soils with intact fungal communities. Seed
 | Sword fern | | | X | X | | | | |
 | Huckleberry (spp.) | | X | X | X | | | | |
 | Oregon white oak | | | | X | | | | |
+| Pacific dogwood | | | | X | X | | | |
+| Pacific rhododendron | | | | X | | | | |
+| Cascara | | | | X | X | | | |
+| Red elderberry | | | | X | X | | | |
+| Kinnikinnick | | | | X | | | | |
 | Camas | | | | X | | | | |
 | Wapato | | | | | X | | | |
 | Skunk cabbage | | | | X | X | | | |
 | Devil's club | | | X | X | | | | |
 | Black cottonwood | | | | | X | | | |
 | Salmonberry | | | | X | X | | | |
+| Lady fern | | | X | X | X | | | |
+| Maidenhair fern | | | | X | X | | | |
 | Pacific yew | | | X | X | | | | |
 | Licorice fern | | | | X | | | | |
 | Western trillium | | | X | X | | | | |
@@ -1271,13 +1563,13 @@ The Flora chip in the derived chipset processes queries about vascular plants, b
 
 ### Total Flora Survey Statistics
 
-- **Total species profiled:** 41 (plus huckleberry complex = multiple species)
+- **Total species profiled:** 51 (plus huckleberry complex = multiple species)
 - **Elevation bands covered:** All 8 (ELEV-ALPINE through ELEV-SHALLOW-MARINE)
-- **Habitat types referenced:** 15 of 17
+- **Habitat types referenced:** 16 of 17
 - **Ecological roles assigned:** All 13 ROLE-* IDs used
 - **ESA-listed species:** Whitebark pine (Threatened), Alaska yellow cedar (Threatened)
-- **Culturally significant species:** 25+ with nation-specific attributions
-- **Primary source citations:** 35+
+- **Culturally significant species:** 33+ with nation-specific attributions
+- **Primary source citations:** 45+
 
 ---
 

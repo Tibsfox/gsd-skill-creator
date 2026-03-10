@@ -20,26 +20,31 @@ A comprehensive PNW ecosystem research block organized through GPU-accelerated t
 ### Taxonomy Surveys (Wave 1)
 | Document | Size | Species | Description |
 |----------|------|---------|-------------|
-| [flora-survey.md](flora-survey.md) | 87 KB | 41 | Vascular plants, bryophytes, marine macroalgae |
+| [flora-survey.md](flora-survey.md) | 107 KB | 51 | Vascular plants, bryophytes, marine macroalgae |
 | [fauna-terrestrial.md](fauna-terrestrial.md) | 165 KB | 86 | Mammals, birds, amphibians, reptiles |
-| [fauna-marine-aquatic.md](fauna-marine-aquatic.md) | 96 KB | 39 | Salmon, marine mammals, invertebrates |
-| [fungi-microbiome-survey.md](fungi-microbiome-survey.md) | 57 KB | 23 | Mycorrhizal networks, decomposers, lichens, microbiome |
+| [fauna-marine-aquatic.md](fauna-marine-aquatic.md) | 132 KB | 61 | Salmon, marine mammals, marine fish, forage fish, invertebrates |
+| [fungi-microbiome-survey.md](fungi-microbiome-survey.md) | 70 KB | 31 | Mycorrhizal networks, decomposers, lichens, microbiome |
 | [ecological-networks.md](ecological-networks.md) | 122 KB | — | 5 major ecological pathways (bus architecture) |
 | [heritage-bridge.md](heritage-bridge.md) | 69 KB | — | Cultural-ecological integration (17+ nations, OCAP/CARE/UNDRIP) |
 
 ### Synthesis & Chipset (Wave 2)
 | Document | Size | Description |
 |----------|------|-------------|
-| [cross-module-merge.md](cross-module-merge.md) | 36 KB | Unified taxonomy, 189 species, 377 cross-refs resolved |
+| [cross-module-merge.md](cross-module-merge.md) | 44 KB | Unified taxonomy, 227 species, 490+ cross-refs resolved |
 | [pnw-ecosystem.chipset.yaml](pnw-ecosystem.chipset.yaml) | 27 KB | 6 chips, 5 bus routes, 6 clock domains |
 | [minecraft-world-spec.md](minecraft-world-spec.md) | 23 KB | Biome mapping, entity spawns, redstone systems |
+
+### Publication (Wave 4)
+| Document | Size | Description |
+|----------|------|-------------|
+| [final-assembly.md](final-assembly.md) | 12 KB | Executive summary, pipeline walkthrough, species index, gap closure retrospective, bibliography |
 
 ### Engineering & Verification (Wave 3)
 | Document | Size | Description |
 |----------|------|-------------|
 | [engineering-optimization.md](engineering-optimization.md) | 7 KB | 38% bus contention reduction, knowledge tiering |
 | [college-biology-seed.md](college-biology-seed.md) | 7 KB | Biology department seed (25 concepts, 3 try sessions) |
-| [verification-matrix.md](verification-matrix.md) | 10 KB | 32 tests: 29 PASS, 3 PARTIAL, 6/6 safety-critical PASS |
+| [verification-matrix.md](verification-matrix.md) | 10 KB | 32 tests: 32 PASS, 0 PARTIAL, 6/6 safety-critical PASS |
 
 ---
 
@@ -47,8 +52,8 @@ A comprehensive PNW ecosystem research block organized through GPU-accelerated t
 
 | Metric | Value |
 |--------|-------|
-| Total species profiled | 189 + 3 communities |
-| ESA-listed species | 20 (3 Endangered, 17 Threatened) |
+| Total species profiled | 227 + 3 communities |
+| ESA-listed species | 22 (3 Endangered, 19 Threatened) |
 | Species of concern | 14 additional |
 | Elevation bands | 8 (Arctic-Alpine to Deep Marine) |
 | Vertical range | 15,340 ft (383 Minecraft blocks) |
@@ -59,7 +64,7 @@ A comprehensive PNW ecosystem research block organized through GPU-accelerated t
 | Bus routes | 5 |
 | Clock domains | 6 |
 | Safety-critical tests | 6/6 PASS |
-| Total research output | 814 KB across 15 files |
+| Total research output | 895 KB across 15 files |
 
 ## Scale Reference
 
