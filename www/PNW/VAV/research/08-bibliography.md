@@ -439,4 +439,154 @@ All citations are traceable to their source. No unsourced claims in any research
 
 ---
 
-*Complete bibliography for Voxel as Vessel v1 + v2. 88 sources across 11 categories. Three-pass filter + sovereign world architecture coverage verified.*
+## 12. v3 Signal Fidelity & Data Transmission Sources (Mission 3)
+
+### Signal Processing and Imaging (v3)
+
+[F1] Nyquist, Harry. "Certain Topics in Telegraph Transmission Theory." *Transactions of the AIEE*, vol. 47, no. 2, pp. 617-644, 1928.
+https://doi.org/10.1109/T-AIEE.1928.5055024
+Foundational sampling theorem. Primary source for M14.
+
+[F2] Shannon, Claude E. "Communication in the Presence of Noise." *Proceedings of the IRE*, vol. 37, no. 1, pp. 10-21, 1949.
+https://doi.org/10.1109/JRPROC.1949.232969
+Channel capacity theorem. Foundation for M14, M17.
+
+[F3] Ben-Ezra, Moshe, et al. "Temporal Super-Resolution Using a Multi-Channel Illumination Source." *Sensors*, vol. 24, no. 3, 857, 2024.
+doi:10.3390/s24030857
+TSR via synchronized multi-channel LEDs extending temporal range by 6x. Primary source for M14 §3.
+
+[F4] Lai, Y., Marquez, M., and Liang, J. "Tutorial on Compressed Ultrafast Photography." *J. Biomed. Opt.*, 29(S1), S11524, 2024.
+doi:10.1117/1.JBO.29.S1.S11524
+CUP achieving trillions of fps. Reference for M14 §3.
+
+[F5] Tessive LLC. "Time Filter Technical Explanation." *tessive.com*, 2024.
+https://tessive.com/time-filter-technical-explanation/
+MTF shaping via continuously varied exposure. Reference for M14 §1.
+
+[F6] Imatest LLC. "Nyquist Frequency, Aliasing, and Color Moiré." *imatest.com*, 2024.
+https://www.imatest.com/docs/nyquist-aliasing/
+SFR/MTF testing for imaging systems. Reference for M14 §1.
+
+### Color Management (v3)
+
+[F7] Calibrite. "ColorChecker Camera Calibration Workflow — ICC and DNG." *calibrite.com*, 2024.
+https://calibrite.com/photo-target/
+7-step calibration protocol with X-Rite ColorChecker. Primary source for M15 §2.
+
+[F8] International Color Consortium. "White Paper #46: Improving Color Image Quality for Medical Photography." *color.org*, 2017.
+https://www.color.org/whitepapers/ICC_White_Paper46-Medical_Photography_Guidelines.pdf
+ICC profile specification for color-critical workflows. Reference for M15 §1.
+
+[F9] X-Rite. "Color Management Workflow with DNG Camera Profiles." *xrite.com*, 2024.
+https://www.xrite.com/service-support/color_management_workflow_with_dng_camera_profiles
+DNG dual-illuminant profile creation. Reference for M15 §2.
+
+### Audio Restoration (v3)
+
+[F10] iZotope. "RX 8: Spectral Recovery and Audio Restoration." *izotope.com*, 2021.
+https://www.izotope.com/en/rx.html
+ML spectral recovery and restoration tools. Primary source for M16 §4.
+
+[F11] Wikipedia Contributors. "Audio Restoration." *en.wikipedia.org*, 2024.
+https://en.wikipedia.org/wiki/Audio_restoration
+Overview of degradation modes and restoration techniques. Reference for M16 §3.
+
+[F12] Lawrence Berkeley National Laboratory. "IRENE Audio Restoration System." *irene.lbl.gov*, 2024.
+https://irene.lbl.gov/
+2D optical profilometry for non-contact disc playback. Reference for M16 §4.
+
+[F13] Library of Congress. "National Audio-Visual Conservation Center / Packard Campus." *loc.gov*, 2024.
+https://www.loc.gov/avconservation/packard/
+Preservation research and IRENE deployment. Reference for M16 §4.
+
+[F14] Adobe Systems. "Applying Noise Reduction Techniques." *Adobe Audition Help*, 2024.
+https://helpx.adobe.com/audition/using/noise-reduction-restoration-effects.html
+Spectral subtraction and Wiener filter implementations. Reference for M16 §4.
+
+### Serialization and HPC (v3)
+
+[F15] InfiniBand Trade Association. "IBTA Specification Volume 1 Release 1.7." *infinibandta.org*, 2023.
+https://www.infinibandta.org/ibta-specification/
+InfiniBand architecture: RDMA, QPs, fabric topologies. Primary source for M17 §3.
+
+[F16] Pichetti, L., et al. "Benchmarking Ethernet Interconnect for HPC/AI Workloads." *SC '24 Workshops*, 2024.
+doi:10.1109/SCW63240.2024.00124
+Ethernet vs InfiniBand HPC comparison. Reference for M17 §3.
+
+[F17] NVIDIA Corporation. "NVIDIA Quantum InfiniBand Networking Platform." *nvidia.com*, 2025.
+https://www.nvidia.com/en-us/networking/products/infiniband/
+NDR 400 Gbps and SHARP in-network computing. Reference for M17 §3.
+
+[F18] Google. "FlatBuffers Documentation and Benchmarks." *flatbuffers.dev*, 2024.
+https://flatbuffers.dev/benchmarks/
+81 ns/op deserialization benchmarks. Primary source for M17 §1.
+
+[F19] arXiv:2407.13494. "Streaming Technologies and Serialization Protocols: Empirical Performance Analysis." 2024.
+Serialization format comparison. Reference for M17 §1.
+
+### Networking and Transport (v3)
+
+[F20] Waitzman, David. "RFC 1149: A Standard for the Transmission of IP Datagrams on Avian Carriers." *IETF*, 1990.
+https://www.rfc-editor.org/rfc/rfc1149
+Original IPoAC specification. Primary source for M18 §5.
+
+[F21] Waitzman, David. "RFC 2549: IP over Avian Carriers with Quality of Service." *IETF*, 1999.
+https://www.rfc-editor.org/rfc/rfc2549
+QoS extension for avian carriers. Reference for M18 §5.
+
+[F22] Carpenter, Brian, and Robert Hinden. "RFC 6214: Adaptation of RFC 1149 for IPv6." *IETF*, 2011.
+https://www.rfc-editor.org/rfc/rfc6214
+IPv6 avian carrier adaptation. Reference for M18 §5.
+
+[F23] Bergen Linux User Group. "RFC 1149 Implementation Writeup." *blug.linux.no*, 2001.
+https://www.blug.linux.no/rfc1149/writeup/
+Only documented IPoAC implementation. 9 packets, 55% loss. Reference for M18 §5.
+
+[F24] Cerf, V.G., et al. "RFC 5050: Bundle Protocol Specification." *IETF Delay-Tolerant Networking Working Group*, 2007.
+DTN bundle protocol for sneakernet mesh. Reference for M18 §6.
+
+### Security and Zero Trust (v3)
+
+[F25] NIST. "SP 800-207: Zero Trust Architecture." *csrc.nist.gov*, 2020.
+https://csrc.nist.gov/publications/detail/sp/800-207/final
+PDP/PEP architecture, continuous authentication. Primary source for M20 §1.
+
+[F26] CISA. "Zero Trust Maturity Model v2." *cisa.gov*, 2023.
+https://www.cisa.gov/sites/default/files/2023-04/zero_trust_maturity_model_v2_508.pdf
+Five-pillar maturity model. Primary source for M20 §4.
+
+[F27] Department of Defense. "Zero Trust Reference Architecture v2.0." *dodcio.defense.gov*, 2022.
+https://dodcio.defense.gov/Portals/0/Documents/Library/(U)ZT_RA_v2.0(U)_Sep22.pdf
+Seven-pillar DoD ZT architecture. Reference for M20 §1.
+
+[F28] IBM Security. "Cost of a Data Breach Report 2024." *ibm.com*, 2024.
+https://www.ibm.com/reports/data-breach
+Average breach cost $4.88M. Economic case for ZT. Reference for M20 §1.
+
+---
+
+## Source Quality Summary (v1 + v2 + v3)
+
+| Category | v1 Count | v2 Count | v3 Count | Total | Primary/Peer-Reviewed | Official Docs | Community/Blog |
+|---|---|---|---|---|---|---|---|
+| Ceph | 6 | 5 | 0 | 11 | 1 | 7 | 3 |
+| Minecraft | 6 | 4 | 0 | 10 | 0 | 10 | 0 |
+| RAG/AI | 8 | 0 | 0 | 8 | 2 | 0 | 6 |
+| Cloud Infrastructure | 6 | 7 | 0 | 13 | 0 | 8 | 5 |
+| Procedural Generation | 6 | 4 | 0 | 10 | 2 | 1 | 7 |
+| Signal/Fidelity | 12 | 0 | 6 | 18 | 5 | 7 | 6 |
+| Color Management | 0 | 0 | 3 | 3 | 1 | 1 | 1 |
+| Audio Restoration | 0 | 0 | 5 | 5 | 0 | 3 | 2 |
+| Serialization/HPC | 0 | 0 | 5 | 5 | 2 | 2 | 1 |
+| Networking/Transport | 3 | 4 | 5 | 12 | 5 | 2 | 5 |
+| Security/ZT | 4 | 0 | 4 | 8 | 7 | 1 | 0 |
+| Humor RFCs | 4 | 0 | 0 | 4 | 4 | 0 | 0 |
+| Dimensionality | 5 | 0 | 0 | 5 | 3 | 0 | 2 |
+| Backup/DR | 0 | 4 | 0 | 4 | 0 | 2 | 2 |
+| **Total** | **60** | **28** | **28** | **116** | **32** | **44** | **40** |
+
+All citations are traceable to their source. No unsourced claims in any research module.
+
+---
+
+*Complete bibliography for Voxel as Vessel v1 + v2 + v3. 116 sources across 14 categories. Three-pass filter + sovereign world architecture + signal fidelity coverage verified.*
