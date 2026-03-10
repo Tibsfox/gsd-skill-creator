@@ -259,7 +259,7 @@ Itten identified seven types of color contrast, each producing a distinct visual
 
 **2. Light-Dark Contrast** — Differences in value (Munsell's dimension). Black against white is the extreme. This contrast drives the perception of form, depth, and volume. It is the dominant contrast in Phil Lewis's pen-and-ink base drawings before digital color is applied.
 
-**3. Cold-Warm Contrast** — Warm hues (red, orange, yellow) against cool hues (blue, green, violet). This contrast maps directly onto Goethe's plus/minus distinction and Goldstein's wavelength-arousal findings. Warm colors advance visually; cool colors recede. The interplay creates a sense of spatial depth without perspective geometry.
+**3. Cold-Warm Contrast** — Warm hues (red, orange, yellow) against cool hues (blue, green, violet). This contrast maps directly onto Goethe's plus/minus distinction and Goldstein's wavelength-arousal findings. Warm colors advance visually; cool colors recede [→ Module A, Section 13: the chromatic depth mechanism — warm advance and cool recede because of chromatic aberration in the lens and differential accommodation]. The interplay creates a sense of spatial depth without perspective geometry.
 
 **4. Complementary Contrast** — Hues opposite each other on the color wheel (red-green, blue-orange, yellow-violet). When placed side by side, complements intensify each other through simultaneous contrast. When mixed, they neutralize to gray. Complementary contrast produces the highest-energy visual interactions and is a signature tool of Fauvist painting.
 
@@ -351,7 +351,7 @@ Key findings:
 
 2. **Cool hues produce calm and relaxation.** Blue, blue-green, and green consistently scored highest on calm/relaxation measures and lowest on arousal/excitement measures. This confirms the direction of Goldstein's clinical observations with modern methodology and larger samples.
 
-3. **The warm-cool divide is robust.** The arousal difference between warm and cool hues was statistically significant (p < 0.001) and persisted across variations in brightness and saturation, though the magnitude of the effect was modulated by these secondary dimensions.
+3. **The warm-cool divide is robust.** The arousal difference between warm and cool hues was statistically significant (p < 0.001) and persisted across variations in brightness and saturation, though the magnitude of the effect was modulated by these secondary dimensions. [→ Module A, Section 3: the neural substrate of this divide is the opponent-process system — the retina's L-M and S-(L+M) channels physically separate warm from cool before the signal reaches the cortex, making the warm-cool distinction a hardware feature, not a cultural artifact.]
 
 4. **Purple occupies an ambiguous position.** Pure purple (Munsell P) straddled the warm-cool divide, producing moderate arousal with mixed valence. Red-purple (RP) was perceived as warm; blue-purple (PB) as cool. This is consistent with purple's position on the color wheel as a transitional hue between the warm and cool hemispheres.
 
@@ -493,7 +493,7 @@ Matisse articulated this explicitly: "When I put down green it doesn't mean gras
 
 Fauvist painters used several specific strategies from the color-theory toolkit:
 
-1. **Complementary contrast at maximum saturation.** Red against green, blue against orange, yellow against violet — all at full chroma. This produces the most intense simultaneous contrast effect, where each color intensifies its complement. The result is a visual vibration at the boundary — the eye oscillates between the two hues, unable to settle. This effect is now understood as a consequence of opponent-process coding: the red-green and blue-yellow channels are driven to their limits simultaneously.
+1. **Complementary contrast at maximum saturation.** Red against green, blue against orange, yellow against violet — all at full chroma. This produces the most intense simultaneous contrast effect, where each color intensifies its complement. The result is a visual vibration at the boundary — the eye oscillates between the two hues, unable to settle. This effect is now understood as a consequence of opponent-process coding [→ Module A, Section 3.3: the cardinal directions of color space — the axes that the retina physically computes — align exactly with the complementary pairs the Fauvists discovered empirically]: the red-green and blue-yellow channels are driven to their limits simultaneously.
 
 2. **Arbitrary color assignment.** Rather than mixing colors to match observed reality, Fauvists chose colors for their emotional and compositional relationships. A shadow that "should" be gray might be painted purple. A face that "should" be flesh-toned might be green. The viewer initially registers the "wrongness" — but if the color relationships within the painting are internally consistent, the initial dissonance gives way to a new kind of coherence.
 
@@ -506,7 +506,7 @@ Fauvism demonstrated empirically what color psychology would later confirm:
 - Complementary contrast is the highest-energy color relationship. Maximizing it produces the most intense viewer response.
 - Saturation is a primary driver of emotional intensity. The Fauvist palette was defined by its refusal to mute.
 
-The movement lasted only about five years as a coherent school — by 1910, most of its practitioners had moved on to Cubism, abstraction, or personal styles. But the principle it established — that color is an independent emotional language — became the foundation for everything that followed, from Kandinsky's synesthetic abstractions to Phil Lewis's geometric color fields.
+The movement lasted only about five years as a coherent school — by 1910, most of its practitioners had moved on to Cubism, abstraction, or personal styles. But the principle it established — that color is an independent emotional language — became the foundation for everything that followed, from Kandinsky's synesthetic abstractions to Phil Lewis's geometric color fields [→ Module D, Section 6.3: Lewis's aesthetic signature inherits the Fauvist principle — his palette is chosen for emotional and compositional effect, not descriptive accuracy, deploying complementary pairs selectively within an analogous framework].
 
 ---
 
@@ -567,7 +567,7 @@ Op Art (Optical Art), as practiced by Bridget Riley, Victor Vasarely, and Josef 
 
 Albers's *Interaction of Color* (1963) — a teaching text based on his decades of work at the Bauhaus, Black Mountain College, and Yale — demonstrated through hundreds of exercises that there is no such thing as seeing a color in isolation. Every color is modified by its neighbors. A single gray appears as two different colors when placed on different backgrounds. A single hue appears to shift in saturation depending on the saturation of its surround.
 
-Albers's central lesson: **Context determines color.** The same physical stimulus (identical wavelength composition reflected from a surface) produces different perceptual experiences depending on the spatial context. This is not an illusion to be corrected — it is how color vision works. The visual system evolved to detect *relationships* between patches, not to measure absolute wavelengths. Simultaneous contrast, the phenomenon Goethe documented and Itten codified, is the default operating mode of the opponent-process system.
+Albers's central lesson: **Context determines color.** The same physical stimulus (identical wavelength composition reflected from a surface) produces different perceptual experiences depending on the spatial context. This is not an illusion to be corrected — it is how color vision works [→ Module A, Section 6.3: the double-opponent neurons in V1 are the specific mechanism — their center-surround receptive fields compute the chromatic difference between a patch and its surround, making context-dependence a hardware feature of the cortex]. The visual system evolved to detect *relationships* between patches, not to measure absolute wavelengths. Simultaneous contrast, the phenomenon Goethe documented and Itten codified, is the default operating mode of the opponent-process system.
 
 For digital artists, Albers's lesson has direct practical implications: the perceived color of any element in a composition depends on every adjacent element. Changing the background changes the foreground. This is why Phil Lewis's compositions, with their dense layering of interlocking geometric patterns, produce a richness of color that exceeds what any individual hue would produce in isolation — each color modifies its neighbors, generating emergent chromatic relationships that exist only in the viewer's perception.
 
@@ -577,7 +577,7 @@ For digital artists, Albers's lesson has direct practical implications: the perc
 
 The festival-visionary art tradition — encompassing the live painting, large-scale installations, and UV-reactive prints associated with Burning Man, Boom Festival, Envision, Electric Forest, and similar gatherings — constitutes a color laboratory with unique experimental conditions:
 
-1. **UV illumination.** Many festival art installations are viewed under UV (blacklight) conditions, where fluorescent pigments absorb ultraviolet light and re-emit it as visible light. This creates a unique perceptual situation: the surface *emits* visible light rather than merely reflecting it. The result is similar to an RGB screen — additive color from a physical surface — but with the textural qualities of paint. The gamut of UV-reactive pigments is narrow (dominated by greens, magentas, oranges, and cyans) but extremely saturated, pushing the viewer's color system to its limits.
+1. **UV illumination.** Many festival art installations are viewed under UV (blacklight) conditions, where fluorescent pigments absorb ultraviolet light and re-emit it as visible light [→ Module D, Section 4.1: the festival circuit — from Burning Man to Boom to Electric Forest — provides the physical infrastructure for this viewing context; → Module A, Section 19.2: under UV, the cone activation pattern is fundamentally different, making a single print two distinct neural experiences]. This creates a unique perceptual situation: the surface *emits* visible light rather than merely reflecting it. The result is similar to an RGB screen — additive color from a physical surface — but with the textural qualities of paint. The gamut of UV-reactive pigments is narrow (dominated by greens, magentas, oranges, and cyans) but extremely saturated, pushing the viewer's color system to its limits.
 
 2. **Scale and immersion.** Festival art is typically large — murals, banners, stage backdrops, and multi-room installations. When a color fills the viewer's peripheral vision, it activates a different mode of processing than when viewed as a small patch on a gallery wall. Peripheral color vision has lower acuity but produces stronger emotional/autonomic responses (affecting mood and arousal without being the focus of attention).
 
@@ -591,7 +591,7 @@ Phil Lewis's work is designed for these conditions. His pen-and-ink bases have t
 
 ## 4. The Digital-Analog Synthesis
 
-The distinction between additive and subtractive color is not merely technical. It is a fundamental divide in the physics of how color reaches the eye, and it has direct consequences for what an artist can achieve. Artists who work in both systems — pen and ink on paper, digital color on screen — must navigate this divide constantly, translating between two color physics that do not map onto each other cleanly.
+The distinction between additive and subtractive color is not merely technical. It is a fundamental divide in the physics of how color reaches the eye, and it has direct consequences for what an artist can achieve. Artists who work in both systems — pen and ink on paper, digital color on screen — must navigate this divide constantly, translating between two color physics that do not map onto each other cleanly [→ Module D, Section 7: Lewis's digital-analog synthesis workflow — from pen-and-ink original to digital scan to screen color to physical print — is a case study in this translation problem].
 
 ---
 
@@ -682,7 +682,7 @@ This is the same color science operating in the same nervous system. The differe
 
 ## 5. Color as Design Language
 
-The vocabulary of color theory — warm/cool, complementary, analogous, saturated/muted, high-value/low-value — is not confined to fine art practice. It is a shared design language that operates across creative disciplines. The same principles that govern a Rothko painting govern a logo, a character design, a fursuit, a website, a coloring book, and an architectural lighting plan. The scale and medium differ. The perceptual principles do not.
+The vocabulary of color theory — warm/cool, complementary, analogous, saturated/muted, high-value/low-value — is not confined to fine art practice. It is a shared design language that operates across creative disciplines [→ Module D, Section 4: the festival ecosystem is where this shared language is most visibly deployed — UV banners, stage design, wearable art, and large-scale installations all draw from the same color vocabulary]. The same principles that govern a Rothko painting govern a logo, a character design, a fursuit, a website, a coloring book, and an architectural lighting plan. The scale and medium differ. The perceptual principles do not.
 
 ---
 
@@ -712,7 +712,7 @@ The principles are direct applications of the research:
 - **Desaturated palettes** signal maturity, sophistication, or weariness. A character in muted earth tones is read as grounded or world-worn.
 - **Complementary color accents** create visual tension that signals complexity. A predominantly cool character with a single warm accent (a red scarf on a blue figure) has a visual "conflict" that suggests hidden depth.
 
-In the furry art community — where artists design personal characters (fursonas) and commission art and fursuits based on those designs — color choices carry particular emotional weight. A fursona's palette is an expression of the creator's identity, not a commercial design brief. The color choices are personal, deliberate, and emotionally loaded. The same hue-arousal and value-valence principles apply, but the stakes are self-expression rather than market positioning.
+In the furry art community — where artists design personal characters (fursonas) and commission art and fursuits based on those designs — color choices carry particular emotional weight. A fursona's palette is an expression of the creator's identity, not a commercial design brief. The color choices are personal, deliberate, and emotionally loaded. The same hue-arousal and value-valence principles apply, but the stakes are self-expression rather than market positioning. [→ Module D, Section 8.3: Lewis's fox subjects — with their warm amber-orange palettes — are a case study in how the same creature can carry different emotional tones depending on palette choices.]
 
 Fursuit construction adds a physical-material layer: the available palette of faux fur fabrics constrains the realizable colors, and the way fur catches light (each fiber is a tiny cylinder reflecting and refracting) produces different saturation and value effects than flat paint or screen display. A character that reads as vivid on screen may need adjustments in fur to achieve the same perceptual impact — a practical gamut-mapping problem analogous to the RGB-to-CMYK print translation described in Section 4.2.
 
@@ -798,7 +798,7 @@ Sacred geometry (Module C) provides the structural framework; color theory provi
 - **Fibonacci spirals in warm colors** activate both the mathematical-pattern recognition system (Module C) and the warm-hue arousal system (Module B). The viewer simultaneously perceives order and feels energy.
 - **Mandala patterns in complementary color pairs** produce visual vibration at the boundaries — the geometric precision of the mandala conflicts with the chromatic oscillation of complementary contrast, creating a perceptual tension that is the signature "alive" quality of visionary art.
 - **Fractal branching colored with value gradients** uses lightness progression to reinforce the spatial depth of the fractal structure. The branch closest to the viewer is brightest; the deepest recursion is darkest. Value encodes depth. Geometry encodes structure. The two systems collaborate.
-- **The golden ratio appears in color proportion.** Goethe's area-ratio recommendations for complementary pairs (yellow:violet = 1:3, orange:blue = 1:2) are, functionally, golden-ratio-adjacent proportions. Whether this is coincidence or reflects a deeper optimization principle (the visual system may prefer proportions that approach irrational ratios because they avoid simple-integer resonances that produce monotony) is an open research question.
+- **The golden ratio appears in color proportion.** Goethe's area-ratio recommendations for complementary pairs (yellow:violet = 1:3, orange:blue = 1:2) are, functionally, golden-ratio-adjacent proportions [→ Module C, Section 2.2: the formal mathematics of φ ≈ 1.618 and the golden angle ≈ 137.5°, and Section 2.3: why the golden angle produces optimal packing in phyllotaxis]. Whether this is coincidence or reflects a deeper optimization principle (the visual system may prefer proportions that approach irrational ratios because they avoid simple-integer resonances that produce monotony) is an open research question.
 
 ---
 
