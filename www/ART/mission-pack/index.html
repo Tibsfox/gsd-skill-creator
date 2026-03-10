@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shapes, Colors, Coloring Outside the Lines — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #4A0E8F;
+      --secondary: #006D75;
+      --tertiary: #B45309;
+      --accent: #7C3AED;
+      --light-primary: #F3E8FF;
+      --light-secondary: #CCFBF1;
+      --bg: #0D0A14;
+      --bg-card: #1A1428;
+      --bg-card-hover: #221A38;
+      --text: #EDE9F4;
+      --text-muted: #A89EC0;
+      --border: #2D2450;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.65;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1A0535 0%, #0A1A2E 60%, #0A2020 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(124,58,237,0.4);
+      border-radius: 3px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #E8D8FF;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: var(--secondary);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .tagline {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── FILE CARDS ── */
+    .files {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .file-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      display: block;
+    }
+
+    .file-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .file-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .file-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #D8C8F8;
+      margin-bottom: 0.35rem;
+    }
+
+    .file-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── CONTENTS ── */
+    .stages {
+      margin-bottom: 3rem;
+    }
+
+    .stage {
+      border-left: 3px solid var(--primary);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      background: rgba(74,14,143,0.08);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .stage:nth-child(2) { border-color: var(--secondary); background: rgba(0,109,117,0.08); }
+    .stage:nth-child(3) { border-color: var(--tertiary); background: rgba(180,83,9,0.08); }
+
+    .stage-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .stage-items {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .stage-items li::before {
+      content: '→ ';
+      color: var(--accent);
+    }
+
+    /* ── USAGE ── */
+    .usage {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .usage h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .usage ol {
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .usage ol li { margin-bottom: 0.5rem; }
+
+    code {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.8rem;
+      background: rgba(124,58,237,0.15);
+      color: #C4B5FD;
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: #110E1E;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #C4B5FD;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    /* ── QUOTE ── */
+    .closing-quote {
+      background: linear-gradient(135deg, rgba(74,14,143,0.12), rgba(0,109,117,0.12));
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .closing-quote p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .closing-quote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-style: normal;
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .pipeline-arrow { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">GSD Research Mission Package</div>
+  <h1>Shapes, Colors,<br/>Coloring Outside the Lines</h1>
+  <div class="subtitle">The phillewisart Edition</div>
+  <p class="tagline">A Deep Research Study in Visionary Art, Color Science, and Sacred Geometry</p>
+  <div class="pipeline">
+    <span>Vision</span>
+    <span class="pipeline-arrow">→</span>
+    <span>Research</span>
+    <span class="pipeline-arrow">→</span>
+    <span>Mission</span>
+  </div>
+</header>
+
+<main>
+
+  <p class="section-label">Downloads</p>
+  <div class="files">
+    <a class="file-card" href="mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-name">mission.pdf</div>
+      <div class="file-desc">30-page mission package — complete Vision, Research, and Mission stages. Ready for GSD Orchestrator handoff.</div>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="file-icon">🗒️</div>
+      <div class="file-name">mission.tex</div>
+      <div class="file-desc">XeLaTeX source file. Modify and recompile to customize colors, content, or layout.</div>
+    </a>
+  </div>
+
+  <p class="section-label">Document Contents</p>
+  <div class="stages">
+    <div class="stage">
+      <div class="stage-title">Stage 1 — Vision Document</div>
+      <ul class="stage-items">
+        <li>Narrative vision in the phillewisart philosophical register</li>
+        <li>5-problem problem statement</li>
+        <li>Core concept: the universe's grammar + Lewis as instrument</li>
+        <li>Domain map and module architecture (ASCII)</li>
+        <li>4 research modules: Neuroscience, Color Theory, Sacred Geometry, Visionary Art</li>
+        <li>Chipset configuration YAML</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line to GSD ecosystem philosophy</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-title">Stage 2 — Research Reference</div>
+      <ul class="stage-items">
+        <li>Module A: Visual perception neuroscience (retina → LGN → V1 → V4 → IT cortex)</li>
+        <li>Salk Institute 2019 joint color-shape coding finding</li>
+        <li>Module B: Color theory history (Newton → Goethe → Munsell → digital) + psychology</li>
+        <li>Module C: Sacred geometry — Platonic solids, golden ratio, Fibonacci, Flower of Life</li>
+        <li>Module D: Visionary art tradition + Phil Lewis biography, aesthetic, and technique</li>
+        <li>Safety and sensitivity matrix</li>
+        <li>Annotated source bibliography</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-title">Stage 3 — Mission Package</div>
+      <ul class="stage-items">
+        <li>4-wave execution plan with parallel tracks (Wave 1A + 1B simultaneous)</li>
+        <li>Squadron profile: 14 roles including CRAFT-VIS, CRAFT-COLOR, CRAFT-GEO, CRAFT-ART</li>
+        <li>Component breakdown with model assignments (30/60/10 Opus/Sonnet/Haiku)</li>
+        <li>Token budget (~117,000 combined)</li>
+        <li>30-test test plan: 4 safety-critical, 16 core, 6 integration, 4 edge cases</li>
+        <li>Verification matrix mapping all 12 criteria to test IDs</li>
+        <li>Dependency graph (ASCII)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h3>How to Use This Package</h3>
+    <ol>
+      <li>Open <code>mission.pdf</code> and review all three stages — especially the chipset configuration and wave execution plan in Stage 3.</li>
+      <li>Hand the PDF to your GSD Orchestrator or skill-creator agent along with this prompt:<br/>
+        <em style="font-size:0.85rem; color:#a89ec0;">"Execute the mission in mission.pdf. Use the wave plan, model assignments, and crew manifest. Start with Wave 0 foundation. Report at each wave boundary before proceeding."</em>
+      </li>
+      <li>Approve wave transitions via the CAPCOM checkpoint at each wave boundary.</li>
+      <li>The final deliverable is <em>The Visible Grammar</em> — a publication-quality companion document for the phillewisart aesthetic.</li>
+    </ol>
+  </div>
+
+  <p class="section-label">Recompile LaTeX Source</p>
+  <div class="usage" style="margin-bottom: 3rem;">
+    <h3>Three-Pass XeLaTeX Compilation</h3>
+    <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Three passes required to resolve table of contents, cross-references, LastPage counter, and hyperlink destinations. Requires XeTeX with DejaVu fonts and standard TeX Live packages.</p>
+  </div>
+
+  <div class="closing-quote">
+    <p>The lines in the coloring book were always approximate. The world outside them is where the actual grammar lives. This mission is an expedition to document that grammar — and to show how one artist from Boulder, Colorado has been reporting it faithfully for two decades, in pen and ink and UV light and the memory of a thousand Red Rocks shows.</p>
+    <cite>— from the Through-Line, Stage 1</cite>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package · Shapes, Colors, Coloring Outside the Lines — The phillewisart Edition</p>
+  <p style="margin-top: 0.4rem;">March 10, 2026 · Squadron Profile · Ready for Orchestrator</p>
+</footer>
+
+</body>
+</html>

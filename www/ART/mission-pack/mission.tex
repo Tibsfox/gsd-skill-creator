@@ -1,0 +1,1069 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME ── Visionary / Psychedelic: electric violet + deep teal + solar amber
+\definecolor{primary}{HTML}{4A0E8F}       % Electric violet
+\definecolor{secondary}{HTML}{006D75}     % Deep teal
+\definecolor{tertiary}{HTML}{B45309}      % Solar amber
+\definecolor{accent}{HTML}{7C3AED}        % Bright violet
+\definecolor{lightprimary}{HTML}{F3E8FF}  % Pale violet
+\definecolor{lightsecondary}{HTML}{CCFBF1}
+\definecolor{lighttertiary}{HTML}{FEF3C7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS & FOOTERS ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Shapes, Colors, Coloring Outside the Lines}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Shapes, Colors, Coloring Outside the Lines -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════════
+%  TITLE PAGE
+% ══════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Shapes, Colors,\\[0.3em]Coloring Outside the Lines}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The phillewisart Edition}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Visionary Art, Color Science, and Sacred Geometry}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 10, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Shapes, Colors, Coloring Outside the Lines --- Vision Guide}
+
+\metafield{Date:}{March 10, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{None (foundational study)}
+\metafield{Context:}{The phillewisart Edition --- a deep dive into the intersection of visionary art practice, the neuroscience of color and form perception, sacred geometry as a mathematical and cultural framework, and the digital-analog synthesis that defines the Phil Lewis aesthetic.}
+
+\subsection{Vision}
+
+There is a child who looks at a landscape and sees the geometry inside it --- the hexagonal tiling of a pine cone, the golden spiral buried in a wave, the frequency pattern vibrating through a stand of aspens. That child doodles through school, finds DOS manuals comprehensible, and eventually discovers that digital tools can be used to make visible what the eye has always partially seen but never quite held still.
+
+Phil Lewis is that child, grown into an artist whose Boulder, Colorado studio sits at the intersection of nature, mathematics, and festival culture. His work --- recognizable at a glance by the interlocking geometries emerging from organic forms, the layered digital color applied with the precision of a craftsman who memorized the manual before touching the machine --- is not decoration. It is a research report: here is what the world looks like when you stop pretending the lines are where convention says they are.
+
+This research mission operates on Phil's fundamental premise as its philosophical engine: that shapes and colors are not properties of objects but properties of the perceiving system meeting the world at its boundary. A photon enters the eye. Opponent-process cells fire. Color is assembled, not received. A form is recognized not because a line exists in the world but because the brain constructs the boundary between this and not-this. The coloring book exists; the lines inside it are a negotiated fiction. When Phil Lewis paints a jellyfish and threads repeating geometries through its bell --- or renders Red Rocks as a portal to another dimension --- he is not distorting reality. He is reporting it more accurately than a photograph does.
+
+The mission asks: what are the deep structures underlying this aesthetic, and what can an agent team produce that fully maps, honors, and extends it? The answer requires four parallel tracks: the neuroscience of visual perception (how color and shape are actually processed), color theory and psychology (how hue communicates), sacred geometry as a mathematical and historical framework, and the visionary art tradition in which Phil Lewis operates. The synthesis is a comprehensive research document that could serve as the intellectual companion to a Phil Lewis retrospective.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The perception gap:} Most viewers experience art as surfaces. The rich literature on how color and shape are co-processed in the visual cortex --- the Salk Institute's 2019 finding that color and form are combined far earlier in the visual hierarchy than previously thought, the V4 ``glob'' system, the role of opponent-process cells --- is inaccessible to general audiences without a guide that translates it.
+  \item \textbf{The sacred geometry credibility gap:} Sacred geometry occupies an uncomfortable middle zone between rigorous mathematics (Platonic solids, the golden ratio, Fibonacci spirals in natural systems) and popular mysticism. A research document that maps the actual mathematical content of these patterns --- and distinguishes documented natural occurrence from metaphysical claims --- is needed.
+  \item \textbf{The Phil Lewis documentation gap:} Phil Lewis is a well-known figure in festival and visionary art communities (29K+ Instagram followers, a Boulder studio and gallery) but lacks the kind of thorough intellectual documentation that contextualizes his work within the traditions he inhabits and the sciences he intuitively practices.
+  \item \textbf{The digital-analog synthesis problem:} The combination of traditional pen-and-ink with digital tools that Lewis employs is undertheorized. The question of what digital color (RGB, light-based) does differently than pigment-based color, and how hybrid practitioners navigate both, lacks a clear treatment.
+  \item \textbf{The festival-to-gallery translation problem:} Visionary and psychedelic art has historically been tied to festival and counter-cultural contexts. The conditions under which it translates to gallery and institutional settings --- and what is gained or lost in that translation --- is an open research question.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Shapes and colors are the universe's self-report, and artists are the instruments through which it becomes legible.}
+
+The same equations describe the spiral of a galaxy, the arrangement of seeds in a sunflower, the Fibonacci branching of a tree, and the geometric patterns that the visual cortex generates under certain conditions of altered perception. Phil Lewis doesn't invent these patterns; he finds them and translates them into a medium where other nervous systems can meet them. The golden ratio (approximately 1.618) is mathematically optimal for packing and growth problems --- evolution didn't ``plan'' it, but organisms that followed it survived. The brain's V4 area processes color in millimeter-sized ``globs.'' The opponent-process system (red-green, blue-yellow, black-white) mirrors the three axes of color space that Lewis deploys when he places an electric teal against a warm amber in a composition. The sacred geometries of tradition and the geometries of perception are the same geometries.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+RESEARCH DOMAIN MAP — Shapes, Colors, Coloring Outside the Lines
+
+        +---------------------------+
+        |   NEUROSCIENCE OF VISION  |
+        |  (how we see what we see) |
+        +-----------+---------------+
+                    |
+    +---------------v---------------+
+    |   COLOR THEORY \& PSYCHOLOGY   |
+    |   (what color does to us)     |
+    +---------------+---------------+
+                    |
+    +---------------v---------------+
+    |     SACRED GEOMETRY           |
+    |   (mathematics of pattern)    |
+    +---------------+---------------+
+                    |
+    +---------------v---------------+
+    |     VISIONARY ART TRADITION   |
+    |  (the cultural/creative field)|
+    +---------------+---------------+
+                    |
+    +-------+-------v-------+-------+
+            |  PHIL LEWIS   |
+            | SYNTHESIS     |
+            +---------------+
+                 phillewisart.com
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+
+Module A: Visual Perception Neuroscience
+  - Color encoding (retina -> LGN -> V1 -> V4 -> IT cortex)
+  - Shape recognition (ventral stream / "what pathway")
+  - Color-shape joint coding (Salk Institute 2019)
+  - Opponent process \& color opponent cells
+
+Module B: Color Theory \& Psychology
+  - Historical arc: Newton -> Goethe -> Munsell -> digital
+  - Color psychology research (hue/saturation/brightness effects)
+  - Warm/cool, valence, arousal
+  - Art movements as color laboratories (Fauvism, Expressionism)
+  - RGB vs. pigment: digital vs. analog color
+
+Module C: Sacred Geometry \& Mathematical Patterns
+  - Platonic solids: mathematics and cultural history
+  - Golden ratio / Phi: mathematical basis + natural occurrence
+  - Fibonacci sequence in biological systems
+  - Mandala, Flower of Life, Metatron's Cube
+  - Fractal geometry: scale invariance in nature
+
+Module D: Visionary Art Tradition \& phillewisart
+  - Visionary art: history, defining characteristics
+  - Festival culture as art ecosystem (Burning Man, Boom, Envision)
+  - Artists in the tradition: Alex Grey, Android Jones, Luke Brown
+  - Phil Lewis: biography, aesthetic, technique, community
+  - Digital-analog synthesis in practice
+  - Phil Lewis work catalog and thematic analysis
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Visual Perception Neuroscience}
+
+This module maps the neural pathway from photon to percept. It begins in the retina --- three types of cone cells (S, M, L) detecting wavelengths --- and traces the signal through the optic nerve to the lateral geniculate nucleus (LGN), then to primary visual cortex (V1), then through extrastriate areas (V2, V4, IT). Special attention is given to V4, where color processing occurs in millimeter-scale ``glob'' clusters, and to the 2019 Salk Institute finding published in \textit{Science} that color and orientation (shape) are jointly coded in the primary visual cortex far earlier in the processing hierarchy than the classical model assumed. The module also covers opponent-process color coding (red-green, blue-yellow, black-white axes), the construction of color perception in the brain rather than in the object, peripheral versus foveal color accuracy, and the ``fill-in'' problem.
+
+\subsubsection{Module B: Color Theory and Psychology}
+
+This module traces the intellectual history of color from Newton's \textit{Opticks} (1704) through Goethe's \textit{Theory of Colors} (1810) to Munsell's systematic color space, Itten's Bauhaus teachings, and contemporary digital color models. It documents the psychology of hue, saturation, and brightness: warm hues produce higher arousal and emotional intensity; cool hues evoke calm; high saturation triggers stronger emotional response. It covers the Fauvist and Expressionist art movements as empirical color experiments. It distinguishes RGB (additive, light-based) from traditional pigment-based (subtractive) color systems and addresses how digital artists like Phil Lewis navigate both.
+
+\subsubsection{Module C: Sacred Geometry and Mathematical Patterns}
+
+This module examines the mathematical structures underlying sacred geometry: the five Platonic solids and their appearance in crystal and molecular structures; the golden ratio (Phi, approximately 1.618) and its derivation from the Fibonacci sequence; the documented occurrence of Fibonacci numbers in plant morphology (sunflower seed arrangements, pine cone spirals, petal counts); and the Flower of Life as a geometric figure from which the Platonic solids can be derived via Metatron's Cube. It also covers the historical and cultural context: Greek philosophical associations, Egyptian architectural encoding of ratio, Hindu and Buddhist mandala traditions, and the twentieth-century revival of sacred geometry as both art and speculative mathematics. The module is careful to distinguish mathematically documented claims from metaphysical assertions.
+
+\subsubsection{Module D: Visionary Art Tradition and Phil Lewis}
+
+This module situates Phil Lewis within the visionary art tradition: a practice characterized by vibrant color, sacred geometry, organic-geometric fusion, and the intent to transmit inner or transpersonal experience to the viewer. It documents the festival-art ecosystem (Burning Man, Boom Festival, Envision Festival) as the primary exhibition and community context. It profiles kindred artists in the tradition: Alex Grey, Android Jones, Luke Brown, Amanda Sage. It then focuses on Phil Lewis specifically: his biography (Lake Tahoe and Colorado upbringing, music career, digital art transition), technique (pen-and-ink combined with digital tools, UV printing, laser engraving), aesthetic signature (repeating geometries emerging from organic forms), and thematic catalog (Red Rocks, jellyfish, foxes, trees, vibrational patterns). It addresses the question of festival-to-gallery translation and documents Phil's Boulder studio as a community anchor.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: "shapes-colors-phillewisart"
+  activation\_profile: squadron
+  wave\_count: 4
+
+models:
+  opus:   "claude-opus-4-6"       \% ~{}30\% -- synthesis, cross-module, sensitivity
+  sonnet: "claude-sonnet-4-6"     \% ~{}60\% -- survey, document assembly, verification
+  haiku:  "claude-haiku-4-5-20251001"  \% ~{}10\% -- schemas, templates, scaffolding
+
+modules:
+  - id: A
+    name: visual-perception-neuroscience
+    model: sonnet
+    parallel\_with: [B]
+  - id: B
+    name: color-theory-psychology
+    model: sonnet
+    parallel\_with: [A]
+  - id: C
+    name: sacred-geometry-mathematics
+    model: sonnet
+    parallel\_with: [D]
+  - id: D
+    name: visionary-art-phillewisart
+    model: opus
+    parallel\_with: [C]
+
+synthesis:
+  model: opus
+  inputs: [A, B, C, D]
+  output: "The Visible Grammar: A Complete Companion"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Neural pathway of color and shape perception (retina through IT cortex)
+  \item Color theory history from Newton to digital models
+  \item Color psychology: hue, saturation, brightness, arousal, valence
+  \item Sacred geometry: Platonic solids, golden ratio, Fibonacci, Flower of Life, Metatron's Cube
+  \item Natural occurrence of geometric patterns in biological systems (documented)
+  \item Visionary art tradition: history, characteristics, key artists
+  \item Festival culture as art ecosystem
+  \item Phil Lewis: biography, aesthetic, technique, community presence
+  \item Digital-analog synthesis in contemporary art practice
+  \item Thematic analysis of Phil Lewis's work catalog
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Clinical applications of color therapy (chromotherapy) beyond historical overview
+  \item Psychedelic pharmacology and its direct neurological mechanisms
+  \item Art market analysis or commercial valuation
+  \item Technical tutorials for digital art software
+  \item Comprehensive survey of all visionary artists (focus on tradition-defining figures + Phil Lewis)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The neural pathway from photon to color percept is documented with specific anatomical structures and cited research at each stage.
+  \item The 2019 Salk Institute joint color-shape coding finding is accurately described with source citation.
+  \item Color psychology is documented across hue, saturation, and brightness dimensions with peer-reviewed citations for each claim.
+  \item The historical arc of color theory (Newton through digital) is complete with dates and key figures.
+  \item All five Platonic solids are documented with mathematical properties and cultural associations.
+  \item The golden ratio's mathematical basis and documented natural occurrences (minimum 5) are cited.
+  \item Fibonacci sequence occurrences in plant morphology are documented with specific species and spiral counts.
+  \item The visionary art tradition is defined with distinguishing characteristics that separate it from psychedelic and surrealist art.
+  \item At least four tradition-defining visionary artists are profiled with specific work references.
+  \item Phil Lewis's biography, aesthetic signature, and technique are documented drawing on his own stated philosophy.
+  \item The document can serve as a standalone intellectual companion to a Phil Lewis gallery exhibition.
+  \item The synthesis chapter maps the connections between all four modules --- showing how the same mathematical structures appear in retinal processing, in the golden ratio, in Phil Lewis's compositions, and in the natural forms he depicts.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+The Space Between (Foxglove, 2026) & Philosophical sibling & Shares the ``vibration through-line'' from Ch.~4 onward; both trace mathematical structure across scales \\
+The Quark and the Compiler & Methodological model & Same multi-scale tracing approach; tools as universe self-examination \\
+GSD Skill-Creator documentation & Upstream dependency & This mission package feeds skill-creator for execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The same pattern appears at every scale: the eye constructs color from opponent-process differencing; the ratio that governs sunflower packing is the ratio inscribed in the Parthenon; the five Platonic solids that Plato assigned to the elements are the five shapes hidden inside the Flower of Life; the repeating geometries Phil Lewis threads through a jellyfish's bell are the vibrational eigenmodes of a membrane under tension. The universe has a grammar. It is expressed in wavelengths and ratios and the Fibonacci sequence. It is expressed in the firing of retinal ganglion cells and in the careful pen-and-ink marks a former bass player makes at his Boulder studio before opening the digital canvas.
+
+Coloring outside the lines is not transgression. The lines were approximate to begin with. The actual structure of the world is richer than the coloring book suggests, and the artist's job --- Phil Lewis's job --- is to report it faithfully. This research mission produces the map that makes that report legible.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Shapes, Colors, Coloring Outside the Lines --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the factual foundation for the mission package. Each module section contains findings, data, and citations relevant to that research track. The synthesis module (Module D extended) integrates all four tracks around the Phil Lewis aesthetic.
+
+Key source organizations for this research:
+\begin{itemize}[noitemsep]
+  \item Salk Institute for Biological Studies (visual cortex research)
+  \item National Institutes of Health / PubMed (peer-reviewed neuroscience)
+  \item American Museum of Natural History (color vision education)
+  \item Society for Neuroscience / \textit{ScienceDaily} (research summaries)
+  \item Wikipedia (Color Vision, Colour Centre --- used for structural overview, cross-referenced with primary sources)
+  \item BMC Psychology (peer-reviewed color psychology)
+  \item EBSCO Research Starters (sacred geometry historical overview)
+  \item phillewisart.com (primary source for artist biography and aesthetic)
+\end{itemize}
+
+\subsection{Module A Reference: Visual Perception Neuroscience}
+
+\subsubsection{The Retinal Foundation}
+
+The eye contains three types of cone photoreceptors, conventionally labeled Short (S), Medium (M), and Long (L) based on the peak wavelength each detects. S cones respond to violet-blue wavelengths; M cones to green-yellow; L cones to greenish-yellow (not red as commonly stated --- the peak L-cone sensitivity is in the greenish-yellow region of the spectrum). Color perception is not a property of the object but an output of the perceiving system: objects absorb some wavelengths and reflect others; the reflected photons trigger differential cone responses; the brain interprets this differential as color.
+
+Retinal ganglion cells (RGCs) act as feature detectors. The midget cell class displays red-green opponency; the bi-stratified class links S-cone ON pathways with L-M cone OFF pathways (producing blue-yellow opponency). The opponent-process system is mathematically elegant: rather than encoding three separate absolute color channels, it encodes differences, which is more efficient and robust. The three opponent axes (red-green, blue-yellow, black-white) map directly onto the ``cardinal directions'' of psychophysically defined color space.
+
+\subsubsection{The Cortical Pathway}
+
+From the retina, signals travel via the optic nerve to the lateral geniculate nucleus (LGN) of the thalamus, which organizes and repackages them before forwarding to primary visual cortex (V1) in the occipital lobe. V1 contains two types of color-sensitive neurons: single-opponent neurons (responding to large areas of uniform color --- useful for recognizing color scenes and atmospheres) and double-opponent cells (responding to color boundaries, textures, and patterns).
+
+From V1, visual information proceeds through extrastriate cortex: V2, then V4. Color processing in the extended V4 area occurs in millimeter-sized modules called ``globs.'' V4 is the first stage where the full range of hues in color space is represented. V4 neurons have been shown to provide input to the inferior temporal (IT) cortex, which integrates color with shape and form.
+
+\subsubsection{Joint Color-Shape Coding (Salk Institute, 2019)}
+
+A landmark study from the Salk Institute, published in \textit{Science} in June 2019, overturned the classical model. Scientists previously believed the visual system encoded shape and color with different sets of neurons and combined them only at the highest brain centers. The Salk research showed that neurons in the primary visual cortex respond selectively to particular \textit{combinations} of color and shape, and that color and orientation are jointly coded and spatially organized in primate primary visual cortex (Li \& Callaway et al., \textit{Science}, 2019, DOI: 10.1126/science.aaw5868). The lead researchers noted: the brain ``encodes color and form together in a systematic way'' rather than processing them in separate streams before later combination. Neuroscientist Bevil Conway (Wellesley/MIT) has noted separately that the brain appears to reflect what artists have long recognized: that color and shape can be decoupled or combined, each represented somewhat independently.
+
+\subsubsection{Peripheral Color and the Fill-In Problem}
+
+The cone distribution in the human eye is uneven: cone density is highest at the fovea, extremely low in the periphery. As a result, peripheral color vision is poor; much of the color perceived in the periphery may be ``filled in'' by what the brain expects based on context and memory (Conway, Nature Reviews Neuroscience, 2009). This has direct implications for composition: a viewer scanning a Phil Lewis print is constructing color as they go, with the brain filling gaps based on pattern and expectation. The geometric repetition in Lewis's work is not just aesthetically satisfying --- it feeds the brain's fill-in machinery with reliable pattern data.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Stage} & \tableheader{Structure} & \tableheader{Function} \\
+\midrule
+Retina & S, M, L cones & Wavelength detection \\
+Retina & Retinal ganglion cells & Opponent-process encoding \\
+LGN & Lateral geniculate nucleus & Signal organization, relay \\
+V1 & Primary visual cortex & Color + orientation joint coding \\
+V4 & Extrastriate cortex ``globs'' & Full hue-space representation \\
+IT cortex & Inferior temporal lobe & Color-shape integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module B Reference: Color Theory and Psychology}
+
+\subsubsection{Historical Arc}
+
+Color theory --- the study of rules and guidelines for color use in art and design --- was first formally referenced by Italian humanist Leon Battista Alberti in 1435. Isaac Newton's \textit{Opticks} (1704) established the color wheel by demonstrating that white light contains all spectral colors. Johann Wolfgang von Goethe's \textit{Theory of Colors} (1810) linked color directly to emotional response, associating ``plus colors'' (yellow, red-yellow, yellow-red) with warmth and excitement. Neuropsychologist Kurt Goldstein in the 1940s expanded Goethe's work with physiological evidence: longer wavelengths (warm colors) produce higher arousal; shorter wavelengths (cool colors) produce calm. Goldstein found that red worsened motor tremors and balance while green improved motor function.
+
+The Munsell color system provided the first systematic three-dimensional color space based on psychological principles of visual perception, encoding hue, value (brightness), and chroma (saturation) independently. Albert Munsell's framework remains a standard reference for controlled color psychology research. Contemporary digital color uses additive RGB (red-green-blue light-mixing) rather than subtractive pigment-mixing; this enables luminosity effects (colors that appear to glow or emit light) impossible in traditional media.
+
+\subsubsection{Color Psychology Findings}
+
+A peer-reviewed study in BMC Psychology (2025, DOI: 10.1186/s40359-025-03034-y) investigated emotional valence responses to color across hue, brightness, and saturation dimensions in art and non-art students. Warm hues (yellow, yellow-red, red, red-purple, purple) are consistently associated with higher emotional arousal and intensity. Cool hues (blue, blue-green, green) evoke calm and relaxation. High saturation correlates with stronger emotional response across hue categories; high brightness links to positive valence. Art-trained observers demonstrated systematic differences in color-emotion perception, suggesting that both training and innate sensitivity modulate the response.
+
+A comprehensive PMC review (Elliot, Frontiers in Psychology, 2015) confirmed: red hues produce the most emotional arousal; blue the least; green intermediate. The three basic color properties --- hue, lightness, and chroma --- each independently influence psychological functioning, though most research has focused on hue. Cultural variation is significant: yellow connotes brightness and cheer in the United States but jealousy in France; white signals mourning in Eastern contexts but purity in Western ones.
+
+\subsubsection{Art Movements as Color Laboratories}
+
+The Fauvist movement (early 20th century, Matisse as central figure) treated color as autonomous from descriptive function. Henri Matisse: ``When I put down green it doesn't mean grass, and when I put down blue it doesn't mean sky.'' The Fauvists --- whose name originated as a critique (``wild beasts'') for their ``unfinished'' appearance --- used complementary colors and high saturation to maximize emotional impact. Picasso's Blue Period (1901--1904) demonstrated monochromatic color's capacity for sustained emotional register: using only blue and green hues after a friend's death, he produced paintings of profound melancholy that have become benchmarks of color-emotion research. Mark Rothko's monochromatic color field paintings showed that eliminating hue variation focuses emotional response on subtle within-color variation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Hue} & \tableheader{Arousal Level} & \tableheader{Common Associations} \\
+\midrule
+Red & Highest & Energy, urgency, warmth, passion \\
+Yellow & High & Brightness, cheer, energy (W); jealousy (FR) \\
+Orange & High & Warmth, social connection \\
+Green & Intermediate & Freshness, calm, nature, health \\
+Blue & Low & Trust, calm, coolness, sadness \\
+Purple & Intermediate & Royalty, creativity, imagination \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module C Reference: Sacred Geometry and Mathematical Patterns}
+
+\subsubsection{The Five Platonic Solids}
+
+The five Platonic solids are the only convex polyhedra in which every face is an identical regular polygon and every vertex is identical: tetrahedron (4 triangular faces), cube/hexahedron (6 square faces), octahedron (8 triangular faces), dodecahedron (12 pentagonal faces), and icosahedron (20 triangular faces). Plato associated them with classical elements: tetrahedron with fire, cube with earth, octahedron with air, icosahedron with water, dodecahedron with the cosmos itself. These shapes appear physically in crystal lattices and in viral capsid structures (many viruses have icosahedral symmetry). In Metatron's Cube --- a sacred geometry figure constructed by connecting the centers of 13 circles in the Fruit of Life pattern --- all five Platonic solids can be derived.
+
+\subsubsection{The Golden Ratio and Fibonacci Sequence}
+
+The golden ratio (Phi, $\varphi \approx 1.618$) emerges from the Fibonacci sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \ldots\ --- each term the sum of the two preceding), as the ratio of consecutive Fibonacci numbers converges to 1.618 as the sequence progresses. The mathematical basis for its prevalence in nature is optimization: when a plant spaces its leaves or seeds by the golden angle (approximately 137.5°, derived from $\varphi$), it maximizes exposure to sunlight or water while minimizing overlap. Evolution selected for this not by plan but because organisms with this growth pattern out-competed others. Documented natural occurrences include:
+
+\begin{itemize}[noitemsep]
+  \item Sunflower seeds: arranged in two sets of spirals, clockwise and counter-clockwise, with counts being consecutive Fibonacci numbers (commonly 34 and 55)
+  \item Pine cones: spiral counts typically 8 and 13
+  \item Flower petal counts: lilies (3), buttercups (5), delphiniums (8), marigolds (13), asters (21), daisies (34, 55, or 89)
+  \item Nautilus shells: logarithmic spiral approximating the golden spiral
+  \item The icosahedron: ratio of edge length to inscribed sphere radius equals the golden ratio
+\end{itemize}
+
+\subsubsection{The Flower of Life, Metatron's Cube, and the Mandala}
+
+The Flower of Life --- a pattern of 19 overlapping circles forming a flower-like design --- appears in ancient Egyptian, Phoenician, and Buddhist art and is documented at sites including the Temple of Osiris at Abydos. It is claimed to contain, within its geometry, every Platonic solid, the Tree of Life from Kabbalah, and the mathematical basis for musical intervals. Whether these claims are rigorously demonstrable varies: the construction of Metatron's Cube from the Flower of Life, and the derivation of all five Platonic solids from Metatron's Cube, is geometrically demonstrable. Broader metaphysical claims about ``encoding all of creation'' are philosophical, not mathematical. Mandalas --- circular geometric diagrams used in Hindu and Buddhist meditation practice --- are separately documented as tools for focusing attention; their circular, self-similar structure exploits the brain's natural affinity for pattern recognition.
+
+\subsubsection{Fractals and Scale Invariance}
+
+Fractal geometry, formalized by Benoit Mandelbrot in the 20th century, describes structures that exhibit self-similarity across scales: a branch of a fern looks like a smaller version of the whole fern; a coastline looks like itself at every scale of magnification. Fractal patterns appear in snowflakes, river deltas, lightning, cauliflower, and the branching of neurons. The pervasiveness of fractal geometry in nature means that Phil Lewis's repeating geometries at multiple scales are not an artistic convention but a form of structural realism: the world actually looks like that when you zoom in or out.
+
+\subsection{Module D Reference: Visionary Art Tradition and phillewisart}
+
+\subsubsection{Defining Visionary Art}
+
+Visionary art is a contemporary movement characterized by vibrant color, sacred geometry, organic-geometric fusion, and the intent to transmit transpersonal or consciousness-expanding experience to the viewer. It is distinguished from surrealism (which draws on Freudian unconscious and dream imagery) and from psychedelic art (which tends toward more chaotic, exploratory aesthetics) by its more refined, intentional structure and its explicit spiritual or consciousness-expanding intent. Key defining characteristics as described by practitioners and critics include: sacred geometry as structural element; non-ordinary states of consciousness as subject matter; multicultural spiritual symbolism; and the creation of works intended to produce ``medicinal transmission'' (Luke Brown's phrase) for the viewer.
+
+\subsubsection{Festival Culture as Art Ecosystem}
+
+Visionary art has become deeply intertwined with transformational festival culture. Events including Burning Man (Black Rock Desert, Nevada), Boom Festival (Idanha-a-Nova, Portugal), and Envision Festival (Uvita, Costa Rica) function as exhibition spaces, community formation contexts, and economic ecosystems for visionary artists. These events feature live painting, large-scale installations, and projection mapping alongside electronic music. The festival circuit has also generated institutional nodes: the Chapel of Sacred Mirrors (CoSM), founded by Alex and Allyson Grey in Hudson Valley, New York, serves as a dedicated institutional home for visionary art. Phil Lewis is described by observers as ``a staple of the festival visual art scene,'' with his work recognizable across the festival community.
+
+\subsubsection{Kindred Artists}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Medium / Style} & \tableheader{Distinctive Quality} \\
+\midrule
+Alex Grey & Painting, architecture & Anatomical-spiritual synthesis; founded CoSM/Entheon; major influence on the tradition \\
+Android Jones & Digital art & Fusion of technology, psychedelia, and sacred geometry; multidimensional beings \\
+Luke Brown & Painting & Eastern-Western mysticism synthesis; ``medicinal transmission'' as intent; featured at Boom Festival \\
+Amanda Sage & Painting & Vibrant color and symbolic storytelling; sacred geometry integrated into portraiture \\
+Allyson Grey & Painting & Net/grid patterns as consciousness maps; co-founder of CoSM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Phil Lewis: Biography and Aesthetic}
+
+Phil Lewis grew up in Lake Tahoe and Colorado, where his art was most influenced by nature. From a young age he reported seeing shapes and colors in landscapes and animals --- not as a metaphor but as a literal perceptual experience that differs from ordinary description. He doodled through school, enrolled in Art 101 and drawing and painting in college, but felt an urge to ``expand what Art could do, where it could live, and how people could experience it.'' At age 12, his parents agreed to buy him a computer if he memorized the entire DOS manual; he did. His introduction to Photoshop in college was described as ``everything clicked'' --- the combination of traditional art with digital tools ``unlocked a vortex to expand creativity.'' After graduating college in 2001 he spent seven years playing bass in a band with his brothers before transitioning to full-time art.
+
+His aesthetic signature, as documented by observers and in his own statements: repeating geometries created digitally and embedded in or emerging from organic natural subjects (jellyfish, foxes, trees, mountains, owls, mushrooms); pen-and-ink as the raw organic base combined with digital design as the expansion medium; subjects drawn from nature (particularly the Colorado/Tahoe landscape) and from music (particularly Red Rocks Amphitheatre). His statement on Red Rocks: ``I have been to so many shows at Red Rocks, it would be impossible to recount them all but I feel that I've captured a good dose of their collective energy. It is a portal to another dimension.'' His studio and gallery operates in Boulder, Colorado.
+
+His technical output spans multiple media: limited-edition canvas prints, metal prints, lenticular 3D works, UV printing (including on golf discs and violin bodies), laser engraving (on devices, dog tags), apparel, yoga mats, and silver coins. The LogoJet UV printer features prominently in his recent work, including multi-layer printing on transparent surfaces to create imagery visible from both top and underside. He has an Instagram presence of approximately 29,000 followers and a Facebook page for his Boulder studio and gallery.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
+\midrule
+Psychedelic content & Some visionary art is associated with psychedelic substances. Research must present historical/cultural context without advocating for or against substance use & ANNOTATE \\
+Indigenous sacred imagery & Some sacred geometry and visionary art draws on Indigenous traditions. Name specific traditions (Huichol, San People) rather than generic ``Indigenous'' & GATE \\
+Metaphysical claims & Sacred geometry includes claims that are mathematically demonstrable and claims that are spiritual/philosophical. Distinguish clearly & GATE \\
+Cultural variation in color & Color associations vary significantly across cultures. Avoid presenting Western associations as universal & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government, Institutional, and Peer-Reviewed Sources}
+
+\begin{itemize}[noitemsep]
+  \item Li, P., Garg, A., \& Callaway, E. (2019). Color and orientation are jointly coded and spatially organized in primate primary visual cortex. \textit{Science}, 364(6447), 1275. DOI: 10.1126/science.aaw5868. Salk Institute for Biological Studies.
+  \item Conway, B. (2009). Cortical mechanisms of colour vision. \textit{Nature Reviews Neuroscience}. DOI: 10.1038/nrn1138.
+  \item Conway, B., \& Lafer-Sousa, R. (2013). Study reveals insight into how brain processes shape, color. \textit{ScienceDaily} / Wellesley College. Dec 2013.
+  \item PMC/NIH: Mechanism of human color vision. \textit{Frontiers in Neuroscience} (2024). PMC11221215.
+  \item Wikipedia contributors. Color vision. \textit{Wikipedia}, The Free Encyclopedia. (Cross-referenced with primary sources above.)
+  \item Wikipedia contributors. Colour centre. \textit{Wikipedia}, The Free Encyclopedia.
+  \item American Museum of Natural History. How We See Color. amnh.org/explore/ology/brain/seeing-color.
+  \item Society for Neuroscience / BrainFacts.org. Color: The World Your Brain Creates (2025).
+  \item Elliot, A. J. (2015). Color and psychological functioning: a review of theoretical and empirical work. \textit{Frontiers in Psychology}. PMC4383146.
+  \item BMC Psychology (2025). Comparative analysis of color emotional perception in art and non-art university students: hue, saturation, and brightness effects in the Munsell color system. DOI: 10.1186/s40359-025-03034-y.
+  \item PMC/NIH. Visual performance of painting colors based on psychological factors. PMC9556761.
+  \item EBSCO Research Starters. Sacred geometry (Religion and Philosophy). ebsco.com.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Primary Artist Sources}
+
+\begin{itemize}[noitemsep]
+  \item phillewisart.com (primary source): About Phil page, artist statement, shop catalog, blog. Boulder, CO studio and gallery.
+  \item Rare Air Discs. Phil Lewis Art collaboration descriptions (phillewisart.com reprints). rareairdiscs.com.
+  \item AesDes.org (University aesthetic design blog, 2020). Explore an Aesthetic: Phil Lewis. aesdes.org.
+  \item FeedFreq.com. What is Visionary Art? A Deep Dive (2025). feedfreq.com.
+  \item FeedFreq.com. Best Psychedelic Visual Artists In The World Today. feedfreq.com.
+  \item Veronicas Art. Psychedelic Art Guide (2023). veronicasart.com.
+  \item PsychedelicArtists.org. Unraveling the Mystical: Sacred Geometry in Psychedelic Art. psychedelicartists.org.
+  \item Julia Edelman Substack. The Evolution of Modern Psychedelic Art (Dec 2024). juliaedelman.substack.com.
+  \item Rare Earth Gallery. Introduction to Sacred Geometry; 10 Examples of Sacred Geometry in the Real World. rareearthgallerycc.com.
+  \item Home Art Haven. Sacred Geometry: The Universal Patterns in Art and Architecture (2024). homearthaven.com.
+  \item Byard Art. The Impact of Colour Psychology in Visual Arts (2024). byardart.co.uk.
+  \item Invaluable.com. The Science of Color Explained by Art (2018). invaluable.com.
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document titled \textit{The Visible Grammar: Shapes, Colors, and Coloring Outside the Lines --- A Complete Companion to the Art of Phil Lewis} that maps the neural, mathematical, cultural, and creative structures underlying the phillewisart aesthetic. The document should be usable as a standalone exhibition companion, as an educational resource on visual perception and color psychology, and as a definitive contextual record for Phil Lewis's place within the visionary art tradition.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+
+Wave 0: Foundation (Sequential)
+  [HAIKU] -- Shared schemas, source index, style guide
+
+Wave 1A: Visual Perception + Color Theory (Parallel)
+  [SONNET-A] -- Module A: Neuroscience survey
+  [SONNET-B] -- Module B: Color theory / psychology survey
+
+Wave 1B: Sacred Geometry + Visionary Art (Parallel)
+  [SONNET-C] -- Module C: Sacred geometry survey
+  [OPUS-D]   -- Module D: Visionary art + Phil Lewis deep dive
+
+Wave 2: Synthesis (Sequential)
+  [OPUS] -- Cross-module integration: "The Visible Grammar"
+           Maps: retinal opponent-process <-> color theory
+           Maps: Fibonacci in nature <-> Phil Lewis compositions
+           Maps: V4 glob clusters <-> sacred geometry modules
+           Maps: festival art ecosystem <-> Boulder studio
+
+Wave 3: Publication + Verification (Sequential)
+  [SONNET] -- Document assembly, formatting, bibliography
+  [SONNET] -- Source verification, accuracy checking
+  [OPUS]   -- Final editorial review + through-line check
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation layer:} Shared schemas, source index, formatting templates, safety guidelines
+  \item \textbf{Survey layer:} Module-level research compilation (Modules A, B, C, D in parallel pairs)
+  \item \textbf{Synthesis layer:} Cross-module integration to produce ``The Visible Grammar'' synthesis chapter
+  \item \textbf{Publication layer:} Document assembly, verification, final editorial pass
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+1 & Module A document & Neural pathway complete, all 6 stages cited, Salk 2019 accurately described & Wave 1A, SONNET-A \\
+2 & Module B document & Historical arc complete (Newton--digital), psychology findings cited, art movements documented & Wave 1A, SONNET-B \\
+3 & Module C document & All 5 Platonic solids, golden ratio, 5+ Fibonacci occurrences, Flower of Life documented & Wave 1B, SONNET-C \\
+4 & Module D document & Phil Lewis biography, aesthetic, technique, 4+ kindred artists profiled & Wave 1B, OPUS-D \\
+5 & Synthesis chapter & Cross-module connections mapped, through-line clear, exhibition-ready narrative & Wave 2, OPUS \\
+6 & Complete companion document & All modules + synthesis, formatted, verified, bibliography complete & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation (W0) & None & Haiku & 2,000 \\
+Module A: Neuroscience (W1A) & Foundation & Sonnet & 8,000 \\
+Module B: Color Theory (W1A) & Foundation & Sonnet & 8,000 \\
+Module C: Sacred Geometry (W1B) & Foundation & Sonnet & 8,000 \\
+Module D: Visionary Art / Phil Lewis (W1B) & Foundation & Opus & 12,000 \\
+Synthesis Chapter (W2) & A, B, C, D & Opus & 10,000 \\
+Document Assembly (W3) & All W1+W2 & Sonnet & 6,000 \\
+Verification (W3) & Assembled doc & Sonnet & 4,000 \\
+Final Editorial (W3) & Verified doc & Opus & 5,000 \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$63,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Phil Lewis deep dive (D) requires cultural sensitivity, nuanced artist portraiture, and judgment about claims; Synthesis requires cross-module pattern recognition; Final editorial requires through-line integrity \\
+Sonnet & $\sim$60\% & Neuroscience survey (A), color theory survey (B), sacred geometry survey (C), document assembly, and verification are well-structured research compilation tasks suited to Sonnet's depth-efficiency balance \\
+Haiku & $\sim$10\% & Foundation schemas, shared templates, and scaffolding files are low-complexity, high-structure tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}XC{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0 & Foundation & Sequential & Schemas, source index, style guide & Haiku \\
+1A & Perception + Color & Parallel & Module A + Module B documents & Sonnet \\
+1B & Geometry + Art & Parallel & Module C + Module D documents & Sonnet + Opus \\
+2 & Synthesis & Sequential & Cross-module integration chapter & Opus \\
+3 & Publication & Sequential & Assembled, verified, final document & Sonnet + Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Agent} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+Source Index & LOG & Compile all research sources from mission package into indexed reference file & Haiku \\
+Schema Files & PLAN & Define document schemas for each of the 4 module outputs + synthesis chapter & Haiku \\
+Style Guide & EXEC & Define formatting, citation style, section structure for all outputs & Haiku \\
+Safety Brief & SECURE & Document sensitivity rules: distinguish math from metaphysics, name specific Indigenous traditions, no advocacy & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Parallel --- Visual Perception and Color Theory}
+
+\textbf{Track A: Module A --- Neuroscience of Visual Perception}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Retinal system & CRAFT-VIS & Document S, M, L cone types, retinal ganglion cells, opponent process encoding \\
+Cortical pathway & CRAFT-VIS & Map LGN → V1 → V4 → IT with functions at each stage \\
+Salk 2019 & SCOUT & Accurately summarize joint color-shape coding finding with citation \\
+V4 globs & CRAFT-VIS & Document glob system, full hue-space representation \\
+Peripheral fill-in & EXEC & Document peripheral color weakness and fill-in mechanism \\
+Module A doc & EXEC & Assemble into formatted module document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Module B --- Color Theory and Psychology}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+History arc & CRAFT-COLOR & Newton → Goethe → Goldstein → Munsell → Itten → digital \\
+Hue/sat/brightness & CRAFT-COLOR & Document psychological effects with BMC Psychology 2025 citations \\
+Art movements & SCOUT & Fauvism, Expressionism, Color Field as color laboratories \\
+RGB vs. pigment & EXEC & Distinguish additive and subtractive color; implications for digital art \\
+Module B doc & EXEC & Assemble into formatted module document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Parallel --- Sacred Geometry and Visionary Art}
+
+\textbf{Track C: Module C --- Sacred Geometry}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Platonic solids & CRAFT-GEO & Mathematical properties, elemental associations, crystal/viral occurrence \\
+Golden ratio & CRAFT-GEO & Mathematical derivation from Fibonacci, optimization basis, natural occurrences (≥5) \\
+Flower of Life & CRAFT-GEO & Construction, documented historical sites, geometric derivations \\
+Mandala & CRAFT-GEO & Meditation function, circular geometry, cultural traditions \\
+Fractals & EXEC & Scale invariance, natural occurrence, Mandelbrot formalization \\
+Safety flag & VERIFY & Flag any metaphysical claims; mark as philosophical vs. mathematical \\
+Module C doc & EXEC & Assemble into formatted module document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track D: Module D --- Visionary Art and Phil Lewis (Opus)}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Define tradition & CRAFT-ART & Distinguish visionary from surrealist and psychedelic art with specific criteria \\
+Festival ecosystem & CRAFT-ART & Burning Man, Boom, Envision, CoSM/Entheon as ecosystem nodes \\
+Kindred artists & SCOUT & Alex Grey, Android Jones, Luke Brown, Amanda Sage profiles \\
+Phil biography & OPUS & Lake Tahoe/CO upbringing, music career, DOS manual, digital transition \\
+Phil aesthetic & OPUS & Repeating geometries in organic forms; pen-ink + digital hybrid \\
+Phil technique & OPUS & UV printing, laser engraving, LogoJet, lenticular 3D \\
+Phil thematic catalog & OPUS & Red Rocks, jellyfish, foxes, trees, vibration patterns \\
+Module D doc & OPUS & Assemble into formatted module document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis --- The Visible Grammar}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+A--B bridge & INTEG & Map opponent-process encoding (Module A) to warm-cool color theory (Module B) \\
+A--C bridge & INTEG & Map V4 glob spatial organization to sacred geometry's repeating patterns \\
+B--D bridge & INTEG & Map Fauvist color independence to Phil Lewis's non-descriptive color use \\
+C--D bridge & INTEG & Map Fibonacci in plant morphology to Phil Lewis's organic subjects \\
+All-module synthesis & OPUS & Write ``The Visible Grammar'' chapter connecting all four tracks through Phil Lewis's work \\
+Through-line check & OPUS & Verify that the core thesis (universe has a grammar / Lewis reports it faithfully) runs through synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Document assembly & EXEC & Combine all module documents + synthesis into complete companion \\
+Source verification & VERIFY & Verify all citations are traceable to stated sources; flag any unsupported claims \\
+Sensitivity review & SECURE & Review metaphysical / Indigenous / psychedelic content flags; apply annotations \\
+Final editorial & OPUS & Read complete document; ensure through-line integrity, voice consistency, exhibition readiness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Haiku-generated schemas and style guide (Wave 0) should be cached as the prompt prefix for all subsequent waves
+  \item Module documents (Wave 1A/1B) should be cached as context for the Synthesis agent (Wave 2)
+  \item The complete source index should remain in cache throughout Wave 3 verification
+  \item Phil Lewis biography and aesthetic profile (Module D core) should be cached and reused in Synthesis to maintain voice consistency
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 Foundation & 2,000 & 3,000 & Schema generation \\
+Wave 1A (A+B parallel) & 8,000 & 16,000 & Two full module docs \\
+Wave 1B (C+D parallel) & 10,000 & 20,000 & D is Opus, longer \\
+Wave 2 Synthesis & 25,000 & 10,000 & All modules as input \\
+Wave 3 Publication & 15,000 & 8,000 & Assembly + verification \\
+\midrule
+\textbf{Total} & \textbf{60,000} & \textbf{57,000} & \textbf{$\sim$117,000 combined} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+[W0: Foundation]
+      |
+      +----> [W1A-A: Neuroscience]  (parallel)
+      |                   \
+      +----> [W1A-B: Color Theory]  (parallel)
+      |                   |
+      +----> [W1B-C: Sacred Geometry] (parallel)
+      |                   |
+      +----> [W1B-D: Phil Lewis / Visionary Art] (parallel)
+                          |         |
+                          |         |
+                      [W2: Synthesis -- OPUS]
+                              |
+                      [W3: Verification + Assembly]
+                              |
+                     [FINAL: The Visible Grammar]
+\end{asciibox}
+
+\newpage
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Description} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 4 & Mandatory & Source quality, attribution, advocacy, metaphysics separation & BLOCK \\
+Core functionality & 16 & Required & Deliverable acceptance per success criterion & BLOCK \\
+Integration & 6 & Required & Cross-module connection validation & BLOCK \\
+Edge cases & 4 & Best-effort & Outlier handling, data gaps, cultural variation & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, institutional research, or professional organizations. Zero entertainment media or unattributed blog claims. \\
+SC-NUM & Numerical attribution & Every Fibonacci count, cone sensitivity range, golden ratio value, and percentage attributed to a specific citable source. \\
+SC-ADV & No advocacy & Document presents evidence on psychedelic art, altered states, and sacred geometry without advocating for specific substances, spiritual practices, or political positions. \\
+SC-META & Metaphysics separation & Clearly distinguishes between mathematically demonstrable claims (Fibonacci in sunflowers) and philosophical/spiritual claims (Flower of Life encodes all creation). Never presents the latter as scientific fact. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Neural pathway completeness & Module A documents all 6 stages: retina (S/M/L cones), RGCs, LGN, V1, V4, IT cortex with functions at each stage \\
+CF-02 & Salk 2019 accuracy & Joint color-shape coding finding accurately described; DOI cited; classical model contrasted \\
+CF-03 & Color psychology coverage & Hue, saturation, and brightness effects each documented with at least one peer-reviewed citation \\
+CF-04 & Art movements as color labs & At least 3 art movements (Fauvism, Expressionism, Color Field) documented with specific artist examples \\
+CF-05 & Historical arc completeness & Color theory history covers Newton (1704), Goethe (1810), Goldstein (1940s), Munsell, and digital era \\
+CF-06 & Platonic solids completeness & All five solids named with face count, elemental association, and one physical occurrence in nature \\
+CF-07 & Golden ratio documentation & Mathematical basis shown; at least 5 natural occurrences cited; optimization explanation included \\
+CF-08 & Fibonacci in plants & At least 4 specific plant examples documented with spiral/petal counts \\
+CF-09 & Visionary art definition & Clear distinguishing criteria from surrealism and psychedelic art; cited source \\
+CF-10 & Kindred artist profiles & At least 4 artists profiled with name, medium, and distinctive characteristic \\
+CF-11 & Phil Lewis biography & Covers: Lake Tahoe/CO origins, DOS manual story, music career, digital art transition \\
+CF-12 & Phil Lewis aesthetic & Documents: organic-geometric fusion, pen-ink + digital hybrid, repeating geometries in natural subjects \\
+CF-13 & Phil Lewis technique & Documents: UV printing, laser engraving, lenticular 3D, LogoJet process \\
+CF-14 & Phil Lewis themes & Documents: Red Rocks, jellyfish, foxes, trees, vibrational patterns \\
+CF-15 & Festival ecosystem & Documents: at least 3 festival venues + at least 1 institutional anchor (CoSM/Entheon) \\
+CF-16 & Synthesis connections & At least 4 documented cross-module connections in synthesis chapter \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & A → B bridge: perception to theory & Synthesis explicitly maps opponent-process color encoding to warm-cool color psychology \\
+IN-02 & A → C bridge: perception to geometry & Synthesis connects V4 spatial pattern organization to geometric pattern perception \\
+IN-03 & B → D bridge: theory to practice & Synthesis traces Fauvist color independence to Phil Lewis's non-descriptive color use \\
+IN-04 & C → D bridge: geometry to art & Synthesis maps Fibonacci natural occurrence to organic subjects in Phil Lewis's work \\
+IN-05 & Cross-module data consistency & Golden ratio value and Fibonacci examples are consistent across Modules C and D \\
+IN-06 & Document self-containment & A reader with no prior knowledge of neuroscience, color theory, sacred geometry, or visionary art can follow the complete document without undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Neural pathway documented with anatomical structures and citations & CF-01, SC-NUM & Pending \\
+2. Salk 2019 finding accurately described with citation & CF-02, SC-SRC & Pending \\
+3. Color psychology documented across hue/saturation/brightness & CF-03, SC-NUM & Pending \\
+4. Historical arc of color theory complete & CF-05 & Pending \\
+5. All five Platonic solids documented & CF-06, SC-NUM & Pending \\
+6. Golden ratio mathematical basis and natural occurrences cited & CF-07, SC-NUM & Pending \\
+7. Fibonacci occurrences in plant morphology documented & CF-08, SC-NUM & Pending \\
+8. Visionary art tradition defined with distinguishing characteristics & CF-09, SC-ADV & Pending \\
+9. Four tradition-defining visionary artists profiled & CF-10 & Pending \\
+10. Phil Lewis biography documented from primary source & CF-11, SC-SRC & Pending \\
+11. Document serves as standalone exhibition companion & IN-06, CF-16 & Pending \\
+12. Synthesis maps cross-module connections & CF-16, IN-01, IN-02, IN-03, IN-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gap-fill \\
+EXEC & Executor $\times$2 & Document production --- one per parallel track (W1A, W1B) \\
+CRAFT-VIS & Vision Specialist & Module A: neuroscience of visual perception \\
+CRAFT-COLOR & Color Specialist & Module B: color theory and psychology \\
+CRAFT-GEO & Geometry Specialist & Module C: sacred geometry and mathematics \\
+CRAFT-ART & Art Specialist & Module D: visionary art tradition \\
+VERIFY & Verification Agent & Source validation; accuracy checking; metaphysics separation \\
+INTEG & Integration Agent & Cross-module relationship validation; synthesis preparation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only channel crossing human-machine boundary \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; flag when claims become unsupported \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission title & The Visible Grammar: Shapes, Colors, and Coloring Outside the Lines \\
+Activation profile & Squadron (14 roles including CRAFT specialists) \\
+Wave count & 4 waves \\
+Module count & 4 modules + 1 synthesis \\
+Parallel tracks & 2 (W1A and W1B simultaneously) \\
+Estimated context windows & 8--12 \\
+Estimated sessions & 3--4 \\
+Total estimated tokens & $\sim$117,000 (60K input + 57K output) \\
+Primary model & Sonnet 4.6 (60\%) \\
+Synthesis / editorial model & Opus 4.6 (30\%) \\
+Scaffolding model & Haiku 4.5 (10\%) \\
+Human checkpoints & Wave 0 → 1, Wave 1 → 2, Wave 2 → 3, Final review \\
+Deliverable & Publication-quality PDF companion document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily The Through-Line}
+
+\medskip
+
+From a young age, Phil Lewis saw shapes and colors when looking at landscapes and animals. That is not a poetic description. That is a precise report of what the visual cortex does when it is sensitive enough to notice: it constructs the geometry that the world is actually organized by, rather than the geometry that convention assigns. The opponent-process cells fire. V4 lights up in its precise millimeter-scaled globs. The Fibonacci spiral that the retina is tracking in the pine cone is the same spiral that Plato's student was tracking in the shell. The repeating geometry that Phil threads through a jellyfish's bell is the vibrational eigenmode that a physicist would calculate for a membrane under tension. The lines in the coloring book were always approximate. The world outside them is where the actual grammar lives. This mission is an expedition to document that grammar --- and to show how one artist from Boulder, Colorado has been reporting it faithfully for two decades, in pen and ink and UV light and the memory of a thousand Red Rocks shows.
+
+\medskip
+\textit{--- Vision to Mission. Execute.}
+\end{quotebox}
+
+\end{document}
