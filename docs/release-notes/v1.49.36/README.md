@@ -1,6 +1,6 @@
 # v1.49.36 — AWF Living Systems Research and the Root Landing Page
 
-### For Paintless Dog — who painted the fox that became the brand. The painting defines the visual language: warm parchment, fox orange, ink structure. Eight years later, it still sets the palette.
+### For Paintless Dog — who painted the fox that became the brand. The painting defines the visual language: warm parchment, fox orange, ink structure. Ten years later, it still sets the palette.
 
 **Shipped:** 2026-03-10
 **Commits:** 5 (+ merge commit)
