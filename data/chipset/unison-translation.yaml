@@ -1,5 +1,5 @@
 # Unison Translation Chipset Configuration
-# Derived from www/UNI/ research (28,693 words, 5 modules, 28 sources).
+# Derived from www/tibsfox/com/UNI/ research (28,693 words, 5 modules, 28 sources).
 # Enables GSD agents to understand, write, translate, and deploy Unison code
 # using content-addressed knowledge backed by the deep research study.
 
@@ -25,7 +25,7 @@ chipset:
 
 skills:
   - name: unison-language-core
-    source: www/UNI/research/01-language-core.md
+    source: www/tibsfox/com/UNI/research/01-language-core.md
     token_budget: "2.0%"
     priority: 80
     team: unison-dev
@@ -38,7 +38,7 @@ skills:
       Covers the foundational "big idea" and its consequences.
 
   - name: unison-type-system
-    source: www/UNI/research/02-type-system-abilities.md
+    source: www/tibsfox/com/UNI/research/02-type-system-abilities.md
     token_budget: "2.0%"
     priority: 75
     team: unison-dev
@@ -52,7 +52,7 @@ skills:
       comparison across 6 languages x 8 dimensions.
 
   - name: unison-tooling
-    source: www/UNI/research/03-tooling-workflow.md
+    source: www/tibsfox/com/UNI/research/03-tooling-workflow.md
     token_budget: "1.5%"
     priority: 70
     team: unison-dev
@@ -65,7 +65,7 @@ skills:
       Desktop app. Full scratch-to-publish pipeline reference.
 
   - name: unison-distributed
-    source: www/UNI/research/04-distributed-computing.md
+    source: www/tibsfox/com/UNI/research/04-distributed-computing.md
     token_budget: "1.5%"
     priority: 65
     team: unison-dev
@@ -79,7 +79,7 @@ skills:
       comparison. Cloud platform is PROPRIETARY.
 
   - name: unison-ecosystem
-    source: www/UNI/research/05-ecosystem-adoption.md
+    source: www/tibsfox/com/UNI/research/05-ecosystem-adoption.md
     token_budget: "0.5%"
     priority: 50
     team: unison-dev
@@ -92,7 +92,7 @@ skills:
       2026 roadmap. All metrics source-attributed with dates.
 
   - name: unison-synthesis
-    source: www/UNI/research/06-synthesis.md
+    source: www/tibsfox/com/UNI/research/06-synthesis.md
     token_budget: "0.5%"
     priority: 60
     team: unison-dev
@@ -189,7 +189,7 @@ teams:
       - unison-cloud-specialist
       - unison-translator
     resource_locks:
-      - "www/UNI/**"
+      - "www/tibsfox/com/UNI/**"
     sync_points:
       - event: "translation-complete"
         action: "Signal that code translation is ready for review"
