@@ -343,7 +343,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## License
 
-MIT
+Licensed under the [Business Source License 1.1](./LICENSE) (BSL 1.1). Converts to GPL 3.0 on 2030-03-11.
 
 ## Contributing
 
