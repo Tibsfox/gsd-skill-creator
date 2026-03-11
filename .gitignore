@@ -52,15 +52,11 @@ contrib/upstream/*/
 !contrib/upstream/.gitkeep
 !contrib/README.md
 
-# WWW generated output
-www/site/*/
-www/staging/*/
-!www/tools/
-!www/README.md
-
 # Local project data
 media/
-www/www.zip
+
+# Lost and found (orphaned files from refactors)
+lost-and-found/
 
 
 # User-local config
