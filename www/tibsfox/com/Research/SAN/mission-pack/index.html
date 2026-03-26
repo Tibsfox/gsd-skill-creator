@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SANS Institute — Deep Research Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #263238;
+      --secondary: #1565C0;
+      --tertiary: #37474F;
+      --accent: #0D47A1;
+      --light-bg: #ECEFF1;
+      --card-bg: #CFD8DC;
+      --white: #FFFFFF;
+      --text: #212121;
+      --subtle: #757575;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+      color: var(--white);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header .label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+    .header .pipeline {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #90CAF9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .card .filetype {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-weight: 700;
+    }
+    .card h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary);
+    }
+    .contents ol {
+      padding-left: 1.25rem;
+    }
+    .contents li {
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .contents li strong {
+      color: var(--secondary);
+    }
+    .instructions {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .instructions ol {
+      padding-left: 1.25rem;
+    }
+    .instructions li {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    code {
+      background: var(--light-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      font-family: 'DejaVu Sans Mono', monospace;
+    }
+    .quote {
+      background: #E3F2FD;
+      border-left: 4px solid var(--secondary);
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .quote p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--tertiary);
+    }
+    .quote .attr {
+      font-style: normal;
+      font-size: 0.8rem;
+      color: var(--subtle);
+      margin-top: 0.5rem;
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--subtle);
+    }
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">GSD Research Mission Package</div>
+  <h1>The SANS Institute</h1>
+  <div class="subtitle">Cybersecurity's Training Engine — Conferences, Certifications, Curriculum & Community</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="sans-mission.pdf" download>
+      <div class="filetype">PDF Document</div>
+      <h3>Mission Package</h3>
+      <p>29-page complete pipeline: Vision, Research Reference, and Mission Package with wave execution plan.</p>
+    </a>
+    <a class="card" href="sans-mission.tex" download>
+      <div class="filetype">LaTeX Source</div>
+      <h3>Source (.tex)</h3>
+      <p>XeLaTeX source for modification and recompilation. Requires DejaVu fonts.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <ol>
+      <li><strong>Stage 1 — Vision Document:</strong> Problem statement (5 problems), ecosystem architecture diagram, 5 research modules, chipset configuration, scope boundaries, 12 success criteria, through-line</li>
+      <li><strong>Stage 2 — Research Reference:</strong> Organizational history & milestones, training curriculum (6 practice areas, 85+ courses), GIAC certification pipeline (tiers, exam format, pricing), 2026 conference & summit catalog (8+ events), community programs (Holiday Hack, NetWars, ISC), ISC2 2025 Workforce Study data, salary benchmarks, AI impact analysis, bibliography</li>
+      <li><strong>Stage 3 — Mission Package:</strong> Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, component breakdown with model assignments, 28 test cases (safety-critical + core + integration + edge), verification matrix, token budget (~66K across 18 windows), dependency graph</li>
+    </ol>
+  </div>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF for the complete research mission package</li>
+      <li>Hand to <code>gsd-skill-creator</code> via Claude Code for orchestrated execution</li>
+      <li>The mission activates at Squadron profile (12 crew roles, 2 parallel tracks)</li>
+      <li>Wave 0 (Foundation) runs first, then Wave 1 parallelizes across Track A (Org + Training) and Track B (Conferences + Community)</li>
+      <li>Wave 2 synthesizes workforce context across all modules</li>
+      <li>Wave 3 assembles, verifies, and publishes the final integrated reference</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure DejaVu fonts are installed (<code>apt install fonts-dejavu</code>)</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode sans-mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page counts</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    <p>"CTFs are a tremendous learning vehicle."</p>
+    <div class="attr">— Ed Skoudis, SANS Fellow</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem · March 2026 · Vision → Research → Mission
+</div>
+
+</body>
+</html>

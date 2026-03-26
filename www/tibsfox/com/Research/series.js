@@ -33,6 +33,7 @@
     { id: 'PJM', name: 'Pearl Jam', path: 'PJM/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
+    { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },
     { id: 'SPA', name: 'Spatial Awareness', path: 'SPA/index.html' },
