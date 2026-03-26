@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King's X — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #E65100;
+    --tertiary: #3E2723;
+    --accent: #6A1B9A;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF3E0;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--tertiary) 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    color: white;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; opacity: 0.8; }
+  .header h1 { font-size: 2.8rem; margin: 1rem 0 0.5rem; font-weight: 700; }
+  .header .subtitle { font-size: 1.2rem; opacity: 0.9; font-style: italic; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid rgba(74, 20, 140, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(74, 20, 140, 0.15); }
+  .card h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  .card .format { font-family: 'DM Sans', sans-serif; display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-top: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.5rem; }
+  .contents { list-style: none; padding: 0; }
+  .contents li { padding: 0.4rem 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; padding: 2px 6px; border-radius: 3px; margin-right: 0.5rem; color: white; }
+  .stage-1 { background: var(--primary); }
+  .stage-2 { background: var(--secondary); }
+  .stage-3 { background: var(--tertiary); }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+  .instructions h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); margin-bottom: 0.75rem; }
+  .instructions ol { padding-left: 1.5rem; font-size: 0.9rem; }
+  .instructions li { margin-bottom: 0.4rem; }
+  .instructions code { background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; }
+  .quote .attr { font-style: normal; font-family: 'DM Sans', sans-serif; color: var(--subtle); font-size: 0.85rem; margin-top: 0.75rem; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } .header h1 { font-size: 2rem; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>King's X</h1>
+  <div class="subtitle">Three Sides of One — The Power Trio That Lived in Every Space Between</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+<div class="container">
+  <div class="cards">
+    <a href="kingsx-mission.pdf" download class="card">
+      <h3>📄 Mission Package (PDF)</h3>
+      <p>Complete three-stage document: Vision, Research Reference, and Mission Package. 26 pages, publication-quality.</p>
+      <span class="format">PDF — 26 pages</span>
+    </a>
+    <a href="kingsx-mission.tex" download class="card">
+      <h3>📝 LaTeX Source (.tex)</h3>
+      <p>Editable XeLaTeX source. Modify, extend, and recompile. DejaVu fonts required.</p>
+      <span class="format">TEX — Editable</span>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage stage-1">Stage 1</span> Vision Guide — narrative vision, problem statement, 5 research modules, 12 success criteria</li>
+    <li><span class="stage stage-1">Stage 1</span> Domain map — three musical lineages converging; genre space diagram</li>
+    <li><span class="stage stage-1">Stage 1</span> Through-line — King's X as the Amiga Principle's corollary</li>
+    <li><span class="stage stage-2">Stage 2</span> M1: Origins and Formation (1979–1988) — Springfield to Houston</li>
+    <li><span class="stage stage-2">Stage 2</span> M2: Musical Innovation — drop-D, 12-string bass, vocal architecture, Heavy Melody</li>
+    <li><span class="stage stage-2">Stage 2</span> M3: Discography — all 13 studio albums, 5 label eras, key albums in detail</li>
+    <li><span class="stage stage-2">Stage 2</span> M4: Influence and Legacy — 13 peer testimonials, Big 4 of Prog Metal, Houston scene</li>
+    <li><span class="stage stage-2">Stage 2</span> M5: Identity, Faith, and Resilience — race, sexuality, health, the 40-year lineup</li>
+    <li><span class="stage stage-3">Stage 3</span> Squadron activation (12 roles), 2-track parallel execution</li>
+    <li><span class="stage stage-3">Stage 3</span> Wave plan — 18 context windows across 4 sessions</li>
+    <li><span class="stage stage-3">Stage 3</span> Test plan — 30 tests (6 safety-critical, 14 core, 6 integration, 4 edge)</li>
+    <li><span class="stage stage-3">Stage 3</span> Verification matrix mapping all 12 success criteria to test IDs</li>
+  </ul>
+
+  <div class="instructions">
+    <h3>Usage</h3>
+    <ol>
+      <li>Feed this mission package to <strong>gsd-skill-creator</strong> via Claude Code</li>
+      <li>The orchestrator reads Stage 3 for execution plan and crew manifest</li>
+      <li>Stage 2 provides the research evidence base for all modules</li>
+      <li>Stage 1 provides the vision and scope boundaries</li>
+    </ol>
+    <h3 style="margin-top: 1rem;">Recompilation</h3>
+    <ol>
+      <li>Edit <code>kingsx-mission.tex</code> as needed</li>
+      <li>Run: <code>xelatex -interaction=nonstopmode kingsx-mission.tex</code> (3 passes)</li>
+      <li>Requires DejaVu fonts (pre-installed on Ubuntu)</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "Three people. Four decades. Thirteen albums. Zero hit singles. And an influence that runs like a river under every heavy record made since 1988."
+    <div class="attr">— From the mission through-line</div>
+  </div>
+</div>
+</body>
+</html>
