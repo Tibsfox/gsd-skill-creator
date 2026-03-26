@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Law & Accounting — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #BF360C;
+    --tertiary: #37474F;
+    --accent: #283593;
+    --light-primary: #E8EAF6;
+    --light-secondary: #FBE9E7;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .header small {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    margin: 0.5rem 0;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: var(--light-primary);
+  }
+  .header .pipeline {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid #ddd;
+  }
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .file-card .ext {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .file-card .ext.tex { background: var(--secondary); }
+  .file-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .file-card p { font-size: 0.85rem; color: var(--subtle); }
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  .contents { list-style: none; }
+  .contents li {
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+  }
+  .contents li strong { color: var(--accent); }
+  .instructions { background: var(--light-primary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--tertiary);
+    font-size: 0.95rem;
+  }
+  .meta { text-align: center; color: var(--subtle); font-size: 0.85rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>Business Law & Accounting</h1>
+  <div class="subtitle">Fox Infrastructure Group — Legal & Financial Foundations</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+  <div class="files">
+    <a class="file-card" href="business-law-accounting-mission.pdf" download>
+      <span class="ext">PDF</span>
+      <h3>Mission Package</h3>
+      <p>28-page research mission — Vision, Research Reference, and Mission Package with wave execution plan</p>
+    </a>
+    <a class="file-card" href="business-law-accounting-mission.tex" download>
+      <span class="ext tex">TEX</span>
+      <h3>LaTeX Source</h3>
+      <p>XeLaTeX source for recompilation and modification by FoxLaw</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><strong>Stage 1 — Vision Document:</strong> Problem statement, 6 research modules, chipset configuration, 12 success criteria, scope boundaries</li>
+    <li><strong>Stage 2 — Research Reference:</strong> WA entity formation (PBC + co-ops), Subchapter T accounting, tribal sovereign structures, NHPA/NAGPRA/CDFI compliance, equity securities, international frameworks</li>
+    <li><strong>Stage 3 — Mission Package:</strong> Fleet activation (16 roles), 3-track parallel execution, 7 deliverables, 35 tests, 170K token budget</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF — all three stages are in one document</li>
+      <li>Hand the PDF to <code>gsd-skill-creator</code> via Claude Code for execution</li>
+      <li>The orchestrator reads Stage 3 to decompose into wave-based tasks</li>
+      <li>CAPCOM gates at each wave boundary require human approval</li>
+      <li>Final output: 6 module reference documents + 1 integrated legal reference</li>
+    </ol>
+  </div>
+
+  <h2>LaTeX Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Requires XeLaTeX with DejaVu fonts installed</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page count</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "FoxLaw is not outside counsel. It is a founding co-op law firm built and managed by the family lawyers who are already part of the founding team. Formed simultaneously with Fox Infrastructure Group — the first act, not an afterthought."
+  </div>
+
+  <div class="meta">
+    <p>Date: March 25, 2026 | Activation Profile: Fleet | 6 Modules | 28 Pages</p>
+    <p>GSD Ecosystem — Amiga Principle Applied to Law</p>
+  </div>
+</div>
+</body>
+</html>

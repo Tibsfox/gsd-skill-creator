@@ -1,0 +1,991 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Legal / Financial / Professional ===
+\definecolor{primary}{HTML}{1A237E}       % Deep Navy — sections
+\definecolor{secondary}{HTML}{BF360C}     % Copper — subsections
+\definecolor{tertiary}{HTML}{37474F}      % Charcoal — subsubsections
+\definecolor{accent}{HTML}{283593}        % Indigo — pipeline arrows
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Light indigo — quote boxes
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Business Law \& Accounting}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Business Law and Accounting -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ================================================================
+%  TITLE PAGE
+% ================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Business Law\\[0.3em]\& Accounting}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Fox Infrastructure Group --- Legal \& Financial Foundations}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ================================================================
+%  TABLE OF CONTENTS
+% ================================================================
+\tableofcontents
+\newpage
+
+% ================================================================
+%  STAGE 1 --- VISION DOCUMENT
+% ================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Business Law \& Accounting --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Fox Infrastructure Group Master Business Plan (reviewed 7.5/10)}
+\metafield{Context:}{FoxLaw formation, FoxCapital CDFI certification, 21 cooperative subsidiaries, tribal sovereign partnerships, international expansion via FoxVentures}
+
+\subsection{Vision}
+
+The Fox Infrastructure Group is not merely a holding company for transportation and energy assets --- it is a legal and financial architecture that must hold together across tribal sovereign jurisdictions, Washington State cooperative law, federal regulatory frameworks, and international capital markets. The legal and accounting foundations are not downstream concerns to be addressed after the engineering is settled. They \textit{are} the engineering.
+
+FoxLaw is designed as a founding co-op, not outside counsel. FoxCapital administers a two-layer compensation system --- equal pay per work unit plus compounding equity that pays lifetime dividends --- across 21 independently operating cooperative subsidiaries. Every tribal partnership requires a governance structure that preserves sovereign authority while enabling joint venture economics. Every federal dollar flowing through IIJA, BEAD, or CDFI programs carries compliance obligations that cascade through every entity in the corridor.
+
+This research mission maps the complete legal and accounting terrain that FoxLaw must navigate from day one. The goal is not legal advice --- it is a comprehensive reference that equips FoxLaw's founding lawyers with the statutory landscape, accounting frameworks, and regulatory pathways they need to build operating agreements that will hold under the weight of a corridor spanning BC to Chile.
+
+The Amiga Principle applies here with particular force: architectural elegance in legal structure eliminates entire categories of future disputes, tax exposures, and compliance failures. A formation order that sequences entity creation correctly avoids years of remediation. An equity accounting system designed for cooperative patronage from inception avoids costly retrofitting when FoxCapital scales to thousands of equity holders.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Multi-Entity Formation Complexity.} Fox Infrastructure Group must form a Washington PBC parent plus 21 cooperative subsidiaries under RCW 23.86, each with independent boards, bylaws, and operating agreements. The formation sequence, naming conventions, and inter-entity relationships must be architecturally sound from the first filing.
+
+  \item \textbf{Cooperative Accounting at Scale.} The two-layer compensation system (equal pay + compounding equity) requires Subchapter T--compliant patronage dividend accounting across 21 entities, with real-time work unit tracking, internal capital accounts, and cross-entity equity accrual. No off-the-shelf accounting system handles this natively.
+
+  \item \textbf{Tribal Sovereign Joint Venture Structures.} Each tribal partnership (Tulalip, Muckleshoot, Puyallup, and others along the corridor) requires a governance structure that preserves sovereign immunity, avoids state taxation on tribal lands, and enables joint equity participation. The legal frameworks differ by nation --- Section 17 corporations, tribally chartered entities, and state-chartered tribal LLCs each carry different implications for immunity, taxation, and transparency.
+
+  \item \textbf{Federal Regulatory Compliance Cascade.} NHPA Section 106 consultation, NAGPRA compliance, CDFI certification for FoxCapital, IIJA/BEAD broadband funding requirements, and FCC licensing for Fox CapComm create overlapping compliance obligations that must be mapped to specific entities and tracked through corridor buildout.
+
+  \item \textbf{International Capital and Expansion Frameworks.} FoxVentures Singapore, Japanese Sogoshosha partnerships, and the CPTPP trade corridor alignment require cross-border legal structures that connect Washington cooperative entities to international capital markets and sovereign wealth funds without compromising the corridor's cooperative governance model.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Legal architecture as infrastructure --- the operating agreements, accounting systems, and regulatory compliance frameworks that make every other Fox company possible.
+
+The Fox legal and accounting system is a three-tier architecture: (1) Fox Infrastructure Group Inc. as a Washington PBC setting standards, equity policy, and anchor partner relationships; (2) 21 cooperative subsidiaries under RCW 23.86 operating independently with their own boards and revenue; (3) regional operating units structured as tribal economic development corporations or joint ventures with majority tribal equity and sovereign governance.
+
+\begin{asciibox}
+LEGAL ARCHITECTURE MAP
+========================
+
+  Fox Infrastructure Group Inc.
+  Washington PBC (RCW 23.035) --- Mukilteo, WA
+  |
+  +--- BACKBONE (formed first)
+  |    |--- FoxLaw Co-op (RCW 23.86) -- legal layer
+  |    |--- FoxCapital Co-op (CDFI) -- equity + finance
+  |    +--- Fox CapComm Co-op -- comms + operations
+  |
+  +--- 18 OPERATING CO-OPS (RCW 23.86)
+  |    |--- Transport: FoxMaglev, FoxFiber
+  |    |--- Energy: FoxSolar, FoxEnergy, FoxCompute
+  |    |--- Logistics: FoxCargo, FoxData
+  |    |--- Build: FoxCivil, FoxLand, FoxSupply
+  |    |--- Environment: FoxEarth
+  |    |--- Security: FoxSec
+  |    |--- Emergency: FoxResponse
+  |    |--- Sustain: FoxOps, FoxPermit
+  |    |--- People: FoxEdu
+  |    |--- Media: Fox Media
+  |    +--- Growth: FoxVentures
+  |
+  +--- TRIBAL OPERATING UNITS (per-nation)
+       |--- Tribal EDC or Joint Venture
+       |--- Majority tribal equity + board control
+       +--- Sovereign governance preserved
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Entity Formation \& Corporate Structure}
+Washington PBC formation under RCW 23.035 (now primarily under Title 23B with social purpose provisions). Cooperative corporation formation under RCW 23.86 and RCW 23.78 (employee cooperatives). Formation sequencing for 22 entities. Registered agent requirements. Annual reporting obligations. Inter-entity operating agreements.
+
+\subsubsection{Module 2: Cooperative Accounting \& Taxation}
+Subchapter T of the Internal Revenue Code (IRC \S\S 1381--1388). Patronage dividend calculation, qualified vs.\ nonqualified written notices of allocation, internal capital accounts, collective reserve accounts. Washington B\&O tax (gross receipts, no corporate income tax). GAAP vs.\ tax basis accounting for cooperatives. Work unit tracking as patronage basis.
+
+\subsubsection{Module 3: Tribal Sovereign Governance \& Joint Ventures}
+IRA Section 17 federal corporate charters. Tribally chartered corporations. State-chartered tribal corporations. Sovereign immunity doctrine and limited waivers. Arm-of-the-tribe tax exemption. Joint venture structuring with non-tribal partners. Rev.\ Rul.\ 94-16 (tribal governmental units not taxable). OCAP\textsuperscript{\textregistered} principles and CARE data sovereignty.
+
+\subsubsection{Module 4: Federal Regulatory Compliance}
+NHPA Section 106 consultation process (36 CFR Part 800). NAGPRA compliance for infrastructure on federal or tribal lands. CDFI certification requirements (U.S.\ Treasury CDFI Fund). IIJA/BEAD broadband funding compliance. FCC licensing for emergency mesh communications. NEPA integration with Section 106.
+
+\subsubsection{Module 5: Equity System Design \& Securities}
+Work unit tracking systems for real-time patronage accrual. Community equity offering design (FoxCapital \$100M--\$200M target). Securities registration requirements (Regulation A+, Regulation D, Regulation CF). Inheritable equity structures. Tribal sovereign equity accounts. Cross-entity dividend distribution mechanics.
+
+\subsubsection{Module 6: International Expansion Frameworks}
+CPTPP member-state legal alignment (Japan, Canada, Mexico, Chile, Peru). Singapore investment vehicle structuring. Japanese Sogoshosha partnership models. Sovereign wealth fund investment terms. Inter-American Development Bank requirements. Cross-border cooperative recognition.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: "Document assembly + legal reference compilation"
+    model: sonnet
+    budget: "~60% of total tokens"
+  denise:
+    role: "Synthesis + cross-module legal analysis"
+    model: opus
+    budget: "~30% of total tokens"
+  paula:
+    role: "Template scaffolding + citation formatting"
+    model: haiku
+    budget: "~10% of total tokens"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Washington State entity formation law (PBC, cooperative, employee cooperative)
+  \item Subchapter T cooperative taxation and patronage accounting
+  \item Tribal business structure frameworks (Section 17, tribally chartered, state-chartered)
+  \item CDFI certification pathway and requirements
+  \item NHPA Section 106 and NAGPRA compliance frameworks
+  \item Community equity offering securities registration
+  \item Washington B\&O tax obligations for cooperative entities
+  \item IIJA/BEAD broadband funding compliance requirements
+  \item International expansion legal frameworks (CPTPP, sovereign wealth)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Specific operating agreement drafting (FoxLaw deliverable, not research output)
+  \item Individual tribal nation negotiations (relationship-driven, per Principle 11)
+  \item Detailed securities registration filing (requires securities counsel)
+  \item Tax return preparation or specific tax advice
+  \item Litigation strategy or dispute resolution design
+  \item Specific BNSF ROW agreement terms (FoxLaw landmark document)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All 22 entity types (1 PBC + 21 co-ops) documented with formation requirements, statutory citations, and filing costs
+  \item Formation sequence validated --- no entity depends on one not yet formed
+  \item Subchapter T patronage accounting documented with worked examples for work-unit-based patronage
+  \item Internal capital account lifecycle mapped from accrual through inheritance
+  \item At least 3 tribal business structures compared (Section 17, tribally chartered, state-chartered) with sovereignty, tax, and transparency implications
+  \item CDFI certification pathway documented with 7 eligibility criteria mapped to FoxCapital's structure
+  \item NHPA Section 106 consultation process documented with tribal-specific requirements
+  \item Community equity offering analyzed under at least 2 securities registration frameworks
+  \item Washington B\&O tax obligations documented for cooperative entities with rate classifications
+  \item International expansion frameworks documented for at least 3 CPTPP member states
+  \item All source citations traceable to government agencies, peer-reviewed sources, or professional legal organizations
+  \item Cross-module dependencies identified (e.g., CDFI certification requires entity formation; equity offering requires securities compliance)
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent document; this mission provides the legal and accounting research to execute Chapter 2 (Corporate Structure) and Chapter 3 (Backbone Companies) \\
+Fox Legal Staffing Analysis & Complementary; that analysis sizes the legal team, this mission maps what they must know \\
+GSD Mesh Prototype Spec & Infrastructure layer; legal compliance (FCC licensing, tribal ROW) depends on this mission's Module 4 \\
+Salish Sea Expansion Vision & Geographic expansion requires Module 3 (tribal governance) and Module 6 (international frameworks) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between the entities matter more than the entities themselves. A cooperative corporation filing is a piece of paper. The operating agreement that binds it to its parent PBC, its tribal partners, and its equity holders --- that is the architecture. FoxLaw exists because the legal layer is not an afterthought bolted onto engineering. It is the first act. The founding lawyers hold co-op equity. Their lifetime dividends depend on the corridor's success. When the legal architecture is right, it becomes invisible --- the worker sees their equity growing daily, the tribal nation governs their corridor segment, and the concrete apprentice earns the same rate as the board member. That invisibility is the mark of architectural elegance. The Amiga Principle, applied to law.
+
+\newpage
+
+% ================================================================
+%  STAGE 2 --- RESEARCH REFERENCE
+% ================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Business Law \& Accounting --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles statutory frameworks, regulatory requirements, and accounting standards relevant to the Fox Infrastructure Group's legal and financial architecture. Each module corresponds to a research track in the mission package. Sources are drawn exclusively from government agencies, statutory codes, federal regulatory bodies, and professional legal/accounting organizations.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Washington State Legislature (RCW statutes)
+  \item U.S.\ Department of the Treasury (CDFI Fund)
+  \item Internal Revenue Service (Subchapter T, tribal taxation)
+  \item Bureau of Indian Affairs (tribal business structures)
+  \item Advisory Council on Historic Preservation (Section 106)
+  \item U.S.\ Government Accountability Office (tribal consultation)
+  \item Washington State Department of Revenue (B\&O tax)
+  \item National Society of Accountants for Cooperatives (NSAC)
+  \item ICA Group (cooperative internal capital accounts)
+\end{itemize}
+
+\subsection{Module 1: Entity Formation \& Corporate Structure}
+
+\subsubsection{Washington Public Benefit Corporation}
+
+Fox Infrastructure Group Inc.\ is structured as a Washington Public Benefit Corporation. Washington's social purpose corporation framework is codified in RCW 23B.25, which allows corporations to pursue social purposes alongside shareholder value. The PBC designation legally protects the public benefit purpose in the articles of incorporation, preventing future boards from abandoning the mission without amending the articles.
+
+Formation requires a \$200 filing fee with the Washington Secretary of State, a \$60 annual report, and compliance with the Uniform Business Organizations Code (RCW 23.95) for entity filing, registered agent, and naming requirements. The corporation name must contain ``corporation,'' ``incorporated,'' ``company,'' or ``limited'' (or standard abbreviations), and must not contain ``bank,'' ``trust,'' ``cooperative,'' or similar restricted terms.
+
+Washington has no corporate income tax. The state instead levies a Business \& Occupation (B\&O) tax on gross receipts, with rates varying by classification (retailing 0.471\%, wholesaling 0.484\%, services and other activities 1.5\% for businesses with aggregate income under \$5M, increasing to 2.1\% for businesses at or above \$5M). A surcharge of 0.5\% applies to businesses with gross income exceeding \$250M annually.
+
+\subsubsection{Cooperative Corporations Under RCW 23.86}
+
+The 21 subsidiary cooperatives are formed under RCW 23.86 (Cooperative Associations). Any number of persons may associate together as a cooperative for the transaction of any lawful business on the cooperative plan, with or without capital stock. The statute defines ``lawful business'' broadly to include every kind of lawful effort for business, agricultural, dairy, mercantile, mining, manufacturing, or mechanical business on the cooperative plan.
+
+Key formation requirements include articles of incorporation filed with the Secretary of State (or the Insurance Commissioner for insurance cooperatives), compliance with RCW 23.95 naming requirements, and adoption of bylaws. Cooperatives may merge with other domestic cooperatives or with ordinary business corporations, and may convert to ordinary business corporations through a supermajority vote.
+
+\subsubsection{Employee Cooperative Corporations (RCW 23.78)}
+
+For worker-owned subsidiaries, Washington's Employee Cooperative Corporations Act (RCW 23.78) provides additional governance tools. Employee cooperatives may establish internal capital account systems to reflect book value and determine redemption prices for membership shares, capital stock, and written notices of allocation.
+
+Key provisions: bylaws may permit periodic redemption of written notices of allocation and capital stock; the cooperative must provide for recall and redemption of membership shares upon termination; the cooperative may pay or credit interest on internal capital account balances; and a portion of retained net earnings may be assigned to a collective reserve account. At the end of each accounting period, internal capital account balances must be adjusted so their sum equals the net book value of the cooperative.
+
+\subsubsection{Formation Sequencing}
+
+The Fox Infrastructure Group Master Plan specifies a formation order: Fox Infrastructure Group Inc.\ (PBC parent) forms first, followed simultaneously by FoxLaw Co-op (legal backbone). FoxCapital and Fox CapComm form next as the equity and communications backbones. All remaining operating cooperatives form after the backbone layer is operational. This sequencing ensures that legal counsel (FoxLaw) and equity infrastructure (FoxCapital) exist before any operating entity needs them.
+
+\subsection{Module 2: Cooperative Accounting \& Taxation}
+
+\subsubsection{Subchapter T Framework}
+
+Cooperative taxation under Subchapter T of the Internal Revenue Code (IRC \S\S 1381--1388) governs how cooperatives calculate and distribute patronage dividends. The five code sections address: what constitutes a cooperative under Subchapter T (\S1381), how income and patronage dividends are calculated (\S1382), nonqualified patronage treatment (\S1383), patron taxation on dividends (\S1385), and definitional terms (\S1388).
+
+Three criteria must be met for patronage dividends to be deductible by the cooperative: (1) the dividend must be paid on the basis of quantity or value of business done with the patron; (2) the cooperative must operate under a pre-existing obligation to pay the dividend (typically in bylaws); and (3) the amount must be determined by reference to the net earnings of the cooperative from business done with its patrons.
+
+\subsubsection{Patronage Dividend Mechanics}
+
+In a worker cooperative, accounting net income is split in two stages. First, the board determines the allocation between the collective reserve account and individual patronage dividends. Second, the patronage dividend is further divided between cash payments and written notices of allocation retained in members' internal capital accounts. Federal law requires a minimum of 20\% of qualified patronage dividends be paid in cash so members can satisfy their immediate tax obligations.
+
+Patronage is determined by each member's proportional use of the cooperative. For worker cooperatives, this is typically measured by hours worked or compensation earned. The resulting percentage determines each member's share of the total patronage dividend pool.
+
+The Fox system's innovation is using ``work units'' as the patronage basis across all 21 cooperatives. Every work unit earns the same rate regardless of role, title, company, seniority, or geography. This equal-pay principle, combined with per-unit equity accrual, means the patronage calculation becomes a straightforward function of work units contributed.
+
+\subsubsection{Qualified vs.\ Nonqualified Written Notices of Allocation}
+
+Qualified written notices of allocation are taxed to the member in the year they are allocated (even if not paid in cash), and the cooperative deducts them in the same year. When the cooperative later redeems the notice, the member pays no additional tax. Nonqualified written notices of allocation are not deductible by the cooperative when allocated, but are deductible when redeemed; the member is taxed at redemption.
+
+The choice between qualified and nonqualified notices has significant implications for cash flow, member tax burden, and cooperative capitalization. Most worker cooperatives use qualified notices so the cooperative receives the immediate tax deduction, accepting that members must pay tax on the allocation even before receiving cash.
+
+\subsubsection{Internal Capital Accounts}
+
+Internal capital accounts track each member's equity stake in the cooperative. The account reflects: initial membership share purchase, accumulated qualified patronage allocations (retained portions), any interest credited by the cooperative, and adjustments for losses. Upon departure, the member's account is redeemed --- typically with an initial cash payment proportional to the cooperative's liquidity, followed by deferred payments matched to the depreciation or sale of underlying assets.
+
+For the Fox system, internal capital accounts across multiple cooperatives must be aggregated by FoxCapital to present a unified equity dashboard. The ``compounding equity'' promise --- that equity accumulates over a career, pays dividends for life, and passes to family --- requires that internal capital accounts survive member transitions between Fox entities and support inheritance transfer.
+
+\subsubsection{Washington B\&O Tax}
+
+Washington's Business \& Occupation tax is levied on gross receipts with no deductions for labor, materials, or operating costs. Cooperative entities are subject to B\&O tax like any other business form. The tax applies regardless of profitability. Small businesses may qualify for a sliding-scale credit that can reduce or eliminate the tax for very small operations.
+
+Key rates for Fox entities: retailing (0.471\%), wholesaling (0.484\%), manufacturing (0.484\%), services and other activities (1.5\% under \$5M aggregate, 2.1\% at \$5M+). The services rate is significant for FoxLaw, FoxCapital, FoxData, and other service-oriented cooperatives.
+
+\subsubsection{Patronage Source Classification}
+
+Under Rev.\ Rul.\ 69-576, income classification as patronage-sourced versus nonpatronage-sourced depends on whether the generating activity actually facilitates the cooperative's core marketing, purchasing, or service activities. Income that merely enhances overall profitability without facilitating the cooperative purpose is nonpatronage-sourced and not eligible for the patronage deduction. This distinction is critical for Fox entities that may generate investment income, rental income, or other non-core revenue.
+
+\subsection{Module 3: Tribal Sovereign Governance \& Joint Ventures}
+
+\subsubsection{Tribal Business Structure Options}
+
+The Bureau of Indian Affairs identifies three primary structures for tribally owned businesses. Each carries distinct implications for sovereignty, taxation, and transparency:
+
+\textbf{IRA Section 17 Corporations.} Chartered under Section 17 of the Indian Reorganization Act of 1934. Wholly owned by the tribe but legally separate from the tribal government. The IRS has ruled these corporations exempt from federal income tax (the charter cannot be dissolved or amended without Congressional action or Secretary of Interior approval, respectively). Section 17 corporations possess sovereign immunity, removing tribal government assets from risk during a default. They may issue tax-exempt bonds for essential governmental services and may enter 25-year land leases without Secretary approval.
+
+\textbf{Tribally Chartered Corporations.} Formed entirely by tribal government through ordinance, business corporation code, or resolution. No federal or state approval needed. Enjoy sovereign immunity and avoidance of state taxation when doing business on Indian land with Indian stockholders. However, transparency concerns may arise for lenders and partners, as tribally chartered corporations are not required to make the same disclosures as state-chartered entities.
+
+\textbf{State-Chartered Tribal Corporations.} Incorporated under state law (e.g., Washington business corporation or LLC statutes). Familiarity and transparency for lenders, but no presumption of sovereign immunity. Must pay federal income taxes. Subject to state regulation and taxation. Cannot issue tax-exempt bonds.
+
+\subsubsection{Arm-of-the-Tribe Doctrine}
+
+Businesses wholly owned and controlled by a tribal government that serve the tribe's benefit may qualify as ``arms of the tribe,'' treated as extensions of the tribal government and exempt from federal income tax. The IRS has consistently ruled that tribal governments are not taxable entities (Rev.\ Rul.\ 94-16), and governmental units that operate as subordinate economic entities share this treatment --- provided they are genuine operating arms rather than separate legal entities.
+
+\subsubsection{Sovereign Immunity and Limited Waivers}
+
+Tribal sovereign immunity means that tribal entities generally cannot be sued without tribal consent. For joint ventures with non-tribal partners like Fox, limited waivers of sovereign immunity must be negotiated on a transaction-by-transaction basis. Waivers can be limited to specific assets, types of legal relief, claim amounts, or enforcement mechanisms (such as arbitration). The Fox approach --- tribal majority equity and board control --- preserves sovereign governance while enabling joint economic participation.
+
+\subsubsection{Joint Venture Tax Implications}
+
+When tribal entities enter joint ventures with non-tribal partners, the partnership is generally taxable unless carefully structured. Strategies include ensuring the tribal entity is treated as a disregarded entity for tax purposes, maintaining that the joint venture operates as an arm of the tribe, and carefully allocating income between on-reservation and off-reservation activities.
+
+\subsection{Module 4: Federal Regulatory Compliance}
+
+\subsubsection{NHPA Section 106 Consultation}
+
+Section 106 of the National Historic Preservation Act requires federal agencies to consider the effects of their undertakings on historic properties before approving expenditure of federal funds or issuance of licenses. The implementing regulations at 36 CFR Part 800 define the consultation process.
+
+Critical for Fox: consultation is required not only for projects on tribal lands but also for projects off tribal lands that may affect historic properties of religious and cultural significance to tribes. The corridor route through ancestral lands of Coast Salish and other PNW nations triggers Section 106 for any federally funded or federally licensed component (IIJA/BEAD broadband, FCC licensing, FHWA corridor elements).
+
+The consultation process requires: identification of consulting parties (including Tribal Historic Preservation Officers), identification of historic properties in the area of potential effects, assessment of adverse effects, and resolution of adverse effects through Memoranda of Agreement or Programmatic Agreements. Government-to-government consultation with tribal nations is conducted by the lead federal agency, not by the project applicant --- though applicants assist in providing project details.
+
+\subsubsection{NAGPRA Compliance}
+
+The Native American Graves Protection and Repatriation Act applies when infrastructure projects on federal or tribal lands encounter human remains or cultural items. NAGPRA mandates consultation with affiliated tribal nations regarding disposition of cultural items and requires specific protocols for both intentional excavation and inadvertent discovery. Fox's corridor buildout, particularly the FoxMaglev guideway and FoxFiber conduit installation, must include NAGPRA compliance plans for every segment crossing federal or tribal lands.
+
+\subsubsection{CDFI Certification}
+
+The CDFI Fund (U.S.\ Department of the Treasury) certifies Community Development Financial Institutions that meet seven criteria: legal entity status, primary mission of promoting community development, financing entity (predominant business activity is provision of financial products/services), provision of development services, service to eligible target markets, accountability to residents of target areas (through board representation), and non-government status (tribal governments excluded from the government restriction).
+
+FoxCapital's CDFI certification pathway: the cooperative must demonstrate a track record of providing financial products and development services to low-income communities. The Fox equity system --- community investment pools, tribal sovereign equity structures, and real-time work unit tracking --- maps directly to CDFI requirements. Certification opens access to the CDFI Program (financial and technical assistance), Native American CDFI Assistance Program, Capital Magnet Fund, CDFI Bond Guarantee Program (up to 30-year capital), and New Markets Tax Credit Program (through CDE certification).
+
+\subsubsection{IIJA/BEAD Broadband Compliance}
+
+Fox CapComm's broadband strategy (Ziply Fiber acquisition, community ISP model) must comply with Infrastructure Investment and Jobs Act (IIJA) and Broadband Equity, Access, and Deployment (BEAD) program requirements. These include: community-focused deployment priorities, compliance with prevailing wage requirements, environmental and historic preservation review (linking back to Section 106), and reporting on broadband adoption and equity metrics. Community cooperative ISPs receive priority in BEAD funding allocation.
+
+\subsection{Module 5: Equity System Design \& Securities}
+
+\subsubsection{Community Equity Offering Structure}
+
+FoxCapital's target of \$100M--\$200M in community equity offerings requires securities registration or exemption. Primary frameworks:
+
+\textbf{Regulation A+ (Tier 2):} Allows offerings up to \$75M per year to both accredited and non-accredited investors. Requires SEC qualification of an offering statement, ongoing annual reporting, and audited financial statements. No state-by-state registration (federal preemption). Best suited for the broad community offering model.
+
+\textbf{Regulation D (Rule 506(b) and 506(c)):} No offering cap. Rule 506(b) allows up to 35 non-accredited investors; Rule 506(c) permits general solicitation but only to accredited investors. No SEC registration required, but Form D must be filed. Best suited for anchor partner and institutional tranches.
+
+\textbf{Regulation CF (Crowdfunding):} Up to \$5M per year through registered intermediaries. Open to all investors with investment limits based on income/net worth. Best suited for individual community members at small amounts.
+
+A phased equity strategy could layer these: Regulation CF for grassroots community participation, Regulation A+ for the primary community offering, and Regulation D for institutional and sovereign wealth fund tranches.
+
+\subsubsection{Inheritable Equity Design}
+
+The Fox promise that equity ``passes to family'' requires careful legal structuring. Cooperative membership shares typically cannot be transferred without board approval. Internal capital accounts are personal to the member. To enable inheritance: operating agreements must explicitly authorize transfer on death, estate planning provisions must be built into the equity account structure, and the cooperative must establish procedures for estate succession that comply with both cooperative law and probate law in the member's jurisdiction.
+
+\subsection{Module 6: International Expansion Frameworks}
+
+\subsubsection{CPTPP Alignment}
+
+The Comprehensive and Progressive Agreement for Trans-Pacific Partnership includes Japan, Canada, Mexico, Chile, and Peru --- all key Fox corridor markets. CPTPP provisions on investment, services, and government procurement create a favorable framework for cross-border cooperative infrastructure. However, cooperative entities may face classification challenges under investment treaties that assume conventional corporate structures.
+
+\subsubsection{Sovereign Wealth Fund Investment Terms}
+
+FoxVentures Singapore targets GIC, Temasek, Japanese Sogoshosha (Mitsubishi, Mitsui, Sumitomo, Marubeni, Itochu), Korea Development Bank, and JBIC. These institutions typically require: clear governance structures with independent boards, audited financial statements under internationally recognized standards, clear exit mechanisms, and sovereign or quasi-sovereign guarantees. The cooperative model's non-traditional governance (one-member-one-vote, equal pay) requires careful positioning to align with institutional investor expectations.
+
+\subsubsection{Inter-American Development Bank}
+
+For Central and South American expansion (Mexico to Chile corridor segments), IDB financing requires compliance with IDB procurement policies, environmental and social safeguards, and financial reporting standards. Tribal sovereign governance frameworks developed for PNW nations must be adapted for Indigenous governance structures in Mexico, Chile, and Peru.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} \\
+\midrule
+Tribal sovereignty & All tribal governance structures described in general terms. Specific nation negotiations are relationship-driven and not included in this research output. Nation-specific attribution always used. \\
+Securities compliance & Research reference only; actual securities offerings require registered securities counsel and SEC/state review. \\
+Tax treatment & General frameworks described; specific tax planning requires qualified tax professionals familiar with cooperative and tribal taxation. \\
+NAGPRA cultural items & No specific site locations or cultural item inventories included. \\
+Legal advice disclaimer & This document is a research reference, not legal advice. FoxLaw's founding lawyers must validate all frameworks against current statutes and regulations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Washington State Legislature --- RCW 23.86 (Cooperative Associations), RCW 23.78 (Employee Cooperatives), RCW 23B.25 (Social Purpose Corporations), RCW 23.95 (Uniform Business Organizations Code)
+  \item U.S.\ Department of the Treasury, CDFI Fund --- CDFI Certification Application, CDE Certification, Program Guidelines
+  \item Internal Revenue Service --- Subchapter T (IRC \S\S 1381--1388), Rev.\ Rul.\ 94-16 (tribal governmental units), Rev.\ Rul.\ 69-576 (patronage source classification)
+  \item Bureau of Indian Affairs --- ``Choosing a Tribal Business Structure'' (2019), Division of Economic Development
+  \item Advisory Council on Historic Preservation --- ``Consultation with Indian Tribes in the Section 106 Review Process: A Handbook'' (2021), 36 CFR Part 800
+  \item U.S.\ Government Accountability Office --- GAO-20-466T (Tribal Consultation and Federal Infrastructure)
+  \item Washington State Department of Revenue --- B\&O Tax Classifications and Rates
+  \item U.S.\ Department of Agriculture, Rural Development --- ``Income Tax Treatment of Cooperatives'' (CIR 44-3)
+  \item Federal Highway Administration --- Tribal Consultation Guidelines for Section 106
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+\begin{itemize}[leftmargin=2em]
+  \item National Society of Accountants for Cooperatives (NSAC) --- ``Fundamentals of Cooperative Taxation''
+  \item ICA Group --- ``Internal Capital Accounts: An Illustrated Guide''
+  \item National Cooperative Grocers Association --- ``Accounting Best Practices for Cooperatives''
+  \item Office of the Comptroller of the Currency --- CDFI and CD Bank Resource Directory
+  \item National Congress of American Indians --- Tribal Sovereignty Resources
+  \item California Indian Legal Services --- ``Establishing a Tribal Economic Development Entity''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+%  STAGE 3 --- MISSION PACKAGE
+% ================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive legal and accounting reference document covering entity formation, cooperative taxation, tribal governance structures, federal regulatory compliance, equity system design, and international expansion frameworks for the Fox Infrastructure Group corridor. The output must be self-contained, professionally sourced, and ready for FoxLaw's founding lawyers to use as their primary reference during Year 1 formation activities.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+=============================
+
+WAVE 0: Foundation (Sequential)
+  [Haiku] Shared schemas + source index + citation templates
+     |
+     v
+WAVE 1: Parallel Research Tracks (Parallel x 3)
+  Track A: [Sonnet] Entity Formation + Cooperative Accounting
+  Track B: [Sonnet] Tribal Governance + Federal Compliance
+  Track C: [Opus]  Equity Design + International Frameworks
+     |
+     v
+WAVE 2: Synthesis (Sequential)
+  [Opus] Cross-module integration + gap analysis + legal
+         consistency review
+     |
+     v
+WAVE 3: Publication + Verification (Sequential)
+  [Sonnet] Final document assembly + source validation
+  [Opus]  Legal accuracy review + sensitivity check
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Entity Formation Guide & All 22 entities documented with statutory citations, costs, and formation sequence & Module 1 \\
+2 & Cooperative Accounting Reference & Subchapter T walkthrough with worked patronage examples & Module 2 \\
+3 & Tribal Governance Framework & 3+ structures compared with sovereignty/tax/transparency matrix & Module 3 \\
+4 & Regulatory Compliance Map & Section 106, NAGPRA, CDFI, IIJA/BEAD requirements mapped to entities & Module 4 \\
+5 & Equity System Architecture & Securities registration analysis, ICA lifecycle, inheritance design & Module 5 \\
+6 & International Expansion Brief & CPTPP alignment, SWF terms, IDB requirements for 3+ markets & Module 6 \\
+7 & Integrated Reference Document & All modules compiled with cross-references, index, and bibliography & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 3,000 \\
+Source index & None & Haiku & 4,000 \\
+Entity formation & Schemas & Sonnet & 25,000 \\
+Cooperative accounting & Schemas & Sonnet & 30,000 \\
+Tribal governance & Schemas & Sonnet & 25,000 \\
+Federal compliance & Schemas & Sonnet & 20,000 \\
+Equity system design & Entity, Accounting & Opus & 25,000 \\
+International frameworks & Entity, Tribal & Opus & 18,000 \\
+Cross-module synthesis & All modules & Opus & 20,000 \\
+Final assembly & Synthesis & Sonnet & 15,000 \\
+Verification & Assembly & Opus & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Rationale} & \tableheader{Budget \%} \\
+\midrule
+Opus & Cross-module legal analysis, tribal sovereignty sensitivity, equity/securities judgment, synthesis, verification & 37\% \\
+Sonnet & Statutory compilation, accounting walkthrough, compliance mapping, document assembly & 53\% \\
+Haiku & Schema scaffolding, citation templates, source index & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 1 & 7,000 \\
+1 & Parallel Research & Parallel $\times$ 3 & 6--8 & 118,000 \\
+2 & Synthesis & Sequential & 2--3 & 20,000 \\
+3 & Publication + Verification & Sequential & 2--3 & 25,000 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total}} & \textbf{11--15} & \textbf{170,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0.1 & Shared schemas & JSON schemas for entity records, citation format, compliance checklist items & Haiku \\
+0.2 & Source index & Master bibliography with URL, last-accessed date, and reliability rating & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Entity Formation + Cooperative Accounting}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A.1 & WA PBC formation & RCW 23B.25 requirements, filing process, annual obligations & Sonnet \\
+1A.2 & RCW 23.86 co-ops & Formation requirements for 21 cooperative subsidiaries & Sonnet \\
+1A.3 & RCW 23.78 employee co-ops & Internal capital account provisions, membership share mechanics & Sonnet \\
+1A.4 & Subchapter T walkthrough & IRC \S\S 1381--1388 analysis with worked patronage examples & Sonnet \\
+1A.5 & B\&O tax obligations & Rate classifications, cooperative-specific considerations & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Tribal Governance + Federal Compliance}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1B.1 & Tribal business structures & Section 17, tribally chartered, state-chartered comparison matrix & Sonnet \\
+1B.2 & Sovereign immunity & Waiver frameworks, arm-of-the-tribe doctrine, Rev.\ Rul.\ 94-16 & Opus \\
+1B.3 & Section 106 process & Consultation steps, THPO roles, Programmatic Agreement templates & Sonnet \\
+1B.4 & NAGPRA compliance & Requirements for infrastructure on federal/tribal lands & Sonnet \\
+1B.5 & CDFI certification & 7 eligibility criteria mapped to FoxCapital structure & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Equity Design + International Frameworks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1C.1 & Securities registration & Reg A+, Reg D, Reg CF analysis for community equity offering & Opus \\
+1C.2 & ICA lifecycle & Internal capital account from accrual through inheritance & Opus \\
+1C.3 & CPTPP alignment & Investment, services, and procurement provisions for Fox markets & Sonnet \\
+1C.4 & SWF investment terms & Governance, audit, and exit requirements for institutional capital & Opus \\
+1C.5 & IDB requirements & Environmental/social safeguards, procurement, reporting & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Cross-module integration & Identify dependencies, conflicts, and gaps across all 6 modules & Opus \\
+2.2 & Legal consistency review & Verify no contradictions between entity, tax, and securities frameworks & Opus \\
+2.3 & Sensitivity review & Ensure tribal sovereignty, securities disclaimers, and tax caveats are complete & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Final document assembly & Compile all modules into integrated reference with cross-references & Sonnet \\
+3.2 & Source validation & Verify all citations resolve to valid government/professional sources & Sonnet \\
+3.3 & Legal accuracy review & Final pass for accuracy, completeness, and appropriate caveats & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 output (schemas, source index) cached for all Wave 1 tracks --- 5-minute TTL window exploited by launching all three tracks within 2 minutes of Wave 0 completion
+  \item Track A and Track B outputs cached for Track C tasks 1C.1 and 1C.2 (equity design depends on entity formation and tribal governance context)
+  \item All Wave 1 outputs cached for Wave 2 synthesis --- launch synthesis within TTL window of last Wave 1 completion
+  \item Synthesis output cached for Wave 3 publication
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0: Foundation & --- & --- & 7,000 & 7,000 \\
+Wave 1: Track A & --- & 55,000 & --- & 55,000 \\
+Wave 1: Track B & 15,000 & 28,000 & --- & 43,000 \\
+Wave 1: Track C & 20,000 & --- & --- & 20,000 \\
+Wave 2: Synthesis & 20,000 & --- & --- & 20,000 \\
+Wave 3: Publication & 10,000 & 15,000 & --- & 25,000 \\
+\midrule
+\textbf{Total} & \textbf{65,000} & \textbf{98,000} & \textbf{7,000} & \textbf{170,000} \\
+\textbf{Percentage} & \textbf{38\%} & \textbf{58\%} & \textbf{4\%} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+  [0.1 Schemas] --+---> [1A.1 WA PBC]
+  [0.2 Sources] --+---> [1A.2 RCW 23.86]
+                  |---> [1A.3 RCW 23.78]
+                  |---> [1A.4 SubchT]
+                  |---> [1A.5 B&O Tax]
+                  |
+                  +---> [1B.1 Tribal Structures]
+                  |---> [1B.2 Sovereign Immunity]
+                  |---> [1B.3 Section 106]
+                  |---> [1B.4 NAGPRA]
+                  |---> [1B.5 CDFI]
+                  |
+                  +---> [1C.3 CPTPP]
+                  +---> [1C.5 IDB]
+
+  [1A.1-1A.4] -------> [1C.1 Securities]
+  [1A.3-1A.4] -------> [1C.2 ICA Lifecycle]
+  [1B.1-1B.2] -------> [1C.4 SWF Terms]
+
+  [ALL Wave 1] -------> [2.1 Integration]
+                  +---> [2.2 Consistency]
+                  +---> [2.3 Sensitivity]
+
+  [ALL Wave 2] -------> [3.1 Assembly]
+                  +---> [3.2 Source Validation]
+                  +---> [3.3 Legal Review]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{35} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, statutory codes, or professional legal organizations. Zero entertainment media or blogs. \\
+SC-NUM & Numerical attribution & Every filing fee, tax rate, and dollar amount attributed to specific statutory or agency source. \\
+SC-ADV & No legal advice & Document presents frameworks without rendering specific legal opinions or recommending specific actions. \\
+SC-IND & Tribal attribution & Every tribal governance reference uses nation-specific attribution. No generic ``Indigenous peoples'' or ``Native American'' generalizations. \\
+SC-SEC & Securities disclaimer & All securities registration discussion includes appropriate disclaimers about need for registered securities counsel. \\
+SC-TAX & Tax disclaimer & All tax treatment discussion notes that specific tax planning requires qualified professionals. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Entity coverage & All 22 entities (1 PBC + 21 co-ops) documented with formation requirements \\
+CF-02 & Formation sequence & Dependency chain validated; no entity requires one not yet formed \\
+CF-03 & Statutory citations & Every formation requirement cites specific RCW section \\
+CF-04 & SubchT walkthrough & Worked patronage example with dollar amounts through full allocation cycle \\
+CF-05 & ICA lifecycle & Internal capital account traced from initial share through inheritance \\
+CF-06 & Tribal structure comparison & At least 3 structures compared on sovereignty, taxation, transparency \\
+CF-07 & CDFI criteria mapping & All 7 certification criteria individually addressed for FoxCapital \\
+CF-08 & Section 106 process & Complete consultation process documented with THPO roles \\
+CF-09 & Securities analysis & At least 2 registration frameworks analyzed for community equity offering \\
+CF-10 & B\&O rates & Rate classifications documented for relevant Fox entity types \\
+CF-11 & CPTPP coverage & At least 3 member-state frameworks analyzed \\
+CF-12 & SWF requirements & Governance, audit, and exit requirements documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Entity $\rightarrow$ Tax cascade & Entity formation requirements correctly connect to Subchapter T obligations \\
+IN-02 & Tribal $\rightarrow$ Securities & Tribal sovereign equity accounts addressed within securities framework \\
+IN-03 & CDFI $\rightarrow$ Entity & CDFI certification prerequisites reference correct entity formation steps \\
+IN-04 & Section 106 $\rightarrow$ IIJA & Historic preservation requirements mapped to broadband funding compliance \\
+IN-05 & ICA $\rightarrow$ Inheritance & Internal capital account mechanics connect to inheritable equity design \\
+IN-06 & B\&O $\rightarrow$ Entity types & Tax rate classifications match actual Fox entity business activities \\
+IN-07 & International $\rightarrow$ Governance & SWF governance requirements addressed against cooperative governance model \\
+IN-08 & Self-containment & Document comprehensible without external references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1.\ All 22 entities documented & CF-01, CF-03 & Pending \\
+2.\ Formation sequence validated & CF-02 & Pending \\
+3.\ Subchapter T with examples & CF-04, SC-NUM & Pending \\
+4.\ ICA lifecycle mapped & CF-05, IN-05 & Pending \\
+5.\ 3+ tribal structures compared & CF-06, SC-IND & Pending \\
+6.\ CDFI pathway documented & CF-07, IN-03 & Pending \\
+7.\ Section 106 process documented & CF-08, IN-04 & Pending \\
+8.\ 2+ securities frameworks analyzed & CF-09, SC-SEC & Pending \\
+9.\ B\&O obligations documented & CF-10, IN-06 & Pending \\
+10.\ 3+ CPTPP states covered & CF-11 & Pending \\
+11.\ All sources professional & SC-SRC & Pending \\
+12.\ Cross-module dependencies identified & IN-01 through IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate decisions; go/no-go \\
+PLAN & Planner & Wave decomposition; Track A/B/C parallel optimization \\
+SCOUT & Research Agent & Statutory source gathering; RCW/IRC evidence compilation \\
+EXEC-A & Track A Executor & Entity formation + cooperative accounting assembly \\
+EXEC-B & Track B Executor & Tribal governance + federal compliance assembly \\
+CRAFT-LAW & Legal Domain Specialist & Statutory interpretation; cross-jurisdiction analysis \\
+CRAFT-FIN & Financial Domain Specialist & Cooperative accounting; securities; tax framework analysis \\
+VERIFY & Verification Agent & Source validation; statutory citation checking \\
+INTEG & Integration Agent & Cross-module consistency; dependency chain validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+TOPO & Topology Manager & Agent team structure for 3 parallel tracks \\
+ARCH & Architecture & Cross-cutting structural decisions (schema, format) \\
+SECURE & Security & Safety boundary enforcement (tribal sensitivity, disclaimers) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (6 modules, legal sensitivity) \\
+Total modules & 6 \\
+Total deliverables & 7 (6 module documents + 1 integrated reference) \\
+Parallel tracks & 3 (Wave 1) \\
+Context windows & 11--15 estimated \\
+Sessions & 3--4 estimated \\
+Total token budget & 170,000 \\
+Model split & Opus 38\% / Sonnet 58\% / Haiku 4\% \\
+Crew size & 16 roles \\
+Safety-critical tests & 6 (all mandatory-pass / BLOCK) \\
+Total tests & 35 \\
+Success criteria & 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``FoxLaw is not outside counsel. It is a founding co-op law firm built and managed by the family lawyers who are already part of the founding team. Formed simultaneously with Fox Infrastructure Group --- the first act, not an afterthought.''}
+
+\vspace{0.5em}
+
+The legal architecture is the spaces between the entities --- the operating agreements, the equity flows, the sovereign governance structures that make 21 cooperatives function as one corridor. When those spaces are designed with architectural elegance, the complexity becomes invisible. The worker sees their equity growing. The tribal nation governs their segment. The concrete apprentice earns the same as the board member. That is the Amiga Principle, applied to law.
+\end{quotebox}
+
+\end{document}
