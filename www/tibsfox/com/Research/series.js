@@ -3,6 +3,7 @@
 (function() {
   var projects = [
     { id: 'ACC', name: 'Accounting', path: 'ACC/index.html' },
+    { id: 'AGR', name: 'PNW Agriculture', path: 'AGR/index.html' },
     { id: 'ARC', name: 'Shapes & Colors', path: 'ARC/index.html' },
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
     { id: 'AWF', name: 'Air Water Food', path: 'AWF/index.html' },
