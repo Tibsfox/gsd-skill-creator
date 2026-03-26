@@ -1,0 +1,1005 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Infrastructure / Industrial-Pacific ===
+\definecolor{primary}{HTML}{1A237E}        % Deep indigo — Pacific depth
+\definecolor{secondary}{HTML}{00695C}      % Teal — PNW evergreen
+\definecolor{tertiary}{HTML}{37474F}       % Blue-gray — steel/concrete
+\definecolor{accent}{HTML}{0277BD}         % Ocean blue — Pacific trade routes
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Pacific Spine: Ground Truth}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Pacific Spine Ground Truth -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ======================================================================
+% TITLE PAGE
+% ======================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Pacific Spine\\[0.3em]Ground Truth}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Sno-Isle TECH $\cdot$ Boeing $\cdot$ Pacific Rim Trade\\[0.2em]Compute Platforms $\cdot$ Ecology $\cdot$ Disaster Response}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18 context windows across 6 sessions}}
+\end{center}
+\newpage
+
+% ======================================================================
+% TABLE OF CONTENTS
+% ======================================================================
+\tableofcontents
+\newpage
+
+% ======================================================================
+% STAGE 1 --- VISION DOCUMENT
+% ======================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Pacific Spine Ground Truth --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Fox Infrastructure Group Master Business Plan (v1.0)}
+\metafield{Context:}{Fox Infrastructure Group opening move --- three conversations in Snohomish County}
+
+\subsection{Vision}
+
+The corridor starts at home. Three conversations start everything: Sno-Isle TECH, Boeing, Tulalip Tribes. But those conversations require ground truth --- the actual state of the institutions, the workforce pipelines, the trade networks, the compute platforms, and the disaster response systems that the Pacific Spine will eventually integrate.
+
+This research mission maps that ground truth. It examines Sno-Isle TECH Skills Center not as an abstraction but as a functioning institution at 9001 Airport Road in Everett, serving 14 school districts across Snohomish and Island counties, with 22 active programs ranging from aerospace manufacturing to maritime vessel operations. It traces the Boeing educational pathway from the Pre-Employment Training (BPET) program through the new IAM Local 751 Machinists Institute training center that opened in Everett in June 2025. It documents the Pacific Rim trade network that the corridor must integrate with --- the CPTPP member nations from Canada to Chile, the West Coast port expansion plans, and the \$19 billion economic engine that Paine Field already represents.
+
+The research also establishes the compute and science platform landscape --- from CERN's petabyte-scale Ceph clusters running on OpenStack to NASA's systems engineering methodology that the GSD ecosystem already implements --- because the FoxCompute and FoxData layers cannot be designed without understanding what world-class distributed infrastructure actually looks like in production. And it maps the disaster response reality: a 700-mile fault line with a 37\% probability of producing a magnitude 7.1+ earthquake in the next 50 years, coastal communities that will be isolated for at least two weeks, and a response infrastructure that is, by every professional assessment, inadequate.
+
+The spaces between these systems --- between education and employment, between local manufacturing and global trade, between daily operations and catastrophic response --- are where Fox Infrastructure Group lives. This mission maps those spaces with precision so that the opening conversations can be grounded in evidence rather than aspiration.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Workforce Pipeline Fragmentation:} Sno-Isle TECH produces skilled graduates, Boeing needs skilled workers, and the Machinists Institute trains for specific Boeing roles --- but these pipelines operate independently without a unified pathway from high school enrollment through journey-level employment. The gap between educational output and employer intake represents lost human potential and regional economic friction.
+
+\item \textbf{Housing Barrier to Education:} Students attending skill-center education from rural Snohomish and Island counties face commute times of 90+ minutes each way. No barracks-style temporary housing exists near Sno-Isle TECH or Paine Field to enable immersive, residential skill training. This limits program accessibility to students within reasonable daily commuting distance.
+
+\item \textbf{Pacific Rim Trade Isolation:} Despite Snohomish County being home to the Port of Everett (the \#1 Customs Export District on the U.S. West Coast) and producing aircraft delivered to airlines in CPTPP member nations, the region has no structured participation in Pacific Rim trade coordination. The Fox Infrastructure Group's Pacific Spine vision requires understanding the actual trade architecture it must integrate with.
+
+\item \textbf{Compute Platform Knowledge Gap:} The FoxCompute and FoxData layers described in the master business plan require distributed infrastructure at a scale informed by organizations that have actually built it --- CERN (300,000 cores, 50+ PB Ceph), NASA (systems engineering methodology), and the hyperscale cloud providers headquartered in the corridor (Amazon AWS, Microsoft Azure). No systematic mapping of these platforms' architectures exists in the Fox ecosystem.
+
+\item \textbf{Cascadia Preparedness Deficit:} Professional assessments consistently describe Pacific Northwest disaster preparedness as inadequate for a Cascadia Subduction Zone event. Oregon projects \$32 billion in economic losses and 650--5,000 fatalities. Essential services will be offline for one month to 18 months. The FoxResponse layer is designed to address this, but its design requires understanding the current state of federal, state, tribal, and local response capabilities.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Map the ground truth of every system the Pacific Spine's opening move must engage --- education, manufacturing, trade, compute, ecology, and safety --- so that the three founding conversations are grounded in evidence.
+\end{quotebox}
+
+The core concept is \textbf{ground-truth research as prerequisite to action}. The Fox Infrastructure Group master plan describes what the corridor will become. This mission documents what it must work with today.
+
+\subsubsection{Regional Context Map}
+
+\begin{asciibox}
+                     PACIFIC RIM TRADE NETWORK
+                    (CPTPP: BC to Chile to Asia)
+                              |
+            +-----------------+------------------+
+            |                                    |
+    Port of Everett                    Port of Tacoma/Seattle
+    (#1 Export District)               (NWSA Deep Water)
+            |                                    |
+            +------------ PAINE FIELD -----------+
+            |        (Boeing / Sno-Isle)         |
+            |                                    |
+    +-------+--------+              +-----------+----------+
+    |                |              |                      |
+ Sno-Isle       Boeing Everett   Machinists         Workforce
+ TECH Skills    Factory          Institute          Housing
+ Center         (30,000+         (Opened 2025)      (NEEDED)
+ (14 districts) workers)
+    |                |              |
+    +-------+--------+--------------+
+            |
+     SNOHOMISH COUNTY WORKFORCE PIPELINE
+            |
+    +-------+--------+
+    |                |
+ FoxCompute     FoxResponse
+ (OpenStack/    (Cascadia
+  CEPH/NASA)     Mesh Network)
+    |                |
+    +-------+--------+
+            |
+      PACIFIC SPINE CORRIDOR
+      (BC to Chile)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  Module 1             Module 2              Module 3
+  PACIFIC RIM          SNO-ISLE SKILL       BOEING MFG
+  TRADE NETWORK        CENTER & EDU         PATHWAY
+  (CPTPP, ports,       (programs, advisory, (BPET, Machinists
+   trade routes)        workforce tracks)    Institute, pipeline)
+       |                     |                    |
+       +----------+----------+--------------------+
+                  |
+            INTEGRATION
+            SYNTHESIS
+                  |
+       +----------+----------+--------------------+
+       |                     |                    |
+  Module 4             Module 5              Module 6
+  BARRACKS            COMPUTE &             PNW SAFETY &
+  HOUSING MODEL       SCIENCE PLATFORMS     DISASTER RESPONSE
+  (modular, temp,     (CERN/NASA/CEPH/     (Cascadia, mesh,
+   residential edu)    OpenStack/Cloud)      Pacific network)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Pacific Rim Trade Network}
+
+Scope: CPTPP member nation alignment (12 nations: Australia, Brunei, Canada, Chile, Japan, Malaysia, Mexico, New Zealand, Peru, Singapore, UK, Vietnam). West Coast port infrastructure and expansion plans. Trade corridor from British Columbia through Washington, Oregon, California to Chile. Japanese trading company (Sogoshosha) integration patterns. Singapore sovereign wealth fund (GIC/Temasek) investment architecture. Port of Everett export capabilities and expansion trajectory.
+
+\subsubsection{Module 2: Sno-Isle TECH Skill Center \& Educational Pathways}
+
+Scope: Current program inventory (22 programs across 5 career pathways). Aerospace manufacturing and maritime vessel operations programs. Advisory committee structure and engagement model. Connection to 14 member school districts spanning Snohomish and Island counties. Dual credit and industry certification pipelines. Summer school expansion (2025 relaunch). Apprenticeship career fair ecosystem (182 programs statewide, 250+ occupations). Foundation and corporate partnership model.
+
+\subsubsection{Module 3: Boeing Manufacturing Pathway}
+
+Scope: Paine Field / Boeing Everett factory operations (30,000+ workers, \$19B economic output). Boeing Pre-Employment Training (BPET) program structure. IAM Local 751 Machinists Institute Everett facility (opened June 2025, VR training, spray painting, manual machining, blueprint reading). 777X production timeline and workforce implications. MAX 10 Everett production line (hiring began January 2026). Aviation Technical Services (ATS) as secondary employer. Washington Aerospace Training \& Research Center at Paine Field. Embry-Riddle Aeronautical University Everett campus.
+
+\subsubsection{Module 4: Barracks Housing Model}
+
+Scope: Modular workforce housing patterns (prefab dormitory, man camp, residential education models). Rapid deployment capability (weeks, not months). Cost comparison: modular vs.\ conventional (20--40\% savings). Precedent models for educational barracks: military training center housing, Job Corps residential programs, construction crew camps. Integration with Sno-Isle TECH programs for immersive residential skill training. Snohomish County zoning and permitting considerations.
+
+\subsubsection{Module 5: Compute \& Science Platforms}
+
+Scope: CERN Worldwide LHC Computing Grid (1.4M cores, 1.5 exabytes, 170 sites, 42 countries). CERN's OpenStack + Ceph deployment (300,000 cores, 50+ PB Ceph). NASA Systems Engineering Handbook and V-model methodology. Amazon Web Services architecture (local presence: AWS Puget Sound). Microsoft Azure (Redmond headquarters, 30 miles from Paine Field). VMware/Broadcom virtualization stack. OpenStack as open-source cloud platform. Ceph as distributed storage powering CERN, Human Brain Project, MeerKat radio telescope. FoxCompute Electric City thesis (Grand Coulee hydroelectric).
+
+\subsubsection{Module 6: PNW Safety \& Disaster Response Network}
+
+Scope: Cascadia Subduction Zone (700-mile fault, 37\% probability M7.1+ in 50 years, last rupture January 26, 1700). Oregon Resilience Plan projections (\$32B losses, 650--5,000 fatalities, 27,000 displaced). Two-week self-sufficiency requirement. ShakeAlert early warning system. FEMA Region 10 coverage. Tribal emergency response capabilities (Tulalip, Puyallup, Colville). Pacific Ocean network design for full-rim coordination (Japan tsunami link). Mesh network emergency communications. FoxResponse activation sequence.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  model: fleet
+  modules: 6
+  activation: fleet
+  crew_size: full (17 roles)
+  parallel_tracks: 3
+  model_split:
+    opus: 30%   # Synthesis, trade network, disaster modeling
+    sonnet: 60% # Survey compilation, program inventories
+    haiku: 10%  # Schemas, templates, scaffolding
+  estimated_tokens: ~380K total
+  estimated_windows: 18
+  estimated_sessions: 6
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Current state of all six module domains as of March 2026
+\item Government, academic, and professional organization sources only
+\item Quantitative data with specific source attribution
+\item Direct relevance to Fox Infrastructure Group opening move
+\item Snohomish/Island county geographic focus with Pacific Rim context
+\item Cascadia Subduction Zone preparedness assessment
+\item Open-source compute platform architectures (OpenStack, Ceph)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Proprietary cloud architecture details (AWS/Azure internals)
+\item Political advocacy or policy recommendations
+\item Tribal-specific governance structures (requires listening sessions, not desk research)
+\item Detailed engineering specifications for FoxMaglev or FoxFiber
+\item Financial projections or business plan updates
+\item Curriculum design (that is a separate mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Sno-Isle TECH program inventory covers all 22 current programs with pathway classification
+\item Boeing workforce pipeline documented from BPET enrollment through journey-level employment
+\item Machinists Institute Everett facility capabilities documented with specific training tracks
+\item CPTPP member nation trade relationships mapped with Pacific Spine corridor alignment
+\item West Coast port expansion plans documented for all major facilities (Everett, Tacoma/Seattle, Vancouver, Prince Rupert)
+\item Barracks housing model includes at least 3 precedent case studies with cost data
+\item CERN/Ceph/OpenStack architecture documented at sufficient depth for FoxCompute design reference
+\item NASA Systems Engineering methodology mapped to GSD mission control pattern
+\item Cascadia Subduction Zone preparedness gaps quantified with agency source data
+\item Pacific Ocean disaster response network design includes Japan--PNW tsunami coordination
+\item Every numerical claim attributed to a specific government, academic, or professional source
+\item Document is self-contained: a reader with no Fox ecosystem knowledge can follow the full argument
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent vision --- this mission provides ground-truth evidence & Upstream \\
+GSD Cloud Ops Curriculum & Compute platform findings feed curriculum design & Downstream \\
+GSD Local Cloud Provisioning & OpenStack/Ceph architecture informs local deployment & Downstream \\
+GSD Mesh Prototype Spec & Disaster response findings inform mesh network design & Downstream \\
+FoxEdu Vision (future) & Sno-Isle and Boeing findings shape educational pathway design & Downstream \\
+Salish Sea Expansion Vision & Ecological and tribal context provides regional grounding & Lateral \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The corridor starts at home. It always will.
+
+Every system mapped in this research --- from a skills center classroom at 9001 Airport Road to a petabyte-scale Ceph cluster at CERN to a 700-mile fault line building pressure under the Pacific Ocean --- represents a space between. Between what exists and what is needed. Between education and employment. Between daily operations and catastrophic response. Between local manufacturing and global trade.
+
+The Amiga Principle holds: architectural leverage over brute force. Sno-Isle TECH already trains the workforce. Boeing already builds the aircraft. The ports already move the freight. The fault line already stores the energy. Fox Infrastructure Group does not replace these systems. It connects them. The connective tissue between sovereign regional operators --- that is what the three conversations are about. And those conversations must be grounded in evidence, not aspiration.
+
+The spaces between are where the work lives.
+\end{quotebox}
+
+\newpage
+
+% ======================================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ======================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Pacific Spine Ground Truth --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings organized by research module. Each module section contains quantitative data, organizational context, and source attribution sufficient for a GSD agent to produce its assigned deliverable without additional research.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item Sno-Isle TECH Skills Center (Mukilteo School District)
+\item Boeing Commercial Airplanes
+\item IAM Local 751 / The Machinists Institute
+\item Puget Sound Regional Council (PSRC)
+\item Economic Alliance Snohomish County (EASC)
+\item Snohomish County Government
+\item CERN IT Department / WLCG
+\item NASA Systems Engineering Division
+\item USGS Pacific Coastal and Marine Science Center
+\item Oregon Department of Emergency Management
+\item Washington Emergency Management Division
+\item FEMA Region 10
+\end{itemize}
+
+\subsection{Module 1 Reference: Pacific Rim Trade Network}
+
+\subsubsection{CPTPP Architecture}
+
+The Comprehensive and Progressive Agreement for Trans-Pacific Partnership encompasses 12 member nations: Australia, Brunei, Canada, Chile, Japan, Malaysia, Mexico, New Zealand, Peru, Singapore, the United Kingdom (acceded July 2023), and Vietnam. Combined GDP exceeds \$15.8 trillion, representing 14.4\% of global GDP and constituting the world's fourth-largest free trade area (source: CPTPP treaty documentation via Wikipedia/CFR analysis). The agreement entered into force December 30, 2018.
+
+The United States withdrew from the predecessor TPP in January 2017 and has not rejoined, though the Pacific Spine corridor alignment connects primarily to CPTPP nations: Canada (British Columbia), Mexico, Chile (southern terminus), Japan (Sogoshosha trading companies, Temasek/GIC sovereign wealth), Singapore (FoxVentures branch office location per master plan), and Peru.
+
+China applied for CPTPP membership in September 2021; Australia has indicated acceptance is unlikely in the near term. The Regional Comprehensive Economic Partnership (RCEP), signed November 2020, includes fifteen Asia-Pacific countries but not the United States.
+
+\subsubsection{West Coast Port Infrastructure}
+
+The Port of Everett is designated the \#1 Customs Export District on the U.S. West Coast (source: Economic Alliance Snohomish County). Boeing is the port's largest customer, importing parts from around the world for Everett aerospace manufacturing (source: Everett Herald, May 2025).
+
+Planned West Coast port expansions as of 2026 include: Port of Prince Rupert (British Columbia) feasibility study for a new 2 million TEU container terminal, estimated completion 2030--31; Vancouver (British Columbia) invited three construction teams in November 2025 for major expansion (source: Pacific Coast Intermodal Port Info, February 2026).
+
+The Pacific Northwest International Trade Association (PNITA) notes that Oregon and Washington are among only 12 U.S. states with a trade surplus, with international trade supporting one in five Oregon jobs at wages averaging 11\% higher than non-trade positions (source: Portland Metro Chamber / PNITA).
+
+\subsubsection{Snohomish County Trade Position}
+
+Snohomish County's economy includes 337,157 jobs as of 2024, with aerospace product and parts manufacturing as the top industry. The County contains 46\% of all aerospace workers in Washington State (source: EASC). The region's aerospace supply chain includes 600+ companies supporting Boeing and other manufacturers including Airbus, Bombardier, Comac, Embraer, Sukhoi, and Mitsubishi (source: EASC Target Industries profile).
+
+\subsection{Module 2 Reference: Sno-Isle TECH Skill Center}
+
+\subsubsection{Institutional Profile}
+
+Sno-Isle TECH Skills Center is a public technical high school located at 9001 Airport Road, Everett, Washington, near Paine Field. It is a cooperative effort of 14 local school districts spanning Snohomish and Island counties (source: Snohomish School District / Sno-Isle TECH website). Programs serve juniors and seniors (ages 16--20) at no cost to students of member districts (some programs have lab fees).
+
+Operating hours: Monday, Wednesday, Thursday, Friday 7am--3pm; Tuesday 9am--3pm. Students split their day between their home high school and Sno-Isle TECH. Transportation is provided by member school districts.
+
+\subsubsection{Program Inventory}
+
+Twenty-two programs organized into five career pathways:
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Information Technology:} Computers Servers \& Networking, Electronics Engineering Technology, Video Game Design, Animation
+\item \textbf{Business \& Marketing:} Fashion \& Merchandising, Culinary Arts (three tracks: Baking \& Pastry, Management \& Operations, Production \& Service)
+\item \textbf{Human Services:} Early Childhood Education, Cosmetology, Criminal Justice, Fire Fighting
+\item \textbf{Science \& Health:} Nursing, Dental Assisting, Medical Assisting, Healthcare Careers, Pharmacy Technician, Veterinary Assisting
+\item \textbf{Trade \& Industry:} Advanced Manufacturing, Aerospace Manufacturing, Construction, Metal Fabrication, Welding, Diesel Mechanics, Autobody/Collision, Maritime Vessel Operations
+\end{itemize}
+
+(Source: Sno-Isle TECH website, Snohomish School District, Darrington School District documentation.)
+
+Programs still accepting applications for 2026--27 as of March 2026 include: Electronics Engineering Technology, Computers Servers \& Networking, Culinary Arts (all three tracks), Early Childhood Education, Fashion \& Merchandising, Advanced Manufacturing, Maritime Vessel Operations, Pharmacy Technician, and Video Game Design (source: Sno-Isle TECH website).
+
+\subsubsection{Apprenticeship Ecosystem}
+
+Sno-Isle TECH hosts the 2026 Apprenticeship Career + Job Fair on April 23, bringing together more than 30 apprenticeship programs from across Washington State. More than 5,000 employers across Washington participate in 182 apprenticeship programs spanning nearly 250 occupations (source: Lynnwood Times, March 19, 2026). Participating programs span aerospace, advanced manufacturing, construction, food industry, dental hygiene, mental health, healthcare, maritime, transportation, water treatment, automotive, sheet metal, and more.
+
+\subsubsection{Foundation \& Support}
+
+The Sno-Isle Skills Center Foundation supports students through scholarships and resources, eliminating financial barriers to career and technical education (source: snoislescfoundation.org). Summer school program relaunched in 2025/2026, offering 3-week introductory courses for incoming 9th--12th grade students (source: Sno-Isle TECH website).
+
+\subsection{Module 3 Reference: Boeing Manufacturing Pathway}
+
+\subsubsection{Paine Field / Boeing Everett Complex}
+
+The Boeing Everett Factory is the world's largest building by volume at over 472 million cubic feet, covering 98.3 acres within a 1,000-acre complex adjacent to Seattle Paine Field International Airport (source: Boeing / Wikipedia). The complex includes up to 200 separate buildings, employs approximately 30,000 workers across three shifts operating seven days a week, and has delivered more than 5,000 widebody aircraft since opening in 1967 (source: multiple aviation industry sources).
+
+Current production programs at Everett include the 767 freighter (production ending 2027), the 777/777X family (500+ orders), and as of January 2026, Boeing began hiring for the MAX 10 production line in Everett (source: Wikipedia / Everett Herald).
+
+The Paine Field/Boeing Everett Manufacturing Industrial Center (MIC) accounts for approximately 42,000 covered jobs (source: PSRC profile). Paine Field was renamed Seattle Paine Field International Airport in July 2023 and handled 580,000 passengers in 2024 (source: Wikipedia).
+
+\subsubsection{Boeing Pre-Employment Training (BPET)}
+
+BPET is a certified training pathway where students completing approved courses receive direct offers of employment as Aircraft Structures Mechanics in Everett and Renton. Roles include: drilling and fastening complex structures including composite materials, operating hand and machine tools including automated equipment, verifying kitted parts against installation plans and bill of materials. Entry pay: \$25.32/hour with potential up to \$54.76/hour per collective bargaining agreement (source: Boeing Indeed listings, 2026).
+
+\subsubsection{IAM Local 751 Machinists Institute --- Everett}
+
+The Machinists Institute opened a 20,000-square-foot, three-story training facility in Everett in June 2025 (source: Everett Herald, June 9, 2025). IAM Local 751 represents approximately 33,000 Boeing machinists in Washington.
+
+Training capabilities include: VR-equipped training rooms with robotic arms, virtual reality spray-painting and welding simulators, manual machining equipment (milling machines), blueprint reading and assembly line quality control curriculum, and a large auditorium for union meetings. The Everett program offers a direct Boeing employment pathway --- the first such program Local 751 has operated in Everett (source: Everett Herald).
+
+This responds to a projected U.S. shortfall of over 2 million machinists by 2030 (source: Deloitte / The Manufacturing Institute, 2021 study, cited by U.S. Sen. Maria Cantwell at the facility's opening).
+
+\subsubsection{Regional Training Ecosystem}
+
+Additional workforce training resources at or near Paine Field include: Washington Aerospace Training \& Research Center, Center of Excellence for Aerospace and Advanced Manufacturing, Aerospace Joint Apprenticeship Committee (AJAC --- statewide registered apprenticeship), Edmonds Community College aerospace and advanced manufacturing programs, and Embry-Riddle Aeronautical University's Everett campus offering associate through master's degrees (source: Snohomish County Government workforce training inventory).
+
+\subsection{Module 4 Reference: Barracks Housing Model}
+
+\subsubsection{Modular Workforce Housing Industry}
+
+Modular workforce housing (also called ``man camps,'' crew lodges, or base camps) has been deployed for over a century, from 19th-century railroad workers to modern construction, energy, and military contexts. Modular construction delivers housing 40--50\% faster than conventional construction and typically at 20--40\% lower cost (source: Modular Genius, Mobile Modular industry documentation).
+
+Configurations range from 20 to 1,000+ residents. Standard installations include: sleeping quarters, kitchens, dining facilities, showers, laundry, recreation areas, and medical facilities. Deployment timeline: weeks at a prepared site, not months (source: multiple industry providers).
+
+\subsubsection{Educational Workforce Housing Precedents}
+
+California's Center for Cities + Schools at UC Berkeley has pioneered education workforce housing research, documenting nine local educational agencies that have navigated planning, financing, and construction of workforce housing on school-district-owned land (source: UC Berkeley CC+S / cityLAB at UCLA / Terner Center for Housing Innovation).
+
+Key finding: by using land already owned by educational institutions, housing can be leased to employees and students at below-market rates, addressing affordability barriers that limit program participation.
+
+\subsubsection{Application to Sno-Isle TECH}
+
+Students from rural districts (e.g., Darrington School District) commute significant distances to the Sno-Isle campus. The bus from Darrington High School departs at 6:25am and returns by 11:15am for AM session students (source: Darrington School District). A residential education model using modular barracks-style housing near the Paine Field campus could eliminate commute barriers, enable immersive multi-week skill intensives, and align with the FoxEdu vision of corridor-trained builders.
+
+\subsection{Module 5 Reference: Compute \& Science Platforms}
+
+\subsubsection{CERN Computing Infrastructure}
+
+CERN operates approximately 300,000 computing cores with current storage requirements estimated at 70 petabytes per year (source: CERN IT Department / DCD analysis). The infrastructure runs on an OpenStack cloud deployment with Ceph distributed storage as backend, described as one of the most ambitious open cloud deployments in the world.
+
+CERN's Ceph deployment: 10+ clusters totaling over 50 petabytes as of 2021, supporting cloud, Kubernetes, and HPC use-cases (source: NERSC Data Seminars / Dan van der Ster, CERN). Ceph serves as backend for OpenStack Cinder Block Storage and simultaneously as backend for the XRootD storage element.
+
+\subsubsection{Worldwide LHC Computing Grid (WLCG)}
+
+The WLCG combines approximately 1.4 million computer cores and 1.5 exabytes of storage from over 170 sites in 42 countries. It runs over 2 million tasks per day with global transfer rates exceeding 260 GB/s (source: CERN WLCG documentation). The tiered architecture: Tier 0 at CERN, 11 Tier 1 national centers, and approximately 160 Tier 2 and Tier 3 sites worldwide.
+
+CERN initially selected OpenStack for its low cost: ``In 2011, we could see how much additional computer processing the LHC was going to need, and equally, we could see that we are in a situation where both staff and budget are going to be flat. This meant that open source was an attractive solution'' (source: DCD interview with CERN IT).
+
+\subsubsection{NASA Systems Engineering}
+
+NASA's Systems Engineering Handbook established the V-model: requirements flow down, verification flows up, with formal review gates and configuration management at every stage. This methodology migrated from aerospace into software engineering and became the backbone of serious development methodology (documented in GSD ecosystem's ``The Quark and the Compiler'' essay). The GSD mission control pattern directly implements NASA SE practices.
+
+\subsubsection{Regional Cloud Presence}
+
+Amazon Web Services, Microsoft Azure, and Google Cloud all maintain significant presence in the Puget Sound region. Microsoft's headquarters in Redmond is approximately 30 miles south of Paine Field. Amazon's campus expansion extends from Seattle into Snohomish County (fulfillment center in Arlington). The FoxCompute Electric City thesis proposes leveraging Grand Coulee hydroelectric power for compute operations under Colville Tribes governance.
+
+\subsubsection{Ceph in Research Context}
+
+Ceph is characterized as flexible, inexpensive, fault-tolerant, hardware-neutral, and infinitely scalable (source: Scientific Computing World). Active deployments include: CERN particle physics (50+ PB), Immunity Bio cancer research (1 TB per genetic test), the Human Brain Project (next-gen mixed workload execution), and MeerKat radio telescope (20 PB object storage) (source: Scientific Computing World, 2020).
+
+\subsection{Module 6 Reference: PNW Safety \& Disaster Response Network}
+
+\subsubsection{Cascadia Subduction Zone}
+
+The Cascadia Subduction Zone is a 700-mile fault running from northern California to Vancouver Island, British Columbia, approximately 70--100 miles offshore. There have been 43 earthquakes in the last 10,000 years; the last occurred January 26, 1700, estimated at magnitude 9.0 (source: Oregon Department of Emergency Management). Evidence was confirmed via Japanese historical records documenting a destructive trans-Pacific tsunami on that date, and by Native American oral histories.
+
+Current probability estimates: 37\% chance of a magnitude 7.1+ earthquake in the next 50 years. Southern zone: approximately 40\% chance of magnitude 8.0--8.5 in 50 years. Full-margin rupture (magnitude 8.7--9.2): 16--22\% probability in 50 years (source: USGS / Oregon Dept.\ of Emergency Management / National Association of Counties).
+
+\subsubsection{Projected Impact}
+
+Oregon Resilience Plan projections: total economic losses exceeding \$32 billion (close to one-fifth of Oregon's gross state product). Fatalities: 650 to 5,000. Displaced residents: over 27,000. Completely destroyed buildings: up to 24,000, with another 85,000 sustaining extensive damage. Service outage timelines: water and sewer systems 1 month to 1 year; electricity 1--3 months; police and fire stations 2--4 months; top-priority highways 6--12 months; healthcare facilities 18 months (source: Washington County, OR Emergency Management / Oregon Resilience Plan).
+
+USGS research shows that earthquake-driven coastal subsidence of 0.5--2 meters could more than double people, buildings, and roads exposed to coastal flooding, with effects persisting for decades or centuries --- amplified by climate-driven sea-level rise (source: USGS Pacific Coastal and Marine Science Center, 2025).
+
+\subsubsection{Self-Sufficiency Requirement}
+
+All professional assessments converge on a minimum two-week self-sufficiency requirement for communities following a CSZ event. Coastal communities will be isolated into ``islands'' due to landslides, liquefaction, and infrastructure failure (source: Oregon Department of Emergency Management). Federal response will be overwhelmed; county-to-county mutual aid is the primary response mechanism (source: National Association of Counties, August 2025).
+
+\subsubsection{Pacific Ocean Network}
+
+The 1700 Cascadia earthquake produced a tsunami that struck the Japanese coast, demonstrating the trans-Pacific connection. USGS notes that findings have global implications for coastal areas near subduction zones including Chile, Indonesia, and Japan. The FoxResponse Pacific network design must account for this full-rim coordination requirement. The Cascadia Region Earthquake Science Center (CRESCENT) supports cross-institutional research and applications (source: USGS / Pacific Northwest Seismic Network).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Domain} & \tableheader{Sensitivity} & \tableheader{Handling} \\
+\midrule
+Tribal engagement & Nation-specific attribution & Always name specific nations (Tulalip, Puyallup, Colville); never generic references \\
+Disaster projections & Published agency data only & All fatality/loss projections attributed to specific agency reports \\
+Boeing workforce & Active labor dynamics & Note IAM Local 751 context; do not advocate for labor positions \\
+Trade policy & Politically contested & Present CPTPP structure factually; no trade policy advocacy \\
+Compute architecture & Proprietary boundaries & Document open-source layers (OpenStack, Ceph); respect proprietary cloud boundaries \\
+Housing & Zoning sensitivity & Document modular housing capabilities; do not presume zoning approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item Oregon Department of Emergency Management --- Cascadia Subduction Zone preparedness
+\item USGS Pacific Coastal and Marine Science Center --- Coastal subsidence research
+\item Washington Emergency Management Division
+\item FEMA Region 10
+\item Snohomish County Government --- Economic Development Initiative, Workforce Training
+\item Puget Sound Regional Council --- Paine Field/Boeing Everett MIC profile
+\item Washington State Department of Commerce
+\item Pacific Northwest Seismic Network (PNSN) / University of Washington
+\end{itemize}
+
+\subsubsection{Institutional \& Academic Sources}
+\begin{itemize}[leftmargin=2em]
+\item CERN IT Department --- Computing infrastructure documentation
+\item CERN Worldwide LHC Computing Grid --- Grid architecture and capacity
+\item NASA Systems Engineering Handbook
+\item UC Berkeley Center for Cities + Schools --- Education workforce housing
+\item Embry-Riddle Aeronautical University, Everett Campus
+\item Edmonds Community College --- Aerospace training programs
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+\begin{itemize}[leftmargin=2em]
+\item Economic Alliance Snohomish County --- Target industries, major employers, workforce data
+\item Sno-Isle TECH Skills Center / Sno-Isle Skills Center Foundation
+\item IAM Local 751 / The Machinists Institute
+\item Boeing Commercial Airplanes --- Workforce and facility data
+\item Pacific Northwest International Trade Association (PNITA)
+\item National Association of Counties --- Cascadia preparedness assessment
+\item Deloitte / The Manufacturing Institute --- Machinist shortfall projections
+\end{itemize}
+
+\newpage
+
+% ======================================================================
+% STAGE 3 --- MISSION PACKAGE
+% ======================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive ground-truth research document covering six domains critical to the Fox Infrastructure Group's opening move in Snohomish County: Pacific Rim trade network architecture, Sno-Isle TECH skill center programs and pathways, Boeing manufacturing workforce pipeline, barracks-style workforce housing models, compute and science platform architectures, and PNW safety and disaster response network design. The document must be self-contained, fully sourced, and structured for direct use in Fox Infrastructure Group's three founding conversations.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+ Wave 0: FOUNDATION
+ [Schema] [Source Index] [Style Guide]
+     |
+     v
+ Wave 1: PARALLEL SURVEYS (3 tracks)
+ Track A: Trade + Skill Center    Track B: Boeing + Housing
+ Track C: Compute + Disaster
+     |              |              |
+     v              v              v
+ Wave 2: SYNTHESIS
+ [Cross-module integration] [Gap analysis] [Narrative weaving]
+     |
+     v
+ Wave 3: PUBLICATION + VERIFICATION
+ [Document assembly] [Source validation] [Final review]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source index, citation format, naming conventions
+\item \textbf{Survey Layer} --- Six parallel module surveys producing structured findings
+\item \textbf{Synthesis Layer} --- Cross-module integration, gap identification, narrative coherence
+\item \textbf{Publication Layer} --- Final document assembly, verification, and delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Pacific Rim Trade Survey & CPTPP nations mapped, port data sourced, trade corridor aligned & Mod 1 \\
+D2 & Sno-Isle TECH Profile & All 22 programs inventoried, pathways classified, advisory model documented & Mod 2 \\
+D3 & Boeing Pathway Map & BPET through journey-level pipeline documented, Machinists Institute profiled & Mod 3 \\
+D4 & Housing Model Analysis & 3+ case studies with cost data, modular deployment timeline & Mod 4 \\
+D5 & Compute Platform Reference & CERN/Ceph/OpenStack at design depth, NASA SE methodology mapped & Mod 5 \\
+D6 & Disaster Response Assessment & CSZ probabilities sourced, preparedness gaps quantified, Pacific network designed & Mod 6 \\
+D7 & Integrated Ground Truth Document & All modules synthesized into single self-contained reference & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{2cm}C{1.3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+00-schema & None & Haiku & 4K \\
+01-source-index & None & Haiku & 6K \\
+02-trade-survey & 00, 01 & Sonnet & 35K \\
+03-snoisle-survey & 00, 01 & Sonnet & 30K \\
+04-boeing-survey & 00, 01 & Sonnet & 35K \\
+05-housing-survey & 00, 01 & Sonnet & 25K \\
+06-compute-survey & 00, 01 & Sonnet & 40K \\
+07-disaster-survey & 00, 01 & Opus & 45K \\
+08-cross-integration & 02--07 & Opus & 50K \\
+09-gap-analysis & 08 & Opus & 20K \\
+10-document-assembly & 08, 09 & Sonnet & 45K \\
+11-verification & 10 & Sonnet & 25K \\
+12-final-review & 11 & Opus & 20K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 07, 08, 09, 12 (35\%) & Disaster modeling requires judgment under uncertainty; cross-module synthesis requires seeing patterns across six domains; final review requires editorial judgment \\
+Sonnet & 02--06, 10, 11 (55\%) & Survey compilation is structured work with clear templates; document assembly and source validation are systematic \\
+Haiku & 00, 01 (10\%) & Schema and index creation are scaffolding tasks with well-defined outputs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Tasks} & \tableheader{Parallel} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & 2 & No & 1 & 10K \\
+1 & Surveys & 6 & 3 tracks & 9 & 210K \\
+2 & Synthesis & 2 & No & 3 & 70K \\
+3 & Publication & 3 & No & 5 & 90K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Totals}} & & \textbf{18} & \textbf{380K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W0.1 & Create shared schema & Haiku & 4K & \texttt{00-schema.yaml} \\
+W0.2 & Build source index & Haiku & 6K & \texttt{01-source-index.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Surveys}
+
+\textbf{Track A: Trade + Skill Center}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W1.A1 & Pacific Rim trade survey & Sonnet & 35K & \texttt{02-trade-survey.md} \\
+W1.A2 & Sno-Isle TECH profile & Sonnet & 30K & \texttt{03-snoisle-survey.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Boeing + Housing}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W1.B1 & Boeing pathway map & Sonnet & 35K & \texttt{04-boeing-survey.md} \\
+W1.B2 & Housing model analysis & Sonnet & 25K & \texttt{05-housing-survey.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Compute + Disaster}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W1.C1 & Compute platform reference & Sonnet & 40K & \texttt{06-compute-survey.md} \\
+W1.C2 & Disaster response assessment & Opus & 45K & \texttt{07-disaster-survey.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W2.1 & Cross-module integration & Opus & 50K & \texttt{08-integration.md} \\
+W2.2 & Gap analysis & Opus & 20K & \texttt{09-gaps.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W3.1 & Document assembly & Sonnet & 45K & \texttt{10-assembled.md} \\
+W3.2 & Source verification & Sonnet & 25K & \texttt{11-verified.md} \\
+W3.3 & Final review & Opus & 20K & \texttt{12-final.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output (schemas) cached for all Wave 1 tasks (5-minute TTL window)
+\item Wave 1 Track A and Track B outputs cached at track completion for Wave 2 synthesis
+\item Wave 2 integration output cached for entire Wave 3 sequence
+\item Source index (W0.2) pinned in cache for all waves --- referenced by every survey task
+\item Strategic model allocation: Opus reserved for judgment-heavy synthesis (Waves 2--3); Sonnet handles systematic survey compilation (Wave 1)
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & 0K & 0K & 10K \\
+Wave 1 & 45K & 165K & 0K \\
+Wave 2 & 70K & 0K & 0K \\
+Wave 3 & 20K & 70K & 0K \\
+\midrule
+\textbf{Totals} & \textbf{135K} & \textbf{235K} & \textbf{10K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0.1 Schema]  [W0.2 Source Index]
+        \              /
+         \            /
+          v          v
+  +-------+----------+----------+
+  |        |         |          |
+  v        v         v          v
+[W1.A1] [W1.A2]  [W1.B1] [W1.B2]  [W1.C1] [W1.C2]
+Trade   SnoIsle  Boeing  Housing  Compute  Disaster
+  \       /        \       /        \        /
+   \     /          \     /          \      /
+    v   v            v   v            v    v
+    Track A          Track B         Track C
+        \              |              /
+         \             |             /
+          v            v            v
+         [W2.1 Cross-Module Integration]
+                    |
+                    v
+            [W2.2 Gap Analysis]
+                    |
+                    v
+          [W3.1 Document Assembly]
+                    |
+                    v
+          [W3.2 Source Verification]
+                    |
+                    v
+           [W3.3 Final Review]
+                    |
+                    v
+               DELIVERED
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Coverage} \\
+\midrule
+Safety-Critical & 7 & Mandatory & BLOCK & Source quality, attribution, sensitivity \\
+Core Functionality & 18 & Required & BLOCK & Module completeness, data accuracy \\
+Integration & 8 & Required & BLOCK & Cross-module consistency \\
+Edge Cases & 5 & Best-effort & LOG & Data gaps, temporal currency \\
+\midrule
+\multicolumn{2}{r}{\textbf{Total: 38}} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every statistic, probability, dollar amount, or workforce count attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents trade, labor, and preparedness evidence without legislative advocacy \\
+SC-IND & Indigenous attribution & Tulalip, Puyallup, Colville named specifically; zero generic ``Indigenous peoples'' references \\
+SC-CLI & Climate/disaster projections & Every earthquake probability, loss projection, and subsidence estimate cites specific agency \\
+SC-SEC & Security sensitivity & No operational vulnerability details for Boeing, port, or emergency infrastructure \\
+SC-LOC & No sensitive locations & No specific coordinates for tribal cultural sites or critical infrastructure access points \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Sno-Isle 22 programs inventoried & CF-01, CF-02 & Pending \\
+2. Boeing BPET--journey pipeline & CF-03, CF-04 & Pending \\
+3. Machinists Institute documented & CF-05 & Pending \\
+4. CPTPP nations mapped & CF-06, CF-07 & Pending \\
+5. Port expansion plans documented & CF-08 & Pending \\
+6. Housing 3+ case studies & CF-09, CF-10 & Pending \\
+7. CERN/Ceph/OpenStack at depth & CF-11, CF-12, CF-13 & Pending \\
+8. NASA SE methodology mapped & CF-14 & Pending \\
+9. CSZ preparedness gaps quantified & CF-15, CF-16 & Pending \\
+10. Pacific network incl.\ Japan & CF-17, CF-18 & Pending \\
+11. All claims attributed & SC-SRC, SC-NUM & Pending \\
+12. Self-contained document & IN-07, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache TTL management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gap-fill \\
+EXEC-A & Executor (Track A) & Trade survey + Sno-Isle profile production \\
+EXEC-B & Executor (Track B) & Boeing pathway map + housing model analysis \\
+EXEC-C & Executor (Track C) & Compute reference + disaster assessment \\
+CRAFT-TRADE & Trade Specialist & CPTPP alignment analysis; port infrastructure context \\
+CRAFT-INFRA & Infrastructure Specialist & Compute platform architecture; emergency systems design \\
+VERIFY & Verification & Source validation; numerical accuracy; cross-reference checking \\
+INTEG & Integration Agent & Cross-module relationship validation; narrative coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Safety Warden & Safety boundary enforcement; sensitivity review \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research Modules & 6 \\
+Activation Profile & Fleet \\
+Crew Size & 17 roles \\
+Parallel Tracks & 3 \\
+Total Waves & 4 (0--3) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 6 \\
+Total Token Budget & \textasciitilde380K \\
+Model Split & Opus 35\% / Sonnet 55\% / Haiku 10\% \\
+Deliverables & 7 (6 module surveys + 1 integrated document) \\
+Test Count & 38 (7 safety-critical, 18 core, 8 integration, 5 edge) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+\begin{quotebox}
+\textit{``The corridor starts at home. Three conversations in Snohomish County start everything.''}
+
+\vspace{0.5em}
+
+Those conversations must be grounded in evidence. This mission provides the evidence --- the actual state of the institutions, the workforce pipelines, the trade networks, the compute platforms, and the disaster response systems that the Pacific Spine will eventually connect. The spaces between these systems are where Fox Infrastructure Group lives. This research maps those spaces with the precision they deserve.
+\end{quotebox}
+
+\end{document}
