@@ -8,6 +8,7 @@
     { id: 'AWF', name: 'Air Water Food', path: 'AWF/index.html' },
     { id: 'BCM', name: 'Building', path: 'BCM/index.html' },
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
+    { id: 'BLA', name: 'Business Law', path: 'BLA/index.html' },
     { id: 'BRC', name: 'Black Rock City', path: 'BRC/index.html' },
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'CMH', name: 'Comp. Mesh', path: 'CMH/index.html' },
