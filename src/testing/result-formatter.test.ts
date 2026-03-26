@@ -179,7 +179,8 @@ describe('ResultFormatter', () => {
       // Default mode should not have score suffix on passing tests
       // (failures always show score in the Actual line)
       // Look for the pattern of a passing test without score suffix
-      expect(output).toContain('PASS  "Handle user login"');
+      const stripped = output.replace(/\u001b\[[0-9;]*m/g, '');
+      expect(stripped).toContain('PASS  "Handle user login"');
     });
 
     it('should use borderline language for edge cases', () => {
