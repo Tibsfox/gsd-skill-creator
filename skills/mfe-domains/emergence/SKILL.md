@@ -1,6 +1,6 @@
 ---
 name: mfe-emergence
-description: "Complex systems and emergent behavior. Chaos, networks, learning — how simple rules generate unexpected complexity."
+description: "Complex systems and emergent behavior — chaos theory, fractals, neural networks, cellular automata, and computability. Analyzes dynamical systems for chaos via Lyapunov exponents, classifies bifurcations, measures fractal dimension, and models emergent phenomena. Use when analyzing chaotic systems, computing Lyapunov exponents, classifying bifurcations, measuring fractal dimension, modeling neural networks, or studying emergent behavior from simple rules."
 user-invocable: false
 allowed-tools: Read Grep Glob
 metadata:
@@ -27,20 +27,17 @@ metadata:
 
 # Emergence
 
-## Summary
+Part IX: Growing — Chapters 28, 29, 30, 31 — Plane Position: (0.5, 0) radius 0.4 — 36 Primitives
 
-**Emergence** (Part IX: Growing)
-Chapters: 28, 29, 30, 31
-Plane Position: (0.5, 0) radius 0.4
-Primitives: 36
+## Workflow
 
-Complex systems and emergent behavior. Chaos, networks, learning — how simple rules generate unexpected complexity.
+1. **Identify the dynamical system** — determine whether it is discrete (logistic map, cellular automaton) or continuous (ODE system)
+2. **Compute the Lyapunov exponent** to classify behavior: λ > 0 indicates chaos, λ < 0 indicates convergence to periodic orbit
+3. **Analyze bifurcations** by varying parameters — classify as saddle-node, pitchfork, Hopf, or period-doubling
+4. **Measure fractal dimension** for strange attractors using d = log(N)/log(1/r) for self-similar structures
+5. **Estimate prediction horizon** using t_predict ≈ (1/λ) × ln(Δ/δ₀) to quantify how far ahead the system remains predictable
 
-**Key Concepts:** Neural Network, Logistic Map, Turing Machine, Bifurcation Theory, Fractal Dimension
-
-## Key Primitives
-
-
+## Key Concepts
 
 **Neural Network** (definition): An artificial neural network is a computational graph: y = f_L(W_L * f_{L-1}(... f_1(W_1 * x + b_1) ...+ b_L)), where W_i are weight matrices, b_i are bias vectors, and f_i are nonlinear activation functions. A perceptron is the single-layer case: y = sigma(w^T x + b).
   - Approximating complex input-output mappings from data
