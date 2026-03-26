@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pi-Mono + GSD Ecosystem — Upstream Intelligence Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #ECEFF1; color: #212121; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #263238 0%, #1565C0 50%, #37474F 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.85; }
+  .header .pipeline { margin-top: 1rem; font-size: 0.9rem; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .file-card { background: #CFD8DC; border-radius: 8px; padding: 1.5rem; text-decoration: none; color: #212121; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .file-card .ext { display: inline-block; background: #263238; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .file-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: #263238; }
+  .file-card p { font-size: 0.85rem; color: #455A64; }
+  .section { background: white; border-radius: 8px; padding: 2rem; margin-bottom: 1.5rem; }
+  .section h2 { font-family: 'Libre Baskerville', serif; color: #263238; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #1565C0; padding-bottom: 0.5rem; }
+  .section h3 { color: #1565C0; margin: 1rem 0 0.5rem; }
+  .section ul { padding-left: 1.5rem; }
+  .section li { margin-bottom: 0.3rem; }
+  .quote { background: #ECEFF1; border-left: 4px solid #263238; padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: 'Libre Baskerville', serif; font-style: italic; color: #37474F; }
+  .meta { text-align: center; color: #757575; font-size: 0.85rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #BDBDBD; }
+  code { background: #ECEFF1; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="pipeline">GSD Research Mission Package</div>
+  <h1>Pi-Mono SDK + GSD Ecosystem</h1>
+  <div class="subtitle">Upstream Intelligence for gsd-skill-creator</div>
+</div>
+<div class="container">
+  <div class="files">
+    <a href="mission.pdf" download class="file-card">
+      <span class="ext">PDF</span>
+      <h3>Mission Package</h3>
+      <p>26-page Vision → Research → Mission pipeline. Ready for GSD orchestrator handoff.</p>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <span class="ext">TEX</span>
+      <h3>LaTeX Source</h3>
+      <p>Editable XeLaTeX source. Recompile with three passes of <code>xelatex</code>.</p>
+    </a>
+  </div>
+
+  <div class="section">
+    <h2>Contents</h2>
+    <h3>Stage 1 — Vision Document</h3>
+    <ul>
+      <li>Upstream ecosystem map (Pi-Mono, GSD v1, GSD-2, Mintlify docs)</li>
+      <li>Problem statement: 5 integration gaps identified</li>
+      <li>Integration architecture: skill-creator as GSD-2 extension #20</li>
+      <li>5 research modules with chipset configuration</li>
+      <li>10 testable success criteria</li>
+    </ul>
+    <h3>Stage 2 — Research Reference</h3>
+    <ul>
+      <li>Pi SDK: 7 packages analyzed with API surfaces and dependency graph</li>
+      <li>GSD v1: 10 context artifacts cataloged with v2 equivalents</li>
+      <li>GSD-2: 19 extensions inventoried, dispatch pipeline documented, auto mode analyzed</li>
+      <li>Mintlify: configuration schema, MDX patterns, AI tool integration</li>
+      <li>Bridge architecture: extension manifest, observation pipeline, skill injection hooks</li>
+    </ul>
+    <h3>Stage 3 — Mission Package</h3>
+    <ul>
+      <li>10 components across 4 waves with 2 parallel tracks</li>
+      <li>Squadron activation profile (12 roles)</li>
+      <li>192,000 token budget: Opus 32% / Sonnet 58% / Haiku 10%</li>
+      <li>32 tests across safety-critical, core, integration, and edge case categories</li>
+      <li>Complete verification matrix mapping criteria to test IDs</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Usage</h2>
+    <p><strong>Feed to GSD Orchestrator:</strong> Place the PDF in your project's <code>.planning/research/</code> directory. The skill-creator's mission execution pipeline will read the wave plan and dispatch agents accordingly.</p>
+    <p><strong>Recompile LaTeX:</strong></p>
+    <pre style="background:#ECEFF1;padding:1rem;border-radius:4px;margin-top:0.5rem;font-size:0.85rem;overflow-x:auto;">xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    <p style="margin-top:0.5rem;font-size:0.85rem;color:#757575;">Three passes required for TOC, cross-references, and page count.</p>
+  </div>
+
+  <div class="section">
+    <h2>Upstream Repositories</h2>
+    <ul>
+      <li><a href="https://github.com/badlogic/pi-mono">badlogic/pi-mono</a> — v0.62.0, 27.3k stars, 179 releases</li>
+      <li><a href="https://github.com/gsd-build/get-shit-done">gsd-build/get-shit-done</a> — v1.28.0, 39.8k stars, 39 releases</li>
+      <li><a href="https://github.com/gsd-build/gsd-2">gsd-build/gsd-2</a> — v2.43.0, 2.9k stars, 73 releases</li>
+      <li><a href="https://github.com/gsd-build/docs">gsd-build/docs</a> — Mintlify starter kit, MDX docs</li>
+    </ul>
+  </div>
+
+  <div class="quote">
+    "Pi is Agnus. GSD is Paula. Skill-creator is Denise. The bus protocol is the extension system. The spaces between the chips are where the power lives."
+  </div>
+
+  <div class="meta">
+    Date: March 26, 2026 · Activation Profile: Squadron · 18 context windows across 4 sessions
+  </div>
+</div>
+</body>
+</html>

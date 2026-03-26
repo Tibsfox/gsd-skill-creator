@@ -1,0 +1,1017 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === Color Scheme: Technology (Steel/Electric/Graphite) ===
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === Section Formatting ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === Custom Environments ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === Headers and Footers ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Pi-Mono + GSD Ecosystem}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === Hyperlinks ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Pi-Mono + GSD Ecosystem Upstream Intelligence -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Pi-Mono SDK +\\[0.3em]GSD Ecosystem}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Upstream Intelligence for gsd-skill-creator}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Integration Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Pi-Mono + GSD Ecosystem --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{gsd-skill-creator-analysis.md, skill-creator-wasteland-integration-analysis.md, mcp-servers-research.md}
+\metafield{Context:}{Deep-dive into Pi-Mono SDK (badlogic/pi-mono), GSD v1 (get-shit-done), GSD-2 (gsd-pi), GSD docs (Mintlify), and their integration paths into the gsd-skill-creator ecosystem}
+
+\subsection{Vision}
+
+The AI coding agent landscape has consolidated around a handful of serious contenders, and two of them --- Pi (from Mario Zechner / badlogic) and GSD (from T\^ACHES / glittercowboy) --- have converged into a single stack. GSD-2 is now built directly on the Pi SDK, which means the meta-prompting context engineering system that went viral as ``Get Shit Done'' now has programmatic control over the agent harness itself: fresh context windows per task, structured dispatch, crash recovery, cost tracking, and multi-worker parallel orchestration.
+
+This convergence represents the single most important upstream for gsd-skill-creator. Pi provides the unified LLM API and agent runtime. GSD v1 established the context engineering patterns (PROJECT.md, REQUIREMENTS.md, ROADMAP.md, wave-based execution). GSD-2 operationalized those patterns into a real state machine with 19 bundled extensions, worktree isolation, sliding-window stuck detection, and a verification ladder. The gsd-build/docs repository is the documentation layer built on Mintlify's starter kit.
+
+For skill-creator, the opportunity is threefold: (1) internalize the Pi SDK's package architecture so generated skills can target the Pi agent runtime directly, not just Claude Code slash commands; (2) absorb GSD-2's context engineering artifacts as first-class patterns in the skill generation pipeline; and (3) position skill-creator as a GSD-2 extension --- the 20th extension --- that adds adaptive learning, pattern observation, and skill evolution to the system GSD-2 already provides.
+
+This is the Amiga Principle at ecosystem scale. Pi is Agnus (the coordinator, managing DMA and resource allocation across providers). GSD is Paula (the I/O controller, managing execution phases, verification, and human interaction). Skill-creator is Denise (the creative engine, observing patterns and generating new capabilities). None of them alone achieves what the three together can.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented agent runtime knowledge.} gsd-skill-creator generates skills targeting Claude Code's slash command interface, but the ecosystem has moved to Pi SDK's programmatic agent harness. Generated skills don't leverage \texttt{context: fork}, subagent dispatch, or Pi's tool-calling infrastructure.
+
+\item \textbf{No GSD-2 state machine awareness.} GSD-2 manages work through a file-based state machine (\texttt{.gsd/} directory). Skill-creator has no model of this state machine, so it can't generate skills that interact with GSD-2's phases (plan, execute, verify, complete) or read its context artifacts.
+
+\item \textbf{Missing extension integration path.} GSD-2 ships 19 extensions loaded automatically. Skill-creator could be the 20th, but there's no bridge architecture, no extension manifest, and no protocol for skill-creator to participate in GSD-2's dispatch pipeline.
+
+\item \textbf{Documentation ecosystem disconnect.} GSD's documentation is migrating to Mintlify (gsd-build/docs). Skill-creator's own documentation (tibsfox.com/docs) uses a separate pipeline. Unifying documentation patterns would enable cross-referencing and consistent user experience.
+
+\item \textbf{Upstream intelligence gap.} Pi-mono releases at a rapid cadence (v0.62.0, 179 releases, 3,354 commits). GSD v1 is at v1.28.0 (39 releases). GSD-2 is at v2.43.0 (73 releases). Skill-creator has no automated monitoring of these upstreams, meaning breaking changes, new extension points, and integration opportunities are discovered late.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Internalize the Pi SDK + GSD ecosystem as upstream intelligence, then position gsd-skill-creator as a native GSD-2 extension that adds adaptive learning to the existing context engineering pipeline.
+\end{quotebox}
+
+The integration follows a layered absorption model: bottom-up from the Pi SDK's TypeScript packages, through GSD-2's state machine and extension system, up to the documentation and community layer.
+
+\subsubsection{Upstream Ecosystem Map}
+
+\begin{asciibox}
+\begin{verbatim}
+UPSTREAM ECOSYSTEM (what we're integrating)
+============================================
+
+badlogic/pi-mono (27.3k stars, MIT, TypeScript 95.7%)
+├── @mariozechner/pi-ai         → Unified multi-provider LLM API
+│   (OpenAI, Anthropic, Google, OpenRouter, Bedrock, etc.)
+├── @mariozechner/pi-agent-core → Agent runtime + tool calling + state
+├── @mariozechner/pi-coding-agent → Interactive coding agent CLI
+├── @mariozechner/pi-mom        → Slack bot → coding agent
+├── @mariozechner/pi-tui        → Terminal UI library
+├── @mariozechner/pi-web-ui     → Web components for AI chat
+└── @mariozechner/pi-pods       → vLLM GPU pod management
+
+gsd-build/get-shit-done (39.8k stars, MIT, JavaScript)
+├── Context engineering layer (PROJECT.md, REQUIREMENTS.md, etc.)
+├── Meta-prompting commands (/gsd:new-project, /gsd:plan-phase, etc.)
+├── Multi-agent orchestration (researcher, planner, executor, verifier)
+├── Wave-based parallel execution
+└── XML prompt formatting for structured plans
+
+gsd-build/gsd-2 (2.9k stars, MIT, TypeScript 92.5%)
+├── Built on Pi SDK (npm: gsd-pi)
+├── State machine driven by .gsd/ files on disk
+├── 19 bundled extensions (browser, search, GitHub, MCP, etc.)
+├── Auto mode: fresh context per task, crash recovery
+├── Worktree isolation, squash merge
+├── Token optimization: budget/balanced/quality profiles
+├── Skills system: auto-detect, install, route
+├── VS Code extension, web UI, headless CI mode
+└── mintlify-docs/ directory (docs migration in progress)
+
+gsd-build/docs (Mintlify starter kit)
+├── MDX content (index.mdx, quickstart.mdx, development.mdx)
+├── AI tool guides (Cursor, Claude Code, Windsurf)
+├── docs.json configuration
+└── Generated from mintlify/starter template
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Integration Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+SKILL-CREATOR AS GSD-2 EXTENSION (#20)
+========================================
+
+gsd-2 CLI (gsd-pi)
+├── Extension loader
+│   ├── ext/gsd          (core workflow)
+│   ├── ext/browser      (Playwright)
+│   ├── ext/search       (Brave/Tavily/Jina)
+│   ├── ext/github       (issues/PRs)
+│   ├── ext/mcp-client   (MCP servers)
+│   ├── ext/subagent     (isolated workers)
+│   ├── ... (13 more)
+│   └── ext/skill-creator  ← NEW: 20th extension
+│       ├── observe()     → Watch task executions for patterns
+│       ├── learn()       → Generate skills from observed patterns
+│       ├── discover()    → Surface relevant skills at dispatch time
+│       ├── evaluate()    → Measure skill activation effectiveness
+│       ├── refine()      → Bounded improvement within constraints
+│       └── publish()     → Share skills to registry/community
+│
+├── Dispatch pipeline
+│   ├── Read STATE.md → Determine next unit
+│   ├── Build dispatch prompt (pre-inline context)
+│   ├── [skill-creator: inject relevant skills] ← NEW hook
+│   ├── Create fresh agent session via Pi SDK
+│   ├── Execute task
+│   ├── [skill-creator: observe execution] ← NEW hook
+│   └── Write results to .gsd/
+│
+└── Pi SDK (agent-core)
+    ├── Unified LLM API (20+ providers)
+    ├── Tool calling infrastructure
+    ├── Session management
+    └── State management
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Pi-Mono SDK Architecture}
+Deep analysis of the seven Pi packages, their TypeScript APIs, the unified provider abstraction, the agent-core runtime's tool-calling and state management, and the monorepo build system. Focus on which APIs skill-creator needs to target when generating skills for the Pi runtime.
+
+\subsubsection{Module 2: GSD v1 Context Engineering}
+Comprehensive inventory of GSD v1's context artifacts, meta-prompting patterns, XML plan formatting, multi-agent orchestration model, wave execution, and the operational patterns that made it effective. This is the lineage that GSD-2 inherits and that skill-creator must understand.
+
+\subsubsection{Module 3: GSD-2 Agent Application}
+Architecture of GSD-2 as a TypeScript application: the state machine, extension system, dispatch pipeline, auto mode, crash recovery, token optimization, skills discovery, worktree isolation, verification ladder, and the 19 bundled extensions. The target integration surface for skill-creator.
+
+\subsubsection{Module 4: Documentation and Mintlify Ecosystem}
+The gsd-build/docs repository structure, Mintlify configuration, MDX content patterns, AI tool integration guides, and how this documentation layer can serve both GSD-2 and skill-creator users.
+
+\subsubsection{Module 5: Bridge Architecture}
+The specific engineering required to make skill-creator a native GSD-2 extension: the extension manifest, dispatch hooks, observation pipeline, skill injection at dispatch time, and the TypeScript interfaces needed to participate in GSD-2's execution pipeline.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+name: "pi-mono-gsd-upstream-intel"
+version: "1.0.0"
+description: "Upstream intelligence pack for Pi-Mono + GSD ecosystem"
+
+skills:
+  required:
+    - name: "pi-sdk-architecture"
+      domain: "upstream-intelligence"
+      token_budget: "3%"
+    - name: "gsd-context-engineering"
+      domain: "upstream-intelligence"
+      token_budget: "3%"
+    - name: "gsd2-extension-system"
+      domain: "upstream-intelligence"
+      token_budget: "4%"
+    - name: "mintlify-docs-patterns"
+      domain: "upstream-intelligence"
+      token_budget: "2%"
+    - name: "skill-creator-bridge"
+      domain: "integration"
+      token_budget: "5%"
+
+agents:
+  topology: "pipeline"
+  stages:
+    - survey: ["pi-sdk", "gsd-v1", "gsd-2", "docs"]
+    - synthesis: ["bridge-architecture"]
+    - verification: ["integration-tests"]
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete architectural analysis of all seven Pi-mono packages
+\item Full inventory of GSD v1 context artifacts and meta-prompting patterns
+\item GSD-2 extension system analysis with dispatch pipeline integration points
+\item Mintlify documentation patterns and configuration schema
+\item Bridge architecture specification for skill-creator as GSD-2 extension \#20
+\item Upstream monitoring strategy for three rapidly-evolving repositories
+\item TypeScript interface definitions for the extension integration
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Implementation of the bridge (this pack produces the spec; execution is a separate milestone)
+\item Pi-mono's vLLM pod management (pi-pods) --- not relevant to skill-creator integration
+\item GSD-2's VS Code extension internals
+\item Mintlify platform administration (only the content patterns matter)
+\item GSD v1's Solana token / cryptocurrency aspects
+\item OAuth provider credential management
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Pi SDK package inventory covers all 7 packages with public API surface areas, dependency relationships, and version compatibility matrices.
+\item GSD v1 context artifact inventory documents all 10+ file types with their schema, lifecycle, and relationship to GSD-2 equivalents.
+\item GSD-2 extension system analysis identifies all integration hooks, dispatch pipeline injection points, and the TypeScript interfaces needed for a new extension.
+\item GSD-2's 19 bundled extensions are cataloged with their capabilities, tool provisions, and interaction patterns.
+\item Bridge architecture specification defines the complete TypeScript interface for skill-creator as GSD-2 extension \#20.
+\item Documentation patterns from Mintlify are analyzed with MDX component inventory and configuration schema.
+\item Upstream monitoring strategy covers all three repositories with release cadence analysis and breaking change detection patterns.
+\item Migration path from GSD v1 slash-command skills to GSD-2 extension skills is documented.
+\item Token budget impact analysis quantifies the cost of skill-creator as a GSD-2 extension across budget/balanced/quality profiles.
+\item All findings are sourced from the actual GitHub repositories (commit history, package.json, source code) --- no speculative claims.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-skill-creator-analysis.md & Foundation --- current skill-creator architecture that this integration extends \\
+skill-creator-wasteland-integration-analysis.md & Parallel integration track --- Wasteland federation protocol \\
+mcp-servers-research.md & Transport layer --- MCP patterns for skill-creator's server components \\
+gsd-chipset-architecture-vision.md & Chipset YAML definitions that express GSD-2 agent topologies \\
+gsd-upstream-intelligence-pack-v1\_43.md & Predecessor --- Anthropic channel monitoring; this pack adds GSD ecosystem monitoring \\
+gsd-amiga-vision-architectural-leverage.md & Philosophical foundation --- the Amiga Principle applied to Pi/GSD/skill-creator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga didn't win by having the fastest processor. It won because three custom chips --- Agnus, Paula, and Denise --- each did their job brilliantly and communicated through a shared bus with zero wasted cycles. Pi is Agnus: it coordinates LLM provider access, session management, and resource allocation. GSD is Paula: it handles the I/O of software development --- the planning, execution, verification, and human interaction that turns intent into working code. Skill-creator is Denise: it observes the patterns flowing across the bus and generates new capabilities, turning repeated work into reusable intelligence.
+
+The Amiga's power came from the spaces between the chips --- the bus protocol that let them cooperate without stepping on each other. For the Pi/GSD/skill-creator stack, that bus protocol is GSD-2's extension system: a well-defined interface where each component does its work in its own context window and communicates through structured files on disk. Skill-creator doesn't need to understand everything GSD-2 does. It needs to observe at dispatch time, learn from task summaries, and inject relevant skills into future dispatches. The bus carries the signal; the chips do the work.
+
+This is what giving people their lives back looks like at the infrastructure level. Not one monolithic system that tries to do everything, but three specialized systems that compose into something greater than the sum of their parts.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Pi-Mono + GSD Ecosystem --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference contains findings from direct analysis of the source repositories. Key sources:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Pi-Mono:} github.com/badlogic/pi-mono (v0.62.0, 3,354 commits, MIT license)
+\item \textbf{GSD v1:} github.com/gsd-build/get-shit-done (v1.28.0, 1,359 commits, MIT license)
+\item \textbf{GSD-2:} github.com/gsd-build/gsd-2 (v2.43.0, 1,768 commits, MIT license)
+\item \textbf{GSD Docs:} github.com/gsd-build/docs (Mintlify starter, 1 commit, MIT license)
+\item \textbf{Mintlify:} starter.mintlify.com/quickstart
+\end{itemize}
+
+\subsection{Module 1: Pi-Mono SDK Architecture}
+
+\subsubsection{Package Inventory}
+
+The Pi monorepo contains seven packages, all TypeScript (95.7\%), managed as an npm workspace with a shared \texttt{tsconfig.base.json}.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Package} & \tableheader{Purpose} & \tableheader{Relevance} \\
+\midrule
+pi-ai & Unified multi-provider LLM API covering OpenAI, Anthropic, Google, OpenRouter, Bedrock, Azure, Groq, Cerebras, Mistral, xAI, HuggingFace, Vertex, Copilot, and more & Critical \\
+pi-agent-core & Agent runtime with tool calling, state management, and session lifecycle & Critical \\
+pi-coding-agent & Interactive CLI coding agent (the ``pi'' command) & High \\
+pi-mom & Slack bot delegating to coding agent & Low \\
+pi-tui & Terminal UI with differential rendering & Medium \\
+pi-web-ui & Web components for AI chat interfaces & Medium \\
+pi-pods & vLLM GPU pod management CLI & Out of scope \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Build and Development}
+
+The monorepo uses \texttt{npm workspaces} with a standard build chain: \texttt{npm install} $\rightarrow$ \texttt{npm run build} $\rightarrow$ \texttt{npm run check} (lint/format/typecheck via Biome). The \texttt{web-ui} package depends on compiled \texttt{.d.ts} files from dependencies, requiring build before check. Testing uses \texttt{test.sh} which skips LLM-dependent tests without API keys.
+
+\subsubsection{Agent Configuration}
+
+Pi uses \texttt{AGENTS.md} as the standard for project-level behavioral guidance, loaded automatically at both user and project levels. This replaces the older \texttt{CLAUDE.md} convention. The \texttt{.pi/} directory at the repo root contains project-specific Pi configuration.
+
+\subsubsection{Skill-Creator Integration Points}
+
+The critical packages for skill-creator integration are \texttt{pi-ai} (for understanding which providers/models skills should target) and \texttt{pi-agent-core} (for understanding the tool-calling and state management interfaces that skills must conform to). When generating skills for the GSD-2 runtime, skill-creator needs to produce artifacts compatible with Pi's extension loading mechanism.
+
+\subsection{Module 2: GSD v1 Context Engineering}
+
+\subsubsection{Context Artifact Inventory}
+
+GSD v1 established a file-based context engineering system. Each file type has a specific purpose, size constraint, and lifecycle.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Artifact} & \tableheader{Purpose} & \tableheader{GSD-2 Equivalent} \\
+\midrule
+PROJECT.md & Project vision, always loaded & PROJECT.md \\
+REQUIREMENTS.md & Scoped v1/v2 requirements with phase traceability & Integrated into CONTEXT.md \\
+ROADMAP.md & Phase progression with completion markers & M001-ROADMAP.md \\
+STATE.md & Decisions, blockers, session memory & STATE.md (auto-derived) \\
+CONTEXT.md & Phase-specific implementation decisions & M001-CONTEXT.md \\
+RESEARCH.md & Domain investigation findings & M001-RESEARCH.md \\
+PLAN.md & Atomic task with XML structure and verification & S01-PLAN.md, T01-PLAN.md \\
+SUMMARY.md & Execution results and changes & T01-SUMMARY.md \\
+todos/ & Captured ideas for later & Seeds system \\
+threads/ & Cross-session context & KNOWLEDGE.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Meta-Prompting Architecture}
+
+GSD v1's core innovation was recognizing that Claude Code's quality degrades as its context window fills (``context rot''). The solution: structure work into atomic plans small enough to execute in a fresh context window. Each plan uses XML prompt formatting optimized for Claude's attention mechanism.
+
+The command vocabulary spans: \texttt{new-project}, \texttt{discuss-phase}, \texttt{plan-phase}, \texttt{execute-phase}, \texttt{verify-work}, \texttt{ship}, \texttt{complete-milestone}, \texttt{new-milestone}, \texttt{quick}, \texttt{fast}, plus utility commands for debugging, backlog management, code review, and UI design.
+
+\subsubsection{Multi-Agent Orchestration}
+
+GSD v1 uses a thin orchestrator pattern: the orchestrator spawns specialized agents, collects results, and routes to the next step. The orchestrator never does heavy lifting. Agents include: 4 parallel researchers (stack, features, architecture, pitfalls), a planner, a plan checker, executors (one per parallel track), and a verifier.
+
+\subsubsection{Wave Execution Model}
+
+Plans are grouped into waves based on dependencies. Within each wave, plans run in parallel. Waves run sequentially. This is structurally identical to skill-creator's own wave execution model --- the vocabulary differs (GSD says ``phases/plans'', skill-creator says ``waves/components'') but the execution semantics are the same.
+
+\subsubsection{Model Profiles}
+
+GSD v1 introduced the quality/balanced/budget model profile concept: Opus for planning, Sonnet for execution, Haiku for scaffolding. This maps directly to skill-creator's 30/60/10 Opus/Sonnet/Haiku allocation. The alignment is intentional --- both systems independently converged on the same cost-quality tradeoff.
+
+\subsection{Module 3: GSD-2 Agent Application}
+
+\subsubsection{Architecture Overview}
+
+GSD-2 is a standalone TypeScript CLI built on the Pi SDK. The critical architectural shift from v1: GSD-2 is not a prompt framework --- it's an application that \emph{controls} the agent session. It reads \texttt{.gsd/} files, determines the next unit of work, creates a fresh Pi agent session, injects a focused prompt with all context pre-inlined, lets the LLM execute, and reads disk state again.
+
+\subsubsection{Work Hierarchy}
+
+GSD-2 structures work into three levels: Milestone (a shippable version, 4--10 slices) $\rightarrow$ Slice (one demoable vertical capability, 1--7 tasks) $\rightarrow$ Task (one context-window-sized unit). The iron rule: a task must fit in one context window. Skill-creator's own ``component'' concept maps to GSD-2's ``task''.
+
+\subsubsection{The Extension System}
+
+GSD-2 ships 19 extensions, all loaded automatically:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Extension} & \tableheader{Capability} & \tableheader{SC Relevance} \\
+\midrule
+GSD & Core workflow, auto mode, commands, dashboard & Critical \\
+Browser Tools & Playwright with form intelligence, visual diffing & Low \\
+Search the Web & Brave/Tavily/Jina web search & Medium \\
+Google Search & Gemini-powered search with AI answers & Medium \\
+Context7 & Library/framework documentation & High \\
+Background Shell & Long-running process management & Low \\
+Async Jobs & Background bash with job tracking & Low \\
+Subagent & Delegated tasks with isolated context & Critical \\
+GitHub & Issues and PR management & Medium \\
+Mac Tools & macOS Accessibility API automation & Low \\
+MCP Client & Native MCP server integration & Critical \\
+Voice & Speech-to-text transcription & Low \\
+Slash Commands & Custom command creation & High \\
+Ask User Questions & Structured input with select options & Medium \\
+Secure Env Collect & Masked secret collection & Low \\
+Remote Questions & Slack/Discord decision routing & Medium \\
+Universal Config & Import MCP servers from other tools & Medium \\
+AWS Auth & Bedrock credential refresh & Low \\
+TTSR & Type-safe runtime validation & Medium \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Auto Mode State Machine}
+
+GSD-2's auto mode is the primary execution path. The loop: Plan (with integrated research) $\rightarrow$ Execute (per task, fresh context) $\rightarrow$ Complete $\rightarrow$ Reassess Roadmap $\rightarrow$ Next Slice. Key behaviors for skill-creator integration:
+
+\begin{enumerate}[leftmargin=2em]
+\item Fresh session per unit --- every task gets a clean 200k-token context
+\item Context pre-loading --- dispatch prompt includes inlined plans, summaries, and decisions
+\item Git worktree isolation --- each milestone runs in its own branch
+\item Crash recovery via lock files and session forensics
+\item Sliding-window stuck detection with diagnostic retry
+\item Timeout supervision (soft/idle/hard thresholds)
+\item Cost tracking per unit, per phase, per model
+\item Adaptive replanning after each slice
+\item Verification enforcement with auto-fix retries
+\item Milestone validation gate
+\end{enumerate}
+
+\subsubsection{Dispatch Pipeline Integration Points}
+
+The dispatch pipeline is where skill-creator hooks in. At dispatch time, GSD-2 builds a prompt by: (1) reading STATE.md, (2) determining the next unit, (3) pre-inlining relevant files into the prompt, (4) creating a fresh agent session. Skill-creator can hook into step (3) to inject relevant skills based on the task's domain, file types, and historical patterns.
+
+\subsubsection{Skills System (Existing)}
+
+GSD-2 already has a skills system: \texttt{skill\_discovery: auto|suggest|off}, \texttt{always\_use\_skills}, \texttt{skill\_rules} for situational routing, and \texttt{skill\_staleness\_days} for deprioritizing unused skills. Skill-creator would enhance this from a static configuration system to a dynamic, observation-driven one.
+
+\subsubsection{Token Optimization Profiles}
+
+GSD-2's three profiles: budget (40--60\% savings, cheap models, skip research), balanced (10--20\% savings, default), quality (0\% savings, all phases, full power). Complexity-based routing classifies tasks as simple/standard/complex and routes to appropriate models. Budget pressure graduates model downgrading at 50\%, 75\%, and 90\% ceiling thresholds. Skill-creator must respect these profiles --- its observation overhead must scale with the active profile.
+
+\subsubsection{Bundled Agents}
+
+Three specialized subagents: Scout (fast codebase recon), Researcher (web research and synthesis), Worker (general-purpose execution). Skill-creator could add a fourth: Observer (pattern extraction from completed tasks).
+
+\subsection{Module 4: Documentation and Mintlify}
+
+\subsubsection{gsd-build/docs Structure}
+
+The docs repo is generated from Mintlify's starter template. It contains MDX content files (\texttt{index.mdx}, \texttt{quickstart.mdx}, \texttt{development.mdx}), organized into sections: Getting Started, Customization, Writing Content, and AI Tools. Configuration lives in \texttt{docs.json}.
+
+\subsubsection{Mintlify Configuration}
+
+Mintlify uses \texttt{docs.json} for site configuration: name, logo, colors, navigation structure, footer links, and API reference integration. The AI-assisted writing feature installs documentation skills via \texttt{npx skills add https://mintlify.com/docs}, providing component reference and writing standards to AI coding tools.
+
+\subsubsection{AI Tool Integration}
+
+The docs repo includes setup guides for Cursor, Claude Code, and Windsurf. This is particularly relevant because skill-creator generates skills for Claude Code --- the Mintlify skill integration pattern (\texttt{npx skills add}) provides a distribution model that skill-creator could adopt.
+
+\subsubsection{GSD-2 Internal Docs}
+
+GSD-2 also maintains its own \texttt{docs/} directory with 17 documentation files covering getting started, auto mode, configuration, custom models, token optimization, cost management, git strategy, parallel orchestration, teams, skills, commands, architecture, troubleshooting, CI/CD, VS Code extension, visualizer, remote questions, and dynamic model routing. Additionally, a \texttt{mintlify-docs/} directory exists within the GSD-2 repo, suggesting the documentation migration is in progress.
+
+\subsection{Module 5: Bridge Architecture}
+
+\subsubsection{Extension Manifest Design}
+
+A GSD-2 extension is a TypeScript module that registers tools, hooks, and commands with the Pi SDK's extension loader. The skill-creator extension would register:
+
+\begin{itemize}[leftmargin=2em]
+\item \texttt{skill-creator:observe} --- Hook called after each task completion
+\item \texttt{skill-creator:inject} --- Hook called during dispatch prompt construction
+\item \texttt{skill-creator:discover} --- Tool for finding relevant skills
+\item \texttt{skill-creator:learn} --- Tool for generating skills from patterns
+\item \texttt{skill-creator:evaluate} --- Tool for measuring skill effectiveness
+\item \texttt{skill-creator:status} --- Command showing skill-creator dashboard
+\end{itemize}
+
+\subsubsection{Observation Pipeline}
+
+The observation pipeline reads T01-SUMMARY.md files (YAML frontmatter + narrative) after task completion. It extracts: tool sequences, file patterns, error-recovery strategies, and verification outcomes. These feed the PatternAggregator from skill-creator's existing architecture.
+
+\subsubsection{Skill Injection at Dispatch}
+
+During GSD-2's dispatch prompt construction (step 3 of the pipeline), skill-creator injects relevant skills based on: (a) the task plan's file types and domain keywords, (b) historical co-activation data, and (c) the current token optimization profile. Under ``budget'' profile, injection is minimal; under ``quality'', full skill context is provided.
+
+\subsubsection{State File Integration}
+
+Skill-creator adds two files to the \texttt{.gsd/} directory: \texttt{SKILLS.md} (current skill activation state) and \texttt{PATTERNS.md} (observed patterns pending skill generation). These participate in GSD-2's existing state-on-disk model.
+
+\subsubsection{Migration from v1 Patterns}
+
+For projects migrating from GSD v1, skill-creator can scan \texttt{.planning/} directories for historical patterns, extract tool sequences from old SUMMARY.md files, and pre-populate the PATTERNS.md file. This gives skill-creator a head start on new GSD-2 projects.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Mitigation} & \tableheader{Type} \\
+\midrule
+API key exposure & Skill-creator extension must never log or store provider credentials; delegate all auth to Pi SDK & Security \\
+Token budget theft & Observation overhead capped at 2\% of task budget; hard limit enforced at extension level & Resource \\
+Skill injection bloat & Max 3 skills injected per dispatch; total injection capped at 5,000 tokens & Resource \\
+Prompt injection via skills & All generated skills validated against GSD-2's existing prompt injection scanner & Security \\
+License compliance & All upstream repos are MIT licensed; skill-creator integration preserves MIT attribution & Legal \\
+Breaking upstream changes & Automated monitoring with version pinning and compatibility testing & Operational \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Repositories}
+
+\begin{enumerate}[leftmargin=2em]
+\item badlogic/pi-mono --- \url{https://github.com/badlogic/pi-mono} (v0.62.0, accessed March 26, 2026)
+\item gsd-build/get-shit-done --- \url{https://github.com/gsd-build/get-shit-done} (v1.28.0, accessed March 26, 2026)
+\item gsd-build/gsd-2 --- \url{https://github.com/gsd-build/gsd-2} (v2.43.0, accessed March 26, 2026)
+\item gsd-build/docs --- \url{https://github.com/gsd-build/docs} (accessed March 26, 2026)
+\end{enumerate}
+
+\subsubsection{Documentation Sources}
+
+\begin{enumerate}[leftmargin=2em]
+\item Mintlify Quickstart --- \url{https://starter.mintlify.com/quickstart}
+\item Pi SDK AGENTS.md --- Project-level agent behavioral guidance
+\item GSD-2 docs/ directory --- 17 documentation files covering all subsystems
+\end{enumerate}
+
+\subsubsection{GSD Ecosystem Project Knowledge}
+
+\begin{enumerate}[leftmargin=2em]
+\item gsd-skill-creator-analysis.md --- Current skill-creator architecture analysis
+\item skill-creator-wasteland-integration-analysis.md --- Wasteland federation integration
+\item mcp-servers-research.md --- MCP transport and server patterns
+\item gsd-chipset-architecture-vision.md --- Chipset YAML specification
+\item gsd-upstream-intelligence-pack-v1\_43.md --- Anthropic channel monitoring
+\end{enumerate}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete upstream intelligence pack that enables gsd-skill-creator to internalize the Pi-Mono SDK, GSD v1, GSD-2, and Mintlify documentation patterns. Deliver a bridge architecture specification that positions skill-creator as GSD-2's 20th extension with observation, learning, and skill injection capabilities.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+Wave 0: Foundation (schemas, source index)
+  |
+  v
+Wave 1A: Pi SDK Survey    Wave 1B: GSD v1+v2 Survey
+  |                          |
+  v                          v
+Wave 2: Bridge Architecture Synthesis
+  |
+  v
+Wave 3: Publication + Verification
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item Shared schema definitions and source repository index
+\item Parallel survey of Pi SDK packages and GSD ecosystem
+\item Synthesis of bridge architecture with TypeScript interfaces
+\item Verification against success criteria and publication
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+D1 & Pi SDK Package Analysis & All 7 packages documented with API surfaces and dependency graph & Module 1 \\
+D2 & GSD v1 Context Artifact Catalog & All 10+ artifacts with schema, lifecycle, v2 mapping & Module 2 \\
+D3 & GSD-2 Extension System Analysis & All 19 extensions cataloged, dispatch pipeline documented & Module 3 \\
+D4 & Mintlify Pattern Guide & Configuration schema, MDX components, AI tool integration & Module 4 \\
+D5 & Bridge Architecture Spec & TypeScript interfaces, extension manifest, hook definitions & Module 5 \\
+D6 & Upstream Monitor Config & Version tracking, release cadence analysis, change detection & Module 5 \\
+D7 & Migration Guide & v1 $\rightarrow$ v2 skill migration path documented & Module 5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+C0: Shared Schema & None & Haiku & 8,000 \\
+C1: Pi SDK Survey & C0 & Sonnet & 25,000 \\
+C2: GSD v1 Survey & C0 & Sonnet & 20,000 \\
+C3: GSD-2 Survey & C0 & Opus & 35,000 \\
+C4: Docs Survey & C0 & Sonnet & 12,000 \\
+C5: Bridge Synthesis & C1, C2, C3, C4 & Opus & 40,000 \\
+C6: Upstream Monitor & C3 & Sonnet & 15,000 \\
+C7: Migration Guide & C2, C3 & Sonnet & 12,000 \\
+C8: Verification & All & Sonnet & 15,000 \\
+C9: Publication & C8 & Sonnet & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 32\% & Bridge synthesis and GSD-2 survey require cross-module judgment \\
+Sonnet & 58\% & Survey compilation, verification, and structured document assembly \\
+Haiku & 10\% & Shared schemas, templates, and scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Parallel} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & C0 & Sequential & 8,000 \\
+1 & Parallel Surveys & C1, C2, C3, C4 & 2 tracks & 92,000 \\
+2 & Synthesis & C5, C6, C7 & Sequential & 67,000 \\
+3 & Publish + Verify & C8, C9 & Sequential & 25,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C0 & Shared schema definitions, source index, cross-reference format & Haiku & shared-schema.yaml, source-index.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Surveys}
+
+\textbf{Track A: Pi SDK + Docs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C1 & Pi SDK package analysis: API surfaces, dependencies, version matrix & Sonnet & pi-sdk-analysis.md \\
+C4 & Mintlify docs patterns: config schema, MDX components, AI tool integration & Sonnet & mintlify-patterns.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: GSD Ecosystem}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C2 & GSD v1 context artifacts, meta-prompting patterns, command inventory & Sonnet & gsd-v1-analysis.md \\
+C3 & GSD-2 extension system, dispatch pipeline, auto mode, skills system & Opus & gsd-2-analysis.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C5 & Bridge architecture: TypeScript interfaces, extension manifest, dispatch hooks & Opus & bridge-architecture.md \\
+C6 & Upstream monitoring: version tracking, release cadence, change detection & Sonnet & upstream-monitor.md \\
+C7 & Migration guide: v1 $\rightarrow$ v2 skill migration path & Sonnet & migration-guide.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Comp} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C8 & Verification: run test plan, validate all success criteria & Sonnet & verification-report.md \\
+C9 & Compile final document, generate index, publish & Sonnet & Final PDF + index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 1 tracks share the C0 foundation via cached schema definitions (5-minute TTL window)
+\item C5 (synthesis) benefits from having C1--C4 outputs available as pre-inlined context
+\item C6 and C7 can begin before C5 completes if C2/C3 outputs are cached
+\item Shared source-index.md eliminates redundant URL fetching across survey components
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 0 & 8,000 & 8,000 \\
+Wave 1 & 35,000 & 57,000 & 0 & 92,000 \\
+Wave 2 & 40,000 & 27,000 & 0 & 67,000 \\
+Wave 3 & 0 & 25,000 & 0 & 25,000 \\
+\midrule
+\textbf{Total} & \textbf{75,000} & \textbf{109,000} & \textbf{8,000} & \textbf{192,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+C0 (Schema)
+├──> C1 (Pi SDK)    ──┐
+├──> C2 (GSD v1)    ──┼──> C5 (Bridge Synthesis)
+├──> C3 (GSD-2)     ──┤     |
+└──> C4 (Docs)      ──┘     v
+                          C6 (Monitor)
+     C2 ──┐              C7 (Migration)
+     C3 ──┘──> C7            |
+                             v
+                          C8 (Verify) ──> C9 (Publish)
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All claims traceable to GitHub repos or official documentation \\
+SC-NUM & Numerical attribution & Version numbers, star counts, commit counts sourced from repos \\
+SC-SEC & No credential exposure & Zero API keys, tokens, or auth patterns in generated output \\
+SC-LIC & License compliance & All upstream repos confirmed MIT; attribution preserved \\
+SC-ADV & No advocacy & Document presents architecture without advocating specific vendor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Pi SDK package inventory (7 packages) & CF-01, CF-02 & Pending \\
+2. GSD v1 context artifact inventory (10+) & CF-03, CF-04 & Pending \\
+3. GSD-2 extension hooks identified & CF-05, CF-06 & Pending \\
+4. 19 extensions cataloged & CF-07 & Pending \\
+5. Bridge TypeScript interfaces defined & CF-08, CF-09 & Pending \\
+6. Mintlify patterns analyzed & CF-10 & Pending \\
+7. Upstream monitoring strategy & CF-11, CF-12 & Pending \\
+8. v1 to v2 migration path & CF-13 & Pending \\
+9. Token budget impact analysis & CF-14 & Pending \\
+10. All findings sourced from repos & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave boundary gates \\
+PLAN & Planner & Wave decomposition; dependency ordering \\
+SCOUT & Research Agent & Repository fetching; source compilation \\
+EXEC-A & Executor (Track A) & Pi SDK + Mintlify surveys \\
+EXEC-B & Executor (Track B) & GSD v1 + GSD-2 surveys \\
+CRAFT-SDK & SDK Specialist & Pi package API analysis \\
+CRAFT-GSD & GSD Specialist & Extension system and dispatch pipeline \\
+VERIFY & Verification & Source validation; cross-reference checking \\
+INTEG & Integration Agent & Bridge architecture cross-module synthesis \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking across profiles \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Total Components & 10 (C0--C9) \\
+Parallel Tracks & 2 (Wave 1) \\
+Estimated Token Budget & 192,000 \\
+Context Windows & 18 \\
+Sessions & 4 \\
+Model Split & Opus 32\% / Sonnet 58\% / Haiku 10\% \\
+Upstream Repositories & 4 (pi-mono, get-shit-done, gsd-2, docs) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The Amiga didn't win by having the fastest processor. It won because three custom chips each did their job brilliantly and communicated through a shared bus with zero wasted cycles. Pi is Agnus. GSD is Paula. Skill-creator is Denise. The bus protocol is the extension system. The spaces between the chips are where the power lives.''}
+
+\vspace{0.5em}
+\hfill --- The Through-Line
+\end{quotebox}
+
+\end{document}
