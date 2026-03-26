@@ -13,6 +13,7 @@
     { id: 'BRC', name: 'Black Rock City', path: 'BRC/index.html' },
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'CMH', name: 'Comp. Mesh', path: 'CMH/index.html' },
+    { id: 'COI', name: 'Coil', path: 'COI/index.html' },
     { id: 'COL', name: 'Columbia Valley', path: 'COL/index.html' },
     { id: 'DAA', name: 'Deep Audio', path: 'DAA/index.html' },
     { id: 'DDA', name: 'dada', path: 'DDA/index.html' },
