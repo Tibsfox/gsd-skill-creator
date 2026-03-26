@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tessl Skill Review &mdash; Quality Gates for AI Agent Skills</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-tsl">
+  <header>
+    <h1>Tessl Skill Review</h1>
+    <div class="subtitle">When a skill creator&rsquo;s skills get reviewed by an external quality tool &mdash; the recursive loop</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-tessl-platform">Platform</a>
+      <a href="page.html?doc=02-skill-quality-problem">Quality</a>
+      <a href="page.html?doc=03-pr28-improvements">PR #28</a>
+      <a href="page.html?doc=04-github-actions-workflow">Actions</a>
+      <a href="page.html?doc=05-open-source-contribution">OSS</a>
+      <a href="page.html?doc=06-recursive-quality">Recursion</a>
+      <a href="page.html?doc=07-verification-matrix">Verification</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      On March 26, 2026, a Tessl employee submitted PR #28 to the gsd-skill-creator repository,
+      improving five skills and installing a GitHub Actions workflow for automated skill review.
+      The improvements averaged +60 percentage points per skill &mdash; not by changing what the
+      skills knew, but by changing how they presented what they knew. The content was already there.
+      The structure was missing. A skill without a workflow is a wish. A skill without a trigger is
+      invisible. A skill without error handling is dangerous. And a skill creator whose own skills
+      score 0% on a skill review has a credibility problem &mdash; one worth fixing.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Skills Improved</span></div>
+      <div class="stat"><span class="stat-value">+60%</span><span class="stat-label">Avg Score Gain</span></div>
+      <div class="stat"><span class="stat-value">19</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">PR #28</span><span class="stat-label">External Contribution</span></div>
+    </div>
+
+    <h2>The Platform &amp; The Problem</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-tessl-platform" class="card" style="text-decoration:none;color:inherit">
+        <h3>The Skill Review Engine</h3>
+        <div class="meta"><span class="tag tag-platform">Platform</span></div>
+        <p>Tessl: founded by Guy Podjarny (ex-Snyk, ex-Akamai CTO). $125M+ raised, $500&ndash;750M valuation. Registry of 3,000+ skills, evaluation framework, CLI, GitHub Actions. The <code>tessl skill review</code> command and its three scoring components.</p>
+      </a>
+      <a href="page.html?doc=02-skill-quality-problem" class="card" style="text-decoration:none;color:inherit">
+        <h3>What Makes a Good Skill?</h3>
+        <div class="meta"><span class="tag tag-quality">Quality</span></div>
+        <p>Common failure modes: missing frontmatter, weak descriptions, no workflows, no error handling. The 5-skill case study. Measuring quality objectively. The skill sprawl problem and the parallel to code linting evolution.</p>
+      </a>
+    </div>
+
+    <h2>The Contribution</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=03-pr28-improvements" class="card" style="text-decoration:none;color:inherit">
+        <h3>Five Skills, Sixty Points</h3>
+        <div class="meta"><span class="tag tag-pr">PR #28</span></div>
+        <p>The specific improvements, skill by skill. dacp-interpreter (0% &rarr; 85%), mfe-synthesis (+52%), mfe-unification (+64%), mfe-change (+46%), mfe-emergence (+53%). What was wrong, what fixed it, the consistent pattern.</p>
+      </a>
+      <a href="page.html?doc=04-github-actions-workflow" class="card" style="text-decoration:none;color:inherit">
+        <h3>Automated Quality Gates</h3>
+        <div class="meta"><span class="tag tag-workflow">Workflow</span></div>
+        <p>The skill-review.yml workflow: triggers on PRs, runs tesslio/skill-review, posts one comment. Non-blocking by default. Zero external accounts. The incremental improvement model.</p>
+      </a>
+    </div>
+
+    <h2>The Larger Pattern</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=05-open-source-contribution" class="card" style="text-decoration:none;color:inherit">
+        <h3>The Good-OSS-Citizen Pattern</h3>
+        <div class="meta"><span class="tag tag-oss">Open Source</span></div>
+        <p>PR #28 as a model contribution: honest disclosure, small scope, genuine value. The relationship between tool vendors and open source projects. Trust through transparency.</p>
+      </a>
+      <a href="page.html?doc=06-recursive-quality" class="card" style="text-decoration:none;color:inherit">
+        <h3>The Skill Creator&rsquo;s Skills Get Reviewed</h3>
+        <div class="meta"><span class="tag tag-recursive">Recursion</span></div>
+        <p>The recursive loop: a skill creation tool&rsquo;s own skills reviewed by an external quality tool. The adaptive learning layer working as designed. The Rosetta Stone connection. The closed feedback loop.</p>
+      </a>
+    </div>
+
+    <h2>Verification</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=07-verification-matrix" class="card" style="text-decoration:none;color:inherit">
+        <h3>The Score Card</h3>
+        <div class="meta"><span class="tag tag-pass">7/7 PASS</span></div>
+        <p>Named for the Tessl scoring system. 7/7 module completion, source registry with tier classification, cross-link coverage audit, PR #28 verification. The verification matrix verifies a project about verification.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Tessl Skill Review &middot; Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
