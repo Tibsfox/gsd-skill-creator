@@ -37,6 +37,7 @@
     { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' },
     { id: 'T55', name: '555 Timer', path: 'T55/index.html' },
     { id: 'THE', name: 'Thermal Energy', path: 'THE/index.html' },
+    { id: 'TSL', name: 'Tessl Review', path: 'TSL/index.html' },
     { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
     { id: 'VAV', name: 'Voxel as Vessel', path: 'VAV/index.html' },
     { id: 'WAL', name: 'Weird Al', path: 'WAL/index.html' },
