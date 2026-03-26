@@ -1,0 +1,1087 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Technology (Steel / Electric / Graphite) ---
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% --- Table Helpers ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers / Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Synsor.ai}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Synsor.ai -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% =====================================================================
+\begin{document}
+
+% --- TITLE PAGE ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Synsor.ai\\[0.3em]Predictive Quality AI}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{AI-Powered Optical Inspection for Manufacturing}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% --- TABLE OF CONTENTS ---
+\tableofcontents
+\newpage
+
+% =====================================================================
+% STAGE 1 --- VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Synsor.ai --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Deep Research / Pre-Integration Analysis}
+\metafield{Depends On:}{GSD Amiga Vision, GSD Silicon Layer Spec}
+\metafield{Context:}{Competitive intelligence and integration feasibility study for the GSD ecosystem}
+
+\subsection{Vision}
+
+The manufacturing floor is a place where milliseconds compound into millions. A hairline crack in a plastic injection mold propagates through ten thousand units before any human eye catches the drift. A gradual thermal shift in a stamping press produces parts that pass visual inspection at 9 AM and fail quality gates by 2 PM, with the root cause buried somewhere in the six hours of production data nobody reviewed in real time.
+
+Synsor.ai occupies exactly this space between: between the moment a process begins to degrade and the moment that degradation becomes a defect. Their thesis --- that deep learning applied to optical inspection can predict quality failures before they manifest --- sits at the intersection of computer vision, manufacturing process control, and the broader Industry 4.0 transformation reshaping European manufacturing. As a Munich-based startup with a patented approach to real-time image trend analysis, Synsor.ai represents a specific instance of the Amiga Principle applied to factory floors: architectural leverage (a single camera plus trained model) achieving outcomes that previously required armies of human inspectors or million-dollar inline metrology systems.
+
+This research mission examines Synsor.ai from five angles: the company itself, its intellectual property, the competitive landscape it navigates, the market dynamics propelling (and constraining) AI adoption in manufacturing, and the architectural patterns that could connect Synsor's approach to the GSD ecosystem's own vision of sensor-driven, AI-augmented production intelligence.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Opacity of early-stage AI manufacturing startups.} Synsor.ai is seed-stage, pre-revenue-disclosure, with limited public technical documentation. Understanding their actual capabilities versus their marketing claims requires structured investigation across patents, investor profiles, and competitive positioning.
+
+  \item \textbf{Fragmented AOI competitive landscape.} The automatic optical inspection space spans from incumbent industrial giants (Siemens, Keyence, Cognex) to a constellation of AI-native startups (Scortex, Relimetrics, elunic, Landing AI). No single reference maps the competitive topology with enough resolution to identify genuine differentiation.
+
+  \item \textbf{Patent claim ambiguity.} Synsor.ai's German patent for ``optimizing production processes based on visual information'' is described in marketing terms but the actual claims, their defensibility, and their novelty relative to existing AOI patents are unexamined.
+
+  \item \textbf{Market sizing variance.} Published AI-in-manufacturing market projections for 2025 range from \$2.3B to \$34B depending on the analyst, making it nearly impossible to contextualize a seed-stage startup's addressable market without normalizing methodologies.
+
+  \item \textbf{Integration architecture gap.} The GSD ecosystem's silicon layer and chipset architecture define patterns for sensor-driven agent activation, but no analysis exists mapping external products like Synsor.ai to these patterns --- specifically whether their camera-plus-model approach could serve as a ``Paula chip'' (I/O specialist) feeding the GSD event dispatcher.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Synsor.ai is a turnkey predictive-quality system that combines commodity camera hardware with proprietary deep learning to detect manufacturing anomaly trends in real time --- a plug-and-play ``Denise chip'' for the factory floor.
+\end{quotebox}
+
+The company delivers hardware (camera, edge computer, lighting, mounting bracket) plus software (anomaly detection model, trend analysis engine, operator UI). The integration philosophy is deliberate: minutes to set up, minimal IT infrastructure changes, compatible with existing production lines. Their patented innovation centers on efficiently retaining large volumes of image data in compressed feature representations, enabling temporal trend detection that conventional AOI systems --- which analyze frame-by-frame --- cannot perform.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SYNSOR.AI TECHNOLOGY DOMAIN
+============================
+
+Manufacturing Floor
+  |
+  v
+[Camera + Lighting + Bracket]  <-- Turnkey hardware kit
+  |
+  v
+[Edge Compute Unit]
+  |-- Image capture (batch production)
+  |-- Deep learning inference (anomaly detection)
+  |-- Feature compression (patent: temporal retention)
+  |-- Trend analysis (temporal anomaly drift)
+  |
+  v
+[Operator Dashboard]
+  |-- Real-time anomaly alerts
+  |-- Historical trend visualization
+  |-- Root cause indicators
+  |-- Predictive maintenance integration hooks
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULES (5 parallel tracks)
+======================================
+
+[M1: Company Profile]     [M2: IP Landscape]
+  |  founding, funding,     |  patent analysis,
+  |  team, product           |  defensibility,
+  |  architecture            |  prior art
+  |                          |
+  +-----+------+-----+------+
+        |      |      |
+[M3: Competitive]  [M4: Market]     [M5: Integration]
+  |  Scortex,       |  sizing,        |  GSD chipset
+  |  Relimetrics,   |  segments,      |  mapping,
+  |  elunic,        |  growth         |  Paula/Denise
+  |  incumbents     |  drivers        |  patterns
+  |                 |                  |
+  +--------+--------+--------+--------+
+           |                 |
+    [Synthesis Module]  [GSD Bridge Spec]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Company \& Product Architecture}
+
+Founding story, team composition (Nico Engelmann, Benjamin Gosse), legal entity evolution (UG to GmbH), APX seed investment (April 2022), Munich Startup Center for Entrepreneurship (SCE) affiliation, current headcount, revenue indicators, product architecture (hardware kit + software platform), deployment model, and customer vertical penetration across plastics, metals, food, cosmetics, and packaging.
+
+\subsubsection{M2: Patent \& Intellectual Property Landscape}
+
+Analysis of the granted German patent ``Verfahren zur Optimierung eines Produktionsprozesses auf Basis visueller Informationen und Vorrichtung zur Durchführung des Verfahrens.'' Claim decomposition, novelty assessment relative to existing AOI patents (e.g., US10964004B2 from Utechzone), defensibility analysis, freedom-to-operate considerations, and potential PCT/international filing status.
+
+\subsubsection{M3: Competitive Landscape}
+
+Mapping of direct competitors (Scortex, Relimetrics/ReliVision, elunic), adjacent players (Landing AI, Instrumental, Neurala), and incumbent AOI vendors (Cognex, Keyence, Omron, KLA-Tencor). Comparative analysis on deployment model, pricing, AI approach, industry focus, funding stage, and geographic footprint. Identification of competitive moats and vulnerability vectors.
+
+\subsubsection{M4: Market Dynamics \& Industry Context}
+
+Normalization of published AI-in-manufacturing market projections. Segmentation of the predictive quality / computer vision quality control subsegment. Analysis of adoption drivers (Industry 4.0 mandates, labor shortages, IoT sensor cost decline), barriers (data privacy, legacy system integration, ROI uncertainty), and geographic patterns (Germany as manufacturing AI epicenter, EU regulatory landscape).
+
+\subsubsection{M5: GSD Integration Architecture}
+
+Mapping Synsor.ai's product architecture to GSD ecosystem patterns. Analysis of whether Synsor's camera-edge-model pipeline could serve as a ``Paula'' I/O specialist or ``Denise'' display/analysis chip within the GSD chipset architecture. Event dispatcher integration (inotify model applied to image streams), silicon manifest compatibility, and potential as a reference implementation for the GSD manufacturing vertical.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: synsor-deep-research
+  version: "1.0"
+  activation\_profile: squadron
+
+  agents:
+    flight:
+      model: opus
+      role: "Mission orchestration, synthesis judgment"
+    plan:
+      model: sonnet
+      role: "Wave decomposition, dependency management"
+    scout:
+      model: sonnet
+      role: "Source gathering, patent database research"
+    exec-alpha:
+      model: sonnet
+      role: "Company profile, competitive landscape"
+    exec-beta:
+      model: sonnet
+      role: "Market dynamics, integration architecture"
+    craft-ip:
+      model: opus
+      role: "Patent claim analysis, IP defensibility"
+    craft-arch:
+      model: opus
+      role: "GSD integration architecture mapping"
+    verify:
+      model: sonnet
+      role: "Source validation, data consistency"
+    integ:
+      model: opus
+      role: "Cross-module synthesis"
+    capcom:
+      model: haiku
+      role: "Human approval interface"
+    budget:
+      model: haiku
+      role: "Token budget tracking"
+    log:
+      model: haiku
+      role: "Audit trail, commit messages"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Synsor.ai company profile, founding through March 2026
+  \item German patent analysis and international filing status
+  \item Direct and adjacent competitor mapping (10--15 companies)
+  \item AI-in-manufacturing market sizing with methodology normalization
+  \item Predictive quality / computer vision QC subsegment analysis
+  \item GSD chipset architecture integration feasibility
+  \item APX investor profile and portfolio context
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item JoltSynsor / Inframind Labs (different company, different domain --- infrastructure SHM)
+  \item Synsor.ai internal financials beyond publicly available seed round data
+  \item Full patent prosecution history (requires DPMA database access)
+  \item Source code analysis or reverse engineering
+  \item Customer testimonials or case studies (unavailable publicly)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Company profile covers founding date, founders, legal entity type, headquarters, funding history, investor identity, headcount range, and product description --- all sourced.
+  \item Patent analysis identifies at least 3 specific claims from the German patent and assesses novelty against at least 2 prior art references.
+  \item Competitive landscape maps at least 8 companies across 5 comparison dimensions (AI approach, deployment model, funding, geography, industry focus).
+  \item Market sizing presents at least 3 analyst projections with methodology characterization and a normalized addressable market estimate for Synsor's specific subsegment.
+  \item Industry 4.0 adoption driver analysis cites at least 4 quantitative data points from government or analyst sources.
+  \item GSD integration analysis maps Synsor's architecture to at least 3 specific GSD chipset patterns (event dispatcher, silicon manifest, agent activation).
+  \item All numerical claims attributed to specific, named sources.
+  \item Document distinguishes between Synsor.ai (Munich, manufacturing QC) and JoltSynsor/Inframind Labs (Cambridge, infrastructure SHM) to prevent entity confusion.
+  \item Wave execution plan achieves at least 2 parallel tracks in Wave 1.
+  \item Test plan contains at least 24 tests across all four categories.
+  \item Complete source bibliography with government, peer-reviewed, and professional organization sources.
+  \item Through-line connects Synsor's architectural approach to the GSD Amiga Principle.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Amiga Vision & Synsor embodies the Amiga Principle: specialized execution paths over brute force & Contextual \\
+GSD Silicon Layer Spec & Synsor's camera-edge pipeline maps to the event dispatcher / silicon manifest patterns & Extends \\
+GSD Chipset Architecture & Synsor as potential ``Denise'' or ``Paula'' chip in manufacturing vertical & Extends \\
+Fox Infrastructure Group & Manufacturing AI as addressable vertical for infrastructure subsidiaries & Informs \\
+GSD Mesh Prototype Spec & Edge compute patterns relevant to Synsor's on-premise deployment model & Cross-reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that architectural leverage --- specialized execution paths faithfully iterated --- produces staggering complexity from small, principled building blocks. Synsor.ai is, in miniature, this principle applied to the factory floor. A single camera. A trained model. An edge computer. No million-dollar metrology lab. No army of inspectors. Just the right architecture in the right space between: between the process drifting and the defect manifesting.
+
+The spaces between matter here as much as they do in the GSD ecosystem. Synsor's value lives not in any single image frame but in the temporal relationships between frames --- the drift, the trend, the gradual degradation that a frame-by-frame system cannot see. This is mutual information in Shannon's sense: the manufacturing process and the visual output share entropy, and Synsor's patent is fundamentally about compressing that shared entropy efficiently enough to detect it in real time. Mathematics dissolving the philosophical question of ``when does a process become out of control?'' into a quantifiable signal.
+
+% =====================================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% =====================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Synsor.ai --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings organized by research module. Each section is self-contained for agent consumption during Wave 1 parallel execution. Cross-module references are marked with \texttt{[→ MX]} notation.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item PitchBook, Crunchbase, CB Insights --- corporate intelligence
+  \item Deutsches Patent- und Markenamt (DPMA) --- patent registry
+  \item MarketsandMarkets, Precedence Research, Fortune Business Insights --- market analysis
+  \item EU-Startups, Munich Startup, Startbase --- European startup ecosystem
+  \item APX / Axel Springer Porsche GmbH \& Co.\ KG --- investor profile
+  \item LinkedIn corporate pages --- team and product updates
+\end{itemize}
+
+\subsection{M1: Company \& Product Architecture Reference}
+
+\subsubsection{Founding \& Corporate Structure}
+
+Synsor.ai was incorporated on May 27, 2021, in Munich, Bavaria, Germany. The original legal entity was registered as Synsor.ai UG (haftungsbeschr\"{a}nkt), later converted to Synsor.ai GmbH. The company is headquartered at Balanstra\ss e 73, Building 19B, Munich. Co-founders are Nico Engelmann (Gesch\"{a}ftsf\"{u}hrer, listed as inventor on the company's patent) and Benjamin Gosse (Gesch\"{a}ftsf\"{u}hrer, later described as Head of Growth at Bilendo, suggesting a transition or dual role). Current headcount is estimated at 2--10 employees across multiple sources.
+
+\textbf{Sources:} Crunchbase (synsor-ai profile), Startbase (synsor-ai GmbH), PitchBook (company profile \#461905-66), LinkedIn (synsor.ai company page).
+
+\subsubsection{Funding History}
+
+Synsor.ai received seed funding from APX on April 20, 2022. The amount was undisclosed. APX is a pre-seed/seed investor jointly backed by Axel Springer SE and Porsche AG, headquartered in Berlin, with a total fund volume of at least \euro55 million. APX typically invests \euro25,000--\euro500,000 per company and takes approximately 5\% equity. No subsequent funding rounds have been publicly disclosed as of March 2026.
+
+The company is also affiliated with the Strascheg Center for Entrepreneurship (SCE) at Munich University of Applied Sciences, suggesting academic incubation support.
+
+\textbf{Sources:} Crunchbase (funding rounds), APX official site (apx.vc), Porsche Newsroom (APX capital increase, January 2021), TechCrunch (APX \euro55M announcement), SCE startup directory.
+
+\subsubsection{Product Architecture}
+
+Synsor.ai delivers a turnkey B2B optical inspection system consisting of:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} \\
+\midrule
+Camera & Industrial-grade imaging for batch production capture \\
+Edge Computer & On-premise compute unit running deep learning inference \\
+Lighting & Controlled illumination for consistent image quality \\
+Mounting Bracket & Physical integration with production line \\
+AI Software & Anomaly detection model + trend analysis engine \\
+Operator UI & Dashboard for real-time alerts and historical trends \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The system is positioned as ``the most scalable vision system on the market'' (company claim), emphasizing ease of IT integration and minimal customer-side overhead during rollout. Target verticals include plastics, metal and sheet metal parts, food, cosmetics, and packaging --- all batch/series production environments.
+
+The software comprises two layers: the background intelligence (deep learning inference plus temporal trend analysis) and the customer-facing UI for system control and monitoring. The company supports integration with both proprietary and third-party cameras.
+
+\textbf{Sources:} Munich Startup (synsor-ai profile), EU-Startups directory, LinkedIn company page, Startbase product description.
+
+\subsubsection{Entity Disambiguation}
+
+\begin{quotebox}
+\textbf{Important:} Synsor.ai (Munich, Germany) and JoltSynsor / Inframind Labs (Cambridge, UK) are entirely separate companies with no known corporate relationship. Synsor.ai operates in manufacturing quality control; JoltSynsor (rebranded to Inframind Labs in 2025) operates in civil infrastructure structural health monitoring using LiDAR and ground-penetrating radar. The name similarity is coincidental. [→ Out of Scope]
+\end{quotebox}
+
+\subsection{M2: Patent \& IP Landscape Reference}
+
+\subsubsection{Granted German Patent}
+
+Synsor.ai was granted a German patent titled ``Verfahren zur Optimierung eines Produktionsprozesses auf Basis visueller Informationen und Vorrichtung zur Durchf\"{u}hrung des Verfahrens'' (Method for Optimizing a Production Process Based on Visual Information and Device for Carrying Out the Method). The grant was announced publicly via LinkedIn in mid-2025. Nico Engelmann is listed as inventor.
+
+The patent addresses three key technical claims based on public descriptions:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Real-time image capture from quality cameras} in production environments, using both proprietary and third-party camera systems.
+  \item \textbf{AI-driven monitoring for gradual quality degradation} --- the system watches for ``creeping deterioration'' (schleichende Verschlechterung) rather than binary pass/fail inspection.
+  \item \textbf{Efficient temporal retention of image data} --- a method for ``keeping large volumes of images in memory without quality loss'' using compressed feature representations, enabling over-time trend analysis that conventional systems perform only in batch (typically next-day or later).
+\end{enumerate}
+
+The third claim appears to be the core novelty: enabling real-time temporal trend analysis over image streams without the storage burden of raw image retention. This is architecturally significant --- it implies a learned feature compression that preserves anomaly-relevant information while discarding pixel-level redundancy.
+
+\textbf{Sources:} LinkedIn synsor.ai patent announcement, Startbase company profile, IPqwery trademark records (1 registered trademark in ``Scientific and technological services'' class).
+
+\subsubsection{Prior Art Context}
+
+The AOI patent landscape is dense. A representative prior art reference is US10964004B2 (Utechzone Co., Ltd., filed December 2018), which covers an automated optical inspection method using deep learning with paired defect-free/defect-containing training images. The Utechzone patent focuses on the training methodology (paired image combinations for supervised learning), while Synsor's patent appears to focus on the temporal analysis dimension (trend detection over time, not just frame-level defect classification).
+
+Key differentiators between Synsor's claimed approach and standard AOI patents:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Standard AOI} & \tableheader{Synsor Approach} \\
+\midrule
+Analysis unit & Single frame & Temporal sequence \\
+Defect model & Binary (pass/fail) & Gradient (trend toward failure) \\
+Data retention & Raw images or none & Compressed features \\
+Timing & Post-production batch & Real-time inline \\
+Value proposition & Defect detection & Defect prediction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Sources:} Google Patents (US10964004B2), Springer Journal of Intelligent Manufacturing (Lo \& Lin 2024, AOI synthetic mechanisms), Syntec Optics (deep learning AOI overview, 2023).
+
+\subsection{M3: Competitive Landscape Reference}
+
+\subsubsection{Direct Competitors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2cm}L{2.2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Company} & \tableheader{HQ} & \tableheader{Funding} & \tableheader{Focus} & \tableheader{Differentiator} \\
+\midrule
+Synsor.ai & Munich, DE & Seed (APX) & Predictive quality & Temporal trend analysis patent \\
+Scortex & Paris, FR & PE-backed & Quality intelligence & Full quality intelligence platform \\
+Relimetrics & Germany / SV & \$6.3M Series A & Smart quality audit & Hardware-agnostic, ReliVision platform \\
+elunic & Germany & Unknown & Visual inspection & Industrial AOI competitor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Scortex} is the most directly comparable competitor: a Paris-based company offering a ``Quality Intelligence Platform'' for manufacturing with automated visual inspection and real-time analytics. Scortex has progressed further in funding (private equity-backed) and appears to have a broader product surface.
+
+\textbf{Relimetrics} (ReliVision platform) is a more established player, founded 2013, with \$6.3M Series A from Newfund, Quest Venture Partners, and Merus Capital. They emphasize hardware-agnostic deployment and have executed projects for major automotive OEMs across Europe, Asia, and North America. Their platform covers a wider scope than pure AOI, including assembly verification and quality audit.
+
+\textbf{Sources:} PitchBook (competitor mapping), Crunchbase (Scortex, Relimetrics profiles), BounceWatch (Relimetrics investor analysis), Relimetrics official site.
+
+\subsubsection{Adjacent \& Incumbent Players}
+
+The broader competitive field includes AI-native startups (Landing AI, Instrumental, Neurala), incumbents with AI capabilities (Cognex, Keyence, Omron, KLA-Tencor), and edge AI hardware vendors (Hailo) whose processors power AOI systems from multiple vendors. The competitive dynamics segment along two axes: ``AI-native vs.\ AI-augmented incumbent'' and ``point solution vs.\ platform.''
+
+Synsor.ai occupies the ``AI-native point solution'' quadrant --- a focused, turnkey system for a specific manufacturing use case. This positions them well for SME adoption (low integration burden) but potentially vulnerable to platform players who can offer AOI as one capability among many.
+
+\subsection{M4: Market Dynamics Reference}
+
+\subsubsection{Market Sizing (Normalized)}
+
+Published projections for the global AI-in-manufacturing market vary significantly by methodology and scope:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Analyst} & \tableheader{2025 Est.} & \tableheader{Target} & \tableheader{CAGR} & \tableheader{Scope} \\
+\midrule
+MarketsandMarkets & \$34.2B & \$155B (2030) & 35.3\% & Broad AI/mfg \\
+Precedence Research & \$8.6B & \$287B (2035) & 42.1\% & Broad AI/mfg \\
+Fortune BI & \$7.6B & \$62.3B (2032) & 35.1\% & Broad AI/mfg \\
+Verified MR & \$2.3B & \$35.9B (2032) & 47.8\% & Narrow AI/mfg \\
+Insight Partners & \$27.0B & \$611B (2034) & 42.3\% & Broad AI/mfg \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The variance is attributable to scope definition: broader estimates include AI hardware, software, and services across all manufacturing applications; narrower estimates focus on software-only or specific application segments. The predictive maintenance and quality inspection subsegment, which is Synsor's addressable space, represents approximately 36\% of the total market according to multiple analysts.
+
+\textbf{Synsor's addressable subsegment estimate:} Taking the median 2025 estimate of approximately \$8--12B for the total market and applying the 36\% quality/maintenance share yields a 2025 addressable market of \$2.9--4.3B globally. The European share (approximately 27\% based on regional breakdowns) narrows this to \$780M--\$1.16B for European predictive quality AI.
+
+\textbf{Sources:} MarketsandMarkets (AI in manufacturing report), Precedence Research (January 2026 report), Fortune Business Insights, Verified Market Research, The Insight Partners.
+
+\subsubsection{Adoption Drivers}
+
+Key quantitative indicators for AI adoption in manufacturing:
+
+\begin{itemize}[leftmargin=2em]
+  \item 41.9\% of industrial organizations adopted AI in 2024, up from 16.9\% in 2022 --- a 25-point increase in two years (Market Growth Reports).
+  \item AI-enabled quality inspection systems achieve up to 90\% improvement in production consistency and 95\% accuracy in automated defect detection (industry aggregate data).
+  \item IoT sensor prices have declined to \$0.10--\$0.80 per unit, enabling dense instrumentation at low cost (tech-stack.com, 2025 analysis).
+  \item AI-driven predictive maintenance reduces unplanned downtime by up to 30\% and maintenance costs by 25--40\% (tech-stack.com, industry benchmarks).
+  \item IDC predicts that by 2029, at least 30\% of factories will manage control systems centrally through open automation platforms (IDC 2026 Manufacturing FutureScape).
+\end{itemize}
+
+\textbf{Sources:} Market Growth Reports (2024 adoption survey), tech-stack.com (AI adoption in manufacturing analysis, December 2025), IDC 2026 Manufacturing FutureScape.
+
+\subsection{M5: GSD Integration Architecture Reference}
+
+\subsubsection{Chipset Pattern Mapping}
+
+Synsor.ai's architecture maps to three GSD chipset patterns [→ GSD Silicon Layer Spec]:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{GSD Pattern} & \tableheader{Synsor Element} & \tableheader{Mapping} \\
+\midrule
+Event Dispatcher & Image stream ingestion & Camera output feeds event dispatcher; debouncing handles frame rate normalization \\
+Paula (I/O chip) & Camera + edge compute & Hardware kit serves as I/O specialist, converting physical world to digital signals \\
+Denise (display chip) & Operator dashboard + trend engine & Visualization and analysis layer, rendering insight from raw I/O \\
+Silicon Manifest & Model configuration & Trained model parameters as adapter configuration in silicon.yaml \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Feasibility}
+
+The GSD event dispatcher pattern (single inotify instance, multiple subscribers) translates naturally to Synsor's architecture: the camera produces an image stream, the event dispatcher classifies and routes frames to the anomaly detection model (ChipsetRouter subscriber), the trend analysis engine (SessionObserver subscriber), and the operator dashboard (DashboardNotifier subscriber). The debouncing layer handles frame rate variance and burst capture events.
+
+Synsor's patent on compressed feature retention maps directly to the GSD observation log pattern: append-only JSONL with extracted training pairs. The compressed features could serve as the intermediate representation between raw image capture and the training pair extraction that feeds the GSD learning loop.
+
+\textbf{Sources:} GSD Silicon Layer Spec (event dispatcher architecture), GSD Chipset Architecture Vision (Amiga chip naming conventions), GSD Staging Layer Vision (observation patterns).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Competitive intelligence ethics & GATE & All data from public sources only; no proprietary information \\
+Patent analysis limitations & ANNOTATE & Analysis based on public descriptions, not full patent prosecution file \\
+Market projection variance & ANNOTATE & Multiple estimates presented with methodology characterization \\
+Startup viability assessment & GATE & Present factual indicators only; no investment recommendations \\
+Entity confusion risk & ABSOLUTE & Explicit disambiguation of Synsor.ai vs.\ JoltSynsor/Inframind Labs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Corporate Intelligence}
+\begin{itemize}[leftmargin=2em]
+  \item Crunchbase --- Synsor.ai company profile and funding rounds
+  \item PitchBook --- Company profile \#461905-66, competitor mapping
+  \item CB Insights --- SYNSOR company profile, Expert Collections
+  \item Startbase --- Synsor.ai GmbH corporate details
+  \item LinkedIn --- synsor.ai company page (342 followers, patent announcement)
+\end{itemize}
+
+\subsubsection*{Ecosystem \& Investor}
+\begin{itemize}[leftmargin=2em]
+  \item APX official site (apx.vc) --- Investment philosophy and portfolio
+  \item Porsche Newsroom --- APX capital increase announcement (January 2021)
+  \item TechCrunch --- ``Porsche and Axel Springer increase investment into APX to \euro55M'' (January 2021)
+  \item Silicon Canals --- APX funding and accelerator transition analysis
+  \item EU-Startups --- Synsor.ai directory listing
+  \item Munich Startup --- Synsor.ai startup profile
+  \item SCE (Strascheg Center for Entrepreneurship) --- Synsor startup detail page
+\end{itemize}
+
+\subsubsection*{Market Analysis}
+\begin{itemize}[leftmargin=2em]
+  \item MarketsandMarkets --- AI in Manufacturing Market Report (2025--2030)
+  \item Precedence Research --- AI in Manufacturing Market Report (January 2026)
+  \item Fortune Business Insights --- AI in Manufacturing Market (2025--2032)
+  \item Verified Market Research --- AI in Manufacturing Market (September 2025)
+  \item The Insight Partners --- AI in Manufacturing Market (February 2026)
+  \item tech-stack.com --- ``AI Adoption in Manufacturing'' analysis (December 2025)
+\end{itemize}
+
+\subsubsection*{Technical \& Patent}
+\begin{itemize}[leftmargin=2em]
+  \item Google Patents --- US10964004B2 (Utechzone, AOI deep learning method)
+  \item Springer --- Lo \& Lin (2024), ``Automated optical inspection based on synthetic mechanisms''
+  \item Syntec Optics --- ``Automated Optical Inspection With Deep Learning'' (2023)
+  \item Hailo --- ``Automatic Optical Inspection With AI For Industrial Manufacturing'' (2025)
+  \item MDPI Infrastructures --- AI in SHM review (2024) [for JoltSynsor disambiguation]
+\end{itemize}
+
+% =====================================================================
+% STAGE 3 --- MISSION PACKAGE
+% =====================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Synsor.ai covering company profile, intellectual property, competitive landscape, market dynamics, and GSD ecosystem integration architecture. The document will serve as both a competitive intelligence reference and an integration feasibility study for the GSD skill-creator manufacturing vertical.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave 0: [Foundation]
+         |-- 0A: Shared schemas + source index (Haiku)
+         |-- 0B: Entity disambiguation template (Haiku)
+         |
+Wave 1: [Parallel Research Tracks]
+         |-- Track A: [1A: Company Profile] + [1B: Patent Analysis]
+         |-- Track B: [1C: Competitive Map] + [1D: Market Dynamics]
+         |-- Track C: [1E: GSD Integration]
+         |
+Wave 2: [Synthesis]
+         |-- 2A: Cross-module integration + gap fill (Opus)
+         |-- 2B: GSD bridge specification (Opus)
+         |
+Wave 3: [Publication + Verification]
+         |-- 3A: Document assembly + formatting (Sonnet)
+         |-- 3B: Test execution + verification (Sonnet)
+         |-- 3C: Bibliography + index generation (Haiku)
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared types, source index, entity templates
+  \item \textbf{Research Layer} --- Five parallel module investigations
+  \item \textbf{Synthesis Layer} --- Cross-module integration and GSD bridge spec
+  \item \textbf{Publication Layer} --- Document assembly, verification, bibliography
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Company Profile & All founding data sourced, funding history complete & M1 \\
+2 & Patent Analysis & 3+ claims identified, 2+ prior art comparisons & M2 \\
+3 & Competitive Map & 8+ companies, 5+ dimensions & M3 \\
+4 & Market Analysis & 3+ projections, normalized subsegment estimate & M4 \\
+5 & GSD Integration & 3+ chipset pattern mappings & M5 \\
+6 & Synthesis Document & All modules integrated, no contradictions & Wave 2 \\
+7 & Final PDF & Compiles clean, all citations resolved & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0A: Schemas & None & Haiku & 3K \\
+0B: Templates & None & Haiku & 2K \\
+1A: Company & 0A & Sonnet & 12K \\
+1B: Patent & 0A, 0B & Opus & 15K \\
+1C: Competitive & 0A & Sonnet & 14K \\
+1D: Market & 0A & Sonnet & 12K \\
+1E: Integration & 0A & Opus & 10K \\
+2A: Synthesis & 1A--1E & Opus & 18K \\
+2B: Bridge Spec & 1E, 2A & Opus & 12K \\
+3A: Assembly & 2A, 2B & Sonnet & 10K \\
+3B: Verification & 3A & Sonnet & 8K \\
+3C: Bibliography & 3A & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Tasks} \\
+\midrule
+Opus & 30\% & Patent analysis, GSD integration, cross-module synthesis, bridge spec \\
+Sonnet & 55\% & Company profile, competitive mapping, market dynamics, assembly, verification \\
+Haiku & 15\% & Schemas, templates, bibliography, token tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}C{1cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Parallel} & \tableheader{Model Mix} & \tableheader{Tokens} & \tableheader{Windows} \\
+\midrule
+0 & 2 & 1 & Haiku & 5K & 0.5 \\
+1 & 5 & 3 & Opus/Sonnet & 63K & 3 \\
+2 & 2 & 1 & Opus & 30K & 2 \\
+3 & 3 & 2 & Sonnet/Haiku & 21K & 1.5 \\
+\textbf{Total} & \textbf{12} & & & \textbf{119K} & \textbf{7} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0A & Shared schemas & Source record, company record, patent record types & Haiku & 3K \\
+0B & Entity templates & Disambiguation template, comparison matrix template & Haiku & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Company \& IP (sequential within track):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1A & Company profile & Full M1 research document & Sonnet & 12K \\
+1B & Patent analysis & Full M2 research document & Opus & 15K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Market context (sequential within track):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1C & Competitive map & Full M3 research document & Sonnet & 14K \\
+1D & Market dynamics & Full M4 research document & Sonnet & 12K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Integration (parallel with A and B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1E & GSD integration & Full M5 research document & Opus & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Depends} \\
+\midrule
+2A & Cross-module synthesis & Integrated findings, gap analysis & Opus & 18K & 1A--1E \\
+2B & GSD bridge spec & Integration architecture document & Opus & 12K & 1E, 2A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.3cm}C{1.3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Depends} \\
+\midrule
+3A & Document assembly & Final formatted document & Sonnet & 10K & 2A, 2B \\
+3B & Verification & Test execution results & Sonnet & 8K & 3A \\
+3C & Bibliography & Complete source index & Haiku & 3K & 3A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Wave 0 schemas:} Cached at conversation start for all downstream tasks. 5-minute TTL exploited: load schemas first in every context window.
+  \item \textbf{Source index:} Built incrementally across Wave 1; each track appends sources to shared index. Deduplication in Wave 2.
+  \item \textbf{Entity disambiguation:} Template from 0B included in every Wave 1 task to prevent Synsor/JoltSynsor confusion.
+  \item \textbf{GSD chipset references:} Silicon Layer Spec and Chipset Architecture loaded once for tasks 1E, 2A, 2B. Approximately 8K always-loaded.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Research production & 25K & 50K & --- \\
+Synthesis \& integration & 30K & --- & --- \\
+Assembly \& verification & --- & 18K & 3K \\
+Schemas \& scaffolding & --- & --- & 5K \\
+\midrule
+\textbf{Total} & \textbf{55K} & \textbf{68K} & \textbf{8K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$131K tokens across $\sim$7 context windows in 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0:  [0A: Schemas]---+---[0B: Templates]---+
+                         |                      |
+Wave 1:  [1A: Company]--[1B: Patent]           |
+         [1C: Compete]--[1D: Market]           |
+         [1E: Integration]---------------------+
+                |          |         |
+Wave 2:  [2A: Synthesis]--+--[2B: Bridge Spec]
+                |                    |
+Wave 3:  [3A: Assembly]---[3B: Verify]---[3C: Bibliography]
+
+Critical path: 0A -> 1B -> 2A -> 3A -> 3B
+Parallel paths: Track A (1A,1B) || Track B (1C,1D) || Track C (1E)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & 17\% \\
+Core functionality & 14 & Required & BLOCK & 47\% \\
+Integration & 6 & Required & BLOCK & 20\% \\
+Edge cases & 5 & Best-effort & LOG & 17\% \\
+\midrule
+\textbf{Total} & \textbf{30} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Source quality & All citations traceable to corporate filings, analyst reports, patent databases, or professional media. Zero blog/forum sources. \\
+SC-02 & Numerical attribution & Every market size, percentage, funding amount attributed to specific named source. \\
+SC-03 & No investment advocacy & Document presents competitive/market analysis without recommending investment decisions. \\
+SC-04 & Entity disambiguation & Document explicitly distinguishes Synsor.ai from JoltSynsor/Inframind Labs in at least one dedicated section. \\
+SC-05 & Competitive fairness & No unsubstantiated claims about competitor weaknesses; all comparisons based on public data. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Company founding data & Date, founders, entity type, HQ all present and sourced \\
+CF-02 & Funding history & APX investment date, investor identity, fund context documented \\
+CF-03 & Product architecture & All 6 hardware/software components described \\
+CF-04 & Patent claim count & At least 3 specific claims identified \\
+CF-05 & Prior art comparison & At least 2 prior art patents compared \\
+CF-06 & Patent novelty assessment & Clear differentiation from standard AOI approaches \\
+CF-07 & Competitor count & At least 8 companies mapped \\
+CF-08 & Comparison dimensions & At least 5 dimensions (AI approach, deployment, funding, geography, focus) \\
+CF-09 & Market projections & At least 3 analyst estimates with methodology notes \\
+CF-10 & Subsegment estimate & Normalized addressable market for predictive quality AI \\
+CF-11 & Adoption drivers & At least 4 quantitative data points sourced \\
+CF-12 & GSD pattern mappings & At least 3 chipset patterns mapped to Synsor elements \\
+CF-13 & Event dispatcher analysis & Explicit mapping of camera stream to GSD event dispatcher \\
+CF-14 & Feature compression mapping & Patent technique mapped to GSD observation log pattern \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Patent → Competitive cascade & Patent analysis informs competitive differentiation assessment \\
+IN-02 & Market → Company context & Market sizing contextualizes Synsor's addressable opportunity \\
+IN-03 & Company → Integration bridge & Product architecture details feed GSD integration mapping \\
+IN-04 & Cross-module data consistency & Funding amounts, dates, headcount consistent across modules \\
+IN-05 & Document self-containment & Reader with no prior Synsor knowledge can follow full narrative \\
+IN-06 & GSD ecosystem coherence & Integration analysis references correct GSD document names and patterns \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Data gap acknowledgment & Patent analysis notes limitations of public-description-only analysis \\
+EC-02 & Temporal currency & Most sources from 2024--2026; older sources flagged \\
+EC-03 & Market projection uncertainty & Variance across analyst estimates explicitly discussed \\
+EC-04 & Competitor data gaps & Missing competitor data (e.g., elunic funding) noted rather than fabricated \\
+EC-05 & Benjamin Gosse role ambiguity & Dual-role observation (Synsor co-founder / Bilendo Head of Growth) noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Company profile completeness & CF-01, CF-02, CF-03 & Pending \\
+2. Patent claim analysis & CF-04, CF-05, CF-06 & Pending \\
+3. Competitive landscape breadth & CF-07, CF-08 & Pending \\
+4. Market sizing with normalization & CF-09, CF-10 & Pending \\
+5. Adoption driver quantification & CF-11 & Pending \\
+6. GSD chipset pattern mappings & CF-12, CF-13, CF-14 & Pending \\
+7. Numerical attribution & SC-02 & Pending \\
+8. Entity disambiguation & SC-04 & Pending \\
+9. Parallel execution in Wave 1 & IN-06 & Pending \\
+10. Test count target & (self-verifying: 30 tests) & Pass \\
+11. Source bibliography & SC-01 & Pending \\
+12. Through-line connection & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Corporate intelligence gathering; patent database queries \\
+EXEC-A & Executor Alpha & Company profile + competitive landscape production \\
+EXEC-B & Executor Beta & Market dynamics + integration architecture production \\
+CRAFT-IP & Patent Specialist & Patent claim analysis; prior art comparison; IP defensibility \\
+CRAFT-ARCH & Architecture Specialist & GSD chipset mapping; bridge specification \\
+VERIFY & Verification & Source validation; cross-module consistency checking \\
+INTEG & Integration Agent & Cross-module synthesis; gap identification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 12 \\
+Waves & 4 (0--3) \\
+Max parallel tracks & 3 (Wave 1) \\
+Activation profile & Squadron (12 roles) \\
+Estimated tokens & $\sim$131K \\
+Estimated context windows & 7 \\
+Estimated sessions & 4 \\
+Model distribution & Opus 42\% / Sonnet 52\% / Haiku 6\% \\
+Critical path & 0A → 1B → 2A → 3A → 3B \\
+Test count & 30 (5 safety / 14 core / 6 integration / 5 edge) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The Amiga Principle holds that architectural leverage --- specialized execution paths faithfully iterated --- produces staggering complexity from small, principled building blocks.''}
+
+\vspace{0.5em}
+
+Synsor.ai is this principle made industrial: one camera, one model, one edge device --- and the space between frames becomes a signal that predicts the future of a production line. The factory floor, like the filesystem, like the codebase, like the ecosystem itself, reveals its secrets in the spaces between.
+\end{quotebox}
+
+\end{document}
