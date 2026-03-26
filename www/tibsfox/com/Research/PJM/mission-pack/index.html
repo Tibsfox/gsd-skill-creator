@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Jam — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #E65100;
+    --tertiary: #1B5E20;
+    --accent: #BF360C;
+    --light-primary: #ECEFF1;
+    --light-secondary: #FFF3E0;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #37474F 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.5rem; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+  .header .subtitle { font-size: 1.1rem; color: #FFE0B2; font-style: italic; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.9rem; color: #FFAB91; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--secondary);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .card .format { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--secondary); font-weight: 700; }
+  .card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.5rem 0 0.3rem; }
+  .card .desc { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.4rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-primary); }
+  .stages { list-style: none; }
+  .stages li { padding: 0.6rem 0; border-bottom: 1px solid #E0E0E0; }
+  .stages .stage-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; color: white; margin-right: 0.5rem; }
+  .s1 { background: var(--primary); }
+  .s2 { background: var(--secondary); }
+  .s3 { background: var(--tertiary); }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { margin-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  code { background: #E8E8E8; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote { font-family: 'Libre Baskerville', serif; font-style: italic; color: var(--subtle); text-align: center; margin: 2rem 0; padding: 1.5rem; border-top: 1px solid #E0E0E0; border-bottom: 1px solid #E0E0E0; }
+  .meta { text-align: center; font-size: 0.8rem; color: var(--subtle); margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #E0E0E0; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Pearl Jam</h1>
+  <div class="subtitle">The Spaces Between the Notes</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+<div class="container">
+  <h2>Files</h2>
+  <div class="cards">
+    <a class="card" href="pearl-jam-mission.pdf" download>
+      <div class="format">PDF</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">27-page complete pipeline document — Vision, Research Reference, and Mission Package</div>
+    </a>
+    <a class="card" href="pearl-jam-mission.tex" download>
+      <div class="format">LaTeX Source</div>
+      <div class="name">TeX Source</div>
+      <div class="desc">XeLaTeX source for modification and recompilation</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="stages">
+    <li><span class="stage-tag s1">Stage 1</span> <strong>Vision Document</strong> — Problem statement, core concept, 5 research modules, chipset configuration, 12 success criteria, scope boundaries, through-line</li>
+    <li><span class="stage-tag s2">Stage 2</span> <strong>Research Reference</strong> — Origins & Seattle scene, musical evolution (12 albums), Ticketmaster battle chronology, Ten Club & bootleg program, Roskilde tragedy & Vitalogy Foundation, source bibliography</li>
+    <li><span class="stage-tag s3">Stage 3</span> <strong>Mission Package</strong> — Squadron activation (12 roles), 4-wave execution plan, 2 parallel tracks, 35 tests (6 safety-critical), dependency graph, token budget (358K), crew manifest</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF for mission scope and research findings</li>
+      <li>Feed to <code>gsd-skill-creator</code> via Claude Code for orchestrated execution</li>
+      <li>CAPCOM checkpoints at post-Wave 0, post-Wave 1, and post-Wave 2</li>
+      <li>All safety-critical tests (SC-*) are mandatory-pass / BLOCK gates</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Edit <code>pearl-jam-mission.tex</code> as needed</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode pearl-jam-mission.tex</code> (×3)</li>
+      <li>Requires DejaVu fonts (pre-installed on Ubuntu; available via <code>fonts-dejavu</code>)</li>
+    </ol>
+  </div>
+
+  <div class="quote">"Nothing has been the same since."<br>— Pearl Jam on Roskilde, 2020</div>
+
+  <div class="meta">
+    GSD Ecosystem — Deep Research Series<br>
+    Activation: Squadron | Modules: 5 | Est. 18 windows across 4 sessions<br>
+    March 25, 2026
+  </div>
+</div>
+</body>
+</html>
