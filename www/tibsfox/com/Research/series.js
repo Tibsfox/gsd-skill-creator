@@ -23,6 +23,7 @@
     { id: 'GRV', name: 'Green River', path: 'GRV/index.html' },
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
+    { id: 'JNS', name: 'JanSport', path: 'JNS/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },

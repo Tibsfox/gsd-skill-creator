@@ -1,0 +1,74 @@
+/* JNS -- JanSport
+ * Theme: Trail/outdoor -- olive green with canvas tan
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --olive: #558B2F;
+  --olive-deep: #33691E;
+  --olive-mid: #689F38;
+  --canvas: #D7CCC8;
+  --canvas-light: #EFEBE9;
+  --canvas-dim: #A1887F;
+  --bark: #4E342E;
+  --trail: #F5F0EB;
+  --forest: #1B5E20;
+  --earth: #3E2723;
+  --loam: #795548;
+  --summit: #ECEFF1;
+  --strap: #FF8F00;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #4E342E;
+  --link: var(--olive-mid);
+  --card-border: #BCAAA4;
+  --border: #BCAAA4;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--earth) 0%, var(--olive-deep) 30%, var(--olive) 60%, var(--olive-mid) 100%);
+  border-bottom: 4px solid var(--canvas);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--olive-deep); border-bottom-color: var(--border); }
+h3 { color: var(--olive-mid); }
+th { background: var(--olive-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(85, 139, 47, 0.04); }
+tr:hover { background: rgba(85, 139, 47, 0.08); }
+blockquote { border-left-color: var(--olive); background: rgba(85, 139, 47, 0.06); }
+code { background: var(--canvas-light); }
+pre { background: var(--earth); color: #E0E0E0; }
+.stat-value { color: var(--olive-deep); }
+
+/* -- Tags -- */
+.tag-origins { background: #E8F5E9; color: #1B5E20; }
+.tag-product { background: #EFEBE9; color: #4E342E; }
+.tag-design { background: #FFF3E0; color: #E65100; }
+.tag-corporate { background: #E3F2FD; color: #0277BD; }
+.tag-cascades { background: #E0F2F1; color: #00695C; }
+.tag-sustainability { background: #F1F8E9; color: #33691E; }
+.tag-culture { background: #FBE9E7; color: #BF360C; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: trail marker motif -- */
+.trail-marker {
+  background: linear-gradient(90deg, var(--olive-deep), var(--olive), var(--canvas-dim), var(--canvas), var(--olive-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
