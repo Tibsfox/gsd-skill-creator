@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gradient Engine — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0D47A1;
+  --secondary: #E65100;
+  --tertiary: #263238;
+  --light1: #E3F2FD;
+  --light2: #FFF3E0;
+  --light3: #ECEFF1;
+  --text: #212121;
+  --subtle: #616161;
+  --border: #BDBDBD;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: #FAFAFA;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, #1565C0 50%, var(--secondary) 100%);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+header .tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+header .subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-bottom: 0.3rem;
+}
+
+header .meta {
+  font-size: 0.82rem;
+  opacity: 0.7;
+  margin-top: 1rem;
+}
+
+main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.file-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .file-cards { grid-template-columns: 1fr; }
+}
+
+.file-card {
+  background: var(--light3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+
+.file-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.file-card .icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.file-card .name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.file-card .desc {
+  font-size: 0.8rem;
+  color: var(--subtle);
+  margin-top: 0.3rem;
+}
+
+h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin: 2rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--light1);
+}
+
+.stage-block {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 0.8rem 0;
+  border-left: 4px solid var(--primary);
+}
+
+.stage-block.s2 { border-left-color: var(--secondary); }
+.stage-block.s3 { border-left-color: var(--tertiary); }
+
+.stage-block .stage-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.stage-block.s1 .stage-label { color: var(--primary); }
+.stage-block.s2 .stage-label { color: var(--secondary); }
+.stage-block.s3 .stage-label { color: var(--tertiary); }
+
+.stage-block h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.stage-block ul {
+  margin: 0.4rem 0 0 1.1rem;
+  font-size: 0.85rem;
+  color: var(--subtle);
+}
+
+.usage-steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0.8rem 0;
+}
+
+.usage-steps li {
+  counter-increment: step;
+  padding: 0.5rem 0 0.5rem 2.8rem;
+  position: relative;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--light3);
+}
+
+.usage-steps li:last-child { border-bottom: none; }
+
+.usage-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  background: var(--primary);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin: 0.8rem 0;
+}
+
+@media (max-width: 600px) {
+  .modules-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.module-chip {
+  background: var(--light1);
+  border: 1px solid #90CAF9;
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.module-chip strong {
+  display: block;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+code {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.83rem;
+  background: #F0F4F7;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}
+
+p { margin: 0.6rem 0; font-size: 0.92rem; }
+
+.closing-quote {
+  background: var(--light1);
+  border-left: 4px solid var(--primary);
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.closing-quote p {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--tertiary);
+}
+
+.closing-quote cite {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--subtle);
+  font-style: normal;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.78rem;
+  color: var(--subtle);
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>The Gradient Engine</h1>
+  <div class="subtitle">Electric Thermal Management Across All Scales</div>
+  <div class="subtitle" style="font-size: 0.95rem;">From Wrist Cooler to Sunshield</div>
+  <div class="meta">March 11, 2026 · Fleet Profile · Vision → Research → Mission</div>
+</header>
+
+<main>
+  <div class="file-cards">
+    <a href="mission.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">mission.pdf</div>
+      <div class="desc">29-page compiled mission package. Ready for GSD Orchestrator.</div>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <div class="name">mission.tex</div>
+      <div class="desc">LaTeX source. Recompile with: <code>xelatex mission.tex</code> (3 passes)</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="stage-block s1">
+    <div class="stage-label">Stage 1 — Vision Document</div>
+    <h4>The Gradient Engine — Vision Guide</h4>
+    <ul>
+      <li>Gradient Interception Model: combustion → interception paradigm shift</li>
+      <li>5 problem statements: combustion lock-in, cold-climate gap, scale discontinuity, PDRC commercialization, space–terrestrial knowledge transfer</li>
+      <li>8-scale architecture: wearable → personal vehicle → residential → commercial → industrial → vessel → space → interstellar</li>
+      <li>12 testable success criteria with verification mapping</li>
+    </ul>
+  </div>
+
+  <div class="stage-block s2">
+    <div class="stage-label">Stage 2 — Research Reference</div>
+    <h4>Sourced Findings Across 8 Modules</h4>
+    <ul>
+      <li>IEA heat pump data: outsold gas furnaces by 30% in US (2024); 3–5× efficiency vs. gas boilers</li>
+      <li>PDRC: Stanford 2014 breakthrough → SkyCool pilot (6°C sub-ambient, 10%+ refrigeration savings)</li>
+      <li>EV thermal: Tesla Octovalve, BYD 16-in-1, Hanon 4th-gen multi-source heat pumps</li>
+      <li>NASA: ISS ammonia ATCS, JWST 5-layer sunshield (260K gradient), Voyager RTG triage</li>
+      <li>Transition: high-efficiency electrification decreases energy burden for all income levels (ScienceDirect 2025)</li>
+      <li>40+ sources — IEA, DOE, NREL, NASA, CEC, peer-reviewed journals</li>
+    </ul>
+  </div>
+
+  <div class="stage-block s3">
+    <div class="stage-label">Stage 3 — Mission Package</div>
+    <h4>Fleet Activation — 19 Crew, 3 Parallel Tracks</h4>
+    <ul>
+      <li>10 components (C0–C9), 4-wave execution, ~170K tokens across 4–6 sessions</li>
+      <li>Model split: 25% Opus (synthesis + transition pathways) / 68% Sonnet (surveys) / 7% Haiku (foundation)</li>
+      <li>38 tests: 7 safety-critical BLOCK gates (HV, refrigerant, nuclear, equity, military)</li>
+      <li>Full verification matrix mapping 12 success criteria to test IDs</li>
+    </ul>
+  </div>
+
+  <h2>Research Modules</h2>
+
+  <div class="modules-grid">
+    <div class="module-chip"><strong>M1</strong> Thermal Physics</div>
+    <div class="module-chip"><strong>M2</strong> Micro/Personal</div>
+    <div class="module-chip"><strong>M3</strong> Residential</div>
+    <div class="module-chip"><strong>M4</strong> Commercial/Ind.</div>
+    <div class="module-chip"><strong>M5</strong> Vessels/Mobile</div>
+    <div class="module-chip"><strong>M6</strong> Space Thermal</div>
+    <div class="module-chip" style="background: var(--light2); border-color: #FFCC80;"><strong>M7</strong> Transition Pathways</div>
+    <div class="module-chip" style="background: var(--light2); border-color: #FFCC80;"><strong>M8</strong> Synthesis</div>
+  </div>
+
+  <h2>How to Use</h2>
+
+  <ol class="usage-steps">
+    <li>Download <code>mission.pdf</code> and review the three-stage pipeline</li>
+    <li>Hand the package to GSD Orchestrator / Skill-Creator in Claude Code</li>
+    <li>The Orchestrator reads the chipset config, activates Fleet profile, and begins Wave 0</li>
+    <li>CAPCOM checkpoints at each wave boundary for human review</li>
+    <li>To modify: edit <code>mission.tex</code>, recompile with <code>xelatex -interaction=nonstopmode mission.tex</code> (3 passes)</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>Requires XeLaTeX with DejaVu fonts (standard on Ubuntu). Three passes for TOC and cross-references:</p>
+  <p><code>xelatex -interaction=nonstopmode mission.tex && xelatex -interaction=nonstopmode mission.tex && xelatex -interaction=nonstopmode mission.tex</code></p>
+
+  <div class="closing-quote">
+    <p>The gradient is always there. The question is always the same: what mediates the flow? A furnace answers with combustion — destroying a hydrocarbon bond to manufacture a temperature differential that nature didn't provide. A heat pump answers with interception — using electricity to redirect thermal energy that was already moving through the environment. A spacecraft radiator answers with geometry — pointing a surface at the 3-kelvin void and letting Stefan-Boltzmann do the rest. The mediator is the same: the electron. This is the Gradient Engine.</p>
+    <cite>— from the Through-Line, Stage 1</cite>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package · The Gradient Engine — Electric Thermal Management Across All Scales</p>
+  <p style="margin-top: 0.4rem;">March 11, 2026 · Miles Tiberius Foxglove · tibsfox.com · Fleet Profile · Ready for Orchestrator</p>
+</footer>
+
+</body>
+</html>

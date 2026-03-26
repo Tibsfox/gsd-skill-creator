@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WA Accounting Laws & Regulations — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #0D47A1;
+    --light-primary: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #ECEEF2;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A237E 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.5rem; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; margin: 0.5rem 0; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-top: 0.3rem; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.6; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #D0D0D0;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-weight: 700; font-size: 1rem; color: var(--primary); }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  h3 { color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+
+  .contents { background: var(--light-primary); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .contents ul { list-style: none; padding-left: 1.2rem; }
+  .contents li { padding: 0.25rem 0; font-size: 0.9rem; }
+  .contents li::before { content: "→ "; color: var(--accent); font-weight: 700; }
+
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { padding: 0.3rem 0; font-size: 0.9rem; }
+
+  code { background: #E0E0E0; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+  }
+  .quote-box p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem; color: var(--tertiary); }
+
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; }
+
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Accounting Laws &<br>Regulations in Washington State</h1>
+  <div class="subtitle">CPA Licensure, Practice Standards, Business Compliance & Record Keeping</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a href="accounting-mission.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">accounting-mission.pdf</div>
+      <div class="desc">Complete 27-page mission package — Vision, Research Reference, and Mission Plan. Ready for GSD Skill-Creator execution.</div>
+    </a>
+    <a href="accounting-mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <div class="name">accounting-mission.tex</div>
+      <div class="desc">LaTeX source file. Edit and recompile with XeLaTeX to customize or update with new regulatory data.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <h3>Stage 1 — Vision Document</h3>
+    <ul>
+      <li>Vision narrative: accounting as the grammar of economic life</li>
+      <li>5 core problems: licensure complexity, scope-of-practice, firm licensing, record retention, enforcement</li>
+      <li>Layered protocol stack model (federal standards → state statute → board rules → professional standards)</li>
+      <li>5 research modules: CPA Licensure, Practice Standards, Firm Licensing, Business Compliance, Enforcement</li>
+      <li>12 testable success criteria</li>
+    </ul>
+    <h3>Stage 2 — Research Reference</h3>
+    <ul>
+      <li>M1: Three CPA licensure pathways (Nov 2025 changes), exam structure, ethics, CPE (120 hrs/3 yrs)</li>
+      <li>M2: GAAP hierarchy, board-rule-prevails principle (WAC 4-30-048), independence, integrity</li>
+      <li>M3: Firm licensing triggers, peer review (2024 compilation exemption), firm mobility</li>
+      <li>M4: Record retention master table (DOR 5yr, L&I 3yr, IRS 3-7yr), scope-of-practice boundary table</li>
+      <li>M5: Disciplinary authority ($30K fines), prohibited acts catalog, consumer complaint process</li>
+    </ul>
+    <h3>Stage 3 — Mission Package</h3>
+    <ul>
+      <li>Squadron activation profile (12 roles)</li>
+      <li>4-wave execution plan with 2 parallel tracks</li>
+      <li>9 deliverables with acceptance criteria</li>
+      <li>32 tests (5 safety-critical, 16 core, 6 integration, 5 edge case)</li>
+      <li>~71,500 token budget across ~18 context windows</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the Vision Document (Stage 1) to confirm scope and the 5-module decomposition.</li>
+      <li>Check the Research Reference (Stage 2) — all citations trace to RCW sections, WAC rules, or agency publications.</li>
+      <li>Hand the complete package to <strong>gsd-skill-creator</strong> via Claude Code for execution.</li>
+      <li>CAPCOM checkpoints occur at wave boundaries for human approval.</li>
+      <li>Note the November 2025 licensure pathway changes and the Pathway 3 expiration date (December 31, 2035).</li>
+    </ol>
+  </div>
+
+  <h2>Recompiling the LaTeX</h2>
+  <div class="instructions">
+    <ol>
+      <li>Requires XeLaTeX with DejaVu fonts installed.</li>
+      <li>Run three passes:
+        <br><code>xelatex -interaction=nonstopmode accounting-mission.tex</code> (×3)
+      </li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    <p>"The CPA credential is a standing wave maintained by education, examination, experience, and continuing education. The Board of Accountancy is the resonance chamber. Understand the architecture once, and every subsequent encounter costs less."</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Research Mission Package · March 12, 2026 · Squadron Profile · 5 Modules · 27 Pages
+</div>
+
+</body>
+</html>

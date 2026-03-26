@@ -1,0 +1,565 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{00695C}
+\definecolor{tertiary}{HTML}{5D4037}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}{\Large\bfseries\sffamily\color{primary}}{\thesection}{1em}{}[\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}{\large\bfseries\sffamily\color{secondary}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily\color{tertiary}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{\noindent\colorbox{#2}{\makebox[\textwidth][l]{\textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}\vspace{0.5em}\par}
+\newtcolorbox{asciibox}{colback=rowgray, colframe=bordergray, arc=1pt, boxrule=0.5pt, left=6pt, right=6pt, top=4pt, bottom=4pt, fontupper=\small\ttfamily, breakable}
+\newtcolorbox{quotebox}{colback=lightprimary, colframe=primary, arc=2pt, boxrule=0.5pt, left=12pt, right=12pt, top=8pt, bottom=8pt, breakable}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Aquatic Taxonomy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{colorlinks=true, linkcolor=accent, urlcolor=accent, pdfauthor={GSD Ecosystem}, pdftitle={PNW Aquatic Taxonomy -- Mission Package}, pdfsubject={Vision to Mission Pipeline}}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Beneath the\\[0.3em]Current}}
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Complete Aquatic Species Taxonomy\\of the Pacific Northwest}}
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Salmon, Freshwater Fish, Marine Fish, Lamprey,\\Sturgeon \& Invertebrate Keystone Species}}
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 8, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 40+ context windows across 20+ sessions}}
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Aquatic Species Taxonomy --- Vision Guide}
+
+\metafield{Date:}{March 8, 2026}
+\metafield{Status:}{Initial Vision / Research-Integrated}
+\metafield{Depends on:}{pnw-avian-taxonomy-mission.pdf, pnw-mammal-taxonomy-mission.pdf, 04-salish-sea-expansion-vision.md, gsd-foxfire-heritage-skills-vision.md}
+\metafield{Context:}{Capstone volume of the PNW vertebrate series, completing the trophic network connecting avian, mammalian, and aquatic taxonomies through the region's defining ecological currency: salmon. Covers all water-breathing species---anadromous salmonids, freshwater fish, marine fish, lamprey, sturgeon, and ecologically critical invertebrates.}
+
+\subsection{Vision}
+
+Everything in the Pacific Northwest runs on fish.
+
+The orca that hunts Chinook in the Strait of Juan de Fuca. The eagle that tears sockeye flesh on the Skagit gravel bar. The bear that drags a chum carcass into the forest, where its nitrogen-15 signature persists in tree rings for centuries. The Lummi reef net fishers who read tide and salmon together as a single system. The 200-foot Douglas fir whose roots are colonized by mycorrhizal fungi carried in fecal pellets of voles that feed in forests fertilized by salmon carcasses dragged from streams by bears.
+
+Remove the fish and the system collapses.
+
+The Salish Sea alone harbors 253 documented fish species. Washington's freshwater systems support over 60 native species, from the Olympic mudminnow---found nowhere else on Earth---to the white sturgeon, the largest freshwater fish in North America, unchanged in basic form for 175 million years. Twenty-eight species of salmon and steelhead are ESA-listed on the West Coast. The Pacific lamprey---a jawless fish whose lineage predates the dinosaurs by 200 million years---is in steep decline. The eulachon, ``salvation fish'' to First Nations because its fat-rich spring runs meant survival after winter, is ESA-threatened.
+
+This mission builds the aquatic layer of the PNW knowledge base, completing the trophic network the avian and mammalian taxonomies began. Every fish will receive a full biological profile. Anadromous species will be traced through their full life cycle. Marine species will be documented within the Salish Sea's 253-species inventory. Freshwater endemics will be mapped to their specific watersheds. And the deep connections---salmon-bear-eagle-forest nutrient cycling, herring-orca-seal food web, lamprey-river-nutrient loop---will be made explicit.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Salmon dominates the narrative.} Pacific salmon are five species out of 300+. The non-salmonid aquatic fauna---rockfish, sculpin, lamprey, smelt, sturgeon, flatfish, forage fish---receives disproportionately little attention despite critical ecological roles.
+
+\item \textbf{Freshwater-marine-estuarine disconnect.} Most references treat freshwater, estuarine, and marine fish separately. Anadromous species exist across all three, and the ecological connections between domains are poorly represented.
+
+\item \textbf{Invertebrate keystone species omitted.} Dungeness crab, spot shrimp, geoduck, sea urchins, and the sunflower sea star (proposed ESA listing) are ecologically critical but absent from vertebrate-focused references.
+
+\item \textbf{Deep-time evolutionary context missing.} Lamprey (450 Mya), sturgeon (175 Mya), and rockfish radiations represent remarkable evolutionary stories absent from management-focused references.
+
+\item \textbf{Cultural fisheries knowledge unlinked.} Indigenous fishing technologies---reef nets, weirs, tidal traps, eulachon grease processing---represent sophisticated ichthyological knowledge unconnected to the heritage skills curriculum.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A living taxonomy where each aquatic species is a fully documented biological ``skill card'' placed within its watershed/marine habitat, evolutionary lineage, trophic network, and cultural context---the capstone volume connecting avian and mammalian taxonomies through salmon.
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+PNW Aquatic Study Region — Habitat Zones
+═════════════════════════════════════════════
+HEADWATER / ALPINE STREAMS (>3,000 ft)
+│ Bull trout, cutthroat, sculpin
+├────────────────────────────────────────────
+MID-ELEVATION RIVERS & TRIBUTARIES
+│ Salmon spawning, steelhead, lamprey
+├────────────────────────────────────────────
+LOWLAND RIVERS & FLOODPLAINS
+│ Coho rearing, pikeminnow, mudminnow
+├────────────────────────────────────────────
+LAKES & RESERVOIRS
+│ Sockeye (kokanee), whitefish, bass (intro)
+├────────────────────────────────────────────
+ESTUARIES & TIDAL ZONES
+│ Juvenile salmon, smelt, Dungeness crab
+├────────────────────────────────────────────
+NEARSHORE / KELP FOREST / ROCKY REEF
+│ Rockfish (28 spp), lingcod, greenling
+├────────────────────────────────────────────
+PELAGIC / CONTINENTAL SHELF
+│ Herring, hake, halibut, sablefish
+├────────────────────────────────────────────
+DEEP MARINE / BENTHIC
+│ Ratfish, hagfish, deep rockfish, geoduck
+├────────────────────────────────────────────
+COLUMBIA RIVER MAINSTEM (Cross-cutting)
+│ 1,243 mi, 14 dams, 12 ESA-listed species
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Seven Research Modules + Synthesis
+══════════════════════════════════════════════
+MODULE 1: SALMONIDS & ANADROMOUS     [Opus]
+MODULE 2: FRESHWATER RESIDENTS       [Sonnet]
+MODULE 3: MARINE FISH                [Sonnet]
+MODULE 4: ANCIENT LINEAGES           [Opus]
+MODULE 5: KEYSTONE INVERTEBRATES     [Opus]
+MODULE 6: AQUATIC HABITAT ZONES      [Opus]
+MODULE 7: CULTURAL ICHTHYOLOGY       [Opus]
+         + SYNTHESIS MODULE           [Opus]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Salmonids and Anadromous Fish}
+Five Pacific salmon (Chinook, Coho, Sockeye, Pink, Chum), steelhead, sea-run cutthroat, bull trout, Dolly Varden. All 28 ESA-listed salmon/steelhead ESUs/DPSs. Full life cycles: ocean to river to redd. Hatchery-wild interactions. Dam passage challenges across 14 Columbia mainstem dams.
+
+\subsubsection{Module 2: Freshwater Resident Fish}
+60+ native species across 15+ families. Olympic mudminnow (\textit{Novumbra hubbsi}---PNW endemic, sole member of genus). Sand roller, sculpin diversity, native cyprinids, suckers. 30+ introduced species documented separately.
+
+\subsubsection{Module 3: Marine Fish}
+253-species Salish Sea inventory (Pietsch \& Orr, NOAA/Burke Museum). 28 rockfish species (3 ESA-listed, populations declined 70\% since 1960s, some 100+ years old). Forage fish: herring, sand lance, surf smelt. Flatfish, cod, lingcod, sharks, skates, ratfish.
+
+\subsubsection{Module 4: Ancient Lineages}
+Pacific lamprey (450 Mya), white and green sturgeon (175 Mya), eulachon (``salvation fish''), Pacific hagfish. Living fossils in modern ecosystems with deep evolutionary context.
+
+\subsubsection{Module 5: Keystone Invertebrates}
+Dungeness crab, spot shrimp, geoduck (140+ year lifespan), Pacific and Olympia oyster, razor clam, sea urchins (3 species), sunflower sea star (proposed ESA listing after wasting disease). Eelgrass and bull kelp as foundational habitat.
+
+\subsubsection{Module 6: Aquatic Habitat Zones}
+Nine zones with trophic network analysis. Columbia River mainstem as cross-cutting corridor. Dam impacts on connectivity. Eelgrass decline and juvenile salmon rearing. Climate and ocean condition effects.
+
+\subsubsection{Module 7: Cultural Ichthyology}
+Lummi reef net technology, Coast Salish weirs, Makah halibut fishing, Columbia River tribal fisheries (Celilo Falls---inundated 1957), lamprey harvest, eulachon grease and ``grease trails.'' Fish-as-skill metaphor framework with 12+ mappings.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  orchestrator: { model: opus }
+  agents:
+    - { name: CRAFT-SALMON, model: opus, modules: [1] }
+    - { name: CRAFT-FRESH, model: sonnet, modules: [2] }
+    - { name: CRAFT-MARINE, model: sonnet, modules: [3] }
+    - { name: CRAFT-ANCIENT, model: opus, modules: [4] }
+    - { name: CRAFT-INVERT, model: opus, modules: [5] }
+    - { name: CRAFT-HABITAT, model: opus, modules: [6] }
+    - { name: CRAFT-CULTURE, model: opus, modules: [7] }
+    - { name: SCOUT, model: sonnet }
+    - { name: VERIFY, model: sonnet }
+    - { name: WARDEN, model: opus }
+\end{asciibox}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Fish inventories total 350+ profiles (freshwater + marine + anadromous).
+\item Every profile: scientific name, taxonomy, morphometrics, habitat, diet, reproduction, status, evolutionary note.
+\item All 28 ESA-listed salmon/steelhead ESUs/DPSs documented with current recovery status.
+\item Ancient lineages documented with deep evolutionary context (hundreds of millions of years).
+\item 15+ keystone invertebrate species profiled with ecological roles.
+\item Nine aquatic habitat zones with trophic networks and anthropogenic stressors.
+\item Columbia River documented as cross-cutting corridor with dam passage impacts.
+\item Every Indigenous reference names a specific nation and cites published sources.
+\item Cross-links to 4+ PNW Research Series documents.
+\item All numerical claims attributed to specific agencies or peer-reviewed research.
+\item Bibliography: 80+ sources from NOAA, USFWS, WDFW, ODFW, tribal commissions, journals.
+\item Fish-as-skill framework maps 12+ aquatic adaptations to GSD patterns.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+pnw-avian-taxonomy-mission.pdf & Salmon-bird nutrient cycling, forage fish as seabird prey, heron-kingfisher-dipper fish predation \\
+pnw-mammal-taxonomy-mission.pdf & Orca-salmon food web, bear-salmon nutrient transport, sea otter-urchin-kelp cascade \\
+04-salish-sea-expansion-vision.md & Reef net fishing, weir technology, First Salmon ceremony, salmon economy \\
+gsd-foxfire-heritage-skills-vision.md & Heritage documentation for fishing and aquatic observation \\
+gsd-ecosystem-field-guide.html & Completes the vertebrate core of the PNW ecological knowledge base \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The salmon is the Rosetta Stone of the Pacific Northwest. Translate its life cycle and you translate the entire ecosystem: ocean productivity into river nutrients, marine nitrogen into forest growth rings, Indigenous ecological knowledge into conservation science, federal law into tribal treaty rights, the geological history of a volcanic coastline into the adaptive radiation of a genus that learned to read rivers as roads home.
+
+This is the space between salt and fresh, between ocean and forest, between the 450-million-year-old jawless lamprey and the 10,000-year-old fishing weir built to harvest it. The Amiga Principle lives in every salmon run: a four-year-old fish weighing eight pounds navigates 900 miles of open ocean, finds the Columbia among 10,000 miles of coastline, ascends through 14 dams, and locates---by smell---the gravel bar where it was born. Not through raw power. Through precision. Through architecture evolved over millions of generations.
+
+\begin{quotebox}
+\textit{First Nations people called eulachon ``salvation'' fish because the return of spawning runs to coastal rivers meant the difference between life and death after long winters.} --- NOAA Fisheries
+\end{quotebox}
+
+\newpage
+
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Aquatic Taxonomy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+\textbf{Key source organizations:} NOAA Fisheries (NMFS), USFWS, USGS, USFS PNW Research Station, WDFW, ODFW, NWIFC, CRITFC, Pacific Fishery Management Council, Burke Museum (UW), University of Puget Sound, Native Fish Society, Encyclopedia of Puget Sound, Center for Whale Research (orca-salmon link).
+
+\subsection{Module 1: Salmonid Reference}
+
+NOAA has listed 28 salmon/steelhead ESUs/DPSs as threatened or endangered. Nine Chinook ESUs carry ESA protection. In the Columbia Basin, 12 populations of four species plus bull trout and Kootenai sturgeon are listed. Washington salmon fishing vessels declined from 3,041 (1978) to 79 (2022). Chinook---the largest salmon, primary prey of Southern Resident orcas---is the most ESA-listed species. Bull trout (\textit{S. confluentus}), ESA-threatened, requires water below 12\textdegree C. Sources: NOAA, NWIFC, NW Council.
+
+\subsection{Module 2: Freshwater Reference}
+
+Washington freshwater fauna spans 15+ native families. Olympic mudminnow (\textit{Novumbra hubbsi}) is the only fish entirely endemic to WA---sole member of its genus, confined to Quinault-Chehalis lowland swamps. Sand roller (\textit{Percopsis transmontana}) inhabits Columbia drainage backwaters. Multiple sculpin species partition microhabitats. Introduced species include bass, walleye, perch, catfish, carp, non-native trout, and Northern pike (invasive salmon predator). Sources: UPS Museum, WDFW, ODFW.
+
+\subsection{Module 3: Marine Fish Reference}
+
+Pietsch \& Orr documented 253 fish species in the Salish Sea (NOAA, Burke Museum---first complete survey in 35 years). Rockfish: 28 species in Puget Sound, 3 ESA-listed (yelloweye threatened, bocaccio endangered, canary). Abundance declined ~70\% since 1960s. Some yelloweye exceed 100 years. After the 1974 Boldt Decision increased salmon restrictions, rockfish were promoted as alternatives, accelerating decline. Over 90 groundfish species inhabit WA marine waters. WDFW has conducted systematic bottom trawling since 1987. Sources: NOAA NWFSC, Burke Museum, WDFW, Encyclopedia of Puget Sound.
+
+\subsection{Module 4: Ancient Lineages Reference}
+
+Pacific lamprey: 450+ Mya lineage; ammocoete larvae burrow 5--7 years; sacred to Columbia River tribes; CRITFC leads restoration. White sturgeon: largest NA freshwater fish (20 ft, 1,500 lbs); Kootenai population ESA-endangered. Green sturgeon southern DPS ESA-threatened. Eulachon: so oil-rich they burn as candles; ``grease trails'' were pre-contact trade highways; southern DPS ESA-threatened since 2010. Sources: CRITFC, USFWS, NOAA.
+
+\subsection{Module 5: Invertebrate Reference}
+
+250+ benthic invertebrate species in Puget Sound. Dungeness crab: PNW's most valuable single-species fishery. Sunflower sea star: proposed ESA listing after wasting disease devastated populations since 2013; loss triggered urchin explosions and kelp forest collapse. Geoduck: world's largest burrowing clam, 140+ year lifespan. WDFW bottom trawl data since 1987 tracks English sole (increasing), Pacific cod (variable), spot shrimp (increasing since 2007 low), female Dungeness crab (decreasing since mid-2000s). Sources: NOAA, Puget Sound Vital Signs, WDFW.
+
+\subsection{Module 6: Habitat Zone Reference}
+
+Columbia River: 1,243 miles, 14 mainstem dams, 12 ESA-listed fish populations. Celilo Falls---greatest salmon fishery in North America, fished for 10,000+ years---inundated by The Dalles Dam in 1957. FCRPS Biological Opinion is among the most litigated environmental documents in American history. Eelgrass meadows provide critical juvenile salmon habitat; decline threatens ESA-listed populations. Sources: NW Council, NOAA, USACE.
+
+\subsection{Fish-as-Skill Metaphor Framework}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Adaptation} & \tableheader{Example} & \tableheader{Skill-Creator Pattern} \\
+\midrule
+Natal Homing & Salmon olfaction & Stateful return to origin context \\
+Anadromous Life & Salmon/lamprey & Cross-environment execution \\
+Filter Feeding & Lamprey larva & Stream processing \\
+Swim Bladder & Deep rockfish & Pressure-aware deployment \\
+Longevity & Yelloweye (100+ yr) & Long-running process persistence \\
+Camouflage & Flatfish & Interface adaptation \\
+Reef Building & Oyster aggregation & Infrastructure accumulation \\
+Kelp Architecture & Bull kelp canopy & Vertical partitioning \\
+Cooperative Spawn & Reef net harvest & Multi-agent coordination \\
+Tidal Synchrony & Razor clam spawn & Event-driven activation \\
+Lateral Line & Sculpin sensing & Distributed sensor network \\
+Electric Sense & Ratfish detection & Low-bandwidth environmental scan \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Implementation} \\
+\midrule
+ESA spawning locations & ABSOLUTE & No precise coordinates \\
+Indigenous attribution & ABSOLUTE & Every reference names a nation \\
+Treaty fishing rights & ANNOTATE & Legal context, not advocacy \\
+Dam removal politics & ANNOTATE & Document impacts factually \\
+Hatchery management & GATE & Published science, no prescriptions \\
+Population data & GATE & Agency or peer-reviewed sources only \\
+Cultural sovereignty & GATE & Level 1 public knowledge only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government Sources}
+\begin{enumerate}[leftmargin=2em, label={[G\arabic*]}]
+\item NOAA Fisheries. ``Pacific Salmon and Steelhead: ESA Protected Species.''
+\item NOAA Fisheries. ``Saving Pacific Salmon and Steelhead.''
+\item NOAA Fisheries. ``Eulachon.'' Species profile and recovery plan.
+\item NOAA Fisheries. ``Science Leading to Recovery of Puget Sound Rockfish.''
+\item NOAA Fisheries. ``FCRPS Biological Opinion.''
+\item NOAA Fisheries. ``Critical Habitat Maps (West Coast Region).''
+\item WDFW. Salmon/Trout ID Guide. Bottom trawl surveys (1987--present).
+\item ODFW. Marine Sport Fish ID Key. Conservation Strategy Species.
+\item USFS R6. ``Fish in the Pacific Northwest.''
+\item Puget Sound Vital Signs. ``Groundfish and Benthic Invertebrates.''
+\end{enumerate}
+
+\subsubsection{Peer-Reviewed \& Professional}
+\begin{enumerate}[leftmargin=2em, label={[P\arabic*]}]
+\item Pietsch, T.W. and J.W. Orr. ``Fishes of the Salish Sea.'' NOAA. 253-species inventory.
+\item Palsson, W.A. et al. 2009. ``Status of Puget Sound Groundfish.'' WDFW.
+\item Andrews, K.S. et al. 2018/2019. Rockfish genetics and ESA studies. NOAA NWFSC.
+\item NW Council. Columbia River ESA history.
+\item NWIFC. Salmon fisheries management under ESA.
+\item Native Fish Society. Native species profiles.
+\item UPS Museum. ``Freshwater Fishes of Washington'' checklist.
+\item Burke Museum. Fish collections (11M specimens).
+\item Encyclopedia of Puget Sound. Rockfish and species profiles.
+\item CRITFC. Lamprey and salmon restoration.
+\end{enumerate}
+
+\subsubsection{Cultural Sources}
+\begin{enumerate}[leftmargin=2em, label={[C\arabic*]}]
+\item Stewart, Hilary. \textit{Indian Fishing.} Douglas \& McIntyre, 1977.
+\item Boxberger, D.L. \textit{To Fish in Common.} U. Nebraska Press, 1989.
+\item Suttles, Wayne. \textit{Coast Salish Essays.} UW Press, 1987.
+\item Makah Cultural and Research Center. Ozette materials.
+\item CRITFC. Lamprey and eulachon cultural documentation.
+\end{enumerate}
+
+\newpage
+
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+Build the PNW Aquatic Species Taxonomy as the capstone volume completing the trophic network between avian, mammalian, and aquatic taxonomies. Seven research modules documenting 350+ species with biological profiles, evolutionary histories, habitat zone placements, trophic roles, and cultural context.
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+D1 & Salmonid Compendium & All 5 salmon + steelhead + char; 28 ESA ESUs/DPSs \\
+D2 & Freshwater Fish Atlas & 60+ native + 30+ introduced with watershed mapping \\
+D3 & Marine Fish Compendium & 253 Salish Sea + outer coast species \\
+D4 & Ancient Lineages Module & Lamprey, sturgeon, eulachon with deep evo context \\
+D5 & Keystone Invertebrates & 15+ species with ecological roles and trends \\
+D6 & Habitat Zone Analysis & 9 zones + Columbia corridor + trophic networks \\
+D7 & Cultural Ichthyology & Indigenous fishing tech, 12+ skill mappings \\
+D8 & Bibliography + Cross-links & 80+ sources; 4+ PNW series links \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 2 \\
+1 & Parallel Surveys & 3 tracks & Son+Opus & 14 \\
+2 & Specialist Tracks & 2 tracks & Opus & 6 \\
+3 & Habitat + Trophic & Sequential & Opus & 8 \\
+4 & Culture + Synthesis & Sequential & Opus+Son & 6 \\
+5 & Publication + QA & Sequential & Son+Opus & 4 \\
+\midrule
+ & \textbf{Total} & & & \textbf{~40} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Foundation & --- & --- & 19K \\
+Salmonids (Wave 1A) & 100K & --- & --- \\
+Freshwater (Wave 1B) & --- & 120K & --- \\
+Marine Fish (Wave 1C) & --- & 200K & --- \\
+Ancient Lineages (Wave 2D) & 50K & --- & --- \\
+Invertebrates (Wave 2E) & 50K & --- & --- \\
+Habitat Zones (Wave 3) & 120K & --- & --- \\
+Culture + Synthesis (Wave 4) & 80K & 15K & --- \\
+Pub + QA (Wave 5) & 10K & 35K & --- \\
+\midrule
+\textbf{Totals} & \textbf{410K} & \textbf{370K} & \textbf{19K} \\
+\midrule
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{~799K tokens across ~40 windows}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: [Schema]──>[Sources]──>[Habitat Defs]
+             │
+Wave 1:      ├──>[Salmonids]──────────┐
+             ├──>[Freshwater Fish]────┤
+             └──>[Marine Fish]────────┤
+                                      │
+Wave 2:  ┌──>[Ancient Lineages]<──────┤
+         └──>[Invertebrates]<─────────┘
+                  │          │
+Wave 3:  [Habitat Zones]──>[Trophic]──>[Columbia]
+                                │
+Wave 4:  [Cultural]──>[Cross-Taxonomy Synthesis]
+                              │
+Wave 5:  [Assembly]──>[Verify]──>[Safety]──>[PUBLISH]
+\end{asciibox}
+
+\section{Test Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & 9 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 10 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{40} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel optimization \\
+SCOUT & Research Agent & Source gathering; web research \\
+EXEC-A & Executor & Salmonid + anadromous production \\
+EXEC-B & Executor & Freshwater + marine fish production \\
+CRAFT-SALMON & Salmonid Expert & ESA analysis, life cycle docs \\
+CRAFT-FRESH & FW Specialist & Native + introduced profiles \\
+CRAFT-MARINE & Marine Specialist & 253-species Salish Sea + coast \\
+CRAFT-ANCIENT & Paleo-ichthyologist & Lamprey, sturgeon, deep evo \\
+CRAFT-INVERT & Invert Ecologist & Crab, shrimp, stars, kelp \\
+CRAFT-HABITAT & Habitat Analyst & Zone analysis, trophic networks \\
+CRAFT-CULTURE & Cultural Specialist & Indigenous fishing, skills \\
+VERIFY & Verification & Taxonomy + ESA status validation \\
+INTEG & Integration & Cross-module + cross-taxonomy \\
+CAPCOM & HITL Interface & Human approval at boundaries \\
+BUDGET & Resource Mgr & Token budget; session planning \\
+WARDEN & Safety Agent & ESA compliance, cultural sovereignty \\
+TOPO & Topology Mgr & Agent team structure \\
+LOG & Chronicle & Audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Context Windows & ~40 \\
+Total Sessions & ~20 \\
+Total Tokens & ~799K \\
+Opus Budget & ~410K (51\%) \\
+Sonnet Budget & ~370K (46\%) \\
+Haiku Budget & ~19K (2\%) \\
+Parallel Tracks & 3 (W1), 2 (W2) \\
+Research Modules & 7 + Synthesis \\
+Species Target & 350+ (fish + inverts) \\
+Bibliography Target & 80+ sources \\
+Tests & 40 (9 safety, 16 core, 10 integ, 5 edge) \\
+Safety Gates & 9 mandatory-pass \\
+Cross-Links & 4+ PNW Series docs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{Salmon and steelhead have been central to the culture and economy of Indigenous people since time immemorial.}
+
+\vspace{0.5em}
+
+This mission documents what lives beneath the current---the 253 species in the Salish Sea that most people never see, the 450-million-year-old lamprey that predates every tree in the PNW Research Series, the rockfish that lived through both World Wars and are now declining toward extinction, the eulachon whose body was burned as a candle and whose grease trails became the first highways of the Pacific Northwest.
+
+It completes the trophic circle. The avian taxonomy documented the birds that eat the fish. The mammalian taxonomy documented the mammals that distribute the nutrients. This volume documents the fish---the ecological currency on which everything runs. Remove them and the eagles starve, the bears thin, the orcas die, the forests lose their nitrogen, and the knowledge systems that sustained civilizations for ten thousand years lose their subject.
+
+The space between the salmon and the forest is not empty. It is full of bears, eagles, fungi, nitrogen isotopes, treaty rights, dam turbines, court decisions, and the sound of a Lummi elder teaching a grandchild to read the tide.
+
+\vspace{0.5em}
+\hfill\textit{--- Beneath the Current, PNW Research Series}
+\end{quotebox}
+
+\end{document}

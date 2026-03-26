@@ -1,0 +1,1045 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Technology Color Scheme ──────────────────────────
+\definecolor{primary}{HTML}{263238}       % Steel blue - sections
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue - subsections
+\definecolor{tertiary}{HTML}{37474F}      % Graphite - subsubsections
+\definecolor{accent}{HTML}{0277BD}        % Bright electric - highlights
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light steel
+\definecolor{lightsecondary}{HTML}{E3F2FD}% Light electric
+\definecolor{lighttertiary}{HTML}{ECEFF1} % Light graphite
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% ── Section formatting ───────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom environments ──────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and footers ──────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Electric Motors \& Generators}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Electric Motors and Generators -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\color{darktext}
+
+\begin{document}
+
+% ══════════════════════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Electric Motors\\[0.3em]and Generators}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Electromagnetic Energy Conversion --- From Faraday's Disk to the EV Revolution}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 6--8 sessions}}
+\end{center}
+\newpage
+
+% ══════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ══════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Electric Motors and Generators --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Skill Creator v1.49+ (DACP support)}
+\metafield{Context:}{GSD Educational Knowledge Pack --- Engineering Foundations}
+
+\subsection{Vision}
+
+Every modern civilization depends on two reciprocal machines: devices that convert electrical energy into mechanical motion (motors), and devices that convert mechanical motion into electrical energy (generators). These twin pillars of electromagnetic engineering share identical physical principles --- Faraday's law of induction, the Lorentz force, and Maxwell's field equations --- yet their engineering expressions span an extraordinary range, from sub-watt MEMS actuators to 1,800~MW turbo-alternators powering national grids.
+
+This research mission constructs a comprehensive educational knowledge pack covering the full landscape of electric motors and generators. The pack traces the physics from first principles through historical development, across the modern taxonomy of machine types, into the frontier challenges of our era: EV traction motors free of rare-earth dependency, offshore wind generators at the 15~MW scale, grid-forming inverter systems replacing synchronous inertia, and DOE efficiency standards reshaping industrial motor populations worldwide.
+
+The Amiga Principle applies here with particular force. A motor and a generator are the \emph{same machine} operated in reverse --- a single elegant architecture expressed through two execution paths. Understanding the shared electromagnetic core, rather than memorizing each variant independently, is the architectural leverage that lets a learner navigate the entire taxonomy from DC brushed motors to axial-flux PMSMs to synchronous reluctance drives. The spaces between rotor and stator --- the air gap, the flux path, the commutation strategy --- are where the engineering meaning lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented understanding:} Most educational resources treat motors and generators as separate topics, obscuring their shared electromagnetic foundation and the principle that every motor is a generator operated in reverse.
+
+\item \textbf{Taxonomy overwhelm:} The classification tree (DC brushed, DC brushless, AC induction, AC synchronous, permanent magnet, wound rotor, switched reluctance, stepper, linear, homopolar\ldots) overwhelms learners who lack an organizing framework rooted in first-principles physics.
+
+\item \textbf{Rare-earth dependency:} The dominant EV traction motor (interior permanent magnet synchronous) depends on neodymium-iron-boron magnets with volatile supply chains concentrated in a single country, creating a critical vulnerability in the global electrification transition.
+
+\item \textbf{Efficiency standards gap:} New DOE motor efficiency rules (IE4/Super Premium by 2027, fractional HP by 2029) will affect hundreds of millions of industrial motors, yet awareness of what these standards require, and why, remains low outside specialist engineering circles.
+
+\item \textbf{Grid-integration complexity:} The shift from synchronous generators (fossil/nuclear/hydro) to inverter-based resources (wind/solar) threatens grid stability by reducing rotational inertia, requiring new understanding of how generators interact with power systems.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Electric motors and generators are dual expressions of a single electromagnetic principle --- Faraday's law of induction --- differing only in whether energy flows from electrical to mechanical (motor) or mechanical to electrical (generator). Every design decision in the taxonomy emerges from how the magnetic field is created, how commutation is managed, and what constraints the application imposes.
+\end{quotebox}
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+           ELECTROMAGNETIC ENERGY CONVERSION
+           ==================================
+
+    ELECTRICAL ENERGY  <=======>  MECHANICAL ENERGY
+          |            Faraday's           |
+          |              Law               |
+          v                                v
+    ┌──────────┐                    ┌──────────┐
+    │  MOTORS  │  <── same ──>      │GENERATORS│
+    │ (E → M)  │    machine         │ (M → E)  │
+    └────┬─────┘                    └────┬─────┘
+         │                               │
+    ┌────┴────────────────┐    ┌─────────┴──────────┐
+    │  DC        AC       │    │  DC         AC      │
+    │  ├─Brushed ├─Induct.│    │  ├─Dynamo   ├─Alter.│
+    │  ├─BLDC    ├─Sync.  │    │  └─Homopol. ├─Induct│
+    │  └─Linear  ├─Reluct.│    │             └─Linear│
+    │            └─Stepper│    │                     │
+    └─────────────────────┘    └─────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  ┌─────────────────────────────────────────────────┐
+  │          MODULE ARCHITECTURE (5 Modules)        │
+  ├─────────────────────────────────────────────────┤
+  │                                                 │
+  │  M1: Electromagnetic    M2: Motor Taxonomy      │
+  │      Foundations            & Engineering       │
+  │  (Physics layer)        (Design layer)          │
+  │       │                      │                  │
+  │       ├──────────┬───────────┤                  │
+  │       │          │           │                  │
+  │  M3: Generator   │     M4: Applications &      │
+  │      Systems     │         Frontiers            │
+  │  (Power gen.)    │     (EV, renewables,         │
+  │       │          │      industrial)             │
+  │       └──────────┴───────────┘                  │
+  │                  │                              │
+  │          M5: Standards, Efficiency              │
+  │              & Grid Integration                 │
+  │          (Regulatory / systems layer)           │
+  └─────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Electromagnetic Foundations}
+The physics substrate: Faraday's law of induction, Lenz's law, Lorentz force, Maxwell's field equations as they apply to rotating and linear machines. Magnetic circuits, flux paths, air gap analysis, back-EMF, torque production mechanisms (alignment torque, reluctance torque, Lorentz torque). Historical development from \O rsted (1820) through Faraday (1831), Henry (1832), Pixii's commutated dynamo (1832), Maxwell's equations (1865), and the War of the Currents (1880s--1890s).
+
+\subsubsection{M2: Motor Taxonomy and Engineering}
+Complete classification of electric motor types: DC brushed (series, shunt, compound), DC brushless (BLDC/electronically commutated), AC induction (squirrel-cage, wound-rotor), AC synchronous (PMSM, wound-rotor synchronous, synchronous reluctance), stepper motors, switched reluctance motors, linear motors. For each type: operating principle, torque-speed characteristics, efficiency profile, commutation method, advantages, limitations, and primary applications.
+
+\subsubsection{M3: Generator Systems and Power Generation}
+Classification of generator types: dynamos (commutated DC), alternators/synchronous generators (salient pole, cylindrical rotor, turbo-alternators), induction generators, permanent magnet generators, homopolar generators, linear generators. Excitation systems, voltage regulation, synchronization requirements. Power generation across scales: bicycle hub dynamos through 1,800~MW turbo-alternators. Renewable energy generators: wind turbine generators (DFIG, direct-drive PMSG), hydroelectric generators (Francis, Kaplan, Pelton turbine coupling), wave energy linear generators.
+
+\subsubsection{M4: Applications and Frontiers}
+EV traction motors: interior permanent magnet synchronous motors (IPMSM), the rare-earth dependency problem, alternative approaches (wound-rotor synchronous/EESM, synchronous reluctance, ferrite PM, axial flux). Research at Oak Ridge National Laboratory, DOE Vehicle Technologies Office, EU ReFreeDrive consortium. Industrial applications: pumps, compressors, conveyors, HVAC, robotics. Emerging technologies: in-wheel motors, integrated motor-inverter units, silicon carbide power electronics, AI-optimized motor control.
+
+\subsubsection{M5: Standards, Efficiency, and Grid Integration}
+NEMA/IEC efficiency classification (IE1--IE4), DOE motor efficiency regulations (EPAct 1992, EISA 2007, 2016 expanded scope, 2027 IE4 mandate), testing standards (IEEE 112 Method B). The 40\% global electricity consumption by motors. Variable frequency drives and system-level efficiency. Grid integration: synchronous generator inertia, frequency regulation, the challenge of inverter-based resources, grid-forming wind turbines (NREL 2022 demonstration), pumped-storage hydroelectric as grid balancing.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:              # Memory/coordination
+    model: sonnet
+    role: Research compilation, source management
+    cache: shared-source-index
+
+  denise:             # Display/output
+    model: sonnet
+    role: Document assembly, diagrams, formatting
+    cache: template-library
+
+  paula:              # I/O/communication
+    model: opus
+    role: Cross-module synthesis, physics verification
+    cache: physics-foundation-cache
+
+  m68000:             # CPU/orchestration
+    model: opus
+    role: Narrative coherence, educational framing
+    cache: pedagogical-framework
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Electromagnetic principles underlying all rotating and linear electric machines
+\item Complete motor taxonomy with operating principles, characteristics, and applications
+\item Complete generator taxonomy including renewable energy generator systems
+\item EV traction motor technology and rare-earth alternatives
+\item DOE/NEMA/IEC efficiency standards and regulatory timeline
+\item Grid integration fundamentals: synchronous inertia, frequency regulation, inverter-based resources
+\item Historical development from Faraday (1831) through present
+\item Quantitative data: efficiency ranges, power densities, cost metrics where available
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Detailed power electronics design (inverter topologies, gate driver circuits)
+\item Motor control algorithms (FOC, DTC, sensorless control) at implementation depth
+\item Manufacturing processes for laminations, windings, or permanent magnets
+\item Specific product comparisons or brand recommendations
+\item Superconducting machines (research-stage, not yet commercially deployed)
+\item Piezoelectric or electrostatic actuators (not electromagnetic machines)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Every motor and generator type includes operating principle, torque-speed profile, efficiency range, and at least two cited applications.
+\item Electromagnetic foundations section derives torque and EMF from Faraday's law with at least three worked conceptual examples.
+\item Historical timeline covers at least 12 key milestones from \O rsted (1820) through grid-forming wind demonstration (2022).
+\item EV traction motor section covers at least 4 motor types with quantitative comparison (efficiency, power density, rare-earth content).
+\item DOE efficiency standards section includes complete regulatory timeline with compliance dates and affected motor populations.
+\item Renewable energy generator section covers wind (onshore + offshore), hydroelectric, and at least one emerging technology.
+\item All numerical claims (efficiency percentages, power ratings, cost figures) attributed to specific government, academic, or industry sources.
+\item Cross-module integration demonstrated: at least 3 explicit connections between physics principles (M1) and application-layer decisions (M4/M5).
+\item Document is self-contained: a reader with undergraduate physics can follow the complete narrative without external references.
+\item Grid integration section explains synchronous inertia loss and at least one mitigation strategy with source.
+\item Motor/generator duality explicitly demonstrated for at least 2 machine types (showing same device as both motor and generator).
+\item All source organizations are government agencies (DOE, EIA, NREL), peer-reviewed journals (IEEE, Royal Society), or recognized professional organizations (NEMA, IEC, ORNL).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Skill Creator & Execution engine for this mission & Downstream \\
+The Space Between & Philosophical foundation (spaces between = air gap, flux path) & Upstream \\
+Learn Kung Fu Pack & Educational delivery pattern for knowledge packs & Sibling \\
+BBS Educational Pack & Distribution channel for completed pack & Downstream \\
+Mesh Prototype Spec & Infrastructure powering the cluster (motor-driven cooling) & Lateral \\
+Cloud Ops Curriculum & Parallel educational content in different domain & Sibling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The electric motor and the generator are perhaps the purest embodiment of the Amiga Principle in the physical world. A single architectural insight --- that a changing magnetic field induces an electromotive force, and that a current-carrying conductor in a magnetic field experiences a force --- branches into an extraordinary taxonomy of specialized machines, each optimized for its execution path. The rotor and stator are the spaces between: the air gap where energy converts from one form to another, the commutation boundary where timing creates direction, the flux path where invisible fields do visible work.
+
+Michael Faraday, self-taught bookbinder's apprentice, saw lines of force where trained mathematicians saw nothing. He built the first motor in 1821 and the first generator in 1831 without a single equation. The mathematics came later, through Maxwell, but the physical intuition came first. That sequence --- understanding the \emph{why} before formalizing the \emph{how} --- is the pedagogical heart of this mission. Build the intuition. Let the taxonomy follow naturally. Give people their understanding back.
+
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Electric Motors and Generators --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, peer-reviewed research, and professional engineering organizations. Each module section provides sourced data that agents can draw upon during document production. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{U.S. Department of Energy (DOE)} --- Motor efficiency standards, Vehicle Technologies Office R\&D, Advanced Manufacturing Office
+\item \textbf{National Renewable Energy Laboratory (NREL)} --- Wind turbine technology, grid-forming demonstrations
+\item \textbf{Oak Ridge National Laboratory (ORNL)} --- EV traction motor R\&D, rare-earth alternatives
+\item \textbf{National Electrical Manufacturers Association (NEMA)} --- Motor efficiency classifications, Premium Efficiency program
+\item \textbf{International Electrotechnical Commission (IEC)} --- Global efficiency standards (IE1--IE4)
+\item \textbf{IEEE} --- Peer-reviewed motor/generator research, historical archives
+\item \textbf{U.S. Energy Information Administration (EIA)} --- Power generation statistics
+\item \textbf{Royal Society / PMC} --- Historical electromagnetic research
+\end{itemize}
+
+\subsection{M1 Reference: Electromagnetic Foundations}
+
+\subsubsection{Faraday's Discovery and the Birth of Electric Machines}
+
+Michael Faraday's 1832 paper on electromagnetic induction is regarded as one of the most consequential scientific publications in history, alongside works by Copernicus, Newton, and Einstein (Royal Society Philosophical Transactions A, 2015). On August 29, 1831, Faraday wrapped two insulated coils of wire around opposite sides of an iron ring and observed that passing current through one coil induced a momentary current in the other --- the first demonstration of electromagnetic induction and the first electric transformer.
+
+Within months, Faraday demonstrated multiple manifestations: transient currents from sliding a bar magnet in and out of a coil, and continuous DC current from rotating a copper disk between magnetic poles (the ``Faraday disk'' --- the first electromagnetic generator). He had previously built the first electric motor in 1821, demonstrating continuous electromagnetic rotation. Joseph Henry independently discovered electromagnetic induction in 1830--1832 but published after Faraday (Britannica; IEEE Spectrum).
+
+\subsubsection{Key Historical Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} & \tableheader{Significance} \\
+\midrule
+1820 & \O rsted discovers electromagnetism & Current deflects compass needle; electricity and magnetism linked \\
+1821 & Faraday's electromagnetic rotation & First electric motor --- continuous circular motion from current + magnet \\
+1831 & Faraday discovers electromagnetic induction & Foundation for all generators, transformers, and inductors \\
+1832 & Pixii builds first commutated dynamo & First practical DC generator; commutator converts AC to pulsed DC \\
+1834 & Lenz formulates his law & Direction of induced current opposes the change producing it \\
+1865 & Maxwell publishes field equations & Mathematical framework unifying electricity, magnetism, and light \\
+1871 & Gramme's improved dynamo & Iron-core flux path enabled commercial power generation \\
+1880s & War of the Currents & Edison (DC) vs.\ Westinghouse/Tesla (AC); AC ultimately prevails \\
+1888 & Tesla patents AC induction motor & Rotating magnetic field eliminates commutator; foundation of modern AC motors \\
+1892 & EPAct (U.S.) & First federal motor efficiency standards \\
+2007 & EISA (U.S.) & NEMA Premium Efficiency required for broader motor scope \\
+2022 & NREL grid-forming wind demo & Wind turbines demonstrated operating in grid-forming mode for the first time \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Physical Laws}
+
+\textbf{Faraday's Law of Induction:} A changing magnetic flux through a circuit induces an electromotive force (EMF) proportional to the rate of change of flux. This is the operating principle behind all generators and transformers, and explains back-EMF in motors.
+
+\textbf{Lorentz Force / Amp\`ere's Force Law:} A current-carrying conductor in a magnetic field experiences a force perpendicular to both the current and the field. This is the torque-producing mechanism in all conventional motors.
+
+\textbf{Lenz's Law:} The direction of induced current opposes the change in flux that produced it. This explains generator loading effects and motor back-EMF that limits starting current.
+
+\textbf{Motor--Generator Duality:} A motor operated in reverse becomes a generator. When a motor's coil rotates, back-EMF is induced (Faraday's law) opposing the driving voltage. When driven by external mechanical force, this same EMF drives current through an external circuit --- the device is now a generator (OpenStax Physics; Physics LibreTexts).
+
+\subsection{M2 Reference: Motor Taxonomy and Engineering}
+
+\subsubsection{DC Motors}
+
+\textbf{Brushed DC Motors} use mechanical commutation via carbon brushes and a commutator to reverse current direction in the rotor windings. Simple, inexpensive, and easy to control by varying voltage. Efficiency typically 75--85\%. Limitations: brush wear (1,000--3,000 service hours), sparking (fire hazard in explosive atmospheres), electromagnetic interference. Applications: automotive windows, small appliances, toys, power tools (Renesas; Cence Power).
+
+\textbf{Brushless DC Motors (BLDC)} replace mechanical commutation with electronic controllers and Hall-effect position sensors. Permanent magnets on the rotor, electromagnets on the stator (the inverse of brushed DC). Efficiency typically 80--95\%. Service life approximately 20,000 hours --- roughly 7$\times$ longer than brushed motors. Higher output speed (up to 6$\times$ faster), more precise motion control, no sparking or brush noise. More expensive due to electronic controller complexity. Applications: industrial automation, robotics, CNC machines, EV traction, drones, HVAC fans, HDD spindle motors (Renesas; NIDEC; MPS Application Note AN047).
+
+\subsubsection{AC Motors}
+
+\textbf{Induction Motors (Asynchronous)} are the most common motor type worldwide. A rotating magnetic field in the stator induces current in the rotor through electromagnetic induction (no physical electrical connection to rotor). The rotor always turns slightly slower than the stator field --- this difference is called ``slip'' and is inherent to torque production. Efficiency typically 75--90\%. Available as squirrel-cage (simplest, most rugged) or wound-rotor (allows external resistance for speed control). Applications: pumps, fans, compressors, conveyors, HVAC, elevators --- virtually all continuous-duty industrial applications (Parvalux; Oriental Motor; Tyto Robotics).
+
+\textbf{Synchronous Motors} rotate at exactly the synchronous speed set by the supply frequency. The rotor field is provided by permanent magnets (PMSM) or wound field coils (WRSM). No slip, therefore higher efficiency than induction motors at the operating point. Used for high-precision positioning and high-efficiency traction applications (Fiveable; Charged EVs).
+
+\textbf{Switched Reluctance Motors (SRM)} have no magnets or windings on the rotor --- just shaped iron poles. Torque is produced by the rotor's tendency to align with energized stator poles (reluctance torque). Very rugged, tolerant of high temperatures, lower material cost. Challenges: higher noise/vibration, requires precise rotor position sensing and complex controllers (DOE Vehicle Technologies Office).
+
+\textbf{Stepper Motors} divide a full rotation into discrete steps, enabling precise open-loop position control without feedback sensors. Used in 3D printers, CNC machines, camera platforms, and automation equipment.
+
+\subsubsection{Motor Efficiency Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Motor Type} & \tableheader{Efficiency} & \tableheader{Control} & \tableheader{Key Advantage} \\
+\midrule
+Brushed DC & 75--85\% & Simple voltage & Low cost, easy control \\
+BLDC & 80--95\% & Electronic & Long life, high precision \\
+AC Induction & 75--90\% & VFD or direct & Rugged, low maintenance \\
+PMSM & 90--97\% & Inverter + FOC & Highest power density \\
+Switched Reluctance & 80--90\% & Complex DSP & No magnets, rugged \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+{\small Source: Tyto Robotics efficiency comparison; DOE Vehicle Technologies Office; IEEE Spectrum.}
+
+\subsection{M3 Reference: Generator Systems and Power Generation}
+
+\subsubsection{Generator Types}
+
+\textbf{Dynamos} (commutated DC generators) were the first generators capable of delivering industrial-scale power. They use electromagnetic self-excitation --- residual magnetism in field coils bootstraps the generation process. Hippolyte Pixii built the first commutated dynamo in 1832. The dynamo principle (self-induction) made industrial electric power economically feasible. Today, dynamos are obsolete for large-scale generation but remain relevant in niche low-power DC applications (Wikipedia --- Dynamo; Electric Generator).
+
+\textbf{Alternators / Synchronous Generators} produce alternating current and are the dominant technology for large-scale power generation worldwide. Large 50/60~Hz three-phase alternators in power plants generate most of the world's electric power. Rotor provides the magnetic field (via permanent magnets or wound field coils); stator contains the armature windings where power is generated. Must be precisely synchronized to grid frequency during startup. Provide critical rotational inertia for grid frequency stability (Wikipedia --- Alternator).
+
+\textbf{Induction Generators} operate by mechanically driving an induction machine rotor faster than synchronous speed (negative slip). Can use standard AC induction motors as generators without internal modification. Common in smaller wind turbines and micro-hydro installations.
+
+\textbf{Doubly-Fed Induction Generators (DFIG)} allow variable-speed operation while maintaining grid frequency through power electronics on the rotor circuit. Dominant technology in onshore wind turbines for over a decade.
+
+\subsubsection{Renewable Energy Generators}
+
+\textbf{Wind Turbine Generators:} DOE's Wind Energy Technologies Office reports that wind energy costs have fallen from over 55 cents/kWh in 1980 to under 3 cents/kWh today, while capacity factors improved from 22\% (pre-1998) to nearly 35\% today. Modern onshore turbines average 2--3~MW capacity; offshore turbines now reach 15+ MW. Generator types include DFIG (variable speed, partial-rating converter), direct-drive PMSG (permanent magnet synchronous, no gearbox), and electrically excited synchronous generators. NREL technology innovations could unlock an additional 80\% of economically viable wind capacity through longer blades, taller towers, and wake steering (DOE WETO; NREL).
+
+\textbf{Hydroelectric Generators:} Typically large synchronous generators coupled to water turbines (Francis, Kaplan, or Pelton depending on head and flow). Hydroelectric provides dispatchable, high-inertia generation that complements variable renewables. Pumped-storage hydroelectric serves as grid-scale energy storage, pumping water to an upper reservoir during surplus and generating during peak demand. Modern innovations include variable-speed turbines and modular power generation systems using hydrokinetic turbines and Archimedes screws (ScienceDirect; DOE).
+
+In 2022, GE and NREL demonstrated that common wind turbines can operate in grid-forming mode, providing voltage and frequency stability services previously exclusive to fossil fuel, nuclear, and hydroelectric synchronous generators (AIChE).
+
+\subsubsection{Power Generation Scale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Generator Type} & \tableheader{Power Range} & \tableheader{Cap.\ Factor} & \tableheader{Application} \\
+\midrule
+Bicycle hub dynamo & 3--6 W & Variable & Lighting \\
+Portable gasoline gen. & 1--10 kW & On-demand & Backup power \\
+Micro-hydro & 5--100 kW & 40--60\% & Rural off-grid \\
+Onshore wind turbine & 2--5 MW & 25--40\% & Grid-connected \\
+Offshore wind turbine & 8--15+ MW & 35--50\% & Grid-connected \\
+Hydroelectric (large) & 100--800 MW & 30--60\% & Baseload/peaking \\
+Nuclear steam turbine & 500--1,800 MW & $\sim$90\% & Baseload \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+{\small Sources: DOE WETO; EIA; solartechonline.com offshore wind guide 2025.}
+
+\subsection{M4 Reference: Applications and Frontiers}
+
+\subsubsection{EV Traction Motors}
+
+The interior permanent magnet synchronous motor (IPMSM) dominates the EV market. In 2022, 82\% of the global electric car market used rare-earth permanent magnet motors (Assembly Magazine). These motors use neodymium-iron-boron (NdFeB) magnets, requiring approximately 1.2~kg of NdFeB per 100~kW of peak motor power, containing the rare earth elements neodymium, praseodymium, dysprosium, and terbium. PMSM motors are up to 15\% more efficient than induction motors and offer the highest power density of any traction motor type (electengmaterials.com).
+
+DOE's Vehicle Technologies Office identifies three primary traction motor types for hybrid and plug-in EVs: IPM motors (highest efficiency and power density, but rare-earth dependent), induction motors (high reliability, mature technology, but lower efficiency and power density), and switched reluctance motors (lowest cost, ruggedest, but noisier and less efficient). DOE's primary goal is to decrease motor cost, volume, and weight by 50\% while maintaining performance (DOE VTO).
+
+\subsubsection{Rare-Earth Alternatives}
+
+Research is intensifying on alternatives to rare-earth PM motors for EV traction:
+
+\textbf{Wound-Rotor Synchronous Motors (WRSM/EESM):} Replace permanent magnets with electromagnetic coils in the rotor, allowing direct field strength control. Used by BMW. Lower material cost (copper vs.\ rare earths) but requires brushes/slip rings and separate field power stage (Charged EVs).
+
+\textbf{Synchronous Reluctance Motors:} No magnets, no rotor windings --- torque from shaped iron rotor poles seeking magnetic alignment. EU ReFreeDrive consortium achieved 200~kW peak power for premium EV applications. Lower cost, sustainable manufacturing, but lower power density than PMSM (Electric Motor Engineering).
+
+\textbf{Ferrite PM Motors:} Replace NdFeB with low-cost ferrite permanent magnets. Stable supply chain, but lower magnetic flux density requires clever rotor geometries to approach NdFeB performance. Research suggests ferrite motors could become the ``traction motor of choice'' in future EV markets (ScienceDirect).
+
+\textbf{Advanced Electric Machines (AEM) Technology:} Semi-sinusoidal machine that swaps permanent magnets for electrical steel in the rotor while changing how current is fed to the coils. Claims higher efficiency and power density than conventional PMSM with zero rare-earth content (AEM).
+
+\subsubsection{Industrial Motor Population}
+
+Electric motors consume more electricity than any other industrial technology. Globally, motors account for over 40\% of power use. In the United States, motors draw more than one trillion kilowatt-hours annually, costing \$112 billion (ABB/DOE). Approximately 300 million motors are in use in U.S.\ industry, infrastructure, and large buildings, with 30 million new motors sold annually for industrial purposes (Wikipedia --- Premium Efficiency).
+
+\subsection{M5 Reference: Standards, Efficiency, and Grid Integration}
+
+\subsubsection{Efficiency Classification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{IEC Class} & \tableheader{NEMA Equiv.} & \tableheader{U.S. Status} & \tableheader{Typical Values} \\
+\midrule
+IE1 & Standard & Historical baseline & 85--92\% (varies by HP) \\
+IE2 & Energy Efficient & EPAct 1992 minimum & 88--94\% \\
+IE3 & Premium Efficiency & EISA 2007 / current minimum & 90--96\% \\
+IE4 & Super Premium & Required 2027 (100--250 HP) & 92--97\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+{\small Sources: NEMA; IEC; ABB; DOE.}
+
+\subsubsection{DOE Regulatory Timeline}
+
+\textbf{1992 --- EPAct:} First U.S. motor efficiency standards for limited general-purpose motors (NEMA Designs A and B, 1--200~HP). 
+
+\textbf{2007 --- EISA:} Expanded scope; required NEMA Premium Efficiency (IE3) for broader motor population.
+
+\textbf{2016 --- Expanded Scope Rule:} Nearly all single-speed induction motors 1--500~HP must meet Premium Efficiency. Projected to reduce carbon emissions by 395 million metric tons and save \$41.4 billion in energy costs over 30 years.
+
+\textbf{2023 --- Updated Test Rule:} Testing and labeling requirements for expanded motor types including synchronous and inverter-only motors.
+
+\textbf{2027 --- IE4 Mandate:} Mid-range motors (100--250~HP) must meet Super Premium/IE4 efficiency. DOE projects \$8.8 billion in business savings and 92 million metric tons CO\textsubscript{2} reduction over 30 years of sales (DOE; NEMA; ABB).
+
+\textbf{2029 --- Fractional HP Expansion:} Coverage expands to motors rated 0.25--3~HP in NEMA frame sizes 42, 48, and 56 (DOE).
+
+\subsubsection{Grid Integration and Synchronous Inertia}
+
+Large synchronous generators inherently provide rotational inertia that stabilizes grid frequency after sudden generation/load imbalances. As inverter-based resources (wind, solar) replace synchronous generation, this inertia decreases, requiring new approaches. In 2022, GE and NREL demonstrated that standard wind turbines can operate in grid-forming mode, providing voltage and frequency stability services previously available only from conventional synchronous generators. Variable-speed pumped-storage hydroelectric plants can also provide synthetic inertia and rapid frequency response, serving as complementary balancing resources for high-renewable grids (AIChE; ScienceDirect).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Rare-earth mining env.\ impact & Environmental & Present data from peer-reviewed sources; no advocacy \\
+Supply chain geopolitics & Geopolitical & State factual supply concentration; no policy positions \\
+Grid stability claims & Technical safety & All projections from DOE/NREL/IEA only \\
+EV range/performance claims & Consumer impact & Attribute to manufacturer or DOE data \\
+Cost projections & Economic & Source all figures; note volatility \\
+Worker safety (high voltage) & Physical safety & Note hazard context; do not provide operational procedures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item U.S.\ Department of Energy --- Motor efficiency standards, VTO R\&D programs, WETO wind technology
+\item U.S.\ Energy Information Administration --- Power generation statistics
+\item National Renewable Energy Laboratory (NREL) --- Wind technology innovations, grid-forming demonstration
+\item Oak Ridge National Laboratory (ORNL) --- EV motor R\&D, Beyond Rare Earth Magnets (BREM) project
+\item Ames Laboratory --- Advanced permanent magnet research
+\item Sandia National Laboratories --- Wind turbine blade R\&D
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+\begin{itemize}[leftmargin=2em]
+\item Royal Society Philosophical Transactions A (2015) --- Historical commentary on Faraday (1832)
+\item IEEE Spectrum --- Electric motor history, EV motor rare-earth research
+\item IEEE Xplore --- IPMSM traction motor simulation and control
+\item ScienceDirect --- Ferrite PM motors for EVs; hydroelectric power generation
+\item OpenStax University Physics II --- Motors, generators, and transformers
+\item Physics LibreTexts --- Generators and back-EMF
+\end{itemize}
+
+\subsubsection{Professional Organizations and Industry}
+\begin{itemize}[leftmargin=2em]
+\item National Electrical Manufacturers Association (NEMA) --- Motor efficiency classifications and standards
+\item International Electrotechnical Commission (IEC) --- Global efficiency standards IE1--IE4
+\item ABB --- 2027 DOE motor standards analysis
+\item Renesas, NIDEC, MPS --- BLDC motor technical references
+\item Charged EVs --- EV traction motor alternatives analysis
+\item Electric Motor Engineering --- Synchronous reluctance / ReFreeDrive consortium
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained educational knowledge pack on electric motors and generators covering electromagnetic foundations, complete motor/generator taxonomy, EV traction frontiers, renewable energy generation, and efficiency standards/grid integration. The pack must be suitable for inclusion in the GSD BBS Educational Pack system and serve as a reference for the Learn Kung Fu teaching pipeline.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0           Wave 1A / 1B          Wave 2         Wave 3
+  (Foundation)     (Parallel Research)   (Synthesis)    (Publication)
+  ┌──────────┐    ┌───────────────────┐  ┌──────────┐  ┌──────────┐
+  │ Shared   │    │ Track A:          │  │ Cross-   │  │ Final    │
+  │ Schemas  │───>│ M1 Foundations    │─>│ module   │─>│ Assembly │
+  │ Source   │    │ M2 Motors         │  │ Synthesis│  │ Verify   │
+  │ Index    │    ├───────────────────┤  │ Physics  │  │ Index    │
+  │ Template │    │ Track B:          │  │ Threads  │  │ Publish  │
+  │          │───>│ M3 Generators     │─>│          │  │          │
+  │          │    │ M4 Applications   │  │          │  │          │
+  │          │    │ M5 Standards      │  │          │  │          │
+  └──────────┘    └───────────────────┘  └──────────┘  └──────────┘
+   Sequential        Parallel (2 trk)    Sequential    Sequential
+   Haiku             Sonnet + Opus       Opus          Sonnet
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer:} Shared schemas, source bibliography, section templates, physics notation conventions
+\item \textbf{Research Layer:} Five parallel-capable module documents with cited data
+\item \textbf{Synthesis Layer:} Cross-module integration threads tracing physics principles through applications
+\item \textbf{Publication Layer:} Final assembled document, verification, index generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & EM Foundations Doc & Faraday's law, Lorentz force, historical timeline & M1 \\
+2 & Motor Taxonomy Doc & All motor types with principles, data, applications & M2 \\
+3 & Generator Systems Doc & All generator types + renewable energy generators & M3 \\
+4 & Applications \& Frontiers Doc & EV motors, rare-earth alternatives, industrial & M4 \\
+5 & Standards \& Grid Doc & DOE/NEMA timeline, efficiency data, grid integration & M5 \\
+6 & Synthesis Chapter & Cross-module integration threads & INTEG \\
+7 & Assembled Knowledge Pack & Complete formatted document with TOC and index & PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Schemas + Source Index & None & Haiku & 4,000 \\
+W0: Section Templates & None & Haiku & 3,000 \\
+W1A: M1 EM Foundations & W0 & Opus & 15,000 \\
+W1A: M2 Motor Taxonomy & W0 & Sonnet & 18,000 \\
+W1B: M3 Generator Systems & W0 & Sonnet & 15,000 \\
+W1B: M4 Applications & W0 & Opus & 16,000 \\
+W1B: M5 Standards \& Grid & W0 & Sonnet & 12,000 \\
+W2: Synthesis Chapter & W1A, W1B & Opus & 10,000 \\
+W3: Assembly + Verification & W2 & Sonnet & 8,000 \\
+W3: Index + Publication & W3 Verify & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Physics foundations (M1), cross-module synthesis (W2), EV frontiers (M4) --- judgment-heavy, requires connecting principles to applications \\
+Sonnet & $\sim$60\% & Motor taxonomy (M2), generator systems (M3), standards (M5), assembly, verification --- structured compilation with clear specifications \\
+Haiku & $\sim$10\% & Schemas, templates, scaffolding --- mechanical tasks requiring speed over depth \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Tracks} & \tableheader{Model Mix} & \tableheader{Est.\ Windows} \\
+\midrule
+0 & Foundation & 1 (sequential) & Haiku & 1--2 \\
+1 & Research & 2 (parallel) & Sonnet + Opus & 8--12 \\
+2 & Synthesis & 1 (sequential) & Opus & 2--3 \\
+3 & Publication & 1 (sequential) & Sonnet & 2--3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Seq} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0.1 & Define shared schemas & Haiku & JSON schemas for motor/generator entries \\
+0.2 & Build source index & Haiku & Source bibliography with citation keys \\
+0.3 & Create section templates & Haiku & Markdown templates for each module section \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Seq} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1A.1 & M1: EM Foundations & Opus & Physics doc with laws, derivations, history \\
+1A.2 & M2: Motor Taxonomy & Sonnet & Complete motor classification with data tables \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Seq} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1B.1 & M3: Generator Systems & Sonnet & Generator classification + renewables \\
+1B.2 & M4: Applications & Opus & EV traction, rare-earth alternatives, industrial \\
+1B.3 & M5: Standards \& Grid & Sonnet & Regulatory timeline, grid integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Seq} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+2.1 & Cross-module physics threads & Opus & Integration narrative tracing Faraday's law through all 5 modules \\
+2.2 & Motor--generator duality demos & Opus & Worked examples showing same device as motor and generator \\
+2.3 & Synthesis chapter assembly & Opus & Unified synthesis with cross-references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Seq} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+3.1 & Source verification pass & Sonnet & All claims traced to cited sources \\
+3.2 & Document assembly & Sonnet & Final formatted knowledge pack \\
+3.3 & Test execution & Sonnet & Test results against all criteria \\
+3.4 & Index + metadata & Sonnet & Searchable index, BBS pack metadata \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Physics foundation cache:} Shared across M1, M2, M3 --- Faraday's law formulations, Lorentz force expressions, Maxwell equations summary. Load once in W0, reuse throughout W1.
+\item \textbf{Source index cache:} Complete bibliography loaded at W0, referenced by citation key in all subsequent waves. Avoids redundant source lookups.
+\item \textbf{Cross-module thread cache:} After W1 completes, extract key physics$\leftrightarrow$application connections for W2 synthesis. Structured as connection pairs (principle $\rightarrow$ application instance).
+\item \textbf{5-minute TTL exploitation:} Within each wave, sequence tasks to reuse warm caches. Track A tasks share the physics cache; Track B tasks share the applications cache.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 7,000 \\
+Wave 1: Research & 31,000 & 45,000 & --- \\
+Wave 2: Synthesis & 10,000 & --- & --- \\
+Wave 3: Publication & --- & 12,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{41,000} & \textbf{57,000} & \textbf{7,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$105,000 output tokens across 18--24 context windows.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0.1 ──> W0.2 ──> W0.3
+                      │
+            ┌─────────┴──────────┐
+            v                    v
+     ┌──────────────┐    ┌──────────────┐
+     │  Track A     │    │  Track B     │
+     │  1A.1 (M1)   │    │  1B.1 (M3)   │
+     │   │          │    │   │          │
+     │  1A.2 (M2)   │    │  1B.2 (M4)   │
+     │              │    │   │          │
+     │              │    │  1B.3 (M5)   │
+     └──────┬───────┘    └──────┬───────┘
+            │                   │
+            └─────────┬─────────┘
+                      v
+               ┌──────────────┐
+               │  Wave 2      │
+               │  2.1 -> 2.2  │
+               │    -> 2.3    │
+               └──────┬───────┘
+                      v
+               ┌──────────────┐
+               │  Wave 3      │
+               │  3.1 -> 3.2  │
+               │    -> 3.3    │
+               │    -> 3.4    │
+               └──────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Source quality, attribution, advocacy \\
+Core functionality & 16 & Required & BLOCK & Module completeness, data accuracy \\
+Integration & 6 & Required & BLOCK & Cross-module connections, consistency \\
+Edge cases & 4 & Best-effort & LOG & Data gaps, temporal currency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every efficiency percentage, power rating, cost figure, or statistical claim attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific legislative or policy positions on energy or regulation. \\
+SC-SEC & Security sensitivity & No operational details that could aid exploitation of power grid vulnerabilities. \\
+SC-GEO & Geopolitical neutrality & Supply chain concentration stated factually without political framing or advocacy. \\
+SC-SAF & Electrical safety & High-voltage/high-current contexts note hazard awareness without providing operational procedures. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Motor type coverage & $\geq$6 motor types with principle, efficiency, applications \\
+CF-02 & Generator type coverage & $\geq$5 generator types with principle, scale, applications \\
+CF-03 & Physics derivations & $\geq$3 conceptual examples from Faraday's law \\
+CF-04 & Historical timeline & $\geq$12 milestones from 1820 to 2022 \\
+CF-05 & EV motor comparison & $\geq$4 traction motor types with quantitative data \\
+CF-06 & Rare-earth alternatives & $\geq$3 alternative approaches with sourced performance data \\
+CF-07 & DOE regulatory timeline & Complete timeline with all compliance dates \\
+CF-08 & Wind generation & Onshore + offshore with capacity factors and cost trends \\
+CF-09 & Hydroelectric coverage & Turbine types, pumped storage, grid balancing role \\
+CF-10 & Efficiency standards table & IEC IE1--IE4 mapped to NEMA equivalents with values \\
+CF-11 & Motor--generator duality & $\geq$2 explicit demonstrations (same device, both modes) \\
+CF-12 & Industrial motor stats & Global electricity share, U.S. consumption, motor population \\
+CF-13 & BLDC vs brushed comparison & Quantitative efficiency, lifespan, cost comparison \\
+CF-14 & Grid-forming wind & NREL 2022 demonstration cited with significance \\
+CF-15 & Renewable gen.\ emerging tech & $\geq$1 emerging technology beyond standard wind/hydro \\
+CF-16 & Self-containment check & Undergraduate physics reader can follow entire narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1$\rightarrow$M2 cascade & Faraday's law explicitly connected to motor torque production \\
+IN-02 & M1$\rightarrow$M3 cascade & Electromagnetic induction explicitly connected to generator EMF \\
+IN-03 & M2$\rightarrow$M4 cascade & Motor taxonomy types mapped to EV traction applications \\
+IN-04 & M3$\rightarrow$M5 cascade & Generator types connected to grid integration challenges \\
+IN-05 & Cross-module consistency & Efficiency values, motor type names consistent across all modules \\
+IN-06 & Self-containment & No undefined terms or unexplained references; complete bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Motor/gen.\ types with data & CF-01, CF-02 & Pending \\
+2. EM foundations derivations & CF-03, IN-01, IN-02 & Pending \\
+3. Historical timeline & CF-04 & Pending \\
+4. EV traction comparison & CF-05, CF-06 & Pending \\
+5. DOE standards timeline & CF-07, CF-10 & Pending \\
+6. Renewable energy generators & CF-08, CF-09, CF-15 & Pending \\
+7. Numerical attribution & SC-NUM & Pending \\
+8. Cross-module integration & IN-01--IN-04 & Pending \\
+9. Self-contained document & CF-16, IN-06 & Pending \\
+10. Grid integration / inertia & CF-14, IN-04 & Pending \\
+11. Motor--generator duality & CF-11 & Pending \\
+12. Professional sources only & SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC-A & Executor A & Track A document production (M1, M2) \\
+EXEC-B & Executor B & Track B document production (M3, M4, M5) \\
+CRAFT-PHYS & Physics Specialist & EM foundations verification; equation review \\
+CRAFT-ENG & Engineering Specialist & Motor/generator technical accuracy \\
+VERIFY & Verification & Source validation; numerical accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Activation Profile:} Squadron (12 roles, 2 parallel tracks)
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron \\
+Total Modules & 5 \\
+Parallel Tracks & 2 \\
+Estimated Context Windows & 18--24 \\
+Estimated Sessions & 6--8 \\
+Total Output Tokens & $\sim$105,000 \\
+Model Split & Opus 39\% / Sonnet 54\% / Haiku 7\% \\
+Deliverables & 7 (5 module docs + synthesis + assembled pack) \\
+Test Count & 32 (6 safety + 16 core + 6 integration + 4 edge) \\
+Safety-Critical Tests & 6 (all mandatory-pass / BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\emph{``I was at first almost frightened when I saw such mathematical force made to bear upon the subject, and then wondered to see that the subject stood it so well.''} --- Michael Faraday, on reading Maxwell's mathematical treatment of his experimental discoveries.
+
+\vspace{0.5em}
+
+The spaces between rotor and stator --- the air gap where invisible fields do visible work --- are where the meaning lives. Understanding these spaces, from Faraday's copper disk to a 15~MW offshore turbine, is how we give people their understanding back.
+\end{quotebox}
+
+\end{document}
