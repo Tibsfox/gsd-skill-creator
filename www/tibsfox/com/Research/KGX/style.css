@@ -1,0 +1,68 @@
+/* KGX -- King's X: Three Sides of One
+ * Theme: Deep purple and warm amber -- spiritual depth, soulful warmth
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --primary: #4A148C;
+  --secondary: #E65100;
+  --tertiary: #6A1B9A;
+  --accent: #BF360C;
+  --cream: #F3E5F5;
+  --mist: #E1BEE7;
+  --warm-cream: #FFF3E0;
+  --parchment: #EFEBE9;
+  --text: #212121;
+  --text-light: #757575;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 50%, var(--accent) 100%);
+  border-bottom: 4px solid var(--secondary);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--primary); border-bottom-color: var(--mist); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+td { border-bottom-color: var(--mist); }
+tr:nth-child(even) { background: rgba(74, 20, 140, 0.05); }
+tr:hover { background: rgba(74, 20, 140, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(230, 81, 0, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1224; color: #d1b3e8; }
+.stat-value { color: var(--primary); }
+
+/* -- Tags -- */
+.tag-vision { background: #F3E5F5; color: #4A148C; }
+.tag-engineering { background: #FFF3E0; color: #E65100; }
+.tag-systems { background: #E8EAF6; color: #283593; }
+.tag-community { background: #E8F5E9; color: #2E7D32; }
+.tag-deployment { background: #EFEBE9; color: #3E2723; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+.tag-fail { background: #FFEBEE; color: #C62828; }
+
+/* -- Special: harmonic glow motif -- */
+.harmonic-glow {
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
