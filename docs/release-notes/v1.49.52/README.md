@@ -13,9 +13,9 @@
 
 ## Summary
 
-The 50th Research project — SYN (Synsor Corp), an AI visual inspection company headquartered at 1920 Merrill Creek Parkway in Everett, Washington. Eight modules cover the company from founding through product architecture, patent landscape, competitive analysis (10 companies mapped across 7 dimensions), market dynamics ($2.9-4.3B addressable subsegment), the technology deep dive (vision pipeline, compressed feature retention, Shannon mutual information), and PNW connections including the Everett manufacturing corridor, Boeing proximity, and GSD chipset integration architecture.
+The 50th Research project — SYN (Synsor Corp), an AI visual inspection company based in Snohomish County, Washington. Eight modules cover the company from founding through product architecture, patent landscape, competitive analysis (10 companies mapped across 7 dimensions), market dynamics ($2.9-4.3B addressable subsegment), the technology deep dive (vision pipeline, compressed feature retention, Shannon mutual information), and PNW connections including the Everett manufacturing corridor, Boeing proximity, and GSD chipset integration architecture.
 
-Named "Everett" — Boeing's hometown, 30 miles north of Seattle on the Snohomish River. Where the PNW builds things at scale. Synsor's location in Everett's manufacturing corridor is not incidental — it's proximity to the factories their sensors inspect.
+Named "Everett" — Boeing's hometown, 30 miles north of Seattle on the Snohomish River. Where the PNW builds things at scale. Synsor's Snohomish County location in the manufacturing corridor is not incidental — it's proximity to the factories their sensors inspect.
 
 Project #50 marks a milestone: the Research series began with 16 PNW ecology projects and has grown to 50 complete projects spanning ecology, electronics, infrastructure, energy, creative arts, business law, music, conventions, cybersecurity, and industrial AI sensing. The bioregion keeps revealing new layers.
 

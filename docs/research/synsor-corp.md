@@ -237,7 +237,7 @@ Synsor embodies the Amiga Principle: specialized execution paths faithfully iter
 
 ### 9.1 Synsor and the PNW Manufacturing Ecosystem
 
-While Synsor.ai is headquartered in Munich, the research address of 1920 Merrill Creek Parkway, Everett, Washington 98203, places this study within the PNW industrial landscape that defines the broader research series. Everett is Boeing's hometown -- the site of the world's largest building by volume (the 747/767/777/787 assembly plant), a factory floor where optical inspection at scale is not theoretical but daily operational reality.
+While Synsor.ai is headquartered in Munich, Synsor Corp's Snohomish County, Washington presence places this study within the PNW industrial landscape that defines the broader research series. Everett is Boeing's hometown -- the site of the world's largest building by volume (the 747/767/777/787 assembly plant), a factory floor where optical inspection at scale is not theoretical but daily operational reality.
 
 The Snohomish County manufacturing corridor stretching from Everett through Mukilteo to Marysville represents one of the densest concentrations of aerospace manufacturing in North America. Boeing's presence anchors an ecosystem of hundreds of suppliers, subcontractors, and specialty manufacturers -- exactly the kind of batch/series production environments where Synsor's technology applies [22].
 
