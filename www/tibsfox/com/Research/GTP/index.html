@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geggy Tah &mdash; Production Mission</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gtp">
+  <header>
+    <h1>Geggy Tah &mdash; Production Mission</h1>
+    <div class="subtitle">The Inclusionary Wave Educational Module &mdash; Phase 2: Architecture &amp; Build Pipeline</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=research/01-source-material">Source</a>
+      <a href="page.html?doc=research/02-research-to-room-mapping">Room Map</a>
+      <a href="page.html?doc=research/03-data-structure-specification">Data</a>
+      <a href="page.html?doc=research/04-constellation-map-specification">Constellation</a>
+      <a href="page.html?doc=research/05-two-chart-visualization">Visualization</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      "Tommy taught me that music is an expression of life. Life is not perfect. Life has mistakes, and it's flawed. It's really beautiful, and it's really ugly. It smells pretty, and it stinks." &mdash; Susan Rogers, on what Geggy Tah taught Prince's engineer
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Rooms</span></div>
+      <div class="stat"><span class="stat-value">16</span><span class="stat-label">Panels</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Try Sessions</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Visualizations</span></div>
+      <div class="stat"><span class="stat-value">30</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">~93K</span><span class="stat-label">Token Budget</span></div>
+    </div>
+
+    <h2>Architecture Reference</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/01-source-material" class="card" style="text-decoration:none;color:inherit">
+        <h3>Source Material</h3>
+        <div class="meta"><span class="tag tag-vision">Module 1</span></div>
+        <p>Complete Phase 1 research inventory: 5 modules, 1,600 lines, full source bibliography. Content extraction protocol and verification rules. Every claim traceable to published sources.</p>
+      </a>
+      <a href="page.html?doc=research/02-research-to-room-mapping" class="card" style="text-decoration:none;color:inherit">
+        <h3>Research-to-Room Mapping</h3>
+        <div class="meta"><span class="tag tag-architecture">Module 2</span></div>
+        <p>Exact mapping from 5 Phase 1 modules to 5 rooms, 16 panels, and 5 Try Sessions. Thread system architecture, progressive disclosure model, and content flow diagrams.</p>
+      </a>
+    </div>
+
+    <h2>Data Structures</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/03-data-structure-specification" class="card" style="text-decoration:none;color:inherit">
+        <h3>Data Structure Specification</h3>
+        <div class="meta"><span class="tag tag-build">Module 3</span></div>
+        <p>TypeScript interfaces for Room, Panel, TrySession, ThreadConnection, NetworkNode, Quote, SourceRef. Validation rules, sample data, and the Creative DNA Study template interface.</p>
+      </a>
+    </div>
+
+    <h2>Interactive Visualizations</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/04-constellation-map-specification" class="card" style="text-decoration:none;color:inherit">
+        <h3>Constellation Map</h3>
+        <div class="meta"><span class="tag tag-integration">Module 4</span></div>
+        <p>SVG/D3.js force-directed graph: 11 nodes, 17 edges, 4 groups. Interaction model, responsive behavior, accessibility, and static fallback. The network made visible.</p>
+      </a>
+      <a href="page.html?doc=research/05-two-chart-visualization" class="card" style="text-decoration:none;color:inherit">
+        <h3>Two-Chart Visualization</h3>
+        <div class="meta"><span class="tag tag-integration">Module 5</span></div>
+        <p>D3.js toggle between Market View and Network View. Same band, same data, radically different story. The metric you choose determines the narrative you tell.</p>
+      </a>
+    </div>
+
+    <h2>Module Rooms</h2>
+    <table>
+      <thead>
+        <tr><th>Room</th><th>Title</th><th>Panels</th><th>Try Session</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>R1</td><td>The Workshop (Origins)</td><td>3</td><td>Workshop Exercise</td><td>M1</td></tr>
+        <tr><td>R2</td><td>The Sound (Discography)</td><td>4</td><td>Found Sound Session</td><td>M2</td></tr>
+        <tr><td>R3</td><td>The Network (Connections)</td><td>4</td><td>Constellation Exercise</td><td>M3</td></tr>
+        <tr><td>R4</td><td>The Ripple (Trajectories)</td><td>3</td><td>The Two Charts</td><td>M4</td></tr>
+        <tr><td>R5</td><td>The Label (Curatorial Practice)</td><td>2</td><td>Label Exercise</td><td>M5</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Build Pipeline</h2>
+    <table>
+      <thead>
+        <tr><th>Wave</th><th>Phase</th><th>Tracks</th><th>Sessions</th><th>Gate</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>W0</td><td>Foundation</td><td>Sequential</td><td>1</td><td>Auto</td></tr>
+        <tr><td>W1</td><td>Room Build</td><td>2 parallel</td><td>2</td><td>HITL</td></tr>
+        <tr><td>W2</td><td>Integration</td><td>Sequential</td><td>0.5</td><td>HITL</td></tr>
+        <tr><td>W3</td><td>Publication</td><td>Sequential</td><td>0.5</td><td>Final</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mission Pack</h2>
+    <div class="card-grid">
+      <a href="mission.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission Package</h3>
+        <div class="meta"><span class="tag tag-pass">Full Pipeline</span></div>
+        <p>Complete GSD production mission package: Phase 2 vision, architecture reference, milestone specification, 4-wave execution plan, 30-test verification matrix, 12-role crew manifest. LaTeX source, compiled PDF, and interactive HTML index.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Project References</h2>
+    <table>
+      <thead>
+        <tr><th>Project</th><th>Code</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Geggy Tah Deep Research</td><td><a href="../GGT/index.html">GGT</a></td><td>Primary source &mdash; all Phase 1 research</td></tr>
+        <tr><td>Deep Audio Analysis</td><td><a href="../DAA/index.html">DAA</a></td><td>Sonic analysis methodology</td></tr>
+        <tr><td>Shapes and Colors</td><td><a href="../ARC/index.html">ARC</a></td><td>Visual pattern language for constellation map</td></tr>
+        <tr><td>Spatial Awareness</td><td><a href="../SPA/index.html">SPA</a></td><td>Room-based spatial metaphor architecture</td></tr>
+        <tr><td>Gradient Engine</td><td><a href="../GRD/index.html">GRD</a></td><td>Color specification for visualization palettes</td></tr>
+        <tr><td>Minecraft RAG</td><td><a href="../MCR/index.html">MCR</a></td><td>Room-building pedagogy</td></tr>
+        <tr><td>Voxel as Vessel</td><td><a href="../VAV/index.html">VAV</a></td><td>Data container architecture</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Geggy Tah &mdash; Production Mission &middot; Research Series &middot; gsd-skill-creator</p>
+    <p style="font-size:0.8em;opacity:0.7;">CREATIVE DNA STUDY &mdash; Phase 2 Production Pipeline &mdash; All claims attributed to published sources</p>
+  </footer>
+</body>
+</html>

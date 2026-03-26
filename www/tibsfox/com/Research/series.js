@@ -22,6 +22,7 @@
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
     { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
     { id: 'GGT', name: 'Geggy Tah', path: 'GGT/index.html' },
+    { id: 'GTP', name: 'Geggy Tah Prod.', path: 'GTP/index.html' },
     { id: 'GRD', name: 'Gradient Engine', path: 'GRD/index.html' },
     { id: 'GRV', name: 'Green River', path: 'GRV/index.html' },
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },

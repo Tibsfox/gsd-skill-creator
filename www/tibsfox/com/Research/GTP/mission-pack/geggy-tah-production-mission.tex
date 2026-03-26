@@ -1,0 +1,987 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Music Production / Creative Build (Deep Violet-Amber-Warm Brown) ===
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{FF8F00}
+\definecolor{tertiary}{HTML}{3E2723}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Geggy Tah --- Production Mission}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Geggy Tah -- Production Mission: Inclusionary Wave Educational Module},
+  pdfsubject={Vision to Mission Pipeline -- Phase 2},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD PRODUCTION MISSION PACKAGE --- PHASE 2}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Inclusionary Wave\\[0.3em]Educational Module}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Geggy Tah as Creative DNA Case Study\\for the GSD Creative Suite}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{From Research to Executable Educational Content}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Research $\rightarrow$ Architecture $\rightarrow$ Build}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Phase 2: Production Pipeline}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Depends On: Geggy Tah Deep Research Mission (Phase 1)}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Inclusionary Wave Module --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Architecture Ready / Awaiting Build}
+\metafield{Depends On:}{Geggy Tah Deep Research Mission (Phase 1, complete)}
+\metafield{Context:}{GSD Creative Suite / Music History / College Structure}
+
+\subsection{Vision}
+
+Phase 1 assembled the evidence. Now we build with it.
+
+The Geggy Tah Deep Research Mission produced a comprehensive 27-page reference documenting the band's origins, discography, creative network, post-band trajectories, and cultural context within the Luaka Bop ecosystem. That reference is the foundation. This Phase 2 mission transforms it into a living educational module --- an interactive, explorable case study in \textit{inclusionary aesthetics} designed to teach musicians, producers, and students of creative practice how genre dissolution, collaborative chemistry, and fearless experimentation produce work that outlasts commercial categories.
+
+The module sits within the GSD Creative Suite alongside GSD-Tracker (the OctaMED-descended music composition tool) and the Deep Audio Analyzer. Where GSD-Tracker teaches \textit{how} to make music and the Deep Audio Analyzer teaches \textit{how} to listen to music, this module teaches \textit{how creative ecosystems work} --- how a workshop-not-a-band in 1987 LA becomes a Grammy empire two decades later, why Prince's engineer found her artistic breakthrough in a Pomona home studio, and what happens when you hand a theremin to a jazz bassist and say ``play.''
+
+The pedagogical model follows the GSD College structure: rooms (thematic spaces), panels (focused explorations within a room), and Try Sessions (hands-on experiential moments). The through-line is the \textit{inclusionary wave} --- Byrne's term for Geggy Tah's aesthetic, which we generalize into a teachable creative framework: the deliberate practice of absorbing disparate influences without hierarchy, producing work that transcends categorization not through rejection but through radical inclusion.
+
+This is also a test case for a new module type in the Creative Suite: the \textit{Creative DNA Study} --- a deep-dive into how specific artistic lineages propagate through collaborative networks. If the Geggy Tah module succeeds, the pattern extends to other case studies: the Paisley Park network, the Muscle Shoals sound, the Wrecking Crew, the Canterbury Scene, the CBGB ecosystem. Each one traces how creative DNA travels through people, not institutions.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Static research doesn't teach.} The Phase 1 reference is a comprehensive evidence base, but a document sitting on a shelf teaches nothing. The research needs to be decomposed into explorable, progressive-disclosure learning paths that meet users at different entry points and depths.
+
+\item \textbf{Creative influence is invisible.} The connection between Geggy Tah's experimental home recordings and Adele's ``Hello'' is invisible to anyone who encounters these as separate cultural artifacts. The module must make influence pathways tangible and navigable --- not as academic citation graphs, but as human stories about people teaching each other to hear differently.
+
+\item \textbf{Genre taxonomy obscures creative practice.} Discogs calls Geggy Tah ``Pop Rock, Downtempo, Avantgarde.'' Apple Music says ``funk, jazz, alternative, and experimental rock.'' These labels describe the output; they say nothing about the \textit{practice} --- the deliberate choice to use dog claw scratches, garage door squeals, and submerged drums as valid sonic material. The module must teach the practice, not the label.
+
+\item \textbf{The ``one-hit wonder'' frame erases networks.} The commercial music industry organizes memory around chart success. By that measure, Geggy Tah produced one hit. By any other measure --- the careers they launched, the creative breakthroughs they catalyzed, the producer who built modern pop on their foundation --- they produced an ecosystem. The module must demonstrate why network-based analysis reveals what chart-based analysis hides.
+
+\item \textbf{No ``Creative DNA Study'' pattern exists yet.} The GSD Creative Suite has educational packs (Foxfire Heritage, Learn Kung Fu) and creative tools (GSD-Tracker, Deep Audio Analyzer) but no template for tracing artistic lineage through collaborative networks. This module establishes the pattern.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Model:} The \textit{Creative DNA Study} --- an interactive educational module that traces artistic influence through a collaborative network, using progressive disclosure (overview $\rightarrow$ rooms $\rightarrow$ panels $\rightarrow$ deep dives) to make invisible creative pathways visible and navigable.
+
+\textbf{Concrete instance:} Geggy Tah as the nexus node. Five rooms radiating outward from the band's creative practice, each room containing 2--4 panels, each panel containing a Try Session that gives the user a hands-on experience of the concept being taught.
+\end{quotebox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  THE INCLUSIONARY WAVE --- MODULE MAP
+  =====================================
+
+  ENTRY POINT: "What happens when you absorb everything?"
+        |
+        v
+  +------------------------------------------------------------------+
+  | LOBBY: The Inclusionary Wave                                      |
+  | One-page overview. Byrne quote. Timeline ribbon. Entry to rooms. |
+  +------------------------------------------------------------------+
+        |
+   +----+----+--------+---------+--------+
+   |         |        |         |        |
+   v         v        v         v        v
+  [R1]     [R2]     [R3]      [R4]     [R5]
+  The      The      The       The      The
+  Workshop Sound    Network   Ripple   Label
+  (Origins)(Albums) (People)  (Legacy) (Context)
+   |         |        |         |        |
+   +-- 3P    +-- 4P   +-- 4P    +-- 3P   +-- 2P
+   |         |        |         |        |
+   +-- TS    +-- TS   +-- TS    +-- TS   +-- TS
+
+  P = Panel (focused exploration)
+  TS = Try Session (hands-on experience per panel)
+
+  THREAD SYSTEM:
+  - Influence Thread: traces creative DNA across rooms
+  - Timeline Thread: chronological navigation layer
+  - Concept Thread: "inclusionary aesthetics" principles
+\end{asciibox}
+
+\subsection{Room Specifications}
+
+\subsubsection{Room 1: The Workshop (Origins)}
+
+\textbf{Premise:} Every creative ecosystem starts with a space where the rules haven't been written yet.
+
+\textbf{Panels:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{CoCu: The Anti-Band} --- Ten people, five non-musicians, audience-as-participant. How unstructured collaboration creates the conditions for radical inclusion. Bono buying studio time for a band he'll never sign.
+\item \textbf{Baby Sisters and Demo Tapes} --- The naming story as entry point to Jordan and Kurstin's partnership. The demo tape that traveled. Byrne's reaction. The paradox of an American band on a world-music label.
+\item \textbf{The Jazz Root} --- Kurstin under Jaki Byard at The New School. Playing the Village Vanguard with Bobby Hutcherson. How rigorous training in one tradition creates the confidence to break every tradition simultaneously.
+\end{enumerate}
+
+\textbf{Try Session:} \textit{The Workshop Exercise.} User is given 5 unrelated sound sources (a field recording, a jazz piano phrase, a spoken word clip, a percussion loop, a synth pad) and prompted to combine them into a 60-second arrangement using GSD-Tracker. No genre label. No rules. The constraint is \textit{inclusion} --- every element must appear.
+
+\subsubsection{Room 2: The Sound (Discography)}
+
+\textbf{Premise:} Three albums are three experiments in how far inclusion can stretch before it becomes something new.
+
+\textbf{Panels:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Grand Opening: The Aural Planet} --- Rogers' production approach. Home recording philosophy. Rolling Stone's ``creates its own aural planet.'' How recording on a Stephens 16-track tape machine imposes creative constraints.
+\item \textbf{Sacred Cow: The Hit Nobody Expected} --- ``Whoever You Are'' from an 8-year-old's traffic courtesy song to Billboard \#16 to Mercedes-Benz. How a song can mean different things across decades. Entertainment Weekly's ``silliness tempered by keen musicianship.''
+\item \textbf{Into the Oh: The Expanded Palette} --- Theremin, Moog synths, clavinets, Wurlitzers. Laurie Anderson dropping a ``postcard from a strange cloud.'' James Gadson bringing Aretha's groove. How adding voices to an inclusive practice doesn't dilute it --- it deepens.
+\item \textbf{The Unconventional Toolkit} --- Dog claw scratches, garage door squeals, submerged drums, found sounds. Jordan's principle that music is an expression of life --- beautiful, ugly, simple, complicated. The Amiga Principle applied to instrumentation: specialized tools for specialized moments.
+\end{enumerate}
+
+\textbf{Try Session:} \textit{The Found Sound Session.} User records 3 sounds from their immediate environment (door, glass, chair, voice, anything). GSD-Tracker loads them as samples. User builds a 16-row pattern using only these sounds plus one pitched instrument. The lesson: every sound is a potential instrument when the practice is inclusion.
+
+\subsubsection{Room 3: The Network (Creative Connections)}
+
+\textbf{Premise:} Creative DNA doesn't flow through institutions. It flows through people who change each other.
+
+\textbf{Panels:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Susan Rogers: When Prince's Engineer Learned Something New} --- Rogers' arc from Prince (1983--1988) through Geggy Tah to Berklee and psychoacoustics. The specific moment: ``Tommy taught me that music is an expression of life.'' How the most technically accomplished engineer in pop music was transformed by two unknowns in a home studio.
+\item \textbf{Pamelia and the Theremin} --- The story of handing someone an instrument they've never touched and changing the trajectory of an entire instrument's modern history. Bob Moog's ``true modern-day maestro.'' The walking bass technique that came from jazz upright training. SNL. TED. Vienna.
+\item \textbf{David Byrne: The Curator's Bet} --- What it means to sign an act that doesn't fit your label's identity because the music demands it. The Luaka Bop philosophy: ``strange, but musical.'' How curatorial courage enables inclusionary practice.
+\item \textbf{The Constellation Map} --- Interactive visualization of every person who passed through the Geggy Tah creative field: Jordan, Kurstin, Rogers, Byrne, Pamelia, Gadson, Hahn, Anderson, Phillips, Millstein, Atef. Where they came from. Where they went. What they carried with them.
+\end{enumerate}
+
+\textbf{Try Session:} \textit{The Constellation Exercise.} User maps their own creative network --- the people who taught them something that changed their practice. Not mentors in the formal sense. The person who handed you a book, an instrument, an idea that rerouted everything. The module provides a visual tool (SVG constellation map) for mapping these connections.
+
+\subsubsection{Room 4: The Ripple (Post-Geggy Tah Trajectories)}
+
+\textbf{Premise:} The measure of a creative ecosystem isn't what it produced. It's what it made possible.
+
+\textbf{Panels:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{From Pomona to ``Hello''} --- Kurstin's trajectory mapped in detail. The decision point: jazz pianist or pop producer. How Geggy Tah was the bridge. ``I learned how to produce and record music. Everything happened.'' The specific production DNA: multi-instrumental fluency, genre-agnostic arrangement, the willingness to play everything yourself.
+\item \textbf{The Quiet Craftsman} --- Tommy Jordan's less-visible but no less significant post-band path. Steel drums on ``Flake.'' Ben Harper's endorsement. T Bone Burnett's praise. The question the module poses without answering: what does success look like when you measure by creative integrity rather than commercial visibility?
+\item \textbf{The Chart That Lies} --- A data visualization exercise. Plot Geggy Tah's ``success'' by chart metrics (1 hit, 3 albums, inactive since 2001). Then plot it by network influence (9 Grammys through Kurstin, Moog's theremin program through Pamelia, Berklee's cognition lab through Rogers, Jack Johnson's debut through Jordan). The visualization teaches why network analysis reveals what market analysis hides.
+\end{enumerate}
+
+\textbf{Try Session:} \textit{The Two Charts.} User is given data about a band of their choosing and prompted to produce two visualizations: the market chart (sales, chart positions, commercial metrics) and the network chart (where did the members go? what did they catalyze?). The module provides the D3.js visualization scaffold.
+
+\subsubsection{Room 5: The Label (Luaka Bop and Curatorial Practice)}
+
+\textbf{Premise:} The space an artist lands in shapes what they can become. Curatorial decisions are creative decisions.
+
+\textbf{Panels:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The Sri Lankan Tea and the Masonic Eye} --- Luaka Bop's founding. The name from tea packaging. Tibor Kalman's design. The explicit rejection of ``world music'' as a category. How design, naming, and positioning are creative acts that determine how music is heard.
+\item \textbf{The American Exception} --- Why Geggy Tah on Luaka Bop is the most interesting thing about their career from a music industry perspective. An American rock band on a label built to surface international voices. What Byrne's decision to sign them says about the limits and possibilities of curatorial identity.
+\end{enumerate}
+
+\textbf{Try Session:} \textit{The Label Exercise.} User designs a hypothetical record label: name, visual identity, curatorial philosophy, first three signings. The constraint: the label must have a coherent identity AND include at least one act that breaks that identity. The exercise teaches that the exceptions define the rule.
+
+\subsection{Integration Points}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Integration} & \tableheader{Mechanism} \\
+\midrule
+GSD-Tracker & Room 2 Try Sessions & Found Sound and Workshop exercises use Tracker as composition tool \\
+Deep Audio Analyzer & Room 2 Panels & Sonic analysis of GT production techniques (Rogers' engineering choices) \\
+Foxfire Heritage Pack & Room 3 Pattern & Creative DNA Study shares ``oral history as primary source'' methodology \\
+College Structure & All Rooms & Rooms map to .college/ directory; panels = curriculum units \\
+The Hundred Voices & Room 4 Through-line & Literary parallel --- 100 voices as inclusionary practice in prose \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus: opus-4     # Room 3 (Network), Room 4 (Ripple), Synthesis
+  denise: sonnet-4   # Room 1 (Origins), Room 2 (Sound), Room 5 (Label), schemas
+  paula: haiku-4     # Templates, Try Session scaffolds, index generation
+  copper:
+    - wave_timing: "standard"
+    - parallel_tracks: 2
+    - cache_ttl: "5min"
+  blitter:
+    model_split:
+      opus: 30%
+      sonnet: 55%
+      haiku: 15%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item 5 rooms with 16 total panels and 5 Try Sessions
+\item Interactive constellation map (SVG/D3.js) for Room 3
+\item Two-chart visualization exercise (D3.js scaffold) for Room 4
+\item GSD-Tracker integration hooks for Room 1 and Room 2 Try Sessions
+\item Progressive disclosure: lobby overview $\rightarrow$ room $\rightarrow$ panel $\rightarrow$ deep dive
+\item Thread navigation system (Influence, Timeline, Concept)
+\item Creative DNA Study pattern template (reusable for future case studies)
+\item TypeScript interfaces for room/panel/trySession/thread data structures
+\item All content sourced from Phase 1 Research Reference (no new primary research)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Audio playback of copyrighted Geggy Tah recordings
+\item Automated audio analysis of specific tracks (requires separate DAA integration mission)
+\item Full GSD-Tracker sample packs (separate asset pipeline)
+\item Future Creative DNA Studies (Canterbury Scene, Muscle Shoals, etc.)
+\item Monetization or commercial distribution layer
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All 5 rooms implemented with complete panel content sourced from Phase 1 reference
+\item Each room has at least 1 functional Try Session with clear user instructions
+\item Constellation map (Room 3) renders all 11+ network members with connection metadata
+\item Two-chart visualization (Room 4) produces both market and network views from sample data
+\item GSD-Tracker integration hooks documented for Room 1 and Room 2 Try Sessions
+\item Progressive disclosure functions: lobby $\rightarrow$ room $\rightarrow$ panel navigation verified
+\item Thread system allows cross-room navigation by Influence, Timeline, or Concept
+\item Creative DNA Study pattern extracted as reusable template with documented interfaces
+\item TypeScript interfaces compile without errors and cover all data structures
+\item All factual claims in module content traceable to Phase 1 source bibliography
+\item Module self-contained: user with no prior GT knowledge can navigate complete journey
+\item No copyrighted material (lyrics, audio) reproduced; all content is original analysis
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+The first mission asked: \textit{who were Geggy Tah?} This mission asks: \textit{what can Geggy Tah teach?}
+
+The inclusionary wave is not a music theory concept. It is a \textit{creative practice framework} --- the deliberate cultivation of a creative space where no influence is excluded, no tool is too strange, no combination is too unlikely. It is what happens when a jazz pianist trained by Mingus's pianist decides that dog claw scratches belong in a recording. It is what happens when Prince's engineer finds her artistic breakthrough in a home studio in Pomona. It is what happens when you hand a bass player a theremin and she becomes its greatest living practitioner.
+
+The Amiga Principle says: architectural elegance over brute force. The inclusionary wave says: radical absorption over genre policing. They are the same insight expressed in different domains. The Amiga didn't become legendary by having the most RAM. Geggy Tah didn't become influential by having the biggest budget. Both achieved leverage through \textit{how they organized the material they had}.
+
+This module teaches that organizing principle --- not as theory, but as practice. The Try Sessions put tools in users' hands. The rooms tell the human stories. The constellation map makes the invisible network visible. And the Creative DNA Study pattern, once established, becomes a reusable lens for understanding how creativity actually propagates: not through charts and sales figures, but through moments when one person changes how another person hears.
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE (Abbreviated --- draws from Phase 1)
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- ARCHITECTURE REFERENCE}{secondary}
+
+\section{Architecture Reference}
+
+\subsection{Source Material}
+
+This production mission draws entirely from the Phase 1 Deep Research Mission (27 pages, 5 research modules, full source bibliography). No new primary research is required. The architecture reference below specifies \textit{how} the research maps to module structure.
+
+\subsection{Research-to-Room Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Room} & \tableheader{Source Module} & \tableheader{Key Content Pulled} \\
+\midrule
+R1: Workshop & M1 (Origins) & CoCu formation, duo evolution, signing story, Byrne quotes \\
+R2: Sound & M2 (Discography) & All 3 album catalogs, personnel, production details, critical reception \\
+R3: Network & M3 (Creative Network) & Rogers, Byrne, Pamelia, Gadson biographical profiles \\
+R4: Ripple & M4 (Trajectories) & Kurstin career timeline, Jordan post-band, Pamelia path \\
+R5: Label & M5 (Cultural Context) & Luaka Bop founding, curatorial philosophy, 90s landscape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Data Structure Specification}
+
+\subsubsection{TypeScript Interfaces}
+
+\begin{asciibox}
+// === CORE TYPES ===
+
+enum RoomId \{
+  WORKSHOP = 'workshop',
+  SOUND = 'sound',
+  NETWORK = 'network',
+  RIPPLE = 'ripple',
+  LABEL = 'label'
+\}
+
+enum ThreadType \{
+  INFLUENCE = 'influence',   // Creative DNA connections
+  TIMELINE = 'timeline',     // Chronological navigation
+  CONCEPT = 'concept'        // Inclusionary aesthetics principles
+\}
+
+interface Room \{
+  id: RoomId;
+  title: string;
+  premise: string;          // One-sentence framing question
+  panels: Panel[];
+  trySession: TrySession;
+  sourceModule: string;     // Phase 1 module reference
+\}
+
+interface Panel \{
+  id: string;               // e.g., 'r1-p1-cocu'
+  room: RoomId;
+  title: string;
+  subtitle: string;
+  content: PanelContent;
+  threads: ThreadConnection[];
+  sources: SourceRef[];     // Phase 1 bibliography entries
+\}
+
+interface PanelContent \{
+  narrative: string;        // Main prose (progressive disclosure: first para visible)
+  pullQuotes: Quote[];      // Key quotes with attribution
+  dataPoints: DataPoint[];  // Verifiable facts with source refs
+  deepDive?: string;        // Extended content (disclosed on request)
+\}
+
+interface TrySession \{
+  id: string;
+  room: RoomId;
+  title: string;
+  description: string;
+  instructions: string[];
+  toolIntegration?: ToolHook;  // GSD-Tracker, D3, SVG scaffold
+  estimatedMinutes: number;
+\}
+
+interface ToolHook \{
+  tool: 'gsd-tracker' | 'd3-viz' | 'svg-constellation' | 'label-designer';
+  config: Record<string, unknown>;
+  fallback: string;           // Text-only alternative if tool unavailable
+\}
+
+interface ThreadConnection \{
+  thread: ThreadType;
+  fromPanel: string;
+  toPanel: string;
+  label: string;              // e.g., "Rogers carries this insight to Barenaked Ladies"
+\}
+
+interface NetworkNode \{
+  id: string;
+  name: string;
+  role: string;               // e.g., "Producer", "Thereminist"
+  connection: string;         // Relationship to GT
+  priorPath: string;          // Where they came from
+  subsequentPath: string;     // Where they went
+  transformativeMoment?: string;  // The specific GT moment that mattered
+\}
+
+interface Quote \{
+  text: string;
+  speaker: string;
+  source: string;
+  year?: number;
+\}
+
+interface SourceRef \{
+  id: string;
+  publication: string;
+  url: string;
+  accessed: string;
+\}
+\end{asciibox}
+
+\subsection{Constellation Map Specification}
+
+The Room 3 constellation map is an SVG/D3.js interactive visualization. Each node represents a person in the Geggy Tah creative network. Edges represent creative relationships (collaboration, mentorship, catalysis). Node size reflects outbound influence (how many subsequent nodes a person catalyzed). Edge labels describe the specific creative exchange.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Prior Path} & \tableheader{GT Role} & \tableheader{Subsequent Path} \\
+\midrule
+Tommy Jordan & CoCu founder & Vocals, bass, lyrics, songwriter & Jack Johnson ``Flake,'' continued LA music \\
+Greg Kurstin & New School jazz, CalArts & Keys, guitar, co-producer & Bird \& the Bee, 9 Grammys, Adele \\
+Susan Rogers & Prince (1983--88) & Co-producer (Grand Opening, Sacred Cow) & Barenaked Ladies, Berklee, McGill PhD \\
+David Byrne & Talking Heads & Label founder, exec producer & Continued Luaka Bop curation \\
+Pamelia Stickney & Jazz upright bass & Theremin (Into the Oh) & Moog collaborator, TED, Vienna scene \\
+Daren Hahn & Session musician & Drums (Sacred Cow) & Toured with Sting, BNL \\
+James Gadson & Aretha, Bill Withers & Drums (Into the Oh) & Continued session legend \\
+Laurie Anderson & Performance art pioneer & Guest (Into the Oh) & Continued solo career \\
+Glen Phillips & Toad the Wet Sprocket & Guest vocals (Sacred Cow) & Solo career, collaborations \\
+Lavey Millstein & LA session percussionist & Percussion, synth, tabla (Into the Oh) & Session work \\
+Jaki Byard & Mingus's pianist & Kurstin's teacher (pre-GT) & (d.\ 1999) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Two-Chart Visualization Specification}
+
+Room 4's ``Chart That Lies'' exercise requires a D3.js scaffold producing two views of the same entity:
+
+\textbf{View A --- Market Chart:}
+\begin{itemize}[leftmargin=2em]
+\item X-axis: Time (1994--2025)
+\item Y-axis: Commercial metrics (chart positions, album sales proxies)
+\item GT data points: Grand Opening (no chart), Sacred Cow (\#16 Modern Rock), Into the Oh (no significant chart), band inactive after 2001
+\item Visual impression: brief blip, long flatline --- the ``one-hit wonder'' picture
+\end{itemize}
+
+\textbf{View B --- Network Chart:}
+\begin{itemize}[leftmargin=2em]
+\item Same X-axis: Time (1994--2025)
+\item Y-axis: Cumulative network influence (Grammys won by alumni, chart \#1s produced by alumni, institutions founded/joined)
+\item GT data points: 1994 (Rogers transforms), 1999 (Pamelia discovers theremin), 2006 (Kurstin forms Bird \& Bee), 2012 (first US \#1 via Kurstin), 2015 (Adele ``Hello''), 2017--2023 (Grammy accumulation), 2025 (Jordan podcast, Rogers at Berklee)
+\item Visual impression: exponential growth curve --- the ``creative ecosystem'' picture
+\end{itemize}
+
+The exercise's power is in the toggle between views. Same band. Same data. Radically different story.
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build the Inclusionary Wave Educational Module as an executable GSD Creative Suite component: 5 rooms, 16 panels, 5 Try Sessions, an interactive constellation map, a two-chart visualization exercise, and the reusable Creative DNA Study pattern template. All content sourced from Phase 1 research. Outputs are TypeScript data structures, SVG/D3 visualizations, GSD-Tracker integration hooks, and formatted educational content ready for the College directory.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 --------> WAVE 1 (Parallel) ------------> WAVE 2 --------> WAVE 3
+  Foundation       Track A       Track B             Integration      Publication
+  +-----------+   +---------+  +-----------+        +-----------+   +-----------+
+  | TS ifaces |   | R1      |  | R3 Network|        | Thread    |   | College   |
+  | Room      |   | Workshop|  | + Constell|        | system    |   | dir       |
+  | schemas   |-->| R2 Sound|  | R4 Ripple |------->| Cross-room|-->| Index     |
+  | Phase 1   |   | + Try   |  | + 2-Chart |        | links     |   | Verify    |
+  | index     |   | Sessions|  | R5 Label  |        | Pattern   |   | Package   |
+  +-----------+   +---------+  +-----------+        | template  |   +-----------+
+                                                    +-----------+
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+D1 & TypeScript interfaces & All data structures compile; covers rooms, panels, threads, nodes & W0 \\
+D2 & Phase 1 content index & Every panel's source material mapped to Phase 1 sections & W0 \\
+D3 & Room 1: Workshop & 3 panels + Try Session (Workshop Exercise) & W1A \\
+D4 & Room 2: Sound & 4 panels + Try Session (Found Sound) + Tracker hooks & W1A \\
+D5 & Room 3: Network & 4 panels + Try Session (Constellation) + SVG map & W1B \\
+D6 & Room 4: Ripple & 3 panels + Try Session (Two Charts) + D3 scaffold & W1B \\
+D7 & Room 5: Label & 2 panels + Try Session (Label Exercise) & W1B \\
+D8 & Thread navigation system & Influence, Timeline, Concept threads across all rooms & W2 \\
+D9 & Creative DNA Study template & Reusable pattern doc with interfaces and room/panel arch & W2 \\
+D10 & Constellation map (SVG/D3) & 11+ nodes, labeled edges, hover detail, responsive & W1B \\
+D11 & Two-chart visualization & Toggle between Market and Network views, D3, sample data & W1B \\
+D12 & College directory structure & .college/ integration, room files, panel files, index & W3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: TypeScript interfaces & None & Haiku & 4K \\
+W0: Phase 1 content index & Phase 1 PDF & Sonnet & 5K \\
+W0: Room templates & Interfaces & Haiku & 3K \\
+W1A: Room 1 (Workshop) & W0, Phase 1 M1 & Sonnet & 8K \\
+W1A: Room 2 (Sound) & W0, Phase 1 M2 & Sonnet & 12K \\
+W1A: Tracker integration hooks & Room 2 & Sonnet & 4K \\
+W1B: Room 3 (Network) & W0, Phase 1 M3 & Opus & 10K \\
+W1B: Constellation map & Room 3 data & Sonnet & 6K \\
+W1B: Room 4 (Ripple) & W0, Phase 1 M4 & Opus & 8K \\
+W1B: Two-chart D3 scaffold & Room 4 data & Sonnet & 5K \\
+W1B: Room 5 (Label) & W0, Phase 1 M5 & Sonnet & 6K \\
+W2: Thread system & All rooms & Opus & 6K \\
+W2: Pattern template & All rooms + threads & Opus & 5K \\
+W3: College directory & W2 outputs & Sonnet & 4K \\
+W3: Verification & All & Sonnet & 4K \\
+W3: Index + packaging & All & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & Room 3 (network influence requires judgment), Room 4 (creative trajectory analysis), W2 thread system and pattern extraction \\
+Sonnet & 55\% & Rooms 1, 2, 5 (content assembly from research), visualizations (D3/SVG implementation), W0 content index, W3 college dir \\
+Haiku & 15\% & W0 interfaces and templates, W3 index/packaging, Try Session scaffolds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallel} & \tableheader{Sessions} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & 1 & Auto \\
+1 & Room Build & 2 tracks & 2 & HITL \\
+2 & Integration & Sequential & 0.5 & HITL \\
+3 & Publication & Sequential & 0.5 & Final \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+TypeScript interfaces & Haiku & Room, Panel, TrySession, Thread, NetworkNode types \\
+Phase 1 content index & Sonnet & JSON mapping: panel ID $\rightarrow$ Phase 1 section + key quotes \\
+Room/panel templates & Haiku & Markdown templates with progressive disclosure markers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Room Build}
+
+\textbf{Track A --- Content Core (Rooms 1 \& 2):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Room 1: Workshop (3 panels) & Sonnet & Panel content, CoCu narrative, Jazz Root profile \\
+Room 2: Sound (4 panels) & Sonnet & Album deep-dives, production analysis, toolkit panel \\
+Try Sessions (R1 + R2) & Sonnet & Workshop Exercise + Found Sound Session specs \\
+GSD-Tracker hooks & Sonnet & Integration config for sample loading, pattern templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Network \& Context (Rooms 3, 4, 5):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Room 3: Network (4 panels) & Opus & Rogers profile, Pamelia story, Byrne analysis, constellation \\
+Constellation map (SVG/D3) & Sonnet & Interactive node-edge visualization, 11+ nodes \\
+Room 4: Ripple (3 panels) & Opus & Kurstin arc, Jordan profile, Chart That Lies exercise \\
+Two-chart visualization & Sonnet & D3 toggle scaffold with sample GT data \\
+Room 5: Label (2 panels) & Sonnet & Luaka Bop analysis, American Exception panel \\
+Try Sessions (R3 + R4 + R5) & Sonnet & Constellation, Two Charts, Label Exercise specs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Thread system & Opus & Cross-room navigation links (Influence, Timeline, Concept) \\
+Creative DNA Study template & Opus & Reusable pattern: interfaces, room arch, panel structure \\
+Cross-room consistency & Opus & Verify all names, dates, facts consistent across rooms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+College directory & Sonnet & .college/music-history/inclusionary-wave/ structure \\
+Verification pass & Sonnet & All claims checked against Phase 1 source bibliography \\
+Index + packaging & Haiku & Module README, navigation index, download package \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & 0 & 5K & 7K \\
+Wave 1 (Track A) & 0 & 24K & 0 \\
+Wave 1 (Track B) & 18K & 17K & 0 \\
+Wave 2 & 11K & 0 & 0 \\
+Wave 3 & 0 & 8K & 3K \\
+\midrule
+\textbf{Total} & \textbf{29K} & \textbf{54K} & \textbf{10K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$93K tokens across $\sim$18 context windows in 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Interfaces] --+---> [W1A: R1 Workshop] --------+
+  [W0: Content Index]-+                                |
+  [W0: Templates] ----+---> [W1A: R2 Sound] ----------+
+                      |     [W1A: Tracker Hooks] ------+---> [W2: Threads]
+                      |                                |          |
+                      +---> [W1B: R3 Network] ---------+          v
+                      |     [W1B: Constellation SVG] --+    [W2: Pattern]
+                      |                                |          |
+                      +---> [W1B: R4 Ripple] ----------+          v
+                      |     [W1B: Two-Chart D3] -------+    [W2: Consistency]
+                      |                                |          |
+                      +---> [W1B: R5 Label] -----------+          v
+                            [W1B: Try Sessions] -------+    [W3: College Dir]
+                                                             [W3: Verify]
+                                                             [W3: Package]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-01 & No copyrighted content & Zero lyrics, audio, or extended quoted material reproduced \\
+SC-02 & Source traceability & Every factual claim maps to Phase 1 bibliography entry \\
+SC-03 & Living persons accuracy & All characterizations sourced to published interviews \\
+SC-04 & No speculation & No claims about relationships, breakup causes, or personal dynamics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Room 1 completeness & 3 panels + Try Session with clear instructions \\
+CF-02 & Room 2 completeness & 4 panels + Try Session + Tracker integration documented \\
+CF-03 & Room 3 completeness & 4 panels + Try Session + constellation map functional \\
+CF-04 & Room 4 completeness & 3 panels + Try Session + two-chart toggle functional \\
+CF-05 & Room 5 completeness & 2 panels + Try Session with label design exercise \\
+CF-06 & Constellation map & 11+ nodes rendered, edges labeled, hover shows detail \\
+CF-07 & Two-chart visualization & Market view and Network view toggle without error \\
+CF-08 & Progressive disclosure & Lobby $\rightarrow$ room $\rightarrow$ panel navigation path verified \\
+CF-09 & TypeScript compilation & All interfaces compile with tsc --strict \\
+CF-10 & Try Session: Workshop & Instructions produce functional exercise in GSD-Tracker context \\
+CF-11 & Try Session: Found Sound & Sample loading path documented, 16-row pattern achievable \\
+CF-12 & Try Session: Constellation & User can map own network using provided SVG tool \\
+CF-13 & Try Session: Two Charts & Sample data produces both views; user can substitute own data \\
+CF-14 & Try Session: Label & Exercise produces coherent label concept with identity-breaking act \\
+CF-15 & Thread navigation & Influence thread connects $\geq$5 panels across $\geq$3 rooms \\
+CF-16 & Pattern template & Creative DNA Study template documented with reuse instructions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Phase 1 alignment & All room content traceable to specific Phase 1 sections \\
+IN-02 & Cross-room consistency & Names, dates, facts identical across all rooms \\
+IN-03 & GSD-Tracker hooks & Tracker integration config loads without error \\
+IN-04 & College directory & .college/ structure follows established conventions \\
+IN-05 & Self-containment & New user completes lobby-to-deep-dive journey without external reference \\
+IN-06 & Pattern reusability & Template can produce skeleton for different band/network case study \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Tracker unavailable fallback & Try Sessions degrade gracefully to text-only instructions \\
+EC-02 & D3 unavailable fallback & Constellation and two-chart provide static SVG alternative \\
+EC-03 & Sparse network data & Constellation map handles nodes with minimal metadata \\
+EC-04 & Future extensibility & Pattern template accommodates 3--8 rooms without restructuring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 5 rooms implemented & CF-01--05 & Pending \\
+2. Each room has Try Session & CF-10--14 & Pending \\
+3. Constellation map renders & CF-06, EC-03 & Pending \\
+4. Two-chart visualization & CF-07, CF-13 & Pending \\
+5. GSD-Tracker hooks & CF-02, IN-03 & Pending \\
+6. Progressive disclosure & CF-08, IN-05 & Pending \\
+7. Thread system & CF-15 & Pending \\
+8. Pattern template & CF-16, IN-06 & Pending \\
+9. TypeScript interfaces & CF-09 & Pending \\
+10. Source traceability & SC-02, IN-01 & Pending \\
+11. Self-contained & IN-05, EC-01--02 & Pending \\
+12. No copyrighted material & SC-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+EXEC-A & Content Builder & Rooms 1 \& 2 (content-heavy, Tracker integration) \\
+EXEC-B & Visualization Builder & Constellation map, two-chart D3, Room 5 \\
+CRAFT-NET & Network Analyst & Room 3 influence analysis; constellation data (Opus) \\
+CRAFT-ARC & Trajectory Analyst & Room 4 creative DNA tracing (Opus) \\
+VERIFY & Verification & Phase 1 alignment; fact consistency; source checking \\
+INTEG & Integration Agent & Thread system; cross-room links; college directory \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Progressive disclosure quality; Try Session usability \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Phase & 2 (Production --- follows Phase 1 Research) \\
+Rooms & 5 \\
+Panels & 16 \\
+Try Sessions & 5 \\
+Interactive Visualizations & 2 (constellation map, two-chart toggle) \\
+Parallel Tracks & 2 (Content Core + Network/Viz) \\
+Waves & 4 (Foundation, Build, Integration, Publication) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Total Token Budget & $\sim$93K (Opus 29K / Sonnet 54K / Haiku 10K) \\
+Model Split & Opus 31\% / Sonnet 58\% / Haiku 11\% \\
+Safety-Critical Tests & 4 (all mandatory-pass / BLOCK) \\
+Total Tests & 30 \\
+HITL Gates & 2 (post-Wave 1, post-Wave 2) \\
+New Pattern Established & Creative DNA Study (reusable for future case studies) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Tommy taught me that music is an expression of life. Life is not perfect. Life has mistakes, and it's flawed. It's really beautiful, and it's really ugly. It smells pretty, and it stinks. Life is simple as pie, and it's complicated. Life is mysterious and dark, and life is bright and dazzling. So your music should be all of that.''}
+
+\vspace{0.5em}
+\hfill --- Susan Rogers, Tape Op Magazine
+
+\vspace{1em}
+The inclusionary wave is a practice, not a genre. This module teaches that practice --- not by describing it, but by putting tools in hands and stories in context. The Creative DNA Study pattern, once established here, becomes the lens through which we understand every creative network in the GSD ecosystem. The spaces between people are where the music lives. The spaces between modules are where the learning happens.
+\end{quotebox}
+
+\end{document}
