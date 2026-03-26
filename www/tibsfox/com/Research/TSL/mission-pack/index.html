@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PR #28 Tessl Skill Review — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: #212121;
+    background: #FAFAFA;
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, #263238 0%, #37474F 50%, #1565C0 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  header .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  header .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+  .card {
+    background: #ECEFF1;
+    border: 1px solid #B0BEC5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #212121;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #263238;
+    margin-bottom: 0.3rem;
+  }
+  .card .meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #757575;
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #263238;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #1565C0;
+  }
+  .contents {
+    background: #E3F2FD;
+    border-left: 4px solid #1565C0;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+  }
+  .contents h4 {
+    font-family: 'DM Sans', sans-serif;
+    color: #1565C0;
+    margin-bottom: 0.5rem;
+  }
+  .contents ul {
+    list-style: none;
+    padding: 0;
+  }
+  .contents li {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+    color: #37474F;
+  }
+  .contents li::before {
+    content: '→ ';
+    color: #1565C0;
+    font-weight: 700;
+  }
+  ol.steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+  ol.steps li {
+    counter-increment: step;
+    padding: 0.6rem 0 0.6rem 2.5rem;
+    position: relative;
+    font-size: 0.95rem;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    background: #263238;
+    color: white;
+    border-radius: 50%;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0.5rem;
+  }
+  .quote {
+    background: #ECEFF1;
+    border-left: 4px solid #263238;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #37474F;
+  }
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+  }
+  .decision-table th {
+    background: #263238;
+    color: white;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  .decision-table td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .decision-table tr:nth-child(even) { background: #F5F5F5; }
+  .accept { color: #2E7D32; font-weight: 700; }
+  .adapt { color: #E65100; font-weight: 700; }
+  .reject { color: #B71C1C; font-weight: 700; }
+  code {
+    background: #ECEFF1;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-family: 'DejaVu Sans Mono', monospace;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #757575;
+    border-top: 1px solid #E0E0E0;
+    margin-top: 2rem;
+  }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>PR #28 Tessl Skill Review</h1>
+  <div class="subtitle">Agent Skills Ecosystem & GSD Architectural Alignment — March 26, 2026</div>
+</header>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="pr28-tessl-review-mission.pdf" download>
+      <div class="icon">📄</div>
+      <h3>Mission Package (PDF)</h3>
+      <div class="meta">24 pages · Vision → Research → Mission</div>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <div class="icon">📝</div>
+      <h3>LaTeX Source (.tex)</h3>
+      <div class="meta">Editable source · XeLaTeX + DejaVu fonts</div>
+    </a>
+  </div>
+
+  <h2>Executive Summary</h2>
+
+  <table class="decision-table">
+    <tr>
+      <th>Component</th>
+      <th>Decision</th>
+      <th>Rationale</th>
+    </tr>
+    <tr>
+      <td>DACP frontmatter + restructuring</td>
+      <td class="accept">Accept</td>
+      <td>Genuine spec compliance for a procedural skill</td>
+    </tr>
+    <tr>
+      <td>MFE description "Use when…" clauses</td>
+      <td class="adapt">Adapt</td>
+      <td>Valid pattern, rewrite in GSD voice</td>
+    </tr>
+    <tr>
+      <td>MFE summary flattening</td>
+      <td class="reject">Reject</td>
+      <td>Destroys structured metadata</td>
+    </tr>
+    <tr>
+      <td>MFE workflow injection</td>
+      <td class="reject">Reject</td>
+      <td>Reference skills ≠ procedural skills</td>
+    </tr>
+    <tr>
+      <td>MFE "Primitives" → "Concepts" rename</td>
+      <td class="reject">Reject</td>
+      <td>GSD-specific terminology</td>
+    </tr>
+    <tr>
+      <td>GitHub Action workflow</td>
+      <td class="reject">Reject</td>
+      <td>Supply-chain risk, unverified data flow</td>
+    </tr>
+  </table>
+
+  <div class="contents">
+    <h4>Document Contents</h4>
+    <ul>
+      <li><strong>Stage 1 — Vision:</strong> Problem statement, domain map, 5 research modules, 10 success criteria</li>
+      <li><strong>Stage 2 — Research:</strong> Tessl platform analysis, Agent Skills spec audit, per-skill diff impact, governance review, response strategy</li>
+      <li><strong>Stage 3 — Mission:</strong> Wave execution plan, 32 tests (6 safety-critical), squadron crew manifest, ~66K token budget across ~8 context windows</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+
+  <ol class="steps">
+    <li>Download the <strong>Mission Package PDF</strong> and review the three-stage pipeline (Vision → Research → Mission)</li>
+    <li>Use Stage 2 research findings to inform your PR review comment on GitHub</li>
+    <li>Hand Stage 3 to <code>gsd-skill-creator</code> via Claude Code for execution of the wave plan</li>
+    <li>Wave 1 runs three parallel tracks: DACP patching, MFE analysis, and governance review</li>
+    <li>Wave 2 synthesizes into the final decision matrix and GSD-native improvement specs</li>
+    <li>Wave 3 produces the PR review comment, contribution policy, and verification report</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+
+  <p style="font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: #37474F;">
+    To modify and recompile the LaTeX source, ensure DejaVu fonts are installed and run three XeLaTeX passes:
+  </p>
+  <pre style="background: #263238; color: #E0E0E0; padding: 1rem; border-radius: 6px; font-size: 0.85rem; margin: 1rem 0; overflow-x: auto;">xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+
+  <div class="quote">
+    "The Amiga's genius wasn't raw power — it was architectural leverage." This PR is an Amiga moment in miniature. The power of GSD's mathematical foundations skills isn't in their Tessl scores — it's in the architectural relationships between them. Take what's genuinely useful. Protect what makes the architecture sing.
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Vision → Research → Mission Pipeline · Squadron Activation Profile
+</footer>
+
+</body>
+</html>
