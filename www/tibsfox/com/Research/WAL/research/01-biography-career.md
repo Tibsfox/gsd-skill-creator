@@ -82,7 +82,7 @@ Yankovic would later say: "If there hadn't been a Dr. Demento, I'd probably have
 
 Dr. Demento served as a pre-internet distribution platform for niche comedy music. The show reached an audience that actively sought the unusual, creating a self-selecting listener base perfectly primed for Yankovic's material. This is the same pattern that would later apply to YouTube, social media, and streaming -- platforms that allow niche creators to find their audience without gatekeepers.
 
-> Cross-reference: The platform-to-audience pipeline mirrors the distribution patterns documented in [STA](../STA/research/01-career-overview.md) (Steve Allen's use of television as a new medium for comedy) and [DAA](../DAA/research/01-audio-fundamentals.md) (signal distribution in audio production).
+> Cross-reference: The platform-to-audience pipeline mirrors the distribution patterns documented in [STA](../STA/index.html) (Steve Allen's use of television as a new medium for comedy) and [DAA](../DAA/index.html) (signal distribution in audio production).
 
 ---
 
