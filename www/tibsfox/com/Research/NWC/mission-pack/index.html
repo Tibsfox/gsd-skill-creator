@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norwescon 48 — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #0277BD;
+    --tertiary: #F9A825;
+    --accent: #7C4DFF;
+    --light-primary: #EDE7F6;
+    --light-secondary: #E1F5FE;
+    --bg: #FAFAFA;
+    --card-bg: #F0EDF6;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A0E5E 50%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  header .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  header .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    opacity: 0.85;
+  }
+  header .meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 1rem;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid #D1C4E9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(49, 27, 146, 0.15);
+  }
+  .file-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .file-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+  .file-card p {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    line-height: 1.4;
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.4rem; font-size: 0.9rem; }
+  .stage-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    color: white;
+    margin-right: 0.4rem;
+  }
+  .stage-1 { background: var(--primary); }
+  .stage-2 { background: var(--secondary); }
+  .stage-3 { background: var(--tertiary); color: #212121; }
+  code {
+    font-family: 'DM Sans Mono', monospace;
+    font-size: 0.85rem;
+    background: var(--light-primary);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+  }
+  .quote {
+    background: var(--light-primary);
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.2rem;
+    margin: 2rem 0;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 520px) {
+    .files { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Norwescon 48</h1>
+  <div class="subtitle">The Pacific Northwest's Premier Science Fiction & Fantasy Convention</div>
+  <div class="meta">March 25, 2026 · Squadron Activation · ~180K tokens · 10 context windows</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="norwescon-mission.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <h3>Mission Package (PDF)</h3>
+      <p>24-page three-stage document. Vision → Research → Mission. Ready for GSD orchestrator handoff.</p>
+    </a>
+    <a href="norwescon-mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <h3>LaTeX Source (.tex)</h3>
+      <p>Full XeLaTeX source. Modify and recompile with three passes.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul>
+    <li><span class="stage-tag stage-1">Stage 1</span> <strong>Vision Document</strong> — Convention as navigable knowledge space; 5-module architecture; 12 success criteria; Amiga Principle through-line</li>
+    <li><span class="stage-tag stage-2">Stage 2</span> <strong>Research Reference</strong> — 48-year history; GoH profiles (Vernon/Bowers/Ash/Orbit/Bihary); 7 PKD nominees; 30+ programming tracks; logistics; community infrastructure</li>
+    <li><span class="stage-tag stage-3">Stage 3</span> <strong>Mission Package</strong> — 7 deliverables; 4 waves (2 parallel tracks); Squadron crew manifest (12 roles); 26-test verification plan</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Review the PDF to verify scope and structure</li>
+    <li>Place both files in the skill-creator mission intake directory</li>
+    <li>GSD orchestrator reads Stage 3 for execution parameters</li>
+    <li>Squadron activation: FLIGHT assigns waves, EXEC agents produce modules in parallel</li>
+    <li>VERIFY agent runs 26-test plan; 4 safety-critical tests are mandatory-pass</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>Requires XeLaTeX with DejaVu fonts (Ubuntu default). Three passes:</p>
+  <ul>
+    <li><code>xelatex -interaction=nonstopmode norwescon-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode norwescon-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode norwescon-mission.tex</code></li>
+  </ul>
+
+  <div class="quote">
+    "A convention is a space between — not quite work, not quite leisure. The founders started Norwescon as practice for a larger thing and discovered the practice was the thing."
+  </div>
+
+</div>
+</body>
+</html>
