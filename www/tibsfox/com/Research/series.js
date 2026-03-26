@@ -34,6 +34,7 @@
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
+    { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },
     { id: 'SPA', name: 'Spatial Awareness', path: 'SPA/index.html' },
     { id: 'STA', name: 'Steve Allen', path: 'STA/index.html' },
     { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' },
