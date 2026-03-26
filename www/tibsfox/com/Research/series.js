@@ -23,6 +23,7 @@
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
+    { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
     { id: 'MPC', name: 'Math Co-Proc.', path: 'MPC/index.html' },

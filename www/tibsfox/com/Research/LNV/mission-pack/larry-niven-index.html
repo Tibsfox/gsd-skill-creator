@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Larry Niven — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #0277BD;
+    --tertiary: #F9A825;
+    --accent: #7C4DFF;
+    --light-primary: #EDE7F6;
+    --light-secondary: #E1F5FE;
+    --dark: #212121;
+    --subtle: #757575;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--dark); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A0E5E 50%, var(--secondary) 100%);
+    color: white; padding: 4rem 2rem 3rem; text-align: center;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.8rem; opacity: 0.8; }
+  .header h1 { font-size: 2.5rem; margin: 0.5rem 0 0.3rem; font-weight: 700; }
+  .header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1.5rem; font-size: 0.95rem; color: var(--tertiary); font-weight: 600; }
+  .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 10px; padding: 1.8rem;
+    text-decoration: none; color: var(--dark); transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(49,27,146,0.12);
+  }
+  .file-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(49,27,146,0.15); }
+  .file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--primary); }
+  .file-card .ext { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-top: 0.3rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.15rem; margin: 2rem 0 0.8rem; font-weight: 700; }
+  .contents { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem 2rem; margin: 1rem 0; }
+  .contents ul { list-style: none; padding: 0; }
+  .contents li { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 0.3rem 0; color: var(--dark); }
+  .contents li strong { color: var(--primary); }
+  .instructions { background: var(--light-primary); border-radius: 8px; padding: 1.5rem 2rem; margin: 1rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: rgba(49,27,146,0.08); padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+    font-style: italic; color: var(--primary);
+  }
+  .quote cite { display: block; text-align: right; font-style: normal; font-family: 'DM Sans', sans-serif; font-weight: 600; margin-top: 0.5rem; font-size: 0.85rem; }
+  .footer { text-align: center; padding: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>Larry Niven</h1>
+  <h2>Architect of Known Space — Hard Science Fiction, Megastructures & the Literature of Wonder</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="files">
+    <a class="file-card" href="larry-niven-mission.pdf" download>
+      <div class="label">Mission Package</div>
+      <div class="ext">PDF — 27 pages</div>
+      <div class="desc">Complete three-stage pipeline: Vision, Research Reference, and Mission Package with wave execution plan.</div>
+    </a>
+    <a class="file-card" href="larry-niven-mission.tex" download>
+      <div class="label">LaTeX Source</div>
+      <div class="ext">.tex — XeLaTeX</div>
+      <div class="desc">Full source for recompilation and modification. Requires DejaVu fonts and XeLaTeX.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ul>
+      <li><strong>Stage 1 — Vision Document:</strong> Problem statement, 5 research modules (Biography, Known Space, Ringworld, Collaborations, Ideas & Legacy), chipset configuration, 12 success criteria, scope boundaries, through-line</li>
+      <li><strong>Stage 2 — Research Reference:</strong> Sourced findings for all 5 modules including timeline structure, 8 alien species profiles, Ringworld physical parameters, Niven-Pournelle novel catalog, Niven's Laws complete text, predictive fiction catalog, critical assessment</li>
+      <li><strong>Stage 3 — Mission Package:</strong> Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, 101K token budget (30/60/10 Opus/Sonnet/Haiku), 29-test verification plan, dependency graph, crew manifest</li>
+    </ul>
+  </div>
+
+  <h3>Usage</h3>
+  <div class="instructions">
+    <ol>
+      <li>Feed this PDF to the GSD skill-creator via Claude Code</li>
+      <li>The orchestrator will parse Stage 3 and decompose into executable wave plans</li>
+      <li>Wave 0 (Foundation) produces shared schemas consumed by all subsequent waves</li>
+      <li>Wave 1 executes two parallel research tracks: Track A (Biography & Collaborations) and Track B (Known Space, Ringworld, Ideas & Legacy)</li>
+      <li>Wave 2 (Synthesis) integrates findings across all modules</li>
+      <li>Wave 3 assembles, verifies, and tests the final document</li>
+    </ol>
+  </div>
+
+  <h3>Recompilation</h3>
+  <div class="instructions">
+    <ol>
+      <li>Ensure DejaVu fonts are installed: <code>apt install fonts-dejavu</code></li>
+      <li>Compile with XeLaTeX (three passes for TOC, cross-refs, and page counts):</li>
+    </ol>
+    <p style="margin-top:0.5rem"><code>xelatex -interaction=nonstopmode larry-niven-mission.tex</code> ×3</p>
+  </div>
+
+  <div class="quote">
+    "The dinosaurs became extinct because they didn't have a space program. And if we become extinct because we don't have a space program, it'll serve us right!"
+    <cite>— Larry Niven</cite>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem · March 2026 · Vision → Research → Mission
+</div>
+
+</body>
+</html>
