@@ -26,6 +26,7 @@
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
     { id: 'JNS', name: 'JanSport', path: 'JNS/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
+    { id: 'LFR', name: 'Living Forest', path: 'LFR/index.html' },
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
