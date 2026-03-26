@@ -5,6 +5,12 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// Resolve paths relative to the engine root (two levels up from tests/wings/)
+const ENGINE_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const srcPath = (rel: string) => resolve(ENGINE_ROOT, rel);
 
 // ─── Wing 5: Set Theory ────────────────────────────────
 
@@ -48,7 +54,7 @@ describe('Wing 5: Set Theory', () => {
     it('WonderPhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/05-set-theory/WonderPhase.tsx',
+        srcPath('src/observatory/wings/05-set-theory/WonderPhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -59,7 +65,7 @@ describe('Wing 5: Set Theory', () => {
     it('SeePhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/05-set-theory/SeePhase.tsx',
+        srcPath('src/observatory/wings/05-set-theory/SeePhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -71,7 +77,7 @@ describe('Wing 5: Set Theory', () => {
     it('TouchPhase has at least 2 interactive elements', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/05-set-theory/TouchPhase.tsx',
+        srcPath('src/observatory/wings/05-set-theory/TouchPhase.tsx'),
         'utf-8',
       );
       const matches = src.match(/data-interactive=/g);
@@ -123,7 +129,7 @@ describe('Wing 6: Category Theory', () => {
     it('WonderPhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/06-category-theory/WonderPhase.tsx',
+        srcPath('src/observatory/wings/06-category-theory/WonderPhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -134,7 +140,7 @@ describe('Wing 6: Category Theory', () => {
     it('SeePhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/06-category-theory/SeePhase.tsx',
+        srcPath('src/observatory/wings/06-category-theory/SeePhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -146,7 +152,7 @@ describe('Wing 6: Category Theory', () => {
     it('TouchPhase has at least 2 interactive elements', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/06-category-theory/TouchPhase.tsx',
+        srcPath('src/observatory/wings/06-category-theory/TouchPhase.tsx'),
         'utf-8',
       );
       const matches = src.match(/data-interactive=/g);
@@ -198,7 +204,7 @@ describe('Wing 7: Information Theory', () => {
     it('WonderPhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/07-information-theory/WonderPhase.tsx',
+        srcPath('src/observatory/wings/07-information-theory/WonderPhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -209,7 +215,7 @@ describe('Wing 7: Information Theory', () => {
     it('SeePhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/07-information-theory/SeePhase.tsx',
+        srcPath('src/observatory/wings/07-information-theory/SeePhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -221,7 +227,7 @@ describe('Wing 7: Information Theory', () => {
     it('TouchPhase has at least 2 interactive elements', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/07-information-theory/TouchPhase.tsx',
+        srcPath('src/observatory/wings/07-information-theory/TouchPhase.tsx'),
         'utf-8',
       );
       const matches = src.match(/data-interactive=/g);
@@ -273,7 +279,7 @@ describe('Wing 8: L-Systems', () => {
     it('WonderPhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/08-l-systems/WonderPhase.tsx',
+        srcPath('src/observatory/wings/08-l-systems/WonderPhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -284,7 +290,7 @@ describe('Wing 8: L-Systems', () => {
     it('SeePhase does not contain mathNotation rendering', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/08-l-systems/SeePhase.tsx',
+        srcPath('src/observatory/wings/08-l-systems/SeePhase.tsx'),
         'utf-8',
       );
       expect(src).not.toMatch(/mathNotation/);
@@ -296,7 +302,7 @@ describe('Wing 8: L-Systems', () => {
     it('TouchPhase has at least 2 interactive elements', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/08-l-systems/TouchPhase.tsx',
+        srcPath('src/observatory/wings/08-l-systems/TouchPhase.tsx'),
         'utf-8',
       );
       const matches = src.match(/data-interactive=/g);
@@ -309,7 +315,7 @@ describe('Wing 8: L-Systems', () => {
     it('ConnectPhase references the unit circle and "begin again"', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/08-l-systems/ConnectPhase.tsx',
+        srcPath('src/observatory/wings/08-l-systems/ConnectPhase.tsx'),
         'utf-8',
       );
       expect(src).toMatch(/unit circle/i);
@@ -319,7 +325,7 @@ describe('Wing 8: L-Systems', () => {
     it('CreatePhase contains closing words and "begin again"', async () => {
       const { readFileSync } = await import('fs');
       const src = readFileSync(
-        'src/observatory/wings/08-l-systems/CreatePhase.tsx',
+        srcPath('src/observatory/wings/08-l-systems/CreatePhase.tsx'),
         'utf-8',
       );
       expect(src).toMatch(/begin again/i);
@@ -351,7 +357,7 @@ describe('Cross-wing structure', () => {
     describe(`${wing.name} file structure`, () => {
       it('has all 7 required files (index + 6 phases)', async () => {
         const { existsSync } = await import('fs');
-        const base = `src/observatory/wings/${wing.dir}`;
+        const base = srcPath(`src/observatory/wings/${wing.dir}`);
 
         expect(existsSync(`${base}/index.tsx`)).toBe(true);
         for (const phase of PHASES) {
@@ -366,7 +372,7 @@ describe('Cross-wing structure', () => {
       const { readFileSync } = await import('fs');
       for (const wing of WINGS) {
         const src = readFileSync(
-          `src/observatory/wings/${wing.dir}/index.tsx`,
+          srcPath(`src/observatory/wings/${wing.dir}/index.tsx`),
           'utf-8',
         );
         expect(src).toContain("from '../../../types/index.js'");
