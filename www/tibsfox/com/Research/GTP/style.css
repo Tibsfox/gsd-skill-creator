@@ -1,0 +1,47 @@
+/* GTP — Geggy Tah Production: The Inclusionary Wave Educational Module
+   Project palette and overrides — base layout from ../../brand.css
+   Phase 2: Production Mission — deep violet + amber + warm brown */
+
+:root {
+  --primary: #311B92;
+  --secondary: #FF8F00;
+  --tertiary: #4A148C;
+  --accent: #E65100;
+  --cream: #EDE7F6;
+  --mist: #D1C4E9;
+  --text: #212121;
+  --text-light: #757575;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 55%, var(--accent) 100%);
+  border-bottom: 4px solid var(--secondary);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(49, 27, 146, 0.05); }
+tr:hover { background: rgba(49, 27, 146, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(255, 143, 0, 0.06); }
+code { background: var(--mist); }
+pre { background: #1a0e30; color: #c9b8e8; }
+.stat-value { color: var(--primary); }
+
+.tag-vision { background: #EDE7F6; color: #311B92; }
+.tag-architecture { background: #FFF3E0; color: #E65100; }
+.tag-build { background: #F3E5F5; color: #4A148C; }
+.tag-integration { background: #FFF8E1; color: #FF8F00; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
