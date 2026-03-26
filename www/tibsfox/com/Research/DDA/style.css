@@ -1,0 +1,70 @@
+/* DDA — dada: Wordplay, Subversion, and the California Sound
+ * Theme: golden amber and deep indigo — California sunset over ocean
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --indigo-deep: #0F0F3D;
+  --indigo: #1A1A4E;
+  --indigo-light: #2D2D6B;
+  --amber: #D4A017;
+  --amber-dark: #B08614;
+  --amber-light: #E8C547;
+  --cream: #FFF8F0;
+  --sand: #F0E4D0;
+  --dusk: #E8D8C4;
+
+  /* Semantic overrides */
+  --page-bg: var(--cream);
+  --page-text: #1A1A2E;
+  --page-text-light: #5A4A6A;
+  --link: var(--indigo);
+  --card-border: var(--sand);
+  --border: var(--sand);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--indigo-deep) 0%, var(--indigo) 40%, var(--amber-dark) 80%, var(--amber) 100%);
+  border-bottom: 4px solid var(--amber);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--indigo-deep); border-bottom-color: var(--sand); }
+h3 { color: var(--indigo); }
+th { background: var(--indigo-deep); }
+td { border-bottom-color: var(--sand); }
+tr:nth-child(even) { background: rgba(212, 160, 23, 0.06); }
+tr:hover { background: rgba(212, 160, 23, 0.12); }
+blockquote { border-left-color: var(--amber); background: rgba(212, 160, 23, 0.08); }
+code { background: var(--sand); }
+pre { background: #0F0F2A; color: #D8D0E8; }
+.stat-value { color: var(--indigo-deep); }
+
+/* -- Tags -- */
+.tag-formation { background: #FFF8E1; color: #8D6E00; }
+.tag-album { background: #E8EAF6; color: #1A1A4E; }
+.tag-single { background: #FFF3E0; color: #BF360C; }
+.tag-style { background: #E8F5E9; color: #2E7D32; }
+.tag-dadaist { background: #FCE4EC; color: #C2185B; }
+.tag-career { background: #F3ECF7; color: #4A1259; }
+.tag-legacy { background: #E3F2FD; color: #1565C0; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: scheduling board motif -- */
+.scheduling-motif {
+  background: linear-gradient(90deg, var(--indigo-deep), var(--amber), var(--indigo-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
