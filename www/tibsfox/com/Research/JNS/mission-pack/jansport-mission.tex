@@ -1,0 +1,1114 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: PNW Heritage / Outdoor Brand ---
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{JanSport}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={JanSport -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{JanSport\\[0.3em]Always With You}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From PNW Garage to Global Icon --- The Architecture of an Enduring Brand}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{JanSport --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{Deep research study into JanSport as a case study in brand endurance, design philosophy, sustainability transformation, and cultural positioning within the outdoor/consumer goods industry.}
+
+\subsection{Vision}
+
+In 1967, above a transmission shop on Aurora Avenue in Seattle, two young people who couldn't afford much of anything except ambition began hand-sewing backpacks from aluminum frames and nylon. Murray Pletz had won a design contest with a flexible-frame pack; Jan Lewis knew how to sew. The company they built carried her name and, eventually, the books of half the students in America.
+
+JanSport's story is not merely a corporate history. It is a study in what happens when a product achieves such structural fitness for its environment that it becomes invisible --- part of the assumed landscape rather than a conscious choice. The SuperBreak backpack, introduced in the mid-1970s as a modified hiking daypack, has remained fundamentally unchanged for five decades. That kind of design longevity is not accidental; it is architectural. It emerges from the same principle that makes the Amiga chipset or a well-designed UNIX pipe enduring: do one thing, do it with integrity, and let the ecosystem grow around you.
+
+This research mission examines JanSport across five dimensions: its PNW founding story and the outdoor culture that shaped its DNA; the product design philosophy that produced one of the most iconic consumer objects in American life; the corporate ownership carousel that carried it from garage to VF Corporation; the sustainability transformation that is remaking its supply chain; and the cultural strategy --- particularly the \#LightenTheLoad mental health campaign --- that has repositioned the brand for Generation Z without abandoning its heritage identity. The through-line is a question relevant far beyond backpacks: how does a brand remain structurally honest across six decades of ownership changes, manufacturing globalization, and generational shifts?
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Heritage Erosion Under Corporate Consolidation.} JanSport has changed hands multiple times --- from founders to K2/Cummins to Blue Bell to VF Corporation --- each transition risking the dilution of founding values. How has the brand maintained (or failed to maintain) design integrity through these transitions?
+
+  \item \textbf{Sustainability Credibility Gap.} JanSport has committed to recycled materials and circular economy goals, but operates within VF Corporation's massive global supply chain spanning dozens of countries. The gap between brand-level sustainability claims and parent-company-level supply chain realities needs rigorous examination.
+
+  \item \textbf{Design Longevity vs.\ Market Pressure.} The SuperBreak's unchanged design is simultaneously the brand's greatest asset and its greatest risk. In a market driven by feature escalation and trend cycles, how does ``timeless simplicity'' compete without becoming ``stale simplicity''?
+
+  \item \textbf{Cultural Positioning Authenticity.} The \#LightenTheLoad mental health campaign represents a significant brand extension beyond product marketing. Whether this constitutes genuine social investment or strategic cause-marketing requires analysis of execution, investment depth, and measurable outcomes.
+
+  \item \textbf{Market Dominance Sustainability.} JanSport and The North Face together control roughly half the US small backpack market. This concentration creates both competitive moats and antitrust/market-health questions worth examining in the context of VF Corporation's portfolio strategy.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} JanSport is a case study in \textit{structural brand fitness} --- the phenomenon where a product achieves such alignment between form, function, price, and cultural context that it persists across generational and ownership transitions with minimal architectural change.
+\end{quotebox}
+
+The research treats JanSport not as a simple brand profile but as an analytical lens into endurance patterns in consumer products. The SuperBreak is to backpacks what the Volkswagen Beetle was to automobiles or what the Levi's 501 was to jeans: a design so structurally resolved that it becomes the category's default archetype.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    JanSport Research Domain
+    ┌──────────────────────────────────────────────┐
+    │                                              │
+    │   ┌──────────┐  ┌───────────┐  ┌─────────┐  │
+    │   │ ORIGINS  │  │  PRODUCT  │  │CORPORATE│  │
+    │   │ Heritage │──│  Design & │──│Structure│  │
+    │   │ & PNW    │  │Innovation │  │& Market │  │
+    │   └────┬─────┘  └─────┬─────┘  └────┬────┘  │
+    │        │              │              │        │
+    │        └──────┬───────┘              │        │
+    │               │                      │        │
+    │   ┌───────────┴──────┐  ┌───────────┴─────┐  │
+    │   │ SUSTAINABILITY   │  │  BRAND CULTURE  │  │
+    │   │ & Manufacturing  │──│  & Social Impact│  │
+    │   └──────────────────┘  └─────────────────┘  │
+    │                                              │
+    └──────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0: Foundation
+    [Shared Schema] ──> [Source Index]
+
+  Wave 1: Parallel Research
+    Track A                    Track B
+    ┌──────────────┐          ┌──────────────────┐
+    │ M1: Origins  │          │ M3: Corporate    │
+    │ & Heritage   │          │ Structure/Market │
+    ├──────────────┤          ├──────────────────┤
+    │ M2: Product  │          │ M4: Sustainability│
+    │ Design       │          │ & Manufacturing  │
+    └──────────────┘          └──────────────────┘
+
+  Wave 1 (cont): Sequential
+    ┌─────────────────────────┐
+    │ M5: Brand Culture &     │
+    │     Social Impact       │
+    └─────────────────────────┘
+
+  Wave 2: Synthesis
+    [Cross-Module Integration] ──> [Structural Fitness Analysis]
+
+  Wave 3: Publication + Verification
+    [Document Assembly] ──> [Source Audit] ──> [Final Review]
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins \& Heritage}
+
+Founding narrative (1967), the Pletz/Lewis/Yowell triad, Seattle/PNW outdoor culture context, the Aluminum Company of America design contest, early hand-sewn production above the transmission shop, the University of Washington bookstore connection, the Mount Rainier annual climb tradition, K2 acquisition (1972), and the departure of Murray Pletz. This module establishes the DNA that all subsequent brand decisions either honored or deviated from.
+
+\subsubsection{Module 2: Product Design \& Innovation}
+
+The evolution from external-frame hiking packs to the panel-loading daypack revolution, the SuperBreak's design philosophy and its status as the best-selling backpack in American history, the 1975 convertible travel pack, dome tents and sleeping bags, the Adaptive Collection (2023) for wheelchair users, the Right Pack and Big Student line extensions, materials science (600D polyester, Cordura fabrics), and the lifetime warranty as a design commitment rather than a marketing tactic.
+
+\subsubsection{Module 3: Corporate Structure \& Market Position}
+
+Ownership timeline (founders $\rightarrow$ K2/Cummins 1972 $\rightarrow$ Blue Bell/Downers 1983 $\rightarrow$ VF Corporation 1986), the Eastpak acquisition (2000), VF Corporation's outdoor portfolio strategy (JanSport + The North Face + Eastpak + Timberland + Supreme), market share analysis (approximately 50\% of US small backpack market with TNF), the L2 Brands collegiate partnership (February 2025), revenue benchmarks, competitive landscape (Herschel, Fjällräven, Nike, Adidas), and the back-to-school revenue concentration (60--70\% of annual sales).
+
+\subsubsection{Module 4: Sustainability \& Manufacturing}
+
+The Recycled SuperBreak (2020, first 100\% recycled fabric backpack), Cordura ECO Fabric (post-consumer recycled PET), solar-powered manufacturing facilities, PVC-free product line, the Surplus Ski n' Hike collection (100\% excess materials), Global Recycled Standard certification, bluesign-certified fabrics, VF Corporation's circular economy 2030 targets, supply chain transparency (public factory lists spanning 30+ countries), Fair Labor Association compliance, and the warranty-repair program (100,000+ packs repaired since 2019).
+
+\subsubsection{Module 5: Brand Culture \& Social Impact}
+
+The \#LightenTheLoad mental health campaign (launched May 2020), partnerships with licensed therapists and the Teenager Therapy podcast, Gen Z consumer psychology research (APA stress data, Pew anxiety data), the Instagram Live and TikTok strategy, documentary film series on youth mental health, World Central Kitchen backpack donations, brand positioning evolution from ``outdoor gear company'' to ``trusted life companion,'' pop culture presence (TV, music references), the Adaptive Collection as inclusivity strategy, and the ``Always With You'' brand platform.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: jansport-deep-research
+  activation: squadron
+  models:
+    opus:   30%  # Synthesis, cross-module analysis, brand fitness theory
+    sonnet: 60%  # Survey compilation, source validation, data tables
+    haiku:  10%  # Schema scaffolding, template generation
+  parallel_tracks: 2
+  waves: 4
+  estimated_windows: 18
+  estimated_sessions: 4
+  cache_strategy: 5-minute-ttl-exploitation
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[nosep]
+  \item Complete founding narrative and ownership history through 2026
+  \item Product design evolution with emphasis on SuperBreak lineage
+  \item VF Corporation portfolio context and market share analysis
+  \item Sustainability initiatives with quantitative data and certifications
+  \item \#LightenTheLoad campaign analysis with engagement metrics
+  \item Competitive landscape within US backpack market
+  \item L2 Brands collegiate partnership and recent strategic moves
+  \item Lifetime warranty economics and brand trust implications
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[nosep]
+  \item Detailed financial modeling of VF Corporation (parent-level financials beyond context)
+  \item International market analysis beyond US (European/Asian operations mentioned but not deep-dived)
+  \item Patent portfolio analysis
+  \item Individual product reviews or consumer satisfaction surveys
+  \item Comparison with technical mountaineering/climbing pack market (Osprey, Gregory, etc.)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Complete founding timeline with all three co-founders documented and sourced
+  \item Ownership chain traced through all four corporate transitions with dates and deal values
+  \item SuperBreak design evolution documented from 1975 University Bookstore Rucksack to current recycled version
+  \item Market share data sourced from at least two independent references
+  \item Sustainability claims verified against third-party certifications (Global Recycled Standard, bluesign)
+  \item \#LightenTheLoad campaign analyzed with specific engagement metrics and partner organizations
+  \item Competitive landscape maps JanSport against at least four named competitors
+  \item Manufacturing footprint documented with geographic scope and labor compliance references
+  \item Adaptive Collection documented as case study in inclusive design
+  \item L2 Brands partnership terms and strategic rationale analyzed
+  \item Cross-module synthesis produces original ``structural brand fitness'' analysis
+  \item All quantitative claims attributed to specific named sources
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Ecosystem Field Guide & Provides execution methodology for this mission & Upstream \\
+Amiga Vision: Architectural Leverage & Structural fitness concept parallels Amiga Principle & Conceptual \\
+Fox Infrastructure Group Plan & Supply chain analysis patterns applicable to manufacturing module & Pattern \\
+Skill Creator Analysis & Research module decomposition follows skill-creator wave patterns & Structural \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+JanSport is, at its core, a story about the spaces between. Between a sewing machine and a mountain. Between a garage and a global supply chain. Between a hiking daypack and a cultural icon. The SuperBreak endures not because it was engineered to dominate but because it was designed to \textit{fit} --- structurally, economically, culturally --- into the life of anyone who needed to carry something from one place to another.
+
+This is the Amiga Principle applied to consumer goods: architectural elegance over brute-force feature escalation. The SuperBreak has one compartment, padded straps, and a front pocket. It costs less than a textbook. It comes with a lifetime warranty. That is not simplicity for its own sake; it is the result of a design so resolved that adding features would subtract value. The research that follows asks whether that structural fitness can survive the pressures of corporate consolidation, sustainability mandates, and generational identity shifts --- or whether, like so many enduring designs, it will eventually be loved to death by the very forces trying to preserve it.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{JanSport --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authoritative sources on JanSport's history, market position, product evolution, sustainability practices, and cultural impact. Each module corresponds to a research track in the mission execution plan. Key source organizations include:
+
+\begin{itemize}[nosep]
+  \item \textbf{VF Corporation} --- Parent company SEC filings, sustainability reports, public factory disclosures
+  \item \textbf{FundingUniverse / Encyclopedia.com} --- Corporate history compilations from \textit{International Directory of Company Histories}
+  \item \textbf{American Psychological Association} --- Gen Z stress and mental health data cited in \#LightenTheLoad
+  \item \textbf{Pew Research Center} --- Teen anxiety and social media usage data
+  \item \textbf{Sustainable Apparel Coalition} --- Higg Materials Sustainability Index methodology
+  \item \textbf{Global Recycled Standard} --- Third-party recycled content certification
+  \item \textbf{The Seattle Times} --- Regional journalism on founding history
+  \item \textbf{PR Newswire / Business Wire} --- Official JanSport press releases
+\end{itemize}
+
+\subsection{Module 1: Origins \& Heritage Reference}
+
+\subsubsection{Founding Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} \\
+\midrule
+1966 & Murray Pletz purchases a \$180 sewing machine for girlfriend Jan Lewis to sew a prototype aluminum flexible-frame backpack \\
+1966 & Pletz enters the Aluminum Company of America (Alcoa) design contest and wins \\
+1967 & JanSport founded in Seattle, WA by Murray Pletz, Jan Lewis, and Skip Yowell (Pletz's cousin). Operations begin above Norman Pletz's transmission shop on Aurora Avenue \\
+1967 & Early production: 1--3 packs per day, entirely hand-sewn \\
+1970 & University of Washington bookstore manager advises Lewis and Pletz on adapting a hiking daypack for students carrying books \\
+1971 & Distribution facility established in Everett, WA. ``Guaranteed for Life'' warranty introduced \\
+1972 & K2 Corporation (owned by Cummins Engine Company) acquires JanSport. Annual Mount Rainier group climb tradition begins \\
+1973 & Dome tent introduced to market \\
+1974 & Mummy sleeping bag developed after a cross-country ski trip where founders slept outside in buffalo fur coats \\
+1975 & Panel-loading daypack (precursor to SuperBreak) and first convertible travel pack introduced \\
+1978 & Jim Whittaker climbs K2 using JanSport's Alpine Phantom pack \\
+1979 & Jan Lewis and Murray Pletz (now McCrory) divorce; Pletz leaves, Lewis and Yowell continue \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The University Bookstore Rucksack}
+
+The product that would become the SuperBreak originated as a collaboration between JanSport and the University of Washington Book Store. In approximately 1970, Lewis and Pletz --- both former UW students --- consulted with the bookstore manager about adapting one of their nylon hiking daypacks for student use. The manager recommended reinforcing the bag and adjusting dimensions to accommodate books. The resulting product, initially known as the ``University Bookstore Rucksack,'' spread to college campuses across the country. The New York Times later described its descendant, the SuperBreak, as ``iconic.'' As of 2024, a plaque commemorating this origin story had reportedly gone missing from the University Book Store.
+
+Source: KIRO Newsradio / The Seattle Times (November 2024, December 2024).
+
+\subsubsection{The Mount Rainier Tradition}
+
+Beginning in 1972, JanSport co-founder Skip Yowell established an annual group climb of Mount Rainier to field-test equipment. By 2018, this had become the longest consecutive annual group climb on record --- 46 years --- with teams of 16 including employees, retailers, international distributors, nonprofit partners, and media. The tradition reflects the brand's founding ethos: products tested in the conditions they were designed for.
+
+Source: Wikipedia / JanSport corporate history.
+
+\subsubsection{Founder Legacy}
+
+Murray Pletz (later Murray McCrory) died on October 7, 2024. Jan Lewis (later Jan Peterson, now Jan Lewis again) remains active as the brand's living co-founder. Skip Yowell served as Vice President of Global Public Relations until his retirement. Murray and Jan's children --- including daughter McCrory Van Brost and son Jeremy Murray McCrory --- have spoken publicly about growing up steeped in the company's culture of adventure.
+
+Source: The Seattle Times (December 2024).
+
+\subsection{Module 2: Product Design \& Innovation Reference}
+
+\subsubsection{The SuperBreak Lineage}
+
+The SuperBreak represents one of the longest-running unchanged consumer product designs in the American market. Key specifications of the current SuperBreak One:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Specification} & \tableheader{Detail} \\
+\midrule
+Materials & 100\% Recycled 600 Denier Polyester main body fabric \\
+Capacity & 25.3 liters \\
+Dimensions & 17 $\times$ 12.5 $\times$ 6 inches \\
+Compartments & One main, one front utility pocket with organizer, side water bottle pocket \\
+Comfort features & Straight-cut padded shoulder straps, 2/3 padded back panel, web haul handle \\
+Properties & Abrasion-resistant, water-repellent (exceeds industry standard) \\
+Warranty & Limited Lifetime --- repair or replace, no questions asked \\
+Price range & Approximately \$35--\$50 retail \\
+Colors/prints & 30+ options per season \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Source: JanSport.com product pages, Amazon product listings.
+
+\subsubsection{Product Line Extensions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Product} & \tableheader{Differentiation} & \tableheader{Capacity} \\
+\midrule
+SuperBreak Plus & Adds padded 15'' laptop sleeve, integrated bottle pocket & 25+ L \\
+Right Pack & Suede leather bottom, 915D Cordura body, laptop sleeve & 31 L \\
+Big Student & Two main compartments, larger capacity for heavy loads & 34 L \\
+Draw Sack & Drawstring closure, casual/fashion positioning & varies \\
+SuperBreak LS & Rugged variant, contemporary colorways & 25 L \\
+Venture Pack System & Travel category entry (announced 2025) & varies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Adaptive Collection (2023)}
+
+In January 2023, JanSport introduced the Adaptive Collection: backpacks designed specifically for individuals using wheelchairs. Features include hassle-free adjustable loops, anchor straps for customization, an adjustable top handle with slide-release buckle for headrest attachment, and an easy-access front panel. JanSport stated this addressed a gap in the market --- no major backpack brand had previously offered a wheelchair-specific pack.
+
+Source: PowerReviews case study / JanSport press materials.
+
+\subsubsection{Lifetime Warranty Economics}
+
+JanSport's lifetime warranty (``if a JanSport product fails, we'll fix or replace it'') functions as both a quality signal and a circular-economy mechanism. Since 2019, the warranty program has repaired over 100,000 backpacks, extending product lifecycles and reducing landfill waste. The warranty creates a durable trust relationship: consumers report that the warranty is a primary purchase driver, and the repair program provides ongoing brand touchpoints post-sale.
+
+Source: JanSport sustainability page, Global Factory analysis.
+
+\subsection{Module 3: Corporate Structure \& Market Position Reference}
+
+\subsubsection{Ownership Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Year} & \tableheader{Owner} & \tableheader{Context} \\
+\midrule
+1967 & Founders (Pletz, Lewis, Yowell) & Garage startup, Seattle \\
+1972 & K2 Corporation / Cummins Engine & K2 diversifying into leisure goods; JanSport moves to Everett, WA \\
+1983 & Blue Bell (Downers) & K2 divests; Blue Bell takes JanSport name for corporate entity \\
+1986 & VF Corporation & VF acquires Blue Bell for \$775 million; gains JanSport, doubles VF's size \\
+2000 & VF Corporation (expanded) & VF acquires Eastpak (\$90M sales, 6\% market share, European focus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{VF Corporation Portfolio Context}
+
+VF Corporation (NYSE: VFC) is one of the world's largest apparel companies. Its outdoor/active segment includes JanSport, The North Face, Eastpak, Timberland, Napapijri, and Supreme. JanSport's corporate headquarters is in Alameda, California, at VF Outdoor headquarters, where it shares offices with The North Face and Napapijri. An apparel warehouse in Appleton, Wisconsin houses the collegiate division. The Everett, Washington distribution facility --- operational since 1971 --- closed in March 2012.
+
+Source: VF Corporation public filings, Encyclopedia.com, Wikipedia.
+
+\subsubsection{Market Share Data}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{6cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Metric} & \tableheader{Data} \\
+\midrule
+JanSport global position & World's largest backpack maker (by volume) \\
+US small backpack share (JanSport + TNF) & Approximately 50\% of all small backpacks sold in the US \\
+VF Corporation US backpack share (2015) & Estimated 55\% across all VF brands \\
+Revenue (2004 est.) & \$300 million (estimated, per Encyclopedia.com) \\
+Employees (est.) & 800 (as of mid-2000s reference) \\
+Back-to-school concentration & 60--70\% of annual product sales during BTS season \\
+Key milestone & Millionth daypack sold in 1985; \$25M annual sales that year \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Source: Wikipedia, Encyclopedia.com/FundingUniverse (\textit{International Directory of Company Histories}), Backpack Brands analysis.
+
+\subsubsection{L2 Brands Collegiate Partnership (February 2025)}
+
+JanSport announced a strategic partnership with L2 Brands to expand collegiate offerings. Phase one (July 2025): signature backpack styles (Big Student, SuperBreak Plus, Right Pack, Draw Sack) customized with official university branding for sale in university bookstores. Phase two: co-branded collegiate apparel collection (details TBA). Alexandra Reveles, VP of Global Brand, stated the partnership deepens JanSport's generational connection to the college experience.
+
+Source: PR Newswire (February 27, 2025).
+
+\subsection{Module 4: Sustainability \& Manufacturing Reference}
+
+\subsubsection{Recycled Materials Program}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Initiative} & \tableheader{Detail} \\
+\midrule
+Recycled SuperBreak (2020) & First JanSport pack with 100\% recycled fabric; uses 900D Cordura ECO Fabric from post-consumer waste (plastic bottles) \\
+Per-pack impact & Each Recycled SuperBreak contains equivalent of 20 plastic water bottles of recycled material \\
+Seasonal scope & 80\% of styles now use recycled main body fabric; 100\% recycled main body and lining materials \\
+Cumulative impact & Equivalent of 236 million plastic bottles kept from landfills through recycled fabric use \\
+Water savings & 1 million gallons saved using undyed 100\% recycled polyester lining \\
+Certifications & Global Recycled Standard (GRS) on recycled polyester and nylon; bluesign-certified fabrics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Source: JanSport sustainability pages, PR Newswire (April 2020, April 2021).
+
+\subsubsection{Manufacturing Practices}
+
+All JanSport products are designed to be PVC-free. Solar power systems provide renewable energy for manufacturing facilities. Solvent-free PU coating is used in production of recycled lines, reducing hazardous chemical use. Packaging uses 100\% FSC-certified recycled paper for hangtags, eco-friendly vegetable ink, and water-based varnish. JanSport saved an estimated 1,338 trees annually through recycled packaging. VF Corporation publishes a full list of manufacturing and processing facilities (spanning Albania, Bangladesh, Cambodia, China, Colombia, India, Indonesia, Vietnam, and 20+ additional countries).
+
+Source: JanSport sustainability pages, Panaprium analysis, Textile World.
+
+\subsubsection{Surplus Ski n' Hike Collection (2021)}
+
+A limited-edition backpack collection made entirely from excess factory materials --- including fabric, lining, ladder locks, and zipper pulls. Every component derived from pre-existing factory surplus that would otherwise have been discarded. Available in Vintage Pink, Red Tape, and Forge Grey. This collection operationalized JanSport's circular economy ambitions by creating a commercial product from waste streams.
+
+Source: PR Newswire (April 2021), Textile World.
+
+\subsubsection{VF Corporation Sustainability Targets}
+
+VF Corporation has committed to being a leader in circular business models by 2030, with science-based greenhouse gas reduction targets aligned with the Paris Agreement. The 2020 Fashion Transparency Index scored VF Corporation at 59\%, placing it 7th among the most transparent fashion brands globally. JanSport's sustainability efforts operate within this corporate framework.
+
+Source: Panaprium analysis, VF Corporation sustainability reports.
+
+\subsection{Module 5: Brand Culture \& Social Impact Reference}
+
+\subsubsection{\#LightenTheLoad Campaign}
+
+Launched May 2020 during Mental Health Awareness Month, \#LightenTheLoad was created to connect Generation Z with mental health resources. The campaign was motivated by research showing that 7 out of 10 young people reported mental health issues weighing them down, only half of Gen Z felt they adequately manage stress (APA, 2018), and 29\% of teens reported feeling anxious or nervous every day or almost every day (Pew Research, 2019).
+
+\textbf{Campaign components:}
+
+\begin{itemize}[nosep]
+  \item Weekly Instagram Live sessions with licensed therapists (Nedra Tawwab, Matthew Dempsey, Whitney Goodman) covering isolation, LGBTQ+ mental wellness, racism, identity
+  \item Original documentary film series featuring real young people (not actors) sharing mental health journeys
+  \item TikTok hashtag challenge driving donations of 10,000 backpacks to World Central Kitchen
+  \item Partnership with Teenager Therapy podcast (2021) for Twitch ``Comfort Calls'' during Mental Health Awareness Month
+  \item Resource partnerships with Do Something, Active Minds, and The Trevor Project
+\end{itemize}
+
+The campaign was described by JanSport marketing leadership as generating ``unprecedented engagement'' between Gen Z and the brand.
+
+Source: PR Newswire (May 2020, July 2020, May 2021), Marketing Dive, Adweek.
+
+\subsubsection{Gen Z Consumer Strategy}
+
+JanSport's target consumer is primarily Generation Z, and the brand has aligned its strategy around documented Gen Z values: authenticity, social responsibility, mental health awareness, sustainability, and self-expression. Key strategic moves include the \#LightenTheLoad campaign, the Recycled SuperBreak, the Adaptive Collection, and the ``Always With You'' brand platform. The brand worked with Los Angeles-based agency Haymaker and Ruby Pseudo (founded by former Nike Consumer Insights manager Jenny Owen) to ensure tonal authenticity with Gen Z.
+
+Source: PR Newswire, Marketing Dive, Total Retail Talks podcast (episode 433, 2024).
+
+\subsubsection{Pop Culture Presence}
+
+JanSport has appeared in television shows including \textit{Unbreakable Kimmy Schmidt}, inspired drag performer Jan Sport, and was referenced in the February 2025 Sparks single ``JanSport Backpack'' from the album \textit{Mad!}. The brand's ubiquity in American schools has made it a cultural shorthand for the student experience.
+
+Source: Wikipedia, The Seattle Times.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Level} & \tableheader{Handling} \\
+\midrule
+Mental health data (Gen Z) & Sensitive & All statistics attributed to APA or Pew Research; no individual stories reproduced \\
+Supply chain labor & Sensitive & Reference VF Corp's public disclosures and Fair Labor Association; no unverified claims \\
+Sustainability claims & Verify & Cross-reference brand claims against third-party certifications (GRS, bluesign) \\
+Founder personal history & Respect & Divorce noted as business transition; no personal commentary \\
+Market share figures & Verify & Multiple independent sources required; note estimation uncertainty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Corporate \& Industry Sources}
+\begin{itemize}[nosep]
+  \item JanSport official website --- \url{https://www.jansport.com}
+  \item VF Corporation --- public filings, sustainability reports, factory disclosure lists
+  \item \textit{International Directory of Company Histories} --- FundingUniverse / Encyclopedia.com
+  \item PR Newswire --- JanSport press releases (2020--2025)
+\end{itemize}
+
+\subsubsection{Journalism \& Analysis}
+\begin{itemize}[nosep]
+  \item The Seattle Times --- ``How JanSport got its start'' (December 2024)
+  \item KIRO Newsradio --- ``Forgotten Seattle origins of the JanSport school backpack'' (November 2024)
+  \item Marketing Dive --- ``JanSport's \#LightenTheLoad push supports Gen Z mental health'' (July 2020)
+  \item Adweek --- ``JanSport's Back-to-School Plan: Mental Health Tools'' (July 2020)
+  \item Textile World --- Surplus materials collection coverage (April 2021)
+\end{itemize}
+
+\subsubsection{Research \& Standards Organizations}
+\begin{itemize}[nosep]
+  \item American Psychological Association --- \textit{Stress in America: Generation Z} (October 2018)
+  \item Pew Research Center --- Teen depression and anxiety studies (2019)
+  \item Sustainable Apparel Coalition --- Higg Materials Sustainability Index v3.3
+  \item Global Recycled Standard --- Recycled content certification
+  \item bluesign --- Chemical and environmental process certification
+  \item Fashion Transparency Index (2020) --- VF Corporation ranking
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on JanSport that examines the brand across five integrated dimensions: founding heritage, product design philosophy, corporate structure and market position, sustainability transformation, and cultural/social impact strategy. The final deliverable will serve as both a standalone reference work and a case study in structural brand fitness applicable to GSD ecosystem analysis.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  ┌─────────────────────────────────────────────┐
+  │           WAVE 0: FOUNDATION                │
+  │  [Schema] ──> [Source Index] ──> [Templates] │
+  ├─────────────────────────────────────────────┤
+  │           WAVE 1: PARALLEL RESEARCH          │
+  │  Track A              │  Track B             │
+  │  M1: Origins          │  M3: Corporate       │
+  │  M2: Product Design   │  M4: Sustainability  │
+  │         M5: Brand Culture (sequential)       │
+  ├─────────────────────────────────────────────┤
+  │           WAVE 2: SYNTHESIS                  │
+  │  [Cross-Module] ──> [Fitness Analysis]       │
+  ├─────────────────────────────────────────────┤
+  │           WAVE 3: PUBLICATION                │
+  │  [Assembly] ──> [Audit] ──> [Final Review]   │
+  └─────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[nosep]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, citation templates
+  \item \textbf{Research Layer} --- Five parallel/sequential research modules with independent source validation
+  \item \textbf{Synthesis Layer} --- Cross-module integration producing original structural fitness analysis
+  \item \textbf{Publication Layer} --- Document assembly, verification matrix execution, final output
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+D1 & Origins \& Heritage Survey & Complete 1966--1979 timeline, all three founders, PNW context & M1 spec \\
+D2 & Product Design Analysis & SuperBreak lineage, Adaptive Collection, warranty economics & M2 spec \\
+D3 & Corporate \& Market Report & Full ownership chain, market share with sources, L2 partnership & M3 spec \\
+D4 & Sustainability Assessment & Quantitative recycling data, certifications verified, supply chain scope & M4 spec \\
+D5 & Brand Culture Analysis & \#LightenTheLoad with metrics, Gen Z strategy, pop culture & M5 spec \\
+D6 & Structural Fitness Synthesis & Cross-module integration, original analytical framework & Synthesis spec \\
+D7 & Final Publication & Compiled document, source audit clean, verification matrix complete & Publication spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Shared Schema & None & Haiku & 2,000 \\
+W0: Source Index & None & Haiku & 3,000 \\
+W1-A: M1 Origins & Schema, Sources & Sonnet & 12,000 \\
+W1-A: M2 Product & Schema, Sources & Sonnet & 12,000 \\
+W1-B: M3 Corporate & Schema, Sources & Sonnet & 10,000 \\
+W1-B: M4 Sustainability & Schema, Sources & Sonnet & 10,000 \\
+W1-C: M5 Brand Culture & Schema, Sources & Opus & 12,000 \\
+W2: Synthesis & M1--M5 complete & Opus & 15,000 \\
+W3: Assembly & Synthesis & Sonnet & 8,000 \\
+W3: Source Audit & Assembly & Sonnet & 5,000 \\
+W3: Final Review & Audit clean & Opus & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & M5 Brand Culture (judgment-intensive), Synthesis (cross-module integration), Final Review (quality gate) \\
+Sonnet & 60\% & M1--M4 surveys, Assembly, Source Audit (structured compilation, verification) \\
+Haiku & 10\% & Shared Schema, Source Index, Templates (scaffolding) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Models} \\
+\midrule
+0 & Foundation & Sequential & 2 & Haiku \\
+1 & Research & Parallel (2 tracks) & 8 & Sonnet + Opus \\
+2 & Synthesis & Sequential & 4 & Opus \\
+3 & Publication & Sequential & 4 & Sonnet + Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0.1 & Define shared schema & Haiku & JSON schema for citations, findings, cross-references \\
+0.2 & Build source index & Haiku & Indexed catalog of all sources with reliability ratings \\
+0.3 & Generate templates & Haiku & Section templates for each module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A (Origins \& Product):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1.1 & M1: Origins survey & Sonnet & Founding timeline, co-founder profiles, PNW context \\
+1.2 & M2: Product analysis & Sonnet & SuperBreak lineage, Adaptive Collection, warranty analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Corporate \& Sustainability):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1.3 & M3: Corporate survey & Sonnet & Ownership chain, market data, L2 partnership, competitive map \\
+1.4 & M4: Sustainability & Sonnet & Recycling data, certifications, supply chain, circular economy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Sequential (Brand Culture --- requires M1--M4 context awareness):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1.5 & M5: Brand culture & Opus & \#LightenTheLoad analysis, Gen Z strategy, cultural impact \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+2.1 & Cross-module mapping & Opus & Relationship matrix between all five modules \\
+2.2 & Structural fitness analysis & Opus & Original analytical framework: why the SuperBreak endures \\
+2.3 & Contradiction resolution & Opus & Reconcile conflicting market data, assess sustainability claims \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+3.1 & Document assembly & Sonnet & Compiled research document with all modules integrated \\
+3.2 & Source audit & Sonnet & Every claim verified against source index; gaps flagged \\
+3.3 & Verification matrix & Sonnet & All success criteria mapped to evidence \\
+3.4 & Final review & Opus & Quality gate: coherence, accuracy, completeness check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+  \item Exploit 5-minute cache TTL by batching Wave 1 Track A tasks within a single session
+  \item Source index (W0) stays in cache for entire Wave 1 --- all modules reference it without re-fetch
+  \item M5 (Brand Culture) scheduled after M1--M4 to benefit from cached cross-module context
+  \item Synthesis (W2) designed for single-session execution to maintain full context
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & --- & --- & 5,000 \\
+Wave 1 & 12,000 & 44,000 & --- \\
+Wave 2 & 15,000 & --- & --- \\
+Wave 3 & 5,000 & 13,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{32,000} & \textbf{57,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} approximately 94,000 tokens across 18 context windows in 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  [W0.1 Schema] ──┐
+  [W0.2 Sources]──┤
+  [W0.3 Templates]┘
+         │
+    ┌────┴────┐
+    │         │
+    ▼         ▼
+  [W1.1 M1] [W1.3 M3]    (Parallel)
+  [W1.2 M2] [W1.4 M4]    (Parallel)
+    │         │
+    └────┬────┘
+         │
+         ▼
+  [W1.5 M5]               (Sequential -- needs M1-M4 context)
+         │
+         ▼
+  [W2.1 Cross-map]
+  [W2.2 Fitness Analysis]  (Sequential)
+  [W2.3 Contradictions]
+         │
+         ▼
+  [W3.1 Assembly]
+  [W3.2 Source Audit]       (Sequential)
+  [W3.3 Verification]
+  [W3.4 Final Review]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to corporate filings, established journalism, or peer-reviewed research. Zero entertainment media or unverified blogs. \\
+SC-NUM & Numerical attribution & Every market share figure, revenue estimate, or recycling statistic attributed to specific named source \\
+SC-ADV & No policy advocacy & Document presents brand strategy analysis without advocating for or against specific regulatory positions \\
+SC-MH & Mental health sensitivity & Gen Z mental health data cited from APA/Pew only; no individual stories reproduced without consent documentation \\
+SC-FIN & Financial data accuracy & Revenue and market share estimates clearly marked as estimates where sourcing is indirect \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Founding timeline completeness & All three co-founders named, 1966--1979 events sourced \\
+CF-02 & Co-founder profiles & Murray Pletz, Jan Lewis, Skip Yowell each individually documented \\
+CF-03 & Ownership chain & All four transitions with dates and deal context \\
+CF-04 & SuperBreak lineage & UW Bookstore Rucksack $\rightarrow$ daypack $\rightarrow$ SuperBreak $\rightarrow$ Recycled SuperBreak \\
+CF-05 & Product line breadth & At least 5 distinct product lines documented \\
+CF-06 & Adaptive Collection & Wheelchair-specific design features enumerated \\
+CF-07 & Market share data & At least 2 independent sources cited \\
+CF-08 & Competitive landscape & At least 4 named competitors mapped \\
+CF-09 & Recycling quantitative data & Plastic bottle equivalents, water savings, and percentage targets sourced \\
+CF-10 & Certification verification & GRS and bluesign certifications confirmed \\
+CF-11 & \#LightenTheLoad components & At least 4 campaign elements documented with dates \\
+CF-12 & Gen Z research data & APA and Pew statistics cited with publication years \\
+CF-13 & L2 partnership terms & Partnership scope, timeline, and product lines documented \\
+CF-14 & Warranty program data & Repair count and lifetime warranty terms documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Heritage $\rightarrow$ Design cascade & Founding outdoor culture traced to product philosophy \\
+IN-02 & Corporate $\rightarrow$ Sustainability cascade & VF ownership linked to supply chain scope and targets \\
+IN-03 & Design $\rightarrow$ Culture cascade & SuperBreak ubiquity connected to cultural icon status \\
+IN-04 & Cross-module consistency & Market share, revenue, and timeline data consistent across modules \\
+IN-05 & Self-containment & Document readable without prior JanSport knowledge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{bordergray}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Conflicting market data & Where sources disagree on market share, both cited with uncertainty noted \\
+EC-02 & Sustainability claim gaps & Areas where brand claims lack third-party verification flagged \\
+EC-03 & Data currency & Most sources within last 5 years; older sources noted as historical \\
+EC-04 & Founder narrative gaps & Where accounts differ (cousin vs.\ father as third co-founder), discrepancy noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Complete founding timeline & CF-01, CF-02 & Pending \\
+2 & Ownership chain traced & CF-03 & Pending \\
+3 & SuperBreak evolution & CF-04 & Pending \\
+4 & Market share sourced & CF-07, SC-NUM & Pending \\
+5 & Sustainability verified & CF-09, CF-10, SC-SRC & Pending \\
+6 & \#LightenTheLoad analyzed & CF-11, CF-12, SC-MH & Pending \\
+7 & Competitive landscape & CF-08 & Pending \\
+8 & Manufacturing documented & CF-09, CF-10, IN-02 & Pending \\
+9 & Adaptive Collection & CF-06 & Pending \\
+10 & L2 partnership & CF-13 & Pending \\
+11 & Structural fitness synthesis & IN-01, IN-03, IN-05 & Pending \\
+12 & All claims attributed & SC-SRC, SC-NUM, SC-FIN & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache TTL management \\
+SCOUT & Research Agent & Source gathering; web research; evidence compilation \\
+EXEC-A & Executor (Track A) & M1 Origins + M2 Product document production \\
+EXEC-B & Executor (Track B) & M3 Corporate + M4 Sustainability document production \\
+CRAFT-BRAND & Brand Specialist & M5 Brand Culture analysis; \#LightenTheLoad campaign deep dive \\
+CRAFT-MARKET & Market Analyst & Competitive landscape; market share validation; VF portfolio context \\
+VERIFY & Verification & Source validation; numerical accuracy checking; certification confirmation \\
+INTEG & Integration Agent & Cross-module relationship validation; consistency checking \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope refinement \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone progress summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (A: Origins/Product, B: Corporate/Sustainability) \\
+Waves & 4 (Foundation, Research, Synthesis, Publication) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Model Split & Opus 34\% / Sonnet 61\% / Haiku 5\% \\
+Total Token Budget & ${\sim}$94,000 \\
+Safety-Critical Tests & 5 (all mandatory-pass / BLOCK) \\
+Core Tests & 14 \\
+Integration Tests & 5 \\
+Edge Case Tests & 4 \\
+Total Tests & 28 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``Our packs are hyper-durable, and less likely to end up in a landfill. Also, the majority of our packs are guaranteed for life, so if a JanSport product fails, we'll fix or replace it.''}
+
+\vspace{0.3em}
+
+\hfill --- Roger Spatz, President, JanSport
+
+\vspace{0.8em}
+
+The SuperBreak endures because it was designed for the spaces between --- between home and school, between ambition and budget, between disposability and permanence. That is the architectural lesson: fitness is not about features. It is about fit.
+\end{quotebox}
+
+\end{document}
