@@ -1,0 +1,71 @@
+/* LNV -- Larry Niven: Hard Science Fiction's Premier Worldbuilder
+ * Theme: Deep space -- midnight blue with stellar gold
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --space-deep: #0D1B2A;
+  --space: #1B2838;
+  --space-mid: #1B3A5C;
+  --stellar-gold: #E8B931;
+  --stellar-gold-light: #F5D76E;
+  --stellar-gold-dim: #B8941F;
+  --nebula: #3A506B;
+  --starfield: #5BC0BE;
+  --dust: #C9D6DF;
+  --void: #0B1420;
+
+  /* Semantic overrides */
+  --page-bg: #F0F2F5;
+  --page-text: #0D1B2A;
+  --page-text-light: #3A506B;
+  --link: var(--space-mid);
+  --card-border: var(--dust);
+  --border: var(--dust);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--void) 0%, var(--space-deep) 30%, var(--space) 60%, var(--space-mid) 100%);
+  border-bottom: 4px solid var(--stellar-gold);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--space-deep); border-bottom-color: var(--dust); }
+h3 { color: var(--space-mid); }
+th { background: var(--space-deep); }
+td { border-bottom-color: var(--dust); }
+tr:nth-child(even) { background: rgba(13, 27, 42, 0.04); }
+tr:hover { background: rgba(13, 27, 42, 0.08); }
+blockquote { border-left-color: var(--stellar-gold); background: rgba(232, 185, 49, 0.06); }
+code { background: var(--dust); }
+pre { background: var(--void); color: #C9D6DF; }
+.stat-value { color: var(--space-deep); }
+
+/* -- Tags -- */
+.tag-biography { background: #FFF8E1; color: #B8941F; }
+.tag-universe { background: #E8EAF6; color: #283593; }
+.tag-ringworld { background: #E0F7FA; color: #00695C; }
+.tag-works { background: #F3E5F5; color: #6A1B9A; }
+.tag-philosophy { background: #FBE9E7; color: #BF360C; }
+.tag-collaborations { background: #E8F5E9; color: #2E7D32; }
+.tag-legacy { background: #E3F2FD; color: #1565C0; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: stellar motif -- */
+.stellar-motif {
+  background: linear-gradient(90deg, var(--space-deep), var(--stellar-gold), var(--space-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
