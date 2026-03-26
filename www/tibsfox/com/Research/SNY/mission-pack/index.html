@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonic Youth — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #F57F17;
+    --tertiary: #37474F;
+    --light-primary: #E8EAF6;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #283593 60%, var(--tertiary) 100%);
+    color: white; padding: 4rem 2rem; text-align: center;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.75rem; opacity: 0.8; }
+  .header h1 { font-size: 2.5rem; margin: 0.5rem 0 0.3rem; font-weight: 700; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--secondary); font-weight: 500; }
+  .header .tagline { font-style: italic; opacity: 0.7; margin-top: 0.5rem; font-size: 0.95rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--secondary);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 0.3rem; }
+  .card .meta { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  .contents li { margin: 0.4rem 0; font-size: 0.95rem; }
+  .contents li strong { color: var(--primary); }
+  ol { padding-left: 1.5rem; }
+  ol li { margin: 0.6rem 0; font-size: 0.95rem; }
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0;
+  }
+  .quote-box p { font-style: italic; }
+  .quote-box .attr { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; font-style: normal; }
+  code { font-family: 'DM Mono', 'DejaVu Sans Mono', monospace; background: var(--card-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  .footer { text-align: center; padding: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } .header h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>Sonic Youth</h1>
+  <div class="subtitle">The Space Between the Notes</div>
+  <div class="tagline">New York City, 1981–2011 · A Deep Research Study</div>
+</div>
+
+<div class="container">
+  <div class="cards">
+    <a class="card" href="sonic-youth-mission.pdf" download>
+      <h3>📄 Mission Package (PDF)</h3>
+      <div class="meta">25 pages · Three-stage pipeline · Ready for GSD Orchestrator</div>
+    </a>
+    <a class="card" href="sonic-youth-mission.tex" download>
+      <h3>📝 LaTeX Source (.tex)</h3>
+      <div class="meta">Editable source · XeLaTeX · DejaVu fonts</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents" style="list-style: none; padding: 0;">
+    <li><strong>Stage 1 — Vision Document:</strong> Narrative vision, 5-problem statement, 5 research modules (Origins & No Wave, Sonic Architecture, Discographic Arc, Visual Art Network, Legacy & Influence), chipset configuration, 12 success criteria, through-line connecting to the Amiga Principle</li>
+    <li><strong>Stage 2 — Research Reference:</strong> No wave origins (1978–1982), alternate tuning catalog (8+ tunings with properties), complete discography (16 albums + SYR series), visual art collaborations (Richter, Pettibon, Kelley, Prince), Nirvana pipeline, influence network, post-2011 survey through 2026, sourced bibliography</li>
+    <li><strong>Stage 3 — Mission Package:</strong> Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, 6 deliverables, 100K token budget (Opus 37% / Sonnet 58% / Haiku 5%), 28-test verification suite (5 safety-critical / BLOCK), dependency graph, cache optimization strategy</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Review the PDF for the complete three-stage pipeline</li>
+    <li>Feed to <code>gsd-skill-creator</code> via Claude Code for orchestrated execution</li>
+    <li>Wave 0 (Foundation) runs first; Wave 1 splits into two parallel research tracks</li>
+    <li>Wave 2 synthesizes cross-module connections; Wave 3 assembles and verifies the final document</li>
+    <li>CAPCOM gates at each wave boundary for human approval</li>
+  </ol>
+
+  <h2>Recompiling the LaTeX</h2>
+  <ol>
+    <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+    <li>Run three passes: <code>xelatex -interaction=nonstopmode sonic-youth-mission.tex</code> (×3)</li>
+    <li>Three passes resolve: table of contents, cross-references, page count, hyperlinks</li>
+  </ol>
+
+  <div class="quote-box">
+    <p>"The most genuine exploratory aspect of Sonic Youth, I felt, was in how a rock song could function outside traditional rock structure, even as it borrowed rock's established language."</p>
+    <div class="attr">— Thurston Moore, <em>Sonic Life</em></div>
+  </div>
+</div>
+
+<div class="footer">
+  GSD Ecosystem · Vision → Research → Mission · March 2026
+</div>
+</body>
+</html>
