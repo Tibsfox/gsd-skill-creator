@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading... — Electric Motors &amp; Generators</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+  <style>
+    .loading { text-align: center; padding: 4rem; color: var(--text-light); }
+    .md-content img { max-width: 100%; }
+    .md-content hr { border: none; border-top: 2px solid var(--mist); margin: 2rem 0; }
+    .toc { background: white; border: 1px solid var(--mist); border-radius: 6px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+    .toc h3 { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--primary); }
+    .toc ul { list-style: none; padding-left: 0; margin: 0; }
+    .toc li { margin: 0.2rem 0; font-size: 0.88rem; font-family: system-ui, sans-serif; }
+    .toc li a { color: var(--text); text-decoration: none; display: block; padding: 0.1rem 0.4rem; border-radius: 3px; transition: background 0.2s, color 0.2s; }
+    .toc li a:hover { color: var(--secondary); background: rgba(0,0,0,0.04); text-decoration: none; }
+    .toc li a.active { color: var(--secondary); background: rgba(0,0,0,0.08); font-weight: 600; }
+    .toc .depth-3 { padding-left: 1.2rem; }
+    .toc .depth-4 { padding-left: 2.4rem; font-size: 0.82rem; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .toc-search { width: 100%; padding: 0.35rem 0.5rem; margin-bottom: 0.5rem; border: 1px solid var(--mist); border-radius: 4px; font-size: 0.82rem; font-family: system-ui, sans-serif; outline: none; background: var(--cream); }
+    .toc-search:focus { border-color: var(--secondary); }
+    h2:hover .anchor, h3:hover .anchor { opacity: 1; }
+    .anchor { opacity: 0; margin-left: 0.3em; text-decoration: none; color: var(--text-light); transition: opacity 0.2s; font-weight: 400; font-size: 0.85em; }
+    .anchor:hover { color: var(--secondary); text-decoration: none; }
+    @media (min-width: 1024px) {
+      .page-grid { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
+      .page-grid .toc { position: sticky; top: 0; max-height: 100vh; overflow-y: auto; margin: 0; scrollbar-width: thin; }
+      .page-grid .toc::-webkit-scrollbar { width: 4px; }
+      .page-grid .toc::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 2px; }
+      .page-grid .md-body { min-width: 0; scroll-behavior: smooth; }
+    }
+  </style>
+</head>
+<body class="project-emg">
+  <header>
+    <h1>Electric Motors &amp; Generators</h1>
+    <div class="subtitle">Electromechanics &mdash; Motor Design &middot; Generator Systems &middot; Drive Controllers &middot; Efficiency</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="index.html" class="back-link">&larr; Back to overview</a>
+    <div id="content" class="md-content">
+      <div class="loading">Loading document...</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Electric Motors &amp; Generators &middot; gsd-skill-creator</p>
+  </footer>
+
+  <script>
+    function mdToHtml(md) {
+      let html = '';
+      const lines = md.split('\n');
+      let inList = false, inCode = false, listType = '', tableRows = [];
+      function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      function inlineFormat(text) {
+        text = text.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, t, u) {
+          if (u.endsWith('.md')) { return '<a href="page.html?doc=' + u.replace('.md','').replace(/.*\//,'') + '">' + t + '</a>'; }
+          return '<a href="' + u + '">' + t + '</a>';
+        });
+        text = text.replace(/ -- /g, ' &mdash; ');
+        return text;
+      }
+      function flushTable() {
+        if (!tableRows.length) return;
+        html += '<table>';
+        tableRows.forEach((row, i) => {
+          const cells = row.split('|').filter(c => c.trim() !== '');
+          if (i === 0) html += '<thead><tr>' + cells.map(c => '<th>' + inlineFormat(c.trim()) + '</th>').join('') + '</tr></thead><tbody>';
+          else if (i > 1) html += '<tr>' + cells.map(c => '<td>' + inlineFormat(c.trim()) + '</td>').join('') + '</tr>';
+        });
+        html += '</tbody></table>';
+        tableRows = [];
+      }
+      function closeList() { if (inList) { html += listType === 'ul' ? '</ul>' : '</ol>'; inList = false; } }
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (line.trim().startsWith('```')) { if (inCode) { html += '</pre>'; inCode = false; } else { closeList(); flushTable(); inCode = true; html += '<pre>'; } continue; }
+        if (inCode) { html += escHtml(line) + '\n'; continue; }
+        if (line.trim().startsWith('|') && line.trim().endsWith('|')) { closeList(); tableRows.push(line.trim()); if (i+1 >= lines.length || !(lines[i+1].trim().startsWith('|') && lines[i+1].trim().endsWith('|'))) flushTable(); continue; }
+        else if (tableRows.length) flushTable();
+        if (line.trim() === '') { closeList(); continue; }
+        const hm = line.match(/^(#{1,6})\s+(.*)/);
+        if (hm) { closeList(); const lv = hm[1].length; const id = hm[2].toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); html += '<h'+lv+' id="'+id+'">'+inlineFormat(hm[2])+'</h'+lv+'>'; continue; }
+        if (line.trim().match(/^[-*_]{3,}$/)) { closeList(); html += '<hr>'; continue; }
+        if (line.trim().startsWith('> ')) { closeList(); html += '<blockquote>'+inlineFormat(line.trim().substring(2))+'</blockquote>'; continue; }
+        if (line.trim().match(/^[-*]\s/)) { if (!inList||listType!=='ul'){closeList();html+='<ul>';inList=true;listType='ul';} html+='<li>'+inlineFormat(line.trim().replace(/^[-*]\s/,''))+'</li>'; continue; }
+        if (line.trim().match(/^\d+\.\s/)) { if (!inList||listType!=='ol'){closeList();html+='<ol>';inList=true;listType='ol';} html+='<li>'+inlineFormat(line.trim().replace(/^\d+\.\s/,''))+'</li>'; continue; }
+        closeList();
+        html += '<p>' + inlineFormat(line) + '</p>';
+      }
+      closeList(); flushTable(); if (inCode) html += '</pre>';
+      return html;
+    }
+    function buildToc(html) {
+      const headings = [], re = /<h([23])\s+id="([^"]*)">(.*?)<\/h[23]>/g;
+      let m; while ((m = re.exec(html)) !== null) headings.push({level:parseInt(m[1]),id:m[2],text:m[3].replace(/<[^>]+>/g,'')});
+      if (headings.length < 3) return '';
+      let toc = '<div class="toc"><h3>Contents</h3><input type="text" class="toc-search" placeholder="Filter sections..."><ul>';
+      headings.forEach(h => { toc += '<li class="depth-'+h.level+'"><a href="#'+h.id+'">'+h.text+'</a></li>'; });
+      return toc + '</ul></div>';
+    }
+    const params = new URLSearchParams(window.location.search);
+    const doc = params.get('doc') || '';
+    document.title = (doc || 'Document') + ' — Electric Motors &amp; Generators';
+    fetch('research/' + doc + '.md')
+      .then(r => { if (!r.ok) throw new Error('Document not found'); return r.text(); })
+      .then(md => { const html = mdToHtml(md); document.getElementById('content').innerHTML = buildToc(html) + html; })
+      .catch(err => { document.getElementById('content').innerHTML = '<p style="color:var(--accent)">Error: '+err.message+'</p>'; });
+  </script>
+</body>
+</html>

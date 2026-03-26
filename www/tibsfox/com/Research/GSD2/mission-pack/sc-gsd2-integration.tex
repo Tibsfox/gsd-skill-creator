@@ -1,0 +1,1246 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Deep forest + electric teal — two ecosystems meeting
+\definecolor{primary}{HTML}{1B3A2D}       % Deep forest
+\definecolor{secondary}{HTML}{006D77}     % Teal ocean
+\definecolor{tertiary}{HTML}{37474F}      % Graphite
+\definecolor{accent}{HTML}{0B9E8E}        % Electric teal
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{gold}{HTML}{B7791A}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+\newtcolorbox{warnbox}{
+  colback=lighttertiary, colframe=gold,
+  arc=2pt, boxrule=0.5pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{skill-creator $\times$ GSD-2 Full Integration}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={Tibsfox / GSD Ecosystem},
+  pdftitle={skill-creator x GSD-2 Full Integration -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.4cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{skill-creator $\times$ GSD-2\\[0.3em]Full Integration Mission}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{All Six Functions --- Managing the Complete GSD-2 Lifecycle}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Tibsfox/gsd-skill-creator $\leftrightarrow$ gsd-build/GSD-2}}
+
+\vspace{2cm}
+\begin{center}
+\textcolor{bordergray}{\rule{6cm}{0.4pt}}
+\end{center}
+
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 11, 2026 \quad|\quad Status: Ready for Claude Code}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 10--14 context windows across 3--4 sessions}}\\[0.5em]
+{\small\sffamily\textcolor{subtlegray}{github.com/Tibsfox/gsd-skill-creator \quad$\times$\quad github.com/gsd-build/GSD-2}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Full Integration Vision Guide}
+
+\metafield{Date:}{March 11, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Repos:}{\url{https://github.com/Tibsfox/gsd-skill-creator} and \url{https://github.com/gsd-build/GSD-2}}
+\metafield{Depends On:}{GSD-2 Deep Architecture Research (prior mission), gsd-skill-creator-analysis.md, skill-creator-wasteland-integration-analysis.md}
+\metafield{Context:}{GSD-2 is the workflow engine --- a TypeScript CLI on the Pi SDK that manages autonomous coding sessions via a disk-driven state machine. skill-creator is the learning layer --- a TypeScript system that observes sessions, detects patterns, promotes skills, and composes agents. Together they solve what neither solves alone: GSD-2 prevents context rot \emph{during} a session; skill-creator prevents amnesia \emph{between} sessions. This mission makes them one system.}
+
+\subsection{Vision}
+
+The Amiga had four custom chips. They did not share a single data bus. They did not route all work through the CPU. Instead, each chip owned its domain --- graphics, audio, DMA, I/O --- and the system worked because the chips knew how to hand off to each other without collision. The system's intelligence was in the interfaces, not in any single processor.
+
+GSD-2 is Agnus --- the DMA controller. It moves chunks of context from disk to agent to disk to agent, never letting the CPU accumulate what it doesn't need. Each fresh context window is a clean DMA transfer: exactly the right bytes, exactly the right time, nothing extra. The state machine is the DMA schedule. The \texttt{.gsd/} directory is the chip's own RAM.
+
+skill-creator is Paula --- the audio chip. Paula doesn't wait for the CPU to play sound. It watches the DMA channel, observes the patterns of data flowing through, builds an anticipatory buffer, and plays audio proactively before it's requested. skill-creator doesn't wait for you to ask it to remember something. It watches the GSD-2 sessions, observes the patterns of tool calls and decisions, builds an anticipatory skill library, and injects relevant knowledge before it's needed.
+
+What this mission builds is the custom bus between them. Six functions of skill-creator --- Observe, Detect, Suggest, Manage, Auto-Load, and Learn/Compose --- each mapped to GSD-2's lifecycle with specific integration points, data contracts, and verification criteria. When complete, every GSD-2 session will be aware of every lesson learned in every previous session. The AI will stop being amnesiac. It will start being experienced.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{GSD-2 uses Pi SDK sessions, not Claude Code hooks.} skill-creator was designed to observe Claude Code sessions via \texttt{settings.json} hooks (\texttt{PreToolUse}, \texttt{PostToolUse}, \texttt{Stop}). GSD-2 runs on the Pi SDK's \texttt{InteractiveMode}, which has a different session lifecycle. Without a bridge, skill-creator cannot observe, record, or learn from any GSD-2 session --- the most important sessions in the ecosystem.
+
+  \item \textbf{Skill discovery exists in GSD-2 but nothing populates it meaningfully.} GSD-2 supports \texttt{skill\_discovery: auto/suggest/off} and searches \texttt{.agents/skills/} and \texttt{.claude/skills/}. skill-creator writes to \texttt{.claude/skills/}. The path alignment is accidental --- not wired. No format negotiation, no metadata handoff, no trigger-to-dispatch mapping. Discovery finds the files but cannot evaluate their relevance for the current GSD-2 phase.
+
+  \item \textbf{GSD-2's artifact files are goldmines of pattern data --- currently unread.} Every slice produces \texttt{T0N-SUMMARY.md} (what happened), \texttt{DECISIONS.md} (architectural choices), \texttt{M001-RESEARCH.md} (domain findings), and \texttt{S0N-PLAN.md} (decomposition approach). These are exactly the observation data skill-creator needs to detect patterns, suggest skills, and refine existing ones. Currently, they accumulate and are never analyzed.
+
+  \item \textbf{Feedback loops are broken across the Pi SDK boundary.} When GSD-2's LLM corrects itself mid-slice, updates a task plan, or notes an architectural contradiction in DECISIONS.md, that is a feedback signal. skill-creator's feedback loop expects \texttt{.planning/patterns/feedback.jsonl} entries, not \texttt{.gsd/} YAML frontmatter. The vocabularies are different. The correction goes unrecorded.
+
+  \item \textbf{Composite agents from skill-creator are not wired to GSD-2's subagent dispatch.} When skill-creator promotes frequently co-activated skills into a composite agent (stored in \texttt{.claude/agents/}), GSD-2's Scout/Researcher/Worker dispatch does not know those agents exist. The agents are generated but never dispatched. GSD-2's \texttt{always\_use\_skills} and \texttt{skill\_rules} preferences are never populated by skill-creator's recommendations.
+
+  \item \textbf{Phase-aware skill loading is impossible without phase context injection.} skill-creator's relevance scorer uses intent patterns, file patterns, and context patterns to decide which skills load. GSD-2 has rich phase context --- Research vs. Plan vs. Execute vs. Complete are fundamentally different contexts requiring different skill sets. Without phase context passed to the relevance scorer, skill-creator loads skills that are correct on average but wrong for the specific phase in progress.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A bidirectional adapter layer that translates GSD-2's Pi SDK session events into skill-creator observation records, forwards phase context to the relevance scorer, and deposits promoted skill artifacts into GSD-2's discovery paths --- making skill-creator the persistent learning layer of every GSD-2 autonomous run.
+
+\subsubsection{Integration Architecture Map}
+
+\begin{asciibox}
+skill-creator x GSD-2 INTEGRATION ARCHITECTURE
+================================================
+
+  GSD-2 RUNTIME (Pi SDK)                SKILL-CREATOR (Node.js CLI)
+  ======================                ===========================
+
+  [ /gsd auto ]                         [ skill-creator observe ]
+       |                                        ^
+       v                                        |
+  [ Pi SDK Session ]  ---event-bridge-->  [ SC Session Observer ]
+       |                   (M1)                 |
+       v                                  [ Pattern Store ]
+  [ .gsd/ artifacts ]                     (.planning/patterns/)
+  T0N-SUMMARY.md     ---artifact-reader-> [ Pattern Analyzer ]
+  DECISIONS.md            (M3)            [ Suggestion Engine ]
+  M001-RESEARCH.md                              |
+  S0N-PLAN.md                            [ Skill Generator ]
+       |                                        |
+       v                                        v
+  [ skill_discovery ]  <--skill-deposit-- [ .claude/skills/  ]
+  .agents/skills/          (M2)           [ .agents/skills/  ]
+  .claude/skills/                         SKILL.md files
+       |                                        |
+       v                                        v
+  [ Dispatch Prompt ]  <--phase-context-- [ Relevance Scorer ]
+  Pre-inlined skills        (M4)          Phase-aware loading
+       |                                        |
+       v                                        v
+  [ LLM Execution ]   ---feedback-tap-->  [ Feedback Store ]
+  Corrections/overrides      (M5)         feedback.jsonl
+  DECISIONS.md updates                    Refinement Engine
+       |                                        |
+       v                                        v
+  [ Agent Manifest ]  <--agent-wire---   [ Agent Composer ]
+  always_use_skills         (M6)         .claude/agents/
+  skill_rules                            Composite agents
+  preferences.md                         GSD-2 subagent format
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE MAP
+===================
+
+  M1: PI SDK EVENT BRIDGE         M2: SKILL DISCOVERY PATH
+  Session lifecycle adapter        .agents/skills/ wiring
+  Hook translation layer           Format negotiation
+  JSONL observation writer         Metadata handoff
+        |                                |
+        +----------+-----------------+---+
+                   |                 |
+         M3: ARTIFACT READER    M4: PHASE-AWARE LOADING
+         .gsd/ file parser       Phase context injection
+         Pattern extraction      Relevance scorer extension
+         Feedback tap            Token budget by phase
+                |                       |
+                +--------+--------------+
+                         |
+           M5: FEEDBACK LOOP       M6: AGENT COMPOSITION
+           DECISIONS.md bridge      Cluster-to-subagent
+           Correction detection     preferences.md writer
+           Refinement triggers      always_use_skills wiring
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- Pi SDK Event Bridge}
+
+The heart of the integration. skill-creator observes Claude Code via \texttt{settings.json} hooks (\texttt{PreToolUse}, \texttt{PostToolUse}, \texttt{Stop}). GSD-2 runs via Pi SDK's \texttt{InteractiveMode}. This module specifies the adapter that translates Pi SDK session events into \texttt{SessionObservation} JSONL records compatible with skill-creator's \texttt{pattern-store.ts}. Covers: event schema mapping, session boundary detection, crash-safe JSONL append, and the startup/shutdown hooks that GSD-2 already provides via its extension system.
+
+\subsubsection{Module 2 --- Skill Discovery Path \& Format Negotiation}
+
+GSD-2 reads \texttt{.agents/skills/} and \texttt{.claude/skills/}. skill-creator writes \texttt{SKILL.md} files with frontmatter including \texttt{name}, \texttt{description}, \texttt{triggers}, and \texttt{enabled}. This module specifies: the exact SKILL.md frontmatter dialect that satisfies both skill-creator's internal schema and GSD-2's discovery parser, the directory target strategy (project-level \texttt{.agents/skills/} for GSD-2 visibility), and the \texttt{description} format that makes GSD-2's skill discovery surface the right skill at the right phase (using the ``Use when\ldots'' pattern with GSD-2 phase vocabulary).
+
+\subsubsection{Module 3 --- Artifact Reader \& Pattern Extraction}
+
+GSD-2's \texttt{.gsd/} directory contains rich pattern data that skill-creator has never read. This module specifies: a \texttt{GSDArtifactReader} class that watches \texttt{.gsd/} for new/updated artifacts, extracts \texttt{SessionObservation} records from \texttt{T0N-SUMMARY.md} YAML frontmatter, extracts pattern candidates from \texttt{M001-RESEARCH.md}, and appends architectural decision signals from \texttt{DECISIONS.md} to \texttt{feedback.jsonl}.
+
+\subsubsection{Module 4 --- Phase-Aware Skill Loading}
+
+skill-creator's relevance scorer has no concept of GSD-2 phases. Research sessions need domain knowledge skills. Plan sessions need decomposition and estimation skills. Execute sessions need framework-specific and testing skills. Complete sessions need UAT and documentation skills. This module specifies: a \texttt{PhaseContext} type injected into the relevance scorer, phase-to-skill-category mappings, and a \texttt{phase\_skill\_rules} section in GSD-2's \texttt{preferences.md} that skill-creator populates from observed patterns.
+
+\subsubsection{Module 5 --- Feedback Loop \& Refinement Bridge}
+
+When GSD-2's LLM updates \texttt{DECISIONS.md} to reverse an earlier decision, that is a correction. When a \texttt{T0N-SUMMARY.md} records ``deviated from plan because\ldots'', that is feedback. This module specifies: a \texttt{GSDFeedbackTap} that reads these signals, translates them to \texttt{FeedbackRecord} entries compatible with skill-creator's \texttt{feedback-store.ts}, and triggers the refinement engine's eligibility check. Includes: decision reversal detection regex, plan deviation NLP patterns, and the bounded refinement rules (20\% max change, 3 corrections minimum, 7-day cooldown) applied to GSD-2 context.
+
+\subsubsection{Module 6 --- Agent Composition \& GSD-2 Subagent Wiring}
+
+skill-creator generates composite agents when skills co-activate 5+ times over 7+ days. GSD-2 dispatches Scout, Researcher, and Worker subagents from \texttt{\textasciitilde/.gsd/agent/}. This module specifies: the format translation from skill-creator's \texttt{.claude/agents/\{name\}.md} to GSD-2's subagent format, the \texttt{preferences.md} writer that populates \texttt{always\_use\_skills} and \texttt{skill\_rules} from skill-creator's co-activation data, and the cluster-to-phase mapping (research-cluster $\to$ Researcher subagent context, execution-cluster $\to$ Worker subagent context).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset: CEDAR
+mission: sc-gsd2-full-integration
+version: 1.0
+profile: fleet
+
+chips:
+  RAVEN:   event-bridge-architect       # Pi SDK session adapter design
+  SALMON:  skill-discovery-engineer     # Format negotiation + path wiring
+  OSPREY:  artifact-reader-builder      # .gsd/ file parser + pattern extractor
+  TAHOMA:  phase-context-injector       # Relevance scorer extension
+  CEDAR:   feedback-bridge-engineer     # DECISIONS.md tap + refinement trigger
+  HEMLOCK: agent-composition-wirer      # Cluster→subagent + preferences writer
+  ORCA:    integration-test-architect   # End-to-end verification + test plan
+  GEODUCK: migration-engineer           # Install path + backwards compat
+
+parallel_tracks:
+  - track_a: [RAVEN, SALMON]      # Session + discovery (W1A)
+  - track_b: [OSPREY, TAHOMA]     # Artifacts + phase loading (W1B)
+  - track_c: [CEDAR, HEMLOCK]     # Feedback + agent wiring (W1C)
+
+synthesis: ORCA + GEODUCK
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Complete bidirectional integration architecture design, with data contracts for all 6 interfaces
+  \item Pi SDK event-to-SessionObservation schema mapping (full field-by-field specification)
+  \item SKILL.md frontmatter dialect that satisfies both skill-creator internals and GSD-2 discovery
+  \item GSDArticfactReader class specification covering all 10 \texttt{.gsd/} artifact types
+  \item PhaseContext type definition and phase-to-skill-category mapping table
+  \item GSDFeedbackTap specification with decision reversal and plan deviation detection patterns
+  \item Agent format translation: skill-creator \texttt{.claude/agents/} $\to$ GSD-2 subagent format
+  \item \texttt{preferences.md} auto-writer specification (always\_use\_skills, skill\_rules, phase\_skill\_rules)
+  \item Installation path and backward compatibility strategy (existing skill-creator installations)
+  \item End-to-end test plan covering the complete skill lifecycle: observe $\to$ detect $\to$ promote $\to$ load $\to$ learn
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item LoRA adapter training pipeline (separately tracked, post-v1.0)
+  \item Wasteland federated skill sharing (Phase 1 of Wasteland integration strategy)
+  \item GSD-OS desktop application integration (separate milestone)
+  \item Modification of Pi SDK internals or GSD-2 core source
+  \item Multi-user or team-level skill sharing (single-user focus for v1.0)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A Pi SDK session started by \texttt{/gsd auto} produces a \texttt{SessionObservation} JSONL record in \texttt{.planning/patterns/sessions.jsonl} within 5 seconds of session completion
+  \item A skill promoted by skill-creator to \texttt{.agents/skills/} is discovered and loaded by GSD-2's skill discovery in the next \texttt{/gsd auto} run without manual configuration
+  \item GSD-2's \texttt{T0N-SUMMARY.md} files are parsed and converted to pattern candidates by \texttt{GSDArtifactReader} with $\geq$90\% field extraction accuracy
+  \item DECISIONS.md reversals produce \texttt{FeedbackRecord} entries within one artifact scan cycle
+  \item PhaseContext is correctly injected into the relevance scorer for all four GSD-2 phases (Research, Plan, Execute, Complete)
+  \item Skills loaded during Research phase differ from skills loaded during Execute phase for the same project (phase-aware loading is observable)
+  \item A skill-creator composite agent cluster is translated into a valid GSD-2 subagent format without manual editing
+  \item \texttt{preferences.md} is auto-populated with \texttt{always\_use\_skills} and \texttt{skill\_rules} from co-activation data after $\geq$5 co-activations observed
+  \item The complete skill lifecycle completes end-to-end: a pattern observed in session 1 becomes a promoted skill loaded in session 3 and refined by feedback from session 5
+  \item All integration interfaces are backward-compatible: existing skill-creator installations continue to work without GSD-2 present
+  \item Integration adds $\leq$2 seconds latency to GSD-2 session startup (\texttt{/gsd auto} is not perceptibly slower)
+  \item All 33 v1 and 10 v2 skill-creator requirements remain satisfied after integration (no regression)
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Interface} \\
+\midrule
+GSD-2 Deep Architecture Research & Direct predecessor & All architectural details sourced here \\
+gsd-skill-creator-analysis.md & Direct predecessor & All skill-creator internals sourced here \\
+skill-creator-wasteland-integration & Sibling mission & ZFC auditor and stamp schema are downstream of this integration \\
+gsd-silicon-layer-spec.md & Hardware analogy & Paula/Agnus chip metaphor drives all design decisions \\
+gsd-amiga-vision.md & Philosophical parent & Amiga Principle: the bus between chips is where intelligence lives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's chips did not share a CPU. They shared a bus. The bus was not smart --- it was a protocol. A set of rules about who could talk, when, and in what format. The intelligence was in the chips. The bus just kept them from colliding.
+
+This integration is a bus. skill-creator does not become part of GSD-2. GSD-2 does not become part of skill-creator. They remain separate TypeScript processes, separate repositories, separate concerns. What this mission builds is the protocol between them: the event schema that translates a Pi SDK session boundary into a skill-creator observation record; the SKILL.md dialect that a GSD-2 discovery scan and a skill-creator relevance scorer both understand; the DECISIONS.md tap that converts an architectural pivot into a feedback signal; the preferences.md writer that converts co-activation data into dispatch rules.
+
+What becomes possible on the other side of this integration is an AI development environment with real institutional memory. Not memory stored in a chat window that expires when the session ends. Memory stored in skills, refined by experience, promoted through a pipeline, and available to every fresh context window as a first-class citizen of the dispatch prompt. The AI does not start over. It starts ahead.
+
+That is what the spaces between these systems are for. Not separation. Transmission.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Full Integration --- Research Reference}
+
+\subsection{How to Use This Document}
+
+All findings sourced from: \url{https://github.com/Tibsfox/gsd-skill-creator} (README, source tree), \url{https://github.com/gsd-build/GSD-2} (README, prior GSD-2 mission), \url{https://github.com/badlogic/pi-mono} (Pi SDK), and lobehub.com/skills/tibsfox-gsd-skill-creator-gsd-workflow (published skill evidence).
+
+\subsection{Module 1 --- Pi SDK Event Bridge}
+
+\subsubsection{The Session Lifecycle Gap}
+
+skill-creator observes sessions via Claude Code \texttt{settings.json} hooks. The hook schema:
+
+\begin{asciibox}
+CLAUDE CODE HOOK (current)          PI SDK EVENT (GSD-2 target)
+===========================         ===========================
+settings.json:                      Pi SDK InteractiveMode:
+  hooks:                              - session start (new context)
+    PreToolUse:  [observer.js]        - tool_call event
+    PostToolUse: [observer.js]        - tool_result event
+    Stop:        [observer.js]        - session end (dispatch complete)
+                                      - error/crash event
+                                      - cost/token telemetry
+\end{asciibox}
+
+The Pi SDK exposes session lifecycle events through its \texttt{InteractiveMode} and extension system. GSD-2's 9 bundled extensions already hook into this lifecycle (the GSD core extension reads disk state at session boundaries, Background Shell extension monitors process readiness). The bridge can use the same extension hook point.
+
+\subsubsection{SessionObservation Schema Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{skill-creator Field} & \tableheader{GSD-2 Source} & \tableheader{Extraction Method} \\
+\midrule
+\texttt{sessionId} & Pi SDK session UUID & Read from Pi SDK session manager at start \\
+\texttt{timestamp} & Session dispatch time & ISO timestamp from \texttt{STATE.md} last-modified \\
+\texttt{commands} & Tool calls in session & Aggregate tool names from Pi SDK event stream \\
+\texttt{filesAccessed} & Read/Write tool targets & Collect file paths from tool\_call events \\
+\texttt{decisions} & \texttt{DECISIONS.md} delta & Diff append-only register between session boundaries \\
+\texttt{skillsActivated} & Skills in dispatch prompt & Parse \texttt{skill\_rules} matches from dispatch construction \\
+\texttt{phase} & \texttt{STATE.md} current phase & Read before dispatch: Research/Plan/Execute/Complete \\
+\texttt{outcome} & \texttt{T0N-SUMMARY.md} written & Detect artifact creation within session boundary \\
+\texttt{tokenCount} & Pi SDK cost tracker & Read from GSD-2's per-unit token ledger \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Bridge Extension Architecture}
+
+The bridge should be implemented as a 10th GSD-2 extension (following the existing 9). It syncs to \texttt{\textasciitilde/.gsd/agent/} on launch (always-overwrite pattern) and:
+
+\begin{itemize}
+  \item On session start: reads \texttt{STATE.md} to capture phase; initializes observation record
+  \item During session: taps tool\_call / tool\_result events; appends to in-memory observation
+  \item On session end: flushes observation record to \texttt{.planning/patterns/sessions.jsonl}
+  \item On crash: writes partial observation with \texttt{status: interrupted} before process exit
+\end{itemize}
+
+\subsection{Module 2 --- Skill Discovery Path \& Format Negotiation}
+
+\subsubsection{Path Alignment}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{System} & \tableheader{Reads From} & \tableheader{Writes To} \\
+\midrule
+skill-creator (current) & \texttt{\textasciitilde/.claude/skills/} & \texttt{\textasciitilde/.claude/skills/} (user-level) \\
+skill-creator (current) & \texttt{.claude/skills/} & \texttt{.claude/skills/} (project-level) \\
+GSD-2 skill discovery & \texttt{.agents/skills/} & (reads only) \\
+GSD-2 skill discovery & \texttt{.claude/skills/} & (reads only) \\
+\textbf{Target (bridge)} & Both & skill-creator writes \texttt{.agents/skills/} too \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The fix is a single configuration addition: skill-creator's \texttt{create} and \texttt{suggest} workflows add a \texttt{--gsd2} flag (or auto-detect \texttt{.gsd/} directory presence) that deposits skills to \texttt{.agents/skills/} in addition to \texttt{.claude/skills/}.
+
+\subsubsection{SKILL.md Format for GSD-2 Compatibility}
+
+The critical field is \texttt{description}. GSD-2's skill discovery evaluates the description to determine phase relevance. The ``Use when\ldots'' pattern with GSD-2 phase vocabulary:
+
+\begin{asciibox}
+---
+name: typescript-error-patterns
+description: >
+  TypeScript error patterns and resolution strategies for common type
+  system failures. Use when GSD-2 is in Execute phase, working with
+  TypeScript files, or when T0N-PLAN.md contains type-related must-haves.
+  Also activates for: type errors, interface mismatches, generic constraints.
+triggers:
+  intents:
+    - "typescript"
+    - "type error"
+    - "execute phase"
+  files:
+    - "*.ts"
+    - "tsconfig.json"
+  contexts:
+    - "gsd-execute"
+    - "gsd-plan"
+  threshold: 0.4
+enabled: true
+version: 1
+metadata:
+  gsd2:
+    phases: ["execute", "plan"]
+    model_hint: "sonnet"
+    token_estimate: 800
+---
+\end{asciibox}
+
+The \texttt{metadata.gsd2} block is a new extension namespace. It carries GSD-2-specific metadata without polluting the official Claude Code format namespace.
+
+\subsubsection{GSD-2 \texttt{preferences.md} Wiring}
+
+\begin{asciibox}
+# Generated by skill-creator (do not edit manually)
+# Last updated: [timestamp]
+
+skill_discovery: auto
+always_use_skills:
+  - project-conventions      # Loaded every Execute phase
+  - git-commit-workflow      # Loaded every Complete phase
+skill_rules:
+  - pattern: "gsd-research"
+    skills: ["domain-research", "web-synthesis"]
+  - pattern: "gsd-plan"
+    skills: ["task-decomposition", "must-have-writer"]
+  - pattern: "gsd-execute"
+    skills: ["typescript-patterns", "testing-strategy"]
+  - pattern: "gsd-complete"
+    skills: ["uat-generation", "commit-conventions"]
+\end{asciibox}
+
+\subsection{Module 3 --- Artifact Reader \& Pattern Extraction}
+
+\subsubsection{GSD Artifact Inventory for Pattern Mining}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artifact} & \tableheader{Phase} & \tableheader{Pattern Signal} \\
+\midrule
+\texttt{T0N-SUMMARY.md} & Execute/Complete & YAML frontmatter: files\_modified, commands\_used, deviations, token\_count \\
+\texttt{DECISIONS.md} & All & Append-only: architectural decisions that could drive skill creation \\
+\texttt{M001-RESEARCH.md} & Research & Domain knowledge that could become reusable skills \\
+\texttt{S0N-PLAN.md} & Plan & Task decomposition patterns that repeat across slices \\
+\texttt{S0N-UAT.md} & Complete & Verification patterns for recurring feature types \\
+\texttt{STATE.md} & All & Phase transitions; duration; stuck/timeout events \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GSDArtifactReader Class Specification}
+
+\begin{asciibox}
+class GSDArtifactReader {
+  // Watches .gsd/ for new/modified files
+  watch(gsdDir: string): void
+
+  // Extracts SessionObservation from T0N-SUMMARY.md
+  parseSummary(path: string): Partial<SessionObservation>
+
+  // Extracts SkillCandidate[] from M001-RESEARCH.md
+  extractResearchPatterns(path: string): SkillCandidate[]
+
+  // Extracts FeedbackRecord[] from DECISIONS.md delta
+  extractDecisionFeedback(
+    current: string,
+    previous: string
+  ): FeedbackRecord[]
+
+  // Extracts pattern signals from S0N-PLAN.md
+  extractPlanPatterns(path: string): PatternSignal[]
+
+  // Returns phase from STATE.md
+  getCurrentPhase(gsdDir: string): GSDPhase
+
+  // Batch: process all .gsd/ files since lastScan
+  scanDelta(gsdDir: string, lastScan: Date): ScanResult
+}
+
+type GSDPhase = "research" | "plan" | "execute" | "complete" | "reassess"
+
+interface ScanResult {
+  observations: SessionObservation[]
+  patterns: PatternSignal[]
+  feedback: FeedbackRecord[]
+  newSkillCandidates: SkillCandidate[]
+}
+\end{asciibox}
+
+\subsubsection{Pattern Extraction from T0N-SUMMARY.md}
+
+The \texttt{T0N-SUMMARY.md} YAML frontmatter already contains structured data. Mapping to skill-creator's \texttt{pattern-analyzer.ts} inputs:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{T0N-SUMMARY Field} & \tableheader{skill-creator Pattern Signal} \\
+\midrule
+\texttt{files\_modified} & File pattern candidate (recurring file types = potential trigger) \\
+\texttt{commands\_used} & Command sequence candidate (n-gram extraction input) \\
+\texttt{deviations\_from\_plan} & Feedback candidate (what the LLM learned mid-task) \\
+\texttt{must\_have\_outcomes} & Verification pattern (recurring verification = potential skill) \\
+\texttt{time\_taken} & Complexity signal (consistently slow tasks = high-value skill candidates) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4 --- Phase-Aware Skill Loading}
+
+\subsubsection{PhaseContext Type}
+
+\begin{asciibox}
+interface PhaseContext {
+  phase: GSDPhase              // Current GSD-2 execution phase
+  milestoneId: string          // e.g. "M001"
+  sliceId: string              // e.g. "S03"
+  taskId?: string              // e.g. "T02" (null during Research/Plan)
+  techStack: string[]          // From M001-RESEARCH.md tech section
+  domains: string[]            // Problem domains detected in slice plan
+  priorSkillsLoaded: string[]  // Skills loaded in previous task of same slice
+}
+\end{asciibox}
+
+\subsubsection{Phase-to-Skill Category Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{GSD-2 Phase} & \tableheader{Primary Skill Categories} & \tableheader{Secondary Categories} & \tableheader{Token Budget} \\
+\midrule
+Research & Domain knowledge, web synthesis, codebase patterns & Tech stack docs, library conventions & 3--4\% \\
+Plan & Decomposition, estimation, must-have writing & Risk patterns, dependency analysis & 2--3\% \\
+Execute & Framework-specific, language patterns, testing & Error resolution, refactor patterns & 4--5\% \\
+Complete & UAT generation, commit conventions, documentation & Changelog patterns, release checklist & 2--3\% \\
+Reassess & Roadmap analysis, risk patterns, pivot history & Architecture patterns, lesson-learned & 1--2\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Relevance Scorer Extension}
+
+skill-creator's \texttt{relevance-scorer.ts} computes a score from 0--1 for each skill against the current context. The extension adds a \texttt{phaseBoost} multiplier:
+
+\begin{asciibox}
+// Extended scoring formula:
+score = (baseScore * triggerMatch) + (phaseBoost * phaseAlignment)
+
+// phaseBoost values:
+//   skill.metadata.gsd2.phases includes currentPhase: +0.3
+//   skill.metadata.gsd2.phases excludes currentPhase: -0.2
+//   skill has no gsd2 metadata:                        0 (neutral)
+
+// phaseAlignment = cosine_similarity(skill.intents, phaseVocabulary[phase])
+\end{asciibox}
+
+\subsection{Module 5 --- Feedback Loop \& Refinement Bridge}
+
+\subsubsection{Decision Reversal Detection}
+
+\texttt{DECISIONS.md} is append-only. A ``reversal'' is detected when:
+\begin{itemize}
+  \item A new entry contradicts an earlier entry (keyword overlap + negation pattern)
+  \item A new entry explicitly references an earlier decision with revision language (``changed from'', ``supersedes'', ``reversed'')
+  \item A \texttt{T0N-SUMMARY.md} records \texttt{deviation: true} for a task that depended on an earlier decision
+\end{itemize}
+
+\begin{asciibox}
+DECISION REVERSAL DETECTION PATTERNS
+======================================
+
+Trigger phrase patterns (regex):
+  /changed from .+ to/i
+  /supersedes decision/i
+  /reversed earlier/i
+  /no longer using/i
+  /abandoned .+ approach/i
+  /discovered that .+ was wrong/i
+
+When matched:
+  1. Extract skill names mentioned in the reversed decision
+  2. Create FeedbackRecord{ skill, type: "correction", source: "decisions.md" }
+  3. Append to feedback.jsonl
+  4. Check refinement eligibility (3+ corrections = eligible)
+\end{asciibox}
+
+\subsubsection{Bounded Refinement Rules (GSD-2 Context)}
+
+The existing skill-creator refinement bounds apply unchanged:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Constraint} & \tableheader{Value} & \tableheader{Rationale} \\
+\midrule
+Min corrections before refine & 3 & Prevent single-session noise from changing durable skills \\
+Max content change per refine & 20\% & Preserve skill identity across refinements \\
+Cooldown between refinements & 7 days & Observe changed behavior before next change \\
+User confirmation & Always & Humane loop: human approves every skill evolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 6 --- Agent Composition \& GSD-2 Subagent Wiring}
+
+\subsubsection{Cluster-to-Subagent Translation}
+
+skill-creator generates composite agents when skills co-activate 5+ times over 7+ days. The format translation to GSD-2 subagent format:
+
+\begin{asciibox}
+SKILL-CREATOR OUTPUT (.claude/agents/react-fullstack.md):
+==========================================================
+---
+name: react-fullstack-agent
+description: Combines: react-hooks, react-components, api-patterns
+tools: Read, Write, Edit, Bash, Glob, Grep
+model: inherit
+skills:
+  - react-hooks
+  - react-components
+  - api-patterns
+---
+
+GSD-2 SUBAGENT TARGET (~/.gsd/agent/agents/react-fullstack.md):
+================================================================
+---
+name: react-fullstack-worker
+description: >
+  Specialized Worker subagent for React full-stack execution tasks.
+  Preloaded with react-hooks, react-components, api-patterns skills.
+  Activate via GSD-2 skill_rules when slice domain contains "react".
+tools: Read, Write, Edit, Bash, Glob, Grep
+model: claude-sonnet-4-6
+phases: ["execute"]
+skills:
+  - react-hooks
+  - react-components
+  - api-patterns
+---
+\end{asciibox}
+
+\subsubsection{preferences.md Auto-Writer}
+
+The \texttt{GSDPreferencesWriter} class reads co-activation data from \texttt{.planning/patterns/} and writes \texttt{.gsd/preferences.md} with:
+
+\begin{itemize}
+  \item \texttt{always\_use\_skills}: skills with $\geq$10 activations and $\geq$0.7 relevance score
+  \item \texttt{skill\_rules}: skills whose co-activation clusters map to detectable domain patterns
+  \item \texttt{phase\_skill\_rules}: skills whose \texttt{metadata.gsd2.phases} metadata is populated
+  \item \texttt{skill\_discovery: auto}: set automatically when $\geq$3 skills have been promoted
+\end{itemize}
+
+\begin{warnbox}
+\textbf{Warning:} GSD-2's \texttt{preferences.md} is also user-editable. The auto-writer must use a clearly marked section with begin/end comments and must never overwrite user-authored sections. Pattern: write to \texttt{\# [skill-creator managed: begin]\ldots\# [skill-creator managed: end]} block only.
+\end{warnbox}
+
+\subsection{System-Wide Data Flow}
+
+\begin{asciibox}
+COMPLETE DATA FLOW: OBSERVE TO LOAD
+=====================================
+
+  SESSION 1:
+  /gsd auto starts
+    -> RAVEN extension hooks session start
+    -> reads STATE.md: phase=execute, slice=S02, task=T03
+    -> session runs (LLM executes T03)
+    -> tool calls observed: Read(*.ts), Write(api.ts), Bash(npm test)
+    -> DECISIONS.md delta: "Using fetch over axios -- simpler"
+    -> T03-SUMMARY.md written
+    -> RAVEN extension hooks session end
+    -> Writes SessionObservation to sessions.jsonl:
+       { phase: "execute", files: ["*.ts"], commands: ["npm test"],
+         skillsActivated: [], outcome: "success" }
+    -> GSDArtifactReader scans T03-SUMMARY.md:
+       { pattern: "typescript+fetch+testing", occurrences: 1 }
+
+  SESSION 2-3: same pattern observed (3 total)
+    -> Pattern analyzer threshold met (3+ occurrences)
+    -> Suggestion generated: "fetch-typescript-patterns"
+    -> User reviews + accepts via `skill-creator suggest`
+    -> SKILL.md written to .agents/skills/fetch-typescript-patterns/
+    -> Description: "TypeScript fetch patterns. Use when gsd-execute..."
+
+  SESSION 4:
+  /gsd auto starts
+    -> GSD-2 skill_discovery scans .agents/skills/
+    -> Finds fetch-typescript-patterns (matches Execute phase)
+    -> Pre-inlines SKILL.md into dispatch prompt
+    -> LLM has the pattern without burning tool calls on orientation
+    -> T04 executes faster, fewer corrections
+
+  FEEDBACK LOOP:
+  Session 5: LLM overrides skill recommendation
+    -> Correction detected in T05-SUMMARY.md
+    -> FeedbackRecord appended to feedback.jsonl
+    -> 3+ corrections = refinement eligible
+    -> `skill-creator refine fetch-typescript-patterns` available
+    -> User confirms: skill content updated (max 20% change)
+    -> Refined skill loaded in session 6
+\end{asciibox}
+
+\subsection{Safety \& Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+API key exposure in sessions.jsonl & GATE & The session observer must never log tool results that contain env vars or secrets. Redact \texttt{Bash} tool outputs containing known secret patterns before writing to JSONL. \\
+preferences.md overwrite & GATE & Auto-writer must use guarded sections. Never overwrite user-edited prefs. Add \texttt{--dry-run} flag to preview changes. \\
+Runaway skill refinement & GATE & Bounded refinement rules (20\% max, 7-day cooldown) are immutable. Not configurable per-project. \\
+GSD-2 BSL 1.1 license & ANNOTATE & Integration layer can be MIT (skill-creator's license). Do not bundle GSD-2 source. Bridge code must be separately packaged. \\
+DECISIONS.md privacy & ANNOTATE & Decision records may contain proprietary architectural info. The feedback tap reads deltas locally; nothing is transmitted externally. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\begin{itemize}
+  \item \textbf{gsd-skill-creator README:} \url{https://github.com/Tibsfox/gsd-skill-creator} --- 33+10 requirements, 6-step workflow, 14-module TypeScript source tree, all CLI commands, bounded learning constraints, agent generation format
+  \item \textbf{GSD-2 README:} \url{https://github.com/gsd-build/GSD-2} --- State machine, 10 artifact types, 9 extensions, 3 subagents, preferences.md schema, skill\_discovery dual-path
+  \item \textbf{Pi SDK (pi-mono):} \url{https://github.com/badlogic/pi-mono} --- InteractiveMode, extension hook architecture, session lifecycle events
+  \item \textbf{GSD Workflow Skill (lobehub):} \url{https://lobehub.com/skills/tibsfox-gsd-skill-creator-gsd-workflow} --- Published skill evidence; routing table; phase-aware invocation patterns
+  \item \textbf{skill-creator-wasteland-integration-analysis.md:} Project knowledge --- ZFC compliance, sequencing strategy, Wasteland integration path as downstream dependency
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, executable integration specification between \texttt{Tibsfox/gsd-skill-creator} and \texttt{gsd-build/GSD-2} that enables all six skill-creator functions (Observe, Detect, Suggest, Manage, Auto-Load, Learn/Compose) to operate across the full GSD-2 lifecycle (Research, Plan, Execute, Complete, Reassess). The integration is specified as a bridge extension and adapter layer --- not a fork of either system --- with full data contracts, TypeScript class specifications, test plan, and installation path. All deliverables are structured for direct handoff to Claude Code with zero additional context.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+INTEGRATION MISSION WAVE ARCHITECTURE
+=======================================
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ========================================
+  [Shared Types]-->[Interface Contracts]-->[Chipset Init]
+
+  WAVE 1A: SESSION BRIDGE (Parallel, Opus)
+  =========================================
+  [RAVEN: Pi SDK Adapter]  ||  [SALMON: Skill Discovery Path]
+
+  WAVE 1B: ARTIFACT + PHASE LAYER (Parallel, Sonnet)
+  ====================================================
+  [OSPREY: GSDArtifactReader]  ||  [TAHOMA: PhaseContext Injector]
+
+  WAVE 1C: FEEDBACK + AGENTS (Parallel, Opus)
+  =============================================
+  [CEDAR: GSDFeedbackTap]  ||  [HEMLOCK: AgentCompositionWirer]
+
+  WAVE 2: SYNTHESIS (Sequential, Opus)
+  =====================================
+  [ORCA: Integration Test Plan + End-to-End Spec]
+  [GEODUCK: Install Path + Migration + Backward Compat]
+
+  WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  =========================================================
+  [Assembly]-->[Verification Matrix]-->[Delivery]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Shared Type Layer} --- \texttt{PhaseContext}, \texttt{GSDPhase}, \texttt{GSDObservation} types extending skill-creator's existing types (Wave 0)
+  \item \textbf{Session Bridge Layer} --- Pi SDK event adapter + skill discovery path wiring (Wave 1A)
+  \item \textbf{Artifact + Phase Layer} --- \texttt{GSDArtifactReader} class + \texttt{PhaseContextInjector} relevance scorer extension (Wave 1B)
+  \item \textbf{Feedback + Agent Layer} --- \texttt{GSDFeedbackTap} class + \texttt{GSDPreferencesWriter} class (Wave 1C)
+  \item \textbf{Synthesis Layer} --- End-to-end integration test plan + installation path (Wave 2)
+  \item \textbf{Publication Layer} --- Assembled spec + verification + delivery (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Criteria} & \tableheader{Agent} \\
+\midrule
+1 & \texttt{PhaseContext} type definitions & All fields specified, TypeScript-valid & RAVEN \\
+2 & Pi SDK session bridge spec & Event-to-JSONL schema, full field mapping & RAVEN \\
+3 & GSD-2 extension manifest & 10th extension format, hook registration & RAVEN \\
+4 & SKILL.md dialect spec & metadata.gsd2 namespace, description template & SALMON \\
+5 & \texttt{preferences.md} writer spec & Guarded sections, auto-populate logic & SALMON \\
+6 & \texttt{GSDArtifactReader} class spec & All 6 artifact types, extraction methods & OSPREY \\
+7 & Pattern extraction mapping table & T0N fields → skill-creator signals & OSPREY \\
+8 & \texttt{PhaseContextInjector} spec & Scoring formula, phaseBoost values & TAHOMA \\
+9 & Phase-to-category mapping table & All 5 phases × skill categories & TAHOMA \\
+10 & \texttt{GSDFeedbackTap} class spec & Decision reversal patterns, FeedbackRecord schema & CEDAR \\
+11 & Agent format translation spec & skill-creator → GSD-2 subagent YAML & HEMLOCK \\
+12 & \texttt{GSDPreferencesWriter} class spec & Managed section protocol, co-activation threshold & HEMLOCK \\
+13 & End-to-end test plan & Session 1→5 lifecycle, all 12 criteria covered & ORCA \\
+14 & Installation path + migration guide & New installs, existing skill-creator users & GEODUCK \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-TYPES & None & Haiku & 12k \\
+W0-CONTRACTS & W0-TYPES & Haiku & 10k \\
+W1A-RAVEN & W0-TYPES & Opus & 60k \\
+W1A-SALMON & W0-TYPES & Opus & 55k \\
+W1B-OSPREY & W0-TYPES, W1A-RAVEN & Sonnet & 50k \\
+W1B-TAHOMA & W0-TYPES, W1A-SALMON & Sonnet & 45k \\
+W1C-CEDAR & W0-TYPES, W1A-RAVEN & Opus & 55k \\
+W1C-HEMLOCK & W0-TYPES, W1A-SALMON & Opus & 60k \\
+W2-ORCA & All W1 & Opus & 90k \\
+W2-GEODUCK & All W1, W2-ORCA & Sonnet & 40k \\
+W3-ASSEMBLE & All W2 & Sonnet & 50k \\
+W3-VERIFY & W3-ASSEMBLE & Sonnet & 25k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{552k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & $\sim$35\% & W1A (session bridge + discovery — cross-system design), W1C (feedback + agent wiring — behavioral judgment), W2-ORCA (end-to-end synthesis) \\
+Sonnet & $\sim$55\% & W1B (artifact reader + phase injector — structured specification), W2-GEODUCK (install path), W3 (assembly + verify) \\
+Haiku & $\sim$10\% & W0 (type scaffolding — pure structure, no judgment) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared types + interface contracts \\
+1A & Session Bridge & Parallel & Opus & Pi SDK adapter + skill discovery path \\
+1B & Artifact + Phase & Parallel & Sonnet & GSDArtifactReader + PhaseContext \\
+1C & Feedback + Agents & Parallel & Opus & FeedbackTap + PreferencesWriter \\
+2 & Synthesis & Sequential & Opus & E2E test plan + install guide \\
+3 & Publication & Sequential & Sonnet & Final assembled + verified spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Agent} \\
+\midrule
+Shared types & Define: GSDPhase, PhaseContext, GSDObservation, GSDFeedbackRecord. Extend (not replace) skill-creator's existing type definitions. & Haiku \\
+Interface contracts & Define TypeScript interfaces for: GSDEventBridge, GSDArtifactReader, PhaseContextInjector, GSDFeedbackTap, GSDPreferencesWriter. No implementation --- interfaces only. & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Opus) --- Session Bridge + Skill Discovery:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Outputs} \\
+\midrule
+RAVEN & Pi SDK bridge spec & Extension manifest, event schema mapping, session boundary detection, crash-safe JSONL write, startup/shutdown hooks \\
+SALMON & Skill discovery spec & SKILL.md dialect with metadata.gsd2, description template with GSD-2 phase vocabulary, preferences.md managed section protocol, directory deposit logic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Sonnet) --- Artifacts + Phase Loading:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Outputs} \\
+\midrule
+OSPREY & GSDArtifactReader & Full class spec for all 6 artifact types, field extraction tables, scanDelta method, error handling for missing/malformed files \\
+TAHOMA & PhaseContextInjector & PhaseContext type, relevance scorer extension (phaseBoost formula), phase-to-category mapping table, token budget by phase \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Opus) --- Feedback + Agent Wiring:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Outputs} \\
+\midrule
+CEDAR & GSDFeedbackTap & Class spec, decision reversal detection regex, plan deviation NLP patterns, FeedbackRecord translation, refinement eligibility trigger \\
+HEMLOCK & AgentCompositionWirer & skill-creator→GSD-2 agent format translation, GSDPreferencesWriter class spec, co-activation threshold logic, managed section write protocol \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Specification} \\
+\midrule
+ORCA & End-to-end test plan & Session 1→5 lifecycle test, all 12 success criteria covered, 40+ tests across safety-critical/core/integration/edge, verification matrix \\
+GEODUCK & Install + migration & npm install path for new users; migration guide for existing skill-creator users; backward compat test; uninstall/rollback procedure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 1 tracks all share the same two READMEs (skill-creator + GSD-2) --- prime once, inject into all 6 Wave 1 dispatches within the same 5-minute TTL window
+  \item W0 type definitions are small and stable --- prime once, reference across all Wave 1 dispatches
+  \item Dispatch all three Wave 1 tracks within 60 seconds of each other to exploit shared cache
+  \item ORCA synthesis (W2) loads all W1 summaries as pre-inlined context --- cache them before W2 dispatch
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[W0-TYPES]----+--->[W1A-RAVEN]---+
+              |                   |
+[W0-CONTRACTS]+--->[W1A-SALMON]--+--->[W2-ORCA]--->[W3-ASSEMBLE]
+              |                   |                      |
+              +--->[W1B-OSPREY]--+--->[W2-GEODUCK]       |
+              |                   |                      v
+              +--->[W1B-TAHOMA]--+                [W3-VERIFY]
+              |                   |                      |
+              +--->[W1C-CEDAR]---+                       v
+              |                   |               [DELIVERY]
+              +--->[W1C-HEMLOCK]--+
+
+Parallel gates:
+  W1A || W1B || W1C  (all parallel, launched simultaneously)
+  W2-ORCA completes before W2-GEODUCK
+  W3-ASSEMBLE completes before W3-VERIFY
+  Three HITL gates: post-W0, post-W1, post-W2
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Secrets, overwrites, runaway learning \\
+Core functionality & 26 & Required & BLOCK & All 12 success criteria (2--3 tests each) \\
+Integration & 8 & Required & BLOCK & Cross-system data contract validation \\
+Edge cases & 6 & Best-effort & LOG & Missing files, malformed YAML, version conflicts \\
+\midrule
+\textbf{Total} & \textbf{45} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & No secrets in sessions.jsonl & Observer redacts Bash tool outputs containing API key patterns before write. Manual scan of sessions.jsonl shows no token/key values. \\
+SC-02 & preferences.md guarded sections & Auto-writer never modifies lines outside the managed section markers. Manual edit to user section survives 3 auto-write cycles unchanged. \\
+SC-03 & Bounded refinement immutable & Attempting to configure maxContentChangePercent $>$ 20 via any config file is rejected with error. Hardcoded floor applies. \\
+SC-04 & No GSD-2 source bundled & Bridge extension package.json has no dependency on gsd-pi or pi-mono. npm install completes without pulling GSD-2 source. \\
+SC-05 & Backward compatibility & A project using skill-creator without GSD-2 present behaves identically to pre-integration. All 43 existing skill-creator CLI commands pass. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Selected Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Criterion} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Session observation within 5s & Run \texttt{/gsd auto} on a single-task slice. sessions.jsonl contains new record within 5s of Pi SDK session end. \\
+CF-02 & JSONL record schema valid & Parsed record contains all required fields: sessionId, timestamp, phase, commands, filesAccessed, outcome. \\
+CF-03 & Skill discovered by GSD-2 & Deposit SKILL.md to .agents/skills/. Run \texttt{/gsd auto}. Verify skill appears in dispatch prompt (grep dispatch log). \\
+CF-04 & Phase-aware loading observable & Research phase session loads domain-knowledge skills. Execute phase session loads framework skills. Different sets confirmed. \\
+CF-05 & T0N-SUMMARY.md parsed correctly & GSDArtifactReader.parseSummary() returns all required fields with $\geq$90\% accuracy against manual extraction. \\
+CF-06 & Decision reversal detected & Append reversal-pattern string to DECISIONS.md. FeedbackRecord appears in feedback.jsonl within one scan cycle. \\
+CF-07 & Agent format translation valid & skill-creator composite agent translates to valid GSD-2 subagent YAML. \texttt{skill-creator agents validate} passes. \\
+CF-08 & preferences.md auto-populated & After 5+ co-activations, \texttt{always\_use\_skills} updated in preferences.md managed section. \\
+CF-09 & Startup latency $\leq$2s & Time \texttt{/gsd auto} startup with and without bridge extension. Delta $\leq$2000ms. \\
+CF-10 & End-to-end lifecycle complete & Session 1 pattern $\to$ Session 3 skill promoted $\to$ Session 5 refinement eligible. All states observable in disk files. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Pi SDK session → sessions.jsonl within 5s & CF-01, CF-02 & Pending \\
+2. skill-creator skill discovered by GSD-2 & CF-03, IN-01 & Pending \\
+3. T0N-SUMMARY.md parsed ≥90\% accuracy & CF-05, IN-02 & Pending \\
+4. DECISIONS.md reversals → FeedbackRecord & CF-06, IN-03 & Pending \\
+5. PhaseContext injected all 5 phases & CF-04, IN-04 & Pending \\
+6. Phase-aware loading observable & CF-04, EC-01 & Pending \\
+7. Agent cluster → valid GSD-2 subagent & CF-07, SC-04 & Pending \\
+8. preferences.md auto-populated & CF-08, SC-02 & Pending \\
+9. End-to-end lifecycle session 1→5 & CF-10, IN-05 & Pending \\
+10. Backward compatible without GSD-2 & SC-05, EC-03 & Pending \\
+11. Startup latency ≤2s & CF-09, EC-04 & Pending \\
+12. All 43 skill-creator requirements satisfied & SC-05, IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction, go/no-go at each wave gate \\
+PLAN & Planner & Wave decomposition, cache strategy, parallel track timing \\
+SCOUT & Research Agent & Source validation, README cross-reference, format verification \\
+EXEC-A & RAVEN & Pi SDK bridge specification + session adapter design \\
+EXEC-B & SALMON & Skill discovery path + SKILL.md format negotiation \\
+CRAFT-OBS & OSPREY & GSDArtifactReader class + pattern extraction mapping \\
+CRAFT-PHASE & TAHOMA & PhaseContextInjector + relevance scorer extension \\
+CRAFT-FB & CEDAR & GSDFeedbackTap + decision reversal detection \\
+CRAFT-AGENT & HEMLOCK & AgentCompositionWirer + GSDPreferencesWriter \\
+VERIFY & ORCA & End-to-end integration test plan, verification matrix \\
+COMPAT & GEODUCK & Installation path, migration guide, backward compat \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (3 gates) \\
+SURGEON & Health Monitor & Cross-system data contract drift detection \\
+SECURE & Security Warden & Secrets exposure, BSL 1.1 compliance, managed section integrity \\
+LOG & Chronicle & Audit trail, commit message conventions for bridge code \\
+RETRO & Retrospective & Post-wave lessons for skill-creator promotion (meta: learning the integration itself) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (16 roles) \\
+Total waves & 5 (0, 1A/1B/1C, 2, 3) \\
+Parallel tracks (Wave 1) & 3 simultaneous \\
+Context windows required & 10--14 across 3--4 sessions \\
+Estimated total tokens & 552k spec + 500k synthesis = $\sim$1.05M \\
+Primary model & Opus (35\%) for cross-system design \\
+Execution model & Sonnet (55\%) for structured specification \\
+Scaffolding model & Haiku (10\%) \\
+Cache optimization windows & 3 (W0$\to$W1, W1$\to$W2, W2$\to$W3) \\
+HITL gates & 3 (post-W0, post-W1, post-W2) \\
+Deliverables & 14 specification documents + 1 PDF \\
+Integration approach & Bridge extension + adapter layer (no fork) \\
+skill-creator license & MIT (unchanged) \\
+GSD-2 license & BSL 1.1 (bridge is separate package) \\
+Primary repos & github.com/Tibsfox/gsd-skill-creator $\times$ github.com/gsd-build/GSD-2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``GSD is the workflow engine. Skill Creator is the learning layer that extends GSD. It doesn't replace any GSD functionality --- it observes how you work within the GSD lifecycle and builds reusable knowledge from your patterns.''}\\[0.3em]
+\textit{``The two systems working together solve a fundamentally different problem than either one alone. GSD prevents the AI from degrading during work. Skill Creator prevents the AI from forgetting between work.''} --- gsd-skill-creator README
+
+\medskip
+
+The Amiga's Paula chip didn't need the CPU to tell it when to play audio. It watched the DMA bus, built an anticipatory buffer, and played ahead of the request. This is what skill-creator becomes for GSD-2 through this integration: not a passenger in the session, but a coprocessor running in parallel --- watching the tool calls, reading the artifacts, building the patterns, depositing the skills, and wiring the agents. Not before the AI is asked. Before the AI needs to ask.
+
+That is the space between observe and load. That is where the memory lives.
+\end{quotebox}
+
+\end{document}
