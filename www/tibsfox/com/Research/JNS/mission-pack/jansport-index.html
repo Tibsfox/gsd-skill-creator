@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JanSport — GSD Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .header small {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0.3rem;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .header .pipeline {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #A5D6A7;
+    letter-spacing: 0.05em;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card h3 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  .contents { margin: 1rem 0; }
+  .contents .stage {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent);
+  }
+  .contents .stage h4 {
+    color: var(--secondary);
+    margin-bottom: 0.3rem;
+  }
+  .contents .stage p {
+    font-size: 0.9rem;
+    color: var(--subtle);
+  }
+  ol { margin: 1rem 0 1rem 1.5rem; }
+  ol li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+  code {
+    background: var(--card-bg);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+  }
+  .quote-box {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-box p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--tertiary);
+  }
+  .meta {
+    text-align: center;
+    color: var(--subtle);
+    font-size: 0.8rem;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>JanSport: Always With You</h1>
+  <div class="subtitle">From PNW Garage to Global Icon — The Architecture of an Enduring Brand</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="jansport-mission.pdf" download>
+      <div class="icon">📄</div>
+      <h3>Mission PDF</h3>
+      <p>27-page research mission package — all three stages compiled</p>
+    </a>
+    <a class="card" href="jansport-mission.tex" download>
+      <div class="icon">📝</div>
+      <h3>LaTeX Source</h3>
+      <p>Editable .tex source — recompile with XeLaTeX</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <div class="stage">
+      <h4>Stage 1 — Vision Document</h4>
+      <p>Narrative vision, problem statement (heritage erosion, sustainability gap, design longevity, cultural authenticity, market dominance), five research modules, chipset configuration, scope boundaries, 12 success criteria, and the through-line connecting JanSport's story to the Amiga Principle.</p>
+    </div>
+    <div class="stage">
+      <h4>Stage 2 — Research Reference</h4>
+      <p>Detailed findings across all five modules: founding timeline (1966–1979), SuperBreak design lineage, ownership chain and VF Corporation portfolio, sustainability data (236M bottles, GRS/bluesign certifications), #LightenTheLoad campaign analysis with APA/Pew data, L2 Brands partnership, and complete source bibliography.</p>
+    </div>
+    <div class="stage">
+      <h4>Stage 3 — Mission Package</h4>
+      <p>Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, component breakdown with model assignments (Opus 34% / Sonnet 61% / Haiku 5%), ~94K token budget across 18 context windows, 28-test plan (5 safety-critical), dependency graph, verification matrix, and crew manifest.</p>
+    </div>
+  </div>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Open <code>jansport-mission.pdf</code> for the complete three-stage package</li>
+    <li>Hand the PDF to <strong>gsd-skill-creator</strong> (Claude Code) for execution</li>
+    <li>The orchestrator reads Stage 3 to decompose into executable waves</li>
+    <li>CAPCOM checkpoints at each wave boundary for human approval</li>
+    <li>Final deliverable: comprehensive JanSport research document</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol>
+    <li>Edit <code>jansport-mission.tex</code> as needed</li>
+    <li>Compile with XeLaTeX (requires DejaVu fonts):
+      <br><code>xelatex -interaction=nonstopmode jansport-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode jansport-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode jansport-mission.tex</code>
+    </li>
+    <li>Three passes required for TOC, cross-references, and page count</li>
+  </ol>
+
+  <div class="quote-box">
+    <p>The SuperBreak endures because it was designed for the spaces between — between home and school, between ambition and budget, between disposability and permanence. That is the architectural lesson: fitness is not about features. It is about fit.</p>
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem · March 26, 2026 · Squadron Profile · 5 Research Modules
+  </div>
+</div>
+
+</body>
+</html>
