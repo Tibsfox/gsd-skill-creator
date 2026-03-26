@@ -1,0 +1,72 @@
+/* WCN -- Westercon
+ * Theme: Western sunset -- warm terracotta with horizon gold
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --terra-deep: #4E2700;
+  --terra: #BF360C;
+  --terra-mid: #8B3A00;
+  --sunset: #FFB300;
+  --sunset-light: #FFD54F;
+  --sunset-dim: #E65100;
+  --horizon: #FF8F00;
+  --sand: #D7CCC8;
+  --clay: #BCAAA4;
+  --adobe: #EFEBE9;
+  --dusk: #1A0E00;
+  --mesa: #FFF8E1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #6D4C41;
+  --link: var(--sunset-dim);
+  --card-border: var(--clay);
+  --border: var(--clay);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--dusk) 0%, var(--terra-deep) 30%, var(--terra) 60%, var(--terra-mid) 100%);
+  border-bottom: 4px solid var(--sunset);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--terra-deep); border-bottom-color: var(--clay); }
+h3 { color: var(--terra-mid); }
+th { background: var(--terra-deep); }
+td { border-bottom-color: var(--clay); }
+tr:nth-child(even) { background: rgba(191, 54, 12, 0.04); }
+tr:hover { background: rgba(191, 54, 12, 0.08); }
+blockquote { border-left-color: var(--sunset); background: rgba(255, 179, 0, 0.06); }
+code { background: var(--mesa); }
+pre { background: var(--dusk); color: #E0E0E0; }
+.stat-value { color: var(--terra-deep); }
+
+/* -- Tags -- */
+.tag-history { background: #FBE9E7; color: #BF360C; }
+.tag-traveling { background: #FFF8E1; color: #F57F17; }
+.tag-governance { background: #EFEBE9; color: #4E342E; }
+.tag-culture { background: #FFF3E0; color: #E65100; }
+.tag-decline { background: #FCE4EC; color: #AD1457; }
+.tag-rosetta { background: #E8EAF6; color: #283593; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: sunset gradient motif -- */
+.sunset-line {
+  background: linear-gradient(90deg, var(--terra-deep), var(--terra), var(--sunset), var(--horizon), var(--terra-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
