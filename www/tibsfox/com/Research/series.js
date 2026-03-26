@@ -29,6 +29,7 @@
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
     { id: 'JNS', name: 'JanSport', path: 'JNS/index.html' },
+    { id: 'KGX', name: "King's X", path: 'KGX/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
     { id: 'LFR', name: 'Living Forest', path: 'LFR/index.html' },
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
