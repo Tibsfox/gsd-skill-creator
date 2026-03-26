@@ -22,20 +22,20 @@
 \usepackage{graphicx}
 \usepackage{lastpage}
 
-% ── Color Scheme: Technology ──────────────────────────────────────────
-\definecolor{primary}{HTML}{263238}       % Steel blue (sections)
-\definecolor{secondary}{HTML}{1565C0}     % Electric blue (subsections)
-\definecolor{tertiary}{HTML}{37474F}      % Graphite (subsubsections)
-\definecolor{accent}{HTML}{0288D1}        % Highlights, pipeline arrows
-\definecolor{lightprimary}{HTML}{ECEFF1}  % Quote boxes, highlights
-\definecolor{lightsecondary}{HTML}{E3F2FD}
-\definecolor{lighttertiary}{HTML}{ECEFF1}
-\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
-\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
-\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
-\definecolor{darktext}{HTML}{212121}      % Body text
+% === COLOR SCHEME: History Domain ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy/Deep Purple
+\definecolor{secondary}{HTML}{F57F17}     % Gold
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment Brown
+\definecolor{accent}{HTML}{6A1B9A}        % Highlight Purple
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light Purple
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Light Gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Light Brown
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
 
-% ── Section Formatting ────────────────────────────────────────────────
+% === SECTION FORMATTING ===
 \titleformat{\section}
   {\Large\bfseries\sffamily\color{primary}}
   {\thesection}{1em}{}
@@ -53,7 +53,7 @@
 \titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
 \titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
 
-% ── Custom Environments ──────────────────────────────────────────────
+% === CUSTOM ENVIRONMENTS ===
 \newcommand{\stageheader}[2]{%
   \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
     \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
@@ -76,35 +76,34 @@
 }
 
 \newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
-
-% ── Table Helpers ─────────────────────────────────────────────────────
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
 
-% ── Headers/Footers ──────────────────────────────────────────────────
+% === HEADERS/FOOTERS ===
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Unison Language}}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Euclid and the Architecture of Reason}}
 \fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
 \fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% ── Hyperlinks ───────────────────────────────────────────────────────
+% === HYPERLINKS ===
 \hypersetup{
   colorlinks=true,
   linkcolor=secondary,
   urlcolor=secondary,
   pdfauthor={GSD Ecosystem},
-  pdftitle={Unison Language -- Mission Package},
+  pdftitle={Euclid and the Architecture of Reason -- Mission Package},
   pdfsubject={Vision to Mission Pipeline},
 }
 
-% ══════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── Title Page ───────────────────────────────────────────────────────
+% ============================================================
+% TITLE PAGE
+% ============================================================
 \thispagestyle{empty}
 \begin{center}
 \vspace*{3cm}
@@ -115,10 +114,10 @@
 \textcolor{bordergray}{\rule{8cm}{0.4pt}}
 
 \vspace{1.5cm}
-{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Unison Language\\[0.3em]Content-Addressed Code from the Future}}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Euclid and the\\[0.3em]Architecture of Reason}}
 
 \vspace{0.8cm}
-{\Large\sffamily\textcolor{secondary}{Language Design $\cdot$ Distributed Systems $\cdot$ Developer Tooling}}
+{\Large\sffamily\textcolor{secondary}{Philosophy, Mathematics, and the Art of Debate}}
 
 \vspace{0.5cm}
 {\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
@@ -129,366 +128,348 @@
 
 \vspace{3cm}
 {\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
-{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 4--5 sessions}}
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12 context windows across 4 sessions}}
 \end{center}
 \newpage
 
-% ── Table of Contents ────────────────────────────────────────────────
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
 \tableofcontents
 \newpage
 
-% ══════════════════════════════════════════════════════════════════════
-%  STAGE 1 — VISION DOCUMENT
-% ══════════════════════════════════════════════════════════════════════
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
 \stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
 
-\section{Unison Language --- Vision Guide}
+\section{Euclid and the Architecture of Reason --- Vision Guide}
 
 \metafield{Date:}{March 7, 2026}
-\metafield{Status:}{Initial Vision / Pre-Research}
-\metafield{Depends On:}{None (entry point)}
-\metafield{Context:}{Programming language research -- functional, content-addressed, distributed}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-mathematical-foundations-conversation.md, the-space-between.pdf}
+\metafield{Context:}{A deep research study tracing Euclid's \textit{Elements} from its origins in Hellenistic Alexandria through its transformation of philosophy, political rhetoric, and the very nature of mathematical truth --- culminating in the non-Euclidean revolution that reshaped our understanding of space, logic, and certainty.}
 
 \subsection{Vision}
 
-Unison asks a question so fundamental that most programmers have never thought to ask it: what if we stopped storing code as text files? What if definitions were identified not by fragile human-assigned names but by the cryptographic hash of their actual content --- their abstract syntax tree, their meaning? The implications cascade outward like ripples in water, touching everything from build systems to dependency management to distributed computing to the very nature of what it means to deploy software.
+Around 300 BCE, a mathematician working in Alexandria assembled thirteen books of definitions, postulates, constructions, and proofs. The work was not entirely original --- it drew on Hippocrates of Chios, Eudoxus, Theaetetus, and the broader Pythagorean tradition. But what Euclid achieved was something more powerful than any single theorem: he demonstrated that an entire universe of mathematical truth could be erected from a handful of self-evident starting points, connected by nothing but the force of logical deduction.
 
-Founded in 2013 by Paul Chiusano, R\'{u}nar Bjarnason, and Arya Irani, Unison represents a clean-sheet rethinking of the programming experience. The language is statically typed, purely functional, and descended from Haskell --- but smaller, simpler, and strict rather than lazy. Its effect system (called ``abilities'') draws from the Frank language's algebraic effects, offering a direct-style alternative to monadic composition that tracks side effects in the type system without the cognitive overhead of manipulating two layers of abstraction simultaneously. The Unison Codebase Manager (UCM) replaces the traditional edit-compile-run cycle with a collaborative dialogue between programmer and compiler.
+This achievement --- the axiomatic method --- became the gold standard not merely for mathematics but for \textit{all} rigorous thought. For over two thousand years, Euclid's \textit{Elements} was the second most printed book in the Western world, surpassed only by the Bible. Its influence radiated far beyond geometry: Spinoza modeled his \textit{Ethics} on Euclidean proof structure. Newton called his laws of motion ``axioms'' and deduced gravitational theory as a sequence of theorems. Thomas Jefferson structured the Declaration of Independence as a Euclidean argument from self-evident truths. Abraham Lincoln taught himself the meaning of ``demonstrate'' by mastering the first six books of the \textit{Elements} by candlelight.
 
-But the real revolution is architectural. Because every definition is content-addressed via 512-bit SHA3 hashes, code becomes location-independent. Computations can migrate between nodes in a distributed system with dependencies deployed on the fly. Serialization and deserialization happen without manual encoder/decoder layers. Version conflicts dissolve --- two ``versions'' of a library can coexist because they are simply different hashes. The diamond dependency problem, the bane of every package manager, becomes a non-issue. Unison 1.0 shipped in November 2025, and Unison Cloud BYOC went generally available in October 2025, making the language's distributed computing vision commercially real.
+And then, in the nineteenth century, the most productive crisis in the history of mathematics erupted from the single most controversial sentence in Euclid's work: the fifth postulate, the parallel postulate. Two millennia of failed attempts to prove it from the other four finally gave way to the stunning realization that consistent, self-contained geometries could exist in which it did \textit{not} hold. Gauss, Lobachevsky, Bolyai, and Riemann did not destroy Euclid --- they revealed that his system was one of many possible architectures of space, and that the choice of axioms is itself a creative act.
 
-This research mission will produce a comprehensive technical reference on Unison's design, implementation, ecosystem, and implications for the future of programming --- structured for the GSD ecosystem's multi-agent orchestration pattern.
+This research mission traces the full arc: from the historical Euclid to the axiomatic method's philosophical reach, from its influence on political argumentation to the non-Euclidean revolution that transformed physics, logic, and our understanding of certainty itself.
 
 \subsection{Problem Statement}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item \textbf{The Build Problem:} Traditional programming languages store code as text files, requiring complex build systems, incremental compilation heuristics, and dependency resolution that regularly fails. Unison eliminates builds entirely by storing type-checked ASTs in a content-addressed database, but the implications of this design for developer workflow, tooling, and ecosystem architecture are insufficiently documented in a single cohesive reference.
+\begin{enumerate}
+  \item \textbf{Historical opacity:} Very little is known about Euclid as a historical figure; the \textit{Elements} itself is a palimpsest of earlier work, later editorial revision, and transmission through Arabic, Latin, and vernacular translations. Separating Euclid's original contribution from its accretions requires careful scholarship.
 
-  \item \textbf{The Effects Problem:} Managing computational side effects remains one of the hardest problems in programming language design. Monadic approaches (Haskell) are powerful but cognitively expensive; direct-style approaches (most imperative languages) provide no type-level tracking. Unison's ability system offers a middle path --- direct-style code with type-tracked effects --- but the design space, trade-offs, and comparison to alternatives requires systematic analysis.
+  \item \textbf{The axiomatic method's philosophical reach is underappreciated:} Most people encounter Euclid as ``high school geometry'' without recognizing that the axiomatic-deductive method he formalized became the template for Western conceptions of proof, truth, and certainty across philosophy, science, law, and politics.
 
-  \item \textbf{The Distribution Problem:} Distributed systems are built from dozens of technologies outside the programming language itself --- container orchestration, service meshes, serialization frameworks, configuration management. Unison's content-addressed code enables a radically different model where a single program describes an entire distributed system. The technical mechanisms enabling this, and their real-world constraints, need structured documentation.
+  \item \textbf{The rhetoric--mathematics connection is obscured:} The direct line from Euclidean logic to Jefferson's Declaration, Lincoln's anti-slavery arguments, and Spinoza's metaphysics is rarely taught as a unified narrative, leaving students unaware of how mathematical structure shapes political and philosophical discourse.
 
-  \item \textbf{The Ecosystem Problem:} Unison's codebase-as-database model creates a fundamentally different ecosystem architecture than package registries like npm or crates.io. Unison Share, the UCM, and the project/branch model represent novel approaches to code sharing, versioning, and collaboration that deserve thorough examination alongside their limitations.
+  \item \textbf{The parallel postulate controversy is treated as a footnote:} The two-thousand-year struggle over the fifth postulate --- and its resolution through non-Euclidean geometry --- is one of the most consequential intellectual dramas in history, yet it is typically reduced to a paragraph in textbooks rather than explored as the paradigm-shifting event it was.
 
-  \item \textbf{The Adoption Problem:} Despite elegant design, Unison remains a niche language. Understanding the barriers to adoption --- ecosystem size, learning curve, tooling maturity, the closed-source nature of Unison Cloud --- is essential for evaluating where Unison fits in the broader landscape of programming language evolution.
+  \item \textbf{Modern disconnect:} Contemporary mathematics education often severs the connection between Euclidean foundations and their philosophical implications, treating geometry as a set of procedures rather than as a living example of how axioms shape entire worlds of thought.
 \end{enumerate}
 
 \subsection{Core Concept}
 
-\textbf{One-line model:} Content-addressed code stored as ASTs in an append-only database, enabling zero-build development, algebraic effect tracking, and self-deploying distributed systems.
+\textbf{One-line model:} \textit{The axiomatic method --- beginning from self-evident truths and building through logical deduction --- is not merely a mathematical technique but the foundational architecture of Western rational thought, and its evolution from Euclid through non-Euclidean geometry traces the deepest transformation in our understanding of truth itself.}
 
-Unison's core insight is that naming is metadata, not identity. When you write a function, the compiler hashes its syntax tree (with all dependencies replaced by their hashes and all named arguments replaced by positional references) to produce a unique 512-bit SHA3 identifier. This hash \emph{is} the function's identity. Human-readable names are stored separately and can be changed at any time without affecting any code that depends on the function. This is the ``big idea'' from which everything else flows: no builds (because definitions are immutable and cached at their hash), no dependency conflicts (because two different definitions simply have different hashes), perfect test caching (because deterministic tests need only re-run when their hash-identified dependencies change), and seamless code mobility (because a hash uniquely pins down a definition and all its transitive dependencies).
+The core insight is that Euclid's contribution was not primarily geometric content but \textit{epistemic architecture}: a method for organizing knowledge that proved so powerful it was adopted by philosophy, theology, science, law, and political rhetoric. The parallel postulate controversy then revealed that this architecture is not unique --- that axioms are choices, not discoveries, and that different choices yield different but equally valid systems.
 
-\subsubsection{Architecture Overview}
+\subsubsection{Domain Map}
 
 \begin{asciibox}
-\begin{verbatim}
-    ┌─────────────────────────────────────────────────────┐
-    │                  UNISON ECOSYSTEM                    │
-    ├──────────────┬──────────────┬────────────────────────┤
-    │  LANGUAGE    │   TOOLING    │    CLOUD PLATFORM      │
-    │              │              │                        │
-    │  ┌────────┐  │  ┌────────┐  │  ┌──────────────────┐  │
-    │  │Content │  │  │  UCM   │  │  │  Unison Cloud    │  │
-    │  │Address │──┤  │(CLI+UI)│  │  │  (BYOC / Public) │  │
-    │  │ Code   │  │  │        │  │  │                  │  │
-    │  └───┬────┘  │  └───┬────┘  │  └───────┬──────────┘  │
-    │  ┌───┴────┐  │  ┌───┴────┐  │  ┌───────┴──────────┐  │
-    │  │Ability │  │  │ Unison │  │  │  Typed RPC +     │  │
-    │  │System  │  │  │ Share  │  │  │  Typed Storage   │  │
-    │  │(Effects│  │  │(Code   │  │  │  + Adaptive      │  │
-    │  │ Types) │  │  │Hosting)│  │  │  Service Graph   │  │
-    │  └────────┘  │  └────────┘  │  └──────────────────┘  │
-    │              │              │                        │
-    │  Static      │  LSP + MCP   │  Deploy with a        │
-    │  Typing +    │  + Desktop   │  function call.       │
-    │  Inference   │  App         │  10-100x LOC savings. │
-    └──────────────┴──────────────┴────────────────────────┘
-\end{verbatim}
+                    EUCLID AND THE ARCHITECTURE OF REASON
+                    ======================================
+
+    +-----------+     +----------------+     +----------------+
+    | HISTORICAL|     |   AXIOMATIC    |     | PHILOSOPHICAL  |
+    | FOUNDATIONS|---->|    METHOD      |---->|   INFLUENCE    |
+    | (300 BCE) |     | (Logic Engine) |     | (Spinoza/Kant) |
+    +-----------+     +----------------+     +----------------+
+          |                   |                      |
+          v                   v                      v
+    +-----------+     +----------------+     +----------------+
+    |  ELEMENTS |     |   POLITICAL    |     |  NON-EUCLIDEAN |
+    | 13 Books  |     |   RHETORIC     |     |  REVOLUTION    |
+    | Geometry  |     | (Jefferson/    |     | (Gauss/Bolyai/ |
+    | + Number  |     |  Lincoln)      |     |  Lobachevsky/  |
+    | Theory    |     |                |     |  Riemann)      |
+    +-----------+     +----------------+     +----------------+
+                              |
+                              v
+                    +-------------------+
+                    | THE SPACE BETWEEN |
+                    | Axioms as choices |
+                    | Structure as lever|
+                    +-------------------+
 \end{asciibox}
 
 \subsubsection{Module Architecture}
 
 \begin{asciibox}
-\begin{verbatim}
-  MODULE 1            MODULE 2           MODULE 3
-  Language Core       Type System &      Tooling &
-  (Content-Addressed  Abilities          Workflow
-   Code, Hashing,     (Static Types,     (UCM, Share,
-   AST Storage,       Inference,         LSP, MCP,
-   No-Build Model)    Algebraic Effects) Desktop App)
-       │                   │                  │
-       └────────┬──────────┘                  │
-                │                             │
-  MODULE 4      │         MODULE 5            │
-  Distributed   │         Ecosystem &         │
-  Computing     │         Adoption            │
-  (Cloud, BYOC, └─────────(Community,    ─────┘
-   Code Mobility,          Libraries,
-   Typed RPC)              Limitations)
-\end{verbatim}
+    MODULE 1: Historical Foundations
+      |-- Euclid's life and context (Alexandria, Ptolemy I)
+      |-- Sources and predecessors (Hippocrates, Eudoxus, Theaetetus)
+      |-- Structure of the Elements (13 books)
+      |-- Transmission (Greek -> Arabic -> Latin -> Vernacular)
+
+    MODULE 2: The Axiomatic Method
+      |-- Definitions, postulates, common notions
+      |-- The deductive chain
+      |-- Aristotle's influence and the proto-logical tradition
+      |-- From Euclid to Hilbert: rigorization
+
+    MODULE 3: Philosophical Influence
+      |-- Spinoza's Ethics Demonstrated in Geometrical Order
+      |-- Newton's Principia as axiomatic physics
+      |-- Kant's synthetic a priori and Euclidean space
+      |-- Descartes and the geometrical spirit
+
+    MODULE 4: Political Rhetoric and Debate
+      |-- Jefferson and "self-evident truths"
+      |-- Lincoln's Euclidean logic in the slavery debate
+      |-- The Enlightenment's debt to geometric reasoning
+      |-- Proof vs. authority in democratic discourse
+
+    MODULE 5: The Parallel Postulate and Non-Euclidean Revolution
+      |-- 2000 years of failed proofs
+      |-- Gauss, Lobachevsky, Bolyai: hyperbolic geometry
+      |-- Riemann: elliptic geometry and curvature
+      |-- Einstein and the physical meaning of non-Euclidean space
+      |-- Axioms as choices, not truths
 \end{asciibox}
 
 \subsection{Research Modules}
 
-\subsubsection{Module 1: Language Core --- Content-Addressed Code}
-The foundational ``big idea'': how code is stored as ASTs in a database rather than text files, the 512-bit SHA3 hashing scheme, the separation of names from identity, the implications for builds (they disappear), renaming (always non-breaking), test caching (deterministic tests never re-run unless dependencies change), and semantically-aware version control (no spurious merge conflicts from formatting or import ordering). Includes the append-only codebase model and how definitions are canonicalized before hashing.
+\subsubsection{Module 1: Historical Foundations}
+The historical context of Euclid and the \textit{Elements} --- who Euclid was (or may have been), the mathematical tradition he synthesized, the structure of the thirteen books, and the remarkable transmission history through Arabic, Latin, and vernacular editions spanning twenty-three centuries.
 
-\subsubsection{Module 2: Type System and Abilities}
-Unison's static type system with bidirectional type inference, structural and unique types, pattern matching, and the ability system (algebraic effects). Covers how abilities track effects in function signatures, the handler mechanism, the relationship to the Frank language, comparison with monadic approaches (Haskell IO, Scala ZIO), and the trade-offs of direct-style effectful programming. Includes the \texttt{IO}, \texttt{Exception}, \texttt{Abort}, \texttt{Stream}, and \texttt{Store} abilities.
+\subsubsection{Module 2: The Axiomatic Method}
+The logical architecture Euclid pioneered: beginning from definitions, postulates, and common notions, then building an edifice of theorems through pure deduction. The relationship to Aristotle's logic, the distinction between construction (``problems'') and demonstration (``theorems''), and the eventual rigorization by Hilbert in the nineteenth century.
 
-\subsubsection{Module 3: Tooling and Developer Workflow}
-The Unison Codebase Manager (UCM) as both CLI and development environment. Scratch files, watch expressions, the add/update cycle, structured refactoring sessions, project/branch model, the UCM Desktop app, LSP integration, the MCP server for AI agent workflows, and the Local Codebase UI. Covers how the programmer-compiler dialogue differs from traditional edit-compile-run cycles.
+\subsubsection{Module 3: Philosophical Influence}
+How the Euclidean method was adopted as the template for rigorous philosophical argument. Spinoza's \textit{Ethics}, modeled explicitly on Euclid's \textit{Elements}, represents the most ambitious attempt to derive metaphysics and moral philosophy from axioms. Newton's \textit{Principia} similarly adopted axiomatic structure for physics. Kant's argument that Euclidean space is a ``synthetic a priori'' truth embedded in the structure of human cognition.
 
-\subsubsection{Module 4: Distributed Computing and Unison Cloud}
-How content-addressed code enables self-deploying distributed systems. The \texttt{Remote} ability, typed RPC without serialization boilerplate, Adaptive Service Graph Compression, typed transactional storage, deployment-as-a-function-call, Unison Cloud public offering, and the BYOC (Bring Your Own Cloud) model launched October 2025. Covers the \texttt{Seq} distributed data structure, the streaming framework, and the ``program as distributed system'' paradigm.
+\subsubsection{Module 4: Political Rhetoric and Debate}
+The direct application of Euclidean reasoning to political discourse. Jefferson's Declaration of Independence as a Euclidean argument from self-evident axioms. Lincoln's mastery of the \textit{Elements} and his explicit use of Euclidean logic in the Lincoln-Douglas debates and the Cooper Union address. The broader Enlightenment project of grounding political legitimacy in reason rather than authority.
 
-\subsubsection{Module 5: Ecosystem, Community, and Adoption}
-Unison Share as code hosting, the ecosystem of libraries, Unison Computing as a public benefit corporation, seed funding (\$9.75M), the community (Discord, Unison Forall conferences), 120+ contributors on GitHub, 6.5K stars. Covers adoption barriers, the closed-source Cloud platform trade-off, comparison to related languages (Haskell, Koka, Eff, Erlang), the 2025 roadmap (C FFI, improved record types, agentic computing framework), and the path to broader adoption.
+\subsubsection{Module 5: The Parallel Postulate and Non-Euclidean Revolution}
+The two-thousand-year controversy over the fifth postulate, the independent discovery of hyperbolic geometry by Gauss, Lobachevsky, and Bolyai, Riemann's generalization to curved spaces, Beltrami's consistency proof, and the ultimate vindication by Einstein's general relativity --- which showed that physical space is non-Euclidean. The philosophical implications: axioms are choices that define mathematical universes, not self-evident truths about a single reality.
 
 \subsection{Chipset Configuration}
 
 \begin{asciibox}
-\begin{verbatim}
 chipset:
-  primary_model: opus
-  secondary_model: sonnet
-  utility_model: haiku
-  allocation:
-    opus: 30%    # Synthesis, cross-module integration,
-                 # vision narrative, adoption analysis
-    sonnet: 60%  # Module surveys, document assembly,
-                 # source verification, technical reference
-    haiku: 10%   # Shared schemas, templates, scaffolding
-  cache_strategy: aggressive
-  prompt_caching: enabled
-  session_budget: 18-24 context windows
-\end{verbatim}
+  name: euclid-architecture-of-reason
+  version: "1.0"
+  activation: squadron
+  modules:
+    - historical-foundations
+    - axiomatic-method
+    - philosophical-influence
+    - political-rhetoric
+    - parallel-postulate-revolution
+  model_assignment:
+    opus: [philosophical-influence, parallel-postulate-revolution, synthesis]
+    sonnet: [historical-foundations, axiomatic-method, political-rhetoric,
+             verification, publication]
+    haiku: [schemas, templates, scaffolding]
+  wave_count: 4
+  parallel_tracks: 2
+  estimated_tokens: 180000
+  cache_strategy: "5-min TTL, shared source index"
 \end{asciibox}
 
 \subsection{Scope Boundaries}
 
-\subsubsection*{In Scope (v1.0)}
+\textbf{In Scope (v1.0):}
 \begin{itemize}[leftmargin=2em]
-  \item Complete technical analysis of content-addressed code architecture
-  \item Unison's type system and ability/effect system with code examples
-  \item UCM workflow, Unison Share, and developer tooling analysis
-  \item Unison Cloud and BYOC distributed computing model
-  \item Ecosystem assessment including libraries, community, and adoption trajectory
-  \item Comparison to related languages (Haskell, Koka, Eff, Erlang/OTP)
-  \item Unison 1.0 milestone analysis and 2026 roadmap items
+  \item Euclid's historical context, sources, and the structure of the \textit{Elements}
+  \item The axiomatic-deductive method and its evolution from Euclid through Hilbert
+  \item Spinoza, Newton, Descartes, and Kant as exemplars of Euclidean philosophical influence
+  \item Jefferson's Declaration and Lincoln's speeches as political applications
+  \item The parallel postulate controversy and the discovery of non-Euclidean geometries
+  \item Connections to GSD ecosystem mathematical foundations (unit circle, set theory, category theory)
 \end{itemize}
 
-\subsubsection*{Out of Scope}
+\textbf{Out of Scope:}
 \begin{itemize}[leftmargin=2em]
-  \item Full Unison language tutorial or learning guide
-  \item Performance benchmarking or runtime profiling
-  \item Unison Cloud pricing analysis or business model evaluation
-  \item Implementation details of the UCM Haskell codebase itself
-  \item Speculative features beyond the published roadmap
+  \item Complete technical treatment of non-Euclidean geometry proofs
+  \item Detailed biography of post-Euclidean mathematicians beyond their relation to the parallel postulate
+  \item Modern formal logic and metamathematics (G\"odel, Tarski) beyond brief mention
+  \item Non-Western mathematical traditions (important but requiring separate dedicated study)
+  \item Pedagogical curriculum design (covered by existing GSD educational packs)
 \end{itemize}
 
 \subsection{Success Criteria}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item Content-addressed code architecture documented with hash scheme, canonicalization process, and at least 3 code examples showing the same function under different names producing identical hashes
-  \item Build elimination mechanism explained with comparison to traditional incremental compilation approaches in $\geq$3 other languages
-  \item Ability system fully documented with all built-in abilities catalogued, at least 2 custom ability examples, and handler mechanics explained
-  \item Comparison table between Unison abilities, Haskell monads, Koka effects, and traditional exception handling covering $\geq$6 dimensions
-  \item UCM workflow documented end-to-end: scratch file $\rightarrow$ typecheck $\rightarrow$ add $\rightarrow$ update $\rightarrow$ publish, with structured refactoring sessions explained
-  \item Unison Cloud distributed computing model traced from content-addressed code $\rightarrow$ code mobility $\rightarrow$ typed RPC $\rightarrow$ self-deployment, with at least 1 complete deployment example
-  \item BYOC architecture documented including infrastructure requirements, setup process, and operational model
-  \item Unison Share ecosystem assessed with library count estimates, community metrics (stars, contributors, Discord activity), and growth trajectory
-  \item At least 5 concrete adoption barriers identified with evidence and potential mitigations
-  \item Cross-module synthesis connecting the content-addressed core to abilities, tooling, and distributed computing as emergent consequences of a single design decision
-  \item All numerical claims attributed to specific sources (GitHub, Unison blog, conference talks, or peer-reviewed publications)
-  \item Document self-contained: a reader with no prior Unison knowledge can understand the complete ecosystem from this reference alone
+\begin{enumerate}
+  \item Historical narrative covers Euclid's context, the \textit{Elements}' structure, and at least three stages of its transmission (Greek, Arabic, Latin, vernacular).
+  \item Axiomatic method section distinguishes definitions, postulates, and common notions with at least two concrete examples from the \textit{Elements}.
+  \item Philosophical influence module covers Spinoza, Newton, and Kant with specific textual connections to Euclidean method.
+  \item Political rhetoric module documents at least three specific instances of Euclidean reasoning in Jefferson's or Lincoln's writings/speeches with source attribution.
+  \item Parallel postulate section traces the controversy from Proclus through Saccheri, Gauss, Lobachevsky, Bolyai, and Riemann.
+  \item Non-Euclidean section explains the three geometries (Euclidean, hyperbolic, elliptic) with their distinct parallel postulate formulations.
+  \item All numerical claims and historical dates are attributed to peer-reviewed or professional sources.
+  \item Cross-module connections identified: at least four explicit links between modules.
+  \item Through-line connects to GSD ecosystem philosophy (Amiga Principle, mathematical foundations, the spaces between).
+  \item Document is self-contained: a reader with no prior knowledge can follow the full arc from Euclid to Einstein.
+  \item Source bibliography contains at least 15 professional or peer-reviewed sources.
+  \item No policy advocacy; evidence and analysis presented without political bias.
 \end{enumerate}
 
 \subsection{Relationship to Other Documents}
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\tableheader{Document} & \tableheader{Relationship} \\
 \midrule
-GSD Framework Vision & Parent ecosystem; Unison research supports multi-agent tool development & Active \\
-gsd-skill-creator & Execution engine for this mission package & Active \\
-Token Optimization Research & Unison's caching model parallels GSD prompt caching strategies & Active \\
+gsd-mathematical-foundations & Euclid's axiomatic method is the historical ancestor of the eight-layer mathematical progression; set theory and category theory are direct descendants \\
+the-space-between.pdf & The ``spaces between'' framework echoes the Euclidean insight that relationships (proofs connecting axioms to theorems) are more fundamental than isolated facts \\
+gsd-learn-kung-fu-pack & Teaching methodology parallels Euclid's progressive disclosure: simple definitions building to complex theorems \\
+gsd-chipset-architecture & Chipset configuration as axiom system: a small set of architectural choices generating complex behavior \\
+unit-circle-skill-creator-synthesis & The unit circle as a modern Euclidean ``common notion'' --- the perceptual event where separate subjects resolve into one \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
 \subsection{The Through-Line}
 
-Unison embodies the Amiga Principle at the language design level: architectural leverage over brute force. Rather than adding yet another build tool, yet another package manager, yet another serialization framework on top of a fundamentally broken model of ``code as text files,'' Unison makes a single radical architectural choice --- content-addressed code --- and lets the solutions emerge naturally. No builds. No dependency hell. No serialization boilerplate. No spurious merge conflicts. Self-deploying distributed systems.
+\begin{quotebox}
+Euclid's deepest contribution was not geometry --- it was the demonstration that a small set of carefully chosen starting points, connected by transparent logical steps, could generate an entire world of knowledge. This is the Amiga Principle expressed in pure thought: architectural elegance as leverage, structure as power, simplicity as the engine of complexity.
 
-This is the same pattern the GSD ecosystem pursues: instead of patching the symptoms of context degradation in AI-assisted development, redesign the architecture so the problems dissolve. Unison proves that when you have the courage to question the deepest assumptions --- even ones as universal as ``code is stored in files'' --- the resulting system can be not just incrementally better but categorically different. The spaces between definitions, the gaps where bugs and friction traditionally hide, simply close.
+The GSD ecosystem inherits this architecture directly. A vision document is an axiom --- a seed of intent. The wave execution plan is a deductive chain. Each component spec is a self-contained theorem, derivable from the vision and independently verifiable. The skill-creator's promotion pipeline (conversation $\rightarrow$ SKILL.md $\rightarrow$ LoRA $\rightarrow$ compiled code) is an L-system grown from Euclidean roots: simple rules, iterated, producing complexity beyond their origin.
+
+And the non-Euclidean revolution carries its own lesson for the ecosystem: axioms are choices. The architectural decisions that define a system are not discovered truths but creative acts. Different choices yield different but internally consistent worlds. The power lies not in finding the ``right'' axioms but in choosing them deliberately and following them honestly.
+
+The space between the axiom and the theorem --- that is where the work lives. That is where understanding happens.
+\end{quotebox}
 
 \newpage
 
-% ══════════════════════════════════════════════════════════════════════
-%  STAGE 2 — RESEARCH REFERENCE
-% ══════════════════════════════════════════════════════════════════════
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
 \stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
 
-\section{Unison Language --- Research Reference}
+\section{Euclid and the Architecture of Reason --- Research Reference}
 
 \subsection{How to Use This Document}
 
-This reference compiles findings from web research, official Unison documentation, and community sources. It is organized by research module and designed to be consumed by GSD agents during mission execution. Each module section provides the factual foundation that agents will expand into full deliverable sections.
+This reference compiles findings from peer-reviewed scholarship, university research programs, and professional mathematical and philosophical organizations. It is organized by research module and designed to be consumed by GSD agents producing the final deliverable.
 
 \textbf{Key source organizations:}
 \begin{itemize}[leftmargin=2em]
-  \item Unison Computing (public benefit corp) --- official language and cloud documentation
-  \item GitHub (unisonweb/unison) --- open source repository, 6.5K stars, 120+ contributors
-  \item LWN.net --- independent technical analysis of Unison
-  \item SoftwareMill --- four-part technical evaluation series
-  \item InfoWorld --- industry coverage of Unison 1.0 launch
-  \item Academic references: Frank language paper (Lindley, McBride, McLaughlin) for ability system foundations
+  \item MacTutor History of Mathematics Archive (University of St Andrews)
+  \item Stanford Encyclopedia of Philosophy
+  \item Internet Encyclopedia of Philosophy
+  \item Encyclop\ae dia Britannica (mathematics and philosophy editors)
+  \item Mathematical Association of America
+  \item Society for Industrial and Applied Mathematics (SIAM)
+  \item National Center for Biotechnology Information / PubMed Central (PMC)
+  \item Springer Nature (Archive for History of Exact Sciences)
+  \item Cambridge University Press (Cambridge Companions series)
 \end{itemize}
 
-\subsection{Module 1 Reference: Language Core}
+\subsection{Module 1: Historical Foundations Reference}
 
-\subsubsection{Content-Addressed Code}
+\subsubsection{Euclid's Life and Context}
 
-Unison's central innovation is identifying definitions by a SHA3-512 hash of their abstract syntax tree rather than by name. Before hashing, definitions are canonicalized: all named arguments are replaced by positional de Bruijn indices, and all references to other definitions are replaced by their hashes. This means two functions with identical structure but different variable names produce the same hash. For example, \texttt{funnyAdd x y = x + y + 1} and \texttt{amusingAdd a b = a + b + 1} hash identically because their canonical ASTs are structurally equivalent. However, \texttt{comicalAdd x y = y + x + 1} produces a different hash because the argument order differs in the AST.
+Euclid of Alexandria (fl.\ c.\ 300 BCE) is traditionally placed during the reign of Ptolemy I (r.\ 305/304--282 BCE), based primarily on Proclus's fifth-century CE \textit{Commentary on the First Book of Euclid's Elements}. Proclus reports that Euclid was younger than Plato's students but older than Archimedes and Eratosthenes. The famous anecdote about Euclid telling Ptolemy that ``there is no royal road to geometry'' comes from this same source, though a nearly identical story is told about Menaechmus and Alexander the Great, casting doubt on its historicity (MacTutor History of Mathematics Archive, University of St Andrews).
 
-Names are stored as separate metadata in the codebase database. Renaming a definition changes only the metadata, never the hash. This means every downstream dependency continues to work because it references the hash, not the name.
+Medieval Arabic sources claim Euclid was born in Tyre and was the son of Naucrates, but modern historians consider these accounts unreliable. There is ongoing scholarly debate about whether Euclid was a single individual, a team leader at Alexandria, or even a collective pseudonym (Itard, 1962, cited in MacTutor).
 
-\subsubsection{The Codebase Database}
+\subsubsection{The Structure of the Elements}
 
-Unison code is stored in a SQLite-backed, append-only database called the ``codebase.'' Definitions are stored as type-checked ASTs linked by hash. The database model ensures that once a definition is added, it is immutable. The codebase format includes a shared compilation cache, which means code is compiled exactly once at the moment it enters the database and never again.
+The \textit{Elements} comprises thirteen books covering plane geometry (Books I--VI), number theory (Books VII--IX), incommensurability (Book X), and solid geometry (Books XI--XIII). The work begins with 23 definitions, 5 postulates, and 5 common notions, from which 465 propositions are derived. Key results include the Pythagorean theorem (I.47), the Euclidean algorithm for greatest common divisors (VII.1--2), the proof that there are infinitely many prime numbers (IX.20), and the construction of the five Platonic solids (XIII).
 
-\subsubsection{Consequences of Content-Addressing}
+The \textit{Elements} synthesized earlier work by Hippocrates of Chios (c.\ 470--410 BCE), Eudoxus of Cnidus (c.\ 408--355 BCE), and Theaetetus (c.\ 417--369 BCE). Historian Markus Asper concluded that Euclid's principal achievement was assembling accepted mathematical knowledge into a logically coherent order and supplying new proofs where gaps existed (cited in the Wikipedia article on \textit{Euclid's Elements}, drawing on scholarly editions).
 
-\begin{center}
-\rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{L{3.5cm}X}
-\toprule
-\rowcolor{primary}
-\tableheader{Property} & \tableheader{Mechanism} \\
-\midrule
-Zero build times & Code is stored pre-compiled; the compilation cache is part of the codebase format \\
-Non-breaking renames & Names are metadata, not identity; renaming never changes hashes \\
-Perfect test caching & Deterministic tests re-run only when their hash-identified dependencies change \\
-Semantic version control & Merge conflicts from formatting, import order, or whitespace are impossible \\
-No dependency conflicts & Different ``versions'' are simply different hashes that coexist \\
-Code mobility & A hash uniquely pins a definition and all transitive dependencies, enabling transfer between nodes \\
-Typed serialization & Values identified by content hash can be persisted and unpersisted without manual encoders/decoders \\
-\bottomrule
-\end{tabularx}
-\end{center}
+\subsubsection{Transmission History}
 
-Unison uses 512-bit SHA3 hashes. According to Unison documentation, if one million unique definitions were generated every second, the first hash collision would be expected after approximately 100 quadrillion years.
+The \textit{Elements} underwent extensive editorial revision by Theon of Alexandria (c.\ 335--405 CE), whose version dominated until 1808, when an earlier manuscript was discovered in the Vatican. The work was translated into Arabic multiple times during the ninth century --- notably by al-\d{H}ajj\={a}j ibn Y\={u}suf and by Is\d{h}\={a}q ibn \d{H}unayn (revised by Th\={a}bit ibn Qurrah). The first Latin translation was made around 1120 by Adelard of Bath from an Arabic version obtained in Spain. The first direct Greek-to-Latin translation appeared in 1505 (Bartolomeo Zamberti), and the \textit{editio princeps} of the Greek text was published in Basel in 1533. The first English translation appeared in 1570 by Sir Henry Billingsley (Britannica, ``Renditions of the Elements'').
 
-\subsubsection{Language Basics}
+Christopher Clavius, a sixteenth-century Jesuit mathematician, produced an influential edition that became part of the Jesuit educational curriculum, exposing hundreds of thousands of students to Euclidean geometry and shaping the mathematical education of figures including Descartes, Laplace, Diderot, and Voltaire (SIAM review of Wardhaugh's \textit{Encounters with Euclid}).
 
-Unison is a statically-typed, purely functional language with strict (eager) evaluation. Function arguments are separated by spaces rather than parentheses and commas. Loops are written via recursion. Pattern matching uses \texttt{match <expr> with <cases>} syntax. The language supports structural types (identified by structure) and unique types (identified by name). Unison has been in development since 2013 and reached version 1.0 in November 2025. The compiler and UCM are implemented in Haskell (99.6\% of the repository).
+\subsection{Module 2: The Axiomatic Method Reference}
 
-\subsection{Module 2 Reference: Type System and Abilities}
+\subsubsection{Definitions, Postulates, and Common Notions}
 
-\subsubsection{Type System}
+Euclid distinguished three types of foundational statements. \textbf{Definitions} specify the meaning of terms (e.g., ``A point is that which has no part''). \textbf{Postulates} are constructive assumptions specific to geometry (e.g., ``To draw a straight line from any point to any point''). \textbf{Common notions} are general logical principles applicable beyond geometry (e.g., ``Things which are equal to the same thing are also equal to one another''). Aristotle used ``axiom'' interchangeably with ``common notion,'' and this terminological overlap has complicated analysis of the relationship between Aristotelian logic and Euclidean mathematics (Rodin, ``Doing and Showing,'' PhilSci Archive).
 
-Unison features bidirectional type inference based on the work of Dunfield and Krishnaswami. Type signatures are optional --- the compiler infers them --- but can be provided for documentation. The type system supports parametric polymorphism, structural and unique algebraic data types, and pattern matching with exhaustiveness checking.
+\subsubsection{The Deductive Chain}
 
-A function type \texttt{A -> B} is syntactic sugar for \texttt{A ->\{e\} B} where \texttt{e} is a set of abilities. A pure function has type \texttt{A ->\{\} B} (empty ability set). The type checker enforces that calls to functions requiring abilities \texttt{\{A1, A2\}} must occur in a context where those abilities are available.
+Each proposition in the \textit{Elements} follows a stereotyped structure: \textit{protasis} (statement), \textit{ekthesis} (setting out), \textit{diorismos} (specification), \textit{kataskeue} (construction), \textit{apodeixis} (proof), and \textit{symperasma} (conclusion). Problems end with ``Q.E.F.'' (\textit{quod erat faciendum} --- ``which was to be done'') and theorems with ``Q.E.D.'' (\textit{quod erat demonstrandum} --- ``which was to be demonstrated''). This distinction between constructive and demonstrative results is a fundamental feature of Euclidean practice (Avigad, Dean, and Mumma, ``A Formal System for Euclid's \textit{Elements},'' \textit{Review of Symbolic Logic}, 2009).
 
-\subsubsection{Abilities (Algebraic Effects)}
+\subsubsection{Gaps and the Road to Hilbert}
 
-Abilities are Unison's implementation of algebraic effects, based on the Frank language by Sam Lindley, Conor McBride, and Craig McLaughlin. Key divergences from Frank: Unison uses ordinary polymorphic types for ability polymorphism, and an empty ability set explicitly disallows abilities (in Frank, it implies ability-polymorphic type). Unison uses a separate \texttt{handle} construct rather than overloading function application for ability handling.
+Despite its reputation for rigor, the \textit{Elements} contains logical gaps. The very first proposition (constructing an equilateral triangle on a given segment) assumes that two circles intersect --- a fact not derivable from Euclid's stated axioms. Bertrand Russell criticized Euclid's reliance on diagrams for inferential power, and David Hilbert's 1899 \textit{Grundlagen der Geometrie} provided a complete axiomatization of Euclidean geometry using 20 axioms that eliminated all dependence on visual intuition (Nirenberg, ``The Axiomatic Method,'' lecture, SUNY Albany; PMC article on diagrams in the \textit{Elements}).
 
-An ability declaration defines an interface of operations. For example, the \texttt{Abort} ability declares a single operation \texttt{Abort.abort} that terminates computation. A handler provides the implementation --- what actually happens when the effect is performed. This separation of interface from implementation enables swappable handlers: the same effectful code can run against a real database, an in-memory mock, or a test stub.
+\subsection{Module 3: Philosophical Influence Reference}
 
-\subsubsection{Built-in Abilities}
+\subsubsection{Spinoza's Ethics Demonstrated in Geometrical Order}
 
-Key abilities in the standard library include \texttt{IO} (system I/O), \texttt{Exception} (error handling with typed failure information), \texttt{Abort} (computation termination), \texttt{Stream} (value emission), and \texttt{Store} (mutable state via get/put). The \texttt{Remote} ability enables distributed computing in Unison Cloud contexts.
+Spinoza's \textit{Ethics} (written 1661--1675, published posthumously 1677) is described by scholars as ``perhaps the most ambitious attempt to apply Euclid's method in philosophy.'' The work is organized into five parts, each beginning with definitions and axioms from which propositions are derived through formal demonstration. Spinoza believed that the geometric method --- \textit{more geometrico} --- could deliver the same certainty in metaphysics and moral philosophy that Euclid achieved in geometry. The deductive structure mirrors the causal necessity that, in Spinoza's metaphysics, governs all of nature (Britannica, ``Ethics by Spinoza''; Internet Encyclopedia of Philosophy, ``Geometrical Method''; Wikipedia, ``Spinoza's \textit{Ethics}'').
 
-\subsubsection{Direct Style vs. Monadic Style}
+In the seventeenth century, mathematics was widely regarded as the paradigmatic science, admired for its conclusive, irrefutable proofs. Many philosophers attempted to replicate Euclid's success in other domains. Spinoza's work represents the fullest realization of this ambition, though its reception has been ambivalent: while the geometric form lends the \textit{Ethics} an appearance of rigor, philosophy ``by the mere act of donning the classical costume of Euclidean geometrical discourse, does not acquire the incontrovertible and scientific aura of its mathematical model'' (Cambridge Companion to Spinoza's \textit{Ethics}).
 
-Unison's abilities enable ``direct-style algebraic effects'' --- effectful code that reads like imperative code but with full type-level effect tracking. Unlike Haskell's monadic IO where programmers must think about two layers (constructing the computation and executing it), Unison programmers write sequential effectful code directly. The trade-off: delayed computations require explicit \texttt{'} (thunk) syntax, and \texttt{!} to force evaluation. Related languages with effect systems include Koka and Eff.
+\subsubsection{Newton's Principia}
 
-\subsection{Module 3 Reference: Tooling and Workflow}
+Isaac Newton's \textit{Philosophi\ae{} Naturalis Principia Mathematica} (1687) adopted Euclidean axiomatic structure for physics. Newton called his three laws of motion ``axioms'' and deduced his law of universal gravitation as a sequence of mathematical theorems. The \textit{Principia}'s structure --- definitions, axioms, propositions with proofs --- directly mirrors the \textit{Elements}. Britannica notes that the ideas of Kepler, Fermat, Descartes, and Newton ``were deeply rooted in, and inconceivable without, Euclid's \textit{Elements}'' (Britannica, ``Renditions of the Elements'').
 
-\subsubsection{Unison Codebase Manager (UCM)}
+\subsubsection{Kant's Synthetic A Priori}
 
-The UCM is the primary interface for working with Unison. It monitors scratch files (any \texttt{.u} file) via filesystem watch and responds to changes by parsing, typechecking, and presenting results. The workflow is: write code in a text editor, save, and the UCM reports results and offers to update the codebase. Commands include \texttt{add} (new definitions), \texttt{update} (changed definitions), \texttt{move} (rename), \texttt{find} (search), \texttt{view} (inspect source), \texttt{test} (run tests), and \texttt{run} (execute programs).
+Immanuel Kant (1724--1804) argued that Euclidean geometry describes the necessary structure of human spatial intuition --- that the axioms of geometry are ``synthetic a priori'' truths, neither mere definitions nor empirical discoveries but conditions of the possibility of experience itself. Kant used Euclid's proof that the angles of a triangle sum to two right angles as an example of how complex truths about non-material objects can be known with certainty. The discovery of non-Euclidean geometry in the nineteenth century undermined Kant's position, showing that alternative geometries are logically consistent (Nirenberg, ``The Axiomatic Method''; plus.maths.org, ``How Euclid Once Ruled the World'').
 
-The UCM also provides a codebase web server for the Local Codebase UI, runs watch expressions automatically, and manages projects and branches.
+\subsection{Module 4: Political Rhetoric and Debate Reference}
 
-\subsubsection{Projects and Branches}
+\subsubsection{Jefferson and ``Self-Evident Truths''}
 
-Introduced as a major codebase abstraction, projects represent libraries, applications, or services that can be shared and versioned. Each project has branches for concurrent workstreams, with a ``main'' branch by default. Projects support pull requests on Unison Share and structured dependency management.
+Thomas Jefferson structured the Declaration of Independence (1776) using Euclidean logical form. The document opens with ``We hold these truths to be self-evident'' --- a phrase that echoes the Euclidean concept of axioms or common notions that require no proof. From these axioms, Jefferson deduced the right to life, liberty, and the pursuit of happiness, and concluded with a ``therefore'' that declares independence as the logical consequence of the premises. Jefferson, who was well-educated in mathematics, adopted Euclid and Locke's logical style to structure what has been called ``arguably the greatest statement in political literature'' (plus.maths.org, ``How Euclid Once Ruled the World''; Nautilus, ``Euclid as Founding Father'').
 
-\subsubsection{UCM Desktop App}
+The historian Judith Grabiner has argued that ``in philosophy, theology, science, and politics, the idealised Euclidean model of reasoning has shaped conceptions of proof, truth, and certainty'' (plus.maths.org).
 
-Released in January 2025, the UCM Desktop provides a rich graphical interface for browsing codebase structure, clicking through to source definitions, reading API docs, and exploring namespace trees. It renders Unison's computable documentation format with tooltips, inter-definition links, and evaluated code examples.
+\subsubsection{Lincoln's Euclidean Logic}
 
-\subsubsection{AI Agent Integration}
+Abraham Lincoln studied the first six books of Euclid's \textit{Elements} during the early 1850s, carrying the text in his saddlebag while riding the Illinois legal circuit and studying by candlelight. Lincoln's motivation was explicitly epistemic: encountering the word ``demonstrate'' repeatedly in legal texts, he resolved to understand what rigorous proof actually meant. As he later recounted, he ``stayed there till I could give any proposition in the six books of Euclid at sight. I then found out what demonstrate means, and went back to my law studies'' (Journal of the Abraham Lincoln Association; Nautilus, ``Euclid as Founding Father'').
 
-An MCP (Model Context Protocol) server was added to the UCM in August 2025 to support AI coding workflows. The MCP server enables AI agents to typecheck Unison code, browse documentation, search Unison Share, and inspect project dependencies --- making Unison one of the first languages to build native AI agent tooling into its core development environment.
+Lincoln applied Euclidean reasoning directly in political debate. In the fourth Lincoln-Douglas debate (1858), he invoked Euclid: ``If you have ever studied geometry, you remember that by a course of reasoning Euclid proves that all the angles in a triangle are equal to two right angles. Now, if you undertake to disprove that proposition, would you prove it to be false by calling Euclid a liar?'' Lincoln challenged Stephen Douglas to ``demonstrate'' popular sovereignty ``as Euclid demonstrated propositions,'' rather than relying on the authority of historical figures (Journal of the Abraham Lincoln Association; Math Teacher's Resource Blog).
 
-\subsubsection{Editor Support}
+Lincoln's Cooper Union address (1860) has been analyzed as following Euclidean proof structure: stating a postulate that all parties could accept, then building a logical chain to an inescapable conclusion. Scholars Hirsch and Van Haften argue that ``Lincoln transformed geometry into speech'' (Civil War Monitor review of \textit{Abraham Lincoln and the Structure of Reason}).
 
-Unison provides LSP (Language Server Protocol) integration for VS Code with syntax highlighting, autocomplete, error highlighting, type-on-hover, and documentation previews. Other editors are supported via community contributions. Notably, code formatting is not a separate concern --- Unison pretty-prints stored definitions on display, so code is always consistently formatted.
+In a private 1854 essay, Lincoln used proof by contradiction against slavery: ``If A can prove, however conclusively, that he may, of right, enslave B, why may not B snatch the same argument, and prove equally, that he may enslave A?'' The logical structure is pure Euclid: if the argument is valid, it must work in both directions; if reversing it produces an absurdity, the original premise is false (Nautilus, ``Euclid as Founding Father'').
 
-\subsection{Module 4 Reference: Distributed Computing}
+\subsection{Module 5: The Parallel Postulate and Non-Euclidean Revolution Reference}
 
-\subsubsection{Code Mobility}
+\subsubsection{The Fifth Postulate}
 
-Because definitions are content-addressed, they can be transferred between nodes by shipping bytecode trees with hash references. The receiving node inspects incoming hashes, identifies any missing dependencies, and requests them on demand. This enables arbitrary computations to migrate across a cluster without pre-packaging or container shipping.
+Euclid's fifth postulate states: if a straight line crossing two other straight lines makes the interior angles on one side less than two right angles, then the two lines, if extended indefinitely, will meet on that side. This postulate troubled mathematicians for centuries because of its apparent complexity compared with the other four postulates. D'Alembert called it ``the scandal of elementary geometry'' in 1767 (MacTutor History of Mathematics).
 
-\subsubsection{Unison Cloud}
+Attempts to prove the fifth postulate from the other four span from Proclus (fifth century CE) through the work of Omar Khayy\={a}m (eleventh century), Saccheri (1733), Lambert, and Legendre. All failed, often by inadvertently assuming equivalent statements (MacTutor; cut-the-knot.org).
 
-Unison Cloud is a commercial platform (operated by Unison Computing, a public benefit corp) that turns the content-addressed code model into a practical distributed computing platform. Key features: deployment via ordinary function calls (no containers, no YAML), typed RPC between services (no serialization boilerplate), typed transactional storage (persist any Unison value directly), and Adaptive Service Graph Compression (co-locating communicating services to reduce latency).
+\subsubsection{The Discovery of Non-Euclidean Geometry}
 
-Unison Cloud regularly achieves 10--100x reductions in lines of code compared to equivalent traditional distributed systems, according to Unison Computing.
+Carl Friedrich Gauss (1777--1855) was likely the first to conclude that the fifth postulate cannot be proven and that a consistent alternative geometry exists. In an 1824 private letter, Gauss wrote that the assumption of angle sums less than 180 degrees in a triangle ``leads to a curious geometry, quite different from ours, but thoroughly consistent.'' However, Gauss never published, reportedly fearing what he called ``the uproar of the Boeotians'' (cut-the-knot.org; MacTutor).
 
-\subsubsection{BYOC (Bring Your Own Cloud)}
+Nikolai Lobachevsky (1792--1856) published the first systematic account of hyperbolic geometry in 1829--1830. J\'{a}nos Bolyai (1802--1860) independently developed the same geometry, publishing it in 1832 as an appendix to his father's textbook. When Gauss saw Bolyai's work, he wrote: ``To praise it would be to praise myself. Indeed the whole contents of the work \ldots coincide almost entirely with my meditations'' (Wikipedia, ``Parallel Postulate''; storyofmathematics.com).
 
-Launched as generally available in October 2025, BYOC allows organizations to run Unison Cloud on their own infrastructure. Requirements: S3-compatible storage and the ability to launch containers. The control plane is lightweight and multi-tenant; Unison Computing never sees customer data or HTTP requests. Free for personal use (up to 10 nodes / 160 cores), with commercial licensing available.
+Bernhard Riemann (1826--1866), in his landmark 1854 lecture ``On the Hypotheses that Form the Foundations of Geometry,'' introduced a third possibility: elliptic geometry, where no parallel lines exist and all lines are of finite length. Riemann generalized geometry to spaces of arbitrary dimension and variable curvature, laying the mathematical foundation for Einstein's general theory of relativity (MacTutor; encyclopedia.com).
 
-\subsubsection{Distributed Data Structures}
+Eugenio Beltrami (1868) provided the first consistency proof by constructing a model of hyperbolic geometry within Euclidean three-dimensional space (the pseudosphere), reducing the consistency of non-Euclidean geometry to that of Euclidean geometry. Felix Klein further developed these models in 1871--1873 (MacTutor).
 
-Unison Cloud provides \texttt{Seq}, a distributed lazily-evaluated data structure spanning multiple nodes. A high-scale streaming framework with exactly-once processing was shipped in March 2025. \texttt{OrderedTable} provides typed transactional storage. These primitives compose into higher-level distributed data structures (sorted maps, linearized event logs, KNN indices for vector search) written in ordinary Unison code.
+\subsubsection{Philosophical Implications}
 
-\subsection{Module 5 Reference: Ecosystem and Adoption}
+The existence of non-Euclidean geometries had profound philosophical consequences. It refuted Kant's claim that Euclidean geometry is a necessary truth about the structure of human spatial intuition. It demonstrated that axioms are choices, not discoveries --- that different sets of axioms yield different but internally consistent mathematical universes. As the Kronecker Wallis analysis summarizes: the centuries-long debate over the parallel postulate ``ultimately expanded mathematical horizons. It taught mathematicians that axioms represent choices about what mathematical universe to explore, not discovered truths about a single platonic reality'' (kroneckerwallis.com).
 
-\subsubsection{Unison Share}
-
-Unison Share is the code hosting platform for the Unison ecosystem. It hosts projects, enables code discovery via search, supports pull requests, and provides a web interface for browsing codebases. Code is published via the \texttt{push} UCM command and libraries installed via \texttt{lib.install} --- no separate package manager required.
-
-\subsubsection{Community Metrics (as of early 2026)}
-
-GitHub: 6.5K stars, 291 forks, 120+ contributors, 19,624 commits, 94 releases. Latest release: 1.0.1 (December 21, 2025). Active Discord community. Unison Forall conference held annually (2022, 2024). Unison Computing raised \$9.75M in seed funding from Amplify Partners, Uncork Capital, Good Growth Capital, and Bloomberg Beta.
-
-\subsubsection{Related Languages}
-
-\begin{center}
-\rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2.5cm}L{2.5cm}X}
-\toprule
-\rowcolor{primary}
-\tableheader{Language} & \tableheader{Effects} & \tableheader{Storage} & \tableheader{Evaluation} & \tableheader{Key Difference} \\
-\midrule
-Haskell & Monads & Text files & Lazy & Monadic effects, traditional build \\
-Koka & Effects & Text files & Strict & Effect handlers but file-based \\
-Eff & Effects & Text files & Strict & Research language, limited tooling \\
-Erlang/OTP & Actor model & BEAM files & Strict & Distribution via message passing \\
-Unison & Abilities & Database & Strict & Content-addressed code \\
-\bottomrule
-\end{tabularx}
-\end{center}
-
-\subsubsection{Adoption Barriers}
-
-Key barriers identified from community discussion and independent analysis: (1) Small ecosystem --- fewer libraries than established languages; (2) Learning curve --- functional programming + novel concepts like content-addressed code; (3) Unison Cloud is not open source, creating vendor dependency concerns; (4) Everything must be written in Unison (no FFI until planned C FFI lands); (5) Namespace/fork/merge workflows can be confusing; (6) Limited IDE support compared to mainstream languages.
-
-\subsubsection{Roadmap (2026)}
-
-Published roadmap items include: C FFI support, improved record types, improved library management, faster codebase sync, improved MCP server, new UCM Desktop capabilities, Cloud observability, agentic computing framework, and Kinesis on S3.
+Einstein's general theory of relativity (1915) provided the ultimate vindication: physical space is non-Euclidean, its curvature determined by the distribution of mass and energy. The geometry of the universe is an empirical question, not an a priori certainty.
 
 \subsection{Safety and Sensitivity Considerations}
 
@@ -497,101 +478,110 @@ Published roadmap items include: C FFI support, improved record types, improved 
 \begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
 \toprule
 \rowcolor{primary}
-\tableheader{Area} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
 \midrule
-Vendor claims & LOC reduction claims (10--100x) are self-reported by Unison Computing; present as claimed, not verified & ANNOTATE \\
-Open source status & Language is MIT-licensed open source; Cloud platform is proprietary. Clearly distinguish. & GATE \\
-Competition framing & Present factual comparisons to other languages without advocacy for or against adoption & ANNOTATE \\
-Community metrics & GitHub stars and contributor counts are point-in-time snapshots; note date of measurement & GATE \\
+Historical claims & All biographical details about Euclid carry significant uncertainty; present with appropriate hedging & GATE \\
+Philosophical positions & Present Spinoza, Kant, et al.\ as historical positions without advocacy for or against & ANNOTATE \\
+Political rhetoric & Present Jefferson and Lincoln's use of Euclidean logic without endorsing or attacking their political positions & ANNOTATE \\
+Religious claims & Spinoza's \textit{Ethics} was banned for perceived atheism; present neutrally & ANNOTATE \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
 \subsection{Source Bibliography}
 
-\subsubsection*{Primary Sources}
-\begin{itemize}[leftmargin=2em]
-  \item Unison Language Official Documentation --- \url{https://www.unison-lang.org/docs/}
-  \item Unison GitHub Repository --- \url{https://github.com/unisonweb/unison}
-  \item ``The Big Idea'' --- \url{https://www.unison-lang.org/docs/the-big-idea/}
-  \item Announcing Unison 1.0 --- \url{https://www.unison-lang.org/unison-1-0/}
-  \item Unison Cloud BYOC Announcement --- \url{https://www.unison-lang.org/blog/cloud-byoc/}
-  \item Unison Cloud: Our Approach --- \url{https://www.unison.cloud/our-approach/}
-  \item Abilities Language Reference --- \url{https://www.unison-lang.org/docs/language-reference/abilities-and-ability-handlers/}
-  \item Abilities for the Monadically Inclined --- \url{https://www.unison-lang.org/docs/fundamentals/abilities/for-monadically-inclined/}
-  \item UCM Desktop and MCP Updates --- \url{https://www.unison-lang.org/blog/ucm0545/}
-\end{itemize}
+\subsubsection{University Research Programs and Archives}
 
-\subsubsection*{Independent Analysis}
-\begin{itemize}[leftmargin=2em]
-  \item LWN.net: ``Programming in Unison'' --- \url{https://lwn.net/Articles/978955/}
-  \item SoftwareMill: 4-part Unison evaluation series --- \url{https://softwaremill.com/trying-out-unison-part-1-code-as-hashes/}
-  \item InfoWorld: ``Futuristic Unison functional language debuts'' (Dec 2025) --- \url{https://www.infoworld.com/article/4100673/futuristic-unison-functional-language-debuts.html}
-  \item Renato Athaydes: ``A look at Unison: a revolutionary programming language'' --- \url{https://renato.athaydes.com/posts/unison-revolution.html}
-  \item Dave Thomas (pragdave): ``Abilities: a New Way to Inject Behavior and State'' --- \url{https://pragdave.me/discover/unison/2023-03-11-abilities/}
-\end{itemize}
+\begin{enumerate}[leftmargin=2em]
+  \item MacTutor History of Mathematics Archive, University of St Andrews --- ``Euclid'' biography; ``Non-Euclidean Geometry'' topic page
+  \item Stanford Encyclopedia of Philosophy --- ``Thomas Jefferson'' entry
+  \item Internet Encyclopedia of Philosophy --- ``Geometrical Method''; ``Spinoza, Benedict de: Metaphysics''
+  \item PhilSci Archive, University of Pittsburgh --- Rodin, ``Doing and Showing: The Euclidean Structure''
+  \item Carnegie Mellon University --- Avigad, Dean, and Mumma, ``A Formal System for Euclid's Elements'' (\textit{Review of Symbolic Logic}, 2009)
+  \item Cambridge University Press --- \textit{Cambridge Companion to Spinoza's Ethics} (2024 Spinoza Lexicon)
+  \item SUNY Albany --- Nirenberg, ``The Axiomatic Method'' (lecture, 1996)
+\end{enumerate}
 
-\subsubsection*{Academic Foundations}
-\begin{itemize}[leftmargin=2em]
-  \item Lindley, McBride, McLaughlin --- ``Do Be Do Be Do'' (Frank language, ability system foundation)
-  \item Dunfield, Krishnaswami --- Bidirectional typechecking for higher-rank polymorphism
-  \item Effects bibliography referenced by Unison documentation
-\end{itemize}
+\subsubsection{Peer-Reviewed Research and Professional Publications}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Springer Nature --- De Risi, ``The Development of Euclidean Axiomatics'' (\textit{Archive for History of Exact Sciences}, 2016)
+  \item PMC/PNAS --- ``Researchers Find History in the Diagrams of Euclid's Elements'' (2017)
+  \item SIAM --- Davis, review of Wardhaugh's \textit{Encounters with Euclid}
+  \item Duke University Press --- ``The Geometrical Method in Spinoza's Ethics'' (\textit{Poetics Today}, 2007)
+  \item Mathematical Association of America --- Review of Bonola's \textit{Non-Euclidean Geometry}
+  \item Felgner, ``The Axiomatic Method of Euclid'' in \textit{Philosophy of Mathematics in Antiquity and in Modern Times} (Birkh\"auser, 2023)
+\end{enumerate}
+
+\subsubsection{Professional Organizations and Reference Works}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Encyclop\ae dia Britannica --- ``Euclid,'' ``Renditions of the Elements,'' ``Ethics by Spinoza,'' ``Declaration of Independence''
+  \item Journal of the Abraham Lincoln Association --- ``Lincoln, Euclid, and the Satisfaction of Success''
+  \item Library of Congress --- ``Thomas Jefferson: Declaration of Independence''
+  \item University of Minnesota Press (Manifold) --- Goldenbaum, ``The Geometrical Method as a New Standard of Truth''
+  \item Philopedia.org --- ``Ethics Demonstrated in Geometrical Order''
+\end{enumerate}
 
 \newpage
 
-% ══════════════════════════════════════════════════════════════════════
-%  STAGE 3 — MISSION PACKAGE
-% ══════════════════════════════════════════════════════════════════════
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
 \stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
 
 \section{Milestone Specification}
 
 \subsection{Mission Objective}
 
-Produce a comprehensive, publication-quality technical reference on the Unison programming language covering its content-addressed code architecture, ability system, developer tooling, distributed computing model, and ecosystem. The reference must be self-contained, technically precise, and structured for both human readers and downstream GSD agent consumption.
+Produce a comprehensive, publication-quality research document tracing Euclid's \textit{Elements} from its Hellenistic origins through its transformation of philosophy, political rhetoric, and mathematical truth. The deliverable must be self-contained, rigorously sourced, and accessible to an educated general reader while maintaining scholarly precision.
 
 \subsection{Architecture Overview}
 
 \begin{asciibox}
-\begin{verbatim}
-  WAVE 0 (Foundation)    WAVE 1 (Parallel Research)     WAVE 2       WAVE 3
-  ┌──────────────────┐   ┌──────────────────────────┐   ┌────────┐   ┌────────┐
-  │ Shared schemas   │   │ TRACK A    │  TRACK B    │   │Synth-  │   │Publish │
-  │ Source index     │──>│ M1: Core   │  M3: Tools  │──>│esis +  │──>│  +     │
-  │ Template         │   │ M2: Types  │  M4: Distrib│   │Cross-  │   │Verify  │
-  │                  │   │            │  M5: Ecosys │   │module  │   │        │
-  └──────────────────┘   └──────────────────────────┘   └────────┘   └────────┘
-       Sequential              Parallel (2 tracks)       Sequential   Sequential
-       Haiku                   Sonnet + Opus             Opus         Sonnet
-\end{verbatim}
+WAVE 0: Foundation
+  [HAIKU] Shared schemas, source index, document templates
+          |
+          v
+WAVE 1: Parallel Research Tracks
+  Track A: [SONNET] Historical Foundations + Axiomatic Method
+  Track B: [OPUS]   Philosophical Influence + Political Rhetoric
+          |
+          v
+WAVE 2: Synthesis
+  [OPUS] Cross-module integration + Parallel Postulate (capstone)
+         Non-Euclidean revolution as convergence point
+          |
+          v
+WAVE 3: Publication + Verification
+  [SONNET] Final assembly, source verification, formatting
 \end{asciibox}
 
 \subsection{System Layers}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item \textbf{Foundation:} Shared schemas, source index, document template, cross-reference conventions
-  \item \textbf{Research:} Five parallel-capable module surveys with source-backed findings
-  \item \textbf{Synthesis:} Cross-module integration connecting content-addressing to all downstream consequences
-  \item \textbf{Publication:} Final document assembly, verification, formatting, and delivery
+\begin{enumerate}
+  \item \textbf{Source Layer} --- Curated bibliography of peer-reviewed and professional sources
+  \item \textbf{Research Layer} --- Five thematic modules with findings and evidence
+  \item \textbf{Synthesis Layer} --- Cross-module connections and narrative integration
+  \item \textbf{Publication Layer} --- Final formatted document with bibliography and index
 \end{enumerate}
 
 \subsection{Deliverables}
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{3cm}}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}XC{1.5cm}}
 \toprule
 \rowcolor{primary}
 \tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
 \midrule
-1 & Language Core Reference & Hash scheme, canonicalization, $\geq$3 code examples, comparison to 3+ build systems & Module 1 \\
-2 & Type System \& Abilities Reference & All built-in abilities, 2+ custom examples, handler mechanics, comparison table & Module 2 \\
-3 & Tooling Reference & End-to-end UCM workflow, project model, MCP server, Desktop app & Module 3 \\
-4 & Distributed Computing Reference & Code mobility mechanism, Cloud architecture, BYOC, deployment example & Module 4 \\
-5 & Ecosystem Assessment & Community metrics, library survey, 5+ adoption barriers, roadmap analysis & Module 5 \\
-6 & Cross-Module Synthesis & Unified narrative tracing content-addressing through all modules & Wave 2 \\
-7 & Final Publication & Formatted, verified, self-contained document with complete bibliography & Wave 3 \\
+D1 & Source Index & $\geq$15 professional sources, categorized & W0-01 \\
+D2 & Historical Foundations & Euclid's context, Elements structure, transmission & W1-01 \\
+D3 & Axiomatic Method & Definitions/postulates/CN, deductive chain, Hilbert & W1-02 \\
+D4 & Philosophical Influence & Spinoza, Newton, Kant with textual evidence & W1-03 \\
+D5 & Political Rhetoric & Jefferson, Lincoln with $\geq$3 specific instances & W1-04 \\
+D6 & Parallel Postulate & 2000-year arc, three geometries, implications & W2-01 \\
+D7 & Synthesis Document & All modules integrated, cross-references, bibliography & W3-01 \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -603,18 +593,18 @@ Produce a comprehensive, publication-quality technical reference on the Unison p
 \begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
 \toprule
 \rowcolor{primary}
-\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
 \midrule
-W0: Shared Schemas & None & Haiku & 2K \\
-W0: Source Index & None & Haiku & 3K \\
-W1A: Language Core & W0 & Sonnet & 12K \\
-W1A: Type System & W0, M1 partial & Sonnet+Opus & 15K \\
-W1B: Tooling & W0 & Sonnet & 10K \\
-W1B: Distributed & W0, M1 partial & Sonnet+Opus & 14K \\
-W1B: Ecosystem & W0 & Sonnet & 8K \\
-W2: Synthesis & All W1 & Opus & 12K \\
-W3: Publication & W2 & Sonnet & 8K \\
-W3: Verification & W3 pub & Sonnet & 4K \\
+Source Index & None & Haiku & 5,000 \\
+Document Templates & None & Haiku & 3,000 \\
+Historical Foundations & Source Index & Sonnet & 25,000 \\
+Axiomatic Method & Source Index & Sonnet & 25,000 \\
+Philosophical Influence & Source Index & Opus & 30,000 \\
+Political Rhetoric & Source Index & Opus & 30,000 \\
+Parallel Postulate & All W1 modules & Opus & 30,000 \\
+Cross-Module Synthesis & All W1+W2 & Opus & 15,000 \\
+Publication Assembly & All above & Sonnet & 12,000 \\
+Verification & Final document & Sonnet & 5,000 \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -623,14 +613,14 @@ W3: Verification & W3 pub & Sonnet & 4K \\
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\tableheader{Model} & \tableheader{\%} & \tableheader{Rationale} \\
 \midrule
-Opus & 30\% (Synthesis, M2/M4 analysis) & Cross-module integration requires judgment about how content-addressing cascades into effects, tooling, and distribution; comparison analysis between effect systems requires nuanced PL theory understanding \\
-Sonnet & 60\% (Module surveys, publication) & Structured research compilation, document assembly, source verification, and technical reference writing are Sonnet's sweet spot \\
-Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven and low-complexity \\
+Opus & 30\% & Judgment-heavy modules: philosophical analysis, political rhetoric interpretation, synthesis, cross-module integration \\
+Sonnet & 60\% & Structured research compilation: historical survey, axiomatic method documentation, publication assembly, verification \\
+Haiku & 10\% & Scaffolding: source index, document templates, schemas \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -641,15 +631,15 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
 \toprule
 \rowcolor{primary}
-\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Windows} \\
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Type} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
 \midrule
-0 & Foundation & Sequential & Haiku & 1 \\
-1 & Research & Parallel (2) & Sonnet+Opus & 8--12 \\
-2 & Synthesis & Sequential & Opus & 4--5 \\
-3 & Publication & Sequential & Sonnet & 3--4 \\
+0 & Foundation & Sequential & Haiku & 8,000 \\
+1 & Parallel Research & Parallel (2) & Sonnet+Opus & 110,000 \\
+2 & Synthesis & Sequential & Opus & 45,000 \\
+3 & Publication & Sequential & Sonnet & 17,000 \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -658,53 +648,45 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
 \midrule
-0.1 & Shared schemas & Section template, cross-reference format, citation style & Haiku \\
-0.2 & Source index & Validated URL list with quality ratings for all sources & Haiku \\
-0.3 & Document template & LaTeX skeleton with all section stubs & Haiku \\
+W0-01 & Build source index & Haiku & Categorized bibliography with URLs \\
+W0-02 & Create document templates & Haiku & Section templates for all 5 modules \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
 \subsection{Wave 1: Parallel Research Tracks}
 
-\textbf{Track A:} Language fundamentals (Modules 1 and 2)
+\textbf{Track A --- Historical and Structural (Sonnet):}
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
 \toprule
-\rowcolor{secondary}
-\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
 \midrule
-1A.1 & Content-addressed code deep dive & Hash scheme, canonicalization, examples & Sonnet \\
-1A.2 & Build elimination analysis & Comparison to Make, Cargo, Stack, Gradle & Sonnet \\
-1A.3 & Type system survey & Inference, structural/unique types, exhaustiveness & Sonnet \\
-1A.4 & Ability system analysis & All abilities, handlers, custom ability walkthrough & Opus \\
-1A.5 & Effect system comparison & Unison vs Haskell vs Koka vs Eff vs direct-style & Opus \\
+W1-01 & Historical Foundations survey & Sonnet & Complete module with sources \\
+W1-02 & Axiomatic Method analysis & Sonnet & Complete module with examples \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-\textbf{Track B:} Tooling, distribution, and ecosystem (Modules 3, 4, 5)
+\textbf{Track B --- Philosophical and Political (Opus):}
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
 \toprule
-\rowcolor{secondary}
-\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
 \midrule
-1B.1 & UCM workflow documentation & End-to-end scratch-to-publish pipeline & Sonnet \\
-1B.2 & Developer tooling survey & Desktop, LSP, MCP, Local UI, editor support & Sonnet \\
-1B.3 & Code mobility mechanism & Content-hash transfer protocol, dependency deployment & Sonnet \\
-1B.4 & Unison Cloud architecture & Public cloud, BYOC, typed RPC, storage, streaming & Opus \\
-1B.5 & Ecosystem assessment & Share, community, libraries, adoption barriers & Sonnet \\
-1B.6 & Roadmap and trajectory & 2026 roadmap items, growth indicators & Sonnet \\
+W1-03 & Philosophical Influence & Opus & Spinoza, Newton, Kant analysis \\
+W1-04 & Political Rhetoric & Opus & Jefferson, Lincoln with evidence \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -713,14 +695,13 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
 \midrule
-2.1 & Cross-module integration & Unified narrative: content-addressing $\rightarrow$ all consequences & Opus \\
-2.2 & Implications analysis & What Unison's design means for PL evolution & Opus \\
-2.3 & Gap identification & Missing evidence, unresolved questions, research limits & Opus \\
+W2-01 & Parallel Postulate capstone & Opus & Non-Euclidean revolution module \\
+W2-02 & Cross-module synthesis & Opus & Integration narrative, cross-references \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -729,15 +710,14 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{1.5cm}}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\tableheader{ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
 \midrule
-3.1 & Document assembly & Complete formatted reference document & Sonnet \\
-3.2 & Source verification & All citations checked, broken links flagged & Sonnet \\
-3.3 & Self-containment review & Verify document readable without prior Unison knowledge & Sonnet \\
-3.4 & Final formatting & Typography, diagrams, table of contents, bibliography & Sonnet \\
+W3-01 & Document assembly & Sonnet & Complete formatted document \\
+W3-02 & Source verification & Sonnet & All claims verified against sources \\
+W3-03 & Final review & Sonnet & Polished deliverable \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -745,10 +725,10 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 \subsection{Cache Optimization Strategy}
 
 \begin{itemize}[leftmargin=2em]
-  \item \textbf{Source index caching:} Wave 0 source index persists across all waves, eliminating redundant URL lookups
-  \item \textbf{Cross-reference caching:} Module hash-to-section mapping enables agents to reference completed modules without re-reading
-  \item \textbf{Schema reuse:} Shared schemas from Wave 0 are loaded once and reused by all Wave 1 agents
-  \item \textbf{Prompt caching:} System prompts with mission context cached for all agent invocations within a session
+  \item Source index (W0-01) cached at session start; referenced by all Wave 1 components within 5-minute TTL
+  \item Track A and Track B execute in parallel within the same session to maximize cache reuse of shared sources
+  \item Wave 2 synthesis begins immediately after Wave 1 completion to retain context
+  \item Document templates (W0-02) reused across all modules
 \end{itemize}
 
 \subsection{Token Budget}
@@ -758,41 +738,41 @@ Haiku & 10\% (Schemas, templates) & Foundation scaffolding is template-driven an
 \begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
 \toprule
 \rowcolor{primary}
-\tableheader{Phase} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\tableheader{Phase} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
 \midrule
-Wave 0: Foundation & 3K & 5K & 8K \\
-Wave 1: Research & 40K & 59K & 99K \\
-Wave 2: Synthesis & 25K & 12K & 37K \\
-Wave 3: Publication & 20K & 12K & 32K \\
+Wave 0: Foundation & --- & --- & 8,000 \\
+Wave 1: Research & 60,000 & 50,000 & --- \\
+Wave 2: Synthesis & 45,000 & --- & --- \\
+Wave 3: Publication & --- & 17,000 & --- \\
 \midrule
-\textbf{Total} & \textbf{88K} & \textbf{88K} & \textbf{176K} \\
+\textbf{Totals} & \textbf{105,000} & \textbf{67,000} & \textbf{8,000} \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
+\textbf{Grand Total:} $\sim$180,000 tokens across 4 sessions.
+
 \subsection{Dependency Graph}
 
 \begin{asciibox}
-\begin{verbatim}
-  W0.1 (Schemas) ──┬──> W1A.1 (Core) ──> W1A.2 (Build)
-  W0.2 (Sources) ──┤                          │
-  W0.3 (Template)──┤    W1A.3 (Types) ──> W1A.4 (Abilities) ──> W1A.5 (Comparison)
-                   │                                                     │
-                   │    W1B.1 (UCM) ──> W1B.2 (Dev Tools)              │
-                   ├──> W1B.3 (Mobility) ──> W1B.4 (Cloud)             │
-                   │    W1B.5 (Ecosystem) ──> W1B.6 (Roadmap)          │
-                   │         │                      │                    │
-                   │         └──────────┬───────────┘                    │
-                   │                    │                                │
-                   │              W2.1 (Integration) <───────────────────┘
-                   │              W2.2 (Implications)
-                   │              W2.3 (Gap Analysis)
-                   │                    │
-                   │              W3.1 (Assembly)
-                   │              W3.2 (Verification)
-                   │              W3.3 (Self-Containment)
-                   └───────────── W3.4 (Final Format)
-\end{verbatim}
+W0-01 (Source Index) ----+----> W1-01 (Historical)
+                         |                          \
+W0-02 (Templates)  ------+----> W1-02 (Axiomatic)    \
+                         |                             +--> W2-01 (Parallel
+                         +----> W1-03 (Philosophy)    /     Postulate)
+                         |                          /            |
+                         +----> W1-04 (Rhetoric)  -/             |
+                                                                 v
+                                                          W2-02 (Synthesis)
+                                                                 |
+                                                                 v
+                                                          W3-01 (Assembly)
+                                                                 |
+                                                                 v
+                                                          W3-02 (Verification)
+                                                                 |
+                                                                 v
+                                                          W3-03 (Final Review)
 \end{asciibox}
 
 \section{Test Plan}
@@ -801,17 +781,15 @@ Wave 3: Publication & 20K & 12K & 32K \\
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}X}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Coverage} \\
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
 \midrule
-Safety-critical & 5 & Mandatory & BLOCK & Source quality, numerical attribution, advocacy \\
-Core functionality & 14 & Required & BLOCK & All 12 success criteria \\
-Integration & 6 & Required & BLOCK & Cross-module connections \\
-Edge cases & 4 & Best-effort & LOG & Data gaps, temporal currency \\
-\midrule
-\textbf{Total} & \textbf{29} & & & \\
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -820,16 +798,15 @@ Edge cases & 4 & Best-effort & LOG & Data gaps, temporal currency \\
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
 \toprule
 \rowcolor{primary}
-\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
 \midrule
-SC-SRC & Source quality & All citations traceable to official docs, peer-reviewed work, or professional journalism. Zero blogs-as-primary-source. \\
-SC-NUM & Numerical attribution & Every metric (stars, contributors, funding, LOC claims) attributed to specific source with date \\
-SC-ADV & No advocacy & Document presents Unison factually without advocating for or against adoption \\
-SC-VND & Vendor claims marked & Self-reported claims from Unison Computing (e.g., 10--100x LOC reduction) clearly attributed as vendor claims \\
-SC-OSS & Open source vs proprietary & MIT-licensed language clearly distinguished from proprietary Cloud platform throughout \\
+SC-SRC & Source quality & All citations traceable to university archives, peer-reviewed journals, or professional encyclopedias. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every date, figure count, and historical statistic attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents historical evidence without advocating political positions \\
+SC-REL & Religious neutrality & Spinoza's perceived atheism and the theological context presented neutrally \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -843,18 +820,18 @@ SC-OSS & Open source vs proprietary & MIT-licensed language clearly distinguishe
 \rowcolor{primary}
 \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
 \midrule
-1. Content-addressed architecture with 3+ code examples & CF-01, CF-02 & Pending \\
-2. Build elimination vs 3+ other languages & CF-03 & Pending \\
-3. All built-in abilities catalogued + 2 custom examples & CF-04, CF-05 & Pending \\
-4. Effect system comparison table ($\geq$6 dimensions) & CF-06 & Pending \\
-5. UCM end-to-end workflow documented & CF-07 & Pending \\
-6. Distributed computing chain traced & CF-08, CF-09 & Pending \\
-7. BYOC architecture documented & CF-10 & Pending \\
-8. Ecosystem assessed with metrics & CF-11 & Pending \\
-9. 5+ adoption barriers identified & CF-12 & Pending \\
-10. Cross-module synthesis present & IN-01, IN-02 & Pending \\
-11. All numerical claims attributed & SC-NUM & Pending \\
-12. Document self-contained & IN-06 & Pending \\
+1. Transmission history (3+ stages) & CF-01 & Pending \\
+2. Axiomatic method examples ($\geq$2) & CF-02, CF-03 & Pending \\
+3. Spinoza/Newton/Kant connections & CF-04, CF-05, CF-06 & Pending \\
+4. Jefferson/Lincoln instances ($\geq$3) & CF-07, CF-08, CF-09 & Pending \\
+5. Parallel postulate arc & CF-10, CF-11 & Pending \\
+6. Three geometries explained & CF-12 & Pending \\
+7. All claims sourced & SC-SRC, SC-NUM & Pending \\
+8. Cross-module connections ($\geq$4) & IN-01, IN-02, IN-03, IN-04 & Pending \\
+9. Through-line to GSD & CF-13 & Pending \\
+10. Self-contained readability & IN-05 & Pending \\
+11. Bibliography $\geq$15 sources & CF-14 & Pending \\
+12. No policy advocacy & SC-ADV & Pending \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -863,22 +840,22 @@ SC-OSS & Open source vs proprietary & MIT-licensed language clearly distinguishe
 
 \begin{center}
 \rowcolors{2}{rowgray}{white}
-\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
 \toprule
 \rowcolor{primary}
 \tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
 \midrule
-FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
-PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
-SCOUT & Research Agent & Source gathering; evidence compilation; web research to fill gaps \\
-EXEC-A & Executor (Track A) & Document production for Modules 1 and 2 \\
-EXEC-B & Executor (Track B) & Document production for Modules 3, 4, and 5 \\
-CRAFT-PL & PL Theory Specialist & Ability system analysis, effect system comparison, type theory \\
-CRAFT-DIST & Distribution Specialist & Cloud architecture, code mobility, BYOC, distributed data structures \\
-VERIFY & Verification & Source validation; accuracy checking; claim attribution \\
-INTEG & Integration Agent & Cross-module relationship validation; synthesis support \\
-CAPCOM & HITL Interface & Human approval at wave boundaries; scope clarification \\
-BUDGET & Resource Manager & Token budget tracking; session planning; cache optimization \\
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC-A & Executor (Track A) & Historical Foundations + Axiomatic Method production \\
+EXEC-B & Executor (Track B) & Philosophical Influence + Political Rhetoric production \\
+CRAFT-HIST & History Specialist & Primary domain: historical context, transmission, chronology \\
+CRAFT-PHIL & Philosophy Specialist & Secondary domain: philosophical analysis, argument structure \\
+VERIFY & Verification & Source validation; accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
 LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
 \bottomrule
 \end{tabularx}
@@ -893,26 +870,33 @@ LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
 \rowcolor{primary}
 \tableheader{Metric} & \tableheader{Value} \\
 \midrule
-Activation Profile & Squadron (12 roles) \\
+Activation Profile & Squadron \\
 Research Modules & 5 \\
 Parallel Tracks & 2 \\
-Estimated Context Windows & 18--24 \\
-Estimated Sessions & 4--5 \\
-Token Budget & $\sim$176K total \\
-Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
-Safety-Critical Tests & 5 (all mandatory BLOCK) \\
-Total Tests & 29 \\
+Waves & 4 (Foundation / Research / Synthesis / Publication) \\
+Total Estimated Tokens & $\sim$180,000 \\
+Context Windows & 12 \\
+Sessions & 4 \\
+Model Distribution & Opus 58\% / Sonnet 37\% / Haiku 5\% \\
+Crew Size & 12 roles \\
+Safety-Critical Tests & 4 (mandatory-pass) \\
+Total Tests & 28 \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-\vspace{1em}
+\vspace{1cm}
 
 \begin{quotebox}
-\textit{``We're used to thinking of a program as a thing that describes what a single OS process will do. Unison starts with the premise that no matter how many nodes a computation occupies, it should be expressible via a single program.''}
+\textit{``The \textit{Elements} form one of the most beautiful and influential works of science in the history of humankind. Its beauty lies in its logical development of geometry and other branches of mathematics. It has influenced all branches of science but none so much as mathematics and the exact sciences.''}
 
 \vspace{0.5em}
-\hfill --- The through-line: one radical architectural choice, and the solutions emerge.
+
+\hfill --- David Joyce, Clark University, \textit{Euclid's Elements} online edition
+
+\vspace{1em}
+
+The architecture of reason is the architecture of everything we build. From Euclid's five postulates to a GSD vision document, from a Euclidean proof to a wave execution plan --- the pattern is the same: choose your starting points deliberately, follow them honestly, and trust the structure to carry more than any single step could hold alone. The spaces between the axiom and the theorem are where understanding lives.
 \end{quotebox}
 
 \end{document}
