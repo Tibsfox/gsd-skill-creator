@@ -28,6 +28,7 @@
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
     { id: 'MPC', name: 'Math Co-Proc.', path: 'MPC/index.html' },
     { id: 'NND', name: 'New New Deal', path: 'NND/index.html' },
+    { id: 'NWC', name: 'Norwescon', path: 'NWC/index.html' },
     { id: 'OCN', name: 'Open Compute', path: 'OCN/index.html' },
     { id: 'PJM', name: 'Pearl Jam', path: 'PJM/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
