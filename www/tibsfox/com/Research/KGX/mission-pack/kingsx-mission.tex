@@ -1,0 +1,1031 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — Music/Arts: Spiritual depth, soulful warmth, earthy ground
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — spiritual, progressive
+\definecolor{secondary}{HTML}{E65100}     % Warm amber — soul, gospel fire
+\definecolor{tertiary}{HTML}{3E2723}      % Earth brown — grounded, authentic
+\definecolor{accent}{HTML}{6A1B9A}        % Medium purple — highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender mist
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Warm cream
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Parchment
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{King's X}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={King's X -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{King's X\\[0.3em]Three Sides of One}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Power Trio That Lived in Every Space Between}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{King's X --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD Ecosystem --- Music History Deep Research Series}
+
+\subsection{Vision}
+
+In 1988, while the music industry was drowning in hairspray and power ballads, three men from utterly different worlds released an album called \textit{Out of the Silent Planet}. A Black man raised by his great-grandmother in Southern Baptist Illinois. A white kid from Mississippi who learned guitar through bluegrass with his father and brother. A white drummer from New Jersey who'd survived the Christian rock touring circuit. None of them had any business being in a band together, and the sound they made had no business existing in the late 1980s --- drop-D tuned progressive metal fused with Beatles harmonies, gospel vocals, funk grooves, and lyrics wrestling with faith, doubt, and identity. They called themselves King's X, and for four decades they have been simultaneously one of the most influential and most commercially overlooked bands in the history of rock music.
+
+Pearl Jam's Jeff Ament declared on MTV that King's X invented grunge. Alice in Chains, Soundgarden, and Helmet acknowledged their debt. Billy Corgan, Mick Mars, Tony Iommi, Geddy Lee, and Bono have all spoken their names with reverence. Dream Theater, Living Colour, and a generation of progressive metal bands trace lineage directly to \textit{Gretchen Goes to Nebraska}. And yet King's X never went gold. Never had a Top 40 hit. Never became a household name. They became something arguably more important: the musician's musician, the band that other bands pointed to when asked who really mattered.
+
+This is a study of how three people, through architectural elegance and specialized execution, created something that transcended every category the industry tried to impose on them. It is a study of the spaces between --- between genres, between races, between faith and doubt, between commercial expectation and artistic integrity. King's X did not just make music in those spaces. They \textit{lived} there. And the resonance they created in those spaces changed the sound of rock music forever, whether the mainstream noticed or not.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The Influence Gap.} King's X is widely cited by peer musicians as a foundational influence on grunge, progressive metal, and alternative rock, yet their role is largely absent from mainstream music histories and genre genealogies. The band's contributions to drop-D tuning, genre fusion, and vocal harmony architecture in heavy music remain underdocumented.
+
+\item \textbf{The Identity Paradox.} The band existed at the intersection of multiple identity categories --- Black and white, Christian and secular, gay and straight, progressive and heavy --- that the music industry treats as mutually exclusive market segments. Understanding how these intersections shaped both the music and its commercial trajectory requires integrated analysis.
+
+\item \textbf{The Power Trio Architecture.} King's X represents a distinct model of three-person creative symbiosis where each member is a lead vocalist, songwriter, and stylistic anchor. This architecture --- the ``three sides of one'' --- has sustained a single lineup for over four decades while producing thirteen studio albums of remarkable stylistic range.
+
+\item \textbf{The Innovation Record.} The band's pioneering use of drop-D tuning, 12-string bass, and the fusion of gospel/soul vocal techniques with progressive metal instrumentation constitutes a set of musical innovations whose downstream effects are acknowledged but poorly traced.
+
+\item \textbf{The Resilience Pattern.} The band has survived heart attacks, cancer diagnoses, industry abandonment, the implosion of their management relationship, the evaporation of their Christian fanbase following Pinnick's coming out, and 14-year gaps between albums --- and remains an active creative unit. The mechanisms of this resilience are themselves worthy of study.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Three Sides of One:} The emergent musical identity created when three radically different artistic voices --- gospel/funk (Pinnick), progressive/bluegrass (Tabor), and rhythmic/melodic (Gaskill) --- fuse into a sound that cannot be decomposed into its parts. The whole is not merely greater than the sum; it is \textit{categorically different} from anything any member would produce alone.
+\end{quotebox}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+KING'S X --- MUSICAL ECOSYSTEM
+
+  Springfield, MO (1980)     Houston, TX (1985-present)
+  +-------------------+      +---------------------------+
+  | The Edge          |----->| King's X                  |
+  | Sneak Preview     |      | (Sam Taylor era 1985-92)  |
+  +-------------------+      | (Independent 1993-present)|
+                              +---------------------------+
+                                         |
+              +----------------+---------+---------+
+              |                |                   |
+    +---------+------+ +------+--------+ +--------+-------+
+    | Doug Pinnick   | | Ty Tabor      | | Jerry Gaskill  |
+    | Bass/Vocals    | | Guitar/Vocals | | Drums/Vocals   |
+    | b.1950 Joliet  | | b.1961 Pearl  | | b.1958 NJ      |
+    | Gospel/Funk/   | | Bluegrass/    | | Rock/Pop/      |
+    | Soul/Hendrix   | | Beatles/Prog  | | Groove/Melody  |
+    +-------+--------+ +------+--------+ +--------+-------+
+            |                  |                   |
+    +-------+--------+ +------+--------+ +--------+-------+
+    | Poundhound     | | Platypus      | | Come Somewhere |
+    | Supershine     | | Jelly Jam     | | (solo album)   |
+    | KXM            | | Jughead       | |                |
+    | Pinnick/Gales/ | | Xenuphobe     | |                |
+    | Pridgen        | | Solo albums   | |                |
+    | Tres Mts.      | |               | |                |
+    | Grinder Blues  | |               | |                |
+    +----------------+ +---------------+ +----------------+
+
+  GENRE SPACE (the "impossible to categorize" territory):
+
+    Progressive Metal <---> Hard Rock <---> Alternative
+           |                    |                |
+         Gospel <----> Soul/Funk <----> Beatles Pop
+           |                    |                |
+       Bluegrass <---> Grunge <----> Psychedelia
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+
+  M1: Origins and Formation
+      Springfield -> Houston -> Sam Taylor -> Megaforce
+      Phil Keaggy connection | Christian music intersection
+      The Edge -> Sneak Preview -> King's X name
+          |
+  M2: Musical Innovation Engine
+      Drop-D tuning genesis | 12-string bass | Vocal architecture
+      Genre fusion mechanics | "Heavy Melody" concept
+      Beatles + Sabbath + Sly Stone + Hendrix = ???
+          |
+  M3: Discography and Stylistic Evolution
+      13 studio albums (1988-2022) | 5 label eras
+      Key albums: Gretchen, Dogman, Three Sides of One
+      Production approaches | Concept vs. song albums
+          |
+  M4: Influence and Legacy Mapping
+      "Invented grunge" claim | Drop-D downstream effects
+      Big 4 of Prog Metal | Musician testimonials
+      Seattle scene connections | Living Colour parallel
+          |
+  M5: Identity, Faith, and Resilience
+      Race in hard rock | Pinnick's sexuality
+      Faith -> doubt -> agnosticism arc
+      Health crises | 14-year silence | Unchanged lineup
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Origins and Formation (1979--1988)}
+
+The pre-history and formative period of King's X, tracing the convergence of three musicians from radically different backgrounds. Covers the Phil Keaggy touring band connection, the Springfield club circuit years as The Edge, the transformation into Sneak Preview, the fateful relocation to Houston on a broken record deal promise, the Morgan Cryar backing band period, and the mentorship of Sam Taylor (ZZ Top's video producer). Documents the ``Pleiades'' demo moment --- when Ty Tabor presented his drop-D composition to Pinnick and Gaskill and the King's X sound crystallized.
+
+\subsubsection{M2: Musical Innovation Engine}
+
+Technical analysis of King's X's musical contributions. The drop-D tuning innovation and its relationship to Tabor's bluegrass roots. Doug Pinnick's pioneering use of the 12-string bass and his gospel-inflected distorted bass tone. The three-part vocal harmony architecture where every member is a genuine lead vocalist. The ``Heavy Melody'' concept --- progressive complexity married to pop accessibility. The genre fusion mechanics that produced a sound simultaneously heavy enough for metalheads and melodic enough for pop listeners.
+
+\subsubsection{M3: Discography and Stylistic Evolution}
+
+Comprehensive album-by-album analysis across five label eras: Megaforce (1988--1991), Atlantic (1992--1996), Metal Blade (1998--2004), InsideOut (2005--2022), and independent releases. Tracks the arc from the C.S. Lewis-influenced spiritual psychedelia of the debut through the progressive zenith of \textit{Gretchen Goes to Nebraska}, the commercial peak of \textit{Faith Hope Love}, the dark introspection of the self-titled album, the Brendan O'Brien-produced heaviness of \textit{Dogman}, the post-Atlantic experimentation, and the 14-year silence broken by \textit{Three Sides of One}.
+
+\subsubsection{M4: Influence and Legacy Mapping}
+
+Systematic documentation of King's X's influence on the development of grunge, progressive metal, and alternative rock. Jeff Ament's ``King's X invented grunge'' declaration. The parallel development of drop-D tuning with Soundgarden (Kim Thayil confirmed showing Chris Cornell drop-D in 1985, the same year Tabor wrote ``In the New Age''). The band's position as one of the ``Big 4 of Progressive Metal'' alongside Queensr\"{y}che, Fates Warning, and Dream Theater. Testimonials from Alice in Chains, Pearl Jam, Soundgarden, Smashing Pumpkins, Living Colour, Dream Theater, and others.
+
+\subsubsection{M5: Identity, Faith, and Resilience}
+
+The human story behind the music. Doug Pinnick as one of the very few Black frontmen in hard rock/metal, and his analysis of how race affected the band's commercial trajectory. His 1998 public coming out and its immediate consequences (Christian retail stores pulling their catalog). The band's collective journey from faith through doubt to individual spiritual positions. Jerry Gaskill's two heart attacks and recovery. Ty Tabor's 2022 diagnosis of an undisclosed serious illness. The remarkable fact of an unchanged lineup across 40+ years and what sustains it. Doug Pinnick's legacy meditation at age 73: ``Sooner or later, I'll be forgotten. And I'm okay with that because that's life.''
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission_type: deep_research
+  domain: music_history
+  activation: squadron
+  models:
+    opus: 30%   # Synthesis, identity analysis, through-line
+    sonnet: 60% # Discography surveys, influence mapping, evidence
+    haiku: 10%  # Schemas, templates, source indexing
+  sensitivity:
+    - racial_identity_in_music (HIGH)
+    - LGBTQ_identity_in_conservative_genre (HIGH)
+    - health_privacy_for_living_persons (MODERATE)
+    - faith_and_doubt_narratives (MODERATE)
+  source_requirements:
+    - peer_musician_testimonials
+    - music_journalism (professional publications)
+    - authorized_biographies
+    - band_interviews (primary sources)
+    - academic_music_analysis
+  prohibited_sources:
+    - fan_speculation_forums
+    - unauthorized_medical_details
+    - gossip_media
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete King's X studio discography analysis (13 albums, 1988--2022)
+\item All three members' musical backgrounds and formative influences
+\item Drop-D tuning innovation and its documented downstream effects
+\item Peer musician testimonials and influence documentation
+\item The Sam Taylor management era and its impact
+\item Race, sexuality, and faith as factors in the band's trajectory
+\item The Houston/Texas heavy music scene context (Galactic Cowboys, Atomic Opera)
+\item Health crises and their impact on the band's continuity
+\item Solo projects and side bands as creative outlets
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Full transcription or musical analysis of individual songs (reference only)
+\item Detailed financial analysis of record deals and royalties
+\item Unauthorized speculation about Ty Tabor's specific medical diagnosis
+\item Comprehensive analysis of all solo and side project discographies
+\item Comparison ranking against other power trios (Rush, Cream, etc.) --- the mission documents, it does not rank
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All 13 studio albums individually documented with release date, label, producer, and stylistic characterization
+\item Drop-D tuning innovation traced with primary source attribution from band members and contemporaries
+\item At least 10 peer musician influence testimonials documented with source attribution
+\item Doug Pinnick's biography covered from Joliet childhood through current status with sensitivity to identity dimensions
+\item Ty Tabor's musical lineage (bluegrass $\rightarrow$ Beatles $\rightarrow$ progressive $\rightarrow$ King's X) documented
+\item Jerry Gaskill's rhythmic and vocal contributions individually characterized
+\item The Sam Taylor era documented as both catalyst and constraint
+\item The ``invented grunge'' claim analyzed with evidence from multiple sources including the Jeff Ament declaration and Kim Thayil's drop-D timeline
+\item Faith-to-doubt arc traced across the discography with specific album/lyrical references
+\item Health crises documented with respect for privacy boundaries (published information only)
+\item The ``three sides of one'' creative model analyzed as an architectural pattern
+\item Houston/Texas scene context established with at least 3 peer bands documented
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+Deep Audio Analyzer Mission & Audio analysis tools applicable to King's X recordings & Tooling \\
+The Space Between & ``Spaces between'' as philosophical framework for King's X's genre position & Philosophy \\
+The Quark and the Compiler & Creative community as driver of computing evolution; music $\leftrightarrow$ technology feedback loop & Context \\
+The Hundred Voices & 100 authorial voices across a century; King's X as three voices across four decades & Parallel \\
+Amiga Creative Suite & Music production tools; tracker heritage; the art-technology intersection & Adjacent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Rush was the thesis --- three people creating infinite complexity through architectural leverage. King's X is the \textit{corollary}: three people creating infinite complexity through the spaces between identities that should not coexist. A Black gay man from Illinois singing gospel-inflected metal. A white bluegrass kid from Mississippi playing Beatles-meets-Hendrix through drop-D distortion. A white Jersey drummer holding it all together with groove and melody. The music industry said these identities don't share a stage. King's X said the stage \textit{is} the space between them, and the resonance in that space is the sound.
+
+The Amiga Principle says you don't need brute force if you have architectural elegance. King's X proved it with three people, three voices, and a tuning that any kid could play with one finger. They didn't need a hit single or a platinum record. They needed the space between a D power chord and a gospel harmony, and in that space they built a sound that changed everything --- even if the world looked the other way.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{King's X --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authorized biographies, professional music journalism, band interviews, and peer musician testimonials. It serves as the evidence base for the mission's five research modules. Key source categories:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Authorized biographies:} Chris Smith's \textit{What You Make It: The Authorized Biography of Doug Pinnick} (2018); Greg Prato's \textit{King's X: The Oral History} (Jawbone Press, 2019)
+\item \textbf{Professional music journalism:} Rolling Stone, Guitar World, D Magazine, Louder/Classic Rock, Metal Hammer, Blabbermouth, Metal Injection
+\item \textbf{Band interviews:} Direct statements from Pinnick, Tabor, and Gaskill in professional interview settings
+\item \textbf{Peer testimonials:} Published statements from Jeff Ament, Billy Corgan, Mick Mars, Scott Ian, Tony Iommi, Geddy Lee, Vernon Reid, Billy Sheehan, Kim Thayil, and others
+\end{itemize}
+
+\subsection{M1 Reference: Origins and Formation}
+
+\subsubsection{The Three Paths to Springfield}
+
+Doug Pinnick was born September 3, 1950, in Braidwood, Illinois, and raised by his great-grandmother Ida Mae Pinnick in Joliet in a strict Southern Baptist environment. He discovered rock through Sly and the Family Stone, Jimi Hendrix, and Led Zeppelin, while his vocal foundation came from gospel choirs. In the mid-1970s he formed a progressive art rock band called Servant, influenced by Yes and Emerson, Lake \& Palmer. In 1979, he relocated to Springfield, Missouri, to join a project with Greg X. Volz of the Christian rock band Petra; when that project dissolved within a month, Pinnick was offered a spot in guitarist Phil Keaggy's touring band alongside drummer Jerry Gaskill.
+
+Jerry Gaskill was born circa 1958 in New Jersey and had connected with Pinnick through the Christian rock touring circuit, both having worked with Phil Keaggy and members of Petra. Ty Tabor was born September 17, 1961, in Pearl, Mississippi, where he began playing guitar and singing at a young age, performing bluegrass with his father and brother (his brother played banjo). By his teens he was playing rock bands, heavily influenced by the Beatles and Alice Cooper. He attended Evangel College in Springfield, Missouri, immersing himself in the local music scene. The three met when Tabor's band opened for Phil Keaggy, and after Tabor's drummer quit right before the show, Tabor volunteered to play drums --- impressing Keaggy's band enough to be invited into the circle.
+
+\subsubsection{The Edge Through Sneak Preview (1980--1985)}
+
+Calling themselves The Edge (well before U2's guitarist made the name famous, as Tabor has stipulated), the trio played the Springfield bar circuit extensively, specializing in Top 40 covers. By 1983 they had changed their name to Sneak Preview and begun recording original material, releasing a self-titled LP in 1984 with all original songs. The group relocated to Houston, Texas in 1985 on the promise of a recording contract with Star Song/Frontline Records, but the deal fell through.
+
+\subsubsection{Sam Taylor and the King's X Identity (1985--1992)}
+
+In Houston, the trio became the backing band for CCM artist Morgan Cryar (Tabor and Pinnick co-wrote songs on Cryar's \textit{Fuel on the Fire}, 1986). Through this work they met Sam Taylor, then vice president of ZZ Top's production company. Taylor became the group's manager, producer, and mentor --- described by some as ``the fourth member.'' Taylor suggested the name King's X (reportedly after a band he admired in his high school days) and helped secure a recording contract with New York's Megaforce Records in 1987. Taylor's influence on the band's early sound and direction was formative, but the relationship would eventually become a source of tension.
+
+\subsubsection{The ``Pleiades'' Moment}
+
+The crystallization of the King's X sound traces to a specific event: Ty Tabor presenting a demo of a song called ``Pleiades,'' written entirely in drop-D tuning. As documented in the Rolling Stone coverage of the oral history, Tabor's demo fused the drop-D heaviness (rooted in his bluegrass background's open tuning traditions) with progressive arrangements and the band's emerging three-part vocal harmony style. Pinnick and Gaskill recognized the sound immediately. As the oral history records, the band grafted heavy, lumbering riffing onto progressive rhythms, post-Beatles psychedelic textures, three-part harmonies, and Pinnick's gospel-inflected vocals. This fusion became the King's X identity.
+
+\subsection{M2 Reference: Musical Innovation}
+
+\subsubsection{Drop-D Tuning and Its Consequences}
+
+King's X's 1988 debut \textit{Out of the Silent Planet} was recorded almost entirely in drop-D tuning at a time when this was an oddity in rock and metal --- Metallica and Slayer were still in standard tuning. Drop-D (lowering the sixth string from E to D) creates a deeper tone and allows power chords to be played with a single finger, enabling faster chord changes and a heavier sound.
+
+Pinnick has traced the innovation to Tabor's bluegrass roots, noting that drop-D voicings are common in bluegrass but were rarely applied to distorted electric guitar in the mid-1980s. Tabor essentially took a technique from one tradition and transposed it into another, creating a new sonic vocabulary. Kim Thayil of Soundgarden has confirmed that he showed Chris Cornell drop-D tuning in 1985 --- the same year Tabor wrote ``In the New Age'' --- meaning both bands developed the technique independently and simultaneously. The parallel evolution is well-documented: Soundgarden's \textit{Ultramega OK} and King's X's debut were released the same year (1988).
+
+The downstream effects were enormous. As drop-D became the foundation of grunge (Alice in Chains, Pearl Jam, Soundgarden, Nirvana), alternative metal (Helmet, Tool, Rage Against the Machine), and eventually nu-metal (Korn, Deftones), the tuning that King's X helped popularize became the dominant guitar voicing in heavy music for a generation.
+
+\subsubsection{The 12-String Bass}
+
+Pinnick is one of very few hard rock bassists to regularly use a 12-string bass (inspired by Cheap Trick's Tom Petersson). The instrument layers octave strings above the standard four, producing a massive, chorus-like tone that is a signature element of the King's X sound. Combined with his pick technique and heavy distortion, Pinnick's bass tone has been described as ``Chris Squire on steroids'' --- carrying both low-end weight and harmonic richness simultaneously.
+
+\subsubsection{Vocal Architecture}
+
+King's X is unique among power trios in that all three members are genuine lead vocalists. Pinnick's voice combines the raw power of hard rock with the soulful inflection of gospel and R\&B. Tabor brings a melodic, Beatles-influenced vocal quality (his lead on ``It's Love'' is the band's most commercially successful moment). Gaskill provides a warm, tuneful third voice. Their three-part harmonies --- rooted in gospel tradition but applied to heavy music --- became the band's most immediately recognizable feature and a quality that no other hard rock band has replicated at the same level.
+
+\subsubsection{The ``Heavy Melody'' Concept}
+
+The band once described their approach as ``Heavy Melody'' --- progressive complexity married to pop-level melodic accessibility. This is the architectural principle: the music is heavy enough for metalheads (drop-D riffs, distorted bass, powerful drumming) but melodic enough for pop listeners (Beatles harmonies, soul-influenced vocal arrangements, memorable hooks). The fusion creates a space that no genre category adequately describes, which is both the band's greatest artistic achievement and their greatest commercial liability.
+
+\subsection{M3 Reference: Discography and Evolution}
+
+\subsubsection{Complete Studio Discography}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}C{1cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Album} & \tableheader{Year} & \tableheader{Label} & \tableheader{Character} \\
+\midrule
+1 & Out of the Silent Planet & 1988 & Megaforce & Spiritual psychedelia; drop-D debut; C.S. Lewis references \\
+2 & Gretchen Goes to Nebraska & 1989 & Megaforce & Progressive zenith; concept elements; ``Over My Head'' \\
+3 & Faith Hope Love & 1990 & Megaforce & Commercial peak; ``It's Love''; US Top 100 \\
+4 & King's X & 1992 & Atlantic & Darker, introspective; tensions with Taylor \\
+5 & Dogman & 1994 & Atlantic & Brendan O'Brien production; heavy, muscular; Woodstock '94 \\
+6 & Ear Candy & 1996 & Atlantic & Return to roots; last Atlantic release \\
+7 & Tape Head & 1998 & Metal Blade & Post-Atlantic reinvention; experimental \\
+8 & Please Come Home\ldots Mr. Bulbous & 2000 & Metal Blade & Eclectic; hidden tracks in European languages \\
+9 & Manic Moonlight & 2001 & Metal Blade & Electronic experimentation; stylistic outlier \\
+10 & Black Like Sunday & 2003 & Metal Blade & Pre-King's X songs re-recorded; fan-submitted cover art \\
+11 & Ogre Tones & 2005 & InsideOut & Michael Wagener production; return to form \\
+12 & XV & 2008 & InsideOut & Wagener again; 15th anniversary marker \\
+13 & Three Sides of One & 2022 & InsideOut & 14-year gap; Michael Parnin production; mature synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Albums in Detail}
+
+\textbf{Gretchen Goes to Nebraska (1989)} is widely considered the band's masterwork and most creative period. Written around a story penned by Jerry Gaskill (the title originated as a joke years earlier that Tabor vowed to use), the album spans progressive epics (``Pleiades''), anthemic rock (``Over My Head,'' ``Summerland''), and atmospheric pieces (``The Burning Down''). It contains the track ``Pleiades,'' credited by Tabor as the genesis of the King's X sound. The album deepened their underground reputation and earned critical praise, though it did not achieve major commercial breakthrough.
+
+\textbf{Dogman (1994)} marked a deliberate shift. After parting with Sam Taylor and taking over a year off, the band enlisted Brendan O'Brien (who had recently produced Stone Temple Pilots and Pearl Jam) and delivered their heaviest, most direct album. The result was a muscular, less abstract sound with more direct lyrics. The band performed at Woodstock '94 and opened shows for Pearl Jam. Despite critical acclaim and stronger promotional push from Atlantic, mainstream breakthrough remained elusive.
+
+\textbf{Three Sides of One (2022)} broke a 14-year silence between studio albums (the longest gap in the band's history). Produced by Michael Parnin at Blacksound Studio in California, it was recorded primarily analog. Ty Tabor called it ``the most enjoyable album I've personally ever recorded.'' The album synthesizes elements from across the band's career --- Beatles harmonies, sludgy heaviness, gospel warmth, psychedelic textures --- into what reviewers described as a summation of the King's X identity.
+
+\subsection{M4 Reference: Influence and Legacy}
+
+\subsubsection{Peer Musician Testimonials}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Musician} & \tableheader{Band} & \tableheader{Nature of Tribute} \\
+\midrule
+Jeff Ament & Pearl Jam & Declared on MTV that King's X ``invented grunge''; longtime friend and tourmate; later collaborated with Pinnick in Tres Mts. \\
+Billy Corgan & Smashing Pumpkins & Contributed to the Oral History; cited as major influence \\
+Mick Mars & M\"{o}tley Cr\"{u}e & Featured in the Oral History interviews \\
+Scott Ian & Anthrax & Wrote the foreword to the Oral History book \\
+Tony Iommi & Black Sabbath & Called King's X one of the most underrated bands of all time \\
+Geddy Lee & Rush & Cited King's X as an influence on his bass playing \\
+Vernon Reid & Living Colour & Longtime champion; Living Colour and King's X toured together \\
+Billy Sheehan & Mr. Big & Vocal public supporter \\
+Kim Thayil & Soundgarden & Confirmed drop-D timeline; discussed tuning innovations with Pinnick \\
+Devin Townsend & Solo/SYL & Included \textit{Gretchen Goes to Nebraska} in his ``Five Albums That Made Me'' \\
+Mike McCready & Pearl Jam & Cited King's X as a huge influence on his music \\
+Billy Gibbons & ZZ Top & Praised the band as overlooked and underrated \\
+Jerry Cantrell & Alice in Chains & Cited King's X as a key influence on harmonic structures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The ``Big 4 of Progressive Metal''}
+
+King's X is frequently grouped with Queensr\"{y}che, Fates Warning, and Dream Theater as the ``Big 4'' of progressive metal --- the bands that defined the genre in the late 1980s and early 1990s. This positioning acknowledges King's X's role not merely as an influence \textit{on} progressive metal but as a co-founder of the genre itself.
+
+\subsubsection{The Houston/Texas Scene}
+
+King's X was not an isolated phenomenon. Houston in the late 1980s produced a cluster of innovative heavy bands including Galactic Cowboys (who shared members and collaborators with King's X through Wally Farkas and Alan Doss), Atomic Opera, and Watchtower. This scene --- distinct from both the LA glam circuit and the Seattle grunge explosion --- represented a third path in American heavy music that privileged musicianship, vocal harmony, and genre fusion.
+
+\subsection{M5 Reference: Identity, Faith, and Resilience}
+
+\subsubsection{Race in Hard Rock}
+
+Doug Pinnick has spoken directly about how race affected the band's commercial prospects. As one of very few Black frontmen in hard rock/metal, he faced an industry that had difficulty marketing a biracial band. In his assessment, audiences were uncertain how to categorize a tall Black man with a mohawk singing heavy music with two white musicians. The biracial makeup of the band, while artistically generative, was commercially destabilizing in an industry built on demographic segmentation.
+
+\subsubsection{Sexuality and Faith}
+
+In 1998, Pinnick publicly came out as gay. The consequences were immediate: Diamante Music Group canceled distribution of King's X material in Christian retail stores. The Christian fanbase that had embraced the band's spiritual lyrics --- despite the band's repeated insistence that they were not a ``Christian rock band'' but rather ``a band of Christians'' --- largely evaporated. Pinnick has since identified as agnostic, representing a faith-to-doubt journey that is traced across the discography from the openly spiritual early albums to the more questioning later work.
+
+\subsubsection{Health Crises}
+
+Jerry Gaskill suffered a massive heart attack in February 2012, followed by a second cardiac event later. All tour dates were canceled; recovery was long but ultimately successful. Doug Pinnick dealt with a lymph node infection. In July 2022, Ty Tabor announced a diagnosis of a serious undisclosed illness requiring ``vigilant monitoring,'' leading to the cancellation of all European tour dates for \textit{Three Sides of One}. Tabor stated his prognosis was good but that he needed to remain in the U.S. for treatment.
+
+\subsubsection{Legacy and Acceptance}
+
+At age 73, Pinnick offered a meditation on legacy in a 2025 interview: his great-grandmother Ida Mae Pinnick, who raised him, passed away in 1974, and her great-great-nieces and nephews don't even know her name --- but if they opened the family history book, they'd find it. ``Sooner or later, I'll be forgotten,'' Pinnick said. ``And I'm okay with that because that's life. And that's a beautiful thing.'' This radical acceptance --- after a career of enormous influence and minimal commercial recognition --- is itself a form of the spiritual wisdom the band's music always pursued.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Handling} \\
+\midrule
+Racial identity in music industry & HIGH & Use Pinnick's own published words; contextualize within industry structure; no speculation \\
+LGBTQ identity in conservative genre & HIGH & Document only published facts; respect Pinnick's own framing; note real-world consequences \\
+Ty Tabor's health status & MODERATE & Report only what band has publicly disclosed; do not speculate on diagnosis \\
+Jerry Gaskill's cardiac history & MODERATE & Published medical events only; note recovery \\
+Faith and religious identity & MODERATE & Trace the arc through published interviews; present without advocacy \\
+Sam Taylor relationship & MODERATE & Document published facts of split; note both contributions and tensions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Authorized Biographies}
+
+\begin{itemize}[leftmargin=2em]
+\item Smith, Chris. \textit{What You Make It: The Authorized Biography of Doug Pinnick}. 2018.
+\item Prato, Greg. \textit{King's X: The Oral History}. Jawbone Press, February 2019. Foreword by Scott Ian (Anthrax).
+\end{itemize}
+
+\subsubsection{Professional Music Journalism}
+
+\begin{itemize}[leftmargin=2em]
+\item Rolling Stone. ``King's X: The Oral History --- New Greg Prato Book Chronicles Band's Saga.'' February 2019.
+\item D Magazine. ``Kings X: Important Enough to Be Legends, Fringe Enough to Be Forgotten.'' May 2013.
+\item Guitar World. Michael Moses, 1992 article on King's X's ``New Age metal and progressive soul.''
+\item Guitar World. Ty Tabor masterclass feature, October 2024.
+\item Louder/Classic Rock/Metal Hammer. ``King's X: The Story of the Cult Rock Band.'' June 2025.
+\item Blabbermouth. Pinnick interviews on grunge influence (February 2025) and aging/legacy (February 2025).
+\item Metal Injection. ``Doug Pinnick Explains How King's X Helped Shape Grunge.'' February 2025.
+\item VintageRock.com. Doug Pinnick interview on \textit{Three Sides of One}. 2022.
+\end{itemize}
+
+\subsubsection{Reference Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: King's X, Doug Pinnick, Ty Tabor, Jerry Gaskill, Drop D tuning (all accessed March 2026)
+\item Encyclopedia.com: King's X entry
+\item AllMusic: King's X discography and album pages
+\item Prog Archives: King's X discography and reviews
+\item VH1: 100 Greatest Artists of Hard Rock (King's X ranked \#83)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on King's X that traces their origins, musical innovations, complete discography, influence on subsequent genres, and the identity/resilience dimensions of their four-decade career. The document must be self-contained, evidence-based, and suitable for integration into the GSD ecosystem's music history knowledge base.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+
+  Wave 0: Foundation (Sequential)
+  +-------------------------------------------+
+  | Schema + Source Index + Template           |
+  | Haiku: shared data structures              |
+  +-------------------------------------------+
+              |
+  Wave 1: Parallel Research (2 tracks)
+  +-------------------+  +-------------------+
+  | Track A:          |  | Track B:          |
+  | M1 Origins        |  | M4 Influence      |
+  | M2 Innovation     |  | M5 Identity       |
+  | M3 Discography    |  |                   |
+  | (Sonnet)          |  | (Opus+Sonnet)     |
+  +-------------------+  +-------------------+
+              |                    |
+              +--------+-----------+
+                       |
+  Wave 2: Synthesis (Sequential)
+  +-------------------------------------------+
+  | Cross-module integration                   |
+  | Innovation -> Influence cascade            |
+  | Identity -> Commercial trajectory          |
+  | Opus: judgment-heavy analysis              |
+  +-------------------------------------------+
+              |
+  Wave 3: Publication + Verification
+  +-------------------------------------------+
+  | Document assembly + source validation      |
+  | Test execution + verification matrix       |
+  | Sonnet: structured production              |
+  +-------------------------------------------+
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Source Layer} --- Authorized biographies, professional journalism, band interviews, peer testimonials
+\item \textbf{Research Layer} --- Five modules producing structured findings with citations
+\item \textbf{Synthesis Layer} --- Cross-module integration revealing causal chains and patterns
+\item \textbf{Publication Layer} --- Final document assembly with verification and quality gates
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}X L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Origins document & Complete formation narrative with primary sources & M1 spec \\
+2 & Innovation analysis & Drop-D, 12-string, vocal, Heavy Melody documented & M2 spec \\
+3 & Discography survey & All 13 albums with characterization and context & M3 spec \\
+4 & Influence map & 10+ peer testimonials; genre genealogy traced & M4 spec \\
+5 & Identity/resilience study & Race, sexuality, faith, health documented sensitively & M5 spec \\
+6 & Synthesis chapter & Cross-module connections; ``three sides of one'' analysis & Synthesis spec \\
+7 & Final publication & Complete document; all tests passing & Publication spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schema + Index & None & Haiku & 2,000 \\
+W0: Source compilation & None & Haiku & 3,000 \\
+W1A: M1 Origins & W0 & Sonnet & 8,000 \\
+W1A: M2 Innovation & W0 & Sonnet & 8,000 \\
+W1A: M3 Discography & W0 & Sonnet & 12,000 \\
+W1B: M4 Influence & W0 & Sonnet & 10,000 \\
+W1B: M5 Identity & W0 & Opus & 10,000 \\
+W2: Synthesis & W1A, W1B & Opus & 8,000 \\
+W3: Assembly & W2 & Sonnet & 6,000 \\
+W3: Verification & W2 & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & M5 Identity (sensitivity requires judgment); Synthesis (cross-module patterns); Through-line \\
+Sonnet & 60\% & M1--M4 research modules; document assembly; verification matrix \\
+Haiku & 10\% & Schema creation; source index; template scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Execution} & \tableheader{Windows} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & 2 & Auto \\
+1 & Parallel Research & 2 tracks & 8 & CAPCOM \\
+2 & Synthesis & Sequential & 4 & CAPCOM \\
+3 & Publication & Sequential & 4 & FLIGHT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema & JSON schema for album entries, personnel, testimonials & Haiku & 2,000 \\
+Source index & Compiled bibliography with URL/page references & Haiku & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Musical Substance (Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+M1: Origins & Formation narrative with sources & Sonnet & 8,000 \\
+M2: Innovation & Technical analysis of musical contributions & Sonnet & 8,000 \\
+M3: Discography & 13-album survey with characterization & Sonnet & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Human Story (Opus + Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+M4: Influence & Peer testimonials; genre genealogy & Sonnet & 10,000 \\
+M5: Identity & Race, sexuality, faith, resilience & Opus & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Cross-module integration & Innovation $\rightarrow$ Influence cascade; Identity $\rightarrow$ trajectory & Opus & 5,000 \\
+``Three Sides of One'' analysis & Architectural pattern of the trio's creative model & Opus & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Document assembly & Complete publication-ready document & Sonnet & 6,000 \\
+Test execution & All tests run; verification matrix completed & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Source index as persistent cache:} Wave 0 source index shared across all Wave 1 tasks, eliminating redundant lookups
+\item \textbf{5-minute TTL exploitation:} Track A and Track B tasks scheduled to share context window within cache validity period
+\item \textbf{Schema reuse:} Album and personnel schemas defined once, referenced by all modules
+\item \textbf{Testimonial deduplication:} Peer quotes compiled once in M4, referenced by M2 and M5 as needed
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 5,000 \\
+Wave 1: Research & 10,000 & 38,000 & --- \\
+Wave 2: Synthesis & 8,000 & --- & --- \\
+Wave 3: Publication & --- & 10,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{18,000} & \textbf{48,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$71,000 tokens across $\sim$18 context windows in 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+  [W0-SCHEMA] ----+----> [W1A-M1] ----+
+                   |                    |
+                   +----> [W1A-M2] ----+----> [W2-SYNTHESIS]
+                   |                    |           |
+                   +----> [W1A-M3] ----+           |
+                   |                               |
+                   +----> [W1B-M4] ----+           |
+                   |                    |           |
+                   +----> [W1B-M5] ----+-----------+
+                                                   |
+                                          [W3-ASSEMBLY]
+                                                   |
+                                        [W3-VERIFICATION]
+
+  Legend:
+    ----> = dependency (must complete before)
+    W1A tasks run in parallel with W1B tasks
+    W2 requires ALL W1 tasks complete
+    W3 requires W2 complete
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations trace to authorized biographies, professional music journalism, or band interviews. Zero fan forums or gossip media. \\
+SC-NUM & Numerical attribution & Every date, chart position, and timeline claim attributed to specific source \\
+SC-ADV & No advocacy & Document presents evidence without advocating for or against any position on race, sexuality, or faith \\
+SC-RAC & Racial sensitivity & Race discussed using Pinnick's own published words and framing; no external projection \\
+SC-HLT & Health privacy & Ty Tabor's diagnosis described only as ``undisclosed illness'' per band's own statement; no speculation \\
+SC-LGB & LGBTQ sensitivity & Pinnick's sexuality discussed using his own language and published timeline; consequences documented factually \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Album completeness & All 13 studio albums listed with year, label, producer \\
+CF-02 & Drop-D documentation & Innovation traced with Tabor/Pinnick/Thayil primary sources \\
+CF-03 & Peer testimonials & $\geq$10 documented with source attribution \\
+CF-04 & Pinnick biography & Childhood through current status, with identity dimensions \\
+CF-05 & Tabor musical lineage & Bluegrass $\rightarrow$ Beatles $\rightarrow$ progressive $\rightarrow$ King's X \\
+CF-06 & Gaskill characterization & Rhythmic and vocal contributions individually described \\
+CF-07 & Sam Taylor era & Both catalyst and constraint documented \\
+CF-08 & Grunge claim analysis & Ament declaration + Thayil timeline + multiple sources \\
+CF-09 & Faith arc & Traced across discography with album references \\
+CF-10 & Health documentation & Published events only; privacy respected \\
+CF-11 & Creative model analysis & ``Three sides of one'' as architectural pattern \\
+CF-12 & Texas scene context & $\geq$3 peer bands documented \\
+CF-13 & 12-string bass & Pinnick's instrument innovation documented \\
+CF-14 & Vocal architecture & Three-voice harmony system described \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Innovation $\rightarrow$ Influence & Drop-D innovation traced to grunge/alt-metal downstream \\
+IN-02 & Identity $\rightarrow$ Trajectory & Race/sexuality effects on commercial arc documented \\
+IN-03 & Formation $\rightarrow$ Innovation & Bluegrass roots $\rightarrow$ drop-D connection explicit \\
+IN-04 & Taylor $\rightarrow$ Split $\rightarrow$ Evolution & Management change reflected in discography shift \\
+IN-05 & Cross-module consistency & Same dates, names, facts consistent across all modules \\
+IN-06 & Self-containment & Reader with no prior knowledge can follow entire narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Contested claims & ``Invented grunge'' presented as claim with evidence, not fact \\
+EC-02 & Data gaps & Areas of incomplete information acknowledged \\
+EC-03 & Temporal currency & Most recent sources from 2024--2026 where available \\
+EC-04 & Sneak Preview era & Pre-King's X recordings noted as poorly documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 13 albums documented & CF-01 & Pending \\
+2. Drop-D innovation traced & CF-02, IN-03 & Pending \\
+3. 10+ peer testimonials & CF-03 & Pending \\
+4. Pinnick biography complete & CF-04, SC-RAC, SC-LGB & Pending \\
+5. Tabor lineage documented & CF-05, IN-03 & Pending \\
+6. Gaskill individually characterized & CF-06 & Pending \\
+7. Sam Taylor era documented & CF-07, IN-04 & Pending \\
+8. Grunge claim analyzed & CF-08, EC-01 & Pending \\
+9. Faith arc traced & CF-09 & Pending \\
+10. Health crises documented & CF-10, SC-HLT & Pending \\
+11. Creative model analyzed & CF-11 & Pending \\
+12. Texas scene contextualized & CF-12 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; evidence compilation; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1, M2, M3 document production \\
+EXEC-B & Executor (Track B) & M4, M5 document production \\
+CRAFT-MUS & Music Analyst & Musical innovation analysis; genre taxonomy; technical accuracy \\
+CRAFT-HUM & Identity Analyst & Race, sexuality, faith, resilience --- sensitivity and accuracy \\
+VERIFY & Verification & Source validation; fact-checking; citation accuracy \\
+INTEG & Integration & Cross-module consistency; cascade validation \\
+CAPCOM & HITL Interface & Human approval at Wave 1 and Wave 2 boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research modules & 5 \\
+Activation profile & Squadron (12 roles) \\
+Parallel tracks & 2 (Musical Substance / Human Story) \\
+Estimated context windows & 18 \\
+Estimated sessions & 4 \\
+Total token budget & $\sim$71,000 \\
+Model split & Opus 25\% / Sonnet 68\% / Haiku 7\% \\
+Safety-critical tests & 6 (all mandatory-pass / BLOCK) \\
+Total tests & 30 \\
+Human gates & 2 (post-Wave 1, post-Wave 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``I've been told how influential King's X has been by almost every musician I've run into, but very few will make a big statement about it.''}
+
+\vspace{0.5em}
+\hfill--- Doug Pinnick, 2025
+
+\vspace{1em}
+
+Three people. Four decades. Thirteen albums. Zero hit singles. And an influence that runs like a river under every heavy record made since 1988. The music industry couldn't categorize them because they lived in the spaces between every category. Black and white. Sacred and secular. Heavy and melodic. Progressive and accessible. The spaces between are where the resonance lives --- and King's X built their entire cathedral there.
+\end{quotebox}
+
+\end{document}
