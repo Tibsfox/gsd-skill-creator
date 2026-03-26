@@ -1,0 +1,974 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Ecology × Technology hybrid ===
+\definecolor{primary}{HTML}{1B5E20}       % Forest green — sections
+\definecolor{secondary}{HTML}{1565C0}     % River blue — subsections
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsections
+\definecolor{accent}{HTML}{2E7D32}        % Highlight green
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Weyerhaeuser Living Forest}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Weyerhaeuser Living Forest -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Living Forest\\[0.3em]Weyerhaeuser in Minecraft}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pacific Northwest Timberlands $\times$ Real-Time Climate Mesh}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Mission}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 45--55 context windows across 8--10 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Living Forest --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{gsd-local-cloud-provisioning-vision, Fox Infrastructure Group Master Plan, GSD BBS Educational Pack}
+\metafield{Context:}{Foxy's Playground Minecraft server, Pacific Rim Mesh Network, FoxEarth environmental monitoring}
+
+\subsection{Vision}
+
+Weyerhaeuser owns approximately 2.5 million acres of highly productive forests spanning from southern Oregon to the North Cascade Mountains in Washington --- the largest private timberland holding in the Pacific Northwest. These forests, dominated by Douglas-fir with elevations ranging from a few hundred feet to 5,550 feet, represent a living system so vast that no human being can comprehend it by walking through it. But you could walk through it in Minecraft.
+
+This mission builds a 1:1-scale Minecraft simulation of Weyerhaeuser's PNW timberlands fed by real-time climate data from the Pacific Rim mesh network. Not a static map. A \emph{living} forest --- where the weather you feel in-game is the weather hitting the actual canopy right now, where wildfire detections from NASA FIRMS appear as spreading flame within minutes, where tree growth follows real silvicultural models calibrated to LiDAR-measured canopy heights. The forest breathes. The mesh network is its nervous system.
+
+This is the Amiga Principle made literal: you don't need to render every needle on every Douglas-fir. You need the \emph{right data at the right resolution} flowing through \emph{specialized execution paths} --- terrain from USGS 3DEP, canopy structure from LiDAR, weather from OpenWeatherMap and NOAA, fire from FIRMS, growth models from USFS Forest Inventory and Analysis. Each data stream has its own pipeline. Together they produce something no single system could: a forest you can stand inside that knows what's happening to the real one.
+
+The spaces between the data streams --- where terrain meets canopy, where weather drives fire risk, where mesh telemetry touches game state --- that's where the simulation comes alive. And when the Cascadia Subduction Zone eventually ruptures, the same mesh network that feeds weather data into Minecraft will activate FoxResponse emergency mode. The game becomes a training ground for the real thing.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Scale incomprehension.} 2.5 million acres of contiguous forest is cognitively inaccessible --- you cannot grasp the interconnection of watersheds, fire corridors, elevation gradients, and species distribution at that scale from any vantage point. Minecraft's explorable 3D world makes the system navigable.
+  \item \textbf{Static maps lie.} Traditional GIS outputs produce snapshots frozen in time. Forests are dynamic systems where weather, fire, logging, growth, and seasonal cycles constantly reshape conditions. A living simulation that ingests real-time data reveals what static maps conceal.
+  \item \textbf{Climate data is invisible.} NOAA stations, FIRMS detections, and USGS stream gauges produce data that lives in databases and dashboards. Translating that data into a visceral spatial experience --- rain falling on the ridgeline you're standing on --- makes climate tangible and educational.
+  \item \textbf{Mesh network validation needs a consumer.} The Pacific Rim mesh network produces telemetry data. Without a compelling, visible, always-running consumer of that data, the mesh has no proof-of-concept audience. A Minecraft server with thousands of players consuming mesh-fed weather in real time is the most visceral possible demonstration.
+  \item \textbf{Emergency preparedness requires spatial literacy.} When Cascadia ruptures, responders need to know terrain, access routes, fuel loads, and water sources across millions of acres. A simulation that people have already explored recreationally creates spatial literacy that no training manual can match.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Real terrain + real trees + real weather + real fire = living forest.}\\[0.5em]
+GIS-to-Minecraft terrain pipeline ingests USGS 3DEP elevation data and OpenStreetMap features to generate accurate block-world topography. LiDAR-derived canopy height models place trees at real densities and heights. OpenWeatherMap and NOAA APIs drive in-game weather cycles synced to actual PNW conditions. NASA FIRMS wildfire detections trigger in-game fire spread events. The Pacific Rim mesh network routes all sensor data through a unified telemetry bus that the Minecraft server consumes as a plugin data source.
+\end{quotebox}
+
+\subsubsection{Terrain and Forest Architecture}
+
+\begin{asciibox}
+TERRAIN PIPELINE
+================
+
+  USGS 3DEP LiDAR     OpenStreetMap        AWS Terrain Tiles
+  (point clouds)       (roads, rivers,      (global elevation)
+       |               buildings)                |
+       v                    |                    v
+  Canopy Height         Overpass API         Heightmap
+  Model (CHM)              |               Generator
+       |                   v                    |
+       +---------> ARNIS Engine <--------------+
+                   (Rust, open-source)
+                        |
+                        v
+              Minecraft World Save
+              (.mca Anvil format)
+                        |
+                        v
+              Paper/Spigot Server
+              (Java Edition 1.21+)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE — SIX PARALLEL STREAMS
+==========================================
+
+ M1: TERRAIN     M2: CANOPY      M3: CLIMATE     M4: FIRE
+ GENESIS         ECOLOGY         BRIDGE          & DISTURBANCE
+ --------        --------        --------        --------
+ USGS 3DEP       LiDAR CHM       OpenWeather     NASA FIRMS
+ OSM features    USFS FIA         NOAA CDO        NIFC perims
+ Arnis engine    Species map     NWS forecasts   Spread model
+ Hydrology       Growth model    Day/night sync  Logging events
+      |              |               |               |
+      +--------------+-------+-------+---------------+
+                             |
+                    M5: MESH TELEMETRY
+                    ------------------
+                    Sensor ingestion
+                    MQTT/WebSocket bus
+                    FoxResponse bridge
+                    Data quality gates
+                             |
+                             v
+                    M6: LIVING WORLD ENGINE
+                    -----------------------
+                    Tick-rate simulation
+                    Season/growth cycles
+                    Event correlation
+                    Player experience layer
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Terrain Genesis}
+GIS-to-Minecraft world generation pipeline. Ingest USGS 3DEP elevation data and AWS Terrain Tiles for the 2.5-million-acre Weyerhaeuser PNW footprint. Process through Arnis (open-source Rust engine) or custom pipeline using PDAL and GDAL. Generate accurate heightmaps covering elevations from sea level to 5,550 feet. Overlay OpenStreetMap road networks, river systems, and watershed boundaries. Handle the Cascade Range volcanic geology, including Mount St.\ Helens blast zone (Weyerhaeuser's St.\ Helens Tree Farm). Scale factor selection: 1:20 recommended for playability (each Minecraft block = 20m), with 1:1 available for local detail areas.
+
+\subsubsection{Module 2: Forest Canopy Ecology}
+Tree placement driven by real data. USGS 3DEP LiDAR point clouds processed into canopy height models at 1-meter resolution. USFS Forest Inventory and Analysis (FIA) database provides species distribution: 81\% Douglas-fir, 12\% whitewood, 7\% other (noble fir, grand fir, western red cedar, Sitka spruce, Engelmann spruce, ponderosa pine, western larch, lodgepole pine, red alder). Map Weyerhaeuser's harvest rotation cycles (third-generation planting on original 1900 parcels). Northern Spotted Owl habitat conservation areas (Coos Bay 50-year HCP through 2045, Central Cascades Multi-Species HCP). Growth models calibrated to Weyerhaeuser's selective breeding program --- climate-adapted seedling stock.
+
+\subsubsection{Module 3: Climate Bridge}
+Real-time weather synchronization. OpenWeatherMap API (free tier: 1,000 calls/day) provides current conditions for configurable city/coordinates across the timberland footprint. NOAA Climate Data Online API provides historical baselines and anomaly detection. Map real precipitation, temperature, wind speed, and cloud cover to Minecraft weather states (clear, rain, thunder). Biome-aware: snow above treeline in Cascades, rain in coastal zones, dry conditions east of crest. Day/night cycle synced to actual PNW solar position. Seasonal variation in precipitation patterns (wet winters, dry summers) drives gameplay experience.
+
+\subsubsection{Module 4: Fire and Disturbance}
+Wildfire detection and simulation. NASA FIRMS API provides near-real-time (within 3 hours) and ultra-real-time (within 1 minute for CONUS) active fire detections from MODIS and VIIRS satellites. NIFC WFIGS Current Wildland Fire Perimeters provides authoritative fire boundary data via ArcGIS REST API. When FIRMS detects a hotspot within the simulation footprint, the Living World Engine triggers in-game fire spread using a simplified cellular automaton model. Fuel load derived from canopy density (Module 2) and moisture content (Module 3). Historical disturbance overlay: 1980 Mount St.\ Helens eruption blast zone, major wildfire scars, Weyerhaeuser harvest units.
+
+\subsubsection{Module 5: Mesh Telemetry}
+Pacific Rim mesh network sensor integration. The FoxResponse mesh network (solar-powered nodes, 50 km radio range, Starlink backup) produces continuous environmental telemetry: temperature, humidity, wind, air quality, soil moisture. MQTT or WebSocket transport carries sensor readings to a telemetry bus. The Minecraft server plugin subscribes to the bus and translates sensor events into game state changes. Data quality gates filter noise and validate sensor readings before they affect gameplay. When the mesh activates emergency mode (Cascadia event), the game world reflects the activation --- sirens, weather shift, emergency channel overlay.
+
+\subsubsection{Module 6: Living World Engine}
+The integration layer. A Paper/Spigot server plugin that consumes all five upstream data streams on a configurable tick rate. Manages: seasonal tree growth (using FIA growth curves), weather state transitions (smoothed, not jarring), fire spread simulation, harvest event processing (when Weyerhaeuser logs a unit, trees disappear; when they replant, saplings appear over subsequent growth ticks). Player experience layer: HUD showing real sensor readings, biome information panels, educational signage at notable locations (Mount St.\ Helens viewpoint, spotted owl habitat boundaries, original 1900 parcel markers). Scoreboard integration for community events.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+name: "living-forest"
+version: "1.0.0"
+
+agents:
+  - name: "terrain-gen"
+    role: "USGS 3DEP + OSM -> Minecraft world generation"
+  - name: "canopy-mapper"
+    role: "LiDAR CHM + FIA species -> tree placement engine"
+  - name: "climate-sync"
+    role: "OpenWeatherMap + NOAA -> in-game weather driver"
+  - name: "fire-watch"
+    role: "NASA FIRMS + NIFC -> fire spread simulation"
+  - name: "mesh-bridge"
+    role: "Pacific Rim telemetry -> MQTT/WS event bus"
+  - name: "world-engine"
+    role: "Tick-rate integration of all streams"
+  - name: "edu-layer"
+    role: "Educational signage, HUD, player guides"
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "terrain_accuracy"
+        threshold: "elevation RMSE < 5 blocks at 1:20 scale"
+        action: "block"
+      - check: "weather_sync_latency"
+        threshold: "< 15 minutes from API call to game state"
+        action: "block"
+      - check: "fire_detection_latency"
+        threshold: "< 30 minutes from FIRMS alert to game event"
+        action: "block"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[nosep]
+  \item Weyerhaeuser PNW timberlands (WA + OR, \textasciitilde2.5M acres) terrain generation at 1:20 scale
+  \item Douglas-fir dominant canopy placement from LiDAR CHM data
+  \item Real-time weather sync via OpenWeatherMap API (single reference station per biome zone)
+  \item NASA FIRMS fire detection integration with simplified spread model
+  \item Mesh telemetry ingestion via MQTT (simulated sensors for v1.0 if physical mesh not yet deployed)
+  \item Paper/Spigot plugin architecture for Java Edition 1.21+
+  \item Educational HUD and signage system
+  \item Mount St.\ Helens blast zone as showcase area
+  \item Harvest/replant event simulation
+  \item Minecraft EULA-compliant server operation
+\end{itemize}
+
+\subsubsection*{Out of Scope (Future)}
+\begin{itemize}[nosep]
+  \item Southern US timberlands (\textasciitilde7M acres --- separate mission)
+  \item Canadian licensed timberlands (\textasciitilde14M acres)
+  \item Bedrock Edition support (Java Edition only for v1.0)
+  \item Real-money transactions or pay-to-win mechanics (EULA compliance)
+  \item Actual Weyerhaeuser corporate partnership (educational/simulation only)
+  \item Full 1:1 scale generation (computational infeasibility at 2.5M acres)
+  \item Multiplayer PvP or survival-game mechanics
+  \item Integration with Weyerhaeuser's proprietary harvest scheduling systems
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Terrain generation produces explorable Minecraft world covering $\geq$50,000 contiguous acres of Weyerhaeuser PNW land at 1:20 scale with elevation accuracy RMSE $<$ 5 blocks.
+  \item Tree placement reflects real canopy density from LiDAR data, with Douglas-fir comprising $\geq$75\% of placed tree types in western zones.
+  \item Weather sync updates in-game conditions within 15 minutes of real-world API data, correctly mapping rain, clear, and snow states.
+  \item At least 3 distinct biome zones are represented (coastal, valley, montane/subalpine) with appropriate species and weather differentiation.
+  \item Fire detection events from NASA FIRMS within the simulation footprint trigger visible in-game fire spread within 30 minutes of satellite observation.
+  \item The mesh telemetry bus successfully ingests $\geq$3 distinct sensor types (temperature, humidity, wind) and translates them to game state.
+  \item Mount St.\ Helens blast zone is rendered as a distinct terrain feature with educational signage explaining the 1980 eruption and Weyerhaeuser's recovery forestry.
+  \item Northern Spotted Owl habitat conservation areas are delineated in-game with appropriate signage (no precise nest locations).
+  \item The server runs stable under 50 concurrent players with $<$200ms average tick time.
+  \item Educational HUD displays real sensor data alongside Minecraft gameplay data.
+  \item All climate projections and ecological data are sourced from government agencies or peer-reviewed research.
+  \item Minecraft EULA compliance verified --- no prohibited monetization patterns.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+GSD Local Cloud Provisioning & Service VM hosts Minecraft server; infrastructure VM provides DNS/NTP \\
+Fox Infrastructure Master Plan & FoxResponse mesh network is the telemetry source; FoxEarth provides environmental baselines \\
+GSD BBS Educational Pack & Shared educational philosophy; BBS pack teaches computing history, Living Forest teaches ecology \\
+Foxy's Playground (Minecraft EULA) & Revenue strategy and compliance framework for server monetization \\
+GSD Amiga Vision & Architectural leverage principle governs the data pipeline design \\
+Pacific Spine Emergency Network & Mesh telemetry dual-use: recreation feeds become emergency data during Cascadia events \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Frederick Weyerhaeuser purchased 900,000 acres of Washington timberland in 1900. Today the company is planting third-generation trees on that same ground. The forest remembers what the ledger books forgot --- that land is not an asset class, it is a living system that operates on timescales longer than any quarterly report.
+
+Building that forest in Minecraft, fed by real data from real sensors on real land, is the Amiga Principle applied to ecology: you don't need to simulate every mycorrhizal network. You need the right data streams flowing through specialized pipelines into a world that \emph{feels} alive. The spaces between the data --- where terrain meets canopy, where weather drives fire, where mesh telemetry becomes rain on a ridge --- that's where understanding lives. A kid exploring this world learns more about Pacific Northwest forest ecology in an afternoon than a semester of textbook diagrams could teach. And when the ground shakes, the same mesh that feeds their weather becomes the network that saves lives.
+
+The corridor starts at home. The forest starts with the first tree.
+
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Living Forest --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the factual foundation for each research module. Every claim is sourced from government agencies, peer-reviewed research, or authoritative industry data.
+
+Key source organizations:
+\begin{itemize}[nosep]
+  \item \textbf{USGS} --- 3D Elevation Program (3DEP), National Map, LiDAR point clouds
+  \item \textbf{NASA} --- FIRMS (Fire Information for Resource Management System), Landsat, LANCE
+  \item \textbf{NOAA/NCEI} --- Climate Data Online, weather station networks, forecast models
+  \item \textbf{USFS} --- Forest Inventory and Analysis (FIA), Pacific Northwest Research Station
+  \item \textbf{USFWS} --- Northern Spotted Owl HCP, Endangered Species Act listings
+  \item \textbf{Weyerhaeuser Company} --- SEC 8-K filings, annual reports, western timberlands data
+  \item \textbf{OpenStreetMap} --- Geospatial features via Overpass API
+  \item \textbf{AWS} --- Terrain Tiles (Registry of Open Data), S3-hosted 3DEP LiDAR
+\end{itemize}
+
+\subsection{Terrain Genesis Reference}
+
+\subsubsection{USGS 3DEP LiDAR Data}
+The USGS 3D Elevation Program aims to collect LiDAR data across the conterminous United States. Data is available as LAZ-format point clouds via Amazon S3 (both public Entwine Point Tile format and Requester Pays raw LAZ 1.4). Quality Level 2 (QL2) data provides $\leq$2 points/m\textsuperscript{2} with $\leq$10 cm vertical accuracy in non-vegetated areas. The Pacific Northwest has extensive QL2 coverage. Point cloud data can be processed into Digital Terrain Models (DTM), Digital Surface Models (DSM), and Canopy Height Models (CHM) using PDAL (Point Data Abstraction Library) and GDAL.
+
+\subsubsection{Arnis World Generation Engine}
+Arnis is an open-source Rust application that transforms real-world geographic data into playable Minecraft worlds. It processes OpenStreetMap geospatial data (building footprints, roads, land use) combined with elevation data from AWS Terrain Tiles to generate accurate terrain with architecture. The engine supports both Java Edition (1.17+) and Bedrock Edition. Key capabilities: customizable scale, spawn point selection, building interior generation, and terrain-only mode for natural landscapes. The elevation pipeline uses AWS Terrain Tiles (migrated from commercial providers in 2025), providing cost-free access to global elevation data. Client-side tile caching reduces redundant downloads.
+
+\subsubsection{Weyerhaeuser PNW Terrain Profile}
+Weyerhaeuser's western timberlands span from southern Oregon to the North Cascade Mountains in Washington. Elevations range from a few hundred feet to 5,550 feet. The geology reflects chains of volcanic islands that collided with the North American continent, forming portions of western Oregon and Washington. The Cascade Range volcanic peaks (including Mount St.\ Helens) testify to continuing eruption history. The 1980 Mount St.\ Helens eruption devastated Weyerhaeuser's St.\ Helens Tree Farm, creating a unique recovery forestry landscape that has been intensively studied and replanted.
+
+\subsubsection{Hydrological Features}
+Major river systems within the timberland footprint include the Cowlitz, Lewis, Kalama, and Toutle rivers in Washington, and the Willamette tributary systems in Oregon. Watershed boundaries from USGS Watershed Boundary Dataset (WBD) provide the structural framework for hydrological modeling. Stream gauge data from USGS National Water Information System (NWIS) can feed real-time water level information.
+
+\subsection{Forest Canopy Ecology Reference}
+
+\subsubsection{Species Composition}
+Weyerhaeuser's western US timberlands are historically dominated by Douglas-fir (\emph{Pseudotsuga menziesii}), which remains the primary species planted and harvested. Per SEC filings (2024 data): Douglas-fir comprises approximately 81\% of harvest volume, whitewood species 12\%, and other species 7\%. Additional native species grown and harvested include noble fir, grand fir, western red cedar, Sitka spruce, Engelmann spruce, ponderosa pine, western larch, lodgepole pine, and red alder. The company operates world-class seedling selection, breeding, and field-testing programs producing climate-adapted planting stock.
+
+\subsubsection{LiDAR Canopy Height Models}
+USGS 3DEP LiDAR data enables generation of 1-meter resolution Canopy Height Models by computing the difference between Digital Surface Models (highest return) and Digital Terrain Models (ground return). Published research demonstrates R\textsuperscript{2} = 0.85 correlation between LiDAR-derived CHM and field-measured tree heights on plots with accurate GPS locations. Processing workflow: normalize point cloud heights using k-nearest neighbor interpolation, filter noise using isolated voxel filtering, suppress non-forested areas using NLCD classification, merge tiles into regional CHM products. Datasets of 13+ terabytes for recent 3DEP acquisitions require parallel processing infrastructure.
+
+\subsubsection{Forest Growth and Harvest Cycles}
+Weyerhaeuser is now planting third-generation trees on many locations, including more than 400,000 acres of the original land purchased in 1900. All harvested sites in Washington and Oregon are replanted within two years using climate-adapted seedlings from the company's breeding program. Intensive management includes site-specific fertilization, competing vegetation prevention, and pre-commercial thinning. Douglas-fir rotation periods typically range from 40--60 years in the PNW.
+
+\subsubsection{Conservation and Endangered Species}
+The Northern Spotted Owl Habitat Conservation Plan (1995, Coos Bay Tree Farm, Oregon) is a 50-year commitment through 2045 providing habitat on Weyerhaeuser timberlands complementing federal recovery efforts. The Multi-Species Habitat Conservation Plan (Central Cascades, Washington) covers northern spotted owl plus grizzly bear, wolf, and lynx. Research on Oregon slender salamander (2012--2019) found that occupancy did not decline due to harvest activities. Red tree vole research indicates the species occurs in intensively managed forests, not only old growth.
+
+\subsection{Climate Bridge Reference}
+
+\subsubsection{OpenWeatherMap API}
+The OpenWeatherMap API provides current weather data for any geographic coordinates. Free tier: 1,000 API calls/day, sufficient for 15-minute update intervals across multiple sensor zones. Returns temperature, humidity, pressure, wind speed/direction, cloud cover, precipitation, and weather condition codes (clear, rain, drizzle, thunderstorm, snow, mist). The Dynamic Weather Plugin and RealTimeWeather plugin for Spigot/Paper servers demonstrate proven integration patterns: API key configuration, city/coordinate selection, automatic weather state mapping, and day/night cycle synchronization.
+
+\subsubsection{NOAA Climate Data Online}
+NOAA's National Centers for Environmental Information (NCEI) provides REST APIs for historical and near-real-time climate data. The Data Access Service API (\texttt{/access/services/data/v1}) supports dataset selection, station filtering, date ranges, and multiple output formats. Daily summaries, hourly observations, and climate normals are available for thousands of stations across the PNW. Key parameters: TMAX, TMIN, PRCP, SNOW, AWND (average wind). Station density in the Weyerhaeuser footprint provides adequate spatial coverage for biome-zone differentiation.
+
+\subsubsection{PNW Climate Patterns}
+Weyerhaeuser's western timberlands experience a wet and mild maritime climate with most annual precipitation falling during winter months. The Cascade Range creates a dramatic rain shadow: western slopes receive 60--120+ inches of annual precipitation while eastern slopes receive 15--30 inches. Elevation drives temperature gradients, with snow persisting at higher elevations into spring and summer. This climate pattern creates exceptional Douglas-fir growing conditions and is central to the species distribution mapping.
+
+\subsection{Fire and Disturbance Reference}
+
+\subsubsection{NASA FIRMS}
+The Fire Information for Resource Management System distributes near-real-time active fire data from MODIS (Aqua and Terra) and VIIRS (S-NPP, NOAA-20, NOAA-21). Global data available within 3 hours of satellite observation; US and Canada detections available in real-time (within 1 hour) and ultra-real-time (within 1 minute via direct broadcast from University of Wisconsin-Madison SSEC). VIIRS surface footprint: approximately 375$\times$375m at nadir. Data formats: SHP, KML, TXT, WMS. The FIRMS API provides programmatic access to active fire data by geographic bounding box and time range.
+
+\subsubsection{NIFC Fire Perimeters}
+The National Interagency Fire Center's WFIGS (Wildland Fire Interagency Geospatial Services) Current Wildland Fire Perimeters dataset is the authoritative federal source for fire boundary data. Available via ArcGIS REST endpoint with query support for bounding box, date, and GeoJSON export. Historical perimeters available for trend analysis and disturbance mapping.
+
+\subsubsection{FEDS Fire Tracking}
+The Fire Event Delineation System (developed by UC Irvine, NASA GSFC, Cardiff University, and Universidad del Rosario) uses VIIRS active fire detections to model fire perimeters every 12 hours using an alpha hull clustering approach. Available as ``VIIRS Modeled Fire Perimeter'' on FIRMS. NRT data accessible via OGC API. Validated against California FRAP year-end data with favorable accuracy metrics.
+
+\subsubsection{PNW Fire History and Risk}
+The Pacific Northwest fire regime includes both natural (lightning) and human-caused ignitions. Climate change is extending fire seasons and increasing severity. Weyerhaeuser's Mount St.\ Helens Tree Farm experienced catastrophic disturbance in 1980 --- the eruption blast zone provides a unique landscape for simulation, showing 45+ years of recovery forestry alongside the monument boundary.
+
+\subsection{Mesh Telemetry Reference}
+
+\subsubsection{FoxResponse Mesh Architecture}
+The Fox Infrastructure Group FoxResponse mesh network specification calls for solar-powered nodes with 72--96 hour battery backup, mesh radio with 50 km range, Starlink backup, local data cache (maps, medical protocols, offline resources), deployable in 30 minutes by two people. Emergency activation sequence: each station node islands on FoxSolar, mesh activates without central server dependency. The full PNW mesh network is projected for Year 7--8 under Curve 3, Year 2--3 under Curve 5.
+
+\subsubsection{Sensor Data Transport}
+MQTT (Message Queuing Telemetry Transport) is the standard lightweight protocol for IoT sensor networks. WebSocket transport provides browser-compatible real-time data streaming. For Minecraft integration, the server plugin subscribes to MQTT topics organized by sensor zone and data type. Quality-of-Service levels ensure delivery guarantees appropriate to each data type (weather: QoS 1, fire alerts: QoS 2).
+
+\subsubsection{Simulated Sensors for v1.0}
+Until physical mesh deployment, the system operates with simulated sensor data derived from NOAA station readings and NASA satellite products. The simulation layer generates MQTT messages in the same format as physical sensors, allowing the Living World Engine to be developed and tested against realistic data patterns without hardware dependency.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Boundary} & \tableheader{Mitigation} \\
+\midrule
+Endangered species locations & ABSOLUTE & No GPS coordinates or specific nest/den sites for Northern Spotted Owl or other listed species \\
+Weyerhaeuser intellectual property & GATE & Use only publicly available data (SEC filings, public website, government databases) \\
+Tribal land boundaries & ABSOLUTE & Nation-specific attribution; delineation only from public government sources \\
+Climate projections & GATE & All projections cited from NOAA, IPCC, or peer-reviewed sources \\
+Fire simulation accuracy & ANNOTATE & Clearly label simulation as educational, not operational fire prediction \\
+Minecraft EULA compliance & GATE & No prohibited monetization; cosmetic-only optional purchases \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Government and Agency Sources}
+\begin{itemize}[nosep]
+  \item USGS 3D Elevation Program (3DEP) --- LiDAR point clouds, AWS S3 public dataset
+  \item USGS National Map --- Digital elevation models, watershed boundaries
+  \item NASA FIRMS --- Active fire data API (MODIS, VIIRS)
+  \item NASA LANCE --- Land, Atmosphere Near real-time Capability for EO
+  \item NOAA NCEI --- Climate Data Online, weather station data, REST APIs
+  \item USFS Forest Inventory and Analysis (FIA) --- Species distribution, growth data
+  \item USFWS --- Northern Spotted Owl HCP documentation
+  \item NIFC WFIGS --- Wildland fire perimeters, fire history
+  \item Oregon GEOHub --- Statewide parcel GIS data
+  \item USDA NAIP --- National Agriculture Imagery Program aerial photos
+\end{itemize}
+
+\subsubsection*{Corporate and Industry Sources}
+\begin{itemize}[nosep]
+  \item Weyerhaeuser Company SEC 8-K filings (2024--2025) --- Timberland acreage, species data, financial metrics
+  \item Weyerhaeuser Company public website --- Western timberlands forestry description, conservation plans
+  \item Forisk Ownership Database (2024) --- Timber REIT ownership data
+\end{itemize}
+
+\subsubsection*{Open-Source Tools and Platforms}
+\begin{itemize}[nosep]
+  \item Arnis (github.com/louis-e/arnis) --- Real-world Minecraft terrain generation, Apache 2.0
+  \item OpenStreetMap --- Geospatial features, Open Database License
+  \item AWS Terrain Tiles --- Global elevation dataset, Registry of Open Data
+  \item PDAL --- Point Data Abstraction Library for LiDAR processing
+  \item OpenTopography --- 3DEP Jupyter notebook workflows
+  \item RealTimeWeather plugin --- Minecraft weather sync reference implementation
+  \item Dynamic Weather Plugin --- Spigot/Paper weather sync, OpenWeatherMap integration
+\end{itemize}
+
+\subsubsection*{Peer-Reviewed Research}
+\begin{itemize}[nosep]
+  \item Shao et al.\ (2022) --- High-resolution CHM generation from USGS 3DEP LiDAR, \emph{Remote Sensing} 14(4):935
+  \item Canopy height model and NAIP imagery pairs across CONUS (2025) --- \emph{Scientific Data}
+  \item Chen et al.\ (2022) --- FEDS fire event tracking algorithm validation, UC Irvine/NASA GSFC
+  \item Modeling forest AGB and volume using LiDAR and FIA data in the PNW (2014) --- \emph{Remote Sensing} 7(1):229
+  \item Floodcraft (2024) --- Game-based interactive learning using Minecraft for education, AWS case study
+\end{itemize}
+
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a playable Minecraft server hosting an accurate 3D representation of Weyerhaeuser's Pacific Northwest timberlands, fed by real-time climate and fire data from government APIs and the Pacific Rim mesh network, with educational overlays and a living simulation engine that reflects actual forest conditions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+ WAVE 0          WAVE 1A           WAVE 1B          WAVE 2         WAVE 3
+ Foundation      Terrain Track     Data Track        Synthesis      Publication
+ ----------      -------------     ----------        ---------      -----------
+ [Schemas ]      [Terrain Gen]     [Climate   ]      [Living  ]     [Server   ]
+ [Source   ] --> [Canopy Map ] --> [Fire Watch ] --> [World   ] --> [Deploy   ]
+ [Index    ]     [             ]   [Mesh Bridge]     [Engine  ]     [Test     ]
+                                                                    [Docs     ]
+
+ Sequential      Parallel           Parallel         Sequential     Sequential
+ Haiku           Sonnet+Opus        Sonnet            Opus          Sonnet
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[nosep]
+  \item \textbf{Data Ingestion Layer} --- API clients for USGS, NASA, NOAA, OpenWeatherMap, OSM
+  \item \textbf{Processing Layer} --- LiDAR-to-CHM pipeline, terrain heightmap generation, sensor normalization
+  \item \textbf{World Generation Layer} --- Arnis-based or custom Minecraft world builder
+  \item \textbf{Simulation Layer} --- Living World Engine tick-rate processor
+  \item \textbf{Plugin Layer} --- Paper/Spigot server plugins (weather sync, fire events, mesh bridge, HUD)
+  \item \textbf{Education Layer} --- Signage, documentation, player guides
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+D1 & Terrain World Save & $\geq$50K acres at 1:20, RMSE $<$ 5 blocks & M1 spec \\
+D2 & Canopy Overlay & Douglas-fir $\geq$75\% in western zones & M2 spec \\
+D3 & Weather Sync Plugin & $<$15 min latency, 3+ biome zones & M3 spec \\
+D4 & Fire Watch Plugin & $<$30 min FIRMS-to-game latency & M4 spec \\
+D5 & Mesh Bridge Service & 3+ sensor types ingested via MQTT & M5 spec \\
+D6 & Living World Engine & Stable 50-player, $<$200ms tick & M6 spec \\
+D7 & Educational Package & HUD, signage, player guide & M6 + edu \\
+D8 & Server Configuration & EULA-compliant, production-ready & Ops spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{2.5cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 8K \\
+Source index & None & Haiku & 12K \\
+Terrain pipeline & Schemas & Sonnet & 45K \\
+Canopy mapper & Schemas, terrain & Opus & 50K \\
+Climate plugin & Schemas & Sonnet & 35K \\
+Fire watch plugin & Schemas, climate & Sonnet & 40K \\
+Mesh bridge & Schemas & Sonnet & 30K \\
+Living World Engine & All modules & Opus & 65K \\
+Educational layer & Engine & Sonnet & 25K \\
+Server config/ops & Engine & Sonnet & 20K \\
+Integration tests & All & Opus & 30K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\%} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & Canopy mapper (ecological judgment), Living World Engine (cross-system integration), integration tests (quality verification) \\
+Sonnet & 60\% & Terrain pipeline, climate plugin, fire watch, mesh bridge, educational layer, server config \\
+Haiku & 10\% & Shared schemas, source index, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Schemas, source index & Sequential & 2 \\
+1A & Terrain track & Terrain, canopy & Parallel & 8--10 \\
+1B & Data track & Climate, fire, mesh & Parallel & 6--8 \\
+2 & Synthesis & Living World Engine & Sequential & 8--10 \\
+3 & Publication & Edu, ops, tests & Sequential & 6--8 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Define shared data schemas & Haiku & TypeScript interfaces: coordinate systems, sensor readings, weather states, fire events, tree species enums \\
+Build source index & Haiku & JSON registry of all API endpoints, credentials required, rate limits, data formats \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Terrain Track}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+USGS 3DEP data acquisition pipeline & Sonnet & Python/Rust scripts to fetch and cache LiDAR tiles for target bounding boxes \\
+Heightmap generation & Sonnet & PDAL/GDAL pipeline producing Minecraft-compatible elevation grids \\
+Arnis integration or custom generator & Sonnet & World save (.mca) files with accurate terrain \\
+LiDAR CHM processing & Opus & Canopy height model at 1m resolution, species classification overlay \\
+Tree placement engine & Opus & Algorithm mapping CHM + FIA data to Minecraft tree types and densities \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Data Track}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+OpenWeatherMap client & Sonnet & Java plugin: API polling, weather state mapping, biome-zone routing \\
+NOAA CDO client & Sonnet & Historical baseline calculator, anomaly detection \\
+NASA FIRMS client & Sonnet & API poller with bounding box filter, fire event emitter \\
+Fire spread model & Sonnet & Cellular automaton using fuel load and moisture inputs \\
+MQTT mesh bridge & Sonnet & Service subscribing to mesh topics, translating to plugin events \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Living World Engine core & Opus & Tick-rate processor consuming all data streams, managing world state \\
+Season/growth simulation & Opus & FIA-calibrated growth curves, seasonal transitions, harvest/replant \\
+Event correlation engine & Opus & Cross-stream event detection (e.g., low humidity + high wind = fire risk visual) \\
+Player experience layer & Opus & HUD integration, real-time data display, exploration waypoints \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Educational signage system & Sonnet & In-game signs, books, and NPC guides at notable locations \\
+Player guide documentation & Sonnet & Markdown + in-game book: how to explore, what you're seeing, data sources \\
+Server ops configuration & Sonnet & Docker compose, monitoring, backup, EULA compliance checklist \\
+Integration test suite & Opus & End-to-end tests: API to game state, performance benchmarks \\
+Verification report & Sonnet & Criterion-by-criterion verification with evidence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+  \item \textbf{5-minute cache window:} Wave 0 foundation schemas cached and reused by all subsequent waves
+  \item \textbf{Terrain tile caching:} 3DEP LiDAR tiles and AWS Terrain Tiles cached on local disk after first fetch
+  \item \textbf{API response caching:} OpenWeatherMap responses cached for update interval (15 min); FIRMS cached for polling interval (5 min)
+  \item \textbf{World generation checkpointing:} Minecraft world saves checkpointed per 10,000-block region to allow incremental regeneration
+  \item \textbf{Session continuity:} Each wave produces a state artifact consumed by the next wave, minimizing context window reloading
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 20K \\
+Wave 1A: Terrain & 50K & 45K & --- \\
+Wave 1B: Data & --- & 105K & --- \\
+Wave 2: Synthesis & 65K & --- & --- \\
+Wave 3: Publication & 30K & 70K & --- \\
+\midrule
+\textbf{Total} & \textbf{145K} & \textbf{220K} & \textbf{20K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} \textasciitilde385K tokens across 45--55 context windows.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  [Schemas] ----+----> [Terrain Pipeline] ----> [Canopy Mapper] --+
+                |                                                   |
+                +----> [Climate Plugin] --------+                   |
+                |                               |                   |
+                +----> [Fire Watch] -----+      |                   |
+                |                        |      v                   v
+                +----> [Mesh Bridge] ----+-> [Living World Engine] --> [Edu Layer]
+                                                    |                       |
+  [Source Index] ---> (consumed by all)              v                       v
+                                              [Server Config] -------> [Tests]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations from gov agencies, peer-reviewed journals, or professional organizations \\
+SC-NUM & Numerical attribution & Every species count, area measurement, and elevation statistic attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for logging policy or environmental regulation \\
+SC-END & Endangered species & No precise GPS coordinates for Northern Spotted Owl nests or other listed species locations \\
+SC-CLI & Climate projections & All temperature and precipitation projections cite NOAA or peer-reviewed source \\
+SC-FIR & Fire disclaimer & Simulation clearly labeled as educational; not operational fire prediction \\
+SC-EUL & EULA compliance & Server configuration verified against current Minecraft EULA; no prohibited monetization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Terrain extent & World save covers $\geq$50K acres at 1:20 scale \\
+CF-02 & Elevation accuracy & RMSE $<$ 5 blocks vs.\ 3DEP reference elevations \\
+CF-03 & Hydrology & Major rivers (Cowlitz, Lewis, Kalama) present as water features \\
+CF-04 & Species distribution & Douglas-fir $\geq$75\% in western biome zones \\
+CF-05 & Canopy height & Tree heights correlate with LiDAR CHM (R $>$ 0.7 at zone level) \\
+CF-06 & Weather sync latency & API to game state $<$ 15 minutes \\
+CF-07 & Weather state mapping & Rain, clear, and snow correctly mapped from API conditions \\
+CF-08 & Biome differentiation & $\geq$3 distinct zones with different weather/species profiles \\
+CF-09 & FIRMS latency & Satellite detection to game fire event $<$ 30 minutes \\
+CF-10 & Fire spread model & Fire expands based on fuel load and wind direction \\
+CF-11 & Mesh ingestion & $\geq$3 sensor types successfully parsed from MQTT \\
+CF-12 & Growth simulation & Trees visibly grow over configurable time acceleration \\
+CF-13 & Harvest events & Harvest removes trees; replant adds saplings \\
+CF-14 & HUD data display & Real sensor readings shown alongside game data \\
+CF-15 & Mt.\ St.\ Helens & Blast zone rendered as distinct terrain feature with signage \\
+CF-16 & Server stability & 50 concurrent players, $<$200ms average tick time \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Weather $\rightarrow$ fire risk & Low humidity + high wind triggers elevated fire risk visual \\
+IN-02 & Terrain $\rightarrow$ weather & Higher elevation zones receive snow when valleys receive rain \\
+IN-03 & Canopy $\rightarrow$ fire fuel & Dense canopy areas show faster fire spread than clearcuts \\
+IN-04 & Mesh $\rightarrow$ weather override & Mesh sensor data overrides API weather when available \\
+IN-05 & Growth $\rightarrow$ canopy density & After growth ticks, canopy density increases measurably \\
+IN-06 & Cross-module data consistency & Same coordinates resolve identically across all modules \\
+IN-07 & API failure graceful degradation & Server continues with cached data if any API becomes unavailable \\
+IN-08 & Self-containment & New player understands the world without external documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Boundary conditions & World edge handled gracefully (barrier or ocean) \\
+EC-02 & LiDAR data gaps & Missing CHM tiles produce reasonable default (flat canopy estimate) \\
+EC-03 & API rate limiting & Graceful backoff when OpenWeatherMap/FIRMS rate limits hit \\
+EC-04 & Extreme weather & Blizzard and heat wave conditions mapped without plugin crash \\
+EC-05 & Temporal currency & Most data sources $<$2 years old; older sources flagged \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1. Terrain $\geq$50K acres, RMSE $<$5 & CF-01, CF-02 & Pending \\
+2. Tree placement reflects LiDAR & CF-04, CF-05 & Pending \\
+3. Weather sync $<$15 min & CF-06, CF-07 & Pending \\
+4. 3+ biome zones & CF-08, IN-02 & Pending \\
+5. FIRMS fire $<$30 min & CF-09, CF-10 & Pending \\
+6. Mesh 3+ sensor types & CF-11, IN-04 & Pending \\
+7. Mt.\ St.\ Helens rendered & CF-15 & Pending \\
+8. Spotted owl areas delineated & SC-END & Pending \\
+9. 50-player stability & CF-16, EC-04 & Pending \\
+10. HUD displays real data & CF-14 & Pending \\
+11. Sources from agencies & SC-SRC, SC-NUM & Pending \\
+12. EULA compliance & SC-EUL & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & API documentation gathering; data format validation \\
+EXEC-A & Executor (Terrain) & World generation pipeline; LiDAR processing \\
+EXEC-B & Executor (Data) & Plugin development; API clients \\
+CRAFT-GEO & GIS Specialist & Coordinate systems; projection handling; spatial accuracy \\
+CRAFT-ECO & Ecology Specialist & Species mapping; growth models; conservation boundaries \\
+CRAFT-NET & Network Specialist & MQTT architecture; mesh telemetry; WebSocket transport \\
+VERIFY & Verification & Source validation; accuracy checks; EULA compliance \\
+INTEG & Integration Agent & Cross-module testing; data consistency validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget; session planning; API cost tracking \\
+SURGEON & Health Monitor & Plugin performance; server tick time; memory usage \\
+LOG & Chronicle & Commit messages; milestone summaries; version tags \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions; schema evolution \\
+SECURE & Safety Warden & EULA enforcement; endangered species boundary; fire disclaimer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (17 roles) \\
+Research modules & 6 \\
+Deliverables & 8 \\
+Total tests & 36 (7 safety / 16 core / 8 integration / 5 edge) \\
+Estimated context windows & 45--55 \\
+Estimated sessions & 8--10 \\
+Token budget & \textasciitilde385K (Opus 145K / Sonnet 220K / Haiku 20K) \\
+Parallel tracks & 2 (Terrain + Data in Wave 1) \\
+Primary language & Java (plugins), Rust/Python (terrain gen), TypeScript (schemas) \\
+Target Minecraft version & Java Edition 1.21+ on Paper/Spigot \\
+Scale & 1:20 (1 block = 20m) \\
+Target area & $\geq$50,000 acres initial; expandable to full 2.5M-acre footprint \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\emph{``The forest remembers what the ledger books forgot --- that land is not an asset class, it is a living system that operates on timescales longer than any quarterly report.''}
+
+\vspace{0.5em}
+The Living Forest mission takes the Amiga Principle from metaphor to terrain: specialized data pipelines, each doing one thing exceptionally well, flowing together into a world that breathes. The spaces between the streams --- where weather meets fuel load, where elevation meets species range, where mesh telemetry becomes rain on a ridgeline --- that's where understanding grows.
+
+The corridor starts at home. The forest starts with the first tree.
+\end{quotebox}
+
+\end{document}
