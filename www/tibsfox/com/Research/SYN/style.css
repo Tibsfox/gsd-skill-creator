@@ -1,0 +1,73 @@
+/* SYN -- Synsor Corp
+ * Theme: Sensor/detection -- electric blue with signal cyan
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --electric: #0277BD;
+  --electric-deep: #01579B;
+  --electric-mid: #0288D1;
+  --cyan: #00BCD4;
+  --cyan-light: #4DD0E1;
+  --cyan-dim: #00838F;
+  --steel: #37474F;
+  --ice: #E0F7FA;
+  --graphite: #263238;
+  --slate: #ECEFF1;
+  --ink: #0A1929;
+  --signal: #00E5FF;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #37474F;
+  --link: var(--electric-mid);
+  --card-border: #B0BEC5;
+  --border: #B0BEC5;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--electric-deep) 30%, var(--electric) 60%, var(--cyan-dim) 100%);
+  border-bottom: 4px solid var(--cyan);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--electric-deep); border-bottom-color: var(--border); }
+h3 { color: var(--electric-mid); }
+th { background: var(--electric-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(2, 119, 189, 0.04); }
+tr:hover { background: rgba(2, 119, 189, 0.08); }
+blockquote { border-left-color: var(--cyan); background: rgba(0, 188, 212, 0.06); }
+code { background: var(--ice); }
+pre { background: var(--ink); color: #E0E0E0; }
+.stat-value { color: var(--electric-deep); }
+
+/* -- Tags -- */
+.tag-company { background: #E0F7FA; color: #00838F; }
+.tag-product { background: #E3F2FD; color: #0277BD; }
+.tag-patent { background: #FFF3E0; color: #E65100; }
+.tag-competitive { background: #E8F5E9; color: #1B5E20; }
+.tag-market { background: #ECEFF1; color: #263238; }
+.tag-technology { background: #E1F5FE; color: #01579B; }
+.tag-integration { background: #E8EAF6; color: #283593; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: sensor pulse motif -- */
+.sensor-pulse {
+  background: linear-gradient(90deg, var(--electric-deep), var(--electric), var(--cyan), var(--cyan-light), var(--electric-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

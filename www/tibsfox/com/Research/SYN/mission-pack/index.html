@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synsor.ai — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #263238; --secondary: #1565C0; --tertiary: #37474F; --accent: #0D47A1; --light: #ECEFF1; --bg: #FAFAFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: #212121; line-height: 1.6; }
+  .header { background: var(--primary); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; margin-bottom: 0.3rem; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-bottom: 1rem; }
+  .header .pipeline { font-size: 0.95rem; color: #90CAF5; letter-spacing: 0.1em; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .file-card { background: #E8EAF6; border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--primary); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .file-card .type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); font-weight: 700; }
+  .file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.3rem 0; }
+  .file-card .desc { font-size: 0.85rem; color: #455A64; }
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.4rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--light); padding-bottom: 0.3rem; }
+  .contents { background: white; border-radius: 8px; padding: 1.5rem; border: 1px solid #E0E0E0; }
+  .contents .stage { margin-bottom: 1rem; }
+  .contents .stage-label { font-weight: 700; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contents ul { list-style: none; margin-top: 0.3rem; }
+  .contents li { padding: 0.15rem 0; font-size: 0.9rem; }
+  .contents li::before { content: "→ "; color: var(--secondary); }
+  ol.instructions { padding-left: 1.5rem; }
+  ol.instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  code { background: var(--light); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; }
+  pre { background: var(--primary); color: #B0BEC5; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.8rem; margin: 0.5rem 0; }
+  .quote { background: var(--light); border-left: 4px solid var(--secondary); padding: 1rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem; color: var(--tertiary); }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="pipeline">GSD RESEARCH MISSION PACKAGE</div>
+  <h1>Synsor.ai</h1>
+  <div class="subtitle">Predictive Quality AI for Manufacturing</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+<div class="container">
+  <div class="files">
+    <a href="synsor-mission.pdf" download class="file-card">
+      <div class="type">PDF — 26 pages</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage pipeline document ready for GSD orchestrator</div>
+    </a>
+    <a href="synsor-mission.tex" download class="file-card">
+      <div class="type">LaTeX Source</div>
+      <div class="name">Source (.tex)</div>
+      <div class="desc">Editable XeLaTeX source for recompilation and modification</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-label">Stage 1 — Vision Document</div>
+      <ul>
+        <li>Vision narrative and problem statement (5 problems)</li>
+        <li>Core concept with domain and module architecture diagrams</li>
+        <li>5 research modules: Company, Patent, Competitive, Market, GSD Integration</li>
+        <li>Chipset configuration (Squadron profile, 12 agents)</li>
+        <li>12 testable success criteria</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label">Stage 2 — Research Reference</div>
+      <ul>
+        <li>Company profile: founding, funding (APX/Axel Springer/Porsche), product architecture</li>
+        <li>Patent analysis: German patent claims, prior art comparison, novelty assessment</li>
+        <li>Competitive landscape: Scortex, Relimetrics, elunic + incumbents</li>
+        <li>Market dynamics: 5 analyst projections, normalized subsegment estimate</li>
+        <li>GSD integration: chipset pattern mapping (Paula/Denise/Event Dispatcher)</li>
+        <li>Entity disambiguation: Synsor.ai vs. JoltSynsor/Inframind Labs</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label">Stage 3 — Mission Package</div>
+      <ul>
+        <li>4-wave execution plan with 3 parallel tracks</li>
+        <li>12 tasks, ~131K tokens, 7 context windows, 4 sessions</li>
+        <li>30 tests (5 safety / 14 core / 6 integration / 5 edge)</li>
+        <li>Squadron crew manifest (12 roles)</li>
+        <li>Dependency graph and cache optimization strategy</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Usage</h2>
+  <ol class="instructions">
+    <li>Download the PDF and .tex files</li>
+    <li>Place in your GSD skill-creator <code>.planning/staging/inbox/</code> directory</li>
+    <li>The orchestrator reads the mission package and decomposes into wave execution</li>
+    <li>Wave 0 (Foundation) runs first, establishing shared schemas</li>
+    <li>Wave 1 runs 3 parallel tracks: Company+IP, Market+Competitive, Integration</li>
+    <li>Wave 2 synthesizes across modules and produces the GSD bridge spec</li>
+    <li>Wave 3 assembles, verifies, and publishes the final document</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>To modify and recompile the LaTeX source:</p>
+  <pre>xelatex -interaction=nonstopmode synsor-mission.tex
+xelatex -interaction=nonstopmode synsor-mission.tex
+xelatex -interaction=nonstopmode synsor-mission.tex</pre>
+  <p>Requires XeLaTeX with DejaVu fonts installed. Three passes resolve TOC, cross-references, and page counts.</p>
+
+  <div class="quote">
+    "Synsor.ai is the Amiga Principle made industrial: one camera, one model, one edge device — and the space between frames becomes a signal that predicts the future of a production line."
+  </div>
+</div>
+</body>
+</html>
