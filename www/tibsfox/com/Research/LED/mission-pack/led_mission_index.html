@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LED Lighting &amp; Controllers — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber: #B45309;
+    --amber-light: #FEF3C7;
+    --amber-mid: #D97706;
+    --blue: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --graphite: #374151;
+    --gray-100: #F9FAFB;
+    --gray-200: #F3F4F6;
+    --gray-400: #9CA3AF;
+    --gray-600: #6B7280;
+    --gray-800: #1F2937;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--gray-100);
+    color: var(--gray-800);
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 40%, #1a1a2e 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(180,83,9,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(29,78,216,0.2) 0%, transparent 60%);
+  }
+
+  header > * { position: relative; z-index: 1; }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber-mid);
+    border: 1px solid var(--amber-mid);
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+
+  header h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #FEF9C3;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  header .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    color: #93C5FD;
+    margin-bottom: 1rem;
+  }
+
+  header .tagline {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #D1D5DB;
+    margin-bottom: 1.5rem;
+  }
+
+  .pipeline-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--amber-mid);
+    letter-spacing: 0.05em;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* FILE CARDS */
+  .file-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .file-card {
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .file-card:hover {
+    box-shadow: 0 4px 20px rgba(180,83,9,0.12);
+    border-color: var(--amber);
+  }
+
+  .file-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .file-card.pdf::before { background: var(--amber); }
+  .file-card.tex::before { background: var(--blue); }
+
+  .file-card-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+  }
+
+  .file-card.pdf .file-card-icon { background: var(--amber-light); color: var(--amber); }
+  .file-card.tex .file-card-icon { background: var(--blue-light); color: var(--blue); }
+
+  .file-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--gray-800);
+  }
+
+  .file-card p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  .download-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--amber);
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* SECTIONS */
+  h2.section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--amber-light);
+  }
+
+  /* MODULE GRID */
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  .module-card {
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-left: 4px solid var(--amber);
+    border-radius: 4px;
+    padding: 0.9rem 1rem;
+  }
+
+  .module-card:nth-child(even) { border-left-color: var(--blue); }
+
+  .module-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gray-400);
+    margin-bottom: 0.2rem;
+  }
+
+  .module-card h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 0.3rem;
+  }
+
+  .module-card p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    line-height: 1.4;
+  }
+
+  /* USAGE STEPS */
+  .usage-steps {
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .usage-steps ol {
+    padding-left: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+  }
+
+  .usage-steps li { margin-bottom: 0.6rem; color: var(--gray-800); }
+  .usage-steps code {
+    background: var(--gray-200);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+  }
+
+  /* RECOMPILE BOX */
+  .code-box {
+    background: #1a1a2e;
+    color: #E2E8F0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .code-box .comment { color: #6B7280; }
+  .code-box .cmd { color: #93C5FD; }
+
+  /* QUOTE */
+  .closing-quote {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--graphite);
+    font-size: 0.95rem;
+  }
+
+  /* META BAR */
+  .meta-bar {
+    background: var(--gray-200);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    color: var(--gray-600);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .meta-bar span { display: flex; align-items: center; gap: 0.3rem; }
+  .meta-bar strong { color: var(--gray-800); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.8rem; }
+    .file-cards { grid-template-columns: 1fr; }
+    .module-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">GSD Research Mission Package</div>
+  <h1>LED Lighting &amp; Controllers</h1>
+  <div class="subtitle">DIY Electronics · Microcontrollers · Smart Lighting · Instruments &amp; High-Speed Logic</div>
+  <div class="tagline">A deeply cross-linked reference study — 8 modules, 34+ pages, full Fleet execution</div>
+  <div class="pipeline-tag">Vision → Research → Mission · March 9, 2026 · Ready for GSD Orchestrator</div>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <span><strong>Profile:</strong> Fleet (17 roles)</span>
+    <span><strong>Modules:</strong> 8</span>
+    <span><strong>Min. pages:</strong> 34 HTML</span>
+    <span><strong>Est. tokens:</strong> ~176K</span>
+    <span><strong>Sessions:</strong> 4–6</span>
+    <span><strong>Status:</strong> Ready for handoff</span>
+  </div>
+
+  <h2 class="section-title">Mission Files</h2>
+
+  <div class="file-cards">
+    <a href="led_mission.pdf" download class="file-card pdf">
+      <div class="file-card-icon">PDF</div>
+      <h3>LED Lighting &amp; Controllers — Mission Package</h3>
+      <p>30-page complete pipeline document: Stage 1 Vision, Stage 2 Research Reference, Stage 3 Mission Package. Print-ready. All three stages in one document.</p>
+      <div class="download-hint">↓ led_mission.pdf</div>
+    </a>
+
+    <a href="led_mission.tex" download class="file-card tex">
+      <div class="file-card-icon">TEX</div>
+      <h3>XeLaTeX Source</h3>
+      <p>Full XeLaTeX source file. Modify section content, add findings, adjust wave plans, and recompile to keep your mission package current as research develops.</p>
+      <div class="download-hint">↓ led_mission.tex</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">Contents: Three Stages</h2>
+
+  <div class="usage-steps">
+    <ol>
+      <li><strong>Stage 1 — Vision Document:</strong> Problem statement (5 problems), domain architecture map (6-layer ASCII diagram), 8 research module definitions, chipset YAML configuration, scope boundaries, 12 testable success criteria, and the philosophical through-line connecting LED physics to the autodidact's learning arc.</li>
+      <li><strong>Stage 2 — Research Reference:</strong> Verified findings for all 8 modules — LED I-V curves, resistor calculations, WS2812B and APA102 protocol timing details, Philips Hue CLIP API v1/v2, TCS34725 color sensing and circadian adaptation, RP2040 PIO architecture, Nyquist/sampling theory, PLC output modules. Full bibliography with professional sources.</li>
+      <li><strong>Stage 3 — Mission Package:</strong> Fleet profile crew manifest (17 roles), 4-wave execution plan with 3 parallel tracks, 18-component breakdown with model assignments (Opus/Sonnet/Haiku), token budget (~176K), dependency graph, 12 success criteria mapped to test plan, 4 BLOCK-level safety gates, complete deliverables table.</li>
+    </ol>
+  </div>
+
+  <h2 class="section-title">8 Research Modules</h2>
+
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-num">MODULE 1</div>
+      <h4>LED Electronics Fundamentals</h4>
+      <p>Forward voltage, I-V curves, Ohm's Law, current-limiting resistors, series/parallel wiring, constant-current drivers, strip power, thermal management.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 2</div>
+      <h4>Microcontroller Programming</h4>
+      <p>Arduino, PIC MPLAB XC8, Raspberry Pi (pigpio), ESP32, RP2040 PIO. PWM generation, timer config, interrupt handling. Cross-platform comparison guide.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 3</div>
+      <h4>Addressable LED Protocols</h4>
+      <p>WS2812B NZR 800 kHz protocol, APA102 SPI 24 MHz, SK6812 RGBW, WS2813/WS2815. NeoPixel library, FastLED, WLED firmware. Power injection guide.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 4</div>
+      <h4>Smart Lighting &amp; Ambient Sensing</h4>
+      <p>Philips Hue CLIP API v1/v2, diyHue emulator, TCS34725 RGB sensing, circadian CCT adaptation, Home Assistant. Ambient → Hue automation pipeline.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 5</div>
+      <h4>DIY Household LED Controllers</h4>
+      <p>MOSFET PWM dimmers, TRIAC phase-cutting overview, WLED firmware (full BOM), IR/RF remote systems, mains safety, 12V/24V strip controllers.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 6</div>
+      <h4>High-Speed LED &amp; Persistence of Vision</h4>
+      <p>POV physics, APA102 vs WS2812B for POV, RP2040 dual-core PIO architecture, polar image mapping, rotation sensing, wireless power for rotating assemblies.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 7</div>
+      <h4>Oscilloscopes &amp; Scientific Measurement</h4>
+      <p>Scope types, bandwidth, Nyquist theorem, trigger modes, probe compensation, measuring PWM/WS2812B, DIY scopes (DSO138, ESP32, Pico). Multimeter diode test mode.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-num">MODULE 8</div>
+      <h4>PLC &amp; Industrial LED Control</h4>
+      <p>IEC 61131-3 ladder logic, relay vs transistor output modules, MOSFET driver boards, Modbus TCP integration, hybrid PLC + ESP32 architectures.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">How to Execute This Mission</h2>
+
+  <div class="usage-steps">
+    <ol>
+      <li>Open the PDF and read Stage 1 (Vision) to understand the domain architecture and success criteria.</li>
+      <li>Open Claude Code and paste the Stage 3 Wave 0 component specs (<code>F0-a</code>, <code>F0-b</code>, <code>F0-c</code>) to generate HTML templates, the site map schema, and source index.</li>
+      <li>Once Wave 0 is complete (CAPCOM human approval checkpoint), launch three parallel Claude Code sessions — one per Wave 1 track (A, B, C). Feed each the Stage 3 component specs for their track plus the Wave 0 outputs.</li>
+      <li>Collect all Wave 1 HTML drafts. Feed them to a single Opus 4.6 session for Wave 2 synthesis: cross-link injection, glossary generation, and code verification.</li>
+      <li>CAPCOM checkpoint: review the linked site structure before Wave 3.</li>
+      <li>Run Wave 3 publication tasks: HTML W3C validation, external link checking, safety warning audit, and final site.zip packaging.</li>
+    </ol>
+  </div>
+
+  <h2 class="section-title">LaTeX Recompilation</h2>
+
+  <div class="code-box">
+    <span class="comment"># Requires XeLaTeX and DejaVu fonts (TeX Live 2023+)</span><br>
+    <span class="comment"># Three passes required for TOC, cross-refs, and LastPage</span><br><br>
+    <span class="cmd">xelatex -interaction=nonstopmode led_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode led_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode led_mission.tex</span>
+  </div>
+
+  <div class="closing-quote">
+    "An LED is not a light source. It is a boundary condition — a place where electrons, coached into higher energy states by a voltage differential, fall across a gap and surrender their borrowed energy as photons. The oscilloscope, the multimeter, the color sensor, the PIC's CCP module, the RP2040's PIO state machine: these are all different ways of standing at that boundary and asking: how bright? how fast? what color? when?"
+    <br><br>
+    — GSD LED Mission, Vision Synthesis, March 2026
+  </div>
+
+</main>
+
+</body>
+</html>

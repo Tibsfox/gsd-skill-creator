@@ -1,0 +1,71 @@
+/* WAL — Weird Al Yankovic: The Art and Science of Parody
+ * Theme: purple and gold — the classic Weird Al palette
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --purple-deep: #4A1259;
+  --purple: #7B2D8E;
+  --purple-light: #9C4DB8;
+  --gold: #FFD700;
+  --gold-dark: #C9A030;
+  --gold-light: #FFE44D;
+  --cream: #FDF8FF;
+  --mist: #E8DFF0;
+  --lavender: #F3ECF7;
+
+  /* Semantic overrides */
+  --page-bg: var(--cream);
+  --page-text: #212121;
+  --page-text-light: #5A4A6A;
+  --link: var(--purple);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 50%, var(--gold-dark) 100%);
+  border-bottom: 4px solid var(--gold);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--purple-deep); border-bottom-color: var(--mist); }
+h3 { color: var(--purple); }
+th { background: var(--purple-deep); }
+td { border-bottom-color: var(--mist); }
+tr:nth-child(even) { background: rgba(123, 45, 142, 0.05); }
+tr:hover { background: rgba(123, 45, 142, 0.10); }
+blockquote { border-left-color: var(--gold); background: rgba(255, 215, 0, 0.08); }
+code { background: var(--mist); }
+pre { background: #1a1520; color: #d8c8e8; }
+.stat-value { color: var(--purple-deep); }
+
+/* -- Tags -- */
+.tag-biography { background: #F3ECF7; color: #4A1259; }
+.tag-cultural { background: #FFF8E1; color: #8D6E00; }
+.tag-catalog { background: #EDE7F6; color: #7B2D8E; }
+.tag-method { background: #E8F5E9; color: #2E7D32; }
+.tag-philosophy { background: #FFF3E0; color: #BF360C; }
+.tag-rosetta { background: #FCE4EC; color: #C2185B; }
+.tag-connections { background: #E3F2FD; color: #1565C0; }
+.tag-synthesis { background: #F3ECF7; color: #4A1259; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: accordion motif -- */
+.accordion-motif {
+  background: linear-gradient(90deg, var(--purple-deep), var(--gold), var(--purple-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

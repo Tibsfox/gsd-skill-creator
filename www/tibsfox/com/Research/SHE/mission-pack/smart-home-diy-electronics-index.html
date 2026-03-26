@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Home Technologies & DIY Electronics — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #263238; --secondary: #1565C0; --tertiary: #37474F; --accent: #0277BD; --light: #ECEFF1; --bg: #FAFAFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; color: #212121; background: var(--bg); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  header h1 { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  header p { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.85; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .file-card { background: #E3F2FD; border: 1px solid #BBDEFB; border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--primary); transition: transform 0.2s, box-shadow 0.2s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .file-card h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--secondary); }
+  .file-card p { font-size: 0.9rem; color: var(--tertiary); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.5rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light); padding-bottom: 0.5rem; }
+  .contents { background: white; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .contents h4 { font-family: 'DM Sans', sans-serif; color: var(--secondary); margin: 1rem 0 0.5rem; }
+  .contents ul { margin-left: 1.5rem; }
+  .contents li { margin-bottom: 0.3rem; font-size: 0.95rem; }
+  .instructions { background: var(--light); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { margin-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+  code { background: #263238; color: #B2FF59; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote { background: #E3F2FD; border-left: 4px solid var(--secondary); padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; }
+  footer { text-align: center; padding: 2rem; color: var(--tertiary); font-size: 0.85rem; font-family: 'DM Sans', sans-serif; }
+  @media (max-width: 600px) { .files { grid-template-columns: 1fr; } header h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p style="font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem;">GSD RESEARCH MISSION PACKAGE</p>
+  <h1>Smart Home Technologies & DIY Electronics</h1>
+  <p>Comprehensive Mapping for Students & Makers — 36 Hands-On Projects</p>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="smart-home-diy-electronics-mission.pdf" download class="file-card">
+      <h3>📄 Mission Package (PDF)</h3>
+      <p>31-page document with all three stages: Vision, Research Reference, and Mission Package. Ready for GSD orchestrator.</p>
+    </a>
+    <a href="smart-home-diy-electronics-mission.tex" download class="file-card">
+      <h3>📝 LaTeX Source (.tex)</h3>
+      <p>Full XeLaTeX source for modification and recompilation. Requires DejaVu fonts and standard LaTeX packages.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="contents">
+    <h4>Stage 1 — Vision Document</h4>
+    <ul>
+      <li>Vision narrative: from 500-in-1 kits to modern smart homes</li>
+      <li>5 concrete problems (black box, fragmentation, electronics gap, safety deficit, vendor lock-in)</li>
+      <li>Smart home technology stack diagram (7 layers)</li>
+      <li>6 research modules with scope definitions</li>
+      <li>12 testable success criteria</li>
+      <li>Through-line connecting to the Amiga Principle</li>
+    </ul>
+
+    <h4>Stage 2 — Research Reference</h4>
+    <ul>
+      <li>Electronics fundamentals: Ohm's law, power, Kirchhoff, components</li>
+      <li>Microcontroller comparison: ESP32, Arduino, Raspberry Pi, XIAO, ATtiny</li>
+      <li>Sensor catalog: 15+ types with specs, interfaces, and applications</li>
+      <li>Actuator catalog: relays, servos, steppers, LEDs, solenoids</li>
+      <li>Protocol comparison matrix: Wi-Fi, BLE, Zigbee, Z-Wave, Thread, Matter, MQTT, LoRa</li>
+      <li>Matter protocol deep dive (v1.5, November 2025)</li>
+      <li>Platform guides: Home Assistant, ESPHome, Node-RED</li>
+      <li>36 complete student projects across 6 difficulty tiers</li>
+      <li>Safety & standards: NEC, UL, IoT security, RF compliance</li>
+      <li>Complete bibliography: standards bodies, protocol specs, open-source platforms</li>
+    </ul>
+
+    <h4>Stage 3 — Mission Package</h4>
+    <ul>
+      <li>Squadron activation profile (12 roles, 2 CRAFT specialists)</li>
+      <li>4-wave execution plan with parallel research tracks</li>
+      <li>Token budget: 291K across 18 context windows, 4 sessions</li>
+      <li>8 safety-critical tests (mandatory-pass/BLOCK)</li>
+      <li>38 total tests with verification matrix</li>
+      <li>Complete crew manifest with hardware and software specialists</li>
+    </ul>
+  </div>
+
+  <h2>Usage</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Download the <strong>Mission Package PDF</strong> — this is the complete, self-contained document.</li>
+      <li>To execute via GSD skill-creator, feed the PDF or .tex source to the orchestrator with: <code>gsd mission execute smart-home-diy-electronics-mission.pdf</code></li>
+      <li>The mission will activate a Squadron profile with 12 agents across 4 waves.</li>
+      <li>Wave 1 runs two parallel tracks (Hardware Foundations + Software & Connectivity) to maximize throughput.</li>
+      <li>Wave 2 synthesizes 36 projects across 6 tiers, with Opus handling capstone projects and safety analysis.</li>
+      <li>Human checkpoints (CAPCOM) occur at each wave boundary.</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Download the <strong>.tex source file</strong></li>
+      <li>Ensure DejaVu fonts are installed: <code>sudo apt install fonts-dejavu</code></li>
+      <li>Compile with XeLaTeX (three passes for cross-references):
+        <br><code>xelatex mission.tex && xelatex mission.tex && xelatex mission.tex</code>
+      </li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "The best way to learn electronics is to build something that matters to you — something you'll use every day. A smart home is the perfect laboratory because every room is a lesson, every switch is a circuit, and every automation is a program."
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem &middot; Vision → Research → Mission Pipeline &middot; March 2026
+</footer>
+
+</body>
+</html>

@@ -6,6 +6,20 @@ Each version links to a detailed release notes directory with full feature descr
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.49.39](release-notes/v1.49.39/) | "Weird Al: Eat It" — 37 Research Projects & Rosetta Stone | 2026-03-25 | — | — | [retro](release-notes/v1.49.39/README.md), [lessons](release-notes/v1.49.39/README.md) |
+| v1.49.38 | License Change (BSL 1.1) | 2026-03-25 | — | — | |
+| [v1.49.37](release-notes/v1.49.37/) | Thermal & Hydrogen Energy + Hub Integration | 2026-03-10 | — | — | [retro](release-notes/v1.49.37/README.md), [lessons](release-notes/v1.49.37/README.md) |
+| [v1.49.36](release-notes/v1.49.36/) | AWF Living Systems + Brand + Root Landing | 2026-03-10 | — | — | [retro](release-notes/v1.49.36/README.md), [lessons](release-notes/v1.49.36/README.md) |
+| [v1.49.35](release-notes/v1.49.35/) | VAV Signal Fidelity + ECO Gap Closure | 2026-03-10 | — | — | [retro](release-notes/v1.49.35/README.md), [lessons](release-notes/v1.49.35/README.md) |
+| [v1.49.34](release-notes/v1.49.34/) | ART Visual Perception Study | 2026-03-10 | — | — | [retro](release-notes/v1.49.34/README.md), [lessons](release-notes/v1.49.34/README.md) |
+| [v1.49.33](release-notes/v1.49.33/) | LED Lighting & Systems Administration | 2026-03-10 | — | — | [retro](release-notes/v1.49.33/README.md), [lessons](release-notes/v1.49.33/README.md) |
+| [v1.49.32](release-notes/v1.49.32/) | Miscellaneous Fixes | 2026-03-09 | — | — | [retro](release-notes/v1.49.32/README.md), [lessons](release-notes/v1.49.32/README.md) |
+| [v1.49.31](release-notes/v1.49.31/) | Traditions & Indigenous Knowledge | 2026-03-09 | — | — | [retro](release-notes/v1.49.31/README.md), [lessons](release-notes/v1.49.31/README.md) |
+| [v1.49.30](release-notes/v1.49.30/) | Virtual Black Rock City | 2026-03-09 | — | — | [retro](release-notes/v1.49.30/README.md), [lessons](release-notes/v1.49.30/README.md) |
+| [v1.49.29](release-notes/v1.49.29/) | Code Quality & Furry Fandom Arts | 2026-03-09 | — | — | [retro](release-notes/v1.49.29/README.md), [lessons](release-notes/v1.49.29/README.md) |
+| [v1.49.28](release-notes/v1.49.28/) | Retro-Driven Improvements | 2026-03-09 | — | — | [retro](release-notes/v1.49.28/README.md), [lessons](release-notes/v1.49.28/README.md) |
+| [v1.49.27](release-notes/v1.49.27/) | Spatial Awareness Chipset | 2026-03-09 | — | — | [retro](release-notes/v1.49.27/README.md), [lessons](release-notes/v1.49.27/README.md) |
+| [v1.49.26](release-notes/v1.49.26/) | Bio-Physics Sensing Systems | 2026-03-09 | — | — | [retro](release-notes/v1.49.26/README.md), [lessons](release-notes/v1.49.26/README.md) |
 | [v1.49.25](release-notes/v1.49.25/) | Wings of the Pacific Northwest & Fur, Fin & Fang | 2026-03-09 | — | — | [retro](release-notes/v1.49.25/README.md), [lessons](release-notes/v1.49.25/README.md) |
 | [v1.49.24](release-notes/v1.49.24/) | Building Construction & Smart Home Electronics | 2026-03-08 | — | — | [retro](release-notes/v1.49.24/README.md), [lessons](release-notes/v1.49.24/README.md) |
 | [v1.49.23](release-notes/v1.49.23/) | Unison Language & Math Co-Processor Completion | 2026-03-08 | — | — | [retro](release-notes/v1.49.23/README.md), [lessons](release-notes/v1.49.23/README.md) |

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD-2 Deep Architecture Research — Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #1a1f24;
+    color: #e0e6ed;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #263238 0%, #1a2027 60%, #0d1117 100%);
+    border-bottom: 2px solid #1565C0;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .tag {
+    display: inline-block;
+    background: #1565C0;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.85rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  header h1 span { color: #42a5f5; }
+  header p.sub {
+    color: #90a4ae;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .pipeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .pipeline span {
+    background: #263238;
+    border: 1px solid #37474f;
+    color: #42a5f5;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .pipeline .arrow { color: #546e7a; font-size: 1rem; }
+  main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  .meta-bar {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: #1e262d;
+    border: 1px solid #2d3b45;
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #546e7a; font-weight: 600; }
+  .meta-value { font-size: 0.9rem; color: #90a4ae; font-family: 'DM Mono', monospace; }
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #1565C0;
+    margin-bottom: 1rem;
+  }
+  .files-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  @media (max-width: 600px) { .files-grid { grid-template-columns: 1fr; } }
+  .file-card {
+    background: #1e262d;
+    border: 1px solid #2d3b45;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.2s, background 0.2s;
+    color: inherit;
+  }
+  .file-card:hover { border-color: #1565C0; background: #222c35; }
+  .file-icon { font-size: 2rem; }
+  .file-card h3 { font-size: 1rem; font-weight: 700; color: #e0e6ed; }
+  .file-card .file-desc { font-size: 0.85rem; color: #78909c; line-height: 1.5; }
+  .file-card .file-size { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: #42a5f5; }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #1565C0;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: auto;
+    width: fit-content;
+  }
+  .download-btn:hover { background: #1976D2; }
+  .contents-list { list-style: none; margin-bottom: 3rem; }
+  .contents-list li {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1e262d;
+    align-items: flex-start;
+  }
+  .stage-badge {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin-top: 0.15rem;
+  }
+  .s1 { background: #263238; color: #90a4ae; border: 1px solid #37474f; }
+  .s2 { background: #0d2a4a; color: #42a5f5; border: 1px solid #1565C0; }
+  .s3 { background: #1a2027; color: #78909c; border: 1px solid #37474f; }
+  .contents-list li p { font-size: 0.88rem; color: #90a4ae; line-height: 1.5; }
+  .contents-list li strong { color: #cfd8dc; }
+  .usage-section { margin-bottom: 3rem; }
+  .steps { counter-reset: steps; list-style: none; }
+  .steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #1e262d;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(steps);
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: #1565C0;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1rem;
+  }
+  .steps li p { font-size: 0.88rem; color: #90a4ae; line-height: 1.6; }
+  .steps li code { background: #1e262d; border: 1px solid #2d3b45; padding: 0.15rem 0.4rem; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 0.82rem; color: #42a5f5; }
+  .compile-section {
+    background: #1e262d;
+    border: 1px solid #2d3b45;
+    border-left: 3px solid #1565C0;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .compile-section pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: #42a5f5;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    margin-top: 0.75rem;
+  }
+  .compile-section p { font-size: 0.85rem; color: #78909c; }
+  .quote {
+    background: #1a2027;
+    border-left: 3px solid #42a5f5;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: #90a4ae;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .quote cite { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.78rem; color: #546e7a; }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #1e262d;
+    color: #37474f;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>GSD-2 <span>Deep Architecture</span> Research</h1>
+  <p class="sub">Autonomous Agent CLI — Pi SDK Integration — Context Engineering — Ecosystem Bridge Analysis</p>
+  <div class="pipeline">
+    <span>Vision</span>
+    <span class="arrow">→</span>
+    <span>Research</span>
+    <span class="arrow">→</span>
+    <span>Mission</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <div class="meta-item">
+      <span class="meta-label">Date</span>
+      <span class="meta-value">March 11, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Profile</span>
+      <span class="meta-value">Fleet (16 roles)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Pages</span>
+      <span class="meta-value">27 pages</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Source</span>
+      <span class="meta-value">github.com/gsd-build/GSD-2</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Status</span>
+      <span class="meta-value">Ready for GSD Orchestrator</span>
+    </div>
+  </div>
+
+  <p class="section-title">Downloads</p>
+  <div class="files-grid">
+    <a class="file-card" href="gsd2-mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <h3>Mission Package PDF</h3>
+      <p class="file-desc">Complete 27-page research mission. All three stages: Vision, Research Reference, and Mission Package with wave execution plan.</p>
+      <span class="file-size">gsd2-mission.pdf</span>
+      <span class="download-btn">↓ Download PDF</span>
+    </a>
+    <a class="file-card" href="gsd2-mission.tex" download>
+      <div class="file-icon">📝</div>
+      <h3>LaTeX Source</h3>
+      <p class="file-desc">XeLaTeX source file. Modify and recompile to customize module assignments, wave structure, or chipset configuration.</p>
+      <span class="file-size">gsd2-mission.tex</span>
+      <span class="download-btn">↓ Download .tex</span>
+    </a>
+  </div>
+
+  <p class="section-title">Contents</p>
+  <ul class="contents-list">
+    <li>
+      <span class="stage-badge s1">Stage 1</span>
+      <p><strong>Vision Guide</strong> — Narrative vision connecting GSD-2's architecture to the Amiga Principle and Tibsfox's GSD ecosystem. Problem statement (5 problems), core concept, ASCII architecture maps, 6-module breakdown, CEDAR chipset configuration, 12 success criteria, through-line on the spaces between v1, v2, and skill-creator.</p>
+    </li>
+    <li>
+      <span class="stage-badge s2">Stage 2</span>
+      <p><strong>Research Reference</strong> — Module 1: State machine (hierarchy, execution loop, crash recovery, stuck detection, timeouts). Module 2: Context engineering (10 artifacts, pre-loading strategy, adaptive replanning). Module 3: Extension system (9 extensions + 3 subagents + skill discovery). Module 4: Git strategy (branch-per-slice, squash merge, verification ladder). Module 5: Pi SDK (7 packages, two-file loader, 20+ providers, per-phase model allocation). Module 6: Integration opportunities (3 concrete paths with data format specs).</p>
+    </li>
+    <li>
+      <span class="stage-badge s3">Stage 3</span>
+      <p><strong>Mission Package</strong> — Fleet profile execution plan. 3 parallel Wave 1 tracks. Token budget (831k total). Dependency graph. 34-test test plan. Verification matrix mapping all 12 success criteria. 16-role crew manifest. Full execution summary. Ready for handoff to Claude Code.</p>
+    </li>
+  </ul>
+
+  <div class="usage-section">
+    <p class="section-title">How to Use with GSD / skill-creator</p>
+    <ol class="steps">
+      <li><p>Hand the PDF to a Claude Code session: <code>Read gsd2-mission.pdf and execute Stage 3</code></p></li>
+      <li><p>Confirm the chipset configuration matches your target environment (CEDAR chipset, Fleet profile)</p></li>
+      <li><p>Approve each HITL gate: after Wave 0, after Wave 1, and after Wave 2</p></li>
+      <li><p>Wave 1 runs three parallel tracks simultaneously — dispatch all three within 60 seconds to exploit cache TTL</p></li>
+      <li><p>Synthesis (Wave 2) requires all Wave 1 outputs — ORCA completes before GEODUCK starts</p></li>
+      <li><p>The integration blueprint (Module 6) contains the skill-creator bridge data format — this is the primary integration artifact for Wasteland</p></li>
+    </ol>
+  </div>
+
+  <div class="compile-section">
+    <p>To recompile after modifications (requires XeLaTeX + DejaVu fonts):</p>
+    <pre>xelatex -interaction=nonstopmode gsd2-mission.tex
+xelatex -interaction=nonstopmode gsd2-mission.tex
+xelatex -interaction=nonstopmode gsd2-mission.tex</pre>
+  </div>
+
+  <div class="quote">
+    "The spaces between versions are where the real architecture lives. GSD v1 was a beautiful hypothesis. GSD-2 is the proof that the hypothesis was right about the problem and wrong about the solution. Our skill-creator is the third act of this story."
+    <cite>— GSD-2 Mission Package, Through-Line</cite>
+  </div>
+
+</main>
+
+<footer>GSD Research Mission Package · github.com/gsd-build/GSD-2 · March 2026 · Fleet Profile · BSL 1.1</footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* WSB — Small Business
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #004D40;
+  --secondary: #00695C;
+  --tertiary: #00796B;
+  --accent: #64FFDA;
+  --cream: #f0faf8;
+  --mist: #c8e8e3;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+  border-bottom: 4px solid var(--accent);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(0, 105, 92, 0.05); }
+tr:hover { background: rgba(0, 105, 92, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(0, 105, 92, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1f2e; color: #a8d8ea; }
+.stat-value { color: var(--primary); }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

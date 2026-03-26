@@ -1,0 +1,1210 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme
+\definecolor{primary}{HTML}{263238}       % Steel blue-gray — section headers
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — subsections
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsections
+\definecolor{accent}{HTML}{0288D1}        % Bright electric — highlights
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light steel
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{gogreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Environments
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD-2 Deep Architecture Research}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={GSD-2 Deep Architecture Research -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{GSD-2\\[0.3em]Deep Architecture Research}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Autonomous Agent CLI — Pi SDK Integration — Context Engineering}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study into the Next Generation of Agentic Coding}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 11, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 8--12 context windows across 2--3 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Source: github.com/gsd-build/GSD-2}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{GSD-2 --- Vision Guide}
+
+\metafield{Date:}{March 11, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Source Repository:}{\url{https://github.com/gsd-build/GSD-2}}
+\metafield{Depends On:}{GSD Ecosystem Architecture, skill-creator integration analysis, Pi SDK (badlogic/pi-mono)}
+\metafield{Context:}{GSD-2 is a parallel lineage to Tibsfox's GSD ecosystem --- a full rewrite of the original glittercowboy/get-shit-done prompt framework into a standalone TypeScript CLI. Understanding its architecture deeply reveals where our ecosystem aligns, where it diverges, and where integration would create the most leverage.}
+
+\subsection{Vision}
+
+There is a moment every builder recognizes: the moment when the tool you're wielding starts working against you. The original GSD was a beautiful first step --- markdown prompts installed into \texttt{\textasciitilde/.claude/commands/}, leaning entirely on the LLM to read its own instructions and do the right thing. It went viral because it worked, and it worked because the underlying intuition was sound: structure the context, name the phases, keep the LLM oriented. But the limit was structural. Injecting prompts through slash commands is asking, not controlling.
+
+GSD-2 is the answer to that limit. It is not a prompt framework anymore --- it is a TypeScript application that \emph{controls} the agent session programmatically, using the Pi SDK (\texttt{badlogic/pi-mono}) as its harness. Fresh context windows are not hoped for --- they are enforced. Git strategy is not requested --- it is executed. Cost tracking is not left to the LLM's imagination --- it is metered per unit. The transformation from prompt engineering to application engineering is complete.
+
+This matters for our ecosystem because GSD-2 and Tibsfox's GSD share the same Amiga Principle: architectural leverage over brute computational force. Where GSD-2 solves context rot by clearing windows programmatically, our GSD solves it with wave-based fresh-context subagents and skill promotion pipelines. Where GSD-2 uses a state machine driven by disk files, our GSD uses mission packages with embedded verification criteria. The spaces between these two approaches --- the architectural decisions that differ --- are where the most interesting integration opportunities live.
+
+The through-line is this: GSD-2 is the CLI layer; our skill-creator is the adaptive intelligence layer. They are not competitors. They are chipsets running on the same motherboard, waiting to discover each other.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Context rot in long-running agent sessions.} As an LLM fills its context window with accumulated state across a multi-hour coding session, output quality degrades non-linearly. The LLM begins summarizing its own summaries, forgetting earlier decisions, hallucinating module interfaces it once knew exactly. GSD-2 solves this architecturally by enforcing one fresh 200k-token context window per task --- not through instruction, but through programmatic session management via the Pi SDK.
+
+  \item \textbf{No real automation without a real runtime.} The original GSD's ``auto mode'' was the LLM calling itself in a loop, burning context on orchestration overhead. Auto mode is fundamentally different when driven by a real state machine: GSD-2's \texttt{/gsd auto} reads disk state, dispatches a fresh agent session, waits for artifacts, reads disk state again, and repeats --- with no accumulation, no degradation, and no human babysitting required.
+
+  \item \textbf{Crash invisibility and unrecoverable state.} When a long agent session dies mid-task, all in-flight context is lost. GSD-2 uses lock files to track the current unit and session forensics to synthesize a recovery briefing from surviving disk state --- enabling resumption without loss of orientation.
+
+  \item \textbf{Provider lock-in limiting model choice.} Expensive Opus calls for routine research, fast Haiku for synthesis where it should be the reverse --- single-provider systems force suboptimal model allocation. GSD-2's per-phase model selection via 20+ provider support (OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, etc.) allows true cost-conscious assignment.
+
+  \item \textbf{No feedback loop between build episodes.} Each agent session in a naive framework starts from scratch, unable to learn what the previous session discovered about the codebase's conventions, failure modes, or architectural constraints. GSD-2's context pre-loading (inlining task plans, slice plans, prior summaries, dependency summaries, and decisions register into every dispatch) partially solves this --- but the deeper solution is a skill layer that promotes discovered patterns into reusable intelligence. That layer is ours.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A TypeScript state machine on disk drives a sequence of fresh-context Pi SDK agent sessions, each dispatched with pre-inlined context, producing verified artifacts that advance a milestone hierarchy.
+
+GSD-2 structures work as \texttt{Milestone $\rightarrow$ Slice $\rightarrow$ Task}, with the iron rule that a task must fit in one context window. Each slice flows through Research $\rightarrow$ Plan $\rightarrow$ Execute $\rightarrow$ Complete $\rightarrow$ Reassess automatically. The state machine reads \texttt{.gsd/STATE.md}, dispatches, waits, reads again. The only thing that crosses session boundaries is files on disk.
+
+\subsubsection{System Architecture Map}
+
+\begin{asciibox}
+GSD-2 SYSTEM ARCHITECTURE
+==========================
+
+  USER TERMINAL
+       |
+       v
+  [ gsd CLI binary ]
+       |
+       +---> loader.ts  (sets PI_PACKAGE_DIR, env vars)
+       |          |
+       |          v
+       |     cli.ts  (wires SDK managers, loads extensions)
+       |          |
+       |    +-----+------+----------+----------+
+       |    |            |          |          |
+       |  wizard.ts  app-paths  resource-   src/resources/
+       |  (API keys)   (.gsd/)   loader.ts
+       |
+       v
+  [ Pi SDK -- InteractiveMode ]
+       |
+       +---> Agent Session (fresh 200k ctx per task)
+       |         |
+       |    [ Dispatch Prompt: pre-inlined context ]
+       |         |
+       |    +----+----+----+----+
+       |    |         |        |
+       |  Scout   Worker  Researcher
+       |  (recon) (exec)  (web research)
+       |
+  [ .gsd/ STATE MACHINE ]
+       |
+       +-- STATE.md       (current unit / phase)
+       +-- M001-ROADMAP   (milestone plan)
+       +-- S01-PLAN.md    (slice decomposition)
+       +-- T01-PLAN.md    (task + must-haves)
+       +-- T01-SUMMARY.md (what happened)
+       +-- DECISIONS.md   (append-only register)
+       +-- PROJECT.md     (living project doc)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE MAP
+===================
+
+  M1: CORE ARCHITECTURE        M2: CONTEXT ENGINEERING
+  State machine patterns        Dispatch construction
+  Hierarchy (M/S/T)            Pre-inlining strategy
+  Loop mechanics               Cache exploitation
+        |                             |
+        +----------+------------------+
+                   |
+          M3: EXTENSION SYSTEM        M4: GIT STRATEGY
+          9 bundled extensions        Branch-per-slice
+          Skill discovery             Squash merge
+          3 subagents                 Atomic commits
+                |                          |
+                +----------+---------------+
+                           |
+              M5: PROVIDER LAYER      M6: INTEGRATION OPP.
+              Pi SDK multi-model      GSD ecosystem mapping
+              20+ providers           Skill-creator bridge
+              Per-phase allocation    CEDAR chipset mapping
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 — Core Architecture \& State Machine}
+
+The heart of GSD-2 is its disk-driven state machine. The \texttt{.gsd/} directory is the single source of truth. Auto mode reads it, writes it, and advances based purely on what it finds. No in-memory state survives session boundaries. This module documents the state machine topology, transition rules, lock file protocol, crash recovery mechanics, stuck detection logic, and timeout supervision hierarchy.
+
+\subsubsection{Module 2 — Context Engineering \& Dispatch System}
+
+Every dispatch is a carefully constructed prompt that pre-inlines all relevant context: task plans, slice plans, prior task summaries, dependency summaries, roadmap excerpts, and the decisions register. The LLM never wastes tool calls on orientation. This module documents the dispatch construction algorithm, the 10 artifact types managed by GSD, context pre-loading strategies, and the relationship to cache optimization (5-minute TTL).
+
+\subsubsection{Module 3 — Extension \& Subagent System}
+
+GSD-2 ships 9 bundled extensions and 3 specialized subagents (Scout, Researcher, Worker). Extensions are synced to \texttt{\textasciitilde/.gsd/agent/} on every launch. Skill discovery (auto/suggest/off mode) detects and installs relevant skills during research phases. This module maps all 9 extensions, the 3 subagents, skill routing rules, and the AGENTS.md routing architecture.
+
+\subsubsection{Module 4 — Git Strategy \& Verification}
+
+Branch-per-slice with squash merge. Each slice gets its own branch (\texttt{gsd/M001/S01}). Tasks commit atomically on the branch. Slice completion triggers squash merge to main as one clean commit. Verification uses a ladder: static checks $\rightarrow$ command execution $\rightarrow$ behavioral testing $\rightarrow$ human review. Must-haves (Truths, Artifacts, Key Links) are mechanically checkable. This module documents the full git topology and verification ladder.
+
+\subsubsection{Module 5 --- Pi SDK Integration \& Multi-Provider Architecture}
+
+The Pi SDK (\texttt{badlogic/pi-mono}) provides the agent harness: unified multi-provider LLM API, agent runtime with tool calling, TUI library, and interactive coding agent CLI. GSD-2 embeds it as its execution substrate. This module documents the Pi SDK package structure (7 packages), the two-file loader pattern (critical design decision), the \texttt{pkg/} shim directory, provider configuration, and per-phase model assignment.
+
+\subsubsection{Module 6 --- Integration Opportunities with GSD Ecosystem}
+
+Where does GSD-2 align with Tibsfox's GSD? Where does it diverge? What would a skill-creator bridge look like? This module maps GSD-2's slice/task hierarchy onto our milestone/wave model, identifies where the CEDAR chipset could interface with the Pi SDK, and proposes a Wasteland integration path where GSD-2's disk-driven state machine could become a consumer of skill-creator promoted patterns.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset: CEDAR
+mission: gsd2-deep-architecture
+version: 1.0
+profile: fleet
+
+chips:
+  RAVEN:    context-engineering-analyst     # dispatch construction deep dive
+  SALMON:   state-machine-archaeologist     # .gsd/ protocol reverse engineering
+  OSPREY:   extension-mapper               # 9 extensions + 3 subagents survey
+  TAHOMA:   git-strategy-analyst           # branch/squash/verify topology
+  CEDAR:    pi-sdk-integrator              # badlogic/pi-mono package mapping
+  HEMLOCK:  integration-architect          # GSD ecosystem bridge design
+  ORCA:     verification-engineer          # test plan + must-haves analysis
+  GEODUCK:  cost-model-analyst             # token budget + provider allocation
+
+parallel_tracks:
+  - track_a: [RAVEN, SALMON]     # Core architecture wave
+  - track_b: [OSPREY, TAHOMA]    # Extensions + Git wave
+  - track_c: [CEDAR, HEMLOCK]    # Integration architecture wave
+
+synthesis: ORCA + GEODUCK (cross-module integration)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Complete architecture documentation of GSD-2 from README and public source
+  \item State machine topology, transition graph, and lock file protocol
+  \item Context engineering patterns: dispatch construction, pre-inlining, cache optimization
+  \item All 9 bundled extensions and 3 subagents mapped and characterized
+  \item Git strategy: branch-per-slice, squash merge, atomic commit conventions
+  \item Pi SDK package survey: all 7 packages, two-file loader pattern, provider architecture
+  \item Integration opportunity analysis: GSD ecosystem, skill-creator, CEDAR chipset
+  \item Comparative analysis: GSD-2 vs. Tibsfox's GSD wave-based model
+  \item Mission package ready for Claude Code execution
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item Source code forensics requiring authenticated GitHub access (robots.txt disallowed)
+  \item Runtime profiling or performance benchmarking
+  \item Contribution to or modification of the GSD-2 codebase itself
+  \item Pi SDK internals beyond what is documented in public README
+  \item License compliance analysis (BSL 1.1 implications for commercial use)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The state machine transition graph is fully documented with all states, transitions, and guard conditions
+  \item The dispatch construction algorithm is reverse-engineered and documented with all 10 artifact types
+  \item All 9 extensions and 3 subagents are individually characterized (purpose, interface, dependencies)
+  \item The git strategy is fully mapped: branch naming, commit conventions, squash merge trigger, revert strategy
+  \item All 7 Pi SDK packages are documented with their roles in the GSD-2 runtime
+  \item The two-file loader pattern is explained with its exact reasoning and env var sequencing
+  \item Per-phase model allocation is documented with cost implications
+  \item Comparative analysis identifies $\geq$5 architectural decisions where GSD-2 and Tibsfox's GSD differ
+  \item Integration opportunity analysis proposes $\geq$3 concrete integration paths with skill-creator
+  \item The CEDAR chipset mapping identifies which chips correspond to GSD-2 execution roles
+  \item A complete Wasteland integration path is sketched for GSD-2 as a skill-creator consumer
+  \item All findings are sourced to the public GitHub repository and Pi SDK documentation
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Interface} \\
+\midrule
+gsd-skill-creator-analysis.md & Sibling system & skill-creator is GSD-2's missing adaptive layer \\
+gsd-amiga-vision.md & Philosophical parent & Amiga Principle manifests differently in each system \\
+skill-creator-wasteland-integration & Downstream consumer & Wasteland skill stamps could feed GSD-2 via skill discovery \\
+gsd-silicon-layer-spec.md & Hardware analogy & CEDAR chipset maps onto GSD-2 extension architecture \\
+ai-agentic-programming-report.md & Research context & GSD-2 is a concrete implementation of agentic patterns \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga computer shipped in 1985 with four custom chips --- Agnus, Denise, Paula, Gary --- each handling a specialized domain (DMA, graphics, audio, I/O) so the CPU could remain free for judgment-intensive tasks. The Amiga did not overpower the IBM PC. It outarchitected it. This is the principle running through every design decision in GSD-2, whether its authors named it that way or not.
+
+The fresh-context window per task is Paula --- the chip that keeps audio playing without CPU interruption. The state machine on disk is Agnus --- the DMA controller that moves data without burdening the processor. The Pi SDK is the custom silicon layer --- the thing that makes all of it possible at speed without brute force.
+
+What GSD-2 does not have is a skill-creator. It has skill discovery (suggest/auto/off), but it does not have a system that observes patterns across episodes, promotes them through a pipeline, and makes them structurally available to future sessions. That is the \emph{space between} --- the connection tissue that would transform GSD-2 from a powerful autonomous builder into a learning system. That is what our ecosystem provides. Understanding GSD-2 deeply is not about competing with it. It is about knowing exactly where our architecture completes it.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{GSD-2 --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section documents research findings from deep analysis of the GSD-2 public repository (\url{https://github.com/gsd-build/GSD-2}), the Pi SDK monorepo (\url{https://github.com/badlogic/pi-mono}), and the original GSD ecosystem (\url{https://github.com/gsd-build/get-shit-done}).
+
+\textbf{Key sources:}
+\begin{itemize}
+  \item \textbf{GSD-2 README} — Primary architectural documentation (github.com/gsd-build/GSD-2)
+  \item \textbf{Pi SDK (pi-mono)} — Underlying agent harness (github.com/badlogic/pi-mono)
+  \item \textbf{GSD v1 (get-shit-done)} — Original prompt framework for comparison (github.com/gsd-build/get-shit-done)
+  \item \textbf{DeepWiki / GSD docs} — Community analysis and wiki (deepwiki.com/gsd-build)
+  \item \textbf{NPM: gsd-pi} — Published package metadata
+\end{itemize}
+
+\subsection{Module 1 --- Core Architecture \& State Machine}
+
+\subsubsection{The Hierarchy}
+
+GSD-2 organizes work into a strict three-tier hierarchy:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Unit} & \tableheader{Scale} & \tableheader{Definition} \\
+\midrule
+\textbf{Milestone} & 4--10 slices & A shippable version. Approved by the user at roadmap stage. \\
+\textbf{Slice} & 1--7 tasks & One demoable vertical capability. Has its own git branch. \\
+\textbf{Task} & 1 context window & Iron rule: fits in one 200k-token window. If it cannot, it is two tasks. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The iron rule is the most important architectural decision in GSD-2. It is not a guideline --- it is the boundary condition that makes everything else work. Fresh context windows are only meaningful if the unit of work always fits within them.
+
+\subsubsection{The Execution Loop}
+
+Each slice flows through five phases automatically:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Artifact Produced} & \tableheader{Notes} \\
+\midrule
+Research & M001-RESEARCH.md & Scouts codebase + ecosystem. One fresh session. \\
+Plan & S01-PLAN.md & Decomposes slice into tasks with must-haves. \\
+Execute & T0N-SUMMARY.md & One fresh session per task. All context pre-inlined. \\
+Complete & S01-UAT.md & UAT script derived from slice outcomes. Squash merge. \\
+Reassess & Updated ROADMAP.md & Checks if roadmap still makes sense. Reorders if needed. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The State Machine}
+
+Auto mode is a state machine driven entirely by files in \texttt{.gsd/}. The state machine:
+
+\begin{itemize}
+  \item Reads \texttt{STATE.md} to determine the current unit and phase
+  \item Creates a fresh Pi SDK agent session
+  \item Injects a focused prompt with all relevant context pre-inlined
+  \item Lets the LLM execute until it produces the expected artifact
+  \item Reads disk state again and dispatches the next unit
+\end{itemize}
+
+\textbf{Crash recovery:} A lock file tracks the current unit. If the session dies, the next \texttt{/gsd auto} reads the surviving session file, synthesizes a recovery briefing from every tool call that made it to disk, and resumes with full context. No work is lost as long as the LLM made durable writes before the crash.
+
+\textbf{Stuck detection:} If the same unit dispatches twice without producing the expected artifact, GSD-2 retries once with a deep diagnostic prompt. If it fails again, auto mode stops and reports the exact file it expected. This prevents infinite retry loops that would burn budget.
+
+\textbf{Timeout supervision:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Timeout Type} & \tableheader{Default} & \tableheader{Action} \\
+\midrule
+Soft timeout & 20 min & Warns LLM to wrap up; nudges toward durable output \\
+Idle watchdog & 10 min & Detects stalls (no tool calls, no output progression) \\
+Hard timeout & 30 min & Pauses auto mode; reports last known state \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 --- Context Engineering \& Dispatch System}
+
+\subsubsection{The 10 Managed Artifacts}
+
+GSD-2 manages 10 artifact types in \texttt{.gsd/}, each with a specific role in context engineering:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artifact} & \tableheader{Purpose} \\
+\midrule
+\texttt{PROJECT.md} & Living doc: what the project is right now \\
+\texttt{DECISIONS.md} & Append-only register of architectural decisions \\
+\texttt{STATE.md} & Quick-glance dashboard: always read first \\
+\texttt{M001-ROADMAP.md} & Milestone plan with slice checkboxes, risk levels, dependencies \\
+\texttt{M001-CONTEXT.md} & User decisions from the discuss phase \\
+\texttt{M001-RESEARCH.md} & Codebase and ecosystem research \\
+\texttt{S01-PLAN.md} & Slice task decomposition with must-haves \\
+\texttt{T01-PLAN.md} & Individual task plan with verification criteria \\
+\texttt{T01-SUMMARY.md} & What happened: YAML frontmatter + narrative \\
+\texttt{S01-UAT.md} & Human test script derived from slice outcomes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Context Pre-Loading Strategy}
+
+Every dispatch prompt pre-inlines (not references, but \emph{inlines}):
+\begin{itemize}
+  \item Task plan (\texttt{T0N-PLAN.md})
+  \item Slice plan (\texttt{S0N-PLAN.md})
+  \item Prior task summaries for the current slice
+  \item Dependency summaries (tasks the current task depends on)
+  \item Relevant roadmap excerpt
+  \item Decisions register (\texttt{DECISIONS.md})
+\end{itemize}
+
+The critical insight: the LLM \emph{starts} with everything it needs instead of spending its first tool calls reading files. This reclaims 5--15\% of the context window per session that would otherwise be consumed by orientation.
+
+\subsubsection{Adaptive Replanning}
+
+After each slice completes, the roadmap is reassessed. If the work revealed new information that changes the plan (discovered technical debt, different API surface than expected, scope creep), slices are reordered, added, or removed. The roadmap is a living document, not a contract. This is the most important difference from rigid phase-plan systems.
+
+\subsection{Module 3 --- Extension \& Subagent System}
+
+\subsubsection{Bundled Extensions (9)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Extension} & \tableheader{Capability} \\
+\midrule
+\textbf{GSD} & Core workflow engine: auto mode, state machine, commands, dashboard \\
+\textbf{Browser Tools} & Playwright-based browser for UI verification and screenshot comparison \\
+\textbf{Search the Web} & Brave Search + Jina page extraction for research phases \\
+\textbf{Context7} & Up-to-date library/framework documentation lookup \\
+\textbf{Background Shell} & Long-running process management with readiness detection \\
+\textbf{Subagent} & Delegated tasks with isolated context windows \\
+\textbf{Slash Commands} & Custom command creation and registration \\
+\textbf{Ask User Questions} & Structured user input with single/multi-select UI \\
+\textbf{Secure Env Collect} & Masked secret collection without manual \texttt{.env} editing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Distribution strategy:} Extensions are bundled into the \texttt{src/resources/extensions/} directory and synced to \texttt{\textasciitilde/.gsd/agent/} on \emph{every} launch (always-overwrite). This means \texttt{npm update -g} takes effect immediately without reinstallation ceremonies.
+
+\subsubsection{Bundled Subagents (3)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Role} & \tableheader{Output} \\
+\midrule
+\textbf{Scout} & Fast codebase recon & Compressed context package for handoff to other agents \\
+\textbf{Researcher} & Web research & Synthesized findings from Brave + Jina + Context7 \\
+\textbf{Worker} & General execution & Durable artifacts in isolated context window \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Skill Discovery}
+
+GSD-2 supports three skill discovery modes:
+\begin{itemize}
+  \item \textbf{auto} --- Automatically detects and installs relevant skills during research phases
+  \item \textbf{suggest} --- Identifies relevant skills and prompts user for confirmation
+  \item \textbf{off} --- Skill discovery disabled; manually specified skills only via \texttt{always\_use\_skills}
+\end{itemize}
+
+Skill discovery searches both \texttt{.claude/skills/} and \texttt{.agents/skills/} paths (dual-path support added in a recent release). This is the integration surface for our skill-creator pipeline.
+
+\subsection{Module 4 --- Git Strategy \& Verification}
+
+\subsubsection{Branch-Per-Slice Topology}
+
+\begin{asciibox}
+GIT TOPOLOGY (GSD-2)
+====================
+
+main:
+  feat(M001/S03): auth and session management       <- squash commit
+  feat(M001/S02): API endpoints and middleware      <- squash commit
+  feat(M001/S01): data model and type system        <- squash commit
+
+gsd/M001/S01 (branch preserved after merge):
+  feat(S01/T03): file writer with round-trip fidelity
+  feat(S01/T02): markdown parser for plan files
+  feat(S01/T01): core types and interfaces
+
+Branch naming convention: gsd/{MilestoneID}/{SliceID}
+Commit convention:        feat({SliceID}/{TaskID}): description
+Squash merge trigger:     S0N-COMPLETE phase artifact written
+Revert target:            Any main commit reverts one full slice
+\end{asciibox}
+
+This strategy achieves: clean main history (one commit per vertical capability), per-task forensics (preserved on branches), git bisect compatibility, and individual slice revertability.
+
+\subsubsection{Verification Ladder}
+
+GSD-2 uses a four-rung verification ladder per task:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Level} & \tableheader{What is Checked} \\
+\midrule
+1 & Static checks & Files exist, no stubs, imports resolve \\
+2 & Command execution & Build passes, tests run, linters clear \\
+3 & Behavioral testing & Feature works as specified in must-haves \\
+4 & Human review & Only when agent genuinely cannot self-verify \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Must-have types:}
+\begin{itemize}
+  \item \textbf{Truths} --- Observable behaviors (``User can sign up with email'')
+  \item \textbf{Artifacts} --- Files that must exist with real implementation, not stubs
+  \item \textbf{Key Links} --- Imports and wiring between artifacts
+\end{itemize}
+
+\subsection{Module 5 --- Pi SDK Integration \& Multi-Provider Architecture}
+
+\subsubsection{Pi SDK Package Survey}
+
+The Pi SDK (\texttt{badlogic/pi-mono}) is a 7.7k-star monorepo providing the agent harness that GSD-2 runs on:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Package} & \tableheader{Role in GSD-2} \\
+\midrule
+\texttt{@mariozechner/pi-ai} & Unified multi-provider LLM API (OpenAI, Anthropic, Google, etc.) \\
+\texttt{@mariozechner/pi-agent-core} & Agent runtime with tool calling and state management \\
+\texttt{@mariozechner/pi-coding-agent} & Interactive coding agent CLI (GSD-2's primary harness) \\
+\texttt{@mariozechner/pi-mom} & Slack bot delegation (used for team workflows) \\
+\texttt{@mariozechner/pi-tui} & Terminal UI library with differential rendering (dashboard) \\
+\texttt{@mariozechner/pi-web-ui} & Web components for AI chat interfaces \\
+\texttt{@mariozechner/pi-pods} & CLI for managing vLLM deployments on GPU pods \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Two-File Loader Pattern}
+
+This is one of GSD-2's most subtle and important design decisions. The problem: the Pi SDK evaluates \texttt{PI\_PACKAGE\_DIR} at import time. If the env var is not set before the first SDK import, the SDK's theme resolution looks in the wrong directory and collides with GSD-2's own \texttt{src/} structure.
+
+The solution: two files with a strict ordering guarantee.
+
+\begin{asciibox}
+loader.ts:
+  1. Sets PI_PACKAGE_DIR=./pkg (points to shim, not src/)
+  2. Sets all other GSD env vars
+  3. Does ZERO SDK imports (static or dynamic)
+  4. dynamic-imports cli.ts
+
+cli.ts:
+  1. Static SDK imports (safe: PI_PACKAGE_DIR already set)
+  2. Wires SDK managers
+  3. Loads extensions
+  4. Starts InteractiveMode
+
+The pkg/ shim directory:
+  - Contains ONLY piConfig and theme assets
+  - Exists to give Pi SDK a clean resolution root
+  - No overlap with src/ directory
+\end{asciibox}
+
+\subsubsection{Multi-Provider Support}
+
+GSD-2 supports 20+ providers via the Pi SDK's unified LLM API:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Provider Category} & \tableheader{Providers} \\
+\midrule
+Direct API & Anthropic, OpenAI, Google (Gemini), Mistral, xAI, HuggingFace \\
+OAuth / Subscription & Claude Max, GitHub Copilot, Codex (no API key needed) \\
+Gateway / Aggregator & OpenRouter (hundreds of models: Llama, DeepSeek, Qwen...) \\
+Cloud Platforms & Amazon Bedrock, Azure OpenAI, Google Vertex \\
+Fast inference & Groq, Cerebras \\
+Proxy & Vercel AI Gateway \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Per-phase model assignment (preferences.md):}
+\begin{asciibox}
+models:
+  research:   openrouter/deepseek/deepseek-r1  # Fast, cheap for orientation
+  planning:   claude-opus-4-6                  # Judgment-intensive decomposition
+  execution:  claude-sonnet-4-6                # Quality/speed balance
+  completion: claude-sonnet-4-6                # Summary + UAT generation
+\end{asciibox}
+
+Cost tracking is per-model, per-phase, per-unit --- enabling real budget ceilings that pause auto mode before overspending.
+
+\subsection{Module 6 --- Integration Opportunities with GSD Ecosystem}
+
+\subsubsection{Architectural Comparison: GSD-2 vs. Tibsfox's GSD}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4.5cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{GSD-2 (badlogic/pi)} & \tableheader{Tibsfox's GSD} \\
+\midrule
+Context management & Fresh session per task (programmatic) & Wave-based fresh subagents + cache exploitation \\
+State persistence & Disk files (.gsd/) & Mission package YAML + STATE.md \\
+Adaptive learning & Skill discovery (suggest/auto/off) & skill-creator pipeline (LoRA → compiled) \\
+Parallelism & Sequential per task (async dispatch) & Wave-based parallel execution tracks \\
+Model allocation & Per-phase preferences.md & 30/60/10 Opus/Sonnet/Haiku principle \\
+Git strategy & Branch-per-slice, squash merge & Not prescribed (project-dependent) \\
+Verification & Must-haves (Truths/Artifacts/Links) & Wave verification matrix \\
+Recovery & Lock files + session forensics & Mission package re-entry \\
+Provider support & 20+ via Pi SDK & Anthropic primary (Claude Code) \\
+Extension model & 9 bundled, skill discovery & SKILL.md files, skill-creator promotion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Path 1: Skill Discovery Bridge}
+
+GSD-2's skill discovery searches \texttt{.claude/skills/} and \texttt{.agents/skills/}. Our skill-creator pipeline promotes skills to \texttt{SKILL.md} files. These paths are compatible. A Wasteland skill that GSD skill-creator promotes could be deposited into \texttt{.agents/skills/} and auto-discovered by a GSD-2 session running in the same project directory.
+
+\textbf{Integration surface:} \texttt{skill\_discovery: auto} + our skill-creator output path.
+
+\subsubsection{Integration Path 2: CEDAR Chipset as GSD-2 Extension}
+
+GSD-2's extension system syncs to \texttt{\textasciitilde/.gsd/agent/} on every launch. A CEDAR chipset extension could be packaged as a GSD-2 extension that provides: wave-based orchestration vocabulary, PNW bioregion taxonomy for project naming, and planning-bridge-mcp integration for mission deposit. The extension would appear in every GSD-2 session without modification to the core.
+
+\subsubsection{Integration Path 3: GSD-2 as Skill-Creator Consumer}
+
+Our skill-creator observes patterns, promotes them through a pipeline (conversation $\rightarrow$ SKILL.md $\rightarrow$ LoRA adapter $\rightarrow$ compiled). GSD-2's adaptive replanning reads the roadmap and adjusts. If skill-creator could deposit pattern observations as roadmap annotations (Wasteland MVR stamps in a \texttt{.gsd/} compatible format), GSD-2's replanning could incorporate ecosystem-level intelligence without modification.
+
+\textbf{Data format:} YAML frontmatter in \texttt{M001-RESEARCH.md} is a natural injection point.
+
+\subsection{Safety \& Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+BSL 1.1 License & GATE & Business Source License 1.1 restricts commercial production use. Research and integration analysis are permitted. Consult license before shipping GSD-2 as part of a product. \\
+API key exposure & GATE & GSD-2's Secure Env Collect extension masks secrets. Any integration must inherit this pattern. Never write API keys to .gsd/ artifacts. \\
+Budget ceiling & ANNOTATE & Auto mode can exhaust significant API budget unattended. Always set budget\_ceiling in preferences.md before running overnight sessions. \\
+Source attribution & ABSOLUTE & All findings in this document sourced to public GitHub repositories. No proprietary internals were accessed. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Repositories}
+
+\begin{itemize}
+  \item \textbf{GSD-2 Repository:} \url{https://github.com/gsd-build/GSD-2} --- Primary source. README is the canonical architecture document.
+  \item \textbf{Pi SDK (pi-mono):} \url{https://github.com/badlogic/pi-mono} --- Underlying agent harness. 7.7k stars, 114 contributors, MIT license.
+  \item \textbf{GSD v1 (get-shit-done):} \url{https://github.com/gsd-build/get-shit-done} --- Original prompt framework. Provides before/after comparison context.
+\end{itemize}
+
+\subsubsection{Community Analysis}
+
+\begin{itemize}
+  \item \textbf{DeepWiki GSD Analysis:} \url{https://deepwiki.com/gsd-build/get-shit-done} --- Automated wiki covering GSD v1 architecture, three-tier structure, and state management patterns.
+  \item \textbf{GSD OpenCode port:} \url{https://github.com/rokicool/gsd-opencode} --- Community port revealing additional architectural constraints and multi-provider patterns.
+\end{itemize}
+
+\subsubsection{Package Registry}
+
+\begin{itemize}
+  \item \textbf{NPM: gsd-pi} --- Published package. Install: \texttt{npm install -g gsd-pi}. Node.js $\geq$ 20.6.0 required.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete architectural intelligence package on GSD-2 (\texttt{github.com/gsd-build/GSD-2}) that enables the Tibsfox GSD ecosystem to understand, analyze, and design integrations with this parallel agentic coding system. The package documents GSD-2's state machine, context engineering patterns, extension architecture, git strategy, Pi SDK integration, and all concrete paths by which our skill-creator can bridge into GSD-2's execution model. All findings are sourced to public repositories and structured for direct handoff to Claude Code.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+GSD-2 RESEARCH MISSION WAVE ARCHITECTURE
+=========================================
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ========================================
+  [Schema]-->[Source Index]-->[Chipset Config]
+
+  WAVE 1A: CORE ARCHITECTURE TRACK (Parallel, Sonnet+Opus)
+  ==========================================================
+  [RAVEN: Dispatch System]  ||  [SALMON: State Machine]
+
+  WAVE 1B: SYSTEMS TRACK (Parallel, Sonnet)
+  ===========================================
+  [OSPREY: Extensions+Agents]  ||  [TAHOMA: Git+Verify]
+
+  WAVE 1C: INTEGRATION TRACK (Parallel, Opus)
+  =============================================
+  [CEDAR: Pi SDK]  ||  [HEMLOCK: Integration Design]
+
+  WAVE 2: SYNTHESIS (Sequential, Opus)
+  =====================================
+  [ORCA: Cross-module integration + comparison matrix]
+  [GEODUCK: Token budget + cost model analysis]
+
+  WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  =========================================================
+  [Assembly]-->[Verification]-->[Delivery]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, chipset configuration (Wave 0)
+  \item \textbf{Core Architecture Layer} --- State machine + dispatch system (Wave 1A)
+  \item \textbf{Systems Layer} --- Extensions/agents + git/verification (Wave 1B)
+  \item \textbf{Integration Layer} --- Pi SDK + ecosystem bridge design (Wave 1C)
+  \item \textbf{Synthesis Layer} --- Cross-module integration, comparison matrix, cost model (Wave 2)
+  \item \textbf{Publication Layer} --- Assembly, verification, delivery (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Agent} \\
+\midrule
+1 & State machine reference & All states, transitions, guard conditions documented & SALMON \\
+2 & Dispatch system analysis & 10 artifacts mapped, pre-loading algorithm documented & RAVEN \\
+3 & Extension + agent survey & All 9 extensions + 3 agents characterized & OSPREY \\
+4 & Git strategy document & Branch topology, commit conventions, verify ladder & TAHOMA \\
+5 & Pi SDK package map & All 7 packages + two-file loader + provider table & CEDAR \\
+6 & Integration blueprint & 3 concrete paths with data format specifications & HEMLOCK \\
+7 & Comparison matrix & $\geq$5 architectural diff points, aligned dimensions & ORCA \\
+8 & Cost model analysis & Per-phase model allocation with budget implications & GEODUCK \\
+9 & Test plan + matrix & Full test plan mapped to success criteria & ORCA \\
+10 & Mission package PDF & This document, compiled and verified & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 8k \\
+W0-SOURCES & None & Haiku & 8k \\
+W1A-RAVEN & W0-SCHEMA & Sonnet & 40k \\
+W1A-SALMON & W0-SCHEMA & Sonnet & 40k \\
+W1B-OSPREY & W0-SCHEMA & Sonnet & 35k \\
+W1B-TAHOMA & W0-SCHEMA & Sonnet & 30k \\
+W1C-CEDAR & W0-SCHEMA, W1A & Opus & 50k \\
+W1C-HEMLOCK & W0-SCHEMA, W1A-SALMON & Opus & 60k \\
+W2-ORCA & All W1 & Opus & 80k \\
+W2-GEODUCK & All W1, W2-ORCA & Sonnet & 30k \\
+W3-ASSEMBLE & All W2 & Sonnet & 40k \\
+W3-VERIFY & W3-ASSEMBLE & Sonnet & 20k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{441k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & $\sim$30\% & CEDAR (Pi SDK deep integration), HEMLOCK (integration blueprint), ORCA (synthesis + comparison matrix) \\
+Sonnet & $\sim$60\% & RAVEN, SALMON, OSPREY, TAHOMA (survey/documentation), GEODUCK, W3 assembly/verify \\
+Haiku & $\sim$10\% & W0 schemas and source index scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index \\
+1A & Core Architecture & Parallel & Sonnet & Dispatch + state machine docs \\
+1B & Systems & Parallel & Sonnet & Extensions + git docs \\
+1C & Integration & Parallel & Opus & Pi SDK + integration blueprint \\
+2 & Synthesis & Sequential & Opus & Comparison matrix + cost model \\
+3 & Publication & Sequential & Sonnet & Final assembled + verified PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Agent} \\
+\midrule
+Shared schema & Define data structures for: state transitions, artifact manifest, extension descriptor, integration path spec & Haiku \\
+Source index & Compile and verify all 3 primary URLs, community sources, NPM package ref & Haiku \\
+Chipset config & Initialize CEDAR chipset YAML with all 8 chips mapped to research domains & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Core Architecture (run simultaneously with B and C):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Questions} \\
+\midrule
+RAVEN & Dispatch system analysis & How is the dispatch prompt assembled? What are the 10 pre-inlined elements? How does cache TTL factor in? \\
+SALMON & State machine reference & What are all .gsd/ states? How does the transition graph work? How does lock file + crash recovery interact? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Systems (run simultaneously with A and C):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Questions} \\
+\midrule
+OSPREY & Extension + agent survey & What does each of the 9 extensions expose? How do the 3 subagents differ? How does always-overwrite sync work? \\
+TAHOMA & Git + verification doc & Branch naming regex? Squash merge trigger condition? Full must-have type catalog? UAT script format? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Integration Architecture (run simultaneously with A and B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Key Questions} \\
+\midrule
+CEDAR & Pi SDK package map & Which pi-mono packages does GSD-2 use and how? Two-file loader exact mechanism? Provider auth flows? \\
+HEMLOCK & Integration blueprint & What data format bridges skill-creator to GSD-2? Where does CEDAR chipset plug in? Wasteland stamp schema? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Specification} \\
+\midrule
+ORCA & Comparison matrix + test plan & Synthesize all Wave 1 outputs. Produce $\geq$5-row architectural comparison. Map all 12 success criteria to tests. Identify cross-module dependencies. \\
+GEODUCK & Cost model & Calculate per-phase token budget with Opus/Sonnet/Haiku allocation. Project real-world cost for a 10-slice GSD-2 milestone using Anthropic pricing. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+Assemble & Sonnet & Collect all Wave 1--2 outputs. Compile into final document. Verify TOC and cross-references. \\
+Verify & Sonnet & Run all SC and CF tests. Mark verification matrix. Report any BLOCK-level failures. \\
+Deliver & Sonnet & Present PDF + .tex + index.html. Brief summary only. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 1 agents share the same source index from Wave 0 --- prime cache before parallel dispatch
+  \item All three Wave 1 tracks can run within the same 5-minute TTL window if dispatched within 60 seconds of each other
+  \item RAVEN and SALMON share the GSD-2 README as primary input --- prime once, exploit in both
+  \item CEDAR and HEMLOCK share the Pi SDK README --- same strategy
+  \item Wave 2 synthesis uses all Wave 1 summaries as input --- cache W1 outputs before W2 dispatch
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Input Tokens} & \tableheader{Output Tokens} \\
+\midrule
+Wave 0 & Haiku & 20k & 16k \\
+Wave 1A & Sonnet & 60k & 80k \\
+Wave 1B & Sonnet & 50k & 65k \\
+Wave 1C & Opus & 80k & 110k \\
+Wave 2 & Opus & 100k & 110k \\
+Wave 3 & Sonnet & 80k & 60k \\
+\midrule
+\multicolumn{2}{r}{\textbf{Total Input}} & \textbf{390k} & \\
+\multicolumn{2}{r}{\textbf{Total Output}} & & \textbf{441k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[W0-SCHEMA]---+--->[W1A-RAVEN]---+
+              |                   |
+[W0-SOURCES]--+--->[W1A-SALMON]--+-->[W2-ORCA]--->[W3-ASSEMBLE]
+              |                   |                     |
+              +--->[W1B-OSPREY]--+-->[W2-GEODUCK]       |
+              |                   |                     v
+              +--->[W1B-TAHOMA]--+              [W3-VERIFY]
+              |                   |                     |
+              +--->[W1C-CEDAR]---+                      v
+              |                   |              [DELIVERY]
+              +--->[W1C-HEMLOCK]--+
+
+Parallel gates:
+  W1A || W1B || W1C (all parallel, cache-shared)
+  W2-ORCA must complete before W2-GEODUCK starts
+  W3-ASSEMBLE must complete before W3-VERIFY starts
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & Source quality, attribution, advocacy \\
+Core functionality & 20 & Required & BLOCK & All 12 success criteria \\
+Integration & 5 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 5 & Best-effort & LOG & Gaps, disputed details, currency \\
+\midrule
+\textbf{Total} & \textbf{34} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All architectural claims traceable to public GitHub repositories or NPM registry. Zero secondary/entertainment sources. \\
+SC-NUM & Numerical attribution & All numbers (35 stars, 8 forks, 7 packages, 9 extensions, 20+ providers) attributed to observed repository data. \\
+SC-ADV & No advocacy & Document describes GSD-2 architecture without recommending adoption or arguing against it. Analysis is neutral. \\
+SC-LIC & License accuracy & BSL 1.1 implications described accurately. No misrepresentation as open source or MIT. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. State machine fully documented & CF-01, CF-02 & Pending \\
+2. Dispatch algorithm documented & CF-03, CF-04 & Pending \\
+3. All 9 extensions + 3 agents characterized & CF-05, CF-06 & Pending \\
+4. Git strategy fully mapped & CF-07, CF-08 & Pending \\
+5. All 7 Pi SDK packages documented & CF-09, CF-10 & Pending \\
+6. Two-file loader pattern explained & CF-11 & Pending \\
+7. Per-phase model allocation documented & CF-12, CF-13 & Pending \\
+8. $\geq$5 architectural diff points identified & CF-14, IN-01 & Pending \\
+9. $\geq$3 integration paths with data formats & CF-15, CF-16, CF-17 & Pending \\
+10. CEDAR chipset mapping produced & CF-18, IN-02 & Pending \\
+11. Wasteland integration path sketched & CF-19, IN-03 & Pending \\
+12. All findings sourced to public repos & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate decisions; go/no-go \\
+PLAN & Planner & Wave decomposition; dependency management; cache strategy \\
+SCOUT & Research Agent & Source gathering; GitHub URL validation; NPM metadata \\
+EXEC-A & RAVEN & Dispatch system analysis and context engineering documentation \\
+EXEC-B & SALMON & State machine documentation and crash recovery analysis \\
+CRAFT-ARCH & OSPREY & Extension + subagent survey; skill discovery mapping \\
+CRAFT-GIT & TAHOMA & Git topology; verification ladder; UAT format analysis \\
+CRAFT-SDK & CEDAR & Pi SDK deep integration; two-file loader analysis; provider table \\
+CRAFT-INT & HEMLOCK & Integration blueprint; data format specs; Wasteland bridge \\
+VERIFY & ORCA & Cross-module synthesis; comparison matrix; test plan execution \\
+BUDGET & GEODUCK & Token budget; cost model; per-phase allocation analysis \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (W0$\to$W1, W1$\to$W2, W2$\to$W3) \\
+SURGEON & Health Monitor & Research quality degradation; source drift detection \\
+LOG & Chronicle & Audit trail; commit messages; milestone summary \\
+TOPO & Topology Manager & Team structure; mid-wave restructuring if needed \\
+RETRO & Retrospective & Post-wave analysis; lessons for skill-creator promotion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (16 roles) \\
+Total waves & 5 (0, 1A/1B/1C, 2, 3) \\
+Parallel execution tracks & 3 (Wave 1A + 1B + 1C simultaneous) \\
+Context windows required & 8--12 across 2--3 sessions \\
+Estimated total tokens & 831k (390k input + 441k output) \\
+Primary model & Sonnet (60\%) \\
+Synthesis model & Opus (30\%) \\
+Scaffolding model & Haiku (10\%) \\
+Cache optimization windows & 3 (W0 prime $\to$ W1; W1 prime $\to$ W2; W2 prime $\to$ W3) \\
+Deliverables & 10 documents + 1 compiled PDF \\
+HITL gates & 3 (post-W0, post-W1, post-W2) \\
+License & BSL 1.1 (research and analysis permitted) \\
+Repository URL & github.com/gsd-build/GSD-2 \\
+NPM package & gsd-pi (npm install -g gsd-pi) \\
+Node.js requirement & $\geq$ 20.6.0 (22+ recommended) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The original GSD showed what was possible. This version delivers it.''} --- GSD-2 README
+
+\medskip
+
+The spaces between versions are where the real architecture lives. GSD v1 was a beautiful hypothesis: structure the context, and the LLM will find its way. GSD-2 is the proof that the hypothesis was right about the problem and wrong about the solution. Not more prompting --- a different substrate entirely.
+
+Our skill-creator is the third act of this story. If GSD-2 is the substrate and context engineering is the method, then adaptive skill promotion is the memory. A system that can observe its own patterns, compress them into reusable intelligence, and make them available to every future session is not just more efficient --- it is a different kind of thing. The Amiga did not win by being faster than the IBM PC. It won by having four chips that remembered how to draw a screen, play a sound, move bytes --- so the CPU could think.
+
+That is where we are going.
+\end{quotebox}
+
+\end{document}

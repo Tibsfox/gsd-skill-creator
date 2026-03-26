@@ -1,0 +1,1029 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === HISTORY DOMAIN COLOR SCHEME ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy/Deep Purple — sections
+\definecolor{secondary}{HTML}{F57F17}     % Gold — subsections
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment Brown — subsubsections
+\definecolor{accent}{HTML}{6A1B9A}        % Purple accent
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light purple for quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Light gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Light parchment
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Steve Allen}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Steve Allen -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Stephen Valentine Patrick\\[0.3em]William Allen}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Renaissance Man of American Television}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study into Life, History \& Influences}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 17, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Steve Allen --- Vision Guide}
+
+\metafield{Date:}{March 17, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone biographical research mission)}
+\metafield{Context:}{Deep biographical study of Stephen Valentine Patrick William Allen (1921--2000), television pioneer, composer, author, intellectual, and cultural force}
+
+\subsection{Vision}
+
+There are people whose lives fit neatly into a single discipline---a musician, an actor, a writer. And then there are people like Steve Allen, whose creative output was so vast and varied that it seems to defy the limits of a single lifetime. Born on December 26, 1921, to vaudeville performers in New York City, Allen grew into what Noel Coward reportedly called ``the most talented man in America.'' He created the format that every late-night talk show still follows, composed more songs than any individual in the modern Guinness record books, authored over fifty books on subjects ranging from humor to biblical criticism, and produced one of the most intellectually ambitious programs ever broadcast on American television.
+
+Yet Allen's story is not simply one of prolific output. It is a story about the tension between entertainment and intellect, between mass appeal and uncompromising curiosity. Allen was a self-taught thinker who debated theology, championed scientific skepticism, collaborated with Jack Kerouac, experimented with LSD under clinical supervision, and crusaded against vulgarity on the very medium he helped build. He launched careers---Don Knotts, Steve Martin, the Smothers Brothers, Albert Brooks---while simultaneously writing mystery novels, performing as a jazz pianist, and running for a Screen Actors Guild board seat on the day before he died.
+
+This mission seeks to document and analyze the full arc of Allen's life and influence: from the vaudeville circuits of his parents' era through the golden age of television, the countercultural ferment of the 1950s and 60s, and into his final years as an elder statesman of American entertainment and public discourse. The goal is not hagiography but understanding---tracing the threads that connected a fatherless boy raised by Irish Catholics on Chicago's South Side to the man who invented how America ends its day.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Underrecognized pioneer.} Despite creating the late-night talk show format, Allen is frequently overshadowed by successors like Carson and Letterman. Popular histories often credit later hosts with innovations Allen originated in the 1950s.
+
+\item \textbf{Fragmented legacy.} Allen's output spanned television, music, literature, philosophy, and activism. No single existing resource integrates these dimensions into a coherent biographical portrait suitable for structured knowledge capture.
+
+\item \textbf{Vanishing primary sources.} Many of Allen's early television broadcasts exist only as kinescopes or have been lost entirely. His radio work from the 1940s is largely unarchived. Documenting what is known becomes more urgent as witnesses to the era diminish.
+
+\item \textbf{Intellectual dimension underexplored.} Allen's work with the Committee for Skeptical Inquiry, his biblical criticism, his advocacy of general semantics, and his humanist philosophy represent a significant intellectual legacy that entertainment-focused biographies tend to minimize.
+
+\item \textbf{Cultural bridge role.} Allen served as a critical bridge between vaudeville-era entertainment and modern media, between jazz culture and mainstream television, between Beat Generation counterculture and middle America. These bridging functions deserve systematic analysis.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A comprehensive biographical knowledge system documenting Steve Allen as the quintessential American polymath whose innovations in television format, musical composition, literary output, and public intellectualism created templates that persist across American culture.
+
+Allen's life is best understood through five interconnected domains: his origins in vaudeville and radio, his television innovations, his musical and creative arts career, his intellectual and literary life, and his lasting cultural influence. Each domain feeds the others---his radio improvisational skills became his television format; his musical talent infused his shows with jazz credibility; his reading habit and intellectual curiosity produced both his books and his most ambitious television project, \textit{Meeting of Minds}.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+         STEVE ALLEN: DOMAIN ARCHITECTURE
+         ================================
+
+  [ORIGINS & BIOGRAPHY]
+    Vaudeville heritage | Chicago childhood
+    Radio career 1942-1950 | Army service
+              |
+              v
+  [TELEVISION INNOVATION] <---> [MUSIC & CREATIVE ARTS]
+    Tonight Show 1954-57         8,500+ songs composed
+    Steve Allen Show 1956-60     Jazz pianist / 50+ albums
+    Meeting of Minds 1977-81     Kerouac collaboration
+    Format inventions            Broadway / Film
+              |                        |
+              v                        v
+  [INTELLECTUAL LIFE & WRITINGS]
+    54+ books authored
+    Biblical criticism | Humanism
+    Scientific skepticism (CSICOP)
+    General semantics | Media criticism
+              |
+              v
+  [CULTURAL LEGACY & INFLUENCE]
+    Late-night format DNA
+    Carson -> Letterman -> Leno -> modern hosts
+    Careers launched (Knotts, Martin, Brooks)
+    Jazz advocacy | Beat Generation bridge
+    Parents Television Council
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE 1: Biography & Origins
+    -> Vaudeville family (Billy Allen & Belle Montrose)
+    -> Chicago childhood, 18 schools
+    -> Radio career: KOY, KNX, Smile Time
+    -> Army service, marriages, family
+
+  MODULE 2: Television Innovation
+    -> Tonight Show creation & format innovations
+    -> Steve Allen Show vs Ed Sullivan
+    -> Game shows: What's My Line?, I've Got a Secret
+    -> Meeting of Minds (PBS, 1977-1981)
+
+  MODULE 3: Music & Creative Arts
+    -> 8,500+ songs, Grammy Award
+    -> Jazz piano, 50+ albums
+    -> Kerouac/Poetry for the Beat Generation
+    -> Broadway (Sophie), Film (Benny Goodman Story)
+
+  MODULE 4: Intellectual Life & Writings
+    -> 54+ books across genres
+    -> Dumbth, Biblical criticism volumes
+    -> Humanism, CSICOP, Skeptics Society
+    -> General semantics, LSD experiment
+
+  MODULE 5: Cultural Legacy & Influence
+    -> Late-night format descendants
+    -> Careers launched & mentored
+    -> Jazz advocacy on television
+    -> Media criticism & moral advocacy
+    -> Death & posthumous recognition
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Biography \& Origins}
+
+Comprehensive biographical documentation from Allen's birth in 1921 to vaudeville parents Billy Allen (Carroll Abler) and Belle Montrose (Isabelle Donohue), through his peripatetic childhood across 18 schools, his education at Drake University and Arizona State Teachers College, his Army service during WWII, his early radio career at KOY Phoenix and KNX Los Angeles, and his personal life including marriages to Dorothy Goodman (1943--1952) and Jayne Meadows (1954--2000). Covers the formative influences of Irish Catholic upbringing, vaudeville comedy traditions, and the improvisational skills developed in radio.
+
+\subsubsection{Module 2: Television Innovation}
+
+Analysis of Allen's television career as format innovator: the creation and hosting of \textit{Tonight!} (later \textit{The Tonight Show}) from 1953--1957, including the invention of the opening monologue, desk-and-sofa set, comic exchanges with the bandleader, man-on-the-street interviews, and audience participation comedy. Covers the prime-time \textit{Steve Allen Show} (1956--1960) and its competition with Ed Sullivan, the Westinghouse syndicated show (1962--1964), game show hosting (\textit{What's My Line?}, \textit{I've Got a Secret}), and the Emmy/Peabody-winning \textit{Meeting of Minds} (PBS, 1977--1981). Documents Allen's role in launching careers of performers including Don Knotts, Tom Poston, Louis Nye, Steve Martin, Albert Brooks, Tim Conway, and the Smothers Brothers.
+
+\subsubsection{Module 3: Music \& Creative Arts}
+
+Documentation of Allen's extraordinary musical output: an estimated 8,500+ songs (Guinness World Record holder for most prolific modern composer), including standards such as ``This Could Be the Start of Something Big,'' ``Picnic,'' ``Impossible,'' and the Grammy-winning ``Gravy Waltz'' (1964 Best Original Jazz Composition). Covers his work as a jazz pianist across 50+ albums, his collaboration with Jack Kerouac on \textit{Poetry for the Beat Generation} (1959), Broadway musicals (\textit{Sophie}, 1963; \textit{Belle Starr}, 1969), film scores, and his role in the 1956 biopic \textit{The Benny Goodman Story}. Analyzes Allen's complex relationship with rock and roll, including the famous Elvis Presley ``Hound Dog'' episode.
+
+\subsubsection{Module 4: Intellectual Life \& Writings}
+
+Survey of Allen's literary and philosophical output: 54+ books spanning humor, social criticism, mystery novels, children's books, poetry, and religious criticism. Key works include \textit{Dumbth: The Lost Art of Thinking} (1989/1998), \textit{Steve Allen on the Bible, Religion, and Morality} (1990) and its sequel, \textit{Vulgarians at the Gate} (2001, posthumous), and \textit{Reflections}. Documents his evolution from Roman Catholic upbringing to secular humanism, his membership in CSICOP and the Council for Secular Humanism, his Martin Gardner Lifetime Achievement Award (1996), his support for general semantics (Alfred Korzybski Memorial Lecture, 1992), and his participation in supervised LSD experiments with Gerald Heard and Sidney Cohen in the late 1950s.
+
+\subsubsection{Module 5: Cultural Legacy \& Influence}
+
+Analysis of Allen's lasting impact: the direct lineage from his Tonight Show innovations through Jack Paar to Johnny Carson, David Letterman, Jay Leno, Conan O'Brien, and all modern late-night hosts. Documented influence acknowledgments from Letterman, Leno, Bill Maher, Steve Martin, Robin Williams, Harry Shearer, and Billy Crystal. Covers his advocacy work with the Parents Television Council, his Television Hall of Fame induction (1986), two Hollywood Walk of Fame stars, the Steve Allen Theater in Hollywood, his death on October 30, 2000, and his burial at Forest Lawn Hollywood Hills. Examines the paradox of Allen's simultaneous roles as entertainment innovator and moral critic of the medium he helped create.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  copper:
+    role: "Biographical research coordination"
+    focus: "Module integration, chronological coherence"
+  agnus:
+    role: "Source management and verification"
+    focus: "Cross-referencing dates, claims, attributions"
+  denise:
+    role: "Narrative rendering and prose quality"
+    focus: "Readable, engaging biographical prose"
+  paula:
+    role: "Media and music domain analysis"
+    focus: "Discography, filmography, song catalog accuracy"
+  gary:
+    role: "Gate management between research waves"
+    focus: "Completeness checks, gap identification"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Complete biographical chronology from birth (1921) through death (2000)
+\item All major television programs created, hosted, or regularly appeared on
+\item Musical career including songwriting, recordings, and live performance
+\item Literary output across all genres (54+ books cataloged)
+\item Intellectual and philosophical evolution (Catholicism to humanism)
+\item Documented influence relationships with successor entertainers
+\item Family life and key personal relationships
+\item Awards, honors, and institutional recognitions
+\item Cultural context of American television's golden age
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Complete song-by-song catalog (8,500+ songs; summary treatment only)
+\item Episode-level analysis of any television series
+\item Detailed analysis of Jayne Meadows' independent career
+\item Comprehensive comparison with every late-night successor
+\item Legal or financial details of contracts and business arrangements
+\item Medical details beyond publicly documented cause of death
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All five biographical modules contain sourced content from professional organizations, encyclopedias, or archival records
+\item Chronological accuracy verified across all modules---no date contradictions between sections
+\item Television career section documents at least 8 distinct series/programs with air dates and networks
+\item Musical career section includes discography highlights, Grammy documentation, and Kerouac collaboration details
+\item Literary output section catalogs major works across genres with publication dates
+\item Intellectual evolution traced from Catholic upbringing through humanist/skeptic period with named organizations and awards
+\item At least 6 documented influence acknowledgments from named successor entertainers
+\item Family and personal life section covers both marriages, all children, and key personal milestones
+\item Meeting of Minds documented as distinct creative achievement with format description, awards, and Allen's own assessment
+\item Cross-module integration demonstrates connections between domains (e.g., radio skills $\rightarrow$ TV format, reading habit $\rightarrow$ literary output)
+\item Death circumstances accurately documented with autopsy findings distinct from initial reports
+\item All numerical claims (song count, book count, album count) attributed to specific sources with noted discrepancies between estimates
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Vision Docs & Standalone research mission; no dependencies & Independent \\
+Television History & Could feed broader American TV history mission & Future \\
+Jazz in America & Allen's jazz advocacy connects to broader jazz study & Future \\
+Beat Generation & Kerouac collaboration connects to literary movement study & Future \\
+American Humanism & Allen's skepticism work connects to freethought history & Future \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Steve Allen's life embodies a principle at the heart of the GSD ecosystem: that the most powerful systems emerge not from narrow specialization but from the creative integration of diverse capabilities. Like the Amiga architecture that inspires GSD's design philosophy, Allen was a system of specialized components---comedian, musician, writer, thinker---working in concert to produce output far exceeding what any single capability could achieve alone.
+
+The spaces between Allen's disciplines were where his genius lived. His radio improvisation skills became television format innovations. His voracious reading habit produced both his literary output and the intellectual ambition of \textit{Meeting of Minds}. His jazz piano provided the musical bridge to Jack Kerouac's spoken word. His Catholic upbringing gave him both the moral framework he later challenged and the seriousness with which he approached that challenge.
+
+In studying Allen, we study the architecture of creative integration itself---how a single human system, properly configured, can generate output across multiple domains while maintaining coherence and quality. That is the lesson, and it resonates far beyond entertainment history.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Steve Allen --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference compiles verified findings from professional encyclopedias, archival records, broadcast histories, and institutional documentation. Each module corresponds to a research domain identified in Stage 1. Sources are cited inline and compiled in the bibliography.
+
+Key source organizations:
+\begin{itemize}[leftmargin=2em]
+\item Encyclopaedia Britannica (biographical overview, career chronology)
+\item Encyclopedia.com / Scribner Encyclopedia of American Lives (biographical detail)
+\item Academy of Television Arts \& Sciences (Hall of Fame documentation)
+\item Committee for Skeptical Inquiry / CSICOP (intellectual biography)
+\item Freedom From Religion Foundation (freethought biographical record)
+\item Arizona State University Archives (educational records, honorary doctorate)
+\item Social Networks and Archival Context (SNAC) cooperative (archival holdings)
+\item Scottsdale Public Library (Steve Allen Papers, 1951--2000)
+\item Bowling Green State University (Allen papers, 1956--1973)
+\end{itemize}
+
+\subsection{Module 1: Biography \& Origins Reference}
+
+\subsubsection{Birth and Parentage}
+
+Stephen Valentine Patrick William Allen was born December 26, 1921, in New York City. His parents were Billy Allen (born Carroll Abler, of German ancestry) and Belle Montrose (born Isabelle Donohue), a husband-and-wife vaudeville comedy team. The birth name was Stephen Valentine Allen; the additional names Patrick and William were acquired during childhood. The middle name Valentine came from vaudeville actor Val Stanton, a close friend of the family. Milton Berle later described Allen's mother as ``the funniest woman in vaudeville.''
+
+Allen's father died when Steve was approximately eighteen months old. The infant was relocated to Chicago's South Side, where he was raised primarily by his mother's Irish Catholic family. His mother continued performing and was frequently absent. Allen attended an estimated eighteen different schools during his itinerant childhood, developing what biographers describe as a voracious reading habit as compensation for social instability.
+
+\subsubsection{Education and Early Career}
+
+Allen briefly attended Drake University in Des Moines, Iowa (1941) on a journalism scholarship before transferring to Arizona State Teachers College (now Arizona State University) in Tempe, Arizona. He left during his sophomore year (1942) to take a radio job at station KOY in Phoenix. It was at Arizona State that he met his first wife, Dorothy Goodman. The university later awarded Allen an Alumni Achievement Award (1966) and an honorary doctorate (1982).
+
+Allen enlisted in the U.S. Army during World War II and was trained as an infantryman at Camp Roberts, California. He saw no combat and was discharged due to asthma. He returned to KOY and then formed a comedy team with fellow announcer Wendell Noble. Both relocated to Los Angeles in 1945, where they debuted a radio comedy show called \textit{Smile Time} on the Mutual Broadcasting System network. The show ran for two years.
+
+By 1946, Allen had moved to KNX, CBS's Los Angeles affiliate, where his half-hour music-and-talk format gradually evolved to include more conversation and less music. His show became the most popular nighttime radio program in Los Angeles history. A pivotal moment occurred when a scheduled guest, Doris Day, failed to appear; Allen picked up a microphone, went into the studio audience, and ad-libbed for the first time---a technique that would become foundational to his television career.
+
+Allen also had a brief early career naming wrestling holds after answering an ad for a television wrestling announcer in 1949. He knew nothing about wrestling, so he watched shows and invented descriptive names for the holds, some of which remain in use.
+
+\subsubsection{Family Life}
+
+Allen married Dorothy Goodman on August 23, 1943. They had three sons: Steve Jr. (later a doctor in Elmira, New York), Brian (a real estate broker in Seattle), and David (a songwriter in Los Angeles). The marriage ended in divorce in 1952.
+
+Allen met actress Jayne Meadows at a dinner party in 1952. According to accounts, Allen was uncharacteristically speechless throughout the evening. At the end of dinner, Meadows remarked that he was either the rudest or the shyest man she had ever met. They married on July 31, 1954, in Waterford, Connecticut, and had one son, William Christopher Allen (later an executive at MTM Television). Allen and Meadows remained married for 46 years until his death. Meadows described him as ``my best friend and my partner on stage and off for more than 48 years.'' She died in 2015 and is buried beside him.
+
+Allen's son Brian joined a commune in the mid-1970s, an experience that ``hurt and stunned'' Allen initially. He later wrote about the experience in his book \textit{Beloved Son}, eventually coming to better understand his son's beliefs.
+
+\subsection{Module 2: Television Innovation Reference}
+
+\subsubsection{The Tonight Show (1953--1957)}
+
+Allen's first network television experience was \textit{The Steve Allen Show} on CBS (1950--1952), a half-hour program that required his relocation to New York. Though only moderately successful, it served as a proving ground.
+
+In July 1953, Allen began hosting a late-night talk/variety show on local New York station WNBT-TV. On September 27, 1954, the show went national on the full NBC network as \textit{Tonight!} (later renamed \textit{The Tonight Show}), with Gene Rayburn as announcer and Skitch Henderson leading the band. The show aired from 11:15 p.m. to 1:00 a.m. Eastern.
+
+Allen is credited with introducing the fundamental trademarks of the talk show genre: the opening monologue delivered from a piano; comic exchanges with the show's bandleader; comedy sketches with a repertory cast; a simple set of desk and sofa; and casual banter with celebrity guests. He pioneered the ``man on the street'' comedic interviews and ad-libbed audience interaction that became genre staples. His recurring bit ``The Question Man'' was a direct precursor to Johnny Carson's ``Carnac the Magnificent.''
+
+The show introduced numerous future stars to national audiences, including Steve Lawrence, Eydie Gorme, Andy Williams, Don Knotts, Jonathan Winters, and the Smothers Brothers. Allen left the Tonight Show in 1957, succeeded by Ernie Kovacs and then Jack Paar.
+
+\subsubsection{The Steve Allen Show (1956--1960)}
+
+In June 1956, NBC offered Allen a prime-time Sunday night variety hour, strategically scheduled opposite CBS's top-rated \textit{Ed Sullivan Show}. The program featured early television appearances by rock-and-roll pioneers Elvis Presley, Jerry Lee Lewis, and Fats Domino, alongside mainstream stars. Regular cast members included Tom Poston, Louis Nye, Bill Dana, Don Knotts, Pat Harrington Jr., Dayton Allen, and Gabriel Dell.
+
+The most notorious episode involved Elvis Presley on July 1, 1956. Allen, known for his reservations about rock and roll, had Presley sing ``Hound Dog'' to an actual basset hound while dressed in white tie and tailcoat. Elvis later called it the most ridiculous performance of his career. The stunt generated massive ratings.
+
+Allen's show won the Variety Show of the Year Award in 1958 and the George Foster Peabody Award for best comedy show in 1960. The show also pioneered compatible color broadcasting from September 1957.
+
+\subsubsection{Westinghouse Show and Later Television}
+
+From 1962 to 1964, Allen recreated the Tonight format for a Westinghouse-syndicated show, taped at the Steve Allen Playhouse in Hollywood. The show featured the Donn Trenner Orchestra with jazz musicians including guitarist Herb Ellis and trombonist Frank Rosolino. Though not an overwhelming success at the time, David Letterman, Steve Martin, Harry Shearer, and Robin Williams later cited this show as highly influential on their own comedic visions.
+
+Allen also introduced Albert Brooks and Steve Martin to national audiences on a subsequent Filmways syndicated show (1968--1969). He hosted \textit{I've Got a Secret} for CBS (1964--1967) and produced \textit{Jazz Scene USA}, a short-lived show hosted by Oscar Brown Jr. featuring West Coast jazz musicians.
+
+\subsubsection{Meeting of Minds (1977--1981)}
+
+Allen's most personally cherished project debuted on PBS in 1977. \textit{Meeting of Minds} featured actors portraying historical figures---including Sun Yat-sen, Machiavelli, Elizabeth Barrett Browning, Cleopatra, Thomas Aquinas, and many others---engaged in roundtable discussions moderated by Allen. He described it as ``drama disguised as a talk show'' and wrote all scripts based on the actual writings and documented positions of the historical figures.
+
+Allen first conceived the idea in 1959 but spent nearly two decades getting it produced. Many television executives considered it ``too thoughtful'' for American audiences. Allen eventually produced the initial episodes himself to demonstrate viability.
+
+The show won the George Foster Peabody Award (1977), an Emmy for Outstanding Informational Series (1981), and awards from the Television Critics Circle and the National Organization for Women, among others. Allen's wife Jayne Meadows played most of the female historical roles.
+
+\subsection{Module 3: Music \& Creative Arts Reference}
+
+\subsubsection{Songwriting Career}
+
+By his own estimate, Allen composed more than 8,500 songs, though only a small fraction were ever recorded. He was listed in the Guinness Book of World Records as the most prolific modern composer of songs (the 1984 record cited over 4,000 compositions; later estimates from Allen himself climbed higher). His musical training was limited to three years of piano lessons beginning at age seven.
+
+In a famous stunt, Allen bet singer Frankie Laine that he could write 50 songs per day for a week. Composing on public display in the window of Wallach's Music City, a Hollywood music store, Allen met the quota and won \$1,000. One song from the marathon, ``Let's Go to Church (Next Sunday Morning),'' became a chart hit for Jimmy Wakely and Margaret Whiting, reaching No. 13 pop and No. 2 country in 1950.
+
+Notable compositions include ``This Could Be the Start of Something Big'' (his signature song and a cabaret standard), ``Picnic,'' ``Impossible,'' ``South Rampart Street Parade,'' ``On the Beach,'' and ``Houseboat.'' His songs were recorded by artists including Ella Fitzgerald, Louis Armstrong, Sarah Vaughan, Tony Bennett, Count Basie, Nat King Cole, and Bing Crosby.
+
+\subsubsection{Grammy Award and Jazz Career}
+
+``Gravy Waltz'' was originally composed and performed by Ray Brown as an instrumental in the early 1960s. Allen later wrote lyrics for it, and the collaboration won the 1964 Grammy Award for Best Original Jazz Composition. Allen recorded approximately 50--75 albums across his career, beginning with \textit{Steve Allen At The Piano} for Columbia Records in 1951. He recorded for Decca (and its subsidiaries Brunswick and Coral) throughout the 1950s, then Dot Records in the 1960s. His charting albums included \textit{Music for Tonight} (1955, No. 7 Billboard), \textit{Funny Fone-Calls} (1963, No. 70), and \textit{Gravy Waltz \& 11 Current Hits} (1963, No. 41).
+
+Allen maintained a long-term musical partnership with vibraphonist Terry Gibbs, performing duets as late as 1997.
+
+\subsubsection{Jack Kerouac Collaboration}
+
+In 1957, Jack Kerouac was booked for a jazz-accompanied poetry reading at the Village Vanguard in New York. The first night was a disaster---Kerouac was nervous and did not mesh with the band. On the second night, Steve Allen attended and offered impromptu piano accompaniment. The collaboration was so successful that Allen arranged a recording session.
+
+The resulting album, \textit{Poetry for the Beat Generation} (1959, Hanover Records), was recorded in a single session lasting approximately one hour. Kerouac insisted the first take would be the only take. Allen's gentle, jazz-inflected piano provided sympathetic counterpoint to Kerouac's spoken-word delivery. The album was nearly suppressed when Dot Records president Randy Wood declared Kerouac's language obscene, necessitating release on the smaller Hanover label. It has been reissued multiple times and is considered a landmark of the jazz-poetry genre.
+
+\subsubsection{Film and Theater}
+
+Allen's most notable film role was the title character in \textit{The Benny Goodman Story} (1956). He recalled that his one contribution to the film's music came in early scenes requiring the sound of a clarinet beginner---``the only sound Allen could produce on a clarinet.'' Other film appearances included cameos as himself in Robert Altman's \textit{The Player} (1992) and Martin Scorsese's \textit{Casino} (1995).
+
+For the Broadway stage, Allen wrote the music and lyrics for \textit{Sophie} (1963), a musical based on the life of Sophie Tucker, which opened at the Winter Garden Theatre. He also wrote \textit{Belle Starr} (1969), a London show starring Betty Grable. Both received poor reviews. In 1985, Allen wrote 19 songs for a CBS television musical adaptation of \textit{Alice in Wonderland}, with Jayne Meadows as the Queen of Hearts.
+
+\subsection{Module 4: Intellectual Life \& Writings Reference}
+
+\subsubsection{Literary Output}
+
+Allen authored over 54 books across a remarkable range of genres: humor and comedy analysis (\textit{Funny People}, 1981), social criticism (\textit{Dumbth: The Lost Art of Thinking with 101 Ways to Reason Better and Improve Your Mind}, 1989/1998), religious criticism (\textit{Steve Allen on the Bible, Religion, and Morality}, 1990, and its sequel), mystery novels (a series ``starring'' himself and Jayne Meadows as amateur detectives, beginning with \textit{The Talk Show Murders}, 1982), poetry (his first collection, \textit{Windfall}, 1946), short stories (\textit{The Man Who Turned Back the Clock}), autobiographies (\textit{Mark It and Strike It}, 1960; \textit{Hi-Ho Steverino!}, 1992), political commentary (\textit{But Seriously\ldots}), philosophical essays (\textit{Reflections}), and his final work, \textit{Vulgarians at the Gate: Trash TV and Raunch Radio} (2001, posthumous).
+
+The mystery novels were later revealed to have been ghostwritten by Walter J. Sheldon and, subsequently, Robert Westbrook.
+
+Working with publisher Paul Kurtz at Prometheus Books, Allen published 15 books. He also produced \textit{Gullible's Travels}, an audiotape with original music designed to introduce children to critical thinking.
+
+\subsubsection{Religious and Philosophical Evolution}
+
+Allen was raised Roman Catholic but was automatically excommunicated in his early thirties due to his second marriage. He reported that doubts about Catholicism began in his mid-twenties. He evolved into a secular humanist and freethinker, though he resisted the label of atheist, acknowledging ``time-honored, creative, and intellectually respectable arguments for the existence of God'' while rejecting organized religion and biblical literalism.
+
+His two-volume biblical criticism presented essays arranged alphabetically by topic, addressing abortion, anti-Semitism, capital punishment, evolution, and original sin, among other subjects. Compared by reviewers to Voltaire's \textit{Philosophical Dictionary} and Thomas Paine's \textit{The Age of Reason}, the work challenged fundamentalist assumptions while drawing on scholarship from Catholic, Protestant, and Jewish biblical scholars.
+
+\subsubsection{Scientific Skepticism and Humanism}
+
+Allen became a Humanist Laureate for the Academy of Humanism and an active member of CSICOP (Committee for Skeptical Inquiry) and the Council for Secular Humanism. He received the Martin Gardner Lifetime Achievement Award from CSICOP in 1996. In 2011 (posthumously), he was selected for inclusion in the Committee for Skeptical Inquiry's Pantheon of Skeptics.
+
+He served on the Council for Media Integrity, a group that debunked pseudoscientific claims, and wrote extensively for \textit{Skeptic} magazine on topics including Scientology, the concept of genius, and the legacy of Isaac Asimov. He received the Rose Elizabeth Bird Commitment to Justice Award from Death Penalty Focus in 1998.
+
+\subsubsection{General Semantics and LSD}
+
+Allen was a student and supporter of general semantics, the discipline founded by Alfred Korzybski. He recommended general semantics in \textit{Dumbth} and delivered the Alfred Korzybski Memorial Lecture in 1992.
+
+In the late 1950s, author and philosopher Gerald Heard, working with psychiatrist Sidney Cohen, introduced Allen to LSD as part of a supervised clinical program aimed at ``intelligent, adventurous people.'' This was before LSD was classified as a controlled substance.
+
+\subsection{Module 5: Cultural Legacy \& Influence Reference}
+
+\subsubsection{Late-Night Format Legacy}
+
+Allen's Tonight Show innovations constitute the DNA of all subsequent late-night programming. Documented direct influence acknowledgments include:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Successor} & \tableheader{Documented Statement} \\
+\midrule
+Jay Leno & Called Allen ``the inspiration for everything we do here'' \\
+David Letterman & Stated Allen ``was an enormous influence on television'' and that ``his early work is really the foundation for what late night shows have become'' \\
+Bill Maher & Declared ``everybody who ever has done a talk show should pay a royalty to Steve Allen'' \\
+Billy Crystal & Called Allen ``the generator of a lot of ideas that were ahead of its time'' \\
+Johnny Carson & Praised Allen as ``a most creative innovator and brilliant entertainer'' \\
+Milton Berle & Called him ``an icon, an original'' \\
+Noel Coward & Reportedly called Allen ``the most talented man in America'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Specific format elements traceable to Allen include: the opening monologue, the desk-and-sofa set, banter with the bandleader, the sidekick/announcer relationship, comedy sketches with a repertory cast, man-on-the-street interviews (precursor to Leno's ``Jaywalking'' and Kimmel's segments), audience participation stunts (precursor to Letterman's physical comedy), and cameras roaming outside the studio.
+
+\subsubsection{Careers Launched}
+
+Allen provided early national television exposure to: Don Knotts, Tom Poston, Louis Nye, Bill Dana, Tim Conway, Steve Martin, Albert Brooks, the Smothers Brothers, Steve Lawrence, Eydie Gorme, Andy Williams, Jonathan Winters, Lenny Bruce, Mort Sahl, and Regis Philbin (who began his career as an NBC Page during Allen's Tonight Show).
+
+\subsubsection{Media Criticism and Advocacy}
+
+Despite being a lifelong political liberal and Democrat, Allen was a vocal moral conservative regarding media content. He actively supported the Parents Television Council and sponsored advertisements urging broadcasters and parents to exercise responsibility. He was highly critical of Howard Stern and other shock jocks. His posthumous book \textit{Vulgarians at the Gate} addressed what he perceived as television's moral decline.
+
+On the day before his death, he placed a full-page newspaper advertisement urging people to alert sponsors that ``TV is leading children down a moral sewer.'' He was also running for a Screen Actors Guild board seat at the time.
+
+\subsubsection{Death and Honors}
+
+On October 30, 2000, Allen performed a sold-out one-man concert at Victor Valley Community College in Victorville, California. While driving to visit his son, he was involved in a minor car accident. He reportedly joked with the other driver afterward. He later died at his son's home in Encino, California, at age 78.
+
+Initial reports attributed his death to a heart attack. However, an autopsy revealed he died from a hemopericardium---a ruptured blood vessel caused by chest injuries sustained in the car accident, injuries he had not realized were serious. His death was ruled accidental.
+
+Allen is buried at Forest Lawn Memorial Park in Hollywood Hills, in an originally unmarked grave. Jayne Meadows was buried beside him following her death in 2015.
+
+Honors include: Television Hall of Fame induction (1986), two stars on the Hollywood Walk of Fame (television and radio), the Steve Allen Theater in Hollywood named in his honor, the Martin Gardner Lifetime Achievement Award (1996), the George Foster Peabody Award (twice: 1960, 1977), Emmy Awards, and the posthumous inclusion in CSICOP's Pantheon of Skeptics (2011).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\midrule
+Religious criticism & Allen's biblical criticism should be presented as his documented position, not endorsed or opposed & ANNOTATE \\
+LSD experience & Historical context (pre-scheduling, clinical supervision) must be clear & ANNOTATE \\
+Elvis controversy & Multiple perspectives exist; present Allen's stated intent alongside Presley's reaction & ANNOTATE \\
+Rock and roll criticism & Allen's views were products of his era; avoid presentism & ANNOTATE \\
+Family difficulties & Brian Allen's commune experience: use Allen's own published account only & GATE \\
+Death circumstances & Accurate autopsy findings must distinguish from initial heart attack reports & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Encyclopedias \& Reference Works}
+\begin{itemize}[leftmargin=2em]
+\item Encyclopaedia Britannica. ``Steve Allen.'' Updated March 13, 2026.
+\item Scribner Encyclopedia of American Lives, Thematic Series: The 1960s. ``Allen, Stephen Valentine Patrick William (`Steve').''
+\item EBSCO Research Starters. ``Steve Allen Biography.''
+\end{itemize}
+
+\subsubsection{Archival \& Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+\item Social Networks and Archival Context (SNAC). Allen biographical record, including ASU archives.
+\item Scottsdale Public Library. Steve Allen Papers, 1951--2000 (WorldCat record 49244609).
+\item Bowling Green State University. Steve Allen Papers, 1956--1973 (WorldCat record 14228108).
+\item Academy of Television Arts \& Sciences. Hall of Fame records, 1986.
+\item Committee for Skeptical Inquiry (CSICOP). Pantheon of Skeptics, 2011.
+\end{itemize}
+
+\subsubsection{Broadcast History \& Media}
+\begin{itemize}[leftmargin=2em]
+\item PBS Pioneers of Television. ``Late Night TV'' program segment.
+\item CNN. \textit{The Story of Late Night} documentary series (2021).
+\item Alba, Ben. \textit{Inventing Late Night: Steve Allen and the Original Tonight Show}. Prometheus Books, 2005.
+\end{itemize}
+
+\subsubsection{Musical \& Literary Sources}
+\begin{itemize}[leftmargin=2em]
+\item The Beat Museum. Kerouac \& Allen: \textit{Poetry for the Beat Generation} (Hanover Records, 1959).
+\item All About Jazz. Album review: \textit{Poetry for the Beat Generation}.
+\item Playbill. ``Steve Allen, Prolific Composer and `Tonight' Show Host, Dead at 78.''
+\item Freedom From Religion Foundation. Steve Allen biographical entry.
+\end{itemize}
+
+\subsubsection{News \& Obituaries}
+\begin{itemize}[leftmargin=2em]
+\item Variety. ``TV Talkshow Pioneer Steve Allen Dies.'' October 31, 2000.
+\item CBS News. ``Comedian Steve Allen Dead at 78.'' 2000.
+\item Irish America Magazine. ``Steve Allen (1921--2000).'' February 2001.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality biographical knowledge document on Stephen Valentine Patrick William Allen (1921--2000), integrating five research domains---biography, television innovation, music and creative arts, intellectual life, and cultural legacy---into a self-contained reference work suitable for educational use, content creation, and further GSD ecosystem development.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0 (Foundation)     WAVE 1 (Research)      WAVE 2 (Synth)  WAVE 3 (Pub)
+====================    ==================     ==============   ============
+[Shared Schema]    -->  [Bio & Origins]    --> [Cross-Module]   [Final Doc]
+[Source Index]     -->  [TV Innovation]    --> [Integration]    [Verify]
+[Style Guide]     -->  [Music & Arts]     --> [Synthesis]      [Publish]
+                        [Intellectual]
+                        [Legacy]
+                        
+                        Track A: Bio + TV + Legacy (sequential)
+                        Track B: Music + Intellectual (parallel)
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source bibliography, style templates
+\item \textbf{Research Layer} --- Five parallel/sequential survey modules producing sourced content
+\item \textbf{Integration Layer} --- Cross-module relationship validation and chronological alignment
+\item \textbf{Publication Layer} --- Final document assembly, verification, and delivery
+\end{enumerate}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+D1 & Biographical Survey & Complete chronology, birth--death, all sources cited & Module 1 \\
+D2 & Television Analysis & 8+ programs documented with dates, networks, innovations & Module 2 \\
+D3 & Music \& Arts Survey & Discography, Grammy, Kerouac, Broadway, film & Module 3 \\
+D4 & Intellectual Profile & Books, philosophy, skepticism, organizations & Module 4 \\
+D5 & Legacy Assessment & Influence chain, honors, death, posthumous recognition & Module 5 \\
+D6 & Integrated Document & All modules merged, cross-referenced, verified & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared Schema & None & Haiku & 2,000 \\
+Source Index & None & Haiku & 3,000 \\
+Bio \& Origins & Schema & Sonnet & 12,000 \\
+TV Innovation & Schema & Sonnet & 15,000 \\
+Music \& Arts & Schema & Sonnet & 12,000 \\
+Intellectual Life & Schema & Opus & 10,000 \\
+Cultural Legacy & Schema & Sonnet & 10,000 \\
+Cross-Module Synth & All modules & Opus & 8,000 \\
+Verification & Synthesis & Sonnet & 5,000 \\
+Final Assembly & Verified draft & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & Intellectual Life module (judgment-heavy philosophical analysis), Cross-Module Synthesis (integration requiring nuanced connections) \\
+Sonnet & 60\% & Bio \& Origins, TV Innovation, Music \& Arts, Cultural Legacy, Verification, Final Assembly \\
+Haiku & 10\% & Shared Schema, Source Index, Style Guide scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Components} & \tableheader{Execution} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & 2 & Sequential & 5,000 \\
+1 & Parallel Research & 5 & 2 tracks & 59,000 \\
+2 & Synthesis & 1 & Sequential & 8,000 \\
+3 & Publication & 2 & Sequential & 10,000 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated:}} & \textbf{82,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Est. Tokens} \\
+\midrule
+Shared Schema & Haiku & Biographical entry template, date format, source citation format & 2,000 \\
+Source Index & Haiku & Master bibliography with quality ratings and access notes & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Biographical Narrative (Sequential)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Est. Tokens} \\
+\midrule
+Bio \& Origins & Sonnet & Birth--1950 chronology with sources & 12,000 \\
+TV Innovation & Sonnet & 1950--1981 television career analysis & 15,000 \\
+Cultural Legacy & Sonnet & Influence chain, honors, death & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Creative \& Intellectual (Parallel with Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Est. Tokens} \\
+\midrule
+Music \& Arts & Sonnet & Compositions, recordings, collaborations, theater, film & 12,000 \\
+Intellectual Life & Opus & Books, philosophy, skepticism, general semantics & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Est. Tokens} \\
+\midrule
+Cross-Module Synth & Opus & Integrated narrative, cross-references, chronological alignment & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Est. Tokens} \\
+\midrule
+Verification & Sonnet & Date consistency, source validation, fact-checking & 5,000 \\
+Final Assembly & Sonnet & Publication-ready document with TOC, index & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Shared prefix:} Wave 0 outputs (schema + source index) cached as prompt prefix for all Wave 1 tasks
+\item \textbf{Track isolation:} Track A and Track B share schema but not each other's outputs until Wave 2
+\item \textbf{Source deduplication:} Master source index prevents redundant web research across modules
+\item \textbf{Chronological spine:} Bio \& Origins produces a date-indexed timeline reused by all subsequent modules for temporal alignment
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 5,000 \\
+Wave 1: Research & 10,000 & 37,000 & --- \\
+Wave 2: Synthesis & 8,000 & --- & --- \\
+Wave 3: Publication & --- & 10,000 & --- \\
+\midrule
+\textbf{Subtotals} & \textbf{18,000} & \textbf{47,000} & \textbf{5,000} \\
+\midrule
+\multicolumn{3}{r}{\textbf{Mission Total:}} & \textbf{70,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Budget split: Opus 26\% / Sonnet 67\% / Haiku 7\% (within tolerance of 30/60/10 target).
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+  [Schema] ---> [Bio & Origins] ---> [TV Innovation] ---> [Legacy]
+      |                                                       |
+      |                                                       v
+      +-------> [Music & Arts] --------------------------> [SYNTH] --> [VERIFY] --> [PUBLISH]
+      |                                                       ^
+      +-------> [Intellectual Life] --------------------------+
+      |
+  [Source Index] (feeds all modules)
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge Cases & 4 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{28} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to encyclopedias, archives, institutional records, or professional journalism. Zero entertainment blogs as primary sources. \\
+SC-NUM & Numerical attribution & Every song count, book count, album count, and date attributed to specific source with noted discrepancies between estimates. \\
+SC-ADV & No advocacy & Document presents Allen's positions (religious, political, media criticism) without endorsing or opposing them. \\
+SC-FAM & Family privacy & Allen's son Brian's commune experience sourced only from Allen's own published account. No speculative personal details. \\
+SC-MED & Death accuracy & Autopsy findings (hemopericardium from car accident injuries) clearly distinguished from initial heart attack reports. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Bio completeness & Birth, parentage, childhood, education, Army, radio, marriages, children all documented \\
+CF-02 & TV program count & $\geq$ 8 distinct programs with air dates and networks \\
+CF-03 & Tonight Show format & $\geq$ 5 specific format innovations attributed to Allen \\
+CF-04 & Song count sourced & Multiple estimates cited with source for each \\
+CF-05 & Grammy documented & Year, category, song title, collaborator all present \\
+CF-06 & Kerouac collaboration & Album title, year, recording circumstances, label history \\
+CF-07 & Book count sourced & Total $\geq$ 50, major titles across genres listed \\
+CF-08 & Religious evolution & Catholic $\rightarrow$ humanist trajectory with named organizations \\
+CF-09 & CSICOP involvement & Martin Gardner Award, Pantheon of Skeptics, dated \\
+CF-10 & Influence chain & $\geq$ 6 named successors with direct quotes or documented statements \\
+CF-11 & Meeting of Minds & Format, years, awards (Peabody, Emmy), Allen's assessment \\
+CF-12 & Elvis episode & Date, circumstances, both Allen's and Presley's reactions \\
+CF-13 & Benny Goodman film & Year, role, Allen's anecdote about clarinet contribution \\
+CF-14 & Death circumstances & Date, location, accident, autopsy findings, burial site \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Radio $\rightarrow$ TV pipeline & Document traces how radio improvisation skills became TV format elements \\
+IN-02 & Music $\leftrightarrow$ TV integration & Musical career shown as integral to television work, not separate \\
+IN-03 & Reading $\rightarrow$ Writing $\rightarrow$ Meeting of Minds & Intellectual trajectory connects literary output to TV ambition \\
+IN-04 & Date consistency & No contradictions in dates between modules (marriage, show dates, awards) \\
+IN-05 & Self-containment & Document readable without external references; all terms defined \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Song count discrepancy & Multiple published estimates (3,000 to 14,000+) acknowledged with sources \\
+EC-02 & Ghostwritten works & Mystery novel ghostwriting disclosed \\
+EC-03 & LSD context & Pre-scheduling legal status and clinical setting noted \\
+EC-04 & Wrestling naming & Unusual early career detail included with appropriate sourcing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All modules sourced & SC-SRC & Pending \\
+2. Chronological accuracy & IN-04 & Pending \\
+3. TV career $\geq$ 8 programs & CF-02 & Pending \\
+4. Musical career complete & CF-04, CF-05, CF-06 & Pending \\
+5. Literary output cataloged & CF-07 & Pending \\
+6. Intellectual evolution traced & CF-08, CF-09 & Pending \\
+7. $\geq$ 6 influence acknowledgments & CF-10 & Pending \\
+8. Family/personal life complete & CF-01, SC-FAM & Pending \\
+9. Meeting of Minds documented & CF-11 & Pending \\
+10. Cross-module integration & IN-01, IN-02, IN-03 & Pending \\
+11. Death accurately documented & CF-14, SC-MED & Pending \\
+12. Numerical claims attributed & SC-NUM, EC-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; Track A/B parallel optimization \\
+SCOUT & Research Agent & Source gathering; bibliography compilation \\
+EXEC-A & Executor (Track A) & Bio, TV Innovation, Legacy document production \\
+EXEC-B & Executor (Track B) & Music \& Arts, Intellectual Life document production \\
+CRAFT-BIO & Biography Specialist & Chronological accuracy, family details, source cross-referencing \\
+CRAFT-MEDIA & Media/Entertainment Specialist & Television history, format analysis, influence chain documentation \\
+VERIFY & Verification Agent & Date consistency, source validation, fact-checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (A: Biographical Narrative, B: Creative \& Intellectual) \\
+Total Waves & 4 (0: Foundation, 1: Research, 2: Synthesis, 3: Publication) \\
+Estimated Token Budget & 70,000 \\
+Model Split & Opus 26\% / Sonnet 67\% / Haiku 7\% \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Total Tests & 28 (5 safety-critical, 14 core, 5 integration, 4 edge) \\
+Deliverables & 6 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``He was an icon, an original.''} --- Milton Berle
+
+\vspace{0.5em}
+
+Steve Allen's life is a study in what happens when curiosity refuses to specialize. From a fatherless boy learning comedy at eighteen different schools to the man who gave America its bedtime ritual, Allen demonstrated that the most enduring innovations come not from doing one thing perfectly but from connecting many things fluently. His late-night format persists. His songs persist. His books persist. His questions persist. In the GSD ecosystem, we call that architecture over brute force. Allen just called it showing up to work every day.
+\end{quotebox}
+
+\end{document}

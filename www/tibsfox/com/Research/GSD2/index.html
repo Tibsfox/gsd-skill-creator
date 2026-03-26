@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSD-2 Architecture — Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsd2">
+  <header>
+    <h1>GSD-2 Architecture</h1>
+    <div class="subtitle">Workflow Systems &mdash; Planning &middot; Execution &middot; Agent Coordination &middot; Phase Management</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      GSD-2: The next-generation Get Shit Done workflow system. Iron rule: every task fits in one context window. Disk-driven state machine. Milestone-Slice-Task hierarchy. Pi SDK integration. skill-creator as the adaptive learning layer.
+    </blockquote>
+
+    <h2>Research Modules</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-architecture-state-machine" class="card" style="text-decoration:none;color:inherit">
+        <h3>01. Architecture &amp; State Machine</h3>
+        <div class="meta">Core Design &middot; Execution Engine</div>
+        <p>Iron rule (task = 1 context window), 3-tier hierarchy (Milestone/Slice/Task), 5-phase execution loop, crash recovery via lock files and forensics, stuck detection, timeout supervision (20/10/30 min).</p>
+      </a>
+      <a href="page.html?doc=02-context-engineering" class="card" style="text-decoration:none;color:inherit">
+        <h3>02. Context Engineering</h3>
+        <div class="meta">Token Budget &middot; Pre-loading Strategy</div>
+        <p>10 managed artifacts, pre-loading strategy, dispatch construction algorithm with token budget, 5-minute cache TTL, must-haves system (truths/artifacts/key links), phase-specific context budgets.</p>
+      </a>
+      <a href="page.html?doc=03-extensions-subagents" class="card" style="text-decoration:none;color:inherit">
+        <h3>03. Extensions &amp; Subagents</h3>
+        <div class="meta">9 Bundled Extensions &middot; 3 Subagents</div>
+        <p>9 bundled extensions (GSD Core, Background Shell, Git Conventions, Verification Ladder, DECISIONS Protocol, UAT Generation, Stuck Detection, Crash Recovery, Skill Discovery), 3 subagents (Scout/Researcher/Worker).</p>
+      </a>
+      <a href="page.html?doc=04-git-strategy" class="card" style="text-decoration:none;color:inherit">
+        <h3>04. Git Strategy</h3>
+        <div class="meta">Branch-per-Slice &middot; Verification Ladder</div>
+        <p>Branch naming (gsd/M001/S01), atomic task commits, squash merge with UAT summary, 4-level verification ladder (static/artifact/behavioral/human), must-haves as mechanical verification.</p>
+      </a>
+      <a href="page.html?doc=05-pi-sdk-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>05. Pi SDK Integration</h3>
+        <div class="meta">badlogic/pi-mono &middot; Multi-Provider</div>
+        <p>7 Pi SDK packages, two-file loader pattern (loader.ts/cli.ts), InteractiveMode session lifecycle events, 20+ AI provider support, per-phase model allocation, cost tracking and token ledger.</p>
+      </a>
+      <a href="page.html?doc=06-skill-creator-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>06. Skill-Creator Integration</h3>
+        <div class="meta">Full Integration Thesis &middot; 6 Modules</div>
+        <p>6 integration modules: Pi SDK event bridge, skill discovery path, GSDArtifactReader, PhaseContext type, GSDFeedbackTap, agent composition via preferences.md. 10 success criteria defined.</p>
+      </a>
+      <a href="page.html?doc=07-verification-matrix" class="card" style="text-decoration:none;color:inherit">
+        <h3>07. Verification Matrix</h3>
+        <div class="meta">Quality Assurance &middot; Coverage Audit</div>
+        <p>12/12 success criteria PASS. ~1,670 lines of research content across 6 modules. Source quality assessment. Cross-link coverage across 8 sibling projects.</p>
+      </a>
+    </div>
+
+    <h2>Mission Pack</h2>
+    <div class="card-grid">
+      <a href="mission.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mission Pack</h3>
+        <div class="meta">Original mission package</div>
+        <p>The original research brief and mission package defining scope, success criteria, and wave plan for this project.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>GSD-2 Architecture &middot; Research Series &middot; gsd-skill-creator</p>
+    <p>7 modules &middot; State machine, context engineering, extensions, Pi SDK, skill-creator integration</p>
+  </footer>
+</body>
+</html>
