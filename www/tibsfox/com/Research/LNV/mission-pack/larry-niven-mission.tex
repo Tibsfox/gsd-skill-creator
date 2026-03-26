@@ -1,0 +1,1108 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Space/Physics — Cosmic Wonder ===
+\definecolor{primary}{HTML}{311B92}        % Cosmic purple — sections
+\definecolor{secondary}{HTML}{0277BD}      % Nebula blue — subsections
+\definecolor{tertiary}{HTML}{F9A825}       % Star gold — subsubsections
+\definecolor{accent}{HTML}{7C4DFF}         % Electric violet — highlights
+\definecolor{lightprimary}{HTML}{EDE7F6}   % Lavender mist
+\definecolor{lightsecondary}{HTML}{E1F5FE} % Ice blue
+\definecolor{lighttertiary}{HTML}{FFF8E1}  % Warm cream
+\definecolor{rowgray}{HTML}{F5F5F5}        % Alternating rows
+\definecolor{bordergray}{HTML}{BDBDBD}     % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}     % Footer text
+\definecolor{darktext}{HTML}{212121}       % Body text
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Larry Niven}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Larry Niven -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\color{darktext}
+
+\begin{document}
+
+% ============================================================
+%  TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Larry Niven\\[0.3em]Architect of Known Space}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Hard Science Fiction, Megastructures \& the Literature of Wonder}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+%  TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Larry Niven --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{Deep research study of Larry Niven's literary career, worldbuilding methodology, scientific influence, and cultural legacy. Designed for the GSD skill-creator ecosystem as a comprehensive reference on one of hard science fiction's most architecturally inventive minds.}
+
+\subsection{Vision}
+
+Laurence van Cott Niven did something remarkable in the landscape of twentieth-century science fiction: he built a universe that worked. Not in the hand-waving, technobabble sense of ``worked,'' but in the rigorous, physics-constrained, mathematically grounded sense. From his first published story in 1964 through six decades of relentless invention, Niven constructed the Tales of Known Space---a future history spanning a thousand years, populated by deeply alien species, governed by technologies whose implications he traced with forensic precision, and anchored by the conviction that the universe operates according to discoverable laws that reward those who pay attention.
+
+The Ringworld alone would secure Niven's place in the canon. A rotating band encircling a star at Earth's orbital distance, three million times the surface area of our planet, the Ringworld was born from Niven's attempt to improve on Freeman Dyson's sphere---to strip away the structurally unnecessary portions and keep only the equatorial band where centrifugal force could simulate gravity. It was engineering fiction at its purest: a concept so compelling that physicists wrote papers about its stability problems, fans demanded corrections at conventions, and Niven himself wrote sequels specifically to address the engineering objections. The structure became so iconic that NASA borrowed the term when describing exoplanet discoveries, and the Halo video game franchise built its entire setting around the concept.
+
+But Niven's genius extends far beyond any single megastructure. His Known Space series introduced the concept of ``organlegging''---black-market organ trafficking enabled by universal transplant compatibility---decades before real-world organ trafficking became a documented crisis. His 1973 story ``Flash Crowd'' predicted that instantaneous transportation would produce spontaneous mob formation, a concept that maps precisely onto the flash-mob phenomenon enabled by the internet and social media thirty years later. His treatment of magic as a non-renewable resource in \textit{The Magic Goes Away} anticipated resource-depletion frameworks that ecology would later formalize. And his collaborations with Jerry Pournelle produced some of the finest first-contact and disaster fiction ever written.
+
+This research mission seeks to document, analyze, and structure the complete Niven corpus---not as a mere bibliography, but as an interconnected system of ideas, technologies, species, and philosophical propositions that together constitute one of the most architecturally coherent bodies of work in speculative fiction.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented documentation.} Niven's output spans sixty years, dozens of series, hundreds of short stories, multiple collaborative universes, and numerous non-fiction essays. No single reference integrates the full scope of his work, its internal timeline, and its real-world influence into a coherent analytical framework.
+
+\item \textbf{Scientific contributions under-recognized.} Niven's fictional concepts---organlegging, flash crowds, Ringworld engineering, the Kzinti as a model for alien sociology---have had measurable influence on real-world science, technology forecasting, and policy thinking. This influence is scattered across disciplines and rarely attributed systematically.
+
+\item \textbf{Collaborative complexity.} Niven's partnerships with Pournelle, Barnes, Lerner, and others produced works set in at least three distinct fictional universes (Known Space, CoDominium, Heorot). The creative dynamics, division of labor, and cross-pollination between these collaborations are poorly documented.
+
+\item \textbf{The Laws as epistemology.} Niven's Laws---his published observations on ``how the Universe works''---represent a unique intersection of empirical philosophy, writerly craft, and hard-SF world-building principles. Their evolution from convention speeches to formal publication to ongoing revision constitutes an under-examined intellectual project.
+
+\item \textbf{Legacy and critical reassessment.} Niven's work, like much Golden/Silver Age SF, contains elements that have aged poorly alongside elements of enduring brilliance. A comprehensive study must address both dimensions honestly to serve contemporary readers and researchers.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Larry Niven as the supreme architect of hard-SF worldbuilding---a mathematician who treated fictional universes as engineering problems, traced the social implications of technology with prophetic accuracy, and demonstrated that rigorous scientific constraints amplify rather than diminish the sense of wonder.
+\end{quotebox}
+
+Niven's method is fundamentally architectural. He begins with a physical law or technological premise, works out its logical consequences with mathematical rigor, then follows those consequences into sociology, economics, psychology, and politics. The organ bank problem in Known Space is paradigmatic: if transplant technology becomes universal, demand for organs will outstrip supply; if organs extend life, demand becomes infinite; if demand is infinite, the legal threshold for ``capital crime'' will be driven downward by democratic pressure until jaywalking becomes a death sentence. This chain of reasoning---technology $\rightarrow$ economics $\rightarrow$ politics $\rightarrow$ moral catastrophe---is Niven's signature move, executed across dozens of stories with different premises.
+
+\subsubsection{Study Domain Map}
+
+\begin{asciibox}
+                    LARRY NIVEN: RESEARCH DOMAIN
+  ===================================================
+
+  [BIOGRAPHY]          [KNOWN SPACE]        [COLLABORATIONS]
+  Life & Career        Universe Timeline    Pournelle Partnership
+  Education (Math)     Alien Species        Barnes/Lerner/Others
+  Awards & Honors      Technologies         Shared Universe Method
+       |                    |                      |
+       +--------------------+----------------------+
+                            |
+                     [RINGWORLD &
+                     MEGASTRUCTURES]
+                     Physics & Engineering
+                     Real-World Influence
+                     Stability Problems
+                            |
+                     [IDEAS & LEGACY]
+                     Niven's Laws
+                     Predictive Fiction
+                     Cultural Impact
+                     Critical Assessment
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  Wave 0: Foundation
+  +-----------------------+
+  | Shared schemas,       |
+  | bibliography index,   |
+  | timeline scaffold     |
+  +-----------------------+
+           |
+  Wave 1: Parallel Research
+  +-------------+    +------------------+
+  | Track A:    |    | Track B:         |
+  | Biography & |    | Known Space &    |
+  | Career Arc  |    | Ringworld/Mega   |
+  +-------------+    +------------------+
+           |                  |
+  +-------------+    +------------------+
+  | Track A:    |    | Track B:         |
+  | Collabora-  |    | Ideas, Laws &    |
+  | tions       |    | Cultural Legacy  |
+  +-------------+    +------------------+
+           |                  |
+           +--------+---------+
+                    |
+  Wave 2: Synthesis
+  +-----------------------+
+  | Cross-module integra- |
+  | tion, thematic analy- |
+  | sis, timeline recon-  |
+  | ciliation             |
+  +-----------------------+
+           |
+  Wave 3: Publication & Verification
+  +-----------------------+
+  | Final document assem- |
+  | bly, source verifica- |
+  | tion, test execution  |
+  +-----------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Life \& Career Arc}
+
+Biography from Beverly Hills childhood through Caltech dropout, Washburn University mathematics degree, UCLA graduate work, first sale (``The Coldest Place,'' 1964, \$25), rise through the SF community, marriage to Marilyn ``Fuzzy Pink'' Wisowaty (1969), major awards (five Hugos, one Nebula, 2015 SFWA Grand Master), policy advisory roles (Citizens' Advisory Council on National Space Policy, SIGMA/DHS), and the Doheny oil dynasty family background.
+
+\subsubsection{Module 2: The Known Space Universe}
+
+The thousand-year future history: Belter period (2000--2350 CE) with slower-than-light travel and organlegging crises; the 300-year gap filled by Man-Kzin Wars shared-universe anthologies; the Neutron Star/Ringworld period (2651+ CE) with hyperdrive and alien contact. Alien species catalog: Kzinti (aggressive felinoids), Pierson's Puppeteers (three-legged cowardly geniuses), Pak (humanity's biological ancestors), Kdatlyno (sonar-seeing warrior poets), Grogs (sessile telepaths), Outsiders (information traders), Thrintun/Slavers (extinct telepathic tyrants). Technologies: stasis fields, General Products hulls, boosterspice, transfer booths, hyperdrive, Bussard ramjets, molecular monofilaments, tasps.
+
+\subsubsection{Module 3: Ringworld \& Megastructures}
+
+The Ringworld concept: genesis from Dyson sphere optimization, physical parameters (1 AU radius, ~600 million miles circumference, ~3 million Earth surface areas), centrifugal gravity via rotation (~770 miles/second rim speed), shadow squares for day/night cycle, rim-wall mountains for atmosphere containment. Engineering problems and corrections across sequels. The ``Bigger Than Worlds'' essay and its catalog of megastructure concepts. Influence on real-world physics (stability papers), aerospace engineering (NASA terminology adoption), and popular culture (Halo franchise, Stellaris, Culture novels lineage).
+
+\subsubsection{Module 4: Collaborations \& Shared Worlds}
+
+The Niven-Pournelle partnership: nine co-authored novels including \textit{The Mote in God's Eye} (1974, CoDominium universe, first contact masterwork), \textit{Lucifer's Hammer} (1977, comet-impact survival), \textit{Footfall} (1985, alien invasion), \textit{Inferno} (1976, Dante adaptation). The Niven-Barnes partnership: Dream Park series, Legacy of Heorot/Beowulf's Children (Tau Ceti colonization). The Niven-Lerner collaboration: Fleet of Worlds series extending Known Space. The shared-universe experiment: Man-Kzin Wars anthologies opening Known Space to other writers. Creative methodology: how Niven and Pournelle divided labor, the ``Building The Mote in God's Eye'' essay as craft documentation.
+
+\subsubsection{Module 5: Ideas, Laws \& Cultural Legacy}
+
+Niven's Laws: evolution from convention speeches (1968 DNC catalyst) through the 1984 Owlswick Press chapbook to 2002 Analog revision. Key principles: ``F $\times$ S = k'' (freedom-security tradeoff), ``Ethics change with technology,'' ``The only universal message in science fiction: There exist minds that think as well as you do, but differently.'' Niven's Laws for Writers. Predictive fiction: organlegging and real-world organ trafficking, flash crowds and internet mobs, teleportation booth economics and gig-economy parallels. Policy influence: SDI advisory role, SIGMA/Homeland Security consulting. Cultural artifacts: Nevinyrral's Disk (Magic: The Gathering), Halo franchise, ``Man of Steel, Woman of Kleenex'' essay as pop-physics landmark. Critical legacy: SFE assessment of ``early joy'' versus later ``rancorous'' political agendas; gender and race representation issues; enduring influence on hard-SF successors (Bear, Baxter, McAuley, Brin).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:    "Known Space timeline & bibliography index"
+  denise:   "Ringworld engineering diagrams & species profiles"
+  paula:    "Source verification & cross-reference validation"
+  motorola: "Synthesis engine & thematic analysis"
+  model_allocation:
+    opus:   "30% — Synthesis, cross-module integration, critical
+             assessment, thematic through-lines"
+    sonnet: "60% — Module surveys, biography assembly, technology
+             catalogs, source compilation"
+    haiku:  "10% — Shared schemas, timeline scaffold, bibliography
+             template"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Complete biography with primary source attribution
+\item Known Space universe analysis: timeline, species, technologies, internal consistency
+\item Ringworld engineering concept: physics, corrections, real-world influence
+\item All major collaborations (Pournelle, Barnes, Lerner) with creative methodology analysis
+\item Niven's Laws: complete text, evolution, philosophical analysis
+\item Predictive fiction catalog: concept, story of origin, real-world manifestation
+\item Awards and honors: complete listing with context
+\item Critical reception: contemporary and retrospective assessment
+\item Cultural legacy: games, media, terminology, scientific influence
+\item Complete bibliography of solo and collaborative novels
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Full text analysis of individual novels (this is a research reference, not literary criticism)
+\item Detailed plot summaries beyond what's needed for thematic analysis
+\item Fan fiction and unauthorized derivative works
+\item Comprehensive listing of every short story (catalog major collections instead)
+\item Political biography beyond what directly influenced the fiction or public reception
+\item Comparison studies with other SF authors (brief contextual mentions only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Biography covers all major life phases with professional-source attribution (birth through Grand Master Award)
+\item Known Space timeline accounts for all seven eras with key works mapped to each
+\item At least 8 alien species individually profiled with biological, sociological, and narrative roles documented
+\item Ringworld engineering section includes quantitative physical parameters with citations
+\item All 9 Niven-Pournelle novels cataloged with universe assignment and critical reception
+\item Niven's Laws presented in complete 2002 revision with evolutionary history
+\item At least 5 predictive-fiction concepts documented with real-world manifestation evidence
+\item At least 12 professional-quality sources cited (academic, agency, professional organization)
+\item Critical assessment section addresses both enduring strengths and documented weaknesses
+\item Cross-module integration identifies at least 6 thematic connections spanning modules
+\item Timeline consistency: no contradictions between biography dates and publication history
+\item Document is self-contained: a reader with no prior Niven knowledge can understand the complete picture
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+The Space Between & Architectural leverage philosophy parallels Niven's engineering approach to fiction & Philosophical \\
+GSD Amiga Vision & ``Amiga Principle'' of specialized execution paths mirrors Niven's Known Space chipset metaphor & Architectural \\
+Learn Kung Fu Pack & Niven's predictive methodology as case study for pattern recognition curriculum & Educational \\
+Foxfire Heritage & Shared-universe methodology (Man-Kzin Wars) as model for collaborative knowledge systems & Methodological \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Larry Niven's career embodies the Amiga Principle in literary form. Where the Amiga achieved extraordinary results through specialized execution paths rather than brute computational power, Niven achieved extraordinary world-building through rigorous physical constraints rather than unconstrained imagination. The Known Space universe is not vast because Niven ignored the laws of physics---it is vast \textit{because} he obeyed them, and followed each consequence to its logical terminus.
+
+The spaces between Niven's technologies are where his stories live. The space between universal organ transplant capability and the democratic pressure to expand capital punishment. The space between instantaneous teleportation and the spontaneous formation of mobs. The space between a rotating megastructure and the engineering problems that make it unstable. Niven understood, as few writers before or since, that the most interesting fiction emerges not from what technology can do, but from the gap between what it can do and what its users wish it would do.
+
+This is the builder's lesson: constraints are not obstacles to wonder. They are the architecture of wonder itself.
+
+\newpage
+
+% ============================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Larry Niven --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from professional sources, author-maintained archives, and scholarly encyclopedias. It is organized by research module and designed to be consumed by GSD agents executing the mission plan in Stage 3. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{The Encyclopedia of Science Fiction (SFE)} --- Peer-reviewed reference work, Gollancz/Orion Publishing
+\item \textbf{larryniven.net} --- Author-maintained official website and biography archive
+\item \textbf{Internet Speculative Fiction Database (ISFDB)} --- Professional bibliographic database
+\item \textbf{Science Fiction and Fantasy Writers of America (SFWA)} --- Professional organization, award records
+\item \textbf{Hugo/Nebula Award archives} --- Official award documentation
+\item \textbf{NASA/ESA publications} --- Real-world megastructure research citations
+\item \textbf{Monthly Notices of the Royal Astronomical Society} --- Peer-reviewed physics papers on Ringworld stability
+\end{itemize}
+
+\subsection{Module 1 Reference: The Life \& Career Arc}
+
+\subsubsection{Early Life \& Education}
+
+Laurence van Cott Niven was born April 30, 1938, in Los Angeles, California, and spent his childhood in Beverly Hills. He is a great-grandson of Edward L. Doheny, the oil tycoon who drilled the first successful well in the Los Angeles City Oil Field in 1892 and was subsequently implicated in the Teapot Dome scandal of the 1920s. Niven spent two years (ages six to eight) in Washington, D.C.
+
+In 1956, Niven entered the California Institute of Technology but left after approximately eighteen months, having discovered a bookstore stocked with used science fiction magazines that consumed his attention. He subsequently enrolled at Washburn University in Topeka, Kansas, earning a Bachelor of Arts in mathematics with a minor in psychology in 1962. He completed one year of graduate work in mathematics at the University of California, Los Angeles, before dropping out to write full-time.
+
+\subsubsection{Career Trajectory}
+
+Niven sold his first story, ``The Coldest Place,'' in 1964 for \$25. The story was set on the dark side of Mercury, then believed to be tidally locked; scientists discovered Mercury's 2:3 resonance rotation between Niven's payment and publication. His editor Fred Pohl began directing him toward ``the odd pockets of the universe,'' seeding the curiosity-driven approach that would characterize his career.
+
+Major career milestones:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} & \tableheader{Significance} \\
+\midrule
+1964 & ``The Coldest Place'' published & First sale; launches Known Space \\
+1966 & ``Neutron Star'' published & First Hugo (Best Short Story, 1967) \\
+1969 & Married Marilyn Wisowaty & ``Fuzzy Pink'' --- herself a notable SF/Regency fan \\
+1970 & \textit{Ringworld} published & Hugo, Nebula, Locus, Ditmar awards \\
+1972 & ``Inconstant Moon'' & Second Hugo (Best Short Story) \\
+1974 & \textit{The Mote in God's Eye} & First Pournelle collaboration; Heinlein endorsement \\
+1975 & ``The Hole Man'' & Third Hugo (Best Short Story) \\
+1976 & ``The Borderland of Sol'' & Hugo (Best Novelette) \\
+1977 & \textit{Lucifer's Hammer} & NYT bestseller with Pournelle \\
+1984 & \textit{The Integral Trees} & Solo masterwork; unique zero-g ecology \\
+1984 & \textit{Niven's Laws} chapbook & First formal publication of Laws \\
+1985 & \textit{Footfall} & Alien invasion bestseller with Pournelle \\
+1988 & Man-Kzin Wars launched & Known Space becomes shared universe \\
+2007 & SIGMA/DHS advisory & SF writers advising Homeland Security \\
+2015 & SFWA Grand Master Award & Damon Knight Memorial Grand Master \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Awards Summary}
+
+Five Hugo Awards (Best Short Story 1967, 1972, 1975; Best Novelette 1976; Best Novel 1971 for \textit{Ringworld}). One Nebula Award (Best Novel 1970 for \textit{Ringworld}). Locus Award, Ditmar Award. Robert A. Heinlein Award (2005, jointly with Pournelle). SFWA Damon Knight Memorial Grand Master (2015). Seiun Award, Skylark Award, additional Eastercon and Worldcon honors.
+
+\subsection{Module 2 Reference: The Known Space Universe}
+
+\subsubsection{Timeline Structure}
+
+The Known Space future history spans approximately one thousand years, from the first human exploration of the Solar System to the year 3122 CE (the chronologically latest story, ``Safe at Any Speed''). The larryniven.net archive divides Known Space into seven eras:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Era} & \tableheader{Period} & \tableheader{Key Features} \\
+\midrule
+1 & Near Future (post-1975--2040) & Solar system exploration \\
+2 & Early Interstellar (2099--2135) & Slower-than-light colonies, organlegging crisis, ARM police \\
+3 & Intermediate (2322--2386) & Organ bank problem easing, medical advances \\
+4 & Man-Kzin Wars (c.2350--2550) & Human-Kzinti conflicts, shared-universe anthologies \\
+5 & Beowulf Shaeffer era (2651+) & Hyperdrive, Puppeteer contact, neutron star exploration \\
+6 & Louis Wu / Ringworld era & Ringworld discovery and exploration \\
+7 & Far Future (to 3122) & Teela gene spreading, ``Safe at Any Speed'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The series was originally conceived as two separate sequences: the Belter stories (2000--2350 CE) featuring fusion-powered and Bussard ramjet ships, and the Neutron Star/Ringworld stories (2651+ CE) featuring faster-than-light hyperdrive. Niven implicitly merged them in the 1966 story ``A Relic of the Empire'' by using Slaver civilization elements from the Belter series as plot devices in the FTL setting. The 300-year gap between the two settings was opened as a shared universe in the late 1980s, filled by the Man-Kzin Wars anthology series.
+
+\subsubsection{Alien Species Catalog}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Species} & \tableheader{Type} & \tableheader{Key Traits} \\
+\midrule
+Kzinti & Aggressive felinoids & Tiger-like warriors; fought multiple unsuccessful wars with humanity; used stolen technology to enhance aggression and render females non-sentient; base-8 number system \\
+Pierson's Puppeteers & Three-legged herbivores & Twin heads used as hands (brain in torso); consider courage a form of insanity; technologically superior; General Products corporation; fleeing the galaxy \\
+Pak & Humanity's ancestors & Three life stages (infant, breeder, protector); tree-of-life virus triggers protector stage; likely Ringworld builders; from galactic core \\
+Kdatlyno & Reptilian sonar-seers & Warrior-poets; enslaved by Kzinti, freed by humanity; perceive via sonar \\
+Grogs & Sessile telepaths & Motionless fur-covered cones; eyeless; communicate telepathically \\
+Outsiders & Information traders & Sell technological secrets (including hyperdrive); follow Starseeds through space \\
+Thrintun (Slavers) & Extinct telepathic tyrants & Ruled galaxy billions of years ago via telepathic mind control; seeded food yeast on colony worlds that may have evolved into current life forms \\
+Chirpsithra & Lobster-like diplomats & Benevolent galactic rulers in Draco Tavern series \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Technologies}
+
+Technologies in Known Space evolve across the timeline: early-era inventions (Bussard ramjets, organ transplantation) give way to later discoveries (hyperdrive, stasis fields, General Products hulls). Each technology has sociological consequences that Niven traces meticulously.
+
+Organlegging: Universal transplant compatibility creates infinite demand for organs; capital punishment expands to supply organ banks; black-market ``organleggers'' murder for parts. The Gil Hamilton ARM detective stories explore this premise.
+
+Transfer booths: Planetary-surface teleportation that produces ``flash crowds''---spontaneous mass gatherings at newsworthy events, anticipating internet-era flash mobs by three decades.
+
+Stasis fields: Bubbles of disconnected spacetime where time effectively stops. Objects in stasis are invulnerable and perfectly reflective, including to neutrinos. Two overlapping stasis fields cancel each other.
+
+Boosterspice: A drug that reverses aging and extends human lifespan indefinitely, creating a society where death is largely elective.
+
+Hyperdrive: Sold to humanity by the Outsiders. Quantum I allows transit at 122 times light speed; Quantum II at 420,480 times light speed.
+
+\subsection{Module 3 Reference: Ringworld \& Megastructures}
+
+\subsubsection{Genesis of the Concept}
+
+Niven described the origin in his official biography: he encountered the Dyson sphere concept around April 1968 and designed what he considered a superior compromise structure. The key insight was that spinning a Dyson sphere would cause the atmosphere and oceans to pool at the equator, so why not remove everything except the equatorial band? The result was a ring encircling a star at approximately 1 AU, spinning fast enough for centrifugal force to simulate gravity on its inner surface.
+
+\subsubsection{Physical Parameters}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Orbital radius & $\sim$1 AU ($\sim$93 million miles / 150 million km) \\
+Circumference & $\sim$600 million miles ($\sim$940 million km) \\
+Width & $\sim$1 million miles ($\sim$1.6 million km) \\
+Surface area & $\sim$3 million $\times$ Earth's surface \\
+Rim speed & $\sim$770 miles/second for 1g centrifugal gravity \\
+Rim walls & Mountain-height walls to contain atmosphere \\
+Day/night cycle & Shadow squares orbiting closer to star \\
+Material & Scrith (fictional material of immense tensile strength) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Stability Problem and Corrections}
+
+A Ringworld is dynamically unstable: any perturbation causes it to drift toward its star. At MIT fandom gatherings, attendees reportedly chanted ``The Ringworld is unstable!'' Niven acknowledged this and addressed it in \textit{The Ringworld Engineers} (1979) by adding attitude jets on the rim, powered by the solar wind, to maintain position. A 2025 paper by Colin McInnes (Monthly Notices of the Royal Astronomical Society) demonstrated that ringworlds could theoretically be stable in binary star systems, where gravitational tug-of-war creates equilibrium points.
+
+\subsubsection{The ``Bigger Than Worlds'' Essay}
+
+Published in Analog (March 1974) and collected in \textit{A Hole in Space} and \textit{Playgrounds of the Mind}, this speculative engineering essay catalogs megastructure concepts consistent with known physics: generation ships, rotating habitats, Dyson spheres, Ringworlds, Alderson disks, and galaxy-scale structures. The essay demonstrates Niven's method of treating science fiction concepts as engineering design problems.
+
+\subsection{Module 4 Reference: Collaborations \& Shared Worlds}
+
+\subsubsection{The Niven-Pournelle Partnership}
+
+Jerry Pournelle (1933--2017) held advanced degrees in psychology, statistics, engineering, and political science. His background in military systems analysis complemented Niven's mathematical imagination. Pournelle once noted that Niven would purchase duplicate computer setups on the theory that redundancy was the best maintenance policy.
+
+Together they produced nine novels and became one of the most commercially successful partnerships in SF history, with multiple New York Times bestsellers.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Title} & \tableheader{Universe} & \tableheader{Type} \\
+\midrule
+1974 & The Mote in God's Eye & CoDominium & First contact \\
+1976 & Inferno & Standalone & Dante adaptation \\
+1977 & Lucifer's Hammer & Standalone & Comet impact \\
+1981 & Oath of Fealty & Standalone & Arcology politics \\
+1985 & Footfall & Standalone & Alien invasion \\
+1987 & The Legacy of Heorot & Heorot (with Barnes) & Colonization \\
+1993 & The Gripping Hand & CoDominium & Mote sequel \\
+1995 & Beowulf's Children & Heorot (with Barnes) & Colony sequel \\
+2000 & The Burning City & Standalone & Fantasy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{The Mote in God's Eye} is widely regarded as one of the finest first-contact novels in the genre. Robert Heinlein called it ``possibly the finest science fiction novel I have ever read.'' Set in Pournelle's CoDominium universe (a future where the US and USSR form a world government), it depicts humanity's encounter with the Moties, an ancient alien species with a catastrophic biological secret: they reproduce uncontrollably and are trapped in an endless cycle of civilization and collapse.
+
+\subsubsection{Other Collaborations}
+
+With Steven Barnes: the Dream Park series (1981+), depicting a futuristic theme park using holographic technology; \textit{The Descent of Anansi} (1982); \textit{Achilles' Choice} (1991); \textit{Saturn's Race} (2000).
+
+With Edward M. Lerner: the Fleet of Worlds series (2007+), extending the Known Space universe with new Puppeteer-focused novels.
+
+With David Gerrold: \textit{The Flying Sorcerers} (1971), a comedic novel filled with portraits of other SF authors encoded as alien names.
+
+\subsubsection{The Man-Kzin Wars Experiment}
+
+In the late 1980s, Niven opened the 300-year gap in the Known Space timeline to other authors, creating one of science fiction's most successful shared-universe experiments. The Man-Kzin Wars anthologies (11+ volumes) fill in the history of human-Kzinti conflict, with contributions from authors including Pournelle, Stirling, Dean Ing, and others. Niven contributed approximately six stories himself but served primarily as the universe's governing authority.
+
+\subsection{Module 5 Reference: Ideas, Laws \& Cultural Legacy}
+
+\subsubsection{Niven's Laws --- Complete 2002 Revision}
+
+Originally presented at conventions, first formally published by Owlswick Press for the Philadelphia Science Fiction Society (Philcon, November 1984), and most recently revised January 29, 2002 (published in Analog, November 2002). Selected key laws:
+
+\begin{itemize}[leftmargin=2em]
+\item Never throw shit at an armed man. (Corollary: Never stand next to someone doing so.) Dated to the 1968 Democratic National Convention.
+\item Never fire a laser at a mirror.
+\item Mother Nature doesn't care if you're having fun.
+\item F $\times$ S = k. The product of Freedom and Security is a constant.
+\item It is easier to destroy than to create.
+\item Ethics change with technology.
+\item There ain't no justice. (TANJ)
+\item The only universal message in science fiction: There exist minds that think as well as you do, but differently.
+\item Niven's Law on time travel: If the universe of discourse permits changing the past, then no time machine will be invented in that universe.
+\end{itemize}
+
+Niven's Laws for Writers (from the 1989 collection \textit{N-Space}): six rules including ``It is a sin to waste the reader's time'' and ``If what you have to say is important and/or difficult to follow, use the simplest language possible.''
+
+\subsubsection{Predictive Fiction Catalog}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concept} & \tableheader{Year} & \tableheader{Real-World Manifestation} \\
+\midrule
+Organlegging & 1967 & Documented black-market organ trafficking in India, China, and elsewhere; Massachusetts 2023 prisoner organ-donation bill \\
+Flash crowds & 1973 & Flash mobs (2003+), social-media-driven protests, Slashdot effect / website overload \\
+Wireheading & 1970s & Behavioral addiction to digital stimulation, social media engagement loops \\
+Transfer booth economics & 1970s & Gig economy disruption, remote work displacing geographic labor markets \\
+Boosterspice / life extension & 1970s & Anti-aging research (senolytics, rapamycin, telomere therapy) \\
+ARM surveillance & 1970s & Mass surveillance infrastructure, predictive policing \\
+Ringworld concept & 1970 & NASA exoplanet terminology, Halo franchise, academic stability papers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cultural Artifacts}
+
+Nevinyrral's Disk in Magic: The Gathering (``Larry Niven'' reversed) references the Warlock's Wheel from \textit{The Magic Goes Away}---an open-ended enchantment that drains all mana from a region. The card destroys all creatures, enchantments, and artifacts in play. The game's mana-from-lands system itself was inspired by Niven's treatment of magic as a depletable resource.
+
+The Halo video game franchise built its setting around ring-shaped megastructures explicitly inspired by Niven's Ringworld, though at a much smaller scale (10,000 km vs. 1 AU diameter).
+
+Niven wrote for Star Trek: The Animated Series, adapting his story ``The Soft Weapon'' as ``The Slaver Weapon,'' introducing the Kzinti to the Star Trek universe. He also wrote for the original Land of the Lost television series and DC Comics' Green Lantern, incorporating hard-SF concepts like universal entropy and redshift into comic book narratives.
+
+\subsubsection{Critical Assessment}
+
+The SFE entry on Niven acknowledges that ``the fresh inventive gaiety characteristic of Niven's early work has not survived the passing of the years'' and that ``the political agendas exposed in the collaborations have become more rancorous over the same period.'' The entry concludes Niven will be remembered for ``the Tales of Known Space, the most energetic Future History ever written, for his bright and profligate technophilia, for his astonishingly well conceived aliens, and for his early joy.''
+
+Contemporary critical reassessment notes persistent issues with gender representation, ethnic stereotyping (particularly in the collaborations), and an increasingly conservative political stance that sometimes overwhelms the fiction. The 2008 DHS consulting incident---where Niven suggested spreading organ-harvesting rumors in Latino communities to reduce hospital costs---drew significant criticism. These dimensions coexist with the enduring technical brilliance, the prophetic social extrapolation, and the sheer imaginative scale that makes Niven's best work indispensable to the genre.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Gender representation & ANNOTATE & Document historical context and critical reception without excusing or dismissing \\
+Ethnic stereotyping & ANNOTATE & Note specific instances identified by critics; present evidence-based assessment \\
+Political advocacy & ANNOTATE & Distinguish between fiction-embedded politics and public policy statements \\
+DHS consulting remarks & ANNOTATE & Document factually with source attribution; note public criticism \\
+Living author & GATE & Ensure all biographical claims sourced to professional references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Author Archives \& Professional Organizations}
+
+\begin{itemize}[leftmargin=2em]
+\item larryniven.net --- Official author website and biography archive
+\item Science Fiction and Fantasy Writers of America (SFWA) --- Grand Master Award records
+\item Hugo Awards / World Science Fiction Society --- Award archives
+\item Nebula Awards / SFWA --- Award archives
+\item Internet Speculative Fiction Database (ISFDB) --- Professional bibliography
+\end{itemize}
+
+\subsubsection{Scholarly \& Reference Works}
+
+\begin{itemize}[leftmargin=2em]
+\item Clute, John and Nicholls, Peter (eds). \textit{The Encyclopedia of Science Fiction}. Gollancz/Orion, online at sf-encyclopedia.com. Entry: ``Niven, Larry.''
+\item McInnes, Colin R. ``Ringworlds and Dyson spheres can be stable.'' \textit{Monthly Notices of the Royal Astronomical Society}, 2025. DOI: 10.1093/mnras/staf028
+\item Niven, Larry and Pournelle, Jerry. ``Building `The Mote in God's Eye'.'' \textit{Galaxy Magazine}, January 1976. Reprinted in Pournelle, \textit{A Step Farther Out}.
+\item Niven, Larry. ``Bigger Than Worlds.'' \textit{Analog}, March 1974. Reprinted in \textit{A Hole in Space} and \textit{Playgrounds of the Mind}.
+\item Niven, Larry. ``Niven's Laws.'' \textit{Analog Science Fiction and Fact}, November 2002.
+\end{itemize}
+
+\subsubsection{Secondary Professional Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Space.com --- Megastructure and exoplanet coverage with Niven interview
+\item The Engineer (UK) --- ``Sci Fi Eye: Thinking Big'' (Gareth L. Powell, January 2023)
+\item ABC News / USA Today --- Niven predictive fiction coverage (2009)
+\item Reactor Magazine (formerly Tor.com) --- Critical retrospective on Mote novels (2024)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+%  STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Larry Niven: biography, universe analysis, megastructure engineering, collaborative methodology, philosophical laws, and cultural legacy. The document must be self-contained, professionally sourced, and structured for both human reading and GSD agent consumption.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0          WAVE 1             WAVE 2        WAVE 3
+  Foundation      Parallel Research  Synthesis      Publication
+  [Sequential]    [2 Parallel Tracks][Sequential]   [Sequential]
+       |               |    |             |              |
+  +--------+    +------+    +------+  +--------+  +---------+
+  |Schemas |    |Track |    |Track |  |Cross-  |  |Assembly |
+  |Timeline|    |  A   |    |  B   |  |Module  |  |Verify   |
+  |BibIndex|--->|Bio & |--->|Known |-+|Integr- |-+|Test     |
+  |Template|    |Career|    |Space | ||ation   | ||Execute  |
+  +--------+    |Collab|    |Ring  | |+--------+ |+---------+
+                +------+    |Ideas | |           |
+                            +------+ |           |
+                                     |           |
+                               5-min cache    Final
+                               exploitation  assembly
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer:} Shared bibliography index, timeline scaffold, species/technology schemas
+\item \textbf{Research Layer:} Five parallel-capable module surveys compiled from Stage 2 sources
+\item \textbf{Synthesis Layer:} Cross-module thematic analysis, timeline reconciliation, critical integration
+\item \textbf{Publication Layer:} Final document assembly, formatting, verification, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Spec} \\
+\midrule
+1 & Timeline scaffold & All 7 eras mapped with date ranges and key works & W0-TIMELINE \\
+2 & Biography chapter & Birth through Grand Master, all milestones sourced & W1-BIO \\
+3 & Known Space survey & Species, technologies, timeline with internal consistency & W1-KNOWN \\
+4 & Ringworld analysis & Quantitative parameters, stability discussion, influence & W1-RING \\
+5 & Collaboration catalog & All major partnerships with creative methodology & W1-COLLAB \\
+6 & Ideas \& Legacy chapter & Laws, predictions, cultural artifacts, critical assessment & W1-IDEAS \\
+7 & Synthesis chapter & 6+ cross-module thematic connections & W2-SYNTH \\
+8 & Final document & Compiled, formatted, verified, all tests passing & W3-FINAL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-SCHEMAS & None & Haiku & 3K \\
+W0-TIMELINE & None & Haiku & 4K \\
+W0-BIBINDEX & None & Haiku & 3K \\
+W1-BIO & W0-* & Sonnet & 12K \\
+W1-KNOWN & W0-* & Sonnet & 15K \\
+W1-RING & W0-* & Opus & 10K \\
+W1-COLLAB & W0-* & Sonnet & 10K \\
+W1-IDEAS & W0-* & Opus & 12K \\
+W2-SYNTH & W1-* & Opus & 15K \\
+W3-ASSEMBLE & W2-SYNTH & Sonnet & 8K \\
+W3-VERIFY & W3-ASSEMBLE & Sonnet & 5K \\
+W3-TEST & W3-VERIFY & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Ringworld physics analysis, Ideas/Legacy critical assessment, cross-module synthesis --- all require judgment and nuanced integration \\
+Sonnet & 60\% & Biography assembly, Known Space survey, collaboration catalog, document assembly, verification --- structured content production \\
+Haiku & 10\% & Schemas, timeline scaffold, bibliography template --- lightweight scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Components} & \tableheader{Parallel} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & 3 & No & 1 \\
+1 & Research & 5 & 2 tracks & 8 \\
+2 & Synthesis & 1 & No & 3 \\
+3 & Publication & 3 & No & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W0-SCHEMAS & Haiku & 3K & JSON schemas for species, technology, timeline entries \\
+W0-TIMELINE & Haiku & 4K & Seven-era timeline scaffold with date ranges \\
+W0-BIBINDEX & Haiku & 3K & Source index template with categories \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A:} Biography \& Collaborations
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W1-BIO & Sonnet & 12K & Complete biography chapter \\
+W1-COLLAB & Sonnet & 10K & Collaboration catalog with methodology analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:} Universe Analysis \& Ideas
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W1-KNOWN & Sonnet & 15K & Known Space survey (species, tech, timeline) \\
+W1-RING & Opus & 10K & Ringworld analysis with physics parameters \\
+W1-IDEAS & Opus & 12K & Laws, predictions, cultural legacy, critical assessment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W2-SYNTH & Opus & 15K & Cross-module thematic analysis, 6+ connections, timeline reconciliation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication \& Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W3-ASSEMBLE & Sonnet & 8K & Final document compilation and formatting \\
+W3-VERIFY & Sonnet & 5K & Source validation, cross-reference check \\
+W3-TEST & Sonnet & 4K & Execute test plan, generate verification matrix \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs cached as shared context for all Wave 1 components (5-minute TTL window)
+\item Track A and Track B in Wave 1 execute in parallel with no cross-track dependencies
+\item W1-RING and W1-IDEAS both assigned to Opus; schedule sequentially within Track B to avoid Opus contention
+\item Wave 2 synthesis loads all Wave 1 outputs; schedule immediately after Wave 1 completion to exploit cache
+\item Wave 3 components are strictly sequential: assemble $\rightarrow$ verify $\rightarrow$ test
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & --- & --- & 10K \\
+Wave 1 & 22K & 37K & --- \\
+Wave 2 & 15K & --- & --- \\
+Wave 3 & --- & 17K & --- \\
+\midrule
+\textbf{Total} & \textbf{37K} & \textbf{54K} & \textbf{10K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$101K tokens across $\sim$14 context windows in $\sim$4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0-SCHEMAS ──┐
+  W0-TIMELINE ─┼──> W1-BIO ────────┐
+  W0-BIBINDEX ─┘    W1-COLLAB ─────┤
+                    W1-KNOWN ──────┤──> W2-SYNTH ──> W3-ASSEMBLE
+                    W1-RING ───────┤                    |
+                    W1-IDEAS ──────┘               W3-VERIFY
+                                                       |
+                                                   W3-TEST
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to professional organizations, author archives, peer-reviewed journals, or award-granting bodies. Zero entertainment blogs as primary sources. \\
+SC-NUM & Numerical attribution & Every date, award count, physical parameter, or publication statistic attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents evidence and findings without advocating for political positions \\
+SC-LIV & Living author accuracy & All biographical claims about Niven verified against professional reference sources \\
+SC-BAL & Critical balance & Both strengths and documented weaknesses addressed with evidence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Biography completeness & All major life phases covered (birth through Grand Master) \\
+CF-02 & Award catalog & All 5 Hugos, 1 Nebula, Grand Master documented with years \\
+CF-03 & Timeline 7 eras & All seven Known Space eras mapped with date ranges \\
+CF-04 & Species catalog & $\geq$8 alien species individually profiled \\
+CF-05 & Technology catalog & $\geq$6 Key Known Space technologies documented with implications \\
+CF-06 & Ringworld parameters & Physical dimensions with quantitative values and units \\
+CF-07 & Stability discussion & MIT chant, Ringworld Engineers fix, 2025 McInnes paper cited \\
+CF-08 & Pournelle novels & All 9 co-authored novels cataloged with universe and type \\
+CF-09 & Other collaborators & Barnes, Lerner, Gerrold partnerships documented \\
+CF-10 & Man-Kzin Wars & Shared-universe experiment documented \\
+CF-11 & Niven's Laws & Complete 2002 revision presented with evolution history \\
+CF-12 & Predictive fiction & $\geq$5 concepts with real-world manifestation evidence \\
+CF-13 & Cultural artifacts & Nevinyrral's Disk, Halo, Star Trek contributions documented \\
+CF-14 & Critical assessment & SFE evaluation and contemporary reassessment included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Bio $\rightarrow$ Known Space & Career milestones align with Known Space publication dates \\
+IN-02 & Known Space $\rightarrow$ Ringworld & Ringworld series correctly placed in Known Space timeline \\
+IN-03 & Bio $\rightarrow$ Collaborations & Pournelle partnership dates consistent with biography timeline \\
+IN-04 & Ideas $\rightarrow$ Known Space & Predictive fiction concepts traced to specific Known Space stories \\
+IN-05 & Cross-module consistency & No contradictions in dates, names, or facts between modules \\
+IN-06 & Document self-containment & Reader with no prior Niven knowledge can follow complete narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Data gaps acknowledged & Areas of incomplete knowledge identified (e.g., recent output) \\
+EC-02 & Temporal currency & Most recent sources cited where available (2024--2026) \\
+EC-03 & Disputed claims handled & Contested assertions flagged with uncertainty language \\
+EC-04 & Known Space continuity & Niven's own admission that continuity is approximate noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Biography covers all major life phases & CF-01, SC-LIV & Pending \\
+2. Known Space timeline all 7 eras & CF-03, IN-02 & Pending \\
+3. $\geq$8 alien species profiled & CF-04 & Pending \\
+4. Ringworld quantitative parameters & CF-06, SC-NUM & Pending \\
+5. All 9 Niven-Pournelle novels cataloged & CF-08, IN-03 & Pending \\
+6. Niven's Laws complete 2002 revision & CF-11 & Pending \\
+7. $\geq$5 predictive-fiction concepts & CF-12, IN-04 & Pending \\
+8. $\geq$12 professional sources cited & SC-SRC & Pending \\
+9. Critical assessment addresses both dimensions & CF-14, SC-BAL & Pending \\
+10. $\geq$6 cross-module connections & IN-01--06 & Pending \\
+11. Timeline consistency & IN-05, EC-04 & Pending \\
+12. Self-contained document & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC-A & Executor (Track A) & Biography \& collaboration chapters \\
+EXEC-B & Executor (Track B) & Known Space, Ringworld, Ideas chapters \\
+CRAFT-LIT & Literary Specialist & Narrative analysis, critical assessment, thematic connections \\
+CRAFT-PHYS & Physics Specialist & Ringworld engineering, megastructure analysis \\
+VERIFY & Verification & Source validation; fact-checking; date consistency \\
+INTEG & Integration Agent & Cross-module reconciliation; timeline alignment \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Activation Profile:} Squadron (12 roles, 5 modules, literary/science domain)
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research Modules & 5 \\
+Activation Profile & Squadron \\
+Crew Size & 12 roles \\
+Parallel Tracks & 2 \\
+Waves & 4 (0--3) \\
+Context Windows & $\sim$14 \\
+Sessions & $\sim$4 \\
+Total Token Budget & $\sim$101K \\
+Opus Allocation & 37K (37\%) \\
+Sonnet Allocation & 54K (53\%) \\
+Haiku Allocation & 10K (10\%) \\
+Safety-Critical Tests & 5 (mandatory-pass) \\
+Total Tests & 29 \\
+Success Criteria & 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The dinosaurs became extinct because they didn't have a space program. And if we become extinct because we don't have a space program, it'll serve us right!''}
+
+\vspace{0.5em}
+\hfill --- Larry Niven
+
+\vspace{1em}
+Niven built universes the way an engineer builds bridges: with mathematics, with physics, with an obsessive attention to what happens when the load shifts. The spaces between his technologies---where transplant capability meets legislative corruption, where instantaneous travel meets mob psychology, where a rotating ring meets gravitational instability---are where his stories live. This mission seeks to map those spaces with the same rigor Niven brought to creating them.
+\end{quotebox}
+
+\end{document}
