@@ -297,8 +297,10 @@ describe('EmbeddingCache', () => {
       // No entries should be stale with 1 hour max age
       expect(cache.getStaleEntries(60 * 60 * 1000)).toHaveLength(0);
 
-      // All entries should be stale with 0ms max age
-      expect(cache.getStaleEntries(0)).toHaveLength(1);
+      // All entries should be stale with a generous max age of 1ms
+      // (using 0 causes race conditions in fast CI environments)
+      await new Promise(r => setTimeout(r, 5));
+      expect(cache.getStaleEntries(1)).toHaveLength(1);
     });
   });
 
