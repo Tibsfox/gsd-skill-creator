@@ -1,0 +1,45 @@
+/* ACC — Accounting
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --primary: #1A237E;
+  --secondary: #283593;
+  --tertiary: #1565C0;
+  --accent: #42A5F5;
+  --cream: #f5f6fa;
+  --mist: #e3e6f0;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+  border-bottom: 4px solid var(--accent);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(40, 53, 147, 0.05); }
+tr:hover { background: rgba(40, 53, 147, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(40, 53, 147, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1f2e; color: #a8d8ea; }
+.stat-value { color: var(--primary); }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

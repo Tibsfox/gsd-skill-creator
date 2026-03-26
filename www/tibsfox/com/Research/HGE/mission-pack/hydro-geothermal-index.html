@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Power Beneath and the Water Above — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0D47A1;
+    --secondary: #E65100;
+    --tertiary: #3E2723;
+    --accent: #1565C0;
+    --light-primary: #E3F2FD;
+    --light-secondary: #FFF3E0;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1565C0 40%, var(--secondary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; opacity: 0.8; }
+  .header h1 { font-size: 2.2rem; margin: 0.8rem 0 0.4rem; }
+  .header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1rem; opacity: 0.9; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--primary);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 0.3rem; }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  .card.geo { border-left-color: var(--secondary); }
+  .card.geo h3 { color: var(--secondary); }
+  h2.section { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.1rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  .contents { font-size: 0.9rem; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); margin: 0.8rem 0 0.3rem; }
+  .contents .stage.s2 { color: var(--secondary); }
+  .contents .stage.s3 { color: var(--tertiary); }
+  .contents ul { list-style: none; padding-left: 1.2rem; }
+  .contents li { padding: 0.15rem 0; }
+  .contents li::before { content: "—"; color: var(--subtle); margin-right: 0.5rem; }
+  .instructions { background: var(--light-primary); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; font-size: 0.88rem; }
+  .instructions ol { padding-left: 1.2rem; }
+  .instructions li { margin: 0.4rem 0; }
+  .instructions code { background: white; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.82rem; }
+  .quote { background: var(--light-secondary); border-left: 4px solid var(--secondary); padding: 1rem 1.5rem; margin: 2rem 0; font-style: italic; font-size: 0.92rem; border-radius: 0 6px 6px 0; }
+  .meta { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--subtle); text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #E0E0E0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>The Power Beneath and the Water Above</h1>
+  <h2>Hydroelectric & Geothermal Energy for the Fox Infrastructure Corridor</h2>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <h3>Mission PDF</h3>
+      <p>27-page research mission package — Vision → Research → Mission pipeline. Ready for GSD orchestrator.</p>
+    </a>
+    <a class="card geo" href="mission.tex" download>
+      <h3>LaTeX Source</h3>
+      <p>Complete .tex source file. Recompile with XeLaTeX (3 passes) to regenerate or modify.</p>
+    </a>
+  </div>
+
+  <h2 class="section">Contents</h2>
+  <div class="contents">
+    <div class="stage">Stage 1 — Vision Document</div>
+    <ul>
+      <li>Vision narrative: hydro+geo energy portfolio under tribal sovereignty</li>
+      <li>Problem statement (5 core problems)</li>
+      <li>Energy domain map and module architecture (ASCII diagrams)</li>
+      <li>Six research modules: Hydro Systems, Geothermal Frontier, Tribal Sovereignty, Grid Integration, Data Center Power, Funding & Regulatory</li>
+      <li>Chipset configuration (Opus 30% / Sonnet 60% / Haiku 10%)</li>
+      <li>Scope boundaries, 12 success criteria, through-line</li>
+    </ul>
+
+    <div class="stage s2">Stage 2 — Research Reference</div>
+    <ul>
+      <li>M1: Columbia Basin hydro — 40,570 MW capacity, Grand Coulee 6,809 MW, BPA operations, climate impacts, salmon constraints</li>
+      <li>M2: Geothermal frontier — EGS technology (Fervo Cape Station), PNW Cascade resources, DOE projections to 90 GW by 2050</li>
+      <li>M3: Tribal sovereignty — Colville Settlement Act ($53M + $15.25M/yr), Spokane Compensation Act, pathway to operational control</li>
+      <li>M4: Grid integration — Hydro flexibility + geothermal baseload complementarity</li>
+      <li>M5: Data center power — AI demand growth, Electric City site advantages ($0.02/kWh)</li>
+      <li>M6: Funding — IIJA, IRA, DOE Indian Energy, EPA Brownfields, BLM geothermal exclusions</li>
+      <li>Safety & sensitivity matrix, complete source bibliography</li>
+    </ul>
+
+    <div class="stage s3">Stage 3 — Mission Package</div>
+    <ul>
+      <li>Squadron activation (12 roles) with CRAFT-HYDRO and CRAFT-GEO specialists</li>
+      <li>4-wave execution: Foundation → Parallel Research → Synthesis → Publication</li>
+      <li>8 deliverables with acceptance criteria</li>
+      <li>31 tests (7 safety-critical, 14 core, 6 integration, 4 edge case)</li>
+      <li>~97,000 token budget across 18–22 context windows</li>
+    </ul>
+  </div>
+
+  <h2 class="section">Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Hand the <code>mission.pdf</code> to the GSD skill-creator orchestrator as the mission brief</li>
+      <li>The orchestrator reads all three stages and initializes the Squadron crew manifest</li>
+      <li>Wave 0 (Foundation) executes first — schemas and source index</li>
+      <li>Wave 1 runs two parallel tracks: Track A (Hydro + Tribal) and Track B (Geothermal + Regulatory)</li>
+      <li>Wave 2 synthesizes: Grid Integration depends on both M1 and M2 outputs</li>
+      <li>Wave 3 verifies all sources and produces the final formatted publication</li>
+      <li>CAPCOM checkpoints at each wave boundary for human go/no-go</li>
+    </ol>
+  </div>
+
+  <h2 class="section">Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu)</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page counts</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "The heat beneath and the water above have always been there. This mission maps the engineering, economics, and governance that connect them — not as competing resources, but as complementary halves of a clean energy architecture built on tribal sovereignty and the Amiga Principle."
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem · Fox Infrastructure Group · March 25, 2026<br>
+    Vision → Research → Mission Pipeline
+  </div>
+
+</div>
+</body>
+</html>

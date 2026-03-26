@@ -1,0 +1,1010 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology domain: Steel / Electric / Graphite
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Computational Mesh}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Computational Mesh -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Computational Mesh}}
+
+\vspace{0.4cm}
+{\fontsize{18}{22}\selectfont\sffamily\textcolor{secondary}{High-Speed Networks, Parallel Processing,\\[0.2em]and the Linear Algebra of Machine Intelligence}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{tertiary}{From Ethernet Frames to Exascale Flops}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{accent}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026\quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet\quad|\quad Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Computational Mesh --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Amiga Vision, Chipset Architecture Vision, GSD Mesh Prototype Spec}
+\metafield{Context:}{The hardware substrate that connects compute to mathematics---understanding the full stack from photons on fiber to floating-point operations on silicon, and why the architecture of connection determines the architecture of intelligence.}
+
+\subsection{Vision}
+
+Every computation that matters---every gradient descent step, every fluid dynamics timestep, every climate simulation frame---ultimately reduces to two things: moving numbers and multiplying matrices. The entire edifice of modern high-performance computing is an elaborate, multi-billion-dollar answer to one question: \emph{how do we move the right numbers to the right multipliers at the right time?}
+
+This is the question the Amiga answered in 1985 with DMA channels and copper lists. It is the question InfiniBand answers with RDMA verbs and adaptive routing. It is the question NVIDIA answers with tensor cores and NVLink. And it is the question the GSD ecosystem must answer as it plans a mesh cluster that turns commodity white-box hardware into a coherent computational instrument.
+
+The computational mesh is not merely a network---it is the space between the processors, and meaning lives in that space. A 1.8 exaflop supercomputer with a slow interconnect is just a warehouse of idle silicon. A modest cluster with the right topology, the right communication primitives, and the right mathematical decomposition can punch far above its weight. This is the Amiga Principle applied to infrastructure: architectural leverage over raw power.
+
+This research mission maps the full vertical stack---from IEEE 802.3 Ethernet standards to BLAS Level 3 GEMM kernels---not as isolated technologies but as a single integrated system where each layer's design decisions constrain and enable every other layer. The goal is to produce a knowledge pack that gives the GSD ecosystem (and its builder) the deep understanding needed to make principled infrastructure decisions for the planned 10-node mesh cluster and beyond.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The Speed-of-Light Wall.} Network bandwidth has scaled from 10 Gbps to 800 Gbps in two decades, with 1.6 Tbps arriving in 2026, but latency remains stubbornly bounded by physics---speed of light in fiber, serialization delay, switch hop counts. Understanding where bandwidth helps and where latency dominates is essential for topology selection.
+
+\item \textbf{The Topology Decision Space.} Fat-tree, dragonfly, torus, mesh, HyperX---each topology makes different trade-offs between cost, latency, bisection bandwidth, and fault tolerance. No single topology is optimal for all workloads. The GSD cluster needs a topology rationale grounded in the actual communication patterns of its target workloads.
+
+\item \textbf{The Communication Primitive Gap.} MPI, NCCL, RDMA, Gloo---the distributed computing ecosystem offers multiple communication libraries optimized for different hardware and workload profiles. Choosing incorrectly can leave 50\% or more of available bandwidth unused. The relationship between collective operations and mathematical kernels must be understood to select correctly.
+
+\item \textbf{The Hardware-Software Co-Design Challenge.} Modern matrix multiplication runs on tensor cores executing 256$\times$256$\times$16 fused multiply-accumulate operations, but these hardware units are useless without software that tiles, pipelines, and schedules data movement to keep them fed. The gap between peak FLOPS and achieved FLOPS is a direct measure of architectural understanding.
+
+\item \textbf{The Exascale Convergence.} AI training and traditional HPC simulation are converging on the same hardware, the same interconnects, and the same mathematical kernels. The GSD ecosystem must understand this convergence to position its infrastructure correctly---neither over-building for current needs nor under-building for future workloads.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The computational mesh is a hierarchical pipeline where photons become packets become messages become matrix tiles become floating-point results---and the architecture of each transformation layer determines the throughput of every layer above it.
+\end{quotebox}
+
+Understanding this pipeline end-to-end---from physical layer signaling (PAM4, coherent optics) through network topology (dragonfly, fat-tree) through communication primitives (RDMA, collective operations) through mathematical kernels (BLAS GEMM, tensor core MMA instructions)---is what separates systems that achieve 80\% of peak from systems that achieve 15\%.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+THE COMPUTATIONAL MESH --- VERTICAL STACK
+
+Layer 6: MATHEMATICS
+  Linear algebra kernels (BLAS/LAPACK/ScaLAPACK)
+  Matrix decomposition, eigensolvers, FFT
+  +---------------------------------------------------------+
+Layer 5: HARDWARE EXECUTION
+  Vector processors, SIMD/SIMT, tensor cores
+  Systolic arrays, mixed-precision FMA
+  +---------------------------------------------------------+
+Layer 4: COMMUNICATION PRIMITIVES
+  MPI collectives, NCCL, RDMA verbs, Gloo
+  AllReduce, AllGather, ReduceScatter, Send/Recv
+  +---------------------------------------------------------+
+Layer 3: INTERCONNECT TOPOLOGY
+  Fat-tree, dragonfly(+), torus, mesh, HyperX
+  Routing algorithms, adaptive vs. static
+  +---------------------------------------------------------+
+Layer 2: LINK LAYER + TRANSPORT
+  InfiniBand, Slingshot, Ultra Ethernet, RoCE
+  Lossless fabric, congestion control, QoS
+  +---------------------------------------------------------+
+Layer 1: PHYSICAL LAYER
+  800GbE/1.6TbE standards, PAM4, coherent optics
+  SerDes, FEC, signal integrity, power/thermal
+  +---------------------------------------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY MAP
+
+  +-------------------+     +-------------------+
+  | M1: High-Speed    |     | M2: Interconnect  |
+  | Network Standards |---->| Topologies        |
+  | (Physical/Link)   |     | (Fat-tree/Dragon) |
+  +-------------------+     +-------------------+
+          |                         |
+          v                         v
+  +-------------------+     +-------------------+
+  | M3: Parallel      |<----| M4: Vector/Matrix |
+  | Processing        |     | Processing HW     |
+  | (MPI/NCCL/RDMA)   |     | (Tensor/Systolic) |
+  +-------------------+     +-------------------+
+          |                         |
+          v                         v
+  +-------------------+     +-------------------+
+  | M5: Linear Alg.   |---->| M6: Exascale      |
+  | Foundations        |     | Convergence       |
+  | (BLAS/LAPACK)      |     | (Top500/AI+HPC)   |
+  +-------------------+     +-------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: High-Speed Network Standards}
+The physical and link layer foundations. IEEE 802.3df (800GbE), IEEE 802.3dj (1.6TbE), PAM4 signaling, coherent optics (400ZR/800ZR), SerDes evolution from 56G to 200G per lane, Forward Error Correction architectures, Linear Pluggable Optics, and the power-bandwidth trade-off that constrains everything above. Source organizations: IEEE 802.3, Ethernet Alliance, Ethernet Technology Consortium, Optical Internetworking Forum.
+
+\subsubsection{Module 2: Interconnect Topologies}
+Network topology design for HPC and AI clusters. Fat-tree (Clos) networks with full bisection bandwidth, dragonfly and dragonfly+ topologies with their cost-diameter trade-offs, k-ary n-cube torus/mesh topologies, HyperX and Slim Fly alternatives, and the routing algorithms (D-mod-k, adaptive, minimal/non-minimal) that determine realized performance. Source organizations: IEEE, ACM SIGARCH, HPE/Cray (Slingshot), NVIDIA (InfiniBand), published research.
+
+\subsubsection{Module 3: Parallel Processing Paradigms}
+Communication libraries and programming models for distributed computation. MPI (point-to-point and collective operations), NCCL (GPU-optimized collectives), RDMA (one-sided and two-sided), Gloo, and the emerging GPU-Initiated Networking (GIN) model. Ring vs. tree algorithms, protocol selection (LL/LL128/Simple), topology-aware algorithm selection, and the Bruck algorithm for all-to-all patterns. Source organizations: MPI Forum, NVIDIA, Meta/Facebook, published research.
+
+\subsubsection{Module 4: Vector and Matrix Processing Hardware}
+Hardware architectures for parallel numerical computation. Classical vector processors (Cray, NEC), modern SIMD/SIMT (AVX-512, CUDA cores), tensor cores (Volta through Blackwell---4$\times$4 to 256$\times$256 MMA), Google TPU systolic arrays, AMD CDNA matrix cores, and the emerging mixed-precision landscape (FP64/FP32/FP16/BF16/TF32/FP8/INT8/INT4). Source organizations: NVIDIA, AMD, Google, Intel, IEEE, published research.
+
+\subsubsection{Module 5: Linear Algebra Computational Foundations}
+The mathematical kernels that consume the hardware. BLAS Levels 1--3 (vector, matrix-vector, matrix-matrix operations), LAPACK (factorizations, eigensolvers, SVD), ScaLAPACK (distributed dense linear algebra), optimized implementations (MKL, cuBLAS, AOCL-BLAS, OpenBLAS, BLIS), tiling strategies for cache hierarchy exploitation, and communication-avoiding algorithms that minimize data movement. Source organizations: Netlib, TACC, NVIDIA, AMD, Intel, University of Texas FLAME project.
+
+\subsubsection{Module 6: The Exascale Convergence}
+Where it all comes together. The TOP500 landscape (four exascale systems as of November 2025), the Slingshot vs. InfiniBand vs. Ultra Ethernet interconnect competition, AI/HPC workload convergence, mixed-precision benchmarking (HPL-MxP), energy efficiency (Green500), and the architectural lessons from El Capitan, Frontier, Aurora, and JUPITER. Source organizations: TOP500, DOE national laboratories, EuroHPC, Ultra Ethernet Consortium.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: "computational-mesh"
+  domain: "technology/infrastructure"
+  activation: "fleet"
+  model_allocation:
+    opus: 30    # Synthesis, cross-module integration
+    sonnet: 60  # Survey compilation, technical analysis
+    haiku: 10   # Schemas, templates, scaffolding
+
+  agents:
+    CRAFT-NET: "Network standards and topology specialist"
+    CRAFT-HPC: "HPC architecture and parallel processing"
+    CRAFT-ALG: "Linear algebra and numerical methods"
+
+  context_budget:
+    per_component: "4000-6000 tokens"
+    overhead: "15%"
+    total_estimate: "85,000-110,000 tokens"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Wired high-speed networking (800GbE and above), data center and HPC interconnects
+\item Cluster-scale topologies (tens to thousands of nodes), both direct and indirect
+\item GPU-centric and CPU-centric parallel processing with emphasis on dense linear algebra
+\item BLAS/LAPACK ecosystem and hardware-accelerated matrix operations
+\item Current TOP500 systems and their architectural lessons
+\item Relevance to GSD planned 10-node mesh cluster architecture
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Wireless mesh networks, IoT mesh, LoRa, Zigbee
+\item Sparse linear algebra and graph processing (separate future mission)
+\item Quantum computing interconnects
+\item Detailed vendor pricing and procurement
+\item Cloud provider internal network architectures (proprietary)
+\item Programming tutorials (this is architecture reference, not how-to)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Ethernet standards evolution from 400GbE through 1.6TbE documented with IEEE task force references and timeline
+\item At least four HPC interconnect topologies analyzed with quantitative trade-offs (diameter, bisection bandwidth, cost per port)
+\item Communication libraries (MPI, NCCL, RDMA) compared across latency, bandwidth, and workload suitability with published benchmarks cited
+\item Vector processor evolution from Cray-1 through Blackwell tensor cores traced with architectural specifications at each generation
+\item BLAS hierarchy (Level 1--3) explained with computational intensity analysis and cache behavior
+\item At least three TOP500 exascale systems profiled with interconnect, processor, and benchmark data from official sources
+\item Mixed-precision computation landscape mapped across hardware generations with precision format specifications
+\item Cross-module integration demonstrated: network topology choices traced to their impact on collective communication performance on matrix operations
+\item All quantitative claims attributed to IEEE standards, TOP500 data, vendor specifications, or peer-reviewed publications
+\item GSD cluster relevance section connects research findings to 10-node mesh architecture decisions
+\item Power and thermal considerations addressed for high-speed networking and GPU compute
+\item Ultra Ethernet Consortium specification and roadmap documented with member organization context
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Mesh Prototype Spec & Hardware decisions informed by topology and interconnect research & Feeds into \\
+Amiga Vision & Architectural leverage principle applied to network and compute design & Draws from \\
+Chipset Architecture & Agent topology parallels network topology; model allocation parallels compute allocation & Bidirectional \\
+Local Cloud Provisioning & VM networking, virtual switches informed by physical network understanding & Feeds into \\
+Fox Infrastructure Group & PNW mesh network planning informed by topology and standards research & Feeds into \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's custom chips weren't just fast---they were \emph{architecturally correct}. Agnus didn't try to be a general-purpose processor; it was a DMA controller that moved data with zero CPU involvement. Denise didn't try to compute physics; it rendered bitplanes from pre-arranged copper lists. Each chip did one thing brilliantly, and the system bus connected them so the whole was greater than the sum of its parts.
+
+The computational mesh is the same principle at datacenter scale. The 800GbE PHY doesn't try to route packets---it converts electrical signals to optical signals with minimal latency. The dragonfly topology doesn't try to provide full bisection bandwidth---it minimizes expensive long-range links while maintaining low diameter. The NCCL ring algorithm doesn't try to be a general-purpose message passing system---it optimizes AllReduce for GPU memory hierarchies. The tensor core doesn't try to be a general-purpose ALU---it executes matrix multiply-accumulate at a rate that would require thousands of scalar operations.
+
+The space between these components---the interfaces, the protocols, the mathematical abstractions that let Layer 6 express intent and Layer 1 execute it---that's where the architecture lives. That's where the GSD ecosystem needs to be fluent. Not to build a supercomputer, but to understand the design language well enough to make the right choices for a 10-node cluster that embodies the same principles at a different scale. Because the Amiga Principle doesn't change with scale. It only changes in expression.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Computational Mesh --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authoritative sources across six research modules. Each module section contains technical findings, quantitative data, and source attributions. Key source organizations include: IEEE 802.3 Working Group, Ethernet Alliance, Ethernet Technology Consortium, TOP500 Organization, NVIDIA Corporation, AMD, Intel, HPE/Cray, Ultra Ethernet Consortium, DOE National Laboratories, Netlib (BLAS/LAPACK), MPI Forum, ACM SIGARCH, and peer-reviewed publications from SC (Supercomputing), ISCA, and HPCA conferences.
+
+\subsection{Module 1: High-Speed Network Standards}
+
+\subsubsection{The 800GbE Standard}
+
+The IEEE P802.3df Task Force released version 1.0 of the 800GbE specification on February 16, 2024, completing a multi-year standardization effort. The 800GBASE-R specification defines a new MAC operating at 800 Gbps using eight 106.25 Gbps physical lanes, built upon two sets of modified 400GbE PCS (Physical Coding Sublayer) logic with 32 virtual lanes at 25 Gbps each. The design reuses RS(544,514) forward error correction from the 400GbE standard, providing backward compatibility while doubling throughput.
+
+Key physical medium dependent (PMD) specifications include 800G-DR8 (eight parallel 100G single-mode fibers, 500m reach), 800G-SR8 (eight parallel 100G multimode fibers, 50--100m), and 800G-FR4/DR4 variants using 200G-per-lane PAM4 signaling for reduced fiber count. Coherent optics extensions (800ZR) target 80--120km reaches for data center interconnect applications.
+
+\subsubsection{The Road to 1.6 Terabit Ethernet}
+
+The IEEE P802.3dj Task Force, formed from the 802.3df work, targets 200G-per-lane electrical and optical signaling to enable 1.6 Tbps Ethernet. Completion is projected for July 2026. Industry leaders were trialing 1.6T systems by late 2025, with the Ethernet Alliance roadmap projecting 3.2 Tbps by approximately 2028. The transition from 100G-per-lane (current 800GbE) to 200G-per-lane (1.6TbE) represents a fundamental SerDes generation change.
+
+\subsubsection{PAM4 Signaling and Signal Integrity}
+
+PAM4 (Pulse Amplitude Modulation, 4-level) doubles the bit rate per baud compared to NRZ (Non-Return-to-Zero) by encoding 2 bits per symbol across four voltage levels. A lane running at 26.56 Gbaud delivers approximately 50 Gbps with PAM4 versus 25 Gbps with NRZ. The trade-off is reduced signal-to-noise ratio due to smaller voltage separation between levels, requiring robust FEC and equalization. At 106+ Gbaud rates needed for 200G-per-lane, signal integrity challenges include crosstalk, insertion loss, and power consumption.
+
+\subsubsection{Ultra Ethernet Consortium}
+
+The Ultra Ethernet Consortium (UEC), comprising AMD, Arista, Broadcom, Cisco, HPE, Intel, Meta, and Microsoft among others, aims to evolve Ethernet specifically for AI and HPC workloads. As of 2025, Ethernet powers approximately 52\% of TOP500 systems by count, while InfiniBand accounts for roughly 40\% of aggregate performance. The UEC targets lossless, low-latency, predictable communication while preserving Ethernet's openness, ecosystem breadth, and cost advantages. UEC Specification 1.0 was released in 2025, addressing transport-layer enhancements for collective communication patterns common in distributed training.
+
+\subsubsection{Power and Thermal Considerations}
+
+Data centers consumed significant global electricity by 2025, with projections suggesting power usage could double to over 1,000 TWh by 2030, driven substantially by generative AI workloads. The Ethernet Alliance notes that while networking is not the largest power consumer in a data center, every watt used on the network is a watt unavailable for compute workloads. Linear Pluggable Optics (LPO) operate at roughly half the power of retimed optics, making them attractive for 400G--800G deployments where thermal budgets are constrained.
+
+\subsection{Module 2: Interconnect Topologies}
+
+\subsubsection{Fat-Tree (Clos) Networks}
+
+The fat-tree topology, based on Charles Clos's 1953 switching network design, is a hierarchical architecture providing full bisection bandwidth---meaning aggregate bandwidth between any two halves of the network equals total bandwidth into either half. NVIDIA's DGX SuperPOD reference architecture specifies a three-tier fat-tree using Quantum-2 InfiniBand switches at 400 Gbps per port, connecting up to 32 DGX systems. Fat-trees dominate GPU cluster deployments because they provide predictable performance regardless of which GPU pairs communicate, critical for distributed training where communication patterns shift dynamically.
+
+Strengths: full bisection bandwidth, well-understood routing (D-mod-k static routing distributes traffic effectively), mature vendor support, excellent for unpredictable traffic patterns. Weaknesses: high cost at large scale due to many switches and links at upper tiers, cable complexity, relatively high power consumption from switch count.
+
+\subsubsection{Dragonfly and Dragonfly+ Topologies}
+
+The dragonfly topology (Kim et al., 2008) is a two-tier hierarchical network where routers form groups interconnected as a complete graph. Each group provides at least one link to every other group, achieving a network diameter of just three hops while minimizing expensive long-range optical links. The dragonfly effectively leverages high-radix routers to scale to very high node counts with high bisection bandwidth.
+
+Dragonfly+ extends the design by using fat-tree sub-topologies within each group rather than a full mesh, improving scalability and worst-case throughput. HPE's Cray EX systems use 64-port Slingshot switches in two-level dragonfly topologies. In a typical configuration, each group has 32 Slingshot switches. The three most powerful TOP500 systems (El Capitan, Frontier, Aurora) all use Slingshot-11 interconnect in dragonfly-family topologies. Slingshot powers approximately 71\% of aggregate compute capacity among the world's top 10 systems.
+
+Challenges include adversarial traffic patterns that can saturate inter-group links, requiring adaptive routing between minimal and non-minimal paths. Research into buffer architectures (LUGH, 2025) and congestion detection algorithms continues to address fairness and tail-latency problems inherent in the topology.
+
+\subsubsection{Torus, Mesh, and Alternative Topologies}
+
+In a k-ary n-cube mesh, each switch connects to its direct neighbors---four connections in 2D, six in 3D. A torus adds wraparound links at mesh boundaries, forming interconnected rings. Google's TPU v4 pods use 3D torus topologies with optical reconfigurability. Torus topologies are inexpensive and excellent for stencil applications (lattice QCD), but their blocking nature and higher latency make them less suitable for diverse workloads.
+
+HyperX topologies generalize the concept by providing full connectivity within each dimension. Slim Fly (Besta et al., 2014) uses mathematical constructions to minimize diameter while maintaining cost effectiveness. The choice between topologies depends on workload communication patterns, cable cost tolerance, and whether the cluster will run primarily uniform or adversarial traffic.
+
+\subsubsection{Topology Selection Framework}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topology} & \tableheader{Diameter} & \tableheader{Bisection BW} & \tableheader{Cost} & \tableheader{Best For} \\
+\midrule
+Fat-tree & $O(\log N)$ & Full & High & Unpredictable traffic \\
+Dragonfly & 3 hops & High & Medium & Large scale, mixed \\
+Torus & $O(N^{1/d})$ & Low & Low & Stencil/neighbor \\
+HyperX & 2--3 hops & Tunable & Medium & Balanced workloads \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: Parallel Processing Paradigms}
+
+\subsubsection{MPI: The Universal Standard}
+
+The Message Passing Interface is a language-independent specification for distributed memory parallel computing, with implementations including Open MPI, MPICH, and Intel MPI. MPI provides both point-to-point operations (Send, Recv) and collective operations (Broadcast, Reduce, AllReduce, AllGather, ReduceScatter, Scatter, Gather, AllToAll). MPI is versatile across platforms, working on cluster computing, supercomputers, and cloud environments. Modern implementations support CUDA-aware communication for GPU-resident data, though overhead from CPU coordination remains a consideration.
+
+\subsubsection{NCCL: GPU-Optimized Collectives}
+
+NVIDIA's Collective Communication Library implements multi-GPU and multi-node communication primitives optimized for NVIDIA GPUs and networking. NCCL performs automatic topology detection across PCIe, NVLink, NVSwitch, InfiniBand, and RoCE to maximize performance. It provides five collective operations (AllReduce, Broadcast, Reduce, AllGather, ReduceScatter) plus point-to-point Send/Recv, with support for grouped operations to reduce overhead.
+
+NCCL implements three data transfer protocols. The Simple protocol maximizes bandwidth for large messages using a producer-consumer handshake with 8-byte flag fields. The Low-Latency (LL) protocol uses inline 4-byte flags per 8 bytes of data for sub-microsecond synchronization, achieving 25--50\% of peak bandwidth. The LL128 protocol transmits 128-byte units (120 bytes data, 8 bytes flag), achieving approximately 95\% bandwidth utilization while maintaining low latency.
+
+For collective algorithms, NCCL selects between ring algorithms (bandwidth-optimal for large messages, $O(N)$ latency) and tree algorithms (logarithmic latency, better for small/medium messages). The double binary tree approach pipelines Reduce and Broadcast operations to implement AllReduce.
+
+\subsubsection{RDMA and GPU-Initiated Networking}
+
+Remote Direct Memory Access enables data transfer between systems without CPU involvement, critical for high-bandwidth, low-latency communication. GPUDirect RDMA allows direct GPU-to-NIC data paths, bypassing CPU memory entirely. NCCL 2.28 introduced the Device API with GPU-Initiated Networking (GIN), exposing one-sided RDMA primitives (put, put-with-signal) directly to GPU threads. This eliminates CPU coordination overhead and is particularly effective for irregular communication patterns in Mixture-of-Experts workloads.
+
+\subsubsection{Communication Library Selection}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Library} & \tableheader{Optimized For} & \tableheader{Transport} & \tableheader{Use Case} \\
+\midrule
+MPI & General distributed & TCP, IB, shared mem & CPU clusters, hybrid \\
+NCCL & NVIDIA GPU collectives & NVLink, IB, RoCE, PCIe & GPU training, inference \\
+Gloo & CPU + fallback GPU & TCP, shared mem & PyTorch default CPU \\
+RCCL & AMD GPU collectives & Infinity Fabric, RoCE & AMD GPU clusters \\
+MSCCL & Custom patterns & Based on NCCL & Microsoft research \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Experimental findings indicate NCCL achieves up to 345\% lower execution time in AllReduce operations compared to MPI and Gloo in multi-GPU configurations. However, in cross-container virtualization environments, NCCL can exhibit up to 213\% higher latency compared to single-container deployments, suggesting careful attention to deployment topology.
+
+\subsection{Module 4: Vector and Matrix Processing Hardware}
+
+\subsubsection{Classical Vector Processors}
+
+Vector processors operate on large one-dimensional arrays (vectors) using variable-length instructions, distinct from fixed-width SIMD. The Cray-1 (1976) achieved approximately 80 MFLOPS sustained using pipeline parallelism with separate pipelines for different operations, employing ``vector chaining'' to pipeline batches of vector instructions. The ILLIAC IV (1972) pioneered the massively parallel approach with 64 separate ALUs. Japanese vendors (Fujitsu, Hitachi, NEC) produced register-based vector machines in the 1980s, typically slightly faster than contemporary Cray systems.
+
+Modern CPUs implement SIMD extensions (Intel AVX-512, ARM SVE/SVE2) that borrow from vector processing concepts but use fixed-length operations. True vector processors with variable-length vector registers persist in specialized contexts, with the RISC-V Vector Extension (RVV) being a notable modern example providing genuine variable-length vector processing.
+
+\subsubsection{GPU Architecture: From CUDA Cores to Tensor Cores}
+
+Modern GPUs contain 80--140 Streaming Multiprocessors (SMs), each the fundamental execution unit under SIMT (Single Instruction, Multiple Thread) execution. Threads execute in groups of 32 (warps on NVIDIA, wavefronts on AMD), maximizing throughput for uniform computations. High Bandwidth Memory (HBM2/HBM3) provides 1--3 TB/s bandwidth, a 10--30$\times$ advantage over CPUs.
+
+Tensor Cores, introduced with the Volta architecture (2017), are dedicated matrix multiply-accumulate (MMA) units. The progression across generations:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Architecture} & \tableheader{MMA Shape} & \tableheader{Precisions} & \tableheader{Key Feature} \\
+\midrule
+Volta (2017) & 4$\times$4$\times$4 & FP16/FP32 & First tensor cores \\
+Ampere (2020) & 8$\times$8 & +BF16, TF32, INT8 & Sparsity support \\
+Hopper (2022) & 64$\times$256$\times$16 & +FP8 & WGMMA, 4-warp groups \\
+Blackwell (2024) & 256$\times$256$\times$16 & +FP4 & tcgen05, tensor memory \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Blackwell's fifth-generation tensor cores execute MMA across 2 SMs simultaneously and introduce dedicated ``tensor memory'' to reduce register pressure. A single Hopper tensor core can perform 1,024 floating-point operations per clock cycle. For AI workloads utilizing tensor cores, achievable performance increases 2--10$\times$ compared to standard CUDA cores.
+
+\subsubsection{Google TPU and Systolic Arrays}
+
+Google's Tensor Processing Units use systolic array architectures where data flows through a grid of processing elements, each performing a multiply-accumulate and passing results to neighbors. This architecture is specifically optimized for matrix multiplication and convolution operations in TensorFlow workloads. TPU v4 pods use optically reconfigurable 3D torus interconnects.
+
+\subsubsection{Mixed Precision Landscape}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Bits} & \tableheader{Exponent} & \tableheader{Mantissa} & \tableheader{Use Case} \\
+\midrule
+FP64 & 64 & 11 & 52 & Scientific computing \\
+FP32 & 32 & 8 & 23 & General purpose \\
+TF32 & 19 & 8 & 10 & Training (NVIDIA) \\
+BF16 & 16 & 8 & 7 & Training, inference \\
+FP16 & 16 & 5 & 10 & Inference, training \\
+FP8 (E4M3) & 8 & 4 & 3 & Forward pass \\
+FP8 (E5M2) & 8 & 5 & 2 & Gradients \\
+INT8 & 8 & -- & -- & Quantized inference \\
+INT4 & 4 & -- & -- & Compressed inference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+El Capitan achieves 16.7 exaFLOPS on the HPL-MxP (mixed-precision) benchmark versus 1.809 exaFLOPS on standard HPL, demonstrating the enormous performance gains from mixed-precision computation when mathematical techniques preserve accuracy.
+
+\subsection{Module 5: Linear Algebra Computational Foundations}
+
+\subsubsection{The BLAS Hierarchy}
+
+The Basic Linear Algebra Subprograms define three levels of operations with fundamentally different computational intensity:
+
+\textbf{Level 1 BLAS} --- scalar, vector, and vector-vector operations (dot product, axpy, norms). Computational intensity: $O(1)$---each data element is used in a constant number of operations. Memory-bandwidth bound on all modern hardware.
+
+\textbf{Level 2 BLAS} --- matrix-vector operations (gemv, trsv, ger). Computational intensity: $O(1)$ per matrix element. Still memory-bandwidth bound but with larger working sets that benefit from cache.
+
+\textbf{Level 3 BLAS} --- matrix-matrix operations (gemm, trsm, syrk). Computational intensity: $O(n)$---for an $n \times n$ matrix multiply, $2n^3$ operations on $4n^2$ data elements gives intensity $n/2$. This is the critical level: large enough working sets achieve compute-bound operation, making Level 3 BLAS the target for hardware optimization.
+
+The GEMM (General Matrix Multiply, $C \leftarrow \alpha AB + \beta C$) operation is the single most important computational kernel in HPC and AI. It is the inner loop of neural network training (forward pass, backward pass, weight update), the core of LU/QR/Cholesky factorization, and the benchmark operation for the TOP500 HPL.
+
+\subsubsection{LAPACK and Distributed Linear Algebra}
+
+LAPACK builds on BLAS to provide higher-level numerical algorithms: solving linear systems (LU factorization), least-squares problems (QR factorization), eigenvalue problems (Schur decomposition), and singular value decomposition (SVD). LAPACK was designed to exploit Level 3 BLAS for cache-friendly blocked algorithms, replacing the earlier LINPACK (Level 1 BLAS) and EISPACK packages.
+
+ScaLAPACK extends LAPACK to distributed-memory parallel systems using PBLAS (Parallel BLAS) and BLACS (Basic Linear Algebra Communication Subprograms). Modern alternatives include MAGMA (heterogeneous CPU+GPU dense linear algebra) and PLASMA (multi-core asynchronous scheduling).
+
+\subsubsection{Optimized Implementations}
+
+The reference BLAS/LAPACK from Netlib is written in Fortran and performs poorly. Production systems use vendor-optimized implementations: Intel MKL (x86), NVIDIA cuBLAS and NVPL (GPU/ARM), AMD AOCL-BLAS (Zen architectures), OpenBLAS (open-source, auto-tuned), and BLIS (BLAS-like Library Instantiation Software from UT Austin's FLAME project). These implementations are typically written in C and assembly, with hand-tuned kernels for specific microarchitectures.
+
+\subsubsection{Tiling and Communication-Avoiding Algorithms}
+
+Matrix multiplication performance depends critically on data reuse within cache hierarchies. Loop tiling (blocking) restructures computation to operate on cache-sized submatrices, ensuring that data loaded into L2/L3 cache is reused $O(n)$ times rather than $O(1)$. For GPUs, tiling maps naturally to shared memory within SMs, with bank conflict avoidance via padding or swizzling patterns.
+
+Communication-avoiding (CA) algorithms, pioneered by Demmel et al., minimize data movement between memory hierarchy levels and between processors. For distributed GEMM, CA algorithms reduce communication volume from $O(n^2/\sqrt{P})$ to provably optimal bounds. The KAMI system (SC'25) applies CA techniques within a single GPU, reorganizing tensor core units, registers, and shared memory access patterns to reduce on-chip data movement.
+
+\subsection{Module 6: The Exascale Convergence}
+
+\subsubsection{TOP500 Landscape (November 2025)}
+
+Four systems have achieved exascale (1+ exaFLOPS) on the HPL benchmark:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{2.5cm}L{2.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{System} & \tableheader{Location} & \tableheader{HPL} & \tableheader{Interconnect} & \tableheader{Accelerator} \\
+\midrule
+1 & El Capitan & LLNL, USA & 1.809 EF & Slingshot-11 & AMD MI300A \\
+2 & Frontier & ORNL, USA & 1.206 EF & Slingshot-11 & AMD MI250X \\
+3 & Aurora & ANL, USA & 1.012 EF & Slingshot-11 & Intel GPU Max \\
+4 & JUPITER & JSC, Germany & 1.000 EF & InfiniBand & NVIDIA GH200 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+All three US exascale systems use HPE Slingshot-11 interconnect in dragonfly-family topologies. Europe's first exascale system (JUPITER) uses NVIDIA's InfiniBand-based interconnect. El Capitan's 11.34 million cores achieve 60.94 GigaFLOPS/watt, ranking 23rd on Green500.
+
+\subsubsection{The Interconnect Competition}
+
+The TOP500 reveals a stark divide between deployment breadth and performance concentration. 100G Ethernet has the largest share by system count among TOP500 systems, but contributes minimally to aggregate performance. Slingshot powers approximately 71\% of aggregate compute capacity among the top 10 systems. InfiniBand NDR400 appears in approximately 35 systems but accounts for roughly 10.3\% of aggregate performance. The Ultra Ethernet Consortium aims to bridge this gap, offering InfiniBand-class performance with Ethernet's deployment advantages.
+
+\subsubsection{AI/HPC Workload Convergence}
+
+The HPL-MxP benchmark, measuring mixed-precision performance, illustrates convergence: El Capitan achieves 16.7 exaFLOPS on HPL-MxP versus 1.809 exaFLOPS on standard HPL---a $9.2\times$ multiplier from mixed-precision techniques that maintain mathematical accuracy. This mirrors the AI training workflow where forward passes use FP16/BF16 and loss scaling preserves FP32 accuracy. The hardware that accelerates AI training (tensor cores, high-bandwidth memory, fast interconnects) is the same hardware that accelerates scientific simulation.
+
+Network configuration errors were found to cause approximately 10.7\% of significant GPU job failures in large-scale training (Meta study), underscoring that interconnect reliability is as important as raw bandwidth for production AI workloads.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Export controls on HPC hardware & Legal/Policy & Present factual status without advocacy \\
+China TOP500 non-reporting & Geopolitical & Note data gap factually \\
+Energy consumption projections & Environmental & Cite published agency data only \\
+Vendor performance claims & Commercial & Cross-reference with independent benchmarks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Standards Organizations and Government Sources}
+IEEE 802.3 Working Group --- 802.3df (800GbE), 802.3dj (1.6TbE), 802.3bs (400GbE) standards. Ethernet Alliance --- Ethernet Roadmap 2025, interoperability testing. Ethernet Technology Consortium --- 800GBASE-R specification. Optical Internetworking Forum (OIF) --- 400ZR, 800ZR coherent optics. TOP500 Organization --- November 2025 (66th edition) and June 2025 (65th edition) lists. Lawrence Livermore National Laboratory --- El Capitan system specifications. Oak Ridge National Laboratory --- Frontier system specifications. Argonne National Laboratory --- Aurora system specifications. EuroHPC / J\"{u}lich Supercomputing Centre --- JUPITER system specifications.
+
+\subsubsection{Peer-Reviewed Research}
+Kim, J. et al. ``Technology-Driven, Highly-Scalable Dragonfly Topology,'' 2008. Besta, M. et al. ``Slim Fly: A Cost Effective Low-Diameter Network Topology,'' ACM/IEEE SC, 2014. Liang, Y. et al. ``High Performance Interconnect Technologies for Supercomputers,'' HAL preprint, 2024. NCCL analysis: ``Demystifying NCCL: An In-depth Analysis of GPU Communication Protocols,'' arXiv:2507.04786, 2025. Wang et al. ``KAMI: Communication-Avoiding GEMM within a Single GPU,'' SC'25, 2025. Khattak \& Mikaitis, ``Accurate Models of NVIDIA Tensor Cores,'' arXiv:2512.07004, 2025. Fasi \& Mikaitis, mixed-precision block FMA analysis, SIAM J. Sci. Comput. Sewell et al. ``Bruck Algorithm Performance Analysis for Multi-GPU All-to-All Communication,'' HPCAsia 2024.
+
+\subsubsection{Professional Organizations and Industry Sources}
+Ultra Ethernet Consortium --- UEC Specification 1.0. NVIDIA Corporation --- NCCL documentation, DGX SuperPOD reference architecture, Blackwell architecture whitepaper. AMD --- AOCL-BLAS/LAPACK documentation, MI300A specifications. Intel --- MKL documentation, Data Center GPU Max specifications. HPE/Cray --- Slingshot-11 interconnect specifications. Netlib --- BLAS and LAPACK reference implementations and documentation. University of Texas FLAME project --- BLIS framework. MPI Forum --- MPI specification. InfiniBand Trade Association --- InfiniBand specification.
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, publication-quality knowledge pack documenting the computational mesh---from physical-layer network standards through interconnect topologies, parallel processing paradigms, hardware execution architectures, and linear algebra computational foundations---synthesized into actionable architectural guidance for the GSD ecosystem's infrastructure planning.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+
+Wave 0: FOUNDATION (Sequential)
+  [Shared schemas] --> [Source index] --> [Template scaffolding]
+                                              |
+Wave 1: PARALLEL SURVEY                      v
+  Track A: [M1: Networks] + [M2: Topologies]  |  Track B: [M4: Hardware] + [M5: LinAlg]
+  Track C: [M3: Parallel Processing]          |
+                                              |
+Wave 2: SYNTHESIS (Sequential)                v
+  [M6: Convergence] --> [Cross-module integration] --> [GSD relevance analysis]
+                                              |
+Wave 3: PUBLICATION (Sequential)              v
+  [Document assembly] --> [Verification] --> [Knowledge pack release]
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation layer} --- shared terminology glossary, source quality index, LaTeX/document templates
+\item \textbf{Survey layer} --- six parallel-capable research modules with independent evidence bases
+\item \textbf{Synthesis layer} --- cross-module integration analysis, GSD cluster relevance mapping
+\item \textbf{Publication layer} --- assembled document, verification pass, knowledge pack packaging
+\end{enumerate}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+D1 & Network Standards Survey & 800GbE/1.6TbE specs documented with IEEE references \\
+D2 & Topology Analysis & 4+ topologies with quantitative comparison \\
+D3 & Communication Library Guide & MPI/NCCL/RDMA compared with benchmark data \\
+D4 & Hardware Architecture Survey & Vector/tensor/systolic evolution documented \\
+D5 & Linear Algebra Reference & BLAS/LAPACK hierarchy with implementation guide \\
+D6 & Exascale Integration Analysis & TOP500 systems profiled, convergence assessed \\
+D7 & GSD Cluster Recommendations & Topology, interconnect, and software stack guidance \\
+D8 & Assembled Knowledge Pack & Single document with all modules integrated \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 3,000 \\
+W0-SOURCES & None & Haiku & 4,000 \\
+W1A-NETWORKS & W0-SCHEMA & Sonnet & 8,000 \\
+W1A-TOPOLOGY & W0-SCHEMA & Sonnet & 8,000 \\
+W1B-HARDWARE & W0-SCHEMA & Sonnet & 8,000 \\
+W1B-LINALG & W0-SCHEMA & Sonnet & 8,000 \\
+W1C-PARALLEL & W0-SCHEMA & Sonnet & 8,000 \\
+W2-CONVERGENCE & W1A, W1B, W1C & Opus & 10,000 \\
+W2-SYNTHESIS & W1A, W1B, W1C & Opus & 8,000 \\
+W2-GSD-RELEVANCE & W2-SYNTHESIS & Opus & 6,000 \\
+W3-ASSEMBLY & W2-ALL & Sonnet & 12,000 \\
+W3-VERIFICATION & W3-ASSEMBLY & Sonnet & 6,000 \\
+W3-PACKAGE & W3-VERIFICATION & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis, cross-module integration, convergence analysis, GSD relevance \\
+Sonnet & 60\% & Survey compilation, document assembly, verification, technical content \\
+Haiku & 10\% & Shared schemas, source templates, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Components} & \tableheader{Execution} & \tableheader{Model} \\
+\midrule
+0 & Foundation & 2 & Sequential & Haiku \\
+1 & Parallel Survey & 5 & 3 parallel tracks & Sonnet \\
+2 & Synthesis & 3 & Sequential & Opus \\
+3 & Publication & 3 & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & None & Haiku & Shared terminology glossary, data types, module interfaces \\
+W0-SOURCES & None & Haiku & Source quality index, citation templates, bibliography scaffold \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Survey}
+
+\textbf{Track A --- Network Infrastructure:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1A-NETWORKS & W0 & Sonnet & IEEE standards survey, PHY specs, power analysis \\
+W1A-TOPOLOGY & W0 & Sonnet & Topology comparison, routing algorithms, selection framework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Compute Architecture:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1B-HARDWARE & W0 & Sonnet & Vector/tensor/systolic architecture survey \\
+W1B-LINALG & W0 & Sonnet & BLAS/LAPACK hierarchy, implementations, tiling strategies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Communication:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1C-PARALLEL & W0 & Sonnet & MPI/NCCL/RDMA/Gloo analysis, protocol comparison \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W2-CONVERGENCE & W1 all & Opus & Exascale analysis, TOP500 profiling, AI/HPC convergence \\
+W2-SYNTHESIS & W1 all & Opus & Cross-module integration, dependency mapping \\
+W2-GSD-RELEVANCE & W2-SYNTH & Opus & Cluster recommendations, topology rationale \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W3-ASSEMBLY & W2 all & Sonnet & Integrated document, cross-references, figures \\
+W3-VERIFICATION & W3-ASSEMBLY & Sonnet & Source verification, consistency checks, test pass \\
+W3-PACKAGE & W3-VERIFY & Sonnet & Final knowledge pack, index, deployment artifacts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{5-minute TTL window:} Wave 1 parallel tracks (A, B, C) should be launched within the same cache window to share Wave 0 foundation outputs
+\item \textbf{Foundation caching:} W0-SCHEMA and W0-SOURCES are small enough to inline into Wave 1 component contexts, eliminating a cache lookup
+\item \textbf{Synthesis pre-loading:} Wave 2 components should receive structured summaries (not full texts) from Wave 1, keeping context budgets under 6,000 tokens per module
+\item \textbf{Assembly streaming:} Wave 3 assembly can process modules sequentially rather than loading all simultaneously, reducing peak context usage
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Haiku} & \tableheader{Sonnet} & \tableheader{Opus} \\
+\midrule
+Wave 0 & 7,000 & --- & --- \\
+Wave 1 & --- & 40,000 & --- \\
+Wave 2 & --- & --- & 24,000 \\
+Wave 3 & --- & 22,000 & --- \\
+\midrule
+\textbf{Totals} & \textbf{7,000} & \textbf{62,000} & \textbf{24,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total estimate:} 93,000 tokens ($\pm$15\% overhead = 80,000--107,000)
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ----+
+              |---> W1A-NETWORKS --+
+              |                     |---> W1A-TOPOLOGY --+
+              |                                          |
+W0-SOURCES --+---> W1B-HARDWARE --+                     |
+              |                     |---> W1B-LINALG --+ |
+              |                                        | |
+              +---> W1C-PARALLEL ---------------------+| |
+                                                      || |
+                    +--all Wave 1 outputs-------------+| |
+                    |                                  v v
+                    +---> W2-CONVERGENCE --+
+                    |                      |
+                    +---> W2-SYNTHESIS ----+--> W2-GSD-RELEVANCE
+                                                      |
+                              +--all Wave 2 outputs---+
+                              |
+                              v
+                    W3-ASSEMBLY --> W3-VERIFICATION --> W3-PACKAGE
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-SRC & Source quality & All citations from IEEE, TOP500, vendor specs, or peer-reviewed venues \\
+SC-NUM & Numerical attribution & Every bandwidth, FLOPS, or benchmark figure attributed to specific source \\
+SC-ADV & No policy advocacy & Evidence presented without advocating procurement or policy positions \\
+SC-SEC & Security sensitivity & No operational details enabling exploitation of network vulnerabilities \\
+SC-VND & Vendor neutrality & No single vendor's claims presented without independent verification context \\
+SC-EXP & Export control awareness & US export restrictions noted factually without detailed guidance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Ethernet 400G--1.6T documented & CF-01, CF-02 & Pending \\
+2. Four+ topologies analyzed & CF-03, CF-04 & Pending \\
+3. MPI/NCCL/RDMA compared & CF-05, CF-06 & Pending \\
+4. Vector--tensor evolution traced & CF-07, CF-08 & Pending \\
+5. BLAS hierarchy explained & CF-09, CF-10 & Pending \\
+6. Three+ exascale systems profiled & CF-11, CF-12 & Pending \\
+7. Mixed-precision mapped & CF-13 & Pending \\
+8. Cross-module integration & IN-01, IN-02, IN-03 & Pending \\
+9. Quantitative claims sourced & SC-SRC, SC-NUM & Pending \\
+10. GSD cluster relevance & CF-14, CF-15 & Pending \\
+11. Power/thermal addressed & CF-16 & Pending \\
+12. Ultra Ethernet documented & CF-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC (x3) & Executor & Document production---one per parallel track \\
+CRAFT-NET & Network Specialist & Modules 1--2: standards, topologies, interconnects \\
+CRAFT-HPC & HPC Specialist & Modules 3--4: parallel processing, hardware architecture \\
+CRAFT-ALG & Algebra Specialist & Module 5: BLAS/LAPACK, numerical methods \\
+VERIFY & Verification & Source validation; accuracy and consistency checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Security & Safety boundary enforcement \\
+ANALYST & Pattern Analyst & Cross-module pattern detection \\
+RETRO & Retrospective & Post-wave analysis; lessons learned \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet \\
+Total modules & 6 \\
+Parallel tracks (Wave 1) & 3 \\
+Estimated context windows & 18--22 \\
+Estimated sessions & 4--5 \\
+Token budget (est.) & 93,000 ($\pm$15\%) \\
+Model split & Opus 26\% / Sonnet 67\% / Haiku 7\% \\
+Crew size & 18 roles \\
+Critical path & W0 $\rightarrow$ W1 (any track) $\rightarrow$ W2-CONVERGENCE $\rightarrow$ W3-ASSEMBLY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\emph{``The Amiga's custom chips weren't just fast---they were architecturally correct. Each did one thing brilliantly, and the system bus connected them so the whole was greater than the sum of its parts.''}
+
+\vspace{0.5em}
+
+The computational mesh is this principle at every scale---from the PAM4 symbols on a fiber to the tensor core MMA instructions that multiply matrices at exascale speeds. The space between the processors is where the architecture lives, and understanding that space is what turns a warehouse of silicon into an instrument of discovery.
+\end{quotebox}
+
+\end{document}

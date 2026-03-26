@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxel as Vessel v2 — Sovereign World Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #006064;
+      --tertiary: #BF360C;
+      --accent: #283593;
+      --light-primary: #E8EAF6;
+      --light-secondary: #E0F7FA;
+      --row-gray: #F5F5F5;
+      --border-gray: #BDBDBD;
+      --subtle-gray: #757575;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAFAFA;
+      color: #212121;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    header h1 span { color: #80CBC4; }
+    header .subtitle {
+      font-size: 1rem;
+      opacity: 0.85;
+      margin-bottom: 0.5rem;
+    }
+    header .depends {
+      font-size: 0.82rem;
+      opacity: 0.65;
+      font-style: italic;
+    }
+    header .pipeline {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      opacity: 0.75;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--subtle-gray);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border-gray);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      background: #ECEFF1;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 1px solid #CFD8DC;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,35,126,0.12); }
+    .card .card-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .card .card-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .card .card-desc { font-size: 0.83rem; color: var(--subtle-gray); }
+    .card .card-size {
+      font-size: 0.75rem;
+      color: var(--secondary);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    .contents {
+      margin-bottom: 2.5rem;
+    }
+    .stage {
+      margin-bottom: 1.5rem;
+    }
+    .stage-header {
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border-radius: 3px;
+      margin-bottom: 0.75rem;
+    }
+    .stage-header.s2 { background: var(--secondary); }
+    .stage-header.s3 { background: var(--tertiary); }
+    .stage ul { list-style: none; padding-left: 0; }
+    .stage ul li {
+      font-size: 0.88rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      color: #37474F;
+    }
+    .stage ul li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+      font-weight: 700;
+    }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 620px) { .modules-grid { grid-template-columns: repeat(2, 1fr); } }
+    .module-chip {
+      background: var(--light-primary);
+      border: 1px solid #9FA8DA;
+      border-radius: 4px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.78rem;
+    }
+    .module-chip .m-id { font-weight: 700; color: var(--primary); }
+    .module-chip .m-name { color: #546E7A; font-size: 0.73rem; }
+    .usage {
+      background: var(--light-secondary);
+      border: 1px solid #80DEEA;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .usage h3 { color: var(--secondary); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .usage ol { padding-left: 1.5rem; font-size: 0.87rem; color: #37474F; }
+    .usage ol li { margin-bottom: 0.4rem; }
+    .recompile {
+      background: #ECEFF1;
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .recompile h3 { color: var(--primary); font-size: 0.88rem; margin-bottom: 0.6rem; }
+    .recompile code {
+      display: block;
+      background: #263238;
+      color: #80CBC4;
+      font-family: 'DM Mono', 'DejaVu Sans Mono', monospace;
+      font-size: 0.8rem;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      margin-top: 0.4rem;
+      white-space: pre;
+    }
+    .through-line {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: #37474F;
+      border-left: 3px solid var(--primary);
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--subtle-gray);
+      border-top: 1px solid var(--border-gray);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package — Second-Pass Filter</div>
+  <h1>Voxel as Vessel <span>v2</span></h1>
+  <div class="subtitle">Sovereign World Architecture · Block Data · PCG Seeds · Multi-World Topology · Ceph/OpenStack DR</div>
+  <div class="depends">Depends on: Voxel as Vessel v1 (Ceph/RADOS · Anvil Format · RAG Pipeline)</div>
+  <div class="pipeline">Vision → Research → Mission · Fleet Profile · 194,000 tokens · 3–4 sessions</div>
+</header>
+
+<div class="container">
+
+  <div class="section-label">Download Files</div>
+  <div class="cards">
+    <a class="card" href="mission_v2.pdf" download>
+      <div class="card-icon">📄</div>
+      <div class="card-title">mission_v2.pdf</div>
+      <div class="card-desc">Complete 29-page GSD mission package. Three-stage pipeline: Vision → Research → Mission.</div>
+      <div class="card-size">PDF · 29 pages · XeLaTeX compiled</div>
+    </a>
+    <a class="card" href="mission_v2.tex" download>
+      <div class="card-icon">📝</div>
+      <div class="card-title">mission_v2.tex</div>
+      <div class="card-desc">Full LaTeX source. Edit and recompile for customization or extension.</div>
+      <div class="card-size">TeX source · XeLaTeX + DejaVu fonts</div>
+    </a>
+  </div>
+
+  <div class="section-label">New Modules (v2 Second-Pass)</div>
+  <div class="modules-grid">
+    <div class="module-chip"><div class="m-id">M7</div><div class="m-name">Block/Chunk Deep Dive</div></div>
+    <div class="module-chip"><div class="m-id">M8</div><div class="m-name">Texture/Atlas Architecture</div></div>
+    <div class="module-chip"><div class="m-id">M9</div><div class="m-name">PCG Seed Manifold</div></div>
+    <div class="module-chip"><div class="m-id">M10</div><div class="m-name">Multi-Server Fabric</div></div>
+    <div class="module-chip"><div class="m-id">M11</div><div class="m-name">Sovereign World Rights</div></div>
+    <div class="module-chip"><div class="m-id">M12</div><div class="m-name">Edge Topology + LOD</div></div>
+    <div class="module-chip"><div class="m-id">M13</div><div class="m-name">Backup / DR / Hot Swap</div></div>
+    <div class="module-chip"><div class="m-id">M14</div><div class="m-name">Full-Stack Synthesis</div></div>
+  </div>
+
+  <div class="section-label">Document Contents</div>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-header">STAGE 1 — VISION DOCUMENT</div>
+      <ul>
+        <li>Vision narrative: seed-space manifold, sovereignty, the delta as territory</li>
+        <li>5 problem statements: palette opacity, unexploited seed space, ownership model gap, discontinuous edge topology, fragile live-world DR</li>
+        <li>Core concept: Sovereign Voxel Stack with 8-layer ASCII architecture</li>
+        <li>7 module descriptions (M7–M13) + M14 synthesis</li>
+        <li>Chipset configuration YAML with cache strategy</li>
+        <li>12 testable success criteria with measurable thresholds</li>
+        <li>Through-line: "Maps between things are more fundamental than the things themselves"</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-header s2">STAGE 2 — RESEARCH REFERENCE</div>
+      <ul>
+        <li>M7: Palette compression (bits-per-entry formula, chunk generation pipeline table)</li>
+        <li>M8: Resource pack directory structure, atlas source types, PBR texture sets, pack format versioning</li>
+        <li>M9: LCG mathematics, seed-space distance metric, Morton/Hilbert RADOS key mapping, 1.18 climate parameters</li>
+        <li>M10: Velocity/Waterfall/BungeeCord comparison, MultiPaper chunk ownership protocol, HuskSync config</li>
+        <li>M11: OpenStack service roles table, SCS R9 integration, multi-tenant Ceph cluster config</li>
+        <li>M12: Edge topology options table, 4D torus noise solution, LOD zone storage specification</li>
+        <li>M13: RBD snapshot strategy, mirroring modes comparison, hot-swap failover 7-step sequence, CephX keyring, backup tooling landscape</li>
+        <li>Safety considerations: keyrings, PII, EULA, seed recovery, hot-swap timing</li>
+        <li>31-source bibliography</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-header s3">STAGE 3 — MISSION PACKAGE</div>
+      <ul>
+        <li>8 deliverables with acceptance criteria</li>
+        <li>Component breakdown: 10 components, token budgets, model assignments</li>
+        <li>5-wave execution plan with parallel tracks (W1A, W1B, W2 all parallel)</li>
+        <li>Token budget: 194,000 total (Opus 53% / Sonnet 43% / Haiku 4%)</li>
+        <li>43 tests: 5 safety-critical (BLOCK), 20 core, 10 integration, 8 edge</li>
+        <li>Verification matrix: 12 criteria × test IDs</li>
+        <li>16-role crew manifest with CRAFT-M7 through CRAFT-M14</li>
+        <li>1 HITL gate: post-Wave 2 (pre-synthesis)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h3>How to Feed to GSD Orchestrator / Skill-Creator</h3>
+    <ol>
+      <li>Ensure v1 mission outputs are available — this package explicitly depends on v1 Research Reference as a prefill cache at Wave 0.</li>
+      <li>Open the PDF and provide it to your GSD Skill-Creator instance as the mission specification.</li>
+      <li>At Wave 0, the FLIGHT commander loads the v1 reference and generates shared schemas (block.yaml, ceph-ops.yaml, openstack.yaml).</li>
+      <li>Execute W1A (M7, M8, M9 in parallel), then W1B (M10, M11 in parallel), then W2 (M12, M13 in parallel).</li>
+      <li>Stop at the CAPCOM GATE after W2 for human review of topology design and DR playbook before synthesis.</li>
+      <li>Execute W3 (M14 synthesis + VERIFY) after gate approval.</li>
+    </ol>
+  </div>
+
+  <div class="recompile">
+    <h3>LaTeX Recompilation (requires XeLaTeX + DejaVu fonts)</h3>
+    <code>xelatex -interaction=nonstopmode mission_v2.tex
+xelatex -interaction=nonstopmode mission_v2.tex
+xelatex -interaction=nonstopmode mission_v2.tex</code>
+  </div>
+
+  <div class="through-line">
+    "Ceph does not store a world. Ceph stores the difference between the generated world and the modified world.
+    Everything that was never touched is still just a seed and a function call away. The sovereignty is not over
+    the bytes; it is over the delta. The owner of a world owns the modifications, the player data, the community
+    history — the Space Between what was generated and what was built."
+    <br><br>— Miles Tiberius Foxglove, <em>The Space Between</em> (2026)
+  </div>
+
+</div>
+
+<footer>
+  GSD Mission Package · Voxel as Vessel v2 · March 10, 2026 · Miles Tiberius Foxglove / tibsfox.com
+</footer>
+
+</body>
+</html>

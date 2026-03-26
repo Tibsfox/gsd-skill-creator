@@ -1,0 +1,801 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Technology color scheme: Steel / Electric / Graphite ---
+\definecolor{primary}{HTML}{1A237E}       % Deep navy — section headers
+\definecolor{secondary}{HTML}{00838F}     % Ceph teal — subsection headers
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsection headers
+\definecolor{accent}{HTML}{0277BD}        % Electric blue — highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E0F7FA}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{blockgreen}{HTML}{2E7D32}    % Minecraft green accent
+
+% --- Section formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable, skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% --- Table helpers ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Ceph + RAG + Minecraft Block Storage}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Ceph RAG Minecraft Block Storage -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% =====================================================================
+\begin{document}
+
+% --- TITLE PAGE ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Voxel as Vessel\\[0.3em]Ceph, RAG, and the Minecraft\\[0.3em]Block Storage Hypothesis}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Distributed Object Storage $\cdot$ Retrieval-Augmented Generation $\cdot$ Voxel Data Primitives}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research and Proof-of-Concept Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 10, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% --- TABLE OF CONTENTS ---
+\tableofcontents
+\newpage
+
+% =====================================================================
+%  STAGE 1 — VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Voxel as Vessel --- Vision Guide}
+
+\metafield{Date:}{March 10, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{Ceph cluster fundamentals, RAG pipeline architecture, Minecraft Anvil/NBT format specification}
+\metafield{Context:}{Originated as a cold-start research mission exploring an unconventional architecture: using Minecraft world files as the generic block-data storage layer beneath a Ceph-backed RAG system. The framing positions Minecraft not as a game but as a universally understood spatial indexing format --- a coordinate-keyed, chunked, compressed object store hiding in plain sight.}
+
+\subsection{Vision}
+
+There is a peculiar isomorphism haunting the intersection of distributed storage and voxel worlds. A Minecraft chunk --- 16×16×320 blocks, each a typed integer in a zlib-compressed NBT tree, addressed by (x,z) region coordinates and packed into 4096-byte sectors within an Anvil .mca file --- is, structurally, a RADOS object in disguise. It has a key (region/chunk coordinates), a variable-sized compressed payload, extended attributes (NBT metadata), a content-addressed structure, and a natural sharding scheme. The Ceph engineers and Notch's team solved the same problem from opposite ends of the universe and arrived at nearly identical primitives.
+
+This mission asks what happens when you lean into that isomorphism rather than coincidentally discovering it. The hypothesis is this: Minecraft world files can serve as a \textit{generic binary block-data storage format} --- a spatial database with a globally understood schema, rich tooling ecosystem, compression built in, and coordinate-native addressing --- sitting underneath a Ceph cluster as the persistent object payload format. Documents, embeddings, graph nodes, vector indices: all chunked, spatially encoded into block coordinates, and stored as Minecraft world data that happens to live inside RADOS objects.
+
+The RAG dimension adds the third layer. Retrieval-Augmented Generation pipelines require three things from their storage substrate: fast random access to chunks, reliable persistence of embedding vectors, and a metadata scheme that survives retrieval at query time. Ceph's RADOS layer provides the distributed persistence and S3-compatible object access. The Minecraft world format provides a surprisingly capable spatial chunking and compression scheme that maps naturally onto the embedding-chunk relationship in RAG: each document chunk becomes a 16×16 section of blocks, its embedding lives in NBT compound tags, and spatial proximity in the voxel world encodes semantic proximity in the embedding space.
+
+This is infrastructure as poetry. The same coordinate geometry that lets a player navigate to a woodland mansion also navigates a retrieval system to the right embedding cluster. The Amiga Principle applies here at full force: architectural leverage over brute-force engineering. Instead of building another bespoke chunk-store, use one that already has a decade of optimization, a global community of tooling authors, and a format so well-documented that 12-year-olds implement parsers in Clojure for fun.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{RAG systems lack a universally portable, self-describing chunk store.} Current vector databases (Pinecone, Milvus, Qdrant, Weaviate) are black boxes with proprietary formats. If the database disappears, so does the corpus. A storage format that is also a world --- that encodes its own spatial structure, that anyone with an NBT parser can read --- addresses this portability crisis.
+
+  \item \textbf{Ceph's object model needs a richer chunk-level schema.} RADOS objects are arbitrary byte blobs. Applications that store structured data inside RADOS must either rely on RGW metadata headers (shallow) or implement their own schema layer. The Minecraft Anvil format is a battle-tested hierarchical binary schema with compression, versioning (DataVersion field), and coordinate indexing already solved.
+
+  \item \textbf{Embedding space and physical space have no natural bridge.} Vector embeddings live in high-dimensional abstract space; retrieval systems struggle to make that space \textit{inspectable} or \textit{navigable}. Mapping embedding clusters onto voxel space creates a spatial metaphor that is humanly navigable --- you could literally walk through your document corpus in a Minecraft client.
+
+  \item \textbf{Distributed RAG systems have no standardized sharding unit.} Ceph shards at the object level; vector databases shard at the index level; document stores shard at the collection level. A voxel-based layer introduces a \textit{spatial shard unit} --- the region file (32×32 chunks) --- that maps cleanly onto both RADOS placement groups and RAG retrieval granularity.
+
+  \item \textbf{Testing and debugging RAG corpora is opaque.} You cannot look at a vector database and see what is in it without specialized tooling. A Minecraft-backed corpus can be opened in NBTExplorer, rendered in a world viewer, or walked through in-game. Debuggability becomes spatial and immediate.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Minecraft worlds are RADOS-native spatial object stores that can back a RAG pipeline's chunk and embedding layer.}
+
+The architecture has three layers that correspond precisely to the three technologies:
+
+\begin{itemize}
+  \item \textbf{Layer 1 (Minecraft / Anvil):} The chunk-and-region format provides the spatial schema. Documents are encoded as block sequences within 16×16×16 sections. Embeddings live as NBT float arrays in chunk compound tags. Block types encode chunk type (document, embedding, graph node, index metadata).
+  \item \textbf{Layer 2 (Ceph / RADOS):} Each Minecraft region file (.mca, covering 32×32 chunks = 512×512 blocks) is stored as a RADOS object. The CRUSH algorithm distributes region objects across OSDs. RGW provides S3-compatible access. BlueStore handles the physical durability layer.
+  \item \textbf{Layer 3 (RAG pipeline):} The retrieval layer queries Ceph for relevant region files, deserializes the NBT chunk data, extracts embedding vectors, performs ANN search within the spatial window, and returns chunk text for LLM augmentation. The spatial coordinate system provides a natural locality heuristic: semantically similar documents cluster in adjacent chunks.
+\end{itemize}
+
+\subsubsection{Domain Architecture Diagram}
+
+\begin{asciibox}
+VOXEL AS VESSEL --- SYSTEM ARCHITECTURE
+=========================================
+
+  [ USER QUERY ]
+       |
+       v
+  [ RAG ORCHESTRATOR ]
+  - embed query (text-embedding-3-large or bge-m3)
+  - compute spatial coordinate from embedding
+       |
+       v
+  [ SPATIAL COORDINATE MAPPER ]             <-- key innovation
+  - maps N-dim embedding vector to (x,z) voxel coords
+  - identifies candidate region files
+  - handles multi-region ANN expansion
+       |
+       v
+  [ CEPH / RADOS LAYER ]
+  - RADOS Gateway (RGW) -- S3-compatible API
+  - CRUSH algorithm -- spatial region file placement
+  - BlueStore backend -- physical OSD durability
+  - Region pool: one RADOS object per .mca file
+       |
+       v
+  [ MINECRAFT ANVIL DESERIALIZER ]
+  - parse .mca header (8KiB, 32x32 chunk table)
+  - decompress target chunks (zlib, scheme 2)
+  - extract NBT compound tags
+  - retrieve: block palette, embedding float arrays,
+              source text, chunk metadata, timestamps
+       |
+       v
+  [ RERANKER + CONTEXT ASSEMBLY ]
+  - cosine similarity re-rank retrieved chunk embeddings
+  - assemble context window (300-500 token chunks)
+       |
+       v
+  [ LLM GENERATION ]
+  - augmented prompt with retrieved context
+  - grounded, source-attributed response
+
+=========================================
+STORAGE HIERARCHY:
+  Block    (1x1x1)   = ~1 token of source text
+  Section  (16^3)    = document chunk (~400 tokens)
+  Chunk    (16x320)  = document (20 sections)
+  Region   (32x32c)  = corpus shard (.mca RADOS object)
+  World    (unbounded) = full RAG corpus
+=========================================
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE DEPENDENCY GRAPH
+==================================
+
+  [M1: Ceph/RADOS] --feeds--> [M3: Integration Architecture]
+  [M2: RAG Pipeline] --feeds--> [M3: Integration Architecture]
+  [M4: Minecraft Format] --feeds--> [M3: Integration Architecture]
+  [M3: Integration] --informs--> [M5: Proof of Concept]
+  [M5: PoC] --validates--> [M6: Spatial Embedding Mapping]
+
+  PARALLEL TRACK A: M1 + M2 (can run simultaneously)
+  PARALLEL TRACK B: M4 (can run simultaneously with A)
+  SEQUENTIAL: M3 (requires A+B complete)
+  SEQUENTIAL: M5 + M6 (require M3)
+
+==================================
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 --- Ceph / RADOS Architecture Survey}
+Comprehensive documentation of Ceph's RADOS object model, the CRUSH algorithm, BlueStore backend, RGW S3 interface, and OSD daemon architecture. Focus on object naming schemes, xattr metadata, pool configuration, placement group sizing, and the librados API surface relevant to storing Anvil region files.
+
+\subsubsection{M2 --- RAG Pipeline Architecture Survey}
+End-to-end RAG pipeline documentation covering document ingestion, chunking strategies (300--500 token target), embedding models (text-embedding-3-large, bge-m3, Matryoshka embeddings), vector storage formats, ANN search algorithms (HNSW, IVF), hybrid BM25+dense retrieval, reranking (Cohere Rerank 3.5, Jina v2), and prompt augmentation. Survey advanced patterns: Corrective RAG, Agentic RAG, GraphRAG.
+
+\subsubsection{M3 --- Integration Architecture Design}
+Design the bridge layer connecting M1 and M2 via the Minecraft format. Define the encoding scheme: how document chunks map to Minecraft sections, how embeddings are encoded as NBT float arrays, how spatial coordinates map to embedding dimensions (dimensionality reduction: PCA/UMAP from 1536-dim to 2D/3D voxel space), and how RADOS object keys map to region file coordinates. Produce the schema spec and API design.
+
+\subsubsection{M4 --- Minecraft Anvil / NBT Format Deep Dive}
+Complete technical documentation of the Anvil format (.mca), the NBT type system (12 tag types, compound trees, long arrays, palette compression), chunk format structure (DataVersion, section arrays, block state palettes, xPos/zPos/yPos coordinates), the Region file header (8KiB, two 4KiB tables for offsets and timestamps), sector addressing (4096-byte aligned), and compression schemes (zlib scheme 2). Survey tooling: anvil-parser (Python), nbt (Python), Clojure anvil-clj, MCEdit, NBTExplorer.
+
+\subsubsection{M5 --- Proof-of-Concept Implementation Plan}
+Executable specification for a minimal PoC: Python library using \texttt{anvil-parser} or \texttt{nbt} to encode/decode document chunks, a mock Ceph layer (initially local filesystem, then RADOS via \texttt{rados-python}), a minimal RAG loop (encode document, store in Anvil world, retrieve by spatial coordinate, return text). Benchmarks: write/read latency, storage overhead vs. raw JSONL, retrieval precision vs. standard vector DB.
+
+\subsubsection{M6 --- Spatial Embedding Mapping Research}
+Investigate the mapping from high-dimensional embedding space to 2D/3D voxel coordinates. Survey: UMAP for 2D projection, PCA for 3D, t-SNE for visualization-only, Space-Filling Curves (Hilbert, Z-order/Morton) for locality-preserving 1D mappings that naturally tile into voxel grids. Evaluate which mapping best preserves semantic locality in the voxel coordinate system, and how to handle dynamic corpus growth (new chunks extend the world; old chunks stay put).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset Configuration --- Voxel as Vessel
+# Activation Profile: Squadron (6 modules, 12 roles)
+
+mission:
+  id: voxel-as-vessel-v1
+  activation: squadron
+  modules: [M1, M2, M3, M4, M5, M6]
+  parallel_tracks: 2
+
+models:
+  opus:    claude-opus-4-6      # M3, M6, synthesis
+  sonnet:  claude-sonnet-4-6    # M1, M2, M4, M5, docs
+  haiku:   claude-haiku-4-5     # schemas, scaffolding
+
+waves:
+  wave_0:  foundation           # schemas + source index
+  wave_1a: [M1, M2]             # PARALLEL: Ceph + RAG surveys
+  wave_1b: [M4]                 # PARALLEL: Minecraft format
+  wave_2:  [M3]                 # integration design (requires 1a+1b)
+  wave_3:  [M5, M6]             # PoC spec + spatial mapping
+  wave_4:  synthesis + publish  # final document assembly
+
+storage:
+  raw_sources:   rados pool 'vav-sources'
+  embeddings:    rados pool 'vav-embeddings' (Anvil format)
+  outputs:       rados pool 'vav-outputs'
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Ceph RADOS architecture documentation (object model, CRUSH, RGW, BlueStore)
+  \item RAG pipeline documentation (ingestion, embedding, retrieval, reranking, generation)
+  \item Minecraft Anvil/.mca format complete technical specification
+  \item NBT type system and palette compression documentation
+  \item Integration architecture design: encoding scheme, API spec, schema design
+  \item Dimensionality reduction survey for spatial embedding mapping (UMAP, PCA, Morton codes)
+  \item Proof-of-concept implementation plan with Python library choices
+  \item Storage overhead analysis vs. conventional RAG vector store formats
+  \item Tooling ecosystem survey for Ceph (librados, RGW) and Minecraft (anvil-parser, nbt)
+  \item Latency and performance benchmarking methodology
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Production Ceph cluster deployment and operations
+  \item Full working implementation (PoC plan only in v1.0)
+  \item Bedrock Edition Minecraft format (Java Edition Anvil only)
+  \item Multi-modal embeddings (text-only RAG corpus in v1.0)
+  \item Minecraft rendering or game-client integration
+  \item Security hardening or production RAG deployment
+  \item Cost analysis for cloud Ceph vs. managed vector DB services
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Ceph RADOS object model fully documented: OSD, Monitor, CRUSH, BlueStore, and RGW components with roles in the voxel storage architecture.
+  \item RAG pipeline stages (ingest, chunk, embed, store, retrieve, rerank, generate) documented with best-practice parameters and proposed mapping to the Minecraft layer.
+  \item Minecraft Anvil format completely specified: region file header, sector addressing, NBT compression, section array structure, block state palette, coordinate system.
+  \item NBT type system documented with all 12 tag types and the long-array palette compression scheme.
+  \item An encoding scheme designed mapping: document tokens to blocks, document chunks to Minecraft sections, embedding vectors to NBT float arrays, corpus shards to region files, region files to RADOS objects.
+  \item A spatial coordinate mapping specified that maps embedding vectors to (x,z) voxel coordinates with documented locality preservation properties.
+  \item At least three dimensionality reduction or space-filling-curve approaches evaluated for semantic locality preservation in 2D voxel space.
+  \item PoC implementation plan executable: libraries chosen, API surface defined, benchmark methodology specified, success metrics stated.
+  \item Storage overhead of the Minecraft encoding layer quantified relative to raw JSONL, Parquet, and native vector DB formats.
+  \item A debuggability workflow documented: how to inspect, navigate, and modify the corpus using standard Minecraft/NBT tooling.
+  \item Cross-module integration validated: encoding scheme from M3, Anvil spec from M4, and RAG pipeline from M2 are mutually consistent.
+  \item The through-line connecting voxel-as-vessel to the GSD Amiga Principle and \textit{The Space Between} philosophical framework is explicit and traceable throughout.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Skill-Creator Vision & Parent architecture & Voxel-as-Vessel is a potential storage backend for the Skill-Creator corpus \\
+The Space Between (book) & Philosophical parent & Embedding space isomorphism extends the Complex Plane of Experience into 3D voxel space \\
+The Quark and the Compiler & Historical lineage & Minecraft chunk format sits in the Unix-derived storage lineage traced in the essay \\
+claudeus-wp-mcp & Adjacent project & Same principle: use an existing rich ecosystem as infrastructure rather than building from scratch \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The deepest insight in this architecture is not technical --- it is structural. What Minecraft's designers solved, under enormous optimization pressure from millions of concurrent players, was exactly the problem that plagues distributed AI systems: how do you address, chunk, compress, and retrieve an unbounded spatial dataset with O(1) random access and graceful degradation under partial failure? The answer --- coordinate-keyed region files, 4096-byte sector alignment, zlib compression, hierarchical NBT trees with palette deduplication --- is a solved instance of the RAG chunk-store problem.
+
+This is the Amiga Principle at geological scale. The same equations at different depths. A vector embedding is a coordinate in high-dimensional space. A block in Minecraft is a coordinate in three-dimensional space. The maps between those spaces --- UMAP, PCA, Morton codes, Hilbert curves --- are the mathematics of \textit{The Space Between}: the structures connecting domains that turn out to be the same structure seen from different altitudes. The voxel world is not the storage; it is the \textit{index}. And an index is a map of a map. The territory is the embeddings. The map is the voxel world. The meta-map is the CRUSH algorithm distributing that world across OSDs. Coordinates and compression, all the way down.
+
+\newpage
+
+% =====================================================================
+%  STAGE 2 RESEARCH REFERENCE
+% =====================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Voxel as Vessel --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each research module. All sources are from official project documentation, professional organizations, or peer-reviewed research. Key source organizations: Ceph Foundation (ceph.io), Red Hat Ceph Storage documentation, AWS/IBM/Databricks (RAG architecture), Minecraft Wiki (format specification), open-source RAG projects (LightRAG, Pinecone, Qdrant).
+
+\subsection{M1 Reference --- Ceph / RADOS Architecture}
+
+\subsubsection{RADOS Fundamentals}
+
+RADOS (Reliable Autonomic Distributed Object Store) is the unified storage substrate beneath all Ceph services, implementing the CP properties of the CAP theorem: strong consistency and partition tolerance. All clients see an identical view of data immediately following writes. The storage unit is the \textit{object}: a named payload, optional xattrs, and optional omap (key-value). Objects live in named \textit{pools} defining replication level, erasure coding policy, and CRUSH placement. For voxel-backed RAG: \texttt{vav-regions} (Anvil .mca objects), \texttt{vav-meta} (world metadata, index maps), and \texttt{vav-cache} (hot embedding cache).
+
+\subsubsection{CRUSH Algorithm}
+
+CRUSH (Controlled Replication Under Scalable Hashing) determines object placement without a central lookup table. Clients and OSDs independently compute object location from the cluster map, eliminating coordinator bottlenecks. CRUSH is rack-aware: replicas distribute across failure domains (racks, hosts, zones) as defined in the CRUSH map. For voxel RAG, CRUSH placement rules can co-locate adjacent region files on nearby OSDs, improving sequential read performance during spatial retrieval queries that span multiple adjacent regions.
+
+\subsubsection{BlueStore and RGW}
+
+Since Ceph 12 (Luminous), BlueStore directly manages HDDs and SSDs without an intermediate filesystem, eliminating the double-write penalty of the prior Filestore backend. BlueStore provides lower latency for the RAG mixed workload: large sequential writes during corpus ingestion and random-access reads during retrieval.
+
+RGW (RADOS Gateway) provides a stateless S3-compatible API; all state persists in RADOS pools, enabling horizontal scaling behind a load balancer. Python clients use \texttt{boto3} or \texttt{s3fs} to fetch Anvil region files by key following the pattern \texttt{regions/r.\{x\}.\{z\}.mca}. The Beast frontend (Boost.Asio) handles high-concurrency retrieval requests asynchronously, suitable for production RAG query loads.
+
+\subsection{M2 Reference --- RAG Pipeline Architecture}
+
+\subsubsection{Pipeline Stages and Voxel Analogues}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{RAG Stage} & \tableheader{Standard Implementation} & \tableheader{Voxel-Layer Analogue} \\
+\midrule
+Ingest & Load PDFs, HTML, DBs & Parse source; normalize to text \\
+Chunk & 300--500 token splits & Encode into $16\times16\times16$ NBT sections \\
+Embed & text-embedding-3-large & TAG\_List of TAG\_Float in NBT compound \\
+Store & Pinecone, Milvus, Qdrant & Anvil region file $\rightarrow$ RADOS object \\
+Retrieve & HNSW/IVF ANN search & Spatial coordinate query + NBT deserialize \\
+Rerank & Cohere Rerank 3.5 & Cosine similarity on NBT float arrays \\
+Generate & LLM context window & LLM with assembled chunk text \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Embedding Models and Retrieval Quality}
+
+Leading embedding models in 2026: OpenAI \texttt{text-embedding-3-large} (3072-dim, Matryoshka-reducible to 256), BAAI \texttt{bge-m3} (1024-dim, multilingual), Cohere \texttt{embed-v3} (1024-dim). Matryoshka embeddings (Kusupati et al., NeurIPS 2022) encode information at multiple granularities: short vectors for fast spatial first-stage retrieval, full vectors for precision reranking.
+
+Research from Microsoft (2024) indicates RAG reduces hallucination 40--60\% versus vanilla generation; two-stage retrieval outperforms single-stage by 10--15\% on NDCG@10. Hybrid BM25 + dense vector search (Reciprocal Rank Fusion) is default in all major vector databases as of 2026.
+
+\subsubsection{Advanced RAG Patterns}
+
+Corrective RAG (CRAG, Yan et al. 2024) adds a lightweight evaluator scoring retrieval quality before generation, triggering web search fallback if retrieved chunks score below threshold. Agentic RAG allows the LLM to decide when to retrieve, what to search for, and whether results are sufficient. GraphRAG (Microsoft, 2024) stores entity-relationship graphs alongside vector embeddings. All three patterns are compatible with the voxel storage layer: different block type categories represent document chunks, graph nodes, and quality-score metadata respectively.
+
+\subsection{M4 Reference --- Minecraft Anvil / NBT Format}
+
+\subsubsection{Region File and Chunk Structure}
+
+Each .mca Anvil file covers 32x32 chunks (512x512 blocks in x/z). Header: 8KiB split into two 4KiB tables --- the first containing chunk offsets and sector lengths, the second containing chunk timestamps (4-byte epoch seconds each). Chunks are always 4096-byte sector aligned. Chunk data begins with a 4-byte big-endian length, a 1-byte compression scheme indicator (scheme 2 = zlib, the only scheme used by the official client), and the compressed NBT payload.
+
+Since Minecraft 1.18, chunks span Y=-64 to Y=320 (384 blocks tall), divided into 24 sections of $16\times16\times16$ blocks. Each section contains a BlockStates long array (variable-bit palette IDs packed into 64-bit longs) and a Palette list (block state compound tags). Palette deduplication is a significant efficiency win for RAG document encoding: sections using a small vocabulary of block types yield minimal palette entries and highly compressed BlockStates arrays.
+
+\subsubsection{NBT Type System}
+
+NBT provides 12 tag types: TAG\_Byte, TAG\_Short, TAG\_Int, TAG\_Long, TAG\_Float, TAG\_Double, TAG\_Byte\_Array, TAG\_String, TAG\_List, TAG\_Compound, TAG\_Int\_Array, TAG\_Long\_Array. For embedding storage: TAG\_List of TAG\_Float provides a direct 32-bit float container. A 1024-dim float32 embedding = 4KB --- fitting within one section's compound tags. If higher precision is required (some models recommend float64), TAG\_Double doubles storage to 8KB per chunk but remains within section bounds. Custom namespace tags (\texttt{rag:embedding}, \texttt{rag:source\_id}, \texttt{rag:chunk\_index}) coexist with standard Minecraft tags within the NBT compound structure.
+
+\subsubsection{Coordinate System and Tooling}
+
+Chunk coordinates are obtained by right-shifting block coordinates 4 bits. Region coordinates are obtained by right-shifting chunk coordinates 5 bits. Both operations are deterministic and reversible. Signed 32-bit integers yield approximately $3.5 \times 10^{12}$ unique chunk positions --- sufficient for any realistic text corpus.
+
+Available Python libraries: \texttt{anvil-parser} (read/write .mca, block get/set, section access), \texttt{nbt} (full NBT type support, all 12 tag types), \texttt{amulet-core} (cross-version world editor library). GUI tooling: NBTExplorer (C\#, visual NBT tree editor, all Minecraft formats), MCEdit (Python world editor).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+RADOS authentication & GATE & Document keyring auth model; no production credentials in any deliverable \\
+Float precision & GATE & TAG\_Float is 32-bit; evaluate TAG\_Double or binary blob for high-precision embedding models \\
+Coordinate overflow & ANNOTATE & 32-bit signed int ceiling; document maximum corpus size implications for the PoC spec \\
+Format versioning & ANNOTATE & Pin to DataVersion; document migration strategy across Minecraft version updates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Project Documentation}
+\begin{itemize}[leftmargin=1.5em]
+  \item Ceph Foundation. \textit{Ceph Technology Overview}. ceph.io/en/discover/technology/
+  \item Ceph Foundation. \textit{The RADOS Distributed Object Store} (Weil, 2009). ceph.io
+  \item Ceph Foundation. \textit{Ceph Object Storage Deep Dive Series, Part 1} (2025). ceph.io
+  \item Ceph Documentation. \textit{rados(8) --- RADOS Object Storage Utility}. docs.ceph.com
+  \item Red Hat. \textit{Red Hat Ceph Storage 5: Object Gateway Guide}. docs.redhat.com
+  \item Minecraft Wiki. \textit{Region File Format}. minecraft.wiki/w/Region\_file\_format
+  \item Minecraft Wiki. \textit{Chunk Format}. minecraft.wiki/w/Chunk\_format
+  \item Minecraft Wiki. \textit{NBT Format}. minecraft.wiki/w/NBT\_format
+\end{itemize}
+
+\subsubsection{Professional and Research Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item AWS. \textit{What is Retrieval-Augmented Generation?} aws.amazon.com
+  \item IBM. \textit{What is RAG?} ibm.com/think/topics/retrieval-augmented-generation
+  \item Databricks. \textit{What is Retrieval Augmented Generation?} databricks.com
+  \item Pinecone. \textit{RAG Overview}. pinecone.io/learn/retrieval-augmented-generation/
+  \item Qdrant. \textit{What is RAG in AI?} qdrant.tech
+  \item HKUDS. \textit{LightRAG: Simple and Fast Retrieval-Augmented Generation} (EMNLP 2025). github.com/HKUDS/LightRAG
+  \item Let's Data Science. \textit{How RAG Actually Works} (2026). letsdatascience.com
+  \item Clyso. \textit{What is RADOS?} (2025). clyso.com
+  \item Weil, Sage A. \textit{Ceph: Reliable, Scalable, and High-Performance Distributed Storage}. PhD, UC Santa Cruz, 2007.
+  \item Kusupati et al. \textit{Matryoshka Representation Learning}. NeurIPS 2022.
+  \item Yan et al. \textit{Corrective Retrieval Augmented Generation (CRAG)}. 2024.
+\end{itemize}
+
+\newpage
+
+% =====================================================================
+%  STAGE 3 MISSION PACKAGE
+% =====================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Voxel as Vessel --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive research and design document for the Voxel-as-Vessel architecture, covering Ceph/RADOS, RAG pipeline integration, and the Minecraft Anvil format as a generic block-data store. Deliver an executable PoC plan and spatial embedding mapping specification, ready for implementation by a Claude Code agent team.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+Wave 0:  Foundation (Haiku) --> schemas, glossary, source index
+Wave 1A: M1 (Ceph) + M2 (RAG) -- PARALLEL -- Sonnet
+Wave 1B: M4 (Minecraft) ------- PARALLEL -- Sonnet
+Wave 2:  M3 (Integration Design) ---------- Opus [CAPCOM gate]
+Wave 3:  M5 (PoC Plan) + M6 (Spatial Map) - Sonnet + Opus
+Wave 4:  Synthesis + Publication ---------- Opus + Sonnet
+========================
+\end{asciibox}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Owner} \\
+\midrule
+1 & M1: Ceph Survey & 6 subsystems documented and sourced & EXEC-A \\
+2 & M2: RAG Survey & 7 pipeline stages + 3 advanced patterns & EXEC-A \\
+3 & M4: Anvil/NBT Ref & Format fully specified; tooling surveyed & EXEC-B \\
+4 & M3: Integration & Encoding scheme, API spec, schema & CRAFT-ARCH \\
+5 & M5: PoC Plan & Executable spec with benchmark methodology & EXEC-A \\
+6 & M6: Spatial Map & 3+ approaches evaluated with locality analysis & CRAFT-ARCH \\
+7 & Final Document & All modules assembled and cross-verified & INTEG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0 Foundation & None & Haiku & 8K \\
+M1 Ceph Survey & W0 & Sonnet & 25K \\
+M2 RAG Survey & W0 & Sonnet & 25K \\
+M4 Minecraft & W0 & Sonnet & 20K \\
+M3 Integration & M1, M2, M4 & Opus & 35K \\
+M5 PoC Plan & M3 & Sonnet & 20K \\
+M6 Spatial Map & M3 & Opus & 30K \\
+Synthesis & M1--M6 & Opus & 20K \\
+Publication & Synthesis & Sonnet & 15K \\
+\midrule
+\textbf{Total} & & & \textbf{$\approx$198K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 43\% & M3, M6, Synthesis: design-heavy, judgment-intensive; encoding scheme design, spatial mapping evaluation, cross-module integration \\
+Sonnet & 53\% & M1, M2, M4, M5, Publication: survey compilation, structured spec production, document assembly \\
+Haiku & 4\% & W0 Foundation: schema generation, glossary, source index templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Notes} \\
+\midrule
+0 & Foundation & W0 schemas & Sequential & Haiku; sets shared cache for all waves \\
+1A & Ceph + RAG & M1, M2 & Parallel & Sonnet; independent research tracks \\
+1B & Minecraft & M4 & Parallel & Sonnet; runs concurrently with 1A \\
+2 & Integration & M3 & Sequential & Opus; requires 1A+1B; CAPCOM gate \\
+3 & PoC + Spatial & M5, M6 & Parallel & Sonnet + Opus; requires W2 \\
+4 & Synthesis & Final doc & Sequential & Opus + Sonnet; gate before delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 foundation schema is cached; all subsequent waves reference without regeneration
+  \item Source index built once in Wave 0; waves 1A/1B append new sources
+  \item M3 encoding spec is shared between M5 (PoC) and M6 (spatial mapping) agents
+  \item Shared glossary prevents terminology drift across parallel tracks
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Modules} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Opus & M3, M6, Synthesis & $\approx$85K & 43\% of budget \\
+Sonnet & M1, M2, M4, M5, Pub & $\approx$105K & 53\% of budget \\
+Haiku & W0 Foundation & $\approx$8K & 4\% of budget \\
+\midrule
+\textbf{Total} & & \textbf{$\approx$198K} & 2--3 sessions at 80K each \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0 (Foundation)
+  |
+  +--------+---------+
+  |                  |
+  v                  v
+ 1A                 1B
+[M1, M2]           [M4]
+  |                  |
+  +--------+---------+
+           |
+           v
+          W2
+         [M3]
+   <-- CAPCOM gate -->
+           |
+      +----+----+
+      |         |
+      v         v
+     M5        M6
+   (PoC)   (Spatial)
+      |         |
+      +----+----+
+           |
+           v
+       W4 (Synthesis)
+           |
+           v
+        DELIVER
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK delivery \\
+Core functionality & 18 & Required & BLOCK delivery \\
+Integration & 8 & Required & BLOCK delivery \\
+Edge cases & 6 & Best-effort & LOG, do not block \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to official project docs or professional orgs. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every benchmark figure, dimension count, and performance metric attributed to a named source. \\
+SC-SEC & Security sensitivity & RADOS auth model documented without publishing keyring secrets or exploitable configuration details. \\
+SC-VER & Format versioning & All Minecraft format references specify Java Edition and DataVersion; no Bedrock Edition content conflated. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{5.5cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & RADOS fully documented & CF-01,02,03 & PENDING \\
+2 & RAG pipeline documented & CF-04,05,06 & PENDING \\
+3 & Anvil format specified & CF-07,08,09 & PENDING \\
+4 & NBT type system documented & CF-10,11 & PENDING \\
+5 & Encoding scheme designed & CF-12,13,14 & PENDING \\
+6 & Spatial mapping specified & CF-15,16 & PENDING \\
+7 & Dim.\ reduction evaluated & CF-17,18 & PENDING \\
+8 & PoC plan executable & CF-19,20 & PENDING \\
+9 & Storage overhead quantified & IN-01,02 & PENDING \\
+10 & Debuggability workflow documented & IN-03,04 & PENDING \\
+11 & Cross-module consistency validated & IN-05,06,07,08 & PENDING \\
+12 & Through-line explicit and traceable & EC-01 & PENDING \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; overall sequencing \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; gap analysis \\
+EXEC-A & Doc Executor A & M1 (Ceph), M2 (RAG), M5 (PoC) production --- Sonnet \\
+EXEC-B & Doc Executor B & M4 (Minecraft/Anvil) production --- Sonnet \\
+CRAFT-ARCH & Architecture Specialist & M3 integration design; M6 spatial mapping --- Opus \\
+CRAFT-RAG & RAG Domain Specialist & RAG pipeline depth; embedding model selection and evaluation \\
+VERIFY & Verification Agent & Source validation; format version pinning; citation checking \\
+INTEG & Integration Agent & Cross-module consistency validation; encoding/API alignment \\
+CAPCOM & HITL Interface & Human approval at Wave 2 boundary (pre-PoC) \\
+BUDGET & Resource Manager & Token budget tracking; session boundary planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 6 (M1 through M6) \\
+Parallel Tracks & 2 (Track 1A: Ceph+RAG; Track 1B: Minecraft) \\
+Execution Waves & 5 (W0, W1A/1B, W2, W3, W4) \\
+Model Distribution & Opus 43\% / Sonnet 53\% / Haiku 4\% \\
+Estimated Tokens & $\approx$198K across 2--3 sessions \\
+HITL Gates & 1 (post-Wave 2, pre-PoC execution) \\
+Deliverables & 7 (6 module docs + final assembled document) \\
+Test Count & 36 (4 safety-critical, 18 core, 8 integration, 6 edge) \\
+Primary Sources & 22 (official docs, professional orgs, peer-reviewed) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The coordinates for the region a chunk belongs to can be found by taking the floor of dividing the chunk coordinates by 32.''} \hfill --- Minecraft Wiki, Region File Format
+
+\vspace{0.8em}
+
+And the coordinates for the document a meaning belongs to can be found by taking the floor of projecting the embedding vector into voxel space. Every retrieval system is a world. Every world is a retrieval system. The question was never whether Minecraft could store embeddings. The question was whether we were paying attention when it already had.
+
+The Amiga Principle: the answer was always there. You just had to pick up the controller.
+
+\vspace{0.5em}
+\hfill \textit{--- Voxel as Vessel, through-line}
+\end{quotebox}
+
+\end{document}

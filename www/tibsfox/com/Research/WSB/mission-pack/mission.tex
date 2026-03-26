@@ -1,0 +1,1097 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Business / Social Science ---
+\definecolor{primary}{HTML}{283593}
+\definecolor{secondary}{HTML}{D84315}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1565C0}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{WA Small Business Startup}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Starting a Small Business in Washington State -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Starting a Small Business\\[0.3em]in Washington State}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Formation, Compliance, Taxation \& Growth}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study for the Evergreen Entrepreneur}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 12, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Starting a Small Business in Washington State --- Vision Guide}
+
+\metafield{Date:}{March 12, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{Cold-start research mission --- Snohomish County / Everett focus}
+
+\subsection{Vision}
+
+Starting a business is not merely a legal filing. It is a phase transition --- the moment a human intention crosses from private imagination into the public regulatory lattice that Washington State has constructed over more than a century. That lattice --- tax classifications, labor standards, licensing regimes, insurance mandates --- is not arbitrary bureaucracy. It is the boundary condition the state imposes on economic activity, the same way physical constants constrain what particles can do. The entrepreneur's task is to learn where the degrees of freedom live within those constraints.
+
+Washington presents a distinctive landscape for new businesses. It has no personal income tax, which lowers the barrier to entry, but it compensates with a Business \& Occupation (B\&O) tax on gross receipts --- a structure that taxes revenue rather than profit, meaning even a company operating at a loss owes money to the state. This inversion of the usual logic (``pay when you earn'' versus ``pay when you profit'') shapes everything downstream: cash-flow planning, pricing strategy, the very definition of when a business is ``succeeding.''
+
+For an Everett-based entrepreneur in 2026, the landscape has shifted further. Washington passed its largest tax package in state history in 2025, broadening sales tax to cover IT services, security, advertising, and more. Everett itself has a tiered minimum wage structure by employer size. The Paid Family and Medical Leave program premium rose to 1.13\%. Each of these changes is a new term in the equation the entrepreneur must solve. This mission exists to map those terms comprehensively, so the entrepreneur can move from intention to action with clear eyes.
+
+The deeper pattern here echoes the Amiga Principle: architectural leverage over brute force. Rather than learning each regulation by collision --- filing late, missing a permit, underpaying a wage --- this research package front-loads the structural knowledge so the entrepreneur can allocate attention to the thing that actually matters: building something worth building.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}, leftmargin=2.5em]
+  \item \textbf{Entity selection complexity.} Washington offers multiple business structures (sole proprietorship, LLC, S-Corp, C-Corp, partnership) each with different liability exposure, tax treatment, and formation costs. Choosing incorrectly can result in unnecessary personal liability or tax inefficiency.
+  \item \textbf{Multi-layered licensing and registration.} A Washington business must register with the Secretary of State, obtain a state business license from the Department of Revenue, potentially obtain city-level endorsements, and may need professional or industry-specific permits. Missing any layer creates compliance risk.
+  \item \textbf{Gross-receipts tax on day one.} The B\&O tax applies to gross income with no deductions for expenses, and recent 2025--2026 legislation has increased rates and broadened taxable services. A new business must understand its tax classification immediately or risk misreporting.
+  \item \textbf{Employment law density.} Washington has among the most employee-protective labor laws in the nation: no tip credit, mandatory paid sick leave, Paid Family \& Medical Leave premiums, workers' compensation, a high and annually-adjusting minimum wage, and local minimum wage overlays in cities like Everett and Seattle.
+  \item \textbf{Capital access barriers.} While Washington offers numerous loan and grant programs (SBA, SSBCI, Flex Fund, CDFIs, microenterprise grants), navigating which programs apply to a specific business stage, location, and demographic profile is a research task in itself.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Map every regulatory, financial, and operational obligation a Washington small business faces --- from Secretary of State filing through quarterly tax reporting --- into a single navigable reference architecture, organized by lifecycle stage and decision dependency.
+
+The core insight is that business startup is not a linear checklist but a \emph{dependency graph}: you cannot get your business license without your UBI number, you cannot get your UBI without filing formation documents, you cannot choose your formation type without understanding the tax consequences, and you cannot understand the tax consequences without knowing your business classification. This mission maps that graph.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    WASHINGTON STATE SMALL BUSINESS DOMAIN
+  ╔═══════════════════════════════════════════════════════════╗
+  ║                                                           ║
+  ║  ┌─────────────┐     ┌──────────────┐    ┌────────────┐  ║
+  ║  │  FORMATION   │────▶│  LICENSING    │───▶│   TAXES    │  ║
+  ║  │  Entity Type │     │  State/Local  │    │  B&O/Sales │  ║
+  ║  │  SOS Filing  │     │  Professional │    │  Classify  │  ║
+  ║  └──────┬───────┘     └──────┬───────┘    └─────┬──────┘  ║
+  ║         │                    │                   │         ║
+  ║         ▼                    ▼                   ▼         ║
+  ║  ┌─────────────┐     ┌──────────────┐    ┌────────────┐  ║
+  ║  │  EMPLOYMENT  │◀───▶│   FUNDING     │◀──▶│  SUPPORT   │  ║
+  ║  │  Wages/Leave │     │  Grants/Loans │    │  SBDC/EASC │  ║
+  ║  │  Insurance   │     │  SBA/SSBCI    │    │  SCORE     │  ║
+  ║  └─────────────┘     └──────────────┘    └────────────┘  ║
+  ║                                                           ║
+  ╚═══════════════════════════════════════════════════════════╝
+     ▲ Dependencies flow left-to-right, top-to-bottom
+     ▲ Cross-links show mutual constraints
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE DECOMPOSITION (5 Parallel Research Tracks)
+
+  M1: FORMATION          M2: LICENSING          M3: TAXATION
+  ├ Entity types         ├ State BL             ├ B&O classes
+  ├ SOS filing           ├ City endorsements    ├ Rate changes 2025-26
+  ├ Registered agent     ├ Professional         ├ Sales tax expansion
+  ├ Governance docs      ├ Industry-specific    ├ Filing frequency
+  └ EIN / UBI            └ Permit wizard        └ Credits/deductions
+
+  M4: EMPLOYMENT         M5: FUNDING & SUPPORT
+  ├ Min wage (state+local) ├ SBA loan programs
+  ├ Overtime thresholds    ├ SSBCI / Flex Fund
+  ├ PFML premiums          ├ CDFIs & microloans
+  ├ Workers' comp          ├ Grants (Commerce)
+  ├ Paid sick leave        ├ SBDC / EASC / SCORE
+  └ WA Cares Fund          └ Snohomish County resources
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Business Formation \& Legal Structure}
+Entity type selection (sole proprietorship, LLC, corporation, partnership), Secretary of State filing procedures, Certificate of Formation vs.\ Articles of Incorporation, UBI number acquisition, registered agent requirements, governance documents (bylaws, operating agreements), and federal EIN application. Decision framework for choosing structure based on liability, taxation, and growth plans.
+
+\subsubsection{M2: Licensing \& Regulatory Compliance}
+Washington State Business License Application via the Business Licensing Service, city and county endorsements, the Business Licensing Wizard tool, professional licensing requirements, industry-specific permits (food, construction, cannabis, alcohol), and maintaining compliance across multiple jurisdictions.
+
+\subsubsection{M3: Tax Landscape \& Financial Obligations}
+Business \& Occupation tax classifications and rates (retailing 0.471\%, wholesaling 0.484\%, services 1.5\%+), 2025--2026 legislative changes (service rate tiers, sales tax expansion to IT/advertising/security services, large business surcharge), sales and use tax collection, city-level B\&O taxes, filing frequency determination, credits and deductions including MATC, and the absence of state income tax.
+
+\subsubsection{M4: Employment Law \& Workforce Management}
+State minimum wage (\$17.13/hr) and local overlays (Everett: \$18.77--\$20.77 depending on size), overtime exemption thresholds (\$80,168.40/yr), Paid Family \& Medical Leave (1.13\% premium rate, employer/employee split), workers' compensation via L\&I, mandatory paid sick leave (1 hour per 40 worked), WA Cares Fund (long-term care, benefits starting July 2026), new-hire reporting, and labor poster requirements.
+
+\subsubsection{M5: Funding, Resources \& Support Ecosystem}
+SBA 7(a) and 504 loan programs, State Small Business Credit Initiative (SSBCI, \$163.4M allocation), Small Business Flex Fund 2, CDFI lenders (Craft3, Business Impact NW, SNAP Financial Access), microenterprise grants via WSMA, Working Washington grants, Department of Commerce programs, and the local support network: Everett/Snohomish County SBDC at WSU Everett (915 N.\ Broadway), Economic Alliance Snohomish County, SCORE mentoring, Everett Community College Small Business Accelerator, Northwest Innovation Resource Center, and the Business Builder Expo (March 31, 2026, Lynnwood).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  orchestrator:
+    model: opus
+    role: "Mission direction, synthesis, cross-module integration"
+  planner:
+    model: sonnet
+    role: "Wave decomposition, dependency management, parallel optimization"
+  executors:
+    count: 2
+    model: sonnet
+    role: "Document production per parallel track"
+  specialists:
+    - name: CRAFT-LEGAL
+      model: opus
+      role: "Entity selection, liability analysis, regulatory interpretation"
+    - name: CRAFT-FISCAL
+      model: opus
+      role: "Tax classification, financial planning, funding navigation"
+  verification:
+    model: sonnet
+    role: "Source validation, regulatory accuracy, cross-module consistency"
+  foundation:
+    model: haiku
+    role: "Shared schemas, templates, source index scaffolding"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item All business entity types available under Washington State law
+  \item State-level licensing, registration, and tax obligations current through March 2026
+  \item 2025--2026 legislative tax changes (HB 2137, SB 5796 tax package)
+  \item Employment law requirements for businesses with 1--50 employees
+  \item Everett and Snohomish County local requirements and resources
+  \item Federal requirements intersecting state obligations (EIN, SBA programs)
+  \item Funding programs available to Washington small businesses as of March 2026
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Sector-specific deep dives (cannabis, healthcare, construction contractor specializations)
+  \item International business / import-export compliance
+  \item Franchise-specific regulations
+  \item Detailed accounting procedures or bookkeeping methodology
+  \item Real estate acquisition / commercial lease negotiation
+  \item Intellectual property strategy (patents, trademarks beyond trade name registration)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item Entity comparison table covers all five major structures with liability, tax, formation cost, and governance requirements for each.
+  \item Step-by-step formation flowchart traces the complete path from entity selection through UBI number receipt.
+  \item Licensing module identifies all required state, city (Everett), and county (Snohomish) licenses with application links and fees.
+  \item B\&O tax section explains all relevant classifications with 2026-current rates and provides examples for at least three common business types.
+  \item Sales tax expansion coverage itemizes all newly taxable services effective October 1, 2025.
+  \item Employment module provides a compliance checklist covering minimum wage, overtime, PFML, workers' comp, paid sick leave, and WA Cares for a small employer in Everett.
+  \item Everett-specific minimum wage tiers documented with effective dates and employer-size thresholds.
+  \item Funding section catalogs at least 10 distinct loan/grant programs with eligibility criteria, amounts, and application channels.
+  \item Local resource directory includes SBDC, EASC, SCORE, and at least three additional Snohomish County resources with contact information.
+  \item All numerical claims (tax rates, wage amounts, premium percentages, filing fees) cite specific government sources.
+  \item Document is self-contained: a reader with no prior knowledge of Washington business law can follow the entire startup process.
+  \item Through-line connects the regulatory landscape to the GSD ecosystem philosophy of architectural leverage over brute-force discovery.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Core Architecture & Chipset config follows Amiga coprocessor model & Active \\
+Skill-Creator Pipeline & Mission designed for SC execution via Claude Code & Active \\
+The Space Between Ch.\ 17 & ``Boundary conditions'' framing echoes regulatory lattice & Reference \\
+Tibsfox Infrastructure & Business knowledge may inform tibsfox.com hosting decisions & Adjacent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every entrepreneur is a boundary condition exploring degrees of freedom. The regulatory lattice of Washington State --- its UBI numbers, B\&O classifications, PFML premiums, tiered minimum wages --- is not an obstacle to the business. It \emph{is} the topology of the space in which the business exists. Just as a particle's behavior is defined by the field it inhabits, a business's operational shape is defined by the regulatory field it navigates.
+
+This mission treats that field as a legitimate object of study, not a nuisance to be minimized. The Amiga Principle applies: invest once in understanding the architecture, and every subsequent decision becomes cheaper. The alternative --- learning each regulation by collision, one penalty at a time --- is the brute-force approach. The entrepreneur who reads this mission package before filing their first form is using architectural leverage. They are, in the GSD sense, \emph{getting stuff done}.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Starting a Small Business in Washington State --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides source-backed findings organized by module. Each section corresponds to a research module from the Vision Document. All data is current as of March 2026 unless otherwise noted.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Washington Secretary of State (SOS) --- \url{https://www.sos.wa.gov}
+  \item Washington Department of Revenue (DOR) --- \url{https://dor.wa.gov}
+  \item Washington Department of Labor \& Industries (L\&I) --- \url{https://lni.wa.gov}
+  \item Washington Employment Security Department (ESD) --- \url{https://esd.wa.gov}
+  \item Washington Department of Commerce --- \url{https://www.commerce.wa.gov}
+  \item Washington Small Business Development Center (SBDC) --- \url{https://wsbdc.org}
+  \item U.S.\ Small Business Administration (SBA) --- \url{https://www.sba.gov}
+  \item Business.WA.gov --- \url{https://www.business.wa.gov}
+  \item Economic Alliance Snohomish County (EASC) --- \url{https://www.economicalliancesc.org}
+\end{itemize}
+
+\subsection{M1: Business Formation \& Legal Structure Reference}
+
+\subsubsection{Entity Types and Comparison}
+
+Washington recognizes several business structures, each carrying distinct implications for personal liability, taxation, management complexity, and formation cost.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Structure} & \tableheader{Liability} & \tableheader{Taxation} & \tableheader{Formation} & \tableheader{Governance} \\
+\midrule
+Sole Prop. & Unlimited personal & Pass-through (Schedule C) & No state filing & None required \\
+LLC & Limited to entity & Pass-through (default) or corp election & \$180 Certificate of Formation & Operating Agreement \\
+S-Corp & Limited to entity & Pass-through; must pay reasonable salary & \$180 Articles + IRS S-election & Bylaws; Board \\
+C-Corp & Limited to entity & Double taxation (corp + dividend) & \$180 Articles of Incorporation & Bylaws; Board; Officers \\
+LP/LLP & Varies by partner type & Pass-through & \$180 Certificate of LP & Partnership Agreement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Source:} Washington Secretary of State, Corporations and Charities Division; Business.WA.gov Small Business Guide.
+
+\subsubsection{Formation Procedure}
+
+The formation process for entities requiring state registration (LLC, corporation, LP) follows a defined sequence. A sole proprietorship does not require Secretary of State filing but still needs a business license if gross income exceeds \$12,000/year.
+
+The key steps are: (1) Choose and verify business name availability via the SOS business search; (2) Designate a registered agent --- a Washington-based person or entity who will receive official service of process; (3) File the appropriate formation document (Certificate of Formation for LLCs, Articles of Incorporation for corporations) with the Secretary of State, which costs \$180; (4) Upon filing, the SOS issues a Unified Business Identifier (UBI) number, which is the state-level business identification used across all agencies; (5) Create governance documents --- Operating Agreement for LLCs, Bylaws for corporations; (6) Apply for a federal EIN from the IRS.
+
+A critical ordering note from practitioners: begin with the Secretary of State, not the Department of Revenue. The UBI number issued by the SOS is needed for all subsequent agency interactions. Starting elsewhere risks generating duplicate identification numbers and wasting time resolving conflicts.
+
+\textbf{Source:} Business.WA.gov Checklist for Opening a Business; WA Secretary of State online filing portal.
+
+\subsection{M2: Licensing \& Regulatory Compliance Reference}
+
+\subsubsection{State Business License}
+
+Washington requires a state business license for any business that meets one or more of the following conditions: gross income of \$12,000 or more per year; requirement to collect sales tax; use of a trade name different from the owner's legal name; intent to hire employees within 90 days; or requirement to pay taxes or fees to the Department of Revenue.
+
+The Washington Business License Application is filed through the Business Licensing Service (BLS) and simultaneously establishes accounts with the Departments of Revenue, Employment Security, and Labor \& Industries. Online filing typically processes within 5 business days; paper filing can take up to 21 days.
+
+\textbf{Source:} Washington Department of Revenue, \url{https://dor.wa.gov/open-business}; Business.WA.gov Small Business Guide.
+
+\subsubsection{Local Licensing}
+
+In addition to the state license, most cities and counties require their own business licenses. The Business Licensing Wizard (\url{https://secure.dor.wa.gov/gteunauth/_/}) generates a customized checklist of required licenses and permits based on business activity and location.
+
+For Everett-based businesses, contact the City of Everett for local endorsements. Snohomish County requirements apply for businesses operating outside city limits. The Municipal Research and Services Center (MRSC) maintains a directory of all Washington cities and counties with their licensing requirements.
+
+\subsubsection{Industry-Specific Permits}
+
+Certain business activities require additional permits: food businesses need kitchen and food handler permits from the county health department; food and beverage manufacturers need Washington Department of Agriculture licensing; alcohol sales require a license from the Liquor and Cannabis Board; construction trades must register as contractors with L\&I, which requires bonding and insurance --- even marketing or bidding for construction work requires contractor registration.
+
+\textbf{Source:} Business.WA.gov Small Business Guide --- Start chapter; Washington Department of Licensing.
+
+\subsection{M3: Tax Landscape \& Financial Obligations Reference}
+
+\subsubsection{Business \& Occupation (B\&O) Tax}
+
+Washington's B\&O tax is a gross receipts tax --- it applies to total revenue with no deductions for labor, materials, or other costs of doing business. This is fundamentally different from income-based taxation and is a critical point for new business owners to understand.
+
+The state does not levy a personal or corporate income tax. The B\&O tax is the primary mechanism by which business activity is taxed.
+
+\textbf{Key B\&O classifications and rates (post-2025 legislation):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Classification} & \tableheader{Rate (2026)} & \tableheader{Notes} \\
+\midrule
+Retailing & 0.50\% & Increased from 0.471\% per 2025 legislation \\
+Wholesaling & 0.50\% & Increased from 0.484\% \\
+Manufacturing & 0.50\% & Increased from 0.484\%; MATC credit available \\
+Service \& Other Activities & 1.5\% & For businesses under \$5M aggregate income \\
+Service (≥\$5M income) & 2.1\% & Increased from 1.75\% per Oct 2025 change \\
+Large business surcharge & +0.5\% & On income over \$250M; effective Jan 1, 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The small business B\&O tax credit effectively exempts the first portion of income for qualifying small businesses. Filing frequency (monthly, quarterly, or annually) depends on annual gross receipts.
+
+\textbf{Source:} Washington Department of Revenue, B\&O tax page; Association of Washington Business; HCVT LLP analysis.
+
+\subsubsection{Sales Tax Expansion (October 2025)}
+
+Washington's 2025 legislative session produced the largest tax increase in state history, including a major expansion of services subject to sales tax effective October 1, 2025. Newly taxable services include: IT support and training, data processing, website design and development, security services, temporary staffing (with hospital exceptions), advertising services, and live events/training with real-time interaction. Notable exclusions: web hosting, domain registration, newspapers, radio/TV broadcasting, publishing, and out-of-home advertising.
+
+\textbf{Source:} Association of Washington Business; CLA Connect analysis.
+
+\subsubsection{City-Level B\&O Taxes}
+
+Cities may levy their own B\&O tax in addition to the state tax. For Seattle, effective January 1, 2026, the B\&O threshold increased to \$2 million following voter approval of Proposition 2. Businesses with gross receipts under \$2 million owe no city B\&O tax. Above that threshold, businesses pay tax only on receipts exceeding \$2 million.
+
+Everett's city-level B\&O requirements should be verified directly with the City of Everett finance department, as local B\&O rates and thresholds vary significantly across jurisdictions.
+
+\textbf{Source:} City of Seattle, \url{https://www.seattle.gov/city-finance/business-taxes}; MRSC city B\&O overview.
+
+\subsection{M4: Employment Law \& Workforce Management Reference}
+
+\subsubsection{Minimum Wage (2026)}
+
+Washington State's 2026 minimum wage is \$17.13 per hour for employees aged 16 and older. Youth workers (14--15) may be paid 85\% of minimum wage (\$14.56/hr). Washington does not allow tip credits --- all employees must receive the full minimum wage before tips.
+
+\textbf{Everett-specific minimum wages (effective January 1, 2026):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{3cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Employer Size} & \tableheader{Jan--Jun 2026} & \tableheader{Jul--Dec 2026} \\
+\midrule
+Large (500+ employees) & \$20.77/hr & \$20.77/hr \\
+Mid-size (15--499 or >\$2M revenue) & \$18.77/hr & \$19.77/hr \\
+Small (<15 employees) & \$17.13/hr (state rate) & \$17.13/hr (state rate) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Source:} Washington L\&I, Minimum Wage page; Mondaq 2026 Minimum Wage Update; PayNW.
+
+\subsubsection{Overtime and Exempt Status}
+
+For 2026, the overtime-exempt salary threshold is \$1,541.70/week (\$80,168.40/year), regardless of employer size. Employees earning below this threshold are eligible for overtime pay after 40 hours in a workweek. Computer professionals paid hourly must earn at least \$59.96/hr to qualify as exempt.
+
+For noncompete enforceability, employees must earn at least \$126,858.83 annually; independent contractors must earn at least \$317,147.09.
+
+\textbf{Source:} Miller Nash LLP; Perkins Coie 2026 wage update.
+
+\subsubsection{Paid Family \& Medical Leave (PFML)}
+
+All Washington employers with at least one employee must participate in the PFML program. The 2026 premium rate is 1.13\% of gross wages (excluding tips), up to the Social Security taxable maximum of \$184,500. Premiums are split approximately 71.43\% employee / 28.57\% employer for businesses with 50+ employees. Businesses with fewer than 50 employees are not required to pay the employer share but must collect and remit the employee portion.
+
+Eligible employees can receive up to 12 weeks of paid leave (up to 16--18 weeks for combined qualifying events). Starting January 1, 2026, job protection extends to employers with 25+ employees, with eligibility reduced from 12 months to 180 calendar days of employment.
+
+Small businesses (<50 employees) can apply for \$3,000 grants per employee on PFML for 7+ days who is replaced by a temporary worker (up to 10 grants per calendar year). Receiving a grant requires the employer to pay the employer share of premiums for 3 years thereafter.
+
+\textbf{Source:} Washington ESD, \url{https://paidleave.wa.gov}; Paychex PFML guide.
+
+\subsubsection{Workers' Compensation}
+
+Washington requires all businesses hiring employees to carry no-fault workers' compensation insurance through the Washington State Fund, administered by L\&I. Premiums are paid by both employers and employees (collected via payroll deductions). Premium rates vary by industry classification and hours worked. Employers file quarterly reports with L\&I. Coverage includes medical costs, rehabilitation, wage replacement, disability benefits, and survivor benefits.
+
+\textbf{Source:} Washington L\&I; Connecteam Washington Labor Laws guide.
+
+\subsubsection{WA Cares Fund}
+
+The WA Cares Fund is a long-term care insurance program. Eligible employees will begin accessing benefits in July 2026, including professional personal care, healthcare equipment, and home modifications. Premiums are collected alongside PFML through employer quarterly reporting.
+
+\textbf{Source:} PayNW 2026 Compliance Updates.
+
+\subsection{M5: Funding, Resources \& Support Ecosystem Reference}
+
+\subsubsection{Federal Loan Programs}
+
+The SBA offers several loan programs accessible in Washington: 7(a) loans for general business purposes, 504 loans for long-term fixed-rate financing of major assets, microloans up to \$50,000 through intermediary lenders, and disaster loans for affected businesses. SBIR/STTR grants provide competitive grant funding from 11 federal agencies for small businesses developing new products or technology.
+
+\textbf{Source:} SBA.gov; Business.WA.gov Loans and Grants page.
+
+\subsubsection{State Programs}
+
+The Washington Department of Commerce administers the State Small Business Credit Initiative (SSBCI), a \$163.4 million allocation from the U.S.\ Treasury funding five capital access programs. These are implemented as loans and equity investments (not grants) through CDFIs and participating lenders, with a portion targeted to very small businesses and socially/economically disadvantaged individuals.
+
+The Small Business Flex Fund 2 offers loans up to \$250,000 at interest rates of 8.25--11.25\% with 36--72 month terms and no prepayment penalties. Note: as of early 2026, the Flex Fund 2 is pausing new applications during a redesign phase to better meet microloan needs.
+
+Working Washington grants support small businesses with annual revenue under \$5 million, particularly those in sectors with sustained losses. The Workforce Development Council has launched new rounds of small business grants in partnership with the Department of Commerce.
+
+\textbf{Source:} Washington Department of Commerce, \url{https://www.commerce.wa.gov/access-to-capital/}; SmallBusinessFlexFund.org.
+
+\subsubsection{CDFI and Community Lenders}
+
+Community Development Financial Institutions serve businesses that don't qualify for traditional bank loans:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Lender} & \tableheader{Loan Range} & \tableheader{Focus} \\
+\midrule
+Craft3 & Up to \$250K & Pacific NW underserved business owners \\
+Business Impact NW & \$5K -- \$500K & SEDI business owners in WA, AK, ID, OR \\
+SNAP Financial Access & \$5K -- \$150K & Women, POC, veterans, immigrants, LGBTQ+ \\
+Tacoma Microloan & \$5K -- \$25K & Short-term loans for Tacoma businesses \\
+Rural Opportunity Fund & Varies & Eastern WA counties \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Source:} Gusto Washington Business Grants and Loans; Business.WA.gov.
+
+\subsubsection{Local Resources: Snohomish County / Everett}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Resource} & \tableheader{Details} \\
+\midrule
+Washington SBDC (Everett) & Free, confidential business advising. WSU Everett, 915 N.\ Broadway Suite 310. Email: washington@wsbdc.org, Phone: 833-492-7232 \\
+Economic Alliance Snohomish County & Regional economic development; membership; advocacy; Business Builder Expo (March 31, 2026 at Lynnwood Event Center). info@EconomicAllianceSC.org \\
+SCORE & Free mentoring from working and retired executives. Snohomish/Island/San Juan counties: 206-553-7320 \\
+EvCC Small Business Accelerator & Training, tools, and guidance for established businesses. 425-267-0150 \\
+NW Innovation Resource Center & Free advisory for entrepreneurs and inventors across NW Washington. 360-255-7870 \\
+WA Procurement Technical Assistance (APEX) & Help finding government contracts. Contact: 425-248-4223 \\
+Office of Minority \& Women's Business Enterprises & Certification and Linked Deposit Loan Program \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Source:} EASC; City of Snohomish Business Resource Directory; Snohomish County government; HeraldNet resource listing.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Tax advice & GATE & Present information factually; note this is not tax advice and readers should consult a CPA or tax attorney \\
+Legal structure advice & GATE & Present comparison framework; recommend consulting a business attorney for entity selection \\
+Employment law & GATE & Cite specific statutes; note laws change and employers should verify with L\&I \\
+Funding eligibility & ANNOTATE & Present program criteria without guaranteeing eligibility; direct to program contacts \\
+Legislative changes & ANNOTATE & Note effective dates clearly; flag that 2025--2026 was a period of significant change \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Washington Secretary of State, Corporations and Charities Division
+  \item Washington Department of Revenue --- B\&O tax, Sales tax, Business licensing
+  \item Washington Department of Labor \& Industries --- Minimum wage, Workers' comp, Employment standards
+  \item Washington Employment Security Department --- PFML, Unemployment insurance, WA Cares
+  \item Washington Department of Commerce --- SSBCI, Access to Capital, Startup Washington
+  \item Washington State Legislature --- RCW 49.46 (Minimum Wage), Title 51 (Industrial Insurance)
+  \item City of Seattle Finance --- B\&O tax, Proposition 2
+  \item City of Everett --- Local minimum wage ordinance
+  \item Snohomish County --- Starting a Business resource page
+  \item U.S.\ Small Business Administration --- 7(a), 504, SBIR programs
+  \item IRS --- EIN application, S-Corp election
+\end{itemize}
+
+\subsubsection*{Professional Organizations \& Analyses}
+\begin{itemize}[leftmargin=2em]
+  \item Association of Washington Business (AWB) --- Tax change analysis
+  \item Municipal Research and Services Center (MRSC) --- City B\&O overview
+  \item Economic Alliance Snohomish County --- Local business resources
+  \item Washington Small Business Development Center --- Advising services
+  \item Washington State Microenterprise Association (WSMA) --- Grant programs
+  \item Miller Nash LLP --- 2026 minimum wage update
+  \item Perkins Coie LLP --- Washington wage announcements
+  \item HCVT LLP --- B\&O tax changes analysis
+  \item Moss Adams / Baker Tilly --- Seattle B\&O Proposition 2 analysis
+  \item Paychex --- PFML compliance guide
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained reference document that enables a prospective small business owner in Everett, Washington to navigate the complete startup process --- from entity selection through operational compliance --- with all regulatory requirements, tax obligations, employment laws, and support resources documented and sourced to authoritative agencies. The output must be current through March 2026, including all 2025--2026 legislative changes.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE EXECUTION ARCHITECTURE
+
+  Wave 0: FOUNDATION (Sequential, Haiku)
+  ┌───────────────────────────────────────────┐
+  │  Shared schemas, source index, templates  │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 1: PARALLEL RESEARCH (Sonnet + Opus)
+  ┌──────────────────┐    ┌──────────────────┐
+  │  TRACK A          │    │  TRACK B          │
+  │  M1: Formation    │    │  M3: Taxation     │
+  │  M2: Licensing    │    │  M4: Employment   │
+  └────────┬─────────┘    └────────┬─────────┘
+           │    ┌──────────────────┘
+           ▼    ▼
+  ┌───────────────────────────────────────────┐
+  │  M5: Funding & Support (depends on M1-M4) │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 2: SYNTHESIS (Sequential, Opus)
+  ┌───────────────────────────────────────────┐
+  │  Cross-module integration, decision       │
+  │  frameworks, startup flowchart            │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 3: PUBLICATION + VERIFICATION (Sonnet)
+  ┌───────────────────────────────────────────┐
+  │  Format, verify sources, compile, test    │
+  └───────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item \textbf{Foundation Layer} --- Shared data schemas, citation format, glossary template, source index
+  \item \textbf{Research Layer} --- Five parallel module documents with sourced findings
+  \item \textbf{Synthesis Layer} --- Cross-module decision frameworks, dependency flowcharts, compliance checklists
+  \item \textbf{Publication Layer} --- Formatted output, source verification, LaTeX compilation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Entity Comparison Matrix & All 5 structures, 6+ attributes each & Table + narrative \\
+2 & Formation Flowchart & Complete dependency path, SOS→UBI→BLS & ASCII diagram \\
+3 & Licensing Checklist & State + Everett + Snohomish requirements & Structured checklist \\
+4 & Tax Classification Guide & B\&O rates, sales tax expansion, filing & Tables + examples \\
+5 & Employment Compliance Pack & Wages, PFML, W/C, sick leave, WA Cares & Checklist + tables \\
+6 & Funding Directory & 10+ programs with eligibility/amounts & Annotated table \\
+7 & Local Resource Directory & 7+ Snohomish County resources + contacts & Contact table \\
+8 & Startup Decision Flowchart & End-to-end visual from idea to operating & ASCII diagram \\
+9 & Synthesized Reference Doc & All modules integrated, cross-referenced & LaTeX PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Source Index & None & Haiku & 2,000 \\
+W0: Schema Defs & None & Haiku & 1,500 \\
+W1: M1 Formation & W0 & Sonnet & 8,000 \\
+W1: M2 Licensing & W0 & Sonnet & 6,000 \\
+W1: M3 Taxation & W0 & Opus & 10,000 \\
+W1: M4 Employment & W0 & Opus & 10,000 \\
+W1: M5 Funding & W0, M1--M4 & Sonnet & 8,000 \\
+W2: Synthesis & M1--M5 & Opus & 12,000 \\
+W3: Publication & Synthesis & Sonnet & 6,000 \\
+W3: Verification & All modules & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Tax classification (judgment-heavy), employment law (complex tiered rules), cross-module synthesis \\
+Sonnet & $\sim$60\% & Formation procedures, licensing compilation, funding directory, publication formatting, verification \\
+Haiku & $\sim$10\% & Foundation schemas, template scaffolding, source index structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Execution} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 1 & 3,500 \\
+1 & Parallel Research & 2 tracks & 8 & 42,000 \\
+2 & Synthesis & Sequential & 3 & 12,000 \\
+3 & Pub + Verify & Sequential & 3 & 10,000 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & & \textbf{15} & \textbf{67,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+Source Index & Haiku & None & Canonical URL list with access dates \\
+Schema Definitions & Haiku & None & Entity comparison schema, checklist schema, resource directory schema \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Formation \& Licensing:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+M1: Formation & Sonnet & W0 schemas & Entity matrix, formation flowchart \\
+M2: Licensing & Sonnet & W0, M1 (UBI) & License checklist, permit guide \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Tax \& Employment:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+M3: Taxation & Opus & W0 schemas & Tax classification guide, rate tables \\
+M4: Employment & Opus & W0 schemas & Compliance checklist, wage tables \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Funding (sequential after A+B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+M5: Funding & Sonnet & W0, M1--M4 & Funding directory, resource contacts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+Integration & Opus & M1--M5 & Cross-module decision framework \\
+Flowchart & Opus & Integration & End-to-end startup dependency graph \\
+Narrative & Opus & All & Through-line, executive summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Dependencies} & \tableheader{Output} \\
+\midrule
+Formatting & Sonnet & Synthesis & LaTeX compilation, PDF output \\
+Source Verify & Sonnet & All modules & URL validation, citation check \\
+Test Execution & Sonnet & Test plan & Pass/fail matrix \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Source index as shared cache:} Wave 0 source index loaded into every Wave 1 context to prevent redundant lookups
+  \item \textbf{Schema reuse:} Entity comparison schema defined once, referenced by M1 (formation), M3 (tax implications), and M5 (funding eligibility)
+  \item \textbf{Cross-module glossary:} Terms defined in Wave 0 (UBI, B\&O, PFML, L\&I) to prevent inconsistent definitions
+  \item \textbf{Progressive context loading:} Wave 2 loads only module summaries (not full text) to fit within context window
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Wave 0} & \tableheader{Wave 1} & \tableheader{Wave 2} & \tableheader{Wave 3} \\
+\midrule
+Haiku & 3,500 & --- & --- & --- \\
+Sonnet & --- & 22,000 & --- & 10,000 \\
+Opus & --- & 20,000 & 12,000 & --- \\
+\midrule
+\textbf{Total} & 3,500 & 42,000 & 12,000 & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total: $\sim$67,500 tokens across 15 context windows in 4 sessions.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  DEPENDENCY GRAPH
+
+  W0-SRC ─────┬──────────────────────────────┐
+  W0-SCH ─────┤                              │
+              ▼                              ▼
+        ┌─────────┐  ┌─────────┐    ┌─────────┐  ┌─────────┐
+        │ M1:FORM │─▶│ M2:LIC  │    │ M3:TAX  │  │ M4:EMP  │
+        └────┬────┘  └────┬────┘    └────┬────┘  └────┬────┘
+             │            │              │            │
+             └────────────┴──────┬───────┴────────────┘
+                                 ▼
+                          ┌─────────┐
+                          │ M5:FUND │
+                          └────┬────┘
+                               ▼
+                        ┌────────────┐
+                        │ W2:SYNTH   │
+                        └──────┬─────┘
+                               ▼
+                        ┌────────────┐
+                        │ W3:PUB+VER │
+                        └────────────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations trace to government agencies, professional organizations, or established law firms. Zero blog-only or entertainment sources. \\
+SC-NUM & Numerical attribution & Every tax rate, wage amount, fee, premium percentage, and threshold attributed to a specific agency source. \\
+SC-ADV & No advocacy & Document presents regulatory information without advocating for or against specific business structures, tax strategies, or policy positions. \\
+SC-LEG & Legal disclaimer & Document includes clear disclaimer that content is informational, not legal or tax advice, and readers should consult qualified professionals. \\
+SC-CUR & Currency verification & All rates and thresholds verified against 2026 effective dates; 2025 legislation changes noted with correct effective dates. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Entity comparison & All 5 structures covered with liability, tax, cost, governance \\
+CF-02 & Formation flowchart & Complete path from selection through UBI receipt \\
+CF-03 & State license criteria & All 6 triggering conditions documented \\
+CF-04 & Local license (Everett) & Everett and Snohomish requirements identified \\
+CF-05 & B\&O classifications & All major classes with 2026 rates \\
+CF-06 & Sales tax expansion & All newly taxable services listed with effective date \\
+CF-07 & B\&O examples & At least 3 business-type examples computed \\
+CF-08 & Min wage tiers & State + Everett tiers with dates and thresholds \\
+CF-09 & PFML details & Premium rate, split, eligibility, benefit duration \\
+CF-10 & Workers' comp & Coverage scope, filing requirements, quarterly reporting \\
+CF-11 & Funding programs & 10+ distinct programs with eligibility and amounts \\
+CF-12 & SBDC contact & Everett SBDC address, phone, email \\
+CF-13 & EASC listing & EASC description, contact, and upcoming events \\
+CF-14 & Overtime threshold & 2026 salary threshold with source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Formation → Licensing & UBI dependency from SOS to BLS clearly traced \\
+IN-02 & Entity → Tax cascade & Entity type selection linked to B\&O classification \\
+IN-03 & Licensing → Employment & Employer registration triggers ESD/L\&I noted \\
+IN-04 & Tax → Funding & Tax obligations inform funding need assessment \\
+IN-05 & Consistent terminology & UBI, B\&O, PFML, L\&I used identically across all modules \\
+IN-06 & Self-containment & No undefined terms or unexplained acronyms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Multi-jurisdiction & Addresses businesses operating in multiple WA cities \\
+EC-02 & Sole prop edge case & Notes that sole proprietors still need BL if >\$12K \\
+EC-03 & Flex Fund pause & Notes current application pause with context \\
+EC-04 & Legislative flux & Flags areas of ongoing change (Burien min wage litigation) \\
+EC-05 & Data gaps & Notes where information may change or be incomplete \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Entity comparison table & CF-01 & Pending \\
+2 & Formation flowchart & CF-02, IN-01 & Pending \\
+3 & License identification & CF-03, CF-04 & Pending \\
+4 & B\&O classifications with rates & CF-05, CF-07 & Pending \\
+5 & Sales tax expansion coverage & CF-06 & Pending \\
+6 & Employment compliance checklist & CF-08--CF-10, CF-14 & Pending \\
+7 & Everett min wage tiers & CF-08 & Pending \\
+8 & 10+ funding programs & CF-11 & Pending \\
+9 & Local resource directory & CF-12, CF-13 & Pending \\
+10 & All numbers sourced & SC-NUM, SC-SRC & Pending \\
+11 & Self-contained document & IN-05, IN-06 & Pending \\
+12 & Through-line to GSD philosophy & SC-ADV & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; URL validation; web research \\
+EXEC-A & Executor & Track A document production (Formation, Licensing) \\
+EXEC-B & Executor & Track B document production (Tax, Employment) \\
+CRAFT-LEGAL & Domain Specialist & Entity selection logic, regulatory interpretation \\
+CRAFT-FISCAL & Domain Specialist & Tax classification, financial planning, funding nav \\
+VERIFY & Verification & Source validation; rate accuracy; cross-module check \\
+INTEG & Integration & Cross-module relationships; dependency tracing \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (+ 1 sequential) \\
+Execution Waves & 4 (W0--W3) \\
+Context Windows & $\sim$15 \\
+Sessions & $\sim$4 \\
+Estimated Tokens & $\sim$67,500 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Deliverables & 9 \\
+Tests & 30 (5 safety / 14 core / 6 integration / 5 edge) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The entrepreneur's task is not to fight the regulatory lattice but to learn where the degrees of freedom live within its constraints. This is architectural leverage --- the Amiga Principle applied to the act of starting something from nothing.''}
+
+\vspace{0.5em}
+\hfill --- WA Small Business Startup Mission, Through-Line
+\end{quotebox}
+
+\end{document}

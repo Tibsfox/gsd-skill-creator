@@ -1,0 +1,783 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% --- COLOR SCHEME: Infrastructure + Energy + Ecology ---
+\definecolor{primary}{HTML}{1A3A4A}       % Deep steel — section headers
+\definecolor{secondary}{HTML}{B8860B}     % Highway amber — subsection headers
+\definecolor{tertiary}{HTML}{1B5E20}      % Forest green — subsubsection headers
+\definecolor{accent}{HTML}{D4600E}        % Safety orange — highlights
+\definecolor{lightprimary}{HTML}{E0EEF4}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% --- SECTION FORMATTING ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% --- CUSTOM ENVIRONMENTS ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% --- HEADERS/FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{New New Deal --- Interstate Corridor Transformation}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={New New Deal --- Interstate Corridor Transformation Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ==========================================
+\begin{document}
+
+%% ---- TITLE PAGE ----
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The New New Deal}}
+
+\vspace{0.5cm}
+{\fontsize{18}{22}\selectfont\sffamily\textcolor{primary}{Interstate Corridor Transformation}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Enclosed Energy-Generating Wildlife-Safe\\Human-Protecting Transportation Infrastructure}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Engineering for the Environment, Not Against It}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 13, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 modules) \quad|\quad Estimated: 16--20 context windows across 5--7 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Cross-references: Thermal \& Hydrogen Energy Systems Mission (March 10, 2026)}}
+\end{center}
+\newpage
+
+%% ---- TABLE OF CONTENTS ----
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1: VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The New New Deal --- Vision Guide}
+
+\metafield{Date:}{March 13, 2026}
+\metafield{Status:}{Initial Vision / Conversation-Harvested}
+\metafield{Depends on:}{Thermal \& Hydrogen Energy Systems Mission (2026-03-10), The Space Between (Ch.~4--24 vibration through-line), GSD Chipset Architecture Vision}
+\metafield{Context:}{Comprehensive conversation-driven research across energy systems, occupational health, wildlife ecology, infrastructure economics, and democratic governance. Six modules spanning five harvesting channels, seven protective functions, and a phased automation transition under regional democratic control.}
+\metafield{Activation Profile:}{Fleet (6 modules, 3+ parallel tracks)}
+
+\subsection{Vision}
+
+The United States Interstate Highway System is the largest single piece of public infrastructure on Earth --- 48,890 miles of controlled-access roadway carrying one quarter of all vehicle miles driven in the country. It was built in a single generation, funded by a gasoline tax, and designed for one purpose: moving vehicles between cities as fast as possible. Every other consequence --- the UV radiation aging truckers' skin, the diesel particulate filling their lungs, the deer killed at closing speeds that make neurological reaction physically impossible, the rain and ice that kill 1,200 people a year, the thermal energy absorbed by black asphalt and radiated as waste heat --- was treated as externality. The road does not know what it carries. It does not care.
+
+This mission proposes that the road should know. The road should care. And the mechanism by which it cares is structural: enclose the interstate corridor --- underground where it heals urban wounds, canopy-covered above ground everywhere else --- and transform every surface of that enclosure into a transducer that converts incident energy into useful output. Solar panels on the canopy roof. Piezoelectric crystals in the road surface. Thermoelectric generators in the pavement base. Wind turbines at corridor exits harvesting vehicle-displaced airflow. And in the future, perovskite photovoltaic road surfaces harvesting diffuse light under the canopy itself.
+
+The energy is not the reason to build it. The energy is what makes the economics work. The reason to build it is that the cargo is families. The cargo is the grandmother traveling from Everett to see grandchildren in California. The cargo is the kid driving home for Thanksgiving. The cargo is the trucker whose left arm ages twenty years faster than his right because nobody thought to shade the road he spends his life on. And the landscape the road passes through is alive --- 36 million deer, hundreds of endangered species, grizzly bears and mountain lions and red wolves --- all navigating a 48,000-mile blade that bisects every major wildlife corridor in North America.
+
+An enclosed corridor does not reduce these harms. It eliminates the categories. No rain reaches the driving surface. No ice forms. No sun glare blinds the driver. No UV penetrates the cab. No deer enters the roadway. No bird strikes a windshield at interstate speed. The road becomes a managed atmosphere --- ventilated to extract diesel fumes, lit to eliminate fog and darkness, thermally regulated to prevent tire blowouts and pavement rutting. And every watt of energy that would have been absorbed by black asphalt and wasted as entropy is instead harvested, stored, and distributed to the communities the corridor passes through.
+
+This is the New New Deal. The original New Deal built the roads. Eisenhower paved them into interstates. The New New Deal encloses them --- turning the nation's largest public asset from a passive transportation surface into an active, intelligent, energy-generating, life-protecting corridor system, governed by regional democratic authorities on a timeline the people choose.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Wasted Energy at Continental Scale.} The 48,890-mile interstate system absorbs solar radiation across approximately 7.5 billion square meters of black asphalt. One hundred percent of this absorbed energy is currently wasted as thermal entropy --- heating the road, the air above it, and the vehicles on it. A solar canopy at optimal tilt could generate 500+ TWh/year (13\%+ of US electricity consumption). Piezoelectric, thermoelectric, and wind channels add further capacity.
+
+  \item \textbf{Occupational Health Crisis for 3.5 Million Drivers.} Truck drivers experience UV exposure on their left arm 5$\times$ greater than the right and 20$\times$ greater on the left side of the face. Diesel exhaust is classified as ``likely carcinogenic'' by the EPA, with trucking industry workers showing elevated lung cancer mortality increasing with years of service. Prolonged sun exposure causes fatigue, headaches, and dehydration that impair driving safety.
+
+  \item \textbf{Weather-Related Crash Mortality.} Over 20\% of all US vehicle crashes (approximately 1.2 million annually) are weather-related. Snow, ice, rain, fog, and sun glare collectively cause thousands of deaths and tens of thousands of injuries per year. State and local agencies spend over \$7 billion annually on snow/ice control and weather-damage repair.
+
+  \item \textbf{Wildlife-Vehicle Collision Catastrophe.} An estimated 1--2 million crashes between motor vehicles and large animals occur annually, causing approximately 200--440 human deaths, 26,000--59,000 human injuries, and at least \$8--10 billion in property damage. The FHWA identified 21 federally listed Threatened or Endangered species for which road mortality is a major threat. Current mitigation approaches (signs, fences, overpasses) cannot scale.
+
+  \item \textbf{Habitat Fragmentation.} The interstate system severs every major wildlife corridor in North America. Animals that need to migrate seasonally --- elk, mule deer, pronghorn --- are cut off from routes their species have used for thousands of years. Wildlife overpasses work but cost \$4 million each and exist at a few dozen locations across an entire continent. The system needs corridor-length connectivity, not point solutions.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Enclose the interstate corridor and transform every surface into a transducer --- harvesting energy, protecting cargo, reconnecting ecosystems, and distributing power to communities under regional democratic governance.}
+
+\subsubsection{Corridor Architecture}
+
+\begin{asciibox}
+           CROSS-SECTION: ENCLOSED INTERSTATE CORRIDOR
+
+   ============ SOLAR PV CANOPY (24m span) ============
+   | PV | PV | PV | PV | PV | PV | PV | PV | PV | PV |
+   =====================================================
+   |  WIND TURBINES      LED LIGHTING       VENTILATION|
+   |  AT EXITS           (no fog/dark)       EXTRACTION|
+   |                                                   |
+   |  [Lane][Lane] [Median] [Lane][Lane]               |
+   |                                                   |
+   |  PIEZO LAYER (40mm) -- harvests compression       |
+   |  THERMOELECTRIC      -- harvests thermal gradient |
+   |  PEROVSKITE PV       -- harvests diffuse light    |
+   +---------------------------------------------------+
+   |       SUBGRADE / COOL SUBSTRATE                   |
+   |  Wildlife passes OVER/AROUND entire corridor      |
+   +---------------------------------------------------+
+
+   SURFACE RETURNED TO: ecosystem / community / parkland
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+    MODULE ARCHITECTURE --- 6 Research Modules, 3 Parallel Tracks
+    ==============================================================
+
+    WAVE 0: Foundation (schemas, source index, shared definitions)
+            |
+    WAVE 1: -------+------- PARALLEL TRACKS --------+-------
+            |                |                       |
+         Track A          Track B                 Track C
+      [Module A:        [Module C:              [Module D:
+       Energy            Health &                Ecological
+       Systems]          Safety]                 Integration]
+      [Module B:        [Module E:              [Module F:
+       Structural        Community               Transportation
+       Engineering]      Economics]              Transition]
+            |                |                       |
+    WAVE 2: -------+------- SYNTHESIS THREADS ------+-------
+            |                |                       |
+      Energy-Structure   Health-Community        Ecology-Transport
+      Cross-thread       Cross-thread            Cross-thread
+            |                |                       |
+            +------- INTEGRATION SYNTHESIS ----------+
+            |                                        |
+            |    Materials Thread (PV, piezo, TEG)    |
+            |    Economics Thread (ROI, multiplier)   |
+            |    Governance Thread (regional auth.)   |
+            |                                        |
+    WAVE 3: Publication + Verification
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Energy Systems --- Five-Channel Harvest Architecture}
+Comprehensive analysis of solar PV (canopy-mounted), piezoelectric (road-embedded), thermoelectric (pavement gradient), wind (vehicle-displaced airflow in enclosed corridor), and future perovskite PV (road surface). Power-per-mile calculations, capacity factor modeling across US climate zones, grid integration architecture, and comparison to current US generation mix. Cross-references Thermal \& Hydrogen Energy Systems mission Modules A, D, E.
+
+\subsubsection{Module B: Structural Engineering --- Corridor Design}
+Tunnel vs.\ canopy vs.\ hybrid corridor design. Load-bearing canopy structures spanning 24m at interstate scale. Underground conversion in urban cores (land return to communities). Ventilation system design for fume extraction during diesel-to-electric fleet transition. Seismic, wind, snow, and thermal stress analysis. Integration with existing bridge and overpass infrastructure.
+
+\subsubsection{Module C: Occupational \& Public Health}
+UV radiation exposure asymmetry in truck drivers (unilateral dermatoheliosis). Diesel exhaust exposure and lung cancer mortality in trucking industry workers. Heat stress, fatigue, dehydration, and cognitive impairment from solar loading. Sun glare as crash factor. Quantified health benefits of enclosed corridor: eliminated UV, managed fumes, controlled thermal environment, eliminated glare.
+
+\subsubsection{Module D: Ecological Integration --- Wildlife Corridors \& Animal Strike Elimination}
+Wildlife-vehicle collision statistics, species-specific mortality data, habitat fragmentation analysis. Enclosed corridor as continental-scale wildlife crossing. Integration with existing crossing infrastructure (e.g., Snoqualmie Pass I-90 overpass). Endangered species road mortality reduction. Bird strike physics (closing-speed analysis, neurological reaction time vs.\ vehicle velocity). Regional ecological interface design --- corridor authorities managing wildlife passage in coordination with tribal nations, state wildlife agencies, and conservation organizations.
+
+\subsubsection{Module E: Community Economics \& Governance --- The New New Deal}
+Historical analysis of original New Deal and Eisenhower Interstate Act as infrastructure-driven economic transformation. Construction job creation at scale (millions of positions over 20+ years). Self-funding economics through electricity revenue. Savings quantification: snow/ice control (\$7B+/year), weather-crash costs, animal collision costs (\$8--10B/year), pavement life extension. Regional corridor authority governance model. Energy sovereignty for corridor-adjacent communities. Revenue sharing frameworks.
+
+\subsubsection{Module F: Transportation Transition --- Phased Automation}
+Enclosed corridor as optimal environment for autonomous freight (eliminated weather, wildlife, pedestrians, cross-traffic). Phased transition: human operators in protected corridors (Phase 1), mixed autonomy with regional approval (Phase 2), full automation where communities consent (Phase 3). Fleet electrification incentive structure (diesel ventilation load vs.\ zero-load electric). Human operator retraining and transition employment in corridor maintenance and energy systems.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission_id: "new-new-deal-corridor-2026"
+  activation: fleet
+  crew_size: 17+
+  parallel_tracks: 3
+  modules: 6
+  waves: 4 (0-Foundation, 1-Parallel, 2-Synthesis, 3-Publication)
+  model_split:
+    opus: 35%    # Synthesis, governance, ecological sensitivity, health
+    sonnet: 55%  # Survey compilation, engineering data, economic analysis
+    haiku: 10%   # Schemas, templates, scaffolding
+  cross_references:
+    - "thermal-hydrogen-energy-2026-03-10"
+    - "the-space-between-ch4-24"
+  safety_gates: 9
+  core_tests: 28
+  integration_tests: 8
+  edge_tests: 6
+  total_tests: 51
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item US Interstate Highway System (48,890 miles) as primary scope; National Highway System (164,000+ miles) as expansion context
+  \item Five energy harvesting channels with power-per-mile calculations and national capacity estimates
+  \item Structural engineering principles for canopy and tunnel corridor design
+  \item Occupational health data for UV, diesel exhaust, heat stress, and glare affecting truck drivers
+  \item Wildlife-vehicle collision data and habitat fragmentation analysis
+  \item New Deal / Eisenhower Act historical economic analysis as framework for New New Deal
+  \item Regional democratic governance model for corridor authorities
+  \item Phased automation transition with community consent framework
+  \item Pacific Northwest regional focus for detailed case studies (I-5 corridor, I-90 Snoqualmie Pass)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Detailed structural engineering calculations (foundation loads, steel tonnage, concrete volume)
+  \item Specific legislative drafting or policy advocacy
+  \item International highway systems (Autobahn, etc.) beyond reference comparison
+  \item Autonomous vehicle technology development (treated as external input to transition planning)
+  \item Detailed grid interconnection engineering (utility-scale transmission planning)
+  \item Financial instrument design (bond structures, public-private partnerships)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Five energy harvesting channels individually quantified with power-per-mile and national capacity estimates, sourced to peer-reviewed or government data
+  \item Corridor structural design principles documented for at least three typologies (urban tunnel, rural canopy, mountain hybrid)
+  \item Occupational health burden quantified with specific epidemiological data for UV, diesel exhaust, heat stress, and glare
+  \item Wildlife-vehicle collision statistics sourced to FHWA, IIHS, State Farm, or peer-reviewed studies; at least 5 endangered species road-mortality cases documented
+  \item Enclosed corridor benefits mapped to each hazard category with quantified or estimated reduction percentages
+  \item New Deal historical economics documented with GDP-share comparisons and multiplier effect data
+  \item Regional corridor authority governance model described with at least 4 functional responsibilities and democratic accountability mechanisms
+  \item Phased automation transition described with community consent framework and workforce transition provisions
+  \item Cross-module synthesis demonstrates that all seven protective functions (weather, UV, fumes, glare, wildlife, heat, pavement) derive from a single structural intervention
+  \item PNW case study (I-5 or I-90) provides concrete regional application with local data
+  \item All sources traceable to government agencies, peer-reviewed journals, or professional organizations
+  \item Indigenous nation attribution used for all tribal references (Yakama, Nez Perce, Snoqualmie, etc.); never generic
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection Point} \\
+\midrule
+Thermal \& Hydrogen Energy Systems & Sister mission & Module A (energy channels) maps to Modules A, D, E (heat pumps, fuel cells, electrolysis). PGM materials thread connects to PV and TEG catalyst research. \\
+The Space Between (Ch.~4--24) & Philosophical frame & ``Maps between things more fundamental than things themselves'' --- the corridor is a boundary condition doing work at every scale \\
+GSD Chipset Architecture & Execution engine & Fleet activation profile; FIFO queue architecture for parallel wave execution \\
+GSD Skill-Creator & Execution target & Mission package designed for direct handoff to skill-creator orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A 95-mph fastball crosses the plate in 400 milliseconds. A mourning dove's neurological reaction time cannot process and respond to an object at that speed from that angle. The bird does not fail. Physics fails the bird. The geometry of the encounter makes avoidance impossible before neurology even engages.
+
+A deer at the shoulder of I-5 at dusk in October. A truck at 70 mph. The closing distance is covered in under two seconds. The deer's startle-to-sprint time is half a second to one second. The driver's perception-reaction time is 1.5 seconds minimum. Neither organism can solve this problem. No sign, no fence, no sensor, no education campaign changes the geometry. The only intervention that works is structural: make the collision impossible by separating the trajectories.
+
+This is the same principle that applies to every other hazard. You cannot tell rain not to fall on the highway. You cannot tell UV not to penetrate a truck window. You cannot tell diesel particulate not to accumulate in a driver's lungs. You cannot tell ice not to form on the bridge deck. You solve all of them the same way: by enclosing the corridor and managing what enters and exits.
+
+The road that results does not generate energy. It \textit{cares for its cargo}. The energy is just what caring looks like when the material is intelligent enough to do it. And the landscape reconnected above the corridor --- the elk crossing where a highway used to bisect their migration route, the red wolf no longer dodging semis on US-64 --- that is what engineering \textit{for} the environment looks like. Not mitigating harm. Eliminating categories.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2: RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Interstate Corridor Transformation --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings harvested from extensive conversation-based research. All statistics require attribution to the sources listed. No findings should be reproduced without verifying against the primary source.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item Federal Highway Administration (FHWA) --- interstate system data, wildlife-vehicle collision studies, road weather management
+  \item Insurance Institute for Highway Safety (IIHS) / State Farm --- animal collision claims, crash statistics
+  \item National Highway Traffic Safety Administration (NHTSA) --- weather-related crash data, fatality statistics
+  \item U.S. Energy Information Administration (EIA) --- electricity consumption, generation mix
+  \item Fraunhofer Institute for Solar Energy Systems (ISE) --- PV canopy capacity modeling (Autobahn study)
+  \item California Energy Commission --- piezoelectric highway harvesting research (UC Merced)
+  \item New England Journal of Medicine --- unilateral dermatoheliosis case study (trucker UV damage)
+  \item American Cancer Society / OSHA / EPA --- diesel exhaust carcinogenicity
+  \item The Pew Charitable Trusts --- wildlife-vehicle collision policy research
+  \item Brookings Institution --- New Deal infrastructure economics, federal spending analysis
+  \item Ember Energy --- US electricity generation review (2024--2025)
+\end{itemize}
+
+\subsection{Module A Reference: Energy Systems}
+
+\subsubsection{Interstate System Dimensions}
+The Interstate System is currently 48,876 miles long (FHWA). As of 2022, about one quarter of all vehicle miles driven in the country used the Interstate Highway System (Wikipedia/FHWA). Minimum lane width is 12 feet (3.7 m) with minimum paved shoulder widths of 4 feet (left) and 10 feet (right) per direction (AASHTO/FHWA). A standard 4-lane divided interstate spans approximately 76 feet (23 m) of paved surface across both directions.
+
+\subsubsection{Solar PV Canopy --- Capacity Modeling}
+The Fraunhofer ISE study modeled covering all 13,000 km of the German Autobahn at 24 m width with 180 W/m\textsuperscript{2} panels, yielding 56 GW capacity and approximately 47 TWh/year. US insolation is substantially higher (1,400--2,400 kWh/m\textsuperscript{2}/year vs.\ 1,000--1,100 for Germany).
+
+\textbf{US Interstate estimate:} 48,000 miles $\times$ 24 m width $\times$ 200 W/m\textsuperscript{2} $=$ $\sim$370 GW installed. At 16\% average capacity factor: $\sim$518 TWh/year. US electricity consumption reached approximately 3,938 TWh in 2024 (EIA). Solar canopy output would represent $\sim$13\% of total US consumption.
+
+\subsubsection{Piezoelectric Harvesting}
+The California Energy Commission / UC Merced project estimated that one lane-mile of highway could generate 72,800 kWh/year from passenger vehicles and up to 907,873 kWh/year from heavy trucks. Best reported conversion efficiency under optimal conditions: 17.2\% (ScienceDirect review, 2025).
+
+\subsubsection{Thermoelectric Harvesting}
+Asphalt pavement reaches 60--70\textdegree C under direct sun (Transportation Research Record). Temperature gradient between surface and 13 cm depth enables Seebeck-effect generation. Optimum harvester design produces $\sim$29 mW average, extrapolating to $\sim$23.2 kWh/day per kilometer (LSU/USDOT). Primary value is co-benefit: surface temperature reduction of 3--5\textdegree C extends pavement life and mitigates urban heat island (Frontiers in Built Environment).
+
+\subsubsection{Wind Energy from Vehicle Displacement}
+Field measurements show VAWT prototypes producing up to 48 W from vehicle-generated wind of 4.4 m/s average, achieving 34.6\% efficiency (Energy Engineering journal). CFD simulations with optimized guide vanes showed 242\% improvement in power generation from passenger vehicles (MDPI Energies, 2025). Enclosed corridors amplify the channeling effect significantly beyond open-air conditions.
+
+\subsubsection{US Electricity Context}
+US electricity demand was approximately 3,938 TWh in 2024 (EIA/Visual Capitalist). Solar generation reached 303 TWh in 2024, roughly 7\% of total generation (Ember Energy). An interstate solar canopy system at 518 TWh/year would nearly double national solar output.
+
+\subsection{Module C Reference: Occupational \& Public Health}
+
+\subsubsection{UV Radiation Asymmetry in Truck Drivers}
+UV exposure on the left arm is 5$\times$ greater than the right for truck drivers; exposure on the left side of the face is 20$\times$ greater (skincancer.net, Fleet/Solera). Approximately 75\% of melanomas are diagnosed on the left side of the body (skincancer.net). The iconic NEJM case study documented a 69-year-old trucker with 28 years of driving showing severe unilateral dermatoheliosis --- chronic UVA exposure causing thickening of the epidermis and stratum corneum and destruction of elastic fibers (NEJM, 2012; Northwestern).
+
+Front windshields (laminated glass with PVB interlayer) absorb most UV. Side windows (tempered glass) lack the PVB layer and transmit substantially more radiation --- approximately 25\% less blockage than the windshield (PMC/Boxer Wachler study).
+
+\subsubsection{Diesel Exhaust Exposure}
+The EPA classifies diesel exhaust as ``likely to be carcinogenic to humans.'' NIOSH considers it a ``potential occupational carcinogen.'' OSHA recognizes that diesel exhaust contains polyaromatic hydrocarbons adsorbed to elemental carbon particles (OSHA Diesel Exhaust Overview). A retrospective study of 31,135 male workers in the unionized US trucking industry found elevated lung cancer risk increasing with years of exhaust exposure (PMC/Garshick et al.). Defining attributes include decreased peak airflow, increased airway resistance, phlegm-producing cough, and eye/throat irritation (CDC/UAB concept analysis).
+
+\subsubsection{Heat Stress and Fatigue}
+Prolonged sun exposure causes fatigue, headaches, and dehydration affecting driver concentration and safety (Christenson Transportation). Heat stress, dehydration, and glare take a toll on focus; heat exhaustion symptoms include headache, nausea, dizziness, muscle cramps, and confusion (Transco Lines). Heatstroke can cause sudden incapacitation and loss of vehicle control (Drake Law Group).
+
+\subsubsection{Sun Glare}
+NHTSA reports sun glare contributes to thousands of accidents annually. Straining through glare causes eye fatigue, discomfort, and decreased concentration (Koester Legal).
+
+\subsection{Module D Reference: Ecological Integration}
+
+\subsubsection{Wildlife-Vehicle Collision Statistics}
+1--2 million crashes between motor vehicles and large animals occur annually in the US, causing approximately 200 human deaths, 26,000 injuries, and at least \$8 billion in property damage (Pew Charitable Trusts). Wikipedia/Conover (2019) reports at least 59,000 injuries and 440 fatalities annually from deer-vehicle collisions alone. State Farm data: 1.7 million animal collision claims July 2024--June 2025 (III). FHWA average cost per wildlife-vehicle collision: \$6,126; moose collisions average \$30,769--\$44,546 (FHWA/signedsweet.com).
+
+\subsubsection{Endangered Species Road Mortality}
+FHWA identified 21 federally listed Threatened or Endangered species for which road mortality is a major threat, including Hawaiian goose, desert tortoise, San Joaquin kit fox, and California tiger salamander (Born Free USA/FHWA). Grizzly 399, the oldest known reproducing female grizzly in the Greater Yellowstone Ecosystem, was killed by a vehicle near Grand Teton in 2024. Four red wolves killed by vehicles in 10 months in eastern North Carolina on US-64, including a father whose orphaned pups subsequently died (Born Free USA).
+
+\subsubsection{Habitat Fragmentation}
+In rural states such as Wyoming, wildlife-vehicle crashes represent almost 20\% of reported collisions (Pew). The 2008 FHWA Wildlife-Vehicle Collision Reduction Study reviewed 34 mitigation methods and concluded ``there are no simple solutions'' (FHWA-HRT-08-034). Wildlife experts estimate 5--10 carcasses for every reported crash (Born Free USA/FHWA). Snoqualmie Pass wildlife overpass on I-90 in Washington provides safe passage for thousands of animals annually including elk and deer (Pew).
+
+\subsubsection{Closing-Speed Physics (The Randy Johnson Principle)}
+A 95-mph fastball covers the 60.5-foot pitcher-mound-to-plate distance in approximately 400 ms. A mourning dove's neurological reaction time cannot process and respond to a transverse object at that speed. The March 24, 2001 incident during spring training demonstrated that even a bird --- an organism whose evolutionary heritage is optimized for aerial maneuver --- has zero chance against closing speeds exceeding its neurological response window. Scaled to highways: a truck at 70 mph covers approximately 103 feet per second. A deer's startle-to-sprint reaction is 0.5--1.0 seconds. The driver's perception-reaction time is 1.5 seconds minimum. The geometry is lethal before neurology engages.
+
+\subsection{Module E Reference: Community Economics}
+
+\subsubsection{New Deal Historical Precedent}
+The WPA's first appropriation in 1935 was \$4.9 billion, approximately 6.7\% of GDP (Wikipedia/Brookings). At peak employment, the WPA provided paid work for up to 40\% of unemployed Americans, equivalent to $\sim$4 million jobs today (Brookings). The PWA's peak infrastructure spending hit approximately 2.96\% of GDP --- the highest federal infrastructure investment share ever recorded (Brookings). Today the US spends only 2.3\% of GDP on infrastructure, vs.\ 5\% for European countries and 8\% for China (Brookings).
+
+\subsubsection{Interstate Economic Impact}
+Research shows each dollar of federal highway grants raises a state's annual economic output by at least \$2 (Richmond Fed/San Francisco Fed). Removing the interstate system would reduce real GDP by \$619.1 billion (3.9\%), with 25\% of that loss from reduced international market access (NBER working paper, Jaworski/Kitchens/Nigai via Richmond Fed).
+
+\subsubsection{Savings from Enclosed Corridor}
+Snow/ice control: \$2+ billion/year; weather infrastructure repair: \$5+ billion/year (NAS/FHWA). Weather-related crashes: \$X billion (subset of 1.2 million annual weather crashes). Animal collision insurance: \$8--10 billion/year. Pavement life extension: quantify via reduced thermal cycling and eliminated freeze-thaw.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling Requirement} \\
+\midrule
+Endangered species locations & ABSOLUTE & No GPS coordinates or specific nest/den/breeding sites for any listed species \\
+Indigenous nation attribution & ABSOLUTE & Specific nation names (Yakama, Nez Perce, Snoqualmie, etc.); never generic ``Indigenous peoples'' \\
+Diesel carcinogenicity claims & GATE & Cite EPA, NIOSH, IARC, or peer-reviewed epidemiological studies only \\
+Climate projections for energy capacity & GATE & Cite EIA, NREL, or IPCC scenario data; label uncertainty ranges \\
+Automation and labor displacement & ANNOTATE & Present workforce transition evidence without advocacy for specific policy outcomes \\
+Urban highway removal and racial equity & ANNOTATE & Document historical harm from urban interstate construction (1950s--60s community destruction) with specific geographic and demographic data; no generalizations \\
+Tribal treaty rights and corridor land & GATE & Any corridor passing through treaty land requires specific nation attribution and acknowledgment of sovereignty \\
+Wildlife population estimates & GATE & Cite USGS, USFWS, or state wildlife agency data only; label estimate ranges \\
+Energy production estimates & ANNOTATE & Present as modeling ranges, not definitive predictions; identify assumptions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}
+  \item Federal Highway Administration (FHWA). Interstate FAQ; Road Weather Management; Wildlife-Vehicle Collision Reduction Study (FHWA-HRT-08-034, 2008).
+  \item FHWA. Office of Highway Policy Information: Interstate system mileage and standards.
+  \item National Highway Traffic Safety Administration (NHTSA). Fatality Analysis Reporting System (FARS).
+  \item U.S. Energy Information Administration (EIA). Electricity end use 2024; Annual Energy Outlook.
+  \item U.S. Environmental Protection Agency (EPA). Diesel exhaust: Integrated Risk Information System (IRIS); Reduce Heat Islands guidance.
+  \item Occupational Safety and Health Administration (OSHA). Diesel Exhaust Overview.
+  \item National Institute for Occupational Safety and Health (NIOSH). Diesel exhaust classification.
+  \item California Energy Commission. Ultra-High Power Density Roadway Piezoelectric Energy Harvesting System (CEC-500-2023-036).
+  \item Fraunhofer Institute for Solar Energy Systems (ISE). PV canopy Autobahn study (via Recharge News, 2020).
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}
+  \item Garshick E, et al. Lung Cancer and Vehicle Exhaust in Trucking Industry Workers. \textit{Environmental Health Perspectives} 116(10), 2008.
+  \item Garshick E, et al. Lung Cancer and Elemental Carbon Exposure in Trucking Industry Workers. \textit{Environmental Health Perspectives} 120(9), 2012.
+  \item Harris C. Diesel Engine Exhaust Exposure in Relation to Lung Cancer in Long-Haul Truck Drivers. \textit{Workplace Health \& Safety}, 2024.
+  \item Vermeulen R, et al. Exposure-response estimates for diesel engine exhaust and lung cancer mortality. \textit{Environmental Health Perspectives} 122:172--177, 2014.
+  \item Gordon J, Brieva J. Unilateral Dermatoheliosis. \textit{New England Journal of Medicine} 366:e25, 2012.
+  \item Gaber H, AbdelRaheem M. Piezoelectric Energy Harvesting from Roadways: Challenges, Advances, Future Directions. \textit{Transportation Research Record}, 2025.
+  \item Jiang W, et al. Energy harvesting from asphalt pavement using thermoelectric technology. \textit{Applied Energy} 205:941--950, 2017.
+  \item Tahami SA, et al. Thermoelectric Energy Harvesting System for Roadway Sustainability. \textit{Transportation Research Record}, 2020.
+  \item Conover MR. Numbers of Human Fatalities, Injuries, and Illnesses Due to Wildlife. \textit{Human-Wildlife Interactions} 13(2):264--276, 2019.
+  \item Cunningham CX, et al. Permanent Daylight Saving Time Would Reduce Deer-Vehicle Collisions. \textit{Current Biology}, 2022.
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Policy Research}
+\begin{itemize}
+  \item The Pew Charitable Trusts. Wildlife-Vehicle Collisions Are a Big and Costly Problem (2021).
+  \item Insurance Institute for Highway Safety / State Farm. Deer vehicle collision claims data (2024--2025).
+  \item Brookings Institution. How Federal Infrastructure Investment Can Put America to Work (2021); How Historic Would a \$1 Trillion Infrastructure Program Be? (2017).
+  \item Urban Institute. Federal Infrastructure Spending on Transportation (2025).
+  \item Richmond Federal Reserve. When Interstates Paved the Way (2021).
+  \item Ember Energy. US Electricity 2025 Special Report.
+  \item ARC Solutions (Animal Road Crossings). Wildlife crossing infrastructure data.
+  \item American Cancer Society. Diesel Exhaust and Cancer Risk.
+  \item Born Free USA. Deadly Collisions: Wild Encounters on the Road (2024).
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3: MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package --- Execution Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document that establishes the technical feasibility, economic justification, health imperative, ecological benefit, and democratic governance framework for transforming the US Interstate Highway System into enclosed, energy-generating, wildlife-safe, human-protecting transportation corridors --- framed as a New New Deal infrastructure program.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  Wave 0: FOUNDATION ─── Shared schemas, source index, unit conventions
+     │
+  Wave 1: PARALLEL RESEARCH ─── 3 tracks, 6 modules
+     │   Track A: [A: Energy Systems] [B: Structural Engineering]
+     │   Track B: [C: Health & Safety] [E: Community Economics]
+     │   Track C: [D: Ecological Integration] [F: Transport Transition]
+     │
+  Wave 2: SYNTHESIS ─── 3 cross-threads + integration
+     │   Energy-Structure │ Health-Community │ Ecology-Transport
+     │              └── Integration Synthesis ──┘
+     │
+  Wave 3: PUBLICATION + VERIFICATION
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Five-Channel Energy Model & Power-per-mile for all 5 channels; national totals; sourced data & Module A \\
+2 & Corridor Design Typology & 3+ typologies with cross-sections; ventilation design; structural principles & Module B \\
+3 & Health Impact Assessment & UV, diesel, heat, glare quantified; reduction estimates for enclosed corridor & Module C \\
+4 & Ecological Integration Plan & WVC statistics; 5+ endangered species cases; corridor-as-crossing analysis & Module D \\
+5 & Economic \& Governance Framework & New Deal comparison; ROI model; regional authority structure & Module E \\
+6 & Automation Transition Roadmap & 3-phase plan; community consent framework; workforce provisions & Module F \\
+7 & Integrated Synthesis & Cross-module connections; single-structure-seven-solutions demonstration & Wave 2 \\
+8 & PNW Case Study & I-5 or I-90 application with regional data & Wave 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Source Index & None & Haiku & 2,000 \\
+W0: Shared Schemas & None & Haiku & 1,500 \\
+W1A: Module A (Energy) & W0 & Sonnet & 8,000 \\
+W1A: Module B (Structure) & W0, partial A & Sonnet & 7,000 \\
+W1B: Module C (Health) & W0 & Sonnet & 6,000 \\
+W1B: Module E (Economics) & W0 & Sonnet & 6,000 \\
+W1C: Module D (Ecology) & W0 & Opus & 8,000 \\
+W1C: Module F (Transition) & W0 & Sonnet & 5,000 \\
+W2: Energy-Structure & W1A & Opus & 4,000 \\
+W2: Health-Community & W1B & Opus & 4,000 \\
+W2: Ecology-Transport & W1C & Opus & 5,000 \\
+W2: Integration Synth. & All W2 threads & Opus & 6,000 \\
+W2: PNW Case Study & All W1 & Opus & 5,000 \\
+W3: Final Assembly & All W2 & Sonnet & 4,000 \\
+W3: Verification & All & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 35\% & Ecological sensitivity (Module D), synthesis cross-threads, integration, PNW case study, governance/equity analysis \\
+Sonnet & 55\% & Energy calculations, structural engineering data, health epidemiology compilation, economic analysis, final assembly \\
+Haiku & 10\% & Shared schemas, source index, unit convention scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Parallelism} & \tableheader{Windows} & \tableheader{Gate} \\
+\midrule
+Wave 0 & Source index, schemas & Sequential & 1 & CAPCOM review \\
+Wave 1 & 6 modules, 3 tracks & 3-way parallel & 6--8 & CAPCOM review \\
+Wave 2 & 3 cross-threads + integ. & 3-way $\rightarrow$ seq. & 4--5 & FLIGHT go/no-go \\
+Wave 3 & Assembly + verification & Sequential & 2--3 & Final CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}
+  \item Wave 0 outputs (schemas, source index) cached for all Wave 1 components
+  \item Module A (Energy) partial results cached for Module B (Structure) --- canopy dimensions drive structural loads
+  \item All Module outputs cached for Wave 2 synthesis --- each cross-thread receives paired module caches
+  \item PNW Case Study receives full Wave 1 cache to select most illustrative regional data
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Output Tokens} & \tableheader{Input (Cached)} & \tableheader{Input (Fresh)} \\
+\midrule
+Wave 0 & 3,500 & 0 & 5,000 \\
+Wave 1 & 40,000 & 10,500 & 30,000 \\
+Wave 2 & 24,000 & 40,000 & 15,000 \\
+Wave 3 & 7,000 & 64,000 & 5,000 \\
+\midrule
+\textbf{Total} & \textbf{74,500} & \textbf{114,500} & \textbf{55,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Schemas] ──┬──> [W1A: Energy] ──────┐
+                  │                         ├──> [W2: Energy-Structure]
+                  ├──> [W1A: Structure] ────┘
+                  │
+                  ├──> [W1B: Health] ───────┐
+                  │                         ├──> [W2: Health-Community]
+                  ├──> [W1B: Economics] ────┘
+                  │
+                  ├──> [W1C: Ecology] ──────┐
+                  │                         ├──> [W2: Ecology-Transport]
+                  └──> [W1C: Transition] ───┘
+                                               │
+        [W2: Energy-Struct] ──┐                │
+        [W2: Health-Comm]  ───┼──> [W2: Integration Synthesis]
+        [W2: Eco-Transport] ──┘         │
+        [All W1] ──────────────> [W2: PNW Case Study]
+                                        │
+                          [W3: Assembly + Verification]
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 9 & Mandatory & BLOCK & Sources, species, Indigenous, health, climate \\
+Core functionality & 22 & Required & BLOCK & All 12 success criteria \\
+Integration & 8 & Required & BLOCK & Cross-module connections \\
+Edge cases & 6 & Best-effort & LOG & Data gaps, outliers, temporal currency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, or professional organizations \\
+SC-NUM & Numerical attribution & Every statistic attributed to specific source \\
+SC-ADV & No policy advocacy & Evidence presented without advocating for specific legislation \\
+SC-IND & Indigenous attribution & Every tribal reference names specific nation (Yakama, Nez Perce, Snoqualmie, etc.) \\
+SC-END & Endangered species safety & No specific nest/den/breeding site locations for listed species \\
+SC-MED & Health data accuracy & All UV, diesel, cancer claims cite peer-reviewed epidemiological studies \\
+SC-CLI & Energy projections sourced & All capacity estimates cite specific agency data with uncertainty ranges \\
+SC-EQU & Racial equity sensitivity & Urban highway removal discussion references specific communities and demographics \\
+SC-TRT & Tribal treaty acknowledgment & Any corridor crossing treaty land acknowledges specific nation sovereignty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates \\
+PLAN & Planner & Wave decomposition; 3-track optimization \\
+TOPO & Topology Manager & Cross-track coordination; mid-mission restructuring \\
+SCOUT & Research Agent & Gap-fill web research; source validation \\
+EXEC-A & Executor (Track A) & Energy \& Structure module production \\
+EXEC-B & Executor (Track B) & Health \& Economics module production \\
+EXEC-C & Executor (Track C) & Ecology \& Transition module production \\
+CRAFT-ENERGY & Energy Specialist & PV, piezo, TEG, wind calculations \\
+CRAFT-ECO & Ecology Specialist & Wildlife data, habitat connectivity, endangered species \\
+CRAFT-HEALTH & Health Specialist & Epidemiology, UV dosimetry, diesel exposure \\
+CRAFT-ECON & Economics Specialist & New Deal analysis, multiplier modeling, ROI \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Safety Warden & BLOCK gate enforcement; sensitivity boundary checking \\
+VERIFY & Verification & Source validation; numerical accuracy \\
+INTEG & Integration & Cross-module consistency; synthesis quality \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget; session planning \\
+LOG & Chronicle & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C) \\
+Synthesis Threads & 3 + Integration + PNW Case Study \\
+Estimated Context Windows & 16--20 \\
+Estimated Sessions & 5--7 \\
+Primary Models & Sonnet (55\%), Opus (35\%), Haiku (10\%) \\
+Estimated Total Output Tokens & $\sim$74,500 \\
+Human Checkpoints & 4 (post-W0, post-W1, post-W2, Final) \\
+Safety-Critical Tests & 9 mandatory-pass BLOCK gates \\
+Core Tests & 22 required-pass BLOCK gates \\
+Integration Tests & 8 required-pass \\
+Edge Case Tests & 6 best-effort \\
+Total Tests & 45 \\
+Research Domains & 6 (Energy, Structure, Health, Ecology, Economics, Transition) \\
+Geographic Focus & US Interstate System; PNW regional case study \\
+Cross-References & Thermal \& Hydrogen Energy Systems (2026-03-10) \\
+Final Deliverable & Multi-section research document + executive summary + bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The cargo is families. The landscape is alive. The road should know both of these things. An enclosed corridor does not generate energy --- it cares for its cargo. The energy is just what caring looks like when the material is intelligent enough to do it. And the landscape reconnected above --- the elk crossing where a highway used to bisect their migration, the red wolf no longer dodging semis on US-64 --- that is what engineering for the environment looks like. Not mitigating harm. Eliminating categories.''}
+
+\vspace{0.8em}
+\noindent --- Through-line of this mission. The goal is not to document six separate infrastructure improvements but to demonstrate that a single structural intervention --- enclosing the corridor --- simultaneously solves seven categories of harm (weather, UV, fumes, glare, wildlife, heat, pavement degradation) while generating continental-scale renewable energy and distributing it to the communities the corridor serves. The maps between these solutions are more fundamental than any individual solution. The New New Deal builds the map.
+\end{quotebox}
+
+\end{document}

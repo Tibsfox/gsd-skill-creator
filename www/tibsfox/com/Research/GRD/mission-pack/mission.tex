@@ -1,0 +1,956 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Engineering/Energy — Electric Blue + Solar Gold + Carbon Graphite ===
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{E65100}
+\definecolor{tertiary}{HTML}{263238}
+\definecolor{accent}{HTML}{1565C0}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\color{darktext}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Gradient Engine}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem — Miles Tiberius Foxglove},
+  pdftitle={The Gradient Engine — Electric Thermal Management Across Scales},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% === TITLE PAGE ===
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Gradient Engine\\[0.3em]Electric Thermal Management\\[0.3em]Across All Scales}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Wrist Cooler to Sunshield}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study into Electric Heating, Cooling, \& Transition Pathways}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 11, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 8 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% === TABLE OF CONTENTS ===
+\tableofcontents
+\newpage
+
+% ============================================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Gradient Engine --- Vision Guide}
+
+\metafield{Date:}{March 11, 2026}
+\metafield{Status:}{Initial Vision / Full Pipeline (Vision $\rightarrow$ Research $\rightarrow$ Mission)}
+\metafield{Depends on:}{Thermal management scalar stack conversation, HVAC/heat pump/energy transfer mission (March 10, 2026), environmental restoration mission}
+\metafield{Context:}{A comprehensive electric-first study of thermal management from personal wearables through spacecraft, with explicit oil/gas transition pathways at every scale. No fossil fuel combustion as an end-state solution --- only as a legacy system to be replaced.}
+
+\subsection{Vision}
+
+Every thermal system on Earth --- and off it --- solves the same differential equation. A gradient exists between where heat is and where it should be. Something mediates the flow. The engineering is choosing \textit{what} mediates and \textit{how fast}. The only thing that changes across scales is the boundary conditions.
+
+For two centuries, the dominant mediator was combustion. Burn something. Use the temperature differential between flame and ambient to push heat where you want it, or power a compressor that moves it where you don't. Oil, gas, coal --- the gradient was always manufactured by destroying a hydrocarbon bond and releasing ancient solar energy stored in geological time.
+
+The electric alternative doesn't manufacture a gradient. It \textit{intercepts} one. A heat pump doesn't create heat; it moves heat that already exists in the ambient air, ground, or water, using electricity to do the thermodynamic lifting. A radiative cooling surface doesn't consume energy to reject heat; it exploits the 297-kelvin gradient between the Earth's surface and the 3-kelvin cosmic microwave background, radiating thermal energy through the atmospheric transparency window at 8--13 micrometres. A Peltier junction moves heat across a semiconductor boundary using electron flow, not flame.
+
+The transition from combustion to interception is not merely a fuel swap. It is a change in the relationship between human habitation and the thermodynamic environment --- from adversarial (burn fuel to fight the gradient) to cooperative (use electricity to ride the gradient that already exists). This study maps that transition across every scale at which humans manage thermal energy: from the lithium cell in a wrist cooler to the ammonia loops on the International Space Station, from the heat pump in a duplex in Everett to the sunshield on James Webb.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The Combustion Lock-In Problem.} Globally, heating buildings accounts for over one-sixth of natural gas demand. Over 90\% of oil and 85\% of natural gas in European industry serves thermal loads. Existing infrastructure --- gas mains, boilers, furnaces, distribution networks --- creates massive inertia against electrification even where electric alternatives are cheaper to operate. Transition pathways must address not just technology replacement but infrastructure decommissioning economics.
+
+\item \textbf{The Cold-Climate Performance Gap.} Heat pump coefficient of performance (COP) degrades as ambient temperature drops. At moderate temperatures COP reaches 3.0--4.0; near 0\textdegree F the advantage over resistive heating narrows dramatically. Cold-climate markets (including the Pacific Northwest winter) need solutions that maintain electric-first performance: ground-source systems, cascade architectures, and cold-climate air-source heat pumps rated to $-$15\textdegree F and below.
+
+\item \textbf{The Scale Discontinuity.} Thermal management strategies that work at one scale often fail at the next. A mini-split heat pump solves a single-family home; it cannot serve a 40-story high-rise. District energy, VRF systems, and central plant architectures each introduce new electrical infrastructure demands (panel upgrades, transformer capacity, peak load management) that must be mapped per scale.
+
+\item \textbf{The Passive Cooling Commercialization Gap.} Passive daytime radiative cooling (PDRC) has been demonstrated at sub-ambient temperatures under direct sunlight --- cooling power of 30--100 W/m$^{2}$ with zero energy input. Yet as of 2025, most PDRC materials remain in laboratory or pilot stage. The gap between published performance and commercial deployment is a materials science, manufacturing, and standards problem that this study must characterize.
+
+\item \textbf{The Space--Terrestrial Knowledge Transfer Problem.} NASA and ESA have 60+ years of electric-only thermal control engineering: heat pipes, MLI blankets, ammonia loops, radiator arrays, cryocoolers, Peltier junctions, and radioisotope thermal generators. Much of this knowledge is publicly available but rarely mapped back to terrestrial building or vehicle applications. The structural isomorphism between an ISS cold plate and a data center liquid cooling loop is exact --- but the communities rarely talk to each other.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Gradient Interception Model:} Every thermal management system in this study --- heat pump, radiative cooler, Peltier device, cryocooler, spacecraft radiator --- is formally the same object: a device that intercepts a naturally occurring thermal gradient and redirects the energy flow using electricity rather than combustion. The study maps this invariant across 8 scales, from personal wearables to interstellar spacecraft.
+
+\begin{asciibox}
+SCALE ARCHITECTURE — The Gradient Engine
+
+MICRO            RESIDENTIAL        COMMERCIAL          VESSELS           SPACE
+|                |                  |                   |                 |
+Wearables -----> Single Family ---> Small Business ---> Ships ---------> LEO (ISS)
+Personal EVs --> Duplex/Triplex --> Mid Commercial ---> Carriers ------> Hubble
+Trains -------> Apartments ------> Large Corp -------> Platforms -----> JWST
+Aircraft -----> High-Rise -------> Skyscrapers ------> Mobile Temp ---> Voyager
+Submarines                         Industrial                            Lunar/Mars
+
+EACH NODE CONTAINS:
+  [Current fossil system] --> [Electric replacement] --> [Transition pathway]
+  [Passive thermal]       --> [Active electric]      --> [Hybrid optimal]
+
+THROUGH-LINE: Same dQ/dt equation, different boundary conditions
+\end{asciibox}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+
+  M1: Thermal Physics     M2: Micro/Personal    M3: Residential
+  Fundamentals            Environments          Scale
+       |                       |                     |
+       v                       v                     v
+  M4: Commercial &        M5: Vessels &         M6: Space Thermal
+  Industrial Scale        Mobile Structures     Engineering
+       |                       |                     |
+       +----------+------------+---------------------+
+                  |
+                  v
+          M7: Transition Pathways — Oil/Gas to Electric
+                  |
+                  v
+          M8: Synthesis — The Gradient Engine Unified
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Thermal Physics Fundamentals}
+Heat transfer mechanisms (conduction, convection, radiation, phase change). Thermodynamic cycles relevant to electric systems: vapor-compression with low-GWP refrigerants (R-290, R-32, CO$_2$ transcritical), absorption cycles, magnetocaloric, thermoelectric (Peltier/Seebeck), thermoacoustic. Heat pump theory: COP vs. temperature differential, inverter-driven variable-speed compressors, cascade systems. Thermal storage: sensible, latent (PCM), thermochemical, seasonal (borehole, aquifer, pit). Radiative cooling physics: atmospheric transparency window (8--13 $\mu$m), Stefan-Boltzmann law, selective emitter design, PDRC metamaterials.
+
+\subsubsection{Module 2: Micro/Personal Environments}
+EV thermal management: battery pack liquid cooling, heat pump cabin heating, octovalve-style multi-port routing, Tesla/BYD integrated thermal architectures, waste heat recovery, thermal runaway prevention. Rail: electric HVAC, metro tunnel heat management. Aircraft: no-bleed electric environmental control (787 architecture), electric anti-icing. Submarines: nuclear reactor thermal loops, seawater cooling, thermal signature management. Wearables: Peltier cooling vests, space suit liquid cooling garments, sublimators.
+
+\subsubsection{Module 3: Residential Scale}
+Single-family: air-source and ground-source heat pumps, mini-splits, ducted systems, envelope performance (R-values, air sealing, blower door), passive solar, ERV/HRV, radiant floor. Multifamily: VRF systems, shared vs. individual, water-source heat pump loops. Apartments: central plant vs. distributed, four-pipe hydronic, cooling towers. High-rise: stack effect, curtain wall performance, perimeter heating, riser distribution. All-electric new construction vs. retrofit economics.
+
+\subsubsection{Module 4: Commercial \& Industrial Scale}
+Small business part-time occupancy, RTU replacement with heat pump RTUs, demand-controlled ventilation. Mid-size: VAV with electric reheat, chilled beams, underfloor air, BACnet/BAS integration. Large/campus: district electric systems, ground-source heat pump fields, data center waste heat recovery. Skyscrapers: double-skin facades, ice storage, cogeneration elimination pathways. Industrial: industrial heat pumps to 200\textdegree C, clean room electric HVAC, cold storage, greenhouse electric climate control.
+
+\subsubsection{Module 5: Vessels \& Mobile Structures}
+Ships: electric propulsion waste heat, shore power, reefer container management, ORC waste heat to electric. Naval: nuclear electric thermal loops, all-electric ship architectures. Offshore: electric trace heating, flowline thermal management. Mobile/temporary: electric construction site heating, disaster relief, military FOB.
+
+\subsubsection{Module 6: Space Thermal Engineering}
+ISS ATCS: ammonia coolant loops, PVTCS, external radiators, cold plates, IFHX. Hubble: passive MLI, heater management, thermal degradation over decades. JWST: five-layer sunshield, passive cooling to 40K, MIRI cryocooler to 6.4K, L2 thermal stability. Voyager: RTG decay heat, thermal louvers, heater triage. Future: lunar surface extremes, Mars habitat design, nuclear thermal propulsion cooling. SmallSat thermal: miniaturized heat pipes, deployable radiators, CubeSat coatings-only solutions.
+
+\subsubsection{Module 7: Transition Pathways --- Oil/Gas to Electric}
+Residential gas-to-electric: equipment lifecycle replacement strategy (furnace $\rightarrow$ heat pump at end of life), panel upgrade economics, time-of-use rate optimization, cold-climate hybrid dual-fuel as transitional step. Commercial: phased electrification (RTUs first, then boilers, then process heat), electrical infrastructure planning (transformer, switchgear, peak management). Industrial: process heat electrification ladder (low-temp first, medium via industrial HP, high-temp via electric arc/induction). Fleet/transport: ICE waste heat dependency elimination, electric cabin conditioning. Policy landscape: building performance standards, gas ban timelines, IRA incentives, EU regulations. Equity: low-income household transition support, energy burden analysis, high-efficiency vs. low-efficiency electrification outcomes.
+
+\subsubsection{Module 8: Synthesis --- The Gradient Engine Unified}
+Cross-scale structural invariants. The same dQ/dt equation at every node. Map between spacecraft radiator design and terrestrial radiative cooling. Map between EV battery thermal management and building thermal storage. The gradient interception model as unifying framework. Integration with \textit{The Space Between} chapter architecture (wave theory, thermodynamics, boundary conditions).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: gradient-engine
+  profile: fleet
+  modules:
+    - id: M1-thermal-physics
+      model: sonnet
+      tokens: 18000
+      parallel_group: wave1a
+    - id: M2-micro-personal
+      model: sonnet
+      tokens: 20000
+      parallel_group: wave1a
+    - id: M3-residential
+      model: sonnet
+      tokens: 18000
+      parallel_group: wave1b
+    - id: M4-commercial-industrial
+      model: sonnet
+      tokens: 20000
+      parallel_group: wave1b
+    - id: M5-vessels-mobile
+      model: sonnet
+      tokens: 16000
+      parallel_group: wave1c
+    - id: M6-space-thermal
+      model: sonnet
+      tokens: 18000
+      parallel_group: wave1c
+    - id: M7-transition-pathways
+      model: opus
+      tokens: 22000
+      parallel_group: wave2
+      depends_on: [M1, M2, M3, M4, M5]
+    - id: M8-synthesis
+      model: opus
+      tokens: 20000
+      parallel_group: wave2
+      depends_on: [M1, M2, M3, M4, M5, M6, M7]
+  safety_gates:
+    - HIGH_VOLTAGE: "Electrical safety warnings for panel upgrades and high-voltage systems"
+    - REFRIGERANT: "Refrigerant handling safety — R-290 flammability, CO2 high-pressure"
+    - SPACE_SYSTEMS: "No operational security details for military thermal systems"
+    - EQUITY: "Transition pathway equity — no framing that burdens low-income disproportionately"
+    - NUCLEAR: "RTG and reactor references — factual physics only, no weapons-adjacent content"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Electric heating and cooling technologies at all 8 scales (wearable through spacecraft)
+\item Heat pump technology: air-source, ground-source, water-source, industrial, cascade, cold-climate
+\item Passive thermal management: radiative cooling, PCM, thermal mass, envelope performance
+\item Active electric thermal: Peltier/thermoelectric, cryocoolers, electric resistance (as transitional)
+\item Oil/gas transition pathways at residential, commercial, industrial, and transport scales
+\item Thermal storage technologies (sensible, latent, thermochemical, seasonal)
+\item Space thermal engineering (ISS, Hubble, JWST, Voyager, lunar/Mars)
+\item EV and electric transport thermal management
+\item Policy and economic frameworks for electrification (IRA, EU directives, building codes)
+\item Equity analysis of electrification transitions
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Fossil fuel combustion system design or optimization (documented only as legacy to replace)
+\item Nuclear reactor design (referenced only as heat source in space/naval contexts)
+\item Hydrogen combustion for heating (electrolyzer-to-fuel-cell pathway covered in separate mission)
+\item Grid generation and transmission infrastructure (referenced only as electrification dependency)
+\item Detailed refrigerant chemistry (covered at application level, not molecular)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Heat pump COP data sourced from IEA, DOE, or peer-reviewed studies for at least 4 climate zones
+\item Radiative cooling performance data (W/m$^{2}$) from at least 3 peer-reviewed PDRC studies
+\item EV thermal management architectures documented for at least 3 major OEM platforms
+\item Residential transition pathway with cost data from NREL, DOE, or utility programs
+\item Commercial electrification pathway with phased implementation timeline and infrastructure requirements
+\item Industrial heat pump applications documented to at least 150\textdegree C with sourced efficiency data
+\item Space thermal control systems documented from NASA ATCS, JWST, and Voyager technical references
+\item Cross-scale structural invariants explicitly mapped between at least 4 scale pairs
+\item Equity analysis of electrification with data from at least 2 peer-reviewed or government studies
+\item All oil/gas systems documented with explicit electric replacement technology and transition timeline
+\item Passive cooling technologies assessed at both current TRL and projected 2030 commercial readiness
+\item Through-line connecting terrestrial and space thermal engineering through the gradient interception model
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+HVAC/Energy Transfer Mission (Mar 10) & Direct predecessor --- covers heat pumps, waste heat recovery, fuel cells, geothermal, hydroelectric. This mission extends thermal focus across all scales and adds transition pathways. \\
+Environmental Restoration Mission & Shares clean air/water themes; thermal management of agricultural and habitat systems overlaps with greenhouse and habitat modules. \\
+The Space Between (Ch. 4--24) & Vibration through-line connects wave theory, thermodynamics, and boundary conditions. Thermal gradient interception is a specific instance of the book's central metaphor. \\
+LED/Electronics Mission & Electronics thermal management (heat sinks, vapor chambers, thermal throttling) is the micro-scale anchor of this study. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A heat pump in a house in Everett and the ammonia loops on the International Space Station are solving the same equation. The heat pump intercepts the thermal gradient between outdoor air and indoor comfort, using electricity to move enthalpy against its natural flow direction. The ISS ATCS intercepts the gradient between waste heat from avionics and the 3-kelvin sink of deep space, using mechanical pumps to transport ammonia through radiator panels that reject energy by infrared emission.
+
+The only difference is the boundary conditions. On the ground, you have convection as an ally and gravity to help your fluids circulate. In orbit, you have no convection at all, and your radiators must face carefully computed directions to avoid re-absorbing reflected sunlight. On Voyager, 15 billion miles from the Sun, you have no solar input and your only heat source is the radioactive decay of plutonium-238 --- and the engineering question becomes not how to reject heat but how to conserve it as your power source decays at 4 watts per year.
+
+The gradient is always there. The question is always the same: \textit{What mediates the flow?} The answer this study demands is: \textit{Electricity. Not combustion. Interception, not manufacture.} From the Peltier junction in a cooling vest to the cryocooler on MIRI, the electron is the common mediator. This is the Gradient Engine.
+
+\newpage
+
+% ============================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Gradient Engine --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced data for each research module. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{International Energy Agency (IEA)} --- Heat pump deployment data, global energy outlook, renewable heat projections
+\item \textbf{U.S. Department of Energy (DOE)} --- Building electrification programs, industrial heat pump research, energy efficiency standards
+\item \textbf{National Renewable Energy Laboratory (NREL)} --- Building stock analysis, electrification packages, residential transition economics
+\item \textbf{NASA} --- Spacecraft thermal control handbooks, ATCS documentation, JWST thermal design, SmallSat thermal technology SOA
+\item \textbf{California Energy Commission (CEC)} --- Radiative sky cooling pilot studies, building decarbonization
+\item \textbf{Electric Power Research Institute (EPRI)} --- National Electrification Assessment, heat pump market analysis
+\item \textbf{Peer-reviewed journals} --- Science, Nature, ACS Applied Materials, Journal of Thermal Analysis, MDPI Processes
+\end{itemize}
+
+\subsection{Module 1 Reference: Thermal Physics Fundamentals}
+
+\subsubsection{Heat Pump Thermodynamics}
+Heat pumps currently available on the market operate at 3 to 5 times the energy efficiency of natural gas boilers, according to the IEA's Future of Heat Pumps report. The core metric is the Coefficient of Performance (COP): the ratio of thermal energy delivered to electrical energy consumed. At moderate ambient temperatures (above 5\textdegree C), air-source heat pumps achieve COPs of 3.0--4.0, meaning each unit of electricity produces 3--4 units of usable heat. Ground-source systems maintain higher COPs across temperature ranges because soil temperature remains relatively stable (8--15\textdegree C year-round at depth).
+
+COP degrades with falling ambient temperature. At 0\textdegree F ($-$18\textdegree C), air-source heat pump efficiency approaches that of resistive heating (COP near 1.0). Cold-climate air-source heat pumps (ccASHP) rated to $-$15\textdegree F use enhanced vapor injection (EVI) compressor technology to maintain useful COP of 1.5--2.0 at low temperatures. Cascade systems using CO$_2$ transcritical cycles on the low-temperature side paired with conventional refrigerant on the high side extend useful operation to $-$25\textdegree C and below.
+
+Variable-speed inverter-driven compressors represent the most significant efficiency advance in recent heat pump technology. Unlike single-speed units that cycle on/off, inverter compressors modulate continuously, matching output to load. This eliminates cycling losses, reduces temperature swings, and improves seasonal COP by 15--30\%.
+
+\subsubsection{Radiative Cooling Physics}
+Passive daytime radiative cooling exploits the atmospheric transparency window between 8 and 13 $\mu$m wavelength, through which thermal infrared radiation can escape directly to the cold sink of outer space (approximately 3 K). The theoretical cooling power for a surface with ideal spectral properties (perfect solar reflection, perfect emission in the atmospheric window) is approximately 100--150 W/m$^{2}$.
+
+The 2014 Stanford breakthrough demonstrated the first photonic structure achieving sub-ambient cooling under direct sunlight. Since then, metamaterial films, porous polymer coatings, and bio-inspired structures have achieved practical cooling powers of 30--100 W/m$^{2}$. Purdue University's ultra-white paint (BaSO$_4$-based) achieved 98.1\% solar reflectance and demonstrated cooling of 4.5\textdegree C below ambient in direct sunlight.
+
+SkyCool Systems, in a California Energy Commission-funded pilot, demonstrated rooftop radiative cooling panels that cool circulating fluid 6\textdegree C below ambient continuously, reducing refrigeration system energy consumption by at least 10\% when integrated with existing vapor-compression condensers. The panels operate using a patented multilayer cooling film that both reflects sunlight and emits infrared through the atmospheric window.
+
+\subsubsection{Thermal Storage}
+Phase-change materials (PCMs) store thermal energy at constant temperature during melting/solidification. Paraffin-based PCMs operate in the 20--60\textdegree C range suitable for building applications; salt hydrates extend to higher temperatures. Seasonal thermal energy storage --- borehole, aquifer, and pit systems --- stores summer excess heat underground for winter use, with demonstrated round-trip efficiencies of 50--70\% in Danish district heating systems.
+
+\subsection{Module 2 Reference: Micro/Personal Environments}
+
+\subsubsection{EV Battery Thermal Management}
+The global EV battery thermal management systems market was valued at approximately \$5.4 billion in 2024 and is projected to reach \$29 billion by 2030, reflecting the critical importance of thermal control to battery performance, safety, and longevity. Liquid cooling with water-glycol circulated through cold plates is the industry standard, reducing peak battery temperature by 15--30\% versus air cooling while maintaining cell-to-cell temperature uniformity below 5\textdegree C.
+
+Tesla's Octovalve system, introduced in the Model Y (2021), replaced discrete pumps and valves with a single multi-port controller managing heat exchange between cabin, battery, and powertrain. This integrated approach reduces component count and enables sophisticated thermal routing --- for example, using motor waste heat to warm the battery in cold weather, or routing battery heat to cabin heating. BYD's ``16-in-1'' integrated thermal management system on the e-Platform 3.0 manages five thermal modes: high-temperature heating, high-temperature cooling, low-temperature preheating, waste heat recovery, and low-temperature servo.
+
+Heat pump technology in EVs extends driving range by approximately 10\% at 0\textdegree C (32\textdegree F) compared to resistive heating. At moderate cold temperatures, heat pumps achieve COP of 2--3; their advantage diminishes as temperature drops toward $-$18\textdegree C, at which point supplemental PTC (positive temperature coefficient) resistive heating is typically activated. Hanon Systems launched fourth-generation multi-source heat pumps in 2024 that capture waste heat from motor, battery, and ambient air simultaneously.
+
+\subsubsection{Electric Aircraft Environmental Control}
+The Boeing 787 Dreamliner introduced the first no-bleed architecture in a commercial aircraft, replacing engine bleed-air systems with electrically driven compressors for cabin pressurization and air conditioning. This eliminates the thermodynamic penalty of extracting high-pressure air from engine compressor stages. Electric environmental control systems (E-ECS) are lighter, more efficient, and enable finer temperature control per cabin zone.
+
+\subsubsection{Submarine and Naval Electric Thermal}
+Modern nuclear submarines use closed-loop freshwater cooling circuits interfaced with seawater heat exchangers. The thermal management challenge is bidirectional: maintaining crew comfort in a sealed environment while minimizing thermal signature in the surrounding water. All-electric ship programs (DDG-1000 Zumwalt class) integrate electric propulsion with thermal management, using waste heat from the integrated power system for crew spaces.
+
+\subsection{Module 3 Reference: Residential Scale}
+
+\subsubsection{Heat Pump Deployment Data}
+According to the IEA's Global Energy Review 2025, U.S. heat pump sales rose 15\% in 2024, with a 30\% surge in the second half. Heat pumps outsold natural gas furnaces by a record 30\% margin. Globally, heat pump sales rose 27\% from 2020 to 2024, though the European market declined 21\% in 2024 (driven by 50\% drops in Germany and 25\% in France due to policy uncertainty and energy price normalization).
+
+Residential heat pumps achieve seasonal COP of 2.5--3.5 in moderate climates, reducing annual operating costs by \$400--\$714 compared to gas systems (NREL/PG\&E estimates for California). Air-to-air units cost \$3,000--\$6,000 installed; air-to-water systems including radiator modifications run 2--4 times the cost of a gas boiler. Financial incentives in 30+ countries cover over 70\% of current heating demand.
+
+\subsubsection{Envelope Performance}
+Danish data demonstrates that heat pumps in the best-insulated homes use 30\% less electricity than those in poorly insulated homes. Upgrading a home's energy rating by two grades (e.g., D to B) can halve heating energy demand, according to IEA analysis. This makes envelope improvement a critical precondition for efficient electrification --- undersized heat pumps in leaky buildings will underperform and potentially require expensive backup resistance heating.
+
+\subsubsection{Multifamily and High-Rise}
+NREL research identifies the ``repeatable multifamily heat pump retrofit'' as a critical market gap. Variable refrigerant flow (VRF) systems can serve 10--40+ zones from a single outdoor unit, offering simultaneous heating and cooling with energy recovery between zones. Water-source heat pump loops allow each apartment to have an individual heat pump sharing a common condenser water loop --- metering is straightforward and each unit controls its own comfort.
+
+Stack effect in tall buildings creates pressure differentials that drive infiltration and exfiltration, increasing heating loads on lower floors and cooling loads on upper floors. Curtain wall thermal performance, vestibule air locks, and neutral pressure plane management become critical above 10 stories.
+
+\subsection{Module 4 Reference: Commercial \& Industrial Scale}
+
+\subsubsection{Commercial Building Electrification}
+U.S. commercial buildings account for 16\% of national greenhouse gas emissions. An NREL/DOE overview of building electrification found that heat pump rooftop units (HP-RTUs) replacing gas-fired RTUs achieved over 40\% combined heating and cooling energy savings with customer payback under 2 years. Cold-climate commercial heat pump RTUs with electric resistance backup delivered supply air temperatures above 38\textdegree C (100\textdegree F), meeting comfort requirements.
+
+Building automation systems (BACnet, LON, Modbus) enable demand-controlled ventilation, optimal start/stop, economizer control, and demand response participation. These systems are essential for managing the increased electrical load from electrification while maintaining grid stability.
+
+\subsubsection{Industrial Heat Pumps}
+The IEA World Energy Outlook 2025 identifies industrial heat pumps as a crucial enabler of industrial decarbonization, providing low- and medium-temperature process heat using one-third to one-fifth of the energy required by conventional boilers. Industrial heat pumps now serve process temperatures up to 150--200\textdegree C, covering applications in food processing, chemicals, textiles, and pulp/paper. The share of electricity in global industrial heat consumption is projected to rise from 4\% (2024) to 12\% (2030), driven primarily by non-energy-intensive industries.
+
+\subsubsection{Data Center Waste Heat Recovery}
+Modern data centers reject enormous quantities of low-grade waste heat (typically 30--50\textdegree C supply water). District heating systems in Scandinavian countries already capture this waste heat via heat pumps to serve residential and commercial buildings --- a direct implementation of the gradient interception model where computation's thermal exhaust becomes a community heating source.
+
+\subsection{Module 5 Reference: Vessels \& Mobile Structures}
+
+\subsubsection{All-Electric Maritime}
+The maritime industry is transitioning from diesel-mechanical to diesel-electric and battery-electric propulsion. Shore power (cold ironing) at ports eliminates auxiliary diesel generators during docking. Electric ferries (Norway's MF Ampere, launched 2015) demonstrated that battery-electric operation is viable for short routes. Waste heat from electric propulsion systems (motor, inverter, battery) can be captured via heat pumps for cabin and cargo conditioning.
+
+\subsubsection{Offshore Platform Electrification}
+Norway's Hywind Tampen floating wind farm (2023) directly electrifies offshore oil platforms, displacing gas turbines. Subsea flowline heating transitions from gas-powered heat generation to electric trace heating with resistance cables, preventing hydrate and wax formation without combustion.
+
+\subsection{Module 6 Reference: Space Thermal Engineering}
+
+\subsubsection{ISS Active Thermal Control System}
+The ISS ATCS uses mechanically pumped anhydrous ammonia in closed-loop circuits for heat collection (cold plates, heat exchangers), transportation (pumps and plumbing), and rejection (external radiator panels). The Photovoltaic Thermal Control System (PVTCS) manages excess heat from the Electrical Power System. Interface Heat Exchangers (IFHX) transfer heat between the internal water/air loops and external ammonia loops. Total heater power of 1.8 kW on bypass lines prevents ammonia freezing. Thermal Radiator Rotary Joints (TRRJs) allow radiator panels to track optimal rejection angles.
+
+\subsubsection{JWST Thermal Architecture}
+The James Webb Space Telescope uses a five-layer Kapton/aluminum sunshield (21.2m $\times$ 14.2m deployed) that blocks 99.999\% of solar energy. The first layer intercepts 90\% of incoming heat; each successive layer blocks more. The cold side passively reaches approximately 40 K. The MIRI instrument requires active cryocooling to 6.4 K via a pulse-tube cooler. The hot side (spacecraft bus) operates near 300 K --- a 260 K gradient across a single structure. Beryllium was chosen for the primary mirror segments for its near-zero coefficient of thermal expansion at cryogenic temperatures.
+
+\subsubsection{Voyager RTG Thermal Management}
+Voyager 1 and 2 use radioisotope thermoelectric generators (RTGs) containing plutonium-238. The Seebeck effect converts decay heat directly to electricity with no moving parts. Power output declines approximately 4 W per year as the isotope decays. As of 2025, the Voyagers operate on approximately 4 W electrical each, with instruments being selectively deactivated to conserve power. Thermal louvers with bimetallic actuators passively regulate heat rejection. The spacecraft survive interstellar space on the waste heat of radioactive decay alone --- the ultimate minimal thermal system.
+
+\subsubsection{Future Space Thermal Challenges}
+Lunar surface thermal management must handle extremes of $-$173\textdegree C (night) to +127\textdegree C (day) on 14-day cycles. Mars habitats face thin-atmosphere conditions (some convection possible, unlike vacuum) with dust accumulation reducing solar panel output. Both environments demand electric thermal solutions --- no combustion atmosphere is available on either body.
+
+\subsection{Module 7 Reference: Transition Pathways}
+
+\subsubsection{Residential Gas-to-Electric}
+The NREL Building Stock Analysis recommends lifecycle replacement: when a gas furnace reaches end of life (typically 15--20 years), replace with a heat pump rather than another gas unit. For systems less than 10 years old, the recommendation is to improve envelope efficiency first, then map electrification for eventual replacement.
+
+Key infrastructure barriers include electrical panel capacity (many older homes have 100A service; heat pump + EV charging + cooking may require 200A upgrade at \$2,000--\$5,000), and gas utility franchise agreements that create financial disincentives for disconnection. Cold-climate markets should consider dual-fuel systems as transitional: heat pump for primary heating down to a switchover point (typically 25--35\textdegree F), with existing gas furnace as backup below that temperature, with a planned sunset date for the gas equipment.
+
+A peer-reviewed study (ScienceDirect, 2025) of Los Angeles residential electrification found that high-efficiency electric technologies decreased energy burden for all households, especially low-income ones, while \textit{low-efficiency} electrification increased costs and grid load by 40--50\%. The finding is critical: transition pathways must specify high-efficiency equipment to avoid worsening the energy burden for vulnerable populations.
+
+\subsubsection{Commercial Electrification Pathway}
+The recommended phased approach: (1) Replace end-of-life rooftop units with heat pump RTUs (shortest payback, highest impact). (2) Convert domestic hot water from gas to heat pump water heaters. (3) Address space heating boilers --- the most complex conversion requiring hydronic system redesign. (4) Electrify process loads last. At each phase, assess electrical infrastructure and upgrade transformers, switchgear, and distribution as needed.
+
+RMI research found that climate-appropriate technology bundles are essential: energy-recovery ventilation paired with heat pump RTUs for cold climates (Washington DC, Chicago), fully electric heat pump RTUs for moderate climates (Seattle), and solar arrays powering heat pumps for sunny climates (Las Vegas).
+
+\subsubsection{Industrial Transition Ladder}
+Low-temperature process heat (below 100\textdegree C): direct replacement with industrial heat pumps today. Medium-temperature (100--200\textdegree C): high-temperature heat pumps using CO$_2$ transcritical or cascade systems. High-temperature (above 200\textdegree C): electric arc furnaces (steel), induction heating (metals), microwave/RF heating (ceramics, chemicals). The IEA projects that electric process heat will grow from 4\% to 12\% of global industrial heat consumption by 2030.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Sensitivity} & \tableheader{Handling} \\
+\midrule
+High-voltage systems & Safety-critical & All panel upgrade and HV references include licensed electrician requirement \\
+Refrigerant handling & Safety-critical & R-290 flammability, CO$_2$ pressure hazards noted; no DIY refrigerant work \\
+Nuclear systems & Factual only & RTGs and reactor thermal described as physics; no weapons-adjacent content \\
+Equity/income & Socioeconomic & Transition pathways address low-income impact with sourced data \\
+Military thermal & Security & No operational specifics for submarine/naval thermal signature management \\
+Gas industry transition & Economic/political & Present evidence without policy advocacy; document both benefits and barriers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item IEA, ``The Future of Heat Pumps,'' World Energy Outlook special report
+\item IEA, ``Global Energy Review 2025,'' heat pump deployment data
+\item IEA, ``Renewables 2025,'' renewable heat section
+\item IEA, ``World Energy Outlook 2025,'' industrial heat pump analysis
+\item IEA, ``Energy Efficiency Policy Toolkit 2025,'' heat pump policy recommendations
+\item U.S. DOE / NREL, ``Overview of Building Electrification,'' NREL/TP-5500-88309
+\item California Energy Commission, ``Radiative Sky Cooling-Enabled Efficiency Improvements,'' CEC-500-2025-002
+\item NASA, ``Active Thermal Control System (ATCS) Overview''
+\item NASA, ``Small Spacecraft Technology State of the Art: Thermal Control,'' 2024 edition
+\item NASA JSC, ``Thermal Technology Roadmap 2024''
+\item BOMA International, ``Electrification in Commercial Buildings,'' 2023
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=2em]
+\item Zhao et al., ``Progress in passive daytime radiative cooling from spectral design to real application,'' \textit{Carbon Future} 2(1), 2025
+\item Li et al., ``Advanced passive daytime radiative cooling,'' \textit{Advanced Composites and Hybrid Materials} 8:97, 2025
+\item Sun et al., ``Recent Advances in Spectrally Selective Daytime Radiative Cooling Materials,'' \textit{Nano-Micro Letters}, 2025
+\item Xie et al., ``Subambient daytime radiative cooling of vertical surfaces,'' \textit{Science}, 2024
+\item Wu et al., ``Spectrally engineered textile for radiative cooling against urban heat islands,'' \textit{Science} 384, 2024
+\item Chen et al., ``Biomimetic Daytime Radiative Cooling Technology,'' \textit{PMC/Biomimetics}, 2025
+\item ``Design strategies, manufacturing, and applications of radiative cooling technologies,'' \textit{De Gruyter/Nanophotonics}, 2025
+\item ``Integrated thermal management strategies for electric vehicles,'' \textit{J. Thermal Analysis and Calorimetry}, 2026
+\item Parrish et al., ``Cryogenic Thermal System Design of JWST ISIM,'' \textit{SAE Technical Paper} 2005-01-3041
+\item ``Achieving equitable widespread residential building electrification,'' \textit{Applied Energy} 381, 2025
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Industry}
+\begin{itemize}[leftmargin=2em]
+\item Heat Pumping Technologies TCP, IEA Global Energy Review 2025 analysis
+\item Recurrent Auto, ``Winter EV Range Study,'' 30,000-vehicle dataset, 2025/2026
+\item Building Decarbonization Coalition, ``Electrification of Commercial and Residential Buildings''
+\item AEE Center / IJEM Vol.7 Iss.3, ``Electrification in Commercial Buildings: Engineering the Transition,'' 2025
+\item IDTechEx, ``Thermal Management for Electric Vehicles 2025--2035''
+\end{itemize}
+
+\newpage
+
+% ============================================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, publication-quality reference document covering electric thermal management across 8 scales (wearable $\rightarrow$ spacecraft), with explicit oil/gas-to-electric transition pathways at every terrestrial scale, sourced entirely from government, peer-reviewed, and professional organization data.
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+
+Wave 0:  [FOUNDATION]  Shared schemas, source index, glossary
+              |
+         +---------+---------+
+         |         |         |
+Wave 1A: M1+M2   M3+M4    M5+M6     (3 parallel tracks)
+         Physics  Residential  Vessels+Space
+         +Micro   +Commercial
+         |         |         |
+         +---------+---------+
+              |
+Wave 2:  [SYNTHESIS]  M7 Transition Pathways + M8 Unified Synthesis
+              |
+Wave 3:  [PUBLICATION + VERIFICATION]
+\end{asciibox}
+
+\textbf{System Layers:}
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared terminology, units, source quality standards, LaTeX template
+\item \textbf{Survey Layer} --- 6 parallel research modules, each self-contained with internal sources
+\item \textbf{Synthesis Layer} --- Transition pathways integrating all terrestrial modules; unified cross-scale analysis
+\item \textbf{Publication Layer} --- Final assembly, verification, formatting, and delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+D1 & Thermal Physics Reference & COP data for 4+ climate zones; PDRC performance from 3+ studies \\
+D2 & Micro/Personal Survey & 3+ OEM EV thermal architectures; aircraft + submarine electric thermal \\
+D3 & Residential Survey & Heat pump deployment data (IEA); envelope integration; multifamily gap analysis \\
+D4 & Commercial/Industrial Survey & HP-RTU savings data; industrial HP to 200\textdegree C; electrification phasing \\
+D5 & Vessels/Mobile Survey & Maritime electrification; offshore; mobile/temporary structures \\
+D6 & Space Thermal Survey & ISS ATCS, JWST sunshield/cryocooler, Voyager RTG, lunar/Mars \\
+D7 & Transition Pathways & Gas-to-electric at residential + commercial + industrial + transport with equity analysis \\
+D8 & Synthesis Document & Cross-scale invariants mapped; gradient interception model unified \\
+D9 & Final Compiled Document & All modules assembled, indexed, cross-referenced, publication-ready \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+C0: Foundation & None & Haiku & 6,000 \\
+C1: Thermal Physics & C0 & Sonnet & 18,000 \\
+C2: Micro/Personal & C0 & Sonnet & 20,000 \\
+C3: Residential & C0 & Sonnet & 18,000 \\
+C4: Commercial/Ind. & C0 & Sonnet & 20,000 \\
+C5: Vessels/Mobile & C0 & Sonnet & 16,000 \\
+C6: Space Thermal & C0 & Sonnet & 18,000 \\
+C7: Transition Path & C1--C5 & Opus & 22,000 \\
+C8: Synthesis & C1--C7 & Opus & 20,000 \\
+C9: Publication & C0--C8 & Sonnet & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 25\% & Transition pathways (cross-module judgment, equity analysis), Synthesis (cross-scale integration, philosophical framing) \\
+Sonnet & 68\% & All 6 survey modules (structured research compilation), Publication assembly \\
+Haiku & 7\% & Foundation schemas, glossary, template scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\textbf{Wave Summary:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Execution} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0 & C0 & Sequential & 6,000 \\
+Wave 1 & C1--C6 & 3 parallel tracks & 110,000 \\
+Wave 2 & C7--C8 & Sequential & 42,000 \\
+Wave 3 & C9 & Sequential & 12,000 \\
+\midrule
+\textbf{Total} & & & \textbf{170,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C0: Foundation & Haiku & Shared glossary (COP, PDRC, ATCS, VRF, RTG, MLI, PCM, etc.), unit standards (SI primary, imperial in parentheses for US context), source quality checklist, LaTeX section template \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 1: Parallel Survey Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Components} & \tableheader{Model} & \tableheader{Focus} \\
+\midrule
+1A & C1 + C2 & Sonnet & Physics fundamentals + EV/aircraft/submarine thermal \\
+1B & C3 + C4 & Sonnet & Residential + commercial/industrial electrification \\
+1C & C5 + C6 & Sonnet & Maritime/mobile + space thermal engineering \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C7: Transition & Opus & Oil/gas transition pathways at residential, commercial, industrial, transport scales. Equity analysis. Policy landscape. Phased implementation timelines. \\
+C8: Synthesis & Opus & Cross-scale invariants. Gradient interception model. Space-terrestrial knowledge transfer. Integration with \textit{The Space Between} framework. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+C9: Publication & Sonnet & Final assembly, cross-referencing, index generation, LaTeX compilation, verification checklist \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Foundation cache:} Glossary and template shared across all Wave 1 tracks (loaded once, referenced by all)
+\item \textbf{Source index:} Deduplicated bibliography maintained in C0, appended by each module, merged in C9
+\item \textbf{Cross-reference tags:} Each module tags key findings with scale identifiers (MICRO, RES, COM, IND, VES, SPACE) for synthesis module harvesting
+\item \textbf{Transition pathway hooks:} Survey modules flag every oil/gas system encountered with a \texttt{[TRANSITION]} tag for C7 to collect
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input} & \tableheader{Output} & \tableheader{Total} \\
+\midrule
+C0: Foundation & 2,000 & 4,000 & 6,000 \\
+C1: Thermal Physics & 6,000 & 12,000 & 18,000 \\
+C2: Micro/Personal & 6,000 & 14,000 & 20,000 \\
+C3: Residential & 6,000 & 12,000 & 18,000 \\
+C4: Commercial/Ind. & 6,000 & 14,000 & 20,000 \\
+C5: Vessels/Mobile & 6,000 & 10,000 & 16,000 \\
+C6: Space Thermal & 6,000 & 12,000 & 18,000 \\
+C7: Transition Path & 8,000 & 14,000 & 22,000 \\
+C8: Synthesis & 8,000 & 12,000 & 20,000 \\
+C9: Publication & 6,000 & 6,000 & 12,000 \\
+\midrule
+\textbf{Total} & \textbf{60,000} & \textbf{110,000} & \textbf{170,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+                         C0 (Foundation)
+                              |
+            +-----------------+-----------------+
+            |                 |                 |
+      [Track 1A]        [Track 1B]        [Track 1C]
+       C1 + C2            C3 + C4           C5 + C6
+       Physics            Residential       Vessels
+       +Micro             +Commercial       +Space
+            |                 |                 |
+            +-----------------+-----------------+
+                              |
+                    C7 (Transition Pathways)
+                              |
+                    C8 (Synthesis)
+                              |
+                    C9 (Publication)
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\textbf{Test Categories:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 9 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{38} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Safety-Critical Tests:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-SRC & Source quality & All citations from IEA, DOE, NREL, NASA, peer-reviewed journals, or professional organizations. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every COP value, cost figure, temperature, and efficiency percentage attributed to specific source. \\
+SC-ADV & No policy advocacy & Transition pathways present evidence and options without advocating specific legislation. \\
+SC-HV & High-voltage safety & All electrical panel upgrade and HV system references include licensed electrician requirement. \\
+SC-REF & Refrigerant safety & R-290 flammability, CO$_2$ high-pressure hazards, and all refrigerant handling references include professional-only requirement. \\
+SC-EQ & Equity framing & Transition pathways do not frame electrification in ways that disproportionately burden low-income households without noting mitigation. \\
+SC-NUC & Nuclear content boundary & RTG and reactor thermal content is factual physics only; no weapons-adjacent information. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Core Functionality Tests (selected):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Heat pump COP data & COP values sourced for 4+ climate zones from IEA or DOE \\
+CF-02 & PDRC performance & Cooling power (W/m$^{2}$) from 3+ peer-reviewed studies \\
+CF-03 & EV thermal architectures & 3+ OEM platforms documented (Tesla, BYD, + 1 other) \\
+CF-04 & Residential transition & Cost data from NREL, DOE, or utility programs \\
+CF-05 & Commercial pathway & Phased timeline with infrastructure requirements \\
+CF-06 & Industrial HP temp range & Applications documented to 150\textdegree C+ with sources \\
+CF-07 & ISS ATCS documentation & Ammonia loop, cold plates, IFHX, radiators described from NASA sources \\
+CF-08 & JWST thermal & Sunshield layers, passive cooling to 40K, MIRI 6.4K from NASA/SAE \\
+CF-09 & Voyager RTG & Pu-238 decay, power decline, heater triage from NASA data \\
+CF-10 & Cross-scale invariants & 4+ scale pairs with explicit structural mapping \\
+CF-11 & Equity analysis & 2+ sourced studies on income-differentiated electrification outcomes \\
+CF-12 & Oil/gas replacement map & Every fossil system has named electric replacement + timeline \\
+CF-13 & Passive cooling TRL & Current and 2030 projected readiness for PDRC technologies \\
+CF-14 & Thermal storage survey & Sensible, latent, thermochemical, and seasonal storage documented \\
+CF-15 & Envelope integration & Insulation/air-sealing as precondition for HP efficiency, with data \\
+CF-16 & SmallSat thermal & Miniaturized thermal tech for CubeSats from NASA SOA report \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Integration Tests (selected):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & EV $\rightarrow$ Building cascade & Battery thermal lessons applied to building thermal storage \\
+IN-02 & Space $\rightarrow$ Terrestrial transfer & Spacecraft radiator design mapped to terrestrial radiative cooling \\
+IN-03 & Residential $\rightarrow$ Commercial scale & Technology progression from single-family to high-rise documented \\
+IN-04 & Physics $\rightarrow$ All modules & COP, emissivity, conductivity definitions consistent across all modules \\
+IN-05 & Transition $\rightarrow$ Every scale & M7 addresses fossil replacement at every terrestrial scale from M2--M5 \\
+IN-06 & Industrial HP $\rightarrow$ Data center & Waste heat recovery chain from process heat to district heating \\
+IN-07 & PDRC $\rightarrow$ Building envelope & Radiative cooling integrated with roof/wall thermal strategy \\
+IN-08 & Self-containment & Reader with no prior knowledge can follow entire document \\
+IN-09 & Source consistency & Same data points referenced in multiple modules use identical values \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Heat pump COP for 4+ climate zones & CF-01, IN-04 & Pending \\
+2. PDRC performance from 3+ studies & CF-02, IN-07 & Pending \\
+3. EV thermal for 3+ OEMs & CF-03, IN-01 & Pending \\
+4. Residential transition with cost data & CF-04, CF-15 & Pending \\
+5. Commercial pathway with phasing & CF-05, IN-03 & Pending \\
+6. Industrial HP to 150\textdegree C+ & CF-06, IN-06 & Pending \\
+7. Space thermal from NASA sources & CF-07--09, CF-16 & Pending \\
+8. Cross-scale invariants for 4+ pairs & CF-10, IN-01--02 & Pending \\
+9. Equity analysis with 2+ studies & CF-11, SC-EQ & Pending \\
+10. Oil/gas replacement map complete & CF-12, IN-05 & Pending \\
+11. PDRC TRL current + 2030 & CF-13, IN-07 & Pending \\
+12. Through-line gradient interception & CF-10, IN-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web research; evidence compilation \\
+EXEC-1A & Executor & Track 1A production (Physics + Micro) \\
+EXEC-1B & Executor & Track 1B production (Residential + Commercial) \\
+EXEC-1C & Executor & Track 1C production (Vessels + Space) \\
+CRAFT-THERM & Domain Specialist & Thermodynamic accuracy; COP calculations; cycle analysis \\
+CRAFT-ELEC & Domain Specialist & Electrical infrastructure; panel capacity; grid integration \\
+CRAFT-SPACE & Domain Specialist & NASA thermal systems; spacecraft design; cryogenic engineering \\
+CRAFT-TRANS & Domain Specialist & Transition pathway economics; equity analysis; policy landscape \\
+VERIFY & Verification & Source validation; numerical cross-checking; unit consistency \\
+INTEG & Integration & Cross-module relationship validation; invariant mapping \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions; document organization \\
+SECURE & Security & Safety boundary enforcement (HV, refrigerant, nuclear, military) \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Mgr & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Components & 10 (C0--C9) \\
+Research Modules & 8 (M1--M8) \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C) \\
+Estimated Total Tokens & $\sim$170,000 \\
+Estimated Sessions & 4--6 \\
+Crew Size & 19 roles \\
+Test Count & 38 (7 safety-critical, 16 core, 9 integration, 6 edge) \\
+Safety Gates & 5 (HV, Refrigerant, Nuclear, Equity, Military) \\
+Model Split & 25\% Opus / 68\% Sonnet / 7\% Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{The gradient is always there. The question is always the same: what mediates the flow? A furnace answers with combustion --- destroying a hydrocarbon bond to manufacture a temperature differential that nature didn't provide. A heat pump answers with interception --- using electricity to redirect thermal energy that was already moving through the environment. A spacecraft radiator answers with geometry --- pointing a surface at the 3-kelvin void and letting Stefan-Boltzmann do the rest.}
+
+\textit{The transition from combustion to interception is not a fuel swap. It is a change in posture --- from adversarial to cooperative, from manufacturing gradients to riding them. From the Peltier junction on a wrist cooler to the ammonia loops on the International Space Station, the mediator is the same: the electron. This is the Gradient Engine, and it runs on every scale the universe provides.}
+
+\vspace{0.5em}
+\hfill --- \textit{from the Through-Line, Stage 1}
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,917 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Energy / Infrastructure ──
+% Deep hydro blue + geothermal amber + earth brown
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{E65100}
+\definecolor{tertiary}{HTML}{3E2723}
+\definecolor{accent}{HTML}{1565C0}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Hydroelectric \& Geothermal Energy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Hydroelectric and Geothermal Energy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═══════════════════════════════════════════
+%  TITLE PAGE
+% ═══════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Power Beneath\\[0.3em]and the Water Above}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Hydroelectric \& Geothermal Energy for the Fox Infrastructure Corridor}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Hydroelectric \& Geothermal Energy --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Fox Infrastructure Group Master Business Plan, Electric City Thesis}
+\metafield{Context:}{FoxSolar, FoxEnergy, FoxCompute energy layer; Colville Confederated Tribes partnership; PNW corridor spine; Cascadia resilience architecture}
+
+\subsection{Vision}
+
+The Columbia River system is the largest hydroelectric complex in North America --- a network of dams generating over 40\% of all U.S. hydropower from a single watershed. At its heart sits Grand Coulee Dam, rated at 6,809 MW, the largest hydroelectric facility in the United States and the keystone of the Federal Columbia River Power System. This is the power that built the Pacific Northwest, that lit the aluminum smelters and aircraft factories that won a world war, and that --- through a history tangled with displacement and broken promises --- took tribal lands from the Colville Confederated Tribes and the Spokane Tribe to do it.
+
+The Fox Infrastructure Group's Electric City thesis begins where that history left. The abandoned aluminum smelter site at Electric City, powered by Grand Coulee's BPA hydroelectric rates of \$0.02/kWh, with Columbia River free cooling, hundreds of megawatts of already-permitted infrastructure, and the Colville Confederated Tribes as majority equity holders and operating lead. The same dam. The same river. The same power. Community owned.
+
+But hydroelectric power, for all its dominance in the PNW, faces a convergence of pressures: climate change is reshaping snowpack timing and summer streamflows; data center demand is exploding; salmon recovery obligations constrain operations; and the seasonal mismatch between generation peaks and consumption peaks is widening. The Fox energy layer --- FoxSolar, FoxEnergy, FoxCompute --- cannot rest on hydro alone.
+
+Beneath the Cascade Range, one of the most volcanically active chains on the continent, lies a second energy resource of extraordinary scale: geothermal heat. The DOE's Enhanced Geothermal Shot analysis projects up to 90 GW of domestic geothermal capacity by 2050. Fervo Energy has demonstrated that enhanced geothermal systems can deliver firm, 24/7 carbon-free power using horizontal drilling techniques borrowed from the oil and gas industry, with well costs falling 49\% across early Cape Station wells. Oregon's Cascade volcanoes alone hold an estimated 2,200 MW of conventional geothermal potential, and the broader Pacific Northwest sits squarely in the Ring of Fire. This is not speculative energy --- it is heat that already exists, waiting for the engineering to reach it.
+
+This research mission maps the complete energy landscape that underpins the Fox corridor: the hydroelectric system as it exists and as climate change will reshape it, the geothermal frontier as EGS technology makes it accessible, the tribal sovereignty dimensions that give both resources their moral architecture, the grid integration challenges of pairing baseload geothermal with flexible hydro, the data center demand curve that makes firm clean power the most valuable commodity in American energy, and the funding and regulatory pathways that connect vision to construction.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Seasonal mismatch intensifying.} Climate change is shifting PNW precipitation from snow to rain, moving peak hydroelectric generation from summer (when demand is highest) to winter. By the 2030s, Columbia Basin models project higher winter flows, earlier spring runoff, and systematically lower summer flows --- creating a growing gap between when hydro produces power and when the grid needs it most.
+
+\item \textbf{Data center demand outpacing clean firm supply.} PNW electricity demand is rising sharply, driven by AI data centers, electrification, and cryptocurrency mining. BPA projects demand growth that existing hydro and renewables cannot meet. The Fox corridor's FoxCompute vision --- 50 MW to 1 GW phased at Electric City --- requires a clean firm power portfolio, not hydro dependence alone.
+
+\item \textbf{Tribal energy sovereignty remains incomplete.} The Colville Confederated Tribes receive annual compensation from BPA for Grand Coulee Dam's use of their land, but this is a revenue payment, not operational control. The Fox model --- tribal majority equity and operating lead --- requires understanding the full legal, regulatory, and economic landscape of tribal energy development.
+
+\item \textbf{Geothermal potential is mapped but undeveloped in the PNW.} Oregon has 2,200 MW of estimated geothermal potential and only 18 MW installed. Washington has extensive geothermal prospecting areas (Mount Baker--Snoqualmie, Newberry Volcano) but zero utility-scale geothermal generation. The gap between identified resource and deployed capacity is wider in the PNW than anywhere else in the western United States.
+
+\item \textbf{Grid integration of hydro + geothermal is uncharted.} No utility or system operator has designed a portfolio that pairs flexible hydroelectric dispatch with firm geothermal baseload at corridor scale. The complementary characteristics --- geothermal provides the 24/7 floor, hydro provides the flexible peaks and ancillary services --- have been theorized but not engineered for a specific geography.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Pair the PNW's existing hydroelectric flexibility with emerging geothermal baseload to create a corridor-scale clean firm energy portfolio under tribal sovereign governance.}
+
+The Fox energy layer treats hydroelectric and geothermal not as competing resources but as complementary halves of a resilient power system. Geothermal provides the always-on floor --- 24/7, weather-independent, carbon-free baseload with capacity factors above 80\%. Hydroelectric provides the flexible ceiling --- rapid-dispatch peaking, ancillary services, and the ability to shape generation around intermittent renewables. Together, they form a portfolio that no single resource can match: firm enough for data center SLAs, flexible enough for grid stability, and clean enough for Washington's 2045 fossil-free mandate.
+
+\subsubsection{Energy Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    ┌─────────────────────────────────────┐
+                    │     COLUMBIA RIVER BASIN HYDRO       │
+                    │                                       │
+                    │  Grand Coulee ─── 6,809 MW            │
+                    │  Chief Joseph ─── 2,620 MW            │
+                    │  John Day ─────── 2,160 MW            │
+                    │  The Dalles ───── 1,807 MW            │
+                    │  Bonneville ───── 1,093 MW            │
+                    │  + 250 additional facilities           │
+                    │  ─────────────────────────             │
+                    │  Total Basin: ~40,570 MW capacity      │
+                    │  Annual: ~50% of PNW generation        │
+                    └──────────────┬──────────────────────┘
+                                   │
+                    ┌──────────────┴──────────────────────┐
+                    │        FOX ENERGY LAYER              │
+                    │                                       │
+                    │  FoxCompute ── Electric City (hydro)  │
+                    │  FoxSolar ──── Station solar + island  │
+                    │  FoxEnergy ─── Grid integration        │
+                    │  FoxGeo? ───── Geothermal baseload     │
+                    └──────────────┬──────────────────────┘
+                                   │
+                    ┌──────────────┴──────────────────────┐
+                    │     CASCADE RANGE GEOTHERMAL         │
+                    │                                       │
+                    │  Newberry Volcano ── OR, ~2,200 MW est│
+                    │  Mt. Baker area ──── WA, 80,000 acres │
+                    │  Eastern OR/ID ───── USGS study area   │
+                    │  Ring of Fire ────── Corridor-length   │
+                    │  ─────────────────────────             │
+                    │  PNW Installed: ~50 MW (4 projects)    │
+                    │  DOE 2050 Target: 90 GW nationally     │
+                    └─────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  ┌──────────────┐   ┌──────────────┐   ┌──────────────┐
+  │  M1: HYDRO   │   │  M2: GEOTML  │   │  M3: TRIBAL  │
+  │  SYSTEMS     │   │  FRONTIER    │   │  SOVEREIGNTY │
+  │              │   │              │   │              │
+  │ Grand Coulee │   │ EGS tech     │   │ Colville     │
+  │ BPA/FCRPS    │   │ Fervo/FORGE  │   │ Settlement   │
+  │ Climate      │   │ Cascade sites│   │ OCAP/CARE    │
+  │ Fish/salmon  │   │ Cost curves  │   │ Revenue→Ctrl │
+  └──────┬───────┘   └──────┬───────┘   └──────┬───────┘
+         │                  │                   │
+         └──────────┬───────┘                   │
+                    │                           │
+  ┌──────────────┐  │  ┌──────────────┐         │
+  │  M4: GRID    │──┘  │  M5: DATA    │─────────┘
+  │  INTEGRATION │     │  CENTER PWR  │
+  │              │     │              │
+  │ Hydro+Geo    │     │ AI demand    │
+  │ Ancillary    │     │ Electric City│
+  │ Seasonal     │     │ Corridor     │
+  │ Portfolio    │     │ SLA/uptime   │
+  └──────┬───────┘     └──────┬───────┘
+         │                    │
+         └────────┬───────────┘
+                  │
+         ┌────────┴────────┐
+         │  M6: FUNDING &  │
+         │  REGULATORY     │
+         │                 │
+         │ DOE/BPA         │
+         │ IRA/IIJA        │
+         │ BLM/USFS        │
+         │ State mandates  │
+         └─────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Columbia Basin Hydroelectric Systems}
+Current capacity, generation patterns, and operational constraints of the Federal Columbia River Power System. Grand Coulee Dam as anchor. BPA power marketing and Provider of Choice contracts. Climate change impacts on snowpack timing, seasonal streamflow shifts, and summer generation deficits. Drought vulnerability and multi-year variability. Salmon and fish passage obligations and their operational costs.
+
+\subsubsection{M2: Geothermal Frontier --- EGS \& Cascade Resources}
+Enhanced Geothermal Systems technology: horizontal drilling, fiber-optic sensing, reservoir engineering. Fervo Energy's Cape Station results and cost trajectory. DOE FORGE program and Newberry Volcano research. PNW-specific geothermal resource mapping: Cascade Range volcanics, eastern Oregon/Idaho basaltic aquifers, Mount Baker--Snoqualmie prospects. Installed vs.\ potential capacity gap. Superhot geothermal and lithium co-production.
+
+\subsubsection{M3: Tribal Energy Sovereignty}
+Colville Confederated Tribes' relationship with Grand Coulee Dam: 1940 displacement, 1994 Settlement Act (\$53M lump sum + \$15.25M annual), ongoing BPA revenue payments. Spokane Tribe Equitable Compensation Act of 2020. Transition from compensation recipient to operational lead (the Fox model). DOE Office of Indian Energy programs. Tribal clean energy precedents. Cultural sovereignty frameworks: OCAP, CARE Principles, UNDRIP Article 31.
+
+\subsubsection{M4: Grid Integration --- Hydro + Geothermal Portfolio}
+Design principles for pairing flexible hydro with firm geothermal baseload. Seasonal complementarity modeling. Ancillary services: frequency regulation, voltage support, spinning reserve. BPA oversupply management and the spring surplus problem. How geothermal baseload changes the calculus of hydro dispatch. Western Energy Imbalance Market implications. Islanding capability for Cascadia resilience.
+
+\subsubsection{M5: Data Center Power Requirements}
+AI-driven electricity demand growth: projections, timelines, geographic concentration. Data center power density requirements and SLA uptime guarantees. Grand Coulee / Electric City as data center site: BPA rates, Columbia River cooling, permitted MW, transmission infrastructure. Fervo's geothermal data center corridor thesis. Comparison: nuclear restart (Three Mile Island / Microsoft), gas generation (ExxonMobil), vs.\ hydro+geo clean firm portfolio.
+
+\subsubsection{M6: Funding \& Regulatory Pathways}
+Federal: IIJA, IRA investment/production tax credits, DOE Office of Indian Energy, EPA Brownfields (Electric City smelter remediation), EDA distressed community grants, DOE Enhanced Geothermal Shot funding. BLM categorical exclusions for geothermal permitting. State: Washington 2045 fossil-free grid mandate (CETA), Oregon renewable portfolio standard. BPA Provider of Choice long-term contracts (executed December 2025). Geothermal-specific: GEO Act, BLM lease auctions, USFS geothermal leasing.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:        # Memory / Context Management
+    model: opus
+    allocation: 30%
+    tasks:
+      - Cross-module synthesis (M4 integration layer)
+      - Tribal sovereignty sensitivity review (M3)
+      - Portfolio design judgment calls (M4/M5)
+      - Through-line narrative weaving
+
+  denise:       # Output / Document Production
+    model: sonnet
+    allocation: 60%
+    tasks:
+      - Hydroelectric systems survey (M1)
+      - Geothermal technology survey (M2)
+      - Data center demand analysis (M5)
+      - Funding pathway compilation (M6)
+      - Source bibliography assembly
+
+  paula:        # I/O / Scaffolding
+    model: haiku
+    allocation: 10%
+    tasks:
+      - Shared data schemas
+      - Source index template
+      - Table structure scaffolding
+      - Citation format validation
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Pacific Northwest hydroelectric system: Columbia Basin, BPA/FCRPS, Grand Coulee focus
+\item Enhanced geothermal systems: technology state-of-art, PNW resource potential, cost trajectories
+\item Tribal energy sovereignty: Colville, Spokane, and relevant PNW nations' relationship to energy infrastructure
+\item Grid integration theory: hydro+geo complementarity at corridor scale
+\item Data center power demand: AI-driven growth, Electric City thesis validation
+\item Federal and state funding/regulatory landscape as of March 2026
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Detailed engineering design of specific geothermal plants
+\item FoxMaglev propulsion energy requirements (separate mission)
+\item International corridor segments (BC, Latin America) --- future phases
+\item Nuclear energy options (Columbia Generating Station covered only as existing BPA resource)
+\item Distributed solar/wind integration (covered in FoxSolar/FoxEnergy separate docs)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Columbia Basin hydroelectric capacity, generation, and BPA rate structure documented with government sources
+\item Grand Coulee Dam operational profile complete: capacity, annual generation, tribal settlement terms, climate vulnerability
+\item Climate change impact on PNW hydro quantified: seasonal shift projections from PNNL, UW Hydro, or RMJOC studies
+\item EGS technology state documented: Fervo Cape Station results, DOE FORGE findings, cost reduction trajectory
+\item PNW geothermal resource potential mapped: Cascade Range, eastern OR/ID, Mount Baker area with USGS/NREL sources
+\item Tribal energy sovereignty framework complete: settlement acts, annual payment structures, pathway from revenue to operational control
+\item Hydro+geothermal grid integration model described: seasonal complementarity, ancillary services, portfolio design principles
+\item Data center demand projections sourced: AI-driven growth, Electric City site advantages quantified
+\item Federal funding pathways identified with specific programs, amounts, and Fox application points
+\item Geothermal regulatory landscape current: BLM categorical exclusions, GEO Act, state-level policies
+\item Cross-module synthesis demonstrates portfolio advantage over single-resource strategy
+\item All numerical claims attributed to specific government, peer-reviewed, or professional organization sources
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Priority} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent document; Electric City thesis, FoxEnergy/FoxSolar/FoxCompute specs & Critical \\
+Fox Legal Staffing Analysis & Regulatory compliance framework for energy development & High \\
+GSD Mesh Prototype Spec & Compute infrastructure powered by this energy portfolio & High \\
+Deep Audio Analyzer Mission & Pattern: research mission format and wave structure & Reference \\
+GSD Chipset Architecture & Agnus/Denise/Paula model assignment rationale & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The power that displaced the Colville Tribes now funds an enterprise they own. That sentence from the Fox Infrastructure Group plan carries the full weight of this research mission. Grand Coulee Dam is not just 6,809 megawatts of generating capacity --- it is a monument to what happens when infrastructure is built without the consent of the people whose land it occupies. The Fox model does not pretend that history can be undone. It asks whether the same river, the same power, the same land can be redirected toward a future where the people who were displaced become the people who govern.
+
+Geothermal energy enters this story not as a replacement for hydroelectric but as its complement --- the always-on floor beneath the flexible ceiling. The Cascade Range volcanoes that define the Pacific Northwest's geography also define its energy future. The heat beneath and the water above. Both have always been there. The question this mission answers is how to harness them together, under tribal sovereign governance, at corridor scale, for the communities that need them most.
+
+The Amiga Principle applies: not brute-force generation from a single massive source, but architectural leverage from specialized, complementary systems working in concert. The spaces between hydro and geothermal --- the seasonal gaps, the dispatch flexibility, the islanding capability --- are where the real power lives.
+
+\newpage
+
+% ═══════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Hydroelectric \& Geothermal Energy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, peer-reviewed research, and professional organizations to support the six research modules defined in Stage 1. Each section provides quantitative data with source attribution. Agents executing individual modules should treat this as their primary evidence base and conduct targeted web research only to fill specific gaps.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item Bonneville Power Administration (BPA) --- Federal hydropower marketing, rate data, Provider of Choice contracts
+\item U.S. Bureau of Reclamation --- Grand Coulee Dam operations, capacity data, Columbia Basin Project
+\item U.S. Energy Information Administration (EIA) --- Generation statistics, state energy profiles, drought impacts
+\item U.S. Geological Survey (USGS) --- Geothermal resource assessment, Northwest Volcanic Aquifer Study
+\item U.S. Department of Energy (DOE) --- GeoVision analysis, Enhanced Geothermal Shot, FORGE program
+\item National Renewable Energy Laboratory (NREL/NLR) --- Geothermal market reports, cost modeling, GEOPHIRES
+\item Northwest Power and Conservation Council (NWPCC) --- Regional power plans, resource adequacy, Ninth Power Plan
+\item Pacific Northwest National Laboratory (PNNL) --- Climate-hydropower modeling, SECURE Water Act studies
+\item U.S. Congress --- Colville Settlement Act (P.L.\ 103--436), Spokane Equitable Compensation Act (P.L.\ 116--100)
+\item Geothermal Rising --- PNW Regional Interest Group, industry conferences, district energy systems
+\end{itemize}
+
+\subsection{M1 Reference: Columbia Basin Hydroelectric Systems}
+
+\subsubsection{System Scale and Capacity}
+
+The Columbia River Basin contains over 250 hydroelectric dams generating approximately 40\% of all U.S.\ hydropower. The basin spans roughly 250,000 square miles across the PNW and British Columbia (EIA). Grand Coulee Dam, located in Grant County, Washington, is the largest hydroelectric facility in the United States with a nameplate capacity of 6,809 MW across four powerhouses and 33 generators, producing an average of 21 billion kWh annually (Bureau of Reclamation). The Nathaniel Washington Power Plant alone accounts for 4,485 MW of this total (Bureau of Reclamation).
+
+Hydropower provides approximately 50\% of the PNW's annual energy generation and 54\% of its flexible capacity, with over 460 generating projects and cumulative capacity of roughly 40,570 MW (NWPCC). The Federal Columbia River Power System (FCRPS) --- operated collaboratively by BPA, the U.S.\ Army Corps of Engineers, and the Bureau of Reclamation --- generates approximately 35\% of the entire power supply of the Pacific Northwest (Bureau of Reclamation). Washington State generates more hydroelectric power than any other state, contributing roughly 37\% of total national hydropower output (EIA).
+
+\subsubsection{BPA Operations and Contracts}
+
+BPA markets wholesale power from 31 federal hydroelectric projects with combined installed capacity of 22.5 GW, one non-federal nuclear plant (Columbia Generating Station), and several small non-federal plants (Harvard Kennedy School / BPA). BPA provides about 28--33\% of the electric power consumed in the Northwest and operates approximately 15,000 miles of high-voltage transmission (BPA). In December 2025, BPA executed new long-term Provider of Choice power purchase agreements with more than 130 Northwest public utility customers, securing two additional decades of reliable, low-cost power supply (BPA, December 2025). Investments through 2050 in seven federal projects will provide up to 330 average megawatts of additional energy through high-efficiency turbine runners with improved fish passage, generator rewinds, and new turbine installations (BPA).
+
+\subsubsection{Climate Change Impacts}
+
+A 2024 PNNL study found that overall hydropower generation is expected to rise with climate change, but with significant seasonal redistribution. Winter generation may increase 12\% in the near term (2020--2039) and 18\% in the midterm (2040--2059), while summer generation may decrease 1--5\% in western regions (PNNL, August 2024). The core mechanism: warming temperatures convert mountain snowpack from snow to rain, reducing winter storage and shifting peak runoff earlier in the year. By the 2030s, models project higher average winter streamflows, earlier peak spring runoff, and longer periods of low summer flows in the Columbia Basin (NWPCC / RMJOC). Drought vulnerability is significant: in 2023--2024, PNW hydropower generation fell close to or below the lower end of the 10-year range, with reservoir storage at end of September reaching only 48\% of capacity in Oregon, 67\% in Washington, 76\% in Montana, and 60\% in Idaho (EIA).
+
+\subsubsection{Salmon and Operational Constraints}
+
+The lower Snake River dams produce approximately 1,100 average MW annually --- enough to power Seattle --- with up to 2,500 MW of peaking capacity in winter months (Utility Dive). Federal agencies estimated that replacing the full capabilities of the four lower Snake River dams with renewables and batteries would cost roughly \$800 million per year, representing a 25\% increase in regional electric bills (Utility Dive). The hydropower system provides critical ancillary services --- frequency regulation, spinning reserve, and the flexibility to integrate thousands of MW of intermittent wind and solar. During spring oversupply conditions, water must be spilled rather than run through turbines, which can exceed water quality standards and harm fish (BPA Oversupply Management Protocol).
+
+\subsection{M2 Reference: Geothermal Frontier}
+
+\subsubsection{Enhanced Geothermal Systems Technology}
+
+Enhanced Geothermal Systems (EGS) create engineered underground reservoirs by drilling into hot but impermeable rock and injecting fluid to open fracture pathways. Unlike conventional geothermal, which requires naturally occurring heat, permeability, and fluid, EGS can access the vastly larger resource base of hot dry rock formations (DOE). Fervo Energy's approach applies horizontal drilling, fiber-optic sensing, and hydraulic stimulation techniques from the oil and gas industry. At Cape Station in Utah, Fervo's 30-day well test achieved a maximum flow rate of 107 kg/s at high temperature, enabling over 10 MW of electric production per well --- tripling the output of its earlier Project Red pilot (Fervo Energy, September 2024). In June 2025, Fervo drilled its Sugarloaf appraisal well to 15,765 feet true vertical depth with a projected bottomhole temperature of 520\textdegree F, completing it in just 16 drilling days --- a 79\% reduction from the DOE baseline for ultradeep geothermal wells (Fervo Energy, June 2025). Well costs fell 49\% across the first four Cape Station wells (Utility Dive / Center for Public Enterprise).
+
+\subsubsection{National Scale and Projections}
+
+U.S.\ geothermal nameplate capacity reached 3.97 GW as of 2024, an 8\% increase from 3.67 GW in 2020 (NREL 2025 Geothermal Market Report). The DOE's Enhanced Geothermal Shot analysis projects up to 90 GW of domestic geothermal capacity by 2050, which could supply approximately 12\% of U.S.\ electricity (DOE / Congressional Research Service). A June 2025 Princeton study published in Joule found that over 250 GW of EGS could be deployed by 2050 at baseline costs, potentially making it the third most significant clean energy technology behind wind and solar (Princeton / Joule). Fervo Energy secured \$462 million in Series E funding in December 2025 and \$206 million in additional project financing in June 2025, with Cape Station Phase I (100 MW) on track for 2026 commercial operation and Phase II (400 MW) by 2028, with permits for expansion to 2 GW (Fervo Energy). An independent reserves report from DeGolyer \& MacNaughton confirmed that the Cape Station project area can support over 5 GW of development (Fervo Energy).
+
+\subsubsection{Pacific Northwest Geothermal Resources}
+
+The PNW sits on the Ring of Fire with extensive geothermal potential. Oregon's Cascade Mountains hold an estimated 2,200 MW of electricity-generating potential, ranking the state third nationally after Nevada and California (EIA Oregon profile). Oregon has two geothermal plants with only about 18 MW of operational capacity (EIA). The broader PNW currently has approximately 50 MW of installed geothermal capacity across four projects: River Raft I (Southern Idaho), Neal Hot Springs (Malheur County, OR), Paisley (Lake County, OR), and Oregon Tech campus in Klamath Falls (NWPCC). In Washington, the U.S.\ Forest Service designated over 80,000 acres of the Mount Baker--Snoqualmie National Forest for potential geothermal development, with Snohomish PUD investing approximately \$5 million in exploration (NPR, 2015). The USGS Northwest Volcanic Aquifer Study is assessing groundwater and geothermal potential across drought-stricken eastern Oregon, northeastern California, northwestern Nevada, and southeastern Idaho --- a region shaped by 17 million years of volcanic eruptions (USGS). Newberry Volcano, the largest in the Cascades, is the site of the NEWGEN EGS research partnership among PNNL, Oregon State University, and AltaRock Energy (Oregon DOE).
+
+\subsection{M3 Reference: Tribal Energy Sovereignty}
+
+\subsubsection{Grand Coulee Dam and the Colville Tribes}
+
+The Confederated Tribes of the Colville Reservation are a confederacy of 12 tribes occupying 1.4 million acres of a reservation originally established at 2.9 million acres in 1872 (Hydro Leader interview, Cody Desautel). Grand Coulee Dam and Chief Joseph Dam are both located on the Colville Reservation. Under the Act of June 29, 1940, the federal government paid \$63,000 to the Colville Tribes and \$4,700 to the Spokane Tribe for tribal land taken for dam construction (U.S.\ Senate Report 113--202). In 1994, Congress enacted the Confederated Tribes of the Colville Reservation Grand Coulee Dam Settlement Act (P.L.\ 103--436), providing a lump-sum payment of \$53,000,000 for past use and annual payments of \$15,250,000 adjusted based on BPA power sales revenues (Congress.gov / U.S.\ DOI). The Colville Tribes receive annual revenue-sharing checks from BPA calculated per the settlement agreement terms (Hydro Leader interview).
+
+\subsubsection{Spokane Tribe Compensation}
+
+The Spokane Tribe of Indians of the Spokane Reservation Equitable Compensation Act (P.L.\ 116--100, signed into law in 2020) provides compensation modeled on the Colville settlement. The Spokane Tribe received a \$53,000,000 trust fund deposit and annual payments equal to 25\% of the Colville Computed Annual Payment through 2029, increasing to 32\% from 2030 onward (Congress.gov). Spokane tribal acreage taken for Grand Coulee Dam construction equaled approximately 39\% of Colville tribal acreage taken (Congressional findings).
+
+\subsubsection{Pathway from Revenue to Operational Control}
+
+The Fox Infrastructure Group model positions the Colville Confederated Tribes as majority equity holders and operating lead of FoxCompute at the Electric City site. This represents a structural shift from compensation recipient to infrastructure governor. The BIA has documented the Colville Reservation's green energy development potential, noting the Tribes' ownership stake in both Grand Coulee and Wells Dams as providing readily available cheap, reliable, renewable power with six transmission lines crossing reservation lands (BIA, Colville Green Energy Business Development). The DOE Office of Indian Energy provides dedicated funding for tribal clean energy projects, identified in the Fox funding architecture as the primary funding source for Electric City development.
+
+\subsection{M4 Reference: Grid Integration}
+
+The PNW hydroelectric system's defining characteristic is its flexibility: generation can be shaped up or down quickly to match demand fluctuations, making it a critical tool for integrating intermittent renewables (NWPCC). Geothermal energy provides the complementary characteristic: firm, 24/7 baseload with capacity factors above 80\% (Utility Dive / Center for Public Enterprise). The spring oversupply problem --- when high river flows and strong wind generation coincide, forcing BPA to curtail non-hydro resources under the Oversupply Management Protocol --- would be partially mitigated by displacing thermal baseload with geothermal, freeing hydro for its highest-value use as a flexibility resource. BPA's participation in the Western Energy Imbalance Market and emerging organized markets offers price signals that reward firm clean generation.
+
+\subsection{M5 Reference: Data Center Power}
+
+Electricity demand from data centers is growing faster than new generation can come online (Fervo Energy whitepaper, July 2025). OpenAI CEO Sam Altman stated in a 2025 Senate hearing that AI costs will converge to energy costs, and AI abundance will be limited by energy abundance (Fervo / Senate testimony). The Electric City site offers: BPA hydro at \$0.02/kWh (6x cheaper than U.S.\ average, 11x cheaper than California); Columbia River free cooling eliminating chiller plant costs; hundreds of MW of already-permitted industrial electrical infrastructure from the former aluminum smelter; and Grant County designation as a distressed community qualifying for EDA economic development grants (Fox Infrastructure Group plan).
+
+\subsection{M6 Reference: Funding \& Regulatory}
+
+Key federal programs: IIJA funding for clean energy and resilience; DOE Office of Indian Energy for Electric City tribal clean energy development; EPA Brownfields for smelter site remediation; IRA investment and production tax credits extended to geothermal in January 2025; BLM categorical exclusion for geothermal permitting (January 2025) potentially saving one year per project; the proposed GEO Act placing geothermal on equal footing with oil and gas on public land. California Governor Newsom signed legislation in October 2025 to speed geothermal approvals. BPA's new Provider of Choice contracts (executed December 2025) provide long-term rate stability for the next two decades. The Enhanced Geothermal Shot targets \$45/MWh by 2035 through 90\% cost reduction; current trajectory suggests \$60--70/MWh by 2030 is achievable (DOE Liftoff report).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Tribal sovereignty & All references to Indigenous energy rights must name specific nations (Colville Confederated Tribes, Spokane Tribe). Never use generic ``Indigenous peoples'' without national attribution. & ABSOLUTE \\
+Salmon recovery & Present fish passage data objectively; avoid framing dam removal as settled science or as unwarranted activism. & ANNOTATE \\
+Geothermal fracking & EGS hydraulic stimulation is distinct from oil/gas fracking but draws public concern. Document the difference accurately without dismissing concerns. & ANNOTATE \\
+Climate projections & All temperature, streamflow, and precipitation projections attributed to specific agencies and scenarios (PNNL, RMJOC, IPCC pathway). & GATE \\
+Energy economics & Present BPA rates and cost comparisons from published sources. Do not advocate for specific policy positions. & GATE \\
+Environmental impact & Geothermal development in national forests raises old-growth and watershed concerns. Present both industry and environmental perspectives. & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item Bureau of Reclamation --- \textit{About Grand Coulee Dam}. \url{https://www.usbr.gov/pn/grandcoulee/about/}
+\item Bureau of Reclamation --- \textit{Nathaniel Washington Power Plant}. \url{https://www.usbr.gov/pn/grandcoulee/tpp/}
+\item BPA --- \textit{2024 Pacific Northwest Loads and Resources Study (White Book)}. \url{https://www.bpa.gov/-/media/Aep/power/white-book/2024-white-book.pdf}
+\item BPA --- \textit{Provider of Choice: Low-Cost Power for Two More Decades} (December 2025). \url{https://www.bpa.gov/about/newsroom/}
+\item BPA --- \textit{Hydropower Impact}. \url{https://www.bpa.gov/energy-and-services/power/hydropower-impact}
+\item EIA --- \textit{Drought Conditions Reduce Hydropower Generation}. \url{https://www.eia.gov/todayinenergy/detail.php?id=63664}
+\item EIA --- \textit{Columbia River Basin Provides 40\%+ of U.S.\ Hydroelectric Generation}. \url{https://www.eia.gov/todayinenergy/detail.php?id=16891}
+\item EIA --- \textit{Oregon State Energy Profile}. \url{https://www.eia.gov/state/analysis.php?sid=OR}
+\item DOE --- \textit{GeoVision: Harnessing the Heat Beneath Our Feet} (2019). \url{https://www.energy.gov/hgeo/geothermal/geovision}
+\item DOE --- \textit{Enhanced Geothermal Shot Analysis} (January 2023). \url{https://www.energy.gov/eere/articles/doe-analysis-highlights-opportunities-expand-clean-affordable-geothermal-power}
+\item DOE --- \textit{Geothermal Energy Overview}. \url{https://www.energy.gov/topics/geothermal-energy}
+\item USGS --- \textit{Groundwater and Geothermal Energy in Eastern Oregon Study}. \url{https://www.usgs.gov/news/state-news-release/study-explores-groundwater-and-geothermal-energy-drought-stricken-eastern}
+\item USGS --- \textit{Hydrogeologic and Geothermal Conditions of the Northwest Volcanic Aquifers}. \url{https://www.usgs.gov/centers/oregon-water-science-center/science/hydrogeologic-and-geothermal-conditions-northwest}
+\item U.S.\ Congress --- \textit{Colville Reservation Grand Coulee Dam Settlement Act} (P.L.\ 103--436, 1994)
+\item U.S.\ Congress --- \textit{Spokane Tribe Equitable Compensation Act} (P.L.\ 116--100, 2020)
+\item Congressional Research Service --- \textit{Enhanced Geothermal Systems FAQ} (R48090). \url{https://www.congress.gov/crs-product/R48090}
+\item NLR (formerly NREL) --- \textit{2025 U.S.\ Geothermal Market Report}. \url{https://www.nlr.gov/geothermal/2025-us-geothermal-market-report}
+\item PNNL --- \textit{Hydropower Generation Projected to Rise} (August 2024). \url{https://www.pnnl.gov/news-media/hydropower-generation-projected-rise-climate-change-brings-uncertain-future}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=2em]
+\item Ricks, W.\ et al.\ (2025). Pathways to national-scale adoption of enhanced geothermal power through experience-driven cost reductions. \textit{Joule}, published June 4, 2025.
+\item Harvard Kennedy School --- \textit{Realizing the Value of BPA's Hydroelectric Fleet}. MRCBG Working Paper 91.
+\item Hamlet, A.F.\ et al.\ (2010). Effects of projected climate change on energy supply and demand in the PNW. \textit{Climatic Change}.
+\item Harrell et al.\ (2022). Where and When Does Streamflow Regulation Affect Climate Change Outcomes in the Columbia River Basin? \textit{Water Resources Research}.
+\item UW Hydro / RMJOC-II --- Columbia River Climate Change streamflow projections dataset.
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Industry}
+\begin{itemize}[leftmargin=2em]
+\item NWPCC --- \textit{Hydropower for the 21st Century Power Grid}. \url{https://www.nwcouncil.org/energy/energy-topics/hydropower/}
+\item NWPCC --- \textit{Assessing Geothermal Energy Potential} and \textit{Tapping Into Geothermal Energy}
+\item Geothermal Rising --- PNW Regional Interest Group newsletters and webinars. \url{https://geothermal.org/pacific-northwest-regional-interest-group-rig-0}
+\item Global Energy Monitor --- \textit{2025 Global Geothermal Power Tracker} (March 2025)
+\item Fervo Energy --- Cape Station technical announcements, Technology Day results, financing disclosures. \url{https://fervoenergy.com/}
+\item DeGolyer \& MacNaughton --- Independent geothermal reserves report for Cape Station Phase I (2025)
+\item Hydro Leader Magazine --- Interview with Cody Desautel, Colville Tribes Natural Resources Director
+\item BIA --- \textit{Colville Indian Reservation Green Energy Business Development} report
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document covering the hydroelectric and geothermal energy landscape relevant to the Fox Infrastructure Group corridor. The document must provide sufficient technical, economic, regulatory, and tribal sovereignty context for the Fox energy layer (FoxSolar, FoxEnergy, FoxCompute) to make informed infrastructure decisions, with all claims sourced to government agencies, peer-reviewed research, or professional organizations.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0          Wave 1A         Wave 1B         Wave 2         Wave 3
+  ──────          ───────         ───────         ──────         ──────
+  Foundation      Hydro Track     Geo Track       Synthesis      Publication
+
+  [Schemas]  ──→  [M1: Hydro] ──→               ──→ [M4: Grid] ──→ [Verify]
+  [Sources]  ──→  [M3: Tribal]──→               ──→ [M5: Data] ──→ [Format]
+             ──→               [M2: Geothermal]──→              ──→ [Publish]
+             ──→               [M6: Regulatory]──→
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer} --- Shared schemas, source index, citation format, numerical data tables
+\item \textbf{Survey Layer} --- Six module-specific research compilations with sourced findings
+\item \textbf{Integration Layer} --- Cross-module synthesis: hydro+geo portfolio, tribal governance, funding convergence
+\item \textbf{Publication Layer} --- Formatted output, verification, bibliography, executive summary
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Hydroelectric Systems Survey & Covers FCRPS, Grand Coulee, BPA contracts, climate impacts, salmon constraints & M1 \\
+D2 & Geothermal Technology Survey & EGS state-of-art, PNW resources, cost trajectories, Fervo/FORGE data & M2 \\
+D3 & Tribal Sovereignty Analysis & Settlement acts, revenue structure, pathway to operational control, OCAP/CARE & M3 \\
+D4 & Grid Integration Design & Hydro+geo complementarity model, seasonal dispatch, ancillary services & M4 \\
+D5 & Data Center Power Analysis & Demand projections, Electric City advantages, SLA architecture & M5 \\
+D6 & Funding \& Regulatory Guide & Federal/state programs, permitting pathways, timeline estimates & M6 \\
+D7 & Synthesis Document & Cross-module integration, portfolio advantage demonstration & M4+M5 \\
+D8 & Source Bibliography & Complete, verified, professional-source-only bibliography & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 2,000 \\
+Source index & None & Haiku & 3,000 \\
+M1: Hydro survey & Schemas, sources & Sonnet & 15,000 \\
+M2: Geothermal survey & Schemas, sources & Sonnet & 15,000 \\
+M3: Tribal analysis & Schemas, sources & Opus & 12,000 \\
+M4: Grid integration & M1, M2 & Opus & 10,000 \\
+M5: Data center power & M1, M2, M4 & Sonnet & 10,000 \\
+M6: Regulatory guide & Schemas & Sonnet & 8,000 \\
+Synthesis & M1--M6 & Opus & 12,000 \\
+Verification & All & Sonnet & 5,000 \\
+Publication & All & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Rationale} & \tableheader{Share} \\
+\midrule
+Opus & Cross-module synthesis, tribal sovereignty sensitivity, portfolio design judgment, through-line narrative & 30\% \\
+Sonnet & Survey compilation, document assembly, regulatory compilation, verification, structured content production & 60\% \\
+Haiku & Shared schemas, templates, source index scaffolding, citation validation & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Est.\ Windows} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1 \\
+1 & Parallel Research & Parallel (2 tracks) & 4 & 6--8 \\
+2 & Synthesis & Sequential & 3 & 4--5 \\
+3 & Publication + Verify & Sequential & 2 & 2--3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+0.1 & Shared data schemas & Haiku & JSON schemas for source entries, findings, data tables & 2,000 \\
+0.2 & Source index & Haiku & Compiled reference list with URLs and access dates & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Hydroelectric + Tribal:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+1A.1 & M1: Hydro systems & Sonnet & Complete hydroelectric survey with data tables & 15,000 \\
+1A.2 & M3: Tribal sovereignty & Opus & Settlement analysis, governance pathway & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Geothermal + Regulatory:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+1B.1 & M2: Geothermal frontier & Sonnet & EGS technology + PNW resource survey & 15,000 \\
+1B.2 & M6: Regulatory guide & Sonnet & Funding programs + permitting pathways & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+2.1 & M4: Grid integration & Opus & Hydro+geo portfolio design with seasonal model & 10,000 \\
+2.2 & M5: Data center power & Sonnet & Demand analysis + Electric City validation & 10,000 \\
+2.3 & Cross-module synthesis & Opus & Integrated narrative, portfolio advantage proof & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+3.1 & Verification pass & Sonnet & All sources validated, numbers cross-checked & 5,000 \\
+3.2 & Final publication & Sonnet & Formatted document, TOC, bibliography, executive summary & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output (schemas + source index) cached and reused across all Wave 1 components
+\item Track A and Track B share no data dependencies --- fully parallelizable within 5-minute cache TTL windows
+\item Wave 2 synthesis consumes Wave 1 outputs; schedule immediately after Wave 1 completion to exploit warm cache
+\item M4 (Grid Integration) must consume both M1 and M2 --- this is the critical path dependency
+\item Tribal sovereignty module (M3) assigned to Opus due to cultural sensitivity judgment requirements
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 5,000 \\
+Wave 1A: Hydro + Tribal & 12,000 & 15,000 & --- \\
+Wave 1B: Geo + Regulatory & --- & 23,000 & --- \\
+Wave 2: Synthesis & 22,000 & 10,000 & --- \\
+Wave 3: Publication & --- & 10,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{34,000} & \textbf{58,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$97,000 tokens across 18--22 context windows in 4--5 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+        ┌───────────┐
+        │  Wave 0   │
+        │ Schemas + │
+        │  Sources  │
+        └─────┬─────┘
+              │
+     ┌────────┴────────┐
+     │                 │
+┌────┴────┐       ┌────┴────┐
+│ Track A │       │ Track B │
+│ M1+M3   │       │ M2+M6   │
+│ (Hydro+ │       │ (Geo+   │
+│ Tribal)  │       │ Regul.) │
+└────┬────┘       └────┬────┘
+     │                 │
+     └────────┬────────┘
+              │
+        ┌─────┴─────┐
+        │  Wave 2   │
+        │ M4+M5+    │
+        │ Synthesis  │
+        └─────┬─────┘
+              │
+        ┌─────┴─────┐
+        │  Wave 3   │
+        │ Verify +  │
+        │ Publish   │
+        └───────────┘
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every MW capacity, kWh figure, dollar amount, and percentage attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for or against dam removal, specific energy policies, or legislative positions. \\
+SC-IND & Indigenous attribution & Every reference to tribal nations names the specific nation (Colville Confederated Tribes, Spokane Tribe, Yakama Nation). Never generic ``Indigenous peoples'' without attribution. \\
+SC-CLI & Climate projections sourced & Every streamflow, temperature, or precipitation projection cites the specific agency, model, and scenario (PNNL, RMJOC, IPCC pathway). \\
+SC-END & Salmon data accuracy & Fish population and passage data attributed to NOAA, USACE, or BPA sources. No claims about species status without agency citation. \\
+SC-GEO & Geothermal safety & EGS hydraulic stimulation described accurately as distinct from oil/gas hydraulic fracturing; seismicity monitoring protocols noted. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Columbia Basin hydro documented & CF-01, CF-02 & Pending \\
+2. Grand Coulee profile complete & CF-03, SC-NUM & Pending \\
+3. Climate impact quantified & CF-04, SC-CLI & Pending \\
+4. EGS technology documented & CF-05, CF-06 & Pending \\
+5. PNW geothermal mapped & CF-07, CF-08 & Pending \\
+6. Tribal sovereignty framework & CF-09, SC-IND & Pending \\
+7. Grid integration model & CF-10, IN-01 & Pending \\
+8. Data center demand sourced & CF-11, CF-12 & Pending \\
+9. Federal funding identified & CF-13 & Pending \\
+10. Geothermal regulatory current & CF-14 & Pending \\
+11. Portfolio advantage demonstrated & IN-02, IN-03 & Pending \\
+12. All claims sourced & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache TTL scheduling \\
+SCOUT & Research Agent & Source gathering; evidence compilation; targeted web research for gaps \\
+EXEC & Executor ($\times$2) & Document production --- one per parallel track \\
+CRAFT-HYDRO & Hydro Specialist & Hydroelectric system analysis, BPA operations, climate modeling \\
+CRAFT-GEO & Geothermal Specialist & EGS technology, Cascade resources, cost trajectory analysis \\
+VERIFY & Verification & Source validation; numerical accuracy; cross-module consistency \\
+INTEG & Integration Agent & Cross-module synthesis; hydro+geo portfolio design validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope/direction decisions \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; thin-evidence flagging \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 6 \\
+Parallel Tracks & 2 (Hydro+Tribal / Geo+Regulatory) \\
+Total Waves & 4 (0--3) \\
+Estimated Context Windows & 18--22 \\
+Estimated Sessions & 4--5 \\
+Total Token Budget & $\sim$97,000 \\
+Model Split & Opus 35\% / Sonnet 60\% / Haiku 5\% \\
+Critical Path & Wave 0 $\rightarrow$ Wave 1 (parallel) $\rightarrow$ Wave 2 (M4 depends on M1+M2) $\rightarrow$ Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The power that displaced the Colville Tribes now funds an enterprise they own. Same dam. Same river. Same power. Community owned.''}
+
+\vspace{0.5em}
+
+The heat beneath and the water above have always been there. This mission maps the engineering, economics, and governance that connect them --- not as competing resources, but as complementary halves of a clean energy architecture built on tribal sovereignty and the Amiga Principle: specialized systems, working in concert, producing outcomes no single system could achieve alone.
+\end{quotebox}
+
+\end{document}
