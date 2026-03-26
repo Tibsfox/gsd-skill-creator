@@ -1,0 +1,72 @@
+/* WYR -- Weyerhaeuser & Sustainable Timber
+ * Theme: Old-growth -- deep bark brown with evergreen
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --bark-deep: #2C1A0E;
+  --bark: #3E2723;
+  --bark-mid: #4E342E;
+  --evergreen: #2E7D32;
+  --evergreen-light: #4CAF50;
+  --evergreen-dim: #1B5E20;
+  --heartwood: #5D4037;
+  --sapwood: #8D6E63;
+  --moss: #81C784;
+  --duff: #D7CCC8;
+  --canopy: #0A1F0A;
+
+  /* Semantic overrides */
+  --page-bg: #F5F0EB;
+  --page-text: #2C1A0E;
+  --page-text-light: #5D4037;
+  --link: var(--evergreen-dim);
+  --card-border: var(--duff);
+  --border: var(--duff);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--canopy) 0%, var(--bark-deep) 30%, var(--bark) 60%, var(--bark-mid) 100%);
+  border-bottom: 4px solid var(--evergreen);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--bark-deep); border-bottom-color: var(--duff); }
+h3 { color: var(--bark-mid); }
+th { background: var(--bark-deep); }
+td { border-bottom-color: var(--duff); }
+tr:nth-child(even) { background: rgba(62, 39, 35, 0.04); }
+tr:hover { background: rgba(62, 39, 35, 0.08); }
+blockquote { border-left-color: var(--evergreen); background: rgba(46, 125, 50, 0.06); }
+code { background: var(--duff); }
+pre { background: var(--canopy); color: #D7CCC8; }
+.stat-value { color: var(--bark-deep); }
+
+/* -- Tags -- */
+.tag-founding { background: #EFEBE9; color: #4E342E; }
+.tag-timberlands { background: #E8F5E9; color: #1B5E20; }
+.tag-conflict { background: #FBE9E7; color: #BF360C; }
+.tag-sustainability { background: #E8F5E9; color: #2E7D32; }
+.tag-carbon { background: #E3F2FD; color: #1565C0; }
+.tag-products { background: #FFF8E1; color: #F57F17; }
+.tag-culture { background: #F3E5F5; color: #6A1B9A; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: bark ring motif -- */
+.bark-ring {
+  background: linear-gradient(90deg, var(--bark-deep), var(--evergreen), var(--bark-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
