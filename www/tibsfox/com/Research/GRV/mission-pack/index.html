@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green River & The Seattle Sound — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--primary), #6A1B9A); padding: 3rem 2rem; text-align: center; color: white; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .header p { font-family: 'DM Sans', sans-serif; font-size: 1rem; opacity: 0.9; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1rem; font-size: 0.9rem; color: var(--secondary); }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s; display: block; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.2); }
+  .card h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .card .ext { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.05em; }
+  .card p { font-size: 0.9rem; margin-top: 0.5rem; }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  .contents { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .contents h4 { font-family: 'DM Sans', sans-serif; color: var(--tertiary); margin-bottom: 0.5rem; }
+  .contents ul { list-style: none; padding: 0; }
+  .contents li { padding: 0.3rem 0; font-size: 0.9rem; border-bottom: 1px solid rgba(78,52,46,0.1); }
+  .contents li:last-child { border-bottom: none; }
+  .contents .stage-label { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); }
+  .instructions { background: var(--light-primary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.2rem; }
+  .instructions li { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: rgba(74,20,140,0.08); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; }
+  .quote .attr { font-style: normal; font-family: 'DM Sans', sans-serif; color: var(--subtle); margin-top: 0.5rem; font-size: 0.85rem; }
+  .footer { text-align: center; padding: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7;">GSD Research Mission Package</p>
+  <h1>Green River & The Seattle Sound</h1>
+  <p>A Century of Music from the Emerald City — A Deep Research Study</p>
+  <div class="pipeline">Vision → Research → Mission | Full Pipeline Execution</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="green-river-seattle-sound-mission.pdf" download>
+      <span class="ext">PDF — 29 pages</span>
+      <h3>Mission Package (PDF)</h3>
+      <p>Complete three-stage document: Vision Guide, Research Reference, and Mission Package ready for GSD orchestrator.</p>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <span class="ext">TEX — XeLaTeX source</span>
+      <h3>LaTeX Source</h3>
+      <p>Editable source file. Recompile with three passes of <code>xelatex</code> to regenerate the PDF.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="contents">
+    <h4><span class="stage-label">Stage 1 — Vision Document</span></h4>
+    <ul>
+      <li>Vision narrative: Green River as the fulcrum of a century of Seattle music</li>
+      <li>Problem statement: 5 gaps in existing scholarship</li>
+      <li>6-module architecture spanning pre-1950s through 2026</li>
+      <li>Domain map and module dependency diagram</li>
+      <li>Fleet activation profile with chipset configuration</li>
+      <li>12 testable success criteria</li>
+    </ul>
+  </div>
+
+  <div class="contents">
+    <h4><span class="stage-label">Stage 2 — Research Reference</span></h4>
+    <ul>
+      <li><strong>Module 1:</strong> Coast Salish traditions, Jackson Street jazz, Ray Charles, Quincy Jones</li>
+      <li><strong>Module 2:</strong> The Wailers, The Sonics, Etiquette Records, Jimi Hendrix, The Ventures</li>
+      <li><strong>Module 3:</strong> Green River biography, Deep Six compilation, Sub Pop founding, proto-grunge</li>
+      <li><strong>Module 4:</strong> Grunge explosion — Mudhoney, Pearl Jam, Nirvana, Soundgarden, Alice in Chains</li>
+      <li><strong>Module 5:</strong> Death Cab, Fleet Foxes, Macklemore, Shabazz Palaces, KEXP transformation</li>
+      <li><strong>Module 6:</strong> Odesza, DIY punk, venue ecosystem, Green River reunion, rising costs</li>
+      <li>Safety/sensitivity matrix and complete source bibliography</li>
+    </ul>
+  </div>
+
+  <div class="contents">
+    <h4><span class="stage-label">Stage 3 — Mission Package</span></h4>
+    <ul>
+      <li>4-wave execution plan with 3 parallel research tracks</li>
+      <li>18-role Fleet crew manifest</li>
+      <li>80,000 token budget (Opus 36% / Sonnet 58% / Haiku 6%)</li>
+      <li>33 tests: 6 safety-critical, 16 core, 6 integration, 5 edge case</li>
+      <li>Complete verification matrix mapping 12 criteria to test IDs</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Review the Vision Document (Stage 1) for scope and success criteria</li>
+      <li>Consult the Research Reference (Stage 2) for sourced findings per module</li>
+      <li>Hand the Mission Package (Stage 3) to <code>gsd-skill-creator</code> for execution via Claude Code</li>
+      <li>The wave plan supports 3 parallel tracks — assign to concurrent agent sessions</li>
+      <li>CAPCOM gates at wave boundaries require human approval before proceeding</li>
+    </ol>
+  </div>
+
+  <h2>LaTeX Recompilation</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+      <li>Run three compilation passes:
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      </li>
+      <li>Three passes resolve TOC, cross-references, and page count</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "I think we just considered ourselves rock & roll guys who grew up on punk rock. We realized that there was some music that we liked before we became hardcore kids that we were afraid we listened to, but then we admitted we liked it. And we started making music like that."
+    <div class="attr">— Alex Shumway, Green River</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem — Research Mission Generator — March 2026<br>
+  Green River & The Seattle Sound: A Century of Music from the Emerald City
+</div>
+
+</body>
+</html>
