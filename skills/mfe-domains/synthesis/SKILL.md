@@ -1,6 +1,6 @@
 ---
 name: mfe-synthesis
-description: "The complete picture. Meta-mathematical connections, cross-domain synthesis, and the Complex Plane itself as a navigational tool."
+description: "Meta-mathematical connections, cross-domain synthesis, and the Complex Plane as a navigational tool. Classifies problems by quadrant (Abstract/Embodied x Logic/Creativity), routes them to relevant domains, and traces dependency chains. Use when classifying mathematical problems across domains, navigating the Complex Plane of Experience, finding cross-domain connections, or building multi-domain solution strategies."
 user-invocable: false
 allowed-tools: Read Grep Glob
 metadata:
@@ -25,20 +25,17 @@ metadata:
 
 # Synthesis
 
-## Summary
+Part X: Being — Chapters 32, 33 — Plane Position: (0, 0) radius 0.6 — 35 Primitives
 
-**Synthesis** (Part X: Being)
-Chapters: 32, 33
-Plane Position: (0, 0) radius 0.6
-Primitives: 35
+## Workflow
 
-The complete picture. Meta-mathematical connections, cross-domain synthesis, and the Complex Plane itself as a navigational tool.
+1. **Classify the problem** using Position-Based Classification to determine its Complex Plane coordinates (real axis: logic↔creativity, imaginary axis: embodied↔abstract)
+2. **Identify active domains** via Domain Activation — check which of the 10 domain regions contain the problem position
+3. **Plan navigation path** through activated domains in dependency order, minimizing traversal cost
+4. **Apply cross-quadrant composition** when the problem spans multiple quadrants — use bridge primitives for distant concepts (distance > 0.8)
+5. **Trace the dependency chain** back to foundations to verify all prerequisites are covered
 
-**Key Concepts:** Complex Plane of Experience, Quadrant Classification, Domain Positioning, Mathematical Dependency Chain, Cross-Quadrant Composition
-
-## Key Primitives
-
-
+## Key Concepts
 
 **Complex Plane of Experience** (definition): The Complex Plane of Experience is a two-axis classification framework for mathematical concepts: the real axis spans from pure logic (-1) to pure creativity (+1), the imaginary axis spans from pure embodied (-1) to pure abstract (+1). Every mathematical concept occupies a position on this plane.
   - Classifying mathematical problems by their character and abstraction level
