@@ -1,0 +1,988 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: PNW Grunge ===
+\definecolor{primary}{HTML}{263238}       % Slate (dark Pacific Northwest sky)
+\definecolor{secondary}{HTML}{E65100}     % Amber/Rust (vintage amp glow)
+\definecolor{tertiary}{HTML}{1B5E20}      % Forest green (Cascadia)
+\definecolor{accent}{HTML}{BF360C}        % Deep rust
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light slate
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Pearl Jam}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Pearl Jam -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Pearl Jam\\[0.3em]The Spaces Between the Notes}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Seattle, the Pacific Northwest \& the World}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Pearl Jam --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD Ecosystem --- Deep Research Series}
+
+\subsection{Vision}
+
+Pearl Jam is a band born in the spaces between loss and reinvention. They emerged from the wreckage of Mother Love Bone --- from Andrew Wood's death, from a grief that could have ended everything --- and built something that has endured for thirty-five years. In a music industry designed to chew artists up and spit them out within a single album cycle, Pearl Jam has persisted through principle, stubbornness, and an unwavering commitment to the idea that the relationship between a band and its audience is sacred.
+
+This is a Pacific Northwest story at its core. Seattle in 1990 was not the tech capital it would become --- it was a rain-soaked city of Boeing layoffs and alienated youth, where bands rehearsed in forge basements and played to crowds of fifty at the Off Ramp Caf\'{e}. The grunge movement that exploded out of that scene carried something genuine: a refusal of hair-metal artifice, a willingness to sing about depression and loneliness and murder, a sound built from classic rock bones dressed in flannel and distortion. Pearl Jam rode that wave alongside Nirvana, Soundgarden, and Alice in Chains --- but while the others burned bright and burned out, Pearl Jam kept going. Not because they avoided darkness, but because they found a way to carry it forward.
+
+The Amiga Principle applies here with startling precision. Pearl Jam's architecture --- stable core membership, specialized execution paths (Gossard's rhythm architecture, McCready's lead pyrotechnics, Vedder's lyrical and vocal identity, Ament's melodic bass lines), and a fan community infrastructure (Ten Club, official bootlegs, seniority-based ticketing) that predates modern platform economics by decades --- achieved remarkable outcomes through elegance rather than brute force. They fought Ticketmaster before anyone understood monopoly in live entertainment. They released official bootlegs of every show before streaming existed. They built a fan club that rewards loyalty through time, not money.
+
+This research mission documents not just what Pearl Jam did, but \textit{how} they did it --- the architectural decisions, the principled stands, the community structures --- because those patterns are instructive far beyond music. This is a study of how you build something that lasts by caring more about the spaces between than the nodes themselves.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \textbf{Incomplete cultural record:} Pearl Jam's thirty-five-year arc from Seattle grunge band to enduring cultural institution has never been comprehensively documented through the lens of architectural and community design principles rather than celebrity biography.
+
+\item \textbf{Industry activism precedent underexplored:} The band's 1994 Ticketmaster battle, congressional testimony, and alternative venue experiments established precedents that directly prefigure the 2024 DOJ antitrust suit against Live Nation, yet this throughline is rarely analyzed as a coherent anti-monopoly campaign.
+
+\item \textbf{Fan community innovation underdocumented:} Ten Club's seniority-based ticketing, the official bootleg program, holiday singles, and community forums represent pioneering approaches to direct artist--fan relationships that predate Patreon, Bandcamp, and modern creator economy platforms by over a decade.
+
+\item \textbf{Musical evolution obscured by debut:} Critical and popular discourse often reduces Pearl Jam to \textit{Ten} and early grunge, obscuring twelve studio albums of sonic evolution spanning classic rock, experimental, punk, folk, and art rock.
+
+\item \textbf{Social impact insufficiently connected:} The Vitalogy Foundation's work across environment, homelessness, and Indigenous causes --- along with the band's voter registration drives, carbon offset programs, and benefit concerts --- constitutes a coherent activism model rarely examined as a system.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-Line Model:} Pearl Jam as architectural case study --- how principled design decisions across music, community, industry, and activism create a self-sustaining cultural institution that outlasts market forces.
+\end{quotebox}
+
+Pearl Jam's longevity is not accidental. It emerges from a set of interlocking architectural decisions: resist the industry's disposability logic (no videos for Vs., fight Ticketmaster), invest in direct fan infrastructure (Ten Club since 1990, official bootlegs since 2000), evolve musically without chasing trends (No Code and Yield when grunge was dying), and channel cultural capital into causes (Vitalogy Foundation, Home Shows, carbon offsets). Each decision reinforces the others. The refusal to make videos increased mystique and live-show demand. The Ticketmaster fight cemented fan loyalty. The fan club created infrastructure for the bootleg program. The bootleg program funded the foundation. The foundation deepened the band's meaning beyond entertainment.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    PEARL JAM ECOSYSTEM
+                    
+    ORIGINS                    MUSICAL ARC
+    Green River ----+          Ten (1991)
+    Mother Love     |          Vs. (1993)
+      Bone ---------+---> PJ   Vitalogy (1994)
+    Temple of       |          No Code (1996)
+      the Dog ------+          Yield (1998)
+                               Binaural (2000)
+    INDUSTRY                   Riot Act (2002)
+    Ticketmaster ---+          Pearl Jam (2006)
+    Congress '94    |          Backspacer (2009)
+    ETM Experiment -+--> ANTI  Lightning Bolt (2013)
+    Official        |    MONO  Gigaton (2020)
+      Bootlegs -----+   POLY  Dark Matter (2024)
+                               
+    COMMUNITY                  ACTIVISM
+    Ten Club -------+          Vitalogy Foundation
+    Holiday Singles |          Home Shows (homelessness)
+    Poster Art -----+--> FAN   Carbon offset program
+    Seniority       |   INFRA  Indigenous causes
+      Ticketing ----+          Voter registration
+                               Benefit concerts
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1          Module 2           Module 3
+  ORIGINS &         MUSICAL            INDUSTRY
+  SEATTLE           EVOLUTION          ACTIVISM
+  SCENE             (12 albums)        (Ticketmaster+)
+     |                 |                   |
+     +--------+--------+--------+---------+
+              |                  |
+           Module 4           Module 5
+           COMMUNITY          CULTURAL
+           & FAN INFRA        LEGACY
+           (Ten Club+)        (Impact+)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins \& the Seattle Scene}
+
+Green River's split in 1987, Mother Love Bone's formation and Andrew Wood's death in 1990, Stone Gossard and Jeff Ament's rebuilding alongside Mike McCready, the Jack Irons connection to Eddie Vedder in San Diego, Temple of the Dog as grief-channeled collaboration with Soundgarden's Chris Cornell and Matt Cameron, the Mookie Blaylock era and first show at the Off Ramp Caf\'{e} on October 22, 1990, the rename to Pearl Jam, and the signing to Epic Records. The broader Seattle ecosystem: Sub Pop Records, the Off Ramp, Black Dog Forge rehearsal space, the Cameron Crowe \textit{Singles} connection, and the cultural conditions (Boeing layoffs, PNW isolation, rain) that incubated grunge.
+
+\subsubsection{Module 2: Musical Evolution}
+
+Album-by-album analysis across twelve studio records from \textit{Ten} (1991) through \textit{Dark Matter} (2024). Tracking sonic shifts from classic-rock-influenced grunge through experimental periods (\textit{No Code}, \textit{Yield}), raw rock return (\textit{Pearl Jam}), and late-career vitality (\textit{Gigaton}, \textit{Dark Matter}). Producer relationships (Rick Parashar, Brendan O'Brien, Adam Kasper, Andrew Watt). The three-guitar dynamic after Vedder began playing rhythm during the Vitalogy era. Drummer transitions: Krusen, Chamberlain, Abbruzzese, Irons, Cameron (1998--2025), and the current open question. Vedder's lyrical evolution from personal confession to political engagement to environmental reflection.
+
+\subsubsection{Module 3: Industry Activism \& the Ticketmaster War}
+
+The 1992 Seattle free concert and first friction with Ticketmaster. The May 1994 DOJ complaint and Sullivan \& Cromwell representation. Ament and Gossard's congressional testimony. The \$18 ticket / \$1.80 service fee demand. Ticketmaster's exclusive venue contracts (63\% of American venues). The failed ETM Entertainment Network experiment in 1995 (ski lodges and racetracks). The DOJ investigation closure in July 1995. Pearl Jam's reluctant return to Ticketmaster by 1998. The 2010 Live Nation--Ticketmaster merger and its consequences. The direct line from Pearl Jam's 1994 battle to the 2024 DOJ antitrust suit. The ``Pearl Jam Bill'' that died in Congress. The official bootleg program as an end-run around industry distribution.
+
+\subsubsection{Module 4: Community \& Fan Infrastructure}
+
+Ten Club: born from the Mother Love Bone Earth Affair fan organization in 1990, now the longest-running major-band fan club in rock. Seniority-based ticketing that rewards loyalty over wealth. The holiday singles program (1991--2018): annual vinyl releases for members with covers, live tracks, and unreleased material plus the \textit{Deep} magazine. The official bootleg revolution: 72 shows from the 2000 Binaural Tour released on CD, setting a Billboard 200 record for simultaneous debuts. Evolution from CD to MP3 to FLAC to 24-bit high-resolution audio. The concert poster art program commissioning unique artwork for every show. The Pearl Jam Community forums. SiriusXM Pearl Jam Radio (Channel 22). Over 3.5 million bootleg copies sold through 2008.
+
+\subsubsection{Module 5: Cultural Legacy \& Social Impact}
+
+The Roskilde Festival tragedy (June 30, 2000): nine lives lost during a crowd crush, the band's near-dissolution, ``Arc'' performed only nine times, ``Love Boat Captain'' as memorial, Stone Gossard's 2003 trip to Copenhagen to meet families, the 2020 twentieth-anniversary statement, and lasting impact on festival safety standards across Europe. The Vitalogy Foundation (est. 2006): three pillars of environment, homelessness, and Indigenous causes. The Home Shows program raising \$11 million for King County homelessness. Carbon offset calculations for every tour since 2003. Voter registration drives since 1992. The Rock and Roll Hall of Fame induction in 2017. Mike McCready's \textit{Farewell to Seasons} graphic album (2026). Matt Cameron's July 2025 departure after 27 years. Pearl Jam's influence on subsequent artists (Silverchair, White Stripes, Strokes, Pakistani indie rock). The band as ``Generation X's Grateful Dead.''
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: pearl-jam-deep-research
+  activation: squadron
+  models:
+    opus: 30%    # Synthesis, Roskilde sensitivity, legacy analysis
+    sonnet: 60%  # Album surveys, timeline compilation, source verification
+    haiku: 10%   # Shared schemas, templates, bibliography scaffolding
+  modules: 5
+  parallel_tracks: 2
+  waves: 4
+  estimated_tokens: 380000
+  estimated_windows: 18
+  estimated_sessions: 4
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Complete band history from Green River (1984) through current status (March 2026)
+\item All twelve studio albums with sonic and thematic analysis
+\item Ticketmaster battle chronology and industry impact analysis
+\item Ten Club, official bootleg program, and fan infrastructure documentation
+\item Vitalogy Foundation programs and activism record
+\item Roskilde tragedy and its aftermath (handled with appropriate sensitivity)
+\item Concert poster art program as cultural artifact
+\item PNW cultural context and grunge movement positioning
+\item Rock and Roll Hall of Fame induction (2017) significance
+\item Matt Cameron departure (2025) and current band status
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Eddie Vedder solo career and side projects (separate mission)
+\item Comprehensive Temple of the Dog analysis (referenced contextually only)
+\item Complete bootleg-by-bootleg catalog review (referenced structurally)
+\item Individual band member biographies beyond Pearl Jam context
+\item Comparison rankings with other grunge bands (positioned, not ranked)
+\item Reproduction of song lyrics or copyrighted creative works
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item All twelve studio albums individually documented with release data, producer, sonic character, and cultural context
+\item Ticketmaster battle timeline covers 1992 free concert through 2024 DOJ suit with verifiable dates
+\item Ten Club history traced from Mother Love Bone Earth Affair (1990) through current operations
+\item Official bootleg program documented from 2000 launch through format evolution to present
+\item Roskilde tragedy covered with factual accuracy, sensitivity, and connection to safety reform
+\item Vitalogy Foundation's three pillars documented with specific program examples and verifiable figures
+\item Musical evolution thesis supported with at least two producer/critic characterizations per era
+\item PNW cultural context connects Boeing layoffs, Sub Pop, venue ecosystem, and grunge emergence
+\item All sources traceable to established music journalism, band official channels, or academic/legal records
+\item Cross-module connections demonstrated between industry activism, fan infrastructure, and community building
+\item Band lineup changes documented with dates and context for all six drummers plus Boom Gaspar
+\item Concert poster art program referenced as cultural innovation in fan engagement module
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+Deep Audio Analyzer Mission & Audio analysis tools applicable to PJ discography study & Tooling \\
+GSD Amiga Creative Suite & Concert poster art program as creative production case study & Pattern \\
+Fox Infrastructure Group & PNW cultural geography shared context & Context \\
+BBS Educational Pack & Ten Club as precursor to community platform design & Pattern \\
+Foxfire Heritage Skills & Indigenous causes pillar connects to cultural sovereignty frameworks & Ethics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Pearl Jam's story is, at its deepest level, a story about the spaces between. Between a band and its audience. Between grief and creation. Between commercial pressure and principled resistance. Between a song on a studio album and the same song performed live twenty years later with a different drummer and a crowd that knows every word.
+
+The Amiga Principle isn't just a metaphor here --- it's a precise description of how Pearl Jam works. Specialized execution paths (each member's distinct role), architectural leverage over brute force (fan club infrastructure rather than marketing budgets), and faithful iteration producing staggering complexity (the same five people playing together for thirty-five years, never making the same album twice). They built something that lasts because they cared about the architecture. About the relationships. About the spaces between the notes.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Pearl Jam --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings organized by research module. Key source categories include band official channels (pearljam.com, Ten Club), established music journalism (Rolling Stone, Billboard, AllMusic, Britannica), regional history archives (HistoryLink.org), legal scholarship, and festival safety records.
+
+\subsection{Origins \& Seattle Scene Reference}
+
+\subsubsection{Pre--Pearl Jam Lineage}
+
+Stone Gossard and Jeff Ament played together in Green River from the mid-1980s until the band's 1987 dissolution over stylistic differences with Mark Arm. They then formed Mother Love Bone with Malfunkshun vocalist Andrew Wood. PolyGram signed Mother Love Bone in late 1988. Wood died of a heroin overdose on March 19, 1990, five months before the band's debut album \textit{Apple} was released in August 1990.
+
+In the aftermath, Gossard began writing harder-edged material and reconnected with Mike McCready, whose band Shadow had broken up. Chris Cornell of Soundgarden composed tribute songs to Wood, and along with Soundgarden drummer Matt Cameron, recorded the Temple of the Dog album (released April 1991), which yielded the hit ``Hunger Strike'' and featured Eddie Vedder on vocals.
+
+\subsubsection{Formation}
+
+A demo tape from Gossard, Ament, and McCready reached Eddie Vedder through former Red Hot Chili Peppers drummer Jack Irons. Vedder, then fronting a San Diego band called Bad Radio, recorded vocals over the demos and flew to Seattle. With Dave Krusen on drums, the band initially performed as Mookie Blaylock. Their first show was at the Off Ramp Caf\'{e} in Seattle on October 22, 1990. They opened for Alice in Chains at the Moore Theatre on December 22, 1990.
+
+After signing to Epic Records in early 1991, they renamed themselves Pearl Jam. Vedder initially claimed the name referenced his great-grandmother Pearl's peyote jam recipe; he admitted in a 2006 Rolling Stone cover story that this was fabricated, though he did have a great-grandmother named Pearl. Ament came up with ``pearl''; the band settled on ``Pearl Jam'' after attending a Neil Young concert featuring extended improvisations.
+
+\subsubsection{Seattle Ecosystem}
+
+Black Dog Forge in Belltown served as Pearl Jam's early rehearsal space, with blankets draped over water pipes for soundproofing. The venue was lost to gentrification in 2017. The Off Ramp Caf\'{e} hosted both Pearl Jam's debut and a Nirvana show on November 25, 1990, and later served as a filming location for Soundgarden's performance in Cameron Crowe's 1992 film \textit{Singles}.
+
+The broader context included Boeing layoffs that devastated Seattle's economy in the prior decade, creating a disaffected working-class youth culture. Sub Pop Records (founded 1986) had already signed Soundgarden and was building the infrastructure for what the media would call the ``Seattle Sound.''
+
+\subsection{Musical Evolution Reference}
+
+\subsubsection{The Debut Era (1991--1994)}
+
+\textbf{Ten} (August 27, 1991): Recorded at London Bridge Studios in Seattle with producer Rick Parashar. Eleven tracks addressing depression, suicide, loneliness, and murder. Named after Mookie Blaylock's jersey number. Slow initial sales accelerated in 1992; spent nearly five years on the Billboard 200; certified 13$\times$ platinum in the U.S. with over 13 million copies sold domestically. AllMusic described the style as combining an ``expansive harmonic vocabulary'' with an anthemic classic-rock-influenced sound.
+
+\textbf{Vs.} (October 19, 1993): Sold over 950,000 copies in its first week, setting the record for most albums sold in a single week. Spent five weeks atop the Billboard 200. The band refused to make music videos for any songs, marking their first major anti-industry stance. ``Daughter'' reached number one on the mainstream rock chart for eight weeks.
+
+\textbf{Vitalogy} (November 21, 1994, on vinyl; December 6, 1994, on CD): Producer Brendan O'Brien described sessions as ``a little strained \ldots there was some imploding going on.'' Second-fastest-selling CD in history at the time with 877,000 units in the first week. Third consecutive multi-platinum album.
+
+\subsubsection{The Experimental Turn (1996--1998)}
+
+\textbf{No Code} (August 27, 1996): Marked a deliberate shift toward introspection and eclecticism. The band's desire to avoid commercial pigeonholing intensified.
+
+\textbf{Yield} (February 3, 1998): Continued the eclectic approach while reintegrating harder rock elements. ``Do the Evolution'' became a fan favorite and featured one of the few music videos the band made post-\textit{Ten}.
+
+\subsubsection{The Rebuilding (2000--2006)}
+
+\textbf{Binaural} (May 16, 2000): Coincided with the launch of the official bootleg program and the Roskilde tragedy. Marked the beginning of the Matt Cameron era.
+
+\textbf{Riot Act} (November 12, 2002): Shaped by post-Roskilde reflection and post-9/11 political engagement. Last album for Epic Records. Contains ``Love Boat Captain'' memorializing the Roskilde victims and ``Arc,'' a wordless vocal piece performed live only nine times.
+
+\textbf{Pearl Jam} (May 2, 2006): Self-titled album on J Records. Critics praised its return to arena-rock energy. ``World Wide Suicide'' recalled the urgency of ``Jeremy.'' First album produced by Adam Kasper alone.
+
+\subsubsection{The Independent Era (2009--Present)}
+
+\textbf{Backspacer} (September 20, 2009): First release on the band's own Monkeywrench Records, distributed via Target stores and iTunes. One of the first to use Apple's iTunes LP format.
+
+\textbf{Lightning Bolt} (October 15, 2013): Continued the independent release model.
+
+\textbf{Gigaton} (March 27, 2020): Released on Monkeywrench/Republic Records. Addressed environmental concerns; the title references a unit of ice mass used in climate science.
+
+\textbf{Dark Matter} (April 19, 2024): Produced by Andrew Watt. Received Grammy nominations for Best Rock Album, Best Rock Song, and Best Rock Performance. Featured the band's first use of stage video visuals (by Seattle's Rob Sheridan). The subsequent tour saw cancellations in London and Berlin due to severe illness, which Vedder described as a ``near-death experience.''
+
+\subsubsection{Drummer Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Drummer} & \tableheader{Tenure} & \tableheader{Context} \\
+\midrule
+Dave Krusen & 1990--1991 & Founding drummer; left for rehabilitation \\
+Matt Chamberlain & 1991 & Brief stint; left for Saturday Night Live band \\
+Dave Abbruzzese & 1991--1994 & Fired over political differences re: Ticketmaster \\
+Jack Irons & 1994--1998 & Connected Vedder to the band; left for health reasons \\
+Matt Cameron & 1998--2025 & Longest tenure (27 years); also Soundgarden; departed July 7, 2025 \\
+TBD & 2025--present & Vedder confirmed the band is ``in the lab'' and ``excited for the future'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Additional touring/session member: Boom Gaspar (keyboards) since 2002. Josh Klinghoffer (formerly of Red Hot Chili Peppers) served as touring musician for the Dark Matter tour.
+
+\subsection{Industry Activism Reference}
+
+\subsubsection{Ticketmaster Battle Chronology}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} \\
+\midrule
+Labor Day 1992 & Free Seattle concert for 30,000; Ticketmaster demands \$1 service fee; band distributes tickets independently \\
+Early 1994 & Band demands \$18 tickets / \$1.80 max service fees for summer tour; Ticketmaster refuses \\
+May 6, 1994 & Pearl Jam files formal complaint with DOJ Antitrust Division via Sullivan \& Cromwell \\
+June 30, 1994 & Ament and Gossard testify before House subcommittee \\
+Summer 1994 & Summer tour canceled; band cannot find non-Ticketmaster venues \\
+1995 & 13-date tour via ETM Entertainment Network using alternative venues (ski lodges, racetracks); \$18--21 tickets, \$2.45 flat service charge \\
+July 5, 1995 & DOJ closes investigation without action \\
+1995 & ``Pearl Jam Bill'' introduced by House Democrats (requiring printed service charges); dies in committee \\
+1998 & Band reluctantly resumes working with Ticketmaster \\
+2010 & Ticketmaster merges with Live Nation for \$2.5 billion \\
+May 2024 & DOJ files sweeping antitrust lawsuit against Live Nation/Ticketmaster \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+At the time of Pearl Jam's complaint, Ticketmaster held contracts with roughly 63\% of American venues, with another 36.8\% working with them on a non-contract basis. The band's efforts prompted other platinum-selling bands to pursue low-ticket-price strategies: Green Day (\$7.50), the Offspring (\$12), Stone Temple Pilots and Hootie and the Blowfish (\$18), and Live (\$20).
+
+\subsection{Community \& Fan Infrastructure Reference}
+
+\subsubsection{Ten Club}
+
+Founded from the Mother Love Bone Earth Affair fan organization in 1990. Offers members-only ticket presales with seniority-based seating (longer membership = better seats). Annual membership includes access to exclusive content, priority ticket purchasing, and community forums. The club operates through pearljam.com with dedicated community discussion boards.
+
+\subsubsection{Official Bootleg Program}
+
+Launched for the 2000 Binaural Tour with 72 shows released on CD in three retail waves. Set a Billboard 200 record for most albums debuting simultaneously. The final show of the tour (Seattle, November 6, 2000) was released as a triple-disc set and peaked at number 98 on the Billboard 200. The program was designed to combat unauthorized fan recordings by offering high-fidelity soundboard mixes engineered by Brett Eliason.
+
+Format evolution: physical CDs (2000--2003), MP3 digital downloads at \$9.99 per show (2005), lossless FLAC added (2006), 24-bit/96kHz high-resolution audio added (2012). Distribution shifted from the band's website to nugs.net partnership. Over 3.5 million bootleg copies sold through 2008 alone. Every show from every tour since 2000 has been released (excepting 2004 Vote for Change and 2007 European tours).
+
+\subsubsection{Holiday Singles}
+
+Annual vinyl singles mailed to Ten Club members from 1991 through 2018 (except 1994). Featured covers, live versions, previously unreleased material, and notable guest artists. Packaged with the band's \textit{Deep} magazine for ``Analog'' tier members. Program discontinued after the 2017 and 2018 singles were released.
+
+\subsubsection{Concert Poster Art}
+
+Pearl Jam commissions unique artwork for every show, creating a collectible ecosystem of limited-edition screen-printed posters by independent artists. The program has become a cultural phenomenon within the fan community, with secondary-market values reflecting both artistic merit and show significance.
+
+\subsection{Cultural Legacy \& Social Impact Reference}
+
+\subsubsection{The Roskilde Tragedy}
+
+On June 30, 2000, during Pearl Jam's set at the Orange Stage of the Roskilde Festival in Denmark, a crowd crush occurred. Nine young men (aged 17--26) from Denmark, Germany, Sweden, the Netherlands, and Australia died; twenty-six were injured. Contributing factors included rain-soaked muddy conditions, poor sound quality in the rear prompting forward crowd pressure, and delayed security response.
+
+The band stopped the music when informed and asked the crowd to step back. Investigations by police, prosecutors, and civil courts determined the incident was accidental with no criminal liability, though response time was criticized. The band considered breaking up. Riot Act (2002) was shaped by the grief. ``Arc'' --- layered wordless vocals --- was recorded as a tribute and performed live exactly nine times. ``Love Boat Captain'' contains the lyric referencing the ``lost nine friends,'' which Vedder modifies in concert to reflect elapsed time.
+
+In 2003, Gossard traveled to Copenhagen to meet survivors and victims' families. A memorial at the festival grounds by Danish artist Lars Skov Nielsen features a black stone inscribed ``\ldots how fragile we are\ldots'' surrounded by nine trees. The tragedy prompted new safety standards across European festivals, including capacity limits, exit requirements, and crowd-surfing prohibitions.
+
+In the band's 2020 twentieth-anniversary statement, Gossard wrote that the band's eleven children had deepened their understanding of the families' grief: their ``hearts still ache every single day'' and they ``live forever in the shadow of [the families'] pain.''
+
+\subsubsection{Vitalogy Foundation}
+
+Public nonprofit established in 2006 by band members and manager Kelly Curtis. Three operational pillars:
+
+\textbf{Environment:} Carbon dioxide output calculated in metric tons for every world tour since 2003, with offsets purchased at \$200/ton. Pearl Jam named 2011 Planet Defenders by Rock the Earth. Carbon mitigation funds directed to protect the Amazon and its Indigenous inhabitants.
+
+\textbf{Homelessness:} The Home Shows program tackling homelessness in King County, Washington. Over \$11 million contributed from philanthropy partners and donors. Partnered with local businesses and organizations to connect individuals and families with affordable permanent housing.
+
+\textbf{Indigenous Causes:} Decades of background work with tribal groups. Carbon mitigation efforts supporting preservation of the Amazon and its Indigenous communities.
+
+The Foundation allocates \$5 from each concert ticket sold. Annual budget approximately \$1.5 million. The Future Days Fund enables Ten Club members to nominate U.S. 501(c)(3) organizations for \$2,500 grants.
+
+\subsubsection{Broader Activism Record}
+
+Voter registration since the 1992 ``Drop in the Park'' Seattle concert (3,000+ registered). Contributed ``Porch'' to the 2022 \textit{Good Music to Ensure Safe Abortion Access to All} compilation, raising over \$230,000. Canceled 2016 North Carolina concert to protest anti-LGBTQ legislation. Supported West Memphis 3 (Damien Echols shares writing credit on ``Army Reserve''). Mike McCready advocates for Crohn's disease awareness. Stone Gossard drives the band's carbon-neutral policy.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Handling} \\
+\midrule
+Roskilde tragedy & Report facts, name no victims individually, preserve dignity, note memorial and safety reforms \\
+Andrew Wood's death & Reference cause of death factually (heroin overdose) without sensationalism \\
+Drug references & Factual context only; no glamorization \\
+Political positions & Present the band's documented positions without editorial advocacy \\
+Indigenous references & Vitalogy Foundation's work referenced with appropriate specificity; no generic ``Indigenous peoples'' \\
+Mental health themes & Song themes (depression, isolation) referenced as artistic expression, not clinical analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Band Official Sources}
+\begin{itemize}[leftmargin=2em]
+\item Pearl Jam official website: pearljam.com (Ten Club, Vitalogy Foundation, bootleg program)
+\item Pearl Jam Community forums: community.pearljam.com
+\item Ten Club shop: shop.pearljam.com
+\end{itemize}
+
+\subsubsection{Established Music Journalism}
+\begin{itemize}[leftmargin=2em]
+\item Rolling Stone --- multiple articles on Ticketmaster battle (1995), band history, Dark Matter coverage
+\item Billboard --- Roskilde anniversary coverage, chart data
+\item AllMusic --- discography and style analysis
+\item Encyclopaedia Britannica --- Pearl Jam overview and cultural positioning
+\item Rate Your Music --- fan reception data and genre classification
+\end{itemize}
+
+\subsubsection{Regional \& Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+\item HistoryLink.org --- ``Future grunge-rock icons perform debut gig'' (File \#11003)
+\item PBS NewsHour --- Ticketmaster timeline and DOJ coverage
+\item The Hill --- Ticketmaster dustups chronology
+\item University of Chicago Business Law Review --- Ticketmaster antitrust analysis
+\item Lyndsanity.com --- ETM Entertainment Network co-founder David Cooper interview (2024)
+\item Euronews --- Roskilde 25th anniversary coverage (2025)
+\item Seattle Magazine --- Vitalogy Foundation equity profile
+\end{itemize}
+
+\subsubsection{Festival \& Safety Records}
+\begin{itemize}[leftmargin=2em]
+\item Roskilde Festival Wikipedia --- incident documentation, safety reforms
+\item Danish Broadcasting (DR) --- first-person tragedy account
+\item Concert Archives --- Roskilde 2000 event record
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Pearl Jam covering origins, musical evolution, industry activism, fan community infrastructure, and cultural legacy across thirty-five years. The document will serve as both a standalone reference and a template for how principled architectural decisions create enduring cultural institutions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+Wave 0 [FOUNDATION] ──Sequential──> Haiku
+  │  Shared schemas, source index, style guide
+  │
+Wave 1 [PARALLEL RESEARCH] ──Parallel──> Sonnet + Opus
+  │  Track A: Origins + Musical Evolution (Modules 1-2)
+  │  Track B: Industry + Community (Modules 3-4)
+  │
+Wave 2 [SYNTHESIS] ──Sequential──> Opus
+  │  Cultural Legacy (Module 5) + Cross-module integration
+  │
+Wave 3 [PUBLICATION] ──Sequential──> Sonnet
+     Final assembly, verification, formatting
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \textbf{Source Layer} --- Verified bibliography with URL index and access dates
+\item \textbf{Research Layer} --- Five module documents with sourced findings
+\item \textbf{Synthesis Layer} --- Cross-module integration and legacy analysis
+\item \textbf{Publication Layer} --- Formatted final document with TOC, bibliography, and index
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Source Index & All URLs verified, categorized by type & W0-SOURCES \\
+2 & Origins Module & Green River through first show, sourced & W1A-ORIGINS \\
+3 & Musical Evolution Module & All 12 albums documented & W1A-MUSIC \\
+4 & Industry Activism Module & Ticketmaster chronology complete & W1B-INDUSTRY \\
+5 & Community Module & Ten Club + bootlegs + poster art & W1B-COMMUNITY \\
+6 & Cultural Legacy Module & Roskilde + Vitalogy + influence & W2-LEGACY \\
+7 & Synthesis Document & Cross-module connections verified & W2-SYNTHESIS \\
+8 & Final Publication & Formatted, proofread, indexed & W3-FINAL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source Index & None & Haiku & 8,000 \\
+Style Guide & None & Haiku & 5,000 \\
+Origins Module & Source Index & Sonnet & 35,000 \\
+Musical Evolution & Source Index & Sonnet & 55,000 \\
+Industry Activism & Source Index & Sonnet & 40,000 \\
+Community Module & Source Index & Sonnet & 35,000 \\
+Cultural Legacy & All W1 modules & Opus & 50,000 \\
+Synthesis & All modules & Opus & 45,000 \\
+Cross-Verification & Synthesis & Opus & 25,000 \\
+Final Assembly & All above & Sonnet & 40,000 \\
+Publication QA & Final Assembly & Sonnet & 20,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Roskilde sensitivity, legacy synthesis, cross-module judgment, through-line narrative \\
+Sonnet & 60\% & Album surveys, chronological compilation, source verification, document assembly \\
+Haiku & 10\% & Shared schemas, source index scaffolding, template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Tokens} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & 13,000 & 1 \\
+1 & Parallel Research & Parallel (2 tracks) & 165,000 & 9 \\
+2 & Synthesis & Sequential & 120,000 & 5 \\
+3 & Publication & Sequential & 60,000 & 3 \\
+\midrule
+& \textbf{Total} & & \textbf{358,000} & \textbf{18} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Source Index & Haiku & 8,000 & Verified URL catalog with categories \\
+Style Guide & Haiku & 5,000 & Tone, formatting, sensitivity rules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Origins + Musical Evolution}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Origins deep-dive & Sonnet & 35,000 & Module 1 document \\
+Album-by-album analysis & Sonnet & 55,000 & Module 2 document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Industry + Community}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Ticketmaster chronology & Sonnet & 40,000 & Module 3 document \\
+Fan infrastructure survey & Sonnet & 35,000 & Module 4 document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Cultural Legacy module & Opus & 50,000 & Module 5 document \\
+Cross-module synthesis & Opus & 45,000 & Integration document \\
+Cross-verification & Opus & 25,000 & Consistency audit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Final assembly & Sonnet & 40,000 & Complete formatted document \\
+Publication QA & Sonnet & 20,000 & Proofread, fact-checked final \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Source Index and Style Guide cached at Wave 0 completion; TTL exploited across all Wave 1 tasks
+\item Track A and Track B share the Source Index cache but operate on independent module caches
+\item Wave 2 synthesis tasks share all Wave 1 output caches within the 5-minute TTL window
+\item Album discography data (dates, chart positions, certifications) compiled once in Module 2 and referenced by all subsequent modules
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+W0: [Source Index] ──> [Style Guide]
+         │                   │
+         ├───────────────────┤
+         │                   │
+W1: [Origins]──>[Music]  [Industry]──>[Community]
+         │         │         │              │
+         └────┬────┘         └──────┬───────┘
+              │                     │
+W2:     [Cultural Legacy] ←─── [All W1 Modules]
+              │
+         [Synthesis]
+              │
+         [Cross-Verify]
+              │
+W3:     [Final Assembly]
+              │
+         [Publication QA]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to band official channels, established journalism, or academic/legal sources \\
+SC-NUM & Numerical attribution & Every sales figure, chart position, and date attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents band's positions without editorial endorsement \\
+SC-RSK & Roskilde sensitivity & Tragedy covered factually; no individual victim names; memorial and reforms documented \\
+SC-LYR & No lyric reproduction & Zero copyrighted lyrics reproduced; song references by title and thematic description only \\
+SC-DIG & Dignity preservation & Andrew Wood's death, substance references, and personal struggles presented without sensationalism \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Album completeness & All 12 studio albums documented with release date, producer, and chart data \\
+CF-02 & Album characterization & Each album has $\geq$2 sonic/thematic descriptors from critics or band \\
+CF-03 & Ticketmaster timeline & All 10 key events from 1992 through 2024 DOJ suit present with dates \\
+CF-04 & Congressional testimony & Ament/Gossard June 1994 testimony documented with context \\
+CF-05 & Ten Club history & Traced from Mother Love Bone Earth Affair through current operations \\
+CF-06 & Bootleg program & Launch (2000), format evolution, sales data documented \\
+CF-07 & Holiday singles & Program dates (1991--2018), format, and discontinuation noted \\
+CF-08 & Poster art program & Referenced with cultural significance context \\
+CF-09 & Vitalogy three pillars & Environment, homelessness, Indigenous causes each documented with examples \\
+CF-10 & Home Shows & \$11 million figure and King County focus documented \\
+CF-11 & Carbon offset & Per-tour calculation since 2003 documented \\
+CF-12 & Roskilde facts & Date, venue, casualty count, nationality spread, investigations \\
+CF-13 & Memorial documentation & Stone monument, nine trees, Lars Skov Nielsen, Gossard Copenhagen visit \\
+CF-14 & Drummer timeline & All six drummers with tenure dates and transition context \\
+CF-15 & Formation sequence & Demo tape $\rightarrow$ Jack Irons $\rightarrow$ Vedder $\rightarrow$ Seattle arrival $\rightarrow$ Mookie Blaylock $\rightarrow$ rename \\
+CF-16 & Hall of Fame & 2017 induction in first year of eligibility documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Origins $\rightarrow$ Music & Temple of the Dog connection traced through to Cameron joining PJ \\
+IN-02 & Industry $\rightarrow$ Community & Bootleg program linked to anti-industry distribution philosophy \\
+IN-03 & Music $\rightarrow$ Legacy & Riot Act explicitly connected to Roskilde aftermath \\
+IN-04 & Community $\rightarrow$ Activism & Ten Club $\rightarrow$ Vitalogy Foundation $\rightarrow$ Future Days Fund pipeline \\
+IN-05 & Ticketmaster $\rightarrow$ DOJ & 1994 complaint linked to 2024 antitrust suit as continuous thread \\
+IN-06 & Drummer $\rightarrow$ Industry & Abbruzzese firing linked to Ticketmaster disagreement \\
+IN-07 & PNW context $\rightarrow$ Origins & Boeing layoffs, Sub Pop, venue ecosystem connected to band formation \\
+IN-08 & Self-containment & Reader with no Pearl Jam knowledge can follow complete narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Current status uncertainty & Matt Cameron departure and open drummer question noted with appropriate hedging \\
+EC-02 & Sales data variance & Where sources disagree (85M vs 100M+ worldwide), range noted \\
+EC-03 & Name origin dispute & Both the peyote story and the 2006 retraction documented \\
+EC-04 & Temporal currency & Most recent available data cited; 2024--2026 events included \\
+EC-05 & Roskilde legal nuance & Multiple investigation outcomes noted without legal conclusion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 12 albums documented & CF-01, CF-02 & Pending \\
+2. Ticketmaster timeline complete & CF-03, CF-04, IN-05 & Pending \\
+3. Ten Club history traced & CF-05, IN-04 & Pending \\
+4. Bootleg program documented & CF-06, IN-02 & Pending \\
+5. Roskilde covered with sensitivity & SC-RSK, CF-12, CF-13, EC-05 & Pending \\
+6. Vitalogy three pillars documented & CF-09, CF-10, CF-11 & Pending \\
+7. Musical evolution thesis supported & CF-02, IN-01, IN-03 & Pending \\
+8. PNW context connected & IN-07 & Pending \\
+9. All sources traceable & SC-SRC, SC-NUM & Pending \\
+10. Cross-module connections & IN-01 through IN-08 & Pending \\
+11. Drummer timeline complete & CF-14, IN-06, EC-01 & Pending \\
+12. Poster art referenced & CF-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; URL verification; evidence compilation \\
+EXEC-A & Executor (Track A) & Origins + Musical Evolution document production \\
+EXEC-B & Executor (Track B) & Industry + Community document production \\
+CRAFT-MUS & Music Specialist & Album analysis; sonic characterization; producer relationships \\
+CRAFT-SOC & Social Impact Specialist & Activism record; foundation programs; legacy analysis \\
+VERIFY & Verification & Source validation; date/figure accuracy; cross-module consistency \\
+INTEG & Integration Agent & Cross-module relationship validation; through-line coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; sensitivity review \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache TTL optimization \\
+SURGEON & Health Monitor & Research quality degradation detection; scope creep alert \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 \\
+Parallel Tracks & 2 \\
+Waves & 4 (Foundation / Research / Synthesis / Publication) \\
+Estimated Total Tokens & 358,000 \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety-Critical Tests & 6 (all BLOCK on failure) \\
+Total Tests & 35 \\
+HITL Checkpoints & 3 (post-W0, post-W1, post-W2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Nothing has been the same since.''}
+
+\vspace{0.5em}
+
+Pearl Jam's story is proof that the spaces between --- between loss and creation, between a band and its audience, between principle and pressure --- are where meaning lives. This mission documents not just a band, but an architecture of endurance. The same architecture that runs through the GSD ecosystem: small, principled building blocks, faithfully iterated, producing something that outlasts everything designed to replace it.
+\end{quotebox}
+
+\end{document}

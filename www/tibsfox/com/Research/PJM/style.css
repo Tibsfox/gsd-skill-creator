@@ -1,0 +1,74 @@
+/* PJM -- Pearl Jam
+ * Theme: Grunge black and amber -- charcoal with alive-amber
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --charcoal-deep: #1A1A1A;
+  --charcoal: #212121;
+  --charcoal-mid: #333333;
+  --amber: #F9A825;
+  --amber-light: #FDD835;
+  --amber-dim: #F57F17;
+  --slate: #37474F;
+  --steel: #546E7A;
+  --rust: #BF360C;
+  --ash: #9E9E9E;
+  --smoke: #E0E0E0;
+  --stage: #0D0D0D;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #546E7A;
+  --link: var(--amber-dim);
+  --card-border: var(--smoke);
+  --border: var(--smoke);
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--stage) 0%, var(--charcoal-deep) 30%, var(--charcoal) 60%, var(--charcoal-mid) 100%);
+  border-bottom: 4px solid var(--amber);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--charcoal-deep); border-bottom-color: var(--smoke); }
+h3 { color: var(--charcoal-mid); }
+th { background: var(--charcoal-deep); }
+td { border-bottom-color: var(--smoke); }
+tr:nth-child(even) { background: rgba(33, 33, 33, 0.04); }
+tr:hover { background: rgba(33, 33, 33, 0.08); }
+blockquote { border-left-color: var(--amber); background: rgba(249, 168, 37, 0.06); }
+code { background: var(--smoke); }
+pre { background: var(--stage); color: #E0E0E0; }
+.stat-value { color: var(--charcoal-deep); }
+
+/* -- Tags -- */
+.tag-origins { background: #FFF8E1; color: #F57F17; }
+.tag-album { background: #E3F2FD; color: #1565C0; }
+.tag-discography { background: #F3E5F5; color: #6A1B9A; }
+.tag-industry { background: #FBE9E7; color: #BF360C; }
+.tag-community { background: #E8F5E9; color: #2E7D32; }
+.tag-activism { background: #EFEBE9; color: #4E342E; }
+.tag-evolution { background: #E0F2F1; color: #00695C; }
+.tag-legacy { background: #FFF3E0; color: #E65100; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: amp glow motif -- */
+.amp-glow {
+  background: linear-gradient(90deg, var(--charcoal-deep), var(--amber), var(--charcoal-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
