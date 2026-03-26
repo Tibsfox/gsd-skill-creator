@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxel as Vessel — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #00838F;
+      --tertiary: #37474F;
+      --accent: #0277BD;
+      --light-primary: #E8EAF6;
+      --light-secondary: #E0F7FA;
+      --card-bg: #D0D9F0;
+      --border: #BDBDBD;
+      --text: #212121;
+      --subtle: #757575;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: #F8F9FC;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #283593 60%, var(--accent) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    .header-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .pipeline {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pipeline span { opacity: 0.6; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    .meta-bar strong { color: var(--text); }
+
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--light-primary);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid #9FA8DA;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26,35,126,0.15);
+      border-color: var(--accent);
+    }
+
+    .card-icon { font-size: 1.5rem; }
+
+    .card-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    .card-ext {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: auto;
+      padding-top: 0.5rem;
+    }
+
+    .stages {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stage-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .stage-item:last-child { border-bottom: none; }
+
+    .stage-num {
+      min-width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .s1 { background: var(--primary); }
+    .s2 { background: var(--secondary); }
+    .s3 { background: var(--tertiary); }
+
+    .stage-content h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .stage-content p { font-size: 0.82rem; color: var(--subtle); }
+
+    .usage {
+      background: var(--light-secondary);
+      border: 1px solid #80DEEA;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .usage ol {
+      margin-top: 0.75rem;
+      padding-left: 1.5rem;
+      font-size: 0.88rem;
+      line-height: 2;
+      color: var(--text);
+    }
+
+    .latex-block {
+      background: #ECEFF1;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--tertiary);
+      margin-top: 0.75rem;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      background: var(--light-primary);
+      border-radius: 0 8px 8px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--tertiary);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    blockquote cite {
+      display: block;
+      text-align: right;
+      font-size: 0.78rem;
+      margin-top: 0.5rem;
+      color: var(--subtle);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">GSD Research Mission Package</div>
+  <h1>Voxel as Vessel</h1>
+  <p class="subtitle">Ceph, RAG, and the Minecraft Block Storage Hypothesis — a deep research and architectural design study</p>
+  <div class="pipeline">
+    Vision <span>→</span> Research <span>→</span> Mission
+    <span style="margin-left:1rem; font-size:0.75rem; opacity:0.7;">Full Pipeline · Squadron Profile</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <div><strong>Date:</strong> March 10, 2026</div>
+    <div><strong>Status:</strong> Ready for GSD Orchestrator</div>
+    <div><strong>Profile:</strong> Squadron (12 roles)</div>
+    <div><strong>Est. Tokens:</strong> ~198K · 2–3 sessions</div>
+    <div><strong>Modules:</strong> M1–M6</div>
+    <div><strong>Pages:</strong> 20</div>
+  </div>
+
+  <h2>Downloads</h2>
+  <div class="cards">
+    <a class="card" href="mission_combined.pdf" download>
+      <div class="card-icon">📄</div>
+      <div class="card-title">Mission Package PDF</div>
+      <div class="card-desc">Full 20-page document: Vision Guide, Research Reference, and Mission Package — all three stages in one file.</div>
+      <div class="card-ext">mission_combined.pdf</div>
+    </a>
+    <a class="card" href="mission_combined.tex" download>
+      <div class="card-icon">📝</div>
+      <div class="card-title">LaTeX Source</div>
+      <div class="card-desc">Full XeLaTeX source file. Edit and recompile to customize the mission, add modules, or extend the research reference.</div>
+      <div class="card-ext">mission_combined.tex</div>
+    </a>
+  </div>
+
+  <div class="stages">
+    <h2 style="border:none; padding:0; margin-bottom:1rem;">Document Contents</h2>
+    <div class="stage-item">
+      <div class="stage-num s1">1</div>
+      <div class="stage-content">
+        <h4>Stage 1 — Vision Document</h4>
+        <p>Narrative vision · Problem statement (5 problems) · Core concept with architecture diagrams · 6 research modules (M1–M6) · Chipset configuration · Scope boundaries · 12 success criteria · GSD relationship map · Through-line</p>
+      </div>
+    </div>
+    <div class="stage-item">
+      <div class="stage-num s2">2</div>
+      <div class="stage-content">
+        <h4>Stage 2 — Research Reference</h4>
+        <p>M1: Ceph/RADOS (RADOS fundamentals, CRUSH, BlueStore, RGW) · M2: RAG pipeline (stages, embeddings, advanced patterns) · M4: Minecraft Anvil/NBT format (region files, chunk structure, type system, tooling) · Safety considerations · 22-source bibliography</p>
+      </div>
+    </div>
+    <div class="stage-item">
+      <div class="stage-num s3">3</div>
+      <div class="stage-content">
+        <h4>Stage 3 — Mission Package</h4>
+        <p>Deliverables table · Component breakdown with model assignments · Wave execution plan (5 waves, 2 parallel tracks) · Token budget (~198K) · Dependency graph · 36-test test plan · Verification matrix · Squadron crew manifest (12 roles) · Execution summary</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h2 style="border:none; padding:0; margin-bottom:0.75rem;">How to Use This Package</h2>
+    <ol>
+      <li>Open <strong>mission_combined.pdf</strong> and read Stage 1 (Vision) to understand the architecture hypothesis</li>
+      <li>Share the package with your <strong>GSD Orchestrator / Skill-Creator</strong> agent in Claude Code</li>
+      <li>The agent will execute <strong>Wave 0</strong> (foundation schemas) first, then parallel tracks 1A + 1B</li>
+      <li>CAPCOM gate activates after <strong>Wave 2</strong> (M3: Integration Design) — human approval required before PoC execution</li>
+      <li>Waves 3 and 4 produce the executable PoC plan and spatial embedding mapping research</li>
+    </ol>
+  </div>
+
+  <h2>Recompile from Source</h2>
+  <div class="latex-block">
+xelatex -interaction=nonstopmode mission_combined.tex<br>
+xelatex -interaction=nonstopmode mission_combined.tex<br>
+xelatex -interaction=nonstopmode mission_combined.tex<br>
+<br>
+# Three passes required for TOC, cross-references, lastpage, and hyperlinks<br>
+# Requires XeLaTeX with: fontspec, tcolorbox, tabularx, colortbl, booktabs, lastpage
+  </div>
+
+  <br>
+
+  <blockquote>
+    "The coordinates for the region a chunk belongs to can be found by taking the floor of dividing the chunk coordinates by 32." — Minecraft Wiki, Region File Format
+    <br><br>
+    And the coordinates for the document a meaning belongs to can be found by taking the floor of projecting the embedding vector into voxel space. Every retrieval system is a world. Every world is a retrieval system.
+    <cite>— Voxel as Vessel, through-line</cite>
+  </blockquote>
+
+</main>
+
+<footer>
+  GSD Ecosystem · Miles Tiberius Foxglove · tibsfox.com · March 2026
+</footer>
+
+</body>
+</html>

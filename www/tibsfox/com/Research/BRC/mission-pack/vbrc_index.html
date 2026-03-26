@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Black Rock City — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ember:    #8B2500;
+    --flame:    #BF360C;
+    --playa:    #1565C0;
+    --ash:      #37474F;
+    --dust:     #F57F17;
+    --glow:     #FBE9E7;
+    --sky:      #E3F2FD;
+    --smoke:    #ECEFF1;
+    --text:     #212121;
+    --subtle:   #757575;
+    --border:   #BDBDBD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #FAFAFA; color: var(--text); }
+
+  header {
+    background: linear-gradient(135deg, var(--ember) 0%, #5D0000 50%, var(--ash) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(245,127,23,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35em 0.9em;
+    border-radius: 3px;
+    margin-bottom: 1.2rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  header .subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.88;
+    margin-bottom: 0.4rem;
+  }
+  header .tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-top: 0.6rem;
+  }
+  header .pipeline {
+    margin-top: 1.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+  }
+  header .pipeline span { color: var(--dust); font-weight: 700; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  .files-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 600px) { .files-grid { grid-template-columns: 1fr; } }
+
+  .file-card {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem 1.6rem;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .file-card:hover {
+    border-color: var(--ember);
+    box-shadow: 0 4px 16px rgba(139,37,0,0.12);
+  }
+  .file-card .file-icon { font-size: 1.8rem; }
+  .file-card .file-name { font-weight: 700; font-size: 1rem; color: var(--ember); }
+  .file-card .file-desc { font-size: 0.85rem; color: var(--subtle); }
+  .file-card .file-meta { font-size: 0.78rem; color: var(--border); font-family: monospace; margin-top: auto; }
+
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ember);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--glow);
+    padding-bottom: 0.4rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .stage-list { list-style: none; }
+  .stage-list li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.92rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  .stage-badge {
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .s1 { background: var(--glow); color: var(--ember); }
+  .s2 { background: var(--sky); color: var(--playa); }
+  .s3 { background: var(--smoke); color: var(--ash); }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .principles-grid { grid-template-columns: 1fr; } }
+  .principle-pill {
+    background: var(--glow);
+    border-left: 3px solid var(--ember);
+    padding: 0.5rem 0.8rem;
+    border-radius: 3px;
+    font-size: 0.83rem;
+  }
+  .principle-pill strong { color: var(--ember); display: block; font-size: 0.78rem; }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .roles-grid { grid-template-columns: 1fr 1fr; } }
+  .role-chip {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  .role-chip .brc { color: var(--subtle); font-size: 0.65rem; }
+  .role-chip .pnw { color: var(--ash); font-weight: 700; font-size: 0.78rem; }
+
+  .chipset-box {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    padding: 1.2rem 1.5rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .chipset-box .chip-name { color: #F57F17; font-weight: bold; }
+  .chipset-box .chip-desc { color: #90CAF9; }
+  .chipset-box .comment { color: #616161; }
+
+  .usage-steps { counter-reset: step; list-style: none; margin: 1rem 0; }
+  .usage-steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 0.9rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .usage-steps li::before {
+    content: counter(step);
+    background: var(--ember);
+    color: white;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .usage-steps code {
+    background: var(--smoke);
+    padding: 0.1em 0.5em;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    font-family: monospace;
+    color: var(--ash);
+  }
+
+  .quote-box {
+    background: var(--glow);
+    border-left: 4px solid var(--ember);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #4a2000;
+  }
+
+  footer {
+    background: var(--ash);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    margin-top: 3rem;
+  }
+  footer a { color: rgba(255,255,255,0.8); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">GSD Research Mission Package</div>
+  <h1>Virtual Black Rock City</h1>
+  <div class="subtitle">Festival Simulation in Code — GSD skill-creator × Wasteland Integration</div>
+  <div class="tagline">Playa Roles, PNW Names, and the Gift Economy of Code</div>
+  <div class="pipeline">Vision <span>→</span> Research <span>→</span> Mission &nbsp;|&nbsp; Branch: <span>wasteland/skill-creator-integration</span></div>
+</header>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files-grid">
+    <a class="file-card" href="vbrc_mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-name">vbrc_mission.pdf</div>
+      <div class="file-desc">Complete 3-stage mission package. Vision Guide, Research Reference, and Mission Package in one 24-page document.</div>
+      <div class="file-meta">24 pages · ~236k tokens · Fleet activation</div>
+    </a>
+    <a class="file-card" href="vbrc_mission.tex" download>
+      <div class="file-icon">🔧</div>
+      <div class="file-name">vbrc_mission.tex</div>
+      <div class="file-desc">XeLaTeX source for the mission package. Edit and recompile with three passes to update content.</div>
+      <div class="file-meta">XeLaTeX · DejaVu fonts · Playa color scheme</div>
+    </a>
+  </div>
+
+  <h2>Package Contents</h2>
+  <ul class="stage-list">
+    <li><span class="stage-badge s1">Stage 1</span> Vision Guide — 10 Principles mapping, PNW naming framework, CEDAR chipset architecture, city domain map, 12 success criteria, through-line to GSD philosophy</li>
+    <li><span class="stage-badge s1">Stage 1</span> Problem Statement — 5 concrete problems: roles without on-ramps, skills without ceremony, names without roots, Wasteland without local culture, festival without physics</li>
+    <li><span class="stage-badge s1">Stage 1</span> Chipset Configuration — CEDAR (Creative Environment Design, Art, and Restoration): 8 chips across Scout/Patrol/Squadron/Fleet profiles</li>
+    <li><span class="stage-badge s2">Stage 2</span> 10 Principles Reference — Each BRC principle mapped to a testable GSD architectural guideline with implementation pattern</li>
+    <li><span class="stage-badge s2">Stage 2</span> 30 Playa Roles Catalog — Every BRC volunteer department translated to a PNW-named skill specification</li>
+    <li><span class="stage-badge s2">Stage 2</span> 8 Theme Camp Clusters — Cedar Grove, Raven's Roost, Salmon Run, Tide Pool, Osprey Watch, Old Growth Assembly, Mycorrhizal Hub, Fireline Cedar</li>
+    <li><span class="stage-badge s2">Stage 2</span> 4 Mutant Vehicles — Orca Sled, Raven Crawler, Osprey Dive, Chinook Rider — mobile chipset definitions</li>
+    <li><span class="stage-badge s2">Stage 2</span> 12 Art Installation Archetypes — Nurse Log, Mycorrhizal Mandala, Tidal Reach, Salmon Ladder, and more emergent composition patterns</li>
+    <li><span class="stage-badge s2">Stage 2</span> Wasteland MVR Integration — Rig identity schema (Fox-042, Raven-001), Esplanade Feed (wanted board), Mycorrhizal Mark stamp taxonomy, trust ladder mapping</li>
+    <li><span class="stage-badge s3">Stage 3</span> Wave Execution Plan — 5 waves (0, 1A, 1B, 2, 3) with parallel tracks, cache optimization, dependency graph</li>
+    <li><span class="stage-badge s3">Stage 3</span> 12 Deliverables — skill directories, config YAML, data files, docs, test suite, role-chooser catalog</li>
+    <li><span class="stage-badge s3">Stage 3</span> 6 Safety-Critical Tests — all BLOCK-on-fail: Medical gate, identity check, DPW sign-off, LNT enforcement, yearbook rule, anti-commodification</li>
+    <li><span class="stage-badge s3">Stage 3</span> 18-Role Fleet Crew Manifest — FLIGHT, PLAN, TOPO, ARCH, CRAFT-BRC, CRAFT-PNW, SECURE, ANALYST, and full team-of-teams topology</li>
+  </ul>
+
+  <h2>The 10 Principles → GSD Guidelines</h2>
+  <div class="principles-grid">
+    <div class="principle-pill"><strong>Radical Inclusion</strong>Open Skill Access — no prerequisite gates</div>
+    <div class="principle-pill"><strong>Decommodification</strong>Anti-Gamification — no leaderboards or stamps-for-sale</div>
+    <div class="principle-pill"><strong>Gifting</strong>Unconditional Skill Share — no license restrictions</div>
+    <div class="principle-pill"><strong>Radical Self-Reliance</strong>Agent Autonomy — each agent carries its own context</div>
+    <div class="principle-pill"><strong>Communal Effort</strong>Multi-Agent Topology — all skills declare camp affiliation</div>
+    <div class="principle-pill"><strong>Radical Self-Expression</strong>User-Defined Content — only Safety Warden enforces boundaries</div>
+    <div class="principle-pill"><strong>Civic Responsibility</strong>Safety Warden Pattern — infrastructure gates mandatory-pass</div>
+    <div class="principle-pill"><strong>Leaving No Trace</strong>LNT Cleanup Agent — no orphaned dependencies</div>
+    <div class="principle-pill"><strong>Participation</strong>Execution-First — skills activate on attempt, not qualification</div>
+    <div class="principle-pill"><strong>Immediacy</strong>Cache-Optimized — 5-minute TTL, zero wait states</div>
+  </div>
+
+  <h2>30 Playa Roles (BRC → PNW Name)</h2>
+  <div class="roles-grid">
+    <div class="role-chip"><div class="brc">Airport</div><div class="pnw">Osprey Landing</div></div>
+    <div class="role-chip"><div class="brc">Arctica</div><div class="pnw">Glacial Flow</div></div>
+    <div class="role-chip"><div class="brc">ARTery</div><div class="pnw">Nurse Log Guild</div></div>
+    <div class="role-chip"><div class="brc">BRC Rangers</div><div class="pnw">Watershed Watch</div></div>
+    <div class="role-chip"><div class="brc">Box Office</div><div class="pnw">Salish Gate</div></div>
+    <div class="role-chip"><div class="brc">Burn Perimeter</div><div class="pnw">Fireline Cedar</div></div>
+    <div class="role-chip"><div class="brc">Burner Express</div><div class="pnw">Chinook Rider</div></div>
+    <div class="role-chip"><div class="brc">Burning Man Hive</div><div class="pnw">Mycorrhizal Hub</div></div>
+    <div class="role-chip"><div class="brc">Info Radio</div><div class="pnw">Raven Broadcast</div></div>
+    <div class="role-chip"><div class="brc">Census</div><div class="pnw">Osprey Survey</div></div>
+    <div class="role-chip"><div class="brc">Center Camp</div><div class="pnw">Old Growth Assembly</div></div>
+    <div class="role-chip"><div class="brc">Cleanup</div><div class="pnw">Restoration Pass</div></div>
+    <div class="role-chip"><div class="brc">DMV</div><div class="pnw">Orca Sled DMV</div></div>
+    <div class="role-chip"><div class="brc">DPW</div><div class="pnw">Cascade Brigade</div></div>
+    <div class="role-chip"><div class="brc">Documentation</div><div class="pnw">Raven Archive</div></div>
+    <div class="role-chip"><div class="brc">Earth Guardians</div><div class="pnw">Geoduck Watch</div></div>
+    <div class="role-chip"><div class="brc">Emergency Svcs</div><div class="pnw">Tide Pool Medical</div></div>
+    <div class="role-chip"><div class="brc">Gate / Exodus</div><div class="pnw">Columbia Gate</div></div>
+    <div class="role-chip"><div class="brc">Greeters</div><div class="pnw">Raven's Welcome</div></div>
+    <div class="role-chip"><div class="brc">Lamplighters</div><div class="pnw">Firefly Circuit</div></div>
+    <div class="role-chip"><div class="brc">Man Watch</div><div class="pnw">Tahoma's Eye</div></div>
+    <div class="role-chip"><div class="brc">Media Mecca</div><div class="pnw">Salish Press</div></div>
+    <div class="role-chip"><div class="brc">Placement</div><div class="pnw">Territory Mapping</div></div>
+    <div class="role-chip"><div class="brc">Playa Info</div><div class="pnw">Hemlock Reference</div></div>
+    <div class="role-chip"><div class="brc">Ranger HQ</div><div class="pnw">Watershed Command</div></div>
+    <div class="role-chip"><div class="brc">Special Events</div><div class="pnw">Cascade Gathering</div></div>
+    <div class="role-chip"><div class="brc">Theme Camp Place.</div><div class="pnw">Cedar Grove Planning</div></div>
+    <div class="role-chip"><div class="brc">Ticketing</div><div class="pnw">Salish Access</div></div>
+    <div class="role-chip"><div class="brc">Traffic</div><div class="pnw">Salmon Run Traffic</div></div>
+    <div class="role-chip"><div class="brc">Volunteer Coord.</div><div class="pnw">Raven Muster</div></div>
+  </div>
+
+  <h2>CEDAR Chipset</h2>
+  <div class="chipset-box">
+<span class="comment"># CEDAR — Creative Environment Design, Art, and Restoration</span>
+<span class="comment"># Names sourced from tibsfox.com/PNW bioregion taxonomy</span>
+
+chips:
+  <span class="chip-name">RAVEN</span>:   <span class="chip-desc">"Communication, observation, and message routing"</span>
+  <span class="chip-name">SALMON</span>:  <span class="chip-desc">"Navigation, upstream problem-solving, lifecycle mgmt"</span>
+  <span class="chip-name">OSPREY</span>:  <span class="chip-desc">"Aerial observation, census, documentation"</span>
+  <span class="chip-name">TAHOMA</span>:  <span class="chip-desc">"Summit synthesis, apex skill promotion engine"</span>
+  <span class="chip-name">CEDAR</span>:   <span class="chip-desc">"Structural stability, camp scaffolding, LNT"</span>
+  <span class="chip-name">HEMLOCK</span>: <span class="chip-desc">"Deep-time patience, dependency resolution"</span>
+  <span class="chip-name">ORCA</span>:    <span class="chip-desc">"Mobile traversal, mutant-vehicle transport layer"</span>
+  <span class="chip-name">GEODUCK</span>: <span class="chip-desc">"Deep persistence, Dolt commons root system"</span>
+
+profiles:
+  scout:    <span class="chip-desc">[RAVEN, SALMON]</span>
+  patrol:   <span class="chip-desc">[RAVEN, SALMON, OSPREY, CEDAR]</span>
+  squadron: <span class="chip-desc">[RAVEN, SALMON, OSPREY, CEDAR, TAHOMA, ORCA]</span>
+  fleet:    <span class="chip-desc">[all chips]</span>
+  </div>
+
+  <h2>How to Use This Package</h2>
+  <ol class="usage-steps">
+    <li>Hand <code>vbrc_mission.pdf</code> to GSD orchestrator or paste into a fresh Claude Code session on branch <code>wasteland/skill-creator-integration</code></li>
+    <li>Tell GSD: <code>gsd new-project "Virtual Black Rock City v1.44"</code> and load this document as the mission spec</li>
+    <li>Execute Wave 0 first (Foundation): schema, PNW naming glossary, source index — these seed the cache for all parallel tracks</li>
+    <li>Launch Waves 1A and 1B simultaneously in separate Claude Code sessions; each produces its deliverables independently</li>
+    <li>Run Wave 2 Synthesis (Opus) after both 1A and 1B complete; this is where Wasteland integration, art patterns, and safety gates are finalized</li>
+    <li>Run Wave 3 Publication (Sonnet) to produce the role-chooser catalog and execute all 6 safety-critical tests — all must BLOCK-pass before milestone close</li>
+  </ol>
+
+  <h2>Recompile LaTeX</h2>
+  <ol class="usage-steps">
+    <li>Install XeLaTeX: <code>sudo apt-get install texlive-xetex texlive-fonts-recommended</code></li>
+    <li>Run three passes: <code>xelatex -interaction=nonstopmode vbrc_mission.tex</code> (repeat 3×)</li>
+    <li>Three passes resolve: table of contents, cross-references, lastpage counter, hyperlink destinations</li>
+  </ol>
+
+  <div class="quote-box">
+    "The playa is not the desert. The playa is the space between the desert and the city. The skill is not the code. The skill is the pattern between the code. Virtual Black Rock City is an invitation to inhabit that topology deliberately — named in the language of salmon, raven, cedar, and tahoma."
+    <br><br>
+    <strong>The Cedar holds. The Raven watches. The Salmon always knows the way upstream.</strong>
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem &nbsp;·&nbsp; Tibsfox &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp;
+  Branch: <a href="https://github.com/Tibsfox/gsd-skill-creator/tree/wasteland/skill-creator-integration">wasteland/skill-creator-integration</a> &nbsp;·&nbsp;
+  Names sourced from <a href="https://tibsfox.com/PNW/">tibsfox.com/PNW</a>
+</footer>
+
+</body>
+</html>

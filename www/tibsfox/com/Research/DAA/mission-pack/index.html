@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Audio Analyzer — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #00695C;
+  --secondary: #E65100;
+  --tertiary: #263238;
+  --light-primary: #E0F2F1;
+  --light-secondary: #FFF3E0;
+  --bg: #FAFAFA;
+  --card: #F0F0F0;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Libre Baskerville', serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--primary), var(--tertiary)); color: white; padding: 3rem 2rem; text-align: center; }
+.header h1 { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+.header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.85; margin-bottom: 0.5rem; }
+.header .tagline { font-style: italic; opacity: 0.7; font-size: 0.95rem; }
+.container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.file-card { background: var(--card); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); margin-bottom: 0.4rem; }
+.file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 1rem; margin-bottom: 0.3rem; }
+.file-card .desc { font-size: 0.8rem; color: var(--subtle); }
+h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+ol, ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+.quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; font-style: italic; }
+code { font-family: 'DejaVu Sans Mono', monospace; background: var(--card); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Deep Audio Analyzer</h1>
+  <div class="subtitle">Paula Chipset — Audio Intelligence Layer</div>
+  <div class="tagline">Iterative Refinement Through Conversational DSP</div>
+</div>
+<div class="container">
+  <div class="files">
+    <a href="deep-audio-analyzer-mission.pdf" download class="file-card">
+      <div class="label">PDF</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">28-page Vision → Research → Mission pipeline. Ready for GSD orchestrator.</div>
+    </a>
+    <a href="deep-audio-analyzer-mission.tex" download class="file-card">
+      <div class="label">LaTeX Source</div>
+      <div class="name">.tex File</div>
+      <div class="desc">Editable XeLaTeX source. Recompile with three passes.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3>Stage 1 — Vision Document</h3>
+  <ul>
+    <li>Vision narrative: the fox at the pond, the refinement cycle as relationship</li>
+    <li>5 concrete problems (audio opacity, single-pass limits, spatial underuse, DSP-narrative gap, Paula vacancy)</li>
+    <li>Core concept: Listen → Characterize → Discuss → Re-listen → Refine → Map</li>
+    <li>5 research modules (Foundation, Source ID, Spatial, Temporal, Refinement Controller)</li>
+    <li>Chipset configuration (Paula position, pipeline-with-feedback topology)</li>
+    <li>12 testable success criteria</li>
+  </ul>
+
+  <h3>Stage 2 — Research Reference</h3>
+  <ul>
+    <li>DSP algorithms with validated parameters from live analysis session</li>
+    <li><em>Pseudacris regilla</em> bioacoustic profile (frequency, call patterns, chorus dynamics)</li>
+    <li>Spatial reasoning mathematics: GCC-PHAT, ILD, coherence, comb filtering</li>
+    <li>Reference recording findings: 5 caller groups, spatial map, temporal narrative</li>
+    <li>Safety considerations (endangered species, recording privacy, cultural sensitivity)</li>
+  </ul>
+
+  <h3>Stage 3 — Mission Package</h3>
+  <ul>
+    <li>10 components across 4 waves with 2 parallel tracks</li>
+    <li>Squadron activation profile (12 crew roles, CRAFT-DSP + CRAFT-ACOUSTICS)</li>
+    <li>~155K token budget (37% Opus, 49% Sonnet, 3% Haiku, 11% buffer)</li>
+    <li>30 tests (5 safety-critical, 14 core, 6 integration, 5 edge case)</li>
+    <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Hand the PDF to <code>gsd-skill-creator</code> via Claude Code</li>
+    <li>The orchestrator reads all three stages and begins Wave 0</li>
+    <li>CAPCOM requests go/no-go at each wave boundary</li>
+    <li>The reference recording (<code>media/audio/20260209_194520.wav</code>) serves as the acceptance test</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>If you modify the <code>.tex</code> source:</p>
+  <ol>
+    <li><code>xelatex -interaction=nonstopmode deep-audio-analyzer-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode deep-audio-analyzer-mission.tex</code></li>
+    <li><code>xelatex -interaction=nonstopmode deep-audio-analyzer-mission.tex</code></li>
+  </ol>
+  <p>Three passes required for TOC, cross-references, and page count.</p>
+
+  <div class="quote">
+    "The frogs didn't start calling because the analysis got better. They started calling because the fox sat still long enough."
+  </div>
+</div>
+</body>
+</html>

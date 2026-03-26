@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WA Small Business Startup — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #283593;
+    --secondary: #D84315;
+    --tertiary: #37474F;
+    --accent: #1565C0;
+    --light-primary: #E8EAF6;
+    --light-secondary: #FBE9E7;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A237E 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.5rem; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; margin: 0.5rem 0; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-top: 0.3rem; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.6; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #E0E0E0;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-weight: 700; font-size: 1rem; color: var(--primary); }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  h3 { color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+
+  .contents { background: var(--light-primary); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .contents ul { list-style: none; padding-left: 1.2rem; }
+  .contents li { padding: 0.25rem 0; font-size: 0.9rem; }
+  .contents li::before { content: "→ "; color: var(--accent); font-weight: 700; }
+
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { padding: 0.3rem 0; font-size: 0.9rem; }
+
+  code { background: #E8E8E8; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; font-family: 'DejaVu Sans Mono', monospace; }
+
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+  }
+  .quote-box p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem; color: var(--tertiary); }
+
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; }
+
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Starting a Small Business<br>in Washington State</h1>
+  <div class="subtitle">Formation, Compliance, Taxation & Growth</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a href="mission.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">mission.pdf</div>
+      <div class="desc">Complete 27-page mission package — Vision, Research Reference, and Mission Plan. Ready for GSD Skill-Creator execution.</div>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <div class="name">mission.tex</div>
+      <div class="desc">LaTeX source file. Edit and recompile with XeLaTeX to customize or update with new data.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <h3>Stage 1 — Vision Document</h3>
+    <ul>
+      <li>Vision narrative: regulatory lattice as boundary conditions</li>
+      <li>5 core problems: entity selection, multi-layer licensing, gross-receipts tax, employment density, capital access</li>
+      <li>Domain map and module architecture (ASCII diagrams)</li>
+      <li>5 research modules: Formation, Licensing, Taxation, Employment, Funding & Support</li>
+      <li>12 testable success criteria</li>
+      <li>Chipset configuration (Opus/Sonnet/Haiku assignment)</li>
+    </ul>
+    <h3>Stage 2 — Research Reference</h3>
+    <ul>
+      <li>M1: Entity comparison matrix (5 structures), formation procedure, UBI workflow</li>
+      <li>M2: State business license triggers, local licensing, industry-specific permits</li>
+      <li>M3: B&O tax classifications with 2026 rates, sales tax expansion (Oct 2025), city B&O</li>
+      <li>M4: Minimum wage (state + Everett tiers), overtime thresholds, PFML (1.13%), workers' comp, WA Cares</li>
+      <li>M5: SBA programs, SSBCI ($163.4M), Flex Fund, CDFIs, Snohomish County resources</li>
+      <li>Complete source bibliography (government + professional)</li>
+    </ul>
+    <h3>Stage 3 — Mission Package</h3>
+    <ul>
+      <li>Squadron activation profile (12 roles)</li>
+      <li>4-wave execution plan with 2 parallel tracks</li>
+      <li>9 deliverables with acceptance criteria</li>
+      <li>30 tests (5 safety-critical, 14 core, 6 integration, 5 edge case)</li>
+      <li>Verification matrix mapping all 12 success criteria to tests</li>
+      <li>~67,500 token budget across ~15 context windows</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Open the PDF and review the Vision Document (Stage 1) to confirm scope and module structure.</li>
+      <li>Check the Research Reference (Stage 2) for source quality and data currency — all figures are current through March 2026.</li>
+      <li>Hand the complete package to <strong>gsd-skill-creator</strong> via Claude Code for execution.</li>
+      <li>The Mission Package (Stage 3) provides the wave plan, component specs, and test plan the orchestrator will follow.</li>
+      <li>CAPCOM checkpoints occur at wave boundaries — the orchestrator will pause for human approval.</li>
+    </ol>
+  </div>
+
+  <h2>Recompiling the LaTeX</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure you have XeLaTeX installed with the DejaVu font family.</li>
+      <li>Run three compilation passes:
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      </li>
+      <li>Three passes resolve the table of contents, cross-references, and page count.</li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    <p>"The entrepreneur's task is not to fight the regulatory lattice but to learn where the degrees of freedom live within its constraints. This is architectural leverage — the Amiga Principle applied to the act of starting something from nothing."</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Research Mission Package · March 12, 2026 · Squadron Profile · 5 Modules · 27 Pages
+</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voxel as Vessel v3 — Signal Fidelity &amp; Data Transmission</title>
+<style>
+  :root {
+    --primary: #7B1FA2;
+    --secondary: #00838F;
+    --tertiary: #E65100;
+    --light: #F3E5F5;
+    --slate: #455A64;
+    --dark: #1a1a2e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--dark);
+    color: #f0f0f0;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #4A148C 60%, #1a1a2e 100%);
+    padding: 48px 40px 40px;
+    border-bottom: 3px solid var(--secondary);
+  }
+  header h1 { font-size: 2.4rem; letter-spacing: -0.02em; color: #fff; }
+  header h2 { font-size: 1.2rem; color: #CE93D8; font-weight: normal; margin-top: 6px; }
+  header p  { color: #B39DDB; font-size: 0.95rem; margin-top: 14px; max-width: 680px; font-style: italic; }
+  .main { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+  .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 40px; }
+  .card {
+    background: #1e1e3a;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .card:hover { border-color: var(--secondary); transform: translateY(-2px); }
+  .card-icon { font-size: 2rem; margin-bottom: 12px; }
+  .card h3 { color: #CE93D8; font-size: 1.05rem; margin-bottom: 6px; }
+  .card p  { color: #aaa; font-size: 0.88rem; line-height: 1.5; }
+  .card .badge { display: inline-block; background: var(--primary); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 3px; margin-top: 10px; font-family: monospace; }
+  section h2 { color: var(--secondary); font-size: 1.3rem; margin-bottom: 16px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+  .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 36px; }
+  .module { background: #252545; border-left: 3px solid var(--tertiary); padding: 12px 16px; border-radius: 0 6px 6px 0; }
+  .module h4 { color: #FFCC80; font-size: 0.9rem; margin-bottom: 4px; }
+  .module p  { color: #aaa; font-size: 0.8rem; line-height: 1.4; }
+  .quote {
+    background: #1e1e3a;
+    border-left: 4px solid var(--primary);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #CE93D8;
+    line-height: 1.8;
+  }
+  .usage { background: #1a2a1a; border: 1px solid #2d5a2d; border-radius: 8px; padding: 24px; margin-bottom: 32px; }
+  .usage h2 { color: #81C784; border-color: #2d5a2d; }
+  pre { background: #111; padding: 16px; border-radius: 6px; font-size: 0.82rem; overflow-x: auto; color: #a8d5b5; line-height: 1.6; margin-top: 12px; }
+  .meta { color: #666; font-size: 0.82rem; margin-top: 40px; text-align: center; border-top: 1px solid #222; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Voxel as Vessel v3</h1>
+  <h2>Signal Fidelity &amp; Data Transmission — Third-Pass Refinement</h2>
+  <p>"The channel does not know what it is carrying. Only the encoding does. Choose your sampling rate deliberately, and when the channel goes down — know which frequencies you need to reconstruct from the delta alone."</p>
+</header>
+
+<div class="main">
+
+  <div class="files">
+    <a class="card" href="mission_v3.pdf" download>
+      <div class="card-icon">📄</div>
+      <h3>Mission Package v3 (PDF)</h3>
+      <p>32-page GSD research mission. Three stages: Vision → Research → Mission. XeLaTeX, violet/teal/amber color scheme.</p>
+      <span class="badge">mission_v3.pdf</span>
+    </a>
+    <a class="card" href="mission_v3.tex" download>
+      <div class="card-icon">🔧</div>
+      <h3>LaTeX Source</h3>
+      <p>Full XeLaTeX source. Recompile with three passes of xelatex to regenerate PDF after edits.</p>
+      <span class="badge">mission_v3.tex</span>
+    </a>
+  </div>
+
+  <section>
+    <h2>Research Modules — Third Pass (M14–M21)</h2>
+    <div class="modules">
+      <div class="module">
+        <h4>M14 — Temporal Imaging</h4>
+        <p>Nyquist/Shannon in imaging. Long exposure vs fast frame rate. Temporal aliasing, MTF, shutter angle. TSR (6× beyond Nyquist). CUP (trillion fps). Field separation, deinterlacing.</p>
+      </div>
+      <div class="module">
+        <h4>M15 — Color Fidelity</h4>
+        <p>ICC vs DNG profiles. ColorChecker workflow (7 steps). RAW processing pipeline. Studio lighting: D65/flash vs LED vs tungsten. sRGB/AdobeRGB/ProPhoto gamuts.</p>
+      </div>
+      <div class="module">
+        <h4>M16 — Audio Fidelity</h4>
+        <p>Mic calibration, polar patterns, proximity effect. Semaphores &amp; mutexes in DAW signal chain. Gating, JACK RT scheduling. FFT restoration pipeline. IRENE optical digitization. iZotope spectral recovery.</p>
+      </div>
+      <div class="module">
+        <h4>M17 — Serialization + HPC</h4>
+        <p>FlatBuffers 81 ns/op vs JSON 7045 ns/op. Protobuf, MessagePack, Cap'n Proto, Avro. Reed-Solomon, LDPC, Hamming, ECC RAM. InfiniBand HDR 200 Gbps, RDMA, SHARP in-network computing. HIPPI history.</p>
+      </div>
+      <div class="module">
+        <h4>M18 — Transport Taxonomy</h4>
+        <p>Acoustic modem → POTS/V.90 → ADSL/VDSL → DOCSIS 3.1 (OFDM/4K FFT) → GPON/DWDM. HIPPI. InfiniBand. RFC 1149 IPoAC (Bergen 2001). Sneakernet bandwidth. Sneakernet mesh / DTN Bundle Protocol.</p>
+      </div>
+      <div class="module">
+        <h4>M19 — Backup + Federation</h4>
+        <p>3-2-1-1-0 rule. RBD snapshot/mirror, BorgBackup, CDP. Arrow Flight, Trino, Apache Drill federation. Cross-domain: data diode, CASB, break-and-inspect, format sanitization.</p>
+      </div>
+      <div class="module">
+        <h4>M20 — Zero Trust + Firewall</h4>
+        <p>NIST SP 800-207 PDP/PEP architecture. DoD 7 pillars. BeyondCorp/ZTNA. Proxy types (forward/reverse/IAP/CASB/WAF). 4-zone firewall model mapped to Ceph/OpenStack. CephX ZT gap analysis. CAEP session re-eval.</p>
+      </div>
+      <div class="module">
+        <h4>M21 — Synthesis</h4>
+        <p>Frequency-domain unification of all modules. Extended Ceph/Minecraft fidelity isomorphism. Transport Pareto frontier. Sneakernet mesh protocol spec outline. Through-line: "the channel does not know what it carries."</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote">
+    Every layer of the stack is a decision about which frequencies to trust.<br>
+    The camera's shutter is a temporal low-pass filter. The Fourier transform is the language all these decisions share.<br>
+    The pigeon carrying a USB drive does not know its effective bandwidth exceeds ADSL by a factor of ten thousand.<br><br>
+    The seed is still there. The function is still there. Only the changes need the channel.
+  </div>
+
+  <div class="usage">
+    <h2>Usage — Hand to Skill-Creator</h2>
+    <p style="color:#ccc; font-size:0.9rem; margin-bottom: 12px;">Feed this package to GSD skill-creator in Claude Code to execute the research mission:</p>
+    <pre>
+# Compile from source (after edits)
+xelatex -interaction=nonstopmode mission_v3.tex
+xelatex -interaction=nonstopmode mission_v3.tex
+xelatex -interaction=nonstopmode mission_v3.tex
+
+# Hand to skill-creator
+"Execute this mission package. Start with Wave 0 (schemas), then
+ launch 4 parallel tracks in Wave 1. HITL gate after Wave 1.
+ Use Opus for M16 audio, M20 ZT, M21 synthesis.
+ Sonnet for all other modules."
+    </pre>
+  </div>
+
+  <section>
+    <h2>Document Structure (32 pages)</h2>
+    <p style="color:#aaa; font-size:0.9rem; line-height:1.8;">
+      Stage 1 (Vision Guide): Fidelity stack diagram · Problem statement (5 problems) · Core thesis · 12 success criteria<br>
+      Stage 2 (Research Reference): M14 Temporal imaging · M15 Color fidelity · M16 Audio restoration · M17 Serialization+HPC · M18 Transport taxonomy (IPoAC to InfiniBand) · M19 Backup+federation · M20 Zero trust+firewall<br>
+      Stage 3 (Mission Package): Fleet crew manifest (20 roles) · Wave execution plan (4 parallel tracks) · Token budget (242K) · 5 SC tests · 15 core tests · 8 integration · 8 edge cases · Dependency graph · 35-source bibliography
+    </p>
+  </section>
+
+  <div class="meta">
+    Miles Tiberius Foxglove · tibsfox.com · March 2026<br>
+    Companion to Voxel as Vessel v1 (Ceph/RAG/Minecraft) and v2 (Sovereign World Architecture)
+  </div>
+
+</div>
+</body>
+</html>

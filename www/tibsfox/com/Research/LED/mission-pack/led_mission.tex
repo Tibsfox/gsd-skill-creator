@@ -1,0 +1,988 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme: electric amber, steel blue, graphite
+\definecolor{primary}{HTML}{B45309}       % Amber/warm -- LED glow
+\definecolor{secondary}{HTML}{1D4ED8}     % Electric blue -- digital logic
+\definecolor{tertiary}{HTML}{374151}      % Graphite -- instruments
+\definecolor{accent}{HTML}{D97706}
+\definecolor{lightprimary}{HTML}{FEF3C7}
+\definecolor{lightsecondary}{HTML}{DBEAFE}
+\definecolor{lighttertiary}{HTML}{F3F4F6}
+\definecolor{rowgray}{HTML}{F9FAFB}
+\definecolor{bordergray}{HTML}{D1D5DB}
+\definecolor{subtlegray}{HTML}{6B7280}
+\definecolor{darktext}{HTML}{111827}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{LED Lighting \& Controllers}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={LED Lighting and Controllers -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ── TITLE PAGE ──────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.2cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{LED Lighting \&\\[0.3em]Controllers}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{DIY Electronics, Microcontrollers, Smart Lighting,\\Instruments \& High-Speed Digital Logic}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- Deeply Cross-Linked Reference Web Pages}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Profile}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 9, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (8 modules)  |  Estimated: 12--16 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ───────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{LED Lighting \& Controllers --- Vision Guide}
+
+\metafield{Date:}{March 9, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends on:}{None (root mission)}
+\metafield{Context:}{Cold-start research mission; 8 research modules covering LED electronics through high-speed digital instruments}
+
+\subsection{Vision}
+
+Light is the oldest technology. Before the transistor, before the steam engine, before the wheel, organisms evolved to detect, generate, and navigate by photons. The LED is not a modern invention so much as a modern crystallization --- a junction of p-type and n-type semiconductor that, under forward bias, forces electrons across an energy gap, emitting that gap as a photon of precisely determined wavelength. The color is not painted on; it is physics.
+
+What makes the current moment remarkable is not the LED itself but the controller ecosystem that has grown up around it. A maker in their garage can now command 300 individually-addressable RGB pixels from a single Arduino pin, build an ambient light sensor that reads the color temperature of sunlight and adjusts their household lighting in real time, or spin a strip of APA102 LEDs at 1800 RPM to conjure floating three-dimensional images through the persistence-of-vision effect. The hardware cost for all of this has collapsed to nearly zero. What remains is the knowledge infrastructure.
+
+This mission exists to build that infrastructure: a deeply cross-linked, rigorously sourced web reference spanning the full territory from Ohm's Law through high-speed digital logic, from soldering a current-limiting resistor to programming a PIC16F877A's CCP module, from Philips Hue's CLIP API to building a DIY oscilloscope from a Raspberry Pi Pico. Every topic will be interlinked to every other. The reader who begins at ``What is a forward voltage?'' will find themselves, through natural curiosity and well-placed hyperlinks, arriving at persistence-of-vision displays, I2C sensor polling loops, and Nyquist sampling theory before they know it. That is the design intent.
+
+The philosophical through-line: light is a wave, and the entire LED ecosystem is humanity learning to generate, control, and sense waves with ever-finer precision. The multimeter is the simplest wave-detector; the oscilloscope reveals the wave's shape in time; the color sensor performs spectral decomposition; the microcontroller encodes the wave as data and controls it with nanosecond precision. The POV display is perhaps the purest expression of this arc --- light, time, and motion conspiring to trick the brain's temporal integration window into seeing images that do not exist.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{LED electronics are under-documented at the connective level.} Beginners learn Ohm's Law and forward voltage in isolation, without understanding how these connect to PWM brightness control, constant-current drivers, and the thermal-runaway dynamics that destroy cheap LED installations.
+
+  \item \textbf{Microcontroller programming for LED control is fragmented across platforms.} Arduino, PIC, Raspberry Pi, and ESP32 ecosystems each have excellent individual documentation but rarely cross-reference each other, leaving makers unable to port skills or understand platform tradeoffs.
+
+  \item \textbf{Addressable LED protocols (WS2812B, APA102, SK6812) are poorly understood at the electrical and timing level.} Most tutorials treat these as magic; few explain why WS2812B fails at 3.3V logic, why APA102 outperforms WS2812B for POV applications, or what ``800 kHz NZR protocol'' actually means for interrupt-sensitive code.
+
+  \item \textbf{Smart lighting (Philips Hue, WLED, diyHue) and DIY LED systems exist in separate universes.} Makers who want ambient-sensing color adaptation must separately learn the Hue CLIP API, TCS34725 I2C color sensing, circadian rhythm color temperature curves, and PWM-based LED dimming --- with no unified resource connecting them.
+
+  \item \textbf{Test and measurement tools are treated as black boxes.} Beginners acquire oscilloscopes and multimeters without understanding sampling theory, probe compensation, Nyquist limits, or how to interpret what they see --- making them unable to debug the very circuits they are building.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The LED as a boundary condition:} every topic in this mission is a different way of controlling or measuring the photon flux across a semiconductor junction.
+
+\begin{asciibox}
+PHOTON EMISSION (LED junction)
+         |
+    +----+----+
+    |         |
+CONTROL    MEASUREMENT
+    |         |
++---+---+ +---+---+
+| MICRO | | SCOPE |
+| CTRL  | | METER |
++-------+ +-------+
+    |         |
+ PWM/SPI   ADC/Sample
+    |         |
+  STRIPS   WAVEFORM
+  HUE API  ANALYSIS
+\end{asciibox}
+
+\subsubsection{Domain Architecture Map}
+
+\begin{asciibox}
+LED LIGHTING & CONTROLLERS -- RESEARCH DOMAIN MAP
+==================================================
+
+LAYER 0: PHYSICS FOUNDATION
+  [LED Electronics] -- forward voltage, I-V curve, current limiting
+  [Semiconductor Physics] -- p-n junction, photon emission, wavelength vs bandgap
+
+LAYER 1: PASSIVE CONTROL
+  [Resistors & Ohm's Law] --> [LED Electronics]
+  [PWM Fundamentals] --> [LED dimming]
+  [Constant Current Drivers] --> [LED strip power]
+
+LAYER 2: MICROCONTROLLER PROGRAMMING
+  [Arduino / AVR] <--> [PIC MPLAB XC8]
+  [Raspberry Pi Python/C] <--> [ESP32/ESP8266]
+  [RP2040 PIO] --> [High-Speed LED switching]
+
+LAYER 3: ADDRESSABLE LED PROTOCOLS
+  [WS2812B NZR protocol] --> [NeoPixel / FastLED libraries]
+  [APA102 / SK9822 SPI] --> [POV displays, high-speed refresh]
+  [SK6812 RGBW] --> [Color rendering]
+
+LAYER 4: SMART LIGHTING ECOSYSTEMS
+  [Philips Hue CLIP API] <--> [diyHue bridge emulator]
+  [WLED firmware] <--> [ESPHome]
+  [TCS34725 ambient sensing] --> [circadian adaptation]
+
+LAYER 5: HIGH-SPEED & ADVANCED
+  [POV displays] <-- [APA102 + RP2040 PIO]
+  [Digital logic timing] --> [oscilloscope debugging]
+  [PLC ladder logic] --> [industrial LED control]
+
+LAYER 6: INSTRUMENTS & MEASUREMENT
+  [Multimeters] --> [LED forward voltage measurement]
+  [Oscilloscopes] --> [PWM / WS2812B waveform analysis]
+  [Scientific data sampling] --> [Nyquist, ADC, signal conditioning]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: LED Electronics Fundamentals}
+Forward voltage, current-limiting resistors, I-V curves, constant current vs constant voltage drivers, LED types (5mm, SMD 5050, COB, high-power), color vs wavelength vs semiconductor material, thermal management, power calculations, series vs parallel wiring.
+
+\subsubsection{Module 2: Microcontroller Programming for LED Control}
+Arduino (AVR/ATmega), PIC (MPLAB XC8, CCP/PWM module), Raspberry Pi (Python RPi.GPIO, pigpio, C with DMA), ESP32/ESP8266, RP2040 PIO state machines. GPIO output modes, PWM generation, timer configuration, interrupt handling for LED timing. Cross-platform comparison and skill-transfer guide.
+
+\subsubsection{Module 3: Addressable LED Strips and Protocols}
+WS2812B (NZR single-wire protocol, 800 kHz, GRB order, 3.3V logic level problem), APA102/SK9822 (SPI dual-wire, no timing sensitivity, brightness control frame), SK6812 RGBW, WS2813 (backup data line), WS2815 (12V), power injection, decoupling capacitors, Adafruit NeoPixel library, FastLED library, WLED firmware.
+
+\subsubsection{Module 4: Smart Lighting and Ambient Sensing}
+Philips Hue CLIP API v1 and v2, ZigBee HA protocol, diyHue bridge emulator, OpenHue API spec, TCS34725 RGB color sensor (I2C, 16-bit ADC, IR filter, 3,800,000:1 dynamic range), APDS9960 alternative, circadian rhythm and color temperature (CCT/mirek units), automated brightness and color adaptation algorithms, Home Assistant integration.
+
+\subsubsection{Module 5: DIY Household LED Controllers}
+Phase-dimmer compatibility with LED bulbs, MOSFET-based PWM dimmers, TRIAC phase-cutting, 12V/24V DC LED strip controllers, IR and RF remote systems, WLED ESP8266/ESP32 controllers, open-source alternatives to commercial smart bulbs, safety and mains isolation.
+
+\subsubsection{Module 6: High-Speed LED Switching and Persistence of Vision}
+POV display theory (human eye temporal integration, 10--12 fps perception limit), APA102 SPI at 24 MHz, RP2040 dual-core operation (one core for LED SPI, one for image processing), polar coordinate image mapping, Hall effect or reflectance sensor rotation detection, Schmitt trigger debouncing, wireless power transfer for rotating assemblies, PCB design for high-G environments.
+
+\subsubsection{Module 7: Oscilloscopes and Scientific Digital Data Sampling}
+Oscilloscope types (analog, DSO, MSO), bandwidth vs sampling rate, Nyquist theorem and aliasing, trigger types (edge, pulse, slope, pattern), probe compensation and input impedance, measuring PWM waveforms, decoding WS2812B and SPI protocols, equivalent-time sampling, DIY oscilloscopes (DSO138, Arduino Nano, ESP32, RP2040 Picotronix), multimeter operation, diode test mode for LED forward voltage measurement, ADC fundamentals (resolution, noise, non-linearity).
+
+\subsubsection{Module 8: PLC and Industrial LED Control}
+PLC ladder logic for LED signaling and indicator arrays, relay output modules vs transistor output modules, industrial LED strip controllers, safety interlocks, IEC 61131-3 programming standards, integration with SCADA, comparison with Arduino/Raspberry Pi for industrial applications.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+led_lighting_mission:
+  profile: Fleet
+  modules: 8
+  parallel_tracks: 3
+  primary_language: en
+  output_format: deeply_cross_linked_html
+  pages_per_module: 4-8
+  cross_links: bidirectional
+  code_examples: yes
+  circuit_diagrams: ascii_art
+  difficulty_levels: [beginner, intermediate, advanced]
+  source_quality: professional_and_peer_reviewed
+  models:
+    synthesis:    claude-opus-4-6     # ~30%
+    survey:       claude-sonnet-4-6   # ~60%
+    scaffolding:  claude-haiku-4-5    # ~10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[noitemsep]
+  \item LED electronics from first principles through advanced driver circuits
+  \item Microcontroller programming: Arduino, PIC, Raspberry Pi, ESP32, RP2040
+  \item Addressable LED strips: WS2812B, APA102, SK6812, WS2815
+  \item Smart lighting: Philips Hue API, diyHue, WLED, ambient color sensing
+  \item DIY household LED controllers and dimmers
+  \item POV displays and high-speed LED switching
+  \item Oscilloscopes, multimeters, and ADC/sampling theory
+  \item PLC basics for LED control
+  \item Deeply cross-linked HTML reference pages with code examples
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[noitemsep]
+  \item Laser diodes (separate physics, safety requirements)
+  \item OLED/AMOLED display driving (too distinct)
+  \item Mains AC wiring beyond safety overview
+  \item PCB fabrication (mentioned but not detailed)
+  \item RF/Zigbee radio protocol internals beyond API level
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All 8 research modules have at least 4 fully-rendered HTML pages with working internal hyperlinks.
+  \item Every HTML page links to at least 3 other pages within the site (bidirectional where applicable).
+  \item LED electronics module correctly explains forward voltage, Ohm's Law calculations, and constant-current drivers with worked examples and ASCII circuit diagrams.
+  \item Microcontroller module includes working code examples for Arduino C++, PIC XC8 C, and Raspberry Pi Python for LED PWM brightness control.
+  \item WS2812B and APA102 protocol pages explain the electrical and timing differences at a level sufficient to debug real hardware issues.
+  \item Philips Hue and ambient sensing module includes a complete worked example of TCS34725 color sensing feeding Hue API brightness/color adaptation.
+  \item POV display page explains the APA102 vs WS2812B selection rationale and includes RP2040 PIO code structure.
+  \item Oscilloscope module explains Nyquist theorem, trigger setup, and probe compensation in plain language with practical LED debugging examples.
+  \item All code examples compile or are verified against official library documentation.
+  \item Site has a master index page with module map and topic cross-reference table.
+  \item All sources are from professional organizations, official documentation, or peer-reviewed material.
+  \item Pages are readable on mobile (responsive CSS).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+The Space Between (MTF) & Vibration through-line; wave equations connect to LED photon emission & Philosophical parent \\
+Skill-Creator & This mission generates HTML skills for self-documentation & Downstream \\
+tibsfox.com infrastructure & Output pages may be published here & Deployment target \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every topic in this mission is a different angle on the same question: how do humans gain fine-grained control over photons? The LED junction answers: by engineering the energy gap. The resistor and the constant-current driver answer: by managing the current. The PWM signal answers: by modulating time. The oscilloscope answers: by measuring the modulation. The color sensor answers: by reading back what was emitted. The POV display answers: by exploiting the human visual system's own temporal integration --- the eye's inability to distinguish individual frames fast enough.
+
+This is the same arc traced in \textit{The Space Between}: from sensory encounter (seeing light) through formal abstraction (forward voltage, duty cycle, Nyquist) through synthesis (a living room that reads the sky and adjusts its own color accordingly). The autodidact's path through this domain is not a straight line but a spiral --- returning to Ohm's Law from the perspective of a 24 MHz SPI bus, returning to basic PWM from the context of a POV display spinning at 1800 RPM. The cross-links in the output pages are not decoration; they are the structure of learning itself.
+
+\newpage
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{LED Lighting \& Controllers --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section compiles verified findings organized by module. All claims are sourced from professional organizations, official manufacturer documentation, or established maker education platforms. Page authors should draw from these findings to write HTML content; they should not reproduce text verbatim but paraphrase and synthesize.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item SparkFun Electronics (learn.sparkfun.com) --- LED resistors, oscilloscope basics
+  \item Adafruit Industries (learn.adafruit.com, adafruit.com) --- NeoPixel, TCS34725, POV displays
+  \item Microchip Technology (microchip.com) --- PIC MPLAB XC8 official documentation
+  \item Raspberry Pi Foundation (magazine.raspberrypi.com) --- RP2040 PIO, POV projects
+  \item Philips Hue Developer Portal (developers.meethue.com) --- CLIP API v1/v2
+  \item Electronics-Tutorials (electronics-tutorials.ws) --- LED theory, diode I-V curves
+  \item Tektronix (tek.com) --- oscilloscope setup and measurement guides
+  \item CircuitCellar (circuitcellar.com) --- advanced POV, PCB design for high-G
+  \item diyHue project (diyhue.org) --- open-source Hue bridge emulator
+  \item OpenHue (github.com/openhue/openhue-api) --- OpenAPI specification
+\end{itemize}
+
+\subsection{Module 1 Reference: LED Electronics Fundamentals}
+
+\subsubsection{The LED I-V Curve and Forward Voltage}
+
+An LED is a semiconductor diode; its current-voltage relationship is nonlinear. Until the applied voltage reaches the forward voltage threshold, very little current flows. Beyond that threshold, current increases exponentially with voltage. A 0.1V increase in forward voltage can increase current by 30--65 mA in a typical visible-light LED. This exponential behavior is why constant-current drivers are preferred over constant-voltage: a constant-current driver adjusts its output voltage to maintain a stable current, preventing thermal runaway.
+
+Typical forward voltages by color: red/orange/yellow 1.8--2.2V; green/blue/white/UV 3.0--3.8V (due to wider bandgap semiconductor material --- InGaN for blue/white, GaAsP for red). White LEDs are blue LED junctions with a phosphor conversion layer; their forward voltage reflects the underlying blue junction.
+
+The forward current for standard 5mm indicator LEDs is typically 20 mA maximum. High-power LEDs may be rated at 350 mA, 700 mA, or 1A+. Running LEDs at or near maximum current reduces lifetime; the industry practice is to operate at 50--70\% of rated maximum for longevity.
+
+\subsubsection{Current-Limiting Resistor Calculations}
+
+The resistor value formula: $R = (V_s - V_f) / I_f$
+
+Where $V_s$ is supply voltage, $V_f$ is LED forward voltage, and $I_f$ is desired forward current. Example: 5V supply, red LED ($V_f = 1.8V$), desired 20 mA current: $R = (5 - 1.8) / 0.020 = 160\Omega$. Round up to 180$\Omega$ (standard E12 value). Always calculate the resistor power dissipation: $P = I^2 \times R = 0.02^2 \times 180 = 72 mW$ --- a standard 1/4W resistor is safe.
+
+For series LED strings, forward voltages add: $R = (V_s - n \times V_f) / I_f$. For parallel strings, each branch requires its own resistor. Parallel LEDs should never share a single resistor because manufacturing variations in $V_f$ cause unequal current distribution.
+
+\subsubsection{LED Strip Power and Constant-Voltage Drivers}
+
+LED strips (12V or 24V) use constant-voltage power supplies with resistors pre-soldered on each LED section. At full brightness, a 5050 RGB 60 LED/m strip draws approximately 14.4W/m (12V at 1.2A/m). A 5m strip at full white can draw 60--72W; power supply must be sized at 120\% of calculated load minimum.
+
+Voltage drop along long LED strips requires power injection at intervals. At 5V (WS2812B strips), significant voltage drop occurs after 50--100 LEDs without power injection. The copper traces on the strip have finite resistance; injecting power every meter or every 150 LEDs maintains brightness uniformity.
+
+\subsection{Module 2 Reference: Microcontroller Programming}
+
+\subsubsection{Arduino / AVR Platform}
+
+The Arduino IDE (now IDE 2.x) provides a C++ wrapper around AVR hardware. For LED PWM dimming: the analogWrite() function uses hardware PWM at approximately 490 Hz (pins 5, 6) or 980 Hz (other PWM pins) on Arduino Uno. For smoother dimming, Timer1 can be reconfigured to run at higher frequency via direct register manipulation.
+
+Digital output for LED control: TRIS/PORT register concept on PIC translates to pinMode()/digitalWrite() on Arduino. For high-speed switching, direct port manipulation (PORTB |= (1 << PB5)) is 4--8x faster than digitalWrite().
+
+\subsubsection{PIC Microcontroller and MPLAB XC8}
+
+The PIC16F877A (and related 16F-series) uses MPLAB X IDE with XC8 compiler. GPIO direction is controlled via TRIS registers (1=input, 0=output); GPIO state via PORT registers. The CCP (Capture/Compare/PWM) module generates hardware PWM. Key registers: CCP1CON (mode selection), CCPR1L (duty cycle low 8 bits), CCP1CON bits 4-5 (duty cycle bits 0-1), PR2 (period), T2CON (Timer2 prescaler).
+
+PWM frequency formula: $f_{PWM} = f_{osc} / (4 \times T2prescale \times (PR2 + 1))$. For $f_{osc} = 4MHz$, prescaler = 4, PR2 = 249: $f_{PWM} = 4000000 / (4 \times 4 \times 250) = 1 kHz$.
+
+\subsubsection{Raspberry Pi and RP2040}
+
+Raspberry Pi GPIO uses Python's RPi.GPIO or pigpio (hardware PWM) libraries. The pigpio library provides hardware-timed PWM avoiding the jitter of software PWM. For the RP2040 (Pico), the Programmable I/O (PIO) state machines are revolutionary: they implement custom digital protocols in hardware, providing deterministic nanosecond-level timing independent of the CPU. This is why RP2040 excels at WS2812B timing, SPI-based POV display control, and other timing-critical applications. The RP2040 has 8 PIO state machines across two PIO blocks.
+
+\subsection{Module 3 Reference: Addressable LED Protocols}
+
+\subsubsection{WS2812B Protocol Details}
+
+The WS2812B integrates an RGB LED and controller IC in a single 5050 package. The single-wire NZR (Non-Return to Zero) protocol operates at 800 kHz. Data encoding: a ``1'' bit is 0.8 \textmu s high + 0.45 \textmu s low; a ``0'' bit is 0.4 \textmu s high + 0.85 \textmu s low. Timing tolerance is \textpm 150 ns, making interrupts during transmission fatal to data integrity. Each LED receives 24 bits (8 green, 8 red, 8 blue --- GRB order, not RGB). After receiving its 24 bits, the IC passes remaining data downstream.
+
+Critical 3.3V logic issue: the WS2812B datasheet specifies minimum high voltage of $0.7 \times V_{DD} = 3.5V$. At 3.3V logic (ESP32, ESP8266, Arduino Due, Raspberry Pi), transmission is unreliable. Solution: 74HCT125 level shifter (translates 3.3V logic to 5V logic reliably), or use a short pull-up resistor to 5V on the data line.
+
+\subsubsection{APA102 / SK9822 Protocol}
+
+APA102 uses a two-wire SPI interface (clock + data) with no timing constraints, making it compatible with any microcontroller and essential for POV displays where update speed is critical. Data rate: up to 24 MHz on SPI. Frame structure: 32-bit start frame (all 0s), one 32-bit LED frame per LED (111 + 5-bit brightness + 8-bit blue + 8-bit green + 8-bit red), end frame (all 1s + n/2 bits for long strips). The separate brightness control (5-bit, 32 levels) is independent of color PWM, enabling very fine dimming at low brightness levels. For a 300-LED strip, a complete update takes approximately 300 \textmu s at 8 MHz --- fast enough for 1000+ frame-per-second POV displays.
+
+\subsubsection{Library Ecosystem}
+
+Adafruit NeoPixel library supports WS2812B, SK6812 RGBW, WS2811. Disables interrupts during strip.show() to guarantee timing. FastLED supports WS2812B, WS2815, SK6812, APA102, and 50+ other chipsets. Provides HSV color space operations, palettes, and noise functions useful for organic animation effects. WLED (wled.me) is a complete ESP32/ESP8266 firmware supporting WS2812B and APA102 with 100+ effects, real-time E1.31 sACN/Art-Net input, JSON API, and Home Assistant integration.
+
+\subsection{Module 4 Reference: Smart Lighting and Ambient Sensing}
+
+\subsubsection{Philips Hue CLIP API}
+
+The Hue bridge is a ZigBee coordinator and HTTP web server on the local network. CLIP v1 uses PUT requests to /api/\{username\}/lights/\{id\}/state. Key state parameters: on (boolean), bri (1--254 brightness), hue (0--65535), sat (0--254), xy (CIE 1931 x,y chromaticity), ct (153--454 mirek, corresponding to 2200K--6500K). CLIP v2 (current) uses HTTPS exclusively (RED compliance mandate) and an EventStream (SSE) for real-time state updates.
+
+The Hue bridge includes a ZLLLightLevel sensor (ambient light), ZLLTemperature sensor, and ZLLPresence sensor in each Hue Motion Sensor. These can be polled via GET /clip/v2/resource/light\_level. Light level is reported in lux (0--83,000 lux scale). Arduino MKR1010, MKR1000, and Nano 33 IoT can make PUT requests to the Hue bridge via the ArduinoHttpClient library.
+
+\subsubsection{diyHue and WLED}
+
+diyHue (diyhue.org) emulates a Philips Hue bridge in software, enabling Hue app control of non-Hue devices including ESP8266/ESP32 + WS2812B/APA102 strips. Architecture: Zigbee devices connect via Zigbee dongle → Zigbee2MQTT → diyHue → Hue app. diyHue supports the Hue Entertainment API for synchronized light shows. Custom ESP8266/ESP32 DIY lights can be web-flashed and appear automatically in the Hue app.
+
+\subsubsection{TCS34725 Color and Ambient Light Sensing}
+
+The TCS34725 is an I2C color sensor with four channels (red, green, blue, clear), 16-bit ADC per channel, 3,800,000:1 dynamic range, and an integrated IR blocking filter. I2C address: 0x29. Programmable gain (1x, 4x, 16x, 60x) and integration time (2.4 ms -- 700 ms) allow operation from starlight to direct sunlight. The Adafruit TCS34725 library provides lux calculation and correlated color temperature (CCT) computation. CCT can be compared to the Hue bridge's ct parameter (mirek = 1,000,000 / CCT\_kelvin) to match interior lighting to ambient conditions.
+
+Circadian rhythm adaptation: research in chronobiology establishes that blue-rich light (6500K, high CCT) suppresses melatonin production; warm light (2700K, low CCT) does not. A DIY ambient-adaptive lighting system using TCS34725 can measure outdoor CCT, compute the appropriate indoor CCT, convert to mirek, and send a PUT request to the Hue bridge (or WLED) to adapt the interior lighting throughout the day.
+
+\subsection{Module 5 Reference: DIY Household LED Controllers}
+
+\subsubsection{MOSFET-Based PWM Dimmers}
+
+For 12V/24V DC LED strips, an N-channel MOSFET (e.g., IRLZ44N, logic-level gate) can switch the strip's negative terminal at PWM frequency. Gate drive: 3.3V--5V logic output from Arduino/ESP32 directly drives logic-level MOSFETs. Freewheeling diode across the LED strip absorbs inductive kickback. Switching frequency should be above 1 kHz to avoid visible flicker; 25 kHz is typical for imperceptible flicker in camera recording. Bootstrap driver ICs (e.g., IR2110) enable high-side switching.
+
+\subsubsection{WLED Firmware}
+
+WLED running on ESP8266/ESP32 is the most capable open-source LED controller firmware. Features: over-the-air firmware updates, HTTP REST JSON API, WebSocket API for real-time control, MQTT support, IR remote decoding, DMX/Art-Net input, preset system, 100+ built-in effects, segment control, and a mobile-friendly web UI. BOM: ESP8266 NodeMCU (\$3), 5V 10A power supply, WS2812B strip, 300--500$\Omega$ data resistor, 1000\textmu F capacitor.
+
+\subsection{Module 6 Reference: High-Speed LED Switching and POV}
+
+\subsubsection{Persistence of Vision Physics}
+
+The human brain processes approximately 10--12 frames per second at the cognitive level for motion detection, but the retina's temporal integration window is approximately 25--40 ms. A POV display exploits this by spinning a row of LEDs faster than the integration time, so the eye sees a solid plane of light rather than a rotating row. At 1800 RPM (30 revolutions/second), one revolution takes 33 ms --- below the integration threshold. For a 360-pixel angular resolution (1 pixel per degree), each pixel occupies 33 ms / 360 = 92 \textmu s --- requiring LED switching at approximately 11 kHz minimum.
+
+\subsubsection{APA102 for POV: The Essential Choice}
+
+WS2812B cannot be used for POV displays because its 800 kHz NZR protocol means a 150-LED strip requires 4.5 ms to update, and the 50 \textmu s reset period (low for $>50\mu s$) limits update rate further. APA102 at 8--24 MHz SPI has no such constraints: a 150-LED strip updates in approximately 75--225 \textmu s, supporting thousands of updates per revolution. The RP2040's dual-core design enables one core to run the SPI DMA LED output while the other processes the rotation position sensor and loads the next column of the image array.
+
+\subsubsection{RP2040 PIO Architecture}
+
+The RP2040 features two PIO blocks, each with four state machines and a 32-instruction program memory. PIO state machines execute at up to system clock speed (133 MHz), with deterministic timing. Each state machine has a 32-bit shift register, input/output FIFO buffers (8 entries each, 32-bit wide), and pin-mapping logic. For APA102 POV display: PIO SM0 runs the SPI clock/data at 24 MHz; PIO SM1 reads the reflectance sensor interrupt for rotation position; Core 0 updates the FIFO with column data; Core 1 handles image loading from flash.
+
+\subsection{Module 7 Reference: Oscilloscopes and Measurement}
+
+\subsubsection{Oscilloscope Fundamentals}
+
+An oscilloscope is a voltage-vs-time graphing instrument. Key specifications: bandwidth (highest frequency reliably measured; rule: bandwidth should be $5\times$ the highest signal frequency), sampling rate (digital oscilloscopes: Nyquist requires $\geq 2\times$ bandwidth; in practice $10\times$ is recommended for clean waveforms), vertical resolution (typically 8-bit, giving 256 discrete voltage levels per division), input impedance (standard 1 M$\Omega$, or 50$\Omega$ for RF), maximum input voltage.
+
+Probe compensation: every passive probe has an adjustable compensation trimmer. An uncompensated probe introduces frequency-dependent errors, visually evident as rounded or spiked square-wave corners. Compensation is performed against the scope's built-in 1 kHz square-wave reference output before every use.
+
+Trigger: the trigger system synchronizes the sweep to a specific voltage crossing, making repetitive signals appear stationary. Edge trigger (rising or falling, at a set voltage level) is the baseline mode. For complex LED protocols, advanced trigger modes (pulse width, serial pattern) allow capturing specific protocol events.
+
+\subsubsection{Measuring LED-Related Signals}
+
+PWM on an LED pin: set timebase to 1--10 ms/division, vertical to 2V/division. Measure period (T = 1/f), high time (duty cycle = high time / T). Verify PWM frequency is above 1 kHz for flicker-free video recording.
+
+WS2812B data line: set timebase to 1--2 \textmu s/division. A ``1'' bit appears as a longer high pulse (approximately 0.8 \textmu s); a ``0'' bit as a shorter high pulse (approximately 0.4 \textmu s). Protocol decoders available on intermediate oscilloscopes (Rigol DS1054Z, Siglent SDS1104X) can automatically decode WS2812B and SPI frames.
+
+Multimeter diode test mode: set multimeter to diode test mode (often marked with diode symbol). Connect red probe to LED anode, black to cathode. Display shows forward voltage in millivolts (e.g., 2700 for red LED = 2.7V). LED will glow faintly, confirming polarity.
+
+\subsubsection{Nyquist-Shannon Sampling and ADC Principles}
+
+The Nyquist-Shannon theorem: a signal of maximum frequency $f_{max}$ can be perfectly reconstructed from discrete samples taken at a rate $f_s \geq 2 f_{max}$. Sampling below $2 f_{max}$ produces aliasing --- false low-frequency components. An anti-aliasing filter (low-pass filter at $f_{max}$) must precede the ADC.
+
+ADC resolution: an n-bit ADC divides its input range into $2^n$ levels. A 12-bit ADC provides 4096 levels; at a 3.3V range this gives 0.8 mV resolution. The ESP32's ADC is 12-bit but has significant non-linearity; external ADCs (e.g., ADS1115, 16-bit I2C) provide better performance for precision measurements.
+
+\subsection{Module 8 Reference: PLC and Industrial Control}
+
+PLCs (Programmable Logic Controllers) use ladder logic (IEC 61131-3) to control industrial LED indicator systems, including status arrays, safety interlocks, and machine status lighting. Output modules on PLCs include relay outputs (up to 2A, 250VAC per point) and transistor outputs (up to 0.5A DC, faster switching). For LED strips on PLCs, transistor output modules with solid-state relay or MOSFET driver boards bridge the gap between PLC logic and high-current LED loads. Modern PLCs (Allen-Bradley, Siemens S7, WAGO) increasingly support Modbus TCP/EtherNet/IP, enabling integration with Raspberry Pi or ESP32 controllers for hybrid systems.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Domain} & \tableheader{Safety Consideration} & \tableheader{Classification} \\
+\midrule
+Mains AC wiring & LED dimmers connecting to mains require proper isolation, CE/UL certification, and should never be attempted without electrical qualification & BLOCK (exclude instructions) \\
+High-power LED thermal & High-power LEDs without heatsinking can reach 150C+, causing burns and fire & GATE (always warn) \\
+LED direct eye exposure & High-power LEDs and blue-rich LEDs can cause retinal damage; never stare at direct LED output & GATE (always warn) \\
+POV display mechanical & Rotating assemblies at 1800+ RPM are physically dangerous; always enclose before powering & GATE (always warn) \\
+3.3V to 5V logic & Applying 5V logic to 3.3V device pins causes immediate damage & ANNOTATE \\
+Capacitor polarity & Electrolytic capacitors installed backwards will rupture & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Professional Organizations and Manufacturer Documentation}
+
+\begin{itemize}[noitemsep]
+  \item Waveform Lighting. ``When and Why do LEDs Need Current Limiting Resistors?'' waveformlighting.com, 2024.
+  \item SparkFun Electronics. ``LED Current Limiting Resistors.'' learn.sparkfun.com.
+  \item SparkFun Electronics. ``How to Use an Oscilloscope.'' learn.sparkfun.com.
+  \item Adafruit Industries. NeoPixel library GitHub repository. github.com/adafruit/Adafruit\_NeoPixel.
+  \item Adafruit Industries. TCS34725 Color Sensor product page. adafruit.com/product/1334.
+  \item Adafruit Industries. ``Motorized POV LED Display.'' learn.adafruit.com.
+  \item Microchip Technology. MPLAB XC8 Compiler documentation. microchip.com.
+  \item Tektronix. ``Setting and Using an Oscilloscope.'' tek.com.
+  \item Philips Hue Developer Portal. CLIP API v1/v2 documentation. developers.meethue.com.
+  \item diyHue Project. Open-source Hue bridge emulator. diyhue.org.
+  \item OpenHue. OpenAPI specification for Philips Hue REST API. github.com/openhue/openhue-api.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Technical Education Sources}
+
+\begin{itemize}[noitemsep]
+  \item Raspberry Pi Official Magazine. ``POV Display.'' magazine.raspberrypi.com (HomeMadeGarbage project).
+  \item Raspberry Pi Official Magazine. ``Persistence of Vision Candle.'' magazine.raspberrypi.com.
+  \item Circuit Cellar. ``Building a Holographic Persistence-of-Vision Display.'' circuitcellar.com, July 2024.
+  \item Cornell University ECE4760. ``Persistent Vision Display.'' people.ece.cornell.edu/land/courses/ece4760.
+  \item Electronics-Tutorials. ``Light Emitting Diode or the LED Tutorial.'' electronics-tutorials.ws.
+  \item Electronics Notes. ``Digital Sampling Oscilloscope.'' electronics-notes.com.
+  \item PCBSync. ``NeoPixel WS2812B Arduino: The Complete Addressable LED Strip Guide.'' pcbsync.com, 2025.
+  \item Nuts \& Volts Magazine. ``Calculating Current Limiting Resistor Values for LED Circuits.'' nutsvolts.com.
+  \item Wikipedia. ``Oscilloscope.'' en.wikipedia.org (sampling rate, Nyquist discussion).
+\end{itemize}
+
+\subsubsection{Community and Professional Maker Platforms}
+
+\begin{itemize}[noitemsep]
+  \item Random Nerd Tutorials. WS2812B guide for Arduino. randomnerdtutorials.com.
+  \item LastMinuteEngineers. WS2812B Arduino tutorial. lastminuteengineers.com.
+  \item HowToMechatronics. WS2812B with Arduino and FastLED. howtomechatronics.com.
+  \item CircuitDigest. PIC PWM with MPLAB XC8. circuitdigest.com.
+  \item DeepBlueMbedded. PIC programming tutorials. deepbluembedded.com.
+  \item Electrosome. LED blinking and PWM with PIC MPLAB XC8. electrosome.com.
+  \item The Engineering Projects. TCS34725 color sensor tutorial. theengineeringprojects.com.
+\end{itemize}
+
+\newpage
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a deeply cross-linked HTML reference website covering all eight research modules of LED lighting and controller technology, from first-principles electronics through high-speed digital logic and test instrumentation. All pages must be interlinked bidirectionally, sourced professionally, and include code examples and ASCII circuit diagrams.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+Wave 0: FOUNDATION (Sequential, Haiku)
+  [F0-a] Shared HTML/CSS templates + style guide
+  [F0-b] Site index and cross-reference schema
+  [F0-c] Source index with verified URLs
+
+        |
+        v (Wave 0 complete)
+        
+Wave 1: PARALLEL RESEARCH TRACKS (Parallel, Sonnet+Opus)
+
+  Track A (Modules 1,2,3)          Track B (Modules 4,5,8)
+  ----------------------           ----------------------
+  [1A-1] LED Electronics           [1B-1] Smart Lighting / Hue
+  [1A-2] Microcontroller Prog.     [1B-2] DIY Controllers
+  [1A-3] Addressable LED Proto.    [1B-3] PLC & Industrial
+
+          Track C (Modules 6,7) -- runs alongside A and B
+          ----------------------------
+          [1C-1] POV & High-Speed LED
+          [1C-2] Oscilloscopes & Measurement
+
+        |
+        v (Wave 1 complete: 8 module drafts)
+
+Wave 2: SYNTHESIS (Sequential, Opus)
+  [W2-a] Cross-link injection (all pages linked to each other)
+  [W2-b] Glossary and master index page
+  [W2-c] Code example verification pass
+
+        |
+        v (Wave 2 complete)
+
+Wave 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  [W3-a] HTML validation and mobile responsiveness
+  [W3-b] Source link verification
+  [W3-c] Safety warning injection
+  [W3-d] Final site package (zip + file list)
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Produced in} \\
+\midrule
+1 & Site index page & Module map, topic table, responsive CSS & Wave 2 \\
+2 & Module 1: LED Electronics (4+ pages) & Forward voltage, resistor calc, drivers, power & Wave 1A \\
+3 & Module 2: Microcontroller Programming (6+ pages) & Arduino, PIC XC8, RPi, ESP32, RP2040 & Wave 1A \\
+4 & Module 3: Addressable LED Protocols (4+ pages) & WS2812B, APA102, libraries, power & Wave 1A \\
+5 & Module 4: Smart Lighting (4+ pages) & Hue API, diyHue, TCS34725, circadian & Wave 1B \\
+6 & Module 5: DIY Controllers (3+ pages) & MOSFET, WLED, dimmers, BOM & Wave 1B \\
+7 & Module 6: POV and High-Speed (3+ pages) & Physics, APA102, RP2040 PIO, code & Wave 1C \\
+8 & Module 7: Oscilloscopes (4+ pages) & Nyquist, trigger, probe, LED debugging & Wave 1C \\
+9 & Module 8: PLC (2+ pages) & Ladder logic, output modules, hybrid systems & Wave 1B \\
+10 & Glossary page & All technical terms defined and cross-linked & Wave 2 \\
+11 & Site package (zip) & All HTML, CSS, image files bundled & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+F0-a: Templates & None & Haiku & 4K \\
+F0-b: Index schema & Templates & Haiku & 3K \\
+F0-c: Source index & Research & Sonnet & 5K \\
+1A-1: LED Electronics & Templates, Sources & Sonnet & 15K \\
+1A-2: MCU Programming & Templates, Sources & Sonnet & 20K \\
+1A-3: LED Protocols & Templates, Sources & Sonnet & 15K \\
+1B-1: Smart Lighting & Templates, Sources & Opus & 18K \\
+1B-2: DIY Controllers & Templates, Sources & Sonnet & 10K \\
+1B-3: PLC & Templates, Sources & Sonnet & 8K \\
+1C-1: POV / High-Speed & Templates, Sources & Opus & 16K \\
+1C-2: Oscilloscopes & Templates, Sources & Sonnet & 14K \\
+W2-a: Cross-links & All module drafts & Opus & 12K \\
+W2-b: Glossary + Index & All modules & Sonnet & 10K \\
+W2-c: Code verification & Module drafts & Sonnet & 8K \\
+W3-a: HTML validation & W2 output & Sonnet & 5K \\
+W3-b: Link verification & W2 output & Sonnet & 4K \\
+W3-c: Safety warnings & All pages & Sonnet & 6K \\
+W3-d: Site package & All pages & Sonnet & 3K \\
+\midrule
+\textbf{TOTAL} & & & \textbf{\textasciitilde 176K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} & \tableheader{Budget \%} \\
+\midrule
+Opus 4.6 & Smart Lighting, POV, Cross-linking synthesis & Requires multi-domain integration, subtle API tradeoffs, cross-link architecture judgment & 30\% \\
+Sonnet 4.6 & All module content pages, verification, publication & High-quality content generation, code examples, structured HTML & 60\% \\
+Haiku 4.5 & Templates, scaffolding, schemas & Repetitive structure generation; speed and cost efficiency & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+0 & Foundation & F0-a, F0-b, F0-c & Sequential & Haiku/Sonnet \\
+1 & Parallel Tracks & 1A-1..3, 1B-1..3, 1C-1..2 & Parallel (3 tracks) & Sonnet/Opus \\
+2 & Synthesis & W2-a, W2-b, W2-c & Sequential & Opus/Sonnet \\
+3 & Publication & W3-a..d & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Prompt / Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+F0-a & Generate responsive HTML/CSS template with navigation bar, breadcrumb, cross-link sidebar, code block styling, safety callout box & base.html, style.css & Warm amber + electric blue color scheme \\
+F0-b & Generate site taxonomy: module slugs, page slugs, cross-reference matrix (which pages link to which) & site\_map.json & Must be complete before Wave 1 \\
+F0-c & Compile verified source URLs and DOI/title for all bibliography entries in Stage 2 & sources.json & Links verified by HEAD request \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+Tracks A, B, and C run in parallel. Each track produces module draft HTML files. All tracks share the Wave 0 templates and source index.
+
+\textbf{Track A: Electronics and Programming}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Key Content} \\
+\midrule
+1A-1 & LED Electronics module (4 pages) & LED I-V curve, forward voltage table by color, Ohm's Law calculator widget, series/parallel wiring, constant-current vs constant-voltage, strip power guide \\
+1A-2 & Microcontroller Programming module (6 pages) & Arduino PWM code, PIC CCP/XC8 code, RPi Python pigpio, ESP32, RP2040 PIO; platform comparison table \\
+1A-3 & Addressable LED Protocols module (4 pages) & WS2812B protocol timing diagram, APA102 SPI frames, library comparison, power injection guide, WLED overview \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Smart Lighting and Controllers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Key Content} \\
+\midrule
+1B-1 & Smart Lighting module (4 pages) & Hue CLIP API v1/v2, TCS34725 I2C wiring, CCT-to-mirek conversion, circadian adaptation algorithm, diyHue setup \\
+1B-2 & DIY Controllers module (3 pages) & MOSFET dimmer circuit, WLED BOM and setup guide, IR/RF remote overview \\
+1B-3 & PLC module (2 pages) & Ladder logic basics, output module types, hybrid PLC+ESP32 architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: High-Speed and Instruments}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Key Content} \\
+\midrule
+1C-1 & POV and High-Speed LED module (3 pages) & POV physics, APA102 vs WS2812B comparison, RP2040 PIO dual-core architecture, rotation detection, polar image mapping \\
+1C-2 & Oscilloscopes and Measurement module (4 pages) & Scope types, bandwidth/sampling rate, Nyquist, trigger, probe compensation, measuring PWM, measuring WS2812B, multimeter diode mode, DIY scope options \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Notes} \\
+\midrule
+W2-a & Inject cross-links across all pages per site\_map.json; verify every page links out to $\geq 3$ others; verify bidirectionality & Opus: judgment on which links are most useful to readers \\
+W2-b & Generate master index page and glossary: all technical terms defined, linked to first-use page & Sonnet: structured HTML generation \\
+W2-c & Verify all code examples compile or match official library docs; fix any errors found & Sonnet with code execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Notes} \\
+\midrule
+W3-a & HTML validation (W3C), mobile responsiveness check (viewport meta, flexible layout) & Block on W3C errors \\
+W3-b & HTTP HEAD check on all external source URLs; flag broken links & Annotate dead links with archival fallback \\
+W3-c & Audit all pages for safety topics; inject safety callout boxes where required per Stage 2 sensitivity table & Mandatory-pass gate \\
+W3-d & Bundle all HTML/CSS/images into site.zip; generate file manifest & Final deliverable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (templates, source index) are cached and prepended to every Wave 1 agent context.
+  \item Each Wave 1 track is a separate Claude Code session, allowing three simultaneous sessions.
+  \item Wave 2 synthesis agent receives all Wave 1 outputs in one context; Opus 4.6 long context window accommodates this.
+  \item Wave 3 verification tasks are parallelizable per module (8 parallel HTML validation passes).
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Components} & \tableheader{Tokens} & \tableheader{Model} \\
+\midrule
+Foundation (Wave 0) & 3 & 12K & Haiku + Sonnet \\
+Track A (Wave 1) & 3 & 50K & Sonnet \\
+Track B (Wave 1) & 3 & 36K & Opus + Sonnet \\
+Track C (Wave 1) & 2 & 30K & Opus + Sonnet \\
+Synthesis (Wave 2) & 3 & 30K & Opus + Sonnet \\
+Publication (Wave 3) & 4 & 18K & Sonnet \\
+\midrule
+\textbf{TOTAL} & \textbf{18} & \textbf{\textasciitilde 176K} & Mixed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+F0-a ──> F0-b ──> F0-c
+  |                 |
+  +────────────────>+
+                    |
+         +──────────+──────────+
+         |          |          |
+      Track A    Track B    Track C
+      [1A-1,2,3] [1B-1,2,3] [1C-1,2]
+         |          |          |
+         +──────────+──────────+
+                    |
+                 [W2-a] <── cross-link synthesis
+                    |
+                 [W2-b] <── glossary + index
+                    |
+                 [W2-c] <── code verification
+                    |
+               W3-a,b,c,d
+                    |
+             SITE PACKAGE (site.zip)
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{1.5cm}L{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Gate Action} \\
+\midrule
+Safety-critical & 4 & P0 & BLOCK on fail \\
+Cross-link integrity & 3 & P1 & BLOCK on fail \\
+Code example validity & 3 & P1 & GATE \\
+Content coverage & 6 & P2 & ANNOTATE \\
+HTML/CSS quality & 3 & P2 & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests (Mandatory-Pass / BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+S-01 & No mains AC wiring instructions & All pages with dimmer/TRIAC content include safety callout deferring to licensed electrician; no step-by-step mains wiring \\
+S-02 & POV mechanical safety warning present & POV module page includes rotating machinery hazard callout with specific RPM-danger note \\
+S-03 & High-power LED eye safety warning & Wherever high-power LEDs are discussed, IR/blue hazard callout is present \\
+S-04 & Capacitor polarity warnings in all power supply sections & All pages with electrolytic capacitors include polarity callout \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4.5cm}L{3cm}L{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & All 8 modules have $\geq$4 HTML pages with working links & T-CL-01, T-CL-02 & Pre-mission \\
+SC2 & Every page links to $\geq$3 others & T-CL-03 & Pre-mission \\
+SC3 & LED electronics pages include Ohm's Law worked examples & T-CO-01 & Pre-mission \\
+SC4 & MCU pages include code for Arduino, PIC XC8, RPi Python & T-CO-02 & Pre-mission \\
+SC5 & Protocol page explains WS2812B/APA102 differences for hardware debugging & T-CO-03 & Pre-mission \\
+SC6 & Smart lighting includes TCS34725 $\rightarrow$ Hue adaptation example & T-CO-04 & Pre-mission \\
+SC7 & POV page explains APA102 selection rationale with RP2040 PIO notes & T-CO-05 & Pre-mission \\
+SC8 & Oscilloscope page explains Nyquist, trigger, probe & T-CO-06 & Pre-mission \\
+SC9 & All code examples verified against library docs & T-CE-01, T-CE-02, T-CE-03 & Pre-mission \\
+SC10 & Master index page with module map exists & T-CL-01 & Pre-mission \\
+SC11 & All sources are professional orgs or peer-reviewed & T-SRC-01 & Pre-mission \\
+SC12 & Responsive CSS on mobile viewport & T-HTML-03 & Pre-mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest (Fleet Profile)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; BLOCK enforcement \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency validation \\
+SCOUT & Research Agent & Source gathering; URL verification; bibliography maintenance \\
+EXEC-A & Executor-A & Track A HTML production (LED Electronics, MCU Programming, Protocols) \\
+EXEC-B & Executor-B & Track B HTML production (Smart Lighting, DIY Controllers, PLC) \\
+EXEC-C & Executor-C & Track C HTML production (POV, Oscilloscopes) \\
+CRAFT-EE & Electronics Specialist & Component-level accuracy review (resistor calculations, PWM math, protocol timing) \\
+CRAFT-SW & Software Specialist & Code example review (Arduino, XC8, Python, PIO); library API accuracy \\
+VERIFY & Verification Agent & Source validation; HTML W3C check; link checking \\
+INTEG & Integration Agent & Cross-link injection; glossary population; bidirectionality audit \\
+CAPCOM & HITL Interface & Human approval at Wave 0$\rightarrow$1 and Wave 2$\rightarrow$3 boundaries \\
+BUDGET & Resource Manager & Token budget tracking per wave; session planning \\
+SURGEON & Health Monitor & Content quality degradation detection; hallucination flags \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting decisions (HTML schema, CSS framework, URL naming) \\
+SECURE & Safety Warden & Safety-critical test enforcement; BLOCK on S-01..S-04 failures \\
+LOG & Chronicle & Commit messages; wave summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total modules & 8 \\
+Total HTML pages (minimum) & 34 \\
+Activation profile & Fleet (17 roles) \\
+Parallel tracks (Wave 1) & 3 \\
+Total estimated tokens & $\sim$176,000 \\
+Context windows & 12--16 \\
+Sessions & 4--6 \\
+Safety gates & 4 BLOCK-level \\
+Human approval checkpoints & 2 (Wave 0$\rightarrow$1, Wave 2$\rightarrow$3) \\
+Primary model & Sonnet 4.6 (60\%) \\
+Synthesis model & Opus 4.6 (30\%) \\
+Scaffold model & Haiku 4.5 (10\%) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Closing}
+
+\begin{quotebox}
+\textit{``An LED is not a light source. It is a boundary condition --- a place where electrons, coached into higher energy states by a voltage differential, fall across a gap and surrender their borrowed energy as photons. The oscilloscope, the multimeter, the color sensor, the PIC's CCP module, the RP2040's PIO state machine: these are all different ways of standing at that boundary and asking: how bright? how fast? what color? when?''}
+
+\vspace{0.5em}
+\textit{--- GSD LED Mission, Vision Synthesis, March 2026}
+
+\vspace{0.5em}
+This mission package is ready for handoff to GSD Skill-Creator (Claude Code). Feed it the PDF and Stage 3 component specs. The photons are waiting.
+\end{quotebox}
+
+\end{document}
