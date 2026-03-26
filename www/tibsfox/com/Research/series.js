@@ -43,6 +43,7 @@
     { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
     { id: 'VAV', name: 'Voxel as Vessel', path: 'VAV/index.html' },
     { id: 'WAL', name: 'Weird Al', path: 'WAL/index.html' },
+    { id: 'WCN', name: 'Westercon', path: 'WCN/index.html' },
     { id: 'WYR', name: 'Weyerhaeuser', path: 'WYR/index.html' },
     { id: 'WSB', name: 'Small Business', path: 'WSB/index.html' }
   ];

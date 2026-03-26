@@ -1,0 +1,1001 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === HISTORY DOMAIN COLOR SCHEME ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy/Deep purple — sections
+\definecolor{secondary}{HTML}{F57F17}     % Gold — subsections
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown — subsubsections
+\definecolor{accent}{HTML}{6A1B9A}        % Highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Westercon}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Westercon -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% =====================================================================
+% TITLE PAGE
+% =====================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Westercon\\[0.3em]The West Coast Science Fantasy Conference}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{History, Governance, Cultural Legacy \& the Question of Retirement}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% =====================================================================
+% TABLE OF CONTENTS
+% =====================================================================
+\tableofcontents
+\newpage
+
+% =====================================================================
+% STAGE 1 — VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Westercon --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{Cold-start research mission on the West Coast Science Fantasy Conference}
+
+\subsection{Vision}
+
+In September 1948, a one-day gathering of 77 science fiction fans in Los Angeles planted a seed that would grow into one of the longest-running traditions in speculative fiction fandom. Walter J.\ ``Doc'' Daugherty of the Los Angeles Science Fantasy Society proposed a regional alternative for West Coast fans who could not afford the cross-country trek to Worldcon. What began as an act of accessibility --- bringing the community to the community --- became the West Coast Science Fantasy Conference: Westercon.
+
+For nearly eight decades, Westercon has been a living institution of democratic fan governance, a rotating celebration that has visited cities from San Diego to Portland to Salt Lake City, carrying with it an ethos of volunteerism, self-determination, and participatory culture. Its bylaws, maintained through open business meetings where any member may speak, represent one of the purest expressions of Robert's Rules applied to geek community. Its masquerades, regency dances, ice cream socials, and late-night room parties have incubated entire subcultures --- most notably, the first openly publicized furry fan gathering at Westercon~38 in Sacramento in 1985, a Prancing Skiltaire room party hosted by Mark Merlino and Rod O'Riley that would eventually give rise to the global furry fandom.
+
+Now, in 2025--2026, Westercon faces a question that no amount of parliamentary procedure can easily resolve: whether the institution itself has outlived its purpose. A motion to repeal the Westercon Bylaws entirely was given first passage at Westercon~77. If ratified at Westercon~78 in July 2026, Westercon~80 in 2028 would be the final convention under the current charter, and the ``Westercon'' service mark would revert fully to LASFS. This research mission seeks to understand the full arc --- origins, governance, cultural impact, and the forces driving its potential retirement --- so that the story can be told with the depth and fidelity it deserves.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Institutional memory at risk.} Westercon's 78-year history spans the evolution of Western fan culture from mimeographed fanzines to virtual conventions, yet no comprehensive research synthesis captures the full arc from 1948 founding to 2026 retirement vote.
+  \item \textbf{Governance model underdocumented.} The Westercon bylaws represent a rare example of democratic, volunteer-run, rotating-host convention governance. Its site selection process, relationship to LASFS, and business meeting traditions deserve scholarly documentation before they potentially dissolve.
+  \item \textbf{Cultural birthplace narratives incomplete.} Westercon's role as the incubator of furry fandom (1985 Prancing Skiltaire party), its cross-pollination with Worldcon, and its spawning of institutions like The Other Change of Hobbit bookstore are scattered across fan wikis and personal recollections rather than synthesized.
+  \item \textbf{Decline trajectory unanalyzed.} The forces driving the proposed retirement --- declining attendance, volunteer burnout, pandemic disruption, competition from local and media-focused conventions --- have not been systematically examined.
+  \item \textbf{Legacy preservation undefined.} If Westercon does retire, no framework exists for how its traditions, institutional knowledge, and cultural contributions should be preserved for future fan historians.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Westercon as a case study in participatory institutional life cycles --- birth, self-governance, cultural radiation, decline, and the deliberate choice of an orderly sunset.
+\end{quotebox}
+
+This research treats Westercon not merely as a convention series but as an \emph{institution} in the sociological sense: a self-governing community with rules, rituals, memory, and identity. The study maps its life cycle from founding through potential dissolution, examining what made it thrive, what it spawned, and what its retirement reveals about the changing landscape of fan community.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+WESTERCON INSTITUTIONAL ECOSYSTEM
+==================================
+
+  LASFS (est. 1934)
+    |
+    +-- Founded Westercon (1948)
+    |     |
+    |     +-- Service mark holder
+    |     +-- Failsafe governance (bylaws Art. 1)
+    |     +-- Archive of minutes & bylaws
+    |
+    +-- Loscon (annual, since 1975)
+    |     |
+    |     +-- Assumed Westercon duties (2021, 2023)
+    |
+    +-- Worldcon relationship
+          |
+          +-- Combined events (1954, 1958, etc.)
+          +-- Shared governance DNA (WSFS model)
+
+  WESTERCON CONVENTION CYCLE
+  ==========================
+  Bid -> Site Selection Vote -> Business Meeting
+    -> Convention (4 days, July 4 weekend)
+      -> Programming / Art Show / Masquerade
+      -> Room Parties (incl. furry parties 1985+)
+      -> Site Selection for N+2
+    -> Minutes to LASFS
+
+  CULTURAL RADIATION
+  ==================
+  1977: The Other Change of Hobbit (bookstore)
+  1985: First furry fan gathering (Prancing Skiltaire)
+  1986: First openly-named "furry party"
+  1989: ConFurence (first furry convention) <-- direct lineage
+  2020s: Global furry fandom (200+ conventions)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  +-------------------+    +--------------------+
+  | M1: History &     |    | M2: Governance &   |
+  |     Origins       |    |     Organization   |
+  | (1948-present)    |    | (Bylaws, LASFS,    |
+  |                   |    |  Site Selection)   |
+  +--------+----------+    +--------+-----------+
+           |                        |
+           v                        v
+  +-------------------+    +--------------------+
+  | M3: Cultural      |<-->| M4: Convention     |
+  |     Impact &      |    |     Culture &      |
+  |     Legacy        |    |     Traditions     |
+  | (furry fandom,    |    | (programming,      |
+  |  bookstores,      |    |  masquerade,       |
+  |  Worldcon)        |    |  parties)          |
+  +--------+----------+    +--------+-----------+
+           |                        |
+           +----------+-------------+
+                      |
+                      v
+           +--------------------+
+           | M5: Decline &      |
+           |     Proposed       |
+           |     Retirement     |
+           | (2020s crisis,     |
+           |  bylaws repeal)    |
+           +--------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: History \& Origins (1948--2000s)}
+
+Trace Westercon from its founding by ``Doc'' Daugherty through the LASFS, the first one-day event with 77 attendees, the transition to a weekend-long rotating July~4th format in the 1950s, and the combined Worldcon/Westercon events of the mid-century. Cover the growth decades, peak attendance periods, and the convention's role in building West Coast fan infrastructure.
+
+\subsubsection{M2: Governance \& Organization}
+
+Document the Westercon bylaws system, the LASFS service mark relationship, the site selection voting process (west of the 104th meridian or Hawaii), the business meeting tradition, the failsafe provisions when committees collapse, and the role of key governance figures like Kevin Standlee. Include the Australia annexation clause as an example of fannish whimsy encoded in parliamentary procedure.
+
+\subsubsection{M3: Cultural Impact \& Legacy}
+
+Analyze Westercon's role as a cultural incubator: the 1985 Prancing Skiltaire party and the birth of furry fandom, the founding of The Other Change of Hobbit bookstore (1977), cross-pollination with Worldcon, the Cartoon/Fantasy Organization connection, and Westercon's influence on the broader convention ecosystem. Document the Mark Merlino / Rod O'Riley lineage from Westercon room parties to ConFurence to the modern furry convention circuit.
+
+\subsubsection{M4: Convention Culture \& Traditions}
+
+Catalog the distinctive elements of Westercon: the four-day July~4th weekend format, the First Night Icebreaker / ``Meet the Guests'' event, the Mike Glyer ice cream social (borrowed from Loscon, 1978), the masquerade, the regency dance, room party culture, art shows, dealers rooms, and the ``portable bookstore'' tradition. Examine how these elements were adopted by descendant conventions.
+
+\subsubsection{M5: Decline \& Proposed Retirement (2020--2028)}
+
+Analyze the factors driving Westercon's potential end: COVID-19 cancellations and postponements (Westercon~73 through~75), declining volunteer pools, repeated years with no eligible bids, the necessity of combining with BayCon and Loscon to survive, the Kayla Allen / Linda Deneroff assessment that ``Westercon simply doesn't have enough interest anymore,'' and the mechanics of the bylaws repeal motion requiring ratification at Westercon~78 in July 2026.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  opus: synthesis, cultural-impact-analysis, through-line
+  sonnet: history-survey, governance-documentation,
+          convention-culture-catalog, decline-analysis
+  haiku: shared-schemas, source-index, templates
+ratio: "30/60/10"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Complete history from 1948 founding to 2028 projected final convention
+  \item Bylaws, governance structure, and site selection mechanics
+  \item Cultural impact including furry fandom origins and bookstore/convention spawning
+  \item Convention traditions and programming elements
+  \item Decline analysis and retirement vote mechanics
+  \item LASFS organizational role and service mark relationship
+  \item Attendance data where available from official sources
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Comprehensive profiles of every individual Westercon (78 events)
+  \item Complete guest-of-honor bibliography
+  \item Comparison with all regional SF conventions globally
+  \item Financial analysis of convention budgets (data unavailable)
+  \item Predictions about post-retirement LASFS decisions
+  \item Coverage of Worldcon governance except where it intersects Westercon
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Historical timeline covers all major periods: founding (1948), July~4th standardization (1950s), peak years, combined Worldcon events, and decline (2020s).
+  \item Governance section documents at least 8 distinct bylaw provisions with citations.
+  \item Furry fandom origin narrative traces the complete chain from 1985 Prancing Skiltaire party through ConFurence founding (1989) with named individuals and dates.
+  \item At least 5 distinct cultural contributions traced from Westercon to broader fandom.
+  \item Attendance data compiled for at least 10 documented Westercons across different decades.
+  \item Site selection process documented with geographic boundary (104th meridian), voting mechanics, and failsafe provisions.
+  \item Decline analysis identifies at least 4 distinct contributing factors with evidence.
+  \item Bylaws repeal motion mechanics documented including first passage (2025), ratification requirement (2026), and consequences (Westercon~80 as final).
+  \item LASFS role documented from founding (1934) through current service mark stewardship.
+  \item Convention culture section catalogs at least 6 distinct traditions with origins.
+  \item All sources traceable to official convention records, fan encyclopedias, or organizational publications.
+  \item Through-line connects Westercon's story to the GSD ecosystem philosophy of humane, participatory community building.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Steve Allen Research Pack & Parallel cultural-history research mission & Peer \\
+GSD Knowledge Map & Epistemological framework for source quality & Upstream \\
+gsd-skill-creator & Execution orchestrator for this mission & Downstream \\
+Furry Fandom History & Potential follow-on deep dive from M3 findings & Spawns \\
+Fan Governance Models & Potential comparative study (WSFS, LASFS, Westercon) & Spawns \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Westercon is a story about what happens when a community builds something for itself, governs it democratically, and then --- when the energy runs low --- chooses to retire it with dignity rather than let it degrade. This is the Amiga Principle in reverse: sometimes the most humane thing a system can do is recognize when its purpose has been fulfilled and make space for what comes next. The furry fandom that was born in a Westercon hotel room in 1985 now runs over 200 conventions worldwide. The participatory governance DNA of the Westercon business meeting lives on in every fan-run convention that uses Robert's Rules. The question Westercon faces in 2026 is not ``was it worth it?'' --- the answer to that is self-evident --- but ``can an institution end well?'' That question matters to anyone building community infrastructure, including the GSD ecosystem itself.
+
+\newpage
+
+% =====================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =====================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Westercon --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from official Westercon records, LASFS organizational history, fan encyclopedias (Fancyclopedia, WikiFur, Fanlore), convention archives, and community journalism (File~770, Dogpatch Press, Flayrah). Each module can be consumed independently by a research agent.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Los Angeles Science Fantasy Society (LASFS) --- service mark holder, founding organization
+  \item Westercon.org --- official bylaws, minutes, history, and site selection records
+  \item Fancyclopedia / Fanlore --- fan-maintained institutional encyclopedias
+  \item WikiFur --- furry fandom encyclopedia with Westercon cross-references
+  \item File~770 --- Hugo-winning fan news journal (Mike Glyer, editor)
+  \item The ConFurence Archive --- primary source for furry party origins
+\end{itemize}
+
+\subsection{M1 Reference: History \& Origins}
+
+\subsubsection{Founding and Early Years (1948--1950s)}
+
+The first Westercon was held in September 1948 as a one-day event with 77 attendees. It was proposed by Walter J.\ ``Doc'' Daugherty of LASFS for West Coast fans who could not afford to travel east for Worldcon. According to Fancyclopedia~3, E.\ Everett Evans introduced the motion to create Westercon and chaired the first event, with Daugherty chairing the second. The original full name was the ``West Coast Scienti-Fantasy Conference.''
+
+By the early 1950s, Westercon had settled into its enduring format: a weekend-long event held over the American Independence Day holiday, rotating among cities in the western United States and Canada. Several early Westercons were combined with Worldcon, including the 1954 event (John~W.\ Campbell as Worldcon GoH, Jack Williamson as Westercon GoH) and events in 1958 and beyond.
+
+\subsubsection{Growth Decades (1960s--1990s)}
+
+Through the 1960s and 1970s, Westercon grew alongside the broader expansion of science fiction fandom. The convention's rotating-host model meant that different cities and fan communities took turns building organizing capacity. A group of attendees who ran a portable bookstore at Westercon founded The Other Change of Hobbit in Berkeley, California in 1977 --- one of the most beloved science fiction bookstores in the United States.
+
+Peak attendance for Westercon varied significantly by location and whether the event was combined with other conventions. Westercon~65 in Seattle (2012) drew approximately 920 attending members. Westercon~72 ``Spikecon'' in Layton, Utah (2019) combined with NASFiC and drew around 808 attending members.
+
+\subsubsection{Key Attendance Data Points}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Number} & \tableheader{Location} & \tableheader{Attendance} \\
+\midrule
+1948 & Westercon 1 & Los Angeles, CA & 77 \\
+2003 & Westercon 56 & SeaTac, WA & --- \\
+2011 & Westercon 64 & San Jose, CA & 693/826 \\
+2012 & Westercon 65 & Seattle, WA & 865/950 \\
+2019 & Westercon 72 & Layton, UT & $\sim$750/835 \\
+2020 & Westercon 73 & Seattle, WA & Cancelled \\
+2022 & Westercon 74 & Tonopah, NV & Small \\
+2024 & Westercon 76 & Salt Lake City & --- \\
+2025 & Westercon 77 & Santa Clara, CA & (w/ BayCon) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M2 Reference: Governance \& Organization}
+
+\subsubsection{The LASFS Service Mark}
+
+The name ``Westercon'' is a registered service mark of the Los Angeles Science Fantasy Society, Inc.\ (LASFS). LASFS, founded October~27, 1934, is the oldest continuously operating science fiction club in the world. Its motto is ``De Profundis Ad Astra'' (From the Depths to the Stars), and its unofficial Rule~0 is ``Death will not release you.''
+
+LASFS retains specific responsibilities: archiving bylaws and business meeting minutes, providing a prototype site-selection ballot to each administering Westercon, and acting as the ultimate failsafe if a Westercon committee declares itself unable to fulfill its duties. In the event of committee failure, the LASFS Board of Directors determines alternate arrangements.
+
+\subsubsection{The Bylaws System}
+
+Westercon governance operates through bylaws that are amended at annual business meetings. Key provisions include:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Geographic eligibility:} Sites must be on the North American continent west of the 104th meridian west, or in the state of Hawaii. A whimsical 1998 amendment (proposed by Down Under Fan Fund delegate Terry Frost) would also permit Australian sites if either Australia or the United States annexes the other. An attempt to repeal this provision at the 2003 Business Meeting failed.
+  \item \textbf{Site selection timing:} Sites are chosen two years in advance by vote of the current Westercon's members.
+  \item \textbf{Bid requirements:} At least two people (Chair and Treasurer), an organizing instrument, a hotel letter of intent, and (for US organizations) evidence of non-profit status.
+  \item \textbf{Membership classes:} At minimum, supporting and attending memberships must be offered.
+  \item \textbf{Name badges:} Pre-registered member names must be in no less than 24-point bold type.
+  \item \textbf{Failsafe provision (Section 3.16):} If no bid wins site selection, the Business Meeting may select a site by three-fourths vote. If the Meeting cannot decide, LASFS selects.
+  \item \textbf{Amendment process:} Changes require first passage at one Business Meeting and ratification at the next year's Meeting.
+  \item \textbf{Enforcement:} Each Westercon is responsible for enforcing bylaw provisions. The Bylaws must be published in at least one progress report and in the program book.
+\end{itemize}
+
+\subsubsection{Kevin Standlee and Governance Stewardship}
+
+Kevin Standlee led the committee that redrafted the Westercon Bylaws in the 1990s and is effectively the primary author of the current bylaws. He chaired Westercon~74 in Tonopah (2022) and has been the most consistent voice in documenting and maintaining Westercon's institutional structure. His work on the westercon.org website provides the most authoritative public record of the convention's governance history.
+
+\subsection{M3 Reference: Cultural Impact \& Legacy}
+
+\subsubsection{Birthplace of Furry Fandom}
+
+The most significant cultural legacy of Westercon is its role as the birthplace of organized furry fandom. The timeline:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{July 1985 --- Westercon 38, Sacramento:} Mark Merlino (Sy Sable) and Rod O'Riley (Vinson Mink), both co-founders of the Cartoon/Fantasy Organization (C/FO), hosted a room party in Sheldon Linker and Toni Poper's room at the Red Lion Inn. The party was called ``The Prancing Skiltaire'' after Merlino's house, named for a mink-like alien species he created and referencing the Prancing Pony Inn from \emph{Lord of the Rings}. The party screened a fan-compiled version of \emph{Animalympics}. This was the first openly publicized funny-animal fan party at a science fiction convention.
+  \item \textbf{1986 --- Westercon 39, San Diego:} Merlino and O'Riley held the first party explicitly called a ``furry party.''
+  \item \textbf{1987 --- Westercon, Oakland:} The one-year anniversary party grew so large it was dubbed ``Das FurryParty.'' The 1987 BayCon Furry Party in San Jose attracted someone who proposed starting a furry fanzine.
+  \item \textbf{1989 --- ConFurence Zero:} The success of Westercon and BayCon furry parties led Merlino and O'Riley to found ConFurence, the world's first dedicated furry convention, in Costa Mesa, California. 65 attendees.
+  \item \textbf{2024:} The global furry fandom now supports over 200 conventions worldwide, with the largest (Midwest FurFest) drawing over 14,000 attendees. Mark Merlino passed away on February~20, 2024, after battling cancer.
+\end{itemize}
+
+\subsubsection{Other Cultural Contributions}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{The Other Change of Hobbit (1977):} Attendees who ran a portable bookstore at Westercon went on to found this beloved Berkeley SF bookstore.
+  \item \textbf{Convention governance template:} Westercon's rotating-host, bid-and-vote, business-meeting model influenced the governance of numerous regional conventions.
+  \item \textbf{Regency Dance tradition:} Popularized at Westercon, adopted by many fan conventions.
+  \item \textbf{C/FO and anime fandom:} The Cartoon/Fantasy Organization, whose members were central to early furry parties at Westercon, also held its first meeting at LASFS in 1977 and contributed to the founding of North American anime fandom.
+\end{itemize}
+
+\subsection{M4 Reference: Convention Culture \& Traditions}
+
+\subsubsection{Standard Programming Elements}
+
+Westercon traditionally includes: panel discussions on SF/fantasy literature and fandom; an art show; a dealers room (``huckster room''); autograph sessions; opening and closing ceremonies; and Guests of Honor chosen to showcase professionals who reside in the Westercon geographic region.
+
+\subsubsection{Distinctive Traditions}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Four-day July 4th weekend format:} Established in the 1950s, though the specific days vary year to year.
+  \item \textbf{First Night Icebreaker / ``Meet the Guests'':} Held on the first evening, an informal setting for members to meet professional attendees.
+  \item \textbf{Ice Cream Social:} Introduced by Mike Glyer in 1978, borrowed from Loscon. Not held at every convention but a recognized tradition.
+  \item \textbf{Masquerade:} Costume contest typically held on the second night or Saturday night.
+  \item \textbf{Regency Dance:} A staple for many years, alongside at least one rock and roll dance.
+  \item \textbf{Room Party Culture:} Evenings feature parties hosted by groups promoting other conventions, clubs, or just for socializing. This culture directly incubated the furry party tradition.
+  \item \textbf{Business Meeting:} Open to all members, usually held on the second day, following Robert's Rules. Site selection results announced on the third day.
+\end{itemize}
+
+\subsection{M5 Reference: Decline \& Proposed Retirement}
+
+\subsubsection{COVID-19 Impact}
+
+Westercon~73 (Seattle, originally July~2020) was postponed to 2021, then went virtual, then the committee disbanded entirely in April~2021. LASFS assumed official Westercon functions and combined them with Loscon~47 in November~2021. Westercon~74 (originally 2021) was also postponed. The disruption broke the convention's continuity and exposed the fragility of its all-volunteer organizing model.
+
+\subsubsection{Repeated Bid Failures}
+
+Multiple recent years saw no eligible bids file for future Westercons:
+\begin{itemize}[leftmargin=2em]
+  \item Westercon~75 (2023): Convention chair cancelled due to ``a cascade of circumstances''; Loscon assumed duties.
+  \item Westercon~76 (2024): No eligible bids filed by deadline. Utah bid received 55/58 preference votes but was ineligible due to missing non-profit documentation. Business Meeting selected them anyway under Section~3.16.
+  \item Westercon~77 (2025): No bids filed. Westercon~75 Business Meeting awarded it to Kevin Standlee and Lisa Hayes as placeholders; eventually transferred to BayCon~2025.
+  \item Westercon~78 and~79: Both awarded to BayCon in Santa Clara, effectively becoming a co-hosted event rather than an independent convention.
+\end{itemize}
+
+\subsubsection{The Bylaws Repeal Motion}
+
+Kayla Allen and Linda Deneroff, longtime Westercon administrators, concluded that ``Westercon simply doesn't have enough interest anymore, and rather than just have it fizzle out completely, we should try to organize an orderly shutdown by repealing the Bylaws and handing the convention's charter back to LASFS.''
+
+The motion was submitted to the Westercon~77 Business Meeting at BayCon~2025 in Santa Clara and received first passage on July~6, 2025. Under Westercon's amendment process, it must be ratified at Westercon~78 (BayCon~2026, July~3--6, 2026) to take effect. If ratified:
+\begin{itemize}[leftmargin=2em]
+  \item Westercons~79 and~80 would still be held (already selected).
+  \item Those final Westercons would not conduct site selection or hold a business meeting.
+  \item Westercon~80 (2028) would be the final convention under the current bylaws.
+  \item The disposition of the ``Westercon'' name would revert to LASFS.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} \\
+\midrule
+Living individuals & Kevin Standlee, Kayla Allen, Linda Deneroff, and other named figures are active community members; represent their positions accurately from public statements only. \\
+Deceased individuals & Mark Merlino (d. Feb 2024) and Rod O'Riley --- treat with respect; use established biographical facts from community-vetted sources. \\
+Furry fandom framing & Present the furry fandom origin story without sensationalism; emphasize creative and community aspects. \\
+Convention politics & The retirement vote is contentious for some fans. Present positions neutrally from official statements. \\
+LASFS organizational dynamics & Avoid speculation about internal LASFS politics beyond publicly documented board actions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Organizational \& Official Sources}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Westercon.org --- Official history, bylaws, business meeting minutes, site selection records. \url{https://www.westercon.org/}
+  \item LASFS (Los Angeles Science Fantasy Society) --- Organizational history. \url{https://lasfs.org/}
+  \item Westercon Bylaws (2014 revision, as amended through 2025). \url{http://www.westercon.org/wp-content/uploads/2015/06/WesterconBylaws-201407.htm}
+  \item BayCon 42 / Westercon 78 --- Current convention information. \url{https://baycon.org/}
+\end{enumerate}
+
+\subsubsection{Fan Encyclopedias}
+
+\begin{enumerate}[leftmargin=2em, resume]
+  \item Wikipedia --- ``Westercon,'' ``Los Angeles Science Fantasy Society,'' ``Science fiction convention.''
+  \item Fancyclopedia 3 --- ``LASFS,'' ``Worldcon.'' \url{https://fancyclopedia.org/}
+  \item WikiFur --- ``Westercon,'' ``Mark Merlino,'' ``The Prancing Skiltaire,'' ``1980s.'' \url{https://en.wikifur.com/}
+  \item Fanlore --- ``Los Angeles Science Fantasy Society.'' \url{https://fanlore.org/}
+\end{enumerate}
+
+\subsubsection{Community Journalism \& Archives}
+
+\begin{enumerate}[leftmargin=2em, resume]
+  \item File 770 (Mike Glyer, ed.) --- Westercon retirement coverage, site selection reporting. \url{https://file770.com/}
+  \item The ConFurence Archive --- Rod O'Riley, ``Looking Back at 10 Years of Furry Parties'' (1995). \url{https://confurence.com/}
+  \item Dogpatch Press --- ``Remembering Mark Merlino (1952--2024)'' and ``40th Anniversary of Animalympics.'' \url{https://dogpatch.press/}
+  \item Flayrah --- Fred Patten, ``An Illustrated Chronology of Furry Fandom, 1966--1996.'' \url{https://www.flayrah.com/}
+  \item Atlas Obscura --- ``Los Angeles Science Fantasy Society.'' \url{https://www.atlasobscura.com/}
+\end{enumerate}
+
+\newpage
+
+% =====================================================================
+% STAGE 3 — MISSION PACKAGE
+% =====================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document on Westercon (the West Coast Science Fantasy Conference) covering its 78-year institutional history, governance model, cultural contributions (including the birth of furry fandom), convention traditions, and the mechanics and context of the proposed 2026 retirement. The deliverable should serve as both a standalone historical reference and a preservation document for fan historians.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Schema] --> [Source Index]
+       |
+       v
+WAVE 1: Parallel Research Tracks
+  Track A: [M1: History] + [M2: Governance]
+  Track B: [M3: Cultural Impact] + [M4: Traditions]
+  Track C: [M5: Decline & Retirement]
+       |
+       v
+WAVE 2: Synthesis
+  [Cross-module integration] --> [Narrative arc]
+       |
+       v
+WAVE 3: Publication + Verification
+  [Document assembly] --> [Source verification]
+       --> [Test execution]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer:} Shared schemas for source citations, date formatting, attendance data, and cross-reference conventions.
+  \item \textbf{Research Layer:} Five parallel-capable modules producing standalone survey sections.
+  \item \textbf{Synthesis Layer:} Cross-module integration identifying connections (e.g., governance failures driving decline; room party culture enabling furry fandom emergence).
+  \item \textbf{Publication Layer:} Final document assembly, bibliography generation, and verification pass.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Historical Timeline & 1948--2028 arc, all major periods, attendance data & M1 \\
+2 & Governance Analysis & 8+ bylaw provisions documented with citations & M2 \\
+3 & Cultural Impact Study & Furry fandom lineage, 5+ contributions traced & M3 \\
+4 & Traditions Catalog & 6+ traditions with origins and evolution & M4 \\
+5 & Decline Analysis & 4+ factors with evidence, retirement vote mechanics & M5 \\
+6 & Synthesis Narrative & Cross-module connections, institutional life cycle arc & Synthesis \\
+7 & Source Bibliography & All claims attributed, professional sources only & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Shared Schemas & None & Haiku & 2,000 \\
+W0: Source Index & None & Haiku & 3,000 \\
+W1: M1 History Survey & Schemas & Sonnet & 8,000 \\
+W1: M2 Governance Doc & Schemas & Sonnet & 7,000 \\
+W1: M3 Cultural Impact & Schemas & Opus & 8,000 \\
+W1: M4 Traditions Catalog & Schemas & Sonnet & 6,000 \\
+W1: M5 Decline Analysis & Schemas & Sonnet & 7,000 \\
+W2: Cross-Module Synthesis & All W1 & Opus & 6,000 \\
+W3: Document Assembly & All W2 & Sonnet & 5,000 \\
+W3: Verification Pass & Assembly & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & M3 (Cultural Impact), W2 (Synthesis) & Judgment-heavy analysis; cultural sensitivity (furry fandom framing); cross-module narrative integration \\
+Sonnet & M1, M2, M4, M5, W3 (Assembly, Verification) & Structured survey compilation; document assembly; source verification \\
+Haiku & W0 (Schemas, Source Index) & Template scaffolding; low-complexity structured output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1 \\
+1 & Research & Parallel (3 tracks) & 5 & 8 \\
+2 & Synthesis & Sequential & 1 & 4 \\
+3 & Publication & Sequential & 2 & 5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Shared Schemas & Date formats, citation style, attendance data schema, cross-reference conventions & Haiku & 2,000 \\
+Source Index & Curated list of all primary sources with quality ratings and access notes & Haiku & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (History + Governance):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1: History Survey & Chronological survey from 1948 founding through 2028 projected end & Sonnet & 8,000 \\
+M2: Governance Doc & Bylaws analysis, LASFS relationship, site selection mechanics & Sonnet & 7,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Cultural Impact + Traditions):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M3: Cultural Impact & Furry fandom origins, bookstore founding, governance template influence & Opus & 8,000 \\
+M4: Traditions Catalog & Convention programming elements with origins and evolution & Sonnet & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Decline):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M5: Decline Analysis & COVID impact, bid failures, attendance decline, retirement vote & Sonnet & 7,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Cross-Module Synthesis & Integrate findings across all 5 modules; identify causal chains; build institutional life-cycle narrative & Opus & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Document Assembly & Combine all modules into final publication document with bibliography & Sonnet & 5,000 \\
+Verification Pass & Source validation, cross-module consistency, accuracy checking & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave~0 outputs (schemas, source index) are cached and loaded into every Wave~1 agent's context.
+  \item Track A and Track B in Wave~1 run in parallel; Track C can start after schemas are ready.
+  \item M3 (Opus, cultural impact) may reference M1 (history) outputs if Track A completes first; otherwise uses source index directly.
+  \item Wave~2 synthesis requires all Wave~1 outputs in context; plan for a large context window.
+  \item Wave~3 assembly can begin before verification completes; verification runs against the assembled draft.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Haiku} & \tableheader{Sonnet} & \tableheader{Opus} \\
+\midrule
+Wave 0: Foundation & 5,000 & 0 & 0 \\
+Wave 1: Research & 0 & 28,000 & 8,000 \\
+Wave 2: Synthesis & 0 & 0 & 6,000 \\
+Wave 3: Publication & 0 & 8,000 & 0 \\
+\midrule
+\textbf{Totals} & \textbf{5,000} & \textbf{36,000} & \textbf{14,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} 55,000 estimated output tokens across 18 context windows.
+
+\textbf{Ratio check:} Opus 25\% / Sonnet 65\% / Haiku 10\% --- within acceptable range of 30/60/10 target.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Schemas]--->[Source Index]
+    |              |
+    +------+-------+
+           |
+    +------+------+-------+
+    |      |      |       |
+   [M1]  [M2]  [M3]    [M4]   [M5]
+    |      |      |       |      |
+    +------+------+-------+------+
+                  |
+           [Synthesis]
+                  |
+           [Assembly]
+                  |
+         [Verification]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to official convention records, fan encyclopedias, organizational publications, or community journalism. Zero entertainment media as primary sources. \\
+SC-NUM & Numerical attribution & Every attendance figure, date, and vote count attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents Westercon's history and the retirement debate without advocating for or against the bylaws repeal. \\
+SC-LIV & Living persons & All quotes and positions attributed to living individuals (Standlee, Allen, Deneroff) sourced from their own public statements. \\
+SC-FUR & Furry fandom sensitivity & Furry fandom origin narrative presented without sensationalism; emphasizes creative community and historical significance. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Historical coverage & Timeline covers 1948 founding, 1950s standardization, growth decades, and 2020s decline. \\
+CF-02 & Attendance data & At least 10 data points across different decades compiled with sources. \\
+CF-03 & Bylaw provisions & At least 8 distinct bylaw provisions documented. \\
+CF-04 & Site selection & Geographic boundary, voting mechanics, and failsafe provisions all documented. \\
+CF-05 & LASFS role & Founding, service mark, archive duties, and failsafe role all covered. \\
+CF-06 & Furry chain & 1985 Prancing Skiltaire $\rightarrow$ 1986 first ``furry party'' $\rightarrow$ 1989 ConFurence chain complete. \\
+CF-07 & Named individuals & Daugherty, Evans, Merlino, O'Riley, Standlee, Allen, Deneroff all present with roles. \\
+CF-08 & Cultural contributions & At least 5 distinct contributions traced with evidence. \\
+CF-09 & Traditions catalog & At least 6 traditions documented with origins. \\
+CF-10 & Decline factors & At least 4 factors identified with supporting evidence. \\
+CF-11 & Retirement mechanics & First passage (2025), ratification requirement (2026), consequences (W79, W80, end) documented. \\
+CF-12 & COVID impact & Westercon 73--75 disruptions specifically documented. \\
+CF-13 & Bid failures & At least 3 years of bid failures documented with specific circumstances. \\
+CF-14 & BayCon relationship & Current BayCon co-hosting arrangement for W77--79 documented. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & History $\rightarrow$ Decline cascade & Document traces how historical volunteer model became unsustainable. \\
+IN-02 & Governance $\rightarrow$ Retirement cascade & Bylaw provisions (failsafe, amendment process) directly cited in retirement mechanics. \\
+IN-03 & Culture $\rightarrow$ History consistency & Dates and names consistent between M1 (history) and M3 (cultural impact). \\
+IN-04 & Traditions $\rightarrow$ Culture connection & Room party tradition (M4) connects to furry party emergence (M3). \\
+IN-05 & Cross-module source consistency & Same events use consistent data across all modules. \\
+IN-06 & Document self-containment & A reader unfamiliar with SF fandom can follow the entire narrative. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Data gaps acknowledged & Missing attendance data flagged rather than estimated. \\
+EC-02 & Disputed facts noted & Where sources disagree (e.g., Daugherty vs Evans as founder), both positions presented. \\
+EC-03 & Post-retirement uncertainty & Document acknowledges that LASFS's future decisions about the Westercon name are unknown. \\
+EC-04 & Temporal currency & Most recent information reflects 2025--2026 developments. \\
+EC-05 & Australia clause context & Whimsical bylaw provision presented with appropriate context (humor, not absurdity). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Historical timeline coverage & CF-01, CF-02 & Pending \\
+2. Governance documentation (8+ provisions) & CF-03, CF-04 & Pending \\
+3. Furry fandom origin chain & CF-06, CF-07 & Pending \\
+4. Cultural contributions (5+) & CF-08 & Pending \\
+5. Attendance data (10+ points) & CF-02 & Pending \\
+6. Site selection process & CF-04, CF-05 & Pending \\
+7. Decline factors (4+) & CF-10, CF-12, CF-13 & Pending \\
+8. Bylaws repeal mechanics & CF-11 & Pending \\
+9. LASFS role documented & CF-05 & Pending \\
+10. Traditions catalog (6+) & CF-09 & Pending \\
+11. Source traceability & SC-SRC, SC-NUM & Pending \\
+12. Through-line connection & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research \\
+EXEC-A & Executor (Track A) & M1 + M2 document production \\
+EXEC-B & Executor (Track B) & M3 + M4 document production \\
+CRAFT-HIST & History Specialist & Chronological analysis; attendance data compilation \\
+CRAFT-GOV & Governance Specialist & Bylaws interpretation; institutional structure analysis \\
+VERIFY & Verification & Source validation; accuracy checking; cross-module consistency \\
+INTEG & Integration Agent & Cross-module relationship validation; narrative arc \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 \\
+Parallel Tracks & 3 (Tracks A, B, C) \\
+Total Waves & 4 (W0--W3) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Estimated Output Tokens & 55,000 \\
+Model Split (Opus/Sonnet/Haiku) & 25\% / 65\% / 10\% \\
+Safety-Critical Tests & 5 (all BLOCK) \\
+Total Tests & 30 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``It began, like many interesting parts of science fiction fandom, at a convention where people were bored.''} --- Rod O'Riley, on the 1985 Westercon party that launched furry fandom.
+
+\vspace{0.5em}
+
+The spaces between the panels, after the masquerade, in the hotel rooms where someone says ``what if we tried something different'' --- that is where culture happens. Westercon's greatest contribution was never the programming on the schedule. It was the infrastructure of gathering that made the unscheduled possible. That is the Amiga Principle: build the platform, then get out of the way.
+\end{quotebox}
+
+\end{document}
