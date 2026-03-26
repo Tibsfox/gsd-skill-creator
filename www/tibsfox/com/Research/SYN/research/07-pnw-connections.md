@@ -24,7 +24,7 @@
 
 ## 1. Everett Manufacturing Corridor
 
-The research address of 1920 Merrill Creek Parkway, Everett, Washington 98203, places this study within the PNW industrial landscape. Everett sits 30 miles north of Seattle on the Snohomish River, anchored by Boeing's Commercial Airplanes division and the world's largest building by volume -- the 747/767/777/787 assembly plant covering 98.3 acres under a single roof [1].
+Synsor Corp's Snohomish County, Washington presence places this study within the PNW industrial landscape. Everett sits 30 miles north of Seattle on the Snohomish River, anchored by Boeing's Commercial Airplanes division and the world's largest building by volume -- the 747/767/777/787 assembly plant covering 98.3 acres under a single roof [1].
 
 The Snohomish County manufacturing corridor stretching from Everett through Mukilteo to Marysville represents one of the densest concentrations of aerospace manufacturing in North America. Boeing's presence anchors an ecosystem of hundreds of suppliers, subcontractors, and specialty manufacturers. This is exactly the kind of high-mix, high-precision manufacturing environment where AI-powered quality inspection has measurable economic value [1].
 
