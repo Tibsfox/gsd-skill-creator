@@ -1,0 +1,346 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=0.9in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Multi-Jurisdiction / Comparative ---
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{BF360C}
+\definecolor{tertiary}{HTML}{1B5E20}
+\definecolor{accent}{HTML}{E65100}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FFEBEE}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+% Jurisdiction accent colors
+\definecolor{oregon}{HTML}{2E7D32}
+\definecolor{alaska}{HTML}{0D47A1}
+\definecolor{california}{HTML}{F57F17}
+\definecolor{canada}{HTML}{D32F2F}
+\definecolor{mexico}{HTML}{00695C}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+\titlespacing*{\subsubsection}{0pt}{0.7em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newcommand{\jurisdictionheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.3em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Ring of Fire Trade Network}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Ring of Fire Trade Network -- Vision to Mission},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+\vspace{1cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Ring of Fire\\[0.3em]Trade Network\textsuperscript{TM}}}
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{secondary}{AI-Assisted Early Warning, Climate Resilience,\\Workforce Development \& Federated Governance}}
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{tertiary}{How to Remember the Past Without Hurting Each Other}}
+\vspace{0.3cm}
+{\sffamily\textcolor{subtlegray}{A Tribal-Led Cooperative for Pacific Rim Preparedness,\\Climate Adaptation \& Proof-of-Concept Human-AI Collaboration}}
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline --- Seven Modules, Fleet Profile}}
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 12, 2026 | Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation: Fleet | Est: 50 windows across 10 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Tibsfox / Miles Tiberius Foxglove}}
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Ring of Fire Trade Network --- Vision Guide}
+\metafield{Date:}{March 12, 2026}
+\metafield{Status:}{Conversation-Harvested / Research Complete}
+\metafield{Context:}{Tribal-led cooperative integrating disaster preparedness, climate resilience, workforce development, federated AI governance, and Pacific Rim trade}
+
+\subsection{Vision}
+
+The Ring of Fire is a 40,000-kilometer horseshoe of subduction zones encircling the Pacific Ocean. The Cascadia Subduction Zone --- a 1,000-kilometer fault from Northern California through British Columbia --- last fully ruptured on January 26, 1700 (magnitude 9.0). The recurrence interval is 200--600 years. We are at 326. The geology is already a network. The question is whether the humans living on those plates can build a cooperative structure that mirrors the one the earth already operates.
+
+The Ring of Fire Trade Network is a proposed cooperative of tribal nations and coastal communities. Its founding premise: survival infrastructure \emph{is} trade infrastructure. The network that can coordinate a tsunami response can coordinate anything else afterward. Trust, communication protocols, shared situational awareness --- the hard problem gets solved once, and everything downstream inherits it.
+
+The short-term mission is early warning and AI-assisted search and rescue. The medium-term is structural retrofitting and workforce development. The long-term is a proof of concept: demonstrating that AI can serve as connective tissue between communities without dissolving them --- that the map can honor the territories it represents --- and that remembering the past does not require repeating it.
+
+\subsection{The Economic Pathway}
+
+The cooperative is not a program imposed on communities. It is a \emph{ladder} that communities build for themselves, rung by rung. Each rung creates the conditions for the next to exist.
+
+\begin{asciibox}
+  THE PATHWAY (Bottom-Up Economic Architecture)
+
+  RUNG 7: GLOBAL CO-OP
+  |  Pacific Rim trade, individual investors, AI-assisted
+  |  Proof of concept for human-AI collaboration going forward
+  |
+  RUNG 6: REGIONAL CO-OP NETWORK
+  |  Ring of Fire Trade Network (cooperative structure)
+  |  Shared infrastructure, shared risk, shared revenue
+  |
+  RUNG 5: SMALL BUSINESS
+  |  Individual becomes economic actor
+  |  Formation, licensing, tax compliance
+  |
+  RUNG 4: HIGHER EDUCATION or TRADE
+  |  CPA, LTP/LTC, retrofit carpentry, sensor tech
+  |  Drone operator, AI system monitor, mesh deployer
+  |  Tribal college, community college, SBDC pipeline
+  |
+  RUNG 3: EDUCATION
+  |  Literacy, numeracy, civic knowledge
+  |
+  RUNG 2: INDIVIDUAL
+  |  The person, their needs, their agency
+  |
+  RUNG 1: UBI (FLOOR)
+     Managed by local tribal officials
+     Safety net that makes every rung accessible
+     Locally administered, not federally algorithmic
+     Interim structure until co-op formalizes governance
+
+  * Each rung creates conditions for the next
+  * UBI floor prevents anyone from falling through
+  * Co-op structure prevents capture at any level
+  * Tribal sovereignty preserved at every rung
+\end{asciibox}
+
+\textbf{The UBI principle:} A person pursuing education cannot learn if they are worried about feeding their family next week. Local administration means tribal officials who know their community decide how the floor functions. This is an interim structure: the cooperative's own governance process will formalize the mechanism as the network matures.
+
+\textbf{Why cooperative structure prevents capture:} At every level, ownership is distributed. No single investor, government, or corporation can own the network. The AI is federated, not centralized. The data stays local. The decisions stay human.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}, leftmargin=2.5em]
+  \item \textbf{Near-source tsunami warning gap.} DART buoys optimized for far-field tsunamis. Near-source Cascadia warning: only 15--30 minutes. Last-mile delivery to remote tribal communities unreliable.
+  \item \textbf{Climate-seismic compound risk.} Sea level rise, storm surge, wildfire-driven soil destabilization, permafrost degradation interact with seismic vulnerability. No unified resilience framework exists.
+  \item \textbf{Workforce skills gap.} Seismic retrofit, sensor installation, drone survey, AI operations, mesh deployment require skills that largely do not exist in the communities that need them most.
+  \item \textbf{AI governance vacuum.} AI systems for disaster response are typically developed centrally with no community accountability. Training data and decision authority are opaque.
+  \item \textbf{Colonial trust deficit.} Every Pacific Rim nation carries wounds. ``Technology transfer'' has historically meant ``dependency creation.'' The cooperative must address this explicitly.
+  \item \textbf{Funding fragmentation.} FEMA BRIC, NOAA, BIA, EDA, SBA 8(a), HUD CDBG --- individually accessible, rarely integrated.
+  \item \textbf{FEMA BRIC instability.} FEMA attempted to terminate BRIC (April 2025). Court-ordered restoration (December 2025). Enforcement ongoing as of March 2026.
+\end{enumerate}
+
+\subsection{Core Architecture}
+
+\begin{asciibox}
+  RING OF FIRE TRADE NETWORK --- FOUR-LAYER STACK
+
+  LAYER 4: COOPERATIVE TRADE & GOVERNANCE
+  | Co-op structure, tribal sovereignty, trade protocols
+  | Memory principle: remember without repeating
+  | UBI floor managed by local tribal officials
+  |----------------------------------------------------
+  LAYER 3: FEDERATED AI SKILL-CENTERS
+  | Community-owned AI training, open objectives
+  | Government oversight, transparent governance
+  | Local data sovereignty, federated model sharing
+  |----------------------------------------------------
+  LAYER 2: WORKFORCE & RETROFIT
+  | Seismic + climate resilience construction
+  | Sensor installation, drone survey, mesh deployment
+  | Tribal college pipeline, continuous retraining
+  |----------------------------------------------------
+  LAYER 1: EARLY WARNING & RAPID RESPONSE
+  | AI-enhanced detection (ShakeAlert + DART + local)
+  | HITL decision gate (tribal emergency managers)
+  | AI-guided SAR (drones, satellite, routing)
+  | Distributed communication mesh (LoRa/Meshtastic)
+
+  * Each layer creates jobs that sustain the layers below
+  * Each layer generates data that trains the AI above
+  * The cooperative owns the whole stack
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Early Warning \& Detection}
+ShakeAlert (1,500+ sensors + GPS/GNSS), DART 4th-gen buoys (10--15 min earlier detection), COSZO (NSF offshore observatory), near-source gap analysis, AI signal processing, last-mile delivery to tribal communities.
+
+\subsubsection{M2: AI-Guided Search \& Rescue}
+Post-event coordination under degraded infrastructure. Drone swarms, satellite imagery, probabilistic survivor location, debris field routing. Human operators guide; AI optimizes.
+
+\subsubsection{M3: Structural Retrofitting \& Climate Adaptation}
+Unified seismic + climate resilience. Vertical evacuation structures, base isolation, permafrost-adaptive foundations. AI prioritization: occupancy, vulnerability, inundation proximity, shelter role, cultural significance, community priority. Community override mechanism.
+
+\subsubsection{M4: Workforce Development \& Technology Transition}
+Tribal college pipeline (Northwest Indian College, Salish Kootenai). Community colleges (Everett CC). SBDC network. Skills: retrofit carpentry, sensor installation, drone ops, AI monitoring, mesh deployment. Continuous retraining as technology evolves. The co-op as standing training institution.
+
+\subsubsection{M5: Federated AI Skill-Centers}
+Community-owned training facilities. Local data, local oversight, published training objectives. Federated architecture: nodes share model architectures, not raw data. Central coordination for interoperability; distributed intelligence production. If you trained the model, you understand the model.
+
+\subsubsection{M6: Cooperative Structure \& Trade Framework}
+WA cooperative law (RCW 23.86 / 24.06). Tribal membership with ownership stakes. Revenue: FEMA BRIC (court-restored), NOAA, BIA, EDA, SBA 8(a), HUD CDBG. US-Asia-Pacific trade zone. Individual investors participate without capturing. Proof of concept for AI-assisted trade.
+
+\subsubsection{M7: Founding Principles \& Historical Context}
+The memory principle as operational design constraint. Training data includes historical context without encoding bias. Trade algorithms avoid replicating extraction patterns. Governance has memory (audit trail) without that memory becoming a weapon. Founding document names the history explicitly --- as context, not guilt.
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item Economic pathway documented from UBI floor through global co-op with dependency logic at each rung.
+  \item Early warning architecture covers detection, AI processing, HITL gate, and last-mile delivery.
+  \item Retrofit prioritization model specified with variables, objective, and community override.
+  \item Workforce pipeline mapped from tribal college entry through skill-center to co-op employment.
+  \item Federated AI architecture specified with data sovereignty and model sharing protocols.
+  \item Cooperative legal structure identified with WA statute references and tribal membership.
+  \item Funding strategy maps 6+ programs with BRIC contingency planning.
+  \item FEMA BRIC legal status documented with court timeline.
+  \item Founding principles articulate memory principle, sovereignty, and transparency.
+  \item Pilot scope defined: geography, communities, timeline, measurable outcomes.
+  \item All seismic/tsunami claims sourced to USGS, NOAA, PNSN, or peer-reviewed research.
+  \item Through-line connects to GSD ecosystem philosophy.
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+The earth is going to move. The Cascadia fault will rupture. The cooperative structure says: we face it together. The federated AI says: together without surrendering sovereignty. The skill-centers say: together in a way that builds local capacity. The memory principle says: together while remembering what happened the last time powerful nations decided they knew what was best for smaller ones. The economic pathway says: together with a floor beneath us that no one falls through, and a ladder above us that everyone can climb.
+
+The same equation, operating at every scale. From the seismic sensor that detects the wave, to the AI that models the inundation, to the human who decides whether to evacuate, to the worker who builds the vertical evacuation tower, to the cooperative that pays their wage, to the network that connects their community to every other community on the Ring of Fire. The maps between these scales are more fundamental than any individual scale. That is the space between.
+
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Research Reference --- Key Findings}
+
+\subsection{Cascadia Subduction Zone}
+The CSZ is a 620-mile convergent boundary producing M9.0+ earthquakes. The 1700 event generated a trans-Pacific tsunami reaching Japan. Recurrence: 200--600 years (43 events in 10,000 years). ShakeAlert provides seconds-to-minutes warning using 1,500+ seismic sensors plus GPS/GNSS. DART 4th-gen buoys detect tsunamis 10--15 minutes earlier. COSZO (NSF) adds offshore instrumentation to the OOI Regional Cabled Array. The University of Washington's 2019 feasibility study identified the near-source gap as the critical vulnerability.
+
+\textbf{Sources:} USGS ShakeAlert; NOAA PMEL; COSZO; PNSN; UW Feasibility Study (2019).
+
+\subsection{Funding Landscape --- BRIC Status}
+FEMA attempted BRIC termination April 2025. Court order December 11, 2025 prohibited termination. Enforcement order March 6, 2026 set deadlines for FEMA compliance. BRIC provides 75/25 federal/local cost share (90/10 for impoverished communities). Tribal governments may apply directly as applicants. The cooperative must maintain alternative funding pathways (NOAA, BIA, EDA, SBA) regardless of BRIC status.
+
+\textbf{Sources:} FEMA; Congressional Research Service (IN12609); WA Military Dept.
+
+\subsection{Source Bibliography}
+USGS ShakeAlert; NOAA PMEL (DART, Center for Tsunami Research); PNSN; COSZO (NSF); Pacific Tsunami Warning Center; FEMA (BRIC, HMGP); Congressional Research Service; WA Emergency Management Division; OR Dept.\ of Emergency Management; BIA Tribal Climate Resilience; EDA; SBA; HUD; UW School of Oceanography; Northwest Indian College; Economic Alliance Snohomish County.
+
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16+ roles) \\
+Research Modules & 7 + Economic Pathway \\
+Parallel Tracks & 3 (Tech / Civic / Culture) \\
+Execution Waves & 4 (W0--W3) \\
+Context Windows & $\sim$50 \\
+Sessions & $\sim$10 \\
+Estimated Tokens & $\sim$220,000 \\
+Model Split & Opus 40\% / Sonnet 50\% / Haiku 10\% \\
+Deliverables & 11 (includes co-op meeting one-pager) \\
+Tests & 48 (8 safety / 22 core / 10 integration / 8 edge) \\
+Economic Pathway & 7 rungs: UBI $\rightarrow$ Individual $\rightarrow$ Education $\rightarrow$ Trade $\rightarrow$ Small Business $\rightarrow$ Regional Co-op $\rightarrow$ Global Co-op \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{quotebox}
+\textit{``Our people have lived on this coastline for ten thousand years, and the earth is telling us it is going to move again. Here is how we prepare together --- with tools we understand, with governance we control, with a floor beneath us that no one falls through, and with a memory of the past that makes us wiser, not weaker.''}
+
+\vspace{0.5em}
+\hfill --- Ring of Fire Trade Network, Founding Vision
+\end{quotebox}
+
+\end{document}

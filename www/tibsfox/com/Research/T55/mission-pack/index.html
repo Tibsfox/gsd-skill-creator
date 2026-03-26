@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>555 Timer IC — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #0288D1;
+    --light-bg: #ECEFF1;
+    --card-bg: #CFD8DC;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #FAFAFA; color: var(--text); }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 60%, var(--secondary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.5rem; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin: 0.5rem 0; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-top: 0.3rem; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #81D4FA; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+    display: block; cursor: pointer;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .file-card .ext { font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    color: white; background: var(--secondary); display: inline-block;
+    padding: 2px 8px; border-radius: 3px; margin-bottom: 0.5rem; }
+  .file-card h3 { font-size: 1rem; margin: 0.3rem 0; }
+  .file-card p { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary);
+    font-size: 1.4rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.3rem; }
+  .contents { list-style: none; padding: 0; }
+  .contents li { padding: 0.4rem 0; font-size: 0.95rem; }
+  .contents .stage { font-weight: 700; color: var(--secondary); margin-top: 0.8rem; }
+  .instructions { background: var(--light-bg); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.5; }
+  code { background: #B0BEC5; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote {
+    background: #E3F2FD; border-left: 4px solid var(--secondary);
+    padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0;
+    font-family: 'Libre Baskerville', serif; font-style: italic;
+    font-size: 0.95rem; line-height: 1.6; color: var(--tertiary);
+  }
+  .quote .attr { font-style: normal; font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; }
+  .footer { text-align: center; color: var(--subtle); font-size: 0.8rem; padding: 2rem 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>The 555 Timer IC</h1>
+  <div class="subtitle">A Deep Research Study — Analog IC Design · Circuit Theory · Electronics Education</div>
+  <div class="pipeline">Vision → Research → Mission &nbsp;·&nbsp; Full Pipeline Execution</div>
+</div>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="555-timer-mission.pdf" download>
+      <span class="ext">PDF</span>
+      <h3>555 Timer IC — Mission Package</h3>
+      <p>30-page three-stage document: Vision, Research Reference, and Mission Package ready for GSD Orchestrator.</p>
+    </a>
+    <a class="file-card" href="555-timer-mission.tex" download>
+      <span class="ext">TEX</span>
+      <h3>555 Timer IC — LaTeX Source</h3>
+      <p>Complete XeLaTeX source file. Requires DejaVu fonts and standard TeX Live packages.</p>
+    </a>
+  </div>
+
+  <h2>Contents Breakdown</h2>
+  <ul class="contents">
+    <li class="stage">Stage 1 — Vision Document</li>
+    <li>Vision narrative and problem statement (5 problems identified)</li>
+    <li>Core concept: voltage-controlled bistable timing engine</li>
+    <li>Domain map and module architecture (5 research modules)</li>
+    <li>Chipset configuration: Squadron profile</li>
+    <li>Scope boundaries and 12 success criteria</li>
+    <li>Through-line: The 555 as Amiga Principle exemplar</li>
+    <li class="stage">Stage 2 — Research Reference</li>
+    <li>M1: History &amp; Design Origins — Camenzind biography, design timeline, naming</li>
+    <li>M2: Internal Architecture — 6 functional blocks, 8-pin configuration, signal flow</li>
+    <li>M3: Operating Modes &amp; Mathematics — Monostable/Astable/Bistable derivations</li>
+    <li>M4: Applications — PWM, LED dimming, timers, alarms, design best practices</li>
+    <li>M5: Modern Variants — NE555, TLC555, LMC555, ICM7555 comparison; corporate lineage</li>
+    <li>Safety considerations and complete bibliography</li>
+    <li class="stage">Stage 3 — Mission Package</li>
+    <li>Milestone specification with 7 deliverables</li>
+    <li>4-wave execution plan with 2 parallel tracks</li>
+    <li>Token budget: ~56,000 across 7–8 context windows</li>
+    <li>30-test plan (5 safety + 14 core + 6 integration + 5 edge)</li>
+    <li>12-role Squadron crew manifest</li>
+    <li>Verification matrix mapping all 12 success criteria</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Open the PDF to review the complete three-stage mission package.</li>
+      <li>To hand off to <strong>gsd-skill-creator</strong>: provide the PDF as context for a new milestone.</li>
+      <li>The GSD Orchestrator should read Stage 3 for wave execution plan, component specs, and crew manifest.</li>
+      <li>Each module spec (M1–M5) is self-contained — agents can execute from their spec alone.</li>
+      <li>Wave 0 (Foundation) must complete before Wave 1 begins; Tracks A and B execute in parallel.</li>
+    </ol>
+  </div>
+
+  <h2>Recompiling the LaTeX Source</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure <code>texlive-xetex</code> and <code>fonts-dejavu</code> are installed.</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode 555-timer-mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page count.</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "Nine out of ten of its applications were in areas and ways I had never contemplated."
+    <div class="attr">— Hans Camenzind, on the 555 timer (1997)</div>
+  </div>
+
+  <div class="footer">
+    GSD Ecosystem · March 25, 2026 · Squadron Profile · 5 Modules · 30 Tests
+  </div>
+</div>
+
+</body>
+</html>

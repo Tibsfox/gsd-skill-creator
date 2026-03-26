@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thermal &amp; Hydrogen Energy Systems — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1A3A4A;
+      --secondary: #B84B00;
+      --tertiary: #1B5E20;
+      --accent: #E65100;
+      --light: #E8F0F4;
+      --light2: #FFF3E0;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --bg: #FAFAFA;
+      --card-bg: #EEF3F6;
+      --text: #212121;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2c5364 60%, #1B5E20 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    header .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 0.6rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 span { color: #FFCC80; }
+
+    header .subtitle {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+    }
+
+    header .pipeline {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: #FFCC80;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .files-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .files-grid { grid-template-columns: 1fr; }
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border: 1px solid #C5D5DF;
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: box-shadow 0.18s, transform 0.15s;
+    }
+
+    .file-card:hover {
+      box-shadow: 0 4px 18px rgba(26,58,74,0.15);
+      transform: translateY(-2px);
+    }
+
+    .file-card .file-type {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .file-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .file-card p {
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin: 2rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--light);
+    }
+
+    .stage-block {
+      background: white;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .stage-block.s2 { border-left-color: var(--secondary); }
+    .stage-block.s3 { border-left-color: var(--tertiary); }
+
+    .stage-block .stage-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .stage-block.s1 .stage-label { color: var(--primary); }
+    .stage-block.s2 .stage-label { color: var(--secondary); }
+    .stage-block.s3 .stage-label { color: var(--tertiary); }
+
+    .stage-block h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .stage-block ul {
+      margin: 0.4rem 0 0 1.1rem;
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    .usage-steps {
+      counter-reset: step;
+      list-style: none;
+      margin: 0.8rem 0;
+    }
+
+    .usage-steps li {
+      counter-increment: step;
+      padding: 0.5rem 0 0.5rem 2.8rem;
+      position: relative;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .usage-steps li:last-child { border-bottom: none; }
+
+    .usage-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      background: var(--primary);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin: 0.8rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .modules-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .module-chip {
+      background: var(--light2);
+      border: 1px solid #FFCC80;
+      border-radius: 6px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .module-chip strong {
+      display: block;
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    code {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.83rem;
+      background: #F0F4F7;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.1em 0.35em;
+    }
+
+    pre {
+      background: #1A2830;
+      color: #A8D5A2;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+      line-height: 1.55;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    .meta-row span strong {
+      color: var(--primary);
+    }
+
+    .quote-block {
+      background: var(--light);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.3rem;
+      margin: 1.5rem 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: #3A5A6A;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--light);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">GSD Research Mission Package</div>
+  <h1>Thermal &amp; <span>Hydrogen</span> Energy Systems</h1>
+  <p class="subtitle">HVAC · Heat Pumps · Waste Heat Recovery · Catalytic Conversion · Fuel Cells · Solar Electrolysis · Geothermal · Hydroelectric (PNW)</p>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="meta-row">
+    <span><strong>Date:</strong> March 10, 2026</span>
+    <span><strong>Activation:</strong> Fleet (6 modules)</span>
+    <span><strong>Status:</strong> Ready for GSD Orchestrator</span>
+    <span><strong>Sessions:</strong> 4–5 estimated</span>
+    <span><strong>Context Windows:</strong> 12–16</span>
+  </div>
+
+  <h2>Downloads</h2>
+  <div class="files-grid">
+    <a class="file-card" href="mission.pdf" download>
+      <div class="file-type">PDF · 30 pages</div>
+      <h3>Mission Package</h3>
+      <p>Complete three-stage pipeline: Vision → Research Reference → Mission Package. Print-ready.</p>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="file-type">LaTeX Source · XeLaTeX</div>
+      <h3>mission.tex</h3>
+      <p>Full source for modification and recompilation. Edit and rebuild with three XeLaTeX passes.</p>
+    </a>
+  </div>
+
+  <h2>Research Modules</h2>
+  <div class="modules-grid">
+    <div class="module-chip"><strong>Module A</strong>HVAC &amp; Heat Pumps</div>
+    <div class="module-chip"><strong>Module B</strong>Waste Heat Recovery</div>
+    <div class="module-chip"><strong>Module C</strong>Catalytic Conversion</div>
+    <div class="module-chip"><strong>Module D</strong>Fuel Cell Technology</div>
+    <div class="module-chip"><strong>Module E</strong>Solar Electrolysis</div>
+    <div class="module-chip"><strong>Module F</strong>PNW Geo &amp; Hydro</div>
+  </div>
+
+  <h2>Document Contents</h2>
+
+  <div class="stage-block s1">
+    <div class="stage-label">Stage 1 — Vision Document</div>
+    <h4>Narrative vision, problem statement, core concept, module architecture</h4>
+    <ul>
+      <li>6-problem problem statement covering heat pump deployment, WHR adoption gaps, green hydrogen costs, PGM constraints, PNW geothermal underdevelopment, and hydroelectric climate risk</li>
+      <li>Domain map (ASCII): solar → electrolysis → fuel cell → HVAC loop; Columbia River hydro; Cascade geothermal; industrial WHR</li>
+      <li>12 testable success criteria with verification mapping</li>
+      <li>Through-line: the Gradient Interception Model</li>
+    </ul>
+  </div>
+
+  <div class="stage-block s2">
+    <div class="stage-label">Stage 2 — Research Reference</div>
+    <h4>Sourced findings, data tables, safety considerations, full bibliography</h4>
+    <ul>
+      <li>Heat pump COP data (IEA, EPA ENERGY STAR 2025), refrigerant transition timeline, global deployment figures</li>
+      <li>WHR technology comparison table (6 technology families by temperature class)</li>
+      <li>Catalytic converter PGM challenge: Pt/Pd/Rh supply constraints, 6 non-PGM candidate material classes</li>
+      <li>Fuel cell comparison: PEM, SOFC, AFC, PAFC, MCFC — efficiency, DOE durability targets, 2025 milestones</li>
+      <li>Green hydrogen LCOH trajectory 2018→2031; electrolyzer cost comparison in 2024 USD (AWE, PEMEL, SOEC, AEM)</li>
+      <li>PNW geothermal inventory (7 facilities/projects); WA/OR hydroelectric capacity data (EIA 2024–2025); PNNL climate projections</li>
+      <li>40+ cited sources: IEA, DOE/HFTO, NREL, PNNL, EIA, EPA, Nature Energy, ScienceDirect, Oxford Institute</li>
+    </ul>
+  </div>
+
+  <div class="stage-block s3">
+    <div class="stage-label">Stage 3 — Mission Package</div>
+    <h4>Fleet activation, wave plan, test gates, crew manifest, execution summary</h4>
+    <ul>
+      <li>Fleet profile (17 crew roles); 3 parallel tracks in Wave 1; 3 synthesis threads in Wave 2</li>
+      <li>5-wave execution plan with token budget (~88k output) and cache optimization strategy</li>
+      <li>7 safety-critical BLOCK tests; 24 core functionality tests; 6 integration tests</li>
+      <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+      <li>Cross-cutting threads: Materials (PGM/non-PGM), Economics (LCOH/LCOE/WHR payback), PNW Grid Integration</li>
+    </ul>
+  </div>
+
+  <h2>How to Hand Off to GSD Skill-Creator</h2>
+  <ol class="usage-steps">
+    <li>Open <code>mission.pdf</code> and review the Stage 1 Vision for alignment with your research intent. Amend the success criteria if needed before execution.</li>
+    <li>Start a Claude Code session with the GSD Skill-Creator. Provide the PDF and say: <em>"Execute this research mission. Use the Fleet activation profile. Begin with Wave 0."</em></li>
+    <li>Approve each wave at the CAPCOM human checkpoint before authorizing the next wave. Wave 2 (synthesis) is the most judgment-intensive — review Opus outputs carefully.</li>
+    <li>After Wave 3, the final assembled document replaces this mission package as the deliverable. The mission package is consumed; the research document is produced.</li>
+  </ol>
+
+  <h2>Recompile LaTeX</h2>
+  <pre>
+# Requires XeLaTeX (TeX Live 2023+) and DejaVu fonts
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+# Three passes required for TOC, cross-references, and LastPage counter</pre>
+
+  <div class="quote-block">
+    "Every technology in this study is, at its deepest level, a boundary condition problem. The heat pump does not generate warmth — it exploits a temperature gradient. The fuel cell does not burn hydrogen — it forces protons and electrons to travel different paths to recombination, harvesting the difference in potential. The geothermal well doesn't create heat — it taps a gradient between Earth's interior and its surface that has been building since accretion. The through-line: how does the universe's tendency toward equilibrium, when skillfully interrupted, become civilization?"
+    <div style="margin-top:0.5rem; font-style:normal; font-size:0.78rem; color:#555;">— Stage 1 Through-Line, Thermal &amp; Hydrogen Energy Systems Mission Package</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package · Thermal &amp; Hydrogen Energy Systems · March 10, 2026<br/>
+  Miles Tiberius Foxglove · tibsfox.com · Generated by Claude Sonnet 4.6
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1090 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Ecology / Living Systems ===
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE SETUP ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Clean Air, Water \& Food Systems}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdftitle={Clean Air, Water and Food Systems -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Clean Air, Water \& Food\\[0.3em]Living Systems Research}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Purification $\cdot$ Ecology $\cdot$ Pollinators $\cdot$ Forest Restoration}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Clean Air, Water \& Food Systems --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends on:}{None (root mission)}
+\metafield{Context:}{Cold-start mission --- full pipeline from vision through execution}
+
+\subsection{Vision}
+
+There is a question older than civilization: what does it mean to breathe, drink, and eat well? Not merely to survive the intake, but to be genuinely nourished by it --- to receive from the world around us something clean, alive, and sustaining. Somewhere in the long arc of industrialization, we began to answer that question with chemistry and convenience rather than ecology and care. We built systems optimized for yield, scale, and cost --- and along the way we introduced into air, water, and food the residue of our own cleverness.
+
+The crisis is not a single failure. It is a pattern of disconnections: from topsoil, from watersheds, from pollinator populations that evolved alongside flowering plants over 130 million years, from the forest canopies that regulate rainfall across entire continents. Each disconnection feeds the others. Pesticides that suppress pests also suppress bees. Agricultural runoff that boosts crop yields also contaminates drinking water. Deforestation that creates cattle pasture disrupts the moisture-recycling systems that make downstream agriculture possible in the first place. The problems do not stack --- they braid.
+
+This research mission examines the full braid: clean air technologies, water purification systems, food supply safety, pollinator ecology, wildlife habitat restoration, and tropical forest conservation. It approaches them not as separate policy domains but as expressions of a single underlying question about how living systems maintain purity, diversity, and resilience. The mission aims to compile the best current evidence, map the connections between domains, and produce a reference document capable of informing both technical implementation and strategic restoration.
+
+At its heart, this is a mission about feedback loops. Clean water enables healthy food crops. Healthy food crops support diverse wildlife. Diverse wildlife maintains forest structure. Forest structure regulates water cycles. The system is not broken in isolation --- it is strained across every link simultaneously. Understanding that simultaneously is the research challenge; responding to it is the civilization challenge.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+\item \textbf{Air quality has become a global mortality driver.} According to the State of Global Air 2024 report, air pollution causes approximately 8.1 million premature deaths annually worldwide, making it the fourth largest risk factor globally after smoking, high blood pressure, and dietary concerns. The global population spends roughly 90\% of its time indoors, yet indoor air quality receives far less regulatory attention than outdoor sources.
+
+\item \textbf{Water contamination is pervasive and poorly addressed.} Over 2 billion people lack reliable access to safe drinking water. Emerging contaminants --- particularly per- and polyfluoroalkyl substances (PFAS), termed ``forever chemicals'' --- have prompted the U.S. EPA to establish its first national drinking water standards in 2024, yet point-of-use filtration technologies are not yet certified to the new standards. Agricultural runoff, lead infrastructure, and industrial discharge compound the challenge.
+
+\item \textbf{Food supply safety faces compounding failures.} While more than 99\% of USDA-tested foods comply with EPA pesticide residue limits, the Environmental Working Group's 2025 analysis found that over 75\% of non-organic produce carries detectable residues. Globally, reported pesticide residue incidents rose 5.8\% in 2024, and persistent organic pollutants banned decades ago --- including DDT, banned in the US since 1972 --- continue to appear in fresh produce and salmon at measurable levels. PFAS in food packaging represents an additional emerging vector.
+
+\item \textbf{Pollinator collapse is accelerating.} Between June 2024 and March 2025, U.S. commercial beekeeping colonies suffered an average loss of 62\%, representing more than 1.7 million colonies --- one of the most severe pollinator die-offs in recorded history. A 2025 PNAS study found that more than one in five of nearly 1,600 assessed vertebrate and insect pollinator species faces elevated extinction risk. Since 75\% of globally common food crops depend on pollination services, this represents a compounding threat to food security.
+
+\item \textbf{Forests and natural habitats are being lost faster than they can recover.} In 2024, the world lost 8.1 million hectares of forest --- 63\% above the trajectory needed to halt deforestation by 2030. Tropical primary forest loss was driven in part by climate-induced fires, and the Amazon is approaching ecological tipping points that could trigger irreversible conversion to savanna-like states. Harmful subsidies outweigh conservation finance by more than 200:1, and forest regrowth in isolated patches cannot replicate old-growth ecological function.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Living Filter Network:} Clean air, water, and food are not endpoints --- they are emergent properties of intact living systems. Forests filter air and regulate water; soil microbiomes filter toxins and build food quality; pollinators are the keystone of wild plant and crop reproduction; wetlands and riparian zones are the kidneys of watersheds. Technological purification (HEPA filters, reverse osmosis membranes, carbon filtration) addresses the residue of ecological failure. Ecological restoration addresses the failure itself. A complete strategy requires both.
+
+\subsubsection{System Architecture --- Domain Map}
+
+\begin{asciibox}
+LIVING SYSTEMS RESEARCH ARCHITECTURE
+
+  ATMOSPHERE LAYER
+  +-----------------+     +-----------------+     +-----------------+
+  |  Indoor Air     |     |  Outdoor Air    |     |  Forest Air     |
+  |  Quality (IAQ)  |---->|  Pollution      |<----|  Regulation     |
+  |  HEPA / UV / AI |     |  PM2.5, VOCs    |     |  Transpiration  |
+  +-----------------+     +-----------------+     +-----------------+
+           |                       |                       |
+           v                       v                       v
+  HYDROSPHERE LAYER
+  +-----------------+     +-----------------+     +-----------------+
+  |  Drinking Water |     |  Watershed &    |     |  Agricultural   |
+  |  Purification   |<----|  Runoff Control |---->|  Water Safety   |
+  |  RO/GAC/UV/PFAS |     |  Wetlands       |     |  Irrigation     |
+  +-----------------+     +-----------------+     +-----------------+
+           |                       |                       |
+           v                       v                       v
+  BIOSPHERE LAYER
+  +-----------------+     +-----------------+     +-----------------+
+  |  Food Safety    |     |  Pollinator     |     |  Wildlife &     |
+  |  Pesticide Mgmt |<----|  Health / Bees  |---->|  Habitat Resto  |
+  |  Organic / IPM  |     |  Varroa / CCD   |     |  Native Plants  |
+  +-----------------+     +-----------------+     +-----------------+
+           |                       |                       |
+           v                       v                       v
+  FOREST / ECOSYSTEM LAYER
+  +-----------------------------------------------------------+
+  |  Tropical Forest Conservation  |  Temperate Regrowth     |
+  |  Amazon / Congo / SE Asia      |  Carbon Sequestration   |
+  |  Deforestation Drivers / EUDR  |  Biodiversity Recovery  |
+  +-----------------------------------------------------------+
+
+  KEY FLOWS:
+  --> Purification demand created by ecological deficit
+  <-- Ecological health reduces purification burden
+  ==  Mutual regulatory relationship
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE DECOMPOSITION
+
+Module 1: AIR        Air purification technologies, IAQ, outdoor pollution,
+                     HEPA/UV/photocatalytic/plasma innovations, NIST standards
+
+Module 2: WATER      Water filtration science (RO, GAC, UV, nanofiltration),
+                     PFAS removal, desalination, global access, EPA standards
+
+Module 3: FOOD       Food safety monitoring, pesticide residues, PFAS in food,
+                     organic farming, IPM, blockchain traceability, FSMA updates
+
+Module 4: POLLIN     Bee colony collapse (2025 crisis), Varroa mite resistance,
+                     pollinator ecology, native bee decline, habitat restoration
+
+Module 5: HABITAT    Wildlife corridors, native plant restoration, rewilding,
+                     urban habitat, correct food sources for fauna, keystone species
+
+Module 6: FOREST     Tropical forest ecology, Amazon tipping points, Congo Basin,
+                     forest restoration science, EUDR, finance mechanisms, indigenous stewardship
+
+  PARALLEL TRACKS:
+  Track A (Wave 1): Module 1 + Module 2 + Module 3
+  Track B (Wave 1): Module 4 + Module 5 + Module 6
+  Wave 2: Cross-module synthesis (air-water-food-pollinator-habitat-forest nexus)
+  Wave 3: Publication + verification + index
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Air Purification Systems}
+Surveys indoor and outdoor air purification technologies. Documents HEPA filtration (99.97\% particle removal at 0.3 microns), activated carbon, UV-C disinfection, photocatalytic oxidation, plasma-based systems, electrostatic precipitators, and emerging nanotechnology approaches. Examines NIST's new test methodology for by-product emissions from active air cleaners (2025). Covers the global air purification market (\$15.5B in 2022, projected \$28.5B by 2032) and AI-integrated smart purification systems.
+
+\subsubsection{Module 2: Water Purification Technologies}
+Documents the full spectrum of water purification: reverse osmosis, granular activated carbon, ceramic filtration, UV treatment, and emerging electrochemical oxidation techniques for PFAS destruction. Addresses the EPA's 2024 first national PFAS drinking water standards. Examines desalination advances (University of Michigan's 2025 boron-removal breakthrough). Covers contaminant classes: heavy metals, biological pathogens, VOCs, nitrates, PFAS, microplastics.
+
+\subsubsection{Module 3: Clean Food Supply}
+Examines the full farm-to-fork food safety system: USDA Pesticide Data Program findings (2024), EWG Shopper's Guide analysis, FAO/WHO JMPR assessment of 37 pesticides (2024), FDA Human Foods Program restructuring (2024), PFAS in food and packaging, organic farming and Integrated Pest Management (IPM), AI-enabled food traceability, and blockchain supply chain monitoring.
+
+\subsubsection{Module 4: Pollinator Health and Bee Conservation}
+Documents the 2025 U.S. colony collapse crisis (62\% loss, 1.7M colonies), Varroa mite resistance to amitraz, Deformed Wing Virus and Acute Bee Paralysis Virus transmission chains, Frontiers 2024 review of bee conservation across anthropogenic habitats, PNAS 2025 extinction risk assessment of 1,600 pollinator species (1-in-5 at risk), habitat restoration strategies (wildflower corridors, native planting, urban rewilding), and the pollination dependency of 75\% of global food crops.
+
+\subsubsection{Module 5: Wildlife Habitat and Natural Food Sources}
+Covers native plant restoration as the keystone of wildlife food web reconstruction, wildlife corridor science, rewilding methodology, correct food source provision for keystone species, urban habitat creation, roadside and powerline verge management as pollinator infrastructure, and the ecological roles of bats, birds, beetles, moths, and other non-bee pollinators. Includes animal nutritional ecology --- what constitutes appropriate natural diet by species class.
+
+\subsubsection{Module 6: Forest Conservation and Rainforest Ecology}
+Examines the 2024 data: 8.1 million hectares of forest lost (63\% above 2030 trajectory), 18 football fields of tropical forest per minute. Documents Amazon tipping point science (potential savanna conversion by 2050 if trends persist), Congo Basin pressures, Southeast Asian oil palm dynamics. Covers forest regrowth science (isolated patch vs. landscape-embedded recovery), EUDR (EU Deforestation Regulation) implementation, community forestry models (Maya Biosphere Reserve's near-zero deforestation rate), finance mechanisms, and AI-assisted remote sensing monitoring.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: "clean-air-water-food-living-systems"
+  profile: fleet
+  model_split:
+    opus_pct: 30        # Synthesis, forest tipping points, cross-domain integration
+    sonnet_pct: 60      # Module surveys, document assembly, source compilation
+    haiku_pct: 10       # Shared schemas, templates, source index scaffolding
+  modules: 6
+  parallel_tracks: 2
+  waves: 4
+  context_windows_est: "8-12"
+  sessions_est: "4-6"
+  cache_strategy: "prefix_caching_on_shared_source_index"
+  sensitivity:
+    - "PFAS regulatory data: cite EPA/WHO only, no industry sources"
+    - "Colony collapse 2025: peer review pending on USDA paper, flag accordingly"
+    - "Amazon tipping points: contested science, present range of projections"
+    - "Indigenous land rights: name specific nations in forest module"
+    - "Endangered species: no GPS coordinates for nesting/colony sites"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Air purification technology survey: HEPA, UV, carbon, plasma, photocatalytic, AI-integrated systems
+  \item Indoor and outdoor air quality science and health impacts
+  \item Water filtration technology survey: RO, GAC, UV, ceramic, nanofiltration, electrochemical
+  \item PFAS in water and food --- detection, regulation, removal
+  \item Pesticide residue monitoring, MRL frameworks, integrated pest management
+  \item Organic and regenerative agriculture practices and outcomes
+  \item Honey bee colony collapse disorder and 2025 crisis documentation
+  \item Native bee and pollinator ecology across all major taxa
+  \item Pollinator habitat restoration methodology across anthropogenic landscapes
+  \item Wildlife habitat restoration and correct food source provision by species class
+  \item Tropical forest ecology: Amazon, Congo Basin, Southeast Asian rainforests
+  \item Forest restoration science: active vs. passive regeneration, landscape connectivity
+  \item Deforestation drivers, finance mechanisms, community forestry models
+  \item Cross-domain nexus mapping (how each system affects the others)
+  \item Animal feed and nutrition safety (parallel to human food safety)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Industrial wastewater treatment (separate mission)
+  \item Specific product endorsements or brand comparisons
+  \item Climate mitigation policy (addressed only as it intersects forest conservation)
+  \item Detailed GMO crop science (tangentially referenced, not surveyed)
+  \item Marine and ocean ecology (separate mission)
+  \item Veterinary pharmaceutical residues in food (flagged for follow-on)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+  \item Air purification technology survey documents at least 8 distinct purification mechanisms with efficacy data and source citations.
+  \item Water purification module covers at minimum 6 filtration technology types and addresses PFAS removal specifically with EPA-sourced regulatory data.
+  \item Food safety module documents current pesticide MRL frameworks from at least 3 major regulatory bodies (EPA, EU, FAO/WHO) with 2024--2025 data.
+  \item Colony collapse crisis is documented with USDA quantitative data and peer-reviewed mechanistic analysis (Varroa/amitraz resistance chain).
+  \item Pollinator extinction risk is quantified using PNAS 2025 or equivalent peer-reviewed assessment.
+  \item Habitat restoration module provides practical methodology for at least 5 distinct landscape types (agricultural, urban, roadside, forest edge, industrial).
+  \item Wildlife nutrition module identifies correct food sources for at minimum 4 keystone wildlife categories with sourced dietary ecology data.
+  \item Forest loss is quantified with 2024 data and 2030 trajectory gap analysis from published assessment bodies (Forest Declaration Assessment, Global Forest Watch).
+  \item Amazon tipping point science is represented with range of scientific projections and attributed to peer-reviewed sources.
+  \item Community forestry and indigenous stewardship models are documented with specific named examples and outcome data.
+  \item Cross-domain nexus section explicitly traces at least 4 causal pathways linking modules (e.g., pesticides $\rightarrow$ pollinators $\rightarrow$ food yield; deforestation $\rightarrow$ rainfall $\rightarrow$ agricultural water).
+  \item Source bibliography contains at minimum 30 entries, all traceable to government agencies, peer-reviewed journals, or established professional organizations.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Ocean Ecology Mission & Downstream: marine food chain intersects seafood safety & Planned \\
+Veterinary Pharma Residues & Downstream: animal medicine in food supply & Out of scope v1 \\
+Climate Finance Mission & Upstream: funding mechanisms for forest conservation & Separate \\
+Regenerative Agriculture & Parallel: farming practices overlap with food/pollinator & Future \\
+Urban Greening Mission & Parallel: urban habitat and air quality overlaps & Future \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The universe writes the same equation at every scale. A cell membrane filters what enters and exits the cell --- it is selective, semi-permeable, alive. A forest canopy filters light, moisture, and wind for the ecosystem below. A wetland filters the water running from farm to river. HEPA filters and reverse osmosis membranes are our technological approximation of what living systems do continuously, effortlessly, and regeneratively. The difference is that living filters are self-repairing, self-replicating, and self-improving over evolutionary time. Our mechanical ones degrade, clog, and require replacement.
+
+This mission is ultimately about restoring the living filters --- the forests, soils, waterways, and pollinator networks that are the planet's original, and superior, purification infrastructure. Technological purification systems address the symptom. Ecological restoration addresses the condition. The research must hold both truths in view simultaneously: the immediate human need for clean air, water, and food (solved in part by technology), and the long-term imperative to rebuild the systems whose degradation created that need in the first place.
+
+In the GSD ecosystem, this is the Amiga Principle applied to planetary biology: do not brute-force what the living world already does elegantly. Understand the architecture. Restore the conditions. Then step back and let the system breathe.
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Clean Air, Water \& Food Systems --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles current findings across six research modules. All claims are attributed to primary sources. The document is organized by module for independent module production, then synthesized in a cross-domain nexus section. Source quality rule: all citations are from government agencies, peer-reviewed journals, or established professional organizations only.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item U.S. Environmental Protection Agency (EPA) --- air and water standards, PFAS regulation
+  \item U.S. Food and Drug Administration (FDA) --- food safety, FSMA, pesticide tolerances
+  \item U.S. Department of Agriculture (USDA) --- pesticide data program, bee colony surveys, agricultural research
+  \item National Institute of Standards and Technology (NIST) --- air cleaner test methodology
+  \item World Health Organization (WHO) / Food and Agriculture Organization (FAO) --- international food and water standards
+  \item Proceedings of the National Academy of Sciences (PNAS) --- peer-reviewed pollinator extinction assessment
+  \item Environmental Working Group (EWG) --- pesticide residue consumer analysis
+  \item Forest Declaration Assessment --- annual deforestation tracking
+  \item Rainforest Alliance --- forest conservation and regenerative agriculture
+  \item World Wildlife Fund (WWF) --- deforestation and habitat protection
+  \item Frontiers in Ecology and Evolution --- bee conservation and habitat research
+  \item American Lung Association --- air quality and health impact reporting
+\end{itemize}
+
+\subsection{Module 1 Reference: Air Purification Systems}
+
+\subsubsection{Health Context and Scale}
+
+Air pollution represents one of humanity's most significant health burdens. The State of Global Air 2024 confirmed 8.1 million premature deaths annually attributable to air pollution. The American Lung Association's State of the Air 2025 report found that nearly half of the U.S. population lives under unhealthy pollution levels. A 2024 Springer Nature review noted that ``sick building syndrome'' and documented illness clusters in poorly ventilated spaces underscore the significance of indoor air quality, particularly given that the global population spends an average of 90\% of time indoors.
+
+\subsubsection{Core Purification Technologies}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Technology} & \tableheader{Mechanism and Efficacy} & \tableheader{Limitations} \\
+\midrule
+HEPA Filtration & Removes 99.97\% of particles $\geq$0.3 microns; effective for PM, allergens, mold, viruses & Does not remove chemical gases or VOCs \\
+Activated Carbon & Adsorbs VOCs, odors, chlorine, chemical gases; effectiveness scales with carbon volume & Limited lifespan; ineffective for particles \\
+UV-C Disinfection & Destroys biological contaminants; recognized by WHO and major health agencies & Can generate ozone as a by-product \\
+Photocatalytic Oxidation & Light-activated nanoparticles break down VOCs and biological contaminants & By-products under investigation \\
+Electrostatic Precipitators & Electrostatic forces capture fine particulate including sub-micron particles & May generate ozone; requires regular cleaning \\
+Plasma-based Systems & Ionization neutralizes pathogens, VOCs, bacteria, mold spores & Ozone generation must be controlled \\
+Plant Biofilters & NASA 1989 study confirmed certain plants remove VOCs, formaldehyde, benzene & Insufficient as sole method; complementary \\
+Nanofiber Filters & High surface-area-to-volume ratio; superior fine particle capture & Emerging technology; cost constraints \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{2024--2025 Key Developments}
+
+A 2024 meta-analysis of 148 studies found that HEPA filters reduced small particle numbers by approximately 50\% on average --- considerably less than manufacturer claims. A 2024 HEPA study across 29 homes found primary room particulate matter reduction of 78.8\% and secondary room reductions of 57.9\% (WellnessPulse, 2025). NIST researchers in September 2025 published a new standard test methodology for detecting harmful by-products --- ozone, formaldehyde, and ultrafine particles --- from active air cleaners. The global air filtration market was valued at \$15.54 billion in 2022 and is projected to reach \$28.45 billion by 2032 (Springer Nature, 2025).
+
+AI integration is transforming purification systems: smart purifiers with IoT sensors now adjust filtration settings in real time based on detected particulate, VOC, and humidity levels. A 2025 Springer Nature study called for standardized energy efficiency frameworks for AI-driven filtration.
+
+\subsection{Module 2 Reference: Water Purification Technologies}
+
+\subsubsection{Global Access and Contamination Context}
+
+Over 2 billion people globally lack reliable access to safe drinking water (Water Purification Filters Market, 2024). The global water purification filters market was valued at \$44.22 billion in 2024, projected to reach \$62.53 billion by 2034 at a 5.2\% CAGR. 65\% of the world's population lacks reliable water filtration, with Asia-Pacific the fastest-growing demand region (11.3\% CAGR through 2030).
+
+\subsubsection{Core Filtration Technologies}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Technology} & \tableheader{Contaminants Addressed} & \tableheader{Key Limitation} \\
+\midrule
+Reverse Osmosis (RO) & Arsenic, hexavalent chromium, nitrates, perchlorate, PFAS, heavy metals & 3--5 gallons waste per gallon produced; removes beneficial minerals \\
+Granular Activated Carbon & Chlorine, THMs, VOCs, taste/odor compounds & Limited efficacy on nitrates, PFAS \\
+Carbon Block Filters & Broader chemical range than GAC; lead, DBPs & Higher cost; more frequent replacement \\
+UV Treatment & Bacteria, viruses, biological pathogens & Does not remove chemical contaminants \\
+Nanofiltration / Ultrafiltration & Bacteria, suspended solids, larger molecules & Less effective on dissolved inorganic compounds \\
+Ion Exchange Resins & Nitrates, heavy metals, PFAS (combined with GAC) & Regeneration waste stream \\
+Electrochemical Oxidation & PFAS destruction (emerging 2024) & Energy intensive; scaling required \\
+Solar SODIS & Pathogen inactivation via UV and heat; low-resource appropriate & Batch only; no chemical removal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{PFAS: The Emerging Priority}
+
+The EPA finalized its first national PFAS drinking water standards in April 2024 under the Safe Drinking Water Act. As of that date, certification standards for PFAS filters had not yet been updated to match EPA's new requirements. The EPA's Tap Water Database (EWG) notes that GAC, ion exchange, and reverse osmosis systems can significantly reduce PFAS. Traditional RO units discard approximately 3--5 gallons of wastewater per purified gallon. Newer 1:1 efficiency systems (such as tankless RO with 800 GPD filtration) are reducing this waste ratio.
+
+University of Michigan researchers published in Nature Water (January 2025) a new electrode-based approach to boron removal from seawater, addressing a key weakness in desalination. Boron in seawater is approximately twice WHO's most lenient safe drinking water limit, and 5--12 times higher than agricultural plant tolerance. The research was funded by the National Alliance for Water Innovation and U.S. Department of Energy.
+
+\subsection{Module 3 Reference: Clean Food Supply}
+
+\subsubsection{Regulatory Framework and Monitoring}
+
+The USDA Pesticide Data Program (PDP) Annual Summary for 2024 reported that more than 99\% of tested foods complied with EPA maximum residue limits. However, the EWG's 2025 Shopper's Guide analysis (based on 53,692 USDA samples of 47 produce items) found that over 75\% of non-organic fruits and vegetables carried detectable pesticide residues, with 265 pesticides and breakdown products detected. The Dirty Dozen produce items showed more than 95\% of samples with detectable residues.
+
+Notably, DDT --- banned in the U.S. since 1972 --- was still detected at low levels in leaf lettuce (16.2\% of samples), potatoes (2.3\%), and salmon (1.7\%). Chlordane, also banned since the 1970s--1980s, appeared in 2.3\% of canned pumpkin samples.
+
+\subsubsection{2024--2025 Regulatory Developments}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Development} & \tableheader{Detail} \\
+\midrule
+EPA PFAS drinking water standards & First national standards finalized April 2024; \$4.7B retrofit market created \\
+FDA Human Foods Program & Launched October 2024, consolidating food safety and nutrition oversight \\
+FSMA Produce Safety Rule update & New pre-harvest agricultural water requirements; large farm compliance April 7, 2025 \\
+EPA DCPA (Dacthal) cancellation & All uses canceled 2024 after data showed thyroid hormone disruption to developing fetus \\
+SQFI Edition 10 & Safe Quality Food Institute standards update, July 2025 \\
+FAO/WHO JMPR 2024 & Evaluated 37 pesticides including 7 new compounds; dietary risk assessments conducted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Sustainable Farming and Contamination Reduction}
+
+A PMC review (Pesticide Use and Degradation Strategies, 2023) found that agricultural robots used for precision pesticide application could reduce pesticide usage by 80\% compared to conventional broadcast spraying. Integrated Pest Management (IPM), mandated in the EU through Directive 2009/128/EC, combines biological, physical, and non-chemical methods to reduce pesticide dependency. Blockchain food traceability became a cornerstone of supply chain monitoring in 2024, enabling real-time tracking and rapid contamination response (Food Poisoning News, 2024).
+
+\subsection{Module 4 Reference: Pollinator Health and Colony Collapse}
+
+\subsubsection{The 2025 Crisis}
+
+USDA data confirmed that 1.7 million bee colonies died between summer 2024 and spring 2025, representing an average loss of 62\% of U.S. commercial beekeeping colonies --- one of the most severe pollinator die-offs in recorded history (Food Tank, August 2025). The estimated economic impact reached \$600 million in lost revenue, including lost pollination income, reduced honey production, and colony replacement costs. In California alone, losses related to almond pollination contracts exceeded \$428 million.
+
+Beekeepers first noticed the scale of losses in January 2025 as hives were prepared for transport to pollinate California's almond crops. Survey data from Project Apis M. confirmed the 62\% average loss across commercial operations. USDA-ARS researchers identified Varroa destructor mite resistance to amitraz as a primary factor. These parasitic mites weaken bees by feeding on their organs and transmit Deformed Wing Virus (DWV) and Acute Bee Paralysis Virus (ABPV). A 2025 USDA paper (under peer review) reported that all Varroa mites collected from collapsed colonies showed resistance to miticides, calling for new control strategies.
+
+\subsubsection{Long-term Pollinator Decline}
+
+A PNAS study published April 2025 assessed extinction risk across nearly 1,600 vertebrate and insect pollinator species in North America and found that more than one in five faces elevated extinction risk. Major threats are climate change, agricultural intensification, hydrological modification, and urban development.
+
+Managed honey bee colonies in the U.S. dropped from 5 million in the 1940s to approximately 2.68 million in 2023 (Pollinator.org / USDA APHIS). A CABI Reviews paper (2024) documented that 87\% of flowering plant species and 87 of the leading global food crops rely on pollinators for seed production. Eastern monarch butterfly populations have declined by 80\% over recent decades; multiple Bombus (bumblebee) species have experienced abundance declines of up to 96\%.
+
+\subsubsection{Restoration Strategies}
+
+A 2024 Frontiers in Ecology and Evolution review by Kline and Joshi (University of Arkansas) documented conservation strategies across natural, agricultural, urban, and industrial landscapes. Effective interventions include wildflower corridor planting, artificial nesting sites, managed road and powerline verge habitat, and urban green infrastructure. A PMC-published landscape restoration study found that hedgerow planting increased wild bee abundance by 8\% after one year and significantly increased species richness by seven years. Restoration sites embedded within intact landscapes support higher biodiversity than isolated patches.
+
+\subsection{Module 5 Reference: Wildlife Habitat and Natural Food Sources}
+
+\subsubsection{Habitat Fragmentation and Food Web Disruption}
+
+Habitat loss and fragmentation disrupt not only species movement but also the nutritional ecology of wildlife --- the availability of correct, native food sources is as critical as physical habitat. Monoculture agricultural landscapes offer food to very few wildlife species and actively starve generalist pollinators by eliminating floral diversity. Invasive non-native plants outcompete native plants that have co-evolved with local fauna, disrupting the food source networks that native wildlife depend on.
+
+\subsubsection{Native Plant Restoration}
+
+Native plants provide the most nutritionally appropriate food sources for native pollinators and wildlife. A U.S. Fish and Wildlife Service pollinator habitat restoration project in Maine's Aroostook County documented the technical challenges of restoration: seed mix development, sourcing of native plant materials, seeding rate optimization, weed management, and ongoing monitoring. NRCS cost-sharing programs have reduced financial barriers for private landowners, though technical complexity remains a barrier.
+
+Pollinators serve functional niches inaccessible to honey bees: bumblebees access deep flowers honey bees cannot reach; small beetles pollinate tropical trees; moths pollinate at night; hummingbirds and bats cover long distances. Each niche requires its appropriate native food plants.
+
+\subsubsection{Urban and Anthropogenic Habitat}
+
+A 2024 empirical study across Western Europe (Frontiers) found that larger cities host richer bee faunas, though not necessarily at-risk conservation species. Urban rewilding --- converting road verges, roundabouts, solar parks, and powerline corridors into pollinator habitat --- is increasingly recognized as national biodiversity infrastructure. Studies document that the introduction of impervious surfaces reduces bee and butterfly species richness in proportion to coverage. Solar park ground cover management offers a significant opportunity: vegetation management aligned with pollinator needs costs no more than conventional ground cover maintenance.
+
+\subsection{Module 6 Reference: Forest Conservation and Rainforest Ecology}
+
+\subsubsection{Current Deforestation Data (2024)}
+
+The Forest Declaration Assessment 2025 reported that 8.1 million hectares of forest were lost in 2024 --- 63\% above the trajectory needed to halt deforestation by 2030. Forest degradation affected an additional 8.8 million hectares. Primary tropical forest loss spiked due to climate-induced fire events. The Rainforest Alliance reports tropical forest is being lost at the equivalent of 18 football fields per minute. Harmful subsidies outweigh green subsidies for forest conservation by more than 200:1.
+
+In Brazil's Amazon, fires accounted for an estimated 60\% of primary forest loss in 2024, and emissions from fire and degradation exceeded those from deforestation for the first time on record. Researchers warn that nearly half of the Amazon could transition to a savanna-like state by 2050 if current trends persist.
+
+\subsubsection{Forest Ecology and Regeneration Science}
+
+Mongabay's year-in-review for 2025 noted that global analyses mapping age and distribution of regenerating forests showed that regrowth embedded within intact landscapes supports higher biodiversity and follows trajectories closer to old-growth systems. Isolated patches frequently stall or simplify even when tree cover returns. Naturally regenerated forests, plantations, and agroforestry systems store carbon differently, support different species, and respond differently to heat and drought --- treating them as equivalent risks overstating recovery.
+
+A ScienceDaily report (2025) documented concerns about seedling survival bottlenecks 30 years after selective logging in Borneo's Danum Valley, where logged areas showed trait differences and survival challenges compared to intact forest, raising concerns about regeneration failure in some Dipterocarpaceae-dominated systems.
+
+\subsubsection{Conservation Models}
+
+The Rainforest Alliance documents that Guatemala's Maya Biosphere Reserve community forestry concessions (twelve concessions managing 417,269 hectares) have maintained near-zero deforestation rates since 2000 --- while adjacent areas suffer some of the highest deforestation rates in the Americas. WWF's Project Finance for Permanence model combines policy change, sustained funding, and community engagement in a single binding agreement to ensure long-term conservation outcomes. AI remote sensing collaboration between Meta and World Resources Institute produced a high-resolution global tree canopy height map in 2024, enabling more precise conservation planning. Planet's Project Centinela provides real-time satellite analytics to biodiversity hotspots.
+
+The EU Deforestation Regulation (EUDR), delayed 12 months by European Parliament vote in November 2024 (now targeted for late 2025), requires supply chain traceability for forest-risk commodities including soy, timber, cocoa, beef, rubber, and palm oil.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensitivity Area} & \tableheader{Handling Protocol} \\
+\midrule
+PFAS regulatory claims & Cite EPA and WHO only; avoid industry sources; note that filter certifications are not yet updated to 2024 EPA standards \\
+2025 colony collapse (USDA paper under peer review) & Flag pending peer review status; present as preliminary findings \\
+Amazon tipping point science & Present as range of scientific projections; cite IPCC and peer-reviewed sources only; note contested timescales \\
+Indigenous land rights in forest module & Name specific nations (Maya Q'eqchi', Kayap\'o, etc.) never generic ``indigenous peoples'' \\
+Endangered species locations & No GPS coordinates for nest, colony, or breeding sites \\
+Pesticide industry data & Use only government regulatory data (USDA PDP, EPA); EWG cited as consumer advocacy with appropriate context \\
+Colony collapse causation & Multiple factors implicated; present as multifactorial, not single-cause \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=*]
+  \item U.S. EPA. (2024). \textit{Identifying Drinking Water Filters Certified to Reduce PFAS}. EPA Water Research.
+  \item U.S. EPA. (2024). \textit{First National PFAS Drinking Water Standards}. Safe Drinking Water Act.
+  \item U.S. EPA. (2024). \textit{DCPA (Dacthal) cancellation notice}. Federal Register.
+  \item USDA Agricultural Marketing Service. (2024). \textit{Pesticide Data Program Annual Summary 2024}.
+  \item USDA Agricultural Research Service. (2025). \textit{Varroa destructor mite resistance to amitraz in collapsed colonies}. Under peer review.
+  \item U.S. FDA. (2024). \textit{Human Foods Program launch; Office of Inspections and Investigations restructuring}. FDA Reorganization Notices.
+  \item FDA. (2024). \textit{FSMA Produce Safety Rule, Subpart E update for pre-harvest agricultural water}.
+  \item NIST. (September 2025). \textit{New Standard Test Method for Air Cleaner By-Products}. NIST News.
+  \item U.S. Fish \& Wildlife Service. \textit{Best Practices for Pollinator Habitat Restoration, Aroostook County, Maine}.
+  \item Forest Declaration Assessment. (2025). \textit{2025 Annual Report: 2024 Forest Loss Data and 2030 Trajectory Analysis}.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=*]
+  \item Li et al. (2024). \textit{Review of Current and Future Indoor Air Purifying Technologies}. ACS EST Engineering, 4(11), 2607--2630.
+  \item Singh et al. (2024). \textit{Review of current and future indoor air purifying technologies}. Environmental Research.
+  \item FAO/WHO JMPR. (2024). \textit{Pesticide Residues in Food: Report 2024}. WHO Publications.
+  \item Kline, O. \& Joshi, N.K. (2024). \textit{Current trends in bee conservation and habitat restoration in different types of anthropogenic habitats}. Frontiers in Ecology and Evolution, 12, 1401233.
+  \item Jacobson et al. (2025). \textit{Elevated extinction risk in over one-fifth of native North American pollinators}. PNAS, 122(14).
+  \item Pan, W. et al. (2025). \textit{A highly selective and energy efficient approach to boron removal overcomes the Achilles heel of seawater desalination}. Nature Water.
+  \item Comprehensive Evaluation of Advanced Water Filtration Techniques. (July 2025). MedRxiv preprint. DOI: 10.1101/2025.07.18.25331748.
+  \item Frontiers (2024). \textit{Opportunities and Challenges for Wild Bee Conservation} (Research Topic, 13 articles).
+  \item Banin, L.F. (2025). \textit{Rainforest's next generation of trees threatened 30 years after logging}. UK Centre for Ecology and Hydrology / ScienceDaily.
+  \item PMC. (2023). \textit{Pesticide Use and Degradation Strategies: Food Safety, Challenges and Perspectives}. PMC10379487.
+  \item PMC. (2023). \textit{Optimal restoration for pollination services increases forest cover while doubling agricultural profits}. PMC10204975.
+  \item ScienceDirect. (2024). \textit{From field to table: Ensuring food safety by reducing pesticide residues in food}. Science of the Total Environment.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Reports}
+\begin{itemize}[leftmargin=*]
+  \item Environmental Working Group (EWG). (2025). \textit{Shopper's Guide to Pesticides in Produce}.
+  \item EWG. \textit{Tap Water Database and Water Filter Guide}.
+  \item American Lung Association. (2025). \textit{State of the Air 2025}.
+  \item Health Effects Institute. (2024). \textit{State of Global Air 2024}.
+  \item Pollinator.org. (2024). \textit{Threats to Pollinators: Habitat Loss, Pesticides, Climate}.
+  \item CABI Digital Library. (2024). \textit{What are the main reasons for the worldwide decline in pollinator populations?} CABI Reviews.
+  \item Food Tank. (August 2025). \textit{Bee Colony Collapse Threatens U.S. Food Supply}.
+  \item Save the Bee. (2025). \textit{The 2025 Bee Crisis: Unprecedented Losses Threaten Pollination and Food Security}.
+  \item World Wildlife Fund (WWF). \textit{Deforestation and Forest Degradation: Current Data and Strategies}.
+  \item Rainforest Alliance. (2024). \textit{2024 Annual Report: Regenerative Agriculture and Forest Conservation}.
+  \item Mongabay. (December 2025). \textit{The year in rainforests 2025: Deforestation fell; the risks did not}.
+  \item Mongabay. (December 2024). \textit{The year in tropical rainforests: 2024}.
+  \item FoodChain ID. (February 2025). \textit{A Closer Look at Global Pesticide Residue Incidents in 2024}.
+  \item Food Safety Magazine. (December 2025). \textit{USDA Reports 99 Percent of Foods Tested in 2024 Complied with Pesticide Residue Tolerances}.
+  \item Springer Nature. (August 2025). \textit{AI-driven innovations: transforming air filtration for sustainable and healthy buildings}. Discover Applied Sciences.
+  \item World Economic Forum. (November 2024). \textit{What causes indoor air pollution and how to tackle it}.
+\end{itemize}
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-ready research reference on clean air purification, water filtration, food supply safety, pollinator health and restoration, wildlife habitat and food source provision, and tropical forest conservation and regrowth. The document shall synthesize current data across six modules with full source attribution, map the causal connections between domains, and provide practical and policy-relevant findings that support both technological implementation and ecological restoration strategies.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+
+WAVE 0: FOUNDATION (Sequential / Haiku)
+  [0-A] Shared schema: source index, citation format, module template
+  [0-B] Research skeleton with section stubs for all 6 modules
+  [0-C] Sensitivity protocol document loaded into all agent contexts
+
+WAVE 1: PARALLEL SURVEY (Parallel / Sonnet + Opus)
+  Track A (Modules 1-2-3):          Track B (Modules 4-5-6):
+  +-------------------------+        +-------------------------+
+  | 1-A: Air Purification   |        | 1-B: Pollinator Health  |
+  | 2-A: Water Filtration   |        | 2-B: Wildlife Habitat   |
+  | 3-A: Food Safety        |        | 3-B: Forest Ecology     |
+  +-------------------------+        +-------------------------+
+      Sonnet (survey)                     Opus (tipping pts)
+      Opus (synthesis)                    Sonnet (survey)
+
+WAVE 2: SYNTHESIS (Sequential / Opus)
+  [S-1] Cross-domain nexus mapping (4+ causal pathways)
+  [S-2] Contradiction resolution across modules
+  [S-3] Executive summary and through-line narrative
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential / Sonnet)
+  [P-1] Document assembly and formatting
+  [P-2] Source verification (all citations checked)
+  [P-3] Sensitivity review (PFAS claims, colony collapse status, tipping points)
+  [P-4] Final output: reference document + bibliography
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer:} Shared source index, citation schema, module templates, sensitivity protocols
+  \item \textbf{Survey Layer:} Six parallel module research surveys with quantitative data extraction
+  \item \textbf{Synthesis Layer:} Cross-module causal pathway mapping, contradiction resolution, narrative integration
+  \item \textbf{Publication Layer:} Document assembly, source verification, sensitivity review, final formatting
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component} \\
+\midrule
+1 & Air Purification Survey & $\geq$8 technologies, efficacy data, 2024--25 developments, NIST findings & 1-A \\
+2 & Water Filtration Survey & $\geq$6 technology types, PFAS removal, EPA standards, desalination & 2-A \\
+3 & Food Safety Survey & 3 regulatory frameworks, pesticide data, organic/IPM, traceability & 3-A \\
+4 & Pollinator Health Survey & 2025 crisis quantified, Varroa mechanism, extinction risk, restoration & 1-B \\
+5 & Wildlife Habitat Survey & $\geq$5 landscape types, $\geq$4 wildlife categories, native food source data & 2-B \\
+6 & Forest Ecology Survey & 2024 loss data, tipping points, restoration science, community models & 3-B \\
+7 & Cross-Domain Nexus & $\geq$4 causal pathways explicitly traced and documented & S-1 \\
+8 & Source Bibliography & $\geq$30 entries, 100\% from approved source categories & P-2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0-A Source Index & None & Haiku & 8K \\
+0-B Module Skeleton & 0-A & Haiku & 5K \\
+0-C Sensitivity Protocol & None & Haiku & 3K \\
+1-A Air Survey & 0-A, 0-C & Sonnet & 25K \\
+2-A Water Survey & 0-A, 0-C & Sonnet & 25K \\
+3-A Food Safety Survey & 0-A, 0-C & Sonnet & 25K \\
+1-B Pollinator Survey & 0-A, 0-C & Opus & 30K \\
+2-B Wildlife Habitat Survey & 0-A, 0-C & Sonnet & 22K \\
+3-B Forest Ecology Survey & 0-A, 0-C & Opus & 30K \\
+S-1 Nexus Synthesis & 1-A through 3-B & Opus & 20K \\
+S-2 Contradiction Resolution & All modules & Opus & 10K \\
+S-3 Executive Summary & S-1, S-2 & Opus & 8K \\
+P-1 Document Assembly & All & Sonnet & 15K \\
+P-2 Source Verification & All & Sonnet & 12K \\
+P-3 Sensitivity Review & All & Sonnet & 8K \\
+P-4 Final Output & P-1, P-2, P-3 & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Pct.} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Amazon tipping point science (contested, judgment-heavy), pollinator extinction risk synthesis, cross-domain causal pathway mapping, colony collapse multifactorial analysis \\
+Sonnet & 60\% & Module surveys, document assembly, source compilation, water/air technology comparisons, food safety regulatory mapping, verification \\
+Haiku & 10\% & Shared schemas, source index template, module stubs, citation formatting \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2cm}L{3cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Primary Model} \\
+\midrule
+0 & Foundation & 0-A, 0-B, 0-C & Sequential & Haiku \\
+1 & Survey & 1-A/B, 2-A/B, 3-A/B & Parallel (2 tracks) & Sonnet + Opus \\
+2 & Synthesis & S-1, S-2, S-3 & Sequential & Opus \\
+3 & Publication & P-1, P-2, P-3, P-4 & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+0-A & Source index schema & JSON schema for all source types; pre-loaded bibliography entries from this research reference & Haiku \\
+0-B & Module skeleton & 6-module document structure with section stubs, placeholder tables, and heading hierarchy & Haiku \\
+0-C & Sensitivity protocol & 7 sensitivity rules loaded into all agent system prompts & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A --- Purification Systems (Sonnet-led):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+1-A & Air Purification Survey & 8+ technology profiles, efficacy tables, NIST 2025 findings, market data & Sonnet \\
+2-A & Water Filtration Survey & 6+ technology profiles, PFAS section, EPA 2024 standards, desalination & Sonnet \\
+3-A & Food Safety Survey & USDA PDP 2024, EWG 2025, FAO/WHO JMPR 2024, FDA restructuring, blockchain traceability & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Ecology Systems (Opus-led):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+1-B & Pollinator Health Survey & 2025 colony collapse data, Varroa mechanism, PNAS extinction risk, restoration methodology & Opus \\
+2-B & Wildlife Habitat Survey & 5+ landscape types, 4+ wildlife categories with dietary data, native plant ecology & Sonnet \\
+3-B & Forest Ecology Survey & 2024 deforestation data, tipping point science, regeneration bottlenecks, community models & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+S-1 & Cross-domain nexus & Map 4+ causal pathways: pesticides$\to$pollinators$\to$food; deforestation$\to$rainfall$\to$agriculture; air quality$\to$plant health$\to$wildlife; water contamination$\to$crop safety$\to$wildlife nutrition & Opus \\
+S-2 & Contradiction resolution & Check all modules for data consistency (species counts, percentages, timeline); flag and resolve & Opus \\
+S-3 & Executive summary & 3--4 paragraph cross-cutting synthesis; through-line narrative for publication & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+P-1 & Document assembly & Integrated multi-module document; all tables formatted; bibliography compiled & Sonnet \\
+P-2 & Source verification & All 30+ citations traced to primary sources; no broken citations; no entertainment media & Sonnet \\
+P-3 & Sensitivity review & PFAS claims checked against EPA only; colony collapse paper flagged as under review; tipping points ranged & Sonnet \\
+P-4 & Final output & Clean publication-ready document with bibliography and cross-domain nexus integrated & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Prefix cache the shared source index (0-A) into all Wave 1 agent contexts --- estimated 40\% token reuse
+  \item Prefix cache the sensitivity protocol (0-C) into all agent contexts
+  \item Cache module outputs between waves to avoid re-reading in synthesis
+  \item In Track A, agents share bibliography entries as they are discovered --- single bibliography maintained
+  \item Forest Ecology (3-B) and Pollinator (1-B) agents share overlapping sources (habitat, native plants) via shared index
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Estimated Tokens} & \tableheader{Primary Model} \\
+\midrule
+Wave 0: Foundation & 16K & Haiku \\
+Wave 1: Surveys (Track A) & 75K & Sonnet \\
+Wave 1: Surveys (Track B) & 82K & Opus/Sonnet \\
+Wave 2: Synthesis & 38K & Opus \\
+Wave 3: Publication & 45K & Sonnet \\
+\midrule
+\textbf{Total Estimated} & \textbf{256K} & Mixed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+         [0-A Source Index]---+
+         [0-B Skeleton    ]   |
+         [0-C Sensitivity ]---+
+                              |
+          +-------------------+-------------------+
+          |                                       |
+    TRACK A                                 TRACK B
+    [1-A Air Survey]                    [1-B Pollinator]
+    [2-A Water Survey]                  [2-B Habitat   ]
+    [3-A Food Survey ]                  [3-B Forest    ]
+          |                                       |
+          +-------------------+-------------------+
+                              |
+                    [S-1 Nexus Synthesis]
+                    [S-2 Contradictions ]
+                    [S-3 Exec Summary   ]
+                              |
+                    [P-1 Document Assembly]
+                    [P-2 Source Verification]
+                    [P-3 Sensitivity Review ]
+                    [P-4 Final Output       ]
+
+  GATE: CAPCOM approval required between Wave 1 and Wave 2
+  GATE: CAPCOM approval required between Wave 2 and Wave 3
+  BLOCK: Any SC-test failure halts Wave 3 pending resolution
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK \\
+Core functionality & 18 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional organizations. Zero entertainment media or blog content. \\
+SC-NUM & Numerical attribution & Every colony loss percentage, deforestation hectare count, mortality figure, and market size attributed to specific named source \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating specific legislation; regulatory data reported descriptively \\
+SC-END & Endangered species locations & No GPS coordinates or specific nesting/colony/den site locations for any listed or at-risk species \\
+SC-MED & Medical accuracy & No health claims without peer-reviewed evidence; PFAS, pesticide, and air quality health impacts cited to agency or journal sources only \\
+SC-CLI & Climate projections sourced & All Amazon tipping point projections, deforestation trajectory figures, and temperature change data attributed to IPCC scenarios or peer-reviewed sources \\
+SC-COL & Colony collapse caution & USDA 2025 Varroa paper flagged as ``under peer review''; findings presented as preliminary pending peer review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Air tech completeness & $\geq$8 purification mechanisms documented with efficacy data \\
+CF-02 & Air market data & Global market value and projection cited to named source \\
+CF-03 & NIST findings included & NIST 2025 by-product test methodology documented \\
+CF-04 & Water tech completeness & $\geq$6 filtration types documented with contaminant profiles \\
+CF-05 & PFAS water coverage & EPA 2024 PFAS standards cited; certification gap noted \\
+CF-06 & Desalination advance & University of Michigan boron-removal breakthrough documented \\
+CF-07 & Food monitoring data & USDA PDP 2024 data cited; 99\%+ compliance figure sourced \\
+CF-08 & EWG analysis included & 2025 Shopper's Guide findings (75\%+ residue rate) cited with context \\
+CF-09 & Persistent pollutants & DDT and chlordane persistence documented with USDA source \\
+CF-10 & Colony collapse quantity & 1.7M colonies / 62\% loss / \$600M impact all cited to USDA/Project Apis M. \\
+CF-11 & Varroa mechanism & Deformed Wing Virus and amitraz resistance chain documented \\
+CF-12 & Extinction risk quantified & PNAS 2025 ``1-in-5'' finding cited with full attribution \\
+CF-13 & Habitat landscape coverage & $\geq$5 distinct landscape types documented with restoration methodology \\
+CF-14 & Wildlife food source data & $\geq$4 wildlife/pollinator categories with appropriate food sources documented \\
+CF-15 & Forest loss quantified & 8.1M hectares / 63\% above 2030 trajectory cited to Forest Declaration Assessment \\
+CF-16 & Tipping point science & Amazon savanna conversion risk (2050 timeline) presented as projected range \\
+CF-17 & Community forestry model & Maya Biosphere Reserve near-zero deforestation rate documented \\
+CF-18 & Bibliography completeness & $\geq$30 source entries, all from approved source categories \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Pesticide $\to$ pollinator cascade & Module 3 food/pesticide findings explicitly cross-referenced to Module 4 pollinator health impacts \\
+IN-02 & Deforestation $\to$ rainfall cascade & Module 6 forest loss linked to Module 2 water cycle disruption and Module 3 agricultural water impacts \\
+IN-03 & Habitat $\to$ food crop cascade & Module 5 habitat restoration linked to Module 4 pollinator recovery and Module 3 food crop yield \\
+IN-04 & Air quality $\to$ plant health cascade & Module 1 outdoor air pollution linked to crop and forest health in Modules 3 and 6 \\
+IN-05 & Cross-module data consistency & Colony loss figures, deforestation data, and pesticide percentages consistent across all modules \\
+IN-06 & Document self-containment & A reader with no prior knowledge can understand all six domains from the document alone; no unexplained terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: $\geq$8 air purification technologies documented & CF-01, CF-02, CF-03 & Pending \\
+SC-2: $\geq$6 water filtration types; PFAS coverage & CF-04, CF-05, CF-06 & Pending \\
+SC-3: 3+ regulatory frameworks for food safety (2024--25) & CF-07, CF-08, CF-09 & Pending \\
+SC-4: Colony collapse quantified with USDA data & CF-10, CF-11, SC-COL & Pending \\
+SC-5: Pollinator extinction risk quantified & CF-12, SC-NUM & Pending \\
+SC-6: $\geq$5 landscape types for habitat restoration & CF-13 & Pending \\
+SC-7: $\geq$4 wildlife categories with food source data & CF-14, SC-SRC & Pending \\
+SC-8: Forest loss quantified with 2024 data & CF-15, SC-CLI & Pending \\
+SC-9: Amazon tipping points as ranged projections & CF-16, SC-CLI, SC-ADV & Pending \\
+SC-10: Community forestry models documented & CF-17, SC-IND & Pending \\
+SC-11: $\geq$4 cross-domain causal pathways traced & IN-01, IN-02, IN-03, IN-04 & Pending \\
+SC-12: $\geq$30 bibliography entries, approved sources only & CF-18, SC-SRC, IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at wave gates; scope enforcement \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web search; evidence compilation; bibliography maintenance \\
+EXEC-A & Executor Alpha & Modules 1-A, 2-A, 3-A (purification systems track) \\
+EXEC-B & Executor Bravo & Modules 2-B (wildlife habitat) document production \\
+CRAFT-ECO & Ecology Specialist & Modules 1-B (pollinators) and 3-B (forest ecology) --- deep domain analysis \\
+CRAFT-SCI & Science Specialist & Technology modules (air, water); supports efficacy data interpretation \\
+CRAFT-FOOD & Food Safety Specialist & Module 3-A; pesticide regulation; PFAS food pathways \\
+VERIFY & Verification Agent & Source validation; SC-test enforcement; citation tracing \\
+INTEG & Integration Agent & Cross-module nexus mapping (S-1); consistency checks (S-2) \\
+CAPCOM & HITL Interface & Human approval at Wave 1$\to$2 and Wave 2$\to$3 gates only \\
+BUDGET & Resource Manager & Token budget tracking across all agents and waves \\
+SURGEON & Health Monitor & Research quality degradation detection; flags thin evidence sections \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if scope shifts \\
+SECURE & Safety Warden & Enforces all SC-tests; BLOCKS publication on any safety-critical failure \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6+ modules) \\
+Modules & 6 \\
+Parallel Tracks & 2 (Wave 1) \\
+Waves & 4 \\
+Total Components & 16 \\
+Estimated Total Tokens & 256K \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 4--6 \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+CAPCOM Gates & 2 (Wave 1$\to$2, Wave 2$\to$3) \\
+Safety-Critical Tests & 7 (all BLOCK on failure) \\
+Total Tests & 36 \\
+Success Criteria & 12 \\
+Bibliography Target & $\geq$30 approved sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The bee is more honored than other animals, not because she labors, but because she labors for others.''} --- Saint John Chrysostom
+
+\vspace{0.8em}
+
+\textit{This research mission honors the same logic. Every filter, every native flower planted, every hectare of forest not cut is labor for others --- for the watershed downstream, for the child breathing tomorrow's air, for the species whose presence we have not yet learned to notice. The living filter network has no maintenance contract. It operates on ecological continuity and evolutionary memory. Our task is not to replace it. Our task is to stop breaking it, and to help it remember how to work.}
+\end{quotebox}
+
+\end{document}

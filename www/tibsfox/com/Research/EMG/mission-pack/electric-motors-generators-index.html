@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electric Motors & Generators — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #263238;
+  --secondary: #1565C0;
+  --tertiary: #37474F;
+  --accent: #0277BD;
+  --light-bg: #ECEFF1;
+  --card-bg: #CFD8DC;
+  --white: #FFFFFF;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+  color: var(--white); padding: 3rem 2rem; text-align: center;
+}
+header .label { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.5rem; }
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.4rem; }
+header .subtitle { font-size: 1.1rem; color: #90CAF9; margin-bottom: 0.3rem; }
+header .meta { font-size: 0.85rem; opacity: 0.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+.file-card .name { font-weight: 700; font-size: 1.05rem; margin: 0.3rem 0; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.4rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.5rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+.contents h3 { color: var(--secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+.contents ul { list-style: none; padding-left: 1rem; }
+.contents li { padding: 0.2rem 0; font-size: 0.9rem; }
+.contents li::before { content: "→ "; color: var(--accent); font-weight: 700; }
+ol { padding-left: 1.5rem; }
+ol li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+code { background: var(--light-bg); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; }
+.quote-box {
+  background: #E3F2FD; border-left: 4px solid var(--secondary);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+  font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem;
+}
+.quote-box .attr { font-style: normal; font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; }
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; border-top: 1px solid var(--light-bg); margin-top: 2rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Electric Motors & Generators</h1>
+  <div class="subtitle">Electromagnetic Energy Conversion — From Faraday's Disk to the EV Revolution</div>
+  <div class="meta">March 25, 2026 · Squadron Profile · 18–24 Context Windows</div>
+</header>
+
+<div class="container">
+  <div class="files">
+    <a href="electric-motors-generators-mission.pdf" download class="file-card">
+      <div class="ext">PDF</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete 28-page Vision → Research → Mission pipeline document</div>
+    </a>
+    <a href="electric-motors-generators-mission.tex" download class="file-card">
+      <div class="ext">TEX</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable XeLaTeX source for recompilation and modification</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="contents">
+    <h3>Stage 1 — Vision Document</h3>
+    <ul>
+      <li>Vision narrative: electromagnetic duality and the Amiga Principle</li>
+      <li>5-part problem statement (fragmentation, taxonomy, rare-earth, standards, grid)</li>
+      <li>Domain architecture and module architecture (ASCII diagrams)</li>
+      <li>5 research modules: Foundations, Motors, Generators, Applications, Standards</li>
+      <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+    </ul>
+  </div>
+
+  <div class="contents">
+    <h3>Stage 2 — Research Reference</h3>
+    <ul>
+      <li>M1: Electromagnetic foundations — Faraday's discovery, historical milestones, core physical laws</li>
+      <li>M2: Motor taxonomy — DC brushed/BLDC, AC induction/synchronous, SRM, stepper, efficiency comparison</li>
+      <li>M3: Generator systems — Dynamos, alternators, DFIG, renewable energy generators (wind + hydro)</li>
+      <li>M4: Applications — EV traction motors, rare-earth alternatives (WRSM, SynRM, ferrite, AEM)</li>
+      <li>M5: Standards — NEMA/IEC classification, DOE regulatory timeline 1992–2029, grid integration</li>
+      <li>Safety considerations and complete source bibliography</li>
+    </ul>
+  </div>
+
+  <div class="contents">
+    <h3>Stage 3 — Mission Package</h3>
+    <ul>
+      <li>Wave execution plan (4 waves, 2 parallel tracks)</li>
+      <li>Component breakdown with model assignments and token budgets</li>
+      <li>32-test plan (6 safety-critical, 16 core, 6 integration, 4 edge cases)</li>
+      <li>Verification matrix mapping 12 criteria to test IDs</li>
+      <li>Squadron crew manifest (12 roles)</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <ol>
+    <li>Review the PDF to understand scope, structure, and execution plan</li>
+    <li>Feed the mission package to <code>gsd-skill-creator</code> via Claude Code</li>
+    <li>The orchestrator will execute Wave 0 → 1 → 2 → 3 following the dependency graph</li>
+    <li>CAPCOM will prompt for human approval at each wave boundary</li>
+    <li>Final output: assembled educational knowledge pack ready for BBS distribution</li>
+  </ol>
+
+  <h2>Recompiling the LaTeX</h2>
+  <ol>
+    <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+    <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+    <li>Three passes resolve TOC, cross-references, and page counts</li>
+  </ol>
+
+  <div class="quote-box">
+    "I was at first almost frightened when I saw such mathematical force made to bear upon the subject, and then wondered to see that the subject stood it so well."
+    <div class="attr">— Michael Faraday, on reading Maxwell's mathematical treatment of his experimental discoveries</div>
+  </div>
+</div>
+
+<footer>
+  GSD Ecosystem · Vision → Research → Mission Pipeline<br>
+  The spaces between rotor and stator are where the meaning lives.
+</footer>
+
+</body>
+</html>

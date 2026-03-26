@@ -1,0 +1,926 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Professional / Legal ---
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{WA Accounting Laws \& Regulations}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={WA Accounting Laws and Regulations -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Accounting Laws \&\\[0.3em]Regulations in\\[0.3em]Washington State}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{CPA Licensure, Practice Standards, Business Compliance \& Record Keeping}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 12, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 20 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Accounting Laws \& Regulations in Washington State --- Vision Guide}
+
+\metafield{Date:}{March 12, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{WA Small Business Startup Mission (adjacent)}
+\metafield{Context:}{Cold-start research mission --- practitioner and business-owner audience}
+
+\subsection{Vision}
+
+Accounting is the grammar of economic life. Every financial transaction a business makes --- every sale, every payroll run, every tax remittance --- produces a sentence in a language that regulators, investors, creditors, and the business owner themselves must be able to read. The laws and regulations governing accounting in Washington State define the syntax of that language: who is authorized to write certain kinds of sentences (CPA licensure), what grammatical rules those sentences must follow (professional standards and GAAP), how long the sentences must be preserved (record retention), and what happens when someone writes a fraudulent one (disciplinary enforcement).
+
+Washington's accounting regulatory landscape is anchored by the Public Accountancy Act (RCW 18.04) and the Board of Accountancy's administrative rules (WAC 4-30). These statutes and rules define a closed system: only licensed CPAs and CPA firms may perform attest services and use the protected ``CPA'' title. But surrounding that closed system is a much larger open field --- bookkeepers, tax preparers, payroll specialists, enrolled agents --- who operate under federal credentials and general business law without state-specific licensing. The boundary between these two zones is where most confusion and compliance risk lives.
+
+For a small business owner in Everett, Washington, the practical questions cascade quickly. Do I need a CPA, or will a bookkeeper suffice? What records must I keep, and for how long? If I hire an accountant, how do I verify their credentials? What happens if they make an error on my B\&O tax filing? If I want to start my own accounting practice, what does that require? This mission maps the complete regulatory terrain so these questions resolve against authoritative sources rather than assumptions.
+
+The deeper pattern, as always, is the same equation operating at different scales. The Board of Accountancy is to the accounting profession what the Secretary of State is to business formation: the institutional boundary condition that defines who may operate and under what constraints. The 150-credit education requirement is a resonance threshold --- below it, you cannot generate the signal (a licensed CPA credential) that the regulatory system will accept. The three-year renewal cycle with 120 CPE hours is a maintenance oscillation, ensuring the signal doesn't degrade. Understanding these as structural patterns, not arbitrary bureaucracy, is the Amiga Principle applied to professional regulation.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}, leftmargin=2.5em]
+  \item \textbf{CPA licensure complexity.} Washington offers multiple education pathways (three as of November 2025), each with different credit-hour, degree-level, and experience requirements. The 2025 rule changes introduced new pathways that expire at different dates, creating a moving target for prospective CPAs.
+  \item \textbf{Scope-of-practice boundaries.} The line between services requiring a CPA license (attest, compilation) and services available to unlicensed practitioners (bookkeeping, tax preparation, advisory) is defined by statute but poorly understood by business owners and aspiring practitioners.
+  \item \textbf{Firm licensing and peer review.} CPA firms performing attest services must hold a firm license, participate in board-approved peer review programs, and comply with quality assurance requirements. Recent changes (November 2024) excluded compilations from mandatory peer review, altering compliance obligations.
+  \item \textbf{Record retention maze.} Washington businesses face overlapping retention requirements from the Department of Revenue (5 years for tax records), L\&I (3 years for payroll, 30 years for chemical exposure), IRS (3--7 years), and the Board of Accountancy (3 years for CPE documentation). No single reference consolidates these timelines.
+  \item \textbf{Ethics and disciplinary framework.} The Board can impose fines up to \$30,000, revoke licenses, and require restitution. Understanding what constitutes a violation --- from negligent tax preparation to failure to maintain independence --- is critical for practitioners but dispersed across multiple WAC sections.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Map every layer of Washington's accounting regulatory framework --- from CPA licensure through business record-keeping obligations --- into a single navigable reference, organized by stakeholder (practitioner vs.\ business owner) and compliance lifecycle.
+
+The core insight is that accounting regulation operates as a \emph{layered protocol stack}: federal standards (GAAP, GAAS, IRC) form the base layer; state statute (RCW 18.04) defines the jurisdictional authority layer; board rules (WAC 4-30) implement the operational protocol; and professional standards (AICPA, PCAOB) provide the application-level specifications. When board rules conflict with AICPA standards, board rules prevail --- a critical override rule that many practitioners miss.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+           WASHINGTON STATE ACCOUNTING REGULATORY DOMAIN
+  ╔════════════════════════════════════════════════════════════╗
+  ║                                                            ║
+  ║  ┌────────────────┐    ┌──────────────────┐               ║
+  ║  │  CPA LICENSURE  │───▶│  PRACTICE         │              ║
+  ║  │  Education       │    │  STANDARDS        │              ║
+  ║  │  Exam / Ethics   │    │  GAAP / GAAS      │              ║
+  ║  │  Experience      │    │  Independence     │              ║
+  ║  │  CPE Renewal     │    │  Attest Rules     │              ║
+  ║  └────────┬────────┘    └────────┬─────────┘              ║
+  ║           │                      │                         ║
+  ║           ▼                      ▼                         ║
+  ║  ┌────────────────┐    ┌──────────────────┐               ║
+  ║  │  FIRM LICENSING  │───▶│  ENFORCEMENT      │              ║
+  ║  │  Organization    │    │  Discipline       │              ║
+  ║  │  Peer Review     │    │  Fines/Revocation │              ║
+  ║  │  QAR Program     │    │  Consumer Protect │              ║
+  ║  └────────┬────────┘    └──────────────────┘              ║
+  ║           │                                                ║
+  ║           ▼                                                ║
+  ║  ┌────────────────┐    ┌──────────────────┐               ║
+  ║  │  BUSINESS        │◀──▶│  TAX PREPARERS    │              ║
+  ║  │  COMPLIANCE      │    │  & BOOKKEEPERS    │              ║
+  ║  │  Record Keeping  │    │  Federal Creds    │              ║
+  ║  │  Filing / Audit  │    │  No State License │              ║
+  ║  └────────────────┘    └──────────────────┘              ║
+  ║                                                            ║
+  ╚════════════════════════════════════════════════════════════╝
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE DECOMPOSITION (5 Parallel Research Tracks)
+
+  M1: CPA LICENSURE       M2: PRACTICE STANDARDS   M3: FIRM LICENSING
+  ├ Education pathways     ├ GAAP hierarchy          ├ Firm license reqs
+  ├ CPA exam (4 sections)  ├ Independence (WAC 042) ├ Non-CPA firm owners
+  ├ Experience (2K/4K hrs) ├ Integrity/objectivity  ├ Peer review (WAC 130)
+  ├ Ethics exam (AICPA)    ├ Accounting principles  ├ QAR program
+  ├ CPE (120 hrs/3 yrs)    ├ Compliance hierarchy   ├ Firm mobility
+  └ Reciprocity/mobility   └ Board rule prevails    └ Practice privilege
+
+  M4: BUSINESS COMPLIANCE     M5: ENFORCEMENT & CONSUMER PROTECTION
+  ├ DOR record retention (5yr) ├ Disciplinary actions (WAC 142)
+  ├ L&I payroll records (3yr)  ├ Fine structure (up to $30K)
+  ├ IRS retention (3-7yr)      ├ License revocation/suspension
+  ├ Tax filing obligations     ├ Consumer complaint process
+  ├ Scope of practice boundary ├ Prohibited acts catalog
+  └ Non-CPA services           └ Restitution / remedial sanctions
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: CPA Licensure \& Individual Credentialing}
+Complete mapping of Washington's three education pathways to CPA licensure (effective November 2025), including Pathway 1 (bachelor's + 150 credits + 1 year experience), Pathway 2 (bachelor's + accounting concentration + 2 years experience), and Pathway 3 (legacy 150-credit pathway, expiring December 2035). CPA exam structure (3 core + 1 discipline section, 75 passing score, 36-month window). Ethics exam requirement (AICPA Code of Professional Conduct, 90\% passing score). Experience verification by 5-year CPA. CPE requirements (120 hours per 3-year cycle, minimum 20/year, 4-hour WA ethics course). Interstate reciprocity and CPA mobility. Inactive status, retirement, and reinstatement.
+
+\subsubsection{M2: Practice Standards \& Professional Conduct}
+GAAP hierarchy for Washington practitioners (GASB/FASB Codification as Category A, GASB Technical Bulletins as Category B). Independence requirements under WAC 4-30-042. Integrity and objectivity standards (WAC 4-30-040). Accounting principles compliance (WAC 4-30-049). The critical override rule: when WAC 4-30 conflicts with AICPA Code of Professional Conduct, board rules prevail. Attest service definitions. Compilation service definitions and their 2024 peer-review exemption. Professional standards compliance for specific service types (audit, review, compilation, attestation, advisory).
+
+\subsubsection{M3: Firm Licensing, Peer Review \& Organization}
+CPA firm license requirements under RCW 18.04.195 --- mandatory for firms with a Washington office performing attest or compilation services. Non-licensee firm owner registration (WAC 4-30-110). Firm name restrictions and DBA prohibitions. Board-approved peer review programs (PCAOB inspections, AICPA peer review, other board-approved programs). Enrollment timing, reporting at renewal, and consequences of peer review failure. November 2024 change exempting compilations from mandatory peer review. Firm mobility provisions for out-of-state firms. Practice privilege for out-of-state individuals under RCW 18.04.350.
+
+\subsubsection{M4: Business Compliance, Record Keeping \& Tax Obligations}
+Washington DOR record retention requirements (WAC 458-20-254: 5 years for tax records, including gross receipts, deductions, exemptions, ledgers, journals, invoices, financial statements). L\&I employer payroll record requirements (3 years). Federal IRS record retention (3--7 years depending on document type). Corporate records requirements under RCW 23B (for-profit) and RCW 24.03A (nonprofit). Annual filing requirements for local governments under RCW 43.09.230 (GAAP and cash-basis reporting to State Auditor). Scope-of-practice boundaries: what services require a CPA license vs.\ what bookkeepers and tax preparers can legally do in Washington.
+
+\subsubsection{M5: Enforcement, Discipline \& Consumer Protection}
+Board enforcement authority under RCW 18.04.295 and WAC 4-30-142. Catalog of prohibited acts (fraud, negligence, incompetence, failure to comply with professional standards, concealing violations, failure to cooperate with board investigations). Fine structure (up to \$30,000 plus investigative costs). License revocation, suspension, and conditions precedent to renewal. Mandatory notification requirements (conviction, disciplinary action in another jurisdiction, malpractice judgment). Consumer complaint process. Title protection enforcement --- prohibited use of ``CPA,'' ``CA,'' ``LPA,'' ``PA'' and similar designations by unlicensed persons.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  orchestrator:
+    model: opus
+    role: "Mission direction, regulatory interpretation, cross-module synthesis"
+  planner:
+    model: sonnet
+    role: "Wave decomposition, dependency management, parallel optimization"
+  executors:
+    count: 2
+    model: sonnet
+    role: "Document production per parallel track"
+  specialists:
+    - name: CRAFT-REG
+      model: opus
+      role: "Statutory interpretation, WAC/RCW analysis, compliance mapping"
+    - name: CRAFT-PRAC
+      model: opus
+      role: "Professional standards, GAAP hierarchy, practice boundary analysis"
+  verification:
+    model: sonnet
+    role: "Citation validation, WAC/RCW accuracy, cross-module consistency"
+  foundation:
+    model: haiku
+    role: "Shared schemas, statutory index, glossary scaffolding"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Complete CPA licensure framework including 2025 pathway changes
+  \item All WAC 4-30 ethics and practice rules current through March 2026
+  \item Firm licensing, peer review, and QAR requirements
+  \item Business record retention requirements from DOR, L\&I, and IRS
+  \item Scope-of-practice boundaries between CPAs and unlicensed practitioners
+  \item Board enforcement and disciplinary framework
+  \item Federal credential landscape (EA, PTIN) as it intersects Washington practice
+  \item GAAP/GASB reporting framework for Washington local governments
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Detailed GAAP/FASB accounting methodology (standard textbook content)
+  \item Tax law substance (IRC provisions, deduction strategies, tax planning)
+  \item Forensic accounting and litigation support specialties
+  \item International accounting standards (IFRS) except where intersecting with WA practice
+  \item Academic program rankings or career guidance
+  \item Software and technology tool recommendations
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item All three CPA licensure pathways documented with education hours, degree requirements, experience thresholds, and expiration dates.
+  \item CPA exam structure described including sections, passing score, time window, and application process via NASBA.
+  \item CPE requirements specified with hour counts, annual minimums, ethics course requirement, and renewal cycle.
+  \item Practice standards hierarchy documented showing GAAP sources, the board-rule-prevails override, and compliance with specific WAC sections.
+  \item Independence, integrity, and objectivity rules summarized with WAC citations and illustrative examples.
+  \item Firm licensing requirements differentiated by service type (attest vs.\ compilation vs.\ advisory) with 2024 peer review changes noted.
+  \item Record retention requirements consolidated from DOR, L\&I, IRS, and Board of Accountancy into a single reference table with document types and retention periods.
+  \item Scope-of-practice boundary clearly delineated: what requires a CPA license, what requires only a PTIN/EA, and what is unrestricted.
+  \item Board enforcement authority documented with fine amounts, prohibited acts, notification requirements, and complaint process.
+  \item All statutory citations traceable to specific RCW sections and WAC rules.
+  \item Document self-contained: a reader unfamiliar with Washington accounting law can navigate the complete regulatory landscape.
+  \item Through-line connects accounting regulation to GSD ecosystem philosophy.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+WA Small Business Startup & Business compliance module overlaps; this mission goes deeper on accounting specifics & Active \\
+GSD Core Architecture & Chipset config follows Amiga coprocessor model & Active \\
+The Space Between Ch.\ 14 & Information theory framing applies to regulatory signal/noise & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every profession that touches public trust operates under a regulatory resonance condition. The CPA credential is not just a title --- it is a standing wave maintained by the interference pattern between education (the initial energy input), examination (the frequency filter), experience (the medium through which the wave propagates), and continuing education (the maintenance oscillation that prevents decay). The Board of Accountancy is the resonance chamber. Remove any wall and the standing wave collapses.
+
+This is the same pattern that appears at every scale in the GSD ecosystem. The Skill-Creator's context engineering pipeline maintains quality through verification gates; the CPA licensure system maintains quality through examination and peer review gates. The Board's rule-prevails-over-AICPA principle mirrors the GSD safety warden pattern: local rules override general defaults when they conflict. The Amiga Principle says: understand the architecture once, and every subsequent encounter with it costs less. That's what this mission delivers.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Accounting Laws \& Regulations --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides source-backed findings organized by module. All data is current as of March 2026.
+
+\textbf{Key source authorities:}
+\begin{itemize}[leftmargin=2em]
+  \item Washington State Board of Accountancy (WBOA) --- \url{https://acb.wa.gov}
+  \item Public Accountancy Act --- RCW 18.04 --- \url{https://app.leg.wa.gov/rcw/default.aspx?cite=18.04}
+  \item Board Rules --- WAC 4-30 --- \url{https://app.leg.wa.gov/wac/default.aspx?cite=4-30}
+  \item Washington State Auditor's Office (SAO) --- \url{https://sao.wa.gov}
+  \item Washington Department of Revenue (DOR) --- \url{https://dor.wa.gov}
+  \item Washington Department of Labor \& Industries (L\&I) --- \url{https://lni.wa.gov}
+  \item Internal Revenue Service (IRS) --- \url{https://www.irs.gov}
+  \item AICPA --- \url{https://www.aicpa.org}
+  \item NASBA --- \url{https://www.nasba.org}
+  \item Washington Society of CPAs (WSCPA) --- \url{https://www.wscpa.org}
+\end{itemize}
+
+\subsection{M1: CPA Licensure \& Individual Credentialing Reference}
+
+\subsubsection{Education Pathways (Effective November 20, 2025)}
+
+The Board amended WAC 4-30-060 and WAC 4-30-070 following a public hearing on October 17, 2025, creating three licensure pathways. All pathways require an accounting concentration defined as 24 semester hours (36 quarter hours) in accounting subjects and 24 semester hours (36 quarter hours) in business administration at the undergraduate or graduate level.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}L{3cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Pathway} & \tableheader{Education} & \tableheader{Credit Hours} & \tableheader{Experience} & \tableheader{Expires} \\
+\midrule
+1 & Post-baccalaureate (master's+) with accounting concentration & 150 semester hrs & 1 year / 2,000 hrs & None \\
+2 & Baccalaureate with accounting concentration & 120 semester hrs & 2 years / 4,000 hrs & None \\
+3 (Legacy) & Baccalaureate + 30 add'l semester hrs with accounting concentration & 150 semester hrs & 1 year / 2,000 hrs & Dec 31, 2035 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The key innovation in the 2025 amendments is Pathway 2, which allows candidates with a bachelor's degree and accounting concentration to sit for the exam and pursue licensure with 120 credits, provided they complete two years (4,000 hours) of experience instead of one. This addresses the national pipeline shortage of CPA candidates by reducing the education barrier while increasing the experience requirement.
+
+\textbf{Source:} WBOA, WAC 4-30-060, WAC 4-30-070 (amended October 2025).
+
+\subsubsection{CPA Examination}
+
+The Uniform CPA Exam consists of four sections: three core (AUD --- Auditing and Attestation, FAR --- Financial Accounting and Reporting, REG --- Regulation) and one discipline chosen by the candidate (ISC --- Information Systems and Controls, BAR --- Business Analysis and Reporting, or TCP --- Tax Compliance and Planning). Each section is scored 0--99 with a 75 passing threshold. Washington provides a 36-month window from the first passing score to complete all four sections --- one of the longest in the nation.
+
+Exam fees consist of a \$96 education evaluation fee, a \$103 exam application fee, and \$262.64 per section. Applications are submitted through NASBA's Okta-based CPA portal.
+
+\textbf{Source:} WBOA Exam page; NASBA; UWorld CPA Requirements guide.
+
+\subsubsection{Ethics Requirement}
+
+All Washington CPA candidates must pass the AICPA Professional Ethics exam --- an 8-hour self-study course covering the AICPA Code of Professional Conduct --- with a score of 90\% or better. This is a one-time requirement for initial licensure.
+
+For renewal, CPAs must complete a 4-hour Board-approved Washington State ethics and regulations course every three-year renewal cycle. At least 60\% of the course content must cover the Public Accountancy Act, Board rules and policies, and variances between Washington law and the AICPA Code of Conduct.
+
+\textbf{Source:} WBOA; WAC 4-30-132.
+
+\subsubsection{Experience Verification}
+
+Experience must be verified by an active CPA licensee who has held their license for a minimum of five years. The verifying CPA must determine, by interview or course completion, that the applicant is knowledgeable of the Public Accountancy Act and Board Rules. Both the applicant and verifying CPA must maintain documentation for a minimum of three years.
+
+Qualifying experience includes public accounting, industry/government employment, and in certain cases academic employment. Experience may be obtained through one or more employers, with or without compensation, and may combine full-time and part-time work.
+
+\textbf{Source:} WBOA Experience page; WAC 4-30-070, WAC 4-30-072.
+
+\subsubsection{Continuing Professional Education (CPE)}
+
+CPAs must complete at least 120 hours of CPE in the three calendar years preceding renewal, with a minimum of 20 hours per year. No more than 24 hours may be non-technical. A 4-hour Board-approved ethics course is mandatory per renewal cycle.
+
+Acceptable formats include nano learning (10--50 minutes, 0.2--1.0 credit hours), formal learning (50+ minutes with attendance tracking), self-study, university courses, and peer review committee service. CPE credit is not allowed for CPA exam review courses. Acceptable subjects span accounting, auditing, taxation, management advisory, information technology, and general professional competence.
+
+License renewal occurs every three years between January 1 and April 30. The renewal fee is \$230; late renewal (May 1--June 30) incurs an additional \$100 fee.
+
+\textbf{Source:} WAC 4-30-132, WAC 4-30-133, WAC 4-30-134; WBOA CPE Guidelines.
+
+\subsection{M2: Practice Standards \& Professional Conduct Reference}
+
+\subsubsection{GAAP Hierarchy for Washington Practitioners}
+
+Washington practitioners must follow the GAAP hierarchy as established by GASB Codification Section 1000. Category A comprises officially established accounting principles (GASB Statements and Interpretations). Category B comprises GASB Technical Bulletins, Implementation Guides, and AICPA literature specifically cleared by GASB. In the absence of treatment in either category, practitioners may consider nonauthoritative literature (FASB, FASAB, IASB, AICPA).
+
+For private-sector entities, FASB Accounting Standards Codification is the authoritative source of U.S.\ GAAP. For governmental entities, GASB standards apply. The Washington State Auditor's Office prescribes the BARS (Budgeting, Accounting and Reporting System) manuals for local government accounting.
+
+\textbf{Source:} SAO BARS GAAP Manual, Section 3.1.2; GASB Codification Section 1000.
+
+\subsubsection{The Board-Rule-Prevails Principle}
+
+Under WAC 4-30-048, when Board rules differ from professional standards published by AICPA or other standard-setting bodies, Board rules prevail. This is a critical compliance point: CPAs cannot assume that compliance with AICPA standards alone satisfies Washington obligations. They must independently verify that their practice conforms to WAC 4-30, which may impose stricter or different requirements.
+
+\textbf{Source:} WAC 4-30-048; WBOA December 2017 Newsletter.
+
+\subsubsection{Independence (WAC 4-30-042)}
+
+A licensee must maintain independence in mental attitude in all professional services for which independence is required by professional standards. The rule extends to licensees, CPA firms, nonlicensee firm owners, employees of such persons, out-of-state individuals with practice privileges under RCW 18.04.350, and out-of-state firms operating under RCW 18.04.195.
+
+\subsubsection{Integrity and Objectivity (WAC 4-30-040)}
+
+In any professional service, a licensee must maintain objectivity and integrity, be free of conflicts of interest, and must not knowingly misrepresent facts or subordinate judgment to others.
+
+\subsubsection{Accounting Principles (WAC 4-30-049)}
+
+A licensee may not express an opinion that financial statements conform with GAAP, or state that they are unaware of material modifications needed, if the statements contain a material departure from applicable accounting principles --- unless the licensee can demonstrate that due to unusual circumstances the statements would be misleading without the departure, and the departure is fully disclosed.
+
+\textbf{Source:} WAC 4-30-040, 4-30-042, 4-30-049.
+
+\subsection{M3: Firm Licensing, Peer Review \& Organization Reference}
+
+\subsubsection{Firm License Requirements}
+
+Under RCW 18.04.195, a firm with an office in Washington must hold a CPA firm license if performing or offering attest services (RCW 18.04.025(1)) or compilation services (RCW 18.04.025(5)). A firm license is \emph{not} required for firms performing other professional services (advisory, tax, consulting) using the CPA title, provided services are performed through individuals with practice privileges and the firm is licensed in the individual's home state.
+
+Non-CPA individuals may own an interest in a CPA firm in Washington. They must register with the Board as nonlicensee firm owners, meet good character requirements, and comply with state laws and Board rules.
+
+No licensed firm may operate under an alias or DBA that differs from the name registered with the Board.
+
+\textbf{Source:} RCW 18.04.195; WBOA Firm Licensing Requirements page; WAC 4-30-110.
+
+\subsubsection{Peer Review (WAC 4-30-130)}
+
+All firms performing attest services or other services requiring an assurance report must participate in a board-approved peer review program. Board-approved programs include PCAOB inspections, AICPA-administered peer review (through administering entities like the Colorado Society of CPAs), and other Board-approved programs.
+
+\textbf{November 2024 change:} As of November 21, 2024, compilations are excluded from the Board's mandatory peer review requirements. Firms that are AICPA members may still be required to complete peer review for compilation work through their AICPA membership obligations, but this is no longer a Board licensing condition.
+
+Firms must enroll in a peer review program \emph{before} issuing their first attest report. Every firm must certify its peer review status and results with each firm license renewal application by April 30 of the renewal year.
+
+If the Board determines through peer review or otherwise that a firm's practices do not conform to professional standards, it may require remedial CPE, mandate submission of future work for review, or take disciplinary action including license revocation.
+
+\textbf{Source:} WAC 4-30-130; WBOA QAR Program page; WSCPA peer review changes advisory.
+
+\subsubsection{Firm Mobility and Practice Privilege}
+
+Out-of-state CPA firms may exercise all privileges of a Washington-licensed firm without obtaining a Washington firm license if the firm holds a valid license in its home state, all individuals performing the work hold active CPA licenses, the firm meets QAR requirements, and the firm consents to comply with the Public Accountancy Act. The firm must cease operations in Washington if its home-state license becomes invalid.
+
+\textbf{Source:} WBOA Practice Privilege page; RCW 18.04.195, RCW 18.04.350.
+
+\subsection{M4: Business Compliance \& Record Keeping Reference}
+
+\subsubsection{Scope of Practice: Who Needs What Credential}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Service} & \tableheader{Credential Required} & \tableheader{Notes} \\
+\midrule
+Audit / Attest & WA CPA license + CPA firm license & Only licensed CPAs within licensed firms may issue attest reports \\
+Review engagement & WA CPA license + CPA firm license & Subject to SSARS and peer review \\
+Compilation & WA CPA license + CPA firm license & Firm license required; peer review exempted as of Nov 2024 \\
+Tax preparation (federal) & IRS PTIN & No WA state license required; CPAs, EAs, and attorneys have unlimited IRS representation \\
+Tax preparation (WA state) & No state-specific license & WA does not require a separate state tax preparer registration \\
+Bookkeeping & No license required & General business activity; no CPA restriction \\
+Financial advisory / consulting & No CPA license required & Unless using ``CPA'' title, which requires active license \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Washington does not require a state-level tax preparer registration (unlike Oregon, California, New York, Maryland, or Connecticut). Any individual with an IRS PTIN may prepare federal tax returns. However, only CPAs, EAs, and attorneys have unlimited representation rights before the IRS. PTIN-only preparers have limited representation rights.
+
+\textbf{Source:} RCW 18.04.345; IRS Tax Professional Credentials guide; WBOA Use of Title page.
+
+\subsubsection{Title Protection}
+
+Under RCW 18.04.345, no unlicensed individual or firm may use the titles ``certified public accountant,'' ``CPA,'' ``certified accountant,'' ``chartered accountant,'' ``licensed accountant,'' ``licensed public accountant,'' ``public accountant,'' or abbreviations ``CA,'' ``LA,'' ``LPA,'' ``PA,'' or similar designations. Violation is a misdemeanor.
+
+Inactive certificate holders (converted to inactive license status as of July 1, 2024) must attach the term ``inactive'' whenever using the CPA title and may not practice public accounting.
+
+\textbf{Source:} RCW 18.04.345; WBOA Use of Title page.
+
+\subsubsection{Record Retention Requirements}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Record Type} & \tableheader{Retention} & \tableheader{Authority} & \tableheader{Notes} \\
+\midrule
+Tax records (B\&O, sales, use) & 5 years & WAC 458-20-254 & Gross receipts, deductions, ledgers, journals, invoices \\
+Payroll records & 3 years & WA L\&I & Employee hours, wages, deductions, W/C contributions \\
+Personnel records & 3 years post-term & WAC 296-17-35201 & Longer than federal 1-year minimum \\
+Chemical exposure records & 30 years & WA L\&I / OSHA & Safety data sheets, exposure monitoring \\
+Federal income tax returns & 3--7 years & IRS & 3 years from filing; 7 years if loss deduction claimed \\
+CPE documentation & 3 years & WBOA & CPAs must retain for audit verification \\
+CPA experience affidavit & 3 years & WAC 4-30-072 & Both applicant and verifying CPA \\
+Corporate governance docs & Permanent & RCW 23B / 24.03A & Articles, bylaws, meeting minutes \\
+Financial statements & 5 years & WAC 458-20-254 & Included in DOR record-keeping requirements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Source:} Washington DOR (WAC 458-20-254); L\&I Recordkeeping Requirements; IRS Publication 583; WBOA.
+
+\subsection{M5: Enforcement, Discipline \& Consumer Protection Reference}
+
+\subsubsection{Board Authority}
+
+The Board of Accountancy consists of nine members appointed by the governor: six licensed CPAs (10+ years continuous licensure) and three public members. The Board meets quarterly (last Friday of January, April, July) and as needed. Its office is at 711 Capitol Way S., Suite 400, Olympia, WA 98501.
+
+Under RCW 18.04.295 and WAC 4-30-142, the Board may revoke, suspend, or refuse to issue or renew a license; impose fines up to \$30,000 plus investigative and legal costs; require full restitution to injured parties; impose remedial sanctions; impose conditions precedent to renewal; or prohibit nonlicensees from holding ownership in licensed firms.
+
+\textbf{Source:} RCW 18.04.035, 18.04.295; WAC 4-30-142.
+
+\subsubsection{Prohibited Acts (Selected)}
+
+WAC 4-30-142 catalogs specific prohibited acts including: fraud or deceit in obtaining a license; dishonesty, fraud, or negligence in professional services; failure to comply with professional standards; offering services when not qualified; making misleading representations; negligent tax preparation; failure to file required reports; breach of fiduciary duties; failure to cooperate with Board investigations; concealing another's violation; and failure to timely notify the Board of convictions, disciplinary actions in other jurisdictions, or malpractice judgments.
+
+\subsubsection{Consumer Protection}
+
+The Board publishes consumer alerts and disciplinary actions on its website. Consumers may file complaints through the Board's online complaint system. The Board investigates complaints and publishes investigation statistics. Disciplinary actions are searchable through the Board's license/discipline search tool at \url{https://acb.wa.gov}.
+
+\textbf{Source:} WBOA Consumer Protection pages; RCW 18.04.015(d).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Legal interpretation & GATE & Present WAC/RCW text factually; note readers should consult attorneys for specific compliance questions \\
+Tax advice & GATE & Present information without recommending specific tax strategies \\
+Credential guidance & ANNOTATE & Present pathways factually; recommend contacting WBOA directly for individual eligibility \\
+Disciplinary cases & ANNOTATE & Cite Board's published actions without identifying individuals beyond public record \\
+Legislative changes & ANNOTATE & Flag November 2025 rule changes and Pathway 3 expiration date prominently \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Government \& Statutory Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Washington State Board of Accountancy (\url{https://acb.wa.gov})
+  \item RCW 18.04 --- Public Accountancy Act
+  \item WAC 4-30 --- Board of Accountancy Administrative Rules
+  \item Washington State Auditor's Office --- BARS GAAP Manual, BARS Cash Manual
+  \item Washington Department of Revenue --- Record Keeping (WAC 458-20-254)
+  \item Washington L\&I --- Recordkeeping Requirements, Employment Standards
+  \item IRS --- Tax Professional Credentials, Publication 583, PTIN requirements
+  \item RCW 23B (Business Corporations Act), RCW 24.03A (Nonprofit Corporations Act)
+  \item RCW 43.09.200, 43.09.230 --- State Auditor local government reporting
+\end{itemize}
+
+\subsubsection*{Professional Organizations}
+\begin{itemize}[leftmargin=2em]
+  \item AICPA --- Code of Professional Conduct, Peer Review Standards
+  \item NASBA --- CPA Exam administration, NIES education evaluation
+  \item GASB --- Governmental Accounting Standards
+  \item FASB --- Financial Accounting Standards Codification
+  \item PCAOB --- Public company audit oversight
+  \item Washington Society of CPAs (WSCPA) --- Practice guidance, peer review changes
+  \item Government Finance Officers Association (GFOA) --- Financial reporting excellence
+  \item Washington Finance Officers Association (WFOA) --- Local government accounting
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained reference document mapping Washington State's complete accounting regulatory framework --- from individual CPA licensure through business record-keeping obligations --- with all requirements sourced to specific RCW sections, WAC rules, and authoritative agency publications. The output must incorporate the November 2025 licensure pathway changes and the November 2024 peer review exemption for compilations.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE EXECUTION ARCHITECTURE
+
+  Wave 0: FOUNDATION (Sequential, Haiku)
+  ┌───────────────────────────────────────────┐
+  │  Statutory index, shared schemas, glossary │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 1: PARALLEL RESEARCH (Sonnet + Opus)
+  ┌──────────────────┐    ┌──────────────────┐
+  │  TRACK A          │    │  TRACK B          │
+  │  M1: CPA License  │    │  M3: Firm License │
+  │  M2: Standards    │    │  M4: Business Req │
+  └────────┬─────────┘    └────────┬─────────┘
+           │    ┌──────────────────┘
+           ▼    ▼
+  ┌───────────────────────────────────────────┐
+  │  M5: Enforcement (depends on M1-M4)       │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 2: SYNTHESIS (Sequential, Opus)
+  ┌───────────────────────────────────────────┐
+  │  Cross-module integration, compliance     │
+  │  decision trees, consolidated tables      │
+  └──────────────────┬────────────────────────┘
+                     ▼
+  Wave 3: PUBLICATION + VERIFICATION (Sonnet)
+  ┌───────────────────────────────────────────┐
+  │  Format, verify citations, compile, test  │
+  └───────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & CPA Licensure Pathway Matrix & All 3 pathways with education, experience, expiration & Table + narrative \\
+2 & CPA Exam Quick Reference & Sections, scores, fees, timeline & Structured reference \\
+3 & CPE Requirements Summary & Hours, formats, ethics course, renewal dates & Checklist \\
+4 & Practice Standards Map & GAAP hierarchy, board-rule-prevails, WAC citations & Diagram + narrative \\
+5 & Scope-of-Practice Boundary Table & CPA vs.\ EA vs.\ PTIN vs.\ bookkeeper & Annotated table \\
+6 & Firm Licensing Decision Tree & When firm license required, peer review obligations & ASCII flowchart \\
+7 & Record Retention Master Table & All document types, periods, authorities consolidated & Reference table \\
+8 & Enforcement \& Discipline Reference & Prohibited acts, fines, complaint process & Structured catalog \\
+9 & Synthesized Regulatory Reference & All modules integrated with cross-references & LaTeX PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Statutory Index & None & Haiku & 2,500 \\
+W0: Glossary/Schema & None & Haiku & 2,000 \\
+W1: M1 CPA Licensure & W0 & Sonnet & 9,000 \\
+W1: M2 Standards & W0 & Opus & 10,000 \\
+W1: M3 Firm Licensing & W0 & Sonnet & 7,000 \\
+W1: M4 Business Reqs & W0 & Sonnet & 8,000 \\
+W1: M5 Enforcement & W0, M1--M4 & Opus & 8,000 \\
+W2: Synthesis & M1--M5 & Opus & 14,000 \\
+W3: Publication & Synthesis & Sonnet & 6,000 \\
+W3: Verification & All modules & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Statutory interpretation (practice standards, enforcement), cross-module synthesis, compliance hierarchy analysis \\
+Sonnet & $\sim$60\% & Licensure procedures, firm licensing, business requirements, record retention compilation, publication \\
+Haiku & $\sim$10\% & Foundation schemas, statutory index, glossary scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Execution} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 2 & 4,500 \\
+1 & Parallel Research & 2 tracks & 9 & 42,000 \\
+2 & Synthesis & Sequential & 4 & 14,000 \\
+3 & Pub + Verify & Sequential & 3 & 11,000 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & & \textbf{18} & \textbf{71,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Statutory index as shared cache:} W0 builds canonical RCW/WAC citation index loaded into every W1 context
+  \item \textbf{Glossary reuse:} Terms (``attest,'' ``compilation,'' ``licensee,'' ``practice privilege'') defined once per WAC 4-30-010
+  \item \textbf{Cross-module WAC references:} WAC 4-30-048 (compliance hierarchy) referenced by M2, M3, and M5 --- defined once in glossary
+  \item \textbf{Progressive context loading:} Wave 2 loads module summaries only to fit synthesis within context window
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  DEPENDENCY GRAPH
+
+  W0-IDX ─────┬──────────────────────────────┐
+  W0-GLO ─────┤                              │
+              ▼                              ▼
+        ┌─────────┐  ┌─────────┐    ┌─────────┐  ┌─────────┐
+        │ M1:CPA  │  │ M2:STD  │    │ M3:FIRM │  │ M4:BIZ  │
+        └────┬────┘  └────┬────┘    └────┬────┘  └────┬────┘
+             │            │              │            │
+             └────────────┴──────┬───────┴────────────┘
+                                 ▼
+                          ┌─────────┐
+                          │ M5:ENFC │
+                          └────┬────┘
+                               ▼
+                        ┌────────────┐
+                        │ W2:SYNTH   │
+                        └──────┬─────┘
+                               ▼
+                        ┌────────────┐
+                        │ W3:PUB+VER │
+                        └────────────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{32} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All regulatory citations trace to RCW, WAC, or authoritative agency publications. Zero unsourced claims. \\
+SC-NUM & Numerical attribution & Every fee, credit-hour count, fine amount, and retention period cited to specific statute or rule. \\
+SC-ADV & No advocacy & Document presents regulatory framework without recommending specific accounting firms, credential strategies, or policy positions. \\
+SC-LEG & Legal disclaimer & Document states content is informational only and readers should consult the Board or a licensed attorney for specific compliance questions. \\
+SC-CUR & Currency verification & All pathway requirements, fees, and rule changes verified against effective dates (Nov 2025 pathways, Nov 2024 peer review change). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Three licensure pathways & All 3 pathways with education, experience, and expiration \\
+CF-02 & CPA exam structure & 4 sections, scores, fees, 36-month window \\
+CF-03 & Ethics exam requirement & AICPA course, 90\% score, one-time for initial \\
+CF-04 & CPE requirements & 120 hrs/3 yrs, 20/yr minimum, 4-hr ethics course \\
+CF-05 & GAAP hierarchy & Category A/B sources with WAC citation \\
+CF-06 & Board-rule-prevails & WAC 4-30-048 override rule documented \\
+CF-07 & Independence rule & WAC 4-30-042 summarized \\
+CF-08 & Firm license trigger & Attest/compilation services require firm license \\
+CF-09 & Peer review 2024 change & Compilation exemption noted with date \\
+CF-10 & Scope-of-practice table & CPA vs.\ EA vs.\ PTIN vs.\ bookkeeper \\
+CF-11 & Title protection & Protected titles and abbreviations listed \\
+CF-12 & Record retention table & All document types with periods and authorities \\
+CF-13 & Fine structure & Up to \$30K plus costs, per RCW 18.04.295 \\
+CF-14 & Prohibited acts & Key categories from WAC 4-30-142 \\
+CF-15 & Complaint process & Consumer complaint pathway documented \\
+CF-16 & Experience verification & 5-year CPA requirement, documentation rules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Three pathways documented & CF-01 & Pending \\
+2 & CPA exam structure & CF-02 & Pending \\
+3 & CPE requirements specified & CF-03, CF-04 & Pending \\
+4 & Practice standards hierarchy & CF-05, CF-06 & Pending \\
+5 & Ethics rules summarized & CF-07 & Pending \\
+6 & Firm licensing differentiated & CF-08, CF-09 & Pending \\
+7 & Record retention consolidated & CF-12 & Pending \\
+8 & Scope-of-practice boundary & CF-10, CF-11 & Pending \\
+9 & Enforcement documented & CF-13, CF-14, CF-15 & Pending \\
+10 & All citations traceable & SC-SRC, SC-NUM & Pending \\
+11 & Self-contained document & IN-05, IN-06 & Pending \\
+12 & Through-line to GSD & SC-ADV & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & RCW/WAC retrieval; URL validation; web research \\
+EXEC-A & Executor & Track A production (CPA Licensure, Standards) \\
+EXEC-B & Executor & Track B production (Firm Licensing, Business Reqs) \\
+CRAFT-REG & Domain Specialist & Statutory interpretation, WAC/RCW analysis \\
+CRAFT-PRAC & Domain Specialist & Professional standards, GAAP, practice boundaries \\
+VERIFY & Verification & Citation accuracy; cross-module consistency \\
+INTEG & Integration & Cross-module relationships; terminology consistency \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking \\
+LOG & Chronicle & Audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (+ 1 sequential) \\
+Execution Waves & 4 (W0--W3) \\
+Context Windows & $\sim$18 \\
+Sessions & $\sim$4 \\
+Estimated Tokens & $\sim$71,500 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Deliverables & 9 \\
+Tests & 32 (5 safety / 16 core / 6 integration / 5 edge) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The CPA credential is a standing wave maintained by education, examination, experience, and continuing education. The Board of Accountancy is the resonance chamber. Remove any wall and the standing wave collapses. Understand the architecture once, and every subsequent encounter costs less.''}
+
+\vspace{0.5em}
+\hfill --- WA Accounting Laws Mission, Through-Line
+\end{quotebox}
+
+\end{document}
