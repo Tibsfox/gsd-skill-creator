@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coldplay — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #F9A825;
+    --tertiary: #00695C;
+    --accent: #283593;
+    --bg: #FAFAFA;
+    --card: #F0F0F5;
+    --card-hover: #E8EAF6;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); }
+  
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 60%, var(--tertiary) 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    color: white;
+  }
+  .header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin-bottom: 1rem; }
+  .header h1 { font-size: 2.6rem; margin-bottom: 0.5rem; font-weight: 700; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; margin-bottom: 0.5rem; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--secondary); margin-top: 1.2rem; }
+  
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.8rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s, transform 0.15s;
+    border: 1px solid #ddd;
+  }
+  .file-card:hover { background: var(--card-hover); transform: translateY(-2px); }
+  .file-card .ext { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); font-weight: 700; margin-bottom: 0.5rem; }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); line-height: 1.5; }
+  
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.4rem; }
+  
+  .contents { line-height: 1.9; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); font-size: 0.95rem; margin-top: 1rem; }
+  .contents ul { list-style: none; padding-left: 1.5rem; }
+  .contents ul li::before { content: "→ "; color: var(--secondary); font-weight: 700; }
+  
+  .instructions { font-family: 'DM Sans', sans-serif; font-size: 0.92rem; line-height: 1.8; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; }
+  .instructions code { background: #E8EAF6; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  
+  .quote-box {
+    background: var(--card-hover);
+    border-left: 4px solid var(--secondary);
+    padding: 1.5rem 1.8rem;
+    margin: 2.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .quote-box .attr { font-style: normal; text-align: right; margin-top: 0.8rem; color: var(--subtle); font-size: 0.9rem; }
+  
+  .meta { font-family: 'DM Sans', sans-serif; text-align: center; color: var(--subtle); font-size: 0.8rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Coldplay</h1>
+  <div class="subtitle">A Deep Research Study</div>
+  <div class="subtitle" style="font-size: 0.95rem; opacity: 0.8;">History, Discography, Cultural Impact &amp; Sustainability</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="files">
+    <a class="file-card" href="coldplay-mission.pdf" download>
+      <div class="ext">PDF — 26 pages</div>
+      <div class="name">coldplay-mission.pdf</div>
+      <div class="desc">Complete three-stage mission package. Print-ready, hyperlinked, with table of contents.</div>
+    </a>
+    <a class="file-card" href="coldplay-mission.tex" download>
+      <div class="ext">LaTeX Source</div>
+      <div class="name">coldplay-mission.tex</div>
+      <div class="desc">XeLaTeX source file. Modify and recompile to customize the document.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <div class="stage">Stage 1 — Vision Document</div>
+    <ul>
+      <li>Vision narrative: from UCL dormitory to most-attended tour in history</li>
+      <li>Problem statement: 5 concrete research gaps identified</li>
+      <li>6 research modules: Origins, Discography, Live, Sustainability, Awards, Philanthropy</li>
+      <li>12 testable success criteria</li>
+      <li>Chipset configuration: Fleet profile, 3 parallel tracks</li>
+    </ul>
+    <div class="stage">Stage 2 — Research Reference</div>
+    <ul>
+      <li>Formation: Pectoralz → Starfish → Coldplay (1996–2000)</li>
+      <li>Complete discography: 10 albums, 6 producers, genre evolution map</li>
+      <li>MOTS World Tour: $1.52B revenue, 13.1M tickets, 223 shows</li>
+      <li>Sustainability: BMW battery, kinetic floors, SAP app, MIT-verified 59% emission cut</li>
+      <li>Awards: 7 Grammys, 9 Brits, 7 VMAs, 9 Billboards</li>
+      <li>Philanthropy: 10% tithe, Oxfam, One Tree Planted, Music Venue Trust</li>
+      <li>12-album plan: musical (album 11), bedroom finale (album 12)</li>
+    </ul>
+    <div class="stage">Stage 3 — Mission Package</div>
+    <ul>
+      <li>4-wave execution plan with 3 parallel research tracks</li>
+      <li>18 crew agents (Fleet profile), 10 deliverables</li>
+      <li>29 test cases (5 safety-critical, 14 core, 6 integration, 4 edge)</li>
+      <li>Token budget: ~48K (Opus 30%, Sonnet 60%, Haiku 10%)</li>
+      <li>Dependency graph and cache optimization strategy</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Download <code>coldplay-mission.pdf</code> for the complete, ready-to-read mission package.</li>
+      <li>Hand the PDF to the GSD skill-creator (Claude Code) as mission input. The document is self-contained—no additional context required.</li>
+      <li>The orchestrator will decompose into the 4-wave execution plan described in Stage 3.</li>
+      <li>Wave boundaries are go/no-go gates requiring CAPCOM (human) approval.</li>
+      <li>Expected execution: 18–22 context windows across 4–6 sessions.</li>
+    </ol>
+  </div>
+
+  <h2>LaTeX Recompilation</h2>
+  <div class="instructions">
+    <p>To modify and recompile the document:</p>
+    <ol>
+      <li>Edit <code>coldplay-mission.tex</code> in any text editor.</li>
+      <li>Ensure DejaVu fonts are installed (standard on Ubuntu/Debian).</li>
+      <li>Compile with XeLaTeX (three passes required):</li>
+    </ol>
+    <p style="margin-top: 0.5rem;">
+      <code>xelatex -interaction=nonstopmode coldplay-mission.tex</code><br>
+      <code>xelatex -interaction=nonstopmode coldplay-mission.tex</code><br>
+      <code>xelatex -interaction=nonstopmode coldplay-mission.tex</code>
+    </p>
+  </div>
+
+  <div class="quote-box">
+    "We are only going to do 12 proper albums and that's real. Having that limit means the quality control is so high right now, and for a song to make it, it's almost impossible, which is great."
+    <div class="attr">— Chris Martin, Apple Music interview, 2024</div>
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem — Research Mission Generator<br>
+    Generated March 26, 2026 · Fleet Profile · 6 Modules · 26 Pages
+  </div>
+
+</div>
+</body>
+</html>
