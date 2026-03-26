@@ -1,0 +1,76 @@
+/* FDR -- Year of the Fire Dragon
+ * Theme: Imperial fire -- deep crimson with dynastic gold and dark earth
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --crimson: #8B0000;
+  --crimson-deep: #4A0000;
+  --crimson-mid: #A50000;
+  --gold: #B8860B;
+  --gold-light: #FFF8DC;
+  --gold-dim: #8B6914;
+  --flame: #C41E3A;
+  --flame-light: #FDE8E8;
+  --flame-dim: #9B1B30;
+  --earth: #3E2723;
+  --earth-light: #EFEBE9;
+  --earth-dim: #2C1A17;
+  --ember: #DAA520;
+  --cinnabar: #E34234;
+  --ash: #757575;
+  --smoke: #F5F5F5;
+  --parchment: #FFFAF5;
+
+  /* Semantic overrides */
+  --page-bg: #FFFAF5;
+  --page-text: #212121;
+  --page-text-light: #3E2723;
+  --link: var(--crimson-mid);
+  --card-border: #D7CCC8;
+  --border: #D7CCC8;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--crimson-deep) 0%, var(--crimson) 30%, var(--flame-dim) 60%, var(--gold-dim) 85%, var(--gold) 100%);
+  border-bottom: 4px solid var(--gold);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--crimson); border-bottom-color: var(--border); }
+h3 { color: var(--earth); }
+th { background: var(--crimson-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(139, 0, 0, 0.04); }
+tr:hover { background: rgba(139, 0, 0, 0.08); }
+blockquote { border-left-color: var(--crimson); background: rgba(139, 0, 0, 0.05); }
+code { background: var(--gold-light); }
+pre { background: var(--earth-dim); color: #E0E0E0; }
+.stat-value { color: var(--crimson); }
+
+/* -- Tags -- */
+.tag-cosmology { background: #EDE7F6; color: #4527A0; }
+.tag-dragon { background: #FDE8E8; color: #8B0000; }
+.tag-fire { background: #FFF3E0; color: #E65100; }
+.tag-archetype { background: #FFF8DC; color: #8B6914; }
+.tag-demographic { background: #E3F2FD; color: #0D47A1; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: dragon scale motif -- */
+.dragon-scale {
+  background: linear-gradient(90deg, var(--crimson-deep), var(--crimson), var(--flame), var(--ember), var(--gold));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
