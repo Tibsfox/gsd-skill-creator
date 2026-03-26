@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Spine Ground Truth — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1A237E;
+  --secondary: #00695C;
+  --tertiary: #37474F;
+  --accent: #0277BD;
+  --light-primary: #E8EAF6;
+  --light-secondary: #E0F2F1;
+  --bg: #FAFAFA;
+  --card-bg: #F0F0F0;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Libre Baskerville', serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; text-align: center; }
+.header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+.header p { font-family: 'DM Sans', sans-serif; font-size: 1rem; opacity: 0.85; }
+.container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); border: 1px solid #ddd; transition: box-shadow 0.2s; display: block; }
+.file-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.4rem; }
+h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin: 2rem 0 1rem; font-size: 1.3rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); margin: 1.2rem 0 0.6rem; font-size: 1.05rem; }
+ol, ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+.quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; }
+code { font-family: 'DM Mono', monospace; background: #E8E8E8; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.badge { font-family: 'DM Sans', sans-serif; display: inline-block; background: var(--accent); color: white; padding: 0.2em 0.7em; border-radius: 12px; font-size: 0.8rem; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="header">
+  <p style="font-size:0.85rem; letter-spacing:2px; margin-bottom:1rem;">GSD RESEARCH MISSION PACKAGE</p>
+  <h1>The Pacific Spine Ground Truth</h1>
+  <p>Sno-Isle TECH · Boeing · Pacific Rim Trade · Compute Platforms · Ecology · Disaster Response</p>
+  <p style="margin-top:1rem;"><span class="badge">Fleet Profile</span> <span class="badge">6 Modules</span> <span class="badge">18 Windows</span></p>
+</div>
+
+<div class="container">
+  <div class="files">
+    <a class="file-card" href="pacific-spine-ground-truth-mission.pdf" download>
+      <div class="label">📄 Mission Package (PDF)</div>
+      <div class="desc">25-page complete mission package — Vision, Research, and Mission stages</div>
+    </a>
+    <a class="file-card" href="pacific-spine-ground-truth-mission.tex" download>
+      <div class="label">📝 LaTeX Source (.tex)</div>
+      <div class="desc">Editable XeLaTeX source — modify and recompile</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3>Stage 1 — Vision Document</h3>
+  <ul>
+    <li>Vision narrative — ground truth as prerequisite to action</li>
+    <li>Problem statement — 5 core problems (pipeline fragmentation, housing barriers, trade isolation, compute gap, preparedness deficit)</li>
+    <li>Regional context map and module architecture (ASCII diagrams)</li>
+    <li>6 research module specifications</li>
+    <li>Chipset configuration (Fleet profile, 17 roles, 3 parallel tracks)</li>
+    <li>12 testable success criteria</li>
+    <li>Through-line connecting to GSD ecosystem philosophy</li>
+  </ul>
+
+  <h3>Stage 2 — Research Reference</h3>
+  <ul>
+    <li>Module 1: Pacific Rim Trade Network (CPTPP, ports, Snohomish County trade position)</li>
+    <li>Module 2: Sno-Isle TECH Skill Center (22 programs, 5 pathways, apprenticeship ecosystem)</li>
+    <li>Module 3: Boeing Manufacturing Pathway (BPET, Machinists Institute, regional training)</li>
+    <li>Module 4: Barracks Housing Model (modular workforce housing, educational precedents)</li>
+    <li>Module 5: Compute & Science Platforms (CERN, WLCG, Ceph, OpenStack, NASA SE)</li>
+    <li>Module 6: PNW Safety & Disaster Response (Cascadia, projections, self-sufficiency, Pacific network)</li>
+    <li>Safety and sensitivity considerations table</li>
+    <li>Complete source bibliography (government, academic, professional)</li>
+  </ul>
+
+  <h3>Stage 3 — Mission Package</h3>
+  <ul>
+    <li>Milestone specification with 7 deliverables</li>
+    <li>13-component breakdown with model assignments</li>
+    <li>4-wave execution plan with 3 parallel tracks</li>
+    <li>Cache optimization strategy</li>
+    <li>Token budget (~380K total: Opus 35% / Sonnet 55% / Haiku 10%)</li>
+    <li>Dependency graph (ASCII)</li>
+    <li>38-test plan (7 safety-critical, 18 core, 8 integration, 5 edge)</li>
+    <li>Verification matrix mapping all 12 criteria</li>
+    <li>17-role Fleet crew manifest</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Review the PDF for the complete three-stage pipeline</li>
+    <li>Hand the package to <code>gsd-skill-creator</code> via Claude Code</li>
+    <li>The orchestrator uses Stage 3 to decompose into wave-based parallel execution</li>
+    <li>Each survey agent receives its module spec + source index from Stages 1–2</li>
+    <li>Synthesis and publication agents integrate findings into the final ground-truth document</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>To modify and recompile the LaTeX source:</p>
+  <ol>
+    <li>Edit <code>mission.tex</code> with any LaTeX editor</li>
+    <li>Compile with XeLaTeX (requires DejaVu fonts):</li>
+  </ol>
+  <pre style="background:#263238;color:#eee;padding:1rem;border-radius:6px;margin:1rem 0;font-size:0.85rem;overflow-x:auto;">xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+
+  <div class="quote">
+    The corridor starts at home. Three conversations in Snohomish County start everything.<br><br>
+    Those conversations must be grounded in evidence. The spaces between education and employment, between local manufacturing and global trade, between daily operations and catastrophic response — those are where Fox Infrastructure Group lives. This research maps those spaces with the precision they deserve.
+  </div>
+
+  <p style="text-align:center; color:var(--subtle); margin-top:3rem; font-family:'DM Sans',sans-serif; font-size:0.85rem;">
+    Fox Infrastructure Group Inc. · Mukilteo, Washington · March 26, 2026<br>
+    GSD Ecosystem · Vision → Research → Mission
+  </p>
+</div>
+</body>
+</html>
