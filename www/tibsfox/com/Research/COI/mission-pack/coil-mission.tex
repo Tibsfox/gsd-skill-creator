@@ -1,0 +1,1042 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Occult / Alchemical ===
+\definecolor{primary}{HTML}{311B92}       % Deep violet — the hidden, the occult
+\definecolor{secondary}{HTML}{F57F17}     % Alchemical gold — transmutation
+\definecolor{tertiary}{HTML}{004D40}      % Deep teal — the depths, the underworld
+\definecolor{accent}{HTML}{6A1B9A}        % Amethyst — magickal resonance
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Coil: Sonic Alchemy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Coil: Sonic Alchemy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Coil: Sonic Alchemy\\[0.3em]and the Hidden Frequencies}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Music, Magick, and Legacy of an Irreplaceable Project}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Coil: Sonic Alchemy --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone deep research study)}
+\metafield{Context:}{GSD Educational Knowledge Pack --- Music History / Experimental Music}
+
+\subsection{Vision}
+
+Coil were not a band in any conventional sense. They were an alchemical vessel---a two-decade experiment in transmuting sound, consciousness, and identity through the crucible of esoteric practice, technological innovation, and radical personal honesty. Formed in 1982 by John Balance and Peter ``Sleazy'' Christopherson from the wreckage of Throbbing Gristle and Psychic TV, Coil operated in the spaces between genres, between waking and dreaming, between the sacred and the profane. Their work was, as Balance described it, ``magickal music''---sound designed not merely for consumption but for transformation.
+
+What makes Coil an essential subject for deep study is the sheer density of interconnection their work embodies. They sit at the junction of post-industrial music, queer culture, the British AIDS crisis, occult practice, avant-garde cinema, and the birth of electronic music's experimental wing. To study Coil is to trace the hidden wiring connecting Aleister Crowley to acid house, Derek Jarman to Nine Inch Nails, Austin Osman Spare to modular synthesis. Each connection illuminates not just the group's work but the broader cultural currents they navigated and shaped.
+
+This research mission constructs a comprehensive reference on Coil's artistic output, philosophical framework, sonic methodology, cultural context, collaborative network, and posthumous legacy. The goal is not hagiography but cartography---mapping the territory so that subsequent work (educational packs, audio analysis tools, cross-referenced discographies) can build on a solid foundation of verified, well-sourced knowledge.
+
+The spaces between nodes carry meaning. Between Throbbing Gristle's dissolution and Coil's formation, between the ``solar'' early works and the ``moon musick'' of the late period, between Balance's death in 2004 and the ongoing posthumous reissue program---in each gap, the signal persists. This study aims to capture that signal with fidelity.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\arabic*., leftmargin=2em]
+\item \textbf{Fragmented historical record.} Coil's history is scattered across fan sites, out-of-print publications, archived interviews, and word-of-mouth lore. No single comprehensive, well-sourced reference integrates the biographical, discographic, philosophical, and technical dimensions of their work into a cohesive whole. David Keenan's \textit{England's Hidden Reverse} covers some ground but is one perspective among many.
+
+\item \textbf{Sonic methodology is under-documented.} While Coil's thematic concerns (occultism, alchemy, sexuality) receive extensive attention, the technical dimension of \textit{how} they achieved their sound---their instruments, studio techniques, sampling strategies, and the evolution from early industrial to drone to acid house to ``moon musick''---remains poorly catalogued and largely anecdotal.
+
+\item \textbf{Occult and philosophical frameworks are often sensationalized or misunderstood.} Coil's engagement with chaos magick, Thelema, Enochian systems, and the work of Austin Osman Spare was sophisticated and intentional, yet popular accounts frequently reduce it to shock-value accessory. The relationship between their esoteric practice and their creative method deserves rigorous, respectful treatment.
+
+\item \textbf{Cultural context is frequently overlooked.} Coil's work is inseparable from London's gay subculture of the 1980s, the AIDS crisis, their friendship with Derek Jarman, and the broader post-industrial music scene. Accounts that treat them purely as ``occult musicians'' miss half the picture.
+
+\item \textbf{Posthumous legacy is contested and chaotic.} Since both Balance (2004) and Christopherson (2010) have died, the reissue landscape has become complex, with multiple labels, estates, and former collaborators releasing material of varying authority. A clear map of what exists and its provenance is needed.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textit{Transmutation as method:} Coil's entire body of work can be understood as applied alchemy---the systematic transformation of base material (sound, consciousness, identity, cultural taboo) into refined states through disciplined experimental process.
+\end{quotebox}
+
+This model organizes the research into six interconnected domains, each representing a facet of the transmutation process: the biographical crucible (origins and personnel), the sonic laboratory (instruments and techniques), the philosophical framework (occult and esoteric systems), the cultural matrix (queer identity, AIDS, cinema, the post-industrial scene), the discographic corpus (the works themselves), and the posthumous afterlife (legacy, reissues, influence).
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    COIL: SONIC ALCHEMY
+                    Research Domain Map
+    ┌──────────────────────────────────────────┐
+    │                                          │
+    │   ┌─────────┐         ┌─────────┐       │
+    │   │ MODULE 1│◄───────►│ MODULE 2│       │
+    │   │ Origins │         │  Sonic  │       │
+    │   │   and   │         │ Methods │       │
+    │   │Personnel│         │         │       │
+    │   └────┬────┘         └────┬────┘       │
+    │        │                   │             │
+    │        ▼                   ▼             │
+    │   ┌─────────┐         ┌─────────┐       │
+    │   │ MODULE 3│◄───────►│ MODULE 4│       │
+    │   │ Occult  │         │Cultural │       │
+    │   │  and    │         │ Context │       │
+    │   │Esoteric │         │         │       │
+    │   └────┬────┘         └────┬────┘       │
+    │        │                   │             │
+    │        ▼                   ▼             │
+    │   ┌─────────┐         ┌─────────┐       │
+    │   │ MODULE 5│◄───────►│ MODULE 6│       │
+    │   │Discog-  │         │Posthum. │       │
+    │   │ raphy   │         │ Legacy  │       │
+    │   └─────────┘         └─────────┘       │
+    │                                          │
+    └──────────────────────────────────────────┘
+
+    Cross-module relationships:
+    M1 ←→ M3: Personal belief → creative practice
+    M2 ←→ M5: Sonic evolution  → album chronology
+    M3 ←→ M4: Occult practice  → queer identity
+    M4 ←→ M6: Cultural impact  → posthumous legacy
+    M1 ←→ M4: Personnel        → scene membership
+    M2 ←→ M3: Sound as ritual  → magickal intent
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+    WAVE 0: Foundation
+    ┌────────────────────────────────────────┐
+    │  Shared schemas, source index,         │
+    │  timeline scaffold, naming conventions │
+    └──────────────────┬─────────────────────┘
+                       │
+    WAVE 1: Parallel Research
+    ┌──────────────────┴─────────────────────┐
+    │  Track A           Track B             │
+    │  ┌──────────┐     ┌──────────┐         │
+    │  │ M1:Orig  │     │ M3:Occult│         │
+    │  │ M2:Sonic │     │ M4:Cult. │         │
+    │  └──────────┘     └──────────┘         │
+    └──────────────────┬─────────────────────┘
+                       │
+    WAVE 2: Synthesis
+    ┌──────────────────┴─────────────────────┐
+    │  M5: Discography (depends M1+M2+M3+M4)│
+    │  M6: Legacy (depends M4+M5)            │
+    │  Cross-module integration              │
+    └──────────────────┬─────────────────────┘
+                       │
+    WAVE 3: Publication + Verification
+    ┌──────────────────┴─────────────────────┐
+    │  Final assembly, fact-check, test plan │
+    │  Bibliography, index generation        │
+    └────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Personnel}
+
+Biographical foundation covering both core members (Balance and Christopherson) and the wider constellation of collaborators: Stephen Thrower, Danny Hyde, Drew McDowall, William Breeze, Thighpaulsandra, Ossian Brown, and key guest contributors (Marc Almond, Gavin Friday, Rose McDowall). Traces the Throbbing Gristle $\rightarrow$ Psychic TV $\rightarrow$ Coil lineage and the Balance/Christopherson personal and creative partnership. Includes the Zos Kia overlap period and the break with Genesis P-Orridge.
+
+\subsubsection{Module 2: Sonic Methods and Instrumentation}
+
+Technical documentation of Coil's evolving sound palette: early samplers (Emulator, Fairlight CMI), the Moog and modular synthesizers, the ANS photoelectronic synthesizer, the Mellotron and Optigan, Serge and Synton modulars in the later period, and Nord Modular for live performance. Documents the shift from structured industrial (Scatology era) through acid house experimentation (Love's Secret Domain) to drone and ``moon musick'' (Musick to Play in the Dark). Covers studio practices including the use of altered states, improvisation, solstice/equinox recording sessions, and the concept of ``Sidereal Sound'' (after Austin Osman Spare).
+
+\subsubsection{Module 3: Occult and Esoteric Frameworks}
+
+Rigorous mapping of Coil's philosophical and magickal influences: Aleister Crowley and Thelema, Austin Osman Spare and the Neither-Neither doctrine, chaos magick (Peter Carroll and Ray Sherwin), Enochian systems (John Dee's Hieroglyphic Monad), the Qabalah, grimoire traditions, and shamanic practice. Distinguishes Coil's approach from Psychic TV/TOPY's more systematized method. Documents the relationship between magickal intent and creative process---how specific works were conceived as rituals, sigils, or invocations rather than conventional compositions.
+
+\subsubsection{Module 4: Cultural Context}
+
+Situates Coil within London's gay subculture of the 1980s--90s, the AIDS crisis (their ``Tainted Love'' single as the first AIDS charity release, the Gay Man's Guide to Safer Sex soundtrack), the friendship and artistic collaboration with filmmaker Derek Jarman (The Angelic Conversation, Blue), the post-industrial music scene (connections to Current 93, Nurse With Wound, Nine Inch Nails), and the broader alternative/underground cultural network. Covers the move from London to Weston-super-Mare, the shift from urban hedonism to hermetic rural practice.
+
+\subsubsection{Module 5: Discography and Works}
+
+Comprehensive survey of Coil's output organized into eras: early period (How to Destroy Angels through Horse Rotorvator, 1984--1986), middle period (Gold Is the Metal through Love's Secret Domain, 1987--1991), side-project proliferation (ELpH, Black Light District, Time Machines, 1993--1998), late period/``moon musick'' (Astral Disaster through Black Antlers, 1999--2004), and the posthumous corpus (The Ape of Naples onward). Includes aliases, soundtracks, remix work, compilation appearances, and limited editions. Maps the ``solar'' $\rightarrow$ ``moon musick'' trajectory that Balance himself identified.
+
+\subsubsection{Module 6: Posthumous Legacy and Influence}
+
+Documents the period after Balance's death (November 13, 2004) and Christopherson's death (November 24, 2010): the completion of The Ape of Naples and The New Backwards, Christopherson's move to Thailand and work as Threshold HouseBoys Choir, the ongoing reissue program across labels (Dais, Cold Spring, Infinite Fog, Prescription), the contested archival landscape, and Coil's documented influence on artists from Nine Inch Nails to Autechre to Sonic Youth. Covers the cultural reassessment and growing critical recognition in the 2010s--2020s.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:                    # Memory + scheduling
+    model: "Opus"
+    tasks:
+      - "Cross-module synthesis (M5, M6)"
+      - "Occult framework analysis (M3)"
+      - "Cultural sensitivity review"
+    allocation: "30%"
+
+  denise:                   # Display + output
+    model: "Sonnet"
+    tasks:
+      - "Biographical survey (M1)"
+      - "Sonic methods catalogue (M2)"
+      - "Discography compilation (M5)"
+      - "Legacy documentation (M6)"
+      - "Document assembly + verification"
+    allocation: "60%"
+
+  paula:                    # Audio + I/O
+    model: "Haiku"
+    tasks:
+      - "Shared schemas + templates"
+      - "Source index scaffolding"
+      - "Timeline data structures"
+    allocation: "10%"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Complete biographical profiles of all confirmed Coil members and key collaborators
+\item Verified discography covering studio albums, EPs, singles, side projects, soundtracks, and significant posthumous releases through 2026
+\item Documented sonic techniques and instrumentation by era
+\item Mapped occult and esoteric influences with specific works they informed
+\item Cultural context including AIDS activism, Derek Jarman collaborations, and post-industrial scene connections
+\item Posthumous release timeline with label and provenance information
+\item Documented influence chains to named subsequent artists
+\item Live performance history and legacy
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Audio analysis or spectral study of specific recordings (future mission)
+\item Comprehensive collector's guide with pressing variants and market values
+\item Full transcription or analysis of lyrical content (copyright considerations)
+\item Detailed biographies of collaborators' non-Coil work beyond what contextualizes Coil
+\item Legal analysis of estate and rights disputes
+\item Comparison studies with non-related experimental music traditions
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\arabic*., leftmargin=2em]
+\item All six research modules produce self-contained reference documents of $\geq$3,000 words each with verified sources
+\item Biographical profiles cover both core members and all six named extended members with confirmed participation dates
+\item Discography covers $\geq$40 distinct releases (studio albums, major EPs, side-project albums) with release dates and label information
+\item Sonic methods section documents $\geq$8 named instruments/technologies with specific albums on which they appear
+\item Occult framework section identifies $\geq$5 distinct esoteric traditions with specific works they informed
+\item Cultural context section covers the AIDS crisis, Derek Jarman collaboration, and post-industrial scene with $\geq$3 sourced claims per topic
+\item Posthumous legacy section maps $\geq$10 posthumous releases with label and provenance
+\item Cross-module relationships verified: $\geq$3 explicit connections per module pair where relationships exist
+\item All factual claims attributed to named sources (no unsourced assertions)
+\item Timeline consistency verified across all modules (no contradictory dates)
+\item Influence section names $\geq$8 specific artists with documented Coil connections
+\item Document is self-contained: a reader unfamiliar with Coil can construct a comprehensive understanding from the research alone
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Coil recordings are prime candidates for spectral analysis and sonic fingerprinting & Feeds Into \\
+GSD Educational Packs & This study provides source material for a music history knowledge pack & Feeds Into \\
+The Space Between & Coil's ``spaces between'' ethos resonates with the ecosystem's core philosophy & Philosophical \\
+Foxfire Heritage Skills & Coil's approach to occult knowledge parallels heritage skill preservation methodology & Pattern Match \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Gold Is the Metal (With the Broadest Shoulders) is described in its own liner notes as ``a completely separate package---a stopgap and a breathing space---the space between two twins.'' This is Coil's own language for what the GSD ecosystem calls the spaces between: the meaning that emerges not from the nodes themselves but from the connections, the gaps, the liminal zones where transformation occurs.
+
+Coil's entire practice was an exercise in the Amiga Principle before we had a name for it: architectural leverage over brute force, specialized execution paths yielding results that raw power could not. They achieved with a Fairlight and a Moog and a committed practice of altered states what no amount of conventional studio time could replicate. The research mission honors this by applying structured methodology to inherently unstructured material---giving bones to the ineffable so that subsequent work can build on solid ground, while preserving the mystery that makes the subject worth studying in the first place.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Coil: Sonic Alchemy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings organized by research module. Each section provides sourced information suitable for direct use in constructing the final research deliverables. Key source organizations and publications:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Brainwashed.com/coil} --- The most comprehensive online archive of Coil interviews, discography data, and publications; maintained since the band's active period
+\item \textbf{The Nachtkabarett} --- Detailed analysis of Coil's occult symbolism and esoteric references
+\item \textbf{England's Hidden Reverse} by David Keenan --- The primary published biographical and critical text covering Coil, Current 93, and Nurse With Wound
+\item \textbf{Threshold House / thresholdhouse.com} --- Coil's own label and official web presence
+\item \textbf{Discogs.com} --- Verified discographic data with pressing details
+\item \textbf{The Wire magazine} --- Multiple feature articles and interviews across Coil's career, including the 1995 ``Obscure Mechanics'' piece
+\item \textbf{The Quietus} --- Extensive retrospective coverage including the ``Strange and Frightening World of Coil'' feature
+\item \textbf{PopMatters} --- Academic-quality analysis of Coil and Psychic TV's divergent occult methodologies
+\item \textbf{Dais Records / Cold Spring Records / Infinite Fog} --- Current reissue labels with authoritative liner notes
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and Personnel}
+
+\subsubsection{Core Members}
+
+\textbf{John Balance} (born Geoffrey Burton, also known as Rushton after his stepfather's surname; later styled Jhon or Jhonn Balance). Born circa 1962. As a teenager, Balance created the fanzine \textit{Stabmental}, covering avant-garde artists including Throbbing Gristle, The Residents, and Lemon Kittens. In February 1980, he attended the Throbbing Gristle performance recorded as \textit{Heathen Earth}, where he first met Christopherson. After briefly attending the University of Sussex and participating in Brian Williams' Lustmord project, Balance returned to London to live with Christopherson, with whom a romantic partnership had begun. He participated in Psychic TV recordings (``Just Drifting'' from \textit{Force the Hand of Chance}, 1982; \textit{Dreams Less Sweet}, 1983) before founding Coil as a named project in 1982. Balance created the manifesto \textit{The Price of Existence Is Eternal Warfare} in 1983, inspired by Crowley's \textit{The Book of Lies}. He died on November 13, 2004, from injuries sustained in a fall at his home.
+
+\textbf{Peter ``Sleazy'' Christopherson} (born February 27, 1955; died November 24, 2010). A founding member of Throbbing Gristle and a member of the design collective Hipgnosis (responsible for iconic album covers for Pink Floyd, Led Zeppelin, and others). After TG's dissolution in 1981, Christopherson co-founded Psychic TV with Genesis P-Orridge and Alex Fergusson. Growing conflict with P-Orridge led to his departure alongside Balance in January 1984 to focus on Coil full-time. Christopherson was also an accomplished music video director, creating videos for Nine Inch Nails (``Pinion,'' ``Wish,'' ``Help Me I Am In Hell,'' ``Happiness In Slavery''), as well as the unreleased \textit{Broken} short film. After Balance's death, he relocated to Thailand, completed \textit{The Ape of Naples}, continued work as Threshold HouseBoys Choir, and participated in the Throbbing Gristle reunion. He died in his sleep on November 24, 2010, at age 55.
+
+\subsubsection{Extended Members and Key Collaborators}
+
+\textbf{Stephen Thrower}: Member circa 1986--1991. Previously of the band Possession. Contributed to \textit{Horse Rotorvator}, \textit{Gold Is the Metal}, the \textit{Angelic Conversation} soundtrack, and other recordings. Has since worked with Identical and Cyclobe, and is also known as a film critic and author.
+
+\textbf{Danny Hyde}: Producer and engineer who became a regular fixture on later Coil releases, particularly through the mid-1990s sessions. Key technical collaborator on the \textit{Backwards}/\textit{New Backwards} material and subsequent posthumous releases.
+
+\textbf{Drew McDowall}: Worked with Coil regularly from the mid-1990s, became an official member in 1995. Central to the creation of \textit{Time Machines} (1998), for which he produced the original demo. Continued a significant solo career after Coil's dissolution, releasing \textit{The Third Helix} (2019) on Dais Records among other works. His practice centers on modular synthesis, granular techniques, and cut-up methods derived from Burroughs.
+
+\textbf{William Breeze}: Electric viola player who joined in early 1997, contributing to the Moon's Milk seasonal EPs and other late-period recordings.
+
+\textbf{Thighpaulsandra} (Timothy Lewis): Joined in the late 1990s, contributing to \textit{Astral Disaster}, both \textit{Musick to Play in the Dark} volumes, and subsequent work. Credited with introducing Serge and Synton modular synthesizers to the group's palette. Crucially, it was Thighpaulsandra who asked the question that relaunched Coil's live career: ``Why doesn't Coil play live?''
+
+\textbf{Ossian Brown}: Later-period member and collaborator, also associated with Cyclobe.
+
+\subsubsection{The Psychic TV Split}
+
+Balance and Christopherson departed Psychic TV and Thee Temple ov Psychick Youth in January 1984 to make Coil a full-time concern. The split reflected fundamental creative and philosophical differences with Genesis P-Orridge. As documented in the PopMatts analysis, Psychic TV/TOPY pursued systematized ritual practice with emphasis on replicability and group discipline, while Coil adopted an ad hoc, protean approach drawing from shamanism, alchemy, astrology, divination, Enochian magick, the Qabalah, and grimoire traditions simultaneously.
+
+\subsection{Module 2 Reference: Sonic Methods and Instrumentation}
+
+\subsubsection{Instruments and Technology by Era}
+
+\textbf{Early period (1982--1986)}: DX7, Emulator I and II, Fairlight CMI IIx and III, a device called the ``Mimic'' sampling keyboard (possibly a home-brewed sampler using cassettes), PPG Wave, guitar, piano, clarinet, ocarina, organ, bass. Iron and steel instruments featured on \textit{How to Destroy Angels}. The Angelic Conversation soundtrack introduced subtler sonic moods: drone snippets, echoed percussion, ringing bells, orchestral and choral elements.
+
+\textbf{Middle period (1987--1991)}: Serge modular synthesizer appeared on \textit{Love's Secret Domain}. The album marked a conscious embrace of acid house culture---its acronym (LSD) was deliberate. Sampling technology became more central; Christopherson was involved in creating one of the first samplers.
+
+\textbf{Side-project/transition period (1993--1998)}: \textit{Time Machines} (1998) was composed of four electronic drone pieces created entirely with modular synthesizers, using filters and oscillators fine-tuned to maximize the effect of ``temporal slips.'' Drew McDowall created the original demo inspired by hypnotic states in Tibetan music.
+
+\textbf{Late period / ``Moon Musick'' (1999--2004)}: Serge and Synton modular synthesizers (introduced by Thighpaulsandra), Nord Modular for live performances, Kurzweil K2000/K2600 series. Marimba (Tom Edwards) joined for live and studio work. The sound shifted decisively toward slower tempos, drone, and nocturnal electronics. Live re-performances of earlier songs (``Ostia,'' ``Slur,'' ``Teenage Lightning'') were deliberately slowed and transformed.
+
+\subsubsection{Key Sonic Concepts}
+
+\textbf{``Sidereal Sound''}: Coined by Coil in homage to Austin Osman Spare. Balance explained that ``sidereal relates to stars, but also through wordplay to looking at reality sideways, from a new angle or perspective. So as Spare twisted images in space, we adopt a similar process with sound.'' This represented their philosophy of sonic deviation and experimentation.
+
+\textbf{``Solar'' vs. ``Moon Musick''}: Balance described the first half of the discography as ``solar'' and their later work as ``moon musick''---a fundamental shift from aggressive, outward-directed energy to introspective, nocturnal, drone-based composition.
+
+\textbf{Sound as ritual}: Coil conceived many works as magical operations rather than conventional compositions. Specific recordings were timed to solstices and equinoxes (the Moon's Milk series, 1998), intended to trigger altered states in listeners, or designed as sonic equivalents of hallucinogenic experiences (\textit{Time Machines}).
+
+\textbf{Cut-up method}: Inherited from William Burroughs via Brion Gysin, the cut-up technique was central to Coil's compositional practice---fragmenting source material and reassembling it to allow unexpected meanings to emerge.
+
+\subsubsection{The ANS Synthesizer}
+
+Coil expressed particular interest in the Russian ANS photoelectronic synthesizer, a unique instrument that converts graphical images drawn on glass plates into sound. The 2003 album \textit{ANS} documented their experimentation with this instrument, representing one of the few Western groups to work with it.
+
+\subsection{Module 3 Reference: Occult and Esoteric Frameworks}
+
+\subsubsection{Primary Influences}
+
+\textbf{Aleister Crowley and Thelema}: Crowley's system pervaded Coil's work from the earliest recordings. The ``Tainted Love'' video contained multiple subliminal references to Crowley and the Law of Thelema. Balance's manifesto \textit{The Price of Existence Is Eternal Warfare} drew directly from \textit{The Book of Lies}.
+
+\textbf{Austin Osman Spare}: The Neither-Neither doctrine---the state of total vacuity of the conscious mind, related to Buddhist and tantric concepts---was central to both Coil's philosophy and their sonic methodology (``Sidereal Sound''). Drew McDowall has credited Spare as the subtextual influence on his entire body of work.
+
+\textbf{Chaos Magick}: The movement codified in 1978 by Peter Carroll and Ray Sherwin rejected the hierarchies of Victorian-era magical orders while empowering eclectic source material for ritual design. Coil absorbed chaos magick's DIY ethos but diverged from TOPY's systematized application, preferring an ad hoc approach that drew from multiple traditions simultaneously.
+
+\textbf{Enochian Magick and John Dee}: The artwork for \textit{Time Machines} (1998) featured John Dee's Hieroglyphic Monad inverted. Dee's system of angelic communication and his unifying glyph---composed of the seven symbols of alchemical planetary elements---represented the unity of all existence, a concept that resonated with Coil's synthesizing ambitions.
+
+\textbf{The Goetia / Lesser Key of Solomon}: Referenced across multiple works. This grimoire tradition, originally excavated by S. Liddell MacGregor Mathers (co-founder of the Golden Dawn) and published by Crowley, deals with the evocation of entities associated with earthly desires---a framework Coil both explored and subverted.
+
+\subsubsection{Magick as Creative Method}
+
+Balance stated: ``Certain tracks on certain Coil records are designed to trigger altered states, whether this happens or not is to some extent up to the listener. Without wishing to sound pompous, we want to make sacred music.'' This was not metaphorical: specific works were conceived as functional ritual objects. Albums were sometimes packaged with sigil-like autographs, blood stains, and art objects, transforming the physical record into ``something akin to occult artifacts.''
+
+The relationship between drug use and magickal practice was explicit: \textit{Love's Secret Domain}'s acronym (LSD) was intentional; \textit{Time Machines}' four tracks were named after hallucinogenic compounds (telepathine, DOET, 5-MeO-DMT, psilocybin) and were ``tested and retested'' for apparent narcotic potency.
+
+\subsubsection{Distinguishing Coil from TOPY}
+
+The PopMatts analysis identifies three ``magickal rifts'' separating Coil from Psychic TV/TOPY: differing relationships to chaos magick's legacy, divergent attitudes toward systematized vs. intuitive practice, and contrasting views on the role of group discipline vs. individual exploration. TOPY sought replicable results through disciplined sigil technique; Coil pursued protean, ad hoc experimentation that ``obsessively fine-tuned the variables of their own psyches.''
+
+\subsection{Module 4 Reference: Cultural Context}
+
+\subsubsection{AIDS Crisis and Queer Identity}
+
+Coil's 1985 cover of ``Tainted Love'' / ``Panic'' was released as a charity single with proceeds donated to the Terrence Higgins Trust. It is widely cited as the first music release dedicated to AIDS awareness and charity. The title's meaning was deliberately inverted from its pop-song original: Balance and Christopherson, as active members of London's gay nightlife, witnessed the early devastation of the epidemic firsthand. ``Tainted Love'' literally signified an infected lover.
+
+The Christopherson-directed video was purchased by the Museum of Modern Art in New York---the first music video to enter MoMA's permanent collection. \textit{Horse Rotorvator} (1986) was partly influenced by the AIDS-related deaths of friends. The 1992 soundtrack for the \textit{Gay Man's Guide to Safer Sex} video was both a call to action during the pre-therapy height of AIDS destruction and an uncompromising celebration of male homosexuality.
+
+\subsubsection{Derek Jarman Collaborations}
+
+Coil's first live performance (August 4, 1983) took place at the Magenta Club during a screening of films by Cerith Wyn Evans and Derek Jarman, establishing a creative connection that would span a decade:
+
+\textbf{The Angelic Conversation} (1985): Coil composed the full soundtrack for Jarman's meditation on homosexual desire, featuring Shakespeare's sonnets read by Judi Dench over Coil's instrumental backing. The film was described by Jarman as ``a dream world, a world of magic and ritual.''
+
+\textbf{Blue} (1993): Coil contributed music to Jarman's final major work---79 minutes of unchanging International Klein Blue accompanied by a soundtrack describing his experience living and dying with AIDS. The piece Coil recorded was intended as a ``representation of the ghost-like memory of the gay clubs at the end of the 70s/beginning of the 80s, where people had sex with strangers in backdoors and caught the HIV virus.''
+
+\textbf{Hellraiser rejected score} (1985--1986): Coil composed a score for Clive Barker's film that was ultimately rejected, reportedly because the music was deemed ``too terrifying.'' The rejected material was later released on compilation.
+
+\subsubsection{Post-Industrial Scene Connections}
+
+Coil maintained deep connections with Current 93 (David Tibet) and Nurse With Wound (Steve Stapleton), forming what Keenan termed the hidden reverse of English music. The relationship with Nine Inch Nails was significant: Coil remixed material from \textit{The Downward Spiral}; Christopherson directed NIN videos; Trent Reznor attempted to sign Coil to his Nothing imprint in the 1990s, and recordings took place at Nothing Studios in New Orleans. Reznor later named his side project How to Destroy Angels after Coil's debut EP, with Christopherson's approval.
+
+\subsection{Module 5 Reference: Discography Overview}
+
+\subsubsection{Key Studio Albums}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Title} & \tableheader{Significance} & \tableheader{Label} \\
+\midrule
+1984 & How to Destroy Angels (EP) & Debut; iron/steel instruments; dedicated to Mars & L.A.Y.L.A.H. \\
+1985 & Scatology & First LP; alchemy/transmutation themes & Some Bizzare \\
+1986 & Horse Rotorvator & Often cited as masterwork; AIDS/death themes & Some Bizzare \\
+1987 & Gold Is the Metal & Demos/outtakes; launched Threshold House label & Threshold \\
+1991 & Love's Secret Domain & Acid house turn; LSD acronym deliberate & Threshold \\
+1998 & Time Machines & Drone pieces named for hallucinogens & Eskaton \\
+1999 & Astral Disaster & Thighpaulsandra collaboration; initially 99 copies & Prescription \\
+1999 & Musick to Play in the Dark Vol. 1 & ``Moon musick'' era begins & Chalice \\
+2000 & Musick to Play in the Dark Vol. 2 & Continuation of nocturnal electronics & Chalice \\
+2000 & Constant Shallowness Leads to Evil & Deep noise territory & Eskaton \\
+2002 & The Remote Viewer & Return to semi-structured ambient & Threshold \\
+2003 & ANS & Russian photoelectronic synthesizer experiments & Threshold \\
+2004 & Black Antlers & Final studio sessions with Balance; live-derived & Threshold \\
+2005 & The Ape of Naples & Posthumous; completed by Christopherson & Threshold \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Side Projects and Aliases}
+
+Coil operated under multiple aliases, each representing a distinct sonic territory: \textbf{ELpH} (glitch and electronic experimentation; \textit{Worship the Glitch}, 1995), \textbf{Black Light District} (\textit{A Thousand Lights in a Darkened Room}, 1996), \textbf{Time Machines} (psychedelic drone, 1998), \textbf{The Eskaton} (acid house farewell), and \textbf{Sickness of Snakes} (\textit{Nightmare Culture}, 1985, with Boyd Rice). The side projects collectively traced the evolution from acid house through glitch to drone that defined Coil's transitional period.
+
+\subsubsection{Live Discography}
+
+After only four performances in 1983, Coil did not play live again until December 14, 1999 (Volksbuehne, Berlin---an 18-minute ELpH performance). They subsequently performed approximately 50 concerts through 2004, including two performances at the Royal Festival Hall (2000), wearing the signature ``fluffy suits'' that became a visual hallmark. Four live albums were released in 2003 (\textit{Live One} through \textit{Live Four}). Their final concert was at the 2004 Dublin Electronic Music Festival.
+
+\subsection{Module 6 Reference: Posthumous Legacy}
+
+\subsubsection{Deaths and Aftermath}
+
+John Balance died November 13, 2004, from injuries sustained in a fall at his home in Weston-super-Mare. Peter Christopherson formally announced that Coil as a creative entity had ceased to exist and relocated to Thailand, where he completed \textit{The Ape of Naples} (2005) and continued work as the Threshold HouseBoys Choir. He participated in the Throbbing Gristle reunion and planned further Coil archival releases, including the DVD box set \textit{Colour Sound Oblivion} (2010). Christopherson died in his sleep on November 24, 2010, at age 55 in Bangkok. Upon his death, people were asked to donate to organizations helping children affected by AIDS in Thailand.
+
+\subsubsection{Reissue Landscape}
+
+The posthumous release program has been extensive and sometimes contested:
+
+\textbf{Dais Records}: Major reissue partner; has released \textit{Musick to Play in the Dark} volumes, \textit{Time Machines}, \textit{Worship the Glitch}, \textit{Queens of the Circulating Library}, \textit{Black Antlers} (2025 reissue), among others.
+
+\textbf{Cold Spring Records}: Released \textit{Backwards} (2015, with Danny Hyde master) and the 10-year anniversary edition (January 2026); also released \textit{Recoiled} (2014), previously unreleased Coil remixes of NIN's \textit{The Downward Spiral}, authorized by Danny Hyde.
+
+\textbf{Infinite Fog Productions}: Released \textit{The New Backwards} extended edition (2022) and \textit{Astral Disaster: The Definitive Edition} (2025).
+
+\textbf{Threshold Archives}: A series of planned comprehensive reissues that has been intermittent.
+
+Additional posthumous releases include \textit{The Gay Man's Guide to Safer Sex + 2} (2019, with Danny Hyde as surviving participant), \textit{Sara Dale's Sensual Massage} (2020), and ongoing archival material. The 2024 box set \textit{The Art \& Audio, Works \& Writings of Geoffrey Rushton Alias John Balance: The Years 1979--1986} compiled early Balance/Coil work across 8 LPs with an accompanying book.
+
+\subsubsection{Influence}
+
+Coil's documented influence spans multiple genres and artists: Nine Inch Nails (Trent Reznor was an open fan; named How to Destroy Angels after the debut EP); Autechre; Sonic Youth; Chris Connelly; Alec Empire; KK Null; the broader dark ambient, neofolk, and experimental electronic scenes. The drone explorations of \textit{Time Machines} are credited with opening floodgates that continue to resonate in contemporary experimental music. The 2010s--2020s reissue wave has introduced Coil to new audiences, with critical reassessment establishing them as one of the most significant experimental music projects of the late 20th century.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Sensitivity} & \tableheader{Handling} \\
+\midrule
+Drug use and altered states & Moderate & Document as historical creative practice; no glorification or instruction; note harms alongside claimed benefits \\
+AIDS crisis and deaths & High & Treat with dignity and historical gravity; emphasize activism and cultural contribution \\
+Occult practice & Moderate & Present as documented belief system and creative methodology; avoid sensationalism or dismissal \\
+Balance's death & High & State facts plainly; no speculation beyond documented accounts \\
+Christopherson's death & High & State facts plainly with dignity \\
+Sexuality and queer identity & Moderate & Central to the work; present as integral cultural context, not sensational detail \\
+Estate and rights disputes & Low & Note existence without taking sides; focus on the work itself \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Published Books}
+Keenan, David. \textit{England's Hidden Reverse: A Secret History of the Esoteric Underground}. SAF Publishing, 2003. (Primary biographical and critical source.)
+
+Lachman, Gary. \textit{Turn Off Your Mind: The Mystic Sixties and the Dark Side of the Age of Aquarius}. Disinformation, 2001. (Broader occult context.)
+
+\subsubsection{Periodicals and Online Publications}
+The Wire, Issue 134, April 1995. ``Obscure Mechanics'' (feature interview with Coil). \\
+The Quietus. ``Serious Listeners: The Strange and Frightening World of Coil.'' November 2011. \\
+PopMatts. ``Strange Vistas from the Occultism of Coil and Psychic TV.'' March 2019. \\
+Telekom Electronic Beats. ``Magick \& Music: Coil's Drew McDowall Explains Ritual And The Creative Process.'' (Drew McDowall interview.) \\
+The Vinyl Factory. ``Pagan Experimentalists: Unravelling Coil in 10 Albums.'' \\
+Treble. ``The Best Coil Albums: A Beginner's Guide.'' April 2024.
+
+\subsubsection{Online Archives and Databases}
+Brainwashed.com/coil --- Official archive: discography, interviews, publications. \\
+The Nachtkabarett (nachtkabarett.com/coil) --- Occult symbolism analysis. \\
+Discogs.com --- Verified discographic data. \\
+Rate Your Music (rateyourmusic.com/artist/coil) --- Community-sourced discography and critical assessment.
+
+\subsubsection{Label Sources}
+Dais Records (dfrnt.com / coilofficial.bandcamp.com) --- Reissue liner notes and artist statements. \\
+Cold Spring Records --- \textit{Backwards} reissue notes. \\
+Infinite Fog Productions --- \textit{The New Backwards} extended edition notes.
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, well-sourced research reference on the experimental music group Coil (1982--2005), covering biography, sonic methodology, occult frameworks, cultural context, discography, and posthumous legacy. The reference must be self-contained, cross-referenced across modules, and structured for subsequent use in GSD educational knowledge packs and audio analysis missions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0          WAVE 1              WAVE 2          WAVE 3
+  Foundation      Parallel Research   Synthesis        Publication
+  ┌────────┐      ┌────────┐         ┌────────┐      ┌────────┐
+  │Schemas │      │Track A │         │ M5:    │      │Assembly│
+  │Source   │─────│M1:Orig │─────────│ Discog │──────│Verify  │
+  │Index   │      │M2:Sonic│         │ M6:    │      │Test    │
+  │Timeline│      ├────────┤         │ Legacy │      │Publish │
+  │        │      │Track B │         │Cross-  │      │        │
+  │        │──────│M3:Occlt│─────────│module  │      │        │
+  │        │      │M4:Cult.│         │integr. │      │        │
+  └────────┘      └────────┘         └────────┘      └────────┘
+   Haiku           Sonnet+Opus        Opus             Sonnet
+   Sequential      Parallel(2)        Sequential       Sequential
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[label=\arabic*., leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, timeline data structure, source index, naming conventions
+\item \textbf{Survey Layer} --- Six module-specific research documents (M1--M6)
+\item \textbf{Synthesis Layer} --- Cross-module integration, discography assembly, legacy mapping
+\item \textbf{Publication Layer} --- Final document assembly, verification, bibliography, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Origins \& Personnel Reference & $\geq$3,000 words; all 8 members profiled; sourced & M1-SURVEY \\
+2 & Sonic Methods Reference & $\geq$3,000 words; $\geq$8 instruments documented; era-mapped & M2-SURVEY \\
+3 & Occult Frameworks Reference & $\geq$3,000 words; $\geq$5 traditions identified; sourced & M3-SURVEY \\
+4 & Cultural Context Reference & $\geq$3,000 words; AIDS/Jarman/scene covered & M4-SURVEY \\
+5 & Annotated Discography & $\geq$40 releases; dates/labels verified & M5-SYNTHESIS \\
+6 & Legacy \& Influence Map & $\geq$10 posthumous releases; $\geq$8 influenced artists & M6-SYNTHESIS \\
+7 & Integrated Research Document & All modules cross-referenced; self-contained & ASSEMBLY \\
+8 & Source Bibliography & All claims attributed; $\geq$15 distinct sources & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2,000 \\
+W0-SOURCE-INDEX & None & Haiku & 3,000 \\
+W0-TIMELINE & None & Haiku & 2,000 \\
+M1-SURVEY & W0-* & Sonnet & 8,000 \\
+M2-SURVEY & W0-* & Sonnet & 8,000 \\
+M3-SURVEY & W0-* & Opus & 10,000 \\
+M4-SURVEY & W0-* & Sonnet & 8,000 \\
+M5-SYNTHESIS & M1,M2,M3,M4 & Sonnet & 12,000 \\
+M6-SYNTHESIS & M4,M5 & Opus & 10,000 \\
+CROSS-MODULE & M1--M6 & Opus & 6,000 \\
+ASSEMBLY & All above & Sonnet & 8,000 \\
+VERIFY & ASSEMBLY & Sonnet & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Occult framework analysis requires nuanced judgment; cross-module synthesis needs holistic perspective; legacy assessment involves contested interpretations \\
+Sonnet & 60\% & Biographical survey, sonic methods catalogue, discography compilation, and document assembly are structured tasks well-suited to Sonnet's balance of quality and efficiency \\
+Haiku & 10\% & Schema generation, source indexing, and timeline scaffolding are mechanical tasks requiring speed over depth \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Execution} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & 3 & Sequential & Auto \\
+1 & Parallel Research & 4 (2+2) & Parallel (2 tracks) & CAPCOM \\
+2 & Synthesis & 3 & Sequential & CAPCOM \\
+3 & Publication & 2 & Sequential & FLIGHT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & Haiku & 2,000 & Shared data schemas for personnel, releases, instruments, sources \\
+W0-SOURCE-INDEX & Haiku & 3,000 & Categorized source list with reliability ratings \\
+W0-TIMELINE & Haiku & 2,000 & Master chronology scaffold (1978--2026) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Biography and Sound}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+M1-SURVEY & Sonnet & 8,000 & Origins and Personnel reference document \\
+M2-SURVEY & Sonnet & 8,000 & Sonic Methods and Instrumentation reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Philosophy and Culture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+M3-SURVEY & Opus & 10,000 & Occult and Esoteric Frameworks reference \\
+M4-SURVEY & Sonnet & 8,000 & Cultural Context reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+M5-SYNTHESIS & Sonnet & 12,000 & Comprehensive annotated discography \\
+M6-SYNTHESIS & Opus & 10,000 & Legacy, influence, and posthumous corpus map \\
+CROSS-MODULE & Opus & 6,000 & Integration validation; cross-reference index \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+ASSEMBLY & Sonnet & 8,000 & Final integrated document with TOC, bibliography, index \\
+VERIFY & Sonnet & 4,000 & Fact-check pass; test plan execution; final review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs cached as shared context prefix for all Wave 1 components
+\item Track A and Track B share the Wave 0 cache but execute in separate context windows
+\item Wave 2 components load Wave 1 outputs as structured data, not raw text---reduces token overhead
+\item 5-minute cache TTL exploited by scheduling Wave 1 Track A components back-to-back (M1 $\rightarrow$ M2)
+\item Discography component (M5) receives pre-structured release data from M1/M2 schemas, not free-text
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 7,000 \\
+Wave 1: Research & 10,000 & 16,000 & --- \\
+Wave 2: Synthesis & 16,000 & 12,000 & --- \\
+Wave 3: Publication & --- & 12,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{26,000} & \textbf{40,000} & \textbf{7,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$73,000 tokens across 18--22 context windows in 4--5 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+    W0-SCHEMA ──┬──► M1-SURVEY ──┐
+    W0-SOURCE ──┤                ├──► M5-SYNTHESIS ──┐
+    W0-TIMELINE─┤   M2-SURVEY ──┘                   │
+                │                                     ├► ASSEMBLY ──► VERIFY
+                ├──► M3-SURVEY ──┐                   │
+                │                ├──► M6-SYNTHESIS ──┘
+                └──► M4-SURVEY ──┘        │
+                                          │
+                     CROSS-MODULE ◄───────┘
+                     (validates all M1-M6 connections)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to published books, established music publications, label liner notes, or verified archives. Zero tabloid or unsourced claims. \\
+SC-NUM & Numerical attribution & Every date, count, or statistic attributed to a specific source \\
+SC-ADV & No advocacy & Document presents evidence without advocating for specific positions on estate disputes or artistic merit rankings \\
+SC-SEN & Sensitivity handling & Drug use, deaths, and sexuality presented with historical dignity; no sensationalism \\
+SC-CPY & No copyright violation & No reproduction of lyrics, extensive quotation of published texts, or unauthorized images \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Module word count & Each module $\geq$3,000 words \\
+CF-02 & Personnel completeness & All 8 named members individually profiled with dates \\
+CF-03 & Discography breadth & $\geq$40 distinct releases documented \\
+CF-04 & Release data accuracy & Each release has title, year, and label \\
+CF-05 & Instrument catalogue & $\geq$8 named instruments/technologies with album mappings \\
+CF-06 & Era classification & Each instrument mapped to specific era(s) \\
+CF-07 & Esoteric traditions & $\geq$5 distinct traditions identified with specific works \\
+CF-08 & AIDS coverage & $\geq$3 sourced claims about Coil's AIDS-related work \\
+CF-09 & Jarman coverage & All three major collaborations documented \\
+CF-10 & Scene connections & $\geq$5 named scene connections with evidence \\
+CF-11 & Posthumous releases & $\geq$10 posthumous releases with label/provenance \\
+CF-12 & Influence documentation & $\geq$8 specific influenced artists with evidence \\
+CF-13 & Self-containment & Unfamiliar reader can construct understanding without external sources \\
+CF-14 & Solar/Moon framework & Balance's own categorization documented and applied \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1$\leftrightarrow$M3 cascade & Personal belief systems traced to specific creative decisions \\
+IN-02 & M2$\leftrightarrow$M5 consistency & Instruments mentioned in M2 appear on correct albums in M5 \\
+IN-03 & M3$\leftrightarrow$M4 integration & Occult practice connected to queer identity where documented \\
+IN-04 & M4$\leftrightarrow$M6 continuity & Cultural impact threads traced through posthumous legacy \\
+IN-05 & Timeline consistency & No contradictory dates across any modules \\
+IN-06 & Cross-reference index & $\geq$3 explicit connections per module pair \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Disputed claims handled & Contested facts (e.g., Hellraiser rejection story) flagged with uncertainty language \\
+EC-02 & Data gaps acknowledged & Areas of incomplete knowledge identified \\
+EC-03 & Source currency & Primary sources from last 15 years where available \\
+EC-04 & Alias disambiguation & All side-project aliases clearly linked to Coil membership \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Module word count $\geq$3,000 & CF-01 & Pending \\
+2. All 8 members profiled & CF-02 & Pending \\
+3. $\geq$40 releases documented & CF-03, CF-04 & Pending \\
+4. $\geq$8 instruments documented & CF-05, CF-06 & Pending \\
+5. $\geq$5 esoteric traditions & CF-07 & Pending \\
+6. AIDS/Jarman/scene coverage & CF-08, CF-09, CF-10 & Pending \\
+7. $\geq$10 posthumous releases & CF-11 & Pending \\
+8. $\geq$3 cross-module connections & IN-01--IN-06 & Pending \\
+9. All claims attributed & SC-SRC, SC-NUM & Pending \\
+10. Timeline consistency & IN-05 & Pending \\
+11. $\geq$8 influenced artists & CF-12 & Pending \\
+12. Self-contained document & CF-13 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate decisions \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; web research; evidence compilation \\
+EXEC-A & Executor (Track A) & M1 and M2 document production \\
+EXEC-B & Executor (Track B) & M3 and M4 document production \\
+CRAFT-SONIC & Domain: Sound & Sonic methods analysis; instrument verification \\
+CRAFT-ESOTERIC & Domain: Occult & Esoteric framework mapping; sensitivity review \\
+VERIFY & Verification & Source validation; fact-checking; date consistency \\
+INTEG & Integration & Cross-module relationship validation; discography coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 6 \\
+Parallel Tracks & 2 (Wave 1) \\
+Estimated Context Windows & 18--22 \\
+Estimated Sessions & 4--5 \\
+Token Budget (Opus) & $\sim$26,000 (36\%) \\
+Token Budget (Sonnet) & $\sim$40,000 (55\%) \\
+Token Budget (Haiku) & $\sim$7,000 (10\%) \\
+Total Token Budget & $\sim$73,000 \\
+Safety-Critical Tests & 5 (mandatory-pass) \\
+Total Tests & 29 \\
+Deliverables & 8 \\
+HITL Gates & 2 (post-Wave 1, post-Wave 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{quotebox}
+\textit{``Without wishing to sound pompous, we want to make sacred music. I don't mean something that assumes Messianic proportions or delusions, but I think all good music should be an attempt to change people's mind-sets.''} --- John Balance, The Wire, 1995
+
+\vspace{0.5em}
+
+The signal persists in the spaces between. This mission maps the territory so the music can continue to do its work.
+\end{quotebox}
+
+\end{document}

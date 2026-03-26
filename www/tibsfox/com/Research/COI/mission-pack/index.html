@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coil: Sonic Alchemy — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #F57F17;
+    --tertiary: #004D40;
+    --accent: #6A1B9A;
+    --light-primary: #EDE7F6;
+    --bg: #FAFAFA;
+    --card-bg: #2D2640;
+    --card-text: #E8E0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); }
+  
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--tertiary) 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.8; margin-bottom: 1rem; }
+  header h1 { font-size: 2.4rem; margin-bottom: 0.5rem; }
+  header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; font-weight: 400; }
+  header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1.5rem; font-size: 0.95rem; color: var(--secondary); }
+  
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg);
+    color: var(--card-text);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(49,27,146,0.3); }
+  .file-card .format { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); margin-bottom: 0.5rem; }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; color: white; }
+  .file-card .desc { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; }
+  
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  
+  .contents { list-style: none; padding: 0; }
+  .contents li { padding: 0.5rem 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+  
+  ol.instructions { padding-left: 1.5rem; }
+  ol.instructions li { margin-bottom: 0.8rem; line-height: 1.6; font-size: 0.95rem; }
+  
+  code { font-family: 'DM Mono', 'DejaVu Sans Mono', monospace; background: var(--light-primary); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  
+  .quote-box {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-box p { font-style: italic; line-height: 1.7; font-size: 0.95rem; }
+  .quote-box .attr { font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); margin-top: 0.5rem; }
+  
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; }
+  
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Coil: Sonic Alchemy<br>and the Hidden Frequencies</h1>
+  <div class="subtitle">The Music, Magick, and Legacy of an Irreplaceable Project</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+  
+  <div class="files">
+    <a href="coil-mission.pdf" download class="file-card">
+      <div class="format">PDF — 27 pages</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage pipeline: Vision Guide, Research Reference, and Mission Package ready for GSD orchestrator.</div>
+    </a>
+    <a href="coil-mission.tex" download class="file-card">
+      <div class="format">LaTeX Source</div>
+      <div class="name">coil-mission.tex</div>
+      <div class="desc">XeLaTeX source file. Modify and recompile to extend or customize the research.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage">Stage 1 — Vision Document</span>Vision narrative, problem statement (5 problems), core concept (transmutation as method), domain map, 6 research modules, chipset configuration, scope boundaries, 12 success criteria, through-line</li>
+    <li><span class="stage">Stage 2 — Research Reference</span>Source organizations, Module 1–6 reference findings (Origins & Personnel, Sonic Methods, Occult Frameworks, Cultural Context, Discography, Posthumous Legacy), safety/sensitivity considerations, source bibliography</li>
+    <li><span class="stage">Stage 3 — Mission Package</span>Milestone spec, 8 deliverables, component breakdown with model assignments, 4-wave execution plan with 2 parallel tracks, cache optimization, token budget (~73K), dependency graph, 29-test plan, verification matrix, Squadron crew manifest (12 roles)</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol class="instructions">
+    <li>Download the <strong>PDF</strong> for the complete mission package — it's self-contained and ready for handoff.</li>
+    <li>Feed to <strong>gsd-skill-creator</strong> via Claude Code. The Wave 0–3 execution plan and component specs are designed for direct orchestrator consumption.</li>
+    <li>HITL gates at post-Wave 1 and post-Wave 2 — CAPCOM will request human approval before proceeding.</li>
+    <li>Estimated execution: <strong>18–22 context windows</strong> across <strong>4–5 sessions</strong> with a Squadron activation profile.</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol class="instructions">
+    <li>Download the <code>.tex</code> source file</li>
+    <li>Ensure DejaVu fonts are installed (standard on Ubuntu; available via <code>fonts-dejavu</code>)</li>
+    <li>Run three XeLaTeX passes:
+      <br><code>xelatex -interaction=nonstopmode coil-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode coil-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode coil-mission.tex</code>
+    </li>
+  </ol>
+
+  <div class="quote-box">
+    <p>"Without wishing to sound pompous, we want to make sacred music. I don't mean something that assumes Messianic proportions or delusions, but I think all good music should be an attempt to change people's mind-sets."</p>
+    <div class="attr">— John Balance, The Wire, 1995</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Activation Profile: Squadron · March 2026
+</footer>
+
+</body>
+</html>
