@@ -10,8 +10,8 @@
 </head>
 <body class="project-cmh">
   <header>
-    <h1>Computational Mesh</h1>
-    <div class="subtitle">Mesh Networking &mdash; Topology &middot; Distributed Systems &middot; Signal Routing &middot; Node Architecture</div>
+    <h1>The Computational Mesh</h1>
+    <div class="subtitle">Infrastructure &mdash; High-Speed Networks &middot; Parallel Processing &middot; Linear Algebra &middot; Exascale</div>
     <nav>
       <a href="index.html" class="active">Overview</a>
       <a href="mission.html">Mission Pack</a>
@@ -20,11 +20,50 @@
 
   <main>
     <blockquote>
-      Research content coming soon. This module is currently in development.
+      The computational mesh is a hierarchical pipeline where photons become packets become messages become matrix tiles become floating-point results &mdash; and the architecture of each transformation layer determines the throughput of every layer above it.
     </blockquote>
 
-    <h2>About This Project</h2>
-    <p>The Computational Mesh research module covers mesh networking topology, distributed system design, signal routing, and node architecture for resilient networks. Full research content is in development.</p>
+    <h2>Research Modules</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-high-speed-network-standards" class="card" style="text-decoration:none;color:inherit">
+        <h3>01 &mdash; High-Speed Network Standards</h3>
+        <div class="meta">800GbE &middot; 1.6TbE &middot; PAM4 &middot; UEC</div>
+        <p>Physical and link layer foundations: IEEE 802.3df/dj, PAM4 signaling, coherent optics, Ultra Ethernet Consortium, and power constraints.</p>
+      </a>
+      <a href="page.html?doc=02-interconnect-topologies" class="card" style="text-decoration:none;color:inherit">
+        <h3>02 &mdash; Interconnect Topologies</h3>
+        <div class="meta">Fat-tree &middot; Dragonfly &middot; Torus &middot; Slim Fly</div>
+        <p>Network topology design for HPC and AI: five topologies analyzed with diameter, bisection bandwidth, cost trade-offs, and routing algorithms.</p>
+      </a>
+      <a href="page.html?doc=03-parallel-processing" class="card" style="text-decoration:none;color:inherit">
+        <h3>03 &mdash; Parallel Processing Paradigms</h3>
+        <div class="meta">MPI &middot; NCCL &middot; RDMA &middot; Collectives</div>
+        <p>Communication libraries for distributed computation: MPI universality, NCCL GPU optimization, RDMA zero-copy, and collective operation patterns.</p>
+      </a>
+      <a href="page.html?doc=04-vector-matrix-hardware" class="card" style="text-decoration:none;color:inherit">
+        <h3>04 &mdash; Vector &amp; Matrix Hardware</h3>
+        <div class="meta">Cray &middot; Tensor Cores &middot; TPU &middot; Mixed Precision</div>
+        <p>Hardware architectures from Cray-1 vector chaining through Blackwell 256x256 tensor cores, Google TPU systolic arrays, and the mixed-precision landscape.</p>
+      </a>
+      <a href="page.html?doc=05-linear-algebra-foundations" class="card" style="text-decoration:none;color:inherit">
+        <h3>05 &mdash; Linear Algebra Foundations</h3>
+        <div class="meta">BLAS &middot; GEMM &middot; LAPACK &middot; Tiling</div>
+        <p>The mathematical kernels: BLAS hierarchy, GEMM as the king of kernels, LAPACK algorithms, tiling for cache exploitation, and communication-avoiding methods.</p>
+      </a>
+      <a href="page.html?doc=06-exascale-convergence" class="card" style="text-decoration:none;color:inherit">
+        <h3>06 &mdash; The Exascale Convergence</h3>
+        <div class="meta">TOP500 &middot; AI+HPC &middot; Green500 &middot; GSD Cluster</div>
+        <p>Four exascale systems profiled, interconnect competition, AI-HPC convergence, energy efficiency, and relevance to the GSD 10-node mesh cluster.</p>
+      </a>
+      <a href="page.html?doc=07-verification-matrix" class="card" style="text-decoration:none;color:inherit">
+        <h3>07 &mdash; Verification Matrix</h3>
+        <div class="meta">12/12 PASS &middot; Source Quality &middot; Cross-Links</div>
+        <p>Success criteria verification, source quality assessment, and execution summary.</p>
+      </a>
+    </div>
+
+    <h2>Project Stats</h2>
+    <p>7 research modules &middot; ~1,120 lines &middot; 5 topologies &middot; 5 communication libraries &middot; 4 exascale systems &middot; 10 cross-referenced projects</p>
 
     <h2>Mission Pack</h2>
     <div class="card-grid">
@@ -37,8 +76,7 @@
   </main>
 
   <footer>
-    <p>Computational Mesh &middot; PNW Research Series &middot; gsd-skill-creator</p>
-    <p>Research content coming soon.</p>
+    <p>The Computational Mesh &middot; Research Series &middot; gsd-skill-creator</p>
   </footer>
 </body>
 </html>
