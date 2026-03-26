@@ -1,6 +1,7 @@
 # The Polka Medley
 
-> **Module:** Synthesis -- Capstone Cross-Reference Document
+> **Domain:** Synthesis & Cross-Reference
+> **Module:** 8 -- Interrelationships Atlas
 > **Through-line:** *Like a polka medley compresses an entire pop landscape into a single accordion-driven track, this atlas compresses the entire Research Series' connection to WAL into a single navigable document.* Every concept mapped. Every project linked. Every connection justified.
 
 ---
