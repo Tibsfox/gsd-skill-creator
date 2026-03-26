@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year of the Fire Dragon — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #8B0000;
+    --secondary: #B8860B;
+    --tertiary: #3E2723;
+    --accent: #C41E3A;
+    --light-primary: #FDE8E8;
+    --light-secondary: #FFF8DC;
+    --bg: #FFFAF5;
+    --card-bg: #F5EDE3;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; margin-bottom: 1rem; }
+  .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--light-secondary); }
+  .header .chinese { font-size: 1.8rem; margin: 0.5rem 0; opacity: 0.9; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    border: 1px solid #D7CCC8; transition: transform 0.2s;
+    text-decoration: none; color: var(--text); display: block;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,0,0,0.15); }
+  .card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1rem; margin-bottom: 0.3rem; }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  .contents { list-style: none; }
+  .contents li { padding: 0.4rem 0; border-bottom: 1px solid #EFEBE9; font-size: 0.95rem; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); display: inline-block; min-width: 6rem; }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { margin-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  .instructions code { background: #F5EDE3; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+  }
+  .quote-box p { font-style: italic; font-size: 0.95rem; }
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; font-family: 'DM Sans', sans-serif; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } .header h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>The Year of the Fire Dragon</h1>
+  <div class="chinese">丙辰 — Bǐng Chén</div>
+  <div class="subtitle">Cosmology, Culture, and the Sixty-Year Flame</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <div class="icon">🐉</div>
+      <h3>Mission Package (PDF)</h3>
+      <p>27-page three-stage pipeline: Vision → Research → Mission. Publication-quality, ready for GSD orchestrator.</p>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <div class="icon">📜</div>
+      <h3>LaTeX Source (.tex)</h3>
+      <p>Full XeLaTeX source for modification and recompilation. DejaVu fonts, tcolorbox environments, imperial fire color scheme.</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage">Stage 1</span> Vision Document — narrative vision, problem statement, 5-module architecture, 12 success criteria, through-line</li>
+    <li><span class="stage">Stage 2</span> Research Reference — Wuxing theory, dragon mythology, Fire in TCM, Bǐng Chén archetype, demographic evidence, 30+ sources</li>
+    <li><span class="stage">Stage 3</span> Mission Package — Squadron activation, 4-wave execution plan, 3 parallel tracks, 32 tests, crew manifest, 60.5K token budget</li>
+  </ul>
+
+  <h2>Five Research Modules</h2>
+  <ul class="contents">
+    <li><span class="stage">Module 1</span> Cosmological Foundations — Wuxing, Heavenly Stems, Earthly Branches, sexagenary mathematics</li>
+    <li><span class="stage">Module 2</span> The Dragon in Chinese Culture — Neolithic origins through Qing dynasty, nine types, Dragon Kings</li>
+    <li><span class="stage">Module 3</span> Fire Element Deep Dive — TCM correspondences, Heart as Emperor, Shen, seasonal medicine</li>
+    <li><span class="stage">Module 4</span> The Fire Dragon Archetype — Bǐng Chén construction, hidden stems, Four Pillars, five Dragon variants</li>
+    <li><span class="stage">Module 5</span> Demographic & Social Impact — Dragon baby booms, peer-reviewed evidence, educational competition, the dragon paradox</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Download the <strong>Mission Package (PDF)</strong> and review all three stages</li>
+      <li>Feed to <code>gsd-skill-creator</code> via Claude Code as the mission input document</li>
+      <li>The orchestrator will decompose into Wave 0–3 execution using the component specs and dependency graph</li>
+      <li>Squadron activation profile: 12 roles, 3 parallel tracks, ~14 context windows across 4 sessions</li>
+      <li>To modify and recompile the LaTeX source:
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code> (run three times)
+      </li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    <p>"The meaning lives in the pairing — in the space between the Stem and the Branch, the Fire and the Dragon, the sixty-year clock and the human life it measures. The Fire Dragon is not the loudest note in the zodiac. It is the most harmonic."</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem — Vision → Research → Mission Pipeline<br>
+  March 26, 2026 | Activation Profile: Squadron | 5 Modules | 27 Pages
+</div>
+
+</body>
+</html>
