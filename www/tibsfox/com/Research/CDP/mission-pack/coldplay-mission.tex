@@ -1,0 +1,958 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Cosmic / Music / Spheres ──
+\definecolor{primary}{HTML}{1A237E}        % Deep indigo — cosmic night
+\definecolor{secondary}{HTML}{F9A825}      % Golden amber — stage light
+\definecolor{tertiary}{HTML}{00695C}       % Teal — sustainability
+\definecolor{accent}{HTML}{283593}         % Bright indigo
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Coldplay}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Coldplay -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════
+%  TITLE PAGE
+% ════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Coldplay\\[0.3em]A Deep Research Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{History, Discography, Cultural Impact \& Sustainability}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{From University College London to the Most-Attended Tour in History}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--22 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ════════════════════════════════════════════════════
+%  TABLE OF CONTENTS
+% ════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Coldplay --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{GSD Ecosystem --- Deep Research Mission}
+
+\subsection{Vision}
+
+There is something rare about a band that begins in a university dormitory and ends up generating the most-attended concert tour in human history. Coldplay's three-decade arc---from Chris Martin meeting Jonny Buckland during orientation week at University College London in 1996, through ten studio albums that collectively sold over 160 million copies, to a sustainability-pioneering world tour verified by MIT---is not merely a story of commercial success. It is a case study in deliberate artistic evolution, principled reinvention, and the proposition that enormous scale and genuine care are not mutually exclusive.
+
+The Coldplay story maps onto the spaces between genres, between intimacy and spectacle, between artistic ambition and popular accessibility. Their willingness to pivot---from the hushed indie-rock of \textit{Parachutes} to Brian Eno's orchestral experiments on \textit{Viva la Vida}, to Max Martin's pop architecture on \textit{Music of the Spheres}---mirrors the GSD ecosystem's Amiga Principle: architectural leverage and specialized execution paths producing results that dwarf brute-force approaches. The band's self-imposed twelve-album limit, their 10\% charitable tithe, their kinetic dancefloor technology---these are not marketing gestures but structural decisions baked into the operation itself.
+
+This research mission will produce a comprehensive, publication-quality reference document spanning six modules: origins and formation, discographic evolution, live performance and cultural impact, sustainability innovation, awards and industry influence, and the band's philanthropic legacy and finite future. The resulting document is designed for both standalone reading and integration into the GSD college curriculum as a case study in creative-enterprise architecture.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Fragmented historical record.} Coldplay's twenty-eight-year history is spread across thousands of interviews, reviews, and fan sites with no single authoritative research document synthesizing the full arc from formation through the end of the Music of the Spheres World Tour.
+  \item \textbf{Underexamined sustainability model.} The band's environmental touring innovations---BMW rechargeable batteries, kinetic dancefloors, SAP-powered fan transport apps, MIT-verified 59\% emission reductions---represent the most ambitious green-touring initiative in live music history, yet no structured reference captures the complete technology stack and verification methodology.
+  \item \textbf{Sonic evolution poorly mapped.} Critical and popular discourse often treats Coldplay as monolithic, obscuring a dramatic genre journey spanning post-Britpop, art rock, electronica, orchestral pop, gospel, afrobeat, and progressive rock across ten albums with six different primary producers.
+  \item \textbf{Cultural and economic impact unquantified.} The Music of the Spheres World Tour (\$1.52 billion, 13.1 million tickets, 223 shows) generated seismic readings, national proclamations, and economic boosts across 40+ countries---data that exists in scattered press reports but has not been systematically compiled.
+  \item \textbf{Finite creative arc undocumented.} Martin's explicit twelve-album plan (with a musical as album eleven and a bedroom-recorded finale as album twelve) represents a rare deliberate creative boundary in popular music, meriting structured analysis.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Coldplay as a case study in \textit{deliberate creative-enterprise architecture}---how principled structural constraints (genre reinvention per album, self-imposed album limit, 10\% charitable tithe, sustainability-by-design touring) produce outsized artistic, commercial, and cultural outcomes over a multi-decade career.
+
+The research treats the band not as a static entity to be catalogued but as a dynamic system whose evolution follows identifiable architectural patterns. Each album era represents a design generation; each touring innovation represents an engineering milestone; each philanthropic commitment represents a structural value embedded in the operating model.
+
+\begin{asciibox}
+\begin{verbatim}
+                    COLDPLAY: RESEARCH DOMAIN MAP
+
+  FORMATION          DISCOGRAPHY          LIVE / CULTURAL
+  ┌──────────┐      ┌──────────────┐     ┌───────────────┐
+  │ UCL 1996 │──→──│ 10 Studios   │──→──│  223 Shows    │
+  │ Pectoralz│      │ 6 Producers  │     │  $1.52B Rev   │
+  │ Starfish │      │ 160M Records │     │  13.1M Tix    │
+  │ Coldplay │      │ 10 Genres    │     │  40+ Countries│
+  └──────────┘      └──────────────┘     └───────────────┘
+       │                   │                     │
+       └───────────────────┼─────────────────────┘
+                           │
+                    ┌──────┴──────┐
+                    │  CROSSCUTS  │
+                    ├─────────────┤
+                    │Sustainability│
+                    │Awards/Acclm │
+                    │Philanthropy │
+                    │12-Album Arc │
+                    └─────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module 1: Origins \& Formation}
+University College London (1996--2000). The Pectoralz-to-Starfish-to-Coldplay naming arc. Martin, Buckland, Berryman, Champion---four personalities, one chemistry. Phil Harvey as creative fifth member. The Safety EP (500 copies), Fierce Panda signing, Parlophone deal. Cultural context: post-Britpop landscape, the gap between Oasis and Radiohead that Coldplay filled.
+
+\subsubsection{Module 2: Discography \& Sonic Evolution}
+Ten studio albums from \textit{Parachutes} (2000) through \textit{Moon Music} (2024). Producer collaborations: Ken Nelson, Danton Supple, Brian Eno, Markus Dravs, Rik Simpson, Stargate, Max Martin, Bill Rahko, Jon Hopkins. Genre migration from dream pop through post-Britpop, art rock, orchestral pop, electronica, afrobeat, and back. Collaborators: Rihanna, BTS, Burna Boy, Little Simz, Beyoncé, Selena Gomez, Elyanna, Tini, Ayra Starr. The twelve-album plan and its artistic rationale.
+
+\subsubsection{Module 3: Live Performance \& Cultural Impact}
+From the Glastonbury breakthrough (2000) to five Pyramid Stage headlinings. The Music of the Spheres World Tour (2022--2025): most-attended tour in history, first band to gross \$1 billion, 13.1 million tickets, 223 reported shows. Seismic events (Berlin 1.5-magnitude earthquake). Wembley 10-night residency. \textit{Live at River Plate} concert film. Immersive production design: four-act narrative structure, LED wristbands, pyrotechnics, confetti systems.
+
+\subsubsection{Module 4: Sustainability \& Environmental Innovation}
+The ``no tour until it's sustainable'' pledge (2019). Three guiding principles: Reduce, Reinvent, Restore. BMW rechargeable show battery (recycled i3 cells). Energy Floors kinetic dancefloors. SAP fan-transport app. DHL GoGreen freight logistics. Solar PV backstage charging. MIT Environmental Solutions Initiative verification. 59\% direct CO$_2$e reduction vs.\ 2016--17 tour. 7+ million trees planted via One Tree Planted. EcoRecord LP and EcoCD physical formats. Compostable LED wristbands (86\% return rate). Biodegradable confetti and reduced-chemical pyrotechnics.
+
+\subsubsection{Module 5: Awards, Recognition \& Industry Influence}
+Seven Grammy Awards from 39 nominations. Nine Brit Awards from 32 nominations (most-awarded/nominated band in Brit history). Seven MTV VMAs. Nine Billboard Music Awards. NME Godlike Genius Award (2016). Rock and Roll Hall of Fame recognition (``Yellow'' in Songs That Shaped Rock and Roll; \textit{A Rush of Blood to the Head} on 200 Definitive Albums). 100 million monthly Spotify listeners (first group to achieve this). Forbes: ``the standard for the current alternative scene.'' Influence on Imagine Dragons, Bastille, The 1975, and dozens of others.
+
+\subsubsection{Module 6: Philanthropy, Activism \& Future Trajectory}
+10\% tithe on all earnings since early career. Oxfam Make Trade Fair campaign. Global Citizen Festival participation. ClientEarth, The Ocean Cleanup, One Tree Planted partnerships. Amnesty International advocacy. Music Venue Trust UK donations. 2023 \textit{Time} 100 Climate list. The twelve-album endgame: album eleven (a musical, animated), album twelve (``Coldplay,'' bedroom-recorded). Plans to continue touring after studio retirement. Legacy analysis.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: coldplay-deep-research
+  activation: fleet
+  model_allocation:
+    opus: 30%    # Synthesis, cultural analysis, through-line
+    sonnet: 60%  # Survey compilation, discography, tour data
+    haiku: 10%   # Schema scaffolding, bibliography templates
+  parallel_tracks: 3
+  estimated_windows: 18-22
+  sessions: 4-6
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Complete band history from 1996 formation through September 2025 Wembley finale
+  \item All ten studio albums with producer credits, genre analysis, commercial performance
+  \item Music of the Spheres World Tour complete data (revenue, attendance, records, sustainability)
+  \item Award history across Grammy, Brit, MTV VMA, Billboard, and NME
+  \item Sustainability technology stack and MIT verification methodology
+  \item Philanthropic commitments and organizational partnerships
+  \item The twelve-album plan and announced future projects
+  \item Key collaborations (Rihanna, BTS, Burna Boy, Little Simz, Beyoncé, etc.)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Solo projects by individual members (Chris Martin solo appearances, etc.)
+  \item Personal lives of band members beyond professionally relevant context
+  \item Detailed musicological/harmonic analysis (reserved for a potential follow-up)
+  \item Fan culture and fandom studies
+  \item Concert bootleg or unreleased material cataloguing
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All ten studio albums individually profiled with producer, genre classification, commercial data, and critical reception summary.
+  \item Music of the Spheres World Tour documented with verified revenue (\$1.52B+), attendance (13.1M+), venue records, and sustainability metrics.
+  \item Grammy, Brit, and Billboard award histories complete with years, categories, and outcomes.
+  \item Sustainability technology stack documented: BMW battery, kinetic floors, SAP app, DHL logistics, solar PV, with MIT verification methodology.
+  \item Band formation narrative traces Pectoralz → Starfish → Coldplay arc with all four members' origins and Phil Harvey's role.
+  \item At least five genre transitions explicitly mapped across the discography with producer attribution.
+  \item Philanthropic commitments documented: 10\% tithe, Oxfam, Global Citizen, ClientEarth, One Tree Planted, Music Venue Trust.
+  \item Twelve-album plan documented with confirmed details for albums eleven (musical) and twelve (bedroom-recorded ``Coldplay'').
+  \item Cultural influence section identifies at least five documented successor bands or industry impacts.
+  \item All numerical claims (sales figures, revenue, attendance, emission reductions) attributed to specific verifiable sources.
+  \item Document is self-contained: a reader with no prior Coldplay knowledge can understand the complete arc.
+  \item Synthesis module connects all six research modules into a coherent narrative of deliberate creative-enterprise architecture.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD College Curriculum & Case study in creative-enterprise architecture & Feeds into \\
+Deep Audio Analyzer Mission & Audio analysis tooling applicable to Coldplay corpus & Cross-reference \\
+Sustainability Infrastructure & Green-touring technology parallels solar/mesh infrastructure & Informational \\
+The Space Between & ``Spaces between genres'' as lived creative philosophy & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Coldplay's story is, at its heart, about the architecture of deliberate constraint. A band that chose to reinvent its sound with every album rather than repeat a proven formula. A touring operation that chose to build the world's first rechargeable show battery rather than accept the carbon cost of business as usual. A creative enterprise that chose a twelve-album limit---``less is more''---when the commercial incentive was to continue indefinitely.
+
+These are architectural decisions, not marketing decisions. They echo the Amiga Principle at the core of the GSD ecosystem: that specialized execution paths and principled constraints produce results that brute-force approaches never reach. The spaces between Coldplay's albums---between \textit{Parachutes} and \textit{Viva la Vida}, between \textit{Ghost Stories} and \textit{Everyday Life}---are where the most interesting creative work happens. The transitions, not the destinations, define the band.
+
+This research mission aims to capture that architecture faithfully: not a fan document, not a critical takedown, but a structural analysis of how four musicians from University College London built one of the most consequential creative enterprises of the twenty-first century.
+
+\newpage
+
+% ════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Coldplay --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings from authoritative sources to support the six research modules. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Recording Academy / GRAMMY.com} --- Official Grammy nomination and award records
+  \item \textbf{Brit Awards / BPI} --- British Phonographic Industry award and sales certification data
+  \item \textbf{Billboard / Pollstar Boxoffice} --- Tour revenue, attendance, and chart performance data
+  \item \textbf{MIT Environmental Solutions Initiative} --- Independent sustainability verification
+  \item \textbf{Guinness World Records} --- Certified attendance and touring records
+  \item \textbf{Coldplay.com / sustainability.coldplay.com} --- Official band communications and sustainability data
+  \item \textbf{Encyclopaedia Britannica} --- Biographical and historical reference
+  \item \textbf{Hope Solutions} --- Chartered Environmentalist assessments of touring emissions
+\end{itemize}
+
+\subsection{Module 1: Origins \& Formation Reference}
+
+\subsubsection{University College London, 1996--1999}
+
+Coldplay formed in 1996 at University College London. Chris Martin (b.\ March 2, 1977, Exeter) studied Ancient World Studies, graduating with first-class honours. Jonny Buckland (b.\ September 11, 1977, London) was his first musical partner; together they formed ``Pectoralz.'' Guy Berryman (b.\ April 12, 1978, Kirkcaldy, Scotland) joined on bass, and the trio renamed to ``Starfish.'' Will Champion (b.\ July 31, 1978, Southampton) completed the lineup by learning drums specifically for the band, despite having no prior drumming experience---he was already a multi-instrumentalist. The name ``Coldplay'' was adopted in 1998, taken from a poetry collection titled \textit{Child's Reflections, Cold Play}, and originally used by Tim Crompton's group.
+
+Phil Harvey, Martin's school friend, became manager and is credited as the band's ``fifth member'' and creative director. Three of four members completed their degrees (Berryman dropped out). Martin has joked that his real dream was to become an ancient history teacher, but ``then Coldplay came about.''
+
+\subsubsection{Early Releases and Label Journey}
+
+The band recorded their first EP, \textit{Safety} (1998), intending it as a demo---it went so well they released 500 copies to radio stations, press, and family. Simon Williams of independent label Fierce Panda signed them after seeing a London club show. Under Fierce Panda, they recorded \textit{Brothers \& Sisters} (February 1999), which entered the UK Singles Chart at number 92. After the \textit{Blue Room} EP generated glowing reviews, Parlophone (EMI) signed the band in 1999---a major-label deal that would anchor their entire career.
+
+Tim Rice-Oxley, then a Classics student, was asked by Martin to join as keyboard player but declined because his own band, Keane, was already active---a sliding-doors moment for both groups.
+
+\subsection{Module 2: Discography \& Sonic Evolution Reference}
+
+\subsubsection{Complete Studio Album Overview}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Primary Producer} & \tableheader{Genre / Style} \\
+\midrule
+Parachutes & 2000 & Ken Nelson & Post-Britpop, melodic pop, dream pop \\
+A Rush of Blood to the Head & 2002 & Ken Nelson & Alternative rock, art rock \\
+X\&Y & 2005 & Danton Supple & Arena rock, electronic-tinged ballads \\
+Viva la Vida or Death and All His Friends & 2008 & Brian Eno & Baroque pop, art rock, orchestral \\
+Mylo Xyloto & 2011 & Markus Dravs, Brian Eno & Electronica, pop-rock, concept album \\
+Ghost Stories & 2014 & Paul Epworth, Rik Simpson & Ambient, downtempo, electronica \\
+A Head Full of Dreams & 2015 & Rik Simpson, Stargate & Pop, funk, dance-pop \\
+Everyday Life & 2019 & Rik Simpson, Bill Rahko & Art rock, gospel, world music \\
+Music of the Spheres & 2021 & Max Martin & Synth-pop, space pop, K-pop collab \\
+Moon Music & 2024 & Bill Rahko, Max Martin & Pop rock, afrobeat, electronic, funk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Sonic Transitions}
+
+\textbf{Parachutes → A Rush of Blood to the Head (2000--2002):} The band expanded from hushed, intimate arrangements to more ambitious, dynamic compositions. ``Clocks'' introduced the iconic piano riff that would define their early identity, while ``The Scientist'' showcased Martin's ability to craft emotionally resonant ballads on a larger scale.
+
+\textbf{X\&Y → Viva la Vida (2005--2008):} The most dramatic reinvention. Brian Eno's production brought orchestral arrangements, world-music textures, and conceptual ambition. The delayed release of X\&Y had caused EMI's stock to drop; \textit{Viva la Vida} responded with the band's most critically acclaimed work and their first simultaneous UK/US number-one single.
+
+\textbf{Mylo Xyloto → Ghost Stories (2011--2014):} From explosive, pop-infused optimism (including a Rihanna collaboration) to the most intimate, subdued album of their career, written during Martin's separation from Gwyneth Paltrow. This whiplash demonstrated the band's willingness to follow emotional truth over commercial momentum.
+
+\textbf{Everyday Life → Music of the Spheres (2019--2021):} From a stripped-down, politically conscious double album recorded without a tour (environmental pledge) to a Max Martin-produced space-pop record featuring BTS. The genre distance between these consecutive albums is arguably the widest in the discography.
+
+\subsubsection{The Twelve-Album Plan}
+
+Martin has confirmed the band will release exactly twelve studio albums, citing the Beatles and Bob Marley as precedent. Album eleven will be an animated musical. Album twelve, titled simply \textit{Coldplay}, will be recorded in a bedroom setting---a deliberate return to origins. The band will continue touring after studio retirement. Martin told \textit{NME} that the final ``single single'' is ``All My Love'' from \textit{Moon Music}, and that the twelfth album will likely arrive ``a year late'' due to the musical's animation timeline.
+
+\subsection{Module 3: Live Performance \& Cultural Impact Reference}
+
+\subsubsection{Music of the Spheres World Tour (2022--2025)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total Gross Revenue & \$1.52 billion \\
+Total Tickets Sold & 13.1 million (most-attended tour in history) \\
+Total Reported Shows & 223 \\
+Launch Date / Venue & March 18, 2022, Estadio Nacional, San José, Costa Rica \\
+Final Date / Venue & September 12, 2025, Wembley Stadium, London \\
+Countries Visited & 40+ \\
+Wembley Stadium Shows & 16 (10-night residency in 2025 grossed \$131.4M) \\
+Billboard No.\ 1 Tour & 2022, 2023, 2024, and 2025 (four consecutive years) \\
+First Band to Gross \$1B & Yes (achieved during 2025 North American leg) \\
+Buenos Aires Record & \$49.7M from 626,841 entries (highest South American boxscore) \\
+Ahmedabad, India & 223,000+ fans across two nights (largest 21st-century stadium shows) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Production Design}
+
+The show is structured as a four-act narrative representing a journey outward into the unknown and returning home. Key production elements include LED wristbands (100\% compostable, plant-based materials, 86\% return/reuse rate), kinetic dancefloors and power bikes that generate electricity from audience movement, biodegradable confetti, reduced-chemical pyrotechnics, fireworks and laser systems using low-energy LED technology, and a PA system consuming up to 50\% less power than standard touring rigs.
+
+\subsubsection{Cultural Phenomena}
+
+On July 10, 2022, seismic stations near Berlin detected a 1.28-magnitude earthquake attributed to a Coldplay concert at Olympiastadion; the band encouraged fans to surpass this, producing 1.5-magnitude readings on subsequent nights. Vodafone UK reported 258 gigabytes of data uploaded during Coldplay's 2024 Glastonbury headline set. EE registered more than 47 terabytes of network traffic during the 2025 Wembley residency. The Ahmedabad shows drew 8.3 million Disney+ Hotstar views for a single live broadcast on January 26, 2025.
+
+\subsection{Module 4: Sustainability \& Environmental Innovation Reference}
+
+\subsubsection{The Three Principles}
+
+Coldplay's sustainability framework for the Music of the Spheres World Tour is built on three pillars: \textbf{Reduce} (less consumption, more recycling, cut CO$_2$ emissions by 50\% vs.\ 2016--17 tour), \textbf{Reinvent} (support new green technologies, develop sustainable touring methods), and \textbf{Restore} (fund nature and technology-based projects, draw down more CO$_2$ than the tour produces).
+
+\subsubsection{Technology Stack}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Technology} & \tableheader{Partner} & \tableheader{Function} \\
+\midrule
+Rechargeable show battery & BMW (recycled i3 cells) & First mobile rechargeable concert battery; powers 100\% of show with renewable energy \\
+Kinetic dancefloors & Energy Floors & Converts audience movement to electricity; custom tiles for durability and portability \\
+Fan transport app & SAP & Advises low-carbon routes; rewards fans choosing green transport; 350K+ downloads \\
+Freight logistics & DHL GoGreen Plus & Sustainable Aviation Fuel, electric vehicles, packing efficiency; 85\% lifecycle CO$_2$ reduction per SAF flight \\
+Solar PV panels & Various & Installed backstage at each venue to charge batteries pre-show \\
+Biodiesel generators & HVO biofuel & Palm-oil-free hydrotreated vegetable oil from waste cooking oil \\
+LED wristbands & Custom & 100\% compostable plant-based materials; 86\% return rate for reuse \\
+EcoRecord LP & Parlophone & Made from 9 recycled PET bottles per copy; 85\% CO$_2$ reduction vs.\ virgin plastic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification}
+
+All sustainability data is independently collated by Hope Solutions (Chartered Environmentalist, Fellow of IEMA) and audited by MIT's Environmental Solutions Initiative. Professor John E.\ Fernández of MIT has validated the 59\% direct CO$_2$e emission reduction (show-by-show comparison vs.\ 2016--17 A Head Full of Dreams Tour). The figures explicitly exclude offsets---the reductions are real operational reductions. The tour has planted over 7 million trees across 24 countries through One Tree Planted, restoring approximately 10,000 hectares.
+
+\subsection{Module 5: Awards, Recognition \& Industry Influence Reference}
+
+\subsubsection{Major Award Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Award Body} & \tableheader{Wins} & \tableheader{Nominations} & \tableheader{Notable} \\
+\midrule
+Grammy Awards & 7 & 39 & Record of the Year (``Clocks''), Song of the Year (``Viva la Vida'') \\
+Brit Awards & 9 & 32 & Most-awarded/nominated band in history; 4× Best British Group \\
+MTV VMAs & 7 & --- & Swept 2003 for ``The Scientist'' \\
+Billboard Music Awards & 9 & 30 & Top Rock Album, Top Rock Artist, Top Touring Artist \\
+Ivor Novello Awards & 2 & --- & Songwriters of the Year (2003) \\
+NME Awards & Godlike Genius & --- & 2016 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Industry Influence}
+
+The Rock and Roll Hall of Fame included ``Yellow'' in its ``Songs That Shaped Rock and Roll'' exhibition and \textit{A Rush of Blood to the Head} in its ``200 Definitive Albums'' list. Forbes described Coldplay as ``the standard for the current alternative scene.'' \textit{Rolling Stone} readers voted them the fourth-best artist of the 2000s decade. The band became the first group in Spotify history to reach 100 million monthly listeners. Their touring sustainability initiatives have directly influenced Billie Eilish, Shawn Mendes, and festival organizers worldwide. A 2023 \textit{Time} 100 Climate list inclusion further cemented their position as cultural-environmental leaders.
+
+\subsection{Module 6: Philanthropy, Activism \& Future Trajectory Reference}
+
+\subsubsection{Charitable Framework}
+
+Since their early years, Coldplay have donated 10\% of all profits to charity, held in a bank account none of the band members can access. In 2021, according to \textit{The Times}, the band donated more than \pounds2.1 million to environmental causes through their J Van Mars Foundation. Key organizational partnerships include Oxfam (Make Trade Fair campaign; Martin visited Ghana and Haiti), Amnesty International (performed at The Secret Policeman's Ball 2012), ClientEarth, The Ocean Cleanup, One Tree Planted, Global Citizen, Music Venue Trust (10\% of UK show proceeds donated), Human Rights First, Cancer Active, and 21st Century Leaders.
+
+\subsubsection{Future Trajectory}
+
+The band plans two more studio albums after \textit{Moon Music}: album eleven (an animated musical, timeline extended beyond original 2025 target) and album twelve (\textit{Coldplay}, bedroom-recorded, a return to origins). Live touring will continue indefinitely after studio retirement. Martin has stated that the creative limitation is the point: ``There's only twelve and a half Beatles albums. There's about the same Bob Marley, so all of our heroes.'' With more dates teased for 2027 and beyond, the Music of the Spheres World Tour may yet challenge The Eras Tour's all-time gross revenue record of \$2.08 billion.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Personal lives of members & GATE & Include only professionally relevant context; no tabloid material \\
+Political controversies & ANNOTATE & Note conservative Muslim criticism of Indonesia/Malaysia shows; present without advocacy \\
+Copyright infringement lawsuit & ANNOTATE & Document Satriani ``Viva la Vida'' suit; note dismissal; present facts only \\
+Sustainability greenwashing debate & ANNOTATE & Present both MIT verification and Transport \& Environment criticism of Neste partnership \\
+Mental health themes in lyrics & GATE & Reference Ghost Stories context with appropriate framing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official \& Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Coldplay.com --- Official band website and sustainability portal (sustainability.coldplay.com)
+  \item Recording Academy / GRAMMY.com --- Grammy Awards history and verification
+  \item Brit Awards / BPI --- British Phonographic Industry certifications and award records
+  \item MIT Environmental Solutions Initiative --- Independent sustainability audit reports
+  \item Guinness World Records --- Certified touring attendance records
+  \item Billboard / Pollstar Boxoffice --- Tour revenue and chart data
+  \item Rock and Roll Hall of Fame --- ``200 Definitive Albums'' and ``Songs That Shaped Rock and Roll''
+\end{itemize}
+
+\subsubsection{Reference Publications}
+\begin{itemize}[leftmargin=2em]
+  \item Encyclopaedia Britannica --- ``Coldplay'' biographical entry (updated March 2026)
+  \item GRAMMY.com --- ``Songbook: Coldplay's Diverse Musical Styles'' (2025)
+  \item \textit{Variety} --- ``Coldplay Announces Final Album Will Be the Band's 12th'' (September 2024)
+  \item \textit{NME} --- Chris Martin exclusive interview on twelve-album plan (October 2024)
+  \item \textit{Variety} --- ``Are Eco-Friendly Tours the Future of Live Music?'' (January 2025)
+  \item Hope Solutions --- Tour emissions assessment methodology and reports
+  \item Energy Floors --- Kinetic dancefloor technology documentation
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality reference document on Coldplay spanning formation, discography, live performance, sustainability innovation, awards, and philanthropy. The document must be self-contained, verifiable, and suitable for integration into the GSD college curriculum as a case study in creative-enterprise architecture.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+Wave 0: Foundation          Wave 1: Research (Parallel)         Wave 2    Wave 3
+┌─────────────────┐   ┌─────────────────────────────────┐   ┌───────┐  ┌───────┐
+│ Schema + Source │──→│ Track A: Origins + Discography   │──→│Synth- │──│Publish│
+│ Index + Templates│  │ Track B: Live + Sustainability   │   │ esis  │  │  +    │
+│ (Haiku)         │   │ Track C: Awards + Philanthropy   │   │(Opus) │  │Verify │
+└─────────────────┘   └─────────────────────────────────┘   └───────┘  └───────┘
+      Sequential              3 Parallel Tracks              Sequential  Sequential
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, document templates
+  \item \textbf{Research Layer} --- Six parallel-capable survey modules
+  \item \textbf{Synthesis Layer} --- Cross-module integration, narrative arc, through-line
+  \item \textbf{Publication Layer} --- Final document assembly, verification, indexing
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Source Index & 15+ authoritative sources catalogued & W0-SOURCE \\
+2 & Origins Module & Formation through Parlophone signing & W1A-ORIGINS \\
+3 & Discography Module & All 10 albums profiled & W1A-DISCOG \\
+4 & Live Performance Module & MOTS tour fully documented & W1B-LIVE \\
+5 & Sustainability Module & Tech stack + MIT verification & W1B-SUSTAIN \\
+6 & Awards Module & Grammy/Brit/Billboard complete & W1C-AWARDS \\
+7 & Philanthropy Module & Charitable framework + future plans & W1C-PHILANTH \\
+8 & Synthesis Document & Cross-module narrative + through-line & W2-SYNTHESIS \\
+9 & Final Publication & Compiled, indexed, verified PDF & W3-PUBLISH \\
+10 & Verification Report & All 12 criteria mapped to evidence & W3-VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SOURCE & None & Haiku & 2K \\
+W0-SCHEMA & None & Haiku & 1.5K \\
+W1A-ORIGINS & W0-SOURCE & Sonnet & 4K \\
+W1A-DISCOG & W0-SOURCE, W0-SCHEMA & Sonnet & 6K \\
+W1B-LIVE & W0-SOURCE & Sonnet & 5K \\
+W1B-SUSTAIN & W0-SOURCE & Opus & 5K \\
+W1C-AWARDS & W0-SOURCE, W0-SCHEMA & Sonnet & 4K \\
+W1C-PHILANTH & W0-SOURCE & Sonnet & 3.5K \\
+W2-SYNTHESIS & All W1 components & Opus & 6K \\
+W3-PUBLISH & W2-SYNTHESIS & Sonnet & 4K \\
+W3-VERIFY & W3-PUBLISH & Opus & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Sustainability analysis (nuanced greenwashing debate), synthesis narrative, verification matrix, cultural impact judgment \\
+Sonnet & 60\% & Survey compilation (discography tables, tour data, award lists), document assembly, origins narrative \\
+Haiku & 10\% & Schema templates, source index scaffolding, bibliography formatting \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Est.\ Windows} & \tableheader{Primary Model} \\
+\midrule
+0 & Foundation & Sequential & 2 & Haiku \\
+1 & Parallel Research & 3 Tracks & 8--10 & Sonnet + Opus \\
+2 & Synthesis & Sequential & 4--5 & Opus \\
+3 & Publish + Verify & Sequential & 3--4 & Sonnet + Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Source index compilation & SCOUT & Haiku & source-index.json with 15+ entries \\
+Schema definition & PLAN & Haiku & album.schema, award.schema, tour-metrics.schema \\
+Template generation & EXEC & Haiku & Module document templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Origins \& Discography (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Formation research & CRAFT-HIST & Sonnet & origins-module.md \\
+Discography survey & CRAFT-MUSIC & Sonnet & discography-module.md \\
+Sonic evolution map & CRAFT-MUSIC & Sonnet & genre-transitions.md \\
+12-album plan docs & CRAFT-HIST & Sonnet & future-trajectory.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Live Performance \& Sustainability (Sonnet + Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+MOTS tour data & CRAFT-LIVE & Sonnet & tour-metrics-module.md \\
+Cultural phenomena & CRAFT-LIVE & Sonnet & cultural-impact.md \\
+Sustainability tech & CRAFT-GREEN & Opus & sustainability-module.md \\
+MIT verification & CRAFT-GREEN & Opus & verification-methodology.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Awards \& Philanthropy (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Awards compilation & CRAFT-ACCLAIM & Sonnet & awards-module.md \\
+Industry influence & CRAFT-ACCLAIM & Sonnet & influence-analysis.md \\
+Philanthropy survey & CRAFT-CAUSE & Sonnet & philanthropy-module.md \\
+Legacy analysis & CRAFT-CAUSE & Sonnet & legacy-framework.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Cross-module integration & INTEG & Opus & integrated-narrative.md \\
+Through-line synthesis & FLIGHT & Opus & through-line.md \\
+Consistency check & VERIFY & Opus & consistency-report.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Document assembly & EXEC & Sonnet & coldplay-research.pdf \\
+Bibliography validation & VERIFY & Sonnet & bibliography-check.md \\
+Verification matrix & VERIFY & Opus & verification-matrix.md \\
+Index page & EXEC & Sonnet & index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 outputs cached as shared context for all Wave 1 agents (5-minute TTL window)
+  \item Source index loaded once, referenced by all CRAFT agents
+  \item Album schema and tour-metrics schema shared across Tracks A and B
+  \item Wave 1 Track outputs cached at wave boundary for Wave 2 synthesis
+  \item Opus agents in Wave 2 receive all six module outputs in a single context load
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus Tokens} & \tableheader{Sonnet Tokens} & \tableheader{Haiku Tokens} \\
+\midrule
+Wave 0: Foundation & --- & --- & 3.5K \\
+Wave 1: Research & 10K & 21.5K & --- \\
+Wave 2: Synthesis & 6K & --- & --- \\
+Wave 3: Publish & 3K & 4K & --- \\
+\midrule
+\textbf{Total} & \textbf{19K (30\%)} & \textbf{25.5K (60\%)} & \textbf{3.5K (10\%)} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+W0-SOURCE ──→─┬─→ W1A-ORIGINS ──→──┐
+              ├─→ W1A-DISCOG  ──→──┤
+              ├─→ W1B-LIVE    ──→──┤
+W0-SCHEMA ──→─┤                    ├──→ W2-SYNTHESIS ──→ W3-PUBLISH
+              ├─→ W1B-SUSTAIN ──→──┤                     ──→ W3-VERIFY
+              ├─→ W1C-AWARDS  ──→──┤
+              └─→ W1C-PHILANTH──→──┘
+
+Legend: ──→ = dependency    ─┬─ = fork    ─┤ = join
+Wave boundaries are go/no-go gates requiring FLIGHT approval.
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to official sites, major publications, or industry databases. Zero entertainment blogs as primary sources. \\
+SC-NUM & Numerical attribution & Every sales figure, revenue number, and emission percentage attributed to Billboard, Pollstar, MIT, or official Coldplay data. \\
+SC-ADV & No advocacy & Document presents Coldplay's sustainability efforts and criticisms thereof without advocating for or against specific environmental policies. \\
+SC-PRIV & Personal privacy & No tabloid-sourced personal information; Martin-Paltrow reference limited to professionally relevant context. \\
+SC-COPY & No copyrighted material & No song lyrics, poem excerpts, or extended quotations reproduced. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+CF-01 & All 10 studio albums profiled with year, producer, genre, and commercial data \\
+CF-02 & MOTS tour documents revenue (\$1.52B+), tickets (13.1M+), and show count (223+) \\
+CF-03 & Grammy history complete: 7 wins from 39 nominations with categories and years \\
+CF-04 & Brit Awards: 9 wins from 32 nominations; most-awarded band status documented \\
+CF-05 & Sustainability tech stack: all 8 technology partners identified and described \\
+CF-06 & MIT verification methodology documented with Prof.\ Fernández attribution \\
+CF-07 & Formation narrative: Pectoralz → Starfish → Coldplay with all member origins \\
+CF-08 & At least 5 genre transitions mapped: post-Britpop → art rock → orchestral → electronic → pop → afrobeat \\
+CF-09 & Philanthropic commitments: 10\% tithe, Oxfam, ClientEarth, One Tree Planted, Music Venue Trust \\
+CF-10 & 12-album plan: albums 11 (musical) and 12 (bedroom ``Coldplay'') documented \\
+CF-11 & At least 5 successor bands/industry impacts cited with sources \\
+CF-12 & Billboard Boxscore #1 status for 4 consecutive years (2022--2025) documented \\
+CF-13 & 59\% emission reduction figure attributed to MIT ESI verification \\
+CF-14 & Self-containment: document readable without prior Coldplay knowledge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+IN-01 & Discography → Live: album eras map to corresponding tour eras \\
+IN-02 & Sustainability → Live: green tech described in sustainability module matches tour production details \\
+IN-03 & Awards → Discography: Grammy/Brit wins correctly attributed to specific albums \\
+IN-04 & Philanthropy → Sustainability: 10\% tithe and environmental partnerships connect without contradiction \\
+IN-05 & Origins → Future: formation narrative and 12-album plan form coherent bookended arc \\
+IN-06 & Cross-module data consistency: sales figures, dates, and member details identical across all modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & All 10 albums profiled & CF-01 & Pending \\
+2 & MOTS tour documented & CF-02, CF-12 & Pending \\
+3 & Grammy/Brit/Billboard complete & CF-03, CF-04, IN-03 & Pending \\
+4 & Sustainability tech stack & CF-05, CF-06, CF-13, IN-02 & Pending \\
+5 & Formation narrative complete & CF-07, IN-06 & Pending \\
+6 & Genre transitions mapped & CF-08 & Pending \\
+7 & Philanthropy documented & CF-09, IN-04 & Pending \\
+8 & 12-album plan documented & CF-10, IN-05 & Pending \\
+9 & Cultural influence cited & CF-11 & Pending \\
+10 & Numerical claims attributed & SC-NUM, SC-SRC & Pending \\
+11 & Self-contained document & CF-14 & Pending \\
+12 & Synthesis connects all modules & IN-01 through IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation \\
+EXEC (×2) & Executor & Document production---one per parallel track cluster \\
+CRAFT-HIST & History Specialist & Formation, early years, future trajectory \\
+CRAFT-MUSIC & Music Specialist & Discography, sonic evolution, genre analysis \\
+CRAFT-LIVE & Live Specialist & Tour data, production design, cultural phenomena \\
+CRAFT-GREEN & Sustainability Specialist & Green tech stack, MIT verification, emission data \\
+CRAFT-ACCLAIM & Awards Specialist & Grammy, Brit, Billboard, industry influence \\
+CRAFT-CAUSE & Philanthropy Specialist & Charitable framework, activism, legacy \\
+VERIFY & Verification & Source validation; numerical accuracy checking \\
+INTEG & Integration Agent & Cross-module consistency; narrative coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+TOPO & Topology Manager & Agent team structure; mid-mission adjustments \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Waves & 4 (0 through 3) \\
+Parallel Tracks & 3 (Wave 1) \\
+Estimated Context Windows & 18--22 \\
+Estimated Sessions & 4--6 \\
+Total Estimated Tokens & $\sim$48K (Opus: 19K, Sonnet: 25.5K, Haiku: 3.5K) \\
+Research Modules & 6 \\
+Deliverables & 10 \\
+Test Cases & 29 (5 safety-critical, 14 core, 6 integration, 4 edge) \\
+Success Criteria & 12 \\
+Crew Size & 18 agents \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``I've never been cool and I don't really care about being cool. It's just an awful lot of time and hair gel wasted.''}\\[0.5em]
+\hfill--- Chris Martin\\[1em]
+The architecture of deliberate constraint---twelve albums, not thirteen; fifty percent fewer emissions, not carbon offsets; ten percent of everything to charity, not whatever's convenient. In the spaces between these boundaries, the most interesting creative work happens. That is the Coldplay principle, and it rhymes with the Amiga Principle at the heart of the GSD ecosystem: principled constraints, faithfully iterated, produce staggering results.
+\end{quotebox}
+
+\end{document}
