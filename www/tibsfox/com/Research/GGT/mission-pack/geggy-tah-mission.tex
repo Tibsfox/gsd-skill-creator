@@ -1,0 +1,1050 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Music History / Cultural (Burgundy-Gold-Parchment) ===
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Geggy Tah --- Deep Research}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Geggy Tah -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Geggy Tah\\[0.3em]The Inclusionary Wave}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Music, Postmodernism, and the Spaces Between Genres}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 14 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Geggy Tah --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD Creative Suite / Music History Educational Pack}
+
+\subsection{Vision}
+
+In 1993, David Byrne received a demo tape from two musicians in Pomona, California. He described it as ``one of the weirdest, most surprising things we'd ever heard. It was truly like nothing else.'' The band was Geggy Tah---a name derived from the childhood mispronunciations of ``Greg'' and ``Tommy'' by their respective baby sisters. Byrne signed them to his Luaka Bop label, a home for music that defied conventional categories, even though they were an American band on a label built to showcase the world. They didn't fit. That was the point.
+
+Geggy Tah---Tommy Jordan on vocals, bass, and lyrics; Greg Kurstin on keyboards, guitar, and multi-instrumental wizardry---produced three albums between 1994 and 2001 that treated genre boundaries as suggestions to be cheerfully ignored. Their sound blended funk, jazz, alternative rock, experimental noise, and pop into something critics struggled to name. Byrne called them ``a cross between Ween and Prince, but with deeper and more articulate lyrics.'' \textit{Rolling Stone} said their debut ``creates its own aural planet.'' Ben Harper called Jordan ``one of the most creative and versatile multi-instrumentalists of our generation.'' T Bone Burnett counted Jordan among the five most creative people working in the music business.
+
+The story of Geggy Tah is a story about the spaces between things---between jazz training and pop accessibility, between critical adoration and commercial obscurity, between a childhood song about traffic courtesy and a hit single that climbed the charts five years after it was recorded. It is also the origin story of Greg Kurstin, who went from a one-hit-wonder band on an indie label to becoming one of the most decorated producers in modern music history, winning nine Grammy Awards and co-writing Adele's ``Hello.'' The creative DNA of Geggy Tah---the fearless eclecticism, the multi-instrumental fluency, the insistence that music should express the full messiness of life---runs directly through the mainstream pop that Kurstin would later help define.
+
+This research mission documents Geggy Tah comprehensively: their origins in the experimental collective CoCu, their three albums on Luaka Bop, the network of extraordinary musicians who passed through their orbit (Susan Rogers, Pamelia Kurstin, James Gadson, Laurie Anderson), their post-band trajectories, and the cultural context of David Byrne's Luaka Bop label as a postmodern curatorial project. The pack is designed for integration into the GSD Creative Suite as a music history educational module---a case study in how artistic courage, genre dissolution, and collaborative chemistry can produce work that ``comes out the other side'' of postmodernism.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The vanishing middle.} Geggy Tah occupied a space between mainstream and underground that has largely disappeared from the music industry. Their story illuminates how label restructuring (Luaka Bop's move from Warner Bros.\ to Virgin), commercial timing, and genre-defying sound can relegate extraordinary work to historical footnotes.
+
+\item \textbf{The one-hit-wonder trap.} The band's cultural legacy is almost entirely collapsed into ``Whoever You Are'' and a Mercedes-Benz commercial. The depth of their three-album catalog, their live show innovation, and their creative influence is undocumented in any comprehensive form.
+
+\item \textbf{The invisible origin story.} Greg Kurstin's biography typically begins with Lily Allen or The Bird and the Bee. His formative decade with Geggy Tah---where he learned to produce, record, and think about music as an expression of life's full range---is treated as a footnote rather than a foundation.
+
+\item \textbf{The Susan Rogers connection.} Rogers, Prince's legendary engineer, has described her work with Geggy Tah as career-transforming---the experience that taught her ``music is an expression of life'' and shifted her approach to production. This pivotal creative relationship is underexplored.
+
+\item \textbf{The Luaka Bop paradox.} Geggy Tah was an American band on a world music label that rejected the ``world music'' label. Their presence on Luaka Bop raises questions about curatorial identity, genre taxonomy, and what it means to be ``exotic enough'' for an outsider-art imprint.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Model:} Geggy Tah as a case study in \textit{inclusionary aesthetics}---the creative practice of treating every genre, instrument, found sound, and emotional register as valid material, producing work that transcends categorization not by rejecting influences but by absorbing all of them simultaneously.
+\end{quotebox}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    GEGGY TAH: THE INCLUSIONARY WAVE
+                    ================================
+
+  PRECURSORS                    CORE                      AFTERMATH
+  ==========                    ====                      =========
+
+  CoCu Collective ----+     Grand Opening (1994)     Greg Kurstin
+  (1987-early 90s)    |         |                    - Bird and the Bee
+  10 musicians        |     Sacred Cow (1996)        - 9 Grammy Awards
+  + 5 non-musicians   +---> "Whoever You Are"        - Adele, Sia, Beck
+  Bono buys studio    |         |                    
+  time                |     Into the Oh (2001)       Tommy Jordan
+                      |         |                    - Jack Johnson "Flake"
+  David Byrne --------+     Luaka Bop Label          - Ben Harper circle
+  Luaka Bop (1988)    |     Susan Rogers (prod.)     
+  "World music"       |     Pamelia Kurstin          Pamelia Stickney
+  that isn't          |     (theremin)               - Bob Moog collaborator
+                      |     James Gadson (drums)     - TED, SNL, Moog doc
+  Jazz Training ------+     Daren Hahn (drums)       - Vienna experimental
+  Jaki Byard (Kurstin)      Laurie Anderson (guest)    scene
+  Upright bass (Pamelia)    Glen Phillips (guest)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  +------------------+    +---------------------+
+  | M1: ORIGINS      |    | M2: DISCOGRAPHY     |
+  | CoCu -> GT       |    | 3 Albums Deep       |
+  | Formation story   |    | Track-level analysis|
+  +--------+---------+    +---------+-----------+
+           |                        |
+           v                        v
+  +------------------+    +---------------------+
+  | M3: CREATIVE     |    | M4: POST-GEGGY TAH  |
+  | NETWORK          |    | TRAJECTORIES        |
+  | Rogers, Byrne,   |    | Kurstin's rise      |
+  | Pamelia, Gadson   |    | Jordan's quiet path |
+  +--------+---------+    +---------+-----------+
+           |                        |
+           +----------+-------------+
+                      |
+                      v
+           +---------------------+
+           | M5: CULTURAL        |
+           | CONTEXT             |
+           | Luaka Bop, 90s alt, |
+           | postmodern music    |
+           +---------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Origins and Formation}
+
+CoCu (Collaborating Cultures / Combating Cultures), the ten-member experimental collective founded by Tommy Jordan circa 1987 in the Los Angeles club scene. Five trained musicians (Jordan, John McKnight, Danny Moynahan) and five non-musicians. Kurstin auditioned in 1988, introduced by McKnight. CoCu established residencies at Flaming Colossus and Vertigo in LA, caught Bono's attention (who bought three weeks of studio time). Jordan described CoCu as ``more of a workshop than a band,'' focused on audience involvement. The duo's evolution from CoCu through their 1993 signing to Luaka Bop. The demo tape that Byrne called ``truly like nothing else.'' The origin of the name from baby sisters' mispronunciations.
+
+\subsubsection{M2: Discography and Musical Architecture}
+
+Deep analysis of all three albums: \textit{Grand Opening} (1994, co-produced with Susan Rogers), \textit{Sacred Cow} (1996, featuring ``Whoever You Are'' reaching \#16 on Billboard Modern Rock), and \textit{Into the Oh} (2001, with Pamelia Kurstin on theremin, Laurie Anderson guest appearance, James Gadson on drums). Track listings, production credits, critical reception, instrumentation details. The story of ``Whoever You Are''---written by Jordan at age 8 as a thank-you to considerate drivers, hitting the charts five years after release via a Mercedes-Benz commercial. The unreleased \textit{Music Inspired by the Fragrance} album that became \textit{Into the Oh} after label restructuring. Recording techniques including unconventional sounds (dog claw scratches, garage door squeals, submerged drums).
+
+\subsubsection{M3: The Creative Network}
+
+Susan Rogers---Prince's staff engineer (1983--1988), co-producer of \textit{Grand Opening} and \textit{Sacred Cow}. Rogers accepted a lower fee to work with Geggy Tah, said the experience ``changed her life'' and taught her that ``music is an expression of life.'' Now an associate professor at Berklee College of Music with a doctorate in psychology from McGill. Pamelia Stickney (née Kurstin)---introduced to the theremin during production of \textit{Into the Oh}, went on to become one of the world's premier thereminists (Bob Moog collaborator, TED speaker, SNL performer). James Gadson (Aretha Franklin, Bill Withers), Daren Hahn, Laurie Anderson, Glen Phillips (Toad the Wet Sprocket). David Byrne and Yale Evelev as executive producers across all three albums.
+
+\subsubsection{M4: Post-Geggy Tah Trajectories}
+
+Greg Kurstin's path from Geggy Tah through Action Figure Party (Verve Records, 1999), touring with Beck, forming The Bird and the Bee with Inara George (Blue Note Records), and his rise to one of pop music's most prolific producers. Nine Grammy Awards including Producer of the Year (2017, 2018). Key productions: Adele's ``Hello'' (25), Lily Allen's \textit{It's Not Me, It's You}, Kelly Clarkson's ``Stronger,'' Sia's ``Chandelier,'' Foo Fighters' \textit{Medicine at Midnight}, Kendrick Lamar's \textit{Mr.\ Morale \& The Big Steppers}. Kurstin's jazz training under Jaki Byard (Charles Mingus's pianist) at The New School as creative foundation.
+
+Tommy Jordan's post-band work: steel drums on Jack Johnson's ``Flake'' (the debut single from \textit{Brushfire Fairytales}, topped the Billboard Triple-A chart). Ben Harper's endorsement. T Bone Burnett's praise. Jordan's relatively quiet career compared to Kurstin's visibility, continuing as a creative multi-instrumentalist in the Pomona/LA music scene.
+
+\subsubsection{M5: Luaka Bop and Cultural Context}
+
+David Byrne's founding of Luaka Bop in 1988---originally to release Brazilian compilations, expanding to Cuba, Africa, and beyond. The label's explicit rejection of the ``world music'' category in favor of ``contemporary pop.'' Yale Evelev as label president and co-curator. The tension of placing an American band on a label built for international outsider music. The Brazil Classics series, the Adventures in Afropea series, the William Onyeabor reissue project, the Alice Coltrane Turiyasangitananda discovery. The label's design philosophy (Tibor Kalman, packaging as statement). Geggy Tah's place in the 1990s alternative rock landscape alongside peers like Soul Coughing, Barenaked Ladies, They Might Be Giants, and Mono Puff. The postmodern ``inclusionary wave'' that Byrne identified in Geggy Tah as a broader aesthetic movement.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus: opus-4     # Synthesis, cultural analysis, through-line
+  denise: sonnet-4   # Survey assembly, track analysis, bibliography
+  paula: haiku-4     # Schemas, templates, index scaffolding
+  copper:
+    - wave_timing: "standard"
+    - parallel_tracks: 2
+    - cache_ttl: "5min"
+  blitter:
+    model_split:
+      opus: 30%      # M3 (Creative Network), M5 (Cultural Context), Synthesis
+      sonnet: 60%    # M1 (Origins), M2 (Discography), M4 (Trajectories)
+      haiku: 10%     # Wave 0 schemas, index page
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete band history from CoCu formation through \textit{Into the Oh} (2001)
+\item All three studio albums with track listings, personnel, and production details
+\item Biographical profiles of core and key ancillary personnel
+\item Greg Kurstin's post-Geggy Tah career through present day
+\item Tommy Jordan's documented post-band collaborations
+\item Pamelia Stickney's theremin career originating from Geggy Tah sessions
+\item Susan Rogers' creative relationship with the band and its impact on her career
+\item Luaka Bop label history and curatorial philosophy
+\item Critical reception and commercial performance data
+\item The ``Whoever You Are'' / Mercedes-Benz commercial cultural moment
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Musical transcription or harmonic analysis of specific tracks
+\item Detailed discography of every Kurstin production credit post-2006
+\item Copyright-protected lyrics or extended musical quotation
+\item Speculation about band dissolution or interpersonal dynamics
+\item Unreleased recordings or vault material not publicly documented
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item CoCu formation and evolution to Geggy Tah documented with named individuals and dates
+\item All three studio albums cataloged with track counts, label, year, producer credits, and key personnel
+\item ``Whoever You Are'' origin story traced from Jordan's childhood composition through Billboard chart performance
+\item Susan Rogers' creative relationship with Geggy Tah documented with her own statements about its impact
+\item Pamelia Kurstin/Stickney's introduction to theremin during \textit{Into the Oh} sessions documented
+\item Greg Kurstin's career trajectory from Geggy Tah through Grammy-winning producer mapped with key milestones
+\item Tommy Jordan's post-band work documented with at least 2 named collaborations
+\item Luaka Bop label context provided including founding, curatorial philosophy, and Geggy Tah's anomalous position
+\item David Byrne's direct quotes about the band preserved with attribution
+\item At least 3 critical reviews cited from professional music publications
+\item All touring partners documented (Sting, Soul Coughing, Barenaked Ladies)
+\item Cultural context positions Geggy Tah within 1990s alternative rock landscape
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Creative Suite Vision & Parent vision; Geggy Tah pack is a music history module & Active \\
+GSD-Tracker (OctaMED) & Shared domain: tracker music history, 90s music production & Active \\
+Deep Audio Analyzer Mission & Technical audio analysis tools that could analyze GT recordings & Complete \\
+Foxfire Heritage Pack & Parallel structure: oral history, cultural preservation methodology & Complete \\
+The Hundred Voices & Literary parallel: GT's 100-voices-in-one approach to genre & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+David Byrne said Geggy Tah had ``come out the other side'' of postmodernism. What does the other side look like? It looks like two musicians from Pomona who absorbed jazz training, punk energy, found-sound experimentation, and children's songwriting into a practice so inclusive that genre categories simply dissolved. It looks like Susan Rogers---Prince's engineer, one of the few women in professional audio---finding that a pair of unknown eccentrics in a home studio changed her understanding of what music could be. It looks like a theremin player who didn't know the theremin existed until Tommy Jordan handed her one during an album session, and who went on to collaborate with Bob Moog himself.
+
+The Amiga Principle says that architectural elegance and specialized execution paths outperform brute force. Geggy Tah is the musical expression of that principle: not more instruments, not louder sound, not bigger budgets, but a fundamentally different relationship with the material. The inclusionary wave is the spaces between genres---the recognition that boundaries are not walls but seams, and that the most interesting music happens in the stitching.
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Geggy Tah --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings from professional music publications, label documentation, artist interviews, and academic sources. Each claim is attributed to a specific source. Use this as the evidence base for all mission deliverables.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item Billboard (chart data, industry reporting)
+\item Rolling Stone (critical reviews, artist profiles)
+\item Luaka Bop Records (label documentation, artist biographies)
+\item Berklee College of Music (Susan Rogers academic profile, Pamelia Stickney)
+\item Tape Op Magazine (Susan Rogers and Greg Kurstin production interviews)
+\item Grammy.com / Recording Academy (award documentation)
+\item Discogs (discography verification, personnel credits)
+\item AllMusic (catalog data, genre classification)
+\end{itemize}
+
+\subsection{M1 Reference: Origins and Formation}
+
+\subsubsection{CoCu (c.\ 1987--early 1990s)}
+
+Tommy Jordan formed CoCu (Collaborating Cultures or Combating Cultures) in approximately 1987 in Los Angeles. The group comprised ten members: five highly trained musicians including Jordan, John McKnight, and Danny Moynahan, plus five non-musicians. Jordan described CoCu as ``more of a workshop than a band,'' emphasizing audience involvement and collaborative experimentation. CoCu established residencies at two exclusive LA clubs---Flaming Colossus and Vertigo---where they attracted attention from notable figures including U2's Bono, who purchased three weeks of studio time for the group and requested Jordan send him the resulting recordings. Greg Kurstin auditioned for and joined CoCu in 1988, introduced to Jordan by John McKnight. (Source: Wikipedia/Geggy Tah, citing multiple interviews)
+
+\subsubsection{Duo Formation and Signing}
+
+Jordan and Kurstin began experimenting as a duo in mid-1988. After CoCu disbanded in the early 1990s, they focused exclusively on their partnership. The name ``Geggy Tah'' derived from their first names: both men had a younger sister who mispronounced her brother's name as a toddler---``Geggy'' for Greg, ``Tah'' for Tommy. Jordan has a twin sister who called him ``Tah'' throughout their childhood. (Source: Iowa State Daily interview, Wikipedia)
+
+Their demo tape reached David Byrne, who had founded Luaka Bop in 1988 to showcase music from outside the United States. Though Geggy Tah as an American band did not fit the label's international profile, Byrne was compelled by their sound. He described the demo as ``one of the weirdest, most surprising things we'd ever heard. It was truly like nothing else.'' He characterized the band as ``a cross between Ween and Prince, but with deeper and more articulate lyrics'' and later stated they were ``so postmodern they've come out the other side.'' The band signed to Luaka Bop in 1993. (Source: Wikipedia, Luaka Bop documentation)
+
+\subsubsection{Musical Training Background}
+
+Greg Kurstin studied jazz formally at The New School for Jazz and Contemporary Music in New York City under Jaki Byard, who had been pianist for Charles Mingus. Kurstin also earned a degree from California Institute of the Arts. He performed as a jazz pianist with Bobby Hutcherson and George Coleman, including a residency at the Village Vanguard. (Source: Billboard, Grammy.com, ASCAP interview)
+
+Tommy Jordan was based in Pomona, California. He has been described as a vocalist, multi-instrumentalist, bassist, and songwriter. Jordan wrote the hit song ``Whoever You Are'' at age 8. He described his primary instrument as writing rather than any single instrument. (Source: Iowa State Daily, Wikipedia)
+
+\subsection{M2 Reference: Discography}
+
+\subsubsection{Grand Opening (1994)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Detail} \\
+\midrule
+Label & Luaka Bop \\
+Year & 1994 \\
+Producers & Tommy Jordan, Greg Kurstin, Susan Rogers \\
+Executive Producers & David Byrne, Yale Evelev \\
+Format & CD \\
+Commercial Result & Not a commercial success; critical acclaim \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Co-produced by Jordan and Kurstin with Susan Rogers, whose credits include Prince (\textit{Purple Rain}, \textit{Sign o' the Times}), The Jacksons, David Byrne, and Barenaked Ladies. Rogers typically produced higher-profile musicians but accepted a lower fee to work with Geggy Tah after hearing their demo, stating that the experience ``changed her life and boosted her career by teaching her to think differently about what music was and could be.'' Rolling Stone wrote that the duo's ``classical and jazz backgrounds prop up songs whose structural inventiveness rewards saturation listening'' and called it ``a debut that creates its own aural planet.'' (Source: Wikipedia, Tape Op/Susan Rogers interview)
+
+\subsubsection{Sacred Cow (1996)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Detail} \\
+\midrule
+Label & Luaka Bop \\
+Year & 1996 \\
+Tracks & 13 \\
+Producers & Susan Rogers, Tommy Jordan, Greg Kurstin \\
+Executive Producers & David Byrne, Yale Evelev \\
+Added Member & Daren Hahn (drums) \\
+Hit Single & ``Whoever You Are'' (\#16 Billboard Modern Rock) \\
+Tour Partners & Sting, Soul Coughing, Barenaked Ladies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The album was recorded at home with producer Susan Rogers. Entertainment Weekly described the album as daring to ``be taken seriously'' with its ``blend of punk, funk, and prog-rock,'' noting ``the silliness is tempered by keen musicianship and closet tenderness.'' Guest vocalists included Glen Phillips of Toad the Wet Sprocket on ``House of Usher.'' The final track, ``Gina,'' was named after Rogers' Tera Terrier, who appeared on both album covers. (Source: Bandcamp, Iowa State Daily, Entertainment Weekly)
+
+\textbf{``Whoever You Are'' --- Origin and Chart History:} Jordan wrote the tune and refrain as a child, approximately age 8, as a way of thanking thoughtful drivers and cheering up his father, who sometimes became frustrated in traffic. The lyrics center on gratitude toward considerate strangers who allow lane changes. The music video featured the band playing while driving, woven into footage from a vintage driving safety film. The single peaked at \#16 on the Billboard Modern Rock Tracks chart. In approximately 2001, Mercedes-Benz licensed the song for a television commercial, causing a resurgence in airplay and chart activity five years after its initial release. (Source: Wikipedia, PopMatters, Iowa State Daily)
+
+\subsubsection{Into the Oh (2001)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Detail} \\
+\midrule
+Label & Luaka Bop / Virgin \\
+Year & 2001 \\
+Tracks & 12 \\
+Originally Titled & \textit{Music Inspired by the Fragrance} \\
+New Members & ``Lavey'' Bruce Millstein (percussion, synth, tabla) \\
+Notable Personnel & Pamelia Kurstin (theremin), James Gadson (drums) \\
+Guest Appearances & Laurie Anderson \\
+Mastered By & Bob Ludwig (tracks 1--11) \\
+Primary Recording & Stephens 2'' 16-track tape machine \\
+Genre (Discogs) & Pop Rock, Downtempo, Avantgarde \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Originally announced in 1999 as \textit{Music Inspired by the Fragrance}, with two tracks (``Space Heater'' and ``Sweat'') released as free MP3 downloads on the web. The album was delayed due to Luaka Bop's transition from Warner Bros.\ to Virgin Records. The opening track, ``Goodnight to the Machine,'' consisted of a voicemail message from one of the band members' grandfathers. Kurstin's instrumentation included pianos, clavinets, Wurlitzers, B-3 organs, and Moog synthesizers. Pamelia Kurstin (now Stickney) performed theremin across multiple tracks; Bob Moog later called her ``the instrument's true modern-day maestro.'' James Gadson (Aretha Franklin, Bill Withers) contributed drums on ``Holly Oak,'' ``Love Is Alone,'' and ``Special Someone.'' Laurie Anderson provided a spoken-word appearance on ``Aliens Somewhere.'' (Source: Hip Online, Discogs, Luaka Bop, Ink19)
+
+Variety reviewed the live show supporting the album, noting that Jordan ``assembles bands---sometimes on the fly---that perform under the name Geggy Tah,'' and compared his lyrical sensibility to David Byrne's while noting the rhythms ``gently slide under the listener's feet and force them to respond.'' (Source: Variety, June 2001)
+
+\subsection{M3 Reference: The Creative Network}
+
+\subsubsection{Susan Rogers}
+
+Born August 3, 1956, in Southern California. Began career as an audio technician at Audio Industries Corporation (1978). Became Prince's staff engineer in 1983, engineering \textit{Purple Rain}, \textit{Around the World in a Day}, \textit{Parade}, \textit{Sign o' the Times}, and \textit{The Black Album}. Founded Prince's Vault---the archival system that preserved his recordings from the 2008 Universal Studios fire. Left Prince's employ in 1988, relocated to Los Angeles.
+
+Rogers co-produced Geggy Tah's \textit{Grand Opening} and \textit{Sacred Cow}. In a Tape Op interview, Rogers described the transformative impact: ``From those two guys [Jordan and Kurstin] I learned the art and the craft of record making in a whole new way.'' She elaborated: ``Tommy taught me that music is an expression of life. Life is not perfect. Life has mistakes, and it's flawed. It's really beautiful, and it's really ugly. It smells pretty, and it stinks. Life is simple as pie, and it's complicated. Life is mysterious and dark, and life is bright and dazzling. So your music should be all of that.''
+
+Rogers went on to co-produce the Billboard \#1 hit ``One Week'' with Barenaked Ladies (1998 album \textit{Stunt}). She earned a doctorate in psychology from McGill University and is now an associate professor at Berklee College of Music, directing the Berklee Music Perception and Cognition Laboratory. Her book, \textit{This Is What It Sounds Like: What the Music You Love Says About You} (co-written with Ogi Ogas), was published by W.\ W.\ Norton. (Source: Tape Op, Berklee, Wikipedia, WePresent/WeTransfer)
+
+\subsubsection{David Byrne and Luaka Bop}
+
+David Byrne founded Luaka Bop in 1988 (the name taken from the packaging of a Sri Lankan tea---``Luaka BOP'' on a silver foil block, a phrase Byrne found ``strange, but musical''). Logo conceived by Byrne and illustrated by Tibor Kalman. The label began with the \textit{Brazil Classics} compilation series (\textit{Beleza Tropical} sold over 350,000 copies). Yale Evelev served as label president. Initially distributed through Warner Bros., Luaka Bop became fully independent in 2006. The label explicitly avoided the ``world music'' categorization, presenting all releases as ``contemporary pop music'' with design-forward packaging. Notable artists include Os Mutantes, Tim Maia, Susana Baca, William Onyeabor, Floating Points, Pharoah Sanders, and Alice Coltrane Turiyasangitananda. (Source: Wikipedia/Luaka Bop, Red Bull Music Academy, NPR)
+
+Byrne served as executive producer on all three Geggy Tah albums alongside Evelev. His direct involvement in signing the band---despite their American nationality conflicting with the label's international mission---represents one of Luaka Bop's most notable curatorial decisions.
+
+\subsubsection{Pamelia Stickney (née Kurstin)}
+
+Born May 28, 1976, in Southern California. Trained as a jazz upright bassist. Introduced to the theremin during production of \textit{Into the Oh} in 1999 by Tommy Jordan and Greg Kurstin. Married Greg Kurstin (later divorced, reverting to the name Stickney). Became one of the world's foremost thereminists: instrumental to the final design of Robert Moog's Etherwave Pro Theremin as the primary test musician. Appeared on Saturday Night Live and in the 2004 documentary \textit{Moog}. Performed a TED talk on theremin technique. Developed a distinctive ``walking bass'' theremin technique derived from her jazz background. Solo album \textit{Thinking Out Loud} released on John Zorn's Tzadik label (2007). Collaborated with David Byrne, Yoko Ono, Béla Fleck and the Flecktones, and Ulver. Based in Vienna, Austria since 2005. (Source: Wikipedia/Pamelia Kurstin, Berklee, TED, Theremin Vox)
+
+\subsubsection{Additional Key Personnel}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role} & \tableheader{Note} \\
+\midrule
+Daren Hahn & Drums (Sacred Cow) & Made GT a trio; toured with Sting, Soul Coughing \\
+James Gadson & Drums (Into the Oh) & Legendary session drummer (Aretha Franklin, Bill Withers) \\
+Laurie Anderson & Guest (Into the Oh) & Spoken word on ``Aliens Somewhere'' \\
+Glen Phillips & Guest vocals (Sacred Cow) & Lead singer of Toad the Wet Sprocket \\
+``Lavey'' Bruce Millstein & Percussion (Into the Oh) & LA session percussionist/composer; synth, tabla, backing vocals \\
+Cyril Atef & Drums (Into the Oh) & Tracks 2 and 10 \\
+Bob Ludwig & Mastering (Into the Oh) & Premier mastering engineer; Gateway Mastering \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M4 Reference: Post-Geggy Tah Trajectories}
+
+\subsubsection{Greg Kurstin --- From Geggy Tah to Grammy Dominance}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} \\
+\midrule
+1999 & Released \textit{Action Figure Party} on Verve Records under pseudonym \\
+Early 2000s & Toured with Beck's band; began independent production \\
+2004 & Met Inara George; formed The Bird and the Bee (signed to Blue Note) \\
+2006 & First major outside production: Lily Allen's \textit{Alright, Still} \\
+2009 & Produced Allen's \textit{It's Not Me, It's You} (sole producer); 3 Ivor Novello Awards \\
+2012 & Kelly Clarkson's ``Stronger (What Doesn't Kill You)'' --- first US \#1 \\
+2014 & Sia's ``Chandelier'' --- Grammy nom for Record of the Year \\
+2015 & Co-wrote and produced Adele's ``Hello'' --- first single to exceed 1M digital sales in 7 days \\
+2017 & 4 Grammy Awards: Record/Song/Album of the Year (Adele), Producer of the Year \\
+2018 & Producer of the Year (2nd consecutive); 5th Grammy \\
+2021 & Adele's ``Easy on Me'' from \textit{30}; Foo Fighters' \textit{Medicine at Midnight} \\
+2022 & Kendrick Lamar's \textit{Mr.\ Morale \& The Big Steppers} \\
+2023 & 3 Grammy wins including Best Rap Performance; Gorillaz' \textit{Cracker Island} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Total Grammy Awards: 9. Additional artists include Paul McCartney (\textit{Egypt Station}), Harry Styles, Miley Cyrus, Liam Gallagher, PinkPantheress, Wolf Alice, Tegan and Sara, Maren Morris, and Greta Van Fleet. Kurstin launched No Expectations Publishing with his wife Rachel Kurstin as manager. Kelly Clarkson stated: ``What makes him stand out as a producer is his skill as a musician. He can play anything phenomenally.'' (Source: Wikipedia/Greg Kurstin, Billboard, Grammy.com, ASCAP)
+
+In a PopMatters interview, Kurstin reflected on Geggy Tah: ``It was such a different time in my life\ldots I sort of grew up [with them] and it was an important part of growing up. I learned how to produce and record music. Everything happened.'' (Source: PopMatters, 2015)
+
+\subsubsection{Tommy Jordan --- Post-Band}
+
+In 2000, Jordan played steel drums on Jack Johnson's ``Flake,'' the debut single from \textit{Brushfire Fairytales} (2001). The song topped the Billboard Triple-A chart for three weeks and became the best-performing song of 2002 on that chart listing. Ben Harper called Jordan ``one of the most creative and versatile multi-instrumentalists of our generation.'' In the 1990s, T Bone Burnett described Jordan as one of the five most creative people working in the music business. A 2025 podcast interview (The Hustle, Episode 519) documented Jordan's continued music career. Jordan continued to perform and assemble bands in the LA area. (Source: Wikipedia/Flake, Wikipedia/Geggy Tah, The Hustle podcast)
+
+\subsubsection{Pamelia Stickney --- The Theremin Path}
+
+After her introduction to the theremin during Geggy Tah sessions, Stickney recorded \textit{Gymnopedie} (2000) as ``The Kurstins'' with Greg Kurstin. She became a key figure in the theremin revival: primary test musician for Moog's Etherwave Pro, performer in the 2004 documentary \textit{Moog}, and TED speaker. She relocated to Vienna in 2005 and became active in the European experimental music scene, collaborating with Seb Rochford and performing with the group Barbez. Her solo album \textit{Thinking Out Loud} appeared on John Zorn's Tzadik label in 2007. (Source: Wikipedia/Pamelia Kurstin, Berklee, LPR, Frank-Ratchye STUDIO)
+
+\subsection{M5 Reference: Cultural Context}
+
+\subsubsection{Luaka Bop as Curatorial Project}
+
+Luaka Bop's founding principle was David Byrne's desire to ``turn friends on to stuff I liked.'' The label operated as a curatorial entity---part gallery, part mixtape---with design-forward packaging (Tibor Kalman-conceived aesthetic) intended to signal that the music was ``as relevant to your life and is as contemporary as Prodigy, Fiona Apple, or Cornershop.'' The label released approximately 85 albums, most exploring music of the African diaspora. Geggy Tah was anomalous: an American rock band on a label defined by international curation. Their presence reflected Byrne's willingness to follow artistic instinct over brand coherence. (Source: Red Bull Music Academy, NPR, Wikipedia/Luaka Bop)
+
+\subsubsection{1990s Alternative Rock Context}
+
+Geggy Tah's active period (1994--2001) coincided with the commercial peak of alternative rock. Their touring partners---Sting, Soul Coughing, Barenaked Ladies---represent the eclectic end of the 90s alternative spectrum. Discogs classifies them as ``Pop Rock, Downtempo, Avantgarde.'' Last.fm categorizes them as ``alternative rock/jazz rock.'' Apple Music describes their sound as ``a quirky mix of funk, jazz, alternative, and experimental rock.'' The Hustle podcast described their albums as explorations of ``songs as if they were found art projects, mixing in whatever instrument or genre worked.'' (Source: Discogs, Last.fm, Apple Music, The Hustle)
+
+\subsubsection{The ``One-Hit Wonder'' Question}
+
+Geggy Tah is frequently categorized as a one-hit wonder due to ``Whoever You Are'' being their sole charting single. However, this categorization obscures: three critically acclaimed albums, endorsements from David Byrne, T Bone Burnett, Ben Harper, and Susan Rogers; a creative network that produced a nine-time Grammy winner, a world-renowned thereminist, and contributions to one of the most successful debut albums of the 2000s (Jack Johnson's \textit{Brushfire Fairytales}). The Tracklib profile describes them as having ``faded into the ether that engulfs all one-hit wonders,'' a characterization that underestimates their influence. (Source: Tracklib, multiple)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Level} & \tableheader{Handling} \\
+\midrule
+Copyright (lyrics) & ABSOLUTE & No lyrics reproduced; discuss themes and structure only \\
+Copyright (recordings) & ABSOLUTE & No audio reproduction; describe sonic characteristics \\
+Personal relationships & ANNOTATE & Document professional collaborations; avoid speculation on personal dynamics \\
+Career comparisons & ANNOTATE & Present Jordan and Kurstin trajectories factually without value judgments \\
+Living persons & GATE & All claims attributed to published sources; no unsourced characterizations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Label and Artist Documentation}
+\begin{itemize}[leftmargin=2em]
+\item Luaka Bop Records --- \url{https://www.luakabop.com/}
+\item Geggy Tah Bandcamp --- \url{https://geggytah.bandcamp.com/}
+\item Greg Kurstin Official --- \url{https://www.gregkurstin.com/}
+\item No Expectations Management --- \url{https://www.noexpectationsmusic.com/greg-kurstin}
+\end{itemize}
+
+\subsubsection{Professional Music Publications}
+\begin{itemize}[leftmargin=2em]
+\item Billboard --- Kurstin career profile, Grammy nominations (2017)
+\item Rolling Stone --- \textit{Grand Opening} review (1994)
+\item Entertainment Weekly --- \textit{Sacred Cow} review (1996)
+\item Variety --- Live show review (June 2001)
+\item Tape Op Magazine --- Susan Rogers interview (Issue 117); Greg Kurstin interview (Issue 135)
+\item PopMatters --- Bird and the Bee / Kurstin retrospective (2015)
+\end{itemize}
+
+\subsubsection{Academic and Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+\item Berklee College of Music --- Susan Rogers faculty profile; Pamelia Stickney event listing
+\item ASCAP --- Greg Kurstin songwriter interview
+\item Grammy.com / Recording Academy --- Award documentation (2017, 2018, 2023)
+\item Red Bull Music Academy --- Luaka Bop label history (2014)
+\end{itemize}
+
+\subsubsection{Discography and Catalog Sources}
+\begin{itemize}[leftmargin=2em]
+\item Discogs --- Full discography verification, personnel credits, label catalog numbers
+\item AllMusic --- Genre classification, album ratings
+\item Apple Music --- Artist biography, catalog listing
+\item Last.fm --- Genre tags, listener data
+\end{itemize}
+
+\subsubsection{Interviews and Oral History}
+\begin{itemize}[leftmargin=2em]
+\item Iowa State Daily --- Jordan and Kurstin interview during Sacred Cow tour
+\item The Hustle Podcast (Episode 519, 2025) --- Tommy Jordan retrospective interview
+\item WePresent/WeTransfer --- Susan Rogers career profile
+\item TED --- Pamelia Kurstin theremin performance and lecture
+\item Theremin Vox --- Pamelia Kurstin biography
+\end{itemize}
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality educational research pack documenting the complete history, creative network, and cultural legacy of Geggy Tah. The pack serves as both a standalone music history reference and a module within the GSD Creative Suite, illuminating the creative DNA that connects a 1990s Pomona experimental band to the mainstream pop production landscape of the 2020s.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 (Sequential) -----> WAVE 1 (Parallel) -------> WAVE 2 ------> WAVE 3
+  Foundation                  Track A    Track B          Synthesis       Publication
+  +-----------+              +--------+ +--------+      +-----------+   +-----------+
+  | Schemas   |              | M1     | | M3     |      | Cross-mod |   | Format    |
+  | Source    |---+--------->| Origins| | Network|----->| synthesis |-->| Verify    |
+  | Index     |   |          | M2     | | M4     |      | Through-  |   | Compile   |
+  | Templates |   |          | Discog | | Traject|      | line      |   | Index     |
+  +-----------+   |          +--------+ +--------+      +-----------+   +-----------+
+                  |                                           ^
+                  +---- M5 Cultural Context (Wave 1B) -------+
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer} --- Source bibliography, verified facts, personnel database, discography catalog
+\item \textbf{Narrative Layer} --- Module prose, biographical profiles, cultural analysis
+\item \textbf{Synthesis Layer} --- Cross-module connections, influence mapping, through-line
+\item \textbf{Presentation Layer} --- Formatted educational pack with progressive disclosure
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Origins Module & CoCu through signing; named individuals, dates & M1 \\
+D2 & Discography Module & 3 albums, personnel, charts, reviews & M2 \\
+D3 & Creative Network Module & Rogers, Byrne, Pamelia, Gadson profiles & M3 \\
+D4 & Trajectories Module & Kurstin Grammy arc; Jordan post-band & M4 \\
+D5 & Cultural Context Module & Luaka Bop, 90s landscape, inclusionary aesthetics & M5 \\
+D6 & Synthesis Document & Cross-module integration, influence map & Synthesis \\
+D7 & Source Bibliography & All sources verified, categorized & Wave 0 \\
+D8 & Educational Pack (final) & Formatted, progressive disclosure, complete & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Schemas/Templates & None & Haiku & 3K \\
+W0: Source Index & None & Sonnet & 5K \\
+W1A: M1 Origins & W0 & Sonnet & 8K \\
+W1A: M2 Discography & W0 & Sonnet & 12K \\
+W1B: M3 Creative Network & W0 & Opus & 10K \\
+W1B: M4 Trajectories & W0 & Sonnet & 10K \\
+W1B: M5 Cultural Context & W0 & Opus & 8K \\
+W2: Synthesis & W1A, W1B & Opus & 8K \\
+W3: Formatting & W2 & Sonnet & 5K \\
+W3: Verification & W2 & Sonnet & 4K \\
+W3: Index/Packaging & W3-Format & Haiku & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & M3 (network analysis requires judgment about creative influence), M5 (cultural context requires nuanced positioning), W2 Synthesis \\
+Sonnet & 60\% & M1 (factual chronology), M2 (discography catalog), M4 (career milestones), W0 Source Index, W3 Format/Verify \\
+Haiku & 10\% & W0 Schemas/Templates, W3 Index/Packaging \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallel} & \tableheader{Sessions} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & 1 & Auto \\
+1 & Research/Survey & 2 tracks & 1 & HITL \\
+2 & Synthesis & Sequential & 0.5 & HITL \\
+3 & Publication & Sequential & 0.5 & Final \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Shared schemas (person, album, track, source) & Haiku & TypeScript interfaces \\
+Source index (all bibliography entries cataloged) & Sonnet & JSON source database \\
+Module templates (section structure per module) & Haiku & Markdown templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Chronological Core:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+M1: Origins and Formation & Sonnet & CoCu $\rightarrow$ GT narrative \\
+M2: Discography Deep Dive & Sonnet & 3-album catalog with personnel, reception \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Network and Context:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+M3: Creative Network & Opus & Biographical profiles, influence analysis \\
+M4: Post-GT Trajectories & Sonnet & Kurstin/Jordan/Pamelia career timelines \\
+M5: Cultural Context & Opus & Luaka Bop analysis, 90s positioning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Cross-module integration & Opus & Influence map connecting all 5 modules \\
+Through-line narrative & Opus & Inclusionary wave thesis tied to GSD philosophy \\
+Contradiction resolution & Opus & Verified consistency across modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Document formatting & Sonnet & Final educational pack layout \\
+Source verification & Sonnet & All claims checked against source index \\
+Index page generation & Haiku & HTML index with download links \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs cached as shared context for all Wave 1 tasks (source index, schemas)
+\item Track A and Track B share the W0 cache but operate on independent source subsets
+\item Wave 2 synthesis receives concatenated Wave 1 outputs within 5-minute cache TTL
+\item Personnel database (W0) cached across all waves to prevent redundant biography generation
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & 0 & 5K & 3K \\
+Wave 1 (Track A) & 0 & 20K & 0 \\
+Wave 1 (Track B) & 18K & 10K & 0 \\
+Wave 2 & 8K & 0 & 0 \\
+Wave 3 & 0 & 9K & 2K \\
+\midrule
+\textbf{Total} & \textbf{26K} & \textbf{44K} & \textbf{5K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$75K tokens across $\sim$14 context windows in 3 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Schemas] ----+----> [W1A: M1 Origins] --------+
+                    |                                  |
+                    +----> [W1A: M2 Discography] ------+----> [W2: Synthesis]
+                    |                                  |          |
+                    +----> [W1B: M3 Network] ----------+          |
+                    |                                  |          v
+                    +----> [W1B: M4 Trajectories] -----+   [W3: Format]
+                    |                                  |          |
+                    +----> [W1B: M5 Context] ----------+          v
+                                                           [W3: Verify]
+                                                                  |
+                                                                  v
+                                                           [W3: Package]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-01 & Source quality & All citations traceable to professional music publications, label docs, or academic sources \\
+SC-02 & No lyrics reproduction & Zero copyrighted lyrics quoted in any module \\
+SC-03 & Living persons accuracy & All characterizations of living persons attributed to published sources \\
+SC-04 & No speculation & No claims about interpersonal dynamics, band breakup causes, or unreleased material \\
+SC-05 & Chart data sourced & All Billboard/chart positions attributed to Billboard or equivalent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & CoCu documentation & Named members, approximate dates, venue names, Bono connection \\
+CF-02 & Band formation story & Demo tape, Byrne signing, name origin \\
+CF-03 & Grand Opening catalog & Year, label, producers, critical reception \\
+CF-04 & Sacred Cow catalog & Track count, personnel, chart position, tour partners \\
+CF-05 & Into the Oh catalog & Track count, personnel (incl.\ Pamelia, Gadson, Anderson), label transition \\
+CF-06 & ``Whoever You Are'' full story & Childhood origin, chart peak, Mercedes commercial, video description \\
+CF-07 & Rogers relationship & Her statements about GT's impact; career timeline \\
+CF-08 & Pamelia theremin origin & Introduction during Into the Oh sessions; subsequent career \\
+CF-09 & Kurstin career arc & GT $\rightarrow$ Bird and the Bee $\rightarrow$ Grammys with $\geq$5 milestone dates \\
+CF-10 & Jordan post-band & $\geq$2 named collaborations (Jack Johnson, Ben Harper endorsement) \\
+CF-11 & Luaka Bop context & Founding, philosophy, Byrne quotes, label roster context \\
+CF-12 & Byrne quotes preserved & $\geq$3 distinct Byrne statements about GT with attribution \\
+CF-13 & Critical reviews cited & $\geq$3 reviews from professional publications \\
+CF-14 & Tour partners documented & Sting, Soul Coughing, Barenaked Ladies named \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M1 $\rightarrow$ M2 continuity & CoCu members appear consistently in album credits \\
+IN-02 & M2 $\rightarrow$ M3 network & All key personnel in M3 traceable to specific album credits in M2 \\
+IN-03 & M2 $\rightarrow$ M4 timeline & Kurstin's GT albums chronologically precede all post-GT milestones \\
+IN-04 & M3 $\rightarrow$ M5 context & Rogers and Byrne connections reflect Luaka Bop label dynamics \\
+IN-05 & Self-containment & Reader with no prior knowledge can follow complete narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Date uncertainty & CoCu formation ``circa 1987'' flagged as approximate \\
+EC-02 & Source conflict handling & Any contradictions between sources noted (e.g., label timeline) \\
+EC-03 & Jordan current status & Acknowledged as less publicly documented than Kurstin \\
+EC-04 & Grammy count currency & Kurstin award count matches most recent available data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. CoCu documented & CF-01, CF-02 & Pending \\
+2. Three albums cataloged & CF-03, CF-04, CF-05 & Pending \\
+3. ``Whoever You Are'' traced & CF-06 & Pending \\
+4. Rogers relationship documented & CF-07, SC-03 & Pending \\
+5. Pamelia theremin origin & CF-08, IN-02 & Pending \\
+6. Kurstin trajectory mapped & CF-09, IN-03 & Pending \\
+7. Jordan post-band work & CF-10, EC-03 & Pending \\
+8. Luaka Bop context & CF-11, IN-04 & Pending \\
+9. Byrne quotes preserved & CF-12, SC-03 & Pending \\
+10. Critical reviews cited & CF-13, SC-01 & Pending \\
+11. Tour partners documented & CF-14 & Pending \\
+12. Cultural context positioning & CF-11, IN-04, IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source verification; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1 Origins, M2 Discography production \\
+EXEC-B & Executor (Track B) & M4 Trajectories production \\
+CRAFT-MUS & Music Analyst & M3 Creative Network (Opus); influence analysis \\
+CRAFT-CUL & Cultural Analyst & M5 Cultural Context (Opus); Luaka Bop positioning \\
+VERIFY & Verification & Source validation; chart data accuracy \\
+INTEG & Integration Agent & Cross-module consistency; timeline verification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Chronological Core + Network/Context) \\
+Waves & 4 (Foundation, Research, Synthesis, Publication) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 3 \\
+Total Token Budget & $\sim$75K (Opus 26K / Sonnet 44K / Haiku 5K) \\
+Model Split & Opus 35\% / Sonnet 59\% / Haiku 6\% \\
+Safety-Critical Tests & 5 (all mandatory-pass / BLOCK) \\
+Total Tests & 28 \\
+HITL Gates & 2 (post-Wave 1, post-Wave 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Geggy Tah are so postmodern they've come out the other side\ldots They incorporate so many disparate elements into their sound that one senses a new sensibility afoot, an inclusionary wave\ldots like nothing I've heard before.''}
+
+\vspace{0.5em}
+\hfill --- David Byrne
+
+\vspace{1em}
+The inclusionary wave is the spaces between genres. The Amiga Principle applied to music: not more power, but a fundamentally different relationship with the material. Everything is valid. Everything connects. The spaces between are where the music lives.
+\end{quotebox}
+
+\end{document}
