@@ -1,6 +1,6 @@
 ---
 name: mfe-change
-description: "Calculus and continuous transformation. Rates, accumulation, approximation — the mathematics of motion and growth."
+description: "Calculus and continuous transformation — derivatives, integrals, ODEs, Taylor series, and optimization. Computes rates of change, accumulates quantities over intervals, solves differential equations, and classifies critical points. Use when computing derivatives or integrals, solving ordinary differential equations, performing Taylor series approximations, finding critical points, or analyzing continuous change and motion."
 user-invocable: false
 allowed-tools: Read Grep Glob
 metadata:
@@ -26,20 +26,17 @@ metadata:
 
 # Change
 
-## Summary
+Part III: Moving — Chapters 8, 9, 10 — Plane Position: (0, -0.2) radius 0.4 — 58 Primitives
 
-**Change** (Part III: Moving)
-Chapters: 8, 9, 10
-Plane Position: (0, -0.2) radius 0.4
-Primitives: 58
+## Workflow
 
-Calculus and continuous transformation. Rates, accumulation, approximation — the mathematics of motion and growth.
+1. **Verify continuity** at the point or interval of interest — confirm the function meets the three conditions (defined, limit exists, limit equals value)
+2. **Compute derivatives** using the appropriate rule (power, chain, product, quotient) to find rates of change
+3. **Find critical points** where f'(x) = 0 or f'(x) is undefined, then classify using the first or second derivative test
+4. **Integrate** using antiderivatives and the Fundamental Theorem of Calculus to accumulate quantities
+5. **Solve ODEs** by identifying the equation type and applying the matching technique (separation, integrating factor, etc.)
 
-**Key Concepts:** Derivative, Definite Integral, Ordinary Differential Equation, Limit, Continuity
-
-## Key Primitives
-
-
+## Key Concepts
 
 **Derivative** (definition): The derivative of f at x is f'(x) = lim_{h->0} [f(x+h) - f(x)]/h, when this limit exists. It represents the instantaneous rate of change of f at x, and the slope of the tangent line to the graph at (x, f(x)).
   - computing the instantaneous rate of change of a quantity
