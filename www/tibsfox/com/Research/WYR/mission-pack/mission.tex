@@ -1,0 +1,1014 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ===== COLOR SCHEME: ECOLOGY/NATURE =====
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ===== SECTION FORMATTING =====
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ===== CUSTOM ENVIRONMENTS =====
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ===== HEADERS/FOOTERS =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Weyerhaeuser \& Sustainable Timber}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ===== HYPERLINKS =====
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Weyerhaeuser and Sustainable Timber -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ===== TITLE PAGE =====
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Weyerhaeuser \&\\[0.3em]Sustainable Timber}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Working Forest Model --- North America}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ===== TABLE OF CONTENTS =====
+\tableofcontents
+\newpage
+
+% ===========================================================================
+% STAGE 1 --- VISION DOCUMENT
+% ===========================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Weyerhaeuser \& Sustainable Timber --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (root mission)}
+\metafield{Context:}{GSD Ecosystem --- PNW Ecological \& Infrastructure Research Track}
+
+\subsection{Vision}
+
+The Pacific Northwest was built on timber. Before the silicon, before the software, before the coffee shops with their MacBooks, there were the trees --- Douglas fir and western red cedar running from the Cascade crest to the coast, a green wall so dense that early surveyors described it as impenetrable. Frederick Weyerhaeuser saw that wall in 1900 and purchased 900,000 acres of it from the Northern Pacific Railway for \$5.4 million. A century and a quarter later, the company bearing his name controls approximately 10.4 million acres of timberland across the United States and manages additional public lands in Canada, generating \$7.1 billion in net sales in 2024 with roughly 9,400 employees.
+
+The question this research mission investigates is not whether Weyerhaeuser is a large timber company --- that is settled fact --- but whether the ``working forest'' model it champions represents a genuine path to sustainable resource management or a sophisticated rebranding of industrial extraction. The answer matters beyond the company itself. Weyerhaeuser's practices influence forestry standards across North America through its Sustainable Forestry Initiative (SFI) certification, its carbon credit methodologies, its mass timber investments, and its sheer acreage. If its model works, it suggests that private timberland ownership at scale can align profit with ecological integrity. If it doesn't, 10.4 million acres of forest are being managed under a flawed paradigm.
+
+This study treats Weyerhaeuser as a lens through which to examine the broader architecture of sustainable timber in the 21st century --- the certification systems, the carbon accounting, the mass timber revolution, the biodiversity tradeoffs, and the rural economic dependencies. The spaces between these domains are where the real story lives: between corporate sustainability claims and on-the-ground practices, between carbon credit methodologies and atmospheric reality, between engineered wood products and the forests they come from, between the jobs timber provides and the ecosystems it shapes.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Certification Credibility Gap.} Forest certification systems (SFI, FSC, PEFC) use different standards and governance structures, creating confusion about what ``sustainable'' actually means. Weyerhaeuser's exclusive use of SFI --- an industry-founded standard --- rather than the more environmentally stringent FSC standard raises questions about the rigor of its sustainability claims. Only about 11\% of global forests carry any certification.
+
+\item \textbf{Clearcutting Paradox.} Weyerhaeuser defends clearcutting as a low-disturbance method backed by research, while environmental organizations document significant impacts on scenic values, soil stability, water quality, and wildlife habitat. The Columbia River Gorge conflicts, Oregon herbicide spraying controversies, and Maine mature-forest conservation disputes illustrate that ``sustainable'' clearcutting remains deeply contested.
+
+\item \textbf{Carbon Accounting Complexity.} The company's Natural Climate Solutions business --- targeting \$100 million in annual EBITDA --- sells Improved Forest Management (IFM) carbon credits based on delayed harvests. Proving ``additionality'' (that carbon storage exceeds business-as-usual operations) requires counterfactual baselines that are inherently unprovable. The integrity of voluntary carbon markets depends on resolving these methodological tensions.
+
+\item \textbf{Mass Timber Supply Chain Integrity.} Mass timber (CLT, glulam) promises 30--60\% lower embodied carbon than steel and concrete construction. But scaling mass timber demand creates new pressure on forest systems. Whether increased timber harvest for mass timber can remain within sustainable yield boundaries while preserving biodiversity is an open question.
+
+\item \textbf{Rural Economic Dependency.} Weyerhaeuser operates as a REIT with fiduciary obligations to shareholders, yet rural communities across the U.S. South, Pacific Northwest, and Northeast depend on its operations for employment and economic activity. The tension between capital optimization (portfolio recycling, non-core divestiture) and community stability is structurally unresolved.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} A timber corporation's sustainability claims can be evaluated as a system of interlocking feedback loops --- certification $\leftrightarrow$ practice, carbon storage $\leftrightarrow$ carbon accounting, forest yield $\leftrightarrow$ market demand, community stability $\leftrightarrow$ shareholder returns --- where the integrity of the whole depends on honest calibration at each junction.
+\end{quotebox}
+
+The working forest model asserts that managed forests can simultaneously provide timber, sequester carbon, support biodiversity, filter water, and sustain rural economies --- indefinitely. This study examines each of those claims against available evidence, treating them not as independent assertions but as a coupled system where failure in one domain propagates through the others.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    WEYERHAEUSER SUSTAINABLE TIMBER DOMAIN
+                    ==========================================
+
+    WESTERN TIMBERLANDS          SOUTHERN TIMBERLANDS         NORTHERN TIMBERLANDS
+    (WA, OR)                     (AL, MS, NC, SC, VA, AR)     (ME)
+    +------------------+         +---------------------+      +---------------+
+    | Douglas fir      |         | Loblolly pine        |     | Spruce/fir    |
+    | Western hemlock  |         | Planted pine (80%+)  |     | Carbon credits|
+    | Export markets   |         | Sawlog + fiber mkts  |     | IFM projects  |
+    | Mt. St. Helens   |         | $500M EWP facility   |     | Wind energy   |
+    | restoration      |         | CCS pore space       |     |               |
+    +------------------+         +---------------------+      +---------------+
+           |                              |                          |
+           +------------------------------+--------------------------+
+                                          |
+                              +------------------------+
+                              | CORPORATE OPERATIONS   |
+                              | SFI Certification      |
+                              | Tree Genetics Research |
+                              | ~100 Scientists        |
+                              | 100-200yr Planning     |
+                              | REIT Structure (NYSE)  |
+                              +------------------------+
+                                          |
+              +---------------------------+---------------------------+
+              |                           |                           |
+    +------------------+     +---------------------+     +------------------+
+    | WOOD PRODUCTS    |     | NATURAL CLIMATE     |     | REAL ESTATE /    |
+    | Lumber, EWP,     |     | SOLUTIONS           |     | ENERGY / NR      |
+    | TimberStrand     |     | Forest carbon       |     | Conservation     |
+    | Distribution     |     | Wind / Solar        |     | Mitigation banks |
+    | Mass timber      |     | CCS leases          |     | Rec leases       |
+    +------------------+     +---------------------+     +------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+    MODULE 1: Corporate Profile & History
+         |
+    MODULE 2: Forest Management & Certification ----+
+         |                                           |
+    MODULE 3: Carbon & Climate Solutions      MODULE 4: Mass Timber & Wood Products
+         |                                           |
+    MODULE 5: Biodiversity & Stewardship      ------+
+         |
+    MODULE 6: Economic & Community Impact
+         |
+    SYNTHESIS: The Working Forest Verdict
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Corporate Profile \& History}
+
+Weyerhaeuser's 125-year arc from timber baron to self-described sustainability leader. Founding (1900), high-yield forestry era (1960s--80s), spotted owl crisis (late 1980s--90s), pivot to sustainable forestry branding, REIT conversion (2010), current portfolio optimization strategy. Key figures: Frederick Weyerhaeuser, George H. Weyerhaeuser, Devin W. Stockfish (current CEO). Financial structure as REIT with \$7.1B revenue, 10.4M acres.
+
+\subsubsection{Module 2: Forest Management \& Certification}
+
+Silvicultural practices: clearcutting rationale, reforestation timelines (plant within first available season), tree genetics program, 25--50 year rotation cycles. SFI certification (140+ indicators), comparison with FSC and PEFC standards. Controversies: Columbia River Gorge clearcutting (2018), Oregon aerial herbicide spraying, Maine conservation easement disputes. Old-growth definition (50+ acres, 200+ years west of Cascades, 250+ east).
+
+\subsubsection{Module 3: Carbon \& Climate Solutions}
+
+Forest carbon sequestration mechanics, working forest carbon cycle (grow $\rightarrow$ harvest $\rightarrow$ store in products $\rightarrow$ replant). NCS business targeting \$100M EBITDA by 2025: IFM carbon credits (Maine pilot: 50,000 acres, 475,000 lifetime credits at $\sim$\$29/credit), Mississippi project, partnership with Carbon Direct/Microsoft. CCS pore space leasing in Southeast. Scope 1/2 net-zero transition plan, Scope 3 inventory. GHG Inventory Principles publication.
+
+\subsubsection{Module 4: Mass Timber \& Wood Products}
+
+Wood products manufacturing: lumber, TimberStrand\textregistered\ engineered wood, distribution network. \$500M EWP facility planned for southeast Arkansas. Mass timber revolution: CLT, glulam, LVL --- 30--60\% lower embodied carbon than steel/concrete. 2021 IBC code update allowing 18-story mass timber buildings. University partnerships (Arkansas, Clemson). Products storing 10M+ metric tons CO\textsubscript{2} equivalent annually over 100 years.
+
+\subsubsection{Module 5: Biodiversity \& Environmental Stewardship}
+
+Ecosystem services: water filtration (serving 100,000+ community residents in some watersheds), wildlife habitat, recreational access. Riparian buffer practices, threatened/endangered species programs. Mt. St. Helens restoration (18 million seedlings). Climate resilience adaptation. Longview mill pollution settlement with Columbia Riverkeeper. Tension between certification claims and on-the-ground environmental impact.
+
+\subsubsection{Module 6: Economic \& Community Impact}
+
+REIT structure and shareholder obligations: \$5.3B returned to shareholders 2021--2024, 5\%+ annual dividend growth. Portfolio optimization: \$1.1B in non-strategic land sales since 2020, net reduction of 680,000 acres while increasing per-acre value. THRIVE community program (Raymond, WA). Rural employment dependency. \$500M Arkansas facility as Southern economic development. Tribal sovereignty and Indigenous rights recognition in forestry policy.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: "Orchestration & Memory"
+    assignment: "Mission control, wave sequencing, cache management"
+    model: opus
+    token_share: 15%
+  denise:
+    role: "Synthesis & Presentation"
+    assignment: "Cross-module integration, final publication assembly"
+    model: opus
+    token_share: 15%
+  paula:
+    role: "Verification & Quality"
+    assignment: "Source validation, accuracy checking, safety gates"
+    model: sonnet
+    token_share: 10%
+  m68000:
+    role: "Execution Engine"
+    instances: 4
+    assignment: "Parallel module research and document production"
+    model: sonnet
+    token_share: 60%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{\sffamily In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Weyerhaeuser's current operations, practices, and sustainability claims (U.S. and Canada)
+\item SFI certification framework and comparison with FSC/PEFC
+\item Forest carbon credit methodology and voluntary carbon market participation
+\item Mass timber market growth and supply chain sustainability
+\item Rural economic dependency and community programs
+\item Environmental controversies and regulatory compliance
+\item Biodiversity and ecosystem services data from company and agency sources
+\end{itemize}
+
+\textbf{\sffamily Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Other timber REITs (Rayonier, PotlatchDeltic, CatchMark) except for brief comparison
+\item International timber markets beyond Weyerhaeuser's direct operations
+\item Detailed financial modeling or investment analysis
+\item Legislative advocacy or policy recommendations
+\item Pre-1980 historical practices (mentioned for context only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Corporate profile covers founding through current REIT structure with key financial metrics sourced from SEC filings and investor relations
+\item SFI certification framework explained with 140+ indicator structure; FSC/PEFC comparison includes governance differences
+\item At least three documented environmental controversies analyzed with sourced claims from both company and critics
+\item Carbon credit methodology (IFM) explained with specific project data: acreage, credit volume, pricing, verification registry
+\item Mass timber section includes embodied carbon comparison data (wood vs. steel vs. concrete) from peer-reviewed LCA studies
+\item Biodiversity section covers at least three ecosystem services with quantitative data (watershed coverage, species programs, restoration acreage)
+\item Economic analysis addresses REIT shareholder returns alongside rural community dependency with specific dollar figures
+\item Old-growth definition and protection policy documented with Weyerhaeuser's specific acreage and age thresholds
+\item At least two PNW-specific case studies analyzed in depth (Mt. St. Helens restoration, Columbia Gorge controversy)
+\item Source bibliography includes government agencies (USFS, EPA, GAO), peer-reviewed research, and professional organizations
+\item All numerical claims attributed to specific sources with publication dates
+\item Document is self-contained: a reader with no forestry background can follow the complete argument
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+Fox Infrastructure Group Master Plan & Timber supply chain for PNW cluster build; sustainable building materials & Feeds into \\
+GSD Mesh Prototype Spec & White-box node construction materials sourcing & Reference \\
+Foxfire Heritage Skills Vision & Traditional woodcraft knowledge; timber species identification & Cross-reference \\
+PNW Taxonomy (tibsfox.com/PNW) & Species naming conventions: Cedar, Fir, Hemlock & Naming source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle teaches that remarkable outcomes emerge from architectural elegance rather than brute force --- from knowing which specialized execution path to follow at each decision point. A working forest, at its best, embodies exactly this principle: each acre managed not as a commodity bin to be emptied and refilled, but as a living system where the spacing between trees, the timing of thinning, the genetics of seedlings, and the length of rotation cycles compound across decades into something more valuable than the sum of board feet extracted.
+
+Whether Weyerhaeuser actually manages its 10.4 million acres this way --- or merely describes them this way --- is what this mission will determine. The answer matters for the GSD ecosystem's infrastructure planning, for the PNW communities where these forests stand, and for anyone who believes that sustainable resource management is possible at industrial scale. The spaces between the claims and the evidence are where the truth grows.
+
+\newpage
+
+% ===========================================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ===========================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Weyerhaeuser \& Sustainable Timber --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, corporate disclosures, peer-reviewed research, and investigative journalism. Each module provides the evidence base for the corresponding mission component. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{USDA Forest Service} --- Forest Inventory and Analysis (FIA) program, Wood Innovations, Timber Products Output, 2030 National Report on Sustainable Forests
+\item \textbf{U.S. Government Accountability Office (GAO)} --- GAO-25-107496 Forest Service timber sales review
+\item \textbf{Weyerhaeuser Company} --- SEC filings (NYSE: WY), sustainability reports, Carbon Credit Principles, GHG Inventory Principles
+\item \textbf{Sustainable Forestry Initiative (SFI)} --- Forest Management Standard, Fiber Sourcing Standard, Chain of Custody
+\item \textbf{Forest Stewardship Council (FSC)} --- Comparative certification framework
+\item \textbf{American Carbon Registry (ACR)} --- IFM project verification methodology
+\item \textbf{Carbon Direct} --- Scientific verification partnership with Weyerhaeuser
+\item \textbf{The Nature Conservancy} --- Climate-smart forestry collaboration
+\item \textbf{U.S. Forest Products Laboratory} --- Mass timber embodied carbon research (Hemmati et al., 2024)
+\end{itemize}
+
+\subsection{Module 1 Reference: Corporate Profile \& History}
+
+\subsubsection{Founding and Growth}
+
+Weyerhaeuser Company began operations in 1900 when Frederick Weyerhaeuser (1834--1914), a German immigrant, purchased 900,000 acres of Washington state timberland from the Northern Pacific Railway. By 1903, the company owned more than 1.5 million acres in Washington. The company helped establish the Washington Fire Protection Association in 1908, employing 75 forest fire patrolmen. By the close of the 1910s, Weyerhaeuser operated 22 mills. (Source: HistoryLink.org)
+
+\subsubsection{Key Milestones}
+
+1937: Began research into sustainable-yield forestry. 1938: Among the first companies to grow and plant tree seedlings commercially. 1941: Established the first certified tree farm in the United States (Clemons Tree Farm) on 200,000 acres in Washington state. 1961: Harvested first crop of second-growth trees, establishing the harvest-and-restoration cycle. 1986: Planted 2 billionth seedling in the Mt. St. Helens blast zone (18 million seedlings by hand after the 1980 eruption). (Source: Weyerhaeuser Environmental Stewardship page)
+
+\subsubsection{High-Yield Forestry Era}
+
+Under George H. Weyerhaeuser (president from 1966), the company adopted ``high-yield forestry'' involving large-scale clearcutting, wetland draining, and chemical herbicides, fungicides, and fertilizers to increase growth and shorten rotation times. The company expanded into ply-veneer, hardboard, particleboard, and processed wood bark products, opening three kraft-pulp mills. (Source: HistoryLink.org)
+
+\subsubsection{Current Corporate Structure}
+
+Weyerhaeuser operates as a real estate investment trust (REIT), trading on NYSE under symbol WY. In 2024, the company reported \$7.1 billion in net sales with approximately 9,400 employees. It owns or controls approximately 10.4 million acres of timberlands in the U.S. plus additional Canadian lands under long-term license. Business segments include Timberlands, Wood Products, Real Estate, Energy and Natural Resources. CEO: Devin W. Stockfish. Headquarters: Seattle, Washington. (Source: Weyerhaeuser investor relations, SEC filings)
+
+\subsubsection{Portfolio Optimization Strategy}
+
+Since 2020, Weyerhaeuser has sold approximately \$1.1 billion in non-strategic forest land, a net reduction of roughly 680,000 acres, while increasing overall portfolio value and cash flow per acre. The company set a target of \$1 billion in strategic timberland acquisitions by end of 2025 and had invested \$775 million for nearly 252,000 acres as of mid-2025. Major 2024--2025 transactions include 84,300 acres in Alabama (\$244M), 117,000 acres in North Carolina and Virginia (\$375M), and 10,000 acres in Washington (\$95M), offset by divestitures in Oregon (28,000 acres, \$190M), Georgia and Alabama (86,000 acres, \$220M), and Virginia (108,000 acres). (Source: Weyerhaeuser press releases, PRNewswire, Nareit)
+
+\subsection{Module 2 Reference: Forest Management \& Certification}
+
+\subsubsection{Silvicultural Practices}
+
+Weyerhaeuser's forestry operations follow 25--50 year rotation cycles depending on species and region. The company uses traditional techniques of selection and cross-pollination to develop seedlings with superior growth, wood quality, and survival characteristics. Approximately 2\% of total land base is harvested annually, spread across millions of acres. Reforestation occurs within the first available planting season, within two growing seasons, or by planned natural regeneration within five years. (Source: Weyerhaeuser Sustainable Forestry Policy)
+
+\subsubsection{SFI Certification}
+
+Weyerhaeuser's entire timberlands portfolio is certified to the Sustainable Forestry Initiative (SFI) Forest Management Standard, which includes more than 140 measurable indicators covering biodiversity, soil health, water quality, special sites, recreational access, forestry research, and logger training. All manufacturing facilities are certified to SFI Fiber Sourcing and/or Certified Sourcing standards. Select sites carry SFI and PEFC Chain of Custody certification. Weyerhaeuser chose SFI over FSC because the SFI standards are designed specifically for North American operations and scale to their operational footprint. (Source: Weyerhaeuser sustainability pages)
+
+\subsubsection{Clearcutting Practices and Defense}
+
+Weyerhaeuser describes clearcutting as requiring fewer roads and less-frequent land activity than selective harvest methods, resulting in fewer disturbances to soil and water. The company states it conducts careful analysis to identify environmentally sensitive locations and follows best practices including minimizing road building, engineering roads for erosion prevention, leaving tree buffers along waterways, and protecting threatened and endangered species. (Source: Weyerhaeuser ``How We Do It'' series)
+
+\subsubsection{Environmental Controversies}
+
+\textbf{Columbia River Gorge (2018):} Weyerhaeuser planned clearcutting of 250+ acres within the Columbia River Gorge National Scenic Area east of Hood River, Oregon. The land fell within a General Management Area exempt from Scenic Area regulation. Friends of the Columbia River Gorge protested, citing significant adverse effects on scenic, natural, cultural, and recreation resources. The organization requested selective harvest, smaller clearcuts, and phased implementation. Oregon Department of Forestry regulations limited individual clearcuts to 120 acres with 300-foot buffers between adjacent units. (Sources: Willamette Week, Columbia Insight)
+
+\textbf{Oregon Aerial Herbicide Spraying (2024):} Weyerhaeuser filed notice to helicopter-spray pesticides on 2,000+ acres in Lincoln and Polk counties, Oregon. The application included herbicides aminopyralid, metsulfuron methyl, clopyralid, hexazinone, imazapyr, sulfometuron methyl, and triclopyr. Many parcels contained wetlands, fish-bearing streams, and domestic water sources. At least two chemicals listed as state pesticides of moderate concern. (Source: Lincoln Chronicle / Yachats News)
+
+\textbf{Longview Mill Pollution:} Columbia Riverkeeper sued Weyerhaeuser over alleged harmful discharges from its Longview, Washington mill into the Columbia River. The settlement required Weyerhaeuser to reroute stormwater pipes, aerate a pond, install monitoring devices and filters, and change on-site procedures. The Longview mill had been cited for 42 failures to meet pollution limits between October 2020 and November 2021. (Source: Oregon Public Broadcasting)
+
+\textbf{Maine Conservation (2025--2026):} Professional foresters criticized a DEP-approved conservation plan for NECEC transmission corridor mitigation, noting that because Weyerhaeuser owns several hundred thousand acres nearby, harvest reductions in the conservation area could be offset by heavier cutting elsewhere, resulting in near-zero net mature-forest benefit. (Source: Sun Journal, March 2026)
+
+\subsubsection{Old-Growth Policy}
+
+Weyerhaeuser defines old-growth forests as stands that are (1) 50+ acres; (2) have 50\%+ dominant native tree species; and (3) are 200+ years old west of the Cascade crest or 250+ years east. The company's policy states it will not harvest old-growth forests under this definition. In other parts of the U.S. and Canada, old-growth is defined on a project basis to match location-specific forest types. (Source: Weyerhaeuser Sustainable Forestry Policy)
+
+\subsection{Module 3 Reference: Carbon \& Climate Solutions}
+
+\subsubsection{Forest Carbon Cycle}
+
+Trees absorb CO\textsubscript{2} through photosynthesis and store it as solid carbon in trunks, limbs, roots, and leaves. When harvested at peak growth and converted to wood products, carbon remains locked in products for the life of buildings. New trees are replanted to continue the sequestration cycle. Weyerhaeuser reports that wood products produced annually store more than 10 million metric tons of CO\textsubscript{2} equivalent over 100 years. The company states that each year, growing trees remove more carbon than is released through harvesting. (Source: Weyerhaeuser sustainability reports)
+
+\subsubsection{Natural Climate Solutions Business}
+
+Weyerhaeuser set a target of \$100 million in annual Adjusted EBITDA from its NCS business by end of 2025. NCS EBITDA grew fourfold to \$84 million in 2024 from 2020. Revenue streams include forest carbon credits, renewable energy (7 wind sites, first solar site operational), mitigation banking, conservation projects, and carbon capture and sequestration (CCS) leasing. (Source: Nareit interview, Weyerhaeuser investor relations)
+
+\subsubsection{Forest Carbon Credit Projects}
+
+The company's first IFM project in Maine covers approximately 50,000 acres. It received American Carbon Registry (ACR) approval in September 2023 with an initial issuance of nearly 32,000 mtCO\textsubscript{2}e credits, sold for \$29 per credit. Lifetime expected generation: 475,000 credits. A second project was registered in Mississippi in 2024. The company partnered with Carbon Direct (scientific verification) and credits meet quality criteria used by Microsoft, the world's largest CDR buyer. Over 200,000 acres under IFM management that changes harvest practices to sequester additional carbon through delayed harvests and denser forest growth. (Sources: Weyerhaeuser press release, Carbon Direct, University of Florida Warrington College)
+
+\subsubsection{CCS Pore Space}
+
+Across the Southeastern U.S., Weyerhaeuser owns subsurface pore space rights beneath its timberlands. The company structures lease agreements with qualified companies for permanent belowground carbon capture and sequestration. Recent U.S. tax law changes (45Q credits) have improved project economics. (Source: Weyerhaeuser CCS page)
+
+\subsubsection{GHG Targets}
+
+Weyerhaeuser developed Scope 1 and 2 net-zero transition plans and refreshed Scope 3 emissions inventory. The company published GHG Inventory Principles advocating for its preferred approach to forest carbon accounting. It participated in updating SFI standards to add climate considerations to the Forest Management standard. It represented the forest sector at Climate Week NYC, COP28, and other global events. (Source: Weyerhaeuser sustainability strategy)
+
+\subsection{Module 4 Reference: Mass Timber \& Wood Products}
+
+\subsubsection{Mass Timber Overview}
+
+Mass timber uses engineered wood products --- cross-laminated timber (CLT), glued laminated timber (glulam), laminated veneer lumber (LVL) --- to construct large-scale buildings. CLT is made by criss-crossing wood layers with adhesive, producing panels with strength-to-weight ratios rivaling concrete. The 2021 International Building Code permits mass timber buildings up to 270 feet (approximately 18 stories). Mass timber generally uses younger, fast-growth trees smaller than 11 inches in diameter. (Sources: Turner \& Townsend, Sustainalytics, MIT Climate Portal)
+
+\subsubsection{Embodied Carbon Data}
+
+Peer-reviewed life cycle assessments show that mass timber buildings produce 30\% fewer CO\textsubscript{2} emissions compared to concrete and up to 50\% fewer than steel. A systematic review of 62 peer-reviewed articles found that on average, approximately 43\% of GHG emissions are avoided when reinforced concrete structures are substituted with mass timber alternatives. The U.S. Forest Products Laboratory study of Adohi Hall (University of Arkansas) found the mass timber structure emitted 198 kg CO\textsubscript{2} eq./m\textsuperscript{2} versus 243 kg for steel, a 19\% reduction, while storing approximately 2,757 tons of CO\textsubscript{2}. Houses constructed with wood show 17--58\% lower embodied energy than steel-framed and 16--55\% lower than concrete. (Sources: USFS Forest Products Laboratory, Journal of Sustainable Forestry, Journal of Forestry, CORRIM)
+
+\subsubsection{Market Growth}
+
+The global CLT market is projected to grow at 14.5\% annually from \$1.1 billion (2021) to \$2.5 billion by 2027. Mass timber projects are projected to grow from roughly 100 in 2018 to nearly 25,000 by 2034. Buildings account for approximately 39\% of global carbon emissions (28\% operational, 11\% embodied). States including California, Oregon, Washington, and Utah have amended building codes for taller mass timber structures. (Sources: MarketsandMarkets, Forest Business Network, World Green Building Council)
+
+\subsubsection{Weyerhaeuser Wood Products}
+
+Weyerhaeuser sources approximately 40\% of manufacturing wood from its own SFI-certified forests, 22\% from other certified landowners, and 38\% from non-certified landowners (typically small family forests). All wood comes from legal, non-controversial, responsible sources. The company is investing \$500 million in a southeast Arkansas facility for TimberStrand\textregistered\ engineered wood products. It maintains partnerships with the University of Arkansas Fay Jones School of Architecture and Clemson University's Wood Utilization + Design Institute. (Source: Weyerhaeuser Building Sustainably With Wood page)
+
+\subsection{Module 5 Reference: Biodiversity \& Environmental Stewardship}
+
+\subsubsection{Ecosystem Services}
+
+Weyerhaeuser forests provide water filtration (trees, plants, and soil absorb precipitation and slowly release filtered water into streams, rivers, and groundwater), wildlife habitat, outdoor recreation access, and biodiversity support. Some forests provide clean drinking water for up to 100,000 community residents. The company measures and publicly reports ecosystem services data including carbon capture, water filtration, wildlife habitat, and recreational access. (Source: Weyerhaeuser Environmental Stewardship page)
+
+\subsubsection{Water Quality}
+
+Forest practices include safeguarding water quality by maintaining forests' ability to capture and filter water. Manufacturing operations either recycle or treat water on-site, evaporate water during product drying, or deliver to publicly owned treatment facilities. The company's forests rely on natural precipitation with minimal measurable impact on water use. (Source: Weyerhaeuser Environmental Stewardship)
+
+\subsubsection{Restoration Case Study: Mt. St. Helens}
+
+The 1980 eruption destroyed 68,000 acres of Weyerhaeuser-owned timberland. The company planted 18 million seedlings by hand in the blast zone, placing its 2 billionth seedling there in 1986. The restored forests began yielding harvestable timber only a few years ago (circa 2020s), roughly 40 years after the eruption, demonstrating the long investment horizon of sustainable forestry. (Sources: Weyerhaeuser, Nareit)
+
+\subsubsection{Wildfire \& Climate Resilience}
+
+The company promotes climate resilience by identifying priority climate risks and implementing adaptation and mitigation measures. Its research draws on published work including studies on wildfire risk science, anthropogenic climate change impacts on western U.S. forests, and hillslope sediment production after wildfire. Weyerhaeuser participated in SFI standard updates adding climate considerations. (Source: Weyerhaeuser sustainability pages)
+
+\subsection{Module 6 Reference: Economic \& Community Impact}
+
+\subsubsection{REIT Financial Performance}
+
+As a REIT, Weyerhaeuser returned more than \$5.3 billion to shareholders from 2021 to 2024 through dividends and share repurchase. The base dividend increased by more than 5\% annually over four years. The company captured \$117 million in operating improvements and targeted an additional \$55--130 million in margin benefits. (Source: Nareit, Weyerhaeuser investor relations)
+
+\subsubsection{Rural Community Programs}
+
+The THRIVE community program, launched in its second community (Raymond, Washington), works with local elected officials and leaders to identify priorities and invest in community development. Weyerhaeuser supports rural economies through the Weyerhaeuser Giving Fund and employee engagement programs. The company employs approximately 9,400 people across North America, with operations concentrated in rural areas. (Source: Weyerhaeuser sustainability strategy)
+
+\subsubsection{Supply Chain Employment}
+
+Wood products manufacturing drives significant rural employment. The \$500 million TimberStrand facility in southeast Arkansas represents a major economic development investment. In North Carolina and Virginia, the company's expanded footprint includes three mills, two distribution centers, and field offices employing 600+ people. (Source: Weyerhaeuser press releases)
+
+\subsubsection{U.S. Forest Context}
+
+The United States contains approximately 750 million acres (303 million hectares) of forest land. Almost half is held in public trust by federal and state entities. The USDA Forest Service sold an average of 3.08 billion board feet annually over 2017--2021, the highest in decades. In the U.S. Southeast, over 85\% of forestland is owned by small, private family landowners. Forest resources in the U.S. have increased over the past century and forest carbon stocks have doubled since the 1950s. (Sources: USFS FIA, USIPA, GAO-25-107496)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Indigenous rights & Weyerhaeuser policy references ``recognition of indigenous peoples' rights'' --- verify specificity of nation-level attribution & GATE \\
+Carbon credit integrity & Additionality claims are inherently counterfactual; present methodology and critiques without advocacy & ANNOTATE \\
+Clearcutting impacts & Present both company defense and environmental organization evidence without taking sides & ANNOTATE \\
+Endangered species & No specific location data for listed species on Weyerhaeuser lands & ABSOLUTE \\
+Rural economic dependency & Present financial data without implying communities have no alternatives & ANNOTATE \\
+Corporate disclosure & Distinguish between independently verified claims and self-reported corporate data & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item USDA Forest Service --- Forest Inventory and Analysis (FIA) Program, national forest census
+\item USDA Forest Service --- 2030 National Report on Sustainable Forests (GTR-WO-107, 2026)
+\item USDA Forest Service --- Wood Innovations Program
+\item USDA Forest Service --- Forest Products Laboratory (Hemmati et al., 2024, Adohi Hall LCA)
+\item U.S. Government Accountability Office --- GAO-25-107496 Forest Service Timber (2025)
+\item Oregon Department of Forestry --- Forest Practices Act compliance records
+\item Washington Department of Ecology --- Longview mill compliance records
+\item U.S. Environmental Protection Agency --- Pesticide drift guidance
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=2em]
+\item ``The global potential for carbon capture and storage from forestry,'' \textit{Carbon Balance and Management} (2016)
+\item ``The fate of carbon in a mature forest under carbon dioxide enrichment,'' \textit{Nature} (April 2020)
+\item ``Wildfire risk science facilitates adaptation of fire-prone social-ecological systems,'' \textit{Environmental Research Letters} (2020)
+\item ``Impact of anthropogenic climate change on wildfire across western US forests,'' \textit{PNAS} (2016)
+\item Hemmati et al., ``Comparison of Embodied Carbon Footprint of Mass Timber,'' USFS Forest Products Laboratory (2024)
+\item ``Estimation of annual harvested wood products based on remote sensing and TPO survey data,'' \textit{Geo-spatial Information Science} (2024)
+\item Hegeir et al., Comparative LCA of mass timber, concrete, and steel structures (Norwegian industrial buildings)
+\item ``High-rise Timber Buildings as a Climate Change Mitigation Measure,'' Skullestad et al. (2016)
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Corporate Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Weyerhaeuser Company --- SEC filings, sustainability reports, press releases (weyerhaeuser.com)
+\item Sustainable Forestry Initiative (SFI) --- Forest Management Standard, Fiber Sourcing Standard
+\item Programme for the Endorsement of Forest Certification (PEFC)
+\item Forest Stewardship Council (FSC)
+\item American Carbon Registry (ACR) --- IFM project methodology
+\item Carbon Direct --- Weyerhaeuser partnership documentation
+\item The Nature Conservancy --- Climate-smart forestry collaboration
+\item National Association of Real Estate Investment Trusts (Nareit) --- Company profiles
+\item HistoryLink.org --- Weyerhaeuser Company history (File 1675)
+\item Consortium for Research on Renewable Industrial Materials (CORRIM)
+\end{itemize}
+
+\newpage
+
+% ===========================================================================
+% STAGE 3 --- MISSION PACKAGE
+% ===========================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Weyerhaeuser and sustainable timber that evaluates the working forest model against available evidence across six interconnected domains. The final deliverable will serve as a knowledge-base document for the GSD ecosystem's infrastructure and materials planning, with particular relevance to PNW regional development.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation         WAVE 1: Parallel Research        WAVE 2: Synthesis    WAVE 3: Publish
+[Sequential]               [3 Parallel Tracks]              [Sequential]         [Sequential]
+                            
+Schema + Source Index  -->  Track A: Modules 1+2       -->  Cross-module    -->  Final Assembly
+                            Track B: Modules 3+4       -->  Integration     -->  Verification
+                            Track C: Modules 5+6       -->  Verdict         -->  Publication
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer} --- Source index, citation database, quantitative data tables
+\item \textbf{Research Layer} --- Six parallel module surveys with structured findings
+\item \textbf{Synthesis Layer} --- Cross-module integration, contradiction identification, verdict framework
+\item \textbf{Publication Layer} --- Final document assembly, verification matrix, delivery package
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Source Index & All sources catalogued with quality rating and access status & W0-SCHEMA \\
+D2 & Corporate Profile & 125-year arc with financial data from SEC filings & W1-MOD1 \\
+D3 & Certification Analysis & SFI framework + FSC/PEFC comparison + 3 controversies & W1-MOD2 \\
+D4 & Carbon \& Climate Report & IFM methodology + project data + additionality critique & W1-MOD3 \\
+D5 & Mass Timber Assessment & Embodied carbon LCA data + market projections & W1-MOD4 \\
+D6 & Biodiversity Report & 3+ ecosystem services quantified + restoration cases & W1-MOD5 \\
+D7 & Economic Analysis & REIT returns + rural dependency + community programs & W1-MOD6 \\
+D8 & Synthesis \& Verdict & Cross-module integration with working forest evaluation & W2-SYNTH \\
+D9 & Final Publication & Complete document, verified, with bibliography & W3-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 4,000 \\
+W0-SRCIDX & None & Sonnet & 8,000 \\
+W1-MOD1 & W0-SCHEMA & Sonnet & 12,000 \\
+W1-MOD2 & W0-SCHEMA, SRCIDX & Sonnet & 15,000 \\
+W1-MOD3 & W0-SCHEMA, SRCIDX & Opus & 18,000 \\
+W1-MOD4 & W0-SCHEMA, SRCIDX & Sonnet & 15,000 \\
+W1-MOD5 & W0-SCHEMA, SRCIDX & Sonnet & 12,000 \\
+W1-MOD6 & W0-SCHEMA, SRCIDX & Sonnet & 12,000 \\
+W2-SYNTH & All W1 modules & Opus & 20,000 \\
+W3-PUB & W2-SYNTH & Sonnet & 10,000 \\
+W3-VERIFY & W3-PUB & Opus & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 34\% & Synthesis, carbon methodology judgment, cross-module integration, final verification \\
+Sonnet & 58\% & Module surveys, document assembly, structured research, source verification \\
+Haiku & 8\% & Schema generation, template scaffolding, citation formatting \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Tracks} & \tableheader{Components} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & 1 (seq) & 2 & 12,000 \\
+1 & Parallel Research & 3 (par) & 6 & 84,000 \\
+2 & Synthesis & 1 (seq) & 1 & 20,000 \\
+3 & Publication & 1 (seq) & 2 & 18,000 \\
+\midrule
+& \textbf{Total} & & \textbf{11} & \textbf{134,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-SCHEMA & Generate shared data schemas: source entry format, finding entry format, cross-reference format & Haiku & 4,000 \\
+W0-SRCIDX & Build master source index from all identified sources; validate URLs; assign quality ratings & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Corporate \& Certification (Modules 1+2)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1-MOD1 & Corporate history, financial data, REIT structure, portfolio optimization timeline & Sonnet & 12,000 \\
+W1-MOD2 & SFI/FSC/PEFC comparison, clearcutting analysis, 3 controversy case studies, old-growth policy & Sonnet & 15,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Carbon \& Products (Modules 3+4)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1-MOD3 & Carbon cycle, IFM methodology, NCS business analysis, CCS, additionality critique & Opus & 18,000 \\
+W1-MOD4 & Mass timber LCA data, CLT/glulam properties, market projections, Weyerhaeuser products & Sonnet & 15,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Stewardship \& Economics (Modules 5+6)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1-MOD5 & Ecosystem services data, water quality, restoration cases, wildlife programs & Sonnet & 12,000 \\
+W1-MOD6 & REIT returns, rural employment, THRIVE program, supply chain economics, tribal rights & Sonnet & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W2-SYNTH & Cross-module integration: identify contradictions, trace feedback loops, evaluate working forest model against evidence, produce verdict framework & Opus & 20,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W3-PUB & Assemble final document, format bibliography, generate index page and companion files & Sonnet & 10,000 \\
+W3-VERIFY & Run test plan, verify all numerical claims sourced, check safety-critical gates, produce verification matrix & Opus & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (schemas, source index) cached and loaded into all Wave 1 contexts --- 5-minute TTL window exploited by launching Track A, B, C within 2 minutes of each other
+\item Each Wave 1 track shares the same source index but operates on independent module content, minimizing cross-track dependencies
+\item Wave 2 synthesis loads all six module outputs --- largest single context window; use Opus for maximum comprehension
+\item Wave 3 verification runs against the assembled document, not individual modules, reducing redundant checking
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Tokens} & \tableheader{Model} & \tableheader{\% Total} \\
+\midrule
+Foundation (W0) & 12,000 & Haiku + Sonnet & 9\% \\
+Track A: Corp + Cert & 27,000 & Sonnet & 20\% \\
+Track B: Carbon + Products & 33,000 & Opus + Sonnet & 25\% \\
+Track C: Stewardship + Econ & 24,000 & Sonnet & 18\% \\
+Synthesis (W2) & 20,000 & Opus & 15\% \\
+Publication + Verify (W3) & 18,000 & Sonnet + Opus & 13\% \\
+\midrule
+\textbf{Total} & \textbf{134,000} & & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ─────┬───> W1-MOD1 ─────┐
+               │                    │
+W0-SRCIDX ─────┼───> W1-MOD2 ─────┤
+               │                    │
+               ├───> W1-MOD3 ─────┤
+               │                    ├───> W2-SYNTH ───> W3-PUB ───> W3-VERIFY
+               ├───> W1-MOD4 ─────┤
+               │                    │
+               ├───> W1-MOD5 ─────┤
+               │                    │
+               └───> W1-MOD6 ─────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 8 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge Cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{38} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, corporate SEC filings, or professional organizations. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every acreage figure, dollar amount, CO\textsubscript{2} metric, and percentage attributed to specific source with date \\
+SC-ADV & No policy advocacy & Document presents evidence and findings without advocating for specific legislative or policy positions on forestry regulation \\
+SC-IND & Indigenous attribution & Any Indigenous rights reference names specific nation or framework (UNDRIP, OCAP\textregistered), never generic ``Indigenous peoples'' \\
+SC-END & Endangered species & No GPS coordinates or specific habitat locations for any listed species on Weyerhaeuser lands \\
+SC-CLI & Climate projections sourced & Every carbon sequestration rate, emissions projection, or climate impact figure cites specific study or agency \\
+SC-BAL & Balanced presentation & Environmental controversies present both Weyerhaeuser's stated defense and critics' documented evidence \\
+SC-FIN & Financial data sourced & All REIT financial data (revenue, EBITDA, shareholder returns) traceable to SEC filings or investor relations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Corporate history completeness & Founding (1900) through current REIT with key milestones \\
+CF-02 & Financial metrics & Revenue, acreage, employee count, stock symbol sourced \\
+CF-03 & SFI framework & 140+ indicators, governance structure explained \\
+CF-04 & FSC/PEFC comparison & At least 3 governance/standard differences documented \\
+CF-05 & Controversy coverage & $\geq$3 controversies with sourced claims from both sides \\
+CF-06 & Old-growth definition & Acre, species, age thresholds documented per policy \\
+CF-07 & IFM methodology & Project mechanics: acreage, credits, pricing, registry \\
+CF-08 & Additionality critique & Counterfactual baseline challenge documented with academic source \\
+CF-09 & NCS business metrics & EBITDA target, actual figures, revenue streams enumerated \\
+CF-10 & Mass timber LCA data & $\geq$2 peer-reviewed studies with specific CO\textsubscript{2} reduction figures \\
+CF-11 & Market projections & CLT market size and growth rate with source \\
+CF-12 & Ecosystem services & $\geq$3 services with quantitative data \\
+CF-13 & Mt. St. Helens case & Acreage destroyed, seedlings planted, timeline to harvest \\
+CF-14 & REIT shareholder returns & Total returned 2021--2024 with dividend growth rate \\
+CF-15 & Rural employment data & Employee count, facility investments, THRIVE program \\
+CF-16 & PNW case studies & $\geq$2 Pacific Northwest-specific cases analyzed in depth \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Certification $\leftrightarrow$ Practice & Document traces how SFI indicators map to actual harvest decisions \\
+IN-02 & Carbon $\leftrightarrow$ Products & Carbon stored in wood products connected to harvest volumes \\
+IN-03 & Biodiversity $\leftrightarrow$ Clearcutting & Ecosystem service claims evaluated against documented harvest impacts \\
+IN-04 & Economics $\leftrightarrow$ Community & REIT optimization decisions connected to rural employment effects \\
+IN-05 & Mass timber $\leftrightarrow$ Forest yield & Demand growth projections evaluated against sustainable harvest rates \\
+IN-06 & Carbon credits $\leftrightarrow$ Certification & IFM project areas cross-referenced with SFI certification claims \\
+IN-07 & Data consistency & Same metrics (acreage, revenue, CO\textsubscript{2}) consistent across modules \\
+IN-08 & Self-containment & Non-expert reader can follow complete argument without external refs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Data gap acknowledgment & At least one ``data insufficient'' or ``further research needed'' note \\
+EC-02 & Temporal currency & Primary sources from 2020 or later where available \\
+EC-03 & Disputed claims flagged & Where company and critics disagree, disagreement explicitly noted \\
+EC-04 & Certification limitation & Acknowledged that SFI is industry-governed vs. FSC multi-stakeholder \\
+EC-05 & Carbon credit uncertainty & Additionality limitations presented with appropriate hedging \\
+EC-06 & Regional variation & Differences between Western and Southern timberlands operations noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Corporate profile with financial metrics & CF-01, CF-02 & Pending \\
+2. SFI framework + FSC/PEFC comparison & CF-03, CF-04, EC-04 & Pending \\
+3. Three documented controversies & CF-05, SC-BAL & Pending \\
+4. IFM methodology with project data & CF-07, CF-08, CF-09 & Pending \\
+5. Mass timber embodied carbon data & CF-10, CF-11 & Pending \\
+6. Three ecosystem services quantified & CF-12, CF-13 & Pending \\
+7. REIT returns + rural dependency & CF-14, CF-15, IN-04 & Pending \\
+8. Old-growth definition documented & CF-06 & Pending \\
+9. Two PNW case studies & CF-16, CF-13 & Pending \\
+10. Government/peer-reviewed bibliography & SC-SRC & Pending \\
+11. All numerical claims attributed & SC-NUM, SC-FIN, SC-CLI & Pending \\
+12. Self-contained document & IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; overall quality \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache timing \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gaps \\
+EXEC-A & Track A Executor & Modules 1+2 document production \\
+EXEC-B & Track B Executor & Modules 3+4 document production \\
+EXEC-C & Track C Executor & Modules 5+6 document production \\
+CRAFT-ECO & Ecology Specialist & Biodiversity analysis, ecosystem services verification \\
+CRAFT-FIN & Finance Specialist & REIT analysis, carbon market economics, LCA data \\
+VERIFY & Verification Agent & Source validation; accuracy checking; safety gates \\
+INTEG & Integration Agent & Cross-module consistency; feedback loop tracing \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Security & Safety boundary enforcement; sensitivity gates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Components & 11 \\
+Parallel Tracks & 3 (Wave 1) \\
+Estimated Total Tokens & 134,000 \\
+Context Windows & 18--22 \\
+Sessions & 4--5 \\
+Opus Share & 34\% \\
+Sonnet Share & 58\% \\
+Haiku Share & 8\% \\
+Safety-Critical Tests & 8 (mandatory-pass) \\
+Total Tests & 38 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``A tree's value is not in its board feet alone, but in the water it filters, the carbon it stores, the habitat it shelters, the soil it holds, and the communities it sustains. The working forest model succeeds or fails on whether it can account for all of these simultaneously --- and honestly.''}
+
+\vspace{0.5em}
+
+\hfill --- The spaces between the rings is where the tree actually grows.
+\end{quotebox}
+
+\end{document}
