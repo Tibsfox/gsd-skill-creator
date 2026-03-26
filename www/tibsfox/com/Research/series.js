@@ -37,6 +37,7 @@
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },
+    { id: 'SNY', name: 'Sonic Youth', path: 'SNY/index.html' },
     { id: 'SPA', name: 'Spatial Awareness', path: 'SPA/index.html' },
     { id: 'STA', name: 'Steve Allen', path: 'STA/index.html' },
     { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' },
