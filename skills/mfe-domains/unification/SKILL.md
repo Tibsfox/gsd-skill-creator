@@ -1,6 +1,6 @@
 ---
 name: mfe-unification
-description: "Deep symmetries and unifying principles. Where separate mathematical threads converge into shared structure."
+description: "Deep symmetries and unifying principles — gauge theory, Lie groups, Noether's theorem, and the Standard Model. Constructs field theories from symmetry requirements, derives conservation laws, and traces force unification. Use when working with gauge symmetry, Lie groups (U(1), SU(2), SU(3)), conservation laws via Noether's theorem, the Higgs mechanism, or Standard Model structure."
 user-invocable: false
 allowed-tools: Read Grep Glob
 metadata:
@@ -25,20 +25,17 @@ metadata:
 
 # Unification
 
-## Summary
+Part VIII: Converging — Chapters 26, 27 — Plane Position: (0, 0.6) radius 0.3 — 37 Primitives
 
-**Unification** (Part VIII: Converging)
-Chapters: 26, 27
-Plane Position: (0, 0.6) radius 0.3
-Primitives: 37
+## Workflow
 
-Deep symmetries and unifying principles. Where separate mathematical threads converge into shared structure.
+1. **Identify the symmetry group** governing the problem — U(1) for electromagnetism, SU(2) for weak force, SU(3) for strong force, or combinations
+2. **Apply the gauge principle** to derive required gauge fields from local invariance requirements
+3. **Construct the Lagrangian** encoding field dynamics and interactions using gauge-invariant terms
+4. **Apply Noether's theorem** to extract conserved quantities (charge, isospin, color charge) from continuous symmetries
+5. **Check for spontaneous symmetry breaking** — apply the Higgs mechanism where gauge bosons acquire mass
 
-**Key Concepts:** Gauge Principle, SU(2) Symmetry Group, String Action, U(1) Symmetry Group, SU(3) Symmetry Group
-
-## Key Primitives
-
-
+## Key Concepts
 
 **Gauge Principle** (technique): The gauge principle states that physics must be invariant under local (spacetime-dependent) symmetry transformations. Requiring local gauge invariance necessitates the introduction of gauge fields (connections) that transform as A_mu -> g A_mu g^{-1} + (i/e) g partial_mu g^{-1}.
   - Constructing quantum field theories from symmetry requirements
