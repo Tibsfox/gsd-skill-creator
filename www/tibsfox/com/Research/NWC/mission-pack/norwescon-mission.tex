@@ -1,0 +1,1034 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — Space/Cosmic (speculative fiction convention)
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple — section headers
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue — subsections
+\definecolor{tertiary}{HTML}{F9A825}      % Star gold — subsubsections
+\definecolor{accent}{HTML}{7C4DFF}        % Electric violet — highlights
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Lavender wash
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Norwescon 48}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Norwescon 48 -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Norwescon 48\\[0.3em]Deep Research Mission}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Pacific Northwest's Premier Science Fiction \& Fantasy Convention}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{April 2--5, 2026 --- DoubleTree by Hilton Seattle Airport, SeaTac, WA}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 10 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Norwescon 48 --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{Convention attendance planning and community intelligence gathering}
+
+\subsection{Vision}
+
+Norwescon is where the Pacific Northwest's speculative fiction community comes home. Running continuously since 1978, it is one of the largest regional SF\&F conventions in the United States --- a four-day convergence of writers, artists, scientists, gamers, costumers, filmmakers, and fans at the DoubleTree by Hilton Seattle Airport in SeaTac, Washington. Norwescon 48 runs April 2--5, 2026.
+
+This research mission exists because attending a convention well is its own kind of engineering problem. The schedule is dense --- hundreds of panels, readings, workshops, concerts, film screenings, gaming sessions, dances, and special events spread across four days and dozens of rooms. The guests of honor represent extraordinary creative and scientific talent. The Philip K. Dick Award ceremony anchors the weekend's literary calendar. And the community infrastructure --- from the Oasis sensory-safe lounge to the BIPOC \& AAPI lounge, from teen programming to party-wing protocols --- reflects a mature, intentional culture of inclusion.
+
+The goal is comprehensive intelligence: who is there, what is happening, when it matters, where to find it, and how the community that sustains it all works. Armed with this, the convention transforms from an overwhelming firehose into a curated experience --- the spaces between panels become as valuable as the panels themselves.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Schedule density overwhelm.} Norwescon packs 30+ programming tracks across four days into a dozen simultaneous rooms. Without advance triage, high-priority events get missed.
+\item \textbf{Guest of honor knowledge gap.} Writer GoH Ursula Vernon (T. Kingfisher) alone spans children's books, adult horror, webcomics, and Hugo/Nebula-winning fiction. The other guests --- Geneva Bowers, Summer Ash, Dutch Bihary, Orbit Books --- each require background to engage meaningfully.
+\item \textbf{Philip K. Dick Award literacy.} Seven novels nominated, award ceremony Friday night. Without pre-reading or at least synopsis familiarity, the ceremony is a spectator event rather than a participatory one.
+\item \textbf{Logistics friction.} Hotel room block is closed, parking is cashless, nearby hotel alternatives exist but are not part of the con arrangement. Transportation options include light rail, rideshare, and hotel shuttle.
+\item \textbf{Community infrastructure invisibility.} First-time or infrequent attendees may not discover the Oasis lounge, meetup signups, speed friending, volunteer opportunities, or the Guidebook mobile app without advance knowledge.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Convention as navigable knowledge space:} decompose the four-day event into five research modules that map the full territory, enabling strategic attendance planning and deep engagement.
+
+\subsubsection{Convention Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+ ┌─────────────────────────────────────────────────────┐
+ │              NORWESCON 48 DOMAIN MAP                 │
+ │           April 2–5, 2026 · SeaTac, WA              │
+ ├─────────────────────────────────────────────────────┤
+ │                                                      │
+ │  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
+ │  │ HISTORY  │  │ GUESTS   │  │ PROGRAMMING      │   │
+ │  │ & ORIGIN │──│ OF HONOR │──│ & SCHEDULE       │   │
+ │  │ (M1)     │  │ (M2)     │  │ (M3)             │   │
+ │  └────┬─────┘  └────┬─────┘  └────┬─────────────┘   │
+ │       │             │              │                  │
+ │       └──────┬──────┘       ┌──────┘                  │
+ │              │              │                          │
+ │  ┌──────────┴──────┐  ┌───┴──────────────────────┐  │
+ │  │ LOGISTICS &     │  │ COMMUNITY & CULTURE      │  │
+ │  │ ATTENDANCE (M4) │──│ (M5)                     │  │
+ │  └─────────────────┘  └──────────────────────────┘  │
+ │                                                      │
+ │  PKD Award ──┐  Masquerade ──┐  Dances ──┐          │
+ │  Film Fest ──┤  Gaming ──────┤  Art ──────┤          │
+ │  Concerts ───┘  Workshops ───┘  Readings ─┘          │
+ └─────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0: Foundation ─── Shared schemas, source index
+      │
+  Wave 1: ┌─ Track A: M1 (History) + M2 (Guests)
+      │    └─ Track B: M3 (Programming) + M4 (Logistics)
+      │
+  Wave 2: Synthesis ─── M5 (Community) + Cross-module integration
+      │
+  Wave 3: Publication ─── Final assembly + Verification
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: History \& Origin}
+
+Norwescon's 48-year arc from a practice run for a 1981 Worldcon bid to one of the largest regional conventions in the United States. Founding of NWSFS. Venue migrations from the Hyatt to Red Lion to Sheraton Tacoma to the DoubleTree SeaTac. The Alternacon interlude. COVID cancellation (2020) and virtual year (2021). Evolution of the Guest of Honor tradition.
+
+\subsubsection{Module 2: Guests of Honor \& Featured Events}
+
+Deep profiles on all five guest categories: Writer GoH Ursula Vernon / T. Kingfisher (Hugo, Nebula, Mythopoeic winner; Digger webcomic; children's and adult horror); Artist GoH Geneva Bowers (Hugo-winning illustrator; Appalachian magical realism); Science GoH Summer Ash (astrophysicist, rocket scientist, science communicator; Stanford/ISU/Cambridge); Spotlight Publisher Orbit Books (represented by executive editor Bradley Englert; Corey, Jemisin, Leckie, Sapkowski); Special Guest Dutch Bihary (body art, SFX, Skin Wars). Philip K. Dick Award ceremony and 2026 nominees.
+
+\subsubsection{Module 3: Programming \& Schedule}
+
+The four-day schedule across 30+ tracks: Writing, SF, Fantasy, Horror, Science, Technology, Biology, Space, History, Military, Art, Costume, Gaming, Music, Poetry, Community, YA, Teen/Tween, Youth, Readings, Workshops, Streaming, and Special Events. Key highlights: Opening Ceremonies (Thu), PKD Award Ceremony (Fri 7pm), Masquerade (Sat), Speculative Film Festival, Labyrinth 40th anniversary shadow cast, CATAN US National Championship Qualifier, concerts, three themed dances (First Contact Galactic Gala, Black Light Rave, Goblin Ball).
+
+\subsubsection{Module 4: Logistics \& Attendance}
+
+Membership pricing, registration process, hotel situation (room block closed; nearby alternatives), transportation (light rail, shuttle, driving directions), hotel cashless policy, party wing rules (Wing 5B), maps and room directory, Guidebook mobile app, schedule downloads (ePub/PDF).
+
+\subsubsection{Module 5: Community \& Culture}
+
+The all-volunteer organizational structure (501(c)(3)), NWSFS governance, volunteer pathways, meetup system, the Oasis low-sensory lounge, BIPOC \& AAPI lounge, accessibility features, teen programming philosophy, speed friending, charity (Page Ahead), Code of Conduct, antiracism statement, costuming and weapons policies.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: norwescon-48-deep-research
+  activation: squadron
+  modules: 5
+  waves: 4
+  parallel_tracks: 2
+  model_split:
+    opus: 30%    # Synthesis, guest profiles, community analysis
+    sonnet: 60%  # Schedule compilation, logistics, history
+    haiku: 10%   # Schemas, templates, index scaffolding
+  safety_domains:
+    - source_quality
+    - copyright_compliance
+  estimated_tokens: ~180K
+  estimated_windows: 10
+  estimated_sessions: 4
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete convention overview with 48-year historical context
+\item All five guest of honor profiles with career highlights and key works
+\item All seven 2026 Philip K. Dick Award nominees with publication details
+\item Full programming track inventory with highlighted must-see events
+\item Logistics guide covering membership, hotel, transport, and technology
+\item Community infrastructure including lounges, meetups, and volunteer pathways
+\item Three themed dance nights and special event descriptions
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Individual panel-by-panel schedule optimization (too dynamic; use Guidebook app)
+\item Hotel room booking assistance (block is closed)
+\item PKD nominee book reviews (would require reading all seven novels)
+\item Historical archives deep-dive (pre-Norwescon 30 guest lists, etc.)
+\item Party guide or room-party coordination
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Convention history covers founding through Norwescon 48 with venue timeline
+\item All five GoH categories profiled with career achievements and key works
+\item All seven 2026 PKD Award nominees listed with titles, authors, and publishers
+\item At least 20 programming tracks identified with representative panel examples
+\item Key special events catalogued with dates, times, and locations
+\item Membership pricing documented for all categories (adult, youth, child, single-day)
+\item Hotel and transport logistics cover at least three arrival methods
+\item Community infrastructure covers at least four support spaces/programs
+\item Three themed dance nights described
+\item All sources traceable to norwescon.org, Wikipedia, or professional review outlets
+\item Document compiles as a self-contained reference requiring no prior Norwescon knowledge
+\item Through-line connects to GSD ecosystem philosophy
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+PNW Taxonomy Pack & Regional context; PNW bioregional identity & Informs \\
+Foxfire Heritage Pack & Community-based knowledge transmission & Parallel \\
+The Hundred Voices & Literary community; authorial voice traditions & Resonates \\
+The Space Between & Speculative fiction as epistemological tool & Philosophical root \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A convention is a space between. Not quite work, not quite leisure. Not entirely public, not entirely private. Norwescon has sustained that liminal space for 48 years --- an annual emergence where people who spend most of the year navigating a world that doesn't quite fit them find a place that does. The founders started it as practice for a larger thing and discovered the practice was the thing.
+
+This is the Amiga Principle in community form: a small group of PNW fans in 1978, building something elegant and specific, watched it grow through faithful iteration into one of the largest regional conventions in the country. The architecture is all-volunteer. The execution is love. The product is four days where the spaces between --- the hallway conversations, the party-wing encounters, the speed friending, the quiet hours in the Oasis --- matter as much as any panel on the schedule.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Norwescon 48 --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles primary-source findings organized by research module. All data sourced from official Norwescon communications and professional review outlets.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item Norwescon official website (norwescon.org) --- primary source for all convention details
+\item Philip K. Dick Award administration (philipkdickaward.org)
+\item Reactor Magazine / Locus Magazine --- professional SF\&F review outlets
+\item FanCons.com / FantasyCons.com --- convention aggregator databases
+\item Wikipedia --- historical context with citation verification
+\end{itemize}
+
+\subsection{Module 1: History \& Origin Reference}
+
+\subsubsection{Founding and Early Years}
+
+Norwescon was founded in 1978 by Pacific Northwest fans who wanted to build experience for a planned 1981 Seattle Worldcon bid. They simultaneously created the Northwest Science Fiction Society (NWSFS) to develop a volunteer base. The first Norwescon was held in what is now the city of SeaTac, Washington, featuring Theodore Sturgeon as Guest of Honor and drawing just over 400 attendees.
+
+The convention moved to the Hyatt Hotel the following year (site of the 1961 Worldcon), where it remained through Norwescon VII. Growth pressures led to a move to SeaTac's Red Lion Inn, followed by an emergency relocation back to the Hyatt for a year under the name ``Alternacon.'' Five years at the Sheraton in Tacoma followed (late 1980s through early 1990s). A brief stay in Bellevue preceded the 1994 return to the original Red Lion site, now renamed the DoubleTree Hotel SeaTac, where the convention has been held ever since.
+
+Note: Norwescon 13 was skipped in the numbering sequence, but since the numbering had already skipped a year for the Alternacon, the year count resynched with the convention number. The name ``Norwescon'' was also the name of the 8th World Science Fiction Convention held in Portland, Oregon, in 1950.
+
+\subsubsection{COVID Era}
+
+Norwescon 43 (2020) was cancelled due to the COVID-19 pandemic. Norwescon 43 was held virtually in 2021 with Writer GoH Jacqueline Carey, Artist GoH Sana Takeda, and Science GoH Dr. Susan Langley. In-person conventions resumed in 2022.
+
+\subsubsection{Venue Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Years} & \tableheader{Venue} & \tableheader{Notes} \\
+\midrule
+1978 & Unincorporated SeaTac area & NWC 1; 400+ attendees \\
+1979--1984 & Hyatt Hotel, SeaTac & NWC II--VII \\
+1985--1986 & Red Lion Inn, SeaTac & Growth pressures \\
+1987 & Hyatt Hotel (return) & ``Alternacon'' \\
+1988--1992 & Sheraton, Tacoma & Five-year run \\
+1993 & Bellevue area & One year \\
+1994--present & DoubleTree SeaTac & Continuous (excl. 2020--2021) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Guests of Honor \& Featured Events Reference}
+
+\subsubsection{Writer Guest of Honor --- Ursula Vernon / T. Kingfisher}
+
+Author and illustrator of an extraordinary range of work. Over 15 children's books, at least a dozen adult novels, the epic webcomic Digger, and numerous short stories. Degree in anthropology from Macalester College. Currently based in New Mexico.
+
+\textbf{Major awards:} Hugo Award for Best Graphic Story (Digger, 2012); Mythopoeic Award (Digger, 2013); Nebula Award for Best Short Story (``Jackalope Wives,'' 2015); Hugo Award for Best Novelette (``The Tomato Thief,'' 2017); Andre Norton Nebula + Lodestar + Dragon + Locus + Mythopoeic (A Wizard's Guide to Defensive Baking, 2021); Hugo Award for Best Short Story (``Metal Like Blood in the Dark,'' 2021).
+
+Her series Dragonbreath won the Sequoyah Award. Hamster Princess was nominated for the Texas Bluebonnet Award and made the Amelia Bloomer List. Castle Hangnail won the Mythopoeic Award in 2016.
+
+\subsubsection{Artist Guest of Honor --- Geneva Bowers}
+
+Hugo Award--winning illustrator whose work centers on atmosphere and magical realism. Inspired by growing up in Appalachia, her art captures a sense of calm and nostalgia, bridging nature and speculative imagination.
+
+\subsubsection{Science Guest of Honor --- Summer Ash}
+
+Astrophysicist, rocket scientist, and science communicator. Bachelor's in mechanical engineering from Stanford; master's in space studies from the International Space University. Worked as aerospace engineer on the X-34 Program at Orbital Sciences Corporation. Graduate research at Cambridge's Cavendish Laboratory on radio galaxy evolution and AGN effects. Former ``In-House Astrophysicist'' for The Rachel Maddow Show (2009--2016). Published in The Atlantic, Smithsonian, Scientific American, Slate, and Nautilus Magazine.
+
+\subsubsection{Spotlight Publisher --- Orbit Books}
+
+Division of Hachette Book Group comprising Orbit, Redhook, Orbit Works, and Run For It imprints. Launched in 2007. Represented at NWC48 by executive editor Bradley Englert. Roster includes James S. A. Corey, N. K. Jemisin, Ann Leckie, Kim Stanley Robinson, Andrzej Sapkowski, Joe Abercrombie, and Brent Weeks. Run For It is Orbit's new horror imprint.
+
+\subsubsection{Special Guest --- Dutch Bihary}
+
+Face and body art specialist, international instructor, SFX makeup and prosthetics artist. Featured on Season 1 of Skin Wars and returned as celebrity mentor on Skin Wars: Fresh Paint. Expertise spans tattoo work, comic book illustration, face/body painting, practical SFX for TV/film, large-scale murals, 3D chromadepth attractions, and prop sculpting. Teaches at institutions including MBS Academy (Korea) and Stan Winston Studio.
+
+\subsubsection{2026 Philip K. Dick Award Nominees}
+
+The Philip K. Dick Award recognizes distinguished science fiction published as a paperback original in the United States. The 2026 award ceremony takes place Friday, April 3 at 7:00 PM PDT at Norwescon 48. Judges: Jim Aikin (chair), Kim Antieau, J. D. Goff, Abbey Mei Otis, Lisa Swanstrom.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Title} & \tableheader{Author} & \tableheader{Publisher} \\
+\midrule
+Sunward & William Alexander & Saga Press \\
+Outlaw Planet & M. R. Carey & Orbit \\
+Casual & Koji A. Dae & Tenebrous Press \\
+The Immeasurable Heaven & Caspar Geon & Solaris \\
+Uncertain Sons and Other Stories & Thomas Ha & Undertow Publications \\
+Scales & Christopher Hinz & Angry Robot \\
+City of All Seasons & Oliver K. Langmead \& Aliya Whiteley & Titan Books \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Recent winners:} Time's Agent by Brenda Peynado (2025, for 2024 publications) with special citation to Alien Clay by Adrian Tchaikovsky. These Burning Stars by Bethany Jacobs (2024). The Extractionist by Kimberly Unger (2023). Dead Space by Kali Wallace (2022).
+
+\subsection{Module 3: Programming \& Schedule Reference}
+
+\subsubsection{Programming Tracks}
+
+Norwescon 48 features over 30 programming tracks: Art, Art in Action, Artists Workshop, Audio, Biology, Community, Concerts, Costume, Editing \& Publishing, Fanfic, Fantasy, Filmmaking Workshop, Gaming, Guest of Honor, Hands-On Workshop, History, Horror, Meetup, Military, Music, Poetry, Popular Culture \& Media, Readings, Scheduled Games, Science Fiction, Space, Special Events, Streaming, Technology, Teen/Tween, Wild Card, Writing, Writing Classes, YA, Youth.
+
+Events on the Streaming track are live-streamed free via Twitch and YouTube.
+
+\subsubsection{Key Special Events}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{When} & \tableheader{Event} & \tableheader{Details} \\
+\midrule
+Thu evening & Opening Ceremonies & GoH interviews; hosted by Lydia K. Valentine \\
+Fri 7pm PDT & PKD Award Ceremony & Grand 2; readings from nominees; winner announced \\
+Sat evening & Masquerade & Costume competition; prizes include NWC49 passes \\
+Thu--Sun & Speculative Film Festival & International short films in one-hour blocks \\
+Sat evening & Labyrinth Shadow Cast & 40th anniversary of the film; live performance \\
+Sat & CATAN Qualifier & 24 seats; winner qualifies for US Nationals \\
+Thu--Sat & Themed Dances & First Contact Galactic Gala / Black Light Rave / Goblin Ball \\
+Thu--Sun & Concerts & Multiple acts throughout the weekend \\
+Thu--Sun & Artemis: Cosmos & Spaceship bridge simulator; noon--1am (Sun to 5pm) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Notable Panel Highlights (Sample)}
+
+From the published schedule: ``Artificial Intelligence and Economics'' (Technology track), ``Space Propulsion Systems --- Real and Imagined'' (SF), ``Traditional Crafts in a Digital World'' (Costume), ``Lord of the Rings as a Horror Story'' (Horror), ``L4 Space Habitat Society'' (Space), ``Myths as a Structure'' (Fantasy), ``Villains: Deconstruct, Diversify, Decolonize'' (Writing), ``Best Mad Scientist Plans'' (SF/GoH/Streaming), ``Finding Your Authenticity'' (Writing/Streaming), and ``Castles and Fortifications'' (History).
+
+\subsubsection{Workshops}
+
+Writers Workshop (application required), various Hands-On Workshops including ``How to Pattern the Weird Stuff'' (cosplay patterning, 10-person limit), Regency Era Dance Workshop, and Qigong movement meditation class.
+
+\subsection{Module 4: Logistics \& Attendance Reference}
+
+\subsubsection{Membership Pricing}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Price} & \tableheader{Notes} \\
+\midrule
+Four-day adult & \$110 & Full convention access \\
+Youth (13--17) & \$50 & Permission slip required \\
+Child (0--12) & Free & Parent/guardian must register first \\
+Single-day Thursday & \$40 & Badge pickup day-of only \\
+Single-day Friday & \$70 & Badge pickup day-of only \\
+Single-day Saturday & \$70 & Badge pickup day-of only \\
+Single-day Sunday & \$40 & Badge pickup day-of only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Registration is online. Payment via Stripe or PayPal. Memberships are nonrefundable but transferable or rollable to next year.
+
+\subsubsection{Hotel \& Venue}
+
+\textbf{Primary venue:} DoubleTree by Hilton Hotel Seattle Airport, 18740 International Blvd, SeaTac, WA 98188. Phone: 206-246-8600.
+
+\textbf{Room block status:} CLOSED. Rooms may still be available at standard hotel rates. Nearby alternatives (no convention arrangement): Hilton Garden Inn Seattle Airport (next door), La Quinta Inn \& Suites (across the street), Coast Gateway Hotel, Days Inn by Wyndham SeaTac Airport.
+
+\textbf{Important hotel notes:} The hotel has gone cashless --- credit/debit cards only. Loud parties are permitted only in party wing (Wing 5B); review party rules before hosting.
+
+\subsubsection{Transportation}
+
+Accessible by plane (SeaTac Airport is adjacent), light rail (Link Light Rail), car (ample parking), and transit. Hotel provides shuttle service. Detailed directions available on the Norwescon website.
+
+\subsubsection{Technology}
+
+Guidebook mobile app available for iOS and Android --- provides schedule, maps, notifications, and custom schedule building. Schedule also available as downloadable ePub and PDF for offline use.
+
+\subsection{Module 5: Community \& Culture Reference}
+
+\subsubsection{Organizational Structure}
+
+Norwescon is a 501(c)(3) charitable organization, entirely volunteer-run. Convention Committee (ConCom) meets monthly (in-person and Zoom). NWSFS (Northwest Science Fiction Society) is the parent organization, founded alongside Norwescon to build the volunteer base for the original Worldcon bid.
+
+\subsubsection{Support Spaces}
+
+\textbf{The Oasis Lounge} (Room 7204): Radically inclusive, low-sensory safer space. Fidget toys, short fiction, poetry, meditation aids, coloring pages. Open Thu/Fri/Sat noon--1am, Sun noon--5pm. No requirement to socialize.
+
+\textbf{BIPOC \& AAPI Lounge}: Dedicated space in the same wing as the Oasis (floor below).
+
+\textbf{Gender-neutral restrooms}: Available near Grand 3 Ballroom doors and in rooms 5103 and 5201.
+
+\subsubsection{Community Programs}
+
+\textbf{Speed Friending} (Thu 4--5pm): Structured two-minute conversations for meeting new people. Low-pressure, topic-guided.
+
+\textbf{Meetups}: Open application system; any attendee can propose a meetup (fandom hangout, industry mixer, etc.).
+
+\textbf{Volunteering}: Both at-convention volunteering and year-round ConCom participation available. Open positions posted on website.
+
+\textbf{Charity}: This year's charity is Page Ahead, supporting children's literacy.
+
+\subsubsection{Policies}
+
+Code of Conduct, Antiracism Statement, Harassment Policy, costuming policy, weapons policy, photo/video policy, health and safety guidelines, and accessibility statement all published on the website. Minor Permission Slip required for all attendees under 18.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Domain} & \tableheader{Mode} & \tableheader{Boundary} \\
+\midrule
+Copyright & ABSOLUTE & No reproduction of creative works, panel transcripts, or proprietary schedule content \\
+Privacy & ABSOLUTE & No personal contact info for attendees or panelists beyond published channels \\
+Source quality & GATE & All data from official Norwescon sources or professional review outlets \\
+Accessibility & ANNOTATE & Note accessibility features and limitations as published \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources (Official)}
+\begin{itemize}[leftmargin=2em]
+\item Norwescon official website --- \url{https://www.norwescon.org/}
+\item Norwescon 48 schedule --- \url{https://www.norwescon.org/con/schedule/}
+\item Norwescon Guests of Honor page --- \url{https://www.norwescon.org/con/guests-of-honor/}
+\item Norwescon membership page --- \url{https://www.norwescon.org/con/memberships/}
+\item Norwescon PKD Award page --- \url{https://www.norwescon.org/philip-k-dick-award/}
+\item News From Norwescon, Feb 2026 --- \url{https://www.norwescon.org/2026/02/02/news-from-norwescon-february-2026/}
+\item News From Norwescon, Mar 2026 --- \url{https://www.norwescon.org/2026/03/02/news-from-norwescon-march-2026/}
+\item PKD Award Nominees Announcement --- \url{https://www.norwescon.org/2026/01/13/2026-philip-k-dick-award-nominees-announced/}
+\end{itemize}
+
+\subsubsection{Professional Review Outlets}
+\begin{itemize}[leftmargin=2em]
+\item Reactor Magazine (PKD coverage) --- \url{https://reactormag.com/2026-philip-k-dick-award-nominees/}
+\item Locus Magazine (PKD coverage) --- \url{https://locusmag.com/2026/01/2026-philip-k-dick-award-nominees/}
+\item File 770 (PKD coverage) --- \url{https://file770.com/2026-philip-k-dick-award-nominees-announced/}
+\item Philip K. Dick Award official site --- \url{https://www.philipkdickaward.org/}
+\end{itemize}
+
+\subsubsection{Reference Databases}
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: Norwescon --- \url{https://en.wikipedia.org/wiki/Norwescon}
+\item FanCons.com --- \url{https://fancons.com/events/info/26769/norwescon-2026}
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained Norwescon 48 research document covering convention history, guest profiles, programming highlights, logistics, and community infrastructure. The document should enable an attendee with zero prior Norwescon experience to navigate the convention strategically and engage meaningfully with guests, events, and community.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  ┌─────────────────────────────────────────────────┐
+  │ Wave 0: Foundation                               │
+  │   0.1 Shared schemas + source index    [Haiku]   │
+  │   0.2 Convention data normalization    [Haiku]   │
+  ├─────────────────────────────────────────────────┤
+  │ Wave 1: Parallel Research                        │
+  │   Track A                │  Track B              │
+  │   1A.1 History (M1)      │  1B.1 Schedule (M3)  │
+  │        [Sonnet]          │        [Sonnet]       │
+  │   1A.2 Guests (M2)      │  1B.2 Logistics (M4) │
+  │        [Opus]            │        [Sonnet]       │
+  ├─────────────────────────────────────────────────┤
+  │ Wave 2: Synthesis                                │
+  │   2.1 Community & Culture (M5)       [Opus]     │
+  │   2.2 Cross-module integration       [Opus]     │
+  ├─────────────────────────────────────────────────┤
+  │ Wave 3: Publication                              │
+  │   3.1 Final document assembly        [Sonnet]   │
+  │   3.2 Verification pass              [Sonnet]   │
+  └─────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Source Layer} --- Official Norwescon website, PKD Award administration, professional SF\&F review outlets
+\item \textbf{Research Layer} --- Five modules covering history, guests, programming, logistics, community
+\item \textbf{Integration Layer} --- Cross-module connections, attendance strategy synthesis
+\item \textbf{Publication Layer} --- Final document with navigation aids and index
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & History Survey & Founding through NWC48 with venue timeline & M1 \\
+2 & GoH Profiles & All 5 categories with awards and key works & M2 \\
+3 & PKD Nominee Index & All 7 nominees with authors and publishers & M2 \\
+4 & Programming Guide & 20+ tracks with highlighted events & M3 \\
+5 & Logistics Reference & Pricing, hotel, transport, technology & M4 \\
+6 & Community Guide & Support spaces, programs, policies & M5 \\
+7 & Integrated Document & All modules compiled, cross-referenced & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{1.5cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Deps} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas & None & Haiku & $\sim$5K \\
+Source index & None & Haiku & $\sim$5K \\
+History survey (M1) & 0.1 & Sonnet & $\sim$20K \\
+GoH profiles (M2) & 0.1 & Opus & $\sim$30K \\
+Programming guide (M3) & 0.1 & Sonnet & $\sim$25K \\
+Logistics reference (M4) & 0.1 & Sonnet & $\sim$15K \\
+Community guide (M5) & 1A, 1B & Opus & $\sim$25K \\
+Cross-module integration & M1--M5 & Opus & $\sim$20K \\
+Final assembly & All & Sonnet & $\sim$20K \\
+Verification & All & Sonnet & $\sim$15K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & $\sim$30\% & GoH profiles (nuanced career analysis), community/culture synthesis, cross-module integration \\
+Sonnet & $\sim$60\% & History compilation, schedule inventory, logistics assembly, final document, verification \\
+Haiku & $\sim$10\% & Shared schemas, source index, template scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Tasks} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & Sequential & 0.1, 0.2 & $\sim$10K \\
+1 & Research & Parallel (2 tracks) & 1A.1, 1A.2, 1B.1, 1B.2 & $\sim$90K \\
+2 & Synthesis & Sequential & 2.1, 2.2 & $\sim$45K \\
+3 & Publication & Sequential & 3.1, 3.2 & $\sim$35K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+0.1 & Shared schemas & Convention data types, section templates & Haiku & None \\
+0.2 & Source index & URL index with last-verified dates & Haiku & None \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- History \& Guests:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+1A.1 & History survey & 48-year arc, venue timeline, COVID era & Sonnet & 0.1 \\
+1A.2 & GoH profiles & All 5 categories + PKD nominees & Opus & 0.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Programming \& Logistics:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+1B.1 & Programming guide & Track inventory, key events, workshops & Sonnet & 0.1 \\
+1B.2 & Logistics reference & Membership, hotel, transport, tech & Sonnet & 0.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+2.1 & Community guide & Org structure, support spaces, policies & Opus & 1A, 1B \\
+2.2 & Cross-module integration & Attendance strategy, cross-references & Opus & M1--M5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication \& Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+3.1 & Final assembly & Compile all modules, build navigation & Sonnet & 2.1, 2.2 \\
+3.2 & Verification & Run test plan, validate sources & Sonnet & 3.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output cached for all Wave 1 tasks (shared schemas reused across both tracks)
+\item Track A and Track B execute in parallel within the same session where possible
+\item GoH profile data (1A.2) cached for PKD Award integration in synthesis
+\item 5-minute cache TTL window exploited by scheduling Wave 1 tasks in rapid succession
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & $\sim$10K \\
+Wave 1: Research & $\sim$30K & $\sim$60K & --- \\
+Wave 2: Synthesis & $\sim$45K & --- & --- \\
+Wave 3: Publication & --- & $\sim$35K & --- \\
+\midrule
+\textbf{Total} & \textbf{$\sim$75K} & \textbf{$\sim$95K} & \textbf{$\sim$10K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$180K tokens across $\sim$10 context windows in $\sim$4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+           ┌─────────┐
+           │  START   │
+           └────┬────┘
+                │
+         ┌──────┴──────┐
+         │   Wave 0    │
+         │  0.1  0.2   │
+         └──────┬──────┘
+                │
+       ┌────────┴────────┐
+  ┌────┴────┐       ┌────┴────┐
+  │ Track A │       │ Track B │
+  │1A.1 1A.2│       │1B.1 1B.2│
+  └────┬────┘       └────┬────┘
+       └────────┬────────┘
+                │
+         ┌──────┴──────┐
+         │   Wave 2    │
+         │  2.1  2.2   │
+         └──────┬──────┘
+                │
+         ┌──────┴──────┐
+         │   Wave 3    │
+         │  3.1  3.2   │
+         └──────┬──────┘
+                │
+           ┌────┴────┐
+           │   END   │
+           └─────────┘
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 12 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{26} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Source quality & All citations traceable to norwescon.org, PKD admin, or professional SF\&F outlets. Zero entertainment blogs. \\
+SC-02 & Copyright compliance & No reproduction of creative works, panel transcripts, or proprietary content \\
+SC-03 & Privacy & No personal contact information beyond officially published channels \\
+SC-04 & Numerical attribution & All dates, prices, and counts attributed to specific sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & History completeness & Founding (1978) through NWC48 with venue timeline \\
+CF-02 & GoH coverage & All 5 categories individually profiled \\
+CF-03 & Vernon awards & At least 6 major awards listed with years \\
+CF-04 & PKD nominees & All 7 titles with authors and publishers \\
+CF-05 & Track inventory & $\geq$20 programming tracks identified \\
+CF-06 & Special events & $\geq$8 key events with dates and locations \\
+CF-07 & Membership pricing & All categories (adult, youth, child, single-day) documented \\
+CF-08 & Hotel info & Address, room block status, nearby alternatives \\
+CF-09 & Transport options & $\geq$3 arrival methods described \\
+CF-10 & Support spaces & Oasis, BIPOC lounge, gender-neutral restrooms documented \\
+CF-11 & Community programs & Speed friending, meetups, volunteering, charity described \\
+CF-12 & Dance nights & All 3 themed dances named \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & GoH $\rightarrow$ Schedule & GoH names appear in schedule with specific panel/event references \\
+IN-02 & PKD $\rightarrow$ Events & Award ceremony linked to Friday schedule with time and location \\
+IN-03 & Logistics $\rightarrow$ Tech & Guidebook app referenced in both logistics and schedule sections \\
+IN-04 & History $\rightarrow$ Venue & Venue timeline consistent with current hotel details \\
+IN-05 & Community $\rightarrow$ Schedule & Support spaces referenced with operating hours matching schedule \\
+IN-06 & Self-containment & A reader with zero Norwescon knowledge can navigate the full document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Schedule currency & Note that schedule may change; cite last-updated date \\
+EC-02 & Room block closure & Explicitly state block is closed; provide alternatives \\
+EC-03 & Cashless policy & Hotel cashless policy noted in logistics \\
+EC-04 & Streaming access & Note that streaming track is free and requires no membership \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. History covers founding through NWC48 & CF-01 & Pending \\
+2. All 5 GoH categories profiled & CF-02, CF-03 & Pending \\
+3. All 7 PKD nominees listed & CF-04 & Pending \\
+4. $\geq$20 tracks identified & CF-05 & Pending \\
+5. Key events catalogued & CF-06, IN-02 & Pending \\
+6. Membership pricing documented & CF-07 & Pending \\
+7. $\geq$3 transport methods & CF-09 & Pending \\
+8. $\geq$4 community spaces/programs & CF-10, CF-11 & Pending \\
+9. Three dance nights described & CF-12 & Pending \\
+10. All sources traceable & SC-01 & Pending \\
+11. Self-contained reference & IN-06 & Pending \\
+12. Through-line connects to GSD & (Manual review) & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\textbf{Activation Profile: Squadron (12 roles)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering from norwescon.org and PKD admin \\
+EXEC-A & Executor (Track A) & History survey + GoH profiles production \\
+EXEC-B & Executor (Track B) & Programming guide + logistics reference production \\
+CRAFT-LIT & Literary Specialist & GoH career analysis; PKD nominee assessment \\
+CRAFT-COM & Community Specialist & Organizational structure; culture analysis \\
+VERIFY & Verification & Source validation; accuracy checking; link verification \\
+INTEG & Integration Agent & Cross-module references; attendance strategy synthesis \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total modules & 5 \\
+Total deliverables & 7 \\
+Total tests & 26 (4 safety-critical, 12 core, 6 integration, 4 edge) \\
+Activation profile & Squadron (12 roles) \\
+Parallel tracks & 2 \\
+Waves & 4 (Foundation $\rightarrow$ Research $\rightarrow$ Synthesis $\rightarrow$ Publication) \\
+Estimated tokens & $\sim$180K \\
+Estimated context windows & $\sim$10 \\
+Estimated sessions & $\sim$4 \\
+Model split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Critical path & Wave 0 $\rightarrow$ Wave 1 Track A (GoH profiles) $\rightarrow$ Wave 2 $\rightarrow$ Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``A convention is a space between --- not quite work, not quite leisure. The founders started Norwescon as practice for a larger thing and discovered the practice was the thing. Forty-eight years of faithful iteration, and the spaces between panels still matter as much as any event on the schedule.''}
+
+\vspace{0.5em}
+\hfill --- The Through-Line
+\end{quotebox}
+
+\end{document}
