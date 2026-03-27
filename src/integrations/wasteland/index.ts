@@ -540,6 +540,27 @@ export {
   normalizeToUTC,
 } from './utc.js';
 
+// Herald Agent (intelligence briefing composer)
+export {
+  routeToTiers,
+  filterBySeverity,
+  filterByAge,
+  groupByType,
+  countBySeverity,
+  renderGlance,
+  renderScan,
+  renderRead,
+  runHerald,
+  DEFAULT_HERALD_CONFIG,
+} from './herald-agent.js';
+export type {
+  DisclosureLevel,
+  HeraldConfig,
+  RenderedBriefing,
+  HeraldResult,
+  HeraldInput,
+} from './herald-agent.js';
+
 // Gas City Role Parser (frontmatter + markdown role file parser)
 export {
   GasCityRoleSchema,
