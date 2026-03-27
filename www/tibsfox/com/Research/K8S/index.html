@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes Ecosystem &mdash; Deep Research</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-k8s">
+  <header>
+    <h1>Kubernetes Ecosystem</h1>
+    <div class="subtitle">Deep Research &mdash; Architecture &middot; Edge &middot; AI/ML &middot; Security &middot; Operations &middot; Mission 93.3</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=research/01-distributions-architecture">Distributions</a>
+      <a href="page.html?doc=research/02-networking-traffic-management">Networking</a>
+      <a href="page.html?doc=research/03-storage-persistence">Storage</a>
+      <a href="page.html?doc=research/04-gpu-scheduling-ai-ml">GPU &amp; AI/ML</a>
+      <a href="page.html?doc=research/05-security-zero-trust">Security</a>
+      <a href="page.html?doc=research/06-operations-observability">Operations</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga achieved what mainframes couldn't &mdash; not by being bigger, but by being specialized. Custom chips doing dedicated work, coordinated by a CPU that knew how to delegate. Kubernetes, properly configured, is the same architecture at infrastructure scale.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Distributions</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">Tests (6 Safety)</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Mesh Nodes</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Security Layers</span></div>
+      <div class="stat"><span class="stat-value">93.3</span><span class="stat-label">Mission ID</span></div>
+    </div>
+
+    <h2>Infrastructure Foundation</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/01-distributions-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>Distributions &amp; Architecture</h3>
+        <div class="meta"><span class="tag tag-vision">Module 1</span></div>
+        <p>K8s v1.35 "Timbernetes", K3s (single binary, 512MB), MicroK8s, KubeEdge. Distribution comparison across 10+ dimensions. Amiga Principle node mapping: 68000/Agnus/Denise/Paula to K3s roles.</p>
+      </a>
+      <a href="page.html?doc=research/02-networking-traffic-management" class="card" style="text-decoration:none;color:inherit">
+        <h3>Networking &amp; Traffic Management</h3>
+        <div class="meta"><span class="tag tag-engineering">Module 2</span></div>
+        <p>Gateway API as the post-Ingress era. Ingress-NGINX retirement (March 2026). CNI landscape: Cilium (eBPF), Calico, Flannel. Service mesh: Istio vs. Linkerd. The nftables migration.</p>
+      </a>
+    </div>
+
+    <h2>Resource Management</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/03-storage-persistence" class="card" style="text-decoration:none;color:inherit">
+        <h3>Storage &amp; Persistence</h3>
+        <div class="meta"><span class="tag tag-systems">Module 3</span></div>
+        <p>CSI driver ecosystem. Longhorn for small clusters, Rook/Ceph for enterprise scale, OpenEBS Mayastor for NVMe. Decision framework for bare-metal 3&ndash;10 node deployments with mixed SSD/HDD.</p>
+      </a>
+      <a href="page.html?doc=research/04-gpu-scheduling-ai-ml" class="card" style="text-decoration:none;color:inherit">
+        <h3>GPU Scheduling &amp; AI/ML</h3>
+        <div class="meta"><span class="tag tag-deployment">Module 4</span></div>
+        <p>NVIDIA GPU Operator and Dynamic Resource Allocation (DRA). Fractional GPU: MIG, MPS, time-slicing. Topology-aware scheduling. Kueue, Volcano, YuniKorn. Dual RTX 5090 configuration.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Cutting Concerns</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=research/05-security-zero-trust" class="card" style="text-decoration:none;color:inherit">
+        <h3>Security &amp; Zero Trust</h3>
+        <div class="meta"><span class="tag tag-community">Module 5</span></div>
+        <p>Five defense layers: network policies, RBAC, mTLS with pod certificates (KEP-4317), admission control (OPA/Kyverno), runtime detection (Falco). Phased zero-trust implementation for the GSD mesh.</p>
+      </a>
+      <a href="page.html?doc=research/06-operations-observability" class="card" style="text-decoration:none;color:inherit">
+        <h3>Operations &amp; Observability</h3>
+        <div class="meta"><span class="tag tag-pass">Module 6</span></div>
+        <p>GitOps with ArgoCD and Flux. Prometheus + Grafana + OpenTelemetry monitoring. Velero backup. FinOps and right-sizing. Self-healing patterns. Cluster lifecycle management.</p>
+      </a>
+    </div>
+
+    <h2>Cross-References</h2>
+    <table>
+      <thead>
+        <tr><th>Project</th><th>Relationship</th><th>Direction</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="../OCN/index.html">OCN &mdash; Open Compute</a></td><td>Hardware infrastructure: white-box node specs, rack design, power distribution</td><td>Informs K8S</td></tr>
+        <tr><td><a href="../SYS/index.html">SYS &mdash; Systems Admin</a></td><td>OS layer below Kubernetes: bare-metal provisioning, network config, storage prep</td><td>Foundation</td></tr>
+        <tr><td><a href="../CMH/index.html">CMH &mdash; Comp. Mesh</a></td><td>Mesh networking topology maps to K3s multi-node cluster architecture</td><td>Parallel</td></tr>
+        <tr><td><a href="../GSD2/index.html">GSD2 &mdash; GSD-2 Arch.</a></td><td>Agent orchestration runs on K8s cluster; extension system maps to pod lifecycle</td><td>Deploys on K8S</td></tr>
+        <tr><td><a href="../PSG/index.html">PSG &mdash; Pacific Spine</a></td><td>Backbone network that connects mesh nodes; K8s overlay networking layer</td><td>Transport</td></tr>
+        <tr><td><a href="../PMG/index.html">PMG &mdash; Pi-Mono + GSD</a></td><td>Pi SDK agent runtime containerized as K8s workloads; GSD orchestration pods</td><td>Workload</td></tr>
+        <tr><td><a href="../SAN/index.html">SAN &mdash; SANS Institute</a></td><td>Security frameworks, incident response, hardening standards for cluster security</td><td>Guides K8S</td></tr>
+        <tr><td><a href="../GRD/index.html">GRD &mdash; Gradient Engine</a></td><td>GPU compute workloads scheduled via K8s DRA; training/inference job management</td><td>Workload</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Kubernetes Ecosystem &middot; Mission 93.3 &middot; Research Series &middot; gsd-skill-creator</p>
+    <p style="font-size:0.8em;opacity:0.7;">ARCHITECTURAL ANALYSIS &mdash; Configuration recommendations subject to upstream release changes</p>
+  </footer>
+</body>
+</html>
