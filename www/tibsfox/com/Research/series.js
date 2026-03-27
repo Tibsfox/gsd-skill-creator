@@ -61,6 +61,7 @@
     { id: 'RLS', name: 'Resonant Lands', path: 'RLS/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
+    { id: 'SGL', name: 'Signal & Light', path: 'SGL/index.html' },
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },

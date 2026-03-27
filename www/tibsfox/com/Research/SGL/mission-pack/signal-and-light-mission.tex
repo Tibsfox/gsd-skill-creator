@@ -1,0 +1,1087 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color scheme: Technology domain — Steel/Electric/Graphite
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{00897B}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% Table helpers
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Signal \& Light}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Signal and Light -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Signal \& Light}}
+
+\vspace{0.3cm}
+{\fontsize{18}{22}\selectfont\bfseries\sffamily\textcolor{primary}{The Complete Stage Intelligence Stack}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Realtime DSP $\cdot$ ASIC Design $\cdot$ LED/POV $\cdot$ DMX $\cdot$ MIDI}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: $\sim$14 context windows across $\sim$5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Signal \& Light --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{GSD Chipset Architecture, Deep Audio Analyzer Mission, Amiga Creative Suite Vision}
+\metafield{Context:}{Full pipeline --- vision, research reference, and mission package in a single document}
+
+\subsection{Vision}
+
+Every live performance is a conversation between signal and light. The bass player's fingers generate acoustic pressure waves that a microphone converts to voltage, that an ADC quantizes into samples, that a DSP chain shapes and sculpts in real time --- and somewhere downstream, those same samples trigger LED arrays that paint the air with color timed to the beat. The entire path from vibrating string to photon hitting retina is one continuous signal chain, and every link in that chain is governed by the same mathematics: Fourier transforms decomposing complex waveforms into constituent frequencies, adaptive filters learning the shape of noise in real time, control protocols marshaling thousands of independent devices into synchronized action.
+
+This mission studies the complete vertical stack of stage intelligence --- from the DSP algorithms that cancel noise and shape sound, through the custom silicon that executes those algorithms at wire speed, to the LED persistence-of-vision displays and stage lighting rigs that transform electrical signals into visual experience, controlled by DMX512 and MIDI protocols that have defined the language of live performance for four decades. The Amiga Principle is everywhere in this domain: the original Amiga's custom chipset (Agnus, Denise, Paula) was purpose-built silicon for exactly this kind of real-time multimedia --- DMA-driven audio playback, hardware sprite engines, copper-list driven display timing. The modern equivalents are ASIC DSP processors, FPGA filter implementations, and Art-Net pixel controllers. The architecture has scaled by orders of magnitude, but the principle --- specialized execution paths for deterministic real-time behavior --- remains identical.
+
+The spaces between matter here as much as anywhere in the GSD ecosystem. The gap between a DSP filter's output and an LED driver's input is where latency hides. The gap between a MIDI note-on message and the DMX universe update that triggers a lighting cue is where synchronization lives or dies. Understanding these interstitial zones --- the protocol boundaries, the clock domain crossings, the analog-digital thresholds --- is what separates a system that merely works from one that feels alive.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Real-time noise cancellation requires adaptive algorithms that converge fast enough for live audio} --- the Least Mean Squares (LMS) family and its variants (NLMS, FxLMS, RLS) operate under strict latency budgets where a single missed sample corrupts the anti-noise signal, yet the mathematical foundations and implementation trade-offs are scattered across decades of DSP literature with no unified treatment connecting theory to modern hardware.
+
+\item \textbf{Custom silicon for DSP is both more accessible and more opaque than ever} --- FPGA development boards cost under \$100 and ASIC shuttle runs serve small customers, but the design pipeline from algorithm specification through HDL implementation to physical timing closure remains poorly documented outside academic labs, particularly for audio-rate signal processing where fixed-point coefficient quantization can destabilize an otherwise correct filter.
+
+\item \textbf{LED persistence-of-vision displays bridge mechanical engineering, embedded systems, and human psychophysics} --- the 40ms afterimage window that makes POV work demands precise synchronization between motor RPM, LED refresh rate, and image column timing, with failure modes that are invisible in simulation and only appear at physical speed, yet no single reference integrates the optical science, the control theory, and the embedded firmware patterns.
+
+\item \textbf{Stage lighting has evolved from simple dimmer control to pixel-mapped media surfaces} --- the DMX512 protocol's 512-channel universe, designed for analog dimmers in 1986, now carries RGB data for thousands of individually addressable LED pixels via Art-Net and sACN Ethernet bridges, creating a protocol ecosystem where understanding the full stack (physical layer RS-485 through application-layer pixel mapping) is essential but rarely presented holistically.
+
+\item \textbf{MIDI 2.0 represents the first major protocol revision in four decades but adoption remains fragmented} --- the new Universal MIDI Packet format with 32-bit controllers, 256 channels across 16 groups, bidirectional capability inquiry, and per-note expression solves long-standing limitations, but the specification's five interlocking documents and the coexistence requirements with billions of MIDI 1.0 devices create an integration challenge that few references address practically.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The stage intelligence stack is a unified signal chain where every component --- from adaptive DSP filters through custom silicon execution engines to LED pixel arrays and control protocols --- implements the same Amiga Principle: specialized, deterministic execution paths that achieve real-time performance through architectural elegance rather than brute computational force.
+\end{quotebox}
+
+The core insight is convergence. Noise cancellation, LED timing, DMX framing, and MIDI sequencing are all manifestations of the same underlying problem: generating the right output at exactly the right time, every time, with zero tolerance for jitter. The mathematical tools (z-transforms, adaptive filter theory, Fourier analysis) unify the DSP layer. The architectural tools (pipelining, DMA, dedicated execution units) unify the silicon layer. The protocol tools (RS-485 differential signaling, Ethernet multicast, serial packet framing) unify the control layer. This mission maps the territory where these three unification axes intersect.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+SIGNAL & LIGHT — DOMAIN MAP
+===============================================================
+
+  ACOUSTIC DOMAIN          SILICON DOMAIN         VISUAL DOMAIN
+  ┌─────────────┐         ┌──────────────┐       ┌─────────────┐
+  │ Microphone   │         │ FPGA/ASIC    │       │ LED Array   │
+  │ ADC/DAC     │────────>│ Filter Engine │──────>│ POV Display │
+  │ Codec       │         │ MAC Units    │       │ Stage Wash  │
+  │ Preamp      │         │ DMA Engine   │       │ Pixel Map   │
+  └─────────────┘         └──────────────┘       └─────────────┘
+        │                       │                       │
+        v                       v                       v
+  ┌─────────────┐         ┌──────────────┐       ┌─────────────┐
+  │ ANC / NR    │         │ HDL Design   │       │ Art-Net     │
+  │ FIR / IIR   │         │ Fixed-Point  │       │ sACN / E1.31│
+  │ FFT / STFT  │         │ Pipelining   │       │ DMX512      │
+  │ LMS / FxLMS │         │ Timing Close │       │ SPI / I2S   │
+  └─────────────┘         └──────────────┘       └─────────────┘
+        │                       │                       │
+        └───────────────────────┼───────────────────────┘
+                                │
+                    ┌───────────┴───────────┐
+                    │   CONTROL PROTOCOLS   │
+                    │                       │
+                    │  MIDI 1.0 / 2.0       │
+                    │  DMX512 / RDM         │
+                    │  Art-Net / sACN       │
+                    │  OSC / MSC            │
+                    │  USB / Bluetooth      │
+                    └───────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: DSP Algorithms] ──────────> [M2: ASIC/FPGA Silicon]
+         │                                │
+         │                                │
+         v                                v
+  [M3: Sound Filtering] ──> [M4: LED & POV Display]
+                                          │
+                                          v
+                              [M5: DMX & Stage Lighting]
+                                          │
+                                          v
+                              [M6: MIDI & Control Protocols]
+
+  Parallel tracks:
+    Track A: M1 + M2 (signal processing + silicon)
+    Track B: M3 + M4 (filtering applications + visual output)
+    Track C: M5 + M6 (control protocols)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Real-Time DSP Algorithms}
+Adaptive noise cancellation theory and implementation. Core algorithms: LMS, NLMS, FxLMS, FxRLS. Feedforward vs.\ feedback ANC architectures. Spectral subtraction, Wiener filtering, and subband processing. AI-enhanced noise suppression (DTLN, deep learning hybrids). Convergence analysis, step-size selection, and stability bounds. The z-transform framework connecting continuous-time filter design to discrete-time implementation.
+
+\subsubsection{Module 2: ASIC and FPGA DSP Implementation}
+Custom silicon design pipeline from algorithm specification through RTL, synthesis, place-and-route, and timing closure. FPGA prototyping as the proving ground for ASIC tape-out. FIR and IIR filter implementation in VHDL/Verilog: multiply-accumulate architectures, fixed-point coefficient quantization, stability under truncation. DSP slice utilization, pipelining strategies, and resource-performance trade-offs. The Chisel/FIRRTL agile hardware methodology. Audio codec integration (I2S, S/PDIF, TDM interfaces).
+
+\subsubsection{Module 3: Sound Filtering and Audio Processing}
+Practical filter design for audio: parametric EQ, crossover networks, dynamic range compression. Filter bank architectures (octave-band, 1/3-octave ANSI S1.11). The hearing aid DSP pipeline as a complete worked example of filter bank + compression + feedback cancellation on constrained silicon. Psychoacoustic considerations: critical bands, masking, loudness perception. Real-time requirements: sample-rate constraints, buffer sizing, latency budgets.
+
+\subsubsection{Module 4: LED Persistence of Vision and Display Technology}
+The psychophysics of persistence of vision: afterimage duration ($\sim$40ms), flicker fusion frequency, and the engineering implications. POV display architectures: rotary (propeller/cylindrical), reciprocating, and flexible-PCB designs. LED driver protocols: SPI (APA102/DotStar), single-wire (WS2812/NeoPixel), and their timing requirements. Inductive power transfer for rotating assemblies. Synchronization: Hall-effect sensors, reflectance sensors, Schmitt trigger debouncing. The PIO (Programmable I/O) architecture of the RP2040 as a case study in hardware-assisted LED timing. 3D POV displays and holographic illusions.
+
+\subsubsection{Module 5: DMX512 and LED Stage Lighting}
+The DMX512 protocol: RS-485 physical layer, packet structure, 512-channel universe, timing (break, mark-after-break, start code, channel data). RDM (Remote Device Management) bidirectional extension. Art-Net: DMX-over-Ethernet encapsulation, universe addressing (subnet/universe/net), broadcast vs.\ unicast. sACN (E1.31): multicast architecture, priority handling, synchronization packets. Pixel mapping: media servers, fixture profiles, universe planning for large LED arrays. Network design: IGMP snooping, dedicated lighting VLANs, managed switches. Wireless DMX: FHSS systems, CRMX (LumenRadio), range and reliability trade-offs.
+
+\subsubsection{Module 6: MIDI and Control Protocol Integration}
+MIDI 1.0 fundamentals: serial protocol, channel messages, system messages, running status. MIDI 2.0: Universal MIDI Packet (UMP) format, 32-bit controller resolution, 16 groups $\times$ 16 channels, MIDI-CI (Capability Inquiry), Profile Configuration, Property Exchange, Jitter Reduction Timestamps. MIDI Show Control (MSC) for theatrical automation. OSC (Open Sound Control) as a complementary protocol. MIDI-to-DMX bridges: triggering lighting cues from musical events. Integration patterns: BPM-synchronized lighting, audio-reactive visual effects, timecode (SMPTE/MTC) as the master clock. Hardware controller design: faders, encoders, displays, and the ergonomics of real-time control surfaces.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: "signal-and-light"
+  version: "1.0"
+  activation_profile: "fleet"
+
+  agnus:  # Memory + DMA coordination
+    role: "Resource orchestration across 6 modules"
+    manages: "Token budget, wave scheduling, cache TTL"
+    model: "haiku"
+
+  denise:  # Display + visualization
+    role: "Diagram generation, protocol visualizations"
+    manages: "Architecture diagrams, timing charts, waveforms"
+    model: "sonnet"
+
+  paula:  # Audio + I/O
+    role: "DSP algorithm analysis, audio pipeline documentation"
+    manages: "Filter specifications, codec interfaces, signal flow"
+    model: "opus"
+
+  m68000:  # General computation
+    role: "Integration, synthesis, cross-module analysis"
+    manages: "Protocol bridging, system-level architecture"
+    model: "opus"
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Adaptive noise cancellation algorithms (LMS family) with convergence analysis
+\item FIR/IIR filter implementation on FPGA with fixed-point considerations
+\item ASIC design pipeline overview (algorithm $\to$ RTL $\to$ synthesis $\to$ tape-out)
+\item LED POV display theory, architecture, and firmware patterns
+\item Addressable LED protocols (WS2812, APA102, SK6812)
+\item DMX512 protocol specification, RDM extension, Art-Net, sACN
+\item MIDI 1.0 and 2.0 protocol specifications and controller design
+\item Integration patterns: MIDI-to-DMX, audio-reactive lighting, timecode sync
+\item Psychoacoustic and psychophysical foundations (critical bands, flicker fusion)
+\item Network design for large-scale lighting installations
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Specific commercial product reviews or purchasing recommendations
+\item Analog circuit design beyond ADC/DAC interface requirements
+\item Laser safety classification and laser show control (ILDA protocol)
+\item Video projection mapping and media server software tutorials
+\item Music composition, arrangement, or performance technique
+\item Building code compliance for permanent lighting installations
+\item RF design for wireless microphone systems
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item DSP module covers LMS, NLMS, FxLMS, and RLS with convergence equations and step-size bounds
+\item FPGA module includes complete FIR and IIR implementation patterns with fixed-point analysis
+\item ASIC pipeline documented from algorithm specification through tape-out readiness
+\item POV display module covers mechanical, electrical, firmware, and psychophysical aspects
+\item DMX512 protocol fully specified including timing diagrams and packet structure
+\item Art-Net and sACN compared with universe planning guidelines for 1000+ pixel installations
+\item MIDI 2.0 UMP format documented with backward-compatibility translation rules
+\item At least three integration patterns (MIDI$\to$DMX, audio-reactive, timecode) fully specified
+\item All filter algorithms include stability criteria and failure-mode analysis
+\item Psychoacoustic and psychophysical foundations cited to peer-reviewed sources
+\item Every numerical claim attributed to a specific source
+\item Document is self-contained: a reader with DSP fundamentals can follow every module without external references
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Amiga Creative Suite & GSD-Tracker's audio engine uses these DSP fundamentals & Upstream \\
+Deep Audio Analyzer & Shares DSP algorithm foundations, extends into hardware & Sibling \\
+Chipset Architecture & ASIC/FPGA module maps to Agnus/Denise/Paula paradigm & Upstream \\
+ISA Vision & Control protocol layer maps to ISA bus arbitration model & Upstream \\
+Mesh Prototype Spec & Hardware cluster could host FPGA accelerator nodes & Downstream \\
+BBS Educational Pack & Stage tech curriculum draws from all six modules & Downstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's Paula chip could play four channels of 8-bit audio at 28kHz with zero CPU involvement --- DMA-driven, interrupt-free, deterministic. That architectural decision, made in 1985 by Jay Miner's team at a fraction of the budget their competitors enjoyed, enabled an entire generation of music trackers, demo scene compositions, and multimedia applications that machines with ten times the raw processing power couldn't match. The Amiga Principle isn't nostalgia; it's an engineering theorem: specialized execution paths, faithfully iterated, produce outcomes that general-purpose brute force cannot.
+
+Every module in this mission is a modern instance of that theorem. An FPGA implementing a 64-tap FIR filter in hardware completes each sample in a single clock cycle --- no instruction fetch, no cache miss, no branch prediction failure. A DMX512 universe refreshes all 512 channels every 23ms with microsecond-level determinism. An APA102 LED strip accepts SPI data at 20MHz without flow control because the protocol was designed to be simple enough that timing is guaranteed by construction. And MIDI 2.0's Jitter Reduction Timestamps let devices pre-compute and time-stamp events for sample-accurate playback --- the same trick Paula used with her DMA pointer registers forty years earlier.
+
+The space between signal and light is where the GSD ecosystem's physical layer lives. Understanding this stack --- from adaptive filter convergence to LED photon emission --- is what transforms a software-only orchestration system into one that can reach out and touch the real world.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Signal \& Light --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the technical foundations for each of the six research modules. It is organized to support parallel agent execution: each module section is self-contained with its own sources and data. Cross-module connections are noted explicitly.
+
+\textbf{Key source organizations:}
+
+\begin{itemize}[leftmargin=2em]
+\item ANSI/ESTA (Entertainment Services and Technology Association) --- DMX512, sACN, RDM standards
+\item MIDI Manufacturers Association (MMA) / AMEI --- MIDI 1.0 and 2.0 specifications
+\item IEEE --- Signal processing standards, adaptive filter theory
+\item Texas Instruments --- TMS320 DSP application notes and ANC reference designs
+\item Xilinx/AMD, Intel/Altera --- FPGA DSP implementation guides
+\item Cornell University ECE --- FPGA DSP course materials and POV display research
+\item USITT (United States Institute for Theatre Technology) --- Original DMX512 standard body
+\item NASA ADS --- Active noise control research (aerospace applications)
+\end{itemize}
+
+\subsection{Module 1 Reference: Real-Time DSP Algorithms}
+
+\subsubsection{Adaptive Noise Cancellation Foundations}
+
+Active noise cancellation operates on the principle of destructive interference: generating an anti-noise signal with equal amplitude but inverted phase relative to the unwanted noise. The system requires two inputs: a primary input containing signal plus noise, and a reference input correlated with the noise but uncorrelated with the desired signal.
+
+The adaptive filter continuously adjusts its coefficients (weights) to minimize the error signal --- the difference between the desired output and the filter's actual output. The key algorithms form a hierarchy of increasing complexity and performance:
+
+\textbf{LMS (Least Mean Squares):} The foundational algorithm. Updates filter weights proportional to the error signal multiplied by the reference input: $w(n+1) = w(n) + \mu \cdot e(n) \cdot x(n)$, where $\mu$ is the step size controlling convergence speed vs.\ stability. Optimal for stable environments with moderate noise levels.
+
+\textbf{NLMS (Normalized LMS):} Normalizes the step size by the input signal power: $\mu_{eff} = \mu / (\|x(n)\|^2 + \epsilon)$. This provides faster convergence and better stability when input signal power varies, at the cost of one additional division per sample.
+
+\textbf{FxLMS (Filtered-x LMS):} Required when an acoustic delay (the ``secondary path'') exists between the cancellation speaker and the error microphone. The reference signal is filtered through an estimate of the secondary path transfer function $\hat{S}(z)$ before updating the adaptive filter. This is the standard algorithm for real-world ANC systems.
+
+\textbf{RLS (Recursive Least Squares):} Minimizes the weighted sum of squared errors over the entire history. Faster convergence than LMS but computationally expensive ($O(N^2)$ per sample vs.\ $O(N)$ for LMS). Superior for rapidly changing noise conditions.
+
+\subsubsection{Spectral Methods}
+
+Spectral subtraction estimates the noise spectrum during silence periods and subtracts it from the noisy signal's spectrum. Wiener filtering provides the optimal (minimum mean-square error) linear filter when signal and noise power spectra are known. The Short-Time Fourier Transform (STFT) enables frequency-domain processing of non-stationary signals by windowing the input into overlapping frames.
+
+\subsubsection{AI-Enhanced Noise Suppression}
+
+The Dual-signal Transformation LSTM Network (DTLN) represents the current state of the art in real-time speech enhancement. It combines STFT-based magnitude spectrum processing with a learned analysis/synthesis basis for phase information, using stacked LSTM networks with fewer than one million parameters. The architecture processes one second of audio in approximately 33ms on modern hardware while delivering performance competitive with much larger models.
+
+\subsubsection{ANC System Architectures}
+
+Feedforward systems sample the noise before it reaches the cancellation point. Narrowband feedforward systems handle periodic noise (engines, fans, compressors) by generating reference signals matched to the noise's fundamental frequency and harmonics. Broadband feedforward systems use the FxLMS algorithm to handle non-periodic noise with continuous spectral content.
+
+Feedback systems cancel noise without a separate reference microphone, using a delayed version of the error signal as the reference. This is effective when the noise is narrowband and the desired signal is broadband (or vice versa), provided the delay exceeds the decorrelation time of the broadband component.
+
+\subsection{Module 2 Reference: ASIC and FPGA DSP Implementation}
+
+\subsubsection{The FPGA-to-ASIC Pipeline}
+
+The modern DSP design flow typically begins with algorithm development in MATLAB or Python, transitions to hardware description language (HDL) implementation targeting an FPGA for prototyping, and optionally proceeds to ASIC tape-out for volume production. MathWorks DSP HDL Toolbox provides a bridge, generating synthesizable HDL from MATLAB algorithm specifications.
+
+FPGAs offer reconfigurability and rapid iteration; ASICs offer optimized power, performance, and per-unit cost at volume. The crossover point depends on production volume --- typically 10,000--100,000 units justify the non-recurring engineering (NRE) costs of ASIC development, which can range from hundreds of thousands to millions of dollars depending on process node and complexity.
+
+\subsubsection{FIR Filter Implementation}
+
+FIR filters implement the convolution sum $y(n) = \sum_{k=0}^{N-1} h(k) \cdot x(n-k)$ using multiply-accumulate (MAC) operations. On FPGA, this maps to DSP slices (dedicated multiplier-accumulator blocks). Key implementation choices include fully parallel (one multiplier per tap, single-cycle latency), fully serial (one multiplier shared across all taps, N-cycle latency), or semi-parallel architectures balancing throughput against resource usage.
+
+For audio-rate signals (44.1--192kHz sampling), the gap between the sampling frequency and the FPGA clock frequency (typically 100--300MHz) provides hundreds or thousands of clock cycles per sample, enabling a single DSP slice to be time-multiplexed across many filter taps. A 16-tap symmetric FIR filter on a Xilinx Spartan-6 achieves resource reductions of 79\% over conventional implementations by exploiting BRAM-based coefficient storage and LUT shift registers for sample delay lines.
+
+\subsubsection{IIR Filter Implementation}
+
+IIR filters offer sharper frequency responses with fewer coefficients but introduce feedback that can cause instability. The biquad (second-order section) is the standard building block. Fixed-point coefficient quantization is the critical challenge: poles close to the unit circle in the z-plane may shift outside it after quantization, causing the filter to become unstable. Mitigation strategies include using cascaded second-order sections (rather than high-order direct forms), allocating sufficient fractional bits (typically 14 of 16 total bits), and always simulating the fixed-point implementation against a floating-point reference.
+
+\subsubsection{Agile Hardware Design}
+
+The Chisel hardware construction language (a Scala DSL) supports rapid ASIC prototyping. A UC Berkeley research group demonstrated a complete DSP spectrometer ASIC (``Splash2'') with RTL designed by one person in eight weeks using Chisel generators. A larger radar receive processor required approximately 300 engineering-weeks (a team of 8 over 9 months), representing a 56\% reduction in development time compared to traditional HDL flows.
+
+\subsubsection{Hearing Aid ASIC: A Complete Worked Example}
+
+A signal processing ASIC for digital hearing aids, fabricated in 180nm CMOS, integrates an 18-band 1/3-octave ANSI S1.11 filter bank using the Interpolated FIR (IFIR) technique, dynamic range compression with lookup-table-based logarithm, and an SPI interface for external codec communication and programmability. Real-time testing used two ZedBoard FPGAs: one hosting the design under test, the other providing audio I/O via the integrated XADC. This represents the complete pipeline from algorithm through FPGA validation to ASIC fabrication.
+
+\subsection{Module 3 Reference: Sound Filtering and Audio Processing}
+
+\subsubsection{Practical Filter Architectures}
+
+Audio processing chains typically combine multiple filter types. A parametric equalizer uses cascaded biquad sections, each adjustable in center frequency, bandwidth (Q factor), and gain. A crossover network splits the audio spectrum into frequency bands for multi-driver speaker systems. Dynamic range compression reduces the amplitude range by applying gain reduction above a threshold, with attack and release time constants controlling the speed of adaptation.
+
+\subsubsection{Real-Time Constraints}
+
+At 48kHz sampling rate, each sample period is approximately 20.8 microseconds. A 256-sample buffer introduces 5.3ms of latency. Professional live sound targets total system latency under 10ms (including ADC, processing, and DAC). Hearing aids target under 6ms. Each additional processing stage adds latency equal to its buffer size divided by the sample rate.
+
+For ANC in headphones, the total acoustic delay from noise source through the secondary path to the ear must be shorter than the processing delay, placing an upper bound on filter length and algorithm complexity. Modern DSP chips (e.g., TI TMS320C6748) with VLIW architectures execute multiple MACs per clock cycle to meet these constraints.
+
+\subsection{Module 4 Reference: LED Persistence of Vision}
+
+\subsubsection{Psychophysical Foundations}
+
+Persistence of vision refers to the brain's tendency to retain a visual impression for approximately 40ms (25Hz) after the light stimulus ceases. The flicker fusion frequency --- the rate above which discrete flashes appear continuous --- varies from 12--75Hz depending on brightness, eccentricity, and stimulus size, with typical values of 50--60Hz for moderate brightness at central fixation.
+
+POV displays exploit this by sweeping a linear array of LEDs through space fast enough that successive columns of illumination merge into a perceived 2D image. The minimum rotation speed for a stable image is approximately 15--20 revolutions per second (900--1200 RPM). Commercial POV displays such as the KAIST JANUS project operate at 1000 RPM with 96 tri-color LEDs per blade.
+
+\subsubsection{LED Driver Protocols}
+
+\textbf{APA102 (DotStar):} Two-wire SPI protocol. Data (MOSI) and clock (SCK) lines. Supports clock rates up to 20MHz. Each LED frame: 3-bit ``111'' header + 5-bit global brightness + 8-bit blue + 8-bit green + 8-bit red = 32 bits. Start frame: 32 zero bits. End frame: at least $\lceil N/2 \rceil$ bits (where N is the LED count). The separate clock line provides deterministic timing independent of data rate variations.
+
+\textbf{WS2812 (NeoPixel):} Single-wire protocol. Timing-encoded: a ``0'' bit is a 400ns high pulse followed by 850ns low; a ``1'' bit is 800ns high, 450ns low ($\pm$150ns tolerance). Each LED: 24 bits (8G + 8R + 8B). A reset (latch) signal is >50$\mu$s low. The tight timing tolerance makes bit-banging on general-purpose CPUs unreliable; hardware peripherals (SPI, PIO, DMA-driven timers) are preferred.
+
+\subsubsection{Power and Synchronization}
+
+Inductive (wireless) power transfer eliminates the wire-tangling problem for rotating POV assemblies. A transmitter coil on the stationary base couples magnetically to a receiver coil on the rotating arm. The RP2040's Programmable I/O (PIO) state machines provide hardware-accurate LED timing independent of the main ARM cores, enabling the CPU to handle image processing and rotation detection while PIO handles the time-critical LED protocol.
+
+Rotation detection typically uses a reflectance sensor (IR emitter/detector pair) aimed at a single white marker on the base. The detected pulse triggers a timer reset; the period between pulses gives the current RPM. A Schmitt trigger between the sensor and the microcontroller prevents false triggering from electrical noise. Image column timing is computed by dividing the rotation period by the desired angular resolution.
+
+\subsection{Module 5 Reference: DMX512 and Stage Lighting}
+
+\subsubsection{DMX512 Protocol Specification}
+
+DMX512 (ANSI E1.11---2008) uses EIA-485 differential signaling at 250kbps over twisted-pair cable with XLR-5 connectors (XLR-3 is common but non-standard). A DMX packet consists of: a break (minimum 88$\mu$s low), mark-after-break (minimum 8$\mu$s high), a start code byte (0x00 for dimmer data), and up to 512 data bytes, each preceded by a start bit and followed by two stop bits. The maximum refresh rate for a full 512-channel universe is approximately 44Hz (22.7ms per frame).
+
+The network topology is a daisy chain (multi-drop bus): one controller (master), up to 32 slave devices per physical segment. A 120$\Omega$ terminating resistor at the end of each chain prevents signal reflections. Maximum cable length is typically 300--1000 feet depending on cable quality and electromagnetic environment.
+
+\subsubsection{RDM (Remote Device Management)}
+
+RDM (ANSI E1.20) adds bidirectional communication to DMX512 using alternate start code 0xCC. RDM packets are inserted between normal DMX data packets. Each RDM device has a unique 48-bit identifier. The controller can discover devices, query and set parameters (DMX address, device label, sensor values), and perform firmware updates. Maximum 32 RDM devices per daisy chain.
+
+\subsubsection{Art-Net and sACN (E1.31)}
+
+Art-Net, developed by Artistic Licence in 1998, encapsulates DMX universe data in UDP packets over standard Ethernet. Art-Net 4 supports up to 32,768 universes. It operates on a default subnet of 2.x.x.x (Art-Net) or 10.x.x.x (typical installations) and can use broadcast, unicast, or (in Art-Net 4) directed broadcast for data distribution.
+
+sACN (Streaming ACN, ANSI E1.31) uses IP multicast for efficient data distribution. Each universe maps to a specific multicast group address (239.255.x.x). This is inherently more network-efficient than Art-Net's broadcast mode for large installations, as devices only receive the universes they subscribe to. sACN includes synchronization packets (E1.31:2018) to ensure all receivers update simultaneously, and priority levels (0--200) allowing multiple sources to coexist with deterministic failover.
+
+For pixel mapping, each RGB pixel consumes 3 DMX channels; each RGBW pixel consumes 4. A single DMX universe (512 channels) thus supports 170 RGB pixels or 128 RGBW pixels. A 10,000-pixel LED wall requires approximately 59 DMX universes --- well within the capacity of Art-Net or sACN over a single Gigabit Ethernet link, but requiring careful network design (dedicated lighting VLAN, managed switches with IGMP snooping, static IP or DHCP reservations).
+
+\subsubsection{Pixel Controllers}
+
+Art-Net/sACN-to-SPI pixel controllers (e.g., Advatek PixLite, Sundrax PixelGate) bridge the Ethernet lighting network to addressable LED hardware. A typical controller supports 4--8 SPI outputs, each driving 300--1000 pixels, with support for chipsets including WS2812B, WS2811, APA102, SK6812, and dozens of others. Configuration is via web interface over the same Ethernet connection. End-to-end latency from console to LED is typically under 20ms for live performance applications.
+
+\subsection{Module 6 Reference: MIDI and Control Protocols}
+
+\subsubsection{MIDI 1.0 Fundamentals}
+
+MIDI 1.0 (1983) uses a serial protocol at 31.25kbaud over a current-loop interface with 5-pin DIN connectors. Messages consist of a status byte (most significant bit = 1) followed by one or two data bytes (MSB = 0). Channel Voice messages (Note On, Note Off, Control Change, Program Change, Pitch Bend, Aftertouch) address 16 channels. System messages handle timing (MIDI Clock, Start, Stop, Continue), identification (SysEx), and synchronization (MTC/SMPTE).
+
+Controller resolution is 7 bits (0--127) for most messages, expandable to 14 bits using paired MSB/LSB controllers. Pitch bend is 14 bits natively. The protocol's serial nature means polyphonic note data on a single cable experiences timing skew proportional to note count --- a known limitation for dense musical passages.
+
+\subsubsection{MIDI 2.0 Architecture}
+
+MIDI 2.0, unveiled January 2020, consists of five interlocking specifications:
+
+\textbf{Universal MIDI Packet (UMP):} The new packet format uses 32-bit-aligned packets (multiples of 32 bits). It supports 16 Groups, each with 16 MIDI Channels, for a total of 256 addressable streams. Controller resolution increases to 32 bits. Per-note controllers enable unprecedented articulation control. Note On messages can optionally include a precise pitch value for microtonal applications.
+
+\textbf{MIDI-CI (Capability Inquiry):} Enables bidirectional communication. Devices query each other's capabilities and negotiate the protocol level (MIDI 1.0 or 2.0). If a MIDI 2.0 device discovers it's connected to a MIDI 1.0 device, it falls back automatically.
+
+\textbf{Profile Configuration:} Devices declare compatibility with standard profiles (e.g., ``drawbar organ,'' ``analog synth,'' ``lighting controller''). A control surface querying a device with a ``mixer'' profile auto-maps its faders to mixer parameters; the same surface querying a ``drawbar organ'' profile maps controls to virtual drawbars.
+
+\textbf{Property Exchange:} JSON-based messages for discovering and setting device properties (preset names, parameter values, configuration data). This replaces much of the need for manufacturer-specific editor software.
+
+\textbf{Jitter Reduction Timestamps:} Optional timestamps allow events to be transmitted ahead of time and executed at the precise intended moment, reducing jitter on packet-based transports like USB.
+
+\subsubsection{MIDI Show Control and Integration}
+
+MIDI Show Control (MSC) extends MIDI for theatrical automation, providing commands for Go, Stop, Resume, Timed Go, and other cue-based operations across sound, lighting, machinery, video, and pyrotechnics subsystems. MSC typically triggers DMX lighting cues via a MIDI-to-DMX bridge or through the lighting console's MIDI input.
+
+Audio-reactive lighting uses real-time analysis of the audio signal (envelope following, beat detection, spectral decomposition) to generate DMX or Art-Net commands. The audio analyzer extracts features (BPM, spectral centroid, onset strength), maps them to lighting parameters (color, intensity, strobe rate), and outputs the result as DMX values. Latency budget for perceptible audio-visual synchrony is approximately 20--40ms.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Hearing damage & ANC system failures can expose users to loud transients & ANNOTATE \\
+Electrical safety & DMX and LED systems operate at voltages capable of causing injury & ANNOTATE \\
+Photosensitive epilepsy & Strobing LED effects can trigger seizures at 3--30Hz & ANNOTATE \\
+POV mechanical safety & Rotating assemblies at 1000+ RPM pose serious injury risk & ANNOTATE \\
+IP/Patent concerns & Several ASIC design techniques and LED protocols are patent-encumbered & ANNOTATE \\
+E-waste & ASIC fabrication and LED manufacturing generate hazardous waste & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Standards Bodies and Professional Organizations}
+
+\begin{itemize}[leftmargin=2em]
+\item ANSI/ESTA E1.11---2008: USITT DMX512-A protocol standard
+\item ANSI E1.20: RDM (Remote Device Management) for DMX512
+\item ANSI E1.31---2009/2018: sACN (Streaming ACN) protocol
+\item MIDI Manufacturers Association: MIDI 1.0 Detailed Specification (1983/1996)
+\item MMA/AMEI: M2-100-U through M2-104-UM, MIDI 2.0 specifications (2020/2023)
+\item Artistic Licence: Art-Net protocol specification (Art-Net 4, 2017)
+\item IEEE: Adaptive filter theory and digital signal processing standards
+\end{itemize}
+
+\subsubsection*{Academic and Government Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Texas Instruments Application Report SPRA042: ``Design of Active Noise Control Systems With the TMS320 Family''
+\item NASA ADS: ``Digital Signal Processing System for Active Noise Reduction'' (aerospace ANC research)
+\item UC Berkeley EECS-2020-32: Bailey, S. ``Rapid ASIC Design for Digital Signal Processors'' (Chisel framework)
+\item ScienceDirect: Deepu et al. ``Design and implementation of a signal processing ASIC for digital hearing aids'' (2022)
+\item Springer JESIT: ``High performance IIR filter implementation on FPGA'' (2021)
+\item Wiley IET CDS: Maamoun, ``Efficient FPGA based architecture for high-order FIR filtering'' (2021)
+\item Cornell University ECE4760/ECE5760: FPGA DSP course materials and POV display projects
+\item KAIST Design Media Lab: JANUS interactive POV display (SIGGRAPH 2014 Emerging Technologies)
+\item Stanford CCRMA: MIDI 2.0 technical overview (2021)
+\end{itemize}
+
+\subsubsection*{Industry Technical References}
+
+\begin{itemize}[leftmargin=2em]
+\item MathWorks: DSP HDL Toolbox documentation (FPGA/ASIC DSP design flow)
+\item Adafruit Learning System: Motorized POV LED Display (DotStar/RP2040)
+\item Raspberry Pi Magazine: POV Display with RP2040 PIO (HomeMadeGarbage)
+\item Circuit Cellar: ``Building a Holographic Persistence-of-Vision Display'' (2024)
+\item Sound On Sound: ``Introducing MIDI 2.0'' (protocol technical analysis)
+\item Hackaday: ``The Basics of Persistence of Vision Projects'' (2019)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document covering the complete stage intelligence stack: real-time DSP algorithms, ASIC/FPGA silicon implementation, sound filtering, LED persistence-of-vision displays, DMX512/Art-Net/sACN stage lighting control, and MIDI/control protocol integration. The deliverable must be technically rigorous, self-contained, and structured for integration into the GSD skill-creator ecosystem as reference material for the Amiga Creative Suite and hardware-layer educational packs.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+WAVE EXECUTION — SIGNAL & LIGHT
+================================================================
+
+Wave 0: Foundation           ┌────────────────────────────────┐
+  [Shared schemas, glossary] │  Shared types, source index,   │
+                             │  notation conventions           │
+                             └────────────┬───────────────────┘
+                                          │
+Wave 1: Parallel Research    ┌────────────┴───────────────────┐
+                             │                                 │
+              Track A        │    Track B        Track C       │
+           ┌─────────┐      │  ┌─────────┐   ┌──────────┐   │
+           │ M1: DSP  │      │  │ M3: Audio│   │ M5: DMX  │   │
+           │ M2: ASIC │      │  │ M4: LED  │   │ M6: MIDI │   │
+           └─────────┘      │  └─────────┘   └──────────┘   │
+                             └────────────┬───────────────────┘
+                                          │
+Wave 2: Synthesis            ┌────────────┴───────────────────┐
+  [Cross-module integration, │  Integration patterns, unified │
+   protocol bridge docs]     │  signal chain narrative         │
+                             └────────────┬───────────────────┘
+                                          │
+Wave 3: Publication          ┌────────────┴───────────────────┐
+  [Final assembly, verify,   │  Document assembly, test plan  │
+   index, delivery]          │  execution, source audit        │
+                             └────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared glossary, notation conventions, mathematical prerequisites, source index template
+\item \textbf{Algorithm Layer} --- DSP theory, adaptive filter mathematics, spectral analysis methods
+\item \textbf{Silicon Layer} --- FPGA/ASIC implementation patterns, HDL architectures, fixed-point analysis
+\item \textbf{Application Layer} --- Audio filtering, LED display, POV firmware, psychoacoustic/psychophysical models
+\item \textbf{Protocol Layer} --- DMX512, Art-Net, sACN, MIDI 1.0/2.0, OSC, MSC
+\item \textbf{Integration Layer} --- Cross-domain bridges, audio-reactive lighting, timecode synchronization
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Shared Glossary & $\geq$80 terms defined with cross-references & W0-1 \\
+2 & Source Index & All sources catalogued with quality tier & W0-2 \\
+3 & DSP Algorithm Survey & LMS/NLMS/FxLMS/RLS fully specified & W1-A1 \\
+4 & ASIC/FPGA Implementation Guide & FIR+IIR patterns, fixed-point analysis & W1-A2 \\
+5 & Audio Filtering Reference & Parametric EQ, crossover, compression & W1-B1 \\
+6 & LED \& POV Display Reference & Psychophysics + firmware + hardware & W1-B2 \\
+7 & DMX/Art-Net/sACN Reference & Protocol specs + network design & W1-C1 \\
+8 & MIDI Protocol Reference & 1.0 + 2.0 + MSC + integration & W1-C2 \\
+9 & Integration Patterns & $\geq$3 cross-domain bridge specifications & W2-1 \\
+10 & Unified Signal Chain Narrative & End-to-end story from mic to photon & W2-2 \\
+11 & Final Document & All modules assembled, verified, indexed & W3-1 \\
+12 & Test Report & All tests executed, verification matrix complete & W3-2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{2.2cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared Glossary & None & Haiku & 3K \\
+Source Index & None & Haiku & 2K \\
+DSP Algorithm Survey & Glossary & Opus & 15K \\
+ASIC/FPGA Guide & Glossary, DSP & Sonnet & 12K \\
+Audio Filtering Ref & DSP & Sonnet & 10K \\
+LED \& POV Reference & Glossary & Sonnet & 10K \\
+DMX Protocol Reference & Glossary & Sonnet & 12K \\
+MIDI Protocol Reference & Glossary & Sonnet & 12K \\
+Integration Patterns & All W1 modules & Opus & 10K \\
+Unified Narrative & All W1 + W2-1 & Opus & 8K \\
+Final Assembly & All prior & Sonnet & 5K \\
+Test/Verification & All prior & Sonnet & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 33\% & DSP algorithm survey (mathematical precision), integration patterns (cross-domain judgment), unified narrative (synthesis) \\
+Sonnet & 57\% & Implementation guides, protocol references, document assembly (structured content production) \\
+Haiku & 10\% & Glossary, source index, scaffolding (template generation) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Tasks} & \tableheader{Tracks} & \tableheader{Est. Time} \\
+\midrule
+0 & Foundation & 2 & 1 (sequential) & 30 min \\
+1 & Parallel Research & 6 & 3 (parallel) & 3 hours \\
+2 & Synthesis & 2 & 1 (sequential) & 1.5 hours \\
+3 & Publication & 2 & 1 (sequential) & 1 hour \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation (Sequential)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0.1 & Build shared glossary (DSP, LED, protocol terms) with cross-module references & glossary.md & Haiku & 3K \\
+0.2 & Compile source index with quality tiers and module assignments & sources.md & Haiku & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\subsubsection*{Track A: Signal Processing + Silicon}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1A.1 & DSP algorithm survey: LMS family, spectral methods, AI-enhanced, convergence analysis & m1-dsp.md & Opus & 15K \\
+1A.2 & ASIC/FPGA implementation: FIR/IIR patterns, HDL, fixed-point, Chisel, hearing aid case study & m2-silicon.md & Sonnet & 12K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection*{Track B: Audio Applications + Visual Output}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1B.1 & Audio filtering reference: EQ, crossover, compression, psychoacoustics, latency & m3-audio.md & Sonnet & 10K \\
+1B.2 & LED \& POV reference: psychophysics, driver protocols, power, sync, RP2040 PIO & m4-led.md & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection*{Track C: Control Protocols}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1C.1 & DMX/Art-Net/sACN reference: protocol specs, RDM, pixel mapping, network design & m5-dmx.md & Sonnet & 12K \\
+1C.2 & MIDI reference: 1.0 + 2.0 + UMP + CI + MSC + controller design & m6-midi.md & Sonnet & 12K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis (Sequential)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+2.1 & Integration patterns: MIDI$\to$DMX bridge, audio-reactive lighting, timecode sync & integration.md & Opus & 10K \\
+2.2 & Unified signal chain narrative: end-to-end from acoustic input to photon output & narrative.md & Opus & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification (Sequential)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Produces} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+3.1 & Assemble final document: all modules, TOC, cross-references, bibliography & final.md & Sonnet & 5K \\
+3.2 & Execute test plan, complete verification matrix, source audit & test-report.md & Sonnet & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Skill Loads Saved:} Glossary and source index loaded once in Wave 0, cached for all Wave 1 agents (saves 6 redundant loads)
+\item \textbf{Schema Reuse:} Document structure template produced in Wave 0, consumed by all six Wave 1 module producers
+\item \textbf{Pre-Computed Knowledge:} Research reference (Stage 2 of this document) serves as the pre-computed knowledge tier --- Wave 1 agents receive their module's reference section rather than conducting fresh web research
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{3cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est. Tokens} & \tableheader{Context Windows} & \tableheader{Sessions} \\
+\midrule
+Wave 0 & 5K & 1 & 1 \\
+Wave 1 & 71K & 8 & 3 \\
+Wave 2 & 18K & 3 & 1 \\
+Wave 3 & 10K & 2 & 1 \\
+\midrule
+\textbf{Total} & \textbf{$\sim$104K} & \textbf{$\sim$14} & \textbf{$\sim$5} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+CRITICAL PATH: W0 -> W1-A1 -> W2-1 -> W3-1
+================================================================
+
+W0.1 ──┬──> W1-A1 (DSP) ──────────┐
+       │                            │
+W0.2 ──┼──> W1-A2 (ASIC) ─────────┤
+       │                            │
+       ├──> W1-B1 (Audio) ─────────┤
+       │                            ├──> W2.1 (Integration)
+       ├──> W1-B2 (LED/POV) ──────┤          │
+       │                            │          v
+       ├──> W1-C1 (DMX) ──────────┤     W2.2 (Narrative)
+       │                            │          │
+       └──> W1-C2 (MIDI) ─────────┘          v
+                                         W3.1 (Assembly)
+                                              │
+                                              v
+                                         W3.2 (Verify)
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\textbf{Total Tests:} 42~~|~~\textbf{Safety-Critical:} 8~~|~~\textbf{Target Coverage:} 85\%+
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Share} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK & 19\% \\
+Core functionality & 18 & Required & BLOCK & 43\% \\
+Integration & 10 & Required & BLOCK & 24\% \\
+Edge cases & 6 & Best-effort & LOG & 14\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (Mandatory Pass)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Source quality & All citations from standards bodies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-02 & Numerical attribution & Every dB measurement, timing value, frequency, bit width, and protocol parameter attributed to a specific source \\
+SC-03 & No policy advocacy & Document presents technical analysis without advocating for specific product purchases or policy positions \\
+SC-04 & Safety annotation: hearing & ANC failure modes annotated with hearing damage risk \\
+SC-05 & Safety annotation: electrical & DMX/LED voltage and current ratings annotated with electrical safety warnings \\
+SC-06 & Safety annotation: photosensitive & Strobe/flash frequencies annotated with photosensitive epilepsy risk range (3--30Hz) \\
+SC-07 & Safety annotation: mechanical & POV rotating assembly risks annotated with RPM and kinetic energy warnings \\
+SC-08 & Security sensitivity & No operational vulnerability details for DMX/Art-Net network exploitation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & LMS algorithm completeness & Weight update equation, convergence condition, step-size bounds \\
+CF-02 & NLMS specification & Normalization formula, stability improvement over LMS \\
+CF-03 & FxLMS specification & Secondary path modeling, filtered reference signal \\
+CF-04 & RLS specification & Recursive formulation, computational complexity comparison \\
+CF-05 & FIR FPGA pattern & MAC architecture, DSP slice mapping, resource estimates \\
+CF-06 & IIR FPGA pattern & Biquad implementation, fixed-point stability analysis \\
+CF-07 & ASIC pipeline & Algorithm $\to$ HDL $\to$ synthesis $\to$ tape-out stages documented \\
+CF-08 & Hearing aid case study & 18-band filter bank, compression, 180nm CMOS, FPGA validation \\
+CF-09 & POV psychophysics & Afterimage duration, flicker fusion frequency, minimum RPM \\
+CF-10 & APA102 protocol & SPI timing, frame format, start/end frames \\
+CF-11 & WS2812 protocol & Bit timing (T0H, T0L, T1H, T1L), reset signal \\
+CF-12 & DMX512 timing & Break, MAB, start code, channel data, refresh rate \\
+CF-13 & Art-Net specification & UDP encapsulation, universe addressing, broadcast/unicast \\
+CF-14 & sACN specification & Multicast groups, synchronization, priority levels \\
+CF-15 & MIDI 1.0 core & Status/data bytes, channel messages, system messages \\
+CF-16 & MIDI 2.0 UMP & Packet format, 32-bit controllers, 16 groups $\times$ 16 channels \\
+CF-17 & MIDI-CI & Capability inquiry, protocol negotiation, backward compatibility \\
+CF-18 & Pixel mapping math & Channels per pixel, universes per pixel count, network planning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & DSP $\to$ FPGA cascade & Filter algorithm maps to specific HDL implementation pattern \\
+IN-02 & FPGA $\to$ Audio cascade & Silicon implementation meets audio latency budget \\
+IN-03 & Audio $\to$ LED cascade & Audio analysis output maps to LED control parameters \\
+IN-04 & DMX $\to$ Art-Net consistency & DMX universe structure consistent between direct and Ethernet transport \\
+IN-05 & MIDI $\to$ DMX bridge & MIDI event types map to specific DMX channel operations \\
+IN-06 & Timecode integration & SMPTE/MTC synchronization documented across audio and lighting \\
+IN-07 & Cross-module terminology & Same terms used consistently across all six modules \\
+IN-08 & Signal chain continuity & End-to-end path from microphone to LED pixel traceable \\
+IN-09 & Protocol stack layering & Physical $\to$ data link $\to$ application layers consistent across DMX/Art-Net/sACN \\
+IN-10 & Self-containment & Reader with DSP fundamentals can follow every module without external references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Filter instability & At least one example of fixed-point quantization causing instability \\
+EC-02 & DMX cable length limits & Signal degradation beyond 300m documented \\
+EC-03 & Art-Net broadcast storm & Network congestion scenario for $>$100 universes without IGMP \\
+EC-04 & MIDI 1.0/2.0 coexistence & Fallback behavior when 2.0 device meets 1.0 device \\
+EC-05 & POV speed variation & Image distortion when motor RPM fluctuates \\
+EC-06 & Data gap acknowledgment & At least one ``further research needed'' notation per module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. DSP covers LMS family with convergence equations & CF-01--04 & Pending \\
+2. FPGA includes FIR/IIR with fixed-point analysis & CF-05--06, EC-01 & Pending \\
+3. ASIC pipeline documented & CF-07--08 & Pending \\
+4. POV covers all four aspects & CF-09--11, EC-05 & Pending \\
+5. DMX512 fully specified & CF-12, SC-05 & Pending \\
+6. Art-Net/sACN compared with planning guidelines & CF-13--14, CF-18, EC-03 & Pending \\
+7. MIDI 2.0 UMP documented with compatibility & CF-15--17, EC-04 & Pending \\
+8. $\geq$3 integration patterns & IN-03, IN-05, IN-06 & Pending \\
+9. Stability criteria for all filters & CF-01--06, EC-01 & Pending \\
+10. Psychoacoustic/psychophysical foundations sourced & CF-09, SC-01 & Pending \\
+11. All numerical claims attributed & SC-02 & Pending \\
+12. Self-contained document & IN-10 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache TTL management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1 + M2 document production (DSP + silicon) \\
+EXEC-B & Executor (Track B) & M3 + M4 document production (audio + LED) \\
+EXEC-C & Executor (Track C) & M5 + M6 document production (DMX + MIDI) \\
+CRAFT-DSP & DSP Specialist & Algorithm correctness, convergence analysis, stability verification \\
+CRAFT-HW & Hardware Specialist & FPGA/ASIC implementation patterns, timing analysis, fixed-point validation \\
+CRAFT-PROTO & Protocol Specialist & DMX/Art-Net/sACN/MIDI specification accuracy \\
+VERIFY & Verification & Source validation; cross-module consistency; numerical accuracy \\
+INTEG & Integration Agent & Cross-module relationships; signal chain continuity; integration patterns \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions; document skeleton \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 12 \\
+Parallel tracks & 3 (Wave 1) \\
+Sequential depth & 4 waves \\
+Opus / Sonnet / Haiku split & 33\% / 57\% / 10\% \\
+Estimated context windows & $\sim$14 \\
+Estimated sessions & $\sim$5 \\
+Estimated wall time & $\sim$6 hours \\
+Total tests & 42 (8 safety-critical) \\
+Target coverage & 85\%+ \\
+Token budget & $\leq$110K \\
+Activation profile & Fleet (17 roles) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The Amiga's Paula chip could play four channels of 8-bit audio at 28kHz with zero CPU involvement. Forty years later, an FPGA implements a 64-tap FIR filter in a single clock cycle, a DMX universe refreshes 512 channels every 23ms, and an APA102 strip accepts SPI data at 20MHz --- all because the same principle holds: specialized execution paths, faithfully iterated, produce outcomes that brute force cannot. The space between signal and light is where the real world begins.''}
+
+\vspace{0.5em}
+\hfill--- Signal \& Light, GSD Research Mission
+\end{quotebox}
+
+\end{document}
