@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Living Forest — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1B5E20;
+    --river: #1565C0;
+    --graphite: #37474F;
+    --light-forest: #E8F5E9;
+    --light-river: #E3F2FD;
+    --cream: #FAFAFA;
+    --ink: #212121;
+    --muted: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--cream); color: var(--ink); }
+  .header { background: var(--forest); padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-family: 'DM Sans', sans-serif; color: white; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .header p { font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,0.85); font-size: 1rem; }
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; gap: 1rem; margin: 2rem 0; }
+  .card { background: #ECEFF1; border-radius: 6px; padding: 1.5rem; text-decoration: none; color: var(--ink); transition: background 0.2s; display: block; }
+  .card:hover { background: #CFD8DC; }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--forest); margin-bottom: 0.3rem; }
+  .card .meta { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--muted); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--forest); font-size: 1.3rem; margin: 2rem 0 0.8rem; border-bottom: 1px solid #BDBDBD; padding-bottom: 0.3rem; }
+  p, li { line-height: 1.7; margin-bottom: 0.6rem; font-size: 0.95rem; }
+  ul, ol { padding-left: 1.5rem; }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: #ECEFF1; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.88em; }
+  .quote { background: var(--light-forest); border-left: 3px solid var(--forest); padding: 1rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; font-style: italic; }
+  .footer { text-align: center; padding: 2rem; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p style="font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem;">GSD Research Mission Package</p>
+  <h1>The Living Forest</h1>
+  <p>Weyerhaeuser in Minecraft × Pacific Rim Climate Mesh</p>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="living-forest-mission.pdf" download>
+      <h3>📄 Mission Package (PDF)</h3>
+      <p class="meta">26 pages — Vision → Research → Mission pipeline, ready for GSD orchestrator</p>
+    </a>
+    <a class="card" href="living-forest-mission.tex" download>
+      <h3>📝 LaTeX Source (.tex)</h3>
+      <p class="meta">XeLaTeX source — modify and recompile with DejaVu fonts</p>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <p><strong>Stage 1 — Vision Document:</strong> Narrative vision for a 1:1-scale Minecraft simulation of Weyerhaeuser's 2.5M-acre PNW timberlands. Five problem statements, six research modules (Terrain Genesis, Forest Canopy, Climate Bridge, Fire &amp; Disturbance, Mesh Telemetry, Living World Engine), chipset configuration, 12 success criteria.</p>
+
+  <p><strong>Stage 2 — Research Reference:</strong> Sourced findings from USGS 3DEP, NASA FIRMS, NOAA NCEI, USFS FIA, Weyerhaeuser SEC filings, Arnis world generation engine, OpenWeatherMap, and NIFC fire perimeters. Safety and sensitivity considerations. Complete bibliography.</p>
+
+  <p><strong>Stage 3 — Mission Package:</strong> Fleet activation profile (17 roles). Wave execution plan with parallel terrain and data tracks. 8 deliverables, 36 tests (7 safety-critical), verification matrix, token budget (~385K across 45–55 context windows), dependency graph.</p>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Review the PDF to understand scope, modules, and wave structure</li>
+    <li>Feed the mission package to <code>gsd-skill-creator</code> via Claude Code</li>
+    <li>GSD orchestrator decomposes into waves and assigns to agents</li>
+    <li>Wave 0 (Foundation) runs first, producing schemas consumed by all subsequent waves</li>
+    <li>Waves 1A and 1B run in parallel — terrain generation and data plugin development</li>
+    <li>Wave 2 (Synthesis) integrates all streams into the Living World Engine</li>
+    <li>Wave 3 (Publication) produces educational content, server config, and tests</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>The LaTeX source requires XeLaTeX with DejaVu fonts:</p>
+  <p><code>xelatex -interaction=nonstopmode living-forest-mission.tex</code> (three passes)</p>
+
+  <div class="quote">
+    "The forest remembers what the ledger books forgot — that land is not an asset class, it is a living system that operates on timescales longer than any quarterly report."
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem · March 26, 2026 · Vision → Research → Mission
+</div>
+
+</body>
+</html>

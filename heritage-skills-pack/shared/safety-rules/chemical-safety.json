@@ -1,0 +1,61 @@
+[
+  {
+    "id": "CHEM-001",
+    "domain": "chemical",
+    "pattern": "(?:lye|sodium.?hydroxide|potassium.?hydroxide|wood.?ash.?lye|nixtamal|masa|hominy|soapmaking|soap.?making|tanning.{0,20}lye).{0,80}(?!(?:glove|goggle|eye.?protect|protective|ppe|rinse|ventilat|neutralize|apron))",
+    "level": "gated",
+    "annotation": {
+      "domain": "chemical",
+      "level": "gated",
+      "message": "Lye (sodium or potassium hydroxide) is highly caustic and will cause severe burns on contact with skin or eyes. Always wear: chemical-resistant gloves, eye protection (goggles, not just glasses), long sleeves. Work in a well-ventilated area -- lye reacts with water producing heat and steam. Have a water source nearby to immediately rinse any skin contact (flush for 20+ minutes).",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "American Chemical Society Safety Guidelines; OSHA Chemical Safety Standards"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "CHEM-002",
+    "domain": "chemical",
+    "pattern": "(?:mordant|alum|chrome|copper.?sulfate|ferrous.?sulfate|tannin|indigo.{0,20}vat|natural.?dye.{0,40}(?:skin|hand|contact|handle)).{0,80}(?!(?:glove|protect|rinse|ventilat|wash))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "chemical",
+      "level": "annotated",
+      "message": "Natural dye mordants can stain skin and some (copper, chrome, iron mordants) can be absorbed through skin in quantity. Wear gloves when handling mordant solutions. Avoid breathing steam from hot mordant baths. Do not use cooking pots for dyeing with metal mordants -- dedicate separate vessels.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Deb McClintock, Natural Dyeing: Traditional and Contemporary Methods; Foxfire Book 2 (1973)"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "CHEM-003",
+    "domain": "chemical",
+    "pattern": "(?:volatile|solvent|acetone|mineral.?spirits|turpentine|naphtha|toluene|xylene|benzene).{0,60}(?:(?:mix|use|apply|thin|clean))?",
+    "level": "redirected",
+    "annotation": {
+      "domain": "chemical",
+      "level": "redirected",
+      "message": "Volatile chemical processes involving petroleum solvents and similar chemicals fall outside the scope of heritage skills instruction and require professional safety supervision. Traditional finishes (beeswax, tung oil, shellac dissolved in ethanol, linseed oil) are more appropriate for heritage skill contexts.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Heritage Skills Scope Definition; OSHA Hazardous Materials Standards"
+    }
+  },
+  {
+    "id": "CHEM-004",
+    "domain": "chemical",
+    "pattern": "(?:brain.?tan|brain.{0,20}tan|brain.{0,20}nning).{0,80}(?!(?:glove|hygiene|wash|rinse|hand))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "chemical",
+      "level": "annotated",
+      "message": "Brain tanning uses raw animal brain matter. Always wear gloves and wash hands thoroughly after handling. While the risk from deer brain material is very low, proper hygiene is still important. Use gloves when handling the raw brain emulsion. Finished brain-tanned leather is safe to handle without special precautions.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Matt Richards, Deerskins into Buckskins; Traditional Tanning Methods"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  }
+]

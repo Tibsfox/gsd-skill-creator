@@ -1,0 +1,1184 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+
+% === COLOR SCHEME: Technology (Steel/Electric/Graphite) ===
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{555 Timer IC}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={555 Timer IC -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The 555 Timer IC\\[0.3em]A Deep Research Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Analog IC Design $\cdot$ Circuit Theory $\cdot$ Electronics Education}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{From Camenzind's Breadboard to a Billion Units Per Year}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026\hspace{1em}|\hspace{1em}Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron\hspace{1em}|\hspace{1em}Estimated: 8 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The 555 Timer IC --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD Ecosystem --- Electronics Education \& Analog IC Deep Dive}
+
+\subsection{Vision}
+
+The 555 timer IC is, by any reasonable measure, the most successful integrated circuit ever designed. Conceived in 1971 by Swiss-born engineer Hans Camenzind on a breadboard in his home office---under contract to Signetics, paid half his salary plus borrowed lab equipment---the chip has since been manufactured by dozens of companies, sold in quantities exceeding one billion units per year, and found its way into applications its creator never imagined. More than fifty years after its debut, the 555 remains in active production in both its original bipolar form and modern CMOS variants.
+
+What makes the 555 remarkable is not raw computational power but architectural elegance: three matched resistors, two comparators, an SR flip-flop, a discharge transistor, and an output stage. These six functional blocks, wired into an 8-pin DIP package, create a timing engine of extraordinary versatility. The same chip that blinks an LED on a hobbyist's breadboard drives PWM signals in industrial motor controllers, generates precision time delays in medical instruments, and serves as the first IC most electronics students ever touch.
+
+This research mission treats the 555 not merely as a component to be documented, but as a case study in the Amiga Principle: how architectural leverage---specialized execution paths composed of simple, principled building blocks---can produce staggering versatility through faithful iteration. The 555 is the analog IC equivalent of what the GSD ecosystem aspires to be: a small, elegant design that punches far above its weight class because every internal pathway earns its place.
+
+The study spans the chip's historical origins, internal architecture, mathematical timing theory, practical applications, and the evolution from bipolar to CMOS implementations. The goal is a comprehensive educational reference that could serve as both a standalone electronics primer and a GSD knowledge pack ready for integration into the Learn Kung Fu curriculum.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Scattered Documentation.} Authoritative information about the 555's internal operation is dispersed across manufacturer datasheets, university lecture notes, and hobbyist tutorials of wildly varying quality. No single reference integrates history, theory, mathematics, and practice into a coherent educational narrative.
+
+  \item \textbf{Bipolar/CMOS Confusion.} The proliferation of 555 variants (NE555, LM555, TLC555, LMC555, ICM7555) with different electrical characteristics creates confusion for designers choosing between bipolar and CMOS implementations. Trade-offs in output drive, power consumption, and frequency range are poorly synthesized.
+
+  \item \textbf{Mathematical Foundations Undertaught.} The RC timing equations that govern 555 operation derive from exponential charge/discharge curves, yet most tutorials present only the final formulas without connecting them to the underlying capacitor physics. Students memorize $T = 1.1RC$ without understanding \textit{why}.
+
+  \item \textbf{Application Design Gap.} While thousands of 555 circuit examples exist online, few provide the design methodology---how to go from a timing specification to component values with proper consideration of tolerance, temperature stability, and load interaction.
+
+  \item \textbf{Educational Integration Missing.} The 555 is an ideal vehicle for teaching analog IC fundamentals (comparators, flip-flops, voltage dividers, current sinking/sourcing) but is rarely presented as a coherent system-level lesson connecting all these concepts.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The 555 timer is a voltage-controlled bistable engine that converts RC time constants into precisely timed digital output transitions.
+\end{quotebox}
+
+The 555's genius lies in its use of a resistive voltage divider to establish two fixed reference thresholds (1/3 and 2/3 of $V_{CC}$), which two comparators monitor against the voltage on an external timing capacitor. When the capacitor voltage crosses either threshold, the comparator output toggles an SR flip-flop, which in turn controls both the output pin and a discharge transistor that resets the capacitor. This closed-loop charge-monitor-discharge cycle is the fundamental timing mechanism from which all three operating modes (monostable, astable, bistable) derive.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    THE 555 TIMER IC — RESEARCH DOMAIN MAP
+
+   HISTORY &             INTERNAL              OPERATING MODES
+   DESIGN ORIGINS        ARCHITECTURE           & MATHEMATICS
+   ┌──────────────┐     ┌──────────────┐       ┌──────────────┐
+   │ Camenzind     │     │ Voltage      │       │ Monostable   │
+   │ Signetics '71 │────▶│ Divider      │──────▶│ T = 1.1RC    │
+   │ 9→8 pin       │     │ Comparators  │       │ Astable      │
+   │ evolution     │     │ SR Flip-Flop │       │ f = 1.44/    │
+   └──────────────┘     │ Discharge FET│       │ (R1+2R2)C    │
+                        │ Output Stage │       │ Bistable     │
+                        └──────────────┘       └──────┬───────┘
+                              │                       │
+                              ▼                       ▼
+                   ┌──────────────┐       ┌──────────────┐
+                   │ APPLICATIONS  │       │ MODERN        │
+                   │ & CIRCUIT     │       │ VARIANTS &    │
+                   │ DESIGN        │       │ CMOS          │
+                   │               │       │ EVOLUTION     │
+                   │ PWM, Timers   │       │               │
+                   │ Oscillators   │       │ TLC555        │
+                   │ Pulse Gen     │       │ LMC555        │
+                   │ VCO, Alarms   │       │ ICM7555       │
+                   └──────────────┘       └──────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+ ┌─────────────────────────────────────────────────────┐
+ │              RESEARCH MODULE ARCHITECTURE            │
+ ├─────────────────────────────────────────────────────┤
+ │                                                     │
+ │  M1: History & Design Origins                       │
+ │   └──▶ Camenzind biography, Signetics context,     │
+ │        design evolution, naming, market impact      │
+ │                                                     │
+ │  M2: Internal Architecture & Operating Theory       │
+ │   └──▶ Voltage divider, comparators, SR flip-flop, │
+ │        discharge transistor, output stage, pinout   │
+ │                                                     │
+ │  M3: Operating Modes & Timing Mathematics           │
+ │   └──▶ Monostable, astable, bistable equations,    │
+ │        RC derivations, duty cycle analysis          │
+ │                                                     │
+ │  M4: Applications & Circuit Design                  │
+ │   └──▶ PWM, motor control, LED dimming, VCO,       │
+ │        alarm circuits, design methodology           │
+ │                                                     │
+ │  M5: Modern Variants & CMOS Evolution               │
+ │   └──▶ NE555 vs LM555, TLC555, LMC555, ICM7555,   │
+ │        556/558 derivatives, package evolution       │
+ │                                                     │
+ │  Cross-cutting: M2 ↔ M3 (theory↔math)             │
+ │                 M3 ↔ M4 (math↔practice)            │
+ │                 M4 ↔ M5 (practice↔modern variants) │
+ └─────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: History \& Design Origins}
+
+Hans Camenzind's journey from Signetics employee to independent contractor, the evolution from a 9-pin to 8-pin design, the marketing decision by Art Fury, the rapid adoption by 12 manufacturers in 1972, and the chip's ascent to becoming the most-produced IC in history. Includes the Signetics-to-Philips-to-NXP corporate lineage and Camenzind's later redesign efforts.
+
+\subsubsection{M2: Internal Architecture \& Operating Theory}
+
+Complete functional block analysis: the three 5\,k$\Omega$ resistor voltage divider (100\,k$\Omega$+ for CMOS), upper and lower comparators with threshold and trigger inputs, SR flip-flop state logic, discharge transistor operation, output stage current sourcing/sinking capability (200\,mA bipolar, 10--100\,mA CMOS), reset override, and control voltage pin functionality.
+
+\subsubsection{M3: Operating Modes \& Timing Mathematics}
+
+Rigorous derivation of timing equations from RC exponential charge/discharge curves. Monostable: $T = 1.1RC$. Astable: $f = 1.44 / (R_1 + 2R_2)C$, duty cycle analysis, high/low time decomposition. Bistable: latch behavior with trigger and reset. The control voltage pin as a frequency modulation input for VCO applications.
+
+\subsubsection{M4: Applications \& Circuit Design}
+
+Practical circuit design methodology: PWM generation for motor speed control and LED dimming using diode-steered duty cycle adjustment; precision time-delay circuits; alarm and tone generators; clock signal generation for digital logic; voltage-controlled oscillators; switch debouncing; missing-pulse detection. Design considerations including bypass capacitor placement, flyback diode protection, MOSFET/transistor driver selection, and PCB layout guidelines.
+
+\subsubsection{M5: Modern Variants \& CMOS Evolution}
+
+Comparative analysis of the 555 family: original bipolar NE555/SE555 (4.5--16\,V, 200\,mA output, $\sim$10\,mA quiescent); CMOS TLC555 (2--15\,V, 600\,$\mu$A quiescent, 2\,MHz operation); LMC555 (1.5--15\,V, ultra-low power); ICM7555/Renesas (2--18\,V, 60\,$\mu$A quiescent, 20\,pA input current). Dual 556 and quad 558 derivatives. Package evolution from metal TO-5 cans through DIP-8 to modern SOIC surface-mount. The acquisition trail: Signetics $\rightarrow$ Philips $\rightarrow$ NXP, National Semi $\rightarrow$ TI, Intersil $\rightarrow$ Renesas, Zetex $\rightarrow$ Diodes Inc.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  name: "555-timer-deep-research"
+  version: "1.0"
+  profile: squadron
+
+  modules:
+    - id: M1
+      name: "History & Design Origins"
+      model: sonnet
+      tokens: ~6000
+      parallel_track: A
+
+    - id: M2
+      name: "Internal Architecture & Operating Theory"
+      model: opus
+      tokens: ~10000
+      parallel_track: A
+
+    - id: M3
+      name: "Operating Modes & Timing Mathematics"
+      model: opus
+      tokens: ~10000
+      parallel_track: B
+
+    - id: M4
+      name: "Applications & Circuit Design"
+      model: sonnet
+      tokens: ~8000
+      parallel_track: B
+
+    - id: M5
+      name: "Modern Variants & CMOS Evolution"
+      model: sonnet
+      tokens: ~6000
+      parallel_track: A
+
+  synthesis:
+    model: opus
+    tokens: ~8000
+
+  foundation:
+    model: haiku
+    tokens: ~3000
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Complete historical narrative of the 555's design and market adoption
+  \item Functional block-level analysis of internal architecture (not transistor-level)
+  \item Rigorous timing equation derivations for all three operating modes
+  \item Practical application circuits with component selection methodology
+  \item Comparative analysis of major bipolar and CMOS variants
+  \item Educational framing suitable for Learn Kung Fu pack integration
+  \item PCB design considerations and common troubleshooting guidance
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Transistor-level SPICE simulation of internal circuitry
+  \item Manufacturing process details (die fabrication, bonding)
+  \item Proprietary manufacturer test procedures
+  \item Military/aerospace qualification specifics (MIL-STD testing)
+  \item Programmable 555 variants (CSS555, etc.) --- future mission
+  \item Discrete transistor recreation projects --- future mission
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Historical narrative covers Camenzind's biography, the 9-to-8 pin design evolution, Signetics context, and the naming origin with source attribution.
+  \item Internal architecture section identifies and explains all six functional blocks (voltage divider, two comparators, SR flip-flop, discharge transistor, output stage) with correct signal flow.
+  \item All eight pins documented with electrical function, typical connections, and boundary conditions.
+  \item Monostable timing equation ($T = 1.1RC$) derived from RC exponential charge curve, not merely stated.
+  \item Astable frequency equation ($f = 1.44/(R_1+2R_2)C$) derived with high-time and low-time decomposition.
+  \item Duty cycle analysis includes both standard limitation ($>$50\%) and diode-steered full-range technique.
+  \item At least four distinct application circuits documented with component selection rationale.
+  \item Comparative variant table covers $\geq$5 models across bipolar and CMOS families with supply voltage, quiescent current, output current, and max frequency.
+  \item Every numerical claim (production volume, current ratings, voltage ranges, frequency limits) attributed to a specific manufacturer datasheet or IEEE/professional source.
+  \item Cross-module consistency: architecture terminology in M2 matches variable names in M3 equations and pin references in M4 circuits.
+  \item Educational progression: a reader encountering the 555 for the first time can follow from history through theory to building a working circuit.
+  \item Document is self-contained---no undefined terms, no unexplained references, complete bibliography.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Learn Kung Fu Pack & 555 mission feeds directly into electronics curriculum module & Downstream \\
+GSD Chipset Architecture & Analog IC design patterns inform GSD's own chipset metaphor & Lateral \\
+BBS Educational Pack & 555 content could populate an electronics BBS knowledge node & Downstream \\
+Amiga Vision & The 555 as a real-world exemplar of the Amiga Principle & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The 555 timer is a physical proof of the Amiga Principle. Hans Camenzind did not have a supercomputer; he had a breadboard, pencil sketches, and hand-cut Rubylith masking film. The chip he produced contained 25 transistors, 2 diodes, and 15 resistors---a design so economical that it fit into an 8-pin package a marketing manager named on a whim. And yet this tiny engine of architectural leverage has been manufactured in quantities exceeding a billion per year for over half a century, finding applications its creator never contemplated.
+
+The spaces between the components---the thresholds where comparators flip, the moments when capacitors cross voltage boundaries, the silent logic of the SR flip-flop deciding which state to hold---these are where the 555's magic lives. Not in the transistors themselves, but in the relationships between them. That is the lesson the 555 teaches, and it is the same lesson the GSD ecosystem is built on: small, principled building blocks, faithfully iterated, produce staggering complexity.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The 555 Timer IC --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from manufacturer datasheets, IEEE publications, professional engineering sources, and documented oral histories. Each module section provides the evidence base for the corresponding mission deliverable. Source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{IEEE Spectrum} --- Chip Hall of Fame feature, technical retrospectives
+  \item \textbf{Texas Instruments} --- LM555, TLC555, LMC555 datasheets and application notes
+  \item \textbf{Renesas Electronics} (formerly Intersil) --- ICM7555/ICM7556 datasheets
+  \item \textbf{NXP Semiconductors} (formerly Philips/Signetics) --- Original NE555 lineage
+  \item \textbf{Electronic Design} --- Memorial and career retrospective by Peter Camenzind
+  \item \textbf{Semiconductor Museum} --- Oral history interview with Hans Camenzind
+  \item \textbf{EDN Magazine} --- Professional obituary and engineering legacy analysis
+\end{itemize}
+
+\subsection{M1 Reference: History \& Design Origins}
+
+\subsubsection{Hans Camenzind --- Biography}
+
+Hans R. Camenzind (January 1, 1934 -- August 8, 2012) was a Swiss-born electronics engineer who spent his career designing analog integrated circuits. He received an MSEE from Northeastern University and an MBA from the University of Santa Clara. After six years of research at P.R. Mallory in Burlington, Massachusetts, he moved to California in 1968 to join Signetics. By 1970 he had left to found his own company, InterDesign, while continuing contract work for Signetics. He later sold InterDesign to Ferranti (subsequently acquired by Plessey) and continued as an independent consultant under the name Array Design. Over his career he designed 140 standard and custom ICs, including the first integrated class-D amplifier, the IC phase-locked loop, and the semicustom IC concept. He was awarded 20 US patents and authored three books, including \textit{Much Ado About Almost Nothing} (2007), a general-audience history of electronics.
+
+(Sources: IEEE Spectrum Chip Hall of Fame; Electronic Design memorial by Peter Camenzind; EDN obituary; Wikipedia --- Hans Camenzind)
+
+\subsubsection{Design Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} \\
+\midrule
+1968 & Camenzind joins Signetics to develop phase-locked loop IC \\
+1970 & Leaves Signetics, founds InterDesign; begins 555 contract \\
+Summer 1971 & First design review: 9-pin constant-current-source design \\
+Oct 1971 & Second review passes: 8-pin direct-resistance design (NE555V/SE555T) \\
+1972 & Signetics releases NE555; 12 companies manufacturing by year-end \\
+1975 & Signetics acquired by Philips Semiconductor \\
+1978 & ICM7555 CMOS variant released by Intersil \\
+$\sim$1988 & LMC555 CMOS variant released by National Semiconductor \\
+2006 & Philips Semiconductor becomes NXP Semiconductors \\
+2017 & Estimated production exceeds 1 billion units annually \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Naming}
+
+Despite popular belief attributing the ``555'' designation to the three internal 5\,k$\Omega$ resistors, Camenzind stated in a recorded oral history interview that the name was chosen arbitrarily by Art Fury, Signetics' marketing manager, who believed the circuit would be commercially successful and simply liked the number.
+
+(Source: Semiconductor Museum oral history; IEEE Spectrum)
+
+\subsubsection{The 9-to-8 Pin Evolution}
+
+The initial design used a constant current source and required 9 pins, fitting a 14-pin package. Camenzind's insight to replace the constant current source with a direct resistance eliminated one pin, enabling the chip to fit into a standard 8-pin DIP---a packaging decision that dramatically reduced cost and increased adoption.
+
+\subsubsection{Market Impact}
+
+The 555 was the only commercially available monolithic timer IC at its 1972 launch. Within the same year, 12 independent semiconductor companies had begun manufacturing compatible versions. By 2017, professional estimates placed annual production above one billion units. IEEE Spectrum described it as ``probably the most popular integrated circuit ever made.''
+
+\subsection{M2 Reference: Internal Architecture \& Operating Theory}
+
+\subsubsection{Component Census}
+
+The standard bipolar 555 (NE555) contains approximately 25 transistors, 2 diodes, and 15 resistors on a silicon die, packaged in an 8-pin dual in-line package (DIP-8). The CMOS die (LMC555) is physically smaller and uses MOSFET transistors with higher-value voltage divider resistors (100\,k$\Omega$+ vs. 5\,k$\Omega$).
+
+\subsubsection{Functional Blocks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Block} & \tableheader{Function} \\
+\midrule
+Voltage Divider & Three matched resistors (5\,k$\Omega$ bipolar / 100\,k$\Omega$+ CMOS) in series between $V_{CC}$ and GND; establishes reference voltages at $\frac{1}{3}V_{CC}$ and $\frac{2}{3}V_{CC}$ \\
+Upper Comparator & Non-inverting input: Threshold (pin 6); Inverting input: $\frac{2}{3}V_{CC}$ reference. Outputs HIGH when threshold voltage exceeds $\frac{2}{3}V_{CC}$, resetting the flip-flop \\
+Lower Comparator & Inverting input: Trigger (pin 2); Non-inverting input: $\frac{1}{3}V_{CC}$ reference. Outputs HIGH when trigger voltage drops below $\frac{1}{3}V_{CC}$, setting the flip-flop \\
+SR Flip-Flop & Set by lower comparator, reset by upper comparator. $\overline{Q}$ output controls discharge transistor and (inverted) output stage. Reset pin (pin 4) overrides both comparator inputs \\
+Discharge Transistor & NPN transistor (collector at pin 7) controlled by $\overline{Q}$. When flip-flop is reset ($\overline{Q}$ HIGH), transistor turns ON, discharging external timing capacitor to ground \\
+Output Stage & Totem-pole driver capable of sourcing or sinking up to 200\,mA (bipolar). Drives pin 3 HIGH or LOW based on flip-flop state \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Pin Configuration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pin} & \tableheader{Name} & \tableheader{Function} \\
+\midrule
+1 & GND & Ground (0\,V reference) \\
+2 & Trigger & Input to lower comparator; output goes HIGH when voltage drops below $\frac{1}{3}V_{CC}$ \\
+3 & Output & Timer output; sources or sinks up to 200\,mA (bipolar) \\
+4 & Reset & Active-low master reset; overrides all other inputs. Normally tied to $V_{CC}$ \\
+5 & Control Voltage & Access to upper comparator reference ($\frac{2}{3}V_{CC}$); allows external modulation. Bypass to GND with 10--100\,nF when unused \\
+6 & Threshold & Input to upper comparator; output goes LOW when voltage exceeds $\frac{2}{3}V_{CC}$ \\
+7 & Discharge & Open-collector/drain output of internal transistor; provides discharge path for timing capacitor \\
+8 & $V_{CC}$ & Positive supply: 4.5--16\,V (bipolar), 2--18\,V (CMOS) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Signal Flow Logic}
+
+The 555's behavior can be summarized as a state machine with two stable output states governed by capacitor voltage relative to the two reference thresholds:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Trigger event} ($V_{pin2} < \frac{1}{3}V_{CC}$): Lower comparator sets flip-flop $\rightarrow$ output HIGH, discharge transistor OFF, capacitor charges.
+  \item \textbf{Threshold event} ($V_{pin6} > \frac{2}{3}V_{CC}$): Upper comparator resets flip-flop $\rightarrow$ output LOW, discharge transistor ON, capacitor discharges.
+  \item \textbf{Reset override} ($V_{pin4} < 0.7$\,V): Flip-flop forced to reset state regardless of comparator outputs.
+  \item \textbf{Control voltage modulation}: External voltage on pin 5 shifts the upper threshold, enabling VCO operation.
+\end{itemize}
+
+(Sources: TI LM555 datasheet; Renesas ICM7555 datasheet; multiple professional tutorial sources)
+
+\subsection{M3 Reference: Operating Modes \& Timing Mathematics}
+
+\subsubsection{Monostable Mode (One-Shot)}
+
+In monostable configuration, pins 6 and 7 share a common RC network while pin 2 receives an external trigger. A single negative-going pulse on the trigger input initiates one output cycle:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Trigger pulse pulls pin 2 below $\frac{1}{3}V_{CC}$
+  \item Lower comparator sets flip-flop; output goes HIGH; discharge transistor turns OFF
+  \item Capacitor $C$ charges through resistor $R$ toward $V_{CC}$
+  \item When capacitor voltage reaches $\frac{2}{3}V_{CC}$, upper comparator resets flip-flop
+  \item Output returns LOW; discharge transistor turns ON; capacitor discharges
+\end{enumerate}
+
+\textbf{Timing derivation:} The capacitor charges according to $V_C(t) = V_{CC}(1 - e^{-t/RC})$. Setting $V_C(T) = \frac{2}{3}V_{CC}$:
+
+$$\frac{2}{3}V_{CC} = V_{CC}(1 - e^{-T/RC}) \implies e^{-T/RC} = \frac{1}{3} \implies T = RC \cdot \ln(3) \approx 1.0986 \cdot RC$$
+
+Rounded for engineering use:
+
+$$\boxed{T \approx 1.1 \cdot R \cdot C}$$
+
+where $T$ is in seconds, $R$ in ohms, $C$ in farads.
+
+\subsubsection{Astable Mode (Free-Running Oscillator)}
+
+In astable configuration, pins 2 and 6 are tied together and connected to the timing capacitor. Two resistors ($R_1$ and $R_2$) create separate charge and discharge paths:
+
+\textbf{Charge cycle} (output HIGH): Capacitor charges from $\frac{1}{3}V_{CC}$ to $\frac{2}{3}V_{CC}$ through $R_1 + R_2$:
+
+$$T_{HIGH} = (R_1 + R_2) \cdot C \cdot \ln(2) \approx 0.693(R_1 + R_2)C$$
+
+\textbf{Discharge cycle} (output LOW): Capacitor discharges from $\frac{2}{3}V_{CC}$ to $\frac{1}{3}V_{CC}$ through $R_2$ only (via pin 7):
+
+$$T_{LOW} = R_2 \cdot C \cdot \ln(2) \approx 0.693 \cdot R_2 \cdot C$$
+
+\textbf{Total period and frequency:}
+
+$$T = T_{HIGH} + T_{LOW} = 0.693(R_1 + 2R_2)C$$
+
+$$\boxed{f = \frac{1.44}{(R_1 + 2R_2) \cdot C}}$$
+
+\textbf{Duty cycle:}
+
+$$D = \frac{T_{HIGH}}{T} = \frac{R_1 + R_2}{R_1 + 2R_2}$$
+
+Note: Because $R_1 > 0$, the standard astable circuit always produces a duty cycle $> 50\%$. To achieve duty cycles below 50\%, a diode-steered configuration is used where separate diodes create independent charge and discharge paths through different resistor branches.
+
+\subsubsection{Bistable Mode (Flip-Flop)}
+
+In bistable configuration, no timing capacitor is used. The trigger and threshold inputs are controlled by external switches or logic signals. The output latches HIGH when triggered and remains HIGH until the reset or threshold input forces it LOW. This mode is useful for switch debouncing, latching circuits, and simple memory elements.
+
+\subsubsection{The ln(2) and ln(3) Constants}
+
+The constants 0.693 and 1.1 that appear throughout 555 timing equations are not arbitrary---they derive directly from the natural logarithm evaluated at the voltage divider's threshold ratios:
+
+\begin{itemize}[leftmargin=2em]
+  \item $\ln(3) \approx 1.0986 \approx 1.1$ --- the time constant multiplier for charging from 0 to $\frac{2}{3}V_{CC}$ (monostable)
+  \item $\ln(2) \approx 0.6931 \approx 0.693$ --- the time constant multiplier for charging/discharging between $\frac{1}{3}V_{CC}$ and $\frac{2}{3}V_{CC}$ (astable)
+\end{itemize}
+
+These derive from the exponential RC charging equation $V(t) = V_{final}(1 - e^{-t/\tau})$ evaluated at the 555's fixed voltage thresholds, making the timing fundamentally supply-voltage-independent (to within approximately 0.1\% over the operating range).
+
+(Sources: DigiKey 555 Timer Calculator documentation; All About Circuits 555 Astable Calculator; multiple university-level references)
+
+\subsection{M4 Reference: Applications \& Circuit Design}
+
+\subsubsection{PWM Generation for Motor Control}
+
+The 555 in astable mode with diode-steered duty cycle control generates a PWM signal suitable for DC motor speed regulation. A potentiometer adjusts the duty cycle from near 0\% to near 100\%, varying the average voltage delivered to the motor. Typical implementations use an IRFZ44N N-channel MOSFET or TIP122 Darlington transistor as the power switching element, with a 1N5819 Schottky flyback diode across the motor for inductive spike protection.
+
+Design parameters for a typical PWM motor controller:
+\begin{itemize}[leftmargin=2em]
+  \item Supply: 9--12\,V DC
+  \item PWM frequency: 15--20\,kHz (above audible range)
+  \item Timing components: $R_1 \approx 1$\,k$\Omega$, $C \approx 0.01$--$0.1\,\mu$F, potentiometer 10--100\,k$\Omega$
+  \item Steering diodes: 1N4148 (fast switching)
+  \item Bypass capacitor: 0.1\,$\mu$F ceramic across $V_{CC}$ to GND, placed close to IC
+\end{itemize}
+
+\subsubsection{LED Dimming}
+
+Identical PWM principle as motor control. The human eye integrates the fast switching, perceiving brightness proportional to duty cycle. For direct LED drive from pin 3, the 555's 200\,mA output capability is sufficient for individual LEDs with appropriate series resistance. For LED strips or arrays, a MOSFET driver stage is required.
+
+\subsubsection{Precision Time Delay}
+
+Monostable mode with edge-triggered input provides clean, debounced single-shot pulses. A pushbutton triggers the timer; the output remains HIGH for a duration set by the RC time constant. Applications include relay activation delays, sequential timing in industrial controls, and camera intervalometer circuits.
+
+\subsubsection{Tone Generation and Alarms}
+
+Astable mode with output driving a piezoelectric buzzer or speaker produces audible tones. Frequency is set by $R_1$, $R_2$, and $C$ values per the astable equation. Variable resistors enable siren-like frequency sweeps. Wailing siren circuits use two 555s: one as a low-frequency modulator driving the control voltage pin of a second 555 configured as an audio-frequency oscillator.
+
+\subsubsection{Design Best Practices}
+
+\begin{itemize}[leftmargin=2em]
+  \item Always place a 0.01--0.1\,$\mu$F bypass capacitor between $V_{CC}$ (pin 8) and GND (pin 1), as close to the IC as physically possible
+  \item Bypass control voltage pin (pin 5) to ground with 10\,nF when not used externally
+  \item Tie reset pin (pin 4) to $V_{CC}$ unless active reset functionality is required
+  \item For timing accuracy better than 5\%, use metal-film resistors (1\% tolerance) and C0G/NP0 ceramic or polypropylene capacitors
+  \item Avoid resistor values above 1\,M$\Omega$ with bipolar 555 (input bias current causes timing drift); CMOS variants tolerate higher impedances due to 20\,pA input current
+  \item Ground connections should converge at a single point near the IC to minimize timing jitter from ground-loop noise
+\end{itemize}
+
+(Sources: TI application notes; multiple professional engineering tutorials; Wevolver engineering reference)
+
+\subsection{M5 Reference: Modern Variants \& CMOS Evolution}
+
+\subsubsection{Variant Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{NE555} & \tableheader{TLC555} & \tableheader{LMC555} & \tableheader{ICM7555} \\
+\midrule
+Technology & Bipolar & CMOS & CMOS & CMOS \\
+$V_{CC}$ Range & 4.5--16\,V & 2--15\,V & 1.5--15\,V & 2--18\,V \\
+$I_Q$ (typ.) & $\sim$3--10\,mA & $\sim$600\,$\mu$A & $\sim$100\,$\mu$A & $\sim$60\,$\mu$A \\
+Output (sink) & 200\,mA & 100\,mA & 100\,mA & 100\,mA \\
+Output (source) & 200\,mA & 10\,mA & 10\,mA & 100\,mA \\
+Max Freq. & $\sim$500\,kHz & 2.1\,MHz & 3\,MHz & 1\,MHz \\
+Input Current & $\sim$0.5\,$\mu$A & $\sim$5\,pA & $\sim$20\,pA & $\sim$20\,pA \\
+Temp. Stability & 50\,ppm/$^{\circ}$C & 30\,ppm/$^{\circ}$C & --- & 50\,ppm/$^{\circ}$C \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Trade-Offs}
+
+The bipolar NE555 remains preferable when high output drive current (200\,mA symmetrical source/sink) is needed, such as directly driving relays, LEDs, or speakers. CMOS variants are essential for battery-powered applications due to orders-of-magnitude lower quiescent current, and for high-frequency applications where the bipolar version cannot operate stably above $\sim$500\,kHz. However, CMOS variants have significantly weaker sourcing capability ($\sim$10\,mA) and may require external buffering for loads that the bipolar version can drive directly.
+
+\subsubsection{Derivative Packages}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Variant} & \tableheader{Package} & \tableheader{Description} \\
+\midrule
+555 & 8-pin DIP/SOIC & Single timer (standard) \\
+556 & 14-pin DIP & Dual timer: two complete 555s sharing $V_{CC}$ and GND \\
+558 & 16-pin DIP & Quad timer: four reduced-functionality timers, edge-triggered, internally tied reset/control pins \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Corporate Lineage}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Original Mfg.} & \tableheader{Acquisition Path} & \tableheader{Current} \\
+\midrule
+Signetics & $\rightarrow$ Philips (1975) $\rightarrow$ NXP (2006) & NXP \\
+National Semi & $\rightarrow$ Texas Instruments (2011) & TI \\
+Intersil & $\rightarrow$ Renesas Electronics (2017) & Renesas \\
+Fairchild & $\rightarrow$ ON Semiconductor (2016) & onsemi \\
+Micrel & $\rightarrow$ Microchip Technology (2015) & Microchip \\
+Zetex & $\rightarrow$ Diodes Incorporated (2008) & Diodes Inc. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+(Sources: Wikipedia 555 timer IC derivatives table; Renesas ICM7555 datasheet; TI TLC555/LMC555 datasheets; IEEE Spectrum)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Guidance} & \tableheader{Boundary} \\
+\midrule
+Electrical Safety & All circuits presented use low-voltage DC ($\leq$15\,V). Mains voltage applications must include isolation transformers and are explicitly out of scope & ABSOLUTE \\
+Component Ratings & All designs must respect maximum ratings from manufacturer datasheets; exceeding $V_{CC}$ or output current limits can cause device destruction & GATE \\
+Thermal Management & Bipolar 555 generates heat at high duty cycles; adequate PCB copper and ventilation required for sustained high-current operation & ANNOTATE \\
+Educational Context & Document assumes learner context; safety warnings for first-time builders regarding capacitor polarity, power supply connection, and ESD precautions & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Manufacturer Datasheets \& Application Notes}
+
+\begin{itemize}[leftmargin=2em]
+  \item Texas Instruments, ``LM555 Timer'' datasheet (SNAS548D)
+  \item Texas Instruments, ``TLC555 LinCMOS Timer'' datasheet (SLFS022)
+  \item Texas Instruments, ``LMC555 CMOS Timer'' datasheet (SNAS556)
+  \item Renesas Electronics, ``ICM7555/ICM7556'' datasheet (FN2867)
+  \item NXP Semiconductors, ``NE555/SA555/NA555'' datasheet
+\end{itemize}
+
+\subsubsection{Professional \& IEEE Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item IEEE Spectrum, ``Chip Hall of Fame: Signetics NE555'' (spectrum.ieee.org)
+  \item Electronic Design, ``The 555 Timer Was Just The Beginning For Hans Camenzind'' --- Peter Camenzind, Nov. 28, 2012
+  \item EDN, ``555 Timer Inventor Hans Camenzind Remembered'' --- Aug. 16, 2012
+  \item Semiconductor Museum, Oral History Interview with Hans Camenzind (semiconductormuseum.com)
+\end{itemize}
+
+\subsubsection{Educational \& Professional Engineering References}
+
+\begin{itemize}[leftmargin=2em]
+  \item DigiKey Electronics, ``555 Timer Calculator'' (digikey.com)
+  \item All About Circuits, ``555 Timer Astable Oscillator Circuit'' (allaboutcircuits.com)
+  \item Jameco Electronics, ``555 Timer Tutorial'' (jameco.com)
+  \item Ken Shirriff / righto.com, ``Reverse Engineering the Popular 555 Timer Chip (CMOS Version)''
+  \item Hans Camenzind, \textit{Designing Analog Chips} (self-published)
+  \item Hans Camenzind, \textit{Much Ado About Almost Nothing} (2007)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality educational reference on the 555 timer IC covering its historical origins, internal architecture, mathematical timing theory, practical applications, and modern CMOS evolution. The deliverable must be self-contained, suitable for integration into the GSD Learn Kung Fu electronics curriculum, and faithful to manufacturer datasheets and professional engineering sources.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+   WAVE 0          WAVE 1             WAVE 2          WAVE 3
+  Foundation    Parallel Research     Synthesis     Publication
+  ──────────   ──────────────────   ───────────   ────────────
+  [Schemas]    Track A:             [Cross-mod    [Final doc
+   [Source     M1: History          integration]   assembly]
+    Index]     M2: Architecture     [Consistency  [Verification
+               M5: Variants          audit]        matrix]
+               ─────────────────    [Educational  [Index page]
+               Track B:              flow check]
+               M3: Mathematics
+               M4: Applications
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, terminology glossary, symbol conventions
+  \item \textbf{Research Layer} --- Five parallel/sequential module surveys producing structured content
+  \item \textbf{Synthesis Layer} --- Cross-module integration, consistency validation, educational flow sequencing
+  \item \textbf{Publication Layer} --- Final document assembly, verification matrix completion, index page generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+D1 & Historical Narrative & Covers Camenzind bio, design timeline, naming, market impact with sources & M1 spec \\
+D2 & Architecture Reference & All 6 blocks, 8 pins, signal flow documented & M2 spec \\
+D3 & Mathematical Reference & 3 mode equations derived, not just stated & M3 spec \\
+D4 & Application Portfolio & $\geq$4 circuits with component selection rationale & M4 spec \\
+D5 & Variant Comparison & $\geq$5 models, bipolar + CMOS, tabulated specs & M5 spec \\
+D6 & Integrated Document & All modules synthesized, cross-referenced, bibliography complete & Synthesis spec \\
+D7 & Index Page & HTML with download links, usage instructions & Publication spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schemas \& Index & None & Haiku & 3,000 \\
+M1: History & W0 & Sonnet & 6,000 \\
+M2: Architecture & W0 & Opus & 10,000 \\
+M3: Mathematics & W0 & Opus & 10,000 \\
+M4: Applications & W0 & Sonnet & 8,000 \\
+M5: Variants & W0 & Sonnet & 6,000 \\
+W2: Synthesis & M1--M5 & Opus & 8,000 \\
+W3: Publication & W2 & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Justification} \\
+\midrule
+Opus & M2, M3, Synthesis ($\sim$30\%) & Architecture analysis and mathematical derivations require deep reasoning; synthesis demands cross-module judgment \\
+Sonnet & M1, M4, M5, Publication ($\sim$60\%) & Structured content assembly, factual compilation, and document formatting are well-suited to Sonnet's strengths \\
+Haiku & W0 Foundation ($\sim$10\%) & Schema generation and source indexing are scaffolding tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Execution} & \tableheader{Est. Tokens} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & 3,000 & 1 \\
+1 & Research (A+B) & Parallel & 40,000 & 4 \\
+2 & Synthesis & Sequential & 8,000 & 1 \\
+3 & Publication & Sequential & 5,000 & 1 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total}} & \textbf{56,000} & \textbf{7--8} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Schema generation & Shared JSON schemas for pin specs, timing equations, variant data & Haiku & 1,500 \\
+Source index & Categorized bibliography with quality ratings & Haiku & 1,000 \\
+Glossary & Standard terminology and symbol definitions & Haiku & 500 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1: History survey & Narrative with timeline, biographical data, market statistics & Sonnet & 6,000 \\
+M2: Architecture analysis & Block diagrams, pin tables, signal flow description & Opus & 10,000 \\
+M5: Variant comparison & Comparative tables, corporate lineage, trade-off analysis & Sonnet & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M3: Mathematics & Equation derivations, mode analysis, constant explanations & Opus & 10,000 \\
+M4: Applications & Circuit designs, component selection guides, best practices & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Cross-module integration & Unified terminology, consistent pin references across all modules & Opus & 3,000 \\
+Educational flow audit & Verify progressive complexity: history $\rightarrow$ theory $\rightarrow$ math $\rightarrow$ practice & Opus & 2,500 \\
+Consistency check & No contradictions in specs, numbers, or naming between modules & Opus & 2,500 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication \& Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Document assembly & Final integrated LaTeX document, three-pass compile & Sonnet & 2,000 \\
+Verification matrix & All 12 criteria mapped to test results & Sonnet & 1,500 \\
+Index page & HTML with file cards, usage instructions & Sonnet & 1,500 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 foundation schemas cached for all Wave 1 tasks (5-minute TTL window)
+  \item Track A and Track B execute within the same session to share cached schemas
+  \item M2 (Architecture) output cached for M3 (Mathematics) to ensure consistent terminology
+  \item Synthesis wave loads all five module outputs; largest single-context operation
+  \item Publication wave operates on synthesis output only; minimal context required
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Tasks} & \tableheader{Est. Tokens} & \tableheader{\% Total} \\
+\midrule
+Opus & M2, M3, Synthesis & 28,000 & 50\% \\
+Sonnet & M1, M4, M5, W3 & 25,000 & 45\% \\
+Haiku & W0 Foundation & 3,000 & 5\% \\
+\midrule
+\multicolumn{2}{l}{\textbf{Grand Total}} & \textbf{56,000} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Note: Opus allocation at 50\% exceeds the standard 30\% guideline due to the mathematical derivation depth required by M3 and the cross-module judgment demands of synthesis. This is appropriate for a technically dense educational mission.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+                    ┌─────────┐
+                    │  W0:    │
+                    │ Found.  │
+                    │ (Haiku) │
+                    └────┬────┘
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+        ┌──────────┐ ┌────────┐ ┌──────────┐
+        │ Track A  │ │        │ │ Track B  │
+        │ M1(Son)  │ │        │ │ M3(Opus) │
+        │ M2(Opus) │ │        │ │ M4(Son)  │
+        │ M5(Son)  │ │        │ │          │
+        └─────┬────┘ │        │ └────┬─────┘
+              │       │        │      │
+              └───────┴───┬────┴──────┘
+                          ▼
+                    ┌─────────┐
+                    │  W2:    │
+                    │ Synth.  │
+                    │ (Opus)  │
+                    └────┬────┘
+                         │
+                         ▼
+                    ┌─────────┐
+                    │  W3:    │
+                    │ Publish │
+                    │ (Son.)  │
+                    └─────────┘
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\midrule
+\multicolumn{1}{l}{\textbf{Total}} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to manufacturer datasheets, IEEE publications, or professional engineering sources. Zero entertainment media \\
+SC-NUM & Numerical attribution & Every electrical specification (voltage, current, frequency, resistance) attributed to a specific datasheet or professional source \\
+SC-ADV & No policy advocacy & Document presents technical information without advocating for or against specific manufacturers, suppliers, or design philosophies \\
+SC-SAF & Electrical safety & All presented circuits operate at $\leq$15\,V DC; mains-voltage applications explicitly excluded with safety note \\
+SC-ACC & Mathematical accuracy & All derived equations verified against published timing calculator results (DigiKey, All About Circuits) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Camenzind biography & Biographical section covers birth/death dates, education, Signetics role, InterDesign founding, and career statistics \\
+CF-02 & Design timeline & Timeline includes $\geq$8 dated events from 1968 through 2017 \\
+CF-03 & Naming origin & Naming section cites oral history source; addresses and corrects the ``three 5k resistors'' myth \\
+CF-04 & Block diagram completeness & All 6 functional blocks identified with correct input/output relationships \\
+CF-05 & Pin documentation & All 8 pins documented with electrical function and typical connection guidance \\
+CF-06 & Signal flow & Trigger-set and threshold-reset pathways explicitly traced through comparators and flip-flop \\
+CF-07 & Monostable derivation & $T = 1.1RC$ derived from $V_C(t) = V_{CC}(1 - e^{-t/RC})$ with $\ln(3)$ shown explicitly \\
+CF-08 & Astable derivation & Frequency equation derived with separate high-time and low-time components \\
+CF-09 & Duty cycle analysis & Standard $>$50\% limitation explained; diode-steered solution described \\
+CF-10 & Bistable documentation & Bistable mode operation and applications described \\
+CF-11 & PWM circuit & Motor control PWM circuit with component values and MOSFET/transistor driver \\
+CF-12 & Application diversity & $\geq$4 distinct application categories documented \\
+CF-13 & Variant table & $\geq$5 models compared across $\geq$6 parameters \\
+CF-14 & Corporate lineage & Manufacturer acquisition chain documented for $\geq$4 original companies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Architecture $\rightarrow$ Math & Pin names in M2 match variable names in M3 equations (pin 6 = threshold = $\frac{2}{3}V_{CC}$) \\
+IN-02 & Math $\rightarrow$ Applications & Component values in M4 circuits produce frequencies/delays consistent with M3 formulas \\
+IN-03 & Architecture $\rightarrow$ Variants & Functional blocks described in M2 appear consistently in M5 variant comparisons \\
+IN-04 & History $\rightarrow$ Variants & Timeline events in M1 align with variant release dates in M5 \\
+IN-05 & Self-containment & No undefined terms, acronyms, or IC part numbers used without first introduction \\
+IN-06 & Educational progression & Content flows from history through theory to practice without requiring reader to skip ahead \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Extreme values & Document notes behavior at boundary conditions (minimum $R$, maximum $C$, temperature extremes) \\
+EC-02 & CMOS incompatibilities & Differences between bipolar and CMOS 555 that affect circuit interchangeability are flagged \\
+EC-03 & Data gap acknowledgment & Areas where manufacturer datasheets disagree or data is unavailable are noted \\
+EC-04 & Temporal currency & Primary sources published within last 10 years where available; older sources justified \\
+EC-05 & Common misconceptions & At least the naming myth addressed; other common errors identified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Historical narrative completeness & CF-01, CF-02, CF-03 & Pending \\
+2 & Six functional blocks documented & CF-04, CF-06 & Pending \\
+3 & Eight pins documented & CF-05 & Pending \\
+4 & Monostable equation derived & CF-07, SC-ACC & Pending \\
+5 & Astable equation derived & CF-08, SC-ACC & Pending \\
+6 & Duty cycle analysis & CF-09 & Pending \\
+7 & $\geq$4 application circuits & CF-11, CF-12 & Pending \\
+8 & $\geq$5 variant comparison & CF-13, CF-14 & Pending \\
+9 & Numerical attribution & SC-NUM & Pending \\
+10 & Cross-module consistency & IN-01, IN-02, IN-03, IN-04 & Pending \\
+11 & Educational progression & IN-05, IN-06 & Pending \\
+12 & Self-contained document & IN-05, EC-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source validation; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1, M2, M5 document production \\
+EXEC-B & Executor (Track B) & M3, M4 document production \\
+CRAFT-ARCH & Architecture Specialist & Internal IC architecture analysis (M2) \\
+CRAFT-MATH & Mathematics Specialist & Timing equation derivations (M3) \\
+VERIFY & Verification & Source validation; equation checking; cross-ref audit \\
+INTEG & Integration Agent & Cross-module consistency; educational flow \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total Modules & 5 \\
+Activation Profile & Squadron (12 roles) \\
+Parallel Tracks & 2 (Track A: M1/M2/M5, Track B: M3/M4) \\
+Execution Waves & 4 (W0 Foundation, W1 Research, W2 Synthesis, W3 Publication) \\
+Estimated Token Budget & 56,000 \\
+Estimated Context Windows & 7--8 \\
+Estimated Sessions & 3 \\
+Model Split & Opus 50\% / Sonnet 45\% / Haiku 5\% \\
+Test Count & 30 (5 safety + 14 core + 6 integration + 5 edge) \\
+Success Criteria & 12 \\
+Deliverables & 7 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{quotebox}
+\textit{``Nine out of ten of its applications were in areas and ways I had never contemplated.''} --- Hans Camenzind, reflecting on the 555 timer (1997)
+
+\vspace{0.5em}
+
+The best architectures do not predict their own applications. They provide the building blocks---simple, principled, faithful---and trust the spaces between to do the rest. The 555 timer, the Amiga chipset, the GSD ecosystem: different scales, same principle. Leverage through elegance. Complexity through composition. A billion units a year, from 25 transistors and a good idea.
+\end{quotebox}
+
+\end{document}

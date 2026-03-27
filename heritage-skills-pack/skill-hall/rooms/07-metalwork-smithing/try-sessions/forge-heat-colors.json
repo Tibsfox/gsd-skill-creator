@@ -1,0 +1,57 @@
+{
+  "id": "smithing-07-heat-colors-beginner",
+  "title": "Reading Forge Heat Colors: The Blacksmith's Temperature Gauge",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn to read steel temperature from heat color -- the blacksmith's primary tool for knowing when metal is ready to work, heat treat, or fire weld. Understand the temperature ranges associated with each color and what operations are appropriate at each stage.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "What is heat color? When steel is heated, it emits visible light as its temperature rises -- progressing from invisible infrared through red, orange, yellow, and white. A blacksmith reads this color to know the metal's temperature without a thermometer. This is not guesswork -- the color-temperature relationship for carbon steel is consistent and learnable. Write down the color sequence you would expect from room temperature to forge welding temperature.",
+      "safetyNote": "Fire/structural gate: this session covers heat color reading. If you are working at an actual forge, verify gate rules have been met: workspace clear of combustibles, quench bucket filled, leather protective equipment on, fire extinguisher accessible. If studying from reference only (recommended for first session), no physical gates apply.",
+      "culturalContext": "Heat color reading is one of the core skills of the Appalachian mountain smith tradition. Before pyrometers and digital temperature gauges, the blacksmith's ability to read heat color accurately determined whether a piece would be successfully forged, heat-treated, or ruined. The Foxfire volumes document smiths who could estimate temperature to within 50°F by color alone after years of practice.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Black heat (room temperature to ~400°F): the metal shows no visible color. It is below any useful forging temperature. Important: black heat metal LOOKS IDENTICAL to cold metal. The blacksmith's rule is 'all metal near the forge is hot until proven otherwise.' Test any metal piece near the forge by touching it briefly to a piece of scrap wood before picking it up -- hot metal scorches wood instantly.",
+      "safetyNote": "Fire gate: black heat steel can cause burns. A piece that was pulled from the forge 5 minutes ago and cooled back to black heat is still above the pain threshold for skin contact. Never pick up forge metal without the 'all metal is hot' assumption.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Faint red / dark red (~900-1100°F): the metal begins to show visible color in low light or dim conditions. Not forgeable for most steels -- this is below the plasticity range. Good for bend operations on thin stock. Useful temperature range for: annealing thin sheet, releasing locked parts, some case hardening.",
+      "safetyNote": "Fire gate: faint red heat steel burns skin on contact.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Cherry red (~1200-1500°F): the standard forging range for most carbon steels. Metal is plastic enough to move under hammer blows but has not lost its grain structure. A cherry red heat gives you 30-60 seconds of working time before the metal cools below working temperature. For: drawing out (lengthening), bending, upsetting (shortening and thickening).",
+      "safetyNote": "Fire gate: cherry red heat produces immediate severe burns. Sparks from hammer blows carry hot scale -- wear leather apron and eye protection.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Orange (~1600-1800°F): upper forging range. Metal moves more freely under the hammer. Punching and drifting holes is easier at orange heat. Fire welding begins to become possible for wrought iron at high orange. Carbon steel at this temperature is at or approaching the temperature where the carbon in the steel begins to migrate -- don't hold at this heat longer than necessary.",
+      "safetyNote": "Fire gate: orange heat steel is a significant fire hazard. Scale knocked off during hammer work at orange heat can travel 6-10 feet and ignite combustibles. Clear the work area of combustibles at least 6 feet in all directions before working at orange heat or above.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 6,
+      "instruction": "Yellow / yellow-white (~1900-2100°F): fire welding range for steel. The surface of the metal takes on a slick, 'wet' appearance and sparks (tiny molten metal droplets) begin to fly. This is the hottest working temperature for most blacksmith work. Exceeding this temperature burns the steel -- the grain structure degrades and the piece must be discarded or reforged.",
+      "safetyNote": "Fire gate: yellow to white heat steel is the highest hazard level in forge work. Flying sparks from fire welding or hammer work at this temperature can embed in skin and ignite combustibles at significant distances. Full protective equipment (leather apron, face shield, leather footwear) is mandatory. Never leave yellow-hot metal unattended.",
+      "sumoMapping": "MetalworkingProcess"
+    },
+    {
+      "order": 7,
+      "instruction": "Heat treatment colors: for knife heat treatment, you need to recognize two specific colors. (1) Austenitizing temperature for most tool steel: bright orange to low yellow (approximately 1475-1525°F for 1084 steel -- confirm for your specific steel). (2) Temper color after quenching: pale yellow to straw to blue, visible on polished steel surface. Straw (~430°F) is typically the target for blades. Write down the austenitizing temperature for 1084 high-carbon steel and the temper color target for a kitchen knife blade.",
+      "safetyNote": "Quench gate: oil quenching at correct temperature. Quench the blade at austenitizing temperature (bright orange to low yellow). Pre-heat your quench oil to 100-130°F to reduce the quench severity and minimize warping. Have the oil container full and stable before you take the heat. Quench vertical, edge-first, and maintain the blade's straight alignment as it enters the oil.",
+      "sumoMapping": "MetalworkingProcess"
+    }
+  ]
+}

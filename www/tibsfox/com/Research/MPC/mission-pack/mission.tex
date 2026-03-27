@@ -1,0 +1,1054 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Technology/Hardware ===
+\definecolor{primary}{HTML}{263238}       % Steel blue - sections
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue - subsections
+\definecolor{tertiary}{HTML}{37474F}      % Graphite - subsubsections
+\definecolor{accent}{HTML}{00838F}        % Teal accent - pipeline arrows, silicon
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light steel
+\definecolor{lightsecondary}{HTML}{E3F2FD}% Light electric
+\definecolor{lighttertiary}{HTML}{ECEFF1} % Light graphite
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules
+\definecolor{subtlegray}{HTML}{757575}    % Footer text
+\definecolor{darktext}{HTML}{212121}      % Body text
+\definecolor{silicongreen}{HTML}{2E7D32}  % For silicon/hardware accents
+\definecolor{copperlist}{HTML}{FF6F00}    % Copper list orange (Amiga reference)
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD Math Co-Processor \& Vector Engine}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={GSD Math Co-Processor and Vector Engine -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\color{darktext}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The GSD Math\\[0.3em]Co-Processor \& Vector Engine}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{GPU-Accelerated Reasoning for Local AI Inference}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{From the 68881 FPU to CUDA Tensor Cores:\\The Amiga Principle Made Silicon}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 7, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron~~|~~Estimated: 18 context windows across 4 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Hardware Reference: NVIDIA RTX 4060 Ti 8GB / 64GB System RAM}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The GSD Math Co-Processor \& Vector Engine --- Vision Guide}
+
+\metafield{Date:}{March 7, 2026}
+\metafield{Status:}{Deep Research / Vision}
+\metafield{Depends on:}{gsd-silicon-layer-spec.md, gsd-chipset-architecture-vision.md, gsd-instruction-set-architecture-vision.md}
+\metafield{Hardware Reference:}{NVIDIA RTX 4060 Ti 8GB VRAM / 64GB System RAM}
+\metafield{Context:}{Extends the Silicon Layer with dedicated mathematical acceleration --- the modern 68881}
+
+\subsection{Vision}
+
+In 1984, Motorola released the 68881 floating-point coprocessor. It had eight 80-bit data registers, supported seven numeric representation modes, and could execute trigonometric, exponential, and algebraic operations in dedicated silicon while the 68000 CPU continued processing the next instruction. The Amiga 3000 shipped with a socket for this chip. When present, mathematical operations that would have taken hundreds of CPU cycles completed in a handful of clock ticks. When absent, the system still worked --- the operating system trapped the F-line instructions and emulated them in software. The architecture was transparent, documented, and gracefully degradable.
+
+The GSD Silicon Layer already establishes the GPU as a coprocessor for AI inference --- LoRA adapters running on the RTX 4060 Ti handle routine pattern-matching while Claude (the CPU) focuses on novel reasoning. But there is an entire class of operations that neither the LLM nor the LoRA adapters are optimized for: \textit{deterministic mathematical computation}. Matrix operations, Fourier transforms, gradient calculations, statistical analysis, geometric transformations, symbolic evaluation --- these are operations where neural inference is both slower and less accurate than direct computation. An LLM calculating a 12×12 matrix determinant is like a 68000 computing sine by iterating a Taylor series in software: technically possible, practically wasteful, and provably inferior to dedicated hardware.
+
+The Math Co-Processor and Vector Engine is the 68881 of the GSD ecosystem. It provides Claude and local inference models with a set of GPU-accelerated mathematical primitives --- CUDA kernels exposed through a clean API --- that execute deterministic computations at hardware speed. When Claude needs to verify a gradient calculation, transform a coordinate system, decompose a signal, or solve a system of equations, it dispatches to the Math Co-Processor rather than reasoning about the arithmetic token by token. The GPU, which sits largely idle during LLM text generation (using only a fraction of its CUDA cores for inference), becomes a parallel math engine available on demand.
+
+This is the Amiga Principle made literal: architectural leverage through specialized execution paths, not raw power applied uniformly. The CPU (Claude) thinks. The custom chips (Math Co-Processor) compute. The results flow back through the bus (the GSD ISA) and into the reasoning stream. The system gets smarter not because the model gets bigger, but because the architecture gets more efficient at routing work to the right substrate.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{LLMs are poor calculators.} Neural networks approximate --- they do not compute. Large language models routinely make arithmetic errors on operations that dedicated hardware executes flawlessly. Every token spent ``reasoning'' about multiplication is a token not spent on actual reasoning.
+
+\item \textbf{GPU utilization during inference is asymmetric.} During LLM text generation, the GPU's thousands of CUDA cores are largely underutilized --- inference is memory-bandwidth-bound, not compute-bound. The RTX 4060 Ti has 4,352 CUDA cores and 136 Tensor Cores sitting partially idle while the model generates tokens one at a time.
+
+\item \textbf{Mathematical verification requires ground truth.} When Claude generates code involving linear algebra, signal processing, physics simulation, or statistical analysis, there is currently no local mechanism to \textit{verify} the mathematical correctness of generated outputs. The Math Co-Processor provides deterministic ground truth against which LLM outputs can be checked.
+
+\item \textbf{The skill-creator's mathematical foundations lack execution.} The ``Math Department'' of skill-creator --- seeded by \textit{The Space Between} --- defines mathematical concepts across multiple language panels (C++ cmath, Java Math, Python math module). But these are descriptive, not executable. The Math Co-Processor makes them runnable: the Rosetta Panel for a trigonometric identity can be \textit{computed} on the GPU and its result fed back into the learning loop.
+
+\item \textbf{Compiled compute (Level 4) needs a math substrate.} The progressive capability pipeline (Conversational $\rightarrow$ Skill-Mediated $\rightarrow$ Local Adapters $\rightarrow$ Compiled Compute) culminates in deterministic code running at native hardware speed. The Math Co-Processor is the execution engine for Level 4 mathematical operations --- the equivalent of copper list instructions for computation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Model:} The GPU is not one coprocessor --- it is a \textit{chipset} of mathematical engines, each specialized for a class of computation, exposed to Claude through the GSD ISA as callable ``F-line instructions'' that execute at CUDA speed and return deterministic results.
+\end{quotebox}
+
+Just as the Amiga's custom chipset contained Agnus (DMA/memory), Denise (display), and Paula (audio/I/O) --- each a specialized engine on the same bus --- the Math Co-Processor contains multiple virtual ``chips'' implemented as CUDA kernel libraries:
+
+\begin{asciibox}
+THE GSD MATH CO-PROCESSOR CHIPSET
+
+  +------------------------------------------------------------------+
+  |                     SYSTEM BUS (GSD ISA)                         |
+  |   +----------------------------------------------------------+  |
+  |   |  F-line instruction dispatch                              |  |
+  |   |  JSON-RPC / MCP tool call interface                       |  |
+  |   |  Result serialization + confidence annotation             |  |
+  |   +----------------------------------------------------------+  |
+  |        |           |           |           |          |          |
+  |   +----+----+ +----+----+ +----+----+ +----+---+ +---+----+    |
+  |   | ALGEBRUS | | FOURIER | | VECTORA | | STATOS | | SYMBEX |   |
+  |   | (Linear  | | (Signal | | (Vector | | (Stats | | (Symb. |   |
+  |   |  Algebra)| |  Proc.) | |  Calc.) | | Engine)| |  Eval) |   |
+  |   |          | |         | |         | |        | |        |    |
+  |   | cuBLAS   | | cuFFT   | | Custom  | | Custom | | Expr.  |   |
+  |   | cuSOLVER | | cuFFTDx | | CUDA    | | CUDA   | | Tree   |   |
+  |   | cuSPARSE | |         | | Kernels | | Kernels| | Engine |   |
+  |   +----------+ +---------+ +---------+ +--------+ +--------+   |
+  |        |           |           |           |          |          |
+  |   +----+-----------+-----------+-----------+----------+----+    |
+  |   |              VRAM WORKSPACE (shared)                   |    |
+  |   |   Workspace budget: 500MB-1.5GB (configurable)         |    |
+  |   |   Managed by silicon.yaml math_coprocessor section      |    |
+  |   +--------------------------------------------------------+   |
+  |        |                                                        |
+  |   +----+----------------------------------------------------+   |
+  |   |              CPU (Claude / Local Model)                  |  |
+  |   |   Dispatches F-line instructions                         |  |
+  |   |   Receives deterministic results                         |  |
+  |   |   Uses results in reasoning chain                        |  |
+  |   +----------------------------------------------------------+  |
+  +------------------------------------------------------------------+
+\end{asciibox}
+
+\subsection{The Five Math Chips}
+
+\subsubsection{ALGEBRUS --- Linear Algebra Engine}
+
+Built on NVIDIA's cuBLAS, cuSOLVER, and cuSPARSE libraries. Handles matrix multiplication (GEMM), decomposition (LU, QR, SVD, Cholesky, eigendecomposition), system solving ($Ax = b$), determinants, matrix inversion, sparse operations, and least-squares fitting. This is the workhorse chip --- matrix operations underpin everything from neural network verification to physics simulation to economic modeling.
+
+Key capability: when Claude generates code that constructs and solves a linear system, ALGEBRUS can execute the actual computation and return the numerical result for verification or direct use. The LLM reasons about \textit{what} to compute; ALGEBRUS computes it.
+
+\subsubsection{FOURIER --- Signal Processing Engine}
+
+Built on cuFFT and cuFFTDx (device extensions). Handles Fast Fourier Transforms (1D, 2D, 3D), inverse FFTs, spectral analysis, convolution, correlation, windowing functions, and power spectral density estimation. Directly supports GSD-Tracker's audio processing pipeline --- a user composing music in the tracker has real-time spectral analysis powered by the same GPU that runs their AI assistant.
+
+Key capability: fused FFT operations that execute entirely on the GPU without round-tripping through host memory. cuFFTDx allows embedding FFT computations inside custom CUDA kernels, eliminating launch overhead for small, frequent transforms.
+
+\subsubsection{VECTORA --- Vector Calculus \& Geometry Engine}
+
+Custom CUDA kernels for operations that don't map cleanly to existing libraries: gradient computation ($\nabla f$), divergence, curl, Jacobian and Hessian matrices, coordinate system transformations (Cartesian $\leftrightarrow$ polar $\leftrightarrow$ spherical), geometric intersections, distance fields, Bézier/B-spline evaluation, and easing function derivatives. This is the engine that makes GSD-Paint's transformation matrices, GSD-Animate's easing curves, and the AI Workshop's gradient descent all execute at GPU speed.
+
+Key capability: batch evaluation of mathematical functions across parameter spaces. Instead of computing $f(x)$ for one value, VECTORA computes $f(x_1), f(x_2), \ldots, f(x_n)$ in parallel across thousands of CUDA cores. This is the fundamental advantage of the GPU as a math coprocessor --- parallelism across data, not sequential precision.
+
+\subsubsection{STATOS --- Statistical Engine}
+
+Custom CUDA kernels for descriptive statistics (mean, median, variance, skewness, kurtosis), probability distributions (normal, Poisson, binomial, chi-squared), hypothesis testing, regression (linear, polynomial, logistic), Monte Carlo simulation via cuRAND, and bootstrap resampling. The cuRAND device API allows generating random numbers directly inside GPU kernels for Monte Carlo without host round-trips.
+
+Key capability: Monte Carlo simulations that would take minutes on a CPU complete in seconds. A financial model with 100,000 simulation paths, a physics system with stochastic forcing, or a reliability analysis with random failure modes --- all execute on the GPU's massive parallelism.
+
+\subsubsection{SYMBEX --- Symbolic Expression Evaluator}
+
+A compile-time expression tree engine (inspired by SymPhas 2.0's approach) that represents mathematical expressions as templated C++ structures, compiles them into optimized CUDA kernels, and evaluates them across parameter spaces. This is the most novel chip --- it bridges symbolic mathematics (the domain of computer algebra systems) with GPU execution (the domain of numerical computing).
+
+Key capability: a mathematical expression defined in the skill-creator's Math Department (e.g., the unit circle identity $\sin^2(\theta) + \cos^2(\theta) = 1$) can be compiled into a CUDA kernel that evaluates it across thousands of $\theta$ values simultaneously, producing both the numerical results and a verification of the identity's correctness across the domain. The Rosetta Panel becomes executable.
+
+\subsection{The 68881 Protocol}
+
+The interaction between Claude (CPU) and the Math Co-Processor follows the exact protocol of the Motorola 68881:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Instruction encounter:} Claude's reasoning chain encounters a mathematical operation that would benefit from hardware acceleration.
+
+\item \textbf{F-line dispatch:} The operation is dispatched to the Math Co-Processor via a tool call (MCP server or direct API). The ``F-line'' is a JSON-RPC call specifying the chip, operation, operands, and precision requirements.
+
+\item \textbf{Concurrent execution:} The Math Co-Processor begins executing on the GPU. Claude can continue reasoning about other aspects of the problem (the CPU is ``released'' to process the next instruction, exactly as the 68000 was released after dispatching to the 68881).
+
+\item \textbf{Result return:} The Math Co-Processor returns the deterministic result, annotated with precision metadata (floating-point format used, error bounds, computation time).
+
+\item \textbf{Graceful degradation:} If the GPU is unavailable or the operation is unsupported, the system falls back to CPU computation (NumPy/SciPy) --- slower but functional. This mirrors the 68000's F-line trap mechanism: if no FPU is present, the OS emulates the instruction in software.
+\end{enumerate}
+
+\begin{asciibox}
+THE 68881 PROTOCOL — DISPATCH AND RETURN
+
+  Claude (CPU)                    Math Co-Processor (GPU)
+      |                                   |
+      |  F-line: ALGEBRUS.solve(A, b)     |
+      |---------------------------------->|
+      |                                   |
+      |  [Claude continues reasoning]     | [GPU executes Ax=b
+      |  [about the next part of the      |  via cuSOLVER LU
+      |   problem]                        |  decomposition]
+      |                                   |
+      |  Result: x = [1.5, -0.3, 2.7]    |
+      |  Precision: FP64, residual 1e-15  |
+      |<----------------------------------|
+      |                                   |
+      |  [Integrates result into          |
+      |   reasoning chain]                |
+      |                                   |
+\end{asciibox}
+
+\subsection{Integration with the Silicon Layer}
+
+The Math Co-Processor extends \texttt{silicon.yaml} with a new section:
+
+\begin{asciibox}
+# silicon.yaml — Math Co-Processor Configuration
+
+math_coprocessor:
+  enabled: true
+  vram_budget_mb: 750          # Workspace allocation
+  chips:
+    algebrus:
+      enabled: true
+      backend: "cublas+cusolver"
+      max_matrix_dim: 8192     # Largest matrix dimension
+      precision: "fp64"        # fp32 | fp64 | mixed
+    fourier:
+      enabled: true
+      backend: "cufft"
+      max_fft_size: 16777216   # 2^24
+      precision: "fp32"
+    vectora:
+      enabled: true
+      backend: "custom-cuda"
+      batch_size: 65536        # Max parallel evaluations
+    statos:
+      enabled: true
+      backend: "custom-cuda+curand"
+      monte_carlo_paths: 100000
+      rng_algorithm: "philox"
+    symbex:
+      enabled: false           # Requires compilation step
+      backend: "expression-tree"
+      jit_cache_dir: ".chipset/symbex-cache/"
+
+  fallback:
+    enabled: true
+    backend: "numpy+scipy"     # CPU fallback
+    warn_on_fallback: true
+
+  mcp_server:
+    port: 8788                 # Adjacent to inference server (8787)
+    protocol: "json-rpc"
+    max_concurrent: 4          # Parallel math operations
+\end{asciibox}
+
+\subsection{VRAM Budget Coexistence}
+
+The Math Co-Processor must share the RTX 4060 Ti's 8GB VRAM with the Silicon Layer's inference workload. The allocation strategy:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{VRAM (MB)} & \tableheader{Notes} \\
+\midrule
+Base model (Q4\_K\_M 7B) & 4,500 & Resident during inference \\
+KV cache & 1,500 & Reduced from 2,000 to accommodate math \\
+Hot LoRA adapters (2--3) & 150 & Fewer hot adapters when math is active \\
+Math Co-Processor workspace & 750 & Dynamically allocated/freed per operation \\
+CUDA overhead + headroom & 1,292 & Runtime, temporary buffers \\
+\midrule
+\textbf{Total} & \textbf{8,192} & \textbf{Full VRAM budget} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Math Co-Processor workspace is \textit{transient} --- allocated when an F-line instruction arrives, freed when the result is returned. This is unlike LoRA adapters (which stay resident) or the KV cache (which grows during a session). The workspace supports the largest anticipated operation (e.g., SVD of an 8192×8192 FP64 matrix requires $\sim$512MB).
+
+When the Math Co-Processor is idle (which is most of the time --- math operations are bursts, not sustained), its VRAM budget is available for additional LoRA adapter caching or extended KV cache.
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Five math chips (ALGEBRUS, FOURIER, VECTORA, STATOS, SYMBEX)
+\item MCP server exposing chips as tool calls to Claude and local models
+\item Integration with \texttt{silicon.yaml} for VRAM budget management
+\item CPU fallback (NumPy/SciPy) when GPU is unavailable
+\item Result annotation with precision metadata and error bounds
+\item Batch operations across parameter spaces (VECTORA, STATOS)
+\item Monte Carlo simulation engine (STATOS + cuRAND)
+\item Expression tree compilation for SYMBEX (JIT to CUDA kernels)
+\item Performance benchmarking suite comparing GPU vs. CPU execution
+\item Dashboard integration showing math chip utilization
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Computer algebra systems (symbolic simplification, theorem proving) --- SYMBEX evaluates expressions, it does not simplify them
+\item Multi-GPU distribution --- single GPU only for v1.0
+\item Real-time graphics rendering --- the math chips are compute-only, not display
+\item Training --- the Math Co-Processor does not train models; it computes
+\item AMD ROCm / Intel oneAPI support --- NVIDIA CUDA only for v1.0
+\item Arbitrary precision arithmetic (beyond FP64) --- future consideration
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Correctness:} All math chip outputs match reference implementations (NumPy/SciPy) to within documented floating-point tolerances (ULP $\leq$ 4 for transcendental functions, exact for integer operations).
+
+\item \textbf{Speedup:} GPU execution of supported operations achieves $\geq$10× speedup over CPU fallback for batch sizes $\geq$1,000 elements. Individual scalar operations may not show speedup (dispatch overhead dominates).
+
+\item \textbf{VRAM discipline:} Math Co-Processor never exceeds its declared VRAM budget. Overflow triggers graceful fallback to CPU, not OOM crash.
+
+\item \textbf{Inference coexistence:} Math operations execute without disrupting concurrent LLM inference. Token generation throughput drops by $<$5\% during math chip activity.
+
+\item \textbf{Latency:} F-line dispatch-to-result latency $<$50ms for typical operations (matrix multiply up to 1024×1024, FFT up to $2^{20}$). Larger operations are I/O-dominated and scale predictably.
+
+\item \textbf{Graceful degradation:} Removing the GPU, disabling math\_coprocessor in silicon.yaml, or encountering an unsupported operation produces correct results via CPU fallback with a logged warning, never an error.
+
+\item \textbf{Discoverability:} Claude (or the local model) can query available chips and operations via the MCP server's capability endpoint, enabling dynamic dispatch based on what math hardware is available.
+
+\item \textbf{Verification loop:} Claude can dispatch a computation, receive the result, and use it as ground truth to verify its own generated code --- closing the reasoning-computation feedback loop.
+
+\item \textbf{SYMBEX compilation:} An expression defined in skill-creator's Math Department (e.g., a trigonometric identity) can be compiled into a CUDA kernel and evaluated across a parameter space in $<$200ms including JIT compilation (cached for subsequent calls).
+
+\item \textbf{Dashboard visibility:} Math chip utilization, operation counts, speedup ratios, and VRAM usage are visible in the GSD-OS dashboard as a ``Math Co-Processor'' panel alongside the existing Silicon Layer diagnostics.
+
+\item \textbf{5-minute setup:} A user with a CUDA-capable GPU can enable the Math Co-Processor with \texttt{gsd chipset math-init} and have it operational within 5 minutes (no model downloads required --- this is libraries, not weights).
+
+\item \textbf{Educational integration:} GSD-OS's Creative Suite (Paint, Tracker, Animate) can invoke math chips for real-time visualization --- transformation matrices in Paint, spectral analysis in Tracker, easing derivatives in Animate.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-silicon-layer-spec.md & Direct extension --- Math Co-Processor is a new subsystem within the Silicon Layer, sharing VRAM budget and silicon.yaml configuration \\
+gsd-chipset-architecture-vision.md & The math chips are ``instruction set extensions'' in chipset terminology --- chipsets declare which math chips they need \\
+gsd-instruction-set-architecture-vision.md & F-line instructions extend the ISA with mathematical opcodes; the 32-bit instruction word gains a math dispatch class \\
+gsd-amiga-vision-architectural-leverage.md & The Math Co-Processor is the purest expression of the Amiga Principle --- specialized silicon for specialized work \\
+gsd-amiga-creative-suite-vision.md & GSD-Paint, Tracker, and Animate consume math chip outputs for real-time creative computation \\
+gsd-mathematical-foundations-conversation.md & The mathematical progression (unit circle $\rightarrow$ vectors $\rightarrow$ calculus) defines what the chips compute \\
+unit-circle-skill-creator-synthesis.md & SYMBEX makes the unit circle synthesis executable --- skill-creator's math knowledge becomes GPU-runnable \\
+The Space Between (textbook) & The eight-layer mathematical progression seeds the chip operation libraries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The Amiga's 68881 FPU didn't make the computer faster at everything. It made it faster at \textit{the right things} --- the operations where dedicated silicon could outperform general-purpose instruction execution by orders of magnitude. The rest of the system didn't change. The CPU still ran the same code. The custom chips still handled DMA and display. But when mathematical computation was needed, the system had a specialized path that executed at hardware speed rather than software speed.
+
+The GSD Math Co-Processor follows the same principle. Claude doesn't need to be better at arithmetic --- it needs \textit{access to something that is already perfect at arithmetic}. The GPU sitting in the user's machine is that something. Four thousand CUDA cores, a hundred and thirty-six Tensor Cores, and NVIDIA's two decades of math library engineering --- all available as a coprocessor for the AI that can think but cannot count.
+
+The space between intent and execution narrows again. Not by making the model larger, but by making the architecture smarter. The 68881 would approve.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Math Co-Processor \& Vector Engine --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the technical foundations for implementing the five math chips. Each module section contains architecture details, API surface, CUDA library mappings, and performance characteristics sourced from NVIDIA documentation, peer-reviewed research, and production benchmarks.
+
+Key source organizations: NVIDIA Developer Documentation (CUDA Toolkit, Math Libraries), IEEE 754 Floating-Point Standard, arXiv (GPU kernel optimization research), the llama.cpp project (GPU inference coexistence patterns), and the SymPhas project (symbolic-to-CUDA compilation).
+
+\subsection{GPU Architecture Foundations}
+
+Modern NVIDIA GPUs contain three types of processing cores within each Streaming Multiprocessor (SM): CUDA cores for general-purpose parallel computation, Tensor Cores for matrix arithmetic acceleration, and RT cores for ray tracing. The RTX 4060 Ti (Ada Lovelace architecture, compute capability 8.9) provides 4,352 CUDA cores across 34 SMs, 136 fourth-generation Tensor Cores, and 34 RT cores.
+
+During LLM inference, GPU utilization is asymmetric. Text generation is memory-bandwidth-bound --- the bottleneck is loading model weights from VRAM, not computing with them. The CUDA cores are substantially underutilized during the decode phase (generating tokens one at a time). This creates an opportunity: the idle compute capacity can service mathematical operations without meaningfully impacting inference throughput.
+
+NVIDIA's CUDA-X ecosystem provides GPU-accelerated libraries covering the full spectrum of mathematical computation: cuBLAS for linear algebra, cuFFT for Fourier transforms, cuRAND for random number generation, cuSOLVER for direct solvers, cuSPARSE for sparse matrix operations, and the CUDA Math API for standard mathematical functions. These libraries are production-hardened, extensively optimized for each GPU architecture, and available through C/C++/Python interfaces.
+
+\subsection{ALGEBRUS Reference --- Linear Algebra}
+
+\subsubsection{cuBLAS Architecture}
+
+cuBLAS provides GPU-accelerated Basic Linear Algebra Subprograms (BLAS). The library supports three levels of operations: Level 1 (vector-vector), Level 2 (matrix-vector), and Level 3 (matrix-matrix). The critical operation for AI workloads is GEMM (GEneralized Matrix Multiplication): $D = F(\alpha \cdot A \cdot B + \beta \cdot C)$, where $A$, $B$, $C$ are matrices and $F$ is an optional epilogue function.
+
+cuBLASLt extends this with fused kernels that combine multiple operations (e.g., GEMM + bias + activation) into a single kernel launch, reducing memory round-trips. For the Math Co-Processor, cuBLASLt's epilogue fusion allows operations like ``solve linear system and apply ReLU'' in a single dispatch.
+
+Performance on RTX 4060 Ti: FP32 GEMM achieves approximately 22 TFLOPS; FP16 via Tensor Cores achieves approximately 176 TFLOPS. For mathematical verification (where FP64 precision is often required), the Ada Lovelace architecture provides 1:64 FP64 throughput relative to FP32 --- adequate for verification workloads but not sustained HPC.
+
+\subsubsection{cuSOLVER Architecture}
+
+cuSOLVER provides direct solver routines: LU factorization, QR factorization, Cholesky factorization, Bunch-Kaufman factorization, singular value decomposition (SVD), eigenvalue problems (symmetric and non-symmetric), and batched solvers for many small systems. The dense solver API covers the LAPACK-equivalent operations most commonly needed for engineering and scientific computation.
+
+Critical for the Math Co-Processor: batched solvers allow solving thousands of small linear systems in parallel --- e.g., if Claude generates a mesh with 10,000 cells each requiring a local 3×3 system solve, cuSOLVER's batched API handles all of them in a single kernel launch.
+
+\subsubsection{cuSPARSE Architecture}
+
+cuSPARSE handles operations on matrices where most entries are zero. Sparse matrix formats (CSR, CSC, COO, BSR) minimize storage and enable specialized algorithms. Sparse matrix--dense matrix multiplication (SpMM) is critical for graph algorithms, finite element methods, and network analysis --- workloads that may emerge from skill-creator's pattern analysis.
+
+\subsection{FOURIER Reference --- Signal Processing}
+
+\subsubsection{cuFFT and cuFFTDx}
+
+cuFFT implements the Cooley-Tukey FFT algorithm on the GPU, supporting 1D, 2D, and 3D transforms of complex and real-valued data. Transform sizes up to $2^{27}$ (134 million points) are supported in a single call.
+
+The breakthrough for the Math Co-Processor is cuFFTDx --- the device extension that allows FFT operations to execute \textit{inside} user kernels. Traditional cuFFT requires: (1) copy data to GPU, (2) launch FFT kernel, (3) read results back. cuFFTDx eliminates steps 1 and 3 for data that's already on the GPU --- the FFT is embedded in the computation pipeline. For the GSD-Tracker's real-time spectral analysis, this means the audio buffer is transformed in-place without ever leaving VRAM.
+
+Performance: 1D FFT of $2^{20}$ complex single-precision values completes in $<$1ms on the RTX 4060 Ti. Batch FFTs (many small transforms) achieve even higher throughput due to full SM occupancy.
+
+\subsection{VECTORA Reference --- Vector Calculus \& Geometry}
+
+\subsubsection{Custom CUDA Kernel Design}
+
+VECTORA's operations don't map to existing NVIDIA libraries --- they require custom kernels. The design follows the GPGPU programming model: each mathematical function is implemented as a CUDA kernel that operates on arrays of inputs in parallel.
+
+Gradient computation: for a scalar field $f: \mathbb{R}^n \rightarrow \mathbb{R}$ represented as a grid, the gradient $\nabla f$ at each grid point is computed via finite differences. A CUDA kernel with one thread per grid point computes all gradient values simultaneously. For a $1024^3$ grid, this means $\sim$1 billion gradient evaluations executed in parallel.
+
+Coordinate transformations: converting between Cartesian, polar, spherical, and cylindrical coordinates is embarrassingly parallel --- each point transforms independently. A batch of 1 million point transformations completes in microseconds.
+
+Bézier and B-spline evaluation: GSD-Animate's easing curves are Bézier curves. Evaluating a cubic Bézier at $N$ parameter values requires $4N$ multiplications and $3N$ additions --- perfectly suited to CUDA's SIMT (Single Instruction, Multiple Thread) execution model.
+
+\subsubsection{Kernel Generation via LLM}
+
+Recent research demonstrates that LLMs can generate optimized CUDA kernels that match or exceed human-written performance. The CUDA-LLM framework uses a Feature Search and Reinforcement (FSR) approach to iteratively refine generated kernels for correctness and performance. The KernelBench benchmark and GPU MODE community competitions have driven rapid progress in this area, with LLM-generated kernels achieving up to 179× speedup over naive implementations.
+
+For VECTORA, this creates a self-bootstrapping path: Claude can \textit{generate} the custom CUDA kernels that the Math Co-Processor will use, verify them against reference implementations, and deploy them --- the AI writes its own math hardware.
+
+\subsection{STATOS Reference --- Statistical Engine}
+
+\subsubsection{cuRAND Device API}
+
+cuRAND provides GPU-accelerated random number generation with multiple algorithms: XORWOW, MRG32K3a, MTGP32 (Mersenne Twister), Philox (counter-based, suitable for parallel streams), and Sobol (quasi-random for low-discrepancy sequences). The device API is critical: random numbers are generated \textit{inside} GPU kernels without host interaction.
+
+For Monte Carlo simulation, the pattern is: launch a kernel with $N$ threads, each thread initializes its own RNG state (offset by thread ID), generates the required random variates, performs the simulation logic, and writes results. No host-device synchronization is needed during the simulation. A Monte Carlo option pricing model with 100,000 paths and 252 time steps executes in milliseconds.
+
+\subsubsection{Statistical Reduction Kernels}
+
+Computing statistics (mean, variance, min, max, quantiles) over large datasets requires parallel reduction --- a well-studied GPU programming pattern. The key insight is that reduction is $O(\log n)$ in parallel depth: $n$ values are reduced to $n/2$ in the first step, $n/4$ in the second, and so on. On the RTX 4060 Ti, reducing 100 million values takes $<$5ms.
+
+For the Math Co-Processor, these reductions are fused with generation: a Monte Carlo simulation kernel generates paths \textit{and} accumulates the running statistics in shared memory, producing the final result without writing intermediate data to global memory.
+
+\subsection{SYMBEX Reference --- Symbolic Expression Evaluation}
+
+\subsubsection{Expression Tree Compilation}
+
+The SymPhas 2.0 project demonstrates that symbolic mathematical expressions can be compiled into optimized CUDA kernels at compile time using C++ template metaprogramming. The expression tree is represented as nested template types; the compiler generates specialized kernel code for each unique expression. This achieves performance comparable to hand-written kernels while preserving the symbolic structure.
+
+For SYMBEX, the approach is adapted to JIT (Just-In-Time) compilation: expressions are defined at runtime (e.g., by Claude or by skill-creator's Math Department), compiled into PTX (NVIDIA's virtual ISA), and cached as compiled kernels. Subsequent evaluations of the same expression skip compilation entirely.
+
+The workflow: (1) Claude or the local model defines an expression as an abstract syntax tree (AST), (2) SYMBEX translates the AST into CUDA C++ source, (3) NVRTC (NVIDIA Runtime Compilation) compiles it to PTX, (4) the kernel is loaded and executed, (5) the compiled kernel is cached to disk for future sessions.
+
+\subsubsection{Connection to The Space Between}
+
+The eight-layer mathematical progression from \textit{The Space Between} defines the operation vocabulary for SYMBEX:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Layer} & \tableheader{Domain} & \tableheader{SYMBEX Operations} \\
+\midrule
+1 & Unit Circle & $\sin$, $\cos$, $\tan$ and inverses; identity verification \\
+2 & Pythagorean & Distance, norm, magnitude; $a^2 + b^2 = c^2$ evaluation \\
+3 & Trigonometry & Fourier series composition, harmonic analysis \\
+4 & Vector Calculus & Gradient, divergence, curl, Jacobian evaluation \\
+5 & Set Theory & Membership testing, cardinality, power set enumeration \\
+6 & Category Theory & Functor application, natural transformation verification \\
+7 & Information Theory & Entropy, mutual information, KL divergence \\
+8 & L-systems & String rewriting, fractal generation, self-similar evaluation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Inference Coexistence Patterns}
+
+\subsubsection{CUDA Stream Isolation}
+
+CUDA streams provide the mechanism for math operations to execute concurrently with LLM inference without interference. The inference server (llama-server or Ollama) uses its own CUDA streams for model execution. The Math Co-Processor creates separate streams for math operations. The GPU's hardware scheduler interleaves warps from both stream sets across available SMs.
+
+Critical constraint: VRAM allocation must be coordinated. The Math Co-Processor pre-allocates its workspace at startup (declared in silicon.yaml) and manages it internally, never competing with the inference server's memory pool. If the inference server needs more VRAM (e.g., longer context), the math workspace can be reduced dynamically.
+
+\subsubsection{NEO-Style CPU Offloading}
+
+The NEO inference system demonstrates that CPU and GPU can cooperatively serve LLM inference, with attention layers offloaded to CPU when GPU memory is constrained. This pattern extends naturally: during a math-heavy burst, some inference layers can be temporarily CPU-offloaded to free GPU compute for the math operation, then restored. On the RTX 4060 Ti with 64GB system RAM, this trade-off is viable.
+
+\subsection{MCP Server Architecture}
+
+The Math Co-Processor is exposed to Claude and local models as an MCP (Model Context Protocol) server:
+
+\begin{asciibox}
+MCP SERVER: gsd-math-coprocessor
+  Port: 8788
+  Protocol: JSON-RPC over stdio (local) or SSE (remote)
+
+  Tools:
+    algebrus.gemm       — Matrix multiplication
+    algebrus.solve       — Linear system Ax=b
+    algebrus.svd         — Singular value decomposition
+    algebrus.eigen       — Eigendecomposition
+    algebrus.det         — Determinant
+    fourier.fft          — Forward FFT (1D/2D/3D)
+    fourier.ifft         — Inverse FFT
+    fourier.spectrum     — Power spectral density
+    vectora.gradient     — Gradient of scalar field
+    vectora.transform    — Coordinate transformation
+    vectora.bezier       — Bezier curve evaluation
+    vectora.batch_eval   — Batch function evaluation
+    statos.describe      — Descriptive statistics
+    statos.monte_carlo   — Monte Carlo simulation
+    statos.regression    — Regression fitting
+    statos.hypothesis    — Hypothesis testing
+    symbex.compile       — Compile expression to kernel
+    symbex.evaluate      — Evaluate compiled expression
+    symbex.verify        — Verify mathematical identity
+
+  Resources:
+    math://capabilities  — List available chips and operations
+    math://vram          — Current VRAM utilization
+    math://benchmarks    — Performance data for this GPU
+
+  Prompts:
+    verify-computation   — Check LLM math output against GPU
+    explore-parameter    — Sweep parameter space for function
+    visualize-function   — Generate evaluation data for plotting
+\end{asciibox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Mitigation} \\
+\midrule
+Numerical overflow/underflow & GATE & All operations check for infinity/NaN; results annotated with IEEE 754 exception flags \\
+VRAM exhaustion & ABSOLUTE & Hard budget limits; operation rejected if workspace insufficient; never OOM the inference server \\
+Malicious kernel injection & ABSOLUTE & SYMBEX JIT compilation sandboxed; only mathematical operations permitted; no system calls from kernels \\
+Precision misrepresentation & GATE & Every result includes the actual precision used and error bounds; never claim more precision than computed \\
+Timing side-channels & ANNOTATE & Math operations are not constant-time; not suitable for cryptographic use \\
+GPU thermal throttling & GATE & Monitor GPU temperature; reduce math throughput if approaching thermal limit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{NVIDIA Documentation}
+
+NVIDIA CUDA C++ Programming Guide --- \url{https://docs.nvidia.com/cuda/cuda-c-programming-guide/}
+
+NVIDIA CUDA-X GPU-Accelerated Libraries --- \url{https://developer.nvidia.com/gpu-accelerated-libraries}
+
+NVIDIA nvmath-python Library --- \url{https://developer.nvidia.com/nvmath-python}
+
+NVIDIA Blackwell Ultra Architecture Blog --- \url{https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era}
+
+NVIDIA Rubin Platform Architecture Blog --- \url{https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/}
+
+\subsubsection{Research Papers \& Technical References}
+
+CUDA-LLM: LLMs Can Write Efficient CUDA Kernels (arXiv 2506.09092, June 2025)
+
+SymPhas 2.0: Parallel and GPU Accelerated Symbolic Algebra Framework (arXiv 2511.10508, November 2025)
+
+NEO: Saving GPU Memory Crisis with CPU Offloading for Online LLM Inference (MLSys 2025)
+
+SwizzlePerf: Hardware-Aware LLMs for GPU Kernel Optimization (arXiv 2508.20258, August 2025)
+
+LM Studio + llama.cpp CUDA 12.8 Flash Attention Integration (NVIDIA RTX AI Garage, May 2025)
+
+Large Language Model Inference Acceleration: A Comprehensive Hardware Perspective (arXiv 2410.04466, October 2024)
+
+\subsubsection{Historical References}
+
+Motorola MC68881/MC68882 Floating-Point Coprocessor User's Manual (Motorola, 1987)
+
+Motorola M68000 Family Programmer's Reference Manual (Freescale Semiconductor)
+
+IEEE 754-2019 Standard for Floating-Point Arithmetic
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package --- Math Co-Processor \& Vector Engine}
+
+\subsection{Milestone Specification}
+
+\metafield{Mission Objective:}{Implement the GSD Math Co-Processor as a set of GPU-accelerated mathematical engines exposed via MCP server, integrated with the Silicon Layer's VRAM management, providing Claude and local inference models with deterministic mathematical computation at CUDA speed.}
+
+\metafield{Milestone ID:}{gsd-math-coprocessor-v1.0}
+\metafield{Activation Profile:}{Squadron (12 roles, 2 parallel tracks)}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+
+  Wave 0: Foundation          [Sequential, Haiku]
+  +--------------------------+
+  | Shared schemas, MCP      |
+  | scaffold, VRAM manager   |
+  +--------------------------+
+            |
+  Wave 1: Parallel Tracks    [Parallel, Sonnet+Opus]
+  +-------------+  +-------------+
+  | Track A:    |  | Track B:    |
+  | ALGEBRUS    |  | STATOS      |
+  | FOURIER     |  | SYMBEX      |
+  | (cuBLAS/    |  | (Custom     |
+  |  cuFFT)     |  |  CUDA)      |
+  +-------------+  +-------------+
+            \        /
+  Wave 2: Integration        [Sequential, Opus]
+  +--------------------------+
+  | VECTORA, MCP server,     |
+  | silicon.yaml integration, |
+  | inference coexistence     |
+  +--------------------------+
+            |
+  Wave 3: Verification       [Sequential, Sonnet]
+  +--------------------------+
+  | Test suite, benchmarks,  |
+  | dashboard panel,         |
+  | documentation            |
+  +--------------------------+
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}X L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & MCP Server Scaffold & Responds to capability queries; tool registration works & W0-C1 \\
+2 & VRAM Manager & Allocates/frees workspace within budget; reports utilization & W0-C2 \\
+3 & ALGEBRUS Chip & GEMM, solve, SVD, eigen, det pass correctness tests & W1A-C1 \\
+4 & FOURIER Chip & FFT/IFFT match NumPy to FP32 tolerance & W1A-C2 \\
+5 & STATOS Chip & Descriptive stats, Monte Carlo, regression pass tests & W1B-C1 \\
+6 & SYMBEX Chip & Expression compile + evaluate matches analytical results & W1B-C2 \\
+7 & VECTORA Chip & Gradient, transform, batch eval pass correctness tests & W2-C1 \\
+8 & Integration Suite & All chips accessible via MCP; silicon.yaml configures them & W2-C2 \\
+9 & Test \& Benchmark & Full test suite passes; benchmark report generated & W3-C1 \\
+10 & Dashboard Panel & Math chip utilization visible in GSD-OS dashboard & W3-C2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens (est.)} \\
+\midrule
+MCP Scaffold & None & Haiku & 4,000 \\
+VRAM Manager & MCP Scaffold & Sonnet & 8,000 \\
+ALGEBRUS & VRAM Manager & Sonnet & 15,000 \\
+FOURIER & VRAM Manager & Sonnet & 12,000 \\
+STATOS & VRAM Manager & Sonnet & 14,000 \\
+SYMBEX (JIT) & VRAM Manager & Opus & 20,000 \\
+VECTORA & ALGEBRUS, FOURIER & Sonnet & 12,000 \\
+Integration & All chips & Opus & 18,000 \\
+Test Suite & Integration & Sonnet & 10,000 \\
+Benchmarks & Test Suite & Sonnet & 6,000 \\
+Dashboard Panel & Integration & Sonnet & 8,000 \\
+Documentation & All & Opus & 12,000 \\
+\midrule
+\textbf{Total} & & & \textbf{139,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 36\% & SYMBEX (JIT compiler --- most architecturally novel), Integration (cross-chip coordination), Documentation (narrative coherence) \\
+Sonnet & 57\% & ALGEBRUS, FOURIER, STATOS, VECTORA (well-defined library wrapping), Tests, Benchmarks, Dashboard \\
+Haiku & 7\% & MCP Scaffold (boilerplate), schema definitions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Duration} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1 session \\
+1 & Parallel Build & Parallel (2 tracks) & 4 & 1 session \\
+2 & Integration & Sequential & 2 & 1 session \\
+3 & Verification & Sequential & 3 & 1 session \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+MCP Server Scaffold & Haiku & JSON-RPC server with tool registration, capability endpoint, health check \\
+VRAM Manager & Sonnet & Workspace allocator with budget limits, dynamic resize, utilization reporting \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Library-Backed Chips (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Description} \\
+\midrule
+ALGEBRUS & cuBLAS/cuSOLVER/cuSPARSE wrappers; GEMM, solve, SVD, eigen, det, sparse ops \\
+FOURIER & cuFFT/cuFFTDx wrappers; FFT, IFFT, spectrum, convolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Custom Kernel Chips (Sonnet + Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Description} \\
+\midrule
+STATOS & Custom CUDA kernels for statistics, Monte Carlo, regression; cuRAND integration \\
+SYMBEX & Expression tree parser, NVRTC JIT compilation, kernel cache, parameter sweep engine \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Description} \\
+\midrule
+VECTORA & Custom kernels consuming ALGEBRUS primitives; gradient, transform, Bézier, batch eval \\
+Full Integration & MCP server wires all chips; silicon.yaml parser reads math\_coprocessor config; inference coexistence testing via CUDA stream isolation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Verification \& Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Description} \\
+\midrule
+Test Suite & Correctness tests (vs. NumPy/SciPy), edge cases (NaN, inf, zero-dim), precision verification \\
+Benchmarks & GPU vs. CPU timing; speedup ratios; VRAM usage profiles; inference impact measurement \\
+Dashboard Panel & WebGL component showing math chip utilization, operation history, VRAM gauge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{5-minute cache TTL:} Wave 1 tracks A and B are designed to complete within a single cache window each. ALGEBRUS and FOURIER share the cuBLAS/cuFFT include context; STATOS and SYMBEX share the custom kernel compilation context.
+\item \textbf{Shared compilation context:} All CUDA kernels in a track share the same \texttt{nvcc}/NVRTC compilation environment, avoiding redundant setup.
+\item \textbf{Test data reuse:} Test matrices, FFT inputs, and statistical datasets are generated once in Wave 0 and reused across all waves.
+\item \textbf{Incremental verification:} Each chip is tested independently in Wave 1, then integration tests in Wave 2 only cover cross-chip interactions.
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+    MCP Scaffold -----> VRAM Manager
+         |                    |
+         |          +---------+---------+
+         |          |                   |
+         v          v                   v
+    ALGEBRUS    FOURIER          STATOS    SYMBEX
+         |          |               |         |
+         +----+-----+               +----+----+
+              |                          |
+              v                          |
+          VECTORA                        |
+              |                          |
+              +-----------+--------------+
+                          |
+                     Integration
+                          |
+                     +----+----+
+                     |         |
+                Test Suite   Dashboard
+                     |
+                Benchmarks
+                     |
+               Documentation
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Gate Action} \\
+\midrule
+Safety-Critical & 6 & P0 & BLOCK \\
+Correctness & 20 & P1 & BLOCK \\
+Performance & 8 & P2 & WARN \\
+Integration & 6 & P1 & BLOCK \\
+Edge Cases & 10 & P2 & WARN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+S-01 & VRAM budget never exceeded & Math operations rejected when workspace insufficient; inference unaffected \\
+S-02 & No OOM during concurrent inference + math & Stress test: continuous inference + rapid math dispatches for 10 minutes \\
+S-03 & Graceful GPU absence & All operations return correct results via CPU fallback when CUDA unavailable \\
+S-04 & NaN/Inf propagation & Invalid inputs produce IEEE 754 compliant exceptions, not crashes \\
+S-05 & SYMBEX sandboxing & JIT-compiled kernels cannot execute system calls or access memory outside workspace \\
+S-06 & Thermal protection & Math throughput reduces when GPU temperature exceeds 85°C \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{5cm}L{2.5cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Correctness matches reference & C-01 through C-20 & --- \\
+2 & $\geq$10× GPU speedup & P-01 through P-04 & --- \\
+3 & VRAM discipline & S-01, S-02 & --- \\
+4 & Inference coexistence & S-02, I-01 & --- \\
+5 & Dispatch latency $<$50ms & P-05, P-06 & --- \\
+6 & Graceful degradation & S-03, S-04 & --- \\
+7 & Discoverability & I-02 & --- \\
+8 & Verification loop & I-03 & --- \\
+9 & SYMBEX compilation $<$200ms & P-07, P-08 & --- \\
+10 & Dashboard visibility & I-04 & --- \\
+11 & 5-minute setup & I-05 & --- \\
+12 & Educational integration & I-06 & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+Mission Commander & SILICON-LEAD & Overall architecture, VRAM budget coordination, integration decisions \\
+Systems Architect & ALGEBRUS-ARCH & cuBLAS/cuSOLVER wrapper design, API surface \\
+Signal Specialist & FOURIER-SPEC & cuFFT/cuFFTDx integration, spectral analysis pipeline \\
+Kernel Engineer & VECTORA-ENG & Custom CUDA kernel development, gradient/transform ops \\
+Statistics Lead & STATOS-LEAD & Statistical kernel design, Monte Carlo engine, cuRAND integration \\
+Compiler Engineer & SYMBEX-COMP & Expression tree parser, NVRTC JIT pipeline, kernel cache \\
+Integration Lead & BUS-MASTER & MCP server, silicon.yaml integration, chip routing \\
+Test Commander & VERIFY-CMD & Test suite design, reference implementation comparison \\
+Performance Analyst & BENCH-MARK & GPU vs. CPU benchmarking, speedup measurement, VRAM profiling \\
+Dashboard Engineer & SCOPE-VIS & WebGL math chip utilization panel, real-time metrics \\
+Safety Warden & SAFE-GUARD & VRAM limits, thermal monitoring, sandbox enforcement \\
+Documentation Lead & DOC-WRITER & API reference, integration guide, educational examples \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total components & 12 \\
+Parallel tracks & 2 (Wave 1) \\
+Estimated tokens & 139,000 \\
+Estimated sessions & 4 \\
+Model split & Opus 36\% / Sonnet 57\% / Haiku 7\% \\
+Critical path & MCP Scaffold $\rightarrow$ VRAM Manager $\rightarrow$ [ALGEBRUS $\|$ STATOS] $\rightarrow$ VECTORA $\rightarrow$ Integration $\rightarrow$ Tests \\
+Activation profile & Squadron \\
+Hardware requirement & NVIDIA CUDA-capable GPU (reference: RTX 4060 Ti 8GB) \\
+Software requirement & CUDA Toolkit 12.x, Python 3.10+, llama.cpp or Ollama \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The CPU set up the work --- wrote the copper lists, configured the blitter --- and then the custom chips executed autonomously. The CPU was free to think about the next thing while the hardware did the grunt work.'' --- The Amiga Principle}
+
+\vspace{0.5em}
+
+The Math Co-Processor completes the circle. Claude thinks. The GPU computes. The architecture connects them. The user's machine --- that box sitting under the desk with four thousand cores waiting for something to do --- becomes the mathematical foundation of an AI system that can finally verify its own arithmetic. Not by reasoning harder, but by dispatching to silicon that was born to calculate.
+
+\vspace{0.5em}
+
+The 68881 had eight registers and cost as much as the computer it plugged into. The RTX 4060 Ti has four thousand cores and costs three hundred dollars. The principle is the same. The scale is different. The opportunity is now.
+\end{quotebox}
+
+\end{document}

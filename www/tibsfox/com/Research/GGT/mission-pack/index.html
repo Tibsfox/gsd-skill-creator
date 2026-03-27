@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geggy Tah — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --accent: #7B1FA2;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.75rem; opacity: 0.85; }
+  .header h1 { font-size: 2.4rem; margin: 0.5rem 0 0.3rem; letter-spacing: -0.02em; }
+  .header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.9; }
+  .header .pipe { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; margin-top: 1.5rem; opacity: 0.8; }
+  .container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text);
+    border: 1px solid #D1C4E9; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(74,20,140,0.15); }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  h2.section { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.2rem; margin: 2.5rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  .contents { list-style: none; padding: 0; }
+  .contents li { padding: 0.4rem 0; border-bottom: 1px solid #EDE7F6; font-size: 0.95rem; }
+  .contents li strong { color: var(--primary); font-family: 'DM Sans', sans-serif; }
+  .instructions { background: var(--light-secondary); border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; }
+  .quote .attr { font-style: normal; text-align: right; margin-top: 0.6rem; font-size: 0.85rem; color: var(--subtle); }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: #EDE7F6; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  .meta { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #EDE7F6; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>Geggy Tah</h1>
+  <h2>The Inclusionary Wave</h2>
+  <div class="pipe">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a href="geggy-tah-mission.pdf" download class="card">
+      <h3>📄 Mission PDF</h3>
+      <p>27-page complete pipeline document. Vision, research reference, and mission package.</p>
+    </a>
+    <a href="geggy-tah-mission.tex" download class="card">
+      <h3>📝 LaTeX Source</h3>
+      <p>.tex source for modification and recompilation. XeLaTeX with DejaVu fonts.</p>
+    </a>
+  </div>
+
+  <h2 class="section">Contents</h2>
+  <ul class="contents">
+    <li><strong>Stage 1 — Vision Document:</strong> Narrative vision, problem statement (5 problems), core concept (inclusionary aesthetics), domain map, module architecture, chipset config, 12 success criteria, through-line</li>
+    <li><strong>Stage 2 — Research Reference:</strong> 5 modules (Origins, Discography, Creative Network, Trajectories, Cultural Context), safety considerations, full source bibliography from professional publications</li>
+    <li><strong>Stage 3 — Mission Package:</strong> Squadron activation (12 roles), 8 deliverables, 4-wave execution plan with 2 parallel tracks, 75K token budget, 28 tests (5 safety-critical), verification matrix</li>
+  </ul>
+
+  <h2 class="section">Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF — three reading speeds: glance (tables/diagrams), scan (headers/bullets), read (full prose)</li>
+      <li>Hand the PDF to <code>gsd-skill-creator</code> via Claude Code for orchestrated execution</li>
+      <li>The mission decomposes into 4 waves across ~3 sessions with 2 HITL gates</li>
+      <li>Wave 1 runs two parallel tracks: chronological core (M1+M2) and network/context (M3+M4+M5)</li>
+      <li>Final output: a comprehensive Geggy Tah educational module for the GSD Creative Suite</li>
+    </ol>
+  </div>
+
+  <h2 class="section">Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Edit <code>geggy-tah-mission.tex</code> as needed</li>
+      <li>Compile with XeLaTeX (requires DejaVu fonts):
+        <br><code>xelatex -interaction=nonstopmode geggy-tah-mission.tex</code> (run 3×)</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "Geggy Tah are so postmodern they've come out the other side… They incorporate so many disparate elements into their sound that one senses a new sensibility afoot, an inclusionary wave… like nothing I've heard before."
+    <div class="attr">— David Byrne</div>
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem · March 26, 2026 · Squadron Profile · 5 Research Modules · 27 Pages
+  </div>
+
+</div>
+</body>
+</html>

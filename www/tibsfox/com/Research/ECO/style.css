@@ -1,0 +1,70 @@
+/* ECO — Living Systems Taxonomy & Chipset
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --summit: #4a5568;
+  --alpine: #718096;
+  --montane: #2d5a3a;
+  --lowland: #38654a;
+  --riparian: #2a6496;
+  --tidal: #1a5276;
+  --deep: #1b3a4b;
+  --bark: #4a3728;
+  --cream: #f8f6f0;
+  --mist: #e4e8e0;
+  --water: #2a6496;
+  --salmon: #c75b3a;
+  --kelp: #5a7a3a;
+  --snow: #d4dce8;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--water);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--summit) 0%, var(--montane) 35%, var(--tidal) 70%, var(--deep) 100%);
+  border-bottom: 4px solid var(--kelp);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--deep); }
+h3 { color: var(--bark); }
+
+th { background: var(--deep); }
+tr:nth-child(even) { background: rgba(26, 82, 118, 0.06); }
+tr:hover { background: rgba(26, 82, 118, 0.12); }
+
+blockquote { border-left-color: var(--tidal); background: rgba(26, 82, 118, 0.05); }
+
+code { background: var(--mist); }
+pre { background: #2c2c2c; color: #e0e0e0; }
+
+.stat-value { color: var(--deep); }
+
+/* --- Tags --- */
+.tag-flora { background: #e8f5e9; color: #2e7d32; }
+.tag-fauna { background: #fff3e0; color: #e65100; }
+.tag-fungi { background: #fff8e1; color: #f57f17; }
+.tag-marine { background: #e3f2fd; color: #1565c0; }
+.tag-networks { background: #f3e5f5; color: #7b1fa2; }
+.tag-heritage { background: #fce4ec; color: #880e4f; }
+.tag-chipset { background: #e0f2f1; color: #00695c; }
+.tag-minecraft { background: #e8eaf6; color: #283593; }
+.tag-foundation { background: #eceff1; color: #37474f; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

@@ -1,0 +1,1117 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: TECHNOLOGY (Steel / Electric / Graphite) ===
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SANS Institute}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={SANS Institute -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The SANS Institute\\[0.3em]Cybersecurity's Training Engine}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Conferences, Certifications, Curriculum \& Community}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{SANS Institute --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD BBS Educational Pack (security module), GSD Cloud Ops Curriculum, Fox Infrastructure Group security posture planning}
+
+\subsection{Vision}
+
+The cybersecurity industry faces a paradox: the global workforce gap has reached 4.8 million unfilled positions, yet the 2025 ISC2 Workforce Study reveals the more fundamental crisis is no longer headcount but \emph{capability}. Fifty-nine percent of cybersecurity teams report critical or significant skills gaps---up from 44\% just one year prior. Budget cuts, hiring freezes, and the relentless acceleration of AI-powered threats have created an environment where defenders must be simultaneously deeper in expertise and broader in coverage than at any previous point in the field's history.
+
+At the center of this workforce crisis stands a singular institution: the SANS Institute. Founded in 1989 as a cooperative research and education organization, SANS has grown into the world's largest cybersecurity training organization, delivering 85+ courses across six practice areas, operating the Internet Storm Center early-warning system, running the GIAC certification program, and maintaining an accredited graduate college. SANS is not merely a training vendor---it is the gravitational center around which much of the cybersecurity profession's skill development, community identity, and career progression orbits.
+
+Understanding SANS as a complete ecosystem---its conference model, certification pipeline, community engagement programs, pricing structure, curriculum architecture, and workforce development philosophy---provides a comprehensive map of how cybersecurity skills are actually built and validated in practice. For anyone building security-aware infrastructure, planning training investments, or designing educational curricula that touch information security, SANS is the reference architecture.
+
+This research mission maps the full SANS ecosystem: the organizational structure, the training and certification pipeline, the conference and summit model, the community programs that lower barriers to entry, the economic realities of participation, and the workforce context that makes all of it urgently relevant.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{The Skills-Over-Headcount Crisis.} The cybersecurity workforce gap is no longer primarily about unfilled seats---it is about unfilled \emph{capabilities}. AI, cloud security, and identity governance have become foundational skills rather than specializations, and 88\% of organizations have experienced security incidents directly attributable to skills deficits.
+
+  \item \textbf{Training Investment Opacity.} SANS courses typically cost \$8,500--\$9,000 USD per course with an additional \$999 for GIAC certification. For individuals and small organizations, the total investment pathway---training, certification, renewal, travel---is poorly understood and rarely mapped end-to-end, creating barriers to informed decision-making.
+
+  \item \textbf{Conference Model Fragmentation.} SANS operates dozens of events annually across multiple continents, ranging from flagship multi-track conferences to specialized summits (ICS, AI, DFIR, Leadership, Security Awareness). The relationships between events, their target audiences, and their value propositions are not consolidated in any single reference.
+
+  \item \textbf{Community Program Visibility.} SANS operates significant free and low-cost community programs---Holiday Hack Challenge, NetWars CTFs, Internet Storm Center, CIS Critical Controls co-development, the SANS Reading Room---that substantially lower the barrier to entry for cybersecurity skill development. These programs are under-documented relative to the paid training pipeline.
+
+  \item \textbf{Curriculum-to-Career Mapping.} The SANS training roadmap spans six practice areas and 85+ courses, each mapping to GIAC certifications that align with the NIST NICE Cybersecurity Workforce Framework. The pathways from entry-level to advanced specialization, and from certification to career outcome, need systematic documentation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} SANS is the cybersecurity profession's skill forge---where raw technical aptitude is shaped, validated, and continuously refined through a unified pipeline of practitioner-led training, rigorous certification, and community-sustained practice.
+\end{quotebox}
+
+SANS operates as an integrated ecosystem rather than a collection of independent products. Training courses prepare candidates for GIAC certifications. Certifications validate skills against the NIST NICE framework. Conferences provide immersive training delivery plus community networking. Community programs (Holiday Hack, NetWars, ISC) create on-ramps for newcomers and continuous practice for professionals. The SANS Technology Institute grants accredited degrees built on SANS courses and GIAC exams. Each component reinforces the others, creating a self-sustaining cycle of skill development, validation, and professional advancement.
+
+\subsubsection{Ecosystem Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+                    SANS INSTITUTE ECOSYSTEM
+                    ========================
+
+  ┌─────────────┐   ┌──────────────┐   ┌──────────────────┐
+  │  TRAINING   │   │ CONFERENCES  │   │   COMMUNITY      │
+  │  85+ courses│──▶│ Security West│──▶│ Holiday Hack     │
+  │  6 practice │   │ DFIRCON      │   │ NetWars CTF      │
+  │  areas      │   │ ICS Summit   │   │ Internet Storm   │
+  │  3 delivery │   │ AI Summit    │   │   Center         │
+  │  modes      │   │ Leadership   │   │ Reading Room     │
+  └──────┬──────┘   └──────┬───────┘   └────────┬─────────┘
+         │                 │                     │
+         ▼                 ▼                     ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │              GIAC CERTIFICATION (40+ certs)             │
+  │    Practitioner → Applied Knowledge → Expert            │
+  │    Open-book proctored │ CyberLive hands-on labs        │
+  │    Aligned to NIST NICE Workforce Framework             │
+  └──────────────────────────┬──────────────────────────────┘
+                             │
+                             ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │          SANS TECHNOLOGY INSTITUTE                      │
+  │    Accredited BS/MS/Graduate Certificates               │
+  │    NSA CAE-CD designated                                │
+  │    Courses = classes │ GIAC exams = finals               │
+  └─────────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  MODULE 1              MODULE 2              MODULE 3
+  Organizational        Training &            Conference &
+  Foundation            Certification         Summit Model
+  ├─ History            ├─ Curriculum         ├─ Flagship events
+  ├─ Structure          │  domains            ├─ Specialized
+  ├─ Key figures        ├─ GIAC pipeline      │  summits
+  └─ Mission            ├─ Pricing            ├─ Global reach
+                        └─ Delivery modes     └─ Event anatomy
+
+  MODULE 4              MODULE 5
+  Community &           Workforce
+  Free Programs         Context
+  ├─ Holiday Hack       ├─ ISC2 data
+  ├─ NetWars            ├─ Skills gap
+  ├─ ISC / Reading Room ├─ AI impact
+  └─ Work-Study         └─ Career outcomes
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Organizational Foundation}
+History from 1989 founding through present day. Organizational structure: SANS Institute (training), GIAC (certification), SANS Technology Institute (degrees), SANS Security Awareness (enterprise culture programs). Key figures and faculty model (practitioner-instructors, not academics). The vendor-agnostic content development philosophy. Relationship to CIS, NIST, and other standards bodies.
+
+\subsubsection{Module 2: Training \& Certification Pipeline}
+The six practice areas: Cyber Defense, Offensive Operations, Digital Forensics \& Incident Response, Cloud Security, Industrial Control Systems, and Leadership. Course numbering conventions (SEC, FOR, ICS, LDR, AIS, etc.). The GIAC certification tiers: Practitioner, Applied Knowledge, Expert (GSE). Exam format: open-book, proctored, CyberLive hands-on components. Pricing structure across training formats and certification attempts. The three delivery modes: In-Person, Live Online, OnDemand.
+
+\subsubsection{Module 3: Conference \& Summit Model}
+Flagship events: SANS 2026 (Orlando), Security West (San Diego), regional events (London, Singapore, Dubai, Amsterdam, Tokyo). Specialized summits: ICS Security Summit, AI Cybersecurity Summit, Cybersecurity Leadership Summit, Security Awareness \& Culture Summit, DFIRCON. Event anatomy: courses, SANS@Night talks, NetWars tournaments, Solutions Expo, Welcome Reception. The in-person networking premium.
+
+\subsubsection{Module 4: Community \& Free Programs}
+Holiday Hack Challenge (21+ years, 15,000+ annual participants, free, all skill levels). NetWars cyber ranges and CTF competitions. Internet Storm Center (ISC) early-warning system. SANS Reading Room research archive. CIS Critical Security Controls co-development. Work-Study program (discounted training in exchange for conference moderation). Webcasts, podcasts, newsletters, free course demos.
+
+\subsubsection{Module 5: Workforce Context \& Career Outcomes}
+ISC2 2025 Workforce Study findings: 4.8M gap, skills $>$ headcount shift, 59\% critical skills gaps, 88\% skills-driven security incidents. AI as top required skill (41\%), cloud security second (36\%). GIAC-certified salary benchmarks (\$104K--\$150K average). SANS Technology Institute alumni outcomes. Alignment with NIST NICE framework and CISA strategic plan. The economics of ROI: course cost vs.\ career advancement.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  name: sans-institute-deep-research
+  version: 1.0.0
+  domain: technology/cybersecurity-education
+  color_scheme: steel-electric-graphite
+
+modules:
+  - organizational-foundation
+  - training-certification-pipeline
+  - conference-summit-model
+  - community-free-programs
+  - workforce-context-outcomes
+
+activation:
+  profile: squadron
+  crew_size: 12
+  parallel_tracks: 2
+  estimated_windows: 18
+  estimated_sessions: 4
+
+model_allocation:
+  opus: 30%    # Synthesis, workforce analysis, cross-module integration
+  sonnet: 60%  # Survey compilation, course/cert documentation, event mapping
+  haiku: 10%   # Shared schemas, templates, bibliography scaffolding
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[nosep]
+  \item SANS Institute organizational history, structure, and mission
+  \item Complete training curriculum mapping across all six practice areas
+  \item GIAC certification pipeline: tiers, exam format, pricing, renewal
+  \item Conference and summit model: flagship events, specialized summits, global reach
+  \item Community programs: Holiday Hack, NetWars, ISC, Reading Room, Work-Study
+  \item Workforce context: ISC2 data, skills gap analysis, salary benchmarks
+  \item Pricing and ROI analysis for individuals and organizations
+  \item NIST NICE framework alignment
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[nosep]
+  \item Detailed course-by-course syllabus analysis (85+ courses too granular for v1.0)
+  \item Competitive comparison with other training providers (Offensive Security, EC-Council, CompTIA)
+  \item SANS private/enterprise training program details (custom engagements)
+  \item Individual instructor biographical profiles beyond key figures
+  \item Country-specific pricing for all international markets
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item SANS organizational history traced from 1989 founding through 2026 with key milestones documented and sourced.
+  \item All six training practice areas mapped with representative courses, associated GIAC certifications, and career role alignments.
+  \item GIAC certification pipeline documented end-to-end: exam format, open-book policy, CyberLive components, pricing tiers, renewal requirements.
+  \item At least 8 major 2026 conference/summit events cataloged with dates, locations, and distinguishing focus areas.
+  \item Community programs documented with participation scale, access model (free/paid), and skill-level targeting.
+  \item Pricing structure mapped across delivery modes (in-person, virtual, OnDemand) with total cost-of-participation estimates.
+  \item Workforce context grounded in ISC2 2025 study data with specific statistics cited and sourced.
+  \item Career outcome data (salary ranges, job roles, satisfaction metrics) documented with attribution.
+  \item NIST NICE framework alignment described with specific mapping examples.
+  \item Cross-module integration demonstrated: at least 3 explicit connections between modules (e.g., workforce gap $\rightarrow$ training investment $\rightarrow$ community on-ramps).
+  \item All sources traceable to SANS official publications, ISC2 research, GIAC documentation, or professional-quality journalism.
+  \item Document self-contained: a reader with no prior SANS knowledge can understand the complete ecosystem from this package alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+GSD BBS Educational Pack & Security module draws on same historical progression (plain-text passwords $\rightarrow$ bcrypt) that SANS teaches in SEC401 \\
+GSD Cloud Ops Curriculum & Cloud security practice area (SEC510, SEC541, SEC588) directly relevant to curriculum design \\
+Fox Infrastructure Group & Security posture for 10-node mesh cluster informed by SANS defensive architecture principles \\
+GSD Mesh Prototype Spec & Network hardening informed by SANS Cyber Defense curriculum domain \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The SANS Institute embodies the Amiga Principle at civilizational scale. Just as the Amiga achieved remarkable capability through specialized execution paths rather than brute-force computation, SANS achieves workforce transformation through \emph{practitioner-led, hands-on, immediately-applicable} training rather than academic abstraction. The philosophy is architectural: build the right pathways for skill to flow through, and extraordinary capability emerges from ordinary starting points.
+
+The spaces between matter here too. SANS is not merely its courses, nor its certifications, nor its conferences. It is the connections between them---the Holiday Hack player who discovers a passion for forensics, takes SEC504, earns GCIH, attends DFIRCON, and becomes a SANS instructor. The ecosystem creates pathways where none existed, and the community sustains them. That is what giving people their lives back looks like in the cybersecurity domain: a clear, navigable path from curiosity to mastery.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SANS Institute --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from official SANS publications, ISC2 workforce research, GIAC certification documentation, and professional cybersecurity journalism. Each module provides structured data suitable for direct integration into research documents, educational materials, or strategic planning.
+
+\textbf{Key source organizations:}
+\begin{itemize}[nosep]
+  \item SANS Institute (sans.org) --- Training, events, community programs
+  \item GIAC (giac.org) --- Certification pricing, exam specifications
+  \item SANS Technology Institute (sans.edu) --- Degree programs, tuition, accreditation
+  \item ISC2 (isc2.org) --- Workforce studies, skills gap research
+  \item NIST (nist.gov) --- NICE Cybersecurity Workforce Framework (SP 800-181)
+\end{itemize}
+
+\subsection{Module 1: Organizational Foundation Reference}
+
+\subsubsection{History \& Structure}
+
+The SANS Institute---formally the Escal Institute of Advanced Technologies---was founded in 1989 as a cooperative research and education organization focused on information security. The acronym stands for SysAdmin, Audit, Network, and Security. Initially operating as a traditional technical conference, SANS evolved through the 1990s into a training-focused organization with a distinctive practitioner-instructor model.
+
+Key organizational milestones:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} \\
+\midrule
+1989 & SANS Institute founded as cooperative research organization \\
+Mid-1990s & Transition from conference model to combined training/tradeshow events \\
+1999 & Global Information Assurance Certification (GIAC) program established \\
+2000s & Internet Storm Center (ISC) launched as community early-warning system \\
+2006 & SANS Technology Institute established as accredited college; OnDemand and vLive training formats introduced \\
+2013 & SANS Technology Institute receives regional accreditation from Middle States Commission on Higher Education \\
+2020s & 85+ course catalog; global event footprint spanning 6 continents; NetWars and Holiday Hack Challenge reach 15,000+ annual participants \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The organizational structure comprises four primary entities: SANS Institute (training delivery and research), GIAC (certification), SANS Technology Institute (accredited degree programs), and SANS Security Awareness (enterprise culture programs). SANS maintains a vendor-agnostic approach to content development and aligns its curriculum with the NIST NICE Cybersecurity Workforce Framework.
+
+As of 2021, SANS is recognized as the world's largest cybersecurity research and training organization. It trains over 40,000 cybersecurity professionals annually.
+
+\subsubsection{Key Figures \& Faculty Model}
+
+SANS employs a distinctive faculty model: all instructors are active cybersecurity practitioners, not full-time academics. This ensures course content reflects current threats, tools, and operational realities. Notable figures include:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role \& Contribution} \\
+\midrule
+Ed Skoudis & SANS Fellow; founder of Holiday Hack Challenge and Counter Hack; President of SANS Technology Institute; author of penetration testing curriculum \\
+Rob T.\ Lee & Chief AI Officer and Chief of Research at SANS; leads research and mentors faculty on AI and emerging threats \\
+Robert M.\ Lee & SANS Fellow; Dragos CEO; author of ICS515 and FOR578; pioneer of ICS/OT cybersecurity training \\
+Dr.\ Johannes Ullrich & CTO of Internet Storm Center; Dean of Faculty at SANS Technology Institute; author of SEC522 \\
+Stephen Northcutt & Founded GIAC certification; founding President of SANS Technology Institute \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Faculty have authored more than 40 books on information security and created over 150 open-source cybersecurity tools.
+
+\subsection{Module 2: Training \& Certification Pipeline Reference}
+
+\subsubsection{Curriculum Domains}
+
+SANS organizes its 85+ courses into six primary practice areas, each representing a distinct operational discipline:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Practice Area} & \tableheader{Focus} & \tableheader{Key Courses} \\
+\midrule
+Cyber Defense & Monitoring, detection, incident response, architecture & SEC401, SEC503, SEC501 \\
+Offensive Operations & Penetration testing, red teaming, exploit development & SEC504, SEC560, SEC760 \\
+DFIR & Digital forensics, threat hunting, malware analysis & FOR500, FOR508, FOR577 \\
+Cloud Security & Cloud architecture, controls, DevSecOps & SEC510, SEC541, SEC588 \\
+Industrial Control Systems & ICS/SCADA security, OT defense & ICS410, ICS515, ICS612 \\
+Leadership & Strategic planning, SOC management, risk governance & LDR514, LDR521, LDR551 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Additionally, SANS has expanded into AI-specific training with courses such as SEC595 (Applied Data Science and AI/ML for Cybersecurity), SEC495 (Leveraging LLMs: Building \& Securing RAG), SEC545 (GenAI and LLM Application Security), and AIS247 (AI Security Essentials for Business Leaders).
+
+\subsubsection{GIAC Certification Pipeline}
+
+GIAC offers 40+ certifications organized into tiers:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Description} & \tableheader{Examples} \\
+\midrule
+Practitioner & Validates core abilities in specific domains & GSEC, GCIH, GPEN, GCFE \\
+Applied Knowledge & Comprehensive assessment of deeper expertise & GCFA, GXPN, GWAPT \\
+Expert (GSE) & Elite multi-domain certification; requires passing multiple GIAC exams & GIAC Security Expert \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Exam format:} GIAC exams are proctored, open-book (hard-copy notes and books allowed; no internet or digital notes). Delivery is via remote proctoring (ProctorU) or at Pearson VUE test centers. Exam length varies by certification (82--106 questions over 3--4 hours). Some exams include CyberLive performance-based tasks requiring hands-on work in live virtual machines. Candidates typically receive a 120-day window to use their exam attempt after activation.
+
+\textbf{Certification validity:} 4 years. Renewal requires either 36 CPE credits or retaking the current exam version. Renewal fee: \$499 USD.
+
+\subsubsection{Pricing Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Item} & \tableheader{Cost (USD)} & \tableheader{Notes} \\
+\midrule
+Standard course (4--6 day) & \$8,525--\$8,780 & Varies by format and event \\
+GIAC certification attempt & \$999 & Bundled or standalone \\
+GIAC retake & \$849--\$899 & If initial attempt fails \\
+GIAC 45-day extension & \$479 & Extends exam window \\
+Practice test (standalone) & \$399 & 2 included when bundled \\
+4-year GIAC renewal & \$499 & Via CPE credits or re-exam \\
+OnDemand extended access & Free & Included with in-person course purchase at major events \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total cost of initial certification:} Approximately \$9,500--\$9,800 for course + bundled GIAC attempt, excluding travel and lodging. International pricing varies (e.g., \texteuro8,230 in Amsterdam, S\$11,390 in Singapore, \textyen1,335,000 in Japan).
+
+\textbf{Cost reduction options:} SANS Work-Study program (discounted training in exchange for conference moderation), group vouchers, early-bird discounts (\$500 typical), employer tuition reimbursement, and SANS Technology Institute academic pricing.
+
+\subsubsection{Delivery Modes}
+
+Three primary delivery formats:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Description} & \tableheader{Best For} \\
+\midrule
+In-Person & Immersive, distraction-free; includes networking, SANS@Night, NetWars & Deep focus; relationship building \\
+Live Online & Synchronous virtual classroom with live instructor & Remote learners; flexible location \\
+OnDemand & Self-paced; 4-month access window with extension options & Busy professionals; self-directed study \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: Conference \& Summit Model Reference}
+
+\subsubsection{2026 Flagship Events}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Event} & \tableheader{Location} & \tableheader{Dates} & \tableheader{Scale} \\
+\midrule
+SANS 2026 & Orlando, FL & April 2026 & 50+ courses; largest annual event \\
+Security West 2026 & San Diego, CA & May 11--16 & 40+ courses; flagship West Coast event \\
+SANS Surge & San Diego, CA & Feb 23--28 & Focused training event \\
+SANS (Arlington) & Arlington, VA & Mar 2--7 & DC-area training \\
+SANS London June & London, UK & June 2026 & Major European event \\
+SANS Amsterdam June & Amsterdam, NL & June 2026 & European training \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Specialized Summits (2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Summit} & \tableheader{Location} & \tableheader{Focus} \\
+\midrule
+Cybersecurity Leadership Summit & Arlington, VA (Mar 17--22) & CISOs, directors, managers; risk management, team leadership, strategy \\
+AI Cybersecurity Summit & Arlington, VA & AI-powered threats, AI-assisted defense, LLM security \\
+ICS Security Summit & Orlando, FL (June 2026) & Industrial control systems, OT defense, critical infrastructure \\
+Security Awareness \& Culture Summit & Las Vegas, NV (Aug 19--28) & Human risk management, security culture, behavior change (13th annual) \\
+DFIRCON & TBD & Digital forensics, incident response, open-source DFIR tools \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Event Anatomy}
+
+A typical SANS conference week includes: multi-day training courses (the core offering), SANS@Night bonus sessions (evening talks by faculty and guest speakers), NetWars cyber range tournaments, Solutions Expo (vendor showcases), Welcome Reception networking event, hands-on workshops, and CPE credit opportunities. In-person attendees receive exclusive bonus sessions not available virtually. The networking component is consistently cited by attendees as a primary value driver beyond the training itself.
+
+\subsection{Module 4: Community \& Free Programs Reference}
+
+\subsubsection{Holiday Hack Challenge}
+
+The SANS Holiday Hack Challenge is an annual free cybersecurity competition running for 21+ years, created by Ed Skoudis and the Counter Hack team. The event features an immersive, gamified virtual environment with a holiday-themed storyline. Challenges span all skill levels from complete beginners to expert practitioners, covering topics including network security, cloud exploitation, LLM vulnerabilities, post-quantum cryptography, and forensics. More than 15,000 players participate annually. Prizes include SANS OnDemand course access and NetWars Continuous subscriptions. The 2025 edition (``Revenge of the Gnome(s)'') introduced a pure CTF mode alongside the traditional game world, and a micro-challenge system for accessibility. The challenge remains open year-round for practice after the competition period.
+
+\subsubsection{NetWars Cyber Ranges}
+
+NetWars is SANS' suite of interactive cyber range platforms used for hands-on skill development and competition. Variants include Core NetWars (multi-disciplinary), DFIR NetWars, ICS NetWars (factory floor simulation), Cyber Defense NetWars, and Grid NetWars (power generation). NetWars is used by the U.S.\ Air Force and U.S.\ Army for military cybersecurity training. NetWars tournaments run at major SANS events, with an annual Tournament of Champions for top performers. The NetWars Continuous platform provides ongoing access outside of events.
+
+\subsubsection{Internet Storm Center (ISC)}
+
+The Internet Storm Center is SANS' community-operated internet monitoring and early-warning system. Run by volunteer security practitioners (``handlers''), the ISC tracks emerging threats, vulnerabilities, and attack patterns in real-time. Dr.\ Johannes Ullrich serves as CTO. The ISC publishes daily diary entries, the SANS Stormcast podcast, and threat analysis. It operates as a free public resource for the global security community.
+
+\subsubsection{Additional Community Resources}
+
+The SANS Reading Room maintains an extensive archive of information security research documents contributed by the community. Free webcasts, email newsletters (@Risk, Newsbites, Ouch!), and podcasts provide ongoing education. SANS co-founded the Center for Internet Security (CIS) and contributes to the CIS Critical Security Controls. The SANS Technology Institute Leadership Lab and free course demos provide entry points for exploration. Community Nights events in the Asia-Pacific region bring local practitioners together for learning and networking.
+
+\subsubsection{Work-Study Program}
+
+SANS offers a Work-Study program where participants receive substantial training discounts in exchange for moderating conference sessions. This significantly reduces the financial barrier for individuals who cannot access employer-funded training.
+
+\subsection{Module 5: Workforce Context \& Career Outcomes Reference}
+
+\subsubsection{ISC2 2025 Workforce Study Key Findings}
+
+The 2025 ISC2 Cybersecurity Workforce Study, based on responses from a record 16,029 cybersecurity professionals globally, represents the most comprehensive annual snapshot of the profession's state:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Finding} \\
+\midrule
+Global workforce size & 5.5 million active professionals \\
+Estimated demand & 10.2 million positions needed \\
+Workforce gap & 4.8 million unfilled positions (2024 estimate; ISC2 declined to re-estimate in 2025, citing skills $>$ headcount shift) \\
+Critical/significant skills gaps & 59\% of teams (up from 44\% in 2024) \\
+Any skills gap reported & 95\% of respondents \\
+Security incidents from skills deficits & 88\% experienced at least one; 69\% experienced more than one \\
+Top skill needed & AI (41\%), followed by cloud security (36\%) \\
+Budget cuts impact & 36\% (down 1 point from 2024) \\
+Layoffs impact & 24\% (down 1 point from 2024) \\
+Right staffing level & 34\% (up from 30\% in 2023) \\
+Exhaustion from staying current & 48\% \\
+Overwhelmed by workload & 47\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The study marks a fundamental shift: for the first time, ISC2 declined to publish its traditional global workforce gap estimate, stating that respondents now view skills shortages as more critical than headcount shortages. As ISC2 Acting CEO Debra Taylor noted, the most pressing concern for cybersecurity teams is no longer headcount but capabilities.
+
+\subsubsection{GIAC-Certified Salary Benchmarks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Certification} & \tableheader{Avg Salary (USD)} & \tableheader{Source} \\
+\midrule
+GCIH (Incident Handler) & \$132,000/yr & PayScale \\
+GWAPT (Web App Pen Tester) & \$104,000/yr & PayScale \\
+GIAC general average & \$104,500--\$150,100/yr & Multiple industry sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For comparison, the average CEH-certified salary is approximately \$102,000/yr and OSCP approximately \$100,000/yr, positioning GIAC certifications at the higher end of cybersecurity credential salary premiums.
+
+\subsubsection{AI Impact on Workforce}
+
+AI has emerged as both the top skills need and a source of professional optimism. Seventy-three percent of respondents believe AI will create more specialized cybersecurity roles, 72\% say it will require more strategic mindsets, and 66\% expect it will demand broader skill sets. Forty-eight percent are already pursuing generalized AI knowledge, and 35\% are studying AI-specific vulnerabilities and exploits. SANS has responded with dedicated AI courses (SEC595, SEC495, SEC545, AIS247) and the AI Cybersecurity Summit.
+
+\subsubsection{SANS Technology Institute Outcomes}
+
+The SANS Technology Institute is designated as an NSA Center of Academic Excellence in Cyber Defense (CAE-CD). It has been recognized alongside institutions such as Stanford, MIT, Carnegie Mellon, and Oxford as a global leader in cybersecurity education. The SANS.edu Sentinels competitive team has achieved top rankings in national cybersecurity competitions, including second place in the NSA's 2025 Codebreaker Challenge. Degree tuition: master's program approximately \$54,000 (36 credits at \$1,500/credit); bachelor's completion program \$41,750; graduate certificates \$22,800--\$29,250.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Offensive training ethics & ANNOTATE & Note SANS' active-defense and ``hack back'' courses have been flagged for ethical grey areas; present without advocacy \\
+Cost accessibility & ANNOTATE & Document pricing accurately including barriers; note Work-Study and scholarship pathways \\
+Security technique detail & GATE & Reference training topics without providing operational exploitation details \\
+Vendor-agnostic claims & ANNOTATE & SANS claims vendor-agnostic content; note this is self-reported \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources (SANS Ecosystem)}
+\begin{itemize}[nosep]
+  \item SANS Institute --- \url{https://www.sans.org/}
+  \item SANS Training Events --- \url{https://www.sans.org/cyber-security-training-events}
+  \item SANS Cyber Security Skills Roadmap --- \url{https://www.sans.org/cyber-security-skills-roadmap}
+  \item SANS Summits --- \url{https://www.sans.org/cyber-security-summit}
+  \item GIAC Certifications --- \url{https://www.giac.org/}
+  \item GIAC Pricing --- \url{https://www.giac.org/pricing/}
+  \item GIAC Affiliate Pricing --- \url{https://www.sans.org/cyber-security-certifications/affiliate-pricing-giac}
+  \item SANS Technology Institute --- \url{https://www.sans.edu/}
+  \item SANS Technology Institute Tuition --- \url{https://www.sans.edu/admissions/tuition/}
+  \item SANS Holiday Hack Challenge --- \url{https://www.sans.org/mlp/holiday-hack-challenge-2024}
+  \item Internet Storm Center --- \url{https://isc.sans.edu/}
+\end{itemize}
+
+\subsubsection{Workforce Research}
+\begin{itemize}[nosep]
+  \item ISC2 2025 Cybersecurity Workforce Study --- \url{https://www.isc2.org/Insights/2025/12/2025-ISC2-Cybersecurity-Workforce-Study}
+  \item ISC2 ``A Focus on Skills'' Analysis --- \url{https://www.isc2.org/Insights/2025/12/a-focus-on-skills-isc2-workforce-study}
+  \item CSO Online: ``Cybersecurity skills matter more than headcount in the AI era'' (Jan 2026) --- \url{https://www.csoonline.com/article/4108270/}
+  \item GovTech: ``The State of the 2025 Cyber Workforce'' (Dec 2025) --- \url{https://www.govtech.com/blogs/lohrmann-on-cybersecurity/}
+\end{itemize}
+
+\subsubsection{Encyclopedic Reference}
+\begin{itemize}[nosep]
+  \item Wikipedia: SANS Institute --- \url{https://en.wikipedia.org/wiki/SANS_Institute}
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained reference document on the SANS Institute ecosystem---organizational structure, training curriculum, certification pipeline, conference model, community programs, and workforce context---suitable for informing training investment decisions, educational curriculum design, and security posture planning within the GSD ecosystem.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0 ─── Foundation (Sequential) ──────────────────────
+  │  Shared schemas, source index, style templates
+  │
+  Wave 1 ─── Parallel Research ────────────────────────────
+  │  Track A: Org Foundation + Training/Cert Pipeline
+  │  Track B: Conference Model + Community Programs
+  │
+  Wave 2 ─── Synthesis (Sequential) ───────────────────────
+  │  Workforce Context + Cross-module integration
+  │
+  Wave 3 ─── Publication + Verification (Sequential) ─────
+     Final assembly, test plan execution, verification
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[nosep]
+  \item \textbf{Source Layer} --- Curated bibliography of SANS, GIAC, ISC2, and NIST sources
+  \item \textbf{Survey Layer} --- Per-module research documents with structured data tables
+  \item \textbf{Synthesis Layer} --- Cross-module integration and workforce context analysis
+  \item \textbf{Publication Layer} --- Final document assembly with verification matrix
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+D1 & Source Index & All sources validated, categorized by type & Wave 0 \\
+D2 & Org Foundation Survey & History, structure, key figures documented & Wave 1A \\
+D3 & Training \& Cert Survey & 6 practice areas, GIAC pipeline, pricing mapped & Wave 1A \\
+D4 & Conference \& Summit Survey & 8+ events cataloged with distinguishing features & Wave 1B \\
+D5 & Community Programs Survey & All major programs documented with access models & Wave 1B \\
+D6 & Workforce Context Analysis & ISC2 data integrated, career outcomes mapped & Wave 2 \\
+D7 & Integrated Reference Document & Self-contained, cross-referenced, verified & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source index \& schemas & None & Haiku & 2,000 \\
+Org foundation survey & Source index & Sonnet & 8,000 \\
+Training/cert survey & Source index & Sonnet & 12,000 \\
+Conference/summit survey & Source index & Sonnet & 8,000 \\
+Community programs survey & Source index & Sonnet & 6,000 \\
+Workforce context analysis & All surveys & Opus & 10,000 \\
+Cross-module synthesis & All surveys & Opus & 8,000 \\
+Final assembly & All above & Sonnet & 6,000 \\
+Verification & Final doc & Opus & 4,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Workforce analysis requires judgment across economic, technical, and career dimensions; cross-module synthesis requires seeing connections between domains; verification requires critical evaluation \\
+Sonnet & 60\% & Survey compilation, structured data table creation, course/certification mapping, event cataloging---well-defined tasks with clear output formats \\
+Haiku & 10\% & Schema definitions, template scaffolding, bibliography formatting---mechanical tasks with low judgment requirements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallelism} & \tableheader{Windows} & \tableheader{Model Mix} \\
+\midrule
+0 & Foundation & Sequential & 2 & Haiku \\
+1 & Parallel Research & 2 tracks & 8 & Sonnet \\
+2 & Synthesis & Sequential & 4 & Opus \\
+3 & Publication & Sequential & 4 & Sonnet + Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0.1 & Build source index & Categorized bibliography with validation status & Haiku \\
+0.2 & Define shared schemas & Data table formats, citation style, section templates & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Organizational \& Training}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A.1 & Org foundation survey & History, structure, faculty model, standards alignment & Sonnet \\
+1A.2 & Training curriculum map & 6 practice areas, representative courses, career roles & Sonnet \\
+1A.3 & GIAC certification survey & Tiers, exam format, pricing, renewal, CyberLive details & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Events \& Community}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1B.1 & Conference catalog & 2026 events with dates, locations, scale, focus & Sonnet \\
+1B.2 & Summit specialization map & Specialized summits with differentiating features & Sonnet \\
+1B.3 & Community programs survey & Holiday Hack, NetWars, ISC, Reading Room, Work-Study & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Workforce context analysis & ISC2 data integration, salary benchmarks, AI impact & Opus \\
+2.2 & Cross-module synthesis & Connections: gap $\rightarrow$ training $\rightarrow$ community $\rightarrow$ career & Opus \\
+2.3 & ROI analysis & Total cost-of-participation vs.\ career outcome mapping & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Document assembly & Integrated reference with all modules and cross-refs & Sonnet \\
+3.2 & Test plan execution & All safety-critical and core tests run & Opus \\
+3.3 & Verification matrix & Every criterion mapped to passing tests & Sonnet \\
+3.4 & Final publication & PDF, \LaTeX\ source, index.html & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+  \item Wave 0 outputs cached for all Wave 1 tasks (schemas reused across both tracks)
+  \item Wave 1 Track A and Track B run in parallel---no cross-dependency within Wave 1
+  \item Wave 2 synthesis reads all Wave 1 outputs within 5-minute cache TTL window
+  \item Source index (Wave 0) remains valid throughout mission---single fetch, multiple reads
+  \item GIAC pricing data fetched once in Wave 1A.3, reused in Wave 2.3 ROI analysis
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 4,000 \\
+Wave 1: Parallel Research & --- & 34,000 & --- \\
+Wave 2: Synthesis & 18,000 & --- & --- \\
+Wave 3: Publication & 4,000 & 6,000 & --- \\
+\midrule
+\textbf{Totals} & \textbf{22,000} & \textbf{40,000} & \textbf{4,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} \textasciitilde66,000 tokens across 18 context windows and 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  [Source Index] ──┬──▶ [Org Foundation] ──┐
+  [Schemas]     ──┤                        ├──▶ [Workforce Context]
+                  ├──▶ [Training/Cert]  ───┤       │
+                  ├──▶ [Conference]     ───┤       ▼
+                  └──▶ [Community]      ───┘  [Cross-Module Synthesis]
+                                                   │
+                                                   ▼
+                                            [Final Assembly]
+                                                   │
+                                                   ▼
+                                            [Verification]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Action} \\
+\midrule
+Safety-critical & Non-negotiable source and attribution boundaries & 5 & BLOCK \\
+Core functionality & Deliverable acceptance criteria & 14 & BLOCK \\
+Integration & Cross-module validation & 5 & BLOCK \\
+Edge cases & Robustness and completeness & 4 & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to SANS, GIAC, ISC2, NIST, or professional journalism. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every price, salary, percentage, and workforce statistic attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents training options and workforce data without advocating for specific policy positions \\
+SC-SEC & Security sensitivity & No operational exploitation details; training topics referenced at curriculum level only \\
+SC-PRC & Pricing accuracy & All pricing data attributed to official SANS/GIAC sources with date stamps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Org history completeness & Timeline from 1989 to 2026 with $\geq$5 milestones sourced \\
+CF-02 & Practice area coverage & All 6 practice areas mapped with $\geq$2 courses each \\
+CF-03 & GIAC tier documentation & All 3 tiers (Practitioner, Applied Knowledge, Expert) described \\
+CF-04 & Exam format accuracy & Open-book policy, CyberLive, proctoring options, time limits documented \\
+CF-05 & Pricing table completeness & Course, cert attempt, retake, renewal, extension all priced \\
+CF-06 & Event catalog size & $\geq$8 distinct 2026 events with dates and locations \\
+CF-07 & Summit differentiation & Each summit's unique focus area clearly distinguished \\
+CF-08 & Holiday Hack documentation & History, scale, access model, skill levels, prizes documented \\
+CF-09 & NetWars variants cataloged & $\geq$4 NetWars variants identified with descriptions \\
+CF-10 & ISC2 data integration & $\geq$8 specific statistics from 2025 Workforce Study cited \\
+CF-11 & Salary benchmarks & $\geq$3 GIAC-certified salary data points with sources \\
+CF-12 & AI impact documented & AI skill demand, professional sentiment, SANS course response covered \\
+CF-13 & Delivery modes mapped & All 3 delivery modes (In-Person, Live Online, OnDemand) described \\
+CF-14 & NIST alignment noted & NICE framework relationship documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Gap $\rightarrow$ Training cascade & Document traces workforce gap to SANS training as response \\
+IN-02 & Training $\rightarrow$ Cert $\rightarrow$ Career & Pipeline from course to certification to salary outcome documented \\
+IN-03 & Community $\rightarrow$ Pipeline on-ramp & Holiday Hack/NetWars shown as entry points to paid training pathway \\
+IN-04 & Pricing consistency & Costs in Module 2 match costs referenced in Module 5 ROI context \\
+IN-05 & Document self-containment & No undefined terms or unexplained references; complete for naive reader \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Cost criticism noted & SANS pricing criticism acknowledged (high cost, ROI debates) \\
+EC-02 & Ethical grey areas noted & Active defense / ``hack back'' course ethics flagged \\
+EC-03 & Data recency & Primary sources from 2025--2026 where available \\
+EC-04 & International variation & Non-US pricing or availability mentioned at least once \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Org history 1989--2026 & CF-01 & Pending \\
+2. Six practice areas mapped & CF-02, CF-13 & Pending \\
+3. GIAC pipeline end-to-end & CF-03, CF-04, CF-05 & Pending \\
+4. 8+ events cataloged & CF-06, CF-07 & Pending \\
+5. Community programs documented & CF-08, CF-09 & Pending \\
+6. Pricing structure mapped & CF-05, SC-PRC & Pending \\
+7. ISC2 workforce data & CF-10, SC-NUM & Pending \\
+8. Career outcome data & CF-11, CF-12 & Pending \\
+9. NIST NICE alignment & CF-14 & Pending \\
+10. Cross-module integration & IN-01, IN-02, IN-03 & Pending \\
+11. Source traceability & SC-SRC, SC-NUM & Pending \\
+12. Self-contained document & IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache timing \\
+SCOUT & Research Agent & Source gathering; SANS/GIAC/ISC2 evidence compilation \\
+EXEC-A & Executor (Track A) & Org Foundation + Training/Cert survey production \\
+EXEC-B & Executor (Track B) & Conference + Community programs survey production \\
+CRAFT-TRAIN & Training Specialist & Curriculum domain analysis; GIAC pipeline verification \\
+CRAFT-WORK & Workforce Analyst & ISC2 data integration; salary benchmarks; AI impact analysis \\
+VERIFY & Verification & Source validation; pricing accuracy; cross-reference checking \\
+INTEG & Integration Agent & Cross-module relationship validation; self-containment testing \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Waves & 4 (0--3) \\
+Parallel Tracks & 2 (Wave 1) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Total Token Budget & \textasciitilde66,000 \\
+Model Split & Opus 33\% / Sonnet 61\% / Haiku 6\% \\
+Research Modules & 5 \\
+Deliverables & 7 \\
+Test Cases & 28 \\
+Success Criteria & 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\emph{``CTFs are a tremendous learning vehicle.''} --- Ed Skoudis, SANS Fellow
+
+\vspace{0.5em}
+
+The SANS ecosystem proves that the space between curiosity and mastery need not be a void. When the pathways are well-architected---practitioner-led training, rigorous certification, community-sustained practice, and free on-ramps for anyone willing to learn---extraordinary capability emerges from ordinary starting points. That is the Amiga Principle at work in the cybersecurity profession: specialized execution paths, not brute-force headcount, are what close the skills gap.
+\end{quotebox}
+
+\end{document}

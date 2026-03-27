@@ -1,0 +1,1214 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Technology / Sovereign Cloud
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo -- sections
+\definecolor{secondary}{HTML}{006064}     % Teal -- subsections
+\definecolor{tertiary}{HTML}{BF360C}      % Ember orange -- subsubsections
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F7FA}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers / Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Voxel as Vessel v2 --- Sovereign World Architecture}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Voxel as Vessel v2 -- Sovereign World Architecture Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ===========================================================
+% TITLE PAGE
+% ===========================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- SECOND-PASS FILTER}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{10cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Voxel as Vessel\\[0.3em]v2: Sovereign World Architecture}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Block Data $\cdot$ PCG Seeds $\cdot$ Multi-World Topology $\cdot$ Ceph/OpenStack Sovereignty}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Second-Pass Filter on the Voxel as Vessel Mission}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Builds on v1 Foundations}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 10, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--10 context windows across 3--4 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Depends on: Voxel as Vessel v1 (Ceph/RADOS + RAG pipeline + Anvil format)}}
+\end{center}
+\newpage
+
+% ===========================================================
+% TABLE OF CONTENTS
+% ===========================================================
+\tableofcontents
+\newpage
+
+% ===========================================================
+% STAGE 1 --- VISION DOCUMENT
+% ===========================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Voxel as Vessel v2 --- Vision Guide}
+
+\metafield{Date:}{March 10, 2026}
+\metafield{Status:}{Second-Pass Research Vision / Pre-Execution}
+\metafield{Depends on:}{Voxel as Vessel v1 (Ceph/RADOS architecture, Anvil/NBT format, RAG pipeline foundations)}
+\metafield{Extends:}{Block/chunk/texture data deep-dive; PCG seeds as high-dimensional address spaces; sovereign world ownership; OpenStack VM isolation; infinite edge topology; LOD-driven dynamic Ceph allocation; backup, imaging, and hot-swap}
+\metafield{Context:}{Miles Tiberius Foxglove / tibsfox.com --- The Space Between autodidact philosophy}
+
+\subsection{Vision}
+
+The first \emph{Voxel as Vessel} mission established the isomorphism: a Minecraft region file is structurally identical to a RADOS object. Coordinate-keyed, chunked, zlib-compressed, hierarchically typed --- the Anvil format and Ceph's object store solve the same distributed storage problem at different scales.
+
+The second pass deepens the stack in every direction. Below the region file, we discover a fractal of data structures: palette-compressed BlockState long arrays, JSON block models, PBR texture sets with color/normal/MER layers, atlas sprite sheets stitched from namespaced PNG files. Each layer is a coordinate space in its own right, and each coordinate space admits a seed. Java's 64-bit LCG seed is not merely a world identifier --- it is a compressed address into a 2\textsuperscript{64} combinatorial manifold. Two worlds at the same seed but different generator versions inhabit adjacent but non-overlapping regions of that manifold; Morton-encoded chunk coordinates fold 3D space onto 1D keys; Hilbert curves preserve spatial locality through the folding. The same mathematics that routes network packets and indexes R-trees also governs which blocks grow on which hillside.
+
+Above the region file, we find the question of sovereignty. A world is not merely a file. It is a persistent space with an owner, a history, a community, and a right to continuity. When that world runs on a VM backed by Ceph RBD --- with OpenStack Keystone managing identity, Neutron enforcing network isolation, Nova scheduling dedicated compute nodes, and Cinder presenting block volumes --- the world acquires the infrastructure of a sovereign state: territory (storage pool), citizenship (player data sync), borders (server firewall rules), and a constitution (access control lists).
+
+This mission maps the full architecture: from the 16x16x384 block column at the base, through the PCG seed manifold that generates it, across the Velocity proxy network that stitches multiple servers into a seamless world, into the OpenStack tenant that owns the VM, and out to the Ceph RBD mirroring pair that guarantees continuity when disaster strikes. At every edge --- world border, server boundary, storage cluster boundary --- we ask: what is the topology? How does LOD govern the detail budget? How does the storage allocation scale dynamically? What happens during a hot swap?
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Block and texture data opacity.} The Anvil format stores block IDs as palette-compressed long arrays inside NBT compounds. Texture packs layer color, normal, metalness/emissive/roughness (MER), and height maps in JSON-driven atlas sprite sheets. No systematic mapping exists between the block/texture data hierarchy and the RAG embedding pipeline introduced in v1. The palette is the vocabulary; the atlas is the token dictionary; the chunk is the document. This isomorphism is unformalized.
+
+  \item \textbf{Seed space is unexploited as an address space.} A 64-bit Java LCG seed generates a deterministic world. LCG state can be algebraically inverted from observed chunk features (structure placements, biome boundaries, dungeon layouts). Yet no framework treats the seed as a coordinate in a high-dimensional address space, uses it to address world shards in Ceph, or exploits seed-space locality to cluster thematically related worlds.
+
+  \item \textbf{Multi-server world coherence lacks a sovereign ownership model.} MultiPaper, HuskSync, and Velocity solve horizontal scaling and player data sync, but none formalize world ownership. Who owns a chunk when two servers compete for it? What are the access rights when a player crosses a server boundary? How does a world operator assert sovereignty over their space in a shared OpenStack tenant?
+
+  \item \textbf{Infinite world topology is discontinuous at edges.} Minecraft's world boundary is a hard wall at $\pm$30,000,000 blocks. No native mechanism supports torus topology (edge wraps), multi-world portals as topology-preserving maps, or LOD-based storage scaling where distant world regions are stored at reduced resolution in Ceph. The edge is a cliff, not a horizon.
+
+  \item \textbf{Ceph backup and hot-swap for live game worlds is operationally fragile.} Minecraft worlds are written continuously. RBD snapshots are CoW but require filesystem freeze coordination. Journal-based vs.\ snapshot-based RBD mirroring have different RPO/RTO tradeoffs. Hot-swap (live promotion of secondary RBD image) during active world operation is underdocumented. The security surface --- RADOS keyrings, CephX auth, data-at-rest encryption --- is rarely hardened in game server contexts.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Sovereign Voxel Stack:} A Minecraft world is a sovereign computational territory, owned by a Keystone identity, isolated by Neutron, stored in a dedicated Ceph pool, generated from a seed-coordinate in a 2\textsuperscript{64}-dimensional address manifold, rendered at LOD-appropriate resolution from the world edge inward, and continuously protected by journal-mirrored RBD snapshots with hot-swap capability.
+
+\subsubsection{System Architecture --- Layer Map}
+
+\begin{asciibox}
+SOVEREIGN VOXEL STACK --- LAYER MAP
+
+LAYER 7: TOPOLOGY & RENDERING
+  World Edge      : Hard wall / torus wrap / portal gateway
+  LOD Zones       : [FULL] --> [REGION-LOD2] --> [REGION-LOD4] --> [UNLOADED]
+  Map Projection  : Morton / Hilbert curve --> 1D Ceph object keys
+
+LAYER 6: MULTI-SERVER FABRIC
+  Velocity Proxy  : Player routing, server selection, load balance
+  MultiPaper      : Chunk ownership negotiation, Master coordinator
+  HuskSync        : Player data sync via Redis + MySQL/PostgreSQL
+
+LAYER 5: WORLD DATA
+  World Files     : /worlds/<uuid>/region/r.X.Z.mca  (Anvil)
+  Player Data     : /worlds/<uuid>/playerdata/UUID.dat
+  Resource Packs  : /packs/<namespace>/  (JSON + PNG atlas)
+
+LAYER 4: BLOCK/TEXTURE SCHEMA
+  BlockState      : Palette-compressed long[] in NBT Section
+  Block Model     : JSON (assets/minecraft/models/block/*.json)
+  Atlas Config    : assets/<ns>/atlases/blocks.json  (sprite sources)
+  Texture Set     : color.png + normal.png + MER.png  (PBR, Bedrock)
+
+LAYER 3: PCG SEED SPACE
+  World Seed      : 64-bit signed long (Java) / 32-bit int (Bedrock)
+  Chunk Seed      : f(worldSeed, chunkX, chunkZ)  via LCG
+  Biome Seed      : GenLayer LCG  (multiplier: 6364136223846793005)
+  Structure Seed  : lower 48 bits of worldSeed  (Java Random)
+
+LAYER 2: OPENSTACK / VM ISOLATION
+  Keystone        : World owner identity (UUID -> project -> tenant)
+  Nova            : Dedicated compute node (PlacementFilter)
+  Neutron         : Private network per world, security groups
+  Cinder          : RBD volume  (pool: worlds, image: <world-uuid>)
+
+LAYER 1: CEPH DISTRIBUTED STORAGE
+  RBD Images      : worlds/<world-uuid>  (block device for VM disk)
+  RADOS Objects   : regions/<world-uuid>/r.X.Z.mca  (object store)
+  RBD Mirror      : journal-based or snapshot-based (site A -> site B)
+  Snapshots       : worlds/<world-uuid>@<YYYY-MM-DD_HH>  (CoW)
+  CephX Auth      : per-world keyring, cap r rw pool=worlds
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY GRAPH
+
+  M7-BLOCK       M8-TEXTURE      M9-PCG-SEED
+  (Block/chunk   (Resource pack   (LCG math,
+   NBT schema,    atlas, JSON      seed space,
+   palette,       models, PBR)     dimensional
+   sections)                       mapping)
+      |               |                |
+      +-------+--------+--------+------+
+                       |
+              M10-MULTI-SERVER
+              (Velocity, MultiPaper,
+               HuskSync, chunk
+               ownership, sync)
+                       |
+              M11-SOVEREIGN-WORLD
+              (OpenStack: Keystone,
+               Nova, Neutron, Cinder;
+               world ownership rights)
+                       |
+              M12-EDGE-TOPOLOGY
+              (Infinite torus wrap,
+               portal maps, LOD zones,
+               dynamic Ceph allocation)
+                       |
+              M13-BACKUP-SECURITY
+              (RBD snapshots, mirror,
+               hot-swap, CephX, encryption,
+               disaster recovery)
+
+  Note: M7-M9 are parallel (v2 deep-dive on v1 foundations)
+        M10-M11 are parallel (server fabric + sovereignty)
+        M12-M13 are parallel (topology + protection)
+        M14-SYNTHESIS integrates all seven
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M7: Block and Chunk Data Deep Dive}
+
+Block storage in Minecraft 1.18+ uses a palette-compression scheme within NBT Section compounds. Each Section (16\textsuperscript{3} blocks) stores a \texttt{block\_states} compound containing a \texttt{palette} array of block state descriptors and a \texttt{data} array of packed 64-bit longs. The bits-per-entry is \texttt{ceil(log2(palette\_size))}, minimum 4. This module formalizes the palette as a vocabulary, the Section as a compressed document, and the chunk as a corpus shard --- completing the RAG isomorphism begun in v1.
+
+\subsubsection{M8: Texture Pack and Resource Pack Architecture}
+
+Resource packs layer assets at \texttt{assets/<namespace>/}: block state JSON files (\texttt{blockstates/}), model JSON files (\texttt{models/block/}), and texture PNGs (\texttt{textures/block/}). Since 1.19.3, atlas configuration files (\texttt{atlases/}) control sprite stitching into GPU-ready sprite sheets. Bedrock adds PBR layers: color, normal, MER (metalness/emissive/roughness), and subsurface. Pack format versioning (pack\_format in \texttt{pack.mcmeta}, now \texttt{min\_format}/\texttt{max\_format} since 25w31a) governs compatibility. This module maps the entire texture data hierarchy to addressable storage objects in Ceph.
+
+\subsubsection{M9: PCG Seed Space as High-Dimensional Address Manifold}
+
+Java Edition uses a 64-bit signed long seed initializing a 48-bit LCG (\texttt{seed * 0x5DEECE66DL + 0xBL}). Structure generation uses only the lower 48 bits (``structure seed''). Biome generation uses GenLayer with its own LCG (multiplier 6364136223846793005). With $2^{64}$ possible seeds and 5 climate parameters per quarter-chunk (temperature, humidity, continentalness, erosion, weirdness), each seed is a point in a high-dimensional manifold. This module develops seed-space locality metrics, Morton/Hilbert mappings from seed coordinates to Ceph object keys, and algebraic LCG inversion for seed recovery from observed terrain features.
+
+\subsubsection{M10: Multi-Server World Fabric and Data Sync}
+
+Velocity (successor to BungeeCord) provides player routing and load balancing. MultiPaper enables single-world horizontal scaling: a MultiPaper-Master coordinates chunk ownership across server instances, routing chunk read requests to the owning server for consistency. HuskSync provides cross-server player data synchronization via Redis (low-latency) + MySQL/PostgreSQL (persistent). This module specifies the full data flow for a sovereign world network: from player login through Velocity, through chunk ownership negotiation in MultiPaper, to player data sync in HuskSync, with formal ownership semantics for each data type.
+
+\subsubsection{M11: Sovereign World Rights and OpenStack Isolation}
+
+OpenStack provides the infrastructure primitives for world sovereignty. Keystone maps world UUID to project/tenant. Nova's PlacementFilter assigns dedicated compute nodes to isolated world tenants. Neutron creates private networks per world with security group firewall rules. Cinder presents Ceph RBD volumes as block devices for VM disks. The Sovereign Cloud Stack (SCS, OpenStack 2025.1 Epoxy) formalizes the Domain Manager role for tenant self-management. This module specifies the full tenant provisioning workflow for a new world and the access control matrix governing player, operator, and administrator roles.
+
+\subsubsection{M12: Infinite Edge Topology and LOD-Driven Dynamic Storage}
+
+Minecraft's native world border is a hard wall. This module explores three topology extensions: (1) torus wrap (seamless east-west/north-south connection using 3D simplex noise seeded identically at both edges), (2) portal gateway (coordinate-preserving map between two world UUIDs, implemented as a dimension warp), and (3) multi-world edge stitching (adjacent worlds share a border region stored redundantly in both worlds' Ceph pools). LOD zones govern storage allocation: the innermost zone (player-active) is full-resolution Anvil; outer zones use coarser region representations compressed at higher ratios and allocated from a dynamic Ceph pool with OSD-class-aware CRUSH rules scaling capacity on demand.
+
+\subsubsection{M13: Backup, Security, Imaging, and Hot Swap}
+
+Ceph RBD provides CoW snapshots (\texttt{rbd snap create worlds/<uuid>@snap-name}). Incremental backup exports deltas between snapshots (\texttt{rbd export-diff --from-snap snap1 pool/image@snap2 diff.bin}). Journal-based RBD mirroring provides near-real-time replication between sites; snapshot-based mirroring provides periodic synchronization with lower network overhead. Hot swap promotes the secondary site's image to primary (\texttt{rbd mirror image promote}) after demoting the primary. CephX authentication issues per-world keyrings with least-privilege caps. Data-at-rest encryption uses LUKS on the VM disk layer above RBD. This module specifies the full DR playbook: RPO/RTO targets, failover sequence, filesystem freeze coordination, and post-failover validation.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# Voxel as Vessel v2 --- Chipset Configuration
+mission: voxel-vessel-v2-sovereign-world
+version: "2.0.0"
+profile: fleet
+depends_on: voxel-vessel-v1
+
+modules:
+  M7:
+    name: block-chunk-deep-dive
+    model: claude-sonnet-4-6
+    wave: 1A
+    parallel_with: [M8, M9]
+    token_budget: 18000
+  M8:
+    name: texture-resource-pack
+    model: claude-sonnet-4-6
+    wave: 1A
+    parallel_with: [M7, M9]
+    token_budget: 16000
+  M9:
+    name: pcg-seed-manifold
+    model: claude-opus-4-6
+    wave: 1A
+    parallel_with: [M7, M8]
+    token_budget: 22000
+  M10:
+    name: multi-server-fabric
+    model: claude-sonnet-4-6
+    wave: 1B
+    parallel_with: [M11]
+    token_budget: 18000
+    depends_on: [M7]
+  M11:
+    name: sovereign-world-openstack
+    model: claude-opus-4-6
+    wave: 1B
+    parallel_with: [M10]
+    token_budget: 24000
+    depends_on: [M7]
+  M12:
+    name: edge-topology-lod-storage
+    model: claude-opus-4-6
+    wave: 2A
+    parallel_with: [M13]
+    token_budget: 26000
+    depends_on: [M9, M10, M11]
+  M13:
+    name: backup-security-hotswap
+    model: claude-sonnet-4-6
+    wave: 2A
+    parallel_with: [M12]
+    token_budget: 20000
+    depends_on: [M11]
+  M14:
+    name: synthesis
+    model: claude-opus-4-6
+    wave: 3
+    token_budget: 30000
+    depends_on: [M7, M8, M9, M10, M11, M12, M13]
+
+cache_strategy:
+  - v1_research_reference: "prefill at Wave 0 -- do not re-derive"
+  - block_schema: "share NBT compound spec across M7, M8, M10"
+  - openstack_api: "share tenant provisioning template across M11, M12, M13"
+  - ceph_rbd_ops: "share snapshot/mirror command reference across M11, M12, M13"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v2.0)}
+
+\begin{itemize}[leftmargin=2em]
+  \item Palette-compressed BlockState NBT schema (Java Edition 1.18+)
+  \item Resource pack / atlas / block model / texture set JSON structures
+  \item PBR texture layers (color, normal, MER, heightmap) for Bedrock Vibrant Visuals
+  \item PCG LCG seed mathematics, seed-space topology, dimensional mapping
+  \item Velocity + MultiPaper + HuskSync multi-server architecture
+  \item OpenStack (Keystone, Nova, Neutron, Cinder) tenant isolation model
+  \item Torus-wrap, portal-gateway, and edge-stitch infinite topology designs
+  \item LOD zone specification with dynamic Ceph pool allocation
+  \item RBD snapshot, incremental export-diff, journal/snapshot mirroring
+  \item Hot-swap failover sequence (demote/promote) with RPO/RTO targets
+  \item CephX keyring least-privilege design and LUKS disk encryption
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+  \item Bedrock Edition world format (LevelDB) --- Java Edition only for v2
+  \item Fabric/Forge mod API internals beyond plugin communication channels
+  \item Client-side rendering pipeline (GPU shader, deferred rendering)
+  \item Legal / EULA analysis of world sovereignty claims
+  \item Kubernetes/container orchestration (reserved for v3)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Block palette vocabulary is formally mapped to RAG token embedding space (palette entry = token type, bits-per-entry = vocabulary entropy).
+  \item Resource pack atlas JSON structure is fully catalogued: all source types (\texttt{directory}, \texttt{single}, \texttt{unstitch}, \texttt{filter}, \texttt{paletted\_permutations}) documented with Ceph storage addresses.
+  \item PCG seed-space distance metric is defined: two seeds are ``adjacent'' if their LCG states differ by $\leq k$ calls; metric is computable in $O(1)$.
+  \item Morton and Hilbert curve encodings for chunk coordinates are implemented and validated: \texttt{encode(chunkX, chunkZ) -> rados\_key} is deterministic and invertible.
+  \item Multi-server ownership protocol is formally specified: chunk ownership table, conflict resolution rules, and player data sync sequence are documented.
+  \item OpenStack tenant provisioning sequence for a new sovereign world is fully scripted: Keystone project, Nova aggregate, Neutron network, Cinder volume, CephX keyring.
+  \item Torus-wrap topology is prototyped: noise function seeding strategy produces seamless edge join with $< 5\%$ visual discontinuity metric.
+  \item LOD zone storage allocation policy is specified: zone radii, compression ratios, Ceph device-class assignment, and scaling trigger thresholds are all defined.
+  \item RBD snapshot RPO is $\leq 15$ minutes for active worlds; journal-mirroring replication lag is $\leq 60$ seconds under normal network conditions.
+  \item Hot-swap failover sequence is documented step-by-step with pre- and post-validation checks; total RTO is $\leq 5$ minutes for a world with $< 1$TB RBD image.
+  \item CephX keyring design follows least-privilege: each world-uuid keyring has caps limited to its own pool/namespace with no cross-world read access.
+  \item Full synthesis document connects v1 (RADOS/RAG/Anvil) to v2 (block schema/PCG/sovereignty/topology/DR) in a coherent reference architecture.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Voxel as Vessel v1 & Foundation & Ceph/RADOS, Anvil format, RAG pipeline --- do not re-derive \\
+The Space Between (2026) & Philosophy & Autodidact framing; vibration through-line; same equations at different scales \\
+Skill-Creator Mission & Tooling & This mission package is intended for execution via GSD Skill-Creator \\
+SCS R9 / OpenStack Epoxy & Reference & Sovereign Cloud Stack R9 (2025); Domain Manager role; OpenStack 2025.1 \\
+MultiPaper / HuskSync & Reference & Open-source server scaling and sync tools; Apache 2.0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A block is a token. A chunk is a document. A region file is a corpus shard. A seed is a coordinate. A world is a sovereign territory.
+
+Every layer of this architecture is the same structure at a different scale. The LCG multiplier \texttt{0x5DEECE66D} is a magic number --- not because Mojang chose it, but because it appears in the Wikipedia article on linear congruential generators as a \emph{common parameter}. It is not special to Minecraft; it is the universe's preferred way to fold large spaces into small ones. Morton codes fold 2D chunk coordinates into 1D RADOS keys using the same bit-interleaving trick that Z-order curves use to preserve spatial locality in databases. Hilbert curves do the same with better locality. The mathematics of storage routing and the mathematics of world generation are not separate subjects; they are the same subject viewed from different altitudes.
+
+The sovereign world is the Amiga Principle at planetary scale. The Amiga achieved extraordinary capability through architectural leverage: a custom chipset that understood the problem deeply enough to do more with less. The sovereign voxel stack achieves the same thing: a world that is simultaneously a game environment, a distributed storage namespace, a RAG corpus, a computational territory, and a persistent community --- all from the same underlying geometry. The Space Between is not a metaphor here. It is the literal coordinate space between two chunk addresses, the literal frequency domain between two noise octaves, the literal gap between two LCG states. Maps between things are more fundamental than the things themselves, and this architecture is nothing but maps, all the way down.
+
+\newpage
+
+% ===========================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ===========================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Voxel as Vessel v2 --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from four targeted research sessions conducted March 10, 2026, plus harvested context from the v1 mission. It covers the seven new modules (M7--M13) added in the second-pass filter. Findings from v1 (Ceph/RADOS architecture, Anvil .mca format, NBT tag types, RAG pipeline stages, embedding models) are not repeated here; consult the v1 Research Reference.
+
+Key sources: Minecraft Wiki (minecraft.wiki), Microsoft Learn Bedrock documentation, Sovereign Cloud Stack (sovereigncloudstack.org), OpenMetal (openmetal.io), Ceph official documentation (ceph.io, docs.ceph.com), GitHub repositories (MultiPaper, HuskSync, camptocamp/ceph-rbd-backup), NVIDIA GPU Gems 3 (procedural terrain/LOD), Alan Zucconi's Minecraft world generation analysis.
+
+\subsection{M7: Block and Chunk Data --- Deep Technical Reference}
+
+\subsubsection{BlockState Palette Compression (Java 1.18+)}
+
+Each Section (16\textsuperscript{3} = 4096 blocks) stores a \texttt{block\_states} NBT compound with two fields:
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{palette}: TAG\_List of TAG\_Compound, each entry being a block state descriptor (\texttt{Name} + optional \texttt{Properties}).
+  \item \texttt{data}: TAG\_Long\_Array of packed integers. Bits-per-entry = max(4, ceil(log2(palette\_length))). Entries are packed sequentially across longs; no cross-long spanning in 1.16+.
+\end{itemize}
+
+A chunk with only air and stone has a 2-entry palette, requiring 4 bits per block (minimum). A heavily decorated chunk might have 128 block states, requiring 7 bits per block. The \texttt{data} array length is ceil(4096 * bpe / 64).
+
+\textbf{RAG isomorphism (v2 formalization):} The palette is the vocabulary (block type = token type). The bits-per-entry encodes vocabulary entropy. A Section with palette size $n$ has information-theoretic entropy $\log_2 n$ bits per token. The palette index is the token embedding address. The long array is the document body. This completes the block$\to$token mapping begun in v1.
+
+\subsubsection{Chunk Generation Pipeline (Java 1.18+ Stages)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Stage} & \tableheader{Description} \\
+\midrule
+noise & Base terrain density using 50+ noise maps; 3D climate map per quarter-chunk \\
+surface & Surface block placement (grass, sand, snow) based on biome \\
+carvers & Cave and ravine carving \\
+liquid\_carvers & Aquifer and lava sea placement \\
+features & Trees, ores, structures, vegetation \\
+light & Deferred light level calculation \\
+heightmaps & MOTION\_BLOCKING, WORLD\_SURFACE, OCEAN\_FLOOR generation \\
+full & Chunk ready; entity spawning on initial generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M8: Texture Pack and Resource Pack Architecture}
+
+\subsubsection{Resource Pack Directory Structure}
+
+\begin{asciibox}
+<pack-root>/
+  pack.mcmeta              -- Pack metadata (format, description)
+  pack.png                 -- Pack icon
+  assets/
+    <namespace>/
+      blockstates/         -- Block variant/multipart JSON
+        stone.json
+      models/
+        block/             -- Block model JSON (geometry + faces)
+          stone.json
+        item/              -- Item model JSON
+      textures/
+        block/             -- PNG textures (16x16, 32x32, etc.)
+          stone.png
+      atlases/             -- Sprite atlas configs (1.19.3+)
+        blocks.json        -- Controls block texture atlas stitching
+      sounds/              -- .ogg audio files
+      sounds.json          -- Sound event definitions
+\end{asciibox}
+
+\subsubsection{Atlas System (Java 1.19.3+)}
+
+Atlas config files in \texttt{assets/<ns>/atlases/} control GPU sprite sheet stitching. Source types:
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{directory} --- include all PNGs from a subdirectory recursively.
+  \item \texttt{single} --- include one specific PNG by resource path.
+  \item \texttt{filter} --- remove sprites matching namespace/path regex from the list.
+  \item \texttt{unstitch} --- extract regions from a single source image by pixel coordinates.
+  \item \texttt{paletted\_permutations} --- generate color-permuted variants from a palette key file (used for armor trims, fireworks).
+\end{itemize}
+
+The blocks atlas (\texttt{atlases/blocks.json}) stitches all block textures. Mipmapping: 4 default mip levels; resolution halved at each level. Padding between sprites is $2^{n_{mip}}$ texels minimum to prevent bleed. If the atlas exceeds GPU texture size limits, Minecraft auto-downscales all sprites.
+
+\subsubsection{PBR Texture Sets (Bedrock Vibrant Visuals)}
+
+Bedrock's \texttt{minecraft:texture\_set} JSON (format\_version 1.16.100+) defines PBR layers:
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{color} --- RGBA base color (PNG or hex/array)
+  \item \texttt{normal} --- Normal map (R=X, G=Y, B=Z surface direction)
+  \item \texttt{metalness\_emissive\_roughness} (\texttt{MER}) --- R=metalness, G=emissive, B=roughness
+  \item \texttt{heightmap} --- Parallax occlusion data
+  \item \texttt{metalness\_emissive\_roughness\_subsurface} (1.21.30+) --- Adds subsurface scattering channel
+\end{itemize}
+
+\textbf{Storage implication:} A PBR block requires 4 PNG files per face direction instead of 1. For a 256-block-type world, this multiplies texture storage by up to 4x. In Ceph, this maps to 4 RADOS objects per block type per namespace, addressable as \texttt{textures/<ns>/<block>/<layer>.png}.
+
+\subsubsection{Pack Format Versioning}
+
+Pack format versioning (field \texttt{pack\_format} in \texttt{pack.mcmeta}) ensures compatibility. Since snapshot 25w31a, format uses \texttt{min\_format}/\texttt{max\_format} range. Format 48 corresponds to 1.21; format 88 corresponds to 1.21.9. Incompatible packs trigger warnings; the game loads them with additional confirmation only.
+
+\subsection{M9: PCG Seed Space as High-Dimensional Address Manifold}
+
+\subsubsection{Seed Mathematics}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Java Edition:} 64-bit signed long; $2^{64}$ = 18.4 quintillion unique seeds.
+  \item \textbf{Bedrock Edition:} 32-bit signed int; $2^{32}$ = 4.3 billion unique seeds.
+  \item \textbf{LCG state:} Java's \texttt{Random} is a 48-bit LCG: \texttt{state = (state * 0x5DEECE66DL + 0xBL) \& ((1L<<48)-1)}. Upper 32 bits of state are the next \texttt{nextInt()} output.
+  \item \textbf{Structure seed:} Lower 48 bits of world seed. All structure placements (villages, strongholds, monuments) use only these 48 bits, making structure seed brute-force feasible ($2^{48}$ states, recoverable in hours on GPU).
+  \item \textbf{Biome seed:} GenLayer uses its own LCG with multiplier \texttt{6364136223846793005L} and increment \texttt{1442695040888963407L}. Biomes require full 64-bit seed.
+  \item \textbf{Chunk seed:} Each chunk gets a seed derived from world seed + chunkX + chunkZ via a sequence of LCG advances.
+\end{itemize}
+
+\subsubsection{1.18 Climate Parameters}
+
+Since 1.18, each quarter-chunk (4x4x4 blocks) has 5 climate parameters from noise maps: temperature, humidity, continentalness, erosion, weirdness. Biome assignment matches these parameters to the nearest biome in a 5D climate space. Over 50 noise maps contribute to terrain generation in 1.18+.
+
+\subsubsection{Seed-Space Address Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mapping} & \tableheader{Description} \\
+\midrule
+Morton (Z-order) & Bit-interleave chunkX and chunkZ: even bits from X, odd bits from Z. Preserves 2D locality in 1D key. Simple to compute. \\
+Hilbert curve & Recursive quadrant subdivision; superior locality vs.\ Morton (no row-reversal artifacts). More complex; lookup-table or recursive implementation. \\
+Seed + Morton & Prefix RADOS key with seed hash: \texttt{<seed-hash-16>/<morton-key>}. Partitions object namespace by world while preserving spatial locality within world. \\
+Seed-space distance & $d(s_1, s_2)$ = min LCG steps between $s_1$ and $s_2$ states. LCG is invertible ($O(1)$): step count computable via modular inverse of multiplier. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M10: Multi-Server World Fabric and Data Sync}
+
+\subsubsection{Proxy Layer}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{BungeeCord:} Legacy (2012). Rarely updated, lacks modern security. Not recommended for new deployments.
+  \item \textbf{Waterfall:} BungeeCord fork by PaperMC. Active maintenance, improved stability. Good for legacy plugin compatibility.
+  \item \textbf{Velocity:} Current best practice (2025). Faster connection handling, modern plugin API, stronger security. Recommended for new sovereign world networks.
+\end{itemize}
+
+\subsubsection{MultiPaper Chunk Ownership Protocol}
+
+MultiPaper is a Purpur fork enabling a single world to scale across multiple server instances. Architecture:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{MultiPaper-Master:} Standalone process (or BungeeCord/Velocity plugin) storing region files and coordinating ownership.
+  \item \textbf{Chunk read:} Server requests chunk from Master. If another server owns it, Master routes request to owner for up-to-date copy.
+  \item \textbf{Chunk ownership:} Unowned chunks can be ticked by any server. Server sends ownership request to Master before ticking an unowned chunk.
+  \item \textbf{Conflict resolution:} Master arbitrates ownership; single-writer guarantee per chunk at any time.
+  \item \textbf{Scaling:} 10 servers × 10 players each instead of 1 server × 100 players. Preserves vanilla mechanics (render distance, mob farms, redstone).
+\end{itemize}
+
+\subsubsection{Player Data Sync}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{HuskSync:} Cross-server player data sync via Redis (v5.0+) + MySQL/MariaDB/PostgreSQL. Apache 2.0 license. Supports Spigot and Fabric. Syncs inventory, XP, health, potion effects, enderchest, statistics. Per-server group configuration (survival servers vs.\ minigame servers can have separate sync pools).
+  \item \textbf{IOSync:} Simpler alternative; copies player data files (\texttt{world/playerdata/UUID.dat}) to a shared directory on disconnect; restores on reconnect.
+\end{itemize}
+
+\subsection{M11: Sovereign World Rights and OpenStack Isolation}
+
+\subsubsection{OpenStack Service Roles in Sovereign World Architecture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Service} & \tableheader{Role} & \tableheader{World Sovereignty Function} \\
+\midrule
+Keystone & Identity & World UUID mapped to project; player UUIDs mapped to users; roles: world-owner, operator, player, spectator \\
+Nova & Compute & PlacementFilter assigns dedicated compute nodes to isolated world tenants; PlacementFilter prevents cross-tenant VM cohabitation \\
+Neutron & Networking & Private network per world; security groups block cross-world traffic; VPN-as-a-Service available (SCS R7+) \\
+Cinder & Block storage & RBD volume (pool: worlds, image: <world-uuid>) presented as VM block device; snapshot and clone API \\
+Swift / RGW & Object storage & Resource pack and player data backup target; S3-compatible API; per-world buckets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Sovereign Cloud Stack (SCS) Integration}
+
+The Sovereign Cloud Stack R9 (November 2025) ships OpenStack 2025.1 (Epoxy) with Ceph Reef. The Domain Manager role (contributed by SCS community) enables world operators to self-manage users and projects within their tenant without requiring full cloud-admin access. SCS R7 added VPN-as-a-Service; R9 adds live migration improvements for pass-through PCI devices (relevant for GPU-accelerated world rendering nodes).
+
+\subsubsection{Multi-Tenant Ceph Cluster Configuration}
+
+Two Ceph clusters can run side-by-side: a system cluster (for Kubernetes PVC storage) and a tenant cluster (for world data). Separate keyring namespaces; separate CRUSH maps; separate pools. This pattern is documented in OpenStack-Helm and is the production-grade approach for a platform hosting multiple sovereign worlds.
+
+\subsection{M12: Infinite Edge Topology and LOD-Driven Dynamic Storage}
+
+\subsubsection{World Edge Topology Options}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Topology} & \tableheader{Description} & \tableheader{Implementation} \\
+\midrule
+Hard wall & Default; world border enforced at $\pm$30M blocks & Native \\
+Torus wrap & East/west and north/south edges connected; player teleported with coordinate adjustment & Server plugin + noise seed alignment \\
+Portal gateway & Warp between two different world UUIDs at matching border coordinates & Velocity plugin + MultiPaper cross-server teleport \\
+Edge stitch & Two adjacent worlds share a border region stored in both Ceph pools; chunk data replicated at seam & Custom plugin + RBD object copy \\
+Infinite multidimensional & World UUIDs indexed in $n$-dimensional lattice; adjacency defined by seed-space distance & v3 scope \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Torus Topology Implementation}
+
+The key challenge is ensuring noise continuity at the wrap boundary. Solution: use 3D simplex noise evaluated on the surface of a torus, parameterized as $(\sin(2\pi x/W), \cos(2\pi x/W), \sin(2\pi z/H), \cos(2\pi z/H))$ in 4D. The 4D noise function is naturally periodic in both dimensions. As noted in the Atomic Object procedural generation analysis, a world of $W \times H$ chunks can wrap seamlessly if the noise is seeded identically at both edges --- which is guaranteed when the noise function is evaluated on the torus surface in 4D rather than on the flat plane in 2D.
+
+\subsubsection{LOD Zone Specification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Zone} & \tableheader{Radius} & \tableheader{Storage Format} & \tableheader{Ceph Allocation} \\
+\midrule
+Z0 (Active) & 0--256 chunks & Full Anvil, uncompressed & SSD OSD pool, 3x replication \\
+Z1 (Near) & 256--1024 chunks & Anvil, zlib level 6 & SSD/HDD mixed pool \\
+Z2 (Far) & 1024--4096 chunks & Region-averaged palette, 50\% sparse & HDD pool, erasure code 4+2 \\
+Z3 (Archive) & $>$4096 chunks & Seed-regenerable; metadata only & Cold HDD or S3 backend \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Zone transitions are triggered by player proximity: as a player approaches Z2, the Z2 region is promoted to Z1 (regenerated at full resolution from seed if not previously modified, or restored from snapshot if modified). Dynamic Ceph pool allocation uses CRUSH device-class-aware rules: \texttt{class ssd} for Z0, \texttt{class hdd} for Z1/Z2, with OSD weight scaling as world population grows.
+
+\subsubsection{LOD Rendering Principles}
+
+LOD was invented by James Clark (founder of Silicon Graphics) in 1976 for military flight simulators. Modern implementations include Discrete LOD (DLOD, cache multiple model versions), Continuous LOD (CLOD, dynamic mesh simplification), and geomipmapping (terrain-specific, fixed reduction with error evaluation). For voxel worlds, the LOD-storage parallel is direct: distant chunks need fewer blocks resolved (coarser palette, averaged block types), exactly as distant polygons need fewer vertices. The NVIDIA GPU Gems 3 terrain LOD approach (close/medium/far block groups with alpha-blend transitions) maps directly to zone transitions.
+
+\subsection{M13: Backup, Security, Imaging, and Hot Swap}
+
+\subsubsection{RBD Snapshot Strategy}
+
+RBD uses Copy-on-Write (CoW): creating a snapshot is instantaneous and consumes no additional space until blocks diverge. Two levels of snapshots exist (mutually exclusive): Pool-level (entire pool) and RBD-level (individual image). For world servers, RBD-level snapshots are the standard approach.
+
+Full snapshot creation: \texttt{rbd snap create worlds/<world-uuid>@snap-YYYY-MM-DD\_HH}
+
+Incremental export (delta between two snapshots): \\ \texttt{rbd export-diff --from-snap snap1 pool/image@snap2 delta.bin}
+
+This delta file is self-contained and idempotent: import-diff can be interrupted and safely retried. For two-datacenter DR, the delta is transferred via SCP or streamed directly: \\ \texttt{rbd export-diff --from-snap snap1 pool/img@snap2 - | ssh user@site-b rbd import-diff - pool2/img}
+
+\subsubsection{RBD Mirroring Modes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Mechanism} & \tableheader{Tradeoffs} \\
+\midrule
+Journal-based & Real-time journaling; every write replicated to secondary & Near-zero RPO; high bandwidth; slight write latency overhead \\
+Snapshot-based & Periodic snapshot diff export/import & Configurable RPO (minutes--hours); lower bandwidth; simpler ops \\
+BorgBackup + RBD export & Stream RBD export to Borg repo; deduplication + compression & No secondary cluster needed; good for cold backup; no hot-swap \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Hot-Swap Failover Sequence}
+
+For a planned failover (both sites operational):
+\begin{enumerate}
+  \item \textbf{Quiesce world:} Send save-all + stop commands to Minecraft server; wait for confirmation.
+  \item \textbf{Filesystem freeze:} Issue \texttt{fsfreeze} on VM (or use Minecraft world-save lock) to ensure data consistency.
+  \item \textbf{Final snapshot:} \texttt{rbd snap create worlds/<uuid>@failover-final}
+  \item \textbf{Demote primary:} \texttt{rbd mirror image demote worlds/<uuid>} --- primary stops accepting writes, drains journal.
+  \item \textbf{Verify secondary sync:} Confirm secondary has received all journal entries.
+  \item \textbf{Promote secondary:} \texttt{rbd mirror image promote worlds/<uuid>} on site B.
+  \item \textbf{Start VM on site B:} Nova boot from promoted Cinder volume.
+  \item \textbf{Start Minecraft server:} World resumes. Total RTO target: $\leq 5$ minutes.
+\end{enumerate}
+
+For unplanned failover (site A down): skip steps 1--4; promote secondary with \texttt{--force} flag; accept potential loss of journal entries since last sync (RPO = replication lag, target $\leq 60$ seconds with journal mode).
+
+\subsubsection{CephX Security Design}
+
+Each world UUID gets its own CephX keyring with minimum-privilege capabilities:
+
+\begin{asciibox}
+# Per-world keyring (least privilege)
+[client.world-<uuid>]
+  key = <generated-key>
+  caps mon = "profile rbd"
+  caps osd = "profile rbd pool=worlds namespace=<uuid>"
+  caps mgr = "profile rbd pool=worlds"
+\end{asciibox}
+
+This keyring cannot read or write any other world's namespace. Cross-world access requires an operator-level keyring with explicit multi-namespace caps. Data-at-rest encryption uses LUKS on the VM disk layer (above RBD), managed by OpenStack Barbican key service or local key escrow. TLS encrypts RBD mirroring traffic between sites (Ceph messenger v2 protocol, mutual authentication).
+
+\subsubsection{Backup Tooling Landscape}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{rbd-brctl (inwinstack):} YAML-driven full/incremental backup with configurable circle counts and snapshot retention.
+  \item \textbf{ceph-rbd-backup (camptocamp):} Daily snapshot + incremental export to backup cluster; Nagios-compatible check action.
+  \item \textbf{BorgBackup + rbd export:} Block-level deduplication; streams RBD export via stdin; no intermediate files; excellent storage efficiency.
+  \item \textbf{Storware vProtect:} Enterprise solution; proxy VM attach + RBD snap-diff; OpenStack Cinder integration; policy-based scheduling.
+  \item \textbf{Trilio:} Cloud-native DR; Ceph RBD snapshot pull + snapshot-diff for incremental; Kubernetes + OpenStack focus; compliance-ready.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk} & \tableheader{Mitigation} \\
+\midrule
+RADOS keyrings & Secret exposure & Never store keyrings in world files, plugin configs, or version control. Use OpenStack Barbican or HashiCorp Vault. \\
+Player UUID data & Privacy (GDPR/COPPA) & Player data files are PII. Encrypt at rest (LUKS), restrict keyring access, anonymize in analytics. \\
+World EULA & IP/licensing & World files may contain Mojang-generated terrain. Export pipelines must not redistribute protected content. \\
+Seed recovery & Reverse engineering & LCG seed recovery from chunk data is feasible. Do not treat seed as a secret; treat world content as the protected asset. \\
+Hot-swap timing & Data loss & Always demote before promote (never concurrent primaries). Journal mode reduces RPO but never to zero. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Project Documentation}
+
+\begin{itemize}[leftmargin=2em]
+  \item Minecraft Wiki. ``World generation.'' minecraft.wiki/w/World\_generation
+  \item Minecraft Wiki. ``Resource pack.'' minecraft.wiki/w/Resource\_pack
+  \item Minecraft Wiki. ``Atlas.'' minecraft.wiki/w/Atlas
+  \item Minecraft Wiki. ``Pack format.'' minecraft.wiki/w/Pack\_format
+  \item Minecraft Wiki. ``Seed (level generation).'' minecraft.fandom.com/wiki/Seed\_(level\_generation)
+  \item Microsoft Learn. ``Texture Set JSON and Introduction to Texture Sets.'' learn.microsoft.com/en-us/minecraft/creator/reference/content/texturesetsreference
+  \item Microsoft Learn. ``Add-Ons Reference: blocks.json.'' learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference
+  \item Bedrock Wiki. ``Texture Atlases.'' wiki.bedrock.dev/concepts/texture-atlases
+  \item MultiPaper GitHub. github.com/MultiPaper/MultiPaper
+  \item HuskSync GitHub. github.com/WiIIiam278/HuskSync
+  \item Ceph Documentation. ``Block Devices and OpenStack.'' docs.ceph.com/en/latest/rbd/rbd-openstack
+  \item Ceph.io Blog. ``Incremental Snapshots with RBD.'' ceph.io/en/news/blog/2013/incremental-snapshots-with-rbd
+\end{itemize}
+
+\subsubsection{Cloud Infrastructure}
+
+\begin{itemize}[leftmargin=2em]
+  \item Sovereign Cloud Stack. ``SCS R9 Released.'' sovereigncloudstack.org/en/sovereign-cloud-stack-r9-released (November 2025)
+  \item Sovereign Cloud Stack. ``SCS R7 Released.'' scs.community/release/2024/09/11/release7 (September 2024)
+  \item OpenMetal. ``Multi-Tenant OpenStack Architecture Basics.'' openmetal.io/resources/blog/multi-tenant-openstack-architecture-basics (November 2025)
+  \item OpenMetal. ``Ceph RBD Mirroring for Disaster Recovery.'' openmetal.io/resources/blog/ceph-rbd-mirroring-for-disaster-recovery (July 2025)
+  \item OpenMetal. ``Confidential Cloud Storage with Ceph.'' openmetal.io/resources/blog/confidential-cloud-storage-with-ceph (October 2025)
+  \item Kubedo. ``Ceph Storage Backend for OpenStack: 2025 Guide.'' kubedo.com/ceph-storage-backend-openstack (September 2025)
+  \item Mirantis. ``Placement Control and Multi-Tenancy Isolation with OpenStack.'' mirantis.com
+  \item OpenStack Helm. ``Deploying Multiple Ceph Clusters.'' docs.openstack.org/openstack-helm
+  \item Vinchin. ``How to Backup Ceph Based on Snapshot?'' vinchin.com (December 2024)
+  \item Storware. ``Backup Strategies for Ceph.'' storware.eu (September 2025)
+\end{itemize}
+
+\subsubsection{Procedural Generation and Graphics}
+
+\begin{itemize}[leftmargin=2em]
+  \item Zucconi, Alan. ``The World Generation of Minecraft.'' alanzucconi.com/2022/06/05/minecraft-world-generation (August 2024)
+  \item Hube12. ``Seed Cracking.'' gist.github.com/hube12/368e7331e497b17e092e8ca4ba206b3c
+  \item MinecraftForum. ``The Seed Algorithm.'' minecraftforum.net
+  \item NVIDIA GPU Gems 3. ``Chapter 1: Generating Complex Procedural Terrains Using the GPU.'' developer.nvidia.com/gpugems/gpugems3
+  \item Wikipedia. ``Level of Detail (Computer Graphics).'' en.wikipedia.org/wiki/Level\_of\_detail\_(computer\_graphics) (November 2025)
+  \item Atomic Object. ``Building an Infinite Procedurally-Generated World.'' spin.atomicobject.com/2015/05/03/infinite-procedurally-generated-world
+  \item Chiusano, Paul. ``The Limits of Procedural Generation and Lazy Simulation in Games.'' pchiusano.github.io
+  \item EUGameHost. ``BungeeCord, Waterfall, and Velocity Proxies Explained.'' eugamehost.com (August 2025)
+\end{itemize}
+
+\newpage
+
+% ===========================================================
+% STAGE 3 --- MISSION PACKAGE
+% ===========================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive reference architecture for the Sovereign Voxel Stack: a Minecraft world as a sovereign computational territory, owned by an OpenStack Keystone identity, isolated by Neutron, generated from a PCG seed-address in a $2^{64}$-dimensional manifold, stored in Ceph RBD with LOD-driven dynamic allocation, networked via Velocity/MultiPaper/HuskSync, and protected by journal-mirrored incremental snapshots with a documented hot-swap DR sequence. Deliverables extend the v1 Voxel as Vessel architecture into a complete, production-ready sovereign world platform specification.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+
+W0  FOUNDATION
+    [FLIGHT] Load v1 reference; generate shared schemas
+    [HAI]    Block schema + Ceph command templates
+    Duration: 1 session segment
+
+W1A PARALLEL TRACK A (Block / Texture / PCG)
+    [M7-CRAFT] Block palette schema + RAG isomorphism
+    [M8-CRAFT] Texture pack / atlas / PBR architecture
+    [M9-CRAFT] PCG seed manifold + Morton/Hilbert mapping
+    Duration: 1 session (parallel)
+
+W1B PARALLEL TRACK B (Server Fabric / Sovereignty)
+    [M10-CRAFT] Multi-server fabric: Velocity + MultiPaper + HuskSync
+    [M11-CRAFT] Sovereign world rights: OpenStack tenant provisioning
+    Duration: 1 session (parallel, after W1A outputs available)
+
+W2  PARALLEL TRACK C (Topology / DR)
+    [M12-CRAFT] Edge topology + LOD zones + dynamic storage
+    [M13-CRAFT] Backup + security + hot-swap DR playbook
+    [CAPCOM GATE: post-W2 review before synthesis]
+    Duration: 1 session (parallel)
+
+W3  SYNTHESIS + VERIFICATION
+    [M14-OPUS]  Full-stack integration document
+    [VERIFY]    Test plan execution + matrix completion
+    Duration: 1 session
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Block Data Layer:} Palette-compressed NBT, section schema, RAG token mapping
+  \item \textbf{Texture/Resource Layer:} Atlas config, block model JSON, PBR texture sets
+  \item \textbf{PCG Seed Layer:} LCG mathematics, seed manifold, Morton/Hilbert RADOS addressing
+  \item \textbf{Server Fabric Layer:} Velocity proxy, MultiPaper chunk ownership, HuskSync player sync
+  \item \textbf{Sovereignty Layer:} OpenStack Keystone/Nova/Neutron/Cinder tenant model
+  \item \textbf{Topology Layer:} Torus wrap, portal gateway, edge stitch, LOD zones
+  \item \textbf{Protection Layer:} RBD snapshots, journal mirroring, hot-swap, CephX, LUKS
+  \item \textbf{Synthesis Layer:} Full-stack reference architecture integrating v1 + v2
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Block/Palette Reference & NBT compound spec; palette RAG isomorphism table; bits-per-entry formula & M7 output \\
+2 & Texture/Atlas Catalogue & All atlas source types; PBR layer table; pack format compatibility matrix & M8 output \\
+3 & PCG Seed Architecture & LCG inversion procedure; Morton/Hilbert code; seed-space distance metric & M9 output \\
+4 & Multi-Server Fabric Spec & Velocity + MultiPaper + HuskSync config templates; ownership protocol & M10 output \\
+5 & Sovereign World Provisioning Script & OpenStack CLI sequence (Keystone/Nova/Neutron/Cinder/CephX); ACL matrix & M11 output \\
+6 & Edge Topology \& LOD Design & Torus noise seed strategy; LOD zone table; dynamic Ceph allocation policy & M12 output \\
+7 & DR Playbook & Planned + unplanned failover sequences; RPO/RTO targets; validation checklist & M13 output \\
+8 & Full-Stack Synthesis Document & Unified reference architecture integrating v1 + v2 layers; decision tree for new world operators & M14 output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0: Foundation & v1 reference & Haiku & 8,000 \\
+M7: Block/Chunk & v1 NBT, W0 schema & Sonnet & 18,000 \\
+M8: Texture/Atlas & W0 schema & Sonnet & 16,000 \\
+M9: PCG Seed & W0 schema & Opus & 22,000 \\
+M10: Server Fabric & M7 & Sonnet & 18,000 \\
+M11: Sovereignty & M7, W0 & Opus & 24,000 \\
+M12: Topology/LOD & M9, M10, M11 & Opus & 26,000 \\
+M13: Backup/DR & M11 & Sonnet & 20,000 \\
+M14: Synthesis & M7--M13, v1 & Opus & 30,000 \\
+VERIFY & M14 output & Sonnet & 12,000 \\
+\midrule
+\rowcolor{lightprimary}
+\multicolumn{3}{l}{\textbf{Total}} & \textbf{194,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 40\% (78K) & PCG mathematics (LCG inversion, manifold topology), sovereignty model (OpenStack tenant design), edge topology (torus noise, LOD policy), synthesis integration \\
+Sonnet & 50\% (98K) & Block/texture cataloguing (structured survey), server fabric spec (config templates), DR playbook (procedural sequence), verification \\
+Haiku & 10\% (18K) & Foundation scaffolding, shared schemas, command templates, v1 cache loading \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Parallel} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+W0 & Foundation & No & Haiku & Auto-pass if schema complete \\
+W1A & M7, M8, M9 & Yes (3-way) & Sonnet + Opus & All three complete \\
+W1B & M10, M11 & Yes (2-way) & Sonnet + Opus & Both complete \\
+W2 & M12, M13 & Yes (2-way) & Opus + Sonnet & CAPCOM GATE (human review) \\
+W3 & M14 synthesis, VERIFY & Sequential & Opus + Sonnet & Final verification pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Action} & \tableheader{Output} \\
+\midrule
+Load v1 reference & Prefill v1 Research Reference into context & Shared context \\
+Generate block schema & NBT Section compound template; palette array spec & schema/block.yaml \\
+Generate Ceph commands & Snapshot / mirror / export-diff command reference & schema/ceph-ops.yaml \\
+Generate OpenStack templates & Keystone/Nova/Neutron/Cinder provisioning skeleton & schema/openstack.yaml \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Block, Texture, PCG (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Module} & \tableheader{Primary Task} & \tableheader{Model} \\
+\midrule
+CRAFT-M7 & Block/Chunk Deep Dive & Formalize palette compression; write RAG isomorphism table; document Section NBT schema; bits-per-entry formula & Sonnet \\
+CRAFT-M8 & Texture/Atlas & Catalogue all atlas source types; document block model JSON structure; PBR layer table; pack format matrix & Sonnet \\
+CRAFT-M9 & PCG Seed Manifold & Derive seed-space distance metric; implement Morton/Hilbert encoding; LCG inversion procedure; 1.18 climate parameter analysis & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Server Fabric and Sovereignty (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Module} & \tableheader{Primary Task} & \tableheader{Model} \\
+\midrule
+CRAFT-M10 & Multi-Server Fabric & Write Velocity config; document MultiPaper chunk ownership protocol; HuskSync config templates; player data flow diagram & Sonnet \\
+CRAFT-M11 & Sovereign World & Design OpenStack provisioning sequence; write ACL matrix; document Domain Manager role; tenant Ceph cluster config & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Topology and DR (Parallel, CAPCOM Gate)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Module} & \tableheader{Primary Task} & \tableheader{Model} \\
+\midrule
+CRAFT-M12 & Edge Topology/LOD & Design torus-wrap noise strategy; specify LOD zone table; write dynamic Ceph allocation policy; portal gateway protocol & Opus \\
+CRAFT-M13 & Backup/DR & Write planned and unplanned failover sequences; specify RPO/RTO targets; design CephX keyring; document BorgBackup pipeline & Sonnet \\
+\midrule
+\multicolumn{4}{l}{\textbf{CAPCOM GATE:} Human review of M12 topology design and M13 DR playbook before synthesis.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Module} & \tableheader{Primary Task} & \tableheader{Model} \\
+\midrule
+EXEC-M14 & Synthesis & Integrate v1 + v2 into unified reference architecture; write decision tree for new world operators; cross-module isomorphism table & Opus \\
+VERIFY & Verification & Execute test plan; complete verification matrix; flag any open items & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+W0: Foundation & 0 & 0 & 8,000 & 8,000 \\
+W1A: Block/Texture/PCG & 22,000 & 34,000 & 0 & 56,000 \\
+W1B: Fabric/Sovereignty & 24,000 & 18,000 & 0 & 42,000 \\
+W2: Topology/DR & 26,000 & 20,000 & 0 & 46,000 \\
+W3: Synthesis/Verify & 30,000 & 12,000 & 0 & 42,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{102,000} & \textbf{84,000} & \textbf{8,000} & \textbf{194,000} \\
+\textbf{Share} & \textbf{53\%} & \textbf{43\%} & \textbf{4\%} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+v1-REFERENCE (prefill cache)
+        |
+       W0: FOUNDATION (Haiku)
+        |
+   +----+----+
+   |         |
+  W1A        |
+ M7 M8 M9   |
+   |         |
+   +----W1B--+
+      M10 M11
+        |
+       W2
+      M12 M13
+        |
+    [CAPCOM GATE]
+        |
+       W3
+    M14 + VERIFY
+        |
+   FINAL DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Failure} \\
+\midrule
+Safety-Critical & 5 & MANDATORY-PASS & BLOCK release \\
+Core Functionality & 20 & HIGH & Rework component \\
+Integration & 10 & HIGH & Rework cross-module \\
+Edge Case & 8 & MEDIUM & Document known limitation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome / Failure Condition} \\
+\midrule
+SC-KEY & CephX keyring least-privilege & Keyring \texttt{worlds/<uuid>} cannot read or write any object outside \texttt{pool=worlds namespace=<uuid>}. FAIL if cross-namespace access possible. \\
+SC-SEC & No secrets in world files & RADOS keyrings, passwords, and DB credentials are absent from all world files, plugin configs, and pack archives. FAIL if any secret found. \\
+SC-SWAP & Hot-swap atomicity & No concurrent dual-primary state exists during failover. FAIL if both sites accept writes simultaneously (split-brain). \\
+SC-EULA & No redistributed Mojang assets & Pack atlas PNGs and block model JSONs do not include vanilla Minecraft assets. FAIL if vanilla assets included in output. \\
+SC-PII & Player UUID data encrypted & All \texttt{UUID.dat} files at rest are encrypted (LUKS or equivalent). FAIL if plaintext player data accessible on cold storage. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Palette-RAG isomorphism table & T-M7-01, T-M7-02 & Open \\
+2 & Atlas source types fully catalogued & T-M8-01, T-M8-02 & Open \\
+3 & Seed-space distance metric defined & T-M9-01 & Open \\
+4 & Morton/Hilbert encoding validated & T-M9-02, T-M9-03 & Open \\
+5 & Multi-server ownership protocol specified & T-M10-01, T-M10-02 & Open \\
+6 & OpenStack provisioning script complete & T-M11-01, T-M11-02 & Open \\
+7 & Torus-wrap continuity metric $<5\%$ & T-M12-01 & Open \\
+8 & LOD zone storage policy specified & T-M12-02, T-M12-03 & Open \\
+9 & RBD snapshot RPO $\leq 15$ min & T-M13-01 & Open \\
+10 & Hot-swap RTO $\leq 5$ min documented & SC-SWAP, T-M13-02 & Open \\
+11 & CephX least-privilege verified & SC-KEY & Open \\
+12 & Synthesis document complete & T-M14-01, T-M14-02 & Open \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & FLIGHT-CMDR & Mission coordination; cache strategy; wave sequencing \\
+PLAN & PLAN-OPS & Wave scheduling; dependency tracking; resource allocation \\
+SCOUT & SCOUT-ALPHA & Gap-fill research; source validation; terminology checks \\
+EXEC-A & EXEC-ALPHA & Wave 1A execution (M7, M8, M9) \\
+EXEC-B & EXEC-BRAVO & Wave 1B execution (M10, M11) \\
+CRAFT-M7 & CRAFT-BLOCK & Block/chunk deep dive; palette schema; RAG isomorphism \\
+CRAFT-M8 & CRAFT-TEXTURE & Texture/atlas/resource pack architecture; PBR layers \\
+CRAFT-M9 & CRAFT-SEED & PCG seed manifold; LCG mathematics; Morton/Hilbert \\
+CRAFT-M10 & CRAFT-FABRIC & Multi-server networking; Velocity/MultiPaper/HuskSync \\
+CRAFT-M11 & CRAFT-SOVEREIGN & OpenStack tenant model; sovereignty rights; CephX design \\
+CRAFT-M12 & CRAFT-TOPOLOGY & Edge topology; torus wrap; LOD zones; dynamic allocation \\
+CRAFT-M13 & CRAFT-DR & Backup strategies; DR playbook; hot-swap sequences \\
+CRAFT-M14 & CRAFT-SYNTH & Full-stack synthesis; cross-module integration \\
+VERIFY & VERIFY-OPS & Test plan execution; verification matrix; SC gate enforcement \\
+CAPCOM & CAPCOM-CTRL & Post-Wave-2 human review; HITL gate; go/no-go for synthesis \\
+LOG & LOG-OPS & Session boundary documentation; cache optimization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+New Modules (v2) & 7 (M7--M13) + M14 synthesis \\
+Total Deliverables & 8 \\
+Token Budget & 194,000 (Opus 53\% / Sonnet 43\% / Haiku 4\%) \\
+Estimated Sessions & 3--4 sessions \\
+HITL Gates & 1 (post-Wave 2) \\
+Safety-Critical Tests & 5 (all MANDATORY-PASS / BLOCK) \\
+Depends On & Voxel as Vessel v1 (RADOS/RAG/Anvil) \\
+Pack Format Reference & Java 48 (1.21) / 88 (1.21.9); Bedrock 1.16.100+ \\
+Ceph Reference Version & Reef (SCS R9, November 2025) \\
+OpenStack Reference & 2025.1 Epoxy (SCS R9) \\
+Proxy Reference & Velocity (current best practice, 2025) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``A Minecraft seed is not a blueprint. It is the starting value for an algorithm. The algorithm produces the world on demand, lazily, as the player approaches. The world is not stored; it is calculated. The storage is not the territory; it is the proof that the territory was visited.''}
+
+\vspace{0.8em}
+
+This is the deepest isomorphism of the Sovereign Voxel Stack. Ceph does not store a world. Ceph stores the difference between the generated world and the modified world. Everything that was never touched is still just a seed and a function call away. The sovereignty is not over the bytes; it is over the delta. The owner of a world owns the modifications, the player data, the community history --- the Space Between what was generated and what was built.
+
+\vspace{0.4em}
+\textit{--- Miles Tiberius Foxglove, The Space Between (2026)}
+\end{quotebox}
+
+\end{document}

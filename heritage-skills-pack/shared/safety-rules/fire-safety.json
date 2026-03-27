@@ -1,0 +1,76 @@
+[
+  {
+    "id": "FIRE-001",
+    "domain": "fire",
+    "pattern": "(?:(?:fire|flame|burning|stove|hearth|fireplace|heat).{0,80}(?:indoor|inside|interior|enclosed|tent|cabin|shelter|room)|(?:indoor|inside|interior|enclosed|tent|cabin|shelter|room).{0,80}(?:fire|flame|burning|stove|hearth|fireplace|heat))",
+    "level": "gated",
+    "annotation": {
+      "domain": "fire",
+      "level": "gated",
+      "message": "Any fire in an enclosed space requires adequate ventilation to prevent carbon monoxide (CO) poisoning. CO is odorless and colorless -- symptoms include headache, dizziness, and nausea, progressing to unconsciousness and death. Ensure cross-ventilation with an inlet and outlet. Never sleep with a fire burning in an unvented space.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "CDC Carbon Monoxide Poisoning Prevention; National Fire Protection Association"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FIRE-002",
+    "domain": "fire",
+    "pattern": "(?:outdoor|outside|exterior|open.?air|campfire|fire.?pit|council.?fire|signal.?fire).{0,80}(?!(?:clear|clean|ring|containment|extinguish|water|dirt|shovel|bucket|drown|out))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "fire",
+      "level": "annotated",
+      "message": "For outdoor fires: clear a 10-foot radius of flammable material, build a rock or dirt ring for containment, always have water or dirt ready to extinguish, never leave unattended, and fully extinguish before leaving -- stir ashes and add water until no steam or smoke remains.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "US Forest Service Leave No Trace Guidelines; National Fire Protection Association"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "FIRE-003",
+    "domain": "fire",
+    "pattern": "(?:forge|kiln|smelting|bloomery|brick.?kiln|pottery.?kiln|charcoal.?kiln|pit.?firing|anagama).{0,80}(?!(?:protective|glove|goggles|shield|tong|apron|leather|ppe|gear|equipment))",
+    "level": "gated",
+    "annotation": {
+      "domain": "fire",
+      "level": "gated",
+      "message": "Forge, kiln, and high-temperature fire work requires protective equipment: leather aprons, heat-resistant gloves, eye protection (face shield for forge work), and leather or wool clothing (never synthetic fabrics near open flame). Ensure a clear path to exit the work area and keep a fire extinguisher rated for all fire types nearby.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Foxfire Book 8 (1984): Blacksmithing; NFPA Forge Safety Guidelines"
+    },
+    "traditions": ["appalachian"]
+  },
+  {
+    "id": "FIRE-004",
+    "domain": "fire",
+    "pattern": "(?:gasoline|kerosene|lighter.?fluid|alcohol|petroleum|solvent|accelerant).{0,60}(?:fire|start|ignite|light|flame|burn)",
+    "level": "redirected",
+    "annotation": {
+      "domain": "fire",
+      "level": "redirected",
+      "message": "Using flammable accelerants (gasoline, kerosene, lighter fluid) to start or intensify fires is extremely dangerous and falls outside traditional heritage fire practices. Traditional fire-starting methods (friction fire, flint and steel, char cloth) are safer and more appropriate to heritage skills instruction. Please use traditional fire-starting techniques.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "National Fire Protection Association; Heritage Skills Scope Definition"
+    }
+  },
+  {
+    "id": "FIRE-005",
+    "domain": "fire",
+    "pattern": "(?:qulliq|kudlik|oil.?lamp|seal.?oil.?lamp|blubber.?lamp).{0,80}(?!(?:ventilat|airflow|crack|window|outside|draft|smoke.?hole|opening))",
+    "level": "gated",
+    "annotation": {
+      "domain": "fire",
+      "level": "gated",
+      "message": "The qulliq (Inuit oil lamp) is a sacred and carefully managed flame. When using a qulliq or any open oil lamp in an enclosed space, ensure adequate ventilation to prevent CO buildup and smoke accumulation. Traditional Inuit snow shelters (igluit) maintain ventilation holes -- these are essential, not optional.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Inuit Tapiriit Kanatami Educational Resources; Pitseolak Ashoona documentation"
+    },
+    "traditions": ["inuit"]
+  }
+]

@@ -1,0 +1,54 @@
+/* BCM — Building Construction Mastery
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --primary: #263238;
+  --secondary: #1565C0;
+  --tertiary: #4E342E;
+  --accent: #FF6F00;
+  --cream: #f8f6f0;
+  --mist: #e4e8e0;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+  border-bottom: 4px solid var(--accent);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(21, 101, 192, 0.05); }
+tr:hover { background: rgba(21, 101, 192, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(21, 101, 192, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1f2e; color: #a8d8ea; }
+.stat-value { color: var(--primary); }
+
+/* --- Tags --- */
+.tag-struct { background: #efebe9; color: #4E342E; }
+.tag-elec { background: #fff8e1; color: #f57f17; }
+.tag-plumb { background: #e3f2fd; color: #1565c0; }
+.tag-envelope { background: #e8f5e9; color: #2e7d32; }
+.tag-codes { background: #fce4ec; color: #c62828; }
+.tag-edu { background: #f3e5f5; color: #7b1fa2; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

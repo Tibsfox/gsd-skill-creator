@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Computational Mesh — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #263238; --secondary: #1565C0; --tertiary: #37474F; --accent: #0277BD; --light: #ECEFF1; --bg: #FAFAFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; background: var(--bg); color: #212121; line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.85; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; margin-top: 1rem; color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; }
+  .container { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card { background: #E8EAF0; border-radius: 8px; padding: 1.5rem; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .card .name { font-size: 1.1rem; font-weight: 700; margin: 0.3rem 0; }
+  .card .desc { font-size: 0.85rem; color: #555; }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  .contents li { margin: 0.4rem 0; font-size: 0.95rem; }
+  .contents li strong { color: var(--primary); }
+  ol.instructions { padding-left: 1.5rem; }
+  ol.instructions li { margin: 0.6rem 0; font-size: 0.95rem; }
+  code { background: #E3F2FD; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; font-family: 'DejaVu Sans Mono', monospace; }
+  .quote { background: var(--light); border-left: 4px solid var(--secondary); padding: 1.2rem 1.5rem; margin: 2rem 0; font-style: italic; color: #37474F; }
+  .meta { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #757575; text-align: center; margin-top: 3rem; padding: 1.5rem; border-top: 1px solid #BDBDBD; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>The Computational Mesh</h1>
+  <div class="subtitle">High-Speed Networks, Parallel Processing, and the Linear Algebra of Machine Intelligence</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+<div class="container">
+  <div class="cards">
+    <a class="card" href="computational-mesh-mission.pdf" download>
+      <div class="label">PDF Document</div>
+      <div class="name">computational-mesh-mission.pdf</div>
+      <div class="desc">26-page mission package. Three-stage pipeline: Vision, Research Reference, Mission Package with wave execution plan.</div>
+    </a>
+    <a class="card" href="computational-mesh-mission.tex" download>
+      <div class="label">LaTeX Source</div>
+      <div class="name">computational-mesh-mission.tex</div>
+      <div class="desc">XeLaTeX source. Recompile with three passes: <code>xelatex</code> × 3. Requires DejaVu fonts.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><strong>Stage 1 — Vision Document:</strong> Problem statement (5 challenges), domain architecture (6-layer vertical stack), module architecture (6 modules), chipset configuration (Fleet profile), 12 success criteria, through-line connecting to Amiga Principle</li>
+    <li><strong>Stage 2 — Research Reference:</strong> IEEE 802.3df/dj standards, PAM4 signaling, Ultra Ethernet Consortium, fat-tree/dragonfly/torus topologies, MPI/NCCL/RDMA communication libraries, vector processors through Blackwell tensor cores, BLAS/LAPACK hierarchy, mixed-precision landscape, TOP500 exascale systems, source bibliography</li>
+    <li><strong>Stage 3 — Mission Package:</strong> 13 components across 4 waves (Foundation → Parallel Survey → Synthesis → Publication), 3 parallel tracks, Fleet crew manifest (18 roles), 36 tests (6 safety-critical, 16 core, 8 integration, 6 edge), 93K token budget, verification matrix mapping all 12 criteria</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <ol class="instructions">
+    <li>Review the PDF to understand the full three-stage pipeline</li>
+    <li>Feed Stage 3 (Mission Package) to the GSD skill-creator for orchestrated execution</li>
+    <li>Wave 0 (Foundation) runs first — shared schemas and source index</li>
+    <li>Wave 1 launches three parallel tracks: Network Infrastructure, Compute Architecture, Communication</li>
+    <li>Wave 2 synthesizes with Opus for cross-module integration and GSD cluster recommendations</li>
+    <li>Wave 3 assembles, verifies, and packages the final knowledge pack</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol class="instructions">
+    <li>Ensure DejaVu fonts are installed (standard on Ubuntu/Debian)</li>
+    <li>Run: <code>xelatex -interaction=nonstopmode computational-mesh-mission.tex</code></li>
+    <li>Repeat two more times for TOC, cross-references, and page counts</li>
+  </ol>
+
+  <div class="quote">
+    "The space between the processors is where the architecture lives, and understanding that space is what turns a warehouse of silicon into an instrument of discovery."
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem — Research Mission Package — March 25, 2026<br>
+    Activation Profile: Fleet | 6 Modules | 18 Crew Roles | Est. 93K tokens
+  </div>
+</div>
+</body>
+</html>

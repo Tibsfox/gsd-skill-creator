@@ -1,0 +1,55 @@
+{
+  "roomId": "room-08-pottery-clay",
+  "room": 8,
+  "culturalRules": [
+    {
+      "id": "ROOM08-CULT-001",
+      "domain": "pottery-clay",
+      "tradition": "appalachian",
+      "concept": "Appalachian folk pottery traditions",
+      "level": 1,
+      "note": "Appalachian folk pottery (alkaline glazed stoneware, groundhog kiln firing, functional jug and crock forms) is Level 1 publicly shared craft knowledge. The Jugtown (Seagle and Owens families, Moore County NC), Meaders family (White County GA), and Burlon Craig (Lincoln County NC) traditions are documented extensively in Foxfire volumes, craft revival literature, and museum collections. Appalachian pottery is an active craft tradition with many practitioners and schools. Attribution to specific family traditions and pottery centers is appropriate and encouraged.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM08-CULT-002",
+      "domain": "pottery-clay",
+      "tradition": "appalachian",
+      "concept": "Face jug origins and African American heritage at Edgefield",
+      "level": 2,
+      "nationAttribution": "African American (Edgefield District, South Carolina)",
+      "note": "The face jug tradition has a documented African American origin that predates and informs the Appalachian settler tradition. The Edgefield pottery district of South Carolina (Aiken County) included enslaved African American potters who produced face jugs in the early 1800s. Dave Drake (also known as Dave the Potter), an enslaved man at the Edgefield district, signed and dated his vessels -- a courageous act in antebellum South Carolina -- producing large signed alkaline-glazed storage jars that are now recognized as significant early American art. Presenting face jug history accurately requires acknowledging this African American artistry. The debate over whether the face jug grotesque tradition derives from African protective vessel traditions (nkisi nkondi), European grotesque mask traditions, or multiple simultaneous sources remains active in craft history scholarship. This is Level 2 because accurate attribution requires cross-cultural framing and acknowledgment of African American origin.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM08-CULT-003",
+      "domain": "pottery-clay",
+      "tradition": "first-nations",
+      "concept": "Haudenosaunee coil-built pottery and design traditions",
+      "level": 2,
+      "nationAttribution": "Haudenosaunee (Onondaga, Mohawk, Cayuga, Seneca, Oneida, Tuscarora)",
+      "note": "Haudenosaunee pottery construction techniques (coil building, tempered clay bodies, rounded-base vessel forms, cord-impressed and incised surface decoration, open-pit firing) are Level 1 publicly documented in archaeological literature and museum collections including the New York State Museum, the Rochester Museum and Science Center, and the Canadian Museum of History. Design motifs and decorative elements that carry clan or ceremonial significance are Level 2 contextually shared -- they can be described with attribution but should not be reproduced without Haudenosaunee attribution and framing. Do not represent specific clan-associated designs as purely decorative or freely reproducible. Some pottery forms may carry specific ceremonial significance -- do not describe specific ceremonial uses without nation-specific sourcing.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM08-CULT-004",
+      "domain": "pottery-clay",
+      "tradition": "inuit",
+      "concept": "Soapstone carving and qulliq lamp form",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "Soapstone carving -- the physical shaping of soapstone with tools to produce functional objects -- is Level 1 publicly shared Inuit knowledge, documented in museum collections and taught in community arts programs across Nunavut and Nunavik. The qulliq lamp form (crescent shape, oil reservoir, wick gutter) is publicly documented in ethnographic and museum literature. Contemporary Inuit soapstone sculpture from Cape Dorset (Kinngait), Baker Lake, and other Nunavut communities continues this tradition and is internationally recognized. Qulliq operation (lighting, burning seal oil, wick management, CO ventilation in enclosed spaces) is covered in Room 14 (Arctic Living) where fire and CO safety gates apply. This room covers soapstone carving technique and vessel form only.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM08-CULT-005",
+      "domain": "pottery-clay",
+      "tradition": "first-nations",
+      "concept": "Pottery ceremonial contexts and sacred vessel traditions",
+      "level": 3,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Pottery used in specific ceremonial contexts -- burial vessels, ceremonial food preparation vessels, offering vessels, vessels associated with specific protocols -- may carry Level 3 restricted significance for specific First Nations. The existence of ceremonial pottery traditions and the importance of specific vessel forms in ceremonial life can be acknowledged at this level. Specific ceremonial designs, ceremonial uses, protocols, and ritual functions must not be described without nation-specific sourcing and permission. Refer learners to nation-specific museum collections, cultural departments, and community authorities for this level of engagement.",
+      "action": "restrict"
+    }
+  ]
+}

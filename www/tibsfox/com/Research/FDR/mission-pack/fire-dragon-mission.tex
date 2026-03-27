@@ -1,0 +1,998 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Fire Dragon (Cultural/Cosmological) ──
+\definecolor{primary}{HTML}{8B0000}        % Deep crimson — imperial fire
+\definecolor{secondary}{HTML}{B8860B}      % Dark goldenrod — dynastic gold
+\definecolor{tertiary}{HTML}{3E2723}       % Dark earth brown — ancient ground
+\definecolor{accent}{HTML}{C41E3A}         % Cardinal red — flame accent
+\definecolor{lightprimary}{HTML}{FDE8E8}   % Soft rose
+\definecolor{lightsecondary}{HTML}{FFF8DC}  % Cornsilk
+\definecolor{lighttertiary}{HTML}{EFEBE9}   % Light parchment
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ──
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Year of the Fire Dragon}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Year of the Fire Dragon -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ──
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Year of the\\[0.3em]Fire Dragon}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{丙辰 --- Bǐng Chén}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Cosmology, Culture, and the Sixty-Year Flame}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 14 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Year of the Fire Dragon --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone cultural research pack)}
+\metafield{Context:}{GSD Ecosystem --- Educational Knowledge Pack Series}
+
+\subsection{Vision}
+
+Every sixty years, the celestial stem Bǐng (丙) --- Yang Fire --- meets the earthly branch Chén (辰) --- the Dragon. The result is the Fire Dragon, the most incandescent expression of the Chinese zodiac: a convergence of the only mythical creature in the twelve-animal cycle with the most Yang of the Five Phases. It is not merely an astrological curiosity. The Fire Dragon sits at the intersection of ancient cosmology, imperial statecraft, traditional medicine, and modern demographic science. It is a lens through which to read three thousand years of Chinese civilization.
+
+The Wuxing system --- Wood, Fire, Earth, Metal, Water --- is not a taxonomy of substances but a grammar of transformation. Fire does not mean \emph{flame}; it means the \emph{principle of rising, expanding, ripening}. The Dragon does not mean \emph{monster}; it means the \emph{principle of sovereign creativity, rain-giving beneficence, and the bridge between heaven and earth}. When Fire meets Dragon, the resulting archetype encodes a specific claim about human destiny: that passion governed by nobility produces transformation, and that transformation governed by passion produces civilization.
+
+This research mission builds a comprehensive knowledge pack exploring the Fire Dragon from five interlocking perspectives: cosmological foundations (the Wuxing and sexagenary systems that generate it), mythological depth (the Dragon in Chinese culture from Neolithic jade to imperial robes), elemental medicine (Fire's role in TCM and its implications for body, mind, and season), archetypal synthesis (how the Bǐng Chén combination produces a distinct personality theory), and contemporary impact (the measurable demographic and economic ripple effects of Dragon-year birth preference). The pack is designed for the GSD educational ecosystem, serving as both a standalone reference and a template for future cultural-cosmological research packs.
+
+The through-line is one of \emph{translation} --- the Rosetta Core principle applied to an ancient system of knowledge. The Chinese cosmological tradition encodes sophisticated insights about cyclical time, elemental interaction, and human temperament in a symbolic language that predates Western scientific method by millennia. This pack does not reduce that tradition to Western categories, nor does it uncritically accept astrological claims. Instead, it maps the internal logic of the system, documents its historical and cultural weight, and identifies where its predictions have measurable real-world correlates.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented understanding.} The Fire Dragon is typically presented as a personality horoscope divorced from its cosmological and historical context. Popular sources conflate the twelve-animal cycle with the sixty-year sexagenary system, obscuring the role of the Five Phases.
+\item \textbf{Missing mathematical structure.} The sexagenary cycle is a modular arithmetic system (LCM of 10 and 12 = 60) with deep structural elegance, but it is rarely presented with its combinatorial logic intact.
+\item \textbf{Superficial treatment of Wuxing.} The Five Phases are routinely mistranslated as ``elements'' (implying static substances) rather than ``phases'' or ``agents'' (implying dynamic transformations), leading to fundamental misunderstanding of the system.
+\item \textbf{Undocumented demographic effects.} Dragon-year birth booms are well-attested in peer-reviewed literature but poorly known outside specialist demography, creating a disconnect between cultural belief and measurable social consequence.
+\item \textbf{No integrated educational resource.} No single document connects the cosmological theory, mythological tradition, medical framework, personality archetype, and demographic evidence into a coherent, cross-referenced pack.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The Fire Dragon (丙辰, Bǐng Chén) is the product of two interlocking cycles --- ten Heavenly Stems $\times$ twelve Earthly Branches --- whose intersection every sixty years encodes a specific cosmological, medical, and cultural archetype with measurable real-world effects.
+\end{quotebox}
+
+The core insight is that the Chinese calendrical system is not a flat list of zodiac animals but a \emph{two-dimensional phase space} where elemental quality (the Stems) intersects animal archetype (the Branches). The Fire Dragon occupies a specific coordinate in this space: Yang Fire $\times$ Dragon. Understanding any single axis without the other produces an incomplete picture --- a Dragon without its element, or a Fire without its form.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    COSMOLOGICAL FOUNDATIONS
+                    ┌──────────────────────┐
+                    │  Wuxing (Five Phases) │
+                    │  Heavenly Stems (10)  │
+                    │  Earthly Branches (12)│
+                    │  Sexagenary Cycle (60)│
+                    └──────────┬───────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              │                │                │
+    ┌─────────▼─────────┐  ┌──▼──────────┐  ┌──▼──────────────┐
+    │  DRAGON MYTHOLOGY  │  │ FIRE IN TCM │  │  FIRE DRAGON    │
+    │  Neolithic origins │  │ Heart/Shen  │  │  ARCHETYPE      │
+    │  Imperial symbol   │  │ Mars/Summer │  │  Bing Chen      │
+    │  Nine Dragon types │  │ Joy/Passion │  │  Four Pillars   │
+    │  Cultural practices│  │ Red Phoenix │  │  Personality     │
+    └─────────┬─────────┘  └──┬──────────┘  └──┬──────────────┘
+              │                │                │
+              └────────────────┼────────────────┘
+                               │
+                    ┌──────────▼───────────┐
+                    │  CONTEMPORARY IMPACT  │
+                    │  Dragon baby booms    │
+                    │  Economic effects     │
+                    │  Educational pressure │
+                    │  Global diaspora      │
+                    └──────────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE 1: Cosmological Foundations
+  ├── Wuxing theory (origins, generating/controlling cycles)
+  ├── Heavenly Stems & Earthly Branches
+  ├── Sexagenary cycle mathematics
+  └── Planetary correspondences
+
+  MODULE 2: The Dragon in Chinese Culture
+  ├── Archaeological origins (Neolithic to Bronze Age)
+  ├── Imperial symbolism (Han through Qing)
+  ├── Nine types of dragons
+  ├── Dragon Kings and weather control
+  └── Cultural practices (festivals, art, idioms)
+
+  MODULE 3: Fire Element Deep Dive
+  ├── Fire in Wuxing (generation, control, exhaustion)
+  ├── TCM correspondences (Heart, Small Intestine, Shen)
+  ├── Mars, summer, south, red, joy
+  ├── Pericardium and Triple Burner
+  └── Clinical implications and seasonal medicine
+
+  MODULE 4: The Fire Dragon Archetype
+  ├── Bing Chen (丙辰) construction
+  ├── Yang Fire + Dragon personality synthesis
+  ├── Hidden stems within Chen branch
+  ├── Four Pillars (Bazi) context
+  └── Elemental variants (all five Dragon types)
+
+  MODULE 5: Demographic & Social Impact
+  ├── Dragon-year birth booms (Taiwan, HK, Singapore, PRC)
+  ├── Peer-reviewed evidence (Goodkind, Agarwal, Mocan)
+  ├── Economic ripple effects
+  ├── Educational competition and cohort pressure
+  └── Modern cultural practices and global spread
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Cosmological Foundations}
+The theoretical substrate of the entire system. Covers the Wuxing (Five Phases) from their origins in Shang dynasty oracle bone inscriptions through Zou Yan's 3rd-century BCE systematization to Han dynasty correlative cosmology. Documents the ten Heavenly Stems (Tiāngān) and twelve Earthly Branches (Dìzhī), the modular arithmetic of the sexagenary cycle, and the planetary correspondences (Fire = Mars = 熒惑, Yínghuò). Establishes the critical distinction between ``elements'' (static substances) and ``phases'' (dynamic transformations).
+
+\subsubsection{Module 2: The Dragon in Chinese Culture}
+The mythological and cultural weight of the Dragon (龍/龙, lóng). Traces archaeological evidence from the Xinglongwa culture (6200--5400 BCE) through Hongshan jade coils, Erlitou turquoise mosaics, and imperial regalia. Documents the Dragon's role as rain deity, symbol of imperial authority, and national totem (``Descendants of the Dragon''). Covers the nine dragon types (Bixi through Fuxi), the four Dragon Kings, and contemporary cultural expressions including Dragon Dance, Dragon Boat Festival, and zodiac-timed family planning.
+
+\subsubsection{Module 3: Fire Element Deep Dive}
+Fire (火, Huǒ) as the most Yang phase in the Wuxing system. Documents its associations in Traditional Chinese Medicine: the Heart as ``Emperor'' organ, the Shen (spirit/consciousness) it houses, the Small Intestine as separator of pure and impure, and the protective roles of Pericardium and Triple Burner. Maps the generating cycle (Wood feeds Fire), controlling cycle (Water controls Fire), and exhaustion cycle (Fire exhausts Wood). Covers seasonal medicine, dietary guidance, and emotional implications (joy as the Fire emotion, its excess as mania, its deficiency as depression).
+
+\subsubsection{Module 4: The Fire Dragon Archetype}
+The synthesis of Fire and Dragon into the Bǐng Chén (丙辰) archetype. Bǐng (丙), the third Heavenly Stem, represents Yang Fire --- the sun, illumination, and outward radiance. Chén (辰), the fifth Earthly Branch, corresponds to the Dragon and carries hidden stems within it (Yang Earth, Yin Water, Yin Wood). The module maps how these elements interact, how the Four Pillars of Destiny (Bazi) system uses the birth year as one of four coordinates (year, month, day, hour), and how the five elemental variants of Dragon (Wood, Fire, Earth, Metal, Water) produce distinct personality profiles.
+
+\subsubsection{Module 5: Demographic and Social Impact}
+The measurable real-world effects of Dragon-year cultural preference. Documents the peer-reviewed finding that Dragon years produce statistically significant birth rate increases: approximately 30\% in Singapore's 1976 cohort (Agarwal et al.), 7\% in Taiwan's 1976 cohort, and notable spikes in Hong Kong and mainland China (particularly post-2012 as Cultural Revolution-era suppression of traditional beliefs faded). Traces the downstream effects: increased educational competition, university admission pressure, labor market crowding, and the ironic ``dragon penalty'' where auspicious birth timing produces structural disadvantage through cohort size.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus: "Cosmological Foundations + Dragon Mythology"
+  denise: "Fire Element + Fire Dragon Archetype"
+  paula:  "Demographic Impact + Cross-module Synthesis"
+  model_split:
+    opus:   30%  # Synthesis, cultural sensitivity, archetype
+    sonnet: 60%  # Surveys, source compilation, tables
+    haiku:  10%  # Schemas, templates, scaffolding
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Wuxing theory from Shang origins through Han systematization
+\item Dragon mythology and symbolism in Chinese cultural tradition
+\item Fire element in TCM (Heart, Small Intestine, Pericardium, Triple Burner)
+\item Bǐng Chén (丙辰) archetype construction and personality framework
+\item Peer-reviewed demographic evidence of dragon-year birth patterns
+\item All five elemental Dragon variants (comparative profiles)
+\item Sexagenary cycle mathematical structure
+\item Contemporary cultural practices (Dragon Dance, family planning, zodiac commerce)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Full Bazi (Four Pillars) reading methodology --- referenced but not taught
+\item Feng Shui applications of dragon symbolism
+\item Western astrology comparisons or equivalences
+\item Vietnamese, Korean, or Japanese zodiac variants (noted, not developed)
+\item Predictive horoscope content for specific years
+\item Political analysis of specific historical events in Dragon years
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Wuxing generating and controlling cycles documented with correct directional, seasonal, and planetary correspondences, traceable to published scholarly sources.
+\item Sexagenary cycle explained as modular arithmetic (LCM of 10 and 12), with Yin/Yang pairing rule demonstrated.
+\item Dragon mythology traced from Neolithic archaeological evidence (pre-3000 BCE) through Qing dynasty (1911), with sources from academic or museum publications.
+\item All nine dragon types (the ``Nine Sons'') individually named and characterized.
+\item Fire element TCM correspondences (organs, emotion, season, direction, color, planet, taste) complete and internally consistent.
+\item Bǐng Chén archetype constructed from first principles --- Heavenly Stem + Earthly Branch + hidden stems --- not merely listed as personality traits.
+\item All five elemental Dragon variants (Wood, Fire, Earth, Metal, Water) differentiated with specific years and trait profiles.
+\item Dragon-year birth boom documented with at least three peer-reviewed or government-source citations spanning multiple countries.
+\item Educational and labor-market consequences of dragon cohort size documented with quantitative evidence.
+\item Cross-module integration demonstrated: at least three explicit connections between cosmological theory, cultural practice, and demographic evidence.
+\item No entertainment media, blog, or unsourced claims used as primary evidence.
+\item Cultural sensitivity: Wuxing presented as a coherent knowledge system deserving scholarly respect, not reduced to ``superstition'' or uncritically elevated to ``science.''
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+The Space Between & Mathematical foundations; unit circle as universal cycle; spaces between as generative principle & Philosophical \\
+Learn Kung Fu Pack & Xingyi Quan's Five Element fist forms; martial arts as embodied Wuxing & Educational \\
+Foxfire Heritage Skills & Indigenous knowledge systems; parallel to Chinese correlative cosmology & Cultural \\
+GSD College: Mathematics & Modular arithmetic; cyclic groups; LCM as structural principle & Technical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The sixty-year cycle is a clock built from the spaces between ten and twelve. Not ten alone, not twelve alone, but their \emph{least common multiple} --- the smallest number that holds both rhythms simultaneously. This is the Amiga Principle applied to timekeeping: architectural leverage from the interaction of simple, specialized cycles. The Heavenly Stems carry elemental quality; the Earthly Branches carry animal archetype. Neither is complete without the other. The meaning lives in the pairing.
+
+The Fire Dragon is what happens when passion meets sovereignty --- when the rising, expanding, illuminating force of Yang Fire meets the rain-giving, heaven-bridging, civilization-founding archetype of the Dragon. The ancient Chinese cosmologists understood something that modern complexity science is rediscovering: that the most potent configurations arise not from the extremes of any single dimension, but from the resonant intersection of multiple cycles. The Fire Dragon is not the loudest note in the zodiac. It is the most \emph{harmonic}.
+
+% ════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Year of the Fire Dragon --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from scholarly, government, museum, and peer-reviewed sources organized by research module. Each section is self-contained and can be consumed independently or used as source material for GSD agent document production.
+
+Key source organizations:
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Encyclopædia Britannica} --- Wuxing and dragon (lóng) entries
+\item \textbf{Internet Encyclopedia of Philosophy} --- Wuxing scholarly analysis
+\item \textbf{Cambridge University Press} --- \emph{Science and Civilisation in China} (Needham); \emph{Cosmology and Political Culture in Early China} (Wang)
+\item \textbf{World History Encyclopedia} --- Dragon in Ancient China
+\item \textbf{Natural History Museum of Los Angeles County} --- Dragon cultural exhibit documentation
+\item \textbf{Hong Kong Observatory} --- Heavenly Stems and Earthly Branches reference
+\item \textbf{ScienceDirect / American Economic Association} --- Dragon birth timing peer-reviewed studies
+\item \textbf{National University of Singapore} --- Dragon cohort demographic analysis
+\item \textbf{Al Jazeera} --- Dragon baby boom field reporting (Goodkind interviews)
+\end{itemize}
+
+\subsection{Module 1: Cosmological Foundations Reference}
+
+\subsubsection{Origins of Wuxing}
+
+The term Wuxing (五行) is composed of characters meaning ``five'' (五, wǔ) and ``moving'' (行, xíng). The ``moving'' character originally referred to the five classical planets visible to the naked eye: Venus, Jupiter, Mercury, Mars, and Saturn. The planets were conceived as ``moving stars'' (行星, xíngxīng) whose motions generated the five forces of earthly life. The Wuxing originally functioned as a cosmological framework linking celestial observation to terrestrial governance.
+
+The earliest precursors appear in Shang dynasty (1600--1046 BCE) oracle bone inscriptions, which employ fivefold patterns --- four cardinal directions around a center --- but do not yet constitute a systematic theory. The Zuo Zhuan records a statement attributed to the 27th year of Duke Xiang (c. 546 BCE): ``Heaven has produced the five materials which supply humankind's requirements, and the people use them all.'' Notably, this passage uses ``five materials'' (五材, wǔ cái) rather than ``five phases'' (五行, wǔ xíng), suggesting the systematization came later.
+
+The philosopher Zou Yan (c. 324--250 BCE) is credited with formalizing Wuxing into a systematic cosmological theory during the Warring States period. By the Han dynasty (206 BCE--220 CE), Wuxing had become the dominant intellectual framework, integrated into medicine via the Huangdi Neijing (Yellow Emperor's Inner Canon), and correlated with directions, seasons, colors, musical tones, bodily organs, emotions, and dynastic succession.
+
+\subsubsection{The Five Phases and Their Correspondences}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{1.5cm}L{1.5cm}L{1.3cm}L{1.3cm}L{1.5cm}L{1.5cm}L{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Planet} & \tableheader{Season} & \tableheader{Direct.} & \tableheader{Color} & \tableheader{Organ (Yin)} & \tableheader{Organ (Yang)} & \tableheader{Emotion} \\
+\midrule
+Wood & Jupiter & Spring & East & Green & Liver & Gallbladder & Anger \\
+Fire & Mars & Summer & South & Red & Heart & Sm. Intestine & Joy \\
+Earth & Saturn & Late Sum. & Center & Yellow & Spleen & Stomach & Worry \\
+Metal & Venus & Autumn & West & White & Lungs & Lg. Intestine & Grief \\
+Water & Mercury & Winter & North & Black & Kidneys & Bladder & Fear \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Generating and Controlling Cycles}
+
+The five phases interact through two primary cycles. The \textbf{generating cycle} (生, shēng): Wood $\rightarrow$ Fire $\rightarrow$ Earth $\rightarrow$ Metal $\rightarrow$ Water $\rightarrow$ Wood. Each phase nurtures the next (wood fuels fire; fire creates ash/earth; earth bears metal ore; metal surfaces collect condensation/water; water nourishes wood). The \textbf{controlling cycle} (克, kè): Wood $\rightarrow$ Earth $\rightarrow$ Water $\rightarrow$ Fire $\rightarrow$ Metal $\rightarrow$ Wood. Each phase restrains another (wood parts earth; earth dams water; water quenches fire; fire melts metal; metal cuts wood).
+
+When the generating cycle is in balance, all phases are nourished. When the controlling cycle is in balance, no phase dominates. Imbalance in either direction --- excess generation (overindulgence) or excess control (suppression) --- produces pathology in the body, discord in the state, and disruption in the natural world.
+
+\subsubsection{The Sexagenary Cycle}
+
+The ten Heavenly Stems (天干, Tiāngān) and twelve Earthly Branches (地支, Dìzhī) combine to form the sexagenary cycle (六十甲子, liùshí jiǎzǐ) --- a sixty-term cycle used to record years, months, days, and hours. The cycle begins with Jiǎ-Zǐ (甲子) and ends with Guǐ-Hài (癸亥). Only Yang stems pair with Yang branches and Yin stems with Yin branches, producing 60 (not 120) unique combinations --- the least common multiple of 10 and 12.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{1.2cm}L{1.5cm}L{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Stem} & \tableheader{Pinyin} & \tableheader{Polarity} & \tableheader{Element} & \tableheader{Notes} \\
+\midrule
+1 & 甲 & Jiǎ & Yang & Wood & First stem; begins cycle \\
+2 & 乙 & Yǐ & Yin & Wood & \\
+3 & 丙 & Bǐng & Yang & Fire & \textbf{Fire Dragon stem} \\
+4 & 丁 & Dīng & Yin & Fire & \\
+5 & 戊 & Wù & Yang & Earth & \\
+6 & 己 & Jǐ & Yin & Earth & \\
+7 & 庚 & Gēng & Yang & Metal & \\
+8 & 辛 & Xīn & Yin & Metal & \\
+9 & 壬 & Rén & Yang & Water & \\
+10 & 癸 & Guǐ & Yin & Water & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The twelve Earthly Branches correspond to the twelve zodiac animals: Zǐ (Rat), Chǒu (Ox), Yín (Tiger), Mǎo (Rabbit), Chén (Dragon), Sì (Snake), Wǔ (Horse), Wèi (Goat), Shēn (Monkey), Yǒu (Rooster), Xū (Dog), Hài (Pig). The fifth branch, Chén (辰), is the Dragon. Archaeologists recovered a complete sexagenary cycle carved into a Shang dynasty oracle bone dating to approximately 1000 BCE, representing one of the oldest known calendrical systems in continuous use.
+
+\subsection{Module 2: The Dragon in Chinese Culture Reference}
+
+\subsubsection{Archaeological Origins}
+
+The dragon motif in Chinese culture predates written history. Dragon-like zoomorphic compositions in reddish-brown stone have been found at the Chahai site in Liaoning province, belonging to the Xinglongwa culture (6200--5400 BCE). A dragon statue dating to the fifth millennium BCE was discovered in the Yangshao culture site in Henan in 1987. Jade coiled-dragon badges of rank have been excavated from Hongshan culture sites (c. 4700--2900 BCE). A snake-like dragon painted on red pottery was found at the Taosi site in Shanxi, associated with the Longshan Culture. At the Erlitou site, a dragon-like object coated with approximately 2,000 pieces of turquoise and jade represents one of the most elaborate early dragon artifacts.
+
+\subsubsection{Imperial Symbolism}
+
+The dragon became definitively linked to imperial authority through two foundation myths. The Yellow Emperor (Huangdi) was said to have been immortalized into a dragon and ascended to heaven at the end of his reign. The Yan Emperor was said to have been born through his mother's telepathic encounter with a dragon. Liu Bang, founder of the Han dynasty, claimed his mother conceived him after dreaming of a dragon. By the Tang dynasty, emperors wore dragon-motif robes as an explicit symbol of imperial power. During the Ming and Qing dynasties, the five-clawed dragon was reserved exclusively for the emperor; four claws denoted nobility, three claws the common people. The Forbidden City in Beijing contains over 10,000 dragon designs across its architecture.
+
+\subsubsection{Four Types of Cosmic Dragons}
+
+Ancient Chinese cosmogonists defined four primary dragon types: the Celestial Dragon (天龍, Tiānlóng), guardian of heavenly palaces; the Dragon of Hidden Treasure (伏藏龍, Fúzànglóng), associated with precious metals and volcanoes; the Earth Dragon (地龍, Dìlóng), controller of waterways; and the Spiritual Dragon (神龍, Shénlóng), controller of rain and winds. The latter two were most significant in popular belief, eventually merging into the Dragon Kings (龍王, Lóngwáng) --- four deities governing the four seas of China.
+
+\subsubsection{The Nine Sons of the Dragon}
+
+Traditional Chinese culture identifies nine distinct dragon offspring, each with unique characteristics and whose images appear in specific architectural and decorative contexts: Bixi (贔屓), Qiuniu (囚牛), Yazi (睚眥), Chaofeng (嘲風), Pulao (蒲牢), Chiwen (螭吻), Bi'an (狴犴), Suanni (狻猊), and Fuxi (負屓). Their varied temperaments --- from the music-loving Qiuniu to the fierce Yazi --- reflect the Chinese understanding that power manifests in diverse forms.
+
+\subsubsection{Composite Anatomy}
+
+The Chinese dragon combines elements of nine animals: the horns of a deer, the head of a camel, the eyes of a rabbit (or demon), the ears of an ox, a snake's neck, a clam's belly, fish-like scales, eagle claws, and tiger palms. Scholar Wen Yiduo hypothesized that this composite form represented the political unification of multiple tribes, each contributing their totem animal to a collective symbol.
+
+\subsection{Module 3: Fire Element Deep Dive Reference}
+
+\subsubsection{Fire in the Wuxing System}
+
+Fire (火, Huǒ) represents the phase of fruition and ripening --- the period of maximum Yang energy. In the generating cycle, Wood creates Fire (wood serves as fuel); Fire creates Earth (ash and volcanic activity produce earth). In the controlling cycle, Water controls Fire (extinguishing); Fire controls Metal (melting). Fire corresponds to approximately 73 days of the annual cycle, centered on midsummer.
+
+The Su Wen (earliest surviving text of Chinese medicine) states: ``The supernatural forces of summer create heat in the Heavens and fire on Earth; they create the heart and the pulse within the body, the red color, the tongue, and the ability to express laughter.'' This passage encodes the complete correlative chain: season (summer), cosmological force (heat), terrestrial manifestation (fire), organ (heart), sense (pulse), color (red), sensory gateway (tongue), and expression (laughter).
+
+\subsubsection{The Heart as Emperor Organ}
+
+In TCM, the Heart (心, Xīn) is designated the ``monarch of all organs'' (君主之官, jūnzhǔ zhī guān). It governs blood circulation, controls blood vessels and pulse strength, and --- most critically --- houses the Shen (神), the spirit or consciousness. The Shen encompasses mental activity, memory, consciousness, thinking, sleep, and dreams. When Heart Qi is balanced, a person radiates warmth, clarity, and emotional presence. When imbalanced, the Shen becomes scattered, manifesting as insomnia, poor memory, anxiety, or restlessness.
+
+The Heart's Yang partner is the Small Intestine, which separates pure from impure --- a function that operates both physically (digestion) and psychologically (discernment). The Pericardium serves as the Heart's protector, shielding it from emotional shock. The Triple Burner (San Jiao) regulates metabolism, fluid movement, and temperature across the body's three regions.
+
+\subsubsection{Fire Personality Profile}
+
+Fire personality traits include love, passion, leadership, spirituality, insight, dynamism, intuition, reason, and expressiveness. The balanced Fire person is warm-hearted, generous, and experiences life through connection, joy, and shared pleasure. The imbalanced Fire person may exhibit excess (mania, hyperactivity, inappropriate elation that scatters Heart Qi) or deficiency (emotional coldness, lack of enthusiasm, inability to connect). Clinical signs of Fire imbalance include a cleft in the nose, excessively red complexion, mouth sores, insomnia, and dark or burning urination.
+
+\subsection{Module 4: The Fire Dragon Archetype Reference}
+
+\subsubsection{Bǐng Chén Construction}
+
+The Fire Dragon year is designated Bǐng Chén (丙辰) in the sexagenary system. Bǐng (丙) is the third Heavenly Stem, representing Yang Fire. In traditional imagery, Yang Fire is the sun itself --- brilliant, illuminating, and impossible to ignore. It differs from Yin Fire (Dīng, 丁), which is the candle flame --- intimate, warm, and contained.
+
+Chén (辰) is the fifth Earthly Branch, corresponding to the Dragon. Critically, in the Four Pillars (Bazi) system, each Earthly Branch contains \emph{hidden Heavenly Stems} that create layered elemental interactions beneath the surface. The Chén branch is dominated by Yang Earth (Wù, 戊) and also contains hidden Yin Water (Guǐ, 癸) and Yin Wood (Yǐ, 乙). This means the Dragon branch simultaneously carries Earth stability, Water depth, and Wood growth potential --- a remarkably rich substrate for the surface-level Fire to act upon.
+
+\subsubsection{Fire Dragon Years}
+
+Fire Dragon years in the sexagenary cycle: 1916, 1976, 2036 (and continuing every 60 years). The 1976 Fire Dragon year ran from January 31, 1976, to February 17, 1977, per the lunar calendar. Individuals born in early January 1976 (before the lunar new year) are actually Water Rabbits from the preceding year --- a common source of error in popular zodiac assignment.
+
+\subsubsection{Five Elemental Dragon Variants}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Element} & \tableheader{Years} & \tableheader{Key Traits} & \tableheader{Stem} \\
+\midrule
+Wood Dragon & 1964, 2024 & Thoughtful, introverted, creative; may struggle with relationships & Jiǎ Chén (甲辰) \\
+Fire Dragon & 1916, 1976 & Passionate, decisive, bold; natural leader; impulsive & Bǐng Chén (丙辰) \\
+Earth Dragon & 1928, 1988 & Stable, practical, grounded; team-oriented; slower to act & Wù Chén (戊辰) \\
+Metal Dragon & 1940, 2000 & Disciplined, determined, principled; rigid; high standards & Gēng Chén (庚辰) \\
+Water Dragon & 1952, 2012 & Adaptable, wise, diplomatic; emotionally fluid; patient & Rén Chén (壬辰) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Four Pillars Context}
+
+In Bazi analysis, the year pillar is only one of four coordinates --- year, month, day, and hour each contribute a Stem-Branch pair, yielding eight characters total (hence ``Eight Characters,'' 八字). A 1976 Fire Dragon born in winter may carry stronger Water influence from the seasonal pillar, tempering Fire's intensity. A summer-born Fire Dragon carries heightened Yang energy. This explains why two individuals born in the same Fire Dragon year can manifest very different personalities: the year pillar sets the broad archetype, but the other three pillars modulate it extensively.
+
+\subsection{Module 5: Demographic and Social Impact Reference}
+
+\subsubsection{Dragon-Year Birth Booms}
+
+Peer-reviewed research has documented statistically significant birth rate increases during Dragon years across Chinese-majority populations. Agarwal et al. (American Economic Association, 2018) found that Singapore's three Dragon cohorts since 1976 were substantially larger than normal: approximately 30\% increase in 1976, approximately 20\% in 1988, and approximately 15\% in 2000 --- all statistically significant.
+
+In Taiwan, 1976 recorded 425,125 births versus a baseline average of approximately 396,479, reversing a declining trend. Demographer Daniel Goodkind, who has studied Chinese zodiac birth patterns since 1990, identified five consecutive Dragon cycles showing this pattern and noted that the effect extends to avoidance of Tiger years (perceived as inauspicious) two years prior.
+
+Research published in ScienceDirect (2021) using Shenzhen birth registry data found that approximately 6.7\% of births were actively shifted from the week before the Dragon year began to the week after --- evidence of deliberate birth timing through delayed vaginal delivery and elective C-sections.
+
+\subsubsection{Economic and Educational Consequences}
+
+In multiethnic Singapore, researchers found that larger Dragon cohorts faced weaker educational and economic prospects due to greater competition. The effect rippled beyond ethnic Chinese to affect Malay and Indian Singaporeans, who experienced up to 10\% more competition for school places and employment. University admission competition intensified measurably in Dragon-year cohorts.
+
+Mainland China showed suppressed Dragon-year effects during the 1976 and 1988 cycles due to Cultural Revolution-era condemnation of traditional beliefs, but the pattern re-emerged in the 2012 Dragon year as post-reform generations embraced zodiac timing. The phenomenon is strongest in Hong Kong, Taiwan, and Singapore, where traditional beliefs faced less state suppression.
+
+\subsubsection{The Dragon Paradox}
+
+The demographic evidence creates an ironic feedback loop: parents seeking auspicious births for their children inadvertently create structural disadvantage through cohort crowding. Dragon children face stiffer competition for school admission, university places, military service positions, and early-career jobs. The auspiciousness belief produces measurable dis-auspiciousness at the population level --- a finding with implications for behavioral economics, cultural demography, and public policy.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Wuxing as knowledge system & Respect & Present as coherent cosmological framework; neither reduce to ``superstition'' nor claim scientific validity \\
+TCM health claims & Gate & All organ/meridian descriptions attributed to TCM tradition; no standalone medical advice \\
+Zodiac personality claims & Annotate & Framed as cultural archetype, not psychological science; Four Pillars complexity noted \\
+Dragon-year birth timing & Evidence & Peer-reviewed citations only; no judgment on individual family decisions \\
+Cultural Revolution references & Sensitivity & Historical context for suppressed beliefs; factual tone without political advocacy \\
+Cross-cultural translation & Care & Wuxing ``phases'' not ``elements''; Dragon as beneficent not malevolent; note Western dragon differences \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+\item Hong Kong Observatory --- Heavenly Stems and Earthly Branches reference tables
+\item Natural History Museum of Los Angeles County --- Year of the Dragon exhibit documentation
+\item Shenzhen Birth Registry --- Administrative birth certificate data (2010--2012)
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+\begin{itemize}[leftmargin=2em]
+\item Agarwal, S., Qian, W. --- ``Dragon Babies'' (American Economic Association, 2018)
+\item Mocan, N., Yu, H. --- Dragon year births in mainland China (2017)
+\item Goodkind, D. --- Chinese zodiac birth timing patterns (1991, 1993)
+\item Tan, P.L. --- Dragon cohort educational and economic outcomes, NUS (2017)
+\item ScienceDirect --- ``Dragon year superstition, birth timing, and neonatal health outcomes'' (2021)
+\item Wang, A.H. --- \emph{Cosmology and Political Culture in Early China}, Cambridge UP (2000)
+\item Needham, J. --- \emph{Science and Civilisation in China}, Vol. 2, Cambridge UP (1956)
+\item Sivin, N. --- ``Five Phases'' translation proposal (1987)
+\item Porkert, M. --- \emph{Theoretical Foundations of Chinese Medicine}, MIT Press (1974)
+\item Rochat de la Vallee, E. --- \emph{Wuxing: The Five Elements in Classical Chinese Texts}, Monkey Press (2009)
+\end{itemize}
+
+\subsubsection{Encyclopedic and Museum Sources}
+\begin{itemize}[leftmargin=2em]
+\item Encyclopædia Britannica --- ``Wuxing'' and ``Long'' (dragon) entries
+\item Internet Encyclopedia of Philosophy --- ``Wuxing (Wu-hsing)'' (Littlejohn, R.)
+\item New World Encyclopedia --- ``Wu Xing'' entry
+\item World History Encyclopedia --- ``The Dragon in Ancient China''
+\end{itemize}
+
+% ════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality educational knowledge pack on the Chinese Year of the Fire Dragon (丙辰, Bǐng Chén), integrating cosmological theory, mythological tradition, traditional Chinese medicine, personality archetype, and peer-reviewed demographic evidence into a single, cross-referenced document suitable for the GSD educational ecosystem.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 (Sequential)          WAVE 1 (Parallel)
+  ┌──────────────────┐    ┌──────────────────────────────────┐
+  │ Shared schemas   │    │ Track A: Cosmo + Dragon Myth     │
+  │ Source index      │───▶│ Track B: Fire TCM + Archetype    │
+  │ Citation template │    │ Track C: Demographics            │
+  └──────────────────┘    └──────────────┬───────────────────┘
+                                         │
+  WAVE 2 (Sequential)                    │
+  ┌──────────────────────────────────────▼┐
+  │ Cross-module synthesis                │
+  │ Integration validation                │
+  │ Through-line narrative                │
+  └──────────────────┬───────────────────┘
+                     │
+  WAVE 3 (Sequential)│
+  ┌──────────────────▼───────────────────┐
+  │ Publication formatting               │
+  │ Verification matrix pass             │
+  │ Final PDF + index.html               │
+  └──────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, citation format, source index, glossary of Chinese terms
+\item \textbf{Research Layer} --- Five parallel-capable research modules producing structured survey documents
+\item \textbf{Synthesis Layer} --- Cross-module integration, relationship mapping, through-line narrative
+\item \textbf{Publication Layer} --- LaTeX formatting, verification, PDF compilation, index page generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Cosmological Foundations & Wuxing + sexagenary cycle with correct correspondences & W0-SCHEMA, W1-COSMO \\
+2 & Dragon Mythology Survey & Neolithic through Qing with academic sources & W1-DRAGON \\
+3 & Fire Element Reference & TCM-accurate with organ/meridian/emotion mapping & W1-FIRE \\
+4 & Fire Dragon Archetype & Bǐng Chén construction from first principles & W1-ARCH \\
+5 & Demographic Analysis & Peer-reviewed evidence, 3+ country coverage & W1-DEMO \\
+6 & Integrated Knowledge Pack & Cross-referenced, publication-quality PDF & W2-SYNTH, W3-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2,000 \\
+W0-INDEX & None & Haiku & 1,500 \\
+W1-COSMO & W0-SCHEMA & Sonnet & 8,000 \\
+W1-DRAGON & W0-SCHEMA & Sonnet & 10,000 \\
+W1-FIRE & W0-SCHEMA & Opus & 8,000 \\
+W1-ARCH & W0-SCHEMA & Opus & 7,000 \\
+W1-DEMO & W0-SCHEMA & Sonnet & 6,000 \\
+W2-SYNTH & W1-all & Opus & 10,000 \\
+W3-PUB & W2-SYNTH & Sonnet & 5,000 \\
+W3-VERIFY & W3-PUB & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis, cultural sensitivity, Fire/TCM archetype construction, through-line narrative \\
+Sonnet & 60\% & Survey compilation, source verification, demographic analysis, publication formatting \\
+Haiku & 10\% & Schema creation, template scaffolding, citation format standardization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Execution} & \tableheader{Components} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1 \\
+1 & Research & Parallel (3 tracks) & 5 & 6 \\
+2 & Synthesis & Sequential & 1 & 4 \\
+3 & Publication & Sequential & 2 & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W0-SCHEMA & Haiku & Shared document schema: section headers, citation format, Chinese term glossary, cross-reference convention & 2,000 \\
+W0-INDEX & Haiku & Master source index with URL, access date, and reliability tier for all sources & 1,500 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: History and Culture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W1-COSMO & Sonnet & Complete Wuxing reference: origins, cycles, correspondences table, sexagenary mathematics & 8,000 \\
+W1-DRAGON & Sonnet & Dragon mythology survey: archaeological evidence, imperial symbolism, nine types, cultural practices & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Medicine and Archetype}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W1-FIRE & Opus & Fire element deep dive: TCM organs, Shen, seasonal medicine, personality profile & 8,000 \\
+W1-ARCH & Opus & Bǐng Chén archetype: stem-branch construction, hidden stems, Bazi context, five Dragon variants & 7,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Contemporary Evidence}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W1-DEMO & Sonnet & Demographic analysis: birth boom evidence, economic effects, educational competition, dragon paradox & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W2-SYNTH & Opus & Cross-module integration: connect cosmological theory to cultural practice to demographic evidence; through-line narrative; relationship map & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W3-PUB & Sonnet & Publication-quality LaTeX formatting, PDF compilation (3-pass XeLaTeX), index.html generation & 5,000 \\
+W3-VERIFY & Sonnet & Verification matrix pass: all 12 success criteria checked against test results & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{5-minute cache window exploitation:} Wave 1 tracks share W0-SCHEMA and W0-INDEX in cache; all Track A and B tasks reference the same foundation within the TTL window
+\item \textbf{Source index reuse:} W0-INDEX created once, cached for all Wave 1 components, refreshed in Wave 2
+\item \textbf{Chinese term glossary:} Single glossary document prevents inconsistent romanization across modules
+\item \textbf{Cross-reference convention:} Established in W0 so Wave 1 modules can pre-link to each other's expected sections
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 0 & 3,500 & 3,500 \\
+Wave 1 & 15,000 & 24,000 & 0 & 39,000 \\
+Wave 2 & 10,000 & 0 & 0 & 10,000 \\
+Wave 3 & 0 & 8,000 & 0 & 8,000 \\
+\midrule
+\textbf{Total} & \textbf{25,000} & \textbf{32,000} & \textbf{3,500} & \textbf{60,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0-SCHEMA ─┬─▶ W1-COSMO ──┐
+             ├─▶ W1-DRAGON ─┤
+             ├─▶ W1-FIRE ───┤
+             ├─▶ W1-ARCH ───┼──▶ W2-SYNTH ──▶ W3-PUB ──▶ W3-VERIFY
+             └─▶ W1-DEMO ───┘
+
+  W0-INDEX ──────▶ (all W1 tasks)
+
+  Parallel: W1-COSMO || W1-DRAGON || W1-FIRE || W1-ARCH || W1-DEMO
+  (3 tracks: A={COSMO,DRAGON}, B={FIRE,ARCH}, C={DEMO})
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Source quality, attribution, sensitivity \\
+Core functionality & 16 & Required & BLOCK & Module completeness, accuracy \\
+Integration & 6 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 4 & Best-effort & LOG & Temporal currency, gap acknowledgment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to academic, government, or professional sources. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every birth rate, percentage, and cohort size attributed to a specific study or registry. \\
+SC-ADV & No policy advocacy & Document presents demographic and cultural evidence without advocating for or against zodiac-based family planning. \\
+SC-TCM & Medical framing & All TCM health claims attributed to TCM tradition; no standalone medical advice; appropriate ``this is a traditional framework'' framing. \\
+SC-CUL & Cultural respect & Wuxing and zodiac presented as coherent knowledge systems, not dismissed as superstition or elevated to scientific status. \\
+SC-TRN & Translation accuracy & Wuxing rendered as ``Five Phases'' (not ``Five Elements'') in all scholarly contexts; Chinese characters provided for all key terms. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+CF-01 & Wuxing generating cycle complete and correct (Wood $\rightarrow$ Fire $\rightarrow$ Earth $\rightarrow$ Metal $\rightarrow$ Water $\rightarrow$ Wood) \\
+CF-02 & Wuxing controlling cycle complete and correct \\
+CF-03 & All five phases have complete correspondence tables (planet, season, direction, color, organ-yin, organ-yang, emotion) \\
+CF-04 & Sexagenary cycle explained as LCM(10,12) = 60 with Yin/Yang pairing rule \\
+CF-05 & All ten Heavenly Stems listed with pinyin, characters, polarity, and element \\
+CF-06 & Dragon archaeological evidence cited from pre-3000 BCE with academic sources \\
+CF-07 & Imperial dragon symbolism traced Han through Qing with five-claw rule documented \\
+CF-08 & All nine dragon types individually named \\
+CF-09 & Four cosmic dragon types documented (Tianlong, Fuzanglong, Dilong, Shenlong) \\
+CF-10 & Heart as Emperor organ documented with Shen, pulse, and meridian functions \\
+CF-11 & Fire correspondences complete: Mars, summer, south, red, joy, bitter, tongue \\
+CF-12 & Bǐng Chén construction shown from Heavenly Stem + Earthly Branch first principles \\
+CF-13 & Hidden stems within Chén branch identified (Yang Earth, Yin Water, Yin Wood) \\
+CF-14 & All five elemental Dragon variants documented with years and traits \\
+CF-15 & Dragon birth boom documented with $\geq$3 peer-reviewed or government citations \\
+CF-16 & Dragon paradox (auspicious birth $\rightarrow$ cohort crowding $\rightarrow$ structural disadvantage) articulated \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+IN-01 & Wuxing Fire correspondences consistent between Module 1 (theory) and Module 3 (TCM) \\
+IN-02 & Dragon Branch (Chén) consistently placed as 5th Branch across Modules 1, 2, and 4 \\
+IN-03 & Fire Dragon personality traits in Module 4 logically derive from Fire (Module 3) + Dragon (Module 2) \\
+IN-04 & Demographic evidence (Module 5) references cultural beliefs documented in Module 2 \\
+IN-05 & Cross-module glossary: all Chinese terms use consistent romanization and characters \\
+IN-06 & Self-containment: a reader with no prior knowledge of Chinese cosmology can follow the complete document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Wuxing cycles with sources & CF-01, CF-02, CF-03 & Pending \\
+2 & Sexagenary math explained & CF-04, CF-05 & Pending \\
+3 & Dragon myth from Neolithic & CF-06, CF-07 & Pending \\
+4 & Nine dragon types & CF-08, CF-09 & Pending \\
+5 & Fire TCM correspondences & CF-10, CF-11, SC-TCM & Pending \\
+6 & Bǐng Chén from first principles & CF-12, CF-13 & Pending \\
+7 & Five Dragon variants & CF-14 & Pending \\
+8 & Birth boom evidence & CF-15, SC-NUM & Pending \\
+9 & Educational consequences & CF-16 & Pending \\
+10 & Cross-module integration & IN-01 through IN-06 & Pending \\
+11 & Source quality & SC-SRC, SC-ADV & Pending \\
+12 & Cultural sensitivity & SC-CUL, SC-TRN & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache scheduling \\
+SCOUT & Research Agent & Source gathering; evidence compilation; citation verification \\
+EXEC-A & Executor (Track A) & Cosmological Foundations + Dragon Mythology production \\
+EXEC-B & Executor (Track B) & Fire Element + Archetype production \\
+CRAFT-COSMO & Domain: Cosmology & Wuxing accuracy; sexagenary mathematics; planetary correspondences \\
+CRAFT-CULTURE & Domain: Culture & Dragon mythology; imperial symbolism; sensitivity review \\
+VERIFY & Verification & Source validation; cross-module consistency; test plan execution \\
+INTEG & Integration Agent & Cross-module relationship validation; through-line coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research Modules & 5 (Cosmology, Dragon Myth, Fire TCM, Archetype, Demographics) \\
+Activation Profile & Squadron (12 roles) \\
+Parallel Tracks & 3 (A: History/Culture, B: Medicine/Archetype, C: Demographics) \\
+Total Waves & 4 (Foundation, Research, Synthesis, Publication) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 4 \\
+Total Token Budget & 60,500 (Opus 25K / Sonnet 32K / Haiku 3.5K) \\
+Success Criteria & 12 \\
+Total Tests & 32 (6 safety + 16 core + 6 integration + 4 edge) \\
+Safety-Critical Tests & 6 (all mandatory-pass / BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\emph{``The meaning lives in the pairing --- in the space between the Stem and the Branch, the Fire and the Dragon, the sixty-year clock and the human life it measures. The ancient Chinese cosmologists built a timekeeping system from the resonance of two prime-adjacent cycles, and in doing so encoded a theory of personality, medicine, and destiny that still moves populations. The Fire Dragon is not the loudest note in the zodiac. It is the most harmonic.''}
+
+\vspace{0.5em}
+\hfill --- The Through-Line
+\end{quotebox}
+
+\end{document}

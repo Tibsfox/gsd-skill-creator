@@ -1,0 +1,1131 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Education / Creativity ──
+\definecolor{primary}{HTML}{4527A0}       % Deep violet — imagination, creativity
+\definecolor{secondary}{HTML}{E65100}     % Warm orange — energy, performance
+\definecolor{tertiary}{HTML}{00695C}      % Teal — growth, teamwork
+\definecolor{accent}{HTML}{7B1FA2}        % Purple — creative spark
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Soft lavender
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Soft peach
+\definecolor{lighttertiary}{HTML}{E0F2F1}  % Soft teal
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Odyssey of the Mind}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Odyssey of the Mind -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ══════════════════════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Odyssey of the Mind\\[0.3em]Creative Problem Solving}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Competition Structure, Pedagogy \& Educational Impact}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Odyssey of the Mind --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Depends On:}{brainstorming-techniques.docx (project knowledge)}
+\metafield{Context:}{GSD Educational Knowledge Pack --- Creative Competition Analysis}
+
+\subsection{Vision}
+
+For over forty years, Odyssey of the Mind has embodied a deceptively simple proposition: that creativity can be taught, and that the teaching should be fun. Founded in 1978 by Dr.\ C.\ Samuel Micklus at Glassboro State College (now Rowan University) in New Jersey, the program has grown from 28 schools in a single state to an international phenomenon spanning over 25 countries, with World Finals drawing nearly 900 teams and 18,000 participants annually.
+
+What makes OM architecturally distinctive is not the competition itself but the \emph{constraint system} that governs it. Teams of up to seven students choose from six categories of open-ended problems --- vehicle, technical, classics, structure, performance, and primary --- then spend months designing solutions under strict rules: every idea must originate from the students, every material must fit within a cost limit, and every adult (including the coach) is prohibited from contributing ideas under the ``Outside Assistance'' rule. The competition day adds a second dimension: a surprise ``Spontaneous'' problem requiring real-time creative thinking under pressure.
+
+This architecture --- long-term creative investment combined with improvisational capacity, all constrained by rules that force student ownership --- creates a learning environment that is remarkably aligned with the GSD ecosystem's own principles. The Amiga Principle manifests here: specialized execution paths (five distinct problem types, three spontaneous formats) combined with architectural leverage (the Outside Assistance rule as a structural guarantee of student agency) produce outcomes far exceeding what brute-force instruction could achieve. The spaces between coach and student, between long-term preparation and spontaneous improvisation, between STEM and performing arts --- these are where the real learning happens.
+
+This research mission will produce a comprehensive reference documenting OM's complete ecosystem: its competition framework, coaching methodology, spontaneous problem-solving pedagogy, educational research base, and competitive pathway from regional tournaments through World Finals. The resulting knowledge pack serves both as a standalone educational reference and as a foundation for potential GSD integration --- a creative problem-solving curriculum engine that could complement the ecosystem's existing educational packs.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Structural complexity is underdocumented.} OM's competition framework involves interacting scoring systems (Long-Term at 200 points, Style at 50, Spontaneous at 100), percentage-based normalization, six problem categories with annually changing specifications, four competitive divisions, and a clarification system --- yet no single reference synthesizes these into a coherent architectural view.
+
+\item \textbf{Coaching pedagogy is distributed across tribal knowledge.} The Outside Assistance rule creates a unique coaching challenge: facilitating creativity without contributing ideas. Effective coaching strategies exist in scattered PDFs, regional handbooks, and oral tradition, but have not been compiled into a structured methodology.
+
+\item \textbf{Spontaneous problem-solving is the hidden differentiator.} Coaches consistently report that Spontaneous scores --- not Long-Term scores --- determine which teams advance. Yet Spontaneous preparation receives less structured attention than Long-Term work.
+
+\item \textbf{Educational impact research is thin.} Despite 40+ years of operation and millions of participants, peer-reviewed research on OM's educational outcomes is limited. The strongest study (Bias \& Bias, 2018) identified teamwork, creativity, and problem-solving as the top three competencies, but the evidence base needs synthesis.
+
+\item \textbf{The competition pathway is financially opaque.} National membership costs (\$290), tournament registration fees (\$75--\$145), and World Finals expenses (\$3,000+ registration plus housing) create accessibility barriers that are poorly documented from the participant perspective.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Odyssey of the Mind is a constraint-driven creative education system where architectural rules (Outside Assistance, cost limits, time limits) function as the primary pedagogical mechanism, producing student agency and creative capacity as emergent properties.
+\end{quotebox}
+
+The core insight is that OM's rules are not limitations on creativity --- they \emph{are} the creativity engine. The Outside Assistance rule does not merely prevent cheating; it structurally guarantees that every idea belongs to the students. The cost limit does not merely teach budgeting; it forces creative material substitution. The 8-minute performance window does not merely test preparation; it demands editorial judgment about what matters most. Every constraint is a pedagogical instrument.
+
+\subsubsection{Program Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+    ODYSSEY OF THE MIND — PROGRAM ARCHITECTURE
+
+    ┌─────────────────────────────────────────────────────┐
+    │              MEMBERSHIP ORGANIZATION                │
+    │    School / Community Group / Homeschool             │
+    │         $290 National + Regional Fees                │
+    └──────────────────────┬──────────────────────────────┘
+                           │
+              ┌────────────┴────────────┐
+              │     TEAM FORMATION      │
+              │   Up to 7 students      │
+              │   1+ adult coach        │
+              │   Division by grade/age │
+              └────────────┬────────────┘
+                           │
+         ┌─────────────────┼─────────────────┐
+         ▼                 ▼                 ▼
+    ┌─────────┐     ┌───────────┐     ┌───────────┐
+    │LONG-TERM│     │   STYLE   │     │SPONTANEOUS│
+    │ PROBLEM │     │ COMPONENT │     │  PROBLEM  │
+    │ 200 pts │     │  50 pts   │     │  100 pts  │
+    │ months  │     │ embedded  │     │  minutes  │
+    └────┬────┘     └─────┬─────┘     └─────┬─────┘
+         │                │                  │
+         └────────────────┼──────────────────┘
+                          ▼
+              ┌──────────────────────┐
+              │  PERCENTAGE-BASED    │
+              │  SCORE NORMALIZATION │
+              │  (Top = max points)  │
+              └──────────┬───────────┘
+                         ▼
+              Regional → State → World Finals
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+   MODULE DECOMPOSITION — 5 RESEARCH MODULES
+
+   ┌──────────────────────────────────────────────┐
+   │  M1: COMPETITION FRAMEWORK                   │
+   │      Problem types, divisions, scoring,      │
+   │      rules, clarifications, penalties         │
+   ├──────────────────────────────────────────────┤
+   │  M2: COACHING & PEDAGOGY                     │
+   │      Outside Assistance, Socratic method,    │
+   │      brainstorming facilitation, skill        │
+   │      teaching vs. solution contributing       │
+   ├──────────────────────────────────────────────┤
+   │  M3: SPONTANEOUS PROBLEM-SOLVING             │
+   │      Verbal, hands-on, combination types,    │
+   │      scoring (common vs. creative), practice  │
+   ├──────────────────────────────────────────────┤
+   │  M4: EDUCATIONAL IMPACT & SKILLS             │
+   │      Research findings, competencies built,   │
+   │      STEAM integration, college readiness     │
+   ├──────────────────────────────────────────────┤
+   │  M5: COMPETITION PATHWAY & WORLD FINALS      │
+   │      Regional→State→World, costs, logistics, │
+   │      awards, culture (pins, buddy teams)      │
+   └──────────────────────────────────────────────┘
+
+   Cross-module links:
+     M1 ←→ M2 (rules constrain coaching)
+     M1 ←→ M3 (spontaneous is a scoring component)
+     M2 ←→ M4 (pedagogy produces measured outcomes)
+     M3 ←→ M4 (spontaneous builds specific skills)
+     M1 ←→ M5 (scoring determines advancement)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Competition Framework}
+The structural foundation: six problem categories (Vehicle, Technical, Classics, Structure, Performance, Primary), four competitive divisions (Div I: K--5, Div II: 6--8, Div III: 9--12, Div IV: Collegiate), the three-component scoring system, penalty categories, and the clarification process that governs rule interpretation throughout the season.
+
+\subsubsection{M2: Coaching \& Pedagogy}
+The Outside Assistance rule as pedagogical architecture: what coaches may and may not do, Socratic questioning techniques, brainstorming facilitation without idea contribution, skill teaching boundaries, team formation strategies, parent management, and the unique challenge of facilitating creativity in children while maintaining strict non-intervention.
+
+\subsubsection{M3: Spontaneous Problem-Solving}
+The three formats (verbal, hands-on, verbal/hands-on combination), scoring mechanics (common vs.\ creative responses, card systems), practice methodologies, the brainstorming-during-think-time innovation, and the strategic reality that Spontaneous scores most often determine competitive advancement.
+
+\subsubsection{M4: Educational Impact \& Skills Development}
+Research findings on competencies developed through OM participation (teamwork, creativity, problem-solving, communication, time management, budgeting, public speaking), alignment with 21st-century workforce skills, STEAM integration, college admissions value, and the theoretical basis for creativity-as-teachable-skill.
+
+\subsubsection{M5: Competition Pathway \& World Finals}
+The full competitive pipeline from team formation through regional and state tournaments to World Finals, including cost structures at each level, the percentage-based scoring normalization system, awards (Ranatra Fusca, OMER's Award, Spirit Award), and the cultural dimensions (pin trading, Creativity Festival, buddy teams, float parade).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  name: "Odyssey Research Pack"
+  domain: education
+  color_scheme: violet-orange-teal
+  activation: squadron
+  modules: 5
+  model_split:
+    opus: 30%    # synthesis, cross-module, pedagogy analysis
+    sonnet: 60%  # survey compilation, structure, verification
+    haiku: 10%   # schemas, templates, scaffolding
+  estimated_tokens: 180000
+  estimated_windows: 18
+  estimated_sessions: 4
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete competition framework documentation (all six problem types, four divisions, three scoring components)
+\item Coaching methodology synthesis (Outside Assistance rules, facilitation techniques, team management)
+\item Spontaneous problem-solving taxonomy and practice guide
+\item Educational impact research compilation with source attribution
+\item Competition pathway cost analysis (membership through World Finals)
+\item 2025--2026 season specifics including current problem synopses
+\item Historical context (founding through present, including 1999 organizational split)
+\item International participation scope (25+ countries)
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Destination ImagiNation (post-split competitor) --- separate mission if needed
+\item Full problem text reproduction (copyrighted; synopses only)
+\item Individual team strategy guides or competitive advice
+\item Specific spontaneous problem solutions (top-secret by program rules)
+\item Regional association governance structures (vary by state/country)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All six long-term problem categories documented with structural descriptions and scoring breakdowns.
+\item All four competitive divisions mapped with age/grade requirements and progression rules.
+\item The three-component scoring system (Long-Term 200, Style 50, Spontaneous 100) fully explained including percentage normalization.
+\item Outside Assistance rule documented with at least 8 specific scenario examples (permitted vs.\ prohibited actions).
+\item All three spontaneous problem types (verbal, hands-on, combination) profiled with scoring mechanics.
+\item At least 5 peer-reviewed or professional sources cited for educational impact claims.
+\item Complete cost pathway documented: membership (\$290) through World Finals (\$3,000+ registration).
+\item Historical timeline includes founding (1978), 1999 organizational split, NASA sponsorship (2000s), and current season.
+\item Cross-module connections explicitly traced (e.g., how scoring rules shape coaching strategy).
+\item At least 10 competencies identified as outcomes of OM participation with source attribution.
+\item World Finals logistics documented including 2026 venue (Iowa State University, May 27--30).
+\item Penalty system mapped: Spirit of the Problem, Outside Assistance, Over Time, Over Cost, Unsportsmanlike Conduct.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+brainstorming-techniques.docx & OM's brainstorming methodology maps directly to Osborn's foundational principles; OM applies them under competitive constraints & Foundational \\
+GSD Learn Kung Fu Pack & OM's pedagogical model (teach skills, not solutions) parallels the Kung Fu pack's learning methodology & Parallel \\
+GSD BBS Educational Pack & OM could serve as a creative problem-solving curriculum module within the broader educational ecosystem & Integration \\
+The Space Between & OM's ``spaces between'' coach and student, preparation and improvisation, echo the ecosystem philosophy & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Odyssey of the Mind is, at its heart, an existence proof of the Amiga Principle applied to education. A small set of architectural constraints --- you cannot help them, they must stay within budget, they have eight minutes, they will face the unknown --- produces staggering creative complexity through faithful iteration across millions of student-hours worldwide. The spaces between coach and student, between the known long-term problem and the unknown spontaneous challenge, between STEM engineering and theatrical performance --- these liminal zones are where creativity actually lives.
+
+The GSD ecosystem recognizes this pattern: meaning emerges not from the nodes but from the connections between them. OM's Outside Assistance rule is not a restriction; it is the structural guarantee that the connection between adult knowledge and student expression must pass through the student's own creative process. It is safety by structure, not by policy. And the result --- children who are not afraid to face problems that require original solutions --- is precisely what ``giving people their lives back'' looks like when applied to the next generation.
+
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Odyssey of the Mind --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from the program's official documentation, state association resources, coaching handbooks, and educational research. All claims are attributed to specific sources. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Creative Competitions, Inc.\ (CCI)} --- administering organization; publishes the Program Guide, problems, and clarifications
+\item \textbf{Odyssey of the Mind Official Website} (odysseyofthemind.com) --- primary source for rules, scoring, and program structure
+\item \textbf{Institute of Competition Sciences (ICS)} --- independent cataloging of competitive academic programs
+\item \textbf{ResearchGate / Bias \& Bias (2018)} --- peer-reviewed study on OM competency development
+\item \textbf{State Association Resources} --- Georgia, Virginia, Pennsylvania, NorCal, Delaware, Vermont OM associations
+\item \textbf{PMC / Educational Psychology Review} --- peer-reviewed research on project-based learning and creativity in education
+\end{itemize}
+
+\subsection{M1: Competition Framework Reference}
+
+\subsubsection{Problem Categories}
+
+Odyssey of the Mind publishes five competitive long-term problems and one non-competitive Primary problem each year. The categories are consistent year to year though specific problems change annually.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Description} & \tableheader{Core Skills} \\
+\midrule
+Problem 1: Vehicle & Teams design, build, and operate a ride-on or self-contained powered vehicle with various energy sources to perform specified tasks & Engineering, energy systems, mechanical design \\
+Problem 2: Technical & Teams create innovative contraptions and devices while incorporating artistic elements & Technical innovation, artistic integration \\
+Problem 3: Classics & Teams research, interpret, and present a performance of a classic from literature, architecture, art, or mythology & Research, interpretation, theatrical performance \\
+Problem 4: Structure & Teams design and build a balsa wood and glue structure, then test how much weight it can balance and hold & Structural engineering, materials science, physics \\
+Problem 5: Performance & Teams present a performance revolving around a specific theme with required humorous elements & Writing, acting, comedy, stagecraft \\
+Primary (K--2) & Non-competitive; age-appropriate introduction to OM problem-solving & Foundation skills, creative play \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For the 2025--2026 season, problem themes include a train vehicle challenge (Problem 1, sponsored by ARM \& HAMMER Baking Soda), a comedy performance teaching natural science lessons (Problem 2), a balsa wood structure tested with colliding balls (Problem 4), and a tall-tale performance featuring an original hero (Problem 5). Full problem text is available only to registered members.
+
+\subsubsection{Divisions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Division} & \tableheader{U.S.\ Grades} & \tableheader{Int'l Age Limit} & \tableheader{Notes} \\
+\midrule
+Primary & K--2 & Under 8 on May 1 & Non-competitive \\
+Division I & K--5 & Under 12 on May 1 & Elementary \\
+Division II & 6--8 & Under 15 on May 1 & Middle school \\
+Division III & 9--12 & Not qualifying for I or II & High school \\
+Division IV & Collegiate & Majority high school graduates & All colleges/universities \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Teams compete in the lowest division for which their oldest member qualifies. Multi-school teams are permitted under specific circumstances defined in the Program Guide.
+
+\subsubsection{Scoring System}
+
+The scoring system uses three components with percentage-based normalization. Raw scores are converted so that the highest-scoring team in each component receives the maximum possible points, and all other teams receive a proportional percentage.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Max Points} & \tableheader{Description} \\
+\midrule
+Long-Term & 200 & Solution to the chosen problem; judged on requirements met and creativity in specific categories \\
+Style & 50 & Creative enhancement of the long-term solution through costumes, props, scenery, drama, music \\
+Spontaneous & 100 & On-site problem solved in approximately 10 minutes; secret until competition day \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Total possible: 350 points. Penalties are deducted after normalization. Ties are declared when scores are within one point of each other. Final scores are carried to two decimal places.
+
+\subsubsection{Penalty Categories}
+
+The program enforces six penalty categories: ``Spirit of the Problem'' Violation (team's solution contradicts the problem's intent), Unsportsmanlike Conduct (including discussion of spontaneous problems), Missing Membership Sign, Outside Assistance (non-team-member contribution to the solution), Over Time Limit (8-minute performance window), and Over Cost Limit (materials used exceed stated budget).
+
+\subsection{M2: Coaching \& Pedagogy Reference}
+
+\subsubsection{The Outside Assistance Rule}
+
+The Outside Assistance (OA) rule is the structural heart of OM's pedagogical model. Coaches may teach general skills (carpentry, sewing, painting, engineering principles) but may not direct those skills toward the team's specific problem solution. Parents may provide materials and logistical support but may not suggest ideas, repair props, or contribute to costumes during competition.
+
+\textbf{Permitted coaching actions:}
+\begin{itemize}[leftmargin=2em]
+\item Teach brainstorming techniques and creative problem-solving processes
+\item Use Socratic questioning to help teams evaluate their own ideas
+\item Bring in guest instructors to teach skills (welding, dance, etc.) unrelated to specific solution application
+\item Organize practice schedules and team logistics
+\item Read the problem aloud to younger teams who cannot read it independently
+\item Serve as ``secretary'' writing down only what team members say
+\item Administer spontaneous practice problems (this is explicitly not OA)
+\item Share numeric scores from practice judging (but not verbal feedback)
+\end{itemize}
+
+\textbf{Prohibited actions (will incur OA penalty):}
+\begin{itemize}[leftmargin=2em]
+\item Suggesting ideas for the team's solution, even indirectly
+\item Asking leading questions that steer toward a specific approach
+\item Having parents sew costumes, build props, or repair items
+\item Non-team-members plugging in power tools \emph{during} the timed competition period
+\item Providing verbal feedback from judges that gives specific direction for improvement
+\item Replacing a dropped team member without accepting an OA penalty
+\end{itemize}
+
+\subsubsection{Coaching Methodology}
+
+Effective OM coaching follows a progressive model documented across multiple state association handbooks:
+
+\textbf{Phase 1: Team Formation (Fall).} Select 5--7 members with diverse skills. Establish ground rules: no criticism during brainstorming, no put-downs, every idea has value. Begin with spontaneous practice problems to build team dynamics before selecting a long-term problem.
+
+\textbf{Phase 2: Problem Selection (Early Fall).} Have the entire team read all problem synopses. Discuss pros and cons of each. Let members vote --- but teach consensus-building rather than simple majority rule. Select the problem that energizes the most members.
+
+\textbf{Phase 3: Solution Development (Fall--Winter).} Teach the creative problem-solving process: brainstorming, hypothesizing, building/creating, testing, evaluating, elaborating. Use flipcharts to record all ideas visibly. Assign different team members to ``own'' different sections of the problem (limitations, scoring, problem statement). Break the problem into separate brainstorming sessions for theme, style, props, and performance.
+
+\textbf{Phase 4: Refinement (Late Winter).} Increase meeting frequency. Practice the full 8-minute performance repeatedly. Develop a crisis management plan for equipment failure. Have the team re-read the original problem to ensure they haven't drifted from its intent.
+
+\textbf{Phase 5: Competition Preparation (Spring).} Arrange a practice performance for the school community. Prepare backup materials, extra forms, batteries. Brief parents on OA rules. Remind team of sportsmanship expectations.
+
+\subsubsection{Brainstorming Within OM}
+
+OM's brainstorming methodology maps directly to Osborn's four foundational rules (defer judgment, encourage wild ideas, build on others' ideas, go for quantity) applied under competitive constraints. Coaches are instructed to withhold all criticism, both verbal and non-verbal (``a shrug of the shoulder, a frown''), during brainstorming sessions. Teams are taught that the best ideas often come ``later'' --- after the obvious responses are exhausted.
+
+\subsection{M3: Spontaneous Problem-Solving Reference}
+
+\subsubsection{Problem Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Description} \\
+\midrule
+Verbal & Teams give verbal responses to a question or scenario. May incorporate improvisation or dramatization. Scored for common (1 point) vs.\ creative (5 points) responses. \\
+Hands-On & Teams physically build, construct, or manipulate materials to solve a tangible problem. Each problem has specific scoring categories unique to its requirements. \\
+Verbal/Hands-On Combination & Two-part problems: Part I typically involves building or creating; Part II adds verbal responses about or using the creation. Scored for both components. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Scoring Mechanics}
+
+Verbal problems typically allocate 1 point for common responses and 5 points for creative responses. Some problems use a card system where team members hold up cards with two values (e.g., 2/4 or 3/6) --- the judge uses the lower number for common responses and the higher for creative ones. This system lets teams impact their own score by predicting how creative each response will be.
+
+A 2015 clarification introduced a new format for some verbal problems: teams are given paper and pencils during think time, allowed to brainstorm and write down responses, then refer to their notes during response time. This allows more strategic selection of answers.
+
+\subsubsection{Practice Strategies}
+
+Coaching handbooks consistently emphasize these practice approaches:
+
+\begin{itemize}[leftmargin=2em]
+\item Practice all three types regularly --- teams face only one type per competition but cannot predict which
+\item Rotate all team members through verbal, hands-on, and combination problems, including quiet members who ``can be surprisingly good at verbal''
+\item Remove the time limit occasionally and focus purely on generating creative (not just fast) responses
+\item Practice with slow-down tools (dice, cards) that are used in actual competition
+\item After solving a practice problem, discuss what worked and what didn't; for hands-on problems, try solving again with the improved approach
+\item Familiarize members with diverse materials and their non-traditional uses
+\item Teach active listening: team members should not ``think ahead'' but listen until the judge finishes reading the entire problem
+\end{itemize}
+
+\subsubsection{Strategic Importance}
+
+Multiple coaching sources identify Spontaneous as the decisive competitive factor. One frequently cited observation: coaches who focus exclusively on their Long-Term solution often find comparable Long-Term scores across teams, but Spontaneous scores vary widely and determine advancement. The recommendation is to designate a co-coach specifically for Spontaneous preparation, ensuring neither dimension is neglected.
+
+\subsection{M4: Educational Impact \& Skills Reference}
+
+\subsubsection{Competencies Identified Through Research}
+
+A 2018 study by Bias and Bias surveyed coaches and judges from a Virginia region to identify competencies built through OM participation. The top 10 competencies identified were:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rank} & \tableheader{Competency} & \tableheader{OM Mechanism} \\
+\midrule
+1 & Teamwork & 5--7 members must collaborate on all decisions \\
+2 & Creativity & Open-ended problems reward originality over correctness \\
+3 & Problem-solving & Both long-term analytical and real-time spontaneous \\
+4 & Communication & Performance presentation, verbal spontaneous, team coordination \\
+5 & Critical thinking & Evaluating ideas, interpreting problem constraints, strategic decisions \\
+6 & Time management & Months-long project management with 8-minute performance window \\
+7 & Budgeting & Materials cost limit teaches real-world financial constraint \\
+8 & Public speaking & Performance before judges and audience \\
+9 & Self-confidence & Student ownership of all ideas builds self-efficacy \\
+10 & Cooperation & Consensus-building, conflict resolution, shared credit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{STEAM Integration}
+
+OM is distinctive among academic competitions for its integration of arts and STEM disciplines within a single problem. A vehicle problem requires engineering design \emph{and} theatrical performance. A structure problem requires physics understanding \emph{and} creative ``style'' enhancement. This integration aligns with research showing that project-based learning combining multiple disciplines strengthens creative thinking and real-world application of knowledge.
+
+\subsubsection{College Admissions Value}
+
+Admissions professionals recognize OM participation as evidence of creativity, teamwork, and independent problem-solving. Advancement to State Finals signals meaningful achievement; qualifying for World Finals represents international-level recognition. Only 18 World Champions are named across all problems and divisions each year, making this distinction highly selective.
+
+\subsubsection{Creativity as Teachable Skill}
+
+OM's foundational premise --- that creativity can be taught --- is supported by educational psychology research. The 2020 and 2023 World Economic Forum Future of Jobs Reports identified creativity as the first and third most important emerging skill for future employees globally. Research in the \emph{Educational Psychology Review} (2024) found strong evidence that collaborative learning environments and perspective-taking activities positively impact creative performance. OM's architecture systematically deploys both mechanisms.
+
+\subsection{M5: Competition Pathway \& World Finals Reference}
+
+\subsubsection{Tournament Progression}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Description} & \tableheader{Typical Timing} \\
+\midrule
+Regional & First competitive level; teams from a geographic region within a state & February--March \\
+State / Association & Top teams from regionals; state-level champions selected & March--April \\
+World Finals & Top 1st and 2nd place teams from each state plus international teams & Late May (4 days) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+There is no national-level competition in the United States; state champions advance directly to World Finals. International teams from countries without local tournament infrastructure may apply directly to World Finals by April 1 of the program year.
+
+\subsubsection{Cost Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Cost Item} & \tableheader{Amount} & \tableheader{Notes} \\
+\midrule
+National Membership & \$290 & Per school/organization; district discounts to \$190--\$240 \\
+Tournament Registration & \$75--\$145 & Varies by state association \\
+Materials Budget & Varies & Problem-specific cost limit for on-stage materials \\
+World Finals Registration & \$3,000 & Included in official housing if selected \\
+World Finals Housing & Additional & University dorm accommodations; meals included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Need-based housing grants are available through Creative Opportunities Unlimited (COU), the program's scholarship arm.
+
+\subsubsection{Awards}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Placement Trophies:} 1st, 2nd, and 3rd place in each problem/division at World Finals
+\item \textbf{Honorable Mention:} 4th, 5th, and 6th place
+\item \textbf{Ranatra Fusca Creativity Award:} Named for the water strider (Latin: \emph{Ranatra fusca}); recognizes outstanding creativity regardless of placement
+\item \textbf{OMER's Award:} Recognizes individuals who serve as exemplary role models
+\item \textbf{Odyssey of the Mind Spirit Award:} For teams demonstrating exceptional sportsmanship
+\item \textbf{Odyssey of the Mind Creativity Award:} Additional creativity recognition
+\end{itemize}
+
+\subsubsection{World Finals Culture}
+
+World Finals at Iowa State University (May 27--30, 2026) includes Olympic-style opening and closing ceremonies with a parade of states and countries, a Creativity Festival where each delegation runs a booth, pin trading as a universal social activity transcending language barriers, a float and banner parade, buddy team pairing between domestic and international teams, a coaches' competition, and a graduation ceremony for high school seniors. Age-appropriate parties follow closing ceremonies.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Handling} \\
+\midrule
+Copyright on problem text & Full problem text is proprietary; document synopses and structural analysis only \\
+Spontaneous problem secrecy & Never reproduce actual competition spontaneous problems; use only published practice examples \\
+Child safety & OM is a youth program; all documentation maintains appropriate framing \\
+Accessibility concerns & Document cost barriers transparently; note grant/scholarship availability \\
+Organizational politics & The 1999 OM/DI split is documented factually without advocacy for either organization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Program Sources}
+
+\begin{enumerate}[leftmargin=2em]
+\item Creative Competitions, Inc. (2025). \emph{2025--26 Odyssey of the Mind Program Guide}. odysseyofthemind.com
+\item Odyssey of the Mind Official Website. ``Information,'' ``Problems,'' ``Spontaneous,'' ``World Finals.'' odysseyofthemind.com
+\item Odyssey of the Mind (2024). \emph{2025--2026 Long-Term Problem Synopses}. odysseyofthemind.com
+\item Odyssey of the Mind (2025). ``Clarifications.'' odysseyofthemind.com/clarifications/
+\end{enumerate}
+
+\subsubsection{State Association \& Coaching Resources}
+
+\begin{enumerate}[leftmargin=2em, start=5]
+\item Georgia Odyssey of the Mind. \emph{Coaches' Handbook}. georgiaodyssey.org
+\item Virginia Odyssey of the Mind Region 9. ``Tips on Coaching Odyssey of the Mind Teams.'' (2011)
+\item NorCal Odyssey of the Mind. ``Teaching Creativity Without Outside Assistance.'' norcalodyssey.org
+\item Pennsylvania Odyssey of the Mind. ``Teams and Coaches.'' paodyssey.com
+\item Delaware Odyssey of the Mind. ``FAQs.'' deootm.org
+\item Vermont Odyssey of the Mind. ``Membership \& Registration Fees'' and ``More Coaching Tips.'' vt.odysseyofthemind.org
+\item Michigan Odyssey of the Mind. \emph{Generic Coaches' Manual}. miodyssey.com
+\item NorCal Odyssey of the Mind. \emph{OM Coaches Reminder}. norcalodyssey.org
+\item Florida Odyssey of the Mind. \emph{Spontaneous Problem Solving Guide}. (FLOMA)
+\item NEPA Odyssey of the Mind. ``Spontaneous Problems Galore'' (500+ problem archive). nepaootm.com
+\item NCOME Wiki. ``Scoring.'' ncome.org
+\item Southlake Odyssey of the Mind (Dragonsodyssey). ``Spontaneous.'' dragonsodyssey.org
+\item Loudoun County NWVoices. ``New Processes for Odyssey of the Mind Memberships.'' nwvoices.org
+\end{enumerate}
+
+\subsubsection{Peer-Reviewed \& Professional Sources}
+
+\begin{enumerate}[leftmargin=2em, start=18]
+\item Bias, S.\ K.\ \& Bias, J.\ T.\ (2018). ``Odyssey of the Mind: Using a Creative Problem-Solving Competition to Promote Career Readiness in Elementary School.'' \emph{ResearchGate}.
+\item Educational Psychology Review (2024). ``Linking Disparate Strands: A Critical Review of the Relationship Between Creativity and Education.'' \emph{Springer}.
+\item PMC (2024). ``Enhancing creative cognition through project-based learning: An in-depth scholarly exploration.'' \emph{PMC/NIH}.
+\item World Economic Forum (2020, 2023). \emph{Future of Jobs Reports}.
+\item Institute of Competition Sciences (ICS). ``Odyssey of the Mind.'' competitionsciences.org
+\item Wikipedia. ``Odyssey of the Mind.'' (Accessed March 2026; used for historical timeline cross-reference only.)
+\end{enumerate}
+
+\newpage
+
+% ══════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained reference document on Odyssey of the Mind covering all five research modules: competition framework, coaching pedagogy, spontaneous problem-solving, educational impact, and competitive pathway. The output must be structured for integration into the GSD educational knowledge pack ecosystem and suitable for use by coaches, parents, educators, and program administrators.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE EXECUTION — OM RESEARCH MISSION
+
+  Wave 0: Foundation (Sequential)
+  ├── Shared schemas, source index, citation format
+  └── Template scaffolding for all 5 modules
+
+  Wave 1: Parallel Research (2 tracks)
+  ├── Track A: M1 (Framework) + M3 (Spontaneous)
+  └── Track B: M2 (Coaching) + M4 (Impact)
+
+  Wave 2: M5 (Pathway) + Synthesis (Sequential)
+  ├── M5 depends on M1 scoring + M4 impact data
+  └── Cross-module integration and consistency check
+
+  Wave 3: Publication + Verification (Sequential)
+  ├── Document assembly, formatting, bibliography
+  └── Test execution, verification matrix completion
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Source Layer} --- Official program documentation, state association resources, peer-reviewed research
+\item \textbf{Survey Layer} --- Per-module compilation of findings with source attribution
+\item \textbf{Synthesis Layer} --- Cross-module integration (how rules shape coaching, how coaching produces measured outcomes)
+\item \textbf{Publication Layer} --- Formatted reference document with bibliography, verification matrix, and index
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & Competition Framework Survey & All 6 problem types, 4 divisions, 3 scoring components, penalty system documented with sources \\
+2 & Coaching Pedagogy Guide & OA rule with 8+ scenarios, coaching methodology by phase, brainstorming integration \\
+3 & Spontaneous Problem Reference & 3 types profiled, scoring mechanics, practice strategies, strategic analysis \\
+4 & Educational Impact Compilation & 10+ competencies identified, 5+ sources cited, STEAM integration analysis \\
+5 & Competition Pathway Map & Full cost pipeline, tournament progression, World Finals logistics and culture \\
+6 & Synthesis Document & Cross-module connections traced, unified reference, complete bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Source Index & None & Haiku & 5,000 \\
+W0: Shared Schemas & None & Haiku & 3,000 \\
+W1-A: M1 Framework & W0 & Sonnet & 25,000 \\
+W1-A: M3 Spontaneous & W0 & Sonnet & 20,000 \\
+W1-B: M2 Coaching & W0 & Opus & 25,000 \\
+W1-B: M4 Impact & W0 & Sonnet & 20,000 \\
+W2: M5 Pathway & M1, M4 & Sonnet & 20,000 \\
+W2: Synthesis & M1--M5 & Opus & 25,000 \\
+W3: Assembly & All modules & Sonnet & 20,000 \\
+W3: Verification & All modules & Opus & 15,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Coaching pedagogy analysis (nuanced OA scenarios require judgment), synthesis, verification \\
+Sonnet & 60\% & Framework compilation, spontaneous survey, impact data, pathway documentation, assembly \\
+Haiku & 10\% & Source index, shared schemas, citation templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Windows} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & 2 & Source index valid \\
+1 & Parallel Research & 2 tracks & 8 & Module surveys complete \\
+2 & Synthesis & Sequential & 4 & Cross-refs validated \\
+3 & Publication & Sequential & 4 & All tests pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Windows} & \tableheader{Output} \\
+\midrule
+Source Index & Haiku & 1 & Categorized bibliography with access notes \\
+Shared Schemas & Haiku & 1 & Citation format, table templates, terminology glossary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Competition Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Windows} & \tableheader{Output} \\
+\midrule
+M1: Framework & Sonnet & 2 & Problem types, divisions, scoring, penalties \\
+M3: Spontaneous & Sonnet & 2 & Three formats, scoring, practice guide \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Pedagogy \& Impact}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Windows} & \tableheader{Output} \\
+\midrule
+M2: Coaching & Opus & 2 & OA rule analysis, methodology, scenarios \\
+M4: Impact & Sonnet & 2 & Competency data, research synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Pathway \& Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Windows} & \tableheader{Output} \\
+\midrule
+M5: Pathway & Sonnet & 2 & Tournament flow, costs, World Finals \\
+Cross-Module Synthesis & Opus & 2 & Integration document, relationship map \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication \& Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Windows} & \tableheader{Output} \\
+\midrule
+Document Assembly & Sonnet & 2 & Formatted reference, bibliography \\
+Test Execution & Opus & 2 & Verification matrix, test results \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (source index, schemas) are loaded into every subsequent window as shared context (5-minute cache TTL)
+\item Track A and Track B in Wave 1 run in parallel with no shared state beyond Wave 0 artifacts
+\item Wave 2 loads all Wave 1 module summaries; synthesis agent sees complete picture
+\item Wave 3 loads only final assembled document plus test plan --- no raw research data
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & --- & --- & 8,000 \\
+Wave 1 & 25,000 & 45,000 & --- \\
+Wave 2 & 25,000 & 20,000 & --- \\
+Wave 3 & 15,000 & 20,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{65,000} & \textbf{85,000} & \textbf{8,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand Total:} $\sim$158,000 tokens across $\sim$18 context windows in 4 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+   W0: Source Index ──┬── W0: Schemas
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+   W1-A: M1 Framework     W1-B: M2 Coaching
+   W1-A: M3 Spontaneous   W1-B: M4 Impact
+          │                       │
+          └───────────┬───────────┘
+                      ▼
+             W2: M5 Pathway
+             W2: Synthesis
+                      │
+                      ▼
+             W3: Assembly
+             W3: Verification
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to CCI, state associations, or peer-reviewed journals. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every fee, score, percentage, or participant count attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents OM structure and evidence without advocating for or against the program \\
+SC-CPY & Copyright compliance & No full problem text reproduced; synopses and structural analysis only \\
+SC-SEC & Spontaneous secrecy & No actual competition spontaneous problem solutions included; only published practice examples \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+CF-01 & All 6 problem categories (Vehicle, Technical, Classics, Structure, Performance, Primary) documented \\
+CF-02 & All 4 competitive divisions mapped with grade and age requirements \\
+CF-03 & Scoring system (200/50/100) fully explained with normalization method \\
+CF-04 & Percentage-based scoring example included showing calculation \\
+CF-05 & At least 8 Outside Assistance scenarios documented (4 permitted, 4 prohibited) \\
+CF-06 & Coaching methodology includes all 5 phases (formation through competition) \\
+CF-07 & All 3 spontaneous types (verbal, hands-on, combination) profiled \\
+CF-08 & Verbal scoring mechanics (common=1pt, creative=5pt) documented \\
+CF-09 & Card system for self-assessment in verbal problems documented \\
+CF-10 & At least 7 spontaneous practice strategies listed \\
+CF-11 & Top 10 OM competencies listed with source (Bias \& Bias, 2018) \\
+CF-12 & At least 5 professional/peer-reviewed sources cited for educational claims \\
+CF-13 & Tournament progression (Regional → State → World) documented \\
+CF-14 & Complete cost pipeline from membership through World Finals \\
+CF-15 & All named awards documented (Ranatra Fusca, OMER's, Spirit, Creativity) \\
+CF-16 & 2026 World Finals venue and dates (Iowa State, May 27--30) confirmed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+IN-01 & M1 → M2 cascade: scoring rules cited in coaching methodology as constraints on what coaches can discuss \\
+IN-02 & M1 → M3 cascade: spontaneous scoring component referenced in overall scoring framework \\
+IN-03 & M2 → M4 cascade: coaching techniques linked to measured competency outcomes \\
+IN-04 & M3 → M4 cascade: spontaneous practice linked to specific skills (quick thinking, teamwork, improvisation) \\
+IN-05 & M1 → M5 cascade: scoring normalization determines tournament advancement \\
+IN-06 & Cross-module consistency: fees, dates, division definitions consistent across all modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test Description} \\
+\midrule
+EC-01 & Multi-school team rules noted (exception to standard single-school membership) \\
+EC-02 & Disability accommodations for spontaneous problems acknowledged \\
+EC-03 & Direct-to-World-Finals pathway for countries without local tournaments documented \\
+EC-04 & 1999 organizational split (OM / Destination ImagiNation) addressed factually \\
+EC-05 & Data gap: long-term educational outcome studies acknowledged as limited \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1.\ Six problem categories documented & CF-01 & Pending \\
+2.\ Four divisions mapped & CF-02 & Pending \\
+3.\ Three-component scoring explained & CF-03, CF-04 & Pending \\
+4.\ OA rule with 8+ scenarios & CF-05 & Pending \\
+5.\ Three spontaneous types profiled & CF-07, CF-08, CF-09 & Pending \\
+6.\ Five+ sources for impact claims & CF-12 & Pending \\
+7.\ Complete cost pathway & CF-14 & Pending \\
+8.\ Historical timeline & EC-04 & Pending \\
+9.\ Cross-module connections & IN-01 -- IN-06 & Pending \\
+10.\ Ten competencies identified & CF-11 & Pending \\
+11.\ World Finals logistics & CF-16 & Pending \\
+12.\ Penalty system mapped & CF-01 (subsection) & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate decisions \\
+PLAN & Planner & Wave decomposition; parallel track scheduling \\
+SCOUT & Research Agent & Source validation; additional web research for gaps \\
+EXEC ×2 & Executor (Track A/B) & Module document production \\
+CRAFT-EDU & Education Specialist & Pedagogical analysis; OA rule scenarios; competency mapping \\
+CRAFT-COMP & Competition Analyst & Scoring systems; tournament progression; cost analysis \\
+VERIFY & Verification & Source accuracy; cross-reference consistency \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research Modules & 5 \\
+Activation Profile & Squadron (12 roles) \\
+Estimated Total Tokens & $\sim$158,000 \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Parallel Tracks & 2 (Wave 1) \\
+Test Count & 32 (5 safety + 16 core + 6 integration + 5 edge) \\
+Deliverables & 6 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\emph{``Imagine being faced with a problem that requires an original solution. It can be frightening. Now imagine not being afraid to solve that problem --- that is what OM members learn.''}
+
+\vspace{0.5em}
+\hfill --- Odyssey of the Mind
+
+\vspace{0.8em}
+The fear of the unsolved problem dissolves not through courage but through architecture: constraints that guarantee ownership, time pressure that demands prioritization, surprise that rewards adaptability. The spaces between preparation and performance, between the known and the unknown, between what the coach knows and what the student must discover alone --- these are the generative voids where creativity actually lives. The Amiga Principle, applied to childhood.
+\end{quotebox}
+
+\end{document}

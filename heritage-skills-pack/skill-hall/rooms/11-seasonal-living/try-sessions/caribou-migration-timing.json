@@ -1,0 +1,56 @@
+{
+  "id": "seasonal-11-caribou-migration-beginner",
+  "title": "Caribou Migration Timing: Reading Arctic Seasonal Cycles",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore Inuit knowledge of caribou migration timing -- one of the most critical seasonal events in the Arctic subsistence cycle. Learn how Inuit communities read landscape, weather, and ecological indicators to anticipate caribou arrival, and how this knowledge encodes generations of ecological observation.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 2,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The Inuit year and caribou: in the Inuit seasonal cycle, the southward fall caribou migration is one of the most important events of the year. Caribou in the barrenlands of Nunavut (including the Bathurst herd and Beverly herd) migrate south in August-September to their winter ranges south of treeline. Communities in their path prepare for weeks of intensive hunting, drying, and caching. The northward spring migration in May-June is a second opportunity. Write down the two main migration events and their approximate months.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The caribou is not merely a food source in Inuit culture -- it is central to clothing (caribou hide provides the warmest insulation available in the Arctic), tools (bone and antler), and community life. The Inuit understanding of caribou migration patterns, encoded in IQ, represents thousands of years of observation of specific herds across specific territories. Disruptions to migration patterns (climate change, mining activity, industrial development) are understood in Inuit communities as disruptions to a living relationship, not just a resource supply issue.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Reading migration indicators: Inuit knowledge of caribou migration includes multiple indicator systems. (1) Landscape: caribou follow specific ridgelines and river crossings; knowing these features (inherited territorial knowledge) allows positioning. (2) Weather: strong northwest winds in late August often precede caribou movement. (3) Other animals: birds and wolves often track caribou herds -- their behavior indicates herd proximity. (4) Tracks and sign: the ground shows the progression of the herd -- fresh tracks, droppings, disturbed lichen. Write down three types of indicators used to anticipate caribou arrival.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The multi-indicator approach to migration reading is a form of ecological knowledge synthesis. No single indicator is reliable alone -- the combination of landscape knowledge, weather reading, and biological sign creates a probability estimate for herd arrival. This is the same approach modern wildlife biologists use, but encoded in IQ rather than written protocols.",
+      "sumoMapping": "Predicting"
+    },
+    {
+      "order": 3,
+      "instruction": "Sea ice and migration: the timing of sea ice formation affects both caribou migration and the switch from open-water to on-ice hunting. When freeze-up occurs (typically October in most of Nunavut), the community's travel and hunting methods shift dramatically. An early freeze-up allows earlier ice travel; a late freeze-up extends open-water hunting. Describe how freeze-up timing would affect a community's caribou hunting strategy.",
+      "nationAttribution": "Inuit",
+      "safetyNote": "Arctic-survival gate: sea ice travel carries ice-failure and hypothermia risks. Always check ice thickness before travel. New ice (dark, transparent) must be at least 4 inches thick for foot travel. Coastal ice affected by tides is less predictable than lake ice. Do not travel on ice alone. Cross-reference Room 14 (Arctic Living) for complete ice travel safety protocols.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Harvesting and caching: during the peak migration passage, Inuit hunters processed caribou quickly. Hides were immediately prepared (scraping, stretching, drying) because the fall hide is at peak quality for clothing. Meat was cached -- stored in rock-covered caches, frozen in permafrost, or dried. The quantity harvested in fall often determined the community's food security through winter. Describe three tasks that would happen simultaneously during a caribou migration harvest.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The harvest intensity of the caribou migration season reflects the reality of northern subsistence: the window is brief and the stakes are high. IQ's Pijitsirniq principle (serving the community) is most visibly active during migration season -- individual hunters contribute their catch to the community's collective food supply, with sharing protocols governing distribution. The harvest is a community act, not an individual economic activity.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "The Inuit six-season framework and caribou: in the IQ six-season framework, each season is defined partly by caribou availability. Ukiaksaaq (early fall) is specifically the season of southward caribou migration. Upirnganniit (spring) is the season of northward migration. How does organizing the year around ecological events (caribou arrival) rather than calendar dates (September 21) change how time and season are understood?",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The IQ six-season model names seasons by what is happening ecologically, not by astronomical events. This is a fundamentally different epistemology of time than the European four-season calendar. For communities whose lives depend on reading ecological events accurately, the IQ model is more functional -- it names the things that matter (ice, caribou, light, birds) rather than the astronomical events (solstice, equinox) that are harder to observe directly.",
+      "sumoMapping": "Season"
+    },
+    {
+      "order": 6,
+      "instruction": "Contemporary context: caribou migration patterns have shifted significantly in recent decades, with some herds (including the Bathurst herd, which has declined from nearly half a million animals to fewer than 20,000) moving differently or declining due to climate change, industrial activity, and other pressures. How does the disruption of a migration pattern that has been consistent for generations affect a community whose seasonal calendar, food security, and cultural practices are organized around it?",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The decline of the Bathurst caribou herd is one of the most significant ecological and cultural crises in Nunavut. The Government of Nunavut has implemented hunting restrictions on the Bathurst herd in response. Inuit communities, whose relationship with caribou spans millennia of IQ knowledge, experience these changes not just as a food supply problem but as a rupture in the living relationship between people and caribou. This is the difference between seeing caribou as a resource (Western frame) and seeing caribou as a relative (IQ frame).",
+      "sumoMapping": "CulturalPractice"
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+# GSD Skill Metadata
+pack_id: "THEO-101"
+pack_name: "Theology & Religion Studies -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized
+learning_domain: theological_studies
+
+# Content Description
+description: |
+  Understanding humanity's deepest questions about the sacred, the divine, and
+  the meaning of existence -- studied academically and comparatively. The world's
+  major religious traditions, their texts, practices, and influence on civilization.
+  Respectful, scholarly, non-proselytizing. Every tradition treated with equal
+  scholarly respect.
+
+short_description: "Academic, comparative study of world religions and theological traditions across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Theology & Religion Studies Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - "PHILO-101"
+  - "HIST-101"
+  - "READ-101"
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [25, 45]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: "THEO-101-M1"
+    name: "Stories & Traditions"
+    level: foundation
+    duration_hours: 30
+    prereq_modules: []
+
+  - id: "THEO-101-M2"
+    name: "World Religions Survey"
+    level: foundation-high
+    duration_hours: 40
+    prereq_modules: ["THEO-101-M1"]
+
+  - id: "THEO-101-M3"
+    name: "Sacred Texts & Interpretation"
+    level: elementary-high
+    duration_hours: 45
+    prereq_modules: ["THEO-101-M2"]
+
+  - id: "THEO-101-M4"
+    name: "Religion, Ethics & Society"
+    level: elementary-high
+    duration_hours: 40
+    prereq_modules: ["THEO-101-M2"]
+
+  - id: "THEO-101-M5"
+    name: "Comparative Theology & Interfaith Dialogue"
+    level: middle-high
+    duration_hours: 45
+    prereq_modules: ["THEO-101-M2", "THEO-101-M3", "THEO-101-M4"]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-THEO-001
+    description: "Retell and compare sacred stories from multiple religious traditions"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-THEO-002
+    description: "Name and describe the core teachings of the world's major religions"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-THEO-003
+    description: "Read and interpret passages from major sacred texts with contextual awareness"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-THEO-004
+    description: "Analyze how religion shapes ethics, law, art, and society"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-THEO-005
+    description: "Engage in respectful comparative analysis and interfaith dialogue"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Comparative Discussion Participation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Sacred Text Close Reading"
+    frequency: weekly
+
+  - type: summative
+    name: "Tradition Representation Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Interfaith Dialogue Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: sacred_text_library
+    integrated: true
+    description: "Digital collection of excerpts from major sacred texts for comparative reading"
+
+  - name: world_religions_map
+    integrated: true
+    description: "Interactive map showing religious demographics, sacred sites, and pilgrimage routes"
+
+interactive_elements:
+  - type: activity
+    name: "Sacred Story Retelling Circle"
+
+  - type: activity
+    name: "World Religions Passport"
+
+  - type: discussion
+    name: "Interfaith Panel Simulation"
+
+  - type: investigation
+    name: "Sacred Text Reading Circle"
+
+  - type: reflection
+    name: "Personal Worldview Reflection"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar, hi]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: |
+    Content sensitivity warnings need accessible presentation (not visually-only). Sacred text excerpts require proper Unicode support for non-Latin scripts (Arabic, Hebrew, Devanagari, Chinese). All visual content (religious art, architecture) has detailed text descriptions. Audio recordings of sacred texts in original languages recommended. Interfaith dialogue activities support text-based participation for deaf/HoH learners."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "American Academy of Religion (AAR) Religious Literacy Guidelines"
+    version: 2010
+    alignments:
+      "Religious Literacy": true
+      "Comparative Analysis": true
+      "Historical Context": true
+      "Tradition-Specific Content": "THEO-101-M2, M3"
+      "Interfaith Dialogue": "THEO-101-M5"
+
+  - framework: "NCSS Religious Studies Standards"
+    version: 2016
+    alignments:
+      "Culture": "THEO-101-M1, M2, M4, M5"
+      "Beliefs and Values": "THEO-101-M3, M4, M5"
+      "Power, Authority, Governance": "THEO-101-M4, M5"
+      "Global Connections": "THEO-101-M2, M5"
+
+  - framework: "IB MYP Individuals & Societies"
+    version: 2016
+    alignments:
+      "Key Concept: Beliefs": "THEO-101-M1, M2, M3, M4, M5"
+      "Key Concept: Identities": "THEO-101-M1, M2, M5"
+      "Key Concept: Culture": "THEO-101-M1, M2, M4"
+
+  - framework: "21st Century Skills"
+    alignments:
+      "Critical Thinking": true
+      "Communication": true
+      "Cultural Literacy": true
+      "Global Awareness": true
+      "Perspective-Taking": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: low
+  prerequisites_required: medium
+  notes: "Conceptual complexity increases with age; foundation activities are story-based and accessible. Sensitivity of subject matter requires careful facilitation at all levels."
+
+# Content Flags
+content_flags:
+  - flag: "sensitive_topic"
+    description: "Religious content requires respectful, non-proselytizing treatment"
+    mitigation: "Academic/comparative approach throughout. Multiple perspectives presented equally."
+
+  - flag: "diverse_beliefs"
+    description: "Content presents multiple religious worldviews and non-religious positions"
+    mitigation: "All traditions treated with equal scholarly respect. No advocacy for any position."
+
+  - flag: "historical_conflict"
+    description: "Religious history includes violence, persecution, and conflict"
+    mitigation: "Historical content presented with age-appropriate context. Multiple perspectives on contested events."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/theo-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "THEO-101"
+  looking_for:
+    - "Review by practitioners of represented traditions for accuracy and tone"
+    - "Additional sacred text excerpts with scholarly annotations"
+    - "Activities for interfaith dialogue and comparative analysis"
+    - "Translations to Spanish, Mandarin, Arabic, and Hindi"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Theology & Religion Studies Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - theology
+  - religion
+  - world-religions
+  - comparative-religion
+  - sacred-texts
+  - interfaith
+  - religious-literacy
+  - ethics
+  - philosophy-of-religion
+  - specialized
+
+# External Resources
+resources:
+  - type: online_platform
+    title: "Harvard Pluralism Project"
+    author: "Harvard University"
+    url: "https://pluralism.org"
+
+  - type: online_resource
+    title: "BBC Religions"
+    author: "BBC"
+    url: "https://www.bbc.co.uk/religion"
+
+  - type: online_resource
+    title: "Sacred Texts Online"
+    author: "Internet Sacred Text Archive"
+    url: "https://www.sacred-texts.com"
+
+  - type: online_resource
+    title: "Religions for Peace"
+    author: "Religions for Peace International"
+    url: "https://rfp.org"
+
+  - type: online_course
+    title: "World Religions Through Their Scriptures"
+    author: "Harvard University (edX)"
+    url: "https://www.edx.org/learn/religion"
+
+# Related Packs
+related_packs:
+  - id: "PHILO-101"
+    relationship: "Philosophy provides tools of argument, logic, and ethical reasoning that enrich theological study"
+
+  - id: "HIST-101"
+    relationship: "Religious history is inseparable from world history; historical thinking essential for context"
+
+  - id: "READ-101"
+    relationship: "Reading comprehension and textual analysis skills are foundational for engaging with sacred texts"
+
+  - id: "ART-101"
+    relationship: "Religious art and architecture span every culture and period"
+
+  - id: "COMM-101"
+    relationship: "Interfaith dialogue requires communication skills and empathetic listening"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "book-open"
+    color: "#795548"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "THEO-101-sacred-stories"
+    - "THEO-101-world-religions"
+    - "THEO-101-sacred-texts"
+    - "THEO-101-religion-society"
+    - "THEO-101-interfaith-dialogue"
+
+# File References
+files:
+  vision_document: "THEO-101-vision.md"
+  modules_definition: "THEO-101-modules.yaml"
+  activities: "THEO-101-activities.json"
+  assessment: "THEO-101-assessment.md"
+  resources: "THEO-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering stories, world religions, sacred texts, religion & society, and comparative theology"
+      - "K-College progression with age-appropriate content at every level"
+      - "Academic, comparative, non-proselytizing approach throughout"
+      - "Content sensitivity protocol for respectful treatment of all traditions"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

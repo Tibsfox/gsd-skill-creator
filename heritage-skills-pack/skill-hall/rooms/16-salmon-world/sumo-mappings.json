@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-16-salmon-species",
+    "sumoTerm": "Animal",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PacificSalmon Animal)",
+    "naturalLanguage": "Pacific salmon (genus Oncorhynchus) are animals — anadromous fish born in fresh water, maturing in the ocean, and returning to their birth rivers to spawn. SUMO's Animal classification correctly captures their biological category.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-salmon-species",
+    "sumoTerm": "FoodProduction",
+    "sumoFile": "MILO",
+    "mappingType": "instance",
+    "kifStatement": "(instance SalmonFishing FoodProduction)",
+    "naturalLanguage": "Salmon fishing in the Salish Sea is a food production process — a systematic method for harvesting wild protein for immediate consumption and long-term storage.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-reef-net-fishing",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ReefNetFishing HeritageSkill)",
+    "naturalLanguage": "Reef net fishing is a heritage skill — a sophisticated cooperative technology developed by Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) peoples for the specific reef channel conditions of the San Juan and Gulf Islands. The multi-family coordination protocols and ecological knowledge of reef geography are integral to the skill.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-reef-net-fishing",
+    "sumoTerm": "IntentionalProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ReefNetFishing IntentionalProcess)",
+    "naturalLanguage": "Reef net fishing is an intentional process — a deliberate sequence of positioning canoes, setting the net, reading water signs for approaching salmon schools, signaling, and raising the net in coordination.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-salmon-smoking",
+    "sumoTerm": "FoodPreservation",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SalmonSmoking FoodPreservation)",
+    "naturalLanguage": "Salmon smoking is a food preservation process — the controlled application of smoke and heat to salmon fillets to reduce moisture content, introduce preservative compounds, and achieve a minimum safe internal temperature of 160°F (71°C).",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-salmon-smoking",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SalmonSmoking HeritageSkill)",
+    "naturalLanguage": "Salmon smoking is also a heritage skill encoding generations of knowledge about alder wood selection, smoke temperature management, fish preparation, and storage conditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-first-salmon-ceremony",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass FirstSalmonCeremony CulturalPractice)",
+    "naturalLanguage": "The First Salmon Ceremony is a cultural practice — a structured communal response to the arrival of the first salmon of the season, encoding the relationship of reciprocal obligation between human communities and the Salmon People.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-weir-construction",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass RiverWeirConstruction Manufacturing)",
+    "naturalLanguage": "River weir construction is a manufacturing process — the systematic placement of wooden stakes and woven barriers to create a salmon trap in a river channel.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-16-weir-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass RiverWeirConstruction HeritageSkill)",
+    "naturalLanguage": "River weir construction is also a heritage skill — the knowledge of which rivers support weir placement, how to read water depth and current for optimal trap placement, and how to leave passage for spawning fish.",
+    "ontologicalBridge": null
+  }
+]

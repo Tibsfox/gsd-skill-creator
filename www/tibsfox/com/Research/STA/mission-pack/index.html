@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steve Allen — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --accent: #6A1B9A;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); }
+  
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  header .tag { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+  header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+  header h2 { font-weight: 400; font-size: 1.1rem; opacity: 0.9; color: var(--secondary); }
+  header .pipeline { margin-top: 1.2rem; font-size: 0.95rem; opacity: 0.7; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+    display: block; border: 1px solid rgba(74,20,140,0.12);
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.15); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 0.3rem; }
+  .file-card p { font-size: 0.85rem; color: var(--subtle); }
+
+  h2.section-title {
+    font-family: 'Libre Baskerville', serif; color: var(--primary);
+    font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  .contents { margin-bottom: 2.5rem; }
+  .contents ul { list-style: none; padding: 0; }
+  .contents li { padding: 0.4rem 0; padding-left: 1.2rem; position: relative; font-size: 0.95rem; }
+  .contents li::before { content: '→'; position: absolute; left: 0; color: var(--secondary); font-weight: 700; }
+  .contents .stage { font-weight: 700; color: var(--primary); margin-top: 0.8rem; padding-left: 0; }
+  .contents .stage::before { content: ''; }
+
+  .instructions { margin-bottom: 2.5rem; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.95rem; line-height: 1.5; }
+  .instructions code { background: var(--light-primary); padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem; border-radius: 0 6px 6px 0; margin-top: 2rem;
+    font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem;
+    line-height: 1.6; color: var(--tertiary);
+  }
+  .quote-box .attr { font-style: normal; font-size: 0.85rem; margin-top: 0.5rem; color: var(--subtle); }
+
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--subtle); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Stephen Valentine Patrick William Allen</h1>
+  <h2>The Renaissance Man of American Television</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-title">Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="mission.pdf" download>
+      <div class="icon">📄</div>
+      <h3>mission.pdf</h3>
+      <p>Complete 27-page mission package — Vision, Research Reference, and Mission Package in one document</p>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="icon">📝</div>
+      <h3>mission.tex</h3>
+      <p>XeLaTeX source — modify and recompile for custom editions</p>
+    </a>
+  </div>
+
+  <h2 class="section-title">Contents</h2>
+  <div class="contents">
+    <ul>
+      <li class="stage">Stage 1 — Vision Document</li>
+      <li>Vision narrative & problem statement (5 problems)</li>
+      <li>Core concept with domain map & module architecture</li>
+      <li>5 research modules: Biography, Television, Music, Intellectual Life, Legacy</li>
+      <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+      <li>Through-line connecting to GSD ecosystem philosophy</li>
+
+      <li class="stage">Stage 2 — Research Reference</li>
+      <li>Module 1: Birth, parentage, education, Army, radio career, family</li>
+      <li>Module 2: Tonight Show creation, Steve Allen Show, Meeting of Minds</li>
+      <li>Module 3: 8,500+ songs, Grammy, Kerouac collaboration, Broadway, film</li>
+      <li>Module 4: 54+ books, humanism, CSICOP, general semantics, LSD experiment</li>
+      <li>Module 5: Influence chain (7 documented acknowledgments), honors, death</li>
+      <li>Safety considerations & complete source bibliography</li>
+
+      <li class="stage">Stage 3 — Mission Package</li>
+      <li>Squadron activation profile (12 roles, 2 parallel tracks)</li>
+      <li>4-wave execution plan with token budgets</li>
+      <li>28 tests (5 safety-critical, 14 core, 5 integration, 4 edge)</li>
+      <li>Verification matrix mapping all 12 success criteria</li>
+      <li>Crew manifest and execution summary</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title">Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Open <code>mission.pdf</code> to review the complete three-stage research mission package</li>
+      <li>Hand the PDF to <strong>gsd-skill-creator</strong> via Claude Code for automated execution</li>
+      <li>The orchestrator will use Stage 3 to decompose into Wave 0–3 tasks and assign agents</li>
+      <li>HITL gates at wave boundaries require human approval before proceeding</li>
+      <li>Final output: a comprehensive Steve Allen biographical knowledge document</li>
+    </ol>
+  </div>
+
+  <h2 class="section-title">Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Edit <code>mission.tex</code> with any XeLaTeX-compatible editor</li>
+      <li>Compile three times for TOC, cross-references, and page counts:
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      </li>
+      <li>Requires DejaVu fonts (pre-installed on Ubuntu) and texlive-xetex</li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    "He was an icon, an original." — Milton Berle
+    <br><br>
+    Steve Allen's life embodies a principle at the heart of the GSD ecosystem: that the most powerful systems emerge not from narrow specialization but from the creative integration of diverse capabilities. His late-night format persists. His songs persist. His books persist. His questions persist.
+    <div class="attr">— From the Mission Through-Line</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package · Generated March 17, 2026 · Fox Infrastructure Group
+</footer>
+
+</body>
+</html>

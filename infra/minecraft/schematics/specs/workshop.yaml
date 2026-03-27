@@ -1,0 +1,108 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Workshop"
+id: "workshop"
+filename: "template-workshop-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Open-plan workspace with 4 crafting station clusters, storage walls, and exposed beam ceiling. Designed as a hands-on building and experimentation space within the Knowledge World."
+
+dimensions:
+  width: 17   # X axis (east-west)
+  height: 7   # Y axis (up-down)
+  depth: 13   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:spruce_planks"
+      usage: "Walls and floor -- warm spruce wood throughout for a workshop atmosphere"
+  accent:
+    - block: "minecraft:dark_oak_log"
+      usage: "Ceiling beams -- exposed structural beams running east-west across the ceiling"
+    - block: "minecraft:spruce_slab"
+      usage: "Workbench surfaces -- slab tables at each crafting cluster"
+    - block: "minecraft:spruce_fence"
+      usage: "Table legs and railing around workstations"
+  functional:
+    - block: "minecraft:crafting_table"
+      usage: "Crafting stations -- one per cluster (4 total), centerpiece of each workstation"
+    - block: "minecraft:chest"
+      usage: "Material storage -- 2 chests per cluster (8 total) for supplies"
+    - block: "minecraft:barrel"
+      usage: "Bulk storage -- 1 barrel per cluster (4 total) for secondary materials"
+    - block: "minecraft:anvil"
+      usage: "Tool repair -- 1 anvil per cluster (4 total)"
+    - block: "minecraft:item_frame"
+      usage: "Tool displays -- item frames on walls showing available tools"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Hanging lanterns -- suspended from ceiling beams on chains (6 total)"
+    - block: "minecraft:chain"
+      usage: "Lantern chains -- connecting lanterns to ceiling beams"
+
+layout:
+  ground_floor: |
+    Open-plan rectangular space, 15x11 interior.
+    Spruce plank floor throughout.
+
+    4 crafting station clusters arranged in a 2x2 grid with walkways between them:
+    - Northwest cluster: centered at approximately (4, 4) from interior NW corner
+    - Northeast cluster: centered at approximately (11, 4) from interior NW corner
+    - Southwest cluster: centered at approximately (4, 8) from interior NW corner
+    - Southeast cluster: centered at approximately (11, 8) from interior NW corner
+
+    Each cluster consists of:
+    - 1 crafting table (center)
+    - 2 chests (flanking east and west)
+    - 1 barrel (behind, north side)
+    - 1 anvil (in front, south side)
+    - Spruce slab worksurface connecting the station elements
+
+    3-block wide walkways between all clusters for easy movement.
+
+    Storage wall: Back wall (north) lined with chests and barrels for bulk materials.
+    Tool wall: Side wall (east) with item frames displaying tools.
+
+    South wall: Large 5-wide open archway entrance (no door) for accessibility.
+    The archway is 5 blocks wide and 4 blocks tall with spruce stair arch detail.
+  upper_floors: "None -- single story with exposed beam ceiling"
+  roof: |
+    Spruce plank roof at height 7.
+    4 dark oak log beams running east-west across the ceiling, evenly spaced.
+    Hanging lanterns on chains suspended from beams (6 total -- one between each beam pair,
+    plus one at each end).
+  exterior: |
+    Spruce plank walls on three sides (north, east, west), 6 blocks tall above floor.
+    South wall: 5-block wide open archway with spruce stair arch detailing.
+    No windows -- the open archway provides ample light and airflow.
+
+features:
+  - "4 crafting station clusters in 2x2 grid, each with crafting table, 2 chests, barrel, and anvil"
+  - "5-block wide open archway entrance (no door) for easy access and visibility"
+  - "Exposed dark oak log ceiling beams for industrial workshop aesthetic"
+  - "Hanging lanterns on chains from ceiling beams"
+  - "Storage wall on north side with additional chests and barrels"
+  - "Tool display wall on east side with item frames"
+  - "Spruce slab worksurfaces connecting station elements"
+  - "Wide walkways between clusters for comfortable movement"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the spruce plank floor first across the full footprint"
+  - "Build walls next: spruce planks, 6 blocks tall above floor level"
+  - "Leave the south wall open for the archway (build arch detail with spruce stairs)"
+  - "Place dark oak log ceiling beams before closing the roof"
+  - "Add the spruce plank roof between and above beams"
+  - "Build crafting station clusters from the floor up: table legs, surfaces, then blocks"
+  - "Place functional blocks last: crafting tables, chests, barrels, anvils, item frames"
+  - "Hang lanterns from chains attached to beams"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"

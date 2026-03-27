@@ -1,0 +1,138 @@
+[
+  {
+    "id": "KC-L1-001",
+    "level": 1,
+    "tradition": "cross-tradition",
+    "domain": "general",
+    "action": "include",
+    "explanation": "Level 1: Publicly shared knowledge. Include with proper attribution to originating nation and community."
+  },
+  {
+    "id": "KC-L1-002",
+    "level": 1,
+    "tradition": "cross-tradition",
+    "domain": "crafts",
+    "action": "include",
+    "explanation": "Level 1: Craft techniques widely shared in educational and cultural contexts. Include with nation attribution."
+  },
+  {
+    "id": "KC-L1-003",
+    "level": 1,
+    "tradition": "cross-tradition",
+    "domain": "food",
+    "action": "include",
+    "explanation": "Level 1: Traditional food preparation methods widely documented in educational literature. Include with attribution."
+  },
+  {
+    "id": "KC-L1-004",
+    "level": 1,
+    "tradition": "cross-tradition",
+    "domain": "construction",
+    "action": "include",
+    "explanation": "Level 1: Traditional construction and building techniques documented in public educational sources. Include with attribution."
+  },
+  {
+    "id": "KC-L1-005",
+    "level": 1,
+    "tradition": "cross-tradition",
+    "domain": "governance",
+    "action": "include",
+    "explanation": "Level 1: Publicly available information on traditional governance structures in educational framing. Include with attribution."
+  },
+  {
+    "id": "KC-L2-001",
+    "level": 2,
+    "tradition": "cross-tradition",
+    "domain": "general",
+    "action": "summarize-and-refer",
+    "referralTarget": "community educational resources",
+    "explanation": "Level 2: Contextually shared. Summarize with educational framing and refer to community sources for full detail."
+  },
+  {
+    "id": "KC-L2-002",
+    "level": 2,
+    "tradition": "cross-tradition",
+    "domain": "music",
+    "action": "summarize-and-refer",
+    "referralTarget": "community cultural centers and traditional knowledge keepers",
+    "explanation": "Level 2: Traditional music shared in educational contexts but requires community source referral for full depth."
+  },
+  {
+    "id": "KC-L2-003",
+    "level": 2,
+    "tradition": "cross-tradition",
+    "domain": "plants",
+    "action": "summarize-and-refer",
+    "referralTarget": "ethnobotanical community resources and traditional healers",
+    "explanation": "Level 2: Traditional plant knowledge appropriate in educational summary; full detail requires community referral."
+  },
+  {
+    "id": "KC-L2-004",
+    "level": 2,
+    "tradition": "cross-tradition",
+    "domain": "animals",
+    "action": "summarize-and-refer",
+    "referralTarget": "community wildlife and land stewardship programs",
+    "explanation": "Level 2: Traditional ecological knowledge about animals shared in educational framing with community referral."
+  },
+  {
+    "id": "KC-L2-005",
+    "level": 2,
+    "tradition": "cross-tradition",
+    "domain": "oral-traditions",
+    "action": "summarize-and-refer",
+    "referralTarget": "nation-specific storytelling and oral history programs",
+    "explanation": "Level 2: Oral traditions summarized for educational purpose; full content belongs to originating community."
+  },
+  {
+    "id": "KC-L3-001",
+    "level": 3,
+    "tradition": "cross-tradition",
+    "domain": "general",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "community elders and cultural centers",
+    "explanation": "Level 3: Community restricted. Acknowledge existence only, redirect to community contacts. Do not include content."
+  },
+  {
+    "id": "KC-L3-002",
+    "level": 3,
+    "tradition": "cross-tradition",
+    "domain": "healing",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "community healers and health knowledge keepers",
+    "explanation": "Level 3: Traditional healing practices are community-restricted. Redirect to community health practitioners."
+  },
+  {
+    "id": "KC-L3-003",
+    "level": 3,
+    "tradition": "cross-tradition",
+    "domain": "ceremonies",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "community cultural offices and ceremony keepers",
+    "explanation": "Level 3: Ceremonial knowledge restricted to community. Acknowledge with respect, redirect to appropriate contacts."
+  },
+  {
+    "id": "KC-L4-001",
+    "level": 4,
+    "tradition": "cross-tradition",
+    "domain": "general",
+    "action": "block",
+    "explanation": "Level 4: Sacred/ceremonial. HARD BLOCK. Never reference in detail. No override path permitted."
+  },
+  {
+    "id": "KC-L4-002",
+    "level": 4,
+    "tradition": "cross-tradition",
+    "domain": "ceremonies",
+    "action": "block",
+    "explanation": "Level 4: Sacred ceremonial knowledge. HARD BLOCK. This content is protected under cultural sovereignty and UNDRIP. No reproduction permitted."
+  },
+  {
+    "id": "KC-L4-003",
+    "level": 4,
+    "tradition": "cross-tradition",
+    "domain": "healing",
+    "action": "block",
+    "explanation": "Level 4: Sacred healing knowledge and spiritual medicines. HARD BLOCK. No description, reproduction, or reference permitted."
+  }
+]

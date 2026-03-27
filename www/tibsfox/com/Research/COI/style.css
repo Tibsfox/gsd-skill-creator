@@ -1,0 +1,40 @@
+/* COI — Coil: Sonic Alchemy
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #311B92;    /* Deep violet — the hidden, the occult */
+  --secondary: #F57F17;  /* Alchemical gold — transmutation */
+  --tertiary: #4A148C;   /* Ritual purple */
+  --accent: #E65100;     /* Amber — transformation fire */
+  --cream: #EDE7F6;
+  --mist: #D1C4E9;
+  --text: #212121;
+  --text-light: #757575;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 60%, var(--secondary) 100%);
+  border-bottom: 4px solid var(--accent);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(245, 127, 23, 0.05); }
+tr:hover { background: rgba(245, 127, 23, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(245, 127, 23, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1020; color: #d1c4e9; }
+.stat-value { color: var(--primary); }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

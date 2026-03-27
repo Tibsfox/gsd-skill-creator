@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMOFcon — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: #FAF8F5;
+    color: #212121;
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 40%, #F57F17 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  header .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  header .subtitle {
+    font-size: 1.3rem;
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+  header .pipeline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
+  main {
+    max-width: 820px;
+    margin: -2rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+  .card {
+    background: #EDE7F6;
+    border: 1px solid #CE93D8;
+    border-radius: 8px;
+    padding: 1.8rem;
+    text-decoration: none;
+    color: #212121;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 20, 140, 0.15);
+  }
+  .card .filetype {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4A148C;
+    margin-bottom: 0.5rem;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: #4A148C;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+  }
+  section {
+    margin-bottom: 2.5rem;
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    color: #4A148C;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #CE93D8;
+  }
+  .contents-list {
+    list-style: none;
+    padding: 0;
+  }
+  .contents-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 0.95rem;
+  }
+  .contents-list .stage {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: #4A148C;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  ol.steps {
+    padding-left: 1.5rem;
+  }
+  ol.steps li {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+  }
+  code {
+    font-family: 'DM Sans Mono', monospace;
+    background: #EDE7F6;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+  }
+  pre {
+    background: #263238;
+    color: #ECEFF1;
+    padding: 1.2rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  .quote {
+    background: #F3E5F5;
+    border-left: 4px solid #4A148C;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+  .meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #757575;
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #E0E0E0;
+  }
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+    header h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>SMOFcon</h1>
+  <div class="subtitle">Secret Masters of Fandom — The Convention for Convention Runners</div>
+  <div class="pipeline">Vision → Research → Mission &nbsp;|&nbsp; Full Pipeline Execution</div>
+</header>
+
+<main>
+  <div class="cards">
+    <a href="mission.pdf" download class="card">
+      <div class="filetype">PDF — 27 pages</div>
+      <h3>Mission Package</h3>
+      <p>Complete three-stage research document: Vision Guide, Research Reference, and Mission Package with wave execution plan.</p>
+    </a>
+    <a href="mission.tex" download class="card">
+      <div class="filetype">LaTeX Source</div>
+      <h3>Editable Source</h3>
+      <p>XeLaTeX source file for modification and recompilation. Requires DejaVu fonts and standard TeX Live packages.</p>
+    </a>
+  </div>
+
+  <section>
+    <h2>Contents</h2>
+    <ul class="contents-list">
+      <li>
+        <span class="stage">Stage 1 — Vision Document</span>
+        Vision narrative, problem statement (5 problems), core concept with domain map and module architecture, 5 research modules, chipset configuration, scope boundaries, 12 success criteria, through-line
+      </li>
+      <li>
+        <span class="stage">Stage 2 — Research Reference</span>
+        Etymology & origins (Chalker, NYT, Tucker), convention history table, operations & programming, Worldcon Q&A mechanism, knowledge ecosystem (6+ channels), governance & WSFS structure, internationalization & visa barriers, bursary programs, source bibliography
+      </li>
+      <li>
+        <span class="stage">Stage 3 — Mission Package</span>
+        Milestone spec with 9 deliverables, 10-component breakdown, 4-wave execution plan (2 parallel tracks), token budget (~86K), dependency graph, 28-test plan (5 safety-critical), verification matrix, 15-role crew manifest, execution summary
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Usage Instructions</h2>
+    <ol class="steps">
+      <li>Download the <strong>Mission Package PDF</strong> for the complete three-stage document ready for reading or handoff.</li>
+      <li>To execute via GSD: feed the PDF to <code>gsd-skill-creator</code> as a mission input. The Stage 3 wave plan is structured for direct orchestrator consumption.</li>
+      <li>The Squadron activation profile (12 roles + 4 CRAFT specialists) is pre-configured for 18–22 context windows across 4–5 sessions.</li>
+      <li>CRAFT agents are domain-named: CRAFT-HIST, CRAFT-OPS, CRAFT-KNOW, CRAFT-INTL, CRAFT-GOV.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Recompilation</h2>
+    <p>To modify and rebuild the PDF from the <code>.tex</code> source:</p>
+    <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    <p>Three passes required for TOC, cross-references, and page count resolution. Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu/Debian).</p>
+  </section>
+
+  <div class="quote">
+    "The system works not through brute force or centralized control, but through trust networks, oral tradition, and the stubborn insistence of fan volunteers that institutional memory matters."
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem &nbsp;|&nbsp; March 25, 2026 &nbsp;|&nbsp; Squadron Profile &nbsp;|&nbsp; History Domain (Burgundy/Gold/Parchment)
+  </div>
+</main>
+
+</body>
+</html>

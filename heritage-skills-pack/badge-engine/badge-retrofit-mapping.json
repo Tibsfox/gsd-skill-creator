@@ -1,0 +1,259 @@
+{
+  "id": "badge-retrofit-mapping",
+  "version": "1.0.0",
+  "description": "Maps Phase 1 Try Session IDs (Rooms 1-14) to Trail Badge definitions. Used by Phase 2 integration tests to verify complete badge coverage.",
+  "generatedDate": "2026-03-02",
+  "roomMappings": [
+    {
+      "roomId": 1,
+      "roomTitle": "Building and Shelter",
+      "trySessions": [
+        "building-01-notch-cutting-beginner",
+        "building-01-wigwam-frame-beginner",
+        "building-01-dome-geometry-beginner"
+      ],
+      "badgeIds": [
+        "shelter-explorer-01",
+        "shelter-apprentice-01",
+        "shelter-keeper-01"
+      ],
+      "paths": [
+        "shelter"
+      ],
+      "coverageNote": "Shelter path Explorer through Keeper. Journeyman (shelter-journeyman-01) is assigned to Room 14 (igloo engineering content). Room 1 provides Explorer + Apprentice minimum."
+    },
+    {
+      "roomId": 2,
+      "roomTitle": "Fiber and Textile",
+      "trySessions": [
+        "fiber-02-spinning-beginner",
+        "fiber-02-sinew-splitting-beginner",
+        "fiber-02-quillwork-prep-beginner"
+      ],
+      "badgeIds": [
+        "fiber-explorer-01",
+        "fiber-apprentice-01",
+        "fiber-keeper-01"
+      ],
+      "paths": [
+        "fiber"
+      ],
+      "coverageNote": "Fiber path Explorer through Keeper. Cross-tradition: Appalachian spinning, Inuit sinew processing, Anishinaabe/Haudenosaunee quillwork."
+    },
+    {
+      "roomId": 3,
+      "roomTitle": "Animals and Wildlife",
+      "trySessions": [
+        "animals-03-beekeeping-beginner",
+        "animals-03-tracking-beginner",
+        "animals-03-hide-scraping-beginner"
+      ],
+      "badgeIds": [
+        "heritage-animals-explorer-01",
+        "heritage-animals-apprentice-01"
+      ],
+      "paths": [
+        "heritage"
+      ],
+      "coverageNote": "Heritage path \u2014 animals sub-path. Explorer + Apprentice. Brain-tanning and animal sign reading content drawn from Cree/Dene and Appalachian traditions."
+    },
+    {
+      "roomId": 4,
+      "roomTitle": "Woodcraft and Tools",
+      "trySessions": [
+        "woodcraft-04-whittling-beginner",
+        "woodcraft-04-snowshoe-geometry-beginner",
+        "woodcraft-04-ulu-handle-beginner"
+      ],
+      "badgeIds": [
+        "tool-explorer-01",
+        "tool-apprentice-01",
+        "tool-keeper-01"
+      ],
+      "paths": [
+        "tool"
+      ],
+      "coverageNote": "Tool path Explorer through Keeper. Cross-tradition: Appalachian whittling, Anishinaabe snowshoe, Inuit ulu handle."
+    },
+    {
+      "roomId": 5,
+      "roomTitle": "Food and Preservation",
+      "trySessions": [],
+      "badgeIds": [
+        "food-explorer-01",
+        "food-apprentice-01",
+        "food-keeper-01"
+      ],
+      "paths": [
+        "food"
+      ],
+      "coverageNote": "Food path Explorer through Keeper. Room 5 room-spec.json shows no trySessions array (module-based). Badges cover Appalachian canning, Inuit igunaq, Anishinaabe pemmican traditions."
+    },
+    {
+      "roomId": 6,
+      "roomTitle": "Music and Instruments",
+      "trySessions": [
+        "music-06-dulcimer-string-beginner",
+        "music-06-drum-frame-beginner",
+        "music-06-katajjaq-rhythm-beginner"
+      ],
+      "badgeIds": [
+        "music-explorer-01",
+        "music-apprentice-01",
+        "music-keeper-01"
+      ],
+      "paths": [
+        "music"
+      ],
+      "coverageNote": "Music path Explorer through Keeper. Katajjaq at Level 1 (publicly shared performance tradition). Frame drum construction Level 1; ceremonial protocols Level 3-4 restricted."
+    },
+    {
+      "roomId": 7,
+      "roomTitle": "Metalwork and Smithing",
+      "trySessions": [
+        "smithing-07-heat-colors-beginner",
+        "smithing-07-tong-work-beginner",
+        "smithing-07-nail-making-beginner"
+      ],
+      "badgeIds": [
+        "tool-smithing-explorer-01",
+        "tool-smithing-apprentice-01",
+        "tool-smithing-journeyman-01"
+      ],
+      "paths": [
+        "tool"
+      ],
+      "coverageNote": "Tool path \u2014 smithing sub-path. Explorer through Journeyman. Appalachian blacksmithing primary tradition; Inuinnait cold copper cross-tradition comparison at Apprentice level."
+    },
+    {
+      "roomId": 8,
+      "roomTitle": "Pottery and Clay",
+      "trySessions": [
+        "pottery-08-pinch-pot-beginner",
+        "pottery-08-coil-building-beginner",
+        "pottery-08-soapstone-beginner"
+      ],
+      "badgeIds": [
+        "heritage-pottery-explorer-01",
+        "heritage-pottery-apprentice-01"
+      ],
+      "paths": [
+        "heritage"
+      ],
+      "coverageNote": "Heritage path \u2014 pottery sub-path. Explorer + Apprentice. Appalachian stoneware and Haudenosaunee coil-built pottery. Dave Drake documented at culturalLevel 2."
+    },
+    {
+      "roomId": 9,
+      "roomTitle": "Plant Knowledge",
+      "trySessions": [
+        "safe-plant-id-methodology",
+        "birch-in-anishinaabe-life",
+        "appalachian-dye-plant-basics"
+      ],
+      "badgeIds": [
+        "plant-explorer-01",
+        "plant-apprentice-01",
+        "plant-keeper-01"
+      ],
+      "paths": [
+        "plant"
+      ],
+      "coverageNote": "Plant path Explorer through Keeper. Try sessions use $ref format (JSON references). Anishinaabe botanical knowledge, Appalachian plant traditions, three-characteristic safe ID protocol."
+    },
+    {
+      "roomId": 10,
+      "roomTitle": "Community and Culture",
+      "trySessions": [
+        "community-10-foxfire-ethics-beginner",
+        "community-10-iq-principles-beginner",
+        "community-10-appalachian-mapping-beginner"
+      ],
+      "badgeIds": [
+        "neighbors-explorer-01",
+        "neighbors-apprentice-01",
+        "neighbors-keeper-01",
+        "neighbors-community-explorer-01"
+      ],
+      "paths": [
+        "neighbors"
+      ],
+      "coverageNote": "Neighbors path Explorer through Keeper plus additional community governance Explorer badge. Inuit IQ principles (Aajiiqatigiinniq), Haudenosaunee Great Law, Appalachian mutual aid."
+    },
+    {
+      "roomId": 11,
+      "roomTitle": "Seasonal Living",
+      "trySessions": [
+        "seasonal-11-planting-calendar-beginner",
+        "seasonal-11-caribou-migration-beginner",
+        "seasonal-11-birchbark-harvest-beginner"
+      ],
+      "badgeIds": [
+        "heritage-seasonal-explorer-01",
+        "heritage-seasonal-apprentice-01"
+      ],
+      "paths": [
+        "heritage"
+      ],
+      "coverageNote": "Heritage path \u2014 seasonal living sub-path. Explorer + Apprentice. Appalachian agricultural calendar, Anishinaabe seasonal round, Inuit six-season ecological calendar."
+    },
+    {
+      "roomId": 12,
+      "roomTitle": "History and Memory",
+      "trySessions": [
+        "history-12-family-interview-beginner",
+        "history-12-oral-evidence-beginner",
+        "history-12-personal-timeline-beginner"
+      ],
+      "badgeIds": [
+        "heritage-explorer-01",
+        "heritage-apprentice-01",
+        "heritage-journeyman-01",
+        "heritage-keeper-01",
+        "neighbors-oral-history-journeyman-01"
+      ],
+      "paths": [
+        "heritage",
+        "neighbors"
+      ],
+      "coverageNote": "Heritage path Explorer through Keeper; Neighbors path Journeyman (oral history as evidence). Delgamuukw v. BC (1997) documented. OCAP principles. Gitxsan and Wet'suwet'en named."
+    },
+    {
+      "roomId": 13,
+      "roomTitle": "Northern Watercraft",
+      "trySessions": [
+        "watercraft-13-canoe-anatomy-beginner",
+        "watercraft-13-qajaq-geometry-beginner",
+        "watercraft-13-comparing-designs-beginner"
+      ],
+      "badgeIds": [
+        "watercraft-explorer-01",
+        "watercraft-apprentice-01",
+        "watercraft-keeper-01"
+      ],
+      "paths": [
+        "watercraft"
+      ],
+      "coverageNote": "Watercraft path Explorer through Keeper. Qajaq as extension-of-self (custom body measurements). Birchbark canoe and qajaq design comparison. 1-10-1 cold water safety rule referenced."
+    },
+    {
+      "roomId": 14,
+      "roomTitle": "Arctic Living",
+      "trySessions": [
+        "igloo-block-cutting-geometry",
+        "caribou-hair-properties",
+        "qulliq-lamp-operation",
+        "waterproof-stitch-technique"
+      ],
+      "badgeIds": [
+        "shelter-journeyman-01",
+        "food-arctic-explorer-01",
+        "food-arctic-apprentice-01"
+      ],
+      "paths": [
+        "shelter",
+        "food"
+      ],
+      "coverageNote": "Shelter path Journeyman (igloo engineering, corbelled dome). Food path \u2014 arctic sub-path Explorer + Apprentice (meat caching, igunaq safety, cold/dark/dry preservation mechanisms)."
+    }
+  ]
+}

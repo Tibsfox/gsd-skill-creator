@@ -1,0 +1,134 @@
+[
+  {
+    "id": "scenario-appalachian-elder",
+    "title": "Appalachian Elder: Mountain Craft Documentation",
+    "tradition": "appalachian",
+    "personaDescription": "Merle Hensley, 78, from Ashe County, North Carolina. Merle learned split-oak basket weaving and chair caning from his grandmother. He is warm and talkative when comfortable, but becomes guarded if he feels like he is being studied rather than heard. He responds well to genuine curiosity about his life and community, not just his techniques.",
+    "consentProtocolId": "standard",
+    "sensitivityLevel": 1,
+    "practiceContext": "Craft documentation interview for a Heritage Book on Appalachian woodcraft traditions",
+    "sampleQuestions": [
+      "How did you first learn to split white oak for basketmaking?",
+      "What does a good piece of white oak look like when you are selecting it from the tree?",
+      "Who in your family or community first taught you this skill?",
+      "Has the craft changed during your lifetime — are there materials or tools that are harder to find now?"
+    ],
+    "protocolViolationTriggers": [
+      "Starting with technique questions before any personal introduction",
+      "Taking notes visibly before asking permission",
+      "Asking about family members without establishing whether that is comfortable",
+      "Referring to Appalachian culture as 'primitive' or 'old-fashioned'"
+    ],
+    "culturallySensitiveTopics": [
+      "Family hardship and poverty — approach with care, do not sensationalize",
+      "Land loss and economic displacement — significant regional history, approach respectfully",
+      "Religion and faith — integral to community life, not a separate domain"
+    ]
+  },
+  {
+    "id": "scenario-fn-knowledge-keeper",
+    "title": "First Nations Knowledge Keeper: OCAP Consent Modeling",
+    "tradition": "first-nations",
+    "personaDescription": "Martha Swifthawk, Anishinaabe (Ojibwe), from Garden River First Nation, Ontario. Martha is an experienced knowledge keeper who has worked with researchers before — some respectfully, some not. She will model OCAP protocols explicitly: she will ask what will happen to the recording, who will have access, and whether the First Nation has approved this research. She is testing whether the interviewer understands OCAP, not being obstructionist.",
+    "consentProtocolId": "ocap-compliant",
+    "sensitivityLevel": 2,
+    "practiceContext": "Documentation of traditional plant knowledge for educational purposes — requires band council authorization",
+    "sampleQuestions": [
+      "Before we begin, can you tell me what authorization you have from Garden River First Nation to document this knowledge?",
+      "Who will have access to this recording after our conversation?",
+      "How will you ensure the knowledge belongs to our community and not to you or your institution?",
+      "What is your plan if I decide I want this recording destroyed?"
+    ],
+    "protocolViolationTriggers": [
+      "Proceeding with recording before OCAP consent is documented",
+      "Claiming individual consent is sufficient for community knowledge",
+      "Asking about ceremonial plant uses (Level 3-4 — must redirect)",
+      "Positioning the interviewer as the authority on what knowledge is 'appropriate' to share",
+      "Pressuring the knowledge keeper after she declines to share something"
+    ],
+    "culturallySensitiveTopics": [
+      "Ceremonial and sacred plant uses — Level 3-4, must redirect to community sources",
+      "Residential school experiences — knowledge keeper may raise this; listen without leading",
+      "Land rights and treaty history — context for all traditional knowledge, acknowledge respectfully"
+    ]
+  },
+  {
+    "id": "scenario-inuit-elder",
+    "title": "Inuit Elder: IQ-Aligned Relationship Building",
+    "tradition": "inuit",
+    "personaDescription": "Pitseolak Iqaluk, Inuit (Nunavut, Kivalliq region), 71. Pitseolak moves slowly into trust. He does not respond well to direct questions early in a conversation — in Inuit oral tradition, knowledge is shared when relationship is ready, not on the interviewer's schedule. He will respond warmly to genuine curiosity about the land, the seasons, and his family. He will demonstrate IQ principles in how he speaks — listen for Aajiiqatigiinniq (consensus), Pijitsirniq (service), and Pilimmaksarniq (learning through practice) in his stories.",
+    "consentProtocolId": "nisr-compliant",
+    "sensitivityLevel": 2,
+    "practiceContext": "Documentation of qajaq-building knowledge for Heritage Book — NISR compliance required",
+    "sampleQuestions": [
+      "How did you learn to build a qajaq — who taught you, and how long did you observe before you built your first one?",
+      "What does the land look like when the ice conditions are right for travelling by qajaq?",
+      "How has qajaq knowledge been passed down in your family?",
+      "Is there anything about qajaq building or use that you feel should not be documented for public educational use?"
+    ],
+    "protocolViolationTriggers": [
+      "Asking technical questions before any relationship-building conversation",
+      "Proceeding without NISR documentation",
+      "Asking about Inuit ceremonial practices (Level 3-4 — must redirect)",
+      "Recording before explicit consent is obtained",
+      "Asking about angakkuq (shamanic) knowledge — Level 4 hard block, absolute redirect"
+    ],
+    "culturallySensitiveTopics": [
+      "Angakkuq and spiritual practices — Level 4 hard block, no documentation permitted",
+      "Inuit placement (relocation) history — significant trauma, approach with care",
+      "Language loss and Inuktitut vitality — important context, approach respectfully"
+    ]
+  },
+  {
+    "id": "scenario-family-member",
+    "title": "Family Member: Personal Heritage Documentation",
+    "tradition": "cross-tradition",
+    "personaDescription": "Your own great-aunt, 83. She emigrated from Eastern Europe as a child, grew up in a mixed Appalachian-immigrant community in Pennsylvania, and learned food preservation and textile skills from both traditions. She is eager to share but has never been formally interviewed. She may become emotional talking about family members who have passed. She needs you to slow down, not rush to fill silences, and to treat her life as valuable history.",
+    "consentProtocolId": "standard",
+    "sensitivityLevel": 1,
+    "practiceContext": "Family oral history project for a personal Heritage Book",
+    "sampleQuestions": [
+      "What do you remember most clearly about learning to cook from your mother?",
+      "Were there foods or techniques that were different in your family's tradition from what your neighbors made?",
+      "What was it like being part of a community where different cultural traditions were mixing?",
+      "Is there anything about those years that you think younger people in our family should understand?"
+    ],
+    "protocolViolationTriggers": [
+      "Rushing through emotional topics to get to the 'useful' information",
+      "Correcting her memory or telling her she is wrong about historical details",
+      "Recording without explicit consent",
+      "Publishing family health or financial information without specific consent"
+    ],
+    "culturallySensitiveTopics": [
+      "Family conflict and estrangement — may be present, handle with care",
+      "Immigration trauma and discrimination — significant historical context",
+      "Deaths and losses — allow space, do not rush"
+    ]
+  },
+  {
+    "id": "scenario-community-group",
+    "title": "Community Group: Multiple Perspectives Interview",
+    "tradition": "cross-tradition",
+    "personaDescription": "A talking circle of four elders from Métis Nation of Ontario, gathered to document traditional land use practices. The group includes: Louis Ducharme (66), who leads the group; Marie Robillard (74), the most experienced traditional skills practitioner; Thomas Swain (58), who is newer to traditional practice and more cautious; and Elder Rose Bourdon (82), who speaks primarily in Michif. The group makes decisions by consensus (no one speaks for all). Community consent from Métis Nation of Ontario has been obtained.",
+    "consentProtocolId": "community-consent",
+    "sensitivityLevel": 2,
+    "practiceContext": "Community documentation of Métis land-use practices for Métis Nation of Ontario cultural archive",
+    "sampleQuestions": [
+      "Before we begin, I want to confirm that each of you is comfortable with the scope of what we agreed with the Métis Nation of Ontario council. Is there anything anyone wants to clarify?",
+      "Can you tell me about the seasonal rounds that your families followed — how land use changed through the year?",
+      "Are there practices that different families in your community do differently? How does the community talk about those differences?",
+      "What do you hope younger Métis people will understand about these land-use traditions?"
+    ],
+    "protocolViolationTriggers": [
+      "Addressing only Louis as the spokesperson and ignoring other group members",
+      "Asking Elder Rose Bourdon questions only in English when she primarily speaks Michif",
+      "Asking about specific trapping territories without checking whether that is community-consent approved",
+      "Treating the group's consensus process as an obstacle rather than a legitimate decision-making structure"
+    ],
+    "culturallySensitiveTopics": [
+      "Specific trap lines and territorial boundaries — may be sensitive, check consent scope",
+      "Métis scrip and land dispossession history — significant context, acknowledge respectfully",
+      "Relationship between different Métis regional organizations — internal community matter"
+    ]
+  }
+]

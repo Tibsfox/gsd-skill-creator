@@ -1,0 +1,1008 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: History — Gravitas, Community, Legacy ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy-purple (sections)
+\definecolor{secondary}{HTML}{F57F17}     % Gold (subsections)
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown (subsubsections)
+\definecolor{accent}{HTML}{6A1B9A}        % Deep violet (highlights)
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light purple
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Light gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Light parchment
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SMOFcon}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={SMOFcon -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{SMOFcon\\[0.3em]Secret Masters of Fandom}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Convention for Convention Runners}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{SMOFcon --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{GSD Research Mission --- Fanhistory \& Convention Governance}
+
+\subsection{Vision}
+
+There exists a gathering that has been meeting almost every December since 1984, in hotel function rooms and consuites across two continents, where roughly 100 to 150 people convene not to celebrate science fiction, but to argue about how science fiction celebrations should be organized. They call themselves ``smofs''---Secret Masters of Fandom---a name that began as Jack Chalker's tongue-in-cheek conspiracy joke in 1963 and evolved into the self-identifier of an entire volunteer culture. SMOFcon is their annual parliament, their knowledge exchange, and their recruiting office.
+
+This convention-about-conventions is a microcosm of everything fascinating about self-organizing volunteer communities: oral tradition transmission in an age of wikis, governance-by-constitution in an unincorporated literary society, knowledge transfer across generational and geographic boundaries, and the perpetual tension between institutional memory and newcomer accessibility. It operates with no permanent staff, no central authority, and no profit motive. Each SMOFcon is organized by a different committee, bid for competitively, and run entirely by volunteers who also volunteer to run the conventions they discuss at SMOFcon.
+
+The research stakes here are not trivial. The World Science Fiction Convention---Worldcon---is an 85-year institution that presents the Hugo Awards, moves across countries, and requires years of advance planning by hundreds of volunteers. SMOFcon is where those volunteers learn the trade, recruit help, present their bids, and pass institutional memory from one generation to the next. Understanding how this knowledge ecosystem works---and where it fails---illuminates broader questions about how any complex, volunteer-driven, multi-generational community organization sustains itself.
+
+This mission will produce a comprehensive research document tracing SMOFcon from its linguistic origins through its current global expansion, analyzing it as both a fan-cultural institution and a case study in distributed volunteer governance.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Oral tradition fragility.} SMOFcon's primary knowledge transfer mechanism is face-to-face conversation in hospitality suites and panel discussions. When experienced conrunners retire or die, their institutional knowledge---hotel negotiation tactics, programming strategies, crisis management approaches---often dies with them. The Worldcon Runners' Guide exists but is perpetually outdated, and no systematic mechanism captures the tacit knowledge exchanged at SMOFcon.
+
+\item \textbf{Geographic and financial accessibility barriers.} Despite being a global community's knowledge exchange, SMOFcon has been held almost exclusively in the United States for its first 37 years. European and non-Western conrunners face visa barriers (demonstrated dramatically by the ConKigali team's denial of Swedish visas in 2025), travel costs, and timezone isolation. Bursary programs are emerging but recent and undersized relative to demand.
+
+\item \textbf{Governance opacity.} The World Science Fiction Society is an unincorporated literary society with no permanent officers, no board of directors, and authority distributed across annually rotating committees. Understanding how decisions actually get made---from Worldcon site selection to Hugo Award administration to constitutional amendments---requires navigating a labyrinth of institutional custom that is nowhere comprehensively documented for outsiders.
+
+\item \textbf{Generational succession.} The smof community skews older. Recruiting new convention runners, training them in operational competencies, and integrating them into the social network of trust that underpins fan-run events is a recognized challenge that SMOFcon explicitly tries to address, with mixed results.
+
+\item \textbf{Institutional documentation gap.} Despite 40+ years of SMOFcon history, no comprehensive academic or systematic treatment exists. Fan histories like Fancyclopedia capture individual data points but lack analytical synthesis. The ConRunner wiki is valuable but incomplete. There is no single document that traces the full arc from etymology to current global expansion while analyzing the knowledge ecosystem that SMOFcon anchors.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Core Model:} SMOFcon as the knowledge backbone of a distributed volunteer governance system spanning 85 years and six continents, analyzed through the lenses of oral tradition, institutional design, and community self-organization.
+\end{quotebox}
+
+SMOFcon is not merely a convention. It is the connective tissue of an entire ecosystem: the WSFS constitutional process, the Worldcon bidding cycle, the Hugo Award administration, regional convention planning, and the social network of volunteer trust that makes all of it function. Understanding SMOFcon requires understanding each of these interconnected systems and how knowledge flows between them.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    +========================+
+                    |    SCIENCE FICTION      |
+                    |      FANDOM             |
+                    +========================+
+                              |
+             +----------------+----------------+
+             |                                 |
+    +--------v--------+              +--------v--------+
+    |   CONVENTIONS   |              |    GOVERNANCE   |
+    |   (Regional,    |              |    (WSFS, Hugo  |
+    |    Worldcon)    |              |     Awards)     |
+    +---------+-------+              +--------+--------+
+              |                               |
+              +--------->  SMOFCON  <---------+
+              |        (Knowledge Hub)        |
+              |                               |
+    +---------v-------+              +--------v--------+
+    |  KNOWLEDGE      |              |  COMMUNITY      |
+    |  ARTIFACTS      |              |  NETWORKS       |
+    |  (Runners'      |              |  (Smofs List,   |
+    |   Guide, Wiki,  |              |   Bursaries,    |
+    |   Fancyclopedia)|              |   Recruitment)  |
+    +-----------------+              +-----------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  Module 1           Module 2           Module 3
+  ETYMOLOGY &        CONVENTION         KNOWLEDGE
+  HISTORY            OPERATIONS         ECOSYSTEM
+  [Chalker->Now]     [Structure,        [Runners' Guide,
+                      Worldcon Link]     Wiki, Fancyclopedia]
+       \                  |                  /
+        \                 |                 /
+         +-------> SYNTHESIS <-------+
+                      |
+              +-------+-------+
+              |               |
+        Module 4        Module 5
+        GOVERNANCE &    INTERNATIONALIZATION
+        COMMUNITY       & FUTURE
+        [WSFS, Volunteer [Europe, Visas,
+         Culture]        Virtual, 2039]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Etymology and History}
+
+Traces the term ``SMOF'' from Jack Chalker's likely coinage in 1962--1963 correspondence, through its first appearance in the New York Times (September 1971), to its formalization in Tucker's Neo-Fan's Guide (1973 edition), and the founding of the SMOFcon convention series in 1984. Explores the evolution from humorous conspiracy theory to self-applied professional identity. Documents the complete SMOFcon numbering history including the retroactive ``Smofcon 0'' from the early 1970s New York gathering. Examines the Gerald Kersh derivation through Tucker's 1950s article.
+
+\subsubsection{Module 2: Convention Operations and Structure}
+
+Documents how SMOFcon actually works: typical 100--150 attendees, December scheduling, panel and session formats, consuite culture, site selection bidding process, and the relationship to Worldcon Q\&A sessions. Analyzes the recurring program themes---hotel negotiation, programming diversity, registration systems, crisis management, marketing---and how these reflect the operational needs of the broader convention ecosystem.
+
+\subsubsection{Module 3: Knowledge Ecosystem}
+
+Maps the full knowledge infrastructure that SMOFcon anchors: the Worldcon Runners' Guide (WSFS standing committee product, perpetually under revision), the ConRunner wiki, Fancyclopedia 3, the Smofs mailing list, File 770 reporting, SFSFC and CanSMOF scholarship/bursary programs, and the emerging virtual participation infrastructure. Analyzes the tension between oral tradition and codified knowledge.
+
+\subsubsection{Module 4: Governance and Community}
+
+Examines WSFS as an unincorporated literary society with no permanent officers---a governance model unique in the convention world. Documents the constitutional amendment process (Business Meeting procedure, two-year ratification), the Mark Protection Committee, Site Selection mechanics, and how SMOFcon serves as the informal back-channel for WSFS governance. Analyzes the volunteer culture, recruitment challenges, and generational succession dynamics.
+
+\subsubsection{Module 5: Internationalization and Future}
+
+Traces SMOFcon's geographic expansion from US-only (1984--2010) through Amsterdam (2011), Lisbon (2021), Seattle (2024), Stockholm (2025), Lisbon again (2026), and the significance of this pattern. Documents the visa barrier problem (ConKigali 2025 Swedish visa denial), bursary programs (Glasgow 2024 offering 18 bursaries), virtual participation experiments, and the horizon toward the Worldcon centennial in 2039.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  opus:
+    - synthesis_integration (cross-module narrative)
+    - governance_analysis (WSFS constitutional nuance)
+    - community_dynamics (volunteer culture interpretation)
+    - through_line_composition
+  sonnet:
+    - etymology_survey (Module 1 compilation)
+    - operations_documentation (Module 2 structure)
+    - knowledge_mapping (Module 3 ecosystem)
+    - internationalization_survey (Module 5 data)
+    - source_verification
+    - document_assembly
+  haiku:
+    - shared_schemas (fan terminology glossary)
+    - source_index_scaffold
+    - template_generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete etymology of ``SMOF'' from 1962 to present
+\item SMOFcon convention series history (Smofcon 0 through Smofcon 43)
+\item Relationship between SMOFcon and Worldcon/WSFS governance
+\item Knowledge transfer infrastructure (Runners' Guide, wikis, mailing lists)
+\item Accessibility and internationalization challenges
+\item Volunteer community dynamics and generational succession
+\item Virtual participation and hybrid convention models
+\item Bursary and scholarship programs
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Comprehensive history of individual Worldcons
+\item Hugo Award nomination/voting analysis
+\item Detailed WSFS constitutional text analysis
+\item Individual fan biographies beyond their SMOFcon relevance
+\item Media convention or gaming convention organizational models
+\item Financial analysis of convention economics
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Etymology traces ``SMOF'' from Chalker (1962--1963) through NYT citation (1971) to Tucker's Guide (1973) with at least 4 dated primary sources
+\item SMOFcon convention history covers at least 30 of the 43 numbered events with dates, locations, and hosting organizations
+\item WSFS governance structure documented including Business Meeting procedure, Site Selection mechanics, and Mark Protection Committee
+\item Knowledge ecosystem maps at least 6 distinct knowledge artifacts or channels with their relationships
+\item At least 3 international accessibility barriers documented with specific examples
+\item Volunteer culture dynamics described with evidence from at least 3 sources
+\item Bursary/scholarship programs documented with eligibility, funding levels, and administering organizations
+\item Virtual participation models described with at least 2 specific implementations
+\item Cross-module integration demonstrates at least 4 explicit connections between modules
+\item All claims sourced to fan-historical databases (Fancyclopedia, sfdictionary.com), convention websites, or File 770 reporting
+\item Document is self-contained: a reader unfamiliar with SF fandom can understand the full ecosystem
+\item Through-line connects SMOFcon to broader questions of volunteer knowledge governance
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Steve Allen Vision-to-Mission & Parallel mission & Both explore institutional knowledge preservation \\
+GSD Knowledge Map & Methodology & Knowledge graph patterns applicable to fan knowledge networks \\
+DACP Protocol & Architecture & Multi-agent coordination for research compilation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+SMOFcon exists in the spaces between. Between conventions, it is where the knowledge lives. Between generations, it is where the trust transfers. Between continents, it is where the community stretches and sometimes breaks. It is a volunteer institution sustained by no authority except the shared commitment of people who believe that bringing other people together is worth doing well.
+
+This is the Amiga Principle at civilizational scale: architectural leverage---a small gathering of 150 people structuring the knowledge that enables conventions serving thousands. The system works not through brute force or centralized control, but through trust networks, oral tradition, and the stubborn insistence of fan volunteers that institutional memory matters. Understanding how SMOFcon does this---and where it fails---teaches us something about every self-organizing community that depends on volunteer knowledge to endure.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SMOFcon --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings organized by research module. Each section provides the factual foundation for the corresponding mission component. Key source organizations:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Fancyclopedia 3} (fancyclopedia.org) --- Fan-historical encyclopedia maintained by community editors
+\item \textbf{Historical Dictionary of Science Fiction} (sfdictionary.com) --- Academic-grade citation tracking for SF terminology
+\item \textbf{File 770} (file770.com) --- Mike Glyer's fan news journal, Hugo Award-winning fanzine
+\item \textbf{ConRunner.net} --- Wiki for convention organizers
+\item \textbf{WSFS official site} (wsfs.org) --- Constitutional documents, committee information
+\item \textbf{Worldcon.org} --- Official Worldcon information including bid tracking
+\item \textbf{Individual SMOFcon websites} (smofcon40.org, smofcon41.org, smofcon42.com, smofconlisbon.org)
+\item \textbf{Fandom Rover} (fandomrover.com) --- Convention reports from international conrunners
+\end{itemize}
+
+\subsection{Module 1: Etymology and History Reference}
+
+\subsubsection{Origin of the Term ``SMOF''}
+
+The term ``Secret Masters of Fandom'' originated as a humorous conspiracy theory about a shadowy cabal controlling fan culture. According to Fancyclopedia, the full phrase derives from a 1950s Bob Tucker article, itself inspired by Gerald Kersh's 1953 novel \textit{The Secret Masters}. The initialism ``SMOF'' was likely coined in conversation by Jack L. Chalker around 1962--1963. Chalker himself indicated the term originated in correspondence with Ted Johnstone/Dave McDaniel in late 1962 and began spreading during 1963 (Historical Dictionary of Science Fiction, sfdictionary.com).
+
+The earliest known print citation comes from the New York Times, September 6, 1971, in an article covering the World Science Fiction Convention in Boston. The term appeared in the 1973 third edition of Wilson Tucker's \textit{Neo-Fan's Guide to Science Fiction Fandom} but was absent from the 1955 original edition (Historical Dictionary of SF). A ``SMOF Award'' was presented to Theodore Sturgeon at the 1963 Worldcon, with Forry Ackerman accepting on his behalf (Fancyclopedia).
+
+\subsubsection{Semantic Evolution}
+
+The term evolved through three distinct phases. Initially (1960s), it functioned purely as conspiracy humor about powerful fans who supposedly controlled fandom from smoke-filled rooms. By the 1970s, as conventions proliferated, it became attached to the practical community of experienced convention problem-solvers---former Worldcon chairs, hotel negotiators, and programming directors---who informally shared expertise. The creation of the Smofs mailing list and subsequently SMOFcon in 1984 formalized this community identity. Today, ``smof'' (lowercase) is widely used as both noun and verb: ``smoffing'' means discussing convention operations, and the community of all smofs is sometimes called ``smofdom'' (Fancyclopedia; ConRunner wiki).
+
+At Discon 2, Jodie Offutt offered a characteristically fannish definition: the real Secret Masters of Fandom were the people who kept convention hotel bathtubs filled with ice and beer (Fancyclopedia). Bruce Pelz once declared himself ``Smof \#2---leaving it to others to fight out who is \#1'' (Fancyclopedia).
+
+\subsubsection{SMOFcon Convention History}
+
+The founding convention took place in 1984. The committee originally tried to call it ``ConCon,'' but fans insisted on ``Smofcon'' (Fancyclopedia). A precursor convention on conrunning had been held in New York City in the early 1970s and was retroactively designated ``Smofcon 0.''
+
+Key milestones in the series:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{No.} & \tableheader{Location} & \tableheader{Notes} \\
+\midrule
+0 & New York City & Early 1970s; retroactive designation \\
+1 & (US, 1984) & Founding convention \\
+3 & Boston, MA & Hosted by MCFI \\
+15 & Boston, MA & Also MCFI \\
+21 & Chicago, IL & 2003 \\
+25 & Boston, MA & 2007; marketing theme; MCFI host \\
+28 & San Jose, CA & 2010; 154 attendees; SFSFC sponsor \\
+29 & Amsterdam, NL & 2011; first outside North America \\
+34 & Chicago, IL & 2016 \\
+35 & Boston, MA & 2017 \\
+38 & (US, 2020) & COVID-era \\
+39 & Lisbon, PT & 2021; VIP Executive Art's Hotel \\
+40 & Providence, RI & Dec 2023; MCFI host; Worldcon Q\&A recorded \\
+41 & Seattle, WA & Dec 6--8, 2024; SWOC host \\
+42 & Stockholm, SE & Dec 5--7, 2025; first Nordic country \\
+43 & Lisbon, PT & Dec 4--6, 2026; returning to same venue as 39 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Most SMOFcons have occurred in the United States on the first weekend of December, typically attracting 100--150 attendees (Wikipedia; Smofcon 40 website).
+
+\subsection{Module 2: Convention Operations Reference}
+
+\subsubsection{Format and Programming}
+
+SMOFcon programming includes formal and informal sessions covering insights from events held in the previous year, information about current trends from the community and external experts, reviews of recent conventions, and feedback to bidders for upcoming events, with a focus on widely shareable learnings (Wikipedia). Programming typically addresses: hotel contract negotiation, convention programming diversity, registration and membership systems, marketing and public relations, crisis management, accessibility, and code of conduct implementation.
+
+Smofcon 25 (Boston, 2007) exemplified the thematic approach, emphasizing marketing and publicity with a keynote by Dr. Gloria Boone on convention branding (MCFI/Smofcon 25 website). Smofcon 35 (Boston, 2017) featured a two-hour panel on ``Diversifying Programme'' that focused on avoiding tokenization while expanding participant diversity (Fandom Rover con report).
+
+A distinctive feature is the consuite---a hospitality area providing continuous food and drinks funded by the convention and often supplemented by sponsoring conventions. At Smofcon 35, attendees noted that Dublin 2019 and Arisia sponsored portions of the food (Fandom Rover).
+
+\subsubsection{The Worldcon Q\&A Session}
+
+A significant recurring program element is the Worldcon bid Q\&A session. Seated Worldcons (those already selected) and active bids present updates and answer questions from SMOFcon members. This serves as an informal accountability mechanism---bid committees must demonstrate organizational readiness, financial viability, and facility adequacy to an audience of experienced convention runners.
+
+At SMOFcon 40 (Providence, 2023), presentations were recorded and uploaded to a YouTube playlist by host MCFI. Questionnaire responses from seated Worldcons and bids were published on the Worldcon.org website (Worldcon.org/seated-worldcons).
+
+At SMOFcon 42 (Stockholm, 2025), the Q\&A featured presentations from LAcon V (2026 Worldcon), Montr\'{e}al 2027, and three active 2028 bids (Brisbane, Nuremberg, and ConKigali/Rwanda). Expressions of interest extended as far as 2035, with the host noting the relevance of the 2039 Worldcon centennial (File 770).
+
+\subsubsection{Site Selection and Hosting}
+
+SMOFcon itself is bid for competitively. Bidding groups present at the Q\&A sessions. At Smofcon 38, three groups bid for what would become Smofcon 40: Providence, Stockholm, and NY/NJ (with NY/NJ withdrawing two weeks prior). The site selection process mirrors Worldcon's competitive model but at a smaller, less formal scale (Fancyclopedia).
+
+Each SMOFcon is organized by an independent committee, typically under the umbrella of an existing fan organization. MCFI (Massachusetts Convention Fandom, Inc.) has hosted multiple SMOFcons (3, 15, 25, 40). SWOC hosted Smofcon 41. SFSFC (San Francisco Science Fiction Conventions, Inc.) has sponsored events and scholarship programs.
+
+\subsection{Module 3: Knowledge Ecosystem Reference}
+
+\subsubsection{Worldcon Runners' Guide}
+
+The Worldcon Runners' Guide (WCRG) is maintained by a standing committee of the WSFS Business Meeting---the Worldcon Runners' Guide Editorial Committee (WRGEC). It compiles best practices for Worldcon organization covering bidding, facilities, budgeting, publications, registration, WSFS functions, programming, events, and exhibits.
+
+The guide is structured as a wiki at wcrg.conrunner.net, with a parallel set of updated PDF sections on wsfs.org. It includes a distinctive mechanism for handling disagreement: recommended approaches are stated, ``dissenting views'' are noted with the names of key partisans, and options historically proven disastrous are explicitly flagged (WCRG Introduction). Despite this structure, the guide is perpetually under revision---the WSFS website notes that the guide ``is in the process of being updated'' and provides older PDF versions as interim resources (wsfs.org/committees/worldcon-runners-guide).
+
+\subsubsection{ConRunner Wiki}
+
+The ConRunner wiki (conrunner.net) is a broader resource not limited to Worldcon, covering convention operations generally. It includes articles on WSFS, Worldcon, smof terminology, and various operational topics. Usage statistics show moderate but sustained traffic (the ``Smof'' article has been accessed over 16,000 times as of 2022).
+
+\subsubsection{Fancyclopedia 3}
+
+Fancyclopedia 3 (fancyclopedia.org) is a comprehensive fan-historical encyclopedia with over 62,000 active pages as of 2020 (later reported as 71,000+ by 2025). It documents conventions, fan organizations, terminology, people, and publications. Individual SMOFcon entries provide dates, locations, chairs, attendance figures, and hosting organizations. It serves as the fan-historical record of reference.
+
+\subsubsection{Smofs Mailing List}
+
+The Smofs mailing list is a conrunners email list specifically for Worldcon management discussion. Referenced consistently across fan-historical sources as a key communication channel predating modern social media. The list facilitated coordination that was previously possible only at face-to-face gatherings (Fancyclopedia; ConRunner wiki).
+
+\subsubsection{File 770}
+
+Mike Glyer's File 770 (file770.com) functions as the journal of record for fan news, including detailed coverage of SMOFcon proceedings, Worldcon bids, WSFS governance developments, and community controversies. Its ``smofcon'' tag aggregates years of reporting.
+
+\subsubsection{Scholarship and Bursary Programs}
+
+Multiple organizations fund attendance at SMOFcon:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Program} & \tableheader{Amount} & \tableheader{Details} \\
+\midrule
+SFSFC Scholarships & \$500 each & Operating since at least 2004; two awards per year; targets promising conrunners \\
+CanSMOF Scholarships & Varies & Canadian smof organization; funded attendance for international conrunners \\
+Glasgow 2024 Bursaries & Travel + hotel + membership & Up to 18 bursaries for SMOFcon 42; open to all backgrounds and experience levels \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: Governance and Community Reference}
+
+\subsubsection{WSFS Structure}
+
+The World Science Fiction Society (WSFS) is an unincorporated literary society with no permanent officers, board of directors, chair, or president. Its membership consists of all members of the current year's Worldcon. Authority is exercised through the annual WSFS Business Meeting held at each Worldcon, typically three morning sessions on successive days.
+
+Each Worldcon is organized by an independently incorporated committee---typically 501(c)(3) non-profits in the US or companies limited by guarantee in the UK. These committees operate autonomously within the framework of the WSFS Constitution, which governs Hugo Award administration, Site Selection, and the Business Meeting process. The WSFS Constitution requires a two-year ratification cycle for amendments: proposed at one year's Business Meeting, ratified (or not) at the next (Fancyclopedia; WSFS official documentation).
+
+The only permanent standing committee is the Mark Protection Committee (MPC), responsible for maintaining trademarks including ``Worldcon,'' ``WSFS,'' ``Hugo Award,'' and ``NASFiC.'' Additional committees include the Nitpicking and Flyspecking Committee, the WRGEC, and the Hugo Eligibility Rest of the World Committee (HEROW) (Fancyclopedia).
+
+\subsubsection{Site Selection Mechanics}
+
+Worldcon sites are selected two years in advance by secret ballot of WSFS members. Voters must hold a membership in the current Worldcon and purchase an Advance WSFS Membership in the convention being voted on. Bids must demonstrate their site is at least 500 miles or 800 kilometers from the administering convention. ``None of the Above'' appears on every ballot---if it wins, the Business Meeting selects the site. Electronic voting has been explored but requires unanimous agreement of all filed bids (WSFS Constitution; Seattle 2025 documentation).
+
+SMOFcon serves as a critical pre-selection venue where bids present early-stage plans, answer questions from experienced conrunners, and build community support before the formal voting at Worldcon.
+
+\subsubsection{Volunteer Culture}
+
+Conrunning is entirely volunteer-driven. As the Smofcon 40 website states: the knowledge gathered while running a convention is not always passed to others, and repeating past mistakes is a recurring risk. SMOFcon exists specifically to address this knowledge gap.
+
+The culture has distinctive features: mutual recruitment (attending SMOFcon often results in being recruited for---or recruiting others to---convention committees), mentorship through proximity rather than formal programs, and a social network of trust built over decades of shared volunteer labor. The ``zoo con'' role-playing game, encountered at SMOFcon events, teaches convention decision-making through simulation (Fandom Rover).
+
+\subsection{Module 5: Internationalization and Future Reference}
+
+\subsubsection{Geographic Expansion}
+
+The first 27 SMOFcons (1984--2010) were held exclusively in the United States. The series first left North America with Smofcon 29 in Amsterdam (2011). Smofcon 39 moved to Lisbon, Portugal in 2021. Smofcon 42 was held in Stockholm, Sweden in December 2025---the first SMOFcon in a Nordic country. Smofcon 43 returns to Lisbon in December 2026 at the same venue as Smofcon 39.
+
+This represents three European SMOFcons in six years (2021, 2025, 2026), a dramatic acceleration of internationalization after 27 years of US-only gatherings.
+
+\subsubsection{Visa and Accessibility Barriers}
+
+The ConKigali bid (originally for a Ugandan Worldcon, later changed to Rwanda) was denied Swedish visas for SMOFcon 42 in Stockholm. The team reported ``amorphous reasons'' for the denial, which bid chair Micheal Kabunga described as typical of visa denials from Western countries (File 770). This incident highlighted the structural barriers facing conrunners from the Global South in participating in the international convention planning community.
+
+\subsubsection{Virtual Participation}
+
+SMOFcon 43 (Lisbon, 2026) has announced plans to maximize virtual accessibility: a Discord server for both in-person and remote participants, live-streaming of recorded sessions, and provisions for online presentations by teams unable to travel. The committee noted they are ``currently discussing options with both our team and with the venue'' and will update as commitments are confirmed (smofconlisbon.org).
+
+\subsubsection{The 2039 Horizon}
+
+At SMOFcon 42, with bids extending to 2034, the host reminded attendees that the Worldcon centennial approaches in 2039---100 years since the first World Science Fiction Convention in New York in 1939. This milestone is expected to drive significant discussion about the future of both Worldcon and SMOFcon (File 770).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Fan political disputes & Sensitivity & Present factually without taking sides; document governance structures, not personal conflicts \\
+Visa/immigration barriers & Sensitivity & Report documented incidents; do not speculate on government motivations beyond official statements \\
+Chengdu 2023 controversies & Sensitivity & Reference only as relevant to governance discussions; do not relitigate \\
+Living individuals & Privacy & Use public statements and published roles only; no private information \\
+Code of conduct evolution & Sensitivity & Document as an operational topic; do not evaluate specific incidents \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Fan-Historical Databases}
+
+\begin{itemize}[leftmargin=2em]
+\item Fancyclopedia 3 --- fancyclopedia.org (multiple articles: Smof, Smofcon, WSFS, individual SMOFcon entries)
+\item Historical Dictionary of Science Fiction --- sfdictionary.com (``smof'' entry with dated citations)
+\item ConRunner Wiki --- conrunner.net (Smof, World Science Fiction Convention articles)
+\end{itemize}
+
+\subsubsection{Convention and Society Websites}
+
+\begin{itemize}[leftmargin=2em]
+\item World Science Fiction Society --- wsfs.org (WCRG, constitutional documents)
+\item Worldcon.org (bid documentation, seated Worldcon information, Q\&A questionnaires)
+\item SMOFcon 40 --- smofcon40.org (About Smofcon, Staff)
+\item SMOFcon 41 --- smofcon41.org (Seattle 2024)
+\item SMOFcon 43 --- smofconlisbon.org (Lisbon 2026 planning)
+\item SFSFC --- sfsfc.org (scholarship documentation)
+\item Glasgow 2024 --- glasgow2024.org (SMOFcon 42 bursary program)
+\item Seattle 2025 --- seattlein2025.org (Site Selection documentation)
+\end{itemize}
+
+\subsubsection{Fan Journalism and Reports}
+
+\begin{itemize}[leftmargin=2em]
+\item File 770 --- file770.com (SMOFcon tag; detailed event coverage 2023--2025)
+\item Fandom Rover --- fandomrover.com (Smofcon 35 conreport; Smofcon 42 conreport)
+\item MCFI YouTube --- Worldcon Events channel (SMOFcon 40 Q\&A recordings)
+\end{itemize}
+
+\subsubsection{Reference Works}
+
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia --- ``SMOFcon'' and ``SMOF'' articles
+\item Tucker, Wilson. \textit{Neo-Fan's Guide to Science Fiction Fandom}. 3rd ed., 1973.
+\item Kersh, Gerald. \textit{The Secret Masters}. 1953. (Inspiration for the phrase)
+\item Worldcon Runners' Guide. WRGEC/WSFS, 2016 edition + subsequent updates.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on SMOFcon covering etymology, convention history, operational structure, knowledge ecosystem, governance context, and international expansion. The document must be self-contained for readers unfamiliar with SF fandom while offering analytical depth for those within the community.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0: Foundation
+  [Schema] --> [Source Index] --> [Glossary]
+       |             |               |
+       v             v               v
+  WAVE 1: Parallel Research
+  Track A:                    Track B:
+  [Etymology & History] ---- [Knowledge Ecosystem]
+  [Convention Operations] -- [Internationalization]
+                \               /
+                 v             v
+  WAVE 2: Synthesis
+  [Governance & Community] <-- integrates all tracks
+  [Cross-Module Narrative]
+       |
+       v
+  WAVE 3: Publication
+  [Document Assembly] --> [Verification] --> [Final PDF]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared glossary of fan terminology, source index with reliability ratings, document template
+\item \textbf{Survey Layer} --- Five parallel module surveys compiling sourced findings
+\item \textbf{Synthesis Layer} --- Cross-module integration identifying patterns, connections, and analytical themes
+\item \textbf{Publication Layer} --- Final document assembly, verification, and formatting
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Fan Terminology Glossary & $\geq$25 terms defined with sources & W0-SCHEMA \\
+D2 & Source Index & All sources rated by type and reliability & W0-INDEX \\
+D3 & Etymology \& History Survey & Chalker to present with $\geq$4 primary sources & W1-ETYM \\
+D4 & Convention Operations Survey & Structure, format, and Worldcon relationship & W1-OPS \\
+D5 & Knowledge Ecosystem Map & $\geq$6 artifacts/channels with relationships & W1-KNOW \\
+D6 & Internationalization Survey & Geographic expansion with accessibility analysis & W1-INTL \\
+D7 & Governance \& Community Analysis & WSFS structure + volunteer dynamics & W2-GOV \\
+D8 & Cross-Module Synthesis & $\geq$4 explicit inter-module connections & W2-SYNTH \\
+D9 & Final Research Document & Self-contained, verified, formatted PDF & W3-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2,000 \\
+W0-INDEX & None & Haiku & 3,000 \\
+W1-ETYM & W0-SCHEMA, W0-INDEX & Sonnet & 12,000 \\
+W1-OPS & W0-SCHEMA, W0-INDEX & Sonnet & 10,000 \\
+W1-KNOW & W0-SCHEMA, W0-INDEX & Sonnet & 11,000 \\
+W1-INTL & W0-SCHEMA, W0-INDEX & Sonnet & 9,000 \\
+W2-GOV & W1-ETYM, W1-OPS & Opus & 14,000 \\
+W2-SYNTH & W1-* (all) & Opus & 12,000 \\
+W3-PUB & W2-GOV, W2-SYNTH & Sonnet & 8,000 \\
+W3-VERIFY & W3-PUB & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & Governance analysis, synthesis, cross-module integration, through-line \\
+Sonnet & 60\% & Module surveys, document assembly, verification, source compilation \\
+Haiku & 10\% & Glossary, source index scaffold, template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1 \\
+1 & Parallel Research & Parallel (2 tracks) & 4 & 4--6 \\
+2 & Synthesis & Sequential & 2 & 4--6 \\
+3 & Publication & Sequential & 2 & 2--3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Fan terminology glossary & Haiku & EXEC & Shared schema with 25+ defined terms \\
+Source index scaffold & Haiku & EXEC & Categorized source list with reliability ratings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Historical \& Operational:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Etymology survey & Sonnet & CRAFT-HIST & Chalker origins through modern usage \\
+Operations survey & Sonnet & CRAFT-OPS & Convention structure and Worldcon linkage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Ecosystem \& Global:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Knowledge ecosystem & Sonnet & CRAFT-KNOW & Map of 6+ knowledge artifacts/channels \\
+Internationalization & Sonnet & CRAFT-INTL & Geographic expansion + accessibility \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Governance analysis & Opus & CRAFT-GOV & WSFS structure + volunteer dynamics \\
+Cross-module synthesis & Opus & INTEG & 4+ explicit inter-module connections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Document assembly & Sonnet & EXEC & Unified research document \\
+Verification pass & Sonnet & VERIFY & Source check + consistency audit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Shared context:} Fan terminology glossary and source index loaded once in Wave 0, cached for all subsequent waves
+\item \textbf{Track isolation:} Track A and Track B operate on separate module scopes; no mid-wave cross-reading required
+\item \textbf{Synthesis pre-load:} Wave 2 agents receive only module summaries (not full surveys) to fit within context windows
+\item \textbf{Verification sampling:} Wave 3 verification spot-checks sources rather than re-validating every citation
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & --- & --- & 5,000 \\
+Wave 1 & --- & 42,000 & --- \\
+Wave 2 & 26,000 & --- & --- \\
+Wave 3 & --- & 13,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{26,000} & \textbf{55,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$86,000 output tokens across 18--22 context windows in 4--5 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0-SCHEMA ----+
+                +--> W1-ETYM --+
+  W0-INDEX -----+              |
+                +--> W1-OPS ---+--> W2-GOV ----+
+                |              |               |
+                +--> W1-KNOW --+--> W2-SYNTH --+--> W3-PUB --> W3-VERIFY
+                |              |
+                +--> W1-INTL --+
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, attribution, neutrality \\
+Core functionality & 14 & Required & BLOCK & Per-criterion deliverable acceptance \\
+Integration & 5 & Required & BLOCK & Cross-module validation \\
+Edge cases & 4 & Best-effort & LOG & Robustness and currency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to fan-historical databases, convention websites, or established fan journalism. Zero entertainment media or unsourced blog claims. \\
+SC-NUM & Numerical attribution & Every attendance figure, date, and quantitative claim attributed to a specific source \\
+SC-ADV & No factional advocacy & Document presents governance structures and community dynamics without advocating for specific factions or policy positions within fandom \\
+SC-PRV & Living individual privacy & No private information about living individuals; only public roles and published statements \\
+SC-NEU & Political neutrality & Fan-political disputes presented factually with multiple perspectives where relevant \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Etymology primary sources & $\geq$4 dated sources: Chalker 1962--63, NYT 1971, Tucker 1973, SMOFcon 1984 \\
+CF-02 & Semantic evolution arc & Three phases documented: conspiracy humor, practitioner identity, formalized community \\
+CF-03 & Convention history coverage & $\geq$30 SMOFcons with dates and locations \\
+CF-04 & Convention history milestones & Key firsts documented: founding, first non-US, first European, first Nordic \\
+CF-05 & Operations format & Programming themes, consuite culture, and typical attendance documented \\
+CF-06 & Worldcon Q\&A mechanism & Described with at least 2 specific examples \\
+CF-07 & WSFS governance structure & Business Meeting, Site Selection, MPC, and constitutional amendment process \\
+CF-08 & Knowledge artifacts & $\geq$6 distinct channels mapped: WCRG, ConRunner, Fancyclopedia, Smofs list, File 770, bursaries \\
+CF-09 & Artifact relationships & Connections between knowledge channels explicitly described \\
+CF-10 & International barriers & $\geq$3 documented with specific examples \\
+CF-11 & Bursary programs & $\geq$2 programs with eligibility and funding details \\
+CF-12 & Virtual participation & $\geq$2 specific implementations described \\
+CF-13 & Volunteer dynamics & Evidence from $\geq$3 sources \\
+CF-14 & Self-containment & Glossary covers all fan-specific terms; no undefined jargon \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Etymology $\rightarrow$ Operations & Term evolution reflected in how SMOFcon describes itself \\
+IN-02 & Operations $\rightarrow$ Governance & Worldcon Q\&A sessions linked to WSFS Site Selection process \\
+IN-03 & Knowledge $\rightarrow$ Community & Knowledge artifacts mapped to generational succession challenges \\
+IN-04 & International $\rightarrow$ Governance & Visa barriers connected to WSFS structural limitations \\
+IN-05 & Cross-module consistency & Dates, names, and attendance figures consistent across all modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & COVID disruption & Pandemic impact on SMOFcon continuity noted \\
+EC-02 & Data gaps & Areas of incomplete historical record explicitly flagged \\
+EC-03 & Temporal currency & Primary sources from 2020--2026 where available \\
+EC-04 & Disputed etymology & Pre-Chalker usage noted with appropriate uncertainty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Etymology with 4+ primary sources & CF-01, CF-02, EC-04 & Pending \\
+2. 30+ SMOFcons documented & CF-03, CF-04 & Pending \\
+3. WSFS governance documented & CF-07, IN-02 & Pending \\
+4. 6+ knowledge artifacts mapped & CF-08, CF-09, IN-03 & Pending \\
+5. 3+ international barriers & CF-10, IN-04 & Pending \\
+6. Volunteer dynamics from 3+ sources & CF-13 & Pending \\
+7. Bursary programs documented & CF-11 & Pending \\
+8. Virtual participation models & CF-12 & Pending \\
+9. 4+ cross-module connections & IN-01 through IN-04 & Pending \\
+10. All claims sourced & SC-SRC, SC-NUM & Pending \\
+11. Self-contained for newcomers & CF-14 & Pending \\
+12. Through-line to broader questions & IN-03, IN-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Gap-fill web research; source validation \\
+EXEC & Executor ($\times$2) & Document production---one per parallel track \\
+CRAFT-HIST & History Specialist & Etymology, convention history, semantic evolution \\
+CRAFT-OPS & Operations Specialist & Convention structure, programming, Worldcon linkage \\
+CRAFT-KNOW & Knowledge Specialist & Ecosystem mapping, artifact relationships \\
+CRAFT-INTL & International Specialist & Geographic expansion, accessibility, virtual models \\
+CRAFT-GOV & Governance Analyst & WSFS structure, volunteer dynamics, community analysis \\
+VERIFY & Verification & Source quality audit; consistency checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles + 4 CRAFT specialists) \\
+Total Waves & 4 (Foundation $\rightarrow$ Parallel Research $\rightarrow$ Synthesis $\rightarrow$ Publication) \\
+Parallel Tracks & 2 (Historical/Operational and Ecosystem/Global) \\
+Estimated Context Windows & 18--22 \\
+Estimated Sessions & 4--5 \\
+Total Output Tokens & $\sim$86,000 \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Research Modules & 5 \\
+Deliverables & 9 \\
+Test Count & 28 (5 safety + 14 core + 5 integration + 4 edge) \\
+Safety-Critical Tests & 5 (all mandatory-pass / BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{``Smofs are the people behind the scenes at science fiction conventions. We are those faceless and sometimes nameless individuals, who have spent months, sometimes years, preparing for your arrival.''}
+
+\vspace{0.5em}
+
+The system works not through brute force or centralized control, but through trust networks, oral tradition, and the stubborn insistence of fan volunteers that institutional memory matters. SMOFcon is where that insistence finds its voice---and this mission will give it documentation worthy of the care it represents.
+\end{quotebox}
+
+\end{document}

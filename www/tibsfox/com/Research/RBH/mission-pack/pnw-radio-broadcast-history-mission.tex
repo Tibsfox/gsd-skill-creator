@@ -1,0 +1,958 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: History Domain ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy-purple
+\definecolor{secondary}{HTML}{F57F17}     % Gold
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown
+\definecolor{accent}{HTML}{6A1B9A}        % Highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Radio Broadcast History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={PNW Radio Broadcast History -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Voices from the Fir Trees\\[0.3em]A Complete History of PNW Radio}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pacific Northwest Broadcasting, 1915--Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--22 context windows across 6 sessions}}
+\end{center}
+\newpage
+
+% ============================================
+% TABLE OF CONTENTS
+% ============================================
+\tableofcontents
+\newpage
+
+% ============================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Radio Broadcast History --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research-Ready / Cold-Start}
+\metafield{Depends On:}{None (foundational study)}
+\metafield{Context:}{GSD Ecosystem --- History domain, educational knowledge pack candidate}
+
+\subsection{Vision}
+
+The Pacific Northwest has never been the center of American broadcasting---that title belongs to New York, Chicago, and Los Angeles. Yet from garage workshops in Seattle's Ravenna neighborhood to donut shops on Roosevelt Way, from logging camps in Skagit County to Portland's Oregonian Tower, the region has produced an outsized share of broadcasting's most consequential innovations and personalities. This is the story of a region that consistently punched above its weight, where the spaces between the great population centers created room for experimentation, rebellion, and reinvention.
+
+The arc of PNW radio broadcasting traces a path that mirrors the region's own identity: fiercely independent, ecologically aware, culturally inventive, and stubbornly resistant to homogenization. From Vincent Kraft's five-watt transmitter in 1919 through KEXP's global internet streams reaching 200,000 weekly listeners, each era produced something the mainstream didn't know it needed---until the rest of the world caught up.
+
+What makes PNW radio history particularly compelling for the GSD ecosystem is its embodiment of the Amiga Principle: remarkable outcomes achieved not through brute force but through architectural elegance and specialized execution paths. Lorenzo Milam built KRAB in a converted donut shop for under \$10,000. Dorothy Bullitt acquired the KING call letters from a fishing boat captain. KCMU's volunteer DJs, broadcasting at 10 watts, incubated the grunge revolution that remade global popular culture. Small, principled building blocks producing staggering complexity through faithful iteration.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented historical record:} PNW radio history exists in scattered archives, hobbyist websites, oral histories, and institutional collections (HistoryLink.org, Oregon Encyclopedia, university special collections) with no unified narrative connecting experimental wireless through digital streaming.
+\item \textbf{Underappreciated regional significance:} National broadcasting histories center on East Coast institutions (CBS, NBC, RCA) while overlooking PNW contributions including the community radio movement, grunge-era college radio, and early internet broadcasting innovations.
+\item \textbf{Vanishing primary sources:} KGW's archives were destroyed in a 1943 fire. KRAB's recordings survived only through volunteer archivists. Edward R. Murrow's family recordings were offered to a local archive and apparently lost. Each year, more first-person accounts and original recordings disappear.
+\item \textbf{Missing connective tissue:} The through-line from Kraft's garage to Sub Pop Records, from the Hoot Owls to KEXP, from Murrow's Skagit County childhood to his CBS London broadcasts---these connections are rarely drawn, leaving a story of isolated events rather than a living tradition.
+\item \textbf{Indigenous and marginalized voices underrepresented:} While KBOO's daily Native American news program and KAOS's commitment to underrepresented voices are noted, the broader story of Indigenous, African American, Hispanic, and Asian American broadcasting in the PNW lacks systematic documentation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} PNW radio broadcasting as a continuous tradition of democratic innovation, where geographic isolation and cultural independence produced outsized contributions to American media.
+
+The study traces six overlapping eras, each building on and reacting to the previous: experimental wireless (1915--1922), commercial pioneering and the Golden Age (1922--1945), media empire-building and FM emergence (1945--1962), community and counterculture broadcasting (1962--1984), college radio and the grunge revolution (1972--2001), and public broadcasting's digital transformation (1986--present). Each era produced distinctive institutional forms, cultural outputs, and technological innovations that shaped broadcasting far beyond the region.
+
+\subsubsection{Study Region Map}
+
+\begin{asciibox}
+                    BRITISH COLUMBIA
+                         |
+    +---------+    +-----+-----+    +-----------+
+    |Bellingham|    | Skagit Co |    | Spokane   |
+    | KVOS     |    | (Murrow)  |    | KHQ/KREM  |
+    +---------+    +-----------+    +-----------+
+         |              |                |
+    +---------+    +-----------+    +-----------+
+    | SEATTLE |    | Pullman   |    | E. WA     |
+    | KJR/KING|    | KWSU/NWPB |    | Rural     |
+    | KRAB    |    | (WSU)     |    | translators|
+    | KCMU/KEXP    +-----------+    +-----------+
+    +---------+
+         |
+    +---------+    +-----------+
+    | Olympia |    | PORTLAND  |
+    | KGY/KAOS|    | KGW/KEX  |
+    +---------+    | KBOO     |
+                   | KOIN     |
+                   +-----------+
+                        |
+                   +-----------+
+                   | S. Oregon |
+                   | KMED/JPR  |
+                   +-----------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  [M1: Pioneers]-->[M2: Golden Age]-->[M3: Empires]
+       |                |                  |
+       v                v                  v
+  [M4: Community]<--[M5: College/Grunge]-->[M6: Public/Digital]
+       |                |                  |
+       +--------+-------+--------+---------+
+                |                 |
+         [Synthesis Module]  [Cross-Module]
+                |            [Integration]
+                v
+         [Final Publication]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Pioneers and Spark (1915--1929)}
+Experimental wireless stations (7XF Portland, 7YS Lacey/KGY Olympia, KFU Lents), the transition from Morse code to voice broadcasting, Vincent Kraft and KJR (1922), KGW and the Oregonian (1922), KFC and the Seattle Post-Intelligencer, KFAE/Washington State College (1922). The first broadcast licenses, the regulatory framework of the Department of Commerce, and the rapid proliferation of stations across the region.
+
+\subsubsection{Module 2: Golden Age and War (1929--1945)}
+Network affiliation era: NBC Pacific Coast chains (Red/Gold/Orange), CBS affiliates (KOIN, KIRO), Mutual Broadcasting System's Northwest debut (1937). The KGW Hoot Owls as pioneering variety programming (1923--1933) and Mel Blanc's Portland radio career. Edward R. Murrow's Skagit County upbringing, Washington State College education, and trajectory to CBS. War of the Worlds panic in Concrete, Washington. Wartime broadcasting and the PNW's connection to Murrow's London Blitz reports via KIRO.
+
+\subsubsection{Module 3: Media Empires and FM Revolution (1945--1962)}
+Dorothy Bullitt and King Broadcasting Company: from KEVR to KING, the acquisition of call letters from a fishing boat, KING-FM classical music (1948), KRSC-TV purchase (1949), five-year television monopoly. Expansion to Portland (KGW), Spokane (KREM), Boise (KTVB). The FM revolution: KGW-FM as the Northwest's first FM station (1946). Blanche McBride Virgin as first woman to own and operate a radio station (KMED Medford, 1928). The Bullitt family's public-service broadcasting philosophy.
+
+\subsubsection{Module 4: Community and Counterculture Radio (1962--1984)}
+Lorenzo Milam and KRAB-FM: from donut shop to national movement. The ``KRAB Nebula'' of 14+ community stations. Freeform programming philosophy. KRAB's role in Seattle counterculture---the Helix newspaper connection, Tom Robbins's ``Notes from the Underground,'' Timothy Leary broadcasts. KBOO Portland (1968): from 10-watt repeater to 23,000-watt community institution. KAOS at Evergreen State College (1973). The ``Life Elsewhere'' punk show and early Seattle punk. Reagan-era funding cuts and KRAB's 1984 closure.
+
+\subsubsection{Module 5: College Radio and the Grunge Revolution (1972--2001)}
+KCMU's founding at the University of Washington (1972). The shift to community support (1981). Faith Henschel's ``Bands That Will Make You Money'' compilation cassette. Jonathan Poneman and Bruce Pavitt meeting at KCMU, leading to Sub Pop Records. Soundgarden members as volunteer DJs. Kurt Cobain's dedication of Nirvana's 1991 Paramount Theatre performance to KCMU. The KNDD/``The End'' emergence on KRAB's old 107.7 frequency. The KCMU-to-KEXP transformation via Paul Allen's Experience Music Project (2001). KEXP's pioneering internet streaming and global audience.
+
+\subsubsection{Module 6: Public Broadcasting and Digital Transformation (1986--Present)}
+Northwest Public Radio/Broadcasting (NWPB): from KWSU's tape network to 19-station regional service reaching 3.6 million people. Edward R. Murrow College of Communication at WSU. KUOW and NPR in Seattle. The shift to digital: KEXP's real-time playlists (2001), streaming archives (2002), cell phone streams (2003), YouTube channel (1M+ subscribers). The 2015 KEXP New Home at Seattle Center. Community radio's persistence: KBOO's 400+ volunteers, daily Native American programming, multilingual broadcasting. The 2020 reckoning with diversity in programming. NWPB's 2025 loss of federal funding and KWSU-TV cessation.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus (memory/data):
+    - Historical timeline database (1915-present)
+    - Station registry (call signs, frequencies, owners, dates)
+    - Personnel index (broadcasters, owners, engineers)
+    - Source bibliography with quality ratings
+  denise (display/output):
+    - Narrative chapters per era
+    - Station profiles with technical specifications
+    - Biographical sketches of key figures
+    - Geographic coverage maps (ASCII)
+  paula (audio/cultural):
+    - Program format analysis per era
+    - Musical and cultural impact assessment
+    - Community engagement documentation
+    - Oral history and archival source inventory
+  68000 (orchestration):
+    - Cross-era continuity threading
+    - Thematic synthesis (independence, innovation, community)
+    - Cross-module relationship validation
+    - Publication assembly and verification
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Radio broadcasting in Washington, Oregon, and immediately adjacent Idaho/British Columbia as contextual overlap
+\item AM, FM, community, public, college, and commercial radio
+\item Key television crossover points (where radio pioneers moved to TV, e.g., King Broadcasting)
+\item Internet streaming as radio's digital evolution (KEXP model)
+\item Indigenous, multicultural, and non-English language broadcasting within PNW radio
+\item Regulatory history (FCC, Department of Commerce) as it shaped PNW stations
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Television broadcasting as its own history (except radio-TV crossover figures)
+\item Canadian broadcasting system (CBC, CRTC) except as PNW border context
+\item Ham/amateur radio hobbyist culture (except as precursor to licensed broadcasting)
+\item Podcasting as a distinct medium (except as radio station digital extension)
+\item Detailed technical engineering specifications of transmitters and equipment
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Timeline covers all six eras with at least 5 milestone events per era, each sourced to professional or archival documentation.
+\item At least 15 individual stations profiled with founding date, call sign history, ownership lineage, and cultural significance.
+\item Edward R. Murrow's PNW connections documented from Skagit County childhood through WSU education to CBS career launch, with at least 3 archival sources.
+\item Dorothy Bullitt and King Broadcasting documented from 1946 KEVR purchase through 1991 company sale, including radio-to-television expansion.
+\item Community radio movement traced from Lorenzo Milam's KRAB (1962) through KBOO (1968) and the ``KRAB Nebula,'' with at least 8 stations in the network identified.
+\item KCMU/KEXP history covers founding (1972), grunge era (1988--1994), Paul Allen partnership (2001), and digital innovation milestones.
+\item Mel Blanc's Portland radio career (KGW Hoot Owls 1927--1933, KEX Cobwebs and Nuts 1933--1935) documented with specific program details.
+\item At least 3 examples of PNW radio stations serving underrepresented communities documented (Indigenous, African American, Hispanic, Asian American programming).
+\item Cross-era continuity demonstrated: at least 5 explicit connections between eras (e.g., KRAB's 107.7 frequency becoming KNDD; Murrow's WSU radio courses feeding his CBS career).
+\item Geographic coverage spans Seattle, Portland, Spokane, Pullman, Olympia, and at least 3 smaller communities.
+\item All claims sourced to HistoryLink.org, Oregon Encyclopedia, university archives, FCC records, or professional broadcasting histories---zero entertainment media sources.
+\item Document is self-contained: a reader with no prior PNW knowledge can follow the complete narrative.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+BBS Educational Pack & PNW radio history as source material for retro-computing cultural context & Feeds \\
+Foxfire Heritage Skills & Oral history methodology applicable to broadcast history preservation & Draws from \\
+GSD Ecosystem Field Guide & PNW species taxonomy used as component naming & Contextual \\
+The Space Between & Shannon's information theory as lens for broadcast signal analysis & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Radio, at its essence, is about the spaces between---between transmitter and receiver, between voice and ear, between isolation and community. In the Pacific Northwest, where mountains and water fragment geography and dense forests swallow signals, broadcasting has always been an act of bridging. Vincent Kraft draped tapestries in his garage to improve acoustics. Murrow's mentor Ida Lou Anderson had him sit behind a screen to simulate radio conditions. Lorenzo Milam bought a donut shop because it was cheap and had a corner lot for a tower. Dorothy Bullitt rowed to a fishing boat to acquire call letters.
+
+Each of these acts---small, practical, ingenious---embodies the principle that meaning lives in the connection, not in the nodes themselves. A five-watt transmitter in a campus communications building, faithfully iterated upon by volunteers and visionaries over fifty years, becomes KEXP---a global cultural force broadcasting from Seattle Center. That trajectory is the Amiga Principle in action: architectural leverage over brute force, specialized execution paths producing outcomes that raw computational power alone cannot match. This study documents not just what was broadcast, but how the act of broadcasting itself shaped a region's identity and, through it, the nation's.
+
+\newpage
+
+% ============================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Radio Broadcast History --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authoritative sources to support each research module. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{HistoryLink.org} --- Washington state's free online encyclopedia of history, with detailed entries on radio stations, broadcasters, and broadcasting milestones
+\item \textbf{Oregon Encyclopedia (oregonencyclopedia.org)} --- Oregon Historical Society's authoritative reference
+\item \textbf{Washington State University Libraries, MASC} --- Manuscripts, Archives, and Special Collections holding NWPR audio recordings and KCMU records
+\item \textbf{University of Washington Libraries, Special Collections} --- King Broadcasting Company archives, Dorothy Stimson Bullitt papers
+\item \textbf{Archives West (Orbis Cascade Alliance)} --- Federated finding aids for Pacific Northwest archival collections
+\item \textbf{FCC Historical Records} --- Station licensing, frequency assignments, regulatory actions
+\item \textbf{Washington State University, Murrow College of Communication} --- Edward R. Murrow biographical materials and broadcasting history
+\end{itemize}
+
+\subsection{Module 1 Reference: Pioneers and Spark (1915--1929)}
+
+\subsubsection{Pre-Commercial Experimental Broadcasting}
+
+The earliest documented radio broadcasting experiments in the PNW predate commercial licensing by several years. In Portland, station KFU in Lents transmitted single words in 1915. By 1920, Charles Austin's Northwestern Radio Manufacturing Company operated experimental station 7XF in Portland, broadcasting phonograph concerts nightly to an estimated 400 listener sets by early 1922. In Washington, station 7YS at Saint Martin's College in Lacey is considered the state's first broadcast station; it would become KGY in 1922 and later move to Olympia.
+
+Oregon Agricultural College (now Oregon State University) announced a new wireless station, 7XH, in January 1922. Willard Hawley Jr.'s station 7XG was broadcasting on a regular schedule by March 1922, with signals received as far as 2,500 miles away near Honolulu.
+
+\subsubsection{The Class of 1922: First Licensed Commercial Stations}
+
+The pivotal year was 1922, when the U.S. Department of Commerce began distinguishing experimental from broadcast service stations. Key PNW stations licensed that year include:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Call} & \tableheader{City} & \tableheader{Owner/Operator} & \tableheader{Notable Details} \\
+\midrule
+KJR & Seattle & Vincent Kraft & Licensed March 9, 1922; operated from Kraft's Ravenna garage \\
+KFC & Seattle & Seattle Post-Intelligencer / Carl Haymond & Rooftop shack on P-I building \\
+KHQ & Seattle & Louis Wasmer & Built in Capitol Hill apartment; later moved to Spokane \\
+KGW & Portland & Oregonian Publishing Co. & Licensed March 21, 1922; first broadcast March 25 \\
+KGG & Portland & Hallock \& Watson Radio Service & Oregon's 2nd commercial station; March 27, 1922 \\
+KFAE & Pullman & Washington State College & Signed on December 10, 1922; became KWSC then KWSU \\
+KGY & Olympia & Evolved from 7YS & Washington's first broadcast station lineage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Vincent Kraft's trajectory illustrates the era: starting with a Morse code station (7AC) in 1917, upgrading to voice broadcasting (7XC) in 1919 with a five-watt transmitter, microphone, phonograph, and piano in his Ravenna garage. He draped tapestries on the walls to reduce noise. KJR's 1925 upgrade to 1,000 watts extended its reach to Alaska.
+
+\subsubsection{KGW and Portland's Radio Dawn}
+
+The Oregonian received the 98th radio license in the country. KGW's debut on March 25, 1922 featured soprano Edith Mason of the Chicago Grand Opera. By September 1922, KGW was assigned the exclusive ``Class B'' wavelength (400 meters), recognizing its quality equipment and programming. KGW affiliated with NBC Red Network in 1927, carrying the network's dramas, comedies, news, and sports during the Golden Age.
+
+\subsection{Module 2 Reference: Golden Age and War (1929--1945)}
+
+\subsubsection{The Hoot Owls: America's First Variety Show}
+
+KGW's ``Wiser Order of Hoot Owls'' launched January 29, 1923, created by Oregonian editor Edgar Piper and prominent Portland civic figure Charles F. Berg. The late-night variety program, broadcasting 90-minute live shows weekly, is credited with multiple firsts: the first variety show on radio, the first variety broadcast from a script, the first quiz show, and the first live audience program from a remote location.
+
+The Hoot Owls achieved national celebrity despite broadcasting primarily over KGW, with the uncongested radio spectrum allowing distant reception. The program spawned the Portland Police Sunshine Division, a charitable organization that continues to operate as a nonprofit.
+
+Mel Blanc (born Melvin Jerome Blank, May 30, 1908, San Francisco) moved to Portland at age six. He made his radio debut in June 1923 on KGW's children's show ``Stories by Aunt Nell.'' He joined the Hoot Owls cast in 1927 at age nineteen, writing and performing comedy using dialects and character voices. After a brief stint at San Francisco's KFWI, he returned to KGW and the Hoot Owls. In 1933, he moved to KEX to create ``Cobwebs and Nuts,'' a six-day-a-week late-night show. The grueling schedule at low pay pushed him to Los Angeles in 1935, where he became the voice of Bugs Bunny, Daffy Duck, and over 400 other characters.
+
+\subsubsection{Network Era in the Northwest}
+
+By the 1930s, major networks had PNW affiliates:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Network} & \tableheader{Seattle} & \tableheader{Portland} & \tableheader{Notes} \\
+\midrule
+NBC Red/Pacific Coast & KGW (620) & -- & Fed by eastern Red Network \\
+NBC Gold/Blue & KJR & KEX (1180) & Gold Network launched Oct 1931 \\
+CBS/Don Lee & KIRO & KOIN (940) & Columbia Network \\
+Mutual/Don Lee & KOL & KALE & NW debut Sept 26, 1937 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Mutual Broadcasting System's Northwest debut on September 26, 1937 brought affiliates across the region including KOL Seattle, KALE Portland, KMO Tacoma, KORE Eugene, KIT Yakima, KVOS Bellingham, KGY Olympia, KPQ Wenatchee, and others.
+
+\subsubsection{Edward R. Murrow: From Skagit County to CBS}
+
+Edward Roscoe Murrow (born Egbert Roscoe Murrow, April 25, 1908, Polecat Creek, North Carolina) moved with his family to Blanchard on Samish Bay in Skagit County, Washington, when he was five. His father Roscoe worked on a logging railroad; young Ed spent summers in logging camps. He graduated from Edison High School and enrolled at Washington State College in 1926.
+
+At WSC, Murrow studied speech under Ida Lou Anderson, who became his mentor. Anderson, who had childhood polio, taught a humanities course and coached him in poetry, literature, and broadcasting technique---having him sit behind a screen to simulate radio conditions. The college was among the few offering radio broadcasting courses, taught by Maynard Lee Daggy, with students producing programs aired on campus station KWSC. Murrow received a B in the class.
+
+Murrow graduated June 2, 1930 as student body president, ROTC cadet colonel, leading actor, star debater, and head of the Pacific Student Presidents Association. He joined CBS in 1935 as director of talks. His London Blitz broadcasts (beginning September 1940) reached American listeners via affiliates including KIRO in Seattle. His signature half-second pause after ``This---'' in ``This is London'' was at Ida Lou Anderson's suggestion.
+
+\subsubsection{War of the Worlds in the PNW}
+
+On October 30, 1938, CBS affiliates KVI and KIRO broadcast Orson Welles's dramatization in Western Washington. In the town of Concrete (population approximately 1,000), a coincidental power failure during the broadcast plunged the town into darkness. Residents fainted, grabbed families to flee to the mountains, and some men grabbed guns.
+
+\subsection{Module 3 Reference: Media Empires and FM (1945--1962)}
+
+\subsubsection{Dorothy Bullitt and King Broadcasting}
+
+Dorothy Stimson Bullitt (February 5, 1892 -- June 27, 1989) purchased Seattle radio station KEVR (1090 AM) in 1946 for her company, initially called Western Waves. She immediately sought to change the call letters to KING, for King County. The letters were registered to the merchant vessel SS Watertown; according to legend, Bullitt negotiated with the freighter's owner (one account says she rowed out with champagne). The captain asked only for a donation to his church.
+
+Key milestones: KING-FM (98.1) launched in 1948 for classical music; KRSC-TV purchased in 1949 for \$375,000 and renamed KING-TV, becoming the first television station in the Pacific Northwest. Due to an FCC freeze on new licenses, KING-TV held a monopoly in Seattle from 1948 to 1953. Expansion included Portland (KGW radio and TV, 1954--55), Spokane (KREM, 1957), and Boise (KTVB, 1980).
+
+Bullitt was called the ``velvet steamroller''---her suggestions were always interpreted as orders. She was named Seattle's First Citizen in 1959. King Broadcasting stations won the first Peabody awarded for a locally produced television show (Wunda Wunda, 1957). The company pioneered diversity: KING-TV appointed Jean Enersen as evening news anchor in 1972. After Bullitt's death in 1989, her daughters sold the company to Providence Journal Company in 1991 for an estimated \$300--400 million.
+
+\subsubsection{FM Broadcasting Arrives}
+
+KGW-FM went on air May 7, 1946---the Northwest's first FM station. Initially simulcasting 620 AM, it was sold in 1954, eventually becoming KKRZ (100.3). In 1946, the FCC approved FM engineering plans for four Portland stations: KGW, KOIN, and two others. FM adoption was slow initially due to few FM receivers in the market.
+
+\subsubsection{First Woman Station Owner}
+
+Blanche McBride Virgin became the first woman in the United States to own and operate a professional radio station---KMED in Medford, Oregon---in 1928, predating Dorothy Bullitt by nearly two decades.
+
+\subsection{Module 4 Reference: Community and Counterculture (1962--1984)}
+
+\subsubsection{Lorenzo Milam and KRAB-FM}
+
+Lorenzo Milam, born into wealth, began his radio career volunteering at KPFA-FM in Berkeley (founded 1949 as the first community radio station in the U.S.). In spring 1962, he purchased a former donut shop at 91st and Roosevelt Way in Seattle's Maple Leaf neighborhood for \$7,500. His first choice of call letters was KANT; the FCC assigned KRAB.
+
+KRAB debuted December 13, 1962, on 107.7 FM---unusually, in the commercial portion of the spectrum. Programming was radically eclectic: intellectual roundtables, African indigenous music, readings from 14th-century texts, gramophone recordings from the 1920s. The station initially avoided rock music, broadcasting it only in late-night hours, but pioneered world music, LGBT programming, and eventually punk rock through Norman Batley's ``Life Elsewhere'' show in the 1970s.
+
+Milam left KRAB in March 1968 but continued founding community stations, earning the title ``Johnny Appleseed of community radio.'' The ``KRAB Nebula'' eventually included approximately 40 stations. Key KRAB-connected stations:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{City} & \tableheader{Year} & \tableheader{Connection} \\
+\midrule
+KBOO & Portland, OR & 1968 & KRAB volunteer David Calhoun organized \\
+KDNA & St. Louis, MO & 1969 & KRAB engineer Jeremy Lansman founded \\
+KCHU & Dallas, TX & -- & Milam helped found \\
+WORT & Madison, WI & -- & Milam helped found \\
+KUSP & Santa Cruz, CA & -- & Milam helped found \\
+KPOO & San Francisco & -- & Milam helped found \\
+KTAO & Los Gatos, CA & late 1960s & Milam purchased, renamed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+KRAB closed April 15, 1984, after Reagan-era funding cuts devastated noncommercial radio. Its assets enabled the founding of KSER-FM (90.7, Everett) in 1991. Its 107.7 frequency became KNDD (``The End''), debuting August 23, 1991---just in time for the grunge explosion.
+
+\subsubsection{KBOO Portland}
+
+KBOO signed on June 3, 1968, at a cost of under \$4,000 with a total monthly budget of approximately \$50, starting as a 10-watt repeater of KRAB. By 1970, a used 1,000-watt transmitter expanded coverage to much of Northwest Oregon. KBOO is notable as the only station in the country with a daily, locally produced Native American news program and one of the few producing its own news. Over 400 volunteers produce 35\% of programming as people of color.
+
+\subsubsection{KAOS at Evergreen State College}
+
+Founded by Dean Katz, KAOS began broadcasting January 1, 1973 from The Evergreen State College in Olympia. Its mission centers on voices underrepresented in mainstream media, including Native American, women's, Hispanic, alternative news, and independent music programs, as well as syndicated public affairs from Pacifica Radio.
+
+\subsection{Module 5 Reference: College Radio and Grunge (1972--2001)}
+
+\subsubsection{KCMU: From 10 Watts to Cultural Revolution}
+
+KCMU was founded in 1972 by University of Washington students John Kean, Cliff Noonan, Victoria Fiedler, and Brent Wilcox. They petitioned the FCC to use a Canadian treaty channel at 90.5 FM, broadcasting with a 10-watt transmitter from McMahon Hall. UW budget cuts in 1981 forced the station to become community-supported; by 1982, increased wattage let listeners hear it outside the University District for the first time.
+
+In 1985, Chris Knab (co-founder of 415 Records, former owner of Aquarius Records) became station manager, broadening the format to include hip hop, roots, blues, world music, reggae, and jazz. The next year, Rolling Stone featured KCMU as a growing ``taste maker.''
+
+\subsubsection{The Sub Pop Connection}
+
+Jonathan Poneman, who hosted KCMU's ``Audioasis'' show, met Bruce Pavitt at the station. Together they founded Sub Pop Records. Kim Thayil, future Soundgarden guitarist, began hosting his own KCMU show after winning telephone music trivia contests. Soundgarden members and Mudhoney members served as volunteer DJs. The 1987 Soundgarden single ``Hunted Down'' received heavy play on KCMU.
+
+Music director Faith Henschel produced the legendary 1986 double-cassette compilation ``Bands That Will Make You Money,'' featuring overlooked Northwest bands (Green River, Soundgarden, Treeclimbers, Chemistry Set). She mailed it to industry figures nationwide; it is credited with drawing the earliest outside attention to the emerging Seattle grunge scene.
+
+\subsubsection{Nirvana and KCMU}
+
+KCMU debuted tracks from Nirvana's debut album Bleach (released on Sub Pop, June 1989). On September 23, 1991, Kurt Cobain dedicated Nirvana's Paramount Theatre performance to KCMU, acknowledging its early airplay of tracks like ``Floyd the Barber'' dating back to 1988. KCMU's Sunday night Rap Attack was the first Seattle radio program to play Ice-T, Eazy-E, and N.W.A.
+
+\subsubsection{KCMU to KEXP Transformation}
+
+In 2001, KCMU partnered with Paul Allen's Experience Music Project and was renamed KEXP. The station pioneered digital broadcasting innovations: radio's first real-time playlist (2001), first streaming archive (2002), first cell phone stream (2003), and first full-song podcast. KEXP moved to a new facility at Seattle Center in 2015, opening to the public in April 2016 with an event attended by 12,000. By 2022, the station had over 50,000 sustaining members, a YouTube channel with 1 million+ subscribers and 500 million+ views, and an annual revenue of \$12.5 million.
+
+\subsection{Module 6 Reference: Public Broadcasting and Digital (1986--Present)}
+
+\subsubsection{Northwest Public Broadcasting}
+
+KWSU (1250 AM, Pullman) signed on December 10, 1922 as KFAE, becoming KWSC in 1925. It was among the initial NPR members when the network launched in 1971. By the 1950s, the station had established a ``tape network'' distributing locally produced programs on recording tape to broadcasters statewide.
+
+In the 1980s, translator stations expanded coverage across Washington, Oregon, and Idaho, forming Northwest Public Radio (NWPR). In 2018, radio and television operations merged under the name Northwest Public Broadcasting (NWPB). The network now operates 19 radio stations and 13 translators, reaching 3.6 million people in 44 counties. Approximately half the audience receives public radio exclusively through NWPB. In 2025, KWSU-TV ceased operations following loss of federal funding.
+
+\subsubsection{KEXP as Digital Pioneer}
+
+KEXP's technology milestones represent a model for radio's digital transformation: uncompressed CD-quality internet stream (2000), real-time playlists showing current tracks (2001), 14-day streaming archive (2002), cell phone streaming (2003), video streaming and YouTube channel (2008+), Webby Award for Best Radio Website (2004). The station's 2020 diversity initiative, prompted by analysis showing 24 of the top 25 played artists were predominantly White, led to expanded programming by Black DJs and broader musical representation.
+
+\subsubsection{KING-FM: Classical Music as Public Trust}
+
+When the Bullitt family sold King Broadcasting in 1991, KING-FM was donated to a nonprofit formed by the Seattle Opera, Seattle Symphony, and the Corporate Council for the Arts. In 2011, it shifted to an independent nonprofit, preserving Dorothy Bullitt's original 1948 vision of classical music as a gift to the community.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Level} & \tableheader{Handling} \\
+\midrule
+Indigenous broadcasting & GATE & Use nation-specific names where identified; KBOO's Native American programming documented without generic ``Indigenous'' framing \\
+Counterculture content & ANNOTATE & Document KRAB/KBOO programming choices factually; present context without advocacy \\
+Corporate consolidation & ANNOTATE & Present ownership changes with sourced financial data; no policy advocacy \\
+Murrow and McCarthyism & ANNOTATE & Historical context from academic sources; present facts without political framing \\
+Diversity in programming & GATE & Use station-reported data and documented initiatives; attribute claims to sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Institutional Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item HistoryLink.org --- ``Radio in Washington'' (File \#22494); ``KWSU Radio'' (File \#22416); ``KRAB-FM 107.7'' (File \#10784); ``KEXP-FM Radio'' (File \#20790); ``Murrow, Edward R.'' (File \#23016); ``Edward R. Murrow graduates'' (File \#7526)
+\item Oregon Encyclopedia (oregonencyclopedia.org) --- ``KGW Hoot Owls''; ``Mel Blanc (1908--1989)''; ``KBOO Community Radio''
+\item Washington State University, Murrow College --- ``About Edward R. Murrow'' (murrow.wsu.edu)
+\item Archives West / Orbis Cascade Alliance --- NWPR Audio Recordings (UA 287); King Broadcasting papers; Dorothy Stimson Bullitt papers (Coll. 5269); KCMU records
+\item FCC Historical Records --- Station licensing archives
+\end{itemize}
+
+\subsubsection{Professional Histories and Archives}
+
+\begin{itemize}[leftmargin=2em]
+\item Kramer, Ronald. \textit{Pioneer Mikes: A History of Radio and Television in Oregon.} Pacific Coast Publishing, 2009.
+\item Richardson, David. \textit{Puget Sounds: A Nostalgic Review of Radio and TV in the Great Northwest.}
+\item Harrison, Burt. ``Washington State on the Air.'' 1993.
+\item Chasan, Daniel Jack. \textit{On the Air: The King Broadcasting Story.} Sasquatch Books.
+\item Sperber, A.M. \textit{Murrow: His Life and Times.} Freudlich Books, 1968.
+\item Edwards, Bob. \textit{Edward R. Murrow and the Birth of Broadcast Journalism.} NPR/Wiley, 2004.
+\item KRAB Archive (krabarchive.com) --- Comprehensive online archive of KRAB-FM recordings, program guides, and photographs.
+\item Mel Blanc Project (oregoncartoonproject.org) --- Portland radio career documentation.
+\item Portland Radio Guide (pdxradio.com) --- Craig Adams's Portland radio history compilation.
+\item QZVX Broadcast History (qzvx.com) --- Pacific Northwest broadcast history research.
+\end{itemize}
+
+\subsubsection{University and Archival Collections}
+
+\begin{itemize}[leftmargin=2em]
+\item University of Washington Libraries, Special Collections --- King Broadcasting photograph collection; King Broadcasting public affairs collection
+\item Washington State University Libraries, MASC --- NWPR Audio Recordings 1973--1999; KCMU records
+\item Tufts University --- Edward R. Murrow Papers, ca 1913--1985
+\item Oregon Historical Society Research Library --- Hoot Owls materials (Mss 2512-2, Org Lot 714)
+\end{itemize}
+
+\newpage
+
+% ============================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Pacific Northwest radio broadcast history from 1915 to the present, organized in six chronological-thematic modules, with full source attribution, cross-era continuity, and geographic coverage spanning the region. The document must be self-contained, suitable for both general audiences and as source material for a GSD educational knowledge pack.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave 0: Foundation (Sequential)
+  [Schema + Source Index + Timeline Template]
+         |
+Wave 1: Parallel Research (2 tracks)
+  Track A: [M1: Pioneers] + [M2: Golden Age] + [M3: Empires]
+  Track B: [M4: Community] + [M5: College/Grunge] + [M6: Public/Digital]
+         |
+Wave 2: Synthesis (Sequential)
+  [Cross-module threading] + [Continuity validation]
+         |
+Wave 3: Publication + Verification (Sequential)
+  [Document assembly] + [Test execution] + [Final review]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data layer:} Station registry, personnel index, timeline database, source bibliography
+\item \textbf{Narrative layer:} Six modular chapters with standardized internal structure
+\item \textbf{Synthesis layer:} Cross-era connections, thematic threads, geographic coverage validation
+\item \textbf{Publication layer:} Document assembly, formatting, verification, index generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Station Registry & 15+ stations with complete metadata & Agnus \\
+2 & Timeline Database & 30+ milestone events, sourced & Agnus \\
+3 & Module 1 Chapter & 1915--1929, 5+ events, all sourced & Denise \\
+4 & Module 2 Chapter & 1929--1945, Murrow+Blanc+networks & Denise \\
+5 & Module 3 Chapter & 1945--1962, Bullitt+FM+empires & Denise \\
+6 & Module 4 Chapter & 1962--1984, KRAB+KBOO+community & Denise \\
+7 & Module 5 Chapter & 1972--2001, KCMU+grunge+SubPop & Denise \\
+8 & Module 6 Chapter & 1986--present, NWPB+digital+KEXP & Denise \\
+9 & Synthesis Document & 5+ cross-era connections validated & Paula \\
+10 & Source Bibliography & All sources verified professional & Agnus \\
+11 & Final Publication & Self-contained, formatted, indexed & 68000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Shared schema & None & Haiku & 2K \\
+Source index & None & Haiku & 3K \\
+Timeline template & Shared schema & Haiku & 2K \\
+M1: Pioneers & Source index & Sonnet & 12K \\
+M2: Golden Age & Source index, M1 & Opus & 15K \\
+M3: Empires & Source index & Sonnet & 12K \\
+M4: Community & Source index & Sonnet & 12K \\
+M5: College/Grunge & Source index & Opus & 15K \\
+M6: Public/Digital & Source index & Sonnet & 10K \\
+Cross-module synthesis & M1--M6 & Opus & 12K \\
+Publication assembly & All modules & Sonnet & 8K \\
+Verification & Full document & Sonnet & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Pct.} & \tableheader{Assigned To} \\
+\midrule
+Opus & 32\% & M2 (Murrow biographical complexity), M5 (grunge cultural analysis), Synthesis (cross-era threading) \\
+Sonnet & 60\% & M1, M3, M4, M6 (structured research compilation), Publication, Verification \\
+Haiku & 8\% & Shared schemas, source index, timeline template \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 1 & 7K \\
+1 & Research & Parallel (2 tracks) & 8--10 & 76K \\
+2 & Synthesis & Sequential & 2 & 12K \\
+3 & Publication & Sequential & 2 & 13K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Shared schema & Haiku & 2K & JSON schemas for station, person, event records \\
+Source index & Haiku & 3K & Validated bibliography with quality ratings \\
+Timeline template & Haiku & 2K & Chronological scaffold with era boundaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Chronological First Half (M1--M3):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+M1: Pioneers & Sonnet & 12K & Chapter with 7+ station profiles, experimental era narrative \\
+M2: Golden Age & Opus & 15K & Murrow biography, Hoot Owls/Blanc, network era, WWII \\
+M3: Empires & Sonnet & 12K & Bullitt/KING, FM revolution, station expansion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Chronological Second Half (M4--M6):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+M4: Community & Sonnet & 12K & KRAB/KBOO/KAOS, Milam biography, KRAB Nebula \\
+M5: College/Grunge & Opus & 15K & KCMU, Sub Pop genesis, Nirvana, KEXP transformation \\
+M6: Public/Digital & Sonnet & 10K & NWPB network, digital milestones, KING-FM nonprofit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Cross-module threading & Opus & 8K & 5+ validated cross-era connections \\
+Geographic validation & Sonnet & 4K & Coverage map verification, gap identification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Document assembly & Sonnet & 8K & Formatted publication with TOC, index, maps \\
+Test execution & Sonnet & 5K & All test cases executed, results logged \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (schemas, source index) cached as shared context for all Wave 1 tasks
+\item Track A and Track B share source index but run independently, maximizing parallelism
+\item 5-minute cache TTL exploited by scheduling parallel track tasks within the same session window
+\item M2 and M5 (Opus tasks) scheduled in separate sessions to avoid model-switching overhead
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & -- & -- & 7K & 7K \\
+Wave 1 & 30K & 46K & -- & 76K \\
+Wave 2 & 8K & 4K & -- & 12K \\
+Wave 3 & -- & 13K & -- & 13K \\
+\midrule
+\textbf{Total} & \textbf{38K} & \textbf{63K} & \textbf{7K} & \textbf{108K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Schema]--->[Source Index]--->[Timeline]
+     |            |                |
+     +-----+------+-----+---------+
+           |             |
+    [M1]-->[M2]-->[M3]  [M4]-->[M5]-->[M6]
+     |      |      |     |      |      |
+     +------+------+-----+------+------+
+                   |
+            [Synthesis]
+                   |
+            [Publication]
+                   |
+           [Verification]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations trace to HistoryLink, Oregon Encyclopedia, university archives, FCC records, or published broadcast histories. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every date, frequency, wattage, and financial figure attributed to specific source. \\
+SC-ADV & No policy advocacy & Document presents broadcast history without advocating for specific media policy positions. \\
+SC-IND & Indigenous attribution & Any Indigenous broadcasting references name specific nations, not generic terms. \\
+SC-PRV & Privacy protection & No private addresses or personal information of living individuals beyond publicly documented broadcast careers. \\
+SC-CPY & Copyright compliance & No reproduction of broadcast transcripts, song lyrics, or program scripts beyond brief attributed quotations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Six eras with 5+ events each & CF-01, CF-02 & Pending \\
+2. 15+ stations profiled & CF-03, CF-04 & Pending \\
+3. Murrow PNW connections & CF-05, CF-06 & Pending \\
+4. Bullitt/KING documented & CF-07, CF-08 & Pending \\
+5. KRAB Nebula traced & CF-09, CF-10 & Pending \\
+6. KCMU/KEXP history & CF-11, CF-12 & Pending \\
+7. Mel Blanc Portland career & CF-13 & Pending \\
+8. Underrepresented communities & CF-14, SC-IND & Pending \\
+9. Cross-era continuity & IN-01 through IN-05 & Pending \\
+10. Geographic coverage & IN-06, IN-07 & Pending \\
+11. Source quality & SC-SRC, SC-NUM & Pending \\
+12. Self-containment & IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave boundary go/no-go \\
+PLAN & Planner & Wave decomposition; parallel track coordination \\
+SCOUT & Research Agent & Source verification; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1, M2, M3 document production \\
+EXEC-B & Executor (Track B) & M4, M5, M6 document production \\
+CRAFT-ERA & Era Specialist & Chronological accuracy; period-specific context \\
+CRAFT-GEO & Geographic Specialist & Regional coverage; station location verification \\
+VERIFY & Verification & Source validation; factual accuracy checking \\
+INTEG & Integration Agent & Cross-module continuity; thematic threading \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+TOPO & Topology Manager & Agent team structure; mid-mission adjustment \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Security & Safety boundary enforcement (SC tests) \\
+ANALYST & Pattern Analyst & Cross-era pattern detection \\
+RETRO & Retrospective & Post-wave lessons learned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet \\
+Total modules & 6 \\
+Parallel tracks & 2 \\
+Estimated context windows & 18--22 \\
+Estimated sessions & 6 \\
+Total token budget & 108K \\
+Model split & Opus 35\% / Sonnet 58\% / Haiku 7\% \\
+Safety-critical tests & 6 (mandatory-pass) \\
+Total tests & 36 \\
+Crew size & 18 roles \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{``Radio, at its essence, is about the spaces between---between transmitter and receiver, between voice and ear, between isolation and community. In the Pacific Northwest, where mountains and water fragment geography and dense forests swallow signals, broadcasting has always been an act of bridging.''}
+
+\vspace{0.5em}
+\hfill --- From the Vision Document through-line
+
+\vspace{0.5em}
+From a five-watt transmitter in a Ravenna garage to a global streaming platform at Seattle Center, the story of PNW radio is the story of the Amiga Principle made audible: small, principled building blocks, faithfully iterated, producing outcomes that raw power alone could never achieve.
+\end{quotebox}
+
+\end{document}

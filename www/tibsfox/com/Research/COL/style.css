@@ -1,0 +1,63 @@
+/* COL — Columbia Valley Rainforest Biodiversity
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --forest: #2d5016;
+  --canopy: #3a6b1e;
+  --moss: #5a8a3c;
+  --fern: #7cb356;
+  --bark: #4a3728;
+  --cream: #faf8f0;
+  --mist: #e8ede4;
+  --water: #2a6496;
+  --salmon: #c75b3a;
+  --fungi: #8b6914;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--water);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--forest) 0%, var(--canopy) 100%);
+  border-bottom: 4px solid var(--moss);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--forest); }
+h3 { color: var(--bark); }
+
+th { background: var(--forest); }
+tr:nth-child(even) { background: rgba(90, 138, 60, 0.06); }
+tr:hover { background: rgba(90, 138, 60, 0.12); }
+
+blockquote { border-left-color: var(--moss); background: rgba(90, 138, 60, 0.05); }
+
+code { background: var(--mist); }
+pre { background: #2c2c2c; color: #e0e0e0; }
+
+.stat-value { color: var(--forest); }
+
+/* --- Tags --- */
+.tag-flora { background: #e8f5e9; color: #2e7d32; }
+.tag-fauna { background: #fff3e0; color: #e65100; }
+.tag-fungi { background: #fff8e1; color: #f57f17; }
+.tag-aquatic { background: #e3f2fd; color: #1565c0; }
+.tag-synthesis { background: #f3e5f5; color: #7b1fa2; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+.tag-fail { background: #ffebee; color: #c62828; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

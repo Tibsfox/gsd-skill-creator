@@ -1,0 +1,81 @@
+{
+  "id": "room-06-music-instruments",
+  "room": 6,
+  "domain": "music-instruments",
+  "title": "Music & Instruments",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["MusicalInstrument", "Music", "Singing", "HeritageSkill", "ArtificialObject"],
+  "sumoFile": ["Music.kif", "heritage-domain-ontology.kif"],
+  "safetyDomains": ["tool", "fire"],
+  "trySessions": [
+    "music-06-dulcimer-string-beginner",
+    "music-06-drum-frame-beginner",
+    "music-06-katajjaq-rhythm-beginner"
+  ],
+  "description": "Room 06 covers musical instrument traditions and vocal music practices across Appalachian, First Nations, and Inuit cultures — a record of how humans have made instruments from available materials and transmitted musical knowledge through community practice and apprenticeship.\n\nAppalachian music is a multi-stranded tradition shaped by Scots-Irish, English, German, and African American contributions. The mountain dulcimer (a fretted zither with 3-4 strings including drone strings) is a hybrid instrument with roots in European zithers — the German scheitholt and French épinette des Vosges — adapted by Appalachian builders into an instrument uniquely suited to the modal scales of the Appalachian ballad tradition. The dulcimer is played with a noter (a small stick pressed against the melody string) or fingerpicked, and its drone-plus-melody texture is immediately recognizable. The Appalachian fiddle tradition descends from Scots-Irish reel, jig, and hornpipe music that transformed on the other side of the Atlantic: distinctive cross-tunings (DDAD, AEAE), open drone bowing, and breakdown rhythms developed in the Appalachian mountains into a distinctly American idiom.\n\nThe banjo's origin in West African lute tradition is an essential and often-elided part of Appalachian music history. The kora (a 21-string West African harp-lute) and ngoni (a West African lute) were brought to North America through the forced migration of enslaved African people. African American musicians developed the gourd-banjo into the instrument that entered Appalachian white communities through sustained cultural exchange at dances, work gatherings, and crossroads music-making. The banjo is Appalachian heritage — and its Appalachian heritage is African American heritage. Telling the banjo's history accurately requires both. Shape-note singing (the Sacred Harp tradition) is a community musical literacy system using four shapes — fa (triangle), sol (circle), la (square), mi (diamond) — to indicate solfege syllables, enabling community members without formal music training to sing four-part harmony. Sacred Harp sings are community gatherings where everyone sings and there is no audience — only participants.\n\nFirst Nations instrument traditions in this room include: the Anishinaabe and Cree frame drum (hoop drum) — a single-headed drum made from a bentwood hoop of ash, birch, or cedar and a stretched hide membrane of moose or deer hide; the Haudenosaunee water drum — a clay or wooden vessel partially filled with water, covered with a hide membrane, producing unique resonance from the water contact with the underside of the membrane; hand rattles (birchbark, turtle shell, horn) made across many nations; and the wooden flute, made in many First Nations traditions by hollowing a branch or drilling a cylindrical bore through a wood block with fingerholes. The construction of these instruments (the physical technique of how they are made) is Level 1-2 publicly shared knowledge. The ceremonial uses, specific drum songs, and drum protocols are community-specific knowledge at Level 3-4 and are not covered in this room. Learners should note that asking for specific drum songs, healing songs, or ceremonial protocols requires referral to nation-specific cultural sources.\n\nInuit musical traditions in this room focus on two publicly documented practices. Katajjaq (Inuit throat singing) is a performance tradition of Inuit women, practiced most prominently in Nunavut and Nunavik. Two singers stand face to face, close together, and produce interlocking rhythmic breath patterns — partly voiced, partly breath sounds — in a continuous interlock. The game ends when one singer laughs, loses the rhythm, or breaks the pattern. Katajjaq is a playful and competitive performance tradition, actively shared by Inuit artists at festivals, cultural events, and workshops. Artists including Tanya Tagaq and the duo Sadie and Lucie Idlout have brought katajjaq to international audiences. Katajjaq is Level 1 publicly shared. The qilaut (Inuit frame drum) is a large single-headed frame drum held in the hand and struck on the inside edge of the rim (not the drum head) with a short stick. Drum dance traditions using the qilaut are an important part of Inuit musical practice. As with First Nations drums, specific ceremonial songs in Inuit tradition are Level 4 restricted and must not be described or reproduced.\n\nTool safety applies to all instrument construction in this room: knives, saws, chisels, drills, and carving tools are used to shape wood, cut hide, and install hardware. Fire-adjacent safety applies to solvent-based instrument finishes (shellac, varnish, linseed oil). No content in this room requires a safety gate — all safety requirements are annotated.",
+  "modules": [
+    {
+      "id": "music-06-appalachian-dulcimer",
+      "title": "Appalachian Mountain Dulcimer: Construction and Playing",
+      "tradition": "appalachian",
+      "description": "The Appalachian mountain dulcimer is a fretted zither with 3-4 strings including one or two drone strings, an hourglass or teardrop soundbox, and a fretboard spanning its full length. Construction: box body (top, back, and sides joined with glue and small nails or pegs); fretboard installation (frets placed at positions producing modal scales including the characteristic Mixolydian 6+ fret); tuning peg installation; string installation and initial tuning. Fretting and tuning: standard DAD tuning (bass-drone-melody), noter style (pressing a cylindrical noter against the melody string, allowing drone strings to ring open), fingerpicking variations. Tune categories playable without music training. Appalachian hybrid heritage: European zither ancestry, Appalachian adaptation, and the shared drone-melody texture with the banjo.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "ArtificialObject"]
+    },
+    {
+      "id": "music-06-appalachian-fiddle",
+      "title": "Appalachian Fiddle Tradition",
+      "tradition": "appalachian",
+      "description": "The Appalachian fiddle is the same physical instrument as the classical violin — the distinction is entirely one of tradition and playing style. Scots-Irish reel, jig, and hornpipe traditions brought to the Appalachian mountains from the 1700s onward transformed through contact with African American musical traditions and the resources and culture of the Appalachian landscape. Distinctive features: mountain bowing style (long sustained bowing, double stops, open drone strings), cross-tunings (DDAD, AEAE, GDGD) that favor drone-rich modal keys, tune categories (reels, jigs, hornpipes, breakdowns, waltzes), and the convention of naming tunes by their use at specific local dances or events. The fiddle and the banjo developed as complementary instruments across the 19th century in Appalachian communities, shaped by cultural exchange between Scots-Irish and African American musicians.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "Music"]
+    },
+    {
+      "id": "music-06-appalachian-banjo-history",
+      "title": "Banjo Origins: West African Heritage and Appalachian Tradition",
+      "tradition": "appalachian",
+      "description": "The banjo descends from West African lute instruments — the kora (a 21-string harp-lute) and ngoni (a smaller-bodied lute) — that were brought to North America through the forced migration of enslaved African people. African American musicians developed the gourd-banjo (a drum-resonator lute with a gourd body and a skin head) over the 17th and 18th centuries. By the early 19th century, the banjo had entered white Appalachian communities through sustained cultural exchange at dances, crossroads music-making, and work settings. The 5-string banjo as known in Appalachian old-time music developed from this cross-cultural exchange. Framing: Appalachian banjo music is a cross-cultural heritage, not a single-tradition heritage. Telling the banjo's history accurately means including the African American origin story. The history of cultural exchange — and of the erasure of African American contributions from mainstream Appalachian music narratives — is part of what any learner of this tradition should understand. Cultural level 2: the African American origin story carries historical weight (enslaved people, cultural suppression, erasure) that requires contextual framing beyond simple technique instruction.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "Music"]
+    },
+    {
+      "id": "music-06-fn-frame-drum",
+      "title": "First Nations Frame Drum: Construction and Acoustic Principles",
+      "tradition": "first-nations",
+      "description": "Frame drum construction as practiced in Anishinaabe and Cree traditions: bentwood hoop (ash, birch, or cedar strip bent into a circle, lapped at the joint); hide membrane (moose or deer rawhide soaked to pliability, cut oversized, laced over the hoop with rawhide cord in a zigzag pattern); drying process (natural air drying, 24-48 hours, no heat). The acoustic physics of frame drum resonance: membrane tension, hoop stiffness, and the relationship between diameter, membrane thickness, and pitch. Drumstick construction (padded head on a short handle). Nation attribution: Anishinaabe, Cree. Ceremonial use of drums and specific drum songs are Level 3-4 restricted and are not covered in this room — learners seeking this knowledge should contact nation-specific cultural organizations.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "Manufacturing"]
+    },
+    {
+      "id": "music-06-fn-instruments",
+      "title": "First Nations Instruments: Water Drum, Rattle, and Wooden Flute",
+      "tradition": "first-nations",
+      "description": "Water drum: a Haudenosaunee instrument — a clay or wooden vessel partially filled with water, covered with a hide membrane stretched over the vessel opening. The water contacts the underside of the membrane, producing a distinctive low, resonant tone different from a standard frame drum. The water level affects pitch and timbre. Hand rattle: made in many First Nations traditions — birchbark rattles (folded and stitched bark with pebbles or seeds inside), turtle shell rattles (the shell cleaned and dried, stones added, a handle attached), horn rattles (a hollow segment of animal horn). Construction of these instruments is Level 1 publicly shared. Their specific ceremonial use contexts are Level 2-3. Wooden flute: a tubular wind instrument made by hollowing a branch or drilling a bore through a cylindrical wood blank, with fingerholes cut or burned to produce a scale. Many nations have distinct flute traditions; the construction technique is widely documented. Nation attribution: Haudenosaunee (water drum), Anishinaabe, Cree (hand drum, rattle), various First Nations (wooden flute).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "ArtificialObject"]
+    },
+    {
+      "id": "music-06-inuit-katajjaq",
+      "title": "Katajjaq: Inuit Throat Singing",
+      "tradition": "inuit",
+      "description": "Katajjaq is a publicly shared (Level 1) Inuit throat singing tradition practiced by women, primarily in Nunavut and Nunavik. Two singers stand face to face and produce interlocking rhythmic breath patterns — partly voiced syllables, partly breath sounds — in a continuous interlock that continues until one singer laughs, loses the rhythm, or repeats. The game ends in laughter; then the singers typically begin again. The format: Singer A establishes a repeating 2-4 sound cycle; Singer B fills the gaps with complementary sounds. Together they create a continuous interlocked soundscape. Katajjaq is not ceremonial music — it is a playful, competitive, and social vocal game that has been actively shared by Inuit practitioners at festivals, cultural events, and workshops. Contemporary Inuit artists including Tanya Tagaq have developed katajjaq into internationally recognized performance art while the community practice tradition remains alive. Nation attribution: Inuit (Nunavut, Nunavik).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Singing", "HeritageSkill", "Music"]
+    },
+    {
+      "id": "music-06-inuit-qilaut",
+      "title": "Qilaut: Inuit Frame Drum and Drum Dance",
+      "tradition": "inuit",
+      "description": "The qilaut (Inuit frame drum) is a large single-headed frame drum held in one hand and struck on the inside edge of the rim (not the drum head) with a short stick. The player holds the drum by a handle attached to the frame and rotates the drum slightly as they strike, allowing the drum to 'meet' the stick rather than the stick 'hitting' the drum — a technique that produces a resonant, sustained tone. Qilaut are traditionally made from a willow hoop with a walrus stomach or hide membrane. Drum dance traditions using the qilaut are an important part of Inuit community and ceremonial practice. The instrument construction is Level 1-2 publicly shared. Specific drum songs and their ceremonial contexts are Level 3-4 restricted. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["MusicalInstrument", "HeritageSkill", "Music"]
+    }
+  ]
+}

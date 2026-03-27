@@ -1,0 +1,39 @@
+{
+  "roomId": "room-04-woodcraft-tools",
+  "room": 4,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool"],
+  "criticalRules": [],
+  "gateRules": [],
+  "annotateRules": [
+    {
+      "id": "ROOM04-ANN-001",
+      "description": "Sharp blade safety for whittling and carving",
+      "trigger": "knife use, whittling, carving, any sharp cutting tool",
+      "action": "ANNOTATE -- always cut away from the body; never carve toward fingers or the supporting hand; use a carving glove or thumb guard when learning; keep blades sharp (dull blades require more force and slip more easily); always know where the blade will go if the cut slips"
+    },
+    {
+      "id": "ROOM04-ANN-002",
+      "description": "Crooked knife and drawknife technique safety",
+      "trigger": "crooked knife, drawknife, spokeshave, pull-cut tools",
+      "action": "ANNOTATE -- pull-cut tools draw the blade toward the body; always maintain controlled pull with secure work grip; the blade must be able to stop before reaching the body; use a shaving horse or secure work hold-down when using drawknife"
+    },
+    {
+      "id": "ROOM04-ANN-003",
+      "description": "Steam bending safety for snowshoe frames and chair parts",
+      "trigger": "steam box, steam bending, bending green wood",
+      "action": "ANNOTATE -- steam is a burn hazard; use gloves and keep face away from steam vents; bent wood parts must be clamped into form immediately after removal from steam -- they cool and set quickly; have the bending form ready before opening the steam box"
+    },
+    {
+      "id": "ROOM04-ANN-004",
+      "description": "Ulu and traditional blade tool handling",
+      "trigger": "ulu, snow knife, bone or antler bladed tools",
+      "action": "ANNOTATE -- traditional bladed tools (ulu, pana) are extremely sharp; handle with the same care as any sharp cutting tool; the ulu's curved blade makes its cutting edge less visible than a straight knife -- extra awareness of blade position is required"
+    }
+  ],
+  "safetyNotes": {
+    "cuttingDirection": "The cardinal rule of whittling and carving: always know where the blade will go if the cut slips, and make sure no part of your body is in that path. Most carving injuries happen when the knife slips and the hand holding the wood is the next thing the blade contacts.",
+    "sharpTools": "A sharp tool is safer than a dull one. A dull blade requires more force to cut, which means more force is released when it finally cuts through or slips. A sharp tool cuts cleanly with controlled force. Maintain sharp edges on all cutting tools.",
+    "pullCutTools": "Drawknives, spokeshaves, and crooked knives all draw the blade toward the user. This is a highly controllable technique when the workpiece is secured and the pull is controlled. Always secure the workpiece before using pull-cut tools."
+  }
+}

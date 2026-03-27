@@ -1,0 +1,72 @@
+{
+  "id": "room-17-salish-weaving",
+  "room": 17,
+  "domain": "salish-weaving",
+  "title": "Salish Weaving and Design",
+  "traditions": ["first-nations"],
+  "sumoClasses": ["Artifact", "Manufacturing", "HeritageSkill", "MaterialCulture", "Fabric"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "description": "Room 17 covers the textile and design traditions of Coast Salish peoples — one of the most technically sophisticated and ecologically embedded weaving traditions in North America. At its center is the two-bar loom: two horizontal bars held apart by tension, warp threads hanging vertically, the weaver building cloth from the bottom up. This is not the European four-shaft floor loom. It is a portable, elegant system that has sustained Coast Salish textile production across centuries.\n\nThe fiber traditions of this room begin with mountain goat (Oreamnos americanus) wool, harvested by gathering shed wool from rocky travel paths or obtained through trade with Interior Plateau communities who had more direct access to mountain goat habitat. Alongside mountain goat wool, the historical woolly dog (Canis lupus familiaris) was a distinct breed maintained separately from food dogs, sheared annually — one of the earliest documented selective breeding programs for textile fiber in North America. When sheep wool arrived with European contact, the woolly dog's function became redundant and the breed was not maintained. The woolly dog is now extinct as a distinct breed. This room acknowledges that extinction honestly, as an ecological and cultural loss.\n\nCowichan knitting is explicitly a post-contact adaptation — not a pre-contact tradition — and must be presented as such in all content. Coast Salish peoples adopted European-introduced knitting needles and applied their existing knowledge of Salish wool preparation and geometric design to create a new textile form. This adaptation is not a diminishment of the tradition; it demonstrates the creative capacity of Coast Salish weavers. The Cowichan sweater (dense, water-resistant, using minimally processed undyed wool) is attributed specifically to Quw'utsun' (Cowichan) peoples of Vancouver Island and has significant contemporary economic and cultural importance. Counterfeit sweater production is an ongoing intellectual property concern.\n\nCoast Salish formline design is explicitly distinct from northern NW Coast formline (Haida, Tlingit, Tsimshian) and must never be conflated with it. Northern formline — analyzed by art historian Bill Holm in 1965 — uses the standardized ovoid and U-form system with highly codified rules. Coast Salish formline uses rounder, more oval forms; circular and spiral compositions; and a different grammar of positive/negative space. It is expressed most prominently on spindle whorls, house posts, and ceremonial objects. These are not regional variants of the same system — they are distinct design traditions with different visual grammars and origins.\n\nCedar root basketry in this room is explicitly nation-specific in attribution. Coast Salish imbricated basketry (overlaying coiled cedar root with colored grasses to create geometric surface patterns) is attributed to Stó:lō and Musqueam. Nuu-chah-nulth plaited cedar bark basketry uses flat strips in a checkerboard or twill pattern. Nlaka'pamux (Thompson) coiled cedar root basketry uses distinctive geometric designs in beargrass or cherry bark overlay. Ditidaht and Makah wrapped twining features whale and thunderbird imagery. These are four distinct techniques attributed to distinct nations — the phrase 'Northwest Coast basketry' obscures this diversity and is avoided throughout.\n\nFamily-owned design patterns in Salish blanket and robe weaving are intellectual property belonging to specific families and lineages. This room acknowledges the existence of family-owned designs at Level 2 and redirects any attempt to document or reproduce specific family patterns to the relevant families and cultural offices. The weaving technique is Level 1 public knowledge; the meaning and ownership of specific design compositions is Level 2-3.",
+  "safetyDomains": ["tool"],
+  "trySessions": [
+    "weaving-17-two-bar-loom-beginner",
+    "weaving-17-cedar-root-basketry-beginner",
+    "weaving-17-formline-beginner"
+  ],
+  "modules": [
+    {
+      "id": "weaving-17-two-bar-loom",
+      "title": "Coast Salish Two-Bar Loom",
+      "tradition": "first-nations",
+      "description": "The two-bar loom uses two horizontal bars held apart by tension — one attached to a fixed point above, one weighted below or lashed to the weaver's belt (a form of backstrap loom). Warp threads hang vertically between the bars. The weaver works from the bottom up. This is the traditional Coast Salish loom form — different from the European four-shaft floor loom. Construction: the bars themselves are carved cedar or straight-grained wood; the warp spacing determines the sett (ends per inch). Attribution: Coast Salish (specifically Musqueam, Sto:lo, and other Lower Fraser River communities).",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Artifact", "Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "weaving-17-mountain-goat-wool",
+      "title": "Mountain Goat Wool and the Woolly Dog",
+      "tradition": "first-nations",
+      "description": "Mountain goat (Oreamnos americanus) wool was harvested in two ways: gathering shed wool from rocky areas where goats traveled, and trading for wool from Interior Plateau communities with more direct access to mountain goat habitat. The historical woolly dog (Canis lupus familiaris, a breed now extinct as a distinct breed) was maintained in separate groups from food dogs, sheared annually on small islands to prevent cross-breeding. The combination of mountain goat wool and woolly dog wool produced the distinctive Salish blanket fiber blend. Attribution: Coast Salish, Musqueam. Note: the woolly dog's extinction as a distinct breed is connected to the introduction of sheep via contact with European traders, which made the breed unnecessary. This loss is acknowledged as both an ecological and cultural loss.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["MaterialCulture", "HeritageSkill"]
+    },
+    {
+      "id": "weaving-17-blanket-robe",
+      "title": "Salish Blanket and Robe",
+      "tradition": "first-nations",
+      "description": "Salish blankets and robes woven on the two-bar loom using mountain goat wool and/or woolly dog wool. Distinctive features: bold geometric striped patterns, fringe along the lower edge, natural undyed wool tones (white, brown, black, gray) plus some natural dyes. Ceremonial and trade uses. Technique at Level 1; specific pattern ownership at Level 2-3. Attribution: Coast Salish (Musqueam, Squamish, Stó:lō). Note: specific design patterns carry family and clan associations — the weaving technique is publicly taught and shared, but the meaning and ownership of specific pattern compositions belongs to the families within whose lineages those designs are carried.",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["Artifact", "MaterialCulture", "HeritageSkill"]
+    },
+    {
+      "id": "weaving-17-cowichan-knitting",
+      "title": "Cowichan Knitting",
+      "tradition": "first-nations",
+      "description": "Cowichan knitting is a post-contact adaptation — not a pre-contact tradition. Coast Salish peoples adopted knitting needles (introduced by European contact) and applied their existing knowledge of Salish wool preparation and geometric design to create a new textile form. The Cowichan sweater uses undyed, minimally processed wool knitted at a tight gauge, producing a dense, water-resistant fabric. Attribution: Cowichan peoples (Quw'utsun') of Vancouver Island. Note: contemporary Cowichan knitting is a significant economic and cultural activity, and Cowichan sweaters have been subject to intellectual property disputes regarding counterfeit products — relevant context for the economic dimension of the tradition. The post-contact origin of this technique is stated explicitly and accurately; it does not diminish the tradition.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Artifact", "Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "weaving-17-cedar-basketry",
+      "title": "Cedar Root Basketry",
+      "tradition": "first-nations",
+      "description": "Cedar root basketry traditions across multiple individually attributed nations: (1) Coast Salish imbricated basketry — overlaying coiled cedar root with colored grasses (cattail, beargrass, cherry bark) to create geometric patterns; attributed to Stó:lō, Musqueam, and other Coast Salish communities. (2) Nuu-chah-nulth plaited cedar bark baskets — woven from flat strips of cedar bark in a plaiting technique (checkerboard or twill pattern), using cedar bark rather than round root. (3) Nlaka'pamux (Thompson) coiled cedar root baskets with characteristic geometric designs in beargrass or cherry bark overlay — zigzags, diamond grids, and stepped designs that must be attributed to Nlaka'pamux tradition specifically, not to generic 'Interior Plateau'. (4) Ditidaht and Makah wrapped twining with whale and thunderbird motifs — a surface texture distinct from coiling or plaiting, created by wrapping weft around warp strands. Attribution must be nation-specific throughout. Tool annotation for splitting and shaping tools.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Artifact", "Manufacturing", "MaterialCulture", "HeritageSkill"]
+    },
+    {
+      "id": "weaving-17-formline",
+      "title": "Coast Salish Formline Design",
+      "tradition": "first-nations",
+      "description": "Coast Salish formline design is explicitly distinct from northern NW Coast formline (Haida, Tlingit, Tsimshian) and must never be conflated with it. Key differences: Coast Salish formline uses rounder, more oval forms; is characterized by circular and spiral compositions; has a different grammar for positive/negative space; and is most prominently expressed on spindle whorls, house posts, and ceremonial objects. Northern NW Coast formline (Haida, Tlingit) uses the ovoid and U-form system with highly standardized rules developed by Bill Holm's analysis — Coast Salish formline predates and is independent of this northern system. Spindle whorl imagery specifically: whorls carry design compositions that in some cases carry lineage meaning (Level 2 — designs are not secret, but their specific meanings are contextually shared). Attribution: Coast Salish (Musqueam, Squamish, Stó:lō). culturalLevel: 2 for the design meanings dimension; technique is Level 1.",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["CulturalPractice", "MaterialCulture", "HeritageSkill"]
+    }
+  ]
+}

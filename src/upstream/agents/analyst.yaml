@@ -1,0 +1,15 @@
+name: upstream-analyst
+model: sonnet
+description: >
+  Classifies raw change events by type, severity, and affected domains.
+  Assesses auto-patchability and produces ClassifiedEvents with confidence
+  scores. Uses pattern matching against known change signatures to determine
+  whether upstream changes are breaking, deprecation, enhancement, security,
+  optimization, or informational.
+tools:
+  - Read
+  - Grep
+budget_tokens: 12000
+trigger_contexts:
+  - change classification
+  - severity assessment

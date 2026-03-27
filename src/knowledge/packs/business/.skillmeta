@@ -1,0 +1,557 @@
+# GSD Skill Metadata
+pack_id: BUS-101
+pack_name: "Business & Law -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: business_and_law
+
+# Content Description
+description: |
+  Business and law as interconnected systems of human organization. Covers
+  economic organization, business structures, finance and accounting basics,
+  contracts and legal systems, and ethics and governance -- from running a
+  lemonade stand to understanding constitutional rights.
+
+short_description: "Economic organization, business structures, finance, legal systems, and ethics across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Business & Law Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - COMM-101
+
+# What This Pack Enables
+enables:
+  - ECON-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 100]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 160]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [160, 220]
+
+# Modules
+modules:
+  - id: BUS-101-M1
+    name: "Economic Organization & Markets"
+    description: "How trade works, supply and demand, the role of money, market structures, specialization, and the economic systems that organize human cooperation"
+    learning_outcomes:
+      - "Explain why people specialize and trade rather than producing everything themselves"
+      - "Describe how supply and demand interact to determine prices"
+      - "Understand the role of money as a medium of exchange, store of value, and unit of account"
+      - "Compare different market structures: competition, monopoly, oligopoly"
+      - "Identify how government regulation addresses market failures"
+      - "Trace the flow of goods, services, and money through a simple economy"
+    topics:
+      - "Specialization & Trade"
+      - "Supply & Demand"
+      - "The Role of Money & Currency"
+      - "Market Structures (Competition, Monopoly, Oligopoly)"
+      - "Economic Indicators (GDP, Inflation, Unemployment)"
+      - "Government Roles in Markets (Regulation, Taxation, Public Goods)"
+      - "International Trade & Comparative Advantage"
+      - "Barter, Trade, and the History of Exchange"
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+    prerequisite_modules: []
+    activities:
+      count: 2
+      examples:
+        - "Classroom Market Day: Supply and Demand in Action"
+        - "Barter vs. Money: Trading Game"
+    assessments:
+      - "Can student explain why prices change when supply or demand shifts?"
+      - "Does student understand why specialization increases total output?"
+      - "Can student identify the role money plays vs. direct barter?"
+      - "Does student recognize examples of market structures in real life?"
+
+  - id: BUS-101-M2
+    name: "Business Structures & Entrepreneurship"
+    description: "Types of business organizations, their ownership and liability characteristics, how businesses start, grow, and sometimes fail, and the entrepreneurial process"
+    learning_outcomes:
+      - "Describe the key features of sole proprietorships, partnerships, corporations, LLCs, and nonprofits"
+      - "Explain how liability differs across business structures"
+      - "Create a basic business plan with product, market, costs, and revenue model"
+      - "Understand how businesses raise money (revenue, loans, investment)"
+      - "Analyze why businesses succeed or fail using real examples"
+      - "Compare cooperative, nonprofit, and for-profit organizational models"
+    topics:
+      - "Sole Proprietorship"
+      - "Partnership & Partnership Agreements"
+      - "Corporation (C-Corp, S-Corp)"
+      - "Limited Liability Company (LLC)"
+      - "Nonprofit & Cooperative Structures"
+      - "Starting a Business: Idea to Launch"
+      - "Business Plans & Market Research"
+      - "Growth, Scaling, and Fundraising"
+      - "Why Businesses Fail: Case Studies"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 25
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Lemonade Stand Business Plan"
+        - "Compare Business Types: Research and Present"
+    assessments:
+      - "Can student match business structures to appropriate scenarios?"
+      - "Does student understand the concept of limited liability?"
+      - "Can student create a realistic simple business plan?"
+      - "Does student recognize why business structure choice matters?"
+
+  - id: BUS-101-M3
+    name: "Finance & Accounting Fundamentals"
+    description: "Revenue, expenses, profit, budgeting, financial statements, personal finance, saving, credit, debt, compound interest, and investment basics"
+    learning_outcomes:
+      - "Calculate profit as revenue minus expenses"
+      - "Create and manage a personal or household budget"
+      - "Read and interpret a simple income statement and balance sheet"
+      - "Understand the difference between cash flow and profitability"
+      - "Explain how compound interest works for both savings and debt"
+      - "Describe basic investment concepts: risk, return, and diversification"
+    topics:
+      - "Revenue, Expenses & Profit"
+      - "Budgeting & Financial Planning"
+      - "The Income Statement"
+      - "The Balance Sheet (Assets, Liabilities, Equity)"
+      - "Cash Flow Management"
+      - "Personal Finance: Saving, Spending, Credit"
+      - "Compound Interest & Time Value of Money"
+      - "Investment Basics: Stocks, Bonds, Mutual Funds"
+      - "Taxes: What They Are and How They Work"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 25
+      high: 30
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Personal Budget Challenge: Track Spending for a Week"
+        - "Read a Simple Income Statement"
+    assessments:
+      - "Can student calculate profit from revenue and expense data?"
+      - "Does student create a budget that distinguishes needs from wants?"
+      - "Can student extract key information from a financial statement?"
+      - "Does student understand how compound interest grows over time?"
+
+  - id: BUS-101-M4
+    name: "Contracts, Rights & Legal Systems"
+    description: "How contracts work, what makes agreements enforceable, rights and obligations, the court system, consumer protection, employment law, property rights, and constitutional rights"
+    learning_outcomes:
+      - "Identify the essential elements of a contract: offer, acceptance, consideration, capacity"
+      - "Recognize everyday agreements as contracts with legal force"
+      - "Understand basic rights as a consumer, employee, and citizen"
+      - "Describe how courts resolve disputes when agreements break down"
+      - "Read and interpret a basic legal document in plain language"
+      - "Distinguish between criminal and civil law and their different processes"
+    topics:
+      - "Contract Essentials: Offer, Acceptance, Consideration"
+      - "Capacity & Legality in Contracts"
+      - "Consumer Protection & Warranty Law"
+      - "Employment Law: Wages, Safety, Discrimination"
+      - "Property Rights: Real, Personal, and Intellectual"
+      - "The Court System: Trial Courts, Appeals, Supreme Court"
+      - "Constitutional Rights: Speech, Due Process, Equal Protection"
+      - "Dispute Resolution: Negotiation, Mediation, Arbitration, Litigation"
+      - "Reading & Understanding Legal Documents"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Draft a Simple Contract Between Friends"
+        - "Mock Trial: Breach of Contract"
+    assessments:
+      - "Can student identify offer, acceptance, and consideration in an agreement?"
+      - "Does student recognize that clicking 'I agree' is a contractual action?"
+      - "Can student describe the basic structure of the court system?"
+      - "Does student understand basic constitutional rights and their limits?"
+
+  - id: BUS-101-M5
+    name: "Ethics, Governance & Social Responsibility"
+    description: "Corporate responsibility, stakeholder theory, regulation, transparency, advertising ethics, data privacy, whistleblowing, and doing business in ways that create value without destroying trust"
+    learning_outcomes:
+      - "Identify stakeholders affected by business decisions beyond just owners and customers"
+      - "Evaluate business decisions using ethical frameworks: utilitarian, rights-based, stakeholder"
+      - "Understand why regulation exists and how it balances innovation with protection"
+      - "Analyze real business ethics cases for ethical principles and lessons"
+      - "Distinguish between legal compliance and ethical responsibility"
+      - "Assess corporate social responsibility claims for substance vs. greenwashing"
+    topics:
+      - "Stakeholder Theory: Who Is Affected?"
+      - "Corporate Governance: Boards, Accountability, Transparency"
+      - "Business Ethics Frameworks"
+      - "Regulation & Government Agencies"
+      - "Advertising Ethics: Persuasion vs. Deception"
+      - "Data Privacy & Digital Ethics"
+      - "Whistleblowing: Ethics and Consequences"
+      - "Corporate Social Responsibility & ESG"
+      - "Environmental Responsibility in Business"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 8
+      elementary: 12
+      middle: 18
+      high: 25
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Ethics Dilemma Discussion: Business Scenarios"
+        - "Stakeholder Map for a Local Business"
+    assessments:
+      - "Does student consider multiple stakeholders in business decisions?"
+      - "Can student identify ethical dimensions beyond legal compliance?"
+      - "Does student recognize greenwashing vs. genuine responsibility?"
+      - "Can student articulate why business ethics matter for long-term success?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-ECON-001
+    description: "Explain how supply and demand determine prices in markets"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-BIZ-001
+    description: "Compare business structures and select appropriate types for given scenarios"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-FIN-001
+    description: "Create and manage a budget and interpret basic financial statements"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-LAW-001
+    description: "Identify essential contract elements and understand basic legal rights"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-ETH-001
+    description: "Evaluate business decisions for ethical dimensions and stakeholder impact"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Economic Reasoning Check"
+    frequency: ongoing
+
+  - type: formative
+    name: "Budget Review"
+    frequency: per_project
+
+  - type: formative
+    name: "Contract Element Identification"
+    frequency: per_project
+
+  - type: summative
+    name: "Business Plan Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Legal Document Analysis"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: spreadsheet
+    url: https://sheets.google.com
+    description: "Spreadsheet for budgeting, financial statements, and calculations"
+
+  - name: stock_simulator
+    url: https://www.investopedia.com/simulator/
+    description: "Virtual stock market for practicing investment concepts"
+
+  - name: contract_builder
+    integrated: true
+    description: "Interactive contract builder for learning agreement elements"
+
+interactive_elements:
+  - type: simulator
+    name: "Market Trading Floor"
+
+  - type: simulator
+    name: "Stock Market Simulator"
+
+  - type: game
+    name: "Business Structure Decision Tree"
+
+  - type: manipulative
+    name: "Budget Builder"
+
+  - type: visualization
+    name: "Supply and Demand Curves"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Discussion-based activities have text-based alternatives for learners with speech or hearing limitations."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Council for Economic Education (CEE) Standards"
+    version: 2010
+    alignments:
+      "Standard 1": "Scarcity and choice"
+      "Standard 3": "Allocation methods"
+      "Standard 7": "Markets and prices"
+      "Standard 8": "Price determination"
+      "Standard 14": "Entrepreneurship"
+  - framework: "Jump$tart Financial Literacy Standards"
+    version: 2021
+    alignments:
+      Spending & Saving: true
+      Credit & Debt: true
+      Employment & Income: true
+      Investing: true
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.IND.A: "Knowing and understanding"
+      MYP.IND.D: "Reflecting"
+  - framework: "UK National Curriculum (Economics & Enterprise)"
+    version: "2014"
+    alignments:
+      KS2.BUS: "Business and entrepreneurship"
+      KS3.BUS: "Economic principles and enterprise"
+    alignments:
+      "Civic Life": true
+      "Foundations of Government": true
+      "Role of the Citizen": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Concepts are abstract but grounded in everyday experience; entry is accessible at every level"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: value_judgments
+    description: "Business and legal topics involve value judgments about fairness, justice, and economic systems"
+    mitigation: "Pack presents multiple perspectives. Encourages critical thinking over prescribed answers. Explicitly notes when topics are debated."
+
+  - flag: financial_anxiety
+    description: "Discussions of money, debt, and financial difficulty may trigger anxiety for learners from financially stressed families"
+    mitigation: "Activities use fictional or simulation money. Sensitivity guidance for facilitators. Focus on skills and empowerment, not judgment."
+
+  - flag: legal_variation
+    description: "Laws vary significantly by jurisdiction. Pack teaches general principles, not jurisdiction-specific rules."
+    mitigation: "Clear disclaimers that laws differ by location. Activities encourage learners to research their local laws."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/bus-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "BUS-101"
+  looking_for:
+    - "Real-world business case studies for classroom discussion"
+    - "Anonymized contract examples for legal literacy exercises"
+    - "Translations to Spanish & Mandarin"
+    - "Financial literacy activities using local currency and contexts"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Business & Law Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - business
+  - law
+  - economics
+  - finance
+  - accounting
+  - contracts
+  - legal-literacy
+  - entrepreneurship
+  - ethics
+  - governance
+  - personal-finance
+  - budgeting
+  - investing
+  - corporate-responsibility
+  - foundational
+
+# External Resources
+resources:
+  - type: curriculum
+    title: "Junior Achievement (JA)"
+    author: "Junior Achievement Worldwide"
+    url: "https://www.juniorachievement.org"
+
+  - type: online_platform
+    title: "Khan Academy Economics & Finance"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/economics-finance-domain"
+
+  - type: curriculum
+    title: "Street Law: A Course in Practical Law"
+    author: "Street Law Inc."
+    url: "https://www.streetlaw.org"
+
+  - type: organization
+    title: "SCORE Business Mentoring"
+    author: "SCORE"
+    url: "https://www.score.org"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematical reasoning enables financial analysis and economic modeling"
+
+  - id: COMM-101
+    relationship: "Communication skills drive negotiation, persuasion, and legal argumentation"
+
+  - id: CRIT-101
+    relationship: "Critical thinking powers ethical analysis and business judgment"
+
+  - id: ECON-101
+    relationship: "Advanced economics builds on business and market foundations"
+
+  - id: CODE-101
+    relationship: "Technology products operate within business and legal contexts"
+
+  - id: READ-101
+    relationship: "Legal and financial documents require strong reading comprehension"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "briefcase"
+    color: "#FF9800"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "BUS-101-economic-organization"
+    - "BUS-101-business-structures"
+    - "BUS-101-finance-fundamentals"
+    - "BUS-101-legal-systems"
+    - "BUS-101-ethics-governance"
+
+# File References
+files:
+  vision_document: "BUS-101-vision.md"
+  modules_definition: "BUS-101-modules.yaml"
+  activities: "BUS-101-activities.json"
+  assessment: "BUS-101-assessment.md"
+  resources: "BUS-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering economic organization, business structures, finance, legal systems, and ethics"
+      - "10 starter activities emphasizing real-world application and reasoning"
+      - "Aligned to CEE, Jump$tart, and National Civics standards"
+      - "Parent guidance for non-business and non-legal families"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-05-20"

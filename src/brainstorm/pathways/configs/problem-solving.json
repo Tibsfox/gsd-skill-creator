@@ -1,0 +1,14 @@
+{
+  "id": "problem-solving",
+  "name": "Problem-Solving",
+  "description": "Structured problem attack — understand before solving",
+  "situation": "Need to understand a problem deeply before generating solutions",
+  "technique_sequence": [
+    { "technique": "question-brainstorming", "duration_ms": 600000, "notes": "Surface all dimensions of the problem" },
+    { "technique": "starbursting", "duration_ms": 900000, "notes": "Systematic who/what/where/when/why/how exploration" },
+    { "technique": "five-whys", "duration_ms": 600000, "notes": "Drill to root causes on top questions" },
+    { "technique": "scamper", "duration_ms": 1200000, "notes": "Apply structured lenses to root causes" }
+  ],
+  "required_agents": ["facilitator", "questioner", "analyst", "ideator", "scribe"],
+  "recommended_for": ["how might we", "why is this happening", "root cause", "problem", "reduce", "fix", "solve", "understand"]
+}

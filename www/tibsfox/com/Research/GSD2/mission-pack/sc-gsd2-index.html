@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>skill-creator × GSD-2 — Full Integration Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #0f1712; color: #dce8e0; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #1B3A2D 0%, #0f2419 60%, #080f0a 100%);
+    border-bottom: 2px solid #006D77;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #006D77; color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.85rem; border-radius: 2px; margin-bottom: 1rem; }
+  header h1 { font-size: 2.3rem; font-weight: 700; color: #ffffff; line-height: 1.2; margin-bottom: 0.5rem; }
+  header h1 .cross { color: #0B9E8E; margin: 0 0.3rem; }
+  header p.sub { color: #7ab89a; font-size: 0.95rem; margin-top: 0.6rem; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .repos { display: flex; justify-content: center; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .repo-tag { background: #1B3A2D; border: 1px solid #2d5a3f; color: #0B9E8E; font-size: 0.75rem; font-family: 'DM Mono', monospace; padding: 0.3rem 0.75rem; border-radius: 3px; }
+  .pipeline { display: flex; justify-content: center; align-items: center; gap: 0.4rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .pipeline span { background: #1B3A2D; border: 1px solid #2d5a3f; color: #7ab89a; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 3px; }
+  .pipeline .arr { color: #2d5a3f; }
+
+  main { max-width: 880px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  .meta-bar { display: flex; gap: 2rem; flex-wrap: wrap; background: #132018; border: 1px solid #1e3828; border-radius: 6px; padding: 1rem 1.5rem; margin-bottom: 2.5rem; }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #3d7055; font-weight: 700; }
+  .meta-value { font-size: 0.88rem; color: #7ab89a; font-family: 'DM Mono', monospace; }
+
+  .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #006D77; margin-bottom: 1rem; }
+
+  .files-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  @media (max-width: 580px) { .files-grid { grid-template-columns: 1fr; } }
+  .file-card { background: #132018; border: 1px solid #1e3828; border-radius: 8px; padding: 1.5rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.7rem; transition: border-color 0.2s, background 0.2s; color: inherit; }
+  .file-card:hover { border-color: #006D77; background: #162b1e; }
+  .file-icon { font-size: 1.8rem; }
+  .file-card h3 { font-size: 0.95rem; font-weight: 700; color: #dce8e0; }
+  .file-card .desc { font-size: 0.83rem; color: #5a8a6a; line-height: 1.5; }
+  .file-card .fname { font-family: 'DM Mono', monospace; font-size: 0.73rem; color: #0B9E8E; }
+  .dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: #006D77; color: #fff; font-size: 0.78rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 4px; text-decoration: none; margin-top: auto; width: fit-content; }
+  .dl-btn:hover { background: #00838f; }
+
+  .contents-list { list-style: none; margin-bottom: 2.5rem; }
+  .contents-list li { display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid #132018; align-items: flex-start; }
+  .stage-badge { flex-shrink: 0; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 3px; margin-top: 0.15rem; }
+  .s1 { background: #1B3A2D; color: #7ab89a; border: 1px solid #2d5a3f; }
+  .s2 { background: #0b2c30; color: #0B9E8E; border: 1px solid #006D77; }
+  .s3 { background: #132018; color: #5a8a6a; border: 1px solid #1e3828; }
+  .contents-list li p { font-size: 0.86rem; color: #7ab89a; line-height: 1.55; }
+  .contents-list li strong { color: #c4dac9; }
+
+  .six-functions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+  @media (max-width: 580px) { .six-functions { grid-template-columns: 1fr 1fr; } }
+  .fn-card { background: #132018; border: 1px solid #1e3828; border-radius: 6px; padding: 1rem; }
+  .fn-number { font-size: 0.65rem; font-weight: 700; color: #006D77; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .fn-name { font-size: 0.88rem; font-weight: 700; color: #c4dac9; margin-bottom: 0.25rem; }
+  .fn-bridge { font-size: 0.76rem; color: #5a8a6a; line-height: 1.4; }
+
+  .steps { counter-reset: steps; list-style: none; margin-bottom: 2.5rem; }
+  .steps li { counter-increment: steps; display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid #132018; align-items: flex-start; }
+  .steps li::before { content: counter(steps); flex-shrink: 0; width: 1.5rem; height: 1.5rem; background: #006D77; color: #fff; font-size: 0.73rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 0.1rem; }
+  .steps li p { font-size: 0.86rem; color: #7ab89a; line-height: 1.55; }
+  .steps li code { background: #132018; border: 1px solid #1e3828; padding: 0.12rem 0.38rem; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #0B9E8E; }
+
+  .compile-box { background: #132018; border: 1px solid #1e3828; border-left: 3px solid #006D77; border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+  .compile-box pre { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #0B9E8E; line-height: 1.9; white-space: pre-wrap; margin-top: 0.6rem; }
+  .compile-box p { font-size: 0.83rem; color: #5a8a6a; }
+
+  .quote { background: #0b2c30; border-left: 3px solid #0B9E8E; padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0; margin-bottom: 2rem; font-style: italic; color: #7ab89a; font-size: 0.88rem; line-height: 1.7; }
+  .quote cite { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.75rem; color: #3d7055; }
+
+  footer { text-align: center; padding: 2rem; border-top: 1px solid #132018; color: #2d5a3f; font-size: 0.75rem; font-family: 'DM Mono', monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">⚙ GSD Research Mission Package</div>
+  <h1>skill-creator<span class="cross">×</span>GSD-2</h1>
+  <p class="sub">Full integration of all six skill-creator functions into the GSD-2 autonomous coding lifecycle</p>
+  <div class="repos">
+    <span class="repo-tag">github.com/Tibsfox/gsd-skill-creator</span>
+    <span class="repo-tag">github.com/gsd-build/GSD-2</span>
+  </div>
+  <div class="pipeline">
+    <span>Vision</span><span class="arr">→</span>
+    <span>Research</span><span class="arr">→</span>
+    <span>Mission</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <div class="meta-item"><span class="meta-label">Date</span><span class="meta-value">March 11, 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Profile</span><span class="meta-value">Fleet · 16 roles</span></div>
+    <div class="meta-item"><span class="meta-label">Pages</span><span class="meta-value">28 pages</span></div>
+    <div class="meta-item"><span class="meta-label">Est. Tokens</span><span class="meta-value">~1.05M total</span></div>
+    <div class="meta-item"><span class="meta-label">HITL Gates</span><span class="meta-value">3</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">Ready for Claude Code</span></div>
+  </div>
+
+  <p class="section-title">Downloads</p>
+  <div class="files-grid">
+    <a class="file-card" href="sc-gsd2-integration.pdf" download>
+      <div class="file-icon">📄</div>
+      <h3>Mission Package PDF</h3>
+      <p class="desc">Complete 28-page integration mission. All three stages: Vision (Amiga bus metaphor), Research Reference (6 modules, full data contracts), and Mission Package (Fleet profile, 14 deliverables, 45 tests).</p>
+      <span class="fname">sc-gsd2-integration.pdf</span>
+      <span class="dl-btn">↓ Download PDF</span>
+    </a>
+    <a class="file-card" href="sc-gsd2-integration.tex" download>
+      <div class="file-icon">📝</div>
+      <h3>LaTeX Source</h3>
+      <p class="desc">XeLaTeX source. Modify class specifications, add implementation notes, adjust wave timing, or extend with additional integration modules. Recompile with three passes.</p>
+      <span class="fname">sc-gsd2-integration.tex</span>
+      <span class="dl-btn">↓ Download .tex</span>
+    </a>
+  </div>
+
+  <p class="section-title">Six Functions — Six Integration Points</p>
+  <div class="six-functions">
+    <div class="fn-card"><div class="fn-number">Function 1</div><div class="fn-name">Observe</div><div class="fn-bridge">Pi SDK event bridge → sessions.jsonl. Module 1 (RAVEN).</div></div>
+    <div class="fn-card"><div class="fn-number">Function 2</div><div class="fn-name">Detect</div><div class="fn-bridge">GSDArtifactReader mines T0N-SUMMARY.md for pattern candidates. Module 3 (OSPREY).</div></div>
+    <div class="fn-card"><div class="fn-number">Function 3</div><div class="fn-name">Suggest</div><div class="fn-bridge">Pattern analyzer + suggestion engine — unchanged, fed by GSD-2 observations.</div></div>
+    <div class="fn-card"><div class="fn-number">Function 4</div><div class="fn-name">Manage</div><div class="fn-bridge">SKILL.md dialect + .agents/skills/ deposit path. Module 2 (SALMON).</div></div>
+    <div class="fn-card"><div class="fn-number">Function 5</div><div class="fn-name">Auto-Load</div><div class="fn-bridge">Phase-aware relevance scorer + preferences.md auto-writer. Module 4 (TAHOMA).</div></div>
+    <div class="fn-card"><div class="fn-number">Function 6</div><div class="fn-name">Learn/Compose</div><div class="fn-bridge">GSDFeedbackTap + AgentCompositionWirer → GSD-2 subagent format. Modules 5–6 (CEDAR, HEMLOCK).</div></div>
+  </div>
+
+  <p class="section-title">Document Contents</p>
+  <ul class="contents-list">
+    <li>
+      <span class="stage-badge s1">Stage 1</span>
+      <p><strong>Vision Guide</strong> — The Amiga bus metaphor (Paula chip as skill-creator, Agnus as GSD-2). Six-problem problem statement covering the Pi SDK hook gap, discovery path misalignment, unread artifact goldmine, broken feedback vocabulary, undeployed composite agents, and missing phase context. Integration architecture ASCII maps. Six-module decomposition. CEDAR chipset config. 12 testable success criteria. Through-line: "Not before the AI is asked. Before the AI needs to ask."</p>
+    </li>
+    <li>
+      <span class="stage-badge s2">Stage 2</span>
+      <p><strong>Research Reference</strong> — Module 1: Pi SDK event bridge (hook schema translation, SessionObservation field mapping, 10th extension architecture). Module 2: Skill discovery path (directory alignment, SKILL.md dialect with metadata.gsd2 namespace, preferences.md managed section spec). Module 3: GSDArtifactReader class specification (all 6 .gsd/ artifact types, T0N-SUMMARY field mapping). Module 4: PhaseContext type + phase-to-category mapping + relevance scorer extension formula. Module 5: GSDFeedbackTap + decision reversal detection regex + bounded refinement rules. Module 6: Agent format translation + GSDPreferencesWriter class + co-activation threshold logic. Complete data flow diagram session 1→5.</p>
+    </li>
+    <li>
+      <span class="stage-badge s3">Stage 3</span>
+      <p><strong>Mission Package</strong> — Fleet profile (16 roles). 3 parallel Wave 1 tracks (A: Opus session+discovery, B: Sonnet artifacts+phase, C: Opus feedback+agents). 14 deliverables. ~1.05M estimated tokens. 45 tests across 5 categories including 5 safety-critical (secrets, overwrites, bounded refinement, license separation, backward compat). Full verification matrix. 16-role crew manifest. 3 HITL gates.</p>
+    </li>
+  </ul>
+
+  <p class="section-title">How to Execute with Claude Code</p>
+  <ol class="steps">
+    <li><p>Open Claude Code in the <code>gsd-skill-creator</code> project directory</p></li>
+    <li><p>Pass this PDF: <em>"Read sc-gsd2-integration.pdf and execute Stage 3 as the mission plan"</em></p></li>
+    <li><p>Approve Wave 0 output (shared types + interface contracts) at first HITL gate</p></li>
+    <li><p>Wave 1 runs three parallel tracks — approve all three when complete at second gate</p></li>
+    <li><p>Wave 2 synthesis (ORCA + GEODUCK) produces the end-to-end test plan and install guide</p></li>
+    <li><p>Wave 3 assembles and delivers the final 14-deliverable integration specification</p></li>
+    <li><p>Install bridge extension, run <code>skill-creator verify-integration</code>, confirm all 45 tests pass</p></li>
+  </ol>
+
+  <div class="compile-box">
+    <p>To recompile after modifications (requires XeLaTeX + DejaVu fonts on Ubuntu):</p>
+    <pre>xelatex -interaction=nonstopmode sc-gsd2-integration.tex
+xelatex -interaction=nonstopmode sc-gsd2-integration.tex
+xelatex -interaction=nonstopmode sc-gsd2-integration.tex</pre>
+  </div>
+
+  <div class="quote">
+    "GSD prevents the AI from degrading <em>during</em> work. Skill Creator prevents the AI from forgetting <em>between</em> work. The result is an AI development environment that maintains quality over long projects and gets meaningfully better the more you use it."
+    <cite>— gsd-skill-creator README · This integration makes both statements simultaneously true for GSD-2</cite>
+  </div>
+
+</main>
+
+<footer>skill-creator × GSD-2 Integration Mission · March 2026 · Fleet Profile · MIT × BSL 1.1 Bridge Architecture</footer>
+
+</body>
+</html>

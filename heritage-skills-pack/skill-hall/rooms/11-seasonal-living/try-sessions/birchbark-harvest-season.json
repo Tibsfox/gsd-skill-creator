@@ -1,0 +1,55 @@
+{
+  "id": "seasonal-11-birchbark-harvest-beginner",
+  "title": "Birchbark Harvest Season: Timing and Ecological Knowledge",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the ecological knowledge required for successful birchbark harvesting -- a skill that depends on reading the brief seasonal window when birch trees can be harvested without damage to the tree. Learn the indicators that signal harvest readiness and the relationship between harvest timing and material quality.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 2,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The birchbark harvest window: birchbark can be peeled cleanly from a live tree only during a narrow seasonal window -- typically 3-4 weeks in late spring when sap is running actively and the cambium layer (the living cell layer between bark and wood) is hydrated and active. Outside this window, the bark is bonded tightly to the tree and cannot be removed cleanly without damaging both bark and tree. Name the indicators that signal the harvest window has opened.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "The knowledge of when to harvest birchbark -- and how to harvest it without killing the tree -- is an example of ecological knowledge central to Anishinaabe and Cree traditions. A birch tree correctly harvested (removing only the outer bark, not cutting through the cambium) will regrow its bark over 7-10 years and can be harvested again. A tree incorrectly harvested dies. The birch tree in Anishinaabe territories is understood as a relative, not a raw material -- harvesting responsibly maintains the relationship.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Timing indicators: (1) Leaf emergence: the harvest window typically opens when birch leaves are roughly the size of a mouse's ear to a squirrel's ear -- early leaf emergence indicates sap is running. (2) Sap flow: tap a small hole in the bark -- if sap flows freely, the cambium is active and bark will peel. (3) Temperature: the window requires warm days (50 degrees F and above) and cool nights, typically late May to mid-June in the Great Lakes region, somewhat later in more northern territories. Write down the three timing indicators.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "The same leaf-size indicator used in Appalachian tradition for corn planting ('plant corn when oak leaves are the size of a squirrel's ear') has an analog in Anishinaabe birchbark harvest timing ('harvest birch when leaves are the size of a squirrel's ear'). Whether this convergence reflects independent observation, historical exchange, or coincidence is an interesting question -- both traditions are reading the same ecological signals in the same landscape.",
+      "sumoMapping": "Predicting"
+    },
+    {
+      "order": 3,
+      "instruction": "Tree selection: not all birch trees are suitable for harvest. Select trees with: (1) large diameter (8 inches minimum -- smaller trees have thin bark that tears easily); (2) no large knots or branches on the harvest section; (3) straight grain (spiral grain causes bark to tear in harvest); (4) healthy condition (stress-damaged trees have compromised bark). Sketch or describe what a suitable harvest tree looks like and what signs would disqualify a tree.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "Tree selection is an ecological knowledge skill that requires reading the forest. The Anishinaabe and Cree knowledge systems include detailed guidance on which trees are suitable for which uses -- and this knowledge is specific enough that a skilled practitioner can walk through a forest and identify suitable trees by assessment alone. This is not guessing -- it is applied ecological science.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 4,
+      "instruction": "The harvest technique: using a sharp knife, make two vertical cuts through the outer bark (not through the cambium) the length of the section you want to remove. Make two horizontal cuts to connect the vertical cuts. Slide a smooth, blunt tool (a wooden spreader or the flat of the knife) under the bark at one edge of the cut and work gently around the perimeter, separating the outer bark from the cambium. If the bark resists, the window may be closing -- do not force it.",
+      "safetyNote": "Tool safety annotation: birchbark harvest requires a sharp knife. All standard knife safety applies: cut away from the body, keep the supporting hand clear of the cutting line. When using a wooden spreader to lift bark, do not use metal tools that could cut through the cambium -- damaging the cambium injures the tree.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Rolling and storing: freshly harvested birchbark should be rolled with the white outer surface inside (to prevent cracking as it dries) and tied. Store flat or rolled in a dry, cool location. Fresh bark is pliable and easy to work. As it dries, it becomes stiffer -- it can be re-wetted (soaking in water) to restore pliability for working. For canoe-building quality bark, store flat under weights to prevent warping.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "The preparation and storage of birchbark after harvest is as important as the harvest itself. Birchbark canoe builders (Anishinaabe, Cree, and many other nations with birch in their territories) needed to store bark properly to prevent the cracking and warping that would make it unsuitable for canoe panels. The knowledge of how to roll, store, and re-wet bark is part of the complete skill set transmitted with the harvesting knowledge.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "The sugar bush and birch: both the sugar maple sap harvest (Anishinaabe tradition) and the birchbark harvest are brief seasonal windows in late winter/early spring. The sugar bush opens slightly earlier (late February to April) than the birchbark window (May). Both require reading the same seasonal indicators: warm days, cold nights, sap running. The Anishinaabe seasonal calendar is organized around these windows -- the sugar bush and birchbark harvest define the transition from late winter to spring.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "The clustering of multiple important seasonal harvests into a brief spring window reflects the ecology of the boreal Great Lakes region. The community must be ready, equipped, and organized to take advantage of these windows when they open. The Anishinaabe seasonal calendar (organized around ecological events) is more functionally precise than a calendar-date-based system for these activities -- you cannot schedule a birchbark harvest for May 15 and trust it will be ready; you must be watching the trees.",
+      "sumoMapping": "Agriculture"
+    }
+  ]
+}

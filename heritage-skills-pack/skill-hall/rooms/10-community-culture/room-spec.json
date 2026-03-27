@@ -1,0 +1,72 @@
+{
+  "id": "room-10-community-culture",
+  "room": 10,
+  "domain": "community-culture",
+  "title": "Community & Culture",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["SocialGroup", "CulturalPractice", "Ceremony", "Agent", "CognitiveAgent"],
+  "sumoFile": ["People.kif", "Government.kif", "heritage-domain-ontology.kif"],
+  "safetyDomains": [],
+  "trySessions": [
+    "community-10-foxfire-ethics-beginner",
+    "community-10-iq-principles-beginner",
+    "community-10-appalachian-mapping-beginner"
+  ],
+  "description": "Room 10 covers community governance and cultural practices across Appalachian, First Nations, and Inuit traditions — the accumulated wisdom of how humans organize collective life, make decisions together, and maintain community cohesion across generations.\n\nAppalachian community life was structured around a series of overlapping mutual-aid institutions. Barn raising was the most visible: when a family needed a new barn, the community gathered — sometimes 50 to 100 people — to raise the walls and roof in a single day. This was not charity; it was reciprocal labor exchange. Every family that worked on your barn created an obligation for your labor on theirs. The network of reciprocal obligation was community infrastructure. Cabin raisings, harvest days, and quilting bees operated on the same logic. Church governance was the closest thing to community government in isolated Appalachian communities: the church meeting was where decisions about roads, schools, and community disputes were made; the church calendar organized the community year into planting time, laying-by time, revival season, and harvest. The Appalachian ethic of neighborliness — you owed help to your neighbors because you would need help yourself — was not sentiment but survival philosophy. The Foxfire documentation project, begun in 1966 in Rabun Gap, Georgia, formalized the community-as-knowledge-holder approach: high school students interviewed elders, documented heritage skills, and created a record of Appalachian community life that libraries and universities still rely on. Foxfire's methodology established that community members — not academic experts — are the authoritative holders of their own traditional knowledge. The heritage attribution for Appalachian mutual aid is Scots-Irish, German, and English settler communities of the central and southern Appalachians from the 1700s onward.\n\nFirst Nations governance traditions in this room focus on two foundational systems. The Haudenosaunee Great Law of Peace (Gayanashagowa) is the governance document of the Haudenosaunee Confederacy — the alliance of Onondaga, Seneca, Mohawk, Cayuga, Oneida, and Tuscarora nations. The Great Law established: the Council of the Haudenosaunee as the governing body; Clan Mothers as the holders of chiefly authority (they select and can remove chiefs); consensus decision-making as the required process (no proposal moves without consensus across the Confederacy nations); and the Tree of Peace as the organizing metaphor — the Great White Pine whose roots extend to all nations willing to take shelter. The Haudenosaunee Confederacy is a functioning government, not a historical artifact. The Anishinaabe clan (dodem or dodaim) system organized community governance through kinship groups defined by animal totems. Each clan carried specific governance roles: Crane and Loon clans were speakers and diplomats; Bear clan were police and community protectors; Fish clan (Sturgeon, Pike, Catfish) were scholars and teachers; Bird clans provided spiritual guidance; Marten clan were warriors; Deer and Caribou clans provided service functions. No person could hold a position outside their clan's governance role, and no one could marry within their own clan — the system structured both governance and kinship simultaneously. Cree and Dene communities of the boreal forest maintained decision-making traditions grounded in elder authority and community deliberation. Treaty relationships between nations — the web of agreements governing land, resources, and inter-nation relations — were governance documents in their own right, negotiated through protocols that included gift exchange, ceremony, and formal deliberation. Nation attribution throughout: Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora) and Anishinaabe (Ojibwe, Chippewa, Odawa, Potawatomi).\n\nInuit community governance is organized around Inuit Qaujimajatuqangit (IQ) — the living body of Inuit knowledge, values, and ways of knowing. IQ is not historical; it is the active framework through which Inuit communities understand the world and make decisions. Aajiiqatigiinniq (deciding together) is the Inuit principle of consensus decision-making: decisions are reached when the community has spoken and no unresolved objections remain; silence indicates consent; no one is voted down; the process continues until genuine consensus is achieved. In Inuit hunting communities, where survival depended on coordinated collective action, a decision that left members uncommitted could be fatal — Aajiiqatigiinniq ensured that decisions carried universal commitment. Pijitsirniq (serving others and the community) is the ethic that underlies Inuit sharing practices: a skilled hunter distributes harvest to the community; a master seamstress teaches the next generation; a knowledge holder shares what they know. Pijitsirniq positions community service not as optional generosity but as the fundamental obligation of community membership. Qanuqtuurunnarniq (being resourceful, solving problems) and Tunnganarniq (fostering good spirit by being open and welcoming) round out the IQ principles most directly relevant to community governance. The Government of Nunavut has formally incorporated IQ principles into territorial governance — IQ is not a museum piece but a living governance framework in contemporary use. Nation attribution: Inuit.",
+  "modules": [
+    {
+      "id": "community-10-appalachian-mutual-aid",
+      "title": "Appalachian Mutual Aid: Barn Raising, Work Bees, and Neighborliness",
+      "tradition": "appalachian",
+      "description": "Appalachian community labor exchange traditions: barn raising as the visible expression of the mutual-aid network (50-100 neighbors gathering in a single day; walls and roof raised while the host family provided food; reciprocal obligation created and honored across years); cabin raising, harvest days (corn shucking, bean stringing, tobacco stripping), and quilting bees as parallel labor-exchange events. Neighborliness ethics as survival philosophy: the obligation to help was not optional, and community reputation tracked whether families contributed or withdrew from the network. Foxfire documentation methodology as community knowledge practice: students as documenters, elders as experts, community as owner of community knowledge. Heritage attribution: Scots-Irish, German, and English settler communities of the central and southern Appalachians.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialGroup", "CulturalPractice", "HeritageSkill"]
+    },
+    {
+      "id": "community-10-appalachian-church-governance",
+      "title": "Appalachian Church Governance: Community Decision-Making",
+      "tradition": "appalachian",
+      "description": "The church meeting as the primary governance institution in isolated Appalachian communities: decisions about roads, schools, community disputes, and collective work were made at church meetings because the church building was the only shared public space and the congregation was the assembled community. Church calendar as community time system: planting time, laying-by time, revival season, and harvest season structured the annual rhythm. Deacon and elder roles in church governance: these were not just religious positions but community leadership roles with practical governance functions. Dispute resolution traditions: community disputes brought to the congregation for mediation and judgment. The relationship between religious and civic life in communities without formal government infrastructure.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Government", "SocialGroup", "CulturalPractice"]
+    },
+    {
+      "id": "community-10-fn-haudenosaunee-confederacy",
+      "title": "Haudenosaunee Great Law of Peace: Confederacy Governance",
+      "tradition": "first-nations",
+      "description": "The Great Law of Peace (Gayanashagowa) as the foundational governance document of the Haudenosaunee Confederacy: establishment of the Council of the Haudenosaunee; roles of Clan Mothers in selecting and removing chiefs; consensus decision-making as the required process; the Tree of Peace metaphor (the Great White Pine, roots extending to all nations willing to take shelter). Structure of the Confederacy: the Onondaga as Keepers of the Fire at the center; the Mohawk as Keepers of the Eastern Door; the Seneca as Keepers of the Western Door; the Cayuga and Oneida as younger brothers; the Tuscarora added in the early 18th century. The Haudenosaunee Confederacy as a functioning government whose governance principles influenced later democratic theory. The Great Law's approach to conflict resolution, the condolence process for grieving fallen leaders, and the requirement that decisions serve the next seven generations. Note: The specific ceremonial protocols of Confederacy Council proceedings and the recitation of the Condolence Ceremony are Level 3-4 and are not covered here. Nation attribution: Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora).",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["Government", "SocialGroup", "NormativeAttribute"]
+    },
+    {
+      "id": "community-10-fn-anishinaabe-clan",
+      "title": "Anishinaabe Dodem (Clan) System: Governance Through Kinship",
+      "tradition": "first-nations",
+      "description": "The Anishinaabe clan (dodem or dodaim) system as a governance architecture: clans organized around animal totems carry specific governance roles within Anishinaabe communities. The seven original clans and their governance functions: Crane and Loon clans (Baswenaazhi and Maajaakamigokwe) as speakers and diplomats; Bear clan (Makwa) as police, community protectors, and enforcers of community norms; Fish clans (Sturgeon, Pike, Catfish) as scholars, teachers, and intellectuals; Bird clans (Eagle, Hawk, Crane) providing spiritual guidance; Marten clan as warriors and hunters; Deer and Caribou clans in service roles. Clan exogamy: no person could marry within their own clan, making the clan system both a governance structure and a kinship regulation system that ensured social mixing across family groups. The transmission of clan membership matrilineally in many Anishinaabe communities. Note: Clan-specific protocols, clan ceremonies, and clan-specific restricted knowledge are Level 3-4 and are not covered here. Nation attribution: Anishinaabe (Ojibwe, Chippewa, Odawa, Potawatomi).",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["SocialGroup", "SocialRole", "HeritageSkill"]
+    },
+    {
+      "id": "community-10-inuit-consensus",
+      "title": "Aajiiqatigiinniq: Inuit Consensus Decision-Making",
+      "tradition": "inuit",
+      "description": "Aajiiqatigiinniq (deciding together) as the Inuit principle of consensus decision-making: community members deliberate until a genuine consensus is reached; no one is voted down; silence signals consent; elder perspectives carry weight as a community resource, not as a rank above other members. The practical conditions that shaped Aajiiqatigiinniq: in Inuit hunting communities, survival depended on coordinated collective action — a decision that left members uncommitted or resentful could endanger the entire group. Consensus ensured commitment. Pijitsirniq (serving others and the community) as the ethical foundation underlying consensus practice: the motivation to participate in community deliberation is service to the community, not personal advantage. Aajiiqatigiinniq in contemporary Inuit governance: the Nunavut government and Inuit organizations have incorporated Aajiiqatigiinniq as a structural principle in consultation and decision-making processes. Nation attribution: Inuit.",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["CommunicationAct", "NormativeAttribute", "CulturalPractice"]
+    },
+    {
+      "id": "community-10-inuit-iq-community",
+      "title": "IQ Principles in Community Life: Living Governance",
+      "tradition": "inuit",
+      "description": "Inuit Qaujimajatuqangit (IQ) principles as a living governance framework: Aajiiqatigiinniq (deciding together through consensus); Pijitsirniq (serving others and the community — the ethic that positions community service as a fundamental obligation, not optional generosity); Qanuqtuurunnarniq (being resourceful, solving problems collectively when circumstances change); Tunnganarniq (fostering good spirit by being open, welcoming, and inclusive — the hospitality ethic as community infrastructure). IQ as formally recognized governance: the Government of Nunavut has incorporated IQ principles into territorial policy and governance structures, including land-use planning, the Nunavut Land Claims Agreement consultation processes, and the Nunavut Planning Commission. IQ is not a historical artifact — it is a living governance philosophy adapted to contemporary Inuit political life. The relationship between IQ principles and Aajiiqatigiinniq practice: each IQ principle both describes a value and shapes how the consensus process is conducted. Nation attribution: Inuit.",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["CulturalPractice", "NormativeAttribute", "HeritageSkill"]
+    }
+  ]
+}

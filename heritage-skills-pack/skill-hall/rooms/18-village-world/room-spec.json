@@ -1,0 +1,72 @@
+{
+  "id": "room-18-village-world",
+  "room": 18,
+  "domain": "village-world",
+  "title": "The Village World",
+  "traditions": ["first-nations"],
+  "sumoClasses": ["SocialInteraction", "CommunicativeAct", "IntentionalProcess", "Group", "HeritageSkill", "CulturalPractice"],
+  "sumoFile": ["MILO", "Merge.kif", "heritage-domain-ontology.kif"],
+  "safetyDomains": [],
+  "trySessions": [
+    "village-18-neighbor-map-beginner",
+    "village-18-potlatch-technology-beginner",
+    "village-18-making-right-beginner"
+  ],
+  "description": "The Village World of the Salish Sea was not a collection of isolated communities — it was a network of interconnected peoples linked by marriage, trade, ceremony, and water. Before colonization, the communities of the Salish Sea maintained an extensive web of relationships that structured both cooperation and conflict. The Neighbor Map is the organizing metaphor: every village existed within a web of relationships to other villages, and no community could act without considering those relationships. The Coast Salish nations — Musqueam (xʷməθkʷəy̓əm), Stó:lō, Squamish (Sḵwx̱wú7mesh), Lummi (Lhaq'temish), and Saanich/WSÁNEĆ — occupied the core of this network, connected by shared reef net fishing grounds, trade routes, and marriage ties that crossed what are now national borders. The Kwakwaka'wakw nations to the north, the Nuu-chah-nulth on the west coast of Vancouver Island, and the Heiltsuk further north all maintained active trade, ceremonial, and diplomatic relationships with Salish Sea communities. Understanding this village world requires understanding that conflict and cooperation both happened within a pre-existing web of relationships — you are never simply enemies or strangers when you have cousins across the boundary.\n\nThe potlatch is the social technology that made this village world function: a gift economy system with specific mechanics for wealth redistribution, social accounting, status recognition, and conflict resolution. The potlatch is a technology, not merely a ceremony — it accomplished specific social functions through the mechanism of strategic generosity. Gift economy mechanics: when you receive a gift at a potlatch, you incur a public social debt; receiving creates obligation to give back at larger scale when you host; status is built by giving more than you received, not by accumulating. The criminalization of this social technology is integral context, not background: the 1871 Indian Act and its 1884 amendment made the potlatch illegal in Canada, with active enforcement from 1884 to 1951. In 1922, the Canadian government moved against the largest potlatch in living memory — hosted by Kwakwaka'wakw leader Dan Cranmer at Village Island, with guests from Alert Bay and Cape Mudge. Forty-five people were arrested; twenty-six received suspended sentences in exchange for surrendering their regalia — masks, blankets, coppers, feast dishes, boxes — to government agents. The confiscated items were distributed to museums in Ottawa and elsewhere. The stated purpose of the ban was cultural assimilation; its actual effect was the suppression of the economic self-sufficiency that the gift economy provided. When the technology for wealth redistribution and public conflict resolution was illegal, communities lost the mechanism for maintaining the village world's social fabric. The ban was finally removed with the 1951 revision of the Indian Act. The potlatch was never fully suppressed and has continued and revived since 1951 — the confiscated regalia has been partially repatriated to the Kwagiulth Museum in Cape Mudge and the U'mista Cultural Centre in Alert Bay.\n\nThe emotional intelligence curriculum of the Village World teaches the social intelligence of the Salish Sea through three interlocking frameworks. The brothers metaphor: inter-village conflict in the Salish Sea was almost always conflict between communities that were simultaneously allies, trade partners, and relatives-by-marriage — brothers who fight. This metaphor is grounded in historical evidence: documented compensation protocols paid for injuries rather than escalating them; the distinction between raiding (for prestige, operating within understood rules) and warfare (aimed at destroying a community) is well-documented; and the role of kinship ties in limiting violence is a structural feature of the network. The brothers metaphor does not romanticize conflict — it names the structural reality that conflict between neighboring communities happens within ongoing relationships, not outside them. Emotional Weather for younger learners uses natural metaphors from the Salish Sea environment — anger as storm on the Sound, competition as tide, generosity as salmon run, grief as fog — to make emotional regulation concepts accessible without claiming to reproduce specific ceremonial teachings. These metaphors illuminate observable natural patterns from the Coast Salish ecological context. Making Things Right focuses on restoration over punishment: the question is not who was right and who should be punished, but what happened, what was broken, and what will restore the relationship. Documented Salish Sea protocols include public acknowledgment, compensation scaled to the severity of harm, the role of witnesses who validate and remember the repair, and the forward direction that closes the grievance permanently.",
+  "modules": [
+    {
+      "id": "village-18-neighbor-map",
+      "title": "The Neighbor Map",
+      "tradition": "first-nations",
+      "description": "An interactive network of interconnected villages in the Salish Sea region. The map shows connection types: marriage ties (families intermarried across nations), trade routes (who traded what with whom — salmon, eulachon oil, copper, obsidian, cedar), ceremonial connections (shared or related ceremony traditions), and water connections (who shared fishing grounds, who had rights in whose territory). Specific nation-to-nation relationships named: Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) shared reef net fishing grounds in the San Juan Islands across what is now an international border; Stó:lō and Interior Plateau communities traded river salmon for deer meat and obsidian; Kwakwaka'wakw and Heiltsuk maintained ceremonial exchange relationships. The map reveals that conflict and cooperation both happen within a web of pre-existing relationships — you are never simply enemies or strangers when you have cousins, trading partners, and ceremony connections across the boundary. Nation attribution: Coast Salish (Musqueam, Stó:lō, Squamish, Lummi/Lhaq'temish, Saanich/WSÁNEĆ), Kwakwaka'wakw, Nuu-chah-nulth, Heiltsuk.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Group", "SocialInteraction", "CulturalPractice"]
+    },
+    {
+      "id": "village-18-potlatch-technology",
+      "title": "Potlatch as Technology",
+      "tradition": "first-nations",
+      "description": "THIS IS THE MOST SENSITIVE MODULE IN THE ROOM. The potlatch is presented as social technology — a gift economy system with specific mechanics. Level 1 content (included here): gift economy mechanics: reciprocal obligation — receiving a gift creates obligation to give back at larger scale; strategic generosity as status display — the most generous host gains the most prestige through giving, not accumulating; wealth redistribution — surpluses are given away rather than hoarded, distributing resources across the community network; public accounting — the potlatch is a public record of relationships and obligations (what was given, what is owed); conflict resolution — compensation given at a potlatch resolves disputes publicly and permanently. Criminalization history 1884-1951: the 1884 ban, the 1922 arrests at Alert Bay and Cape Mudge (45 arrested, 26 given suspended sentences in exchange for regalia surrender — masks, blankets, coppers, feast dishes), the explicit government purpose (to eliminate the economic self-sufficiency based on this social technology), the 1951 repeal. Nation attribution: Kwakwaka'wakw (the 1922 arrests were primarily Kwakwaka'wakw from Alert Bay/Cape Mudge), Coast Salish, Heiltsuk, Nuu-chah-nulth, Haida — all had potlatch traditions. Level 3-4 content (NOT reproduced in this room): specific ceremony protocols, particular songs performed for specific occasions, specific regalia and their lineage significance, specific ranking procedures, specific feast protocols. The gift economy principle is Level 1. The ceremony form is Level 3-4.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialInteraction", "CulturalPractice", "HeritageSkill"]
+    },
+    {
+      "id": "village-18-brothers-fight",
+      "title": "When Brothers Fight",
+      "tradition": "first-nations",
+      "description": "The central metaphor: inter-village conflict in the Salish Sea was often conflict between communities that were simultaneously allies, trade partners, and relatives-by-marriage — brothers who fight. The metaphor is grounded in documented historical patterns: (a) raiding vs. warfare distinction — raiding for prestige or goods operated within understood rules (certain times, certain targets) and was different from warfare aimed at destroying a community; (b) compensation protocols — documented cases where goods paid to the aggrieved party resolved an injury without escalating to war; (c) the role of kinship in limiting violence — when one of your relatives lives in the opposing community, total destruction of that community is also destruction of your own family relationships; (d) how the potlatch functioned as a venue for public acknowledgment and resolution of inter-community grievances. Attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw, Nuu-chah-nulth. Framing note: the brothers metaphor does NOT romanticize conflict or claim there was no genuine violence — it names the structural reality that conflict between neighboring communities happens within ongoing relationships, not outside them.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialInteraction", "IntentionalProcess", "CulturalPractice"]
+    },
+    {
+      "id": "village-18-reef-net-model",
+      "title": "The Reef Net Model",
+      "tradition": "first-nations",
+      "description": "The reef net fishing station (attributed to Lummi/Lhaq'temish and Saanich/WSÁNEĆ — cross-reference Room 16: Salmon World) as a model for cooperation protocols. A reef net station requires multi-family coordination even among families who may not always agree. The governance protocols for reef net stations — who has access rights, how harvests are divided, what happens when one family's canoe is unavailable — provide a concrete case study in how the Salish Sea nations managed cooperation at the working level. The reef net station required: designated lookout positions in two elevated canoes connected by the net; synchronized timing based on the lookout's signal; agreed-upon harvest division protocols established before the season; and protocols for when conditions changed. The Reef Net Model as a general principle: structured cooperation protocols enable people to work together productively even when their relationship is complicated. Attribution: Lummi (Lhaq'temish), WSÁNEĆ (Saanich) specifically.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialInteraction", "IntentionalProcess", "HeritageSkill"]
+    },
+    {
+      "id": "village-18-emotional-weather",
+      "title": "Emotional Weather",
+      "tradition": "first-nations",
+      "description": "Module designed for younger learners. Uses natural metaphors from the Salish Sea environment to make emotional regulation concepts accessible without patronizing. Mapping: anger = storm on the Sound (real, powerful, passes, leaves a changed landscape — not evil, not to be suppressed, to be anticipated and prepared for); competition = tide (comes and goes on its own schedule, neither good nor bad, powerful within limits — you can work with the tide's schedule); generosity = salmon run (abundance that benefits everyone when shared, depleted when monopolized — generosity creates abundance, hoarding reduces it for all); grief = fog (real, makes navigation hard, eventually lifts, the landscape is still there underneath). Pedagogical note: these metaphors are respectful use of natural world patterns — they are NOT ceremony or sacred knowledge. They use observable natural phenomena to illuminate human emotional patterns in a way consistent with the ecological knowledge embedded in Salish Sea cultures. Nation attribution: Coast Salish (the Salish Sea's specific weather and ecology is the source environment). Do not claim this is a specific ceremonial teaching — it is an ecological metaphor framework.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialInteraction", "CommunicativeAct"]
+    },
+    {
+      "id": "village-18-making-right",
+      "title": "Making Things Right",
+      "tradition": "first-nations",
+      "description": "Repair protocols after harm — focused on restoration, not punishment. The question is not who was right and who should be punished, but what happened, what was broken, and what will restore the relationship. Documented Salish Sea protocols: (a) public acknowledgment — stating what happened in front of the community (not private shame, but public acknowledgment within the relationship network); (b) compensation — goods given to the injured party scale with the severity of the harm; compensation is not fine-as-punishment but repair-as-relationship-restoration; (c) the role of witnesses — third parties who validate the repair and remember it publicly; (d) forward direction — the repair protocol closes the grievance; once it is done, it is done (not continued resentment). Attribution: Coast Salish (Stó:lō, Lummi), Kwakwaka'wakw. Connection to the Emotional Weather module: repair requires acknowledging the weather (what happened emotionally) before the practical work of restoration can begin.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["SocialInteraction", "IntentionalProcess", "CommunicativeAct", "HeritageSkill"]
+    }
+  ]
+}

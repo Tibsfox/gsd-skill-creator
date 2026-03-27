@@ -1,0 +1,166 @@
+{
+  "id": "watershed-investigation-tool",
+  "culturalSovereigntyLevel": 1,
+  "version": "1.0.0",
+  "introduction": "The watershed investigation approach organizes Salish Sea heritage through the two primary ecological relationships: Saltwater Peoples (coastal, marine-economy nations) and River-Mountain Peoples (Cascade-slope and interior river nations). This framework helps you focus your research without requiring enrollment documentation to begin. It is a starting point for investigation, not a conclusion.",
+  "watershedTypes": {
+    "saltwater": {
+      "description": "Saltwater Peoples are nations whose economies, technologies, and cultural identities developed in relationship to the ocean, protected inland waters, and coastal resources. Their heritage practices center on marine mammal hunting, reef net and open-water salmon fishing, ocean-going canoe construction and navigation, coastal trade routes, and maritime food preservation.",
+      "characteristicPractices": [
+        "Reef net fishing (salmon capture)",
+        "Marine mammal hunting (seal, sea lion, whale — nation-specific)",
+        "Ocean-going canoe construction and navigation",
+        "Coastal trade route networks",
+        "Eulachon oil production and grease trail trade",
+        "Kelp harvesting and intertidal food gathering",
+        "Salted and wind-dried salmon preparation"
+      ],
+      "representativeNations": [
+        "Lummi/Lhaq'temish (Puget Sound, WA)",
+        "WSÁNEĆ/Saanich (southern Vancouver Island)",
+        "Musqueam/xʷməθkʷəy̓əm (Fraser River mouth, BC)",
+        "Squamish/Sḵwx̱wú7mesh (Howe Sound, BC)",
+        "Tulalip (Snohomish River mouth, WA)",
+        "Nuu-chah-nulth (west coast Vancouver Island)",
+        "Makah (Cape Flattery, WA)"
+      ],
+      "geographicIndicators": [
+        "Coastal counties in British Columbia and Washington state",
+        "Vancouver Island communities",
+        "Puget Sound watershed origin",
+        "Gulf Islands or San Juan Islands connection",
+        "Fraser River delta region"
+      ],
+      "note": "Nations may span both watershed categories through trade relationships or family ties. This is an organizational framework, not a rigid boundary."
+    },
+    "riverMountain": {
+      "description": "River-Mountain Peoples are nations whose economies, technologies, and cultural identities developed in relationship to inland river systems, Cascade plateau ecology, and mountain resource zones. Their heritage practices center on river salmon fishing, deer and elk hunting, plateau root foods, interior trade networks, and canyon-country technologies.",
+      "characteristicPractices": [
+        "River salmon fishing (dip netting, weir fishing, platform fishing)",
+        "Plateau root harvesting (camas, bitterroot, wapato, kous)",
+        "Deer and elk hunting on plateau and Cascade slopes",
+        "Interior trade route networks",
+        "Coiled basketry and root bag weaving",
+        "Salmon drying and pemmican preparation",
+        "Horse culture and plateau travel"
+      ],
+      "representativeNations": [
+        "Stó:lō (upper Fraser River, BC)",
+        "Nlaka'pamux/Thompson (Thompson River, BC)",
+        "Okanagan/Syilx (Okanagan watershed, BC/WA)",
+        "Nez Perce (Snake/Clearwater River, ID/WA/OR)",
+        "Yakama (Yakima River, WA)",
+        "Chinook (lower Columbia River, OR/WA)",
+        "Umatilla (Columbia River plateau, OR)"
+      ],
+      "geographicIndicators": [
+        "Interior BC county or district origin",
+        "Eastern Washington or Oregon plateau origin",
+        "Interior river valley family stories",
+        "Cascade Mountain crossing narratives",
+        "Columbia River watershed connection"
+      ],
+      "note": "Many river-mountain nations had established relationships with coastal nations through trade, creating families with connections to both watersheds."
+    },
+    "unknown": "The unknown category is not a failure state. Many people investigating their ancestry cannot yet determine their watershed affiliation. Use 'unknown' during active investigation. The investigation steps below will help you narrow toward saltwater, river-mountain, or both.",
+    "both": "Many families have connections to both watershed types through marriage ties, trade relationships, or family movement across the Cascades. Finding evidence of both saltwater and river-mountain connections is common, not contradictory."
+  },
+  "investigationSteps": [
+    {
+      "stepNumber": 1,
+      "title": "Family oral history",
+      "description": "What stories were passed down? Place names, seasonal practices, specific foods, directions of origin ('we came from near the water' vs. 'we lived near the mountains'). Even fragments count. Write down what you have heard, even if you are uncertain whether it is accurate.",
+      "sources": [
+        "Immediate family members",
+        "Extended family elders",
+        "Family reunion gatherings"
+      ],
+      "evidenceType": "oral"
+    },
+    {
+      "stepNumber": 2,
+      "title": "Geographic family origin",
+      "description": "What are the earliest known geographic locations in family records? County-level location can indicate watershed affiliation. A coastal BC or western Washington county points toward saltwater peoples; an interior BC or eastern Washington county points toward river-mountain peoples.",
+      "sources": [
+        "Birth certificates",
+        "Census records",
+        "Church records",
+        "Indian census rolls (if ancestral nation maintained them)",
+        "BIA records"
+      ],
+      "evidenceType": "geographic-documentary"
+    },
+    {
+      "stepNumber": 3,
+      "title": "County records and Indian census rolls",
+      "description": "Federal Indian census records (1885-1940 in the US) list tribal affiliation. Canadian band records may indicate community membership. Vital statistics records may show reserve or agency affiliation. These records can be accessed through national archives and genealogical databases.",
+      "sources": [
+        "Ancestry.com",
+        "FamilySearch.org",
+        "National Archives (NARA)",
+        "Library and Archives Canada",
+        "Tribal archives"
+      ],
+      "evidenceType": "federal-documentary"
+    },
+    {
+      "stepNumber": 4,
+      "title": "Nation-specific research",
+      "description": "Once you have a geographic or family oral history indication, research the specific nation or nations associated with that region. Each nation has its own enrollment office, cultural center, or historical society that can provide guidance. Approach with the protocol phrasing from the terminology guide.",
+      "sources": [
+        "Tribal enrollment offices",
+        "Cultural centers",
+        "Nation-specific historical societies",
+        "NCAI (National Congress of American Indians)",
+        "AFN (Assembly of First Nations)"
+      ],
+      "evidenceType": "community-direct"
+    },
+    {
+      "stepNumber": 5,
+      "title": "Watershed pattern matching",
+      "description": "Map your evidence against the saltwater/river-mountain characteristics. If your family stories mention reef nets, ocean canoes, or eulachon oil trade: saltwater. If they mention river salmon fishing camps, plateau roots, or Cascade crossings: river-mountain. If both: cross-watershed connection is common. If neither is clear yet: continue investigating.",
+      "sources": [
+        "Watershed types description in this tool",
+        "Salish Sea Ways module"
+      ],
+      "evidenceType": "interpretive"
+    }
+  ],
+  "evidenceTypes": [
+    {
+      "type": "oral",
+      "description": "Family stories, elder interviews, and oral traditions. Often the first evidence available but may be incomplete or shifted over generations. Document exactly what was said, by whom, and when — including uncertainty."
+    },
+    {
+      "type": "geographic-documentary",
+      "description": "County or regional records establishing where family members lived. Birth records, marriage records, and census records often list county of origin, which can be cross-referenced against watershed maps."
+    },
+    {
+      "type": "federal-documentary",
+      "description": "Federal and provincial records including Indian census rolls (1885-1940 US), band council records (Canada), BIA records, Indian Register, annuity records, and treaty records. These often contain direct tribal affiliation data."
+    },
+    {
+      "type": "community-direct",
+      "description": "Direct inquiry to tribal enrollment offices, cultural centers, and nation-specific historical societies. Community contact is the most accurate source but should be approached after you have assembled other evidence — it is a request for guidance, not verification."
+    }
+  ],
+  "interpretationGuidance": {
+    "saltwaterIndicators": [
+      "Family oral mentions of ocean, tides, reef nets, kelp",
+      "Coastal county in BC or Washington state origin",
+      "Eulachon oil or 'grease trails' in family stories",
+      "Canoe traditions or canoe family stories",
+      "Specific nations: Lummi, Musqueam, Squamish, Saanich, Nuu-chah-nulth, Makah, Tulalip, Suquamish"
+    ],
+    "riverMountainIndicators": [
+      "Interior BC, eastern Washington, Oregon plateau origin",
+      "River salmon fishing camp stories",
+      "Plateau root foods (camas, bitterroot, wapato) in family food traditions",
+      "Hunting traditions for deer and elk primarily (not marine mammals)",
+      "Specific nations: Stó:lō, Nlaka'pamux, Okanagan/Syilx, Nez Perce, Yakama, Umatilla"
+    ],
+    "unknownGuidance": "If your evidence does not yet point clearly to saltwater or river-mountain, continue with the investigation steps. Absence of evidence is not evidence of absence — many records were destroyed, families moved, and oral histories were suppressed. An honest 'I am still investigating' is always better than a premature claim."
+  },
+  "limitations": "The watershed investigation tool is educational scaffolding for the beginning of ancestry research. It does not replace formal genealogical research, tribal enrollment processes, or community relationship-building. Community organizations — specifically the nation or nations you are investigating — are the authoritative sources for membership and belonging questions. This tool helps you organize your research and approach communities with better questions. It does not produce answers."
+}

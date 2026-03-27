@@ -1,0 +1,60 @@
+/* MAM — Fur, Fin & Fang
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --earth: #4a3728;
+  --forest: #2d5a3a;
+  --meadow: #6b9a4e;
+  --moss: #4a7a5c;
+  --fur: #8d6e63;
+  --cream: #faf8f4;
+  --mist: #e4e0d8;
+  --water: #2a6496;
+  --claw: #bf360c;
+  --amber: #f9a825;
+  --snow: #efebe9;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--water);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--earth) 0%, var(--forest) 50%, var(--moss) 100%);
+  border-bottom: 4px solid var(--meadow);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--earth); }
+h3 { color: var(--forest); }
+th { background: var(--earth); }
+tr:nth-child(even) { background: rgba(74, 55, 40, 0.06); }
+tr:hover { background: rgba(74, 55, 40, 0.12); }
+blockquote { border-left-color: var(--moss); background: rgba(45, 90, 58, 0.05); }
+code { background: var(--mist); }
+pre { background: #2c2c2c; color: #e0e0e0; }
+.stat-value { color: var(--earth); }
+
+/* --- Tags --- */
+.tag-carnivore { background: #ffebee; color: #c62828; }
+.tag-rodent { background: #fff3e0; color: #e65100; }
+.tag-marine { background: #e3f2fd; color: #1565c0; }
+.tag-community { background: #e8f5e9; color: #2e7d32; }
+.tag-evolution { background: #f3e5f5; color: #7b1fa2; }
+.tag-networks { background: #fce4ec; color: #ad1457; }
+.tag-cultural { background: #fff8e1; color: #f57f17; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

@@ -1,0 +1,287 @@
+# ART-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: "ART-101"
+pack_name: "Visual Arts — Foundational Knowledge Pack"
+
+modules:
+  - id: "ART-101-M1"
+    name: "Seeing & Drawing"
+    description: "Learning to observe carefully and develop foundational drawing skills. Observation drawing trains the eye and hand to work together, builds confidence, and reveals that drawing is a learnable skill, not innate talent."
+
+    learning_outcomes:
+      - "Slow down perception and observe details with intention"
+      - "Develop control of line through contour and gesture drawing"
+      - "Understand basic spatial concepts: foreground, background, depth"
+      - "Create drawings from observation that accurately represent proportions"
+      - "Build confidence that drawing is a skill that can be learned"
+
+    topics:
+      - "Observation Skills & Attentional Focus"
+      - "Contour Drawing & Line Control"
+      - "Gesture Drawing & Movement"
+      - "Basic Perspective & Spatial Representation"
+      - "Proportion & Accurate Seeing"
+      - "Shading & Value in Observational Drawing"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 25
+      high: 15
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Blind Contour Drawing Challenge"
+        - "Perspective Street Scene Sketch"
+        - "Gesture Drawing to Music"
+        - "Still-Life Observation Practice"
+        - "Nature Study with Close Observation"
+        - "Proportion & Facial Features Drawing"
+
+    assessments:
+      - "Can student observe details with intentional focus?"
+      - "Does student demonstrate growing control of line?"
+      - "Can student represent spatial relationships accurately?"
+
+  - id: "ART-101-M2"
+    name: "Color, Value & Composition"
+    description: "Understanding how color, light/dark contrast, and compositional strategies guide the viewer's eye and convey emotion. Students learn to make intentional choices about color mixing, value relationships, and arrangement of elements."
+
+    learning_outcomes:
+      - "Understand color properties: hue, value, saturation, temperature"
+      - "Create and apply value scales in both graphite and color"
+      - "Make intentional color choices to convey mood and meaning"
+      - "Apply compositional principles: balance, emphasis, movement, rhythm"
+      - "Understand how arrangement of elements shapes visual impact"
+
+    topics:
+      - "Color Theory: Hue, Value, Saturation, Temperature"
+      - "Color Mixing & Color Wheels"
+      - "Value Scales & Contrast"
+      - "Balance: Symmetrical, Asymmetrical, Radial"
+      - "Emphasis & Focal Points"
+      - "Movement & Rhythm in Composition"
+      - "Foreground, Background, Middle Ground"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: ["ART-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Color Wheel Mixing Lab"
+        - "Value Scale Charcoal Study"
+        - "Composition Sketches: Same Subject Different Ways"
+        - "Mood Board with Color & Value"
+        - "Rule of Thirds Photography/Composition"
+        - "Color Temperature Landscape Exploration"
+
+    assessments:
+      - "Does student understand color properties and relationships?"
+      - "Can student create intentional value contrasts?"
+      - "Does student apply compositional principles to guide viewer attention?"
+
+  - id: "ART-101-M3"
+    name: "Materials & Making"
+    description: "Exploring diverse media and techniques: drawing, painting, sculpture, printmaking, mixed media, and digital art. Students discover that art is broader than they thought and find media that resonate with their interests and strengths."
+
+    learning_outcomes:
+      - "Develop hands-on skills with at least three different media"
+      - "Understand the affordances and constraints of different materials"
+      - "Make three-dimensional works that demonstrate spatial thinking"
+      - "Experiment with mark-making, texture, and surface qualities"
+      - "Recognize that different media offer different possibilities for expression"
+
+    topics:
+      - "Drawing: Pencil, Charcoal, Pen, Pastel"
+      - "Painting: Watercolor, Acrylic, Oil (age-appropriate)"
+      - "Sculpture & Three-Dimensional Form"
+      - "Printmaking & Mark Repetition"
+      - "Mixed Media & Material Combinations"
+      - "Digital Art & Contemporary Tools"
+      - "Found Object Art & Recycled Materials"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: ["ART-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Found Object Sculpture"
+        - "Monoprint Exploration"
+        - "Clay Hand-Building Techniques"
+        - "Collage with Layered Materials"
+        - "Printmaking: Block Printing or Screen Printing"
+        - "Digital Drawing Introduction"
+
+    assessments:
+      - "Can student use tools and materials with basic competence?"
+      - "Does student explore different media with curiosity?"
+      - "Can student create three-dimensional work with intentional form?"
+
+  - id: "ART-101-M4"
+    name: "Art in Context"
+    description: "Understanding art as a response to history, culture, and human experience. Students study artworks as primary sources, learn about diverse cultural traditions, and recognize art as a form of social commentary and cultural expression."
+
+    learning_outcomes:
+      - "Understand how historical context shapes artistic choices and movements"
+      - "Recognize diverse cultural traditions and their aesthetic values"
+      - "Read artworks as primary sources revealing about history and culture"
+      - "Understand art as social commentary and form of expression"
+      - "Connect personal identity and cultural background to artistic expression"
+
+    topics:
+      - "Historical Movements & Artistic Evolution"
+      - "Renaissance, Impressionism, Modernism, Contemporary Art"
+      - "Cultural Traditions: African, Asian, Indigenous, Islamic, Latin American"
+      - "Art as Social Commentary & Activism"
+      - "Artists' Biographies & Life Impact on Work"
+      - "Artworks as Historical Primary Sources"
+      - "Identity, Representation, & Diverse Voices in Art"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Art History Timeline Mural"
+        - "Cultural Mask Design & Research"
+        - "Artist Biography Study & Presentation"
+        - "Comparative Analysis: Same Theme Across Cultures"
+        - "Contemporary Art & Social Practice Exploration"
+        - "Artworks as Primary Source Investigation"
+
+    assessments:
+      - "Can student place artworks in historical and cultural context?"
+      - "Does student understand art as more than aesthetic object?"
+      - "Can student analyze artwork for cultural and historical meaning?"
+
+  - id: "ART-101-M5"
+    name: "Creative Process & Portfolio"
+    description: "Developing the habits and practices of artists: brainstorming, iteration, critique, revision, and reflection. Students create a portfolio—a curated collection of work—that represents their artistic growth and thinking."
+
+    learning_outcomes:
+      - "Develop brainstorming and ideation habits"
+      - "Practice iteration: creating, assessing, revising based on feedback"
+      - "Give and receive critique that is specific, kind, and growth-focused"
+      - "Reflect on artistic choices and articulate creative intent"
+      - "Build a portfolio that tells a story about growth and identity"
+
+    topics:
+      - "Brainstorming & Ideation Techniques"
+      - "Sketchbooks & Idea Documentation"
+      - "Critique Circles & Peer Feedback"
+      - "Self-Assessment & Reflection"
+      - "Revision & Iteration Cycles"
+      - "Portfolio Selection & Curation"
+      - "Artist Statements & Articulating Intent"
+      - "Professional Practice & Habits"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 30
+
+    prerequisite_modules: ["ART-101-M1", "ART-101-M2", "ART-101-M3"]
+
+    activities:
+      count: 10
+      examples:
+        - "Sketchbook Ideation Sprint"
+        - "Peer Critique Gallery Walk"
+        - "Self-Assessment & Reflection Workshop"
+        - "Portfolio Building & Curation"
+        - "Artist Statement Writing"
+        - "Revision Cycle: Feedback to Final Piece"
+
+    assessments:
+      - "Does student engage in meaningful brainstorming?"
+      - "Can student give and receive critique constructively?"
+      - "Does student revise work based on feedback and self-reflection?"
+      - "Can student articulate intent and growth in portfolio?"
+
+cross_module_competencies:
+  - name: "Visual Observation & Attentional Focus"
+    description: "The ability to slow down, notice details, and attend to visual information with intention. Foundational to all visual art and applicable across disciplines."
+    assessed_in: ["ART-101-M1", "ART-101-M2", "ART-101-M4"]
+
+  - name: "Intentional Creative Choices"
+    description: "Making deliberate decisions about color, composition, media, and expression rather than random or careless work. Reflects growing artistic agency."
+    assessed_in: ["ART-101-M2", "ART-101-M3", "ART-101-M5"]
+
+  - name: "Iteration & Refinement"
+    description: "The habit of creating, assessing, revising, and improving work over time. Develops resilience and understanding that mastery requires practice."
+    assessed_in: ["ART-101-M1", "ART-101-M3", "ART-101-M5"]
+
+  - name: "Visual Analysis & Interpretation"
+    description: "Reading artworks for meaning, understanding context, and articulating what an image communicates. Applicable across art history, criticism, and media literacy."
+    assessed_in: ["ART-101-M4", "ART-101-M5"]
+
+progression_pathways:
+  - name: "Linear Progression"
+    description: "Foundation → Seeing & Drawing → Color & Composition → Materials → Art in Context → Creative Process. Builds skills sequentially."
+    rationale: "This pathway develops technical foundation first, then applies learning to diverse media, contextual understanding, and professional practice."
+
+  - name: "Parallel Exploration"
+    description: "All modules can be explored in parallel, with emphasis shifting by grade level. Foundation students focus on M1 and M3; high school students emphasize M4 and M5."
+    rationale: "Art learning is not strictly linear. Students benefit from simultaneous exposure to materials, history, and process."
+
+parallel_patterns:
+  - pattern: "Media Rotation"
+    description: "Cycling through different media (drawing, painting, sculpture, printmaking) within a unit keeps engagement high and prevents students from feeling locked into one medium."
+    cached: true
+
+  - pattern: "Critique-Revision Loops"
+    description: "Regular cycles of creation, peer critique, self-reflection, and revision embedded in each module builds professional habits and growth mindset."
+    cached: true
+
+skill_creator_integration:
+  observation_points:
+    - "Student willingness to attempt challenging drawing"
+    - "Growth in observational accuracy over time"
+    - "Color choices and intentional use of value"
+    - "Engagement with critique and revision"
+    - "Articulation of artistic intent"
+
+  pattern_detection:
+    - "Students who excel at observational work but struggle with abstraction"
+    - "Confidence growth following successful critique experiences"
+    - "Media preferences emerging (e.g., students gravitating toward sculpture vs. drawing)"
+    - "Connection between art history study and increased sophistication in own work"
+
+  skill_promotion:
+    - "Promote to visual communication (design, UX) if excelling at composition and color"
+    - "Promote to technical observation (scientific illustration, medical art) if excelling at M1"
+    - "Promote to critical analysis if strong in M4 (art history and cultural interpretation)"
+    - "Promote to problem-solving if leveraging design thinking across projects"

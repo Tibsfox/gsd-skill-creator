@@ -1,0 +1,183 @@
+---
+exercise: 4
+title: "Waitlist Timer Tasks"
+slug: blinker
+chapter: 5
+difficulty: intermediate
+programSlug: blinker
+description: "Toggle the COMP ACTY annunciator on and off with delay loops"
+---
+
+# Exercise 4: Waitlist Timer Tasks -- Blinker
+
+## Overview
+
+This exercise demonstrates the concept of timed, repeated actions. The
+program toggles the COMP ACTY annunciator on and off by writing alternating
+values to channel 11, with a CCS-based busy-wait delay between each toggle.
+The exercise guide explains how the real AGC would use Waitlist entries
+instead of busy-wait loops.
+
+## Prerequisites
+
+- Chapter 5: Executive & Waitlist (Waitlist concept, timer tasks)
+- Chapter 6: DSKY (channel 11, annunciators, COMP ACTY)
+- Exercise 1: Hello DSKY (I/O channel writes)
+
+## The Program
+
+Open `programs/blinker.agc`:
+
+```agc
+# Blinker -- toggle COMP ACTY indicator
+SETLOC   4000
+
+BLINK    CA     ON           # Load ON pattern
+         EXTEND
+         WRITE  11           # Channel 11: relay word 2 (COMP ACTY)
+
+# Inline delay loop 1
+         CA     DELCNT
+         TS     TEMP
+DL1LP    CCS    TEMP         # Decrement until zero
+         TC     DL1CN
+         TC     DL1DN        # =0: done
+         TC     DL1DN
+         TC     DL1DN
+DL1CN    TS     TEMP         # CCS stored diminished value in A
+         TC     DL1LP
+
+DL1DN    CA     OFF          # Load OFF pattern
+         EXTEND
+         WRITE  11
+
+# Inline delay loop 2
+         CA     DELCNT
+         TS     TEMP
+DL2LP    CCS    TEMP
+         TC     DL2CN
+         TC     DL2DN
+         TC     DL2DN
+         TC     DL2DN
+DL2CN    TS     TEMP
+         TC     DL2LP
+
+DL2DN    TC     BLINK        # Loop forever
+
+ON       OCT    40000        # Bit 14 set -- COMP ACTY on
+OFF      OCT    00000        # All bits clear -- COMP ACTY off
+DELCNT   DEC    50           # Delay loop iterations
+TEMP     ERASE
+```
+
+## Step-by-Step Walkthrough
+
+### Step 1: The toggle pattern
+
+The program alternates between two channel 11 writes:
+- **ON**: OCT 40000 (bit 14 set) -- turns COMP ACTY on
+- **OFF**: OCT 00000 (all clear) -- turns COMP ACTY off
+
+Channel 11 controls the DSKY relay word 2, which includes the 11 status
+annunciators. Bit 14 corresponds to the COMP ACTY light.
+
+### Step 2: The inline delay loops
+
+Each toggle is followed by a CCS-based counting loop that burns CPU cycles.
+The pattern is duplicated inline (DL1 and DL2) rather than using a
+subroutine, which keeps the program simple and avoids register management.
+
+In a real AGC program, you would use `TC` subroutine calls with careful Q
+register management, but for this introductory exercise the inline approach
+makes the control flow easier to follow.
+
+### Step 3: The CCS delay pattern
+
+```
+         CA     DELCNT       # Load 50 into A
+         TS     TEMP         # Store in temporary variable
+DL1LP    CCS    TEMP         # Decrement TEMP; branch on result
+         TC     DL1CN        # TEMP was > 0: continue loop
+         TC     DL1DN        # TEMP was +0: done
+         TC     DL1DN        # TEMP was < 0: done (safety)
+         TC     DL1DN        # TEMP was -0: done (safety)
+DL1CN    TS     TEMP         # Store diminished value back
+         TC     DL1LP        # Loop
+```
+
+This counts from 50 down to 0, consuming CPU cycles. Each iteration takes
+about 5 MCTs (58 microseconds). 50 iterations is about 2.9 milliseconds
+of delay.
+
+### Step 4: Run with limited steps
+
+```typescript
+const source = readFileSync('src/agc/curriculum/programs/blinker.agc', 'utf-8');
+const program = assembleProgramSource(source);
+// Use enough steps to see at least 2 blink cycles
+const result = runProgram(program, { maxSteps: 10000 });
+
+const ch11Writes = result.ioLog.filter(e => e.channel === 9 && e.type === 'write');
+console.log(`Channel 11 writes: ${ch11Writes.length}`);
+ch11Writes.forEach(w => console.log(`  Step ${w.step}: value ${w.value.toString(8)}`));
+// Expected: alternating 40000 and 00000
+```
+
+### Step 5: Real AGC vs. busy-wait
+
+In the real AGC, this pattern would use the Waitlist instead of busy-waiting:
+
+```typescript
+// Real AGC approach (TypeScript, not assembly):
+// 1. Waitlist entry fires after 50 centiseconds (500ms)
+// 2. Dispatched task creates a NOVAC job
+// 3. Job writes ON/OFF to channel 11
+// 4. Job adds a new Waitlist entry for the next toggle
+// 5. Job ends (ENDOFJOB)
+```
+
+Busy-waiting wastes CPU cycles that other jobs need. The Waitlist approach
+frees the CPU between toggles, allowing guidance and other critical tasks
+to run. In a real mission, busy-waiting would never be acceptable -- but
+for a learning exercise, it demonstrates the pattern.
+
+## Expected Output
+
+- The program runs until maxSteps (it loops forever)
+- Channel 11 receives alternating writes of OCT 40000 and OCT 00000
+- Each pair of writes is separated by the delay loop
+
+## Try It
+
+1. **Change blink speed**: modify `DELCNT DEC 50` to `DEC 10` for faster
+   blinking (shorter delay) or `DEC 200` for slower blinking.
+
+2. **Blink multiple annunciators**: write patterns with multiple bits set:
+   ```agc
+   ON       OCT    40200        # COMP ACTY + TRACKER
+   ```
+
+3. **Add a counter display**: write a counter value to channel 10 each time
+   the toggle happens:
+   ```agc
+   BLINK    CA     BCOUNT
+            EXTEND
+            WRITE  10           # Show toggle count on R1
+            CA     BCOUNT
+            AD     ONE
+            TS     BCOUNT
+            CA     ON
+            EXTEND
+            WRITE  11
+            # ...rest of blink cycle
+   ONE      DEC    1
+   BCOUNT   ERASE
+   ```
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Only one I/O write | maxSteps too low | Increase maxSteps |
+| Delay loop is infinite | CCS branch targets wrong | Check 4-way branch order |
+| All writes are same value | ON and OFF are same | Check OCT values |

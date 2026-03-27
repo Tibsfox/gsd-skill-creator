@@ -1,0 +1,17 @@
+export type { UsageEvent, SkillScoredEvent, SkillBudgetSkippedEvent, SkillLoadedEvent, SkillCorrectionEvent, EventStoreConfig } from './types.js';
+export { DEFAULT_MAX_SIZE_BYTES } from './types.js';
+export type {
+  SkillPatternEntry,
+  PatternReport,
+  PatternInsufficient,
+  PatternDetectionResult,
+  PatternDetectorConfig,
+} from './types.js';
+export { EventStore } from './event-store.js';
+export { TelemetryStage } from './telemetry-stage.js';
+export { UsagePatternDetector } from './usage-pattern-detector.js';
+export { ScoreAdjuster } from './score-adjuster.js';
+export type { ScoreAdjusterConfig } from './score-adjuster.js';
+export { CachePromoter } from './cache-promoter.js';
+export type { PromoteResult } from './cache-promoter.js';
+export { AdaptiveSuggestions } from './adaptive-suggestions.js';

@@ -1,0 +1,52 @@
+/* SHE — Smart Home & DIY Electronics
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --primary: #004d40;
+  --secondary: #ff6d00;
+  --tertiary: #1a237e;
+  --accent: #ff6d00;
+  --cream: #f8f6f0;
+  --mist: #e4e8e0;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--tertiary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, #00695c 40%, var(--tertiary) 80%, #283593 100%);
+  border-bottom: 4px solid var(--accent);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(0, 77, 64, 0.05); }
+tr:hover { background: rgba(0, 77, 64, 0.1); }
+blockquote { border-left-color: var(--accent); background: rgba(255, 109, 0, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1f2e; color: #a8d8ea; }
+.stat-value { color: var(--primary); }
+
+/* --- Tags --- */
+.tag-hw { background: #e8f5e9; color: #2e7d32; }
+.tag-sw { background: #e3f2fd; color: #1565c0; }
+.tag-proj { background: #fff3e0; color: #e65100; }
+.tag-safe { background: #fce4ec; color: #c62828; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

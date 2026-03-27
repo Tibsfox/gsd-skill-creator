@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; LED Lighting &amp; Controllers</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-led">
+  <header>
+    <h1>LED Lighting &amp; Controllers</h1>
+    <div class="subtitle">DIY Electronics &middot; Microcontrollers &middot; Smart Lighting &middot; Instruments &amp; High-Speed Logic</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=m1-led-fundamentals">LED Basics</a>
+      <a href="page.html?doc=m2-arduino-led-control">Microcontrollers</a>
+      <a href="page.html?doc=m3-ws2812b-protocol">LED Protocols</a>
+      <a href="page.html?doc=m4-philips-hue-api">Smart Lighting</a>
+      <a href="page.html?doc=m5-mosfet-pwm-dimmers">DIY Controllers</a>
+      <a href="page.html?doc=m6-pov-physics">POV Displays</a>
+      <a href="page.html?doc=m7-oscilloscope-basics">Oscilloscopes</a>
+      <a href="page.html?doc=m8-plc-ladder-logic">PLC Control</a>
+      <a href="page.html?doc=00-glossary">Glossary</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      This mission exists to build knowledge infrastructure: a deeply cross-linked, rigorously sourced
+      web reference spanning the full territory from Ohm's Law through high-speed digital logic, from
+      soldering a current-limiting resistor to programming a PIC16F877A's CCP module, from Philips Hue's
+      CLIP API to building a DIY oscilloscope from a Raspberry Pi Pico.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">34+</span><span class="stat-label">Pages</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~176K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety Gates</span></div>
+    </div>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Templates, site map, source index</td><td>Sequential</td></tr>
+        <tr><td>1</td><td>Parallel Tracks</td><td>Track A (M1,2,3) &middot; Track B (M4,5,8) &middot; Track C (M6,7)</td><td>Parallel</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-links, glossary, index, code verification</td><td>Sequential</td></tr>
+        <tr><td>3</td><td>Publication</td><td>HTML validation, link check, safety warnings, site.zip</td><td>Sequential</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>S-01</td><td>No mains AC wiring instructions</td><td>Safety callout deferring to licensed electrician</td></tr>
+        <tr><td>S-02</td><td>POV mechanical safety warning</td><td>Rotating machinery hazard callout with RPM-specific danger note</td></tr>
+        <tr><td>S-03</td><td>High-power LED eye safety</td><td>IR/blue hazard callout wherever high-power LEDs discussed</td></tr>
+        <tr><td>S-04</td><td>Capacitor polarity warnings</td><td>Polarity callout in all power supply sections</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>SC1</td><td>All 8 modules have &ge;4 HTML pages with working links</td><td>Pre-mission</td></tr>
+        <tr><td>SC2</td><td>Every page links to &ge;3 other pages (bidirectional)</td><td>Pre-mission</td></tr>
+        <tr><td>SC3</td><td>LED electronics includes Ohm's Law worked examples</td><td>Pre-mission</td></tr>
+        <tr><td>SC4</td><td>MCU pages include Arduino, PIC XC8, RPi Python code</td><td>Pre-mission</td></tr>
+        <tr><td>SC5</td><td>Protocol page explains WS2812B/APA102 timing differences</td><td>Pre-mission</td></tr>
+        <tr><td>SC6</td><td>Smart lighting includes TCS34725 &rarr; Hue adaptation example</td><td>Pre-mission</td></tr>
+        <tr><td>SC7</td><td>POV page explains APA102 selection rationale with PIO notes</td><td>Pre-mission</td></tr>
+        <tr><td>SC8</td><td>Oscilloscope module explains Nyquist, trigger, probe compensation</td><td>Pre-mission</td></tr>
+        <tr><td>SC9</td><td>All code examples verified against library docs</td><td>Pre-mission</td></tr>
+        <tr><td>SC10</td><td>Master index page with module map exists</td><td>Pre-mission</td></tr>
+        <tr><td>SC11</td><td>All sources are professional orgs or peer-reviewed</td><td>Pre-mission</td></tr>
+        <tr><td>SC12</td><td>Responsive CSS on mobile viewport</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Every topic in this mission is a different angle on the same question: how do humans gain fine-grained
+    control over photons? The LED junction answers: by engineering the energy gap. The resistor and the
+    constant-current driver answer: by managing the current. The PWM signal answers: by modulating time.
+    The oscilloscope answers: by measuring the modulation. The color sensor answers: by reading back what
+    was emitted. The POV display answers: by exploiting the human visual system's temporal integration
+    window &mdash; the eye's inability to distinguish individual frames fast enough.</p>
+  </main>
+
+  <footer>
+    <p>LED Lighting &amp; Controllers &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

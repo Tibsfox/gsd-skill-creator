@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "monitor": {
+      "command": "npx",
+      "args": ["-y", "@monitoring-org/mcp-monitor"],
+      "url": "https://monitor.example.com/mcp"
+    }
+  }
+}

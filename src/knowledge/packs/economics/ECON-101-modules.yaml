@@ -1,0 +1,302 @@
+---
+# ECON-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: ECON-101
+pack_name: "Economics & Personal Finance — Foundational Knowledge Pack"
+
+modules:
+  - id: ECON-101-M1
+    name: "Scarcity & Economic Thinking"
+    description: "Economics begins with scarcity: resources are finite. Every choice involves trade-offs. This module teaches wants vs. needs, the concept of opportunity cost, and how economic thinking applies to personal, family, and societal decisions."
+
+    learning_outcomes:
+      - "Identify examples of scarcity in personal, family, and community contexts"
+      - "Distinguish between wants and needs in decision-making"
+      - "Calculate and articulate the opportunity cost of personal and economic choices"
+      - "Apply economic thinking to evaluate trade-offs at different scales"
+      - "Understand that choice requires sacrifice and that understanding what you give up is central to good decisions"
+
+    topics:
+      - "Scarcity as a Fundamental Economic Fact"
+      - "Wants vs. Needs"
+      - "Choice and Trade-Offs"
+      - "Opportunity Cost"
+      - "Resource Allocation at Multiple Scales"
+      - "Decision-Making Under Constraints"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 2
+      examples:
+        - "Desert Island Trade-Off Game"
+        - "Opportunity Cost Scavenger Hunt"
+
+    assessments:
+      - "Can student identify and articulate opportunity costs?"
+      - "Does student apply scarcity thinking to personal decisions?"
+      - "Can student explain wants vs. needs?"
+      - "Does student recognize trade-offs in resource allocation?"
+
+  - id: ECON-101-M2
+    name: "Markets & Exchange"
+    description: "Markets are mechanisms for exchange at scale. Prices coordinate behavior: high prices signal scarcity and incentivize production; low prices discourage buyers. This module teaches supply and demand, market equilibrium, competition, and market failures through simulation and analysis."
+
+    learning_outcomes:
+      - "Explain the roles of supply, demand, and price in market economies"
+      - "Predict how changes in supply or demand affect prices and quantities exchanged"
+      - "Distinguish between different market structures and their competitive dynamics"
+      - "Identify cases where markets work well and where they fail"
+      - "Analyze real-world pricing and market behavior through supply and demand"
+
+    topics:
+      - "Supply and Demand"
+      - "Market Equilibrium and Price Formation"
+      - "Competition and Market Structures"
+      - "Price Elasticity and Consumer Responsiveness"
+      - "Externalities and Market Failures"
+      - "Price Controls and Their Effects"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [ECON-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Classroom Marketplace Simulation"
+        - "Supply & Demand Price Discovery"
+
+    assessments:
+      - "Can student apply supply and demand reasoning to real prices?"
+      - "Does student predict price changes from supply or demand shifts?"
+      - "Can student distinguish competitive markets from monopolies?"
+      - "Does student understand why markets fail in some cases?"
+
+  - id: ECON-101-M3
+    name: "Money & Financial Systems"
+    description: "Money is a technology for exchange and storage of value. Banks connect savers with borrowers. Interest is the price of borrowing and the reward for saving. This module traces money through history, explains banking, and builds intuition about credit, debt, and interest."
+
+    learning_outcomes:
+      - "Explain why societies use money and what functions it serves"
+      - "Describe how banking systems work and the role of banks as financial intermediaries"
+      - "Calculate and interpret interest rates and the time value of money"
+      - "Evaluate credit decisions and understand credit risk and debt"
+      - "Trace the path from personal saving to productive investment"
+
+    topics:
+      - "History and Nature of Money"
+      - "Functions of Money and Media of Exchange"
+      - "Banking and Financial Intermediation"
+      - "Interest Rates and Time Value of Money"
+      - "Credit, Debt, and Leverage"
+      - "Central Banking and Monetary Policy"
+      - "Financial Risk and Regulation"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [ECON-101-M1, ECON-101-M2]
+
+    activities:
+      count: 2
+      examples:
+        - "The History of Money Timeline"
+        - "Interest Calculator Challenge"
+
+    assessments:
+      - "Can student explain why money exists and how it evolved?"
+      - "Does student understand how banks enable borrowing and lending?"
+      - "Can student calculate interest and compare borrowing costs?"
+      - "Does student understand credit scores and debt risk?"
+
+  - id: ECON-101-M4
+    name: "Personal Financial Literacy"
+    description: "Economic theory meets personal life. How much should you save? Is borrowing for college worth it? How do you invest? This module teaches budgeting, saving, borrowing, and investing decisions. It emphasizes intentional decision-making and awareness of behavioral biases."
+
+    learning_outcomes:
+      - "Create a personal budget and track income and spending"
+      - "Evaluate borrowing and saving decisions based on opportunity costs and time value of money"
+      - "Understand credit scores and how credit decisions affect financial opportunity"
+      - "Make informed decisions about risk and return in investing"
+      - "Plan for major financial decisions (education, housing, retirement)"
+      - "Recognize behavioral biases in financial decision-making and strategies to overcome them"
+
+    topics:
+      - "Budgeting and Income Management"
+      - "Saving and Goal-Setting"
+      - "Borrowing and Debt: When and How"
+      - "Credit, Credit Scores, and Credit Reports"
+      - "Investing and Risk-Return Trade-Offs"
+      - "Behavioral Economics and Financial Decision-Making"
+      - "Taxes and Insurance"
+      - "Life-Cycle Financial Planning"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [ECON-101-M1, ECON-101-M3]
+
+    activities:
+      count: 2
+      examples:
+        - "Budget Building Workshop"
+        - "Investment Portfolio Simulation"
+
+    assessments:
+      - "Can student create a realistic personal budget?"
+      - "Does student evaluate borrowing costs and make sound decisions?"
+      - "Can student analyze investment options with appropriate risk consideration?"
+      - "Does student recognize behavioral biases in financial choices?"
+
+  - id: ECON-101-M5
+    name: "Macroeconomics & Civic Economics"
+    description: "Individual choices aggregate into patterns affecting entire economies. Why do recessions happen? What causes unemployment? How does the Federal Reserve influence the economy? This module examines economies at scale, the causes of growth and decline, and how policy affects everyone."
+
+    learning_outcomes:
+      - "Measure and interpret key economic indicators (GDP, inflation, unemployment)"
+      - "Understand the causes and consequences of business cycles"
+      - "Analyze fiscal and monetary policy and predict their effects"
+      - "Explain international trade, comparative advantage, and exchange rates"
+      - "Evaluate policy proposals using economic reasoning and evidence"
+      - "Recognize how economic systems distribute opportunities and resources"
+
+    topics:
+      - "Measuring the Economy: GDP, Inflation, Unemployment"
+      - "Business Cycles and Recessions"
+      - "Fiscal Policy: Government Spending and Taxes"
+      - "Monetary Policy: Central Banks and Interest Rates"
+      - "International Trade and Comparative Advantage"
+      - "Exchange Rates and International Finance"
+      - "Economic Inequality and Distribution"
+      - "Sustainable Growth and Environmental Economics"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 30
+      high: 40
+
+    prerequisite_modules: [ECON-101-M1, ECON-101-M2]
+
+    activities:
+      count: 2
+      examples:
+        - "GDP Measurement Activity"
+        - "Inflation Impact Role Play"
+
+    assessments:
+      - "Can student measure and interpret macroeconomic indicators?"
+      - "Does student understand business cycles and policy responses?"
+      - "Can student evaluate policy proposals with economic reasoning?"
+      - "Does student recognize how policy distributes benefits and costs?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Economic Reasoning"
+    description: "Ability to think like an economist: identify scarcity, consider trade-offs, predict responses to incentives, recognize unintended consequences"
+    assessed_in: [ECON-101-M1, ECON-101-M2, ECON-101-M3, ECON-101-M4, ECON-101-M5]
+
+  - name: "Evidence-Based Analysis"
+    description: "Ability to support claims with data, evaluate competing explanations, and acknowledge uncertainty in economic analysis"
+    assessed_in: [ECON-101-M2, ECON-101-M3, ECON-101-M4, ECON-101-M5]
+
+  - name: "Financial Decision-Making"
+    description: "Ability to analyze options, understand costs and benefits, and make intentional choices about borrowing, saving, and investing"
+    assessed_in: [ECON-101-M1, ECON-101-M3, ECON-101-M4]
+
+  - name: "Systems Thinking"
+    description: "Ability to see how individual decisions create patterns, how policies affect multiple groups, and how systems adapt"
+    assessed_in: [ECON-101-M2, ECON-101-M4, ECON-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Progresses from individual scarcity and choice, through markets and money, to personal and macroeconomic applications. Each builds on previous understanding."
+
+  - name: "Personal Finance Focus"
+    description: "M1 -> M3 -> M4 (with M2 as enrichment)"
+    rationale: "For learners primarily interested in managing their own financial lives, emphasizes scarcity, banking, and personal decision-making."
+
+  - name: "Systems-First Pathway"
+    description: "M1 -> M2 -> M5 (with M3-M4 as applications)"
+    rationale: "For learners interested in how economies work at large scales before applying to personal choices."
+
+  - name: "Interest-Led Pathway"
+    description: "Choose modules based on interest; M1 is foundational for all others"
+    rationale: "A learner fascinated by central banking might start with M3. A learner curious about inequality starts with M5. M1 provides universal foundation."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same structure: learning outcomes, topics, activities, assessment approaches"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Concrete learning activities follow a consistent template across all modules: name, grade range, duration, materials, objectives, variations"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (financial reasoning, systems thinking, evidence-based analysis) across all modules"
+    cached: true
+
+  - pattern: "Real-World Application"
+    description: "Every module connects to personal, community, or civic decision-making; grounding economics in lived experience"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner identifies opportunity costs in everyday situations spontaneously"
+    - "When learner asks 'Why did this price change?' without prompting"
+    - "When learner recognizes incentives affecting behavior (own and others')"
+    - "When learner evaluates a financial decision by considering multiple perspectives"
+    - "When learner catches themselves making a biased financial decision"
+    - "When learner uses supply and demand reasoning to explain real events"
+
+  pattern_detection:
+    - "Effective budgeting strategies for different income levels and constraints"
+    - "Common behavioral biases and how to recognize them"
+    - "Successful methods for evaluating borrowing decisions"
+    - "Real-world applications of supply and demand reasoning"
+    - "Decision frameworks for major financial choices"
+
+  skill_promotion:
+    - "Promote opportun-cost thinking patterns to reusable skills for decision-making"
+    - "Create personal budgeting templates from successful approaches"
+    - "Build investment decision frameworks from effective analysis patterns"
+    - "Develop bias-recognition checklists from observed mistakes and corrections"
+    - "Promote supply-demand reasoning to broadly applicable thinking tools"
+
+# This YAML defines the modular structure for the ECON-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on economic thinking
+# and financial literacy.

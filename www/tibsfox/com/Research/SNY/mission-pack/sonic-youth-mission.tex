@@ -1,0 +1,969 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: MUSIC / ART / NYC ===
+% Indigo night, amber candle glow, industrial slate
+\definecolor{primary}{HTML}{1A237E}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Sonic Youth}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Sonic Youth -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Sonic Youth\\[0.3em]The Space Between the Notes}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{New York City, 1981--2011}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Sonic Youth --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone deep research mission)}
+\metafield{Context:}{Cold-start research into Sonic Youth as a comprehensive study of how architectural innovation---in this case, sonic architecture---can produce generational impact through principled experimentation rather than brute technical force.}
+
+\subsection{Vision}
+
+Sonic Youth emerged from the wreckage of no wave into something unprecedented: a band that treated the electric guitar as a compositional system rather than a performance instrument. For three decades, Thurston Moore, Kim Gordon, Lee Ranaldo, and Steve Shelley dismantled the inherited assumptions of rock music---standard tuning, verse-chorus structure, the boundary between noise and melody---and rebuilt them into a new language that influenced everything from Nirvana to My Bloody Valentine to the very concept of what ``alternative'' could mean.
+
+This research mission examines Sonic Youth not merely as a band but as an architectural phenomenon. Their method---dozens of custom alternate tunings, guitars prepared with drumsticks and screwdrivers, feedback treated as compositional material---mirrors the Amiga Principle at the heart of the GSD ecosystem: specialized execution paths and architectural leverage over raw computational power. A Jazzmaster tuned to F\#F\#F\#F\#EB is not a more powerful guitar; it is a guitar with a different instruction set, capable of producing sounds that standard tuning cannot reach regardless of the player's technical virtuosity.
+
+The study spans from the 1978 no wave scene that formed their soil, through the landmark \textit{Daydream Nation} that proved indie ambition could achieve major-label scale, to the Sonic Youth Recordings experimental series that maintained their avant-garde credentials alongside commercial success, and finally to the 2011 dissolution and the enduring legacy that continues to shape how musicians think about sound, tuning, and the relationship between art and rock.
+
+What Sonic Youth most powerfully demonstrated is that meaning lives in the spaces between notes---in the overtones created by two strings tuned a microtone apart, in the tension between noise and melody, in the gap between the art world and the rock club. This is the same principle that animates the GSD ecosystem's deepest insight: the spaces between are where the signal lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Sonic innovation is under-documented as architecture.} Sonic Youth's alternate tuning system---comprising over 50 distinct tunings across their catalog---represents one of the most systematic explorations of guitar sonority in rock history, yet it is primarily discussed anecdotally rather than as a coherent compositional framework.
+\item \textbf{The no wave--to--alternative pipeline lacks rigorous mapping.} The causal chain from the 1978 no wave scene through Sonic Youth's 1980s independent work to their role in launching the 1990s alternative explosion (including directly facilitating Nirvana's major-label signing) is often told as narrative but rarely analyzed as a system of influence propagation.
+\item \textbf{Cross-disciplinary practice is treated as peripheral.} Sonic Youth's deep connections to visual art (Gerhard Richter, Raymond Pettibon, Mike Kelley, Richard Prince), avant-garde composition (John Cage, Steve Reich, Pauline Oliveros), and film are typically treated as interesting footnotes rather than as integral to their creative methodology.
+\item \textbf{The SYR experimental series is critically under-examined.} The ten releases on their own Sonic Youth Recordings label---each with liner notes in a different language, spanning free improvisation to interpretations of 20th-century classical compositions---represent a parallel body of work that contextualizes the ``commercial'' albums within a broader artistic practice.
+\item \textbf{Post-dissolution activity lacks synthesis.} Since the 2011 breakup following Moore and Gordon's divorce, all four core members have pursued significant solo and collaborative work, but no comprehensive survey connects these threads back to the Sonic Youth methodology.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Sonic Youth as a thirty-year experiment in architectural leverage---proving that specialized tuning systems, prepared instruments, and cross-disciplinary networks produce more enduring creative impact than virtuosity or commercial optimization.
+
+The core insight is that Sonic Youth's innovation was \textit{systematic}, not accidental. Each album required a fleet of guitars, each tuned differently, each essentially a different instrument. This is not the behavior of a band ``experimenting''---it is the behavior of a team building and maintaining a custom toolkit. The tunings created harmonic possibilities (unison pairs, narrow-range voicings, microtonal beating) that could not be accessed through standard tuning at any skill level. The architecture \textit{was} the art.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+NO WAVE ORIGINS (1978-1981)
+|
+|  Glenn Branca Guitar Ensemble --> Thurston Moore, Lee Ranaldo
+|  No New York (Brian Eno, 1978) --> Downtown NYC Art-Music Scene
+|  White Columns Noise Fest 1981 --> Sonic Youth's first performance
+|
+FORMATION & INDEPENDENT ERA (1981-1989)
+|
+|  Neutral --> Homestead --> SST --> Enigma
+|  5 EPs/Albums --> Daydream Nation (1988)
+|  [Library of Congress National Recording Registry]
+|
+MAJOR LABEL ERA (1990-2009)
+|
+|  DGC/Geffen (1990-2008) --> Matador (2009)
+|  Goo --> Dirty --> Washing Machine --> The Eternal
+|  || Parallel track: SYR Series (1997-2010) ||
+|  || SYR1 through SYR9 + Goodbye 20th Century ||
+|
+DISSOLUTION & LEGACY (2011-present)
+|
+|  Moore/Gordon separation --> Band dissolves
+|  Solo careers: Moore, Gordon, Ranaldo, Shelley
+|  Bandcamp archive releases (2020+)
+|  Thurston Moore: They Came Like Swallows (2026)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
++------------------+     +---------------------+
+| M1: ORIGINS &    |     | M2: SONIC           |
+| NO WAVE CONTEXT  |     | ARCHITECTURE        |
+| NYC 1978-1985    |     | Tunings, prepared   |
+| Branca, Chatham  |     | guitars, technique  |
++--------+---------+     +---------+-----------+
+         |                         |
+         v                         v
++------------------+     +---------------------+
+| M3: DISCOGRAPHIC |<--->| M4: VISUAL ART &    |
+| ARC              |     | CULTURAL NETWORK    |
+| 16 albums +      |     | Richter, Pettibon,  |
+| SYR series       |     | Kelley, Prince,     |
+| SST->DGC->Matador|     | film, galleries     |
++--------+---------+     +---------+-----------+
+         |                         |
+         +------------+------------+
+                      |
+                      v
+              +-------+--------+
+              | M5: LEGACY &   |
+              | INFLUENCE      |
+              | Nirvana, alt   |
+              | rock, post-    |
+              | dissolution    |
+              +----------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins \& No Wave Context}
+
+The New York no wave scene of 1978--1982 as the soil from which Sonic Youth grew. Brian Eno's \textit{No New York} compilation (1978), Glenn Branca's guitar ensembles, Rhys Chatham's \textit{Guitar Trio}, the Artists Space festival, the White Columns Noise Fest (1981). The transition from no wave's nihilistic deconstruction to Sonic Youth's constructive reimagining. Early lineup changes (Richard Edson, Bob Bert, Jim Sclavunos) before Steve Shelley's arrival in 1985.
+
+\subsubsection{Module 2: Sonic Architecture}
+
+The technical innovations that defined the band's sound. Comprehensive catalog of alternate tuning systems (over 50 documented tunings), the logic of unison-pair and narrow-range voicings, prepared guitar techniques (drumsticks, screwdrivers, power drills), feedback as compositional material. The practical system of maintaining a fleet of guitars (each dedicated to specific tunings), the economic constraint-to-innovation pipeline (pawnshop instruments that resisted standard tuning), and the influence of Joni Mitchell's alternate tuning practice alongside Branca's harmonic series work.
+
+\subsubsection{Module 3: Discographic Arc}
+
+The complete studio discography as artistic evolution: from the no wave minimalism of the 1982 debut through the noise-to-melody synthesis of \textit{EVOL}/\textit{Sister}/\textit{Daydream Nation}, the major-label navigation of \textit{Goo}/\textit{Dirty}, the quiet subversion of \textit{Experimental Jet Set}, the extended forms of \textit{Washing Machine}/\textit{A Thousand Leaves}, the post-theft rebuilding, the Jim O'Rourke era (\textit{Murray Street}/\textit{Sonic Nurse}), and the final statement of \textit{The Eternal}. The parallel SYR experimental series (1997--2010) as a shadow discography maintaining the band's avant-garde credentials. \textit{Goodbye 20th Century} as the bridge between rock and the classical avant-garde.
+
+\subsubsection{Module 4: Visual Art \& Cultural Network}
+
+Sonic Youth's album covers as a primer in contemporary art: Gerhard Richter (\textit{Daydream Nation}), Raymond Pettibon (\textit{Goo}), Mike Kelley (\textit{Dirty}), Richard Prince (\textit{Sonic Nurse}), Marnie Weber, William S. Burroughs. Kim Gordon's dual practice as musician and visual artist (Artforum contributor, gallery exhibitions, 303 Gallery representation). Cross-disciplinary collaborations: Merce Cunningham Dance Company (with John Paul Jones), film appearances (\textit{The Simpsons}, \textit{Gossip Girl}, \textit{Gilmore Girls}), the Kill Your Idols documentary. Sonic Youth's curatorial role at All Tomorrow's Parties festival.
+
+\subsubsection{Module 5: Legacy \& Influence}
+
+The band's role as kingmakers in alternative rock: championing Nirvana, Beck, Dinosaur Jr., Pavement, and Mudhoney before their breakthroughs. The direct Nirvana connection (the 1989 Maxwell's show, the 1991 European tour documented in \textit{The Year Punk Broke}, facilitating the DGC signing). Steve Shelley's Smells Like Records (Cat Power, Blonde Redhead). Influence on shoegaze (My Bloody Valentine), post-rock, and subsequent noise-rock. The 2011 dissolution. Post-band activities: Thurston Moore's solo career and activism (the 2026 Gaza requiem album with Bonner Kramer), Kim Gordon's memoir \textit{Girl in a Band} and continued art practice, Lee Ranaldo's solo recordings, the 2020 Bandcamp archive releases.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: "Memory and data flow"
+    assignment: "Source bibliography, tuning database,
+                 discographic metadata"
+    model: haiku
+  denise:
+    role: "Visual and narrative rendering"
+    assignment: "Vision narratives, cultural network mapping,
+                 album cover analysis, through-line prose"
+    model: opus
+  paula:
+    role: "Audio and I/O coordination"
+    assignment: "Sonic architecture analysis, tuning system
+                 documentation, prepared guitar technique catalog"
+    model: sonnet
+  68000:
+    role: "Central processing and synthesis"
+    assignment: "Cross-module integration, influence network
+                 analysis, legacy assessment, editorial judgment"
+    model: opus
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Complete studio discography (16 albums, 1982--2009) with critical context
+\item SYR experimental series (10 releases, 1997--2010)
+\item Alternate tuning system catalog with representative examples per era
+\item Visual art collaborations (album covers, gallery practice, film)
+\item Influence network (bands championed, scenes catalyzed, DGC/Nirvana pipeline)
+\item No wave context (1978--1982) as foundational soil
+\item Post-dissolution solo and collaborative work through 2026
+\item The 1999 equipment theft and its creative consequences
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Exhaustive technical transcription of every tuning (reference the sonicyouth.com tuning database)
+\item Detailed analysis of every live bootleg or unofficial release
+\item Personal biographical detail beyond what is relevant to creative practice
+\item Music theory analysis requiring formal notation (keep accessible)
+\item Commercial sales figures and chart positions (focus on cultural impact, not commerce)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item All 16 studio albums individually documented with recording context, tuning innovations, and critical reception.
+\item At least 8 distinct alternate tunings cataloged with their musical properties and representative songs.
+\item No wave origins traced through at least 5 specific predecessor artists/events with sourced connections.
+\item Visual art collaborations documented for at least 6 album covers with artist context.
+\item Influence network maps at least 10 artists/bands directly influenced by Sonic Youth with specific evidence.
+\item The Nirvana connection documented through at least 4 specific events (1989 Maxwell's show, 1991 tour, DGC signing facilitation, personal relationships).
+\item SYR series documented with compositional context for at least 5 of 10 releases.
+\item \textit{Goodbye 20th Century} analyzed as a bridge between rock and classical avant-garde with at least 4 composers covered.
+\item Kim Gordon's visual art practice documented as integral (not peripheral) to Sonic Youth's methodology.
+\item Post-2011 solo careers surveyed through at least 2026 with connections to Sonic Youth methods.
+\item All sources traceable to professional publications, academic sources, or primary band documentation.
+\item Through-line connects Sonic Youth's architectural approach to GSD ecosystem philosophy.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Technical audio analysis methodology applicable to tuning system study & Receives from \\
+The Space Between (textbook) & Mathematical framework for understanding ``spaces between notes'' & Informs \\
+GSD Amiga Vision & Amiga Principle as parallel to Sonic Youth's architectural leverage & Cross-reference \\
+BBS Educational Pack & Potential Sonic Youth ``Learn Kung Fu'' pack for noise-rock techniques & Future output \\
+Foxfire Heritage Skills & Cross-disciplinary cultural documentation methodology & Pattern source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Sonic Youth's greatest lesson is not about guitar tunings or noise or even music. It is about what happens when you refuse to accept inherited constraints as natural laws. Standard tuning is not a law of physics; it is a convention. Verse-chorus-verse is not a requirement; it is a habit. The boundary between ``art'' and ``rock'' is not a wall; it is a door that swings both ways.
+
+The Amiga Principle holds that architectural leverage---specialized execution paths designed for specific purposes---outperforms brute-force generalism. Sonic Youth proved this with guitars. A Jazzmaster tuned to GABDEG is not a better guitar; it is a \textit{different} guitar, one that can produce ``Teen Age Riot'' in a way that no amount of standard-tuning virtuosity could replicate. The architecture creates the possibility space, and the art fills it.
+
+This is the same insight that drives the GSD ecosystem: that the spaces between---between notes, between nodes, between disciplines---are where meaning lives. Sonic Youth didn't just play in those spaces. They built a thirty-year career proving that the spaces between are the only places worth living.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Sonic Youth --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from professional music journalism, academic sources, band documentation, and primary interviews. Each module provides sourced evidence for the claims in the Vision document and sufficient context for GSD agents to produce comprehensive research outputs.
+
+Key source organizations and archives: Sonic Youth official website and Bandcamp archive (sonicyouth.com, sonicyouth.bandcamp.com); the Library of Congress National Recording Registry; AllMusic and Pitchfork critical databases; the Yale Review (Michael Azerrad's ``The Legacy of Sonic Youth''); Premier Guitar and Guitar World for technical analysis; the Centre Pompidou no wave retrospective documentation; Sotheby's/Domus for visual art connections.
+
+\subsection{Module 1 Reference: Origins \& No Wave Context}
+
+\subsubsection{The No Wave Scene (1978--1982)}
+
+No wave emerged in late-1970s downtown New York City as an avant-garde music and art scene that deliberately rejected commercial new wave music. Musicians took rock instrumentation and experimented with noise, dissonance, and atonality, drawing on free jazz, funk, and disco alongside confrontational performance art aesthetics.
+
+The pivotal moment came in 1978 when Artists Space hosted a five-night underground festival organized by Michael Zwack and Robert Longo, featuring ten local bands including Glenn Branca's Theoretical Girls and Rhys Chatham's Tone Death. Brian Eno, in New York to produce Talking Heads' second album, attended and was sufficiently impressed to produce the compilation \textit{No New York} (1978, Antilles Records), documenting the Contortions, Teenage Jesus and the Jerks, Mars, and DNA. This album became the definitive document of the movement.
+
+Two parallel compositional traditions emerged from no wave that directly shaped Sonic Youth. Glenn Branca developed large-ensemble guitar symphonies using volume, alternative tunings, repetition, and the harmonic series. Rhys Chatham, who had studied under La Monte Young and Morton Subotnick, composed \textit{Guitar Trio} (1977) for massed electric guitars, fusing minimalist processes with punk energy after seeing the Ramones at CBGB. Both Thurston Moore and Lee Ranaldo performed in Branca's guitar ensemble in the early 1980s, absorbing his approach to alternate tunings and prepared instruments.
+
+\subsubsection{Formation of Sonic Youth (1981)}
+
+Thurston Moore arrived in New York City in early 1977 and formed the group Room Tone with his roommates, later renamed the Coachmen. After the Coachmen dissolved, Moore began collaborating with Kim Gordon, whose band CKM featured Stanton Miranda. Moore and Gordon performed under several names---Male Bonding, Red Milk, the Arcadians---before settling on ``Sonic Youth'' in mid-1981. The name combined MC5's Fred ``Sonic'' Smith with reggae artist Big Youth.
+
+The band debuted at Noise Fest in June 1981 at New York's White Columns gallery, a nine-night festival organized by Moore himself. Lee Ranaldo was performing with Glenn Branca's ensemble at the same festival; his performance impressed Moore, who described Branca's group as ``the most ferocious guitar band that I had ever seen in my life.'' Ranaldo was invited to join Sonic Youth.
+
+Anne DeMarinis briefly served as keyboardist for Sonic Youth's first-ever White Columns performance on June 18, 1981, contributing vocals on three known songs. She departed before the self-titled debut EP was recorded in December 1981 at Radio City Music Hall, with Glenn Branca signing the band as the first act on his Neutral Records label.
+
+\subsubsection{Early Lineup Instability (1981--1985)}
+
+The band cycled through several drummers: Richard Edson (who also acted in Jim Jarmusch's \textit{Stranger Than Paradise}) played on the debut EP; Bob Bert was fired after tensions during a 1982 tour with Swans (with whom Sonic Youth shared a rehearsal space); Jim Sclavunos recorded \textit{Confusion Is Sex} (1983) before quitting after a few months; Bert returned for the European tour and \textit{Kill Yr Idols} EP. Steve Shelley joined in 1985, completing the core lineup that would remain stable for twenty-six years.
+
+\subsection{Module 2 Reference: Sonic Architecture}
+
+\subsubsection{The Alternate Tuning System}
+
+Sonic Youth's most fundamental innovation was their systematic use of non-standard guitar tunings. Apart from their 1982 debut EP (which was largely in standard EADGBE tuning), the band did not write new material in standard tuning for the remainder of their career. The sonicyouth.com tuning tutorial documents over 50 distinct tunings used across their catalog.
+
+Key characteristics of Sonic Youth tunings include: unison string pairs (two or more strings tuned to the same note, creating a natural chorus effect and enabling barred melody playing); narrow-range voicings (the interval between the highest and lowest strings compressed to an octave or less, versus the standard two octaves); and chromatic or microtonal relationships between adjacent strings that produce beating overtones when strummed.
+
+Representative tunings and their musical properties:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tuning} & \tableheader{Key Songs} & \tableheader{Properties} \\
+\midrule
+GABDEG & Teen Age Riot, Hey Joni & Open, melodic; the ``Daydream Nation'' sound \\
+F\#F\#F\#F\#EB & Kool Thing, 100\% & Droning, aggressive; four unison strings create massive harmonic density \\
+F\#F\#GGAA & Schizophrenia, Tom Violence & Three sequential diatonic tones in unison pairs; no clear root \\
+CGCCGD & What We Know & Deep C drone, cavernous resonance; ``Sonic C Drone'' \\
+EBEAB & Expressway to Yr. Skull & Open E with narrow range; sustained, hypnotic quality \\
+DDDDAA (Lee) & Various Sister-era & Two-tone drone; maximally minimal harmonic content \\
+GGDDGG & Murray Street era & Jazzy, versatile; doubled notes enable both riff and improvisation \\
+Standard (rare) & Mildred Pierce, covers & Used primarily for cover songs and early material \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Prepared Guitar Techniques}
+
+Beyond tuning, Sonic Youth altered their instruments' timbres through physical preparation. Drumsticks were wedged under strings at specific frets to create buzzing, sitar-like overtones. Screwdrivers were dragged across strings for metallic scraping textures. On early recordings like ``The Burning Spear,'' Moore wedged a drumstick under the strings at the twelfth fret and beat it with a second stick. Lee Ranaldo reportedly used an electric drill through a wah pedal on the original recording. Live performances frequently ended with guitars being thrown against amplifiers, using feedback loops as compositional material rather than accidental noise.
+
+\subsubsection{The Guitar Fleet System}
+
+Because each tuning required specific string gauges and setup adjustments (action, neck relief, intonation), Sonic Youth maintained a large fleet of guitars---each dedicated to one or two tunings. This was initially born of economic necessity: in their early days, the band could not afford quality instruments and instead used pawnshop guitars that often resisted standard tuning, prompting creative alternatives. The Fender Jazzmaster eventually became the primary instrument due to its durability and tonal versatility across tunings.
+
+The 1999 equipment theft (the band's entire touring rig stolen from a van in California) was catastrophic precisely because of this system---each guitar represented not just an instrument but a specific tuning configuration that had been developed over years. The band was forced to rebuild from scratch, which directly influenced the sound of \textit{NYC Ghosts \& Flowers} (2000).
+
+\subsubsection{Influences on the Sonic Method}
+
+Two primary influences converged: Glenn Branca's harmonic series explorations (using volume and massed guitars to bring out overtones that exist in the physics of vibrating strings but are normally inaudible) and, less obviously, Joni Mitchell's extensive use of alternate tunings in folk and jazz contexts. Moore acknowledged this directly: ``Joni Mitchell! I've used elements of her songwriting and guitar playing, and no one would ever know about it.'' The band named their \textit{Daydream Nation} track ``Hey Joni'' in tribute.
+
+\subsection{Module 3 Reference: Discographic Arc}
+
+\subsubsection{Independent Era (1982--1989)}
+
+The self-titled debut EP (1982, Neutral Records) remains the only Sonic Youth recording largely in standard tuning, rooted in no wave and funk-punk. \textit{Confusion Is Sex} (1983) introduced the louder, more dissonant approach. \textit{Bad Moon Rising} (1985, Homestead/Blast First) marked the first major synthesis of feedback-drenched noise with traditional pop structures. \textit{EVOL} (1986, SST Records) and \textit{Sister} (1987, SST) continued refining the noise-melody balance, with Robert Palmer of the \textit{New York Times} famously declaring the band was making ``the most startlingly original guitar-based music since Jimi Hendrix.''
+
+\textit{Daydream Nation} (1988, Enigma Records) was the watershed: a double album that cost \$30,000 to record (their most expensive session to that point), produced with Nick Sansano at Greene Street Recording. Its cover featured Gerhard Richter's 1983 painting \textit{Kerze} (Candle). ``Teen Age Riot'' reached number one on both U.S. alternative and British independent charts. The album was added to the Library of Congress National Recording Registry in 2005 and ranked \#1 on Pitchfork's ``100 Greatest Albums of the 1980s.''
+
+\subsubsection{Major Label Era (1990--2009)}
+
+Sonic Youth signed with DGC Records in 1989, with A\&R executive Gary Gersh promising creative control. \textit{Goo} (1990), with Raymond Pettibon's iconic cover art, was the crossover album, featuring ``Kool Thing'' with Chuck D of Public Enemy. \textit{Dirty} (1992), with Mike Kelley's stuffed-animal cover photography, was their most aggressive major-label statement, including ``Youth Against Fascism'' with Ian MacKaye. \textit{Experimental Jet Set, Trash and No Star} (1994) deliberately retreated into quieter, lo-fi territory. \textit{Washing Machine} (1995) introduced extended compositions (one track nearly 20 minutes), and the band headlined Lollapalooza that year.
+
+The late DGC period saw \textit{A Thousand Leaves} (1998), a semi-improvised album with a Harmony Korine-directed video featuring Macaulay Culkin; the post-theft \textit{NYC Ghosts \& Flowers} (2000); and the Jim O'Rourke era of \textit{Murray Street} (2002) and \textit{Sonic Nurse} (2004, featuring Richard Prince nurse paintings on the cover). \textit{Rather Ripped} (2006), with Mark Ibold (formerly of Pavement) on bass, was surprisingly accessible. \textit{The Eternal} (2009), released on Matador Records after leaving Geffen, was their final studio album---a jolt of punk energy that recalled the \textit{Sister}-through-\textit{Dirty} era intensity.
+
+\subsubsection{The SYR Experimental Series (1997--2010)}
+
+Sonic Youth Recordings (SYR) was the band's own label for experimental releases. Each entry followed a tradition of liner notes in a different language: SYR1 in French, SYR2 in Dutch, SYR3 in Esperanto, SYR4 in English, SYR5 in Japanese, SYR6 in Lithuanian, SYR7 in Arpitan, SYR8 in Danish, SYR9 in French.
+
+The series ranged from free improvisation (SYR1: \textit{Anagrama}, 1997) to the ambitious double-disc \textit{Goodbye 20th Century} (SYR4, 1999), which featured Sonic Youth's interpretations of works by John Cage, Steve Reich, Yoko Ono, Pauline Oliveros, Christian Wolff, George Maciunas, James Tenney, Cornelius Cardew, and Takehisa Kosugi. Pauline Oliveros composed ``Six for New Time'' specifically for the project. Moore and Gordon's five-year-old daughter Coco provided vocals for Ono's ``Voice Piece for Soprano.'' Other notable entries include SYR6 (a live recording dedicated to filmmaker Stan Brakhage), SYR8 (with noise artists Mats Gustafsson and Merzbow), and SYR9 (the soundtrack to the film \textit{Simon Werner a Disparu}).
+
+\subsection{Module 4 Reference: Visual Art \& Cultural Network}
+
+\subsubsection{Album Covers as Art Primer}
+
+Sonic Youth's discography functions as an introduction to contemporary art. The collaborations were not decorative but conceptual---each artist's work resonated with the album's sonic character:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Artist} & \tableheader{Significance} \\
+\midrule
+Daydream Nation (1988) & Gerhard Richter & \textit{Kerze} (1983); painting later sold for \$16.6 million in 2011 \\
+Goo (1990) & Raymond Pettibon & Iconic black-and-white drawing that became one of alt-rock's defining images \\
+Dirty (1992) & Mike Kelley & Stuffed-animal photography; Kelley explored trauma, identity, and the emotional value of everyday objects \\
+Sonic Nurse (2004) & Richard Prince & Nurse Paintings series; Prince known for rephotography and appropriation art \\
+Various & Richard Kern, Marnie Weber, William S. Burroughs & Additional collaborations spanning the band's career \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Kim Gordon as Visual Artist}
+
+Kim Gordon was not merely a musician who dabbled in art---she was a trained visual artist who happened to play in a band. She and Ranaldo were art majors; Gordon contributed criticism to \textit{Artforum}, the preeminent contemporary art journal. Her exhibition \textit{Portraits \#17-37} (2007, Iguapop Gallery, Barcelona) featured works inspired by observing audiences during Sonic Youth concerts. She joined 303 Gallery for representation as a visual artist. Her 2015 memoir \textit{Girl in a Band} and Thurston Moore's 2023 memoir \textit{Sonic Life} both document the deep entanglement of art and music in the band's practice.
+
+\subsubsection{Cross-Disciplinary Collaborations}
+
+Sonic Youth collaborated with the Merce Cunningham Dance Company alongside Led Zeppelin guitarist John Paul Jones, performed at the Brooklyn Academy of Music, appeared on \textit{The Simpsons} (the 1996 ``Homerpalooza'' episode, playing a discordant version of the theme), \textit{Gilmore Girls}, and \textit{Gossip Girl}. They curated the first All Tomorrow's Parties music festival. They hired emerging filmmakers Spike Jonze, Todd Haynes, and Sofia Coppola (the latter appearing in their video) before those directors achieved fame. The 2009 exhibition \textit{Sonic Youth: Sensational Fix} traveled internationally, presenting the band's visual art connections as a comprehensive curatorial project.
+
+\subsection{Module 5 Reference: Legacy \& Influence}
+
+\subsubsection{The Nirvana Pipeline}
+
+Sonic Youth's most consequential act of cultural curation was their championing of Nirvana. The key events: On July 13, 1989, Moore and Gordon attended Nirvana's show at Maxwell's in Hoboken, New Jersey, at the invitation of Sub Pop co-owner Bruce Pavitt. Kurt Cobain had listed \textit{Daydream Nation} in his ``Top 50 by Nirvana'' journal entries. In 1991, Sonic Youth invited Nirvana (still on Sub Pop) to join them on a European festival tour, documented in the film \textit{1991: The Year Punk Broke}. The band facilitated Nirvana's signing to DGC Records, the same label Sonic Youth was on. Cobain described the tour invitation as ``a dream come true.'' Gordon developed a protective, ``big sisterly'' relationship with Cobain.
+
+\subsubsection{Broader Influence Network}
+
+The Yale Review's assessment (Michael Azerrad, 2023) identifies Sonic Youth's curatorial influence as extending well beyond direct musical imitation: championing Beck, Dinosaur Jr., Pavement, and Mudhoney before their breakthroughs. A 1988 split single with the newly formed Mudhoney ``validated not only Mudhoney but the entire nascent Seattle grunge scene.'' Steve Shelley's Smells Like Records label introduced Cat Power and Blonde Redhead. The band's attorney Richard Grabel became a leading indie-rock lawyer; their manager John Silva became one of the most powerful in the industry.
+
+Musical influence extended to My Bloody Valentine (noise and feedback textures), the broader shoegaze movement, and subsequent generations of noise-rock artists. As Azerrad notes, ``not many bands were directly influenced by Sonic Youth in a musical sense---the band's sound was too idiosyncratic to copy---but many were inspired to reject traditional ideas of what songs had to sound like.''
+
+\subsubsection{Post-Dissolution (2011--2026)}
+
+The band dissolved in 2011 following the separation and subsequent divorce of Moore and Gordon. All members have stated the band is over and will not reform. Since the breakup: Moore has pursued a prolific solo career and announced a collaborative album with Bonner Kramer titled \textit{They Came Like Swallows---Seven Requiems for the Children of Gaza} (scheduled May 2026); Gordon published \textit{Girl in a Band} (2015) and continues visual art practice; Ranaldo has released solo albums and performed with his group The Dust; Shelley continues drumming with various projects. In 2020, the band released an extensive archive of live recordings on Bandcamp, and in 2022, the rarities EP \textit{In/Out/In} featured previously unissued outtakes from 2000--2010.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Guidance} & \tableheader{Boundary} \\
+\midrule
+Moore/Gordon divorce & Document as factual cause of dissolution; avoid personal judgment or speculation on private matters & GATE \\
+Kurt Cobain's death & Reference only insofar as it relates to Sonic Youth's experience; handle with appropriate gravity & GATE \\
+Political content & Songs like ``Youth Against Fascism'' and Moore's activism: present factually without advocacy & ANNOTATE \\
+Mental health references & ``Schizophrenia'' (inspired by Gordon's brother's condition): note personal origin with sensitivity & GATE \\
+Source attribution & All critical claims attributed to professional publications or primary sources & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Band Sources}
+
+Sonic Youth official website (sonicyouth.com): discography, tuning tutorials, album notes. Sonic Youth Bandcamp archive (sonicyouth.bandcamp.com): complete catalog with liner notes. Thurston Moore, \textit{Sonic Life: A Memoir} (Doubleday, 2023). Kim Gordon, \textit{Girl in a Band} (Dey Street Books, 2015). Thurston Moore and Byron Coley, \textit{No Wave: Post-Punk. Underground. New York. 1976--1980} (Harry N. Abrams, 2008).
+
+\subsubsection{Critical and Academic Sources}
+
+Michael Azerrad, ``The Legacy of Sonic Youth,'' \textit{The Yale Review} (2023). David Browne, \textit{Goodbye 20th Century: A Biography of Sonic Youth} (Da Capo Press, 2008). Library of Congress National Recording Registry (2005 induction of \textit{Daydream Nation}). Centre Pompidou, ``Who You Staring At? Visual Culture of the No Wave Scene'' (2023 exhibition). Jutta Koether, liner notes for \textit{Daydream Nation} 1993 Geffen reissue. Robert Palmer, \textit{New York Times} review (1986).
+
+\subsubsection{Technical and Music Press}
+
+Premier Guitar, ``The Recording Guitarist: The Narrow-Range Tuning Trick'' (technical analysis of Sonic Youth tuning methods). Stringjoy, ``The Alternate Tunings of Sonic Youth: A Primer'' (tuning documentation). AllMusic, Pitchfork, \textit{Rolling Stone}, \textit{Spin}, \textit{Guitar World}, \textit{Billboard}, \textit{Entertainment Weekly} reviews and features. Sotheby's/Domus coverage of Gerhard Richter and Sonic Youth album art connections.
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Sonic Youth spanning their no wave origins, sonic innovations, complete discographic arc, visual art network, and enduring legacy. The output must be self-contained, richly sourced, and structured for both casual reading and reference use. Total estimated output: 40,000--60,000 words across all deliverables.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential)
+  [Shared schemas] --> [Source index] --> [Tuning database scaffold]
+                                              |
+WAVE 1: PARALLEL RESEARCH (2 tracks)          |
+  Track A: Origins + Sonic Architecture ------+
+  Track B: Discography + Visual Art -----------+
+                                               |
+WAVE 2: SYNTHESIS (Sequential)                 |
+  [Legacy & Influence] --> [Cross-module integration]
+                                               |
+WAVE 3: PUBLICATION + VERIFICATION (Sequential)|
+  [Document assembly] --> [Test suite] --> [Final verification]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source bibliography, tuning database structure
+\item \textbf{Research Layer} --- Five parallel-capable module surveys
+\item \textbf{Synthesis Layer} --- Cross-module integration, influence network analysis
+\item \textbf{Publication Layer} --- Final document assembly with editorial quality control
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Origins \& No Wave Survey & No wave context with 5+ predecessor connections & M1 \\
+D2 & Sonic Architecture Analysis & 8+ tunings cataloged, prepared guitar techniques documented & M2 \\
+D3 & Complete Discographic Guide & All 16 albums + 5+ SYR releases documented & M3 \\
+D4 & Visual Art \& Cultural Network Map & 6+ album cover artists, Kim Gordon's practice, cross-disciplinary work & M4 \\
+D5 & Legacy \& Influence Assessment & 10+ influenced artists, Nirvana pipeline, post-2011 survey & M5 \\
+D6 & Integrated Research Document & All modules synthesized into single publication-quality document & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 2,000 \\
+Source index & None & Haiku & 3,000 \\
+M1: Origins survey & Schemas, sources & Sonnet & 12,000 \\
+M2: Sonic architecture & Schemas, sources & Sonnet & 15,000 \\
+M3: Discographic arc & Schemas, sources & Sonnet & 18,000 \\
+M4: Visual art network & Schemas, sources & Opus & 12,000 \\
+M5: Legacy synthesis & M1--M4 & Opus & 15,000 \\
+Cross-module integration & M1--M5 & Opus & 10,000 \\
+Document assembly & All modules & Sonnet & 8,000 \\
+Verification & Full document & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis, cultural network analysis, editorial judgment, through-line prose, cross-module integration \\
+Sonnet & 60\% & Module surveys, discographic documentation, technical analysis, verification, document assembly \\
+Haiku & 10\% & Shared schemas, source index scaffolding, template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Models} \\
+\midrule
+0 & Foundation & Sequential & 2 & Haiku \\
+1 & Parallel Research & Parallel (2 tracks) & 8 & Sonnet + Opus \\
+2 & Synthesis & Sequential & 4 & Opus \\
+3 & Publication + Verification & Sequential & 4 & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0.1 & Define shared schemas & Album entry schema, tuning entry schema, artist collaboration schema & Haiku \\
+0.2 & Build source index & Categorized bibliography with quality ratings & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Origins + Sonic Architecture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A.1 & No wave context survey & D1: Origins document (8,000--10,000 words) & Sonnet \\
+1A.2 & Tuning system catalog & Tuning database with 8+ entries & Sonnet \\
+1A.3 & Prepared guitar techniques & D2: Sonic Architecture document (10,000--12,000 words) & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Discography + Visual Art}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1B.1 & Studio album survey & All 16 albums documented & Sonnet \\
+1B.2 & SYR series survey & 5+ SYR releases documented & Sonnet \\
+1B.3 & Visual art network & D4: Visual Art document (8,000--10,000 words) & Opus \\
+1B.4 & Discographic synthesis & D3: Complete Discographic Guide (12,000--15,000 words) & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Influence network analysis & Influence map with 10+ connections & Opus \\
+2.2 & Legacy assessment & D5: Legacy document (10,000--12,000 words) & Opus \\
+2.3 & Cross-module integration & Connection index, consistency check & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Document assembly & D6: Integrated document & Sonnet \\
+3.2 & Test suite execution & Verification results & Sonnet \\
+3.3 & Final editorial pass & Publication-ready document & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Shared schemas loaded once in Wave 0 and cached for all subsequent waves (5-minute TTL window)
+\item Source index available to all Wave 1 agents without re-generation
+\item Track A and Track B run in parallel with no shared dependencies beyond Wave 0 outputs
+\item Wave 2 synthesis agents receive completed module documents via structured handoff bundles
+\item Tuning database built incrementally during Track A, available as reference for Track B discographic entries
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 0 & 5,000 & 5,000 \\
+Wave 1 & 12,000 & 45,000 & 0 & 57,000 \\
+Wave 2 & 25,000 & 0 & 0 & 25,000 \\
+Wave 3 & 0 & 13,000 & 0 & 13,000 \\
+\midrule
+\textbf{Total} & \textbf{37,000} & \textbf{58,000} & \textbf{5,000} & \textbf{100,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Schemas]--->[Source Index]
+    |              |
+    +------+-------+
+           |
+     +-----+------+
+     |             |
+  [Track A]    [Track B]
+  M1 + M2      M3 + M4
+     |             |
+     +------+------+
+            |
+         [Wave 2]
+       M5 + Integration
+            |
+         [Wave 3]
+       Assembly + Verify
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All claims traceable to professional publications, primary band sources, or academic references. Zero unsourced blog claims. \\
+SC-NUM & Numerical attribution & Every date, count, dollar amount, and chart position attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents Sonic Youth's political songs and activism factually without endorsing specific positions. \\
+SC-PRI & Personal privacy & Moore/Gordon relationship discussed only as factual cause of dissolution; no speculation on personal matters. \\
+SC-MH & Mental health sensitivity & ``Schizophrenia'' song context notes personal origin (Gordon's brother) with appropriate gravity; no trivialization. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Album completeness & All 16 studio albums individually documented with year, label, and context. \\
+CF-02 & Album recording detail & At least 10 albums include recording location, producer, or tuning specifics. \\
+CF-03 & Tuning catalog breadth & At least 8 distinct tunings documented with properties and example songs. \\
+CF-04 & Tuning technical accuracy & Tuning note sequences match sonicyouth.com tuning database. \\
+CF-05 & No wave predecessors & At least 5 specific predecessor artists/events with sourced connections to SY. \\
+CF-06 & No wave timeline & Key events (1978 Artists Space, 1981 Noise Fest) dated and sourced. \\
+CF-07 & Visual art covers & At least 6 album covers documented with artist name and significance. \\
+CF-08 & Kim Gordon art practice & Gordon's visual art documented as distinct practice (Artforum, galleries, 303). \\
+CF-09 & Influenced artists & At least 10 artists/bands with specific evidence of SY influence. \\
+CF-10 & Nirvana pipeline events & At least 4 specific events in the SY-Nirvana relationship documented. \\
+CF-11 & SYR series & At least 5 of 10 SYR releases documented with compositional context. \\
+CF-12 & Goodbye 20th Century & At least 4 composers from the album discussed with context. \\
+CF-13 & Post-2011 survey & All 4 core members' post-dissolution activities surveyed through 2026. \\
+CF-14 & Equipment theft & 1999 theft documented with its creative consequences on subsequent recordings. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Tuning-to-album cascade & Tuning innovations traced from M2 to specific albums in M3. \\
+IN-02 & Art-to-album consistency & Visual artists in M4 match album cover credits in M3. \\
+IN-03 & Origins-to-legacy arc & No wave context in M1 connects to influence assessment in M5. \\
+IN-04 & Cross-module data consistency & Dates, names, and facts consistent across all modules. \\
+IN-05 & Document self-containment & A reader with no prior knowledge can understand the full Sonic Youth story. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Disputed facts & Where sources conflict (e.g., exact tuning for a specific song), noted with uncertainty language. \\
+EC-02 & Data gaps & Areas where primary documentation is incomplete (e.g., early live recordings) acknowledged. \\
+EC-03 & Temporal currency & Most recent activity (through early 2026) included where available. \\
+EC-04 & Minority perspectives & Critical dissent from the consensus view of SY's importance acknowledged. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 16 albums documented & CF-01, CF-02 & Pending \\
+2. 8+ tunings cataloged & CF-03, CF-04 & Pending \\
+3. 5+ no wave predecessors & CF-05, CF-06 & Pending \\
+4. 6+ album cover artists & CF-07 & Pending \\
+5. 10+ influenced artists & CF-09 & Pending \\
+6. Nirvana connection (4+ events) & CF-10 & Pending \\
+7. 5+ SYR releases documented & CF-11 & Pending \\
+8. Goodbye 20th Century (4+ composers) & CF-12 & Pending \\
+9. Kim Gordon art practice integral & CF-08 & Pending \\
+10. Post-2011 through 2026 & CF-13, EC-03 & Pending \\
+11. All sources professional & SC-SRC, SC-NUM & Pending \\
+12. Through-line to GSD philosophy & IN-03, IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; web research for gap-filling \\
+EXEC-A & Executor (Track A) & Origins + Sonic Architecture document production \\
+EXEC-B & Executor (Track B) & Discography + Visual Art document production \\
+CRAFT-SONIC & Sonic Specialist & Tuning system analysis; prepared guitar documentation \\
+CRAFT-ART & Cultural Specialist & Visual art network; cross-disciplinary analysis \\
+VERIFY & Verification & Source validation; fact-checking; tuning accuracy \\
+INTEG & Integration Agent & Cross-module consistency; influence network mapping \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total estimated tokens & 100,000 \\
+Context windows & 18 \\
+Sessions & 4 \\
+Parallel tracks & 2 \\
+Activation profile & Squadron (12 roles) \\
+Model split & Opus 37\% / Sonnet 58\% / Haiku 5\% \\
+Deliverables & 6 (5 module documents + 1 integrated publication) \\
+Test count & 28 (5 safety + 14 core + 5 integration + 4 edge) \\
+Safety-critical tests & 5 (all mandatory-pass / BLOCK) \\
+Estimated output & 40,000--60,000 words \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The most genuine exploratory aspect of Sonic Youth, I felt, was in how a rock song could function outside traditional rock structure, even as it borrowed rock's established language.''}
+
+\vspace{0.5em}
+--- Thurston Moore, \textit{Sonic Life}
+
+\vspace{1em}
+The spaces between the notes are where Sonic Youth lived for thirty years. Not in the noise and not in the melody, but in the tension between them---in the overtones that emerge when two strings tuned a microtone apart vibrate together, creating something neither string could produce alone. This is the Amiga Principle rendered in sound: architectural leverage, specialized execution paths, meaning emerging from the connections rather than the nodes. Sonic Youth didn't just make music in the spaces between. They proved that the spaces between are the only places worth making music.
+\end{quotebox}
+
+\end{document}

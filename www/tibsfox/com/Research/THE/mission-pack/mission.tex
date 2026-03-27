@@ -1,0 +1,1022 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% --- COLOR SCHEME: Engineering/Energy (Steel + Thermal + Forest) ---
+\definecolor{primary}{HTML}{1A3A4A}       % Deep steel blue — section headers
+\definecolor{secondary}{HTML}{B84B00}     % Thermal orange — subsection headers
+\definecolor{tertiary}{HTML}{1B5E20}      % Forest green — subsubsection headers
+\definecolor{accent}{HTML}{E65100}        % Hot accent — highlights
+\definecolor{lightprimary}{HTML}{E8F0F4}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% --- SECTION FORMATTING ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% --- CUSTOM ENVIRONMENTS ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% --- TABLE HELPERS ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% --- HEADERS/FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Thermal \& Hydrogen Energy Systems}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% --- HYPERLINKS ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdftitle={Thermal and Hydrogen Energy Systems -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ============================================================
+\begin{document}
+
+%% ---- TITLE PAGE ----
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Thermal \& Hydrogen\\[0.3em]Energy Systems}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{HVAC · Heat Pumps · Waste Heat Recovery · Catalysis\\Fuel Cells · Solar Electrolysis · Geothermal · Hydroelectric}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Pacific Northwest Focus — Global Technology Scope}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 10, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 modules) \quad|\quad Estimated: 12--16 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+%% ---- TABLE OF CONTENTS ----
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1: VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Thermal \& Hydrogen Energy Systems --- Vision Guide}
+
+\metafield{Date:}{March 10, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Scope:}{Global technology survey with Pacific Northwest regional focus}
+\metafield{Context:}{Cold-start research mission; no prior conversation to harvest}
+\metafield{Activation Profile:}{Fleet (6 modules, 3+ parallel tracks)}
+
+\subsection{Vision}
+
+Energy is fundamentally a story about heat. Every joule produced by the sun, stored in chemical bonds, liberated by combustion, or shuffled through a turbine ultimately becomes entropy — warmth leaking toward equilibrium. The real engineering question is never \textit{how to make energy}, but \textit{how to intercept it before it disperses}, and how many times we can pass it through something useful on its way to the cold sink.
+
+This mission is an investigation into that interception. It spans six interconnected domains: the engineered thermal environment (HVAC and heat pumps), the reclamation of heat already lost (waste heat recovery), the chemistry of conversion (catalytic systems), the electrochemical transformation of hydrogen into electricity (fuel cells), the reverse operation of splitting water with sunlight (solar electrolysis), and the natural thermal and gravitational gradients of the Pacific Northwest itself (geothermal and hydroelectric generation). Together these domains form a complete circuit of thermal energy — from extraction to conversion to storage to release.
+
+The Pacific Northwest occupies a privileged position in this landscape. Washington state delivers one-quarter of all U.S. hydroelectric generation through facilities like Grand Coulee Dam; Oregon holds the nation's third-largest geothermal potential, largely untapped; and both states are committed to 100\% clean electricity by 2045. The region therefore serves simultaneously as one of the world's most mature renewable energy grids and one of its most underexplored geothermal frontiers. Understanding how heat pump electrification, hydrogen production, waste heat reclamation, and grid-scale storage fit into this specific geography is the mission's animating geographic question.
+
+Beneath the technologies lies a deeper pattern: the same mathematics that describes heat flowing through a wall also describes protons crossing a membrane, electrons moving through an external circuit, and water finding its way downhill to a turbine. The topology of energy flow — the shape of the gradients — is more fundamental than any particular machine that exploits them. This mission will surface those structural parallels wherever they appear.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Stranded thermal energy is the largest single source of industrial inefficiency.} Between 20 and 50 percent of industrial energy input is lost as waste heat in exhaust gases, cooling water, or equipment surfaces (U.S. Department of Energy estimate). The technology to reclaim much of this heat exists — organic Rankine cycles, thermoelectric generators, heat exchangers — but deployment remains constrained by high upfront costs and incomplete techno-economic frameworks.
+
+  \item \textbf{Building heating and cooling accounts for approximately 10 percent of global CO\textsubscript{2} emissions, and the electrification pathway through heat pumps is not yet fully mapped.} Heat pumps are 3--5 times more efficient than fossil fuel boilers (IEA), yet their deployment is still limited by upfront cost, refrigerant regulations in transition, grid readiness, and a persistent cold-climate performance perception gap.
+
+  \item \textbf{Green hydrogen through solar electrolysis remains expensive and intermittent, without a fully optimized system architecture.} Green hydrogen constituted only 0.03\% of global hydrogen production as of 2020. Electrolyzer costs, solar intermittency, compression energy penalties (up to 25\% of hydrogen energy), and materials constraints for PEM catalysts all require integrated solutions.
+
+  \item \textbf{Catalytic conversion systems face a materials transition.} Platinum group metals (platinum, palladium, rhodium) are simultaneously the most effective catalysts, among the rarest materials on Earth, and subject to supply chain fragility. The transition to non-PGM catalysts, single-atom catalysis, and perovskite/zeolite alternatives is active but not yet at commercial scale.
+
+  \item \textbf{The Pacific Northwest's geothermal resource is chronically underdeveloped.} Historical hydropower economics made geothermal investment unattractive in the region; now that grid demand is rising and EGS (Enhanced Geothermal Systems) technology is maturing, the Cascade Range's magmatic geothermal resources represent a substantial, undercharacterized opportunity.
+
+  \item \textbf{Hydroelectric generation in the PNW faces dual pressures:} climate-driven variability (a 20\% production drop in 2023 versus 2021, the lowest in two decades) and ecological constraints on dam operations. Pumped storage, modernized turbines, and grid coordination with wind/solar must compensate for reduced peak reliability.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Gradient Interception Model:} Every technology in this study is, at its core, a device that intercepts an energy gradient — thermal, chemical, electrochemical, gravitational — and converts some portion of it to useful work before it dissipates. The figure of merit for any system is not raw efficiency at the point of conversion but \textit{total gradient utilization}: how many times the same joule passes through a useful machine before becoming irreversible entropy.
+
+\subsubsection{Domain Map (PNW Energy Topology)}
+
+\begin{asciibox}
+  SOLAR RESOURCE (seasonal, variable)
+         |
+         |---[Solar Electrolysis]---> H2 ---> [Fuel Cell] ---> Electricity
+         |                                                          |
+         |                                                          v
+  WIND (Columbia Gorge)                                      [HVAC / Heat Pump]
+         |                                                          |
+         v                                                          v
+  [Grid] <-----[Hydroelectric / Grand Coulee, Bonneville]------> LOAD
+         |
+         |---[Geothermal] (Cascades / Newberry Crater)
+         |         Enhanced Geothermal Systems (EGS) emerging
+         |
+  INDUSTRIAL PROCESSES
+         |---[Waste Heat Recovery]---> [ORC / TEG / Heat Exchanger] ---> Power / Heat
+         |
+  VEHICLE FLEET
+         |---[Catalytic Conversion]---> Emission reduction, PGM minimization
+         |---[Fuel Cell Vehicles]----> Zero-emission propulsion
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  Module A: HVAC & Heat Pump Systems        [Core thermal infrastructure]
+  Module B: Waste Heat Recovery             [Industrial reclamation]
+  Module C: Catalytic Conversion            [Chemistry of conversion]
+  Module D: Fuel Cell Technology            [Electrochemical generation]
+  Module E: Solar Electrolysis              [Green hydrogen pathway]
+  Module F: PNW Geothermal & Hydroelectric  [Regional renewable base]
+
+  Cross-cutting thread: MATERIALS (PGM alternatives, perovskites, membranes)
+  Cross-cutting thread: ECONOMICS (LCOH, LCOE, techno-economic analysis)
+  Cross-cutting thread: GRID INTEGRATION (storage, dispatch, demand response)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: HVAC and Heat Pump Systems}
+Survey the thermodynamic principles, performance metrics (COP, HSPF, SEER), and current deployment landscape of air-source and ground-source heat pumps. Examine refrigerant transitions (R-410A to R-32 and natural refrigerants), cold-climate performance advances (COP $\geq$ 1.75 at 5°F per EPA 2025 criteria), demand-side grid response, and the relationship between building envelope efficiency and heat pump sizing.
+
+\subsubsection{Module B: Waste Heat Recovery}
+Inventory WHR technologies by temperature class: high-grade (>400°C), medium-grade (100--400°C), and low-grade (<100°C). Evaluate organic Rankine cycles (ORC), thermoelectric generators (TEGs), heat pipe systems, Kalina cycles, and phase-change material (PCM) storage. Quantify industrial opportunity (DOE estimate: 20--50\% of industrial energy lost as waste heat). Examine the Springer Nature 2025 finding that WHR systems reduce industrial energy use and carbon emissions by 20--30\%.
+
+\subsubsection{Module C: Catalytic Conversion}
+Survey three-way catalytic converter (TWC) technology for NOx/CO/HC reduction. Document the PGM material challenge (platinum, palladium, rhodium supply constraints). Examine advances in non-PGM alternatives: perovskite oxides, zeolites, spinel compounds, and single-atom catalysis. Cover industrial catalysis applications (autothermal reforming, ammonia synthesis) and the crossover with hydrogen fuel cell catalysts.
+
+\subsubsection{Module D: Fuel Cell Technology and Applications}
+Survey primary fuel cell types: PEM (polymer electrolyte membrane), SOFC (solid oxide), AFC (alkaline), PAFC, MCFC. Document DOE performance targets: 60\%+ electrical efficiency, 80,000-hour durability for stationary systems, 30,000-hour for heavy-duty vehicles. Cover 2025 milestones: UCLA 200,000-hour PEM stack life demonstration, Bloom Energy 65\% SOFC efficiency. Examine transportation (hydrogen trucks, forklifts, aviation), stationary power, and combined heat-and-power (CHP) applications.
+
+\subsubsection{Module E: Solar Electrolysis and Green Hydrogen}
+Map the four electrolyzer technology families: AWE (alkaline, 70--80\% efficiency), PEMEL (PEM electrolysis, 75--85\%), SOEC (solid oxide, up to 90\%), and AEM. Examine photoelectrochemical (PEC) direct solar-to-hydrogen conversion (NREL 12.4\% demonstrated efficiency). Document the NREL/DOE cost trajectory: green hydrogen from \$6/kg (2018) to \$3--4/kg (2024), target \$1/kg by 2031 (Hydrogen Shot). Cover solar thermochemical hydrogen (STCH) as the next-generation pathway. Examine PNW-specific potential given the region's abundant hydropower for low-carbon electrolysis.
+
+\subsubsection{Module F: PNW Geothermal and Hydroelectric Power}
+Document Washington's hydroelectric dominance (63.2\% of state electricity, 2025; Grand Coulee at 6,809 MW). Characterize Oregon's hydroelectric profile (42\% of state generation, 2023). Assess the geothermal landscape: Oregon's Newberry Crater (AltaRock EGS project), Klamath Falls district heating (operational since 1981), Neal Hot Springs (22 MW, operational 2012), and emerging Washington Geothermal Resources Act (2024). Examine PNNL's 2024 study projecting 5\% hydropower increase by 2039 and 10\% by 2059 for the U.S., with PNW climate-variability risks.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  profile: fleet
+  modules: 6
+  parallel_tracks: 3
+  model_allocation:
+    opus_4:     30%   # Synthesis, cross-module integration, economics
+    sonnet_4_5: 60%   # Module surveys, data tables, document assembly
+    haiku_4_5:  10%   # Shared schemas, templates, scaffolding
+  wave_structure:
+    wave_0: Foundation (schemas, source index)         -- Sequential, Haiku
+    wave_1: Modules A+B+C (parallel track 1)           -- Parallel, Sonnet
+    wave_1: Modules D+E+F (parallel track 2)           -- Parallel, Sonnet
+    wave_2: Cross-module synthesis + PNW integration   -- Sequential, Opus
+    wave_3: Publication + verification                 -- Sequential, Sonnet
+  context_windows: 12-16
+  sessions: 4-5
+  human_checkpoints: [Wave 0 complete, Wave 1 complete, Wave 2 complete, Final]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Air-source and ground-source heat pump technology, performance, and deployment
+  \item Industrial waste heat recovery: ORC, TEG, heat exchangers, PCM, heat pipes
+  \item Automotive and industrial catalytic conversion, PGM and non-PGM materials
+  \item PEM, SOFC, AFC, and MCFC fuel cell types, performance, and applications
+  \item Solar-powered electrolysis (PV+electrolyzer, PEC, STCH) and green hydrogen economics
+  \item Washington and Oregon geothermal and hydroelectric resource characterization
+  \item PNW grid integration context (BPA, Bonneville, Western Interconnection)
+  \item Techno-economic analysis (LCOE, LCOH, COP, WHR payback)
+  \item Materials crossovers: PGM alternatives serving catalysts, fuel cells, and electrolyzers
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Nuclear power (separate mission scope)
+  \item Battery storage technology (except as context for hydrogen storage comparison)
+  \item Carbon capture and sequestration as a primary topic
+  \item Gray or blue hydrogen production pathways (survey only, not primary focus)
+  \item Offshore wind (PNW focus only)
+  \item Biomass and waste-to-energy (tangential)
+  \item British Columbia cross-border energy flows (background only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Heat pump COP performance at standard (47°F) and cold-climate (5°F) conditions documented with EPA/IEA data.
+  \item Refrigerant transition landscape (R-410A phase-down, R-32 and natural refrigerant adoption) surveyed with timeline.
+  \item WHR technology comparison table covers $\geq$6 technologies with temperature class, efficiency range, and capital cost.
+  \item DOE waste heat potential quantified: at least three industrial sectors with energy loss percentages cited.
+  \item Catalytic converter PGM usage and non-PGM alternatives documented with at least 3 candidate materials and performance data.
+  \item Fuel cell efficiency comparison covers $\geq$4 cell types with electrical efficiency, durability target, and application domain.
+  \item Green hydrogen cost trajectory from 2018 to 2024 and projections to 2031 documented with NREL/DOE sources.
+  \item Electrolyzer technology comparison (AWE, PEMEL, SOEC, AEM) includes efficiency and CAPEX ranges in 2024 USD.
+  \item Washington and Oregon hydroelectric capacity figures documented with source (EIA or BPA) for 2024--2025.
+  \item PNW geothermal potential mapped with at least 4 operational or development-stage facilities identified.
+  \item Cross-module connection between fuel cell catalyst materials and electrolysis catalyst materials explicitly drawn.
+  \item PNW grid integration section addresses how geothermal + hydroelectric + hydrogen storage form a coherent dispatchable clean energy mix.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Skill-Creator Mission & Parent architecture & This mission to be executed by Skill-Creator agent team \\
+PNW Clean Energy Grid Study & Downstream consumer & Module F findings feed regional grid modeling \\
+Materials Science: PGM Alternatives & Upstream source & Modules C, D, E share catalyst material requirements \\
+Hydrogen Economy Roadmap & Parallel scope & Modules D+E contribute to broader H2 economy picture \\
+Building Electrification Study & Adjacent scope & Module A (heat pumps) feeds building decarbonization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every technology in this study is, at its deepest level, a boundary condition problem. The heat pump does not generate warmth — it exploits a temperature gradient between inside and outside, amplifying the difference the way a transistor amplifies a signal. The fuel cell does not ``burn'' hydrogen — it forces protons and electrons to travel different paths to recombination, harvesting the difference in potential. The catalytic converter doesn't destroy pollutants — it lowers the activation energy barrier so the molecules can find their ground state faster. The geothermal well doesn't create heat — it taps a gradient between Earth's interior and its surface that has been building since accretion.
+
+The polymath's insight here is that the \textit{same formal structure} — gradient, barrier, interception device, waste stream — repeats at every scale and in every domain in this study. To understand one of these systems deeply is to understand all of them in rough outline. The through-line for this mission is therefore not merely practical (``how do we decarbonize energy?'') but structural: \textit{how does the universe's tendency toward equilibrium, when skillfully interrupted, become civilization?}
+
+The Pacific Northwest is an unusually clear expression of this principle. Gravity pulls water toward the ocean; we interrupt it at Grand Coulee and Bonneville. The Earth radiates heat from its mantle; we interrupt it at Newberry Crater. The sun illuminates water; we interrupt that illumination with a PEC cell and produce hydrogen. The residual heat of combustion escapes up a flue; we interrupt it with an ORC and recover a fraction. Each interruption is imperfect; the mission is to understand the state of the art in each, and where they might be woven together into something more complete than any single technology alone.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2: RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Thermal \& Hydrogen Energy Systems --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each research module. Data should be cited to the sources listed; all statistics require attribution. No findings in this section should be reproduced without verifying against the primary source.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item International Energy Agency (IEA) — global energy statistics, heat pump deployment, hydrogen roadmaps
+  \item U.S. Department of Energy (DOE) / Hydrogen and Fuel Cell Technologies Office (HFTO) — fuel cell targets, electrolyzer cost data, waste heat estimates
+  \item National Renewable Energy Laboratory (NREL) — solar hydrogen, electrolyzer cost projections, hydropower forecasts
+  \item Pacific Northwest National Laboratory (PNNL) — hydropower climate projections, PNW grid analysis
+  \item U.S. Energy Information Administration (EIA) — state energy profiles, generation mix data
+  \item U.S. Environmental Protection Agency (EPA) / ENERGY STAR — heat pump efficiency standards
+  \item Bonneville Power Administration (BPA) — Columbia River hydroelectric operations
+  \item Geothermal Rising / Oregon Department of Energy — PNW geothermal resource data
+  \item Nature Energy, Applied Energy, Renewable Energy (journals) — peer-reviewed technology findings
+  \item Oxford Institute for Energy Studies — hydrogen economics analysis
+\end{itemize}
+
+\subsection{Module A Reference: HVAC and Heat Pump Systems}
+
+\subsubsection{Thermodynamic Principles and Performance Metrics}
+Heat pumps transfer thermal energy rather than generating it, using the vapor-compression cycle (identical in principle to a refrigerator operating in reverse). The primary efficiency metric is Coefficient of Performance (COP): useful heat output divided by electrical energy input. The IEA reports that commercially available heat pumps achieve a COP of 3 to 5, meaning they deliver 3 to 5 units of heat per unit of electricity consumed — compared to a natural gas boiler's maximum of 1 unit of heat per unit of fuel energy.
+
+The EPA ENERGY STAR Most Efficient 2025 criteria for air-source heat pumps (ASHPs) require a minimum COP of 1.75 at 5°F (cold-climate designation) and 70\% heating capacity at 5°F relative to 47°F performance. This addresses the historical perception that heat pumps fail in cold climates.
+
+\subsubsection{Global Deployment Context}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Data Point} \\
+\midrule
+Global share of space heating (2021) & Approximately 10\% met by heat pumps (IEA) \\
+Global capacity (2021) & 1,000 GW installed \\
+Projected capacity (2030, NZE) & 2,600 GW (IEA Net Zero Scenario) \\
+2024 market signal & Heat pump sales outpaced gas boilers by 30\%, largest gap ever recorded (IEA 2025) \\
+China share & 30\% of global heat pump installations \\
+Europe growth (2022) & 40\% year-over-year growth, driven by Ukraine war energy crisis \\
+Norway saturation & 632 heat pumps per 1,000 households \\
+Projected CO2 reduction & 500 million tonnes by 2030 (IEA estimate) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Refrigerant Transition}
+Current dominant refrigerant R-410A has a high global warming potential (GWP). EPA regulation (finalized for effect starting 2025--2026) restricts R-410A in favor of lower-GWP alternatives including R-32 (GWP approximately 675, versus R-410A at 2,088) and natural refrigerants. Daikin, the world's largest heat pump manufacturer, began shipping R-32 products to six U.S. states including Washington and Oregon as of 2024. HFCs as a class represented approximately 2.5\% of 2019 global GHG emissions; transition to low-GWP refrigerants is therefore a significant parallel decarbonization lever.
+
+\subsubsection{Grid Interaction and Cold-Climate Performance}
+The IEA models that in homes with poor insulation, adding a heat pump can nearly triple peak winter electricity demand. Improving a home's energy rating by two grades can halve heating demand. Denmark data shows heat pumps in well-insulated homes use 30\% less electricity than those in poorly insulated homes. Grid demand response programs allow heat pumps to shift load, enabling grid balancing with variable renewables — relevant to PNW's wind-heavy grid in the Columbia Gorge.
+
+\subsection{Module B Reference: Waste Heat Recovery}
+
+\subsubsection{Industrial Waste Heat Potential}
+The U.S. DOE estimates that between 20 and 50 percent of all industrial energy input is lost as waste heat, primarily in exhaust gases, cooling water, and heated product streams. A 2025 Springer Nature review found that properly installed WHR systems can reduce industrial energy use and carbon emissions by 20--30\%. About 63\% of waste heat streams occur at temperatures below 100°C (low grade), making recovery technically challenging but economically significant at scale.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Temperature Class} & \tableheader{Range} & \tableheader{Primary Recovery Technologies} \\
+\midrule
+High grade & Above 400°C & Recuperators, regenerators, waste heat boilers, HRSG \\
+Medium grade & 100--400°C & ORC, heat pipes, absorption heat pumps, MVR \\
+Low grade & Below 100°C & Heat exchangers, advanced ORC, PCM, Kalina cycle, TEGs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Technology Survey}
+
+\textbf{Organic Rankine Cycle (ORC):} Uses low-boiling-point organic working fluids to generate electricity from medium- and low-temperature heat. Preferred for geothermal, industrial, and marine waste heat applications. Single-stage expanders, simpler and more cost-effective than steam Rankine at small scale.
+
+\textbf{Thermoelectric Generators (TEGs):} Direct Seebeck-effect solid-state devices. Available for source temperatures up to 1,000°C and above. Cited by multiple DOE/California Energy Commission (CEC) reports as among the most actively researched WHR technologies. No moving parts; passive; maintenance advantage.
+
+\textbf{Heat Pipe Systems:} Passive two-phase devices transferring heat via working fluid evaporation/condensation. CEC-funded P-HEX project (2024--2025) demonstrated 80\% heat exchanger effectiveness at brewery and winery pilot sites, with estimated GHG emission reduction of up to 25\% for California industrial sector.
+
+\textbf{Phase-Change Materials (PCM):} Thermal storage enabling WHR buffering when heat source is intermittent. Combined with heat exchangers and heat pumps for time-shifted delivery.
+
+\textbf{Decision Support (2025):} A December 2025 ScienceDirect study presented a multi-criteria decision framework ranking 13 heat-to-heat WHR technologies; heat pumps and conventional exchangers dominated for medium-temperature industrial exhaust with low-temperature demand — relevant to PNW food processing and brewing industries.
+
+\subsection{Module C Reference: Catalytic Conversion}
+
+\subsubsection{Three-Way Catalytic Converter (TWC) Fundamentals}
+Modern automotive catalytic converters use three precious metals — platinum (Pt), palladium (Pd), and rhodium (Rh) — to simultaneously oxidize CO and hydrocarbons (HC) and reduce nitrogen oxides (NOx). The three-way designation refers to these three simultaneous reactions. Rhodium is particularly critical for NOx reduction and is considered the rarest naturally occurring element, found primarily in river sands of North and South America.
+
+The U.S. first mandated catalytic converters in 1975 (Clean Air Act). Euro 7 standards (forthcoming) and U.S. EPA 2027 standards will tighten NOx and particulate limits, requiring further catalyst innovation even as vehicle electrification advances. The global automotive catalysts market was valued at \$87.5 billion in 2023, projected to reach \$155.3 billion by 2034 (CAGR 5.4\%).
+
+\subsubsection{PGM Materials Challenge and Non-PGM Alternatives}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Material Class} & \tableheader{Candidate Materials} & \tableheader{Status} \\
+\midrule
+Current PGM & Pt, Pd, Rh & Commercial standard; supply-constrained; theft target \\
+Perovskite oxides & LaCoO3, LaMnO3, BaFeO3 & Active research; stable at high temperatures \\
+Spinel compounds & Cu2MnO4, MnO2 variants & Active CO oxidation at low temperatures demonstrated \\
+Zeolites & Cu-zeolite, Fe-zeolite & Selective catalytic reduction (SCR) for NOx; commercial in diesel \\
+Single-atom catalysis & Pt/ceria (single atoms) & UCF/Nature Communications 2023; maximizes Pt utilization; reduces precious metal loading \\
+Non-PGM approaches & Transition metal oxides, TiO2, NiO & Lower efficacy; active research area (DOE ElectroCat consortium) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Ohio State University / Ford Motor Company study (Argonne APS, 2022) identified rhodium aluminate formation as the primary mechanism of catalyst deactivation, providing a design target for next-generation converters with longer lifetimes and reduced rhodium requirements.
+
+\subsubsection{Industrial and Energy Catalysis}
+Catalytic principles extend beyond emission control to: autothermal reforming (hydrogen production), the Haber-Bosch ammonia synthesis process, fuel cell anode/cathode catalysts (see Module D), and electrolyzer catalysts (see Module E). The DOE ElectroCat consortium explicitly targets PGM-free catalysts for both fuel cells and electrolyzers, with an estimated cost reduction of up to \$20/kW if PGMs are eliminated from heavy-duty vehicle fuel cell stacks.
+
+\subsection{Module D Reference: Fuel Cell Technology}
+
+\subsubsection{Technology Families and Efficiency Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.8cm}C{1.8cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Cell Type} & \tableheader{Elec. Eff.} & \tableheader{Temp. (°C)} & \tableheader{DOE Durability} & \tableheader{Primary Applications} \\
+\midrule
+PEM (PEMFC) & $\sim$60\% & 60--80 & 80,000 h (stationary) & Transport, portable, CHP \\
+SOFC & Up to 65\% & 600--1000 & 80,000 h & Stationary / data centers \\
+AFC & 60--70\% & 60--90 & --- & Space, niche applications \\
+PAFC & 40--50\% & 150--200 & --- & Stationary CHP \\
+MCFC & 45--55\% & 600--700 & --- & Large stationary power \\
+Combined (CHP) & Up to 80\%+ & Varies & --- & Industrial combined heat and power \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+DOE sets fuel cell lifetime targets under realistic operating conditions at: 8,000 hours for light-duty vehicles, 30,000 hours for heavy-duty trucks, and 80,000 hours for distributed power systems.
+
+\subsubsection{Key 2025 Milestones}
+University of California Los Angeles researchers (April 2025) reported catalyst and support modifications extending PEM stack life beyond 200,000 hours — a seven-fold improvement over the DOE heavy-duty vehicle benchmark. Bloom Energy's Server 6.5 solid-oxide modules deliver 325 kW at 65\% electrical efficiency when operated on hydrogen; installed capacity passed 1.2 GW across eight countries in 2025.
+
+\subsubsection{Applications Survey}
+Transportation: Toyota Mirai FCEV, heavy-duty hydrogen trucks (DOE target: 50,000 trucks/year capacity), Airbus--MTU ZEROe regional aviation (ground test 2027, flight demo 2030). Material handling: STEF cold-chain logistics deployed 115 Toyota/Plug Power forklift units (France/Spain, April 2025), with 3-minute refueling and sub-zero performance. Stationary: Bloom Energy data-center installations in California, South Korean hospital microgrids.
+
+\subsection{Module E Reference: Solar Electrolysis and Green Hydrogen}
+
+\subsubsection{Electrolyzer Technology Families}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}C{2cm}C{2.2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Efficiency} & \tableheader{CAPEX (2024)} & \tableheader{Market Share} & \tableheader{Notes} \\
+\midrule
+AWE (Alkaline) & 70--80\% & \$800/kW & 60\%+ of installed capacity & Dominant; mature technology; China-led \\
+PEMEL (PEM) & 75--85\% & \$600/kW by 2030 (proj.) & 22\% of installed & Better dynamic response; PGM-dependent \\
+SOEC (Solid Oxide) & Up to 90\%+ & High & Minority & Uses waste heat; highest theoretical efficiency \\
+AEM & 70--80\% & Development stage & Emerging & Aims to combine AWE cost with PEM flexibility \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+IRENA projects that alkaline, PEM, and AEM efficiencies will surpass 87.6\% with continued improvement; SOEC's apparent efficiency may approach or exceed 100\% when integrated with waste heat sources — creating a direct coupling opportunity with Module B.
+
+\subsubsection{Green Hydrogen Cost Trajectory}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year / Target} & \tableheader{LCOH (USD/kg)} & \tableheader{Source / Notes} \\
+\midrule
+2018 (actual) & \$6/kg & ScienceDirect 2025 review \\
+2024 (actual) & \$3--4/kg & ScienceDirect 2025 review; AEL CAPEX fell from \$1200/kW to \$800/kW \\
+2026 (DOE target) & \$2/kg & DOE Clean Hydrogen Electrolysis Program (BIL) \\
+2030 (projection) & \$3/kg (solar/wind) & Oxford Institute for Energy Studies, 2025 \\
+2031 (DOE target) & \$1/kg & Hydrogen Shot (``1-1-1'' goal: \$1/kg in 1 decade) \\
+2050 (projection) & \$1--2/kg average & DNV 2024, per OIES paper \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{NREL PEC Technology}
+NREL has demonstrated photoelectrochemical (PEC) direct solar-to-hydrogen conversion at 12.4\% solar-to-hydrogen (STH) efficiency using multijunction cell technology. This approach eliminates the separate electrolyzer, using the full solar spectrum rather than only the wavelengths captured by conventional PV. NREL's solar thermochemical hydrogen (STCH) pathway uses metal oxide redox reactions at above 1,400°C, potentially more efficient than PV-electrolysis but requiring high-temperature materials (perovskites) not yet finalized.
+
+\subsubsection{Compression and Storage Energy Penalty}
+Hydrogen's low volumetric energy density (10.8 MJ/Nm³ versus gasoline at $\sim$32 MJ/L) requires compression to 350--700 bar for vehicle applications. Compression alone consumes 7--28\% of the hydrogen's energy content (OIES 2025). This efficiency loss must be factored into any system-level LCOH calculation, particularly for PNW solar hydrogen projects where the compression cost may offset low-carbon electricity advantages.
+
+\subsection{Module F Reference: PNW Geothermal and Hydroelectric}
+
+\subsubsection{Washington Hydroelectric Profile}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Data} \\
+\midrule
+Hydroelectric share (2025) & 63.2\% of state electricity generation \\
+Net generation (2024) & 102,397 GWh total; hydroelectric dominant \\
+Grand Coulee Dam & Largest capacity power station in the U.S.; 6,809 MW \\
+U.S. share & Washington delivers $\sim$25\% of all U.S. hydroelectric generation \\
+100\% renewable target & Washington State: 100\% clean electricity by 2045 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Oregon Hydroelectric and Renewable Profile}
+Oregon's 2023 generation mix was 42.1\% hydroelectric, 38.1\% natural gas, 14.7\% wind, 3.2\% solar, and 0.4\% geothermal. Oregon was the second-largest U.S. hydroelectric generator after Washington. In 2024, renewable sources (led by hydropower) accounted for approximately 62\% of Oregon's total net generation. The 2023 drought-driven production drop (noted below) reduced hydro to 42\% from its historical $>$50\% share.
+
+\subsubsection{Hydroelectric Climate Variability}
+PNNL's 2024 study, drawing on data from more than 1,400 hydropower facilities, projects U.S. hydropower could increase 5\% by 2039 and 10\% by 2059 — but with significant regional variability. Oregon and Washington saw a 20\% production drop in 2023 versus 2021, the lowest output in two decades, driven by drought. The Southwest is the only region projected to see average hydropower decline. PNW utilities are piloting pumped storage systems to buffer variable wind and solar, requiring closer regional grid coordination.
+
+\subsubsection{PNW Geothermal Resources}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Facility / Project} & \tableheader{Location} & \tableheader{Status and Capacity} \\
+\midrule
+Oregon Institute of Technology plant & Klamath Falls, OR & 1.75 MW; operational 2010; campus power and heating \\
+Neal Hot Springs & Vale (Malheur Co.), OR & 22 MW; operational 2012; supplies Idaho Power \\
+Klamath Falls district heating & Klamath Falls, OR & Operational since 1981; downtown heating \\
+Lakeview district heating & Lakeview, OR & Operational; expansion feasibility study (2023 ODOE grant) \\
+Newberry Crater (AltaRock EGS) & Central OR & EGS development; largest geothermal heat reservoir in western U.S.; mmWave drilling technology under development with Quaise Energy \\
+Washington Geothermal Resources Act & Statewide & Signed 2024; removes barriers; Washington Geothermal Favorability Model completed \\
+Central Washington University GeoEco & Ellensburg, WA & Under construction (2024); campus geothermal; 45\% GHG reduction target by 2030 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The historical underdevelopment of PNW geothermal was explicitly caused by competition with cheap hydropower, not resource scarcity. Industry observers note the Cascades and Great Basin of Oregon/Washington remain ``very much at the front end of the curve'' in geothermal resource characterization. Enhanced Geothermal Systems (EGS) using millimeter-wave (mmWave) drilling (AltaRock / Quaise Energy collaboration) aims to access superhot rock ($>$400°C) at depths not reachable with conventional rotary drilling, with potential yield 10× conventional geothermal wells.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling Requirement} \\
+\midrule
+Hydrogen flammability and safety & GATE & All fuel cell and electrolysis content must note safety protocols; reference DOE safety codes \\
+Refrigerant environmental data (GWP, ODP) & GATE & Cite EPA data only; do not speculate on regulatory outcomes \\
+Hydropower and salmon runs (PNW) & ANNOTATE & Dam removal/operation debates are policy-contested; present ecological and economic evidence without advocacy \\
+Indigenous salmon fisheries (Columbia River) & GATE & Tribal treaty rights connected to dam operations; reference by specific nation (Yakama, Nez Perce, etc.), never generic \\
+Climate projections for hydro variability & GATE & Cite PNNL, USGS, or IPCC scenario data only; label uncertainty ranges \\
+PGM supply chain and geopolitics & ANNOTATE & Note supply concentration (South Africa, Russia) without policy advocacy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}
+  \item International Energy Agency (IEA). \textit{The Future of Heat Pumps}. World Energy Outlook Special Report.
+  \item IEA. \textit{Global Energy Review 2025}. Heat pump deployment data.
+  \item IEA. \textit{Heat Pumps Energy System Profile}. Updated July 2024.
+  \item IEA. \textit{Renewables 2025 Report}. Heat pump market projections.
+  \item U.S. EPA. \textit{ENERGY STAR Most Efficient 2025 and Version 6.2 Heat Pump Specification}. December 2024.
+  \item U.S. Department of Energy (DOE). \textit{Waste Heat Recovery: Technology and Opportunities in U.S. Industry}. EERE.
+  \item DOE Hydrogen and Fuel Cell Technologies Office (HFTO). \textit{Fuel Cells Overview}. energy.gov/eere/fuelcells.
+  \item DOE HFTO. \textit{Multi-Year Program Plan}. February 27, 2025.
+  \item DOE HFTO. \textit{Progress in Hydrogen and Fuel Cells 2025}. March 2025.
+  \item DOE HFTO. \textit{Hydrogen Program Record 24005: Clean Hydrogen Production Cost, PEM Electrolyzer}. May 20, 2024.
+  \item National Renewable Energy Laboratory (NREL). \textit{Hydrogen Production and Delivery: Renewable Electrolysis}. Updated December 2025.
+  \item NREL, Argonne, LBNL, ORNL. \textit{Techno-economic analysis of low-carbon hydrogen}. Cell Reports Sustainability, April 2025.
+  \item Pacific Northwest National Laboratory (PNNL). \textit{Hydropower climate projection study}. OPB coverage, August 2024.
+  \item U.S. EIA. \textit{Oregon State Energy Profile}. eia.gov/state, 2024--2025 data.
+  \item U.S. EIA. \textit{Washington State Energy Profile}. eia.gov/state, 2024--2025 data.
+  \item Oregon Department of Energy. \textit{Biennial Energy Report: Energy Resource \& Technology Reviews 2024}.
+  \item California Energy Commission. \textit{CEC-500-2025-001: Demonstrating Replicable, Innovative, Large-Scale Heat Recovery in the Industrial Sector}. January 2025.
+  \item Argonne National Laboratory / Advanced Photon Source. \textit{Future catalytic converters: rhodium aluminate study}. APS Science Highlight, 2022.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}
+  \item Reznicek et al. \textit{Techno-economic analysis of low-carbon hydrogen}. Cell Reports Sustainability 2, 100338. April 2025.
+  \item Ghosh et al. \textit{Solar-Powered Green Hydrogen from Electrolyzer (PV-H2): A Review}. Solar RRL, June 2025.
+  \item Muhammad et al. \textit{Comparative evaluation of electrolysis methods for solar-assisted green hydrogen production}. Renewable Energy, 239, February 2025.
+  \item ScienceDirect (lead: Kosmadakis). \textit{Decision support tool for waste heat to heat recovery technologies}. December 2025.
+  \item Springer Nature (lead: Jouhara). \textit{Innovative approaches to waste heat recovery}. Journal of Thermal Analysis and Calorimetry, September 2025.
+  \item Nature Energy (lead: Høeg, Vartdal et al.). \textit{Emerging opportunities for high-temperature solid-state and gas-cycle heat pumps}. December 2025.
+  \item MDPI Energies. \textit{Recent Advances in the Development of Automotive Catalytic Converters: A Systematic Review}. Vol. 16 No. 18, September 2023.
+  \item ScienceDirect. \textit{Green hydrogen revolution: Advancing electrolysis, market integration, and sustainable energy transitions}. April 2025.
+  \item Oxford Institute for Energy Studies (OIES). \textit{ET48: Power-to-Hydrogen-to-Power}. July 2025.
+  \item Liu, Rahman et al. (UCF). \textit{Single-atom platinum catalysts on ceria}. Nature Communications, January 2023.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Industry}
+\begin{itemize}
+  \item Heat Pumping Technologies (HPT Annex 57). IEA Technology Collaboration Programme.
+  \item European Heat Pump Association (EHPA). \textit{2024 European Heat Pump Market and Statistics Report}.
+  \item Geothermal Rising / Pacific Northwest Regional Interest Group. Newsletter, September 2024.
+  \item AltaRock Energy. \textit{Newberry EGS project and PNW geothermal play fairway analysis}. altarockenergy.com.
+  \item DOE Hydrogen Program. \textit{2024 Annual Merit Review: Fuel Cell Technologies}. June 2024.
+  \item World Economic Forum. \textit{How much money and energy can heat pumps save households?} September 2025.
+  \item MIT Technology Review. \textit{Heat pumps: 10 Breakthrough Technologies 2024}. January 2024.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3: MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document covering six interconnected energy technology domains — HVAC/heat pumps, waste heat recovery, catalytic conversion, fuel cell technology, solar electrolysis, and PNW geothermal/hydroelectric — with quantitative data, verified sources, and explicit cross-module connections. The final deliverable must serve as both a standalone reference and a modular input to downstream GSD missions on PNW grid planning, green hydrogen economics, and building electrification.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  [WAVE 0: Foundation]
+         |
+         v
+  +------+------+  +------+------+  +------+------+
+  | TRACK A     |  | TRACK B     |  | TRACK C     |
+  | Mod A: HVAC |  | Mod D: Fuel |  | Mod F: PNW  |
+  | Mod B: WHR  |  |   Cells     |  |   Geo/Hydro |
+  | Mod C: Cat. |  | Mod E: Sol. |  | (parallel)  |
+  |   Conversion|  |  Electrol.  |  |             |
+  +------+------+  +------+------+  +------+------+
+         |                |                |
+         v                v                v
+  [WAVE 2: Synthesis -- Cross-Module Integration + PNW Context]
+         |
+         v
+  [WAVE 3: Publication, Verification, Final Review]
+\end{asciibox}
+
+\subsection{System Layers}
+\begin{enumerate}
+  \item \textbf{Foundation Layer (Wave 0):} Shared schemas, source index, PNW geographic context, materials cross-cutting thread
+  \item \textbf{Survey Layer (Wave 1):} Six parallel module surveys, one per technology domain
+  \item \textbf{Synthesis Layer (Wave 2):} Cross-module connections (materials, economics, grid integration), PNW regional coherence analysis
+  \item \textbf{Publication Layer (Wave 3):} Document assembly, citation verification, executive summary, visual aids
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module A: HVAC/Heat Pump Survey & COP data, refrigerant table, deployment figures with IEA/EPA sources & D-A \\
+2 & Module B: Waste Heat Recovery Survey & Technology table, WHR potential data, 3+ industry sectors & D-B \\
+3 & Module C: Catalytic Conversion Survey & TWC technology, PGM alternatives table, 4+ material classes & D-C \\
+4 & Module D: Fuel Cell Survey & 4+ cell types, efficiency table, DOE targets, 2025 milestones & D-D \\
+5 & Module E: Solar Electrolysis Survey & Electrolyzer table, LCOH trajectory, NREL PEC findings & D-E \\
+6 & Module F: PNW Geo/Hydro Survey & WA/OR capacity tables, 7+ PNW facilities, PNNL climate data & D-F \\
+7 & Synthesis Document & 5+ cross-module connections explicitly documented & D-SYN \\
+8 & Verified bibliography & All sources traceable to agency/peer-reviewed/professional origins & D-BIB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+C-00: Schemas + Source Index & None & Haiku & 2k \\
+C-01: HVAC/Heat Pump Survey & C-00 & Sonnet & 8k \\
+C-02: WHR Survey & C-00 & Sonnet & 8k \\
+C-03: Catalytic Conversion Survey & C-00 & Sonnet & 8k \\
+C-04: Fuel Cell Survey & C-00 & Sonnet & 10k \\
+C-05: Solar Electrolysis Survey & C-00 & Sonnet & 10k \\
+C-06: PNW Geo/Hydro Survey & C-00 & Sonnet & 10k \\
+C-07: Materials Cross-Thread & C-03, C-04, C-05 & Opus & 6k \\
+C-08: Economics Cross-Thread & C-01, C-02, C-05, C-06 & Opus & 6k \\
+C-09: PNW Grid Integration & C-05, C-06 & Opus & 8k \\
+C-10: Document Assembly + Exec Summary & All above & Sonnet & 6k \\
+C-11: Citation Verification & All above & Sonnet & 4k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Synthesis, cross-module, economics & Opus & Judgment-intensive pattern recognition; cross-domain integration; subtle techno-economic reasoning \\
+Module surveys, tables, assembly & Sonnet & Reliable structured content production; source compilation; document formatting \\
+Schemas, templates, scaffolding & Haiku & Simple structured output; no judgment required; maximize cache efficiency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{1.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, geographic baseline \\
+1A & Module Surveys (A/B/C) & Parallel & Sonnet & 3 technology domain documents \\
+1B & Module Surveys (D/E/F) & Parallel & Sonnet & 3 technology domain documents \\
+2 & Synthesis & Sequential & Opus & Cross-thread documents (materials, economics, PNW grid) \\
+3 & Publication + Verification & Sequential & Sonnet & Final assembled document + citation check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Agent} & \tableheader{Task} \\
+\midrule
+Source Index & LOG / Haiku & Compile all sources from Research Reference into citable database \\
+Shared Schemas & Haiku & Define data tables, cross-reference IDs, document template \\
+PNW Geographic Context & Haiku & WA/OR energy profile baseline (EIA data) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Module Surveys (Thermal Domain)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Agent} & \tableheader{Survey Focus} \\
+\midrule
+A: HVAC & EXEC-1 / Sonnet & COP performance, refrigerant transition, grid response, building efficiency coupling \\
+B: WHR & EXEC-2 / Sonnet & Technology families by temperature class, industrial potential, DOE/CEC findings \\
+C: Catalysis & CRAFT-CHEM / Sonnet & TWC technology, PGM challenge, single-atom catalysis, industrial crossovers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Module Surveys (Hydrogen \& PNW Domain)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Agent} & \tableheader{Survey Focus} \\
+\midrule
+D: Fuel Cells & EXEC-3 / Sonnet & Cell type comparison, DOE targets, 2025 milestones, transportation/stationary apps \\
+E: Electrolysis & EXEC-4 / Sonnet & Electrolyzer comparison, LCOH trajectory, NREL PEC, STCH pathway, compression penalty \\
+F: PNW Energy & CRAFT-GEO / Sonnet & WA/OR hydroelectric capacity, PNW geothermal inventory, climate variability, pumped storage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Cross-Thread} & \tableheader{Agent} & \tableheader{Connection} \\
+\midrule
+Materials Cross-Thread & INTEG / Opus & PGM reduction: Modules C (catalytic converters), D (fuel cell catalysts), E (electrolyzer catalysts) share the same platinum group metal constraint and the same ElectroCat/single-atom solution pathway \\
+Economics Cross-Thread & INTEG / Opus & LCOH, LCOE, and WHR payback analysis across Modules A, B, E, F; integrated techno-economic framework for PNW deployment \\
+PNW Grid Integration & INTEG / Opus & How geothermal baseload + hydroelectric dispatch + hydrogen storage + heat pump demand response form a coherent 2030--2045 clean energy architecture for WA and OR \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Details} \\
+\midrule
+Document assembly & EXEC-1 / Sonnet & Integrate all module surveys + synthesis threads into final document \\
+Executive summary & EXEC-1 / Sonnet & 1-page summary capturing key quantitative findings per module \\
+Citation verification & VERIFY / Sonnet & Confirm all numerical claims trace to listed sources \\
+CAPCOM review & CAPCOM & Human checkpoint: does final document meet all 12 success criteria? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}
+  \item Wave 0 Foundation documents front-loaded as system prompt cache anchors for all Wave 1 agents
+  \item Source Index cached and reused across all Waves (reduces redundant source lookup by $\sim$40\%)
+  \item Shared schemas injected as first message in each component context
+  \item Module A--F surveys cached in Wave 2 synthesis context (reduces re-reading overhead)
+  \item Haiku used for all non-judgment tasks to minimize token cost; Opus sessions kept short and focused
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave / Component} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Context Windows} \\
+\midrule
+Wave 0: Foundation (3 components) & Haiku & 6k & 1 \\
+Wave 1A: Modules A+B+C & Sonnet & 24k & 3 \\
+Wave 1B: Modules D+E+F & Sonnet & 28k & 3 \\
+Wave 2: Synthesis (3 threads) & Opus & 20k & 3 \\
+Wave 3: Assembly + Verification & Sonnet & 10k & 2 \\
+\midrule
+\textbf{Total estimated} & \textbf{Mixed} & \textbf{$\sim$88k} & \textbf{12--14} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  C-00 (Haiku, Sequential)
+   |-- C-01 (Sonnet, Parallel) --|
+   |-- C-02 (Sonnet, Parallel) --|
+   |-- C-03 (Sonnet, Parallel) --|  --> C-07 (Opus) --> C-10 (Sonnet)
+   |-- C-04 (Sonnet, Parallel) --|                            |
+   |-- C-05 (Sonnet, Parallel) --|  --> C-08 (Opus) -------> |
+   |-- C-06 (Sonnet, Parallel) --|                            |
+                                     --> C-09 (Opus) -------> |
+                                                               |
+                                                        C-11 (Sonnet) --> FINAL
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK & Source quality, numerical attribution, Indigenous rights, climate data sourcing \\
+Core functionality & 24 & Required & BLOCK & One per success criterion (×12) plus key data table completeness \\
+Integration & 6 & Required & BLOCK & Cross-module connections documented \\
+Edge cases & 5 & Best-effort & LOG & Data gaps acknowledged, temporal currency, outlier handling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to IEA, DOE, NREL, PNNL, EPA, peer-reviewed journals, or professional organizations. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every efficiency figure, cost data point, capacity number, and percentage attributed to specific named source. \\
+SC-ADV & No policy advocacy & Hydropower dam operations, salmon impacts, and renewable energy policy presented as evidence without advocating positions. \\
+SC-IND & Indigenous attribution & Columbia River dam discussions referencing tribal fishing rights name specific nations (Yakama Nation, Nez Perce Tribe, Confederated Tribes of the Umatilla Indian Reservation) — never generic ``Indigenous peoples.'' \\
+SC-CLI & Climate projections sourced & PNNL hydropower variability projections and all temperature/precipitation data cite specific agency source and scenario. \\
+SC-H2S & Hydrogen safety & Fuel cell and electrolysis sections note relevant DOE safety codes and standards; no operational safety details omitted. \\
+SC-MED & No unsupported claims & No efficiency, cost, or performance claim stated without qualifying uncertainty language if data is projected rather than measured. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix (Selected Criteria)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Heat pump COP data at 47°F and 5°F with EPA/IEA sources & CF-01, CF-02, SC-NUM & Pending \\
+2. Refrigerant transition landscape surveyed & CF-03, SC-ADV & Pending \\
+3. WHR technology table, 6+ technologies & CF-04, CF-05 & Pending \\
+4. DOE WHR potential quantified (3+ sectors) & CF-06, SC-NUM & Pending \\
+5. Catalytic converter PGM alternatives (3+ materials) & CF-07, CF-08 & Pending \\
+6. Fuel cell efficiency comparison (4+ types) & CF-09, CF-10 & Pending \\
+7. Green hydrogen cost 2018--2031 trajectory & CF-11, SC-NUM & Pending \\
+8. Electrolyzer comparison in 2024 USD & CF-12, SC-NUM & Pending \\
+9. WA/OR hydroelectric capacity (EIA/BPA sourced) & CF-13, SC-SRC & Pending \\
+10. PNW geothermal map with 4+ facilities & CF-14 & Pending \\
+11. Fuel cell / electrolysis catalyst crossover documented & IN-01 & Pending \\
+12. PNW grid integration section produced & IN-02, IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave authorization; go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Additional web research for gap-fill during Wave 1 \\
+EXEC-1 & Thermal Executor & Modules A (HVAC) + B (WHR) + document assembly (Wave 3) \\
+EXEC-2 & Chemistry Executor & Module C (Catalytic Conversion) \\
+EXEC-3 & Fuel Cell Executor & Module D (Fuel Cells) \\
+EXEC-4 & Hydrogen Executor & Module E (Solar Electrolysis) \\
+CRAFT-CHEM & Chemistry Specialist & Cross-thread: PGM alternatives, single-atom catalysis, industrial catalysis \\
+CRAFT-GEO & Geography Specialist & Module F (PNW Geo/Hydro) + PNW grid integration synthesis \\
+VERIFY & Verification Agent & Source validation; numerical accuracy; safety test execution \\
+INTEG & Integration Agent & Cross-module threads (materials, economics, PNW grid) \\
+CAPCOM & HITL Interface & Human checkpoint at Wave boundaries; final approval \\
+BUDGET & Resource Manager & Token budget tracking across all sessions \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team restructuring if Wave 1 parallel tracks collide \\
+ARCH & Architecture Agent & Cross-cutting structural decisions \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, 17 crew roles) \\
+Parallel Tracks & 3 (Wave 1A, 1B, Wave 2 synthesis threads) \\
+Estimated Context Windows & 12--14 \\
+Estimated Sessions & 4--5 \\
+Primary Models & Claude Sonnet 4.5 (60\%), Opus 4.5 (30\%), Haiku 4.5 (10\%) \\
+Estimated Total Tokens & $\sim$88k output (input caching reduces effective cost) \\
+Human Checkpoints & 4 (post-Wave 0, post-Wave 1, post-Wave 2, Final) \\
+Safety Tests & 7 mandatory-pass BLOCK gates \\
+Core Tests & 24 required-pass BLOCK gates \\
+Research Domains & 6 (HVAC/HP, WHR, Catalysis, Fuel Cells, Electrolysis, PNW Energy) \\
+Geographic Focus & Pacific Northwest (WA, OR); global technology context \\
+Final Deliverable & Multi-section deep research document + executive summary + bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The same mathematics that describes heat flowing through a wall also describes protons crossing a membrane, electrons moving through an external circuit, and water finding its way downhill to a turbine. The topology of energy flow — the shape of the gradients — is more fundamental than any particular machine that exploits them.''}
+
+\vspace{0.8em}
+\noindent — Through-line of this mission. The goal is not to document six separate technologies but to trace the single underlying geometry of energy interception that unifies them all. The Pacific Northwest, with its ancient rivers, volcanic heat, and the world's most advanced hydroelectric grid, is the ideal laboratory for this study.
+\end{quotebox}
+
+\end{document}

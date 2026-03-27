@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sir Mix-A-Lot & the West Coast — GSD Mission Package 93.3c</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:#1a1625;color:#c5b9d4;line-height:1.6}
+  .header{background:linear-gradient(135deg,#283593 0%,#D84315 50%,#37474F 100%);padding:3rem 2rem;text-align:center}
+  .header h1{font-family:'Libre Baskerville',serif;font-size:2.4rem;color:#fff;margin-bottom:.3rem}
+  .header .subtitle{color:#ffccbc;font-size:1.1rem;font-style:italic}
+  .header .meta{color:#c5cae9;font-size:.85rem;margin-top:1rem}
+  .container{max-width:800px;margin:0 auto;padding:2rem}
+  .file-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+  .file-card{background:#1e1a2e;border:1px solid#3a2f5b;border-radius:8px;padding:1.5rem;text-decoration:none;color:#c5b9d4;transition:border-color .2s}
+  .file-card:hover{border-color:#D84315}
+  .file-card .icon{font-size:2rem;margin-bottom:.5rem}
+  .file-card .name{font-weight:700;color:#D84315;margin-bottom:.3rem}
+  .file-card .desc{font-size:.85rem;color:#9e9e9e}
+  h2{font-family:'Libre Baskerville',serif;color:#7986CB;margin:2rem 0 1rem;font-size:1.3rem;border-bottom:1px solid#3a2f5b;padding-bottom:.5rem}
+  .contents{list-style:none}
+  .contents li{padding:.4rem 0;border-bottom:1px solid#2a2440}
+  .contents .stage{color:#D84315;font-weight:700;margin-top:1rem}
+  .contents .module{padding-left:1.5rem;color:#9e9e9e}
+  pre{background:#0f0d1a;padding:1rem;border-radius:6px;overflow-x:auto;margin:1rem 0}
+  code{background:#0f0d1a;padding:2px 6px;border-radius:3px;font-size:.9rem;color:#7986CB}
+  pre code{padding:0;background:none}
+  .quote{font-family:'Libre Baskerville',serif;font-style:italic;color:#9e9e9e;padding:1.5rem;border-left:3px solid#283593;margin:2rem 0}
+  .trilogy{background:#1e1a2e;border:1px solid#3a2f5b;border-radius:8px;padding:1.5rem;margin:2rem 0}
+  .trilogy h3{color:#7986CB;margin-bottom:.8rem;font-size:1rem}
+  .trilogy-item{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px solid#2a2440}
+  .trilogy-item:last-child{border:none}
+  .trilogy-label{color:#D84315;font-weight:700;min-width:60px}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Sir Mix-A-Lot & the West Coast</h1>
+  <div class="subtitle">The DIY King from "That Hip-Hop Hotbed Seattle"</div>
+  <div class="meta">March 26, 2026 · Squadron Profile · 12 context windows · 5 sessions</div>
+</div>
+<div class="container">
+  <div class="trilogy">
+    <h3>The 93.3 Trilogy</h3>
+    <div class="trilogy-item"><span class="trilogy-label">93.3a</span>Kubernetes Ecosystem — the infrastructure layer (25 pages)</div>
+    <div class="trilogy-item"><span class="trilogy-label">93.3b</span>KUBE 93.3 FM Seattle — the frequency and the culture (21 pages)</div>
+    <div class="trilogy-item"><span class="trilogy-label">93.3c</span>Sir Mix-A-Lot & the West Coast — the artist and the scene (17 pages)</div>
+  </div>
+  <div class="file-cards">
+    <a class="file-card" href="mix-mission.pdf" download>
+      <div class="icon">🎤</div>
+      <div class="name">mix-mission.pdf</div>
+      <div class="desc">Complete mission package — Vision → Research → Mission (17 pages)</div>
+    </a>
+    <a class="file-card" href="mix-mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">mix-mission.tex</div>
+      <div class="desc">XeLaTeX source — editable, recompilable</div>
+    </a>
+  </div>
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li class="stage">Stage 1 — Vision Document</li>
+    <li class="module">Vision: Auburn to Grammy stage to Seattle Symphony</li>
+    <li class="module">Problem statement (5) · Core concept · Domain map</li>
+    <li class="module">5 modules: Origin, Discography, West Coast, Cross-Genre, Community</li>
+    <li class="stage">Stage 2 — Research Reference</li>
+    <li class="module">Module 1: Auburn birth, Central District, busing, Boys & Girls Club, NastyMix</li>
+    <li class="module">Module 2: Complete discography — Swass through Daddy's Home, label transitions</li>
+    <li class="module">Module 3: West Coast timeline (17 milestones), radio infrastructure map (5 stations)</li>
+    <li class="module">Module 4: Metal Church, Mudhoney, POTUSA, Seattle Symphony — cross-genre</li>
+    <li class="module">Module 5: "10 black millionaires," Dark Side compilation, 206 Zulu, MOHAI</li>
+    <li class="stage">Stage 3 — Mission Package</li>
+    <li class="module">Milestone spec · Wave plan · 32 tests · Squadron crew · Execution summary</li>
+  </ul>
+  <h2>Recompilation</h2>
+  <pre><code>xelatex -interaction=nonstopmode mix-mission.tex
+xelatex -interaction=nonstopmode mix-mission.tex
+xelatex -interaction=nonstopmode mix-mission.tex</code></pre>
+  <div class="quote">
+    "I'm not trying to be Malcolm X or Ice Cube. I think and feel the same things my fans do."<br>
+    — Sir Mix-A-Lot, Detroit Free Press
+  </div>
+</div>
+</body>
+</html>

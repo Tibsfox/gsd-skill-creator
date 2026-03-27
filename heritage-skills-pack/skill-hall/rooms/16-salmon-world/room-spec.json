@@ -1,0 +1,81 @@
+{
+  "id": "room-16-salmon-world",
+  "room": 16,
+  "domain": "salmon-world",
+  "title": "Salmon World",
+  "traditions": ["first-nations"],
+  "sumoClasses": ["Animal", "FoodPreservation", "FoodProduction", "WaterVehicle", "HeritageSkill", "CulturalPractice", "MaterialCulture"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "description": "Room 16 explores the salmon economy of the Salish Sea — one of the most productive and ecologically complex fisheries on earth. Five Pacific salmon species organize the room: Chinook (king), Sockeye (red), Coho (silver), Pink (humpy), and Chum (dog). Each species runs at different times, occupies different ecological niches, and was understood differently by different nations. This species diversity is not background detail — it is the foundation of the Salish Sea salmon economy, enabling a multi-season harvest that sustained coastal and river communities for millennia.\n\nThe salmon economy of the Salish Sea was sophisticated in both ecological and social dimensions. Dried and smoked salmon moved along trade networks from river-access communities to coastal communities and into the Interior Plateau. Surplus storage created wealth; surplus sharing was social technology connected to the potlatch. Who had access to which fishing grounds was a matter of governance and sovereignty, not merely ecology.\n\nReef net technology is this room's showcase of engineering knowledge. Developed specifically by Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) peoples for the shallow reef channels of the San Juan and Gulf Islands, reef net fishing is cooperative technology requiring multi-family coordination, deep knowledge of reef geography and tidal timing, and years of practice. Two anchored canoes stretched a net across a reef channel; lookouts read the water surface for the shimmering shadow of approaching salmon schools; the signal was given and the net was raised. This is not simple technology — it is sophisticated ecological engineering attributed specifically to Lummi and Saanich peoples, not generalized to all Northwest Coast nations.\n\nThe First Salmon Ceremony marks the arrival of the first salmon of the season. Its general significance — communities greeting the first salmon, the first fish welcomed, cooked, shared communally, and its bones returned to the water so the salmon can carry word back to the Salmon People — is Level 1 publicly shared educational content. Specific ceremonial protocols (songs, prayers, preparation methods, who performs specific roles) are Level 3 community-restricted knowledge redirected to specific nations' cultural centers.\n\nThe Salmon's Promise is this pack's central return-journey metaphor. Like the salmon who spends years in the ocean and returns to the river where it was born, learning is a return journey — you leave the place you know, range widely, and return with the knowledge you gained. The pact between humans and Salmon People (honor the salmon, and they will return) models the relationship between learner and knowledge community: reciprocity, relationship, and return. Marine and food safety domains are both active in this room: reef net content carries marine safety gates, and all smoking and preservation content carries food safety gates.",
+  "safetyDomains": ["food", "tool", "marine"],
+  "trySessions": [
+    "salmon-16-species-runs-beginner",
+    "salmon-16-reef-net-beginner",
+    "salmon-16-smoke-dry-beginner"
+  ],
+  "modules": [
+    {
+      "id": "salmon-16-nations",
+      "title": "Salmon Nations",
+      "tradition": "first-nations",
+      "description": "The five Pacific salmon species individually identified with ecology, range, and seasonal run timing. Chinook/King (Oncorhynchus tshawytscha) is the largest Pacific salmon, with the highest fat content and the longest runs — spring and fall Chinook runs were prized trade items. Sockeye/Red (O. nerka) has brilliant red flesh, a summer run, and was a major dried salmon trade item. Coho/Silver (O. kisutch) runs in fall and is prized for table quality. Pink/Humpy (O. gorbuscha) is the smallest and most abundant — even-year runs dominate many rivers and Pinks were dried in large quantities. Chum/Dog (O. keta) runs in late fall with lower fat content but was dried whole and stored for winter. Nation-specific salmon relationships reflect which runs mattered most based on river access and territorial geography. Attribution: Coast Salish, Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Nuu-chah-nulth, Stó:lō, and other Salish Sea nations.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["Animal", "HeritageSkill"]
+    },
+    {
+      "id": "salmon-16-reef-net",
+      "title": "Reef Net Technology",
+      "tradition": "first-nations",
+      "description": "Reef net fishing is a Lummi and Saanich cooperative technology specific to shallow reef channels where salmon pass predictably. Two anchored canoes stretched a net between them across a reef channel where the reef bottom came close enough to the surface to allow the net to lie along the bottom. The net has three components: a floor (laid along the bottom), two lead lines (angled panels guiding fish upward), and a bag (the trap). Lookouts positioned high on the canoe bows watched the water for the distinctive shimmering shadow of an approaching salmon school. When the school was directly over the floor, the signal was given and both crews raised the net simultaneously. The technology required multi-family coordination, specific knowledge of reef geography and tidal timing, and years of practice. Marine gate required for cold water and vessel stability. Attribution: Lummi (Lhaq'temish) and WSÁNEĆ (Saanich) peoples specifically. This technology must not be attributed generically to all Northwest Coast or Salish Sea nations.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "MaterialCulture", "IntentionalProcess"]
+    },
+    {
+      "id": "salmon-16-weir",
+      "title": "Weir Construction",
+      "tradition": "first-nations",
+      "description": "River weir fishing technology — wooden stakes driven into the river bottom in a V or chevron pattern, with woven branches or slats creating a partial barrier that slows salmon and directs them to trap openings. Weirs were placed seasonally and removed during spawning runs to allow fish passage. Sustainable harvest design: the weir geometry creates a trap zone but always allows some fish to pass. This is not accidental — it reflects the same ecological understanding that governs the First Salmon Ceremony, designing for long-term relationship rather than maximum extraction. Tool annotation required for stake-driving and weaving tools. Nation attribution: multiple Salish Sea river communities — Stó:lō, Nlaka'pamux, Syilx on the Fraser River system.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing", "IntentionalProcess"]
+    },
+    {
+      "id": "salmon-16-smoke-dry",
+      "title": "Smoke and Dry",
+      "tradition": "first-nations",
+      "description": "Salmon preservation methods: butterfly fillet for drying racks, whole fish for smoking. Drying rack construction requires adequate air circulation, wind exposure, and protection from insects. Smoking uses alder (Alnus rubra) — the traditional PNW Coast wood for salmon smoking, mild smoke that does not overpower the fish, abundant in the Pacific lowlands. Minimum safe internal temperature for hot-smoked salmon is 160°F (71°C) — non-negotiable for pathogen elimination. Cold smoking (below 90°F) does not kill pathogens and requires salt curing or refrigerated storage. Storage conditions: cool, dry, with air circulation. Spoilage signs: off odor, slimy texture, visible mold — all mean discard. Food gate required on all smoking and storage content. Nation attribution: Coast Salish, Lummi (Lhaq'temish), Nuu-chah-nulth. Tool annotation for filleting knives.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["FoodPreservation", "HeritageSkill", "FoodProduction"]
+    },
+    {
+      "id": "salmon-16-economy",
+      "title": "The Salmon Economy",
+      "tradition": "first-nations",
+      "description": "Salmon as the economic foundation of the Salish Sea. Trade networks carried dried salmon from river communities to coastal communities and inland to Interior Plateau groups. Surplus storage created wealth; surplus sharing was social technology connected to the potlatch. The Fraser River salmon access made Interior Plateau communities (Nlaka'pamux, Syilx) important trading partners for Coast Salish coastal groups. The salmon economy was inseparable from territorial sovereignty: access to specific fishing grounds (reef net stations, weir sites, river fishing locations) was a matter of governance, defined by long-standing rights held by specific families and clans within nations — not open-access commons. Understanding the salmon economy means understanding who had rights to which grounds and how those rights were exercised, transmitted, and defended.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "CulturalPractice"]
+    },
+    {
+      "id": "salmon-16-first-salmon",
+      "title": "First Salmon Ceremony",
+      "tradition": "first-nations",
+      "description": "The First Salmon Ceremony marks the arrival of the first salmon of the season. Its general significance is Level 1 publicly shared knowledge across multiple Salish Sea nations: communities greet the first salmon with ceremony, acknowledging the salmon's return as a gift and a fulfillment of the pact between humans and Salmon People. The first fish is welcomed, cooked, shared communally, and its bones returned to the water so the salmon can return to the ocean and bring word that the people still honor the relationship. This general structure is appropriate in educational content. Specific ceremonial protocols — songs, prayers, specific preparation methods, who speaks and what is said — are Level 3 community-restricted knowledge and must be redirected to specific nations' cultural centers (Lummi Nation Cultural Department, WSÁNEĆ School Board, Coast Salish cultural offices). Never attempt to document or reproduce specific ceremonial protocols. Nation attribution: Coast Salish, Lummi (Lhaq'temish), WSÁNEĆ (Saanich), Nuu-chah-nulth.",
+      "safetyLevel": "standard",
+      "culturalLevel": 2,
+      "sumoMappings": ["CulturalPractice", "HeritageSkill"]
+    },
+    {
+      "id": "salmon-16-promise",
+      "title": "The Salmon's Promise",
+      "tradition": "cross-tradition",
+      "description": "The Salmon's Promise is this pack's central return-journey metaphor. Like the salmon who spends years in the ocean and returns to the river where it was born, learning is a return journey — you leave the place you know, range widely, and return with the knowledge you gained. The pact between humans and Salmon People (honor the salmon, and the salmon will return) encodes the principle of reciprocal relationship: the salmon's return is contingent on being honored, and the human community's prosperity is contingent on maintaining the relationship. This module uses this general concept — which is widely shared in publicly accessible educational contexts — as a learning metaphor. It does not reproduce specific ceremonial content or claim to document the full spiritual relationship. The metaphor illuminates the pattern: reciprocity, return, and relationship. Tradition field is cross-tradition because this module contextualizes the metaphor to illuminate the learning return journey across cultural contexts.",
+      "safetyLevel": "standard",
+      "culturalLevel": 1,
+      "sumoMappings": ["CulturalPractice", "HeritageSkill"]
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+# GSD Skill Metadata
+pack_id: TECH-101
+pack_name: "Technology & Tools — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: 2026-02-20
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: technology_literacy
+
+# Content Description
+description: |
+  Technology as understanding how humans extend their capabilities through
+  tools, systems, and design. Covers simple machines, systems thinking,
+  the engineering design process, digital technology foundations, and
+  technology's relationship with society from foundation through college level.
+
+short_description: "Tools, systems, design thinking, and digital foundations across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Technology Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge: []
+
+# What This Pack Enables
+enables:
+  - CODE-101
+  - ENGR-101
+  - DIGLIT-101
+  - TRADE-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: [PreK, K, 1, 2]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: [3, 4, 5]
+    estimated_hours: [50, 70]
+
+  - label: "Middle School"
+    grades: [6, 7, 8]
+    estimated_hours: [70, 100]
+
+  - label: "High School"
+    grades: [9, 10, 11, 12]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: [13, 14, 15, 16]
+    estimated_hours: [150, 200]
+
+# Modules
+modules:
+  - id: TECH-101-M1
+    name: "Tools & Simple Machines"
+    level: foundation
+    duration_hours: 30
+
+  - id: TECH-101-M2
+    name: "Systems & Processes"
+    level: elementary-high
+    duration_hours: 35
+    prereq_modules: [TECH-101-M1]
+
+  - id: TECH-101-M3
+    name: "Design & Engineering Process"
+    level: foundation-high
+    duration_hours: 40
+
+  - id: TECH-101-M4
+    name: "Digital Technology Foundations"
+    level: elementary-high
+    duration_hours: 35
+    prereq_modules: [TECH-101-M1]
+
+  - id: TECH-101-M5
+    name: "Technology & Society"
+    level: elementary-college
+    duration_hours: 25
+    prereq_modules: [TECH-101-M2]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-TOOL-001
+    description: "Identify tools as extensions of human capability and explain mechanical advantage"
+    levels: [PreK, K, 1, 2, 3, 4, 5]
+
+  - code: LO-SYS-001
+    description: "Map system components, inputs, outputs, and feedback loops"
+    levels: [3, 4, 5, 6, 7, 8]
+
+  - code: LO-DES-001
+    description: "Complete a full design cycle from problem identification through iteration"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-DIG-001
+    description: "Explain how computers store, process, and transmit information"
+    levels: [5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-SOC-001
+    description: "Evaluate technology through ethical, environmental, and equity lenses"
+    levels: [6, 7, 8, 9, 10, 11, 12]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Design Portfolio Review"
+    frequency: ongoing
+
+  - type: formative
+    name: "System Analysis Observations"
+    frequency: weekly
+
+  - type: summative
+    name: "Design Project"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Technology Impact Presentation"
+    frequency: end_of_unit
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: simple_machine_kit
+    url: null
+    integrated: false
+    description: "Physical kit with levers, pulleys, gears, and inclined planes"
+
+  - name: tinkercad
+    url: https://www.tinkercad.com
+    description: "Free online tool for 3D design and circuit building"
+
+  - name: scratch
+    url: https://scratch.mit.edu
+    description: "Visual programming for computational thinking"
+
+interactive_elements:
+  - type: simulator
+    name: "Simple Machine Physics"
+
+  - type: tool
+    name: "System Diagram Builder"
+
+  - type: simulator
+    name: "Network Packet Relay"
+
+  - type: tool
+    name: "Design Portfolio"
+
+  - type: game
+    name: "Binary Decoder"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Hands-on activities have text descriptions. Consider adding video demonstrations with captions."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "ITEEA Standards for Technological and Engineering Literacy"
+    version: 2020
+    alignments:
+      "1.A": "Characteristics and scope of technology"
+      "2.A": "Core practices of technology"
+      "3.A": "Contexts and applications"
+      "4.A": "Characteristics of systemic design"
+  - framework: "Next Generation Science Standards (Engineering)"
+    version: 2013
+    alignments:
+      "K-2-ETS1-1": "Ask questions and define problems"
+      "3-5-ETS1-1": "Define and delimit engineering problems"
+      "MS-ETS1-1": "Define the criteria and constraints of design problems"
+      "HS-ETS1-1": "Analyze a major global challenge"
+      ETS1.A: "Defining and Delimiting Engineering Problems"
+      ETS1.B: "Developing Possible Solutions"
+      ETS1.C: "Optimizing the Design Solution"
+  - framework: "IB Middle Years Programme (Design)"
+    version: "2024"
+    alignments:
+      MYP.DES.A: "Investigating"
+      MYP.DES.B: "Planning"
+      MYP.DES.C: "Creating"
+  - framework: "UK National Curriculum (Design & Technology)"
+    version: "2014"
+    alignments:
+      KS1.DT: "Design, make, evaluate"
+      KS2.DT: "Design and technology processes"
+      KS3.DT: "Iterative design and making"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Hands-on activities make concepts concrete; difficulty scales with module depth"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: tool_safety
+    description: "Activities involve physical tools (scissors, hammers, saws for older students)"
+    mitigation: "Safety guidelines included per activity; parental supervision recommended"
+
+  - flag: environmental_topics
+    description: "Module 5 discusses environmental impact of technology, which can feel overwhelming"
+    mitigation: "Focus on agency and solutions alongside problems; avoid doom narratives"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/tech-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "TECH-101"
+  looking_for:
+    - "Hands-on design challenges for elementary students"
+    - "Industry case studies for systems thinking"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: 2026-02-20
+  next_review: 2026-05-20
+  maintainer: "Technology Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - technology
+  - engineering
+  - design-thinking
+  - simple-machines
+  - systems-thinking
+  - digital-literacy
+  - stem
+  - foundational
+  - tools
+  - innovation
+
+# External Resources
+resources:
+  - type: textbook
+    title: "The Way Things Work Now"
+    author: "David Macaulay"
+    url: null
+
+  - type: online_resource
+    title: "PBS Design Squad Nation"
+    author: "PBS"
+    url: "https://pbskids.org/designsquad"
+
+  - type: textbook
+    title: "The Design of Everyday Things"
+    author: "Don Norman"
+    url: null
+
+  - type: online_course
+    title: "How Stuff Works"
+    author: "HowStuffWorks"
+    url: "https://www.howstuffworks.com"
+
+# Related Packs
+related_packs:
+  - id: CODE-101
+    relationship: "Programming applies digital technology foundations"
+
+  - id: ENGR-101
+    relationship: "Engineering specializes the design and systems thinking"
+
+  - id: SCI-101
+    relationship: "Science provides the principles behind technology"
+
+  - id: MATH-101
+    relationship: "Mathematics provides quantitative tools for technology"
+
+  - id: TRADE-101
+    relationship: "Trades are hands-on applications of technology"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "gear"
+    color: "#FF9800"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  # Prompt caching optimization
+  cache_keys:
+    - "TECH-101-core-concepts"
+    - "TECH-101-design-cycle"
+    - "TECH-101-systems-thinking"
+
+# File References
+files:
+  vision_document: "TECH-101-vision.md"
+  modules_definition: "TECH-101-modules.yaml"
+  activities: "TECH-101-activities.json"
+  assessment: "TECH-101-assessment.md"
+  resources: "TECH-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: 2026-02-20
+    changes:
+      - "Initial release: Five core modules, assessment framework, parent guidance"
+      - "Contributed 20 starter activities across all modules"
+      - "Aligned to ITEEA and NGSS Engineering standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: 2026-05-20

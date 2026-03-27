@@ -1,0 +1,33 @@
+{{!-- Default page template: breadcrumb + content + TOC sidebar --}}
+
+{{>breadcrumb}}
+
+<article class="page-content">
+  <h1>{{page.frontmatter.title}}</h1>
+
+  {{#page.frontmatter.date}}
+  <p class="page-meta">
+    <time datetime="{{page.frontmatter.date}}">{{page.frontmatter.date}}</time>
+    {{#page.frontmatter.updated}} &middot; Updated <time datetime="{{page.frontmatter.updated}}">{{page.frontmatter.updated}}</time>{{/page.frontmatter.updated}}
+  </p>
+  {{/page.frontmatter.date}}
+
+  {{{page.content}}}
+
+  {{#page.frontmatter.tags}}
+  <div class="page-tags">
+    {{#page.frontmatter.tags}}
+    <span class="tag">{{.}}</span>
+    {{/page.frontmatter.tags}}
+  </div>
+  {{/page.frontmatter.tags}}
+</article>
+
+{{>toc}}
+
+{{#page.frontmatter.comments}}
+<section class="comment-section">
+  <h2 class="comment-section__title">Comments</h2>
+  <div id="comments-container"></div>
+</section>
+{{/page.frontmatter.comments}}

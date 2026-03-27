@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inclusionary Wave — Production Mission (Phase 2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #FF8F00;
+    --tertiary: #3E2723;
+    --accent: #6A1B9A;
+    --light-primary: #EDE7F6;
+    --light-secondary: #FFF3E0;
+    --bg: #FAFAFA;
+    --card-bg: #E8EAF6;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header small { font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.75rem; opacity: 0.85; }
+  .header h1 { font-size: 2.2rem; margin: 0.5rem 0 0.3rem; letter-spacing: -0.02em; }
+  .header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.05rem; opacity: 0.9; }
+  .header .pipe { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; margin-top: 1.5rem; opacity: 0.8; }
+  .header .phase { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 4px; padding: 0.2rem 0.8rem; margin-top: 0.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; }
+  .container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text);
+    border: 1px solid #C5CAE9; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(49,27,146,0.15); }
+  .card h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  h2.section { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.2rem; margin: 2.5rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  .rooms { display: grid; grid-template-columns: 1fr; gap: 0.8rem; margin: 1rem 0; }
+  .room { background: var(--light-primary); border-radius: 6px; padding: 1rem 1.2rem; border-left: 4px solid var(--primary); }
+  .room h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--primary); margin-bottom: 0.3rem; }
+  .room p { font-size: 0.85rem; color: var(--subtle); }
+  .room .stats { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--accent); margin-top: 0.4rem; }
+  .instructions { background: var(--light-secondary); border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; }
+  .quote .attr { font-style: normal; text-align: right; margin-top: 0.6rem; font-size: 0.85rem; color: var(--subtle); }
+  code { font-family: 'DejaVu Sans Mono', monospace; background: #E8EAF6; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  .meta { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; }
+  .dep { background: var(--light-secondary); border-radius: 6px; padding: 0.8rem 1.2rem; margin: 1rem 0; font-size: 0.9rem; }
+  .dep strong { color: var(--secondary); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Production Mission Package</small>
+  <h1>The Inclusionary Wave</h1>
+  <h2>Educational Module for the GSD Creative Suite</h2>
+  <div class="phase">Phase 2 — Build</div>
+  <div class="pipe">Research → Architecture → Build</div>
+</div>
+
+<div class="container">
+
+  <div class="dep">
+    <strong>Depends on:</strong> Geggy Tah Deep Research Mission (Phase 1, 27 pages) — the research reference that provides all source material for this production mission.
+  </div>
+
+  <div class="cards">
+    <a href="geggy-tah-production-mission.pdf" download class="card">
+      <h3>📄 Production Mission PDF</h3>
+      <p>25-page build pipeline. Vision, architecture reference, and mission package for the educational module.</p>
+    </a>
+    <a href="geggy-tah-production-mission.tex" download class="card">
+      <h3>📝 LaTeX Source</h3>
+      <p>.tex source for modification and recompilation. XeLaTeX with DejaVu fonts.</p>
+    </a>
+  </div>
+
+  <h2 class="section">Module Rooms</h2>
+  <div class="rooms">
+    <div class="room">
+      <h4>Room 1: The Workshop</h4>
+      <p>CoCu, the anti-band. Baby sisters and demo tapes. The jazz root under Jaki Byard.</p>
+      <div class="stats">3 panels · Try Session: The Workshop Exercise (5-source composition)</div>
+    </div>
+    <div class="room">
+      <h4>Room 2: The Sound</h4>
+      <p>Three albums as three experiments. The aural planet. The hit nobody expected. The unconventional toolkit.</p>
+      <div class="stats">4 panels · Try Session: Found Sound Session · GSD-Tracker integration</div>
+    </div>
+    <div class="room">
+      <h4>Room 3: The Network</h4>
+      <p>Susan Rogers' transformation. Pamelia and the theremin. Byrne's curatorial bet. The constellation map.</p>
+      <div class="stats">4 panels · Try Session: Constellation Exercise · Interactive SVG/D3 map</div>
+    </div>
+    <div class="room">
+      <h4>Room 4: The Ripple</h4>
+      <p>From Pomona to "Hello." The quiet craftsman. The chart that lies.</p>
+      <div class="stats">3 panels · Try Session: The Two Charts · D3 toggle visualization</div>
+    </div>
+    <div class="room">
+      <h4>Room 5: The Label</h4>
+      <p>The Sri Lankan tea and the Masonic eye. The American exception on a world music label.</p>
+      <div class="stats">2 panels · Try Session: The Label Exercise</div>
+    </div>
+  </div>
+
+  <h2 class="section">What This Establishes</h2>
+  <p style="font-size: 0.95rem;">This mission creates a new module type for the GSD Creative Suite: the <strong>Creative DNA Study</strong> — an interactive case study tracing artistic influence through collaborative networks. Once the Geggy Tah module succeeds, the pattern extends to future case studies: the Paisley Park network, the Muscle Shoals sound, the Wrecking Crew, the Canterbury Scene, the CBGB ecosystem.</p>
+
+  <h2 class="section">Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure Phase 1 (Deep Research Mission) is complete and accessible</li>
+      <li>Hand this PDF to <code>gsd-skill-creator</code> via Claude Code</li>
+      <li>The mission decomposes into 4 waves across ~4 sessions with 2 HITL gates</li>
+      <li>Wave 1 runs two parallel tracks: Content Core (R1+R2) and Network/Viz (R3+R4+R5)</li>
+      <li>Final outputs: 5 rooms, 16 panels, 5 Try Sessions, 2 interactive visualizations, College directory integration, and the reusable Creative DNA Study pattern template</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "Tommy taught me that music is an expression of life. Life is not perfect. Life has mistakes, and it's flawed. It's really beautiful, and it's really ugly. It smells pretty, and it stinks."
+    <div class="attr">— Susan Rogers, on what Geggy Tah taught Prince's engineer</div>
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem · March 26, 2026 · Phase 2: Production · Squadron Profile · 5 Rooms · 16 Panels · 5 Try Sessions · 25 Pages
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+[
+  {
+    "heritageConceptId": "room-15-cedar-canoe",
+    "sumoTerm": "WaterVehicle",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarCanoe WaterVehicle)",
+    "naturalLanguage": "A cedar canoe is a kind of water vehicle — a craft constructed from a single western red cedar log, shaped by adzing and burning to carry people and goods on coastal and river waters.",
+    "ontologicalBridge": "bridge-15-cedar-canoe"
+  },
+  {
+    "heritageConceptId": "room-15-cedar-canoe",
+    "sumoTerm": "Canoe",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarCanoe Canoe)",
+    "naturalLanguage": "A cedar canoe is a specific type of canoe — distinguished by its material (western red cedar), its construction method (dugout from a single log), and the traditions of the Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah nations that developed it.",
+    "ontologicalBridge": "bridge-15-cedar-canoe"
+  },
+  {
+    "heritageConceptId": "room-15-cedar-tree",
+    "sumoTerm": "Plant",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WesternRedCedar Plant)",
+    "naturalLanguage": "Western red cedar (*Thuja plicata*) is a plant — a large conifer of the Pacific Coast, producing aromatic reddish-brown wood, fibrous inner bark for weaving, and scale-like foliage. SUMO classifies it by its biological category.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-bark-harvesting",
+    "sumoTerm": "IntentionalProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarBarkHarvesting IntentionalProcess)",
+    "naturalLanguage": "Cedar bark harvesting is an intentional process — a deliberate set of actions for removing inner bark from living cedar trees without killing them.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-bark-harvesting",
+    "sumoTerm": "MaterialCulture",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarBarkHarvesting MaterialCulture)",
+    "naturalLanguage": "Cedar bark harvesting is also traditional material culture — the knowledge of when to harvest (spring, when sap runs), how to identify appropriate trees, how to score and strip bark within the constraints of the Law of the Bark, and how to process the raw material into weaving fiber or rope.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-bentwood-box",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BentwoodBox Artifact)",
+    "naturalLanguage": "A bentwood box is an artifact — a human-made object constructed by kerfing, steaming, and bending a single cedar plank into a four-sided box, joined at one corner. Used for storage, cooking (hot rocks), and trade.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-bentwood-box",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BentwoodBoxMaking Manufacturing)",
+    "naturalLanguage": "Making a bentwood box is a manufacturing process — cutting precise kerfs at 70-80% depth, steaming the plank to make it pliable, bending at the kerfs, and joining the final corner. The physics of the process (steam softening lignin, kerfs controlling the bend radius) are exactly as described in materials science.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-cedar-rope",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarRope Artifact)",
+    "naturalLanguage": "Cedar rope made from twisted inner bark strips is an artifact — a fabricated cordage material used for lashing, fishing gear, and construction in PNW Coast traditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-longhouse",
+    "sumoTerm": "ConstructionProcess",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass LonghouseConstruction ConstructionProcess)",
+    "naturalLanguage": "Longhouse construction is a construction process — the systematic assembly of large cedar posts, ridge beams, and plank cladding into a community dwelling structure.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-15-canoe-carving",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CedarCanoeCarving HeritageSkill)",
+    "naturalLanguage": "Cedar canoe carving is a heritage skill — a traditional process encoding generations of knowledge about cedar properties, adze technique, hull form, and the relationship between maker and material that produces seaworthy vessels.",
+    "ontologicalBridge": null
+  }
+]

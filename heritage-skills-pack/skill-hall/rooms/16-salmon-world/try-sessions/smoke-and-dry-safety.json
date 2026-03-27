@@ -1,0 +1,52 @@
+{
+  "id": "salmon-16-smoke-dry-beginner",
+  "title": "Smoke and Dry: Salmon Preservation Safety",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "prerequisites": [],
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Read the food safety gate before engaging with salmon preservation content.",
+      "safetyNote": "GATE — Food safety: salmon must reach a minimum internal temperature of 160°F (71°C) during hot smoking to kill pathogens including Listeria and Salmonella. Cold smoking (below 90°F/32°C) does not kill pathogens — cold-smoked fish requires salt curing first or refrigerated storage throughout its life. Never store improperly dried salmon in airtight containers — residual moisture in an oxygen-poor environment creates botulism risk. This temperature requirement is non-negotiable."
+    },
+    {
+      "order": 2,
+      "instruction": "Learn the butterfly fillet cut — the foundational preparation for drying rack salmon.",
+      "safetyNote": "ANNOTATE — Knife safety: use a sharp, flexible filleting knife. Score along the backbone, cutting away from you. Stabilize the fish on a non-slip cutting board. A sharp knife requires less force and gives better control than a dull one — dull knives cause more injuries because they require more force and are more likely to slip.",
+      "culturalContext": "The butterfly fillet opens the salmon flat while keeping it connected along the back. Score from tail to head along one side of the backbone, then along the other, leaving the backbone intact as a connecting spine. The resulting flat fillet exposes maximum flesh surface to air and smoke — essential for effective drying. This cut is designed for the drying rack, not the pan. The backbone can be kept for broth.",
+      "sumoMapping": "FoodPreservation"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn traditional smoking setup — smokehouse or drying rack construction, and alder wood selection.",
+      "nationAttribution": "Coast Salish, Nuu-chah-nulth, Lummi (Lhaq'temish)",
+      "culturalContext": "Alder (Alnus rubra) is the traditional smoking wood for salmon on the Pacific Northwest Coast. Alder produces mild smoke that does not overpower the fish, burns at consistent temperatures, and is abundant in the Pacific lowland forests. This is not arbitrary preference — generations of trial established alder as producing the best-preserved, best-tasting product. Hardwood chips (hickory, mesquite) are not traditional replacements; they produce heavier smoke profiles that change the flavor significantly. Traditional smokehouses used a low fire with controlled airflow; drying racks were placed where wind could assist the drying process.",
+      "sumoMapping": "FoodPreservation"
+    },
+    {
+      "order": 4,
+      "instruction": "Understand temperature and time for hot smoking — and how to verify doneness.",
+      "culturalContext": "Hot smoking for salmon uses a temperature range of 180-220°F (82-104°C) in the smoker environment. At this temperature, a salmon fillet of standard thickness (1 inch/2.5 cm) requires approximately 6-8 hours to reach a minimum internal temperature of 160°F (71°C). Verify doneness with an instant-read thermometer inserted into the thickest part of the fillet. The flake test (flesh separates into clean flakes when pressed) indicates doneness but does not verify minimum temperature — use a thermometer for safety. Thicker fillets require more time; thinner pieces may finish sooner.",
+      "sumoMapping": "FoodPreservation"
+    },
+    {
+      "order": 5,
+      "instruction": "Learn the air-dried salmon method — traditional long-term winter storage technique.",
+      "nationAttribution": "Stó:lō, Coast Salish",
+      "culturalContext": "Air-dried salmon (distinct from hot-smoked salmon) is a traditional method for long-term winter storage. Butterfly-filleted salmon is hung on outdoor drying racks in locations with consistent wind exposure, low humidity, and sun. The process takes several days to weeks depending on conditions. Properly dried salmon has dramatically reduced moisture content (below 15%) and will last months stored in cool, dry conditions with air circulation. This is a different product from hot-smoked salmon — drier, harder, longer shelf life. Stó:lō and Coast Salish river communities produced large quantities of air-dried salmon for winter storage and trade.",
+      "sumoMapping": "FoodPreservation"
+    },
+    {
+      "order": 6,
+      "instruction": "Learn storage conditions and spoilage inspection — the final safety gate.",
+      "safetyNote": "GATE — Inspect smoked or dried salmon before consuming: off odor, slimy texture, or visible mold means discard. When in doubt, throw it out. Botulism produces no visible sign, odor, or taste warning — this is why the minimum internal temperature during smoking is non-negotiable. Properly processed and stored salmon: hot-smoked salmon lasts 1-2 weeks at room temperature with air circulation, several months vacuum-sealed and refrigerated. Air-dried salmon: months in cool, dry storage with air circulation. Do not store in airtight containers unless fully dried — residual moisture in sealed containers enables mold and creates botulism risk.",
+      "culturalContext": "Traditional storage methods built in inspection as a normal part of use — salmon was checked regularly during storage and any compromised pieces removed before they affected surrounding stock. The principle of inspection (know your food before you eat it) is as traditional as the preservation technique itself.",
+      "sumoMapping": "FoodPreservation"
+    }
+  ]
+}

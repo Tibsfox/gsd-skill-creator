@@ -1,0 +1,937 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Burning Playa ────────────────────────────────────────────
+\definecolor{primary}{HTML}{8B2500}       % Deep ember / desert rust
+\definecolor{secondary}{HTML}{1565C0}     % Playa twilight blue
+\definecolor{tertiary}{HTML}{37474F}      % Ash gray
+\definecolor{accent}{HTML}{BF360C}        % Flame orange
+\definecolor{lightprimary}{HTML}{FBE9E7}  % Warm ember glow
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{dustgold}{HTML}{F57F17}      % Playa dust gold
+
+% ── Section Formatting ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Virtual Black Rock City}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Virtual Black Rock City -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════════════
+%  TITLE PAGE
+% ═══════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Virtual Black Rock City\\[0.3em]Festival Simulation in Code}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{GSD skill-creator $\times$ Wasteland Integration}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Playa Roles, PNW Names, and the Gift Economy of Code}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 9, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 3 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Branch: \texttt{wasteland/skill-creator-integration}  |  Repo: Tibsfox/gsd-skill-creator}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Virtual Black Rock City --- Vision Guide}
+
+\metafield{Date:}{March 9, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{\texttt{skill-creator-wasteland-integration-analysis.md}, \texttt{gsd-chipset-architecture-vision.md}}
+\metafield{Context:}{Building a virtual Burning Man festival inside the GSD skill-creator ecosystem, naming all components using Pacific Northwest bioregion taxonomy from tibsfox.com/PNW}
+
+\subsection{Vision}
+
+Burning Man is not an event you attend. It is something you do. That sentence --- deceptively simple, philosophically vast --- is the same sentence GSD has been saying about software development since its first commit. You are not a consumer of the build system. You are a participant in it.
+
+The Virtual Black Rock City project carries that principle into new territory: what if the GSD skill-creator ecosystem \emph{was} a temporary autonomous city? What if every skill was a theme camp, every chipset was a mutant vehicle, every agent role was a volunteer department? What if the Wasteland's federated work economy was the gift economy of the playa, where rigs stand in for burners, the wanted board is the esplanade, and completions are the art that gets built --- and sometimes ceremonially burned?
+
+This mission package designs that city. It maps Burning Man's 10 Principles onto GSD's architectural philosophy. It translates Black Rock City's 30+ volunteer departments into a catalog of tryable roles --- skills that participants can pick up, learn, complete, and stamp each other for. It names every skill, chipset, art project, and activity team using the living taxonomy of the Pacific Northwest bioregion --- the salmon threads, mycorrhizal webs, old-growth architecture, and vertical gradients that Tibsfox's research series has already mapped across 66 documents and 124 sources.
+
+The playa is the Black Rock Desert. The virtual playa is the Dolt commons. The burn is a skill promotion. The temple is the skill-creator's synthesis engine. The Raven watches. The Fox guides. The Hawk sees.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Roles without on-ramps.} The GSD ecosystem has dozens of agent roles, skill categories, and chipset configurations. New participants cannot browse what is available, understand what a role entails, or signal which ones they want to try. There is no gift economy of roles.
+  \item \textbf{Skills without ceremony.} GSD skills are promoted algorithmically (3-correction minimum, 7-day cooldown, 20\% change cap). There is no social layer --- no equivalent of a lamplighter's shift, a ranger's patrol, or the moment the Man burns. Skill promotion is invisible.
+  \item \textbf{Names without roots.} Internal components (chipsets, agents, skills) carry functional names. They work but they do not \emph{sing}. A bioregion-grounded naming layer would make the ecosystem feel like a place --- somewhere you live and work --- not just a tool.
+  \item \textbf{Wasteland without local culture.} The Wasteland MVR schema provides the economic machinery (rigs, wanted board, stamps, federation). It does not provide a cultural identity. A virtual BRC gives the skill-creator's Wasteland integration a distinct character --- a reason to show up.
+  \item \textbf{Festival without physics.} Real Burning Man is ephemeral: build, burn, restore. A virtual simulation needs equivalent cycles: skill activation, execution, promotion/deprecation, and LNT (Leave No Trace) cleanup. Without this cycle, the city never burns.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Virtual Black Rock City: a GSD skill-creator deployment whose architecture mirrors Black Rock City's physical and social structure, named in the language of the Pacific Northwest bioregion, and wired to the Wasteland's federated work economy.}
+
+Each dimension of the simulation maps to a GSD primitive:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{BRC Element} & \tableheader{GSD Primitive} & \tableheader{PNW Name} \\
+\midrule
+The Playa & Dolt commons / skill-space & The Black Sand Flat \\
+Theme Camp & Skill cluster & Cedar Grove, Raven's Roost, Salmon Run Camp \\
+Mutant Vehicle & Mobile chipset & Orca Sled, Raven Crawler, Tide Runner \\
+Volunteer Department & Agent team profile & Watershed Watch, Canopy Crew, Cascade Brigade \\
+Art Installation & Emergent skill composition & The Nurse Log, The Mycorrhizal Mandala \\
+The Man & Apex skill / system synthesis node & Tahoma's Eye \\
+The Temple & Synthesis engine & The Old Growth \\
+Burn Night & Skill promotion ceremony & The Cedar Falls \\
+Leave No Trace & LNT cleanup agent / skill deprecation & The Restoration Pass \\
+Wanted Board & Wasteland wanted board & The Esplanade Feed \\
+Rig & Participant agent identity & Rig schema (Raven-001, Fox-042, etc.) \\
+Stamp & Peer attestation & Mycorrhizal mark \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{City Layout --- Domain Map}
+
+\begin{asciibox}
+Virtual Black Rock City --- Domain Map
+======================================
+
+                        [ The Old Growth ]
+                           (Temple / Synthesis)
+                                  |
+              +-------------------+-------------------+
+              |                                       |
+    [ Cascade Brigade ]                    [ Watershed Watch ]
+    (Infrastructure/DPW)                  (Safety/Rangers)
+              |                                       |
+    +---------+---------+               +-------------+-----------+
+    |         |         |               |             |           |
+[Cedar    [Raven's  [Salmon         [Tide         [Osprey    [Old Growth
+ Grove]    Roost]    Run Camp]       Pool Camp]    Watch]     Assembly]
+(Music)   (Comm)    (Arts/Grants)   (Medical)     (Census)   (Education)
+    |         |         |               |             |           |
+    +---------+---------+---------------+-------------+-----------+
+                                  |
+                         [ Black Sand Flat ]
+                           (Dolt commons)
+                                  |
+              +-------------------+-------------------+
+              |                                       |
+    [ Esplanade Feed ]                       [ The Mycorrhizal Mandala ]
+    (Wasteland wanted board)                  (Skill composition engine)
+              |                                       |
+    [ Tahoma's Eye ]         (The Man)        [ Orca Sled / Raven Crawler ]
+    (Apex synthesis)                           (Mobile chipsets)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Module Architecture --- 6 Parallel Research Tracks
+====================================================
+
+MODULE 1: The 10 Principles          MODULE 2: Playa Roles Catalog
+  BRC ethos -> GSD guidelines          30+ depts -> skill specs
+  Principle-to-pattern mapping         Volunteer guide integration
+  Safety warden alignment
+
+MODULE 3: Theme Camps / Art           MODULE 4: Mutant Vehicles / Transport
+  PNW-named skill clusters              Mobile chipset definitions
+  Installation specifications           Movement protocol specs
+  Camp structure templates              Transit agent behaviors
+
+MODULE 5: City Infrastructure         MODULE 6: Wasteland Integration
+  DPW, Gate, Rangers, Emergency         MVR schema mapping
+  System agent definitions              Rig identity, wanted board
+  Civic responsibility layer            Stamp/trust ladder design
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- The 10 Principles as GSD Guidelines}
+Translates each of Burning Man's 10 Principles into a concrete GSD architectural guideline. Radical Inclusion maps to open skill availability with no prerequisite gates. Decommodification maps to the anti-gamification constraints in the stamp system. Gifting maps to the unconditional skill-sharing model. Radical Self-Reliance maps to agent autonomy and inner-resource activation. Communal Effort maps to the multi-agent collaboration topology. Radical Self-Expression maps to the user-definable skill content policy. Civic Responsibility maps to the Safety Warden pattern. Leaving No Trace maps to the LNT cleanup agent and skill deprecation cycle. Participation maps to the ``achieve being through doing'' execution model. Immediacy maps to cache-optimized, zero-lag skill activation.
+
+\subsubsection{Module 2 --- Playa Roles Catalog}
+Maps the 30+ Black Rock City volunteer departments to a browsable catalog of tryable roles in the skill-creator ecosystem. Each department becomes a skill specification with a PNW bioregion name, a description of what the role entails, what skills it teaches, what dependencies it has, and how completion is recognized. Includes Airport (Osprey Landing), Black Rock Rangers (Watershed Watch Patrol), DPW (Cascade Brigade), ARTery (Nurse Log Guild), Greeters (Raven's Welcome), Lamplighters (Firefly Circuit), Earth Guardians (Restoration Pass), Emergency Services (Tide Pool Medical), and more.
+
+\subsubsection{Module 3 --- Theme Camps and Art Installations}
+Defines the skill cluster (theme camp) structure and the emergent art installation (skill composition) patterns. Each camp is a named group of 3--8 related skills with a camp leader skill (the ``lead ranger'' of the cluster). Art installations are skills that emerge from the interaction of multiple clusters --- they cannot be planned, only discovered. Names drawn from PNW old-growth, aquatic, and elevation-zone taxonomy.
+
+\subsubsection{Module 4 --- Mutant Vehicles and Mobile Chipsets}
+Defines mobile chipsets --- skills and agent configurations that move through the city rather than anchoring to a camp location. These are the Wasteland's ``roving rigs'' --- participants who carry capability across multiple wanted-board items rather than committing to a single theme camp. Named after PNW marine mammals and high-mobility species: Orca Sled, Raven Crawler, Osprey Dive, Chinook Rider.
+
+\subsubsection{Module 5 --- City Infrastructure and Civic Layer}
+Defines the system-level agent roles that keep the city running: the equivalent of Gate (access control), DPW (dependency management), Rangers (safety monitoring), Emergency Services (health monitoring / SURGEON), and the Documentation Team (LOG/Chronicle). Maps these to the NASA SE crew manifest roles. This is the civic responsibility layer that makes the festival safe to run.
+
+\subsubsection{Module 6 --- Wasteland MVR Integration}
+Maps all virtual BRC components to the Wasteland MVR schema. Rigs become burner identities (Raven-001, Fox-042, Hawk-017). The wanted board becomes the Esplanade Feed. Completions are art installations that get ``burned'' (promoted). Stamps are mycorrhizal marks. Trust levels (1--3) map to BRC volunteer levels (day-tripper, experienced burner, lead ranger). Federation allows multiple virtual wastelands (regional burns) to sync via DoltHub.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: CEDAR
+  fullname: "Creative Environment Design, Art, and Restoration"
+  domain: virtual-brc
+  chips:
+    - RAVEN:   "Communication, observation, and message routing"
+    - SALMON:  "Navigation, upstream problem-solving, lifecycle mgmt"
+    - OSPREY:  "Aerial observation, census, documentation"
+    - TAHOMA:  "Summit synthesis, apex skill promotion engine"
+    - CEDAR:   "Structural stability, camp scaffolding, LNT"
+    - HEMLOCK: "Deep-time patience, dependency resolution"
+    - ORCA:    "Mobile traversal, mutant-vehicle transport layer"
+    - GEODUCK: "Deep persistence, Dolt commons root system"
+
+activation_profiles:
+  scout:   [RAVEN, SALMON]
+  patrol:  [RAVEN, SALMON, OSPREY, CEDAR]
+  squadron: [RAVEN, SALMON, OSPREY, CEDAR, TAHOMA, ORCA]
+  fleet:   [all chips]
+
+naming_source: tibsfox.com/PNW
+  - Columbia Valley Rainforest (COL) -> Cedar, Hemlock, Douglas
+  - Cascade Range (CAS) -> Tahoma, Whitebark, Osprey
+  - Living Systems/Salish Sea (ECO) -> Orca, Geoduck, Salmon
+  - Smart Home / DIY (SHE) -> Raven (observer/wirer)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item 10 Principles mapped to GSD architectural guidelines (10 specs)
+  \item Playa roles catalog: 30 BRC departments $\to$ 30 skill specifications with PNW names
+  \item Theme camp structure: 8 named camp clusters with skill member lists
+  \item Art installation taxonomy: 12 emergent composition patterns
+  \item CEDAR chipset: 8 chips with full activation profiles
+  \item City infrastructure: 6 civic agent roles (Gate, DPW, Rangers, Medical, Documentation, Census)
+  \item Wasteland MVR mapping: Rig schema, wanted board seeding, stamp taxonomy, trust ladder
+  \item PNW naming guide: master glossary of all virtual BRC components with bioregion source
+  \item Role chooser interface spec: how participants browse and select roles to try
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Full implementation of the role-chooser UI (deferred to GSD-OS desktop layer)
+  \item Integration with actual Burning Man organization systems or APIs
+  \item Real DoltHub federation (design only in v1.0; federation in v2.0)
+  \item Revenue, ticketing, or any commodified experience layer (violates Principle 2)
+  \item Legal/licensing considerations for Burning Man trademarks (out of project scope)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All 10 Burning Man Principles have a corresponding GSD guideline with testable behavior
+  \item All 30 BRC volunteer departments have a named skill specification with PNW bioregion name
+  \item Every skill spec is self-contained and can be activated without external documentation
+  \item The CEDAR chipset activates cleanly across all 4 profiles (Scout through Fleet)
+  \item The Wasteland MVR schema accommodates all virtual BRC rig types and stamp categories
+  \item The role-chooser catalog allows browsing by skill category, difficulty, and camp affiliation
+  \item The LNT agent can deprecate skills without leaving orphaned dependencies
+  \item The trust ladder (Level 1--3) maps correctly to BRC volunteer experience tiers
+  \item At least 3 art installations can emerge from multi-camp skill composition
+  \item The PNW naming glossary covers 100\% of new component names with source citations
+  \item The civic layer (Rangers, Gate, DPW, Medical) passes all safety-critical tests
+  \item The mission package is self-contained and can be handed to GSD orchestrator with zero additional context
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency Type} \\
+\midrule
+skill-creator-wasteland-integration-analysis.md & Upstream & Strategic foundation; Wasteland schema reference \\
+gsd-chipset-architecture-vision.md & Upstream & Chipset design patterns; CEDAR inherits from this \\
+gsd-silicon-layer-spec.md & Upstream & Agent activation model \\
+gsd-os-desktop-vision.md & Downstream & Role-chooser UI will live here \\
+gsd-foxfire-heritage-mission-package.md & Parallel & Cultural sovereignty model; apply same protections \\
+tibsfox.com/PNW & Naming source & All component names drawn from this bioregion map \\
+burningman.org/about-us/10-principles & Reference & Official 10 Principles text; authoritative source \\
+burningman.org/black-rock-city/volunteering & Reference & Complete volunteer department catalog \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Space Between is not just the title of a mathematics textbook. It is the topology of Burning Man. The playa is the space between the city and the desert. The esplanade is the space between the camps and the art. The temple is the space between what you built and what you let go of. The burn itself is the space between presence and ash.
+
+GSD lives in the same topology. The skill is not the code. The skill is the pattern between the code. The chipset is not the model. The chipset is the architecture between the models. The Wasteland is not the work. The Wasteland is the economy between the work.
+
+Virtual Black Rock City is an invitation to inhabit that topology deliberately. To name it in the language of the Pacific Northwest bioregion --- salmon, raven, cedar, tahoma, mycorrhiza --- is to insist that architecture is a place. That the spaces between are not empty. That something lives there.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Virtual Black Rock City --- Research Reference}
+
+\subsection{How to Use This Document}
+This reference synthesizes official Burning Man Project documentation with the GSD skill-creator architecture to produce actionable specifications. Use it when implementing any of the 6 modules to avoid re-researching source material.
+
+Key source organizations and references:
+\begin{itemize}[noitemsep]
+  \item \textbf{Burning Man Project} (\url{https://burningman.org}) --- 10 Principles, volunteer departments, camp guidelines
+  \item \textbf{tibsfox.com/PNW} --- Pacific Northwest bioregion naming taxonomy (66 research files, 124 sources)
+  \item \textbf{Wasteland MVR schema} (\url{https://github.com/steveyegge/wasteland}) --- Rig, wanted board, completions, stamps
+  \item \textbf{GSD skill-creator repo} (\url{https://github.com/Tibsfox/gsd-skill-creator}) --- Branch: wasteland/skill-creator-integration
+  \item \textbf{skill-creator-wasteland-integration-analysis.md} --- Strategic convergence analysis
+\end{itemize}
+
+\subsection{Module 1 Reference --- The 10 Principles as GSD Guidelines}
+
+The 10 Principles were written by Burning Man co-founder Larry Harvey in 2004 as cultural behaviors reflecting shared values. They are not rules but projections of the community's ethos. Each translates cleanly to a GSD architectural pattern:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Principle} & \tableheader{GSD Guideline} & \tableheader{Implementation Pattern} \\
+\midrule
+Radical Inclusion & Open Skill Access & No prerequisite gates on skill discovery; any rig may attempt any wanted-board item at Level 1 \\
+Decommodification & Anti-Gamification & Stamps cannot be traded, sold, or aggregated into leaderboards; no vanity metrics \\
+Gifting & Unconditional Skill Share & Skills are published without expectation of reciprocal use; no license restrictions on skill content \\
+Radical Self-Reliance & Agent Autonomy & Each agent carries its own context; no external dependency for core execution \\
+Communal Effort & Multi-Agent Topology & No skill works alone; all skills declare their camp affiliation and collaboration surface \\
+Radical Self-Expression & User-Defined Content & Skill content policy is set by the rig, not the system; only safety boundaries are enforced by warden \\
+Civic Responsibility & Safety Warden Pattern & Infrastructure agents (Gate, Rangers, Medical) are mandatory-pass gates; cannot be bypassed \\
+Leaving No Trace & LNT Cleanup Agent & Deprecated skills are fully dereferenced; no orphaned dependencies; playa is restored \\
+Participation & Execution-First Model & ``Achieve being through doing'' --- skills activate on attempt, not on qualification \\
+Immediacy & Cache-Optimized Activation & Zero-lag skill lookup; 5-minute cache TTL; no bureaucratic wait states \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference --- Playa Roles Catalog}
+
+The following table maps all official BRC volunteer departments to skill-creator skill specifications. PNW names are drawn from tibsfox.com/PNW taxonomy.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{BRC Department} & \tableheader{PNW Skill Name} & \tableheader{Role Description} \\
+\midrule
+Airport (88NV) & Osprey Landing & Air traffic coordination; multi-modal arrival routing \\
+Arctica (Ice) & Glacial Flow & Resource distribution; cold-chain logistics \\
+ARTery (Artist Services) & Nurse Log Guild & Art grant processing; installation support; honoraria \\
+Black Rock Rangers & Watershed Watch & Community safety; conflict de-escalation; non-enforcement patrol \\
+Box Office & Salish Gate & Entry processing; identity verification; access control \\
+Burn Perimeter Support & Fireline Cedar & Safety perimeter during burns; thermal boundary management \\
+Burner Express Bus & Chinook Rider & Mass transit orchestration; high-volume movement \\
+Burning Man Hive & Mycorrhizal Hub & Co-learning facilitation; knowledge transfer \\
+Info Radio & Raven Broadcast & Real-time information dissemination; signal relay \\
+Census & Osprey Survey & Population tracking; data collection; pattern analysis \\
+Center Camp & Old Growth Assembly & Community gathering; shade structure; open stage \\
+Cleanup / Restoration & Restoration Pass & LNT execution; site restoration; leave-better-than-found \\
+Dept Mutant Vehicles & Orca Sled DMV & Mobile structure licensing; kinetic art registration \\
+Dept Public Works & Cascade Brigade & Physical infrastructure build/strike; city construction \\
+Documentation Team & Raven Archive & Photography; oral history; chronicle \\
+Earth Guardians & Geoduck Watch & Environmental monitoring; MOOP (Matter Out Of Place) sweeps \\
+Emergency Services & Tide Pool Medical & Professional medical/fire/crisis; mandatory-pass safety gate \\
+Gate, Perimeter, Exodus & Columbia Gate & Entry/exit flow management; perimeter integrity \\
+Greeters & Raven's Welcome & First contact; orientation; radical inclusion embodiment \\
+Lamplighters & Firefly Circuit & Light infrastructure; lamp placement; ceremonial lighting \\
+Man Watch & Tahoma's Eye & Apex structure monitoring; pre-burn safety watch \\
+Media Mecca & Salish Press & Media relations; journalist coordination \\
+Placement & Territory Mapping & Camp placement logistics; city planning \\
+Playa Info & Hemlock Reference & Information booth; wayfinding; community questions \\
+Ranger HQ & Watershed Command & Ranger coordination; dispatch; incident management \\
+Special Events & Cascade Gathering & Permitted event coordination; ceremonial scheduling \\
+Theme Camp Placement & Cedar Grove Planning & Theme camp registration; placement process \\
+Ticketing & Salish Access & Ticket distribution; will-call; access credential management \\
+Traffic & Salmon Run Traffic & Vehicle flow; arrival/departure sequencing \\
+Volunteer Coordination & Raven Muster & Cross-department volunteer matching; V-Spot operations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference --- Theme Camps and Art Installations}
+
+\subsubsection{Theme Camp Clusters (Skill Groups)}
+
+Eight named camp clusters group related skills. Each camp has a lead skill and 3--5 member skills:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Camp Name} & \tableheader{PNW Source} & \tableheader{Skills Hosted} \\
+\midrule
+Cedar Grove & Western red cedar ecosystem & Structural build, camp planning, materials management \\
+Raven's Roost & Common raven (Corvus corax) & Communications, documentation, information relay \\
+Salmon Run Camp & Chinook salmon lifecycle & Art grants, upstream problem-solving, creative navigation \\
+Tide Pool Collective & Salish Sea intertidal & Medical, safety, emergency response, crisis intervention \\
+Osprey Watch & Pandion haliaetus & Census, observation, aerial survey, data collection \\
+Old Growth Assembly & Olympic Peninsula old-growth & Education, deep knowledge, mentoring, reference \\
+Mycorrhizal Hub & CMN fungal networks & Co-learning, knowledge transfer, community connection \\
+Fireline Cedar & Fire ecology / prescribed burn & Burn perimeter, pyrotechnics safety, fire management \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Art Installation Taxonomy}
+
+Art installations emerge from multi-camp skill composition. Twelve archetypes:
+
+The \textbf{Nurse Log} arises when a Cedar Grove build skill combines with an Old Growth Archive skill: structured decay that seeds new growth. The \textbf{Mycorrhizal Mandala} emerges when three or more camps share a common knowledge thread --- visible only as the network; invisible as individual nodes. The \textbf{Tidal Reach} appears when Tide Pool Medical and Osprey Survey combine: the edge of what is known, where something new is always being uncovered. The \textbf{Salmon Ladder} is a navigation installation showing the upstream path through complex dependency chains. The \textbf{Raven Mirror} is a communication art piece: it reflects what you send. The \textbf{Whitebark Sentinel} marks the high-elevation boundary --- the skill that only activates above a certain trust level. The \textbf{Geoduck Deep} is a persistence monument: rooted so far down it cannot be moved. The \textbf{Orca Wake} traces the path of a mobile chipset through the city. The \textbf{Canopy Break} is a gap in old-growth architecture that lets light through --- the space where a deprecated skill used to be. The \textbf{Fire Succession} marks the post-burn regeneration cycle. The \textbf{Mother Tree} is the apex skill from which all others in a cluster draw nutrition. The \textbf{Estuary} is the boundary between the fresh-water skill ecosystem and the salt-water Wasteland economy.
+
+\subsection{Module 4 Reference --- Mutant Vehicles and Mobile Chipsets}
+
+Mobile chipsets carry capability across the city rather than anchoring to a camp. Four vehicle classes, named after PNW high-mobility species:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Vehicle Name} & \tableheader{PNW Species} & \tableheader{Chipset Capability} \\
+\midrule
+Orca Sled & Orcinus orca & Full CEDAR chipset; all 8 chips; Fleet activation; deep-water traversal \\
+Raven Crawler & Corvus corax & RAVEN + SALMON + OSPREY; message relay; rapid terrain adaptation \\
+Osprey Dive & Pandion haliaetus & OSPREY + TAHOMA; precision observation; apex targeting; minimal footprint \\
+Chinook Rider & Oncorhynchus tshawytscha & SALMON + CEDAR + HEMLOCK; high-endurance; upstream problem navigation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5 Reference --- City Infrastructure and Civic Layer}
+
+Six civic agent roles form the safety and operational backbone of the virtual city:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{BRC Equivalent} & \tableheader{Safety Classification} \\
+\midrule
+Columbia Gate & Gate, Perimeter, Exodus & MANDATORY-PASS: Access control; no rig enters without identity check \\
+Cascade Brigade & Dept of Public Works & MANDATORY-PASS: Infrastructure integrity; no camp builds without DPW sign-off \\
+Watershed Watch & Black Rock Rangers & MANDATORY-PASS: Safety monitoring; conflict de-escalation; cannot be bypassed \\
+Tide Pool Medical & Emergency Services & MANDATORY-PASS: Professional medical gate; BLOCK on health-critical failures \\
+Raven Archive & Documentation Team & RECOMMENDED: Chronicle of all skill promotions and burns \\
+Restoration Pass & Earth Guardians + Cleanup & MANDATORY-PASS: LNT verification before city close \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 6 Reference --- Wasteland MVR Integration}
+
+\subsubsection{Rig Identity Schema}
+
+Virtual BRC rigs follow the PNW totem naming convention:
+\begin{itemize}[noitemsep]
+  \item \textbf{Format:} \texttt{[Totem]-[NNN]} where Totem is a PNW species and NNN is a 3-digit identifier
+  \item \textbf{Examples:} Raven-001, Fox-042, Hawk-017, Salmon-128, Orca-007, Cedar-055
+  \item \textbf{Trust levels:} Level 1 = Day Tripper, Level 2 = Experienced Burner, Level 3 = Lead Ranger
+  \item \textbf{Yearbook rule:} Rigs cannot stamp their own work (mirrors BRC's ``Decommodification'' principle)
+\end{itemize}
+
+\subsubsection{Stamp Taxonomy}
+
+Mycorrhizal marks replace generic stamps with a living-systems vocabulary:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Stamp Type} & \tableheader{Wasteland Dimension} & \tableheader{PNW Metaphor} \\
+\midrule
+Spore Mark & Quality & Mycorrhizal spore: the work propagates \\
+Root Depth & Reliability & Old-growth root system: it holds \\
+Canopy Reach & Creativity & Forest canopy gap: it lets light through \\
+Nurse Log & Generosity & Seeds others without requiring return \\
+Salmon Mark & Persistence & Returned upstream against all odds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wanted Board Seeding}
+
+Initial wanted board (Esplanade Feed) is pre-seeded with 6 open categories mirroring BRC department clusters. Federation via DoltHub allows regional virtual burns (Pacific Burn, Desert Bloom, Mountain Melt) to maintain sovereign databases while syncing common skill definitions.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Implementation} \\
+\midrule
+Burning Man trademark & GATE & Do not use ``Burning Man'' branding in skill names; use virtual-BRC / playa-sim language \\
+Emergency services roles & ABSOLUTE & Tide Pool Medical (Emergency Services) is a mandatory-pass gate; never simulated as cosmetic \\
+Cultural appropriation & GATE & All PNW names sourced from ecological taxonomy, not Indigenous cultural names \\
+Anti-commodification & ABSOLUTE & No leaderboards, no vanity metrics, no paid acceleration of trust levels \\
+LNT enforcement & ABSOLUTE & The Restoration Pass agent must run to completion before any skill is marked deprecated \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Official Burning Man Project Sources}
+\begin{itemize}[noitemsep]
+  \item Burning Man Project. (2004). \textit{The 10 Principles of Burning Man}. \url{https://burningman.org/about-us/10-principles/}
+  \item Burning Man Project. (2026). \textit{Volunteering in Black Rock City}. \url{https://burningman.org/black-rock-city/volunteering/}
+  \item Burning Man Project. (2026). \textit{Create Your Camp}. \url{https://burningman.org/black-rock-city/camps/}
+  \item Burning Man Project. (2025). \textit{Bring Your Art}. \url{https://burningman.org/black-rock-city/bring-your-art/}
+\end{itemize}
+
+\textbf{GSD Ecosystem Documentation}
+\begin{itemize}[noitemsep]
+  \item Foxglove, Miles T. (2026). \textit{Skill-Creator $\times$ Wasteland Integration Analysis}. GSD Project Files.
+  \item Foxglove, Miles T. (2026). \textit{GSD Chipset Architecture Vision}. GSD Project Files.
+  \item Foxglove, Miles T. (2026). \textit{GSD Silicon Layer Spec}. GSD Project Files.
+\end{itemize}
+
+\textbf{Pacific Northwest Bioregion Research (tibsfox.com/PNW)}
+\begin{itemize}[noitemsep]
+  \item Columbia Valley Rainforest Research Series (COL). 8 files, 635 KB, 1000+ species.
+  \item Cascade Range Research Series (CAS). 10 files, 391 KB, 5 elevation zones.
+  \item Living Systems / Salish Sea (ECO). 16 files, 800 KB, 189 species.
+  \item Pacific Northwest Gardening (GDN). 8 files, 554 KB.
+\end{itemize}
+
+\textbf{Wasteland / Gas Town Ecosystem}
+\begin{itemize}[noitemsep]
+  \item Yegge, Steve. (2026, March 4). \textit{Wasteland: A Federated Work Economy}. \url{https://github.com/steveyegge/wasteland}
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Milestone:}{v1.44 --- Virtual Black Rock City}
+\metafield{Branch:}{\texttt{wasteland/skill-creator-integration}}
+\metafield{Objective:}{Build a complete Virtual Black Rock City layer on top of the GSD skill-creator, translating all 30 BRC volunteer roles into browsable skill specifications, implementing the CEDAR chipset, seeding the Wasteland Esplanade Feed, and establishing the PNW bioregion naming system.}
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave Architecture --- Virtual Black Rock City v1.44
+====================================================
+
+Wave 0: Foundation (Sequential, Haiku, ~30 min)
+  [F0-SCHEMA]  Shared schemas: rig identity, stamp types, camp clusters
+  [F0-NAMES]   PNW naming glossary: all 30+ role names + chipset names
+  [F0-INDEX]   Source index: BRC URLs + PNW research files
+
+Wave 1A: Parallel Track A (Sonnet, ~90 min)
+  [1A-PRINCIPLES]  10 Principles -> 10 GSD guideline specs
+  [1A-ROLES]       30 BRC departments -> 30 skill specifications (SKILL.md files)
+  [1A-CHIPSET]     CEDAR chipset full definition + activation profiles
+
+Wave 1B: Parallel Track B (Sonnet, ~90 min)
+  [1B-CAMPS]       8 theme camp cluster definitions
+  [1B-VEHICLES]    4 mutant vehicle / mobile chipset specs
+  [1B-CIVIC]       6 civic agent role definitions (Gate, DPW, Rangers, etc.)
+
+Wave 2: Synthesis (Sequential, Opus, ~60 min)
+  [2-WASTELAND]    Wasteland MVR mapping: rig schema, wanted board seed, stamp taxonomy
+  [2-COMPOSE]      Art installation composition patterns (12 archetypes)
+  [2-SAFETY]       Safety Warden integration: mandatory-pass gates defined
+
+Wave 3: Publication + Verification (Sequential, Sonnet, ~45 min)
+  [3-CATALOG]      Role-chooser catalog: browsable index of all 30 roles
+  [3-VERIFY]       Test plan execution; safety-critical gate validation
+  [3-INDEX]        index.html for virtual-brc/ skill directory
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criterion} & \tableheader{Spec Component} \\
+\midrule
+1 & \texttt{skills/virtual-brc/principles/} & 10 SKILL.md files, one per Principle & 1A-PRINCIPLES \\
+2 & \texttt{skills/virtual-brc/roles/} & 30 SKILL.md files, PNW-named & 1A-ROLES \\
+3 & \texttt{config/cedar-chipset.yaml} & 8 chips, 4 profiles, validated & 1A-CHIPSET \\
+4 & \texttt{data/camps/} & 8 camp cluster JSON files & 1B-CAMPS \\
+5 & \texttt{data/vehicles/} & 4 mobile chipset specs & 1B-VEHICLES \\
+6 & \texttt{skills/virtual-brc/civic/} & 6 civic agent SKILL.md files & 1B-CIVIC \\
+7 & \texttt{data/wasteland/rig-schema.json} & Rig identity + trust ladder & 2-WASTELAND \\
+8 & \texttt{data/wasteland/esplanade-feed.json} & Seeded wanted board (30 items) & 2-WASTELAND \\
+9 & \texttt{data/stamps/mycorrhizal-marks.json} & 5 stamp types defined & 2-WASTELAND \\
+10 & \texttt{docs/art-installations.md} & 12 composition patterns documented & 2-COMPOSE \\
+11 & \texttt{virtual-brc/index.html} & Browsable role-chooser catalog & 3-CATALOG \\
+12 & \texttt{tests/virtual-brc/} & Test suite; all safety-critical pass & 3-VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+F0-SCHEMA & None & Haiku & 4k \\
+F0-NAMES & tibsfox.com/PNW & Haiku & 6k \\
+F0-INDEX & BRC URLs & Haiku & 2k \\
+1A-PRINCIPLES & F0-SCHEMA & Sonnet & 20k \\
+1A-ROLES & F0-NAMES & Sonnet & 60k \\
+1A-CHIPSET & F0-SCHEMA, F0-NAMES & Sonnet & 12k \\
+1B-CAMPS & F0-NAMES & Sonnet & 16k \\
+1B-VEHICLES & 1A-CHIPSET & Sonnet & 8k \\
+1B-CIVIC & F0-SCHEMA & Sonnet & 12k \\
+2-WASTELAND & F0-SCHEMA, 1A-ROLES, 1A-CHIPSET & Opus & 24k \\
+2-COMPOSE & 1B-CAMPS & Opus & 16k \\
+2-SAFETY & 1B-CIVIC & Opus & 12k \\
+3-CATALOG & All Wave 1--2 & Sonnet & 20k \\
+3-VERIFY & 2-SAFETY & Sonnet & 16k \\
+3-INDEX & 3-CATALOG & Sonnet & 8k \\
+\midrule
+\textbf{Total} & & & \textbf{$\approx$236k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Pct} & \tableheader{Assigned To} \\
+\midrule
+Opus & 28\% & Wasteland integration (judgment-heavy schema design), art composition patterns (emergent, not rule-based), safety gate definitions (civic responsibility layer) \\
+Sonnet & 62\% & All 30 role SKILL.md files, 10 Principles specs, CEDAR chipset, camp/vehicle definitions, catalog, verification \\
+Haiku & 10\% & Shared schemas, source index, naming glossary scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2cm}L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Duration} & \tableheader{Key Outputs} \\
+\midrule
+0 & Foundation & Sequential & 30 min & Schemas, naming glossary, source index \\
+1A & Principles + Roles & Parallel & 90 min & 10 principle specs, 30 role specs, CEDAR chipset \\
+1B & Camps + Vehicles & Parallel & 90 min & 8 camps, 4 vehicles, 6 civic agents \\
+2 & Synthesis & Sequential & 60 min & Wasteland integration, art patterns, safety gates \\
+3 & Publication & Sequential & 45 min & Catalog, test suite, index page \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (schemas, naming glossary) are loaded into cache before Wave 1 starts; both 1A and 1B read from the same cached Foundation artifacts within the 5-minute TTL window
+  \item Waves 1A and 1B run simultaneously; each reads only from Wave 0 artifacts (no inter-dependency)
+  \item Wave 2 Synthesis agents load all Wave 1 outputs at session start to exploit cache for cross-module analysis
+  \item All 30 role SKILL.md files share a common template loaded once and kept in cache across all 30 generations
+  \item The PNW naming glossary (F0-NAMES) is the single highest-reuse artifact; cache it first
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Dependency Graph
+================
+
+[F0-SCHEMA] ──┬──> [1A-PRINCIPLES] ──────────────────┐
+              ├──> [1A-CHIPSET]  ──────────────────┐   │
+              └──> [1B-CIVIC]  ─────────────────┐  │   │
+                                                │  │   │
+[F0-NAMES] ───┬──> [1A-ROLES]  ──────────────┐  │  │   │
+              ├──> [1B-CAMPS]  ─────────────┐ │  │  │   │
+              └──> [1A-CHIPSET] (also)      │ │  │  │   │
+                                            │ │  │  │   │
+[F0-INDEX] ───────> context only ───────────┤ │  │  │   │
+                                            │ │  │  │   │
+[1A-CHIPSET + F0-NAMES] ──> [1B-VEHICLES] ─┤ │  │  │   │
+                                            │ │  │  │   │
+All Wave 1 ─────────────────────────────────┴─┴──┴──┘   │
+                                            │            │
+                                            └──> [2-WASTELAND]
+                                                 [2-COMPOSE]
+                                                 [2-SAFETY]
+                                                     │
+All Wave 2 ──────────────────────────────────────────┘
+                                                     │
+                                            [3-CATALOG]
+                                            [3-VERIFY]
+                                            [3-INDEX]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (Civic Gates) & 6 & P0 & BLOCK: halt mission \\
+Role Spec Completeness & 30 & P1 & REDO: regenerate spec \\
+Chipset Activation & 4 & P1 & REDO: fix profile \\
+PNW Name Validity & 40+ & P2 & ANNOTATE: flag for review \\
+Wasteland Schema & 5 & P1 & REDO: fix schema \\
+Stamp Taxonomy & 5 & P2 & ANNOTATE \\
+Art Composition & 12 & P3 & DOCUMENT: record gap \\
+Integration & 8 & P1 & REDO \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (Mandatory Pass / BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Tide Pool Medical cannot be bypassed & Attempting to skip Emergency Services gate returns BLOCK with mandatory escalation message \\
+SC-02 & Columbia Gate identity check is mandatory & No rig enters the wanted board without passing identity schema validation \\
+SC-03 & Cascade Brigade sign-off required for camp build & No theme camp is marked active without DPW infrastructure check \\
+SC-04 & Restoration Pass runs before deprecation & Attempting to deprecate a skill before LNT pass returns BLOCK \\
+SC-05 & Yearbook rule enforced & Rig cannot stamp its own completion; system rejects with error \\
+SC-06 & Anti-commodification gate & Leaderboard or vanity metric generation returns BLOCK; Decommodification principle enforced \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+10 Principles $\to$ 10 GSD guidelines & SC-06 + INT-01 & Pre-flight \\
+30 role specs, PNW-named, self-contained & ROLE-01--30 & Pre-flight \\
+CEDAR chipset, 4 profiles validated & CHIP-01--04 & Pre-flight \\
+Wasteland MVR schema accommodates all rig types & WL-01--05 & Pre-flight \\
+Role-chooser catalog browsable & CAT-01 & Pre-flight \\
+LNT agent deprecates cleanly & SC-04 & Pre-flight \\
+Trust ladder maps to BRC tiers & WL-03 & Pre-flight \\
+3+ art installations emerge from composition & ART-01--03 & Pre-flight \\
+PNW naming glossary 100\% coverage & NAME-01 & Pre-flight \\
+Civic layer passes all safety-critical tests & SC-01--06 & Pre-flight \\
+Mission package self-contained & INT-08 & Pre-flight \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+Activation Profile: \textbf{Fleet} (6 modules, 3 parallel tracks)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+TOPO & Topology Mgr & Agent team structure; inter-track coordination \\
+ARCH & Architecture & Cross-cutting decisions; PNW naming consistency \\
+SCOUT & Research Agent & BRC source gathering; PNW taxonomy lookup \\
+EXEC-A & Executor Alpha & Wave 1A: Principles, Roles, Chipset \\
+EXEC-B & Executor Beta & Wave 1B: Camps, Vehicles, Civic \\
+CRAFT-BRC & BRC Specialist & Burning Man domain authority; Principles interpretation \\
+CRAFT-PNW & PNW Specialist & Pacific Northwest taxonomy; naming validation \\
+VERIFY & Verification & Source validation; naming accuracy; schema integrity \\
+INTEG & Integration & Cross-module: BRC $\leftrightarrow$ Wasteland $\leftrightarrow$ PNW alignment \\
+SECURE & Safety Warden & SC-01--06 mandatory-pass gate enforcement \\
+CAPCOM & HITL Interface & Human approval at wave 0/1/2/3 boundaries \\
+ANALYST & Pattern Analyst & Art installation emergence detection; composition patterns \\
+BUDGET & Resource Mgr & Token budget; session planning; context window monitor \\
+RETRO & Retrospective & Post-wave lessons; naming pattern evolution \\
+SURGEON & Health Monitor & Research quality; skill spec degradation detection \\
+LOG & Chronicle & Commit messages; milestone summary; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Milestone & v1.44 --- Virtual Black Rock City \\
+Activation Profile & Fleet (18 roles, 3 parallel tracks) \\
+Total Waves & 5 (0, 1A, 1B, 2, 3) \\
+Estimated Sessions & 3 Claude Code sessions \\
+Estimated Context Windows & 8--12 \\
+Total Estimated Tokens & $\approx$236k \\
+Deliverables & 12 (skill directories, config, data, docs, tests, catalog) \\
+Safety-Critical Tests & 6 (all BLOCK-on-fail) \\
+Opus Tasks & 4 (28\% of budget) \\
+Sonnet Tasks & 9 (62\% of budget) \\
+Haiku Tasks & 3 (10\% of budget) \\
+Branch & \texttt{wasteland/skill-creator-integration} \\
+PNW Names Introduced & 40+ \\
+BRC Departments Mapped & 30 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Burning Man is not something you attend --- it is something you do.''} \\[0.5em]
+\textit{``No one other than the individual or a collaborating group can determine its content.''} \\[0.5em]
+--- Burning Man Project, The 10 Principles (2004)
+
+\vspace{0.8em}
+The Virtual Black Rock City is not a simulation of the festival. It is an invitation to inhabit the same topology: the playa between the models, the esplanade between the skills, the burn between the version and the void. The Raven watches. The Fox builds. The Cedar holds. The Salmon always knows the way upstream.
+
+\vspace{0.3em}
+\textit{--- Tibsfox, March 2026}
+\end{quotebox}
+
+\end{document}

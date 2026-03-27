@@ -1,0 +1,46 @@
+{
+  "roomId": "room-13-northern-watercraft",
+  "room": 13,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool", "structural", "arctic-survival"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM13-GATE-001",
+      "description": "Cold water safety for ALL watercraft activities",
+      "trigger": "any watercraft use, launch, paddling scenario",
+      "action": "GATE -- include cold water shock warning (gasping reflex, incapacitation within minutes in cold water), PFD requirement, and buddy system"
+    },
+    {
+      "id": "ROOM13-GATE-002",
+      "description": "Structural integrity for watercraft construction",
+      "trigger": "canoe, qajaq, or umiak construction",
+      "action": "GATE -- structural safety check: frame integrity, skin/bark attachment, flotation characteristics"
+    },
+    {
+      "id": "ROOM13-GATE-003",
+      "description": "Tool safety for construction tools (crooked knife, awl, adze)",
+      "trigger": "use of traditional woodworking and construction tools",
+      "action": "GATE -- include tool safety: cutting direction, sharp tool handling, secure work surface"
+    },
+    {
+      "id": "ROOM13-GATE-004",
+      "description": "Cold water immersion response",
+      "trigger": "capsizing, falling through ice, water entry scenarios",
+      "action": "GATE -- include 1-10-1 rule (1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness in cold water)"
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM13-ANN-001",
+      "description": "Weather awareness for water activities",
+      "trigger": "any on-water activity",
+      "action": "ANNOTATE -- check weather, wind, and water conditions before launch"
+    }
+  ],
+  "safetyNotes": {
+    "coldWaterShock": "Cold water shock triggers an involuntary gasping reflex upon immersion. Even strong swimmers can inhale water and drown within seconds. Water below 15°C (59°F) causes swimming failure within 3-30 minutes. Always wear a PFD, always paddle with a buddy, always know the 1-10-1 rule: 1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness.",
+    "structuralIntegrity": "Traditional watercraft (birchbark canoe, qajaq, umiak) require careful inspection before use. Check frame joints, skin/bark attachment, and waterproofing. A structurally compromised craft can fail suddenly in cold water with life-threatening consequences.",
+    "toolSafety": "Traditional construction tools (crooked knife, awl, bone adze) are extremely sharp. Always cut away from the body, maintain a secure work surface, and keep blades covered when not in use. Seek hands-on instruction from an experienced craftsperson before attempting traditional tool use."
+  }
+}

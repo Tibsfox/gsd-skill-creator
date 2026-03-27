@@ -1,0 +1,40 @@
+/* RBH — PNW Radio Broadcast History
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #4A148C;
+  --secondary: #F57F17;
+  --tertiary: #6A1B9A;
+  --accent: #E65100;
+  --cream: #f9f5ff;
+  --mist: #e8d5f5;
+  --text: #2c2c2c;
+  --text-light: #5a5a5a;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 60%, #7B1FA2 100%);
+  border-bottom: 4px solid var(--secondary);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(74, 20, 140, 0.05); }
+tr:hover { background: rgba(74, 20, 140, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(74, 20, 140, 0.04); }
+code { background: var(--mist); }
+pre { background: #1a1520; color: #d4b8e8; }
+.stat-value { color: var(--primary); }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

@@ -1,0 +1,2037 @@
+[
+  {
+    "id": "shelter-explorer-01",
+    "path": "shelter",
+    "title": "First Shelter",
+    "icon": "shelter-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 1,
+    "components": [
+      {
+        "type": "story",
+        "title": "Why Shelter Matters",
+        "content": "Explore the relationship between shelter design and the land. Log cabin notch geometry reflects the available timber. The wigwam dome reflects the need for rapid construction. Both are responses to the same question: how do we stay warm and dry? Examine the physical constraints that shape shelter across traditions.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Notch Geometry Basics",
+        "content": "Practice drawing the saddle notch and dovetail notch profiles. Understand why the saddle notch is self-draining (water runs out) and why the dovetail notch is self-locking (compression tightens the joint). Sketch both and label the bearing surfaces.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "shelter-apprentice-01",
+    "path": "shelter",
+    "title": "Shelter Understanding",
+    "icon": "shelter-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "shelter-explorer-01"
+    ],
+    "roomId": 1,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Land Shapes the House",
+        "content": "Follow the progression from temporary camp shelters to permanent structures. Understand how material availability (hardwood vs. cedar vs. birch) shapes construction technique. The Haudenosaunee longhouse, the Anishinaabe wiigiwaam, and the Appalachian cabin are all correct answers to the same question.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Frame Geometry",
+        "content": "Calculate the rafter angles for a basic gable roof at 6/12 pitch and 9/12 pitch. Understand why pitch affects snow load (steeper sheds snow), drainage, and interior headroom. Demonstrate the relationship between span, rise, and run using the 3-4-5 right triangle.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Dome vs. Rectangle",
+        "content": "Compare the dome shelter (wigwam, igloo, yurt) to the rectangular shelter (cabin, longhouse). Surface-to-volume ratio: a dome encloses the most volume for the least surface area, conserving heat. A rectangle is easier to partition and expand. Neither is superior \u2014 both solve real problems. Which tradition developed which form, and why?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Does This Shelter Say?",
+        "content": "Choose one shelter form you have studied. Write or describe: what does this structure reveal about the people who built it? What do they value? What problems are they solving? What is the relationship between the builder and the land the structure sits on?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "shelter-journeyman-01",
+    "path": "shelter",
+    "title": "Shelter Knowledge",
+    "icon": "shelter-journeyman",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "shelter-apprentice-01"
+    ],
+    "roomId": 14,
+    "components": [
+      {
+        "type": "story",
+        "title": "Igloo Engineering",
+        "content": "The igloo is one of the most thermodynamically sophisticated shelter forms ever developed. Inuit engineers discovered that packed snow has insulating properties comparable to softwood; that a dome distributes load without internal supports; and that a cold trap entrance keeps warm air inside. Study the geometry of the corbelled dome.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Snow Properties Assessment",
+        "content": "Learn to identify construction-grade snow by compression test and break test. Understand the relationship between snow density, crystal bonding, and block strength. Practice the hand assessment used by Inuit builders: squeeze a handful \u2014 does it hold its shape? Does it break cleanly?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Thermal Logic Across Traditions",
+        "content": "Compare the igloo's thermal logic to the Appalachian cabin with a fireplace and the Haudenosaunee longhouse with central fires. All three use the same principle: create a warm interior volume and minimize heat loss. How does each tradition's available material shape their thermal solution?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Does Shelter Engineering Reveal?",
+        "content": "A Inuit elder once said that the igloo teaches patience, precision, and trust \u2014 the builder must trust the dome geometry before the last block is placed. What engineering trust is required in the Appalachian log corner notch? In the Haudenosaunee longhouse ridge pole? What does the hardest moment of each build teach?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "shelter-keeper-01",
+    "path": "shelter",
+    "title": "Shelter Keeper",
+    "icon": "shelter-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "shelter-journeyman-01"
+    ],
+    "roomId": 1,
+    "components": [
+      {
+        "type": "story",
+        "title": "Shelter as Cultural Text",
+        "content": "A shelter is a document. The Haudenosaunee longhouse documents clan structure (multiple families, shared fire). The Appalachian single-pen cabin documents the frontier family economy (one room, loft, lean-to addition). The Inuit snow house documents the relationship between builder and environment (temporary, perfect for conditions, leaves no trace). Read the shelter as anthropologist.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Shelter Geometry",
+        "content": "Demonstrate three shelter joints or techniques to a learner who has never encountered them: the saddle notch, the igloo corbel principle, and the bent-pole dome method. Adapt your explanation to the learner's background. Check for understanding at each step.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Shelter Traditions in Conversation",
+        "content": "Modern emergency shelter design borrows from all three traditions: the dome tent from the bent-pole dome, the snow trench from Inuit cold-weather technique, the log lean-to from Appalachian woodland camping. Trace these borrowings specifically. Name the tradition, the technique, and the modern application.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Shelter",
+        "content": "Explain to a hypothetical 12-year-old why different cultures built different shelters in the same climate zone. Use at least two specific examples from different traditions (Haudenosaunee, Anishinaabe, Inuit, or Appalachian). Address: how does the land shape the house? What can we learn from each tradition's solution? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "food-explorer-01",
+    "path": "food",
+    "title": "First Preservation",
+    "icon": "food-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 5,
+    "components": [
+      {
+        "type": "story",
+        "title": "Why We Preserve",
+        "content": "Every food preservation tradition is an answer to the same problem: the harvest is finite, but hunger is continuous. Appalachian canning converts summer abundance to winter security. Inuit meat caching extends the caribou hunt across months. Anishinaabe wild rice drying stores the fall harvest for the lean season. The technology differs; the logic is identical.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "pH and Safety",
+        "content": "Understand why low-acid foods (beans, meat, fish) require pressure canning and high-acid foods (tomatoes, berries) allow water-bath canning. The botulism threshold is pH 4.6. Above that, Clostridium botulinum can produce toxin in an anaerobic sealed jar. Know the three safe preservation principles: heat, acid, and salt/drying.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "food-apprentice-01",
+    "path": "food",
+    "title": "Food Traditions",
+    "icon": "food-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "food-explorer-01"
+    ],
+    "roomId": 5,
+    "components": [
+      {
+        "type": "story",
+        "title": "Pemmican and Jerky: A Conversation",
+        "content": "Cree and Dene pemmican (dried meat, rendered fat, dried berries) and Appalachian jerky are both high-energy, shelf-stable trail foods. Pemmican is a complete food: fat for sustained energy, meat for protein, berries for vitamins. Jerky is simpler but less calorie-dense. Study the recipes as engineering specifications.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Fermentation Fundamentals",
+        "content": "Document the basic biochemistry of lacto-fermentation: salt creates osmotic pressure, kills pathogens, and creates an environment where Lactobacillus thrives. Understand why sauerkraut (Appalachian German heritage) and fermented caribou (Inuit igunaq) use the same underlying biology despite vastly different climates and methods.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Preservation as Calendar",
+        "content": "Map three preservation traditions onto the annual calendar they support. Canning season (August-September) extends to winter. Pemmican making (fall hunt) extends to spring travel. Inuit caching (seasonal hunt) extends across the dark months. How does each tradition's preservation calendar reflect the ecological rhythm of their homeland?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Preservation Teaches",
+        "content": "Preservation requires anticipating future need. What does it mean to work in October for the person you will be in January? How do preservation traditions encode values about community (storing for others, sharing when others run out) and relationship with the land (taking what you need, no more)?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "food-keeper-01",
+    "path": "food",
+    "title": "Food Keeper",
+    "icon": "food-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "food-apprentice-01"
+    ],
+    "roomId": 5,
+    "components": [
+      {
+        "type": "story",
+        "title": "Food Sovereignty as Heritage",
+        "content": "Cree and Dene food sovereignty movements reclaim traditional food systems disrupted by residential schools and community relocation. Appalachian communities face food deserts in post-industrial hollows. Both are asserting the same right: the ability to feed yourself from knowledge, not just purchasing power. Food traditions are political acts.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Safe Preservation",
+        "content": "Demonstrate safe water-bath canning technique to a learner. Cover: jar selection, headspace measurement, processing time calculation, seal verification. Cover the food safety reasoning at each step \u2014 not just the procedure, but why the procedure matters. Confirm the learner can state the pH threshold and the three safe preservation principles.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Preservation Across Traditions",
+        "content": "Identify three specific preservation techniques shared across traditions with different implementations: drying (Appalachian jerky, Inuit fish rack, Cree pemmican), fermentation (sauerkraut, igunaq), and fat preservation (lard sealing, tallow). Name the tradition and the specific technique. Explain the underlying biology each relies on.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Food Preservation",
+        "content": "Explain to a hypothetical 12-year-old why food preservation was essential to survival in heritage communities, using specific examples from at least two traditions (Cree, Inuit, Anishinaabe, or Appalachian). Address: what makes each method safe? What do these traditions share? What can someone learn from studying both? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "fiber-explorer-01",
+    "path": "fiber",
+    "title": "First Thread",
+    "icon": "fiber-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 2,
+    "components": [
+      {
+        "type": "story",
+        "title": "What Thread Carries",
+        "content": "Thread carries more than tension. Quillwork carries Anishinaabe geometric knowledge. Inkle-woven bands carry Appalachian pattern traditions. Sinew thread carries the knowledge of how to process an animal completely. Every thread tradition encodes a relationship: with materials, with hands, with the community that passed the technique down.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Fiber Preparation Basics",
+        "content": "Identify the three primary fiber preparation steps: cleaning (removing contaminants), processing (aligning fibers), and twisting (creating thread). Practice finger-twisting plant fiber into a two-ply cord. Understand the difference between S-twist and Z-twist and why twist direction matters when plying.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "fiber-apprentice-01",
+    "path": "fiber",
+    "title": "Fiber Traditions",
+    "icon": "fiber-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "fiber-explorer-01"
+    ],
+    "roomId": 2,
+    "components": [
+      {
+        "type": "story",
+        "title": "Quillwork: Technology and Art",
+        "content": "Anishinaabe and Haudenosaunee quillwork uses porcupine quills softened in water and woven, sewn, or wrapped into geometric patterns. The patterns carry meaning specific to clan and community. The craft requires patience, precise hand tension, and design knowledge that passes within families. Study the technique without claiming access to the pattern meanings.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Loom Warp Setup",
+        "content": "Set up a basic rigid heddle loom or backstrap loom with a 10-end warp. Calculate sett (ends per inch) for a balanced plain weave with your chosen fiber. Understand why warp tension affects weave structure. Thread the heddle. Weave a 6-inch sample in plain weave without dropped threads.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Fiber Technologies Compared",
+        "content": "Compare two fiber technologies: the Appalachian four-shaft floor loom (industrial output, complex pattern capability) and the Haudenosaunee finger-weaving (portable, no equipment, pattern in the hands). What does each prioritize? What does each make possible? Neither is more sophisticated \u2014 they optimize for different values.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What the Hands Know",
+        "content": "Fiber skills are embodied knowledge \u2014 the hands learn what the mind cannot fully describe. Describe a moment when your hands understood something your mind had not yet grasped. What was the skill? What changed when you felt it rather than read it? How does this experience help you understand why fiber traditions transmit through apprenticeship rather than books?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "fiber-keeper-01",
+    "path": "fiber",
+    "title": "Fiber Keeper",
+    "icon": "fiber-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "fiber-apprentice-01"
+    ],
+    "roomId": 2,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Thread of Transmission",
+        "content": "Fiber traditions die when the thread of transmission breaks. The revival of Haudenosaunee beadwork, Anishinaabe quillwork, and Appalachian coverlet weaving in the late 20th century required finding elders who still held the knowledge \u2014 or reconstructing from museum objects. What was lost? What was reconstructed? What is the difference between revival and continuation?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Fiber Preparation",
+        "content": "Demonstrate sinew thread splitting or plant fiber processing to a learner. Cover the full sequence: selecting material, initial processing, splitting to working thickness, and tensioning. Explain the safety considerations (splitting tools are sharp; sinew tension can cut). Confirm the learner can independently process a working length of thread.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Fiber and Identity",
+        "content": "Document three specific examples where fiber technique carries cultural identity: Anishinaabe clan symbols in quillwork, Haudenosaunee wampum encoding treaty relationships, Appalachian coverlet patterns naming families. Name the tradition, the technique, and the specific meaning it carries. Be precise \u2014 do not generalize across traditions.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Fiber Traditions",
+        "content": "Explain to a hypothetical 12-year-old what fiber traditions reveal about the communities that created them, using specific examples from at least two traditions (Anishinaabe, Haudenosaunee, Inuit, or Appalachian). Address: what makes each tradition's approach distinctive? What do these fiber practices share across traditions? What is the role of the teacher in transmitting embodied skills? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "watercraft-explorer-01",
+    "path": "watercraft",
+    "title": "Reading the Water",
+    "icon": "watercraft-explorer",
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 13,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Vessel as Tool and Relationship",
+        "content": "The birchbark canoe and the qajaq were not just transportation \u2014 they were expressions of a relationship with water, a technology refined over generations, and in some traditions, living extensions of the paddler. Explore the different design philosophies: the canoe's communal capacity, the qajaq's individual precision.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Hull Form Reading",
+        "content": "Identify the following hull features on three different watercraft (birchbark canoe, qajaq, dugout canoe): rocker (curvature of keel), sheer (curve of gunwale), beam (width), and depth. Sketch the cross-sections. Explain how rocker affects maneuverability vs. tracking.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "watercraft-apprentice-01",
+    "path": "watercraft",
+    "title": "Watercraft Traditions",
+    "icon": "watercraft-apprentice",
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "watercraft-explorer-01"
+    ],
+    "roomId": 13,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Qajaq as Extension of Self",
+        "content": "In Inuit tradition, the qajaq was custom-built to the paddler's body measurements. The hull was fit to the paddler at the hip and the deck fit to the arm span. This is not metaphor \u2014 it is engineering. A qajaq fit to another paddler's dimensions is unstable. Study the relationship between builder, vessel, and water that produced this design.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Stability Analysis",
+        "content": "Understand primary and secondary stability in watercraft design. Primary stability (resistance to initial tipping) and secondary stability (resistance to complete capsize) trade off against each other. A flat-bottomed boat has high primary, low secondary. A rounded hull has low primary, high secondary. Where does the qajaq fall? The birchbark canoe? The Northwest Coast dugout?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Water Reading Across Traditions",
+        "content": "Compare Inuit qajaq paddling knowledge (reading sea ice, tidal patterns, weather reading from water surface) with Anishinaabe canoe route knowledge (river reading, portage selection, current use) and Northwest Coast paddling knowledge (open water navigation, tidal windows, reef reading). What knowledge does each tradition encode in its watercraft practice?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Does It Mean to Read Water?",
+        "content": "Water reading is a literacy \u2014 a set of skills for interpreting environmental text. What does a skilled paddler know that a novice does not? How is this knowledge transmitted? What is lost when watercraft traditions end? Consider both the practical (navigation, survival) and the cultural (relationship with water, place knowledge) dimensions of watercraft literacy.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "watercraft-keeper-01",
+    "path": "watercraft",
+    "title": "Watercraft Keeper",
+    "icon": "watercraft-keeper",
+    "traditions": [
+      "inuit",
+      "first-nations"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "watercraft-apprentice-01"
+    ],
+    "roomId": 13,
+    "components": [
+      {
+        "type": "story",
+        "title": "Watercraft as Cultural Sovereignty",
+        "content": "The revival of Haudenosaunee elm bark canoe building, Inuit qajaq construction, and Northwest Coast dugout canoe carving are all acts of cultural sovereignty. These are not museum reconstructions \u2014 they are communities reasserting their relationship with water, their knowledge systems, and their identities. Study the revival movements specifically: who led them? What knowledge was recovered? What remains?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Hull Geometry",
+        "content": "Explain the design logic of two different watercraft hull forms to a learner who has never paddled. Cover: why the qajaq is narrow (speed and maneuverability in ice), why the birchbark canoe has rocker (turns easily in river current), why the Northwest Coast dugout is wide (open-water stability with cargo). Use diagrams. Check for understanding.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Watercraft Knowledge Systems",
+        "content": "Compare the knowledge systems encoded in three watercraft traditions: qajaq (Inuit \u2014 body measurement, sea ice reading, rolling technique), birchbark canoe (Anishinaabe/Cree \u2014 river route knowledge, portage selection, birchbark sourcing), Northwest Coast canoe (Haida, Coast Salish \u2014 ocean navigation, tidal knowledge, carving geometry). Each vessel is a portable library of ecological knowledge.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Watercraft Traditions",
+        "content": "Explain to a hypothetical 12-year-old what watercraft traditions reveal about the communities that created them, using specific examples from at least two traditions (Inuit, Anishinaabe, Cree, Haida, or Coast Salish). Address: how does the vessel reflect the water it was built for? What knowledge is encoded in the design? What is lost when these traditions are interrupted? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "plant-explorer-01",
+    "path": "plant",
+    "title": "First Plant",
+    "icon": "plant-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 9,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Plant as Teacher",
+        "content": "Anishinaabe botanical knowledge distinguishes between plants that give themselves freely (wild berries, common greens), plants that require respectful harvest protocols (medicinal plants, specific berries), and plants that are not for human use. This is not superstition \u2014 it is a sophisticated resource management system that prevented overharvest. Appalachian plant knowledge carries similar practical wisdom in different language.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Safe Plant Identification Protocol",
+        "content": "Before any plant identification: verify with three characteristics (leaf shape, stem cross-section, and one additional feature). Never rely on color alone. Never taste an unidentified plant. Confirm your identification against two independent sources. These rules apply to every plant, every time, even plants you have identified before.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "plant-apprentice-01",
+    "path": "plant",
+    "title": "Plant Knowledge",
+    "icon": "plant-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "plant-explorer-01"
+    ],
+    "roomId": 9,
+    "components": [
+      {
+        "type": "story",
+        "title": "Medicinal Plant Knowledge: Sovereignty and Safety",
+        "content": "Anishinaabe, Haudenosaunee, and Cherokee medicinal plant knowledge is culturally specific \u2014 the same plant may be used differently across traditions, and the ceremonial framing matters. This knowledge is community property, not individual property. The cultural sovereignty level for most medicinal plant knowledge is Level 2-3; ceremonial plant use is Level 4. Approach this knowledge with respect.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Sustainable Harvest Protocol",
+        "content": "Apply the one-in-seven rule: harvest no more than one plant in seven from any stand. Understand why: the remaining six plants maintain the population, provide seed, and shelter the soil ecology. Practice harvest rotation: mark the area mentally and return next season. Document the plant, the location, the date, and your harvest quantity.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Plant Knowledge Across Traditions",
+        "content": "Identify three plants used by both Appalachian and First Nations traditions with different (but compatible) applications: yarrow (Achillea millefolium) \u2014 Anishinaabe wound treatment and Appalachian fever tea; staghorn sumac \u2014 Anishinaabe lemonade berries and Appalachian tanning agent; black walnut \u2014 Anishinaabe dye and Appalachian baking. Neither use is wrong \u2014 different applications of real botanical properties.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Does Plant Knowledge Require?",
+        "content": "Plant knowledge requires patience (plants reveal themselves over seasons, not days), attention (the same plant looks different in spring, summer, fall), and humility (the cost of error is real). How does this describe the nature of traditional ecological knowledge more broadly? What does learning plant knowledge teach about learning itself?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "plant-keeper-01",
+    "path": "plant",
+    "title": "Plant Keeper",
+    "icon": "plant-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "plant-apprentice-01"
+    ],
+    "roomId": 9,
+    "components": [
+      {
+        "type": "story",
+        "title": "Plant Knowledge as Cultural Record",
+        "content": "Anishinaabe, Haudenosaunee, and Cherokee plant knowledge encodes millennia of ecological observation. The names of plants in Anishinaabemowin (Ojibwe language) often describe the plant's use, ecology, or relationship to other species \u2014 the name is a data packet. Loss of language is loss of this encoded knowledge. Plant knowledge is inseparable from language.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Safe Identification",
+        "content": "Teach the three-characteristic identification protocol to a learner in the field with a real plant. Do not simply name the plant \u2014 require the learner to identify the three characteristics themselves. When they make an error, ask questions rather than correcting directly. Confirm they can apply the protocol independently before the teaching session ends.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Plant Knowledge Sovereignty",
+        "content": "Research the context of three plant knowledge debates: bioprospecting (pharmaceutical companies patenting plants from traditional knowledge), digital archiving (whether to digitize and publish community plant knowledge), and educational access (how much medicinal plant knowledge belongs in public educational contexts). Name the specific nations and communities involved in these debates.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Plant Knowledge",
+        "content": "Explain to a hypothetical 12-year-old why plant identification requires three characteristics and why traditional plant knowledge belongs to specific nations (not to all humanity collectively). Use specific examples from Anishinaabe, Haudenosaunee, or Appalachian traditions. Address: what makes plant knowledge safe to share and what makes it appropriate to protect? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-explorer-01",
+    "path": "tool",
+    "title": "First Tool",
+    "icon": "tool-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 4,
+    "components": [
+      {
+        "type": "story",
+        "title": "Tools as Thinking",
+        "content": "A tool is crystallized thought. The ulu's semicircular blade is a solution to the problem of cutting frozen hide with cold, cramped hands \u2014 the rocking motion requires less force and finger dexterity than a push-cut. The carving knife's long blade is a solution to the problem of wood grain \u2014 the push cut and pull cut each follow the grain differently. The tool encodes the problem it solves.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Tool Safety Fundamentals",
+        "content": "Apply four cuts safely: push cut, pull cut, stop cut, pare cut. For each cut: body position (cut away from body for push cut; secure the work for pull cut), holding technique (three contact points minimum), and stopping point (know where the blade will go if it slips). Practice on softwood before working on material that matters.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-apprentice-01",
+    "path": "tool",
+    "title": "Tool Traditions",
+    "icon": "tool-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "tool-explorer-01"
+    ],
+    "roomId": 4,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Ulu: Form Follows Function",
+        "content": "The ulu has regional variations across Inuit, Yup'ik, Inupiat, and Greenlandic Inuit communities \u2014 each optimized for local materials and uses. The Greenlandic blade is often narrower for precision; the Yup'ik blade is often broader for hide preparation. These are not arbitrary variations but responses to specific tasks. Study the regional forms.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Edge Geometry",
+        "content": "Understand the relationship between bevel angle, steel hardness, and cutting performance. A 15-degree bevel is razor-sharp but fragile (sushi knives, surgical blades). A 25-degree bevel is durable but less sharp (kitchen knives). A 30-degree bevel handles abuse (axes, ulus). Measure and describe the bevel angle on three tools you have access to.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Tool Traditions in Dialogue",
+        "content": "Compare the Inuinnait (Copper Inuit) cold-hammered copper tools with Appalachian blacksmith forge-welded iron tools. Both work metal into cutting edges; neither is primitive \u2014 they are different technologies optimized for available materials. The Inuinnait had no forge and no fire-based metallurgy; their cold-hammering produced work-hardened copper edges that held.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Does the Tool Ask of the User?",
+        "content": "Every tool makes demands: the hand plane asks for a set stance and wrist angle; the ulu asks for a rocking motion; the draw knife asks for attention to grain direction. What does a tool's demands teach about the material it works? What does learning to use a tool correctly teach about patience, body awareness, and respect for the material?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-keeper-01",
+    "path": "tool",
+    "title": "Tool Keeper",
+    "icon": "tool-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "tool-apprentice-01"
+    ],
+    "roomId": 4,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Life of a Tool",
+        "content": "A well-made tool outlives its maker. Appalachian blacksmiths made tools for grandchildren. Inuit ulu handles were passed through families, with new blades ground when the old wore out. The tool carries the maker's thought and the user's adaptation. Study the concept of tool stewardship: what obligations does ownership of a well-made tool carry?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Edge Maintenance",
+        "content": "Teach a learner to sharpen a carving knife to a working edge using a whetstone. Cover: identifying the bevel angle (keep the existing geometry), stroke direction (edge-trailing for safety and consistency), testing sharpness (paper test, hair test \u2014 not the skin test), and maintenance honing. The learner should be able to restore a working edge independently.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Tool Knowledge Transmission",
+        "content": "Research three specific tool knowledge transmission contexts: Inuinnait cold-copper working knowledge (small community, specific region, limited documentation), Appalachian blacksmithing (regional guild and master-apprentice revival), Dene/Cree tool-making spiritual dimension (the relationship between maker and material as cultural practice). Name the nations, the tools, and the transmission methods.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Tool Traditions",
+        "content": "Explain to a hypothetical 12-year-old what tool traditions reveal about the communities that created them, using specific examples from at least two traditions (Inuit, Inuinnait, Dene, Cree, or Appalachian). Address: how does a tool encode the problem it solves? What does the regional variation in ulu design teach about the relationship between tool and place? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "music-explorer-01",
+    "path": "music",
+    "title": "First Sound",
+    "icon": "music-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 6,
+    "components": [
+      {
+        "type": "story",
+        "title": "Music as Knowledge System",
+        "content": "Music traditions are knowledge systems. The Appalachian ballad encodes family history and community values. Inuit katajjaq (throat singing) encodes the sound environment of the Arctic \u2014 wind, animals, ice \u2014 as a game and artistic practice. Haudenosaunee social dance songs encode ceremonial protocol and seasonal relationships. The melody is the container; the content is the culture.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Acoustic Fundamentals",
+        "content": "Understand how a vibrating string or membrane produces sound: frequency determines pitch (faster vibration = higher pitch), amplitude determines volume (larger vibration = louder sound), and overtone content determines timbre (why a guitar and a violin playing the same note sound different). Apply this to two heritage instruments: what determines the pitch range of a dulcimer? Of a frame drum?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "music-apprentice-01",
+    "path": "music",
+    "title": "Music Traditions",
+    "icon": "music-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "music-explorer-01"
+    ],
+    "roomId": 6,
+    "components": [
+      {
+        "type": "story",
+        "title": "Katajjaq: A Publicly Shared Inuit Tradition",
+        "content": "Katajjaq (Inuit throat singing) is a publicly shared performance tradition \u2014 the genre, the two-singer interlocking breath pattern format, and the game format are documented in Inuit cultural education workshops. The publicly shared patterns involve imitation of natural sounds: wind, animals, water. Note: specific ceremonial songs are Level 4 restricted and are not described here.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Frame Drum Construction Fundamentals",
+        "content": "Construct a simple frame drum using a bent-steam hoop (green wood) and a hide or synthetic membrane. Understand the relationship between frame diameter and pitch (larger drum = lower pitch), membrane tension and pitch (tighter membrane = higher pitch), and frame depth and resonance (deeper frame = more bass). Note: drum construction technique is Level 1; ceremonial drum protocols are Level 3-4 and are not covered here.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Instrument Traditions Compared",
+        "content": "Compare the banjo's African and Appalachian heritage. The banjo descends from the West African kora, ngoni, and similar gourd-and-neck instruments, brought to the Americas by enslaved African people, and adopted into Appalachian musical traditions. This history is often elided. Study the specific instrument lineage: what features of the kora appear in the early banjo? How did the instrument change in Appalachian hands?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Music Remembers",
+        "content": "Music preserves what written records cannot: the emotional register of historical experience. The Appalachian ballad tradition preserved stories of the Border Wars, the Atlantic crossing, and colonial settlement in living memory for generations. What did katajjaq preserve of Arctic life? What would be lost if these traditions ended? What cannot be archived?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "music-keeper-01",
+    "path": "music",
+    "title": "Music Keeper",
+    "icon": "music-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "music-apprentice-01"
+    ],
+    "roomId": 6,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Line Between Public and Sacred",
+        "content": "Every music tradition draws a line between publicly shared music and restricted ceremonial music. In Inuit tradition, katajjaq patterns are publicly shared; specific ceremonial songs belong to families and ceremonies. In First Nations traditions, social dance songs are public; medicine songs and sacred ceremony songs are restricted. The keeper understands this line and teaches it explicitly.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Acoustic Principles",
+        "content": "Explain to a learner how a dulcimer or banjo produces its characteristic sound. Cover: string tension and pitch, fret placement and equal temperament, the relationship between scale length and fret spacing. The learner should be able to explain why two instruments of different sizes can play the same note range.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Music Sovereignty",
+        "content": "Research three specific music sovereignty debates: the recording and distribution of sacred First Nations songs without community permission; the commercial use of Inuit throat singing patterns; the appropriation of specific Appalachian fiddle tunes by commercial country music with no attribution. Name the specific communities affected, the specific works or traditions at issue, and what resolution (if any) occurred.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Music Traditions",
+        "content": "Explain to a hypothetical 12-year-old what the line between publicly shared and ceremonially restricted music means, using specific examples from at least two traditions (Inuit, Haudenosaunee, Anishinaabe, or Appalachian). Address: why does this line exist? What happens when it is crossed? How does understanding this line help a learner engage respectfully with music traditions? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-explorer-01",
+    "path": "neighbors",
+    "title": "Who Are My Neighbors?",
+    "icon": "neighbors-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 10,
+    "neighborsThread": "Every community exists in relationship with other communities. The first step is mapping those relationships.",
+    "components": [
+      {
+        "type": "story",
+        "title": "The Network of Communities",
+        "content": "Explore how communities across traditions maintained relationships with neighbors through trade, marriage, ceremony, and mutual aid. The Appalachian barn raising, the Haudenosaunee Great Law, and the Inuit sharing economy all encode answers to the same question: how do we take care of each other and prevent conflict from becoming destruction?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Mapping Community Connections",
+        "content": "Draw a community relationship map. Place your community (or a historical community from the pack) in the center. Add neighboring communities with lines showing the type of relationship (trade, kinship, ceremonial, territorial). Label what moves along each connection. What communities have no connection? Why?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-apprentice-01",
+    "path": "neighbors",
+    "title": "Community Relations",
+    "icon": "neighbors-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "neighbors-explorer-01"
+    ],
+    "roomId": 10,
+    "neighborsThread": "Understanding how communities maintain relationships requires understanding what those relationships are made of: reciprocity, obligation, and repair.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Reciprocity as Technology",
+        "content": "The Potlatch (Northwest Coast First Nations \u2014 Haida, Tlingit, Kwakwaka'wakw, Coast Salish and others) redistributes wealth and encodes social relationships in public ceremony. The Appalachian corn shucking performs similar functions: labor exchange, community solidarity, status recognition. Both are social technologies for maintaining a community network across time.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Obligation Mapping",
+        "content": "Identify three forms of community obligation present in a heritage tradition of your choice: the obligation created when you accept help (reciprocity debt), the obligation created by membership (community tax), and the obligation created by status (the wealthy host, not the wealthy hoarder). Map these in a specific community's practice.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Redistributive Systems Compared",
+        "content": "Compare the Potlatch (wealth redistribution through ceremonial giving) with the Appalachian work party (labor redistribution through reciprocal exchange) and the Inuit sharing economy (food redistribution as survival technology). All three prevent resource concentration and strengthen community bonds. What specific mechanisms does each use to redistribute? What social norms enforce participation?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Reciprocity Requires",
+        "content": "Reciprocity requires tracking \u2014 who gave what, when, to whom \u2014 and a community willing to enforce the norms. What happens when someone refuses to reciprocate? How do different traditions handle defection? What does this reveal about the social infrastructure required to maintain a gift economy?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-journeyman-01",
+    "path": "neighbors",
+    "title": "Conflict and Resolution",
+    "icon": "neighbors-journeyman",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "neighbors-apprentice-01"
+    ],
+    "roomId": 18,
+    "neighborsThread": "Conflict resolution is the advanced skill of community relationship. It requires everything the community has built \u2014 trust, reciprocity, shared norms \u2014 and the capacity to repair when those break down.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Conflict Resolution Traditions",
+        "content": "The Haudenosaunee condolence ceremony acknowledges grief before demanding cooperation \u2014 you cannot reason with a person in acute grief, so the ceremony clears the path. The Appalachian tradition of going to a neutral elder encodes the same wisdom: the community has designated people with the trust and skills to mediate. The Inuit tradition of moving camps when conflict cannot be resolved uses geographic separation to prevent violence.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Structured Dialogue Technique",
+        "content": "Practice a structured dialogue format: establish relationship first (name who is in the room, acknowledge prior connection), name what happened (without blame), identify what was broken (specific, not general), discuss what repair looks like (concrete, reciprocal), close with restored relationship acknowledgment. This format appears across heritage conflict resolution traditions with different ceremonial framing.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Resolution Traditions Compared",
+        "content": "Compare three conflict resolution traditions: the Haudenosaunee condolence ceremony (formal, ceremonially structured), the Appalachian arbitration by community elder (informal, community-endorsed authority), and the Inuit solution of physical separation (spatial, non-confrontational). What does each tradition prioritize \u2014 restoring relationship? Preventing violence? Establishing accountability? Each has a different primary goal.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Repair Requires",
+        "content": "Repair of broken relationships is harder than prevention. What do heritage conflict resolution traditions reveal about what human relationships require to function? What is the role of acknowledgment (naming what happened), accountability (taking responsibility), and repair (making concrete amends) in the process? Which step do modern conflict resolution approaches most often skip?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-keeper-01",
+    "path": "neighbors",
+    "title": "Bridge Builder",
+    "icon": "neighbors-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "neighbors-explorer-01",
+      "neighbors-apprentice-01",
+      "neighbors-journeyman-01"
+    ],
+    "roomId": 10,
+    "neighborsThread": "The Keeper can explain and model conflict resolution using heritage principles. They have done the work, not just read about it.",
+    "components": [
+      {
+        "type": "story",
+        "title": "When It Goes Wrong",
+        "content": "Study historical examples of inter-community conflict and its resolution \u2014 the protocols for addressing raids between villages, the Appalachian tradition of making it right, the Haudenosaunee condolence ceremony. What do these protocols share? What makes them effective?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Facilitation Technique",
+        "content": "Practice a structured dialogue format drawing from heritage conflict resolution traditions: establish relationship (acknowledge the people in the room), name what happened (without judgment), identify what was broken, discuss what repair looks like, close with restored relationship acknowledgment. This is not therapy \u2014 it is a social technology.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Heritage Principles in Modern Conflict",
+        "content": "Map three heritage conflict resolution principles onto a contemporary situation (school, family, workplace). Name the principle, name the tradition it comes from, explain how it applies. Be specific \u2014 Haudenosaunee condolence ceremony principle: name the grief before asking for cooperation \u2014 not generic.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Bridge Building",
+        "content": "Explain to a hypothetical 12-year-old how communities historically resolved conflicts without destroying relationships. Use at least two specific heritage examples. Address: what is the difference between resolving conflict and winning? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-explorer-01",
+    "path": "heritage",
+    "title": "First Record",
+    "icon": "heritage-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 12,
+    "components": [
+      {
+        "type": "story",
+        "title": "Why Document?",
+        "content": "The Foxfire project in Rabun Gap, Georgia began when high school students interviewed Appalachian elders and discovered that a complete technology civilization existed in living memory \u2014 one that would vanish with the elders. Haudenosaunee oral tradition and Inuit oral history face the same reality: knowledge lives in people, and people are mortal. Documentation is an act of relationship.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Interview Basics",
+        "content": "Practice the three fundamentals of oral history interviewing: open questions (not yes/no), active listening (reflective summary, not interrogation), and consent (the interviewee controls what is shared and how it is used). Conduct a 10-minute practice interview with a family member or community member on a topic of their choosing.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-apprentice-01",
+    "path": "heritage",
+    "title": "Heritage Documentation",
+    "icon": "heritage-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "heritage-explorer-01"
+    ],
+    "roomId": 12,
+    "components": [
+      {
+        "type": "story",
+        "title": "OCAP and Documentation Ethics",
+        "content": "The OCAP principles (Ownership, Control, Access, Possession) govern First Nations and Inuit knowledge documentation. They mean: the community owns its knowledge (not the researcher), controls how it is used, determines who has access, and retains physical possession of the records. These principles emerged from decades of research that extracted knowledge without benefit to communities. They apply to all documentation involving First Nations or Inuit knowledge.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Consent Protocol Implementation",
+        "content": "Draft a consent form for an oral history interview with a heritage skills practitioner. Include: purpose statement (what the recording will be used for), scope of consent (what can be shared publicly vs. kept private), withdrawal rights (the interviewee can withdraw consent after the interview), and attribution preferences (how the person wants to be credited). Have the form reviewed by someone from the tradition before use.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Documentation Methods Compared",
+        "content": "Compare the Foxfire oral history method (student interviewer, community elder, published compilation) with the Smithsonian Oral History methodology (professional archivist, community consent protocols, national archive) and IQ-Pilimmaksarniq (Inuit relationship-based knowledge transmission, community control). Each serves a different purpose with different consent structures. When is each appropriate?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "The Ethics of Documentation",
+        "content": "Documentation creates a record that outlives the relationship it documents. What obligations does the documentarian carry toward the person who shared knowledge? What happens when the documented person and the documentation community disagree about what should be shared? How do the OCAP principles address this?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-journeyman-01",
+    "path": "heritage",
+    "title": "Heritage Book Author",
+    "icon": "heritage-journeyman",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "heritage-apprentice-01"
+    ],
+    "roomId": 12,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Heritage Book as Community Document",
+        "content": "A Heritage Book is not a personal memoir \u2014 it is a community document. The Foxfire volumes are community documents: the students were recorders, not authors in the traditional sense. The knowledge belongs to the people who held it. The book is a vessel for that knowledge, not a claim on it. Understanding this distinction shapes every decision in Heritage Book authorship.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Heritage Book Structure",
+        "content": "Draft the front matter for a Heritage Book project: title page (including territorial acknowledgment), table of contents with chapter descriptions, cultural sovereignty statement (required for all Heritage Books), and attribution section (naming all knowledge holders and community reviewers). Apply the attribution standards from oral history documentation.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Documentation and Sovereignty",
+        "content": "Research the Gitxsan and Wet'suwet'en case Delgamuukw v. British Columbia (1997) \u2014 oral history was accepted as evidence of Indigenous sovereignty in Canadian courts. This changed what documentation means for First Nations communities. What documentation standards did the court establish? What obligations does this create for those who document First Nations oral history?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Does a Heritage Book Owe?",
+        "content": "A Heritage Book owes something to: the community it documents (accurate, respectful representation), the knowledge holders who shared (attribution, consent compliance, OCAP adherence), the readers who will use it (clear, honest framing of what is known vs. uncertain), and the future (documentation that will still be legible and accurate in 50 years). Which obligation is hardest? Why?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-keeper-01",
+    "path": "heritage",
+    "title": "Heritage Keeper",
+    "icon": "heritage-keeper",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "heritage-journeyman-01"
+    ],
+    "roomId": 12,
+    "components": [
+      {
+        "type": "story",
+        "title": "Documentation as Activism",
+        "content": "The Foxfire project changed what was possible for Appalachian communities: students saw their own community as worth studying, and elders saw their knowledge as worth passing down. Haudenosaunee language documentation projects do the same: each recording session is an act of cultural continuity. Documentation is not passive \u2014 it is a choice to say this knowledge matters.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Teaching Documentation Ethics",
+        "content": "Teach a learner the OCAP principles through a concrete scenario. Present a realistic situation: a university researcher wants to digitize a community's oral history recordings. Walk the learner through: who owns the recordings, what control the community should maintain, what access conditions are appropriate, and what possession means in the digital era. Confirm the learner can apply the principles to a new scenario independently.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Documentation Across Contexts",
+        "content": "Compare documentation ethics in three contexts: Appalachian oral history (family and community records, generally lower sovereignty concerns), First Nations knowledge documentation (OCAP principles mandatory, community ownership), and Inuit knowledge documentation (NISR compliance, regional Inuit association oversight). Name the specific frameworks, their origins, and what they require.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Heritage Documentation",
+        "content": "Explain to a hypothetical 12-year-old what the OCAP principles mean and why they exist, using specific examples from First Nations or Inuit documentation history. Address: what happens to communities when researchers document their knowledge without consent or control? What would documentation look like if it followed OCAP from the beginning? Evaluators will assess: accuracy, specificity of attribution, cultural sensitivity, and whether the explanation empowers the learner.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-seasonal-apprentice-01",
+    "path": "heritage",
+    "title": "Seasonal Calendar Documentation",
+    "icon": "heritage-seasonal-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "heritage-explorer-01"
+    ],
+    "roomId": 11,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Seasonal Round as Knowledge System",
+        "content": "The seasonal round is a calendar, a curriculum, and a community organizing system simultaneously. Anishinaabe seasonal rounds encode when to harvest which plants, when to fish which species, when to conduct which ceremonies, and when to move camp. Inuit seasonal rounds encode ice conditions, animal migration, weather patterns, and social gatherings. These are not primitive schedules \u2014 they are ecological monitoring systems refined over generations.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Seasonal Calendar Documentation",
+        "content": "Create a seasonal calendar for one community in the Heritage Skills pack (choose one: Appalachian Smokies region, Anishinaabe Great Lakes, or Inuit Arctic). For each season, document: primary activities, safety considerations, and relevant ecological knowledge. Use only knowledge that is Level 1-2 (publicly or contextually shared). Note where Level 3-4 restricted content (ceremonial events) would appear without describing it.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "relationship",
+        "title": "Calendars Compared",
+        "content": "Compare the Appalachian agricultural calendar with the Anishinaabe seasonal round and the Inuit six-season calendar (each season defined by ecological conditions, not month boundaries). What does each calendar optimize for? What ecological knowledge is encoded in each? What is lost when industrial supply chains replace seasonal awareness?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "Living in Seasonal Time",
+        "content": "Modern industrial time is abstracted from seasonal reality \u2014 the same food is available year-round; the calendar has months, not conditions. What does seasonal awareness require of a person? What does it create in a community? What is both gained and lost when a community transitions from seasonal to industrial time?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-explorer-01",
+    "path": "cedar",
+    "title": "Cedar Apprentice",
+    "icon": "cedar-explorer",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Grandmother Cedar's Gift",
+        "content": "The Cedar Teaching: the man who gave everything away, who had nothing left, was transformed by the Creator into cedar \u2014 so that he could continue giving forever. Bark for weaving. Wood for canoes. Planks for longhouses. Roots for baskets. Rope for lashing. Grandmother Cedar (Xpey' in Coast Salish languages) is not metaphor but relationship. To work with cedar is to receive the ongoing gift. Cedar as relationship, not resource. Nation attribution: Coast Salish (Xpey'), Nuu-chah-nulth, Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Cedar Identification",
+        "content": "Identify western red cedar by 4 characteristics: (1) scale-like overlapping leaves that lie flat like braided rope, (2) fibrous reddish-brown bark that strips vertically from the trunk, (3) strongly buttressed base that flares out above the roots, (4) aromatic reddish-brown heartwood with a distinctive spicy smell when fresh-cut. Confirm your identification against two independent sources (field guide, local naturalist, or community member with cedar knowledge). Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-apprentice-01",
+    "path": "cedar",
+    "title": "Bark Knowledge",
+    "icon": "cedar-apprentice",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "cedar-explorer-01"
+    ],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Law of the Bark",
+        "content": "The Law of the Bark is the ethical framework for cedar harvest: ask permission before beginning, take only what you need for the work at hand, never strip more than one-third of a tree's circumference in a single harvest, close the wound when you are done, and express gratitude. This is ecological wisdom encoded as relational ethics \u2014 the one-third limit reflects generations of observation that trees harvested within this limit consistently recover. The Law of the Bark is not a rule imposed on cedar use; it is the condition under which cedar use can continue. Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Bark Processing Sequence",
+        "content": "Describe the full bark harvesting sequence in order: (1) selecting the tree (straight grain, healthy crown, in a grove of 5+ trees), (2) marking the harvest area (maximum one-third circumference), (3) scoring two vertical cuts with a sharp knife cutting parallel to grain and away from body, (4) bottom horizontal cut to start the separation, (5) peeling inner bark upward in a continuous controlled motion, (6) closing the wound (replacing loose bark, packing moss). Identify which bark layer is used for weaving (inner bark \u2014 pale, flexible, fibrous) vs. construction (outer bark \u2014 brown, corky, protective). Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "The Tree and the Harvester",
+        "content": "Coast Salish and Nuu-chah-nulth harvesting traditions both practice forms of reciprocal relationship with the cedar tree. The Law of the Bark encodes this relationship in practical action: the harvester is not extracting a resource but receiving a gift, and the gift requires a response. How does the Law of the Bark encode the relationship between harvester and tree in specific, observable actions? What does each element of the Law (asking, limiting, closing, giving thanks) contribute to maintaining the relationship over time? Nation attribution: Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Law Teaches",
+        "content": "What does it mean to have an ethical code built into a harvesting practice? The Law of the Bark is not posted on a sign \u2014 it is transmitted as part of learning to harvest cedar. Compare the Law of the Bark to one other traditional resource management practice you have studied (from any tradition in this pack). What ecological knowledge does each encode? What relational framework does each assume between humans and the resource? What happens when the law is not followed?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-journeyman-01",
+    "path": "cedar",
+    "title": "Canoe Knowledge",
+    "icon": "cedar-journeyman",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "cedar-apprentice-01"
+    ],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Form Follows Water",
+        "content": "Each PNW Coast canoe tradition developed hull forms precisely matched to its waters. The Coast Salish flat-bottom shovel-nose canoe is optimized for river travel \u2014 stable in current, able to be poled or dragged over shallows. The Nuu-chah-nulth ocean-going canoe has a high bow to lift over open Pacific swell and a wide beam for offshore stability. The Kwakwaka'wakw northern-style canoe has an upturned bow for Inside Passage chop. The Makah offshore design handles Cape Flattery conditions where Pacific swells, tidal currents, and inside-passage conditions converge. Form follows water \u2014 the water shaped the canoe, and the canoe reveals what its water demands. Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Nation-Specific Canoe Comparison",
+        "content": "Describe 3 distinct PNW Coast canoe traditions with their specific nation attribution, hull characteristics, and intended waters. Required: Coast Salish (specify which canoe type \u2014 racing or shovel-nose, and the hull features specific to it), Nuu-chah-nulth (ocean-going design, key features for open Pacific), and at least one of: Kwakwaka'wakw (northern-style, distinctive bow feature) or Makah (offshore design, geographic context of Cape Flattery). For each: name the nation, describe the water type, identify two hull features that solve problems specific to those waters. Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Canoe as Living Being",
+        "content": "SUMO classifies the cedar canoe as Canoe -> WaterVehicle -> TransportationDevice -> Device -> Artifact. Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, and Makah traditions understand the cedar canoe as a living being completing a transformation that Grandmother Cedar began \u2014 the canoe is not manufactured but released. Both descriptions are true. How does holding both views change how you relate to the canoe? If the canoe is an Artifact, what obligations follow from that? If it is a living being continuing Grandmother Cedar's gift, what different obligations follow? What does each view make visible that the other obscures? Nation attribution: Coast Salish, Nuu-chah-nulth, Kwakwaka'wakw, Makah.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Carver Knows",
+        "content": "A carver who releases a canoe from a cedar log is working with a being, not manufacturing a product. What knowledge does this framing encode? A carver who understands the cedar's gift \u2014 who has internalized the Cedar Teaching and the Law of the Bark \u2014 approaches the log with a different set of questions than a carver who approaches it as raw material. What questions does each framing generate? What does the carver who understands the gift know that the carver who sees only the log does not? What does this require of the person doing the work, over time?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "cedar-journeyman-02",
+    "path": "cedar",
+    "title": "Bentwood Basics",
+    "icon": "cedar-journeyman-02",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "cedar-apprentice-01"
+    ],
+    "roomId": 15,
+    "components": [
+      {
+        "type": "story",
+        "title": "Physics and Knowledge Together",
+        "content": "The bentwood box uses steam to soften lignin in cedar fibers, allowing the wood to bend without splitting at kerf cuts. Lignin is the polymer that binds wood fibers together; steam at 100\u00b0C plasticizes it, making the fibers temporarily pliable. Kerfs cut 70-80% through the plank reduce the effective thickness at the bend location so the wood bends there rather than elsewhere. This is materials science and heritage knowledge simultaneously \u2014 the Kwakwaka'wakw, Coast Salish, and Nuu-chah-nulth builders who developed this technique understood the material's properties through direct observation and practice, arriving at the same conclusions materials scientists reached centuries later. Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Kerf-Bending Sequence",
+        "content": "Describe the bentwood box making sequence in order: (1) calculating kerf spacing \u2014 the distance between kerfs determines how sharp the bend radius will be; tighter bends need closer-spaced kerfs, (2) cutting kerfs to 70-80% of plank depth on the interior face \u2014 shallow enough to leave structural integrity, deep enough to allow bending, (3) steam softening the plank \u2014 steam box or wet blanket over heat, typically 20-30 minutes for full penetration, (4) bending the plank at each kerf while hot \u2014 work quickly before the lignin re-sets, (5) corner joining \u2014 the fourth corner is joined by drilling and lashing, pegging, or a combination. Explain why the kerf must not exceed approximately 80% depth: beyond that point, the remaining wood is too thin to survive the bending stress without fracturing. Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Box as Technology",
+        "content": "The bentwood box is used for waterproof food storage, hot-rock cooking (stones heated in fire, transferred to water in the box \u2014 the box cannot go directly on the fire), and trade goods container. A single technology serving three distinct functions shapes economy and material culture: communities that have bentwood box technology have waterproof storage that doesn't rot, cooking capability without ceramic vessels, and a trade good with high value due to its difficulty of manufacture. How does a single multi-function technology shape the economy and material culture of PNW Coast communities? What becomes possible when this technology is available, and what constraints does its absence create? Nation attribution: Kwakwaka'wakw, Coast Salish, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Cedar's Properties Make Possible",
+        "content": "Cedar's straight grain makes it splittable into planks and strips. Cedar's flexibility makes it steerable \u2014 it bends without fracturing when properly prepared. Cedar's rot resistance means bentwood boxes, canoes, and longhouses last decades. Cedar's aromatic oils discourage insects and fungi. These properties are not incidental to PNW Coast material culture \u2014 they are its foundation. The bentwood box, the ocean-going canoe, the longhouse, the rope, the basket: all depend on cedar being what cedar is. What would this material culture look like without cedar? What does this dependency reveal about the relationship between a people and a specific plant in a specific place? What does the Cedar Teaching mean in light of this dependency?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-journeyman-02",
+    "path": "neighbors",
+    "title": "Brothers Who Fight",
+    "icon": "neighbors-journeyman-02",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "neighbors-apprentice-01"
+    ],
+    "roomId": 18,
+    "neighborsThread": "Conflict within relationship is different from conflict to destroy a relationship. The brothers metaphor \u2014 conflict between communities that are simultaneously allies, trade partners, and relatives \u2014 requires a different kind of resolution.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Conflict Within Relationship",
+        "content": "Historical inter-village conflicts in the Salish Sea were almost always between communities that were simultaneously connected by marriage, trade, and ceremony. The brothers metaphor: fighting within relationship, not to destroy it. A St\u00f3:l\u014d community that raided a neighboring Lummi (Lhaq'temish) community was raiding people whose relatives lived in their own village. A Kwakwaka'wakw community in conflict with Nuu-chah-nulth neighbors was in conflict with people they traded with and had family connections through. Conflict happened within the web of relationships \u2014 and the web constrained how the conflict could be conducted and what resolution looked like.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Raiding vs. Warfare Distinction",
+        "content": "Describe the documented distinction between raiding (for prestige or goods, operating within understood rules \u2014 specific times, specific targets, specific limits on violence) and warfare (aimed at destroying or displacing a community) in Salish Sea inter-community conflict. Name the structural features that made raiding a bounded activity: the role of kinship ties in limiting targets, the compensation protocols that could resolve a raid's consequences, and the ceremony relationships that constrained who could raid whom. Attribution: Coast Salish (St\u00f3:l\u014d, Lummi), Kwakwaka'wakw, Nuu-chah-nulth.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Compensation as Repair",
+        "content": "Describe how compensation protocols worked in Salish Sea communities: what was given (goods proportional to the harm \u2014 blankets, copper pieces, food, other valuables), who received it (the injured party and their community), who witnessed it (the assembled community who validated the exchange), and what it accomplished (the grievance was closed \u2014 publicly, permanently, with witnesses). How does this differ from fine-as-punishment? A fine goes to the state or community as deterrence; compensation goes to the harmed party as repair. The goal is relationship restoration, not deterrence. Attribution: Coast Salish (St\u00f3:l\u014d, Lummi), Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "When Anger Is a Storm",
+        "content": "The Emotional Weather metaphor from the Village World: anger as storm on the Sound \u2014 real, powerful, passes, leaves a changed landscape. How does this framing help you understand what anger requires from the people around you? What does it mean to 'wait out the storm' before addressing the practical repair work? The brothers who fight do not resolve the conflict while the storm is at full force. They wait. They acknowledge. Then they work. What does this sequence require of both parties?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-keeper-02",
+    "path": "neighbors",
+    "title": "The Talking Circle",
+    "icon": "neighbors-keeper-02",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "keeper",
+    "prerequisites": [
+      "neighbors-keeper-01"
+    ],
+    "roomId": 18,
+    "neighborsThread": "The Keeper at Village World level can facilitate a restoration-focused dialogue using documented Salish Sea principles and explain why restoration is structurally different from punishment.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Making Things Right: The Full Sequence",
+        "content": "The documented restoration sequence from Salish Sea traditions: Acknowledgment \u2014 naming what happened publicly, in front of the community who witnessed the relationship and the harm; Compensation \u2014 goods given to the injured party in proportion to the severity of the harm, given publicly and witnessed; Witness \u2014 community members validate the repair and hold the memory, making the resolution a shared fact; Closure \u2014 the forward direction that closes the grievance permanently. Once the repair is witnessed, bringing up the resolved matter is itself a social violation. This sequence requires a community that values ongoing relationship over winning. Attribution: Coast Salish (St\u00f3:l\u014d, Lummi), Kwakwaka'wakw.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Facilitation Practice",
+        "content": "Facilitate a structured dialogue using the restoration-focused sequence drawn from documented Salish Sea principles: (1) Name what happened \u2014 use specific, non-blaming language that establishes shared understanding without assigning sentence; (2) Identify what was broken \u2014 name the specific relationship, trust, or resource that was damaged; (3) Propose what repair looks like \u2014 concrete, proportional to the harm, given to the affected party (not to a third party); (4) Receive witness acknowledgment \u2014 have at least one community member validate the repair aloud. Practice with a low-stakes scenario. The goal is to close the matter with the community's witness, not to determine winners.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Potlatch as Conflict Resolution Venue",
+        "content": "Describe how the potlatch served as a conflict resolution venue in Kwakwaka'wakw and Coast Salish traditions: compensation given at a potlatch was given publicly in front of all guests; the giving was witnessed by everyone present; the grievance was considered resolved in front of the relationship network. Connect this to the gift economy's social accounting function: the potlatch was a public ledger of relationships and obligations. Resolving a conflict at a potlatch entered the resolution into that ledger, witnessed by all present. Future references to the grievance \u2014 which was now in the public record as resolved \u2014 became themselves violations of the social norms the potlatch maintained. Attribution: Kwakwaka'wakw, Coast Salish.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "Can You Teach It? \u2014 Making Things Right",
+        "content": "Explain to a hypothetical 12-year-old how Salish Sea communities resolved serious conflicts without destroying relationships. Use at least two specific nations' practices (for example: St\u00f3:l\u014d public acknowledgment protocols and Kwakwaka'wakw potlatch compensation). Address: what is the difference between punishment and repair? Why does the distinction matter for the community's future? Evaluators assess: accuracy of the description of specific nation practices, nation-specific attribution (no generic 'Northwest Coast peoples'), cultural sensitivity in framing, and whether the explanation empowers the learner to understand the principles \u2014 not just memorize the sequence.",
+        "interactiveElement": "teach-it-verification",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-explorer-01",
+    "path": "salmon",
+    "title": "Salmon Reader",
+    "icon": "salmon-explorer",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Five Salmon Nations",
+        "content": "Five species, five seasonal roles, five ecological niches. The Salish Sea salmon economy is built on species diversity, not monoculture. Chinook opens the season in spring with the highest fat content. Sockeye brings brilliant red flesh in summer. Coho runs silver in the fall. Pink arrives in abundance on its two-year cycle. Chum closes the season in late fall. Each species has its moment; together they sustain a salmon economy from spring through winter.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Species Identification",
+        "content": "Identify all 5 Pacific salmon species by external characteristics: Chinook (largest, black spots on back and tail, black gums), Sockeye (bright red flesh, hooked jaw and humped back at spawning, blue-green back in ocean), Coho (silver flanks, white gums, small black spots on upper body), Pink (small size, large oval spots on tail, pronounced humped back in spawning males), Chum (calico flanks with red and green marbling at spawning, no distinct spots). Practice on photographs from community-authorized natural history sources.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-apprentice-01",
+    "path": "salmon",
+    "title": "Reef Net Principles",
+    "icon": "salmon-apprentice",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "salmon-explorer-01"
+    ],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "Engineering and Ecology",
+        "content": "Reef net technology works because Lummi (Lhaq'temish) and WS\u00c1NE\u0106 (Saanich) peoples understood reef channel geography, salmon behavior, and tidal timing with precision that took generations to develop. The technology is inseparable from the knowledge \u2014 you cannot operate a reef net station without knowing which reefs the salmon use, when the tides favor fishing, and how to read the water surface for approaching schools. The attribution matters: reef net technology belongs specifically to Lummi and Saanich peoples, developed for the specific reef channels of the San Juan and Gulf Islands.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Reef Net Geometry",
+        "content": "Describe the three components of a reef net system: floor (the bottom barrier laid on the reef surface), lead lines (angled panels extending from the floor edges upward to guide fish), and bag (the trap positioned above the floor). Explain how fish are guided from the reef bottom up into the bag: salmon following the reef bottom encounter the angled lead lines and are directed upward, passing over the floor net into the bag above. Draw a diagram with labels showing the two anchored canoes, the net components, and the path a salmon takes through the system.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Cooperative Technology",
+        "content": "A reef net station requires multi-family coordination that the technology itself demands. Describe the defined roles: the two canoe crews (anchoring, managing net lines), the lookout (elevated in the bow, reading the water for approaching schools), and the signal system (communicating between lookout and crews to time the net raise). What social infrastructure \u2014 what governance, what shared protocols, what trust built through practice \u2014 makes this technology function? How does the technology itself shape the social relationships required to use it?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Cooperation Makes Possible",
+        "content": "Reef net fishing required more coordination than any individual family could supply \u2014 and it produced more salmon than any family could catch alone. The technology created both a need for social organization and a reward for maintaining it. What does this tell us about the relationship between social organization and ecological productivity? How does the governance of reef net stations (who has rights to which station, how harvests are shared) reflect a theory of sustainable resource management that emerges from the technology itself?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "salmon-journeyman-01",
+    "path": "salmon",
+    "title": "The Salmon's Promise",
+    "icon": "salmon-journeyman",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "salmon-apprentice-01"
+    ],
+    "roomId": 16,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Return Journey",
+        "content": "The Salmon's Promise: salmon spend years in the ocean and return to the river where they were born. The pact between human communities and the Salmon People \u2014 honor the salmon, and they will return \u2014 encodes the principle of reciprocal relationship: the salmon's return is contingent on being honored, and the human community's prosperity is contingent on maintaining the relationship. This is the pack's central metaphor for learning: leave, range widely, return with what you have learned. The salmon does not return because it has to \u2014 it returns because the relationship holds.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Preservation Safety",
+        "content": "Demonstrate knowledge of salmon smoking safety: minimum internal temperature of 160\u00b0F (71\u00b0C) required for hot smoking to kill pathogens including Listeria and Salmonella. Cold smoking (below 90\u00b0F/32\u00b0C) does not kill pathogens \u2014 cold-smoked salmon requires salt curing first or refrigerated storage throughout. Storage conditions: cool, dry, with air circulation; inspect before consuming (off odor, slimy texture, visible mold means discard). Explain why the botulism risk in improperly stored vacuum-packed fish \u2014 which produces no visible, odor, or taste warning \u2014 makes the minimum smoking temperature non-negotiable.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "First Salmon Ceremony: What We Can Know",
+        "content": "The general significance of the First Salmon Ceremony is Level 1 publicly shared educational content: communities greet the first salmon of the season with ceremony, the first fish is welcomed, cooked, shared communally, and its bones are returned to the water so the salmon can carry word back to the Salmon People that the relationship holds. Specific ceremonial protocols \u2014 songs, prayers, preparation methods, who speaks and what is said \u2014 are Level 3 community-restricted knowledge. How does knowing this boundary help you engage respectfully with ceremony content? What does it mean to learn the shape of something without claiming to possess it?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Return Means",
+        "content": "The salmon returns to where it started. It does not return unchanged \u2014 it has ranged the ocean, grown, and carries what the ocean gave it back to the river. What does it mean for a learner to return to their home community with new knowledge? How does the salmon metaphor illuminate the relationship between learning and belonging? The salmon's promise is not just that it returns \u2014 it is that the return is meaningful only because the relationship was maintained. What relationships must a learner maintain to make their return meaningful?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-explorer-01",
+    "path": "weaving",
+    "title": "First Thread",
+    "icon": "weaving-explorer",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Fiber Traditions of the Salish Sea",
+        "content": "Coast Salish weaving traditions use mountain goat wool, woolly dog wool (now extinct as a distinct breed), and cedar root fiber. Each material has its ecological origin and its place in the weaving tradition. The woolly dog was maintained in separate groups on small islands, sheared annually \u2014 a purpose-built fiber animal that lived within the weaving tradition rather than alongside it. When sheep wool arrived with European contact, the woolly dog's function became redundant. The breed is now extinct. This loss is part of the tradition's history.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Fiber Identification",
+        "content": "Identify the three primary fiber sources in Coast Salish textile traditions: mountain goat wool (long staple, fine fiber, harvested by gathering shed wool from rocky travel paths or obtained through Interior Plateau trade), woolly dog wool (historical \u2014 the woolly dog was a distinct breed bred specifically for fiber production, now extinct as a distinct breed, replaced by sheep wool after European contact), cedar inner bark (processed into strips for basketry, specifically for coiled and plaited basket traditions). For each fiber, name its source species, its typical preparation method, and at least one nation that used it.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-apprentice-01",
+    "path": "weaving",
+    "title": "Loom and Pattern",
+    "icon": "weaving-apprentice",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "weaving-explorer-01"
+    ],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Two-Bar Loom System",
+        "content": "The Coast Salish two-bar loom enables weaving without a rigid frame \u2014 bars held by tension, warp hanging vertically, the weaver building the cloth from the bottom up. A portable, elegant system that traveled easily to seasonal camps. No floor loom to disassemble and transport; no complex frame to construct at each new location. The loom's simplicity is not a limitation \u2014 it is an adaptation to a specific way of living on the land. Attribution: Coast Salish (Musqueam, Squamish, St\u00f3:l\u014d, Cowichan).",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Warp Setup Calculation",
+        "content": "Calculate warp sett for a balanced plain weave in bulky wool: wraps per inch divided by 2 equals the sett in ends per inch. If a wool wraps 18 times per inch, the plain weave sett is 9 epi. Set warp on a two-bar loom (or frame substitute) at the calculated sett. Thread a simple heddle rod: attach string heddles to every other warp thread (the back shed threads), leaving the alternating threads free (the front shed threads). Test both sheds by alternating between the heddle rod and shed stick. Attribution: Coast Salish weaving technique.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Cowichan Knitting: Post-Contact Adaptation",
+        "content": "Cowichan knitting is not a pre-contact tradition. Coast Salish peoples adopted knitting needles \u2014 a European-introduced tool \u2014 and applied their existing knowledge of Salish wool preparation and geometric design to create a new textile form. The Cowichan sweater (dense, water-resistant, using minimally processed undyed wool knitted at a tight gauge) is attributed specifically to Quw'utsun' (Cowichan) peoples of Vancouver Island. Name what was adapted (the tool: knitting needles) vs. what was maintained (fiber knowledge, design vocabulary, geometric grammar). Attribution: Cowichan (Quw'utsun') peoples.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Makes a Tradition",
+        "content": "Cowichan knitting began as an adaptation of a new tool to existing cultural knowledge and is now a fully recognized cultural tradition with significant economic and cultural importance. Cowichan sweaters have been the subject of intellectual property disputes involving counterfeit products that copy the design without attribution or compensation to Quw'utsun' makers. What does this tell us about how traditions form? What counts as authentic? What is the relationship between a tool's origin and a tradition's authenticity?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "weaving-journeyman-01",
+    "path": "weaving",
+    "title": "Coast Salish Formline",
+    "icon": "weaving-journeyman",
+    "traditions": [
+      "first-nations"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "weaving-apprentice-01"
+    ],
+    "roomId": 17,
+    "components": [
+      {
+        "type": "story",
+        "title": "A Distinct Design Language",
+        "content": "Coast Salish formline is not northern NW Coast formline. Describe 3 differences between the two systems: (1) Form \u2014 Coast Salish uses rounder, more freely oval forms vs. northern formline's structured ovoid system. (2) Composition \u2014 Coast Salish emphasizes circular and spiral compositions vs. northern formline's bilateral flowing symmetry. (3) Grammar \u2014 Coast Salish has a different relationship between positive and negative space; the ground space is more actively used in the composition. Attribution: Coast Salish (Musqueam, Squamish, St\u00f3:l\u014d) vs. northern formline nations (Haida, Tlingit, Tsimshian).",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Spindle Whorl Composition",
+        "content": "Describe the spindle whorl as a composition field. The circular format (typically 15-25 cm diameter) encourages radially symmetrical compositions where elements rotate around a center point. What visual elements appear in Coast Salish whorl compositions? Name at least two: transformation figures (human-animal forms), salmon, canoe paddlers, and other recognizable subjects rendered in Coast Salish formline vocabulary. Acknowledge that specific whorl compositions may carry lineage associations \u2014 they are not simply decorative. Studying specific whorls requires understanding that their particular meanings may belong to the family within whose tradition the whorl was made.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "relationship",
+        "title": "Three Basketry Nations",
+        "content": "Describe 3 cedar root basketry traditions individually: (1) Coast Salish imbricated basketry \u2014 technique: coiling cedar root with colored overlay (beargrass, cattail, cherry bark); nation: St\u00f3:l\u014d, Musqueam. (2) Nuu-chah-nulth plaited cedar bark \u2014 technique: flat cedar bark strips woven in checkerboard or twill plaiting; nation: Nuu-chah-nulth. (3) Nlaka'pamux coiled basketry \u2014 technique: fine cedar root coiling with geometric designs in beargrass or cherry bark overlay; nation: Nlaka'pamux (Thompson). Confirm nation-specific attribution for each \u2014 do not use 'Northwest Coast basketry' as a category for any of these.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What Stays, What Changes",
+        "content": "Coast Salish weaving has incorporated new materials (sheep wool replacing woolly dog wool, commercial yarn for some contemporary work) and new tools (knitting needles, steel needles) while maintaining design grammar and cultural meaning. What makes a tradition resilient across material change? What is the core of a tradition \u2014 the specific materials, the technique, the design system, the community relationships, the knowledge transmission? Where does Cowichan knitting fit in this framework?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-animals-explorer-01",
+    "path": "heritage",
+    "title": "Animal Heritage",
+    "icon": "heritage-animals-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 3,
+    "components": [
+      {
+        "type": "story",
+        "title": "What the Animals Carry",
+        "content": "Every animal in this room's tradition carries more than biology \u2014 it carries history, relationship, and survival knowledge. The Appalachian farmer's knowledge of cattle, hogs, and poultry is a complete animal husbandry system developed over generations. Cree and Dene trapping knowledge of beaver, muskrat, and caribou encodes ecological understanding refined over millennia. Inuit seal and caribou knowledge is the foundation of arctic survival. Study the animal knowledge of one tradition before comparing across traditions.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Animal Sign Reading",
+        "content": "Identify three types of animal sign: tracks (shape, gait pattern, stride length), scat (shape, size, content \u2014 bone, seeds, fur), and feeding sign (gnaw marks, browse height, bark stripping). For each sign type: which tradition developed systematic reading of this sign, and what specific ecological knowledge does it encode? Sources: this room's try sessions and canonical works library.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-animals-apprentice-01",
+    "path": "heritage",
+    "title": "Animal Knowledge",
+    "icon": "heritage-animals-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "heritage-animals-explorer-01"
+    ],
+    "roomId": 3,
+    "components": [
+      {
+        "type": "story",
+        "title": "Using the Whole Animal",
+        "content": "Cree and Dene traditions of using every part of the hunted animal (meat, hide, bone, sinew, organs) document a relationship with animal life that is simultaneously practical and relational. Appalachian hunting traditions share the principle of waste-nothing but frame it in terms of self-sufficiency rather than explicit relational ethics. Inuit seal and caribou processing follows the same principle in an arctic ecological context. What does the 'complete use' principle reveal about how each tradition understands its relationship with the animal?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Brain-Tanning Stages",
+        "content": "Document the brain-tanning process in sequence: fleshing (removing tissue from the hide), soaking (softening), wringing (removing water), braining (working brain solution into hide fibers), stretching, smoking. Identify what each stage accomplishes chemically and mechanically. Attribution: Cree and Dene (boreal forest context), Lakota and Crow (regional variations). Identify which stage is the most critical to prevent stiffening.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "What Each Tradition Knows",
+        "content": "Compare the animal knowledge embedded in three traditions: Appalachian husbandry (domestic livestock cycles, breeding knowledge), Cree and Dene trapping (seasonal movement, habitat, sign reading), Inuit seal ecology (breathing holes, ice conditions, behavior patterns). What knowledge does each tradition encode that the others do not? What do all three share?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What the Animals Teach",
+        "content": "Heritage traditions across cultures understand animals as teachers \u2014 not metaphorically but practically. The behavior of migrating caribou teaches route knowledge. The behavior of salmon teaches river reading. What animal knowledge has informed human adaptation in the ecological region you are studying? Be specific about species, behavior, and the human knowledge that follows from it.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-smithing-explorer-01",
+    "path": "tool",
+    "title": "Fire and Metal",
+    "icon": "tool-smithing-explorer",
+    "traditions": [
+      "appalachian"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 7,
+    "components": [
+      {
+        "type": "story",
+        "title": "What the Blacksmith Knows",
+        "content": "The blacksmith's forge is one of the most complex workshops in heritage material culture \u2014 it requires knowledge of fire temperature, metal chemistry (carbon content determines hardness), and mechanical force (hammer angle, strike timing). Appalachian blacksmithing tradition maintained this knowledge through working smiths who served entire communities. What does a blacksmith's skill set reveal about the community that produced it?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Steel, Iron, and Carbon",
+        "content": "Understand the key metallurgical concepts: wrought iron (low carbon, tough, difficult to harden), high-carbon steel (hardenable by heat treat), mild steel (low carbon, easily worked). Identify the forge temperature colors: black heat (invisible, still hot), red heat (600-900\u00b0F), orange heat (900-1100\u00b0F), yellow heat (1100-1300\u00b0F), white heat (1300\u00b0F+, working temperature for forge welding). Know why high-carbon steel must be quenched at the correct temperature.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-smithing-apprentice-01",
+    "path": "tool",
+    "title": "Forge Skills",
+    "icon": "tool-smithing-apprentice",
+    "traditions": [
+      "appalachian"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "tool-smithing-explorer-01",
+      "tool-apprentice-01"
+    ],
+    "roomId": 7,
+    "components": [
+      {
+        "type": "story",
+        "title": "What the Smith Made Possible",
+        "content": "The Appalachian blacksmith made the tools that made everything else: axes that felled timber, plows that broke ground, hinges that hung doors, nails that held structures. The smith was not peripheral \u2014 the smith was the enabling technology of the entire settlement. Document the chain of dependencies: what could not be done without the blacksmith's products?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Fire, Flux, and Quench Safety",
+        "content": "Identify the four gate-level safety requirements for forge work: (1) forge lighting procedure (check fuel, clear combustibles, light from distance); (2) high-heat forging gear (leather apron, face shield, proper tongs \u2014 never bare hands near 2000\u00b0F metal); (3) quench tank position and capacity; (4) ventilation for coal smoke and flux fumes. State the two-person rule for moving structural hot metal. Explain why flux (borax) can cause steam burns on wet skin.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Inuinnait Cold Copper and Appalachian Blacksmithing",
+        "content": "The Inuinnait (Copper Inuit) cold-worked native copper from the Coppermine River region without forge or fire \u2014 pure cold-hammering and work-hardening. Appalachian blacksmithing uses controlled heat to move iron. Both achieve the same goal (shaped metal tools) through completely different physics. Compare the knowledge bases: what does cold-hammering require that forge work does not? What does forge work achieve that cold-hammering cannot?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "The Metallurgist's Knowledge",
+        "content": "Metallurgy requires knowledge of chemistry, physics, and process that was developed empirically over generations. Before modern materials science, smiths understood heat treatment by color, not by temperature measurement. What does this embodied, observational knowledge system reveal about how technical expertise develops and transmits in heritage communities?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "tool-smithing-journeyman-01",
+    "path": "tool",
+    "title": "Forge Mastery",
+    "icon": "tool-smithing-journeyman",
+    "traditions": [
+      "appalachian"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "tool-smithing-apprentice-01"
+    ],
+    "roomId": 7,
+    "components": [
+      {
+        "type": "story",
+        "title": "The Nail as Civilization",
+        "content": "Hand-forged nails were so valuable in early Appalachian and colonial-era communities that abandoned buildings were sometimes burned specifically to recover the nails from the ash. The blacksmith who made nails was not performing a minor task \u2014 the nail was the primary fastener of the built environment. Study what the nail's value reveals about the community that produced it: what is infrastructure? What enables infrastructure?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Heat Treatment Process",
+        "content": "Describe the complete heat treatment process for a high-carbon steel blade: (1) normalization (heat to non-magnetic, air cool \u2014 relieves stress, establishes uniform grain); (2) hardening (heat to non-magnetic, quench in oil or water \u2014 traps carbon in martensite structure, makes steel very hard and brittle); (3) tempering (reheat to 375-450\u00b0F, visible as blue-purple oxide colors \u2014 relieves some brittleness while maintaining hardness). Identify why tempering color is read on polished steel, not on oxidized surfaces.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Iron and Copper: Two Metallurgical Traditions",
+        "content": "Compare Appalachian wrought iron tradition (forge-welded from bloom iron, worked at high heat, hardenable only with high-carbon steel) with Inuinnait native copper tradition (cold-hammered, work-hardened, no forge or fire required). Both traditions recognized that metal could be shaped and sharpened; neither had the other's primary technology. What does each tradition's metallurgy make possible that the other's cannot? Name specific tool types for each tradition.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "What the Forge Teaches",
+        "content": "The forge requires patience \u2014 you cannot rush the heat. It requires attention \u2014 the color of the metal tells you exactly where it is in its thermal cycle. It requires decisive action \u2014 at the correct temperature, you have seconds to work before the metal cools past working heat. What does forge work teach about the relationship between preparation, attention, and action? How does this sequence appear in other heritage skills?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-pottery-explorer-01",
+    "path": "heritage",
+    "title": "Clay Heritage",
+    "icon": "heritage-pottery-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 8,
+    "components": [
+      {
+        "type": "story",
+        "title": "What Clay Carries",
+        "content": "Fired pottery is among the most durable artifacts in the archaeological record \u2014 a pot made 1000 years ago survives while wood, fiber, and leather do not. The clay traditions in this room carry the combined knowledge of Appalachian and Haudenosaunee potters, each working with local materials and transmitting cultural knowledge through functional objects. Dave Drake's signed stoneware at Edgefield District, South Carolina, is among the most documented examples of African American pottery carrying cultural continuity through a restrictive era.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Clay Identification and Testing",
+        "content": "Identify workable clay by three field tests: (1) plasticity test \u2014 roll a coil 6mm in diameter and bend it 90 degrees; if it bends without cracking, it is plastic enough to work; (2) drying test \u2014 form a small ball and allow to dry; it should shrink uniformly without cracking; (3) firing test \u2014 fire a small test piece; it should not explode (indicating air pockets) or turn powdery (indicating too much calcium carbonate). Understand what wedging accomplishes: removes air pockets and creates uniform texture throughout the clay body.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-pottery-apprentice-01",
+    "path": "heritage",
+    "title": "Clay Traditions",
+    "icon": "heritage-pottery-apprentice",
+    "traditions": [
+      "appalachian",
+      "first-nations"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "heritage-pottery-explorer-01"
+    ],
+    "roomId": 8,
+    "components": [
+      {
+        "type": "story",
+        "title": "What the Pot Carries",
+        "content": "Appalachian folk pottery at the Edgefield District potteries (South Carolina) carries the combined knowledge of African American potters, European stoneware traditions, and local material conditions \u2014 documented in the signed work of Dave Drake and others. Haudenosaunee coil-built pottery carries clan-associated design knowledge. Both traditions encode identity, history, and cultural knowledge in functional objects. Read the pot as a document.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Hand-Building in Clay",
+        "content": "Describe the coil-building sequence: preparing clay (wedging to remove air), rolling coils (even pressure, consistent diameter), joining coils (score and slip both surfaces, blend inside and outside), smoothing, and drying. Identify what 'bone dry' means and why kiln loading with incompletely dried ware causes explosions. Identify the three safe firing principles: bone-dry ware, correct temperature ramp, no sudden cooling.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Two Clay Traditions",
+        "content": "Compare Appalachian stoneware (high-fire kiln, salt glaze, wheel-thrown, commercial production) with Haudenosaunee coil-built pottery (low-fire, hand-built, community use). What does each prioritize? What does each make possible that the other does not? Note: Haudenosaunee clan-associated design elements are Level 2 contextually shared \u2014 this comparison acknowledges their existence without claiming to interpret specific meanings.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "The Permanence of Fired Earth",
+        "content": "Fired pottery is among the most durable artifacts in the archaeological record. A pot made 1000 years ago survives while wood, fiber, and leather do not. What does this durability mean for what we know about pottery-making cultures? What does the archaeological dominance of pottery in the record tell us \u2014 and not tell us \u2014 about the cultures that made it?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "heritage-seasonal-explorer-01",
+    "path": "heritage",
+    "title": "The Seasonal Round",
+    "icon": "heritage-seasonal-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 11,
+    "components": [
+      {
+        "type": "story",
+        "title": "What Season Teaches",
+        "content": "Every heritage tradition in this pack is organized around a seasonal calendar \u2014 not an arbitrary human calendar but the ecological calendar of the land itself. Appalachian planting calendars follow frost dates, moon phases, and plant phenology. Anishinaabe seasonal rounds follow the migration of game, the ripening of rice, and the running of maple sap. Inuit seasons are structured by ice, darkness, and caribou movement. The land has a calendar; heritage traditions are ways of reading it.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Map One Seasonal Round",
+        "content": "Choose one of the three traditions (Appalachian, Anishinaabe, or Inuit) and map its seasonal activities across 12 months or the tradition's own seasonal divisions. Identify: primary food sources per season, preparation and preservation activities, travel patterns, shelter changes. Sources: this room's try sessions and canonical works library.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-oral-history-journeyman-01",
+    "path": "neighbors",
+    "title": "Oral History as Evidence",
+    "icon": "neighbors-oral-history-journeyman",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "journeyman",
+    "prerequisites": [
+      "neighbors-apprentice-01"
+    ],
+    "roomId": 12,
+    "neighborsThread": "Oral history is the primary technology through which communities maintain relationships across time. The journeyman understands that oral history is evidence, not anecdote.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Oral History as Legal Record",
+        "content": "The Gitxsan and Wet'suwet'en case Delgamuukw v. British Columbia (1997) established that oral history can serve as evidence of Indigenous territorial sovereignty in Canadian courts. For centuries, colonial legal systems rejected oral tradition as hearsay. The Delgamuukw decision recognized that the Gitxsan and Wet'suwet'en people's oral histories of their territories were a different kind of evidence \u2014 not inferior to written records, but different in form and equal in validity.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Oral History Documentation Standards",
+        "content": "Document the three standards that distinguish oral history evidence from personal anecdote: (1) consistency \u2014 the account is consistent when told by multiple knowledge holders independently; (2) specificity \u2014 the account includes geographic, temporal, or relational details that can be cross-referenced; (3) community validation \u2014 the account is recognized by the community as part of their shared history, not only by one individual. Apply these standards to evaluate an oral history interview you conduct or review.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Oral and Written Records in Conversation",
+        "content": "Compare oral history traditions in three communities: Appalachian family history (passed through storytelling and family Bibles, community knowledge of local events), Gitxsan totem pole records (each crest documents clan history, territorial rights, significant events \u2014 read by trained knowledge holders), Inuit oral navigation knowledge (route descriptions, ice condition patterns, seasonal knowledge transmitted through story and song). What can each record form preserve that the others cannot?",
+        "culturalLevel": 2
+      },
+      {
+        "type": "reflection",
+        "title": "What Counts as Knowledge",
+        "content": "The legal system's original rejection of oral history as evidence reveals an assumption: written records are objective, oral accounts are subjective. The Delgamuukw decision challenged this assumption. What does it mean for a community to have its knowledge system validated by an external authority? What is lost in that validation process \u2014 what must oral tradition become to be recognized by a court? What does this reveal about whose knowledge systems set the standard for what counts as knowledge?",
+        "culturalLevel": 2
+      }
+    ]
+  },
+  {
+    "id": "food-arctic-explorer-01",
+    "path": "food",
+    "title": "Arctic Food Knowledge",
+    "icon": "food-arctic-explorer",
+    "traditions": [
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 14,
+    "components": [
+      {
+        "type": "story",
+        "title": "What Arctic Food Systems Know",
+        "content": "Inuit food traditions are survival technology of the highest order \u2014 they operate in an environment where a single mistake in food handling can mean starvation or death. The knowledge encoded in igunaq (fermented meat), pemmican-equivalent preparations, and hunting-then-caching food systems is not primitive \u2014 it is advanced food systems engineering adapted to an environment that has no margin for error.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "skill",
+        "title": "Cold, Dark, and Dry",
+        "content": "Identify the three preservation mechanisms available in an arctic environment: cold (temperatures below freezing for months), dark (UV light destroys nutrients; winter darkness protects stored meat), and drying (wind-drying in arctic air removes moisture without warmth). Explain how traditional Inuit meat caches exploit all three. Explain why botulism remains a risk in fermented arctic preparations (igunaq) even in cold climates.",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "food-arctic-apprentice-01",
+    "path": "food",
+    "title": "Arctic Preservation",
+    "icon": "food-arctic-apprentice",
+    "traditions": [
+      "inuit"
+    ],
+    "tier": "apprentice",
+    "prerequisites": [
+      "food-arctic-explorer-01"
+    ],
+    "roomId": 14,
+    "components": [
+      {
+        "type": "story",
+        "title": "From Hunt to Cache",
+        "content": "In an Inuit food system, the hunt does not end with the kill. The animal must be processed immediately (before the carcass freezes solid or spoils), portioned for different uses (some fresh, some dried, some cached), transported to the settlement, and stored correctly. Each stage requires specific knowledge. A complete hunt is a food systems operation, not just a hunting skill.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "How a Meat Cache Works",
+        "content": "Describe the design requirements for an effective arctic meat cache: elevated (to prevent ground animal access), ventilated (prevents anaerobic fermentation in cached meat), weighted or secured (against wind and ravens), positioned for access under snow. Explain why igunaq (fermented walrus or seal) requires specific conditions to be safe vs. toxic \u2014 the controlled fermentation vs. dangerous decomposition distinction.",
+        "culturalLevel": 1
+      },
+      {
+        "type": "relationship",
+        "title": "Cold Climate vs. Warm Climate Preservation",
+        "content": "Compare Inuit arctic food preservation (cold, dark, drying, controlled fermentation) with Appalachian food preservation (acid/water-bath canning, salt, smoking, root cellaring) and Anishinaabe preservation (wild rice drying, pemmican, smoking). What does each tradition's environment make available as a preservation mechanism? What problems does each solve that the others cannot?",
+        "culturalLevel": 1
+      },
+      {
+        "type": "reflection",
+        "title": "Planning for the Person You Will Be in March",
+        "content": "A successful Inuit food system requires planning in August for the person who will need food in February. The cache is an act of faith in the future and care for the future self and community. What does the design of the cache system reveal about how Inuit communities understood time, community, and individual survival? How does this compare to Appalachian canning as a parallel act of autumn planning for winter?",
+        "culturalLevel": 1
+      }
+    ]
+  },
+  {
+    "id": "neighbors-community-explorer-01",
+    "path": "neighbors",
+    "title": "Community First",
+    "icon": "neighbors-community-explorer",
+    "traditions": [
+      "appalachian",
+      "first-nations",
+      "inuit"
+    ],
+    "tier": "explorer",
+    "prerequisites": [],
+    "roomId": 10,
+    "neighborsThread": "How communities govern themselves is one of the most important questions in heritage study. The answer varies by tradition, but the question is universal.",
+    "components": [
+      {
+        "type": "story",
+        "title": "Governance as Heritage",
+        "content": "Appalachian community governance (mutual aid societies, church-based community support, neighborly obligation) and Haudenosaunee confederacy governance (the Great Law of Peace, clan mothers, consensus) and Inuit consensus (Aajiiqatigiinniq) are all answers to the same question: how does a community make decisions together? Each tradition developed its governance system in response to its specific context.",
+        "culturalLevel": 2
+      },
+      {
+        "type": "skill",
+        "title": "Aajiiqatigiinniq: Decision by Agreement",
+        "content": "Inuit consensus decision-making (Aajiiqatigiinniq) requires that all parties understand and agree to a decision before it moves forward. Describe: (1) how Aajiiqatigiinniq differs from majority voting; (2) what the role of silence is in consensus processes; (3) what happens when consensus cannot be reached. Nation attribution: Inuit (Nunavut, Nunavik). How does this compare to Quaker consensus (another non-voting tradition) and Appalachian town meeting processes?",
+        "culturalLevel": 2
+      }
+    ]
+  }
+]

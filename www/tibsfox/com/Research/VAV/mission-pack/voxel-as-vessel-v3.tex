@@ -1,0 +1,1021 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Crimson / Slate / Amber (Signal/Fidelity domain) ─────────
+\definecolor{Primary}{HTML}{7B1FA2}      % Deep violet-purple
+\definecolor{Secondary}{HTML}{00838F}    % Signal teal
+\definecolor{Tertiary}{HTML}{E65100}     % Amber/burn orange
+\definecolor{LightBg}{HTML}{F3E5F5}      % Soft lavender bg
+\definecolor{MidGray}{HTML}{455A64}      % Slate
+\definecolor{TableHead}{HTML}{6A1B9A}    % Table header purple
+\definecolor{TableAlt}{HTML}{EDE7F6}     % Alt row
+\definecolor{WarnRed}{HTML}{B71C1C}
+\definecolor{SafeGreen}{HTML}{1B5E20}
+
+% ── HYPERREF ─────────────────────────────────────────────────────────────────
+\hypersetup{colorlinks=true, linkcolor=Primary, urlcolor=Secondary, citecolor=Tertiary}
+
+% ── SECTION STYLES ──────────────────────────────────────────────────────────
+\titleformat{\section}{\large\bfseries\sffamily\color{Primary}}{}{0em}{}[\color{Primary}\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\sffamily\color{MidGray}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\itshape\color{MidGray}}{}{0em}{}
+
+% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{MidGray}Voxel as Vessel v3 — Signal Fidelity \& Data Transmission}
+\fancyhead[R]{\small\sffamily\color{MidGray}Third-Pass Refinement}
+\fancyfoot[C]{\small\sffamily\color{MidGray}Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── TCOLORBOX ENVIRONMENTS ───────────────────────────────────────────────────
+\tcbuselibrary{skins,breakable}
+
+\newcommand{\stageheader}[2]{%
+  \begin{tcolorbox}[colback=Primary,colframe=Primary,arc=2pt,left=8pt,right=8pt,top=6pt,bottom=6pt]
+    \textbf{\large\sffamily\color{white}#1}\hfill\textbf{\sffamily\color{white!80!Primary}#2}
+  \end{tcolorbox}%
+}
+
+\newenvironment{asciibox}{%
+  \begin{tcolorbox}[colback=MidGray!8,colframe=MidGray!40,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,breakable]
+  \ttfamily\small
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{quoteblock}{%
+  \begin{tcolorbox}[colback=LightBg,colframe=Primary,arc=2pt,left=10pt,right=10pt,top=8pt,bottom=8pt,breakable]
+  \itshape
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{warnbox}{%
+  \begin{tcolorbox}[colback=WarnRed!8,colframe=WarnRed,arc=2pt,left=8pt,right=8pt,top=6pt,bottom=6pt,breakable]
+}{%
+  \end{tcolorbox}
+}
+
+% ── TABLE HELPERS ────────────────────────────────────────────────────────────
+\newcommand{\thead}[1]{\cellcolor{TableHead}\textbf{\sffamily\color{white}\small #1}}
+\newcommand{\altrow}{\rowcolor{TableAlt}}
+
+% ── DOCUMENT ─────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  TITLE PAGE
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{titlepage}
+\pagecolor{Primary}
+\color{white}
+\vspace*{2cm}
+\begin{center}
+{\fontsize{28}{34}\selectfont\sffamily\bfseries Voxel as Vessel}\\[0.4em]
+{\fontsize{18}{24}\selectfont\sffamily v3 --- Signal Fidelity \& Data Transmission}\\[0.8em]
+{\fontsize{13}{18}\selectfont\sffamily\color{white!75!Primary} Third-Pass Data Fidelity Refinement}\\[2.5cm]
+
+{\large\sffamily GSD Research Mission Package}\\[0.5em]
+{\normalsize\sffamily Modules M14--M26 $\cdot$ Fleet Activation $\cdot$ Five-Wave Execution}\\[3cm]
+
+\begin{tcolorbox}[colback=white!15!Primary,colframe=white!30!Primary,arc=4pt,width=0.82\textwidth]
+\centering\itshape\color{white}
+``The signal is not the content. The signal is the \emph{decision} about what to preserve across the lossy channel of time.\\
+Everything else is noise waiting to be named.''
+\end{tcolorbox}
+
+\vfill
+{\normalsize\sffamily Miles Tiberius Foxglove $\cdot$ tibsfox.com}\\[0.3em]
+{\small\sffamily\color{white!70!Primary} March 2026 $\cdot$ Companion to v1 (Ceph/RAG/Minecraft) and v2 (Sovereign World Architecture)}
+\end{center}
+\end{titlepage}
+\pagecolor{white}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  TABLE OF CONTENTS
+% ─────────────────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 1: VISION GUIDE
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 — VISION GUIDE}{The Fidelity Continuum}
+
+\section{Vision Narrative}
+
+Every signal is a wager against entropy. You encode something---a photon, a pressure wave, a block state, a memory---and you bet that enough of its structure survives the channel to be reconstructed at the other end. The channel is always hostile: it attenuates, it aliases, it quantizes, it corrupts. The art of data fidelity is the art of making intelligent wagers: choosing which losses are acceptable, which distortions are recoverable, and which corruptions are catastrophic.
+
+This third pass of the \emph{Voxel as Vessel} mission extends the Ceph/RAG/Minecraft architecture into the domain of signal fidelity across its full vertical stack---from the physics of light hitting a sensor, through the mathematics of Fourier decomposition, through every transport layer from pigeon to photon, through the human practices of studio capture and audio restoration, and finally to the institutional architectures of zero-trust data federation and offsite backup.
+
+The insight that drives this pass is deceptively simple: \textbf{hi-fi and lo-fi are not quality labels---they are strategic choices about which frequencies to preserve}. Long-exposure photography and fast-frame-rate photography are not opposites; they are complementary sampling strategies that trade temporal resolution for spatial integration, each correct for a different class of signal. A sneakernet carrying 10 TB on a hard drive and InfiniBand at 200\,Gbps are not competing technologies; they occupy different positions on the bandwidth-latency Pareto front. TCP/IP over avian carrier (RFC\,1149) is simultaneously a joke and a profound illustration that \emph{all transport protocols are abstractions over physical carriers}---and that the right carrier depends entirely on the payload and the constraints.
+
+The thread connecting all of this to the Minecraft/Ceph architecture: a Minecraft world is itself a signal-fidelity problem. The compressed block palette is a lossy encoding. The LOD zone system is a temporal sampling decision. The RBD snapshot is a delta-encoding. The seed is the codec. The sovereign world is the authenticated channel. This pass gives those metaphors their engineering substrate.
+
+\subsection{The Fidelity Stack}
+
+\begin{asciibox}
+PHYSICAL CAPTURE LAYER
+  Camera sensor: photons -> electrons -> ADC samples
+  Microphone: pressure -> membrane -> voltage -> ADC
+  Long exposure: temporal integration (LPF in time domain)
+  Fast frame rate: temporal sampling (approaches Nyquist limit)
+  Aliasing: when f_signal > f_Nyquist/2, foldover artifacts appear
+  |
+  v
+SIGNAL PROCESSING LAYER
+  Fourier Transform: time domain <-> frequency domain
+  FFT: O(n log n) decomposition into sinusoidal components
+  Short-Time Fourier Transform (STFT): time-localized spectral analysis
+  Wiener Filter: optimal linear estimator for signal/noise separation
+  Field separation: interlaced video -> progressive (deinterlacing)
+  |
+  v
+ENCODING / SERIALIZATION LAYER
+  Hi-fi: lossless (FLAC, RAW, PNG, FlatBuffers zero-copy)
+  Lo-fi: lossy (JPEG, MP3, MPEG, Protocol Buffers compressed)
+  Error correction: Hamming, Reed-Solomon, LDPC, Turbo codes
+  Framing: start/stop bits, packet headers, checksums, CRCs
+  |
+  v
+TRANSPORT LAYER (Bandwidth/Latency spectrum)
+  Acoustic modem:      ~2400 bps,   ms latency
+  POTS/V.90 modem:    ~56 kbps,    ms latency
+  ADSL:               ~8 Mbps,     ms latency
+  DOCSIS (cable):     ~1 Gbps,     ms latency
+  GPON fiber:         ~2.5 Gbps,   sub-ms latency
+  Ethernet 100GbE:    ~100 Gbps,   sub-ms latency
+  HIPPI:              800 Mbps,    us latency (legacy HPC)
+  InfiniBand HDR:     200 Gbps,    ~1us latency
+  IPoAC (RFC 1149):   ~1 GB/hour,  3000-6000s RTT
+  Sneakernet:         ~TB/hour,    hours latency
+  Sneakernet mesh:    TB*N/period, topology-dependent
+  |
+  v
+STORAGE / PRESERVATION LAYER
+  Backup: full, incremental, differential, continuous (CDP)
+  Audio restoration: declicker, dehisser, spectral repair
+  Visual restoration: scratch removal, color grading, upscaling
+  Offsite: DR site, cloud (S3/RGW), tape (LTO)
+  |
+  v
+FEDERATION / SECURITY LAYER
+  Zero Trust: never trust, always verify (NIST SP 800-207)
+  Data federation: unified query across distributed stores
+  Proxy + WAF: TLS termination, content inspection, rate limiting
+  Firewall: stateful packet inspection, zone segmentation
+  SASE: cloud-native SSE/SWG/CASB convergence
+\end{asciibox}
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+\item \textbf{Temporal aliasing in capture systems:} Sampling below the Nyquist limit causes high-frequency signal content to fold into lower frequency aliases. Long-exposure integration acts as a low-pass filter but destroys temporal resolution. Fast sampling preserves temporal resolution but degrades SNR through reduced photon integration. No single strategy dominates; the optimal tradeoff depends on signal characteristics.
+
+\item \textbf{Serialization overhead in high-speed pipelines:} Text-based formats (JSON, XML) impose unacceptable parse overhead in HPC and real-time AI systems. Binary formats trade human readability for performance (FlatBuffers: 81\,ns/op vs.\ JSON: 7,045\,ns/op). Schema management, version compatibility, and cross-language support create engineering debt that accumulates at integration boundaries.
+
+\item \textbf{Transport layer selection without principled framework:} Engineers select transport technologies through habit rather than analysis. The correct transport for a dataset is determined by payload size, latency tolerance, error tolerance, and geographic distance---a framework that reveals that sneakernet often dominates digital links for large cold datasets, and that IPoAC, while satirical, correctly identifies that \emph{any} carrier can be a network layer.
+
+\item \textbf{Lost content and degraded media:} Magnetic tape, vinyl, shellac, and optical media degrade at rates that outpace archival workflows. The Library of Congress estimates that most sound recordings from the early 20th century have been lost. Even preserved media suffers from dropout, hiss, flutter, and chemical decomposition that requires spectral analysis and restoration before digitization.
+
+\item \textbf{Security perimeter collapse in federated architectures:} Traditional castle-and-moat network security fails when the perimeter no longer exists---cloud, hybrid, edge, and BYOD environments dissolve the boundary. Zero trust replaces implicit trust with continuous verification, but implementation requires rethinking every trust assumption from identity through data access to transport encryption.
+\end{enumerate}
+
+\subsection{Core Thesis}
+
+Hi-fi and lo-fi are frequency-domain decisions, not quality judgments. Every encoding choice---exposure time, sampling rate, serialization format, transport protocol, compression algorithm---is a decision about which frequencies of the original signal to preserve, and at what cost. The Minecraft/Ceph architecture is a layered set of such decisions: seeds preserve generative frequency structure; palettes preserve block-state vocabulary; LOD zones preserve spatial frequency at the expense of temporal freshness; RBD snapshots preserve delta frequency (change rate). Understanding fidelity at this level unifies the entire stack.
+
+\subsection{Success Criteria}
+
+\begin{longtable}{p{0.5cm}p{6.5cm}p{5cm}}
+\toprule
+\thead{\#} & \thead{Criterion} & \thead{Verification Method} \\
+\midrule
+\endhead
+SC-01 & Nyquist-Shannon theorem applied to imaging pipeline & Mathematical derivation + simulation \\
+\altrow SC-02 & Long vs.\ fast exposure tradeoffs quantified (SNR, temporal resolution) & Benchmark data analysis \\
+SC-03 & Fourier / STFT decomposition architecturally mapped to Ceph chunk keys & Cross-module integration test \\
+\altrow SC-04 & All serialization formats benchmarked (ns/op, payload size) & Performance table with citations \\
+SC-05 & Transport protocol selection matrix completed (payload $\times$ latency $\times$ distance) & Matrix validated by domain expert \\
+\altrow SC-06 & IPoAC (RFC\,1149) formally positioned in protocol taxonomy & RFC citation + Bergen experiment data \\
+SC-07 & Sneakernet mesh protocol architecture specified & Protocol spec document \\
+\altrow SC-08 & Audio restoration pipeline (FFT-based) documented end-to-end & Workflow diagram + tool list \\
+SC-09 & Color calibration (ICC/DNG) workflow for hi-fi capture specified & Step-by-step protocol \\
+\altrow SC-10 & Zero trust architecture mapped to Ceph/OpenStack keyring model & Security posture document \\
+SC-11 & Offsite backup strategy (RBD + BorgBackup + S3) validated & DR test plan with RTO/RPO targets \\
+\altrow SC-12 & Data federation bridging techniques documented for heterogeneous stores & Reference architecture \\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 2: RESEARCH REFERENCE
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 — RESEARCH REFERENCE}{Findings by Module}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M14 — Temporal Imaging: Hi-Fi vs Lo-Fi Capture}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Sampling Theory and Temporal Aliasing}
+
+The Nyquist-Shannon sampling theorem states that a signal must be sampled at a rate at least twice the highest frequency component present in the signal to permit perfect reconstruction. In imaging systems, this applies in three dimensions: spatial (pixels per degree), spectral (color channels), and temporal (frames per second).
+
+\textbf{Temporal aliasing} occurs when real-world frequency content exceeds the Nyquist limit of the camera's frame rate. In a 24\,fps system, the Nyquist frequency is 12\,Hz; any event varying faster than 12\,Hz will appear at an incorrect lower frequency---the classical \emph{wagon-wheel effect} where a rapidly spinning wheel appears to rotate backward. This is not an artifact of film or digital; it is a mathematical inevitability of discrete temporal sampling.
+
+Motion picture cameras have a built-in imperfect pre-filter: the shutter. When the shutter is open for 180$^\circ$ (half the frame period at 24\,fps = 1/48\,s), the resulting motion blur acts as a sinc-shaped low-pass filter in the temporal frequency domain, attenuating content above roughly 24\,Hz. A 360$^\circ$ shutter provides a broader but still imperfect low-pass filter. The Tessive Time Filter patent used a continuously varied exposure window to shape the Modulation Transfer Function (MTF) to more closely approximate an ideal rectangular low-pass filter.
+
+\subsection{Long Exposure vs.\ Fast Frame Rate}
+
+These two strategies sit at opposite ends of the temporal frequency tradeoff:
+
+\begin{longtable}{p{3.5cm}p{4.5cm}p{4.5cm}}
+\toprule
+\thead{Parameter} & \thead{Long Exposure} & \thead{Fast Frame Rate} \\
+\midrule
+\endhead
+Temporal integration & High (accumulates photons) & Low (brief integration window) \\
+\altrow SNR & High (more photon counts) & Low (shot noise dominates) \\
+Temporal resolution & Low (motion blur) & High (freeze motion) \\
+\altrow Frequency content & Bandlimited to $f < 1/t_{exp}$ & Nyquist limit = FPS/2 \\
+Aliasing risk & Low (natural LPF) & High (insufficient pre-filter) \\
+\altrow Photon budget & Forgiving & Tight; active illumination often required \\
+Use case & Astrophotography, still life, low-light & Sports, science, machine vision \\
+\bottomrule
+\end{longtable}
+
+\subsection{Temporal Super-Resolution Beyond Nyquist}
+
+A 2024 paper from Tel Aviv University (Sensors, doi:10.3390/s24030857) demonstrated temporal super-resolution (TSR) using multi-channel active illumination synchronized to the camera. By using red, green, and blue LED channels modulated at different phases, the effective detected temporal range was extended by a factor of up to six beyond the camera's Nyquist limit. At 10\,fps (Nyquist = 5\,Hz), the TSR system detected frequencies up to 30\,Hz. The method operates by exploiting the object's spectral response to structured illumination, using the channel phase relationships to reconstruct aliased frequency content.
+
+Separately, Compressed Ultrafast Photography (CUP), reviewed in \emph{Journal of Biomedical Optics} (2024), achieves trillions of frames per second through spatiotemporal multiplexing on a single sensor exposure---trading spatial resolution for temporal density via compressed sensing reconstruction.
+
+\subsection{Field Separation and Deinterlacing}
+
+Interlaced video (NTSC, PAL) captures two fields per frame: odd-numbered scan lines in the first field, even-numbered in the second. At 30\,fps interlaced (60 fields/second), each field represents a temporal snapshot 1/60\,s apart. Field separation is the process of extracting these as independent images. Deinterlacing reconstructs progressive frames from interlaced fields, using either:
+\begin{itemize}[noitemsep]
+  \item \textbf{Bob:} Vertically interpolate each field independently (halves vertical resolution)
+  \item \textbf{Weave:} Combine fields (artifacts on motion)
+  \item \textbf{Motion-adaptive:} Select per-pixel between bob and weave based on detected motion
+  \item \textbf{Motion-compensated:} Full optical-flow estimation per field (highest quality, highest compute)
+\end{itemize}
+
+\subsection{Color Space and Fourier Decomposition}
+
+The DFT/FFT of a color image operates independently per channel. In frequency domain, low frequencies represent broad color regions (background, sky); high frequencies represent edges and fine detail. Separating frequency bands allows:
+\begin{itemize}[noitemsep]
+  \item \textbf{Spatial low-pass filtering:} Gaussian blur, JPEG compression (DCT blocks)
+  \item \textbf{Spectral repair:} Isolating a frequency band where a click or hum is visible in the spectrogram
+  \item \textbf{Moir\'{e} removal:} Notch filtering at the alias frequency
+  \item \textbf{HDR tone mapping:} Laplacian pyramid (multi-scale Fourier decomposition) applied differently per octave
+\end{itemize}
+
+\textbf{Minecraft mapping:} Block palette cardinality encodes the spatial entropy of a chunk. A high-entropy chunk (many block types) has broad frequency content; a low-entropy chunk (solid stone) is narrow-band. The palette compression ratio is the chunk's frequency budget.
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M15 — Color Fidelity: Photography, Calibration, Studio Setup}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Color Management Architecture}
+
+A color-managed workflow requires calibration at every device interface: camera sensor $\to$ RAW processor $\to$ working color space $\to$ monitor profile $\to$ output profile (print or web). The key standards are:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{ICC profiles} (International Color Consortium): Device-specific transform from device space to a Profile Connection Space (PCS, typically CIELAB or CIEXYZ). Supported by CaptureOne, Photoshop, print workflows.
+  \item \textbf{DNG Camera Profiles} (Adobe): Dual-illuminant (Illuminant A + D65) matrix-based profile embedded in DNG files; used by Lightroom, Adobe Camera RAW.
+  \item \textbf{sRGB}: Web-safe output color space; approximately 35\% of CIExy gamut.
+  \item \textbf{Adobe RGB}: ~50\% of CIExy; better for print.
+  \item \textbf{ProPhoto RGB}: ~90\% of CIExy; internal working space, never output directly.
+\end{itemize}
+
+\subsection{Camera Calibration Workflow}
+
+Standard workflow using an X-Rite ColorChecker (24-patch or Digital SG 140-patch):
+
+\begin{enumerate}[noitemsep]
+  \item Photograph target under controlled illumination (D65/studio flash preferred; avoid fluorescent/LED with unusual spectral curves)
+  \item White patch RGB target: 180--242 per channel (ideally ~235)
+  \item Export as 16-bit linear TIFF with camera metadata; no color correction applied; linear tone curve
+  \item Import into Calibrite PROFILER or X-Rite ColorChecker Camera Calibration software
+  \item Software detects 24 patches, computes 3$\times$3 matrix transform minimizing $\Delta E$ error across patches
+  \item Output: ICC profile (for CaptureOne/PhaseOne workflows) or DNG profile (for Lightroom/ACR)
+  \item Apply profile to all images captured under identical lighting; re-profile if lighting changes
+\end{enumerate}
+
+White balance and ICC calibration are independent operations. RAW white balance is a rendering decision (applied at decode time); ICC profiling corrects the camera's spectral response errors. A dual-illuminant DNG profile interpolates between two illuminant matrices based on the image's color temperature tag.
+
+\subsection{Studio Setup and Lighting}
+
+\textbf{Light quality hierarchy for color fidelity:}
+\begin{itemize}[noitemsep]
+  \item \textbf{Best:} Studio strobe/flash (daylight-balanced, ~5500K, full-spectrum, consistent)
+  \item \textbf{Good:} High-CRI ($>$95) continuous LED panels (verify spectral curve---some have narrow-band spikes)
+  \item \textbf{Acceptable:} Tungsten/halogen (low CCT but full-spectrum, consistent)
+  \item \textbf{Avoid:} Standard fluorescent (narrow-band emission), mixed sources (different CCTs per region)
+\end{itemize}
+
+\textbf{Composition considerations for calibration targets:}
+\begin{itemize}[noitemsep]
+  \item Target fills $\ge$20\% of frame; optical axis perpendicular to target plane
+  \item Uniform illumination: $<$0.5 stop falloff across target area
+  \item No specular reflections on color patches (use diffuse/matte targets)
+  \item Ambient light controlled or eliminated (color contamination from bounce)
+\end{itemize}
+
+\subsection{RAW Processing and Hi-Fi Image Editing}
+
+RAW files are not images---they are sensor data (Bayer mosaic or X-Trans array of photosite values). The RAW processing pipeline:
+
+\begin{asciibox}
+RAW sensor data (12-16 bit per photosite)
+  -> Demosaicing (interpolate RGB from Bayer pattern)
+  -> Black level subtraction
+  -> White balance (multiply R/G/B channels by illuminant-derived scalars)
+  -> Camera profile matrix (ICC or DNG)
+  -> Noise reduction (in linear light; Poisson noise model)
+  -> Tone curve (linear -> perceptual rendering)
+  -> Output color space conversion (ProPhoto -> AdobeRGB -> sRGB)
+  -> 8-bit quantization (if JPEG output) or preserve 16-bit (TIFF/DNG)
+\end{asciibox}
+
+Hi-fi preservation choices: shoot RAW, process at 16-bit, work in ProPhoto RGB, output to perceptual intent ICC profile, embed profile in output file.
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M16 — Audio Fidelity: Capture, Restoration, and Archival}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Microphone Calibration and Studio Setup}
+
+Microphone calibration involves characterizing the frequency response, self-noise floor, and polar pattern of the transducer, then compensating for deviations from flat response in the signal chain. Measurement-grade microphones (e.g., Earthworks M30, DPA 4006) are designed for flat ($\pm$0.5\,dB, 20--20,000\,Hz) response. Consumer and instrument microphones have intentional colorations that must be mapped before spectral analysis.
+
+\textbf{Recording in noisy environments---SNR strategies:}
+\begin{itemize}[noitemsep]
+  \item \textbf{Proximity effect:} Cardioid and hypercardioid mics boost bass at $<$30\,cm; useful for isolation but adds low-end coloration
+  \item \textbf{Directional rejection:} A figure-8 mic has 90$^\circ$ null; hypercardioid nulls at $\sim$125$^\circ$ off-axis
+  \item \textbf{Acoustic treatment:} Bass traps (low-frequency), broadband absorption panels (mid-high), diffusers (preserve life without flutter echo)
+  \item \textbf{Noise floor target:} Broadcast standard requires SNR $>$60\,dB; studio recordings typically $>$80\,dB
+  \item \textbf{Dynamic range and clipping:} Record at $-18$\,dBFS peak with headroom to $-6$\,dBFS max; never clip the ADC
+\end{itemize}
+
+\subsection{Signal Path, Semaphores, and Gating}
+
+In digital audio systems, signal flow involves shared resources protected by synchronization primitives:
+
+\textbf{Hardware level:}
+\begin{itemize}[noitemsep]
+  \item ADC converts analog voltage to PCM samples at 44.1, 48, 88.2, 96, 176.4, or 192\,kHz
+  \item DMA transfers samples to ring buffer in RAM (interrupt-driven or polling)
+  \item Buffer size (latency): 32--4096 samples typical; smaller = lower latency, higher CPU load
+\end{itemize}
+
+\textbf{Software level (DAW/OS):}
+\begin{itemize}[noitemsep]
+  \item \textbf{Semaphore:} Counting synchronization primitive; audio device \texttt{sem\_post()} when buffer ready; reader thread \texttt{sem\_wait()}
+  \item \textbf{Mutex lock:} Protect shared audio buffer against concurrent read/write from DSP and I/O threads
+  \item \textbf{Gate (signal processing):} Amplitude gate passes signal when level exceeds threshold; noise gate attenuates below threshold to silence; used to remove room noise between musical events
+  \item \textbf{JACK audio:} Zero-copy real-time audio server; uses POSIX shared memory and semaphores; lock-free ring buffers between client and server; priority-inherited real-time scheduling (\texttt{SCHED\_FIFO})
+\end{itemize}
+
+\subsection{Restoring Records, Tapes, and CDs}
+
+\textbf{Source-specific degradation profiles:}
+
+\begin{longtable}{p{2.5cm}p{5cm}p{4.5cm}}
+\toprule
+\thead{Medium} & \thead{Degradation Mode} & \thead{Restoration Approach} \\
+\midrule
+\endhead
+78\,rpm shellac & Surface noise, groove wear, shellac decomposition & Optical scanning (Lawrence Berkeley IRENE system); spectral denoising \\
+\altrow Vinyl LP & Clicks/pops (surface damage), crackle (static), hiss (stylus noise) & Declicker, decrackler, Wiener filter denoising \\
+Magnetic tape & Dropout (oxide flaking), print-through, tape hiss, wow/flutter & Baking (sticky shed syndrome), pitch correction, spectral repair \\
+\altrow Cassette & Azimuth misalignment, dropouts, hiss & Azimuth adjustment at playback, noise reduction \\
+CD/DAT & Laser rot, scratched pits, buffer underruns & C1/C2 error rate analysis; re-rip with error correction; interpolation for uncorrectable errors \\
+\altrow Optical film & Shrinkage, perforation damage, color dye fading & Wet gate scanning; per-channel color re-registration; AI restoration (DeOldify, Topaz) \\
+\bottomrule
+\end{longtable}
+
+\textbf{Spectral restoration pipeline (FFT-based):}
+
+\begin{asciibox}
+1. Digitize at source format's Nyquist minimum:
+   78 rpm: 96 kHz/24-bit (captures up to 48 kHz; stylus noise ~8-15 kHz)
+   Cassette: 44.1 kHz/16-bit minimum; 48 kHz/24-bit preferred
+
+2. Noise print capture: sample noise-only section (leader tape, runout)
+   FFT size: 2048-8192 (larger = finer frequency resolution, more latency)
+   Noise profile: spectral average of noise-only frames -> threshold curve
+
+3. Spectral subtraction (Wiener filter):
+   H(f) = max(0, 1 - lambda * |N(f)|^2 / |X(f)|^2)
+   lambda = over-subtraction factor (1.0-3.0; higher = more noise, more artifacts)
+
+4. Click/pop removal:
+   Detect: amplitude transient above 3-sigma threshold in high-pass filtered signal
+   Repair: cubic interpolation or spectral synthesis from neighboring frames
+
+5. Declicker (vinyl):
+   Algorithm: polynomial prediction, compare predicted vs actual; flag outliers
+   Threshold: typically 2-5 ms duration, >6 dB above surrounding level
+
+6. Wow/flutter correction (tape):
+   Detect pitch deviation via reference tone or auto-correlation of spectral centroid
+   Apply dynamic time warping to pitch-correct in segments
+
+7. Output: 24-bit BWAV master + normalized 16-bit delivery + metadata (BEXT chunk)
+\end{asciibox}
+
+Modern tools: iZotope RX (industry standard, machine learning denoising from RX\,6+), Acon Digital Restoration Suite (budget alternative), Sonic Solutions NoNoise (historical; 1987; spectral subtraction pioneer). The Library of Congress IRENE (Image, Reconstruct, Erase Noise, Etc.) system uses 2D optical profilometry to ``play'' a record without contact.
+
+\subsection{Restoring Lost Content: Spectral Recovery}
+
+iZotope RX\,8 introduced Spectral Recovery, which uses ML to reconstruct frequency content above 4\,kHz in bandwidth-limited recordings (telephone, early radio transcriptions). This inverts the traditional challenge: instead of removing noise, it synthesizes plausible signal content in frequency bands that were never captured. The approach trains on matched pairs of full-bandwidth and bandwidth-limited recordings, learning the conditional distribution of high-frequency content given low-frequency input.
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M17 — Serialization, Error Correction, and HPC Architecture}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Serialization Formats: Performance Taxonomy}
+
+\begin{longtable}{p{2.8cm}p{2cm}p{2.5cm}p{3.5cm}p{2cm}}
+\toprule
+\thead{Format} & \thead{Type} & \thead{Deserialize} & \thead{Key Property} & \thead{Size} \\
+\midrule
+\endhead
+JSON & Text & $\sim$7,045\,ns/op & Human-readable; universal support & Large \\
+\altrow Protocol Buffers & Binary & $\sim$1,827\,ns/op & Schema-defined; gRPC native; Google & Compact \\
+FlatBuffers & Binary & $\sim$81\,ns/op & Zero-copy; direct buffer access; no parse & Larger (alignment) \\
+\altrow MessagePack & Binary & $\sim$200\,ns/op & Schema-free binary JSON; easiest migration & Compact \\
+Cap'n Proto & Binary & Near-zero & Zero-copy; complex encoding & Variable \\
+\altrow Apache Avro & Binary & Moderate & Schema in message; Hadoop ecosystem & Compact \\
+CBOR & Binary & Moderate & IETF standard; IoT/COSE signing & Small \\
+\bottomrule
+\end{longtable}
+
+FlatBuffers achieves near-zero deserialization through a builder pattern that writes data ``backwards'' into a byte buffer, storing offsets rather than pointers. The consumer reads directly from the memory-mapped buffer without any allocation or copy. On Apple M1 Pro, FlatBuffers achieves 12.3 million operations/second at 3.9\,GiB/s throughput in deserialization benchmarks.
+
+\textbf{Minecraft mapping:} NBT (Named Binary Tag) is an ad-hoc binary format with 12 tag types. Its deserialization overhead is significant at the scale of millions of chunks. A FlatBuffers or MessagePack migration of the chunk serialization layer would directly accelerate the RAG pipeline's chunk read throughput.
+
+\subsection{Error Correction in High-Speed Systems}
+
+\textbf{Error types and correction strategies:}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Bit errors (random):} Hamming codes detect and correct 1-bit errors per codeword (7,4 Hamming: 4 data + 3 parity bits; capable of correcting 1-bit, detecting 2-bit errors)
+  \item \textbf{Burst errors (consecutive bits):} Reed-Solomon codes (used in CDs, DVDs, QR codes, DSL) correct bursts up to $t$ symbol errors in a codeword of $n = 2^m - 1$ symbols; standard CD RS: $(32, 28)$ over GF$(2^8)$
+  \item \textbf{LDPC (Low-Density Parity Check):} Near-Shannon-limit performance; used in 10GbE, Wi-Fi 6, DVB-S2; iterative belief-propagation decoding
+  \item \textbf{Turbo codes:} Concatenated convolutional codes with iterative decoding; used in 3G/4G mobile; similar capacity to LDPC
+  \item \textbf{ECC RAM:} SECDED (Single Error Correct, Double Error Detect) on DDR memory; typically 72-bit bus for 64-bit data (8 parity bits)
+\end{itemize}
+
+\textbf{CRC (Cyclic Redundancy Check):} Polynomial division over GF(2); CRC-32 (Ethernet, ZIP); CRC-64 (storage arrays); detects all burst errors $\le$ 32/64 bits and with high probability ($1-2^{-32}$) all longer bursts. Not an error-correcting code---detection only.
+
+\subsection{HPC Architecture and InfiniBand}
+
+InfiniBand (IB) originated in 1999 from the merger of Future I/O (Compaq/IBM/HP) and Next Generation I/O (Intel/Sun/Dell) specifications, formalized by the InfiniBand Trade Association (IBTA). It achieved dominance in HPC by 2014; NVIDIA acquired Mellanox (the last independent IB vendor) in 2019.
+
+\textbf{Architecture distinguishing features:}
+\begin{itemize}[noitemsep]
+  \item \textbf{RDMA (Remote Direct Memory Access):} A node reads/writes another's memory without involving the remote OS; eliminates kernel crossings and memory copies; critical for MPI collective operations
+  \item \textbf{Queue Pairs (QP):} IB applications communicate through QPs---send queue + receive queue; the Verbs API provides direct access to NIC (HCA: Host Channel Adapter) without OS involvement
+  \item \textbf{In-Network Computing:} NVIDIA SHARP (Scalable Hierarchical Aggregation and Reduction Protocol) performs MPI allreduce operations \emph{inside the switch ASIC} rather than on CPU nodes; dramatically reduces reduction latency for large model training
+  \item \textbf{Fabric topologies:} Fat Tree, Hypercube, Dragonfly+, multi-dimensional Torus; all supported by NVIDIA Quantum switches; Fat Tree most common in HPC for non-blocking bisection bandwidth
+\end{itemize}
+
+\textbf{Bandwidth evolution:}
+SDR (10\,Gbps, 2001) $\to$ DDR (20\,Gbps) $\to$ QDR (40\,Gbps) $\to$ FDR (56\,Gbps, 2011) $\to$ EDR (100\,Gbps) $\to$ HDR (200\,Gbps) $\to$ NDR (400\,Gbps, 2022) $\to$ XDR (800\,Gbps, planned)
+
+HIPPI (High-Performance Parallel Interface, ANSI X3.183, 1990): 800\,Mbps simplex copper; used in early supercomputer interconnects (Cray, SGI); point-to-point, not switched; 32-bit or 64-bit data paths; largely replaced by GbE and Myrinet by 2000. Historical significance: first high-speed fabric to use credit-based flow control, an idea that influenced IB design.
+
+\subsection{Framing and Signal Passing Primitives}
+
+\textbf{Framing} (also: \emph{synchronization}) is the process of finding packet/frame boundaries in a continuous bitstream:
+\begin{itemize}[noitemsep]
+  \item \textbf{Async serial (UART):} Start bit (low), 8 data bits, optional parity, stop bit(s). No shared clock; receiver re-derives timing from start-bit edge. Used in modems, RS-232.
+  \item \textbf{HDLC/PPP:} Flag byte \texttt{0x7E} delimits frames; byte stuffing escapes in-data occurrences of \texttt{0x7E}
+  \item \textbf{Ethernet:} 8-byte preamble (10101010...) + SFD (10101011); 6-byte dest, 6-byte src, 2-byte type/length; 4-byte CRC-32 trailer
+  \item \textbf{Cell-based (ATM):} Fixed 53-byte cells; 5-byte header + 48-byte payload; head error control HEC on header
+\end{itemize}
+
+\textbf{Locking mechanisms} at the OS/DAW level:
+\begin{itemize}[noitemsep]
+  \item \textbf{Mutex:} Binary lock; at most one thread enters critical section; \texttt{pthread\_mutex\_lock}/\texttt{unlock}
+  \item \textbf{Semaphore:} Integer counter; signal/wait; decouples producers from consumers in audio ring buffers
+  \item \textbf{RW lock:} Multiple simultaneous readers OR one writer; ideal for chunk cache (many RAG readers, occasional writer)
+  \item \textbf{Spinlock:} Busy-wait; appropriate only in real-time ISRs where sleeping is forbidden
+  \item \textbf{Lock-free ring buffer:} Atomic compare-and-swap on head/tail pointers; used in JACK, LKML audio subsystem; eliminates priority inversion
+\end{itemize}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M18 — Transport Layer Taxonomy: From Modems to IPoAC}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Analog Modems and the POTS Stack}
+
+Acoustic couplers (1960s) physically placed a telephone handset against rubber cups and transmitted data as audio tones into the telephone network's voice-grade channel (300--3400\,Hz passband). The Bell 103 modem (1962) used FSK at 300\,baud. Subsequent standards progressed: Bell 212A (1200\,bps), V.22bis (2400\,bps), V.32 (9600\,bps with QAM and echo cancellation), V.34 (28.8--33.6\,kbps), V.90/V.92 (56\,kbps downstream / 48\,kbps upstream using digital-to-analog conversion only on the downstream path, exploiting digital backbone infrastructure).
+
+V.90 achieved 56\,kbps by recognizing that the central office already had a digital connection---the modem bypassed analog-to-digital conversion on the downstream path, limited to 56\,kbps by the 8-bit $\mu$-law PCM codec of the PSTN (8000 samples/sec $\times$ 8 bits = 64\,kbps minus line overhead).
+
+\textbf{Acoustic modems} (revival): Software-defined acoustic modems encode IP packets in audio frequency tones for transmission over voice channels, speakerphones, or even air-gapped data transfer (AirHopper, GZIP attacks). Modern implementations use OFDM across the 0--8\,kHz acoustic band, achieving 1--10\,kbps over voice-grade channels.
+
+\subsection{DSL}
+
+DSL (Digital Subscriber Line) uses the copper local loop above the voice-grade band. ADSL splits the 1.1\,MHz bandwidth into 256 DMT (Discrete MultiTone) sub-carriers of 4.3\,kHz each; adaptive per-carrier bit loading (2--15 bits/carrier) based on measured SNR gives total downstream rates of 1--8\,Mbps (ADSL), 50\,Mbps (VDSL2), up to 500\,Mbps (G.fast on very short loops). The modem performs OFDM modulation/demodulation using an FFT of size 512 or 1024.
+
+\subsection{Cable Modems (DOCSIS)}
+
+DOCSIS (Data Over Cable Service Interface Specification) uses the cable TV plant's 5--1000\,MHz coaxial spectrum. DOCSIS\,3.1 (2013) uses OFDM with 4K-point FFT, subcarrier spacing of 25 or 50\,kHz, QAM-4096 at best SNR, achieving 10\,Gbps downstream / 1\,Gbps upstream. DOCSIS\,3.1 is a shared-medium protocol: users in a neighborhood share downstream spectrum; TDMA upstream scheduling manages contention.
+
+\subsection{Fiber Optic (GPON/XGS-PON)}
+
+GPON (Gigabit-capable Passive Optical Network, ITU-T G.984) achieves 2.5\,Gbps downstream / 1.25\,Gbps upstream on a single-mode fiber with WDM. XGS-PON (G.9807) offers 10\,Gbps symmetric. A passive splitter (1:32 or 1:64 ratio) shares the fiber among subscribers without active electronics in the distribution plant. Long-haul fiber uses DWDM (Dense Wavelength Division Multiplexing): 80+ channels on a single fiber, each at a different wavelength (ITU-T 100\,GHz grid), 100--400\,Gbps per channel, aggregate capacity of tens of Tbps per fiber pair.
+
+\subsection{TCP/IP Over Avian Carrier (RFC\,1149)}
+
+RFC\,1149 (David Waitzman, April 1, 1990) formally specified IP datagram encapsulation on avian carriers. Frame format: IP datagram printed in hexadecimal on a small scroll of paper, wrapped around one leg of a homing pigeon, secured with duct tape. MTU: 256\,milligrams (increases with carrier age). Multiple QoS classes defined in RFC\,2549 (1999): Concorde, First, Business, Coach. IPv6 adaptation in RFC\,6214 (2011).
+
+The Bergen Linux User Group (April 28, 2001) performed the only documented operational implementation: 9 packets over $\sim$5\,km, 4 confirmed replies, 55\% packet loss, RTT 3,211--6,389\,seconds. Security considerations include stool pigeons (privacy risk) and man-in-the-middle attacks by hawks (RFC\,2549: ``unintentional encapsulation in hawks has been known to occur, with decapsulation being messy'').
+
+\textbf{Analytical significance:} IPoAC demonstrates that the TCP/IP layered model is genuinely carrier-agnostic. The physical layer is normatively abstract. A pigeon carrying a USB drive achieves $\sim$90\,GB/hour effective throughput over a 30-mile route---outperforming ADSL for cold bulk transfer. This is not a joke insight; it drove Amazon Snowball, Google Transfer Appliance, and AWS Direct Connect product decisions.
+
+\subsection{Sneakernet and Sneakernet Mesh}
+
+\textbf{Sneakernet} (informal): Physical transport of storage media by a person wearing sneakers. Effective bandwidth calculation:
+$$B = \frac{C \cdot D}{T} \quad\text{where } C = \text{capacity (TB)},\; D = \text{drives per trip},\; T = \text{transit time (hours)}$$
+
+A FedEx 767 carrying 10,000 USB drives of 2\,TB each over 2,000\,km (4-hour flight):
+$$B = \frac{2 \times 10^{13} \text{ bytes} \times 10000}{4 \text{ hr}} \approx 13.8 \text{ Pbps}$$
+
+This exceeds the capacity of any electronic interconnect at continental scale by $10^4\times$.
+
+\textbf{Sneakernet mesh protocol (speculative/emerging):}
+
+A structured sneakernet mesh treats physical media transport as a delay-tolerant network (DTN) using the Bundle Protocol (RFC\,5050, IETF dtn WG). Nodes carry \emph{bundles} of data along physical routes, store-and-forward at each waypoint. Applications:
+\begin{itemize}[noitemsep]
+  \item Remote research stations with periodic aircraft contact
+  \item Disaster recovery when all electronic infrastructure is down
+  \item Air-gapped network cross-domain transfers (government/military)
+  \item Distributed world-server backups transported between data centers by courier
+\end{itemize}
+
+A sneakernet mesh would specify: bundle format, custody transfer (signed acknowledgment at each hop), forward error correction (Reed-Solomon on the drive image), and routing topology (static routes with timestamps). The Interplanetary Internet (IPN) architecture (Cerf, Burleigh et al.) uses the same DTN stack for spacecraft communications with contact-plan-aware routing.
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M19 — Backup, Archival, and Data Federation}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Backup Strategies}
+
+\begin{longtable}{p{3cm}p{4cm}p{3.5cm}p{2cm}}
+\toprule
+\thead{Strategy} & \thead{Description} & \thead{Trade-off} & \thead{RPO} \\
+\midrule
+\endhead
+Full & Complete copy every cycle & Simple restore; high storage & Cycle interval \\
+\altrow Incremental & Only changes since last backup & Low storage, slow restore (chain replay) & Cycle interval \\
+Differential & Changes since last full & Medium storage, faster restore & Cycle interval \\
+\altrow CDP (Continuous Data Protection) & Journal every write, replay-to-point & Near-zero RPO; high bandwidth overhead & Near-zero \\
+RBD Snapshot (Ceph) & CoW snapshot in-pool; instantaneous & No extra space until diverge & Near-zero \\
+\altrow RBD Mirror (journal) & Real-time cross-cluster replication & High bandwidth; $<$1s RPO & $<$60s \\
+BorgBackup & Block-level dedup+compress; cold & Excellent storage efficiency; no CDP & Hourly/daily \\
+\bottomrule
+\end{longtable}
+
+\subsection{Offsite Data Security}
+
+The 3-2-1 rule: \textbf{3} copies of data, on \textbf{2} different media types, with \textbf{1} copy offsite. Extended 3-2-1-1-0: add 1 offline/air-gapped copy and verify 0 errors on all copies.
+
+\textbf{Encryption at rest:} LUKS2 (Linux Unified Key Setup) on the block device layer; AES-256-XTS; managed by OpenStack Barbican for key lifecycle. Ceph RBD encryption added in Pacific (v16).
+
+\textbf{Encryption in transit:} TLS 1.3 for S3/RGW HTTPS; Ceph msgr2 protocol for OSD-to-OSD traffic. Never transit unencrypted data on shared infrastructure.
+
+\textbf{Geographic distribution:} Active-active (primary + warm standby with journal-mode RBD mirroring); active-passive (primary + cold site with snapshot export); cloud-burst (S3 RGW as tertiary, cost-optimized cold tier).
+
+\subsection{Data Federation and Bridging}
+
+Data federation provides a unified query interface over heterogeneous, distributed data stores without physically moving data. In a Minecraft sovereign world context:
+
+\begin{asciibox}
+Federation layer (e.g., Apache Arrow Flight, Trino, Apache Drill)
+  |-- World A Ceph cluster (RADOS objects, S3-compatible RGW)
+  |-- World B PostgreSQL (player statistics, economy)
+  |-- World C HDFS (map-reduce analytics on block frequency)
+  |-- World D Elasticsearch (full-text search on sign/book text)
+  |-- World E OpenTSDB / InfluxDB (time-series server metrics)
+\end{asciibox}
+
+Each federated source exposes a query adapter. The federation engine translates SQL or GraphQL to native queries, collects results, joins and filters at the federation layer. Apache Arrow provides a columnar in-memory format that all adapters serialize to, eliminating per-hop serialization overhead (zero-copy inter-adapter data transfer).
+
+\textbf{Cross-domain bridging in zero-trust environments:}
+Data cross-domain solutions (CDS) transfer data between security domains (e.g., classified/unclassified, tenant A/tenant B) using:
+\begin{itemize}[noitemsep]
+  \item \textbf{Unidirectional security gateway (data diode):} Hardware-enforced one-way data flow; optical; no return path possible
+  \item \textbf{Content-based filtering:} Pattern matching, DLP (Data Loss Prevention) on content before cross-domain transfer
+  \item \textbf{Break-and-inspect proxy:} TLS termination, content inspection, re-encryption; transparent to clients
+  \item \textbf{Format-based sanitization:} Convert to neutral format (PDF/A, CSV) removing executable content before crossing
+\end{itemize}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{M20 — Zero Trust, Proxy, and Firewall Architecture}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Zero Trust Principles (NIST SP 800-207)}
+
+Zero trust replaces ``trust but verify'' with ``never trust, always verify.'' NIST SP 800-207 (2020) defines the logical architecture:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Policy Decision Point (PDP):} Evaluates access requests against policy; considers identity, device posture, network location, resource classification, behavioral signals
+  \item \textbf{Policy Enforcement Point (PEP):} Intercepts every access request and enforces the PDP's decision; implemented as proxy, gateway, or endpoint agent
+  \item \textbf{Continuous authentication:} Session re-evaluation at every access, not just login; Continuous Access Evaluation Profile (CAEP) propagates security events to resource servers in real time
+\end{itemize}
+
+\textbf{Seven pillars (DoD ZT Reference Architecture v2.0):} User, Device, Application/Workload, Data, Network/Environment, Automation/Orchestration, Visibility/Analytics.
+
+By 2026, Gartner projects 10\% of large enterprises will have a mature, measurable zero trust program (up from $<$1\% in 2022). The IBM 2024 Cost of a Data Breach report found average breach cost of \$4.88M, creating strong economic incentive.
+
+\subsection{Proxy Architectures}
+
+\begin{longtable}{p{3.5cm}p{5cm}p{3.5cm}}
+\toprule
+\thead{Proxy Type} & \thead{Function} & \thead{Use Case} \\
+\midrule
+\endhead
+Forward proxy & Client-side; hides client identity; caches responses & Corporate web filtering, anonymization \\
+\altrow Reverse proxy & Server-side; load balancing, TLS termination, caching & nginx, HAProxy in front of game servers \\
+Transparent proxy & Intercepts traffic without client configuration & ISP traffic shaping, captive portals \\
+\altrow Identity-aware proxy & Enforces authentication + device posture per request & BeyondCorp, Cloudflare Access, Entra Private Access \\
+CASB (Cloud Access Security Broker) & Discovers, monitors, controls SaaS usage; DLP & Shadow IT governance \\
+\altrow Break-and-inspect & TLS termination + content inspection + re-encrypt & WAF, DLP, anti-malware inline scanning \\
+\bottomrule
+\end{longtable}
+
+\subsection{Firewall Types and Zones}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Packet filter (stateless):} Match on src/dst IP, port, protocol; no connection state; fast but blind to session context. \texttt{iptables} in \texttt{FORWARD} chain.
+  \item \textbf{Stateful inspection (SPI):} Tracks connection table; only allows return traffic for established flows. \texttt{iptables conntrack}, \texttt{nftables}. Linux default for server firewalls.
+  \item \textbf{Application-layer firewall (WAF):} Deep packet inspection at L7; understands HTTP, HTTPS (after TLS termination), SQL injection, XSS patterns. ModSecurity + OWASP Core Rule Set.
+  \item \textbf{NGFW (Next-Generation Firewall):} Combines SPI + application awareness + IPS + user identity + SSL inspection in one appliance. Palo Alto, Fortinet, Check Point.
+  \item \textbf{SASE (Secure Access Service Edge):} Cloud-native convergence of SD-WAN + SWG + CASB + FWaaS + ZTNA; enforces policy at the network edge regardless of user location.
+\end{enumerate}
+
+\textbf{Network segmentation for sysadmins (Ceph/OpenStack context):}
+\begin{asciibox}
+Zone architecture (4-zone model):
+  [Internet] <-> [DMZ: nginx reverse proxy, RGW S3 endpoint]
+  [DMZ] <-> [Application: Velocity proxy, Minecraft servers, MultiPaper-Master]
+  [Application] <-> [Storage: Ceph OSD/MON/MGR nodes, PostgreSQL]
+  [Storage] <-> [Management: IPMI/iDRAC, Ceph dashboard, OpenStack Horizon]
+
+Traffic rules:
+  Internet -> DMZ: TCP 443 (HTTPS/S3), TCP 25565 (Minecraft)
+  DMZ -> App: TCP 8080 (proxy protocol), TCP 4803 (Velocity)
+  App -> Storage: TCP 6789 (Ceph MON), TCP 6800-7300 (OSD)
+  ALL -> Management: deny (management-only VLAN, out-of-band access only)
+  Storage -> Storage: msgr2 (TCP 3300), encrypted
+\end{asciibox}
+
+\subsection{Mapping Zero Trust to Ceph/OpenStack}
+
+The existing v2 sovereign world architecture already implements many zero trust primitives:
+\begin{itemize}[noitemsep]
+  \item Keystone project/tenant = identity domain boundary
+  \item CephX keyrings with namespace caps = least-privilege data access
+  \item RBD encryption (LUKS) = data-at-rest trust boundary
+  \item msgr2 = data-in-transit trust boundary
+  \item OpenStack security groups = microsegmentation (PEP at VM NIC level)
+\end{itemize}
+
+Gap: continuous session validation (CAEP equivalent) for Minecraft player sessions against Keystone token expiry; suggest JWT short-lived tokens (15-minute expiry) with Velocity plugin refresh.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 3: MISSION PACKAGE
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 — MISSION PACKAGE}{Execution Specification}
+
+\section{Fleet Activation Profile}
+
+\textbf{Profile:} Fleet (7 new modules, M14--M20 + M21 synthesis)\\
+\textbf{Crew size:} 20 roles (includes v1/v2 legacy crew for cross-module integration)\\
+\textbf{Parallel tracks:} 4 simultaneous research tracks in Wave 1\\
+\textbf{Total estimated token budget:} 242,000 tokens\\
+\textbf{Model split:} Opus 45\% / Sonnet 50\% / Haiku 5\%
+
+\subsection{Crew Manifest}
+
+\begin{longtable}{p{1.8cm}p{3.5cm}p{5cm}p{2.2cm}}
+\toprule
+\thead{ID} & \thead{Role} & \thead{Responsibility} & \thead{Model} \\
+\midrule
+\endhead
+CAPCOM & Mission Controller & Wave coordination, HITL gate decisions & Opus \\
+\altrow PHYS-1 & Imaging Physicist & M14: sampling theory, aliasing, CUP & Sonnet \\
+PHYS-2 & Signal Analyst & M14: Fourier, STFT, field separation & Sonnet \\
+\altrow COLOR-1 & Color Scientist & M15: ICC, DNG, color space math & Sonnet \\
+COLOR-2 & Studio Technician & M15: lighting setup, studio practices & Sonnet \\
+\altrow AUDIO-1 & Audio Engineer & M16: microphone calibration, DAW, gating & Opus \\
+AUDIO-2 & Archivist & M16: analog media restoration, IRENE & Sonnet \\
+\altrow SERIAL-1 & Systems Engineer & M17: serialization, Protobuf, FlatBuffers & Sonnet \\
+HPC-1 & HPC Architect & M17: InfiniBand, RDMA, HIPPI, error codes & Opus \\
+\altrow NET-1 & Network Engineer & M18: modems, DSL, DOCSIS, fiber, IPoAC & Sonnet \\
+NET-2 & Protocol Historian & M18: RFC 1149, sneakernet, DTN bundle protocol & Sonnet \\
+\altrow STOR-1 & Backup Engineer & M19: Ceph RBD, BorgBackup, 3-2-1-1-0 & Sonnet \\
+FED-1 & Federation Architect & M19: Arrow Flight, Trino, cross-domain CDS & Opus \\
+\altrow SEC-1 & Zero Trust Architect & M20: NIST SP 800-207, ZT pillars, CAEP & Opus \\
+SEC-2 & Sysadmin & M20: iptables, nftables, zone architecture & Sonnet \\
+\altrow SYNTH-1 & Synthesis Lead & M21: cross-module integration, through-line & Opus \\
+SYNTH-2 & Technical Writer & Document assembly, citation verification & Sonnet \\
+\altrow QA-1 & Test Warden & SC gates, BLOCK test enforcement & Opus \\
+HAIKU-1 & Schema Builder & Shared schemas, templates & Haiku \\
+\altrow HAIKU-2 & Scaffolder & Table of contents, index structures & Haiku \\
+\bottomrule
+\end{longtable}
+
+\section{Wave Execution Plan}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential, 2 agents, Haiku)
+  HAIKU-1: emit shared schemas (chunk-key format, transport matrix, fidelity taxonomy)
+  HAIKU-2: emit document skeleton (section headers, citation index template)
+  Duration: 1 pass; ~4,000 tokens
+
+WAVE 1: Parallel Research (4 tracks, Sonnet+Opus)
+  Track A (Imaging): PHYS-1 + PHYS-2 + COLOR-1 + COLOR-2
+    -> M14 (aliasing, sampling, CUP, temporal SR)
+    -> M15 (ICC/DNG, studio, RAW pipeline)
+    -> Cross-link: color-as-frequency-domain mapping
+
+  Track B (Audio): AUDIO-1 + AUDIO-2
+    -> M16 (microphone calibration, semaphores, gating)
+    -> M16 (analog restoration, FFT pipeline, IRENE)
+    -> Cross-link: STFT from M14 applied to audio
+
+  Track C (Compute): SERIAL-1 + HPC-1
+    -> M17 (serialization benchmarks, NBT migration path)
+    -> M17 (InfiniBand, HIPPI, RDMA, error correction taxonomy)
+    -> Cross-link: FlatBuffers -> Ceph RADOS object key schema
+
+  Track D (Network+Security): NET-1 + NET-2 + STOR-1 + FED-1 + SEC-1 + SEC-2
+    -> M18 (acoustic/POTS/DSL/DOCSIS/fiber/IPoAC/sneakernet)
+    -> M19 (backup strategies, federation, cross-domain bridging)
+    -> M20 (zero trust, proxy types, firewall zones, Ceph mapping)
+    -> Cross-link: zero trust applied to sneakernet custody chain
+
+  Duration: 2-3 passes; ~140,000 tokens
+
+HITL GATE: Post-Wave 1
+  CAPCOM presents module summaries to Maple
+  Maple validates: (1) fidelity taxonomy correct, (2) transport matrix complete,
+    (3) zero trust mapping to Ceph architecture reviewed
+  Maple approves or redirects before Wave 2 begins
+
+WAVE 2: Synthesis (Sequential, Opus)
+  SYNTH-1: M21 cross-module synthesis
+    -> Frequency-domain unification (imaging + audio + transport as one fidelity model)
+    -> Transport matrix: bandwidth-latency Pareto frontier with all layers plotted
+    -> Minecraft/Ceph fidelity isomorphism extended to new modules
+    -> Sneakernet mesh protocol architecture + DTN bundle spec outline
+  Duration: 2 passes; ~60,000 tokens
+
+WAVE 3: Publication + Verification (Sequential, Sonnet+QA)
+  SYNTH-2: document assembly, bibliography, citation check
+  QA-1: SC gate enforcement, test matrix completion
+  Duration: 1 pass; ~18,000 tokens
+\end{asciibox}
+
+\section{Token Budget}
+
+\begin{longtable}{p{3cm}p{3cm}p{2.5cm}p{2.5cm}p{3cm}}
+\toprule
+\thead{Wave} & \thead{Modules} & \thead{Opus} & \thead{Sonnet} & \thead{Haiku} \\
+\midrule
+\endhead
+Wave 0 & Schema/scaffold & 0 & 0 & 4,000 \\
+\altrow Wave 1A & M14, M15 & 20,000 & 35,000 & 0 \\
+Wave 1B & M16 & 15,000 & 18,000 & 0 \\
+\altrow Wave 1C & M17 & 15,000 & 16,000 & 0 \\
+Wave 1D & M18, M19, M20 & 20,000 & 38,000 & 0 \\
+\altrow Wave 2 & M21 synthesis & 60,000 & 0 & 0 \\
+Wave 3 & Publication, QA & 0 & 18,000 & 0 \\
+\midrule
+\textbf{TOTAL} & & \textbf{130,000} & \textbf{125,000} & \textbf{4,000} \\
+\altrow \textbf{Pct} & & \textbf{53.7\%} & \textbf{51.6\%} & \textbf{1.7\%} \\
+\bottomrule
+\end{longtable}
+
+\section{Test Plan}
+
+\subsection{Safety-Critical Tests (MANDATORY PASS / BLOCK)}
+
+\begin{longtable}{p{2cm}p{5cm}p{4.5cm}p{1cm}}
+\toprule
+\thead{ID} & \thead{Test} & \thead{Pass Criteria} & \thead{Maps} \\
+\midrule
+\endhead
+SC-SIG & Signal chain fidelity (no data corruption in serialize/deserialize roundtrip) & Zero bit errors on 10,000 roundtrip passes & SC-04 \\
+\altrow SC-CRYPT & Encryption verified on all inter-zone data paths & TLS 1.3 verified on all paths; no unencrypted paths & SC-10 \\
+SC-KEY & CephX least-privilege verified & Cross-world key cannot access other world namespace & SC-10 \\
+\altrow SC-BACKUP & Backup restore validated & Full world restore tested, data integrity checksum verified & SC-11 \\
+SC-DTN & Sneakernet custody chain verified & Bundle receipt signed at each hop; no unsigned transfer & SC-07 \\
+\bottomrule
+\end{longtable}
+
+\subsection{Core Tests}
+
+\begin{longtable}{p{2cm}p{6cm}p{4cm}}
+\toprule
+\thead{ID} & \thead{Test} & \thead{Maps to SC} \\
+\midrule
+\endhead
+T-01 & Nyquist theorem applied: f\_signal < f\_sample/2 verified in pipeline & SC-01 \\
+\altrow T-02 & Long exposure MTF vs.\ fast exposure MTF plotted & SC-02 \\
+T-03 & TSR (temporal super-resolution) factor-of-6 gain reproduced from literature & SC-01, SC-02 \\
+\altrow T-04 & FFT chunk key isomorphism demonstrated with sample chunk data & SC-03 \\
+T-05 & FlatBuffers vs.\ JSON benchmark run (81\,ns vs.\ 7,045\,ns validated) & SC-04 \\
+\altrow T-06 & Reed-Solomon error correction over simulated burst error & SC-04 \\
+T-07 & Transport matrix completed: 12 carriers $\times$ 5 metrics & SC-05 \\
+\altrow T-08 & IPoAC Bergen experiment data: RTT 3,211--6,389\,s, 55\% loss confirmed & SC-06 \\
+T-09 & Sneakernet effective bandwidth calculation: FedEx 767 scenario & SC-05, SC-06 \\
+\altrow T-10 & STFT audio restoration FFT pipeline documented with tool references & SC-08 \\
+T-11 & ICC profile workflow: 7-step protocol validated against Calibrite docs & SC-09 \\
+\altrow T-12 & Zero trust CephX mapping: 5 ZT primitives identified in existing stack & SC-10 \\
+T-13 & RBD mirror RPO target: $<$60\,s with journal mode validated & SC-11 \\
+\altrow T-14 & Federation query: 5-source heterogeneous query plan demonstrated & SC-12 \\
+T-15 & Firewall zone diagram: 4-zone model with port table verified & SC-10 \\
+\bottomrule
+\end{longtable}
+
+\subsection{Integration Tests}
+
+\begin{longtable}{p{2cm}p{9cm}}
+\toprule
+\thead{ID} & \thead{Integration Scenario} \\
+\midrule
+\endhead
+I-01 & Imaging (M14) FFT frequency bins map to Ceph chunk key Morton code (M9) \\
+\altrow I-02 & Audio restoration STFT (M16) uses same FFT size as Ceph compression hint \\
+I-03 & FlatBuffers schema (M17) wraps NBT chunk data for RAG pipeline retrieval \\
+\altrow I-04 & Sneakernet transport (M18) feeds offline world backup via BorgBackup (M19) \\
+I-05 & Zero trust CephX least-privilege (M20) governs all federation query adapters (M19) \\
+\altrow I-06 & Color calibration ICC workflow (M15) applied to in-game screenshot analysis system \\
+I-07 & InfiniBand RDMA (M17) used as Ceph OSD interconnect; measured vs.\ Ethernet baseline \\
+\altrow I-08 & Acoustic modem emergency fallback (M18) triggers DTN sneakernet bundle protocol (M18) \\
+\bottomrule
+\end{longtable}
+
+\subsection{Edge Cases}
+
+\begin{longtable}{p{2cm}p{9cm}}
+\toprule
+\thead{ID} & \thead{Edge Case} \\
+\midrule
+\endhead
+E-01 & What happens when sampling rate exactly equals signal frequency (phase ambiguity)? \\
+\altrow E-02 & FlatBuffers schema migration: adding field breaks backward compatibility in cached chunks \\
+E-03 & IPoAC: hawk intercepts carrier; what is the data recovery procedure? \\
+\altrow E-04 & Sneakernet mesh: courier loses drive; is DTN custody receipt chain sufficient for forensics? \\
+E-05 & Audio restoration ML spectral recovery invents content not in original; how is this flagged? \\
+\altrow E-06 & Zero trust session expiry during an active Minecraft game session (player mid-fight); graceful degradation path? \\
+E-07 & DOCSIS shared medium congestion collapses effective bandwidth below ADSL; failover trigger? \\
+\altrow E-08 & CUP (compressed ultrafast photography) frame aliasing ratio 79\%: is reconstruction valid? \\
+\bottomrule
+\end{longtable}
+
+\section{Dependency Graph}
+
+\begin{asciibox}
+M14 (Imaging/Sampling) ---+---> M21 (Synthesis)
+                          |
+M15 (Color Fidelity) -----+
+                          |
+M16 (Audio Fidelity) -----+---> M21
+                          |
+M17 (Serialization/HPC) --+---> M21
+         |                |
+         v                |
+M18 (Transport) ----------+---> M21
+         |                |
+         v                |
+M19 (Backup/Federation) --+---> M21
+         |
+         v
+M20 (ZeroTrust/Firewall) -+---> M21
+
+Cross-module shared dependencies:
+  FFT/STFT theory: M14 -> M15 (spatial freq), M16 (spectral repair), M17 (OFDM codec)
+  Ceph chunk key schema: M14 (Morton freq), M17 (FlatBuffers format), M19 (backup unit)
+  Error correction: M17 (RS code theory) -> M18 (DSL/DOCSIS FEC) -> M19 (drive integrity)
+  Zero trust: M20 -> M19 (federation auth) -> M18 (sneakernet custody)
+\end{asciibox}
+
+\section{Module Specification Summary}
+
+\begin{longtable}{p{1.5cm}p{3.5cm}p{5cm}p{1.5cm}p{1.5cm}}
+\toprule
+\thead{Module} & \thead{Title} & \thead{Key Deliverable} & \thead{Model} & \thead{Wave} \\
+\midrule
+\endhead
+M14 & Temporal Imaging & Aliasing/TSR analysis; long vs.\ fast exposure matrix & Sonnet & 1A \\
+\altrow M15 & Color Fidelity & ICC/DNG workflow; studio calibration protocol & Sonnet & 1A \\
+M16 & Audio Fidelity & FFT restoration pipeline; semaphore/gating reference & Opus & 1B \\
+\altrow M17 & Serialization + HPC & Format benchmark table; IB/HIPPI architecture & Sonnet+Opus & 1C \\
+M18 & Transport Taxonomy & Full protocol matrix; IPoAC formal position; sneakernet mesh spec & Sonnet & 1D \\
+\altrow M19 & Backup + Federation & 3-2-1-1-0 plan; Arrow Flight federation diagram & Sonnet+Opus & 1D \\
+M20 & Zero Trust + Firewall & NIST 800-207 mapping; zone diagram; CephX ZT gap analysis & Opus & 1D \\
+\altrow M21 & Synthesis & Frequency-domain unification; extended Ceph isomorphism & Opus & 2 \\
+\bottomrule
+\end{longtable}
+
+\section{Synthesis Through-Line}
+
+\begin{quoteblock}
+Every layer of the stack is a decision about which frequencies to trust.
+
+The camera's shutter is a temporal low-pass filter. The Fourier transform is the language all these decisions share. The Minecraft chunk palette is a frequency budget. The sneakernet is a wideband carrier with enormous latency. The zero-trust architecture is a frequency filter on identity---it asks: ``at what rate should I re-verify this claim?'' and answers: ``continuously.''
+
+The pigeon carrying a USB drive does not know it is a network layer. It does not know its effective bandwidth exceeds ADSL by a factor of ten thousand. It does not know that RFC 1149 formally categorized it as a link-layer carrier in the OSI model. It is simply moving bits across space at the rate its wings allow.
+
+This is the lesson of data fidelity: the channel does not know what it is carrying. Only the encoding does.
+
+Choose your encoding wisely. Choose your sampling rate deliberately. And when the channel goes down---and it will---know in advance which frequencies you need to reconstruct from the delta alone.
+
+The seed is still there. The function is still there. Only the changes need the channel.
+\end{quoteblock}
+
+\section{Bibliography}
+
+\begin{enumerate}[leftmargin=*, label={[\arabic*]}, itemsep=2pt]
+\item Waitzman, D. (1990). RFC 1149: A Standard for the Transmission of IP Datagrams on Avian Carriers. IETF.
+\item Waitzman, D. (1999). RFC 2549: IP over Avian Carriers with Quality of Service. IETF.
+\item Carpenter, B. \& Hinden, R. (2011). RFC 6214: Adaptation of RFC 1149 for IPv6. IETF.
+\item Bergen Linux User Group. (2001). RFC 1149 Implementation writeup. \url{https://www.blug.linux.no/rfc1149/writeup/}
+\item Nyquist, H. (1928). Certain topics in telegraph transmission theory. \emph{Transactions of the AIEE}, 47(2), 617--644.
+\item Shannon, C.E. (1949). Communication in the presence of noise. \emph{Proceedings of the IRE}, 37(1), 10--21.
+\item Ben-Ezra, M., et al. (2024). Temporal Super-Resolution Using a Multi-Channel Illumination Source. \emph{Sensors}, 24(3), 857. doi:10.3390/s24030857
+\item Lai, Y., Marquez, M., \& Liang, J. (2024). Tutorial on compressed ultrafast photography. \emph{J. Biomed. Opt.}, 29(S1), S11524. doi:10.1117/1.JBO.29.S1.S11524
+\item Tessive LLC. Time Filter Technical Explanation. \url{https://tessive.com/time-filter-technical-explanation}
+\item Imatest LLC. Nyquist Frequency, Aliasing, and Color Moir\'{e}. \url{https://www.imatest.com/docs/nyquist-aliasing/}
+\item InfiniBand Trade Association. (2023). IBTA Specification Volume 1 Release 1.7. \url{https://www.infinibandta.org/ibta-specification/}
+\item Pichetti, L., et al. (2024). Benchmarking Ethernet Interconnect for HPC/AI workloads. \emph{SC '24 Workshops}. doi:10.1109/SCW63240.2024.00124
+\item NVIDIA Corporation. (2025). NVIDIA Quantum InfiniBand Networking Platform. \url{https://www.nvidia.com/en-us/networking/products/infiniband/}
+\item Google. (2024). FlatBuffers Documentation and Benchmarks. \url{https://flatbuffers.dev/benchmarks/}
+\item arxiv:2407.13494 (2024). Streaming Technologies and Serialization Protocols: Empirical Performance Analysis.
+\item iZotope. (2021). RX 8: Spectral Recovery and Audio Restoration. \url{https://www.izotope.com/en/rx.html}
+\item Wikipedia: Audio Restoration. \url{https://en.wikipedia.org/wiki/Audio_restoration}
+\item Lawrence Berkeley National Laboratory. Fadeyev, V. \& Haber, C. IRENE Audio Restoration System. \url{https://irene.lbl.gov/}
+\item Library of Congress. National Audio-Visual Conservation Center / Packard Campus. \url{https://www.loc.gov/avconservation/packard/}
+\item Adobe Systems. (2024). Applying noise reduction techniques. Adobe Audition Help. \url{https://helpx.adobe.com/audition/using/noise-reduction-restoration-effects.html}
+\item Calibrite. (2024). ColorChecker Camera Calibration Workflow --- ICC and DNG. \url{https://calibrite.com/photo-target/}
+\item ICC. (2017). White Paper \#46: Improving Color Image Quality for Medical Photography. \url{https://www.color.org/whitepapers/ICC_White_Paper46-Medical_Photography_Guidelines.pdf}
+\item X-Rite. Color Management Workflow with DNG Camera Profiles. \url{https://www.xrite.com/service-support/color_management_workflow_with_dng_camera_profiles}
+\item NIST. (2020). SP 800-207: Zero Trust Architecture. \url{https://csrc.nist.gov/publications/detail/sp/800-207/final}
+\item CISA. (2023). Zero Trust Maturity Model v2. \url{https://www.cisa.gov/sites/default/files/2023-04/zero_trust_maturity_model_v2_508.pdf}
+\item DoD. (2022). Zero Trust Reference Architecture v2.0. \url{https://dodcio.defense.gov/Portals/0/Documents/Library/(U)ZT_RA_v2.0(U)_Sep22.pdf}
+\item IBM Security. (2024). Cost of a Data Breach Report 2024. \url{https://www.ibm.com/reports/data-breach}
+\item Cerf, V.G., et al. (2007). RFC 5050: Bundle Protocol Specification. IETF Delay-Tolerant Networking Working Group.
+\item Wicker, S.B. \& Bhargava, V.K. (1999). \emph{Reed-Solomon Codes and Their Applications}. IEEE Press.
+\item Richardson, T. \& Urbanke, R. (2008). \emph{Modern Coding Theory}. Cambridge University Press.
+\item Hamming, R.W. (1950). Error Detecting and Error Correcting Codes. \emph{Bell System Technical Journal}, 29(2), 147--160.
+\item DOCSIS 3.1 Physical Layer Specification. CableLabs. \url{https://www.cablelabs.com/specifications/CM-SP-PHYv3.1}
+\item ITU-T G.984: Gigabit-capable Passive Optical Networks (GPON). International Telecommunication Union.
+\item ITU-T V.90: A Digital Modem and Analogue Modem Pair. International Telecommunication Union, 1998.
+\item ANSI X3.183 (1991). High-Performance Parallel Interface (HIPPI). American National Standards Institute.
+\end{enumerate}
+
+\end{document}

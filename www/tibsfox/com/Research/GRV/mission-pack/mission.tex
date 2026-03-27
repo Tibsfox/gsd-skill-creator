@@ -1,0 +1,999 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% History domain: Burgundy / Gold / Parchment
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Green River \& the Seattle Sound}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Green River and the Seattle Sound -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Green River \&\\[0.3em]The Seattle Sound}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Century of Music from the Emerald City}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18 context windows across 6 sessions}}
+\end{center}
+\newpage
+
+% TABLE OF CONTENTS
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1 --- VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Green River \& the Seattle Sound --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (root document)}
+\metafield{Context:}{GSD Ecosystem -- Deep Research Mission}
+
+\subsection{Vision}
+
+In 1984, five young musicians in Seattle---Mark Arm, Steve Turner, Jeff Ament, Stone Gossard, and Alex Vincent---formed a band named after one of the darkest chapters in Pacific Northwest history: the Green River Killer. What they built in a few short years became the seed crystal for a musical revolution that reverberated across the planet. Green River existed for barely three years as a performing unit, yet its dissolution produced two of the most consequential bands of the 1990s: Pearl Jam and Mudhoney. Their 1985 EP \textit{Come On Down} is widely regarded as the first grunge record ever released. Their label, Sub Pop, used the phrase ``ultra-loose GRUNGE that destroyed the morals of a generation'' to promote their 1987 EP \textit{Dry as a Bone}---the earliest documented use of the word in connection with Seattle rock.
+
+But Green River did not emerge from silence. Seattle's musical topsoil had been cultivated for decades before those first distorted power chords rang out at Reciprocal Recording. The story begins on Jackson Street in the 1920s, where speakeasy culture and the Great Migration converged to create one of America's most vibrant jazz corridors. It threads through the R\&B revolution that produced Ray Charles and Quincy Jones, through Jimi Hendrix's childhood in the Central District, through the garage-rock earthquake of the Wailers and the Sonics, through the punk and new-wave underground of the late 1970s, and forward past grunge into the indie-rock renaissance, the hip-hop emergence of Sir Mix-A-Lot and Macklemore, and the electronic experiments of Odesza and Shabazz Palaces.
+
+This research mission traces the complete arc---from the sacred songs of the Coast Salish peoples through a century of recorded history---with Green River as the narrative fulcrum: the band that crystallized everything that came before and seeded everything that followed. The study examines how geography, economics, racial dynamics, independent infrastructure, and sheer creative stubbornness produced a city whose musical influence far outstrips its population. Seattle's story is ultimately about the spaces between: between punk and metal, between isolation and ambition, between underground and mainstream, between failure and revolution.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{The Forgotten Foundations.} Popular histories of Seattle music typically begin with grunge, erasing decades of foundational work by Jackson Street jazz musicians, R\&B pioneers, and garage-rock innovators whose contributions directly shaped what followed.
+  \item \textbf{Green River's Understudied Centrality.} Despite being widely cited as ``the first grunge band,'' Green River's specific musical innovations, internal tensions, and branching legacy have received far less scholarly attention than the bands they spawned.
+  \item \textbf{The Infrastructure Question.} Seattle's musical revolutions were enabled by a specific ecosystem of venues, studios, labels, radio stations, and media---from Etiquette Records to Sub Pop to KEXP---whose roles are rarely analyzed as a coherent system.
+  \item \textbf{The Post-Grunge Blind Spot.} The narrative that Seattle music ``ended'' with Kurt Cobain's death in 1994 obscures three decades of subsequent innovation across indie rock, hip-hop, electronic music, and global broadcast influence.
+  \item \textbf{Erased Voices.} The contributions of Black musicians, Indigenous musical traditions, women, and hip-hop artists to Seattle's story remain systematically underrepresented in mainstream accounts of the ``Seattle Sound.''
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Seattle's musical history operates as a continuous feedback loop where geographic isolation concentrates creative energy, independent infrastructure captures and amplifies it, and periodic ``eruption events'' project it globally---with Green River serving as the pivotal eruption that transformed local ferment into worldwide phenomenon.
+
+This model explains why Seattle's musical revolutions recur across genres and decades: the same structural conditions (isolation + infrastructure + concentrated talent) that produced garage rock in the 1960s produced grunge in the 1980s and indie/hip-hop in the 2000s. The specific content changes; the generative mechanism persists.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    THE SEATTLE SOUND: A CENTURY OF MUSIC
+                    =====================================
+
+  1918-1950s          1958-1975           1976-1987          1988-1997
+ +-----------+    +--------------+    +--------------+    +-----------+
+ | JACKSON   |    | GARAGE ROCK  |    | PROTO-GRUNGE |    | GRUNGE    |
+ | STREET    |--->| & HENDRIX    |--->| & GREEN      |--->| EXPLOSION |
+ | JAZZ/R&B  |    | ERA          |    | RIVER        |    |           |
+ +-----------+    +--------------+    +--------------+    +-----------+
+  Ray Charles      The Wailers         Punk/New Wave       Nirvana
+  Quincy Jones     The Sonics          Mr. Epp             Pearl Jam
+  Ernestine        The Ventures        Green River         Alice in Chains
+  Anderson         Jimi Hendrix        Deep Six comp       Soundgarden
+  Jackson St.      Louie Louie         Sub Pop founded     Mother Love Bone
+  Clubs            Etiquette Rec.      Come On Down EP     Mudhoney
+                                       Dry as a Bone       Sub Pop boom
+                         |                   |                   |
+                         v                   v                   v
+                  1998-2015              2016-Present
+               +--------------+      +--------------+
+               | POST-GRUNGE  |      | THE LIVING   |
+               | RENAISSANCE  |      | SCENE        |
+               +--------------+      +--------------+
+                Death Cab              Odesza
+                Fleet Foxes            Shabazz Palaces
+                Macklemore             KEXP global
+                Modest Mouse           DIY punk revival
+                KEXP/Sub Pop           Venue ecosystem
+                Sir Mix-A-Lot          Rising costs
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1: Ancestral Sounds     Module 2: Garage Rock
+  & Jackson Street Jazz          & The Louie Louie Era
+  (Pre-1950s - 1950s)            (1958-1975)
+         |                              |
+         +----------+------------------+
+                    |
+         Module 3: Proto-Grunge &
+         The Birth of Green River
+         (1976-1987)
+                    |
+         +----------+------------------+
+         |                              |
+  Module 4: Grunge Explosion     Module 5: Post-Grunge
+  & Global Impact                Renaissance & Hip-Hop
+  (1988-1997)                    (1998-2015)
+         |                              |
+         +----------+------------------+
+                    |
+         Module 6: The Living Scene
+         & Infrastructure Legacy
+         (2016-Present)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Ancestral Sounds \& Jackson Street Jazz (Pre-1950s--1950s)}
+The earliest documented musical traditions in the Seattle region belong to the Coast Salish and Duwamish peoples, whose sacred and ceremonial songs predate European settlement by millennia. The modern recorded history begins with the emergence of Jackson Street as a jazz corridor in the 1920s, catalyzed by Prohibition-era speakeasy culture and the Great Migration. This module traces the path from Jelly Roll Morton's 1920 residency at the Entertainers Club through the wartime boom that brought Ray Charles, Quincy Jones, and Ernestine Anderson to Seattle, and the desegregation of the musicians' union in 1958.
+
+\subsubsection{Module 2: Northwest Garage Rock \& The Louie Louie Era (1958--1975)}
+The explosive emergence of the Pacific Northwest's distinctive garage-rock sound, anchored by the Wailers' 1961 recording of ``Louie Louie,'' the Sonics' proto-punk ferocity, and the Ventures' instrumental innovations. This module examines Etiquette Records as the region's first significant independent label, the teen-dance circuit that sustained the scene, and Jimi Hendrix's Seattle roots and global departure. The direct sonic lineage from the Sonics' brutal simplicity to punk rock and ultimately grunge is documented.
+
+\subsubsection{Module 3: Proto-Grunge \& The Birth of Green River (1976--1987)}
+The convergence of punk, hardcore, and metal in Seattle's underground clubs---particularly the role of Gorilla Gardens in softening the violent rivalry between scenes. Green River's formation in 1984, their 1985 \textit{Come On Down} EP (often cited as the first grunge record), the seminal 1986 \textit{Deep Six} compilation on C/Z Records, and the founding of Sub Pop Records. This is the module where the central subject---Green River---receives its deepest biographical, musical, and sociological analysis.
+
+\subsubsection{Module 4: Grunge Explosion \& Global Impact (1988--1997)}
+Green River's breakup and the formation of Mudhoney and Mother Love Bone (later Pearl Jam). The Sub Pop marketing machine, the Melody Maker gambit, Nirvana's \textit{Nevermind}, and the commercial explosion. Alice in Chains, Soundgarden, and the ``Big Four'' of grunge. The cultural and economic transformation of Seattle. Andy Wood's death, Kurt Cobain's death, and the decline of grunge as a commercial force.
+
+\subsubsection{Module 5: Post-Grunge Renaissance \& Hip-Hop (1998--2015)}
+The emergence of Seattle's indie-rock wave (Death Cab for Cutie, Modest Mouse, Fleet Foxes, The Head and the Heart), the parallel rise of Seattle hip-hop from Sir Mix-A-Lot through Macklemore and Shabazz Palaces, and the transformation of KEXP from a university radio station into a globally influential music platform. Sub Pop's evolution from grunge label to diverse indie powerhouse.
+
+\subsubsection{Module 6: The Living Scene \& Infrastructure Legacy (2016--Present)}
+The current state of Seattle's music ecosystem: electronic artists like Odesza, the DIY feminist punk scene, rising cost-of-living pressures on artists, the venue ecosystem (Crocodile, Showbox, Neumos, Vera Project), KEXP's 3-million-subscriber YouTube presence, and the ongoing tension between Seattle's musical heritage and its tech-industry transformation. Green River's 2008--2009 reunion shows as a coda.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:      # Memory & scheduling
+    model: sonnet
+    role: Wave coordination, cache management, session planning
+    allocation: 15%
+
+  denise:     # Display & output
+    model: sonnet
+    role: Document assembly, formatting, bibliography
+    allocation: 25%
+
+  paula:      # I/O & communication
+    model: opus
+    role: Cross-module synthesis, cultural sensitivity review
+    allocation: 30%
+
+  68000:      # Central processing
+    model: opus
+    role: Narrative synthesis, historical analysis, judgment
+    allocation: 30%
+
+activation_profile: fleet
+parallel_tracks: 3
+estimated_windows: 18
+estimated_sessions: 6
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[nosep]
+  \item Green River: complete biography, discography, member trajectories, musical analysis
+  \item Seattle music history from earliest documented traditions through 2026
+  \item Key independent labels: Etiquette, C/Z, Sub Pop, PopLlama, Kill Rock Stars
+  \item Venues, studios, and radio stations as infrastructure
+  \item Hip-hop, electronic, indie, and classical scenes alongside rock
+  \item Coast Salish musical traditions (with nation-specific attribution)
+  \item Racial dynamics in Seattle's music history (Jackson Street, segregated unions, erasure)
+  \item Green River's 2008--2009 reunion
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[nosep]
+  \item Broader Pacific Northwest scene outside Seattle metro (Olympia, Portland) except where directly connected
+  \item Detailed musical theory analysis of individual songs
+  \item Post-mortem psychological analysis of deceased musicians
+  \item Comprehensive discographies of all bands mentioned
+  \item Seattle's classical/opera scene beyond brief contextual mention
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Green River biography covers all six members, all releases, formation through breakup and reunion
+  \item Jackson Street jazz era documented with at least 8 named musicians and 5 venues
+  \item Garage-rock module covers Wailers, Sonics, Ventures, and Hendrix with sourced claims
+  \item Deep Six compilation analyzed with all six contributing bands documented
+  \item Sub Pop Records history traced from Subterranean Pop fanzine through Warner partnership
+  \item At least 4 post-grunge genres (indie, hip-hop, electronic, punk) documented with named artists
+  \item KEXP/KCMU history traced from 1972 founding through present global reach
+  \item Infrastructure analysis covers at least 10 venues, 5 studios, and 5 labels
+  \item Every era (pre-1950s, 1950s--1975, 1976--1987, 1988--1997, 1998--2015, 2016--present) has dedicated coverage
+  \item Coast Salish musical traditions referenced with Duwamish and Lushootseed attribution
+  \item All claims attributed to professional sources; zero entertainment blog citations
+  \item Document is self-contained: a reader with no prior knowledge can understand the full arc
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+PNW Taxonomy & Seattle music naming conventions (venue/species parallels) & Reference \\
+The Space Between & ``Spaces between'' philosophy; punk-metal convergence as liminal space & Philosophical \\
+Foxfire Heritage Vision & Cultural preservation methodology; oral history patterns & Pattern \\
+GSD Ecosystem Field Guide & Research mission execution framework & Framework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The story of Seattle music is a story about the spaces between. Between jazz and blues on Jackson Street. Between punk and metal at Gorilla Gardens. Between underground and mainstream at Sub Pop. Between failure and revolution at Reciprocal Recording. Green River inhabited the space between---too punk for the metalheads, too metal for the punks, too raw for the mainstream, too ambitious for the underground---and in that liminal territory they found something new. The Amiga Principle applies: it was never about raw power. It was about architectural leverage---the right people, in the right rooms, with the right infrastructure, at the right moment. A $10-per-hour recording studio. A fanzine that became a label. A word scrawled in a mail-order catalog. These small, principled building blocks produced a sound that changed the world. Giving people their music back---their authentic, unpolished, unapologetically human music---is what Seattle has always done best.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2 --- RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Green River \& the Seattle Sound --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings organized by research module. Each section provides factual material with citations for the corresponding module in the mission package. Key source organizations include HistoryLink.org (Washington State's free online encyclopedia of history), the Seattle City Government Office of Film + Music, KEXP/Friends of KEXP, Sub Pop Records, AllMusic, and peer-reviewed music scholarship.
+
+\subsection{Module 1 Reference: Ancestral Sounds \& Jackson Street Jazz}
+
+\subsubsection{Coast Salish Musical Traditions}
+
+Prior to European settlement, the Duwamish people and neighboring Coast Salish tribes sustained rich musical traditions. In Lushootseed, the word for ``song'' is \textit{st'ilt'ilib}. These traditions were primarily vocal, often accompanied by drums, clappers, rattles, and occasionally flutes or whistles. Music served deeply spiritual functions in Coast Salish life, passed down through oral tradition across generations. KEXP has acknowledged its location ``on the traditional land of the Duwamish and Coast Salish People'' in its institutional mission statement.
+
+\subsubsection{Jackson Street and the Jazz Corridor}
+
+Seattle's jazz scene took root in the neighborhood around 12th Avenue South and Jackson Street beginning in the 1910s. The first documented local jazz performance was by Lillian Smith's Jazz Band in 1918 at Washington Hall. By 1910, Seattle was hub to the largest vaudeville circuit in the country, owned by Alexander Pantages. Jelly Roll Morton, considered the first great jazz composer, performed at the Entertainers Club at 12th and Main Street in 1920. The scene thrived because of what historian Paul de Barros called ``a culture of legalized corruption,'' where nightclub owners paid off police in return for tolerance of gambling, prostitution, and illegal alcohol.
+
+Until the 1950s, the music industry in Seattle was formally segregated. White musicians were represented by Local 76; Black musicians by ``Negro'' Local 493. Desegregation of the unions occurred in 1958. During World War II, 350,000 African Americans moved to the Pacific Northwest for war work, and during the peak of the Jackson Street scene, 34 nightclubs operated between First and 14th Avenues.
+
+\subsubsection{Ray Charles and Quincy Jones}
+
+Ray Charles arrived in Seattle in 1948 at age 17, traveling by Trailways bus from Tampa, Florida. He formed the McSon Trio, recorded his debut single ``Confession Blues'' in 1949 at a downtown Seattle studio, hosted a local radio show, and appeared on television before departing for Los Angeles in 1950. Charles fused gospel, blues, and jazz in the Jackson Street clubs, pioneering a style that prefigured soul music.
+
+Quincy Jones's family settled in Seattle in 1947. At Garfield High School, Jones befriended Charles, who taught him big-band arranging. Jones started a dance band that included Buddy Catlett (later bassist for Count Basie and Louis Armstrong). A local promoter named Bumps Blackwell---who would later produce Little Richard's first records---offered to lead the band. Jones studied arranging at Seattle University before departing for Boston in 1951.
+
+Ernestine Anderson's family arrived in Seattle in 1944. Ironically, her father had heard in Texas that Seattle was a ``quiet'' town where his daughter would not be tempted to pursue a singing career.
+
+\subsection{Module 2 Reference: Northwest Garage Rock \& The Louie Louie Era}
+
+\subsubsection{The Wailers and Etiquette Records}
+
+The Wailers (also known as The Fabulous Wailers) formed in Tacoma, Washington in 1958 as The Nitecaps, comprising five high school friends: John Greek, Richard Dangel, Kent Morrill, Mark Marush, and Mike Burk. After early success with the instrumental ``Tall Cool One'' (1959), the band evolved. Vocalist ``Rockin' Robin'' Roberts joined; John ``Buck'' Ormsby replaced Greek on bass. Roberts, Ormsby, and Morrill founded Etiquette Records, which in 1961 released the first garage-rock version of Richard Berry's ``Louie Louie.'' The single became a massive regional hit, though it never charted nationally.
+
+The Wailers' live album \textit{The Fabulous Wailers at the Castle}, recorded in 1961, has been described as ``undoubtedly one of the most influential albums in Seattle rock \& roll history.'' Between 1961 and 1967, Etiquette issued 26 singles and eight LPs. The Wailers' version of ``Louie Louie'' directly inspired the Kingsmen's 1963 version, which became a worldwide hit and one of the most-covered songs in rock history.
+
+\subsubsection{The Sonics}
+
+The Sonics formed in 1960 in Tacoma, founded by teenage guitarist Larry Parypa. Scouted by Buck Ormsby of the Wailers, they signed to Etiquette Records. Their 1964 debut single ``The Witch'' became the biggest-selling local single in Northwest history. Their debut LP, \textit{Here Are the Sonics} (1965), was recorded at Audio Recording in Seattle with engineer Kearney Barton on a two-track tape recorder with a single drum microphone.
+
+The Sonics' aggressive sound---snarling vocals, demented lyrics, scorching guitar, and whiplash drumming---is widely cited as a key precursor to punk rock. Pete Townshend allegedly praised them on NBC's \textit{Today Show} in 1966. They have been named as inspirations by Nirvana, the White Stripes, LCD Soundsystem, Bruce Springsteen, and the Hives. The Sonics reunited for international touring between 2007 and 2015, and their 2015 album \textit{This Is The Sonics} was their first in over 40 years.
+
+\subsubsection{Jimi Hendrix}
+
+James Marshall ``Jimi'' Hendrix was born in Seattle on November 27, 1942, a third-generation Seattleite. His grandparents, vaudeville performers Nora and Ross Hendrix, had settled in Seattle after being stranded by a traveling show in 1911. Hendrix grew up absorbing the region's R\&B aesthetic, playing in teenage dance combos including the Velvetones, the Rockin' Kings, and Thomas and His Tomcats. He got his start playing R\&B at venues like Birdland in the Central District.
+
+After joining the Army in 1961 and touring the ``chitlin' circuit'' of African-American nightclubs, Hendrix was discovered in New York and flown to London in September 1966. His band, the Jimi Hendrix Experience, became an overnight sensation. His February 12, 1968 homecoming concert at the Seattle Center Arena was his first public guitar performance in his hometown since leaving for the military in 1961. He is globally recognized as perhaps the most gifted and inventive guitarist of all time.
+
+\subsubsection{The Ventures}
+
+The Ventures, from Tacoma, cut their international number-one hit ``Walk---Don't Run'' in Seattle in 1960, becoming one of the best-selling instrumental rock groups in history. Along with the Wailers and Little Bill and the Bluenotes, they constituted the three major bands of the late-1950s Tacoma teen-dance scene that laid groundwork for everything that followed.
+
+\subsection{Module 3 Reference: Proto-Grunge \& The Birth of Green River}
+
+\subsubsection{The Punk and New-Wave Underground}
+
+The first punk concert in Seattle was the Tupperwares backed by the Telepaths at the premiere of \textit{Pink Flamingos} at the Moore Theater on New Year's night, 1976. A wave of local bands emerged congregating at a venue called The Bird, including the Enemy, the Lewd, the Mentors, Chinas Comidas, and X-15.
+
+Prior to the mid-1980s, local hardcore and metal scenes were often violently confrontational. The opening of the Gorilla Gardens venue changed this dynamic by offering two separate shows simultaneously; both hardcore and metal were frequently programmed on the same nights. This softening of relations between scenes directly inspired the hybrid sound of grunge.
+
+\subsubsection{Green River: Formation and Biography}
+
+Green River formed in early 1984 with vocalist Mark Arm, guitarist Steve Turner, drummer Alex Vincent (also known as Alex Shumway), and bassist Jeff Ament. Arm and Turner had previously played together in Mr.\ Epp and the Calculations and the Limp Richerds. The band name was inspired by multiple associations---a local community college, the 1969 Creedence Clearwater Revival song---but the most resonant was the Green River Killer, an infamous Washington State serial killer prominent in headlines at the time.
+
+On June 23, 1984, Green River recorded their first demos at Reciprocal Recording. By late 1984, Stone Gossard had joined on guitar. The band began production in December 1984 on \textit{Come On Down}, completed in mid-1985, by which time Steve Turner had departed. Bruce Fairweather replaced Turner on guitar. \textit{Come On Down} was released by New York-based Homestead Records and is often considered the first grunge record, predating both the Melvins' debut EP and the \textit{Deep Six} compilation.
+
+In 1987, Green River recorded the EP \textit{Dry as a Bone} for the new Sub Pop label, promoted with the now-legendary catalog description: ``ultra-loose GRUNGE that destroyed the morals of a generation''---the earliest known use of the word ``grunge'' in connection with a Seattle band. Kim Gordon of Sonic Youth contributed vocals. Their sole full-length album, \textit{Rehab Doll}, was released in June 1988, though the band had effectively ceased by late October 1987 when Ament, Gossard, and Fairweather announced their desire to quit.
+
+Drummer Alex Shumway later reflected: ``I think we just considered ourselves rock \& roll guys who grew up on punk rock. We realized that there was some music that we liked before we became hardcore kids that we were afraid we listened to, but then we admitted we liked it.''
+
+\subsubsection{The Deep Six Compilation}
+
+Released March 21, 1986, \textit{Deep Six} was the first release by C/Z Records (catalogue number CZ01), a limited edition of 2,000 copies. Compiled by Chris Hanzsek and Tina Casale, the album featured six Seattle bands: Green River, Soundgarden (with Scott Sundquist on drums), Melvins, Malfunkshun (featuring Andy Wood), Skin Yard (with Matt Cameron on drums and Jack Endino on guitar), and the U-Men. For all bands except Green River and the U-Men, this was their first appearance on record.
+
+Hanzsek had opened Reciprocal Recording in 1984 with a rate of \$10 per hour, immediately popular with local musicians. After losing his studio lease, he and Casale started C/Z Records to fill the void of nobody releasing local records. The two-night release party on March 21--22 at UCT Hall featured all six bands. \textit{Deep Six} made almost no impact nationally but is now recognized as the first grunge compilation and resides in the Rock and Roll Hall of Fame.
+
+\subsubsection{Sub Pop Records: Founding}
+
+The origins of Sub Pop trace to 1980, when Bruce Pavitt, a student at Evergreen State College in Olympia, started a fanzine called \textit{Subterranean Pop} focused on American independent rock. Pavitt moved to Seattle in 1983, opened a record store called Fallout, wrote a Sub Pop column for \textit{The Rocket}, and hosted an independent-label specialty show on KCMU radio. In 1986 he released the compilation \textit{Sub Pop 100} and Green River's \textit{Dry as a Bone} EP. In 1987, Jonathan Poneman, a local concert promoter and KCMU DJ, invested \$20,000 for a 50\% share. They officially incorporated on April 1, 1988---April Fools' Day.
+
+\subsection{Module 4 Reference: Grunge Explosion \& Global Impact}
+
+\subsubsection{Green River's Dissolution and Branching Legacy}
+
+After Green River's October 1987 breakup, its members diverged dramatically. Mark Arm and Steve Turner formed Mudhoney, which became Sub Pop's flagship band and ``spearheaded the Seattle grunge movement.'' Jeff Ament, Stone Gossard, and Bruce Fairweather formed Mother Love Bone with vocalist Andrew Wood. After Wood's death from a heroin overdose in March 1990, Ament and Gossard recruited Eddie Vedder and formed Pearl Jam, whose 1991 debut \textit{Ten} became one of the best-selling albums of the decade. Gossard and Ament also participated in Temple of the Dog, a tribute project to Wood featuring Chris Cornell.
+
+\subsubsection{Sub Pop's Marketing Genius and Near-Collapse}
+
+Pavitt and Poneman modeled Sub Pop after earlier independent labels like Motown, Chess, and Stax, seeking to create a cohesive regional brand identity. Charles Peterson served as house photographer; Jack Endino as house producer. In March 1989, they flew British journalist Everett True to Seattle to write about the scene for \textit{Melody Maker}. Poneman later noted: ``It could have happened anywhere, but there was a lucky set of coincidences. Charles Peterson was here to document the scene, Jack Endino was here to record the scene. Bruce and I were here to exploit the scene.''
+
+By 1991, Sub Pop was in severe financial difficulty. When Geffen Records purchased Nirvana's contract for \$72,000, a royalty agreement was included. The subsequent success of \textit{Nevermind}---which sold 2 million copies by Christmas 1991---rescued the label. Pavitt recalled going ``from not being able to pay our phone bill to getting a check for half a million bucks.'' In 1995, Warner Music Group purchased a 49\% stake in Sub Pop.
+
+\subsubsection{The Grunge Mainstream}
+
+Nirvana's \textit{Nevermind} (September 1991) and Pearl Jam's \textit{Ten} (August 1991) brought grunge to global audiences. Soundgarden, Alice in Chains, and others followed. The cultural impact extended beyond music into fashion (flannel, ripped jeans, combat boots) and cinema (Cameron Crowe's 1992 film \textit{Singles}). Seattle transformed from a culturally marginal city into a global music destination.
+
+\subsection{Module 5 Reference: Post-Grunge Renaissance \& Hip-Hop}
+
+\subsubsection{The Indie-Rock Wave}
+
+After grunge's commercial peak, Seattle's newer bands experimented outside the associated sound. Death Cab for Cutie, Modest Mouse, Fleet Foxes, The Head and the Heart, Band of Horses, and the Cave Singers defined a folksy Pacific Northwest indie-rock aesthetic through the 2000s and 2010s. Car Seat Headrest's Will Toledo relocated to Seattle in 2014 and signed with Matador Records. The Shins and the Postal Service brought commercial success to Sub Pop in a new mode entirely distinct from grunge.
+
+\subsubsection{Seattle Hip-Hop}
+
+Seattle hip-hop has been characterized by its sprawl rather than a single sound. In October 1979, local radio DJ Robert L.\ Scott first played ``Rapper's Delight'' on KYAC 1250 AM, and South Seattle's club Lateef's immediately became a site for early experimentation. Sir Mix-A-Lot's 1988 ``Posse on Broadway'' was the first major Seattle rap hit, and his ``Baby Got Back'' won the 1993 Grammy for Best Rap Solo Performance. In 1994, Seattle-born Ishmael Butler (as Butterfly of Digable Planets) won the Grammy for Best Rap Performance by a Duo or Group---two back-to-back Grammy wins during the ``grunge years.''
+
+By the 2000s, groups like Blue Scholars, THEESatisfaction, and Shabazz Palaces were creating critically acclaimed experimental hip-hop. Macklemore \& Ryan Lewis became Seattle's most commercially successful hip-hop export. In 2014, November became Hip-Hop History Month in Washington State.
+
+\subsubsection{KEXP's Global Transformation}
+
+KEXP was founded in 1972 as student-run KCMU at the University of Washington. Jonathan Poneman and Bruce Pavitt met at KCMU, and Poneman credited it as his ``big break.'' In 2001, with funding from Paul Allen, KCMU became KEXP---the call letters a nod to Allen's obsession with the Jimi Hendrix Experience. By 2016, KEXP's YouTube channel had attracted 500 million views; by 2019, over 1 million subscribers; by 2024, over 3 million subscribers. KEXP launched a broadcast station in San Francisco in 2024.
+
+\subsection{Module 6 Reference: The Living Scene}
+
+\subsubsection{Electronic Music and Modern Diversity}
+
+Seattle's electronic scene has produced acts like Odesza, whose live productions have earned critical acclaim. The city's robust DIY and feminist punk scene flourished through the 2000s and 2010s, led by Tacocat, Childbirth, and Thunderpussy. Ruby Room studios emerged as crucial production infrastructure for local hip-hop, serving a role analogous to Jack Endino's role in grunge.
+
+\subsubsection{Venue Ecosystem}
+
+The Crocodile (reopened 2009, relocated 2021), the Showbox (operating since the 1930s), Neumos, the Sunset Tavern, the Tractor Tavern (celebrating 30 years in 2024), and the Vera Project all continue to sustain live music. The Conor Byrne Pub reopened under a cooperative model in 2024. Rising costs of living present an ongoing challenge to the independent artist community.
+
+\subsubsection{Green River Reunion}
+
+Green River reunited on November 30, 1993 during a Pearl Jam concert in Las Vegas, performing ``Swallow My Pride'' and ``Ain't Nothing to Do.'' The band reunited more fully for four shows in 2008 featuring all six members: a warm-up at the Sunset Tavern (July 10), Sub Pop's 20th anniversary at Marymoor Park (July 13), Dante's in Portland (November 28), and the Supersuckers' 20th anniversary at the Showbox (November 29). They performed again May 22--23, 2009 at the Showbox to celebrate the Melvins' 25th anniversary. Tentative plans for a studio album were mentioned but never materialized.
+
+Jeff Ament reflected: ``I'm more proud of this band than I ever would have thought. There's a really cool energy and some real original bits about this band. It's pretty cool. For the most part, our records are pretty good.''
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Coast Salish traditions & Must use nation-specific names (Duwamish, Lushootseed) & ABSOLUTE \\
+Musician deaths & Andy Wood, Kurt Cobain, Layne Staley: factual only, no speculation & GATE \\
+Racial dynamics & Jackson Street segregation, erasure of Black musicians: present evidence & ANNOTATE \\
+Green River Killer & Band name origin: factual context only & GATE \\
+Substance abuse & Heroin's role in scene: documentary, not sensationalized & ANNOTATE \\
+Living musicians & Statements attributed only to published interviews & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Institutional Sources}
+\begin{itemize}[nosep]
+  \item HistoryLink.org --- Washington State free online encyclopedia of history (File \#3641, \#1365, \#2498, \#8947, \#8844, \#20790)
+  \item Seattle.gov Office of Film + Music --- Seattle Music Timeline
+  \item KEXP / Friends of KEXP --- institutional history and mission statements
+  \item Rock and Roll Hall of Fame --- artist biographies
+\end{itemize}
+
+\subsubsection{Professional Music Sources}
+\begin{itemize}[nosep]
+  \item Sub Pop Records --- label history and artist information
+  \item AllMusic --- artist biographies and album reviews
+  \item Rolling Stone --- Green River oral history (Kory Grow, 2019)
+  \item NPR --- ``Beyond Grunge: 15 Artists Redefining Seattle Music'' (2019); ``50 Years of Hip-Hop: Seattle'' (2023); Sub Pop oral history (2020)
+  \item The Seattle Times --- ``15 Artists Who Defined Seattle Music in the 2010s'' (2019)
+  \item Cascade PBS --- Hendrix legacy reporting (2022)
+  \item Billboard --- grunge retrospective (2011)
+  \item Melody Maker / NME --- historical grunge coverage (1989--1994)
+\end{itemize}
+
+\subsubsection{Scholarly \& Reference Works}
+\begin{itemize}[nosep]
+  \item Azerrad, Michael. \textit{Our Band Could Be Your Life}. Little, Brown, 2001.
+  \item de Barros, Paul. \textit{Jackson Street After Hours}. Sasquatch Books, 1993.
+  \item Prato, Greg. \textit{Grunge Is Dead: The Oral History of Seattle Rock Music}. ECW Press, 2009.
+  \item Anderson, Kyle. \textit{Accidental Revolution: The Story of Grunge}. St.\ Martin's Griffin, 2007.
+  \item True, Everett. \textit{Live Through This: American Rock Music in the Nineties}. Da Capo Press, 2001.
+  \item Humphrey, Clark. \textit{Loser: The Real Seattle Music Story}. MISCmedia, 1995.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3 --- MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document covering Green River and the complete arc of Seattle's recorded music history, organized as six chronological modules with cross-module synthesis. The document must be self-contained, fully sourced from professional organizations, and suitable for both standalone reading and integration into the GSD ecosystem's educational knowledge pack infrastructure.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE 0: Foundation          WAVE 1: Parallel Research
+  [Sequential]                [3 Parallel Tracks]
+  +------------------+        +-------------------+
+  | Shared schemas   |        | Track A: Mod 1+2  |
+  | Source index     |------->| Track B: Mod 3+4  |
+  | Style guide      |        | Track C: Mod 5+6  |
+  +------------------+        +-------------------+
+                                       |
+                              WAVE 2: Synthesis
+                              [Sequential]
+                              +-------------------+
+                              | Cross-module      |
+                              | integration       |
+                              | Timeline assembly |
+                              +-------------------+
+                                       |
+                              WAVE 3: Publication
+                              [Sequential]
+                              +-------------------+
+                              | Final assembly    |
+                              | Verification      |
+                              | Bibliography      |
+                              +-------------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[nosep]
+  \item \textbf{Foundation Layer} --- Shared schemas, bibliography template, style guide, source index
+  \item \textbf{Research Layer} --- Six chronological modules, each self-contained with sourced findings
+  \item \textbf{Synthesis Layer} --- Cross-module connections, timeline continuity, thematic threads
+  \item \textbf{Publication Layer} --- Final document assembly, verification, formatting, index generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Module 1: Ancestral Sounds & 8+ musicians, 5+ venues, Coast Salish attribution & W1-A \\
+D2 & Module 2: Garage Rock & Wailers, Sonics, Hendrix, Ventures documented & W1-A \\
+D3 & Module 3: Proto-Grunge & Green River full biography, Deep Six analysis & W1-B \\
+D4 & Module 4: Grunge Explosion & Sub Pop history, Big Four, branching legacy & W1-B \\
+D5 & Module 5: Post-Grunge & 4+ genres, KEXP history, hip-hop arc & W1-C \\
+D6 & Module 6: Living Scene & Current ecosystem, reunion, infrastructure & W1-C \\
+D7 & Synthesis Document & Cross-module connections, unified timeline & W2 \\
+D8 & Final Publication & Complete PDF, bibliography, verification & W3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Shared schemas & None & Haiku & 2,000 \\
+W0: Source index & None & Haiku & 3,000 \\
+W1-A: Modules 1+2 & W0 & Sonnet & 15,000 \\
+W1-B: Modules 3+4 & W0 & Opus & 20,000 \\
+W1-C: Modules 5+6 & W0 & Sonnet & 15,000 \\
+W2: Synthesis & W1-A,B,C & Opus & 12,000 \\
+W3: Publication & W2 & Sonnet & 8,000 \\
+W3: Verification & W2 & Opus & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Rationale} & \tableheader{\% Budget} \\
+\midrule
+Opus & Green River analysis (judgment-heavy), synthesis, cultural sensitivity, verification & 30\% \\
+Sonnet & Module surveys, document assembly, formatting, infrastructure analysis & 60\% \\
+Haiku & Schemas, templates, source index scaffolding & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Components} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & Sequential & 2 & 5,000 \\
+1 & Parallel Research & 3 tracks & 3 & 50,000 \\
+2 & Synthesis & Sequential & 1 & 12,000 \\
+3 & Publication & Sequential & 2 & 13,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Shared schemas & Haiku & 2,000 & Section templates, citation format, timeline schema \\
+Source index & Haiku & 3,000 & Master bibliography, source quality ratings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Pre-History through Hendrix (Modules 1+2)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Coast Salish research & Sonnet & 3,000 & Cultural context with Lushootseed terms \\
+Jackson Street survey & Sonnet & 5,000 & Musicians, venues, timeline 1918--1958 \\
+Garage rock survey & Sonnet & 4,000 & Wailers, Sonics, Ventures, Hendrix \\
+Cross-era connections & Sonnet & 3,000 & R\&B to garage rock lineage analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Green River \& Grunge (Modules 3+4)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Green River biography & Opus & 8,000 & Complete band history, all members \\
+Deep Six analysis & Opus & 4,000 & Compilation context, all six bands \\
+Sub Pop history & Sonnet & 4,000 & Founding through Warner deal \\
+Grunge mainstream & Sonnet & 4,000 & Big Four, commercial explosion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Post-Grunge through Present (Modules 5+6)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Indie-rock survey & Sonnet & 4,000 & Death Cab, Fleet Foxes, Modest Mouse \\
+Hip-hop arc & Sonnet & 4,000 & Mix-A-Lot through Shabazz Palaces \\
+KEXP history & Sonnet & 3,000 & 1972--present transformation \\
+Living scene & Sonnet & 4,000 & Current state, venues, challenges \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Cross-module integration & Opus & 6,000 & Thematic threads, causal chains \\
+Timeline assembly & Opus & 3,000 & Unified chronology 1918--2026 \\
+Infrastructure analysis & Opus & 3,000 & Labels, venues, studios, radio as system \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Document assembly & Sonnet & 5,000 & Final formatted document \\
+Bibliography compile & Sonnet & 3,000 & Complete source list \\
+Verification pass & Opus & 5,000 & All criteria checked, test plan executed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+  \item Wave 0 output cached as shared context for all Wave 1 tracks (5-minute TTL window)
+  \item Track B (Green River core) runs first to establish central narrative; Tracks A and C reference
+  \item Source index shared across all waves to avoid redundant lookups
+  \item Synthesis wave reads all three Track outputs in a single context window
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & 0 & 0 & 5,000 \\
+Wave 1: Research & 12,000 & 38,000 & 0 \\
+Wave 2: Synthesis & 12,000 & 0 & 0 \\
+Wave 3: Publication & 5,000 & 8,000 & 0 \\
+\midrule
+\textbf{Total} & \textbf{29,000} & \textbf{46,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand Total: 80,000 tokens estimated across 18 context windows in 6 sessions.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0-schemas ----+----> W1-Track-A (Mod 1+2) ----+
+                 |                                 |
+                 +----> W1-Track-B (Mod 3+4) ----+--> W2-Synthesis --> W3-Pub
+                 |                                 |
+                 +----> W1-Track-C (Mod 5+6) ----+
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations from HistoryLink, govt sources, professional music press, or peer-reviewed scholarship. Zero blog citations. \\
+SC-NUM & Numerical attribution & Every date, member count, sales figure, or statistic attributed to a specific source \\
+SC-ADV & No advocacy & Document presents music history without advocating for policy positions \\
+SC-IND & Indigenous attribution & Coast Salish, Duwamish, and Lushootseed terms used with nation-specific attribution \\
+SC-DEC & Deceased sensitivity & Factual treatment of Wood, Cobain, Staley deaths; no psychological speculation \\
+SC-LIV & Living persons & All quotes from published interviews only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Green River completeness & All 6 members documented: Arm, Turner, Ament, Gossard, Fairweather, Vincent \\
+CF-02 & Green River discography & Come On Down, Dry as a Bone, Rehab Doll, 1984 Demos all mentioned \\
+CF-03 & Jackson Street depth & 8+ named musicians with venue associations \\
+CF-04 & Garage rock coverage & Wailers, Sonics, Ventures, Hendrix each with sourced detail \\
+CF-05 & Deep Six analysis & All 6 bands documented with recording context \\
+CF-06 & Sub Pop arc & Fanzine through Warner deal with key dates \\
+CF-07 & Post-grunge genres & 4+ genres with named artists (indie, hip-hop, electronic, punk) \\
+CF-08 & KEXP history & 1972 founding through YouTube global reach \\
+CF-09 & Venue inventory & 10+ venues named with context \\
+CF-10 & Studio inventory & Reciprocal Recording + 4 others \\
+CF-11 & Label inventory & Etiquette, C/Z, Sub Pop, + 2 others \\
+CF-12 & Era coverage & All 6 eras have dedicated content \\
+CF-13 & Reunion documented & 1993 + 2008--2009 Green River reunions covered \\
+CF-14 & Hip-hop arc & Mix-A-Lot through Macklemore/Shabazz Palaces \\
+CF-15 & Timeline coherence & Dates are internally consistent across modules \\
+CF-16 & Self-containment & No undefined terms or unexplained references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Jazz to garage cascade & R\&B influence on Wailers/Hendrix explicitly traced \\
+IN-02 & Garage to grunge cascade & Sonics' proto-punk influence on Green River era documented \\
+IN-03 & Green River branching & All successor bands (Mudhoney, Pearl Jam, etc.) traced from dissolution \\
+IN-04 & Infrastructure continuity & Labels, venues, studios referenced consistently across eras \\
+IN-05 & KEXP thread & Radio's role woven across grunge, post-grunge, and present \\
+IN-06 & Cross-module consistency & Same entity uses consistent dates/facts across modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Data gaps & Areas of incomplete knowledge flagged (e.g., early Coast Salish recordings) \\
+EC-02 & Disputed claims & Band name origin (Green River Killer vs.\ CCR) presented with both versions \\
+EC-03 & Temporal currency & Most recent sources cited where available \\
+EC-04 & Minority voices & Black musicians, hip-hop, women-led bands not tokenized \\
+EC-05 & Geographic precision & Tacoma bands (Wailers, Sonics, Melvins) correctly attributed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Green River biography complete & CF-01, CF-02, CF-13 & Pending \\
+2. Jackson Street documented & CF-03, SC-IND & Pending \\
+3. Garage rock sourced & CF-04, SC-SRC & Pending \\
+4. Deep Six analyzed & CF-05, IN-02 & Pending \\
+5. Sub Pop traced & CF-06, IN-04 & Pending \\
+6. Post-grunge genres & CF-07, CF-14 & Pending \\
+7. KEXP history & CF-08, IN-05 & Pending \\
+8. Infrastructure analysis & CF-09, CF-10, CF-11 & Pending \\
+9. All eras covered & CF-12, CF-15 & Pending \\
+10. Coast Salish attribution & SC-IND, EC-01 & Pending \\
+11. Professional sources only & SC-SRC, SC-NUM & Pending \\
+12. Self-contained & CF-16, IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; 3-track parallel optimization \\
+SCOUT & Research Agent & Source gathering; gap-fill web research \\
+EXEC-A & Executor (Track A) & Modules 1+2 document production \\
+EXEC-B & Executor (Track B) & Modules 3+4 document production \\
+EXEC-C & Executor (Track C) & Modules 5+6 document production \\
+CRAFT-HIST & History Specialist & Chronological accuracy; era transitions \\
+CRAFT-MUSIC & Music Specialist & Genre analysis; sonic lineage documentation \\
+VERIFY & Verification & Source validation; accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+TOPO & Topology Manager & Agent team structure; mid-mission adjustment \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Security & Safety boundary enforcement (SC tests) \\
+ANALYST & Pattern Analyst & Cross-module pattern detection \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Total Modules & 6 \\
+Parallel Tracks & 3 \\
+Total Waves & 4 (0--3) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 6 \\
+Total Token Budget & 80,000 \\
+Opus Allocation & 29,000 (36\%) \\
+Sonnet Allocation & 46,000 (58\%) \\
+Haiku Allocation & 5,000 (6\%) \\
+Crew Size & 18 roles \\
+Safety-Critical Tests & 6 (mandatory-pass) \\
+Total Tests & 33 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``I think we just considered ourselves rock \& roll guys who grew up on punk rock. We realized that there was some music that we liked before we became hardcore kids that we were afraid we listened to, but then we admitted we liked it. And we started making music like that.''}
+
+\vspace{0.5em}
+\hfill --- Alex Shumway, Green River
+
+\vspace{1em}
+The spaces between punk and metal. Between underground and mainstream. Between a \$10-per-hour recording studio and a sound that changed the world. Green River found the music in those spaces, and a century of Seattle sound flowed through them.
+\end{quotebox}
+
+\end{document}

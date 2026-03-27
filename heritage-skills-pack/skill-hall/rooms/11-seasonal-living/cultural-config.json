@@ -1,0 +1,55 @@
+{
+  "roomId": "room-11-seasonal-living",
+  "room": 11,
+  "culturalRules": [
+    {
+      "id": "ROOM11-CULT-001",
+      "domain": "seasonal-living",
+      "tradition": "appalachian",
+      "concept": "Appalachian planting calendar and almanac traditions",
+      "level": 1,
+      "note": "Appalachian planting by signs, moon phase gardening, and almanac-based seasonal calendars are Level 1 publicly shared knowledge. These traditions are extensively documented in Foxfire volumes, regional farming literature, and Farmers' Almanac publications. The Scots-Irish and German heritage of Appalachian farm calendars is appropriate to attribute historically. Technique content (moon phase guidance, zodiac sign categories, frost date mapping, phenological indicators) is freely shareable with attribution.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM11-CULT-002",
+      "domain": "seasonal-living",
+      "tradition": "first-nations",
+      "concept": "Haudenosaunee Three Sisters planting calendar",
+      "level": 2,
+      "nationAttribution": "Haudenosaunee",
+      "note": "The Haudenosaunee Three Sisters planting calendar (corn/bean/squash timing and companion planting relationships) is Level 2 -- contextually shared. The ecological knowledge (when to plant, how the Three Sisters support each other agronomically) is publicly documented in Haudenosaunee-authorized educational materials. The ceremonial dimensions of planting and harvest (Green Corn Ceremony and other seasonal ceremonies) are Level 3-4 and must not be described. Focus on the ecological calendar and companion planting system, not the ceremonial calendar. Nation attribution: Haudenosaunee (Seneca, Mohawk, Onondaga, Cayuga, Oneida, Tuscarora).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM11-CULT-003",
+      "domain": "seasonal-living",
+      "tradition": "first-nations",
+      "concept": "Anishinaabe sugar bush season and spiritual dimensions",
+      "level": 2,
+      "nationAttribution": "Anishinaabe",
+      "note": "The sugar bush season is both an ecological event (maple sap run timing) and a community gathering with spiritual dimensions for Anishinaabe communities. The ecological and practical knowledge (when sap runs, how to harvest and reduce) is Level 1. The community and spiritual dimensions (thanksgiving ceremonies, specific prayers and protocols at the sugar bush) are Level 2 -- acknowledge their existence without describing protocols. Nation attribution: Anishinaabe (Ojibwe, Odawa, Potawatomi communities across the Great Lakes region).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM11-CULT-004",
+      "domain": "seasonal-living",
+      "tradition": "inuit",
+      "concept": "IQ six-season framework and ecological seasonal knowledge",
+      "level": 2,
+      "nationAttribution": "Inuit",
+      "note": "The Inuit six-season calendar (Ukiuq, Upingaksaaq, Upirnganniit, Aujaq, Ukiaksaaq, Ukiaq) is IQ knowledge -- a living, community-held framework for understanding the Arctic year. The framework and seasonal names are publicly documented and shared by Inuit communities as part of cultural education. The spiritual dimensions of seasonal transitions (ceremonies, protocols around specific seasonal events, relational protocols with animals) are Level 2-3 -- acknowledge existence without describing specific protocols. Nation attribution: Inuit (Nunavut, Nunavik, Inuvialuit, Nunatsiavut).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM11-CULT-005",
+      "domain": "seasonal-living",
+      "tradition": "first-nations",
+      "concept": "Seasonal ceremonies and planting or harvest ritual protocols",
+      "level": 3,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Specific seasonal ceremonies (Green Corn Ceremony, sugar bush thanksgiving prayers, first-fish ceremonies, first-caribou ceremonies, Three Sisters planting ceremonies) are Level 3 -- community restricted. Their existence can be acknowledged; their content, prayers, songs, and protocols must not be described. Learners should be referred to nation-specific cultural sources, community programs, and cultural education organizations for ceremony-specific knowledge. This rule applies to all First Nations nations represented in this room.",
+      "action": "restrict"
+    }
+  ]
+}
