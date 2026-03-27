@@ -1,0 +1,1065 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Technology (Steel / Electric / Graphite) ─────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1E88E5}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{glgreen}{HTML}{00E676}
+\definecolor{cudaorange}{HTML}{FF6F00}
+
+% ── Section Formatting ─────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD-OS GPU Orchestration}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ─────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={GSD-OS GPU Orchestration -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ─────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{GSD-OS Skill-Creator\\[0.3em]Orchestration Layer\\[0.3em]Mapped to Silicon}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{CUDA Kernel Scheduling \texorpdfstring{$\cdot$}{·} LoRA Adapter Routing \texorpdfstring{$\cdot$}{·} WebGL Dashboard}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 7--9 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{GSD-OS GPU Orchestration --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research Phase}
+\metafield{Depends on:}{gsd-silicon-layer-spec.md, gsd-chipset-architecture-vision.md, gsd-os-desktop-vision.md, the-quark-and-the-compiler}
+\metafield{Hardware Reference:}{NVIDIA RTX 4060 Ti 8GB VRAM (primary); dual RTX 5090 (cluster target)}
+\metafield{Context:}{The GSD Silicon Layer has established a conceptual mapping between hardware primitives and skill-creator pipeline stages. This mission operationalizes that mapping --- translating the Amiga metaphor into concrete CUDA kernel dispatch, LoRA adapter hot-swap routing, and a live CUDA/GL diagnostic dashboard wired directly to GSD's filesystem event bus.}
+
+\subsection{Vision}
+
+The Amiga Principle has always been about architectural leverage --- the insight that specialized execution paths, when properly wired, produce outcomes that dwarf what raw clock speed alone can achieve. The Amiga's custom chipset did not win because its 68000 CPU was faster than everything else. It won because Agnus handled DMA, Denise handled display, and Paula handled audio, each operating with near-zero CPU involvement, each wired to the bus through documented register maps that programmers could reach directly.
+
+The GSD Silicon Layer makes this metaphor literal. As a user works with Claude and GSD, the skill-creator's observation pipeline watches, classifies, and crystallizes recurring patterns into LoRA adapters --- specialized coprocessors for the user's own workflows --- that load directly onto their GPU. The chipset gets faster not because the hardware changes, but because the silicon becomes more specialized to the workload. The first session teaches the system. The hundredth session barely touches the cloud.
+
+This mission bridges the gap between that architectural vision and concrete implementation. The orchestration layer --- the wiring that connects skill-creator's six-stage pipeline (observe, detect, suggest, apply, learn, compose) to the GPU's execution primitives (CUDA streams, kernel graphs, VRAM allocations, SM occupancy) --- is the missing piece. Without it, the Silicon Layer is a beautiful configuration file. With it, the Silicon Layer becomes a living coprocessor that thinks about your work while you're working.
+
+The dashboard completes the picture. In the Amiga tradition, the system is fully observable. CUDA/GL telemetry surfaces through WebGL shaders into GSD-OS's Denise panel --- the same display engine that renders the CRT boot sequence now renders real-time adapter occupancy, VRAM pressure heat maps, stream utilization, and routing confidence. The JTAG port is always open. The register map is always published.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+\item \textbf{The orchestration gap.} The Silicon Layer specification defines the mapping between chipset concepts and GPU primitives, but does not specify the runtime wiring: how skill-creator's pattern detection events trigger CUDA stream assignments, how the intent classifier routes inference requests to the correct adapter, or how VRAM residency decisions propagate back to the chipset's bandwidth allocation model.
+
+\item \textbf{The training feedback loop is unspecified.} The specification calls for training pairs to be extracted from session activity and distilled via QLoRA into LoRA adapters, but the feedback loop --- how a deployed adapter's confidence metrics influence the next round of training data selection, and how staleness is detected --- has no implementation design.
+
+\item \textbf{The dashboard is disconnected from silicon.} The GSD-OS dashboard architecture (planning docs console, live metrics, WebGL renderer) was designed before the Silicon Layer existed. There is no specification for how CUDA telemetry data --- VRAM utilization, warp occupancy, kernel execution times, adapter activation rates --- flows into the dashboard's filesystem event bus or renders through the WebGL shader pipeline.
+
+\item \textbf{Hybrid routing has no confidence model.} The Silicon Layer's hybrid execution mode (local inference for confident adapters, cloud for novel requests) requires a concrete confidence threshold mechanism, but none is specified. Without a published confidence model, routing decisions are opaque and cannot be debugged, tuned, or explained to the user.
+
+\item \textbf{Adapter persistence and promotion lack governance.} The silicon.yaml schema declares adapters but does not specify their lifecycle: how adapters are versioned, how staleness is detected and handled, how community adapters are quarantined and evaluated, or how the system recovers when an adapter degrades below its training-time performance baseline.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Skill-Creator as GPU Kernel Compiler.} The orchestration layer translates skill-creator's six-stage observation pipeline into a sequence of GPU kernel dispatches: each stage maps to a CUDA stream, each pattern to a kernel graph, each adapter to a persistent SM partition, and each routing decision to a stream synchronization event.
+
+\subsubsection{Silicon Architecture Map}
+
+\begin{asciibox}
+GSD-OS Orchestration Layer -- Silicon Mapping
+=============================================
+
+SKILL-CREATOR PIPELINE        GPU EXECUTION LAYER
+======================        ===================
+
+[1] OBSERVE                   CUDA Stream 0 (Session Monitor)
+    SessionObserver            |-- inotify events -> kernel launch
+    filesystem event bus       |-- activity.jsonl -> training buffer
+
+[2] DETECT                    CUDA Stream 1 (Pattern Classifier)
+    PatternDetector (6-stage)  |-- intent classifier kernel
+    confidence scoring         |-- threshold gate -> VRAM resident?
+
+[3] SUGGEST                   CUDA Stream 2 (Proposal Engine)
+    SkillProposer              |-- adapter candidate selection
+    chipset FPGA synthesis     |-- QLoRA ranking kernel
+
+[4] APPLY                     CUDA Stream 3 (Execution Router)
+    SkillApplicator            |-- adapter hot-swap (llama-server API)
+    hybrid routing             |-- cloud gate / local inference
+
+[5] LEARN                     CUDA Stream 4 (Distillation Pipeline)
+    TrainingPairExtractor      |-- JSONL -> QLoRA training kernel
+    QLoRA distillation         |-- Unsloth/PEFT adapter update
+
+[6] COMPOSE                   CUDA Stream 5 (Composition Layer)
+    SkillComposer              |-- adapter chain assembly
+    multi-skill pipelines      |-- merged kernel execution
+
+                               HOST BRIDGE (Tauri IPC)
+                               |-- NVML telemetry -> WebGL dashboard
+                               |-- silicon-usage.jsonl -> Denise panel
+                               |-- VRAM pressure -> budget overlay
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Module Architecture -- 6 Research Tracks
+=========================================
+
+M1: Silicon Orchestration Map      M2: LoRA Adapter Pipeline
+    (CRAFT-SILICON)                    (CRAFT-LORA)
+    |                                  |
+    +-- SM/warp mapping                +-- Training pair extraction
+    +-- CUDA stream assignment         +-- QLoRA distillation spec
+    +-- kernel graph design            +-- VRAM residency model
+                |                              |
+                +----------+  +---------------+
+                           |  |
+M3: CUDA/GL Dashboard      v  v      M4: Chipset Intent Router
+    (CRAFT-DISPLAY)    [SYNTHESIS]      (CRAFT-ROUTER)
+    |                  Wave 2 Opus      |
+    +-- NVML telemetry                 +-- Intent classifier design
+    +-- WebGL shader pipeline          +-- Stream dispatch protocol
+    +-- filesystem event bus           +-- Confidence gate logic
+                |                              |
+                +----------+  +---------------+
+                           |  |
+M5: Hybrid Execution       v  v      M6: Adapter Lifecycle
+    (CRAFT-HYBRID)     [MISSION]        (CRAFT-PERSIST)
+    |                  Wave 3           |
+    +-- Confidence model               +-- silicon.yaml governance
+    +-- cloud/local gate               +-- Staleness detection
+    +-- discrepancy logging            +-- Community quarantine
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Silicon Orchestration Map (CRAFT-SILICON)}
+
+Maps each of skill-creator's six pipeline stages to concrete GPU execution primitives: CUDA stream assignment, kernel graph design, SM warp allocation, and synchronization event topology. This module produces the foundational wiring diagram that all other modules reference.
+
+\subsubsection{M2: LoRA Adapter Pipeline (CRAFT-LORA)}
+
+Specifies the complete lifecycle from training pair extraction through QLoRA distillation to VRAM residency. Covers training data quality gates, Unsloth/PEFT configuration, adapter evaluation protocol, and the promotion criteria that move an adapter from candidate to resident status.
+
+\subsubsection{M3: CUDA/GL Dashboard Architecture (CRAFT-DISPLAY)}
+
+Specifies how NVML telemetry flows through the filesystem event bus into GSD-OS's WebGL shader pipeline. Covers the Denise panel data format, real-time VRAM heat map rendering, stream utilization visualization, and the adapter activation timeline display.
+
+\subsubsection{M4: Chipset Intent Router (CRAFT-ROUTER)}
+
+Designs the intent classifier that sits at the top of the orchestration layer, routing incoming skill invocations to the correct CUDA stream and adapter. Covers classifier architecture, confidence scoring, stream dispatch protocol, and the fallback chain when no adapter meets the confidence threshold.
+
+\subsubsection{M5: Hybrid Execution Protocol (CRAFT-HYBRID)}
+
+Specifies the confidence model that governs cloud/local routing decisions. Covers threshold calibration, discrepancy logging format, continuous improvement loop, and the degradation detection trigger that flags an adapter for retraining.
+
+\subsubsection{M6: Adapter Lifecycle Governance (CRAFT-PERSIST)}
+
+Specifies the silicon.yaml schema extensions, adapter versioning model, staleness detection algorithm, community adapter quarantine pipeline, and the integrity verification chain that links adapter hashes through chipset.lock.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# silicon.yaml -- GPU Orchestration Layer
+chipset: gsd-gpu-orchestration-v1
+base_model: qwen3-8b-instruct-Q4_K_M
+mode: hybrid          # cloud | local | hybrid
+
+gpu:
+  device: 0
+  vram_budget_gb: 6.0
+  resident_adapters_max: 4
+  overflow: degrade    # degrade | warn | block
+
+streams:
+  observe:   { id: 0, priority: low,    sm_fraction: 0.05 }
+  detect:    { id: 1, priority: high,   sm_fraction: 0.20 }
+  suggest:   { id: 2, priority: normal, sm_fraction: 0.10 }
+  apply:     { id: 3, priority: high,   sm_fraction: 0.30 }
+  learn:     { id: 4, priority: low,    sm_fraction: 0.25 }
+  compose:   { id: 5, priority: normal, sm_fraction: 0.10 }
+
+routing:
+  confidence_threshold: 0.82
+  fallback: cloud
+  discrepancy_log: logs/routing-discrepancy.jsonl
+
+adapters:
+  - id: frontend-patterns
+    file: adapters/frontend-patterns.safetensors
+    vram_mb: 420
+    confidence_floor: 0.80
+    sharing: private
+
+dashboard:
+  nvml_poll_interval_ms: 250
+  stream_telemetry: true
+  heat_map: vram_pressure
+  event_bus_path: .chipset/logs/silicon-usage.jsonl
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item CUDA stream assignment spec for all six skill-creator pipeline stages
+  \item QLoRA training pipeline using Unsloth/PEFT on RTX 4060 Ti (8GB)
+  \item NVML telemetry integration with GSD-OS filesystem event bus
+  \item WebGL shader pipeline for real-time VRAM and stream visualization in GSD-OS Denise panel
+  \item Confidence-based hybrid routing model with threshold calibration procedure
+  \item silicon.yaml schema v2 with adapter lifecycle extensions
+  \item Adapter hot-swap via llama-server API
+  \item Staleness detection algorithm and retraining trigger
+  \item Community adapter quarantine and integrity verification pipeline
+  \item Test suite covering adapter activation, routing correctness, and VRAM budget enforcement
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Multi-GPU adapter distribution (single GPU target for v1.0)
+  \item Vulkan compute backend (CUDA only in v1.0)
+  \item Real-time adapter fine-tuning during active session (batch distillation only)
+  \item NVLink / NVSwitch topology for mesh cluster (future; planned for dual RTX 5090 target)
+  \item Full Kubernetes device plugin integration (local workstation target only)
+  \item MIG (Multi-Instance GPU) partitioning
+  \item Adapter marketplace / public registry (quarantine pipeline only)
+  \item CPU-only (llama.cpp) parity testing (future)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+  \item A user with an RTX 4060 Ti can run \texttt{gsd chipset init} and have local inference operational within 5 minutes of base model download completion.
+  \item Each of skill-creator's six pipeline stages is assigned to a distinct named CUDA stream with documented SM fraction allocation and priority level.
+  \item The intent classifier correctly routes at least 85\% of skill invocations to the appropriate adapter, as measured against a holdout evaluation set.
+  \item Adapter hot-swap latency (from routing decision to first token) is below 150ms on RTX 4060 Ti with a 4-bit quantized 8B model.
+  \item The CUDA/GL dashboard renders VRAM pressure and stream utilization in real time at 4Hz refresh without exceeding 2\% CPU overhead on the host process.
+  \item QLoRA distillation from 50+ training pairs produces an adapter with at least 15\% lower perplexity than the base model on the user's holdout evaluation set.
+  \item The confidence model produces calibrated probability estimates (Brier score below 0.15) for cloud/local routing decisions on a held-out routing test set.
+  \item Staleness detection triggers retraining recommendation within 3 sessions of adapter performance falling below the confidence floor.
+  \item Community adapter quarantine pipeline evaluates correctness and integrity in under 60 seconds per adapter on reference hardware.
+  \item silicon.yaml v2 schema validates without error against the published JSON Schema for all existing v1 configurations (backward compatibility).
+  \item VRAM budget enforcement prevents adapter loading from exceeding the declared \texttt{vram\_budget\_gb} under all tested load conditions.
+  \item The complete orchestration layer adds less than 500ms to GSD session startup on reference hardware.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-silicon-layer-spec.md & Parent specification; this mission operationalizes Phase 1--4 of its implementation sequencing \\
+gsd-chipset-architecture-vision.md & Chipset YAML format, intent classifier concept, ASIC/FPGA modes \\
+gsd-os-desktop-vision.md & Dashboard architecture, Denise panel, WebGL renderer, Tauri IPC bridge \\
+gsd-skill-creator-analysis.md & Six-stage pipeline definition; SessionObserver and PatternDetector specs \\
+the-quark-and-the-compiler & Philosophical foundation: CUDA history, SGI/NVIDIA parallel, specialization thesis \\
+gsd-chipset-architecture-vision.md & Chipset FPGA synthesis mode feeds adapter routing decisions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Quark and the Compiler traces a single arc: from the Denny's meeting where Jensen Huang bet that the future belonged to specialized parallel processors, through the decade CUDA spent invisible while the industry doubted it, to the moment AlexNet ran on two GTX 580s and the world changed. The bet was not on raw power. It was on the principle that a processor which does one thing supremely well --- in parallel, at scale --- will outperform a processor that does everything adequately. SGI locked their geometry pipeline into proprietary silicon and was destroyed by commoditization. NVIDIA made CUDA programmable and open and built a fellowship that survived.
+
+The GSD Silicon Layer is that bet placed again, at the scale of a single developer's workflow. The adapters are not trying to replace Claude. They are the Paula chip --- handling the audio while the 68000 thinks about something harder. Every session that generates training pairs is CUDA's invisible decade compressed into an afternoon. Every routing decision that correctly deflects to local inference is a warp executing without calling back to the CPU. The dashboard is the open register map: the evidence that you understand your own machine.
+
+The spaces between the cloud and the silicon are where the work happens. This mission maps those spaces.
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{GSD-OS GPU Orchestration --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides technical findings for each of the six research modules. Each section is self-contained for the assigned CRAFT agent. The synthesis agent (Wave 2) uses this reference to identify cross-module dependencies and resolve conflicts.
+
+Key source organizations for this domain:
+\begin{itemize}[leftmargin=*]
+  \item NVIDIA Developer Documentation (CUDA Programming Guide, NVML API Reference, Nsight Systems)
+  \item PyTorch Foundation (KernelAgent multi-agent orchestration research, CUDA Graphs documentation)
+  \item arXiv cs.DC and cs.AR (GPU scheduling algorithms, MSched proactive memory scheduling)
+  \item MDPI Algorithms (comprehensive GPU scheduling survey, June 2025)
+  \item Unsloth.ai / HuggingFace PEFT (QLoRA training pipeline documentation)
+  \item IEEE Transactions on Parallel and Distributed Systems (RTGPU real-time GPU scheduling)
+\end{itemize}
+
+\subsection{M1 Reference: Silicon Orchestration Map}
+
+\subsubsection{CUDA Stream Architecture for Pipeline Stages}
+
+CUDA Streams provide the primary mechanism for mapping skill-creator's six stages to parallel GPU execution. Concurrent kernel execution across streams allows the observation stage (passive, low-priority) to run simultaneously with the apply stage (active, high-priority), matching the temporal structure of a GSD session.
+
+CUDA Graphs extend this model significantly. Rather than launching kernels individually from the CPU, a CUDA Graph captures an entire execution sequence as a DAG and allows the GPU to manage the execution schedule internally. For skill-creator's pattern detection pipeline (a fixed sequence of classify $\rightarrow$ score $\rightarrow$ threshold $\rightarrow$ route), CUDA Graphs eliminate CPU round-trip overhead on every invocation. The pattern detection sequence, once captured, executes as a single device-initiated graph launch.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.8cm}L{1.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Stage} & \tableheader{GPU Primitive} & \tableheader{Stream} & \tableheader{SM Frac.} & \tableheader{Key Mechanism} \\
+\midrule
+Observe & inotify kernel + buffer writer & 0 & 5\% & Persistent thread monitors filesystem event bus \\
+Detect & Intent classifier kernel graph & 1 & 20\% & CUDA Graph; device-initiated dispatch \\
+Suggest & Adapter ranking kernel & 2 & 10\% & Beam search over adapter metadata index \\
+Apply & Adapter hot-swap + inference & 3 & 30\% & llama-server API; stream sync on route decision \\
+Learn & QLoRA training kernel & 4 & 25\% & Unsloth PEFT; batched, low-priority stream \\
+Compose & Adapter chain assembly & 5 & 10\% & Merged kernel execution (KernelAgent pattern) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{SM Occupancy and Warp Scheduling}
+
+Research from IEEE TPDS (RTGPU, 2023) establishes that SM-granularity scheduling via persistent threads enables concurrent execution of independent kernels by controlling the number of SMs each kernel occupies. For GSD's orchestration layer, the observe and learn streams (low priority, background) should use persistent threads configured to occupy no more than 30\% of available SMs combined, leaving the high-priority apply stream with guaranteed SM capacity for inference requests.
+
+NVIDIA's Multi-Process Service (MPS) allows CUDA contexts to execute simultaneously, bypassing the hardware limitation of time-sliced scheduling. For GSD sessions where multiple streams compete for SM capacity, MPS can improve throughput by 15--25\% on workloads with uneven kernel sizes.
+
+\subsubsection{KernelAgent Pattern for Orchestration}
+
+PyTorch's KernelAgent (March 2026) demonstrates that multi-agent orchestration applied directly to GPU kernel optimization produces significant gains through parallel exploration and shared memory. The KernelAgent pattern --- Profile $\rightarrow$ Diagnose $\rightarrow$ Prescribe $\rightarrow$ Orchestrate $\rightarrow$ Explore $\rightarrow$ Measure --- maps to skill-creator's own pipeline stages with near-perfect correspondence. This is not coincidental: both systems solve the problem of parallel search over a configuration space with shared contextual memory and termination criteria.
+
+GSD's orchestration layer should implement the shared memory broadcast pattern: after each wave of adapter evaluation, outcomes are summarized into a structured context broadcast to all routing agents in subsequent rounds, preventing repeated dead-end paths and accelerating convergence on optimal SM allocation.
+
+\subsection{M2 Reference: LoRA Adapter Pipeline}
+
+\subsubsection{QLoRA Distillation Mechanics}
+
+QLoRA (Dettmers et al., 2023) enables fine-tuning of large quantized models on consumer GPU hardware by training only low-rank decomposition matrices while keeping the base model frozen in 4-bit NormalFloat format. On an RTX 4060 Ti (8GB VRAM), QLoRA training of an 8B parameter model in Q4\_K\_M format consumes approximately 5.5--6.5GB VRAM during training, leaving minimal headroom. The practical ceiling for simultaneous training and inference on this hardware is a single training run with inference paused, or use of CUDA MPS to time-slice.
+
+Unsloth's optimized PEFT implementation reduces QLoRA training memory overhead by 40--60\% through custom CUDA kernels for gradient checkpointing, enabling simultaneous adapter distillation and inference on 8GB VRAM with careful SM allocation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Configuration} & \tableheader{VRAM Use} & \tableheader{Notes} \\
+\midrule
+Base model only (inference) & 4.5 GB & Q4\_K\_M quantized; no training \\
+Base + 1 LoRA (inference) & 4.9 GB & 420MB per adapter average \\
+Base + 4 LoRA (resident) & 6.2 GB & Maximum resident within 6GB budget \\
+QLoRA training (Unsloth) & 6.1 GB & Inference paused; dedicated training stream \\
+Training + inference (MPS) & 7.8 GB & Exceeds budget; requires stream priority enforcement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Training Pair Quality Gates}
+
+The Silicon Layer specification calls for training pairs extracted passively from session activity. Research in curriculum learning and self-supervised data curation establishes that pair quality has greater impact on adapter performance than pair quantity. A quality gate pipeline should filter pairs on: (1) response quality score above 0.75 (measured by a lightweight judge model); (2) prompt diversity (cosine distance from cluster centroids); (3) temporal recency weight (recent sessions weighted 2x over older sessions); and (4) minimum session context length of 500 tokens to ensure adequate pattern information.
+
+\subsubsection{Adapter Promotion Criteria}
+
+An adapter moves from candidate to resident status when it meets all three of: perplexity improvement over base model of at least 15\% on holdout evaluation set; confidence calibration Brier score below 0.15; and minimum 50 training pairs with quality gate pass rate above 80\%.
+
+\subsection{M3 Reference: CUDA/GL Dashboard Architecture}
+
+\subsubsection{NVML Telemetry Pipeline}
+
+NVIDIA Management Library (NVML) exposes GPU metrics via a C API, with Python bindings available through \texttt{pynvml}. For GSD-OS's Tauri/Rust backend, NVML can be accessed via the \texttt{nvml-wrapper} Rust crate. Key telemetry streams relevant to the Silicon Layer dashboard:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Poll Rate} & \tableheader{Dashboard Use} \\
+\midrule
+VRAM used / total & 250ms & Pressure heat map; budget overlay \\
+GPU utilization \% & 250ms & SM occupancy indicator \\
+Memory bandwidth & 500ms & Bus saturation gauge \\
+Temperature & 1s & Thermal throttle warning (PNW summer note) \\
+Process VRAM map & 1s & Per-adapter VRAM allocation breakdown \\
+CUDA context count & 1s & MPS client count indicator \\
+Power consumption & 1s & Budget-aware throttling signal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{WebGL Shader Pipeline for Telemetry Visualization}
+
+GSD-OS's Denise panel uses WebGL shaders for the CRT boot sequence and block rendering engine. The same shader infrastructure can render NVML telemetry with minimal additional code. VRAM pressure maps to a fragment shader that colors each memory region by occupancy level (green $\rightarrow$ yellow $\rightarrow$ red gradient using the same OCS-era color palette). Stream utilization renders as a six-lane pipeline visualization with animated flow indicators.
+
+The filesystem event bus (\texttt{silicon-usage.jsonl}) bridges the Tauri Rust backend (NVML polling) to the WebGL frontend. NVML data is serialized to JSONL at 250ms intervals; the Tauri file watcher emits events to the WebView; the WebGL canvas updates the heat map via a uniform buffer update. This design reuses the existing dashboard's file-watch architecture with zero new IPC mechanisms.
+
+\subsubsection{Amiga Denise Register Map Parallel}
+
+The Denise chip in the original Amiga handled display DMA through a set of hardware registers (color palette, bitplane pointers, sprite data) that programmers could write directly via chip memory addresses. GSD-OS's Denise panel follows this model: each NVML metric has a named ``register'' in the dashboard's state object, updated at its declared poll rate, readable by any panel component via the WebGL uniform buffer. The dashboard is not a black box. The register map is published.
+
+\subsection{M4 Reference: Chipset Intent Router}
+
+\subsubsection{Intent Classifier Architecture}
+
+The chipset's intent classifier sits at the top of the orchestration stack, receiving raw skill invocation requests and returning (adapter\_id, confidence, stream\_id) tuples. For GSD's workload, a lightweight classifier (DistilBERT-class, sub-1B parameters, running on CPU to avoid VRAM contention) achieves sufficient accuracy. The classifier is trained on chipset-observed prompt/adapter pairs using a simple fine-tuning loop distinct from the QLoRA adapter pipeline.
+
+Research on adaptive scheduling (MDPI Algorithms survey, 2025) establishes that hybrid schedulers combining formal methods (threshold rules) with learned models outperform either approach alone. The intent router should implement a two-stage gate: (1) a rule-based pre-filter for obvious cases (e.g., ``generate a unit test'' always routes to test-gen adapter if confidence $> 0.95$); (2) the learned classifier for ambiguous cases.
+
+\subsubsection{Stream Dispatch Protocol}
+
+When the router selects a stream, it must synchronize with the target stream's current state before dispatching. The protocol:
+
+\begin{asciibox}
+DISPATCH PROTOCOL
+==================
+1. QUERY: classifier returns (adapter_id, confidence, stream_id)
+2. GATE:  confidence >= threshold? -> local path : cloud path
+3. SYNC:  cudaStreamQuery(stream_id) -- is stream idle?
+   a. IDLE: dispatch immediately
+   b. BUSY: enqueue in stream's work queue (CUDA atomic counter)
+4. SWAP:  if adapter_id != currently_loaded[stream_id]:
+            llama-server POST /api/load-adapter {adapter_id}
+            await 200 OK (< 150ms target)
+5. INFER: llama-server POST /v1/completions {prompt, adapter}
+6. LOG:   append to silicon-usage.jsonl:
+            {ts, adapter_id, stream_id, confidence, latency_ms, source}
+\end{asciibox}
+
+\subsection{M5 Reference: Hybrid Execution Protocol}
+
+\subsubsection{Confidence Model Design}
+
+The confidence model must be calibrated (not just accurate) --- meaning that when it says ``80\% confident,'' approximately 80\% of those predictions should be correct. Calibration is more important than raw accuracy for routing decisions, because an overconfident model routes too aggressively to local inference and degrades output quality invisibly.
+
+Calibration technique: Platt scaling applied to the intent classifier's raw logits. After training the classifier, fit a logistic regression layer on a held-out calibration set mapping raw scores to calibrated probabilities. The Brier score (mean squared error of probabilistic predictions) provides the primary calibration quality metric; target Brier score below 0.15 (well-calibrated by convention).
+
+\subsubsection{Discrepancy Logging and Continuous Improvement}
+
+When a local inference result diverges significantly from what the cloud API would have returned, this is evidence that the adapter needs retraining. Discrepancy is measured by computing the semantic similarity between the local result and a sampled cloud result (using a lightweight embedding model). When similarity falls below 0.75, the (prompt, local\_response, cloud\_response) triple is added to the discrepancy log and flagged for the next distillation cycle.
+
+A 5\% random sampling rate of local inferences is sufficient to maintain the discrepancy log without overwhelming the cloud API budget. The sampling rate increases automatically to 20\% when the rolling average confidence score drops below 0.70, providing early warning of adapter degradation.
+
+\subsection{M6 Reference: Adapter Lifecycle Governance}
+
+\subsubsection{silicon.yaml Schema Extensions}
+
+The v1.0 silicon.yaml schema covers base model declaration, adapter file paths, and VRAM budgets. The v2.0 schema (this mission's output) adds:
+
+\begin{asciibox}
+# silicon.yaml v2 -- Adapter Lifecycle Extensions
+adapters:
+  - id: frontend-patterns
+    file: adapters/frontend-patterns.safetensors
+    checksum_sha256: "abc123..."          # NEW: integrity hash
+    version: "2.1.0"                     # NEW: semver versioning
+    vram_mb: 420
+    confidence_floor: 0.80
+    staleness_threshold_days: 30         # NEW: auto-flag for review
+    training_pairs_count: 127            # NEW: training data provenance
+    eval_brier_score: 0.11               # NEW: calibration quality
+    sharing: private
+    quarantine: false                    # NEW: community adapter gate
+    promoted_at: "2026-03-15T14:22:00Z" # NEW: promotion timestamp
+\end{asciibox}
+
+\subsubsection{Staleness Detection Algorithm}
+
+An adapter becomes stale when: (1) the rolling 7-day average confidence score drops below the declared \texttt{confidence\_floor}; or (2) the discrepancy log accumulates more than 15 high-divergence samples in any 7-day window; or (3) more than \texttt{staleness\_threshold\_days} have elapsed since the last training pair was added. Stale adapters are automatically downgraded from resident to candidate status and a retraining recommendation is surfaced to the user via the dashboard.
+
+\subsubsection{Community Adapter Quarantine Pipeline}
+
+Community adapters (installed via \texttt{gsd chipset install}) are held in quarantine until they pass: (1) checksum verification against the published hash; (2) behavioral testing against a canonical eval set (correctness checks on 20 known-good prompt/response pairs); (3) VRAM footprint measurement (actual vs. declared); and (4) inference latency measurement on reference hardware. Adapters failing any test are rejected with a structured error report. The quarantine pipeline runs as a one-time background process at install time, completing in under 60 seconds on reference hardware.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Training data privacy & ABSOLUTE & Training pairs never shared by default; \texttt{silicon.yaml} \texttt{sharing: private} is default \\
+Adapter supply chain & GATE & Checksum verification mandatory before any community adapter loads \\
+VRAM exhaustion & GATE & Hard budget limit enforced in silicon.yaml; overflow behavior configurable \\
+Thermal management & ANNOTATE & PNW summer conditions; temperature telemetry with throttle warning in dashboard \\
+Model behavior drift & GATE & Discrepancy logging + staleness detection; user notified before silent degradation \\
+Community adapter malice & ABSOLUTE & Behavioral eval against canonical test set; no adapter executes before quarantine pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Documentation}
+\begin{itemize}[leftmargin=*]
+  \item NVIDIA, \textit{CUDA Programming Guide v12.x} (2026). CUDA Streams, CUDA Graphs, MPS.
+  \item NVIDIA, \textit{NVML API Reference Guide} (2026). Telemetry metrics and polling patterns.
+  \item NVIDIA, \textit{Nsight Systems User Guide} (2025). Timeline profiling and stream visualization.
+  \item HuggingFace, \textit{PEFT Documentation} (2026). QLoRA configuration and adapter management.
+  \item Unsloth.ai, \textit{Unsloth Fine-Tuning Documentation} (2026). Memory-optimized QLoRA.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=*]
+  \item Dettmers et al., ``QLoRA: Efficient Finetuning of Quantized LLMs,'' \textit{NeurIPS 2023}.
+  \item Guevara \& Gregg, ``Enabling Task Parallelism in the CUDA Scheduler,'' Stanford CS (2012).
+  \item Liu et al., ``RTGPU: Real-Time GPU Scheduling of Hard Deadline Parallel Tasks,'' \textit{IEEE TPDS} 43(2), 2023.
+  \item Wang et al., ``MSched: GPU Multitasking via Proactive Memory Scheduling,'' arXiv:2512.24637 (2026).
+  \item MDPI, ``Algorithmic Techniques for GPU Scheduling: A Comprehensive Survey,'' \textit{Algorithms} 18(7), June 2025.
+\end{itemize}
+
+\subsubsection{Technical Resources}
+\begin{itemize}[leftmargin=*]
+  \item PyTorch Foundation, ``KernelAgent: Hardware-Guided GPU Kernel Optimization via Multi-Agent Orchestration,'' pytorch.org, March 2026.
+  \item O'Reilly, \textit{AI Systems Performance Engineering}, Ch.~6 (GPU Architecture and CUDA) and Ch.~12 (Dynamic Scheduling and CUDA Graphs), November 2025.
+  \item Suraj J., ``How Kubernetes Evolved to Tame the GPU Beast (2025 Edition),'' Medium, October 2025.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Design and specify the complete GSD-OS Skill-Creator Orchestration Layer: the runtime wiring that connects skill-creator's six-stage observation pipeline to GPU execution primitives (CUDA streams, kernel graphs, LoRA adapter hot-swap, VRAM budget enforcement), a confidence-calibrated hybrid routing model, real-time CUDA/GL telemetry through the GSD-OS WebGL dashboard, and a governed adapter lifecycle (silicon.yaml v2, staleness detection, community quarantine). Deliverable is a complete specification package ready for implementation in gsd-skill-creator's Claude Code workflow.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+Wave 0: Foundation [Sequential]
+  [Schema]--[Source Index]--[Shared Types]
+               |
+       (cache checkpoint)
+
+Wave 1: Parallel Research [3 tracks]
+  Track A                Track B                Track C
+  [CRAFT-SILICON]        [CRAFT-LORA]           [CRAFT-DISPLAY]
+  [CRAFT-ROUTER]         [CRAFT-HYBRID]         [CRAFT-PERSIST]
+       |                      |                      |
+       +----------+-----------+----------+-----------+
+                  |                      |
+          (cache checkpoint)     (cache checkpoint)
+
+Wave 2: Synthesis [Sequential, Opus]
+  [ARCH + INTEG + ANALYST]
+  Cross-module reconciliation
+  Dependency conflict resolution
+  Unified silicon.yaml v2 schema
+               |
+       (cache checkpoint)
+
+Wave 3: Publication + Verification [Sequential]
+  [EXEC-1: Spec documents]
+  [VERIFY: Test plan execution]
+  [EXEC-2: Dashboard shader spec]
+  [LOG: Milestone commit]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{L\arabic*.}]
+  \item \textbf{Filesystem Event Bus} --- inotify/fanotify dispatcher feeding Observe stream (prerequisite)
+  \item \textbf{Intent Classifier} --- CPU-resident DistilBERT-class model; routes to CUDA stream
+  \item \textbf{CUDA Stream Manager} --- Six named streams with SM fraction allocation and priority
+  \item \textbf{Adapter Hot-Swap Layer} --- llama-server API integration; resident adapter cache
+  \item \textbf{QLoRA Distillation Pipeline} --- Unsloth/PEFT; Stream 4; batched low-priority
+  \item \textbf{VRAM Budget Enforcer} --- Hard limit gate; overflow policy enforcement
+  \item \textbf{NVML Telemetry Bridge} --- Rust nvml-wrapper; 250ms polling; JSONL event bus output
+  \item \textbf{WebGL Dashboard Renderer} --- Denise panel; heat map shader; stream utilization display
+  \item \textbf{Hybrid Routing Engine} --- Confidence gate; discrepancy logger; staleness monitor
+  \item \textbf{Adapter Lifecycle Manager} --- silicon.yaml v2; quarantine pipeline; promotion criteria
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Format} & \tableheader{Success Criterion} \\
+\midrule
+D1 & CUDA Stream Specification & Markdown + YAML & All 6 stages mapped; SM fractions sum to 100\% \\
+D2 & QLoRA Pipeline Spec & Markdown + config & Unsloth config validates; VRAM table complete \\
+D3 & NVML Telemetry Bridge Spec & Rust interface doc & Compiles; nvml-wrapper integration tested \\
+D4 & WebGL Shader Spec (Denise) & GLSL + JSON schema & Heat map renders at 4Hz; CPU overhead $<$2\% \\
+D5 & Intent Classifier Design & Markdown + Python & Training pipeline documented; eval set defined \\
+D6 & Hybrid Routing Spec & Markdown + YAML & Confidence model calibrated; Brier $<$0.15 \\
+D7 & silicon.yaml v2 Schema & JSON Schema + examples & Backward compatible; all v1 configs validate \\
+D8 & Adapter Lifecycle Spec & Markdown & Staleness algorithm complete; quarantine pipeline defined \\
+D9 & Test Suite Specification & Markdown (test IDs) & 12 SC mapped; BLOCK tests identified \\
+D10 & Integration Guide & Markdown & Startup $<$500ms; handoff to Claude Code ready \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{2.5cm}C{1.4cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Schema + Source Index & None & Haiku & 8K \\
+M1: Silicon Orch.\ Map & W0, Research Ref & Sonnet & 22K \\
+M2: LoRA Adapter Pipeline & W0, M1 partial & Sonnet & 25K \\
+M3: CUDA/GL Dashboard & W0, M1 & Sonnet & 20K \\
+M4: Intent Router & W0, M1 & Sonnet & 18K \\
+M5: Hybrid Exec.\ Protocol & W0, M4 & Opus & 28K \\
+M6: Adapter Lifecycle & W0, M2, M5 & Sonnet & 20K \\
+W2: Synthesis & M1--M6 & Opus & 35K \\
+W3: Spec Docs + Shaders & W2 & Sonnet & 30K \\
+W3: Test Plan + Verify & W2 & Sonnet & 18K \\
+W3: Log + Commit & W3 docs & Haiku & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$28\% & M5 Hybrid Protocol (confidence calibration is judgment-heavy); W2 Synthesis (cross-module reconciliation, silicon.yaml v2 design authority) \\
+Sonnet & $\sim$62\% & All six module specs; WebGL shader documentation; test plan; integration guide \\
+Haiku & $\sim$10\% & Wave 0 scaffolding; shared schemas; commit messages; template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{1.8cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Model Mix} & \tableheader{Tracks} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Haiku & 1 (seq.) & 8K \\
+1 & Parallel Research & Sonnet + Opus & 3 (par.) & 133K \\
+2 & Synthesis & Opus & 1 (seq.) & 35K \\
+3 & Publication & Sonnet + Haiku & 1 (seq.) & 53K \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated}} & \textbf{229K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W0-A & PLAN & Haiku & Wave decomposition + dependency graph \\
+W0-B & LOG & Haiku & Shared source index (bibliography JSON) \\
+W0-C & BUDGET & Haiku & Token budget allocation per wave/module \\
+W0-D & SECURE & Haiku & Safety boundary checklist (privacy, thermal, supply chain) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A} (Silicon + Router):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1-A1 & CRAFT-SILICON & Sonnet & CUDA stream spec for all 6 stages (D1) \\
+W1-A2 & CRAFT-ROUTER & Sonnet & Intent classifier design + dispatch protocol (D5) \\
+W1-A3 & VERIFY & Sonnet & SM fraction audit; dispatch protocol correctness check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B} (LoRA + Hybrid):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1-B1 & CRAFT-LORA & Sonnet & QLoRA pipeline spec + VRAM table (D2) \\
+W1-B2 & CRAFT-HYBRID & Opus & Confidence model + calibration procedure (D6) \\
+W1-B3 & SURGEON & Sonnet & VRAM budget stress test design; thermal edge cases \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C} (Display + Lifecycle):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1-C1 & CRAFT-DISPLAY & Sonnet & NVML bridge spec + WebGL shader spec (D3, D4) \\
+W1-C2 & CRAFT-PERSIST & Sonnet & Adapter lifecycle spec + silicon.yaml v2 schema (D7, D8) \\
+W1-C3 & INTEG & Sonnet & Cross-track dependency map; interface contracts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W2-A & ARCH & Opus & Unified silicon.yaml v2 schema; stream assignment reconciliation \\
+W2-B & ANALYST & Opus & Cross-module pattern analysis; shared state protocol \\
+W2-C & INTEG & Opus & Interface contracts (NVML $\leftrightarrow$ WebGL, Router $\leftrightarrow$ Streams) \\
+W2-D & RETRO & Sonnet & Wave 1 lessons; spec gap list for Wave 3 \\
+W2-E & CAPCOM & --- & \textbf{HUMAN GATE: Review synthesis output before Wave 3} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W3-A & EXEC-1 & Sonnet & Final spec documents D1--D8 (markdown) \\
+W3-B & EXEC-2 & Sonnet & GLSL shader code (heat map, stream viz) + D4 \\
+W3-C & VERIFY & Sonnet & SC-1 through SC-12 verification matrix \\
+W3-D & EXEC-1 & Sonnet & Integration guide D10 + implementation roadmap \\
+W3-E & LOG & Haiku & Milestone commit messages + changelog entry \\
+W3-F & CAPCOM & --- & \textbf{HUMAN GATE: Final review before milestone close} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Wave 0 produces the source index} as the first output; all Wave 1 agents load it as prefix context (exploits 5-minute cache TTL window)
+  \item \textbf{Research Reference (Stage 2)} is included as context for all Wave 1 CRAFT agents; cache hit probability high given fixed content
+  \item \textbf{Track A and Track B} can launch simultaneously; Track C can begin after W0 completes
+  \item \textbf{Wave 2 Opus calls} receive all six module outputs as a single batched context; cache warm from Wave 1 completion
+  \item \textbf{GLSL shader code} (W3-B) is self-contained; can be generated independently of D1--D8 finalization
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+  [W0: Foundation]
+         |
+    +----+----+----+
+    |         |    |
+[Track A]  [Track B]  [Track C]      <- Wave 1, parallel
+[M1,M4]    [M2,M5]   [M3,M6]
+    |         |    |
+    +----+----+----+
+         |
+  [W2: Synthesis]
+  ARCH + ANALYST + INTEG
+         |
+    [HUMAN GATE]
+         |
+  [W3: Publication]
+  EXEC-1, EXEC-2, VERIFY, LOG
+         |
+    [HUMAN GATE]
+         |
+  [MILESTONE CLOSE]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 4 & BLOCK & Mission does not advance \\
+Core Functionality & 12 & HIGH & Fix before Wave 3 close \\
+Integration & 6 & HIGH & Fix before milestone close \\
+Edge Cases & 8 & MEDIUM & Document or defer \\
+Performance & 4 & MEDIUM & Document; defer if $<$20\% miss \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-T01 & Training pair privacy & Confirmed: no training pairs leave local filesystem without explicit \texttt{sharing: public} in silicon.yaml \\
+SC-T02 & VRAM budget enforcement & Confirmed: adapter loading blocked when accumulated VRAM exceeds declared \texttt{vram\_budget\_gb} \\
+SC-T03 & Community adapter quarantine & Confirmed: no community adapter executes inference before quarantine pipeline completes \\
+SC-T04 & Checksum verification & Confirmed: adapter load blocked when SHA-256 hash does not match silicon.yaml declaration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}L{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC-1 & Init operational $<$5min & CORE-01, 02 & Pending \\
+SC-2 & Six streams with SM fractions & CORE-03, 04 & Pending \\
+SC-3 & Router 85\% accuracy & CORE-05, 06, 07 & Pending \\
+SC-4 & Hot-swap $<$150ms & PERF-01 & Pending \\
+SC-5 & Dashboard 4Hz, $<$2\% CPU & PERF-02, 03 & Pending \\
+SC-6 & Adapter 15\% perplexity improvement & CORE-08, 09 & Pending \\
+SC-7 & Confidence Brier $<$0.15 & CORE-10, INTEG-01 & Pending \\
+SC-8 & Staleness within 3 sessions & CORE-11, EDGE-01 & Pending \\
+SC-9 & Quarantine $<$60 seconds & SC-T03, CORE-12 & Pending \\
+SC-10 & v2 schema backward compat & INTEG-02 & Pending \\
+SC-11 & VRAM enforcement & SC-T02, PERF-04 & Pending \\
+SC-12 & Startup $<$500ms & INTEG-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; CAPCOM interface \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+ARCH & Architecture & Cross-cutting structural decisions; silicon.yaml v2 design authority \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring if scope expands \\
+CRAFT-SILICON & Silicon Mapper & CUDA stream spec; SM allocation; kernel graph design \\
+CRAFT-LORA & LoRA Engineer & QLoRA pipeline spec; training pair quality gates; VRAM table \\
+CRAFT-DISPLAY & Display Engineer & NVML bridge; WebGL shader spec; Denise panel integration \\
+CRAFT-ROUTER & Router Designer & Intent classifier architecture; dispatch protocol; confidence gate \\
+CRAFT-HYBRID & Hybrid Protocol & Confidence model calibration; discrepancy logging; routing policy \\
+CRAFT-PERSIST & Lifecycle Mgr & silicon.yaml v2 schema; staleness algorithm; quarantine pipeline \\
+INTEG & Integration & Cross-module interface contracts; dependency conflict resolution \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; shared state protocol \\
+VERIFY & Verification & SC mapping; test execution; accuracy and calibration audit \\
+SURGEON & Health Monitor & VRAM stress analysis; thermal edge cases; quality degradation detection \\
+SECURE & Security & Privacy boundary enforcement; checksum protocol; supply chain gates \\
+RETRO & Retrospective & Post-wave analysis; spec gap detection; lessons broadcast \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (Wave 2 + Wave 3) \\
+BUDGET & Resource Mgr & Token budget tracking; session planning; overflow alerts \\
+EXEC-1 & Document Executor & Final spec documents D1--D8, D10 \\
+EXEC-2 & Shader Executor & GLSL shader code; WebGL rendering spec \\
+SCOUT & Research Agent & Gap-fill web research; source validation; bibliography maintenance \\
+LOG & Chronicle & Audit trail; commit messages; milestone changelog \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (22 roles, team-of-teams topology) \\
+Research Modules & 6 (M1--M6, all parallelizable in Wave 1) \\
+Parallel Tracks & 3 (Track A: Silicon+Router, Track B: LoRA+Hybrid, Track C: Display+Lifecycle) \\
+Wave Count & 4 (W0 Foundation, W1 Research, W2 Synthesis, W3 Publication) \\
+Human Gates & 2 (post-W2 synthesis review; post-W3 final review) \\
+Safety-Critical Tests & 4 (all BLOCK: privacy, VRAM, quarantine, checksum) \\
+Estimated Token Budget & 229K across all waves \\
+Model Split & Opus 28\% / Sonnet 62\% / Haiku 10\% \\
+Estimated Sessions & 3--4 sessions (7--9 context windows) \\
+Primary Hardware Target & RTX 4060 Ti 8GB VRAM (single GPU, PNW workstation) \\
+Future Hardware Target & Dual RTX 5090 (mesh cluster; NVLink topology out of scope v1) \\
+Key Dependency & gsd-silicon-layer-spec.md Phase 0 (Filesystem Event Bus) must be complete \\
+Entry Condition & silicon.yaml v1 deployed; llama-server operational; GSD-OS Tauri app built \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The Amiga's custom chipset was not faster than the competition. It was wired differently.\\
+Agnus handled the memory bus. Denise painted the screen. Paula drove the audio channels.\\
+The 68000 thought.\\
+None of them asked permission. None of them waited their turn.\\
+They had the register map. They had the bus. They had the architecture.\\
+\\
+The Silicon Layer is that wiring. The dashboard is that register map.\\
+The GPU does not replace Claude. It handles the patterns Claude taught it,\\
+so Claude can think about something harder.\\
+\\
+Your chipset will get faster as you use it.\\
+That is the Amiga Principle.\\
+That is the spaces between.``}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- GSD Ecosystem Philosophy / The Quark and the Compiler / The Space Between}}
+\end{quotebox}
+
+\end{document}
