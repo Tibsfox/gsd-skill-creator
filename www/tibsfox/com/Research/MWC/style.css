@@ -1,0 +1,192 @@
+/* MWC -- Timber/Trades/Copper theme, PNW Millwork Co-op
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --wood: #4E342E;
+  --wood-light: #EFEBE9;
+  --wood-mid: #5D4037;
+  --wood-dark: #3E2723;
+  --copper: #BF360C;
+  --copper-light: #FBE9E7;
+  --copper-mid: #D84315;
+  --forest: #1B5E20;
+  --forest-light: #E8F5E9;
+
+  /* Semantic overrides */
+  --page-bg: #FAF8F6;
+  --page-text: #212121;
+  --page-text-light: #6D4C41;
+  --link: var(--copper);
+  --link-hover: var(--wood);
+  --accent: var(--copper);
+  --accent-light: var(--copper-light);
+  --accent-dark: var(--wood-dark);
+  --card-bg: white;
+  --card-border: #D7CCC8;
+  --card-shadow: rgba(78,52,46,0.12);
+  --border: #D7CCC8;
+  --parchment: var(--wood-light);
+}
+
+/* ===================================================
+   2. HEADER -- timber/copper gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #2c1a12 0%, #4E342E 40%, #3E2723 70%, #1B3518 100%);
+  border-bottom: 4px solid var(--copper);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(191,54,12,0.2) 0%, transparent 60%),
+              radial-gradient(ellipse at 75% 50%, rgba(27,94,32,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #EFEBE9; }
+header .subtitle { color: #BCAAA4; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--wood);
+  border-bottom-color: var(--wood-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--copper); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--wood-light);
+  border-left: 4px solid var(--copper);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #3E2723;
+}
+
+th { background: var(--wood); }
+td { border-bottom-color: #F5F5F5; }
+tr:nth-child(even) { background: rgba(78,52,46,0.04); }
+tr:hover { background: rgba(78,52,46,0.08); }
+
+pre {
+  background: #2c1a12;
+  color: #E8DDD0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--copper-mid);
+}
+code {
+  background: var(--copper-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--copper);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #D7CCC8;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(78,52,46,0.12); border-color: var(--copper); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #D7CCC8;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--copper);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-legal { background: var(--copper-light); color: var(--copper); }
+.tag-prod { background: var(--wood-light); color: var(--wood); }
+.tag-supply { background: var(--forest-light); color: var(--forest); }
+.tag-biz { background: #FFF3E0; color: #E65100; }
+.tag-workforce { background: #E3F2FD; color: #1565C0; }
+.tag-integ { background: #ECEFF1; color: #37474F; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #D7CCC8;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--copper); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--copper-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--copper);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #FFCCBC; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
