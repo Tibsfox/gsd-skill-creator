@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silicon Forest Corridor — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1A237E;
+  --secondary: #BF360C;
+  --tertiary: #1B5E20;
+  --accent: #2E7D32;
+  --light-bg: #E8EAF6;
+  --card-bg: #C5CAE9;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #0D1642 0%, #1A237E 40%, #1B5E20 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #A5D6A7; letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--primary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: #37474F; font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Silicon Forest Corridor</h1>
+  <h2>Snohomish County &middot; Hwy 99 &middot; Paine Field &middot; Mukilteo&ndash;Edmonds</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="silicon-forest-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification. Editable source file.</div>
+    </a>
+    <a href="../index.html" class="file-card">
+      <div class="ext">HTML &middot; Research Hub</div>
+      <div class="name">Research Modules</div>
+      <div class="desc">Six completed research modules with cross-references, sources, and verification matrix.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative, 5 problem statements, core concept</li>
+          <li>Geographic study region and module architecture diagrams</li>
+          <li>6 research modules: Civic Layer, Creative Commons, JIT Zone, Ferry Mesh, Knowledge Network, Pacific Circuit</li>
+          <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Sno-Isle TECH: 24 programs, 5 pathways, fiber optic certification (first in USA), maritime vessel ops</li>
+          <li>IOOF fraternal model: Fremont Lodge #86, Capitol Hill, co-op convergence with RCW 23.86</li>
+          <li>Hub @ Everett redevelopment: Topgolf anchor, creative commons opportunity, funding mechanisms</li>
+          <li>Paine Field JIT zone: Boeing infrastructure, Airport Road corridor, component inflow logistics</li>
+          <li>Ferry mesh: Mukilteo-Edmonds spine, daily beat protocol, food distribution synchronization</li>
+          <li>Global co-op network: GitHub, Minecraft, Amazon, Costco, Nintendo, Boeing, BNR-SF integration</li>
+          <li>Pacific Assembly Circuit: Asia &rarr; Paine Field &rarr; Silicon Valley &rarr; Global &rarr; Recycle loop</li>
+          <li>Safety considerations and full source bibliography (30+ sources)</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>10 deliverables, 4-wave execution plan with 3 parallel tracks</li>
+          <li>Fleet activation profile: 20 roles including 6 CRAFT specialists</li>
+          <li>22 tests (4 safety-critical), verification matrix</li>
+          <li>~242K token budget, ~18-22 context windows, ~6-8 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the document</li>
+      <li>Wave 0 produces shared glossary, source index, and safety gates</li>
+      <li>Wave 1 executes three parallel tracks (A: Civic+Social, B: Industrial+Logistics, C: Intelligence+Global)</li>
+      <li>Wave 2 synthesizes cross-module integration, cultural sensitivity review, and circuit closure</li>
+      <li>Wave 3 assembles, verifies, and delivers the final document package</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode silicon-forest-mission.tex
+xelatex -interaction=nonstopmode silicon-forest-mission.tex
+xelatex -interaction=nonstopmode silicon-forest-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "The corridor starts at home. It always will. The ferry knows the shift schedule. The restaurant knows
+    the ferry. The GitHub commit knows the assembly window. The recycled component knows the next build.
+    Small town feel on a global scale. That is the daily beat. That is the Silicon Forest Corridor."
+    &mdash; Fox Infrastructure Group, Mukilteo, Washington
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Silicon Forest Corridor &middot; March 2026
+</footer>
+
+</body>
+</html>
