@@ -1,0 +1,1092 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Market History (warm heritage palette) ──────────────────────
+\definecolor{primary}{HTML}{6A1B1B}       % Deep market red
+\definecolor{secondary}{HTML}{7A5C14}     % Aged gold
+\definecolor{tertiary}{HTML}{4E342E}      % Dark parchment brown
+\definecolor{accent}{HTML}{A52A2A}        % Warm red accent
+\definecolor{lightprimary}{HTML}{F9EEEE}  % Blush background
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS & FOOTERS ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Pike Place Market}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Pike Place Market -- History and Shops Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.6em}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═════════════════════════════════════════════════════════════════════════════
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Pike Place Market\\[0.3em]History \& Shops}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Seattle, Washington --- 1907 to Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--12 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Pike Place Market --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research Complete / Ready for Mission Execution}
+\metafield{Domain:}{Urban Public Market History, Cultural Heritage, Independent Commerce}
+\metafield{Geographic Scope:}{Nine-acre historic district, downtown Seattle, Washington (Elliott Bay waterfront)}
+\metafield{Depends On:}{None (self-contained research domain)}
+\metafield{Ecosystem Context:}{Standalone cultural research; connects to GSD community-and-place documentation pattern}
+
+\subsection{Vision}
+
+There is a place on the western edge of downtown Seattle where the land drops off toward Elliott Bay in a steep bluff, and farmers have been selling their produce there since before any living person can remember. Not in the metaphorical sense --- the Pike Place Market opened on August 17, 1907, and it has never truly closed. The same nine acres have hosted the same essential transaction, season after season, for over a century: someone grew something, someone else needed it, and no middleman got between them.
+
+That origin story is not incidental. Pike Place Market was founded in direct opposition to price-gouging produce wholesalers who were marking up onions from ten cents a pound to a dollar. A city councilman named Thomas Plummer Revelle found a dormant 1896 ordinance, dusted it off, and pointed the city toward an empty bluff overlooking the industrial waterfront. On opening day, eight farmers brought their wagons and a crowd of nearly ten thousand showed up. The farmers sold out before noon.
+
+What grew from that day is not simply a farmers' market. It is a kind of civic archive --- a place where Seattle has written its own social history in the daily language of commerce. Japanese immigrants were among the first farmers on opening day; by the 1930s they constituted over seventy-five percent of the vendor permits. The WWII internments gutted the market nearly overnight and that wound has never been fully healed, even as it has been honestly acknowledged. A preservation battle in the 1960s and early 1970s forced Seattle to decide what it valued, and the citizens chose the old, inconvenient, human-scaled thing over a parking garage. Artists, craftspeople, chowder cooks, spice merchants, fishmongers who throw their catch overhead --- they have all found their way into the spaces between the buildings and made something irreplaceable.
+
+To study Pike Place Market is to study how a city metabolizes time. The physical structures have changed slowly. The people have changed completely. The idea has remained the same: direct, honest, independent commerce in a shared public space, with room for the unexpected.
+
+\subsection{Problem Statement}
+
+The following research problems motivate this mission and define its scope:
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Fragmented Historical Record.} The 117-year history of Pike Place Market spans dozens of political eras, ethnic communities, and architectural transformations. No single synthesized reference captures this full arc from the 1907 founding through the 2017 MarketFront expansion, including the near-demolition crisis of the 1960s.
+
+  \item \textbf{Underrepresented Japanese-American Legacy.} Japanese-American farmers were the economic backbone of the Market from 1907 to 1942, composing up to 75\% of all vendor permits at peak. Their forced removal via Executive Order 9066 reshaped the Market permanently. This history is honored but under-documented in accessible form.
+
+  \item \textbf{Shop Genealogies Scattered Across Sources.} Many of the Market's iconic establishments --- some over a century old --- have origin stories distributed across oral histories, newspaper archives, and institutional websites with no consolidated catalog. The founding dates, founding families, and commercial lineages of dozens of shops are not easily cross-referenced.
+
+  \item \textbf{Preservation Movement Context.} The 1964--1971 ``Friends of the Market'' campaign is one of the most significant grassroots urban preservation battles in American history, predating and arguably inspiring subsequent movements nationally. Its lessons are not widely documented in the historic-preservation literature.
+
+  \item \textbf{Community-Commerce Interdependence.} The Market's mandate explicitly pairs commerce with social services --- low-income housing (450+ residents), a free clinic, senior center, childcare, and food bank all operate within the historic district. The mechanics of this public-private social mission are not well understood outside Seattle.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Market as Living Archive:} Pike Place Market is best understood not as a tourist attraction or a shopping destination but as a continuously operating civic archive, where each vendor, building, daystall, and alleyway encodes a layer of Seattle's social history. The goal of this research mission is to make that archive legible.
+
+\subsubsection{Geographic Domain Map}
+
+\begin{asciibox}
+PIKE PLACE MARKET --- SPATIAL OVERVIEW (9 acres, Downtown Seattle)
+=======================================================================
+
+  VIRGINIA ST                              PUGET SOUND / ELLIOTT BAY
+      |                                             |
+  Pike Place  [Main Arcade / North Arcade]          |
+      |   [Pike Place Fish Market]                  |
+      |   [MarketSpice / Rachel the Pig]        WATERFRONT
+      |   [First Starbucks, 1912 Pike Place]        |
+      |                                             |
+  [Corner Market Bldg]  [Sanitary Market Bldg]     |
+  [Three Girls Bakery]  [Athenian Inn]              |
+      |                                             |
+  [Economy Market]   [Post Alley]    [Gum Wall]     |
+  [DeLaurenti]       [Pike Place Chowder]           |
+      |              [Ghost Alley Espresso]         |
+  [Lower Pike Place --- DownUnder Levels]      Victor Steinbrueck Park
+  [Antiques / Comics / Magic Shop / Head Shop]     /
+      |                                           /
+  [MarketFront --- 2017 expansion]   Overlook Walk (completed 2024)
+      |                                  |
+  PIKE ST ___________________________WESTERN AVE
+
+  KEY:  [  ] = Building or landmark    |  = Street / path
+        N/S Arcade = primary daystall rows (farmers / craftspeople)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE DEPENDENCY GRAPH
+====================================================================
+
+  M1: FOUNDING ERA            M2: JAPANESE-AMERICAN LEGACY
+  1907 -- 1930s               1907 -- 1942 (and aftermath)
+       |                              |
+       +----------+   +--------------+
+                  |   |
+              M3: PRESERVATION CRISIS
+              1963 -- 1973 (Friends of the Market / PDA)
+                       |
+          +------------+------------+
+          |                         |
+  M4: SHOPS & MERCHANTS     M5: ARCHITECTURE, SOCIAL
+  (historic + current)      SERVICES & COMMUNITY
+  continuous                continuous
+
+  Flow: M1 + M2 feed M3. M3 frames M4 + M5. M4 + M5 produce final synthesis.
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- Founding Era and Political Origins (1907--1930s)}
+Documents the produce middlemen crisis that precipitated the Market's founding, the political maneuver by Councilman Thomas Revelle, entrepreneur Frank Goodwin's early real estate acquisitions, the rapid physical expansion through the Sanitary Market and Corner Market buildings, and the social dynamics of the earliest vendor community.
+
+\subsubsection{Module 2 --- Japanese-American Community and WWII Impact}
+Traces the central role of Japanese-American Issei and Nisei farmers from the Market's opening day through their forced removal via Executive Order 9066 in 1942. Documents the discriminatory stall-assignment practices they endured, their economic dominance at peak (over 75\% of permits), the devastating aftermath of internment, and the Market's present-day efforts at acknowledgment and repair.
+
+\subsubsection{Module 3 --- Preservation Movement and Governance}
+Covers the 1963 Pike Plaza demolition proposal, the formation of Friends of the Market (1964), the seven-year advocacy campaign led by architect Victor Steinbrueck and artist Mark Tobey, the November 1971 ballot initiative, the creation of the Pike Place Market Historical District, and the establishment of the Preservation and Development Authority (PDA) in 1973.
+
+\subsubsection{Module 4 --- Iconic Shops, Merchants, and Food Culture}
+Catalogs the Market's historic and current notable establishments --- from the Athenian Inn (1909), Three Girls Bakery (1912), and MarketSpice (1911) through Pike Place Fish Market's flying-fish tradition, the original Starbucks (moved to 1912 Pike Place in 1977), Piroshky Piroshky, DeLaurenti, and the Hmong flower vendors. Includes founding dates, family lineages, and commercial histories.
+
+\subsubsection{Module 5 --- Architecture, Buildings, and Community Social Mission}
+Documents the Market's physical structures (Main Arcade, Corner Market, Sanitary Market, Economy Market, Post Alley) and their rehabilitation (1975--1984), the 2017 MarketFront expansion, the 2024 Overlook Walk, the affordable housing program (450+ residents), and the five social service programs funded through the Market Foundation.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# pike_place_market_research.chipset.yaml
+# =========================================
+name: pike-place-market-research
+version: 1.0
+activation_profile: squadron
+
+agents:
+  FLIGHT:   { model: claude-opus-4-6,   role: orchestrator }
+  PLAN:     { model: claude-opus-4-6,   role: wave_planner }
+  SCOUT:    { model: claude-sonnet-4-6, role: source_research }
+  EXEC-A:   { model: claude-sonnet-4-6, role: modules_1_and_2 }
+  EXEC-B:   { model: claude-sonnet-4-6, role: modules_3_and_4 }
+  CRAFT-HIST:  { model: claude-opus-4-6,   role: historical_analysis }
+  CRAFT-CULT:  { model: claude-sonnet-4-6, role: cultural_sensitivity }
+  VERIFY:   { model: claude-sonnet-4-6, role: source_validation }
+  INTEG:    { model: claude-opus-4-6,   role: cross_module_synthesis }
+  CAPCOM:   { model: claude-sonnet-4-6, role: human_interface }
+  BUDGET:   { model: claude-haiku-4-5-20251001, role: token_management }
+  LOG:      { model: claude-haiku-4-5-20251001, role: audit_trail }
+
+sources:
+  primary:
+    - pikeplacemarket.org
+    - seattle.gov/cityarchives
+    - pikeplacemarketfoundation.org
+    - historylink.org
+  secondary:
+    - densho.org
+    - museumofhistory.org
+    - wikipedia.org/wiki/Pike_Place_Market
+  sensitivity:
+    japanese_american_history: CRAFT-CULT mandatory review
+    cultural_attributions: nation_specific_only
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Complete founding chronology, 1907--1930s, with source citations
+  \item Japanese-American farmer history, discriminatory practices, internment impact, and post-war recovery
+  \item Preservation movement chronology, Friends of the Market, 1971 initiative, PDA establishment
+  \item Catalog of 20+ historically notable shops with founding dates, founding families, and current status
+  \item Physical building inventory: Main Arcade, Corner Market, Sanitary Market, Economy Market, DownUnder, MarketFront
+  \item Social services overview: housing, clinic, senior center, childcare, food bank, Market Foundation
+  \item Hmong flower farming community (1982 Indochinese Farm Project)
+  \item Visitor and commercial statistics (2023: 20.9M visitors, \$177M in sales)
+  \item Current governance structure (PDA, Historical Commission, Merchants Association)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Individual vendor biographies beyond the most historically significant
+  \item Recipes or culinary deep-dives for specific shops
+  \item Tourism logistics (parking, hours, transit)
+  \item Post-2024 developments (Overlook Walk connections noted; no deeper expansion)
+  \item Comparative analysis with other U.S. public markets
+  \item Financial analysis of individual business performance
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Founding chronology documents all key events from 1907 to 1920s with named sources and dates.
+  \item Japanese-American chapter captures discriminatory stall assignment practices, internment demographics, and post-war aftermath with attribution to primary sources (Densho, Seattle Municipal Archives, PDA records).
+  \item Preservation narrative traces the full arc from 1963 demolition proposal through 1973 PDA charter, with named advocates documented.
+  \item Shop catalog includes a minimum of 20 establishments with founding year, founding entity, and current operating status verified.
+  \item Buildings section identifies all major Market structures by name, construction date, and current function.
+  \item Social services section documents all five active programs with funding mechanism and beneficiary population.
+  \item Cultural sensitivity review completed for all Japanese-American and Hmong community content by CRAFT-CULT agent.
+  \item All numerical claims (visitor counts, sales figures, vendor percentages) attributed to named sources with years specified.
+  \item Synthesis section produces a coherent 1907--2026 arc narrative integrating all five modules.
+  \item Final document passes source-quality gate: zero entertainment media, zero unsourced statistics.
+  \item Cross-module relationships explicitly documented (e.g., how internment shaped the preservation crisis; how PDA charter shaped current shop culture).
+  \item Delivery package includes complete source bibliography organized by source type.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Foxfire Heritage Skills Vision & Thematic sibling & Both document community knowledge embedded in place \\
+GSD BBS Educational Pack Vision & Indirect parallel & Markets as pre-digital community information networks \\
+The Space Between (Foxglove) & Philosophical resonance & ``Spaces between'' thesis maps precisely to market architecture \\
+GSD OS Desktop Vision & Independent & No direct dependency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable outputs emerge not from raw scale but from specialized actors working in faithful coordination within a shared architecture. Pike Place Market is one of the oldest proofs of this theorem in urban design. The Market's nine acres contain 220+ independent shops, 70+ farmers, 180+ craftspeople, 60+ buskers, and 450+ residents --- none of whom are coordinated by a corporate owner. What coordinates them is the architecture itself: the narrow arcade, the daystall system, the tilted hillside that creates natural vertical separation, the proximity to the waterfront that sets the weather and the light. Small, principled constraints produce staggering variety through faithful iteration.
+
+The spaces between --- the covered walkways, Post Alley, the DownUnder levels that tourists miss entirely, the Desimone Bridge where the Daystall Tenants Association meets --- are where the Market's real life happens. Not in the famous fish throw or the Starbucks line, but in the gap between the produce stall and the spice shop, where a conversation starts that couldn't happen anywhere else. To give people their lives back is to give them access to places like this: human-scaled, independent, historically rooted, stubbornly themselves.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Pike Place Market --- Research Reference}
+
+\subsection{How to Use This Document}
+
+Stage 2 provides sourced findings for each of the five research modules. Agents should extract findings relevant to their assigned module and validate all numerical claims against the listed source organizations before inclusion in deliverables.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item \textbf{Pike Place Market PDA} --- pikeplacemarket.org (official institutional history)
+  \item \textbf{Seattle City Archives} --- seattle.gov/cityarchives (primary documents, ordinances, photos)
+  \item \textbf{Pike Place Market Foundation} --- pikeplacemarketfoundation.org (social services, Day of Remembrance)
+  \item \textbf{Densho: The Japanese American Legacy Project} --- densho.org (oral histories, internment records)
+  \item \textbf{HistoryLink.org} --- historylink.org (Washington State encyclopedia)
+  \item \textbf{Wikipedia / History of Pike Place Market} --- peer-reviewed secondary synthesis
+  \item \textbf{The Landscape and City Foundation (TCLF)} --- tclf.org (architectural history)
+\end{itemize}
+
+\subsection{Module 1 Reference --- Founding Era and Political Origins}
+
+\subsubsection{The Produce Middlemen Crisis (pre-1907)}
+
+Before the Market existed, Seattle-area farmers sold produce at a three-block area called The Lots (Sixth Avenue and King Street). Most goods were then channeled through commercial wholesale houses on Western Avenue, known as Produce Row. Farmers were forced to sell on consignment, receiving a percentage of final sale price. At the worst, they broke even or earned nothing. The system benefited only the middlemen.
+
+The crisis crystallized when onion prices surged from ten cents per pound to one dollar --- a 900\% markup between farm and consumer. City Councilman Thomas Plummer Revelle identified a dormant 1896 city ordinance authorizing the designation of public market land and pushed City Council to use it. On August 5, 1907, Ordinance 16636 was passed, designating a stretch of the newly planked Pike Place bluff as a public market.
+
+\subsubsection{Opening Day and Early Growth}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} & \tableheader{Details} \\
+\midrule
+Aug 17, 1907 & Market opens & 6--12 farmers; crowd of ~10,000; all produce sold by noon \\
+Aug 24, 1907 & Second Saturday & 70 vendor stalls \\
+Nov 30, 1907 & First building & Frank Goodwin opens the first covered arcade \\
+1908 & Triangle Market & Outlook Hotel, Triangle Market constructed \\
+1909 & Athenian Inn opens & Second-oldest continuously operating Market restaurant \\
+1911 & Sanitary Market & Opens with butchers, delicatessens, bakeries \\
+1912 & Corner Market & Three Girls Bakery among first tenants \\
+1921 & City Fish created & City counters high fish prices with city-operated stall \\
+1922 & 11 buildings & Market expanded to nine acres along waterfront \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Frank Goodwin's role:} As owner of the Leland Hotel adjacent to the new market, Goodwin immediately recognized the commercial opportunity. He covered the sidewalk for farmers and, over the following decade, his Public Market and Department Store Company acquired most of the surrounding property, constructing the Corner Market, Economy Market, Sanitary Public Market, and Main Market. This private-commercial layer ran parallel to and in tension with the public civic function from the very beginning.
+
+\subsubsection{Early Vendor Diversity}
+
+Market farmers and merchants came from many nations from the outset, speaking many languages --- a reflection of ongoing immigration waves to the Puget Sound region. By the early 1900s the Market was already a polyglot commercial space. The mosquito fleet (precursor to Washington State Ferries) brought shoppers from Puget Sound islands directly to Colman Dock, within walking distance, creating a regional draw for the Market well before automobiles dominated transit.
+
+\subsection{Module 2 Reference --- Japanese-American Community and WWII Impact}
+
+\subsubsection{From Opening Day to Dominance (1907--1940s)}
+
+Japanese immigrants (Issei --- first-generation emigrants from Japan) were among the very first to sell produce at Pike Place Market on opening day in 1907. Over the following three decades, Japanese-American farming families cultivated rich farmland throughout the Puget Sound region --- in Bellevue, the White River Valley, and the Green River Valley --- and brought their produce to the Market as their primary sales venue.
+
+By World War I, Japanese truck farmers occupied approximately 70\% of Market stalls. At peak in the 1930s, the Market was issuing over 600 vendor permits, the majority held by Japanese-American farmers. By 1939, farmer-seller licenses totaled 515.
+
+\textbf{Discriminatory stall assignments:} Despite their numbers, Japanese-American farmers faced systemic discrimination in the daily stall lottery. Stalls were designated by race, with preferential spots assigned to white farmers even when Japanese-American farmers outnumbered them two to one. The Japanese farming community petitioned the Seattle City Council four times during the 1910s to change these practices and was ignored each time. By the 1920s, Japanese farmers were relegated to odd-numbered stalls in the back of the Market.
+
+\subsubsection{Executive Order 9066 and Internment (1942)}
+
+On December 7, 1941 --- the day of the Pearl Harbor attack --- Japanese-American farmers occupied approximately four-fifths of all Market stalls. On February 19, 1942, President Franklin D. Roosevelt signed Executive Order 9066, authorizing the forced removal of all persons of Japanese ancestry from the West Coast exclusion zone. March 11, 1942 brought Executive Order 9095, freezing all alien property and assets, preventing most from moving or liquidating holdings.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Data} \\
+\midrule
+Japanese-American share of Market stalls, 1941 & ~75--80\% \\
+Farmer-seller licenses, 1939 (pre-war peak) & 515 \\
+Farmer-seller licenses, 1943 (post-internment) & 196 \\
+Japanese-Americans who never returned to Seattle & More than one-third \\
+Japanese-Americans charged or convicted of espionage & Zero \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Many farmers were unable to find anyone to take over their leases. Stalls stood empty. The Market declined significantly and never fully recovered its pre-war character. Most Nikkei farmers sent from the Seattle area were transported to the Minidoka Relocation Center in Idaho.
+
+\subsubsection{Legacy and Acknowledgment}
+
+The Song of the Earth, a five-panel mural at the Market entrance, was commissioned as a lasting tribute to Japanese-American Market history. The Pike Place Market Foundation now observes an annual Day of Remembrance on February 19 (the signing date of Executive Order 9066), with educational programming and community events.
+
+\begin{quotebox}
+``Not a single Issei or Nisei was ever charged or convicted of espionage, yet thousands of families suffered the cost of our country's racial exclusion and paranoia.'' --- Pike Place Market Foundation, Day of Remembrance, 2025
+\end{quotebox}
+
+The 1982 Indochinese Farm Project, created through a partnership between Pike Place Market and King County, supported Hmong refugees from Laos, Cambodia, and Thailand who arrived in the 1980s in re-establishing their farming practices in the U.S. Today, the largest community among the Market's flower farmers is of Hmong descent.
+
+\subsection{Module 3 Reference --- Preservation Movement and Governance}
+
+\subsubsection{The Demolition Threat (1963--1969)}
+
+In 1963, consultant Donald Monson prepared a modernization plan for Seattle's downtown recommending the demolition of Pike Place Market and its replacement with Pike Plaza --- a development featuring office towers, apartments, a hotel, and a 3,000-car parking garage. The plan was enthusiastically supported by the Mayor, the major media outlets, and most civic leaders.
+
+Victor Steinbrueck, a University of Washington architecture professor who had co-designed the Space Needle for the 1962 World's Fair, became the most visible opponent. His advocacy began with a meeting at Lowell's Café within the Market in 1964 that became the founding of Friends of the Market (FOM), an organization that spun out of Allied Arts of Seattle.
+
+On August 4, 1969, despite public outcry, the City Council voted to proceed with the urban renewal plan.
+
+\subsubsection{The Grassroots Victory (1971)}
+
+Friends of the Market sponsored Initiative 1 on the November 1971 Seattle ballot. The initiative would create a 7-acre historic district around the Market and a Historical Commission to approve any alteration or demolition. Twenty-five thousand petition signatures were collected in three weeks.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Vote, Nov 2, 1971} & \tableheader{Result} \\
+\midrule
+For preservation (Initiative 1) & 73,369 votes \\
+Against (city counterproposal) & 53,264 votes \\
+Margin & 3-to-2 in favor of full preservation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The New York Times published an editorial in May 1974 acknowledging the ``epic ten-year battle'' and its significance in urban preservation history.
+
+\subsubsection{PDA Establishment and Rehabilitation}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{1971:} Historical District established; Historical Commission created
+  \item \textbf{1973:} City of Seattle creates the Pike Place Market Preservation and Development Authority (PDA) as a not-for-profit public corporation to own and manage Market buildings
+  \item \textbf{1975--1984:} Major rehabilitation of 24 historic properties using Urban Renewal and HUD funding
+  \item \textbf{1982:} Market Foundation established to fund social services
+  \item \textbf{1982:} Victor Steinbrueck Park (originally Market Park) opens at the north end
+  \item \textbf{2008:} Seattle voters approve a \$71--73 million levy for seismic upgrades and infrastructure
+  \item \textbf{2017:} MarketFront expansion opens --- first major Historic District expansion in 30+ years
+  \item \textbf{2024:} Overlook Walk pedestrian connection to the Seattle waterfront completed
+\end{itemize}
+
+The PDA charter requires it to: preserve, rehabilitate, and protect Market buildings; increase farm and food retailing opportunities; incubate and support small and marginal businesses; and provide services for low-income people.
+
+\subsection{Module 4 Reference --- Iconic Shops, Merchants, and Food Culture}
+
+\subsubsection{Historic Anchor Establishments}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Establishment} & \tableheader{Founded} & \tableheader{Category} & \tableheader{Notes} \\
+\midrule
+MarketSpice & 1911 & Spice and tea & One of the oldest continuously operating Market shops \\
+Three Girls Bakery & 1912 & Bakery & Possibly first Seattle business started by women; still operates \\
+Athenian Inn & 1909 & Restaurant/Bar & Originated as a bakery; second-oldest continuously operating restaurant \\
+Virginia Inn & c.\ 1908 & Bar & Founded as Virginia Bar; operated as cardroom during Prohibition \\
+Pike Place Fish Market & 1930 (est.) & Fishmonger & Made famous by fish-throwing tradition; Sol Amon named ``King of the Market'' 2006 \\
+Don \& Joe's Meats & Pre-1930 & Butcher & Last remaining butcher shop in the Market \\
+DeLaurenti Food \& Wine & 1946 & Specialty grocer & Seattle's most complete source of international specialty ingredients \\
+Pure Food Fish & 1947 (Sol) & Fishmonger & Sol Amon sole proprietor since 1966; April 11 designated Sol Amon Day by Seattle City Council \\
+The Crumpet Shop & 1976 & Bakery/Café & Seattle's first and original crumpet baking company \\
+Tenzing Momo & 1977 & Herbal apothecary & Name is Tibetan for ``divine dumpling''; one of Seattle's oldest herb shops \\
+Pike Place Market Creamery & 1978 & Dairy & Market's primary dairy and egg purveyor \\
+Piroshky Piroshky & 1992 & Bakery & 32 piroshky varieties daily; perennial queue \\
+Pike Place Chowder & Post Alley & Seafood & Award-winning chowder; national acclaim \\
+Oriental Mart & 1970s & Filipino food & Three-generation Apostol family; James Beard ``America's Classics'' 2020 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Original Starbucks}
+
+The first Starbucks store was founded in 1971 originally at 2000 Western Avenue by Jerry Baldwin, Zev Siegl, and Gordon Bowker, inspired by Alfred Peet of Peet's Coffee. In 1977 it moved one block to 1912 Pike Place, where it has operated continuously ever since. The Pike Place location retains the original logo --- a bare-breasted siren modeled after a 15th-century Norse woodcut --- and sells exclusive merchandise not available at other Starbucks locations. A pig statue called ``Pork'n Beans'' near the entrance was purchased in the 2001 Pigs on Parade fundraiser.
+
+The Seattle's Best Coffee (SBC) brand traces its history back to Stewart Brothers' Coffee, which arrived in the Market several months before Starbucks was founded. Starbucks now owns the SBC brand.
+
+\subsubsection{Rachel the Pig}
+
+Rachel, a 550-pound bronze cast piggy bank, has been located since 1986 at the corner of Pike Place under the Public Market Center sign. She was commissioned by the Market Foundation as a fundraising vehicle and has become the Market's unofficial mascot. Rachel raises approximately \$20,000 per year for Market social services. She was created by sculptor Georgia Gerber.
+
+\subsubsection{Cultural Vendor Communities}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Hmong flower farmers:} The largest community among Market flower vendors; arrived as refugees in the 1980s from Laos, Cambodia, and Thailand. The 1982 Indochinese Farm Project provided structured support for their market integration.
+  \item \textbf{Independent craftspeople:} 180+ craftspeople selling handmade goods under the daystall system; a 1983 Hildt Agreement (revised 1999 as the Licata-Hildt Agreement) governs the balance between farmer and craft vendor daystall allocations.
+  \item \textbf{Buskers:} 60+ permitted street performers under the Pike Market Performers' Guild (founded 2001); members include Artis the Spoonman and Jim Page.
+  \item \textbf{Women-owned businesses:} Over 200 women-run businesses operate in the Market as of 2023 data.
+  \item \textbf{Multi-generational family businesses:} Oriental Mart (Apostol family, 3+ generations), Pure Food Fish (Amon family, multiple generations).
+\end{itemize}
+
+\subsubsection{DownUnder and Hidden Levels}
+
+The Market is built on the edge of a steep hill and consists of several lower levels below the main arcade. Each features a distinct mix of tenants: antique dealers, comic book and collectible shops, small family-owned restaurants, and one of Seattle's oldest head shops. The Magic Shop, located on the fourth level, requires navigating a specific staircase sequence from the main arcade. These levels are largely unknown to first-time visitors and constitute a significant portion of the Market's commercial floor space.
+
+\subsection{Module 5 Reference --- Architecture, Buildings, and Social Mission}
+
+\subsubsection{Major Buildings}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Building} & \tableheader{Built} & \tableheader{Notes} \\
+\midrule
+Main Arcade & 1907 & Original covered arcade by Frank Goodwin; primary daystall row \\
+Triangle Market & 1908 & Adjacent to Main Arcade \\
+Sanitary Market & 1911 & Butchers, delicatessens, bakeries; north side of Corner Market \\
+Corner Market & 1912 & Major commercial building; Three Girls Bakery among original tenants \\
+Economy Market & 1900s & Connects to Post Alley; DeLaurenti occupant \\
+Post Alley & Continuous & Cobblestone alley running parallel to Pike Place; Gum Wall, Pike Place Chowder, Ghost Alley Espresso \\
+Municipal Market Bldg & Burned 1974 & Remained a surface parking lot for 43 years \\
+MarketFront & 2017 & First major Historic District expansion in 30+ years; built on site of 1974 fire; reconnects to waterfront \\
+Overlook Walk & 2024 & Pedestrian connection completing link from Victor Steinbrueck Park to Seattle waterfront \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Social Services and Affordable Housing}
+
+The Market contains eight buildings with residential units housing 450+ residents, with emphasis on low-income and senior housing. The 1971 preservation mandate explicitly included social character, not just physical buildings --- one of the first preservation movements to protect people and purpose alongside structures.
+
+\textbf{Five active social service programs (via Market Foundation):}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Pike Market Medical Clinic} --- free/low-cost healthcare within the historic district
+  \item \textbf{Pike Market Senior Center} --- services and community programming for elderly residents
+  \item \textbf{Downtown Food Bank} --- food access for low-income community members
+  \item \textbf{Pike Market Childcare and Preschool} --- on-site childcare for residents and workers
+  \item \textbf{Market Foundation Community Resource Center (The Market Commons)} --- wrap-around social support
+\end{enumerate}
+
+\textbf{Market Foundation funding mechanisms:} Rachel the Pig collects ~\$20,000 annually from visitor donations. The 2017 MarketFront fundraising campaign involved 7,000+ donors (``Piggybackers'') contributing to a \$9 million capital campaign through engraved charms and hoofprints.
+
+\subsubsection{Governance Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Entity} & \tableheader{Role} \\
+\midrule
+Pike Place Market PDA & Not-for-profit public corporation; owns and manages day-to-day operations; created by City Charter 1973 \\
+Historical Commission & 12-member citizen volunteer body appointed by Mayor; reviews all design and use changes in the 9-acre district \\
+Pike Place Market Foundation & Nonprofit; raises funds for social service programs; operates The Market Commons \\
+Pike Place Merchants Association & Incorporated 1973; legal, accounting, and health insurance services; publishes monthly Pike Place Market News \\
+Daystall Tenants Association (DTA) & Formed late 1980s; represents daystall vendor interests; meets on Desimone Bridge \\
+United Farmers Coalition (UFC) & Formed 1998; represents daystall food vendors (produce, flower, processed food) \\
+Pike Market Performers' Guild & Founded 2001; represents 60+ permitted buskers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Current Scale (2023 Data)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Annual visitors & 20.9 million (2023) \\
+Commercial sales & \$177 million (2023) \\
+Independently owned shops \& restaurants & 220+ \\
+Craftspeople & 180+ \\
+Farmers & 70+ \\
+Permitted buskers & 60+ \\
+Market residents (affordable housing) & 450+ \\
+Historic acreage & 9 acres \\
+Open days per year & 363 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Boundary} & \tableheader{Guidance} \\
+\midrule
+Japanese-American internment history & CRAFT-CULT review & Use Densho and Market Foundation primary sources; do not minimize or editorialize the harm \\
+Hmong refugee community & Nation-specific attribution & Always identify as Hmong (from Laos, Cambodia, Thailand); never generic ``Asian'' attribution \\
+Living vendor biographies & Privacy gate & Confirm public-record status before including personal details \\
+Numerical claims & Attribution mandatory & All statistics must cite named source and year \\
+Indigenous presence & Nation-specific & Princess Angeline (Kikisoblu) of the Duwamish; identify by nation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Institutional Sources}
+\begin{itemize}[noitemsep]
+  \item Pike Place Market PDA. \textit{About Pike Place Market.} pikeplacemarket.org/about-pike-place-market/. 2025.
+  \item Pike Place Market PDA. \textit{Market History.} pikeplacemarket.org/market-history/. 2025.
+  \item City of Seattle Archives. \textit{Pike Place Market Centennial.} seattle.gov/cityarchives/exhibits-and-education/online-exhibits/pike-place-market-centennial.
+  \item City of Seattle Neighborhoods. \textit{Pike Place Market Historical District.} seattle.gov/neighborhoods/historic-preservation/historic-districts/pike-place-market-historical-district.
+  \item The Landscape and City Foundation (TCLF). \textit{Pike Place Market Historic District.} tclf.org. 2024.
+  \item Seattle Municipal Archives. Comptroller File 58632; Record Series 4601-03.
+\end{itemize}
+
+\subsubsection{Foundation and Advocacy Sources}
+\begin{itemize}[noitemsep]
+  \item Pike Place Market Foundation. \textit{Day of Remembrance.} pikeplacemarketfoundation.org. 2022, 2023, 2025.
+  \item Pike Place Market Foundation. \textit{Market Foundation History.} pikeplacemarketfoundation.org/events/40th-birthday/history. 2023.
+  \item Pike Place Market PDA. \textit{Day of Remembrance: Honoring the Legacy of Japanese-Americans.} pikeplacemarket.org/day-of-remembrance/. 2025.
+\end{itemize}
+
+\subsubsection{Reference and Secondary Sources}
+\begin{itemize}[noitemsep]
+  \item Wikipedia contributors. \textit{Pike Place Market.} en.wikipedia.org/wiki/Pike\_Place\_Market. Updated February 2026.
+  \item Wikipedia contributors. \textit{History of Pike Place Market.} en.wikipedia.org/wiki/History\_of\_Pike\_Place\_Market. Updated May 2025.
+  \item Wikipedia contributors. \textit{History of the Japanese in Seattle.} en.wikipedia.org/wiki/History\_of\_the\_Japanese\_in\_Seattle. Updated January 2026.
+  \item South Seattle Emerald. \textit{Seattle Japanese American Community Gathers for Day of Remembrance.} southseattleemerald.org. February 20, 2025.
+  \item Densho: The Japanese American Legacy Project. densho.org. (Oral history archive.)
+  \item Visit Seattle. \textit{Pike Place Market.} visitseattle.org. August 2025.
+  \item Public Market Partners (PPS). \textit{Pike Place Market.} pps.org/places/pike-place-market.
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-ready research document on the history and shops of Pike Place Market (1907--2026), organized into five discrete modules covering political origins, Japanese-American community history, the preservation movement, iconic merchants, and the Market's architectural and social mission. The final deliverable will serve as a reference-quality resource suitable for public education, institutional documentation, and GSD ecosystem knowledge-pack integration.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+====================================================================
+
+  WAVE 0 [Sequential / Haiku]
+  ------------------------------------------------
+  Shared schema | Source index | Templates
+
+  WAVE 1 [Parallel / Sonnet + Opus]
+  ------------------------------------------------
+  Track A: EXEC-A          Track B: EXEC-B
+  M1 Founding Era          M3 Preservation Movement
+  M2 Japanese-American     M4 Shops & Merchants
+                    |               |
+  CRAFT-HIST: historical analysis  CRAFT-CULT: sensitivity review
+
+  WAVE 2 [Sequential / Opus]
+  ------------------------------------------------
+  INTEG: cross-module synthesis
+  Full 1907-2026 narrative arc
+  Japanese-American + Preservation tension analysis
+  Shops genealogy cross-reference
+
+  WAVE 3 [Sequential / Sonnet]
+  ------------------------------------------------
+  M5 Architecture & Social Services (finalizes with Wave 2 context)
+  VERIFY: source validation pass
+  Full document assembly and bibliography
+
+====================================================================
+  Total estimated context windows: 8-12 across 4-5 sessions
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Foundation Layer (Wave 0):} Shared data schemas for shops catalog, event timeline, and source citation format
+  \item \textbf{Historical Survey Layer (Wave 1, Track A):} Modules 1 and 2 --- founding era through WWII internment
+  \item \textbf{Governance and Commerce Layer (Wave 1, Track B):} Modules 3 and 4 --- preservation movement and shops catalog
+  \item \textbf{Synthesis Layer (Wave 2):} Cross-module narrative integration, thematic connections, gap-fill
+  \item \textbf{Publication Layer (Wave 3):} Module 5, source verification, assembly, delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Event Timeline & All key dates 1907--2024 with sources & Structured JSON + prose narrative \\
+D2 & Shops Catalog & 20+ establishments, founding year, status verified & Tabular + narrative format \\
+D3 & Japanese-American Chapter & Densho + Seattle Archives citations; CRAFT-CULT reviewed & Standalone section \\
+D4 & Preservation Movement Narrative & Full arc 1963--1973; vote tallies cited & 800--1200 words \\
+D5 & Architecture \& Social Services Section & All buildings named, all 5 services documented & Tabular + prose \\
+D6 & Synthesis Narrative & Coherent 1907--2026 arc connecting all modules & 1000--1500 words \\
+D7 & Source Bibliography & Organized by type; zero entertainment media & Standard citation format \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-schema & None & Haiku & 2K \\
+W0-source-index & None & Haiku & 1K \\
+W1A-module1 & W0-schema & Sonnet & 8K \\
+W1A-module2 & W0-schema, Densho & Opus & 10K \\
+W1B-module3 & W0-schema & Sonnet & 8K \\
+W1B-module4 & W0-schema & Sonnet & 12K \\
+W2-synthesis & M1,M2,M3,M4 & Opus & 15K \\
+W3-module5 & W2-synthesis & Sonnet & 8K \\
+W3-verify & All modules & Sonnet & 6K \\
+W3-assembly & All components & Sonnet & 10K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{80K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & ~30\% & Synthesis, cross-module integration, Japanese-American historical analysis (cultural judgment required), preservation movement narrative \\
+Sonnet & ~60\% & Module survey work, shops catalog compilation, architecture/social services documentation, verification passes, assembly \\
+Haiku & ~10\% & Schema creation, templates, scaffolding, token budget tracking, audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index \\
+1 & Parallel Surveys & Parallel (2) & Sonnet/Opus & Modules 1--4 \\
+2 & Synthesis & Sequential & Opus & Integrated arc narrative \\
+3 & Publication & Sequential & Sonnet & M5, verification, assembly \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Create shared shop schema & BUDGET/LOG & JSON schema: name, founded, category, status, sources \\
+Create event timeline schema & BUDGET/LOG & JSON schema: date, event, module, source \\
+Build source index & SCOUT & Indexed list of all Stage 2 bibliography entries \\
+Define cultural sensitivity checklist & CRAFT-CULT & Review protocol for Japanese-American and Hmong content \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A --- Historical Modules (EXEC-A + CRAFT-HIST)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M1: Founding Era survey & EXEC-A & Narrative + timeline 1907--1930s, Frank Goodwin profile \\
+M2: Japanese-American survey & EXEC-A + CRAFT-CULT & Narrative with discriminatory practices, internment stats, legacy \\
+Historical analysis review & CRAFT-HIST & Cross-check of M1/M2 for historical accuracy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Commerce and Governance Modules (EXEC-B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M3: Preservation Movement survey & EXEC-B & Full 1963--1973 arc, vote data, PDA charter summary \\
+M4: Shops Catalog survey & EXEC-B & 20+ shops with founding dates, families, current status \\
+Cultural vendor section & CRAFT-CULT & Hmong, multi-generational family businesses documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cross-module integration & INTEG & How M1 seeds M2; how M2 shapes the post-war Market that nearly gets demolished in M3; how M3 enables the shop culture of M4 \\
+Full 1907--2026 narrative arc & INTEG (Opus) & 1200-word synthesis document \\
+Gap identification & INTEG & Flag any unresourced claims for W3 VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M5: Architecture \& Social Services & EXEC-A & Buildings table, 5 social programs documented, governance structure \\
+Source validation pass & VERIFY & All numerical claims verified against Stage 2 bibliography \\
+Cultural sensitivity final review & CRAFT-CULT & Final pass on Japanese-American and Hmong content \\
+Document assembly & EXEC-B & All modules integrated into master document \\
+CAPCOM review & CAPCOM & Human sign-off before delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Stage 2 Research Reference primed as system context at session start (within 5-minute cache window)
+  \item Wave 1 tracks launched within the same session to share schema cache
+  \item Wave 2 synthesis launched immediately following Wave 1 completion to maintain M1--M4 context
+  \item Wave 3 primes the synthesis output as context before executing VERIFY pass
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Est.\ Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & Haiku & 3K & Schema + index \\
+Wave 1A & Sonnet/Opus & 18K & M1 + M2 \\
+Wave 1B & Sonnet & 20K & M3 + M4 \\
+Wave 2 & Opus & 15K & Synthesis \\
+Wave 3 & Sonnet & 24K & M5 + verify + assembly \\
+\midrule
+\textbf{Total} & & \textbf{80K} & 4--5 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-schema ──────────────────────────────────+
+W0-source-index ────────────────────────────+
+                                            |
+          +─────────────────────────────────+
+          |                                 |
+    W1A (M1+M2)                      W1B (M3+M4)
+    EXEC-A / CRAFT-HIST              EXEC-B / CRAFT-CULT
+          |                                 |
+          +─────────────────────────────────+
+                          |
+                    W2-SYNTHESIS
+                    INTEG / Opus
+                          |
+               +──────────+──────────+
+               |                     |
+          W3-MODULE5            W3-VERIFY
+          EXEC-A                VERIFY
+               |                     |
+               +──────────+──────────+
+                          |
+                    W3-ASSEMBLY
+                    EXEC-B + CAPCOM
+                          |
+                    FINAL DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-critical (cultural) & 4 & MANDATORY & BLOCK delivery \\
+Source quality & 5 & HIGH & BLOCK delivery \\
+Core completeness & 7 & HIGH & Remediate before delivery \\
+Integration (cross-module) & 4 & MEDIUM & Flag for CAPCOM \\
+Edge cases & 3 & LOW & Document and note \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+T-SC01 & Japanese-American content reviewed by CRAFT-CULT & Zero unsourced claims; internment harm not minimized; specific Densho or PDA citations present \\
+T-SC02 & Hmong community identified as Hmong (not generic ``Asian'' or ``Southeast Asian'') & All references specify Hmong identity; 1982 Indochinese Farm Project cited \\
+T-SC03 & No entertainment media sources cited & Bibliography contains only government, institutional, peer-reviewed, or professional sources \\
+T-SC04 & All numerical statistics attributed to named source + year & Zero bare statistics (e.g., ``75\%'' must cite PDA/Foundation/Archives with year) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Criterion} & \tableheader{Tests} & \tableheader{Status} \\
+\midrule
+SC1: Founding chronology complete & T-CORE01: All dates 1907--1930s sourced & Pending \\
+SC2: Japanese-American chapter sourced & T-SC01, T-SC04 & Pending \\
+SC3: Preservation arc complete & T-CORE02: Vote tallies cited & Pending \\
+SC4: Shops catalog 20+ entries & T-CORE03: Count verified & Pending \\
+SC5: Buildings named and dated & T-CORE04: All structures listed & Pending \\
+SC6: Social services documented & T-CORE05: All 5 programs present & Pending \\
+SC7: Cultural sensitivity reviewed & T-SC01, T-SC02 & Pending \\
+SC8: Numerical claims attributed & T-SC04 & Pending \\
+SC9: Synthesis narrative present & T-INTEG01: Arc covers 1907--2026 & Pending \\
+SC10: Source quality gate & T-SC03 & Pending \\
+SC11: Cross-module connections & T-INTEG02--04 & Pending \\
+SC12: Bibliography organized & T-CORE06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; session planning \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research gap-fill \\
+EXEC-A & Executor Alpha & Modules 1, 2, and 5 document production \\
+EXEC-B & Executor Bravo & Modules 3 and 4 document production; final assembly \\
+CRAFT-HIST & Historical Specialist & Primary domain analysis: political and economic history \\
+CRAFT-CULT & Cultural Specialist & Japanese-American and Hmong community content review; sensitivity gate \\
+VERIFY & Verification Agent & Source validation; numerical accuracy checking \\
+INTEG & Integration Agent & Cross-module synthesis; thematic connection identification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; delivery sign-off \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache window management \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+Estimated Token Budget & 80K total \\
+Estimated Sessions & 4--5 \\
+Context Windows & 8--12 \\
+Safety-Critical Tests & 4 (all MANDATORY-PASS / BLOCK) \\
+Total Success Criteria & 12 \\
+Deliverables & 7 \\
+Domain Color Scheme & Deep market red / aged gold / parchment brown \\
+Cultural Sensitivity Gate & CRAFT-CULT (Japanese-American, Hmong) \\
+Primary Sources & Seattle City Archives, Densho, PDA, Market Foundation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The Market is more than a place of commerce --- it is a place of memory, resilience, and community.''}
+
+\vspace{0.5em}
+--- Pike Place Market Preservation and Development Authority
+
+\vspace{1em}
+\textbf{The Amiga Principle, applied:} Nine acres. 220+ independent shops. 70+ farmers. 450+ residents. No corporate owner. What coordinates them is the architecture itself --- the narrow arcade, the daystall rotation, the steep hillside, the proximity to water. Small, principled constraints producing staggering variety through faithful iteration. The spaces between the stalls are where Seattle lives.
+\end{quotebox}
+
+\end{document}
