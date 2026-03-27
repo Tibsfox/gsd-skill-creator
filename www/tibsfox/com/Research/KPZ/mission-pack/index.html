@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal and the Station — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header { background: var(--primary); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.3rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--secondary); letter-spacing: 0.1em; }
+  .content { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .file-card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.15); }
+  .file-card .label { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 0.5rem; }
+  .file-card .name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 0.8rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .stage { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 0.8rem 1rem; margin: 0.8rem 0; border-radius: 0 4px 4px 0; }
+  .stage.s2 { background: var(--light-secondary); border-left-color: var(--secondary); }
+  .stage.s3 { background: #EFEBE9; border-left-color: var(--tertiary); }
+  .stage strong { font-family: 'DM Sans', sans-serif; }
+  code { font-family: 'DejaVu Sans Mono', monospace; font-size: 0.85rem; background: #EDE7F6; padding: 0.15rem 0.4rem; border-radius: 3px; }
+  .quote { background: var(--light-primary); border: 1px solid var(--primary); border-radius: 6px; padding: 1.5rem; margin: 2rem 0; font-style: italic; }
+  .quote .attr { text-align: right; font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); margin-top: 0.8rem; }
+  .footer { text-align: center; padding: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--subtle); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="pipeline">GSD RESEARCH MISSION PACKAGE</div>
+  <h1>The Signal and the Station</h1>
+  <div class="subtitle">KPLZ 101.5 & the 104.9 Frequency — Seattle Radio Heritage</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="content">
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a href="mission.pdf" download class="file-card">
+      <div class="label">PDF Document</div>
+      <div class="name">mission.pdf</div>
+      <div class="desc">Complete 25-page mission package. Vision, research reference, and execution plan.</div>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <div class="label">LaTeX Source</div>
+      <div class="name">mission.tex</div>
+      <div class="desc">XeLaTeX source file. Modify and recompile with three passes.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="stage">
+    <strong>Stage 1 — Vision Document</strong><br>
+    Narrative vision connecting radio heritage to the "spaces between" philosophy. Problem statement (5 problems), domain map showing both frequency timelines, module architecture for 5 research modules, chipset configuration, scope boundaries, 12 success criteria, and through-line.
+  </div>
+
+  <div class="stage s2">
+    <strong>Stage 2 — Research Reference</strong><br>
+    Complete factual foundation across all 5 modules: Origins & Frequency Heritage (1959–1978), The Radio Wars (1978–1994), Star 101.5 & Personalities (1994–2024), The 104.9 Frequency (1988–present), Industry Context & Cultural Legacy. Includes branding timeline table, personality roster (15+ individuals), ownership chain, ratings data, and source bibliography (FCC, QZVX, RadioDiscussions, RadioInsight, RadioWest).
+  </div>
+
+  <div class="stage s3">
+    <strong>Stage 3 — Mission Package</strong><br>
+    Squadron activation (12 roles, 2 parallel tracks). 4-wave execution plan, component breakdown with model assignments (Opus 37% / Sonnet 53% / Haiku 10%), dependency graph, cache optimization strategy, 26-test plan (4 safety-critical), verification matrix, crew manifest, and execution summary (~58,000 tokens across 14 context windows).
+  </div>
+
+  <h2>Usage</h2>
+  <ol>
+    <li>Review the PDF for completeness and any domain-specific corrections</li>
+    <li>Place <code>mission.pdf</code> and <code>mission.tex</code> in the skill-creator's mission staging area</li>
+    <li>Hand to GSD orchestrator with: <code>"Execute mission: The Signal and the Station"</code></li>
+    <li>CAPCOM approvals required at wave boundaries (0→1, 1→2, 2→3)</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <p>To modify and rebuild the PDF:</p>
+  <ol>
+    <li>Edit <code>mission.tex</code> in any text editor</li>
+    <li>Compile with XeLaTeX (requires DejaVu fonts):</li>
+  </ol>
+  <pre style="background:#EDE7F6;padding:1rem;border-radius:4px;font-size:0.85rem;margin:0.5rem 0;overflow-x:auto;"><code>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</code></pre>
+
+  <div class="quote">
+    A radio station is a space between. Between the transmitter on Cougar Mountain and the car stereo on I-5, between the DJ's voice and the listener's morning, between one song and the next. Understanding how a city once talked to itself through radio is understanding something about what we lost when we stopped.
+    <div class="attr">— The Signal and the Station, Vision Guide</div>
+  </div>
+</div>
+
+<div class="footer">
+  GSD Ecosystem · March 26, 2026 · Squadron Profile · 5 Modules · 25 Pages
+</div>
+
+</body>
+</html>
