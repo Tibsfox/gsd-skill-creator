@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Frequency Continuum — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #0277BD;
+    --tertiary: #F9A825;
+    --accent: #7C4DFF;
+    --light-primary: #EDE7F6;
+    --light-secondary: #E1F5FE;
+    --light-tertiary: #FFF8E1;
+    --dark-text: #212121;
+    --subtle: #757575;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBF8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--dark-text);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A0F5C 60%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  header .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+  }
+
+  header .pipeline {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--tertiary);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid #D1C4E9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--dark-text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(49,27,146,0.15);
+  }
+
+  .file-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+  .file-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .file-card p {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    line-height: 1.4;
+  }
+
+  h3.section-head {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+
+  .contents {
+    background: var(--light-secondary);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 1rem 0;
+  }
+
+  .contents h4 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0.8rem 0 0.3rem;
+  }
+
+  .contents h4:first-child { margin-top: 0; }
+
+  .contents p {
+    font-size: 0.85rem;
+    margin-left: 1rem;
+    color: var(--subtle);
+  }
+
+  ol {
+    margin: 0.8rem 0 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  ol li { margin-bottom: 0.5rem; }
+
+  code {
+    font-family: 'DejaVu Sans Mono', monospace;
+    background: var(--light-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+  }
+
+  .quote-box {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 0.95rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--subtle);
+  }
+
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>The Frequency Continuum</h1>
+  <h2>From Cosmic Wavelengths to Microtonal Intervals</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a class="file-card" href="frequency-continuum-mission.pdf" download>
+      <div class="icon">📄</div>
+      <h3>Mission Package (PDF)</h3>
+      <p>26-page compiled document — Vision, Research Reference, and Mission Package. Ready for GSD orchestrator.</p>
+    </a>
+    <a class="file-card" href="frequency-continuum-mission.tex" download>
+      <div class="icon">📝</div>
+      <h3>LaTeX Source (.tex)</h3>
+      <p>Full XeLaTeX source for modification and recompilation. Requires DejaVu fonts.</p>
+    </a>
+  </div>
+
+  <h3 class="section-head">Contents</h3>
+
+  <div class="contents">
+    <h4>Stage 1 — Vision Document</h4>
+    <p>Problem statement, frequency domain map (10⁻¹⁷ Hz to 20 kHz), 7-module architecture, chipset configuration, 12 testable success criteria, through-line to GSD Amiga Principle.</p>
+
+    <h4>Stage 2 — Research Reference</h4>
+    <p>Source-attributed findings across 6 research modules: Deep Space Pressure Waves (Perseus B♭, M87), Sub-Hz &amp; Infrasound, Schumann Bridge Zone, Microtonal/Macrotonal Interval Systems, NASA Sonification Methods. 30+ cited sources.</p>
+
+    <h4>Stage 3 — Mission Package</h4>
+    <p>Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, 14 context windows across 4 sessions, 231K token budget (Opus 37% / Sonnet 57% / Haiku 6%), 35 tests including 6 safety-critical, full crew manifest.</p>
+  </div>
+
+  <h3 class="section-head">Usage</h3>
+
+  <ol>
+    <li>Review the PDF — the three stages build from vision through research to executable mission.</li>
+    <li>Hand the mission package to <code>gsd-skill-creator</code> via Claude Code for execution.</li>
+    <li>The orchestrator will activate the Squadron crew profile and execute Wave 0 → 3.</li>
+    <li>CAPCOM checkpoints occur at each wave boundary for human review.</li>
+  </ol>
+
+  <h3 class="section-head">Recompile LaTeX</h3>
+
+  <ol>
+    <li>Ensure DejaVu fonts (Serif, Sans, Mono) are installed.</li>
+    <li>Run three XeLaTeX passes:
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+    </li>
+    <li>Three passes resolve TOC, cross-references, and page counts.</li>
+  </ol>
+
+  <div class="quote-box">
+    "From a B-flat that has resonated for 2.5 billion years in the plasma of a galaxy cluster to the 23.5-cent comma that separates twelve perfect fifths from seven octaves on a piano, the frequency continuum is a single story told across sixty orders of magnitude. The spaces between are where the physics lives — and the music."
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · March 26, 2026 · Squadron Profile · 14 Context Windows
+</footer>
+
+</body>
+</html>
