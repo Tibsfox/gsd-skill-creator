@@ -1,0 +1,1025 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Industrial-Community (urban-trades + PNW warmth) ──
+\definecolor{primary}{HTML}{1A237E}       % Deep slate blue — infrastructure
+\definecolor{secondary}{HTML}{BF360C}     % Copper ember — community warmth
+\definecolor{tertiary}{HTML}{1B5E20}      % PNW forest green — co-op
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Headers / Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Silicon Forest Corridor}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Silicon Forest Corridor -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════
+%  TITLE PAGE
+% ═══════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Silicon Forest\\[0.3em]Corridor Initiative}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Snohomish County · Hwy 99 · Paine Field · Mukilteo--Edmonds}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Regional Co-op Economy \& JIT Manufacturing}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 18--22 context windows across 6--8 sessions}}
+
+\vspace{1.5cm}
+{\small\sffamily\textcolor{subtlegray}{From Sno-Isle TECH to Santiago. The corridor trains its own builders.}}
+\end{center}
+\newpage
+
+% ═══════════════════════════════════════════════════
+%  TABLE OF CONTENTS
+% ═══════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Silicon Forest Corridor --- Vision Guide}
+
+\subsection{Metadata}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Ready for Research}
+\metafield{Depends On:}{Fox Infrastructure Group Master Plan, GSD Skill Creator v1.49+}
+\metafield{Context:}{Snohomish County, WA --- Mukilteo ferry corridor south to Edmonds, Hwy 99 spine north through Everett, Airport Road / Paine Field industrial zone, Alderwood Mall business hub}
+\metafield{Activation:}{Fleet Profile --- 6 modules, community/cultural sensitivity, global JIT logistics}
+
+\subsection{Vision}
+
+There is a triangle in Snohomish County that the rest of the world does not yet understand. At its three vertices: Sno-Isle TECH Skills Center on Airport Road near Paine Field, the Boeing assembly infrastructure running south toward the Port of Everett, and the Mukilteo ferry dock pointing west across the water toward Edmonds and the world beyond. Everything in this mission lives inside that triangle --- or flows through it.
+
+The Silicon Forest Corridor vision is not about building a tech park. It is about understanding that this region already has the bones of a complete economic ecosystem, and that what it lacks is not capacity but \emph{coordination}. The Hwy 99 spine from Everett south to Lynnwood already carries the full social stack: low-income neighborhoods cycling up through workforce training at Sno-Isle, established businesses anchored at Alderwood, aerospace manufacturing at Paine Field, ferry logistics connecting to the Olympic Peninsula and beyond. The question is not whether these pieces exist. They do. The question is whether they can be woven into a single coherent system --- a daily beat, a living mesh, a co-op network that gives small businesses the intelligence of a corporation without surrendering the soul of a neighborhood.
+
+The IOOF tradition gives us the model. The Independent Order of Odd Fellows were not a secret society for the sake of secrecy; they were tradespeople and mechanics who understood that mutual aid, shared infrastructure, and community ownership were the preconditions for individual dignity. Their hall pattern --- retail on the ground floor funding community space above --- is the exact same logic as the GSD co-op stack. The form is two centuries old. The function is contemporary. What changes is the mesh layer: zero-trust, open-source, GitHub-native, Minecraft-scale, feeding real-time intelligence from Boeing's manufacturing throughput to the taco truck on Evergreen Way that is calibrating its lunch prep to the Paine Field shift change.
+
+The global circuit completes the picture. JIT electronics finish work flows in through the Port of Everett and the Paine Field cargo apron. Containerized components arrive from Asian suppliers on precision schedules. Regional assembly adds the cultural finishing layer --- locally branded, regionally specific, carrying the PNW design signature. Completed assemblies ship south to Silicon Valley for final integration, then turn east to Europe and west back to Asia. Parts return for recycling. The loop is closed. The corridor is not a tributary; it is a circulatory system.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Coordination vacuum on the Hwy 99 spine.} The corridor from Everett south to Lynnwood has workforce training, industrial capacity, established retail, and transit infrastructure, but no unified intelligence layer connecting daily operations --- restaurant menus, shift schedules, ferry departures, delivery windows, and small business demand signals remain siloed.
+
+  \item \textbf{Creative poverty adjacent to industrial wealth.} The Everett Mall area, one of the highest-traffic nodes on the corridor, is transitioning (The Hub @ Everett, Topgolf anchor, 2026 opening) but the adjacent population --- low-income, underserved, disproportionately young --- has no structured pathway from creative talent to small business ownership along the very corridor they inhabit.
+
+  \item \textbf{Workforce pipeline discontinuity.} Sno-Isle TECH graduates into a credential gap: strong vocational skills, no co-op equity structure, no student housing near campus, no clear handoff from half-day technical training to full-time industry apprenticeship with equity accrual from day one.
+
+  \item \textbf{JIT logistics without community integration.} Paine Field's cargo capacity, Boeing's manufacturing throughput, and the Port of Everett's container handling are globally connected but locally isolated --- the wealth generated does not circulate back through the small business layer on Hwy 99.
+
+  \item \textbf{No regional mesh for knowledge work.} The global co-op network (GitHub, open-source, distributed creative work) exists as an abstraction. There is no local on-ramp: no physical space, no daily coordination protocol, no trust infrastructure for small teams in Snohomish County to participate in global knowledge work at scale.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Daily Beat:} a living mesh that synchronizes the corridor's human, logistical, and creative flows at the cadence of daily life --- ferry departures, shift changes, lunch prep, component arrivals, commit pushes, and community gatherings all on the same pulse.
+
+\subsubsection{Geographic Study Region}
+
+\begin{asciibox}
+SILICON FOREST CORRIDOR — STUDY REGION
+=======================================
+
+  EDMONDS                    MUKILTEO
+  (ferry dock)  <----+---->  (ferry dock)        [WATER LAYER]
+        |             |             |
+        |        [FERRY SPINE]      |
+        |             |             |
+        +------  HWY 99 CORRIDOR ---+
+                      |
+    +-----------------+------------------+
+    |                 |                  |
+ LYNNWOOD         EVERETT           PORT OF
+ (Alderwood)    (Hub@Everett)       EVERETT
+ Established    Creative             Cargo
+ Business       Commons              Terminal
+ Hub            Zone
+    |                 |                  |
+    +-----------------+------------------+
+                      |
+              AIRPORT ROAD
+                      |
+           +----------+----------+
+           |                     |
+      SNO-ISLE TECH          PAINE FIELD
+      Skills Center          (Boeing / Cargo)
+      Workforce              JIT Mfg Zone
+      Training               Silicon Forest
+           |                     |
+           +----------+----------+
+                      |
+              I-5 SOUTH SPINE
+                      |
+                SILICON VALLEY
+                (final assembly)
+                      |
+               PORT OF SEATTLE
+                      |
+            EUROPE <-----> ASIA
+            (distribution)   (components)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE TOPOLOGY
+========================
+
+M1: SNO-ISLE / IOOF CIVIC LAYER
+   Workforce + fraternal infrastructure + co-op equity model
+
+M2: HWY 99 CREATIVE COMMONS CORRIDOR
+   Everett Mall redevelopment + arts/music pathway + small biz incubation
+
+M3: PAINE FIELD SILICON FOREST JIT ZONE
+   Electronics finish work + containerized components + Airport Rd industrial
+
+M4: FERRY MESH \& REGIONAL COORDINATION
+   Mukilteo-Edmonds corridor + daily beat + food distribution sync
+
+M5: GLOBAL CO-OP KNOWLEDGE NETWORK
+   GitHub + Minecraft + Amazon + Nintendo + Boeing + BNR-SF mesh layer
+
+M6: PACIFIC ASSEMBLY CIRCUIT
+   Boeing JIT + Silicon Valley + Europe + Asia + return/recycle loop
+
+Dependencies:
+  M1 ──> M2 (workforce feeds creative commons)
+  M1 ──> M3 (skills pipeline to JIT zone)
+  M3 ──> M6 (Paine Field feeds Pacific circuit)
+  M4 ──> M5 (ferry mesh enables knowledge network)
+  M2 + M5 ──> synthesized in Wave 2
+  All ──> M6 (assembly circuit integrates everything)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 --- Sno-Isle / IOOF Civic Layer}
+The workforce training and fraternal infrastructure backbone. Covers: Sno-Isle TECH Skills Center programs (24 programs, 5 pathways including fiber optic certification --- first in the USA --- maritime vessel operations, advanced manufacturing, electronics, culinary arts); IOOF hall network as model for co-op commercial real estate (retail below, community above); union apprenticeship structures; student housing adjacent to Paine Field; co-op equity accrual from day one.
+
+\subsubsection{M2 --- Hwy 99 Creative Commons Corridor}
+The social transformation layer along the corridor. Covers: Everett Mall / Hub @ Everett redevelopment (Topgolf anchor, 2026 completion, SR 99 frontage); low-income creative commons model for the adjacent population; art and music education as pathway to small business ownership; CDBG / affordable housing trust fund mechanisms; contrast with Alderwood Mall as the established business anchor further south.
+
+\subsubsection{M3 --- Paine Field Silicon Forest JIT Zone}
+The industrial heart of the corridor. Covers: Paine Field cargo operations and Boeing manufacturing throughput; Airport Road industrial corridor; JIT electronics finish work (high-density containerized component inflow, precision assembly windows); the ``Silicon Forest'' identity (PNW tech manufacturing distinct from Silicon Valley); cooling and power infrastructure for dense electronics work.
+
+\subsubsection{M4 --- Ferry Mesh \& Regional Coordination}
+The logistical and data nervous system. Covers: Mukilteo--Edmonds ferry route as a physical data/logistics spine; daily beat protocol (synchronizing restaurant menu prep, shift schedules, delivery windows, ferry departures into a unified regional pulse); food distribution synchronization; Everett Transit integration; mesh network topology centered on the water crossing.
+
+\subsubsection{M5 --- Global Co-op Knowledge Network}
+The zero-trust, open-source intelligence layer. Covers: GitHub as the global commit graph; Minecraft as the shared creative sandbox (Foxy's Playground monetization model); Amazon/Costco logistics intelligence; Nintendo design language as reference for consumer experience; Boeing and BNR-SF (Bell Northern Research San Francisco lineage) as the engineering heritage; federated work economy (Wasteland/DoltHub) as the knowledge-work settlement layer; zero-trust WWW research protocols.
+
+\subsubsection{M6 --- Pacific Assembly Circuit}
+The global economic loop. Covers: JIT hardware flow south from Paine Field to Silicon Valley for final assembly; component inflow from Asian suppliers through Port of Everett and Sea-Tac cargo; completed assembly distribution to Europe; return flow for parts and upgrades; regional recycling and component recovery economy; the closed-loop circulatory model versus the extractive tributary model.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: silicon-forest-corridor
+  profile: fleet
+  modules: 6
+  model-allocation:
+    opus: 30%    \# Synthesis, community sensitivity, cross-module integration
+    sonnet: 60%  \# Survey compilation, document assembly, structured research
+    haiku: 10%   \# Shared schemas, templates, scaffolding
+  parallel-tracks: 3
+  wave-count: 4
+  cultural-sensitivity: HIGH  \# IOOF fraternal history, Indigenous land context
+  safety-boundaries:
+    - Tulalip tribal territory acknowledgment required in M3/M6
+    - Union jurisdiction research: present evidence, no advocacy
+    - JIT supply chain: Boeing ITAR awareness in M3/M6
+    - Housing data: income/demographic data from official sources only
+  anchor-partners:
+    - Boeing (Paine Field manufacturing)
+    - Sno-Isle TECH Skills Center
+    - Port of Everett
+    - Tulalip Tribes (Snohomish County sovereign territory)
+    - Everett Transit
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Sno-Isle TECH Skills Center program inventory and workforce pipeline analysis
+  \item IOOF/fraternal hall network as co-op real estate model
+  \item Hwy 99 corridor from Everett south to Lynnwood (SR 99 spine)
+  \item Everett Mall / Hub @ Everett redevelopment trajectory and creative commons opportunity
+  \item Paine Field cargo and JIT electronics manufacturing zone (Airport Road corridor)
+  \item Mukilteo--Edmonds ferry route as logistics and data spine
+  \item Daily beat protocol design for regional synchronization
+  \item Global co-op knowledge network architecture (GitHub, Minecraft, zero-trust mesh)
+  \item Pacific Assembly Circuit: Paine Field → Silicon Valley → Europe → Asia → return
+  \item RCW 23.86 cooperative structure for co-op entities
+  \item Tulalip tribal territory acknowledgment and partnership requirements
+  \item CDBG, BEAD, IIJA funding mechanisms applicable to corridor
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item South King County / Seattle proper (covered by separate FIG entities)
+  \item Specific Boeing ITAR-controlled manufacturing processes
+  \item Individual union contract negotiation specifics
+  \item Full Pacific Spine south of Puget Sound (covered by Fox Infrastructure Group plan)
+  \item Cryptocurrency or speculative financial instruments
+  \item Content moderation specifics for Minecraft/gaming platform
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item \textbf{Workforce Pipeline Map:} Complete map of Sno-Isle TECH → apprenticeship → industry pathways documented, including all 24 current programs and articulation agreements with 6+ community colleges.
+  \item \textbf{IOOF Co-op Model:} Three or more historical IOOF hall patterns documented as precedent for co-op commercial real estate on the corridor.
+  \item \textbf{Corridor Nodes Identified:} All major nodes on the Hwy 99 corridor (Everett south to Lynnwood) mapped with current use, redevelopment status, and co-op opportunity rating.
+  \item \textbf{Creative Commons Feasibility:} Everett Mall / Hub @ Everett creative commons model developed with funding mechanism stack (CDBG, AHTF, HUD HOME) and program design for low-income arts/music pathway.
+  \item \textbf{JIT Zone Specification:} Paine Field JIT electronics zone documented: cargo throughput capacity, Airport Road industrial inventory, component inflow logistics, assembly window requirements.
+  \item \textbf{Daily Beat Protocol:} Regional synchronization protocol designed with minimum five data feeds (ferry schedules, Paine Field shift times, Everett Transit, restaurant distribution windows, weather/seasonal).
+  \item \textbf{Global Mesh Architecture:} Zero-trust co-op knowledge network architecture documented with GitHub, Minecraft, Amazon, and BNR-SF integration points specified.
+  \item \textbf{Pacific Circuit Model:} JIT supply chain loop documented end-to-end: Paine Field → Silicon Valley → Europe → Asia component return, with recycling/return economy specified.
+  \item \textbf{Funding Stack:} Complete federal, state, and partner funding mechanisms identified for each of 6 modules with priority sequencing.
+  \item \textbf{Cultural Sovereignty:} Tulalip Tribes (Snohomish County) and Tulalip/Edmonds-area Coast Salish acknowledgment integrated appropriately in all modules touching their territory.
+  \item \textbf{Student Housing Model:} Paine Field-adjacent student housing prototype specified with capacity, funding, and Sno-Isle TECH alignment.
+  \item \textbf{Execution Handoff Ready:} All module specs are self-contained and can be handed to gsd-skill-creator for execution with zero additional context required.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Priority} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent document; this mission operationalizes the Snohomish County founding moves & DEPENDS ON \\
+GSD Skill Creator v1.49+ (DACP) & Execution environment for all wave tasks & REQUIRED \\
+GSD Mesh Prototype Spec & Node architecture feeding into Ferry Mesh (M4) & INFORM \\
+Fox Legal Staffing Analysis & Legal structure for co-op entities (RCW 23.86) & REFERENCE \\
+BBS Educational Pack Vision & Educational layer for creative commons pathway (M2) & EXTENDS \\
+Foxfire Heritage Skills Vision & Craft tradition as precedent for trades co-op model & PARALLEL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle says: you do not need raw power if you have architectural elegance. The Commodore Amiga produced sound and graphics that dwarfed competitors running on faster chips, because it had specialized coprocessors that did exactly their job and nothing else. The Silicon Forest Corridor is not trying to be Silicon Valley. It is not trying to be Seattle. It is doing what the Amiga did: deploying specialized, coordinated architecture where brute-force expansion would fail.
+
+The IOOF understood this a century and a half ago. Tradespeople in odd trades, organizing themselves through shared infrastructure, mutual aid, and community ownership --- retail below, community above, knowledge shared freely among members. That is not nostalgia. That is the pattern. The Sno-Isle student who learns fiber optics in the morning and walks to a Paine Field apprenticeship in the afternoon, accumulating co-op equity since day one, living in student housing two miles from campus --- that student is not a beneficiary of a social program. They are a node in a mesh network. They are the space between the institutions that makes the whole system work.
+
+Small town feel on a global scale. The ferry knows the shift schedule. The restaurant knows the ferry. The Minecraft server knows the design brief. The GitHub commit knows the assembly window. The recycled component knows the next build. The corridor breathes together. That is the daily beat.
+
+\newpage
+
+% ═══════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Silicon Forest Corridor --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the evidentiary foundation for the six mission modules. Each section corresponds to one module. Agents should treat this document as the primary source index --- conduct targeted supplemental web research only for gaps identified during task execution.
+
+\textbf{Key source organizations for this mission:}
+\begin{itemize}[leftmargin=*]
+  \item Sno-Isle TECH Skills Center (snoisletech.com) and Sno-Isle Skills Center Foundation (snoislescfoundation.org)
+  \item Port of Everett (portofeverett.com)
+  \item City of Everett, WA (everettwa.gov) --- CDBG, Housing, Planning
+  \item Washington State Department of Commerce --- BEAD, broadband, co-op law (RCW 23.86)
+  \item Washington State L\&I --- Apprenticeship programs
+  \item Tulalip Tribes (tulaliptribes-nsn.gov) --- Snohomish County sovereign territory
+  \item WSDOT (wsdot.wa.gov) --- Hwy 99, ferry schedules, SR 526 interchange
+  \item Boeing Commercial Airplanes, Paine Field (everett.boeing.com)
+  \item Fiber Broadband Association --- fiber optic certification standards
+  \item Independent Order of Odd Fellows (odd-fellows.org) --- fraternal co-op history
+\end{itemize}
+
+\subsection{M1 Reference --- Sno-Isle / IOOF Civic Layer}
+
+\subsubsection{Sno-Isle TECH Skills Center}
+
+Sno-Isle TECH Skills Center is located at 9001 Airport Road, Everett, adjacent to Paine Field --- a cooperative effort of 15 local school districts in Snohomish and Island Counties. It offers 24 programs across five career pathways:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pathway} & \tableheader{Example Programs} \\
+\midrule
+Information Technology & Electronics Engineering Technology, Computers/Servers/Networking, Video Game Design \\
+Business, Marketing \& Management & Fashion \& Merchandising, Management \& Operations \\
+Human Services & Early Childhood Education \\
+Science \& Health & Pharmacy Technician, Healthcare Careers \\
+Trade \& Industry & Advanced Manufacturing, Maritime Vessel Operations, Aerospace Manufacturing, Welding, Metal Fabrication, Culinary Arts (3 tracks), Automotive, Diesel Mechanics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key distinctions:} Sno-Isle TECH is the first school in the United States to offer fiber optic certification through the Fiber Broadband Association, in partnership with Whidbey Telecom. The 2025--26 school year launched the first Maritime Vessel Operations program for high school students in Snohomish/Island Counties, in partnership with the Port of Everett and Maritime Institute (USCG-approved curriculum). Washington State recorded 21,126 registered apprenticeship participants in 2024 --- a 76\% increase since 2015. Sno-Isle hosts the state's largest apprenticeship career fair annually.
+
+\textbf{Articulation agreements:} Everett Community College, Edmonds Community College, Shoreline Community College, Lake Washington Institute of Technology, and others allow Sno-Isle graduates to receive college credit or learning requirement waivers.
+
+\subsubsection{IOOF / Independent Order of Odd Fellows}
+
+Founded by Thomas Wildey (London blacksmith) in Baltimore in 1819 as a mutual aid society for ``mechanics and laboring men.'' Core mission: friendship, love, and truth; no person should face life's challenges alone. Structure: street-level retail funded the building; community space and lodge above. The Fremont (Seattle) IOOF Lodge \#86, chartered 1891, followed this pattern: retail storefronts on the ground floor, community theater (Empty Space Theatre, 1993--2001) and meeting halls above. The Seattle Capitol Hill IOOF building (1908--10) housed community arts groups into the 2000s. This pattern --- productive commerce at ground level funding community infrastructure above --- is the direct architectural predecessor of the co-op stack.
+
+\textbf{IOOF and co-op convergence:} The IOOF became fully co-ed in 2001. Its benevolent nonprofit structure (no owners, no shareholders; surplus reinvested in programs) maps directly to RCW 23.86 cooperative structure. The Grand Lodge safety net and endowment parallel the FoxCapital co-op equity model.
+
+\subsubsection{Washington Cooperative Law}
+
+RCW 23.86 governs cooperative associations in Washington State. Key features: worker ownership, democratic governance (one member/one vote), equity accrual from date of contribution, surplus reinvestment. This is the legal chassis for all corridor co-op entities.
+
+\subsection{M2 Reference --- Hwy 99 Creative Commons Corridor}
+
+\subsubsection{Everett Mall / Hub @ Everett}
+
+Everett Mall (62 acres, SR 99 / Everett Mall Way, Twin Creeks neighborhood, southern Everett) is mid-redevelopment as ``The Hub @ Everett'' by Brixton Capital, with MG2 architecture and Bayley Construction. Status as of March 2026:
+
+\begin{itemize}[leftmargin=*]
+  \item Interior closed July 1, 2025; exterior redevelopment ongoing
+  \item Topgolf confirmed as 68,000 sq ft anchor (replacing Burlington/LA Fitness building)
+  \item Trader Joe's and Ulta Beauty opened in Sears building (2024)
+  \item Everett Transit Mall Station relocated (December 2025, \$2M project) to accommodate redevelopment
+  \item Full Hub @ Everett opening expected 2026
+  \item Location: less than 1 mile south of the SR 99/I-5/SR 526/SR 527 Broadway interchange
+\end{itemize}
+
+\textbf{Creative commons opportunity:} The large rear parking area (near former LA Fitness / Regal Cinemas) is in ``final phase'' planning with multifamily housing, hotel, and mixed-use options on the table. The City of Everett issued permits for nearly 600 housing units in 2024 --- a 340\% increase from 2023. CDBG allocation for 2025: \$869,124 (HUD). The adjacent population is among the lower-income areas of South Everett, with youth safety identified as a mayoral priority (Directive 2025-01).
+
+\subsubsection{Alderwood Mall}
+
+Located in Lynnwood, Snohomish County, Alderwood Mall serves as the established business anchor further south on the corridor --- national brands, professional services, higher disposable income catchment. The strategic distinction is intentional: Hub @ Everett as creative commons / cultural incubation zone; Alderwood as the graduation destination for businesses that scale beyond the co-op incubator stage.
+
+\subsubsection{Corridor Funding Mechanisms}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Program} & \tableheader{Application} & \tableheader{Approx. Available} \\
+\midrule
+HUD CDBG & Low/moderate income housing, economic dev & \$869K/yr (Everett) \\
+WA AHTF (2060) & Affordable housing trust fund & State allocation \\
+HUD HOME & Rental housing production & Federal formula \\
+EDA (Economic Dev Admin) & Creative district, distressed community & Competitive \\
+WA Career Connect & Workforce-to-arts pipeline & State \\
+NEA Creative Placemaking & Arts infrastructure, community spaces & Competitive \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M3 Reference --- Paine Field Silicon Forest JIT Zone}
+
+\subsubsection{Paine Field Infrastructure}
+
+Paine Field (Snohomish County Airport, KPAE) hosts Boeing Commercial Airplanes' largest assembly complex, including the 747/777/787 Everett factory (the largest building by volume in the world at 472 million cubic feet). Boeing employs approximately 30,000+ workers in the Puget Sound region. Paine Field opened to commercial passenger service in 2019.
+
+\textbf{Airport Road corridor:} Sno-Isle TECH sits at 9001 Airport Road --- directly on the spine connecting Paine Field to the broader industrial zone. The corridor includes aerospace suppliers, metal fabrication shops, electronics assembly, and logistics warehousing.
+
+\subsubsection{JIT Electronics Finish Work Model}
+
+``Silicon Forest'' is an existing identity for the Pacific Northwest tech manufacturing cluster (Oregon/Washington), distinct from Silicon Valley's fabless/software model. Key JIT characteristics for the corridor:
+
+\begin{itemize}[leftmargin=*]
+  \item High-density containerized components arriving via Port of Everett / Sea-Tac air cargo
+  \item Precision assembly windows (JIT engineering over trade route shipping time)
+  \item Cultural creative finishing: regionalized branding, PNW design signature applied at assembly
+  \item Final assembly handoff southbound to Silicon Valley
+  \item Boeing's pod manufacturing JV potential as a mesh-based JIT manufacturing chassis
+\end{itemize}
+
+\subsubsection{Cooling and Power}
+
+Dual high-performance compute nodes (e.g., RTX 5090-class) in PNW summer require active cooling strategy. The corridor's proximity to Snohomish County PUD (hydroelectric power from Grand Coulee and Columbia River system via BPA) gives it a significant green energy advantage over California-based alternatives.
+
+\subsection{M4 Reference --- Ferry Mesh \& Regional Coordination}
+
+\subsubsection{Mukilteo--Edmonds Ferry Route}
+
+Washington State Ferries operates the Mukilteo--Clinton route (Whidbey Island) and the Mukilteo--Edmonds connection provides the east-west data/logistics spine at the corridor's western edge. The ferry terminal at Mukilteo (at the foot of SR 525 / Mukilteo Speedway) is 2.5 miles from Sno-Isle TECH and within direct sight of Paine Field flight operations.
+
+The ferry schedule creates a natural ``daily beat'' cadence: departures at 30-minute intervals during peak hours, synchronized with Paine Field shift changes (Boeing uses multi-shift operations), Everett Transit connections, and the SR 99 corridor traffic rhythm.
+
+\subsubsection{Daily Beat Protocol}
+
+The daily beat is a proposed real-time regional synchronization layer:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Data Feed} & \tableheader{Content} & \tableheader{Update Rate} \\
+\midrule
+Ferry Schedules & WSF departure/arrival, capacity, weather delays & Real-time \\
+Paine Field Shift & Boeing shift change times, parking, access & Daily \\
+Everett Transit & Bus/rail connections, Mall Station, Downtown & Real-time \\
+Restaurant/Food Dist. & Prep windows, menu sync, supplier deliveries & Morning \\
+JIT Component Windows & Incoming container status, assembly queue & 4-hour \\
+Weather/Seasonal & PNW conditions affecting ferry, outdoor work & Hourly \\
+Community Events & Hub @ Everett, Sno-Isle TECH, arts calendar & Daily \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Food Distribution Synchronization}
+
+The restaurant and food service layer on the Hwy 99 corridor represents a significant small business density. Culinary Arts is one of Sno-Isle TECH's three-track programs. A daily food distribution synchronization protocol --- matching prep windows to supplier delivery routes, ferry schedules, and Paine Field shift demand --- would reduce waste, increase margins for small operators, and create a coordination layer that larger chains already have internally.
+
+\subsection{M5 Reference --- Global Co-op Knowledge Network}
+
+\subsubsection{Platform Layer}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Platform} & \tableheader{Role in Mesh} & \tableheader{Corridor Integration} \\
+\midrule
+GitHub & Global commit graph; open-source collaboration; zero-trust code review & GSD Skill Creator repo; Wasteland/DoltHub federation \\
+Minecraft & Creative sandbox; server economy (Foxy's Playground); spatial design & Community design tool for Hub @ Everett creative commons \\
+Amazon & Logistics intelligence; demand signals; fulfillment patterns & FoxCargo corridor freight intelligence \\
+Costco & Regional bulk distribution; member co-op DNA (Kirkland, WA heritage) & Supply chain model for corridor co-op wholesale \\
+Nintendo & Consumer experience design language reference; hardware supply chain & Design standard for corridor product finishing \\
+Boeing & Engineering heritage; aerospace manufacturing precision & JIT manufacturing chassis; pod manufacturing JV \\
+BNR-SF & Bell Northern Research / Nortel legacy: distributed systems heritage & Protocol layer for zero-trust mesh architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Zero-Trust Mesh Architecture}
+
+The GSD ecosystem's zero-trust, WWW-based, open-source mesh network centers on:
+\begin{itemize}[leftmargin=*]
+  \item DACP (Deterministic Agent Communication Protocol, v1.49): structured three-part bundles (intent + data + code) replacing ambiguous markdown for agent-to-agent handoffs
+  \item Wasteland/DoltHub federation: Steve Yegge's distributed work economy as the knowledge-work settlement layer
+  \item MCP (Model Context Protocol) servers for real-time tool connectivity
+  \item GitHub as the global trust anchor: commit graphs as provenance chains
+\end{itemize}
+
+\subsubsection{Distributed Knowledge Work \& Creative Content}
+
+The vision of ``highly distributed knowledge work and creative content creation'' maps to the existing GSD College structure (.college/ directory), with panels and departments (culinary-arts, mathematics, mind-body) providing the curriculum layer. The creative commons at the Hub @ Everett serves as the physical on-ramp for low-income individuals to enter the global knowledge work economy --- art and music skills as the first credential, small business operation on the corridor as the first employment, global mesh as the growth layer.
+
+\subsection{M6 Reference --- Pacific Assembly Circuit}
+
+\subsubsection{Supply Chain Flow}
+
+\begin{asciibox}
+PACIFIC ASSEMBLY CIRCUIT — MATERIAL FLOW
+==========================================
+
+ASIAN SUPPLIERS (Taiwan, South Korea, Japan)
+       |
+       v (container ships)
+PORT OF EVERETT / SEA-TAC AIR CARGO
+       |
+       v (JIT inbound)
+PAINE FIELD JIT ZONE
+       | (electronics finish work)
+       | (PNW branding / regional creative finishing)
+       v
+SILICON VALLEY (final assembly + software integration)
+       |
+       +---> EUROPE (completed assemblies, distribution)
+       |         |
+       |         v (returns + upgrades)
+       v         |
+ASIA (distribution) <-- RECYCLE/RETURN LOOP
+       |
+       v (component recovery)
+PAINE FIELD RECYCLING NODE
+       |
+       v (refurbished components)
+JIT QUEUE (back into assembly window)
+\end{asciibox}
+
+\subsubsection{Port of Everett}
+
+Port of Everett is the largest public marina on the US West Coast and includes marine industrial facilities, cargo operations, and the Navy homeport at Naval Station Everett. The port's industrial waterfront is undergoing long-range redevelopment (Waterfront Place). Its proximity to Paine Field (10 miles north) and the Sno-Isle TECH maritime program (launched 2025 in partnership with Port of Everett) makes it the natural logistics anchor for the Pacific Assembly Circuit.
+
+\subsubsection{JIT Engineering Over Trade Route Shipping Time}
+
+The key insight is that engineering decisions can be made faster than containers can cross the Pacific. A 14-day ocean transit from Taipei to the Port of Everett is long enough to complete a design revision, validate it in simulation, update the assembly spec, and have the corrected build ready when the container arrives. The corridor's JIT model exploits this: the shipping window \emph{is} the engineering window.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\midrule
+Tulalip Tribal Territory & Snohomish County is Tulalip territory; all M3/M6 logistics touching this land requires tribal partnership framing, not extraction framing & ABSOLUTE \\
+Boeing ITAR & Specific manufacturing processes and export controls are out of scope & ABSOLUTE \\
+Union Jurisdiction & Present labor organizing structures as evidence; no advocacy for or against specific union positions & GATE \\
+Housing/Income Data & All demographic and income statistics from official sources (HUD, Census, City of Everett) only & GATE \\
+IOOF History & Present fraternal history accurately; the organization's mutual aid legacy is relevant but not to be romanticized or oversimplified & ANNOTATE \\
+Youth Safety & Everett's youth safety directive (2025-01) is active; any M2 content touching youth programming should acknowledge this context & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=*]
+  \item City of Everett, WA --- CDBG Annual Action Plans 2024, 2025. everettwa.gov
+  \item Washington State Department of Commerce --- RCW 23.86 Cooperative Associations
+  \item Washington State L\&I --- Apprenticeship Programs 2024 data (21,126 participants, 76\% increase since 2015)
+  \item WSDOT --- Washington State Ferries, Mukilteo terminal operations
+  \item Port of Everett --- Maritime Vessel Operations partnership announcement, Oct. 2025
+  \item Snohomish County PUD --- Hydroelectric power sourcing, BPA transmission
+  \item FCC BEAD Program --- \$42.5B broadband deployment; WA state allocation \$1.2B
+  \item FAA --- Paine Field (KPAE) commercial operations data
+  \item HUD --- HOME, CDBG program guidelines
+\end{itemize}
+
+\subsubsection{Institutional Sources}
+\begin{itemize}[leftmargin=*]
+  \item Sno-Isle TECH Skills Center --- Program catalog, articulation agreements, fiber optic certification announcement
+  \item Sno-Isle Skills Center Foundation (snoislescfoundation.org) --- Program outcomes, employer partnerships
+  \item Association of Washington Business --- Sno-Isle fiber optic certification article, Aug. 2024
+  \item Fiber Broadband Association --- OpTIC Path Program, fiber workforce pipeline
+  \item Independent Order of Odd Fellows (odd-fellows.org) --- Organizational history, Wildey founding
+  \item PCAD (Pacific Coast Architecture Database, UW) --- IOOF Hall records, Seattle/Fremont/Capitol Hill
+  \item My Everett News (myeverettnews.com) --- Everett Mall / Hub @ Everett coverage, 2022--2026
+  \item Everett City Government --- Mayor Franklin State of the City 2025; Mayoral Directive 2025-01
+  \item Wikipedia --- Everett Mall redevelopment timeline
+  \item MLTnews.com --- Apprenticeship career fair at Sno-Isle TECH, March 2026
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Silicon Forest Corridor --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, publication-quality research and design document for the Silicon Forest Corridor --- a six-module synthesis covering workforce development, creative commons incubation, JIT manufacturing, ferry-mesh logistics, global co-op knowledge network, and Pacific assembly circuit architecture. The deliverable package will be ready for handoff to Fox Infrastructure Group, FoxEdu, and community co-op stakeholders as the operational blueprint for Snohomish County corridor activation.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+
+Wave 0: FOUNDATION (sequential, Haiku)
+  Shared schemas · source index · naming conventions · safety gates
+
+Wave 1: PARALLEL RESEARCH (3 tracks, Sonnet + Opus mix)
+  Track A: M1 (Sno-Isle/IOOF) + M2 (Hwy 99 Creative Commons)
+  Track B: M3 (Paine Field JIT) + M4 (Ferry Mesh)
+  Track C: M5 (Global Co-op Network) + M6 (Pacific Circuit)
+
+Wave 2: SYNTHESIS (sequential, Opus)
+  Cross-module integration · daily beat protocol · circuit closure
+  Cultural sensitivity review · Tulalip acknowledgment · ITAR check
+
+Wave 3: PUBLICATION + VERIFICATION (sequential, Sonnet)
+  Document assembly · source validation · PDF compilation
+  Execution handoff package
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Civic Infrastructure Layer} --- Sno-Isle TECH, IOOF, unions, apprenticeship, co-op law (M1)
+  \item \textbf{Social Transformation Layer} --- Hwy 99 creative commons, housing, arts pathway (M2)
+  \item \textbf{Industrial Manufacturing Layer} --- Paine Field, Airport Road, JIT zone (M3)
+  \item \textbf{Logistics \& Coordination Layer} --- Ferry mesh, daily beat, food distribution (M4)
+  \item \textbf{Intelligence \& Knowledge Layer} --- GitHub, Minecraft, zero-trust mesh (M5)
+  \item \textbf{Global Circuit Layer} --- Pacific assembly, port logistics, recycle loop (M6)
+  \item \textbf{Integration Layer} --- Wave 2 synthesis, cross-module relationships, publication
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Target Wave} \\
+\midrule
+1 & Shared Schema Package & All 6 modules use consistent terminology, source citation format, and safety annotation conventions & Wave 0 \\
+2 & M1 Civic Layer Report & Sno-Isle program map, IOOF co-op model, apprenticeship pipeline, student housing spec & Wave 1A \\
+3 & M2 Creative Commons Report & Hub @ Everett opportunity analysis, arts/music pathway design, funding stack & Wave 1A \\
+4 & M3 JIT Zone Report & Paine Field capacity, Airport Road inventory, component inflow spec & Wave 1B \\
+5 & M4 Ferry Mesh Report & Daily beat protocol, ferry/shift/food synchronization design & Wave 1B \\
+6 & M5 Knowledge Network Report & Platform integration map, zero-trust architecture, Wasteland/DoltHub alignment & Wave 1C \\
+7 & M6 Pacific Circuit Report & Supply chain flow, port logistics, recycle economy model & Wave 1C \\
+8 & Synthesis Document & Cross-module relationships, daily beat integration, circuit closure analysis & Wave 2 \\
+9 & Final Publication PDF & Complete corridor document, all six modules + synthesis, print-ready & Wave 3 \\
+10 & Execution Handoff Package & Self-contained specs for each module, ready for GSD orchestrator & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schema \& Index & None & Haiku & 8K \\
+W1A: M1 Civic Layer & W0 & Sonnet & 22K \\
+W1A: M2 Creative Commons & W0 & Sonnet & 20K \\
+W1B: M3 JIT Zone & W0 & Sonnet & 24K \\
+W1B: M4 Ferry Mesh & W0 & Sonnet & 18K \\
+W1C: M5 Knowledge Network & W0 & Opus & 26K \\
+W1C: M6 Pacific Circuit & W0 + M3 & Sonnet & 22K \\
+W2: Cross-Module Synthesis & All W1 & Opus & 32K \\
+W2: Cultural Sensitivity Review & All W1 & Opus & 14K \\
+W3: Document Assembly & W2 & Sonnet & 28K \\
+W3: Source Validation & All & Sonnet & 12K \\
+W3: Execution Handoff & All & Sonnet & 16K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{$\sim$242K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Cross-module synthesis (W2), cultural sensitivity review (Tulalip, IOOF, youth), M5 knowledge network architecture (judgment-intensive), go/no-go gate decisions \\
+Sonnet & $\sim$60\% & All six module surveys (W1), document assembly, source validation, execution handoff package production \\
+Haiku & $\sim$10\% & W0 schema generation, naming conventions, template scaffolding, citation format standardization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 1 \\
+1 & Parallel research (3 tracks) & Parallel & Sonnet/Opus & 6 \\
+2 & Synthesis + sensitivity & Sequential & Opus & 3 \\
+3 & Publication + handoff & Sequential & Sonnet & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0 --- Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+W0.1 Schema & Shared terminology glossary, source citation format, safety annotation tags & Haiku \\
+W0.2 Source Index & All 30+ sources indexed with URL, type, reliability tier & Haiku \\
+W0.3 Naming Conventions & CRAFT agent names, file conventions, module IDs & Haiku \\
+W0.4 Safety Gates & IITAR gate, Tulalip acknowledgment template, youth safety flag & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1 --- Parallel Research Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Track} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A & CRAFT-CIVIC: M1 Sno-Isle/IOOF & Program map, co-op model, apprenticeship pipeline, student housing spec & Sonnet \\
+1A & CRAFT-SOCIAL: M2 Hwy 99 Creative Commons & Hub @ Everett analysis, arts pathway, funding stack & Sonnet \\
+1B & CRAFT-INDUSTRIAL: M3 JIT Zone & Paine Field capacity, Airport Road inventory, JIT spec & Sonnet \\
+1B & CRAFT-LOGISTICS: M4 Ferry Mesh & Daily beat protocol design, food distribution sync & Sonnet \\
+1C & CRAFT-INTEL: M5 Knowledge Network & Platform integration map, zero-trust architecture & Opus \\
+1C & CRAFT-GLOBAL: M6 Pacific Circuit & Supply chain flow, port logistics, recycle model & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2 --- Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+W2.1 Cross-Module Integration & Daily beat as unified system; how M1 feeds M3 feeds M6; ferry mesh enabling M5 & Opus \\
+W2.2 Cultural Sensitivity Review & Tulalip acknowledgment in all M3/M6 content; IOOF accuracy; youth safety in M2 & Opus \\
+W2.3 Circuit Closure Analysis & Confirm the loop closes: components in → assembly → distribution → return → recycle & Opus \\
+W2.4 CAPCOM Gate & Human approval of synthesis before W3 begins & HITL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3 --- Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+W3.1 Document Assembly & Full corridor publication (PDF + .tex source) & Sonnet \\
+W3.2 Source Validation & All 30+ sources verified, dead links replaced & Sonnet \\
+W3.3 Execution Handoff & Self-contained module specs for GSD orchestrator & Sonnet \\
+W3.4 Final CAPCOM Gate & Human sign-off before delivery & HITL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=*]
+  \item All Wave 1 tasks share the W0 schema prefix --- exploit 5-minute cache window by launching Track A, B, and C in rapid succession
+  \item M3 and M6 share Boeing/Paine Field source material --- cache the Boeing context block and reuse across both tasks
+  \item Tulalip acknowledgment template from W0 cached and injected into all M3/M4/M6 tasks automatically
+  \item Wave 2 synthesis loads all six Wave 1 outputs in a single large context --- plan for 200K+ token window requirement
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0 (Schema) ──────────────────────────────────────────────┐
+       |                                                   |
+       +──> W1A (M1+M2) ──┐                               |
+       +──> W1B (M3+M4) ──+──> W2 Synthesis ──> W3 Pub   |
+       +──> W1C (M5+M6) ──┘         |                     |
+                               CAPCOM Gate ────────────────┘
+                                    |
+                              W3 Handoff Package
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK release \\
+Core Functionality & 8 & P1 & BLOCK delivery \\
+Integration & 6 & P2 & Flag for review \\
+Edge Cases & 4 & P3 & Document and defer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Test} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Tulalip Tribes acknowledgment & M3, M4, and M6 each contain a Tulalip/Coast Salish territorial acknowledgment and partnership framing; no content frames the corridor as passing through ``unceded'' territory without attribution \\
+SC-02 & Boeing ITAR boundary & No specific Boeing manufacturing process details, export control classifications, or defense contract information appears in M3 or M6 content \\
+SC-03 & Income/demographic data sourcing & All income, housing, and demographic statistics cite HUD, Census Bureau, or City of Everett official sources; no unsourced claims \\
+SC-04 & Youth programming safety & M2 content touching youth or low-income populations does not inadvertently suggest unsupervised engagement; references to Everett Mayoral Directive 2025-01 context where relevant \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC-1 & Workforce Pipeline Map complete & T-01, T-02 & Pre-flight \\
+SC-2 & IOOF Co-op Model documented & T-03 & Pre-flight \\
+SC-3 & Corridor Nodes Identified & T-04 & Pre-flight \\
+SC-4 & Creative Commons Feasibility & T-05, T-06 & Pre-flight \\
+SC-5 & JIT Zone Specification & T-07, SC-02 & Pre-flight \\
+SC-6 & Daily Beat Protocol designed & T-08 & Pre-flight \\
+SC-7 & Global Mesh Architecture & T-09 & Pre-flight \\
+SC-8 & Pacific Circuit Model complete & T-10, SC-02 & Pre-flight \\
+SC-9 & Funding Stack identified & T-11 & Pre-flight \\
+SC-10 & Cultural Sovereignty integrated & SC-01, SC-03 & Pre-flight \\
+SC-11 & Student Housing Model specified & T-12 & Pre-flight \\
+SC-12 & Execution Handoff Ready & T-13 & Pre-flight \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates; CAPCOM interface \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache window scheduling \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring if tracks diverge \\
+ARCH & Architecture & Cross-cutting structural decisions; daily beat schema; circuit closure \\
+SCOUT & Research Agent & Source gathering; web research for gaps; source validation \\
+CRAFT-CIVIC & M1 Specialist & Sno-Isle, IOOF, apprenticeship, co-op equity, student housing \\
+CRAFT-SOCIAL & M2 Specialist & Hwy 99 corridor, Hub @ Everett, arts pathway, CDBG funding \\
+CRAFT-IND & M3 Specialist & Paine Field, Airport Road, JIT zone, Boeing infrastructure \\
+CRAFT-LOG & M4 Specialist & Ferry mesh, daily beat, food distribution, regional coordination \\
+CRAFT-INTEL & M5 Specialist & Global co-op network, GitHub/Minecraft, zero-trust mesh, Wasteland \\
+CRAFT-GLOBAL & M6 Specialist & Pacific circuit, port logistics, Asian suppliers, recycle economy \\
+SECURE & Security & ITAR boundary enforcement; safety gate monitoring \\
+INTEG & Integration & Cross-module relationship validation; circuit closure confirmation \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; daily beat synthesis \\
+VERIFY & Verification & Source validation; accuracy checking; citation completeness \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only channel crossing human-machine boundary \\
+BUDGET & Resource Mgr & Token budget tracking; session planning; cache TTL exploitation \\
+SURGEON & Health Monitor & Research quality degradation detection; flag thin evidence modules \\
+RETRO & Retrospective & Post-wave analysis; lessons learned; corridor completion notes \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, community/cultural sensitivity) \\
+Total Crew Roles & 20 \\
+Research Modules & 6 (M1--M6) \\
+Wave Count & 4 (Foundation, Parallel, Synthesis, Publication) \\
+Parallel Tracks & 3 (Wave 1: A, B, C) \\
+Estimated Token Budget & $\sim$242K across all components \\
+Estimated Context Windows & 18--22 across 6--8 sessions \\
+Safety-Critical Tests & 4 (all mandatory-pass / BLOCK) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Anchor & Sno-Isle TECH + Port of Everett + Tulalip Tribes \\
+Output Formats & Research PDF, .tex source, module execution specs \\
+Handoff Destination & Fox Infrastructure Group / FoxEdu / GSD Orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``The corridor starts at home. It always will.''}
+
+\vspace{0.8em}
+The Sno-Isle student who learns fiber optics in the morning and walks to a Paine Field apprenticeship in the afternoon is not a recipient of a social program. They are a node in a mesh. The ferry knows the shift schedule. The restaurant knows the ferry. The GitHub commit knows the assembly window. The recycled component knows the next build.
+
+\vspace{0.5em}
+Small town feel on a global scale. That is the daily beat. That is the Silicon Forest Corridor.
+
+\vspace{0.5em}
+\textbf{\sffamily --- Fox Infrastructure Group, Mukilteo, Washington}
+\end{quotebox}
+
+\end{document}
