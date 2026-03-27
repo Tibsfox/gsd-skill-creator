@@ -1,0 +1,192 @@
+/* BMR — Reggae palette: Green/Gold/Red, Bob Marley & Reggae
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
+:root {
+  --reggae-green: #1B5E20;
+  --reggae-green-light: #E8F5E9;
+  --reggae-green-mid: #2E7D32;
+  --reggae-green-dark: #0D3B0F;
+  --reggae-gold: #F9A825;
+  --reggae-gold-light: #FFF8E1;
+  --reggae-gold-mid: #F57F17;
+  --reggae-red: #B71C1C;
+  --reggae-red-light: #FFEBEE;
+  --reggae-red-mid: #C62828;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--reggae-green);
+  --link-hover: var(--reggae-green-dark);
+  --accent: var(--reggae-green);
+  --accent-light: var(--reggae-green-light);
+  --accent-dark: var(--reggae-green-dark);
+  --card-bg: white;
+  --card-border: #C8E6C9;
+  --card-shadow: rgba(27,94,32,0.12);
+  --border: #C8E6C9;
+  --parchment: var(--reggae-green-light);
+}
+
+/* ═══════════════════════════════════════════
+   2. HEADER — reggae tricolor gradient
+   ═══════════════════════════════════════════ */
+
+header {
+  background: linear-gradient(135deg, #0D3B0F 0%, #1B5E20 35%, #2E7D32 60%, #1a3a1a 100%);
+  border-bottom: 4px solid var(--reggae-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(249,168,37,0.15) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(183,28,28,0.1) 0%, transparent 55%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFF8E1; }
+header .subtitle { color: #C8E6C9; }
+
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
+
+h2 {
+  color: var(--reggae-green-dark);
+  border-bottom-color: var(--reggae-green-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--reggae-green); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
+
+blockquote {
+  background: var(--reggae-gold-light);
+  border-left: 4px solid var(--reggae-gold);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--reggae-green-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(27,94,32,0.04); }
+tr:hover { background: rgba(27,94,32,0.08); }
+
+pre {
+  background: #1a2a1a;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--reggae-gold-mid);
+}
+code {
+  background: var(--reggae-green-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--reggae-green);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ═══════════════════════════════════════════
+   5. CARDS — border-color hover
+   ═══════════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #C8E6C9;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(27,94,32,0.12); border-color: var(--reggae-green); }
+
+/* ═══════════════════════════════════════════
+   6. STATS — grid layout
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #C8E6C9;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--reggae-green);
+}
+
+/* ═══════════════════════════════════════════
+   7. TAGS
+   ═══════════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-origins { background: var(--reggae-green-light); color: var(--reggae-green); }
+.tag-bio { background: var(--reggae-gold-light); color: var(--reggae-gold-mid); }
+.tag-spirit { background: var(--reggae-red-light); color: var(--reggae-red); }
+.tag-music { background: #E8F5E9; color: #2E7D32; }
+.tag-legacy { background: #FFF3E0; color: #E65100; }
+
+/* ═══════════════════════════════════════════
+   8. SPECIAL COMPONENTS
+   ═══════════════════════════════════════════ */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #C8E6C9;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--reggae-green); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--reggae-green-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--reggae-green);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #A5D6A7; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
