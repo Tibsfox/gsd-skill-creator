@@ -1,0 +1,1084 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Social Science / Music Culture ---
+\definecolor{primary}{HTML}{283593}      % Warm indigo - section headers
+\definecolor{secondary}{HTML}{B71C1C}    % Deep coral red - subsections
+\definecolor{tertiary}{HTML}{37474F}     % Slate - subsubsections
+\definecolor{accent}{HTML}{1565C0}       % Blue accent
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FFEBEE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers/Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The B-52s}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The B-52s -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The B-52s\\[0.3em]Party at the Edge of the Universe}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Music History, Cultural Archaeology, and the Art of Joyful Subversion}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The B-52s --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Domain:}{Music History, Cultural Studies, LGBTQ+ Legacy, Post-Punk/New Wave}
+\metafield{Context:}{Cold-start deep research mission; no prior conversation}
+
+\subsection{Vision}
+
+In 1976, five people shared a flaming volcano drink at a Chinese restaurant in Athens, Georgia, and decided to start a band purely for fun. They had almost no musical experience. One of them worked in a health food store. Another lived in a shack in the country with goats and no running water. They borrowed instruments, wore thrift-store wigs and go-go boots, and played songs about rock lobsters and aliens from Planet Claire. Within two years they were on the cover of the \textit{Village Voice}, performing at CBGB, and inspiring John Lennon to come out of retirement.
+
+This is not a story about talent. It is a story about what happens when you build something from nothing but curiosity, friendship, and the freedom that comes from having no idea what you are ``supposed'' to do. The B-52s did not learn the rules of rock and roll and then break them. They simply never learned the rules. The result was something genuinely new---a sound so idiosyncratic it could not be categorized, a band so joyful it could not be dismissed, a cultural force so enduring that its influence reaches from the underground clubs of 1978 to the algorithms of streaming platforms in 2026.
+
+A deep research study of the B-52s is not merely a study of a band. It is a study of how creative communities form, how outsider aesthetics become mainstream, how a small college town can become the center of an alternative universe, how queer culture finds expression in the most unexpected forms, and how grief and resilience can transform a group of survivors into something larger than they were before. It is a study of the spaces between---between surf rock and punk, between tragedy and joy, between the margins and the mainstream, between Athens, Georgia and the rest of the world.
+
+The GSD research mission proposed here will document this story with the rigor and care it deserves, producing a reference document that maps the full arc of the B-52s' history, their sonic innovations, their cultural impact, and the enduring human story at the heart of it all.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The party-band dismissal problem.} The B-52s are routinely undervalued in critical discourse because their music sounds fun. The depth of their musical innovation---Ricky Wilson's radical guitar retunings, the absence of a bass guitar replaced by keyboard synth-bass, the call-and-response vocal architecture---is rarely documented with technical rigor alongside their cultural significance.
+  
+  \item \textbf{The Athens context gap.} The band did not emerge from nowhere; they emerged from a specific time, place, and community: Athens, Georgia in the mid-1970s, a college town with no music scene and a counterculture that had to invent its own entertainment. This context is rarely documented comprehensively.
+  
+  \item \textbf{The Ricky Wilson knowledge gap.} Ricky Wilson was one of the most innovative guitarists of the post-punk era, developing entirely novel tuning systems (DADxBB, CFxxFF) that produced the band's signature sound. His death from AIDS in 1985 at age 32 made him one of the earliest celebrity casualties of the epidemic. His technical contributions and human story deserve dedicated documentation.
+  
+  \item \textbf{The LGBTQ legacy documentation problem.} Four of the five original members identified within the LGBTQ+ community. The band's role as queer icons---their influence on queer culture, their response to the AIDS crisis, their connection to the legal case \textit{Fricke v. Lynch}---is fragmented across disparate sources and has never been compiled into a single authoritative reference.
+  
+  \item \textbf{The influence chain under-documentation problem.} The B-52s' causal influence on subsequent music---the Athens scene (R.E.M., Pylon), the New York DFA label (LCD Soundsystem, Hercules and Love Affair), the Scissor Sisters, and the triggering of John Lennon's \textit{Double Fantasy}---is widely cited anecdotally but rarely traced with precision and source attribution.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The B-52s as Proof of the Outsider Advantage:} When you have no model to follow, you invent one. The band's defining characteristic was not technique but freedom from convention---a freedom that produced technical innovations (Wilson's tunings), aesthetic innovations (thrift-store camp as visual language), and cultural innovations (queer visibility without political framing) that only became legible to the mainstream years after they were created.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+GEOGRAPHIC / CULTURAL DOMAIN MAP
+
+Athens, GA (1976-1979)
++--------------------------------------------------+
+|  Chinese restaurant    Valentine's Day party     |
+|  October 1976          February 1977             |
+|  Formation             First show                |
+|  [Strickland + R.Wilson + C.Wilson + Pierson     |
+|   + Schneider share a flaming volcano drink]     |
++--------------------------------------------------+
+         |
+         v
+New York City (1978-1980)
++--------------------------------------------------+
+|  CBGB / Max's Kansas City  Warner Bros. signing  |
+|  DB Records "Rock Lobster"  Debut album (1979)   |
+|  Underground cult status -> mainstream entry     |
++--------------------------------------------------+
+         |
+         v
+Bermuda (1979) / Global (1980s-2000s)
++--------------------------------------------------+
+|  John Lennon hears "Rock Lobster" in a disco     |
+|  -> Double Fantasy (1980) recorded               |
+|  Rock in Rio (1985) - largest crowd ever         |
+|  Cosmic Thing (1989) - 4x Platinum comeback      |
+|  Farewell Tour Athens (Jan 10, 2023)             |
++--------------------------------------------------+
+
+INFLUENCE RADIATION:
+Athens GA --> R.E.M., Pylon, Dreams So Real
+New York  --> DFA Records, LCD Soundsystem, Hercules & Love Affair
+Cultural  --> Scissor Sisters, queer visibility, LGBTQ+ activism
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+
++---Module 1---+  +---Module 2---+  +---Module 3---+
+| ORIGINS &    |  | SONIC        |  | DISCOGRAPHY  |
+| ATHENS SCENE |  | ARCHITECTURE |  | ARC          |
+|              |  |              |  |              |
+| Formation    |  | Ricky Wilson |  | 7 Studio     |
+| Athens 1976  |  | Guitar DNA   |  | Albums 1979- |
+| CBGB path    |  | Farfisa org. |  | 2008         |
+| Warner Bros. |  | Vocal style  |  | Chart data   |
+|              |  | Genre fusion |  | Cosmic Thing |
++--------------+  +--------------+  +--------------+
+        |                |                 |
+        +----------------+-----------------+
+                         |
+              +----------v----------+
+              |   SYNTHESIS LAYER   |
+              |  Module 4 + 5       |
+              +---------------------+
+                    /         \
+        +-----------+           +-----------+
+        | Module 4  |           | Module 5  |
+        | CULTURAL  |           | HUMAN     |
+        | LEGACY    |           | STORY     |
+        |           |           |           |
+        | LGBTQ+    |           | Band      |
+        | AIDS act. |           | members   |
+        | Influence |           | Ricky's   |
+        | R.E.M./   |           | death     |
+        | Lennon    |           | Farewell  |
+        +-----------+           +-----------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and the Athens Scene}
+
+Documents the formation of the B-52s against the specific social and geographic context of Athens, Georgia in 1976---a college town of 20,000+ students with no music venues and a counterculture that had to invent its own entertainment. Covers the improvised jam session origin story, the Valentine's Day 1977 debut, the trip to New York City, the DB Records ``Rock Lobster'' single (1978), and the Warner Bros. signing. Includes documentation of the broader Athens scene that the B-52s catalyzed: Pylon, R.E.M., and the template for the college rock alternative circuit.
+
+\subsubsection{Module 2: Sonic Architecture}
+
+Technical deep-dive into the B-52s' distinctive sound. Central focus: Ricky Wilson's revolutionary guitar tunings (DADxBB, CFxxFF, use of bass strings on a Mosrite guitar, removal of the G string) that produced the band's signature surf-rock-meets-avant-garde riff vocabulary. Secondary elements: Kate Pierson's Farfisa organ and Korg SB-100 Synthe-Bass (which replaced a conventional bass guitar), Fred Schneider's sprechgesang vocal style, the three-headed call-and-response vocal architecture, and the band's debt to Yoko Ono's avant-garde vocal experiments. Connects to the Lennon story.
+
+\subsubsection{Module 3: Discography Arc}
+
+Comprehensive documentation of all seven studio albums (1979--2008) plus key compilations. Chart positions, sales data, critical reception, and production context for each. Special focus on the Cosmic Thing (1989) comeback: the grief-to-creation arc after Ricky Wilson's death, the Nile Rodgers/Don Was production partnership, the ``Love Shack'' origin story (a throwaway track recorded in one day), and the 4x Platinum result that made them international superstars a decade into their career.
+
+\subsubsection{Module 4: Cultural Legacy and Influence}
+
+Documents the B-52s' role as cultural force beyond their chart positions. Three primary axes: (1) LGBTQ+ iconography---four of five original members in the community, their camp aesthetic, the 1981 book \textit{Reflections of a Rock Lobster} (Aaron Fricke's coming-out story), the \textit{Fricke v. Lynch} court case, and Fred Schneider's later collaboration with RuPaul's Drag Race winner Jinkx Monsoon; (2) AIDS activism and awareness following Ricky Wilson's death; (3) influence on subsequent music---R.E.M. (Michael Stipe's direct acknowledgment), DFA/LCD Soundsystem, and the Lennon/Double Fantasy story.
+
+\subsubsection{Module 5: The Human Story}
+
+Documents the individual members, their trajectories, and the emotional arc of the band. Covers Ricky Wilson's background (learning guitar from PBS, the Mosrite, his privacy around his illness), the band's grief and three-year hiatus, Cindy Wilson's departure and return, Keith Strickland's transition from drums to guitar, the Las Vegas residency, and the January 10, 2023 farewell concert at Athens' Classic Center---the band returning to where it all began, ending the ``Final Tour Ever on Planet Earth.''
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# B-52s Research Mission Chipset Configuration
+# Profile: Squadron | Modules: 5 | Sensitivity: Medium (LGBTQ/AIDS)
+
+chipset:
+  mission_id: b52s_deep_research_v1
+  profile: squadron
+  model_allocation:
+    opus_30pct:
+      - cultural_legacy_synthesis       # Module 4 - LGBTQ/AIDS sensitivity
+      - human_story_narrative           # Module 5 - grief, resilience
+      - cross_module_integration        # Final synthesis
+      - through_line_composition        # Philosophical framing
+    sonnet_60pct:
+      - origins_athens_survey           # Module 1
+      - sonic_architecture_survey       # Module 2
+      - discography_arc_survey          # Module 3
+      - source_compilation              # Bibliography assembly
+      - document_production             # Draft assembly
+    haiku_10pct:
+      - shared_schemas                  # JSON schemas
+      - citation_scaffolding            # Source index templates
+      - table_generation                # Discography tables
+
+  parallel_tracks:
+    track_a: [Module 1, Module 2]       # Wave 1A - Origins + Sonic
+    track_b: [Module 3, Module 4]       # Wave 1B - Discography + Legacy
+    track_c: [Module 5]                 # Wave 1C - Human Story (Opus)
+
+  cache_strategy:
+    ttl_window: 5_minutes
+    warm_items:
+      - shared_schema
+      - source_index
+      - b52s_member_profiles
+      - discography_master_table
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item All five original band members: Fred Schneider, Kate Pierson, Cindy Wilson, Ricky Wilson, Keith Strickland
+  \item Formation period in Athens, Georgia (1976--1979)
+  \item Complete discography: 7 studio albums (1979--2008), major EPs and compilations
+  \item Ricky Wilson's guitar innovations and technical legacy
+  \item The Athens music scene as cultural ecosystem
+  \item LGBTQ+ cultural significance and AIDS activism
+  \item The Lennon/Double Fantasy connection
+  \item Influence on R.E.M., DFA Records/LCD Soundsystem, Scissor Sisters
+  \item The Cosmic Thing comeback arc (1985--1989)
+  \item Farewell tour and Las Vegas residency (2022--2023)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Solo projects (Kate Pierson's solo albums, Fred Schneider's solo work) unless directly relevant
+  \item Comprehensive touring history beyond key landmark shows
+  \item Merchandise and commercial licensing in depth
+  \item Individual fan testimonials and audience reception studies
+  \item Legal/business structure of the band entity
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Origins Module produces a fully sourced chronological account of the band's formation from October 1976 through Warner Bros. signing in 1979, naming all five members and documenting the specific Athens context.
+  \item Sonic Architecture Module documents Ricky Wilson's guitar tuning systems with at least three specific tunings (DADxBB, CFxxFF, etc.), string gauge notes, and the Mosrite/Silvertone instrument history, all sourced.
+  \item Discography Module covers all seven studio albums with peak Billboard 200 positions, US certification levels, key singles, and primary production credits.
+  \item Cosmic Thing comeback narrative traces the complete arc from Ricky Wilson's death (October 1985) through the album's 4x Platinum certification, with at minimum five sourced data points.
+  \item Cultural Legacy Module documents the Lennon/Double Fantasy connection with direct sourced quotes from Lennon and at least one other primary source (Ono, Strickland).
+  \item LGBTQ+ documentation includes the Aaron Fricke/\textit{Fricke v. Lynch} story, the AIDS activism arc, and at least three contemporary examples of continuing queer cultural influence.
+  \item Athens influence chain documents R.E.M.'s acknowledged debt (sourced Stipe quote) and at least two other bands/labels directly influenced.
+  \item Human Story Module documents each surviving member's trajectory with a minimum 3--4 sourced biographical facts per person.
+  \item All numerical claims (chart positions, sales figures, dates) are attributed to specific named sources; zero unsourced statistics.
+  \item Source bibliography contains at least 15 entries from professional organizations, peer-reviewed sources, or established journalism (Rolling Stone, The Guardian, Billboard, New Georgia Encyclopedia, Wikipedia with sourced claims).
+  \item Cross-module connections are explicitly named: at minimum, Ricky Wilson's guitar innovations (Module 2) linked to Athens scene DNA (Module 1), and cultural legacy (Module 4) linked to human story (Module 5).
+  \item Document is self-contained: a reader with no prior knowledge can understand the full B-52s story from formation to farewell without consulting external sources.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Foxfire Heritage Skills Vision & Parallel & Kindred doc --- documenting cultural heritage through archival research \\
+GSD Upstream Intelligence Pack & Process parallel & Same Squadron methodology, different domain \\
+Deep Audio Analyzer Mission & Sonic convergence & Overlap in music analysis techniques; share source schema \\
+The Space Between (textbook) & Philosophical parent & ``Spaces between'' metaphor applies to B-52s sound architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The B-52s built something in the spaces between. Between surf rock and punk. Between the avant-garde (Yoko Ono's vocal experiments) and the danceable. Between tragedy and joy. Between the margins of Athens, Georgia and the global mainstream. Their entire aesthetic was constructed from what others had discarded: thrift-store clothes, borrowed instruments, Farfisa organs nobody wanted, Mosrite guitars played in tunings no one had tried. They found value in the gaps.
+
+This is the Amiga Principle applied to culture: remarkable complexity achieved not through brute force technique but through architectural leverage---choosing the right building blocks, combining them in unexpected configurations, and trusting that the result will be greater than the sum of its parts. Ricky Wilson's ``stupid little guitar line'' was, by conventional metrics, technically simple. In the DADxBB tuning, simple barring across a fret produces a full Dmaj6 chord. The complexity was not in the execution but in the architecture of the choice. One unconventional decision, faithfully executed, opened a sonic universe.
+
+The mission proposed here is itself a space-between operation: taking the fragmented, dispersed record of a band that often slipped through the cracks of critical attention, and assembling it into something complete. The B-52s gave people their lives back---briefly, joyfully, on dance floors from Athens to Bermuda to Sydney. That is worth documenting with precision.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The B-52s --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings across all five research modules, drawn from authoritative journalism, encyclopedic sources, band-official materials, and historical records. Each module section contains findings organized by subtopic with sourced data. The bibliography at the end lists all primary sources.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item New Georgia Encyclopedia (peer-reviewed state encyclopedia, Auburn University authorship)
+  \item Wikipedia (The B-52s, Ricky Wilson, Rock Lobster, Cosmic Thing articles --- cross-checked)
+  \item Official band biography (theb52s.com/bio)
+  \item Rolling Stone magazine (Lennon interview, 500 Greatest Albums/Songs lists)
+  \item Billboard (chart data)
+  \item RIAA (certification data)
+  \item CBC Radio, A.V. Club, American Songwriter (sourced journalism)
+  \item The Red and Black (University of Georgia newspaper, archival coverage)
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and the Athens Scene}
+
+\subsubsection{Formation}
+
+The B-52s formed in Athens, Georgia in October 1976, when five friends shared a flaming volcano cocktail at a Chinese restaurant and spontaneously decided to start a band. The founding members were: Fred Schneider (vocals, percussion), Kate Pierson (vocals, keyboards), Cindy Wilson (vocals, percussion), Ricky Wilson (guitar, vocals)---Cindy's elder brother---and Keith Strickland (drums). When they first jammed that evening, Strickland played guitar and Ricky Wilson played congas; their instrument assignments would shift before the first public performance.
+
+The band's name originated from a dream Strickland had of a band performing in a hotel lounge, in which he heard someone whisper ``the B-52's'' in his ear. The name also referenced the distinctive beehive bouffant hairstyles worn by Pierson and Cindy Wilson---styled to resemble the nose cone of a B-52 bomber aircraft. Other names considered were ``Tina-Trons'' and ``Fellini's Children'' (source: Wikipedia/The B-52s).
+
+\subsubsection{The Athens Context}
+
+In the mid-1970s, Athens, Georgia was a college town of approximately 20,000 University of Georgia students with virtually no music infrastructure: no rock venues, only a handful of bars catering to fraternity and sorority crowds, and a social divide between the counterculture and the Greek system. The Vietnam-era counterculture had migrated to Athens's outskirts, living communally. The only musical acts were cover bands. Entertainment was self-generated: parties in rented houses, communal creative sharing (The Culture Crush).
+
+This vacuum was the precondition for everything. Bands formed because they had to---there was nothing else to go to. The B-52s played their first concert on Valentine's Day 1977 at a house party on North Milledge Avenue in Athens, for approximately 15--20 UGA art students. The venue is now a private residence (Wikipedia/The B-52s).
+
+\subsubsection{New York and the Warner Bros. Signing}
+
+Following their local Athens performances, the band began making weekend trips to New York City to play the underground circuit. Their first single, ``Rock Lobster,'' was recorded in February 1978 at Mountain Studios in Atlanta for approximately \$700 (DB Records, owned by Danny Beard). Released in April 1978, it sold over 2,000 copies as an independent single and earned airplay, leading to bookings at CBGB and Max's Kansas City in New York. When the band played their first New York show following the single's release, Ricky Wilson looked out the window and saw a line around the block. They signed with Warner Bros. Records and recorded their debut album at Compass Point Studios in Nassau, Bahamas in 1978--1979 (New Georgia Encyclopedia; theb52s.com/bio).
+
+\subsubsection{The Athens Ripple Effect}
+
+R.E.M. frontman Michael Stipe has stated: ``During the early days of R.E.M. whenever we would go on tour we always began our set by announcing that we were from Athens, Georgia. The only reason that meant something to anyone was because of The B-52s. We wore that badge proudly.'' The B-52s were the first significant band out of Athens and established the city's credibility as an alternative music origin point, enabling Pylon, R.E.M., Dreams So Real, and the broader college rock ecosystem (Audio-Visual Repository; The Culture Crush).
+
+\subsection{Module 2 Reference: Sonic Architecture}
+
+\subsubsection{Ricky Wilson's Guitar Innovations}
+
+Ricky Wilson (March 19, 1953 -- October 12, 1985) learned guitar from the PBS series \textit{Learning Folk Guitar} and played a Silvertone guitar in high school before acquiring the Mosrite guitar associated with his signature tone. Wilson's defining innovation was a series of unconventional tuning systems that removed one or more strings and created open chord configurations that produced the band's surf-punk-avant-garde sound (Wikipedia/Ricky Wilson; Gearspace forum research; GTDB.org).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tuning} & \tableheader{Notes} & \tableheader{Songs / Characteristics} \\
+\midrule
+DADxBB & 5-string; G string removed; produces open Dmaj6 & Primary early-album tuning; barring any fret yields Dmaj6 shape; distinctive ringing character \\
+CFxxFF & 4-string; middle strings removed; open F configuration & Used on ``Rock Lobster'' and select early tracks; bass strings on guitar \\
+Standard + variations & Modified gauges (bass strings on guitar body) & Heavy string gauges created massive low-end resonance unusual for surf guitar \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The ``Rock Lobster'' riff was described by Pitchfork as: ``It's constructed like prog rock, sounds like the avant-garde, has surreal lyrics and one of pop's most memorable guitar riffs.'' Wilson called it ``the stupidest guitar line you've ever heard.'' A.V. Club described it as ``some kind of stupid genius''---quoting Kate Pierson (AV Club, 2014). Rolling Stone named Wilson the 247th greatest guitarist of all time in its 2023 list.
+
+\subsubsection{The Farfisa and Synth-Bass Architecture}
+
+Kate Pierson played a Farfisa organ---a vintage 1960s Italian combo organ that, combined with Wilson's guitar tunings, created the band's retro-nuevo sound. Critically, the band operated without a conventional bass player. The bass line on ``Rock Lobster'' was performed by Pierson on a Korg SB-100 Synthe-Bass, a keyboard instrument also heard on early Soft Cell recordings including ``Tainted Love'' (Songfacts). This architectural choice---keyboard-generated bass instead of a bass guitarist---is fundamental to the band's sonic identity and was not a workaround but a deliberate aesthetic decision.
+
+\subsubsection{Vocal Architecture}
+
+The three-vocalist structure created a signature call-and-response dynamic: Fred Schneider's spoken-word sprechgesang (deadpan narration, humorous declarations) contrasting with the melodic harmonies of Kate Pierson and Cindy Wilson. The female vocal parts were directly inspired by Yoko Ono's avant-garde vocal experiments---the ``fish noises'' and creature calls in ``Rock Lobster'' are an explicit homage. Keith Strickland confirmed: ``That was really an homage to Yoko when Cindy does that scream at the end.'' (Songfacts; Q magazine).
+
+\subsubsection{Influences and Synthesis}
+
+The band cited children's records, the Mamas and the Papas, Esquerita and the Voola, Yoko Ono, James Brown, The Velvet Underground, Captain Beefheart, and The Beatles as influences. Strickland's stated aesthetic: ``Our feeling was if it sounds good, it is good. So we put that freedom into writing. We felt like we could do anything.'' (Audio-Visual Repository). The result was a synthesis no music industry category could contain---post-punk, new wave, surf rock, girl-group, avant-garde, and camp simultaneously.
+
+\subsection{Module 3 Reference: Discography Arc}
+
+\subsubsection{Complete Studio Album Discography}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Peak (US/UK)} & \tableheader{Notes} \\
+\midrule
+\textit{The B-52's} & 1979 & \#59 US / \#22 UK & Produced by Chris Blackwell; Compass Point Studios, Nassau; ``Rock Lobster,'' ``Planet Claire''; Rolling Stone \#152 Greatest Albums \\
+\textit{Wild Planet} & 1980 & \#18 US / \#18 UK & Produced by Rhett Davies; ``Private Idaho,'' ``Party Out of Bounds''; gold-selling \\
+\textit{Whammy!} & 1983 & \#29 US / \#33 UK & Drum machines replace Strickland; synth-heavy; ``Legal Tender'' \\
+\textit{Bouncing Off the Satellites} & 1986 & \#85 US / \#74 UK & Recorded while Ricky Wilson was dying; dedicated to him; ``Summer of Love,'' ``Wig'' \\
+\textit{Cosmic Thing} & 1989 & \#4 US / \#8 UK & Produced by Nile Rodgers and Don Was; 4x Platinum US; \#1 Australia and New Zealand; ``Love Shack'' (\#3 US), ``Roam'' (\#3 US) \\
+\textit{Good Stuff} & 1992 & \#16 US / \#21 UK & Produced by Nile Rodgers; title track top 40; most political album \\
+\textit{Funplex} & 2008 & \#11 US & Produced by Steve Osborne; first album in 16 years; ``Funplex'' single \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Sources: ClassicRockHistory.com; Official Charts (UK); Billboard; Wikipedia discography.
+
+\subsubsection{The Cosmic Thing Comeback Arc}
+
+The Cosmic Thing comeback is one of the most documented resurrection stories in rock history. Following Ricky Wilson's death in October 1985, the band went into a near-three-year mourning period. Keith Strickland---switching permanently from drums to guitar---began composing new music quietly as a ``grief-soothing balm'' (Garden and Gun, 2019). He shared it with the others; Cindy Wilson often burst into tears during early sessions.
+
+The album was produced by Nile Rodgers and Don Was and recorded at Dreamland Recording Studios in Woodstock, New York. ``Love Shack'' was the final song recorded---a 15-minute unfinished piece brought in on the last day of sessions, refined and cut in a single day. Strickland initially felt it was not ready; Pierson and Schneider overruled him. Radio programmers were unenthusiastic; Schneider personally promoted it to indie stations. ``We had a hard time selling `Love Shack' at first. We would go to radio stations basically to beg them to play the song. Even the record company thought it was too weird.'' (American Songwriter, citing Billboard interview).
+
+The song debuted on the Hot 100 two and a half months after release and peaked at \#3 five months later; it spent 27 weeks on the chart. ``Roam'' also peaked at \#3. The album reached \#4 on the Billboard 200, \#1 in Australia and New Zealand, and achieved 4x Platinum certification in the US. It was the ninth best-selling album in the US in 1990 (Wikipedia/Cosmic Thing).
+
+\subsubsection{Grammy Nominations}
+
+The B-52s received three Grammy nominations: Best Pop Performance by a Duo or Group (1990 and 1991 for Cosmic Thing era); Best Alternative Music Album (1992 for Good Stuff) (Wikipedia/The B-52s). They have never been inducted into the Rock and Roll Hall of Fame, a widely noted critical oversight.
+
+\subsection{Module 4 Reference: Cultural Legacy and Influence}
+
+\subsubsection{LGBTQ+ Iconography}
+
+Four of the five original B-52s members identified within the LGBTQ+ community. The band was consistently queer without being overtly political about it---Kate Pierson described their orientation as: ``We just thought of ourselves as just plain queer---as in eccentric.'' This framing allowed them to model queer aesthetics and visibility in the mainstream during the Reagan era without triggering the backlash that would have accompanied explicit political positioning (The Gryphon, University of Leeds, 2021).
+
+In 1981, 19-year-old Aaron Fricke published \textit{Reflections of a Rock Lobster: A Story About Growing Up Gay}, describing how the B-52s and ``Rock Lobster'' gave him the courage to come out as a gay high school student in Rhode Island and to take a male date to his school prom. The resulting legal case, \textit{Fricke v. Lynch}, is considered one of the first legal victories for LGBTQ+ students and is routinely cited in cases regarding the right of students to bring same-sex dates to school functions (Songs That Saved You, 2023).
+
+\subsubsection{AIDS Activism}
+
+Ricky Wilson died on October 12, 1985, from AIDS-related complications at age 32, making him one of the earliest celebrities to die from the disease---only two weeks after Rock Hudson, generally cited as the first celebrity AIDS death. Wilson had kept his diagnosis private; only Strickland knew. ``There was just so much fear around AIDS at the time,'' Strickland told CBS News. ``There was just so much we didn't know.''
+
+Following Wilson's death, the band produced a public service announcement for AMFAR (The Foundation for AIDS Research) titled ``Art Against AIDS,'' which featured numerous prominent artists of the era (The Gryphon, 2021). Fred Schneider has continued AIDS-related fundraising; he hosted a ``Not So Silent Night Karaoke Dance Party'' benefit for AID Atlanta as recently as 2013 (Atlanta Magazine).
+
+\subsubsection{The John Lennon / Double Fantasy Connection}
+
+In the spring of 1979, John Lennon was vacationing in Bermuda with his son Sean while on a five-year retirement from music. An assistant brought him to a nightclub (Disco 40); upstairs was disco, downstairs was new wave. Lennon heard ``Rock Lobster'' playing. His response, recorded in his final Rolling Stone interview three days before his assassination: ``It sounds just like Yoko's music, so I said to meself, `It's time to get out the old ax and wake the wife up!'''
+
+Lennon called Ono and began composing songs over the phone. The result was \textit{Double Fantasy} (1980), released three weeks before his murder. Ono has stated: ``Listening to the B-52s, John said he realized that my time had come. So he could record an album by making me an equal partner.'' In 2002, Ono joined the B-52s onstage at their 25th anniversary concert at Irving Plaza in New York to perform ``Rock Lobster,'' performing the Cindy Wilson scream she had inspired (Wikipedia/Rock Lobster; CBC Radio; Ultimate Classic Rock).
+
+\subsubsection{Influence on Subsequent Music}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist / Scene} & \tableheader{Connection} \\
+\midrule
+R.E.M. & Stipe acknowledgment; B-52s put Athens on the map; direct scene lineage \\
+Pylon, Dreams So Real & Athens scene siblings; B-52s catalyzed the local ecosystem \\
+DFA Records (LCD Soundsystem, Hercules and Love Affair) & Andy Butler of Hercules cited B-52s as ``the first neo-anything band I ever encountered'' (tcolerachel.com); DFA's entire catalog owes a debt \\
+Scissor Sisters & Direct queer aesthetic lineage; camp performance model \\
+Blood Orange, Panic! At The Disco, DJ Shadow & Sampled B-52s catalog (Downtown Athens GA) \\
+Family Guy, The Simpsons & Cultural embeddedness; ``Love Shack'' covered as ``Iraq Lobster'' (Family Guy), ``Glove Slap'' parody for The Simpsons \\
+Rock Lobsters (Athens hockey team) & City of Athens named its Federal Prospects Hockey League team after ``Rock Lobster,'' following an online poll, May 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Critical Recognition}
+
+\begin{itemize}[noitemsep]
+  \item ``Rock Lobster'' placed \#147 on Rolling Stone's 500 Greatest Songs of All Time (2004)
+  \item \textit{The B-52's} debut album placed \#152 on Rolling Stone's 500 Greatest Albums of All Time and \#99 on VH1's Greatest Albums
+  \item Ricky Wilson named \#247 greatest guitarist of all time by Rolling Stone (2023)
+  \item Inducted into Georgia Music Hall of Fame (2000)
+  \item Inducted into Athens Music Walk of Fame (2020)
+  \item Over 20 million albums sold worldwide
+\end{itemize}
+
+\subsection{Module 5 Reference: The Human Story}
+
+\subsubsection{Band Member Profiles}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Member} & \tableheader{Background and Trajectory} \\
+\midrule
+\textbf{Fred Schneider} & Born New Jersey; attended UGA on scholarship (forestry, 1969); worked health food store in Athens; founding vocalist and lyricist; deadpan sprechgesang style; released solo projects (1984, 1996); collaborated with Jinkx Monsoon; active AIDS fundraising; continued touring after Strickland's retirement \\
+\textbf{Kate Pierson} & New Jersey origin; moved to Athens post-Kent State; lived in a shack with goats outside town for \$15/month; Farfisa and synth-bass architect; collaborated with R.E.M. (guest on \textit{Out of Time}, 1991); duet with Iggy Pop on ``Candy'' (top 40 hit); released solo debut in 2010s \\
+\textbf{Cindy Wilson} & Athens native; Ricky's younger sister; co-vocalist; discovered Ricky's illness only months before his death; departed 1991 (``to start a family''); rejoined 1994 for CBGB 20th anniversary show; released solo debut in 2010s; performed the final farewell concert Jan. 10, 2023 \\
+\textbf{Ricky Wilson} & Born Athens, March 19, 1953; self-taught from PBS; Silvertone guitar $\rightarrow$ Mosrite; invented the band's tuning vocabulary; diagnosed HIV in 1982 during \textit{Whammy!} sessions; told only Strickland; died October 12, 1985, age 32; \textit{Bouncing Off the Satellites} dedicated to him; Rolling Stone \#247 greatest guitarist (2023) \\
+\textbf{Keith Strickland} & Athens native; childhood friends with Ricky Wilson; founding drummer; named the band from a dream; switched to guitar after Ricky's death; composed the seeds of \textit{Cosmic Thing} alone as grief work; retired from touring in 2012 (continued as band member); remains songwriting contributor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Farewell}
+
+In April 2022, the B-52s announced a farewell tour titled ``The Final Tour Ever on Planet Earth'' with KC and the Sunshine Band and DJ Cummerbund. Final dates ran August 22, 2022 through January 10, 2023 (postponed from November 2022 due to illness). The final concert was performed at the Classic Center in Athens, Georgia---the city where Ricky Wilson looked out a window at a line around the block and knew something was happening. Following the farewell tour, the band launched residencies at The Venetian Las Vegas (2023--2024), suggesting the farewell was more of a punctuation mark than a period (Wikipedia/The B-52s).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Boundary Type} & \tableheader{Handling Requirement} \\
+\midrule
+Ricky Wilson's AIDS diagnosis and death & GATE & Present with factual, compassionate accuracy; do not sensationalize; cite only professional sources \\
+LGBTQ+ member identities & ANNOTATE & Note members' self-identification when documented; do not speculate; use members' own language \\
+HIV/AIDS crisis historical context & GATE & Frame within documented historical record; cite CDC/AMFAR/documented sources only \\
+Legal case Fricke v. Lynch & GATE & Present legal and factual record; cite original legal documents or peer-reviewed sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Reference Works and Encyclopedias}
+
+\begin{itemize}[noitemsep]
+  \item Gordon, Stephanie L. ``The B-52's.'' \textit{New Georgia Encyclopedia}. Auburn University. Originally published Sept. 17, 2003; last edited Oct. 12, 2023.
+  \item Wikipedia contributors. ``The B-52s.'' \textit{Wikipedia, The Free Encyclopedia}. Retrieved March 2026.
+  \item Wikipedia contributors. ``Ricky Wilson (guitarist).'' \textit{Wikipedia}. Retrieved March 2026.
+  \item Wikipedia contributors. ``Rock Lobster.'' \textit{Wikipedia}. Retrieved March 2026.
+  \item Wikipedia contributors. ``Cosmic Thing.'' \textit{Wikipedia}. Retrieved March 2026.
+\end{itemize}
+
+\subsubsection{Official and Primary Sources}
+
+\begin{itemize}[noitemsep]
+  \item The B-52s. ``Bio.'' theb52s.com/bio. Accessed March 2026.
+  \item ``B-52s Artist Profile.'' Downtown Athens, GA. downtownathensga.org. Accessed March 2026.
+  \item Official Charts Company UK. ``B-52s Albums and Songs Chart History.'' officialcharts.com.
+  \item Songfacts. ``Rock Lobster by The B-52s.'' songfacts.com. Accessed March 2026.
+\end{itemize}
+
+\subsubsection{Journalism and Criticism}
+
+\begin{itemize}[noitemsep]
+  \item Hendrickson, Matt. `` `Cosmic Thing,' the Iconic B-52's Album, Turns 30.'' \textit{Garden and Gun}. July 8, 2019.
+  \item ``Remember When: The B-52s Improbably Became Bigger Than Ever With `Cosmic Thing'.'' \textit{American Songwriter}. April 6, 2024.
+  \item ``Rock Lobster, Ricky Wilson, and `the Stupidest Guitar Line You've Ever Heard.''' \textit{A.V. Club}. October 14, 2014.
+  \item ``40 Years of Rock Lobster and How the B-52s Revived John Lennon's Career.'' \textit{CBC Radio / Day 6}. April 21, 2018.
+  \item ``How the B-52s' `Rock Lobster' Brought John Lennon Back to the Studio.'' \textit{Ultimate Classic Rock}. April 3, 2020.
+  \item Eldredge, Richard L. ``A Beatle, a Rock Lobster, and How John Lennon Got His Mojo Back.'' \textit{Atlanta Magazine}. 2013.
+  \item Holland, Robert. Concert review. \textit{The Red and Black} (UGA student newspaper). November 17, 1978.
+  \item ``Traveling Through the Cosmos: A History of Athens' Beloved B-52s.'' \textit{The Red and Black}. February 2, 2023.
+\end{itemize}
+
+\subsubsection{Cultural Studies and Commentary}
+
+\begin{itemize}[noitemsep]
+  \item ``The B-52's: Pioneers of LGBTQI+ Activism in the New Wave Scene.'' \textit{The Gryphon} (University of Leeds). February 28, 2021.
+  \item ``Dancing Around This Mess of an Institution: Why The B-52's Deserve a Rock Hall Induction.'' \textit{The Audio-Visual Repository}. May 22, 2020.
+  \item Rachel, T. Cole. ``B-52s.'' tcolerachel.com. Accessed March 2026. (Interview-based profile including direct member quotes.)
+  \item ``The B-52's and the Origins of College Radio.'' \textit{The Culture Crush}. Accessed March 2026.
+  \item ``No. 2: Rock Lobster --- The B-52s.'' \textit{Songs That Saved You} (Substack). April 27, 2023.
+  \item ``How R.E.M. and the B-52s Made a Scene in a Farm Town Called Athens, Georgia.'' \textit{Slate / Hit Parade}. June 29, 2018.
+\end{itemize}
+
+\subsubsection{Technical and Guitar References}
+
+\begin{itemize}[noitemsep]
+  \item ``DADBB B-52s / Ricky Wilson Tuning (DADxBB) Guitar Tuning, Chords \& Scales.'' GTDB.org. March 10, 2024.
+  \item ``Early B-52s Album Guitar Sound.'' Gearspace.com forum. Thread originated 2005, multiple contributors.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, fully sourced reference document on The B-52s spanning all five research modules---Origins, Sonic Architecture, Discography, Cultural Legacy, and Human Story---suitable for use as a standalone cultural archive, an educational resource, and a GSD demonstration of the research mission pipeline applied to music history. The document must meet all 12 success criteria and be deliverable from this mission package with zero additional context provided to the executing agent.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+
+Wave 0 (Foundation)
+  [Haiku] Schema + Source Index + Member Profile Templates
+       |
+       +-----> Wave 1 (Parallel - 3 tracks)
+                |
+      Track A   |   Track B        Track C
+    [Sonnet]    |  [Sonnet]       [Opus]
+    Module 1    |  Module 3       Module 5
+    Origins     |  Discography    Human Story
+    Module 2    |  Module 4       (grief/resilience
+    Sonic Arch  |  Cultural       narrative)
+                |
+                +-----> Wave 2 (Synthesis)
+                          [Opus]
+                          Cross-module integration
+                          Through-line composition
+                          Sensitivity review
+                          |
+                          +-----> Wave 3 (Publication)
+                                    [Sonnet]
+                                    Document assembly
+                                    LaTeX/PDF production
+                                    Bibliography final
+                                    Verification matrix
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, member profile templates (Wave 0)
+  \item \textbf{Survey Layer} --- Five module research documents (Wave 1, parallel)
+  \item \textbf{Synthesis Layer} --- Cross-module integration document (Wave 2)
+  \item \textbf{Publication Layer} --- Final assembled reference PDF (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+D-01 & Shared Schema JSON & Valid JSON, all five modules, member profiles & Wave 0 \\
+D-02 & Module 1: Origins Survey & 3+ sourced data points per sub-topic & Wave 1A \\
+D-03 & Module 2: Sonic Architecture & Tuning table + instrument inventory + Yoko connection & Wave 1A \\
+D-04 & Module 3: Discography & All 7 albums with chart data & Wave 1B \\
+D-05 & Module 4: Cultural Legacy & Fricke case + Lennon story + influence chain & Wave 1B \\
+D-06 & Module 5: Human Story & All 5 members profiled; farewell documented & Wave 1C \\
+D-07 & Cross-Module Integration & 3+ explicit cross-module connections noted & Wave 2 \\
+D-08 & Final Reference PDF & All 12 success criteria met; zero unsourced stats & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Schema + Source Index & None & Haiku & 2,000 \\
+Module 1: Origins Survey & Schema & Sonnet & 6,000 \\
+Module 2: Sonic Architecture & Schema & Sonnet & 7,000 \\
+Module 3: Discography Arc & Schema & Sonnet & 5,000 \\
+Module 4: Cultural Legacy & Schema & Sonnet & 8,000 \\
+Module 5: Human Story & Schema, M4 & Opus & 9,000 \\
+Cross-Module Integration & M1--M5 & Opus & 7,000 \\
+Sensitivity Review & M4, M5, Integration & Opus & 3,000 \\
+Document Assembly & All above & Sonnet & 5,000 \\
+Bibliography Finalization & All above & Sonnet & 2,000 \\
+Verification Pass & Final doc & Sonnet & 3,000 \\
+\midrule
+\textbf{Total} & & & \textbf{\~{}57,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Human Story (grief, resilience, Ricky Wilson's death), Cultural Legacy (AIDS, LGBTQ+ sensitivity), synthesis, through-line composition. Highest judgment requirement. \\
+Sonnet & 60\% & Origins, Sonic Architecture, Discography surveys; document assembly; bibliography; verification. Structured content with clear acceptance criteria. \\
+Haiku & 10\% & Schema generation, citation scaffolding, table templates. No judgment required. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, templates \\
+1A & Origins + Sonic & Parallel & Sonnet & D-02, D-03 \\
+1B & Discography + Culture & Parallel & Sonnet & D-04, D-05 \\
+1C & Human Story & Parallel & Opus & D-06 \\
+2 & Synthesis & Sequential & Opus & D-07 + sensitivity review \\
+3 & Publication & Sequential & Sonnet & D-08 final PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Shared JSON schema & Haiku (BUDGET) & Member profiles (name, role, dates, key facts); album record (title, year, label, peak, certification, singles); source record (id, citation, url, date) \\
+Source index seed & Haiku (LOG) & Pre-populate index with 20 known sources from this research document; assign IDs (SRC-001 through SRC-020) \\
+Module scaffolding & Haiku (LOG) & Empty section templates for each of the 5 modules with acceptance criteria embedded \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Sonnet --- EXEC-1):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Module 1: Origins Survey & Document formation (Oct 1976), Valentine's Day debut (Feb 1977), Athens context, CBGB path, DB Records ``Rock Lobster'' (1978), Warner Bros. signing, Athens ripple effect. Min 3 sources. \\
+Module 2: Sonic Architecture & Document Wilson's tunings (DADxBB, CFxxFF), Mosrite guitar, string gauges, Farfisa organ, Korg SB-100 bass replacement, sprechgesang/vocal architecture, Yoko Ono influence. Include tuning table. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Sonnet --- EXEC-2):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Module 3: Discography & Compile all 7 studio albums: year, label, producer, peak Billboard 200, UK peak, US certification, key singles with chart positions. Include Cosmic Thing comeback narrative. \\
+Module 4: Cultural Legacy & Document LGBTQ+ iconography (Fricke/Fricke v. Lynch), AIDS activism (Wilson death, AMFAR PSA), Lennon/Double Fantasy story (with direct sourced Lennon quote), influence chain (R.E.M., DFA, Scissor Sisters). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Opus --- CRAFT-HUMAN):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Module 5: Human Story & Narrative treatment of all five members. Ricky Wilson: PBS guitar, Mosrite, HIV diagnosis privacy (only Strickland knew), death Oct 12 1985 at 32, dedication of BOTS. Cosmic Thing grief arc. Cindy's departure/return. Strickland drums-to-guitar transition. Farewell tour Jan 10 2023 Athens. Las Vegas residency. Treat grief and resilience with care; GATE: no sensationalism. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Cross-module integration (Opus) & Identify and document at minimum 3 explicit cross-module connections: (1) Wilson's guitar innovations (M2) \(\rightarrow\) Athens outsider context (M1); (2) Cosmic Thing comeback (M3) \(\rightarrow\) grief arc (M5); (3) Lennon story (M4) \(\rightarrow\) Yoko Ono sonic influence (M2). Write the synthesis connecting paragraph for each. \\
+Sensitivity review (Opus) & Review all M4 and M5 content: AIDS narrative accuracy, LGBTQ+ attribution accuracy, Ricky Wilson death treatment. Flag any GATE violations for CAPCOM review. \\
+Through-line composition (Opus) & Write the 200--300 word through-line connecting the B-52s' outsider-advantage story to the GSD ecosystem's Amiga Principle. Reference ``spaces between'' as architectural metaphor. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Document assembly (Sonnet) & Assemble all module outputs, synthesis, and through-line into the final reference document. Apply stage structure (Vision / Research / Mission). Verify formatting. \\
+Bibliography finalization (Sonnet) & Compile all source IDs from source index into formatted bibliography with 3 categories: Reference Works, Official/Primary Sources, Journalism/Cultural Studies. \\
+Verification pass (Sonnet/VERIFY) & Run all tests from Test Plan (see Section 5). Mark each PASS/FAIL/PENDING. Escalate any BLOCK failures to CAPCOM. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Warm the source index and shared schema at Wave 0 and keep active through Wave 1 (5-minute TTL window)
+  \item Member profile data (the five-member biographic table) used in M1, M5, and synthesis---warm at start of Wave 1 and keep through Wave 2
+  \item Discography master table (7 albums) used in M3 and referenced in M4/M5---warm at Wave 1B start
+  \item Wave 1 tracks A, B, C can run simultaneously (no dependency conflicts)
+  \item Wave 2 must follow complete Wave 1 output (synthesis requires all five module documents)
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tokens In} & \tableheader{Tokens Out} & \tableheader{Running Total} \\
+\midrule
+Wave 0 (Foundation) & 2,000 & 2,000 & 4,000 \\
+Wave 1A (Origins + Sonic) & 8,000 & 13,000 & 25,000 \\
+Wave 1B (Discography + Culture) & 8,000 & 13,000 & 46,000 \\
+Wave 1C (Human Story) & 6,000 & 9,000 & 61,000 \\
+Wave 2 (Synthesis) & 12,000 & 10,000 & 83,000 \\
+Wave 3 (Publication) & 15,000 & 10,000 & 108,000 \\
+\midrule
+\textbf{Total} & \textbf{51,000} & \textbf{57,000} & \textbf{\~{}108,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+[D-01: Schema]-------+
+       |             |
+       v             v
+[D-02: Origins]  [D-03: Sonic]    [D-04: Disco]  [D-05: Culture]  [D-06: Human]
+   (Wave 1A)      (Wave 1A)       (Wave 1B)       (Wave 1B)         (Wave 1C)
+       |               |               |               |                |
+       +---------------+---------------+---------------+----------------+
+                                        |
+                                        v
+                              [D-07: Integration]
+                                  (Wave 2)
+                              [Sensitivity Review]
+                                  (Wave 2)
+                                        |
+                                        v
+                               [D-08: Final PDF]
+                                  (Wave 3)
+                                        |
+                                        v
+                              [Verification Matrix]
+                                  (Wave 3)
+
+CRITICAL PATH: Wave 0 -> [1A||1B||1C parallel] -> Wave 2 -> Wave 3
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2.5cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Target \%} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK & 15\% \\
+Core Functionality & 15 & Required & BLOCK & 45\% \\
+Integration & 9 & Required & BLOCK & 27\% \\
+Edge Cases & 4 & Best-effort & LOG & 13\% \\
+\midrule
+\textbf{Total} & \textbf{33} & & & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, encyclopedias, established journalism, official band sources, or government/professional organizations. Zero entertainment blogs or unattributed claims. \\
+SC-NUM & Numerical attribution & Every chart position, sales figure, certification, and date attributed to a specific named source (Billboard, RIAA, Wikipedia with sourced claim, etc.) \\
+SC-ADV & No policy advocacy & Document presents historical and cultural evidence without advocating for specific political positions \\
+SC-MED & AIDS/health accuracy & All HIV/AIDS references use accurate medical/historical framing; sourced to professional organizations; no stigmatizing language \\
+SC-LGBTQ & LGBTQ+ identity accuracy & Member identities presented using members' own documented self-identification language; no speculation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Origins chronology & Formation date (Oct 1976), first show date (Feb 1977 Valentine's Day), and Warner Bros. signing date all sourced \\
+CF-02 & Athens context documented & Document explains why Athens in 1976 had no music scene and how this created the band \\
+CF-03 & Wilson tuning table complete & At least DADxBB and CFxxFF documented with string intervals and characteristic songs \\
+CF-04 & Mosrite/instrument sourcing & Wilson's primary instrument(s) named and sourced \\
+CF-05 & Farfisa + Synth-Bass documented & Both instruments named, roles explained, including Korg SB-100 bass substitution \\
+CF-06 & All 7 studio albums present & Complete table with year, label, peak US chart position, and at least one key single \\
+CF-07 & Cosmic Thing metrics & Peak chart position (\#4 US), US certification (4x Platinum), and ``Love Shack'' peak (\#3) all sourced \\
+CF-08 & Lennon quote present & At least one direct Lennon quote about ``Rock Lobster'' from documented source \\
+CF-09 & Fricke v. Lynch documented & Case name, year, and significance sourced \\
+CF-10 & Ricky Wilson death documented & Date (October 12, 1985), age (32), cause (AIDS-related), and Strickland's guitar transition \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Sourced origins chronology & CF-01, CF-02 & Pending \\
+2. Wilson tuning documentation & CF-03, CF-04 & Pending \\
+3. Complete discography & CF-06 & Pending \\
+4. Cosmic Thing comeback arc & CF-07, IN-01 & Pending \\
+5. Lennon/Double Fantasy connection & CF-08, IN-02 & Pending \\
+6. LGBTQ+ documentation & CF-09, SC-LGBTQ & Pending \\
+7. Athens influence chain & CF-02, IN-03 & Pending \\
+8. Human Story member profiles & CF-10, IN-04 & Pending \\
+9. All numerics sourced & SC-NUM & Pending \\
+10. Bibliography $\geq$15 entries & IN-05 & Pending \\
+11. Cross-module connections & IN-01, IN-02, IN-03 & Pending \\
+12. Document self-containment & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; gap-fill web research for any unresolved data points \\
+EXEC-1 & Sonnet Executor A & Modules 1 (Origins) and 2 (Sonic Architecture) \\
+EXEC-2 & Sonnet Executor B & Modules 3 (Discography) and 4 (Cultural Legacy) \\
+CRAFT-HUMAN & Opus Specialist & Module 5 (Human Story); grief/resilience narrative \\
+CRAFT-CULTURE & Opus Specialist & Cultural legacy sensitivity; LGBTQ+/AIDS framing review \\
+VERIFY & Verification Agent & Source validation; test plan execution; accuracy checking \\
+INTEG & Integration Agent & Cross-module connection mapping; consistency checking \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; GATE escalation handler \\
+BUDGET & Resource Manager & Token budget tracking across all waves \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (Origins, Sonic, Discography, Culture, Human Story) \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C simultaneous) \\
+Total Waves & 4 (0 Foundation, 1 Research, 2 Synthesis, 3 Publication) \\
+Estimated Token Budget & $\sim$108,000 total (51k input + 57k output) \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 3--4 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Deliverables & 8 (D-01 through D-08) \\
+Test Count & 33 (5 safety-critical, 15 core, 9 integration, 4 edge case) \\
+Success Criteria & 12 \\
+Critical Path & Wave 0 $\rightarrow$ [1A $\|$ 1B $\|$ 1C] $\rightarrow$ Wave 2 $\rightarrow$ Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``We just did our own thing, which was a combination of rock 'n' roll, funk, and Fellini, and game show host, and corn, and mysticism.''} \\[0.5em]
+--- Fred Schneider, The B-52s
+
+\vspace{0.8em}
+
+The mission proposed here is itself a space-between operation: taking the fragmented, dispersed record of a band that slipped through the cracks of critical attention, and assembling it into something complete and durable. Ricky Wilson called his ``Rock Lobster'' riff the stupidest guitar line you've ever heard. John Lennon heard it in a Bermuda disco and went home to record his final album. The spaces between things are where everything actually happens.
+\end{quotebox}
+
+\end{document}
