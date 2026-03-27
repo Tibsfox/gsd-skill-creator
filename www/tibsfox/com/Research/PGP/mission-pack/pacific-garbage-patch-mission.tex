@@ -1,0 +1,1009 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === OCEAN/MARINE COLOR SCHEME ===
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{00695C}
+\definecolor{tertiary}{HTML}{5D4037}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS/FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Pacific Garbage Patch Cleanup}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Pacific Garbage Patch Cleanup -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Pacific Garbage Patch\\[0.3em]Cleanup \& Removal}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{North Pacific Subtropical Gyre --- Ocean Remediation}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Pacific Garbage Patch Cleanup --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{Deep research study --- ocean plastic remediation, cleanup technology assessment, policy landscape analysis}
+
+\subsection{Vision}
+
+Between California and Hawai'i, the North Pacific Subtropical Gyre has quietly been accumulating humanity's discarded plastic for decades. What Captain Charles Moore stumbled upon in 1997 --- an ocean surface littered with plastic fragments as far as the eye could see --- has since been mapped, measured, and named: the Great Pacific Garbage Patch. It spans an area twice the size of Texas, contains an estimated 100 million kilograms of plastic debris, and grows denser with each passing year. The patch has increased roughly tenfold each decade since 1945.
+
+Yet the story is not one of despair alone. In September 2024, The Ocean Cleanup declared the eradication of the GPGP achievable within a decade for \$7.5 billion --- less than a single day's revenue for Apple. Their System 03 technology, a 2.2-kilometer floating barrier towed by two vessels, has already extracted nearly 500,000 kilograms from the patch as of August 2025. River interception systems deployed across nine countries are catching plastic before it reaches open water. A fleet of ten such systems, they estimate, could clean the entire patch.
+
+But technology alone cannot solve a problem rooted in production, policy, and human behavior. The UN Global Plastics Treaty negotiations collapsed in August 2025 without agreement, stymied by petrochemical-producing nations resisting production caps. Over 460 million metric tons of new plastic are produced each year, with less than 10\% recycled globally. Microplastics --- fragments smaller than 5mm --- now pervade every ocean depth, every marine species studied, and even human blood and placentas. Current cleanup technology cannot remove them.
+
+This research mission maps the full landscape: the oceanographic mechanisms that concentrate debris, the ecological toll on over 900 affected species, the engineering systems being deployed, the policy frameworks stalling and advancing, and the economic calculus that will determine whether humanity actually finishes the job. The space between knowing the problem and solving it is where this mission operates.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Scale vs. Extraction Rate:} The GPGP contains approximately 100 million kg of plastic across 1.6 million km\textsuperscript{2}. Current extraction technology (System 03) has removed roughly 500,000 kg in two years of operation --- 0.5\% of the total mass. Scaling to full cleanup requires a fleet of 10+ systems operating continuously for a decade.
+
+\item \textbf{Microplastic Intractability:} While 92\% of the patch's \emph{mass} consists of larger objects amenable to mechanical collection, microplastics dominate by \emph{count} --- an estimated 1.8 trillion fragments. No current technology can filter microplastics from open ocean at scale. They penetrate the water column to depths of 2,000+ meters and accumulate in marine sediments.
+
+\item \textbf{Continuous Inflow:} Between 1.15 and 2.41 million metric tons of plastic enter the North Pacific from rivers annually. Without simultaneously stopping inflow at source, cleanup efforts face a refilling-the-bathtub problem. River interception covers only a fraction of the 1,000 most-polluting waterways.
+
+\item \textbf{Policy Deadlock:} After six rounds of negotiations over three years, the UN Intergovernmental Negotiating Committee failed to reach agreement on a global plastics treaty in August 2025. Petrochemical-producing nations blocked binding production caps, creating a governance vacuum for the full lifecycle of plastics.
+
+\item \textbf{Ecological Urgency:} Marine debris affects 914 species through entanglement (354 species) and ingestion (701 species). An estimated 100,000 marine mammals die annually from plastic exposure. Ghost fishing gear constitutes 46\% of the GPGP mass. Without intervention, macroplastic concentrations could reach 86--140 kg/km\textsuperscript{2} by 2040, far exceeding safe levels for marine megafauna.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} The Pacific garbage patch is a systems problem requiring simultaneous action across five domains --- oceanographic understanding, ecological assessment, cleanup technology, source reduction, and economic viability --- connected by the principle that removing legacy pollution and preventing new inflow must proceed in parallel.
+
+The core concept recognizes that no single intervention is sufficient. Mechanical extraction addresses legacy macroplastics. River interception reduces inflow. Policy reform addresses production volumes. Recycling and material science address end-of-life. And ecological monitoring measures whether all of these together are actually reducing harm to marine life. This mission produces a comprehensive reference document that maps all five domains and their interdependencies.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                  PACIFIC GARBAGE PATCH CLEANUP
+                     Domain Architecture
+    ┌─────────────────────────────────────────────┐
+    │         NORTH PACIFIC SUBTROPICAL GYRE       │
+    │     California ←→ Hawai'i ←→ Japan          │
+    │   1.6M km² | ~100M kg plastic | 1.8T pieces │
+    └───────────┬─────────────┬───────────────────┘
+                │             │
+    ┌───────────▼───┐  ┌─────▼──────────┐
+    │ OCEANOGRAPHIC │  │   ECOLOGICAL   │
+    │   CONTEXT     │  │    IMPACT      │
+    │ Gyre dynamics │  │ 914 species    │
+    │ Accumulation  │  │ Entanglement   │
+    │ Fragmentation │  │ Ingestion      │
+    │ Vertical dist │  │ Food chain     │
+    └───────┬───────┘  └──────┬─────────┘
+            │                 │
+    ┌───────▼─────────────────▼─────────┐
+    │       CLEANUP TECHNOLOGIES        │
+    │  Ocean: System 03 fleet (×10)     │
+    │  River: Interceptors (×20+)       │
+    │  Emerging: Enzymatic, magnetic    │
+    │  Recycling: Upcycling pipeline    │
+    └───────────────┬───────────────────┘
+                    │
+    ┌───────────────▼───────────────────┐
+    │      SOURCE REDUCTION & POLICY    │
+    │  UN Plastics Treaty (stalled)     │
+    │  National single-use bans         │
+    │  Extended Producer Responsibility │
+    │  1000 rivers initiative           │
+    └───────────────┬───────────────────┘
+                    │
+    ┌───────────────▼───────────────────┐
+    │      ENVIRONMENTAL ECONOMICS      │
+    │  $7.5B cleanup estimate           │
+    │  Carbon trade-offs                │
+    │  Recycled material markets        │
+    │  Net environmental benefit        │
+    └───────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Oceanographic Context}
+Physical oceanography of the North Pacific Subtropical Gyre. Gyre formation via four currents (California, North Equatorial, Kuroshio, North Pacific). Ekman convergence as the accumulation mechanism. Subtropical Convergence Zone as transport highway between Western and Eastern patches. Vertical distribution of plastics throughout the water column --- surface concentration vs. subsurface accumulation at 2,000m depth. Fragmentation dynamics: UV degradation, wave action, and the continuous production of microplastics from macroplastic breakdown.
+
+\subsubsection{Module 2: Ecological Impact Assessment}
+Species-level documentation of plastic harm across marine taxa. Entanglement data for marine mammals, sea turtles, seabirds, and elasmobranchs. Ingestion pathways and lethal dose thresholds (PNAS 2025 quantitative risk framework). Ghost fishing gear as the dominant entanglement vector. Microplastic bioaccumulation through trophic levels. Chemical leaching from plastics (PBTs, phthalates, flame retardants). Neuston community disruption. The ``plasticosis'' pathology in seabirds. Impacts on ocean carbon sequestration (15--30 Mt C/year potential disruption).
+
+\subsubsection{Module 3: Cleanup Technology Assessment}
+Engineering analysis of The Ocean Cleanup's system evolution (001 → 002 → 03). System 03 specifications: 2.2km wingspan, AI-guided hotspot targeting, retention zone extraction cycle. Extraction metrics and scaling projections (10-system fleet, \$7.5B total cost, decade timeline). River Interceptor systems: 20 deployments across 9 countries, 30M+ kg total removed by June 2025. Alternative technologies: Seabin (coastal), magnetic nanocoils (microplastic), enzymatic degradation (Ideonella sakaiensis), NASA CYGNSS satellite detection. Bycatch concerns and environmental impact of cleanup operations.
+
+\subsubsection{Module 4: Source Reduction \& Policy Landscape}
+UN Global Plastics Treaty timeline (UNEA 5.2 mandate through INC-5.2 collapse). Upstream vs. downstream divide: production caps vs. waste management. National-level interventions: EU single-use plastics directive, China 2025 phase-out plan, US Save Our Seas 2.0 Act. Extended Producer Responsibility schemes. River-source targeting: 1,000 most-polluting rivers account for 80\% of ocean plastic inflow. Deposit-return systems. Industry positions and fossil fuel lobby influence on treaty negotiations.
+
+\subsubsection{Module 5: Environmental Economics \& Net Benefit Analysis}
+Cost-benefit framework for GPGP cleanup. The Ocean Cleanup's \$7.5B estimate contextualized against global plastic production economics. Net Environmental Benefit Assessment (Scientific Reports 2025): cleanup benefits outweigh environmental costs for marine mammals, sea turtles, and seabirds. Carbon accounting: cleanup GHG emissions (0.4--2.9 Mt total) vs. microplastic impact on ocean carbon export (15--30 Mt C/year). Recycled ocean plastic market viability (product partnerships: Kia EV3, sunglasses). Cost-per-kilogram analysis across cleanup technologies (Seabin: \$1.24--1.55/kg; booms: \$22.5--30.1/kg; manual island: \$8.83/kg).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  mission: pacific-garbage-patch-cleanup
+  profile: squadron
+  models:
+    opus: 30%    # Synthesis, ecological sensitivity,
+                 # cross-module integration
+    sonnet: 60%  # Survey compilation, technology
+                 # assessment, policy documentation
+    haiku: 10%   # Schemas, templates, scaffolding
+  modules: 5
+  parallel_tracks: 2
+  waves: 4
+  estimated_windows: 18-24
+  estimated_sessions: 4-6
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Great Pacific Garbage Patch (GPGP) --- primary focus area
+\item All five ocean gyres referenced for comparative context
+\item Surface and near-surface plastic (down to 5m collection depth)
+\item Microplastic distribution through the water column
+\item Marine megafauna impacts (mammals, turtles, seabirds, fish)
+\item The Ocean Cleanup systems (001/002/03) and Interceptors
+\item Alternative and emerging cleanup technologies
+\item UN Plastics Treaty negotiations through INC-5.3 (Feb 2026)
+\item National and regional plastic reduction policies
+\item Cost-benefit and net environmental benefit analyses
+\item River-to-ocean plastic transport pathways
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Detailed seafloor plastic mapping (insufficient data for actionable survey)
+\item Nanoplastic health effects on humans (emerging research, insufficient peer-reviewed data for definitive claims)
+\item Plastic-as-fuel conversion technology assessment (tangential to cleanup mission)
+\item Individual country waste management infrastructure audits
+\item Atmospheric microplastic transport
+\item Deep-sea mining interactions with plastic pollution
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Gyre accumulation mechanisms documented with four-current system and Ekman convergence dynamics, attributed to NOAA and peer-reviewed oceanographic sources.
+\item GPGP characterization includes area (1.6M km\textsuperscript{2}), mass (79--129K tonnes), composition (92\% macroplastic by mass, microplastic-dominated by count), and temporal growth rate, all with citations.
+\item Ecological impact covers all major affected taxa: marine mammals, sea turtles, seabirds, fish, and invertebrates, with species counts attributed to peer-reviewed studies.
+\item Entanglement and ingestion data includes quantitative mortality estimates (100,000 marine mammals/year; 914 species affected) with source attribution.
+\item Ocean Cleanup system evolution documented from System 001 through System 03 with extraction volumes, cost projections, and scaling plans.
+\item River Interceptor program documented with deployment count, geographic coverage, and cumulative extraction volumes.
+\item At least three alternative cleanup technologies assessed with comparative cost-per-kilogram data.
+\item UN Plastics Treaty timeline covers all INC sessions (1--5.3) with key positions of major blocs identified.
+\item Net Environmental Benefit Assessment framework presented with vulnerability scores for macroplastics (2.3), microplastics (1.9), and cleanup (1.8).
+\item Carbon trade-off analysis compares cleanup emissions against microplastic disruption to ocean carbon sequestration with quantitative estimates from published research.
+\item Source reduction strategies documented with specific policy examples from at least three jurisdictions.
+\item All numerical claims attributed to specific government agencies, peer-reviewed journals, or professional organizations --- zero unattributed statistics.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+GSD Mesh Prototype Spec & Infrastructure for running research agents at scale & Enabling \\
+Fox Infrastructure Group & Pacific Northwest physical infrastructure; potential cleanup fleet coordination & Context \\
+Upstream Intelligence Pack & Pattern for converting research into executable GSD missions & Template \\
+GSD Skill Creator Analysis & Rosetta Core translation engine; multi-format output pipeline & Platform \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Pacific garbage patch is, in the deepest sense, a problem of the spaces between. Between production and disposal. Between national jurisdictions in international waters. Between the surface where we can see the damage and the depths where microplastics silently accumulate. Between the technology that exists today and the political will to fund it.
+
+The Amiga Principle applies here with striking clarity: The Ocean Cleanup's System 03 is not the most powerful vessel on the ocean --- it is the most architecturally leveraged, using AI-guided hotspot targeting and a 2.2-kilometer floating barrier to extract plastic at a cost and scale that brute-force approaches cannot match. Ten such systems, the modeling suggests, could clean the entire patch. That is architectural elegance over raw power. And the dual strategy --- ocean extraction plus river interception --- mirrors the principle that you must address both legacy debt and active inflow simultaneously, the same pattern that governs technical debt in software systems, ecological restoration in damaged habitats, and the GSD ecosystem's own approach to building something meaningful: one careful, principled step at a time.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Pacific Garbage Patch --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, peer-reviewed research, and professional conservation organizations. It is structured by research module and designed to be consumed by GSD agents producing the final comprehensive study.
+
+Key source organizations consulted:
+\begin{itemize}[leftmargin=2em]
+\item NOAA Marine Debris Program (US government lead for marine debris)
+\item The Ocean Cleanup (primary cleanup technology developer and operator)
+\item NOAA National Centers for Environmental Information (NCEI)
+\item National Academies of Sciences, Engineering, and Medicine (NASEM)
+\item Ocean Conservancy (conservation research and International Coastal Cleanup)
+\item Scientific Reports / Nature (peer-reviewed impact assessments)
+\item PNAS (quantitative risk frameworks for plastic ingestion)
+\item Environmental Science \& Technology (cleanup technology assessments)
+\item UN Environment Programme (plastics treaty negotiations)
+\item World Economic Forum / Global Plastic Action Partnership
+\item Fauna \& Flora International, WWF, Center for Biological Diversity
+\end{itemize}
+
+\subsection{Module 1: Oceanographic Context Reference}
+
+\subsubsection{Gyre Formation and Structure}
+The North Pacific Subtropical Gyre is formed by four currents rotating clockwise around approximately 20 million km\textsuperscript{2}: the California Current (eastern boundary), the North Equatorial Current (southern boundary), the Kuroshio Current (western boundary), and the North Pacific Current (northern boundary). This anticyclonic circulation, driven by trade winds and westerlies, creates convergent surface flow via Ekman dynamics that draws floating debris toward the gyre center. (Source: National Geographic Education; NOAA; North Pacific Gyre literature)
+
+The North Pacific Subtropical Convergence Zone, located several hundred kilometers north of Hawai'i where warm South Pacific water meets cooler Arctic water, acts as a transport corridor connecting the Western Garbage Patch (near Japan) and Eastern Garbage Patch (between Hawai'i and California). (Source: National Geographic Education; NOAA Marine Debris Program)
+
+\subsubsection{Patch Characterization}
+The GPGP covers approximately 1.6 million km\textsuperscript{2} containing an estimated 79,000--129,000 metric tons of plastic as characterized by multi-vessel and aircraft surveys. This figure is four to sixteen times higher than previous estimates. (Source: Lebreton et al., Scientific Reports, 2018)
+
+By mass composition, 92\% of the patch consists of larger objects (macroplastics $>$5mm), while microplastics dominate by numerical count --- an estimated 1.8 trillion fragments. The patch has grown approximately tenfold each decade since 1945. Ghost fishing gear (abandoned, lost, or discarded fishing equipment) constitutes 46\% of the patch mass. Common debris items include plastic lighters, toothbrushes, water bottles, pens, baby bottles, cell phones, plastic bags, and nurdles (pre-production plastic pellets). Some items are over 50 years old. The gyre contains approximately six pounds of plastic for every pound of plankton. (Source: Wikipedia/Ocean Cleanup synthesis; Scientific Reports 2018; The Ocean Cleanup research data)
+
+The estimated total mass has been reported as up to 100 million kg (100,000 metric tons) by The Ocean Cleanup based on updated modeling. (Source: The Ocean Cleanup, 2024 operations update)
+
+\subsubsection{Vertical Distribution}
+Microplastics are not confined to the surface. Research in the eastern North Pacific Subtropical Gyre found microplastic concentrations of 334 particles/m\textsuperscript{3} throughout the water column, with 84.5\% of particles smaller than 100 $\mu$m. Concentrations show exponential decrease with depth in the upper 500m, but a marked accumulation zone exists at approximately 2,000m depth. The biological carbon pump contributes to vertical redistribution of microplastics through gravitational settling via marine aggregates and vertical migrations of biota. (Source: Egger et al., PNAS Nexus, 2023)
+
+\subsubsection{Inflow Rates}
+Between 1.15 and 2.41 million metric tons of plastic enter the North Pacific Ocean annually from rivers. An estimated 19--23 million metric tons of plastic waste entered global aquatic ecosystems in 2016 (11\% of total plastic waste generated), with projections of 53 million metric tons per year by 2030. (Source: NOAA NCEI; Borrelle et al., Science, 2020)
+
+The United States was the largest producer of plastic waste globally in 2016 at 42 million metric tons, and the third largest contributor to mismanaged plastic waste. An estimated 1.45 million metric tons of plastic debris entered the US coastal environment in 2016. (Source: Law et al., via NOAA Marine Debris Program)
+
+\subsection{Module 2: Ecological Impact Reference}
+
+\subsubsection{Species-Level Harm}
+Marine debris affects 914 species through entanglement (354 species) and/or ingestion (701 species). Plastic ingestion and entanglement have been documented in more than 1,300 marine species according to Ocean Conservancy's comprehensive assessment. This includes more than half of the world's cetacean species, all seven sea turtle species, and approximately one-third of seabird species. (Source: Kuhn \& van Franeker, 2020; Ocean Conservancy plastics research program)
+
+An estimated 100,000 marine mammals die each year from plastic ingestion or entanglement. Approximately 81 of 123 marine mammal species have consumed or been entangled in plastic. An estimated 300,000 whales, dolphins, and porpoises die annually from ghost gear entanglement. Approximately 640,000 metric tons of ghost fishing equipment enters the oceans annually. (Source: WWF Australia; Fauna \& Flora International)
+
+\subsubsection{Ingestion Pathways and Thresholds}
+A November 2025 study published in PNAS --- the most comprehensive quantitative risk assessment to date --- established lethal dose thresholds for macroplastic ingestion in seabirds, marine mammals, and sea turtles. The research found that even small amounts of certain plastic types (soft flexible plastics, balloon fragments, hard fragments) can be lethal. (Source: Ocean Conservancy researchers, PNAS, 2025)
+
+Sea turtles frequently mistake plastic bags for jellyfish, their primary food source. Ingestion of buoyant plastic (such as bottle caps) can make turtles positively buoyant and unable to dive for food. A Mediterranean study found plastic in nearly half of 100+ examined loggerhead turtle stomachs, with one individual containing 67 pieces. (Source: Oceana; multiple peer-reviewed studies)
+
+Seabirds are developing a newly described pathology called ``plasticosis'' --- plastic-induced fibrosis caused by repeated internal injuries from rough-edged plastic fragments, leading to scarring that impairs digestion and nutrient absorption. Nearly every species of seabird now eats plastic. Seabirds are declining faster than any other bird group, with plastic pollution identified as a contributing cause. (Source: Oceana; University of Tasmania research)
+
+\subsubsection{Chemical Contamination}
+Microplastics interact chemically with the marine environment. Plastics contain additives including flame retardants and plasticizers (phthalates) classified as persistent, bioaccumulative, and toxic substances (PBTs). These chemicals leach into seawater and can transfer to organisms that ingest them. Four major plastic types studied --- polyethylene, polystyrene, polyurethane, and PVC --- each interact differently with environmental conditions (temperature, salinity, weathering). (Source: Virginia Institute of Marine Science, NOAA Marine Debris Program research grant)
+
+Fish in the North Pacific ingest an estimated 12,000--24,000 tons of plastic annually, transferring plastic up the food chain to larger fish, marine mammals, and human seafood consumers. A study found plastic in one-quarter of fish sampled at California markets. (Source: Center for Biological Diversity)
+
+\subsubsection{Carbon Cycle Disruption}
+Microplastics may disrupt oceanic carbon sequestration, with estimated annual losses ranging from 15 to 30 million metric tons of carbon. This impact on the biological carbon pump could have significant long-term climate implications beyond the direct ecological harm of plastic pollution. (Source: The Ocean Cleanup research; Scientific Reports 2025 impact assessment framework)
+
+\subsection{Module 3: Cleanup Technology Reference}
+
+\subsubsection{The Ocean Cleanup --- System Evolution}
+Founded in 2013 by Dutch inventor Boyan Slat (then 18 years old), The Ocean Cleanup is a nonprofit with 145 staff based in Rotterdam, Netherlands. Goal: remove 90\% of floating ocean plastic by 2040.
+
+\textbf{System 001 (2018):} First experimental system. Passive propulsion (drifting). Did not effectively capture plastic but provided critical engineering lessons about retention and structural integrity.
+
+\textbf{System 001/B (2019):} Validated core concept and captured first ocean plastic, used to produce The Ocean Cleanup Sunglasses (sold out within 18 months).
+
+\textbf{System 002 ``Jenny'' (2021--2023):} First full-scale system. Shift to active propulsion (towed by two ships). Extracted 282,787 kg total from the GPGP over 8,352 km\textsuperscript{2}. Record single-extraction: 31,816 kg. Proved consistent large-scale extraction was feasible.
+
+\textbf{System 03 (August 2023--present):} Current system. Wing length approximately 2.2 km (3$\times$ System 002). Can clean area equivalent to a football field every five seconds. Extended screen reaches 4m below surface to capture subsurface plastic. AI-guided computational modeling predicts plastic hotspot locations. Retention zone emptied every $\sim$4 days. Extracted approximately 500,000 kg from GPGP by August 2025. Individual catches sometimes exceed 11,000 kg. (Source: The Ocean Cleanup milestones; Wikipedia; multiple reporting sources)
+
+\textbf{Scaling Plan:} The Ocean Cleanup declared in September 2024 that the GPGP could be cleaned within a decade for \$7.5 billion. Modeling suggests as few as 10 System 03-scale units could be sufficient. In 2025, extraction operations are on hiatus for a ``hotspot hunting'' initiative to map high-density plastic concentrations, making future extractions more efficient. In 2026, The Ocean Cleanup received \$121 million from The Audacious Project (their largest single donation) for their 30 Cities Program. (Source: The Ocean Cleanup press releases; Wikipedia)
+
+\subsubsection{River Interceptor Systems}
+The Ocean Cleanup operates Interceptor systems in 9 countries with 20 deployments as of May 2025. These solar-powered, automated systems capture plastic in rivers before it reaches the ocean. Notable deployments include Guatemala (Rio Las Vacas --- Interceptor 006 captured 1.5M+ kg by June 2024; 89 truckloads in a single day during peak flow), Indonesia (Jakarta and Cisadane River), and Malaysia (Klang River). The target is to address the 1,000 most polluting rivers, which account for 80\% of river-sourced ocean plastic inflow. The Interceptor Barricade design, deployed 2023, is the first high-throughput river system. During heavy rainfall in April 2024, a barricade captured 1.4 million kg of waste in hours. (Source: The Ocean Cleanup milestones and river program data)
+
+Total cumulative extraction across all operations: 30 million kg by June 2025; 20 million kg milestone reached December 2024. (Source: The Ocean Cleanup)
+
+\subsubsection{Alternative Technologies}
+\textbf{Seabin Project:} Australia-origin coastal cleanup. Combines pool skimmer and collection bin near shorelines. Collected 32.9 metric tons in Sydney and 3.34 metric tons in Los Angeles in 2022. Estimated cost: \$1.24--1.55/kg. Requires approximately 500 units to keep a 25,000 m\textsuperscript{2} marina clean. (Source: Seabin Project; PMC cleanup technology review)
+
+\textbf{Enzymatic Degradation:} In 2016, Japanese researchers discovered Ideonella sakaiensis, an enzyme capable of breaking down PET plastic. Researchers have optimized the enzyme for faster degradation. The fungus Aspergillus tubingensis can degrade polyurethane. These biological approaches are still at research stage for ocean-scale application. (Source: The Ocean Movement innovation review)
+
+\textbf{Magnetic Nanocoils:} Experimental nanotechnology using magnetic coils to target microplastics without harming marine life. Still in laboratory/early testing phase. (Source: The Ocean Movement)
+
+\textbf{NASA CYGNSS:} Since 2016, NASA's Cyclone Global Navigation Satellite System has been able to detect ocean plastic concentrations, aiding research and cleanup targeting. (Source: The Ocean Movement; NASA)
+
+\textbf{Plastics-to-Fuel:} Licella Holdings (Australia) has developed technology to convert plastic waste into oil for repeated recycling. PlasticRoad created a bicycle path in Zwolle (Netherlands) using 70\% recycled plastic. Catalytic pyrolysis can convert degraded PE/PP into fuels. (Source: Frontiers in Marine Science review, 2025)
+
+\subsubsection{Environmental Impact of Cleanup}
+A 2025 peer-reviewed study in Scientific Reports developed the first comprehensive framework to assess whether GPGP cleanup delivers a net environmental benefit. The study assessed vulnerability of nine marine ecological guilds to three stressors (macroplastics, microplastics, cleanup) on a 1--3 scale. Key findings: average vulnerability to macroplastics = 2.3, to microplastics = 1.9, to cleanup activities = 1.8. An 80\% cleanup could reduce macroplastic concentrations to within safe levels for marine mammals and sea turtles. Cleanup GHG emissions estimated at 0.4--2.9 million metric tons total, significantly less than potential long-term microplastic impacts on ocean carbon export (15--30 Mt C/year). Conclusion: net positive environmental impact. (Source: Egger et al., Scientific Reports, 2025)
+
+Concerns about neuston community disruption (organisms living at the ocean surface including Portuguese man-of-war, sea snails, and sail jellyfish) have been raised. System 03 includes deterrents, cameras, escape aids, and independent observers to monitor wildlife interactions. Monitoring data has confirmed only minimal environmental effects. (Source: The Ocean Cleanup environmental monitoring; Wikipedia)
+
+\subsection{Module 4: Source Reduction \& Policy Reference}
+
+\subsubsection{UN Global Plastics Treaty Timeline}
+March 2022: UNEA 5.2 --- 175 nations agree to mandate for first legally binding instrument to end plastic pollution. Intergovernmental Negotiating Committee (INC) established.
+
+December 2022 (INC-1, Uruguay): Initial dialogues. Divergence emerges between upstream (production control) and downstream (waste management) approaches.
+
+June 2023 (INC-2, Paris): 134 governments call for global rules across the full plastics lifecycle. Zero draft mandate secured.
+
+November 2023 (INC-3, Nairobi): Procedural delays dominate. Additional text drafted.
+
+April 2024 (INC-4, Ottawa): Increased acknowledgment of health harms. Industry lobbying presence grows. Countries agree to exclude upstream measures from intersessional work.
+
+December 2024 (INC-5.1, Busan): Talks collapse over production caps. Chair issues Draft Text; insufficient support.
+
+August 2025 (INC-5.2, Geneva): Ten days of negotiations with 2,600+ participants from 183 countries. Over 100 countries call for binding production caps. Saudi Arabia, Russia, and US push for focus on recycling/waste management only. Talks end without agreement. Former INC Chair resigns.
+
+February 2026 (INC-5.3): One-day session for administrative purposes only; new Chair elected. No substantive negotiations. (Source: UNEP; Global Plastic Laws; World Economic Forum; CNN; Nature)
+
+\subsubsection{Key Policy Positions}
+\textbf{High-Ambition Coalition} (Norway, Rwanda, EU, many African nations, small island states, coastal states): Full lifecycle regulation including production caps, chemical phase-outs, financial support for low/middle-income countries.
+
+\textbf{Petrochemical bloc} (US, Saudi Arabia, Russia, some Asian nations): Focus on downstream waste management, recycling, national action plans. Oppose binding production limits.
+
+\textbf{Production scale:} Over 460 million metric tons of plastic produced annually. Less than 10\% recycled globally. Production responsible for approximately 5\% (2.24 Gt CO\textsubscript{2}e) of global GHG emissions --- nearly twice aviation's footprint. Without policy intervention, waste could reach 1.7 billion metric tons by 2060. (Source: OECD; Nature; World Economic Forum)
+
+\subsubsection{National and Regional Measures}
+EU Directive 2019/904: Phase-out of certain single-use plastics; 25--30\% recycled content targets for bottles.
+
+China: 2025 phase-out plan for certain single-use plastics; State Oceanic Administration Marine Litter and Microplastics Research Center established 2017.
+
+United States: Save Our Seas 2.0 Act (2020) authorized NOAA Marine Debris Program expansion. Microbead-Free Waters Act (2015) banned plastic microbeads in cosmetics. US identified as largest plastic waste producer globally (42 Mt in 2016).
+
+Deposit-return systems operational in Germany and Denmark with mandatory recycling machines at supermarkets. (Source: NOAA; Frontiers review; search results)
+
+\subsection{Module 5: Environmental Economics Reference}
+
+\subsubsection{Cleanup Cost Estimates}
+The Ocean Cleanup estimates \$7.5 billion to clean the entire GPGP within a decade (announced September 2024). This figure assumes a fleet of approximately 10 System 03-scale systems operating continuously.
+
+Comparative cost-per-kilogram for different cleanup approaches: Seabins (\$1.24--1.55/kg), manual island cleanup (\$8.83/kg, Seychelles), ocean booms (\$22.5--30.1/kg). All costs assume plastic constitutes 80--90\% of catches. (Source: PMC cleanup technology review, Falk-Andersson et al.)
+
+Research modeling suggests that even 200 Ocean Cleanup devices would have only modest impact given current production trajectories --- emphasizing that cleanup must be paired with source reduction. (Source: Hohn, Acevedo-Trejos et al., via PMC)
+
+\subsubsection{Recycled Ocean Plastic Markets}
+The Ocean Cleanup has established product partnerships: Kia EV3 trunk liner (recycled GPGP plastic), Ocean Cleanup Sunglasses (first product, sold out in 18 months). Revenue from recycled products helps fund continued operations. However, recycled ocean plastic often scores lower on functional material tests and environmental indicators in life cycle assessments compared to virgin plastic, limiting market potential. (Source: The Ocean Cleanup; PMC review)
+
+\subsubsection{Net Environmental Benefit Framework}
+The 2025 Scientific Reports study provides the most rigorous assessment to date. Cleanup GHG emissions (0.4--2.9 Mt total over full cleanup) are ``significantly lower'' than potential long-term microplastic impacts on ocean carbon sequestration (15--30 Mt C/year). Without intervention, macroplastic concentrations projected to reach 86--140 kg/km\textsuperscript{2} by 2040, far exceeding safe levels. The study concludes that benefits of cleaning the GPGP outweigh potential environmental costs including GHG emissions and ecosystem disruptions. (Source: Egger et al., Scientific Reports, 2025; Plymouth Marine Laboratory summary)
+
+\subsubsection{Global Economic Scale}
+The plastic pollution crisis carries cumulative costs estimated at \$281 trillion by some projections. The National Center for Ecological Analysis and Synthesis is developing a framework to help governments estimate the full costs of plastic pollution accounting for environmental persistence, waste volumes, and ecosystem impacts. (Source: World Economic Forum; NOAA Marine Debris Program)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Concern} & \tableheader{Mitigation} \\
+\midrule
+Endangered species & Location data for nesting/breeding sites near GPGP & No precise coordinates published; regional descriptions only \\
+Indigenous peoples & Pacific Islander communities affected by marine debris & Nation-specific attribution (e.g., Native Hawaiian, Marshall Islander); no generic ``Indigenous'' references \\
+Climate projections & Sea-level rise and ocean temperature scenarios & All projections from IPCC or published agency data with scenario identification \\
+Industry positions & Petrochemical lobby influence on treaty & Present documented positions without editorial characterization; cite sources \\
+Health claims & Microplastic effects on humans & Clearly distinguish established findings from emerging research; appropriate uncertainty language \\
+Wildlife imagery & Graphic entanglement/ingestion descriptions & Factual and clinical language; focus on population-level data rather than individual suffering narratives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item NOAA Marine Debris Program --- \url{https://marinedebris.noaa.gov/}
+\item NOAA National Centers for Environmental Information, Marine Microplastics Database --- \url{https://www.ncei.noaa.gov/products/microplastics}
+\item NOAA Ocean Service, Microplastics Factsheet --- \url{https://oceanservice.noaa.gov/facts/microplastics.html}
+\item National Geographic Education, Great Pacific Garbage Patch --- \url{https://education.nationalgeographic.org/resource/great-pacific-garbage-patch/}
+\item UNEP Intergovernmental Negotiating Committee on Plastic Pollution --- \url{https://www.unep.org/inc-plastic-pollution}
+\item UN SDG Partnership: The Ocean Cleanup --- \url{https://sdgs.un.org/partnerships/cleanup-90-floating-ocean-plastic-2040}
+\item NASEM, Reckoning with the U.S.\ Role in Global Ocean Plastic Waste (2022)
+\item US Save Our Seas 2.0 Act (2020)
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=2em]
+\item Lebreton, L.\ et al.\ (2018). Evidence that the Great Pacific Garbage Patch is rapidly accumulating plastic. \emph{Scientific Reports}, 8, 4666.
+\item Egger, M.\ et al.\ (2025). Evaluating the environmental impact of cleaning the North Pacific Garbage Patch. \emph{Scientific Reports}.
+\item Egger, M.\ et al.\ (2023). Pelagic microplastics in the North Pacific Subtropical Gyre. \emph{PNAS Nexus}, 2(3).
+\item Ocean Conservancy researchers (2025). A quantitative risk assessment framework for mortality due to macroplastic ingestion. \emph{PNAS}.
+\item Rochman, C.\ M.\ et al.\ (2023). Cleaning up without messing up: maximizing benefits of plastic clean-up technologies. \emph{Environmental Science \& Technology}.
+\item Kuhn, S.\ \& van Franeker, J.\ A.\ (2020). Quantitative overview of marine debris ingested by marine megafauna.
+\item Gregory, M.\ R.\ (2009). Environmental implications of plastic debris in marine settings. \emph{Philosophical Transactions of the Royal Society B}.
+\item Frontiers in Marine Science (2025). Mechanical recycling and upcycling of marine macro- and micro-plastics.
+\item Frontiers in Marine Science (2025). The plastics treaty: steps forward, agreement deferred.
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+\begin{itemize}[leftmargin=2em]
+\item The Ocean Cleanup --- \url{https://theoceancleanup.com/}
+\item Ocean Conservancy --- \url{https://oceanconservancy.org/}
+\item WWF (World Wildlife Fund) --- \url{https://www.worldwildlife.org/}
+\item Fauna \& Flora International --- \url{https://www.fauna-flora.org/}
+\item Center for Biological Diversity --- \url{https://www.biologicaldiversity.org/}
+\item Oceana --- \url{https://oceana.org/}
+\item World Economic Forum, Global Plastic Action Partnership
+\item Plymouth Marine Laboratory
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on the Pacific garbage patch: its formation, ecological impact, cleanup technologies, policy landscape, and economic viability. The document must be self-contained, fully sourced from authoritative references, and structured for both human reading and GSD agent consumption. All findings must be traceable to government agencies, peer-reviewed journals, or professional organizations.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+WAVE 0 ──► WAVE 1A ──┐
+           WAVE 1B ──┤──► WAVE 2 ──► WAVE 3
+                     │
+  Foundation  Parallel   Synthesis  Publication
+  (schemas)   surveys    (cross-    + Verify
+              (5 mods)   module)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source index, citation format, output templates
+\item \textbf{Survey Layer} --- Five parallel research modules producing independent survey documents
+\item \textbf{Synthesis Layer} --- Cross-module integration, relationship mapping, contradiction resolution
+\item \textbf{Publication Layer} --- Final document assembly, verification, formatting, delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Section} \\
+\midrule
+1 & Oceanographic Survey & 4-current system, Ekman dynamics, vertical distribution & Module 1 \\
+2 & Ecological Impact Survey & 914+ species, mortality estimates, all taxa covered & Module 2 \\
+3 & Technology Assessment & System evolution, 3+ alternatives, cost/kg data & Module 3 \\
+4 & Policy Landscape & INC timeline, 3+ jurisdictions, position mapping & Module 4 \\
+5 & Economic Analysis & Net benefit framework, carbon trade-offs, cost projections & Module 5 \\
+6 & Synthesis Document & Cross-module integration, unified narrative & Wave 2 \\
+7 & Final Publication & Complete formatted document, all citations verified & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 2K \\
+Source index & None & Haiku & 3K \\
+Oceanographic survey & Schemas & Sonnet & 12K \\
+Ecological survey & Schemas & Opus & 15K \\
+Technology survey & Schemas & Sonnet & 12K \\
+Policy survey & Schemas & Sonnet & 10K \\
+Economics survey & Schemas & Sonnet & 10K \\
+Cross-module synthesis & All surveys & Opus & 15K \\
+Verification pass & Synthesis & Sonnet & 8K \\
+Final assembly & Verified doc & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & 30\% & Ecological impact (sensitivity), cross-module synthesis (judgment), through-line narrative \\
+Sonnet & 60\% & Oceanographic survey, technology assessment, policy landscape, economics, verification, assembly \\
+Haiku & 10\% & Shared schemas, source index, citation templates, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 1--2 \\
+1 & Parallel Surveys & Parallel (2 tracks) & Sonnet+Opus & 8--12 \\
+2 & Synthesis & Sequential & Opus & 4--5 \\
+3 & Publication & Sequential & Sonnet & 3--4 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+0.1 & Define shared schemas & JSON schemas for source citations, species records, policy entries & Haiku \\
+0.2 & Build source index & Master bibliography with all sources from Stage 2 & Haiku \\
+0.3 & Create output templates & Section templates for each module & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Surveys}
+
+\textbf{Track A: Physical Sciences}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1A.1 & Oceanographic context & Gyre formation, accumulation mechanisms, vertical distribution & Sonnet \\
+1A.2 & Technology assessment & System evolution, alternatives, cost analysis, scaling & Sonnet \\
+1A.3 & Economic analysis & Cost-benefit, carbon trade-offs, market viability & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Life Sciences \& Policy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+1B.1 & Ecological impact & Species surveys, mortality data, food chain analysis & Opus \\
+1B.2 & Policy landscape & Treaty timeline, national measures, position mapping & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Cross-module integration & Unified narrative connecting all 5 modules & Opus \\
+2.2 & Contradiction resolution & Reconcile conflicting data across sources & Opus \\
+2.3 & Gap identification & Flag areas needing additional research & Opus \\
+2.4 & Through-line narrative & Ecosystem philosophy connection & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Source verification & Every citation checked against source index & Sonnet \\
+3.2 & Numerical audit & Every statistic traced to specific source & Sonnet \\
+3.3 & Safety review & Endangered species, Indigenous attribution, health claims & Sonnet \\
+3.4 & Final assembly & Formatted publication document & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs (schemas, source index) persist as shared context across all Wave 1 tasks --- load once per session
+\item Track A and Track B run in parallel within the same session window where possible, exploiting 5-minute cache TTL
+\item Stage 2 Research Reference serves as pre-loaded context for all survey tasks --- agents receive the full reference section for their module rather than conducting independent research
+\item Synthesis (Wave 2) receives concatenated Wave 1 outputs --- single context load covers all module findings
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 5K \\
+Wave 1A: Physical & --- & 34K & --- \\
+Wave 1B: Life/Policy & 15K & 10K & --- \\
+Wave 2: Synthesis & 15K & --- & --- \\
+Wave 3: Publication & --- & 18K & --- \\
+\midrule
+\textbf{Total} & \textbf{30K (31\%)} & \textbf{62K (64\%)} & \textbf{5K (5\%)} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+[0.1 Schemas] ──┬──► [1A.1 Oceanographic] ──┐
+                │                            │
+[0.2 Sources] ──┤──► [1A.2 Technology] ──────┤
+                │                            │
+[0.3 Templates]─┤──► [1A.3 Economics] ───────┤
+                │                            ├──► [2.1 Integrate]
+                ├──► [1B.1 Ecological] ──────┤        │
+                │                            │        ▼
+                └──► [1B.2 Policy] ──────────┘   [2.2 Resolve]
+                                                      │
+                                                      ▼
+                                                 [2.3 Gaps]
+                                                      │
+                                                      ▼
+                                                 [2.4 Through-line]
+                                                      │
+                                              ┌───────┴───────┐
+                                              ▼               ▼
+                                         [3.1 Verify]  [3.2 Audit]
+                                              │               │
+                                              └───────┬───────┘
+                                                      ▼
+                                                 [3.3 Safety]
+                                                      │
+                                                      ▼
+                                                 [3.4 Publish]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}C{1.5cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK & Source quality, attribution, advocacy, species locations \\
+Core functionality & 18 & Required & BLOCK & Module completeness, data coverage \\
+Integration & 6 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 5 & Best-effort & LOG & Data gaps, temporal currency, outliers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, or professional orgs. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every species count, percentage, mass estimate, and cost figure attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific legislative positions. \\
+SC-END & Endangered species & No GPS coordinates or specific nesting/breeding site locations for listed species. \\
+SC-IND & Indigenous attribution & Every reference to affected Pacific Islander communities names specific nation. \\
+SC-CLI & Climate projections & Every temperature or sea-level projection cites specific agency or IPCC scenario. \\
+SC-MED & Health claims & No microplastic health claims on humans without peer-reviewed evidence and uncertainty language. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Gyre current system & All four currents named with directional roles \\
+CF-02 & Ekman convergence & Accumulation mechanism explained with physical dynamics \\
+CF-03 & Vertical distribution & Subsurface data cited with depth measurements \\
+CF-04 & Patch dimensions & Area, mass range, and composition cited with sources \\
+CF-05 & Species count & 914+ species documented with entanglement/ingestion breakdown \\
+CF-06 & Mammal mortality & 100,000/year estimate with source attribution \\
+CF-07 & Ghost gear proportion & 46\% GPGP mass from fishing gear, cited \\
+CF-08 & Ingestion thresholds & PNAS 2025 study findings included \\
+CF-09 & Plasticosis pathology & Described with source attribution \\
+CF-10 & System 001--03 evolution & All four iterations documented with extraction volumes \\
+CF-11 & System 03 specs & Wing length, cleaning rate, AI targeting documented \\
+CF-12 & Scaling projection & 10-system fleet, \$7.5B, decade timeline \\
+CF-13 & Interceptor program & 20 deployments, 9 countries, 30M+ kg total \\
+CF-14 & Alternative technologies & $\geq$3 alternatives with cost data \\
+CF-15 & Treaty timeline & All INC sessions (1--5.3) with dates and outcomes \\
+CF-16 & Position mapping & High-ambition vs.\ petrochemical bloc positions documented \\
+CF-17 & Net benefit framework & Vulnerability scores (2.3/1.9/1.8) presented with source \\
+CF-18 & Carbon trade-off & Cleanup emissions vs.\ microplastic carbon impact quantified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Oceanographic → Ecological & Gyre concentration explains species exposure patterns \\
+IN-02 & Technology → Economics & System costs consistent between Modules 3 and 5 \\
+IN-03 & Policy → Technology & Treaty failure contextualized against cleanup feasibility \\
+IN-04 & Ecological → Economics & Net benefit scores connect to species vulnerability data \\
+IN-05 & Cross-module mass data & GPGP mass estimates consistent across all modules \\
+IN-06 & Self-containment & Reader with no prior knowledge can understand full picture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Data gap acknowledgment & At least 3 areas flagged as needing further research \\
+EC-02 & Temporal currency & Primary sources from last 5 years where available \\
+EC-03 & Estimate uncertainty & Mass and count estimates given as ranges, not single values \\
+EC-04 & Microplastic limitations & Explicitly states current tech cannot remove ocean microplastics \\
+EC-05 & Cleanup criticism & Scientific criticisms of ocean cleanup approach documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\small
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Gyre mechanics documented & CF-01, CF-02 & Pending \\
+2 & GPGP characterization complete & CF-03, CF-04, EC-03 & Pending \\
+3 & All major taxa covered & CF-05, CF-09, IN-01 & Pending \\
+4 & Mortality estimates sourced & CF-06, CF-07, CF-08, SC-NUM & Pending \\
+5 & System evolution documented & CF-10, CF-11 & Pending \\
+6 & Interceptor program documented & CF-13 & Pending \\
+7 & Alternative technologies assessed & CF-14 & Pending \\
+8 & Treaty timeline complete & CF-15, CF-16 & Pending \\
+9 & Net benefit framework presented & CF-17, IN-04 & Pending \\
+10 & Carbon trade-offs quantified & CF-18, IN-02 & Pending \\
+11 & Policy examples from 3+ jurisdictions & CF-16, IN-03 & Pending \\
+12 & All statistics attributed & SC-SRC, SC-NUM, SC-CLI & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source validation; evidence compilation; gap-fill web research \\
+EXEC-A & Executor (Track A) & Physical sciences document production \\
+EXEC-B & Executor (Track B) & Life sciences and policy document production \\
+CRAFT-OCEAN & Marine Specialist & Oceanographic and ecological domain analysis \\
+CRAFT-POLICY & Policy Specialist & Treaty landscape and regulatory framework analysis \\
+VERIFY & Verification & Source validation; numerical accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation; contradiction resolution \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Physical Sciences / Life Sciences \& Policy) \\
+Total Waves & 4 (Foundation → Survey → Synthesis → Publication) \\
+Estimated Context Windows & 18--24 \\
+Estimated Sessions & 4--6 \\
+Total Token Budget & $\sim$97K (Opus 30K / Sonnet 62K / Haiku 5K) \\
+Model Split & Opus 31\% / Sonnet 64\% / Haiku 5\% \\
+Deliverables & 7 (5 module surveys + synthesis + final publication) \\
+Success Criteria & 12 \\
+Total Tests & 36 (7 safety + 18 core + 6 integration + 5 edge) \\
+Safety-Critical Tests & 7 (all mandatory-pass / BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The fundamental challenge of cleaning up the ocean garbage patches is that ocean plastic pollution is highly diluted, spanning millions of square kilometers. Therefore, we must target areas with high concentration of floating plastic where System 03 can make the largest impact.''}
+
+\vspace{0.5em}
+
+\hfill --- The Ocean Cleanup
+
+\vspace{0.8em}
+
+The spaces between the plastic fragments are vast. The spaces between nations negotiating a treaty are wider still. But the space between knowing this problem and solving it --- that is where principled, architectural action operates. Not brute force scattered across an ocean, but targeted systems guided by intelligence, placed where they matter most. Ten systems. One decade. \$7.5 billion. The math is clear. The question is whether humanity chooses to do the math.
+\end{quotebox}
+
+\end{document}
