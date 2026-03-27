@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; PNW Millwork Co-op</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mwc">
+  <header>
+    <h1>PNW Millwork Co-op</h1>
+    <div class="subtitle">Cooperative Economics &middot; Timber Heritage &middot; Craftwork &middot; Supply Chain &middot; Workforce Development</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-cooperative-economics">Co-op Economics</a>
+      <a href="page.html?doc=02-timber-heritage">Timber Heritage</a>
+      <a href="page.html?doc=03-millwork-craftsmanship">Craftsmanship</a>
+      <a href="page.html?doc=04-supply-chain-network">Supply Chain</a>
+      <a href="page.html?doc=05-workforce-development">Workforce</a>
+      <a href="page.html?doc=06-client-pipeline">Client Pipeline</a>
+      <a href="page.html?doc=07-the-joinery-report">Verification</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      Synsor built Starbucks and Alaska Airlines fixtures for 46 years out of Everett, Washington.
+      A New York company bought it and shut it down. We're rebuilding it &mdash; owned by the workers
+      this time. The corridor starts at home. It always will.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Components</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~172K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/README.md">README</a></td><td>Mission package overview, contents, and execution summary</td></tr>
+        <tr><td><a href="mission-pack/01-vision-doc.md">Vision Document</a></td><td>North star: what, why, network topology, and the through-line to Fox Infrastructure Group</td></tr>
+        <tr><td><a href="mission-pack/02-research-reference.md">Research Reference</a></td><td>Synsor primary source data, RCW 23.86 legal, AWI standards, supply chain map</td></tr>
+        <tr><td><a href="mission-pack/03-milestone-spec.md">Milestone Specification</a></td><td>Mission objective, deliverables, component breakdown, model assignments</td></tr>
+        <tr><td><a href="mission-pack/04-wave-execution-plan.md">Wave Execution Plan</a></td><td>3-wave structure, 3 parallel tracks, cache strategy, token budget</td></tr>
+        <tr><td><a href="mission-pack/05-test-plan.md">Test Plan</a></td><td>52 tests (8 safety-critical), verification matrix against all 10 success criteria</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Component Specifications</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Wave/Track</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/components/00-shared-types.md">00: Shared Types</a></td><td>Wave 0</td><td>NodeProfile, BOMLineItem, ClientContract schemas + compliance checklist</td></tr>
+        <tr><td><a href="mission-pack/components/01-anchor-node.md">01: Node North</a></td><td>Wave 1A</td><td>Founding node spec: location, cohort, equipment, capitalization</td></tr>
+        <tr><td><a href="mission-pack/components/02-network-legal.md">02: Network Legal</a></td><td>Wave 1B</td><td>RCW 23.86 federation structure with acquisition-protection bylaws</td></tr>
+        <tr><td><a href="mission-pack/components/03-production-model.md">03: Production Model</a></td><td>Wave 1A</td><td>BOM-first CNC production playbook (Synsor methodology)</td></tr>
+        <tr><td><a href="mission-pack/components/04-client-pipeline.md">04: Client Pipeline</a></td><td>Wave 1B</td><td>Named anchor client targets and outreach templates</td></tr>
+        <tr><td><a href="mission-pack/components/05-supply-chain.md">05: Supply Chain</a></td><td>Wave 1C</td><td>I-5 corridor supply chain map with FSC pathway</td></tr>
+        <tr><td><a href="mission-pack/components/06-workforce-pipeline.md">06: Workforce Pipeline</a></td><td>Wave 1C</td><td>Sno-Isle TECH apprenticeship design + FoxEdu integration</td></tr>
+        <tr><td><a href="mission-pack/components/07-verification.md">07: Verification</a></td><td>Wave 2</td><td>Integration audit + NWCDC presentation package assembly</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, compliance checklist</td><td>Sequential</td><td>~6K</td></tr>
+        <tr><td>1</td><td>Core Build</td><td>Track A (Node North + Production) &middot; Track B (Legal + Client) &middot; Track C (Supply + Workforce)</td><td>Parallel</td><td>~118K</td></tr>
+        <tr><td>2</td><td>Integration</td><td>Network design, verification, NWCDC package</td><td>Sequential</td><td>~48K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Agent</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Mission orchestrator</td><td>Opus</td><td>Coordinates all nodes, wave sequencing, go/no-go gates</td></tr>
+        <tr><td>LEGAL</td><td>Co-op legal structure</td><td>Opus</td><td>RCW 23.86 federation, bylaws, acquisition protection</td></tr>
+        <tr><td>OPS</td><td>Production engineering</td><td>Sonnet</td><td>BOM-first playbook, CNC workflow, AWI compliance</td></tr>
+        <tr><td>BIZ-DEV</td><td>Client acquisition</td><td>Sonnet</td><td>Anchor client pipeline, outreach templates, SOW response</td></tr>
+        <tr><td>SUPPLY</td><td>Supply chain</td><td>Sonnet</td><td>Timber sourcing, FSC certification, I-5 corridor logistics</td></tr>
+        <tr><td>WORKFORCE</td><td>Training pipeline</td><td>Sonnet</td><td>Apprenticeship program, Sno-Isle TECH, equity accrual</td></tr>
+        <tr><td>VERIFY</td><td>Integration audit</td><td>Opus</td><td>Success criteria verification, NWCDC package assembly</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>Acquisition-protection bylaws</td><td>Bylaws explicitly restrict equity transfer to non-workers; no hostile acquisition mechanism</td></tr>
+        <tr><td>SC-02</td><td>OSHA woodworking compliance</td><td>Finish room VOC controls, CNC guarding, wood dust PEL -- all three addressed</td></tr>
+        <tr><td>SC-03</td><td>RCW 23.86 minimum requirements</td><td>Articles include all mandatory provisions: member definition, voting rights, patronage dividends</td></tr>
+        <tr><td>SC-04</td><td>FSC certification on critical path</td><td>Supply chain confirms FSC CoC application timeline; no contract template ships without FSC clause</td></tr>
+        <tr><td>SC-05</td><td>AWI grade compliance</td><td>Production playbook specifies AWI Custom or Premium; no output ships below Economy</td></tr>
+        <tr><td>SC-06</td><td>Member equity non-transferable</td><td>Federation agreement confirms equity non-transferable outside worker membership at all nodes</td></tr>
+        <tr><td>SC-07</td><td>Capitalization has 3 pathways</td><td>CDFI + SBA + member equity all present; no single-pathway plan</td></tr>
+        <tr><td>SC-08</td><td>FoxEdu integration documented</td><td>Workforce pipeline explicitly references Fox Infrastructure Group workforce track</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>RCW 23.86 co-op federation filing-ready with acquisition-protection bylaws</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Node North founding spec: location, cohort (8&ndash;12), capitalization pathway</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Production ops playbook: BOM-first engineering, AWI compliant</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Client pipeline: 3+ named warm outreach targets with documented rationale</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Timber/materials supply chain mapped with primary + backup, FSC pathway</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Sno-Isle TECH partnership: curriculum, apprenticeship, equity accrual from day one</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Network governance: production distribution, revenue split, dispute resolution</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Phased capitalization: CDFI, SBA 7(a), member equity buy-in</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Multi-node quality verification: 200 identical fixtures across 2 nodes</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Complete package ready for NWCDC presentation in Olympia</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Fox Infrastructure Group plan ends with a sentence: "The corridor starts at home. It always will."
+    The PNW Millwork Co-op Network is what that looks like at the shop floor level. Not maglev &mdash; woodworking.
+    Not fiber optic &mdash; cabinet joints. The same principle: local workers, community ownership, acquisition-proof
+    structure, generational knowledge transfer. The Amiga Principle is native here. Synsor didn't need to be the
+    biggest fixture manufacturer in America. It needed to be the most precise, most trusted, most embedded shop in
+    the Pacific Northwest &mdash; and for forty years, it was. The co-op reconstruction doesn't need to beat the national
+    consolidators on volume. It needs to beat them on relationship, on speed-to-spec, on the fact that the people
+    building the fixtures are also the people who will be around in ten years when the client needs the next
+    renovation cycle.</p>
+  </main>
+
+  <footer>
+    <p>PNW Millwork Co-op &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
