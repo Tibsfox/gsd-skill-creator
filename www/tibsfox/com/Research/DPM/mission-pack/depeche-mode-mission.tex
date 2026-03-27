@@ -1,0 +1,958 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Music History / Dark Art ─────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — section headers
+\definecolor{secondary}{HTML}{B8860B}     % Dark gold — subsections
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown — subsubsections
+\definecolor{accent}{HTML}{7B1FA2}        % Violet accent
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender — quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ─────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────────────
+\tcbuselibrary{skins,breakable}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Setup ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Depeche Mode}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Depeche Mode -- Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Depeche Mode\\[0.3em]A Deep Study in Electronic Music}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Basildon, Essex, 1980 --- The World, Forever}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Sound, Darkness, Silence, and the Soul}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 $\;|\;$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron $\;|\;$ Estimated: 8--12 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ─────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION
+% ══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Depeche Mode --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{Wikipedia (Depeche Mode), Billboard, NPR Music, Rolling Stone}
+\metafield{Context:}{Cold-start deep research mission initiated from band description}
+
+\subsection{Vision}
+
+There is a peculiar kind of magic in the spaces between the notes --- in the silence that Martin Gore leaves after a synthesizer phrase, in the breath Dave Gahan takes before the chorus of ``Enjoy the Silence.'' Depeche Mode have always understood that music is not made of sound but of the relationship between sounds, and that electronic instruments, far from being cold and mechanical, are capable of transmitting something ancient and deeply human.
+
+They began as schoolboys in Basildon, Essex --- an unremarkable new-town suburb of London --- who couldn't afford amplifiers and so bought synthesizers instead. That economic constraint became an aesthetic destiny. They were, in Martin Gore's own words, attempting to achieve ``the emotion of Neil Young or John Lennon transmitted by Kraftwerk's synthesisers. Soul music played by electronic instruments.'' That paradox --- warmth through circuitry, grief through oscillators, desire through drum machines --- became the organizing principle of one of the most influential catalogs in the history of recorded music.
+
+Depeche Mode's arc is not merely musical. It is a study in endurance, reinvention, and the way a band can metabolize its own suffering and return it as art. Dave Gahan's near-death experience. The departure of Vince Clarke, then Alan Wilder. The grinding recording sessions that shattered friendships. The death of Andy Fletcher. And through it all, fifteen studio albums, 100 million records sold, and a global cult that treats their concerts less like rock shows and more like secular religious rites.
+
+This research mission seeks to document that arc with rigor and care: not as hagiography, but as genuine inquiry into how a group of young men from a nowhere town became one of the defining artistic voices of the late twentieth century, and what their music continues to mean to those who have made it their own.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The Constraint-to-Aesthetic Pipeline:} How did Depeche Mode's initial economic and geographic constraints (no money for amps, no access to established music scenes) catalyze rather than limit their artistic development? What does this teach us about the relationship between limitation and innovation?
+
+  \item \textbf{The Songwriter Succession Problem:} The departure of Vince Clarke in late 1981 left the band's primary songwriter vacant. How did Martin Gore's ascension --- and the entirely different sensibility he brought --- not merely save the band but transform it into something far more significant than Clarke's original vision?
+
+  \item \textbf{The Dark Pivot:} Every Depeche Mode album from \textit{Construction Time Again} (1983) onward moved progressively darker, more industrial, more psychologically intense. What drove this evolution, and how did audiences --- particularly in the United States, where they were initially received as novelty synth-pop --- follow them into that darkness?
+
+  \item \textbf{Suffering as Creative Fuel:} The band's most celebrated work (\textit{Violator}, \textit{Songs of Faith and Devotion}) emerged from periods of profound personal crisis. What is the relationship between the band's documented struggles with addiction, interpersonal conflict, and creative output?
+
+  \item \textbf{The Continuation Question:} After Andy Fletcher's death in May 2022, Gahan and Gore chose to continue. What does the \textit{Memento Mori} album reveal about how artists process grief publicly, and what does the decision to continue say about the nature of creative partnerships that outlast the people who formed them?
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Electronic instruments as vehicles for human soul, constraint as creative catalyst, darkness as emotional truth.
+
+The Depeche Mode thesis is that the most mechanically modern sounds can carry the oldest human feelings. This is not an accident of technique but a philosophical commitment: Gore has always written from the body and the wound, while Gahan has always sung from somewhere beneath the wound. The synthesizer is merely the medium. The message is always the same --- desire, doubt, longing, faith, and the terror of death --- and the medium has never diminished it.
+
+\subsubsection{Band Chronological Map}
+
+\begin{asciibox}
+1977 ─── Vince Clarke + Andy Fletcher: "No Romance in China"
+         │
+1980 ─── Composition of Sound formed (Clarke, Fletcher, Gore)
+         │
+         └─► Dave Gahan joins (heard singing Bowie at Scout hut jam)
+                │
+                ▼
+1980 ─── Name changes to DEPECHE MODE (Bridge House, Sep 24 1980)
+         │
+1981 ─── Signed to Mute Records (Daniel Miller)
+         "Dreaming of Me" (Feb 1981) → first single
+         "Just Can't Get Enough" → first UK Top 10
+         SPEAK & SPELL (Oct 1981) → debut album
+         │
+         └─► Vince Clarke DEPARTS (end of 1981)
+                │
+                ▼
+1982 ─── A BROKEN FRAME (trio: Gahan/Gore/Fletcher)
+         Alan Wilder recruited → full member 1982
+         │
+1983 ─── CONSTRUCTION TIME AGAIN ─── Dark Industrial Turn
+1984 ─── SOME GREAT REWARD ───────── Political/Social Themes
+1986 ─── BLACK CELEBRATION ──────────── Gothic Atmosphere
+1987 ─── MUSIC FOR THE MASSES ─── Stadium Ambition
+         │
+         └─► Rose Bowl 101 Concert (June 18, 1988) — 60,000 fans
+                │
+                ▼
+1990 ─── VIOLATOR ─────────────────────── Global Breakthrough
+         "Personal Jesus" + "Enjoy the Silence"
+         │
+1993 ─── SONGS OF FAITH AND DEVOTION ─── Rock/Gospel Fusion
+         Internal crisis; Gahan addiction; Wilder departs 1995
+         │
+1997 ─── ULTRA (trio: Gahan/Gore/Fletcher returns)
+         │
+2001─────────────────── EXCITER
+2005─────────────────── PLAYING THE ANGEL
+2009─────────────────── SOUNDS OF THE UNIVERSE
+2013─────────────────── DELTA MACHINE
+2017─────────────────── SPIRIT
+         │
+2020 ─── Rock & Roll Hall of Fame Induction
+         │
+May 26, 2022 ─── Andy Fletcher dies (aortic dissection, age 60)
+         │
+         └─► Gahan + Gore continue as duo
+                │
+                ▼
+2023 ─── MEMENTO MORI ─────────────────── 15th studio album
+         112-show world tour (Mar 2023 — Apr 2024)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+┌─────────────────────────────────────────────────────────────────┐
+│                    DEPECHE MODE RESEARCH                        │
+│                  Five-Module Architecture                       │
+└─────────────────────────────────────────────────────────────────┘
+
+   ┌──────────────────┐     ┌──────────────────┐
+   │  MOD-1           │     │  MOD-2           │
+   │  Origins &       │     │  Sound Evolution │
+   │  Formation       │     │  (1983–1993)     │
+   │  1977–1982       │     │  Dark Arc        │
+   └────────┬─────────┘     └────────┬─────────┘
+            │                        │
+            └──────────┬─────────────┘
+                       │
+              ┌────────▼─────────┐
+              │     MOD-3        │
+              │  Violator &      │
+              │  Stadium Peak    │
+              │  (1987–1995)     │
+              └────────┬─────────┘
+                       │
+            ┌──────────┴────────────┐
+            │                       │
+   ┌────────▼─────────┐   ┌────────▼─────────┐
+   │  MOD-4           │   │  MOD-5           │
+   │  Post-Wilder,    │   │  Memento Mori    │
+   │  Survival &      │   │  Legacy &        │
+   │  Hall of Fame    │   │  Continuation    │
+   │  (1995–2020)     │   │  (2020–2024)     │
+   └──────────────────┘   └──────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Formation (1977--1982)}
+Covers the pre-band history of Vince Clarke and Andy Fletcher; the formation of Composition of Sound; Dave Gahan's recruitment; the adoption of the Depeche Mode name; signing with Mute Records and Daniel Miller; the \textit{Speak \& Spell} era; and Clarke's departure with analysis of what the band lost and what it found.
+
+\subsubsection{Module 2: The Dark Arc --- Sound Evolution (1983--1993)}
+Documents the industrial turn beginning with \textit{Construction Time Again}; Alan Wilder's role in expanding their sonic palette through sampling and found sounds; the deepening lyrical themes of \textit{Some Great Reward}, \textit{Black Celebration}, and \textit{Music for the Masses}; and the completed transformation achieved on \textit{Songs of Faith and Devotion}.
+
+\subsubsection{Module 3: The Violator Era and Stadium Ascent (1987--1995)}
+Focuses on the band's commercial and artistic peak: the \textit{Music for the Masses} stadium campaign, the Rose Bowl 101 concert, the marketing genius behind ``Personal Jesus'', and the cultural earthquake of \textit{Violator} (1990). Includes analysis of the band's unique position straddling alternative and mainstream audiences.
+
+\subsubsection{Module 4: Survival, Reinvention, and Hall of Fame (1995--2020)}
+Covers Wilder's departure; Gahan's near-fatal drug overdose; the return with \textit{Ultra}; the subsequent decade of studio albums; their relationship with their global fanbase (especially in Eastern Europe, Latin America, and Germany); and the 2020 Rock and Roll Hall of Fame induction.
+
+\subsubsection{Module 5: Memento Mori, Loss, and Continuation (2020--2024)}
+Examines Andy Fletcher's death on May 26, 2022; the decision by Gahan and Gore to continue; the creation of \textit{Memento Mori}; the 112-show world tour; and the band's enduring influence on electronic music, alternative culture, and popular music production. Includes assessment of their cultural legacy and critical standing.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: depeche_mode_research
+  profile: squadron
+  modules:
+    - id: origins_formation
+      label: "Origins and Formation 1977-1982"
+      model: sonnet
+      sensitivity: low
+      tokens: 8000
+    - id: dark_arc
+      label: "Sound Evolution 1983-1993"
+      model: sonnet
+      sensitivity: low
+      tokens: 10000
+    - id: violator_era
+      label: "Violator Era and Stadium Ascent"
+      model: opus
+      sensitivity: low
+      tokens: 9000
+    - id: survival_hof
+      label: "Survival Reinvention Hall of Fame"
+      model: sonnet
+      sensitivity: medium
+      tokens: 8000
+    - id: memento_mori
+      label: "Memento Mori Loss and Continuation"
+      model: opus
+      sensitivity: high
+      tokens: 9000
+  synthesis:
+    model: opus
+    tokens: 6000
+  publication:
+    model: sonnet
+    tokens: 4000
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Complete discography analysis: all 15 studio albums
+  \item Full band member history: Clarke, Gore, Gahan, Fletcher, Wilder
+  \item Cultural impact on electronic, industrial, dark wave, and synthwave genres
+  \item Concert history including the 1988 Rose Bowl and Memento Mori World Tour
+  \item Andy Fletcher's death and the band's continuation as a duo
+  \item Production techniques: sampling, synthesizer use, collaboration with producers
+  \item Influence on subsequent artists across rock, electronic, and pop
+  \item Critical reception trajectory from novelty act to Rock Hall inductees
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Solo careers of Vince Clarke (Yazoo, Erasure, Assembly) beyond brief mentions
+  \item Martin Gore and Dave Gahan solo albums (separate research scope)
+  \item Deep technical analysis of specific synthesizer hardware
+  \item Business arrangements, management contracts, label disputes
+  \item Bootleg recordings and unofficial releases
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The Origins module correctly identifies the pre-band history of each founding member with dates accurate to within one year.
+  \item The Sound Evolution module traces at least 4 distinct stylistic phases with reference to specific albums and production choices.
+  \item The Violator module quantifies the commercial impact of the album with chart positions, sales certifications, and attendance figures.
+  \item All claims about personal struggles (addiction, deaths, departures) are attributed to named published sources.
+  \item The Legacy module documents influence on at least 6 named subsequent artists with direct attribution.
+  \item The Memento Mori module accurately represents Fletcher's cause of death and the timeline of the album's creation relative to his death.
+  \item All module bibliographies cite only professional, peer-reviewed, or major-outlet journalism sources.
+  \item The synthesis section identifies at least 3 cross-module thematic patterns (e.g., constraint-to-innovation, darkness-as-truth).
+  \item The final document renders without LaTeX errors across three XeLaTeX compilation passes.
+  \item Success criteria map to at least 2 tests each in the verification matrix.
+  \item The crew manifest assigns correct models per the 30/60/10 Opus/Sonnet/Haiku principle.
+  \item The wave plan achieves at least 2 parallel tracks in Wave 1.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Amiga Vision & Philosophical parallel & Amiga Principle: architectural elegance over brute force mirrors DM's constraint-to-art arc \\
+The Space Between & Thematic resonance & Gore's ``soul through machines'' thesis directly echoes the spaces-between philosophy \\
+Foxfire Heritage Pack & Cultural preservation & DM as case study in preserving subculture memory \\
+BBS Educational Pack & Transmission medium & BBS culture and DM shared the same 1980s outsider electronic aesthetic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+There is a thesis hidden inside the Amiga Principle that applies equally to Depeche Mode: the most powerful outputs emerge not from raw resources but from architectural elegance operating within strict constraints. Basildon had no music scene. The band had no money for amplifiers. So they built a world out of oscillators and samplers and the spaces between the notes.
+
+The machines gave them freedom. The limitations gave them identity. And the darkness --- the addiction, the departures, the death --- gave them weight. Martin Gore once said his dream was to combine the emotion of Neil Young with the technology of Kraftwerk. He achieved something rarer: he proved that the coldest machines contain room enough for every human grief. That is the through-line. That is what the music is for.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Depeche Mode --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings organized by research module. Agents should treat each module section as a self-contained research brief. Cross-module connections are flagged with \textbf{[XM]} notations.
+
+\subsubsection{Key Source Organizations and Publications}
+\begin{itemize}
+  \item \textbf{Wikipedia (Depeche Mode)} --- Comprehensive, well-sourced biographical and discographic record; primary reference for dates, chart positions, and lineup changes
+  \item \textbf{Billboard Magazine} --- Commercial chart data, industry coverage, album sales certifications
+  \item \textbf{Rolling Stone / Rolling Stone France} --- Band interviews, critical assessments
+  \item \textbf{NPR Music (World Cafe)} --- Long-form band interviews with musical analysis
+  \item \textbf{Rock \& Roll Hall of Fame} --- Official induction materials and peer tributes
+  \item \textbf{Mute Records} --- Label history, official release documentation
+  \item \textbf{Depeche Mode Official Archives} (archives.depechemode.com) --- Authoritative discography
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and Formation (1977--1982)}
+
+\subsubsection{Pre-Band History}
+
+The band's origins trace to 1977, when schoolmates Vince Clarke and Andy Fletcher formed an early group called ``No Romance in China,'' with Clarke on vocals and guitar and Fletcher on bass. In 1978--1979, Martin Gore played guitar in an acoustic duo called ``Norman and the Worms'' with school friend Phil Burdett. In 1979, Clarke played guitar in an Ultravox-influenced band called ``the Plan.''
+
+In 1980, Clarke and Fletcher formed Composition of Sound, converting to electronic instruments after Clarke encountered Orchestral Manoeuvres in the Dark (OMD). Clarke later said that without OMD, Depeche Mode would never have existed. Fletcher has noted that the move to synthesizers was partly practical: ``We worked odd jobs in order to buy synthesizers, or borrowed them from friends.''
+
+Dave Gahan was recruited after Clarke heard him singing David Bowie's ``Heroes'' at a Scout hut jam session in 1980 --- the same formative origin story that carries the specific texture of place and accident that defines the Amiga Principle.
+
+\subsubsection{Naming the Band}
+
+On September 24, 1980, at the Bridge House venue in Canning Town, the band adopted the name Depeche Mode --- chosen by Dave Gahan. The name derived from a French fashion magazine, \textit{Dépêche Mode}, which Gore said translates as ``hurried fashion'' or ``fashion dispatch'' (more accurately: ``fashion news'' or ``fashion update''). The slight mistranslation became part of the mythology.
+
+\subsubsection{Mute Records and Early Singles}
+
+While playing at the Bridge House, the band was approached by Daniel Miller, electronic producer and founder of Mute Records. Their first single, ``Dreaming of Me,'' was recorded in December 1980 and released in February 1981, reaching \#57 in the UK. ``New Life'' climbed to \#11 and secured an appearance on Top of the Pops. ``Just Can't Get Enough'' became their first UK Top 10 hit.
+
+\textit{Speak \& Spell} was released in October 1981, peaking at \#10 on the UK Albums Chart. Clarke wrote all but two songs on the album --- the exceptions being Gore's ``Tora! Tora! Tora!'' and ``Big Muff.''
+
+\subsubsection{Vince Clarke's Departure}
+
+Clarke departed at the end of 1981, stating unhappiness with the band's direction. He subsequently formed Yazoo with Alison Moyet and later Erasure with Andy Bell. His departure left Gore as the primary songwriter --- a transition that would prove transformative. \textbf{[XM: Module 2]}
+
+Alan Wilder was recruited as a touring keyboardist in 1982 and was promoted to full member in late 1982, participating in the recording of \textit{Construction Time Again}.
+
+\subsection{Module 2 Reference: Sound Evolution and the Dark Arc (1983--1993)}
+
+\subsubsection{The Industrial Turn: Construction Time Again (1983)}
+
+\textit{Construction Time Again} marked the beginning of Depeche Mode's most significant aesthetic shift. Wilder introduced sampling of everyday found objects: clanging metal, machinery noise, industrial ambiance. Working with producer Gareth Jones, the band incorporated tape loops and a sonic palette that had no precedent in British pop music.
+
+``Everything Counts'' (from this album) critiqued corporate greed and became one of the band's defining anthems. \textbf{[XM: Module 3 — cultural positioning]}
+
+\subsubsection{Some Great Reward (1984) and Political/Social Themes}
+
+Recorded at the legendary Hansa Studios in Berlin (where Bowie and U2 had also worked), \textit{Some Great Reward} explored sexuality, religion, and politics. ``People Are People'' became their first US Top 40 hit and was used as the theme for West Germany's coverage of the 1984 Olympics. It became a staple at gay clubs and LGBTQ festivals worldwide, establishing the band's unintended but significant role within queer culture.
+
+``Master and Servant'' (about BDSM power dynamics) and ``Blasphemous Rumours'' (questioning a benevolent God after a young girl survives a suicide attempt only to die later in a car crash) demonstrated that Gore was writing with a precision and darkness unprecedented in British electronic pop.
+
+\subsubsection{Black Celebration (1986) and Gothic Atmosphere}
+
+\textit{Black Celebration} is widely considered the album where Depeche Mode fully committed to a gothic-electronic aesthetic. Atmospheric, brooding, and emotionally claustrophobic, it features ``Stripped'' and ``A Question of Time.'' The shift away from industrial pop toward something more textured and ominous began here.
+
+\subsubsection{The Songwriting Engine}
+
+Across all these albums, the dynamic was: Gore wrote the songs (and sang several himself), Gahan sang lead on the remainder, and Wilder contributed production architecture. Gore's lyrics consistently explored a specific set of themes --- desire as submission, spiritual longing amid doubt, the gap between what humans want and what they allow themselves to have.
+
+\subsection{Module 3 Reference: The Violator Era and Stadium Ascent (1987--1995)}
+
+\subsubsection{Music for the Masses (1987)}
+
+Despite its ironic title, \textit{Music for the Masses} was a genuine bid for stadium-scale success --- and achieved it. Tracks like ``Strangelove,'' ``Never Let Me Down Again,'' and ``Behind the Wheel'' expanded their sound while retaining their electronic identity. The album's companion film, \textit{101} (1989), documented the final show of the Music for the Masses Tour.
+
+\subsubsection{The Rose Bowl Concert, June 1988}
+
+The June 1988 concert at the Pasadena Rose Bowl drew more than 60,000 fans --- the largest attendance at an indoor/outdoor concert by a synthesizer-based band at that time, and arguably the moment when Depeche Mode ceased to be ``alternative'' and became simply a massive band. The event was filmed as \textit{Depeche Mode 101}, directed by D.A. Pennebaker.
+
+\subsubsection{Violator (1990)}
+
+Released in March 1990, \textit{Violator} is widely regarded as the band's masterwork. Produced with Flood (later of U2 and Smashing Pumpkins fame) and engineered with François Kevorkian, it reached \#7 on the Billboard 200 and was certified triple platinum by the RIAA.
+
+The marketing campaign for lead single ``Personal Jesus'' was ahead of its time: advertisements were placed in the personals columns of UK regional newspapers reading ``Your own personal Jesus.'' Later versions included a phone number to hear the song. It became the biggest-selling 12-inch single in Warner Records' history at that time, and their first US Top 40 hit since ``People Are People.''
+
+``Enjoy the Silence'' reached \#6 in the UK (their first UK Top 10 since 1984's ``Master and Servant'') and \#8 in the US, winning Best British Single at the 1991 Brit Awards.
+
+The \textit{Violator} in-store signing at Wherehouse Entertainment in Los Angeles attracted approximately 20,000 fans and turned into a near riot, with some attendees injured. As an apology, the band distributed a limited cassette to LA fans through radio station KROQ.
+
+\subsubsection{Songs of Faith and Devotion (1993)}
+
+The follow-up introduced organic instrumentation and gospel influences alongside their electronic base. Recorded in difficult circumstances --- the band deeply strained by interpersonal conflict and Gahan's emerging addiction to heroin --- it nonetheless entered the UK and US charts at \#1, making it the band's first US number-one album.
+
+Alan Wilder departed in 1995, citing the internal struggles during recording and touring. His departure formally ended the classic four-member lineup.
+
+\subsection{Module 4 Reference: Survival, Reinvention, and Hall of Fame (1995--2020)}
+
+\subsubsection{Gahan's Near-Death and Ultra (1997)}
+
+Dave Gahan suffered a near-fatal heroin overdose during the recording hiatus, and his journey toward sobriety became the emotional substrate of \textit{Ultra} (1997). The album, recorded as a trio, featured a more stripped-down sound and won critical praise as a return to form. It debuted at \#1 in the UK.
+
+\subsubsection{Subsequent Studio Albums}
+
+The band recorded five more albums as a trio: \textit{Exciter} (2001), \textit{Playing the Angel} (2005), \textit{Sounds of the Universe} (2009), \textit{Delta Machine} (2013), and \textit{Spirit} (2017). All reached the UK Top 10. \textit{Sounds of the Universe} was nominated for a Grammy for Best Alternative Album. ``Suffer Well'' (from \textit{Playing the Angel}) was nominated for Best Dance Recording at the 49th Grammy Awards.
+
+By the time of \textit{Spirit} (2017), the Global Spirit Tour became the longest in the band's history, with over 130 shows across the US and Europe.
+
+\subsubsection{Cultural Reach and Fan Devotion}
+
+Depeche Mode hold the record for the largest attendance at a concert in East Germany before the fall of the Berlin Wall. Their fan base in Germany, Eastern Europe, and Latin America is notoriously devoted --- concerts in these regions frequently function as mass secular rituals. Los Angeles City Council officially declared December 13 as ``Depeche Mode Day'' in 2023.
+
+Their single ``Never Let Me Down Again'' experienced a resurgence of popularity after featuring in the HBO series \textit{The Last of Us}.
+
+\subsubsection{Rock and Roll Hall of Fame Induction (2020)}
+
+The band was inducted into the Rock and Roll Hall of Fame in 2020, presented by actress Charlize Theron. Due to the COVID-19 pandemic, Gahan, Gore, and Fletcher accepted via Zoom. Coldplay's Chris Martin remarked at the ceremony that Depeche Mode was ``about throwing away all the rulebooks.'' Arcade Fire's Win Butler added: ``I feel like their music still sounds like it could come out 20 years from now.''
+
+\subsection{Module 5 Reference: Memento Mori, Loss, and Continuation (2020--2024)}
+
+\subsubsection{Andy Fletcher's Death}
+
+Andrew ``Fletch'' Fletcher died unexpectedly on May 26, 2022, from an aortic dissection at his home in London. He was 60 years old. The band issued a statement calling him ``an integral part of Depeche Mode's history and legacy.'' Dave Gahan later described Fletcher as ``the one in the trenches with me the whole way'' from before the band began.
+
+Notably, Gahan and Gore had already been working on new material before Fletcher's death. They began recording \textit{Memento Mori} only six weeks after he died.
+
+\subsubsection{Memento Mori (2023)}
+
+The album was announced on October 4, 2022. Its title --- Latin for ``remember, you must die'' --- had been chosen before Fletcher's death and took on additional meaning afterward. Dave Gahan described it as having themes about life being ``fleeting and cruel, and also joyous and celebratory, but it has to end.''
+
+Lead single ``Ghosts Again'' was co-written with Richard Butler of the Psychedelic Furs and reached \#14 in the UK and \#2 on the US Adult Alternative Songs chart. The album was produced by James Ford (Simian Mobile Disco) and Marta Salogni (who has worked with Björk and Black Midi).
+
+The Memento Mori World Tour ran 112 shows from March 23, 2023 to April 8, 2024. The band performed with long-term live collaborators Peter Gordeno (multi-instrumentalist) and Christian Eigner (drums). Fletcher's keyboard setup was left as an empty space onstage, which Gahan acknowledged would be ``hard.''
+
+A documentary, \textit{Depeche Mode: M}, chronicling three concerts in Mexico City from September 2023, was theatrically released on October 28, 2025.
+
+\subsubsection{Legacy and Influence}
+
+Depeche Mode's influence spans genres and generations. Among artists who have directly cited them:
+\begin{itemize}
+  \item \textbf{Nine Inch Nails} (industrial rock, dark electronic)
+  \item \textbf{Coldplay} (melodic electronic pop)
+  \item \textbf{The Killers} (synth-driven alternative rock)
+  \item \textbf{Arcade Fire} (anthemic emotionalism through electronics)
+  \item \textbf{Linkin Park} (hybrid electronic rock)
+  \item \textbf{Rammstein} (industrial metal)
+  \item \textbf{Marilyn Manson} (dark aesthetic, subversive iconography)
+\end{itemize}
+
+They are credited with inspiring the development of synthwave, EBM (Electronic Body Music), dark wave, and certain strands of industrial rock. Their use of sampling on \textit{Construction Time Again} predated much of what became standard in dance production by a decade.
+
+NPR Music described them as having ``inspired modern techno, as well as many new-wave outfits,'' noting their pioneering use of drum machines and synthesis. Billboard named them the 10th Greatest Top Dance Club Artist of All Time in 2016. Q Magazine included them in ``50 Bands That Changed the World.'' VH1 ranked them \#98 on their ``100 Greatest Artists of All Time.''
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Sensitivity} & \tableheader{Handling Guidance} \\
+\midrule
+Dave Gahan's addiction and near-death & High — personal health & Report factually from named published sources; no speculation beyond documented record \\
+Andy Fletcher's death & High — recent loss & Report cause of death accurately (aortic dissection); avoid sensationalism \\
+Song themes (BDSM, suicide, religious doubt) & Medium & Contextualize within Gore's songwriting philosophy; treat as literary content \\
+Sexuality and queer cultural reception & Medium & Report factually; acknowledge band's role in LGBTQ spaces without overclaiming \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Major Publications and Journalism}
+\begin{itemize}
+  \item Wikipedia. ``Depeche Mode.'' Last modified April 2026. \url{https://en.wikipedia.org/wiki/Depeche_Mode}
+  \item Wikipedia. ``Depeche Mode discography.'' \url{https://en.wikipedia.org/wiki/Depeche_Mode_discography}
+  \item Billboard Magazine. ``Dave Gahan Opens Up on the Decision to Continue Depeche Mode After Andy Fletcher's Death.'' October 4, 2022.
+  \item Rolling Stone France. ``Depeche Mode's Dave Gahan on Memento Mori and life after Andy Fletcher.'' April 2023.
+  \item NPR Music / World Cafe. ``Depeche Mode: Cosmic Synth-Pop.'' December 31, 2009.
+  \item Music Data Blog. ``Depeche Mode: their history in a visual timeline.'' December 2023.
+  \item FM100.3. ``Evolution of Sound: Depeche Mode.'' August 2023.
+  \item Los Angeles / Yahoo Entertainment. ``After Andy Fletcher's death, Depeche Mode makes emotional live return to L.A.'' March 29, 2023.
+\end{itemize}
+
+\subsubsection{Official Sources}
+\begin{itemize}
+  \item Depeche Mode Official Archives. \url{https://archives.depechemode.com}
+  \item Mute Records official release documentation.
+  \item Rock and Roll Hall of Fame induction records (2020).
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Depeche Mode covering all five thematic modules: Origins, Sound Evolution, Violator Era, Post-Wilder Survival, and Memento Mori. The final deliverable is a structured reference work suitable for archival, educational, or curatorial use, assembled through a wave-based parallel research pipeline executed within the GSD skill-creator ecosystem.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  └─► Schema definition, source index, safety rules
+      [Haiku, Sequential]
+
+WAVE 1: Parallel Research Tracks
+  ├─► Track A: MOD-1 Origins + MOD-2 Dark Arc
+  │   [Sonnet × 2, Parallel]
+  └─► Track B: MOD-3 Violator + MOD-4 Survival
+      [Sonnet + Opus, Parallel]
+
+WAVE 2: Synthesis + MOD-5 Memento Mori
+  └─► MOD-5 (Opus) + Cross-module synthesis (Opus)
+      [Opus, Sequential]
+
+WAVE 3: Publication + Verification
+  └─► Document assembly → source verification → final render
+      [Sonnet, Sequential]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schema Layer (Wave 0):} Shared JSON schemas for album entries, personnel records, chart data, and source citations. Produced once and shared across all module agents.
+  \item \textbf{Research Layer (Wave 1):} Four module documents produced in two parallel tracks. Each module spec is self-contained.
+  \item \textbf{Synthesis Layer (Wave 2):} Opus agent identifies cross-module patterns, constructs the interpretive through-line, and drafts the MOD-5 Memento Mori module requiring highest sensitivity.
+  \item \textbf{Publication Layer (Wave 3):} Sonnet assembles modules into final document structure; second Sonnet instance verifies all source attributions and chart data against bibliography.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Shared Schema Package & Wave 0 complete & JSON schemas for albums, personnel, chart data \\
+2 & Origins Module (MOD-1) & All facts dated and sourced & 1,500--2,500 words \\
+3 & Dark Arc Module (MOD-2) & 4 phases documented & 2,000--3,000 words \\
+4 & Violator Era Module (MOD-3) & Commercial data complete & 2,000--3,000 words \\
+5 & Survival/HOF Module (MOD-4) & Hall of Fame coverage complete & 1,500--2,500 words \\
+6 & Memento Mori Module (MOD-5) & Sensitivity review passed & 2,000--3,000 words \\
+7 & Cross-Module Synthesis & 3+ thematic patterns identified & 1,000--1,500 words \\
+8 & Final Research Document & LaTeX compiles, all sources cited & PDF + .tex source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Schema Package & None & Haiku & 2,000 \\
+MOD-1 Origins & Schema & Sonnet & 8,000 \\
+MOD-2 Dark Arc & Schema & Sonnet & 10,000 \\
+MOD-3 Violator & Schema & Opus & 9,000 \\
+MOD-4 Survival & Schema & Sonnet & 8,000 \\
+MOD-5 Memento Mori & Schema + MOD-4 & Opus & 9,000 \\
+Synthesis & MOD 1--5 & Opus & 6,000 \\
+Publication Assembly & All modules & Sonnet & 4,000 \\
+Source Verification & Assembly + Bibliography & Sonnet & 3,000 \\
+\midrule
+\textbf{Total} & & & \textbf{59,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 28\% & Synthesis, Violator analysis, Memento Mori (grief/sensitivity), cross-module integration — highest-judgment tasks \\
+Sonnet & 62\% & All survey modules, publication assembly, source verification — structured, evidence-heavy work \\
+Haiku & 10\% & Schema scaffolding, template generation, index pages — fast, repeatable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index \\
+1 & Research & Parallel (2 tracks) & Sonnet + Opus & MOD 1--4 documents \\
+2 & Synthesis & Sequential & Opus & MOD-5 + cross-module synthesis \\
+3 & Publication & Sequential & Sonnet & Final document + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Define album schema & Haiku & 500 & JSON: albums, lineup, chart data fields \\
+Define personnel schema & Haiku & 300 & JSON: member records with dates \\
+Build source index & Haiku & 800 & Indexed bibliography with reliability scores \\
+Safety boundary register & Haiku & 400 & Sensitivity flags per module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\subsubsection*{Track A: Origins and Dark Arc}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+MOD-1: Origins and Formation & CRAFT-HIST & 8,000 & Origins module (1977--1982) \\
+MOD-2: Dark Arc & CRAFT-SONIC & 10,000 & Sound evolution module (1983--1993) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection*{Track B: Violator Era and Survival}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+MOD-3: Violator Era & CRAFT-PEAK & 9,000 & Violator and stadium ascent module \\
+MOD-4: Survival and HOF & EXEC-A & 8,000 & Post-Wilder era module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis and Grief}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+MOD-5: Memento Mori & Opus (CRAFT-GRIEF) & 9,000 & Final module (requires sensitivity) \\
+Cross-module synthesis & Opus (INTEG) & 6,000 & Through-line, thematic patterns, legacy statement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+Document assembly & Sonnet (EXEC-B) & 4,000 & Merged final document \\
+Source verification & Sonnet (VERIFY) & 3,000 & All claims attributed and checked \\
+LaTeX render (3 passes) & Bash/system & -- & PDF output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 schemas and source index are produced once and injected into all Wave 1 agent contexts within the same 5-minute cache window.
+  \item Tracks A and B in Wave 1 run simultaneously; their outputs are not needed by each other.
+  \item Opus synthesis in Wave 2 consumes all four module outputs; pass them together in a single Opus context.
+  \item Source verification in Wave 3 receives the assembled document and bibliography simultaneously.
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Schema + Source Index]
+         │
+         ├─────────────────────────────┐
+         ▼                             ▼
+[Wave 1A: MOD-1, MOD-2]     [Wave 1B: MOD-3, MOD-4]
+         │                             │
+         └─────────────┬───────────────┘
+                       ▼
+            [Wave 2: MOD-5 + Synthesis]
+                       │
+                       ▼
+              [Wave 3: Assembly + Verify → PDF]
+\end{asciibox}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tokens} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+Wave 0 (Foundation) & 2,000 & Haiku & Cheapest wave \\
+Wave 1 (Research) & 35,000 & Sonnet/Opus & Largest wave \\
+Wave 2 (Synthesis) & 15,000 & Opus & Premium quality \\
+Wave 3 (Publication) & 7,000 & Sonnet & Assembly and verify \\
+\midrule
+\textbf{Total} & \textbf{59,000} & & \textbf{Across 3 sessions} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK — do not proceed \\
+Core Accuracy & 8 & P1 & Revise module, re-run VERIFY \\
+Integration & 4 & P2 & Flag in synthesis, annotate \\
+Edge Cases & 4 & P3 & Document discrepancy, continue \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Andy Fletcher cause of death is reported correctly & Aortic dissection; age 60; May 26, 2022; no speculation beyond record \\
+SC-02 & Gahan's overdose described without glorification & Factual account from named sources; framed as survived crisis not rock mythology \\
+SC-03 & Song themes (BDSM, suicide) treated as literary content & No reproduction of harmful content; analytical framing only \\
+SC-04 & All numerical claims (chart positions, sales) attributed & No unattributed statistics; every figure cites a named publication \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Origins module: facts dated within one year & SC-04, CORE-01 & Pending \\
+Sound Evolution: 4 phases documented & CORE-02, INTEG-01 & Pending \\
+Violator: chart positions and sales cited & SC-04, CORE-03 & Pending \\
+Personal struggles: sourced from publications & SC-01, SC-02, CORE-04 & Pending \\
+Legacy: 6+ named influenced artists & CORE-05, INTEG-02 & Pending \\
+Fletcher death: timeline accurate & SC-01, CORE-06 & Pending \\
+Sources: professional outlets only & SC-04, CORE-07 & Pending \\
+3+ cross-module patterns identified & INTEG-03, INTEG-04 & Pending \\
+LaTeX renders without errors & CORE-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track scheduling \\
+SCOUT & Research Agent & Source gathering; gap-fill web research \\
+EXEC-A & Executor Alpha & Track A document production (MOD-1, MOD-2) \\
+EXEC-B & Executor Beta & Track B document production + Wave 3 assembly \\
+CRAFT-HIST & History Specialist & Origins and formation research (1977--1982) \\
+CRAFT-SONIC & Sound Specialist & Album analysis; production technique documentation \\
+CRAFT-PEAK & Peak Era Specialist & Violator era; commercial data; concert history \\
+CRAFT-GRIEF & Grief/Legacy Specialist & Memento Mori module; sensitivity handling; Andy Fletcher \\
+VERIFY & Verification Agent & Source validation; chart data cross-checking \\
+INTEG & Integration Agent & Cross-module pattern identification; synthesis input \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session boundary decisions \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 + 3 specialized CRAFT roles = 15 total) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+Total Token Budget & 59,000 across 3 sessions \\
+Estimated Sessions & 3 (Foundation, Research+Synthesis, Publication) \\
+Safety-Critical Tests & 4 (all mandatory-pass BLOCK gates) \\
+Primary Risk & Gahan overdose / Fletcher death sensitivity in MOD-4/5 \\
+Mitigation & CRAFT-GRIEF (Opus) handles both; VERIFY cross-checks sources \\
+Final Deliverable & PDF + .tex source + index.html \\
+Handoff Target & gsd-skill-creator (Claude Code) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\noindent{\large\sffamily\textcolor{primary}{``My dream was to combine the emotion of Neil Young or John Lennon transmitted by Kraftwerk's synthesisers. Soul music played by electronic instruments.''}}
+
+\vspace{0.5em}
+\noindent{\small\sffamily\textcolor{subtlegray}{--- Martin Gore, Depeche Mode}}
+
+\vspace{0.8em}
+\noindent{\normalsize The GSD through-line echoes this: the most powerful outputs emerge not from raw computational force but from architectural elegance operating within constraints. Basildon had no music scene. The band had no amplifier budget. So they built a world out of synthesizers and the spaces between the notes. The same principle --- constraint as creative catalyst, limitation as identity --- runs through the Amiga Principle, through \textit{The Space Between}, and through every wave-based mission this ecosystem executes. Forty years of Depeche Mode proves it works.}
+\end{quotebox}
+
+\end{document}
