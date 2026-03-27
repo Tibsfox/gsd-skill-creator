@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNW Planting Intelligence — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --light-secondary: #E3F2FD;
+    --light-tertiary: #EFEBE9;
+    --row-gray: #F5F5F5;
+    --border-gray: #BDBDBD;
+    --subtle-gray: #757575;
+    --dark-text: #212121;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark-text);
+    background: #fafafa;
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  header .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.6rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  header .subtitle {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    margin-bottom: 0.15rem;
+  }
+
+  header .pipeline {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+  }
+
+  header .pipeline span {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 3px;
+    padding: 0.2rem 0.6rem;
+    margin: 0 0.15rem;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* === FILE CARDS === */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+    .contents-grid { grid-template-columns: 1fr !important; }
+  }
+
+  .card {
+    color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .card.mission { background: #0f2e14; }
+  .card.guide { background: #1B5E20; }
+  .card.source-tex { background: #0d2f4a; }
+  .card.source-guide { background: #1a4a6e; }
+
+  .card .file-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 0.35rem;
+  }
+
+  .card .file-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .card .file-desc {
+    font-size: 0.82rem;
+    opacity: 0.8;
+    line-height: 1.45;
+    flex-grow: 1;
+  }
+
+  .card .download-hint {
+    font-size: 0.72rem;
+    opacity: 0.55;
+    margin-top: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 0.5rem;
+  }
+
+  /* === SECTIONS === */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+
+  h3 {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  p, li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 0.9rem; }
+
+  /* === CONTENTS GRID === */
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .contents-block {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+    padding: 1rem;
+    border-top: 3px solid var(--primary);
+  }
+  .contents-block.s2 { border-top-color: var(--secondary); }
+  .contents-block.s3 { border-top-color: var(--tertiary); }
+
+  .contents-block h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--subtle-gray);
+    margin-bottom: 0.45rem;
+  }
+
+  .contents-block ul { list-style: none; padding: 0; margin: 0; }
+  .contents-block li {
+    font-size: 0.8rem;
+    padding: 0.18rem 0;
+    border-bottom: 1px solid var(--row-gray);
+    margin: 0;
+  }
+  .contents-block li:last-child { border-bottom: none; }
+
+  /* === USAGE === */
+  .usage-box {
+    background: var(--light-primary);
+    border: 1px solid #C8E6C9;
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+
+  .usage-box h3 { color: var(--primary); margin-top: 0; }
+
+  .latex-box {
+    background: var(--light-secondary);
+    border: 1px solid #BBDEFB;
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+  .latex-box h3 { margin-top: 0; }
+
+  code {
+    font-family: 'DejaVu Sans Mono', 'Fira Code', monospace;
+    background: rgba(0,0,0,0.06);
+    padding: 0.12em 0.35em;
+    border-radius: 3px;
+    font-size: 0.83em;
+  }
+
+  pre {
+    background: #263238;
+    color: #ECEFF1;
+    padding: 0.9rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0 1.2rem;
+    font-size: 0.85rem;
+  }
+  .summary-table th {
+    text-align: left;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 0.8rem;
+    font-weight: 600;
+  }
+  .summary-table td {
+    padding: 0.4rem 0.8rem;
+    border-bottom: 1px solid var(--border-gray);
+  }
+  .summary-table tr:nth-child(even) td { background: var(--row-gray); }
+
+  /* === QUOTE === */
+  .closing-quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0 1rem;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .closing-quote p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+  }
+
+  .closing-quote .attr {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    color: var(--subtle-gray);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--subtle-gray);
+    border-top: 1px solid var(--border-gray);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>PNW Micro-Climate Planting Intelligence</h1>
+  <div class="subtitle">Pacific Northwest Orchard &amp; Garden — Week of March 26, 2026</div>
+  <div class="subtitle" style="font-size:0.88rem; opacity:0.75;">Squadron Profile · 12 Roles · 5 Modules · ~28K Tokens</div>
+  <div class="pipeline">
+    <span>Vision</span> → <span>Research</span> → <span>Mission</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- FILE CARDS -->
+  <div class="cards">
+    <a class="card mission" href="pnw-planting-mission.pdf" download>
+      <div>
+        <div class="file-type">PDF — 30 Pages · Three-Stage Mission Package</div>
+        <div class="file-name">Mission Package</div>
+        <div class="file-desc">Complete Vision → Research → Mission pipeline. Weather intelligence, crop guides, orchard management, companion ecology, wave execution plan, test plan, crew manifest.</div>
+      </div>
+      <div class="download-hint">↓ Click to download mission PDF</div>
+    </a>
+    <a class="card guide" href="pnw-planting-guide-march-26-2026.pdf" download>
+      <div>
+        <div class="file-type">PDF — 12 Pages · Standalone Planting Guide</div>
+        <div class="file-name">Planting Guide</div>
+        <div class="file-desc">Standalone week-at-a-glance planting guide. Weather tables, crop calendars, orchard tasks, slug defense, day-by-day action calendar.</div>
+      </div>
+      <div class="download-hint">↓ Click to download guide PDF</div>
+    </a>
+    <a class="card source-tex" href="pnw-planting-mission.tex" download>
+      <div>
+        <div class="file-type">LaTeX Source — Mission Package</div>
+        <div class="file-name">Mission .tex Source</div>
+        <div class="file-desc">Full XeLaTeX source for the three-stage mission package. Modify modules, update data, recompile.</div>
+      </div>
+      <div class="download-hint">↓ Click to download .tex</div>
+    </a>
+    <a class="card source-guide" href="pnw-planting-guide-march-26-2026.tex" download>
+      <div>
+        <div class="file-type">LaTeX Source — Planting Guide</div>
+        <div class="file-name">Guide .tex Source</div>
+        <div class="file-desc">Full XeLaTeX source for the standalone planting guide. Update weekly weather and crop data.</div>
+      </div>
+      <div class="download-hint">↓ Click to download .tex</div>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <h2>Three-Stage Contents</h2>
+
+  <div class="contents-grid">
+    <div class="contents-block">
+      <h4>Stage 1 — Vision</h4>
+      <ul>
+        <li>Vision narrative &amp; through-line</li>
+        <li>Problem statement (5 problems)</li>
+        <li>Core concept &amp; domain map</li>
+        <li>Module architecture (5 modules)</li>
+        <li>Chipset configuration (Agnus/Denise/Paula)</li>
+        <li>Scope boundaries</li>
+        <li>Success criteria (12)</li>
+        <li>Ecosystem relationships</li>
+      </ul>
+    </div>
+    <div class="contents-block s2">
+      <h4>Stage 2 — Research</h4>
+      <ul>
+        <li>Source organizations index</li>
+        <li>M1: Weather intelligence data</li>
+        <li>M2: Cool-season crop evidence</li>
+        <li>M3: Warm-season planning science</li>
+        <li>M4: Orchard management protocols</li>
+        <li>M5: Defense &amp; companion ecology</li>
+        <li>Safety &amp; sensitivity matrix</li>
+        <li>Full source bibliography</li>
+      </ul>
+    </div>
+    <div class="contents-block s3">
+      <h4>Stage 3 — Mission</h4>
+      <ul>
+        <li>Milestone specification</li>
+        <li>9 deliverables with acceptance criteria</li>
+        <li>13-component breakdown</li>
+        <li>4-wave execution plan</li>
+        <li>Token budget (~28K)</li>
+        <li>Dependency graph</li>
+        <li>26-test plan (5 safety-critical)</li>
+        <li>Squadron crew manifest (12 roles)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXECUTION SUMMARY -->
+  <h2>Execution Summary</h2>
+
+  <table class="summary-table">
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>Activation Profile</td><td>Squadron (12 roles)</td></tr>
+    <tr><td>Research Modules</td><td>5 (Weather, Cool-Season, Warm-Season, Orchard, Defense/Ecology)</td></tr>
+    <tr><td>Execution Waves</td><td>4 (Foundation → Parallel Research → Synthesis → Publish)</td></tr>
+    <tr><td>Parallel Tracks</td><td>2 (Track A: Wx+Crop | Track B: Orchard+Defense)</td></tr>
+    <tr><td>Components</td><td>13</td></tr>
+    <tr><td>Context Windows</td><td>8–12 estimated</td></tr>
+    <tr><td>Token Budget</td><td>~28,300 (Opus 42% · Sonnet 53% · Haiku 5%)</td></tr>
+    <tr><td>Success Criteria</td><td>12</td></tr>
+    <tr><td>Test Count</td><td>26 (5 safety-critical / BLOCK)</td></tr>
+    <tr><td>Deliverables</td><td>9</td></tr>
+  </table>
+
+  <!-- USAGE -->
+  <h2>Usage</h2>
+
+  <div class="usage-box">
+    <h3>Feeding to GSD / Skill-Creator</h3>
+    <ol>
+      <li>Download the <strong>Mission Package PDF</strong> — this is the complete flight plan.</li>
+      <li>Place it in the <code>.planning/staging/inbox/</code> directory for MCP bridge pickup, or provide it directly to Claude Code.</li>
+      <li>The mission is self-contained: Stage 1 (Vision) frames the scope, Stage 2 (Research) provides the evidence base, Stage 3 (Mission) decomposes into executable wave plans.</li>
+      <li>The <strong>Planting Guide PDF</strong> is a standalone deliverable — it's what the mission <em>produces</em>. Use it directly for this week's planting decisions.</li>
+    </ol>
+  </div>
+
+  <div class="latex-box">
+    <h3>Recompiling LaTeX Sources</h3>
+    <p>Both <code>.tex</code> files require XeLaTeX with DejaVu fonts. Three passes for cross-references:</p>
+    <pre><code># Mission package
+xelatex -interaction=nonstopmode pnw-planting-mission.tex
+xelatex -interaction=nonstopmode pnw-planting-mission.tex
+xelatex -interaction=nonstopmode pnw-planting-mission.tex
+
+# Standalone guide
+xelatex -interaction=nonstopmode pnw-planting-guide-march-26-2026.tex
+xelatex -interaction=nonstopmode pnw-planting-guide-march-26-2026.tex
+xelatex -interaction=nonstopmode pnw-planting-guide-march-26-2026.tex</code></pre>
+    <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--subtle-gray);">Ubuntu/Debian: <code>sudo apt install texlive-xetex fonts-dejavu</code></p>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="closing-quote">
+    <p>The spaces between the rain are where the planting happens. The spaces between the plants are where the ecology happens. Architectural leverage over brute force — the orchard guild as the Amiga Principle made garden-scale.</p>
+    <div class="attr">— Through-line, PNW Planting Intelligence Mission Package</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Research Mission Package · Compiled March 26, 2026<br>
+  Vision → Research → Mission · Full Pipeline Execution
+</footer>
+
+</body>
+</html>
