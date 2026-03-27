@@ -63,6 +63,7 @@
     { id: 'VAV', name: 'Voxel as Vessel', path: 'VAV/index.html' },
     { id: 'WAL', name: 'Weird Al', path: 'WAL/index.html' },
     { id: 'WCN', name: 'Westercon', path: 'WCN/index.html' },
+    { id: 'WLF', name: 'The Wolf', path: 'WLF/index.html' },
     { id: 'WYR', name: 'Weyerhaeuser', path: 'WYR/index.html' },
     { id: 'WSB', name: 'Small Business', path: 'WSB/index.html' }
   ];
