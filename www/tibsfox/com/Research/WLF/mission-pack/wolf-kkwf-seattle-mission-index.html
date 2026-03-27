@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100.7 The Wolf — KKWF Seattle — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wolf-indigo: #1A237E;
+    --country-amber: #E65100;
+    --pacific-green: #2E7D32;
+    --nashville-gold: #F57F17;
+    --light-indigo: #E8EAF6;
+    --light-amber: #FFF3E0;
+    --dark-text: #212121;
+    --subtle-gray: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark-text);
+    background: #FAFAFA;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--wolf-indigo) 0%, #283593 50%, var(--country-amber) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  header .tag { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; margin-bottom: 0.5rem; }
+  header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+  header h2 { font-weight: 400; font-size: 1.1rem; opacity: 0.9; }
+  header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: var(--nashville-gold); }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .file-card {
+    background: #EDEDF4;
+    border: 1px solid #C5CAE9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--dark-text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,35,126,0.15); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle-gray); }
+  h3 { font-family: 'Libre Baskerville', serif; color: var(--wolf-indigo); margin: 2rem 0 1rem; font-size: 1.3rem; }
+  .contents { background: var(--light-indigo); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .contents .stage { margin-bottom: 1rem; }
+  .contents .stage-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .s1 { background: var(--wolf-indigo); }
+  .s2 { background: var(--country-amber); }
+  .s3 { background: var(--pacific-green); }
+  .contents ul { margin-left: 1.5rem; font-size: 0.9rem; }
+  .contents li { margin-bottom: 0.2rem; }
+  .instructions { background: var(--light-amber); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .instructions ol { margin-left: 1.5rem; font-size: 0.9rem; }
+  .instructions li { margin-bottom: 0.4rem; }
+  .instructions code { background: #FFF; padding: 1px 5px; border-radius: 3px; font-size: 0.85rem; }
+  blockquote {
+    border-left: 3px solid var(--wolf-indigo);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--light-indigo);
+    border-radius: 0 8px 8px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #37474F;
+  }
+  blockquote cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--subtle-gray); font-style: normal; }
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--subtle-gray); }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>100.7 The Wolf — KKWF Seattle</h1>
+  <h2>Country Radio in the Pacific Northwest</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+<div class="container">
+  <div class="files">
+    <a href="wolf-kkwf-seattle-mission.pdf" download class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">Mission Package (PDF)</div>
+      <div class="desc">23-page three-stage research mission — ready for GSD orchestrator</div>
+    </a>
+    <a href="wolf-kkwf-seattle-mission.tex" download class="file-card">
+      <div class="icon">📝</div>
+      <div class="name">LaTeX Source (.tex)</div>
+      <div class="desc">Editable XeLaTeX source — modify and recompile</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-label s1">STAGE 1 — VISION</div>
+      <ul>
+        <li>Vision narrative — KKWF's broadcasting paradox</li>
+        <li>5 problem statements (format volatility, Audacy uncertainty, streaming disruption, re-fragmentation, genre identity)</li>
+        <li>Market architecture diagram — Seattle country landscape</li>
+        <li>6 research module definitions</li>
+        <li>12 testable success criteria</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label s2">STAGE 2 — RESEARCH REFERENCE</div>
+      <ul>
+        <li>Station history: complete 1948–2026 ownership/format timeline</li>
+        <li>Market analysis: Nielsen PPM ratings trajectory, KMPS elimination, 2023–24 format wars</li>
+        <li>Morning Wolfpack profiles: McAllister, Mercer, Koons, Drew Bland</li>
+        <li>Audacy corporate timeline with bankruptcy financials</li>
+        <li>Military philanthropy: Operation K9 Companion, 10,000 for the Troops</li>
+        <li>Industry trends: streaming growth, AI-generated country music, genre fusion</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label s3">STAGE 3 — MISSION PACKAGE</div>
+      <ul>
+        <li>Squadron activation (12 roles, 2 parallel tracks)</li>
+        <li>4-wave execution plan with cache optimization</li>
+        <li>32-test verification plan (5 safety-critical)</li>
+        <li>~159,000 token budget across 18–24 context windows</li>
+        <li>Full crew manifest and dependency graph</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Usage</h3>
+  <div class="instructions">
+    <ol>
+      <li>Hand the PDF to <code>gsd-skill-creator</code> via Claude Code</li>
+      <li>The orchestrator reads Stage 3 to decompose into waves</li>
+      <li>Wave 0 builds shared schemas; Wave 1 runs parallel research tracks</li>
+      <li>Wave 2 synthesizes cross-module connections; Wave 3 publishes and verifies</li>
+      <li>CAPCOM gates require human approval at wave boundaries</li>
+    </ol>
+  </div>
+
+  <h3>Recompiling the LaTeX</h3>
+  <div class="instructions">
+    <ol>
+      <li>Requires XeLaTeX with DejaVu fonts installed</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page count</li>
+    </ol>
+  </div>
+
+  <blockquote>
+    A radio station is a continuous signal. What endures is not the format or the corporate parent or the call letters — it is the relationship between the signal and the community it serves. That relationship, built in the spaces between the songs, is the thing that cannot be disrupted by an algorithm.
+    <cite>— Mission Through-Line</cite>
+  </blockquote>
+</div>
+<footer>GSD Ecosystem · March 2026 · Activation Profile: Squadron</footer>
+</body>
+</html>
