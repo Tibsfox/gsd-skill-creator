@@ -32,6 +32,7 @@
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
     { id: 'JNS', name: 'JanSport', path: 'JNS/index.html' },
+    { id: 'K8S', name: 'Kubernetes', path: 'K8S/index.html' },
     { id: 'KGX', name: "King's X", path: 'KGX/index.html' },
     { id: 'KSM', name: 'KISM 92.9', path: 'KSM/index.html' },
     { id: 'KPZ', name: 'KPLZ Seattle', path: 'KPZ/index.html' },

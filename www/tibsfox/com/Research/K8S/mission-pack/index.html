@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Ecosystem — GSD Mission Package 93.3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #263238 0%, #1565C0 50%, #37474F 100%); padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem; }
+  .header .subtitle { color: #B0BEC5; font-size: 1.1rem; }
+  .header .meta { color: #78909C; font-size: 0.85rem; margin-top: 1rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .file-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .file-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; text-decoration: none; color: #c9d1d9; transition: border-color 0.2s; }
+  .file-card:hover { border-color: #1565C0; }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-weight: 700; color: #58a6ff; margin-bottom: 0.3rem; }
+  .file-card .desc { font-size: 0.85rem; color: #8b949e; }
+  h2 { font-family: 'Libre Baskerville', serif; color: #58a6ff; margin: 2rem 0 1rem; font-size: 1.3rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
+  .contents { list-style: none; }
+  .contents li { padding: 0.4rem 0; border-bottom: 1px solid #21262d; }
+  .contents .stage { color: #1565C0; font-weight: 700; margin-top: 1rem; }
+  .contents .module { padding-left: 1.5rem; color: #8b949e; }
+  .instructions { background: #161b22; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.5rem 0; }
+  code { background: #0d1117; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #79c0ff; }
+  pre { background: #0d1117; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; }
+  pre code { padding: 0; background: none; }
+  .quote { font-family: 'Libre Baskerville', serif; font-style: italic; color: #8b949e; padding: 1.5rem; border-left: 3px solid #1565C0; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Kubernetes Ecosystem</h1>
+  <div class="subtitle">Deep Research — GSD Mission Package 93.3</div>
+  <div class="meta">March 26, 2026 · Fleet Profile · 14 context windows · 6 sessions</div>
+</div>
+
+<div class="container">
+
+  <div class="file-cards">
+    <a class="file-card" href="kubernetes-mission.pdf" download>
+      <div class="icon">📄</div>
+      <div class="name">kubernetes-mission.pdf</div>
+      <div class="desc">Complete mission package — Vision → Research → Mission (25 pages)</div>
+    </a>
+    <a class="file-card" href="kubernetes-mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">kubernetes-mission.tex</div>
+      <div class="desc">XeLaTeX source — editable, recompilable</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li class="stage">Stage 1 — Vision Document</li>
+    <li class="module">Vision narrative · Problem statement (5 problems) · Core concept</li>
+    <li class="module">Domain map · Module architecture (6 modules) · Chipset configuration</li>
+    <li class="module">Scope boundaries · Success criteria (12) · Document relationships</li>
+    <li class="stage">Stage 2 — Research Reference</li>
+    <li class="module">Module 1: Distributions & Architecture (K8s v1.35, K3s, MicroK8s, KubeEdge)</li>
+    <li class="module">Module 2: Networking & Traffic (Gateway API, Ingress retirement, CNI comparison)</li>
+    <li class="module">Module 3: Storage & Persistence (Longhorn, Rook/Ceph, decision framework)</li>
+    <li class="module">Module 4: GPU Scheduling & AI/ML (DRA, MIG, time-slicing, Kueue)</li>
+    <li class="module">Module 5: Security & Zero Trust (pod certs, mTLS, RBAC, admission control)</li>
+    <li class="module">Module 6: Operations & Observability (GitOps, Prometheus, Velero, FinOps)</li>
+    <li class="module">Safety considerations · Source bibliography</li>
+    <li class="stage">Stage 3 — Mission Package</li>
+    <li class="module">Milestone spec · Wave execution plan (4 waves, 3 parallel tracks)</li>
+    <li class="module">Test plan (36 tests, 6 safety-critical) · Verification matrix</li>
+    <li class="module">Crew manifest (Fleet, 17 roles) · Execution summary</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's workflow at the PDF's Stage 1 (Vision) section</li>
+      <li>Feed mission docs in wave order per Stage 3's wave execution plan</li>
+      <li>Each module component spec is self-contained — agents need only their assigned module</li>
+      <li>Wave 1 runs three parallel tracks: Infrastructure (A), Resources (B), Cross-cutting (C)</li>
+      <li>Track C (Security) depends on Track A (Networking) — schedule accordingly</li>
+      <li>Wave 2 synthesis requires summaries from all Wave 1 outputs</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <pre><code>xelatex -interaction=nonstopmode kubernetes-mission.tex
+xelatex -interaction=nonstopmode kubernetes-mission.tex
+xelatex -interaction=nonstopmode kubernetes-mission.tex</code></pre>
+  <p style="color: #8b949e; font-size: 0.85rem;">Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references.</p>
+
+  <div class="quote">
+    "Everything in cloud computing is one of four things: compute, storage, network, and the orchestration that ties them together. That's the unit circle."
+  </div>
+
+</div>
+</body>
+</html>
