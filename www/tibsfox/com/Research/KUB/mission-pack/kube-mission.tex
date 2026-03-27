@@ -1,0 +1,719 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: History/Culture (Burgundy / Gold / Parchment) ===
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{KUBE 93.3 FM Seattle}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={KUBE 93.3 FM Seattle -- Deep Research Mission},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% === TITLE PAGE ===
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{KUBE 93.3 FM\\[0.3em]Seattle}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Frequency, A Culture, The Spaces Between}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- Mission 93.3}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron~~|~~Estimated: 10 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{KUBE 93.3 FM Seattle --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-foxfire-heritage-skills-vision.md, gsd-bbs-educational-pack-vision.md}
+\metafield{Context:}{PNW cultural heritage, community radio history, hip-hop as distributed network}
+
+\subsection{Vision}
+
+On May 6, 1964, a 6,600-watt Christian radio station signed on the air at 93.3 FM in Seattle, Washington. Call letters: KBLE-FM. Transmitter: eventually Cougar Mountain, overlooking the Issaquah Alps. Nobody listening to hymns and sermons on that frequency could have imagined that within thirty years, the same signal --- boosted to 100,000 watts, rechristened KUBE --- would be broadcasting Sir Mix-A-Lot's ``Baby Got Back'' to every car stereo from Olympia to Mount Vernon, and that the station's shift to hip-hop would be cited as proof that rap had not merely infiltrated pop music but \textit{superseded} it across the entire Pacific Northwest.
+
+The story of 93.3 FM in Seattle is not merely a radio history. It is a story about how culture propagates through infrastructure. A frequency is a commons --- a shared physical resource that carries whatever signal is placed upon it. From 1964 to 2022, this particular commons carried Christian devotion, country twang, Top 40 pop, rhythmic contemporary hits, hip-hop, and finally sports talk, each format reflecting the commercial and cultural currents of its moment. But the most consequential chapter --- the KUBE era, roughly 1982 to 2022 --- is inseparable from the emergence of hip-hop in the Pacific Northwest, a region that mainstream media consistently dismissed as irrelevant to the genre.
+
+The deeper story is about Nasty Nes Rodriguez, a Filipino immigrant who arrived in Seattle in 1970 and by 1981 was hosting FreshTracks on KFOX --- the West Coast's first dedicated hip-hop radio show. About a young Anthony Ray from the Central District who packed the Rotary Boys \& Girls Club every weekend as Sir Mix-A-Lot. About NastyMix Records, founded in a city that Billboard sarcastically called ``that hip-hop hotbed Seattle.'' About how a distributed network of DJs, community centers, military bases, and one 100,000-watt FM signal created a scene that produced platinum records, Grammy awards, and a cultural identity that persists decades after the station itself was silenced.
+
+Nes Rodriguez died on February 15, 2025, in Los Angeles. He was 62. On the night he passed, a gathering of Seattle hip-hop pioneers was underway at Washington Hall, celebrating the history he helped build. His image was on the trading cards they'd printed. They didn't know yet that he was gone.
+
+This research mission documents the complete arc of 93.3 FM Seattle: the infrastructure, the people, the culture, and the erasure.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{PNW hip-hop history is under-documented.} The mainstream narrative credits New York, Los Angeles, Atlanta, and Houston. Seattle's contributions --- NastyMix Records, the first West Coast hip-hop radio show, the region's role as proof that hip-hop was national music --- are poorly preserved outside local memory and a single 2025 book.
+
+\item \textbf{Radio frequency history is typically reduced to format changes.} The standard accounts list call letter swaps and format flips as data points. The cultural ecosystem that a station enables --- the DJs, the community centers, the record labels, the audience --- is rarely treated as the primary subject.
+
+\item \textbf{Corporate consolidation has erased community infrastructure.} iHeartMedia's repeated format shuffles on 93.3 (2016, 2018, 2022) treated a cultural institution as a programming variable. The mechanics of how corporate radio decisions destroy local scenes is poorly documented in technical terms.
+
+\item \textbf{The connection between radio infrastructure and cultural formation is untheorized.} A 100,000-watt FM signal from Cougar Mountain reaches from Olympia to Mount Vernon. That physical reach shaped which communities could participate in Seattle hip-hop. When KUBE was moved to 104.9's weaker signal in 2016, much of Seattle and the Eastside lost access. Infrastructure \textit{is} culture.
+
+\item \textbf{Nasty Nes Rodriguez's legacy needs formal documentation.} The co-founder of NastyMix Records, host of the West Coast's first hip-hop radio show, and the person who discovered Sir Mix-A-Lot died in 2025. His story connects Filipino-American immigration, community radio, independent music, and the birth of a regional genre.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} KUBE 93.3 FM is a case study in how physical radio infrastructure creates, sustains, and ultimately loses the cultural commons that forms around a frequency.
+\end{quotebox}
+
+A radio frequency is a shared resource. Its reach (power, antenna height, terrain) determines who can participate. Its programming determines what community forms. Its ownership determines how long that community endures. The KUBE story maps all three dynamics across six decades, from a 6,600-watt religious broadcaster to a 100,000-watt cultural institution to a sports talk simulcast.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+  93.3 FM SEATTLE: SIX DECADES OF A FREQUENCY
+  =============================================
+
+  1964-1981          1981-1991          1991-2016
+  KBLE-FM            "The New 93"       KUBE 93 JAMS
+  +----------+       +----------+       +----------------+
+  | Religion |       | Top 40   |       | Rhythmic CHR   |
+  | Country  |------>| CHR      |------>| Hip-Hop + R&B  |
+  | 6.6 kW   |       | 100 kW   |       | 100 kW         |
+  +----------+       +----------+       +--------+-------+
+                                                 |
+       PARALLEL TRACK: PNW HIP-HOP ECOSYSTEM     |
+       +------------------------------------------|--+
+       | 1981: Nasty Nes / FreshTracks / KFOX     |  |
+       | 1983: Sir Mix-A-Lot / Boys & Girls Club  |  |
+       | 1985: NastyMix Records founded           |  |
+       | 1992: "Baby Got Back" #1 worldwide       <--+
+       | 1994: Hybrid rock experiment (failed)    |
+       | 2001: Clear Channel acquisition          |
+       +------------------------------------------+
+
+  2016-2022          2022-present
+  FORMAT WARS        KJR-FM SPORTS
+  +----------+       +----------+
+  | KUBE to  |       | Sports   |
+  | 104.9    |------>| talk on  |
+  | Power 93 |       | 93.3 FM  |
+  | KUBE back|       | KUBE HD2 |
+  | KUBE gone|       +----------+
+  +----------+
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1: Infrastructure    Module 2: People & Culture
+       |                           |
+       +---- Shared Schema --------+
+       |         (Wave 0)          |
+  Module 3: The Hip-Hop Era   Module 4: Corporate & Erasure
+       |                           |
+       +---------- Synthesis ------+
+                  (Wave 2)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Frequency --- Infrastructure History}
+93.3 FM from sign-on (May 6, 1964, KBLE-FM, Eastside Broadcasting, 6,600W) through every call letter and format change. The Cougar Mountain transmitter site. Power increases to 20,000W and then 100,000W (Class C1). The physical reach of the signal and how it shaped audience geography. HD Radio operations (HD2 sub-channels as format exile). Technical specifications: ERP, antenna patterns, coverage maps.
+
+\subsubsection{Module 2: The People --- Builders and Voices}
+Nasty Nes Rodriguez (1962--2025): Filipino immigration, KFOX FreshTracks (1981), the Mastermix format, ``Rap Attack'' on KCMU, ``Hotmix'' on KUBE 93. Sir Mix-A-Lot (Anthony Ray): Central District, Boys \& Girls Club, NastyMix Records, ``Baby Got Back.'' The T-Man Show (1995--2009). Key DJs and programmers: Charlie Brown, Eric Powers, DJ B-Mello, DJ SupaSam, Strawberry \& Lizette Love. The Emerald Street Boys. The community ecosystem: 206 Zulu, MOHAI exhibit, ``The Birth of Seattle Rap'' (2025).
+
+\subsubsection{Module 3: The Hip-Hop Era --- Cultural Formation}
+KUBE's 1991 shift to ``93 Jams'' and its relationship to the national rhythmic CHR movement (KPWR Los Angeles, KMEL San Francisco). The 1992 ``Baby Got Back'' moment. The Central District as geographic anchor. Military bases in Tacoma seeding the fan base. The 1994 hybrid rock experiment and Ballard High School shooting context. The station's influence on PNW markets (Spokane, Boise, Portland). Competition with KPLZ, KQMV (Movin' 92.5), Hot 103.7. Streaming's impact on hip-hop radio audiences.
+
+\subsubsection{Module 4: The Corporate Era --- Consolidation and Erasure}
+Clear Channel/iHeartMedia acquisition (2001). The 2016 four-station shuffle: KUBE to 104.9 rimshot, Power 93.3 on the blowtorch signal. The 2018 reversal (``KUBE is back''). The 2022 final flip: Russell Wilson trade accelerating the KJR sports simulcast. KUBE exiled to HD2. The mechanics of format decisions: Nielsen ratings, advertising revenue, corporate portfolio optimization. What is lost when a cultural commons becomes a programming variable.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  name: kube-93-deep-research
+  version: "93.3"
+  type: ASIC
+
+  copper_bus:
+    trigger: "kube|93.3|seattle radio|hip hop radio|nasty nes"
+    priority: research
+
+  agnus:
+    scheduling: wave-parallel
+    max_parallel: 2
+    cache_ttl: 300
+
+  denise:
+    output_format: pdf
+    color_scheme: history
+    typography: dejavu
+
+  paula:
+    audio_context: critical
+    frequency: 93.3
+    power: 100kW
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete technical history of 93.3 FM Seattle from 1964 sign-on to present
+\item Biographical profiles of key figures (Nasty Nes, Sir Mix-A-Lot, key DJs/programmers)
+\item Cultural analysis of KUBE's role in PNW hip-hop formation
+\item Corporate ownership history and format decision mechanics
+\item Connection between radio infrastructure (power, geography) and cultural reach
+\item The HD2 exile as case study in digital marginalization
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Complete history of all Seattle radio stations (only competitors as context)
+\item National hip-hop history beyond PNW connections
+\item Music criticism or playlist analysis
+\item FCC regulatory history beyond station-specific filings
+\item Broader iHeartMedia corporate analysis beyond Seattle market decisions
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Complete format chronology from KBLE-FM (1964) through KJR-FM (2022) with dates, call letters, formats, and ownership
+\item Technical specifications (frequency, power, transmitter location, coverage area) documented for each era
+\item Nasty Nes Rodriguez biography traces immigration, radio career, NastyMix Records, and 2025 passing with named sources
+\item Sir Mix-A-Lot connection to KUBE documented from Boys \& Girls Club through ``Baby Got Back'' chart performance
+\item At least 8 named individuals profiled with their roles in the station's history
+\item 1991 rhythmic shift contextualized within national format trends (KPWR, KMEL precedents)
+\item Corporate ownership chain documented: Eastside Broadcasting $\rightarrow$ First Media $\rightarrow$ Cook Inlet $\rightarrow$ New Century/Ackerley $\rightarrow$ Clear Channel/iHeartMedia
+\item 2016 and 2022 format changes analyzed as infrastructure decisions with cultural consequences
+\item The Central District's role as geographic anchor for Seattle hip-hop documented
+\item All findings sourced from radio industry publications, newspaper archives, or named participants
+\item Document self-contained: a reader unfamiliar with Seattle radio can follow the complete narrative
+\item Through-line connects radio frequency as commons to the ecosystem philosophy of ``the spaces between''
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Foxfire Heritage Skills & Community knowledge transmission via technology parallels radio's role & Echoes \\
+BBS Educational Pack & Pre-internet community infrastructure; radio as the original ``BBS'' for music culture & Parallels \\
+The Hundred Voices & Voice \#93 (Tommy Orange, 2018) --- Indigenous urban identity parallels KUBE's Central District roots & Resonates \\
+Deep Audio Analyzer & Audio analysis tools could be applied to station format evolution & Enables \\
+Fox Infrastructure & Community-owned communications infrastructure as alternative to corporate radio & Responds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A radio frequency is a space between. Between the transmitter on Cougar Mountain and the car stereo on I-5. Between the DJ's turntable and the teenager in the Central District who just heard something that changed what they thought was possible. Between a Filipino immigrant spinning records on a Sunday night show and a kid from Auburn who would ride those records to a Grammy.
+
+KUBE 93.3 was not a radio station. It was a distributed network --- not the packet-switched kind that Baran drew in his third diagram, but the cultural kind, where the signal carries not just music but identity, where the frequency becomes a commons that a community organizes itself around. When iHeartMedia moved that signal to a rimshot frequency in Tacoma, they didn't change a format. They severed a network. When they brought it back two years later, the network reassembled. When they killed it for good in 2022 to simulcast sports talk, they scattered the nodes.
+
+Nasty Nes understood this. He didn't just play records. He gave history lessons on the air, told listeners where the music came from, connected Seattle to New York to the Philippines to everywhere. The spaces between the songs were where the culture lived. The spaces between the cities were where the signal traveled. The spaces between the people were where the community formed.
+
+The frequency is still there. 93.3 MHz, 100,000 watts, Cougar Mountain. It carries sports talk now. But the culture it built is still propagating --- in the HD2 sub-channel, in the streaming links, in the 206 Zulu gatherings, in the trading cards with Nes's face, in the memories of everyone who ever turned the dial and heard something that sounded like home.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{KUBE 93.3 FM --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from Wikipedia's extensively sourced KJR-FM article, HistoryLink.org (Washington State's free online encyclopedia of history), RadioInsight industry analysis, Seattle Times and KIRO news archives, the Washington Humanities ``How the Northwest Shocked the Hip-Hop World'' essay, and 206 Zulu's oral histories.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item HistoryLink.org --- Washington State historical documentation
+\item RadioInsight --- Radio industry analysis and format change documentation
+\item Seattle Times / KIRO 7 --- Local journalism archives
+\item Washington Humanities --- ``How the Northwest Shocked the Hip-Hop World'' (2022)
+\item 206 Zulu --- Seattle hip-hop nonprofit, oral histories, ``OurStory'' series
+\item RadioDiscussions.com --- First-person accounts from station engineers and DJs
+\end{itemize}
+
+\subsection{Module 1: The Frequency --- Infrastructure Reference}
+
+\subsubsection{Pre-KUBE Era (1964--1981)}
+93.3 FM signed on May 6, 1964 as KBLE-FM, owned by Eastside Broadcasting alongside AM sister KNBX (1050 AM). Initial format was Christian radio at 6,600 watts ERP. The AM carried country; within a few years formats swapped: KBLE-FM played country while the AM took on the KBLE call sign and went religious. Power increased to 20,000 watts with the transmitter relocated to Cougar Mountain in Issaquah. In the 1970s, Ostrander-Wilson acquired both stations and returned the religious format to FM. By the early 1980s, KBLE-FM was carrying religious programming including Dave Ballard's ``Reflections'' program.
+
+\subsubsection{The New 93 / KUBE Launch (1981--1982)}
+On March 17, 1981, First Media purchased KBLE-FM and flipped it to an automated Top 40 format identified on-air as ``The New 93'' while building new studios. On July 8, 1981, at 5:04 PM, the station launched with live DJs. The station promised \$10,000 to anyone who caught them playing fewer than 51 minutes of music per hour. Call letters changed to KUBE on April 2, 1982, becoming ``KUBE 93 FM.'' Power was eventually increased to approximately 98--100 kW ERP (Class C1), making it one of the most powerful FM signals in the Seattle market.
+
+\textbf{Technical detail from RadioDiscussions:} The station used a Blue Optimod 8100 audio processor (blue faceplate because it was purchased through Broadcast Electronics). A CRL processor and Harris stereo generator were the main audio chain. The CRL included a pop/click filter to remove record noise from cart dubbing --- a filter that had to be bypassed when hip-hop entered the rotation.
+
+\subsubsection{Signal Specifications}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XXX}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{KBLE-FM (1964)} & \tableheader{KUBE (1982+)} & \tableheader{KJR-FM (2022+)} \\
+\midrule
+Frequency & 93.3 MHz & 93.3 MHz & 93.3 MHz \\
+ERP & 6,600 W & $\sim$98--100 kW & $\sim$98--100 kW \\
+Class & --- & C1 & C1 \\
+Transmitter & Seattle & Cougar Mountain & Cougar Mountain \\
+Coverage & Limited Seattle & Olympia to Mt. Vernon & Olympia to Mt. Vernon \\
+HD Radio & N/A & Yes (2006+) & Yes \\
+Owner & Eastside Bcstg. & First Media $\rightarrow$ iHeart & iHeartMedia \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: The People --- Biographical Reference}
+
+\subsubsection{Nasty Nes Rodriguez (1962--2025)}
+Born in the Philippines, immigrated to the United States in 1970, settling in Seattle. By 1980--1981, Rodriguez was hosting FreshTracks on KKFX 1250 AM (``KFOX''), a Sunday night show featuring live mixing and scratching on two turntables --- completely new to Seattle radio, and recognized as the West Coast's first dedicated hip-hop show. He introduced the ``Mastermix,'' a 30-minute nonstop blend pulling from hip-hop, Kraftwerk, Hall and Oates, and Egyptian Lover, following the eclectic tradition of Afrika Bambaataa.
+
+In 1984, Rodriguez investigated parties at the Boys \& Girls Club in the Central District where Sir Mix-A-Lot was packing the gym for a dollar per person. The partnership led to NastyMix Records (founded 1985 with Mix-A-Lot, Ed Locke, and Greg Jones). Rodriguez later hosted ``Rap Attack'' on KCMU (precursor to KEXP's ``Street Sounds'') and ``Hotmix'' on KUBE 93. He left Seattle for Los Angeles in 1997 to become rap editor at HITS magazine. Rodriguez experienced severe health problems in late 2024 (heart attack, pneumonia, kidney failure) and died February 15, 2025, in Los Angeles at age 62. He was described by DJ B-Mello as ``like a godfather of Northwest hip-hop.''
+
+\subsubsection{Sir Mix-A-Lot (Anthony Ray, b. 1963)}
+Born August 12, 1963, in Auburn, Washington; grew up in Seattle's Central District (Bryant Manor apartments, 19th Ave and East Yesler Way). Attended Roosevelt High School via Seattle's busing integration program. Began DJing at community centers; by 1983 was playing weekends at the Rainier Vista Boys \& Girls Club. Founded NastyMix Records with Nasty Nes, Ed Locke, and Greg Jones. ``Square Dance Rap'' EP (1985) sold over 45,000 copies independently. ``Baby Got Back'' (1992, Def American) reached \#1 on the Billboard Hot 100, won Grammy for Best Rap Solo Performance. Collaborated with Mudhoney on the ``Judgment Night'' soundtrack (1993). Hosted mornings on Hot 103.7 FM (2017--2019). Performed with the Seattle Symphony in 2014.
+
+\subsubsection{The T-Man Show (1995--2009)}
+Robert ``The T-Man'' Tepper hosted KUBE's morning show for 14 years, marketing himself using only his voice (never revealing his face publicly as part of his persona). Co-hosts included Pasty Dave (producer), Hot Shot Scott, Jimmy Shapiro, Stephen Kilbreath, Vinnie The Pooh, and Tari Free. The T-Man retired in September 2009 to become a professional poker player. Earlier morning team (1981--1995): Charlie Brown (formerly of KJR), Ty Flint (formerly of KVI), and Mary White.
+
+\subsubsection{Other Key Figures}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role} & \tableheader{Significance} \\
+\midrule
+Eric Powers & PD / on-air & Long-time program director; left in 2016 shuffle \\
+DJ B-Mello & DJ / ``Street Sounds'' & Mentored by Nes; KUBE presence through 2000s \\
+Charlie Brown & Morning host & Drove KUBE's initial Top 40 success (1981--1995) \\
+Michael O'Shea & General Manager & Launched ``The New 93'' with \$10K music guarantee \\
+Eric Rosado & Afternoon DJ & Announced KUBE's 2018 comeback on-air \\
+Rich Moore & iHeart VP Programming & Oversaw 2018 return decision \\
+Emerald Street Boys & Rap group & Seattle's first rap group (Captain Crunch, MC Sweet J, MC Sugar Bear) \\
+Kid Sensation & Rapper & Early Seattle rapper associated with NastyMix era \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: The Hip-Hop Era Reference}
+
+\subsubsection{The 1991 Shift}
+In November 1991, KUBE transitioned from mainstream Top 40 to rhythmic contemporary as ``KUBE 93 Jams.'' This followed the success of KPWR (Power 106) in Los Angeles and KSFM in Sacramento, which demonstrated that rhythmic CHR could dominate markets even without established R\&B radio heritage. Six months after the shift, Sir Mix-A-Lot's ``Baby Got Back'' went to \#1 nationally. KUBE's influence extended through the PNW: from Spokane to Boise, R\&B and hip-hop became the dominant pop music, with rhythmic Top 40 as the default format for the region.
+
+A radio industry analyst later wrote that KUBE's success was among the most compelling evidence that hip-hop had not merely infiltrated pop music but superseded it --- even more so than KMEL San Francisco or Hot 97 New York.
+
+\subsubsection{The Central District Ecosystem}
+Seattle's Central District (``The CD'') was the traditional African-American neighborhood and the geographic anchor for the city's hip-hop scene. Community venues included the Rotary Boys \& Girls Club (where Mix-A-Lot performed), RCKCNDY (booked by Tasty Shows' Caroline Davenport, opened to hip-hop in 1993), and the Power Plant on Western Ave. Breakdance crews (Silver Chain Gang, Circuit Breakers, Breaking Mechanism) and graffiti writers (Spaide, Streak, DadOne) formed parallel cultural tracks. Military personnel from Tacoma-area bases provided early audience foundation for hip-hop in the region.
+
+\subsubsection{The 1994 Experiment}
+In March 1994, following a Ballard High School shooting that some linked to hip-hop culture, KUBE shifted to a hybrid rhythmic/modern rock format as simply ``KUBE 93'' with slogans ``Seattle's New Music Revolution'' and ``Channel X.'' The experiment was short-lived; the station had tried to combine rhythmic and alternative audiences, two groups with minimal overlap in the mid-1990s. KUBE eventually returned to full rhythmic contemporary.
+
+\subsection{Module 4: The Corporate Era Reference}
+
+\subsubsection{Ownership Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Years} & \tableheader{Owner} & \tableheader{Key Actions} \\
+\midrule
+1964--1981 & Eastside Broadcasting $\rightarrow$ Ostrander-Wilson & Religious/country format \\
+1981--1994 & First Media $\rightarrow$ Cook Inlet & Launched Top 40; sold to New Century \\
+1994--2001 & New Century / Ackerley & Rhythmic CHR era \\
+2001--present & Clear Channel $\rightarrow$ iHeartMedia & Multiple format changes; KUBE to HD2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Three Exiles}
+
+\textbf{Exile 1 (January 2016):} As part of a four-station realignment, iHeart moved KUBE's format to 104.9 FM (KKBW), a lower-power signal targeting Tacoma that could not reach much of Seattle or the Eastside. 93.3 became ``Power 93.3'' (mainstream CHR). First song on Power: ``Sorry'' by Justin Bieber. Last song on KUBE: ``Whatever You Like'' by T.I.
+
+\textbf{Return (May 2018):} iHeart reversed the move, relaunching KUBE 93.3. First song: ``Nice for What'' by Drake. Positioned as ``Seattle's \#1 for Hip Hop \& Throwbacks.'' The 14,000-songs-without-commercials launch stunt signaled the brand's perceived value.
+
+\textbf{Exile 2 (February 2022):} KUBE dropped hip-hop at midnight on February 19; began simulcasting CHR sister KBKS. On March 8, the frequency flipped to a simulcast of KJR sports talk, accelerated to capitalize on the Russell Wilson--to--Denver trade breaking that day. KUBE call letters moved to a station in Pueblo, Colorado. The hip-hop format was relegated to HD2 and iHeartRadio streaming.
+
+\subsubsection{The HD2 Afterlife}
+KUBE's HD2 sub-channel has cycled through formats: ``KUBE 2'' hip-hop (2006), ``WiLD'' rhythmic (2009), ``Kids Club Radio,'' ``KUBE 93 HD2'' rhythmic CHR (2017--2018), classic hip-hop, Pride Radio (2019), and currently ``KUBE 93.3'' hip-hop (since February 2022). The HD2 channel requires either an HD Radio receiver or the iHeartRadio app --- effectively limiting the audience to those who actively seek it, rather than the passive discovery that made FM radio culturally powerful.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Mitigation} & \tableheader{Priority} \\
+\midrule
+Filipino-American identity & Attribute Nasty Nes's background with specificity; he self-identified as ``the Crazy Pinoy'' & High \\
+Central District gentrification & Note the CD's role without romanticizing displacement & High \\
+1994 shooting context & Present factual context; avoid causal claims about hip-hop and violence & High \\
+Corporate critique & Document iHeart decisions factually; avoid polemic & Medium \\
+Living individuals & Verify current status of named figures before publication & Medium \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: KJR-FM --- extensively sourced article with 50+ references
+\item HistoryLink.org: ``Seattle's underground hip-hop scene breaks out'' (File \#9778)
+\item Washington Humanities: ``How the Northwest Shocked the Hip-Hop World'' (2022)
+\item 206 Zulu: ``Rap Attack Lives: The Legacy of Nasty Nes'' (2025)
+\end{itemize}
+
+\subsubsection{Journalism}
+\begin{itemize}[leftmargin=2em]
+\item Seattle Times: ``KUBE 93.3, Seattle's longtime hip-hop station, is back'' (May 4, 2018)
+\item Seattle Times: ``Community rallies around Seattle music producer'' (November 27, 2024)
+\item Yakima Herald: ``Nasty Nes, Seattle rap pioneer, dies at 62'' (February 20, 2025)
+\item KIRO 7: ``KUBE 93 changes format, Eric Powers leaves'' (2019 retrospective)
+\end{itemize}
+
+\subsubsection{Industry}
+\begin{itemize}[leftmargin=2em]
+\item RadioInsight: ``When Hip-Hop Ruled Seattle Radio'' (March 1, 2022)
+\item RadioInsight: ``KUBE Makes Flip To KJR Simulcast'' (March 8, 2022)
+\item Inside Radio: ``Seattle's KUBE Bumped From 93.3 Signal'' (February 22, 2022)
+\item RAMP 247: ``KUBE Has Left The Building... Again'' (February 21, 2022)
+\item RadioDiscussions.com: ``KUBE-FM in the beginning'' (2024, first-person engineer accounts)
+\end{itemize}
+
+\subsubsection{Books}
+\begin{itemize}[leftmargin=2em]
+\item Ben Camp (Novocaine132): ``The Birth of Seattle Rap'' (Arcadia Publishing/History Press, 2025)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Mission Objective:}{Produce a comprehensive cultural-technical history of 93.3 FM Seattle, documenting the frequency's complete arc from 1964 religious broadcasting through its role as PNW hip-hop infrastructure to its 2022 format change, with particular attention to Nasty Nes Rodriguez's legacy and the relationship between radio infrastructure and cultural formation.}
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0 (Sequential)          Wave 1 (Parallel x2)
+  +------------------+    +----------------------------+
+  | Shared schemas   |    | Track A: Infrastructure    |
+  | Source index     |--->|          + People           |
+  | Timeline draft   |    | Track B: Hip-Hop Era       |
+  +------------------+    |          + Corporate Era    |
+                          +------------+---------------+
+                                       |
+                          Wave 2 (Sequential)
+                          +----------------------------+
+                          | Cross-module synthesis     |
+                          | Through-line narrative     |
+                          +------------+---------------+
+                                       |
+                          Wave 3 (Sequential)
+                          +----------------------------+
+                          | Publication assembly       |
+                          | Verification pass          |
+                          +----------------------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Format Timeline & Every call letter/format change 1964--2026 with dates and sources & D-01 \\
+2 & Technical Profile & Signal specs, transmitter history, coverage analysis & D-01 \\
+3 & Nasty Nes Biography & Immigration through 2025 death with named sources & D-02 \\
+4 & People Profiles & 8+ named individuals with roles and contributions & D-02 \\
+5 & Hip-Hop Formation & KUBE's role in PNW hip-hop with national context & D-03 \\
+6 & Corporate Analysis & Ownership chain and format decision mechanics & D-04 \\
+7 & Synthesis Narrative & Infrastructure-as-culture argument with evidence & D-SYN \\
+8 & Verified PDF & Compiled, cross-referenced, source-validated final & D-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis narrative, through-line, cultural sensitivity analysis, Nasty Nes biography \\
+Sonnet & 60\% & Infrastructure timeline, people profiles, hip-hop era survey, corporate analysis \\
+Haiku & 10\% & Shared schemas, source index, template scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Tracks} & \tableheader{Tasks} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & 1 (sequential) & 2 & 1 \\
+1 & Parallel Research & 2 (parallel) & 4 & 4 \\
+2 & Synthesis & 1 (sequential) & 2 & 3 \\
+3 & Publication & 1 (sequential) & 2 & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All claims attributed to named sources (journalism, industry publications, named participants) \\
+SC-IND & Specific attribution & Filipino-American identity attributed specifically (not generic ``Asian-American''); Central District named, not generic ``Black neighborhood'' \\
+SC-ADV & No advocacy & Corporate decisions documented factually without editorial advocacy \\
+SC-LIV & Living individuals & All claims about living persons verified against recent sources \\
+SC-VIO & Violence context & 1994 Ballard shooting presented as factual context without causal claims about hip-hop \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; source prioritization \\
+SCOUT & Research Agent & Source gathering; archive retrieval \\
+EXEC-A & Executor (Infra) & Infrastructure + people document production \\
+EXEC-B & Executor (Culture) & Hip-hop era + corporate era production \\
+CRAFT-HIST & History Specialist & Timeline accuracy; cross-referencing dates \\
+CRAFT-CULT & Cultural Specialist & Sensitivity review; community context \\
+VERIFY & Verification & Source validation; fact-checking \\
+INTEG & Integration Agent & Cross-module narrative consistency \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking \\
+LOG & Chronicle Agent & Commit messages; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 10 \\
+Parallel tracks & 2 (max, Wave 1) \\
+Sequential depth & 4 waves \\
+Opus / Sonnet / Haiku & 30\% / 60\% / 10\% \\
+Estimated context windows & 10 \\
+Estimated sessions & $\sim$4 \\
+Estimated wall time & $\sim$5 hours \\
+Total tests & 30 (5 safety-critical) \\
+Target coverage & 85\%+ \\
+Activation profile & Squadron (12 roles) \\
+Total token budget & $\sim$100K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``He would give you these little history lessons on the radio and so you started to understand that the people that created this new genre were just like us.''}
+
+\vspace{0.5em}
+
+--- Sir Mix-A-Lot, on Nasty Nes Rodriguez
+
+\vspace{0.5em}
+
+A frequency is a commons. What you build on it --- what community forms around it, what culture propagates through it, what identity crystallizes within it --- is the architecture that matters. Not the transmitter on the mountain. Not the call letters on the FCC filing. The spaces between the songs. The spaces between the people. The spaces between the cities that the signal reaches.
+
+That is what was built on 93.3 MHz in Seattle. That is what was lost. That is what persists.
+\end{quotebox}
+
+\end{document}
