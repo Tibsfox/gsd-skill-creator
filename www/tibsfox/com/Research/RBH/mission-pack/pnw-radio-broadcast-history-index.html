@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voices from the Fir Trees — PNW Radio Broadcast History Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #F57F17;
+    --tertiary: #4E342E;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #F0EBE3;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--primary) 0%, #6A1B9A 100%); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; margin-bottom: 0.3rem; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--secondary); margin-top: 1rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s; display: block; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.15); }
+  .card .filetype { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .filename { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem; }
+  .card .desc { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.3rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--tertiary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .stage-tag { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.15rem 0.5rem; border-radius: 3px; display: inline-block; margin-right: 0.3rem; }
+  .s1 { background: var(--light-primary); color: var(--primary); }
+  .s2 { background: var(--light-secondary); color: #E65100; }
+  .s3 { background: #EFEBE9; color: var(--tertiary); }
+  .quote { background: var(--light-primary); border-left: 4px solid var(--primary); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; font-size: 0.95rem; }
+  code { font-family: 'DM Sans', monospace; background: #EEEEEE; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.85rem; }
+  .meta { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--subtle); text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E0E0E0; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } .header h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="subtitle">GSD Research Mission Package</div>
+  <h1>Voices from the Fir Trees</h1>
+  <div class="subtitle">A Complete History of PNW Radio Broadcasting, 1915–Present</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <div class="filetype">📄 PDF Document</div>
+      <div class="filename">mission.pdf</div>
+      <div class="desc">Complete three-stage mission package — 27 pages, print-ready</div>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <div class="filetype">📝 LaTeX Source</div>
+      <div class="filename">mission.tex</div>
+      <div class="desc">Editable XeLaTeX source for modification and recompilation</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3><span class="stage-tag s1">Stage 1</span> Vision Document</h3>
+  <ul>
+    <li>Narrative vision connecting PNW radio history to the Amiga Principle</li>
+    <li>5-point problem statement addressing fragmented records, underappreciated significance, and vanishing sources</li>
+    <li>6 research modules spanning 1915 to present</li>
+    <li>12 testable success criteria</li>
+    <li>Study region map and module architecture diagrams</li>
+  </ul>
+
+  <h3><span class="stage-tag s2">Stage 2</span> Research Reference</h3>
+  <ul>
+    <li>Module 1: Pioneers & Spark — experimental wireless through first licensed stations (1915–1929)</li>
+    <li>Module 2: Golden Age & War — Hoot Owls, Mel Blanc, Edward R. Murrow, network era (1929–1945)</li>
+    <li>Module 3: Media Empires & FM — Dorothy Bullitt, King Broadcasting, FM revolution (1945–1962)</li>
+    <li>Module 4: Community & Counterculture — KRAB, KBOO, Lorenzo Milam, KRAB Nebula (1962–1984)</li>
+    <li>Module 5: College Radio & Grunge — KCMU/KEXP, Sub Pop, Nirvana, digital transformation (1972–2001)</li>
+    <li>Module 6: Public Broadcasting & Digital — NWPB, internet streaming, KING-FM nonprofit (1986–present)</li>
+    <li>Source bibliography: 7 institutional sources, 10+ professional histories, 3 university collections</li>
+  </ul>
+
+  <h3><span class="stage-tag s3">Stage 3</span> Mission Package</h3>
+  <ul>
+    <li>Fleet activation profile — 18 crew roles, 2 parallel tracks</li>
+    <li>4-wave execution plan with 18–22 context windows across 6 sessions</li>
+    <li>108K total token budget (Opus 35% / Sonnet 58% / Haiku 7%)</li>
+    <li>36 tests across 4 categories (6 safety-critical, 16 core, 8 integration, 6 edge)</li>
+    <li>Full dependency graph and cache optimization strategy</li>
+  </ul>
+
+  <h2>Usage Instructions</h2>
+  <ol>
+    <li>Feed <code>mission.pdf</code> to <code>gsd-skill-creator</code> as the mission specification</li>
+    <li>The orchestrator reads the wave execution plan and assigns agents per the crew manifest</li>
+    <li>Wave 0 produces shared schemas; Wave 1 runs two parallel research tracks</li>
+    <li>Wave 2 synthesizes cross-module connections; Wave 3 assembles and verifies the publication</li>
+    <li>CAPCOM checkpoints at each wave boundary require human approval before proceeding</li>
+  </ol>
+
+  <h2>Recompiling the LaTeX Source</h2>
+  <ol>
+    <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+    <li>Run three compilation passes:
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+    </li>
+    <li>Three passes resolve table of contents, cross-references, and page counts</li>
+  </ol>
+
+  <div class="quote">
+    "Radio, at its essence, is about the spaces between — between transmitter and receiver, between voice and ear, between isolation and community. In the Pacific Northwest, where mountains and water fragment geography and dense forests swallow signals, broadcasting has always been an act of bridging."
+  </div>
+
+  <div class="meta">
+    GSD Ecosystem · March 26, 2026 · History Domain · Fleet Activation
+  </div>
+
+</div>
+</body>
+</html>
