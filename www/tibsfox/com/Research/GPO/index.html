@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSD-OS GPU Orchestration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gpo">
+  <header>
+    <h1>GSD-OS GPU Orchestration</h1>
+    <div class="subtitle">CUDA Streams &middot; LoRA Adapters &middot; NVML Telemetry &middot; Hybrid Routing &middot; Silicon Governance</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-cuda-stream-orchestration">CUDA Streams</a>
+      <a href="page.html?doc=02-lora-adapter-pipeline">LoRA Pipeline</a>
+      <a href="page.html?doc=03-cuda-gl-dashboard">Dashboard</a>
+      <a href="page.html?doc=04-chipset-intent-router">Intent Router</a>
+      <a href="page.html?doc=05-hybrid-execution-protocol">Hybrid Exec</a>
+      <a href="page.html?doc=06-adapter-lifecycle-governance">Lifecycle</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga's custom chipset did not win because the 68000 was faster. It won because Agnus
+      handled DMA, Denise handled display, and Paula handled audio &mdash; each operating with
+      near-zero CPU involvement, each wired to the bus through documented register maps that
+      programmers could reach directly. The GSD Silicon Layer makes this metaphor literal:
+      skill-creator's observation pipeline maps to CUDA streams, patterns become kernel graphs,
+      adapters become persistent SM partitions, and routing decisions become stream synchronization
+      events. The chipset gets faster not because the hardware changes, but because the silicon
+      becomes more specialized to the workload.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">34</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">System Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-cuda-stream-orchestration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: CUDA Stream Orchestration</h3>
+        <div class="meta"><span class="tag tag-cuda">CUDA</span> Track A &middot; Silicon mapping</div>
+        <p>CUDA stream architecture for GSD's six pipeline stages. Kernel graphs and DAG execution. SM partitioning via persistent threads. MPS for concurrent contexts. Stream priority, preemption, and synchronization. RTX 4060 Ti profiling with Nsight Systems.</p>
+      </a>
+
+      <a href="page.html?doc=02-lora-adapter-pipeline" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: LoRA Adapter Pipeline</h3>
+        <div class="meta"><span class="tag tag-lora">LoRA</span> Track B &middot; Training pipeline</div>
+        <p>QLoRA distillation mechanics with NormalFloat4 quantization. Training pair extraction from session activity. Four-stage quality gate pipeline. VRAM budget management. Adapter hot-swap via llama-server API. Unsloth optimization on RTX 4060 Ti.</p>
+      </a>
+
+      <a href="page.html?doc=03-cuda-gl-dashboard" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: CUDA/GL Dashboard</h3>
+        <div class="meta"><span class="tag tag-dash">Dashboard</span> Track C &middot; Telemetry visualization</div>
+        <p>NVML telemetry pipeline via Rust nvml-wrapper. Filesystem event bus bridge (JSONL). WebGL shader pipeline for Denise panel. VRAM pressure heat map. Stream utilization display. Adapter activation timeline. Amiga register map parallel.</p>
+      </a>
+
+      <a href="page.html?doc=04-chipset-intent-router" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Chipset Intent Router</h3>
+        <div class="meta"><span class="tag tag-route">Router</span> Track A &middot; Classification</div>
+        <p>DistilBERT-class intent classifier (CPU-resident, 67M params). Confidence scoring with Platt scaling calibration. Stream dispatch protocol. Two-stage gate: rule-based pre-filter plus learned classifier. Fallback chain design.</p>
+      </a>
+
+      <a href="page.html?doc=05-hybrid-execution-protocol" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Hybrid Execution Protocol</h3>
+        <div class="meta"><span class="tag tag-hybrid">Hybrid</span> Track B &middot; Routing policy</div>
+        <p>Confidence model design with calibration requirements. Platt scaling and temperature scaling. Discrepancy detection via semantic similarity sampling. Continuous improvement loop. Three-signal degradation detection. Cost-benefit analysis.</p>
+      </a>
+
+      <a href="page.html?doc=06-adapter-lifecycle-governance" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Adapter Lifecycle Governance</h3>
+        <div class="meta"><span class="tag tag-gov">Governance</span> Track C &middot; Schema &amp; policy</div>
+        <p>silicon.yaml v2 schema with lifecycle extensions. Adapter versioning (semver). Three-signal staleness detection. Community adapter quarantine pipeline. Integrity verification chain (SHA-256 + chipset.lock). VRAM eviction policy. Power management.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>CUDA stream architecture</td><td>M1, M3, M4</td><td>ACE, MPC, K8S</td></tr>
+        <tr><td>Kernel graphs / DAG execution</td><td>M1, M4</td><td>GSD2, CMH</td></tr>
+        <tr><td>SM partitioning / warp scheduling</td><td>M1, M2</td><td>MPC, OCN</td></tr>
+        <tr><td>QLoRA / NormalFloat4</td><td>M2, M5, M6</td><td>MPC, GSD2</td></tr>
+        <tr><td>VRAM budget enforcement</td><td>M2, M4, M6</td><td>ACE, OCN</td></tr>
+        <tr><td>NVML telemetry</td><td>M1, M3, M6</td><td>SYS, ACE</td></tr>
+        <tr><td>WebGL shader pipeline</td><td>M3</td><td>SGL, GSD2</td></tr>
+        <tr><td>Intent classification</td><td>M4, M5</td><td>GSD2, CMH</td></tr>
+        <tr><td>Confidence calibration (Platt/Brier)</td><td>M4, M5</td><td>MPC, MCF</td></tr>
+        <tr><td>Adapter hot-swap</td><td>M2, M4, M6</td><td>K8S, ACE</td></tr>
+        <tr><td>Staleness detection</td><td>M5, M6</td><td>GSD2, SYS</td></tr>
+        <tr><td>Community quarantine</td><td>M6</td><td>K8S, MCF</td></tr>
+        <tr><td>silicon.yaml schema</td><td>M1, M2, M5, M6</td><td>GSD2, CMH</td></tr>
+        <tr><td>RTX 4060 Ti profiling</td><td>M1, M2, M3</td><td>MPC, OCN</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+GSD-OS GPU ORCHESTRATION -- DOMAIN MAP
+===============================================================
+
+  SKILL-CREATOR PIPELINE       ORCHESTRATION LAYER        GPU EXECUTION
+  +-------------------+       +-------------------+     +-------------------+
+  | Observe           |       | Stream Manager    |     | CUDA Stream 0-5   |
+  | Detect            |------&gt;| Intent Router     |----&gt;| Kernel Graphs     |
+  | Suggest           |       | Confidence Gate   |     | SM Partitions     |
+  | Apply             |       | VRAM Budget       |     | MPS Contexts      |
+  | Learn             |       | Adapter Hot-Swap  |     | Persistent Threads|
+  | Compose           |       | Lifecycle Manager |     | Warp Schedulers   |
+  +-------------------+       +-------------------+     +-------------------+
+        |                           |                         |
+        v                           v                         v
+  +-------------------+       +-------------------+     +-------------------+
+  | SessionObserver   |       | Hybrid Router     |     | NVML Telemetry    |
+  | PatternDetector   |       | Cloud/Local Gate  |     | Power Management  |
+  | SkillProposer     |       | Discrepancy Log   |     | Thermal Monitor   |
+  | Training Pairs    |       | Staleness Monitor |     | Nsight Profiling  |
+  +-------------------+       +-------------------+     +-------------------+
+        |                           |                         |
+        +---------------------------+-------------------------+
+                                    |
+                        +-----------+-----------+
+                        |   DENISE DASHBOARD    |
+                        |                       |
+                        |  VRAM Heat Map        |
+                        |  Stream Utilization   |
+                        |  Adapter Timeline     |
+                        |  Thermal Alerts       |
+                        |  Register Map         |
+                        +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: CUDA Streams] -----------&gt; [M4: Intent Router]
+         |                                |
+         |                                |
+         v                                v
+  [M2: LoRA Pipeline] ----&gt; [M5: Hybrid Execution]
+                                          |
+                                          v
+                              [M3: CUDA/GL Dashboard]
+                                          |
+                                          v
+                              [M6: Adapter Lifecycle]
+
+  Parallel tracks:
+    Track A: M1 + M4 (silicon mapping + routing)
+    Track B: M2 + M5 (training pipeline + hybrid policy)
+    Track C: M3 + M6 (dashboard + governance)
+    </pre>
+  </main>
+
+  <footer>
+    <p>GSD-OS GPU Orchestration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
