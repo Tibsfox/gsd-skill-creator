@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maritime Platform Cost Model &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mcs">
+  <header>
+    <h1>Maritime Platform Cost Model</h1>
+    <div class="subtitle">Vessel OPEX/CAPEX &middot; Port Infrastructure &middot; Subsea Cable &middot; PNW Ports &middot; Fuel Transition &middot; Platform Economics</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-compute-cost-analysis">Compute Costs</a>
+      <a href="page.html?doc=02-energy-infrastructure">Energy Infrastructure</a>
+      <a href="page.html?doc=03-maritime-transport-economics">Transport Economics</a>
+      <a href="page.html?doc=04-convergence-credits">Convergence Credits</a>
+      <a href="page.html?doc=05-scenario-comparison">Scenario Comparison</a>
+      <a href="page.html?doc=06-sensitivity-risk-analysis">Risk Analysis</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The spaces between nodes are where the money lives. Individual cost data for a maritime
+      compute platform exists in scattered form: Norway's subsea tunnel concepts, subsea power
+      cables, shore-based data centers, Korean-yard container vessels. What does not yet exist
+      is a model that shows what these numbers become when they converge &mdash; when the same cable
+      serves both power delivery and data transport, when the same vessel hull doubles as a
+      compute chassis and a coolant heat exchanger, when port infrastructure serves both cargo
+      and maintenance operations. The question is not whether the architecture is elegant. The
+      question is what it costs to build the Amiga at sea.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">42</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Deployment Scales</span></div>
+      <div class="stat"><span class="stat-value">30+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">16</span><span class="stat-label">Fleet Roles</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-compute-cost-analysis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Compute Cost Analysis</h3>
+        <div class="meta"><span class="tag tag-compute">Compute</span> Track A &middot; Marine DC economics</div>
+        <p>Shore-based data center benchmarks ($10-12M/MW general, $20M+ AI-optimized). Marine deployment premium (+30-50%). Ocean cooling credit ($1-2M/MW saved). Container DC construction. AI vs. standard compute density implications.</p>
+      </a>
+
+      <a href="page.html?doc=02-energy-infrastructure" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Energy Infrastructure Costs</h3>
+        <div class="meta"><span class="tag tag-energy">Energy</span> Track A &middot; Wind, cable, hydro</div>
+        <p>Floating offshore wind CAPEX ($4,000+/kW). Fixed offshore ($2,852/kW IRENA 2024). Subsea power cable costs ($0.5-5M/km). HVAC vs. HVDC break-even distance. BPA hydro baseline ($0.02/kWh Grand Coulee). Grid interconnect costs.</p>
+      </a>
+
+      <a href="page.html?doc=03-maritime-transport-economics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Maritime Transport Economics</h3>
+        <div class="meta"><span class="tag tag-transport">Transport</span> Track B &middot; Vessel economics</div>
+        <p>Vessel acquisition by scale ($15-200M+). Annual operating costs: crew ($2-5M/yr), fuel ($3-10M/yr), insurance, maintenance. Autonomous vessel economics and shore control. PNW port infrastructure: Seattle, Tacoma, Portland.</p>
+      </a>
+
+      <a href="page.html?doc=04-convergence-credits" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Convergence Credit Model</h3>
+        <div class="meta"><span class="tag tag-credit">Credits</span> Track B &middot; Integration economics</div>
+        <p>Five convergence credits quantified: ocean cooling (C1), cable bundle dual-use (C2), vessel hull co-location (C3), shared port logistics (C4), BPA hydro power advantage (C5). Net 18-28% CAPEX reduction at regional scale.</p>
+      </a>
+
+      <a href="page.html?doc=05-scenario-comparison" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Scenario Comparison</h3>
+        <div class="meta"><span class="tag tag-analysis">Analysis</span> Synthesis &middot; Three scales</div>
+        <p>Three deployment scales with full CAPEX/OPEX/NPV analysis: Prototype (5 MW, 1 vessel, 50km cable), Regional (100 MW, 5 vessels, 300km spine), Full Corridor (500 MW, 20+ vessels, BC-to-Chile). Cost per MW-hour of compute delivered.</p>
+      </a>
+
+      <a href="page.html?doc=06-sensitivity-risk-analysis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Sensitivity &amp; Risk Analysis</h3>
+        <div class="meta"><span class="tag tag-risk">Risk</span> Synthesis &middot; NPV and sensitivity</div>
+        <p>Top-5 cost driver sensitivity analysis. 20-year NPV at 5%, 8%, 12% discount rates. Steel price swings, cable vessel day rates, wind CAPEX trajectory, regulatory risk premiums. Risk-adjusted returns across all scenarios.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Offshore data center CAPEX/OPEX</td><td>M1, M4, M5</td><td>MCM, NND, HGE</td></tr>
+        <tr><td>Subsea cable cost modeling</td><td>M2, M4, M5</td><td>OCN, ROF, NND</td></tr>
+        <tr><td>Offshore wind economics</td><td>M2, M5, M6</td><td>THE, ACC, HGE</td></tr>
+        <tr><td>Vessel operating costs</td><td>M3, M5, M6</td><td>OCN, WSB, ROF</td></tr>
+        <tr><td>BPA hydro power economics</td><td>M2, M4, M5</td><td>THE, HGE, ACC</td></tr>
+        <tr><td>Convergence credit methodology</td><td>M4, M5, M6</td><td>MCM, NND, ACC</td></tr>
+        <tr><td>Autonomous vessel economics</td><td>M3, M6</td><td>ROF, OCN, NND</td></tr>
+        <tr><td>Container shipping rates</td><td>M3, M5</td><td>WSB, OCN</td></tr>
+        <tr><td>PNW port infrastructure</td><td>M3, M4</td><td>OCN, THE, WSB</td></tr>
+        <tr><td>LNG/hydrogen fuel transition</td><td>M3, M6</td><td>THE, ACC, HGE</td></tr>
+        <tr><td>Marine insurance and regulatory</td><td>M3, M6</td><td>ROF, WSB, ACC</td></tr>
+        <tr><td>NPV and risk modeling</td><td>M5, M6</td><td>MCM, ACC, HGE</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+MARITIME PLATFORM COST ARCHITECTURE
+===============================================================
+
+     OFFSHORE GENERATION         SUBSEA SPINE          SHORE ANCHOR
+     +-----------------+     +---------------+     +----------------+
+     | Floating Wind   |-----| Power + Data  |-----| Electric City  |
+     | $2,852/kW (fix) |     | Cable Bundle  |     | $0.02/kWh BPA  |
+     | $4,000+/kW (flt)|     | $0.5-5M/km   |     | Grand Coulee   |
+     |                 |     |               |     |                |
+     | Tidal/Wave      |     | Dual-use:     |     | Columbia River |
+     | (emerging)      |     |  - Power HVDC |     | Free cooling   |
+     +-----------------+     |  - Data fiber |     +----------------+
+                             +-------+-------+
+                                     |
+              +-----------------+    |    +-----------------+
+              | Compute Node A  |----+----| Compute Node B  |
+              | Container DC    |         | Vessel-mounted  |
+              | $10-12M/MW land |         | (marine premium |
+              | +30-50% marine  |         |  offset by      |
+              |                 |         |  free cooling)  |
+              +-----------------+         +-----------------+
+                                     |
+                             +-------+-------+
+                             | Mobile Edge   |
+                             | Cargo vessels |
+                             | en-route      |
+                             | compute nodes |
+                             +---------------+
+
+CONVERGENCE CREDIT OPPORTUNITIES:
+  C1: Ocean cooling eliminates chiller CAPEX (~$1-2M/MW saved)
+  C2: Cable bundle dual-use (power + data) vs. separate runs
+  C3: Vessel hull compute: CAPEX shared with cargo function
+  C4: Port infrastructure: maintenance + logistics shared
+  C5: BPA hydro anchor: $0.02/kWh vs $0.12 US average
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  F-0 Foundation (Cost Taxonomy)
+   |
+   +----&gt; [M1: Compute Costs] ------\
+   |                                  \
+   +----&gt; [M2: Energy Infrastructure] --&gt; [M5: Scenario Comparison]
+   |                                  /         |
+   +----&gt; [M3: Transport Economics] -/          v
+   |                                /   [M6: Sensitivity &amp; Risk]
+   +----&gt; [M4: Convergence Credits]/
+
+  Parallel tracks:
+    Track A: M1 + M2 (compute + energy)
+    Track B: M3 + M4 (transport + convergence)
+    Synthesis: M5 + M6 (scenarios + risk)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Maritime Platform Cost Model &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
