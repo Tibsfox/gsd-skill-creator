@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resonant Landscapes — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --light-secondary: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+  .header { background: linear-gradient(135deg, var(--primary), var(--tertiary)); color: white; padding: 3rem 2rem; text-align: center; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; }
+  .header .pipeline { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; margin-top: 1rem; opacity: 0.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .file-card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; text-decoration: none; color: var(--text); border: 1px solid #ddd; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); font-size: 1rem; }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.3rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1.05rem; margin: 1.2rem 0 0.5rem; }
+  .contents { background: var(--light-primary); border-left: 3px solid var(--primary); padding: 1.2rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .contents li { margin: 0.3rem 0; font-size: 0.95rem; }
+  ol.instructions { padding-left: 1.5rem; }
+  ol.instructions li { margin: 0.5rem 0; font-size: 0.95rem; }
+  .quote { background: var(--light-primary); border: 1px solid var(--accent); border-radius: 6px; padding: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--tertiary); }
+  .meta { font-family: 'DM Sans', sans-serif; color: var(--subtle); font-size: 0.85rem; text-align: center; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd; }
+  @media (max-width: 600px) { .files { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Resonant Landscapes</h1>
+  <div class="subtitle">The Spaces Between Sound and Silence</div>
+  <div class="subtitle">Pacific Northwest to the Crystal Monastery</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <h2>Mission Package Files</h2>
+  <div class="files">
+    <a class="file-card" href="resonant-landscapes-mission.pdf" download>
+      <div class="icon">📄</div>
+      <div class="name">Mission Package (PDF)</div>
+      <div class="desc">25-page complete pipeline — Vision, Research Reference, and Mission Package</div>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">LaTeX Source (.tex)</div>
+      <div class="desc">Editable XeLaTeX source for recompilation and modification</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <h3>Stage 1 — Vision Document</h3>
+    <ul>
+      <li>Vision narrative: wind-driven sculpture to crystal monastery</li>
+      <li>5 problem statements spanning fragmented knowledge to contemplative literature</li>
+      <li>6 research modules: Sound & Sculpture, Parks Hierarchy, Alpine Wilderness, Olympic Coast, Islands & Salish Sea, Northern Journeys & Contemplation</li>
+      <li>12 testable success criteria</li>
+      <li>Chipset configuration (Agnus/Denise/Paula/68000)</li>
+    </ul>
+    <h3>Stage 2 — Research Reference</h3>
+    <ul>
+      <li>Douglas Hollis's aeolian sculpture and the NOAA Art Walk</li>
+      <li>Soundgarden: formation (1984) through Rock Hall induction (2025)</li>
+      <li>Minoru Yamasaki and the Pacific Science Center (1962 World's Fair)</li>
+      <li>Glacier Peak Wilderness: Spider Meadow, Image Lake, Lyman Lakes loop</li>
+      <li>Olympic coast: Rialto Beach to Ozette, Chilean/Norwegian Memorials</li>
+      <li>Ozette archaeological site: 55,000 Makah artifacts, 11-year excavation</li>
+      <li>Lake Ozette canoeing and the Ozette Loop</li>
+      <li>Mount Constitution and Moran State Park (CCC tower, 1936)</li>
+      <li>Sitka: Sheldon Jackson (1834–1909), Tlingit cultural impact, Mt. Edgecumbe</li>
+      <li>Matthiessen's <em>The Snow Leopard</em>: Crystal Monastery, sacred absence</li>
+      <li>Complete source bibliography</li>
+    </ul>
+    <h3>Stage 3 — Mission Package</h3>
+    <ul>
+      <li>Fleet activation profile (18 roles, 3 CRAFT specialists)</li>
+      <li>4-wave execution plan with 3 parallel tracks</li>
+      <li>29 tests across 4 categories (7 safety-critical / BLOCK)</li>
+      <li>Verification matrix mapping all 12 success criteria</li>
+      <li>Token budget: ~71,000 across 11–14 context windows</li>
+    </ul>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <ol class="instructions">
+    <li>Feed the PDF to the GSD skill-creator orchestrator as a mission package</li>
+    <li>The orchestrator reads Stage 3 to configure waves, agents, and parallel tracks</li>
+    <li>Agents reference Stage 2 for sourced research data during execution</li>
+    <li>Stage 1 provides the vision narrative and success criteria for verification</li>
+    <li>CAPCOM gates at wave boundaries enable human review</li>
+  </ol>
+
+  <h2>LaTeX Recompilation</h2>
+  <ol class="instructions">
+    <li>Ensure XeLaTeX is installed with DejaVu fonts (standard on Ubuntu)</li>
+    <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+    <li>Three passes required for TOC, cross-references, and page count</li>
+  </ol>
+
+  <div class="quote">
+    "Have you seen the snow leopard?" "No! Isn't that wonderful!" — The wind plays through twelve steel pipes on the shore of Lake Washington. It plays through Spider Meadow at dawn and through Hole in the Wall at low tide. The spaces between the sounds are where we live.
+  </div>
+
+  <div class="meta">
+    GSD Research Mission Package · March 26, 2026 · Fleet Profile · 6 Modules<br>
+    Resonant Landscapes: The Spaces Between Sound and Silence
+  </div>
+
+</div>
+</body>
+</html>
