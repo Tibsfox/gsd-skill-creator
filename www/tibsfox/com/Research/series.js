@@ -3,6 +3,7 @@
 (function() {
   var projects = [
     { id: 'ACC', name: 'Accounting', path: 'ACC/index.html' },
+    { id: 'ACE', name: 'Compute Engine', path: 'ACE/index.html' },
     { id: 'AGR', name: 'PNW Agriculture', path: 'AGR/index.html' },
     { id: 'ARC', name: 'Shapes & Colors', path: 'ARC/index.html' },
     { id: 'ATC', name: 'Aries-Taurus Cusp', path: 'ATC/index.html' },
@@ -47,6 +48,7 @@
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'MCM', name: 'Maritime Compute', path: 'MCM/index.html' },
+    { id: 'MCF', name: 'Multi-Cluster Fed.', path: 'MCF/index.html' },
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
     { id: 'MWC', name: 'Millwork Co-op', path: 'MWC/index.html' },
     { id: 'MIX', name: 'Sir Mix-A-Lot', path: 'MIX/index.html' },
@@ -61,6 +63,7 @@
     { id: 'PMG', name: 'Pi-Mono + GSD', path: 'PMG/index.html' },
     { id: 'PPM', name: 'Pike Place Market', path: 'PPM/index.html' },
     { id: 'PSG', name: 'Pacific Spine', path: 'PSG/index.html' },
+    { id: 'PSS', name: 'PNW Signal Stack', path: 'PSS/index.html' },
     { id: 'RBH', name: 'Radio History', path: 'RBH/index.html' },
     { id: 'RLS', name: 'Resonant Lands', path: 'RLS/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
@@ -71,6 +74,7 @@
     { id: 'SSM', name: 'Street Music', path: 'SSM/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
     { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },
+    { id: 'SNL', name: 'Sensing Layer', path: 'SNL/index.html' },
     { id: 'SNY', name: 'Sonic Youth', path: 'SNY/index.html' },
     { id: 'SYN', name: 'Synsor Corp', path: 'SYN/index.html' },
     { id: 'SPA', name: 'Spatial Awareness', path: 'SPA/index.html' },
