@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cusp of Power — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #8B1A1A;
+    --secondary: #1565C0;
+    --tertiary: #5D4037;
+    --accent: #C62828;
+    --light-primary: #FFEBEE;
+    --light-secondary: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #F0EDED;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 60%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .header small {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    margin: 0.8rem 0 0.4rem;
+    font-weight: 700;
+  }
+  .header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .header .pipeline {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    color: #FFCDD2;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--primary);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary); }
+  .card p { font-size: 0.85rem; color: var(--subtle); }
+  .card .ext { font-size: 0.75rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.5rem; }
+  h2.section-title {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  .contents { list-style: none; }
+  .contents li { padding: 0.4rem 0; font-size: 0.95rem; }
+  .contents li strong { color: var(--primary); }
+  .contents li em { color: var(--secondary); font-style: normal; font-weight: 500; }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin: 0.5rem 0; font-size: 0.9rem; }
+  .instructions code { background: white; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote-block {
+    background: var(--light-primary);
+    border-left: 4px solid var(--accent);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--tertiary);
+  }
+  .quote-block .attribution { font-style: normal; font-size: 0.8rem; margin-top: 0.5rem; color: var(--subtle); }
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>The Cusp of Power</h1>
+  <h2>Mars Meets Venus at the Threshold — Aries-Taurus Cusp Deep Research</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <h3>Mission Package (PDF)</h3>
+      <p>Complete three-stage pipeline: Vision Guide, Research Reference, and Mission Package. 29 pages.</p>
+      <div class="ext">PDF — Download</div>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <h3>LaTeX Source (.tex)</h3>
+      <p>Full XeLaTeX source for recompilation, modification, and extension. DejaVu fonts required.</p>
+      <div class="ext">TEX — Download</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">Contents</h2>
+  <ul class="contents">
+    <li><strong>Stage 1 — Vision Document</strong></li>
+    <li>→ Vision narrative: fire meets earth at the three-thousand-year threshold</li>
+    <li>→ 5 problem statements spanning fragmented knowledge, cusp controversy, and Mars-Venus synthesis</li>
+    <li>→ 5 research modules: Historical Foundations, Astronomical Mechanics, Mythology, Personality, Cusp Debate</li>
+    <li>→ 12 testable success criteria</li>
+    <li>→ Domain map and module architecture diagrams</li>
+    <li><em>&nbsp;</em></li>
+    <li><strong>Stage 2 — Research Reference</strong></li>
+    <li>→ Babylonian MUL.APIN catalogues through Ptolemy's Almagest to modern Western astrology</li>
+    <li>→ Precession mechanics: 1°/72yr, Great Year, tropical vs. sidereal zodiac systems</li>
+    <li>→ Mars-Venus mythology across Babylonian, Greek, and Roman traditions</li>
+    <li>→ Cusp of Power personality profile synthesized from 4+ major sources</li>
+    <li>→ Shadow dynamics: controlling, blunt, ego-absorbed, emotionally blind</li>
+    <li>→ Three-position debate map with named practitioners</li>
+    <li>→ Goldschneider's personology system documented</li>
+    <li>→ Full source bibliography (astronomical, mythological, personality)</li>
+    <li><em>&nbsp;</em></li>
+    <li><strong>Stage 3 — Mission Package</strong></li>
+    <li>→ Squadron activation profile (12 roles, 5 modules)</li>
+    <li>→ 4-wave execution plan with 2 parallel research tracks</li>
+    <li>→ ~59K token budget (30/60/10 Opus/Sonnet/Haiku split)</li>
+    <li>→ 28 tests across 4 categories (5 safety-critical)</li>
+    <li>→ Full verification matrix, dependency graph, crew manifest</li>
+  </ul>
+
+  <h2 class="section-title">Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF for the complete three-stage pipeline.</li>
+      <li>Hand the mission package to <code>gsd-skill-creator</code> for execution via Claude Code.</li>
+      <li>The orchestrator begins at <strong>Wave 0</strong> (Foundation), proceeding through parallel research tracks in Wave 1.</li>
+      <li>CAPCOM checkpoints occur at each wave boundary — human approval required to proceed.</li>
+      <li>Final output: a self-contained knowledge pack on the Aries-Taurus cusp suitable for the GSD BBS Educational Pack system.</li>
+    </ol>
+  </div>
+
+  <h2 class="section-title">Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Install XeLaTeX and DejaVu fonts (<code>apt install texlive-xetex fonts-dejavu</code>).</li>
+      <li>Run three compilation passes:
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+        <br><code>xelatex -interaction=nonstopmode mission.tex</code>
+      </li>
+      <li>Three passes resolve: table of contents, cross-references, page counts, and hyperlink destinations.</li>
+    </ol>
+  </div>
+
+  <div class="quote-block">
+    "The boundary is never empty. Where fire meets earth, where Mars meets Venus, where initiation becomes embodiment — the space between is where meaning lives."
+    <div class="attribution">— Mission Through-Line</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  GSD Ecosystem · March 2026 · Vision → Research → Mission
+</div>
+
+</body>
+</html>
