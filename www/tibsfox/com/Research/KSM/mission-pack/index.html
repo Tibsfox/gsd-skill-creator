@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KISM 92.9 FM — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #fafafa; color: #212121; }
+
+  .header {
+    background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 40%, #F57F17 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header small { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin: 0.8rem 0 0.4rem; }
+  .header h2 { font-weight: 400; font-size: 1.1rem; opacity: 0.9; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8; }
+
+  .container { max-width: 800px; margin: -2rem auto 3rem; padding: 0 1.5rem; }
+
+  .card {
+    background: #f3e5f5; border-radius: 10px; padding: 1.5rem 2rem;
+    margin-bottom: 1.2rem; text-decoration: none; color: #212121;
+    display: block; transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid #e1bee7;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74,20,140,0.15); }
+  .card h3 { font-size: 1.15rem; color: #4A148C; margin-bottom: 0.4rem; }
+  .card p { font-size: 0.9rem; color: #555; }
+  .card .filetype { font-size: 0.75rem; color: #6A1B9A; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.5rem; }
+
+  .section { margin-top: 2.5rem; }
+  .section h3 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: #4A148C; margin-bottom: 1rem; border-bottom: 2px solid #F57F17; padding-bottom: 0.4rem; }
+  .section ul { list-style: none; padding: 0; }
+  .section li { padding: 0.4rem 0 0.4rem 1.2rem; position: relative; font-size: 0.95rem; }
+  .section li::before { content: "→"; position: absolute; left: 0; color: #F57F17; font-weight: 700; }
+
+  .instructions { background: #FFFDE7; border-radius: 8px; padding: 1.5rem; margin-top: 2rem; border: 1px solid #FFF9C4; }
+  .instructions h4 { color: #F57F17; margin-bottom: 0.8rem; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  .instructions code { background: #fff; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; font-family: 'DejaVu Sans Mono', monospace; }
+
+  .quote {
+    background: #f3e5f5; border-left: 4px solid #4A148C; padding: 1.2rem 1.5rem;
+    margin-top: 2.5rem; border-radius: 0 8px 8px 0;
+    font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem;
+    color: #4A148C; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <small>GSD Research Mission Package</small>
+  <h1>Classic Rock 92.9 KISM</h1>
+  <h2>The Mount Constitution Signal — Bellingham, WA</h2>
+  <div class="pipeline">Vision → Research → Mission</div>
+</div>
+
+<div class="container">
+  <a class="card" href="kism-mission.pdf" download>
+    <h3>📄 Mission Package (PDF)</h3>
+    <p>Complete three-stage research mission: Vision Guide, Research Reference, and Mission Package. 25 pages, fully sourced, ready for GSD orchestrator.</p>
+    <div class="filetype">PDF — 25 pages — XeLaTeX compiled</div>
+  </a>
+
+  <a class="card" href="kism-mission.tex" download>
+    <h3>📝 LaTeX Source (.tex)</h3>
+    <p>Full source document for modification and recompilation. Requires XeLaTeX with DejaVu fonts.</p>
+    <div class="filetype">TEX — LaTeX source</div>
+  </a>
+
+  <div class="section">
+    <h3>Contents</h3>
+    <ul>
+      <li><strong>Stage 1 — Vision Document:</strong> KISM lineage from 1926 KVOS through 2026, problem statement (5 problems), module architecture, chipset configuration, 12 success criteria, ecosystem through-line</li>
+      <li><strong>Stage 2 — Research Reference:</strong> Five sourced modules covering Founding Dynasty, Technical Infrastructure, Ownership & Business, Cross-Border Signal Dynamics, and Community & Programming</li>
+      <li><strong>Stage 3 — Mission Package:</strong> Squadron activation (12 roles), 4-wave execution plan with 2 parallel tracks, 18 context windows, 30-test verification matrix, crew manifest</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Research Modules</h3>
+    <ul>
+      <li><strong>M1: Founding Dynasty (1926–1972)</strong> — Rogan Jones, KVOS, Supreme Court landmark, KGMI-FM founding</li>
+      <li><strong>M2: Technical Infrastructure</strong> — Mount Constitution, 50kW ERP, Nautel transmitters, HD Radio subchannels</li>
+      <li><strong>M3: Ownership & Business</strong> — Saga Communications, $9.8M acquisition, PNW Media Group rebrand</li>
+      <li><strong>M4: Cross-Border Signal</strong> — US-Canada coordination, Vancouver coverage, CKYE interaction</li>
+      <li><strong>M5: Community & Programming</strong> — Brad & John, Vehicle for a Vet, civic engagement</li>
+    </ul>
+  </div>
+
+  <div class="instructions">
+    <h4>Usage Instructions</h4>
+    <ol>
+      <li>Feed the PDF to <code>gsd-skill-creator</code> as a mission package</li>
+      <li>The orchestrator reads Stage 3 for wave execution plan and crew assignments</li>
+      <li>Each module in Stage 2 is self-contained for parallel agent execution</li>
+      <li>Stage 1 provides context and success criteria for verification</li>
+    </ol>
+
+    <h4 style="margin-top: 1rem;">Recompilation</h4>
+    <ol>
+      <li>Edit <code>kism-mission.tex</code> as needed</li>
+      <li>Compile: <code>xelatex -interaction=nonstopmode kism-mission.tex</code> (run 3×)</li>
+      <li>Requires DejaVu fonts (pre-installed on Ubuntu/Debian)</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    From a 50-watt Seattle apartment in 1926 to a 50,000-watt signal on Mount Constitution — the KISM story is a century of finding the right mountain, the right frequency, and the right community.
+  </div>
+</div>
+
+</body>
+</html>
