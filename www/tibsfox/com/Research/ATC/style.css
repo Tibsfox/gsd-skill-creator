@@ -1,0 +1,79 @@
+/* ATC -- The Cusp of Power: Aries-Taurus
+ * Theme: Mars crimson meets celestial blue -- fire into earth at the threshold
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --mars: #8B1A1A;
+  --mars-deep: #5D1A1A;
+  --mars-light: #FFEBEE;
+  --mars-mid: #C62828;
+  --celestial: #1565C0;
+  --celestial-deep: #0D47A1;
+  --celestial-light: #E3F2FD;
+  --earth: #5D1A1A;
+  --earth-light: #EFEBE9;
+  --earth-dim: #3E2723;
+  --fire: #E65100;
+  --fire-light: #FFF3E0;
+  --venus: #AD1457;
+  --venus-light: #FCE4EC;
+  --gold: #F9A825;
+  --gold-light: #FFFDE7;
+  --taurus: #2E7D32;
+  --taurus-light: #E8F5E9;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #5D4037;
+  --link: var(--celestial);
+  --card-border: #FFCDD2;
+  --border: #FFCDD2;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--mars-deep) 0%, var(--mars) 30%, var(--earth) 60%, var(--celestial-deep) 100%);
+  border-bottom: 4px solid var(--mars-mid);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--mars-deep); border-bottom-color: var(--border); }
+h3 { color: var(--mars); }
+th { background: var(--mars-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(139, 26, 26, 0.04); }
+tr:hover { background: rgba(139, 26, 26, 0.08); }
+blockquote { border-left-color: var(--mars); background: rgba(139, 26, 26, 0.06); }
+code { background: var(--celestial-light); }
+pre { background: var(--earth-dim); color: #E0E0E0; }
+.stat-value { color: var(--mars-deep); }
+
+/* -- Tags -- */
+.tag-history { background: #EFEBE9; color: #3E2723; }
+.tag-astronomy { background: #E3F2FD; color: #0D47A1; }
+.tag-mythology { background: #FCE4EC; color: #880E4F; }
+.tag-personality { background: #FFF3E0; color: #E65100; }
+.tag-debate { background: #FFFDE7; color: #F57F17; }
+.tag-mars { background: #FFEBEE; color: #B71C1C; }
+.tag-venus { background: #FCE4EC; color: #AD1457; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: cusp threshold motif -- */
+.cusp-threshold {
+  background: linear-gradient(90deg, var(--mars-deep), var(--mars), var(--fire), var(--earth), var(--celestial-deep));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
