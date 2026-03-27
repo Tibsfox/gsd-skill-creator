@@ -1,0 +1,1079 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Space / Satellite / Tech ─────────────────────────────
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{4527A0}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ─────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Column Types ────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ───────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Minecraft Real-Time Weather}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Minecraft Real-Time Weather Microclimate Simulation -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Minecraft Real-Time\\[0.3em]Weather \& Microclimate}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Per-Location Simulation via Live Global Data Sources}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026\quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)\quad|\quad Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ─────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Minecraft Real-Time Weather --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Cold-Start Research Complete}
+\metafield{Depends On:}{GSD Skill-Creator (dev branch), GSD Mesh Prototype Spec, GSD Local Cloud Provisioning Vision}
+\metafield{Context:}{Foxy's Playground Minecraft Server; GSD Infrastructure Node Network}
+
+\subsection{Vision}
+
+The sky above any Minecraft world is a lie. It rains when a random number generator says so, clears when a timer expires, and the thunderstorm over your base has no relationship whatsoever to the thunderstorm rolling across the actual mountains outside your window. For a platform that has taught generations of players about geology, agriculture, ecology, and architecture, this is a staggering missed opportunity.
+
+This mission exists to close that gap --- to replace Minecraft's stochastic weather engine with a living atmosphere derived from the real world. Not a simple ``is it raining in my city'' toggle, but a true microclimate simulation: different biomes experiencing different conditions simultaneously, weather fronts rolling across the map the way they roll across actual terrain, players in different geographic locations experiencing weather drawn from their actual coordinates. The Amiga Principle applies here in full force: we don't need to build a weather model from scratch. The models already exist, they are globally distributed, they are free, and several of them update every fifteen minutes. What is missing is the translation layer --- the bridge between NASA's atmospheric data products and Minecraft's weather API.
+
+The technical stack this mission targets is deliberately open and accessible. Open-Meteo provides sub-1km resolution forecasts from seven national weather services with no API key required. NOAA's HRRR model refreshes every hour at 3km resolution across the continental United States. NASA's GEOS-5 CFAPI delivers global atmospheric composition and meteorological data queryable by latitude/longitude. And for those willing to go deeper, a \$30 RTL-SDR dongle pointed at GOES-19 (geosynchronous at 75.2°W) can pull live full-disk satellite imagery directly from orbit. The data is falling from the sky. This mission builds the receiver.
+
+The GSD skill-creator ecosystem provides an ideal deployment context. The GSD mesh node network --- based on the Amiga Principle chipset architecture --- can run a lightweight weather sidecar service alongside its other functions. A node in the Pacific Northwest pulling HRRR data for its local grid cell can push weather state to a Minecraft server world whose biome coordinates map to real PNW geography. When the Cascades get a snow squall, the mountains biome in the game gets a snow squall. When marine fog rolls into Puget Sound, the coastal forest biome dims and mists. The spaces between --- the real world and the game world, the satellite feed and the block state --- collapse into something coherent and alive.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Minecraft's weather is globally uniform and stochastic.} The vanilla engine applies a single rain/clear/thunder state to an entire world dimension simultaneously, with no geographic differentiation. A desert biome gets the same rain toggle as an ocean biome. This prevents any realistic climate or biome-based atmospheric simulation.
+
+  \item \textbf{Existing real-weather mods are architecturally shallow.} Current implementations (WeatherSync, Weather Watch, RealTimeWeather) query a single location and apply it globally, use proprietary API keys that break or cost money at scale, and operate at city-level granularity. None support per-biome, per-region, or per-player geographic differentiation.
+
+  \item \textbf{High-resolution government weather data is underutilized in game contexts.} NOAA HRRR updates every hour at 3km resolution. Open-Meteo aggregates seven national weather services at 1--2km resolution. NASA GEOS-5 provides global atmospheric composition. These free, authoritative data sources are routinely ignored in favor of commercial weather API subscriptions, which introduce cost, rate limits, and external dependencies.
+
+  \item \textbf{DIY satellite reception capability is unknown to the Minecraft modding community.} GOES-19, the current operational US geostationary weather satellite, transmits live full-disk images at 1km/channel resolution via HRIT protocol --- receivable with a \$30 SDR dongle and a small dish. This capability, well-known in the amateur radio community, has never been integrated into a game weather pipeline.
+
+  \item \textbf{No reference architecture exists for mesh-node weather distribution in game servers.} A multiplayer server with geographically distributed players needs a way to deliver per-player localized weather without each client independently polling external APIs. A distributed sidecar architecture that aggregates regional weather state and delivers it via server-side logic is architecturally obvious but unbuilt.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Real-Atmosphere Translation Engine:} Pull live atmospheric state from global data sources keyed to real geographic coordinates, translate weather variables into Minecraft weather states, and apply them spatially across the game world with biome and region differentiation.
+
+\subsubsection{Data Source Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+GLOBAL DATA SOURCES
+====================
+  [NASA GEOS-5 CFAPI]         [NOAA HRRR/RAP]           [Open-Meteo]
+  Global atmospheric          3km resolution             1-2km regional
+  composition + met           CONUS + Alaska             No API key needed
+  lat/lon API endpoint        Updates every hour         7 national models
+         |                          |                          |
+         +-------------- DATA BROKER (Python sidecar) ---------+
+                                    |
+                   [DIY GOES-19 SDR station]  <-- optional local feed
+                                    |
+                         WEATHER STATE CACHE
+                         (per grid cell, 15-min TTL)
+                                    |
+              +--------------------+---------------------+
+              |                    |                     |
+         [Region A]           [Region B]           [Region C]
+         PNW Coast             Cascades             Desert SW
+         fog + drizzle         snow squall          clear + hot
+              |                    |                     |
+              +-------- Minecraft Weather Bridge ---------+
+                                    |
+                    +---------------+--------------+
+                    |               |              |
+               [Dimension]    [Biome Zone]    [Player-Local]
+               global state   sub-region      per-coords
+\end{asciibox}
+
+\subsubsection{Module Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+MISSION MODULES (5 parallel research tracks)
+=============================================
+
+  Module 1            Module 2            Module 3
+  DATA SOURCES        DIY SATELLITE       MC WEATHER API
+  ============        =============       ==============
+  Open-Meteo          GOES-19 HRIT        Fabric/Forge
+  NOAA HRRR           RTL-SDR chain       per-player state
+  NASA GEOS-5         SatDump decode      biome-zone logic
+  API formats         image pipeline      command bridge
+       |                   |                   |
+       +-------------------+-------------------+
+                           |
+  Module 4            Module 5
+  MICROCLIMATE SIM    GSD INTEGRATION
+  ================    ===============
+  coord-to-biome      sidecar service
+  pressure/humidity   mesh node deploy
+  variable mapping    Foxy's Playground
+  transition logic    config schema
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Global Weather Data Sources}
+Survey of available real-time and near-real-time meteorological APIs. Focus on Open-Meteo (free, no key, 1--2km resolution, 7 NWS models), NOAA HRRR (3km, hourly, CONUS), NASA GEOS-5 CFAPI (global, lat/lon point queries), and NOAA GFS (global baseline). Documents API endpoints, parameter schemas, rate limits, data formats (JSON, GRIB2), and license conditions. Maps each source's coverage, latency, and granularity to Minecraft weather variable requirements.
+
+\subsubsection{Module 2: DIY Satellite Reception Pipeline}
+Technical investigation of GOES-19 direct reception via RTL-SDR. Covers hardware requirements (WiFi grid dish, LNA, RTL-SDR Blog V4 or equivalent), SatDump software pipeline, HRIT protocol decode, image product types (full-disk, mesoscale, sector), and automation for continuous reception. Also covers Python-based image analysis for cloud cover, precipitation type detection, and atmospheric opacity estimation. Maps satellite-derived imagery to quantitative weather variables suitable for game injection.
+
+\subsubsection{Module 3: Minecraft Weather API \& Mod Architecture}
+Deep survey of Minecraft's internal weather state model. Documents the Fabric/Forge mod API surface for weather control (WorldWeather, biome precipitation type, per-player effects), existing mods (WeatherSync, Weather Watch, Project Atmosphere, RealTimeWeather plugin), and their architectural approaches and limitations. Produces a reference architecture for a new mod that accepts structured weather state from an external sidecar service and applies it with biome-region granularity.
+
+\subsubsection{Module 4: Microclimate Simulation \& Variable Mapping}
+Defines the translation layer between meteorological data and Minecraft weather states. Maps real variables (temperature, humidity, pressure, cloud cover, precipitation rate, wind speed) to Minecraft equivalents (rain boolean, thunder boolean, snow vs rain by biome, visibility, sky color). Develops the coordinate mapping system that relates real-world lat/lon grid cells to Minecraft biome regions. Models weather front propagation across the game map.
+
+\subsubsection{Module 5: GSD Mesh Integration \& Deployment Architecture}
+Defines the sidecar service architecture for deploying the weather system on GSD mesh nodes. Covers the data pipeline (fetch → normalize → cache → push), configuration schema (mapping real-world grid to Minecraft world coordinates), deployment on Amiga-principle nodes (lightweight Python service alongside Minecraft server), and integration with Foxy's Playground server infrastructure.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# minecraft-weather-microclimate-chipset.yaml
+mission: minecraft_realtime_weather_microclimate
+version: 1.0.0
+activation_profile: squadron
+
+chipset:
+  agnus:             # Data orchestration / fetch pipeline
+    role: FETCH
+    model: claude-sonnet-4-6
+    responsibilities:
+      - Open-Meteo API polling (15-min intervals)
+      - HRRR GRIB2 retrieval and parsing
+      - GEOS-5 CFAPI lat/lon queries
+      - Data normalization to WeatherState schema
+
+  denise:            # Display / visualization / rendering layer
+    role: RENDER
+    model: claude-sonnet-4-6
+    responsibilities:
+      - Minecraft biome zone mapping
+      - Weather state visual translation
+      - Particle effect parameter calculation
+      - Sky color and ambient light mapping
+
+  paula:             # Audio / game effect synthesis
+    role: EFFECT
+    model: claude-haiku-4-5-20251001
+    responsibilities:
+      - Rain/thunder sound event triggers
+      - Wind effect parameter generation
+      - Template and schema scaffolding
+
+  68000:             # Synthesis / integration / judgment
+    role: INTEGRATE
+    model: claude-opus-4-6
+    responsibilities:
+      - Cross-module microclimate synthesis
+      - Satellite data fusion decisions
+      - Architecture review and verification
+      - Mission documentation
+
+data_sources:
+  primary:
+    - open_meteo_api           # no key, 1-2km, 7 NWS models
+    - noaa_hrrr_aws            # 3km CONUS, hourly, free
+    - nasa_geos5_cfapi         # global, lat/lon point
+  supplementary:
+    - goes_19_direct_sdr       # DIY local station, optional
+    - noaa_gfs_global          # global fallback
+    - openweathermap           # commercial fallback
+
+resolution_target: 1-3km      # matching HRRR / Open-Meteo hi-res
+update_interval: 900           # seconds (15 min)
+cache_ttl: 3600                # 1 hour hard max
+minecraft_api: fabric_1_21_x
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Real-time weather fetch from Open-Meteo, NOAA HRRR, and NASA GEOS-5
+  \item Translation of temperature, precipitation, cloud cover, wind to Minecraft weather states
+  \item Per-biome-region weather differentiation within a single Minecraft world
+  \item Per-player geographic weather based on real coordinates (server multiplayer)
+  \item Python sidecar service architecture deployable on GSD mesh nodes
+  \item DIY GOES-19 SDR reception pipeline documentation and integration spec
+  \item Fabric mod API bridge accepting structured WeatherState from external service
+  \item Coordinate mapping system: real lat/lon grid to Minecraft chunk regions
+  \item Configuration schema for Foxy's Playground deployment
+  \item Documentation of all data sources, licenses, and rate limits
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Real-time player IP geolocation (privacy; use server-admin configured coordinates)
+  \item Fully simulated atmospheric physics engine (use NOAA/Open-Meteo models directly)
+  \item Historical weather replay (v2.0 extension)
+  \item Mobile/Bedrock Edition support
+  \item Weather-triggered world generation changes
+  \item Real-time wind physics affecting entity movement (v2.0)
+  \item Commercial API dependencies (all sources free and open)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{Data source survey complete:} All five target APIs (Open-Meteo, NOAA HRRR, GEOS-5, GFS, GOES-19) documented with endpoints, parameters, response schemas, and license terms.
+  \item \textbf{Variable mapping complete:} Every meteorological variable (temperature, precipitation rate, cloud cover, humidity, wind, pressure) mapped to a Minecraft weather state with a deterministic translation function.
+  \item \textbf{Biome-region differentiation:} At least 4 distinct weather zones definable within a single world, each independently receiving real weather from a corresponding geographic coordinate.
+  \item \textbf{15-minute update latency:} End-to-end pipeline from API fetch to in-game weather state change achieves $\leq$15 minute latency under normal operation.
+  \item \textbf{HRRR integration functional:} NOAA HRRR GRIB2 data parseable and normalized to WeatherState schema with Python tooling; 3km grid cell lookups operational.
+  \item \textbf{Open-Meteo integration functional:} Open-Meteo forecast API queried at target coordinates; 15-minutely HRRR-based data available for North America.
+  \item \textbf{GOES-19 pipeline documented:} Complete hardware and software specification for DIY GOES-19 HRIT reception published; SatDump integration path defined.
+  \item \textbf{Fabric mod bridge specified:} Reference architecture for Minecraft Fabric mod accepting external WeatherState JSON produced; command-layer integration documented.
+  \item \textbf{Sidecar service deployable:} Python weather sidecar service runnable on a GSD mesh node with $<$200MB RAM footprint; systemd unit file provided.
+  \item \textbf{Coordinate mapping system complete:} Algorithm for mapping real-world lat/lon bounding boxes to Minecraft X/Z chunk regions documented and tested.
+  \item \textbf{Zero commercial API dependencies:} All data sources in the production pipeline are free, open, and governmentally operated or open-source licensed.
+  \item \textbf{Configuration schema published:} YAML schema for Foxy's Playground deployment (world name, coordinate mappings, update intervals, data source priority) fully specified.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency Notes} \\
+\midrule
+GSD Mesh Prototype Spec & Deployment target & Weather sidecar runs on Amiga-principle nodes \\
+GSD Local Cloud Provisioning Vision & Infrastructure & Network topology for multi-node data distribution \\
+Deep Audio Analyzer Mission & Sibling mission & Demonstrates same sidecar pattern for audio analysis \\
+GSD Amiga Vision & Philosophical & Specialized execution paths; translation engine identity \\
+Foxy's Playground (Minecraft) & End deployment & Primary server target for v1.0 production \\
+GSD Silicon Layer Spec & Chipset naming & Agnus/Denise/Paula/68000 role assignment pattern \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's designers understood something that its contemporaries didn't: you don't win by having the fastest CPU. You win by giving the CPU specialized help. The Agnus chip handled DMA and blitter operations. Denise handled display. Paula handled audio and I/O. The 68000 was freed to do the work only it could do --- synthesis and judgment. The result was a machine that punched thirty years above its weight class.
+
+This mission applies that same insight to meteorology. NOAA has already built the atmospheric models. NASA has already put the satellites in orbit. The national weather services are already running forecast cycles every hour. We do not need to simulate the atmosphere. We need a translation layer --- an Agnus for weather data, a Denise for visual state, a Paula for effect synthesis --- that converts the real sky into the game sky with enough fidelity to feel true.
+
+The deeper motivation, though, is about presence. When the rain in your Minecraft world is the same rain falling on your actual orchard, something changes. The game stops being an escape from reality and becomes a window into it. The spaces between the real and the simulated collapse. And for a server like Foxy's Playground, where the point is connection --- giving people a place to build together across distances --- weather becomes a shared experience grounded in the actual world that players inhabit. That is not a feature. That is a reason to exist.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Minecraft Real-Time Weather --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the evidential foundation for the mission's five research modules. All data is sourced from government agencies, open-source projects, and peer-reviewed meteorological literature. Each finding includes an attribution to a specific source. Claims without citations in this section should be flagged as research gaps before proceeding to execution.
+
+Key source organizations:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{NOAA/NCEP} --- National Centers for Environmental Prediction; operates HRRR, GFS, RAP models
+  \item \textbf{NASA GMAO} --- Global Modeling and Assimilation Office; operates GEOS-5 CFAPI
+  \item \textbf{NASA POWER Project} --- Prediction of Worldwide Energy Resources; solar and meteorological API
+  \item \textbf{Open-Meteo} --- Open-source weather API aggregating 7+ national weather services (AGPLv3)
+  \item \textbf{NOAA GOES Program} --- Geostationary Operational Environmental Satellites; operates GOES-19
+  \item \textbf{RTL-SDR Blog} --- Community documentation for software-defined radio satellite reception
+  \item \textbf{SatDump Project} --- Open-source satellite imagery decode software
+  \item \textbf{Modrinth / CurseForge} --- Minecraft mod repositories; primary source for existing weather mod survey
+\end{itemize}
+
+\subsection{Module 1: Global Weather Data Sources Reference}
+
+\subsubsection{Open-Meteo API}
+
+Open-Meteo is an open-source weather forecasting API providing free access for non-commercial use with no API key, registration, or credit card required. The API aggregates data from over seven major national weather services including NOAA GFS, DWD ICON (Germany), Météo-France AROME/Arpège, ECMWF IFS, JMA (Japan), Environment Canada GEM HRDPS, and MET Norway. Over 2 TB of raw meteorological data are downloaded and processed daily (Open-Meteo GitHub, 2026).
+
+Key specifications:
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Endpoint & \texttt{https://api.open-meteo.com/v1/forecast} \\
+Resolution (Europe/US) & 1--2 km (high-resolution regional models) \\
+Resolution (global) & 11 km \\
+Forecast horizon & 7-day hourly; 16-day with global models \\
+15-minute data & Available via \texttt{minutely\_15=} parameter \\
+15-min coverage & NOAA HRRR (North America), DWD ICON-D2 + MF AROME (Central Europe) \\
+Rate limit & 10,000 requests/day (free); no hard limit for fair use \\
+Historical data & 80+ years (ERA5 reanalysis), 10km resolution \\
+License & CC BY 4.0 (data); AGPLv3 (code) \\
+Self-hosting & Docker or Ubuntu packages; full source available \\
+GeoDNS routing & Requests routed to EU/NA servers; sub-10ms response \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Available weather variables relevant to Minecraft integration: \texttt{temperature\_2m}, \texttt{precipitation}, \texttt{rain}, \texttt{snowfall}, \texttt{cloud\_cover}, \texttt{wind\_speed\_10m}, \texttt{wind\_direction\_10m}, \texttt{weather\_code} (WMO standard), \texttt{is\_day}, \texttt{snow\_depth}, \texttt{visibility}, \texttt{thunder\_probability} (source: Open-Meteo API Documentation, 2026).
+
+\subsubsection{NOAA HRRR Model}
+
+The High-Resolution Rapid Refresh (HRRR) is NOAA's real-time 3km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model. Radar data is assimilated every 15 minutes over a 1-hour period (NOAA/NCEP, 2026). HRRR is particularly suited to this mission because it resolves individual storm cells, fog layers, mountain snow bands, and gap winds --- precisely the features that differentiate microclimate zones in game.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Resolution & 3 km (CONUS + Alaska) \\
+Update frequency & Every hour; sub-hourly fields at 15-min intervals \\
+Forecast horizon & 18h standard; 48h at 00/06/12/18 UTC \\
+Data format & GRIB2 \\
+AWS archive & \texttt{s3://noaa-hrrr-bdp-pds/} (free, public) \\
+Azure archive & Microsoft Planetary Computer (free) \\
+Python library & \texttt{herbie} package (HRRR-B by Brian Blaylock) \\
+Latency & Files available $\sim$3 hours after initialization \\
+Domain & Continental US + Alaska \\
+Variables & Temperature, pressure, humidity, wind, precip type, radar reflectivity, visibility \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{NASA GEOS-5 CFAPI}
+
+NASA's Global Modeling and Assimilation Office (GMAO) provides GEOS-CF (Composition Forecast) data via the CFAPI, allowing access to historical data and forecasts for single locations specified by latitude and longitude coordinates. GEOS-5 Forward Processing (FP) generates near-real-time assimilation products on a 0.3° × 0.25° global grid, updated continuously (NASA GMAO, 2026). The NASA POWER project provides a complementary API for solar radiation and meteorological data at 0.5° × 0.5° resolution dating to 1981.
+
+Note: GEOS-5 forecast products are experimental and designated for research purposes only (NASA GMAO). Suitable as supplementary global fallback, not primary real-time source.
+
+\subsubsection{Data Source Comparison Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.5cm}C{1.5cm}C{1.8cm}L{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Source} & \tableheader{Resolution} & \tableheader{Coverage} & \tableheader{Update Rate} & \tableheader{Best Use} \\
+\midrule
+Open-Meteo & 1--2 km & Global & 1-hour & Primary for most regions \\
+NOAA HRRR & 3 km & CONUS/AK & 15-min ingest & Primary for North America \\
+NASA GEOS-5 & $\sim$30 km & Global & Near-RT & Supplementary / fallback \\
+NOAA GFS & 13 km & Global & 6-hour & Long-range fallback \\
+GOES-19 SDR & 1 km/ch & Americas & Continuous & Local enrichment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: DIY Satellite Reception Reference}
+
+\subsubsection{GOES-19 Overview}
+
+GOES-19 is the current operational NOAA geostationary weather satellite for the Eastern United States (activated April 7, 2025, replacing GOES-16). As a geosynchronous satellite at approximately 75.2°W longitude, GOES-19 maintains a fixed position in the sky --- no tracking hardware required. It transmits High-Rate Information Transmission (HRIT) signals continuously, allowing any ground station within the satellite's footprint to pull live full-disk imagery (RTL-SDR Blog, 2019/updated 2025). GOES-19 produces full-disk images every 30 minutes and mesoscale imagery of the US roughly every 5 minutes.
+
+\subsubsection{Hardware Requirements for DIY Reception}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Typical Cost} & \tableheader{Notes} \\
+\midrule
+RTL-SDR dongle & \$30--\$50 & RTL-SDR Blog V4 recommended; 0.1--1.75 GHz range \\
+WiFi grid dish antenna & \$20--\$40 & Repurposed 2.4GHz dish; feed centered for L-band \\
+Low Noise Amplifier (LNA) & \$30--\$60 & Nooelec Sawbird+ or equivalent; pre-amp near antenna \\
+Coaxial cable & \$10--\$20 & RG-6 or RG-58; minimize length \\
+SatDump software & Free & Open-source; active development \\
+Computer (Linux) & Existing & Raspberry Pi 4 sufficient for decode \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The HRIT signal from GOES-19 carries a data rate of 927 kbps within 1.2 MHz of bandwidth. The 194 MHz downconverted signal is decoded by SatDump into full-color, calibrated imagery (ben.land, 2025). For the Minecraft weather pipeline, cloud cover percentage, precipitation zones (from IR channels), and storm cell identification from mesoscale products are the primary derived products.
+
+Note: As of August 2025, the original NOAA-15/18/19 polar orbiting APT satellites have been decommissioned. Modern DIY weather satellite work focuses on GOES-R series (HRIT), Meteor-M2 (LRPT at 137 MHz), and MetOp (AHRPT). GOES-19 represents the current recommended target for continuous, non-tracking DIY reception.
+
+\subsubsection{Software Pipeline}
+
+SatDump (open-source, actively maintained) handles the full pipeline from raw RF samples to calibrated imagery for GOES-R series satellites. The workflow: RTL-SDR dongle captures L-band signal at $\sim$1694.1 MHz $\rightarrow$ SatDump handles demodulation, Reed-Solomon error correction, and LRIT/HRIT protocol decode $\rightarrow$ output as calibrated GeoTIFF or NetCDF. Python post-processing can extract cloud fraction, precipitation typing from multi-spectral channels, and storm cell location.
+
+\subsection{Module 3: Minecraft Weather API Reference}
+
+\subsubsection{Existing Weather Mods Survey}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Mod/Plugin} & \tableheader{Loader} & \tableheader{Granularity} & \tableheader{Architecture Notes} \\
+\midrule
+WeatherSync & Fabric & Global/City & Queries Open-Meteo; IP or manual lat/lon; server-side only \\
+Weather Watch & Forge & Global/IP & Uses WeatherAPI; server IP geolocation; closed source (key protection) \\
+RealTimeWeather & Spigot & Global/World & Per-world location config; multiple weather provider support \\
+Real Time+Weather & Spigot & Per-player/IP & IP-geolocation per player; open config \\
+Project Atmosphere & Forge & Regional ($\sim$1000 blocks) & Full atmospheric simulation; temperature, pressure, humidity, 40+ cloud types \\
+geobasedWeather & Spigot & Global/City & OpenWeatherMap; simple city-based config \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key architectural gap: no existing mod supports (1) per-biome-region differentiation with (2) real atmospheric model data at (3) sub-city resolution without (4) commercial API dependencies. Project Atmosphere comes closest on simulation fidelity but uses internal simulation rather than live data. WeatherSync comes closest on data sourcing but applies globally.
+
+\subsubsection{Minecraft Weather State Model}
+
+Minecraft's vanilla weather system operates at the World level via three boolean-adjacent states: Clear, Rain/Snow (``DOWNFALL''), and Thunder. The Fabric API exposes \texttt{ServerWorld.setWeather()} and related methods. Biome-level precipitation type (rain vs. snow vs. none) is determined by the biome's \texttt{precipitation} and \texttt{temperature} values --- not a runtime toggle. The WeatherSync mod demonstrates that \texttt{/weather} commands can be scripted from server-side Java calling into the game loop, and this approach can be wrapped with an external sidecar trigger mechanism.
+
+For per-player weather differentiation, the architecture requires client-side mod participation: the server sends weather state packets to specific clients rather than broadcasting globally. The Fabric networking API (\texttt{ServerPlayNetworking}) supports targeted packet dispatch. Project Atmosphere's regional forecast system (1000-block radius zones) provides a useful blueprint for chunk-region weather state management.
+
+\subsection{Module 4: Microclimate Variable Mapping Reference}
+
+\subsubsection{Meteorological Variable to Minecraft State Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Real Variable} & \tableheader{MC State} & \tableheader{Translation Rule} \\
+\midrule
+WMO Weather Code 0--3 & CLEAR & No precipitation; cloud code used for sky color \\
+WMO Code 51--67, 80--82 & RAIN & Precipitation type = RAIN; intensity informs particle density \\
+WMO Code 71--77, 85--86 & SNOW & Precipitation type = SNOW; biome must support snow \\
+WMO Code 95--99 & THUNDER & Thunder state = true; lightning strike rate from thunderstorm intensity \\
+Cloud cover 0--30\% & CLEAR & Vanilla clear state \\
+Cloud cover 30--70\% & PARTLY & Clear with modified sky color (not natively supported; shader hook) \\
+Cloud cover 70--100\% & OVERCAST & Trigger rain state with zero precipitation (visual only) or full rain \\
+Thunder probability $>$40\% & THUNDER & Enable thunder state regardless of WMO primary code \\
+Temperature $<$ 0°C at elevation & SNOW & Override biome rain to snow if temperature condition met \\
+Visibility $<$ 2km & FOG & Fog render distance modifier (requires Sodium/Iris shader integration) \\
+Wind speed $>$ 15 m/s & STORM & Escalate rain to thunder; particle physics modifier \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Coordinate Mapping System}
+
+The bridge between real geography and game world requires a configurable affine transform. A Minecraft world's X/Z coordinates (in chunks, 16×16 blocks) map to a rectangular bounding box in real lat/lon space. The transform is:
+
+\begin{center}
+\texttt{lat = lat\_origin + (chunk\_z / scale\_factor)}\\
+\texttt{lon = lon\_origin + (chunk\_x / scale\_factor)}
+\end{center}
+
+For Foxy's Playground with PNW geography, a plausible configuration: origin at 48.0°N, 122.0°W (Puget Sound area), scale\_factor = 100 (1 chunk = 0.01° latitude, $\sim$1.1 km). This places the game world's climate gradient from marine coast to Cascade mountain range within a realistic geographic footprint, matching biome distribution to actual PNW climate zones.
+
+\subsection{Module 5: GSD Integration Reference}
+
+\subsubsection{Sidecar Service Architecture}
+
+The weather sidecar is a Python process running alongside the Minecraft server on a GSD mesh node. Its responsibilities:
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Scheduler:} Fetch weather data on 15-minute intervals
+  \item \textbf{Fetcher:} Query Open-Meteo / HRRR for each configured geographic zone
+  \item \textbf{Normalizer:} Translate API response to WeatherState schema
+  \item \textbf{Cache:} Store current WeatherState per zone with TTL
+  \item \textbf{Bridge:} Push state changes to Minecraft via RCON commands or plugin API
+\end{enumerate}
+
+Memory footprint target: $<$200MB RSS on a 68000-class GSD node. RCON (Remote Console) is Minecraft's built-in server administration protocol; Python libraries (\texttt{mcrcon}) provide a simple interface. This avoids requiring a custom Fabric mod for basic operation, making the sidecar compatible with vanilla-plus server setups.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Player IP geolocation & Privacy & Do not geolocate players; use admin-configured coordinate mappings only \\
+API rate limiting & Operational & Cache aggressively; exponential backoff; Open-Meteo fair-use compliance \\
+GEOS-5 experimental status & Data quality & Mark as supplementary; do not use as sole data source \\
+GOES-19 SDR reception legality & Legal & Receiving publicly broadcast signals is legal in all jurisdictions; no encryption \\
+Minecraft EULA compliance & Legal & Sidecar is server-admin tooling; does not charge players for weather features \\
+Extreme weather triggers & Safety & Do not trigger in-game thunder during real extreme weather events (tornado, hurricane warnings); add NWS SAME alert check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[noitemsep]
+  \item NOAA/NCEP. (2020--2026). \textit{High-Resolution Rapid Refresh (HRRR)}. \url{https://rapidrefresh.noaa.gov/hrrr/}
+  \item NASA GMAO. (2026). \textit{GEOS-CF Data Access}. \url{https://gmao.gsfc.nasa.gov/gmao-products/geos-cf/data-access\_geos-cf/}
+  \item NASA POWER Project. (2026). \textit{Daily API Documentation}. \url{https://power.larc.nasa.gov/docs/services/api/temporal/daily/}
+  \item NOAA NCCS. (2026). \textit{GEOS-5 Forecast Products}. \url{https://www.nccs.nasa.gov/services/data-collections/coupled-products/geos5-forecast}
+  \item NOAA GOES Program. (2025). \textit{GOES-19 Transition}. \url{https://www.rtl-sdr.com/tag/weather-satellite/}
+  \item NOAA Open Data Dissemination. (2026). \textit{HRRR on AWS}. \url{https://registry.opendata.aws/noaa-hrrr-pds/}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[noitemsep]
+  \item Dowell, D. et al. (2022). The High-Resolution Rapid Refresh (HRRR): An Hourly Updating Convection-Allowing Forecast Model. \textit{Weather and Forecasting}. NOAA IR.
+  \item Benjamin, S. et al. (2016). A North American Hourly Assimilation and Model Forecast Cycle: The Rapid Refresh. \textit{Monthly Weather Review}, 144, 1669--1694.
+\end{itemize}
+
+\subsubsection{Open-Source Projects \& Professional Organizations}
+\begin{itemize}[noitemsep]
+  \item Zippenfenig, P. (2023). \textit{Open-Meteo.com Weather API} [Computer software]. \url{https://open-meteo.com/}
+  \item Open-Meteo GitHub. (2026). \textit{Free Weather Forecast API}. \url{https://github.com/open-meteo/open-meteo}
+  \item RTL-SDR Blog. (2019/2025). \textit{GOES 16/17 and GK-2A Weather Satellite Reception}. \url{https://www.rtl-sdr.com/rtl-sdr-com-goes-16-17-and-gk-2a-weather-satellite-reception-comprehensive-tutorial/}
+  \item ben.land. (2025). \textit{Receiving and decoding transmissions from weather satellites}. \url{https://ben.land/post/2025/05/31/receiving-weather-satellites/}
+  \item Modrinth. (2026). \textit{WeatherSync mod}. \url{https://modrinth.com/mod/weathersync}
+  \item CurseForge. (2026). \textit{Project Atmosphere}. \url{https://www.curseforge.com/minecraft/mc-mods/project-atmosphere}
+  \item SpigotMC. (2025). \textit{RealWeather / RealTime plugin}. \url{https://www.spigotmc.org/resources/realweather-realtime.101599/}
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build a production-ready system that replaces Minecraft's stochastic weather engine with a real-atmosphere translation pipeline, pulling live meteorological data from NASA, NOAA, and Open-Meteo sources and applying it spatially across game world regions with biome-level differentiation. Deliver a Python sidecar service, Fabric mod bridge specification, coordinate mapping system, and DIY GOES-19 SDR reception guide suitable for deployment on GSD mesh nodes and Foxy's Playground server.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE — MINECRAFT REAL-TIME WEATHER MISSION
+=========================================================
+
+WAVE 0: FOUNDATION (Sequential, Haiku)
+---------------------------------------
+  W0-A: Shared schemas (WeatherState, ZoneConfig, SatelliteProduct)
+  W0-B: Source index (API endpoints, auth, rate limits, licenses)
+  W0-C: Test scaffolding (unit test framework, mock API responses)
+
+WAVE 1: PARALLEL TRACKS (Parallel, Sonnet + Opus)
+--------------------------------------------------
+  Track A: Data Sources + Satellite    Track B: MC API + Microclimate
+  ----------------------------         --------------------------------
+  W1-A1: Open-Meteo integration        W1-B1: Minecraft weather API survey
+  W1-A2: NOAA HRRR integration         W1-B2: Variable translation functions
+  W1-A3: GEOS-5 / NASA integration     W1-B3: Biome-region zone system
+  W1-A4: GOES-19 SDR pipeline doc      W1-B4: Coordinate mapping algorithm
+
+WAVE 2: SYNTHESIS (Sequential, Opus)
+--------------------------------------
+  W2-A: Cross-source normalization to WeatherState schema
+  W2-B: Data broker + cache architecture design
+  W2-C: Sidecar service assembly (fetch + normalize + push)
+  W2-D: Integration review + safety boundary audit
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+--------------------------------------------------------
+  W3-A: Fabric mod reference architecture document
+  W3-B: Configuration schema + deployment guide
+  W3-C: Test execution + verification matrix completion
+  W3-D: Final package assembly + index.html
+
+         HUMAN APPROVAL GATES: End of Wave 0, Wave 1, Wave 2
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Data Ingestion Layer} --- API clients for Open-Meteo, HRRR, GEOS-5; RTL-SDR + SatDump for GOES-19
+  \item \textbf{Normalization Layer} --- Translation from heterogeneous API formats to WeatherState schema
+  \item \textbf{Cache Layer} --- Per-zone WeatherState with 15-min TTL; fallback chain on source failure
+  \item \textbf{Translation Layer} --- Meteorological variable to Minecraft state mapping functions
+  \item \textbf{Distribution Layer} --- RCON bridge or Fabric mod API; per-player or per-zone dispatch
+  \item \textbf{Game Layer} --- Minecraft world receives weather state; client-side effects render
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & WeatherState schema & JSON schema validates all 5 data sources & W0-A \\
+2 & Open-Meteo client & Fetches + normalizes 15-min data; tested & W1-A1 \\
+3 & HRRR GRIB2 parser & Reads HRRR output; extracts target variables & W1-A2 \\
+4 & GEOS-5 CFAPI client & Global fallback queries functional & W1-A3 \\
+5 & GOES-19 SDR guide & Hardware spec + SatDump pipeline documented & W1-A4 \\
+6 & Variable translation lib & All WMO codes mapped; test coverage $\geq$90\% & W1-B2 \\
+7 & Zone mapping system & Config-driven lat/lon-to-chunk mapping & W1-B3, W1-B4 \\
+8 & Python sidecar service & $<$200MB RAM; systemd unit; RCON push & W2-C \\
+9 & Fabric mod architecture & Reference spec; no external API dependencies & W3-A \\
+10 & Deployment config & Foxy's Playground YAML; all 12 success criteria & W3-B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+WeatherState schema & None & Haiku & 8K \\
+Source index & None & Haiku & 6K \\
+Open-Meteo client & WeatherState & Sonnet & 20K \\
+HRRR GRIB2 parser & WeatherState & Sonnet & 25K \\
+GEOS-5 client & WeatherState & Sonnet & 15K \\
+GOES-19 SDR guide & Source index & Sonnet & 18K \\
+Variable translation lib & WeatherState & Sonnet & 22K \\
+Zone mapping system & WeatherState & Sonnet & 18K \\
+Python sidecar service & All clients & Opus & 35K \\
+Fabric mod architecture & Zone mapping, translation & Opus & 30K \\
+Synthesis + integration & All modules & Opus & 28K \\
+Deployment config + docs & All components & Sonnet & 20K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & $\sim$30\% & Sidecar service assembly, Fabric mod architecture, cross-module synthesis, integration review, safety audit \\
+Sonnet & $\sim$60\% & All API clients, variable translation, zone mapping, SDR guide, deployment docs, test execution \\
+Haiku & $\sim$10\% & Shared schemas, source index, test scaffolding, template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & CAPCOM approval \\
+1A & Data Sources & Parallel & Sonnet & CAPCOM approval \\
+1B & MC Architecture & Parallel & Sonnet & CAPCOM approval \\
+2 & Synthesis & Sequential & Opus & CAPCOM approval \\
+3 & Publication & Sequential & Sonnet & Final delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W0-A & WeatherState JSON schema & Haiku (PAULA) & \texttt{schemas/weather\_state.json} \\
+W0-B & ZoneConfig schema & Haiku (PAULA) & \texttt{schemas/zone\_config.json} \\
+W0-C & Source index & Haiku (PAULA) & \texttt{docs/source\_index.md} \\
+W0-D & Test scaffolding & Haiku (PAULA) & \texttt{tests/} directory + mock fixtures \\
+W0-E & Coordinate transform utils & Haiku (PAULA) & \texttt{utils/coord\_transform.py} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Data Sources and Satellite (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Output} \\
+\midrule
+W1-A1 & Open-Meteo API client + normalizer & \texttt{sources/open\_meteo.py} \\
+W1-A2 & NOAA HRRR GRIB2 parser (herbie-based) & \texttt{sources/hrrr.py} \\
+W1-A3 & GEOS-5 CFAPI client & \texttt{sources/geos5.py} \\
+W1-A4 & GOES-19 SDR pipeline documentation & \texttt{docs/goes19\_sdr\_guide.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Minecraft Architecture and Microclimate (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Output} \\
+\midrule
+W1-B1 & Minecraft weather API survey document & \texttt{docs/mc\_weather\_api.md} \\
+W1-B2 & WMO code → MC state translation lib & \texttt{translate/wmo\_to\_mc.py} \\
+W1-B3 & Biome-region zone management system & \texttt{zones/zone\_manager.py} \\
+W1-B4 & Coordinate mapping algorithm & \texttt{zones/coord\_map.py} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W2-A & Cross-source normalization audit & Opus (68000) & Unified WeatherState contract \\
+W2-B & Data broker + fallback chain design & Opus (68000) & \texttt{broker/data\_broker.py} \\
+W2-C & Python sidecar service assembly & Opus (68000) & \texttt{service/weather\_sidecar.py} \\
+W2-D & RCON bridge implementation & Opus (68000) & \texttt{bridge/rcon\_bridge.py} \\
+W2-E & Safety boundary audit & Opus (68000) & Safety review report \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W3-A & Fabric mod reference architecture & Sonnet (EXEC-1) & \texttt{docs/fabric\_mod\_spec.md} \\
+W3-B & Deployment config (Foxy's Playground) & Sonnet (EXEC-1) & \texttt{config/foxys\_playground.yaml} \\
+W3-C & Test execution + verification matrix & Sonnet (VERIFY) & Test report \\
+W3-D & README + package index & Sonnet (LOG) & \texttt{README.md}, \texttt{index.html} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Open-Meteo responses cached for 15 minutes per zone (matches HRRR update cycle)
+  \item HRRR data cached for 60 minutes (hourly model; re-fetch on new cycle detection)
+  \item GEOS-5 global data cached for 3 hours (coarser model; used only for fallback)
+  \item WeatherState per zone cached in Redis or flat JSON file; TTL enforced
+  \item Coordinate transform results cached in-memory (deterministic; recomputed only on config change)
+  \item Mock API fixtures pre-generated in Wave 0 for all agents; eliminates redundant fetches during development
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & 0 & 0 & 30K \\
+Wave 1A & 0 & 78K & 0 \\
+Wave 1B & 0 & 80K & 0 \\
+Wave 2 & 115K & 0 & 0 \\
+Wave 3 & 0 & 80K & 0 \\
+\midrule
+\textbf{Total} & \textbf{115K} & \textbf{238K} & \textbf{30K} \\
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{383K tokens} (approx. 8--10 context windows)} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0: Schemas + Source Index
+    |
+    +----[Gate: CAPCOM]----+
+    |                      |
+    v                      v
+W1-A: Data Sources     W1-B: MC Architecture
+  Open-Meteo              MC API Survey
+  HRRR parser             WMO Translation
+  GEOS-5 client           Zone Manager
+  GOES-19 guide           Coord Mapping
+    |                      |
+    +----[Gate: CAPCOM]----+
+                |
+                v
+         W2: Synthesis
+         Cross-source normalize
+         Data broker design
+         Sidecar assembly
+         RCON bridge
+         Safety audit
+                |
+         [Gate: CAPCOM]
+                |
+                v
+         W3: Publication
+         Fabric mod spec
+         Deployment config
+         Test execution
+         Final package
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Privacy, API compliance, safety \\
+Core functionality & 18 & Required & BLOCK & Per success criterion \\
+Integration & 8 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 6 & Best-effort & LOG & Failure modes, extreme weather \\
+\midrule
+\textbf{Total} & \textbf{38} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All data sources documented as gov agency, open-source, or peer-reviewed. Zero commercial API dependencies in production path. \\
+SC-NUM & Numerical attribution & Every translation function parameter (WMO code threshold, temperature cutoff) cites specific source documentation \\
+SC-PRIV & Player privacy & No player IP addresses queried or logged; all geolocation uses admin-configured coordinates only \\
+SC-RATE & API rate compliance & Sidecar enforces Open-Meteo fair-use limit (10K/day); exponential backoff on 429 responses; GEOS-5 research-only flag documented \\
+SC-EULA & Minecraft EULA & Weather feature does not constitute a paid advantage; sidecar is server-admin tooling only \\
+SC-SAFE & Extreme weather filter & NWS SAME alert check prevents in-game thunder/storm trigger when real tornado/hurricane warning active in player region \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Data source survey complete & CF-01, CF-02 & Pending \\
+2. Variable mapping complete & CF-03, CF-04, SC-NUM & Pending \\
+3. Biome-region differentiation & CF-05, IN-01 & Pending \\
+4. 15-minute update latency & CF-06, EC-01 & Pending \\
+5. HRRR integration functional & CF-07, IN-02 & Pending \\
+6. Open-Meteo integration functional & CF-08, IN-02 & Pending \\
+7. GOES-19 pipeline documented & CF-09, EC-02 & Pending \\
+8. Fabric mod bridge specified & CF-10, IN-03 & Pending \\
+9. Sidecar service deployable & CF-11, SC-RATE & Pending \\
+10. Coordinate mapping complete & CF-12, IN-04 & Pending \\
+11. Zero commercial API dependencies & SC-SRC, CF-13 & Pending \\
+12. Configuration schema published & CF-14, IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates; wave approvals \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & API documentation gathering; mod survey; SDR community research \\
+EXEC-1 & Executor (Data) & Wave 1A production: API clients, HRRR parser, SDR guide \\
+EXEC-2 & Executor (MC) & Wave 1B production: MC API, translation lib, zone system \\
+CRAFT-ATMO & Atmospheric Specialist & Open-Meteo, HRRR, GEOS-5 integration; meteorological accuracy \\
+CRAFT-GAME & Game Architecture Specialist & Minecraft mod API, Fabric bridge, RCON protocol \\
+VERIFY & Verification Agent & Source validation; test execution; API compliance checking \\
+INTEG & Integration Agent & Cross-module WeatherState contract; data broker consistency \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only human-machine channel \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache efficiency \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total deliverables & 10 primary artifacts \\
+Research modules & 5 (Data Sources, DIY Satellite, MC API, Microclimate, GSD Integration) \\
+Activation profile & Squadron (12 roles) \\
+Estimated token budget & 383K tokens \\
+Estimated sessions & 3--4 sessions (8--12 context windows) \\
+Model split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Parallel tracks (Wave 1) & 2 tracks (A: data sources; B: MC architecture) \\
+Human approval gates & 3 (end of Wave 0, 1, 2) \\
+Safety-critical tests & 6 (all mandatory-pass BLOCK) \\
+Total tests & 38 \\
+Primary data sources & Open-Meteo (free), NOAA HRRR (free), NASA GEOS-5 (free) \\
+Deployment target & GSD mesh node + Foxy's Playground Minecraft server \\
+Commercial API dependencies & Zero \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The sky is not a backdrop. It is the atmosphere --- a membrane between the satellite and the soil, between the orbital and the inhabited. When we teach the game to read the real sky, we close one of the oldest gaps in simulation: the gap between the world we model and the world we live in.''}
+
+\vspace{0.8em}
+\textbf{Through-line:} The Amiga didn't have faster hardware. It had specialized translators --- chips that understood what the CPU needed and spoke the language of the display, the audio, the memory. This mission builds those same translators for a different domain: from the language of satellite telemetry and numerical weather prediction to the language of block states and weather ticks. The translation is not trivial. But the data is already there, falling from orbit, updated every fifteen minutes, free to anyone willing to point an antenna at the right part of the sky.
+\end{quotebox}
+
+\end{document}
