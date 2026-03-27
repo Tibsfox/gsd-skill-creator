@@ -1,0 +1,1041 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── Color Scheme: Ecology/Nature ──────────────────────────────
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── Section Formatting ────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── Custom Environments ──────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── Headers and Footers ──────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Corvids of the PNW}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── Hyperlinks ───────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Crows and Ravens of the Pacific Northwest -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ═══════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Crows and Ravens\\[0.3em]of the Pacific Northwest}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Ecology, Intelligence, and Cultural Significance\\of Corvus in Cascadia}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \enspace|\enspace Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron \enspace|\enspace Estimated: 18--22 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ═══════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Corvids of the Pacific Northwest --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{PNW Taxonomy Reference (tibsfox.com/PNW)}
+\metafield{Context:}{GSD Ecosystem Educational Knowledge Pack}
+
+\subsection{Vision}
+
+When you stand at dusk on the UW Bothell campus and watch sixteen thousand crows pour out of the sky like a river of dark intelligence, something ancient stirs. These are not just birds. They are minds---each one carrying a map of faces, a memory of slights, a vocabulary of calls that researchers are only beginning to decode. And somewhere above the treeline, a raven watches alone, turning barrel rolls in a thermal, holding a territory that stretches for miles.
+
+The Pacific Northwest is one of the great corvid theaters of the world. Here, American Crows and Common Ravens have partitioned an entire landscape between them: crows claim the lowlands, the cities, the ferry landings and parking lots; ravens hold the mountains, the old-growth forests, the coastal cliffs. Between them lies one of the most fascinating stories in modern ornithology---the 2020 taxonomic absorption of the Northwestern Crow, a species that dissolved not through extinction but through the realization that the lines we drew never matched the lines the birds drew themselves.
+
+This research mission will produce a comprehensive educational reference on the crows and ravens of the PNW, spanning taxonomy and identification, cognitive science, behavioral ecology, cultural significance to Indigenous nations, and conservation challenges. The pack is designed as a knowledge module for the GSD ecosystem's college layer, and as a standalone reference that honors both the scientific rigor these birds deserve and the deep cultural relationships that predate Western taxonomy by millennia.
+
+The through-line is the space between---between species boundaries that blur under genetic scrutiny, between intelligence metrics designed for primates and the parallel cognition that evolved in a brain the size of a walnut, between the raven that is simultaneously a trickster and a creator, between the urban crow that recognizes your face and the wilderness raven that has never seen a human road.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Taxonomic confusion persists in the field.} The 2020 AOS merger of the Northwestern Crow into the American Crow resolved a scientific question but left birders, educators, and wildlife managers without clear guidance on what the PNW crow population actually represents genetically and behaviorally.
+
+  \item \textbf{Corvid intelligence research is fragmented across disciplines.} Studies on tool use, episodic-like memory, facial recognition, and social cognition are published across neuroscience, ethology, and comparative psychology journals with little synthesis accessible to non-specialists.
+
+  \item \textbf{Ecological niche partitioning between crows and ravens in the PNW is poorly documented for general audiences.} The crow--lowland / raven--highland division is well known to birders but lacks a comprehensive treatment connecting habitat, diet, breeding ecology, and competitive dynamics.
+
+  \item \textbf{Indigenous cultural knowledge about corvids is often presented generically.} Raven mythology from the Tlingit, Haida, Tsimshian, Kwakwaka'wakw, Coast Salish, and other nations is frequently collapsed into a single ``Native American'' narrative, erasing nation-specific traditions and their distinct theological emphases.
+
+  \item \textbf{West Nile virus impact on PNW crow populations requires synthesis.} The near-100\% laboratory fatality rate for American Crows exposed to WNV, the documented 30\% national population decline, and the dilution effect observed in biodiverse western habitats need integration into a PNW-specific conservation picture.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} The crows and ravens of the Pacific Northwest form a dual-species system where intelligence, ecology, and cultural meaning are inseparable---and where the spaces between taxonomic categories, habitat zones, and ways of knowing reveal more than the categories themselves.
+
+This model positions corvids not as isolated subjects of study but as a lens through which to examine how biological boundaries work (and dissolve), how cognition evolves convergently with primate intelligence, and how human cultures encode ecological knowledge into mythology that predates and in some ways surpasses Western taxonomy.
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+                    ┌─────────────────────────────────────┐
+                    │     PACIFIC NORTHWEST CORVID RANGE   │
+                    │                                      │
+  Southern Alaska ──┤  RAVEN DOMINANT (alpine, old-growth) │
+                    │    ╲                                 │
+  British Columbia ─┤     ╲  OVERLAP ZONE                 │
+                    │      ╲  (coastal hybridization)     │
+  Puget Sound ──────┤       ╲────────────────────         │
+                    │   CROW DOMINANT  │ RAVEN             │
+                    │   (urban/lowland)│ (east Cascades)   │
+  Oregon Coast ─────┤                  │                   │
+                    │   CROW           │ RAVEN             │
+  Northern CA ──────┤   (valleys)      │ (mountains)       │
+                    └──────────────────┴───────────────────┘
+                          WEST              EAST
+                       (Cascades divide)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  ┌──────────────────────────────────────────────────────────┐
+  │              CORVID PNW KNOWLEDGE PACK                   │
+  ├──────────────────────────────────────────────────────────┤
+  │                                                          │
+  │  MODULE 1: Taxonomy & Identification                     │
+  │    Species profiles, NW Crow merger, field ID            │
+  │           │                                              │
+  │  MODULE 2: Cognition & Intelligence ◄──────────────┐    │
+  │    Tool use, memory, facial recognition, planning   │    │
+  │           │                                         │    │
+  │  MODULE 3: Ecology & Habitat ──────────────────────►│    │
+  │    Niche partitioning, diet, breeding, territory    │    │
+  │           │                                         │    │
+  │  MODULE 4: Social Behavior & Communication          │    │
+  │    Roosting, vocalizations, cooperative breeding     │    │
+  │           │                                         │    │
+  │  MODULE 5: Cultural Significance ◄─────────────────┘    │
+  │    Nation-specific Raven traditions, art, ceremony        │
+  │           │                                              │
+  │  MODULE 6: Threats & Conservation                        │
+  │    West Nile virus, urbanization, climate                │
+  │                                                          │
+  └──────────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Taxonomy and Identification}
+Species profiles for American Crow (\textit{Corvus brachyrhynchos}), Common Raven (\textit{Corvus corax principalis}), and the former Northwestern Crow (\textit{C. b. caurinus}). The 2020 AOS taxonomic merger based on Slager et al.\ genomic analysis. Field identification keys: size, bill shape, tail shape, vocalizations, flight style, habitat. Subspecies variation across the PNW including the western crow (\textit{C. b. hesperis}).
+
+\subsubsection{Module 2: Cognition and Intelligence}
+Convergent evolution of corvid and primate intelligence. Tool use and manufacture (New Caledonian crows as benchmark; PNW species' shellfish-dropping behavior). Episodic-like memory in scrub-jays and implications for Corvus species. Facial recognition research (Marzluff, UW). Theory of mind evidence in ravens (Bugnyar et al.). Brain-to-body ratio comparisons. The ``feathered apes'' framing and its limits.
+
+\subsubsection{Module 3: Ecology and Habitat}
+Niche partitioning between crows (lowland, urban, agricultural) and ravens (alpine, old-growth, east of Cascades). Diet ecology: crows as generalist omnivores in human landscapes; ravens as opportunistic predators and scavengers in wild landscapes. Breeding ecology: cooperative breeding and helpers-at-the-nest in crows; long-term monogamous pair bonds in ravens. Territorial dynamics: crow territory overlap vs.\ raven exclusive territories.
+
+\subsubsection{Module 4: Social Behavior and Communication}
+Communal roosting: the UW Bothell roost (up to 16,000 birds), pre-roost staging behavior, information-center hypothesis. Recent roost migration from Bothell to Redmond (2023--2025). Vocalization complexity: UW acoustic research, individual voice signatures, context-dependent calls. Mobbing behavior toward predators. Raven fission--fusion social dynamics and the social intelligence hypothesis.
+
+\subsubsection{Module 5: Cultural Significance}
+Nation-specific Raven traditions: Tlingit (dual Raven---creator and trickster), Haida (Raven and the First Men, Eagle/Raven moiety system), Tsimshian, Kwakwaka'wakw, Heiltsuk, Coast Salish, Koyukon, and Inuit traditions. Bill Reid's sculpture as cultural bridge. Formline art traditions. The raven as shapechanger, bringer of light, and creator of Haida Gwaii. Contemporary Indigenous artists working with corvid imagery. OCAP\textregistered{} and CARE principles for knowledge attribution.
+
+\subsubsection{Module 6: Threats and Conservation}
+West Nile virus: near-100\% laboratory fatality rate in American Crows; documented 30\% national population decline; the dilution effect in biodiverse western habitats; population recovery trajectories. Crow--raven competitive dynamics under urbanization. Climate change effects on habitat boundaries. Raven population impacts on species of concern (Marbled Murrelet, Snowy Plover, Sage-Grouse). Human--corvid conflict and coexistence in urban PNW.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:                    # Memory/scheduling
+    role: Mission orchestration and wave timing
+    model: opus
+    tasks:
+      - Cross-module synthesis
+      - Cultural sensitivity review
+      - Through-line integration
+
+  denise:                   # Display/output
+    role: Document production and formatting
+    model: sonnet
+    tasks:
+      - Module survey compilation
+      - Species profile assembly
+      - Table and diagram generation
+
+  paula:                    # I/O/communication
+    role: Source validation and verification
+    model: sonnet
+    tasks:
+      - Citation verification
+      - Cross-module consistency
+      - Fact-checking against agency data
+
+  m68000:                   # CPU/logic
+    role: Shared schemas and scaffolding
+    model: haiku
+    tasks:
+      - Template generation
+      - Index construction
+      - Schema validation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item American Crow and Common Raven ecology, behavior, and cognition in the PNW
+  \item The 2020 Northwestern Crow taxonomic merger and its implications
+  \item Nation-specific Indigenous cultural traditions involving Raven
+  \item West Nile virus impact on PNW crow populations
+  \item Communal roosting behavior with focus on Seattle-area roosts
+  \item Field identification guide for PNW corvids
+  \item Urban ecology and human--corvid coexistence
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Non-Corvus corvids (Steller's Jay, Clark's Nutcracker, Black-billed Magpie---future modules)
+  \item Corvid species outside the PNW (Fish Crow, Chihuahuan Raven, etc.)
+  \item Detailed neuroanatomy (referenced but not primary focus)
+  \item Aviculture or captive corvid care
+  \item Pest management protocols (referenced in conservation context only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Species profiles cover American Crow, Common Raven, and former Northwestern Crow with complete taxonomic, morphological, and behavioral data sourced from agency publications.
+  \item The 2020 AOS taxonomic merger is explained with reference to Slager et al.\ (2020) genomic evidence and the AOS Checklist Committee decision.
+  \item Cognition section synthesizes at least six peer-reviewed studies covering tool use, memory, facial recognition, and social cognition.
+  \item Niche partitioning between crows and ravens is mapped across at least four PNW habitat zones with sourced ecological data.
+  \item Cultural significance module names at least six specific Indigenous nations with distinct Raven traditions; no generic ``Native American'' attributions.
+  \item West Nile virus section includes laboratory fatality rates, field mortality data, national population impact figures, and PNW-specific recovery data, all with citations.
+  \item UW Bothell communal roost is documented with population counts, temporal patterns, and the 2023--2025 roost migration, sourced from university and Audubon data.
+  \item Vocalization research is described with reference to at least two UW research programs.
+  \item All numerical claims are attributed to specific sources (government agencies, peer-reviewed journals, or professional organizations).
+  \item Document is self-contained: a reader with no prior knowledge can understand the full corvid ecology of the PNW.
+  \item Safety boundaries are respected: no generic Indigenous attributions, no endangered species location data, no policy advocacy.
+  \item Through-line connects corvid ecology to the GSD ecosystem's Amiga Principle and ``spaces between'' philosophy.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+PNW Taxonomy Reference & Component naming source; this pack extends the Raven entry & Active \\
+GSD College Layer & This pack becomes a department-level module & Planned \\
+Foxfire Heritage Skills & Cultural content aligns with heritage documentation principles & Active \\
+GSD BBS Educational Pack & Delivery format reference for interactive content & Planned \\
+The Space Between & Philosophical spine; ``spaces between'' framing & Published \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle teaches that remarkable outcomes emerge not from brute computational power but from architectural elegance---specialized execution paths working in concert. The corvid brain is the biological proof of concept. With a brain weighing barely 15 grams, a crow matches the cognitive performance of primates with brains orders of magnitude larger. The trick is not more neurons but better wiring: denser pallial neurons, specialized caching circuits, a social cognition architecture that supports facial recognition, episodic-like memory, and possibly even a form of displacement---the ability to communicate about objects not present.
+
+The spaces between are where meaning lives. Between the crow and the raven lies a landscape-scale division of ecological labor. Between Tlingit creator-Raven and Tlingit trickster-Raven lies the full spectrum of what it means to bring a world into being through accident, appetite, and grace. Between the Northwestern Crow that existed for 160 years in our field guides and the American Crow it always was lies a lesson about the boxes we build and the organisms that refuse to stay in them.
+
+This is what we study when we study corvids: the architecture of intelligence, the ecology of coexistence, and the cultural memory of creatures that were here before us and will be here after.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Corvids of the PNW --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government wildlife agencies, peer-reviewed journals, and university research programs. It is organized by module to support parallel agent production. Each module is self-contained: an agent assigned to produce a module section can work from its reference alone.
+
+Key source organizations: Washington Department of Fish and Wildlife (WDFW), Oregon Department of Fish and Wildlife (ODFW), U.S. Geological Survey (USGS), National Park Service (NPS), Cornell Lab of Ornithology, American Ornithological Society (AOS), UW School of Environmental and Forest Sciences, Audubon Society, BirdLife International.
+
+\subsection{Module 1 Reference: Taxonomy and Identification}
+
+\subsubsection{Species Profiles}
+
+\textbf{American Crow} (\textit{Corvus brachyrhynchos}): Length 40--53 cm, wingspan 85--100 cm. All-black plumage with iridescent sheen. Fan-shaped tail. Higher-pitched ``caw'' vocalization. Omnivorous generalist. North American population estimated at approximately 28--31 million individuals (BirdLife International, 2012; recent monitoring data). Three to five recognized subspecies including the western crow (\textit{C. b. hesperis}) and the former Northwestern Crow (\textit{C. b. caurinus}).
+
+\textbf{Common Raven} (\textit{Corvus corax principalis}---Northern Raven subspecies in PNW): Length 56--69 cm, wingspan 116--118 cm, weight 689 g to 1.63 kg. Substantially larger than crows. Wedge-shaped tail, massive curved bill, shaggy throat feathers. Deep guttural croaking vocalizations. The most widely distributed corvid in the Northern Hemisphere, with approximately 7.7 million individuals in the Americas. Eleven accepted subspecies globally. Lifespan exceeds 23 years in the wild; the oldest known wild raven lived to 17 years, 2 months (NPS).
+
+\textbf{Former Northwestern Crow} (\textit{C. b. caurinus}, now subspecies of American Crow): Historically described as a smaller, coastal-adapted crow with a lower, hoarser voice, restricted to the Pacific coast from the Olympic Peninsula to southern Alaska. Closely associated with intertidal habitats. Distinctive behaviors included dropping shellfish onto rocks and caching food during low tide for retrieval at high tide.
+
+\subsubsection{The 2020 Taxonomic Merger}
+
+The Northwestern Crow was first described scientifically in the mid-19th century and was treated as a full species (\textit{Corvus caurinus}) for most of the following 160 years, though its status oscillated: full species in the 1886 AOU Checklist, subspecies in 1931, restored to species in 1957. The fundamental problem was that differentiating the two on phenotypic features---size, voice, behavior---proved nearly impossible, especially in Washington where ranges overlapped.
+
+In 2020, Slager et al.\ published genomic analysis in \textit{Molecular Ecology} examining crows from California to Alaska. Key findings: (1) along the shared 900 km range from coastal Washington to British Columbia, they found no genetically ``pure'' individual of either species; (2) hybridization had been occurring since well before colonial landscape changes; (3) phenotypic differences (smaller size, intertidal habitat, lower-pitched voice) reflected local adaptations and individual variation rather than species-level divergence.
+
+On June 30, 2020, the AOS North American Classification Committee voted to absorb \textit{Corvus caurinus} into \textit{Corvus brachyrhynchos}, published in the 61st Supplement to the AOS Checklist (\textit{The Auk}, 2020). The Northwestern Crow is now treated as subspecies \textit{C. b. caurinus} within the western crow group. USGS Chesser, chair of the committee, stated that the genomic data indicated variation within a species rather than two distinct species.
+
+\subsection{Module 2 Reference: Cognition and Intelligence}
+
+\subsubsection{Brain Architecture}
+
+Corvids possess a brain-to-body mass ratio comparable to non-human great apes and cetaceans, slightly lower than humans. Their hyperpallium (the avian equivalent of the neocortex) is disproportionately large. Despite having no neocortex, corvids achieve comparable cognitive performance through densely packed pallial neurons.
+
+\subsubsection{Tool Use and Manufacture}
+
+New Caledonian crows (\textit{Corvus moneduloides}) represent the benchmark for corvid tool use, demonstrating multi-step metatool problems where each stage is out of sight (Gruber et al., \textit{Current Biology}, 2019). They use mental representations to preplan tool sequences---the first conclusive evidence that birds can plan several steps ahead while using tools. Rooks (\textit{Corvus frugilegus}), which do not use tools in the wild, demonstrate tool use and modification in experimental settings (Bird and Emery, 2009).
+
+PNW-specific tool-analog behavior: Northwestern/coastal crows routinely drop hard-shelled prey (clams, mussels, sea urchins) onto rocks and paved surfaces---a behavior requiring understanding of substrate hardness, drop height, and item fragility.
+
+\subsubsection{Facial Recognition}
+
+John Marzluff (UW School of Environmental and Forest Sciences) demonstrated that American Crows can recognize and remember individual human faces for at least 17 years. Crows that were trapped by a researcher wearing a specific mask subsequently mobbed and alarm-called at anyone wearing that mask, even years later. This information was transmitted socially---crows that had never been trapped also learned to mob the ``dangerous'' face.
+
+\subsubsection{Episodic-Like Memory}
+
+Western scrub-jays (\textit{Aphelocoma californica}) demonstrated the ``what-where-when'' components of episodic-like memory in caching experiments (Clayton and Dickinson, 1998). Eurasian jays (\textit{Garrulus glandarius}) showed evidence through incidental encoding paradigms, forcing recall without prior opportunity to explicitly encode information (Davies et al., 2024).
+
+\subsubsection{Theory of Mind and Social Cognition}
+
+Ravens demonstrate perspective-taking abilities: they appear to understand that other individuals have their own beliefs and desires (Bugnyar et al., 2016). Cache-protection strategies in corvids depend not only on the presence of potential pilferers but on whether those pilferers are paying attention. Ravens demonstrate inferential reasoning, perspective taking, and future planning (Schloegl et al., 2009; Kabadayi and Osvath, 2017).
+
+A 2026 systematic review identified 47 empirical studies spanning 16 corvid species on cognitive development, covering object permanence, caching, tool use/manufacture, object manipulation, play, and gaze following (bioRxiv, 2026).
+
+\subsubsection{Consciousness and Sentience}
+
+Using Birch et al.'s (2020) five-dimensional framework for animal consciousness, researchers assessed corvids as ``plausible sentience candidates,'' noting evidence across perceptual richness, evaluative richness, unity of consciousness, self-consciousness, and temporal thickness (PMC, 2025).
+
+\subsection{Module 3 Reference: Ecology and Habitat}
+
+\subsubsection{Niche Partitioning in the PNW}
+
+In Washington State, crows prefer lower elevations and moist places including creeks, streams, and lakeshores, and are most common in urban and suburban areas west of the Cascades. Ravens are found throughout Washington except in major urban areas; they replace crows in mountainous areas, deserts, and rimrock, and are more common east of the Cascade Range (WDFW). In Oregon, ravens are fairly common statewide but population densities are highest east of the Cascades (ODFW).
+
+Ravens in Washington avoid cities, probably due to earlier harassment by humans, competition with increasingly abundant crows, and lack of appropriate nest sites (BirdWeb/Seattle Audubon). Ravens prefer heavily contoured landscapes, possibly because this habitat produces thermals used for long-distance foraging flights.
+
+\subsubsection{Diet Ecology}
+
+Crows are omnivorous generalists: insects, spiders, snails, fish, snakes, eggs, nestling birds, cultivated fruits, nuts, vegetables, and extensive anthropogenic foods (bread, dog food, garbage). A USGS campground study found American Crows had the most diverse diet among corvids studied, heavily incorporating human food sources.
+
+Ravens are omnivorous and highly opportunistic, taking carrion, small mammals up to adult rock pigeon size, nestling herons, eggs, grasshoppers, beetles, scorpions, fish, and grains. They are significant scavengers, associated with wolf packs in winter nearly 100\% of the time (Cornell Lab). Subadult ravens that discover carcasses guarded by territorial adults will return to communal roosts and communicate the find, returning with numbers to overwhelm territory holders.
+
+\subsubsection{Breeding Ecology}
+
+American Crows are monogamous with long-term pair bonds and cooperative breeding. Offspring from previous years frequently remain as ``helpers at the nest,'' assisting with feeding nestlings. Typical clutch size is 4--6 eggs; breeding success yields 1--2 fledglings per pair. Average breeding territory allows sixfold overlap compared to ravens.
+
+Common Ravens are monogamous with lifelong pair bonds. Each mated pair defends a large exclusive territory year-round. Eggs incubated 18--21 days; young remain in the nest 38--44 days, fed by both parents. Nests typically placed on cliff ledges or in tall conifers.
+
+\subsection{Module 4 Reference: Social Behavior and Communication}
+
+\subsubsection{Communal Roosting in the PNW}
+
+The UW Bothell/North Creek Wetland roost became established around 2009 after wetland restoration (begun 1997) produced trees of sufficient size. At peak, up to 16,000 crows congregated nightly during fall and winter, drawn from a 30-mile radius including Seattle, Bellevue, Everett, and the Snohomish Valley (Marzluff, UW; Seattle Times).
+
+In the 2023 Audubon Christmas Bird Count, approximately 8,000--9,000 crows were observed flying past the Bothell roost to a newly restored wetland at Sixty Acres in Redmond (Wacker, UW Bothell; Pilchuck Audubon Society). By January 2025, little to no evidence of continued roosting at Bothell, though possible small numbers may persist (UW Bothell). Possible causes of the roost shift include campus construction, overcrowding, and competition with Cackling Geese for the wetland.
+
+Roosting serves predator protection (safety in numbers, shared alarm calls), thermoregulation, and possibly information exchange. Crows are unihemispheric sleepers---sleeping half the brain at a time, literally sleeping with one eye open (Pendergraft, UW). Pre-roost staging areas on campus buildings and athletic fields remain poorly understood but likely serve social functions.
+
+\subsubsection{Vocalization Research}
+
+UW Bothell researchers Douglas Wacker (biology) and Shima Abadi (acoustic engineering) launched a project to analyze crow vocalizations at the Bothell roost using sophisticated instrument arrays. Crows produce a diverse repertoire: rattles, bell-like notes, rapid-fire caws, drawn-out croaks. Cornell Lab research confirmed individual crows have distinctive voices. Context-dependent vocalization patterns (e.g., three-caw vs.\ four-caw sequences) may encode different information.
+
+Ravens possess over 30 distinct call types, including a deep guttural croak that is unmistakable in the field. They can imitate a variety of sounds including the human voice. Derek Bickerton (linguist) argued ravens are one of only four known animals (with bees, ants, and humans) demonstrating displacement---communicating about objects or events distant in space or time.
+
+\subsubsection{Raven Social Intelligence}
+
+Raven foraging groups are highly dynamic (fission--fusion dynamics), with individuals coming and going. Despite the ``open-group'' character, recent research demonstrates structured social relationships within these groups. Bugnyar's Austrian Alps research program found ravens form and maintain social relationships across repeated encounters, supporting the social intelligence hypothesis as a driver of corvid cognitive evolution (PMC, 2024). Non-breeder social complexity (subgroups with different foraging strategies) represents an additional source of cognitive challenge beyond the pair bond.
+
+\subsection{Module 5 Reference: Cultural Significance}
+
+\textbf{SENSITIVITY NOTE:} All cultural content must use nation-specific attribution. The following summaries identify distinct traditions; full module production must verify details against nation-authorized sources where available.
+
+\subsubsection{Tlingit Raven Traditions}
+
+In Tlingit culture, two Raven characters are sometimes distinguished: the creator Raven, responsible for bringing the world into being, and the trickster Raven, whose frivolous behavior causes both chaos and transformation. Raven travelled extensively along the Tlingit coast, first south then north, then inland along the Stikine, Nass, Skeena, and Taku rivers. He is a revered transformer figure who shapes the world, yet stories frequently center on his gluttony and impulsive schemes.
+
+\subsubsection{Haida Raven Traditions}
+
+Haida society is divided into two moieties: Eagle and Raven. The Raven moiety is fundamental to social structure and identity. In the Haida creation narrative, Raven discovers humans hidden in a giant clamshell on the beach at Haida Gwaii (Rose Spit) and coaxes them out. He subsequently brings them Sun, Moon, Stars, Fire, Salmon, and Cedar. Bill Reid's sculpture ``The Raven and The First Men'' (1980, now at UBC Museum of Anthropology) is a defining work of Canadian art depicting this creation moment. Haida Gwaii, the archipelago of over 150 islands, is where time begins in these narratives; Raven's image is carved on totem poles and painted on houses throughout the islands.
+
+\subsubsection{Tsimshian, Kwakwaka'wakw, and Heiltsuk Traditions}
+
+To the Tsimshian, Raven is the original organizer, Transformer, teacher, catalyst, and chief spirit. For the Kwakwaka'wakw, Raven masks with articulated beaks that open and close are used in potlatches and ceremonies to reenact Raven myths, with the dancer embodying the spirit. Heiltsuk traditions similarly incorporate Raven as shapechanger and transformer.
+
+\subsubsection{Coast Salish Traditions}
+
+Coast Salish peoples have distinct artistic styles (more fluid than northern formline traditions) for representing Raven. The UW Bothell campus sits on Coast Salish land, connecting the contemporary crow roost directly to ancestral relationships with corvids.
+
+\subsubsection{Koyukon and Inuit Traditions}
+
+Koyukon (Athabaskan) and Inuit traditions in Alaska and the Arctic incorporate Raven as creator and trickster, with distinct emphases reflecting the ecological context of subarctic and arctic environments.
+
+\subsubsection{Shared Elements and Important Distinctions}
+
+Across nations, Raven is a shapechanger who takes human, animal, and inanimate forms. He is simultaneously creator and trickster---bringing light, fire, water, and salmon to humanity while driven by personal appetite rather than altruism. However, the specific narratives, ceremonial uses, artistic traditions, and theological weight differ significantly between nations. Tlingit and Haida traditions give Raven the most prominent creator role; traditions diminish in prominence moving south. Generic attribution erases these differences.
+
+\subsection{Module 6 Reference: Threats and Conservation}
+
+\subsubsection{West Nile Virus}
+
+WNV was first detected in the Western Hemisphere in New York City in 1999 and spread to the Pacific Coast within five years. American Crows are extremely susceptible: laboratory mortality approaches 100\% (McLean et al., 2001; Komar et al., 2003). In a marked Oklahoma population, 65\% of crows died from WNV exposure in a single season (2003), with total mortality reaching 72\% when natural causes were included (Caffrey, \textit{Ornithological Applications}, 2005). In Illinois, 68\% WNV-attributed mortality was documented in a tracked population (PMC, 2004).
+
+Nationally, the U.S.\ crow population declined by approximately 30\% following WNV introduction (Pennsylvania Game Commission). However, the virus became less virulent as it spread westward (Cornell Lab), and crows in species-rich (biodiverse) habitats fared better due to the ``dilution effect''---mosquitoes in diverse ecosystems are more likely to bite species with lower WNV amplification rates.
+
+The American Crow population experienced a sharp 45\% decline from 1999 to 2020 primarily attributed to WNV, with partial recovery observed in some regions since approximately 2010 as populations adapted and incidence rates stabilized. Genetic diversity actually increased after WNV emergence due to immigration refilling depleted territories, with no evidence of a genetic bottleneck.
+
+\subsubsection{Raven Impacts on Species of Concern}
+
+Increasing raven populations in some western areas threaten several species of conservation concern. Ravens have been implicated in predation on California Condor eggs, Marbled Murrelet nests, Least Tern colonies, Snowy Plover nests, Sandhill Crane nests, and Sage-Grouse eggs (Cornell Lab, NPS, BirdWeb). Some control measures have been proposed or implemented. In the western Mojave Desert, human development led to an estimated 16-fold increase in raven population over 25 years.
+
+\subsubsection{Urban Ecology and Coexistence}
+
+Crow populations in the PNW have expanded into urban and suburban areas since the late 20th century, benefiting from anthropogenic food sources. Ravens historically avoided PNW cities but are now observed at edges of urban areas, potentially expanding their urban tolerance. The primary competitive dynamic: crows dominate urban lowlands; ravens are excluded from city cores in Washington, possibly due to earlier human harassment, crow competition, and insufficient nest sites.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Indigenous knowledge & Nation-specific attribution required; never generic ``Indigenous peoples'' & ABSOLUTE \\
+Raven nest locations & No GPS coordinates or specific nest site locations for any listed species & ABSOLUTE \\
+Cultural narratives & Source to nation-authorized publications where available; acknowledge oral tradition & GATE \\
+WNV mortality data & All figures attributed to specific peer-reviewed studies or agency reports & GATE \\
+Raven control programs & Present factual context without advocating for or against specific policies & ANNOTATE \\
+Human--corvid conflict & Present both perspectives (crop damage vs.\ ecosystem services) & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+Washington Department of Fish and Wildlife (WDFW). ``Crows.'' Publication 00611.
+\url{https://wdfw.wa.gov/sites/default/files/publications/00611/wdfw00611.pdf}
+
+Oregon Department of Fish and Wildlife (ODFW). ``Common Raven.''
+\url{https://myodfw.com/wildlife-viewing/species/common-raven}
+
+U.S.\ Geological Survey (USGS). Common Raven Habitat Map, bCORAx\_CONUS\_2001v1.
+\url{https://www.usgs.gov/data/common-raven-corvus-corax-bcoraxconus2001v1-habitat-map}
+
+National Park Service (NPS). ``Common Raven.''
+\url{https://www.nps.gov/places/000/common-raven.htm}
+
+Pennsylvania Game Commission. ``West Nile Virus.''
+\url{https://www.pa.gov/agencies/pgc/wildlife/wildlife-health/wildlife-diseases/west-nile-virus}
+
+\subsubsection{Peer-Reviewed Research}
+
+Slager DL, Epperly KL, Ha RR, Rohwer S, Wood C, Van Hemert C, Klicka J. (2020). Cryptic and extensive hybridization between ancient lineages of American crows. \textit{Molecular Ecology}. DOI: 10.1111/mec.15377
+
+Chesser RT et al. (2020). Sixty-first Supplement to the AOS Check-list of North American Birds. \textit{The Auk: Ornithological Advances}. DOI: 10.1093/auk/ukaa030
+
+Bugnyar T, Reber SA, Buckner C. (2016). Ravens attribute visual access to unseen competitors. \textit{Nature Communications} 7:10506.
+
+Kabadayi C, Osvath M. (2017). Ravens parallel great apes in flexible planning for tool-use and bartering. \textit{Science} 357:202--204.
+
+Gruber R et al. (2019). New Caledonian Crows Use Mental Representations to Solve Metatool Problems. \textit{Current Biology} 29(4):686--692.
+
+Clayton NS, Dickinson A. (1998). Episodic-like memory during cache recovery by scrub jays. \textit{Nature} 395:272--274.
+
+Davies JR, Garcia-Pelegrin E et al. (2024). Incidental encoding and unexpected recall in Eurasian jays. [Multiple publications in 2024 series.]
+
+Caffrey C, Smith SCR, Weston TJ. (2005). West Nile Virus Devastates an American Crow Population. \textit{Ornithological Applications} 107(1):128--132.
+
+Yaremych SA et al. (2004). West Nile Virus and High Death Rate in American Crows. \textit{Emerging Infectious Diseases} 10(4):709--711.
+
+Seed A, Emery NJ, Clayton NS. (2009). Intelligence in Corvids and Apes: A Case of Convergent Evolution. \textit{Ethology} 115:401--420.
+
+Bugnyar T. (2024). Why are ravens smart? Exploring the social intelligence hypothesis. \textit{Animal Cognition} 27:9. DOI: 10.1007/s10071-023-01837-5
+
+\subsubsection{Professional Organizations and University Sources}
+
+Cornell Lab of Ornithology. ``Common Raven Overview'' and ``Counting Crows: The Impact of the West Nile Virus.''
+\url{https://www.allaboutbirds.org/guide/Common_Raven/overview}
+
+Seattle Audubon / BirdWeb. ``Northwestern Crow'' and ``Common Raven.''
+\url{https://www.birdweb.org/birdweb/bird/northwestern_crow}
+
+UW Bothell. ``Crows on Campus.''
+\url{https://www.uwb.edu/about/crows}
+
+UW College of the Environment. ``A Story of 10,000 Crows.'' (2021).
+\url{https://environment.uw.edu/news/2021/12/a-story-of-10000-crows-the-nightly-migration-to-uw-bothell-campus/}
+
+Marzluff JM, Angell T. (2005). \textit{In the Company of Crows and Ravens}. Yale University Press.
+
+Marzluff JM, Angell T. (2012). \textit{Gifts of the Crow}. Free Press.
+
+Corvidresearch.blog (Dr.\ Kaeli Swift, UW). ``A tale of two crows: northwestern vs.\ American.'' (2020).
+\url{https://corvidresearch.blog/2020/04/13/a-tale-of-two-crows-northwestern-vs-american/}
+
+Audubon. ``Why the Northwestern Crow Vanished Overnight.'' (2020/2025).
+\url{https://www.audubon.org/magazine/why-northwestern-crow-vanished-overnight}
+
+Birds Connect Seattle. ``Murder on the Move: UW Bothell Crow Roost Taking Flight.'' (2024).
+\url{https://birdsconnectsea.org/2024/11/01/murder-on-the-move-uw-bothell-crow-roost-taking-flight/}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality educational reference on the crows and ravens of the Pacific Northwest. The document will span taxonomy, cognition, ecology, social behavior, cultural significance, and conservation, organized as a GSD College knowledge pack suitable for both standalone reading and integration into the GSD ecosystem's educational layer.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 ──► WAVE 1 (Parallel) ──────────► WAVE 2 ──► WAVE 3
+  Foundation   Track A: Natural Science      Synthesis   Publication
+               Track B: Culture & Threats                + Verify
+
+  [Haiku]     [Sonnet+Opus]                 [Opus]     [Sonnet]
+  Sequential   Parallel                     Sequential  Sequential
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Schema Layer} --- Shared data models, species profile templates, citation format
+  \item \textbf{Survey Layer} --- Module-level research compilations from Stage 2 reference
+  \item \textbf{Synthesis Layer} --- Cross-module integration, through-line narrative
+  \item \textbf{Publication Layer} --- Final document assembly, formatting, verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Species Profile Set & 3 profiles (Am.\ Crow, Raven, fmr.\ NW Crow) with full taxonomy/morphology/behavior & M1 \\
+2 & Cognition Survey & 6+ peer-reviewed studies synthesized; tool use, memory, facial recognition, social cognition & M2 \\
+3 & Ecology Reference & 4+ PNW habitat zones mapped; niche partitioning documented & M3 \\
+4 & Social Behavior Guide & Roosting, vocalization, cooperative breeding documented with UW data & M4 \\
+5 & Cultural Significance Reference & 6+ nations named with distinct traditions; OCAP\textregistered{}/CARE aligned & M5 \\
+6 & Conservation Assessment & WNV data, raven impacts, urban ecology synthesized with citations & M6 \\
+7 & Integrated Knowledge Pack & All modules assembled; cross-references validated; self-contained & ALL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SCHEMA & --- & Haiku & 2,000 \\
+W0-SOURCES & --- & Haiku & 3,000 \\
+W1A-TAXONOMY & W0 & Sonnet & 8,000 \\
+W1A-COGNITION & W0 & Opus & 10,000 \\
+W1A-ECOLOGY & W0 & Sonnet & 8,000 \\
+W1B-SOCIAL & W0 & Sonnet & 8,000 \\
+W1B-CULTURE & W0 & Opus & 10,000 \\
+W1B-CONSERVATION & W0 & Sonnet & 8,000 \\
+W2-SYNTHESIS & W1A, W1B & Opus & 12,000 \\
+W2-CROSSREF & W1A, W1B & Sonnet & 5,000 \\
+W3-ASSEMBLY & W2 & Sonnet & 8,000 \\
+W3-VERIFY & W3-ASSEMBLY & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Alloc.} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & 32\% & Cognition, Culture, Synthesis & Judgment-heavy analysis; cultural sensitivity; cross-module integration \\
+Sonnet & 58\% & Taxonomy, Ecology, Social, Conservation, Assembly, Verify & Structured compilation; fact-checking; document production \\
+Haiku & 10\% & Schema, Sources & Templates; scaffolding; index construction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Components} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 2 \\
+1 & Research (A+B) & Parallel & Sonnet+Opus & 6 \\
+2 & Synthesis & Sequential & Opus & 2 \\
+3 & Publication & Sequential & Sonnet & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SCHEMA & Species profile template, citation format, section headers, cross-reference keys & Haiku & 2,000 \\
+W0-SOURCES & Source index with URLs, access dates, quality ratings for all referenced materials & Haiku & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Natural Science (Taxonomy, Cognition, Ecology):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W1A-TAXONOMY & Species profiles, 2020 merger analysis, field ID keys, subspecies variation & Sonnet & 8,000 \\
+W1A-COGNITION & Intelligence synthesis: tool use, memory, facial recognition, theory of mind, consciousness & Opus & 10,000 \\
+W1A-ECOLOGY & Niche partitioning, diet, breeding, territory dynamics across PNW habitat zones & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Culture and Threats (Social, Cultural, Conservation):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W1B-SOCIAL & Roosting, vocalizations, cooperative breeding, raven social dynamics & Sonnet & 8,000 \\
+W1B-CULTURE & Nation-specific Raven traditions (6+ nations), art, ceremony, contemporary expression & Opus & 10,000 \\
+W1B-CONSERVATION & WNV impact, raven predation concerns, urban ecology, coexistence & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W2-SYNTHESIS & Cross-module narrative integration; through-line weaving; ``spaces between'' framing & Opus & 12,000 \\
+W2-CROSSREF & Validate cross-module references; resolve contradictions; ensure consistency & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W3-ASSEMBLY & Final document assembly; formatting; table of contents; index generation & Sonnet & 8,000 \\
+W3-VERIFY & Run test plan; verify all citations; confirm safety boundaries & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 outputs cached as shared context for all Wave 1 agents (5-minute TTL window)
+  \item Track A and Track B run in parallel within the same session where possible
+  \item Source index (W0-SOURCES) passed by reference to avoid re-fetching URLs
+  \item Cultural module (W1B-CULTURE) isolated to dedicated Opus context for sensitivity
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0 & 0 & 0 & 5,000 \\
+Wave 1 & 20,000 & 24,000 & 0 \\
+Wave 2 & 12,000 & 5,000 & 0 \\
+Wave 3 & 0 & 13,000 & 0 \\
+\midrule
+\textbf{Total} & \textbf{32,000} & \textbf{42,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} approximately 79,000 tokens across 12 components.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+                    W0-SCHEMA ──┐
+                    W0-SOURCES ─┤
+                                │
+                    ┌───────────┴───────────┐
+                    │                       │
+          ┌─── TRACK A ───┐      ┌─── TRACK B ───┐
+          │                │      │                │
+     W1A-TAXONOMY    W1A-ECOLOGY  W1B-SOCIAL  W1B-CONSERVATION
+          │                │      │                │
+     W1A-COGNITION         │      W1B-CULTURE      │
+          │                │      │                │
+          └────────┬───────┘      └────────┬───────┘
+                   │                       │
+                   └───────────┬───────────┘
+                               │
+                         W2-SYNTHESIS
+                         W2-CROSSREF
+                               │
+                         W3-ASSEMBLY
+                               │
+                         W3-VERIFY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK & 17\% \\
+Core functionality & 18 & Required & BLOCK & 44\% \\
+Integration & 10 & Required & BLOCK & 24\% \\
+Edge cases & 6 & Best-effort & LOG & 15\% \\
+\midrule
+\textbf{Total} & \textbf{41} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every population count, mortality rate, and measurement attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific legislative or management positions. \\
+SC-IND & Indigenous attribution & Every Indigenous knowledge reference names a specific nation; zero generic ``Indigenous peoples'' or ``Native American'' attributions. \\
+SC-END & Endangered species & No GPS coordinates or specific nest/den/breeding site locations for any species of concern. \\
+SC-CLI & Climate projections & Any climate-related claims cite specific agency data or published projections. \\
+SC-CUL & Cultural sensitivity & No sacred or restricted knowledge presented without nation-authorized sourcing; oral tradition acknowledged. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Am.\ Crow profile & Complete taxonomy, morphology (length, wingspan, weight), behavior, population data with sources. \\
+CF-02 & Raven profile & Complete profile including subspecies (\textit{C. c. principalis}), range, lifespan data with sources. \\
+CF-03 & NW Crow merger & Slager et al.\ (2020) cited; AOS decision documented; no pure individuals finding stated. \\
+CF-04 & Tool use coverage & At least 3 studies cited: New Caledonian metatool, shellfish dropping, rook tool modification. \\
+CF-05 & Facial recognition & Marzluff UW research cited with 17-year memory duration and social transmission. \\
+CF-06 & Episodic memory & Clayton \& Dickinson (1998) scrub-jay study and 2024 jay incidental encoding cited. \\
+CF-07 & Theory of mind & Bugnyar et al.\ (2016) raven perspective-taking cited. \\
+CF-08 & Niche partitioning & At least 4 PNW habitat zones described: urban lowland, coastal, alpine/old-growth, east Cascades. \\
+CF-09 & Diet ecology & Crow generalist diet and raven opportunistic diet documented with USGS/WDFW data. \\
+CF-10 & Breeding ecology & Cooperative breeding (crow) and lifelong monogamy (raven) documented with clutch size data. \\
+CF-11 & UW Bothell roost & 16,000 peak count; 2009 establishment; 2023--2025 migration to Redmond documented. \\
+CF-12 & Vocalization research & Wacker/Abadi UW Bothell project referenced; individual voice signatures noted. \\
+CF-13 & Tlingit Raven & Dual creator/trickster distinction documented. \\
+CF-14 & Haida Raven & Raven and the First Men; Eagle/Raven moiety; Bill Reid sculpture referenced. \\
+CF-15 & 6+ nations named & Tlingit, Haida, Tsimshian, Kwakwaka'wakw, Heiltsuk, Coast Salish minimum. \\
+CF-16 & WNV fatality rate & Near-100\% laboratory mortality cited with McLean/Komar source. \\
+CF-17 & WNV population decline & 30\% national decline and 45\% 1999--2020 decline figures with sources. \\
+CF-18 & Dilution effect & Cornell Lab research on biodiversity protection cited. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Taxonomy $\rightarrow$ Ecology & NW Crow coastal adaptation discussed in both taxonomy and ecology modules consistently. \\
+IN-02 & Cognition $\rightarrow$ Social & Facial recognition connected to roosting behavior (social transmission of threat info). \\
+IN-03 & Cognition $\rightarrow$ Culture & Corvid intelligence connected to Indigenous recognition of raven cleverness. \\
+IN-04 & Ecology $\rightarrow$ Conservation & Niche partitioning related to raven expansion and species-of-concern impacts. \\
+IN-05 & Social $\rightarrow$ Conservation & Roosting concentration related to WNV transmission dynamics. \\
+IN-06 & Culture $\rightarrow$ Ecology & Indigenous ecological knowledge (raven--wolf association, salmon connection) cross-referenced. \\
+IN-07 & Cross-module species data & Morphological measurements consistent across all modules. \\
+IN-08 & Citation consistency & Same study referenced in multiple modules uses identical citation data. \\
+IN-09 & Document self-containment & Reader with no prior corvid knowledge can understand full PNW corvid system. \\
+IN-10 & Through-line presence & ``Spaces between'' framing appears in vision, synthesis, and closing. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Taxonomic uncertainty & Ongoing debate about subspecies boundaries acknowledged. \\
+EC-02 & Cognition limits & Limitations of corvid consciousness research noted (anthropomorphism risk). \\
+EC-03 & Data gaps & Areas of incomplete knowledge explicitly identified (e.g., PNW-specific WNV data sparse). \\
+EC-04 & Temporal currency & Primary sources published within last 10 years where available. \\
+EC-05 & Range edge cases & Crow--raven overlap zones and behavioral variation at range boundaries noted. \\
+EC-06 & Cultural diversity & Variation in Raven's prominence (diminishes north to south) acknowledged. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1.\ Species profiles complete & CF-01, CF-02 & Pending \\
+2.\ AOS merger explained & CF-03 & Pending \\
+3.\ Cognition synthesis (6+ studies) & CF-04--CF-07 & Pending \\
+4.\ Niche partitioning (4+ zones) & CF-08 & Pending \\
+5.\ Cultural module (6+ nations) & CF-13--CF-15 & Pending \\
+6.\ WNV data with citations & CF-16--CF-18 & Pending \\
+7.\ UW Bothell roost documented & CF-11, CF-12 & Pending \\
+8.\ Vocalization research referenced & CF-12 & Pending \\
+9.\ All numbers attributed & SC-NUM & Pending \\
+10.\ Self-contained document & IN-09 & Pending \\
+11.\ Safety boundaries respected & SC-IND, SC-END, SC-CUL & Pending \\
+12.\ Through-line present & IN-10 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache timing \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gaps \\
+EXEC-A & Executor (Track A) & Natural science module production (Taxonomy, Cognition, Ecology) \\
+EXEC-B & Executor (Track B) & Culture and threats module production (Social, Culture, Conservation) \\
+CRAFT-ECO & Ecologist & Ecological data analysis; niche partitioning; habitat mapping \\
+CRAFT-CUL & Cultural Specialist & Nation-specific attribution; OCAP\textregistered{}/CARE compliance; sensitivity review \\
+VERIFY & Verification & Source validation; accuracy checking; cross-module consistency \\
+INTEG & Integration Agent & Cross-module relationship validation; through-line coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; cultural content review gate \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total components & 12 \\
+Parallel tracks & 2 (Tracks A and B in Wave 1) \\
+Estimated context windows & 18--22 \\
+Estimated sessions & 4--6 \\
+Total token budget & $\sim$79,000 \\
+Model split & Opus 32\% / Sonnet 58\% / Haiku 10\% \\
+Activation profile & Squadron (12 roles) \\
+Safety-critical tests & 7 (mandatory-pass / BLOCK) \\
+Total tests & 41 \\
+Human gates & 2 (post-Wave 1 cultural review; post-Wave 3 final) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Raven was a shapechanger, who could assume any form---human or animal. He was a glutton and trickster, but he showed pity for the naked people he found in a giant clamshell. His trickery brought them the essentials for existence in a harsh world.''}
+
+\vspace{0.5em}
+
+\hfill --- Pacific Northwest oral tradition
+
+\vspace{1em}
+
+The spaces between the crow and the raven, between the species that was and the species it always was, between the trickster and the creator---these are the spaces where intelligence, ecology, and culture weave together into something larger than any single thread. This mission traces those threads.
+\end{quotebox}
+
+\end{document}

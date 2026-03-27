@@ -18,6 +18,7 @@
     { id: 'CDP', name: 'Coldplay', path: 'CDP/index.html' },
     { id: 'COI', name: 'Coil', path: 'COI/index.html' },
     { id: 'COL', name: 'Columbia Valley', path: 'COL/index.html' },
+    { id: 'CRV', name: 'Corvid PNW', path: 'CRV/index.html' },
     { id: 'DAA', name: 'Deep Audio', path: 'DAA/index.html' },
     { id: 'DDA', name: 'dada', path: 'DDA/index.html' },
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
