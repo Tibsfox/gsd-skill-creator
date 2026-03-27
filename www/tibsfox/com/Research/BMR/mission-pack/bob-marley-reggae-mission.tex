@@ -1,0 +1,1014 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — Cultural/Music/History domain
+%% Reggae national colors: gold, green, black — adapted for document aesthetics
+\definecolor{primary}{HTML}{4A148C}       % Deep burgundy-purple — section headers
+\definecolor{secondary}{HTML}{E65100}     % Warm amber-orange — subsection headers
+\definecolor{tertiary}{HTML}{1B5E20}      % Forest green — subsubsection headers
+\definecolor{accent}{HTML}{7B1FA2}        % Purple accent — pipeline arrows
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light lavender — quote boxes
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Light amber
+\definecolor{lighttertiary}{HTML}{E8F5E9} % Light green
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{goldaccent}{HTML}{F9A825}    % Reggae gold
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS AND FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Bob Marley \& Reggae}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Bob Marley and Reggae -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Bob Marley\\[0.3em]\& Reggae}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Music, Resistance, and the Rhythm of Liberation}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% TABLE OF CONTENTS
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1 — VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Bob Marley \& Reggae --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{None (foundational research mission)}
+\metafield{Context:}{GSD Deep Research Mission --- Cultural History and Musical Legacy}
+
+\subsection{Vision}
+
+In the spaces between a Trench Town government yard and a global stage, something extraordinary was born. Bob Marley did not invent reggae the way an engineer invents a machine --- he became the vessel through which a suffering people's deepest wisdom, spiritual hunger, and indestructible joy found its way into the world's ears. Reggae is, at its core, an architecture of resistance: a musical operating system that transforms pain into groove, oppression into prophecy, and raw human longing into something so structurally elegant it has outlasted the man who gave it its face.
+
+The Amiga Principle holds that remarkable outcomes emerge not from brute force but from specialized execution paths and architectural leverage. Reggae embodies this perfectly. In place of the thunderous arena-rock of its era, reggae wielded the one-drop drum pattern, the skank guitar, and the rolling bass --- three precisely tuned components that, together, create a groove capable of carrying the full weight of postcolonial history. Bob Marley understood, intuitively, that the \textit{spaces between the beats} were where the message lived. The offbeat rhythm, the pause before the downfall of Babylon, the breath between words --- these were not absences. They were the architecture.
+
+This mission documents the full arc: from Jamaica's pre-independence musical ferment through ska's offbeat exuberance, rocksteady's soulful slowing, reggae's spiritual flowering, and Marley's transformation of a Kingston ghetto sound into the world's first truly global protest music. It maps the Rastafari movement's theological engine, Marley's key discography, the structural innovations of reggae's producers, and the genre's living legacy --- UNESCO-inscribed, deeply sampled, and still speaking to the dispossessed on every continent.
+
+The through-line is this: when a people with almost nothing but rhythm and faith find the right architecture for their truth, that truth becomes unkillable. Bob Marley died at thirty-six. The music did not.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Erasure of context:} Reggae's global commodification (beach bars, t-shirts, streaming playlists) has systematically stripped the music of its political urgency, Rastafari theology, and postcolonial origins --- reducing it to a mood rather than a movement.
+
+  \item \textbf{Biographical flattening:} Popular culture has compressed Marley into a single icon (dreadlocks, joint, ``One Love''), obscuring his complex mixed-race identity, his radical pan-Africanism, his near-assassination, his conversion arc, and his evolution as a craftsman who practiced obsessively despite lacking natural gifts.
+
+  \item \textbf{Musical lineage gaps:} The path from Jamaican mento through ska, rocksteady, and into roots reggae --- and the key producers (Lee ``Scratch'' Perry, King Tubby, Coxsone Dodd) who engineered each transition --- remains poorly understood outside specialist circles.
+
+  \item \textbf{Rastafari misrepresentation:} The Rastafari movement, the theological spine of roots reggae, is routinely reduced to marijuana and dreadlocks, with its deep roots in Marcus Garvey's pan-Africanism, Ethiopian Orthodoxy, and Black liberation theology left unexplored.
+
+  \item \textbf{Legacy measurement deficit:} Reggae's documented influence on hip-hop, punk, reggaeton, dub, and dancehall --- and its 2018 UNESCO inscription as Intangible Cultural Heritage --- lacks systematic cross-genre analysis that would demonstrate the full architectural scope of the tradition's gift to world music.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One model:} \textit{The Groove as Carrier Wave} --- reggae transmits political, spiritual, and social content encoded in musical structure, where the offbeat rhythm and bass-forward mix function as an information delivery architecture tuned to the human body's response to rhythm.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+JAMAICAN MUSICAL ECOSYSTEM (1940s -- Present)
+============================================================
+
+ROOTS LAYER (1940s--1950s)
+  [Mento/Folk] <--- African rhythms + European quadrille
+  [R&B Radio]  <--- US Southern stations, New Orleans jazz
+
+EVOLUTIONARY LAYER (1960s)
+  [Ska]       <--- Mento + R&B + independence era energy
+     |                (upbeat, horn-driven, offbeat skank)
+     v
+  [Rocksteady]<--- Slower, soulful, bass-forward (1966--68)
+     |                (love themes + rude boy culture)
+     v
+  [Reggae]    <--- One-drop rhythm, spiritual themes (1968+)
+
+PRODUCTION LAYER (Parallel)
+  [Sound Systems]    [Studio One / Coxsone Dodd]
+  [Treasure Isle]    [Lee "Scratch" Perry / Upsetters]
+  [King Tubby / Dub] [Tuff Gong / Island Records]
+
+GLOBAL LAYER (1970s -- Present)
+  Bob Marley & The Wailers --> International Breakthrough
+  Roots Reggae --> Dub --> Dancehall --> Reggaeton
+  UK 2 Tone --> Hip-Hop sampling --> Global fusion
+  UNESCO Intangible Cultural Heritage (2018)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE MAP
+============================================================
+
+Module 1: ORIGINS & ROOTS
+  Mento, ska, rocksteady; Jamaican independence;
+  sound system culture; key producers
+
+Module 2: BOB MARLEY -- LIFE & CAREER
+  Nine Miles to Trench Town; The Wailers; Island Records
+  signing; key albums; assassination attempt; illness/death
+
+Module 3: RASTAFARI & SPIRITUALITY
+  Marcus Garvey; Haile Selassie; Nyabinghi/Twelve Tribes;
+  Marley's conversion arc; theology in lyrics
+
+Module 4: MUSICAL ARCHITECTURE
+  One-drop rhythm; bass as melody; skank guitar; dub;
+  Lee "Scratch" Perry; King Tubby; I-Threes; live performance
+
+Module 5: GLOBAL IMPACT & LEGACY
+  UNESCO 2018; hip-hop sampling; punk influence;
+  Marley estate & Legend sales; contemporary reggae
+
+          [1 Origins] ----> [2 Marley Life]
+               |                  |
+               v                  v
+          [3 Rastafari] <---> [4 Music Arch]
+                     \           /
+                      v         v
+                   [5 Global Legacy]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins \& Roots}
+Survey the full musical genealogy from Jamaican mento folk music through ska and rocksteady, situating each transition in Jamaica's social and political history (colonialism, 1962 independence, urban migration to Kingston, rude boy subculture). Profiles key producers and sound-system operators who created the infrastructure for reggae's emergence.
+
+\subsubsection{Module 2: Bob Marley --- Life \& Career}
+Full biographical arc: birth in Nine Miles (1945), Trench Town apprenticeship under Joe Higgs, formation of The Wailers (1963), Island Records breakthrough (1973), international rise, the December 1976 assassination attempt, London exile and \textit{Exodus}, Africa tours, cancer diagnosis and death (May 11, 1981). Includes key album analysis.
+
+\subsubsection{Module 3: Rastafari \& Spirituality}
+Documents the Rastafari movement: Marcus Garvey's pan-Africanism, Leonard Howell's founding theology, Haile Selassie's 1930 coronation as prophetic fulfillment, the three principal Mansions (Nyabinghi, Bobo Ashanti, Twelve Tribes of Israel), ganja as sacrament, dreadlocks symbolism, Babylon/Zion dualism. Maps Marley's theological evolution including his 1980 conversion to Ethiopian Orthodoxy.
+
+\subsubsection{Module 4: Musical Architecture}
+Technical analysis of reggae's sonic structure: the one-drop drum pattern, bass-as-lead-melody, skank guitar on beats 2 and 4, organ fills, dub production techniques (King Tubby's mixing-board innovations, Lee ``Scratch'' Perry's experimental studio work). Includes analysis of The Wailers' lineup evolution and the I-Threes vocal trio.
+
+\subsubsection{Module 5: Global Impact \& Legacy}
+Maps reggae's documented influence across genres and continents: hip-hop (Jamaican sound-system culture as proto-DJ culture; Sister Nancy samples by Kanye West, Jay-Z), UK punk (The Clash, The Police), reggaeton (dancehall rhythmic DNA), Afrobeat cross-pollination. UNESCO 2018 inscription. \textit{Legend} compilation sales (28+ million). Contemporary artists (Chronixx, Koffee, Damian Marley).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml — Bob Marley & Reggae Mission
+mission_id: bob_marley_reggae_v1
+activation_profile: squadron
+model_allocation:
+  opus_30pct:
+    - synthesis_module          # Cross-genre influence mapping
+    - rastafari_theology        # Cultural sensitivity: Caribbean religious tradition
+    - legacy_analysis           # Pan-Africanist and postcolonial framing
+  sonnet_60pct:
+    - origins_survey            # Mento/ska/rocksteady historical survey
+    - biography_assembly        # Life and career documentation
+    - discography_analysis      # Album-by-album musical analysis
+    - music_architecture        # Technical reggae structure analysis
+    - global_impact_survey      # Cross-genre influence compilation
+    - document_assembly         # Final publication
+  haiku_10pct:
+    - shared_schemas            # Data templates for album/song entries
+    - source_index              # Bibliography scaffolding
+    - timeline_scaffolding      # Chronology framework
+
+sensitivity_flags:
+  - Caribbean religious tradition (Rastafari): requires respectful framing
+  - Jamaican Patois: preserve as authentic voice, not exoticize
+  - Pan-Africanism: accurate historical attribution (Marcus Garvey)
+  - Cannabis/ganja: sacramental context, not recreational framing
+  - Colonial history: accurate without anachronistic terminology
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Full biographical study of Robert Nesta Marley (1945--1981)
+  \item Jamaican popular music evolution: mento $\rightarrow$ ska $\rightarrow$ rocksteady $\rightarrow$ reggae
+  \item Rastafari movement history, theology, and influence on reggae
+  \item Technical analysis of reggae musical architecture
+  \item Key producers: Lee ``Scratch'' Perry, King Tubby, Coxsone Dodd, Chris Blackwell
+  \item Bob Marley \& The Wailers discography (studio albums 1965--1981)
+  \item Reggae's influence on hip-hop, punk, dancehall, reggaeton
+  \item UNESCO 2018 inscription and cultural heritage status
+  \item Marley family legacy (I-Threes, Ziggy, Damian, Tuff Gong)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Deep dives into post-1990 dancehall or trap-influenced reggae
+  \item Full discographies of Peter Tosh or Bunny Wailer solo work
+  \item Detailed financial/estate analysis of Marley IP valuation
+  \item Medical case study of Marley's acral lentiginous melanoma
+  \item Comparative analysis of other Caribbean musical traditions (calypso, soca)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Musical genealogy traced from mento through ska, rocksteady, and reggae with at minimum three distinct transitional markers documented per stage.
+  \item Bob Marley's full biographical arc documented from Nine Miles (1945) to state funeral (May 21, 1981) with sourced dates for all major milestones.
+  \item All ten studio albums (1973--1981) individually profiled with release year, key tracks, chart performance, and thematic context.
+  \item Rastafari movement documented from Marcus Garvey's 1920s activism through Haile Selassie's 1930 coronation to Marley's 1980 conversion, with the three principal Mansions described.
+  \item Technical reggae architecture documented: one-drop rhythm, skank guitar, dub production, bass-as-melody --- each with at least one concrete musical example.
+  \item At least five cross-genre influence pathways documented with specific cited examples (named artists, specific songs or techniques).
+  \item UNESCO 2018 inscription described with the official language and rationale.
+  \item Key producers (Lee ``Scratch'' Perry, King Tubby, Coxsone Dodd) individually profiled with their technical contributions.
+  \item The One Love Peace Concert (1978) documented as case study of reggae's political function.
+  \item Marley's mixed-race heritage and its role in his identity and reception addressed directly and with nuance.
+  \item All numerical claims (sales figures, chart positions, dates) attributed to specific sources.
+  \item Cultural sensitivity review: Rastafari framed as a living religion with its own theological coherence, not reduced to lifestyle aesthetics.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{5cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{How This Mission Connects} \\
+\midrule
+GSD Foxfire Heritage Skills Vision & Cultural heritage preservation methodology & Reggae as case study in oral tradition and living knowledge transmission \\
+The Space Between (TSB) & Philosophical spine of GSD ecosystem & The ``spaces between the beats'' as literal instantiation of TSB's core metaphor \\
+GSD BBS Educational Pack Vision & Educational content delivery systems & Reggae history as rich domain for educational knowledge pack development \\
+GSD Amiga Vision & Architectural leverage as core principle & One-drop rhythm as Amiga Principle in music: minimal components, maximum expressive power \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga computer achieved its remarkable output not because it had more power than its competitors, but because its custom chipset --- Agnus, Denise, Paula --- each handled a specialized domain with precision, freeing the 68000 processor for what only it could do. Reggae's architecture is structurally identical. The bass holds time and melody simultaneously. The skank guitar cuts air on the offbeat, creating the negative space where the message breathes. The one-drop drum lands on beat three, subverting every Western expectation about where the center of gravity should fall. These three components, precisely calibrated, carry freight that stadium rock cannot.
+
+Bob Marley understood this at a cellular level. He spent his early years in Trench Town not just learning songs but learning how sound moves through bodies, how rhythm bypasses intellect and reaches somewhere deeper. The music he made was not decoration on top of political content --- the rhythm \textit{was} the argument. When the bass rolls in ``No Woman No Cry,'' it is not describing resilience; it \textit{is} resilience, transmitted directly into the listener's nervous system.
+
+This is what the GSD ecosystem pursues in software: not more lines of code, but the right architecture. Not louder output, but precisely shaped signal. The spaces between are where the meaning lives --- in reggae, in code, in the connections between people that technology should protect and amplify, never replace.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Bob Marley \& Reggae --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for all five research modules. Agents should draw directly from these findings for document production. All claims are traceable to the sources listed in the bibliography.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item UNESCO (ich.unesco.org) --- official Intangible Cultural Heritage inscription
+  \item Encyclopaedia Britannica (britannica.com) --- verified biographical and historical data
+  \item Wikipedia (en.wikipedia.org) --- cross-referenced historical data on reggae genres
+  \item PBS American Masters (pbs.org/wnet/americanmasters) --- curated biographical content
+  \item University of Chicago Divinity School --- Rastafari theology scholarship
+  \item bobmarley.com (official estate) --- authorized biographical and discographic data
+  \item Smithsonian Magazine (smithsonianmag.com) --- UNESCO recognition coverage
+  \item Rolling Stone Magazine --- discographic rankings and critical reception
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins \& Roots}
+
+\subsubsection{Jamaica's Musical Pre-History}
+
+Jamaica's musical ecosystem was shaped by centuries of cultural layering. The island was colonized by Spain (1494) and then Britain, with the vast majority of its population descended from enslaved Africans by the time of independence. After 468 years of colonial rule, Jamaica declared independence in 1962, and nationalism generated intense cultural energy and hunger for self-expression.
+
+\textbf{Mento} (1940s--1950s): Jamaica's original folk music, blending West African rhythmic traditions with European quadrille and polka influences, featuring banjos, hand drums, maracas, and the rhumba box. Socially satirical lyrics. Notable artists: Lord Flea, Count Lasher. Often confused with calypso (a Trinidad-origin form).
+
+\textbf{Sound Systems}: Kingston entrepreneurs (Prince Buster, Coxsone Dodd, Duke Reid) created mobile street party systems playing imported American R\&B. As R\&B supply dried up in the late 1950s, they began commissioning original Jamaican recordings. This created the foundational infrastructure for the entire reggae industry.
+
+\subsubsection{Ska (Late 1950s -- 1966)}
+
+Ska originated in Jamaica combining mento/calypso with American jazz and R\&B, characterized by walking bass lines accented with off-beat rhythms. Fast-tempo, horn-driven, upbeat. By the early 1960s it was Jamaica's dominant music genre. Key artists: The Skatalites, Prince Buster, Desmond Dekker, Millie Small (``My Boy Lollipop,'' 1964 --- Jamaica's first commercially successful international hit, over 7 million copies sold). The 1964 New York World's Fair featured ska performance. The Wailers formed in 1963 by Bob Marley, Peter Tosh, and Bunny Wailer within this ska context.
+
+\subsubsection{Rocksteady (1966 -- 1968)}
+
+By 1966 ska's fast tempo proved challenging in Jamaica's heat; musicians slowed the rhythm, emphasizing bass and creating rocksteady. Deeper basslines became dominant; vocal harmonies grew prominent; horns receded; lyrics shifted toward love songs and social commentary. The term codified after Alton Ellis's song ``Rocksteady.'' Phyllis Dillon became known as ``Queen of Rocksteady.'' Key producers: Duke Reid (Treasure Isle label), Coxsone Dodd (Studio One). Bass players explored fat, dark, loose tones impossible at ska tempo --- establishing bass-prominence as a permanent Jamaican music characteristic.
+
+\subsubsection{Reggae Emergence (1968+)}
+
+The word ``reggae'' first appeared in the 1968 Toots and the Maytals single ``Do the Reggay'' --- the song that gave the genre its name. Toots Hibbert described the word as derived from Jamaican street slang ``streggae'' (raggedy). The genre distinguished itself from rocksteady by dropping pretensions to smooth American R\&B, moving closer to US Southern funk with heavy rhythm-section drive. The ``one-drop'' drum pattern (emphasis on beat 3) became central. Guitar ``skanks'' on the offbeat. Organ fills replaced piano. American funk influence (Stax Records) filtered through Jamaican sensibility. Roots reggae (1970--1980) added Rastafari spiritual content, slower tempos, and explicit social protest themes.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{4.5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Genre} & \tableheader{Years} & \tableheader{Key Characteristics} & \tableheader{Key Artists} \\
+\midrule
+Mento & 1940s--50s & Acoustic folk, satirical lyrics, African-European blend & Lord Flea, Count Lasher \\
+Ska & 1958--66 & Fast tempo, walking bass, horns, offbeat guitar & Skatalites, Prince Buster, Desmond Dekker \\
+Rocksteady & 1966--68 & Slower, bass-prominent, vocal harmonies, rude boy themes & Alton Ellis, Phyllis Dillon, The Heptones \\
+Early Reggae & 1968--70 & One-drop drum, organ fills, funk influence & Toots \& Maytals, The Wailers \\
+Roots Reggae & 1970--80 & Rastafari themes, political protest, dub production & Bob Marley, Burning Spear, Culture \\
+Dub & 1970s & Studio-as-instrument, echo/reverb, stripped versions & King Tubby, Lee ``Scratch'' Perry \\
+Dancehall & 1980s+ & Digital riddims, Patois, DJ toasting, fast delivery & Yellowman, Shabba Ranks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: Bob Marley --- Life \& Career}
+
+\subsubsection{Early Life (1945 -- 1963)}
+
+Robert Nesta Marley was born February 6, 1945, in Nine Miles, Saint Ann Parish, Jamaica, to Cedella Malcolm (18 years old) and Norval Sinclair Marley, a white plantation supervisor originally from East Sussex, England. Norval was largely absent; he died when Bob was 10. The biracial heritage positioned Marley as a figure of parallel worlds --- rural spiritual Jamaica and urban colonial Jamaica. Rural Nine Miles provided deep oral tradition, storytelling, and a proverb-rich cultural environment that shaped his songwriting. In the late 1950s he moved to Trench Town, Kingston, a low-income community built over a sewage trench. There he earned the nickname ``Tuff Gong'' for his street-fighting prowess. He received musical mentorship from Joe Higgs, one of Jamaica's first recording stars and a practicing Rastafarian.
+
+\subsubsection{The Wailers Era (1963 -- 1973)}
+
+In 1963 Marley, Bunny Wailer (Neville Livingston), and Peter Tosh (Winston Hubert MacIntosh) formed the Teenagers, later renamed The Wailers. December 1963: First Studio One session, recording ``Simmer Down,'' which reached No. 1 in Jamaica (February 1964, estimated 70,000 copies). The Wailers worked through ska and rocksteady phases with producers Coxsone Dodd and then Lee ``Scratch'' Perry (alliance circa 1969--70, producing what many consider the Wailers' finest recordings). 1966: Marley married Rita Anderson; briefly relocated to Delaware, USA (working as DuPont lab assistant and Chrysler factory fork-lift operator). Returned to Jamaica and formally converted to Rastafari. 1971--72: Unsuccessful London period. 1972: signed to Island Records by Chris Blackwell.
+
+\subsubsection{International Breakthrough (1973 -- 1976)}
+
+\textbf{Catch a Fire} (1973) --- Island Records major-label debut; reached international audiences; classics including ``Concrete Jungle'' and ``Stir It Up.'' Politically charged; described as militant and optimistic. Inducted into the Grammy Hall of Fame (2010). \textbf{Burnin'} (1973) --- included ``I Shot the Sheriff'' (Eric Clapton cover, 1974, became No. 1 hit, breaking Marley to mainstream rock audiences) and ``Get Up, Stand Up.'' Peter Tosh and Bunny Wailer departed. \textbf{Natty Dread} (1974) --- first album as Bob Marley \& The Wailers (solo); introduced I-Threes (Rita Marley, Marcia Griffiths, Judy Mowatt); ``No Woman No Cry,'' ``Lively Up Yourself.'' Ranked No. 181 on Rolling Stone 500 Greatest Albums. \textbf{Rastaman Vibration} (1976) --- US breakthrough; reached Top 50 Billboard Soul Charts; included ``War'' (lyrics from Haile Selassie's UN speech).
+
+\subsubsection{Assassination Attempt and Exodus (1976 -- 1978)}
+
+December 3, 1976: Gunmen attacked Marley's Kingston home at 56 Hope Road, shooting him, Rita Marley, and manager Don Taylor. Despite wounds, Marley performed at the Smile Jamaica Concert two days later. Subsequently relocated to London. \textbf{Exodus} (1977) --- recorded in London; incorporated blues, soul, British rock elements; spent 56 consecutive weeks on UK album charts; gold certifications in US, UK, and Canada; named Album of the Century by Time Magazine (December 1999). Four UK hit singles: ``Exodus,'' ``Waiting in Vain,'' ``Jamming,'' ``One Love.'' \textbf{Kaya} (1978) --- more reflective, spiritual. 1978: Returned to Jamaica; performed at the One Love Peace Concert, bringing political rivals Michael Manley and Edward Seaga to shake hands on stage.
+
+\subsubsection{Africa, Illness, and Final Years (1978 -- 1981)}
+
+\textbf{Survival} (1979) --- dedicated to African independence struggles; ``Africa Unite,'' ``Zimbabwe.'' \textbf{Uprising} (1980) --- final studio album; ``Redemption Song,'' ``Could You Be Loved.'' 1980: European tour attracted largest audiences any music artist had experienced in Europe. In 1977, a malignant acral lentiginous melanoma had been diagnosed on his right toe; Marley declined amputation for religious reasons. By September 1980, cancer had spread to his brain. Sought treatment in Germany. April 1981: Awarded Jamaica's Order of Merit. May 11, 1981: Died in Miami at age 36. May 21, 1981: State funeral in Jamaica combining Ethiopian Orthodoxy and Rastafari tradition; Prime Minister Seaga delivered eulogy; hundreds of thousands lined the streets. Buried at Nine Miles mausoleum with his red Gibson Les Paul guitar, a Bible open at Psalm 23, and cannabis placed by Rita Marley.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Key Tracks / Significance} & \tableheader{Commercial Notes} \\
+\midrule
+The Wailing Wailers & 1965 & ``One Love,'' debut; established the group in Jamaica & Jamaican market \\
+Catch a Fire & 1973 & ``Concrete Jungle,'' ``Stir It Up'' --- international debut & Grammy Hall of Fame 2010 \\
+Burnin' & 1973 & ``I Shot the Sheriff,'' ``Get Up, Stand Up'' & Gold (US); National Recording Registry \\
+Natty Dread & 1974 & ``No Woman No Cry,'' ``Lively Up Yourself'' & Rolling Stone Top 500 (\#181) \\
+Rastaman Vibration & 1976 & ``War,'' US breakthrough & Top 50 Billboard Soul Charts \\
+Exodus & 1977 & ``Jamming,'' ``One Love,'' ``Waiting in Vain'' & Time Album of the Century; 56 wks UK chart \\
+Kaya & 1978 & ``Is This Love,'' ``Satisfy My Soul'' & UK/International success \\
+Survival & 1979 & ``Zimbabwe,'' ``Africa Unite'' & Pan-Africanist statement \\
+Uprising & 1980 & ``Redemption Song,'' ``Could You Be Loved'' & Final studio album \\
+Legend (comp.) & 1984 & Greatest hits compilation & 28+ million copies; best-selling reggae album \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference: Rastafari \& Spirituality}
+
+\subsubsection{Origins of the Movement}
+
+Rastafari emerged in Jamaica in the 1930s as a direct response to British colonial oppression, drawing on Marcus Garvey's pan-African ideology and Christian millennialism. Marcus Garvey (1887--1940), born in Jamaica, organized the Back-to-Africa movement and is understood by Rastafarians to be a prophet. His alleged 1920s declaration that a Black King would be crowned in Africa was interpreted as fulfilled when Haile Selassie I (birth name: Ras Tafari Makonnen) was crowned Emperor of Ethiopia on November 2, 1930. Protestant clergyman Leonard Howell was foundational in proclaiming Selassie's divinity.
+
+\subsubsection{Core Beliefs}
+
+Rastafari is a loosely-organized Abrahamic faith with an estimated 700,000 to 1 million adherents worldwide (largest population in Jamaica). Central beliefs: Haile Selassie I as the second coming of the Messiah (Jah incarnate); Ethiopia as the Holy Land and destination for repatriation; Black people as the lost Tribe of Israel; Western culture as ``Babylon'' (oppressive, corrupt); ganja (cannabis) as a sacrament and aid to meditation (cited from Psalm 104:14); dreadlocks as spiritual practice (Numbers 6:5 reference). The Rastafari movement is decentralized; the three principal Mansions are Nyabinghi (most orthodox), Bobo Ashanti, and Twelve Tribes of Israel.
+
+\subsubsection{Marley and Rastafari}
+
+Though raised Catholic, Marley converted to Rastafari in 1966 following Haile Selassie's 1966 visit to Jamaica (Rita Marley witnessed the motorcade and reported seeing the stigmata). His conversion coincided with his relocation from the US. From this point, Rastafari theology permeated his songwriting: references to Jah, Babylon, Zion, Ethiopian repatriation, pan-Africanism, Black liberation. The University of Chicago Divinity School describes Marley's legacy through three ``Rs'': reggae music, Rastafari movement, and revolutionary action. Late in life, after Selassie's death (1974) shook Marley's conviction, his lyrics took a broader humanitarian turn. On November 4, 1980, six months before his death, Marley was baptized into the Ethiopian Orthodox Church by Archbishop Abuna Yesehaq, taking the name Berhane Selassie.
+
+\subsection{Module 4 Reference: Musical Architecture}
+
+\subsubsection{Reggae's Sonic DNA}
+
+Reggae is distinguished structurally from all predecessor genres by: (1) \textbf{The one-drop rhythm} --- bass drum and snare both on beat 3, creating a gravity-defying backward lurch; (2) \textbf{The skank} --- guitar chords on beats 2 and 4, short and staccato; (3) \textbf{Bass as lead melody} --- the bass guitar carries the primary melodic and harmonic information, not a supporting role; (4) \textbf{Organ fills} --- electric organ (replacing ska's piano) providing texture; (5) \textbf{Vocal harmonies} --- prominent, gospel-influenced. Tempos typically 80--90 BPM (slower than ska's 120+ BPM).
+
+\subsubsection{The Producer-Engineers}
+
+\textbf{Coxsone Dodd} (Studio One, Kingston): The first major Jamaican music producer; signed The Wailers in 1963; shaped ska and early rocksteady. \textbf{Lee ``Scratch'' Perry} (Upsetters studio): Worked with the Wailers 1969--70; pioneered dub through tape delay, reverb, and experimental studio mixing; considered one of the most innovative producers in music history. \textbf{King Tubby} (Osbourne Ruddock): Sound engineer who transformed the mixing desk into a compositional instrument; created dub --- the stripped-down, echo-drenched instrumental version of reggae recordings that became globally influential. \textbf{Chris Blackwell} (Island Records): White Jamaican executive who signed the Wailers in 1972 and provided the marketing infrastructure to reach international rock audiences.
+
+\subsubsection{The Wailers' Sound Architecture}
+
+The classic Bob Marley \& The Wailers lineup after 1974 featured: The Barrett Brothers (Aston ``Family Man'' on bass, Carlton on drums) as the rhythmic engine; the I-Threes (Rita Marley, Marcia Griffiths, Judy Mowatt) providing vocal harmony. Family Man Barrett's bass playing is widely credited as the definitive reggae bass voice --- rolling, melodic, deeply musical.
+
+\subsection{Module 5 Reference: Global Impact \& Legacy}
+
+\subsubsection{UNESCO Recognition}
+
+On November 29, 2018, reggae was inscribed on the UNESCO Representative List of the Intangible Cultural Heritage of Humanity. UNESCO described reggae as ``at once cerebral, socio-political, sensual and spiritual.'' The official statement noted reggae's origins among marginalized communities in Western Kingston and its role as ``a vehicle for social commentary, a cathartic practice, and a means of praising God.'' Jamaica's application was led by Minister of Culture Olivia ``Babsy'' Grange.
+
+\subsubsection{Cross-Genre Influence}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Hip-hop:} Jamaican sound-system culture (mobile party systems, DJ toasting/chatting over music) directly preceded and influenced hip-hop's DJ and MC traditions. Sister Nancy's ``Bam Bam'' has been sampled by Kanye West, Lauryn Hill, Jay-Z, and Chris Brown.
+  \item \textbf{UK Punk:} The Clash, The Police, and other UK punk bands absorbed reggae's Babylon/resistance politics and its rhythmic sensibility. The 2 Tone movement fused ska rhythms with punk attitudes.
+  \item \textbf{Reggaeton:} Latin American genre rooted in dancehall's digital riddim architecture.
+  \item \textbf{Dub/Electronic:} King Tubby's studio innovations prefigured remix culture, sampling, and electronic music production by a decade.
+  \item \textbf{Afrobeat cross-pollination:} Pan-African lyrical content created cultural resonance with Nigerian and West African musicians.
+\end{itemize}
+
+\subsubsection{Legacy Metrics}
+
+\begin{itemize}[noitemsep]
+  \item \textit{Legend} (1984 compilation): over 28 million copies sold; best-selling reggae album of all time; annually sells over 250,000 copies per Nielsen SoundScan data.
+  \item \textit{Exodus} (1977): Time Magazine Album of the Century (December 1999).
+  \item ``One Love'': BBC Song of the Millennium.
+  \item Grammy Lifetime Achievement Award: 2001.
+  \item Rolling Stone 100 Greatest Artists of All Time: ranked 11th (2004).
+  \item Rock and Roll Hall of Fame: inducted posthumously 1994.
+  \item Bob Marley Museum, Kingston: established at 56 Hope Road (his former home).
+  \item Marley's birthday (February 6): national holiday in Jamaica.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Rastafari religion & Cultural sensitivity & Frame as a living religious tradition with theological coherence; do not reduce to lifestyle or marijuana culture \\
+Jamaican Patois & Linguistic respect & Preserve Patois in song lyrics as authentic cultural voice; do not ``correct'' or exoticize \\
+Ganja/cannabis & Religious context & Present in its sacramental and cultural context; note legal complexities without moralizing \\
+Marcus Garvey & Historical attribution & Attribute pan-Africanist intellectual lineage accurately; he is a specific historical figure, not generic ``Black nationalist'' \\
+Marley's biracial heritage & Identity nuance & Present complexity without reductionism; both aspects of his heritage shaped his art \\
+Colonial history & Political accuracy & Use accurate historical framing without anachronistic terminology \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[noitemsep]
+  \item UNESCO ICH. ``Reggae music of Jamaica.'' Representative List of the Intangible Cultural Heritage of Humanity, 2018. \url{https://ich.unesco.org/en/RL/reggae-music-of-jamaica-01398}
+  \item Smithsonian Institution / Smithsonian Magazine. ``Reggae Officially Declared Global Cultural Treasure.'' November 30, 2018.
+\end{itemize}
+
+\subsubsection{Encyclopedic \& Academic Sources}
+\begin{itemize}[noitemsep]
+  \item Encyclopaedia Britannica. ``Bob Marley.'' \url{https://www.britannica.com/biography/Bob-Marley}
+  \item Wikipedia. ``Bob Marley.'' \url{https://en.wikipedia.org/wiki/Bob_Marley}
+  \item Wikipedia. ``Reggae.'' \url{https://en.wikipedia.org/wiki/Reggae}
+  \item Wikipedia. ``Ska.'' \url{https://en.wikipedia.org/wiki/Ska}
+  \item Wikipedia. ``Rocksteady.'' \url{https://en.wikipedia.org/wiki/Rocksteady}
+  \item Wikipedia. ``Rastafari.'' \url{https://en.wikipedia.org/wiki/Rastafari}
+  \item Floyd-Thomas, Juan M. ``Rastafari Theology, Reggae Music, and the Postcolonial Legacy of Bob Marley.'' University of Chicago Divinity School, 2010. \url{https://divinity.uchicago.edu/}
+  \item Cane-Honeysett, Laurence (quoted in The Conversation). ``Why UNESCO was right to add reggae to its cultural heritage list.'' The Conversation, 2018.
+\end{itemize}
+
+\subsubsection{Professional \& Estate Sources}
+\begin{itemize}[noitemsep]
+  \item bobmarley.com (Official Estate). ``History.'' \url{https://www.bobmarley.com/history/}
+  \item Google Arts \& Culture. ``Bob Marley: His Music and Legacy.'' \url{https://artsandculture.google.com/}
+  \item PBS American Masters. ``Bob Marley: About Bob Marley.'' \url{https://www.pbs.org/wnet/americanmasters/bob-marley-about-bob-marley/656/}
+  \item Al Jazeera. ``UNESCO adds reggae music to global cultural heritage list.'' November 29, 2018.
+  \item Rolling Stone Magazine. Discographic rankings and critical reviews, various dates.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3 — MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document on Bob Marley and reggae music encompassing five parallel research modules: the musical genealogy from mento through roots reggae; Marley's full biographical arc; the Rastafari movement's theology and influence; reggae's technical musical architecture; and the genre's global cultural legacy. All content must meet the twelve success criteria, pass all safety-critical tests, and be ready for handoff to the GSD skill-creator pipeline.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+================================================================
+Wave 0  [Foundation]
+        |-- shared_schemas (Haiku)
+        |-- source_index (Haiku)
+        |-- timeline_scaffolding (Haiku)
+
+Wave 1A [Parallel Track A]          Wave 1B [Parallel Track B]
+        |-- Origins survey (Sonnet)          |-- Marley biography (Sonnet)
+        |-- Reggae architecture (Sonnet)     |-- Rastafari theology (Opus)
+
+Wave 2  [Synthesis]
+        |-- Cross-module integration (Opus)
+        |-- Global legacy + UNESCO (Sonnet)
+        |-- Sensitivity review (Opus)
+
+Wave 3  [Publication]
+        |-- Document assembly (Sonnet)
+        |-- Verification pass (Sonnet)
+        |-- Final PDF production (Sonnet)
+================================================================
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer:} Shared data schemas, source index, timeline scaffolding, sensitivity flag registry
+  \item \textbf{Parallel Research Layer:} Five module surveys running in two parallel tracks
+  \item \textbf{Synthesis Layer:} Cross-module integration, global legacy compilation, cultural sensitivity review
+  \item \textbf{Publication Layer:} Document assembly, verification, PDF production
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}L{5cm}L{5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Source Module} \\
+\midrule
+1 & Musical Genealogy Survey & 4 genre stages documented; 3+ transitional markers each & Module 1 \\
+2 & Bob Marley Biography & Full arc 1945--1981; all 10 albums profiled & Module 2 \\
+3 & Rastafari Reference & Garvey through Marley conversion; 3 Mansions documented & Module 3 \\
+4 & Musical Architecture Analysis & One-drop, skank, bass, dub --- each with musical example & Module 4 \\
+5 & Global Legacy Report & 5+ cross-genre pathways; UNESCO inscription documented & Module 5 \\
+6 & Integrated Research Document & All modules synthesized; bibliography complete; sensitivity-reviewed & Wave 2 synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+shared\_schemas & None & Haiku & 2K \\
+source\_index & None & Haiku & 3K \\
+timeline\_scaffolding & None & Haiku & 2K \\
+origins\_survey & source\_index & Sonnet & 18K \\
+marley\_biography & source\_index, timeline & Sonnet & 22K \\
+rastafari\_theology & source\_index & Opus & 16K \\
+music\_architecture & source\_index & Sonnet & 14K \\
+global\_legacy & origins\_survey, music\_arch & Sonnet & 16K \\
+cross\_module\_synthesis & All Wave 1 outputs & Opus & 20K \\
+sensitivity\_review & synthesis & Opus & 8K \\
+document\_assembly & All above & Sonnet & 15K \\
+verification\_pass & document\_assembly & Sonnet & 10K \\
+\midrule
+\textbf{TOTAL} & & & \textbf{$\sim$146K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Budget \%} & \tableheader{Rationale} \\
+\midrule
+Rastafari theology & Opus & 11\% & Living religion; requires cultural nuance and theological precision \\
+Cross-module synthesis & Opus & 14\% & Judgment-heavy; identifies non-obvious connections across all five modules \\
+Sensitivity review & Opus & 5\% & BLOCK-level cultural safety gate \\
+Origins survey & Sonnet & 12\% & Structured historical survey; well-sourced, compilable \\
+Marley biography & Sonnet & 15\% & High-volume structured document production \\
+Music architecture & Sonnet & 10\% & Technical analysis with clear source material \\
+Global legacy & Sonnet & 11\% & Cross-reference compilation and synthesis \\
+Foundations & Haiku & 5\% & Lightweight scaffolding; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Purpose} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, timeline scaffolding \\
+1A & Origins + Architecture & Parallel & Sonnet & Historical and technical survey tracks \\
+1B & Biography + Theology & Parallel & Sonnet/Opus & Human arc and spiritual context tracks \\
+2 & Synthesis & Sequential & Opus & Cross-module integration, legacy, sensitivity \\
+3 & Publication & Sequential & Sonnet & Assembly, verification, PDF production \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+shared\_schemas & Album entry template, artist profile template, source citation schema & Haiku & 2K \\
+source\_index & Index all 15+ research sources with URL, type, reliability rating & Haiku & 3K \\
+timeline\_scaffolding & 1945--2026 chronological framework for Marley and reggae events & Haiku & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A} (runs in parallel with Track B):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+origins\_survey & Mento, ska, rocksteady, early reggae; sound system culture; key producers & Sonnet & 18K \\
+music\_architecture & One-drop, skank, dub; Barrett Brothers; I-Threes; Lee Perry; King Tubby & Sonnet & 14K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B} (runs in parallel with Track A):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+marley\_biography & Full arc Nine Miles 1945 to Miami 1981; all ten studio albums & Sonnet & 22K \\
+rastafari\_theology & Garvey, Howell, Selassie; three Mansions; Marley's conversion arc & Opus & 16K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+global\_legacy & UNESCO 2018; hip-hop, punk, reggaeton cross-genre; Legend sales metrics & Sonnet & 16K \\
+cross\_module\_synthesis & Integration of all five modules; identify cross-module connections & Opus & 20K \\
+sensitivity\_review & Cultural sensitivity audit: Rastafari, Patois, colonial history, Garvey & Opus & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+document\_assembly & Compile all modules into final structured document & Sonnet & 15K \\
+verification\_pass & Source-check all numerical claims; verify citations; test plan execution & Sonnet & 10K \\
+pdf\_production & XeLaTeX compilation (3 passes); final PDF delivery & Sonnet & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (schemas, source index) should be cached and reused across all Wave 1 tasks --- they are pure reference material.
+  \item The source index is the single highest-value cache target: every agent consumes it.
+  \item Wave 1 outputs should be batched into a single context for the Opus synthesis agent in Wave 2 --- use the 5-minute cache window by firing both tracks close together.
+  \item Sensitivity review and cross-module synthesis can share a single Opus context window if fired within the cache TTL.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 3 & 7K & Haiku; cheap \\
+Wave 1A & 2 & 32K & Sonnet; parallel \\
+Wave 1B & 2 & 38K & Sonnet + Opus; parallel \\
+Wave 2 & 3 & 44K & Opus-heavy synthesis \\
+Wave 3 & 3 & 30K & Sonnet; production \\
+\midrule
+\textbf{Total} & \textbf{13} & \textbf{$\sim$151K} & \textbf{3--4 sessions} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+shared_schemas ----+
+source_index  ----+----> origins_survey ---+
+timeline_scaff----+                        |
+                  +----> marley_biography --+---> global_legacy --+
+                  |                        |                      |
+                  +----> rastafari_theol---+                      |
+                  |                        |                      v
+                  +----> music_arch    ----+  cross_module_synth--+
+                                                      |
+                                              sensitivity_review
+                                                      |
+                                              document_assembly
+                                                      |
+                                             verification_pass
+                                                      |
+                                              pdf_production
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{On Failure} \\
+\midrule
+Safety-critical & Non-negotiable cultural/source boundaries & 6 & BLOCK \\
+Core functionality & Deliverable acceptance against success criteria & 22 & BLOCK \\
+Integration & Cross-module consistency validation & 5 & BLOCK \\
+Edge cases & Robustness and completeness & 4 & LOG \\
+\midrule
+\textbf{Total} & & \textbf{37} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to Britannica, Wikipedia (cross-referenced), official estate, UNESCO, PBS, or academic institutions. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every sales figure, chart position, date, and measurement attributed to a named source. \\
+SC-ADV & No policy advocacy & Document presents Rastafari beliefs, cannabis use, and pan-Africanism as historical/cultural facts without advocating for or against. \\
+SC-REL & Rastafari religious respect & Rastafari is framed as a living religion with theological coherence; never reduced to ``marijuana culture'' or costume. \\
+SC-PAT & Patois cultural integrity & Jamaican Patois in song lyrics and cultural context is preserved as authentic voice, not corrected or othered. \\
+SC-GAR & Marcus Garvey attribution & All pan-Africanist intellectual lineage properly attributed to Garvey as a specific historical figure with named works and dates. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Musical genealogy completeness & Mento, ska, rocksteady, early reggae, roots reggae each documented with $\geq$3 transitional markers \\
+CF-02 & Ska characteristics & Walking bassline, offbeat rhythm, horn sections, 1958--1966 timeframe all present \\
+CF-03 & Rocksteady differentiation & Bass prominence, vocal harmonies, 1966--1968 window, Alton Ellis attribution confirmed \\
+CF-04 & One-drop rhythm documented & Technical description present with beat-3 placement and named musical example \\
+CF-05 & Biographical completeness & Nine Miles birth (Feb 6, 1945) through Miami death (May 11, 1981) with all major events sourced \\
+CF-06 & All 10 studio albums profiled & Catch a Fire (1973) through Uprising (1980) each has release year, key tracks, significance \\
+CF-07 & Assassination attempt documented & Dec 3, 1976; 56 Hope Road; Smile Jamaica concert (Dec 5) documented with sources \\
+CF-08 & Exodus significance & 56-week UK chart run; Time Album of Century; London exile context all present \\
+CF-09 & Rastafari theology depth & Garvey, Selassie coronation (1930), Howell, three Mansions, Jah/Babylon/Zion each explained \\
+CF-10 & Marley's conversion arc & Catholic $\rightarrow$ Rastafari (1966) $\rightarrow$ Ethiopian Orthodoxy baptism (Nov 4, 1980) documented \\
+CF-11 & UNESCO inscription documented & November 29, 2018 date; official UNESCO language; Olivia Grange role; intangible heritage context \\
+CF-12 & Five cross-genre influences & Hip-hop, UK punk, reggaeton, dub/electronic, Afrobeat each with named artists/examples \\
+CF-13 & Legend sales metrics & 28+ million copies; annual 250K+ per Nielsen; ``best-selling reggae album'' claim sourced \\
+CF-14 & Key producer profiles & Lee Perry, King Tubby, Coxsone Dodd, Chris Blackwell each individually described \\
+CF-15 & One Love Peace Concert & 1978 context; Manley-Seaga handshake; Marley's political peacemaking role documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Rastafari $\rightarrow$ musical content cascade & Document explicitly traces how Marley's 1966 conversion changed his lyrical themes and musical direction \\
+IN-02 & Studio One $\rightarrow$ ska $\rightarrow$ rocksteady continuity & Coxsone Dodd's role traced from Wailers signing through genre transitions \\
+IN-03 & Lee Perry $\rightarrow$ Wailers $\rightarrow$ dub cascade & Perry's production innovations connected to both Marley's development and the emergence of dub \\
+IN-04 & Cross-module data consistency & Same events (e.g., Dec 3, 1976 shooting) described consistently across biography and legacy modules \\
+IN-05 & Self-containment test & A reader with no prior knowledge of reggae or Marley can follow the full document without undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Musical genealogy: 4 stages, 3+ markers each & CF-01, CF-02, CF-03 & Pending \\
+2. Marley biography 1945--1981 & CF-05, CF-07, IN-04 & Pending \\
+3. All 10 studio albums profiled & CF-06, CF-08 & Pending \\
+4. Rastafari documented Garvey through 1980 & CF-09, CF-10 & Pending \\
+5. Technical music architecture documented & CF-04, IN-03 & Pending \\
+6. Five cross-genre influence pathways & CF-12 & Pending \\
+7. UNESCO inscription described & CF-11 & Pending \\
+8. Key producers individually profiled & CF-14, IN-02, IN-03 & Pending \\
+9. One Love Peace Concert documented & CF-15 & Pending \\
+10. Marley's biracial heritage addressed & CF-05 & Pending \\
+11. All numerical claims sourced & SC-NUM & Pending \\
+12. Cultural sensitivity: Rastafari & SC-REL, SC-PAT, SC-GAR & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; escalation to CAPCOM \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web search; evidence compilation \\
+EXEC-A & Executor Alpha & Track A production: origins survey, music architecture \\
+EXEC-B & Executor Beta & Track B production: biography, global legacy \\
+CRAFT-HIST & History Specialist & Jamaican musical history; colonial context; ska/rocksteady era \\
+CRAFT-RELIG & Religion Specialist & Rastafari theology; Marcus Garvey; Haile Selassie; Marley's conversion \\
+VERIFY & Verification Agent & Source validation; numerical claim checking; accuracy review \\
+INTEG & Integration Agent & Cross-module relationship validation; consistency checking \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; escalation channel \\
+BUDGET & Resource Manager & Token budget tracking; session planning; Opus allocation \\
+LOG & Chronicle Agent & Commit messages; audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & bob\_marley\_reggae\_v1 \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Waves & 4 (0 through 3) \\
+Total Components & 13 \\
+Estimated Tokens & $\sim$151K \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Sessions & 3--4 \\
+Safety Gates & 6 SC tests (BLOCK on fail) \\
+Success Criteria & 12 (all testable, all mapped to tests) \\
+Total Tests & 37 \\
+Primary Sources & UNESCO, Britannica, PBS, bobmarley.com, Wikipedia, UChicago Divinity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\textcolor{primary}{``The music is the message. It is not decoration on top of political content --- the rhythm \textit{is} the argument. When the bass rolls, it does not describe resilience. It \textit{is} resilience, transmitted directly into the nervous system of whoever is listening.''}}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{subtlegray}{--- Research Mission Synthesis, March 2026}}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{secondary}{The spaces between the beats are where the message lives. This is the Amiga Principle in music, and it is why the music did not die when the man did.}}
+\end{center}
+\end{quotebox}
+
+\end{document}
