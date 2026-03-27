@@ -1,0 +1,975 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Technology (Steel Blue / Electric / Graphite) ===
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Kubernetes Ecosystem}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Kubernetes Ecosystem -- Mission Package 93.3},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Kubernetes Ecosystem\\[0.3em]Deep Research}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Architecture, Edge, AI/ML, Security \& Operations}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- Mission 93.3}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet~~|~~Estimated: 14 context windows across 6 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Kubernetes Ecosystem --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-cloud-ops-curriculum-vision.md, gsd-local-cloud-provisioning-vision.md, gsd-mesh-prototype-spec.pdf}
+\metafield{Context:}{GSD 10-node white-box mesh cluster, PNW infrastructure, Amiga Principle architecture}
+
+\subsection{Vision}
+
+The GSD ecosystem is building toward a physical infrastructure layer --- a 10-node white-box mesh cluster running specialized workloads from a PNW orchard. The cloud operations curriculum already maps the journey from bare metal to OpenStack, teaching the four primitives (compute, storage, network, orchestration) as the unit circle of cloud computing. Kubernetes is the next orbital: the layer where those primitives become declarative, self-healing, and composable.
+
+But Kubernetes in 2026 is not the Kubernetes of 2020. The ecosystem has matured dramatically: lightweight distributions like K3s make edge-native clusters viable on hardware that would choke full K8s; the Gateway API is replacing the decade-old Ingress model (with Ingress-NGINX formally retiring in March 2026); GPU scheduling has evolved from whole-device allocation to fractional, topology-aware placement; and zero-trust security has moved from aspiration to architectural requirement with native pod certificates reaching beta in v1.35.
+
+This research mission maps the entire Kubernetes landscape as it exists today --- not as a generic survey, but through the specific lens of the GSD mesh cluster architecture. Every finding connects back to a concrete decision: which distribution runs on an Amiga Principle node? How does Longhorn or Ceph serve the Paula storage layer? Where does Gateway API fit in the Denise rendering pipeline? How do dual RTX 5090s get scheduled for AI workloads without starving Minecraft server pods?
+
+The Amiga Principle applies here as it applies everywhere in the ecosystem: specialized execution paths over brute force. A 10-node K3s cluster with Longhorn storage, Cilium networking, and topology-aware GPU scheduling can outperform a 50-node vanilla cluster that treats every node as identical. Architecture is leverage. Kubernetes, properly understood, is the orchestration layer that makes that leverage repeatable.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Distribution selection is non-obvious.} Full Kubernetes, K3s, MicroK8s, and KubeEdge each serve different hardware profiles. The GSD mesh cluster needs a distribution that runs on constrained nodes (ARM/edge) and GPU-heavy nodes (dual 5090s) with a single control plane. No existing guide maps distribution choice to the Amiga Principle node types.
+
+\item \textbf{The Ingress-to-Gateway migration is happening now.} Ingress-NGINX retires March 2026. Every Kubernetes deployment must migrate to Gateway API or an alternative Ingress controller. The GSD ecosystem needs to start on Gateway API natively rather than accumulate migration debt.
+
+\item \textbf{GPU scheduling remains primitive by default.} Kubernetes treats GPUs as indivisible units. For a cluster running both AI training and Minecraft servers on the same hardware, fractional allocation (MIG, time-slicing, DRA) and topology awareness are essential. The default scheduler wastes expensive silicon.
+
+\item \textbf{Storage for small bare-metal clusters is under-documented.} Cloud-native storage (Longhorn, Rook/Ceph) is well-tested at scale but poorly documented for 3--10 node bare-metal deployments with mixed SSD/HDD and no cloud provider backing. The GSD mesh needs storage that works on real disks.
+
+\item \textbf{Security defaults are insufficient.} Kubernetes networking is flat by default --- any pod can reach any other pod. For a cluster running public Minecraft servers alongside private GSD orchestration, zero-trust (mTLS, network policies, workload identity) is not optional. Native pod certificates in v1.35 change the calculus.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Kubernetes is the declarative orchestration layer that binds compute, storage, network, and identity into self-healing systems --- the unit circle of cloud operations made executable.
+\end{quotebox}
+
+Everything in a Kubernetes cluster resolves to four primitives: a pod is compute + network identity; a PersistentVolumeClaim is storage + lifecycle policy; a Service is network + discovery; and RBAC is identity + authorization. The Gateway API adds a fifth dimension --- traffic management as a first-class, role-separated concern. Understanding these primitives through the OpenStack curriculum's lens (Nova $\rightarrow$ Pod, Neutron $\rightarrow$ CNI, Cinder $\rightarrow$ CSI, Keystone $\rightarrow$ RBAC/ServiceAccount) bridges the educational gap between ``cloud as concept'' and ``cloud as running infrastructure.''
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+  KUBERNETES ECOSYSTEM 2026
+  ==========================
+
+  DISTRIBUTIONS          NETWORKING          STORAGE
+  +-------------+     +---------------+   +------------+
+  | K8s 1.35    |     | Gateway API   |   | Longhorn   |
+  | K3s (edge)  |     | Cilium/eBPF   |   | Rook/Ceph  |
+  | MicroK8s    |     | Calico        |   | OpenEBS    |
+  | KubeEdge    |     | Flannel       |   | NFS/CSI    |
+  +------+------+     +-------+-------+   +-----+------+
+         |                    |                  |
+         +----------+---------+------------------+
+                    |
+              +-----v------+
+              | SCHEDULER  |
+              | DRA / Kueue|
+              | GPU-aware  |
+              +-----+------+
+                    |
+         +----------+---------+------------------+
+         |                    |                  |
+  +------v------+     +------v-------+   +------v------+
+  | AI/ML       |     | SECURITY     |   | OPERATIONS  |
+  | GPU sched.  |     | Zero Trust   |   | GitOps      |
+  | MIG/MPS     |     | mTLS/SPIFFE  |   | Observ.     |
+  | Kueue       |     | Pod Certs    |   | FinOps      |
+  +-------------+     +--------------+   +-------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1: Distributions    Module 2: Networking
+       |                          |
+       +---- Shared Schema -------+---- Module 3: Storage
+       |         (Wave 0)         |          |
+  Module 4: GPU/AI           Module 5: Security
+       |                          |
+       +---------- Synthesis -----+---- Module 6: Operations
+                  (Wave 2)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Distributions \& Architecture}
+Full Kubernetes v1.35 (``Timbernetes''), K3s (single binary, 512MB RAM, CNCF incubating), MicroK8s (snap-based), KubeEdge (cloud-edge split). Comparison matrix across memory footprint, ARM support, HA modes, datastore options (etcd vs. embedded SQLite vs. Kine), and upgrade paths. Mapping to Amiga Principle node types: which distribution for 68000 (control), Agnus (DMA/scheduling), Denise (rendering/GPU), Paula (audio/storage).
+
+\subsubsection{Module 2: Networking \& Traffic Management}
+Gateway API as successor to Ingress. Ingress-NGINX retirement timeline (March 2026). CNI comparison: Cilium (eBPF-native, no iptables), Calico (established, network policy), Flannel (K3s default). Service mesh options: Istio (heavyweight, full-featured), Linkerd (lightweight, Rust data plane). The nftables migration (IPVS deprecated in v1.35). Multi-cluster networking for mesh nodes.
+
+\subsubsection{Module 3: Storage \& Persistence}
+CSI driver ecosystem. Longhorn (lightweight, hyper-converged, ideal for small clusters, CNCF incubating). Rook/Ceph (enterprise-grade, multi-protocol --- block/file/object, requires dedicated disks). OpenEBS (Mayastor for NVMe performance). NFS for shared read-heavy workloads. Decision framework: bare-metal vs. cloud, cluster size, protocol needs, performance requirements.
+
+\subsubsection{Module 4: GPU Scheduling \& AI/ML Workloads}
+NVIDIA Device Plugin and GPU Operator. Dynamic Resource Allocation (DRA, GA in v1.34). Fractional GPU: MIG (hardware partitioning, A100/H100), MPS (software sharing), time-slicing. Topology-aware scheduling (NVLink locality). Specialized schedulers: Kueue (job queueing), Volcano (gang scheduling), YuniKorn. KubeCon EU 2026 announcements: constrained impersonation, GPU isolation via Kata Containers.
+
+\subsubsection{Module 5: Security \& Zero Trust}
+Default-deny network policies. Pod certificates for mTLS (KEP-4317, beta in v1.35). Constrained impersonation (KEP-5284, alpha in v1.35). RBAC best practices: per-workload ServiceAccounts, namespace isolation. Admission controllers: OPA Gatekeeper, Kyverno. Runtime security: Falco, eBPF-based monitoring. SPIFFE/SPIRE for workload identity. Secrets management: HashiCorp Vault integration.
+
+\subsubsection{Module 6: Operations \& Observability}
+GitOps with ArgoCD and Flux. Monitoring stack: Prometheus + Grafana + OpenTelemetry. Logging: ELK/Loki. Cluster autoscaling and right-sizing. FinOps: namespace-level cost attribution, resource quota enforcement. Self-healing patterns: liveness/readiness probes, PodDisruptionBudgets, node auto-repair. Backup and disaster recovery: Velero for cluster state, storage-level replication.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  name: kubernetes-deep-research
+  version: "93.3"
+  type: ASIC
+
+  copper_bus:
+    trigger: "kube|kubernetes|k3s|k8s|cluster|orchestrat"
+    priority: research
+
+  agnus:
+    scheduling: wave-parallel
+    max_parallel: 3
+    cache_ttl: 300
+
+  denise:
+    output_format: pdf
+    color_scheme: technology
+    typography: dejavu
+
+  paula:
+    storage: longhorn
+    replication: 3
+    backup: velero
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Kubernetes v1.33--v1.35 feature landscape with focus on stable and beta features
+\item K3s as primary distribution for GSD mesh cluster evaluation
+\item Gateway API architecture and migration guidance (replacing Ingress)
+\item Storage comparison (Longhorn vs. Rook/Ceph) for 3--10 node bare-metal clusters
+\item GPU scheduling with NVIDIA operator for dual RTX 5090 configuration
+\item Zero-trust security architecture with native Kubernetes primitives
+\item GitOps and observability stack selection
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Managed Kubernetes services (EKS, GKE, AKS) --- this is bare-metal focused
+\item Service mesh deep implementation (separate mission if needed)
+\item Kubernetes operator development (separate mission)
+\item Multi-cloud federation beyond mesh cluster
+\item Application-level CI/CD pipeline design
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Distribution comparison matrix covers K8s, K3s, MicroK8s, and KubeEdge with quantitative resource profiles (RAM, CPU, disk) sourced from official documentation
+\item K3s evaluation addresses all four Amiga Principle node types with specific configuration recommendations
+\item Gateway API architecture documented with migration path from Ingress including ingress2gateway tooling
+\item CNI comparison includes Cilium, Calico, and Flannel with network policy enforcement verification
+\item Storage decision framework produces actionable recommendation for GSD mesh cluster hardware profile
+\item GPU scheduling section covers DRA, MIG, time-slicing, and topology-aware placement with NVIDIA operator configuration
+\item Security architecture specifies default-deny network policies, pod certificate configuration, and RBAC patterns
+\item Zero-trust implementation path defined with phased rollout (network policies $\rightarrow$ mTLS $\rightarrow$ workload identity)
+\item Operations stack selection covers GitOps, monitoring, logging, and backup with specific tool recommendations
+\item All findings sourced from official Kubernetes documentation, CNCF projects, or peer-reviewed benchmarks
+\item Research self-contained: a reader with OpenStack curriculum knowledge can understand the full Kubernetes landscape
+\item Through-line connects Kubernetes orchestration primitives to the Amiga Principle and GSD ecosystem philosophy
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Cloud Ops Curriculum & Kubernetes is the next layer after OpenStack; same four primitives, declarative API & Extends \\
+Local Cloud Provisioning & VM/network templates become Kubernetes manifests; same infrastructure, new abstraction & Evolves \\
+Mesh Prototype Spec & Node hardware profiles map directly to K3s cluster topology & Informs \\
+Chipset Architecture & Kubernetes manifests are the ``ASIC'' configuration format for infrastructure & Parallels \\
+Amiga Vision & Specialized node types (68000/Agnus/Denise/Paula) map to K3s roles & Grounds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga achieved what mainframes couldn't --- not by being bigger, but by being \textit{specialized}. Custom chips doing dedicated work, coordinated by a CPU that knew how to delegate. Kubernetes, properly configured, is the same architecture at infrastructure scale. A K3s cluster with Longhorn on storage nodes, Cilium enforcing zero-trust on network nodes, and NVIDIA DRA scheduling fractional GPUs on compute nodes is not ``a cluster running services.'' It is a system where every node knows its role, every workload gets exactly the resources it needs, and the control plane orchestrates the whole ensemble the way the 68000 coordinated Agnus, Denise, and Paula.
+
+The spaces between the pods --- the network policies, the mTLS handshakes, the CSI volume attachments --- are where the real architecture lives. Not in any single container, but in the declarative relationships between them. That's the unit circle of operations: four primitives, infinite composition, and the understanding that once you see it, every cloud platform in the world resolves into the same geometry.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Kubernetes Ecosystem --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from official Kubernetes documentation, CNCF project repositories, KubeCon 2026 announcements, and vendor-neutral technical analyses. Each module section provides the evidence base for the corresponding mission component.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item Kubernetes Project (kubernetes.io) --- release notes, KEPs, blog posts
+\item Cloud Native Computing Foundation (CNCF) --- project status, conformance, landscape
+\item SUSE/Rancher --- K3s and Longhorn development
+\item NVIDIA --- GPU Operator, DRA contributions, KubeCon presentations
+\item NIST --- microservices security standards (SP 800-204A)
+\end{itemize}
+
+\subsection{Module 1: Distributions \& Architecture Reference}
+
+\subsubsection{Kubernetes v1.35 ``Timbernetes'' (December 2025)}
+The current stable release (v1.35.3, patched March 19, 2026) delivered 60 enhancements: 17 stable, 19 beta, 22 alpha. Key graduations include in-place pod resource adjustment (GA), enabling CPU/memory changes on running containers without pod recreation. This feature modifies cgroup settings directly, requiring cgroups v2 on all nodes. The release also deprecated IPVS proxy mode, pushing the ecosystem toward nftables-based kube-proxy, and deprecated cgroups v1 support entirely.
+
+Pod certificates for mutual TLS (KEP-4317) reached beta: the kubelet now generates keys, requests certificates via PodCertificateRequest, and writes credential bundles directly to the pod filesystem, eliminating the need for external cert-manager/SPIFFE sidecars for basic mTLS. Constrained impersonation (KEP-5284) entered alpha, blocking nodes from impersonating other nodes to extract sensitive pod data.
+
+Supported versions as of March 2026: v1.35 (EOL February 2027), v1.34 (EOL October 2026), v1.33 (EOL June 2026).
+
+\subsubsection{K3s: Lightweight Kubernetes}
+K3s packages all control plane components into a single binary under 70MB. Memory footprint starts at approximately 512MB versus 2GB minimum for vanilla Kubernetes. CNCF Incubation-stage project with over 27,000 GitHub stars. Key architectural choices: containerd as runtime (not Docker), Flannel as default CNI, CoreDNS for service discovery, Traefik as default ingress (configurable), and SQLite or embedded etcd for datastore.
+
+K3s supports both x86\_64 and ARM64/ARMv7, running identically on Raspberry Pi and server hardware. Single-command installation: \texttt{curl -sfL https://get.k3s.io | sh -}. HA mode supported via embedded etcd with 3+ server nodes. K3s tracks upstream Kubernetes releases with a goal of patch releases within one week and minor versions within 30 days.
+
+For the GSD mesh: K3s is the primary candidate. Its single-binary architecture aligns with the Amiga Principle (specialized, minimal footprint), supports heterogeneous node types (ARM edge nodes alongside x86 GPU nodes), and provides a conformant Kubernetes API surface while eliminating the operational overhead of managing separate etcd, scheduler, and controller-manager processes.
+
+\subsubsection{Distribution Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}XXXX}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{K8s (vanilla)} & \tableheader{K3s} & \tableheader{MicroK8s} & \tableheader{KubeEdge} \\
+\midrule
+Min. RAM & 2GB & 512MB & 540MB & 256MB (edge) \\
+Binary size & Multi-binary & $<$70MB single & Snap package & Split binary \\
+Datastore & etcd & SQLite/etcd & Dqlite & Cloud etcd \\
+Default CNI & None & Flannel & Calico & EdgeMesh \\
+ARM support & Yes & Native & Yes & Yes \\
+HA mode & etcd cluster & Embedded etcd & Dqlite HA & Cloud HA \\
+Install & kubeadm & One command & snap install & Keadm \\
+CNCF status & Graduated & Incubating & --- & Incubating \\
+Best for & Production & Edge/small & Dev/test & IoT/edge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Networking \& Traffic Management Reference}
+
+\subsubsection{Gateway API: The Post-Ingress Era}
+The Kubernetes community formally announced Ingress-NGINX retirement in November 2025, with best-effort maintenance until March 2026 and no further updates after that date. The recommended migration path is Gateway API, which provides role-separated, extensible traffic management through three core resources: GatewayClass (infrastructure provider defines capabilities), Gateway (operator instantiates a listener), and HTTPRoute (developer declares routing rules).
+
+Gateway API supports L4 and L7 protocols natively (TCP, UDP, HTTP, gRPC) without annotations. The ingress2gateway tool (v1.0 released March 2026) automates conversion of existing Ingress manifests to Gateway API resources, including controller-level integration tests that verify behavioral equivalence.
+
+Key advantages over Ingress: no vendor-specific annotations needed; built-in traffic splitting, header manipulation, and request mirroring; cross-implementation portability; and explicit persona separation (infrastructure provider vs. cluster operator vs. application developer).
+
+\subsubsection{CNI Landscape}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XXX}
+\toprule
+\rowcolor{primary}
+\tableheader{CNI} & \tableheader{Architecture} & \tableheader{Network Policy} & \tableheader{Best For} \\
+\midrule
+Cilium & eBPF-native, no iptables & L3/L4/L7 + DNS-aware & Modern clusters, observability \\
+Calico & iptables or eBPF & L3/L4 standard & Established, wide adoption \\
+Flannel & VXLAN overlay & None (requires addon) & K3s default, simplicity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For the GSD mesh: Cilium is the recommended CNI. Its eBPF architecture eliminates iptables overhead, provides L7 visibility into pod traffic without a sidecar, and integrates with Kubernetes network policies natively. Microsoft's KubeCon EU 2026 presentations highlighted Cilium security integrations for AI workloads specifically.
+
+\subsubsection{Ingress-NGINX Retirement Timeline}
+November 2025: retirement announced. March 2026: maintenance ends, project archived. No further security patches, bug fixes, or Kubernetes compatibility updates. The Ingress API itself remains supported; only the NGINX-based controller implementation is retired. Alternative Ingress controllers (NGINX Inc./F5 commercial, Traefik, HAProxy) remain actively maintained but the ecosystem direction is clearly toward Gateway API.
+
+\subsection{Module 3: Storage \& Persistence Reference}
+
+\subsubsection{Longhorn}
+CNCF Incubating project. Cloud-native distributed block storage running as microservices within the Kubernetes cluster (hyper-converged). Uses iSCSI protocol (NVMe-over-TCP engine in development, not yet production-ready). Each volume is an independent engine/replica pair, with configurable replication factor. Features include snapshots, incremental backups to S3/NFS, cross-cluster disaster recovery, and encryption at rest via dm-crypt.
+
+Key advantage for small clusters: Longhorn does not require dedicated unformatted disks (unlike Rook/Ceph). It uses existing filesystem paths on worker nodes, making it viable for 3--10 node deployments where every disk is already formatted. Web UI included for visual management. Helm installation in minutes.
+
+Limitations: block storage only (no object or shared filesystem without NFS addon), replication happens at volume level (high-write databases can saturate network links), and generally considered less robust than Ceph for mission-critical enterprise workloads. Best suited for small-to-medium deployments, home labs, and edge environments.
+
+\subsubsection{Rook/Ceph}
+Rook (CNCF Graduated) orchestrates Ceph (distributed storage providing block/file/object) within Kubernetes. Ceph provides three storage protocols via a single deployment: RBD (block) for databases, CephFS (shared filesystem) for multi-writer workloads, and RGW (S3-compatible object) for data lakes. Battle-tested at enormous scale.
+
+Key requirement: Ceph needs dedicated raw devices (unpartitioned, unformatted disks) or dedicated OSD nodes. This makes it less suitable for small clusters where every disk serves double duty. Minimum practical deployment is 3 OSD nodes with dedicated storage drives. The operational overhead (CRUSH maps, OSD lifecycle, monitor quorum) is significant compared to Longhorn.
+
+\subsubsection{Storage Decision Framework}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Criterion} & \tableheader{Longhorn} & \tableheader{Rook/Ceph} \\
+\midrule
+Cluster size & 3--20 nodes & 10+ nodes \\
+Dedicated disks & Not required & Required \\
+Protocols & Block only & Block + File + Object \\
+Operational complexity & Low (Web UI) & High (CRUSH, monitors) \\
+Performance & Good & Excellent (tuned) \\
+ARM support & Yes & Limited \\
+GSD mesh fit & Primary recommendation & Future expansion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: GPU Scheduling \& AI/ML Reference}
+
+\subsubsection{The Default Problem}
+Kubernetes treats GPUs as indivisible units by default. A pod requesting \texttt{nvidia.com/gpu: 1} gets an entire physical GPU, even if it only needs 10\% of the compute capacity. Industry surveys show that most organizations see only 5--40\% GPU utilization due to this all-or-nothing allocation model. For a cluster with dual RTX 5090s, this means potentially wasting the majority of two expensive accelerators.
+
+\subsubsection{NVIDIA GPU Operator}
+Automates the entire GPU software stack: drivers, container toolkit, device plugin, GPU feature discovery (GFD), and monitoring. GFD automatically labels nodes with GPU properties (model, memory, MIG capability), enabling precise workload placement via node selectors and affinities.
+
+\subsubsection{Sharing Strategies}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XXC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Strategy} & \tableheader{Mechanism} & \tableheader{Isolation} & \tableheader{Availability} \\
+\midrule
+MIG & Hardware partition & Full (memory + compute) & A100/H100 only \\
+Time-slicing & Context switching & None (shared memory) & All NVIDIA GPUs \\
+MPS & Software multiplexing & Partial & Compute 3.5+ \\
+DRA & Dynamic allocation & API-level & K8s 1.34+ GA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For RTX 5090s (consumer Blackwell architecture): MIG is not available (enterprise feature on A100/H100). Time-slicing is the primary sharing mechanism, with DRA providing the Kubernetes-native allocation API. MPS can provide better utilization than time-slicing for concurrent inference workloads with lower context-switching overhead.
+
+\subsubsection{Specialized Schedulers}
+Kueue: Cloud-native job queueing system, manages resource quotas and priorities for batch workloads (training jobs). Volcano: Gang scheduling for distributed training (ensures all pods in a job start simultaneously). YuniKorn: Apache scheduler supporting queue hierarchies and resource fragmentation handling. KubeCon EU 2026 showed that Kueue adoption is accelerating as AI workloads shift from training to inference at scale.
+
+\subsection{Module 5: Security \& Zero Trust Reference}
+
+\subsubsection{The Flat Network Problem}
+Kubernetes networking is flat by default: any pod can communicate with any other pod across the entire cluster. Reports indicate 89\% of organizations experienced a Kubernetes security incident in the past year, often due to lateral movement after initial pod compromise. For the GSD mesh running public Minecraft servers alongside private orchestration workloads, this default is unacceptable.
+
+\subsubsection{Defense Layers}
+
+\textbf{Layer 1 --- Network Policies:} Default-deny all ingress/egress per namespace, then explicitly allow only required communication channels. Requires a CNI that enforces network policies (Cilium, Calico --- not Flannel alone).
+
+\textbf{Layer 2 --- RBAC:} Per-workload ServiceAccounts (never share accounts across services). Namespace-scoped Roles preferred over ClusterRoles. Regular audit of permissions.
+
+\textbf{Layer 3 --- mTLS:} Pod certificates (KEP-4317, beta in v1.35) enable native mTLS without external cert-manager. For more comprehensive service mesh mTLS, Linkerd (Rust data plane, lightweight) or Istio (full-featured, heavier) provide automated certificate rotation and policy enforcement.
+
+\textbf{Layer 4 --- Admission Control:} OPA Gatekeeper or Kyverno enforce policies at deployment time: no privileged containers, no hostPath mounts, required resource limits, approved image registries only.
+
+\textbf{Layer 5 --- Runtime Detection:} Falco monitors system calls for anomalous behavior (shell execution in production pods, unexpected outbound connections). eBPF-based tools provide kernel-level visibility without sidecar overhead.
+
+\subsubsection{Phased Implementation}
+Phase 1: Network policies (default-deny) + per-workload ServiceAccounts + namespace isolation. Phase 2: Cilium with L7 visibility + admission controllers (Kyverno). Phase 3: mTLS via pod certificates or Linkerd + Falco runtime monitoring + workload identity (SPIFFE). This phased approach avoids the common failure mode of deploying everything at once and creating operational chaos.
+
+\subsection{Module 6: Operations \& Observability Reference}
+
+\subsubsection{GitOps}
+ArgoCD and Flux are the two dominant GitOps engines. ArgoCD provides a web UI and application-centric model; Flux is more lightweight and Helm-native. Both support multi-cluster management, drift detection, and automated reconciliation. For the GSD ecosystem's existing Git-centric workflow, GitOps is a natural fit: cluster state lives in the same repositories as application code.
+
+\subsubsection{Monitoring Stack}
+Prometheus (metrics collection, alerting) + Grafana (visualization, dashboards) + OpenTelemetry (distributed tracing, vendor-neutral instrumentation). The NVIDIA GPU Operator exports GPU metrics to Prometheus natively. Loki provides log aggregation as a lighter alternative to Elasticsearch.
+
+\subsubsection{Backup \& Disaster Recovery}
+Velero backs up Kubernetes cluster state (resources, persistent volumes) to S3-compatible storage. Combined with Longhorn's built-in backup to S3/NFS, this provides two-layer protection: application-level (Velero) and storage-level (Longhorn snapshots). Recovery testing is essential --- backup systems that have never been tested in anger are not backup systems.
+
+\subsubsection{FinOps}
+Namespace-level resource quotas prevent runaway consumption. Kubernetes 1.35 in-place pod resize (GA) reduces the need to overprovision for peak loads. Right-sizing tools compare actual utilization against resource requests/limits and recommend adjustments. For a self-funded mesh cluster, every watt matters --- right-sizing is not optional.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Mitigation} & \tableheader{Priority} \\
+\midrule
+Security configurations can create false sense of safety & Document limitations alongside recommendations; security is layers, not checkboxes & High \\
+GPU scheduling complexity can cause resource starvation & Always reserve baseline allocations; test under contention & High \\
+Vendor-neutral framing & No cloud provider preference; bare-metal first & Medium \\
+Open-source sustainability & Note project governance status (CNCF stage) for each tool & Medium \\
+Power consumption of GPU nodes & Include FinOps/efficiency in operations module & Medium \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Kubernetes Project}
+\begin{itemize}[leftmargin=2em]
+\item Kubernetes v1.35 Release Blog --- kubernetes.io/blog/2025/12/17/kubernetes-v1-35-release/
+\item Kubernetes Releases Page --- kubernetes.io/releases/
+\item Ingress-NGINX Retirement Announcement --- kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
+\item Ingress2Gateway 1.0 Release --- kubernetes.io/blog/2026/03/20/ingress2gateway-1-0-release/
+\item Gateway API Documentation --- gateway-api.sigs.k8s.io/
+\end{itemize}
+
+\subsubsection{CNCF Projects}
+\begin{itemize}[leftmargin=2em]
+\item K3s Documentation --- docs.k3s.io/
+\item K3s GitHub Repository --- github.com/k3s-io/k3s
+\item Longhorn Documentation --- longhorn.io/docs/
+\item Cilium Documentation --- docs.cilium.io/
+\item Falco Documentation --- falco.org/docs/
+\end{itemize}
+
+\subsubsection{Industry Analysis}
+\begin{itemize}[leftmargin=2em]
+\item CNCF: Kubernetes Security 2025 Stable Features and 2026 Preview (December 2025)
+\item Spectro Cloud: State of Kubernetes 2025 --- workload over-provisioning data
+\item NIST SP 800-204A: Security Strategies for Microservices-based Application Systems
+\item KubeCon EU 2026: NVIDIA GPU scheduling and isolation contributions
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Mission Objective:}{Produce a comprehensive Kubernetes ecosystem reference document covering distributions, networking, storage, GPU scheduling, security, and operations --- specifically mapped to the GSD 10-node mesh cluster architecture. The document will serve as both an educational resource (extending the Cloud Ops Curriculum) and a decision guide for infrastructure implementation.}
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0 (Sequential)          Wave 1 (Parallel x3)
+  +------------------+    +---------------------------+
+  | Shared schemas   |    | Track A: Distributions    |
+  | Source index     |--->|          + Networking      |
+  | Template setup   |    | Track B: Storage + GPU    |
+  +------------------+    | Track C: Security + Ops   |
+                          +------------+--------------+
+                                       |
+                          Wave 2 (Sequential)
+                          +---------------------------+
+                          | Cross-module synthesis    |
+                          | GSD mesh mapping          |
+                          | Decision matrices         |
+                          +------------+--------------+
+                                       |
+                          Wave 3 (Sequential)
+                          +---------------------------+
+                          | Publication assembly      |
+                          | Verification pass         |
+                          | Final PDF + index.html    |
+                          +---------------------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Research Layer} --- Evidence gathering from official sources, quantitative data extraction, source validation
+\item \textbf{Analysis Layer} --- Cross-module synthesis, decision framework construction, GSD-specific mapping
+\item \textbf{Publication Layer} --- Document assembly, formatting, verification, delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Distribution Matrix & 4 distributions compared across 10+ dimensions with sources & D-01 \\
+2 & K3s Mesh Mapping & Node type $\rightarrow$ K3s role mapping for all 4 Amiga types & D-01 \\
+3 & Gateway API Guide & Architecture + migration path + ingress2gateway workflow & D-02 \\
+4 & CNI Comparison & Cilium/Calico/Flannel with policy enforcement analysis & D-02 \\
+5 & Storage Decision & Longhorn vs. Ceph framework with GSD recommendation & D-03 \\
+6 & GPU Scheduling Guide & DRA/MIG/time-slicing for dual RTX 5090 configuration & D-04 \\
+7 & Security Architecture & 5-layer zero-trust with phased implementation plan & D-05 \\
+8 & Operations Stack & GitOps + monitoring + backup tool selection with rationale & D-06 \\
+9 & Synthesis Document & Cross-module integration mapping all decisions to mesh spec & D-SYN \\
+10 & Verified PDF Package & Compiled, cross-referenced, source-validated final document & D-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2.5cm}C{1.2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Spec Doc} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared Schema & D-00 & None & Haiku & 4K \\
+Distributions & D-01 & D-00 & Sonnet & 20K \\
+Networking & D-02 & D-00 & Sonnet & 18K \\
+Storage & D-03 & D-00 & Sonnet & 16K \\
+GPU/AI & D-04 & D-00 & Opus & 22K \\
+Security & D-05 & D-00, D-02 & Opus & 20K \\
+Operations & D-06 & D-00 & Sonnet & 14K \\
+Synthesis & D-SYN & D-01--D-06 & Opus & 24K \\
+Publication & D-PUB & D-SYN & Sonnet & 12K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & GPU scheduling (complex trade-offs), security architecture (judgment-heavy), cross-module synthesis \\
+Sonnet & 60\% & Distribution survey, networking reference, storage comparison, operations stack, publication assembly \\
+Haiku & 10\% & Shared schemas, template scaffolding, index page generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Tracks} & \tableheader{Tasks} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & 1 (sequential) & 2 & 1 \\
+1 & Parallel Research & 3 (parallel) & 6 & 6 \\
+2 & Synthesis & 1 (sequential) & 2 & 3 \\
+3 & Publication & 1 (sequential) & 2 & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0.1 & Shared Schema & TypeScript interfaces for module data contracts & Haiku & 2K \\
+0.2 & Source Index & Validated URL index for all 6 modules & Haiku & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Infrastructure:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1.1 & Distributions & Comparison matrix + K3s deep-dive + mesh mapping & Sonnet & 20K \\
+1.2 & Networking & Gateway API + CNI comparison + Ingress migration & Sonnet & 18K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Resources:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1.3 & Storage & Longhorn/Ceph/NFS comparison + decision framework & Sonnet & 16K \\
+1.4 & GPU/AI & DRA + sharing strategies + scheduler comparison & Opus & 22K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Cross-Cutting:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+1.5 & Security & Zero-trust architecture + phased implementation & Opus & 20K \\
+1.6 & Operations & GitOps + monitoring + backup stack selection & Sonnet & 14K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+2.1 & Cross-Module & Integration document mapping all decisions to mesh spec & Opus & 16K \\
+2.2 & Decision Matrices & Final recommendations with rationale chains & Opus & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{1.2cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+3.1 & Assembly & Combined document with cross-references and formatting & Sonnet & 8K \\
+3.2 & Verification & Source validation, accuracy check, completeness audit & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output (schemas + source index) loaded into all Wave 1 contexts --- approximately 4K shared tokens
+\item Wave 1 Track A and Track B share no dependencies --- fully parallel within 5-minute cache TTL windows
+\item Track C (Security) depends on Track A (Networking/CNI) output for network policy specifics --- schedule after Task 1.2 completes
+\item Wave 2 requires all Wave 1 outputs --- synthesis agent loads summaries, not full documents, to stay within token budget
+\item Wave 3 operates on assembled document --- single context window sufficient
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 0 & 4K & 4K \\
+Wave 1 & 42K & 68K & 0 & 110K \\
+Wave 2 & 24K & 0 & 0 & 24K \\
+Wave 3 & 0 & 12K & 0 & 12K \\
+\midrule
+\textbf{Total} & \textbf{66K} & \textbf{80K} & \textbf{4K} & \textbf{150K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  [0.1 Schema] --> [1.1 Distro]  --> [2.1 Synthesis] --> [3.1 Assembly]
+  [0.2 Sources] -> [1.2 Network] --> [2.1]            -> [3.2 Verify]
+                   [1.3 Storage] --> [2.1]
+                   [1.4 GPU]     --> [2.1]
+                   [1.2] ------> [1.5 Security] --> [2.1]
+                   [1.6 Ops]     --> [2.1]
+                                    [2.2 Decisions] --> [3.1]
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to kubernetes.io, CNCF projects, or vendor-neutral technical sources. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every version number, resource measurement, and benchmark attributed to specific source \\
+SC-ADV & No vendor advocacy & Document presents evidence without advocating for specific vendors or cloud providers \\
+SC-SEC & Security accuracy & No security recommendations that could create false sense of safety; limitations documented alongside capabilities \\
+SC-VER & Version currency & All Kubernetes feature references include version where feature was introduced and current stability level (alpha/beta/GA) \\
+SC-HW & Hardware specificity & GPU recommendations account for consumer vs. enterprise GPU feature differences (MIG availability) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Distribution matrix with sources & CF-01, CF-02, SC-SRC & Pending \\
+2. K3s mesh mapping for Amiga types & CF-03, CF-04 & Pending \\
+3. Gateway API architecture & CF-05, SC-VER & Pending \\
+4. CNI comparison with policy analysis & CF-06, CF-07 & Pending \\
+5. Storage decision framework & CF-08, CF-09 & Pending \\
+6. GPU scheduling guide & CF-10, CF-11, SC-HW & Pending \\
+7. Security architecture (5 layers) & CF-12, CF-13, SC-SEC & Pending \\
+8. Zero-trust phased rollout & CF-14, IN-01 & Pending \\
+9. Operations stack selection & CF-15, CF-16 & Pending \\
+10. All findings sourced & SC-SRC, SC-NUM & Pending \\
+11. Self-contained document & IN-05, IN-06 & Pending \\
+12. Amiga Principle through-line & IN-07, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; evidence compilation; official docs retrieval \\
+EXEC-A & Executor (Infra) & Distribution + networking document production \\
+EXEC-B & Executor (Resources) & Storage + GPU document production \\
+CRAFT-ARCH & Architecture Specialist & Kubernetes internals; API surface analysis; version tracking \\
+CRAFT-SEC & Security Specialist & Zero-trust architecture; threat modeling; policy design \\
+VERIFY & Verification & Source validation; version accuracy; cross-reference checking \\
+INTEG & Integration Agent & Cross-module consistency; Amiga Principle mapping \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team structure; mid-mission track adjustment \\
+ARCH & Architecture Lead & Cross-cutting decisions; GSD mesh spec alignment \\
+SECURE & Safety Warden & Safety boundary enforcement; security claim validation \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; decision framework coherence \\
+LOG & Chronicle Agent & Commit messages; milestone audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 12 \\
+Parallel tracks & 3 (max, Wave 1) \\
+Sequential depth & 4 waves \\
+Opus / Sonnet / Haiku & 30\% / 60\% / 10\% \\
+Estimated context windows & 14 \\
+Estimated sessions & $\sim$6 \\
+Estimated wall time & $\sim$8 hours \\
+Total tests & 36 (6 safety-critical) \\
+Target coverage & 85\%+ \\
+Activation profile & Fleet (17 roles) \\
+Total token budget & $\sim$150K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Everything in cloud computing is one of four things: compute, storage, network, and the orchestration that ties them together. That's the unit circle. Once you see it, every cloud service, every architecture diagram, every vendor's marketing material resolves into combinations of those four primitives.''}
+
+\vspace{0.5em}
+
+--- GSD Cloud Operations Curriculum
+
+\vspace{0.5em}
+
+Kubernetes does not add a fifth primitive. It makes the four executable, declarative, and self-healing. The spaces between the pods --- the network policies, the volume claims, the service accounts --- are where the architecture lives. Understand those spaces, and the entire cloud-native ecosystem resolves into the same unit circle, viewed from the orchestration layer.
+\end{quotebox}
+
+\end{document}
