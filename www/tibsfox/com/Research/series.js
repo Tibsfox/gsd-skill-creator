@@ -54,6 +54,7 @@
     { id: 'OTM', name: 'Odyssey of the Mind', path: 'OTM/index.html' },
     { id: 'PGP', name: 'Garbage Patch', path: 'PGP/index.html' },
     { id: 'PJM', name: 'Pearl Jam', path: 'PJM/index.html' },
+    { id: 'PLT', name: 'PNW Planting', path: 'PLT/index.html' },
     { id: 'PMG', name: 'Pi-Mono + GSD', path: 'PMG/index.html' },
     { id: 'PSG', name: 'Pacific Spine', path: 'PSG/index.html' },
     { id: 'RBH', name: 'Radio History', path: 'RBH/index.html' },
