@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C89.5 FM / KNHC Seattle — Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #D84315;
+    --tertiary: #37474F;
+    --accent: #00897B;
+    --light-primary: #E8EAF6;
+    --light-secondary: #FBE9E7;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F4;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #283593 50%, var(--tertiary) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  header .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    margin: 0.5rem 0;
+    line-height: 1.2;
+  }
+  header .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    color: #FFB74D;
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+  }
+  header .meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 1.5rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  .files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+  .file-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid #E0E0E0;
+  }
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary);
+  }
+  .file-card .desc {
+    font-size: 0.85rem;
+    color: var(--subtle);
+    margin-top: 0.3rem;
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  .contents { padding-left: 1.5rem; }
+  .contents li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .contents .stage {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: var(--secondary);
+    display: block;
+    margin-top: 1rem;
+  }
+  ol.instructions { padding-left: 1.5rem; }
+  ol.instructions li { margin-bottom: 0.8rem; font-size: 0.95rem; }
+  code {
+    background: var(--light-primary);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: 'DM Mono', 'Courier New', monospace;
+  }
+  .quote-box {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+  .quote-box .attr {
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--subtle);
+    margin-top: 0.8rem;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--subtle);
+  }
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>C89.5 FM / KNHC Seattle<br>The Signal That Wouldn't Stop</h1>
+  <div class="subtitle">The World's Oldest Dance Music Station</div>
+  <div class="meta">March 26, 2026 · Squadron Profile · 5 Research Modules · Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="c895-mission.pdf" download>
+      <div class="icon">📄</div>
+      <div class="name">c895-mission.pdf</div>
+      <div class="desc">Complete 27-page mission package — Vision, Research Reference, and Mission Package in one document</div>
+    </a>
+    <a class="file-card" href="c895-mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">c895-mission.tex</div>
+      <div class="desc">XeLaTeX source — modify and recompile as needed</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage">Stage 1 — Vision Document</span></li>
+    <li>Vision narrative: from 100mW classroom to Billboard-charting station</li>
+    <li>Problem statement (5 research gaps)</li>
+    <li>Domain map and module architecture</li>
+    <li>5 research modules: History, Education, Technical, Cultural, Funding</li>
+    <li>Chipset configuration (Agnus/Denise/Paula/Copper)</li>
+    <li>12 testable success criteria</li>
+
+    <li><span class="stage">Stage 2 — Research Reference</span></li>
+    <li>Module 1: Complete history from 1969–2026 with sourced chronology</li>
+    <li>Module 2: Electronic Media curriculum, student pathways, Coping 101</li>
+    <li>Module 3: Signal specifications table (9 power levels), Cougar Mountain, streaming</li>
+    <li>Module 4: Billboard panel, Lady Gaga, 9+ show profiles, Café Chill syndication, awards</li>
+    <li>Module 5: Revenue breakdown, post-CPB impact ($175K + services), organizational structure</li>
+    <li>Full source bibliography (station, government, professional media)</li>
+
+    <li><span class="stage">Stage 3 — Mission Package</span></li>
+    <li>Wave execution plan (4 waves, 2 parallel tracks)</li>
+    <li>Component breakdown with model assignments (Opus 32% / Sonnet 58% / Haiku 10%)</li>
+    <li>28-test plan (5 safety + 14 core + 5 integration + 4 edge)</li>
+    <li>Verification matrix mapping all 12 criteria to test IDs</li>
+    <li>Squadron crew manifest (12 roles)</li>
+    <li>~96,000 token budget across 18–24 context windows</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <ol class="instructions">
+    <li>Open <code>c895-mission.pdf</code> for the complete mission package ready for GSD orchestrator handoff</li>
+    <li>Feed the document to <code>gsd-skill-creator</code> via Claude Code for execution</li>
+    <li>Wave 0 (Foundation) runs first, producing shared schemas and source index</li>
+    <li>Wave 1 executes in two parallel tracks: History+Technical and Education+Cultural</li>
+    <li>Wave 2 synthesizes with Opus handling cross-module integration and the funding module</li>
+    <li>Wave 3 assembles the final publication and runs the 28-test verification suite</li>
+  </ol>
+
+  <h2>Recompilation</h2>
+  <ol class="instructions">
+    <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+    <li>Run three passes:
+      <br><code>xelatex -interaction=nonstopmode c895-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode c895-mission.tex</code>
+      <br><code>xelatex -interaction=nonstopmode c895-mission.tex</code>
+    </li>
+  </ol>
+
+  <div class="quote-box">
+    The air belongs to no one. And belonging to no one is the most radical architecture of all.
+    <div class="attr">— from the mission through-line, echoing The Hundred Voices</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Vision → Research → Mission Pipeline · March 2026
+</footer>
+
+</body>
+</html>
