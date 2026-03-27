@@ -1,0 +1,47 @@
+/* C89 — C89.5 FM / KNHC Seattle
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #1A237E;
+  --secondary: #D84315;
+  --tertiary: #283593;
+  --accent: #BF360C;
+  --cream: #F5F5FA;
+  --mist: #E8EAF6;
+  --text: #212121;
+  --text-light: #5a5a5a;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 50%, #37474F 100%);
+  border-bottom: 4px solid var(--secondary);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(26, 35, 126, 0.04); }
+tr:hover { background: rgba(26, 35, 126, 0.08); }
+blockquote { border-left-color: var(--secondary); background: rgba(216, 67, 21, 0.04); }
+code { background: var(--mist); }
+pre { background: #0d1236; color: #c5cae9; }
+.stat-value { color: var(--primary); }
+
+.tag-history { background: var(--primary); color: white; }
+.tag-education { background: #00897B; color: white; }
+.tag-technical { background: #37474F; color: white; }
+.tag-cultural { background: var(--secondary); color: white; }
+.tag-funding { background: var(--accent); color: white; }
+.tag-pass { background: #2E7D32; color: white; }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}

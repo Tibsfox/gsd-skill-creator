@@ -1,0 +1,1097 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Music / Community Radio / Education ===
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — the signal at night
+\definecolor{secondary}{HTML}{D84315}     % Warm coral — the dance floor energy
+\definecolor{tertiary}{HTML}{37474F}      % Blue-grey slate — the engineering room
+\definecolor{accent}{HTML}{00897B}        % Teal — community connection
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Light indigo
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{C89.5 / KNHC Seattle}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={C89.5 FM Seattle -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% =====================================================
+% TITLE PAGE
+% =====================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{C89.5 FM / KNHC Seattle\\[0.3em]The Signal That Wouldn't Stop}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The World's Oldest Dance Music Station}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% =====================================================
+% TABLE OF CONTENTS
+% =====================================================
+\tableofcontents
+\newpage
+
+% =====================================================
+% STAGE 1 — VISION DOCUMENT
+% =====================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{C89.5 / KNHC Seattle --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Ready for Research Execution}
+\metafield{Depends On:}{None (standalone mission)}
+\metafield{Context:}{GSD Ecosystem --- Community Radio / Education / Music Heritage}
+
+\subsection{Vision}
+
+In December 1969, an electronics teacher named Larry Adams at Nathan Hale High School in Seattle's Meadowbrook neighborhood put a 100-milliwatt AM signal on the air. The goal was not to build a radio empire. The goal was to give bored students something to do with their hands --- something real, something that transmitted, something that existed in the air beyond the classroom walls. That signal, weak enough to cover a parking lot, became KNHC. It never stopped.
+
+Fifty-six years later, C89.5 FM is the world's oldest continuously operating dance music station. It broadcasts at 8,500 watts ERP from Cougar Mountain, reaching over two million listeners across Puget Sound and streaming globally via the internet. It is one of only six stations monitored by Nielsen BDS for Billboard's Dance/Mix Show Airplay chart. It was the first non-commercial station in the United States to join that panel. Lady Gaga performed in the school auditorium in 2008 before anyone outside of New York nightclubs knew her name. Students booked her. Students.
+
+This is a station owned by Seattle Public Schools, operated from Room 1204 of a public high school, where teenagers learn production, programming, copywriting, and on-air hosting as part of an electronic media curriculum --- and the programming they produce competes with and outperforms commercial stations worldwide. The Amiga Principle, operating in the wild: remarkable outcomes from architectural elegance and specialized execution, not brute-force budget.
+
+And now the signal faces its most serious threat since the 1983 Jack Straw frequency-sharing attempt: the dissolution of the Corporation for Public Broadcasting in January 2026, which strips approximately 11\% of C89.5's operating budget and --- critically --- the satellite interconnection and music royalty negotiation infrastructure that public radio has depended on for decades. The station that survived budget cuts, hostile FCC filings, and five decades of format evolution now has to survive the collapse of the federal public broadcasting ecosystem.
+
+This research mission will produce a comprehensive study of C89.5's history, educational model, technical infrastructure, cultural influence, and sustainability architecture --- documenting how a 100-milliwatt classroom experiment became one of the most respected music institutions in the country, and what it takes to keep the signal alive.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Undocumented institutional memory.} C89.5's 56-year journey from AM classroom experiment to Billboard-charting dance station has never been systematically documented as a cohesive narrative. Key figures, technical milestones, format evolution decisions, and survival strategies exist in scattered articles, Wikipedia entries, and institutional memory. No single reference captures the complete picture.
+
+\item \textbf{Educational model not replicated.} The station's unique model --- professional staff mentoring high school students who produce nationally competitive programming --- represents a proven framework for youth media education, yet it has not been studied or codified in a way that other school districts could adopt.
+
+\item \textbf{Post-CPB sustainability gap.} With the Corporation for Public Broadcasting dissolved as of January 2026, C89.5 faces the immediate loss of approximately \$175,000 annually plus satellite distribution, music royalty negotiation, and Emergency Alert System infrastructure. The survival architecture for this transition has not been publicly analyzed.
+
+\item \textbf{Cultural influence underdocumented.} C89.5's role as a tastemaker in electronic dance music --- from early R\&B and urban programming through the EDM explosion, including being the first US station to play Lady Gaga --- represents a cultural history of how a non-commercial high school station shaped a global genre.
+
+\item \textbf{Technical evolution as teaching case.} The station's progression from 100 milliwatts on 1210 kHz AM to 8,500 watts ERP HD Radio on Cougar Mountain, including early internet streaming (1997), MiniDisc workflows, and digital studio construction, is a compact history of broadcast engineering innovation that has educational value far beyond C89.5 itself.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One Model:} C89.5 is a living proof-of-concept that architectural elegance (specialized educational mission + community ownership + musical taste-making) produces outcomes that raw commercial power cannot replicate --- the Amiga Principle operating in terrestrial broadcast radio.
+\end{quotebox}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+C89.5 / KNHC RESEARCH DOMAIN
+==============================
+
+  HISTORY & ORIGINS          EDUCATIONAL MISSION
+  (1969-present)             (Curriculum, Students,
+  Format evolution,           Career pathways,
+  Key figures, Crises         Electronic Media program)
+       |                           |
+       +--------+     +------------+
+                |     |
+          TECHNICAL INFRASTRUCTURE
+          (AM->FM->HD Radio, Cougar Mtn,
+           Streaming, Digital workflow)
+                |     |
+       +--------+     +------------+
+       |                           |
+  CULTURAL INFLUENCE         FUNDING & SUSTAINABILITY
+  (Billboard panel,          (CPB dissolution, Self-funding,
+   Dance music scene,         501(c)(3) association,
+   Cafe Chill syndication,    Listener-supported model)
+   LGBTQ+ community)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCIES
+===================
+
+  [M1: History]---+-->[M3: Technical]
+                  |         |
+                  +-->[M4: Cultural]
+                  |         |
+  [M2: Education]-+-->[M5: Funding]
+                           |
+  All modules --->[M6: SYNTHESIS]
+                  Cross-module integration
+                  + through-line narrative
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: History \& Origins (1969--Present)}
+From Larry Adams's electronics class at Nathan Hale High School through the AM experiment, FM licensing, format evolution (light rock $\rightarrow$ R\&B/urban $\rightarrow$ dance), the Jack Straw frequency challenge, power increases, and the Cougar Mountain relocation. Key figures: Larry Adams, Greg Neilson, June Fox, Drew Bailey, Richard Dalton, Seth Bolin. Timeline of critical decisions and survival moments.
+
+\subsubsection{Module 2: Educational Mission \& Student Experience}
+The electronic media curriculum at Nathan Hale: Intro, Advanced 1/2/3 course sequence. Skills developed (production, programming, on-air hosting, social media, podcasting, music selection). Career-connected learning outcomes. Alumni pathways into broadcast, media, and music industries. The Mass Communications magnet school history. Boise State articulation agreement. Open enrollment policy (students from any Seattle school eligible). Over 100 students per year. The Coping 101 mental health partnership with Seattle Children's Hospital.
+
+\subsubsection{Module 3: Technical Infrastructure}
+Signal progression: 100mW AM (1969) $\rightarrow$ 10W FM (1971) $\rightarrow$ 320W (1972) $\rightarrow$ 1.5kW directional (1974) $\rightarrow$ 3kW non-directional (1981) $\rightarrow$ 30kW (1991) $\rightarrow$ Cougar Mountain relocation at 8.5kW ERP (2002) $\rightarrow$ HD Radio (2008) $\rightarrow$ new transmitter (2018). Digital workflow: MiniDisc-based (2000), digital studios (2009). Streaming: 1997 launch, MP3/Ogg streams. Antenna engineering: directional panel array, null to southeast, gain to north. Coverage: Seattle metro to Victoria BC, east to Snoqualmie Pass.
+
+\subsubsection{Module 4: Cultural Influence \& Programming}
+Billboard Dance Radio Airplay panel membership (2004, first non-commercial station). Nielsen BDS monitoring (one of six stations). Format as tastemaker: early Lady Gaga play and 2008 performance, Rihanna connection. Specialty programming: The Vortex (14+ years), On The Edge (industrial), Hed Kandi America, Café Chill (syndicated nationally via PRX to 30+ stations). Top 89 annual countdown (since 1996). LGBTQ+ community engagement and Pride participation. Rolling Stone recognition. Village Voice ``Best of New York'' (2003). King County ``C89.5 Day'' proclamation (January 25, 2021).
+
+\subsubsection{Module 5: Funding \& Sustainability Architecture}
+Ownership: Seattle Public Schools (license holder), Seattle Schools Board of Education as governing body. Operations: C895/KNHC Public Radio Association (501(c)(3), tax ID 20-5402402, Candid Gold Seal). Revenue structure: 87\% listener donations and business underwriting, 3\% Seattle School District, 10\% CPB Community Service Grant (qualified 2015). CPB dissolution impact: loss of \$175,000 annually plus satellite distribution, music royalties, Emergency Alert System access. Historical funding crises: 1981 near-shutdown (saved by Seattle Central Community College partnership), 1986 first on-air pledge drive, 2002 exclusion from school district budget. Non-commercial educational license constraints and underwriting model.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+mission:
+  name: "C89.5 Deep Research"
+  version: "1.0"
+  activation: "Squadron"
+
+chipset:
+  agnus:    # Memory/scheduling
+    model: "sonnet"
+    budget: "45k tokens"
+    role: "Survey compilation, document assembly"
+
+  denise:   # Display/output
+    model: "opus"
+    budget: "35k tokens"
+    role: "Synthesis, narrative voice, cultural analysis"
+
+  paula:    # Audio/I-O
+    model: "haiku"
+    budget: "8k tokens"
+    role: "Schemas, templates, source index scaffolding"
+
+  copper:   # Sequencer
+    model: "sonnet"
+    budget: "12k tokens"
+    role: "Wave orchestration, dependency management"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Complete chronological history from 1969 to present
+\item Educational program structure and documented outcomes
+\item Technical infrastructure timeline with engineering specifications
+\item Cultural influence documentation with sourced claims
+\item Financial model analysis including post-CPB sustainability
+\item Programming format evolution and specialty show inventory
+\item Key personnel profiles (public-facing roles only)
+\item Organizational structure (Seattle Public Schools + Public Radio Association)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Comparative analysis with other high school radio stations (future mission)
+\item Deep music industry economics beyond C89.5's direct involvement
+\item Individual student records or private personnel information
+\item Detailed FCC regulatory history beyond C89.5-specific events
+\item Broader Seattle music scene history (grunge, hip-hop) except where C89.5 intersects
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item History module covers all documented power increases and format changes with dates and sources
+\item Educational module documents the complete Electronic Media course sequence with skill outcomes
+\item Technical module includes signal specifications for every documented power level
+\item Cultural module sources every artist claim (Lady Gaga, Rihanna, Billboard panel) to verifiable records
+\item Funding module provides complete revenue breakdown with percentages from at least two fiscal years
+\item Post-CPB impact analysis quantifies specific dollar amounts and lost services
+\item At least 80\% of citations trace to official station sources, government records, or professional media
+\item Cross-module integration: history events linked to technical milestones in at least 5 instances
+\item Key personnel identified by name and role with verifiable public sources
+\item Programming inventory covers at least 8 named shows with format descriptions
+\item Organizational structure documented with both Seattle Public Schools and 501(c)(3) governance
+\item Through-line connects C89.5's survival architecture to broader community radio sustainability patterns
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Shares audio/music analysis domain; C89.5 as potential test content source & Feeds into \\
+Fox Infrastructure Group & FoxFiber community network parallels C89.5's community ownership model & Conceptual parallel \\
+GSD BBS Educational Pack & C89.5's curriculum model informs educational pack design patterns & Feeds into \\
+Heritage Skills Vision & Community radio as cultural preservation technology & Conceptual parallel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+In December 1969, a signal went out from a high school in north Seattle. It was 100 milliwatts --- barely enough to cross a parking lot. It was not trying to be famous. It was trying to teach kids how electronics worked by giving them something real to build.
+
+That signal never stopped. It got stronger --- 10 watts, then 320, then 1,500, then 3,000, then 30,000, then back down to 8,500 from a mountaintop that could see the whole Sound. It changed formats. It survived budget cuts and hostile FCC filings and the slow withdrawal of school district funding. It put Lady Gaga on a high school stage before anyone else in the country knew her name. It became one of six stations in the world that decide what goes on the Billboard Dance chart. And through all of it, the signal kept doing what Larry Adams intended: teaching kids by giving them something real.
+
+The air belongs to no one. And belonging to no one is the most radical architecture of all.
+
+
+% =====================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =====================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{C89.5 / KNHC Seattle --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings organized by research module. Each claim is attributed to a specific source. The document is designed to be consumed by GSD agents producing the final research deliverable.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item C89.5 / KNHC official website (c895.org) --- station history, programming, financial disclosures
+\item Seattle Public Schools --- institutional records, building histories, course catalogs
+\item Federal Communications Commission (FCC) --- license records, technical specifications
+\item Corporation for Public Broadcasting (CPB) --- grant records, compliance reports
+\item Billboard Magazine --- Dance/Mix Show Airplay panel documentation
+\item PRX (Public Radio Exchange) --- syndication records for Café Chill and other programs
+\item DanceMusicNW --- in-depth 50th anniversary interview and station history
+\item Radio Survivor --- station tour documentation (2018)
+\end{itemize}
+
+\subsection{Module 1 Reference: History \& Origins}
+
+\subsubsection{Founding and AM Era (1969--1970)}
+
+KNHC originated as a classroom project by electronics teacher Larry Adams at Nathan Hale High School. Adams observed that some students disengaged during theoretical electronics instruction and conceived a radio station as hands-on applied learning. Students built an experimental AM station broadcasting at 100 milliwatts on 1210 kHz in December 1969. The call letters encode the station's origins: K (west of Mississippi), NH (Nathan Hale), C (Cleveland High School, which later received a sister studio).
+
+\textit{Source: Seattle Public Schools, ``Building for Learning'' historical report; DanceMusicNW 50th anniversary interview.}
+
+\subsubsection{FM Transition and Power Progression}
+
+In June 1970, an FCC application was filed for FM on 89.5 MHz. The construction permit was granted in September 1970, and the station went live on FM on January 25, 1971, transmitting 10 watts from Wedgwood Elementary School, covering approximately a 5-mile radius in north Seattle. Subsequent power increases: 320 watts (September 1972, stereo began December 1972), 1,500 watts directional (November 1974), 3 kW non-directional (October 1981), 30 kW (approved 1988, on-air 1991), and relocation to Cougar Mountain at 8,500 watts ERP (2002). A new transmitter was installed in 2018.
+
+\textit{Sources: c895.org/about; Wikipedia/KNHC; c895.org transmitter blog post (April 2018).}
+
+\subsubsection{Format Evolution}
+
+The station entered the 1980s playing light rock and pop with evening specialty shows (jazz, classical). In 1982, the format shifted to R\&B and urban (``more funk than junk''), expanding from two days to seven days per week based on listener response. The ``C89'' brand name entered use in 1983. By 2000, the station had transitioned to high-energy dance music. The format currently combines current-based EDM, Rhythmic Top 40 remixes, and potential future dance hits in a Top 40 presentation style, with genre-specific specialty shows after 6 PM.
+
+\textit{Sources: Wikipedia/KNHC; Seattle Public Schools historical report; DanceMusicNW.}
+
+\subsubsection{Survival Crises}
+
+\textbf{1981 near-shutdown:} Seattle Public Schools announced plans to close KNHC due to budget cuts. The station was saved by a partnership with Seattle Central Community College, which provided financial support in exchange for using the facilities as a student laboratory 28 hours per week.
+
+\textbf{1983--1988 Jack Straw challenge:} The Jack Straw Memorial Foundation (operating KRAB, now KNDD) filed with the FCC to share KNHC's frequency. The case was designated for hearing in 1986; an Administrative Law Judge ruled in Nathan Hale's favor in May 1988, upheld on appeal. Jack Straw eventually built KSER 90.7 in Everett.
+
+\textbf{2002 budget exclusion:} Seattle Public Schools excluded KNHC from its annual budget except for partial salary/benefits for two staff positions (approximately 3\% of operating budget as of 2019).
+
+\textbf{2025--2026 CPB dissolution:} Federal funding for the Corporation for Public Broadcasting was rescinded. CPB dissolved January 5, 2026. Impact to C89.5: loss of approximately \$175,000 annually (11\% of budget including royalty negotiations).
+
+\textit{Sources: Wikipedia/KNHC; Seattle Public Schools historical report; c895.org/federalfunding; c895.org CPB impact page.}
+
+\subsubsection{Key Personnel (Public-Facing)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role} & \tableheader{Notable} \\
+\midrule
+Larry Adams & Founding teacher & Electronics instructor, conceived station as hands-on learning \\
+Greg Neilson & Early General Manager & Led FM transition and technical expansion \\
+June Fox & Station contact / Accessibility & Long-tenured staff, FCC public file contact \\
+Drew Bailey & Operations Manager & Host of The Morning Drive \\
+Richard Dalton & Operations Manager & Supervised 2018 transmitter installation \\
+Seth Bolin & Host / Curator & Café Chill host and curator \\
+Buzz Anderson & Chief Engineer & Led Cougar Mountain transmitter work \\
+Harmony (hlgonty) & Adv. Electronic Media Instructor & Current student mentor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Sources: c895.org; DanceMusicNW; Radio Survivor; Nathan Hale course catalog.}
+
+\subsection{Module 2 Reference: Educational Mission}
+
+\subsubsection{Curriculum Structure}
+
+The Electronic Media sequence at Nathan Hale High School consists of a multi-semester progression:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Course} & \tableheader{Credits} & \tableheader{Skills} \\
+\midrule
+Intro to Electronic Media & 0.5 & Foundations of broadcasting, equipment operation \\
+Dig Med Adv 1 & 0.5 & Production, writing, editing for on-air and social media \\
+Dig Med Adv 2 & 0.5 & Active on-air duties, professional equipment, podcasting \\
+Dig Med Adv 3: Specialization & 0.5 & Two chosen specializations: hosting, production/podcasting, music selection, operations, or social media \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Students from throughout the Seattle area can enroll, even if not attending Nathan Hale. Over 100 students participate each year. The program is classified as CTE (Career and Technical Education).
+
+\textit{Sources: Nathan Hale course catalog (halehs.seattleschools.org); c895.org/nhhs; c895.org/educational-program.}
+
+\subsubsection{Historical Educational Programs}
+
+The Mass Communications magnet school program at Nathan Hale began in the late 1970s, including courses in radio, television, journalism, photography, and graphic arts. A 1977 HEW/NTIA grant funded a sister studio at Cleveland High School on Beacon Hill. The early 1990s brought a magnet grant to further bolster the program. An articulation agreement with Boise State University (mid-1990s) gave students pathways to higher education in broadcasting.
+
+\textit{Sources: Wikipedia/KNHC; c895.org/about.}
+
+\subsubsection{Community and Mental Health Programming}
+
+Coping 101, produced in partnership with Seattle Children's Hospital, features monthly student-led conversations on mental health topics from a teen perspective. The program is distributed via PRX.
+
+\textit{Source: PRX station page for C89.5; c895.org.}
+
+\subsubsection{Inclusion Commitment}
+
+C89.5 maintains an official Affirmation of Inclusion, with historic and ongoing commitment to LGBTQ+ community programming. The station participates actively in Seattle Pride events. A ``We Welcome ALL'' sign is prominently displayed. King County Executive proclaimed January 25, 2021 as ``c89.5 Day.''
+
+\textit{Sources: c895.org/cpb (diversity statement); Radio Survivor station visit; c895.org/educational-program.}
+
+\subsection{Module 3 Reference: Technical Infrastructure}
+
+\subsubsection{Signal Specifications}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Frequency} & \tableheader{Power} & \tableheader{Notes} \\
+\midrule
+1969 & 1210 kHz AM & 100 mW & Experimental, classroom \\
+1971 & 89.5 MHz FM & 10 W & Wedgwood Elementary site \\
+1972 & 89.5 MHz FM & 320 W & Stereo began Dec 1972 \\
+1974 & 89.5 MHz FM & 1,500 W & Directional \\
+1981 & 89.5 MHz FM & 3 kW & Non-directional \\
+1991 & 89.5 MHz FM & 30 kW & Filed 1988, on-air 1991 \\
+2002 & 89.5 MHz FM & 8,500 W ERP & Cougar Mountain relocation \\
+2008 & 89.5 MHz FM + HD & 8,500 W ERP & HD Radio added \\
+2018 & 89.5 MHz FM + HD & 8,500 W ERP & New transmitter installed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Sources: c895.org/about; c895.org/radio-reception-tips; Wikipedia/KNHC.}
+
+\subsubsection{Cougar Mountain Transmitter Site}
+
+The transmitter broadcasts from Audacy's backup tower on Cougar Mountain at 1,220 feet above average terrain. The directional panel antenna array produces higher field strength to the north (toward Seattle metro and beyond), with a null to the southeast. Coverage extends from north of Seattle to roughly halfway into Tacoma, across Puget Sound, as far east as Snoqualmie Pass, and as far north as Victoria, British Columbia. The station classifies as FCC Class C1 non-commercial educational.
+
+\textit{Sources: c895.org/radio-reception-tips; Wikipedia/KNHC; RadioDiscussions technical analysis.}
+
+\subsubsection{Digital and Streaming Infrastructure}
+
+Internet streaming began in 1997, making KNHC one of the earliest radio stations to stream online. Digital workflow conversion started in 1995 and was completed by 2000 using MiniDisc-based equipment. In 2009, the station moved into new digital studios and classrooms at the rebuilt Nathan Hale High School (modernized 2008--2011 with levy funds). Current streaming includes 32 kbit/s and 128 kbit/s MP3 streams plus Ogg format. The website was redesigned March 2018 with real-time playlist and searchable music database. On-demand audio available for two weeks per Digital Millennium Copyright Act restrictions.
+
+\textit{Sources: Wikipedia/KNHC; c895.org/ondemand; c895.org/about.}
+
+\subsection{Module 4 Reference: Cultural Influence}
+
+\subsubsection{Billboard and Industry Recognition}
+
+In 2004, C89.5 became the first non-commercial radio station in the United States to join the Billboard Magazine Dance Radio Airplay panel as a monitored reporter. It remains one of six stations monitored by Nielsen BDS for inclusion in Billboard's weekly Dance/Mix Show Airplay chart. The station has been listed in Billboard's Top 40 of Top 40.
+
+\textit{Sources: Wikipedia/KNHC; c895.org/about; thejerrywang.com.}
+
+\subsubsection{Artist Connections}
+
+Students at C89.5 booked Lady Gaga to perform at Nathan Hale's performing arts center in 2008, before her mainstream breakthrough. According to The Seattle Times, approximately 400 people attended what proved to be an appearance by an artist on the verge of global fame. A signed photo at the station reads: ``C89.5! Thank you for spinning my record, babe.'' C89.5 is reported to have been the first station in the country to play Lady Gaga. Rihanna also performed at the school. Seattle Weekly credited both artists' success partially to C89.5's early support.
+
+\textit{Sources: Seattle Public Schools historical report; Radio Survivor; Seattle Weekly (Feb 2011).}
+
+\subsubsection{Programming Highlights}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Program} & \tableheader{Type} & \tableheader{Description} \\
+\midrule
+The Morning Drive & Breakfast show & 4-hour weekday morning program \\
+8-Bit Work Break & Mini-mix & 15-minute lunchtime mix \\
+Drive @ 5 & Drive show & Weekday afternoon mix show \\
+Test Spin & New music & New music showcase \\
+Café Chill & Downtempo/chill & Weekly curated mix, syndicated nationally via PRX \\
+The Vortex & Specialty & 14+ year running specialty show \\
+On The Edge & Industrial & Weekly industrial music broadcast \\
+Hed Kandi America & House & Weekly mix from Hed Kandi resident \\
+Top 89 Countdown & Annual event & Year-end countdown, archives back to 1996 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Sources: Wikipedia/KNHC; c895.org/schedule; TuneIn; c895.org/top89.}
+
+\subsubsection{Café Chill Syndication}
+
+Café Chill, hosted and curated by Seth Bolin, is produced by KNHC Productions and distributed nationally via PRX. It is funded in part by the Corporation for Public Broadcasting. The program is purchased by stations including Raven Radio, KUGS Bellingham, Delmarva Public Media, KFCF FM, KMUZ, Big Cabbage Radio, Royalton Community Radio, GCR (Global Community Radio), KUCO, KPTZ Port Townsend, and others across the country.
+
+\textit{Sources: PRX series page; cafechill.org; c895.org Café Chill pledge blog.}
+
+\subsubsection{Awards and Recognition}
+
+\begin{itemize}[leftmargin=2em]
+\item The Village Voice ``Best of New York'' high school radio station (2003)
+\item Rolling Stone: recognized as largest and most influential educational radio station in the country
+\item Billboard's Top 40 of Top 40 listing
+\item King County ``c89.5 Day'' proclamation (January 25, 2021)
+\item Nominated for ``Best Non-Profit'' in 2025 Best of the PNW (Seattle Times)
+\item Candid (GuideStar) Gold Seal of Transparency rating
+\end{itemize}
+
+\textit{Sources: c895.org/about; OnlineRadioBox; c895.org/educational-program; c895.org/board.}
+
+\subsection{Module 5 Reference: Funding \& Sustainability}
+
+\subsubsection{Revenue Structure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Source} & \tableheader{Percentage} & \tableheader{Notes} \\
+\midrule
+Listener donations \& business underwriting & $\sim$87\% & Bi-annual pledge drives + corporate underwriting \\
+Seattle School District & $\sim$3\% & Partial salaries/benefits for two staff positions \\
+CPB Community Service Grant & $\sim$10\% & Qualified since 2015; dissolved Jan 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Sources: c895.org/educational-program; c895.org CPB funding page; Wikipedia/KNHC.}
+
+\subsubsection{Organizational Structure}
+
+\textbf{License holder:} Seattle Public Schools (Seattle Schools Board of Education as governing body). \textbf{Operational support:} C895/KNHC Public Radio Association, a 501(c)(3) tax-exempt organization (EIN 20-5402402). The Association provides strategic guidance, fundraising support, and brand management. Board of Directors meets quarterly with additional virtual meetings; members serve three-year terms. As a station owned by a public agency, KNHC is not required to have a separate Community Advisory Board.
+
+\textit{Sources: c895.org/board; c895.org/cpb.}
+
+\subsubsection{Post-CPB Impact Analysis}
+
+With CPB's dissolution effective January 2026, C89.5 faces:
+\begin{itemize}[leftmargin=2em]
+\item Direct grant loss: approximately \$175,000 annually
+\item Loss of CPB-negotiated music royalty rates (stations must now negotiate independently or through new entities)
+\item Loss of satellite interconnection services (CPB awarded a \$57.9M grant to Public Media Infrastructure in September 2025 to sustain distribution through 2030)
+\item Loss of Emergency Alert System infrastructure support
+\item Increased dependence on listener donations for all basic operations
+\item Equipment cost increases for broadcast and digital streams
+\end{itemize}
+
+The station is not an NPR affiliate and does not carry NPR programming, but is affected by the systemic collapse of public broadcasting infrastructure.
+
+\textit{Sources: c895.org/federalfunding; c895.org CPB impact page; CPB.org PMI grant announcement (Sept 2025); Wikipedia/CPB.}
+
+\subsubsection{Historical Funding Resilience}
+
+C89.5 has demonstrated repeated survival against funding crises: the 1981 near-shutdown (resolved via community college partnership), the 1986 launch of listener pledge drives, the 2002 exclusion from the school district budget, and now the CPB dissolution. The station's 87\% self-funding rate was already unusually high for a public radio station, positioning it better than many peers for the post-CPB landscape. The 2019 data showed only 12\% of operating budget from the school district, with the remainder self-generated.
+
+\textit{Sources: Wikipedia/KNHC; c895.org; Seattle Public Schools historical report.}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Sensitivity} & \tableheader{Handling} \\
+\midrule
+Student privacy & HIGH & No individual student names, records, or identifying details \\
+Minor participation & HIGH & Discuss program structure only, not individual minor experiences \\
+LGBTQ+ community & MODERATE & Present station's own published commitment; do not editorialize \\
+CPB/Political context & MODERATE & Present evidence of funding impact without policy advocacy \\
+Personnel & LOW & Public-facing roles and published names only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Station and Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+\item C89.5 Official Website --- \url{https://www.c895.org/about/}
+\item C89.5 Educational Program --- \url{https://www.c895.org/educational-program/}
+\item C89.5 CPB Funding Page --- \url{https://www.c895.org/federalfunding/}
+\item C89.5 Radio Reception Tips --- \url{https://www.c895.org/radio-reception-tips/}
+\item C89.5/KNHC Public Radio Association --- \url{https://www.c895.org/board/}
+\item Nathan Hale High School Course Catalog --- \url{https://halehs.seattleschools.org/academics/course-catalog/}
+\item Nathan Hale Radio Station Page --- \url{https://halehs.seattleschools.org/student-life/radio-station/}
+\item Seattle Public Schools, ``Building for Learning'' --- \url{https://www.seattleschools.org/wp-content/uploads/2024/04/Building-for-Learning-2022-Hale-Radio-Station.pdf}
+\end{itemize}
+
+\subsubsection{Government and Regulatory Sources}
+\begin{itemize}[leftmargin=2em]
+\item Federal Communications Commission --- KNHC license records (Application ID 1002739)
+\item Corporation for Public Broadcasting --- CPB reporting, grant records, PMI announcement
+\item King County Executive Office --- ``c89.5 Day'' proclamation (January 25, 2021)
+\end{itemize}
+
+\subsubsection{Professional Media and Industry Sources}
+\begin{itemize}[leftmargin=2em]
+\item DanceMusicNW --- 50th anniversary feature interview --- \url{https://www.dancemusicnw.com/c895-50th-anniversary-interview/}
+\item Radio Survivor --- Station Visit \#152 (2018) --- \url{https://www.radiosurvivor.com/2019/01/radio-station-visit-152-dance-music-oriented-high-school-radio-station-c89-5/}
+\item Seattle Weekly --- ``Rihanna and Lady Gaga owe some of their success to C89.5 FM'' (Feb 2011)
+\item The Seattle Times --- ``The sound of success at Nathan Hale'' (Nov 2003)
+\item PRX (Public Radio Exchange) --- Café Chill series and station profile --- \url{https://exchange.prx.org/station/c895}
+\item Café Chill Official --- \url{https://www.cafechill.org/}
+\item Wikipedia --- KNHC article --- \url{https://en.wikipedia.org/wiki/KNHC}
+\item Wikipedia --- Corporation for Public Broadcasting article
+\end{itemize}
+
+
+% =====================================================
+% STAGE 3 — MISSION PACKAGE
+% =====================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on C89.5 / KNHC Seattle covering its complete 56-year history, educational model, technical infrastructure, cultural influence, and funding sustainability architecture. The deliverable should serve as both a definitive reference and a case study in how architectural elegance and community ownership can produce outcomes that commercial operations cannot replicate.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+Wave 0: FOUNDATION (Sequential)
+  [Shared Schema] --> [Source Index] --> [Timeline Scaffold]
+       |                   |                    |
+       v                   v                    v
+Wave 1: PARALLEL RESEARCH (2 tracks)
+  Track A:                  Track B:
+  [M1: History]             [M2: Education]
+  [M3: Technical]           [M4: Cultural]
+       |                         |
+       +--------+    +-----------+
+                |    |
+Wave 2: SYNTHESIS (Sequential)
+  [M5: Funding] --> [Cross-Module Integration] --> [Narrative]
+                              |
+Wave 3: PUBLICATION + VERIFICATION (Sequential)
+  [Document Assembly] --> [Source Verify] --> [Test Suite]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, chronological timeline scaffold, source index
+\item \textbf{Research Layer} --- Five parallel-ready research modules with verified sources
+\item \textbf{Synthesis Layer} --- Cross-module integration, through-line narrative, funding analysis
+\item \textbf{Publication Layer} --- Document assembly, verification, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Chronological Timeline & All dates sourced, no gaps >3 years & W0-TIMELINE \\
+2 & History Module & 1969--2026, all crises documented & W1A-HISTORY \\
+3 & Education Module & Course sequence, outcomes, partnerships & W1B-EDUCATION \\
+4 & Technical Module & All power levels, infrastructure specs & W1A-TECHNICAL \\
+5 & Cultural Module & All claims sourced, 8+ shows profiled & W1B-CULTURAL \\
+6 & Funding Module & Revenue breakdown, CPB impact quantified & W2-FUNDING \\
+7 & Integrated Document & Cross-referenced, through-line complete & W2-SYNTHESIS \\
+8 & Verified Publication & All tests pass, sources validated & W3-PUBLISH \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 3,000 \\
+W0-SOURCES & None & Sonnet & 5,000 \\
+W0-TIMELINE & W0-SCHEMA & Sonnet & 6,000 \\
+W1A-HISTORY & W0-TIMELINE & Sonnet & 12,000 \\
+W1A-TECHNICAL & W0-TIMELINE & Sonnet & 10,000 \\
+W1B-EDUCATION & W0-SCHEMA & Sonnet & 10,000 \\
+W1B-CULTURAL & W0-SOURCES & Opus & 12,000 \\
+W2-FUNDING & W1A, W1B & Opus & 10,000 \\
+W2-SYNTHESIS & All W1 & Opus & 15,000 \\
+W3-PUBLISH & W2 & Sonnet & 8,000 \\
+W3-VERIFY & W3-PUBLISH & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} \\
+\midrule
+Opus & $\sim$32\% & Cultural analysis (M4), Funding synthesis (M5), Cross-module integration, Narrative voice \\
+Sonnet & $\sim$58\% & History survey (M1), Technical specs (M3), Education structure (M2), Source compilation, Timeline, Publication, Verification \\
+Haiku & $\sim$10\% & Shared schemas, Template scaffolding, Source index structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallelism} & \tableheader{Components} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & Sequential & 3 & 14,000 \\
+1 & Research & 2 parallel tracks & 4 & 44,000 \\
+2 & Synthesis & Sequential & 2 & 25,000 \\
+3 & Publication & Sequential & 2 & 13,000 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated:}} & \textbf{96,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-SCHEMA & Define shared data schemas for timeline entries, personnel records, technical specs, show profiles & Haiku & 3,000 \\
+W0-SOURCES & Compile and validate all source URLs; create source index with reliability ratings & Sonnet & 5,000 \\
+W0-TIMELINE & Build master chronological scaffold from all sources; flag gaps & Sonnet & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: History + Technical}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1A-HISTORY & Complete narrative history: founding, format changes, crises, key personnel, milestones & Sonnet & 12,000 \\
+W1A-TECHNICAL & Signal specifications table, infrastructure timeline, Cougar Mountain analysis, streaming history & Sonnet & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Education + Cultural}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1B-EDUCATION & Curriculum documentation, student outcomes, partnerships, mental health programs, inclusion policy & Sonnet & 10,000 \\
+W1B-CULTURAL & Billboard panel analysis, artist documentation, programming inventory, Café Chill syndication, awards & Opus & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W2-FUNDING & Revenue analysis, post-CPB impact, organizational structure, resilience patterns & Opus & 10,000 \\
+W2-SYNTHESIS & Cross-module integration, through-line narrative, Amiga Principle connections, case study framing & Opus & 15,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W3-PUBLISH & Assemble all modules into unified document with consistent formatting, cross-references, bibliography & Sonnet & 8,000 \\
+W3-VERIFY & Execute test plan, validate all sources, verify numerical claims, confirm cross-module consistency & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{5-minute TTL exploitation:} Wave 1 Track A and Track B launch within the same cache window, sharing W0 foundation outputs
+\item \textbf{Source index reuse:} W0-SOURCES cached and referenced by all Wave 1 components, eliminating redundant URL validation
+\item \textbf{Schema inheritance:} W0-SCHEMA defines all data structures once; all modules consume without regeneration
+\item \textbf{Cross-wave handoff:} Wave 1 outputs cached for Wave 2 synthesis consumption within single session where possible
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Wave 0} & \tableheader{Wave 1} & \tableheader{Wave 2} & \tableheader{Wave 3} \\
+\midrule
+Opus & --- & 12,000 & 25,000 & --- \\
+Sonnet & 11,000 & 22,000 & --- & 13,000 \\
+Haiku & 3,000 & --- & --- & --- \\
+\midrule
+\textbf{Total} & \textbf{14,000} & \textbf{34,000} & \textbf{25,000} & \textbf{13,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$96,000 tokens across 18--24 context windows in 4--6 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+                    W0-SCHEMA
+                   /    |    \
+            W0-SOURCES  |   W0-TIMELINE
+               |        |        |
+          W1B-CULTURAL  |   W1A-HISTORY
+          W1B-EDUCATION |   W1A-TECHNICAL
+               |        |        |
+               +---W2-FUNDING----+
+                        |
+                   W2-SYNTHESIS
+                        |
+                   W3-PUBLISH
+                        |
+                   W3-VERIFY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{28} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to station sources, government records, or professional media. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every power level, dollar amount, percentage, and date attributed to specific source \\
+SC-ADV & No policy advocacy & CPB/funding content presents evidence without advocating for or against specific legislation \\
+SC-STU & Student privacy & Zero individual student names, records, or identifiable experiences \\
+SC-MIN & Minor protection & Educational program discussed structurally; no individual minor experiences or quotes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Power progression & All 9 documented power levels present with years and specifications \\
+CF-02 & Format changes & Light rock $\rightarrow$ R\&B/urban $\rightarrow$ dance evolution documented with dates \\
+CF-03 & Crisis coverage & All 4 survival crises (1981, 1983, 2002, 2025) individually documented \\
+CF-04 & Course sequence & Complete 4-course Electronic Media progression documented \\
+CF-05 & Personnel profiles & $\geq$6 named personnel with roles and verifiable sources \\
+CF-06 & Billboard documentation & First non-commercial panel membership claim sourced \\
+CF-07 & Lady Gaga claim & 2008 performance sourced to at least 2 independent references \\
+CF-08 & Show inventory & $\geq$8 named shows with format descriptions \\
+CF-09 & Revenue breakdown & Percentage-based breakdown with at least 3 revenue sources \\
+CF-10 & CPB impact & Dollar amount (\$175K) and specific lost services enumerated \\
+CF-11 & Organizational dual structure & Both Seattle Public Schools and 501(c)(3) documented \\
+CF-12 & Café Chill syndication & PRX distribution with $\geq$5 purchasing stations named \\
+CF-13 & Cougar Mountain specs & ERP, elevation, coverage area documented \\
+CF-14 & Streaming history & 1997 launch date and current stream formats documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & History $\rightarrow$ Technical & $\geq$5 history events linked to specific technical milestones \\
+IN-02 & Education $\rightarrow$ Cultural & Student involvement in cultural achievements documented (e.g., Lady Gaga booking) \\
+IN-03 & Funding $\rightarrow$ History & Each funding crisis appears in both history and funding modules consistently \\
+IN-04 & Cross-module consistency & Dates, power levels, and personnel consistent across all modules \\
+IN-05 & Document self-containment & Reader with no prior knowledge can understand complete picture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Data gaps & Areas of incomplete knowledge explicitly flagged \\
+EC-02 & Temporal currency & Post-CPB information reflects 2026 status \\
+EC-03 & Conflicting sources & Any discrepancies between sources noted and reconciled \\
+EC-04 & Disputed claims & ``World's oldest dance station'' claim presented with appropriate qualifier (``still remaining'') \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Power increases with dates/sources & CF-01, SC-NUM & Pending \\
+2. Course sequence documented & CF-04 & Pending \\
+3. Signal specs for every power level & CF-01, CF-13 & Pending \\
+4. Artist claims sourced & CF-07, CF-06, SC-SRC & Pending \\
+5. Revenue breakdown & CF-09, SC-NUM & Pending \\
+6. CPB impact quantified & CF-10 & Pending \\
+7. 80\%+ citations from official/professional sources & SC-SRC & Pending \\
+8. History-technical cross-references ($\geq$5) & IN-01 & Pending \\
+9. Personnel identified by name/role & CF-05 & Pending \\
+10. 8+ shows profiled & CF-08 & Pending \\
+11. Dual organizational structure documented & CF-11 & Pending \\
+12. Through-line connects to sustainability patterns & IN-05, EC-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; gap-fill web research \\
+EXEC-A & Executor (Track A) & History + Technical module production \\
+EXEC-B & Executor (Track B) & Education + Cultural module production \\
+CRAFT-HIST & History Specialist & Chronological analysis, crisis narrative, personnel profiles \\
+CRAFT-MUSIC & Music/Culture Specialist & Billboard analysis, programming inventory, cultural impact \\
+VERIFY & Verification & Source validation; numerical accuracy; date cross-checking \\
+INTEG & Integration Agent & Cross-module consistency; through-line narrative coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research modules & 5 \\
+Activation profile & Squadron (12 roles) \\
+Parallel tracks & 2 (History+Technical \textbar{} Education+Cultural) \\
+Wave count & 4 (Foundation, Research, Synthesis, Publication) \\
+Estimated token budget & $\sim$96,000 \\
+Estimated context windows & 18--24 \\
+Estimated sessions & 4--6 \\
+Model split & Opus 32\% / Sonnet 58\% / Haiku 10\% \\
+Test count & 28 (5 safety + 14 core + 5 integration + 4 edge) \\
+Success criteria & 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``The radio broadcasts to every receiver within range, and the signal does not check the receiver's address before it arrives, and the music is the same music on every porch in every part of town, and the sameness of the music is a fact that the firewall cannot filter and the rules cannot change and the administrators cannot prevent, because the music travels through the air, and the air belongs to no one.''}
+
+\vspace{0.5em}
+\hfill --- \textit{The Hundred Voices}, Voice 14
+
+\vspace{0.5em}
+A 100-milliwatt signal from a high school classroom, fifty-six years later, still teaching through the air.
+\end{quotebox}
+
+\end{document}
