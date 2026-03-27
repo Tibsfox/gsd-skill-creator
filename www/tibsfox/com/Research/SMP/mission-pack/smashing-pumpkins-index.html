@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smashing Pumpkins -- GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #4A148C;
+  --secondary: #E65100;
+  --tertiary: #1B5E20;
+  --accent: #6A1B9A;
+  --light-bg: #F3E5F5;
+  --card-bg: #E1BEE7;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #1a0533 0%, #311B92 40%, #4A148C 70%, #2E0A4F 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #CE93D8; letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.2); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--secondary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--primary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smashing Pumpkins</h1>
+  <h2>Sound, Fury, and the Architecture of Infinite Sadness</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="smashing-pumpkins-mission.pdf" download class="file-card">
+      <div class="ext">PDF</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification ready for GSD orchestrator.</div>
+    </a>
+    <a href="smashing-pumpkins-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable source file. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 -- Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Domain architecture and module dependency diagrams</li>
+          <li>5 research modules: Origins, Peak Years, Sonic Architecture, Cultural Legacy, Reinvention</li>
+          <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 -- Research Reference</span>
+        <ul>
+          <li>Formation history: Chicago 1988, Polish bars, the Metro, Limited Potential, Sub Pop</li>
+          <li>Gish and Siamese Dream production: Smart Studios, Butch Vig, 100+ guitar tracks</li>
+          <li>Mellon Collie: Diamond certified, 28 tracks, Flood/Moulder production, Pumpkinland sessions</li>
+          <li>Chamberlin's drumming: jazz background, snare-centered technique, Yamaha Maple Custom</li>
+          <li>Cultural legacy: 30M albums, Gen X vocabulary, influence mapping (8+ sources, 8+ influenced)</li>
+          <li>ATUM: 33-track rock opera, Machina/Mellon Collie sequel, podcast distribution</li>
+          <li>Safety considerations and full source bibliography</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 -- Mission Package</span>
+        <ul>
+          <li>10 deliverables, 4-wave execution plan with 2 parallel tracks</li>
+          <li>Squadron activation profile: 12 roles</li>
+          <li>36 tests (5 safety-critical), verification matrix</li>
+          <li>~240K token budget, 8-12 context windows, 4-5 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the PDF</li>
+      <li>Wave 0 produces shared schemas, source index, and discography tables</li>
+      <li>Wave 1 executes two parallel tracks (A: Historical, B: Sonic/Cultural/Arc)</li>
+      <li>Wave 2 synthesizes cross-module connections and the thematic through-line</li>
+      <li>Wave 3 assembles, verifies, and delivers the final document</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode smashing-pumpkins-mission.tex
+xelatex -interaction=nonstopmode smashing-pumpkins-mission.tex
+xelatex -interaction=nonstopmode smashing-pumpkins-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "The Smashing Pumpkins built their catalog the way a master architect builds a cathedral: not by
+    adding ornamentation to a structure, but by making the structure itself the ornament. The GSD
+    ecosystem recognizes this disposition immediately. The Amiga Principle does not require power;
+    it requires intention."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Smashing Pumpkins &middot; March 2026
+</footer>
+
+</body>
+</html>
