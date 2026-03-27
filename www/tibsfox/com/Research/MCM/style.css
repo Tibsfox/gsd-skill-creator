@@ -1,0 +1,48 @@
+/* MCM — Maritime Compute & Maglev Bridge
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #0D47A1;
+  --secondary: #00695C;
+  --tertiary: #1565C0;
+  --accent: #004D40;
+  --cream: #e8f0f8;
+  --mist: #b0c4de;
+  --text: #212121;
+  --text-light: #546E7A;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+  border-bottom: 4px solid var(--tertiary);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--secondary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(13, 71, 161, 0.05); }
+tr:hover { background: rgba(13, 71, 161, 0.1); }
+blockquote { border-left-color: var(--secondary); background: rgba(0, 105, 92, 0.04); }
+code { background: var(--mist); }
+pre { background: #0a1929; color: #80cbc4; }
+.stat-value { color: var(--primary); }
+
+.tag-maritime { background: rgba(13, 71, 161, 0.12); color: var(--primary); }
+.tag-energy { background: rgba(0, 105, 92, 0.12); color: var(--secondary); }
+.tag-subsea { background: rgba(21, 101, 192, 0.12); color: var(--tertiary); }
+.tag-bridge { background: rgba(0, 77, 64, 0.12); color: var(--accent); }
+.tag-network { background: rgba(2, 119, 189, 0.12); color: #0277BD; }
+.tag-governance { background: rgba(55, 71, 79, 0.12); color: #37474F; }
+.tag-pass { background: rgba(0, 105, 92, 0.12); color: var(--secondary); }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
