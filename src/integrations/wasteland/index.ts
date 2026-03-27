@@ -540,6 +540,21 @@ export {
   normalizeToUTC,
 } from './utc.js';
 
+// Stamp Reciprocity (cross-validation protocol)
+export {
+  getStampBalance,
+  getReciprocityOpportunities,
+  getStampGraph,
+  generateNotification,
+  generateReciprocityNudge,
+} from './stamp-reciprocity.js';
+export type {
+  StampBalance,
+  ReciprocityOpportunity,
+  StampPair,
+  StampEvent,
+} from './stamp-reciprocity.js';
+
 // Schema Evolution (version-aware DDL migration)
 export {
   getSchemaVersion,
