@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPU Ecosystem &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gpg">
+  <header>
+    <h1>GPU Ecosystem</h1>
+    <div class="subtitle">Graphics Pipeline &middot; Vulkan/OpenGL &middot; Ray Tracing &middot; Shaders &middot; WebGPU &middot; Observability</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-gpu-graphics-pipeline">Graphics Pipeline</a>
+      <a href="page.html?doc=02-vulkan-modern-apis">Vulkan &amp; APIs</a>
+      <a href="page.html?doc=03-ray-tracing-architecture">Ray Tracing</a>
+      <a href="page.html?doc=04-xscreensaver-shadertoy">XScreenSaver</a>
+      <a href="page.html?doc=05-shader-programming">Shaders</a>
+      <a href="page.html?doc=06-gpu-observability">Observability</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga 500 shipped with a custom chipset that embarrassed workstations costing ten times its
+      price. It did not win by having more transistors. It won because Agnus, Denise, and Paula each
+      owned their slice of the machine and communicated through DMA channels that kept the CPU free
+      to think. The GPU is the modern Denise &mdash; a dedicated display coprocessor executing a billion
+      shader invocations per second, stateless, parallel, each computing its color from nothing but
+      coordinates and uniforms. The CPU submits work orders. The GPU fills pixels.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">45</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">#100</span><span class="stat-label">Project Number</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-gpu-graphics-pipeline" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: GPU Graphics Pipeline</h3>
+        <div class="meta"><span class="tag tag-pipeline">Pipeline</span> Track A &middot; Vertex to fragment</div>
+        <p>The modern programmable pipeline: vertex processing, rasterization, fragment shading, tessellation, geometry shaders, compute shaders. GLSL and SPIR-V shader languages. GPU memory architecture. The Hello Triangle from NeHe to Vulkan.</p>
+      </a>
+
+      <a href="page.html?doc=02-vulkan-modern-apis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Vulkan &amp; Modern APIs</h3>
+        <div class="meta"><span class="tag tag-api">API</span> Track A &middot; Explicit GPU control</div>
+        <p>Vulkan 1.3 object model, command buffers, pipeline state objects, descriptor sets, synchronization primitives. The implicit-to-explicit transition from OpenGL. Memory management and validation layers.</p>
+      </a>
+
+      <a href="page.html?doc=03-ray-tracing-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Ray Tracing Architecture</h3>
+        <div class="meta"><span class="tag tag-rt">Ray Tracing</span> Track B &middot; Hardware RT</div>
+        <p>BVH acceleration structures, RT Core architecture across three NVIDIA generations. Vulkan ray tracing pipeline. Hybrid rendering. Path tracing, ReSTIR, and DLSS/FSR reconstruction.</p>
+      </a>
+
+      <a href="page.html?doc=04-xscreensaver-shadertoy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: XScreenSaver &amp; Shadertoy</h3>
+        <div class="meta"><span class="tag tag-glsl">GLSL</span> Track B &middot; Visual programming</div>
+        <p>XScreenSaver 6.14 framework, GLX virtual root window, Shadertoy API wrapper, GLSL portability matrix. WebGPU and WGSL. GPGPU history. 50-hack curated catalog for GSD-OS idle render.</p>
+      </a>
+
+      <a href="page.html?doc=05-shader-programming" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Shader Programming</h3>
+        <div class="meta"><span class="tag tag-shader">Shader</span> Track C &middot; GLSL techniques</div>
+        <p>SIMD execution model. Fragment shader techniques: SDFs, ray marching, noise, post-processing. Vertex skinning, instanced particles. SPIR-V toolchain. Shader debugging. The GSD-OS CRT shader engine.</p>
+      </a>
+
+      <a href="page.html?doc=06-gpu-observability" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: GPU Observability</h3>
+        <div class="meta"><span class="tag tag-obs">Observability</span> Track C &middot; Monitoring</div>
+        <p>NVML and DCGM Exporter. OpenTelemetry for GPU workloads. Prometheus 3.0 resource attributes. Grafana Alloy pipeline. Raspberry Pi SoC monitoring. Five GSD-OS dashboard specifications. Alert engineering.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Graphics pipeline stages</td><td>M1, M2, M3</td><td>GPO, SGL, GSD2</td></tr>
+        <tr><td>Vulkan object model</td><td>M2, M3, M4</td><td>GPO, K8S, ACE</td></tr>
+        <tr><td>GLSL / SPIR-V shaders</td><td>M1, M4, M5</td><td>SGL, MPC, GRD</td></tr>
+        <tr><td>Ray tracing / BVH</td><td>M3</td><td>GPO, CMH, ACE</td></tr>
+        <tr><td>XScreenSaver / Shadertoy</td><td>M4, M5</td><td>SGL, LED, GSD2</td></tr>
+        <tr><td>WebGPU / WGSL</td><td>M4, M5</td><td>CMH, ACE</td></tr>
+        <tr><td>GPGPU / compute shaders</td><td>M1, M4, M5</td><td>GPO, MPC, GRD</td></tr>
+        <tr><td>NVML / DCGM metrics</td><td>M6</td><td>GPO, SYS, K8S</td></tr>
+        <tr><td>OTel / Prometheus</td><td>M6</td><td>SYS, K8S, ACE</td></tr>
+        <tr><td>Grafana dashboards</td><td>M6</td><td>SYS, GPO, GSD2</td></tr>
+        <tr><td>Raspberry Pi VideoCore</td><td>M2, M4, M6</td><td>SGL, LED, T55</td></tr>
+        <tr><td>CRT shader engine</td><td>M5, M6</td><td>GSD2, SGL</td></tr>
+        <tr><td>Amiga chipset mapping</td><td>M1, M4, M6</td><td>GSD2, SGL</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+GPU ECOSYSTEM -- DOMAIN MAP
+===============================================================
+
+  GRAPHICS DOMAIN          COMPUTE DOMAIN          OBSERVABILITY
+  +---------------+       +----------------+       +---------------+
+  | Vertex Shader |       | Compute Shader |       | NVML / DCGM   |
+  | Fragment Shdr |------&gt;| Work Groups    |------&gt;| OTel Collector|
+  | Tessellation  |       | Shared Memory  |       | Prometheus    |
+  | Geometry Shdr |       | Vulkan Compute |       | Grafana Alloy |
+  +---------------+       +----------------+       +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+       +---------------+
+  | Rasterization |       | Ray Tracing    |       | 5 Dashboards  |
+  | Deferred Rend |       | BVH / RT Cores |       | GPU Health    |
+  | Post-Process  |       | Path Tracing   |       | Pi SoC        |
+  | CRT Shader    |       | DLSS / FSR     |       | GSD Metrics   |
+  +---------------+       +----------------+       +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   SHADER PLATFORMS    |
+                    |                       |
+                    |  GLSL / SPIR-V        |
+                    |  WGSL (WebGPU)        |
+                    |  Shadertoy / XSS      |
+                    |  CRT Engine (Denise)  |
+                    |  Vulkan RT Pipeline   |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Graphics Pipeline] --------&gt; [M2: Vulkan &amp; APIs]
+         |                                |
+         |                                |
+         v                                v
+  [M5: Shader Programming] &lt;--- [M3: Ray Tracing Architecture]
+         |                                |
+         |                                v
+         v                     [M4: XScreenSaver &amp; Shadertoy]
+  [M6: GPU Observability]
+
+  Parallel tracks:
+    Track A: M1 + M2 (pipeline + explicit APIs)
+    Track B: M3 + M4 (ray tracing + visual programming)
+    Track C: M5 + M6 (shader dev + monitoring)
+    </pre>
+  </main>
+
+  <footer>
+    <p>GPU Ecosystem &middot; PNW Research Series &middot; gsd-skill-creator &middot; Project #100</p>
+  </footer>
+</body>
+</html>
