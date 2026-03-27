@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Sheet — Wasteland Federation</title>
+<style>
+  :root {
+    --forest: #2E7D32;
+    --bark: #3E2723;
+    --moss: #558B2F;
+    --fern: #689F38;
+    --sky: #E3F2FD;
+    --mist: #F5F5F5;
+    --stone: #455A64;
+    --trail: #8D6E63;
+    --ember: #BF360C;
+    --text: #212121;
+    --subtle: #757575;
+    --border: #BDBDBD;
+    --card-bg: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--mist); color: var(--text); line-height: 1.6; }
+
+  header {
+    background: linear-gradient(135deg, var(--bark) 0%, var(--forest) 60%, var(--moss) 100%);
+    color: white; padding: 2.5rem 2rem; text-align: center;
+  }
+  header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.3rem; }
+  header p { font-size: 0.9rem; opacity: 0.85; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+
+  /* Profile card */
+  .profile-card {
+    background: var(--card-bg); border-radius: 12px; padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+  }
+  .profile-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .profile-icon { font-size: 3rem; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: var(--sky); border-radius: 50%; flex-shrink: 0; }
+  .profile-name { font-size: 1.6rem; font-weight: 700; }
+  .profile-handle { font-size: 0.85rem; color: var(--subtle); font-family: monospace; }
+  .profile-bio { font-size: 0.95rem; color: var(--stone); margin-bottom: 1rem; font-style: italic; padding: 0.8rem; background: var(--mist); border-radius: 8px; border-left: 3px solid var(--forest); }
+
+  /* Trust badge */
+  .trust-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+  }
+  .trust-0 { background: #ECEFF1; color: #546E7A; }
+  .trust-1 { background: #E8F5E9; color: #2E7D32; }
+  .trust-2 { background: #C8E6C9; color: #1B5E20; }
+  .trust-3 { background: #1B5E20; color: white; }
+  .trust-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .trust-0 .trust-dot { background: #90A4AE; }
+  .trust-1 .trust-dot { background: #66BB6A; }
+  .trust-2 .trust-dot { background: #43A047; }
+  .trust-3 .trust-dot { background: #A5D6A7; }
+
+  /* Info rows */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.5rem; }
+  .info-item { padding: 0.6rem 0; }
+  .info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--subtle); font-weight: 600; }
+  .info-value { font-size: 0.95rem; }
+
+  /* Skills */
+  .skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .skill-tag { padding: 0.25em 0.7em; background: #E8F5E9; color: var(--forest); border-radius: 12px; font-size: 0.78rem; font-weight: 500; }
+
+  /* Badges */
+  .badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .badge-item { display: flex; align-items: center; gap: 0.3rem; padding: 0.3em 0.7em; background: var(--mist); border: 1px solid var(--border); border-radius: 8px; font-size: 0.8rem; }
+  .badge-icon { font-size: 1.1rem; }
+
+  /* Stats */
+  .stats-row { display: flex; justify-content: space-around; padding: 1rem 0; border-top: 1px solid var(--border); }
+  .stat { text-align: center; }
+  .stat-num { font-size: 1.5rem; font-weight: 700; color: var(--forest); }
+  .stat-label { font-size: 0.7rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Custom fields */
+  .custom-fields { margin-top: 1rem; }
+  .custom-field { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #EEEEEE; font-size: 0.88rem; }
+  .custom-key { color: var(--subtle); }
+
+  /* Sections */
+  .section-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--trail); margin-bottom: 0.6rem; margin-top: 1rem; }
+
+  /* View toggle */
+  .view-toggle { text-align: center; margin-bottom: 1.5rem; }
+  .toggle-btn { padding: 0.4em 1.2em; border: 1px solid var(--border); background: white; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+  .toggle-btn:first-child { border-radius: 20px 0 0 20px; }
+  .toggle-btn:last-child { border-radius: 0 20px 20px 0; }
+  .toggle-btn.active { background: var(--forest); color: white; border-color: var(--forest); }
+  .hidden { display: none; }
+
+  /* Footer */
+  footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--subtle); }
+  footer a { color: var(--forest); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .stats-row { flex-wrap: wrap; gap: 1rem; }
+    .profile-header { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Character Sheet</h1>
+  <p>Wasteland Federation — what a rig chooses to share</p>
+</header>
+
+<div class="container">
+  <div class="view-toggle">
+    <button class="toggle-btn active" onclick="setView('public')">Public Profile</button>
+    <button class="toggle-btn" onclick="setView('owner')">Owner View</button>
+  </div>
+
+  <div id="sheet"></div>
+</div>
+
+<footer>
+  Wasteland Federation &middot; Character sheets are consent-driven &middot;
+  <a href="../index.html">Back to Black Rock City</a>
+</footer>
+
+<script>
+(function() {
+  const TRUST_NAMES = ['Outsider', 'Registered', 'Contributor', 'Maintainer'];
+  let data = null;
+  let currentView = 'public';
+
+  function setView(view) {
+    currentView = view;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(view));
+    });
+    render();
+  }
+  window.setView = setView;
+
+  function timeAgo(iso) {
+    const d = new Date(iso);
+    const now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days === 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days < 30) return days + ' days ago';
+    if (days < 365) return Math.floor(days / 30) + ' months ago';
+    return Math.floor(days / 365) + ' years ago';
+  }
+
+  function render() {
+    if (!data) return;
+    const c = data.character;
+    const isOwner = currentView === 'owner';
+    const level = data.trustLevel || 0;
+
+    let html = '<div class="profile-card">';
+
+    // Header
+    html += '<div class="profile-header">';
+    html += '<div class="profile-icon">' + (c.icon || '?') + '</div>';
+    html += '<div>';
+    html += '<div class="profile-name">' + esc(c.displayName) + '</div>';
+    html += '<div class="profile-handle">' + esc(c.handle) + '</div>';
+    html += '<span class="trust-badge trust-' + level + '"><span class="trust-dot"></span>' + (data.trustLevelName || TRUST_NAMES[level]) + '</span>';
+    html += '</div></div>';
+
+    // Bio
+    if (c.bio) {
+      html += '<div class="profile-bio">' + esc(c.bio) + '</div>';
+    }
+
+    // Info grid
+    html += '<div class="info-grid">';
+    if (c.homeCamp) {
+      html += '<div class="info-item"><div class="info-label">Camp</div><div class="info-value">' + esc(c.homeCamp) + '</div></div>';
+    }
+    if (isOwner) {
+      html += '<div class="info-item"><div class="info-label">Reputation</div><div class="info-value">' + c.reputationVisibility + '</div></div>';
+    }
+    html += '<div class="info-item"><div class="info-label">Joined</div><div class="info-value">' + timeAgo(data.stats.joinedAt) + '</div></div>';
+    html += '<div class="info-item"><div class="info-label">Updated</div><div class="info-value">' + timeAgo(c.updatedAt) + '</div></div>';
+    html += '</div>';
+
+    // Skills (visible at Contributor+ or owner)
+    if (c.visibleSkills && c.visibleSkills.length > 0 && (level >= 2 || isOwner)) {
+      html += '<div class="section-title">Skills</div>';
+      html += '<div class="skills">';
+      c.visibleSkills.forEach(function(s) { html += '<span class="skill-tag">' + esc(s) + '</span>'; });
+      html += '</div>';
+    }
+
+    // Badges
+    if (data.badges && data.badges.length > 0) {
+      html += '<div class="section-title">Badges</div>';
+      html += '<div class="badges">';
+      data.badges.forEach(function(b) {
+        html += '<div class="badge-item"><span class="badge-icon">' + (b.icon || '') + '</span>' + esc(b.label) + '</div>';
+      });
+      html += '</div>';
+    }
+
+    // Custom fields (visible at Contributor+ or owner)
+    if (c.customFields && Object.keys(c.customFields).length > 0 && (level >= 2 || isOwner)) {
+      html += '<div class="section-title">Details</div>';
+      html += '<div class="custom-fields">';
+      Object.entries(c.customFields).forEach(function(entry) {
+        html += '<div class="custom-field"><span class="custom-key">' + esc(entry[0].replace(/_/g, ' ')) + '</span><span>' + esc(entry[1]) + '</span></div>';
+      });
+      html += '</div>';
+    }
+
+    // Stats (owner only or full visibility)
+    if (data.stats && (isOwner || c.reputationVisibility === 'full')) {
+      html += '<div class="stats-row">';
+      html += '<div class="stat"><div class="stat-num">' + data.stats.completions + '</div><div class="stat-label">Completions</div></div>';
+      html += '<div class="stat"><div class="stat-num">' + data.stats.stampsIssued + '</div><div class="stat-label">Stamps Given</div></div>';
+      html += '<div class="stat"><div class="stat-num">' + data.stats.stampsReceived + '</div><div class="stat-label">Stamps Got</div></div>';
+      html += '<div class="stat"><div class="stat-num">' + data.stats.activeRelationships + '</div><div class="stat-label">Relationships</div></div>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    document.getElementById('sheet').innerHTML = html;
+  }
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // Load data
+  fetch('sample.json')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { data = d; render(); })
+    .catch(function(e) {
+      document.getElementById('sheet').innerHTML =
+        '<div class="profile-card" style="text-align:center;color:#757575;">Failed to load character data.<br>Place a JSON file at sample.json.</div>';
+    });
+})();
+</script>
+
+</body>
+</html>

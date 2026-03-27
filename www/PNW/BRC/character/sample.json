@@ -1,0 +1,31 @@
+{
+  "character": {
+    "handle": "fox-742",
+    "displayName": "Maple Fox",
+    "icon": "🦊",
+    "bio": "Builder of forests, keeper of trails. The mesh is the message.",
+    "homeCamp": "Center Camp",
+    "reputationVisibility": "full",
+    "visibleSkills": ["trust-systems", "federation", "mesh-networking", "cartography", "typescript"],
+    "customFields": {
+      "spirit_animal": "Red Fox",
+      "pronouns": "they/them",
+      "region": "Pacific Northwest"
+    },
+    "updatedAt": "2026-03-27T00:00:00Z"
+  },
+  "trustLevel": 2,
+  "trustLevelName": "Contributor",
+  "badges": [
+    { "type": "welcome-home", "label": "Welcome Home", "icon": "🏠", "grantedAt": "2026-03-05T00:00:00Z" },
+    { "type": "first-stamp", "label": "First Stamp", "icon": "📬", "grantedAt": "2026-03-27T00:00:00Z" },
+    { "type": "bridge-builder", "label": "Bridge Builder", "icon": "🌉", "grantedAt": "2026-03-27T00:00:00Z" }
+  ],
+  "stats": {
+    "completions": 20,
+    "stampsIssued": 4,
+    "stampsReceived": 0,
+    "activeRelationships": 3,
+    "joinedAt": "2026-03-05T04:07:37Z"
+  }
+}
