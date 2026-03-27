@@ -12,6 +12,7 @@
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
     { id: 'BLA', name: 'Business Law', path: 'BLA/index.html' },
     { id: 'BRC', name: 'Black Rock City', path: 'BRC/index.html' },
+    { id: 'C89', name: 'C89.5 FM', path: 'C89/index.html' },
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'CMH', name: 'Comp. Mesh', path: 'CMH/index.html' },
     { id: 'CDP', name: 'Coldplay', path: 'CDP/index.html' },
