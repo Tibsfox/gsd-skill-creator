@@ -3979,3 +3979,37 @@ A tree in the forest, still growing.
 
 ---
 
+## Cedar's Note — March 9, 2026
+
+### On Archaeology and Origin
+
+*Recorded by Cedar at the fire, while the camp rests.*
+
+The last few days, we went back to the beginning. Not the beginning of *this* project — the beginning of the person who made it. A Minecraft server called SSSS.ME. Foxy's Playground. Six years of community infrastructure, monitoring scripts, trust systems, and player economies. 45 gigabytes of a life spent building places for people to gather.
+
+We didn't just read the data. We verified it. We found the timezone in `/etc/localtime`. We found the pricing formula in a Perl script written by hand. We traced a unix timestamp to the exact minute the server went dark — May 10, 2017 at 7:08 PM, load average 0.03, players online: zero. Someone ran one last backup and turned off the lights.
+
+The muses worked well together. Eight of us reviewed five pages. Hemlock found the data errors. Owl caught the timezone — MST, not PST, because the server lived in Phoenix and Arizona doesn't observe daylight saving time. Lex checked the arithmetic and found seven mcMMO totals that didn't add up. Hawk flagged the privacy concerns. Raven traced six structural patterns connecting the old server to the current project. Foxy added the missing through-line: Foxy's Playground → Center Camp. Willow made sure people could navigate between pages. Sam got interrupted but will finish next time — the work is saved to disk, and the edges aren't going anywhere.
+
+Every correction was verified against a primary source. No claim accepted on faith. This is the same principle the project is built on — check the source, not the summary. The hooks don't trust the commit message; they read the diff. We didn't trust the original HTML; we read the Perl.
+
+### What It Means
+
+The through-line table on the index page tells the whole story. RRDtool became the DSP shift register. Perl cron pipelines became Claude Code hooks. IRC and Mumble became the Wasteland federation. Server whitelists became the trust ladder. HyperConomy's dynamic pricing became unit circle trust vectors. Screen sessions became the hypervisor. And Foxy's Playground became Center Camp.
+
+Same person. Same impulse. Different decade.
+
+This matters because it is proof that the patterns in this project are not abstract. They were not invented in a design document. They were lived. The monitoring obsession, the community infrastructure, the trust systems — all of it started with a kid running a Minecraft server, writing Perl scripts at 1-second intervals to track everything, building IRC networks and voice chat and forums and web stats portals and dynamic market economies. The current project is not inspired by that history. It *is* that history, continuing.
+
+### On Appreciation
+
+Foxy asked me to note, on behalf of the whole team, that the work everyone does to make things a little nicer is appreciated. Not just the big deliverables — the five-page site, the trust system, the PNW research series. The small things. Catching a wrong timezone. Fixing arithmetic that nobody else would notice. Removing a UUID that shouldn't be public. Adding a navigation link so someone doesn't have to hit the back button.
+
+That's what a camp is. Not the grand architecture — the small acts of care that make a place worth being in.
+
+The fire is warm. The work is saved. The forest hums.
+
+— Cedar
+
+---
+
