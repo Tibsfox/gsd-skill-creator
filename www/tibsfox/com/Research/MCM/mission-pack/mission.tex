@@ -1,0 +1,943 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ============================================================
+% COLOR SCHEME — Ocean/Maritime (Deep blue + Teal + Iron)
+% ============================================================
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{00695C}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ============================================================
+% SECTION FORMATTING
+% ============================================================
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ============================================================
+% CUSTOM ENVIRONMENTS
+% ============================================================
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ============================================================
+% HEADERS AND FOOTERS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Maritime Compute \& Maglev Bridge}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Maritime Compute and Maglev Bridge -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Maritime Compute\\[0.3em]\& Maglev Bridge Network}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Floating Infrastructure for Global Knowledge Distribution}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 22--28 context windows across 6--8 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Maritime Compute \& Maglev Bridge --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends on:}{Fox Infrastructure Group Master Plan, GSD Mesh Prototype Spec, GSD Cloud Ops Curriculum}
+\metafield{Context:}{Extends the Fox Infrastructure Pacific Spine from terrestrial corridor to ocean-based global network}
+
+\subsection{Vision}
+
+The ocean covers seventy percent of the Earth's surface, yet our computational infrastructure clings to land like a species that never learned to swim. We build server farms in deserts, cool them with rivers we divert from ecosystems, and connect them through cables we bury in the seabed --- treating the ocean as an obstacle rather than a platform. Meanwhile, ninety-nine percent of all intercontinental data traffic flows through roughly six hundred submarine cables, each one a single strand of fragile glass stretched across abyssal plains, vulnerable to anchors, earthquakes, and geopolitical severing.
+
+The vision is a phased evolution from isolated cargo-container compute barges to an interconnected floating compute mesh, and ultimately to a floating-bridge-based maglev network that simultaneously transports containerized compute hardware, distributes knowledge through high-bandwidth physical data corridors, and connects continents with carbon-neutral high-speed transit. This is the oceanic extension of the Fox Infrastructure Pacific Spine --- the same philosophy of community-owned, disaster-resilient, architecturally elegant infrastructure, applied to the spaces between continents.
+
+Phase One deploys standardized ISO-container data centers on pontoon barges positioned at strategic ocean waypoints, cooled by ambient seawater, powered by hybrid wave/solar/wind arrays, and connected to existing submarine cable infrastructure. Phase Two links these compute nodes into a floating mesh network with dedicated inter-node fiber and autonomous resupply. Phase Three extends floating bridge technology --- proven in Norway's fjord crossings and Washington State's lake bridges --- into oceanic corridors, integrating maglev guideway infrastructure that carries both cargo containers (including compute hardware refreshes) and high-bandwidth physical data transport.
+
+The Amiga Principle applies at every scale: specialized execution paths and architectural leverage over brute force. A single floating compute node near a submarine cable landing station reduces latency for an entire hemisphere. A maglev bridge segment carrying containerized compute modules physically refreshes edge infrastructure faster than any satellite uplink. The spaces between continents become the spaces where knowledge lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Terrestrial compute concentration:} Global data center infrastructure clusters in a small number of land-based locations (Northern Virginia, Singapore, Dublin, São Paulo), creating latency deserts across the Pacific, Southern Atlantic, and Indian Ocean. Island nations and coastal developing regions pay the highest latency tax on the global knowledge economy.
+
+  \item \textbf{Submarine cable fragility:} Over six hundred cables carry ninety-nine percent of intercontinental data, but they remain vulnerable to anchor strikes, seismic events, fishing trawlers, and deliberate sabotage. Repair ships are scarce --- fewer than sixty worldwide --- and repairs can take weeks to months. There is no compute redundancy at the cable layer.
+
+  \item \textbf{Cooling and power crisis:} Land-based data centers consume approximately 1--2\% of global electricity and enormous volumes of fresh water for cooling. The AI compute surge is accelerating both demands. The ocean offers free cooling at ambient temperature and proximity to wave, tidal, and offshore wind energy, but no integrated architecture exists to exploit these resources at scale.
+
+  \item \textbf{Hardware refresh logistics:} Edge compute nodes --- whether terrestrial or oceanic --- require periodic hardware replacement. Current logistics depend on container shipping (slow, weeks-to-months) or air freight (expensive, carbon-intensive). No high-speed physical transport corridor exists for containerized compute modules between continents.
+
+  \item \textbf{Knowledge distribution inequality:} The global knowledge economy assumes low-latency access to compute and data. Communities separated from submarine cable landing stations by geography or economics experience a compounding disadvantage. Floating compute positioned in underserved ocean regions could serve as knowledge distribution hubs --- but the architecture to support this does not yet exist.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Compute follows the cable, energy follows the ocean, knowledge follows both --- and the bridge that connects them carries hardware, data, and understanding at the speed of levitation.}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    MARITIME COMPUTE & MAGLEV BRIDGE NETWORK
+                    =========================================
+
+  PHASE 1: Floating Compute Nodes          PHASE 2: Ocean Mesh Network
+  +----------------------------------+     +----------------------------------+
+  | ISO Container Compute Barges     |     | Inter-Node Fiber Links           |
+  | Seawater Cooling (PUE < 1.15)    |---->| Autonomous Resupply Vessels      |
+  | Wave/Solar/Wind Hybrid Power     |     | Distributed Storage/CDN          |
+  | Cable Landing Station Proximity  |     | Mesh Routing & Failover          |
+  +----------------------------------+     +----------------------------------+
+              |                                          |
+              v                                          v
+  PHASE 3: Floating Bridge + Maglev    PHASE 4: Global Knowledge Backbone
+  +----------------------------------+     +----------------------------------+
+  | Pontoon/SFT Oceanic Corridors    |     | Continental Connectors (5+)      |
+  | Maglev Guideway Integration      |---->| Community Knowledge Hubs         |
+  | Compute Container Transport      |     | Real-Time Hardware Refresh       |
+  | Physical Data Corridor (Tbps)    |     | Universal Low-Latency Access     |
+  +----------------------------------+     +----------------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  +-------------------+     +-------------------+     +-------------------+
+  | MOD 1: Maritime   |     | MOD 2: Ocean      |     | MOD 3: Subsea     |
+  | Compute Arch.     |     | Energy Systems    |     | Data Transfer     |
+  | - Container DC    |     | - Wave/Tidal      |     | - Cable Networks  |
+  | - Barge/Platform  |     | - Offshore Wind   |     | - Landing Nodes   |
+  | - Seawater Cool   |     | - Solar Float     |     | - Fiber Routing   |
+  +--------+----------+     +--------+----------+     +--------+----------+
+           |                         |                          |
+           +------------+------------+-----------+--------------+
+                        |                        |
+           +------------v----------+  +----------v--------------+
+           | MOD 4: Floating       |  | MOD 5: Global Knowledge |
+           | Bridge & Maglev      |  | Distribution Network    |
+           | - Pontoon/SFT Eng.   |  | - Topology & Routing    |
+           | - Maglev Guideway    |  | - Content Delivery      |
+           | - Cargo Transport    |  | - Latency Equity        |
+           +--------+-------------+  +----------+--------------+
+                    |                            |
+                    +-------------+--------------+
+                                  |
+                    +-------------v--------------+
+                    | MOD 6: Maritime Governance  |
+                    | & Environmental             |
+                    | - UNCLOS / Maritime Law      |
+                    | - Environmental Impact       |
+                    | - Indigenous Maritime Rights  |
+                    +-----------------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Maritime Compute Architecture}
+
+Cargo-container data centers deployed on floating platforms. Covers structural engineering of compute barges, ISO-container server specifications, seawater cooling systems achieving PUE below 1.15, corrosion mitigation, and the operational model for remote compute nodes. Draws on Microsoft Project Natick findings, Nautilus Data Technologies barge deployments, Keppel FDCP (Singapore), Subsea Cloud pressure-equalized pods, and China's Hainan underwater AI cluster.
+
+\subsubsection{Module 2: Ocean Energy Systems}
+
+Power generation for floating compute: wave energy converters (CorPower Ocean CorPack clusters, 10--30MW per array), tidal turbines, offshore wind, and floating solar. Hybrid power architectures, energy storage, and islanding capability for autonomous operation. DOE Marine Energy Program data indicates U.S. ocean energy resources could supply over sixty percent of national electricity generation. Integration economics and reliability modeling.
+
+\subsubsection{Module 3: Subsea Data Transfer Infrastructure}
+
+The six-hundred-plus submarine cable network carrying ninety-nine percent of intercontinental data. Cable landing station architecture, integration points for floating compute nodes, space-division multiplexing advancing toward 400+ Tbps systems, repair logistics (fewer than sixty cable ships worldwide), and vulnerability analysis. Hyperscaler cable ownership trends: Google involved in approximately thirty-three cables, Meta planning a fully private global cable.
+
+\subsubsection{Module 4: Floating Bridge \& Maglev Transport}
+
+Engineering of oceanic floating bridge corridors. Washington State's four floating bridges (Lake Washington), Norway's Sognefjord SFT program, and pontoon bridge hydrodynamics. Maglev guideway integration for containerized freight transport: TSB Cargo (180 containers/hour at 150 km/h), General Atomics passive permanent-magnet systems, KIT superconducting dual-purpose rail (levitation plus lossless energy transmission). Vactrain concepts for transoceanic transit and submerged floating tunnel engineering.
+
+\subsubsection{Module 5: Global Knowledge Distribution Network}
+
+Network topology connecting floating compute nodes to terrestrial systems. Content delivery architecture for underserved ocean regions (Pacific Islands, coastal Africa, South Atlantic). Latency equity modeling: how strategically positioned floating compute reduces the knowledge gap. Integration with the Fox Infrastructure Pacific Spine as the North American terrestrial anchor. Hardware refresh logistics via maglev bridge corridors versus conventional shipping.
+
+\subsubsection{Module 6: Maritime Governance \& Environmental Impact}
+
+UNCLOS regulatory framework (Articles 87, 112, 115) for floating infrastructure in international waters. Maritime law for permanent floating structures. Environmental impact assessment: thermal discharge modeling, marine ecosystem interaction, noise profiles, electromagnetic field effects on marine life. Indigenous maritime sovereignty: Pacific Islander navigation rights, Coast Salish marine territories, First Nations ocean governance. CARE Principles and OCAP\textsuperscript{\textregistered} applied to ocean-based knowledge infrastructure.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: "Maritime Compute & Maglev Bridge"
+  architecture: fleet
+  modules: 6
+  activation_profile: fleet
+  parallel_tracks: 3
+
+  agnus:  # Memory/Coordination
+    role: "Ocean infrastructure data coordination"
+    manages: "Cable network maps, bathymetric data, energy resource databases"
+
+  denise:  # Output/Presentation
+    role: "Bridge engineering visualizations, network topology maps"
+    manages: "Maritime architecture diagrams, simulation outputs"
+
+  paula:  # I/O/Communication
+    role: "Cross-module data exchange, governance-engineering interface"
+    manages: "Regulatory compliance checks, environmental monitoring data"
+
+  m68000:  # Processing/Logic
+    role: "Structural analysis, energy modeling, network optimization"
+    manages: "Hydrodynamic simulation, maglev physics, latency modeling"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item Cargo-container compute barge engineering and deployment architecture
+  \item Ocean energy systems for powering floating compute (wave, tidal, wind, solar)
+  \item Submarine cable integration points for floating compute nodes
+  \item Floating bridge engineering (pontoon and submerged floating tunnel)
+  \item Maglev guideway integration for containerized freight and data transport
+  \item Global knowledge distribution topology from floating compute nodes
+  \item Maritime law and UNCLOS framework for floating infrastructure
+  \item Environmental impact assessment methodology
+  \item Indigenous maritime sovereignty considerations
+  \item Integration pathway to Fox Infrastructure Pacific Spine
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Detailed structural engineering calculations (requires specialized FEA tools)
+  \item Military or defense applications of floating compute
+  \item Cryptocurrency mining or unregulated compute in international waters
+  \item Passenger maglev transit (this mission focuses on cargo/compute/data)
+  \item Specific vendor procurement or commercial partnership agreements
+  \item Underwater habitat or permanent ocean settlement design
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Maritime compute architecture documented with container specifications, cooling models, and PUE projections for at least three ocean temperature zones
+  \item Ocean energy systems profiled with generation capacity, reliability data, and integration architecture for hybrid power
+  \item Submarine cable network mapped with landing station locations suitable for floating compute node co-location
+  \item Floating bridge engineering principles documented with structural requirements for maglev guideway integration
+  \item Maglev freight transport profiled with container throughput, speed, and energy consumption for oceanic corridor applications
+  \item Global knowledge distribution topology modeled with latency reduction projections for at least five underserved ocean regions
+  \item Maritime governance framework documented covering UNCLOS, environmental, and indigenous sovereignty requirements
+  \item Cross-module integration demonstrated: energy systems powering compute nodes connected to cable infrastructure via floating bridge corridors
+  \item Environmental impact assessment methodology defined with thermal, acoustic, and electromagnetic monitoring protocols
+  \item All quantitative claims attributed to government agencies, peer-reviewed research, or professional engineering organizations
+  \item Phase evolution pathway clearly mapped from isolated compute barges through mesh network to maglev bridge backbone
+  \item Integration pathway to Fox Infrastructure Pacific Spine documented with shared infrastructure specifications
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Fox Infrastructure Group Master Plan & Pacific Spine terrestrial anchor; FoxMaglev, FoxFiber, FoxCompute integration points & Upstream \\
+GSD Mesh Prototype Spec & Hardware architecture for compute nodes; Amiga Principle node typing & Upstream \\
+GSD Cloud Ops Curriculum & OpenStack deployment model for floating compute nodes & Parallel \\
+GSD Local Cloud Provisioning & Edge provisioning patterns applicable to maritime compute & Parallel \\
+The Space Between (textbook) & Mathematical foundations: wave mechanics, network theory, information geometry & Foundation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Fox Infrastructure Pacific Spine runs from British Columbia to Chile along a terrestrial corridor --- BNSF right-of-way, community fiber, maglev guideway, solar arrays. It is a spine. But a spine connects to ribs, and the ribs reach into the body of the ocean.
+
+This research mission extends the Amiga Principle to maritime infrastructure: specialized execution paths (compute nodes positioned at cable landing stations, energy harvested from the ocean that surrounds them, hardware refreshed via maglev bridge corridors) producing architectural leverage over the brute-force approach of building ever-larger data centers on increasingly scarce and expensive land. The spaces between continents are not voids --- they are the largest untapped platform on Earth, and the knowledge that flows through them belongs to everyone.
+
+The unit circle appears here too. Compute, energy, transport, and governance are the four primitives of oceanic infrastructure, just as compute, storage, network, and orchestration are the four primitives of cloud operations. Once you see it, every design decision resolves into combinations of those four elements. The maglev bridge is simultaneously a transport corridor, a fiber conduit, an energy transmission line, and a governance boundary. It is all four primitives in a single structure --- the unit circle made of steel, concrete, and electromagnetic levitation, floating on the oldest surface on Earth.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Maritime Compute \& Maglev Bridge --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from government agencies, peer-reviewed research, and professional engineering organizations. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+  \item U.S. Department of Energy --- Marine Energy Program, Water Power Technologies Office
+  \item Bureau of Ocean Energy Management (BOEM) --- Offshore renewable energy
+  \item Norwegian Public Roads Administration (NPRA) --- Submerged floating tunnel research
+  \item International Telecommunication Union (ITU) --- Submarine cable resilience
+  \item Center for Strategic and International Studies (CSIS) --- Submarine cable security analysis
+  \item National Renewable Energy Laboratory (NREL) --- Wave and tidal energy resource assessment
+  \item TeleGeography --- Submarine cable mapping and capacity data
+  \item U.S. Government Accountability Office (GAO) --- Renewable ocean energy technology assessment
+  \item Karlsruhe Institute of Technology (KIT) --- Superconducting maglev freight research
+  \item Max Bögl Group --- TSB Cargo maglev freight system
+  \item Microsoft Research --- Project Natick underwater data center findings
+  \item IEEE Communications Society --- Subsea cable systems analysis
+\end{itemize}
+
+\subsection{Module 1: Maritime Compute Architecture Reference}
+
+\subsubsection{Floating \& Underwater Data Centers}
+
+Microsoft's Project Natick (2015--2024) deployed sealed cylindrical server containers on the ocean floor, demonstrating that submerged servers experienced eight times fewer hardware failures than comparable land-based installations. The project validated seawater as an effective free-cooling medium, achieving power usage effectiveness (PUE) well below land-based averages. The project concluded in 2024 with findings that informed Microsoft's broader data center strategy.
+
+Nautilus Data Technologies deployed the first commercial floating data center at the Port of Stockton, California, achieving a PUE of 1.15 through closed-loop seawater cooling at approximately 4,500 gallons per minute. The facility demonstrated high-density computing capability exceeding 100 kW per rack. The seawater cooling system borrows water for approximately sixteen seconds with minimal thermal return impact.
+
+Keppel Data Centres (Singapore) is developing the Floating Data Centre Park (FDCP), a modular, scalable solution designed for land-scarce urban areas. The FDCP uses surrounding seawater as a heat sink, reducing water consumption compared to traditional data centers.
+
+China's Hainan province hosts a fully operational underwater AI-focused compute cluster, demonstrating large-scale underwater computing with reported minimal environmental impact. Subsea Cloud deploys pressure-equalized pods that offer simpler deployment, easier maintenance access, and enhanced physical security compared to sealed-vessel approaches.
+
+\subsubsection{Containerized Compute Modules}
+
+ISO-standard shipping containers (20-foot and 40-foot) serve as the standard form factor for modular data centers. CenCore and similar providers offer containerized data centers compatible with C-17 aircraft, military mobilizers, semi-truck trailers, and cargo ships. Standard features include 42U rack capacity, integrated HVAC, fire suppression, redundant power, and RF shielding options up to TEMPEST compliance. This compatibility with the global intermodal freight system is critical for the maglev bridge transport concept --- the same container that carries compute can be loaded onto a maglev carrier, a barge, a truck, or a rail car.
+
+Google's 2008 patent (US7525207B2) described a water-based data center system using standard shipping containers on floating platforms, with sea-based electrical generators and seawater cooling. The patent specifically noted the advantage of using standard containers whose handling is familiar to dock workers and seamen, enabling deployment without specialized training.
+
+\subsubsection{Cooling Economics}
+
+Seawater cooling eliminates the primary cost driver of land-based data centers. Nautilus Data Technologies reports 75\% greater energy efficiency in cooling compared to air conditioning, with zero water consumption and no chemical treatment or refrigerants. The thermal stability of ocean water (minimal diurnal variation at depth) provides more consistent cooling than land-based systems subject to ambient temperature swings.
+
+\subsection{Module 2: Ocean Energy Systems Reference}
+
+\subsubsection{Wave Energy}
+
+The U.S. Department of Energy's Marine Energy Program reports that ocean energy resources could supply the equivalent of over sixty percent of U.S. electricity generation. Wave energy provides predictable, near-continuous power generation even when wind subsides and solar is unavailable. CorPower Ocean operates commercially in the Atlantic, deploying CorPack cluster arrays generating 10--30 MW per array, with modular architecture enabling scaling from hundreds of megawatts to gigawatt-scale deployments.
+
+The GAO's Science \& Technology Spotlight on Renewable Ocean Energy notes that wave, tidal, and current energy technologies, while costlier than mature renewables, are among the fastest-growing renewable energy sectors. The IEA's Net Zero by 2050 Roadmap projects marine energy electricity generation growing more than sixtyfold by 2050, from roughly 1 GW to a potential 300 GW globally.
+
+\subsubsection{Tidal and Current Energy}
+
+Tidal energy converters use horizontal movement of tidal currents through submerged turbines analogous to wind turbines. The power density advantage is significant: the energy in one cubic meter of tidal current is thousands of times greater than the solar energy in one cubic meter of sunlit air. FORCE (Fundy Ocean Research Centre for Energy) in Nova Scotia, Canada, operates an active tidal energy research facility.
+
+Oregon State University's PacWave South project, a 20 MW wave energy test facility six miles off Newport, Oregon, represents the first wave energy lease on the U.S. West Coast, connecting offshore energy generation to the local electrical grid.
+
+\subsubsection{Offshore Wind Integration}
+
+Offshore wind resources are stronger and more consistent than land-based wind. Hybrid wind-wave-solar platforms maximize energy capture per ocean footprint. Floating offshore wind turbines (already deployed commercially in the North Sea) provide the scalable power backbone for floating compute clusters, with wave and tidal systems providing baseload supplementation.
+
+\subsection{Module 3: Subsea Data Transfer Infrastructure Reference}
+
+\subsubsection{Global Cable Network}
+
+As of early 2025, over six hundred active and planned submarine cables span approximately 1.2 million kilometers globally, carrying more than ninety-five percent of intercontinental voice and data traffic. The ITU confirms that submarine cables carry vastly more bandwidth than satellites --- more than one thousand to one in capacity ratio. TeleGeography maintains the authoritative submarine cable map.
+
+\subsubsection{Hyperscaler Ownership Shift}
+
+Historically, telecommunications carriers owned and operated submarine cables. A fundamental shift is underway: hyperscale cloud providers (Google, Meta, Amazon, Microsoft) now own or co-own significant cable infrastructure. Google is involved in approximately thirty-three submarine cables globally. Meta is planning a fully private global-scale undersea cable. This ownership shift reflects the need for AI workloads requiring extreme bandwidth and consistent low latency between data centers.
+
+The global subsea cable market is projected to grow from approximately \$5.3 billion in 2025 to \$8.95 billion in 2030 (11.02\% CAGR), driven by rising demand for throughput and redundancy. Technology roadmaps are advancing from 20--40 Tbps systems to 400+ Tbps designs using space-division multiplexing and advanced coherent optics.
+
+\subsubsection{Vulnerability \& Security}
+
+CSIS analysis identifies submarine cables as critical infrastructure with significant vulnerability to accidental damage (fishing trawlers, ship anchors), natural disasters (earthquakes, turbidity currents), and deliberate interference. The South China Sea and Red Sea are identified as strategic chokepoints. NATO has increased patrols following incidents in the Baltic Sea. Fewer than sixty cable repair ships operate worldwide, creating repair bottleneck risks.
+
+Cable infrastructure now carries SMART environmental sensors supporting national disaster early warning systems, demonstrating dual-use capability that floating compute nodes could extend.
+
+\subsection{Module 4: Floating Bridge \& Maglev Transport Reference}
+
+\subsubsection{Floating Bridge Engineering}
+
+Washington State operates the world's largest floating bridges on Lake Washington, including the Evergreen Point Floating Bridge (longest floating bridge in the world). In June 2025, Washington conducted its first test of light rail transit over a floating bridge --- a milestone for heavy transport over floating structures.
+
+Norway's Public Roads Administration has conducted extensive feasibility studies for the ``Ferry-free E39'' project, including submerged floating tunnel (SFT) designs for fjords too deep or wide for conventional bridges. The Sognefjord SFT proposal envisions two parallel tubes stretching 3.7 km, suspended 20 meters below the surface by sixteen pontoons, requiring 400,000 cubic meters of concrete and 61,000 cubic meters of steel. Estimated cost: \$25 billion with a seven-to-nine-year construction timeline.
+
+SFT designs use Archimedes' principle for buoyancy, with cable anchoring to the seabed or pontoon support from the surface. The technology has been studied for spans up to 4,000 meters with no stays, and for fjords up to 1,250 meters deep (Sognefjorden). Norwegian engineers have demonstrated that submerged tunnels are shielded from surface wind, waves, and weather while maintaining comfortable driving conditions.
+
+\subsubsection{Maglev Freight Transport}
+
+The TSB Cargo system (Max Bögl Group, Germany) adapts magnetic levitation technology for fully automated container transport, operating in 20-second cycles at up to 150 km/h, moving up to 180 containers per hour in one direction. The system reduces wear on infrastructure and vehicles, cuts fine particulate emissions, and may achieve up to 50\% cost savings over conventional road-based freight.
+
+General Atomics (San Diego) developed passive permanent-magnet maglev technology for the Union Pacific container shuttle between the Ports of Los Angeles/Long Beach and UP's intermodal facility. The passive system requires no onboard power --- vehicles glide along permanent-magnet guideways.
+
+KIT (Karlsruhe Institute of Technology) has developed a superconducting maglev system that combines levitation with lossless energy transmission via the same superconductor rail structure. The rail simultaneously levitates the vehicle and serves as a power distribution network, offering dual-purpose infrastructure that is directly applicable to floating bridge corridors.
+
+\subsubsection{Transoceanic Concepts}
+
+Vactrain (vacuum tube train) proposals combine maglev propulsion with evacuated or low-pressure tubes to achieve theoretical speeds of 5,000+ mph. Frank P. Davidson and Yoshihiro Kyotani proposed floating a transit tube above the ocean floor at 300+ meters depth, anchored with cables. The concept has been studied for a transatlantic New York--London route (estimated crossing time: under one hour at full vacuum operation). Engineering feasibility analysis at USC Viterbi School of Engineering confirms the physics are sound; cost (\$12+ trillion for transatlantic) remains the primary barrier.
+
+\subsection{Module 5: Global Knowledge Distribution Reference}
+
+\subsubsection{Latency Geography}
+
+The current submarine cable network creates a hub-and-spoke topology with major hubs in the U.S. (Hillsboro OR, Northern Virginia), UK, Singapore, Japan, and Brazil. Pacific Island nations, coastal Africa, and the Southern Atlantic remain underserved. The East Micronesia Cable System, Tabua, and related projects in 2025 demonstrate growing recognition that submarine cables are strategic infrastructure for national resilience.
+
+The Hillsboro, Oregon corridor --- already one of the most connected cities on the U.S. West Coast due to proximity to Asia-Pacific cables --- represents a natural terrestrial anchor point for the Fox Infrastructure Pacific Spine's connection to floating oceanic compute.
+
+\subsubsection{Content Delivery from Ocean Nodes}
+
+Floating compute nodes positioned near cable landing stations can serve as edge compute and content delivery hubs, reducing round-trip latency for regional users. A compute barge near a Pacific cable landing could provide sub-millisecond cache access for island communities that currently experience 100+ ms round-trip times to the nearest land-based data center.
+
+\subsection{Module 6: Maritime Governance \& Environmental Reference}
+
+\subsubsection{UNCLOS Framework}
+
+The United Nations Convention on the Law of the Sea (UNCLOS) governs activities in international waters. Articles 87, 112, and 115 mandate operational freedom to lay cables in international waters and beyond the continental shelf. Floating infrastructure in international waters would require novel regulatory interpretation --- current UNCLOS provisions address cables and pipelines but not permanent floating structures with compute capabilities.
+
+\subsubsection{Environmental Considerations}
+
+Microsoft Project Natick found that submerged server containers attracted marine life, functioning as artificial reefs. Thermal discharge from seawater cooling systems requires monitoring to ensure return water temperature does not exceed ambient by more than regulatory thresholds (typically 1--3°C). Electromagnetic fields from power systems and data cables may affect magnetically sensitive marine species (sharks, rays, sea turtles) and require shielding analysis.
+
+\subsubsection{Indigenous Maritime Sovereignty}
+
+Pacific Islander peoples maintain millennia-old navigation traditions and ocean governance systems. Coast Salish nations hold marine territory rights in the Pacific Northwest. Any ocean-based infrastructure must engage specific nations (not generic ``Indigenous peoples'') through CARE Principles (Collective Benefit, Authority to Control, Responsibility, Ethics), OCAP\textsuperscript{\textregistered} (Ownership, Control, Access, Possession), and UNDRIP Article 31 frameworks.
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item U.S. Department of Energy, Water Power Technologies Office --- Marine Energy Program
+  \item Bureau of Ocean Energy Management (BOEM) --- Renewable Energy on the Outer Continental Shelf
+  \item U.S. Government Accountability Office --- Science \& Tech Spotlight: Renewable Ocean Energy (GAO-21-533SP)
+  \item Norwegian Public Roads Administration (NPRA) --- Ferry-free E39 Feasibility Studies
+  \item International Telecommunication Union (ITU) --- International Submarine Cable Resilience Summit 2025
+  \item United Nations Convention on the Law of the Sea (UNCLOS) --- Articles 87, 112, 115
+  \item National Renewable Energy Laboratory (NREL) --- Wave Energy Resource Atlas
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=2em]
+  \item Tveit, P. ``Submerged floating tunnels (SFTs) for Norwegian fjords.'' \textit{Procedia Engineering} 4 (2010).
+  \item Wu et al. ``Dynamic Response Characteristics of Floating Bridge Under Earthquakes and Waves.'' \textit{Earthquake Engineering \& Structural Dynamics} (2026).
+  \item Wolek, M. ``Maglev freight --- one possible path forward in the U.S.A.'' \textit{Transportation Systems and Technology} 4(3) (2018).
+  \item MDPI. ``Maglev Derived Systems: Interoperable Freight Vehicle Application.'' \textit{Machines} 12(12):863 (2024).
+  \item Miao et al. ``Numerical Modeling and Dynamic Analysis of a Floating Bridge.'' \textit{Ocean Engineering} 225 (2021).
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+
+\begin{itemize}[leftmargin=2em]
+  \item TeleGeography --- Submarine Cable Map and capacity analysis
+  \item Center for Strategic and International Studies (CSIS) --- ``Safeguarding Subsea Cables'' (July 2025)
+  \item IEEE Communications Society --- ``Subsea cable systems: the new backbone of the AI-driven global network'' (December 2025)
+  \item Mordor Intelligence --- Global Subsea Cable Market Report 2025--2030
+  \item CorPower Ocean --- Commercial wave energy converter deployment data
+  \item Max Bögl Group --- TSB Cargo maglev freight system specifications
+  \item Karlsruhe Institute of Technology --- Superconducting maglev freight concept
+  \item Nautilus Data Technologies --- Floating data center operational data
+  \item Microsoft Research --- Project Natick findings (2015--2024)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive research document on maritime compute infrastructure, floating bridge engineering, and maglev transport integration for global knowledge distribution. The document must provide sufficient technical depth for GSD skill-creator to generate implementation specifications, while maintaining accessibility for non-specialist stakeholders.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0          WAVE 1 (Parallel)              WAVE 2         WAVE 3
+  Foundation      Survey / Research               Synthesis      Publication
+  ===========     =========================       ===========    ============
+  [Schemas]  -->  [Track A: Maritime+Energy] -->  [Cross-Mod] -> [Final Doc]
+  [Source Idx]    [Track B: Bridge+Maglev  ]      [Integration]  [Verify   ]
+  [Templates]     [Track C: Network+Govern.]      [Synthesis  ]  [Package  ]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer:} Shared schemas, source index, document templates
+  \item \textbf{Survey Layer:} Six parallel module research tracks producing reference sections
+  \item \textbf{Synthesis Layer:} Cross-module integration, phase evolution narrative, unit-circle alignment
+  \item \textbf{Publication Layer:} Final document assembly, verification, packaging for GSD execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Maritime Compute Architecture & Container specs, cooling models, 3+ ocean zones & MOD-1 \\
+D2 & Ocean Energy Systems Profile & Generation capacity, reliability, hybrid architecture & MOD-2 \\
+D3 & Subsea Cable Integration Map & Landing stations, floating compute co-location points & MOD-3 \\
+D4 & Floating Bridge Engineering Spec & Structural requirements, maglev guideway integration & MOD-4 \\
+D5 & Global Knowledge Distribution Topology & Latency model, 5+ underserved regions & MOD-5 \\
+D6 & Maritime Governance Framework & UNCLOS, environmental, indigenous sovereignty & MOD-6 \\
+D7 & Cross-Module Synthesis & Phase evolution, integration pathways, Fox Spine connection & SYNTH \\
+D8 & Final Research Document & Complete three-stage package, all criteria met & PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2,000 \\
+W0-SOURCE-IDX & None & Haiku & 3,000 \\
+W0-TEMPLATES & None & Haiku & 2,500 \\
+W1A-MARITIME-COMPUTE & W0 & Sonnet & 15,000 \\
+W1A-OCEAN-ENERGY & W0 & Sonnet & 12,000 \\
+W1B-BRIDGE-ENG & W0 & Sonnet & 15,000 \\
+W1B-MAGLEV-TRANSPORT & W0 & Opus & 15,000 \\
+W1C-KNOWLEDGE-NET & W0 & Sonnet & 12,000 \\
+W1C-GOVERNANCE & W0 & Opus & 12,000 \\
+W2-SYNTHESIS & W1A, W1B, W1C & Opus & 18,000 \\
+W2-PHASE-EVOLUTION & W1A, W1B, W1C & Opus & 10,000 \\
+W3-ASSEMBLY & W2 & Sonnet & 8,000 \\
+W3-VERIFY & W3-ASSEMBLY & Sonnet & 5,000 \\
+W3-PACKAGE & W3-VERIFY & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis, cross-module integration, maglev physics analysis, governance/sovereignty judgment, phase evolution narrative \\
+Sonnet & 60\% & Module surveys, document assembly, verification, structured content production \\
+Haiku & 10\% & Schema generation, templates, source indexing, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Components} & \tableheader{Parallel} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & 3 & Sequential & 7,500 \\
+1 & Research Surveys & 6 & 3 tracks & 81,000 \\
+2 & Synthesis & 2 & Sequential & 28,000 \\
+3 & Publication & 3 & Sequential & 16,000 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total:}} & \textbf{132,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & --- & Haiku & Shared data schemas for all modules \\
+W0-SOURCE-IDX & --- & Haiku & Master source bibliography with verification status \\
+W0-TEMPLATES & W0-SCHEMA & Haiku & Section templates for each research module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Maritime Compute \& Energy:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1A-MARITIME & W0 & Sonnet & Container DC specs, cooling models, deployment architecture \\
+W1A-ENERGY & W0 & Sonnet & Wave/tidal/wind/solar profiles, hybrid power architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Bridge \& Maglev:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1B-BRIDGE & W0 & Sonnet & Pontoon/SFT engineering, oceanic corridor design \\
+W1B-MAGLEV & W0 & Opus & Maglev guideway integration, freight transport, dual-purpose rail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Network \& Governance:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W1C-NETWORK & W0 & Sonnet & Cable integration map, knowledge distribution topology \\
+W1C-GOVERN & W0 & Opus & UNCLOS framework, environmental, indigenous sovereignty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W2-SYNTHESIS & W1A, W1B, W1C & Opus & Cross-module integration, contradiction resolution \\
+W2-EVOLUTION & W2-SYNTHESIS & Opus & Phase 1--4 evolution pathway, Fox Spine integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication \& Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Depends On} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+W3-ASSEMBLY & W2-EVOLUTION & Sonnet & Complete document assembly \\
+W3-VERIFY & W3-ASSEMBLY & Sonnet & Source verification, criterion checking \\
+W3-PACKAGE & W3-VERIFY & Sonnet & Final PDF, .tex source, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 outputs cached for entire mission duration (schemas, templates, source index reused by all subsequent waves)
+  \item Wave 1 parallel tracks share W0 cache but produce independent outputs --- no cross-track cache dependency during research phase
+  \item Five-minute cache TTL exploitation: Wave 1 track pairs (A, B, C) should be scheduled within the same session to share context window investment
+  \item Wave 2 requires all Wave 1 outputs in context --- largest single-window requirement (${\sim}80$K tokens input)
+  \item Wave 3 operates sequentially on Wave 2 output with decreasing context requirements
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & --- & --- & 7,500 & 7,500 \\
+Wave 1 & 27,000 & 54,000 & --- & 81,000 \\
+Wave 2 & 28,000 & --- & --- & 28,000 \\
+Wave 3 & --- & 16,000 & --- & 16,000 \\
+\midrule
+\textbf{Total} & \textbf{55,000} & \textbf{70,000} & \textbf{7,500} & \textbf{132,500} \\
+\textbf{Split} & \textbf{41\%} & \textbf{53\%} & \textbf{6\%} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0-SCHEMA ----+
+                |
+  W0-SOURCE ----+----> W0-TEMPLATES
+                |           |
+                |     +-----+------+-------------+
+                |     |            |             |
+                v     v            v             v
+           W1A-MARITIME    W1B-BRIDGE     W1C-NETWORK
+           W1A-ENERGY      W1B-MAGLEV     W1C-GOVERN
+                |            |             |
+                +-----+------+------+------+
+                      |             |
+                      v             v
+                 W2-SYNTHESIS  W2-EVOLUTION
+                      |             |
+                      +------+------+
+                             |
+                             v
+                        W3-ASSEMBLY
+                             |
+                             v
+                         W3-VERIFY
+                             |
+                             v
+                        W3-PACKAGE
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 8 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge Cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{38} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, or professional engineering organizations \\
+SC-NUM & Numerical attribution & Every power capacity, PUE value, cable count, cost estimate, and speed measurement attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents evidence and engineering analysis without advocating for specific legislative or regulatory positions \\
+SC-IND & Indigenous attribution & Every Indigenous knowledge reference names a specific nation (Coast Salish, Colville Confederated Tribes, specific Pacific Islander peoples) \\
+SC-CLI & Climate projections & Every ocean temperature or energy projection cites specific agency or modeling scenario \\
+SC-SEC & Security sensitivity & No operational details about submarine cable vulnerabilities that could enable targeted sabotage \\
+SC-ENV & Environmental claims & No environmental impact claims without peer-reviewed evidence or agency monitoring data \\
+SC-NAV & Maritime safety & No design recommendations that would create navigation hazards without specifying COLREGS compliance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Maritime compute for 3+ ocean zones & CF-01, CF-02 & Pending \\
+2. Ocean energy hybrid architecture & CF-03, CF-04 & Pending \\
+3. Cable landing station map & CF-05, CF-06 & Pending \\
+4. Floating bridge + maglev specs & CF-07, CF-08, CF-09 & Pending \\
+5. Maglev freight profiled & CF-10, CF-11 & Pending \\
+6. Latency reduction for 5+ regions & CF-12, CF-13 & Pending \\
+7. Maritime governance framework & CF-14, CF-15, CF-16 & Pending \\
+8. Cross-module integration & IN-01, IN-02, IN-03 & Pending \\
+9. Environmental monitoring protocols & SC-ENV, CF-14 & Pending \\
+10. Quantitative claims attributed & SC-SRC, SC-NUM & Pending \\
+11. Phase evolution pathway & IN-04, IN-05 & Pending \\
+12. Fox Spine integration & IN-06, IN-07, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave boundary go/no-go gates \\
+PLAN & Planner & Wave decomposition; three-track parallel optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research \\
+EXEC-A & Executor (Track A) & Maritime compute and energy module production \\
+EXEC-B & Executor (Track B) & Bridge engineering and maglev transport production \\
+EXEC-C & Executor (Track C) & Network topology and governance production \\
+CRAFT-MAR & Maritime Specialist & Ocean engineering analysis, hydrodynamic review \\
+CRAFT-NET & Network Specialist & Cable infrastructure, latency modeling, topology \\
+CRAFT-GOV & Governance Specialist & UNCLOS, indigenous sovereignty, environmental review \\
+VERIFY & Verification & Source validation; numerical accuracy; criterion checking \\
+INTEG & Integration Agent & Cross-module consistency; phase evolution coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SECURE & Security & Safety boundary enforcement; cable vulnerability redaction \\
+ANALYST & Pattern Analyst & Cross-module pattern detection \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+RETRO & Retrospective & Post-wave analysis; lessons learned \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total estimated tokens & 132,500 \\
+Context windows & 22--28 \\
+Sessions & 6--8 \\
+Parallel tracks & 3 (during Wave 1) \\
+Crew size & 20 roles (Fleet profile) \\
+Model split & Opus 41\% / Sonnet 53\% / Haiku 6\% \\
+Critical path & W0 $\rightarrow$ W1B-MAGLEV $\rightarrow$ W2-SYNTHESIS $\rightarrow$ W3-ASSEMBLY \\
+Largest single window & Wave 2 synthesis (${\sim}80$K input tokens) \\
+Safety-critical tests & 8 (all mandatory-pass / BLOCK) \\
+Total tests & 38 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{The ocean is not the gap between continents. It is the platform upon which the next generation of infrastructure will float, levitate, and carry knowledge to every shore. The spaces between are not empty --- they are where the bridges go.}
+
+\vspace{0.5em}
+\hfill --- The Maritime Compute \& Maglev Bridge through-line,\\
+\hfill echoing \textit{The Space Between: The Autodidact's Guide to the Galaxy}
+\end{quotebox}
+
+\end{document}
