@@ -1,0 +1,500 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Social Science (Warm Indigo / Coral / Slate) ===
+\definecolor{primary}{HTML}{283593}
+\definecolor{secondary}{HTML}{D84315}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{4527A0}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}{\Large\bfseries\sffamily\color{primary}}{\thesection}{1em}{}[\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}{\large\bfseries\sffamily\color{secondary}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily\color{tertiary}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{\noindent\colorbox{#2}{\makebox[\textwidth][l]{\textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}\vspace{0.5em}\par}
+\newtcolorbox{asciibox}{colback=rowgray,colframe=bordergray,arc=1pt,boxrule=0.5pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fontupper=\small\ttfamily,breakable}
+\newtcolorbox{quotebox}{colback=lightprimary,colframe=primary,arc=2pt,boxrule=0.5pt,left=12pt,right=12pt,top=8pt,bottom=8pt,breakable}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Sir Mix-A-Lot \& the West Coast}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{colorlinks=true,linkcolor=secondary,urlcolor=secondary,pdfauthor={GSD Ecosystem},pdftitle={Sir Mix-A-Lot -- Deep Research Mission},pdfsubject={Vision to Mission Pipeline}}
+
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Sir Mix-A-Lot\\[0.3em]\& the West Coast}}
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The DIY King from ``That Hip-Hop Hotbed Seattle''}}
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- Mission 93.3c}}
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron~~|~~Estimated: 12 context windows across 5 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Sir Mix-A-Lot \& the West Coast --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{KUBE 93.3 FM Mission (93.3b), gsd-foxfire-heritage-skills-vision.md}
+\metafield{Context:}{Third mission in the 93.3 trilogy: Kubernetes (infrastructure), KUBE (the frequency), Sir Mix-A-Lot (the artist and the scene)}
+
+\subsection{Vision}
+
+Anthony Ray was born on August 12, 1963, in Auburn, Washington. His mother was a licensed practical nurse at the King County Jail. He grew up in Seattle's Central District --- Bryant Manor apartments, 19th Ave and East Yesler Way --- and was bused across the city to Roosevelt High School as part of Seattle's 21-year integration experiment. Some North End residents, he knew, did not want Black children bused into their neighborhoods. By 1983, he was DJing parties at the Rotary Boys \& Girls Club for a dollar a head.
+
+Within a decade, Anthony Ray --- Sir Mix-A-Lot --- had co-founded an independent record label, produced and engineered his own platinum album, put Seattle on the global hip-hop map, hit \#1 on the Billboard Hot 100, won a Grammy, and announced his dream to ``create 10 black millionaires right here in Seattle.'' He did all of this from a home studio in Auburn, on an independent label he built after walking away from the first one over creative control, distributed by Rick Rubin's Def American with a million dollars of promotional backing behind a song about butts.
+
+The standard narrative reduces Sir Mix-A-Lot to ``Baby Got Back.'' That is like reducing the Amiga to its graphics chip. The actual story is about something far more interesting: a Black artist from a city with no hip-hop infrastructure who built every piece of that infrastructure himself --- the production, the label, the distribution, the radio promotion, the cross-genre experimentation --- and in doing so proved that hip-hop was not a regional genre but a \textit{national language} that could be spoken fluently from Seattle to Houston to New York.
+
+More than that, Mix-A-Lot's career arc maps the entire trajectory of West Coast hip-hop from the outside. He was not part of the LA scene (NWA, Death Row, G-funk). He was not part of the Bay Area scene (Too Short, E-40, Digital Underground). He occupied a third position: the Pacific Northwest, where hip-hop was carried by military bases, community centers, college radio, and one 100,000-watt FM signal from Cougar Mountain. His success was the most compelling evidence that the genre had transcended geography entirely.
+
+This research mission traces the complete arc: from Auburn to the Central District to the Grammy stage to the Seattle Symphony, and situates that arc within the broader West Coast scene that was simultaneously producing NWA, Dr.~Dre, Tupac, Snoop Dogg, Too Short, and the entire G-funk revolution. Mix-A-Lot's story is not a footnote to that revolution. It is proof that the revolution was bigger than any one city.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Sir Mix-A-Lot is reduced to one song.} ``Baby Got Back'' dominates public memory. The broader career --- two platinum albums before the hit, the NastyMix/Rhyme Cartel label arc, the Metal Church collaboration, the ``Seattle\ldots The Dark Side'' compilation, the Mudhoney partnership, the Seattle Symphony performance --- is unknown to most.
+
+\item \textbf{The DIY production story is untold.} Mix wrote, arranged, programmed, performed, produced, and engineered his own records. He built a home studio in Auburn. He left NastyMix over creative control. He founded Rhyme Cartel. This is one of hip-hop's great bootstrap stories, and it's rarely framed that way.
+
+\item \textbf{Seattle's position in West Coast hip-hop is untheorized.} The standard West Coast narrative runs LA (NWA/Death Row) $\rightarrow$ Bay Area (Too Short/E-40) $\rightarrow$ G-funk dominance. Seattle is treated as an anomaly. But Mix-A-Lot's platinum success \textit{preceded} ``The Chronic'' --- Swass went platinum in 1990, two years before Dr.~Dre's solo debut redefined the coast.
+
+\item \textbf{The cross-genre experiments deserve analysis.} ``Iron Man'' with Metal Church (1988). ``Freak Momma'' with Mudhoney (1993). ``Subset'' with the Presidents of the United States of America (1999). The Seattle Symphony performance (2014). Mix-A-Lot consistently crossed genre boundaries that the industry insisted were walls. Seattle --- home of both hip-hop and grunge --- made this possible.
+
+\item \textbf{The community-building ambition is forgotten.} ``My dream is to create 10 black millionaires right here in Seattle.'' The ``Seattle\ldots The Dark Side'' compilation (1993) was an attempt to use his platform to launch local artists. Kid Sensation, E-Dawg, Funk Daddy --- the roster of NastyMix and Rhyme Cartel. This was ecosystem thinking before the term existed.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Sir Mix-A-Lot's career is a case study in how one artist, operating from a city with no existing hip-hop infrastructure, built every layer of that infrastructure from scratch --- and in doing so, proved the genre's universality.
+\end{quotebox}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+  SIR MIX-A-LOT: THE COMPLETE ARC
+  =================================
+
+  ORIGIN (1963-1985)           INDEPENDENCE (1985-1991)
+  +-------------------+        +------------------------+
+  | Auburn birth      |        | NastyMix Records       |
+  | Central District  |------->| "Square Dance Rap" '85 |
+  | Roosevelt HS bus  |        | Swass '88 (platinum)   |
+  | Boys & Girls Club |        | Seminar '89 (gold)     |
+  | Nasty Nes meets   |        | Creative control split |
+  +-------------------+        +------------+-----------+
+                                            |
+  PEAK (1991-1994)             WEST COAST CONTEXT
+  +-------------------+        +------------------------+
+  | Rhyme Cartel label|        | 1986: Ice-T "6 N Mornin"|
+  | Rick Rubin / Def  |        | 1988: NWA Straight OC  |
+  | Mack Daddy '92    |<------>| 1989: Too Short Life Is |
+  | "Baby Got Back" #1|        | 1992: The Chronic      |
+  | Grammy '93        |        | 1992: Baby Got Back    |
+  | Seattle Dark Side |        | 1993: Snoop Doggystyle |
+  +-------------------+        +------------------------+
+           |
+  EVOLUTION (1994-2026)
+  +----------------------------------------------+
+  | Chief Boot Knocka '94 | Mudhoney collab '93  |
+  | Bumpasaurus '96       | Subset w/ POTUSA '99 |
+  | Daddy's Home '03      | Hot 103.7 host '17   |
+  | Seattle Symphony '14  | Nicki Minaj sample   |
+  +----------------------------------------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origin \& Identity}
+Anthony Ray biography: Auburn, the Central District, Seattle's busing program, the community center circuit, meeting Nasty Nes. The formation of NastyMix Records (1983/1985). The ``Smurf voice'' and why he sped up ``Square Dance Rap.'' The decision to write, produce, and engineer everything himself. The home studio in Auburn. The relationship between Seattle's geographic isolation and Mix's self-sufficiency.
+
+\subsubsection{Module 2: The Discography}
+Complete album-by-album analysis: Swass (1988, platinum --- ``Posse on Broadway,'' ``Iron Man'' with Metal Church), Seminar (1989, gold --- ``My Hooptie,'' ``Beepers''), Mack Daddy (1992 --- ``Baby Got Back,'' self-released on Rhyme Cartel, Rick Rubin distribution), ``Seattle\ldots The Dark Side'' (1993 compilation), Chief Boot Knocka (1994 --- Flea guest appearance, Grammy-nominated ``Just Da Pimpin' in Me''), Return of the Bumpasaurus (1996 --- low promotion, label exit), Daddy's Home (2003 --- Artist Direct). The NastyMix $\rightarrow$ Rhyme Cartel $\rightarrow$ Def American $\rightarrow$ American $\rightarrow$ Artist Direct label trajectory as a story about creative control and independence.
+
+\subsubsection{Module 3: West Coast Context}
+The broader West Coast timeline: Watts Prophets (1971), Uncle Jamm's Army, KDAY 1580 AM, Egyptian Lover, World Class Wreckin' Cru, Ice-T (``6 in the Mornin''' 1986), NWA (1988), Too Short, Bay Area hyphy precursors, Death Row Records (1991), Dr.~Dre ``The Chronic'' (1992), Snoop Dogg, Tupac. Radio infrastructure: KDAY (LA), KPWR Power 106 (LA), KMEL (SF), KUBE 93 (Seattle). Mix-A-Lot's position as the third pole: not LA, not Bay Area, but PNW --- and why that matters for understanding the genre's national scope.
+
+\subsubsection{Module 4: Cross-Genre \& Legacy}
+The genre-crossing experiments unique to Seattle: ``Iron Man'' remake with Metal Church (rap-metal years before Run-DMC/Aerosmith became the template), the Judgment Night soundtrack with Mudhoney (1993 --- Seattle hip-hop meets Seattle grunge), the Subset project with Presidents of the United States of America (rock-rap fusion, unreleased). The Seattle Symphony performance (2014, Gabriel Prokofiev composition). Nicki Minaj's ``Anaconda'' sampling (2014). Morning radio host on Hot 103.7 (2017--2019). The ``Wheedle's Groove'' documentary narration. Sir Mix-A-Lot's House Remix (DIY Network 2018). The through-line: an artist who refused genre boundaries in a city that was simultaneously producing the world's most important hip-hop \textit{and} the world's most important grunge.
+
+\subsubsection{Module 5: Community \& Ecosystem}
+``My dream is to create 10 black millionaires right here in Seattle.'' The ``Seattle\ldots The Dark Side'' compilation as platform-sharing. Kid Sensation, E-Dawg, Funk Daddy, Jazz Lee Aston --- the artists Mix tried to elevate. NastyMix Records as Seattle's first hip-hop ecosystem (parallels to Motown, Sugar Hill, Def Jam). The Central District as geographic anchor. The 206 Zulu nonprofit carrying the legacy. MOHAI's ``Legacy of Seattle Hip Hop'' exhibit (2015--2016). Ben Camp's ``The Birth of Seattle Rap'' (2025). The Massive Monkees breakdance crew. The question of whether one artist can build a scene --- and what happens when that artist's platform (KUBE, NastyMix) is taken away.
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Complete Sir Mix-A-Lot biography and discography with sourced data
+\item West Coast hip-hop timeline from Watts Prophets through G-funk era
+\item Radio infrastructure (KDAY, KPWR, KMEL, KUBE) as cultural delivery mechanism
+\item Cross-genre collaborations and their significance to Seattle's dual identity
+\item NastyMix/Rhyme Cartel as independent label case study
+\item Community ecosystem building and its limits
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item East Coast hip-hop beyond comparative context
+\item Southern hip-hop (Atlanta, Houston) --- different research mission
+\item Post-2000 West Coast developments (hyphy, Kendrick Lamar era) beyond brief context
+\item Music production technical analysis (beat construction, sampling)
+\item Legal details of NastyMix lawsuit beyond creative control narrative
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Complete biography traces Auburn birth through 2026 with named sources for each career phase
+\item All six studio albums documented with release dates, labels, chart positions, and key singles
+\item NastyMix $\rightarrow$ Rhyme Cartel transition documented as creative control narrative with Mix's own words
+\item West Coast timeline places at least 12 milestone releases/events in chronological relationship to Mix's career
+\item Radio infrastructure (KDAY, KPWR, KMEL, KUBE) documented as cultural delivery mechanisms with launch dates and format descriptions
+\item At least 4 cross-genre collaborations analyzed (Metal Church, Mudhoney, POTUSA, Seattle Symphony)
+\item ``Baby Got Back'' contextualized within both the 1992 chart landscape and its 2014 cultural afterlife (Anaconda)
+\item Community building efforts documented: ``Seattle\ldots The Dark Side'' roster, ``10 black millionaires'' quote sourced
+\item Seattle's integration busing program documented as biographical context, not sociological commentary
+\item All findings sourced from journalism, encyclopedic references, or named participants
+\item Document self-contained for reader unfamiliar with either Seattle or West Coast hip-hop history
+\item Through-line connects Mix's DIY ethos to the Amiga Principle and GSD ecosystem philosophy
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+Sir Mix-A-Lot wrote, arranged, programmed, performed, produced, and engineered his own records. From a home studio in Auburn. On a label he founded after walking away from the first one because he wanted creative control over his product.
+
+That is the Amiga Principle in its purest form. Not brute force --- not the major-label machinery that launched NWA, not the Death Row empire that Dr.~Dre built, not the Bad Boy apparatus that Puffy constructed. One person, with specialized tools, producing work that punched absurdly above its weight class. ``Square Dance Rap'' sold 45,000 copies on an independent label from a city that Billboard mocked. Swass went platinum with virtually no radio exposure. ``Baby Got Back'' spent five weeks at \#1, recorded in a dining-room studio in Auburn, Washington.
+
+The spaces between are everywhere in this story. Between Auburn and the Central District. Between the Boys \& Girls Club and the Billboard chart. Between hip-hop and metal, between rap and grunge, between the commercial and the independent. Mix-A-Lot didn't just cross those spaces --- he \textit{built bridges} and then tried to bring other people across. ``My dream is to create 10 black millionaires right here in Seattle.''
+
+The dream didn't fully materialize. NastyMix collapsed. KUBE was taken away. The Central District gentrified. But the infrastructure Mix built --- the proof that one person from one ``impossible'' city could produce work that competed with anything on either coast --- that infrastructure is still load-bearing. Every PNW artist who followed, from Macklemore to Shabazz Palaces to Sol, stands on ground that Anthony Ray broke with a sped-up voice and a borrowed gym.
+
+\newpage
+
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Sir Mix-A-Lot \& the West Coast --- Research Reference}
+
+\subsection{How to Use This Document}
+
+\textbf{Key sources:} Wikipedia (extensively referenced), Encyclopedia.com, Apple Music editorial, RadioInsight, Washington Humanities, HistoryLink.org, Seattle Times, Town Love (Crane City Music), 206 Zulu.
+
+\subsection{Module 1: Origin \& Identity Reference}
+
+Born August 12, 1963, Auburn, Washington. Grew up in Seattle's Central District, Bryant Manor apartments (19th Ave / East Yesler Way). Mother: licensed practical nurse at King County Jail. Attended Roosevelt High School (University District) via Seattle Public Schools' busing integration program (1978--1999). Began DJing at community centers after high school. By 1983, playing weekends at Rainier Vista Boys \& Girls Club (South Seattle), then moved to Rotary Boys \& Girls Club (Central District). Met Nasty Nes Rodriguez there --- Rodriguez was already hosting FreshTracks on KFOX, the West Coast's first dedicated hip-hop radio show. Partnership with Nes and businessman Ed Locke led to NastyMix Records (founded 1983--1985, sources vary on exact year).
+
+``Square Dance Rap'' (1985/1986): Mix deliberately recorded vocals slowly, then sped up and pitch-shifted in post-production. He later explained to Seattle Refined (2018): ``I didn't want to rap, that's why I use this weird Smurf voice.'' The EP sold over 45,000 copies independently --- a staggering number for an artist from a city with no hip-hop infrastructure and a label with no national distribution.
+
+Self-production: Mix wrote, arranged, programmed, performed, produced, and engineered his own material from the beginning. His Auburn home studio was off the dining room. This total creative self-sufficiency was unusual in an era when most hip-hop artists relied on separate producers, DJs, and studio engineers.
+
+\subsection{Module 2: Discography Reference}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{2.8cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Album} & \tableheader{Label} & \tableheader{Certification} & \tableheader{Key Tracks} \\
+\midrule
+1988 & Swass & NastyMix & Platinum (1990) & ``Posse on Broadway,'' ``Iron Man,'' ``Square Dance Rap'' \\
+1989 & Seminar & NastyMix & Gold (700K+) & ``My Hooptie,'' ``Beepers,'' ``I Got Game'' \\
+1992 & Mack Daddy & Rhyme Cartel / Def American & Multi-platinum & ``Baby Got Back'' (\#1, 5 weeks, double platinum single) \\
+1993 & Seattle\ldots The Dark Side & Rhyme Cartel / Def American & --- & Compilation feat.~local artists \\
+1994 & Chief Boot Knocka & Rhyme Cartel / American & \#69 Billboard 200 & ``Put 'Em On The Glass,'' ``Just Da Pimpin' in Me'' (Grammy nom.) \\
+1996 & Return of the Bumpasaurus & American & --- & Low label promotion; Mix left American \\
+2003 & Daddy's Home & Artist Direct & --- & ``Big Johnson'' (comeback) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The NastyMix Split}
+Mix left NastyMix in 1991 over creative control. He told Spin: ``My main reason for leaving Nastymix was to get creative control over my product. I have a difference of opinion with how most labels promote rap. People don't take it seriously. What's happening with rap is it's being all lumped together, and that's scary. Rap is more informative than any music ever was.'' He founded Rhyme Cartel Records and signed a distribution deal with Rick Rubin's Def American. NastyMix Records' final release was Criminal Nation's ``Trouble in the Hood'' (1992). Mix named his publishing company ``Where's My Publishing Inc.'' as a reference to the dispute.
+
+\subsubsection{``Baby Got Back'' (1992)}
+Released as lead single from Mack Daddy (February 4, 1992). Spent five weeks at \#1 on Billboard Hot 100. Went double platinum as a single. MTV aired the video only after 9 PM due to complaints. Won 1993 Grammy Award for Best Rap Solo Performance and 1993 American Music Award for Favorite Rap/Hip-Hop Artist. Recorded in Mix's home studio in Auburn, WA, produced by Rick Rubin. Mix later estimated he earned over \$100 million in royalties from the song. Nicki Minaj's ``Anaconda'' (2014) prominently sampled it; Mix praised the track as the ``new and improved version.''
+
+\subsection{Module 3: West Coast Context Reference}
+
+\subsubsection{West Coast Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} & \tableheader{Significance} \\
+\midrule
+1971 & Watts Prophets: ``Rappin' Black in a White World'' & Proto-rap; spoken word + music from LA's Watts neighborhood \\
+1981 & Rappers Rapp Records (LA) & First West Coast rap label (Disco Daddy \& Captain Rapp) \\
+1981 & Nasty Nes: FreshTracks (Seattle) & West Coast's first dedicated hip-hop radio show \\
+1983 & KDAY 1580 AM (LA) & First all-hip-hop radio station in the US \\
+1984 & Egyptian Lover: ``On the Nile'' & Early West Coast electro-hop \\
+1985 & NastyMix Records (Seattle) & PNW's first hip-hop label; ``Square Dance Rap'' \\
+1986 & Ice-T: ``6 in the Mornin''' & Pioneer of West Coast gangsta rap \\
+1986 & KPWR Power 106 (LA) & First rhythmic contemporary format station \\
+1988 & NWA: ``Straight Outta Compton'' & Established gangsta rap and West Coast as serious force \\
+1988 & Sir Mix-A-Lot: ``Swass'' & First platinum rap album from outside LA/Bay Area \\
+1989 & Too Short: ``Life Is\ldots Too Short'' & Bay Area breakthrough \\
+1991 & Death Row Records founded & Suge Knight; G-funk label powerhouse \\
+1991 & KUBE becomes ``93 Jams'' (Seattle) & PNW's major market goes rhythmic CHR \\
+1992 & Dr.~Dre: ``The Chronic'' & Defined G-funk; West Coast dominance begins \\
+1992 & Sir Mix-A-Lot: ``Baby Got Back'' \#1 & Seattle artist tops Billboard; proof of genre's national reach \\
+1993 & Snoop Dogg: ``Doggystyle'' & G-funk peak; \#1 debut \\
+1996 & Tupac Shakur murdered & East/West feud culmination \\
+1997 & Notorious B.I.G. murdered & End of the feud era \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Radio Infrastructure Map}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{City} & \tableheader{Format} & \tableheader{Role in West Coast Hip-Hop} \\
+\midrule
+KDAY 1580 AM & Los Angeles & All hip-hop & First all-rap station in US; DJ Greg Mack \\
+KPWR 105.9 & Los Angeles & Rhythmic CHR & First rhythmic contemporary station (1986); Power 106 \\
+KMEL 106.1 & San Francisco & Rhythmic CHR & Bay Area hip-hop anchor \\
+KUBE 93.3 & Seattle & Rhythmic CHR & PNW hip-hop anchor (1991--2022); Cougar Mountain 100kW \\
+KFOX 1250 AM & Seattle & Hip-hop show & Nasty Nes FreshTracks (1981); West Coast's first rap radio \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Mix-A-Lot's Third Position}
+The standard West Coast narrative bifurcates into LA (gangsta rap, G-funk, Death Row) and the Bay Area (pimp rap, hyphy precursors, Too Short). Mix-A-Lot occupied neither pole. He was not gangsta (``I'm not trying to be Malcolm X or Ice Cube,'' he told the Detroit Free Press). He was not pop (not Hammer, not Fresh Prince). He described himself as filling the void between the two, blending humor, social commentary, and bass-heavy electronic production. His success from Seattle --- a city with no established hip-hop infrastructure, no major-label presence, no industry connections --- was the strongest argument that hip-hop was a national language, not a regional dialect.
+
+A radio industry analyst wrote that KUBE's influence (driven in large part by Mix-A-Lot's success) extended through the entire PNW: ``From Spokane to Boise, R\&B and Hip-Hop became the pop music of many smaller Pacific Northwest markets.'' This was not LA influence spreading north. It was Seattle generating its own gravity.
+
+\subsection{Module 4: Cross-Genre \& Legacy Reference}
+
+\subsubsection{Genre Crossings}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Collaboration} & \tableheader{Genre} & \tableheader{Significance} \\
+\midrule
+1988 & ``Iron Man'' w/ Metal Church & Rap-metal & Black Sabbath cover with Seattle thrash band; years before rap-rock became a genre \\
+1993 & ``Freak Momma'' w/ Mudhoney & Hip-hop + grunge & Judgment Night soundtrack; Seattle's two dominant genres in one track \\
+1999 & Subset w/ Presidents of the USA & Rock-rap fusion & Toured, recorded; never officially released \\
+2014 & Seattle Symphony performance & Hip-hop + classical & Gabriel Prokofiev composition; Sonic Evolution series honoring Seattle music icons \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Only in Seattle could these collaborations happen. The city that simultaneously produced Sir Mix-A-Lot and Nirvana, NastyMix Records and Sub Pop, KUBE 93 Jams and KISW rock, had no choice but to produce artists who crossed the lines that the rest of the industry treated as walls.
+
+\subsubsection{Later Career \& Cultural Afterlife}
+Morning radio host on Hot 103.7 FM, Seattle (2017--2019). Narrator for ``Wheedle's Groove,'' a 2009 documentary about Seattle's 1960s/70s funk and soul scene. DIY Network special ``Sir Mix-A-Lot's House Remix'' (2018) --- buying and flipping a house in Seattle. Cards Against Humanity ``Ass Pack'' spokesperson (2019). Robot Chicken and BoJack Horseman appearances. Continues performing at festivals nationally; maintains residence in Auburn, WA. Named his publishing company ``Where's My Publishing Inc.'' --- the joke is still the truth.
+
+\subsection{Module 5: Community \& Ecosystem Reference}
+
+After ``Baby Got Back'' made him the biggest rapper in Seattle, Mix used his platform to attempt scene-building. ``Seattle\ldots The Dark Side'' (1993, Rhyme Cartel/Def American) featured local artists including Kid Sensation and Jazz Lee Aston. He told the Seattle Times: ``My dream is to create 10 black millionaires right here in Seattle.''
+
+The NastyMix roster included Kid Sensation, E-Dawg, Funk Daddy, and Criminal Nation. The label's final release was Criminal Nation's ``Trouble in the Hood'' (1992). After NastyMix's collapse, the Seattle hip-hop ecosystem fragmented. Mix's departure for a major-label deal (and later the music industry's shift away from regional scenes toward national consolidation) meant that the infrastructure he'd built didn't outlast his direct involvement.
+
+The legacy persists through: 206 Zulu (Seattle hip-hop nonprofit, events, oral histories), MOHAI's ``Legacy of Seattle Hip Hop'' exhibit (2015--2016, curated by Jazmyn Scott and Aaron Walker-Loud, featuring Massive Monkees breakdance crew, production stations with Vitamin D and Jake One tracks, and Macklemore's ``Thrift Shop'' fur coat alongside Nasty Nes's NastyMix bomber jacket), and Ben Camp's ``The Birth of Seattle Rap'' (Arcadia Publishing, 2025).
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: Sir Mix-a-Lot --- extensively referenced article
+\item Wikipedia: West Coast hip-hop, KJR-FM, Hip hop music in the Pacific Northwest
+\item Encyclopedia.com / Musician Guide: Sir Mix-A-Lot biography with Spin, Detroit Free Press, Seattle Times quotes
+\item Apple Music editorial: Sir Mix-A-Lot artist page
+\end{itemize}
+
+\subsubsection{Journalism \& Commentary}
+\begin{itemize}[leftmargin=2em]
+\item Washington Humanities: ``How the Northwest Shocked the Hip-Hop World'' (2022)
+\item HistoryLink.org File \#9778: Seattle's underground hip-hop scene (1984)
+\item ABC News: ``Hip-hop at 50: How West Coast rap sparked a seismic shift'' (August 2023)
+\item Town Love (Crane City Music): Sir Mix-A-Lot discography annotations
+\item RadioInsight: ``When Hip-Hop Ruled Seattle Radio'' (March 2022)
+\end{itemize}
+
+\subsubsection{Community Archives}
+\begin{itemize}[leftmargin=2em]
+\item 206 Zulu: ``Rap Attack Lives: The Legacy of Nasty Nes'' and ``OurStory'' series
+\item MOHAI: ``Legacy of Seattle Hip Hop'' exhibit documentation (2015--2016)
+\item Ben Camp (Novocaine132): ``The Birth of Seattle Rap'' (Arcadia Publishing, 2025)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Mission Objective:}{Produce a comprehensive study of Sir Mix-A-Lot's career and its position within the broader West Coast hip-hop landscape, documenting the complete arc from Auburn to the Grammy stage, the DIY production philosophy, the cross-genre experiments unique to Seattle, and the community-building efforts that attempted to create a lasting PNW hip-hop ecosystem.}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Complete Biography & Auburn through 2026 with sources for each phase & D-01 \\
+2 & Discography Analysis & All 6 albums + compilation with labels, charts, key tracks & D-02 \\
+3 & West Coast Timeline & 15+ milestones 1971--1997 placing Mix in context & D-03 \\
+4 & Radio Infrastructure & KDAY/KPWR/KMEL/KUBE roles documented & D-03 \\
+5 & Cross-Genre Analysis & 4+ collaborations with genre significance & D-04 \\
+6 & Community Ecosystem & NastyMix roster, scene-building efforts, legacy orgs & D-05 \\
+7 & Third Position Thesis & Mix's unique position argued with evidence & D-SYN \\
+8 & Verified PDF & Compiled, cross-referenced, source-validated & D-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Third position thesis, cross-genre analysis, community ecosystem synthesis, through-line \\
+Sonnet & 60\% & Biography, discography, West Coast timeline, radio infrastructure, publication \\
+Haiku & 10\% & Shared schemas, source index, template scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Tracks} & \tableheader{Tasks} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & 1 (seq.) & 2 & 1 \\
+1 & Parallel Research & 2 (parallel) & 5 & 5 \\
+2 & Synthesis & 1 (seq.) & 2 & 3 \\
+3 & Publication & 1 (seq.) & 2 & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track A} (Artist): Biography + Discography + Cross-Genre. \textbf{Track B} (Context): West Coast Timeline + Radio Infrastructure + Community Ecosystem.
+
+\section{Test Plan}
+
+Total: 32 tests (5 safety-critical, 15 core, 7 integration, 5 edge). Safety-critical tests: SC-SRC (source quality), SC-IND (specific community attribution --- Central District, not generic; Filipino-American for Nes, not generic Asian), SC-ADV (no genre advocacy), SC-LIV (living persons verification), SC-NUM (chart/sales figures attributed to RIAA or Billboard).
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 11 \\
+Parallel tracks & 2 (max, Wave 1) \\
+Sequential depth & 4 waves \\
+Opus / Sonnet / Haiku & 30\% / 60\% / 10\% \\
+Estimated context windows & 12 \\
+Estimated sessions & $\sim$5 \\
+Estimated wall time & $\sim$6 hours \\
+Total tests & 32 (5 safety-critical) \\
+Target coverage & 85\%+ \\
+Activation profile & Squadron (12 roles) \\
+Total token budget & $\sim$120K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``I'm not trying to be Malcolm X or Ice Cube. I think and feel the same things my fans do.''}
+
+\vspace{0.5em}
+
+--- Sir Mix-A-Lot, Detroit Free Press
+
+\vspace{0.5em}
+
+He wrote it. He arranged it. He programmed it. He performed it. He produced it. He engineered it. From a home studio in Auburn, Washington, a suburb of a city that the industry said didn't matter. And when the record went platinum, he didn't move to LA or New York. He stayed. He tried to bring other people up. He tried to build something that would outlast one song, one album, one career.
+
+The infrastructure didn't hold. NastyMix collapsed. KUBE was taken away. The Central District changed. But the principle holds: one person, with the right tools and the right architecture, can produce work that competes with anything. Not by being bigger. By being more intentional. By knowing every layer of the stack. By refusing to let someone else control your product.
+
+That's the Amiga Principle. That's what Anthony Ray built in Auburn. And the music is still playing.
+\end{quotebox}
+
+\end{document}
