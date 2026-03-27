@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maritime Compute & Maglev Bridge — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0D47A1;
+    --secondary: #00695C;
+    --tertiary: #37474F;
+    --accent: #0277BD;
+    --light-primary: #E3F2FD;
+    --light-secondary: #E0F2F1;
+    --bg: #FAFAFA;
+    --card-bg: #F0F4F8;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--tertiary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  header .label { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+  header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; margin-bottom: 0.5rem; }
+  header .subtitle { font-size: 1.1rem; opacity: 0.9; }
+  header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.85; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    border: 1px solid #ddd; text-decoration: none; color: var(--text);
+    transition: transform 0.2s, box-shadow 0.2s; display: block;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .file-card .type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; }
+  .file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.5rem 0; color: var(--primary); }
+  .file-card .desc { font-size: 0.9rem; color: var(--subtle); }
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); margin: 2rem 0 1rem; font-size: 1.4rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.5rem; }
+  h3 { color: var(--secondary); margin: 1.5rem 0 0.5rem; font-size: 1.1rem; }
+  .contents { background: var(--light-primary); border-radius: 8px; padding: 1.5rem 2rem; margin: 1rem 0; }
+  .contents .stage { margin: 1rem 0; }
+  .contents .stage-label { font-weight: 700; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contents ul { margin: 0.5rem 0 0 1.5rem; }
+  .contents li { margin: 0.3rem 0; font-size: 0.95rem; }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem 2rem; margin: 1rem 0; }
+  .instructions ol { margin-left: 1.5rem; }
+  .instructions li { margin: 0.5rem 0; }
+  code { background: #E8EAF6; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+  }
+  .quote-box p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1rem; line-height: 1.7; }
+  .quote-box .attr { font-family: 'DM Sans', sans-serif; font-style: normal; color: var(--subtle); font-size: 0.85rem; margin-top: 0.8rem; text-align: right; }
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+  @media (max-width: 600px) { .files { grid-template-columns: 1fr; } header h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Maritime Compute & Maglev Bridge Network</h1>
+  <div class="subtitle">Floating Infrastructure for Global Knowledge Distribution</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="mission.pdf" download>
+      <div class="type">PDF Document</div>
+      <div class="name">mission.pdf</div>
+      <div class="desc">Complete three-stage mission package — 26 pages. Vision, research reference, and executable mission specification.</div>
+    </a>
+    <a class="file-card" href="mission.tex" download>
+      <div class="type">LaTeX Source</div>
+      <div class="name">mission.tex</div>
+      <div class="desc">XeLaTeX source for modification and recompilation. Requires DejaVu fonts.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-label">Stage 1 — Vision Document</div>
+      <ul>
+        <li>Vision narrative: oceanic extension of the Fox Infrastructure Pacific Spine</li>
+        <li>Five-problem statement (terrestrial concentration, cable fragility, cooling crisis, hardware logistics, knowledge inequality)</li>
+        <li>Four-phase evolution: isolated barges → mesh network → floating bridge corridors → global maglev backbone</li>
+        <li>Six research modules with architecture diagrams</li>
+        <li>Chipset configuration (Agnus/Denise/Paula/68000)</li>
+        <li>Twelve success criteria</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label">Stage 2 — Research Reference</div>
+      <ul>
+        <li>Maritime compute: Project Natick, Nautilus Data Technologies, Keppel FDCP, containerized DC specs</li>
+        <li>Ocean energy: DOE Marine Energy Program, CorPower Ocean, tidal/wave/wind/solar profiles</li>
+        <li>Subsea cables: 600+ cable network, hyperscaler ownership shift, vulnerability analysis</li>
+        <li>Floating bridges: Washington State, Norway SFT program, Sognefjord feasibility</li>
+        <li>Maglev freight: TSB Cargo, General Atomics passive magnets, KIT superconducting dual-purpose rail</li>
+        <li>Maritime governance: UNCLOS, indigenous sovereignty (CARE, OCAP®, UNDRIP)</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label">Stage 3 — Mission Package</div>
+      <ul>
+        <li>Fleet activation profile: 20 crew roles across 3 parallel tracks</li>
+        <li>Four-wave execution plan: Foundation → Research → Synthesis → Publication</li>
+        <li>132,500 estimated tokens across 22–28 context windows</li>
+        <li>38 tests (8 safety-critical / 16 core / 8 integration / 6 edge)</li>
+        <li>Dependency graph and cache optimization strategy</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the <strong>PDF</strong> for the complete three-stage mission package</li>
+      <li>Hand the PDF to <strong>gsd-skill-creator</strong> (Claude Code) for execution</li>
+      <li>The orchestrator reads Stage 3 and decomposes into wave-based execution</li>
+      <li>CAPCOM gates at wave boundaries for human approval</li>
+      <li>Final output: comprehensive research document on maritime compute and maglev bridge infrastructure</li>
+    </ol>
+  </div>
+
+  <h2>LaTeX Recompilation</h2>
+  <div class="instructions">
+    <p>To modify and recompile the .tex source:</p>
+    <ol>
+      <li>Ensure DejaVu fonts are installed (standard on Ubuntu/Debian)</li>
+      <li>Run three passes:<br>
+        <code>xelatex -interaction=nonstopmode mission.tex</code><br>
+        <code>xelatex -interaction=nonstopmode mission.tex</code><br>
+        <code>xelatex -interaction=nonstopmode mission.tex</code>
+      </li>
+      <li>Three passes resolve: TOC, cross-references, page counts, hyperlink destinations</li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    <p>The ocean is not the gap between continents. It is the platform upon which the next generation of infrastructure will float, levitate, and carry knowledge to every shore. The spaces between are not empty — they are where the bridges go.</p>
+    <div class="attr">— Maritime Compute & Maglev Bridge through-line</div>
+  </div>
+</div>
+
+<footer>
+  GSD Ecosystem · Fox Infrastructure Group · March 2026
+</footer>
+</body>
+</html>
