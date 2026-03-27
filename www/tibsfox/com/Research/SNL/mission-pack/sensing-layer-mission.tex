@@ -1,0 +1,1031 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- COSMIC SENSOR COLOR SCHEME ---
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — section headers
+\definecolor{secondary}{HTML}{E65100}     % Electric amber — subsections
+\definecolor{tertiary}{HTML}{00695C}      % Teal — subsubsections
+\definecolor{accent}{HTML}{0277BD}        % Signal blue — highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- SECTION FORMATTING ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- CUSTOM ENVIRONMENTS ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- HEADERS / FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Sensing Layer}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- HYPERLINKS ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Sensing Layer -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ===================================================================
+% TITLE PAGE
+% ===================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Sensing Layer\\[0.3em]Electronics, Light \& the Open Science Mesh}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Persistence of Vision to Doppler Weather}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Electronics Research Mission}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ===================================================================
+% TABLE OF CONTENTS
+% ===================================================================
+\tableofcontents
+\newpage
+
+% ===================================================================
+% STAGE 1 — VISION DOCUMENT
+% ===================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Sensing Layer --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Cold-Start Research Conducted}
+\metafield{Depends on:}{GSD Mesh Prototype Spec, Fox Infrastructure Group Plan}
+\metafield{Context:}{GSD Ecosystem v1.49+, Amiga Principle Architecture}
+
+\subsection{Vision}
+
+There is a layer between the world and the computer that most people never think about --- the sensing layer. It is where the physics of our atmosphere, the photons bouncing off fog droplets, the pressure waves of a foghorn, and the Doppler shift of a passing rainstorm get translated into bits. That translation is not neutral. How we design it determines what we can know, what we can share, and ultimately what kind of intelligence we can build together.
+
+This mission is about filling in the fractal details of the missing parts of an electronics catalog that lives at that boundary. It spans the tactile joy of soldering an LED strip to an Arduino Nano and watching a message float in the air through persistence of vision, all the way to the global ambition of a zero-trust, co-operative scientific mesh where screensaver cycles from ten thousand hobbyist nodes are computing real atmospheric science. These are not separate projects. They are the same project at different scales.
+
+The Amiga Principle applies here with particular force. The Amiga's custom chips --- Agnus, Denise, Paula --- each did one thing extraordinarily well, offloading specialized work from the 68000 so it could think. A well-designed sensing layer does the same: the ESP8266 reads weather sensors and hands packets to a LoRa mesh; the Raspberry Pi Pico 2's PIO subsystem blasts DAC samples at 150 million samples per second without touching the main CPU; the RTL-SDR dongle sniffs radar reflections while the Pi upstream renders them as a living screensaver that doubles as a community weather node. Specialized paths, elegant architecture, staggering outcomes.
+
+The spaces between matter here too. Fog is not an absence of information --- it is a different kind of presence, one that radar and sonar can read where lidar goes blind. The gap between what one sensor can see and what another can see is where the interesting science lives. A mesh of cheap, well-placed, well-calibrated nodes can collectively see what no single expensive instrument can. This mission catalogs the components, techniques, and protocols needed to build that mesh --- from the LED controller driving a persistence-of-vision display to the Doppler weather node feeding a global open-science co-op.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The electronics catalog has fractal gaps.} Hobbyists and builders working at the intersection of LED art, atmospheric sensing, and distributed computing lack a unified reference for the components, techniques, and integration patterns that span these domains. The catalog exists in fragments across Adafruit, Hackaday, MDPI, and GitHub, but nobody has assembled the cross-domain picture.
+
+  \item \textbf{DIY weather sensing is high-noise, low-fidelity.} Consumer weather stations and single-node Arduino builds produce data too noisy to contribute meaningfully to atmospheric science. Without mesh coordination, calibration protocols, and zero-trust data sharing standards, DIY nodes remain toys rather than instruments.
+
+  \item \textbf{High-speed light and signal work is under-documented for open hardware.} Persistence-of-vision displays, strobe synchronization, phase-locked LED arrays, and high-speed ADC/DAC for audio and scientific sensing all require timing precision that is achievable on modern microcontrollers (Pico 2 PIO, ESP32 I2S) but rarely explained for the builder who is not starting from an FPGA.
+
+  \item \textbf{Fog, distance, and atmospheric opacity are under-served in the DIY sensing toolkit.} Lidar, radar, sonar, and laser rangefinding have different failure modes in fog and precipitation. The tradeoffs --- wavelength selection, signal processing, sensor fusion --- are well-understood in research literature but rarely translated into accessible DIY guidance.
+
+  \item \textbf{Open science co-op infrastructure is fragmented and aging.} BOINC, Folding@home, and SETI@home pioneered volunteer computing, but their architectures predate modern mesh networking, zero-trust security, and GPU-first computing. A new generation of open science co-op nodes built on GSD-style architecture could contribute to atmospheric modeling, protein folding, and radio astronomy with far greater efficiency than legacy screensaver clients.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Sensing Layer as Rosetta Core}: Every sensor, protocol, and compute node in this mission is a translation engine --- converting physical phenomena (light, pressure, radio reflections, temperature) into structured data that can be shared, verified, and acted upon by a global co-operative mesh.
+
+\subsubsection{Domain Map (ASCII)}
+
+\begin{asciibox}
+PHYSICAL WORLD
+    |
+    v
+[SENSING SUBSTRATE]
+  |-- Microcontrollers (Arduino, ESP32, RPi Pico 2, ESP8266)
+  |-- Atmospheric Sensors (BME280, GUVA-S12SD, Anemometer, Rain gauge)
+  |-- Light Systems (WS2812, DotStar, NeoPixel, POV arrays)
+  |-- Remote Sensing (LiDAR ToF, SONAR, RTL-SDR Doppler, Ultrasonic)
+    |
+    v
+[SIGNAL PROCESSING LAYER]
+  |-- ADC/DAC (12-bit SAR, PCF8591, MCP4725, I2S audio, PIO-DAC)
+  |-- Timekeeping (GPS PPS, NTP, SMPTE timecodes, RTC modules)
+  |-- Phase Synchronization (Hall sensors, IR interrupt, PLL)
+    |
+    v
+[MESH TRANSPORT LAYER]
+  |-- LoRa / Meshtastic (long-range, low-power telemetry)
+  |-- WiFi (ESP8266/ESP32 to Home Assistant, MQTT)
+  |-- Zero-Trust Data Sharing (signed packets, DoltHub co-op)
+    |
+    v
+[CO-OP COMPUTE LAYER]
+  |-- DIY Mesh Weather Nodes (Meshtastic WX, MeshBot)
+  |-- Screensaver Science (BOINC, Folding@home, GPU mesh)
+  |-- Global Atmospheric Co-op (NOAA NWS API, open data feeds)
+\end{asciibox}
+
+\subsubsection{Module Architecture (ASCII)}
+
+\begin{asciibox}
+MODULE A          MODULE B          MODULE C
+Microcontroller   Light Systems     Remote Sensing
+Substrate         & Light Art       & Fog Vision
+    |                 |                 |
+    +-------+---------+---------+-------+
+            |                   |
+        MODULE D            MODULE E
+        Signal Proc.        DIY Mesh
+        ADC/DAC/Time        Weather
+            |                   |
+            +--------+----------+
+                     |
+                 MODULE F
+              Open Science
+              Co-op Mesh
+
+Cross-cutting: Zero-Trust Data Sharing (all modules)
+               Phase Sync & Timecoding (B, C, D)
+               LoRa/Meshtastic transport (A, D, E)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Microcontroller Substrate}
+
+Catalog of sensing-focused microcontrollers and their capabilities: Arduino Uno/Nano (ATmega328P, 10-bit ADC, 16MHz), ESP8266 (WiFi-native, I2C/SPI sensor bus), ESP32 (dual-core, built-in DAC, I2S audio, 12-bit ADC), Raspberry Pi Pico / Pico 2 (RP2040/RP2350, PIO subsystem, 12-bit ADC at 500kS/s, 150MS/s PIO-DAC). Low-power amplifier selection for sensor signal conditioning. Power budget analysis for solar-powered field nodes.
+
+\subsubsection{Module B: Light Systems and Light Art}
+
+LED controller ecosystem: WS2812B/NeoPixel (single-wire protocol), DotStar/APA102 (SPI, higher refresh), PWM dimming and MOSFET switching for high-current arrays. Persistence of vision (POV) technique: timing windows, Hall effect synchronization, shift register cascades, ATtiny and Pico implementations. Strobe effects, color shifting, phase synchronization for performance art and scientific stroboscopy. High-speed LED switching for scientific flash photography and light-based rangefinding.
+
+\subsubsection{Module C: Remote Sensing and Seeing Through Fog}
+
+Lidar time-of-flight (ToF) principles, wavelength selection for fog penetration (1550nm vs 905nm), sensor fusion with radar. DIY sonar (ultrasonic HC-SR04, JSN-SR04T waterproof). RTL-SDR Doppler radar principles for weather sensing and object detection. Foghorn acoustics and sonar ranging. Laser rangefinding with phone camera strobing. Coherent vs. incoherent lidar. Radar penetration advantages in precipitation. Sensor fusion strategies.
+
+\subsubsection{Module D: Signal Processing, ADC/DAC and Timekeeping}
+
+Analog-to-digital conversion: architecture comparison (SAR, delta-sigma, successive approximation), resolution vs. speed tradeoffs, ESP32 ADC nonlinearity, Pico ADC characterization, external ICs (ADS1115, PCF8591, ADS7828). Digital-to-analog: MCP4725 12-bit I2C DAC, ESP32 8-bit DAC, PiWave 150MS/s PIO-DAC. I2S for high-quality audio. Timekeeping: GPS PPS for microsecond accuracy, RTC modules (DS3231), NTP synchronization, SMPTE timecodes for synchronized scientific recording. Real-time data analysis on edge nodes.
+
+\subsubsection{Module E: DIY Mesh Weather Networks}
+
+High-fidelity atmospheric monitoring architecture: sensor selection (BME280 pressure/humidity/temperature, GUVA-S12SD UV, SDS011 particulate, anemometer, rain gauge), node calibration against reference stations, LoRa/Meshtastic telemetry protocol (Ecowitt WS85 hack, MeshBot Weather), MQTT to Home Assistant, micro-SD local logging. Mesh weather prediction: ensemble modeling from distributed nodes, NOAA NWS API integration, frog-chorus synchronization protocol for distributed sampling. Zero-trust data validation for contributed observations.
+
+\subsubsection{Module F: Open Science Co-op Mesh}
+
+Distributed volunteer computing ecosystem: BOINC (client 8.2.8, 34K+ active participants, 20+ PetaFLOPS daily), Folding@home (12.9 native PetaFLOPS as of Oct 2025, ARM64 Raspberry Pi support), SETI@home / Einstein@Home, climateprediction.net, MilkyWay@home. GPU-first volunteer computing via CUDA/OpenCL. Screensaver-as-science architecture. GSD-native co-op node design: zero-trust work unit validation, mesh availability broadcasting, integration with Wasteland/DoltHub federation. Scientific application: atmospheric modeling, protein folding, radio signal analysis, seismic monitoring (Quake Catcher Network).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# The Sensing Layer --- GSD Chipset Configuration
+# Amiga Principle: specialized execution paths per sensing domain
+
+sensing_layer:
+  microcontrollers:
+    field_node:
+      primary: ESP32-S3           # WiFi + BLE + I2S + 12-bit ADC
+      alternative: RP2040/RP2350  # PIO subsystem for high-speed I/O
+      ultra_low_power: ESP8266    # WiFi-only, 80MHz, <1mA deep sleep
+    display_node:
+      primary: Arduino Nano       # ATmega328P, direct LED drive
+      pov_display: RP2350 Pico2   # PIO-DAC, 150MS/s
+    gateway:
+      primary: Raspberry Pi 4/5   # Linux, MQTT broker, LoRa HAT
+
+  sensing_substrate:
+    atmospheric:
+      - BME280    # pressure, humidity, temperature (I2C/SPI)
+      - AHT20     # high-accuracy temperature/humidity
+      - GUVA-S12SD # UV index (analog)
+      - SDS011    # particulate matter (UART)
+      - anemometer # wind speed (pulse counting)
+      - rain_gauge # tipping bucket (interrupt)
+    remote:
+      - HC-SR04   # ultrasonic sonar, 2-400cm
+      - VL53L1X   # ToF lidar, 4m range (I2C)
+      - RTL-SDR   # software-defined radio, 500kHz-1.75GHz
+      - HMC5883L  # magnetometer for Doppler orientation
+
+  signal_processing:
+    adc_external: ADS1115         # 16-bit, I2C, 860 SPS
+    dac_external: MCP4725         # 12-bit, I2C, EEPROM
+    audio_interface: PCM5102      # I2S DAC, 32-bit/384kHz
+    rtc: DS3231                   # ±2ppm accuracy, I2C
+
+  mesh_transport:
+    lora_module: RFM95W           # 915MHz, 20km range
+    mesh_protocol: Meshtastic     # encrypted mesh, weather telemetry
+    local: MQTT + Home Assistant  # local broker, zero cloud
+
+  compute_mesh:
+    volunteer: BOINC + F@h        # CPU + GPU contribution
+    local_gpu: RTX class          # CUDA for local atmospheric ML
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Component catalog for all six module domains with specs and sourcing
+  \item POV technique guide: timing mathematics, synchronization hardware, shift register design
+  \item Sensor fusion architecture for fog-penetrating multi-modal sensing
+  \item ADC/DAC comparison matrix across ESP32, Pico, Arduino, and external ICs
+  \item DIY mesh weather node reference design (hardware + software stack)
+  \item LoRa/Meshtastic weather telemetry integration patterns
+  \item BOINC and Folding@home integration as GSD co-op compute nodes
+  \item Zero-trust data signing for contributed scientific observations
+  \item NOAA/NWS API integration for reference calibration
+  \item Screensaver-science architecture for GSD mesh cluster nodes
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Professional-grade meteorological instrument certification (WMO standards)
+  \item Military or aviation radar systems
+  \item Custom ASIC or FPGA design (deferred to future silicon layer mission)
+  \item Full Doppler weather radar build (requires FCC licensing in US)
+  \item Medical-grade biosensing or diagnostic applications
+  \item Cryptocurrency mining on co-op compute nodes
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Component catalog covers all six modules with at minimum 8 components each, including datasheet links, typical price ranges, and key specifications.
+  \item POV display reference design documented end-to-end: LED count, timing formula, synchronization method, power budget, and sample Arduino/Pico code outline.
+  \item Fog-penetration comparison matrix completed for at least four sensing modalities (lidar, radar, sonar, acoustic) with attenuation data and wavelength recommendations.
+  \item ADC/DAC comparison table covers ESP32, Pico, Arduino Uno, ADS1115, PCF8591, and MCP4725 with resolution, sample rate, linearity notes, and use-case guidance.
+  \item DIY mesh weather node reference design specifies full sensor suite, microcontroller, LoRa module, power system, and Meshtastic configuration for a self-sufficient field node.
+  \item NOAA/NWS API integration pattern documented: endpoint selection, data format, calibration workflow for contributed observations.
+  \item Zero-trust data signing protocol specified: signing key management, packet format, DoltHub or equivalent co-op registry integration.
+  \item BOINC and Folding@home integration guide covers installation on Raspberry Pi ARM64, GPU node configuration, project selection, and screensaver display design.
+  \item Screensaver-science architecture documented: visualization of live atmospheric data while contributing compute cycles to open science.
+  \item Phase synchronization reference documented: Hall effect, IR interrupt, and GPS PPS methods for precision timing in POV, stroboscopy, and distributed sampling.
+  \item Real-time edge processing patterns documented for ESP32 and Pico 2: DMA ADC sampling, FIFO buffering, and MQTT publish at sensor-rated frequencies.
+  \item Cross-module integration example: a single node simultaneously running weather sensing, a POV display of live conditions, and contributing idle cycles to BOINC.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency} \\
+\midrule
+GSD Mesh Prototype Spec & Hardware substrate for field nodes & Informs node design \\
+Fox Infrastructure Group Plan & BC--Chile mesh backbone context & Network overlay \\
+GSD Silicon Layer Spec & Future ASIC sensing substrate & Downstream consumer \\
+GSD Chipset Architecture Vision & Agnus/Denise/Paula principle & Architectural metaphor \\
+Deep Audio Analyzer Mission & Audio ADC/DAC patterns & Shared signal processing \\
+GSD Staging Layer Vision & Data ingestion pipeline & Receives sensor feeds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga shipped with a graphics chip, a sound chip, and a DMA chip, each whispering to memory in turn while the CPU got on with thinking. Nobody expected a home computer to also be a sampler, a video editor, and a music workstation. It was all those things because the architecture trusted specialized hardware to do specialized work.
+
+The sensing layer built in this mission is the same bet at a different scale and a different era. A BME280 whispering pressure readings over I2C while a PIO state machine blasts LED pixels at 150 million samples per second while a LoRa packet makes its way twenty kilometers to a mesh gateway while the screensaver renders a live pressure gradient and the idle GPU cores crunch protein folding work units --- none of this fights the others. Each runs in its specialized lane. The spaces between the lanes are where the architecture lives, and that architecture is what this mission documents.
+
+The fog is always there. Sometimes it is literal Pacific fog rolling in from the Sound, and sometimes it is the uncertainty in a distributed measurement, and sometimes it is the gap between what the sensor can see and what the model needs to know. This mission is about learning to see through all of it: with radio waves when light fails, with mesh consensus when a single node fails, with open science when a single institution fails.
+
+% ===================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ===================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Sensing Layer --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles peer-reviewed research, open-source project documentation, and authoritative agency data across the six sensing layer modules. Agents should extract component specifications, integration patterns, and calibration data from the relevant module sections.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item NOAA / National Weather Service --- atmospheric data standards and API
+  \item NASA --- lidar atmospheric research, Doppler wind measurement
+  \item University of California Berkeley --- BOINC platform development
+  \item MDPI (Multidisciplinary Digital Publishing Institute) --- peer-reviewed IoT meteorology
+  \item Adafruit Industries --- open hardware documentation (LED, ADC/DAC, microcontroller)
+  \item Hackaday.com --- community engineering documentation, POV and sensing projects
+  \item Stanford University / Folding@home Consortium --- distributed protein folding
+  \item SSEC / University of Wisconsin-Madison --- Doppler lidar research
+\end{itemize}
+
+\subsection{Module A Reference: Microcontroller Substrate}
+
+\subsubsection{Primary Microcontroller Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.2cm}L{2.2cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Board} & \tableheader{MCU} & \tableheader{ADC} & \tableheader{Clock} & \tableheader{Key Feature} \\
+\midrule
+Arduino Uno R3 & ATmega328P & 10-bit, 6ch & 16 MHz & Excellent ADC linearity; 5V logic; vast ecosystem \\
+Arduino Nano & ATmega328P & 10-bit & 16 MHz & Compact; breadboard-friendly \\
+ESP8266 & Tensilica L106 & 10-bit, 1ch & 80/160 MHz & Native WiFi; deep sleep $<$1mA; I2C sensor bus \\
+ESP32 & Xtensa LX6 dual & 12-bit, 18ch & 240 MHz & I2S audio; built-in DAC; BLE+WiFi \\
+RPi Pico & RP2040 & 12-bit, 3ch & 133 MHz & PIO subsystem; 500 kS/s; MicroPython \\
+RPi Pico 2 & RP2350 & 12-bit, 3ch & 150 MHz & 150 MS/s PIO-DAC (PiWave); ARM+RISC-V \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{ADC Linearity Note (sourced: doctormonk.com ADC comparison study):} The Arduino Uno ATmega328P shows superior linearity across its full 5V range compared to ESP32 and Pico in direct comparison testing. The ESP32 ADC has known nonlinearity issues at voltage extremes. For precision analog sensing (pH, pressure, load cells), use an external 16-bit ADS1115 or ADS1015 breakout.
+
+\textbf{PIO-DAC Record (sourced: Hackaday, Jan 2026):} The Raspberry Pi Pico 2 using its Programmable I/O subsystem has demonstrated 150 million samples per second output to an external DAC (PiWave project by Anabit). The PIO state machine handles parallel data output in a single clock cycle without CPU involvement, enabling speeds normally requiring an FPGA.
+
+\subsubsection{Low-Power Amplifier Selection for Sensor Conditioning}
+
+For signal conditioning between sensors and ADC pins, the following op-amp families are recommended for field nodes: MCP6001 (single-supply, rail-to-rail, 1MHz), INA219 (current sensing via I2C), INA226 (voltage/current/power, 16-bit), and OPAx333 (zero-drift, ultra-low power for remote deployments). For audio preamplification feeding I2S: MAX4466 electret microphone amplifier breakout.
+
+\subsection{Module B Reference: Light Systems and Light Art}
+
+\subsubsection{LED Addressable Strip Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Protocol} & \tableheader{Type} & \tableheader{Max Rate} & \tableheader{Notes} \\
+\midrule
+WS2812B / NeoPixel & Single-wire serial & 800 kHz & 1-wire simplicity; timing-critical; no clock line \\
+DotStar / APA102 & SPI (data + clock) & 20 MHz & Higher refresh rate; better for POV; 2-wire \\
+SK6812 RGBW & Single-wire & 800 kHz & Adds dedicated white channel \\
+74HC595 Shift Register & Parallel cascade & SPI clock & Classic Arduino POV method; 8-bit per chip \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{POV Timing Mathematics (sourced: Hackaday POV Basics; Make: POV Globe project):} The human eye retains an image for approximately 1/25 second (40ms persistence). For a POV display spinning at 600 RPM (10 Hz), the display has 100ms per revolution. With 12 LED columns, each column must be displayed for about 8ms. At 800kHz WS2812B, 144 LEDs can be updated in under 6ms. For smooth POV, DotStar (APA102) at 20MHz is preferred --- it updates 300 LEDs in under 1ms.
+
+\textbf{Holographic POV (sourced: Circuit Cellar, Jul 2024):} The University POV holographic display project used Raspberry Pi Pico MCU on PTFE PCBs (resistant to centrifugal force up to thousands of G), inductive wireless power, and Python TCP over WiFi for image streaming. This eliminates slip ring complexity.
+
+\textbf{Synchronization Methods:} Hall effect sensor + magnet (most reliable for rotation); IR interrupt module MOC7811 (Motorola, used in early 8051 POV projects); optical encoder; GPS PPS for geographically distributed synchronized strobing.
+
+\subsubsection{Phase Synchronization for Performance and Science}
+
+Phase synchronization --- ensuring multiple light sources flash at precisely controlled phase offsets --- is critical for both performance POV art (spinning poi, bike wheel displays) and scientific stroboscopy. The Arduino hardware interrupt on pin D2 or D3 triggers from Hall sensor to reset the display pattern. For multi-node sync over a mesh: GPS PPS pulse ($<$1 microsecond accuracy) distributed via LoRa or WiFi allows strobed observation of moving phenomena across a sensor array.
+
+\subsection{Module C Reference: Remote Sensing and Fog Vision}
+
+\subsubsection{Fog Penetration by Sensing Modality}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modality} & \tableheader{Wavelength} & \tableheader{Fog Effect} & \tableheader{Notes} \\
+\midrule
+Visible Lidar (905nm) & Near-IR & Severe & Up to 200 dB/km attenuation in dense fog; range drops $>$50\% \\
+Eye-safe Lidar (1550nm) & Near-IR & Moderate & Better in fog; water absorbs strongly; reduced retina risk \\
+Millimeter Wave Radar & 77--79 GHz & Minimal & Rain reduces 15--20\%; fog negligible; preferred for weather \\
+X-band Radar & 9.3--9.5 GHz & Low & Nautical/weather standard; penetrates all but heavy rain \\
+Ultrasonic Sonar & 40 kHz & Negligible & Temperature-dependent; excellent in fog; 2--400cm range \\
+Acoustic (Foghorn) & 50--500 Hz & None & Kilometers of range; used for marine navigation since 1850s \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Lidar and Fog (sourced: RP Photonics, LiDAR Solutions Australia, EOS 2025):} Dense fog can attenuate laser light by up to 200 dB/km, essentially blocking standard lidar entirely. Research approaches include longer wavelengths, advanced signal processing, and sensor fusion where lidar is complemented by radar. In automotive and atmospheric applications, the emerging consensus is that neither lidar nor radar alone is sufficient --- sensor fusion is the architecture.
+
+\textbf{Coherent Doppler Lidar (sourced: SSEC / UW-Madison Doppler Lidar):} The Doppler Lidar operates at 1.5 microns (near-IR, eye-safe) and uses optical heterodyne detection, mixing the return signal with a local oscillator for Doppler frequency shift measurement. Wind velocity precision is typically 10 cm/sec. It measures clear-sky aerosol tracers, making it complementary to radar (which needs precipitation) for boundary layer wind profiling.
+
+\textbf{Seeing with Flashes of Light:} Time-of-flight camera principles (e.g., iPhone LiDAR, iPad Pro) use modulated infrared light at nanosecond pulse widths. The sensor measures photon return time per pixel. At 1/3 meter resolution, a 200ns pulse window suffices. DIY phone-based rangefinding using flash synchronization has been demonstrated for indoor mapping.
+
+\subsubsection{Sonar and Acoustic Sensing}
+
+The HC-SR04 ultrasonic module operates at 40 kHz, range 2--400cm, $\pm$3mm accuracy. For weatherproof outdoor use, the JSN-SR04T waterproof variant is recommended. Temperature correction is required: speed of sound = 331 + (0.6 $\times$ T°C) m/s. At 25°C, 343 m/s. A 1°C error introduces 0.17\% range error.
+
+\subsection{Module D Reference: Signal Processing, ADC/DAC and Timekeeping}
+
+\subsubsection{ADC Architecture Comparison}
+
+Successive Approximation Register (SAR) ADC is the dominant architecture in microcontrollers. The Pico RP2040 uses 12-bit SAR with capacitor-ratio matching (not resistors --- capacitor ratios are more precise on-chip). Known Pico ADC nonlinearity: a small dead zone at low voltage and tail-off near 3.3V has been characterized. The ESP32 SAR ADC has more severe nonlinearity; for precision work, the ADS1115 external IC (16-bit, I2C, 860 SPS) is strongly recommended.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.8cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Device} & \tableheader{Resolution} & \tableheader{Max Rate} & \tableheader{Best Use Case} \\
+\midrule
+ATmega328P (Arduino) & 10-bit & 15 kSPS & Best linearity; 5V range; analog instruments \\
+RP2040 (Pico) & 12-bit & 500 kSPS & High speed; DMA+FIFO; 3.3V \\
+ESP32 & 12-bit & 2 MSPS & Fast but nonlinear; use with calibration LUT \\
+ADS1115 (ext) & 16-bit & 860 SPS & High precision; differential; PGA gain \\
+PCF8591 (ext) & 8-bit & 11.25 kSPS & Simple I2C; includes DAC channel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DAC Options for Scientific and Audio Output}
+
+MCP4725 (Adafruit breakout): 12-bit, I2C, EEPROM for stored value, 0--VCC output, up to 400 kHz update (with Fast Mode I2C, 200 kHz effective output bandwidth). Excellent for bias generation, waveform output, and motor control. ESP32 onboard DAC: 8-bit, two channels (GPIO 25/26), 0--3.3V, effective for telephone-quality audio; use I2S for higher quality. PiWave PIO-DAC on Pico 2: 150 MS/s demonstrated, 10/12/14-bit options, suitable for function generator and RF-adjacent applications.
+
+\subsubsection{Timekeeping and Synchronization}
+
+DS3231 RTC module: $\pm$2 ppm accuracy ($<$1 minute per year drift), I2C, battery-backed, temperature-compensated crystal oscillator. For microsecond-precision distributed timing: GPS module with PPS (pulse-per-second) output, disciplined against UTC. NTP synchronization on ESP32/Pi: typically $<$50ms accuracy on LAN, $<$10ms with local server. SMPTE timecodes for synchronized multi-channel recording: LTC (Linear Time Code) audio channel embedding, MTC (MIDI Time Code) for instrument synchronization.
+
+\subsection{Module E Reference: DIY Mesh Weather Networks}
+
+\subsubsection{Reference Architecture (MDPI ECAS-7 2025)}
+
+A peer-reviewed study (MDPI Environmental and Earth Sciences Proceedings, ECAS-7, 2025) validated an ESP8266-based portable meteorological station measuring temperature, humidity, atmospheric pressure, UV index, dew point, altitude, and air density. The prototype ran continuously for 696 hours (29 days), comparing favorably to the INIFAP reference station located 13.1 km away. Differences in humidity were attributed to local geographic/environmental variation rather than instrument error --- validating the value of hyperlocal mesh nodes.
+
+\textbf{Standard Sensor Suite for GSD Weather Nodes:}
+\begin{itemize}[leftmargin=1.5em]
+  \item BME280: pressure ($\pm$1 hPa), humidity ($\pm$3\% RH), temperature ($\pm$1°C)
+  \item AHT20: temperature ($\pm$0.3°C), humidity ($\pm$2\% RH) --- higher accuracy than DHT22
+  \item GUVA-S12SD: UV index via analog voltage (calibration: 0.1V = UV index 1)
+  \item SDS011: PM2.5 and PM10 particulate via UART (laser scattering, $\pm$15 µg/m$^3$)
+  \item Davis-style ultrasonic anemometer: wind speed/direction, no moving parts
+  \item Tipping bucket rain gauge: 0.2mm per tip, interrupt-driven counting
+\end{itemize}
+
+\subsubsection{Meshtastic / LoRa Integration (sourced: Hackaday.io, GitHub oasis6212)}
+
+The Meshtastic weather station project (Hackaday.io, 2024) modified an Ecowitt WS85 ultrasonic weather station to output serial data to a Meshtastic LoRa node. Weather telemetry packets transmit on the mesh every 5 minutes. A Maui deployment experienced winds up to 30 mph daily for one month with only minor antenna corrosion. The RAK Meshtastic Starter Kit (WisBlock) is recommended as the LoRa node platform.
+
+MeshBot Weather (GitHub: oasis6212) runs on Raspberry Pi + Meshtastic radio, integrates NOAA/NWS official EAS alerts, and provides multi-day and hourly forecasts on demand to mesh nodes. It supports firewall mode (whitelist-only responses) and auto-reboot for firmware stability.
+
+\subsection{Module F Reference: Open Science Co-op Mesh}
+
+\subsubsection{Active Volunteer Computing Platforms (2025--2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Platform} & \tableheader{Science Domain} & \tableheader{Status} & \tableheader{GPU Support} \\
+\midrule
+Folding@home & Protein folding / disease & Active & Yes (CUDA/OpenCL) \\
+BOINC / Einstein@Home & Pulsar search / astrophysics & Active & Partial \\
+BOINC / Rosetta@home & Protein structure prediction & Active & No (CPU only) \\
+BOINC / MilkyWay@home & Galaxy modeling & Active & Yes (CUDA) \\
+BOINC / climateprediction.net & Climate modeling & Active & No \\
+BOINC / Cosmology@Home & CMB analysis & Active & No \\
+BOINC / LODA & Integer sequences (LEAN) & Active & No \\
+Quake Catcher Network & Seismology & Active & No \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Current Scale (sourced: Wikipedia / Folding@home, Oct 2025):} Folding@home operates at 12.9 native PetaFLOPS as of October 2025. BOINC 8.2.8 (released Jan 2026) supports 34,236 active participants with 136,341 active computers processing an average of 20.164 PetaFLOPS daily. ARM64 Folding@home client (launched July 2020) enables Raspberry Pi and ARM smartphone participation.
+
+\textbf{GPU Leverage:} GPU applications on BOINC run 2--10x faster than CPU-only versions. CUDA (Nvidia) and OpenCL (AMD/Intel/cross-platform) are both supported. For GSD nodes with RTX-class GPUs, the expected contribution is 10--50x a CPU node depending on workload type. Scientific GPU applications (molecular dynamics, radio signal FFT) are embarrassingly parallel.
+
+\textbf{Zero-Trust Data Sharing Architecture (GSD design principle):} Work unit result validation in BOINC uses redundant computation: multiple independent hosts compute the same unit and results are compared. This ``quorum consensus'' provides zero-trust validation without central authority. For weather mesh data, the equivalent is: each observation packet is signed with the node's private key, timestamped with GPS PPS, and includes cross-calibration delta against the nearest reference station. DoltHub co-op registry tracks node reputation scores.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk} & \tableheader{Mitigation} \\
+\midrule
+Eye-safe lidar & Retinal damage at $<$1550nm & Use only 905nm modules with safety rating; 1550nm preferred for open-air use \\
+RF emissions & LoRa / radar regulatory compliance & FCC Part 15 for 915MHz LoRa; no high-power radar DIY without licensing \\
+High-current LEDs & Fire and heat & Use appropriate MOSFET + heatsink; fuse each strip segment \\
+Volunteer computing & Malicious work units & BOINC sandboxing; only connect to established verified projects \\
+Zero-trust data & Spoofed weather observations & GPS PPS timestamping; signed packets; reputation decay for drift nodes \\
+Privacy & Location of home node & Use grid square (Maidenhead) rather than GPS coordinates in public submissions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item NOAA / National Weather Service: api.weather.gov --- official weather data API and EAS alerts
+  \item NASA HARLIE: conical-scanning Doppler lidar for atmospheric wind velocity measurement
+  \item NSF NCAR: National Center for Atmospheric Research, Micropulse DIAL lidar systems
+  \item SSEC / University of Wisconsin-Madison: Doppler Lidar research program (metobs.ssec.wisc.edu)
+  \item INIFAP (Mexico): Reference meteorological station network used for IoT station calibration
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item MDPI ECAS-7 (2025): Low-cost ESP8266 meteorological station, 696-hour validation study
+  \item Circuit Cellar (Jul 2024): Holographic POV Display using Raspberry Pi Pico, inductive power
+  \item RP Photonics Encyclopedia: LIDAR principles, coherent detection, Doppler applications
+  \item ScienceDirect / Doppler Lidar overview: ABL research, range and sensitivity parameters
+  \item Dr. Monk DIY Electronics Blog (2024): Comparative ADC characterization across ESP32, Pico, Arduino
+\end{itemize}
+
+\subsubsection{Professional Organizations and Open Source}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item University of California Berkeley / BOINC: boinc.berkeley.edu --- volunteer computing infrastructure
+  \item Stanford University / Folding@home: foldingathome.org --- protein folding distributed science
+  \item Adafruit Industries: learn.adafruit.com --- MCP4725 DAC, DotStar POV, Genesis Poi tutorial
+  \item Hackaday.com: Meshtastic WX station, POV basics, Pi Pico ADC characterization
+  \item GitHub / oasis6212: MeshBot Weather --- Meshtastic weather bot for Raspberry Pi
+  \item GitHub / alessandro308: MeshWeather --- mesh network Arduino weather analysis
+  \item FabAcademy 2025 / Patrick Dezséri: Mesh weather station with LoRa and SmartCitizen
+\end{itemize}
+
+% ===================================================================
+% STAGE 3 — MISSION PACKAGE
+% ===================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a complete, executable GSD electronics catalog and integration guide spanning six sensing layer modules: microcontroller substrate, LED light art systems, remote sensing and fog vision, signal processing and timekeeping, DIY mesh weather networks, and open science co-op computing. The deliverable is a living reference that enables GSD skill-creator agents to spec, source, and build any component of the sensing layer without external research.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 — FOUNDATION (Sequential, Haiku)
+  =========================================
+  [Schema] [Source Index] [Component Template] [Safety Boundaries]
+
+  WAVE 1 — PARALLEL SURVEY (Parallel A + B + C, Sonnet/Opus)
+  ============================================================
+  Track A: Modules A+B          Track B: Modules C+D          Track C: Modules E+F
+  MCU Substrate +               Remote Sensing +               DIY Weather +
+  LED Light Art                 Signal Processing              Open Science Co-op
+
+  WAVE 2 — SYNTHESIS (Sequential, Opus)
+  ======================================
+  [Cross-Module Integration] [Zero-Trust Protocol Spec] [Example Node Design]
+  [Screensaver-Science Architecture] [Safety Review]
+
+  WAVE 3 — PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  ==========================================================
+  [Document Assembly] [Source Validation] [Component Pricing Check] [Final PDF]
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{5cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Primary Agent} \\
+\midrule
+1 & Module A: MCU Catalog & 6+ MCUs with full spec table + code patterns & CRAFT-MCU \\
+2 & Module B: LED \& Light Art & POV timing guide + controller comparison & CRAFT-LIGHT \\
+3 & Module C: Remote Sensing & Fog penetration matrix + sensor integration & CRAFT-SENSE \\
+4 & Module D: ADC/DAC/Time & Comparison tables + waveform examples & CRAFT-SIGNAL \\
+5 & Module E: Mesh Weather & Reference node design + Meshtastic config & CRAFT-WEATHER \\
+6 & Module F: Open Science & BOINC/F@h integration + screensaver arch & CRAFT-COOPS \\
+7 & Synthesis Document & Cross-module node design + zero-trust spec & INTEG / Opus \\
+8 & Final Catalog PDF & All modules assembled, indexed, sourced & LOG / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+C-00: Schema \& Template & None & Haiku & 2K \\
+C-01: Source Index & C-00 & Haiku & 3K \\
+C-02: MCU Catalog & C-00, C-01 & Sonnet & 8K \\
+C-03: LED \& POV Guide & C-00, C-02 & Sonnet & 10K \\
+C-04: Remote Sensing Guide & C-00, C-01 & Sonnet + Opus & 12K \\
+C-05: ADC/DAC/Time Reference & C-00, C-02 & Sonnet & 10K \\
+C-06: Mesh Weather Node Design & C-02, C-05, C-01 & Opus & 15K \\
+C-07: Open Science Co-op Guide & C-00, C-02 & Sonnet & 10K \\
+C-08: Cross-Module Synthesis & C-02 through C-07 & Opus & 20K \\
+C-09: Zero-Trust Protocol Spec & C-06, C-08 & Opus & 12K \\
+C-10: Final Assembly \& Verify & All & Sonnet & 8K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated:}} & \textbf{110K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned Work} \\
+\midrule
+Opus & 30\% & Cross-module synthesis, zero-trust protocol design, mesh weather architecture, sensor fusion judgment calls \\
+Sonnet & 60\% & Per-module catalog production, table assembly, code outline generation, document structure \\
+Haiku & 10\% & Schema definition, component templates, scaffolding, source index \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Foundation schemas & Sequential & Haiku & Component template, source index, safety spec \\
+1A & MCU + LED modules & Parallel & Sonnet & C-02, C-03 \\
+1B & Sensing + Signal modules & Parallel & Sonnet+Opus & C-04, C-05 \\
+1C & Weather + Co-op modules & Parallel & Sonnet+Opus & C-06, C-07 \\
+2 & Synthesis + Protocol & Sequential & Opus & C-08, C-09 \\
+3 & Publication + Verify & Sequential & Sonnet & C-10, Final PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Component Template & Standardized schema: name, type, protocol, voltage, price, datasheet, use case & Haiku \\
+Source Index & All 30+ sources cataloged with URL, type, access date, reliability rating & Haiku \\
+Safety Boundary Spec & Eye-safe laser rules, RF compliance, LED current limits, BOINC sandbox & Haiku \\
+Test Scaffold & Test IDs pre-allocated for all 12 success criteria & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Sonnet) --- MCU Substrate + LED Light Art:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Tokens} \\
+\midrule
+C-02: MCU Catalog & Full comparison table (6 platforms), ADC linearity notes, PIO-DAC record, low-power amp selection & 8K \\
+C-03: LED \& POV & Controller comparison (WS2812/DotStar/shift register), POV timing math, synchronization methods, holographic POV reference & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Sonnet + Opus) --- Remote Sensing + Signal Processing:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Tokens} \\
+\midrule
+C-04: Remote Sensing & Fog penetration matrix (4+ modalities), lidar wavelength selection, sonar temperature correction, coherent Doppler lidar overview, phone-flash ToF & 12K \\
+C-05: ADC/DAC/Time & ADC architecture comparison, ESP32 nonlinearity characterization, external ADC/DAC catalog, I2S audio, DS3231 RTC, GPS PPS, SMPTE & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Sonnet + Opus) --- Mesh Weather + Open Science:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Tokens} \\
+\midrule
+C-06: Mesh Weather & Full node reference design (sensor suite, MCU, LoRa, power, Meshtastic config), NOAA API integration, MeshBot deployment & 15K \\
+C-07: Open Science & BOINC/F@h installation on Pi ARM64, GPU project selection, CUDA optimization, screensaver display design, project comparison table & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Tokens} \\
+\midrule
+C-08: Cross-Module Synthesis & Integrated node design (weather sensing + POV display + BOINC); sensor fusion patterns; phase sync integration; Meshtastic transport & 20K \\
+C-09: Zero-Trust Protocol & Signed observation packet format; GPS PPS timestamping; node reputation scheme; DoltHub registry integration; BOINC quorum model applied to weather data & 12K \\
+Safety Review & SECURE agent reviews all modules for laser, RF, power, and data safety boundary compliance & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Task} & \tableheader{Tokens} \\
+\midrule
+C-10: Final Assembly & All modules assembled into unified catalog; bibliography verified; cross-references checked; intro and summary written & 8K \\
+Source Validation & VERIFY agent checks all datasheet links, NOAA API endpoints, and BOINC project URLs & 4K \\
+Pricing Check & Spot-check component prices against DigiKey/Mouser/Adafruit; flag outdated estimates & 2K \\
+Final PDF & XeLaTeX compile; indexing; distribution package & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 outputs (schema, source index) are consumed by all Wave 1 agents --- load into cache before Wave 1 launch; reuse within 5-minute window.
+  \item The component template schema should be kept under 4K tokens to fit in Haiku context with headroom.
+  \item Tracks A, B, C in Wave 1 are fully independent and can run in true parallel with no shared context.
+  \item Wave 2 synthesis requires all Wave 1 outputs --- batch into single Opus context, not sequential calls.
+  \item Safety Review can checkpoint against SECURE agent in Wave 2 without a full recompile if changes are module-local.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Haiku} & \tableheader{Sonnet} & \tableheader{Opus} \\
+\midrule
+Wave 0 & 10K & -- & -- \\
+Wave 1 (all tracks) & -- & 50K & 12K \\
+Wave 2 Synthesis & -- & -- & 36K \\
+Wave 3 Publication & -- & 16K & -- \\
+\midrule
+\textbf{Total} & \textbf{10K} & \textbf{66K} & \textbf{48K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+C-00 (Schema)
+C-01 (Source Index)
+    |
+    +----+------+------+
+    |    |      |      |
+  C-02  C-04  C-06   C-07    [Wave 1 --- parallel]
+  C-03  C-05
+    |    |      |      |
+    +----+------+------+
+              |
+           C-08 (Synthesis)
+           C-09 (Zero-Trust)
+              |
+           C-10 (Final)
+              |
+          [Final PDF]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK & Source quality, laser safety, RF compliance, data signing \\
+Core functionality & 18 & Required & BLOCK & Per-criterion verification (12 criteria, 1--2 tests each) \\
+Integration & 6 & Required & BLOCK & Cross-module consistency, node example, zero-trust end-to-end \\
+Edge cases & 6 & Best-effort & LOG & Pricing staleness, link rot, firmware version drift \\
+\midrule
+\textbf{Total} & \textbf{38} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, professional organizations, or government agencies; zero entertainment or blog-only sources \\
+SC-NUM & Numerical attribution & Every specification (voltage, resolution, range, FLOPS count) attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents sensing and computing options without advocating specific vendor, political, or regulatory position \\
+SC-LASER & Eye-safe laser guidance & Any lidar or laser rangefinding recommendation includes wavelength, power class, and appropriate safety language \\
+SC-RF & RF regulatory compliance & Any LoRa, radar, or SDR recommendation notes applicable FCC/ISED regulatory context (Part 15, amateur license requirements) \\
+SC-LED & LED current safety & All LED array designs specify maximum current, fuse sizing, and MOSFET thermal requirements \\
+SC-BOINC & Volunteer compute safety & BOINC/F@h guidance includes sandbox verification, official project list only, no cryptocurrency mining instructions \\
+SC-ZTRUST & Zero-trust integrity & Signed packet spec reviewed to ensure no single-point-of-failure in node reputation system \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Component catalog: 8+ items per module & CF-01, CF-02 & Pending \\
+2. POV reference design end-to-end & CF-03, CF-04 & Pending \\
+3. Fog penetration matrix (4+ modalities) & CF-05, SC-LASER & Pending \\
+4. ADC/DAC comparison (6 devices) & CF-06 & Pending \\
+5. Mesh weather node reference design & CF-07, CF-08 & Pending \\
+6. NOAA/NWS API integration pattern & CF-09 & Pending \\
+7. Zero-trust data signing protocol & CF-10, SC-ZTRUST & Pending \\
+8. BOINC/F@h integration guide & CF-11, SC-BOINC & Pending \\
+9. Screensaver-science architecture & CF-12 & Pending \\
+10. Phase synchronization reference & CF-13 & Pending \\
+11. Real-time edge processing patterns & CF-14 & Pending \\
+12. Cross-module integration example node & IN-01, IN-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gates; go/no-go decisions \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache scheduling \\
+TOPO & Topology Manager & Agent team restructuring; mid-mission rebalancing \\
+ARCH & Architecture & Cross-module structural decisions; zero-trust protocol design \\
+SCOUT & Research Agent & Source gathering; datasheet retrieval; component price validation \\
+EXEC-A & Executor Track A & MCU Catalog + LED/POV Guide (C-02, C-03) \\
+EXEC-B & Executor Track B & Remote Sensing + ADC/DAC Guide (C-04, C-05) \\
+EXEC-C & Executor Track C & Mesh Weather + Open Science Guide (C-06, C-07) \\
+CRAFT-MCU & MCU Specialist & Microcontroller selection, ADC characterization, PIO expertise \\
+CRAFT-LIGHT & Light Specialist & POV timing math, LED protocols, phase synchronization \\
+CRAFT-SENSE & Sensing Specialist & Lidar/radar/sonar tradeoffs, fog penetration, sensor fusion \\
+CRAFT-SIGNAL & Signal Specialist & ADC/DAC architecture, I2S audio, timekeeping \\
+CRAFT-WEATHER & Weather Specialist & Atmospheric sensor suite, Meshtastic integration, NOAA API \\
+CRAFT-COOPS & Co-op Specialist & BOINC, Folding@home, GPU leverage, screensaver architecture \\
+VERIFY & Verification Agent & Source validation; specification accuracy; link checking \\
+INTEG & Integration Agent & Cross-module relationships; example node design \\
+SECURE & Security Agent & Eye-safe laser; RF compliance; LED safety; BOINC sandboxing \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; Amiga Principle alignment \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope change routing \\
+BUDGET & Resource Manager & Token budget tracking; model allocation monitoring \\
+SURGEON & Health Monitor & Research quality degradation; source drift detection \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+RETRO & Retrospective Agent & Post-wave analysis; lessons for future sensing missions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & The Sensing Layer: Electronics Catalog, Light Systems \& Open Science Mesh \\
+Activation profile & Fleet (6 modules, 23 crew roles) \\
+Total components & 11 (C-00 through C-10) \\
+Parallel tracks & 3 (Wave 1 Tracks A/B/C) \\
+Estimated token budget & 124K total (10K Haiku / 66K Sonnet / 48K Opus) \\
+Estimated sessions & 4--6 context windows \\
+Estimated wall time & 2--4 hours parallel / 6--8 hours sequential \\
+Primary deliverable & Living electronics catalog PDF + component database \\
+Secondary deliverable & Zero-trust weather mesh protocol specification \\
+Gate condition & SC-LASER, SC-RF, SC-BOINC must pass before CAPCOM approval \\
+Human approval points & After Wave 0, after Wave 1, after Wave 2 synthesis \\
+GSD version & Compatible with skill-creator v1.49+ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+{\large\sffamily\textcolor{primary}{``The fog is not an absence of information.}}
+
+{\normalsize\sffamily It is a different kind of presence: one that radar can read where lidar goes blind, one that mesh consensus can resolve where a single sensor fails, one that open science can illuminate where a single institution has neither the budget nor the mandate. The Sensing Layer is not a catalog of parts. It is a map of the spaces between the physical world and the model that describes it --- and the circuits, protocols, and co-operative architectures that live in those spaces.}
+
+{\small\sffamily\textcolor{subtlegray}{--- The Through-Line, GSD Sensing Layer Mission, March 2026}}
+\end{quotebox}
+
+\end{document}
