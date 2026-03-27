@@ -1,0 +1,928 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── COLOR SCHEME: African Savanna ───────────────────────────────
+\definecolor{primary}{HTML}{8B5E3C}       % Burnt umber — the earth
+\definecolor{secondary}{HTML}{C17817}     % Savanna gold — the sun
+\definecolor{tertiary}{HTML}{3E6B48}      % Acacia green — the life
+\definecolor{accent}{HTML}{A0522D}        % Sienna — Pride Rock
+\definecolor{lightprimary}{HTML}{F5EDE4}  % Warm sand
+\definecolor{lightsecondary}{HTML}{FDF3E3}% Morning light
+\definecolor{lighttertiary}{HTML}{E8F0EA} % Canopy shade
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── SECTION FORMATTING ──────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── CUSTOM ENVIRONMENTS ─────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── HEADERS AND FOOTERS ─────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Lion King: Africa \& Roots}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── HYPERLINKS ──────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Lion King: Africa and Roots -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ═══════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Lion King\\[0.3em]Africa \& Roots}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From the Osiris Myth to the Griot's Song:\\The Deepest Story Ever Told}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 18--24 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ═══════════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Lion King: Africa \& Roots --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{The Hundred Voices (Chapters 55--62), The Space Between, Foxfire Heritage Skills Pack}
+\metafield{Context:}{Personal roots exploration through the lens of Africa's deepest stories}
+
+\subsection{Vision}
+
+There is a story that is older than writing. Older than cities. Older than agriculture. It is the story of a father and a son, of a kingdom lost and a kingdom restored, of a young heir who must learn who he is by understanding where he came from. The ancient Egyptians told it as the myth of Osiris and Horus --- the murdered king, the usurping brother, the son who rises to reclaim what was taken. Shakespeare retold it as \textit{Hamlet}. The Mandinka griots of West Africa have been singing it for seven hundred years as the \textit{Epic of Sundiata} --- the Lion King of Mali, the boy who could not walk, who rose from exile to found one of the greatest empires the world has ever known. And Disney, whether by conscious design or the gravity of archetype, channeled all of these streams into a single animated film about a lion cub on the African savanna who must learn that he is more than what he has become.
+
+But beneath the Disney story --- beneath Hamlet, beneath Sundiata, beneath Osiris --- there is something older still. The walking. The Hundred Voices traced it: the Turkana Boy's body opening into the landscape like a prayer, Homo erectus crossing the savanna in the midday heat while every other creature sought shade, the persistence hunters whose sweat glands and bare skin and patient endurance let them run down anything on Earth. The Circle of Life is not a song. It is a paleoanthropological fact. It is the oldest story, the one written in bone and sediment and the volcanic tuff of the Great Rift Valley, and every retelling --- Osiris, Sundiata, Simba --- is an echo of the original: \textit{we walked out of Africa, and we are still walking home}.
+
+This research mission traces the Lion King narrative from its deepest roots to its most recent flowering in Barry Jenkins' \textit{Mufasa} (2024), mapping the mythological convergences, the oral traditions that kept these stories alive, the paleoanthropological foundations that make them universal, and the personal thread of roots, heritage, and return that makes them matter. The through-line connects to everything: the Foxfire heritage documentation model, the Coast Salish reconnecting-descendant protocols, the GSD ecosystem's conviction that the spaces between --- between father and son, between exile and return, between walking away and walking home --- are where meaning lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Mythological Erasure Through Simplification.} The Lion King is widely treated as ``Hamlet with lions'' or a generic coming-of-age tale. The deeper mythological roots --- the Osiris-Horus succession myth (c.~2400 BCE), the Epic of Sundiata (c.~13th century CE), biblical Joseph and Moses parallels --- are largely invisible to general audiences. This flattening severs the story from its African foundations.
+
+  \item \textbf{The Griot Tradition Is Structurally Misunderstood.} Western frameworks treat oral tradition as ``pre-literate'' history --- a lesser technology awaiting the invention of writing. In Mandinka culture, the \textit{jali} (griot) is a genealogist, counselor, musician, and living archive whose art (\textit{jeliya}) is a sophisticated knowledge-preservation system. The GSD ecosystem, with its emphasis on heritage documentation, needs a research-quality understanding of how oral tradition actually works.
+
+  \item \textbf{Human Origins Research Exists in a Silo.} Paleoanthropology (the Turkana Boy, Lucy, the Laetoli footprints, Ardi) tells the deepest version of the ``roots'' story --- everyone's roots lead back to East Africa. But this science rarely connects to the mythological and cultural narratives that arise from the same landscape. The Hundred Voices made this connection; this mission formalizes it as research.
+
+  \item \textbf{Cultural Authenticity in Adaptation Remains Contentious.} From the 1994 original's Swahili names and Zulu chants to Barry Jenkins' collaborative process with African actors for \textit{Mufasa} (2024), the Lion King franchise has navigated (with varying success) the tension between global entertainment and African cultural sovereignty. The heritage skills ecosystem needs a framework for understanding what respectful adaptation looks like.
+
+  \item \textbf{The Personal ``Roots'' Thread Has No Research Anchor.} The connection between deep-time human origins (``we all come from Africa''), cultural identity (``where is my family from?''), and reconnecting-descendant work (``how do I find my way back?'') is felt intuitively but not documented systematically. This mission provides that anchor.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The Lion King is not a single story but a \textit{mythological convergence zone} --- a place where the Osiris myth, Shakespearean tragedy, West African oral epic, East African paleoanthropology, and personal identity narratives all meet, and the meeting reveals that they were always the same story: the child who must understand where they came from in order to know who they are.
+\end{quotebox}
+
+\subsubsection{Mythological Convergence Map}
+
+\begin{asciibox}
+                    THE CONVERGENCE ZONE
+                    
+  OSIRIS/HORUS          HAMLET          SUNDIATA KEITA
+  (c. 2400 BCE)        (c. 1600 CE)    (c. 1235 CE)
+       |                    |                |
+  murdered king        murdered king    exiled prince
+  usurping brother     usurping uncle   driven out by
+  son restores order   son avenges      step-mother
+  cosmic maat          kingdom          returns as Lion
+       |                    |            King of Mali
+       +--------------------+------------ + 
+                            |
+                    THE LION KING (1994)
+                    Mufasa / Scar / Simba
+                    Pride Lands / Exile / Return
+                            |
+                    MUFASA (2024, Jenkins)
+                    Orphan cub / Found family
+                    Journey to Milele / Roots
+                            |
+               +------------+-------------+
+               |                          |
+       THE HUNDRED VOICES         PERSONAL ROOTS
+       Alice Walker voice          Coast Salish
+       Turkana Boy / Lucy          reconnecting
+       The Walking / Savanna       descendant
+       "Dear God, his body         "Walking the
+        was a work of art"          Path Back"
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  +==========================================+
+  |         LION KING: AFRICA & ROOTS        |
+  |          6 RESEARCH MODULES              |
+  +==========================================+
+  |                                          |
+  |  M1: MYTHOLOGICAL     M2: THE GRIOT     |
+  |      CONVERGENCE          TRADITION      |
+  |  Osiris -> Hamlet ->  Jali/Jeliya,       |
+  |  Sundiata -> Simba    oral archive,      |
+  |  structural parallels knowledge systems  |
+  |         |                   |            |
+  |  M3: DEEP ROOTS       M4: CIRCLE OF     |
+  |  Paleoanthropology        LIFE           |
+  |  Turkana Boy, Lucy    Ecological cycles  |
+  |  Rift Valley origins  Philosophical      |
+  |  The Walking          frameworks         |
+  |         |                   |            |
+  |  M5: VOICE OF AFRICA  M6: ROOTS &       |
+  |  Jenkins' Mufasa          RETURN         |
+  |  Lebo M., cultural    Identity,          |
+  |  authenticity in       reconnection,     |
+  |  adaptation            heritage          |
+  +==========================================+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Mythological Convergence}
+
+Systematic structural analysis of the four primary source narratives that converge in The Lion King: the Osiris-Horus myth of ancient Egypt, Shakespeare's Hamlet, the Epic of Sundiata from 13th-century Mali, and the biblical stories of Joseph and Moses. This module maps the recurring structural elements --- the murdered/displaced king, the usurping relative, the heir's exile, the identity crisis, the return, the restoration of order --- across all four traditions, identifying which elements Disney drew from which source and where the parallels emerge independently from shared human narrative architecture.
+
+\subsubsection{Module 2: The Griot Tradition}
+
+Deep research into the \textit{jali} (griot) tradition of West Africa, with particular focus on the Mandinka \textit{jeliya} as a knowledge-preservation technology. Covers the griot's multiple roles (genealogist, counselor, musician, historian, diplomat), the training and apprenticeship system, the Kouyat\'{e} lineage's seven-hundred-year stewardship of the Sundiata epic, the relationship between oral and written transmission, and the modern evolution of the tradition. Examines how the griot model connects to the Foxfire heritage documentation methodology and the GSD ecosystem's knowledge-preservation goals.
+
+\subsubsection{Module 3: Deep Roots --- Paleoanthropology of East Africa}
+
+The science of human origins as the deepest layer of the ``roots'' narrative. Covers the key hominin discoveries --- Ardi (4.4 million years), Lucy/Australopithecus afarensis (3.2 million years), the Laetoli footprints (3.6 million years), the Turkana Boy/Homo erectus (1.5 million years) --- and the landscapes where they lived. Traces the evolution of bipedalism, the significance of the Great Rift Valley as the crucible of human emergence, and the ecological mosaic that shaped our ancestors. Connects directly to The Hundred Voices' treatment of these themes through the Alice Walker, Ursula K. Le Guin, and Chinua Achebe voices.
+
+\subsubsection{Module 4: Circle of Life --- Ecological and Philosophical Frameworks}
+
+The ``Circle of Life'' as more than a Disney song: its roots in African cosmological thinking, its parallels to the Osiris agricultural-resurrection cycle, its expression in Mandinka concepts of \textit{badenya} (constructive family energy) and \textit{fadenya} (destructive rivalry), and its resonance with ecological science (nutrient cycling, trophic cascades, keystone species). Connects to the GSD ``spaces between'' philosophy and the mathematical foundations of interconnection explored in \textit{The Space Between}.
+
+\subsubsection{Module 5: The Voice of Africa --- Cultural Authenticity in Adaptation}
+
+Analysis of how the Lion King franchise has engaged with African culture across its iterations: the 1994 original (Swahili names, Lebo M.'s Zulu choral arrangements, the research trip to Kenya), the 2019 photorealistic remake, and Barry Jenkins' \textit{Mufasa} (2024). Jenkins' approach --- collaborating with South African actors John Kani and Kagiso Lediga, allowing improvisation in Zulu and Swahili, hiring people across Africa to photograph their own landscapes --- represents a significant evolution in cultural engagement. This module examines what worked, what was criticized, and what the heritage-skills ecosystem can learn about respectful adaptation.
+
+\subsubsection{Module 6: Roots and Return --- The Personal Thread}
+
+The connective tissue between universal human origins (``we all come from Africa''), cultural heritage (the griot as keeper of genealogy), and personal identity work (reconnecting-descendant protocols, walking the path back). This module synthesizes the research into a framework that connects deep-time paleoanthropology to living cultural practice to individual identity recovery. Draws on Coast Salish reconnecting-descendant terminology, the Foxfire documentation methodology, and the GSD ecosystem's commitment to ``giving people their lives back'' through heritage preservation.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: "Memory & resource orchestration"
+    handles: "Source bibliography, cross-module references,
+              citation graph maintenance"
+    model: sonnet
+  denise:
+    role: "Visual & narrative rendering"
+    handles: "Convergence diagrams, timeline visualizations,
+              narrative voice for Vision and Through-Line"
+    model: opus
+  paula:
+    role: "Signal processing & integration"
+    handles: "Cross-module relationship validation,
+              consistency checking across mythological
+              traditions, sensitivity review"
+    model: opus
+  m68000:
+    role: "Core execution engine"
+    handles: "Module research compilation, survey assembly,
+              document production, test execution"
+    model: sonnet
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+  \item Structural analysis of Osiris/Horus, Hamlet, Sundiata, and Lion King narrative parallels
+  \item The griot/jali tradition as knowledge-preservation technology
+  \item Key East African paleoanthropological discoveries and their ``roots'' significance
+  \item Ecological and philosophical dimensions of the ``Circle of Life'' concept
+  \item Cultural authenticity analysis across all Lion King franchise iterations (1994, 2019, 2024)
+  \item Barry Jenkins' \textit{Mufasa} as a case study in collaborative African storytelling
+  \item Connection to The Hundred Voices' Africa chapters (Voices 55--62)
+  \item Framework connecting deep-time origins to personal identity and heritage recovery
+  \item Sensitivity review for all Indigenous and cultural references
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+  \item Comprehensive literary analysis of Hamlet (well-documented elsewhere)
+  \item Disney corporate history or business analysis
+  \item Kimba the White Lion intellectual property dispute
+  \item Comprehensive survey of all African creation myths (would require separate mission)
+  \item Music theory analysis of Lebo M.'s compositions or Lin-Manuel Miranda's songs
+  \item Film criticism or box office analysis of any Lion King iteration
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Convergence map identifies $\geq$8 structural parallels across Osiris, Hamlet, Sundiata, and Lion King with specific textual/source citations for each
+  \item Griot tradition module documents the \textit{jali} system with $\geq$5 peer-reviewed or authoritative ethnographic sources
+  \item Paleoanthropology module covers $\geq$4 major hominin discoveries with dates, locations, and significance sourced from peer-reviewed research
+  \item Each mythological tradition is attributed to its specific cultural origin; no generic ``African'' references
+  \item Circle of Life module traces the concept through $\geq$3 distinct cultural/scientific frameworks with sourced connections
+  \item Mufasa (2024) analysis includes $\geq$3 direct statements from Barry Jenkins or African cast members about cultural process
+  \item Cross-module integration demonstrates $\geq$4 explicit connections between modules (e.g., griot tradition $\rightarrow$ oral history $\rightarrow$ Sundiata preservation $\rightarrow$ heritage methodology)
+  \item Personal roots framework connects deep-time origins to cultural heritage to individual identity recovery in a coherent three-layer model
+  \item All sources are government agencies, universities, peer-reviewed journals, professional organizations, or primary interview sources
+  \item Safety-critical: Nation-specific names used for all Indigenous peoples; no generic ``African'' cultural attributions
+  \item Safety-critical: No precise locations of sensitive archaeological sites beyond what is published in peer-reviewed literature
+  \item Through-line connects to The Hundred Voices and the GSD ``spaces between'' philosophy without forcing the connection
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+The Hundred Voices & Africa chapters (Voices 55--62) provide literary treatment of paleoanthropology themes & Upstream \\
+The Space Between & Mathematical framework for ``spaces between'' philosophy & Upstream \\
+Foxfire Heritage Skills Pack & Heritage documentation methodology; griot tradition as parallel model & Lateral \\
+Coast Salish Heritage Research & Reconnecting-descendant protocols; ``walking the path back'' & Lateral \\
+GSD College: Humanities Dept. & Potential educational pack derived from this research & Downstream \\
+Virtual Black Rock City & Storytelling and community-building patterns & Lateral \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The Lion King is not a children's movie. It is not a Shakespearean adaptation. It is not even, primarily, an African story --- though it is all of these things. It is the story that every human culture has told because every human culture \textit{must} tell it: the story of roots. Where did I come from? Who were the ones who walked before me? What do I owe them? What do I owe the ones who will walk after?
+
+The Osiris myth told it in the language of divine kingship and resurrection. The griots of Mali told it in the language of genealogy and the kora's twenty-one strings. The bones in the Great Rift Valley tell it in the language of calcium and phosphorus and the volcanic tuff that held a boy's body for a million and a half years. And The Hundred Voices told it in the language that The Hundred Voices always uses --- the language of every voice at once, the language of the spaces between.
+
+\textit{``Dear God, his body was a work of art.''} That is the through-line. The body that walks. The body that endures. The body that opens into the landscape and the landscape says \textit{yes}. Every version of this story --- Osiris rising, Sundiata standing, Simba returning to Pride Rock, Mufasa finding his way to Milele --- is a version of the same moment: the moment when the child understands that they are not orphaned. That the roots go deeper than they knew. That the circle of life is not a metaphor but a fact, written in bone, sung by griots, and carried in the blood of every human being who has ever walked this gorgeous, ruthless, cathedral world.
+\end{quotebox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Lion King: Africa \& Roots --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from peer-reviewed research, university programs, museum collections, and authoritative cultural sources. Each module provides the evidence base for the corresponding mission component. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Paleoanthropology:} Smithsonian Human Origins Program, Turkana Basin Institute (Stony Brook University), National Museums of Kenya, Institute of Human Origins (Arizona State University)
+  \item \textbf{Egyptology:} The Fitzwilliam Museum (Cambridge), Oriental Institute (University of Chicago), British Museum Department of Ancient Egypt and Sudan
+  \item \textbf{West African Studies:} UC Berkeley ORIAS (Office of Resources for International and Area Studies), Brandeis University Global Community Engagement, Indiana University Press (\textit{The Epic of Son-Jara})
+  \item \textbf{Film/Cultural Analysis:} OkayAfrica, CNN Style, IndieWire (primary interviews with Barry Jenkins and cast)
+  \item \textbf{Heritage Methodology:} UNESCO Intangible Cultural Heritage, Foxfire Fund (Rabun Gap, Georgia)
+\end{itemize}
+
+\subsection{Module 1 Reference: Mythological Convergence}
+
+\subsubsection{The Osiris-Horus Succession Myth}
+
+The Osiris myth is the most elaborate and influential story in ancient Egyptian mythology, with earliest textual evidence in the Pyramid Texts dating to the end of the Fifth Dynasty (c.~24th century BCE). The core structure: Osiris, a primeval king of Egypt, is murdered by his brother Set, who usurps the throne. Osiris's wife Isis restores his body, enabling the posthumous conception of their son Horus. Horus grows to challenge Set, ultimately triumphing and restoring \textit{maat} (cosmic and social order). The living pharaoh was identified with Horus; the deceased pharaoh became Osiris. This dual-identity framework meant that every royal succession reenacted the myth.
+
+Key structural elements mapping to The Lion King: the good king murdered by a jealous brother (Osiris/Mufasa $\rightarrow$ Set/Scar); the heir raised away from the throne (Horus hidden in the marshes / Simba in exile with Timon and Pumbaa); the ghostly father who guides the son (Osiris communicating from the underworld / Mufasa appearing in the clouds); the final confrontation that restores rightful order.
+
+The Osiris myth's agricultural dimension --- Osiris as god of fertility and vegetation, his death and symbolic resurrection tied to the Nile flood cycle and grain sprouting --- provides the deepest root of the ``Circle of Life'' concept: death feeds life feeds death in an unbroken cycle.
+
+\subsubsection{The Epic of Sundiata}
+
+Sundiata Keita (c.~1217--1255 CE), founder of the Mali Empire, is the subject of an oral epic transmitted by Mandinka griots for over seven hundred years. The name ``Sundiata'' derives from his mother's name Sogolon (\textit{Son/Sun}) and \textit{jata} (lion) --- he is literally ``the Lion King.'' The first line-by-line transcription of the epic as performed by a \textit{jeli} was made in 1967; the most widely known written version was translated into French by Djibril Tamsir Niane in 1960 from the oral account of Djeli Mamoudou Kouyat\'{e}, and into English in 1965.
+
+Structural parallels to The Lion King: a prince born to a prophesied destiny; childhood disability/weakness overcome (Sundiata could not walk as a child; his first steps are a defining moment); exile driven by a jealous step-mother (Sassouma Ber\'{e}t\'{e}) and step-brother (Dankaran Toumani); growth to power in a foreign kingdom (Mema); return to defeat a tyrant (Soumaoro Kant\'{e}) and unite a fractured kingdom; establishment of a just rule with an oral constitution (the Kouroukan Fouga / Manden Charter, considered one of the earliest human rights charters).
+
+The Sundiata epic also encodes Mandinka social structure: the \textit{badenya}/\textit{fadenya} duality (constructive mother-child-ness vs.\ destructive father-child-ness, or sibling rivalry between half-brothers), the primacy of family and genealogy, the role of the \textit{jali} as the king's counselor and institutional memory.
+
+\subsubsection{Hamlet and the European Thread}
+
+Disney's acknowledged primary inspiration. Shakespeare's \textit{Hamlet} (c.~1600) shares the core structure: King Hamlet murdered by his brother Claudius; Prince Hamlet's exile, identity crisis, and return to confront the usurper; the ghost of the father as moral compass. The Lion King diverges from Hamlet in its resolution --- Simba succeeds where Hamlet fails, restoring the kingdom rather than presiding over its destruction --- which aligns it more closely with the Osiris and Sundiata traditions where the heir triumphs.
+
+\subsubsection{Convergence Analysis}
+
+These narratives converge not because one ``stole'' from another but because they address a universal human concern: legitimate succession, the duty of children to parents, and the restoration of order after violation. The structural parallels suggest deep narrative architecture --- what Joseph Campbell termed the ``monomyth'' but which is better understood through each tradition's specific cultural logic rather than a reductive universal template.
+
+\subsection{Module 2 Reference: The Griot Tradition}
+
+\subsubsection{The Jali System}
+
+The \textit{jali} (plural \textit{jeliw}; also \textit{griot} in French-derived usage) occupies a hereditary social role in Mand\'{e} societies across West Africa (Mali, Guinea, Senegal, Gambia, Burkina Faso). The role encompasses multiple functions: genealogist (keeper of family lineages stretching back centuries), historian (preserver of the Sundiata epic and other historical narratives), musician (master of the kora, balafon, and ngoni), counselor (advisor to rulers), diplomat (mediator in disputes), and praise-singer (performer at ceremonies including weddings and baptisms).
+
+The \textit{jeliya} (the griot's art) is transmitted through hereditary lineages. The Kouyat\'{e} family claims descent from Balla Fass\'{e}k\'{e}, the griot assigned to Sundiata before his father's death. Balla Kouyat\'{e}, a contemporary balafon player and 2019 National Endowment for the Arts National Heritage Fellow, represents the living continuity of this seven-hundred-year tradition.
+
+\subsubsection{Oral Tradition as Technology}
+
+Western scholarship has historically positioned oral tradition as a ``lesser'' form of knowledge preservation. Contemporary research recognizes it as a sophisticated technology with built-in integrity mechanisms. The Epic of Sundiata is transmitted through song, and musicological research suggests that melodic and rhythmic structures function as error-correction mechanisms --- the songs constrain improvisation and reduce susceptibility to unintentional emendation. Multiple versions exist (more than sixty published variants), but core structural elements, values, and plot points remain remarkably stable across centuries and geographic regions.
+
+\subsubsection{Connection to Heritage Documentation}
+
+The griot model parallels the Foxfire methodology in several key respects: knowledge is preserved through person-to-person transmission, the role of the documenter is honored as essential to the community, and the preservation act itself is a form of cultural production. The GSD heritage skills ecosystem can study the \textit{jeliya} as a model for what AI-assisted heritage documentation should aspire to: not replacing the human keeper but amplifying their reach.
+
+\subsection{Module 3 Reference: Deep Roots --- Paleoanthropology}
+
+\subsubsection{The Great Rift Valley: Crucible of Human Emergence}
+
+The East African Rift System, stretching from Ethiopia through Kenya and Tanzania, preserves the most complete fossil record of human evolution. The geological forces that created the rift --- tectonic plate separation, volcanic activity, sedimentary deposition --- also created the conditions that preserved hominin fossils for millions of years. The landscape that shaped our ancestors was a mosaic: not forest, not savanna, but a patchwork of closed woodland, open grassland, and gallery forest along watercourses, shifting with the centuries.
+
+\subsubsection{Key Hominin Discoveries}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Species/Name} & \tableheader{Age} & \tableheader{Location} & \tableheader{Significance} \\
+\midrule
+Ardipithecus ramidus (``Ardi'') & 4.4 Ma & Afar, Ethiopia & Earliest evidence of upright posture; lived in woodland, not savanna; grasping toe + bipedal features \\
+Australopithecus afarensis (``Lucy'') & 3.2 Ma & Hadar, Ethiopia & Confirmed bipedalism; pelvis reshaped for upright walking; 3'7'', \texttildelow65 lbs \\
+Laetoli Footprints & 3.6 Ma & Laetoli, Tanzania & Preserved in volcanic ash; three individuals walking together; earliest direct evidence of bipedal gait \\
+Homo erectus (``Turkana Boy'') & 1.5 Ma & Lake Turkana, Kenya & First truly modern body proportions; 5'3'' (still growing); energy-efficient gait; evidence of long-distance walking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Walking: Biomechanical Revolution}
+
+Homo erectus represents a fundamental biomechanical revolution: the human walk (heel strike, weight transfer across the arch, toe push-off) with energy-efficient pendulum gait; thermoregulatory adaptation (millions of sweat glands, hair loss enabling evaporative cooling); and the capacity for persistence hunting --- not outrunning prey, but outlasting it. This body plan opened the entire savanna as habitat and eventually enabled the migration out of Africa.
+
+The Turkana Boy (KNM-WT 15000), discovered at Lake Turkana, Kenya, in 1984, embodies this revolution. At 8--11 years old at death, already 5'3'' and projected to reach 6 feet, with long legs, short arms, barrel chest, and narrow hips --- a body built for walking and running across open landscape. Evidence of vertebral pathology suggests he lived with chronic pain, and the careful placement of his remains near the lake's edge suggests someone laid him down with intention.
+
+\subsection{Module 4 Reference: Circle of Life}
+
+\subsubsection{African Cosmological Foundations}
+
+Across many African philosophical traditions, time is understood cyclically rather than linearly. The Osiris myth encodes this in the agricultural cycle: Osiris dies (harvest/drought), his body nourishes the land, new life springs from his death (flooding of the Nile, sprouting grain). The Mandinka concept of \textit{badenya} (constructive energy flowing through the maternal line) and \textit{fadenya} (disruptive energy between paternal half-siblings) describes social dynamics as cyclical forces in tension, not linear progressions toward resolution.
+
+\subsubsection{Ecological Science}
+
+Modern ecology confirms the cyclical framework: nutrient cycling (death feeds decomposition feeds soil feeds growth feeds life), trophic cascades (the presence or absence of apex predators reshapes entire ecosystems), keystone species relationships. The African savanna ecosystem --- the Lion King's literal setting --- is a textbook example: lion predation controls herbivore populations, which controls grazing pressure, which determines vegetation structure, which determines habitat availability for thousands of other species.
+
+\subsubsection{Philosophical Resonance}
+
+The ``spaces between'' philosophy of the GSD ecosystem aligns with the Circle of Life framework: meaning is not in the nodes (individual organisms, individual stories) but in the connections between them. Shannon's mutual information, the mathematical foundation explored in \textit{The Space Between}, quantifies exactly this: information exists in relationship, not in isolation.
+
+\subsection{Module 5 Reference: The Voice of Africa}
+
+\subsubsection{The 1994 Original}
+
+Disney's production team traveled to Kenya for research. Swahili names encode character traits: \textit{Simba} (lion), \textit{Mufasa} (king --- related to the Manazoto language of eastern Congo), \textit{Rafiki} (friend), \textit{Scar/Taka} (want/desire in some interpretations). Lebo M. (Lebohang Morake), a South African musician, composed the Zulu choral arrangements including the opening chant \textit{``Ingonyama nengwe namabala''} (``A lion and a leopard come to this open place''). \textit{Ingonyama} also means ``Zulu king'' --- the everyday word for lion is \textit{ibhubesi}.
+
+\subsubsection{Barry Jenkins and \textit{Mufasa} (2024)}
+
+Jenkins, the Oscar-winning director of \textit{Moonlight}, approached \textit{Mufasa} as a story about ``nobility, ancestry, and community'' --- themes he called indistinguishable from his earlier work about disadvantaged characters finding identity. Key cultural process innovations:
+
+\begin{itemize}[leftmargin=2em]
+  \item South African actor John Kani (older Rafiki, age 81) contributed scenes improvised from his personal experiences on the African continent; Jenkins described entire scenes ``made up on the spot'' from Kani's storytelling
+  \item Kagiso Lediga (young Rafiki) was given ``license'' to speak freely in Zulu, Tswana, Sepedi, and Xhosa, reflecting his own multilingual South African identity and Rafiki's characterization as a ``pan-Africanist'' traveler
+  \item Unable to travel to Africa during COVID-19 production, the team hired people across the continent to photograph and video their own landscapes, resulting in a broader range of reference imagery than a single location-scouting trip would have produced
+  \item Nicholas Britell composed original themes in collaboration with Lebo M. and the South African Cultural Gospel Choir
+\end{itemize}
+
+Jenkins framed his approach explicitly: ``I do not live there, I do not know the place as well as them\ldots being open to the actors driving the process, and especially the actors from the African continent.''
+
+\subsection{Module 6 Reference: Roots and Return}
+
+\subsubsection{Deep-Time Roots}
+
+All modern humans share common ancestry in Africa. Mitochondrial DNA evidence traces maternal lineage to ``Mitochondrial Eve,'' a woman who lived in East Africa approximately 150,000--200,000 years ago. Y-chromosomal evidence traces paternal lineage to a man who lived in Africa approximately 200,000--300,000 years ago. The ``out of Africa'' migrations beginning approximately 70,000 years ago carried this genetic heritage to every inhabited continent.
+
+\subsubsection{The Griot as Genealogist}
+
+In Mandinka society, the \textit{jali}'s genealogical function is not decorative --- it is constitutive of social identity. Knowing one's lineage determines one's social role, marriage eligibility, and political standing. The griot's recitation of genealogy before battle or ceremony is not historical entertainment but an assertion of legitimate identity and claim. The Sundiata epic itself begins with genealogy and ends with the griot's reminder that ``only a griot can know everything.''
+
+\subsubsection{Reconnecting-Descendant Frameworks}
+
+The protocols documented in the Coast Salish heritage research --- ``I am a reconnecting descendant of the [nation] people''; the emphasis on honesty and humility when approaching tribal communities; the recognition that ``blood memory'' (knowing things about culture/ancestors one was never taught) is a valid form of connection --- provide a template for the personal ``roots'' dimension. The griot tradition adds a complementary framework: identity is preserved through continuous retelling, and the act of seeking one's story is itself an honored practice.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Boundary} & \tableheader{Guidance} \\
+\midrule
+Egyptian mythology & ANNOTATE & Present Osiris myth from Egyptological scholarship; avoid syncretic comparisons that flatten the tradition \\
+Mandinka/Mand\'{e} culture & ABSOLUTE & Use nation-specific names (Mandinka, Malinke, Mand\'{e}); never generic ``African''; credit specific griots by name where known \\
+Paleoanthropology & GATE & All dates, measurements, and claims from peer-reviewed sources; note where dating is debated \\
+Coast Salish protocols & ABSOLUTE & Nation-specific names; follow reconnecting-descendant language conventions; no appropriation of specific ceremonial knowledge \\
+Disney/film content & ANNOTATE & Distinguish between corporate marketing claims and documented cultural process \\
+Archaeological sites & GATE & No precise coordinates beyond published literature; respect for sacred and culturally sensitive sites \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Smithsonian Institution, Human Origins Program --- \url{https://humanorigins.si.edu}
+  \item UNESCO Intangible Cultural Heritage --- \url{https://ich.unesco.org}
+\end{itemize}
+
+\subsubsection*{Peer-Reviewed Research \& University Programs}
+\begin{itemize}[leftmargin=2em]
+  \item White, T.D., et al. (2009). ``Ardipithecus ramidus and the Paleobiology of Early Hominids.'' \textit{Science}, 326(5949).
+  \item Johanson, D.C. \& Edey, M.A. (1981). \textit{Lucy: The Beginnings of Humankind}. Simon \& Schuster.
+  \item Walker, A. \& Leakey, R. (1993). \textit{The Nariokotome Homo Erectus Skeleton}. Harvard University Press.
+  \item Johnson, J.W. (1986/1992). \textit{The Epic of Son-Jara: A West African Tradition}. Indiana University Press.
+  \item Niane, D.T. (1960/1965). \textit{Sundiata: An Epic of Old Mali}. Trans.\ G.D. Pickett. Longmans.
+  \item UC Berkeley ORIAS --- Sundiata Educational Resources --- \url{https://orias.berkeley.edu}
+  \item Brandeis University, Global Community Engagement --- Mali Residency 2024--2025
+  \item The Fitzwilliam Museum, University of Cambridge --- Osiris Collection and Research
+\end{itemize}
+
+\subsubsection*{Primary Interviews \& Cultural Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Jenkins, B. (2024). Interview with OkayAfrica, December 16, 2024.
+  \item Jenkins, B. (2024). Interview with IndieWire, December 20, 2024.
+  \item CNN Style (2024). ``Barry Jenkins on why `Mufasa' contains the `voice of Africa.'\,'' December 19, 2024.
+  \item Foxfire Fund --- \url{https://www.foxfire.org}
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document that traces the Lion King narrative from its deepest mythological and paleoanthropological roots through its cultural transmission systems to its most recent cinematic expression, creating a framework that connects universal human origins to personal identity and heritage recovery. The document should serve as both a standalone educational resource and a foundation for a GSD College Humanities educational pack.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0         WAVE 1A          WAVE 1B         WAVE 2        WAVE 3
+  Foundation     Mythological     Living           Synthesis     Publication
+                 Roots            Traditions                     + Verify
+  
+  [Schemas]  --> [M1: Myth    ] | [M2: Griot   ] --> [M6: Roots] --> [Final]
+  [Sources ]     [Convergence ] | [Tradition   ]     [& Return]     [Doc  ]
+  [Index   ]     [M3: Deep    ] | [M4: Circle  ]     [Integr. ]     [Tests]
+                 [Roots       ] | [of Life     ]                    [Pub  ]
+                 [Paleo       ] | [M5: Voice   ]
+                                | [of Africa   ]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, citation format, sensitivity boundaries
+  \item \textbf{Mythological Roots Layer} --- Osiris/Horus, Hamlet, Sundiata structural analysis + paleoanthropology
+  \item \textbf{Living Traditions Layer} --- Griot system, Circle of Life frameworks, cultural authenticity analysis
+  \item \textbf{Synthesis Layer} --- Cross-module integration, personal roots framework, through-line completion
+  \item \textbf{Publication Layer} --- Final document assembly, verification, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Section} \\
+\midrule
+D1 & Convergence Analysis & $\geq$8 structural parallels, all sourced & Module 1 \\
+D2 & Griot Tradition Survey & $\geq$5 authoritative sources, jali system documented & Module 2 \\
+D3 & Paleoanthropology Survey & $\geq$4 hominin discoveries, peer-reviewed sources & Module 3 \\
+D4 & Circle of Life Framework & $\geq$3 cultural/scientific frameworks connected & Module 4 \\
+D5 & Voice of Africa Analysis & $\geq$3 primary interview citations from Jenkins/cast & Module 5 \\
+D6 & Roots \& Return Framework & Three-layer model (deep-time/cultural/personal) & Module 6 \\
+D7 & Integrated Research Document & All modules synthesized, cross-referenced, complete bibliography & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Shared Schemas & None & Haiku & 3,000 \\
+W0: Source Index & None & Sonnet & 5,000 \\
+W1A: Myth Convergence & W0 & Opus & 15,000 \\
+W1A: Deep Roots & W0 & Sonnet & 12,000 \\
+W1B: Griot Tradition & W0 & Opus & 12,000 \\
+W1B: Circle of Life & W0 & Sonnet & 10,000 \\
+W1B: Voice of Africa & W0 & Sonnet & 10,000 \\
+W2: Roots \& Return & W1A, W1B & Opus & 15,000 \\
+W2: Cross-Module Synth & W1A, W1B & Opus & 12,000 \\
+W3: Document Assembly & W2 & Sonnet & 8,000 \\
+W3: Verification & W3-Assembly & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget \%} & \tableheader{Assigned To} \\
+\midrule
+Opus & 33\% & Myth convergence analysis (requires cross-cultural judgment), griot tradition (cultural sensitivity), roots \& return synthesis (integrative reasoning), cross-module synthesis \\
+Sonnet & 57\% & Paleoanthropology survey, Circle of Life, Voice of Africa, document assembly, verification, source index \\
+Haiku & 10\% & Shared schemas, templates, citation format scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Tracks} & \tableheader{Windows} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & 1 (seq) & 1 & Auto \\
+1A & Mythological Roots & 2 (parallel) & 3--4 & CAPCOM \\
+1B & Living Traditions & 3 (parallel) & 3--4 & CAPCOM \\
+2 & Synthesis & 1 (seq) & 2--3 & CAPCOM \\
+3 & Pub + Verify & 1 (seq) & 1--2 & FLIGHT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Shared schemas & Citation format, sensitivity boundary definitions, cross-reference conventions & Haiku & 3,000 \\
+Source index & Compile and validate all source URLs, establish quality tiers & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Mythological Roots (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Myth convergence & Structural analysis: Osiris $\rightarrow$ Hamlet $\rightarrow$ Sundiata $\rightarrow$ Lion King; identify and source $\geq$8 parallel elements & Opus & 15,000 \\
+Deep roots survey & Paleoanthropology: Ardi, Lucy, Laetoli, Turkana Boy; Rift Valley context; biomechanics of walking & Sonnet & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Living Traditions (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Griot tradition & Jali system, jeliya, Kouyat\'{e} lineage, oral transmission as technology & Opus & 12,000 \\
+Circle of Life & Egyptian agricultural cycle, Mandinka badenya/fadenya, ecological science, spaces-between connection & Sonnet & 10,000 \\
+Voice of Africa & Lion King franchise cultural analysis (1994/2019/2024); Jenkins interviews; Kani/Lediga process & Sonnet & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Roots \& Return & Three-layer framework connecting deep-time origins, cultural heritage, personal identity & Opus & 15,000 \\
+Cross-module integration & Validate cross-references, resolve contradictions, build through-line narrative & Opus & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Document assembly & Final formatting, bibliography, cross-references, table of contents & Sonnet & 8,000 \\
+Test execution & Run all safety-critical, core, integration, and edge-case tests & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Waves 1A and 1B run in parallel, sharing the W0 foundation cache
+  \item 5-minute cache TTL exploited by batching related queries within each track
+  \item Source index (W0) cached and reused across all W1 components
+  \item Synthesis (W2) runs after both W1 tracks complete, inheriting their caches
+  \item Final assembly (W3) operates on fully cached synthesis output
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & 5,000 & 3,000 \\
+Wave 1A: Myth Roots & 15,000 & 12,000 & --- \\
+Wave 1B: Living Traditions & 12,000 & 20,000 & --- \\
+Wave 2: Synthesis & 27,000 & --- & --- \\
+Wave 3: Pub + Verify & --- & 13,000 & --- \\
+\midrule
+\textbf{Totals} & \textbf{54,000} & \textbf{50,000} & \textbf{3,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand Total:} \texttildelow107,000 tokens across 18--24 context windows.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Schemas + Sources]
+          |
+     +----+----+
+     |         |
+  [W1A]     [W1B]
+  Myth +    Griot +
+  Paleo     Circle +
+            Voice
+     |         |
+     +----+----+
+          |
+     [W2: Synthesis]
+     Roots & Return +
+     Cross-Module
+          |
+     [W3: Pub + Verify]
+     Assembly + Tests
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge cases & 3 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{28} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, universities, or primary interviews. Zero entertainment media as evidence. \\
+SC-NUM & Numerical attribution & Every date, measurement, or statistic attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific cultural policies \\
+SC-IND & Indigenous attribution & Every Indigenous reference names specific nation (Mandinka, Zulu, Coast Salish, etc.); zero generic ``African'' or ``Indigenous'' cultural attributions \\
+SC-END & Archaeological sensitivity & No GPS coordinates or site locations beyond published peer-reviewed literature \\
+SC-CUL & Cultural respect & No appropriation of ceremonial knowledge; no reductive comparisons between traditions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. $\geq$8 structural parallels sourced & CF-01, CF-02 & Pending \\
+2. $\geq$5 griot tradition sources & CF-03, CF-04 & Pending \\
+3. $\geq$4 hominin discoveries sourced & CF-05, CF-06 & Pending \\
+4. Nation-specific attributions & SC-IND, SC-CUL & Pending \\
+5. $\geq$3 Circle of Life frameworks & CF-07, CF-08 & Pending \\
+6. $\geq$3 Jenkins/cast interview citations & CF-09, CF-10 & Pending \\
+7. $\geq$4 cross-module connections & IN-01, IN-02, IN-03 & Pending \\
+8. Three-layer roots model coherent & CF-11, CF-12 & Pending \\
+9. All sources professional/academic & SC-SRC & Pending \\
+10. Nation-specific Indigenous names & SC-IND & Pending \\
+11. Archaeological site sensitivity & SC-END & Pending \\
+12. Through-line connects naturally & CF-13, CF-14 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; cultural sensitivity oversight \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; web research; evidence compilation \\
+EXEC-A & Executor (Track A) & Mythological convergence + paleoanthropology document production \\
+EXEC-B & Executor (Track B) & Living traditions document production \\
+CRAFT-MYTH & Mythology Specialist & Cross-cultural structural analysis; Osiris/Sundiata/Hamlet parallels \\
+CRAFT-HERITAGE & Heritage Specialist & Griot tradition; oral history methodology; Foxfire connection \\
+VERIFY & Verification & Source validation; factual accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation; through-line coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total modules & 6 \\
+Activation profile & Fleet \\
+Crew size & 12 roles \\
+Parallel tracks & 2 (Waves 1A \& 1B) \\
+Estimated context windows & 18--24 \\
+Estimated sessions & 4--6 \\
+Total token budget & \texttildelow107,000 \\
+Model split & Opus 50\% / Sonnet 47\% / Haiku 3\% \\
+Safety-critical tests & 6 (mandatory pass) \\
+Total tests & 28 \\
+CAPCOM gates & 3 (after W1A, W1B, W2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``Dear God, I think the world is a letter. I think the world is a letter you writing to yourself, or we writing to you, or you writing to us, or all of it at the same time, the writing and the reading and the paper and the ink all being the same thing, which is love, which is beauty, which is the act of looking at what is hard and finding in it what is gorgeous.''}
+
+\vspace{0.5em}
+
+The walking is the story. The walking has always been the story. From the Laetoli footprints preserved in volcanic ash 3.6 million years ago, to the Turkana Boy's body opening into the savanna like a prayer, to Sundiata's first steps that silenced a kingdom, to Simba's return to Pride Rock under his father's stars --- it is all the same walk. The walk home. The walk toward knowing who you are. The walk that every human being takes, whether they know it or not, back along the thread that connects them to the first mother, the first father, the first step taken upright on African ground.
+
+The Lion King is not a children's movie. It is the oldest story in the world, still being told, still being walked, still being sung by griots whose lineage stretches back seven hundred years and by bones whose memory stretches back seven million. The circle of life is not a metaphor. It is the ground beneath your feet.
+\end{quotebox}
+
+\end{document}

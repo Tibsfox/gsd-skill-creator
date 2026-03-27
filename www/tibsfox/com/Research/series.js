@@ -40,6 +40,7 @@
     { id: 'KUB', name: 'KUBE 93.3', path: 'KUB/index.html' },
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
     { id: 'LFR', name: 'Living Forest', path: 'LFR/index.html' },
+    { id: 'LKR', name: 'Lion King Roots', path: 'LKR/index.html' },
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'MCM', name: 'Maritime Compute', path: 'MCM/index.html' },
