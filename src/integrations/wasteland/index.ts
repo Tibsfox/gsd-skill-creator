@@ -539,3 +539,19 @@ export {
   parseUTC,
   normalizeToUTC,
 } from './utc.js';
+
+// Gas City Role Parser (frontmatter + markdown role file parser)
+export {
+  GasCityRoleSchema,
+  extractFrontmatter,
+  parseGasCityRole,
+  parseGasCityRoleFile,
+  discoverRoles,
+  validateRole,
+} from './gas-city-role-parser.js';
+export type {
+  GasCityRoleFrontmatter,
+  GasCityRole,
+  DiscoveryResult,
+  ValidationResult as GasCityValidationResult,
+} from './gas-city-role-parser.js';
