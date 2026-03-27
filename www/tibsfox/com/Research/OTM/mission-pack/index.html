@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odyssey of the Mind — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4527A0;
+    --secondary: #E65100;
+    --tertiary: #00695C;
+    --accent: #7B1FA2;
+    --light-primary: #EDE7F6;
+    --light-secondary: #FFF3E0;
+    --bg: #FAFAFA;
+    --card-bg: #F0EDF5;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; margin-bottom: 1rem; }
+  .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 700; }
+  .header .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; opacity: 0.9; }
+  .container { max-width: 740px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files { display: grid; gap: 1rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); display: block;
+    border-left: 4px solid var(--primary); transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(69,39,160,0.15); }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--primary); }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+  .file-card.tex { border-left-color: var(--tertiary); }
+  .file-card.tex .name { color: var(--tertiary); }
+  h2 { font-family: 'DM Sans', sans-serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 0.8rem; }
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.3rem; font-size: 0.92rem; }
+  .stage-tag { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; color: white; }
+  .s1 { background: var(--primary); }
+  .s2 { background: var(--secondary); }
+  .s3 { background: var(--tertiary); }
+  .quote { background: var(--light-primary); border-left: 3px solid var(--primary); padding: 1rem 1.2rem; margin: 2rem 0; border-radius: 0 6px 6px 0; font-style: italic; font-size: 0.92rem; }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .instructions code { font-family: 'DejaVu Sans Mono', monospace; font-size: 0.82rem; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+  footer { text-align: center; color: var(--subtle); font-size: 0.78rem; padding: 2rem 0; font-family: 'DM Sans', sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Odyssey of the Mind</h1>
+  <div class="subtitle">Creative Problem Solving — Competition Structure, Pedagogy & Educational Impact</div>
+</div>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a class="file-card" href="om-mission.pdf" download>
+      <div class="name">📄 om-mission.pdf</div>
+      <div class="desc">Complete three-stage mission package — Vision → Research → Mission (28 pages)</div>
+    </a>
+    <a class="file-card tex" href="om-mission.tex" download>
+      <div class="name">📝 om-mission.tex</div>
+      <div class="desc">XeLaTeX source — modify and recompile as needed</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3><span class="stage-tag s1">Stage 1</span> Vision Document</h3>
+  <ul>
+    <li>Vision narrative — constraint-driven creative education system</li>
+    <li>Problem statement — 5 concrete gaps in OM documentation</li>
+    <li>Core concept — rules as the creativity engine</li>
+    <li>Program architecture diagram (scoring, divisions, progression)</li>
+    <li>5 research modules with cross-module links</li>
+    <li>12 testable success criteria</li>
+    <li>Ecosystem through-line (Amiga Principle, spaces between)</li>
+  </ul>
+
+  <h3><span class="stage-tag s2">Stage 2</span> Research Reference</h3>
+  <ul>
+    <li><strong>M1:</strong> Competition Framework — 6 problem types, 4 divisions, 3-component scoring, penalties</li>
+    <li><strong>M2:</strong> Coaching & Pedagogy — Outside Assistance rule scenarios, 5-phase methodology, brainstorming</li>
+    <li><strong>M3:</strong> Spontaneous Problem-Solving — 3 types, scoring mechanics, 7+ practice strategies</li>
+    <li><strong>M4:</strong> Educational Impact — Top 10 competencies (Bias & Bias, 2018), STEAM integration, college value</li>
+    <li><strong>M5:</strong> Competition Pathway — Regional→State→World, full cost pipeline, awards, World Finals culture</li>
+    <li>Safety & sensitivity considerations</li>
+    <li>23-source bibliography (CCI, state associations, peer-reviewed research)</li>
+  </ul>
+
+  <h3><span class="stage-tag s3">Stage 3</span> Mission Package</h3>
+  <ul>
+    <li>Squadron activation profile (12 roles, 5 modules)</li>
+    <li>4-wave execution plan with 2 parallel tracks</li>
+    <li>Component breakdown with model assignments (Opus 30% / Sonnet 60% / Haiku 10%)</li>
+    <li>Token budget: ~158,000 across 18 windows in 4 sessions</li>
+    <li>32 tests (5 safety-critical, 16 core, 6 integration, 5 edge)</li>
+    <li>Full verification matrix mapping criteria to tests</li>
+    <li>Crew manifest with CRAFT-EDU and CRAFT-COMP specialists</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF to confirm scope and priorities</li>
+      <li>Hand the complete package to <code>gsd-skill-creator</code> via Claude Code</li>
+      <li>The orchestrator reads Stage 3, activates the Squadron crew, and begins Wave 0</li>
+      <li>CAPCOM gates require human approval between waves</li>
+      <li>Final output: comprehensive Odyssey of the Mind reference document</li>
+    </ol>
+  </div>
+
+  <h2>Recompiling</h2>
+  <div class="instructions">
+    <p>To modify and rebuild the PDF:</p>
+    <ol>
+      <li>Edit <code>om-mission.tex</code> in any text editor</li>
+      <li>Compile with XeLaTeX (requires DejaVu fonts):</li>
+    </ol>
+    <p style="margin-top: 0.5rem;">
+      <code>xelatex -interaction=nonstopmode om-mission.tex</code><br>
+      <code>xelatex -interaction=nonstopmode om-mission.tex</code><br>
+      <code>xelatex -interaction=nonstopmode om-mission.tex</code>
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;">Three passes resolve TOC, cross-references, and page counts.</p>
+  </div>
+
+  <div class="quote">
+    "The fear of the unsolved problem dissolves not through courage but through architecture: constraints that guarantee ownership, time pressure that demands prioritization, surprise that rewards adaptability. The spaces between preparation and performance — these are the generative voids where creativity actually lives."
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem — Vision → Research → Mission Pipeline<br>
+  March 2026
+</footer>
+
+</body>
+</html>
