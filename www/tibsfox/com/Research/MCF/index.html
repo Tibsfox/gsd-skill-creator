@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Cluster Federation &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mcf">
+  <header>
+    <h1>Multi-Cluster Federation</h1>
+    <div class="subtitle">Service Mesh &middot; Istio/Linkerd/Cilium &middot; Multi-Cluster Networking &middot; Federation Patterns</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-federation-control-planes">Federation</a>
+      <a href="page.html?doc=02-service-mesh-cross-cluster">Service Mesh</a>
+      <a href="page.html?doc=03-network-fabric-cni">Network Fabric</a>
+      <a href="page.html?doc=04-day2-operations-observability">Day-2 Ops</a>
+      <a href="page.html?doc=05-foxcompute-integration">FoxCompute</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga was not powerful because it had more transistors than the IBM PC. It was powerful
+      because its three custom chips &mdash; Agnus, Denise, Paula &mdash; each did one thing with mastery,
+      and communicated across a shared bus with minimal overhead. A federated cluster topology is
+      the same principle at infrastructure scale: specialized nodes with dedicated roles, communicating
+      through minimal well-specified interfaces, producing a system whose capability exceeds what any
+      single cluster could achieve. The spaces between the clusters are not dead zones. They are where
+      the protocol lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">38</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">80+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Protocol Stacks</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-federation-control-planes" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Federation Control Planes</h3>
+        <div class="meta"><span class="tag tag-federation">Federation</span> Track A &middot; Control plane architecture</div>
+        <p>Survey of Karmada, Liqo, and Admiralty: centralized vs. P2P vs. scheduling-layer federation.
+        KubeFed lineage and archive. CNCF maturity levels. Scalability benchmarks (Karmada tested to
+        100 large-scale clusters). Push/Pull modes. Failover behavior and suitability for FoxCompute prototype.</p>
+      </a>
+
+      <a href="page.html?doc=02-service-mesh-cross-cluster" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Service Mesh Cross-Cluster Patterns</h3>
+        <div class="meta"><span class="tag tag-mesh">Mesh</span> Track B &middot; East-west communication</div>
+        <p>Istio multi-cluster (primary-remote vs. multi-primary), Linkerd service mirroring, Cilium
+        ClusterMesh eBPF. Performance benchmarks: Linkerd fastest, Cilium 40&ndash;60% less overhead.
+        Ambient Mesh sidecar-free patterns. mTLS identity and SPIFFE/SPIRE workload attestation.</p>
+      </a>
+
+      <a href="page.html?doc=03-network-fabric-cni" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Network Fabric &amp; CNI</h3>
+        <div class="meta"><span class="tag tag-network">Network</span> Track A &middot; eBPF-native connectivity</div>
+        <p>Cilium ClusterMesh deep-dive: eBPF pod-to-pod across cluster boundaries, shared CA, global
+        service discovery. Submariner L3 routing. Skupper L7 application networks. Red Hat Research
+        ICPE 2025 performance study. WireGuard tunnel overlay for rural intermittent connectivity.</p>
+      </a>
+
+      <a href="page.html?doc=04-day2-operations-observability" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Day-2 Operations &amp; Observability</h3>
+        <div class="meta"><span class="tag tag-ops">Operations</span> Track B &middot; Fleet management</div>
+        <p>Configuration drift mechanics. GitOps fleet patterns with ArgoCD app-of-apps. Blast-radius
+        containment. Data sovereignty enforcement (OCAP, GDPR). Cross-cluster RBAC and OIDC identity
+        federation. Observability: Hubble, Thanos, OpenTelemetry, Kiali multi-cluster graph.</p>
+      </a>
+
+      <a href="page.html?doc=05-foxcompute-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: FoxCompute Integration Architecture</h3>
+        <div class="meta"><span class="tag tag-integ">Integration</span> Synthesis &middot; Amiga principle</div>
+        <p>Synthesis module mapping Amiga-principle node roles to cluster boundaries. Federation stack
+        and mesh stack recommendation for Phase 1 prototype. PropagationPolicy templates. Carbon-aware
+        scheduling with solar-intermittent power profiles. Sovereign data enforcement map.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Kubernetes federation (Karmada/Liqo)</td><td>M1, M5</td><td>K8S, SYS, GSD2</td></tr>
+        <tr><td>Service mesh (Istio/Linkerd/Cilium)</td><td>M2, M3, M5</td><td>K8S, CMH, NND</td></tr>
+        <tr><td>eBPF networking &amp; ClusterMesh</td><td>M2, M3</td><td>K8S, NND, OCN</td></tr>
+        <tr><td>mTLS / SPIFFE workload identity</td><td>M2, M3, M4</td><td>CMH, BRC, NND</td></tr>
+        <tr><td>GitOps fleet management (ArgoCD)</td><td>M4, M5</td><td>GSD2, SYS, K8S</td></tr>
+        <tr><td>Blast-radius isolation</td><td>M1, M4, M5</td><td>SYS, CMH, BRC</td></tr>
+        <tr><td>Data sovereignty / OCAP</td><td>M4, M5</td><td>BRC, OCN, MCM</td></tr>
+        <tr><td>Carbon-aware scheduling</td><td>M5</td><td>OCN, K8S, SYS</td></tr>
+        <tr><td>Amiga-principle node roles</td><td>M1, M5</td><td>GSD2, SYS, K8S</td></tr>
+        <tr><td>Cross-cluster observability</td><td>M3, M4</td><td>SYS, CMH, NND</td></tr>
+        <tr><td>WireGuard / BGP peering</td><td>M3, M5</td><td>NND, OCN, SYS</td></tr>
+        <tr><td>PropagationPolicy / workload placement</td><td>M1, M5</td><td>K8S, GSD2, MCM</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+MULTI-CLUSTER FEDERATION -- DOMAIN MAP
+===============================================================
+
+  FEDERATION LAYER            MESH LAYER               OPERATIONS LAYER
+  +------------------+       +------------------+     +------------------+
+  | Karmada          |       | Cilium eBPF      |     | ArgoCD           |
+  | Liqo             |------&gt;| Linkerd Mirror   |----&gt;| Thanos           |
+  | Admiralty         |       | Istio Ambient    |     | Hubble Relay     |
+  | KubeFed (legacy) |       | SPIFFE/SPIRE     |     | OpenTelemetry    |
+  +------------------+       +------------------+     +------------------+
+        |                          |                         |
+        v                          v                         v
+  +------------------+       +------------------+     +------------------+
+  | PropagationPolicy|       | ClusterMesh      |     | Drift Detection  |
+  | OverridePolicy   |       | East-West GW     |     | RBAC Federation  |
+  | Cluster Affinity |       | Global Services  |     | Cert Rotation    |
+  | Push / Pull Mode |       | mTLS / eBPF LB   |     | Blast-Radius     |
+  +------------------+       +------------------+     +------------------+
+        |                          |                         |
+        +------------- -----------+-------------------------+
+                                   |
+                       +-----------+-----------+
+                       |   FOXCOMPUTE FABRIC   |
+                       |                       |
+                       |  Agnus: Control Plane  |
+                       |  Denise: GPU Inference  |
+                       |  Paula: Data Pipeline   |
+                       |  68000: Edge Gateway    |
+                       +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Federation Control Planes] --------&gt; [M3: Network Fabric &amp; CNI]
+         |                                        |
+         |                                        |
+         v                                        v
+  [M2: Service Mesh Cross-Cluster] ----&gt; [M5: FoxCompute Integration]
+         |                                        ^
+         v                                        |
+  [M4: Day-2 Operations] ------------------------+
+
+  Parallel tracks:
+    Track A: M1 + M3 (federation + network fabric)
+    Track B: M2 + M4 (service mesh + operations)
+    Synthesis: M5 (integration architecture)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Multi-Cluster Federation &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
