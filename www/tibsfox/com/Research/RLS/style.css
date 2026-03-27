@@ -1,0 +1,76 @@
+/* RLS -- Resonant Landscapes
+ * Theme: Sound and silence -- forest green with river blue and earth brown
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --forest: #1B5E20;
+  --forest-deep: #0D3B14;
+  --forest-mid: #2E7D32;
+  --river: #1565C0;
+  --river-light: #E3F2FD;
+  --river-dim: #0D47A1;
+  --earth: #4E342E;
+  --earth-light: #EFEBE9;
+  --earth-dim: #3E2723;
+  --meadow: #43A047;
+  --meadow-light: #E8F5E9;
+  --alpine: #90CAF9;
+  --coastal: #0277BD;
+  --stone: #78909C;
+  --sand: #BCAAA4;
+  --wind: #B3E5FC;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #4E342E;
+  --link: var(--river);
+  --card-border: #C8E6C9;
+  --border: #C8E6C9;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--earth-dim) 0%, var(--forest-deep) 25%, var(--forest) 55%, var(--river-dim) 85%, var(--river) 100%);
+  border-bottom: 4px solid var(--river);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--forest-deep); border-bottom-color: var(--border); }
+h3 { color: var(--forest); }
+th { background: var(--forest-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(27, 94, 32, 0.04); }
+tr:hover { background: rgba(27, 94, 32, 0.08); }
+blockquote { border-left-color: var(--forest); background: rgba(27, 94, 32, 0.06); }
+code { background: var(--meadow-light); }
+pre { background: var(--earth-dim); color: #E0E0E0; }
+.stat-value { color: var(--forest-deep); }
+
+/* -- Tags -- */
+.tag-sound { background: #E3F2FD; color: #0D47A1; }
+.tag-sculpture { background: #E8F5E9; color: #1B5E20; }
+.tag-alpine { background: #E0F2F1; color: #00695C; }
+.tag-coastal { background: #FFF3E0; color: #E65100; }
+.tag-islands { background: #E3F2FD; color: #1565C0; }
+.tag-contemplative { background: #F3E5F5; color: #6A1B9A; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: resonance motif -- */
+.resonance-line {
+  background: linear-gradient(90deg, var(--earth-dim), var(--forest), var(--meadow), var(--river), var(--river-dim));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
