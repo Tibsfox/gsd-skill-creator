@@ -1,0 +1,1051 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% History/Media domain color scheme — Burgundy/Gold/Parchment
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFFDE7}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers/footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{KISM 92.9 FM --- Bellingham}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={KISM 92.9 FM Bellingham -- Deep Research Mission},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ======== TITLE PAGE ========
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Classic Rock 92.9 KISM\\[0.3em]The Mount Constitution Signal}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Bellingham, Washington --- Northwest Broadcasting Heritage}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+%% ======== TABLE OF CONTENTS ========
+\tableofcontents
+\newpage
+
+%% ======================================================================
+%%  STAGE 1 — VISION DOCUMENT
+%% ======================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{KISM 92.9 FM --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{PNW broadcasting heritage, Bellingham media ecosystem, community radio culture}
+
+\subsection{Vision}
+
+There is a transmitter on Mount Constitution, 2,409 feet above the waters of the San Juan Islands, and it has been throwing signal across the border since before most of the people who listen to it were born. KISM 92.9 FM is not merely a classic rock station in a small Northwest Washington market. It is the FM descendant of one of the most consequential broadcasting operations in Pacific Northwest history --- a lineage that traces through Rogan Jones, the Supreme Court, cross-border television warfare, and a CCC-built stone tower that nearly got demolished in 1973.
+
+The station's story is the story of how a small city punched above its weight by exploiting geography. Mount Constitution's elevation gives a 50,000-watt FM signal a footprint that reaches from Seattle's northern suburbs to Greater Vancouver, covering a population basin of roughly four million people from a city of under 100,000. That ratio --- the architectural leverage of positioning over raw market size --- is a broadcasting version of the Amiga Principle. The right transmitter on the right mountain with the right signal does more than a hundred kilowatts on flat ground.
+
+This research mission captures the full KISM story: the Rogan Jones broadcasting dynasty that founded it, the Mount Constitution infrastructure that amplifies it, the Saga Communications ownership that sustains it, the cross-border signal dynamics that complicate it, and the community programming that gives it meaning. It is a study of how a radio signal connects a region --- from Bellingham's Yew Street studios to the orchards and islands and border crossings of the Pacific Northwest.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \textbf{Fragmented History.} KISM's story spans four call signs (KVOS, KGMI-FM, KVGM, KISM), multiple format changes, and a founding dynasty that also created KVOS-TV. No single reference traces the complete lineage from 1960 through the 2025 rebrand to Pacific Northwest Media Group.
+
+\item \textbf{Undocumented Technical Infrastructure.} The Mount Constitution transmitter site is shared by multiple broadcasters, uses HD Radio with two subchannels, and was upgraded with a Nautel NV30 (later GV40 on a co-located station). The technical story of how this hilltop site serves an entire region is scattered across FCC filings, equipment vendor case studies, and radio enthusiast forums.
+
+\item \textbf{Cross-Border Signal Dynamics.} KISM's 92.9 FM signal interacts with Canadian stations, particularly Vancouver's CKYE ``Red FM'' on 93.1. The US-Canada frequency coordination agreements, HD Radio splatter effects, and the unique cross-border audience have never been systematically documented from KISM's perspective.
+
+\item \textbf{Community Impact Unrecorded.} Programs like ``Vehicle for a Vet'' (eight years running), the toilet paper drive for Skagit Friendship House (14,000+ rolls), and the Brad \& John morning show's civic engagement represent a community radio tradition that exists mostly in ephemeral web content and on-air memory.
+
+\item \textbf{Ownership Ecosystem Context.} Saga Communications' ``Goldilocks market'' strategy and the 2025 rebrand from Cascade Radio Group to Pacific Northwest Media Group represent a broader story about small-market broadcasting survival in the streaming era. KISM's position within this portfolio tells a larger industry story.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} \textit{KISM is a case study in geographic leverage --- how Mount Constitution's elevation transforms a small-market FM signal into a cross-border broadcasting asset covering 4 million people.}
+\end{quotebox}
+
+The core insight is that KISM's significance exceeds its market designation because of a physical infrastructure advantage established in the 1950s and amplified through six decades of transmitter upgrades. This is the broadcasting equivalent of the Amiga Principle: specialized hardware (the mountain) achieving disproportionate output from modest input (a Bellingham-licensed station).
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+GREATER KISM COVERAGE AREA (92.9 FM, 50kW, Mt. Constitution)
+
+                  BRITISH COLUMBIA, CANADA
+        Hope ·····Victoria·····Vancouver·····Abbotsford
+              \         |          |         /
+               \   Vancouver Is.  |        /
+                \        |        |       /
+    ·····SAN JUAN·ISLANDS·········|······/·····
+         Orcas Island             |    /
+     *** MT. CONSTITUTION ***     |   /
+         (Transmitter, 2409 ft)   |  /
+                  |               | /
+    Olympic   BELLINGHAM [Studios: 2219 Yew St Rd]
+    Peninsula     |               |
+         \    Skagit County   I-5 Corridor
+          \       |               |
+           \  Mt. Vernon          |
+            \     |               |
+             Everett··············/
+              \       |
+               Seattle (northern suburbs)
+
+    Approx. coverage: ~4,000,000 population basin
+    Licensed city: Bellingham, WA (pop. ~95,000)
+    Leverage ratio: ~42:1 (coverage pop : license city pop)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE --- KISM RESEARCH MISSION
+
+  +--------------------+    +----------------------+
+  | M1: FOUNDING       |    | M2: TECHNICAL        |
+  | DYNASTY            |    | INFRASTRUCTURE       |
+  | Rogan Jones, KVOS  |    | Mt. Constitution,    |
+  | 1926-1972 lineage  |    | transmitters, HD     |
+  +--------+-----------+    +----------+-----------+
+           |                           |
+           v                           v
+  +--------+-----------+    +----------+-----------+
+  | M3: OWNERSHIP &    |    | M4: CROSS-BORDER     |
+  | BUSINESS           |    | SIGNAL DYNAMICS      |
+  | Saga Comms, PNW    |    | US-Canada freq coord,|
+  | Media Group, SGA   |    | CKYE, propagation    |
+  +--------+-----------+    +----------+-----------+
+           |                           |
+           +-------------+-------------+
+                         |
+                         v
+              +----------+-----------+
+              | M5: COMMUNITY &      |
+              | PROGRAMMING          |
+              | Brad & John, Vehicle |
+              | for a Vet, events    |
+              +----------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Founding Dynasty (1926--1972)}
+
+The Rogan Jones broadcasting empire, from Lou Kessler's 50-watt Seattle station (KVOS, ``Kessler's Voice of Seattle'') through Jones' 1928 acquisition, the landmark 1936 Supreme Court press-access ruling, the founding of KGMI-FM on 92.9 in March 1960, the creation of International Good Music (IGM) automation systems, and the KVOS-TV cross-border television operation that pioneered Canadian-market broadcasting from US soil.
+
+\subsubsection{Module 2: Technical Infrastructure}
+
+Mount Constitution as a broadcasting site: the CCC-built observation tower (1935--36), KVOS-TV's transmitter installation (1954), the evolution of radio transmitter technology from the original KGMI-FM equipment through the Nautel NV30 (KISM) and GV40 (KWPZ, co-located), HD Radio implementation with three subchannels, the 50,000-watt ERP at 744 meters HAAT, and the Mount Constitution Sites Inc. facility management.
+
+\subsubsection{Module 3: Ownership \& Business Model}
+
+Saga Communications' acquisition of KISM and KGMI for \$9.8 million in 1998, the ``Goldilocks market'' strategy targeting mid-sized cities, Edward K. Christian's founding philosophy, the Cascade Radio Group cluster operation, the January 2025 rebrand to Pacific Northwest Media Group, the five-station portfolio (KISM, KAFE, KGMI, KPUG, K-Bay), and the digital expansion to MyBellinghamNow.com and PNW Perks.
+
+\subsubsection{Module 4: Cross-Border Signal Dynamics}
+
+US-Canada frequency coordination under the bilateral agreement, KISM's signal penetration into Greater Vancouver and Victoria, interaction with CKYE ``Red FM'' 93.1 Vancouver, HD Radio splatter effects on adjacent frequencies, the historical context of cross-border broadcasting (KVOS-TV's Canadian audience as precedent), and the unique multi-national audience profile.
+
+\subsubsection{Module 5: Community \& Programming}
+
+The classic rock format identity, the Brad \& John morning show (Brad Cash and John Reynolds), signature community programs (``Vehicle for a Vet'' since 2017, toilet paper drives, ``Christmas Wish'' on sister station KAFE), on-air personalities (Scott Less as program director, Guy Ovenell, Tessa McLeod, Nick Michaels), the ``Classic Rockforce'' email club, and the station's role as a civic connector in Whatcom and Skagit counties.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:   Opus    # Synthesis: founding dynasty narrative,
+                   #   cross-module integration, through-line
+  denise:  Sonnet  # Production: module surveys, tables,
+                   #   source compilation, technical specs
+  paula:   Haiku   # Scaffolding: shared schemas, templates,
+                   #   bibliography structure
+  68000:   Sonnet  # Verification: source validation,
+                   #   cross-reference checking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[nosep]
+\item Complete KISM lineage from 1960 founding (KGMI-FM) through 2026
+\item Rogan Jones dynasty context from 1926 KVOS founding
+\item Mount Constitution transmitter site technical profile
+\item Saga Communications ownership and business model
+\item Cross-border signal dynamics and Canadian audience
+\item Community programming and civic engagement history
+\item HD Radio subchannels (HD2: KGMI simulcast, HD3: 98.9 K-Bay)
+\item Sister station portfolio within PNW Media Group
+\item FCC licensing data and technical specifications
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[nosep]
+\item Comprehensive Bellingham media market analysis (beyond KISM context)
+\item Full Saga Communications corporate analysis (beyond Bellingham cluster)
+\item KVOS-TV history beyond its relevance to KISM/Mount Constitution
+\item Music programming analysis (playlist composition, rotation patterns)
+\item Advertising revenue or financial performance data
+\item Comparison with non-Saga competitors in the Bellingham market
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[nosep]
+\item Complete call sign lineage documented: KGMI-FM (1960) $\rightarrow$ KVGM (1970) $\rightarrow$ KISM (1973) $\rightarrow$ present, with dates and format changes
+\item Rogan Jones biography traces from 1928 KVOS acquisition through 1972 death, with key milestones sourced
+\item Mount Constitution technical profile includes ERP, HAAT, transmitter make/model, co-located stations, and facility operator
+\item Saga Communications acquisition details sourced (price, date, predecessor owners)
+\item Cross-border signal reach documented with approximate coverage contours and Canadian market penetration
+\item HD Radio subchannel inventory complete (HD2, HD3 with formats, translators, and histories)
+\item ``Vehicle for a Vet'' program history documented from inception through 2024 with at least three recipient profiles
+\item PNW Media Group rebrand (January 2025) documented with portfolio composition and strategic rationale
+\item At least 8 named on-air personalities identified with roles and tenure
+\item US-Canada frequency coordination context explained with reference to KISM's specific situation
+\item All numerical claims (ERP, purchase price, population coverage, program statistics) attributed to specific sources
+\item Through-line connects KISM's geographic leverage to GSD ecosystem philosophy
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+Fox Infrastructure Group & Mount Constitution as infrastructure case study; PNW mesh network coverage overlap & Parallel \\
+Salish Sea Expansion & Lummi/Nooksack geography overlaps KISM coverage; shared Bellingham Bay context & Context \\
+GSD Mesh Prototype Spec & Transmitter site co-location patterns; hilltop infrastructure leverage & Architectural \\
+Foxfire Heritage Skills & PNW cultural geography; community connection traditions & Thematic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+There is a stone tower on the highest point in the San Juan Islands, built by CCC workers in 1935 from sandstone quarried on the north shore of Orcas Island. It has been a fire lookout, a wartime observation post, a television transmitter site, and --- since 1960 --- the broadcasting perch for what is now 92.9 KISM. From that single point, a 50,000-watt signal reaches across water, islands, mountains, and an international border to connect four million people to a station licensed to a city of 95,000.
+
+This is the Amiga Principle made literal in radio waves. The right architecture in the right location, faithfully maintained across decades, producing reach that no amount of power on flat ground could match. Rogan Jones understood this in 1954 when he moved his TV transmitter to Mount Constitution. Saga Communications understood it in 1998 when they paid \$9.8 million for the Bellingham cluster. And every morning when Brad and John go on the air from 2219 Yew Street Road, the signal that carries their voices takes the same path it has taken for over sixty years --- up the coax, across the water to Orcas Island, up the mountain, and out into the spaces between.
+
+
+%% ======================================================================
+%%  STAGE 2 — RESEARCH REFERENCE
+%% ======================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{KISM 92.9 FM --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides sourced findings organized by module. Each section is designed to be consumed independently by a GSD executor agent. Cross-module references are noted inline.
+
+\textbf{Key source organizations:}
+\begin{itemize}[nosep]
+\item Federal Communications Commission (FCC) --- licensing, technical data, facility records
+\item HistoryLink.org --- Washington State historical reference (peer-reviewed entries)
+\item Center for Pacific Northwest Studies, Western Washington University --- Rogan Jones Papers
+\item Saga Communications (SEC filings, corporate communications) --- ownership data
+\item Radio Ink, Inside Radio, Barrett Media --- industry trade press
+\item Mount Constitution Sites Inc. --- transmitter facility operator
+\item Nautel Broadcast --- transmitter equipment manufacturer case studies
+\end{itemize}
+
+\subsection{Module 1: Founding Dynasty Reference}
+
+\subsubsection{The KVOS Origin (1926--1928)}
+
+The station that would eventually become KISM began as KVOS in Seattle in 1926--27, founded by Lou Kessler. The call letters stood for ``Kessler's Voice of Seattle.'' Operating at just 50 watts from an apartment on Queen Anne Hill, the station struggled in Seattle's competitive market. Kessler moved operations to Bellingham in 1927, rebranding as ``The Mount Baker Station.'' Financial difficulties persisted, and the station went through creditor control before Lafayette Rogan Jones (1895--1972) purchased it in 1928--29 for approximately \$9,000.
+
+Jones, a Tennessee-born serial entrepreneur, had co-owned radio stations in Aberdeen, Wenatchee, and Seattle with partner Harry Spence before the Depression disrupted their operations.
+
+\subsubsection{The Supreme Court Landmark (1933--1936)}
+
+In 1933, Jones began airing ``Newspaper of the Air'' --- thirty-minute news programs three times daily that openly read content from the Bellingham Herald, Seattle Times, and Seattle P-I. The Associated Press obtained a restraining order. Federal Judge John Clyde Bowen initially refused a permanent injunction, stating that news reports belong to the public. The case was reversed on appeal, but in 1936 the US Supreme Court threw out the restraining order, ruling that since the AP was a nonprofit organization, it could not claim damages. This landmark case established that radio and television stations had the same right to news reports as newspapers. (Source: HistoryLink.org, File 22498)
+
+\subsubsection{KGMI-FM: Birth of 92.9 (1960)}
+
+In March 1960, Jones founded KGMI-FM on 92.9 MHz through his company International Good Music, Inc. (IGM). The ``KGMI'' call letters honored his automation company: ``K-Good Music Incorporated.'' The FM station initially simulcast programming from KGMI AM 790. Jones was a pioneer in radio automation technology, and IGM became a significant independent enterprise. (Source: Broadcasting Yearbook 1963, p. B-195; QZVX Broadcast History)
+
+\subsubsection{Call Sign Evolution}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Call Sign} & \tableheader{Format} & \tableheader{Context} \\
+\midrule
+1960--1970 & KGMI-FM & Simulcast w/ AM 790 & Jones ownership \\
+1970--1973 & KVGM & Transition & Format experimentation \\
+1973--present & KISM & Top 40 (1973), then Classic Rock & Automated Top 40; later shift \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+(Sources: Broadcasting Yearbook 1974, p. B-224; Wikipedia/KISM citing FCC records)
+
+\subsubsection{Rogan Jones Legacy}
+
+Jones died in 1972, having built a broadcasting empire that included KVOS radio, KGMI-FM (now KISM), KVOS-TV Channel 12, and International Good Music Inc. His papers are archived at the Center for Pacific Northwest Studies at Western Washington University. The Rogan Jones Papers document his innovations in cross-border broadcasting, radio automation, and the legal battles that shaped American media law. (Source: Archives West, Center for Pacific Northwest Studies, WWU)
+
+Haines Fay, the longest-serving personality in the KISM/KGMI lineage, began at KVOS radio in 1944 while still in high school and retired from KGMI in 1992 --- a 48-year tenure. He served on the Bellingham City Council for eight years and ran for mayor in 1983. (Source: QZVX Broadcast History)
+
+\subsection{Module 2: Technical Infrastructure Reference}
+
+\subsubsection{Mount Constitution Site}
+
+Mount Constitution is the highest point in the San Juan Islands at 2,409 feet (744 meters). The CCC-built observation tower was constructed in 1935--36 from over 700 tons of local sandstone quarried on Orcas Island's north shore. Designed by Roland Koepf under architect Ellsworth Storey, the 53-foot tower has served as a fire lookout, WWII observation/radio post, KVOS-TV transmitter site (1954--2016), and continues as a multi-tenant broadcasting facility. (Source: Island Histories; Moran State Park records)
+
+The broadcasting facility is managed by Mount Constitution Sites, Inc., which describes itself as ``the premier broadcast site company serving the Greater Puget Sound area'' with reach from Hope, BC to Vancouver, WA. (Source: mtconstitution.com)
+
+\subsubsection{KISM Technical Specifications}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Frequency & 92.9 MHz (HD Radio) \\
+Call Sign & KISM \\
+FCC Facility ID & 34469 \\
+Class & C \\
+ERP & 50,000 watts \\
+HAAT & 744 meters (2,441 ft) \\
+Transmitter Location & Mount Constitution, Orcas Island \\
+Transmitter Coordinates & 48°40'47"N 122°50'29"W \\
+Authorized Auxiliary Power & 680 watts \\
+HD2 Subchannel & KGMI simulcast (News/Talk) \\
+HD3 Subchannel & 98.9 K-Bay (Classic Hits) \\
+HD3 Translator & K255DC, 98.9 FM, 250W, Class D \\
+HD3 Translator FCC ID & 142903 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+(Source: FCC Licensing and Management System, Facility ID 34469; radio-locator.com)
+
+\subsubsection{Transmitter Equipment}
+
+The KISM transmitter is a Nautel NV30. A co-located station (KWPZ) installed the first Nautel GV40 ever manufactured (serial number H0101) in April 2014, shipped directly from the NAB 2014 exhibition floor. The installation required a Washington State Ferry crossing and 15-hour workdays. The GV40's exciter can output 500 watts of RF directly, eliminating the traditional IPA stage. Engineers noted reduced power consumption compared to the previous transmitter even while increasing HD Radio levels. (Source: Nautel Customer Stories)
+
+The site engineer, identified as ``Erling,'' commented on layout improvements of the GV40 compared to the NV20 (KAFE) and NV30 (KISM) located in a different facility on Mount Constitution. This confirms multiple broadcast facilities exist on the summit. (Source: Nautel Customer Stories)
+
+\subsubsection{HD Radio Subchannels}
+
+KISM operates three HD Radio channels. HD1 carries the main classic rock format. HD2 simulcasts KGMI (790 AM News/Talk), available on FM translator K243BX at 96.5 MHz. HD3 carries ``98.9 K-Bay'' classic hits, previously broadcast on KBAI 930 AM from 2017 until that AM station's closure in 2024. K-Bay is available via FM translator K255DC at 98.9 MHz, 250 watts, Class D. (Source: RadioInsight, March 2024; FCC records)
+
+\subsection{Module 3: Ownership \& Business Reference}
+
+\subsubsection{Saga Communications Overview}
+
+Saga Communications, Inc. (NASDAQ: SGA) was founded in May 1986 by Edward K. Christian in Grosse Pointe Farms, Michigan. Christian's strategy targeted ``Goldilocks'' markets --- mid-sized cities overlooked by large broadcast groups. Initial funding of approximately \$38.5 million acquired the radio division of Josephson International. The company went public in December 1992, with 685,000 shares sold at \$17.75 per share in August 1993 through First Boston Corporation. (Source: SEC filings; FundingUniverse; Encyclopedia.com)
+
+Christian served as Chairman, President, and CEO until his death in July 2022. Leadership passed to Christopher Forgy. As of late 2025, Saga owns or operates approximately 79 FM and 35 AM stations across 27 markets, plus 80 translator stations. The company maintains a dual-class share structure with concentrated insider ownership. The Edward K. Christian Trust holds 886,709 shares as of October 2025. Institutional investors and insiders together hold approximately 97\% of shares. (Source: SEC 8-K filing, August 2022; DCFmodeling.com)
+
+In Nordic languages, ``saga'' means ``an ongoing adventure'' --- a fact Christian frequently cited in corporate communications.
+
+\subsubsection{Bellingham Cluster Acquisition}
+
+Saga acquired KISM and KGMI in 1998 for \$9.8 million. The cluster expanded to include KAFE (104.1, Soft AC), KPUG (1170 AM, Sports), and eventually K-Bay (HD3/translator). All stations share studios at 2219 Yew Street Road, Bellingham, WA 98229, accessible from I-5 via Lakeway Drive. (Source: Broadcasting \& Cable Yearbook 2000, p. D-477; Wikipedia/KISM)
+
+\subsubsection{2025 Rebrand: Pacific Northwest Media Group}
+
+Effective January 2025, the Cascade Radio Group rebranded as Pacific Northwest Media Group. The rebrand reflected expansion beyond traditional radio into digital properties including MyBellinghamNow.com (free online news), PNW Perks (half-price deal platform), and digital marketing services. General Manager and Market President Heidi Persson led the transition. The rebrand does not affect individual station websites, email, or apps. (Source: Radio Ink, January 2025; Inside Radio, January 2025; Barrett Media, January 2025; Bellingham Chamber announcement)
+
+\subsubsection{Station Portfolio}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{Frequency} & \tableheader{Format} & \tableheader{Notes} \\
+\midrule
+KISM & 92.9 FM & Classic Rock & Flagship; Mt. Constitution \\
+KAFE & 104.1 FM & Soft AC & ``Christmas Wish'' program \\
+KGMI & 790 AM / 96.5 FM & News/Talk & Also on KISM-HD2; est. 1926 \\
+KPUG & 1170 AM & Sports & Whatcom County sports \\
+K-Bay & 98.9 FM (translator) & Classic Hits & KISM-HD3; formerly KBAI 930 AM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: Cross-Border Signal Reference}
+
+\subsubsection{Coverage and Propagation}
+
+KISM's transmitter on Mount Constitution at 2,409 feet provides line-of-sight coverage across the Strait of Georgia to Greater Vancouver and southern Vancouver Island. The station's own promotional materials claim coverage of ``roughly 4,000,000'' population. The signal reaches from Seattle's northern suburbs through the I-5 corridor, across the San Juan Islands, and deep into southwestern British Columbia. (Source: PNW Media Group station profile, pnwmediagroup.com)
+
+The elevation advantage was first exploited by Rogan Jones when he moved the KVOS-TV transmitter to Mount Constitution in September 1954, specifically to reach the Vancouver market. Jones had initially envisioned KVOS-TV as a Bellingham station, but insufficient local ad revenue forced him northward. Once reception in BC was strong, Canadian advertising revenue transformed the station's economics. (Source: Salish Current, October 2025; Wikipedia/KVOS-TV)
+
+\subsubsection{US-Canada Frequency Coordination}
+
+Under the bilateral broadcasting agreement between the US and Canada, stations must protect reception of cross-border stations on the other country's territory. They may accept interference from existing cross-border stations but cannot cause new interference. KISM at 92.9 MHz sits adjacent to Vancouver's CKYE ``Red FM'' at 93.1 MHz, a South Asian-format station broadcasting primarily in Punjabi, Hindi, and Urdu with weekend block programming in Fijian and Hungarian. (Source: RadioDiscussions forum, citing bilateral agreement provisions)
+
+When KISM's HD Radio signal is operating at full power, the HD sidebands create ``splatter'' that can mask reception of CKYE in the Bellingham/Skagit County area. Radio enthusiasts have noted that during periods of reduced KISM power (auxiliary transmitter operations at 680 watts), Canadian stations on adjacent frequencies become receivable in Northwest Washington. (Source: RadioDiscussions forum, February 2025)
+
+\subsubsection{Historical Cross-Border Precedent}
+
+KISM inherits a cross-border audience tradition established by KVOS-TV. The television station's Canadian audience was so large that in 1955 Jones incorporated KVOS-TV Limited in Vancouver to sell advertising to Canadian businesses. The 1976 change in Canadian tax law --- removing the deduction for advertising purchased on American television stations --- was specifically aimed at operations like KVOS-TV. CRTC officials compared KVOS-TV to ``smallpox'' for its impact on Vancouver advertising markets. (Source: Wikipedia/KVOS-TV; Salish Current)
+
+\subsection{Module 5: Community \& Programming Reference}
+
+\subsubsection{Format and Audience}
+
+KISM broadcasts a classic rock format, branded as ``NW Washington's Classic Rock.'' Audience demographics skew 65\% male / 35\% female, with the core listening audience aged 35--54 (approximately 59\% of listeners). The 18--24 demographic accounts for 10\%, while 65+ accounts for 4\%. (Source: PNW Media Group station profile)
+
+\subsubsection{On-Air Personalities}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role} & \tableheader{Notes} \\
+\midrule
+Brad Cash & Morning Co-Host & Brad \& John Show; community events lead \\
+John Reynolds & Morning Co-Host & Brad \& John Show; veterans advocate \\
+Scott Less & Program Director & Evening host \\
+Guy Ovenell & Afternoon Host & 1pm slot \\
+Tessa McLeod & Late Evening Host & 10pm slot \\
+Nick Michaels & Weekend/Special & ``The Deep End'' --- music history \\
+Heidi Persson & General Manager & Market President, PNW Media Group \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Vehicle for a Vet Program}
+
+Running since at least 2017 (eight years as of 2024), ``Vehicle for a Vet'' pairs donated and refurbished vehicles with deserving veterans. The program is led by the Brad \& John morning show. Each year, a volunteer Veterans Committee reviews over 100 nomination letters. The vehicles are donated by community members (often veterans themselves) and restored by local shops including Bellingham Automotive, Dr. John's Auto Clinic, and Angler Automotive. (Source: MyBellinghamNow, December 2024; Radio Ink, December 2024)
+
+Notable recipients include Jason Thayer (2024), a 12-year US Army Infantry veteran with two Afghanistan tours, who received a refurbished 2002 GMC Envoy; and USMC Gunnery Sergeant Jake Freeman (previous year). The 2024 vehicle was donated by an anonymous Whatcom County couple, the wife being a veteran herself. The selection committee was led by Dan Johnson, a former Marine. (Source: KISM.com; Radio Ink)
+
+\subsubsection{Community Engagement Programs}
+
+Additional community programs include the ``Show Us Your Roll'' toilet paper drive (2023), which collected over 14,000 rolls valued at approximately \$20,000 for the Skagit Friendship House. The station also participates in ``Christmas Wish'' (through sister station KAFE 104.1) and the ``Airwaves for Animals'' radiothon partnering with the Whatcom Humane Society. The ``Knucklehead of the Year'' is an annual audience-voted humorous award. (Source: Saga Communications community relations page; KISM.com)
+
+\subsubsection{Digital and Engagement Channels}
+
+The station maintains listener engagement through multiple channels: the ``Classic Rockforce'' email club, Facebook community, text messaging, the KISM website (kism.com), the ``Brad and John --- Mornings on KISM'' podcast (distributed via Apple Podcasts, Spotify, Player FM, and other platforms), and the ``Time Warp Radio'' podcast. Live streaming is available through TuneIn and the station website. (Source: KISM.com; TuneIn; mytuner-radio.com)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Category} & \tableheader{Protocol} \\
+\midrule
+Veterans' personal details & Privacy & Use only publicly shared stories; no unpublished details \\
+Indigenous territory context & Cultural & Acknowledge Lummi and Nooksack territories by nation-specific name \\
+Cross-border regulatory details & Legal & Present factual FCC/CRTC framework; no legal advice \\
+Living personalities & Privacy & Use only information from public broadcasts and official bios \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Regulatory Sources}
+
+\begin{itemize}[nosep]
+\item FCC Licensing and Management System, Facility ID 34469 (KISM) and 142903 (K255DC)
+\item Broadcasting Yearbook 1963, p. B-195 (original KGMI-FM listing)
+\item Broadcasting Yearbook 1974, p. B-224 (KISM call sign change)
+\item Broadcasting \& Cable Yearbook 2000, p. D-477 (Saga acquisition)
+\item SEC Archives, Saga Communications 8-K filing (August 2022, Christian obituary)
+\end{itemize}
+
+\subsubsection{Historical \& Academic Sources}
+
+\begin{itemize}[nosep]
+\item HistoryLink.org, File 22498: ``KVOS radio wins landmark Supreme Court ruling'' (peer-reviewed WA State history)
+\item Center for Pacific Northwest Studies, WWU: Rogan Jones Papers, 1912--1983
+\item Archives West (Orbis Cascade Alliance): KVOS Channel 12 Film Records
+\item Island Histories: ``Mount Constitution Observation Tower'' (CCC construction history)
+\item Salish Current: ``Local television station broadcast news, views, community'' (October 2025)
+\end{itemize}
+
+\subsubsection{Industry Trade Sources}
+
+\begin{itemize}[nosep]
+\item Radio Ink: ``KISM's Vehicle for a Vet Awards SUV'' (December 2024); ``Saga's Cascade Cluster Rebrands'' (January 2025)
+\item Inside Radio: ``Saga Rebrands Bellingham Cluster'' (January 2025)
+\item Barrett Media: ``Saga Bellingham WA Is Now Pacific Northwest Media Group'' (January 2025)
+\item Nautel Broadcast: ``First GV40 Installed'' (customer story, Mount Constitution)
+\item QZVX Broadcast History: ``KVOS to KGMI in 1962'' (broadcaster history reference)
+\end{itemize}
+
+\subsubsection{Corporate \& Station Sources}
+
+\begin{itemize}[nosep]
+\item Saga Communications: sagacom.com (corporate, community relations)
+\item PNW Media Group: pnwmediagroup.com (station profiles, advertising data)
+\item KISM: kism.com (programming, contact, community events)
+\item Mount Constitution Sites, Inc.: mtconstitution.com (facility information)
+\item MyBellinghamNow.com (news coverage, Vehicle for a Vet reporting)
+\end{itemize}
+
+
+%% ======================================================================
+%%  STAGE 3 — MISSION PACKAGE
+%% ======================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on KISM 92.9 FM Bellingham covering its complete lineage, technical infrastructure, ownership history, cross-border signal dynamics, and community impact. The document must be self-contained, fully sourced, and structured for both human reading and GSD ecosystem integration.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION --- KISM RESEARCH MISSION
+
+Wave 0: FOUNDATION (Sequential)
+  [Shared Schema] --> [Source Index] --> [Template]
+         |                  |               |
+         v                  v               v
+Wave 1: PARALLEL RESEARCH
+  Track A:                 Track B:
+  [M1: Dynasty] ----+     [M2: Technical] ----+
+  [M3: Ownership] --+     [M4: Cross-Border] -+
+         |                         |
+         +------------+------------+
+                      |
+Wave 2: SYNTHESIS (Sequential)
+  [M5: Community] --> [Cross-Module Integration]
+  --> [Through-Line] --> [Index Building]
+                      |
+Wave 3: PUBLICATION + VERIFICATION
+  [Assembly] --> [Verify] --> [Format] --> [Ship]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[nosep]
+\item \textbf{Data Layer} --- FCC records, SEC filings, historical archives, trade press
+\item \textbf{Research Layer} --- Five module surveys with sourced findings
+\item \textbf{Synthesis Layer} --- Cross-module integration, narrative through-line
+\item \textbf{Presentation Layer} --- LaTeX document, index page, verification matrix
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Source Spec} \\
+\midrule
+1 & Founding Dynasty Survey & Complete 1926--1972 lineage; Supreme Court ruling sourced & Module 1 \\
+2 & Technical Profile & FCC specs, transmitter data, HD subchannel inventory & Module 2 \\
+3 & Ownership Analysis & Saga acquisition, cluster composition, rebrand & Module 3 \\
+4 & Cross-Border Study & Frequency coordination, Canadian coverage, HD splatter & Module 4 \\
+5 & Community Profile & Programs, personalities, engagement channels & Module 5 \\
+6 & Synthesis Document & Integrated narrative with cross-references & Wave 2 \\
+7 & Final PDF & Compiled, verified, publication-ready & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared Schema & None & Haiku & 2,000 \\
+Source Index & None & Haiku & 3,000 \\
+M1: Dynasty Survey & Schema, Sources & Sonnet & 8,000 \\
+M2: Technical Profile & Schema, Sources & Sonnet & 6,000 \\
+M3: Ownership Analysis & Schema, Sources & Sonnet & 6,000 \\
+M4: Cross-Border Study & Schema, Sources & Opus & 8,000 \\
+M5: Community Profile & Schema, Sources & Sonnet & 6,000 \\
+Synthesis \& Integration & M1--M5 & Opus & 10,000 \\
+Verification & All & Sonnet & 4,000 \\
+Publication & Verified draft & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget \%} & \tableheader{Assigned To} \\
+\midrule
+Opus & 32\% & Cross-border analysis (judgment-heavy), synthesis, through-line \\
+Sonnet & 59\% & Module surveys, verification, publication, source compilation \\
+Haiku & 9\% & Shared schemas, templates, source index scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 2 & 5,000 \\
+1 & Research & Parallel (2 tracks) & 8 & 28,000 \\
+2 & Synthesis & Sequential & 4 & 16,000 \\
+3 & Publication & Sequential & 4 & 7,000 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & & \textbf{18} & \textbf{56,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0.1 & Shared schema definition & Haiku & JSON schema for station data, personnel, sources \\
+0.2 & Source index compilation & Haiku & Master bibliography with URL, access date, reliability \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A (History + Business):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1A.1 & Founding Dynasty survey & Sonnet & Module 1 draft with sources \\
+1A.2 & Ownership analysis & Sonnet & Module 3 draft with financials \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Technical + International):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1B.1 & Technical profile & Sonnet & Module 2 draft with FCC data \\
+1B.2 & Cross-border study & Opus & Module 4 draft with regulatory analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+2.1 & Community profile & Sonnet & Module 5 draft (needs M1--M4 context) \\
+2.2 & Cross-module integration & Opus & Linked references, consistency check \\
+2.3 & Through-line composition & Opus & Narrative arc connecting all modules \\
+2.4 & Index and navigation & Sonnet & TOC, cross-references, hyperlinks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+3.1 & Document assembly & Sonnet & Complete LaTeX source \\
+3.2 & Source verification & Sonnet & All citations checked, broken links flagged \\
+3.3 & Format and compile & Sonnet & Three-pass XeLaTeX compilation \\
+3.4 & Index page generation & Sonnet & HTML delivery page \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+\item \textbf{FCC data cache:} Facility ID 34469 response cached across all modules (5-minute TTL)
+\item \textbf{Wikipedia articles:} KISM, KGMI, KVOS-TV, KPUG pages loaded once in Wave 0 source index
+\item \textbf{Saga corporate data:} SEC filings and corporate pages cached in Wave 1A
+\item \textbf{Cross-module schema:} Station data structure shared between all Wave 1 agents
+\item \textbf{Session boundary:} Wave 0 output persisted to disk; Wave 1 tracks share source index file
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 5,000 \\
+Wave 1: Research & 8,000 & 14,000 & --- \\
+Wave 2: Synthesis & 10,000 & 6,000 & --- \\
+Wave 3: Publication & --- & 7,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{18,000} & \textbf{27,000} & \textbf{5,000} \\
+\textbf{Percentage} & \textbf{36\%} & \textbf{54\%} & \textbf{10\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH --- KISM RESEARCH MISSION
+
+  [0.1 Schema]---+--->[1A.1 Dynasty]---+
+                 |                      |
+                 +--->[1A.2 Ownership]--+--->[2.1 Community]
+                 |                      |         |
+  [0.2 Sources]--+--->[1B.1 Technical]--+         v
+                 |                      |   [2.2 Integration]
+                 +--->[1B.2 X-Border]---+         |
+                                                  v
+                                          [2.3 Through-Line]
+                                                  |
+                                                  v
+                                          [2.4 Index]
+                                                  |
+                         +----------+----------+--+
+                         v          v          v
+                    [3.1 Assemble] [3.2 Verify] [3.3 Compile]
+                                                  |
+                                                  v
+                                          [3.4 Index Page]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC, SEC, trade press, or academic archives. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every wattage, dollar amount, population figure, and date attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents broadcasting facts without advocating for regulatory positions \\
+SC-IND & Indigenous attribution & Any mention of tribal territories names specific nation (Lummi, Nooksack) --- never generic \\
+SC-PRI & Living person privacy & All named individuals appear only with information from public broadcasts or official bios \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Call sign lineage completeness & All 4 call signs with transition dates and sources \\
+CF-02 & Jones biography milestones & 1928 purchase, 1933 Newspaper of the Air, 1936 SCOTUS, 1953 KVOS-TV, 1960 KGMI-FM, 1972 death \\
+CF-03 & FCC technical accuracy & ERP, HAAT, class, facility ID match current FCC records \\
+CF-04 & Transmitter equipment identified & Make, model, and installation context documented \\
+CF-05 & Saga acquisition sourced & Price (\$9.8M) and year (1998) with specific source citation \\
+CF-06 & Cross-border reach documented & Coverage description with population estimate and source \\
+CF-07 & HD subchannel inventory & HD2 and HD3 formats, translators, and histories documented \\
+CF-08 & Vehicle for a Vet history & At least 3 program details (year count, recipients, process) \\
+CF-09 & PNW Media Group rebrand & Date, rationale, portfolio composition documented \\
+CF-10 & On-air personalities count & $\geq$8 named individuals with roles \\
+CF-11 & Frequency coordination explained & US-Canada agreement framework described \\
+CF-12 & Station portfolio complete & All 5 PNW Media Group stations listed with formats \\
+CF-13 & Mount Constitution history & CCC tower construction, multi-use history documented \\
+CF-14 & Digital channels inventoried & Website, podcast, streaming, social media documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Dynasty $\rightarrow$ Technical cascade & Jones' 1960 founding connects to Mt. Constitution site history \\
+IN-02 & Technical $\rightarrow$ Cross-border cascade & Transmitter specs explain coverage into Canada \\
+IN-03 & Ownership $\rightarrow$ Community cascade & Saga's strategy explains community programming investment \\
+IN-04 & Cross-module consistency & Station data (frequency, call sign, ERP) consistent across all modules \\
+IN-05 & Timeline consistency & No date contradictions between modules \\
+IN-06 & Document self-containment & Reader needs no prior knowledge to understand full story \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & KBAI/K-Bay transition & AM closure (2024) and HD3 continuity documented \\
+EC-02 & Format change history gaps & Pre-classic-rock formats acknowledged even if dates uncertain \\
+EC-03 & Auxiliary transmitter operations & 680W aux power noted as operational contingency \\
+EC-04 & Data gap acknowledgment & At least one area of incomplete knowledge identified \\
+EC-05 & Temporal currency & Most sources from 2020--2026 where available \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Call sign lineage & CF-01 & Pending \\
+2. Jones biography & CF-02 & Pending \\
+3. Mt. Constitution technical & CF-03, CF-04, CF-13 & Pending \\
+4. Saga acquisition sourced & CF-05 & Pending \\
+5. Cross-border coverage & CF-06, IN-02 & Pending \\
+6. HD subchannel inventory & CF-07, EC-01 & Pending \\
+7. Vehicle for a Vet history & CF-08 & Pending \\
+8. PNW Media Group rebrand & CF-09, CF-12 & Pending \\
+9. On-air personalities ($\geq$8) & CF-10 & Pending \\
+10. Frequency coordination & CF-11, IN-02 & Pending \\
+11. Numerical attribution & SC-NUM & Pending \\
+12. Through-line to GSD & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate approvals \\
+PLAN & Planner & Wave decomposition; parallel track management \\
+SCOUT & Research Agent & Source gathering; FCC/SEC data retrieval \\
+EXEC-A & Executor (Track A) & Dynasty + Ownership module production \\
+EXEC-B & Executor (Track B) & Technical + Cross-Border module production \\
+CRAFT-HIST & History Specialist & Rogan Jones narrative; timeline validation \\
+CRAFT-TECH & Technical Specialist & FCC data interpretation; transmitter analysis \\
+VERIFY & Verification Agent & Source validation; cross-reference checking \\
+INTEG & Integration Agent & Cross-module consistency; through-line coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Research Modules & 5 \\
+Activation Profile & Squadron (12 roles) \\
+Parallel Tracks & 2 (History/Business + Technical/International) \\
+Estimated Context Windows & 18 \\
+Estimated Sessions & 4 \\
+Total Token Budget & 56,000 (Opus 36\% / Sonnet 54\% / Haiku 10\%) \\
+Deliverables & 7 (5 module surveys + synthesis + final publication) \\
+Test Plan & 30 tests (5 safety / 14 core / 6 integration / 5 edge) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``We began with a few stations, great management, and a vision. Building upon that foundation, we continue to grow our broadcast company. Each year we shape and mold the properties we acquire into our vision.''} --- Edward K. Christian, founder of Saga Communications
+
+\vspace{0.5em}
+
+From a 50-watt Seattle apartment in 1926 to a 50,000-watt signal on Mount Constitution --- the KISM story is a century of finding the right mountain, the right frequency, and the right community. The spaces between the transmitter and the receiver are where the signal lives. The spaces between the station and its listeners are where the community grows.
+\end{quotebox}
+
+\end{document}
