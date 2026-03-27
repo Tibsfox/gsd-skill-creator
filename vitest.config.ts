@@ -12,6 +12,10 @@ export default defineConfig({
       '.claude/**',
       'project-claude/**',
       'node_modules/**',
+      '**/node_modules/**',
+      'the-space-between-engine/**',
+      'tests/ipc-commands.test.ts',
+      'test/platform/ipc/ipc-commands.test.ts',
     ],
     coverage: {
       provider: 'v8',

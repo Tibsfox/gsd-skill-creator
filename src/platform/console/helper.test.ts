@@ -366,7 +366,7 @@ describe('createHelperRouter', () => {
 
     await router.handleRequest(req, res as unknown as ServerResponse);
 
-    expect(res.headers['access-control-allow-origin']).toBe('*');
+    expect(res.headers['access-control-allow-origin']).toBe('http://localhost:1420');
   });
 
   // -----------------------------------------------------------------------
