@@ -1,0 +1,1221 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% COLOR SCHEME — Industrial/Dark: Steel / Blood Burgundy / Aged Gold
+\definecolor{primary}{HTML}{1C2A35}
+\definecolor{secondary}{HTML}{7B1A1A}
+\definecolor{tertiary}{HTML}{6B5614}
+\definecolor{accent}{HTML}{A0522D}
+\definecolor{lightprimary}{HTML}{E8ECF0}
+\definecolor{lightsecondary}{HTML}{F5E6E6}
+\definecolor{lighttertiary}{HTML}{F5F0E6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% HEADERS AND FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Post-Industrial Network}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Post-Industrial Network -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Post-Industrial\\[0.3em]Network}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Throbbing Gristle, Nurse With Wound, Current 93,\\Death in June, Coil, and the Outlier Question}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Cultural Topology}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 14--18 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% TABLE OF CONTENTS
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Post-Industrial Network --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Conversation-Harvested}
+\metafield{Depends on:}{gsd-coil-discography-study.md (Module 05 overshoot acknowledged)}
+\metafield{Context:}{Companion study to the Coil deep research mission. Where the Coil study profiles a single
+artist across 43 releases, this mission maps the ecosystem that made Coil possible — the relational
+architecture of British post-industrial music from 1975 to the present.}
+
+\subsection{Vision}
+
+The Coil discography study, in its 479-line Module 05, revealed something the original scope could not
+contain: Coil was never just a band. John Balance and Peter Christopherson were nodes in a network
+— and you cannot understand the signal at a node without tracing the connections that feed it.
+Jhonn Balance had been a member of Psychic TV, whose Genesis P-Orridge had invented industrial music in
+the first place. Christopherson had been present at the origin of Throbbing Gristle, in the Hackney
+studio they called the Death Factory. Current 93's David Tibet met Coil at The Equinox Event in 1983 and
+collaborated for decades. Steven Stapleton of Nurse With Wound appeared on nearly every Current 93
+release and became Coil's closest spiritual neighbor. Death in June's Douglas Pearce provided the folk
+pivot that pulled the entire scene toward acoustic instrumentation. These are not footnotes to a Coil
+biography. They are the context without which the biography makes no sense.
+
+This study is organized around a core architectural insight from the Coil mission debrief: the value is
+not in the nodes but in the spaces between them. What passes between artists — the shared personnel,
+the collaborative recordings, the philosophical borrowings, the deliberate divergences — is where
+post-industrial music's actual intelligence lives. The Nurse With Wound List, 291 entries printed on an
+insert tucked into a debut album in 1979, is the most literal possible expression of this idea: it is
+not a list of artists, it is a map of connections, a pre-internet index of the European experimental
+underground. Its opening words are: ``categories strain, crack and sometimes break, under their burden —
+step out of the space provided.''
+
+The study must also grapple with the outlier question. Nine Inch Nails drew from the industrial palette
+but routed it through arena-rock infrastructure, accumulating the cultural footprint of a major-label
+phenomenon while the scene it borrowed from remained deliberately peripheral. Trent Reznor never called
+his work industrial music; he borrowed techniques from Throbbing Gristle and Test Dept and then
+delivered them to audiences who had never heard of either. Understanding how the industrial vocabulary
+entered the mainstream — and what was lost and what was gained in that translation — completes the
+network map by defining its outer boundary.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The incomplete node profile problem.} Every existing account of this scene focuses on
+    individual artists in isolation. No single document maps the full relational architecture — who
+    collaborated with whom, when connections formed and broke, how philosophical positions influenced
+    sonic choices across the network simultaneously.
+
+  \item \textbf{The artifact-as-index problem.} The Nurse With Wound List is simultaneously a
+    historical document, a collector's guide, and a structural map of 20 years of experimental
+    music — but no research treatment handles all three functions simultaneously. Most treatments
+    reduce it to a curiosity or a shopping list.
+
+  \item \textbf{The divergence-without-comparison problem.} Current 93's move from industrial noise
+    to apocalyptic folk, and Death in June's parallel transition from post-punk, are frequently
+    described but rarely analyzed in comparison. The shared origin (Industrial Records milieu, Psychic
+    TV adjacency, Throbbing Gristle as ur-text) makes the differences analytically meaningful.
+
+  \item \textbf{The NIN framing problem.} Nine Inch Nails is either included in industrial surveys
+    (distorting the center of gravity toward arena-rock aesthetics) or excluded (losing the only case
+    study of what happens when the vocabulary crosses over). Neither choice is analytically satisfying.
+    The study needs a structural position for NIN that acknowledges both its debt to the network and
+    its fundamental difference from it.
+
+  \item \textbf{The sensitivity and ideology problem.} Death in June in particular requires careful
+    handling: Douglas Pearce's use of fascist imagery, collaboration with Boyd Rice, and the ideological
+    drift of segments of the neofolk scene represent real ethical complexity. The study must address this
+    directly rather than elide it.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Cultural topology over discography.} The unit of analysis is the \emph{network relationship},
+not the individual artist. The study treats this scene as a directed graph: nodes are artists, edges
+are collaborations, derivations, and philosophical influences. The Nurse With Wound List becomes
+legible as an adjacency matrix. Current 93 and Death in June become case studies in divergent
+evolution from a shared origin. NIN becomes a case study in what happens when a subgraph reaches
+escape velocity into the mainstream.
+
+\subsubsection{Network Map (Simplified)}
+
+\begin{asciibox}
+THE POST-INDUSTRIAL NETWORK — PRIMARY RELATIONSHIPS
+
+  COUM Transmissions (1969-1976)
+       |
+       v
+  THROBBING GRISTLE (1976-1981) -----> Industrial Records
+  [Genesis P-Orridge, Peter Christopherson,         |
+   Cosey Fanni Tutti, Chris Carter]                 |
+       |                                            |
+       +---------> PSYCHIC TV                       +---> Cabaret Voltaire
+       |           [Genesis + Sleazy]                     SPK, Clock DVA
+       |                |
+       |                +--> COIL (1983-2004)
+       |                     [Christopherson + Balance]
+       |                           |
+       |                           +<--> CURRENT 93 (1982-)
+       |                           |    [David Tibet]
+       |                           |         |
+       |                    NWW List         +<--> NURSE WITH WOUND (1978-)
+       |                    [291 entries]    |    [Steven Stapleton]
+       |                                    |
+       |                    DEATH IN JUNE --+
+       |                    [Douglas P.]
+       |                           |
+       |                           v
+       |                    NEOFOLK EMERGENCE
+       |                    [Sol Invictus, Fire+Ice, etc.]
+       |
+       v
+  NINE INCH NAILS (1988-) — OUTLIER NODE
+  [Reznor: borrows TG techniques, routes through arena-rock]
+  [The Downward Spiral: 4x platinum — escape velocity achieved]
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE STRUCTURE — 6 RESEARCH MODULES
+
+  Module 01: The Origin Node
+  |--> Throbbing Gristle / COUM Transmissions / Industrial Records
+  |--> 1969-1981: From performance art to the genre-founding moment
+
+  Module 02: The Cartographers
+  |--> Nurse With Wound and the NWW List
+  |--> The List as artifact, index, and structural map
+
+  Module 03: The Divergent Path
+  |--> Current 93 / David Tibet
+  |--> Industrial noise --> apocalyptic folk --> Christian mysticism
+
+  Module 04: The Folk Turn
+  |--> Death in June and the neofolk emergence
+  |--> Post-punk --> neofolk; ideology and ethics analysis
+
+  Module 05: The Nexus (Cross-Reference Module)
+  |--> Coil's position in the full network
+  |--> Bridges to the companion Coil discography study
+
+  Module 06: The Outlier Question
+  |--> Nine Inch Nails and mainstream translation
+  |--> What the vocabulary gains and loses in transit
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- The Origin Node}
+
+Throbbing Gristle are the ur-text. Industrial music can be traced to a precise moment of origin
+(the ICA's \textit{Prostitution} exhibition, October 1976), a precise location (Hackney, London),
+and a precise personnel (P-Orridge, Christopherson, Tutti, Carter). This module documents the
+full arc from COUM Transmissions through Industrial Records' dissolution in 1981, including the
+label's function as a distribution infrastructure for the emerging scene (Cabaret Voltaire, SPK,
+Monte Cazazza, Clock DVA) and the significance of the band's self-termination as a methodological
+statement.
+
+\subsubsection{Module 02 --- The Cartographers}
+
+The Nurse With Wound List is a 291-entry document printed on an insert tucked into a limited
+edition debut album in January 1979. It maps 20 years of European experimental music — free
+jazz, Krautrock, noise, outsider rock, musique concrète — without explanation, hierarchy, or
+starting points. Steven Stapleton has since claimed some entries were invented; John Fothergill
+denies this. The list opens with ``categories strain, crack and sometimes break.'' This module
+analyzes the List as three simultaneous objects: historical artifact, collector's index, and
+structural map of the scene's intellectual genealogy.
+
+\subsubsection{Module 03 --- The Divergent Path}
+
+David Tibet founded Current 93 in 1982, initially from within the Psychic TV orbit. By 1988,
+he had pivoted to what he called ``apocalyptic folk'' — acoustic guitars, nursery rhymes,
+Christian eschatology, Norse mythology. By the mid-1990s (*Thunder Perfect Mind*, widely
+considered the apex of the project), Current 93 had traveled an extraordinary arc from
+industrial noise to something closer to sacred music. Tibet's collaborations with Stapleton,
+Balance, and Douglas Pearce make this arc the most richly documented divergence in the network.
+This module traces the arc with album-by-album analysis of the key inflection points.
+
+\subsubsection{Module 04 --- The Folk Turn}
+
+Death in June emerged in 1981 from the post-punk band Crisis (explicitly left-wing and
+anti-fascist). By 1984 Douglas Pearce had adopted acoustic guitars, European folk textures,
+and — controversially — fascist imagery and collaboration with Boyd Rice. This module documents
+the neofolk emergence with full analytical honesty: the music's power, the ideology's danger,
+and the complex web of collaborations that tie Death in June to figures (Tibet, Stapleton,
+Balance) with quite different political orientations. World Serpent Distribution is analyzed as
+infrastructure that sustained the scene while also providing cover for its more troubling elements.
+
+\subsubsection{Module 05 --- The Nexus}
+
+Coil sits at the intersection of every other module. Christopherson was present at TG's origin.
+Balance met Tibet at The Equinox Event. Stapleton and Coil were creative neighbors for two
+decades. The first NIN/Coil collaboration (the \textit{Fixed} EP, 1992) is the single moment
+where the network's interior and the mainstream outlier made direct contact. This module is
+explicitly a bridge document — it cross-references the companion Coil discography study and
+provides the analytical frame for how Coil synthesized inputs from every other node in the graph.
+
+\subsubsection{Module 06 --- The Outlier Question}
+
+Reznor borrowed Throbbing Gristle and Test Dept techniques and routed them through synth-pop
+hooks, major label infrastructure, and arena-rock presentation. \textit{Pretty Hate Machine}
+(1989) went triple platinum. \textit{The Downward Spiral} (1994) debuted at \#2 on the
+Billboard 200 and went quadruple platinum. Reznor has explicitly stated he does not consider
+his work ``industrial music.'' This module analyzes NIN as an outlier case: what the industrial
+vocabulary does when it reaches escape velocity, why the originating network is structurally
+incapable of replicating that trajectory, and what the Coil/NIN collaboration on \textit{Fixed}
+(1992) reveals about the relationship between the two worlds.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml — Post-Industrial Network Study
+mission_id: post-industrial-network-v1
+activation_profile: fleet
+model_allocation:
+  opus: 30%   # Synthesis, ideology analysis, network topology judgment
+  sonnet: 60% # Module surveys, discography tables, document assembly
+  haiku: 10%  # Shared schemas, templates, scaffolding
+
+craft_agents:
+  - CRAFT-HIST: Music history and cultural context specialist
+  - CRAFT-TOPO: Network topology and relationship mapping specialist
+  - CRAFT-ETHI: Ideological/ethical sensitivity specialist (Module 04 primary)
+  - CRAFT-ARCH: Cross-module architecture and synthesis specialist
+
+parallel_capacity: 3
+wave_count: 4
+estimated_tokens: 280000-340000
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Full historical documentation of Throbbing Gristle / COUM Transmissions arc (1969--1981)
+  \item The Nurse With Wound List as primary artifact: composition, influence, legacy
+  \item Current 93 discographic arc from \textit{LAShTAL} (1983) through \textit{Thunder Perfect Mind} (1993) with key later works
+  \item Death in June from formation (1981) through neofolk codification (\textit{But, What Ends When the Symbols Shatter?}, 1992)
+  \item Coil's network position as synthesis node (with cross-reference to companion study)
+  \item Nine Inch Nails as outlier: \textit{Pretty Hate Machine}, \textit{Broken EP}, \textit{The Downward Spiral}, and the \textit{Fixed}/Coil collaboration
+  \item Network relationship mapping: collaborative credits, shared labels, ideological borrowings
+  \item Ethical analysis of fascist imagery and neofolk's ideological drift
+  \item \textit{England's Hidden Reverse} (David Keenan, 2003) as primary secondary source
+  \item World Serpent Distribution as network infrastructure
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Full discographic treatment of Nurse With Wound (40+ releases beyond the List itself)
+  \item Boyd Rice / NON — referenced but not profiled
+  \item Cabaret Voltaire, SPK, Clock DVA — referenced as Industrial Records context but not profiled
+  \item Sol Invictus, Fire and Ice, Forseti — referenced as neofolk second-generation but not profiled
+  \item Genesis P-Orridge biography beyond TG/Psychic TV arc
+  \item Electronic Body Music (EBM) and its divergence from industrial (separate study warranted)
+  \item Post-2000 NIN output beyond network-relevant cross-references
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{Origin documentation:} Throbbing Gristle arc from COUM Transmissions through
+    Industrial Records dissolution is fully documented with key dates, personnel, and
+    contextual significance.
+  \item \textbf{NWW List analysis:} The Nurse With Wound List is analyzed at all three levels
+    (artifact, index, structural map) with geographic and genre distribution of its 291 entries.
+  \item \textbf{Current 93 arc:} At least eight key albums are individually analyzed marking
+    the industrial-to-folk transition, with David Tibet's theological evolution traced.
+  \item \textbf{Death in June arc:} The post-punk-to-neofolk transition is documented with
+    full analysis of the ideological complexity and its implications for the scene.
+  \item \textbf{Network topology:} A complete relationship map documents at least 20 distinct
+    artist-to-artist edges with evidence (collaborative credits, shared personnel, documented
+    influence).
+  \item \textbf{Nexus analysis:} Coil's structural position in the network is analytically
+    established with citations to the companion discography study.
+  \item \textbf{NIN outlier framing:} Nine Inch Nails is positioned as an outlier node with
+    clear analysis of what distinguished its trajectory from the originating network.
+  \item \textbf{Coil/NIN contact point:} The \textit{Fixed} EP collaboration (1992) and
+    subsequent \textit{Downward Spiral} remixes are analyzed as the network's primary
+    mainstream contact moment.
+  \item \textbf{Ethical analysis:} Death in June's ideological complexity is addressed with
+    scholarly honesty — neither elided nor used to invalidate the music.
+  \item \textbf{Sensitivity compliance:} All claims about political ideology are attributed
+    to specific documented sources; no generalizations about entire genre communities.
+  \item \textbf{Self-containment:} A reader with no prior knowledge of the scene can follow
+    the full document without external reference.
+  \item \textbf{Companion integration:} Module 05 successfully bridges to the companion
+    Coil discography study with explicit cross-references to its module structure.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Coil Discography Study & Peer / Parent & This mission is the companion network study that the Coil study's Module 05 overshoot revealed was needed \\
+gsd-amiga-vision & Philosophical & Amiga Principle applies: specialized nodes + architectural leverage over brute-force coverage \\
+gsd-bbs-educational-pack & Structural & BBS pack's information-network model parallels the post-industrial scene's pre-internet distribution infrastructure \\
+The Space Between (textbook) & Through-line & Network topology as philosophical principle; meaning in connections over nodes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+This is a study about what happens in the spaces between artists. The Nurse With Wound List
+exists not to define a canon but to map a field of possibility — and its opening declaration
+(``categories strain, crack and sometimes break'') is both a methodological instruction and a
+philosophical position. The artists in this network were not building a genre. They were
+maintaining pressure against the stabilization of genre — keeping the vocabulary unstable,
+contested, open.
+
+The GSD ecosystem's own philosophical foundation — that architectural leverage comes from
+specialized nodes connected with integrity, not from brute-force coverage — maps onto this scene
+with unusual precision. Throbbing Gristle invented industrial music and then deliberately
+terminated themselves so it could not be reduced to a style. Coil never released a consistent
+album. Current 93 changed its sound every few years. The network sustained itself through
+constant self-disruption. That is the Amiga Principle operating at a cultural scale: small,
+principled components producing staggering complexity through faithful iteration, with no node
+large enough to calcify the whole.
+
+Nine Inch Nails matters to this study not because it belongs to the network, but because it
+defines the network's outer boundary — the point at which the vocabulary detaches from the
+infrastructure that generated it. Understanding the boundary is how you understand the shape.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Post-Industrial Network --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides module-by-module findings synthesized from primary source research.
+All claims are sourced. Agents executing this mission should use this reference as the primary
+evidence base, supplementing with targeted web research for gap-filling only.
+
+\textbf{Key source organizations and texts:}
+\begin{itemize}[noitemsep]
+  \item \textit{England's Hidden Reverse} — David Keenan (2003; revised 2016). The definitive history
+    of Coil, Current 93, and Nurse With Wound.
+  \item Industrial Records / Mute Records — primary release documentation
+  \item Wikipedia (music articles with citations) — biography and discography verification
+  \item Rate Your Music, Discogs — release documentation and collaborative credits
+  \item Stereogum (NWW List at 40 feature, 2019) — List analysis and anniversary coverage
+  \item The Wire magazine — primary critical coverage of the scene since the 1980s
+\end{itemize}
+
+\subsection{Module 01 Reference --- The Origin Node}
+
+\subsubsection{COUM Transmissions (1969--1976)}
+
+COUM Transmissions was a Fluxus-influenced performance art collective formed in Hull in 1969 by
+Genesis P-Orridge (born Neil Megson). The group relocated to Hackney, London in 1973, where
+P-Orridge and Cosey Fanni Tutti met Chris Carter (then a sound recordist for television) and
+Peter Christopherson (then a member of the graphic design collective Hipgnosis). The four built
+a recording studio in Hackney, which they named the Death Factory.
+
+The final COUM Transmissions performance — the \textit{Prostitution} exhibition at London's
+Institute of Contemporary Arts, October 1976 — was simultaneously the public debut of
+Throbbing Gristle. The exhibition generated parliamentary condemnation: Conservative MP Nicholas
+Fairbairn declared the group ``wreckers of civilisation.'' The scandal confirmed the group's
+central method: exposure as a form of revelation.
+
+\subsubsection{Throbbing Gristle (1976--1981)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album / Release} & \tableheader{Year} & \tableheader{Significance} \\
+\midrule
+The Second Annual Report & 1977 & Debut; framed as documentation, not art. Ltd. 786 copies on Industrial Records \\
+D.o.A: The Third and Final Report & 1978 & Expanded sonic palette; synthesizer-led tracks \\
+20 Jazz Funk Greats & 1979 & Ironic title belied by the content; experimental peak \\
+Heathen Earth & 1980 & Fully live studio performance; unique document of the band's process \\
+Mission Terminated postcard & 1981 & Self-dissolution announced via mailed postcard. ``The mission is terminated.'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Industrial Records (founded 1976) functioned as both label and conceptual artwork. Its slogan —
+``Industrial Music for Industrial People'' — was coined with Monte Cazazza to reference both
+the sonic palette and the mass unemployment reshaping British manufacturing. The label distributed
+work by Cabaret Voltaire, SPK, Clock DVA, William S. Burroughs, and Monte Cazazza. Every TG
+concert was recorded and made available via mail order — an infrastructure that prefigured
+the internet's long-tail distribution model by two decades.
+
+\textbf{Post-TG dispersal:} P-Orridge and Christopherson formed Psychic TV. Tutti and Carter
+formed Chris and Cosey. These divergent paths established the two primary downstream branches
+of the network: the noise-ritual-occult branch (Psychic TV $\to$ Coil) and the electronic-body
+branch (Chris and Cosey). John Balance, a Psychic TV member, later partnered with Christopherson
+to form Coil — closing a loop between the network's first and second generation.
+
+\subsection{Module 02 Reference --- The Cartographers}
+
+\subsubsection{Nurse With Wound: Formation and Method}
+
+Nurse With Wound formed in 1978 when visual artist Steven Stapleton, working as a sign painter
+at a London recording studio, improvised a fictional band to secure cheap studio time. He recruited
+John Fothergill and Heman Pathak, gathered ``cheap guitars, synthesizers and other found objects,''
+and recorded the debut in six hours. The album was issued in January 1979 on the group's own
+United Dairies label (named after Rolf-Ulrich Kaiser's Krautrock label Ohr) in a limited pressing
+of 500 copies.
+
+\subsubsection{The Nurse With Wound List}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} & \tableheader{Notes} \\
+\midrule
+Initial entry count & 236 & Included with \textit{Chance Meeting} (1979) \\
+Expanded entry count & 291 & Revised for \textit{To the Quiet Men from a Tiny Girl} (1980) \\
+Geographic range & International & Strong European core; French, German, Italian, UK, Japanese, American entries \\
+Genre spread & Broad & Free jazz, Krautrock, noise, musique concrète, progressive rock, psychedelic, outsider \\
+Named canonical entries & Multiple & Velvet Underground, Captain Beefheart, Yoko Ono, Can, La Monte Young, Frank Zappa \\
+Finders Keepers compilation & 2019 & \textit{Strain, Crack \& Break} Vol. 1 (French entries); Vol. 2 (German entries) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The List's opening declaration — ``categories strain, crack and sometimes break, under their
+burden — step out of the space provided'' — establishes its methodological position. It is not
+a canon. It is a refusal of canon. The entries range from the commercially available (Velvet
+Underground) to the genuinely impossible-to-find (Sphinx Tush: a single song in two live versions,
+1970). Stapleton has claimed some entries were invented; Fothergill denies this. The ambiguity is
+structural: the List was designed to be followed up, not simply consumed.
+
+Stereogum's 40th anniversary assessment (2019) noted that the NWW List prefigured the internet's
+discovery infrastructure by two decades — a pre-algorithmic recommendation engine encoded in
+a vinyl insert. Finders Keepers Records responded to the anniversary by launching the
+\textit{Strain, Crack \& Break} compilation series, drawing exclusively from List entries.
+
+\subsubsection{Nurse With Wound's Evolution}
+
+By 1981, Stapleton was the sole remaining NWW member. He considers \textit{Homotopy to Marie}
+(1982) the first proper NWW release. The project subsequently evolved from industrial noise
+toward surrealism, dada, dark ambient, and drone — drawing on Stapleton's visual art background
+and his fondness for Dadaism and absurdist humor. Over 40 full-length titles followed. Stapleton
+appeared on nearly every Current 93 release until 2010, making him the most consistent node
+in the network's inner circle.
+
+\subsection{Module 03 Reference --- The Divergent Path}
+
+\subsubsection{Current 93: Arc Overview}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Era / Significance} \\
+\midrule
+LAShTAL & 1983 & Industrial noise debut; Tibet describes as ``invocation of Malkunofath'' \\
+Nature Unveiled & 1984 & Dark ambient; co-released with NWW collaboration \\
+Dogs Blood Rising & 1984 & Harsh electronics; early Coil collaboration (Balance co-founders) \\
+Swastikas for Noddy & 1988 & First full apocalyptic folk album; acoustic guitars enter \\
+Earth Covers Earth & 1988 & Transition confirmed; folk textures dominant \\
+Thunder Perfect Mind & 1992 & Critical peak; accessible entry point; last album with Douglas Pearce \\
+Of Ruine, Or Some Blazing Starre & 1994 & Post-Pearce; deeper into Christian mysticism \\
+I Am the Last of All the Field & 2001 & Mature neofolk; Tibet now identifies explicitly as Christian \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Equinox Event (1983)}
+
+The Equinox Event was a festival of post-industrial acts at which Tibet met Steven Stapleton.
+Current 93 performed under the name Dogs Blood Order. John Balance (Coil's co-founder) was
+in the original Current 93 lineup alongside Fritz Catlin of 23 Skidoo. Tibet's invitation to
+Balance to leave Psychic TV and join Current 93 full-time was refused — a refusal that
+indirectly led to Coil's formation and shaped the network's topology for the next two decades.
+
+\subsubsection{Tibet's Theological Evolution}
+
+Tibet took his name from Genesis P-Orridge, reflecting early interest in Tibetan Buddhism and
+Thelema. Current 93's name derives from Aleister Crowley's ``93 Current'' in Thelema. The
+trajectory moved from Crowleyan occultism through pagan Norse mythology (period of living with
+Death in June's Douglas P. and Freya Aswynn) to what Tibet now describes as Christian faith,
+specifically Christian mysticism and eschatology. Tibet completed a Master's degree in Coptic
+Language and Grammar in 2009. His archives through 2013 are held at Cornell University.
+
+\subsection{Module 04 Reference --- The Folk Turn}
+
+\subsubsection{Death in June: Formation and Arc}
+
+Death in June formed in 1981. Douglas Pearce and Tony Wakeford had been members of the
+left-wing anti-fascist punk band Crisis (formed 1977). The initial Death in June sound retained
+post-punk structures with martial drums and abrasive electronics. The folk turn began with
+\textit{Burial} (1984): acoustic guitars, references to European history, and the introduction
+of the Death's Head imagery that would define the group's visual identity and generate decades
+of controversy.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Significance} \\
+\midrule
+The Guilty Have No Pride & 1983 & Post-punk debut \\
+Burial & 1984 & Folk turn begins; acoustic guitars; first fascist imagery \\
+Brown Book & 1987 & Consolidation of neofolk sound; introduces Ian Read \\
+But, What Ends When the Symbols Shatter? & 1992 & Neofolk codification; widely cited as definitive statement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Ideological Complexity}
+
+Death in June's adoption of fascist imagery — SS Totenkopf skulls, runes, references to
+Ernst Röhm and the Night of the Long Knives — has generated sustained controversy. The
+analytical complexity is genuine: Pearce is openly gay and has collaborated extensively
+with Jewish musicians; the Death in June website previously displayed an Israeli flag; the
+band performed in Israel in 2004. Collaborator Boyd Rice (NON), however, has documented
+connections to the Church of Satan and neo-fascist movements. David Tibet, a longtime
+collaborator, has publicly distanced himself from Pearce over these associations.
+
+World Serpent Distribution (founded 1991 by Pearce) distributed neofolk and post-industrial
+releases across the UK through the late 1990s, functioning as the scene's primary commercial
+infrastructure — and inadvertently creating a shared distribution channel for both its
+more ethically complex and more ethically straightforward participants.
+
+\subsubsection{Neofolk Emergence}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Period} & \tableheader{Role in Network} \\
+\midrule
+Death in June & 1981-- & Originator; acoustic folk pivot; controversial imagery \\
+Current 93 & 1982-- & Parallel originator; ``apocalyptic folk'' term coined by Tibet \\
+Sol Invictus & 1987-- & Tony Wakeford (ex-DiJ); less ideologically fraught variant \\
+Fire and Ice & 1987-- & Ian Read; introduced via \textit{Brown Book} \\
+Swans & 1982-- & Parallel trajectory; \textit{Love of Life} (1992) embraces neofolk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05 Reference --- The Nexus}
+
+Coil's structural position in the network is analyzed in the companion discography study.
+Key cross-reference points for this mission:
+
+\begin{itemize}[noitemsep]
+  \item Christopherson's direct presence at TG's origin (TG founding member)
+  \item Balance's early Current 93 membership (Dogs Blood Order period, 1982--1984)
+  \item Stapleton's near-permanent presence on Current 93 releases = NWW/Coil crossover
+  \item The Equinox Event (1983) as the network's founding convergence moment
+  \item \textit{The Snow EP} (1993) — Coil's closest gesture toward accessibility
+  \item \textit{Fixed} (1992) — First Coil/NIN collaboration; the network's primary mainstream contact
+  \item \textit{Closer (Precursor)} on \textit{Closer to God} (1994) — Coil's finest mainstream-adjacent work
+\end{itemize}
+
+\subsection{Module 06 Reference --- The Outlier Question}
+
+\subsubsection{NIN: Industrial Vocabulary, Arena Infrastructure}
+
+Nine Inch Nails was formed by Trent Reznor in 1988 in Cleveland, Ohio. Reznor has explicitly
+stated he does not consider his work ``industrial music'' but acknowledges borrowing techniques
+from Throbbing Gristle and Test Dept. \textit{Pretty Hate Machine} (1989) deployed industrial
+vocabulary (drum machines, synthesizer distortion, noise textures) alongside synth-pop hooks
+and melodic vocals — a combination that had no precedent in the originating network.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Release} & \tableheader{Year} & \tableheader{Network Relevance} \\
+\midrule
+Pretty Hate Machine & 1989 & Vocabulary borrowed; independent release; 3$\times$ platinum \\
+Fixed (EP) & 1992 & First Coil collaboration; J.G. Thirlwell also contributes \\
+The Downward Spiral & 1994 & Recorded at Tate House (``Le Pig''); \#2 Billboard 200; 4$\times$ platinum \\
+Closer to God (EP) & 1994 & Coil's ``Closer (Precursor)'' — the network's most-heard artifact \\
+Further Down the Spiral & 1995 & Coil, Aphex Twin, Rick Rubin contribute; network-mainstream dialogue peaks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Structural Distinction}
+
+The originating network sustained itself through deliberate peripheral positioning: limited
+pressings, anti-commercial aesthetics, self-dissolution (TG's postcard), refusal of genre
+labeling. NIN's trajectory was structurally opposite: major label distribution, MTV placement,
+Lollapalooza touring, Grammy nominations. Coil's \textit{Closer (Precursor)} reached more ears
+via the \textit{Se7en} opening credits (where it appeared as David Fincher's edit of
+\textit{Closer to God}) than via any Coil release — an irony that encodes the outlier
+relationship precisely.
+
+The Reznor question does not resolve into ``NIN belongs to the network'' or ``NIN doesn't.''
+It resolves into: the industrial vocabulary can achieve escape velocity, but the infrastructure
+that generates the vocabulary is structurally incapable of following it into the mainstream.
+The network's anti-commercial architecture is not a failure mode; it is the mechanism by which
+the vocabulary stays alive and potent at the periphery.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensitivity Area} & \tableheader{Boundary Type} & \tableheader{Required Handling} \\
+\midrule
+Fascist imagery (Death in June) & GATE & Document with source attribution; no interpretive generalization to full genre \\
+Political ideology (neofolk right-wing drift) & GATE & Distinguish individual artists; cite specific documented associations \\
+Occult/esoteric content & ANNOTATE & Present as cultural context; no endorsement or dismissal \\
+Genesis P-Orridge biography & ANNOTATE & Use correct pronouns per P-Orridge's own statements (she/her in later life) \\
+Controversial collaboration credits & GATE & Attribute all political claims to named sources only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Reference Texts}
+\begin{itemize}[noitemsep]
+  \item Keenan, David. \textit{England's Hidden Reverse: A Secret History of the Esoteric Underground.} Strange Attractor Press, 2003; revised 2016.
+  \item Ford, Simon. \textit{Wreckers of Civilisation: The Story of COUM Transmissions and Throbbing Gristle.} Black Dog Publishing, 1999.
+  \item Tutti, Cosey Fanni. \textit{Art Sex Music.} Faber and Faber, 2017.
+\end{itemize}
+
+\subsubsection{Discographic and Archival Sources}
+\begin{itemize}[noitemsep]
+  \item Industrial Records catalog documentation (Mute Records reissue liner notes)
+  \item Discogs artist pages: Throbbing Gristle, Nurse With Wound, Current 93, Death in June, Coil, Nine Inch Nails
+  \item Rate Your Music artist profiles and discographies (all six primary artists)
+  \item NWW List Wikipedia article (February 2026 revision)
+  \item Nurse With Wound official discography: ultimathulerecords.com
+\end{itemize}
+
+\subsubsection{Journalism and Critical Accounts}
+\begin{itemize}[noitemsep]
+  \item Stereogum: ``The Nurse With Wound List at 40: A Beginner's Guide.'' 2019.
+  \item The Wire magazine: Ongoing coverage, 1982--present.
+  \item Nine Inch Nails official discography and release notes: nin.com
+  \item Wikipedia: Current 93, Throbbing Gristle, Death in June, Neofolk (all accessed March 2026)
+  \item Cornell University Library: David Tibet Archives (through 2013)
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive six-module research document mapping the post-industrial music network
+from its origin in COUM Transmissions (1969) through the neofolk emergence and the NIN outlier
+case, providing analytical tools (network topology, ideological analysis, outlier framing) that
+complement the companion Coil discography study and stand independently as a reference for the
+British experimental underground.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE — Post-Industrial Network Study
+
+Wave 0: FOUNDATION
+  [HAI] Schema scaffolding, source index, shared templates
+  Sequential | 1 session | ~15,000 tokens
+
+Wave 1: PARALLEL SURVEYS
+  Track A [SON]  Track B [OPU]   Track C [SON]
+  Module 01      Module 02       Modules 03+04
+  TG/COUM/IR     NWW+List        C93 + DiJ
+  Parallel | 2 sessions | ~90,000 tokens per track
+
+Wave 2: SYNTHESIS
+  [OPU] Network topology construction | Outlier analysis
+  [OPU] Sensitivity review (Module 04 ideological content)
+  Sequential | 1-2 sessions | ~60,000 tokens
+
+Wave 3: PUBLICATION + VERIFICATION
+  [SON] Document assembly + formatting
+  [SON] Source verification pass
+  [SON] Module 05 cross-reference integration
+  Sequential | 1 session | ~40,000 tokens
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+1 & Module 01: Origin Node & TG arc fully documented; Industrial Records analyzed & Stage 2, \S2.2 \\
+2 & Module 02: Cartographers & NWW List analyzed at all three levels; entry distribution mapped & Stage 2, \S2.3 \\
+3 & Module 03: Divergent Path & Current 93 arc traced with 8+ album analyses & Stage 2, \S2.4 \\
+4 & Module 04: Folk Turn & DiJ arc + neofolk emergence + ideological analysis & Stage 2, \S2.5 \\
+5 & Module 05: Nexus & Coil's position mapped; companion study cross-referenced & Stage 2, \S2.6 \\
+6 & Module 06: Outlier & NIN outlier analysis; Coil/NIN contact documented & Stage 2, \S2.7 \\
+7 & Network topology diagram & 20+ edges documented with evidence & Stage 1, \S1.3 \\
+8 & Full bibliography & All claims sourced; zero entertainment media & Stage 2, \S2.9 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Foundation schemas & None & Haiku & 15,000 \\
+M01: TG/COUM/IR survey & W0 schemas & Sonnet & 40,000 \\
+M02: NWW + List analysis & W0 schemas & Opus & 35,000 \\
+M03: Current 93 arc & W0, M01 partial & Sonnet & 40,000 \\
+M04: Death in June + neofolk & W0, M03 partial & Sonnet + Opus review & 40,000 \\
+M05: Coil nexus & All modules + companion study & Opus & 25,000 \\
+M06: NIN outlier & M01, M05 & Sonnet + Opus review & 30,000 \\
+Network topology synthesis & All modules & Opus & 30,000 \\
+Sensitivity review (M04) & M04 draft & Opus (CRAFT-ETHI) & 15,000 \\
+Document assembly & All components & Sonnet & 20,000 \\
+Verification pass & Assembled doc & Sonnet & 15,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated:}} & \textbf{305,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Network topology judgment; ideological analysis (Module 04); NIN outlier framing; synthesis pass; any decisions involving contested claims \\
+Sonnet & 60\% & Module surveys; discography tables; document assembly; verification; bibliography formatting \\
+Haiku & 10\% & Shared schemas; table templates; scaffolding; source index structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Models} & \tableheader{Sessions} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Haiku & 1 & Schemas, templates, source index \\
+1 & Parallel Surveys & Sonnet + Opus & 2--3 & Modules 01--04 drafted \\
+2 & Synthesis & Opus & 1--2 & Network topology; M05 + M06 complete; sensitivity review \\
+3 & Publication & Sonnet & 1 & Final assembled document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W0-01 & Artist schema template & Haiku & Shared schema: name, era, key albums, key collaborators, network edges \\
+W0-02 & Source index setup & Haiku & Indexed bibliography with short-codes for in-text citation \\
+W0-03 & Network edge schema & Haiku & Edge definition: artist A $\to$ artist B, type (collab/influence/derivation), evidence \\
+W0-04 & Module skeleton files & Haiku & Empty module files with section headers ready for Wave 1 population \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Surveys}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{1.5cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+A & W1A-01 & TG/COUM history & Sonnet & Module 01 complete draft \\
+A & W1A-02 & Industrial Records catalog & Sonnet (CRAFT-HIST) & Release table with contextual notes \\
+B & W1B-01 & NWW + List analysis & Opus & Module 02 complete draft (three-level analysis) \\
+B & W1B-02 & NWW List entry survey & Sonnet & Genre/geography distribution table \\
+C & W1C-01 & Current 93 arc & Sonnet & Module 03 draft (album-by-album) \\
+C & W1C-02 & Death in June + neofolk & Sonnet & Module 04 draft (ideology section flagged for Wave 2 review) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W2-01 & Network topology construction & Opus (CRAFT-TOPO) & Complete edge map; 20+ documented relationships \\
+W2-02 & Module 04 ideology review & Opus (CRAFT-ETHI) & Reviewed and revised DiJ/neofolk ideology section \\
+W2-03 & Module 05: Coil nexus & Opus & Network synthesis; companion study cross-references \\
+W2-04 & Module 06: NIN outlier & Opus + Sonnet & Outlier analysis; escape velocity concept developed \\
+W2-05 & Cross-module consistency & Sonnet (INTEG) & Entity names, dates, credits consistent across all modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W3-01 & Document assembly & Sonnet & Full document with consistent formatting \\
+W3-02 & Source verification & Sonnet (VERIFY) & All citations traceable; zero entertainment media \\
+W3-03 & Bibliography finalization & Sonnet & Complete, formatted bibliography \\
+W3-04 & HITL review gate & CAPCOM & Human approval before final output \\
+W3-05 & Final output package & Sonnet & PDF + .tex source + index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (schemas, source index) cached at session start of Wave 1 tracks A, B, C
+  \item Artist profiles (Module 01--04) cached for Wave 2 synthesis — 5-minute cache window exploited by starting synthesis immediately after final Wave 1 track completes
+  \item Companion Coil discography study loaded once at Wave 2 start and kept in context for Module 05 construction
+  \item Network edge map (W2-01 output) cached for Module 05 and 06 construction
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 15,000 \\
+Wave 1A: TG/IR & --- & 80,000 & --- \\
+Wave 1B: NWW + List & 35,000 & 10,000 & --- \\
+Wave 1C: C93 + DiJ & 10,000 & 80,000 & --- \\
+Wave 2: Synthesis & 65,000 & 20,000 & --- \\
+Wave 3: Publication & --- & 35,000 & --- \\
+\midrule
+\textbf{Subtotals} & \textbf{110,000} & \textbf{225,000} & \textbf{15,000} \\
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{350,000 tokens}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+  [W0: Foundation] ---------> [W1A: TG Survey]
+       |                           |
+       |            -------------> [W1B: NWW + List]
+       |            |
+       +----------> [W1C: C93 + DiJ]
+                            |
+                            v
+              [W2-01: Network Topology] <-- W1A, W1B, W1C
+              [W2-02: Ideology Review] <-- W1C (M04 draft)
+              [W2-03: Coil Nexus]     <-- W2-01 + companion study
+              [W2-04: NIN Outlier]    <-- W2-01 + W2-03
+              [W2-05: Consistency]    <-- W2-01 through W2-04
+                            |
+                            v
+              [W3-01: Document Assembly]
+              [W3-02: Source Verification]
+              [W3-03: Bibliography]
+                            |
+              [W3-04: HITL Gate] ---- CAPCOM ---- Human Approval
+                            |
+              [W3-05: Final Output Package]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Purpose} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Non-negotiable source and ideology boundaries \\
+Core functionality & 20 & Required & BLOCK & Deliverable acceptance per success criteria \\
+Integration & 6 & Required & BLOCK & Cross-module consistency and companion linkage \\
+Edge cases & 5 & Best-effort & LOG & Robustness and completeness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to books, peer-reviewed music journalism, or official release documentation. Zero entertainment blogs, Reddit, or unsourced wikis as primary claims. \\
+SC-NUM & Numerical attribution & All sales figures, entry counts, pressing numbers, and dates attributed to specific named sources. \\
+SC-ADV & No policy advocacy & Document presents the ideological content of neofolk (Death in June, Boyd Rice) as cultural analysis, not editorial advocacy for or against the artists. \\
+SC-ETHI & Ideology attribution accuracy & All claims connecting specific artists to specific political positions cite documented evidence, not scene-wide generalizations. \\
+SC-PRON & P-Orridge pronoun accuracy & Genesis P-Orridge referred to with she/her pronouns consistent with P-Orridge's own documented preference in later life. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Selected Core and Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & TG arc completeness & Module 01 covers COUM origin through 1981 dissolution with all key albums documented \\
+CF-02 & Industrial Records catalog & At least 6 label releases documented beyond TG's own output \\
+CF-03 & NWW List three-level analysis & Module 02 addresses artifact, index, and structural map functions \\
+CF-04 & Entry count documentation & 291 entries confirmed with expansion from 236 (1979) to 291 (1980) noted \\
+CF-05 & C93 album count & At least 8 Current 93 albums analyzed with arc placement \\
+CF-06 & Tibet theological arc & Arc from Crowleyan occultism to Christian faith traced with key transition points \\
+CF-07 & DiJ folk turn documented & Acoustic guitar introduction traced to specific album (\textit{Burial}, 1984) \\
+CF-08 & Ideology section completeness & Module 04 addresses Death's Head imagery, Boyd Rice collaboration, Tibet's distancing \\
+CF-09 & Coil nexus edges & Module 05 documents Coil's connections to TG, C93, NWW, DiJ with evidence \\
+CF-10 & NIN outlier analysis & Reznor's industrial borrowings and rejection of the label both documented \\
+CF-11 & Coil/NIN contact documented & \textit{Fixed} (1992) and \textit{Closer to God} (1994) both analyzed \\
+CF-12 & Network edge count & Topology diagram documents at least 20 directed edges with evidence \\
+IN-01 & TG $\to$ C93 cascade & Psychic TV connection to Current 93 origin traced across Module 01 and 03 \\
+IN-02 & NWW $\leftrightarrow$ C93 consistency & Stapleton's collaborative role described consistently between Module 02 and 03 \\
+IN-03 & Companion study linkage & Module 05 contains explicit cross-references to Coil discography study module structure \\
+IN-04 & Equinox Event cross-ref & Event appears in both Module 03 (C93 origin) and Module 05 (Coil nexus) consistently \\
+IN-05 & World Serpent cross-ref & DiJ distribution infrastructure in Module 04 connects to neofolk network map in Module 06 \\
+IN-06 & Self-containment & Reader with no prior knowledge can follow document; all terms defined on first use \\
+EC-01 & Disputed facts flagged & NWW List invented-entry controversy handled with both Stapleton and Fothergill positions \\
+EC-02 & Temporal currency & Primary reference texts (Keenan 2016 rev.) cited; later scholarship noted where available \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Origin documentation complete & CF-01, CF-02 & Pending \\
+2. NWW List analyzed at all three levels & CF-03, CF-04 & Pending \\
+3. Current 93 arc (8+ albums) & CF-05, CF-06 & Pending \\
+4. Death in June arc + ideology & CF-07, CF-08 & Pending \\
+5. Network topology (20+ edges) & CF-12, IN-01 & Pending \\
+6. Coil nexus established & CF-09, IN-03 & Pending \\
+7. NIN outlier framing & CF-10 & Pending \\
+8. Coil/NIN contact documented & CF-11 & Pending \\
+9. Ethical analysis of neofolk & SC-ETHI, CF-08 & Pending \\
+10. Sensitivity compliance & SC-SRC, SC-ADV & Pending \\
+11. Self-containment & IN-06 & Pending \\
+12. Companion study integration & IN-03, IN-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; final integration approval \\
+PLAN & Planner & Wave decomposition; parallel track optimization; HITL question generation \\
+SCOUT & Research Agent & Supplementary source gathering; gap-fill web research; discography verification \\
+EXEC-A & Executor (TG/NWW) & Wave 1A and 1B production; Module 01 and 02 drafts \\
+EXEC-B & Executor (C93/DiJ) & Wave 1C production; Module 03 and 04 drafts \\
+CRAFT-HIST & History Specialist & Cultural context; era analysis; Industrial Records institutional history \\
+CRAFT-TOPO & Topology Specialist & Network edge mapping; relationship graph construction; Module 05 architecture \\
+CRAFT-ETHI & Ethics Specialist & Module 04 ideology review; sensitivity compliance; P-Orridge pronoun audit \\
+CRAFT-ARCH & Architecture Specialist & Cross-module structure; companion study integration; Module 06 outlier framing \\
+VERIFY & Verification Agent & Source validation; cross-module consistency; bibliography completeness \\
+INTEG & Integration Agent & IN-series tests; cross-reference validation between all six modules \\
+CAPCOM & HITL Interface & Human approval gate at Wave 2/3 boundary; only channel crossing to user \\
+BUDGET & Resource Manager & Token budget tracking per wave; alert at 80\% consumption \\
+SURGEON & Health Monitor & Research quality degradation detection; escalation to FLIGHT \\
+TOPO & Topology Manager & Agent team restructuring if mid-mission scope change required \\
+RETRO & Retrospective & Post-wave analysis; lessons captured for companion and future missions \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (17 roles) \\
+Total modules & 6 \\
+Parallel tracks (Wave 1) & 3 \\
+Estimated total tokens & 305,000--350,000 \\
+Estimated sessions & 4--5 \\
+Context windows & 14--18 \\
+Primary model & Sonnet (60\%) \\
+Judgment model & Opus (30\%) \\
+Scaffold model & Haiku (10\%) \\
+Safety-critical test count & 5 \\
+Total test count & 36 \\
+HITL gates & 1 (Wave 2/3 boundary) \\
+Companion study dependency & Coil discography study (Module 05 cross-reference) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Categories strain, crack and sometimes break, under their burden ---\\
+step out of the space provided.''}
+
+\smallskip
+--- Nurse With Wound List, opening declaration (1979)
+
+\smallskip
+The network this study maps was built by people who understood that the spaces between artists
+are where the actual intelligence lives. Not the nodes. The edges. The collaborations, the
+departures, the deliberate refusals. The Amiga Principle, applied at cultural scale: small,
+principled components, faithfully iterated, producing staggering complexity from the
+connections between them. That is what the post-industrial network was. That is why it matters.
+\end{quotebox}
+
+\end{document}
