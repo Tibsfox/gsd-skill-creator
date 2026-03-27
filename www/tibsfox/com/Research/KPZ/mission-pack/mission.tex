@@ -1,0 +1,1067 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: History (Radio Heritage) ──
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Commands ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{KPLZ / 104.9 Seattle Radio History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Seattle Radio Heritage -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ════════════════════════════════════════════
+% TITLE PAGE
+% ════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Signal\\[0.3em]and the Station}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{KPLZ 101.5 \& the 104.9 Frequency}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study of Seattle Radio Heritage}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron~~|~~Estimated: 14 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Signal and the Station --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone heritage study)}
+\metafield{Context:}{GSD Ecosystem --- PNW Heritage Research Series}
+
+\subsection{Vision}
+
+There is a frequency, and there is a voice on that frequency, and there is a moment when you first hear that voice and something in you recognizes it before you understand it. For a generation of Pacific Northwest kids growing up in the 1980s, that moment lived at 101.5 FM --- the place on the dial where K-Plus became KPLZ became Z~101.5 became Star 101.5 became, finally, Hank FM. Each name a sedimentation layer in a cultural geology that most people never think about but everyone over thirty in the Puget Sound region carries in their bones.
+
+This is a research study about two radio frequencies --- 101.5 and 104.9 --- and the stations that have occupied them across half a century of Seattle broadcasting. But it is also about something larger: the way a local radio station functions as connective tissue in a regional culture, the way format changes and ownership transfers map onto broader shifts in media consolidation, and the way the death of local radio mirrors the erosion of the spaces between --- the communal frequencies where a city once talked to itself.
+
+The KPLZ story is a complete arc: from KETO-FM's easy listening signal in 1959 through Gene Autry's Golden West pop-rock experiment, through the disco pivot, the Hot Hits wars with KUBE, the Kent and Alan morning institution, the thirty-year Star 101.5 run, and the final quiet flip to satellite-delivered country. The 104.9 story is its chaotic sibling --- Funky Monkey grunge, GenX nostalgia, The Brew, a brief KUBE exile, and now Contemporary Worship. Together they tell the story of how radio was won and lost in the Pacific Northwest.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Vanishing oral history.} The personalities, program directors, and engineers who built Seattle's radio landscape are aging out. Airchecks survive in scattered personal collections and a handful of SoundCloud uploads, but no comprehensive record ties the human stories to the institutional timeline.
+\item \textbf{Consolidation erasure.} Ownership changes from Golden West to Fisher to Sinclair to Lotus --- and from Ackerley to Clear Channel/iHeart on 104.9 --- have systematically severed institutional memory. Each new owner inherits a frequency, not a history.
+\item \textbf{Format archaeology is undocumented.} The precise dates, first songs, and strategic reasoning behind KPLZ's seven distinct format identities exist in fragments across Wikipedia, RadioDiscussions.com threads, and QZVX articles, but have never been synthesized into a single authoritative timeline.
+\item \textbf{The radio wars have no monument.} The KPLZ-vs-KUBE Top 40 war of the 1980s was one of the last great local radio battles in any American market. It produced the Hit Election, Stereo Wars, and defined the sonic identity of a generation. No structured study captures what that competition meant culturally.
+\item \textbf{Two frequencies, one market story.} The 101.5 and 104.9 histories are typically told separately, but they are entangled --- KUBE's 2016 exile to 104.9, the overlapping ownership networks, the way format decisions on one frequency ripple across the entire dial. The systemic view is missing.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Seattle radio heritage as a frequency-indexed cultural stratigraphy --- each format layer a sediment record of ownership economics, audience demographics, and regional identity.
+
+The research treats each frequency as a core sample. Drill down through the layers at 101.5 and you find easy listening, country, pop rock, disco, Top 40, Hot AC, and country again --- a complete cycle in 65 years. Drill down at 104.9 and you find country, urban contemporary, grunge/metal, 90s nostalgia, active rock, rhythmic CHR, and worship --- a market searching for identity on a lower-powered Eatonville signal. The stratigraphic metaphor lets us see patterns: how formats migrate across frequencies, how ownership changes trigger format flips, and how the ``death of disco'' at K-Plus in 1979 rhymes with the ``death of CHR'' at Star 101.5 in 2024.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SEATTLE FM RADIO LANDSCAPE (Heritage Focus)
+═══════════════════════════════════════════════════════════
+
+    101.5 FM (100kW, Cougar Mtn)     104.9 FM (17kW, Eatonville)
+    ─────────────────────────         ──────────────────────────
+    KETO-FM  1959 Easy Listening      K285AE  ~1988 Translator
+    KETO-FM  1974 Country             KJUN-FM 1995 Country
+    KVI-FM   1976 Pop Rock/Top 40     KKBY-FM 1996 Classic Country
+    KPLZ     1978 K-Plus 101/Disco    KKBY    1998 Y 104.9 Urban
+    KPLZ     1980 Music Magazine/AC   KFNK    1999 Funky Monkey
+    KPLZ     1983 Hot Hits            KSGX    2010 GenX 104-9
+    KPLZ     ~1987 Z 101.5            KKBW    2011 The Brew 104-9
+    KPLZ     ~1989 101.5 KPLZ         KUBE    2016 KUBE 104.9
+    KPLZ     1994 Star 101.5 (HAC)    KTDD    2017 Contemporary Worship
+    KPLZ     2024 101.5 Hank FM
+                                      Owner: 247 Media/Hope Media
+    Owner: Lotus Communications       Signal: South Sound/Tacoma
+    Signal: Full Seattle metro
+
+CROSS-FREQUENCY ENTANGLEMENTS:
+  • KUBE (93.3) displaced to 104.9 in 2016 iHeart shuffle
+  • KPLZ competed with KUBE for two decades (1981–1994)
+  • Both frequencies now carry formats alien to their heritage
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+═══════════════════
+
+  ┌─────────────────────────────────────────────────────┐
+  │ M1: ORIGINS & FREQUENCY HERITAGE (1959–1978)        │
+  │     KETO-FM → KVI-FM → KPLZ birth                  │
+  │     104.9 translator origins                         │
+  ├─────────────────────────────────────────────────────┤
+  │ M2: THE RADIO WARS (1978–1994)                      │
+  │     K-Plus disco → Hot Hits → Z 101.5               │
+  │     KPLZ vs KUBE: Hit Election, Stereo Wars         │
+  │     Three-way battle: KPLZ/KUBE/KNBQ                │
+  ├─────────────────────────────────────────────────────┤
+  │ M3: STAR 101.5 & PERSONALITIES (1994–2024)          │
+  │     Kent & Alan (1986–2018, 32 years)               │
+  │     Star branding, Hot AC identity, Christmas music  │
+  │     Ownership transfers: Fisher→Sinclair→Lotus       │
+  ├─────────────────────────────────────────────────────┤
+  │ M4: THE 104.9 FREQUENCY (1988–present)              │
+  │     Funky Monkey, GenX, The Brew, KUBE exile         │
+  │     iHeart's four-station shuffle (2016)             │
+  │     Contemporary Worship transition                  │
+  ├─────────────────────────────────────────────────────┤
+  │ M5: INDUSTRY CONTEXT & CULTURAL LEGACY              │
+  │     Deregulation & consolidation                     │
+  │     Seattle's FM landscape evolution (1970s–2020s)   │
+  │     The death of local radio as cultural commons     │
+  └─────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Origins \& Frequency Heritage (1959--1978)}
+
+The geological bedrock layer. KETO-FM signs on in 1959 as an easy listening station with 10,000 watts and a pelican logo. By 1970, power increases to 100,000 watts. Country music format adopted in 1974. Gene Autry's Golden West Broadcasters acquires in 1976, flips to ``The FM KVI'' with a pop-rock Top~40 format --- first song ``Beginnings'' by Chicago. Frank Colbourn serves as first program director, earns twelve gold records. The 104.9 frequency exists only as a translator (K285AE) rebroadcasting from KLTX. This module establishes the foundation for everything that follows.
+
+\subsubsection{M2: The Radio Wars (1978--1994)}
+
+The era that matters most to collective memory. K-Plus 101 rides the disco wave, crashes with it, reinvents as ``The Music Magazine,'' then returns to mainstream Top~40 as ``Hot Hits'' in 1983 under program director Jeff King, later Casey Keating. The KPLZ-vs-KUBE battle defines 1980s Seattle radio: the Hit Election listener poll, Stereo Wars school competitions, Rick Dees Weekly Top~40 affiliation during the Z~101.5 era. KNBQ provides a third contender until flipping to oldies in 1988. By 1992, KUBE goes rhythmic, KPLZ tries to hold mainstream CHR, and January 14, 1994 marks the end --- ``Waiting for a Star to Fall'' by Boy Meets Girl launches the Star era.
+
+\subsubsection{M3: Star 101.5 \& the Personalities (1994--2024)}
+
+Kent Phillips and Alan Budwill arrive in 1986 and stay for 32 years together --- the longest-running morning team in Seattle radio history. Phillips holds the overall longevity record at 35 years with the station. The Star 101.5 branding survives three ownership transfers (Fisher 1994, Sinclair 2013, Lotus 2021). The annual Christmas music format becomes a regional institution. Curt Kruse and Corine McKenzie inherit mornings in 2019. On April~1, 2024, after ``Good Riddance (Time of Your Life)'' by Green Day, KPLZ flips to gold-leaning country as 101.5 Hank FM. The 2.1 share that triggered the flip tells the story of Hot AC's decline.
+
+\subsubsection{M4: The 104.9 Frequency (1988--present)}
+
+A signal licensed to Eatonville with only 17,000 watts --- fundamentally a South Sound/Tacoma frequency that has spent its life trying to punch above its weight class. The country start (KJUN-FM, 1995) gives way to the beloved Funky Monkey active rock era (1999--2010), which cultivated a devoted listener community and genuine South Sound identity. GenX 104-9 (2010--2011) fails catastrophically at a 0.3 share. The Brew brings active rock back briefly. iHeart's 2016 four-station shuffle exiles KUBE from 93.3 to 104.9, a controversial downgrade. By 2017, the frequency transitions to Contemporary Worship as KTDD, now operated by 247 Media/Hope Media Group.
+
+\subsubsection{M5: Industry Context \& Cultural Legacy}
+
+The macro lens. The Telecommunications Act of 1996 enables the consolidation wave that reshapes Seattle radio from locally owned competitive stations to cluster-managed corporate properties. Golden West (Gene Autry) to Fisher Communications to Sinclair Broadcast Group to Lotus Communications traces one ownership chain. Ackerley to Clear Channel to iHeartMedia traces another. The 2016 iHeart shuffle --- moving four formats across four frequencies simultaneously --- would have been unthinkable in the 1980s competitive landscape. This module connects the KPLZ/104.9 stories to the national narrative of radio consolidation and the erosion of local media.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: Memory & DMA — source corpus management
+    model: sonnet
+    tasks:
+      - Compile complete format-change timeline with dates, first songs
+      - Cross-index ownership transfers with format decisions
+      - Build comprehensive personality roster
+  denise:
+    role: Display & Output — narrative synthesis
+    model: opus
+    tasks:
+      - Write cultural analysis connecting radio to regional identity
+      - Synthesize the Radio Wars era with period context
+      - Craft the through-line connecting local radio to community
+  paula:
+    role: Audio & I/O — verification and quality
+    model: sonnet
+    tasks:
+      - Verify dates against FCC records and Wikipedia sources
+      - Cross-check ratings data across RadioDiscussions threads
+      - Validate ownership chain accuracy
+  68000:
+    role: CPU — orchestration and judgment
+    model: opus
+    tasks:
+      - Go/no-go decisions at wave boundaries
+      - Resolve conflicting dates/facts across sources
+      - Final document integration and quality review
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete timeline of 101.5 FM from KETO-FM (1959) through Hank FM (2024--present)
+\item Complete timeline of 104.9 FM from K285AE translator through KTDD (present)
+\item Key personalities: Frank Colbourn, Jeff King, Casey Keating, Kent Phillips, Alan Budwill, Mark Allan, Devin Durant, Lizz Sommars, Charlie Brown (KUBE), Eric Powers
+\item Ownership chain documentation for both frequencies
+\item The KPLZ-vs-KUBE radio war (1981--1994) with specific promotions and ratings context
+\item Format-change catalogue with dates, first/last songs, and strategic rationale
+\item Ratings data where available from Arbitron/Nielsen references
+\item The iHeart four-station shuffle of January 2016
+\item Industry context: Telecom Act 1996, consolidation wave, deregulation effects
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Other Seattle FM frequencies (KISW, KZOK, KEXP, etc.) except as competitive context
+\item AM radio history (KJR, KOMO, KVI-AM) except as direct KPLZ/104.9 relationships
+\item Technical broadcast engineering (transmitter specs, antenna patterns) beyond basic power/location
+\item Current programming analysis of Hank FM or KTDD worship format
+\item Financial analysis of station sale prices beyond publicly reported figures
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Complete format-change timeline for 101.5 FM with dates accurate to month/year for all seven major identity shifts (KETO$\rightarrow$KVI-FM$\rightarrow$K-Plus$\rightarrow$Music Magazine$\rightarrow$Hot Hits$\rightarrow$Z~101.5$\rightarrow$Star$\rightarrow$Hank FM)
+\item Complete format-change timeline for 104.9 FM covering all nine identity shifts from translator through KTDD
+\item Minimum 15 named personalities documented with their station tenure, role, and subsequent career
+\item Ownership chain for both frequencies fully sourced with acquisition dates and reported sale prices
+\item The Radio Wars era (1978--1994) documented with at least 5 specific promotions, ratings battles, or competitive moments
+\item First and last songs documented for every format change where historically recorded
+\item Cross-frequency entanglement analysis connecting 101.5 and 104.9 through at least 3 structural relationships
+\item Industry context section linking Seattle-specific changes to national consolidation timeline
+\item All dates verified against at least two independent sources where possible
+\item Document is self-contained --- readable by someone with no prior Seattle radio knowledge
+\item Kent \& Alan morning show documented as a cultural institution with specific tenure data and milestones
+\item The Funky Monkey era (1999--2010) documented as a distinct cultural phenomenon on 104.9
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Foxfire Heritage Skills Vision & Cultural heritage preservation methodology applies to oral radio history & Active \\
+Fox Infrastructure Group Plan & PNW regional identity context; community infrastructure philosophy & Active \\
+GSD BBS Educational Pack Vision & Radio history as potential educational module within retro-computing cultural pack & Planned \\
+The Space Between (essay) & ``The spaces between'' philosophy connects directly to radio as communal frequency space & Published \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A radio station is a space between. Between the transmitter on Cougar Mountain and the car stereo on I-5, between the DJ's voice and the listener's morning, between one song and the next. The frequency exists whether anyone is broadcasting on it or not --- 101.5 megahertz oscillates regardless --- but meaning only emerges when someone uses that frequency to connect one human consciousness to another. Kent Phillips broadcasting from KOMO Plaza and a high school kid driving to school in Issaquah, sharing the same three minutes of a song at the same moment: that is mutual information in Shannon's precise sense. The signal reduces uncertainty. The station creates community.
+
+When KPLZ flipped to Hank FM, the frequency didn't change. The transmitter on Cougar Mountain still pushes 100,000 watts into the Puget Sound basin. But the space between changed. The community that gathered at that frequency dispersed. This research mission documents what was there before the dispersal --- not out of nostalgia, but because the architecture of connection matters. Understanding how a city once talked to itself through radio is understanding something about what we lost when we stopped.
+
+\newpage
+
+% ════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Seattle Radio Heritage --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from web research, RadioDiscussions.com community archives, Wikipedia historical articles, QZVX broadcast history database, and FCC public records. It is organized by research module and provides the factual foundation for the mission's production phase.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+\item FCC Public Inspection Files (publicfiles.fcc.gov) --- license records, ownership filings
+\item QZVX Broadcast History \& Current Affairs (qzvx.com) --- comprehensive PNW radio archives
+\item RadioDiscussions.com --- community forum with extensive firsthand accounts from industry professionals
+\item RadioWest.ca --- aircheck archives with dated recordings
+\item RadioInsight.com --- industry trade coverage of format changes and personnel moves
+\item Nielsen Audio (formerly Arbitron) --- ratings data as cited in secondary sources
+\end{itemize}
+
+\subsection{M1: Origins \& Frequency Heritage Reference}
+
+\subsubsection{101.5 FM: The KETO-FM Foundation (1959--1976)}
+
+The station signed on September~1, 1959 as KETO-FM, owned by Chem-Air, Inc. Initial format was easy listening at 10,000 watts ERP. A 1960 Broadcasting Yearbook advertisement depicted a pelican wearing headphones holding a key (a visual pun on ``KEY-to''). FM listenership remained extremely limited throughout the 1960s. By 1970, power had increased to 100,000 watts. In April 1974, KETO-FM adopted a country music format, competing directly against KAYO on 1150 AM, the dominant country station in the market.
+
+In 1976, Golden West Broadcasters --- owned by entertainer Gene Autry --- purchased KETO-FM. Golden West already owned KVI (570 AM), which carried a popular middle-of-the-road/adult contemporary format. Management rebranded the FM station as ``The FM KVI'' (call sign KVI-FM) and installed a younger pop-rock Top~40 format. The first song under the new format was ``Beginnings'' by Chicago. First program director Frank Colbourn relocated from Monterey, California and earned the station twelve gold records from artists including Stevie Wonder, Exile, and Donna Summer.
+
+\subsubsection{104.9 FM: Translator to Full-Power (1988--1998)}
+
+The 104.9 frequency first appeared in the late 1980s as FM translator K285AE, rebroadcasting the adult contemporary format of KLTX (now KJEB-FM). The translator went dark in the early 1990s when KLTX increased its own power. The frequency returned to air in July 1995 as a full-power station using call sign KJUN-FM, broadcasting a country music format. Licensed to Eatonville, Washington, it operates at 17,000 watts ERP with its transmitter on Alder Cutoff Road East in Eatonville. The call letters changed to KKBY-FM in 1996 with a shift to classic country, then on February~2, 1998 flipped to urban contemporary as ``Y~104.9.''
+
+\subsection{M2: The Radio Wars Reference}
+
+\subsubsection{The K-Plus Pivot (1978--1983)}
+
+Confusion between talk-formatted KVI-AM and its sister KVI-FM led to a 1978 rebranding. KVI-FM became ``K-Plus 101'' with new call letters KPLZ. The station leaned heavily into disco, becoming the Seattle market's de facto disco station while KJR and KING maintained mainstream Top~40 formats on AM. The anti-disco backlash hit K-Plus hard --- by late 1979, the format was in crisis. KPLZ pivoted to adult contemporary as ``The Music Magazine'' using the slogan ``KPLZ'' without the K-Plus moniker.
+
+The station returned to mainstream Top~40 on September~5, 1983, adopting the ``Hot Hits'' format and jingle package developed by Mike Joseph, which numerous stations had adopted nationally. Program director Jeff King led the station during this critical transition.
+
+\subsubsection{The Three-Way Battle (1981--1988)}
+
+KBLE-FM (93.3) relaunched in early 1981 as ``The New 93'' (later KUBE), entering the Top~40 arena with low commercial loads and veteran morning man Charlie Brown (from KJR). KNBQ on 97.3 provided a third Top~40 competitor. The market supported an intense three-way rivalry through most of the 1980s, with KNBQ dropping out to become oldies station KBSG in 1988.
+
+\subsubsection{KPLZ vs KUBE: The Definitive Battle (1983--1994)}
+
+Under program directors Jeff King and later Casey Keating, KPLZ competed head-to-head with KUBE. Key competitive features included:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{The Hit Election} --- Listener voting on new music, a KPLZ signature promotion
+\item \textbf{Stereo Wars} --- School-vs-school competitions that generated intense listener loyalty
+\item \textbf{Rick Dees Weekly Top~40} --- KPLZ served as the Seattle affiliate during its Z~101.5 era
+\item \textbf{American Top~40} --- KUBE carried the Casey Kasem and later Shadoe Stevens countdowns
+\item \textbf{Festival presence} --- Both stations appeared at local festivals, making the competition visible in the community
+\end{itemize}
+
+Jeff King hosted mornings during the Hot Hits era, creating parody songs including ``Bruce'' (lamenting confusion with news anchor Bruce King) and ``Dropping Amadeus'' (mocking Falco's extended chart run). Kent Phillips and Alan Budwill replaced King in 1986, transitioning the station through its Z~101.5 and 101.5~KPLZ branding periods.
+
+By the late 1980s, KPLZ had won the straight Top~40 war --- industry sources place the decisive victory around 1988--1990. KUBE responded by adopting a rhythmic contemporary approach in early 1992, finding a new audience. KPLZ attempted various strategies: mainstream CHR emphasis, five-year recurrent focus, and eventually adding rhythmic titles by January 1993. None reversed the decline. Fisher Communications purchased the station in 1994, and on January~14, 1994 at noon, KPLZ abandoned Top~40 for Hot AC.
+
+\subsubsection{The Branding Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Brand} & \tableheader{Notes} \\
+\midrule
+1976 & The FM KVI & Pop rock Top 40; adult-leaning \\
+1978 & K-Plus 101 & Disco-heavy; call letters become KPLZ \\
+$\sim$1980 & KPLZ (The Music Magazine) & AC pivot after disco backlash \\
+1983 & Hot Hits K-Plus FM & Mike Joseph format; Jeff King mornings \\
+$\sim$1987 & Z 101.5 & Rick Dees affiliate; Kent \& Alan established \\
+$\sim$1989 & 101.5 KPLZ & Return to call-letter branding \\
+1994 & Star 101.5 & Hot AC; first song ``Waiting for a Star to Fall'' \\
+2024 & 101.5 Hank FM & Gold-leaning country; satellite-delivered \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M3: Star 101.5 \& Personalities Reference}
+
+\subsubsection{The Kent \& Alan Institution}
+
+Kent Phillips and Alan Budwill began co-hosting mornings at KPLZ in 1986, arriving together from Portland. Phillips also served as program director throughout much of his tenure. Their partnership survived the 1994 format flip from CHR to Hot AC without interruption --- they were the one constant as the station changed its identity around them.
+
+Key milestones: Phillips was previously at KUJ in Walla Walla during college at Whitman, then KJRB in Spokane. Budwill's law enforcement background gave him a distinctive on-air persona (Phillips's first impression: ``He was a cop. You had this really nasty-looking mustache''). Together they orchestrated pranks including submitting a staged wedding photo to the Seattle Times' Bride \& Groom section --- the paper published it.
+
+Budwill retired in January 2019 after 32 years together, broadcasting his final years from a home studio on San Juan Island. Phillips moved to afternoons, then departed KPLZ in December 2021 after 35 years --- the longest tenure of any radio personality at a single Seattle station, surpassing Larry Nelson's 28-year run at KOMO. Phillips subsequently joined FMR Associates as managing partner and co-owns Eastlan Ratings.
+
+\subsubsection{Ownership Chain}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Owner} & \tableheader{Period} & \tableheader{Context} \\
+\midrule
+Chem-Air, Inc. & 1959--1976 & Original KETO-FM licensee \\
+Golden West (Gene Autry) & 1976--1994 & Paired with KVI-AM; created KPLZ identity \\
+Fisher Communications & 1994--2013 & Launched Star 101.5; local PNW media company \\
+Sinclair Broadcast Group & 2013--2021 & Primarily TV company; retained Seattle radio cluster \\
+Lotus Communications & 2021--present & \$18M purchase; flipped to Hank FM in 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Other Key Personnel}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Station/Role} & \tableheader{Notes} \\
+\midrule
+Frank Colbourn & KVI-FM, 1st PD & Relocated from Monterey; 12 gold records \\
+Jeff King & KPLZ, PD/Mornings & Led Hot Hits era; later at KMGI, KHON-TV Hawaii \\
+Casey Keating & KPLZ, PD & Steered station through peak KUBE rivalry \\
+Mark Allan & KPLZ, air talent & Now runs Pirahna Productions; KCTS/Crosscut \\
+Devin Durant & KPLZ, air talent & Lost track per community sources \\
+Lizz Sommars & KPLZ, air talent & Remains in greater Seattle area; out of radio \\
+Jill Taylor & KPLZ, middays & 27 years (1994--2021); also worked KMPS, KMGI \\
+Curt Kruse & Star 101.5, mornings & Took mornings 2019; let go March 2021 \\
+Corine McKenzie & Star 101.5, mornings & Partnered with Kruse; let go March 2021 \\
+Leonard Barokas & KPLZ, producer & Long-tenured morning show producer \\
+Jen Pirak & Star 101.5, afternoons & Later morning host before Hank FM flip \\
+Charlie Brown & KUBE, mornings & KPLZ's primary competitor; 1981--1995 \\
+Eric Powers & KUBE, PD/afternoons & With KUBE 1992--2016; let go in 104.9 move \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M4: The 104.9 Frequency Reference}
+
+\subsubsection{Funky Monkey Era (1999--2010)}
+
+On July~26, 1999, KKBY began stunting with all-Beastie Boys music. On July~31, the station flipped to grunge rock/metal rock active rock as ``Funky Monkey 104.9'' (call letters changed to KFNK October~21). The format emphasized local music, listener participation, and material not heard on mainstream rock stations KISW and KNDD. The station had a loyal following and streamed online, building a nationwide audience. Ownership changed from Rock on Radio, Inc.\ to Ackerley Communications (2001), then to Clear Channel/iHeartMedia (2002), but the format's identity persisted for eleven years.
+
+Final songs on The Monkey (November~10, 2010): ``Brass Monkey'' by Beastie Boys, ``It's the End of the World as We Know It'' by R.E.M., ``Closing Time'' by Semisonic.
+
+\subsubsection{Format Turbulence (2010--2016)}
+
+GenX 104-9 launched the same day with ``Get Ready for This'' by 2~Unlimited, ``Smells Like Teen Spirit'' by Nirvana, and ``Baby Got Back'' by Sir Mix-a-Lot. The 90s-leaning adult hits format was a catastrophic failure, peaking at a 0.3 share versus The Monkey's typical 1.0. The format lasted less than a year --- on October~28, 2011, GenX gave way to Halloween stunting as ``Freddy 104-9,'' then relaunched November~1, 2011 as active rock ``The Brew 104-9 KKBW.''
+
+\subsubsection{The iHeart Shuffle (January 2016)}
+
+On January~19, 2016 at noon, iHeart executed a simultaneous four-station format swap:
+
+\begin{itemize}[leftmargin=2em]
+\item KUBE's rhythmic CHR moved from 93.3 to 104.9 (``KUBE 104.9 --- Tacoma's Hits \& Hip-Hop'')
+\item 93.3 became ``Power 93.3'' (mainstream CHR, targeting Hubbard's market-leading Movin 92.5)
+\item KBKS (106.1 Kiss FM) shifted from mainstream CHR to Hot AC
+\item KKBW's active rock format moved to KYNW as ``Alt 102.9''
+\end{itemize}
+
+The move was widely seen as a downgrade for KUBE, reducing its signal from the full-metro 93.3 to the South Sound 104.9. Eric Powers, who had been with KUBE since 1992, was let go. KUBE's first song on 104.9: ``Can I Get A\ldots'' by Jay-Z.
+
+By May 2018, the KUBE call letters and rhythmic format returned to 93.3, and the 104.9 frequency transitioned to Contemporary Worship as KTDD in December 2017, initially simulcasting Spokane's KZFS before establishing its own identity.
+
+\subsection{M5: Industry Context Reference}
+
+\subsubsection{Seattle Radio Landscape Evolution}
+
+The Seattle FM landscape underwent a dramatic transformation between 1977 and 2026. In 1977, stations were predominantly locally owned with distinct identities: KISW and KZOK for album rock, KSEA for beautiful music, KPLZ for Top~40, KUOW for NPR, KING-FM for classical. By the close of the 1980s, the market's number-one station was news/talk KIRO-AM, and the KPLZ-vs-KUBE contemporary hits battle had both stations near the top of the ratings.
+
+The Telecommunications Act of 1996 accelerated ownership consolidation. Where Seattle once had dozens of independent owners, the market is now dominated by a handful of groups: iHeartMedia (largest cluster), Hubbard Broadcasting, Lotus Communications, Entercom/Audacy (now Cumulus?), and a few independents. The effect on format diversity has been profound --- corporate clusters optimize across their portfolio, leading to format shuffles like iHeart's 2016 four-station swap that would have been impossible under pre-deregulation ownership limits.
+
+\subsubsection{Ratings Context}
+
+Selected ratings data points from secondary sources:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Station} & \tableheader{Share} & \tableheader{Context} \\
+\midrule
+1980 & KPLZ & $\sim$4.6 & Tied 6th; recovering from disco backlash \\
+$\sim$1989 & KPLZ & Top 5 & Won the straight Top 40 war vs KUBE \\
+2010 & KFNK (Monkey) & $\sim$1.0 & Typical share for 17kW South Sound signal \\
+2011 & KSGX (GenX) & 0.3 & Catastrophic failure \\
+2015 & KUBE 93.3 & 2.3 & Ranked \#13; triggered the iHeart shuffle \\
+2024 Jan & KPLZ (Star) & 2.1 & Triggered flip to Hank FM \\
+2024 Jan & KKWF (Wolf) & 7.1 & Market \#2; country target KPLZ now competes with \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Guidance} \\
+\midrule
+Living personalities & Kent Phillips, Alan Budwill, Mark Allan, Eric Powers, and others are living individuals. Present factual career information only; no speculation about personal matters. \\
+Personnel terminations & Several personnel (Curt Kruse, Corine McKenzie, Eric Powers) were let go. State facts without editorializing on fairness or corporate motivations. \\
+Corporate ownership critique & Present consolidation effects factually. Let the data tell the story without advocating for specific regulatory positions. \\
+Ratings as proxy & Ratings data is cited from secondary sources referencing Arbitron/Nielsen. Note sourcing limitations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{FCC \& Government Sources}
+\begin{itemize}[leftmargin=2em]
+\item FCC Public Inspection Files --- KPLZ-FM station profile (publicfiles.fcc.gov/fm-profile/KPLZ-FM)
+\item FCC Public Inspection Files --- KTDD station profile
+\end{itemize}
+
+\subsubsection{Encyclopedic \& Archival Sources}
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: KPLZ-FM --- comprehensive history with extensive citations (en.wikipedia.org/wiki/KPLZ-FM)
+\item Wikipedia: KTDD (FM) --- 104.9 frequency history (en.wikipedia.org/wiki/KTDD\_(FM))
+\item Wikipedia: KJR-FM --- KUBE history and competitive context
+\item Wikipedia: KVI --- parent station history and Golden West context
+\item Wikipedia: KPNW-FM --- competitor station history and 2024 country format wars
+\item QZVX.com --- ``One For Seattle Radio Record Books: Kent Phillips, 35 Years @ KPLZ''
+\item TangentSunset.com --- Seattle Radio History overview
+\end{itemize}
+
+\subsubsection{Community \& Industry Sources}
+\begin{itemize}[leftmargin=2em]
+\item RadioDiscussions.com --- ``K-PLUS FM - Where Are They Now?'' (thread \#763775)
+\item RadioDiscussions.com --- ``KPLZ branding history'' (thread \#667659)
+\item RadioDiscussions.com --- ``Seattle FM stations in the 1970's'' (thread \#476264)
+\item RadioDiscussions.com --- ``Radio Wars'' (thread \#477438)
+\item RadioDiscussions.com --- ``Seattle/Tacoma radio ratings from 1980'' (thread \#770924)
+\item RadioDiscussions.com --- ``Early FM Top 40 in Seattle'' (thread \#648691)
+\item RadioInsight.com --- ``KPLZ Shakes Up Mornings'' (December 2018)
+\item RadioInsight.com --- ``Kent Phillips To Depart KPLZ After 35 Years'' (December 2021)
+\item RadioInsight.com --- ``iHeart Shuffles Four Seattle/Tacoma Stations'' (January 2016)
+\item SeattleRefined.com --- ``Signing Off: Celebrating 32 Years of The Kent \& Alan Show'' (January 2019)
+\item FOX 13 Seattle --- ``Seattle's Star 101.5 KPLZ flips its format to country'' (April 2024)
+\item RadioWest.ca --- Aircheck archives (Jeff King 1985; Kent \& Alan 1991, 1994)
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on the heritage of KPLZ (101.5 FM) and the 104.9 FM frequency in the Seattle-Tacoma radio market. The document will serve as a cultural preservation artifact capturing the oral history, institutional timeline, and industry context of two frequencies that together span 65 years of Pacific Northwest broadcasting. Deliverables include a complete format-change chronology, personality archive, ownership genealogy, and cultural analysis connecting local radio to regional identity.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+═══════════════════════════════
+
+Wave 0: FOUNDATION (Sequential)
+  ┌──────────────────────────────────────────────────┐
+  │ 0.1 Source Index & Timeline Schema  [Haiku]      │
+  │ 0.2 Personality Roster Template     [Haiku]      │
+  │ 0.3 Shared Terminology Glossary     [Haiku]      │
+  └──────────────────────────────────────────────────┘
+                         │
+Wave 1: PARALLEL RESEARCH (2 tracks)
+  ┌───────────────────────┐  ┌───────────────────────┐
+  │ Track A               │  │ Track B               │
+  │ 1A.1 M1: Origins      │  │ 1B.1 M4: 104.9 Freq  │
+  │      [Sonnet]         │  │      [Sonnet]         │
+  │ 1A.2 M2: Radio Wars   │  │ 1B.2 M5: Industry    │
+  │      [Opus]           │  │      [Sonnet]         │
+  │ 1A.3 M3: Star/Kent&Al │  │                       │
+  │      [Sonnet+Opus]    │  │                       │
+  └───────────────────────┘  └───────────────────────┘
+                         │
+Wave 2: SYNTHESIS (Sequential)
+  ┌──────────────────────────────────────────────────┐
+  │ 2.1 Cross-frequency integration     [Opus]       │
+  │ 2.2 Cultural analysis narrative     [Opus]       │
+  │ 2.3 Timeline cross-verification     [Sonnet]     │
+  └──────────────────────────────────────────────────┘
+                         │
+Wave 3: PUBLICATION (Sequential)
+  ┌──────────────────────────────────────────────────┐
+  │ 3.1 Document assembly & formatting  [Sonnet]     │
+  │ 3.2 Fact verification pass          [Sonnet]     │
+  │ 3.3 Final review & polish           [Opus]       │
+  └──────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Source Layer} --- Compiled index of FCC records, Wikipedia articles, RadioDiscussions threads, QZVX archives, RadioInsight coverage, and aircheck collections
+\item \textbf{Chronology Layer} --- Precise timeline of format changes, ownership transfers, and personnel moves for both frequencies
+\item \textbf{Personality Layer} --- Biographical sketches and career trajectories for key on-air talent and program directors
+\item \textbf{Analysis Layer} --- Cultural significance narrative connecting radio heritage to regional identity and national industry trends
+\item \textbf{Integration Layer} --- Cross-frequency entanglement analysis showing how 101.5 and 104.9 stories interconnect
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & 101.5 FM Chronology & All 7 format shifts dated with first/last songs & M1, M2, M3 \\
+D2 & 104.9 FM Chronology & All 9 format shifts dated with context & M4 \\
+D3 & Personality Archive & $\geq$15 profiles with tenure and career data & M2, M3 \\
+D4 & Radio Wars Analysis & $\geq$5 competitive moments documented & M2 \\
+D5 & Ownership Genealogy & Both chains fully sourced with dates/prices & M3, M4, M5 \\
+D6 & Industry Context & National consolidation linked to local effects & M5 \\
+D7 & Cultural Synthesis & Through-line narrative connecting heritage to community & M5 + all \\
+D8 & Complete Document & Self-contained, readable, publication-quality & All modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source Index & None & Haiku & 2,000 \\
+M1: Origins & Source Index & Sonnet & 8,000 \\
+M2: Radio Wars & Source Index & Opus & 12,000 \\
+M3: Star/Personalities & Source Index & Sonnet+Opus & 10,000 \\
+M4: 104.9 Frequency & Source Index & Sonnet & 8,000 \\
+M5: Industry Context & Source Index & Sonnet & 6,000 \\
+Cross-freq Integration & M1--M5 & Opus & 6,000 \\
+Cultural Synthesis & M1--M5, Integration & Opus & 4,000 \\
+Document Assembly & All above & Sonnet & 4,000 \\
+Verification Pass & Assembled doc & Sonnet & 3,000 \\
+Final Review & Verified doc & Opus & 2,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Alloc.} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$37\% & Radio Wars cultural analysis, cross-frequency synthesis, final quality review --- judgment-heavy tasks where nuance matters \\
+Sonnet & $\sim$53\% & Chronology compilation, personality profiles, industry context, document assembly, verification --- structured content production \\
+Haiku & $\sim$10\% & Source index, templates, glossary --- scaffolding tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Components} & \tableheader{Parallel} & \tableheader{Windows} \\
+\midrule
+0 & Foundation & 3 & No & 1 \\
+1 & Research & 5 & Yes (2 tracks) & 4--6 \\
+2 & Synthesis & 3 & No & 3 \\
+3 & Publication & 3 & No & 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0.1 & Source Index & Haiku & Structured index of all research sources with reliability ratings \\
+0.2 & Timeline Schema & Haiku & JSON/YAML schema for format-change events \\
+0.3 & Terminology Glossary & Haiku & Radio industry terms (CHR, Hot AC, rhythmic, etc.) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- The 101.5 Story:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1A.1 & M1: Origins (1959--78) & Sonnet & Complete KETO$\rightarrow$KVI-FM$\rightarrow$KPLZ chronology \\
+1A.2 & M2: Radio Wars (78--94) & Opus & Cultural analysis of KPLZ/KUBE era with promotions \\
+1A.3 & M3: Star era (94--24) & Sonnet+Opus & Kent \& Alan profiles; ownership chain; format evolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- The 104.9 Story \& Context:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+1B.1 & M4: 104.9 Frequency & Sonnet & Complete frequency history with format catalogue \\
+1B.2 & M5: Industry Context & Sonnet & Consolidation timeline; Seattle landscape evolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+2.1 & Cross-frequency analysis & Opus & Entanglement map: 101.5 $\leftrightarrow$ 104.9 $\leftrightarrow$ 93.3 \\
+2.2 & Cultural synthesis & Opus & Narrative connecting radio heritage to community identity \\
+2.3 & Timeline verification & Sonnet & Cross-check all dates against multiple sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+3.1 & Document assembly & Sonnet & Complete formatted document \\
+3.2 & Fact verification & Sonnet & All claims checked; inconsistencies flagged \\
+3.3 & Final review & Opus & Quality gate; publication readiness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Source index caching:} Wave 0 output cached for all Wave 1 tasks (5-minute TTL window)
+\item \textbf{Track A/B parallel launch:} Both tracks start within same context window to share cached foundation
+\item \textbf{Cross-reference caching:} M2 (Radio Wars) output cached for M3 personality profiles (overlapping personnel)
+\item \textbf{Synthesis pre-load:} Wave 1 outputs compiled into single reference before Wave 2 begins
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 2,000 \\
+Wave 1: Research & 12,000 & 22,000 & --- \\
+Wave 2: Synthesis & 10,000 & 3,000 & --- \\
+Wave 3: Publication & 2,000 & 7,000 & --- \\
+\midrule
+\textbf{Total} & \textbf{24,000} & \textbf{32,000} & \textbf{2,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total: $\sim$58,000 tokens across $\sim$14 context windows in 4 sessions.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+════════════════
+
+  [0.1 Source Index] ──┬──> [1A.1 Origins]
+                       │       │
+                       │       └──> [1A.2 Radio Wars]
+                       │               │
+                       │               └──> [1A.3 Star/K&A]
+                       │                       │
+                       ├──> [1B.1 104.9 Freq]   │
+                       │       │                │
+                       ├──> [1B.2 Industry]     │
+                       │       │                │
+                       └───────┴────────────────┘
+                               │
+                        [2.1 Cross-freq]
+                               │
+                        [2.2 Cultural]
+                               │
+                        [2.3 Verify]
+                               │
+                        [3.1 Assembly]
+                               │
+                        [3.2 Fact-check]
+                               │
+                        [3.3 Final Review]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 4 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC records, Wikipedia (with citations), RadioDiscussions (firsthand accounts), QZVX, or RadioInsight. Zero unsourced claims. \\
+SC-NUM & Numerical attribution & Every ratings share, sale price, power figure, and date attributed to specific source \\
+SC-ADV & No policy advocacy & Consolidation effects presented factually without advocating for specific regulatory positions \\
+SC-PER & Living person accuracy & All biographical claims about living individuals verified against multiple sources; no speculation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & 101.5 timeline completeness & All 7 format shifts dated \\
+CF-02 & 101.5 first/last songs & Documented for every shift where historically recorded \\
+CF-03 & 104.9 timeline completeness & All 9 format shifts dated \\
+CF-04 & 104.9 first/last songs & Documented where available \\
+CF-05 & Personality count & $\geq$15 named individuals with tenure data \\
+CF-06 & Kent \& Alan depth & Arrival date, tenure length, retirement dates, post-KPLZ careers \\
+CF-07 & Ownership chain 101.5 & All 5 owners with acquisition dates and prices where public \\
+CF-08 & Ownership chain 104.9 & All owners from translator through KTDD \\
+CF-09 & Radio Wars moments & $\geq$5 specific competitive events documented \\
+CF-10 & Hit Election documented & Specific description of the promotion's mechanics \\
+CF-11 & Stereo Wars documented & Specific description with community impact \\
+CF-12 & iHeart shuffle completeness & All 4 stations/formats in the 2016 swap documented \\
+CF-13 & Funky Monkey depth & Sign-on date, sign-off date, community significance \\
+CF-14 & Industry context linkage & Telecom Act 1996 connected to specific Seattle effects \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Cross-frequency entanglement & $\geq$3 structural connections between 101.5 and 104.9 histories \\
+IN-02 & Personnel consistency & Same individuals referenced consistently across modules \\
+IN-03 & Timeline consistency & No date contradictions between modules \\
+IN-04 & Self-containment & Readable by someone with no Seattle radio knowledge \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Conflicting dates & Where sources disagree on dates, both cited with uncertainty noted \\
+EC-02 & Missing data gaps & Acknowledged where format-change dates or personnel info is incomplete \\
+EC-03 & Approximate dates & Clearly marked with ``$\sim$'' or ``circa'' when precision unavailable \\
+EC-04 & Current status accuracy & Present-day status of stations and personnel verified as of 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. 101.5 format timeline & CF-01, CF-02 & Pending \\
+2. 104.9 format timeline & CF-03, CF-04 & Pending \\
+3. $\geq$15 personalities & CF-05, CF-06 & Pending \\
+4. Ownership chains sourced & CF-07, CF-08 & Pending \\
+5. Radio Wars documented & CF-09, CF-10, CF-11 & Pending \\
+6. First/last songs & CF-02, CF-04 & Pending \\
+7. Cross-frequency analysis & IN-01 & Pending \\
+8. Industry context linked & CF-14 & Pending \\
+9. Dates dual-verified & IN-03, EC-01 & Pending \\
+10. Self-contained document & IN-04, EC-02 & Pending \\
+11. Kent \& Alan documented & CF-06 & Pending \\
+12. Funky Monkey documented & CF-13 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at wave boundaries \\
+PLAN & Planner & Wave decomposition; Track A/B scheduling \\
+SCOUT & Research Agent & Source verification; gap-fill web research \\
+EXEC-A & Executor (Track A) & 101.5 story production (M1, M2, M3) \\
+EXEC-B & Executor (Track B) & 104.9 + industry production (M4, M5) \\
+CRAFT-HIST & History Specialist & Radio era context; format archaeology \\
+CRAFT-CULT & Culture Specialist & Community impact analysis; oral history framing \\
+VERIFY & Verification & Date cross-checking; source quality enforcement \\
+INTEG & Integration Agent & Cross-frequency entanglement validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 \\
+Total Waves & 4 (0--3) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 4 \\
+Total Token Budget & $\sim$58,000 \\
+Model Split & Opus 37\% / Sonnet 53\% / Haiku 10\% \\
+Safety-Critical Tests & 4 (mandatory-pass) \\
+Total Tests & 26 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{A radio station is a space between. Between the transmitter on Cougar Mountain and the car stereo on I-5, between the DJ's voice and the listener's morning, between one song and the next. Understanding how a city once talked to itself through radio is understanding something about what we lost when we stopped.}
+
+\vspace{0.5em}
+\hfill --- \textit{The Signal and the Station, Vision Guide}
+\end{quotebox}
+
+\end{document}
