@@ -1,0 +1,910 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Space/Physics ===
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{F9A825}      % Star gold
+\definecolor{accent}{HTML}{7C4DFF}        % Violet accent
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Light purple
+\definecolor{lightsecondary}{HTML}{E1F5FE}% Light blue
+\definecolor{lighttertiary}{HTML}{FFF8E1} % Light gold
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Frequency Continuum}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Frequency Continuum -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Frequency Continuum}}
+
+\vspace{0.3em}
+{\fontsize{20}{26}\selectfont\bfseries\sffamily\textcolor{primary}{From Cosmic Wavelengths to Microtonal Intervals}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Acoustics \textbullet{} Astrophysics \textbullet{} Music Theory \textbullet{} Psychoacoustics}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 14 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Frequency Continuum --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Skill Creator v1.49+, Deep Audio Analyzer Mission}
+\metafield{Context:}{Foundational frequency-domain research spanning $10^{-17}$ Hz to $10^{12}$ Hz}
+
+\subsection{Vision}
+
+The universe is a symphony performed across sixty orders of magnitude. A supermassive black hole in the Perseus galaxy cluster sustains a B-flat 57 octaves below middle C---a single note held for 2.5 billion years, its period measured not in milliseconds but in tens of millions of years. At the other extreme, microtonal intervals of 16 cents or less carve the spaces between the keys of a piano, revealing tonal landscapes that the Western 12-tone equal temperament system cannot express. Between these extremes lie the Schumann resonances at 7.83 Hz---the electromagnetic heartbeat of Earth itself---and the infrasonic rumble of volcanoes, earthquakes, and weather systems that propagate across entire continents with almost no energy loss.
+
+This research mission maps the complete frequency continuum as a unified field of study. The organizing insight is that the same mathematical relationships---harmonic series, resonant cavities, standing waves, interference patterns---govern phenomena at every scale, from the intracluster medium of galaxy clusters to the cochlear mechanics of the human inner ear. What changes is not the physics but the medium, the timescale, and the observer.
+
+The through-line to the GSD ecosystem is immediate: the Amiga Principle teaches that architectural leverage, not brute computational force, produces extraordinary results. A 7.83 Hz standing wave that wraps the circumference of the Earth is an Amiga Principle writ planetary---a single elegant resonance governing the electromagnetic character of an entire world. The spaces between the notes, like the spaces between the nodes in a network, are where meaning lives.
+
+This study will produce a comprehensive reference document, a set of computational verification tools, and a curated frequency atlas mapping the complete continuum from deep-space pressure waves through infrasound, the Schumann bridge zone, audible acoustics, microtonal and macrotonal interval systems, and into the ultrasonic domain. The result is a living educational resource that serves composers, acousticians, astrophysicists, and anyone drawn to the deep structure of vibration itself.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented knowledge domains.} Microtonal music theory, infrasonic research, astrophysical sonification, and psychoacoustics each maintain separate literatures, terminologies, and methodologies with almost no cross-pollination. No single reference maps the full frequency continuum as a unified phenomenon.
+
+\item \textbf{The 20 Hz illusion.} The common claim that ``infrasound is inaudible'' is incorrect---humans can perceive frequencies well below 20 Hz at sufficient amplitude, and the character of perception changes qualitatively as frequency drops below 10 Hz. This misconception shapes public policy, building codes, and artistic practice.
+
+\item \textbf{Sonification without grounding.} NASA's data sonification program has produced extraordinary public engagement, but the mapping from astrophysical data to audible frequencies is largely aesthetic rather than physically motivated. There is no systematic framework connecting the actual pressure-wave physics of galaxy clusters to human-audible analogues.
+
+\item \textbf{Microtonal isolation from physics.} Western microtonal theory remains largely self-referential, exploring divisions of the octave without connecting interval perception to the broader physics of resonance, standing waves, and harmonic series that govern sound at every scale.
+
+\item \textbf{The missing bridge: Schumann to cochlea.} The Schumann resonances (7.83 Hz fundamental) sit at the exact boundary between infrasonic earth science and audible acoustics, yet no comprehensive study traces the perceptual, physiological, and physical transitions across this boundary zone.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \textit{Frequency is a universal organizing principle; the same wave physics that shapes galaxy clusters, planetary atmospheres, and musical intervals can be mapped as a single continuum with domain-specific resonance regimes.}
+
+Every domain in this study---astrophysical pressure waves, infrasonic oscillations, Schumann resonances, audible acoustics, and microtonal/macrotonal interval systems---is governed by the same fundamental relationship: $f = v / \lambda$, where frequency, propagation velocity, and wavelength form an indivisible triad. What varies across domains is the medium (intracluster plasma, atmosphere, cochlear fluid), the velocity (sound speed varies from $\sim$1,000 km/s in hot cluster gas to $\sim$343 m/s in air), and the relevant timescales (millions of years to microseconds).
+
+\subsubsection{Frequency Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+THE FREQUENCY CONTINUUM
+===========================================================
+10^-17 Hz    Deep Space Pressure Waves (Perseus B-flat)
+  |          Galaxy cluster acoustic modes
+  |          Period: millions of years
+  |
+10^-8 Hz     Cosmic Microwave Background oscillations
+  |          Baryon acoustic oscillations
+  |
+10^-4 Hz     Earth free oscillations (seismic normal modes)
+  |          Gravitational wave background (LISA band)
+  |
+10^-2 Hz     Microseisms, ocean-atmosphere coupling
+  |
+10^-1 Hz     Infrasonic threshold zone
+  |          Volcanic, meteorological, industrial sources
+  |
+ 1 Hz        Sub-audible / tactile perception zone
+  |          Vestibular system engagement
+  |
+ 7.83 Hz === SCHUMANN FUNDAMENTAL === (Earth's heartbeat)
+  |          Alpha-theta brainwave boundary
+  |          14.3, 20.8, 27.3, 33.8 Hz harmonics
+  |
+ 20 Hz       Conventional "hearing threshold"
+  |          (actually perception shifts, not ceases)
+  |
+ 35-250 Hz   LIGO gravitational wave detection band
+  |          (coincidentally in human audio range)
+  |
+ 100-4000 Hz Peak human auditory sensitivity
+  |          Speech fundamental + harmonics
+  |          Musical instrument fundamentals
+  |
+MICROTONAL ZONE: intervals < 100 cents (< 1 semitone)
+  Quarter tones (50 cents), sixth tones (33 cents)
+  Indian sruti (~22 per octave), Arabic maqam
+  Pythagorean comma (23.5 cents)
+
+MACROTONAL ZONE: EDOs with < 12 divisions per octave
+  5-EDO (240 cent steps), Javanese slendro
+  7-EDO (171 cent steps), 8-EDO, 9-EDO, 10-EDO
+  |
+ 20,000 Hz   Upper limit of human hearing
+  |
+ >20 kHz     Ultrasonic domain
+===========================================================
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+                   +---------------------------+
+                   |  M0: Frequency Atlas Core  |
+                   |  (shared schema, units,    |
+                   |   conversion framework)    |
+                   +---------------------------+
+                       |       |       |
+          +------------+  +----+----+  +------------+
+          |               |         |               |
++---------+---+  +--------+--+  +---+---------+  +--+----------+
+| M1: Deep    |  | M2: Sub-Hz |  | M3: Bridge  |  | M4: Micro/ |
+| Space Waves |  | & Infra-   |  | Zone:       |  | Macrotonal |
+| (10^-17 to  |  | sound      |  | Schumann to |  | Intervals  |
+| 10^-4 Hz)   |  | (0.001 to  |  | Audible     |  | & Tuning   |
+|             |  | 20 Hz)     |  | (1-200 Hz)  |  | Systems    |
++-------------+  +-----------+  +-------------+  +------------+
+          |               |         |               |
+          +-------+-------+---------+-------+-------+
+                  |                         |
+          +-------+-------+        +--------+-------+
+          | M5: Sonification|      | M6: Synthesis  |
+          | & Perceptual    |      | & Computational|
+          | Mapping         |      | Verification   |
+          +-----------------+      +----------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M0: Frequency Atlas Core}
+Shared data schema defining the continuum: frequency, wavelength, period, medium, propagation velocity, source class, and perceptual regime. Establishes unit conversion framework (Hz, cents, octaves, periods, wavelength in meters/km/light-years). Provides the backbone data structure that all other modules reference.
+
+\subsubsection{M1: Deep Space Pressure Waves}
+Astrophysical acoustic phenomena: Perseus cluster B-flat (57 octaves below middle C, period $\sim$9.6 million years), M87 variable tones (56--59 octaves below middle C), baryon acoustic oscillations in the cosmic microwave background, and stellar oscillation modes. Source physics: relativistic jet inflation of plasma bubbles in intracluster medium, cavity-driven sound generation. Propagation: sound speed in hot cluster gas ($\sim$1,000 km/s), absorption characteristics, energy transport and cluster heating.
+
+\subsubsection{M2: Sub-Hz and Infrasonic Domain}
+Frequencies from 0.001 Hz to 20 Hz. Natural sources: volcanic eruptions, severe weather, microseisms, ocean-atmosphere coupling, Earth free oscillations (5--7 mHz background). Anthropogenic sources: industrial machinery, wind turbines, transportation. Propagation characteristics: minimal atmospheric absorption at infrasonic frequencies (loss $<$ 1\% over half Earth's circumference at 0.1 Hz). Biological effects: vestibular system engagement, documented physiological responses at high SPL, amplitude-modulation perception interactions.
+
+\subsubsection{M3: The Bridge Zone --- Schumann Resonances to Audible Threshold}
+The critical 1--200 Hz transition region. Schumann resonances: 7.83 Hz fundamental and harmonics at 14.3, 20.8, 27.3, 33.8 Hz. Electromagnetic cavity physics: Earth-surface-to-ionosphere waveguide, lightning excitation ($\sim$50 strikes/second globally), wavelengths of 9,000--38,000 km. Perceptual transitions: tonal sensation ceasing around 20 Hz, individual cycle perception below 10 Hz, dynamic range compression at low frequencies. Psychoacoustic research: equal-loudness contours, infrasound masking effects on audible tones, the alpha-theta brainwave frequency correspondence.
+
+\subsubsection{M4: Microtonal and Macrotonal Interval Systems}
+Intervals smaller than the Western semitone (100 cents): quarter tones (50 cents), sixth tones (33.3 cents), sixteenth tones (12.5 cents), Indian 22-shruti system, Arabic maqam neutral tones, Indonesian gamelan pelog and slendro, ancient Greek enharmonic genus ($<$ 50 cents). Mathematical frameworks: just intonation ratios, prime limits (3-limit Pythagorean through 17-limit septendecimal), equal divisions of the octave (EDO), meantone temperaments. Macrotonal systems: EDOs with fewer than 12 divisions (5-EDO through 11-EDO), their unique intervallic properties and cultural correspondences. Xenharmonic compositional techniques.
+
+\subsubsection{M5: Sonification and Perceptual Mapping}
+NASA/Chandra data sonification methodology: parameter mapping (brightness to volume, position to pitch), audification (direct frequency scaling), multi-wavelength layering. The Perseus resynthesis: 57--58 octave upward scaling, 144--288 quadrillion times frequency multiplication. LIGO gravitational wave chirps: 35--250 Hz detection band, the coincidental overlap with human hearing. SYSTEM Sounds project methods. Perceptual considerations: timbre mapping, frequency-to-pitch non-linearity, accessibility design for blind and low-vision audiences.
+
+\subsubsection{M6: Synthesis and Computational Verification}
+Cross-module integration: unified frequency atlas with computational verification of all unit conversions and physical relationships. Harmonic series analysis across domains. Standing wave calculations for planetary, architectural, and instrumental resonant cavities. Interval arithmetic verification for tuning systems. Sonification parameter validation. Publication-quality frequency continuum visualization.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:  "Frequency Atlas database + unit conversion engine"
+  denise: "Visualization: continuum diagrams, spectrograms,
+           interval lattices, waveform comparisons"
+  paula:  "Audio synthesis: microtonal interval playback,
+           infrasound waveform generation, sonification
+           parameter audition"
+  68000:  "Orchestration: module sequencing, cross-reference
+           validation, bibliography management"
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+\item Complete frequency atlas from $10^{-17}$ Hz to 20 kHz with source attribution
+\item Deep space acoustic phenomena (Perseus, M87, baryon acoustic oscillations)
+\item Sub-Hz and infrasonic physics, propagation, and biological interaction
+\item Schumann resonance physics, measurement, and brainwave correspondence research
+\item Microtonal interval systems: mathematical foundations through 17-limit
+\item Macrotonal EDO systems (5-EDO through 11-EDO) with cultural correspondences
+\item NASA sonification methodology and perceptual mapping frameworks
+\item LIGO gravitational wave frequency characteristics and chirp physics
+\item Computational verification of all frequency conversions and physical claims
+\item Cross-domain harmonic series analysis
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+\item Ultrasonic frequencies above 20 kHz (reserved for future mission)
+\item Electromagnetic spectrum beyond acoustic/pressure phenomena (radio, optical, X-ray as primary subjects)
+\item Clinical therapeutic applications of specific frequencies
+\item Original musical composition or performance
+\item Hardware design for infrasonic or microtonal instruments
+\item Dark matter/dark energy detection methodology
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Frequency atlas covers at least 60 orders of magnitude with source-attributed entries at each major regime boundary
+\item Perseus cluster acoustic analysis includes frequency, wavelength, medium properties, energy budget, and duration with citations to Chandra X-ray Observatory publications
+\item Infrasonic section documents at least 8 natural and 5 anthropogenic source categories with frequency ranges and SPL data
+\item Schumann resonance coverage includes fundamental and first 4 harmonics with cavity physics derivation and measurement history
+\item Microtonal interval inventory includes at least 5 historical/cultural tuning systems with mathematical derivations
+\item Macrotonal EDO section covers all 11 members (1-EDO through 11-EDO) with step sizes in cents and cultural correspondences where documented
+\item Sonification methodology section documents at least 3 distinct mapping approaches with NASA source citations
+\item LIGO chirp physics described with frequency range, duration characteristics, and at least 2 detection events
+\item All unit conversions computationally verified (Hz to cents, octaves to frequency ratios, period to frequency)
+\item Cross-domain harmonic analysis identifies at least 3 structural parallels between astrophysical and musical frequency phenomena
+\item Every quantitative claim attributed to a specific peer-reviewed, government, or professional organization source
+\item Document is self-contained: a reader with no prior domain knowledge can follow the full continuum from deep space to microtonal intervals
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+Deep Audio Analyzer Mission & Frequency analysis tools; spectral decomposition methods & Upstream \\
+The Space Between (textbook) & Mathematical foundations: harmonic series, Fourier analysis, resonance theory & Foundation \\
+GSD Skill Creator v1.49+ & Execution platform for mission waves & Platform \\
+Virtual Black Rock City & Sonic art installation potential; immersive frequency experiences & Downstream \\
+GSD BBS Educational Pack & Frequency physics as educational content module & Downstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The spaces between the notes are where the music lives. This is not metaphor---it is physics. A microtonal interval of 23.5 cents (the Pythagorean comma) exists because twelve perfect fifths do not exactly equal seven octaves; the space between mathematical ideals is where real tuning systems must make their choices. A Schumann resonance at 7.83 Hz exists because the space between Earth's surface and its ionosphere forms a resonant cavity of precisely the right geometry. A B-flat 57 octaves below middle C exists because the space between a supermassive black hole's relativistic jets and the surrounding intracluster medium can sustain pressure waves for billions of years.
+
+The Amiga Principle applies at every scale: architectural elegance---the geometry of a cavity, the ratio of two frequencies, the spacing of overtones in a harmonic series---produces phenomena of staggering complexity from simple, principled building blocks. This research mission traces that principle from the largest resonant cavity we know (a galaxy cluster) through the electromagnetic cavity of our own planet to the smallest intervals the human ear can distinguish. The frequency continuum is the spaces between, made audible.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Frequency Continuum --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides source-attributed findings organized by research module. Each section contains quantitative data, key discoveries, and citations to authoritative sources. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item NASA Chandra X-ray Observatory / Chandra X-ray Center (CXC)
+\item LIGO Scientific Collaboration / Caltech
+\item NASA Hubble Space Telescope / Space Telescope Science Institute
+\item Acoustical Society of America
+\item Institute of Astronomy, Cambridge (UK)
+\item Max Planck Institute
+\item PubMed / National Library of Medicine
+\item Springer Nature (Natural Hazards, acoustics journals)
+\item SAGE Journals (music perception, psychoacoustics)
+\item Xenharmonic Wiki / Microtonal Encyclopedia (community-curated, cross-referenced with academic sources)
+\end{itemize}
+
+\subsection{M1 Reference: Deep Space Pressure Waves}
+
+\subsubsection{Perseus Cluster Acoustics}
+The Perseus galaxy cluster (Abell 426), located 250 million light-years from Earth, contains the deepest note ever detected from a cosmic object. In 2003, a team led by Andrew Fabian at the Institute of Astronomy, Cambridge, using 53 hours of Chandra X-ray Observatory data, identified pressure-wave ripples in the cluster's hot intracluster gas. These ripples correspond to sound waves generated by the inflation of bubbles of relativistic plasma by the central active galactic nucleus in NGC 1275 (Fabian et al., 2003; Chandra Press Release, September 9, 2003).
+
+The detected note is a B-flat with a period between oscillations of approximately 9.6 million years, placing it 57 octaves below middle C. At this frequency ($\sim$3.3 $\times$ $10^{-15}$ Hz), the sound is over one million billion times deeper than the lower limit of human hearing. The pitch has remained roughly constant for approximately 2.5 billion years. The energy required to generate the X-ray cavities is equivalent to the combined energy of 100 million supernovae. Much of this energy is carried by the sound waves and dissipates in the cluster gas, providing a heating mechanism that prevents a cooling flow (Chandra Chronicles, September 16, 2003).
+
+In May 2022, NASA released a resynthesized sonification of the Perseus sound waves, scaling them upward by 57--58 octaves (144--288 quadrillion times their original frequency) to bring them into human hearing range. The sound waves were extracted radially from the center of the cluster and played in an anticlockwise scan (NASA Black Hole Sonification Release, May 2022).
+
+\subsubsection{M87 Variable Tones}
+The supermassive black hole in Messier 87 also generates acoustic waves in its surrounding gas. Unlike Perseus's relatively steady note, M87's tone is variable, ranging from 56 octaves below middle C during minor eruptions to as low as 59 octaves below middle C during major eruptions. M87's black hole gained additional celebrity as the subject of the first Event Horizon Telescope image in 2019.
+
+\subsubsection{Baryon Acoustic Oscillations}
+Sound waves in the early universe, before the cosmic microwave background was released approximately 380,000 years after the Big Bang, left an imprint on the large-scale structure of the cosmos. These baryon acoustic oscillations represent pressure waves that propagated through the hot plasma of the early universe at roughly half the speed of light, creating a characteristic scale of $\sim$150 megaparsecs that is now detectable in the distribution of galaxies.
+
+\subsection{M2 Reference: Sub-Hz and Infrasonic Domain}
+
+\subsubsection{Definitions and Boundaries}
+Infrasound is formally defined as acoustic oscillations below the low-frequency limit of audible sound (approximately 16--20 Hz), per the International Electrotechnical Commission (IEC, 1994). Low-frequency noise typically spans 10--200 Hz. The common assumption that infrasound is inaudible is incorrect: human hearing thresholds have been measured reliably down to 4 Hz at sufficient stimulus levels, and some research demonstrates perception at even lower frequencies (Yeowart et al., 1967; Møller \& Pedersen, 2004, PubMed).
+
+\subsubsection{Perception Characteristics}
+Below approximately 20 Hz, pure tones become gradually less continuous. The tonal sensation ceases around 20 Hz, and below 10 Hz it becomes possible to perceive individual cycles of the sound. A sensation of pressure at the eardrums also occurs. The dynamic range of the auditory system decreases with decreasing frequency---a slight increase in level can change perceived loudness from barely audible to loud. This compression has the effect that a sound inaudible to some people may be loud to others (Møller \& Pedersen, 2004).
+
+\subsubsection{Natural Sources}
+Infrasound originates from severe weather systems, volcanic eruptions, ocean waves (microbaroms), wind, microseisms, auroral electrojet activity, avalanches, and meteors. The background free oscillation of the Earth is coupled with the lower atmosphere at frequencies between 5 and 7 millihertz (mHz), corresponding to periods of approximately 2.5--3.3 minutes (Nishida et al., 2000; cited in Persinger, Natural Hazards, 2013).
+
+\subsubsection{Propagation}
+Infrasonic absorption in air is extraordinarily low. At a period of 10 seconds (0.1 Hz), atmospheric absorption is approximately $2 \times 10^{-9}$ dB per kilometer (Cook, 1962; cited in Persinger 2013). This means energy loss is less than 1\% even after propagating halfway around the Earth. Infrasound can travel thousands of kilometers at sea level with minimal attenuation.
+
+\subsubsection{Biological Interaction}
+Infrasound frequencies and amplitudes converge with those generated by the human body. Muscle sounds and whole-body vibrations are predominantly within the 5--40 Hz range, with typical oscillation amplitudes of 1--50 micrometers, equivalent to pressures of about 1 Pascal and energies on the order of $10^{-11}$ W/m$^2$ (Persinger, 2013). The coupling between approximately 7 Hz and 40--45 Hz frequency bands mediates information between the hippocampal formation and the cerebral cortices (Holz et al., 2010; cited in Persinger 2013).
+
+An 8 Hz infrasound sinusoid at 9 dB sensation level produces a significant masking effect on the detection of a 64 Hz pure tone, raising thresholds by an average of 4.6 dB across 19 normal-hearing listeners (Acta Acustica, 2023). Research also suggests that infrasound may be perceived as amplitude modulation of simultaneously presented audible tones, indicating interactions more complex than simple energetic masking.
+
+\subsection{M3 Reference: The Bridge Zone}
+
+\subsubsection{Schumann Resonance Physics}
+The Schumann resonances are a set of spectral peaks in the extremely low frequency (ELF) portion of the Earth's electromagnetic field spectrum, generated and excited by lightning discharges in the cavity formed by Earth's surface and the ionosphere. Predicted mathematically by Winfried Otto Schumann in 1952 at the Technical University of Munich, first measured by Balser and Wagner in 1960--1963.
+
+The fundamental mode occurs at approximately 7.83 Hz, with progressively weaker harmonics at 14.3, 20.8, 27.3, and 33.8 Hz. These correspond to wavelengths of 38,000, 21,000, 14,000, 11,000, and 9,000 km respectively. The fundamental wavelength equals the circumference of the Earth ($\sim$40,000 km). Higher modes are spaced at approximately 6.5 Hz intervals, a characteristic of the atmosphere's spherical geometry (Wikipedia, sourced from Schumann 1952; Balser \& Wagner 1960--1963).
+
+\subsubsection{Brainwave Correspondence}
+The 7.83 Hz fundamental frequency sits at the boundary between alpha brainwaves (8--13 Hz, associated with relaxation and learning) and theta brainwaves (4--8 Hz, associated with meditation and creativity). A 2006 study found real-time coherence between variations in Schumann and brain activity spectra within the 6--16 Hz band. A 2016 study from Laurentian University's Behavioural Neuroscience Laboratory demonstrated similarities in spectral patterns and strengths of electromagnetic fields generated by the human brain and the Earth-ionosphere cavity (238 measurements, 184 individuals, 3.5-year period).
+
+A 2025 review in PubMed reports that bioelectricity research indicates human brainwave activity is highly dependent on the Schumann resonance, implying a correlation between atmospheric electromagnetic frequencies and brain activity. The authors note that cells and proteins may have evolved to take advantage of frequencies naturally present in Earth's electromagnetic field.
+
+\subsubsection{LIGO Band Overlap}
+LIGO is sensitive to gravitational waves in the frequency range from approximately 5 Hz to 20,000 Hz---a range that coincidentally overlaps almost exactly with human hearing. The first detected gravitational wave signal (GW150914, September 14, 2015) swept from approximately 35 Hz to 250 Hz in a fraction of a second as two black holes ($\sim$30 solar masses each) merged. The first neutron star merger (GW170817, August 17, 2017) was detectable in LIGO instruments for over 100 seconds, sweeping upward in frequency. LIGO converts its spacetime distortion signals into an audible ``chirp'' because the gravitational wave frequencies already fall within the audio range (LIGO Lab, Caltech).
+
+\subsection{M4 Reference: Microtonal and Macrotonal Systems}
+
+\subsubsection{Microtonal Foundations}
+Microtonal music uses intervals smaller than a semitone (100 cents in 12-tone equal temperament). The term was coined before 1912 by Maud MacCarthy Mann. The cent system, where one cent equals 1/1200 of an octave, provides a universal measure for comparing intervals across tuning systems.
+
+Key microtonal intervals include: the Pythagorean comma ($\sim$23.5 cents, the difference between 12 perfect fifths and 7 octaves), the syntonic comma ($\sim$21.5 cents), the quarter tone (50 cents), the sixth tone ($\sim$33.3 cents), the twelfth tone ($\sim$16.7 cents), and the sixteenth tone (12.5 cents). The ancient Greek enharmonic genus featured intervals smaller than 50 cents---less than half a modern semitone (Britannica; Xenharmonic Wiki).
+
+\subsubsection{Historical and Cultural Systems}
+Indian classical music uses a system of 22 shruti (microtonal intervals) per octave. Arabic maqam systems employ neutral tones, often analyzed using 24-EDO (quarter tones) with more precise tuning described in 53-EDO. Turkish makam tradition is analyzed primarily in 53-EDO. Indonesian gamelan uses the pelog (7-tone, unequal) and slendro (5-tone, roughly equal at $\sim$240 cents per step) scales. Ancient Greek tetrachordal theory recognized enharmonic, chromatic, and diatonic genera with intervals of many sizes (Microtonaltheory.com; Xenharmonic Wiki).
+
+Key modern pioneers include: Harry Partch (43-tone just intonation scale, custom instruments), Alois H\'{a}ba (quarter-tone and sixth-tone compositions, Prague Conservatory microtonal department 1934--1949), Juli\'{a}n Carrillo (Sonido 13 system), Easley Blackwood (microtonal etudes in all EDOs from 13 through 24), and Nicola Vicentino (16th-century archicembalo with 36 keys per octave).
+
+\subsubsection{Mathematical Framework}
+Prime limits classify just intonation intervals by the largest prime factor in their frequency ratios: 3-limit (Pythagorean tuning), 5-limit (standard just intonation), 7-limit (septimal), 11-limit (undecimal), 13-limit (tridecimal), 17-limit (septendecimal). Equal divisions of the octave (EDOs) divide the octave into $n$ equal steps of $1200/n$ cents each. Meantone temperaments compromise between pure thirds and pure fifths by distributing the syntonic comma across multiple intervals (Microtonal Encyclopedia; Xenharmonic Wiki).
+
+\subsubsection{Macrotonal Systems}
+Macrotonal EDOs are those with fewer than 12 divisions per octave, forming a finite set of 11 members (1-EDO through 11-EDO). Six of these (5, 7, 8, 9, 10, 11) are xenharmonic (i.e., not subsets of 12-EDO). Notable characteristics: 5-EDO has 240-cent steps and corresponds to some Indonesian slendro tunings and certain African scales; 7-EDO functions as a complete heptatonic scale with neutral intervals; 9-EDO provides a close approximation of the 7/6 septimal ratio; 10-EDO contains 5-EDO as a subset; 11-EDO features a minor subfifth and decent 11th-harmonic approximation (Xenharmonic Wiki, ``Macrotonal EDO'').
+
+\subsection{M5 Reference: Sonification Methodology}
+
+\subsubsection{NASA Sonification Approaches}
+NASA's ``Universe of Sound'' project, led by the Chandra X-ray Center (CXC) with astrophysicist Matt Russo and musician Andrew Santaguida (SYSTEM Sounds project), uses two primary approaches:
+
+\textbf{Parameter mapping:} Image properties (brightness, position, color) are mapped to audible parameters (volume, pitch, timbre). This is used for most image sonifications, including the Hubble Ultra Deep Field, where each galaxy plays a note with pitch determined by color and volume by apparent size (NASA Hubble Sonifications).
+
+\textbf{Audification:} Data are translated directly to audio with frequencies scaled into hearing range. The Perseus cluster sonification is the premier example---actual pressure waves rescaled by 57--58 octaves. LIGO's gravitational wave chirps are also audified, as the waves already fall in the audio frequency range (Frontiers in Communication, 2024).
+
+Multi-wavelength layering assigns different telescope data (Chandra X-ray, Hubble optical, Webb infrared, Spitzer infrared) to different instrument families or frequency ranges, creating layered compositions from the same celestial object.
+
+\subsubsection{Accessibility Impact}
+The Universe of Sound project follows universal design principles, developed in collaboration with consultant Christine Malec and tested with blind and low-vision users. Research published in Frontiers in Communication (2024) found that blind/low-vision participants generally rated learning higher than sighted participants, with Cassiopeia A showing the most significant difference (p = 0.02407).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Infrasound health claims & Extensive pseudoscientific literature exists around ``brown note,'' weaponized infrasound, etc. Present only peer-reviewed findings. & GATE \\
+Schumann resonance wellness & Commercial products make unsubstantiated claims. Distinguish peer-reviewed research from marketing. & GATE \\
+Indigenous tuning systems & Indian shruti, Arabic maqam, Indonesian gamelan must be attributed to specific cultural traditions, never generalized. & ABSOLUTE \\
+NASA data attribution & All sonification credits must include specific mission/telescope and SYSTEM Sounds team. & GATE \\
+Medical frequency claims & No therapeutic claims without peer-reviewed clinical evidence. & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+\item NASA Chandra X-ray Observatory --- Perseus cluster press releases and chronicles (2003, 2022)
+\item NASA Hubble Space Telescope --- Sonification program (science.nasa.gov)
+\item NASA James Webb Space Telescope --- Infrared sonification data
+\item LIGO Scientific Collaboration / Caltech --- Gravitational wave detection publications
+\item IEC (International Electrotechnical Commission) --- Infrasound standard definitions (1994)
+\item DTIC (Defense Technical Information Center) --- Biological effects of low-frequency oscillations
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=2em]
+\item Fabian, A.C. et al. (2003). Sound waves in Perseus cluster. Institute of Astronomy, Cambridge.
+\item Møller, H. \& Pedersen, C.S. (2004). Hearing at low and infrasonic frequencies. PubMed.
+\item M\"{u}hlhans, J.H. (2017). Low frequency and infrasound: critical review. SAGE Journals.
+\item Persinger, M. (2013). Infrasound, human health, and adaptation. Natural Hazards, Springer.
+\item Arcand, K. et al. (2024). A Universe of Sound: processing NASA data into sonifications. Frontiers in Communication.
+\item Burke et al. --- Infrasound masking studies. Acta Acustica (2023).
+\item Holz et al. (2010). Hippocampal-cortical frequency coupling. (Cited in Persinger 2013.)
+\item Huang et al. (2022). Schumann resonance and insomnia. Nature and Science of Sleep.
+\item Schumann, W.O. (1952). Original theoretical predictions. Technical University of Munich.
+\item Abbott, B.P. et al. (2016). Observation of gravitational waves (GW150914). Physical Review Letters.
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Reference Works}
+\begin{itemize}[leftmargin=2em]
+\item Britannica --- Microtonal music entry
+\item Xenharmonic Wiki (en.xen.wiki) --- Macrotonal EDO, microtonal theory
+\item Microtonal Encyclopedia (microtonal.miraheze.org) --- Interval tables, tuning system reference
+\item SYSTEM Sounds (system-sounds.com) --- NASA sonification collaboration
+\item Microtonaltheory.com --- Maqam, gamelan, and tuning system analysis
+\item Huygens-Fokker Foundation / Dutch Microtonal Society
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, source-attributed Frequency Continuum reference document with computational verification, mapping acoustic and wave phenomena from $10^{-17}$ Hz deep-space pressure waves through infrasonic, Schumann, audible, and microtonal/macrotonal frequency regimes. All quantitative claims verified computationally; all sources traceable to government agencies, peer-reviewed research, or professional organizations.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+WAVE 0 [Sequential] ──> WAVE 1 [Parallel] ──> WAVE 2 [Seq] ──> WAVE 3 [Seq]
+Foundation             Research Tracks        Synthesis       Publication
+                       ┌─ Track A ─┐
+   M0: Schema    ──>   │ M1 + M2   │   ──>   M6: Cross-   ──> Final QA
+   + Source Index       │           │         module         + Compile
+                       └───────────┘         synthesis
+                       ┌─ Track B ─┐
+                       │ M3 + M4   │
+                       │   + M5    │
+                       └───────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Data Layer} --- Frequency atlas schema, unit conversion tables, source index
+\item \textbf{Research Layer} --- Six module surveys with quantitative findings
+\item \textbf{Synthesis Layer} --- Cross-module integration, harmonic parallels, verification
+\item \textbf{Publication Layer} --- Formatted document, computational appendix, index
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+D1 & Frequency Atlas Database & 60+ order-of-magnitude coverage, source-attributed & M0 \\
+D2 & Deep Space Acoustics Survey & Perseus + M87 + BAO with full citation chain & M1 \\
+D3 & Infrasonic Reference & 8+ natural, 5+ anthropogenic sources documented & M2 \\
+D4 & Bridge Zone Analysis & Schumann physics + perceptual transitions & M3 \\
+D5 & Interval Systems Compendium & 5+ cultural systems, all macrotonal EDOs & M4 \\
+D6 & Sonification Methods Guide & 3+ approaches documented with NASA citations & M5 \\
+D7 & Synthesis \& Verification & Cross-domain analysis + computational verification & M6 \\
+D8 & Publication Package & Compiled PDF + source .tex + index.html & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+M0: Atlas Schema & None & Haiku & 8,000 \\
+Source Index & None & Haiku & 5,000 \\
+M1: Deep Space & M0 & Sonnet & 25,000 \\
+M2: Infrasound & M0 & Sonnet & 25,000 \\
+M3: Bridge Zone & M0 & Opus & 30,000 \\
+M4: Intervals & M0 & Sonnet & 28,000 \\
+M5: Sonification & M0, M1 & Sonnet & 20,000 \\
+M6: Synthesis & M1--M5 & Opus & 35,000 \\
+Publication & M0--M6 & Sonnet & 15,000 \\
+Verification & All & Opus & 20,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assignment Rationale} & \tableheader{Share} \\
+\midrule
+Opus & Synthesis, cross-module integration, Bridge Zone (psychoacoustic judgment), verification & $\sim$30\% \\
+Sonnet & Survey compilation, structured content, source documentation, publication assembly & $\sim$60\% \\
+Haiku & Shared schemas, source index scaffolding, unit conversion templates & $\sim$10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 2 & 13,000 \\
+1 & Research (A+B) & Parallel & 6 & 128,000 \\
+2 & Synthesis & Sequential & 3 & 55,000 \\
+3 & Publication + QA & Sequential & 3 & 35,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total:}} & \textbf{14} & \textbf{231,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Atlas Schema & Define frequency, wavelength, period, medium, velocity, source, regime fields & Haiku & 8,000 \\
+Source Index & Compile all authoritative sources with quality ratings & Haiku & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Physics Domains:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1: Deep Space & Perseus, M87, BAO acoustic analysis & Sonnet & 25,000 \\
+M2: Infrasound & Sources, propagation, biological interaction & Sonnet & 25,000 \\
+M5: Sonification & NASA methodology, LIGO chirps, mapping frameworks & Sonnet & 20,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Music/Perception Domains:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M3: Bridge Zone & Schumann resonances, perceptual transitions & Opus & 30,000 \\
+M4: Intervals & Microtonal/macrotonal systems, math frameworks & Sonnet & 28,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Cross-module Integration & Harmonic parallels, unified frequency atlas & Opus & 35,000 \\
+Computational Verification & Unit conversions, physical claims, interval arithmetic & Opus & 20,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Document Assembly & Compile all modules into formatted publication & Sonnet & 15,000 \\
+Final QA & Source validation, safety checks, completeness & Sonnet & 10,000 \\
+Packaging & PDF compilation, .tex source, index.html & Sonnet & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 output (schema + source index) cached for all Wave 1 tasks---exploit 5-minute TTL by launching Track A and Track B within the cache window
+\item M1 output cached for M5 (sonification methods reference deep space data)
+\item All module outputs cached before Wave 2 synthesis begins---single context window loads all 6 module summaries
+\item Verification runs immediately after synthesis while context is warm
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Wave 0} & \tableheader{Wave 1} & \tableheader{Wave 2} & \tableheader{Wave 3} \\
+\midrule
+Opus & --- & 30,000 & 55,000 & --- \\
+Sonnet & --- & 98,000 & --- & 35,000 \\
+Haiku & 13,000 & --- & --- & --- \\
+\midrule
+\textbf{Total} & 13,000 & 128,000 & 55,000 & 35,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  [M0: Schema] ──┬──> [M1: Deep Space] ──┬──> [M5: Sonification]
+                 │                        │              │
+                 ├──> [M2: Infrasound] ───┤              │
+                 │                        │              v
+                 ├──> [M3: Bridge] ───────┼──> [M6: Synthesis] ──> [Pub]
+                 │                        │              ^
+                 └──> [M4: Intervals] ────┘              │
+                                                         │
+                                          [Verification] ┘
+
+  Legend: ──> sequential dependency
+          M1,M2 run parallel (Track A)
+          M3,M4 run parallel (Track B)
+          M5 waits for M1 only
+          M6 waits for all M1-M5
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{35} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every frequency, SPL, distance, or statistical claim attributed to a specific source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific policy positions on noise regulation, frequency therapy, etc. \\
+SC-IND & Cultural attribution & Every tuning system reference names specific cultural tradition (Indian shruti, Arabic maqam, Javanese slendro---never ``Eastern music'' or ``non-Western scales'' generically). \\
+SC-MED & Medical accuracy & No health claims (Schumann therapy, infrasound harm) without peer-reviewed evidence; appropriate caveats included. \\
+SC-PSE & Pseudoscience boundaries & Clear distinction maintained between peer-reviewed Schumann resonance research and commercial wellness claims. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. 60 orders of magnitude coverage & CF-01, CF-02 & Pending \\
+2. Perseus analysis with Chandra citations & CF-03, CF-04 & Pending \\
+3. 8+ natural, 5+ anthropogenic infrasonic sources & CF-05, CF-06 & Pending \\
+4. Schumann fundamental + 4 harmonics & CF-07, CF-08 & Pending \\
+5. 5+ cultural tuning systems & CF-09, CF-10 & Pending \\
+6. All 11 macrotonal EDOs & CF-11 & Pending \\
+7. 3+ sonification approaches with NASA citations & CF-12, CF-13 & Pending \\
+8. LIGO chirp physics + 2 events & CF-14 & Pending \\
+9. Unit conversions computationally verified & CF-15, CF-16 & Pending \\
+10. 3+ cross-domain harmonic parallels & IN-01, IN-02, IN-03 & Pending \\
+11. All quantitative claims attributed & SC-SRC, SC-NUM & Pending \\
+12. Self-contained document & IN-07, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache timing \\
+SCOUT & Research Agent & Source gathering; evidence compilation; gap-fill web research \\
+EXEC-A & Executor (Track A) & M1, M2, M5 document production \\
+EXEC-B & Executor (Track B) & M3, M4 document production \\
+CRAFT-PHYS & Physics Specialist & Astrophysics, acoustics, wave mechanics analysis \\
+CRAFT-MUSIC & Music Theory Specialist & Tuning systems, interval mathematics, cultural attribution \\
+VERIFY & Verification & Source validation; accuracy checking; computational verification \\
+INTEG & Integration Agent & Cross-module relationship validation; harmonic parallels \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Research Modules & 7 (M0--M6) \\
+Parallel Tracks & 2 (Physics + Music/Perception) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 4 \\
+Total Token Budget & $\sim$231,000 \\
+Model Split & Opus 37\% / Sonnet 57\% / Haiku 6\% \\
+Deliverables & 8 (D1--D8) \\
+Test Count & 35 (6 safety + 16 core + 8 integration + 5 edge) \\
+Safety-Critical Tests & 6 (all mandatory-pass / BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``We have observed the prodigious amounts of light and heat created by black holes; now we have detected the sound.''} --- Andrew Fabian, Institute of Astronomy, Cambridge, 2003
+
+\vspace{0.5em}
+
+From a B-flat that has resonated for 2.5 billion years in the plasma of a galaxy cluster to the 23.5-cent comma that separates twelve perfect fifths from seven octaves on a piano, the frequency continuum is a single story told across sixty orders of magnitude. The spaces between are where the physics lives---and the music.
+\end{quotebox}
+
+\end{document}
