@@ -24,6 +24,7 @@
     { id: 'EMG', name: 'Electric Motors', path: 'EMG/index.html' },
     { id: 'FDR', name: 'Fire Dragon', path: 'FDR/index.html' },
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
+    { id: 'FQC', name: 'Freq. Continuum', path: 'FQC/index.html' },
     { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
     { id: 'GGT', name: 'Geggy Tah', path: 'GGT/index.html' },
     { id: 'GTP', name: 'Geggy Tah Prod.', path: 'GTP/index.html' },
