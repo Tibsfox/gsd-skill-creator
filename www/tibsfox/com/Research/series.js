@@ -57,6 +57,7 @@
     { id: 'PMG', name: 'Pi-Mono + GSD', path: 'PMG/index.html' },
     { id: 'PSG', name: 'Pacific Spine', path: 'PSG/index.html' },
     { id: 'RBH', name: 'Radio History', path: 'RBH/index.html' },
+    { id: 'RLS', name: 'Resonant Lands', path: 'RLS/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
