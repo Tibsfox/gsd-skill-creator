@@ -1,0 +1,1011 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ---- COLOR SCHEME: Music / History ----
+%% Deep blues heritage meets psychedelic fire
+\definecolor{primary}{HTML}{311B92}       % Deep violet -- the night sky of a 1967 show
+\definecolor{secondary}{HTML}{0D47A1}     % Electric blue -- the amp's glow
+\definecolor{tertiary}{HTML}{BF360C}      % Ember gold-red -- burning guitar
+\definecolor{accent}{HTML}{6A1B9A}        % Amethyst -- psychedelic
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Lavender wash
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ---- SECTION FORMATTING ----
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ---- CUSTOM ENVIRONMENTS ----
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% ---- TABLE HELPERS ----
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ---- HEADERS AND FOOTERS ----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Hendrix \& Joplin: Art of the Guitar, Voice of the Ages}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ---- HYPERLINKS ----
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Hendrix & Joplin -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ============================================================
+\begin{document}
+
+%% ---- TITLE PAGE ----
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Jimi Hendrix \& Janis Joplin:\\[0.3em]Art of the Guitar, Voice of the Ages}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Blues Heritage, Psychedelic Expression, and the\\Summer of Love --- 1943--1970}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% ---- TABLE OF CONTENTS ----
+\tableofcontents
+\newpage
+
+%%==============================================================
+%% STAGE 1 — VISION DOCUMENT
+%%==============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Hendrix \& Joplin --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Research Complete / Ready for GSD Execution}
+\metafield{Depends On:}{Blues Heritage (Bessie Smith, Robert Johnson, Muddy Waters lineage), 1960s Counterculture Context}
+\metafield{Context:}{Cold-start deep research mission; five targeted searches conducted}
+
+\subsection{Vision}
+
+In the summer of 1967, at a fairground in Monterey, California, two artists stepped onto a stage and redefined what it meant to be human in sound. Jimi Hendrix did not play the guitar --- he became it. His left hand wrapped around a right-handed Stratocaster, strings reversed, flipped upside down, physically a contradiction, and out of that contradiction poured the entire future of electric music. Janis Joplin did not sing --- she testified. Her mezzo-soprano moved through registers of sorrow, ecstasy, and defiance in a single breath, carrying three decades of African American blues tradition in a Texas girl's body, setting it loose on a world that had not yet learned how to receive it.
+
+What these two artists share is something deeper than the coincidence of their era or their meeting at Monterey or their deaths at 27 in the same autumn of 1970. Both were translators. Hendrix translated silence into sound, translating the space between the strings into vocabulary that no instrument had ever spoken. Joplin translated interior suffering into exterior song, making the private universal, the personal protest. Both drew from a deep reservoir of African American musical genius --- the blues tradition running through Bessie Smith, Leadbelly, Big Mama Thornton, B.B. King, Muddy Waters, Robert Johnson --- and both carried that inheritance into new sonic territories that would define the next fifty years of popular music.
+
+This mission is not merely a study in biography. It is a deep archaeological dig into the technical and philosophical dimensions of what these two artists achieved: how Hendrix reimagined the electric guitar as a vehicle for controlled noise, feedback, and emotional extremity; how Joplin forged a vocal identity from fragments of outcast longing and blues devotion; and how both of them, in the narrow window between 1967 and 1970, permanently altered what it is possible to feel in the presence of music. The ``spaces between'' --- between notes, between genres, between convention and revolution --- is exactly where their greatness lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+\item \textbf{Lost Technical Lineage.} The technical innovations of Hendrix and Joplin are widely celebrated but poorly understood at a mechanistic level. The specific guitar techniques Hendrix pioneered --- feedback exploitation, wah-wah modulation, the ``Hendrix chord,'' thumb-bass octave voicings --- are often treated as mystical rather than teachable. Similarly, Joplin's vocal technique --- growl, wail, tonal bend, emotional release --- is treated as raw talent rather than as a sophisticated and analyzable craft. This mission must recover the technical specificity that makes their contributions learnable and transmissible.
+
+\item \textbf{Erased African American Heritage.} Both Hendrix and Joplin were white-culture-facing artists whose careers were built on an African American blues foundation that is systematically underacknowledged in mainstream rock historiography. Bessie Smith, Leadbelly, Big Mama Thornton, Muddy Waters, and Robert Johnson were not merely ``influences'' --- they were the primary source material. Any mission that treats Hendrix and Joplin without foregrounding this inheritance reproduces the erasure it should correct.
+
+\item \textbf{The 27 Club as Distraction.} The mythology of the ``27 Club'' --- the literary trope of creative genius extinguished at 27 --- tends to replace analysis with romance. Both Hendrix and Joplin were actively evolving at the time of their deaths; Joplin was mid-session on what would become \textit{Pearl}, her most sophisticated record. The mission must resist the tendency to treat early death as the defining frame and instead ask: what were they becoming?
+
+\item \textbf{Live Performance as Primary Text.} The majority of scholarship focuses on studio recordings. But both Hendrix and Joplin were fundamentally live performance artists whose recorded work only partially captures their power. The Monterey performances (1967), Woodstock (1969), and their respective late-career live recordings are primary texts that any serious study must engage with directly.
+
+\item \textbf{Gendered and Racial Double Standards.} Joplin broke through in a world where ``women don't play with the boys.'' Hendrix was, as \textit{Blues} scholars note, ``a rarity in his field at the time: a Black man who played psychedelic rock.'' Both artists operated under compound forms of cultural expectation and transgression that shaped their music and their reception. The mission must address these dynamics explicitly.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Blues as Living System:} Hendrix and Joplin did not invent a new music --- they were transmission points in a living cultural system. Their genius was the capacity to receive the full signal from the African American blues tradition and retransmit it at unprecedented voltage. Both were amplifiers: Hendrix through literal amplification technology, Joplin through physiological and emotional amplification. The mission studies both the signal and the amplifier.
+
+\subsubsection{The Blues Transmission Map}
+
+\begin{asciibox}
+BLUES HERITAGE (1920s-1950s)
+  |
+  +-- VOCAL LINEAGE             GUITAR LINEAGE
+  |   Ma Rainey (1920s)         Robert Johnson (1930s)
+  |   Bessie Smith (1923-1937)  T-Bone Walker (1940s)
+  |   Billie Holiday (1930s)    Muddy Waters (1940-50s)
+  |   Big Mama Thornton (1950s) B.B. King (1950s-60s)
+  |   Leadbelly (1930s-40s)     Howlin' Wolf (1950s)
+  |           |                         |
+  |           v                         v
+  |    JANIS JOPLIN (1943-1970)   JIMI HENDRIX (1942-1970)
+  |    "Ball and Chain" (1967)    "Purple Haze" (1967)
+  |    "Piece of My Heart"        "Voodoo Child" (1968)
+  |    "Me and Bobby McGee"       "Star-Spangled Banner" (1969)
+  |           |                         |
+  |           v                         v
+  |    MONTEREY POP FESTIVAL --- June 16-18, 1967
+  |           |                         |
+  +---> TRANSMISSION COMPLETE ------> TRANSMISSION COMPLETE
+                |
+                v
+        NEXT GENERATION (1970s-present)
+        Stevie Nicks, Stevie Ray Vaughan, Pink,
+        Amy Winehouse, Adele, Kurt Cobain,
+        Prince, Lenny Kravitz, Jack White
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
++---------------------------+     +---------------------------+
+|  MODULE 1                 |     |  MODULE 2                 |
+|  THE BLUES FOUNDATION     |<--->|  HENDRIX: GUITAR AS       |
+|  Lineage, heritage,       |     |  UNIVERSE                 |
+|  transmission pathway     |     |  Technique, tone, effects |
++---------------------------+     +---------------------------+
+             |                               |
+             v                               v
++---------------------------+     +---------------------------+
+|  MODULE 3                 |     |  MODULE 4                 |
+|  JOPLIN: VOICE AS VESSEL  |<--->|  THE CONVERGENCE          |
+|  Vocal craft, emotional   |     |  Monterey 1967, Summer    |
+|  transmission, feminism   |     |  of Love, counterculture  |
++---------------------------+     +---------------------------+
+             |                               |
+             +---------------+---------------+
+                             |
+                             v
+             +---------------------------+
+             |  MODULE 5                 |
+             |  LEGACY & TRANSMISSION    |
+             |  27 Club, inheritance,    |
+             |  modern relevance         |
+             +---------------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Blues Foundation}
+
+The deep ancestry of both artists. Covers the African American blues lineage from the Delta and Harlem Renaissance through the electric Chicago blues and into the early rock era. Primary figures: Ma Rainey, Bessie Smith (Empress of the Blues, 1892--1937), Leadbelly, Robert Johnson, T-Bone Walker, Muddy Waters, Howlin' Wolf, Big Mama Thornton, B.B. King. This module establishes the cultural and technical inheritance that Hendrix and Joplin were drawing from --- not as background material but as primary source.
+
+\subsubsection{Module 2: Hendrix --- Guitar as Universe}
+
+Technical deep-dive into Hendrix's guitar innovations. Covers: the inverted right-handed Stratocaster setup; thumb-bass voicing technique; the ``Hendrix chord'' (dominant 7\#9); feedback exploitation and amplifier overdrive; wah-wah pedal as melodic instrument; the Octavia pedal; string bending as melodic language; simultaneous lead and rhythm playing; the arc from blues backing musician to solo innovator; key recordings (\textit{Are You Experienced}, \textit{Axis: Bold as Love}, \textit{Electric Ladyland}); the Woodstock ``Star-Spangled Banner'' as political statement through sonic distortion.
+
+\subsubsection{Module 3: Joplin --- Voice as Vessel}
+
+Technical and emotional analysis of Joplin's vocal art. Covers: mezzo-soprano range and its use; growl, wail, and tonal bend as expressive vocabulary; the calculation to abandon ``pretty'' folk singing for blues-rooted rawness; the ``Ball and Chain'' Monterey performance; the arc from Big Brother and the Holding Company through Kozmic Blues Band to Full Tilt Boogie Band; key recordings (\textit{Cheap Thrills}, \textit{I Got Dem Ol' Kozmic Blues}, \textit{Pearl}); Joplin as feminist trailblazer in a male-dominated industry; the unfinished trajectory: what was she becoming?
+
+\subsubsection{Module 4: The Convergence --- Monterey 1967 and the Summer of Love}
+
+The historical and cultural context. Covers: the Monterey International Pop Festival (June 16--18, 1967) as the pivot point where both artists broke nationally; D.A. Pennebaker's documentary; the Summer of Love and San Francisco counterculture; the relationship between psychedelic rock and African American blues sources; Woodstock (1969) as apotheosis; Altamont as collapse; the record industry's exploitation of counterculture artists.
+
+\subsubsection{Module 5: Legacy and Transmission}
+
+The aftermath and inheritance. Covers: both deaths in autumn 1970 (Hendrix, September 18; Joplin, October 4), both at age 27; the 27 Club as cultural mythology vs. interrupted artistic trajectories; posthumous releases (\textit{Pearl}, Band of Gypsies recordings); Rock and Roll Hall of Fame inductions (Hendrix 1992, Joplin 1995); Joplin's purchase of Bessie Smith's headstone as an act of deliberate gratitude; the musicians they influenced (Stevie Ray Vaughan, Stevie Nicks, Prince, Kurt Cobain, Amy Winehouse, Adele); the academic and musicological literature; contemporary resonance.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Mission Chipset Configuration
+# Hendrix & Joplin Deep Research Mission
+
+mission_id: hendrix-joplin-deep-research-v1
+chipset_profile: squadron
+
+roles:
+  FLIGHT:   claude-opus-4    # Mission direction, synthesis judgment
+  PLAN:     claude-sonnet-4  # Wave decomposition, dependency management
+  SCOUT:    claude-sonnet-4  # Source gathering, evidence compilation
+  EXEC-A:   claude-sonnet-4  # Modules 1 & 2 document production
+  EXEC-B:   claude-sonnet-4  # Modules 3 & 4 document production
+  CRAFT-BLUES:  claude-opus-4   # Blues heritage & lineage analysis
+  CRAFT-PERF:   claude-opus-4   # Performance analysis & vocal/guitar craft
+  VERIFY:   claude-sonnet-4  # Source validation, accuracy checking
+  INTEG:    claude-opus-4    # Cross-module relationship validation
+  CAPCOM:   claude-sonnet-4  # Human approval at wave boundaries
+  BUDGET:   claude-haiku-4   # Token budget tracking
+  LOG:      claude-haiku-4   # Commit messages, milestone summaries
+
+model_split:
+  opus:   32%   # FLIGHT, CRAFT-BLUES, CRAFT-PERF, INTEG
+  sonnet: 58%   # PLAN, SCOUT, EXEC-A, EXEC-B, VERIFY, CAPCOM
+  haiku:  10%   # BUDGET, LOG
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Technical analysis of Hendrix's guitar innovations (specific techniques, equipment, recordings)
+  \item Technical analysis of Joplin's vocal craft (range, emotional vocabulary, stylistic choices)
+  \item The African American blues lineage as primary inheritance for both artists
+  \item Monterey Pop Festival 1967 as convergence moment
+  \item Key studio and live recordings from 1967--1970
+  \item Cultural context: counterculture, San Francisco scene, Summer of Love
+  \item Gendered and racial dynamics of their reception and positioning
+  \item Legacy: direct artistic descendants and posthumous cultural impact
+  \item Musicological and academic sources on blues history and rock development
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Detailed personal biography beyond what is musically and culturally relevant
+  \item Speculation about cause of death beyond established facts
+  \item Comparison to contemporary artists not in the direct lineage
+  \item Music theory analysis beyond accessible technical description
+  \item Legal and estate matters
+  \item Extensive coverage of artists not directly connected to the blues lineage (e.g., British Invasion as primary subject)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*:}]
+  \item The African American blues lineage from Bessie Smith through Big Mama Thornton to Joplin, and from Robert Johnson through Muddy Waters to Hendrix, is documented with named artists, dates, and specific technical connections --- not as background color but as primary subject.
+  \item Hendrix's specific guitar innovations are described with technical specificity: the inverted Stratocaster setup, the dominant 7\#9 ``Hendrix chord,'' feedback exploitation, thumb-bass voicing, and wah-wah as melodic instrument.
+  \item Joplin's vocal technique is analyzed with comparable specificity: mezzo-soprano range, growl and wail as deliberate choices, the emotional calculus she made in abandoning folk singing, and the arc of her vocal development across her three band configurations.
+  \item The Monterey Pop Festival is documented as a convergence event with specific performance data: setlist highlights, audience response, industry consequences (Columbia Records signing), and documentary record.
+  \item The gendered dynamics of Joplin's career and the racial dynamics of Hendrix's position as a Black man in psychedelic rock are addressed directly and with specificity rather than as footnotes.
+  \item Both artists' debts to African American predecessors are documented with specific acts of acknowledgment where they exist (e.g., Joplin's purchase of Bessie Smith's headstone).
+  \item The interrupted artistic trajectories --- what each was becoming at the time of death --- are addressed with specificity rather than collapsed into the 27 Club mythology.
+  \item All major claims are sourced to academic, institutional, or authoritative journalistic sources (Rock and Roll Hall of Fame, NPR, Rolling Stone, Britannica, university research, NMAAHC).
+  \item The mission package produces at minimum five distinct research documents corresponding to the five modules, each self-contained and handoff-ready.
+  \item The synthesis document identifies at least three cross-module relationships (e.g., the Monterey moment connecting all five modules; the blues lineage running through both Hendrix and Joplin; the question of what was lost when both died in 1970).
+  \item The legacy module traces at least ten specific direct artistic descendants with specific descriptions of the inheritance.
+  \item The package is formatted and organized such that a researcher with no prior knowledge of either artist could use it as a complete orientation within one reading session.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD College --- Culinary Arts Dept & Parallel domain & Both study craft transmission; blues \& cooking share improvisation-within-tradition structure \\
+The Space Between (textbook) & Philosophical spine & ``Spaces between'' applies directly: Hendrix lived between notes, Joplin between genres \\
+GSD BBS Educational Pack & Distribution layer & Hendrix/Joplin module could ship as a flagship humanities pack \\
+GSD Foxfire Heritage Skills & Cultural parallel & Foxfire principle: preserve living craft by documenting practitioners at peak \\
+GSD Learn Kung Fu Pack & Skill transmission & Both missions study how mastery is transmitted across generations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The GSD ecosystem is built on a foundational insight: meaning lives in the spaces between. Not in the nodes, not in the data, not in the obvious peaks and landmarks --- but in the connections, the transitions, the silences that give the signal its shape. This principle, which animates every architectural decision in gsd-skill-creator, finds its most beautiful human expression in the music of Jimi Hendrix and Janis Joplin.
+
+Hendrix understood this literally. His guitar technique was built on the exploitation of what happens \textit{between} the notes: the feedback that lives in the space between amplifier and string, the bend that lives between one pitch and the next, the wah-wah that lives between the fundamental and its harmonic shadow. He played silence as deliberately as he played sound. His ``Star-Spangled Banner'' at Woodstock --- America's anthem rendered as controlled chaos, bombs and screams and finally resolution --- is the most compressed political statement of the Vietnam era, and it is made entirely of spaces between what the audience expected and what they heard.
+
+Joplin understood it emotionally. Her voice lived between vulnerability and power, between the Texas outcast and the San Francisco icon, between Bessie Smith's 1920s testimony and 1960s protest culture. She described her own singing as ``letting all those things come out'' --- the things that ``don't make for polite conversation.'' The space she opened was the space between the performed self and the true self, and she invited audiences to live in that space with her for three minutes at a time. That is precisely what GSD is building: architecture for the spaces between --- between human intention and executable action, between the vision and the code, between what a person wants to build and what actually gets built. The Amiga Principle is, at its core, the same insight Hendrix had about his guitar: small, specialized elements producing staggering complexity through faithful execution. Paula, Agnus, Denise --- three chips doing specific things with such precision that together they exceeded what any single powerful system could accomplish. Hendrix, Joplin, and the blues tradition they carried forward: three elements --- voice, guitar, heritage --- producing a sound that has not faded in sixty years.
+
+\newpage
+
+%%==============================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%%==============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Hendrix \& Joplin --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each of the five research modules. CRAFT agents should use the findings in their module section as the primary evidence base and supplement with targeted web research for any identified gaps. All sources listed are authoritative (institutional, academic, or established journalistic).
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item Rock and Roll Hall of Fame (rockhall.com) --- biographical and critical assessments
+  \item National Museum of African American History and Culture (nmaahc.si.edu) --- blues heritage documentation
+  \item NPR Music --- historical analysis and oral history interviews
+  \item Encyclop\ae dia Britannica --- authoritative biographical entries
+  \item Wikipedia (cross-referenced) --- factual baseline with citation trails
+  \item Ohio State University / AAEP 1600 Open Textbook --- academic musicological analysis
+  \item GRAMMY Museum --- festival and artist archives
+  \item Library of Congress via Rock and Roll Hall of Fame Library --- primary documents
+\end{itemize}
+
+\subsection{Module 1 Reference: The Blues Foundation}
+
+\subsubsection{The Blues as African American Cultural System}
+
+The blues genre originated in the African American experience following the end of slavery, with the first public chronicling of blues music around the dawn of the 20th century and the first published blues sheet music in 1908. The genre evolved from unaccompanied vocal traditions through acoustic ensemble playing and, critically, through the World War II transition to electric blues. By the 1960s, this electric blues tradition had become the core technical and emotional vocabulary that Hendrix and Joplin would draw from.
+
+The blues operates on a twelve-bar harmonic structure with ``AAB'' call-and-response phrasing, rooted in the African American oral tradition of field hollers and work songs. Its emotional vocabulary --- grief, defiance, desire, transcendence --- and its technical vocabulary --- blue notes, bent pitches, expressive vibrato, call-and-response between voice and instrument --- are the direct inheritance both artists deployed.
+
+\subsubsection{Bessie Smith: The Empress and the Lineage}
+
+Bessie Smith (approximately 1892--1937) was the highest-paid African American entertainer of her era and is generally regarded as the greatest blues singer of the 20th century. Her recordings for Columbia Records beginning in 1923, starting with ``Downhearted Blues,'' made her the first African American superstar of recorded music. She performed with Louis Armstrong and Sidney Bechet, bridging blues and jazz. She was inducted into the Rock and Roll Hall of Fame in 1989.
+
+Smith's legacy was systematically transmitted forward: through Big Mama Thornton (who carried Smith's vocal imprint into the 1950s and whose ``Ball and Chain'' Joplin covered at Monterey), and through direct study by Joplin herself. In 1970, Joplin contributed funds to erect a headstone on Smith's previously unmarked grave in Sharon Hill, Pennsylvania. The inscription reads: ``The Greatest Blues Singer in the World Will Never Stop Singing.'' This was not a gesture --- it was a statement of artistic lineage.
+
+\subsubsection{The Guitar Lineage to Hendrix}
+
+Robert Johnson (1911--1938), the Delta blues guitarist whose haunting slide work influenced virtually every subsequent blues and rock guitarist, stands at one root of the guitar lineage. T-Bone Walker, who was one of the first bluesmen to record an electric blues guitar solo (and who was a direct early influence on Hendrix), carried the tradition into the electric era. Muddy Waters and Howlin' Wolf electrified the Delta blues in Chicago in the 1940s and 1950s, creating the template that British bands --- the Rolling Stones, the Yardbirds, the Animals --- would absorb and retransmit. Hendrix drew from all of these sources, adding B.B. King's expressive vibrato and Curtis Mayfield's soul-inflected playing to his vocabulary.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Era} & \tableheader{Key Contribution to Lineage} \\
+\midrule
+Ma Rainey & 1910s--1920s & Mother of Blues; vocal template for all female blues singers \\
+Bessie Smith & 1923--1937 & Empress of Blues; first African American recording superstar \\
+Robert Johnson & 1930s & Delta slide guitar; mythic intensity; crossroads mythology \\
+Leadbelly & 1930s--1940s & 12-string guitar; folk-blues bridge; direct Joplin influence \\
+T-Bone Walker & 1940s & First electric blues guitar solo; early Hendrix influence \\
+Muddy Waters & 1940s--1950s & Chicago electric blues; Rolling Stones, Hendrix inheritance \\
+Big Mama Thornton & 1950s & Bridge from Smith to Joplin; ``Ball and Chain'' author \\
+B.B. King & 1950s--1960s & Expressive vibrato; ``Lucille'' technique; Hendrix influence \\
+Howlin' Wolf & 1950s--1960s & Intensity; Hendrix covered ``Killing Floor'' at Monterey \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: Hendrix --- Guitar as Universe}
+
+\subsubsection{Biography and Early Career}
+
+James Marshall Hendrix was born November 27, 1942, in Seattle, Washington. He began playing guitar at age 15, left-handed. Unable to find left-handed guitars and unwilling to learn right-handed, he flipped a right-handed guitar over and restrung it --- a physical inversion that would become a source of distinctive sonic possibilities. He enlisted in the US Army in 1961 and was discharged the following year. He worked as a backing musician on the Chitlin' Circuit, playing with the Isley Brothers, Little Richard, Sam Cooke, James Brown, and Ike and Tina Turner. He moved to New York City in 1966 and formed the Jimi Hendrix Experience. The Experience's debut album \textit{Are You Experienced} was released in May 1967. He died September 18, 1970, from barbiturate overdose. He was inducted into the Rock and Roll Hall of Fame in 1992.
+
+\subsubsection{Guitar Innovations: Technical Inventory}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Innovation} & \tableheader{Description and Significance} \\
+\midrule
+Inverted Stratocaster & Left-handed playing on right-handed guitar (restrung). Changed the ergonomics of fretting and picking; volume/tone controls relocated to top. Created unique physical access to techniques. \\
+Thumb-bass voicing & Used the fretting-hand thumb to play bass notes on the low strings, freeing the four fingers for distinct melodic voicings. Heard on ``The Wind Cries Mary,'' ``Bold As Love,'' ``Little Wing.'' \\
+Dominant 7\#9 chord & The ``Hendrix chord'' --- includes both major and minor third simultaneously. Creates ambiguity and tension. Foundational to ``Purple Haze.'' \\
+Feedback exploitation & Deliberately developed amplifier feedback --- previously considered undesirable noise --- as a musical texture. Pioneered with overdriven Marshall amplifiers at high volume. \\
+Wah-wah as melody & Used the wah-wah pedal not as an accent but as a melodic instrument, filtering the fundamental continuously. Transformed perception of what pedals could do. \\
+String bending as melody & Integrated bends into melodic lines rather than using them purely as ornament or accent. Fundamental to his phrasing and emotional delivery. \\
+Octavia pedal & Worked closely with engineer Roger Mayer to develop the Octavia, which doubled the signal an octave up. Expanded sonic palette. \\
+Lead + vocal simultaneously & Led the trio as both lead guitarist and lead vocalist, abandoning the two-person division (guitarist + singer) that preceded him. Changed the template for rock performance. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Recordings}
+
+\begin{itemize}[leftmargin=*]
+  \item \textit{Are You Experienced} (1967) --- debut; ``Purple Haze,'' ``Hey Joe,'' ``The Wind Cries Mary,'' ``Foxy Lady.''
+  \item \textit{Axis: Bold as Love} (1967) --- ``Little Wing,'' ``Bold As Love,'' ``Castles Made of Sand.''
+  \item \textit{Electric Ladyland} (1968) --- ``All Along the Watchtower'' (Dylan cover, widely considered definitive), ``Voodoo Child (Slight Return).''
+  \item \textit{Band of Gypsys} (1970) --- live album; funk-influenced; ``Machine Gun'' as Vietnam-era statement.
+  \item Woodstock 1969 --- ``The Star-Spangled Banner'' performance: controlled feedback and distortion render the national anthem as a sonic account of war, napalm, and chaos.
+\end{itemize}
+
+\subsubsection{Influence and Legacy}
+
+The Rock and Roll Hall of Fame biography describes Hendrix as ``arguably the greatest instrumentalist in the history of rock music.'' Musicians citing direct Hendrix influence include Stevie Ray Vaughan, Prince, Eddie Van Halen, Slash, Kirk Hammett, Yngwie Malmsteen, and Adrian Belew. His influence extends to funk (through Band of Gypsys), jazz-rock fusion (Miles Davis acknowledged the Hendrix influence on \textit{Bitches Brew}), heavy metal, post-punk, grunge, and hip-hop. As Yngwie Malmsteen stated: he ``created modern electric playing, without question.''
+
+\subsection{Module 3 Reference: Joplin --- Voice as Vessel}
+
+\subsubsection{Biography and Early Career}
+
+Janis Lyn Joplin was born January 19, 1943, in Port Arthur, Texas. She grew up feeling like an outsider in a conservative town and turned to music as refuge, discovering the blues through records borrowed from a friend --- Bessie Smith and Leadbelly. She attended Lamar State College and the University of Texas but did not complete her studies. She sang folk music initially, imitating Joan Baez and Judy Collins; she made a deliberate calculation that a ``pretty'' folk voice was not her path. She joined Big Brother and the Holding Company in San Francisco's Haight-Ashbury in 1966. She died October 4, 1970, from a heroin overdose. She was inducted into the Rock and Roll Hall of Fame in 1995.
+
+\subsubsection{Vocal Technique: Technical Inventory}
+
+Joplin possessed a mezzo-soprano voice --- a middle-register female voice --- which she deployed across an extraordinary dynamic range. Her technique drew from blues growl, gospel shout, folk lyrical clarity, and soul's emotional directness. Key characteristics:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Growl and wail:} Joplin developed a distinctive low-register growl and high-register wail as deliberate expressive tools, not as limitations. These grew directly from her study of Bessie Smith.
+  \item \textbf{Tonal bending:} Like a blues guitarist bending strings, Joplin bent pitches vocally, sliding between notes in a way that encoded emotional instability and yearning.
+  \item \textbf{Emotional release:} Her performing philosophy was explicit: ``get up there and just let all those things come out.'' She described singing as the only way she could express what she felt.
+  \item \textbf{Physical commitment:} Her uninhibited physical performance style was inseparable from her vocal delivery; the body was part of the instrument.
+  \item \textbf{Range of dynamics:} From near-whisper to full-throated howl within a single phrase; she used dynamic extremes as emotional punctuation.
+\end{itemize}
+
+\subsubsection{Band Configurations and Artistic Arc}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Band / Period} & \tableheader{Years} & \tableheader{Key Recordings / Context} \\
+\midrule
+Big Brother \& the Holding Company & 1966--1968 & \textit{Cheap Thrills} (1968); Columbia signed on basis of Monterey performance; raw psychedelic rock \\
+Kozmic Blues Band & 1969 & \textit{I Got Dem Ol' Kozmic Blues Again Mama!}; mixed reviews but showcased range; more orchestrated \\
+Full Tilt Boogie Band & 1970 & \textit{Pearl} (posthumous, 1971); ``Me and Bobby McGee'' (\#1 posthumously); most sophisticated ensemble \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Feminist Significance}
+
+Joplin broke through in an environment where female artists were actively discouraged. As singer-songwriter Tracy Nelson recalled of mid-1960s San Francisco: ``I don't know how many musicians [told] me, `Why do you want to do this? This is no place for women.'\,'' Joplin's official biography notes that she ``shattered every stereotype about female artists'' and ``essentially invented the `rock mama' paradigm.'' Joplin herself was explicit: singing was the only way she could refuse the role of ``wife and mother'' that Port Arthur offered as the only alternative. Her biographer Alice Echols called her ``the great unrecognized protest singer of the 1960s'' --- not through explicit political songs but through a voice that refused the status quo.
+
+She influenced: Stevie Nicks, Bonnie Raitt, Pink, and Amy Winehouse, all of whom have cited her directly. Rolling Stone ranked her among the greatest singers of all time (most recently at \#78 in 2023's list of 200 Greatest Singers). NPR dubbed her the ``Queen of Rock'' and one of ``50 Great Voices.''
+
+\subsection{Module 4 Reference: The Convergence --- Monterey 1967}
+
+\subsubsection{The Festival}
+
+The Monterey International Pop Festival was held June 16--18, 1967, at the Monterey County Fairgrounds in California. Organized in seven weeks by John Phillips (The Mamas and the Papas) and Lou Adler, the festival drew up to 50,000 attendees per day with no arrests. Paul McCartney, a board member, personally advocated for the inclusion of the Jimi Hendrix Experience, reportedly telling organizers the event would be ``incomplete'' without him.
+
+The festival is documented in D.A. Pennebaker's film \textit{Monterey Pop} (1969) and in the audio collection held at the Rock and Roll Hall of Fame Library. It is generally regarded as the first major rock festival and the template for Woodstock, Coachella, and the modern festival form.
+
+\subsubsection{The Performances}
+
+\textbf{Janis Joplin:} Big Brother and the Holding Company performed twice --- the Saturday afternoon set was so powerful that festival organizers gave the band a second Sunday slot to ensure Pennebaker's film crew captured it. Joplin's performance of ``Ball and Chain'' caused established artist Cass Elliot, watching from the wings, to stare in ``jaw-dropping wonder.'' The San Francisco Examiner's music critic called Joplin ``the real queen of the festival.'' Columbia Records' Clive Davis, who called Monterey the ``creative turning point'' of his life, signed Big Brother and the Holding Company on the basis of this performance.
+
+\textbf{Jimi Hendrix:} The Jimi Hendrix Experience's Monterey appearance was their first major US performance. (Hendrix had become a star in the UK but was largely unknown in his native country.) As the Rock and Roll Hall of Fame states: ``Rarely does a performer debut as a fully formed artist. The Jimi Hendrix Experience's appearance at Monterey instantly placed the group as the most incendiary in rock and roll.'' Hendrix closed his set by pouring lighter fluid on his guitar and setting it on fire amid ``a frenetic massive feedback and noise battle with his guitar and the amps'' --- an act of sonic and visual theater that defined the counterculture's relationship with spectacle.
+
+\subsubsection{Cultural Context}
+
+Monterey embodied the Summer of Love's idealism: ``Music, Love and Flowers.'' It was, as Rolling Stone's Jann Wenner wrote, ``the nexus'' from which the late-1960s music scene emerged. It also marked the moment, as Lou Adler and others noted, when the record industry recognized that ``hippie rock could be big business'' --- a realization with lasting consequences for the artists it celebrated.
+
+\subsection{Module 5 Reference: Legacy and Transmission}
+
+\subsubsection{The 27 Club Context}
+
+Hendrix died September 18, 1970; Joplin died October 4, 1970. Both were 27 years old. Both deaths occurred during active creative periods. Joplin was mid-session recording \textit{Pearl}, her most accomplished album, which was completed by the surviving band members and released posthumously in January 1971, reaching \#1 on the charts. Hendrix had been developing material for a new album with an increasingly funk-influenced direction; he was reportedly planning a session with Miles Davis before his death. The ``27 Club'' framing --- which includes Robert Johnson, Brian Jones, Jim Morrison, Kurt Cobain, and Amy Winehouse --- is a cultural mythology that can obscure the more important observation: both Hendrix and Joplin were accelerating, not declining.
+
+\subsubsection{Direct Artistic Inheritance}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Inheritance From} & \tableheader{Specific Connection} \\
+\midrule
+Stevie Ray Vaughan & Hendrix & Blues-rock technique; Stratocaster; cited Hendrix as primary influence \\
+Prince & Hendrix & Guitar virtuosity, studio control, flamboyant performance, left-handedness \\
+Kurt Cobain & Hendrix/Joplin & Feedback; raw emotional delivery; flannel-era blues inheritance \\
+Stevie Nicks & Joplin & Rock female archetype; emotional intensity; mystical imagery \\
+Bonnie Raitt & Joplin/blues & Slide guitar; blues female vocalist; political commitment \\
+Pink & Joplin & Raw power, emotional directness, feminist defiance \\
+Amy Winehouse & Joplin/Smith & Retro-blues vocal style; emotional catharsis; similar tragic arc \\
+Adele & Joplin/Smith & Mezzo-soprano power, emotional authenticity, blues feeling \\
+Jack White & Hendrix & Minimalist power trio; blues amplification; feedback use \\
+Lenny Kravitz & Hendrix & Guitar-as-orchestra; retro-futurist approach; Stratocaster mastery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Institutional Recognition}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Jimi Hendrix:} Rock and Roll Hall of Fame (1992); Rolling Stone ``100 Greatest Guitarists'' (\#1 in 2003 list); described by the RRHOF as ``arguably the greatest instrumentalist in the history of rock music.''
+  \item \textbf{Janis Joplin:} Rock and Roll Hall of Fame (1995); Rolling Stone ``100 Greatest Artists'' (\#46, 2004); Rolling Stone ``200 Greatest Singers'' (\#78, 2023); NPR ``50 Great Voices''; as of 2013, RIAA-certified 18.5 million albums sold in the United States.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling Guidance} \\
+\midrule
+Racial dynamics & ANNOTATE & Acknowledge explicitly that both artists built on African American heritage. Do not romanticize or minimize the erasure of Black artists who preceded them. \\
+Cause of death & GATE & State established facts (Hendrix: barbiturate overdose; Joplin: heroin overdose). Do not sensationalize. Focus on artistic trajectory, not death. \\
+Cultural appropriation & ANNOTATE & Address the scholarship on this question directly and evenhandedly. Joplin's tribute to Bessie Smith is a counter-data point; the structural inequity Thornton experienced is also a data point. \\
+27 Club mythology & ANNOTATE & Acknowledge the cultural mythology; resist reinforcing it as the primary frame. \\
+Gender dynamics & GATE & Joplin's experience of sexism in the music industry is documented; present with specificity, not generalization. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government, Institutional, and Museum Sources}
+\begin{itemize}[leftmargin=*]
+  \item Rock and Roll Hall of Fame. ``Jimi Hendrix'' and ``Janis Joplin'' inductee biographies. \url{https://www.rockhall.com}
+  \item Rock and Roll Hall of Fame Library and Archives. ``Greatest Festival Moments: Monterey 1967.'' \url{https://library.rockhall.com/greatest_festival_moments/monterey_1967}
+  \item National Museum of African American History and Culture. ``Bessie Smith.'' \url{https://nmaahc.si.edu/lgbtq/bessie-smith}
+  \item GRAMMY Museum. ``Monterey International Pop Festival: Music, Love, and Flowers, 1967.'' \url{https://grammymuseum.org}
+  \item TeachRock (Rock and Roll Hall of Fame educational program). ``Jimi Hendrix: Rock's Trailblazing Innovator.'' \url{https://teachrock.org}
+  \item Ohio State University, AAEP 1600 Open Textbook. ``Jimi Hendrix.'' \url{https://aaep1600.osu.edu/book/09_Hendrix.php}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+\begin{itemize}[leftmargin=*]
+  \item Mahon, Maureen. ``How Bessie Smith Influenced a Century of Popular Music.'' NPR Music, August 5, 2019. \url{https://www.npr.org/2019/08/05/747738120}
+  \item Baraka, Amiri (LeRoi Jones). \textit{Blues People: The Negro Music in White America}. 1963.
+  \item Echols, Alice. \textit{Scars of Sweet Paradise: The Life and Times of Janis Joplin}. Metropolitan Books, 1999.
+  \item Storey, Arron. ``Jimi Hendrix Analysis.'' London College of Music Licentiate Thesis, 2014 (published at \url{https://arronstorey.com})
+  \item IJFMR (International Journal for Multidisciplinary Research). ``Influential American Guitarist in the History of Hard Rock.'' 2024.
+\end{itemize}
+
+\subsubsection{Authoritative Journalism and Reference Sources}
+\begin{itemize}[leftmargin=*]
+  \item Wikipedia. ``Jimi Hendrix.'' \url{https://en.wikipedia.org/wiki/Jimi_Hendrix}
+  \item Wikipedia. ``Janis Joplin.'' \url{https://en.wikipedia.org/wiki/Janis_Joplin}
+  \item Wikipedia. ``Monterey International Pop Festival.'' \url{https://en.wikipedia.org/wiki/Monterey_International_Pop_Festival}
+  \item Wikipedia. ``Bessie Smith.'' \url{https://en.wikipedia.org/wiki/Bessie_Smith}
+  \item Encyclop\ae dia Britannica. ``Janis Joplin.'' \url{https://www.britannica.com/biography/Janis-Joplin}
+  \item NPR Music. ``Janis Joplin: The Queen of Rock.'' \url{https://www.npr.org/2010/06/07/127483124/janis-joplin-the-queen-of-rock}
+  \item Rolling Stone. ``Why Monterey Pop Was a Turning Point for Sixties Rock.'' \url{https://www.rollingstone.com/music/music-news/why-monterey-pop-was-a-turning-point-for-sixties-rock-194407/}
+  \item JanisJoplin.com official biography. \url{https://janisjoplin.com/biography/}
+  \item Far Out Magazine. ``Five Musicians That Influenced Janis Joplin.'' \url{https://faroutmagazine.co.uk/five-musicians-that-influenced-janis-joplin/}
+  \item Berklee Online / TakeNote. ``Jimi Hendrix and 9 Other Musicians Who Changed the Way We Play.'' \url{https://online.berklee.edu/takenote}
+  \item Musicians Hall of Fame and Museum. ``Why Did Jimi Hendrix Play His Guitar Upside Down.'' \url{https://www.musicianshalloffame.com}
+\end{itemize}
+
+\newpage
+
+%%==============================================================
+%% STAGE 3 — MISSION PACKAGE
+%%==============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research collection on Jimi Hendrix and Janis Joplin --- covering their technical innovations, African American blues inheritance, historical convergence at Monterey 1967, and lasting artistic legacy --- organized as five standalone documents corresponding to the five research modules, plus a synthesis document, plus an index page. All documents must be ready for inclusion in the GSD College humanities curriculum and the GSD BBS Educational Pack system.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION
+  [Haiku] Shared schemas, source index, module templates
+         |
+         v
+WAVE 1A (PARALLEL):                WAVE 1B (PARALLEL):
+  [Sonnet] Module 1: Blues          [Sonnet] Module 3: Joplin
+  [Opus]   Module 2: Hendrix        [Opus]   Module 4: Monterey
+         |                                   |
+         +-----------------+-----------------+
+                           |
+                           v
+WAVE 2: SYNTHESIS
+  [Opus] Cross-module integration document
+  [Opus] Cultural context + racial dynamics analysis
+         |
+         v
+WAVE 3: PUBLICATION + VERIFICATION
+  [Sonnet] Module 5: Legacy + Transmission
+  [Sonnet] Source verification pass
+  [Sonnet] Index page generation
+  [Opus]   Final synthesis and through-line review
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer (Wave 0):} Shared data schemas, source citation formats, module document template, cross-reference index
+  \item \textbf{Historical Layer (Wave 1):} Blues lineage documentation (Module 1) and Hendrix technical analysis (Module 2)
+  \item \textbf{Performance Layer (Wave 1 parallel):} Joplin vocal analysis (Module 3) and Monterey convergence (Module 4)
+  \item \textbf{Synthesis Layer (Wave 2):} Cross-module integration, racial and gendered dynamics analysis
+  \item \textbf{Legacy Layer (Wave 3):} Module 5 (legacy), source verification, index generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criterion} & \tableheader{Component Spec} \\
+\midrule
+1 & Module 1: Blues Foundation & 8--12 pages; all heritage figures named with dates and specific connections & blues-foundation.md \\
+2 & Module 2: Hendrix Guitar & 10--15 pages; all 8 technical innovations described with examples; key recordings annotated & hendrix-guitar.md \\
+3 & Module 3: Joplin Voice & 10--15 pages; vocal technique inventory; feminist context; arc across three band configurations & joplin-voice.md \\
+4 & Module 4: Monterey 1967 & 8--10 pages; both performances documented; cultural context; industry consequences & monterey-convergence.md \\
+5 & Module 5: Legacy & 8--10 pages; 10+ direct artistic descendants; institutional recognition data; 27 Club analysis & legacy-transmission.md \\
+6 & Synthesis Document & 6--8 pages; 3+ cross-module relationships; racial/gendered dynamics; the interrupted trajectories & synthesis.md \\
+7 & Index Page & HTML; file cards; usage instructions; color scheme matching primary violet/blue & index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas \& source index & None & Haiku & 8k \\
+Module 1: Blues Foundation & Source index & Sonnet & 25k \\
+Module 2: Hendrix Guitar & Source index & Opus & 35k \\
+Module 3: Joplin Voice & Source index & Opus & 30k \\
+Module 4: Monterey 1967 & Modules 1--3 & Sonnet & 20k \\
+Module 5: Legacy & Modules 1--4 & Sonnet & 22k \\
+Synthesis Document & All modules & Opus & 30k \\
+Source verification pass & All modules & Sonnet & 15k \\
+Index page & All deliverables & Sonnet & 8k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\approx$32\% & Modules requiring cultural sensitivity, technical depth judgment, and cross-module synthesis: Hendrix guitar innovation (nuance-heavy), Joplin feminist analysis (sensitivity-heavy), synthesis document \\
+Sonnet & $\approx$58\% & Survey compilation, source document assembly, module production for less judgment-heavy modules, verification, index \\
+Haiku & $\approx$10\% & Schema generation, templates, log entries, budget tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{2.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Agents} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku + PLAN & Schemas, source index, templates \\
+1A & Historical Track & Parallel & EXEC-A + CRAFT-BLUES & Modules 1 \& 2 \\
+1B & Performance Track & Parallel & EXEC-B + CRAFT-PERF & Modules 3 \& 4 \\
+2 & Synthesis & Sequential & FLIGHT + INTEG & Synthesis doc, racial/gender analysis \\
+3 & Publication & Sequential & EXEC-A + VERIFY + SCOUT & Module 5, verification, index \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Shared citation schema & Haiku & JSON schema for source citations: \{author, year, title, institution, url, type\} \\
+Source index file & Haiku & Index all 20+ sources from Stage 2 bibliography into machine-readable format \\
+Module document template & Haiku & Markdown template with sections: Overview, Key Figures, Technical Analysis, Primary Sources, Cross-references \\
+Dependency map & PLAN & ASCII dependency graph confirming Wave 1A/1B can run in parallel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Historical (EXEC-A + CRAFT-BLUES):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+Blues Foundation doc & EXEC-A & Use Module 1 Research Reference; fill gaps via targeted search: ``Robert Johnson Delta blues guitar technique'' \\
+Hendrix Guitar doc & CRAFT-BLUES & Use Module 2 Research Reference; supplement: ``Hendrix Stratocaster setup technical details,'' ``dominant 7\#9 chord Hendrix'' \\
+Internal review & VERIFY & Cross-check all technical claims; flag any unsourced assertions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Performance (EXEC-B + CRAFT-PERF):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+Joplin Voice doc & CRAFT-PERF & Use Module 3 Research Reference; supplement: ``Janis Joplin vocal technique analysis,'' ``Big Brother Full Tilt Boogie comparison'' \\
+Monterey 1967 doc & EXEC-B & Use Module 4 Research Reference; include both Hendrix and Joplin performance data \\
+Internal review & VERIFY & Verify all performance claims; confirm festival dates, setlists, industry consequences \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Cross-module synthesis & INTEG & Identify 3+ cross-module relationships; draft synthesis document outline \\
+Racial/gendered dynamics & FLIGHT & 2--3 page analysis: Hendrix as Black man in psychedelic rock; Joplin as woman in male-dominated industry; both as carriers of Black musical heritage \\
+Interrupted trajectories & FLIGHT & 1--2 page section: ``What were they becoming?'' Evidence: Pearl sessions, Band of Gypsys funk direction, planned Miles Davis collaboration \\
+CAPCOM checkpoint & CAPCOM & Human approval before Wave 3 begins; review synthesis document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Module 5: Legacy doc & EXEC-A & Use Module 5 Research Reference; table of 10 direct descendants \\
+Source verification & VERIFY & URL validation pass on all bibliography entries; flag dead links \\
+Final source search & SCOUT & Fill any remaining gaps; confirm current RIAA certification numbers for Joplin; confirm RRHOF current biographical text \\
+Index page & EXEC-B & HTML; violet/blue color scheme; cards for all 7 deliverables; usage instructions \\
+Final review & FLIGHT & Through-line check; confirm racial/gendered dynamics treated with sufficient depth \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Session 1 (Wave 0 + 1):} Open with the full source index (from Wave 0) as system context. Keep it warm across Wave 1A and 1B execution. Estimated cache TTL: sufficient for both parallel tracks within a single 5-minute window.
+  \item \textbf{Session 2 (Wave 2):} Re-inject the source index plus all four completed Wave 1 documents as context for synthesis. Opus model for all Wave 2 tasks.
+  \item \textbf{Session 3 (Wave 3):} Module 5 can reference synthesis document; verification pass uses minimal tokens. Index generation is a single clean Sonnet call.
+  \item \textbf{Batch strategy:} EXEC-A and EXEC-B should be invoked as near-simultaneous calls to maximize cache overlap across the parallel tracks.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input (k)} & \tableheader{Output (k)} & \tableheader{Model Mix} \\
+\midrule
+Wave 0: Foundation & 5 & 8 & Haiku \\
+Wave 1A: Historical & 20 & 60 & Sonnet + Opus \\
+Wave 1B: Performance & 20 & 50 & Sonnet + Opus \\
+Wave 2: Synthesis & 150 & 38 & Opus \\
+Wave 3: Publication & 80 & 45 & Sonnet + Opus \\
+\midrule
+\textbf{TOTAL} & \textbf{275} & \textbf{201} & \textbf{32/58/10} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+    |
+    +-----+------+
+    |             |
+    v             v
+[Wave 1A]      [Wave 1B]     <-- PARALLEL
+Module 1       Module 3
+Module 2       Module 4
+    |             |
+    +------+------+
+           |
+           v
+    [Wave 2: Synthesis]
+    Cross-module integration
+    Racial/gendered analysis
+    Interrupted trajectories
+           |
+           v
+    [Wave 3: Publication]
+    Module 5
+    Source verification
+    Index page
+           |
+           v
+    [DELIVERY]
+    7 documents + index
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & MANDATORY & BLOCK release \\
+Core Functionality & 8 & HIGH & Revision required \\
+Integration & 4 & MEDIUM & Document and continue \\
+Edge Cases & 4 & LOW & Document and note \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & African American attribution integrity & Every blues predecessor is named with their own biography, dates, and specific contributions. No sources are described only in relation to Hendrix or Joplin. \\
+SC-02 & Racial dynamics explicitness & The synthesis document contains a section explicitly addressing Hendrix's position as a Black man in psychedelic rock and Joplin's appropriation of African American blues technique, with named scholars and specific textual evidence. \\
+SC-03 & Source integrity & Every numerical claim (Joplin RIAA certification, Rolling Stone rankings, Monterey attendance figures) is traced to a named institutional or journalistic source in the bibliography. \\
+SC-04 & Death narrative proportionality & No individual module devotes more than 10\% of its content to the circumstances of death. The 27 Club mythology is addressed once, in Module 5, and explicitly framed as a distraction from the artistic trajectory analysis. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{SC Ref} & \tableheader{Success Criterion} & \tableheader{Test IDs} \\
+\midrule
+SC-1 & Blues lineage documented with names, dates, connections & SC-01, CORE-01, CORE-02 \\
+SC-2 & Hendrix technical innovations with specificity & CORE-03, INT-01 \\
+SC-3 & Joplin vocal technique with specificity & CORE-04, INT-02 \\
+SC-4 & Monterey documented with performance data & CORE-05, INT-03 \\
+SC-5 & Gender/racial dynamics addressed explicitly & SC-02, CORE-06 \\
+SC-6 & Attribution/gratitude acts documented & SC-01, CORE-07 \\
+SC-7 & Interrupted trajectories addressed & SC-04, CORE-08 \\
+SC-8 & All claims sourced & SC-03 \\
+SC-9 & Five standalone documents delivered & CORE-01 through CORE-05 \\
+SC-10 & Cross-module relationships identified & INT-04 \\
+SC-11 & 10+ artistic descendants named & CORE-08 \\
+SC-12 & Package self-contained for new reader & EDGE-01 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates; synthesis judgment; racial/gendered dynamics analysis \\
+PLAN & Planner (Sonnet) & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent (Sonnet) & Source gathering; supplementary web research; URL validation \\
+EXEC-A & Executor-A (Sonnet) & Module 1 (Blues Foundation) and Module 5 (Legacy) document production \\
+EXEC-B & Executor-B (Sonnet) & Module 4 (Monterey) and index page production \\
+CRAFT-BLUES & Blues Specialist (Opus) & Module 2 (Hendrix Guitar); deep blues lineage expertise; racial heritage analysis \\
+CRAFT-PERF & Performance Analyst (Opus) & Module 3 (Joplin Voice); vocal craft; feminist context; live performance analysis \\
+VERIFY & Verification (Sonnet) & Source validation; accuracy checking; citation format enforcement \\
+INTEG & Integration (Opus) & Cross-module relationship identification; synthesis document outline \\
+CAPCOM & HITL Interface (Sonnet) & Human approval at Wave 2 boundary; final delivery confirmation \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning; wave boundary cost reporting \\
+LOG & Chronicle (Haiku) & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & hendrix-joplin-deep-research-v1 \\
+Activation Profile & Squadron (12 roles) \\
+Module Count & 5 research modules + 1 synthesis + 1 index \\
+Estimated Context Windows & 6--8 \\
+Estimated Sessions & 3--4 \\
+Total Documents & 7 \\
+Estimated Token Budget & 476k total (input + output) \\
+Model Split & Opus 32\% / Sonnet 58\% / Haiku 10\% \\
+Safety-Critical Tests & 4 (all BLOCK on failure) \\
+Human Checkpoint & Wave 2 boundary (CAPCOM) \\
+GSD Pipeline Stage & Vision $\rightarrow$ Research $\rightarrow$ Mission (complete) \\
+Ready for Orchestrator & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Playing is just about feeling. It isn't necessarily about misery, it isn't about happiness. It's just about letting yourself feel all those things you already have inside of you but are trying to push aside because they don't make for polite conversation. But if you just get up there --- that's the only reason I can sing. Because I get up there and just let all those things come out.''}
+
+\vspace{0.5em}
+\hfill --- Janis Joplin, \textit{The Dick Cavett Show}, 1970
+
+\vspace{1em}
+The GSD ecosystem is built to give people their lives back --- to reduce friction so humans can focus on what matters. What Joplin describes is exactly what GSD builds toward: architecture that removes the obstacles between intention and expression, so that what lives inside can come out. Hendrix found it in the spaces between the strings. Joplin found it in the spaces between the breath. The mission is the same.
+\end{quotebox}
+
+\end{document}

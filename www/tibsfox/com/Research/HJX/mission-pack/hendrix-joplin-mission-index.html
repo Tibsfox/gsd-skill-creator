@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hendrix & Joplin — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #4A148C;
+  --secondary: #E65100;
+  --tertiary: #1B5E20;
+  --accent: #6A1B9A;
+  --light-bg: #EDE7F6;
+  --card-bg: #D1C4E9;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #1a0533 0%, #311B92 40%, #4A148C 70%, #1B5E20 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #CE93D8; letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,20,140,0.2); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--primary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: #311B92; font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Hendrix &amp; Joplin</h1>
+  <h2>Art of the Guitar, Voice of the Ages</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="hendrix-joplin-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable source file. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+    <a href="../index.html" class="file-card">
+      <div class="ext">HTML &middot; Research Project</div>
+      <div class="name">HJX Project</div>
+      <div class="desc">Browse all five research modules, cross-reference maps, and domain architecture.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Blues transmission map and module architecture diagrams</li>
+          <li>5 research modules: Blues Foundation, Hendrix Guitar, Joplin Voice, Monterey 1967, Legacy</li>
+          <li>Chipset configuration (squadron, 12 roles), scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Blues heritage: Ma Rainey, Bessie Smith, Robert Johnson, Muddy Waters, Big Mama Thornton</li>
+          <li>Hendrix technical inventory: 8 guitar innovations with recording examples</li>
+          <li>Joplin vocal analysis: mezzo-soprano range, growl/wail technique, 3 band configurations</li>
+          <li>Monterey 1967: festival data, both performances, industry consequences</li>
+          <li>Legacy: 10 direct artistic descendants with specific inheritance</li>
+          <li>Safety/sensitivity guidelines and full source bibliography (20+ sources)</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>7 deliverables, 4-wave execution plan with 2 parallel tracks</li>
+          <li>Squadron activation profile: 12 roles (FLIGHT, CRAFT-BLUES, CRAFT-PERF, INTEG, etc.)</li>
+          <li>20 tests (4 safety-critical), verification matrix &mdash; "The Experience Report"</li>
+          <li>~476K token budget, 6&ndash;8 context windows, 3&ndash;4 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the mission package</li>
+      <li>Wave 0 produces shared schemas, source index, and module templates</li>
+      <li>Wave 1 executes two parallel tracks (A: Blues + Hendrix, B: Joplin + Monterey)</li>
+      <li>Wave 2 synthesizes cross-module integration, racial/gendered dynamics analysis</li>
+      <li>Wave 3 produces Module 5 (Legacy), source verification, and index page</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode hendrix-joplin-mission.tex
+xelatex -interaction=nonstopmode hendrix-joplin-mission.tex
+xelatex -interaction=nonstopmode hendrix-joplin-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "Hendrix understood the spaces between literally. His guitar technique was built on the
+    exploitation of what happens between the notes: the feedback that lives in the space between
+    amplifier and string, the bend that lives between one pitch and the next. Joplin understood
+    it emotionally. Her voice lived between vulnerability and power. Both drew from a deep reservoir
+    of African American musical genius and carried that inheritance into new sonic territories."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Hendrix &amp; Joplin &middot; Project #101 &middot; March 2026
+</footer>
+
+</body>
+</html>
