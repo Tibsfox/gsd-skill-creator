@@ -1,0 +1,77 @@
+/* LKR -- The Lion King: Africa & Roots
+ * Theme: African Savanna -- burnt umber earth, savanna gold sun, deep brown, deep orange accent
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* -- Palette -- */
+:root {
+  --umber: #8B5E3C;
+  --umber-deep: #5D3A1A;
+  --umber-mid: #A0704B;
+  --savanna: #C17817;
+  --savanna-light: #FDF3E3;
+  --savanna-dim: #9E6112;
+  --earth-deep: #5D4037;
+  --earth-light: #EFEBE9;
+  --accent: #E65100;
+  --accent-light: #FBE9E7;
+  --pride-rock: #A0522D;
+  --sand: #F5EDE4;
+  --acacia: #3E6B48;
+  --acacia-light: #E8F0EA;
+  --grass: #7B8C3B;
+  --sunset: #E8833A;
+  --sky: #B0C4DE;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAF5;
+  --page-text: #212121;
+  --page-text-light: #5D4037;
+  --link: var(--umber);
+  --card-border: #D4C4B0;
+  --border: #D4C4B0;
+}
+
+/* -- Header (gradient + border only) -- */
+header {
+  background: linear-gradient(135deg, var(--earth-deep) 0%, var(--umber-deep) 25%, var(--umber) 55%, var(--savanna-dim) 85%, var(--savanna) 100%);
+  border-bottom: 4px solid var(--savanna);
+}
+
+/* -- Color overrides -- */
+h2 { color: var(--umber-deep); border-bottom-color: var(--border); }
+h3 { color: var(--umber); }
+th { background: var(--umber-deep); }
+td { border-bottom-color: var(--border); }
+tr:nth-child(even) { background: rgba(139, 94, 60, 0.04); }
+tr:hover { background: rgba(139, 94, 60, 0.08); }
+blockquote { border-left-color: var(--umber); background: rgba(139, 94, 60, 0.06); }
+code { background: var(--savanna-light); }
+pre { background: var(--earth-deep); color: #E0E0E0; }
+.stat-value { color: var(--umber-deep); }
+
+/* -- Tags -- */
+.tag-myth { background: #FBE9E7; color: #BF360C; }
+.tag-griot { background: #FFF3E0; color: #E65100; }
+.tag-paleo { background: #EFEBE9; color: #4E342E; }
+.tag-circle { background: #E8F0EA; color: #3E6B48; }
+.tag-voice { background: #E3F2FD; color: #0277BD; }
+.tag-roots { background: #F5EDE4; color: #5D3A1A; }
+.tag-pass { background: #E8F5E9; color: #2E7D32; }
+
+/* -- Special: savanna horizon motif -- */
+.savanna-line {
+  background: linear-gradient(90deg, var(--earth-deep), var(--umber), var(--savanna), var(--sunset), var(--savanna));
+  height: 3px;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
