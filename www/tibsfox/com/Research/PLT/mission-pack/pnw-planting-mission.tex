@@ -1,0 +1,990 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Ecology/Garden ===
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={PNW Micro-Climate Planting Intelligence -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Planting Intelligence}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+
+% =============================================================================
+% TITLE PAGE
+% =============================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{PNW Micro-Climate\\[0.3em]Planting Intelligence}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pacific Northwest Orchard \& Garden --- Week of March 26, 2026}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 | Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron | Estimated: 8--12 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% =============================================================================
+% TABLE OF CONTENTS
+% =============================================================================
+\tableofcontents
+\newpage
+
+% #############################################################################
+% STAGE 1 — VISION DOCUMENT
+% #############################################################################
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Micro-Climate Planting Intelligence --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Depends On:}{None (root vision document)}
+\metafield{Context:}{Deep research mission triggered by real-time weather data analysis for PNW orchard property planting decisions}
+
+\subsection{Vision}
+
+The Pacific Northwest spring does not arrive as a single event. It arrives in the spaces between rain systems --- two-day windows where the soil is workable, the air temperature cooperates, and the gardener who knows the rhythm of the season can get seeds into ground that will be watered for free by the next front rolling off the Pacific. This mission captures that rhythm with data.
+
+The 2025--2026 winter was shaped by a weak La Niña that suppressed Oregon snowpack to near-record lows and delivered wetter-than-normal conditions across Washington. As of late March, ENSO is transitioning to neutral, and the Climate Prediction Center projects a decisive shift to warmer, drier conditions in April. This inflection point --- wet March to dry April --- creates an optimal planting window for cool-season crops that need moisture for germination but warmth for growth. The question is not whether to plant, but what to plant, where, and in what sequence.
+
+For a PNW orchard property with established apple, pear, and plum trees, the question extends beyond the vegetable garden. Late March is the last window for dormant pruning, the critical time for companion plantings that build soil fertility through nitrogen fixation and mineral accumulation, and the moment when the orchard's biological support system for the year is established. The companion planting pattern --- legumes at the drip line fixing atmospheric nitrogen, comfrey mining subsoil minerals, aromatic herbs confusing pest insects --- is the garden-scale expression of the Amiga Principle: specialized components working in concert to produce outcomes far exceeding what any single intervention could achieve.
+
+This mission packages real-time weather intelligence, evidence-based planting calendars, orchard management protocols, and companion planting ecology into a GSD-executable research study. The deliverable is not just information --- it is a decision-support system that answers ``what do I plant this week'' with data-backed specificity.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Planting timing is micro-climate dependent.} Generic ``Zone 8b'' advice fails to account for the actual weather pattern of a specific week. Real-time forecast data combined with soil temperature estimates and frost risk curves provides dramatically better planting decisions than static zone calendars.
+
+\item \textbf{The PNW spring slug bottleneck.} March is peak slug season in maritime Washington. Tender seedlings planted without integrated pest management face 60--80\% loss rates. Planting guides that ignore slug pressure are incomplete for this region.
+
+\item \textbf{Orchard companion planting is under-documented.} The nitrogen-fixing and mineral-accumulating functions of orchard guild plantings are well-established in permaculture literature but poorly integrated into standard PNW planting calendars. Most guides treat vegetable gardens and orchards as separate systems.
+
+\item \textbf{The warm-season timing trap.} PNW gardeners routinely lose warm-season transplants by planting too early. The ``May Mistake'' --- transplanting tomatoes during a warm spell only to have them stunted by June Gloom --- is the single most common novice error in the region. Indoor start timing must be precisely calibrated to the actual transplant-safe window.
+
+\item \textbf{Climate regime shift intelligence.} The La Niña-to-neutral ENSO transition, with growing confidence in El Niño conditions by summer 2026, changes the seasonal trajectory in ways that static calendars cannot capture. Gardeners need climate-context-aware planting guidance.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{center}
+\textbf{\sffamily\textcolor{primary}{Real-Time Weather Data × Regional Planting Knowledge × Orchard Ecology = Week-Specific Actionable Intelligence}}
+\end{center}
+
+The core model fuses three data streams: current weather (NOAA, NWS, commercial forecasts), established regional planting science (WSU Extension, Master Gardener calendars, experienced PNW growers), and orchard companion ecology (nitrogen fixation cycles, pest confusion matrices, pollinator support networks). The fusion product is a week-specific planting calendar with day-by-day action recommendations calibrated to the actual forecast.
+
+\subsubsection{Domain Map: PNW Planting Decision Space}
+
+\begin{asciibox}
+\begin{verbatim}
+                    PNW PLANTING INTELLIGENCE
+                    =========================
+
+    WEATHER LAYER           KNOWLEDGE LAYER          ECOLOGY LAYER
+    +---------------+       +---------------+       +---------------+
+    | NOAA/NWS      |       | WSU Extension |       | N-fixation    |
+    | Forecast      |       | Planting Cals |       | Companion     |
+    | Soil Temp     |------>| Zone/Frost    |------>| Pest Confuse  |
+    | ENSO Phase    |       | Crop Timing   |       | Pollinator    |
+    | Precip Prob   |       | Succession    |       | Mineral Accum |
+    +---------------+       +---------------+       +---------------+
+           |                       |                       |
+           v                       v                       v
+    +-----------------------------------------------------------+
+    |              WEEKLY PLANTING DECISION ENGINE              |
+    |                                                           |
+    |  Day-by-day action calendar + crop-specific guidance     |
+    |  Frost risk gates + slug defense protocols               |
+    |  Orchard task sequencing + companion establishment       |
+    +-----------------------------------------------------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  MODULE 1            MODULE 2            MODULE 3
+  Weather Intel       Cool-Season Crops   Warm-Season Planning
+  +-----------+       +-------------+     +--------------+
+  | Forecast  |       | Direct Sow  |     | Indoor Start |
+  | Soil Temp |------>| Legumes     |     | Tomatoes     |
+  | Frost Risk|       | Greens/Root |     | Peppers      |
+  | ENSO      |       | Alliums     |     | Brassica     |
+  +-----------+       | Herbs       |     | Transplant   |
+       |              +-------------+     | Timing       |
+       |                    |             +--------------+
+       v                    v                    |
+  MODULE 4            MODULE 5                   |
+  Orchard Mgmt        Defense & Ecology          |
+  +-----------+       +--------------+           |
+  | Pruning   |       | Slug IPM     |<----------+
+  | Spray     |       | Companion    |
+  | Bare Root |       | Nitrogen Fix |
+  | Fertility |       | Pollinator   |
+  +-----------+       +--------------+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Weather Intelligence}
+Real-time weather data fusion: 7-day forecast table, ENSO phase analysis, soil temperature estimation by bed type, frost risk curves by PNW sub-region, and the wet-March-to-dry-April transition analysis. Data sourced from NOAA, WA State Climate Office, FOX 13 Seattle, AccuWeather, and WSU AgWeatherNet.
+
+\subsubsection{Module 2: Cool-Season Crop Guide}
+Complete direct-sow catalog for the week of March 26: legumes (peas, favas), salad greens (lettuce, arugula, spinach, kale, mustard, mâche, chard), root vegetables (radish, carrot, beet, turnip, parsnip), alliums (onion sets, shallots, garlic, chives), potatoes, and hardy herbs (cilantro, dill, parsley, chervil, oregano, mint, sorrel). Each crop profiled with minimum soil temperature, days to harvest, frost tolerance, and PNW-specific growing notes.
+
+\subsubsection{Module 3: Warm-Season Planning}
+Indoor seed-starting guide for heat-loving crops: tomatoes, peppers, eggplant, basil, and brassicas for April transplant. Germination temperature requirements, transplant date targeting, the ``May Mistake'' avoidance protocol, and succession planting schedules through April.
+
+\subsubsection{Module 4: Orchard Management}
+Established fruit tree care for late March: dormant pruning deadline, dormant oil spray timing, codling moth trap deployment, fire blight inspection protocol, fertilization guidance, mulch management, and bare root planting window closure. Specific to apple, pear, and plum in western Washington.
+
+\subsubsection{Module 5: Defense \& Companion Ecology}
+Integrated slug management (iron phosphate, copper barriers, beer traps, evening patrols, watering timing). Orchard companion planting matrix: chives for scab prevention, daffodils for rodent deterrence, comfrey for mineral accumulation, clover for nitrogen fixation, nasturtiums as trap crops, calendula/borage/yarrow for pollinator support. Hardy annual flowers for early-season pollinator establishment.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:                          # Memory/scheduling
+    model: opus
+    role: synthesis, cross-module integration
+    allocation: 30%
+    tasks:
+      - Vision narrative and through-line
+      - Cross-module ecology relationships
+      - Climate-to-planting decision synthesis
+      - Companion planting interaction analysis
+
+  denise:                         # Display/output
+    model: sonnet
+    role: document production, structured content
+    allocation: 60%
+    tasks:
+      - Weather data tables and forecasts
+      - Crop planting calendars with specifications
+      - Orchard management protocols
+      - Slug defense procedures
+      - Source bibliography compilation
+
+  paula:                          # I/O coordination
+    model: haiku
+    role: scaffolding, schemas, templates
+    allocation: 10%
+    tasks:
+      - Shared crop data schema
+      - Table templates (crop specs, weather)
+      - Source citation index
+      - Module cross-reference stubs
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=*]
+\item Week of March 26 -- April 1, 2026 planting decisions for western Washington
+\item Cool-season direct-sow crops, warm-season indoor starts, hardy herbs and flowers
+\item Established orchard care for apple, pear, and plum trees
+\item Companion planting for orchard guild establishment
+\item Integrated slug management for maritime PNW
+\item ENSO transition context and April outlook
+\item Day-by-day action calendar with weather correlation
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=*]
+\item Eastern Washington / east-of-Cascades growing conditions
+\item Summer crop management (July--September)
+\item Greenhouse or high tunnel production
+\item Commercial-scale agriculture
+\item Specific cultivar recommendations beyond general type guidance
+\item Irrigation system design
+\item Soil amendment chemistry or lab testing protocols
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*]
+\item Weather intelligence synthesizes data from $\geq$3 authoritative sources with 7-day forecast table.
+\item Soil temperature estimates provided for $\geq$4 bed/location types with planting implications.
+\item Frost risk assessment covers $\geq$5 PNW sub-regions with current-year status.
+\item Cool-season crop guide covers $\geq$20 crops with minimum soil temp, days to harvest, and frost tolerance.
+\item Every crop recommendation supported by at least one PNW-specific regional source.
+\item Warm-season indoor start guide includes germination temperatures and transplant date targets.
+\item Orchard management section covers $\geq$6 late-March priority tasks for established fruit trees.
+\item Companion planting table profiles $\geq$10 guild plants with ecological function and placement.
+\item Slug defense protocol includes $\geq$5 integrated management strategies.
+\item Day-by-day action calendar maps weather forecast to specific planting actions for all 7 days.
+\item ENSO transition analysis connects climate regime shift to planting strategy with agency source.
+\item Complete source bibliography with government agencies, extension services, and professional growers.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection} \\
+\midrule
+Fox Infrastructure Group Plan & Informs & Property-scale agricultural planning; orchard context \\
+GSD Mesh Prototype Spec & Parallel & Weather station node in mesh cluster could automate soil temp monitoring \\
+Foxfire Heritage Skills Vision & Enriches & Traditional ecological knowledge patterns for companion planting \\
+GSD BBS Educational Pack & Potential module & Planting intelligence as educational content pack \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between the rain are where the planting happens. This is not a metaphor --- it is a literal operational constraint that shapes every decision in the PNW garden. The two-day dry window between Wednesday's storm and Sunday's return of moisture is the window. Everything planted in that space catches free irrigation on both sides.
+
+But the pattern runs deeper. Companion planting is the garden-scale expression of the Amiga Principle: specialized components --- nitrogen fixers, mineral accumulators, pest confusers, pollinator attractors --- each doing one thing well, their combined effect vastly exceeding what any mono-crop approach could achieve. The clover does not know about the comfrey. The chives do not coordinate with the yarrow. But the orchard that contains all of them becomes a self-renewing system that reduces external inputs every season. Architectural leverage over brute force. The spaces between the plants are where the ecology happens.
+
+\newpage
+
+% #############################################################################
+% STAGE 2 — RESEARCH REFERENCE
+% #############################################################################
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Planting Intelligence --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from the real-time data research conducted March 26, 2026. All data is current as of publication. Key source organizations:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{NOAA Climate Prediction Center} --- ENSO alerts, monthly/seasonal outlooks
+\item \textbf{Washington State Climate Office (UW)} --- March 2026 newsletter, spring onset trends
+\item \textbf{WSU AgWeatherNet} --- Soil temperature summaries, agricultural weather
+\item \textbf{NW Predictive Services (NIFC)} --- PNW climate and snowpack analysis
+\item \textbf{FOX 13 Seattle} --- 7-day operational weather forecast
+\item \textbf{AccuWeather} --- Seattle monthly temperature actuals/forecast
+\item \textbf{WSU Extension / Master Gardener Program} --- Regional planting science
+\item \textbf{Raintree Nursery} --- PNW-specific fruit tree and companion planting guidance
+\item \textbf{Fedco Seeds} --- Orchard companion plant ecology
+\end{itemize}
+
+\subsection{Module 1: Weather Intelligence Reference}
+
+\subsubsection{7-Day Forecast Data (March 26 -- April 1, 2026)}
+
+FOX 13 Seattle forecast data retrieved March 25--26, 2026: Thursday March 26 shows a high of 54°F and low of 36°F with rain from the departing storm cycle. A meaningful storm system tracked through the north Cascades March 24--26, depositing 18--25 inches of snow at Mt.\ Baker elevation while delivering rain to the lowlands. Friday and Saturday (March 27--28) clear to highs of 55°F with lows of 40--41°F --- the week's prime outdoor planting window. Rain returns Sunday through Tuesday with temperatures dropping to the upper 40s for highs.
+
+AccuWeather March 2026 actuals show the month has been variable: a cold snap around March 13 dropped to 32--35°F, followed by a warming trend to 57--58°F around March 18--20, then cooling again. The pattern of alternating storm systems and dry breaks is characteristic of the La Niña-to-neutral ENSO transition.
+
+\subsubsection{ENSO Phase and Seasonal Context}
+
+The Washington State Climate Office March 2026 newsletter confirms that La Niña conditions persisted through early 2026 but are now transitioning to neutral. The La Niña advisory remains active as of the February 24, 2026 NIFC report, but NOAA projects neutral conditions by spring with growing confidence in El Niño development by June--August 2026.
+
+Seasonal impact: La Niña in the PNW has historically produced normal-to-below-average temperatures with above-average precipitation. The weak nature of this event meant departures from normal were modest. The transition to neutral and potentially El Niño conditions by summer suggests a warmer-than-average growing season ahead.
+
+The Climate Prediction Center's April 2026 outlook projects increased likelihood of ridging over the western US, bringing drier and warmer than normal conditions. The Old Farmer's Almanac long-range forecast concurs: April and May cooler-than-normal in northern Washington, warmer in the south, with below-normal precipitation overall.
+
+\subsubsection{Soil Temperature Analysis}
+
+North Bend weather station data (March 21, 2026): air temperature 41.8°F at 7:55am with 95\% humidity, barometric pressure 30.187 inHg and rising, light rain. Mean annual soil temperature for the Seattle soil series (King County) ranges 47--52°F, with a 15--30°F difference between winter and summer means.
+
+Late March soil temperatures at 4-inch depth in western Washington lowlands typically range 40--48°F depending on exposure and bed construction. Raised beds in full sun gain 5--10°F over in-ground soil due to improved drainage and solar heating of sidewalls.
+
+\subsubsection{Frost Date Analysis}
+
+Seattle/SeaTac average last frost date: March 16--17 (30\% probability threshold, NOAA 1991--2020 normals). Garden.org data shows a 50/50 frost probability point around April 3 and a 90\% frost-free date of April 28 for Seattle. Tacoma's average last frost falls around March 28 --- essentially this week.
+
+UW climate research documents a consistent trend toward earlier spring onset across Washington since the 1960s, with last frost dates shifting earlier at most long-term monitoring stations. SeaTac is noted as a ``known warm spot'' for minimum temperatures in the Puget Sound lowlands.
+
+\subsection{Module 2: Cool-Season Crop Reference}
+
+\subsubsection{Legumes}
+
+Multiple PNW sources confirm peas (snow, snap, and shelling) as the premier late-March direct-sow crop. The Odd Garden Zone 8 PNW Guide (February 2026) notes that all three types can go into the ground as soon as soil is workable, with March sowing providing the longest harvest window before summer heat causes decline. St.\ Clare Heirloom Seeds' PNW Guide (January 2026) classifies shelling peas, snap peas, and snow peas under March ``legumes'' for direct sow. NW Edible Life recommends planting potatoes on St.\ Patrick's Day (March 17) as the PNW gardener tradition, noting that chitting (pre-sprouting) potatoes before sowing in loose soil with straw insulation protects against late frost.
+
+Fava beans tolerate harder frost than peas and serve as heavy nitrogen fixers. Deep Harvest Farm's PNW calendar begins succession-sowing favas in March.
+
+\subsubsection{Salad Greens and Brassica Greens}
+
+Lettuce (loose-leaf), arugula, spinach, kale, mustard greens, mâche (corn salad), and Swiss chard all direct-sow successfully in late March. Deep Harvest Farm recommends sowing arugula weekly from March through mid-September and beets every three weeks from March through July for continuous harvest. The Odd Garden emphasizes that spinach thrives in the cool, moist conditions of late March PNW weather and that loose-leaf lettuce varieties are easiest for beginners. NW Edible Life notes that direct-sown seeds will germinate slowly outdoors in March, recommending concurrent indoor sowing under lights for those who want faster greens.
+
+\subsubsection{Root Vegetables}
+
+Radishes are the fastest-maturing crop at 25--30 days, providing early gratification. Carrots require patience --- slow to germinate in cool soil but benefit from early sowing for a June harvest. Beets, turnips, and parsnips all tolerate March soil temperatures. St.\ Clare's guide lists carrots, beets, and rutabagas under ``Roots'' for March planting, noting that cool-season roots can be sown as soon as the soil passes the squeeze test (a handful of soil forms a ball that crumbles when poked).
+
+\subsubsection{Alliums and Potatoes}
+
+NW Edible Life notes that it is too late to start onions from seed by March but that nursery-purchased onion starts and sets plant well now. Shallots, garlic (spring planting is inferior to fall but functional), and chives (divide existing clumps or plant new) all go in the ground this week. Potatoes are on schedule per the March 17 tradition.
+
+\subsubsection{Hardy Herbs}
+
+Cilantro, dill, parsley, chervil, and sorrel direct-sow in March. NW Edible Life lists these plus fennel, oregano, mint, marjoram, and lemon balm as March-plantable hardy herbs. Mary's Heirloom Seeds' PNW guide confirms an extensive March herb list including basil (indoors), caraway, chives, comfrey, dill, fennel, mugwort, oregano, parsley, peppermint, rosemary, sage, tarragon, and thyme.
+
+\subsection{Module 3: Warm-Season Planning Reference}
+
+\subsubsection{Indoor Start Timing}
+
+St.\ Clare Heirloom Seeds identifies mid-spring (March--April) as the indoor start window for tomatoes, peppers, and eggplants, noting these require a constant 21°C (70°F) to germinate. Late spring (April--May) is the window for cucumbers, summer squash, and melons, with biodegradable pots recommended to protect sensitive roots.
+
+NW Edible Life provides the practical PNW nuance: tomatoes and peppers started on heat mats in unheated greenhouses do fine with row cover at night as temperatures drop. The key is warm soil for germination, after which ambient air temperature matters more. Transplanting outdoors should wait until late May at the earliest.
+
+\subsubsection{The May Mistake}
+
+St.\ Clare's guide explicitly identifies the ``May Mistake'' as planting tomatoes or peppers during a sunny week in early May, followed by ``June Gloom'' that stunts these plants. Their recommendation is firm: do not transplant heat-loving crops before consistently warm weather arrives, typically late May in western Washington lowlands.
+
+\subsection{Module 4: Orchard Management Reference}
+
+\subsubsection{Fruit Tree Timing}
+
+Pacific Northwest Arborist guidance confirms early spring as the optimal planting window for fruit trees: before buds break, with damp ground and no heat stress. Fruit trees are typically available at nurseries starting in February, both bare-root and potted. Bare-root trees must be planted while fully dormant.
+
+For established trees, late March dormant pruning is the final safe window before infection risk increases with bud break. Dormant oil spray should be applied before bud break to suppress overwintering aphids, mites, and scale. Swansons Nursery (Seattle) recommends March rose pruning as well --- removing dead canes and suckers, keeping 3--5 strongest canes cut back by a third.
+
+\subsubsection{PNW-Adapted Fruit Varieties}
+
+Apple varieties with PNW success include Red Delicious, Gala, and disease-resistant cultivars. Pear varieties include Bartlett and Anjou, plus Asian pears. Cherry varieties Bing and Rainier thrive. Plum varieties Santa Rosa and Methley are established PNW performers. Pacific Serviceberry (Amelanchier alnifolia) is a native alternative producing blueberry-like fruit that supports pollinators and wildlife.
+
+\subsection{Module 5: Defense \& Companion Ecology Reference}
+
+\subsubsection{Slug Ecology}
+
+The Odd Garden identifies March as peak slug season and notes that small plants are most vulnerable in their first two weeks after planting. St.\ Clare's PNW guide recommends organic iron-phosphate baits, copper tape barriers around raised beds, and avoiding overhead watering in the evening. NW Edible Life explicitly recommends transplanting over direct-sowing for slug-vulnerable crops, noting that established transplants survive slug pressure that would destroy seedlings.
+
+\subsubsection{Orchard Companion Planting Science}
+
+Fedco Seeds' orchard companion guide identifies six functional categories: beneficial insect accumulators (attract predatory insects via nectar), aromatic pest confusers (bitter aromas deter/confuse pests), living mulches (suppress grass, retain moisture), dynamic accumulators (deep-rooted mineral miners), nitrogen fixers (atmospheric N converted to soil-available form), and pest deterrents (specific repellent functions).
+
+Specific plants with documented functions: chives help prevent apple scab and serve as aromatic pest confusers when planted around trunk bases. Daffodils planted in tight circles 12 inches from trunks deter mice and voles from girdling bark. Comfrey (dynamic accumulator) is extremely rich in potassium and minerals, with taproots reaching 6+ feet to mine subsoil nutrients; chop-and-drop application releases these nutrients at the soil surface. White and crimson clover serve as nitrogen-fixing living mulches between orchard rows. Yarrow attracts hoverflies, parasitic wasps, and other beneficial predators.
+
+Raintree Nursery research identifies chamomile as attracting hoverflies, beneficial wasps, ladybugs, and honeybees while enhancing soil nutrients. Coriander deters aphids. Mint's strong aroma confuses and repels aphids and ants while attracting bee pollinators. The key caution: avoid planting grasses and competitive herbaceous plants directly under fruit trees, as they compete for nutrients and moisture.
+
+\subsubsection{Pollinator Support}
+
+Fruition Seeds' companion planting guide emphasizes temporal diversity: planting a combination of species with different flowering times ensures pollinators always have pollen sources from spring through fall. Willow species are among the earliest spring pollen sources for native bees. Borage, calendula, and yarrow provide mid-season support. Goldenrod and asters carry fall pollinator support.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Climate projections & GATE & All ENSO/temperature projections sourced to NOAA CPC, WA State Climate Office, or Old Farmer's Almanac \\
+Frost date accuracy & ANNOTATE & Frost dates cited as averages from NOAA 1991--2020 normals with probability thresholds noted \\
+Pest management chemicals & ANNOTATE & Only organic-approved methods recommended (iron phosphate, copper, biological) \\
+Invasive species risk & ANNOTATE & Mint flagged as requiring container planting; comfrey noted as persistent once established \\
+Food safety & GATE & No specific health claims about nutritional content of crops \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=*]
+\item NOAA Climate Prediction Center --- ENSO Alert System, Monthly/Seasonal Outlooks
+\item Washington State Climate Office (UW) --- March 2026 Newsletter, Spring Onset Trends Analysis
+\item NW Predictive Services (NIFC) --- PNW Climate and Significant Fire Potential Outlook, Feb 2026
+\item WSU AgWeatherNet --- Eastern WA Soil Temperature Summaries
+\item NOAA National Centers for Environmental Information --- 1991--2020 Climate Normals (frost dates)
+\item USDA NRCS --- SSURGO/STATSGO Soil Survey (Seattle Series description)
+\end{itemize}
+
+\subsubsection{Extension Services \& Professional Growers}
+\begin{itemize}[leftmargin=*]
+\item Deep Harvest Farm --- Pacific NW Planting Calendar (Puget Sound specific)
+\item NW Edible Life --- March Gardening Chores for the Pacific Northwest
+\item St.\ Clare Heirloom Seeds --- Pacific Northwest Vegetable Gardening Guide (Jan 2026)
+\item The Odd Garden --- What to Plant in March in Washington State, Zone 8 PNW Guide (Feb 2026)
+\item Swansons Nursery (Seattle) --- March Gardening Tips
+\item Gardening Know How --- Pacific Northwest March Planting Guides
+\item Mary's Heirloom Seeds --- Pacific Northwest Vegetable Planting Guide
+\item Portland Nursery --- Veggie Calendar (Maritime Northwest Garden Guide reference)
+\end{itemize}
+
+\subsubsection{Nurseries \& Orchard Science}
+\begin{itemize}[leftmargin=*]
+\item Raintree Nursery --- Companion Plants for Apple Trees; PNW Fruit Tree Blog
+\item Fedco Seeds --- Orchard Companion Plants Guide; 10 Companion Plants for the Orchard
+\item Fruition Seeds --- Companion Plants for the Orchard (temporal pollinator diversity)
+\item Pacific Northwest Arborist --- Planting Fruit Trees guide
+\item Albrecht's Nursery --- Companion Planting vs Grass Around Fruit Trees
+\end{itemize}
+
+\subsubsection{Weather Services}
+\begin{itemize}[leftmargin=*]
+\item FOX 13 Seattle --- 7-Day Forecast, March 26, 2026
+\item AccuWeather --- Seattle, WA Monthly Weather, March 2026
+\item North Bend Weather Station --- Soil Temperature/Moisture Data, March 2026
+\item Adventure Sports Network --- PNW Ski Resort Forecast (storm cycle data), March 23, 2026
+\item OpenSnow --- 2025--2026 Mid-Winter Update and Long-Range Outlook, January 2026
+\end{itemize}
+
+\newpage
+
+% #############################################################################
+% STAGE 3 — MISSION PACKAGE
+% #############################################################################
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, data-backed PNW planting guide for the week of March 26, 2026, integrating real-time weather intelligence with regional planting science and orchard companion ecology. The deliverable must enable immediate planting decisions with day-by-day specificity and serve as a reusable template for future weekly planting intelligence missions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE 0                WAVE 1                WAVE 2         WAVE 3
+  Foundation     Parallel Research Tracks      Synthesis      Publish
+  [Sequential]   [Parallel: 2 tracks]        [Sequential]   [Sequential]
+
+  +--------+     +--------+ +--------+       +--------+     +--------+
+  | Schema |---->| Track A| | Track B|------>| Cross- |---->| Format |
+  | Source  |     | Wx+Crop| | Orch+  |       | Module |     | Verify |
+  | Index   |     | Guide  | | Defend |       | Fuse   |     | Publish|
+  +--------+     +--------+ +--------+       +--------+     +--------+
+    Haiku         Sonnet+Opus  Sonnet+Opus     Opus          Sonnet
+    ~2K tokens    ~12K tokens  ~10K tokens     ~6K tokens    ~4K tokens
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Data Layer} --- Weather forecasts, soil temperatures, frost dates, ENSO status (real-time web data)
+\item \textbf{Knowledge Layer} --- PNW planting calendars, crop specifications, orchard science (extension/grower sources)
+\item \textbf{Ecology Layer} --- Companion planting functions, nitrogen fixation, pest management, pollinator support
+\item \textbf{Decision Layer} --- Day-by-day calendar fusing weather with crop timing and ecological context
+\item \textbf{Presentation Layer} --- PDF guide with tables, action calendar, and source bibliography
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Weather Intelligence Section & $\geq$3 sources, 7-day table, ENSO analysis, soil temps, frost risk & Module 1 \\
+2 & Cool-Season Crop Guide & $\geq$20 crops with specs, PNW sources & Module 2 \\
+3 & Warm-Season Indoor Start Guide & Germ temps, transplant dates, May Mistake warning & Module 3 \\
+4 & Orchard Management Section & $\geq$6 tasks, apple/pear/plum specific & Module 4 \\
+5 & Defense \& Companion Section & $\geq$5 slug strategies, $\geq$10 companion plants & Module 5 \\
+6 & Day-by-Day Action Calendar & All 7 days mapped to weather and actions & Cross-module \\
+7 & Source Bibliography & Gov/extension/professional sources only & All modules \\
+8 & LaTeX Source (.tex) & Compiles with 3 XeLaTeX passes, no errors & Presentation \\
+9 & Index Page (HTML) & Download cards, contents, recompile instructions & Presentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SCHEMA: Crop data schema & None & Haiku & 500 \\
+W0-INDEX: Source citation index & None & Haiku & 800 \\
+W1A-WEATHER: Wx intelligence & W0-SCHEMA & Sonnet & 3,000 \\
+W1A-COOL: Cool-season guide & W0-SCHEMA, W1A-WX & Sonnet & 4,000 \\
+W1A-WARM: Warm-season planning & W0-SCHEMA & Sonnet & 2,000 \\
+W1B-ORCHARD: Orchard management & W0-INDEX & Opus & 3,500 \\
+W1B-DEFEND: Defense \& ecology & W0-INDEX & Opus & 3,500 \\
+W1B-FLOWER: Annual flowers & W0-SCHEMA & Sonnet & 1,000 \\
+W2-CALENDAR: Day-by-day fusion & All W1 components & Opus & 3,000 \\
+W2-SYNTH: Cross-module synthesis & All W1 components & Opus & 2,000 \\
+W3-FORMAT: LaTeX compilation & All W2 components & Sonnet & 2,500 \\
+W3-HTML: Index page & W3-FORMAT & Sonnet & 1,000 \\
+W3-VERIFY: Verification pass & All components & Sonnet & 1,500 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Cross-module synthesis, companion ecology analysis, day-by-day decision fusion, through-line narrative \\
+Sonnet & 60\% & Weather data tables, crop specification catalogs, structured content production, LaTeX formatting, verification \\
+Haiku & 10\% & Shared schemas, citation index template, table scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Sequential & 2 & 1,300 \\
+1 & Research (A+B) & Parallel & 6 & 17,000 \\
+2 & Synthesis & Sequential & 2 & 5,000 \\
+3 & Publication & Sequential & 3 & 5,000 \\
+\midrule
+ & \textbf{Total} & & \textbf{13} & \textbf{$\sim$28,300} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Deps} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & Haiku & None & Shared crop data schema (name, soil\_temp, days, frost\_tol, notes) \\
+W0-INDEX & Haiku & None & Source citation template with categories \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Weather + Crop Intelligence:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Deps} & \tableheader{Output} \\
+\midrule
+W1A-WEATHER & Sonnet & W0-SCHEMA & 7-day forecast, ENSO analysis, soil temps, frost risk \\
+W1A-COOL & Sonnet & W0-SCHEMA, W1A-WX & Complete cool-season crop table (20+ crops) \\
+W1A-WARM & Sonnet & W0-SCHEMA & Indoor start guide with timing targets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Orchard + Defense:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Deps} & \tableheader{Output} \\
+\midrule
+W1B-ORCHARD & Opus & W0-INDEX & Orchard management protocols (6+ tasks) \\
+W1B-DEFEND & Opus & W0-INDEX & Slug IPM + companion planting matrix \\
+W1B-FLOWER & Sonnet & W0-SCHEMA & Hardy annual flowers for pollinators \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Deps} & \tableheader{Output} \\
+\midrule
+W2-CALENDAR & Opus & All W1 & Day-by-day action calendar (7 days) \\
+W2-SYNTH & Opus & All W1 & Cross-module connections, April outlook, through-line \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.2cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Deps} & \tableheader{Output} \\
+\midrule
+W3-FORMAT & Sonnet & All W2 & LaTeX document compiled (3 passes) \\
+W3-HTML & Sonnet & W3-FORMAT & Index page with download cards \\
+W3-VERIFY & Sonnet & All & Source validation, criterion-test matrix pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Wave 0 outputs cached for all Wave 1 components.} Schema and index template reused by every research component without re-generation.
+\item \textbf{Track A and Track B run in parallel.} No cross-track dependencies until Wave 2. Each track can be assigned to a separate agent.
+\item \textbf{Weather data fetched once in W1A-WEATHER.} All subsequent components reference the cached weather summary rather than re-fetching.
+\item \textbf{5-minute cache TTL window exploited.} Within each wave, components scheduled to start within the cache validity window of shared context.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & --- & --- & 1,300 \\
+Wave 1A: Weather + Crop & --- & 9,000 & --- \\
+Wave 1B: Orchard + Defense & 7,000 & 1,000 & --- \\
+Wave 2: Synthesis & 5,000 & --- & --- \\
+Wave 3: Publish + Verify & --- & 5,000 & --- \\
+\midrule
+\textbf{Totals} & \textbf{12,000} & \textbf{15,000} & \textbf{1,300} \\
+\textbf{Percentage} & \textbf{42\%} & \textbf{53\%} & \textbf{5\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Note: Opus allocation slightly above the 30\% guideline due to the cross-module synthesis demands of the day-by-day calendar and companion ecology analysis. Haiku allocation below 10\% because the schema/scaffolding requirements are minimal for this domain.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+                       W0-SCHEMA    W0-INDEX
+                        |     \       |    \
+                        |      \      |     \
+                        v       v     v      v
+                   W1A-WEATHER  |  W1B-ORCHARD  W1B-DEFEND
+                     |     |    |       |            |
+                     v     v    v       |            |
+                  W1A-COOL  W1A-WARM    |    W1B-FLOWER
+                     |        |         |       |
+                     v        v         v       v
+                   +-----------------------------+
+                   |      W2-CALENDAR            |
+                   |      W2-SYNTH               |
+                   +-----------------------------+
+                              |
+                              v
+                         W3-FORMAT
+                           |    \
+                           v     v
+                       W3-HTML  W3-VERIFY
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, numerics, climate \\
+Core functionality & 14 & Required & BLOCK & All success criteria \\
+Integration & 4 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 3 & Best-effort & LOG & Data gaps, outliers \\
+\midrule
+\textbf{Total} & \textbf{26} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations from gov agencies, extension services, or professional growers. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every temperature, soil temp, frost date, and day-count attributed to a specific source. \\
+SC-ADV & No policy advocacy & Guide presents planting information without advocating for specific agricultural policies. \\
+SC-CLI & Climate projections sourced & Every ENSO, temperature, and precipitation projection cites NOAA CPC, WA State Climate Office, or Old Farmer's Almanac. \\
+SC-PES & Pest management safety & Only organic-approved methods recommended. No synthetic pesticide recommendations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Weather source count & $\geq$3 authoritative weather/climate sources cited \\
+CF-02 & 7-day forecast completeness & All 7 days with high/low temp and precipitation \\
+CF-03 & Soil temp bed types & $\geq$4 location types with temperature estimates \\
+CF-04 & Frost risk sub-regions & $\geq$5 PNW locations with frost date and risk level \\
+CF-05 & Cool-season crop count & $\geq$20 crops with soil temp, days, frost tolerance \\
+CF-06 & PNW source per crop & Each crop recommendation backed by PNW-specific source \\
+CF-07 & Warm-season germ temps & Germination temperatures for all indoor-start crops \\
+CF-08 & Transplant date targets & Specific transplant window for each indoor-start crop \\
+CF-09 & Orchard task count & $\geq$6 late-March orchard management tasks \\
+CF-10 & Companion plant count & $\geq$10 guild plants with function and placement \\
+CF-11 & Slug strategy count & $\geq$5 integrated slug management strategies \\
+CF-12 & Calendar completeness & All 7 days with weather-correlated actions \\
+CF-13 & ENSO analysis & Climate regime transition connected to planting strategy \\
+CF-14 & Bibliography completeness & Gov, extension, and professional sources all represented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Weather $\rightarrow$ Calendar cascade & Day-by-day calendar reflects actual forecast (rain days = indoor, dry days = outdoor) \\
+IN-02 & Soil temp $\rightarrow$ Crop matching & Crop minimum soil temps consistent with estimated bed temperatures \\
+IN-03 & Companion $\rightarrow$ Orchard integration & Companion plants tied to specific orchard functions (scab, rodent, fertility) \\
+IN-04 & Cross-module consistency & No contradictory temperature, date, or timing data between sections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+EC-01 & Data gap acknowledgment & At least one area where ``further data needed'' or uncertainty noted \\
+EC-02 & Late frost outlier & Guide addresses possibility of frost after average last-frost date \\
+EC-03 & Temporal currency & Primary weather sources from March 2026; planting guides from 2024+ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}X L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1 & Weather from $\geq$3 sources with 7-day table & CF-01, CF-02 & Pending \\
+2 & Soil temps for $\geq$4 bed types & CF-03 & Pending \\
+3 & Frost risk for $\geq$5 sub-regions & CF-04 & Pending \\
+4 & $\geq$20 crops with full specs & CF-05 & Pending \\
+5 & PNW source per crop & CF-06, SC-SRC & Pending \\
+6 & Warm-season germ temps + dates & CF-07, CF-08 & Pending \\
+7 & $\geq$6 orchard tasks & CF-09 & Pending \\
+8 & $\geq$10 companion plants with functions & CF-10 & Pending \\
+9 & $\geq$5 slug strategies & CF-11 & Pending \\
+10 & 7-day action calendar & CF-12, IN-01 & Pending \\
+11 & ENSO transition analysis & CF-13, SC-CLI & Pending \\
+12 & Complete bibliography & CF-14, SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\textbf{Activation Profile:} Squadron (5 modules, moderate complexity)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gate go/no-go decisions \\
+PLAN & Planner & Wave decomposition; parallel track scheduling \\
+SCOUT & Research Agent & Real-time weather data retrieval; source validation \\
+EXEC-A & Executor (Track A) & Weather + crop guide document production \\
+EXEC-B & Executor (Track B) & Orchard + defense document production \\
+CRAFT-CLIM & Climate Specialist & ENSO analysis; soil temp estimation; frost curves \\
+CRAFT-HORT & Horticulture Specialist & Crop timing; companion ecology; orchard science \\
+VERIFY & Verification & Source quality check; criterion-test matrix pass \\
+INTEG & Integration Agent & Cross-module consistency; calendar fusion validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total components & 13 \\
+Parallel tracks & 2 (Wave 1A + 1B) \\
+Estimated context windows & 8--12 \\
+Estimated sessions & 2--3 \\
+Opus token budget & $\sim$12,000 (42\%) \\
+Sonnet token budget & $\sim$15,000 (53\%) \\
+Haiku token budget & $\sim$1,300 (5\%) \\
+Total estimated tokens & $\sim$28,300 \\
+Safety-critical tests & 5 (all mandatory-pass / BLOCK) \\
+Total tests & 26 \\
+Activation profile & Squadron (12 roles) \\
+Success criteria & 12 \\
+Deliverables & 9 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``The spaces between the rain are where the planting happens.''}
+
+\vspace{0.5em}
+
+This mission captures the PNW gardener's fundamental operating constraint --- the two-day dry window --- and transforms it from folk wisdom into data-backed decision architecture. The companion planting matrix is the garden-scale Amiga Principle: chives, comfrey, clover, and yarrow each doing one thing well, their combined effect creating a self-renewing orchard ecosystem that reduces external inputs every season. Architectural leverage over brute force. The spaces between the plants are where the ecology happens.
+\end{quotebox}
+
+\end{document}
