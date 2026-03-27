@@ -1,0 +1,870 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — Ecology/Nature: PNW Landscapes
+\definecolor{primary}{HTML}{1B5E20}       % Forest green — sections
+\definecolor{secondary}{HTML}{1565C0}     % River blue — subsections
+\definecolor{tertiary}{HTML}{4E342E}      % Earth brown — subsubsections
+\definecolor{accent}{HTML}{2E7D32}        % Highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{E8F5E9}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Resonant Landscapes}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Resonant Landscapes -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+\color{darktext}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Resonant Landscapes\\[0.3em]The Spaces Between Sound and Silence}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pacific Northwest to the Crystal Monastery}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Resonant Landscapes --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Ecosystem v1.49+, PNW Taxonomy}
+\metafield{Context:}{Sound, landscape, contemplation, and the spaces between}
+
+\subsection{Vision}
+
+There is a sculpture on the shores of Lake Washington where twelve steel towers hold organ pipes to the wind. When the air moves---as it always does in this city built on water and hills---the pipes produce sounds that are not quite music and not quite weather. They are something in between. A band took its name from this sculpture, and the singer who gave that band its voice eventually became a memorial at the very site that named them. The circle closes, but the wind keeps playing.
+
+This mission traces a thread that begins at that sculpture and radiates outward through every scale of landscape the Pacific Northwest contains---from the urban parks of Seattle through county, state, and national jurisdictions, up into the alpine meadows of Glacier Peak where Image Lake holds the mountain's reflection like a mirror held to the sky, down to the wild Olympic coast where shipwreck memorials mark where Chilean and Norwegian sailors met the ``Graveyard of the Pacific,'' across the Salish Sea to the San Juan Islands where a CCC-built stone tower crowns Mount Constitution, north to Sitka where theology and colonialism collided on Tlingit land, and finally---impossibly---east to the Himalayas, where Peter Matthiessen walked for two months searching for a snow leopard he would never see, and found instead the Crystal Monastery and a teaching about absence.
+
+The connective tissue is sound. The wind through Douglas Hollis's pipes. The crash of surf through Hole in the Wall. The silence of Spider Meadow at dawn. The chanting at Shey Gompa. The spaces between these sounds are where meaning lives---the same principle that animates the GSD ecosystem, the Amiga architecture, and the mathematical structures of \textit{The Space Between}.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented knowledge landscape:} The PNW park system spans municipal, county, state, national, and tribal jurisdictions with no unified interpretive framework connecting urban sculpture parks to alpine wilderness to archaeological sites to international waters.
+\item \textbf{Disappearing cultural memory:} The Ozette archaeological site---the ``Pompeii of the Northwest''---yielded 55,000 Makah artifacts from longhouses buried by mudslide circa 1560, but the story connecting Makah whaling culture to the broader Coast Salish world remains undertold in park interpretation.
+\item \textbf{Colonial legacy in sacred landscapes:} Sheldon Jackson's Presbyterian mission schools in Sitka suppressed Tlingit language and culture while simultaneously collecting 5,000+ artifacts now dispersed across institutions from the Sheldon Jackson Museum to the Smithsonian. This history is inseparable from understanding Mt. Edgecumbe, theology, and the Arctic.
+\item \textbf{Contemplative literature as ecological map:} Matthiessen's \textit{The Snow Leopard} (1978) remains the definitive Western text on landscape-as-spiritual-practice, yet its relationship to PNW contemplative traditions---from the Salish spirit quest to the alpine solitude of Glacier Peak---has not been systematically mapped.
+\item \textbf{Sound sculpture as interpretive key:} Douglas Hollis's ``A Sound Garden'' (1982--83) sits at the intersection of art, science (NOAA), ecology (Lake Washington), and music history (Soundgarden/grunge), but no interpretive framework connects aeolian sculpture to the broader PNW soundscape.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} \textit{Resonant landscapes are systems where physical sound, cultural memory, and contemplative attention interact across scales---from the vibration of a single organ pipe to the silence at Crystal Mountain.}
+
+The research treats the PNW as a single resonant system operating at multiple jurisdictional and experiential scales. Each module examines a different frequency band of this system: urban/sculptural, alpine/wilderness, coastal/archaeological, archipelagic/maritime, northern/colonial-theological, and literary/contemplative.
+
+\begin{asciibox}
+RESONANT LANDSCAPE SYSTEM — Study Region
+============================================
+
+SITKA (AK)                   CRYSTAL MONASTERY (Nepal)
+  Sheldon Jackson               Matthiessen / Snow Leopard
+  Mt. Edgecumbe                 Shey Gompa / Lama Tupjuk
+  Tlingit / Theology            Dolpo / Bharal / Absence
+       |                              |
+       v                              v
+  SAN JUAN ISLANDS          CONTEMPLATIVE THREAD
+    Mt. Constitution            Sound → Silence → Meaning
+    Orcas / Salish Sea
+    Victoria / Vancouver
+       |
+       v
+  SEATTLE URBAN
+    Sound Garden (sculpture)
+    Soundgarden (band)
+    Pacific Science Center
+    Magnuson Park / NOAA
+       |
+       v
+  GLACIER PEAK WILDERNESS
+    Spider Meadow → Spider Gap
+    Lyman Lakes / Lyman Glacier
+    Image Lake / Miners Ridge
+    Buck Creek Pass
+       |
+       v
+  OLYMPIC PENINSULA
+    Rialto Beach → Hole in Wall
+    Chilean Memorial / Norwegian Memorial
+    Yellow Banks / Sand Point
+    Lake Ozette / Cape Alava
+    Ozette Village Archaeological Site
+    La Push / Hwy 101-110-112 / Pysht
+\end{asciibox}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+============================================
+
+  [M1: Sound & Sculpture]     [M2: Parks Hierarchy]
+    Urban soundscapes            Municipal → Federal
+    NOAA / Hollis / Cornell      PNW jurisdictional map
+           |                           |
+           +--------> [M5: Synthesis] <+
+           |          Resonant thread  |
+  [M3: Alpine Wilderness]    [M4: Coastal Trails]
+    Glacier Peak                Olympic Peninsula
+    Spider / Image / Lyman      Ozette / Rialto / La Push
+           |                           |
+           +--------> [M5] <----------+
+                        |
+  [M6: Northern Journeys & Contemplation]
+    Sitka / Sheldon Jackson
+    Matthiessen / Snow Leopard
+    Crystal Monastery
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Sound and Sculpture — Urban Resonance}
+Douglas Hollis's aeolian sculpture ``A Sound Garden'' (1982--83) on the NOAA Western Regional Center campus at Sand Point. Twelve 21-foot steel towers with organ pipes and weathervanes. The band Soundgarden (formed 1984, Chris Cornell, Kim Thayil, Hiro Yamamoto). The Pacific Science Center as Minoru Yamasaki's Gothic-modernist masterwork (1962 World's Fair, US Science Pavilion). Smithsonian connections through Sheldon Jackson artifact collections. Warren G. Magnuson Park as the connective parkland.
+
+\subsubsection{M2: PNW Parks Hierarchy — Jurisdictional Landscape}
+Seattle Parks (Magnuson, Discovery, Carkeek). King County / regional parks. Washington State Parks (Moran State Park, Deception Pass). National Parks (Olympic, Mount Rainier, North Cascades). National Forests (Mt. Baker--Snoqualmie, Okanogan--Wenatchee, Olympic). Wilderness Areas (Glacier Peak, Alpine Lakes, The Enchantments). Tribal lands and sovereignty. The jurisdictional layering that creates the PNW's unique landscape governance.
+
+\subsubsection{M3: Alpine Wilderness — Glacier Peak and the High Country}
+Spider Meadow via Phelps Creek Trail (3,500' to 5,300'). Spider Gap (7,100') and the Spider Glacier crossing. Upper and Lower Lyman Lakes. Lyman Glacier retreat. Cloudy Pass and Suiattle Pass. Image Lake---the ``crown jewel''---and Miners Ridge fire lookout. Buck Creek Pass and views of Glacier Peak (10,541'). The 40+ mile Spider Gap / Buck Creek Pass loop through Mt. Baker--Snoqualmie and Okanogan--Wenatchee National Forests.
+
+\subsubsection{M4: Olympic Peninsula Coastal Trails}
+Rialto Beach to Ozette: the North Coast Trail / Pacific Northwest Trail. Hole in the Wall (tidal access). Chilean Memorial (W.J. Pirrie wreck, 1920, no survivors). Norwegian Memorial (Prince Arthur wreck, 1903). Yellow Banks and Sand Point. Cape Alava and the Ozette Loop. Lake Ozette canoeing (third-largest natural lake in Washington, Makah name q'a'uk). Ozette Village Archaeological Site (55,000+ artifacts, 11-year excavation, Makah Cultural and Research Center). La Push and the Quileute Reservation. Highway 101/110/112 corridor. Pysht, Washington---remote Clallam County community on the Strait of Juan de Fuca.
+
+\subsubsection{M5: Islands and the Salish Sea}
+Mount Constitution on Orcas Island (2,409', highest point in San Juan Islands). CCC-built stone observation tower (1936, architect Ellsworth Storey, modeled on Caucasian watchtowers). Moran State Park (5,252 acres, donated by former Seattle mayor Robert Moran). San Juan Islands history---Spanish, British, and American naming layers. The Salish Sea as unifying waterway. Victoria and Vancouver as northern anchors. Coast Salish peoples (Lummi, Samish, Straits Salish).
+
+\subsubsection{M6: Northern Journeys and Contemplation}
+Sitka, Alaska: Tlingit homeland (Kiks.ádi clan), Russian colonial history, American purchase (1867). Sheldon Jackson (1834--1909): Presbyterian minister, Princeton Theological Seminary, founded Sitka Mission (1878), suppressed Tlingit language, collected 5,000+ artifacts. Sheldon Jackson College (1878--2007, now Sitka Fine Arts Camp / Outer Coast College). Mt. Edgecumbe and the BIA boarding school. The Sheldon Jackson Museum (first concrete building in Alaska, octagonal, 1897). Peter Matthiessen (1927--2014): co-founder of The Paris Review, Zen Buddhist, naturalist. \textit{The Snow Leopard} (1978): two-month journey with George Schaller to Dolpo, Nepal. Shey Gompa / Crystal Monastery and the Lama Tupjuk. The snow leopard as symbol of sacred absence. ``Have you seen the snow leopard? No! Isn't that wonderful!''
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    model: opus
+    role: synthesis-integration
+    tasks:
+      - Cross-module resonance mapping
+      - Contemplative thread weaving (M6)
+      - Cultural sensitivity review (Makah, Tlingit, Coast Salish)
+      - Through-line narrative
+  denise:
+    model: sonnet
+    role: survey-compilation
+    tasks:
+      - Parks hierarchy documentation (M2)
+      - Trail and route research (M3, M4)
+      - Historical chronology (M1, M5)
+      - Source bibliography assembly
+  paula:
+    model: sonnet
+    role: domain-specialist
+    tasks:
+      - Archaeological site documentation (M4)
+      - Architectural analysis (Pacific Science Center)
+      - Literary analysis (Snow Leopard)
+      - Geographic/cartographic data
+  68000:
+    model: haiku
+    role: scaffolding
+    tasks:
+      - Shared schemas and templates
+      - Source index structure
+      - Cross-reference validation
+      - Table formatting
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Douglas Hollis's ``A Sound Garden'' sculpture: history, design, cultural impact
+\item Soundgarden (band): formation through Rock and Roll Hall of Fame induction (2025)
+\item Pacific Science Center: Yamasaki architecture, World's Fair origins, Smithsonian connections
+\item PNW parks at all jurisdictional levels: municipal through federal, including tribal lands
+\item Glacier Peak Wilderness: Spider Meadow, Image Lake, Lyman Lakes trail system
+\item Olympic Peninsula coast: Rialto Beach to Ozette corridor, archaeological sites
+\item San Juan Islands: Orcas Island, Mount Constitution, Moran State Park
+\item Salish Sea: Victoria, Vancouver as northern cultural anchors
+\item Sitka: Sheldon Jackson legacy, Tlingit history, Mt. Edgecumbe
+\item Peter Matthiessen and \textit{The Snow Leopard}: literary and contemplative framework
+\item Lake Ozette paddling and the Ozette archaeological site
+\item Highway 101/110/112 and Pysht as access corridors
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Detailed musicological analysis of Soundgarden's discography
+\item Comprehensive flora/fauna inventories for each park unit
+\item Technical mountaineering routes on Glacier Peak summit
+\item Current tribal governance structures (referenced with respect, not documented in detail)
+\item Matthiessen's complete bibliography beyond \textit{The Snow Leopard}
+\item Detailed comparison with other aeolian sculpture installations worldwide
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item The sculpture--to--band--to--memorial arc of ``A Sound Garden'' is documented with primary sources from NOAA, Douglas Hollis's studio records, and music history archives.
+\item Pacific Science Center architecture traced from Yamasaki's Gothic-modernist vision through World's Fair to landmark status, with Smithsonian institutional connections mapped.
+\item PNW parks hierarchy documented across all six jurisdictional levels (municipal, county, state, national park, national forest/wilderness, tribal) with at least 3 specific examples per level.
+\item Glacier Peak Wilderness trail system documented with elevation profiles, seasonal access windows, permit requirements, and ecological context for Spider Meadow, Image Lake, and Lyman Lakes.
+\item Olympic coast trail from Rialto Beach to Ozette documented with tidal access points, memorial locations, headland restrictions, and archaeological site context.
+\item Ozette Village archaeological site documented with Makah nation-specific attribution, excavation history (Daugherty/WSU, 1966--1981), and artifact disposition.
+\item San Juan Islands documented with geological, historical (Spanish/British/American naming layers), and ecological context; Mount Constitution tower history included.
+\item Sitka/Sheldon Jackson documented with balanced treatment of missionary legacy and Tlingit cultural impact, using nation-specific attribution throughout.
+\item Matthiessen's \textit{Snow Leopard} journey analyzed as contemplative framework connecting to PNW landscape traditions, with Crystal Monastery visit and ``sacred absence'' theme developed.
+\item Cross-module resonance thread---sound, silence, and the spaces between---woven through all six modules with at least one explicit connection per module pair.
+\item All sources are government agencies (NPS, USFS, NOAA), peer-reviewed research, university programs, tribal organizations, or professional publications.
+\item No precise locations of culturally sensitive sites published beyond what appears in existing public NPS/tribal documentation.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+PNW Taxonomy & Species naming conventions used throughout & Input \\
+The Space Between & Mathematical/philosophical framework for ``spaces between'' theme & Foundation \\
+Foxfire Heritage Vision & Indigenous knowledge frameworks (OCAP, CARE, UNDRIP) & Governance \\
+GSD Ecosystem Field Guide & Chipset architecture and mission control patterns & Architecture \\
+Fox Infrastructure Group & PNW geographic context for infrastructure planning & Context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\begin{quotebox}
+The wind moves through twelve steel pipes on the shore of Lake Washington and produces a sound that is not quite music. A young man hears it and names his band. Decades later, the sculpture becomes his memorial. Ten thousand feet higher and a hundred miles east, the wind moves through Spider Meadow and produces a silence that is not quite silence---it is the absence of human noise, which is its own kind of music. On the Olympic coast, the surf crashes through a hole in a rock wall and the sound carries the memory of Chilean sailors who never made it home. In Sitka, the wind off Sitka Sound once carried hymns sung in English over children forbidden to speak Tlingit. And in the Himalayas, at Crystal Mountain, a man who went looking for a snow leopard discovered that the most profound encounter is with what is not there.
+
+The spaces between the sounds are where the meaning lives. This is the Amiga Principle applied to landscape: not the brute force of comprehensive inventory, but the architectural elegance of hearing what connects a sculpture garden to a crystal monastery. The specialized execution paths run through alpine meadows and along tide-dependent coastal trails, through colonial mission schools and Buddhist gompas. What emerges is not a catalog but a resonance---the recognition that the Pacific Northwest, from Sand Point to Shey Gompa, is a single instrument played by the same wind.
+\end{quotebox}
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Resonant Landscapes --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides findings organized by research module. Each module contains sourced data sufficient for an agent to produce its component of the final document without additional research. Key source organizations include the National Park Service (NPS), US Forest Service (USFS), National Oceanic and Atmospheric Administration (NOAA), Washington State Parks, Makah Cultural and Research Center, Sheldon Jackson Museum, Sitka Tribe of Alaska, Washington Trails Association (WTA), The Mountaineers, and university research programs at Washington State University and the University of Washington.
+
+\subsection{M1 Reference: Sound and Sculpture}
+
+\subsubsection{A Sound Garden — The Sculpture}
+Douglas R. Hollis designed and built ``A Sound Garden'' from 1982 to 1983 on the NOAA Western Regional Center campus adjacent to Warren G. Magnuson Park, on the northwestern shore of Lake Washington in Seattle. The sculpture consists of twelve 21-foot (6.4 m) steel tower structures, each topped with an organ pipe attached to a weathervane. When wind rotates the vanes and pushes through the pipes, the installation produces what observers describe as high-pitched hollow whistles and wails---an aeolian instrument, referencing Aeolus, the Greek god of wind. The sculpture is one of six commissioned artworks on the NOAA campus Art Walk, which also includes works by George Trakas (``Berth Haven,'' 1983), Martin Puryear, Scott Burton, and Siah Armajani. The NOAA campus occupies the former Naval Air Station at Sand Point; construction of the Western Regional Center began in 1977.
+
+Access to the sculpture has been restricted since September 11, 2001, when the NOAA campus moved to heightened security. Visitors must present photo identification at the guard house on NE NOAA Drive. Following Soundgarden frontman Chris Cornell's death on May 18, 2017, the sculpture became a makeshift memorial.
+
+\subsubsection{Soundgarden — The Band}
+Soundgarden was formed in Seattle in 1984 by Chris Cornell (vocals/drums), Kim Thayil (guitar), and Hiro Yamamoto (bass). They named themselves after the Hollis sculpture at Sand Point. Cornell initially played drums while singing; drummer Scott Sundquist joined in 1985, followed by Matt Cameron in 1986. Yamamoto departed in 1989, replaced first by Jason Everman, then permanently by Ben Shepherd in 1990.
+
+Key milestones: Deep Six compilation (1986, C/Z Records); Screaming Life EP (1987, Sub Pop); Ultramega OK (1988, SST Records---first grunge band to generate major-label interest); signed to A\&M Records (1988---first grunge act on a major label); Badmotorfinger (1991); Superunknown (1994, No. 1 on Billboard); Down on the Upside (1996). Disbanded 1997; reunited 2010. Cornell died May 18, 2017, in Detroit. Soundgarden inducted into the Rock and Roll Hall of Fame on November 8, 2025, with performances by Taylor Momsen, Brandi Carlile, Mike McCready, and Jerry Cantrell. Cornell's daughter Toni performed ``Fell on Black Days.''
+
+\subsubsection{Pacific Science Center — Architecture}
+The Pacific Science Center occupies the former United States Science Pavilion, designed by Seattle-born architect Minoru Yamasaki (1912--1986) for the Century 21 Exposition (1962 Seattle World's Fair). Yamasaki found inspiration in Gothic cathedrals, Islamic temples, and Japanese gardens. The complex features five interconnected buildings enclosing a courtyard with reflecting pools on approximately 7 acres, with five soaring Gothic-styled steel arches rising to 110 feet. Structural engineering was by Worthington and Skilling (John Skilling, Jack Christiansen, Leslie Robertson---the same team that later engineered the World Trade Center). Landscape architecture by Lawrence Halprin.
+
+The design brought Yamasaki international fame and a Time magazine cover. He subsequently designed the IBM Building in Seattle (1962--64), the World Trade Center Towers I and II in New York (1966--73), and the Rainier Bank Tower in Seattle (1972--77). The Pacific Science Center was designated a Seattle Landmark in 2010, meeting all six designation criteria. In 2025, the financially challenged Pacific Science Center signed a letter of intent to integrate its campus with Seattle Center as one unified public space. The center was the nation's first science and technology center and serves over 500,000 visitors annually.
+
+\subsection{M3 Reference: Glacier Peak Wilderness}
+
+\subsubsection{Spider Meadow and the Phelps Creek Trail}
+The Phelps Creek Trailhead sits at approximately 3,500 feet elevation, accessed via Forest Road 6211 off the Chiwawa River Road (FR 62), which branches from Chiwawa Loop Road off SR-207 near Coles Corner on US-2. The trail follows an old mining road along Phelps Creek for approximately 2.3 miles before entering the Glacier Peak Wilderness. The landscape transitions from rocky roadbed to dirt singletrack entering flower-filled meadows. Leroy Creek crossing (rock-hop, with a hidden multi-tiered waterfall 100 yards upstream) marks the transition. Spider Meadow---a verdant mountain meadow rimmed by rugged peaks including Seven Fingered Jack---opens at approximately mile 5. Seasonal wildflowers bloom through late July into August. Marmots, mountain bluebirds, western tanagers, and warblers are common.
+
+\subsubsection{Spider Gap and the Glacier Crossing}
+From the head of Spider Meadow (5,300'), a steep climb leads to Spider Gap at 7,100 feet---the highest point on the loop. The Spider Glacier (remnant) must be crossed; conditions vary seasonally. Microspikes, trekking poles, and an ice axe may be needed. From Spider Gap, views encompass Upper and Lower Lyman Lakes, Railroad Creek valley, and Bonanza Peak. Descent follows the Lyman Glacier remnants past the upper lakes (turquoise, glacially fed) to Lower Lyman Lake. The Lyman Glacier has retreated significantly and continues to diminish.
+
+\subsubsection{Image Lake --- Crown Jewel}
+Image Lake sits at approximately 6,050 feet on Miners Ridge, accessible via Trail No. 785 from the PCT junction near Suiattle Pass. The 1.6-mile approach from the junction to the Trail No. 795 fork, then 2.4 miles uphill past Lady Camp through extensive mountain meadows that rival Paradise (Mount Rainier) for wildflower displays in late July through mid-August. The lake's south shore offers camping; the iconic view is from the north shore, looking south across the still water to Glacier Peak (10,541') at sunset. The Miners Ridge Fire Lookout is accessible as a day hike from Image Lake camp.
+
+\subsubsection{The Loop}
+The full Spider Gap / Buck Creek Pass loop covers approximately 40--50 miles with 4,800--8,700 feet of total elevation gain depending on route variation. The trail passes through both the Mt. Baker--Snoqualmie National Forest and the Okanogan--Wenatchee National Forest. A Northwest Forest Pass is required year-round. The route incorporates 3.6 miles of the Pacific Crest Trail between Suiattle Pass and the Miners Ridge junction. Buck Creek Pass at mile 9.6 from Trinity Trailhead offers views of Glacier Peak, Liberty Cap, and Flower Dome.
+
+\subsection{M4 Reference: Olympic Peninsula Coastal Trails}
+
+\subsubsection{Rialto Beach to Chilean Memorial}
+Rialto Beach is located 12.5 miles west of US 101 on Mora Road in Olympic National Park. From the parking area, the beach extends north over dark cobblestones. Ellen Creek crossing at approximately 0.8 miles marks the beginning of the camping zone. Hole in the Wall, a large natural arch in a headland, is accessible only at low tide (approximately 1.5 miles from the parking lot; an overland trail exists for high-tide bypass). North of Hole in the Wall, the coastline becomes increasingly rugged with boulder fields, slippery kelp-covered rocks, and multiple headlands passable only below certain tide levels.
+
+The Chilean Memorial at 3.7 miles commemorates the wreck of the W.J. Pirrie, a Chilean vessel lost in 1920 with no survivors. The cove offers camping, a waterfall water source, and bald eagle habitat. Further north: Cape Johnson headland, Norwegian Memorial (Prince Arthur wreck, 1903, approximately 6.5 miles), Yellow Banks, and Sand Point (connecting to the Ozette Loop). The NPS describes this coast as part of the ``Graveyard of the Pacific.'' Backcountry permits required (\$8/person/night); bear canisters mandatory. Note: Mora Road will be closed for construction from early July to October 2026.
+
+\subsubsection{Lake Ozette and the Ozette Loop}
+Lake Ozette is the largest unaltered natural lake in Washington State at 29.5 km\textsuperscript{2}, 8 miles long, 3 miles wide, 331 feet deep. The Makah name was q'a'uk (``large lake''). Three islands: Tivoli, Garden Island, Baby Island. Tivoli's sandy shore is a kayaking/canoeing destination for overnight campers. Erickson's Bay campground is the only boat-in campground in Olympic National Park. Access via Hoko-Ozette Road from Highway 112.
+
+The Ozette Loop connects Cape Alava (northern boardwalk, 3.2 miles) and Sand Point (southern boardwalk, 3.3 miles) via approximately 3 miles of beach hiking for a 9-mile total loop. Wedding Rock near Sand Point contains 54 Ozette Indian petroglyphs. Ahlstrom's Prairie on the Cape Alava trail marks the site of Scandinavian homesteading in the late 19th century.
+
+\subsubsection{Ozette Village Archaeological Site}
+The Ozette archaeological site is located on the Ozette Indian Reservation at Cape Alava, the westernmost point of the Olympic Peninsula. Makah oral history told of a ``great slide'' burying part of the village. Radiocarbon dating places the primary mudslide at approximately 1560 CE (500 $\pm$ 50 years before present), though some sources cite circa 1700 coinciding with a Cascadia Subduction Zone earthquake. Six longhouses (60--70 feet long, 35 feet wide) and their contents were sealed in clay, preserving organic materials that normally decay.
+
+Richard Daugherty (University of Washington graduate student, later Washington State University professor) first surveyed the site in 1947 during a coastal archaeological survey recording 50+ sites. Test excavations in 1966--67 located the first buried house. A winter storm in February 1970 caused bank collapse, exposing hundreds of perfectly preserved wooden artifacts. Makah Tribal Chairman Ed Claplanhoo invited Daugherty to excavate. The 11-year excavation (1970--1981) produced over 55,000 artifacts: cedar boxes, bowls, baskets, combs, looms, canoe paddles, adzes, wedges, mauls, harpoon shafts, whale and seal bones, and a whale-fin carving inlaid with sea otter teeth. Thunderbird, whale, and wolf imagery connected Ozette to broader Northwest Coast artistic traditions shared with Tlingit, Haida, and Kwakwaka'wakw peoples.
+
+The Makah Cultural and Research Center opened in Neah Bay in 1979. A critical agreement between the Makah and WSU stipulated: no artifacts would leave tribal jurisdiction; no prehistoric loss of life would be mentioned publicly. The MCRC constructed an environmentally-controlled curatorial facility in 1993. The excavation produced nine doctoral dissertations and ten master's theses at WSU.
+
+\subsubsection{Highway 101/110/112 Corridor and Pysht}
+US Highway 101 forms the primary loop around the Olympic Peninsula. Highway 110 branches west to La Push and the Quileute Reservation (First, Second, and Third Beaches). Highway 112 runs from US 101 near Sappho along the Strait of Juan de Fuca to Neah Bay, passing through Pysht---a small unincorporated community in Clallam County named from the Klallam word for ``fish.'' Pysht sits on the Pysht River where it meets the Strait, surrounded by timber country. The Hoko-Ozette Road branches from Highway 112 to reach Lake Ozette.
+
+\subsection{M5 Reference: Islands and the Salish Sea}
+
+\subsubsection{Mount Constitution and Moran State Park}
+Mount Constitution (2,409 feet) is the highest point in the San Juan Islands, located on Orcas Island within Moran State Park. The stone observation tower at the summit was designed by Seattle architect Ellsworth Storey (1879--1960) and built by 28 men of the 4768th Company of the Civilian Conservation Corps, primarily from Fort Snelling, Minnesota. Construction ran from August 1935 to summer 1936, using native sandstone quarried from the northern shore of Orcas Island. The architectural inspiration was the ancient watchtowers of the Caucasus Mountains.
+
+Moran State Park encompasses over 5,252 acres---the largest public recreation area in the San Juan Islands and one of the largest state parks in Washington. Robert Moran (1857--1943), a shipbuilder and former Seattle mayor, retired to Orcas Island in 1906, eventually acquiring 7,800 acres that he donated to the state. The park was dedicated in 1921 and contains several freshwater lakes (Cascade Lake, Mountain Lake, Summit Lake, Twin Lakes), old-growth western hemlock forest, and numerous trails.
+
+\subsubsection{San Juan Islands History}
+The Coast Salish peoples---notably the Lummi and Samish tribes---were the original inhabitants. Spanish exploration under Francisco de Eliza (1791), financed by Viceroy Juan Vicente de Güemes Padilla Horcasitas y Aguayo, led to the first European charting. ``Orcas'' derives from a shortened form of ``Horcasitas,'' not from orca whales. The British Admiralty's Henry Kellett reorganized charts in 1847, replacing many American names assigned by Lieutenant Charles Wilkes during the 1838--42 Exploring Expedition. Wilkes had named Orcas Island ``Hull Island'' after Commodore Isaac Hull; ``Mount Constitution'' survived as one of Wilkes's original names (referencing the USS Constitution). The Pig War of 1859 and subsequent 1871 arbitration settled the border dispute in favor of the United States.
+
+Madrona Point on Orcas Island is a traditional Lummi burial ground controversially sold in 1890, purchased out of private ownership for \$2.2 million in 1989, and returned to the Lummi Nation.
+
+\subsection{M6 Reference: Northern Journeys and Contemplation}
+
+\subsubsection{Sitka and Sheldon Jackson}
+Sitka sits on Baranof Island in the Alexander Archipelago, within the Tongass National Forest (world's largest temperate rainforest). The Kiks.ádi clan of the Tlingit people are the traditional owners of the land that became the Sheldon Jackson campus. Russian colonization began in the 1740s; the Battle of Sitka (1804) established Russian dominance until the Alaska Purchase (1867).
+
+Sheldon Jackson (1834--1909) graduated from Princeton Theological Seminary in 1858. He founded the Sitka Mission in 1878 with Fannie Kellogg and John Green Brady (later Governor of Alaska) to ``assimilate'' Tlingit and Haida boys. The school was initially a barracks-based operation. Students were punished for speaking Native languages. Jackson became Federal Agent of Education for Alaska in 1885, responsible for all Alaskan children's education while simultaneously serving as superintendent of Presbyterian missions. He collected over 5,000 artifacts during his Alaska years, distributed across the Sheldon Jackson Museum (Sitka), Field Museum (Chicago), Smithsonian National Museum of Natural History (via the 1909 Alaska-Yukon-Pacific Exposition), and Princeton University.
+
+The Sheldon Jackson Museum, completed in 1897, was the first concrete building in Alaska---an octagonal structure with a glass cupola. Sheldon Jackson College (renamed from various prior names) operated until 2007 when it closed abruptly due to financial collapse. The campus was transferred in 2011 to Alaska Arts Southeast (Sitka Fine Arts Camp). Outer Coast College now operates on the former campus. Mt. Edgecumbe High School, a BIA boarding school, opened in 1946 on Japonski Island in former Naval Air Station buildings.
+
+\subsubsection{Peter Matthiessen and The Snow Leopard}
+Peter Matthiessen (1927--2014) was an American novelist, naturalist, and Zen Buddhist practitioner. He co-founded The Paris Review and is the only writer to have won the National Book Award in both fiction and nonfiction. \textit{The Snow Leopard} won the 1979 National Book Award for Contemporary Thought.
+
+In autumn 1973, Matthiessen accompanied field biologist George Schaller on a 250-mile trek from Pokhara to Shey Gompa in the inner Dolpo region of Nepal---a former Tibetan territory described as the last enclave of pure Tibetan culture. Schaller's objective was to study the rutting behavior of the bharal (Himalayan blue sheep, \textit{Pseudois nayaur}). Matthiessen's journey was simultaneously a spiritual pilgrimage, undertaken in the wake of his wife Deborah Love's death from cancer. Three goals: study the bharal, visit the Crystal Monastery (Shey Gompa) and its Buddhist lama (Lama Tupjuk, the ``Rinpoche'' or ``Precious One''), and glimpse the snow leopard (\textit{Panthera uncia})---a creature seen only twice by Westerners in the preceding 25 years.
+
+The narrative unfolds as a daily diary from September 28 to December 1, 1973. The journey took over a month through monsoonal rains, altitude sickness, unreliable porters, and the emotional burden of having left his eight-year-old son at home. The Crystal Monastery at Shey Gompa was reached; the Lama---a crippled old monk whom Matthiessen initially failed to recognize---served yak cheese and buttered tea. The bharal were studied successfully. The snow leopard was never seen by Matthiessen, though Schaller may have glimpsed it.
+
+The book's climactic insight: Schaller lowers his binoculars after another fruitless scan and says, ``You know something? We've seen so much, maybe it's better if there are some things we don't see.'' Matthiessen's response to himself: ``Have you seen the snow leopard? No! Isn't that wonderful!'' This ``anticlimactic'' teaching---finding meaning not in the sought object but in its absence---connects to core Zen Buddhist practice and to the ``spaces between'' philosophy that animates the GSD ecosystem.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Handling} & \tableheader{Gate} \\
+\midrule
+Makah cultural sovereignty & Nation-specific attribution; defer to MCRC for artifact interpretation; honor excavation agreements & ABSOLUTE \\
+Tlingit cultural impact & Document Sheldon Jackson's suppression of language/culture alongside institutional history; Kiks.ádi clan attribution & ABSOLUTE \\
+Coast Salish attribution & Specific nation names (Lummi, Samish, Straits Salish) throughout; never generic ``Indigenous'' & ABSOLUTE \\
+Ozette site sensitivity & No details beyond published NPS/MCRC documentation; no precise GPS for burial or ceremonial sites & ABSOLUTE \\
+Chris Cornell's death & Factual reference only; no sensationalism & GATE \\
+Colonial mission legacy & Balanced treatment: document harm (language suppression, forced assimilation) and complexity (some alumni loyalty) & ANNOTATE \\
+Glacier/trail safety & Note seasonal conditions, glacier crossing hazards, tidal access restrictions & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+National Park Service (NPS): Olympic National Park coastal trails documentation, Rialto Beach information, Lake Ozette boating guide. US Forest Service (USFS): Glacier Peak Wilderness trail information, Mt. Baker--Snoqualmie and Okanogan--Wenatchee National Forests. NOAA Western Regional Center: campus history, Art Walk documentation. Washington State Parks: Moran State Park information. City of Seattle Landmarks Preservation Board: Pacific Science Center designation report (2010). National Register of Historic Places: Sheldon Jackson School National Historic Landmark District.
+
+\subsubsection{Peer-Reviewed and University Research}
+Washington State University: Ozette Archaeological Project (Daugherty et al., 1966--1981). Journal of Northwest Anthropology: History of Ozette Archaeological Project. University of Washington Press: Ruth Kirk, \textit{Ozette: Excavating a Makah Whaling Village} (2015). SAH Archipedia (Society of Architectural Historians): Pacific Science Center and Ozette Archaeological Site documentation.
+
+\subsubsection{Tribal and Cultural Organizations}
+Makah Cultural and Research Center: Ozette archaeological site documentation. Sitka Tribe of Alaska: land acknowledgment and historical context. Outer Coast College: Sheldon Jackson campus reconciliation documentation. PBS/Antiques Roadshow: Sheldon Jackson Museum curator discussion of Jackson's life and legacy. Lummi Nation: Madrona Point history.
+
+\subsubsection{Professional Organizations and Publications}
+Washington Trails Association (WTA): Spider Meadow and Olympic coast trail reports. The Mountaineers: Spider Gap/Buck Creek Pass loop documentation. Britannica: Soundgarden entry. Wikipedia (cross-referenced): Sound Garden sculpture, Soundgarden band, Pacific Science Center, Ozette archaeological site, Sheldon Jackson, The Snow Leopard, Orcas Island, Mount Constitution, Ozette Lake.
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document exploring resonant landscapes of the Pacific Northwest through six interconnected modules---from urban sound sculpture through alpine wilderness, coastal archaeology, archipelagic maritime culture, northern colonial-theological history, and contemplative literature---unified by a ``spaces between'' interpretive framework that connects Douglas Hollis's aeolian pipes to Peter Matthiessen's snow leopard.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================================
+
+Wave 0: FOUNDATION [Sequential]
+  |-- Shared schemas, source index, cross-ref templates
+  |
+Wave 1: PARALLEL SURVEY [3 tracks]
+  |-- Track A: M1 (Sound/Sculpture) + M2 (Parks Hierarchy)
+  |-- Track B: M3 (Alpine/Glacier Peak) + M4 (Olympic Coast)
+  |-- Track C: M5 (Islands/Salish) + M6 (Northern/Contemplative)
+  |
+Wave 2: SYNTHESIS [Sequential]
+  |-- Cross-module resonance mapping
+  |-- Through-line narrative integration
+  |-- Cultural sensitivity review
+  |
+Wave 3: PUBLICATION + VERIFICATION [Sequential]
+  |-- Document assembly
+  |-- Source verification
+  |-- Test plan execution
+  |-- Final compilation
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer:} Shared schemas, source index, terminology concordance, cross-reference templates
+\item \textbf{Survey Layer:} Six parallel research modules producing self-contained sections with sourced findings
+\item \textbf{Synthesis Layer:} Cross-module integration, resonance thread weaving, gap analysis
+\item \textbf{Publication Layer:} Final document assembly, bibliography, verification matrix, quality assurance
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Source Index & All sources cataloged with quality rating & W0-SCHEMA \\
+D2 & Sound \& Sculpture Module & Hollis, Cornell, Yamasaki documented & W1-M1 \\
+D3 & Parks Hierarchy Module & 6 jurisdictional levels, 3+ examples each & W1-M2 \\
+D4 & Alpine Wilderness Module & Trail system with profiles, access, ecology & W1-M3 \\
+D5 & Olympic Coast Module & Trail, tides, memorials, archaeology & W1-M4 \\
+D6 & Islands \& Salish Sea Module & History, geology, ecology, culture & W1-M5 \\
+D7 & Northern \& Contemplative Module & Sitka, Matthiessen, Crystal Monastery & W1-M6 \\
+D8 & Resonance Synthesis & Cross-module connections, through-line & W2-SYN \\
+D9 & Final Document & Complete, verified, publication-ready & W3-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2,000 \\
+W1-M1 & W0-SCHEMA & Sonnet & 8,000 \\
+W1-M2 & W0-SCHEMA & Sonnet & 6,000 \\
+W1-M3 & W0-SCHEMA & Sonnet & 8,000 \\
+W1-M4 & W0-SCHEMA & Opus & 10,000 \\
+W1-M5 & W0-SCHEMA & Sonnet & 7,000 \\
+W1-M6 & W0-SCHEMA & Opus & 10,000 \\
+W2-SYN & W1-all & Opus & 12,000 \\
+W3-PUB & W2-SYN & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Rationale} & \tableheader{Allocation} \\
+\midrule
+Opus & Cultural sensitivity (Makah, Tlingit, Coast Salish), cross-module synthesis, literary analysis (Matthiessen), through-line narrative & $\sim$32k (35\%) \\
+Sonnet & Survey compilation, trail documentation, architectural history, parks hierarchy, document assembly & $\sim$37k (55\%) \\
+Haiku & Schema scaffolding, source index, cross-reference templates & $\sim$2k (10\%) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Parallel} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & No & 1 & 2,000 \\
+1 & Survey (3 tracks) & Yes (3) & 6 & 49,000 \\
+2 & Synthesis & No & 2 & 12,000 \\
+3 & Publication & No & 2 & 8,000 \\
+\midrule
+& \textbf{Total} & & \textbf{11} & \textbf{71,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Source index & Cataloged bibliography with quality ratings & Haiku & 1,200 \\
+Shared schemas & Module template, cross-ref format, terminology & Haiku & 800 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Survey}
+
+\textbf{Track A: Urban/Institutional}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1: Sound \& Sculpture & Hollis, Soundgarden, PacSci, Smithsonian & Sonnet & 8,000 \\
+M2: Parks Hierarchy & 6-level jurisdictional map with examples & Sonnet & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Wilderness/Coastal}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M3: Alpine Wilderness & Trail system, ecology, access documentation & Sonnet & 8,000 \\
+M4: Olympic Coast & Coastal trails, archaeology, Makah context & Opus & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Maritime/Contemplative}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M5: Islands \& Salish Sea & San Juans, Constitution, history, ecology & Sonnet & 7,000 \\
+M6: Northern \& Contemplative & Sitka, Jackson, Matthiessen, Crystal Monastery & Opus & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Resonance mapping & Cross-module connections identified & Opus & 6,000 \\
+Through-line weaving & Narrative thread connecting all 6 modules & Opus & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Document assembly & All modules integrated into final document & Sonnet & 5,000 \\
+Verification & Test plan execution, source checks & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=2em]
+\item Wave 1 tracks share the Wave 0 foundation in cached context (5-minute TTL window)
+\item Track A and Track B can run in parallel within the same session if context permits
+\item Wave 2 synthesis should load all six module outputs in a single context window
+\item Wave 3 publication leverages cached synthesis output
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ──┬──> W1-M1 ──┐
+            ├──> W1-M2 ──┤
+            ├──> W1-M3 ──┼──> W2-SYN ──> W3-PUB
+            ├──> W1-M4 ──┤
+            ├──> W1-M5 ──┤
+            └──> W1-M6 ──┘
+
+Parallel tracks: {M1,M2} | {M3,M4} | {M5,M6}
+Sequential gates: W0 → W1 → W2 → W3
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 7 & Mandatory & BLOCK \\
+Core Functionality & 12 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to gov agencies, peer-reviewed journals, tribal organizations, or professional publications. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every measurement, date, artifact count attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating specific legislative positions \\
+SC-IND & Indigenous attribution & Every Indigenous reference names specific nation (Makah, Tlingit/Kiks.ádi, Lummi, Samish, Coast Salish, Kwakwaka'wakw, Haida); never generic \\
+SC-END & Sensitive site protection & No precise GPS coordinates for archaeological, burial, or ceremonial sites beyond published NPS/tribal documentation \\
+SC-OZT & Ozette agreement & Makah excavation agreement terms honored: no removal of artifacts from tribal jurisdiction context \\
+SC-CLI & Climate/glacier data sourced & Glacier retreat observations attributed to USFS or USGS monitoring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Sound Garden sculpture-to-band arc & CF-01, CF-02 & Pending \\
+2. PacSci architecture documented & CF-03 & Pending \\
+3. Parks hierarchy (6 levels, 3+ each) & CF-04, CF-05 & Pending \\
+4. Glacier Peak trail system documented & CF-06, CF-07 & Pending \\
+5. Olympic coast trail documented & CF-08, CF-09 & Pending \\
+6. Ozette site with Makah attribution & SC-IND, SC-OZT, CF-10 & Pending \\
+7. San Juan Islands documented & CF-11 & Pending \\
+8. Sitka/Jackson balanced treatment & SC-IND, CF-12 & Pending \\
+9. Matthiessen/Snow Leopard analyzed & CF-13 & Pending \\
+10. Cross-module resonance thread & IN-01 through IN-06 & Pending \\
+11. All sources professional quality & SC-SRC & Pending \\
+12. No sensitive site exposure & SC-END, SC-OZT & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache TTL management \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research for gaps \\
+EXEC-A & Executor (Track A) & M1 + M2 document production \\
+EXEC-B & Executor (Track B) & M3 + M4 document production \\
+EXEC-C & Executor (Track C) & M5 + M6 document production \\
+CRAFT-ECO & Ecology Specialist & Trail systems, alpine/coastal ecology, glacier data \\
+CRAFT-CULT & Cultural Specialist & Indigenous attribution, Makah/Tlingit/Coast Salish sensitivity review \\
+CRAFT-LIT & Literary Analyst & Matthiessen analysis, contemplative thread \\
+VERIFY & Verification & Source validation; accuracy checking; cross-module consistency \\
+INTEG & Integration Agent & Cross-module resonance mapping; through-line verification \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions; resonance framework \\
+SECURE & Safety Warden & Cultural sensitivity boundary enforcement \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total estimated tokens & 71,000 \\
+Context windows & 11--14 \\
+Sessions & 4--5 \\
+Parallel tracks (Wave 1) & 3 \\
+Research modules & 6 \\
+Activation profile & Fleet (18 roles) \\
+Model split & Opus 35\% / Sonnet 55\% / Haiku 10\% \\
+Safety-critical tests & 7 (all mandatory-pass / BLOCK) \\
+Core functionality tests & 12 \\
+Integration tests & 6 \\
+Total tests & 29 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{quotebox}
+\textit{``Have you seen the snow leopard?''} \\
+\textit{``No! Isn't that wonderful!''} \\[0.5em]
+The wind plays through twelve steel pipes on the shore of Lake Washington. It plays through Spider Meadow at dawn and through Hole in the Wall at low tide. It plays through the empty longhouses at Ozette and through the stone tower on Mount Constitution. It plays through the Crystal Monastery at Shey Gompa where a crippled lama serves yak cheese tea to travelers who came looking for something they would not find---and found instead that the not-finding was the teaching.
+
+The spaces between the sounds are where we live.
+\end{quotebox}
+
+\end{document}
