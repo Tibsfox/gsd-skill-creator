@@ -134,7 +134,7 @@ export async function wlStampCommand(args: string[]): Promise<number> {
   // Bootstrap
   let bootstrapResult;
   try {
-    bootstrapResult = await bootstrap({ offline });
+    bootstrapResult = await bootstrap(offline ? ['--offline'] : []);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     if (json) { console.log(JSON.stringify({ error: msg })); }
@@ -215,17 +215,17 @@ export async function wlStampCommand(args: string[]): Promise<number> {
 
     // Interactive prompts
     if (!validScore(quality)) {
-      const q = await p.text({ message: 'Quality score (1-5):', validate: v => { const n = parseInt(v, 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
+      const q = await p.text({ message: 'Quality score (1-5):', validate: (v: string | undefined) => { const n = parseInt(v ?? '', 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
       if (p.isCancel(q)) return 1;
       quality = parseInt(q as string, 10);
     }
     if (!validScore(reliability)) {
-      const r = await p.text({ message: 'Reliability score (1-5):', validate: v => { const n = parseInt(v, 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
+      const r = await p.text({ message: 'Reliability score (1-5):', validate: (v: string | undefined) => { const n = parseInt(v ?? '', 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
       if (p.isCancel(r)) return 1;
       reliability = parseInt(r as string, 10);
     }
     if (!validScore(creativity)) {
-      const c = await p.text({ message: 'Creativity score (1-5):', validate: v => { const n = parseInt(v, 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
+      const c = await p.text({ message: 'Creativity score (1-5):', validate: (v: string | undefined) => { const n = parseInt(v ?? '', 10); return n >= 1 && n <= 5 ? undefined : 'Enter 1-5'; } });
       if (p.isCancel(c)) return 1;
       creativity = parseInt(c as string, 10);
     }
