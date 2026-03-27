@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Garbage Patch Cleanup — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0D47A1;
+    --secondary: #00695C;
+    --tertiary: #5D4037;
+    --accent: #0277BD;
+    --light-primary: #E3F2FD;
+    --light-secondary: #E0F2F1;
+    --bg: #FAFAFA;
+    --card-bg: #F0F4F8;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  .header .tag { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 1rem; }
+  .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.5rem; }
+  .header .subtitle { font-size: 1.1rem; opacity: 0.9; }
+  .header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8; }
+  .container { max-width: 820px; margin: 0 auto; padding: 2rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .card {
+    background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+    text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #ddd; display: block;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card .filetype { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 700; }
+  .card .filename { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.5rem 0 0.3rem; }
+  .card .desc { font-size: 0.85rem; color: var(--subtle); }
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.4rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-primary); padding-bottom: 0.5rem; }
+  h3 { color: var(--secondary); font-size: 1rem; margin: 1.2rem 0 0.5rem; }
+  ul { padding-left: 1.5rem; }
+  li { margin-bottom: 0.4rem; font-size: 0.92rem; }
+  .stage-tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 0.75rem; font-weight: 700; color: white; margin-right: 0.5rem; }
+  .stage1 { background: var(--primary); }
+  .stage2 { background: var(--secondary); }
+  .stage3 { background: var(--tertiary); }
+  .instructions { background: var(--light-secondary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+  code { background: #E8EAF6; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  .quote-box {
+    background: var(--light-primary); border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0;
+  }
+  .quote-box p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; }
+  .quote-box .attr { font-style: normal; font-family: 'DM Sans', sans-serif; color: var(--subtle); margin-top: 0.5rem; font-size: 0.85rem; }
+  .footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Pacific Garbage Patch<br>Cleanup & Removal</h1>
+  <div class="subtitle">North Pacific Subtropical Gyre — Ocean Remediation</div>
+  <div class="pipeline">Vision → Research → Mission | Full Pipeline</div>
+</div>
+
+<div class="container">
+  <h2>Mission Files</h2>
+  <div class="cards">
+    <a class="card" href="pacific-garbage-patch-mission.pdf" download>
+      <div class="filetype">PDF — 29 pages</div>
+      <div class="filename">Mission Package</div>
+      <div class="desc">Complete three-stage document: Vision, Research Reference, and Mission Package with wave execution plan.</div>
+    </a>
+    <a class="card" href="pacific-garbage-patch-mission.tex" download>
+      <div class="filetype">LaTeX Source</div>
+      <div class="filename">mission.tex</div>
+      <div class="desc">XeLaTeX source for recompilation and modification. Requires DejaVu fonts.</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+
+  <h3><span class="stage-tag stage1">Stage 1</span> Vision Document</h3>
+  <ul>
+    <li>Narrative vision — the scale and urgency of GPGP remediation</li>
+    <li>Five-part problem statement: scale, microplastics, inflow, policy deadlock, ecological urgency</li>
+    <li>Domain architecture map spanning oceanography through economics</li>
+    <li>Five research modules with scope boundaries and 12 success criteria</li>
+    <li>Through-line connecting to GSD ecosystem philosophy (Amiga Principle)</li>
+  </ul>
+
+  <h3><span class="stage-tag stage2">Stage 2</span> Research Reference</h3>
+  <ul>
+    <li>Oceanographic context: gyre formation, Ekman convergence, vertical distribution</li>
+    <li>Ecological impact: 914 affected species, mortality estimates, plasticosis pathology</li>
+    <li>Technology assessment: System 001→03 evolution, Interceptors, 5+ alternatives</li>
+    <li>Policy landscape: UN Plastics Treaty INC-1 through INC-5.3 timeline</li>
+    <li>Environmental economics: $7.5B cleanup estimate, net benefit framework, carbon trade-offs</li>
+    <li>Complete bibliography from NOAA, Nature, PNAS, Scientific Reports, and professional orgs</li>
+  </ul>
+
+  <h3><span class="stage-tag stage3">Stage 3</span> Mission Package</h3>
+  <ul>
+    <li>Squadron activation (12 roles, 2 parallel tracks)</li>
+    <li>4-wave execution plan: Foundation → Parallel Surveys → Synthesis → Publication</li>
+    <li>36 tests (7 safety-critical, 18 core, 6 integration, 5 edge)</li>
+    <li>Token budget: ~97K (Opus 31% / Sonnet 64% / Haiku 5%)</li>
+    <li>18–24 context windows across 4–6 sessions</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Feed the PDF to <code>gsd-skill-creator</code> via Claude Code as the mission brief</li>
+      <li>Stage 2 (Research Reference) provides pre-loaded context for all survey agents — no independent web research needed for foundational data</li>
+      <li>Wave 0 outputs serve as shared schemas; Wave 1 tracks run in parallel</li>
+      <li>CAPCOM approvals required at wave boundaries (0→1, 1→2, 2→3)</li>
+      <li>All safety-critical tests are mandatory-pass / BLOCK gates</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Ensure XeLaTeX and DejaVu fonts are installed</li>
+      <li>Run three passes: <code>xelatex -interaction=nonstopmode mission.tex</code> (×3)</li>
+      <li>Three passes resolve TOC, cross-references, and page count</li>
+    </ol>
+  </div>
+
+  <div class="quote-box">
+    <p>"Ten systems. One decade. $7.5 billion. The math is clear. The question is whether humanity chooses to do the math."</p>
+    <div class="attr">— Mission Through-Line</div>
+  </div>
+</div>
+
+<div class="footer">
+  GSD Ecosystem — Pacific Garbage Patch Cleanup Mission Package — March 2026
+</div>
+
+</body>
+</html>
