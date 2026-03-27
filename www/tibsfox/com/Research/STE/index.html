@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silicon to Evidence &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ste">
+  <header>
+    <h1>Silicon to Evidence</h1>
+    <div class="subtitle">Storage Silicon &middot; RAID/HBA &middot; Ceph &middot; Data Recovery &middot; Digital Forensics &middot; Optical Inspection</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-storage-silicon-substrate">Silicon</a>
+      <a href="page.html?doc=02-storage-array-architecture">Arrays</a>
+      <a href="page.html?doc=03-ceph-distributed-storage">Ceph</a>
+      <a href="page.html?doc=04-data-recovery-engineering">Recovery</a>
+      <a href="page.html?doc=05-digital-forensics-legal-chain">Forensics</a>
+      <a href="page.html?doc=06-optical-imaging-vlsi-inspection">Optical</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every enterprise storage incident is, at bottom, a physics problem. Somewhere in the space
+      between a spinning platter or a NAND flash cell and the bit pattern a forensic examiner needs
+      in court, something went wrong. The path from silicon to evidence runs through the same sequence:
+      understand the chip, understand the array, understand the distributed system, understand the failure
+      modes, and only then &mdash; with precision, with chain of custody intact, with write-blocking in
+      place &mdash; begin recovery. Silicon to evidence is not a miracle. It is applied architecture.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">32</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">30+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Silicon Families</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-storage-silicon-substrate" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Storage Silicon Substrate</h3>
+        <div class="meta"><span class="tag tag-silicon">Silicon</span> Track A &middot; Controller families</div>
+        <p>Samsung NVMe/SAS enterprise SSDs, Philips/NXP legacy controllers, Broadcom MegaRAID/HBA Tri-Mode SerDes, AMD/Xilinx FPGA computational storage. Die architectures, firmware paths, known forensic failure modes per family.</p>
+      </a>
+
+      <a href="page.html?doc=02-storage-array-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Storage Array Architecture</h3>
+        <div class="meta"><span class="tag tag-array">Array</span> Track A &middot; RAID topology</div>
+        <p>RAID levels 0/1/5/6/10/50/60/5EE and JBOD topology. Stripe geometry, parity distribution, write-hole vulnerabilities, MegaRAID metadata formats, DDF standard, HBA passthrough vs. IT-mode comparison for Ceph OSD.</p>
+      </a>
+
+      <a href="page.html?doc=03-ceph-distributed-storage" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Ceph Distributed Storage</h3>
+        <div class="meta"><span class="tag tag-distributed">Distributed</span> Track A &middot; Object store</div>
+        <p>Ceph RADOS architecture, BlueStore on-disk format, CRUSH placement algorithm, erasure coding profiles, stretch cluster operations, OSD journal/WAL/DB separation, and forensic challenges unique to distributed object stores.</p>
+      </a>
+
+      <a href="page.html?doc=04-data-recovery-engineering" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Data Recovery Engineering</h3>
+        <div class="meta"><span class="tag tag-recovery">Recovery</span> Track B &middot; Failure modes</div>
+        <p>15+ failure mode taxonomy across controller, firmware, NAND, and protocol layers. Professional toolchain: Ace Lab PC-3000, VNR, FE Flash-Extractor, IR6500 BGA rework. NVMe chip-off procedure, RAID superblock reconstruction.</p>
+      </a>
+
+      <a href="page.html?doc=05-digital-forensics-legal-chain" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Digital Forensics &amp; Legal Chain</h3>
+        <div class="meta"><span class="tag tag-forensics">Forensics</span> Track B &middot; Evidence standards</div>
+        <p>NIST SP 800-86 methodology, write-blocking hardware and procedures, forensic imaging standards, hash verification, chain of custody documentation, court-admissible reporting, Ceph-specific forensic procedures.</p>
+      </a>
+
+      <a href="page.html?doc=06-optical-imaging-vlsi-inspection" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Optical Imaging &amp; VLSI Inspection</h3>
+        <div class="meta"><span class="tag tag-optical">Optical</span> Track B &middot; Evidence documentation</div>
+        <p>Pentax/Ricoh industrial macro lenses for die-level documentation, Bosch AOI semiconductor inspection, brightfield vs. darkfield techniques, EXIF metadata forensics, BGA bond inspection, burn trace documentation.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>NVMe controller architecture</td><td>M1, M4, M5</td><td>SYS, CMH</td></tr>
+        <tr><td>RAID metadata / superblock</td><td>M2, M4</td><td>SYS, SAN</td></tr>
+        <tr><td>Ceph RADOS / CRUSH</td><td>M3, M4, M5</td><td>K8S, OCN</td></tr>
+        <tr><td>BlueStore on-disk format</td><td>M3, M4</td><td>SYS</td></tr>
+        <tr><td>BGA chip-off procedure</td><td>M1, M4, M6</td><td>CMH</td></tr>
+        <tr><td>Write-blocking / imaging</td><td>M5, M4</td><td>SYS, ACE</td></tr>
+        <tr><td>Chain of custody</td><td>M5, M6</td><td>VAV, ACE</td></tr>
+        <tr><td>NIST SP 800-86</td><td>M5</td><td>ACE, SYS</td></tr>
+        <tr><td>Optical inspection (AOI)</td><td>M6, M1</td><td>CMH, SGL</td></tr>
+        <tr><td>Erasure coding (Reed-Solomon)</td><td>M2, M3</td><td>OCN, CMH</td></tr>
+        <tr><td>PCIe / SAS protocols</td><td>M1, M2</td><td>SYS, SGL</td></tr>
+        <tr><td>Firmware forensics</td><td>M1, M4</td><td>SYS, ACE</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+SILICON TO EVIDENCE -- DOMAIN MAP
+===============================================================
+
+  SILICON LAYER            ARRAY LAYER            DISTRIBUTED LAYER
+  +---------------+       +----------------+     +---------------+
+  | Samsung NVMe  |       | RAID 0-60      |     | Ceph RADOS    |
+  | Broadcom RAID |------&gt;| JBOD Encl.     |----&gt;| BlueStore OSD |
+  | AMD/Xilinx    |       | HBA Passthru   |     | CRUSH Map     |
+  | Philips/NXP   |       | DDF Metadata   |     | Stretch Clstr |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+     +---------------+
+  | Die Arch.     |       | Stripe Geom.   |     | OSD UUID      |
+  | Firmware Path |       | Parity Distrib |     | PG Placement  |
+  | Failure Modes |       | Write Hole     |     | Erasure Code  |
+  | NAND Layout   |       | Metadata Loc.  |     | WAL/DB Split  |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   RECOVERY + FORENSICS |
+                    |                        |
+                    |  Chip-off / BGA Rework  |
+                    |  PC-3000 / VNR / FE     |
+                    |  Write-Block / Imaging   |
+                    |  Chain of Custody        |
+                    |  Hash Verification       |
+                    +-----------+-------------+
+                                |
+                    +-----------+-----------+
+                    |   OPTICAL INSPECTION   |
+                    |                        |
+                    |  Pentax/Ricoh Macro     |
+                    |  Bosch AOI Systems      |
+                    |  Brightfield/Darkfield  |
+                    |  VLSI Evidence Photos   |
+                    +------------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Silicon Substrate] ------&gt; [M2: Array Architecture]
+         |                                |
+         |                                v
+         |                        [M3: Ceph Distributed]
+         |                                |
+         +---------- M1+M2+M3 ----------&gt;|
+                                          v
+                              [M4: Recovery Engineering]
+                                          |
+                                          v
+                              [M5: Forensics &amp; Legal]
+                                          |
+                              M1+M5 -----&gt;|
+                                          v
+                              [M6: Optical Inspection]
+
+  Parallel tracks:
+    Track A: M1 + M2 + M3 (silicon + arrays + distributed)
+    Track B: M4 + M5 + M6 (recovery + forensics + optical)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Silicon to Evidence &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
