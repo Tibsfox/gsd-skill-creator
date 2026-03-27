@@ -1,0 +1,951 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Broadcasting / Wolf-Country-PNW ===
+\definecolor{primary}{HTML}{1A237E}       % Wolf Indigo — section headers
+\definecolor{secondary}{HTML}{E65100}     % Country Amber — subsection headers
+\definecolor{tertiary}{HTML}{2E7D32}      % Pacific Green — subsubsection headers
+\definecolor{accent}{HTML}{F57F17}        % Nashville Gold — highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{100.7 The Wolf --- KKWF Seattle}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={100.7 The Wolf KKWF Seattle -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{100.7 The Wolf\\[0.3em]KKWF Seattle}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Country Radio in the Pacific Northwest}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--24 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{100.7 The Wolf --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None --- standalone research mission}
+\metafield{Context:}{Seattle--Tacoma radio market, Audacy ownership cluster, country format broadcasting}
+
+\subsection{Vision}
+
+There is a frequency on the FM dial that has been broadcasting from Tiger Mountain since 1948. It has worn many names---KIRO-FM, KSEA, KQBZ, ``The Buzz''---each one a layer of sediment in Seattle's broadcasting geology. But on November 30, 2005, at noon, when the countdown clock fell silent and Toby Keith's ``How Do You Like Me Now?!'' roared through 68,000 watts of effective radiated power, something crystallized. The frequency became 100.7 The Wolf, and the Pacific Northwest got its defining country voice.
+
+What makes KKWF remarkable is not merely survival---though surviving the Audacy bankruptcy, the KMPS rivalry, and the format wars of 2017--2024 is no small feat. It is that the station embodies a broadcasting paradox: a corporate-owned frequency that has built genuinely local loyalty through military philanthropy, listener-centric morning radio, and the stubborn persistence of country music in a market that the industry once considered inhospitable to the genre. When competitor KPNW abandoned country for adult-alternative in February 2023, The Wolf didn't just absorb those listeners---it surged to all-time ratings highs, proving that the audience had been there all along, waiting for a station that wouldn't flinch.
+
+This research mission examines KKWF from six angles: its layered broadcast history, its competitive position in a volatile market, its programming architecture and on-air talent, its corporate ownership through Audacy's restructuring, its community engagement model, and the industry-wide forces---streaming, genre fusion, AI-generated music---that will shape its future. The goal is a complete portrait of a station at the intersection of legacy broadcasting and digital transformation, rooted in a region where the spaces between the mountains and the water have always shaped how sound travels.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Format Volatility:} Seattle's country radio landscape has experienced repeated format flips (KMPS $\rightarrow$ soft AC, KNUC $\rightarrow$ AAA $\rightarrow$ The Bull, KPLZ $\rightarrow$ Hank FM), creating listener whiplash and making long-term audience development unpredictable. Understanding the dynamics that allowed KKWF to remain stable while competitors churned is essential.
+
+\item \textbf{Corporate Ownership Uncertainty:} Audacy's January 2024 Chapter 11 bankruptcy filing and September 2024 emergence as a private company raise questions about the long-term investment horizon for stations like KKWF. The reduction from \$1.9B to \$350M in debt is dramatic, but post-bankruptcy radio groups historically accelerate cost-cutting.
+
+\item \textbf{Streaming Disruption:} Country music streaming grew 23.8\% in the first half of 2023 alone, with platforms like Spotify becoming the primary discovery mechanism for younger listeners. Traditional radio's gatekeeper role is eroding---less than half of 2025's top country songs also appeared on Billboard's most-played radio chart.
+
+\item \textbf{Competitive Re-Fragmentation:} After briefly being Seattle's sole country station (December 2017--December 2017), KKWF now faces 98.9 The Bull (Hubbard) and 101.5 Hank FM (classic country), splitting format share in a market that historically couldn't sustain two country outlets.
+
+\item \textbf{Genre Identity Crisis:} Country music in 2025 is undergoing radical genre-blending---trap-country, pop-country crossovers, AI-generated chart entries---that challenges traditional format programming. How KKWF navigates playlist curation between heritage country and genre-fluid new releases will determine its relevance to the next generation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} KKWF's durability derives from the compound effect of format consistency, community investment, and personality-driven morning radio in a market where competitors repeatedly self-destructed through format instability.
+
+The station's trajectory demonstrates a broadcasting version of the Amiga Principle: architectural leverage through specialization rather than brute-force breadth. While competitors spread across formats chasing algorithmic optimization, KKWF committed to country, invested in a CMA Award-winning morning show, and built philanthropy infrastructure (Operation K9 Companion, 10,000 for the Troops) that created listener bonds no playlist algorithm can replicate. The result is a station that has outlasted rivals with stronger signals, bigger budgets, and more favorable market positions.
+
+\subsubsection{Market Architecture}
+
+\begin{asciibox}
+SEATTLE-TACOMA COUNTRY RADIO LANDSCAPE (2026)
+=============================================
+
+  AUDACY CLUSTER              HUBBARD CLUSTER        INDEPENDENT
+  +-----------------+         +---------------+      +------------+
+  | KKWF 100.7      |         | KPNW 98.9     |      | KPLZ 101.5 |
+  | "The Wolf"      |         | "The Bull"     |      | "Hank FM"  |
+  | Country (Main)  |         | Country        |      | Classic Cty|
+  | 68kW Tiger Mtn  |         | 63.9kW Tiger   |      | (Lotus)    |
+  +-----------------+         +---------------+      +------------+
+        |                           |
+  Sisters: KISW, KNDD,       Sisters: KQMV,
+  KSWD, KHTP                 KRWM
+
+  MARKET LEADER: KUOW (NPR) ~9.0+ share 6+
+  KEY COMPETITORS: KZOK (Classic Rock), KNDD (Alt), KISW (Active Rock)
+  MEASUREMENT: Nielsen Audio PPM (monthly)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+=============================
+
+  +------------------+     +-------------------+
+  | M1: STATION      |     | M2: MARKET        |
+  | HISTORY &        |     | POSITION &        |
+  | IDENTITY         |     | COMPETITION       |
+  +--------+---------+     +---------+---------+
+           |                         |
+           v                         v
+  +------------------+     +-------------------+
+  | M3: PROGRAMMING  |     | M4: OWNERSHIP     |
+  | & ON-AIR         |     | & BUSINESS        |
+  | TALENT           |     | MODEL             |
+  +--------+---------+     +---------+---------+
+           |                         |
+           +----------+--------------+
+                      |
+                      v
+  +------------------+     +-------------------+
+  | M5: COMMUNITY    |     | M6: INDUSTRY      |
+  | ENGAGEMENT &     |     | CONTEXT &         |
+  | MILITARY FOCUS   |     | DIGITAL FUTURE    |
+  +------------------+     +-------------------+
+                      \   /
+                       \ /
+                        v
+                 [SYNTHESIS]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Station History and Identity}
+
+Trace KKWF's lineage from its 1948 sign-on as KIRO-FM through its multiple format incarnations: CBS Radio affiliate (1948--1960s), progressive rock (late 1960s), beautiful music as KSEA (1973--1988), adult contemporary (1988--1992), talk radio simulcast (1992--1994), independent talk as ``100.7 The Buzz'' / KQBZ (1995--2005), and the November 30, 2005 flip to country. Document ownership transitions: Queen City Broadcasting $\rightarrow$ Bonneville International $\rightarrow$ Entercom $\rightarrow$ Audacy. Map the HD Radio operations (HD2 comedy, then smooth jazz, then blues). Establish how each format era left cultural residue in the station's relationship with Seattle listeners.
+
+\subsubsection{M2: Market Position and Competitive Landscape}
+
+Analyze KKWF's ratings trajectory through Nielsen Audio PPM data, with particular focus on three inflection points: the 2017 KMPS elimination (format monopoly), the 2023 KPNW-to-AAA flip (accidental monopoly), and the 2024 return of The Bull plus Hank FM launch (re-fragmentation). Document the station's 18-34 and 25-54 demographic performance. Compare KKWF's market position against the dominant Seattle stations (KUOW, KZOK, KNDD, KISW). Assess the competitive threat from Hubbard's KPNW ``The Bull'' and Lotus's Hank FM.
+
+\subsubsection{M3: Programming and On-Air Talent}
+
+Profile The Morning Wolfpack with Matt McAllister (launched October 2017), including co-hosts Gabe Mercer (joined September 2022, Wenatchee native) and Captain Ron Koons. Document the show's CMA Broadcast Award for Major Market Personality of the Year and three ACM nominations. Analyze the show's expansion to afternoon drive at sister station KMLE Phoenix (October 2024). Map the full programming day including midday, afternoon, and evening shows. Assess Drew Bland's role as Audacy Regional VP of Programming overseeing both KKWF and KMLE.
+
+\subsubsection{M4: Ownership and Business Model}
+
+Document Audacy's corporate trajectory: Entercom founding (1968) $\rightarrow$ CBS Radio acquisition (2017, adding \$1.5B debt) $\rightarrow$ Audacy rebrand (2021) $\rightarrow$ Chapter 11 filing (January 7, 2024) $\rightarrow$ FCC-approved emergence (September 30, 2024) as private company with 80\% debt reduction. Analyze the post-bankruptcy ownership structure (Laurel Tree Opportunities Corporation as controlling shareholder, MBX Commercial Finance at ~9.5\%). Assess implications for KKWF's operating budget, staffing, and capital investment. Examine the Seattle Audacy cluster (KKWF, KISW, KNDD, KSWD, KHTP) as a revenue portfolio.
+
+\subsubsection{M5: Community Engagement and Military Focus}
+
+Document KKWF's distinctive military philanthropy program: Operation K9 Companion (annual fundraiser for Northwest Battle Buddies, \$400,000 raised in 2025, funding 16 service dogs for veterans with PTSD); 10,000 for the Troops (Valentine's Day card collection); Military Spouse Night (concert experiences for military families); Front Row for the Front Line (priority concert seating for service members). Analyze how this community investment creates listener loyalty that transcends format competition and corporate ownership changes.
+
+\subsubsection{M6: Industry Context and Digital Future}
+
+Examine the macro forces reshaping country radio: streaming growth (country on-demand audio up 23.8\% in H1 2023); genre-blending (Morgan Wallen/Tate McRae crossovers, Jelly Roll's country-hip-hop-rock fusion); AI-generated country music entering charts (Breaking Rust's ``Walk My Walk'' reaching No.~1 on Country Digital Song Sales in 2025); the shifting gatekeeper role from radio programmers to streaming algorithms and TikTok virality. Assess KKWF's digital presence via the Audacy app and streaming platform. Project scenarios for terrestrial country radio's relevance through 2030.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    role: Memory/scheduling controller
+    assignment: Research coordination, source management
+    model: sonnet
+    context: "Manages source bibliography, deduplication,
+              cross-module citation consistency"
+  denise:
+    role: Output/display controller
+    assignment: Document formatting, table generation, maps
+    model: sonnet
+    context: "Produces all formatted output including ratings
+              tables, market maps, timeline graphics"
+  paula:
+    role: Audio/communications controller
+    assignment: Interview/quote integration, audio source analysis
+    model: sonnet
+    context: "Handles all on-air personality profiles, show
+              format descriptions, programming analysis"
+  m68000:
+    role: Central processor
+    assignment: Synthesis, cross-module integration, judgment
+    model: opus
+    context: "Produces vision narrative, competitive analysis,
+              future scenario projections, through-line"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item KKWF's complete broadcast history (1948--2026)
+\item Seattle--Tacoma country radio competitive landscape (all current and recent stations)
+\item Nielsen Audio PPM ratings data (2017--2025)
+\item Audacy corporate structure and bankruptcy/emergence timeline
+\item On-air talent profiles and programming architecture
+\item Community engagement and military philanthropy programs
+\item Country music industry trends (streaming, genre evolution, AI)
+\item Digital platform presence (Audacy app, streaming, social media)
+\item FCC technical data (power, transmitter, HD Radio)
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Detailed financial analysis of Audacy's balance sheet beyond public filings
+\item Proprietary playlist rotation data or music scheduling algorithms
+\item Personal lives of on-air talent beyond professional biography
+\item Comparative analysis with country stations outside the Seattle--Tacoma market
+\item Music licensing and royalty structures
+\item Political content or editorial positions
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Complete timeline of all KKWF format changes with dates, call signs, and ownership transitions from 1948 to 2026
+\item Ratings trajectory documented across at least 8 Nielsen Audio survey periods with 6+, 25-54, and 18-34 demographic breakdowns
+\item All three current Seattle-area country stations (KKWF, KPNW, KPLZ) profiled with signal data, ownership, and market position
+\item Audacy bankruptcy and emergence timeline documented with debt figures, FCC approval details, and post-emergence ownership structure
+\item Morning Wolfpack team fully profiled with hire dates, prior experience, awards, and show expansion details
+\item At least 4 community engagement programs documented with specific outcomes (dollars raised, dogs funded, cards collected)
+\item Country music streaming growth quantified with at least 3 data points from industry sources
+\item AI-generated country music chart entries documented with specific artist names, song titles, and chart positions
+\item Drew Bland's programming role documented showing dual KKWF/KMLE oversight structure
+\item Genre-blending trend illustrated with at least 5 specific artist/collaboration examples
+\item KKWF's HD Radio subchannel history documented (comedy $\rightarrow$ smooth jazz $\rightarrow$ blues)
+\item Through-line connecting KKWF's story to broader themes of format persistence, community investment, and broadcasting in the streaming age
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+GSD Amiga Vision & Amiga Principle as analytical framework for KKWF's specialized persistence & Philosophical \\
+PNW Taxonomy & Seattle/Puget Sound regional context; Tiger Mountain transmitter geography & Geographic \\
+Fox Infrastructure Group & Broadcasting infrastructure parallels; spectrum as shared resource & Technical \\
+Deep Audio Analyzer Mission & Audio signal analysis methodology applicable to broadcast monitoring & Methodological \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+A radio station is, at its most fundamental, a continuous signal. It does not pause for corporate mergers or format flips or bankruptcy filings. The transmitter on Tiger Mountain pushes 68,000 watts into the air whether anyone is listening or not. What changes is what the signal carries---and whether what it carries matters to the people receiving it.
+
+KKWF's twenty-year run as The Wolf, built on a seventy-eight-year-old frequency, is a study in what happens when a station stops chasing formats and starts serving a community. The military philanthropy, the listener-centric morning show, the stubborn commitment to country in a market that once couldn't sustain the genre---these are not marketing strategies. They are the spaces between the songs, the connective tissue that turns a frequency into a relationship. In an industry racing toward algorithmic personalization and AI-generated content, that relationship is the thing that cannot be streamed.
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{100.7 The Wolf --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from industry trade publications, Nielsen Audio ratings reports, FCC filings, and station/corporate communications. Each module section below provides sourced data for the corresponding research module in Stage 1. Key source organizations include:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Nielsen Audio} --- PPM (Portable People Meter) ratings for the Seattle--Tacoma market
+\item \textbf{Federal Communications Commission (FCC)} --- Station licensing, ownership filings, technical data
+\item \textbf{Research Director, Inc.} --- Monthly ratings analysis and market commentary
+\item \textbf{RadioInsight / RadioGeek.ca} --- Industry trade coverage of format changes and personnel moves
+\item \textbf{Billboard / Luminate} --- Chart data, streaming statistics, industry trends
+\item \textbf{Country Insider / Country Aircheck} --- Format-specific trade coverage
+\item \textbf{Audacy corporate communications} --- Bankruptcy filings, restructuring announcements
+\end{itemize}
+
+\subsection{M1 Reference: Station History and Identity}
+
+\subsubsection{Ownership Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Years} & \tableheader{Call Sign} & \tableheader{Owner} & \tableheader{Format} \\
+\midrule
+1948--1963 & KIRO-FM & Queen City Broadcasting & CBS affiliate simulcast (full service) \\
+1963--late 1960s & KIRO-FM & Bonneville International & MOR / full service \\
+Late 1960s--1973 & KIRO-FM & Bonneville & Progressive rock \\
+1973--1988 & KSEA & Bonneville & Beautiful music (Bonneville Program Services) \\
+1988--1992 & KSEA & Bonneville & Adult contemporary \\
+1992--1994 & KIRO-FM & Bonneville & KIRO AM simulcast / talk \\
+1995--1997 & KIRO-FM & Bonneville & Talk (``100.7 The Buzz'') \\
+1997--2005 & KQBZ & Entercom & Hot talk (``Radio For Guys'') \\
+2005--present & KKWF & Entercom / Audacy & Country (``100.7 The Wolf'') \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Milestones}
+
+The country flip occurred at noon on November 30, 2005, mid-broadcast during the Robin \& Maynard show, preceded by a countdown clock voiced by Microsoft Sam. The first song was Toby Keith's ``How Do You Like Me Now?!'' HD Radio operations launched in 2006; the HD2 subchannel cycled through comedy, smooth jazz (June 2011), and blues (February 2012) formats. The station's call sign changed from KQBZ to KKWF concurrent with the country flip.
+
+\subsection{M2 Reference: Market Position and Competition}
+
+\subsubsection{KKWF Ratings Trajectory (Selected Periods)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{6+ Share} & \tableheader{Rank} & \tableheader{Context} \\
+\midrule
+Nov 2017 (pre-flip) & 2.9 & Mid-pack & KMPS held 3.8 share \\
+Jan 2024 & 7.1--7.2 & \#2 & Sole country station; KPNW AAA at 0.8 \\
+Feb 2024 & 7.2--7.5 & \#2 & All-time highs; near market leadership \\
+Apr 2025 & $\sim$3--4 & \#3 (18-34) & Competitive but The Bull re-entered \\
+Aug 2025 & Lowest 1yr & \#11 (18-34) & Sharp decline; Bull gaining \\
+Nov 2025 & 3.5 & Mid-pack & Recovery; stream share 0.8 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The KMPS Elimination (December 2017)}
+
+When Entercom completed its merger with CBS Radio in November 2017, it acquired KMPS (94.1 FM), Seattle's forty-year country incumbent that outbilled KKWF by an estimated 2:1 margin. One industry estimate pegged KMPS annual revenue at \$8--10 million. On December 4, 2017, Entercom flipped KMPS to soft adult contemporary as ``94.1 The Sound,'' launching with Lionel Richie's ``Hello.'' This left KKWF as Seattle's sole country station---but only for approximately 90 minutes. Hubbard Broadcasting immediately flipped rock station KVRQ to ``Country 98.9,'' which became ``98.9 The Bull'' (KNUC, later KPNW).
+
+\subsubsection{The 2023--2024 Format Wars}
+
+On February 14, 2023, Hubbard flipped The Bull to adult alternative as KPNW, leaving KKWF alone in country again. The AAA format was a commercial failure, never exceeding a 1.0 share. Meanwhile, KKWF surged to all-time highs, achieving a higher share than The Wolf and The Bull had ever managed combined. On April 1, 2024, Hubbard reversed course, relaunching The Bull with former morning host Fitz. Hours later, Lotus flipped Hot AC KPLZ (Star 101.5) to classic country as Hank FM. Seattle went from one country station to three in a single day.
+
+\subsection{M3 Reference: Programming and On-Air Talent}
+
+\subsubsection{The Morning Wolfpack}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Joined} & \tableheader{Background} \\
+\midrule
+Matt McAllister & Oct 2017 & Former KNIX Phoenix morning host (2008--2016); CMA Personality of the Year (2015); ACM Personality of the Year (2010); 3 ACM nominations from KKWF \\
+Gabe Mercer & Sept 2022 & Wenatchee, WA native; worked KMLE, KOOL FM, KALV Phoenix; promotions and on-air \\
+Captain Ron Koons & --- & Co-host; part of the three-person morning team \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The show airs weekdays 5--10am PT and expanded to afternoon drive (3--7pm) at Audacy sister KMLE Phoenix in October 2024 as ``Matt, Gabe \& Captain Ron.'' Previous morning hosts included Cory ``Fitz'' Fitzner (departed April 2017 for syndication), Ellen Tailor, and Emily Raines (joined March 2018 from iHeartMedia WUBL Atlanta). Drew Bland, now Audacy Regional VP of Programming for Country, has overseen KKWF's programming since the 2005 country launch and manages both KKWF and KMLE.
+
+\subsection{M4 Reference: Ownership and Business Model}
+
+\subsubsection{Audacy Corporate Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} \\
+\midrule
+1968 & Founded as Entercom Communications \\
+Nov 2017 & Completed CBS Radio acquisition (117 stations; +\$1.5B debt) \\
+2019 & Acquired podcast companies Cadence13, Pineapple Street Studios \\
+2021 & Rebranded as Audacy \\
+Nov 2023 & Stock delisted from NYSE \\
+Jan 7, 2024 & Filed Chapter 11 bankruptcy (S.D. Texas) \\
+Feb 20, 2024 & Restructuring plan confirmed by Judge Christopher Lopez \\
+Sept 18, 2024 & FCC approved license transfers (3-2 vote) \\
+Sept 30, 2024 & Emerged from bankruptcy as private company \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Post-emergence: debt reduced from \$1.9B to \$350M (80\% reduction); leverage ratio dropped from 20x to 2.7x. Controlling shareholder: Laurel Tree Opportunities Corporation. Second-largest shareholder: MBX Commercial Finance (~9.5\%, controlled by 5-Hour Energy founder Manoj Bhargava). CEO David Field retained. The company operates 220+ stations across 45 markets. H1 2024 adjusted earnings grew 128\% to \$40.7M. Seattle cluster includes KKWF, KISW (active rock), KNDD (alternative), KSWD/Emma 94.1 (hot AC), and KHTP/Hot 103.7 (rhythmic AC).
+
+\subsection{M5 Reference: Community Engagement and Military Focus}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Program} & \tableheader{Description} & \tableheader{Outcome} \\
+\midrule
+Operation K9 Companion & Week-long annual fundraiser benefitting Northwest Battle Buddies; provides trained PTSD service dogs to veterans at no cost & \$400K raised (2025); 16 dogs funded; 5th annual \\
+10,000 for the Troops & Valentine's Day campaign collecting cards for military service members & 10,000+ cards annually \\
+Military Spouse Night & Concert experiences organized by Gabe Mercer for military wives/families & Ongoing \\
+Front Row for the Front Line & Priority front-row concert seating for active military and veterans & Ongoing \\
+Dogs for Veterans & General fundraising for veteran service dog programs & Listener-driven \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Matt McAllister has described military philanthropy as the station's defining community commitment, noting approximately one fundraiser per month benefitting local veterans and military families.
+
+\subsection{M6 Reference: Industry Context and Digital Future}
+
+\subsubsection{Country Music Streaming Growth}
+
+Country on-demand audio streaming rose 23.8\% in H1 2023, compared to 8.5\% in H1 2022 (Luminate). Country music consumption overall was up 20.3\% year-over-year in H1 2023. For the first time in Billboard Hot 100 history, the three most popular songs in America were simultaneously country songs (August 2023). By 2025, 36\% of Spotify's top 50 streams in America were country, up from just 2\% in 2016. Over 150 million Americans listen to country music regularly. Morgan Wallen was named Billboard's top artist of 2025---the first male country act to lead the list since Garth Brooks in 1993.
+
+\subsubsection{AI in Country Music}
+
+In November 2025, one-third of the top 10 of Billboard's Country Digital Song Sales chart was composed of AI-assisted artists. Breaking Rust's ``Walk My Walk'' topped the chart; AI artist Cain Walker held the No.~3 and No.~9 positions. Sales volumes remain small (``Walk My Walk'' sold approximately 2,000 copies per chart week), but the trend has generated significant industry concern in Nashville.
+
+\subsubsection{Radio vs.\ Streaming as Gatekeeper}
+
+Less than half of 2025's top country songs also appeared on Billboard's most-played radio chart, indicating streaming and social media have surpassed terrestrial radio as the primary discovery mechanism. Songs increasingly break on TikTok and Spotify playlists before reaching radio programmers. However, radio still reaches more Americans weekly than any other medium (Nielsen), and over 150 million country listeners access the genre through radio and video more commonly than streaming.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\midrule
+Military/Veterans & Ensure respectful representation of PTSD and service dog programs; avoid sensationalizing military trauma & GATE \\
+Corporate Bankruptcy & Present factual financial data from public filings without speculation on future station viability & GATE \\
+Personnel & Limit coverage to professional biography and publicly stated information & ABSOLUTE \\
+Political Content & Audacy's FCC approval involved partisan debate (Soros Fund ownership); present facts neutrally & ANNOTATE \\
+Genre/Cultural & Country music's evolving demographics and genre identity are contested; present data without advocacy & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Industry Trade Publications}
+
+\begin{itemize}[leftmargin=2em]
+\item Research Director, Inc. --- Radio Ratings Roundup series (March--August 2025)
+\item RadioInsight --- Format change coverage, personnel announcements (2017--2024)
+\item RadioGeek.ca --- November 2025 Nielsen Audio PPM Ratings analysis
+\item Country Insider --- KKWF 20th anniversary feature (November 2025)
+\item Ramp247 --- Morning Wolfpack personnel and KMLE expansion coverage
+\item Inside Radio --- Entercom/KMPS format flip coverage (December 2017)
+\item Radio World --- FCC Audacy bankruptcy approval analysis (October 2024)
+\item Billboard --- Country music year-end analysis, chart data (2025)
+\end{itemize}
+
+\subsubsection*{Corporate and Regulatory Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Audacy corporate press releases --- Bankruptcy filing, emergence announcements
+\item FCC public filings --- Station license data, ownership transfer approvals
+\item U.S. Bankruptcy Court, Southern District of Texas --- Case No.~24-90004
+\item Axios, Variety, CNBC --- Audacy bankruptcy financial reporting
+\end{itemize}
+
+\subsubsection*{Market and Industry Data}
+
+\begin{itemize}[leftmargin=2em]
+\item Nielsen Audio --- PPM ratings data for Seattle--Tacoma market
+\item Luminate --- Streaming and sales data for country music
+\item Spotify Newsroom --- 2025 Wrapped trends, streaming statistics
+\item RIAA --- Artist certification data (Luke Combs, Carrie Underwood)
+\end{itemize}
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on KKWF ``100.7 The Wolf'' Seattle---covering its broadcast history, competitive market position, programming architecture, corporate ownership, community engagement model, and industry-wide digital transformation context. The document must be self-contained, fully sourced, and ready for integration into the GSD ecosystem's knowledge base as a reference on terrestrial radio broadcasting in the Pacific Northwest.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+=============================
+
+Wave 0 [Sequential]     Wave 1 [Parallel]        Wave 2 [Seq]    Wave 3 [Seq]
+--------------------     ------------------        -----------     -----------
+                         Track A:                  
+Shared schemas    --->   M1 History      --->                     
+Source index             M3 Programming            Synthesis  ---> Publication
+Template scaffolding     M5 Community    --->      Integration     Verification
+                                                   Future         
+                         Track B:                  Scenarios       
+                         M2 Market       --->                     
+                         M4 Ownership              
+                         M6 Industry     --->                     
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source bibliography index, document templates
+\item \textbf{Historical Layer} --- Station history, ownership transitions, format timeline
+\item \textbf{Market Layer} --- Ratings data, competitive analysis, demographic breakdowns
+\item \textbf{People Layer} --- On-air talent profiles, programming leadership, community programs
+\item \textbf{Business Layer} --- Corporate ownership, bankruptcy timeline, financial data
+\item \textbf{Industry Layer} --- Streaming trends, genre evolution, AI disruption, future scenarios
+\item \textbf{Synthesis Layer} --- Cross-module integration, narrative through-line, conclusions
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Station History Chapter & Complete 1948--2026 timeline with all format changes sourced & M1-HIST \\
+2 & Market Analysis Chapter & 8+ rating periods, 3 station profiles, demographic data & M2-MARKET \\
+3 & Programming Profile & Morning Wolfpack + full day documented with awards/expansion & M3-PROG \\
+4 & Ownership Analysis & Audacy timeline with financial figures from public filings & M4-CORP \\
+5 & Community Chapter & 4+ programs with measurable outcomes & M5-COMM \\
+6 & Industry Context Chapter & Streaming data, AI entries, genre trends with 5+ examples & M6-INDUST \\
+7 & Synthesis \& Conclusions & Cross-module integration, future scenarios, through-line & SYNTH \\
+8 & Source Bibliography & All sources categorized, validated, no entertainment media & BIBLIO \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+SCHEMA & None & Haiku & 2,000 \\
+SRC-INDEX & None & Haiku & 3,000 \\
+M1-HIST & SCHEMA & Sonnet & 8,000 \\
+M2-MARKET & SCHEMA, SRC-INDEX & Sonnet & 10,000 \\
+M3-PROG & SCHEMA & Sonnet & 7,000 \\
+M4-CORP & SCHEMA, SRC-INDEX & Sonnet & 8,000 \\
+M5-COMM & SCHEMA & Sonnet & 5,000 \\
+M6-INDUST & SCHEMA, SRC-INDEX & Sonnet & 9,000 \\
+SYNTH & M1--M6 & Opus & 12,000 \\
+BIBLIO & SRC-INDEX, M1--M6 & Sonnet & 4,000 \\
+PUB & All above & Sonnet & 6,000 \\
+VERIFY & PUB & Opus & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Synthesis, cross-module integration, future scenario generation, judgment on competitive dynamics and industry trajectories \\
+Sonnet & $\sim$60\% & Module surveys, data compilation, document assembly, ratings table generation, biography profiles \\
+Haiku & $\sim$10\% & Shared schemas, template scaffolding, source index structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Primary Model} \\
+\midrule
+0 & Foundation & Sequential & 2 & Haiku \\
+1 & Research Surveys & Parallel (2 tracks) & 6--8 & Sonnet \\
+2 & Synthesis & Sequential & 3--4 & Opus \\
+3 & Publication + Verify & Sequential & 2--3 & Sonnet + Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+Define schemas & Haiku & JSON schemas for ratings data, station profiles, personnel records, timeline events & PLAN review \\
+Build source index & Haiku & Categorized bibliography with quality ratings & VERIFY spot-check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Station \& People (CRAFT-BROADCAST):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+M1-HIST & Sonnet & Complete format/ownership timeline & VERIFY \\
+M3-PROG & Sonnet & Talent profiles, show schedules, awards & VERIFY \\
+M5-COMM & Sonnet & Philanthropy programs with outcomes & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Market \& Industry (CRAFT-MARKET):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+M2-MARKET & Sonnet & Ratings tables, competitive analysis, 3-station profiles & VERIFY \\
+M4-CORP & Sonnet & Audacy timeline with financial data & VERIFY \\
+M6-INDUST & Sonnet & Streaming data, genre trends, AI entries, scenarios & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+Cross-module integration & Opus & Connections between history/market/industry threads & INTEG \\
+Future scenarios & Opus & 3 projected paths for KKWF through 2030 & FLIGHT \\
+Through-line narrative & Opus & Closing synthesis connecting all modules & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+Document assembly & Sonnet & Complete formatted document & PUB review \\
+Source verification & Opus & Every claim traced to source & BLOCK on failure \\
+Final QA & Sonnet & Formatting, consistency, completeness & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Shared source index loaded once in Wave 0, cached across all Wave 1 tasks
+\item Station profile schemas reused across M1, M2, M3 without regeneration
+\item Ratings data table compiled once in M2, referenced by M4 and SYNTH
+\item 5-minute cache TTL window exploited for sequential tasks within each track
+\item Cross-track data exchange at wave boundaries only (not mid-wave)
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0: Foundation & 4,000 & 5,000 & 9,000 \\
+Wave 1: Research & 30,000 & 47,000 & 77,000 \\
+Wave 2: Synthesis & 25,000 & 17,000 & 42,000 \\
+Wave 3: Pub + Verify & 20,000 & 11,000 & 31,000 \\
+\midrule
+\textbf{Total} & \textbf{79,000} & \textbf{80,000} & \textbf{159,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+  SCHEMA ----+----> M1-HIST ---+
+             |                  |
+             +----> M3-PROG ---+----> SYNTH ----> PUB ----> VERIFY
+             |                  |
+             +----> M5-COMM ---+
+             |
+  SRC-INDEX -+----> M2-MARKET -+
+             |                  |
+             +----> M4-CORP ---+----> SYNTH
+             |                  |
+             +----> M6-INDUST -+
+                                      |
+                               BIBLIO -+
+
+  Legend: ----> = depends on
+  Parallel: {M1,M3,M5} || {M2,M4,M6}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target \%} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK & 15\% \\
+Core Functionality & 14 & Required & BLOCK & 45\% \\
+Integration & 8 & Required & BLOCK & 25\% \\
+Edge Cases & 5 & Best-effort & LOG & 15\% \\
+\midrule
+\textbf{Total} & \textbf{32} & & & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to trade publications, corporate filings, or Nielsen data. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every ratings share, dollar figure, percentage, and date attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents broadcasting industry data without advocating for FCC policy positions or political commentary on Audacy ownership \\
+SC-PER & Personnel boundaries & On-air talent coverage limited to professional biography and publicly available information \\
+SC-MIL & Military sensitivity & Veterans' PTSD and service dog programs represented respectfully without sensationalized trauma narratives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Complete 1948--2026 format timeline & CF-01, CF-02 & Pending \\
+2. 8+ Nielsen rating periods documented & CF-03, CF-04 & Pending \\
+3. Three country stations profiled & CF-05 & Pending \\
+4. Audacy bankruptcy timeline with figures & CF-06, CF-07 & Pending \\
+5. Morning Wolfpack fully profiled & CF-08, CF-09 & Pending \\
+6. 4+ community programs with outcomes & CF-10 & Pending \\
+7. Streaming growth with 3+ data points & CF-11 & Pending \\
+8. AI chart entries documented & CF-12 & Pending \\
+9. Drew Bland dual-station role documented & CF-13 & Pending \\
+10. 5+ genre-blending examples & CF-14 & Pending \\
+11. HD Radio subchannel history & IN-01 & Pending \\
+12. Through-line narrative & IN-02, IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering from trade publications and filings \\
+EXEC-A & Executor (Track A) & M1, M3, M5 document production \\
+EXEC-B & Executor (Track B) & M2, M4, M6 document production \\
+CRAFT-BROADCAST & Domain Specialist & Station history, programming, on-air talent analysis \\
+CRAFT-MARKET & Domain Specialist & Ratings analysis, competitive dynamics, industry trends \\
+VERIFY & Verification & Source validation; numerical accuracy checking \\
+INTEG & Integration Agent & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 6 + Synthesis \\
+Parallel Tracks & 2 (Station/People + Market/Industry) \\
+Estimated Context Windows & 18--24 \\
+Estimated Sessions & 4--6 \\
+Total Token Budget & $\sim$159,000 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Test Count & 32 (5 safety-critical, 14 core, 8 integration, 5 edge) \\
+Safety-Critical Gate & All SC tests mandatory-pass / BLOCK \\
+Primary Sensitivity & Military/veteran representation; corporate financial accuracy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``I've always just tried to make it about the people that were listening and not about myself. It was very important to Drew and I that the show be very outward-facing---focus on the listener---make the listener the star.''}
+
+\vspace{0.5em}
+\hfill --- Matt McAllister, Morning Wolfpack host, on KKWF's 20th anniversary (2025)
+
+\vspace{1em}
+A radio station is a continuous signal. What endures is not the format or the corporate parent or the call letters---it is the relationship between the signal and the community it serves. That relationship, built in the spaces between the songs, is the thing that cannot be disrupted by an algorithm, acquired in a merger, or eliminated in a bankruptcy filing. It is the wolf that keeps howling from Tiger Mountain.
+\end{quotebox}
+
+\end{document}
