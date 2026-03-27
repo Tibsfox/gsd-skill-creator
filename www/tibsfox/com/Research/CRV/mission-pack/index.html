@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crows and Ravens of the Pacific Northwest — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --light-secondary: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F0;
+    --text: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #2E7D32 50%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  header .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  header .subtitle {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.9;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+  .file-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+    border-left: 4px solid var(--primary);
+  }
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .file-card .format {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .file-card .name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .file-card .desc {
+    font-size: 0.85rem;
+    color: var(--subtle);
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+  .contents { list-style: none; padding: 0; }
+  .contents li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+  }
+  .contents .stage {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+  }
+  .s1 { background: var(--light-primary); color: var(--primary); }
+  .s2 { background: var(--light-secondary); color: var(--secondary); }
+  .s3 { background: var(--light-primary); color: var(--tertiary); }
+  .instructions {
+    background: var(--light-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .instructions ol {
+    margin-left: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .instructions li { margin-bottom: 0.5rem; }
+  .instructions code {
+    background: rgba(0,0,0,0.06);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 0.85em;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--light-primary);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--tertiary);
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--subtle);
+  }
+  @media (max-width: 600px) {
+    .files { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>Crows and Ravens of the Pacific Northwest</h1>
+  <div class="subtitle">Ecology, Intelligence, and Cultural Significance of Corvus in Cascadia</div>
+</header>
+
+<div class="container">
+
+  <h2>Mission Files</h2>
+  <div class="files">
+    <a href="corvid-pnw-mission.pdf" download class="file-card">
+      <div class="format">PDF</div>
+      <div class="name">corvid-pnw-mission.pdf</div>
+      <div class="desc">Complete mission package — Vision, Research Reference, and Mission Specification (27 pages)</div>
+    </a>
+    <a href="corvid-pnw-mission.tex" download class="file-card">
+      <div class="format">LaTeX Source</div>
+      <div class="name">corvid-pnw-mission.tex</div>
+      <div class="desc">XeLaTeX source — editable, recompilable with DejaVu fonts</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <ul class="contents">
+    <li><span class="stage s1">Stage 1</span> Vision Guide — narrative vision, problem statement, 6 research modules, chipset configuration, 12 success criteria, through-line</li>
+    <li><span class="stage s2">Stage 2</span> Research Reference — taxonomy &amp; 2020 AOS merger, cognition synthesis (tool use, memory, facial recognition, theory of mind), PNW ecology, communal roosting, nation-specific Raven traditions (Tlingit, Haida, Tsimshian, Kwakwaka'wakw, Heiltsuk, Coast Salish+), West Nile virus impact, full bibliography</li>
+    <li><span class="stage s3">Stage 3</span> Mission Package — Squadron activation (12 roles), 4-wave execution plan with parallel tracks, 79K token budget, 41-test verification plan (7 safety-critical), dependency graph, crew manifest</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <div class="instructions">
+    <ol>
+      <li>Feed the PDF to <strong>gsd-skill-creator</strong> via Claude Code for execution</li>
+      <li>The orchestrator reads Stage 3 and decomposes into Wave 0–3 tasks</li>
+      <li>CAPCOM gates at post-Wave 1 (cultural content review) and post-Wave 3 (final approval)</li>
+      <li>Output: a comprehensive PNW corvid knowledge pack for the GSD College layer</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="instructions">
+    <ol>
+      <li>Edit <code>corvid-pnw-mission.tex</code> as needed</li>
+      <li>Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu)</li>
+      <li>Compile: <code>xelatex -interaction=nonstopmode corvid-pnw-mission.tex</code> (three passes)</li>
+    </ol>
+  </div>
+
+  <blockquote>
+    The spaces between the crow and the raven, between the species that was and the species it always was, between the trickster and the creator — these are the spaces where intelligence, ecology, and culture weave together into something larger than any single thread.
+  </blockquote>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Vision → Research → Mission · March 2026
+</footer>
+
+</body>
+</html>
