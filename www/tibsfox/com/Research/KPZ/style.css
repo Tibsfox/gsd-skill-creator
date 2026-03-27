@@ -1,0 +1,47 @@
+/* KPZ — Seattle Radio Heritage — KPLZ & 104.9
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  --primary: #4A148C;
+  --secondary: #F57F17;
+  --tertiary: #6A1B9A;
+  --accent: #E65100;
+  --cream: #F3E5F5;
+  --mist: #E1BEE7;
+  --text: #212121;
+  --text-light: #5a5a5a;
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--secondary);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+  border-bottom: 4px solid var(--secondary);
+}
+
+h2 { color: var(--primary); }
+h3 { color: var(--tertiary); }
+th { background: var(--primary); }
+tr:nth-child(even) { background: rgba(74, 20, 140, 0.04); }
+tr:hover { background: rgba(74, 20, 140, 0.08); }
+blockquote { border-left-color: var(--secondary); background: rgba(245, 127, 23, 0.06); }
+code { background: var(--mist); }
+pre { background: #1a0a2e; color: #ce93d8; }
+.stat-value { color: var(--primary); }
+
+.tag-origins { background: var(--primary); color: white; }
+.tag-wars { background: var(--accent); color: white; }
+.tag-star { background: var(--secondary); color: #212121; }
+.tag-frequency { background: var(--tertiary); color: white; }
+.tag-industry { background: #37474F; color: white; }
+.tag-pass { background: #2E7D32; color: white; }
+
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
