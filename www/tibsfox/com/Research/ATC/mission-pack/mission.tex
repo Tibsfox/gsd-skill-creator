@@ -1,0 +1,1052 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Celestial Fire-Earth (Mars-Venus Duality) ──
+\definecolor{primary}{HTML}{8B1A1A}       % Mars crimson — section headers
+\definecolor{secondary}{HTML}{1565C0}     % Celestial blue — subsection headers
+\definecolor{tertiary}{HTML}{5D4037}      % Earth brown — subsubsection headers
+\definecolor{accent}{HTML}{C62828}        % Fire accent — highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{FFEBEE}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}       % Alternating table rows
+\definecolor{bordergray}{HTML}{BDBDBD}    % Rules, borders
+\definecolor{subtlegray}{HTML}{757575}    % Footer text, metadata
+\definecolor{darktext}{HTML}{212121}      % Body text
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ──
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Aries-Taurus Cusp}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Cusp of Power -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+\color{darktext}
+
+% ══════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Cusp of Power\\[0.3em]Mars Meets Venus at the Threshold}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Aries-Taurus Cusp: Astronomical, Mythological \& Archetypal Dimensions}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 18--22 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ══════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Cusp of Power --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{None (foundational study)}
+\metafield{Context:}{GSD Ecosystem --- Knowledge Pack Pipeline}
+
+\subsection{Vision}
+
+Where fire meets earth, something extraordinary happens. The Aries-Taurus cusp---traditionally dated between April 16 and April 23---is the threshold where the zodiac's first burst of cardinal fire consolidates into fixed earth. In astrological tradition it is called the ``Cusp of Power,'' and the name is no accident: this is the point where raw initiation becomes embodied force, where the warrior's charge crystallizes into the builder's foundation.
+
+But the cusp is more than a personality profile. It is a convergence point for some of the oldest threads in human intellectual history: Babylonian star catalogues compiled three millennia ago, the precession of the equinoxes that slowly rewrites the sky, the mythological marriage of Mars and Venus that echoes across every Mediterranean culture, and a modern debate among astrologers about whether cusps are real at all---or whether they reveal something deeper about how we construct meaning from celestial patterns.
+
+This study treats the Aries-Taurus cusp not as a horoscope column but as a \textit{case study in cultural astronomy}. The cusp sits at the intersection of observational science (precession, ecliptic coordinates, the MUL.APIN catalogues), mythological narrative (the cosmic lovers, the Bull of Heaven, the vernal equinox rites), and modern personality typology (Goldschneider's personology, the cusp controversy in contemporary astrology). Each of these layers illuminates the others. The astronomical reality of precession is what makes the ``Aries'' point a moving target; the mythological traditions encode millennia of human experience with the spring threshold; and the modern personality debate reveals our ongoing need to find meaning in the spaces between categories.
+
+The spaces between. That phrase carries weight here. A cusp \textit{is} a space between---the Latin \textit{cuspis} means ``spear'' or ``point,'' a boundary that is simultaneously a weapon and a threshold. This study lives in that space: between science and story, between fire and earth, between the ancient sky and the modern self.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Fragmented knowledge domains.} The astronomical, mythological, and psychological dimensions of zodiacal cusps are studied in isolation. No integrated reference traces the Aries-Taurus boundary from Babylonian star catalogues through Hellenistic astrology to modern personality typology.
+
+\item \textbf{The cusp controversy lacks grounding.} The debate over whether cusps ``exist'' in astrology proceeds without reference to the actual astronomy (degree-based solar position, the half-degree solar disc, progressed sun mechanics) or to the historical development of the cusp concept.
+
+\item \textbf{Mars-Venus duality is mythologically rich but poorly synthesized.} The planetary rulers of Aries (Mars) and Taurus (Venus) have one of the most storied relationships in classical mythology---the cosmic lovers---yet this mythological depth rarely informs modern cusp interpretation.
+
+\item \textbf{Precession rewrites the boundary.} The Aries-Taurus boundary in the tropical zodiac no longer corresponds to the same stars it referenced when the zodiac was formalized. This fact, and its implications for cusp interpretation, is rarely examined in cusp literature.
+
+\item \textbf{No GSD knowledge pack exists for astrological-astronomical synthesis.} The GSD ecosystem lacks a reference document that treats astrology as a cultural system worthy of rigorous, multi-dimensional study rather than either uncritical acceptance or dismissal.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} The Aries-Taurus cusp is a three-thousand-year-old threshold where observational astronomy, mythological narrative, and personality typology converge---and studying it reveals how humans construct meaning from celestial boundaries.
+\end{quotebox}
+
+The cusp is treated as a \textit{convergence artifact}: a point where multiple knowledge systems intersect and illuminate each other. The study does not argue for or against astrology's validity; it maps the territory where astronomy, mythology, and psychology overlap at a single zodiacal boundary.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                    CELESTIAL MECHANICS
+                    (Precession, Ecliptic,
+                     Solar Disc Geometry)
+                           |
+                           |
+    BABYLONIAN ORIGINS ----+---- HELLENISTIC SYNTHESIS
+    (MUL.APIN, Bull of    |     (Ptolemy, Tropical Zodiac,
+     Heaven, Hired Man)    |      Planetary Rulerships)
+                           |
+                    THE CUSP OF POWER
+                    (Aries-Taurus ~April 19-20)
+                           |
+              +------------+------------+
+              |                         |
+     MYTHOLOGICAL LAYER          MODERN TYPOLOGY
+     (Mars/Venus Marriage,       (Goldschneider Personology,
+      Spring Rites, Dumuzi,      Cusp Controversy,
+      Cardinal → Fixed)          Natal Chart Mechanics)
+              |                         |
+              +------------+------------+
+                           |
+                    ARCHETYPAL SYNTHESIS
+                    (Fire → Earth, Initiation →
+                     Embodiment, Action → Form)
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  ┌──────────────────────────────────────────────────────┐
+  │              MODULE ARCHITECTURE                      │
+  ├──────────────────────────────────────────────────────┤
+  │                                                      │
+  │  [M1] Historical &        [M2] Astronomical          │
+  │       Astronomical              Mechanics             │
+  │       Foundations          (Precession, Tropical      │
+  │  (Babylon → Greece →       vs Sidereal, Degree       │
+  │   Rome → Modern)           Analysis, Solar Disc)     │
+  │         │                         │                   │
+  │         └────────┬────────────────┘                   │
+  │                  │                                    │
+  │  [M3] Mythological &      [M4] Personality &          │
+  │       Cultural                  Archetypal            │
+  │       Dimensions               Analysis               │
+  │  (Mars/Venus, Bull of    (Cusp of Power Traits,      │
+  │   Heaven, Spring Rites,   Fire/Earth Blend,           │
+  │   Alchemical Marriage)    Shadow Dynamics)            │
+  │         │                         │                   │
+  │         └────────┬────────────────┘                   │
+  │                  │                                    │
+  │  [M5] The Cusp Controversy & Modern Synthesis         │
+  │  (Debate Mapping, Goldschneider, Natal Chart          │
+  │   Mechanics, Progressed Sun, Cultural Meaning)        │
+  │                                                      │
+  └──────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Historical \& Astronomical Foundations}
+
+Traces the Aries-Taurus boundary from its earliest attestation in the Babylonian MUL.APIN star catalogues (compiled c.\ 1000 BCE, observations possibly dating to 1370$\pm$100 BCE) through the Hellenistic formalization of the twelve-sign zodiac (5th century BCE), Ptolemy's decisive adoption of the tropical system (2nd century CE), and the transmission into Hindu and modern Western traditions. Key focus: the ``Hired Man'' (LÚ.HUÑ.GÁ) becoming Aries the Ram, the ``Bull of Heaven'' (GU4.AN.NA) as Taurus, and the shift from Taurus to Aries as the vernal-equinox marker.
+
+\subsubsection{M2: Astronomical Mechanics}
+
+The hard science underlying the cusp: Earth's axial precession (one degree every 72 years, full cycle c.\ 25,772 years), the distinction between tropical and sidereal zodiacs, the geometry of the solar disc (approximately half a degree, making it physically possible to ``straddle'' a sign boundary), and the mechanics of degree-based solar position that determine whether a birth chart places the Sun at 29° Aries or 0° Taurus. The IAU constellation boundaries versus the equal-30° astrological signs.
+
+\subsubsection{M3: Mythological \& Cultural Dimensions}
+
+The Mars-Venus mythological complex: Ares the brutal war god softened by Aphrodite in Greek tradition; Mars the guardian of Rome elevated beyond destruction; Venus ruling both Taurus (earthy, sensual) and Libra (aesthetic, relational). The Babylonian Bull of Heaven (Gugalanna) in the Epic of Gilgamesh. Spring equinox rites: the ``violent blood rituals'' alongside pastoral celebration. The alchemical marriage of fire and earth. The Moonletter tradition of cusps as ``locks on a canal''---places of transformation.
+
+\subsubsection{M4: Personality \& Archetypal Analysis}
+
+The ``Cusp of Power'' profile as synthesized across major sources: the blend of cardinal fire (initiation, impulse, courage) with fixed earth (endurance, accumulation, sensory grounding). Strengths: natural leadership, strategic timing (\textit{kairos}), determination, humor, independence. Shadow dynamics: controlling tendencies, bluntness, ego absorption, emotional blindness. The Mars-Venus internal dialogue: drive versus pleasure, conquest versus cultivation, action versus rest. Compatibility patterns with other signs and cusps.
+
+\subsubsection{M5: The Cusp Controversy \& Modern Synthesis}
+
+Mapping the active debate: astrologers who deny cusps exist (the mathematical argument---Sun occupies exactly one sign), those who acknowledge a ``leaking'' of energy within 12 hours of transition, and Goldschneider's personology system that treats cusps as distinct personality periods. The role of Mercury, Venus, and other personal planets in explaining cusp-like experiences. The progressed Sun mechanism. The broader question: what does the persistence of cusp belief reveal about human meaning-making at categorical boundaries?
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:           # Memory & data management
+    role: Source Index, Bibliography, Cross-Reference DB
+    model: haiku
+    note: Shared schema across all modules
+
+  denise:          # Visual & presentation
+    role: Diagrams, Star Charts, Timeline Visualizations
+    model: sonnet
+    note: Zodiac wheel, precession diagrams, mythology maps
+
+  paula:           # Audio & narrative
+    role: Mythological Narratives, Through-Line Prose
+    model: opus
+    note: Synthesis voice, cultural sensitivity
+
+  m68000:          # Central processing
+    role: Cross-Module Integration, Controversy Mapping
+    model: opus
+    note: Judgment-heavy analysis of competing claims
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+\item Western tropical zodiac tradition (Babylonian through modern Western astrology)
+\item The Aries-Taurus cusp specifically (approximately April 16--23)
+\item Astronomical mechanics of precession, solar position, and sign boundaries
+\item Mars and Venus as planetary rulers: mythology, symbolism, and astrological function
+\item The cusp debate among contemporary Western astrologers
+\item Goldschneider's personology system as a case study in cusp typology
+\item Personality trait profiles from major astrological sources
+\item The ``Cusp of Power'' archetype and its shadow dynamics
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+\item Vedic/Jyotish astrology (sidereal system warrants its own study)
+\item Chinese, Mesoamerican, or other non-Western astrological traditions
+\item Empirical validation studies of astrological personality claims
+\item Medical astrology or health predictions
+\item Individual natal chart interpretation or personal horoscope generation
+\item Other zodiacal cusps (each deserves dedicated treatment)
+\item Policy advocacy regarding astrology's scientific status
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Historical timeline traces the Aries-Taurus boundary from MUL.APIN (c.\ 1000 BCE) through Ptolemy (2nd century CE) to modern Western astrology with at least 5 dated milestones.
+\item Astronomical mechanics section explains precession, tropical vs.\ sidereal distinction, and solar disc geometry with quantitative data from NASA or IAU sources.
+\item Mars and Venus mythology documented across at least 3 cultural traditions (Babylonian, Greek, Roman) with named source texts.
+\item Personality profile synthesizes at least 4 major contemporary astrological sources with explicit attribution.
+\item The cusp controversy is mapped with at least 3 distinct positions represented fairly (pro-cusp, anti-cusp, qualified/partial).
+\item Goldschneider's personology system described with publication data, methodology overview, and relationship to traditional astrology.
+\item All astronomical claims cite specific agencies (NASA, IAU) or peer-reviewed sources.
+\item All mythological claims cite named texts (Epic of Gilgamesh, Ptolemy's Almagest, etc.)\ or named scholars.
+\item Shadow dynamics (negative traits, growth edges) documented with equal depth as positive traits.
+\item Cross-module connections made explicit: at least 3 instances where astronomical fact illuminates mythological or psychological interpretation.
+\item Document is self-contained: a reader with no prior astrological knowledge can follow the full argument.
+\item Through-line connects to GSD ecosystem philosophy (spaces between, Amiga Principle, meaning at boundaries).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+The Space Between (textbook) & Philosophical foundation: meaning lives in connection, not nodes & Upstream \\
+GSD BBS Educational Pack & Delivery vehicle for knowledge packs like this one & Downstream \\
+GSD Learn Kung Fu Pack & Pedagogical model: Teacher/Student/Support roles & Parallel \\
+Foxfire Heritage Vision & Cultural sensitivity framework for mythological content & Parallel \\
+Unit Circle Synthesis & Mathematical framing of cyclical systems & Upstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Aries-Taurus cusp is, at its most fundamental level, a story about what happens at boundaries. Not the clean, mathematical boundaries of equal-30°-sign divisions, but the lived, felt, messy boundaries where one kind of energy becomes another. Fire becoming earth. Impulse becoming patience. The warrior laying down the sword to pick up the plow.
+
+This is the same pattern the GSD ecosystem recognizes everywhere: the Amiga Principle says that the most powerful architectures are not the ones with the most raw force, but the ones that manage \textit{transitions} elegantly---the handoffs between specialized execution paths. A cusp is a handoff. Mars hands the baton to Venus. Cardinal hands to Fixed. Spring's explosive beginning hands to spring's sustained flourishing.
+
+And the spaces between---the three-thousand-year conversation between Babylonian astronomers and modern personality typologists, mediated by Greek mythology and Ptolemaic mathematics---that conversation \textit{is} the meaning. No single layer contains it. The cusp exists in the relationship between the layers, just as the Amiga's power existed not in any single chip but in how Agnus, Denise, and Paula talked to each other. Meaning lives in the spaces between.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Cusp of Power --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from web research, scholarly databases, and professional astrological sources. Each module section provides the evidence base for the corresponding mission component. Key source organizations consulted include: Wikipedia (astronomy, history of science articles with cited scholarly sources), the International Astronomical Union (IAU), NASA educational resources, professional astrological organizations and practitioners (Tarot.com, Astrology.com, LoveToKnow), Gary Goldschneider's personology publications (Penguin Random House), and specialized sources on Babylonian astronomy (MUL.APIN scholarship, Mediterranean Archaeology and Archaeometry journal).
+
+\subsection{M1: Historical \& Astronomical Foundations Reference}
+
+\subsubsection{The Babylonian Star Catalogues}
+
+The earliest formal star catalogues emerged in Babylon as the ``Three Stars Each'' texts (c.\ 12th century BCE), dividing the heavens into the paths of Enlil (north), Anu (equator), and Enki (south). These were refined into the MUL.APIN, compiled in canonical form around 1000 BCE, though the underlying observations may date to 1370$\pm$100 BCE based on computational analysis by astrophysicist Bradley Schaefer and astronomer Teije de Jong.
+
+The MUL.APIN listed 66 stars and constellations and identified 17--18 constellations along the ``Path of the Moon'' (the ecliptic)---the precursors to the zodiac. Crucially, the zodiac originally began with the Pleiades (MUL.MUL) in Taurus, not with Aries. The vernal equinox was closest to the Pleiades in the 23rd century BCE. The constellation we now call Aries was known as LÚ.HUÑ.GÁ, the ``Hired Man''---an agrarian laborer, not a ram. The association with Dumuzi's ram and the eventual transformation into ``Aries the Ram'' occurred in later Babylonian tradition, possibly through a bilingual pun (Akkadian ``LU'' can mean both ``hired worker'' and ``sheep'').
+
+Taurus---the ``Bull of Heaven'' (GU4.AN.NA)---was one of the most prominent and oldest zodiacal constellations. In Sumerian tradition, Gugalanna (the Bull of Heaven) features in the Epic of Gilgamesh as a creature sent by the goddess Ishtar to punish Gilgamesh for spurning her advances. The constellation's astrological associations in Babylonian tradition included bounty, courage, creation, fertility, power, prosperity, sacrifice, and strength---a far richer palette than modern sun-sign astrology typically assigns.
+
+\subsubsection{The Formalization of the Twelve-Sign Zodiac}
+
+Around the 5th century BCE, Babylonian astronomers divided the ecliptic into twelve equal 30° segments, creating the standardized zodiac. This was a mathematical abstraction: the actual constellations vary dramatically in size, but the equal-division system provided an ideal coordinate framework for predicting planetary positions. The zodiac was transmitted into Greek astronomy by the 2nd century BCE via Eudoxus of Cnidus and others.
+
+Claudius Ptolemy's \textit{Almagest} (2nd century CE) decisively established the tropical zodiac in Western tradition, anchoring 0° Aries to the March equinox rather than to the physical stars. This choice meant that the zodiac would remain synchronized with the seasons even as precession slowly moved the equinox point through the background constellations.
+
+\subsubsection{Key Historical Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Milestone} \\
+\midrule
+c.\ 2300 BCE & Vernal equinox closest to Pleiades in Taurus; Taurus marks the start of the year \\
+c.\ 1800 BCE & Late Old Babylonian celestial omen texts appear; beginning of organized astrology \\
+c.\ 1000 BCE & MUL.APIN compiled in canonical form; 17--18 ecliptic constellations catalogued \\
+c.\ 500 BCE & Twelve-sign equal-division zodiac formalized in Babylon \\
+c.\ 130 BCE & Hipparchus defines ``First Point of Aries'' at western edge of Aries constellation \\
+2nd cent.\ CE & Ptolemy's \textit{Almagest} establishes tropical zodiac as Western standard \\
+1994 CE & Goldschneider publishes \textit{The Secret Language of Birthdays}, naming 48 cusp ``periods'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M2: Astronomical Mechanics Reference}
+
+\subsubsection{Precession of the Equinoxes}
+
+Earth's rotational axis traces a circle against the background stars approximately every 25,772 years (the ``Great Year'' or Platonic Year). This axial precession causes the vernal equinox point to drift westward at a rate of approximately 1° every 72 years. The result: the tropical zodiac (anchored to the equinox) and the sidereal zodiac (anchored to the stars) drift apart by approximately 1° per 72 years.
+
+When the zodiac was formalized around the 1st century BCE, the two systems were roughly aligned. Today, they differ by approximately 23--24°---nearly an entire sign. The tropical sign of Aries currently corresponds approximately to the constellation Pisces. The IAU boundary of the constellation Aries begins at approximately April 19 in the modern calendar, nearly coinciding with the tropical Aries-Taurus cusp---a coincidence that underscores the complexity of the boundary.
+
+\subsubsection{The Solar Disc and Cusp Geometry}
+
+The Sun's disc has an apparent diameter of approximately 0.5° (half a degree). This means that when the Sun's center is at 29°50' of Aries, a significant portion of the solar disc is physically in Taurus---even though the conventional position (center of disc) places it in Aries. This astronomical fact provides the original, literal basis for the cusp concept: the Sun can physically ``straddle'' a sign boundary.
+
+However, modern cusp interpretation extends far beyond this half-degree window. Popular cusp dates span 5--7 days (approximately April 16--23), corresponding to a solar arc of 5--7°. This extended window has no strict astronomical basis and varies across sources.
+
+\subsubsection{Tropical vs.\ Sidereal: Two Zodiac Systems}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{Tropical} & \tableheader{Sidereal} \\
+\midrule
+Reference point & March equinox = 0° Aries & Fixed stars (varies by \textit{ayanamsa}) \\
+Used in & Western astrology & Vedic/Hindu astrology \\
+Seasonal alignment & Always (by definition) & Drifts with precession \\
+Stellar alignment & Drifts with precession & Always (by definition) \\
+Current offset & 0° (equinox) & $\sim$23--24° behind tropical \\
+Aries dates & $\sim$March 21 -- April 19 & $\sim$April 14 -- May 14 (Lahiri) \\
+Aries-Taurus cusp & $\sim$April 19--20 & $\sim$May 14--15 (Lahiri) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The ``First Point of Aries'' (0° tropical Aries) currently lies in the constellation Pisces and will not enter the constellation Aquarius for several hundred years---the much-discussed ``Age of Aquarius'' transition.
+
+\subsection{M3: Mythological \& Cultural Dimensions Reference}
+
+\subsubsection{Mars (Ares): The God of War}
+
+In Greek mythology, Ares was portrayed as brutish, impulsive, and destructive---the untamed face of conflict, accompanied by Deimos (Fear) and Phobos (Fright). The Romans significantly elevated Mars beyond mere destruction: he became a god of military strategy, courage, and the protection of Rome---a guardian of civilization linked to both conquest and renewal. Mars was deeply honored as a father figure of the Roman state.
+
+The astrological glyph of Mars---a circle with an upward-pointing arrow---represents the principle of vital energy, will, action, and desire. The arrow signifies outward motion, impulse, projection: the force that extends beyond itself to assert its presence. Mars rules Aries (cardinal fire: initiation, courage, direct action) and traditionally co-rules Scorpio (fixed water: psychological depth, intensity).
+
+\subsubsection{Venus (Aphrodite): The Goddess of Love}
+
+Venus embodies beauty, sensual pleasure, attraction, and the principle of drawing desired things toward oneself---in contrast to Mars's ``hot pursuit.'' Her dual rulership of Taurus and Libra reveals two faces: through Taurus, the earthy, physical expression of beauty through form, scent, touch, and sensual pleasure; through Libra, the civilized, aesthetic expression through harmony, balance, and fair relationship.
+
+In the Babylonian tradition, Ishtar (the Sumerian Inanna) embodied both love and war---a duality that the later Greek separation of Aphrodite and Ares divided into distinct deities. The original unity of love and war in a single goddess is significant for understanding the cusp: the Aries-Taurus boundary reunites what the Greeks separated.
+
+\subsubsection{The Cosmic Lovers: Mars and Venus}
+
+The mythological affair between Mars and Venus is one of the most enduring narratives in Western tradition. Their union produced Cupid (Eros)---the god of erotic love---as well as Harmonia (Harmony) and, in some traditions, Phobos and Deimos. The relationship encodes a fundamental archetypal truth: that passionate drive (Mars) and receptive beauty (Venus) need each other. Neither is complete alone.
+
+At the Aries-Taurus cusp, both planetary energies are active. Mars's rulership of Aries provides the fire, drive, and initiation. Venus's rulership of Taurus provides the sensuality, patience, and embodied pleasure. The cusp individual, in astrological interpretation, carries both energies simultaneously---the warrior-lover, the builder-pioneer.
+
+\subsubsection{Spring Rites and the Bull of Heaven}
+
+The Aries-Taurus cusp falls during mid-spring in the Northern Hemisphere. As Gary Goldschneider noted in \textit{The Secret Language of Birthdays}, this period symbolically corresponds to approximately age seven in the human life cycle---the transition from early childhood's pure impulse into the beginning of social awareness and self-possession.
+
+In Babylonian tradition, the Bull of Heaven (Gugalanna) was sent by Ishtar to punish Gilgamesh---a mythological narrative connecting Taurus to divine retribution, cosmic power, and the consequences of spurning love (Venus/Ishtar). Spring itself was understood as a time of both pastoral beauty and violent natural force: the melting snows, the torrential rains, the explosive emergence of new life. Ancient spring festivals often combined celebration with blood ritual---the dual nature of the season encoded in the dual nature of the cusp.
+
+\subsection{M4: Personality \& Archetypal Analysis Reference}
+
+\subsubsection{The ``Cusp of Power'' Profile}
+
+The term ``Cusp of Power'' was popularized by Gary Goldschneider and Thomas Rezek in \textit{The Secret Language of Birthdays} (1994, Penguin Studio). Goldschneider's ``personology'' system is based on astrology, numerology, the Tarot, and empirical observation of over 14,000 people. It divides the zodiacal year into 48 ``periods'' (including 12 cusps) rather than the traditional 12 signs, treating each period as a distinct personality type.
+
+The Cusp of Power (approximately April 19--24 in Goldschneider's system) is characterized by: a preoccupation with personal power; an understanding that the greatest power may be the power of love; a superb sense of timing (\textit{kairos}---knowing when to act and when to wait); a quiet, self-assured first impression; and a tendency toward both strategic brilliance and emotional blindness.
+
+\subsubsection{Trait Synthesis Across Sources}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Trait Domain} & \tableheader{Synthesis} \\
+\midrule
+Leadership & Natural-born leaders who combine Aries's initiative with Taurus's follow-through. Authoritative without being (always) authoritarian. \\
+Determination & Extraordinary persistence: Aries provides the spark, Taurus the fuel. Will not back down from challenges. \\
+Strategic Timing & An instinctive sense of when to act and when to wait---unusual for Aries alone, which tends toward impulsiveness. \\
+Humor \& Sociability & Sassy, independent sense of humor. Enjoy social situations but do not need them for validation. \\
+Sensuality & Mars-Venus combination produces strong physical and creative desires. Romantic with a fierce heart. \\
+Independence & Deeply value freedom and autonomy. Can confuse loved ones with their self-sufficiency. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Shadow Dynamics}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shadow Trait} & \tableheader{Description} \\
+\midrule
+Controlling & The ``Cusp of Power'' can become the ``Cusp of Domination.'' Strong opinions become steamrolling. \\
+Bluntness & Harsh, sarcastic communication that wounds more sensitive personalities. \\
+Ego Absorption & Success and natural magnetism can lead to self-absorption and selfishness. \\
+Emotional Blindness & Strategic brilliance in practical matters combined with tone-deafness in emotional ones. \\
+Stubbornness & Taurus's fixed quality amplified by Aries's refusal to back down: immovable when challenged. \\
+Mercenary Tendencies & Goldschneider lists ``mercenary'' as a weakness: the pragmatism that can shade into ruthless self-interest. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Elemental and Modal Analysis}
+
+The Aries-Taurus cusp combines cardinal fire (Aries) with fixed earth (Taurus). In the element-modality framework inherited from Hellenistic astrology:
+
+\textbf{Fire to Earth:} The transition from the most dynamic, least material element to the most stable, most material. This is the zodiac's first element change and arguably its most dramatic---pure initiatory energy becoming embodied, material form.
+
+\textbf{Cardinal to Fixed:} Cardinal signs initiate; fixed signs sustain. The cusp individual carries both impulses: the drive to begin \textit{and} the determination to finish. This is the source of the ``power'' in ``Cusp of Power''---initiation backed by endurance.
+
+\textbf{Mars to Venus:} The most archetypal masculine-feminine planetary transition in the zodiac. Drive to receptivity. Action to pleasure. Assertion to attraction. The cusp carries both modes.
+
+\subsection{M5: The Cusp Controversy Reference}
+
+\subsubsection{Position 1: Cusps Do Not Exist}
+
+Multiple professional astrologers maintain that cusps are a ``misnomer'' and ``astrology's most persistent myth.'' Their argument: the Sun occupies exactly one sign at any given moment, determined by precise degree. A calculated birth chart will show the Sun at, say, 29°50' Aries or 0°10' Taurus---never both. As astrologer Maria Desimone states: the Sun sign is ``potent, clear and bright: he knows who he is supposed to be.'' The AstroTwins concur that due to the precise mathematical nature of sign transitions, it is not possible to be ``under two signs'' simultaneously.
+
+\subsubsection{Position 2: Cusps Are Real but Narrow}
+
+Astrologer Heather Roan Robbins (45+ years of practice) acknowledges that energy from one sign can ``leak over'' to the next---but only within approximately 12 hours before or after the Sun enters a different sign. This is a far shorter window than the 5--7 day cusp periods commonly cited. Astrologer Lauren McBride suggests the perceived cusp influence often comes from other planets (Mercury, Venus) transiting nearby signs.
+
+\subsubsection{Position 3: Cusps Reveal Broader Chart Dynamics}
+
+The most nuanced position holds that cusp experiences are real but misattributed. People born near sign transitions who identify with both signs likely have personal planets (Mercury, Venus, Mars, Moon) in the adjacent sign. Mercury, for example, never strays more than one sign from the Sun, so a late-Aries Sun often has Mercury in Taurus. The ``cusp'' experience is actually the experience of a complex natal chart---which everyone has, cusp or not.
+
+\subsubsection{The Progressed Sun Mechanism}
+
+The progressed Sun advances approximately 1° per year of life. A person born at 29° Aries will have their progressed Sun enter Taurus before age 1---meaning they begin integrating Taurus qualities from infancy. This mechanism, noted by astrologer at LoveToKnow, provides an additional explanatory framework for cusp-like experiences that does not require the cusp concept itself.
+
+\subsubsection{Goldschneider's Personology System}
+
+Gary Goldschneider (born May 22, 1939) studied psychiatry at Yale Medical School before turning to astrology and personality theory. His \textit{Secret Language of Birthdays} (1994) has sold over one million copies. The system blends astrology, numerology, Tarot, and empirical observation, treating the zodiacal year as 48 ``periods'' rather than 12 signs. Each period---including the 12 cusps---receives a distinct personality profile based on observation of 14,000+ individuals.
+
+Goldschneider's approach is influenced by Abraham Maslow's developmental psychology and Dane Rudhyar's humanistic astrology. The system maps the zodiac onto an 84-year human lifespan (Uranus cycle), with each sign corresponding to a 7-year developmental stage. The Aries-Taurus cusp corresponds to approximately age 7---the transition from early childhood's pure impulse to the beginning of self-aware socialization.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Handling} & \tableheader{Priority} \\
+\midrule
+Scientific status of astrology & Present evidence and claims without advocacy. Frame as cultural system, not empirical science. & GATE \\
+Cultural appropriation risk & Babylonian, Sumerian, and Hellenistic traditions cited with historical specificity, not generic ``ancient wisdom.'' & ANNOTATE \\
+Personality stereotyping & Shadow traits presented alongside strengths. Individual variation emphasized. No deterministic claims. & ANNOTATE \\
+Religious sensitivity & Pagan, Christian (Easter), and Jewish (Passover) spring rites mentioned with equal respect and specificity. & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Astronomical \& Historical Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Wikipedia: ``Zodiac,'' ``Cusp (astrology),'' ``Sidereal and tropical astrology,'' ``Astrological age,'' ``First point of Aries,'' ``Babylonian star catalogues,'' ``MUL.APIN,'' ``Babylonian astrology,'' ``Planets in astrology,'' ``Domicile (astrology)'' (with cited scholarly sources including Ptolemy, Rochberg, Hunger \& Steele, Britton)
+\item Steele, J.\ M. (2018). ``The Development of the Babylonian Zodiac.'' \textit{Mediterranean Archaeology and Archaeometry}, 18(4), 97--105.
+\item Rochberg, F. (2004). \textit{The Heavenly Writing: Divination, Horoscopy, and Astronomy in Mesopotamian Culture}. Cambridge University Press.
+\item Schaefer, B. and de Jong, T. Computational dating of MUL.APIN observations (cited via Wikipedia MUL.APIN article).
+\item Patrick Watson Astrology: ``A Way to Reconcile the Tropical and Sidereal Zodiacs.''
+\item Seven Stars Astrology: ``The Origin of the Zodiac'' (with extensive Babylonian source citations).
+\item Sumerian Astrology: ``The Babylonian Zodiac'' and ``Path of the Moon Pt 1: Origins of the Zodiac.''
+\item CHANI: ``No, astrologers haven't gotten it wrong---the media has'' (history of tropical zodiac).
+\end{itemize}
+
+\subsubsection{Astrological \& Personality Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item Goldschneider, G.\ \& Elffers, J. (1994/2016). \textit{The Secret Language of Birthdays}. Penguin Studio / Avery. ISBN 9780525426882.
+\item Goldschneider, G.\ \& Rezek, T. \textit{The Secret Language of Relationships}. (Cusp naming system source, cited via Tarot.com.)
+\item Tarot.com: ``The Aries-Taurus Cusp'' and ``Born on the Zodiac Cusp.''
+\item Astrology.com: ``The Powerful Aries-Taurus Cusp.''
+\item LoveToKnow: ``Exploring the Dynamic Aries-Taurus Cusp'' and ``Understanding Zodiac Cusps.''
+\item TODAY.com / Lisa Stardust: ``Are Zodiac Cusps Real?'' (Robbins, McBride, Buckland, Brooks quotes).
+\item mindbodygreen / AstroTwins: ``Zodiac Cusp Theory: What It Is + Is It Real?''
+\item YourTango: ``Aries-Taurus Cusp Dates And Unique Traits.''
+\item The Urania Trust: ``Chapter 4: The Planetary Gods'' (Mars and Venus planetary descriptions).
+\item Moonletter: ``The Cusps between the Signs'' (cusps as ``locks on a canal'').
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality knowledge pack on the Aries-Taurus cusp (``Cusp of Power'') that integrates astronomical mechanics, Babylonian-through-modern historical development, Mars-Venus mythology, personality typology, and the contemporary cusp debate into a single self-contained reference document suitable for the GSD BBS Educational Pack system.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  Wave 0          Wave 1A / 1B           Wave 2         Wave 3
+  (Foundation)    (Parallel Research)    (Synthesis)    (Publication)
+  ┌─────────┐    ┌─────────┐           ┌─────────┐    ┌─────────┐
+  │ Shared   │───>│ M1+M2   │──────────>│ Cross-  │───>│ Final   │
+  │ Schema   │    │ Astro/  │           │ Module  │    │ Document│
+  │ Source   │    │ History │           │ Synth-  │    │ Assembly│
+  │ Index    │    ├─────────┤           │ esis    │    │ + QA    │
+  │ Template │───>│ M3+M4   │──────────>│         │    │         │
+  │          │    │ Myth/   │           │         │    │         │
+  │          │    │ Person. │           │         │    │         │
+  └─────────┘    └─────────┘           └─────────┘    └─────────┘
+       │              │                      │              │
+       │         ┌─────────┐                 │              │
+       └────────>│ M5      │─────────────────┘              │
+                 │ Debate/ │                                │
+                 │ Synth.  │────────────────────────────────┘
+                 └─────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Foundation Layer} --- Shared schemas, source index, bibliography template, cross-reference database structure.
+\item \textbf{Research Layer} --- Five parallel/semi-parallel research modules producing structured findings.
+\item \textbf{Synthesis Layer} --- Cross-module integration, contradiction resolution, archetypal pattern mapping.
+\item \textbf{Publication Layer} --- Final document assembly, quality assurance, verification matrix execution.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Knowledge Pack PDF & All 12 success criteria met; self-contained; zero undefined terms & 40--60 pages \\
+2 & Historical Timeline & 7+ milestones from MUL.APIN to Goldschneider & Visual + tabular \\
+3 & Zodiac Mechanics Primer & Precession, tropical/sidereal, solar disc geometry explained & With diagrams \\
+4 & Mars-Venus Mythology Synthesis & 3+ cultural traditions, named texts, archetypal analysis & 3000+ words \\
+5 & Cusp Debate Map & 3+ positions, named practitioners, evidence for each & Balanced \\
+6 & Personality Profile & 4+ sources synthesized, shadow dynamics equal to strengths & Attributed \\
+7 & Source Bibliography & All claims attributed, zero entertainment-only sources & Categorized \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Shared Schema & None & Haiku & 2K \\
+W0: Source Index & None & Haiku & 3K \\
+W1A: M1 Historical & W0 & Sonnet & 8K \\
+W1A: M2 Astronomical & W0 & Sonnet & 6K \\
+W1B: M3 Mythological & W0 & Opus & 8K \\
+W1B: M4 Personality & W0 & Sonnet & 6K \\
+W1B: M5 Debate & W0 & Opus & 6K \\
+W2: Cross-Module Synthesis & W1A, W1B & Opus & 10K \\
+W3: Document Assembly & W2 & Sonnet & 8K \\
+W3: Verification & W3-Assembly & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Cross-module synthesis, mythology (cultural sensitivity), cusp debate (balanced judgment required) \\
+Sonnet & $\sim$60\% & Historical compilation, astronomical mechanics, personality synthesis, document assembly, verification \\
+Haiku & $\sim$10\% & Shared schemas, source index templates, bibliography scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Primary Model} & \tableheader{Est.\ Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 1--2 \\
+1 & Research & Parallel (2 tracks) & Sonnet + Opus & 6--8 \\
+2 & Synthesis & Sequential & Opus & 3--4 \\
+3 & Publication & Sequential & Sonnet & 2--3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared Schema & Zodiac terminology glossary, date conventions, source citation format & Haiku & 2K \\
+Source Index & Master bibliography with categorization (astronomical, mythological, personality, debate) & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: Astronomical-Historical (M1 + M2)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+M1: Babylon to Greece & MUL.APIN through Ptolemy; constellation naming evolution & Sonnet & 4K \\
+M1: Modern Transmission & Hellenistic to modern Western; tropical zodiac dominance & Sonnet & 4K \\
+M2: Precession Mechanics & Quantitative explanation with NASA/IAU data & Sonnet & 3K \\
+M2: Sign Boundary Analysis & Solar disc geometry, degree-based position, IAU vs.\ astrological boundaries & Sonnet & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Mythological-Personality (M3 + M4 + M5)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+M3: Mars-Venus Complex & Three-tradition mythology; Babylonian Ishtar, Greek Ares/Aphrodite, Roman Mars/Venus & Opus & 4K \\
+M3: Spring Rites \& Bull & Gugalanna, spring equinox traditions, ritual context & Opus & 4K \\
+M4: Trait Synthesis & Four-source personality compilation with shadow dynamics & Sonnet & 6K \\
+M5: Debate Mapping & Three positions documented with named practitioners and evidence & Opus & 6K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Cross-Module Integration & Connect astronomical facts to mythological interpretations; map debate positions onto historical development & Opus & 5K \\
+Archetypal Pattern Map & Fire$\rightarrow$Earth, Cardinal$\rightarrow$Fixed, Mars$\rightarrow$Venus as parallel transformation patterns & Opus & 3K \\
+Contradiction Resolution & Reconcile conflicting cusp date ranges; note where sources disagree & Opus & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Document Assembly & Compile all modules into final knowledge pack with consistent formatting and cross-references & Sonnet & 5K \\
+Bibliography Verification & Confirm all citations traceable, no entertainment-only sources & Sonnet & 2K \\
+Test Plan Execution & Run all SC, CF, IN, and EC tests against assembled document & Sonnet & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Wave 0 outputs cached for 5-minute TTL exploitation; all Wave 1 tasks reference shared schema without re-generation.
+\item Track A and Track B run in parallel within the same session where possible, maximizing context window utilization.
+\item M5 (Debate) has a soft dependency on M1--M4 findings but can begin with its own source research before integration.
+\item Wave 2 synthesis loads only module summaries (not full research), staying within context limits.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & 0 & 0 & 5K \\
+Wave 1: Research & 14K & 20K & 0 \\
+Wave 2: Synthesis & 10K & 0 & 0 \\
+Wave 3: Publication & 0 & 10K & 0 \\
+\midrule
+\textbf{Total} & \textbf{24K} & \textbf{30K} & \textbf{5K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total estimate:} $\sim$59K tokens across 18--22 context windows in 4--5 sessions.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0-Schema ──┬──> W1A-M1 (Historical) ──┐
+              │                           │
+              ├──> W1A-M2 (Astronomical) ─┤
+              │                           ├──> W2-Synthesis ──> W3-Assembly
+              ├──> W1B-M3 (Mythology) ────┤                         │
+              │                           │                         v
+              ├──> W1B-M4 (Personality) ──┤              W3-Verification
+              │                           │
+              └──> W1B-M5 (Debate) ───────┘
+                        ↑
+                  (soft dep on M1-M4)
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 5 & Required & BLOCK \\
+Edge Cases & 4 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to scholarly, professional, or historically significant astrological sources. Zero tabloid or entertainment-only sources. \\
+SC-NUM & Numerical attribution & Every date, degree measurement, orbital period, or population count attributed to specific source. \\
+SC-ADV & No advocacy & Document presents astronomical facts, astrological claims, and debate positions without advocating for astrology's scientific validity or invalidity. \\
+SC-CUL & Cultural specificity & All mythological traditions named by specific culture (Babylonian, Greek, Roman)---never generic ``ancient peoples.'' \\
+SC-DET & No determinism & No claim that cusp birth date \textit{determines} personality. All trait descriptions framed as ``tradition holds'' or ``sources describe.'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Historical timeline depth & Timeline spans MUL.APIN (c.\ 1000 BCE) through Goldschneider (1994 CE) with $\geq$5 dated milestones. \\
+CF-02 & Babylonian constellation naming & ``Hired Man'' (LÚ.HUÑ.GÁ) and ``Bull of Heaven'' (GU4.AN.NA) documented with cuneiform transliterations. \\
+CF-03 & Precession quantified & Rate (1°/72yr), full cycle ($\sim$25,772yr), current offset ($\sim$23--24°) all stated with source. \\
+CF-04 & Solar disc geometry & Half-degree diameter explained; physical cusp-straddling possibility documented. \\
+CF-05 & Tropical vs.\ sidereal distinction & Both systems defined with current Aries dates in each system. \\
+CF-06 & Mars mythology: 3 traditions & Babylonian (Nergal), Greek (Ares), Roman (Mars) all represented with named myths. \\
+CF-07 & Venus mythology: 3 traditions & Babylonian (Ishtar/Inanna), Greek (Aphrodite), Roman (Venus) all represented. \\
+CF-08 & Mars-Venus relationship & Mythological affair documented; offspring named; archetypal interpretation provided. \\
+CF-09 & Personality: 4 source synthesis & At least 4 distinct astrological sources cited in trait profile. \\
+CF-10 & Shadow dynamics parity & Shadow traits receive equal or near-equal word count to positive traits. \\
+CF-11 & Cusp debate: 3 positions & Anti-cusp, pro-cusp, and qualified positions each documented with named practitioners. \\
+CF-12 & Goldschneider documented & Publication data, methodology overview, and personology concept explained. \\
+CF-13 & Elemental analysis & Fire-Earth and Cardinal-Fixed transitions explicitly analyzed. \\
+CF-14 & Spring symbolism & Cusp placed in seasonal/agricultural context with historical rites. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Astronomy $\rightarrow$ Mythology cascade & At least 1 instance where astronomical fact (e.g., precession) explicitly illuminates mythological interpretation. \\
+IN-02 & History $\rightarrow$ Modern debate cascade & At least 1 instance where historical development explains a position in the modern cusp controversy. \\
+IN-03 & Mythology $\rightarrow$ Personality cascade & Mars-Venus mythology explicitly connected to personality trait interpretation. \\
+IN-04 & Cross-module consistency & No contradictions in dates, names, or degree measurements between modules. \\
+IN-05 & Self-containment & No undefined astrological terms; all jargon glossed on first use. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Date range disagreement & Variation in cusp dates across sources (April 15--23) acknowledged and documented. \\
+EC-02 & Sidereal cusp offset & Note that in sidereal systems, the Aries-Taurus boundary falls $\sim$24 days later than tropical. \\
+EC-03 & Data gap acknowledgment & At least 1 ``further research needed'' note for areas of incomplete knowledge. \\
+EC-04 & Temporal currency & Sources from last 10 years used where available; older sources flagged as historical. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Historical timeline (5+ milestones) & CF-01, CF-02 & Pending \\
+2. Astronomical mechanics (quantitative) & CF-03, CF-04, CF-05 & Pending \\
+3. Mars-Venus mythology (3 traditions) & CF-06, CF-07, CF-08 & Pending \\
+4. Personality synthesis (4+ sources) & CF-09, CF-10 & Pending \\
+5. Cusp controversy (3 positions) & CF-11 & Pending \\
+6. Goldschneider documented & CF-12 & Pending \\
+7. Astronomical claims sourced & SC-SRC, SC-NUM & Pending \\
+8. Mythological claims sourced & SC-CUL, CF-06, CF-07 & Pending \\
+9. Shadow dynamics documented & CF-10 & Pending \\
+10. Cross-module connections (3+) & IN-01, IN-02, IN-03 & Pending \\
+11. Self-contained document & IN-05 & Pending \\
+12. Through-line to GSD philosophy & SC-ADV (no advocacy) & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research \\
+EXEC-A & Executor (Track A) & Astronomical-Historical document production \\
+EXEC-B & Executor (Track B) & Mythological-Personality document production \\
+CRAFT-ASTRO & Domain: Astronomy & Precession mechanics, degree analysis, IAU data \\
+CRAFT-MYTH & Domain: Mythology & Mars-Venus complex, Babylonian traditions, spring rites \\
+VERIFY & Verification & Source validation; accuracy checking; cross-module consistency \\
+INTEG & Integration Agent & Cross-module relationship validation; archetypal pattern mapping \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Activation Profile:} Squadron (12 roles, 5 modules, cultural sensitivity present in mythological content).
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Name & The Cusp of Power: Mars Meets Venus at the Threshold \\
+Activation Profile & Squadron \\
+Total Modules & 5 \\
+Total Waves & 4 (W0 through W3) \\
+Parallel Tracks & 2 (in Wave 1) \\
+Estimated Context Windows & 18--22 \\
+Estimated Sessions & 4--5 \\
+Estimated Total Tokens & $\sim$59K (24K Opus / 30K Sonnet / 5K Haiku) \\
+Model Split & 41\% Opus / 51\% Sonnet / 8\% Haiku \\
+Safety-Critical Tests & 5 (all mandatory-pass / BLOCK) \\
+Total Tests & 28 \\
+Key Risk & Balancing fair presentation of astrology as cultural system without implicit endorsement or dismissal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``This cusp is where the pure energy of Aries takes form, becomes embodied in the fixed earth sign of Taurus. With Wittgenstein, the world of ideas becomes a world of facts. With Lenin, theories become political action. With J.P.\ Morgan, the energy of money becomes manifest in projects.''}
+
+\vspace{0.5em}
+\hfill --- Moonletter, ``The Cusps between the Signs''
+
+\vspace{1em}
+The boundary is never empty. Where fire meets earth, where Mars meets Venus, where initiation becomes embodiment---the space between is where meaning lives. This mission maps that space.
+\end{quotebox}
+
+\end{document}
