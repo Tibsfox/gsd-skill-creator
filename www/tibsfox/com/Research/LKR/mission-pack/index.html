@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lion King: Africa & Roots — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #8B5E3C;
+    --secondary: #C17817;
+    --tertiary: #3E6B48;
+    --accent: #A0522D;
+    --sand: #F5EDE4;
+    --morning: #FDF3E3;
+    --dark: #212121;
+    --subtle: #757575;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Libre Baskerville', Georgia, serif; background: #FAFAF5; color: var(--dark); }
+  
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+    color: white; padding: 3rem 2rem; text-align: center;
+  }
+  header .tag { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; margin-bottom: 1rem; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.9; }
+  
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+  
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .file-card {
+    background: var(--sand); border: 1px solid #D4C4B0; border-radius: 8px;
+    padding: 1.5rem; text-decoration: none; color: var(--dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,94,60,0.15); }
+  .file-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .file-card .name { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--primary); }
+  .file-card .desc { font-size: 0.85rem; color: var(--subtle); margin-top: 0.3rem; }
+  
+  h3 { font-family: 'DM Sans', sans-serif; color: var(--primary); margin: 2rem 0 1rem; font-size: 1.2rem; }
+  
+  .contents { background: var(--morning); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .contents h4 { font-family: 'DM Sans', sans-serif; color: var(--secondary); margin-bottom: 0.8rem; }
+  .contents ul { list-style: none; padding: 0; }
+  .contents li { padding: 0.3rem 0; font-size: 0.9rem; border-bottom: 1px solid rgba(193,120,23,0.15); }
+  .contents li:last-child { border: none; }
+  .contents .stage { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--primary); display: inline-block; width: 70px; }
+  
+  .instructions { margin: 1.5rem 0; }
+  .instructions ol { padding-left: 1.5rem; }
+  .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; line-height: 1.6; }
+  
+  .quote {
+    background: var(--sand); border-left: 4px solid var(--primary);
+    padding: 1.5rem; margin: 2rem 0; font-style: italic;
+    line-height: 1.8; color: var(--accent);
+  }
+  
+  code { font-family: 'DM Mono', monospace; background: #EDE7DE; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; }
+  
+  footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.8rem; font-family: 'DM Sans', sans-serif; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">GSD Research Mission Package</div>
+  <h1>The Lion King: Africa & Roots</h1>
+  <h2>From the Osiris Myth to the Griot's Song — The Deepest Story Ever Told</h2>
+</header>
+
+<div class="container">
+  <div class="files">
+    <a class="file-card" href="lion-king-roots-mission.pdf" download>
+      <div class="icon">📄</div>
+      <div class="name">Mission Package (PDF)</div>
+      <div class="desc">25-page complete pipeline: Vision → Research → Mission</div>
+    </a>
+    <a class="file-card" href="lion-king-roots-mission.tex" download>
+      <div class="icon">📝</div>
+      <div class="name">LaTeX Source (.tex)</div>
+      <div class="desc">Editable source for recompilation and modification</div>
+    </a>
+  </div>
+
+  <div class="contents">
+    <h4>Contents</h4>
+    <ul>
+      <li><span class="stage">Stage 1</span> Vision Document — Mythological convergence map, 6 research modules, problem statement, chipset configuration, 12 success criteria</li>
+      <li><span class="stage">Stage 2</span> Research Reference — Osiris myth, Epic of Sundiata, griot/jali tradition, East African paleoanthropology, Circle of Life frameworks, Barry Jenkins' Mufasa (2024), roots & return analysis</li>
+      <li><span class="stage">Stage 3</span> Mission Package — Fleet activation, 12-role crew, 4-wave execution plan, 28 tests (6 safety-critical), ~107K token budget across 18-24 windows</li>
+    </ul>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Review the PDF to understand the full three-stage pipeline</li>
+      <li>Feed to <code>gsd-skill-creator</code> via Claude Code for orchestrated execution</li>
+      <li>The mission will execute in 4 waves with 2 parallel tracks in Wave 1</li>
+      <li>CAPCOM gates at wave boundaries require human approval before proceeding</li>
+      <li>Safety-critical tests (SC-*) are mandatory-pass; any failure blocks the pipeline</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <ol>
+      <li>Requires XeLaTeX with DejaVu fonts installed</li>
+      <li>Compile with three passes:<br>
+        <code>xelatex -interaction=nonstopmode lion-king-roots-mission.tex</code><br>
+        <code>xelatex -interaction=nonstopmode lion-king-roots-mission.tex</code><br>
+        <code>xelatex -interaction=nonstopmode lion-king-roots-mission.tex</code>
+      </li>
+      <li>Three passes required for: TOC, cross-references, page counts, hyperlinks</li>
+    </ol>
+  </div>
+
+  <div class="quote">
+    "The walking is the story. The walking has always been the story. From the Laetoli footprints preserved in volcanic ash 3.6 million years ago, to the Turkana Boy's body opening into the savanna like a prayer, to Sundiata's first steps that silenced a kingdom, to Simba's return to Pride Rock under his father's stars — it is all the same walk. The walk home."
+  </div>
+</div>
+
+<footer>
+  GSD Ecosystem &middot; Vision → Research → Mission &middot; March 26, 2026
+</footer>
+
+</body>
+</html>
