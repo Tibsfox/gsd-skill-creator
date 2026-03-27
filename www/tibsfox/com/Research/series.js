@@ -43,6 +43,7 @@
     { id: 'MAM', name: 'Mammals', path: 'MAM/index.html' },
     { id: 'MCM', name: 'Maritime Compute', path: 'MCM/index.html' },
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
+    { id: 'MIX', name: 'Sir Mix-A-Lot', path: 'MIX/index.html' },
     { id: 'MPC', name: 'Math Co-Proc.', path: 'MPC/index.html' },
     { id: 'NND', name: 'New New Deal', path: 'NND/index.html' },
     { id: 'NWC', name: 'Norwescon', path: 'NWC/index.html' },
