@@ -108,7 +108,7 @@ function sampleTraceEvent(overrides?: Partial<TraceEvent>): TraceEvent {
   };
 }
 
-let gatewayPortCounter = 14100;
+let gatewayPortCounter = 14200;
 function getPort(): number {
   return gatewayPortCounter++;
 }

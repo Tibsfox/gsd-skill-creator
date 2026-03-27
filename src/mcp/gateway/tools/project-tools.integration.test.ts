@@ -20,7 +20,7 @@ import { registerProjectReadTools, registerProjectWriteTools } from './project-t
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
-let portCounter = 14100;
+let portCounter = 14400;
 
 function getPort(): number {
   return portCounter++;

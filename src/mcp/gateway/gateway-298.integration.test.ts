@@ -22,7 +22,7 @@ import type { TokenInfo } from './types.js';
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
-let portCounter = 14100;
+let portCounter = 14300;
 
 function getPort(): number {
   return portCounter++;
