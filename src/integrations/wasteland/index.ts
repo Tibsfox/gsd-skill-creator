@@ -540,6 +540,27 @@ export {
   normalizeToUTC,
 } from './utc.js';
 
+// Schema Evolution (version-aware DDL migration)
+export {
+  getSchemaVersion,
+  setSchemaVersion,
+  diffSchema,
+  generateMigrationSQL,
+  migrate,
+  findSchema,
+  SCHEMA_1_0,
+  SCHEMA_1_1,
+  SCHEMA_REGISTRY,
+} from './schema-evolution.js';
+export type {
+  ColumnDef,
+  TableDef,
+  SchemaVersion,
+  MigrationOp,
+  SchemaDiff,
+  MigrationResult,
+} from './schema-evolution.js';
+
 // Herald Agent (intelligence briefing composer)
 export {
   routeToTiers,
