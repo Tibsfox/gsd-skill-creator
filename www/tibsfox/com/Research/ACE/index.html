@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art of the Compute Engine &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ace">
+  <header>
+    <h1>Art of the Compute Engine</h1>
+    <div class="subtitle">CPU Architecture &middot; Instruction Sets &middot; Pipelining &middot; Cache Hierarchy &middot; GPU Compute</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-claude-code-agentic-architecture">Claude Code</a>
+      <a href="page.html?doc=02-rosetta-core-translation-engine">Rosetta Core</a>
+      <a href="page.html?doc=03-gsd-chipset-orchestration">Chipset</a>
+      <a href="page.html?doc=04-cuda-silicon-layer">CUDA Silicon</a>
+      <a href="page.html?doc=05-mesh-phase-synchronization">Mesh &amp; Sync</a>
+      <a href="page.html?doc=06-fractal-documentation-fidelity">Fractal Docs</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga had four specialized chips: Agnus, Denise, Paula, and the 68000. Each spoke a dialect.
+      Together they produced something that no single chip could have achieved. The sum was not additive &mdash;
+      it was multiplicative, because each chip's specialized architecture freed the others to do what they
+      were best at. Thirty years later, the lesson holds. A mesh cluster of white-box nodes with dual
+      RTX 5090s, phase-synchronized over high-speed interconnect, coordinated by a multi-agent GSD
+      orchestrator running CUDA kernels in parallel &mdash; that is the modern Amiga. The art is in the
+      connections, not in the nodes. The meaning lives in the spaces between.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Architecture Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-claude-code-agentic-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Claude Code &mdash; Agentic Architecture</h3>
+        <div class="meta"><span class="tag tag-agent">Agent</span> Track A &middot; Agentic core</div>
+        <p>Single-threaded master loop, dual-buffer steering queue, context compression at 92% utilization, CLAUDE.md manifest patterns from 253 repositories, sub-agent spawning, git worktree parallelism, MCP server integration, hooks system, and Agent SDK.</p>
+      </a>
+
+      <a href="page.html?doc=02-rosetta-core-translation-engine" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Rosetta Core &mdash; Translation Engine</h3>
+        <div class="meta"><span class="tag tag-rosetta">Rosetta</span> Track A &middot; Cross-domain translation</div>
+        <p>Multi-language panel architecture across 14+ languages, College Structure as explorable code, TAOCP algorithmic foundations, MMIX/MIXAL reference ISA, literate programming lineage, cross-domain linking schemas, and calibration feedback loops.</p>
+      </a>
+
+      <a href="page.html?doc=03-gsd-chipset-orchestration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: GSD Chipset &mdash; Multi-Agent Orchestration</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Track B &middot; Chipset design</div>
+        <p>Agnus/Denise/Paula/68000 node mapping, filesystem bus protocol (ISA), DACP structured handoff bundles, skill promotion pipeline from observation to compiled GPU shader, bus arbitration, DMA channels, and safety warden pattern.</p>
+      </a>
+
+      <a href="page.html?doc=04-cuda-silicon-layer" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: CUDA Kernels &mdash; Silicon Layer</h3>
+        <div class="meta"><span class="tag tag-silicon">Silicon</span> Track B &middot; GPU compute</div>
+        <p>Thread/block/grid/warp hierarchy, memory hierarchy from registers to global memory, occupancy optimization, CUDA 13.x cuTile tile programming, cuda.compute Python API, PTX/NVVM IR, LoRA adapter compilation, dual RTX 5090 configuration.</p>
+      </a>
+
+      <a href="page.html?doc=05-mesh-phase-synchronization" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Mesh &amp; Phase Synchronization</h3>
+        <div class="meta"><span class="tag tag-cluster">Cluster</span> Track C &middot; Infrastructure</div>
+        <p>10-node white-box cluster topology, NVLink/InfiniBand/10GbE bus selection, PTP IEEE 1588 time sync, FLTS consensus algorithm, frog chorus phase coherence, MPI message passing, inter-node DMA, solar power budget for PNW operation.</p>
+      </a>
+
+      <a href="page.html?doc=06-fractal-documentation-fidelity" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Fractal Documentation Fidelity</h3>
+        <div class="meta"><span class="tag tag-doc">Documentation</span> Track C &middot; Fidelity pass</div>
+        <p>Knuth's literate programming (weaving and tangling), WEB/CWEB system, TAOCP as self-explanatory architecture, fractal documentation principle at three zoom levels, CLAUDE.md as firmware, fidelity pass workflow, code-as-curriculum thesis.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Single-threaded master loop</td><td>M1, M3</td><td>GSD2, SYS</td></tr>
+        <tr><td>CLAUDE.md manifest patterns</td><td>M1, M6</td><td>GSD2, CMH</td></tr>
+        <tr><td>Rosetta Core panels</td><td>M2, M6</td><td>MPC, OCN</td></tr>
+        <tr><td>TAOCP / MMIX / literate programming</td><td>M2, M6</td><td>MPC, GPO</td></tr>
+        <tr><td>Agnus/Denise/Paula mapping</td><td>M3, M5</td><td>SGL, CMH</td></tr>
+        <tr><td>DACP structured handoffs</td><td>M1, M3</td><td>GSD2, SFC</td></tr>
+        <tr><td>CUDA thread hierarchy</td><td>M4, M5</td><td>MPC, SYS</td></tr>
+        <tr><td>Memory hierarchy / cache</td><td>M4, M5</td><td>CMH, OCN</td></tr>
+        <tr><td>cuTile / CUDA 13.x</td><td>M4</td><td>MPC, GPO</td></tr>
+        <tr><td>NVLink / InfiniBand bus</td><td>M4, M5</td><td>CMH, SYS</td></tr>
+        <tr><td>Phase synchronization / PTP</td><td>M5, M3</td><td>SGL, K8S</td></tr>
+        <tr><td>Fractal documentation</td><td>M6, M2</td><td>GSD2, SFC</td></tr>
+        <tr><td>Skill promotion pipeline</td><td>M3, M4</td><td>GSD2, GPO</td></tr>
+        <tr><td>Solar power / cooling</td><td>M4, M5</td><td>SYS, K8S</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+ART OF THE COMPUTE ENGINE -- DOMAIN MAP
+===============================================================
+
+  AGENTIC LAYER              TRANSLATION LAYER
+  +---------------+         +------------------+
+  | Claude Code   |         | Rosetta Core     |
+  | Master Loop   |         | Language Panels   |
+  | CLAUDE.md     |--------&gt;| College Structure |
+  | Sub-Agents    |         | TAOCP Foundations |
+  +---------------+         +------------------+
+        |                         |
+        v                         v
+  +--------------------[ GSD BUS / ISA ]--------------------+
+        |                         |
+        v                         v
+  ORCHESTRATION LAYER        SILICON LAYER
+  +---------------+         +------------------+
+  | Agnus (DMA)   |         | CUDA Kernels     |
+  | Denise (GPU)  |         | cuTile Tiles     |
+  | Paula (I/O)   |--------&gt;| Memory Hierarchy |
+  | 68000 (CPU)   |         | PTX / NVVM IR    |
+  +---------------+         +------------------+
+        |                         |
+        v                         v
+  +------------------[ MESH INTERCONNECT ]------------------+
+        |                         |
+        v                         v
+  INFRASTRUCTURE LAYER       FIDELITY LAYER
+  +---------------+         +------------------+
+  | 10-Node Mesh  |         | Fractal Docs     |
+  | Phase Sync    |         | 3-Zoom Levels    |
+  | NVLink Bus    |--------&gt;| Literate Prog.   |
+  | Solar Power   |         | Fidelity Pass    |
+  +---------------+         +------------------+
+
+  TAOCP (Knuth) threads through all six layers as the philosophical spine.
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Claude Code] ----------------&gt; [M2: Rosetta Core]
+         |                                    |
+         |                                    |
+         v                                    v
+  [M3: Chipset/Agents] -----------&gt; [M4: CUDA Silicon]
+                                              |
+                                              v
+                                  [M5: Mesh &amp; Phase Sync]
+                                              |
+                                              v
+                                  [M6: Fractal Documentation]
+
+  Parallel tracks:
+    Track A: M1 + M2 (agentic core + translation engine)
+    Track B: M3 + M4 (chipset orchestration + GPU silicon)
+    Track C: M5 + M6 (cluster infrastructure + fidelity pass)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Art of the Compute Engine &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
