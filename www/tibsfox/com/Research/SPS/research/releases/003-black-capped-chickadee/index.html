@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 3&deg; &mdash; Black-capped Chickadee &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.syntax { background: #7B1FA2; }
+    .theory-icon.reference { background: #C62828; }
+    .theory-icon.interval { background: var(--puget-dark); }
+    .theory-icon.broadcast { background: #1565C0; }
+    .theory-icon.dynamics { background: var(--earth-mid); }
+    .theory-icon.network { background: var(--forest-green); }
+    .theory-icon.leap { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Leap card (replaces bridge card for degree 3) */
+    .leap-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .leap-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .leap-table { margin: 0.75rem 0; width: 100%; }
+    .leap-table th { font-size: 0.78rem; }
+    .leap-table td { font-size: 0.85rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">3&deg;</div>
+      <div class="release-title-block">
+        <h2>Black-capped Chickadee</h2>
+        <div class="scientific">Poecile atricapillus &middot; Family Paridae (Tits, Chickadees &amp; Titmice)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Fee-Bee Song &middot; Chick-a-dee Alarm Syntax &middot; Mixed Woodland &middot; Energy 2</div>
+
+    <blockquote>
+      The forest is no longer just singing. The forest is talking. The Black-capped Chickadee says something
+      that means something &mdash; a signal with syntax, with referential content, with interspecific listeners
+      who decode and act on the information. Degree 3 is the leap from sound to language.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Black-capped Chickadee is a small, non-migratory passerine of the family
+          <strong>Paridae</strong> within the order Passeriformes. The PNW population belongs to
+          <em>P. a. occidentalis</em>, the western subspecies. At <strong>9&ndash;14 grams</strong>
+          and <strong>4.7&ndash;5.9 inches</strong> in length, it is in the same size class as the
+          Pacific Wren &mdash; but where the wren skulks in old-growth understory, the chickadee
+          is bold, conspicuous, and approachable. It is the <strong>ambassador species</strong>
+          &mdash; the bird most likely to be the first wild bird a child in the PNW learns to identify
+          by name and by sound.
+        </p>
+        <p>
+          Diagnostic field marks: solid <strong>black cap and bib</strong>, broad
+          <strong>white cheek patches</strong>, gray-blue back, buffy flanks. One of the
+          most intensively studied songbirds in the world, with thousands of published papers
+          spanning neuroscience, cognitive ecology, social behavior, and vocal communication.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; Combinatorial Syntax</h2>
+        <h3>The &ldquo;Fee-Bee&rdquo; Song</h3>
+        <p>
+          A <strong>pure-toned, two-note descending whistle</strong>: a higher &ldquo;fee&rdquo;
+          (3.5&ndash;4.5 kHz) followed by a lower &ldquo;bee&rdquo; (3.0&ndash;3.8 kHz). The interval
+          between the two notes is approximately a <strong>minor third</strong> &mdash; three semitones,
+          a frequency ratio close to 6:5. This is the most common interval in spontaneous human
+          vocalizations across cultures (Nettl 1983; Brandt, Gebrian &amp; Slevc 2012). The chickadee
+          produces the same interval the human auditory system processes most readily. Convergent
+          solution: two species arriving at the same acoustic basin of attraction.
+        </p>
+
+        <h3>The &ldquo;Chick-a-dee&rdquo; Call: Four Note Types, Rule-Governed Combination</h3>
+        <p>
+          The chick-a-dee call is composed of <strong>four distinct note types</strong> designated
+          <strong>A, B, C, and D</strong> (Hailman, Ficken &amp; Ficken 1985):
+        </p>
+        <ul>
+          <li><strong>A notes (&ldquo;chick&rdquo;):</strong> Short, high-frequency introductory notes (&gt;5 kHz)</li>
+          <li><strong>B notes (&ldquo;-a-&rdquo;):</strong> Lower-frequency medial notes (3&ndash;5 kHz)</li>
+          <li><strong>C notes (sweep):</strong> Downward-sweeping FM notes (broadband)</li>
+          <li><strong>D notes (&ldquo;dee&rdquo;):</strong> Terminal broadband notes &mdash; the information-encoding elements</li>
+        </ul>
+        <p>
+          The syntactic rules: note types <strong>always occur in alphabetical order</strong>
+          (A before B before C before D). Any note type can be omitted. The D-note count is
+          <strong>variable and encodes predator threat level</strong>.
+        </p>
+
+        <h3>D-Note Encoding: The Landmark Finding</h3>
+        <p>
+          Templeton, Greene &amp; Davis (2005, <em>Science</em>) demonstrated that the number of
+          D notes is <strong>inversely correlated with predator size</strong>:
+        </p>
+        <ul>
+          <li><strong>Large predators</strong> (Great Horned Owl): fewer D notes (2&ndash;4)</li>
+          <li><strong>Small, agile predators</strong> (Northern Pygmy-Owl, Sharp-shinned Hawk): more D notes (8&ndash;12+)</li>
+        </ul>
+        <p>
+          Smaller predators are <em>more</em> dangerous to chickadee-sized birds because they can
+          pursue through branches with lethal agility. More D notes = more danger. This was confirmed
+          through controlled experiments with taxidermic mounts. Playback of high-D-note calls
+          elicits stronger mobbing responses. <strong>The signal is referential. The communication
+          loop is closed.</strong>
+        </p>
+        <p>
+          This is not metaphorical language. It exhibits the defining properties:
+          <strong>referential meaning</strong> (signal refers to a specific external referent),
+          <strong>combinatorial structure</strong> (discrete elements combined by rules),
+          <strong>audience-dependent variation</strong>, and
+          <strong>calibrated receiver response</strong>.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Fee-bee (&ldquo;fee&rdquo;)</td><td>3.5&ndash;4.5 kHz</td><td>0.3&ndash;0.5 s</td><td>Territory / mate attraction</td></tr>
+            <tr><td>Fee-bee (&ldquo;bee&rdquo;)</td><td>3.0&ndash;3.8 kHz</td><td>0.3&ndash;0.5 s</td><td>Territory / mate attraction</td></tr>
+            <tr><td>A notes (&ldquo;chick&rdquo;)</td><td>&gt;5 kHz</td><td>&lt;0.1 s</td><td>Alarm introductory</td></tr>
+            <tr><td>B notes (&ldquo;-a-&rdquo;)</td><td>3&ndash;5 kHz</td><td>~0.1 s</td><td>Alarm medial</td></tr>
+            <tr><td>C notes (sweep)</td><td>Broadband FM</td><td>~0.1 s</td><td>Alarm transitional</td></tr>
+            <tr><td>D notes (&ldquo;dee&rdquo;)</td><td>2&ndash;5 kHz</td><td>0.05&ndash;0.15 s</td><td>Threat-level encoding</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Interspecies Eavesdropping -->
+        <h2>Interspecies Eavesdropping: The Forest Broadcast Network</h2>
+        <p>
+          The chickadee&rsquo;s alarm call is a <strong>public broadcast</strong>. Other species
+          eavesdrop and respond:
+        </p>
+        <ul>
+          <li><strong>Red-breasted Nuthatches</strong> decode D-note count and calibrate response
+          intensity (Templeton &amp; Greene 2007, <em>PNAS</em>)</li>
+          <li><strong>Downy and Hairy Woodpeckers</strong> increase vigilance</li>
+          <li><strong>Dark-eyed Juncos and Song Sparrows</strong> flee to cover on high-D-note alarms</li>
+          <li><strong>Pacific Wrens</strong> (degree 1&deg;) reduce singing when threat level is elevated</li>
+        </ul>
+        <p>
+          The chickadee is a <strong>public information center</strong> &mdash; a broadcast station
+          transmitting encoded threat intelligence to the mixed-species flock and the wider forest
+          community. This is the <strong>first species in the circle that produces information
+          consumed by other species at other degrees</strong>. The information crosses species
+          boundaries. The forest is becoming an information network.
+        </p>
+
+        <!-- The Leap -->
+        <div class="leap-card">
+          <h3>The Leap: Sound to Language (Degrees 0&ndash;2 &rarr; Degree 3)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degrees 0&ndash;2 were physics &mdash; silence, FM cascade, AM drone. Degree 3 is semiotics
+            &mdash; referential meaning in sound. This is the largest structural leap in the opening sequence.
+          </p>
+          <table class="leap-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg; Heron</th>
+                <th>1&deg; Wren</th>
+                <th>2&deg; Thrush</th>
+                <th>3&deg; Chickadee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Sustained tone</td><td>Named call + syntax</td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combinatorial</td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td><strong>Referential threat info</strong></td></tr>
+              <tr><td><strong>Audience</strong></td><td>None</td><td>Conspecific</td><td>Conspecific</td><td><strong>Interspecific</strong></td></tr>
+              <tr><td><strong>Complexity axis</strong></td><td>Temporal</td><td>Density</td><td>Timbre</td><td><strong>Semantic</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon syntax">S</div>
+            <div class="theory-content">
+              <h4>Combinatorial Syntax <span class="theory-level advanced">Advanced</span></h4>
+              <p>Four discrete note types combined by ordering rules. Open-ended meaning from finite elements &mdash; the defining property of both language and chord theory.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon reference">R</div>
+            <div class="theory-content">
+              <h4>Referential Signaling (D-note Count) <span class="theory-level advanced">Advanced</span></h4>
+              <p>D-note count encodes predator threat level. Meaning through repetition count, not amplitude. Dynamics as information, not just loudness.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon interval">M</div>
+            <div class="theory-content">
+              <h4>The Minor Third Interval <span class="theory-level foundational">Foundational</span></h4>
+              <p>Fee-bee descends approximately a minor third (6:5 ratio). The most common interval in human music across cultures. Convergent acoustic solution.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon broadcast">B</div>
+            <div class="theory-content">
+              <h4>Broadcast Channel (Audio Bus) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Alarm call as broadcast bus: one source, shared medium, multiple receivers with species-specific decoding. The mixer/bus of the forest acoustic network.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon dynamics">D</div>
+            <div class="theory-content">
+              <h4>Dynamics as Encoded Information <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>D-note count functions as a dynamic marking for the forest. More D notes = higher urgency. Information encoded in structure, not volume.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon network">N</div>
+            <div class="theory-content">
+              <h4>Interspecies Information Network <span class="theory-level advanced">Advanced</span></h4>
+              <p>First cross-species information dependency in the circle. Nuthatches decode D-note count. Wrens reduce singing. The forest is an information network.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon leap">L</div>
+            <div class="theory-content">
+              <h4>The Sound-to-Language Leap <span class="theory-level advanced">Advanced</span></h4>
+              <p>Degrees 0&ndash;2: physics of sound production. Degree 3: what sound means. From bioacoustics to biosemiotics. The biggest structural transition so far.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Combinatorial syntax as chord voicing.</strong> A chord combines discrete pitch
+          elements (C, E, G) according to rules (root, third, fifth) to produce meaning (major = bright,
+          minor = dark). The chick-a-dee call combines discrete note types (A, B, C, D) according to
+          ordering rules to produce meaning (more D = higher threat). Both are combinatorial systems
+          where a finite element set generates open-ended meaningful output.
+        </p>
+        <p>
+          <strong>The minor third.</strong> The fee-bee song&rsquo;s descending minor third connects to
+          the deepest layer of human musicality: infant-directed speech, playground chants, the universal
+          calling interval. The chickadee and the human child arrive at the same frequency ratio
+          independently &mdash; a convergent acoustic constant.
+        </p>
+        <p>
+          <strong>The broadcast bus.</strong> In audio engineering, a bus carries signal from sources to
+          destinations. The chickadee&rsquo;s alarm is the bus master. The forest air is the cable.
+          Nuthatches, woodpeckers, and wrens are receivers with species-specific processing chains.
+          Same broadcast, different decoding.
+        </p>
+        <p>
+          <strong>Dynamics as information.</strong> The D-note count is a dynamic marking &mdash; not
+          in amplitude but in communicative intensity. More repetitions = higher urgency. This is a more
+          sophisticated use of dynamics than simple volume: meaning encoded through count, not decibels.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Passerine taxonomy. This release adds combinatorial syntax, alarm broadcast, and music-theory depth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Mixed woodland ecology, mixed-species flock dynamics, food caching, spatial memory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Bio-Physics Sensing
+            <p>Information encoding &mdash; D-note count as encoded sensor output. The chickadee as biological sensor network.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SHE</strong> &mdash; Smart Home Electronics
+            <p>Biological sensor network parallel: detect event, encode info, broadcast to all receivers. Same architecture.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Ernestine Anderson at degree 3&deg;. Both are communicators who stayed while others moved.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Non-referential silence at 0&deg; &rarr; referential syntax at 3&deg;. From absence of meaning to encoded meaning in three degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Degree 1&deg; eavesdrops on degree 3&deg;. Wrens reduce singing on chickadee alarm. First cross-degree information dependency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Direct predecessor. AM sustain (presence, no referent) &rarr; combinatorial syntax (specific, decoded threat info).</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Smith, S.M. (1993). &ldquo;Black-capped Chickadee.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Templeton, C.N., Greene, E. &amp; Davis, K. (2005). Allometry of alarm calls. <em>Science</em> 308(5730).</li>
+          <li>Templeton, C.N. &amp; Greene, E. (2007). Nuthatches eavesdrop on chickadee alarms. <em>PNAS</em> 104(13).</li>
+          <li>Hailman, J.P., Ficken, M.S. &amp; Ficken, R.W. (1985). Chick-a-dee calls as recombinant system. <em>Semiotica</em> 56(3/4).</li>
+          <li>Gill, F.B., Slikas, B. &amp; Sheldon, F.H. (2005). Phylogeny of titmice. <em>MPE</em> 35(1).</li>
+          <li>Barnea, A. &amp; Nottebohm, F. (1994). Hippocampal neurogenesis. <em>PNAS</em> 91(23).</li>
+          <li>Mennill, D.J. &amp; Otter, K.A. (2007). Status signaling in chickadees. Oxford University Press.</li>
+          <li>Nettl, B. (1983). <em>The Study of Ethnomusicology</em>. University of Illinois Press.</li>
+          <li>Brandt, A., Gebrian, M. &amp; Slevc, L.R. (2012). Music and language acquisition. <em>Frontiers in Psychology</em> 3:327.</li>
+          <li>Hockett, C.F. (1960). The origin of speech. <em>Scientific American</em> 203(3).</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Black-capped Chickadee. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Black-capped Chickadee. birdweb.org</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Paridae</div>
+          <div class="stat-detail">Tits, chickadees, titmice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>occidentalis</em></div>
+          <div class="stat-detail">Western subspecies (Baird 1858)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.7&ndash;5.9 in</div>
+          <div class="stat-detail">12&ndash;15 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">9&ndash;14 g</div>
+          <div class="stat-detail">~2&ndash;3 nickels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">6.3&ndash;8.3 in</div>
+          <div class="stat-detail">16&ndash;21 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Fee-Bee Range</div>
+          <div class="stat-value">3.0&ndash;4.5 kHz</div>
+          <div class="stat-detail">Descending minor third interval</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Alarm Range</div>
+          <div class="stat-value">2&ndash;5+ kHz</div>
+          <div class="stat-detail">Broadband (A-B-C-D notes)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Types</div>
+          <div class="stat-value">A, B, C, D</div>
+          <div class="stat-detail">Combinatorial syntax system</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">D-Note Range</div>
+          <div class="stat-value">2&ndash;12+</div>
+          <div class="stat-detail">Encodes predator threat level</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Referential</div>
+          <div class="stat-detail">Signal encodes external meaning</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">3&deg;</div>
+          <div class="stat-detail">First language &mdash; referential meaning</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Social broadcast energy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mixed Woodland</div>
+          <div class="stat-detail">Habitat generalist (urban to forest)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 3&deg; &mdash; S36</div>
+          <div class="parallel-name">Ernestine Anderson</div>
+          <div class="parallel-detail">Both are communicators who stayed while others moved. Anderson stayed in Seattle when jazz moved to New York. The chickadee stays year-round. Both are resident voices whose constancy defines the community.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 003 of 360 &middot;
+      <a href="../002-varied-thrush/index.html">Degree 2&deg;: Varied Thrush</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

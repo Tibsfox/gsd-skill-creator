@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 3&deg; &mdash; Ernestine Anderson &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .album-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+    }
+    .album-card .title {
+      font-weight: 600;
+      color: var(--seattle-navy);
+      font-size: 0.95rem;
+    }
+    .album-card .year-label {
+      font-size: 0.78rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+    }
+    .album-card .significance {
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+      color: #424242;
+    }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">3&deg;</div>
+      <div>
+        <h1>Ernestine Anderson</h1>
+        <div class="subtitle">Jazz &middot; Vocal &middot; Swing &middot; Blues &mdash; Central District 1944 &rarr; Seattle 2016</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../002-wayne-horvitz/index.html">Degree 2&deg; (Horvitz)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          She did not need to leave Seattle to prove she was extraordinary. She needed to come back
+          to prove that Seattle was home. The voice that traveled the world returned to the Central
+          District and sang for the people who had heard her first.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY & SEATTLE ORIGINS
+             ======================================== -->
+
+        <h2>Biography &amp; Seattle Origins</h2>
+
+        <p>Ernestine Irene Anderson was born November 11, 1928, in Houston, Texas. In 1944, at age
+        sixteen, her family moved to Seattle, settling in the <strong>Central District</strong> &mdash;
+        the same neighborhood that had shaped <a href="../000-quincy-jones/index.html">Quincy Jones</a>
+        since his own arrival the previous year. The move placed Anderson at the center of Seattle&rsquo;s
+        Black cultural ecosystem: the <strong>Jackson Street jazz corridor</strong>, the churches and
+        social clubs, and the music program at <strong>Garfield High School</strong>.</p>
+
+        <p>Anderson won Garfield&rsquo;s talent show, confirming what the Jackson Street clubs were
+        already demonstrating nightly: her voice was exceptional. Unlike Frisell
+        (<a href="../001-bill-frisell/index.html">degree 1&deg;</a>) and Horvitz
+        (<a href="../002-wayne-horvitz/index.html">degree 2&deg;</a>), whose connections to Jackson
+        Street are indirect &mdash; inherited infrastructure rather than lived experience &mdash;
+        Anderson <em>performed</em> on Jackson Street as a teenager. She is the second S36 artist
+        (after Jones) with primary, firsthand participation in the corridor.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: NEA Jazz Masters biography (arts.gov);
+        Paul de Barros, <em>Jackson Street After Hours</em> (1993); HistoryLink.org, Essay #10891</p>
+
+        <h3>The Hampton Pipeline: Jones &amp; Anderson</h3>
+
+        <p>Anderson&rsquo;s professional career began at sixteen with <strong>Johnny Otis&rsquo;s</strong>
+        band, continued through <strong>Russell Jacquet&rsquo;s</strong> band, and culminated in
+        <strong>Lionel Hampton&rsquo;s</strong> band &mdash; the same organization that launched Quincy
+        Jones. Both Garfield graduates, both Central District residents, both Hampton alumni. The pipeline:
+        <strong>Garfield</strong> (theory and literacy) &rarr; <strong>Jackson Street</strong> (live
+        performance) &rarr; <strong>Hampton&rsquo;s band</strong> (national exposure) &rarr;
+        <strong>recording career</strong>.</p>
+
+        <!-- ========================================
+             GARFIELD-CENTRAL DISTRICT THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>The Garfield &ndash; Central District Thread: Degrees 0&deg; through 3&deg;</h4>
+          <table>
+            <tr>
+              <td>0&deg; Quincy Jones</td>
+              <td>Arrived Central District age 10. Garfield class of 1950. Jackson Street. Left Seattle for the world. <strong>The exporter.</strong></td>
+            </tr>
+            <tr>
+              <td>1&deg; Bill Frisell</td>
+              <td>Arrived Seattle 1989. No Garfield/Jackson Street connection. Inherited infrastructure. <strong>The import.</strong></td>
+            </tr>
+            <tr>
+              <td>2&deg; Wayne Horvitz</td>
+              <td>Arrived Seattle 1988. No Garfield/Jackson Street connection. Built new infrastructure (Royal Room). <strong>The builder.</strong></td>
+            </tr>
+            <tr>
+              <td>3&deg; Ernestine Anderson</td>
+              <td>Arrived Central District age 16. Garfield, same era as Jones. Jackson Street performer. Left, returned, stayed. <strong>The one who came home.</strong></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CAREER ARC — TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1944&ndash;1950s &mdash; Jackson Street &amp; the Bands</div>
+          <p>Central District, Garfield High School, Jackson Street corridor. Toured with
+          <strong>Johnny Otis</strong> (age 16), <strong>Russell Jacquet</strong>, and
+          <strong>Lionel Hampton</strong>. Same pipeline as Quincy Jones.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1958 &mdash; Stockholm Breakthrough</div>
+          <p><strong><em>Hot Cargo</em></strong> recorded in Stockholm for Mercury Records. Time magazine:
+          &ldquo;the best new jazz voice in America.&rdquo; Critical acclaim in Sweden, where the audience
+          valued jazz vocal art without the racial barriers constraining Black performers at home.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s&ndash;1975 &mdash; The Lean Years</div>
+          <p>American career declined as rock, soul, and funk redrew the commercial map. Jazz vocalists lost
+          their domestic audience. Anderson continued performing in Europe and smaller US venues &mdash;
+          maintaining craft while the industry looked elsewhere. The European Exile pattern.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1976 &mdash; Monterey Revival</div>
+          <p>Performance at the <strong>Monterey Jazz Festival</strong> reignited her American career.
+          The voice was deeper, richer, more authoritative. She had not lost anything in the lean years &mdash;
+          she had deepened. Signed with <strong>Concord Jazz</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1976&ndash;2010s &mdash; Seattle&rsquo;s Jazz Anchor</div>
+          <p>Regular performer at <strong>Dimitriou&rsquo;s Jazz Alley</strong> and the
+          <strong>Earshot Jazz Festival</strong>. Became Seattle&rsquo;s resident jazz voice &mdash;
+          the anchor who connected the Jackson Street era to the contemporary community.
+          <strong>4 Grammy nominations</strong>. <strong>NEA Jazz Master</strong> (2002).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">March 10, 2016</div>
+          <p>Died in Seattle at age 87. At home, in the city where she had arrived as a sixteen-year-old.
+          The circle closed.</p>
+        </div>
+
+        <!-- ========================================
+             KEY ALBUMS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Key Albums</h2>
+
+        <div class="album-grid">
+          <div class="album-card">
+            <div class="title">Hot Cargo</div>
+            <div class="year-label">1958 &middot; Mercury</div>
+            <div class="significance">Stockholm breakthrough. &ldquo;Best new jazz voice in America.&rdquo;</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Hello Like Before</div>
+            <div class="year-label">1976 &middot; Concord Jazz</div>
+            <div class="significance">Comeback album. Title track became signature song.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Live from Concord to London</div>
+            <div class="year-label">1978 &middot; Concord Jazz</div>
+            <div class="significance">Live energy. Audience as collaborator.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Never Make Your Move Too Soon</div>
+            <div class="year-label">1980 &middot; Concord Jazz</div>
+            <div class="significance">Grammy-nominated. Blues ballads and medium swingers.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Big City</div>
+            <div class="year-label">1983 &middot; Concord Jazz</div>
+            <div class="significance">Grammy-nominated. Orchestrated setting with strings.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Five vocal-specific theory nodes &mdash; the first in the S36 engine. Degrees 0&ndash;2 built the
+        instrumental branch (harmony, rhythm, composition, production). Degree 3 opens the
+        <strong>vocal branch</strong>.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Vocal Jazz Phrasing</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Behind-the-beat syllable placement creating elastic swing. The lyric is both meaning
+            and material &mdash; semantic content plus rhythmic placement. Vowels stretched across
+            bar lines; consonants compressed to create tension.</p>
+            <div class="examples">Never Make Your Move Too Soon (1980), Hello Like Before (1976)</div>
+            <div class="genealogy"><strong>New at 3&deg;:</strong> First vocal theory node in S36</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Call-and-Response</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Continuous dialogue between voice and instruments. Singer phrases; piano answers;
+            singer responds to the answer. Rooted in West African vocal traditions carried through
+            the Black church into jazz. Singer as conversation participant, not soloist.</p>
+            <div class="examples">Live from Concord to London (1978), Jazz Alley live sets</div>
+            <div class="genealogy"><strong>From 2&deg;:</strong> Parallels composed improvisation &mdash; structure (alternation) + freedom (content)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blues Tonality in Jazz Context</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Blue notes as tonal color, not chromatic alteration. Microtonal pitch bending the
+            piano cannot replicate &mdash; chromaticism that exists in the body. A gravitational
+            pull toward the minor mode expressed through inflection.</p>
+            <div class="examples">Never Make Your Move Too Soon (1980), Hot Cargo (1958)</div>
+            <div class="genealogy"><strong>From 0&deg;&ndash;1&deg;:</strong> Embodied chromaticism &mdash; Jones (bass), Frisell (upper), Anderson (voice)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Swing Rhythm</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Triplet subdivision with behind-the-beat placement. The pulse is steady but the
+            voice floats above it, leaning back. Not rubato, not syncopation &mdash; continuous
+            microtiming between voice and rhythm section. Elastic time.</p>
+            <div class="examples">Hot Cargo (1958), Concord Jazz recordings (1976&ndash;1990s)</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Jones (regular) &rarr; Horvitz (polymetric) &rarr; Frisell (rubato) &rarr; Anderson (elastic)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Singer as Interpreter</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Interpretation as creative act equal to composition and improvisation. Transforming
+            a fixed text (melody + lyric) through phrasing, dynamics, timbre, and presence into
+            something personal. A skill undervalued by music education but equally demanding.</p>
+            <div class="examples">All Concord Jazz recordings; signature songs evolving across decades</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Jones (compose) &rarr; Horvitz (compose+improv) &rarr; Frisell (improv) &rarr; Anderson (interpret)</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             THE STAY PATTERN
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Stay Pattern</h2>
+
+        <p>Jones left Seattle and never returned as a resident. Frisell and Horvitz arrived from outside.
+        Anderson left, traveled the world, and <strong>came back</strong>. She is the first artist in the
+        engine who represents the return &mdash; the talent that was exported, survived the lean years,
+        and chose Seattle as home.</p>
+
+        <p>Anderson&rsquo;s institution-building was not organizational (Horvitz, Royal Room) or industrial
+        (Jones, Mercury Records VP). It was <strong>presence</strong> &mdash; decades of being Seattle&rsquo;s
+        jazz vocalist, performing at Jazz Alley and Earshot, embodying continuity between the Jackson Street
+        era and the contemporary jazz community. She became an institution not by building one but by
+        <em>being</em> one.</p>
+
+        <p>The S36 engine now tracks four artist-city patterns:</p>
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Seattle Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure</td></tr>
+            <tr><td>The Seattle Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement</td></tr>
+            <tr><td>The European Exile</td><td>Anderson (3&deg;)</td><td>American career decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as resident anchor</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;2&deg;</h4>
+          <ul>
+            <li><strong>Garfield pipeline:</strong> Anderson is the second confirmed alumna (with Jones). Same school, same era, same teachers, different career &mdash; vocalist vs. arranger/producer.</li>
+            <li><strong>Hampton band:</strong> Both Jones and Anderson launched nationally through Hampton. The pipeline is now documented at both ends: arranger (Jones) and vocalist (Anderson).</li>
+            <li><strong>Mercury Records:</strong> Anderson&rsquo;s breakthrough label (<em>Hot Cargo</em>, 1958) is the same label where Jones became VP (1964). Label-level continuity.</li>
+            <li><strong>Chromaticism thread:</strong> Jones in the bass (propulsion). Frisell in the upper register (suspension). Anderson in the voice (embodied inflection). Three deployments of the same harmonic principle.</li>
+            <li><strong>Export pattern contrast:</strong> Jones and Anderson both followed the export pattern. Frisell and Horvitz followed The Seattle Draw. Anderson uniquely returned &mdash; completing the circle.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../001-bill-frisell/index.html">S36-001 &mdash; Bill Frisell (Degree 1&deg;)</a></li>
+            <li><a href="../002-wayne-horvitz/index.html">S36-002 &mdash; Wayne Horvitz (Degree 2&deg;)</a></li>
+            <li><a href="../../../GRV/index.html">GRV &mdash; Green River / Seattle Scene</a></li>
+            <li><a href="../../../RBH/index.html">RBH &mdash; Radio Broadcast History</a></li>
+            <li><a href="../../../CDS/index.html">CDS &mdash; Central District</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>National Endowment for the Arts. &ldquo;Ernestine Anderson: NEA Jazz Master, 2002.&rdquo; arts.gov.</li>
+          <li>Mercury Records. <em>Hot Cargo</em> (1958) and subsequent releases.</li>
+          <li>Concord Jazz. <em>Hello Like Before</em> (1976), <em>Live from Concord to London</em> (1978),
+          <em>Never Make Your Move Too Soon</em> (1980), <em>Big City</em> (1983).</li>
+          <li>Grammy.com. Nomination records.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="5">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>de Barros, Paul. &ldquo;Ernestine Anderson: Seattle&rsquo;s First Lady of Jazz.&rdquo; Seattle Times, 2010.</li>
+          <li>Gioia, Ted. <em>The History of Jazz</em>. 2nd ed. Oxford University Press, 2011.</li>
+          <li>Jones, Quincy. <em>Q: The Autobiography</em>. Doubleday, 2001.</li>
+          <li>JazzTimes. &ldquo;Ernestine Anderson: The Voice That Came Home.&rdquo; 2002.</li>
+          <li>DownBeat. Reviews and profiles, 1958&ndash;2016.</li>
+          <li>NPR Music. &ldquo;Ernestine Anderson: A Life in Jazz.&rdquo; 2008.</li>
+          <li>AllMusic. Artist biography and critical reviews.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="13">
+          <li>HistoryLink.org. Essays #10891 and #3944.</li>
+          <li>Seattle Civil Rights &amp; Labor History Project, UW.</li>
+          <li>Seattle Times. Obituary, March 11, 2016.</li>
+          <li>Associated Press. Obituary, March 2016.</li>
+          <li>Dimitriou&rsquo;s Jazz Alley. Institutional history.</li>
+          <li>Earshot Jazz Festival. Archives, 1988&ndash;present.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR — STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">November 11, 1928</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">March 10, 2016</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Age</span>
+            <span class="stat-value">87</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Houston, TX</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">1944 (age 16)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">3&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (vocal)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s&ndash;2010s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Mercury / Concord</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Honors</h4>
+          <div class="stat-row">
+            <span class="stat-label">NEA Jazz Master</span>
+            <span class="stat-value">2002</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Noms</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Span</span>
+            <span class="stat-value">~70 years</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Branch</span>
+            <span class="stat-value">Vocal (first)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">8 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Garfield Pipeline</h4>
+          <div class="stat-row">
+            <span class="stat-label">Alumni (S36)</span>
+            <span class="stat-value">2 confirmed</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jones</span>
+            <span class="stat-value">Class of 1950</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Anderson</span>
+            <span class="stat-value">Late 1940s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shared Band</span>
+            <span class="stat-value">Lionel Hampton</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shared Label</span>
+            <span class="stat-value">Mercury</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Patterns</h4>
+          <div class="stat-row">
+            <span class="stat-label">Export</span>
+            <span class="stat-value">Yes (1950s)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">European Exile</span>
+            <span class="stat-value">Yes (1960s-70s)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Stay</span>
+            <span class="stat-value">Yes (1976-2016)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Institution Type</span>
+            <span class="stat-value">Presence</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;2&deg; &rarr; 3&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carry Items</span>
+            <span class="stat-value">5 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Not Applicable</span>
+            <span class="stat-value">5 items</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">5 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern Items</span>
+            <span class="stat-value">10 extended</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">Floyd Standifer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 3&deg; / 360 &middot;
+      <a href="../002-wayne-horvitz/index.html">Prev: 2&deg; Horvitz</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
