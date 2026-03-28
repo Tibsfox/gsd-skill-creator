@@ -1,0 +1,247 @@
+{
+  "degree": 1,
+  "species": "Pacific Wren",
+  "scientific_name": "Troglodytes pacificus",
+  "sound_type": "intricate cascade warble",
+  "energy": 2,
+  "ecosystem": "old-growth understory",
+  "season": "resident",
+  "family": "Troglodytidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.644,
+    "lon": -122.354,
+    "description": "Fremont / Discovery Park area"
+  },
+  "physical": {
+    "length_in": "4",
+    "wingspan_in": "5.5",
+    "weight_g": "8-12"
+  },
+  "frequency_range": {
+    "fundamental_hz_low": 2000,
+    "fundamental_hz_high": 10000,
+    "peak_energy_hz_low": 3000,
+    "peak_energy_hz_high": 8000,
+    "register": "soprano"
+  },
+  "song_metrics": {
+    "bout_duration_s": "5-10",
+    "notes_per_bout": "100+",
+    "peak_note_rate_per_s": 36,
+    "note_repertoire_size": "40-50+",
+    "polyphony": "bilateral (two independent voices)"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Complex melodic improvisation",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/improvisation/",
+      "examples": [
+        "Each song rendition differs — improvisation over a structural template",
+        "Note selection from personal repertoire in real time",
+        "Parallels jazz solo performance: chord changes as framework, note choice as creative act"
+      ],
+      "music_theory_parallel": "Improvisation over form. The song template provides harmonic/structural constraints; the individual makes creative choices within them."
+    },
+    {
+      "concept": "Micro-phrase structure (rhythmic grouping)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/",
+      "examples": [
+        "Micro-pauses (10-50 ms) divide cascade into groups of 3-8 notes",
+        "Hierarchical nesting: notes within motifs, motifs within phrases, phrases within bout",
+        "Bar lines and phrase marks in notation serve identical grouping function"
+      ],
+      "music_theory_parallel": "Nested temporal organization — the same principle structuring bars, phrases, sections, and movements in composed music."
+    },
+    {
+      "concept": "Frequency modulation (biological FM synthesis)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/synthesis/",
+      "examples": [
+        "Rapid pitch changes via syringeal muscle tension modulation at millisecond timescales",
+        "Chowning (1973) FM synthesis paper as technical parallel",
+        "Two oscillators (bilateral syrinx) each independently frequency-modulated",
+        "Moog voltage-controlled oscillators (1964) achieve electronically what the wren achieves biologically"
+      ],
+      "music_theory_parallel": "FM synthesis — systematic variation of pitch over time to generate complex timbres from simple vibrating sources."
+    },
+    {
+      "concept": "Theme and variation form",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/",
+      "examples": [
+        "Identifiable motifs recur with modifications (pitch transposition, rhythmic alteration, extension/truncation)",
+        "Bach Goldberg Variations, Beethoven Diabelli Variations — same formal structure",
+        "Balances repetition (recognition) with variation (novelty) to sustain interest over time"
+      ],
+      "music_theory_parallel": "Theme and variation — one of the oldest compositional structures, solving the universal problem of temporal coherence through patterned change."
+    },
+    {
+      "concept": "The trill as ornament (Baroque parallel)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/ornamentation/",
+      "examples": [
+        "Rapid alternation between adjacent pitches — acoustically identical to keyboard trills",
+        "Grace notes (acciaccatura) and mordent-like turns visible in spectrograms",
+        "Maps directly to Baroque ornament tables (C.P.E. Bach, Quantz, Couperin)"
+      ],
+      "music_theory_parallel": "Ornamentation — decorative figures applied to structural notes. The wren's ornament vocabulary parallels Baroque performance practice."
+    },
+    {
+      "concept": "Bilateral polyphony (two-voice syrinx)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/syrinx/",
+      "examples": [
+        "Left and right bronchial halves produce independent frequencies simultaneously",
+        "Non-harmonically-related dual traces visible in spectrograms (Suthers 1990)",
+        "Transition from monophony (degree 0 heron) to polyphony (degree 1 wren)"
+      ],
+      "music_theory_parallel": "Polyphony — multiple independent voices from a single source. The transition from Gregorian chant to organum, enacted by a 10-gram bird."
+    },
+    {
+      "concept": "Old-growth as acoustic environment",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/old-growth/",
+      "examples": [
+        "3-8 kHz frequency window optimized for understory propagation",
+        "High canopy blocks wind noise; dense understory buffers ambient sound",
+        "Forest IS the reverb chamber — degrade it and you degrade the acoustic channel",
+        "Lowest ambient noise levels of any terrestrial habitat"
+      ],
+      "music_theory_parallel": "Acoustic architecture — the performance space shapes the music. Concert hall acoustics, studio design, and forest structure all serve the same function."
+    },
+    {
+      "concept": "Song learning as cultural transmission",
+      "level": "intermediate",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/learning/",
+      "examples": [
+        "Song is learned from neighboring adults during a sensitive period (not innate)",
+        "Local dialects emerge from cultural transmission chains",
+        "Parallels human musical traditions: master-apprentice, oral tradition, regional style"
+      ],
+      "music_theory_parallel": "Cultural transmission — music as learned tradition passed between generations. Local dialect = regional musical style."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Passerine taxonomy and distribution; Pacific Wren species account"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Old-growth forest ecology, understory structure, decay-stage wood habitat"
+    },
+    {
+      "project": "BPS",
+      "title": "Bio-Physics Sensing",
+      "connection": "Bilateral syrinx mechanics, FM synthesis via muscle control, acoustic propagation in forests"
+    },
+    {
+      "project": "COL",
+      "title": "Columbia Valley",
+      "connection": "Old-growth remnants along Columbia tributaries supporting wren populations"
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Bill Frisell at degree 1 — chromatic elaboration, textural layering, complexity from simplicity"
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Direct predecessor. Silence-to-complexity bridge. Monophony to polyphony, bass to soprano, geological tempo to millisecond precision."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Bill Frisell",
+    "degree": 1,
+    "genre": "Americana / Jazz",
+    "shared_principle": "Chromatic elaboration over foundational structure; textural complexity emerging from apparent simplicity; the cascade of notes over a bass pedal.",
+    "resonance_points": [
+      "Textural layering: Frisell builds dense, shimmering textures from simple guitar lines — the wren builds dense cascades from a 10-gram body",
+      "Chromatic elaboration: unexpected intervals and pitch bends parallel the wren's frequency modulation and non-standard interval leaps",
+      "Complexity from apparent simplicity: both seem effortless until you try to transcribe what is actually happening",
+      "Foundational contrast: Frisell's music gains meaning from the silence and space around the notes — the wren's cascade gains meaning from the heron's silence at degree 0"
+    ]
+  },
+  "silence_to_complexity_bridge": {
+    "from_degree": 0,
+    "from_species": "Great Blue Heron",
+    "to_degree": 1,
+    "to_species": "Pacific Wren",
+    "contrast_metrics": {
+      "events_per_hour": {"heron": "0-1", "wren": "3600+"},
+      "notes_per_bout": {"heron": "1-6", "wren": "100+"},
+      "frequency_range_hz": {"heron": "200-800", "wren": "2000-10000"},
+      "body_mass_g": {"heron": "2100-2500", "wren": "8-12"},
+      "polyphony": {"heron": "monophonic", "wren": "bilateral"}
+    },
+    "music_parallel": "Whole note yields to sixty-fourth note cascade. Bass pedal gives way to melodic entrance. Cage yields to Coltrane. Jones yields to Frisell."
+  },
+  "conservation": {
+    "federal_status": "Not listed (ESA)",
+    "state_status": "Monitored; old-growth dependency makes it a bioindicator of forest condition",
+    "protection": "Migratory Bird Treaty Act (16 U.S.C. 703-712)",
+    "primary_threats": [
+      "Old-growth forest loss (80-90% reduction from pre-contact extent in PNW)",
+      "Timber harvest of mature second-growth before reaching old-growth characteristics",
+      "Forest fragmentation reducing contiguous understory habitat",
+      "Anthropogenic noise pollution degrading acoustic environment"
+    ],
+    "habitat_note": "Does not adapt to clearcuts or plantations. Requires structural complexity that only centuries of forest development produce."
+  },
+  "key_sites": [
+    {
+      "name": "Discovery Park old-growth understory",
+      "type": "breeding/foraging",
+      "description": "Remnant old-growth and mature second-growth within city limits; documented Pacific Wren territory",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park old-growth",
+      "type": "breeding/foraging",
+      "description": "One of the last old-growth fragments in urban Seattle",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Olympic National Park (Hoh Rain Forest)",
+      "type": "core habitat",
+      "description": "Pristine old-growth temperate rainforest; high Pacific Wren density",
+      "county": "Jefferson County, WA"
+    }
+  ],
+  "sources": [
+    "Toews & Irwin (2008). Molecular Ecology 17(11). [Species split paper.]",
+    "Toews, Brelsford & Irwin (2011). BMC Evolutionary Biology 11:304.",
+    "Kroodsma (1980). The Condor 82(4). [Song complexity study.]",
+    "Kroodsma (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Suthers (1990). Nature 347. [Bilateral syrinx independence.]",
+    "Suthers, Goller & Pytte (1999). Phil Trans R Soc B 354.",
+    "Cornell Lab of Ornithology. Birds of the World: Pacific Wren.",
+    "Seattle Audubon Society. BirdWeb: Pacific Wren.",
+    "Manuwal & Huff (1987). The Condor 89(3). [Old-growth bird populations.]",
+    "Huff & Raley (1991). USDA Forest Service GTR-PNW-285.",
+    "Chowning (1973). JAES 21(7). [FM synthesis.]",
+    "Habib, Bayne & Boutin (2007). Conservation Biology 21(4)."
+  ],
+  "release_metadata": {
+    "release_number": "001",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
