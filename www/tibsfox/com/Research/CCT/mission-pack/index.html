@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comedy Central &amp; The Daily Show — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #BF360C;
+    --tertiary: #1A237E;
+    --accent: #7B1FA2;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FBE9E7;
+    --light-tertiary: #E8EAF6;
+    --row-gray: #F5F5F5;
+    --border-gray: #BDBDBD;
+    --subtle-gray: #757575;
+    --dark-text: #212121;
+    --card-bg: #EDE7F6;
+    --card-border: #7B1FA2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FAFAFA;
+    color: var(--dark-text);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 60%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+
+  header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .header-meta {
+    display: inline-flex;
+    gap: 2rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.82rem;
+    opacity: 0.9;
+  }
+
+  .pipeline-tag {
+    margin-top: 1.4rem;
+    font-size: 0.9rem;
+    opacity: 0.75;
+    letter-spacing: 0.08em;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .files-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 6px;
+    padding: 1.4rem 1.6rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74,20,140,0.18);
+  }
+
+  .file-card .file-type {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .file-card .file-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .file-card .file-desc {
+    font-size: 0.82rem;
+    color: var(--subtle-gray);
+    line-height: 1.5;
+  }
+
+  .file-card.tex-card {
+    background: var(--light-secondary);
+    border-color: var(--secondary);
+  }
+
+  .file-card.tex-card .file-type { color: var(--secondary); }
+  .file-card.tex-card .file-name { color: var(--secondary); }
+
+  .contents-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contents-table th {
+    background: var(--primary);
+    color: white;
+    padding: 0.55rem 1rem;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .contents-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #E0E0E0;
+    vertical-align: top;
+  }
+
+  .contents-table tr:nth-child(even) td { background: var(--row-gray); }
+
+  .stage-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .badge-1 { background: var(--light-primary); color: var(--primary); }
+  .badge-2 { background: var(--light-secondary); color: var(--secondary); }
+  .badge-3 { background: var(--light-tertiary); color: var(--tertiary); }
+
+  .usage-steps {
+    counter-reset: steps;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .usage-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 0.88rem;
+  }
+
+  .usage-steps li::before {
+    content: counter(steps);
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .recompile-box {
+    background: #212121;
+    color: #E0E0E0;
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    margin-top: 0.8rem;
+    overflow-x: auto;
+  }
+
+  .recompile-box .comment { color: #757575; }
+  .recompile-box .cmd { color: #CE93D8; }
+
+  .closing-quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.6rem;
+    margin-top: 2.5rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .closing-quote blockquote {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .closing-quote cite {
+    font-size: 0.78rem;
+    color: var(--subtle-gray);
+    font-style: normal;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--subtle-gray);
+    border-top: 1px solid #E0E0E0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>Comedy Central<br>&amp; The Daily Show</h1>
+  <h2>The Longest-Running Show in Cable Comedy</h2>
+  <div class="header-meta">
+    <span>March 27, 2026</span>
+    <span>Squadron Profile · 12 Roles</span>
+    <span>5 Research Modules</span>
+    <span>29 Pages</span>
+  </div>
+  <div class="pipeline-tag">Vision → Research → Mission · Full Pipeline Execution</div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Package Files</h2>
+  <div class="files-grid">
+    <a href="comedy_central_mission.pdf" download class="file-card">
+      <div class="file-type">PDF · 202 KB · 29 Pages</div>
+      <div class="file-name">Mission Package</div>
+      <div class="file-desc">Complete three-stage document: Vision Guide, Research Reference, and Mission Package. Ready for GSD orchestrator handoff.</div>
+    </a>
+    <a href="comedy_central_mission.tex" download class="file-card tex-card">
+      <div class="file-type">XeLaTeX Source</div>
+      <div class="file-name">Editable Source</div>
+      <div class="file-desc">Full LaTeX source for modification and recompilation. Three XeLaTeX passes required for correct TOC and page references.</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">Document Contents</h2>
+  <table class="contents-table">
+    <thead>
+      <tr><th>Stage</th><th>Section</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="stage-badge badge-1">Stage 1</span></td><td>Vision Guide</td><td>Narrative vision, problem statement (5 problems), module architecture, chipset config, scope, 12 success criteria, through-line</td></tr>
+      <tr><td><span class="stage-badge badge-2">Stage 2</span></td><td>Module 01: Origins</td><td>Comedy Channel + HA! dual failure, 1991 merger, MST3K, Politically Incorrect, TDS launch (1989–1996)</td></tr>
+      <tr><td><span class="stage-badge badge-2">Stage 2</span></td><td>Module 02: TDS Lineage</td><td>All five host/format eras: Kilborn, Stewart (9/11, Crossfire, 26 Emmys), Noah, rotating, Stewart return 2024</td></tr>
+      <tr><td><span class="stage-badge badge-2">Stage 2</span></td><td>Module 03: Talent Forge</td><td>12+ correspondent alumni profiles, Oliver retention failure, Colbert Report as cable architecture</td></tr>
+      <tr><td><span class="stage-badge badge-2">Stage 2</span></td><td>Module 04: Satire as Journalism</td><td>Baumgartner-Morris Effect (2006), Baym discursive integration (2005), MCDA 2025 study, pedagogy research, civic effects</td></tr>
+      <tr><td><span class="stage-badge badge-2">Stage 2</span></td><td>Module 05: Streaming Era</td><td>South Park HBO Max → Paramount+ transition, Skydance acquisition (Aug 2025), CC website shutdown, linear identity question</td></tr>
+      <tr><td><span class="stage-badge badge-3">Stage 3</span></td><td>Milestone Spec</td><td>Codename INDECISION-COMPLETE, wave architecture diagram, system layers, deliverables table</td></tr>
+      <tr><td><span class="stage-badge badge-3">Stage 3</span></td><td>Wave Execution Plan</td><td>Waves 0–3, parallel tracks 1A/1B/1C, cache optimization, token budget (80K ceiling 96K), dependency graph</td></tr>
+      <tr><td><span class="stage-badge badge-3">Stage 3</span></td><td>Test Plan</td><td>35 total tests: 5 safety-critical (BLOCK), 10 core functionality, 5 integration, 5 edge cases + verification matrix</td></tr>
+      <tr><td><span class="stage-badge badge-3">Stage 3</span></td><td>Crew Manifest</td><td>Squadron profile, 12 roles: FLIGHT, PLAN, SCOUT, EXEC ×2, CRAFT-HIST, CRAFT-MEDIA, VERIFY, INTEG, CAPCOM, BUDGET, LOG</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">How to Use This Package</h2>
+  <ol class="usage-steps">
+    <li>Download the PDF and .tex source files above.</li>
+    <li>Open the PDF and read Stage 1 (Vision) to confirm the mission scope matches your intent before committing executor resources.</li>
+    <li>Hand the PDF to your GSD orchestrator (Claude Code / gsd-skill-creator) with the prompt: <em>"Execute the mission in this package. Codename: INDECISION-COMPLETE. Use the wave plan in Stage 3."</em></li>
+    <li>The orchestrator will pause at the two CAPCOM gates (after Wave 1 and after Wave 2) for your review before proceeding to synthesis and publication.</li>
+    <li>After synthesis, combine Stage 3's cross-module output with the five module documents into the final LaTeX PDF using the compilation instructions below.</li>
+  </ol>
+
+  <h2 class="section-title">Recompile the LaTeX Source</h2>
+  <p style="font-size:0.85rem; color:var(--subtle-gray); margin-bottom:0.6rem;">
+    Three XeLaTeX passes are required to resolve the table of contents, cross-references, and page count. Requires DejaVu fonts installed on Ubuntu.
+  </p>
+  <div class="recompile-box">
+    <span class="comment"># Install dependencies if needed</span><br>
+    <span class="cmd">sudo apt-get install texlive-xetex texlive-fonts-extra fonts-dejavu</span><br><br>
+    <span class="comment"># Three-pass compilation</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode comedy_central_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode comedy_central_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode comedy_central_mission.tex</span>
+  </div>
+
+  <div class="closing-quote">
+    <blockquote>"Comedy Central is not a lifestyle channel."<br>— Comedy Central executive, c. 1999</blockquote>
+    <cite>
+      In the gap between what the network was designed to be and what it became, the spaces-between principle operated at broadcast scale.
+      The architecture did the rest. <em>INDECISION-COMPLETE</em> is the study of a system that worked by refusing to be what it looked like.
+    </cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Comedy Central &amp; The Daily Show · March 27, 2026 · Ready for GSD Orchestrator
+</footer>
+
+</body>
+</html>
