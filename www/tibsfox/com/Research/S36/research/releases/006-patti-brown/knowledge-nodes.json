@@ -1,0 +1,156 @@
+{
+  "degree": 6,
+  "artist": "Patti Bown",
+  "slug": "006-patti-brown",
+  "genre": "Jazz (piano — hard bop, avant-garde)",
+  "energy": 2,
+  "era": "1950s-1970s",
+  "location": {
+    "origin": "Seattle, WA — Central District",
+    "formative": "Seattle, WA — Seattle University (formal music training)",
+    "career": "New York City — hard bop clubs, Columbia Records, session work (Motown), arranger circles (Jones, Nelson, Pearson)"
+  },
+  "born": "1931",
+  "died": "2008",
+  "labels": ["Columbia"],
+  "theory_nodes": [
+    {
+      "concept": "Hard bop piano voicings (rootless voicings, quartal harmony)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/piano/hard-bop-voicings.md",
+      "examples": [
+        "Patti Bown Plays Big Piano (Columbia, 1958) — rootless voicings in trio context, omitting root for bassist",
+        "Horace Silver Song for My Father and Bobby Timmons Moanin' — contemporaneous hard bop piano voicing references",
+        "Quartal voicings built in fourths connecting to modal jazz movement (Kind of Blue, 1959)"
+      ],
+      "description": "Rootless voicings omit the chord root (leaving it to the bassist) and voice the remaining tones — 3rd, 7th, and extensions (9th, 13th, altered tones) — in close position. Harmonically rich but spatially compact, occupying a narrow band of the keyboard's middle register. Quartal dimension adds open, modern sound. Bown's voicings are collaborative — they assume a rhythm section, unlike Berry's self-sufficient stride voicings. The voicing tells you whether the pianist is alone or in a band.",
+      "genealogy": {
+        "ancestors": ["Stride technique — rooted, full voicings (degree 5)", "Cocktail jazz harmony — extended chords (degree 5)", "ii-V-I mastery (degree 0)"],
+        "relationship": "Berry (degree 5) plays rooted stride and cocktail voicings — self-sufficient, assuming no rhythm section. Bown (degree 6) plays rootless hard bop voicings — collaborative, assuming bass and drums. The voicing architecture reflects the performance context: solo vs. trio. Same piano, same neighborhood, opposite voicing philosophy."
+      }
+    },
+    {
+      "concept": "Call-and-response (gospel influence in hard bop)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/forms/call-and-response-hard-bop.md",
+      "examples": [
+        "Bown's hard bop trio recordings — right-hand melodic phrase (call) answered by left-hand chordal punctuation (response)",
+        "Bobby Timmons 'Moanin'' — canonical hard bop call-and-response form",
+        "Horace Silver 'The Preacher' — gospel-jazz synthesis in hard bop context"
+      ],
+      "description": "Call-and-response is the oldest structural principle in African-American music. In hard bop piano, it manifests as right-hand melodic phrase (call) answered by left-hand chordal punctuation (response). The left hand is episodic — it speaks when the right hand pauses, creating a conversation between two hands. This is structurally different from Berry's stride, where the left hand is continuous alternation. The gospel dimension connects Bown to the Central District's church tradition — gospel piano and jazz piano shared techniques, voicings, and performers in the same cultural infrastructure.",
+      "genealogy": {
+        "ancestors": ["Stride technique — continuous left-hand alternation (degree 5)"],
+        "relationship": "two left-hand philosophies from one neighborhood — Berry (degree 5) uses continuous stride alternation (bass-chord-bass-chord), Bown (degree 6) uses episodic call-and-response (speak when the right hand pauses). Berry's left hand is a metronome. Bown's left hand is a conversationalist. The gospel dimension (Central District church tradition) is the shared root."
+      }
+    },
+    {
+      "concept": "Hard bop rhythmic drive (insistent swing, percussive comping)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/hard-bop-drive.md",
+      "examples": [
+        "Patti Bown Plays Big Piano — rhythmic authority driving trio from piano bench",
+        "Art Blakey and the Jazz Messengers — hard bop rhythmic template (drummer as driver)",
+        "Horace Silver Quintet recordings — pianist as rhythmic driver alongside drummer"
+      ],
+      "description": "Hard bop's rhythmic character is heavier, more rooted, more indebted to blues shuffle and gospel backbeat than cool jazz or West Coast jazz. The pianist's chords are rhythmic events — each voicing lands on a specific beat with a specific attack, contributing to groove as much as harmony. The piano as percussive instrument. Bown's authority at the keyboard was partly rhythmic: driving a trio from the piano bench with the same authority a drummer drives a band from the kit. Fifth position on the rhythmic spectrum: regular (Berry), polymetric (Horvitz), rubato (Frisell), elastic swing (Anderson), hard bop drive (Bown).",
+      "genealogy": {
+        "ancestors": ["Elastic swing — vocal phrase stretching (degree 3)", "Regular stride — metronomic left-hand (degree 5)"],
+        "relationship": "hard bop drive is the most physically emphatic position on the rhythmic spectrum. Berry (degree 5) provides regular stride — metronomic, predictable, foundational. Bown (degree 6) provides hard bop drive — insistent, percussive, blues-rooted. Both are rhythmically grounded (unlike Frisell's rubato or Horvitz's polymetric approaches), but Berry's regularity serves the solo pianist's self-sufficiency while Bown's drive serves the trio leader's authority."
+      }
+    },
+    {
+      "concept": "The pianist as bandleader (authority and the bench)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/piano/pianist-as-bandleader.md",
+      "examples": [
+        "Patti Bown Plays Big Piano — trio format, Bown as leader choosing repertoire, tempo, form",
+        "Ahmad Jamal trio recordings — pianist-as-leader template, trio as hierarchy",
+        "Bill Evans Trio — contemporaneous pianist-led trio redefining piano-bass-drums relationship"
+      ],
+      "description": "Leading a jazz piano trio is an act of authority — the pianist chooses repertoire, sets tempo, determines form, signals transitions, controls dynamics. The trio is a hierarchy, and the pianist sits at the top. For Bown, this was a double assertion: musical authority and social authority. A Black woman in 1958 exercising authority over typically male sidemen was claiming a position the industry did not expect her to occupy. Extends the Amiga Principle to small-group scale: Jones (0°, large ensemble), Bown (6°, small group), Berry (5°, solo). Three scales of pianistic authority.",
+      "genealogy": {
+        "ancestors": ["Solo pianist as self-contained ensemble / Amiga Principle (degree 5)", "Arranging-as-architecture / Amiga Principle (degree 0)"],
+        "relationship": "the Amiga Principle now has three scales — Jones (degree 0) directs a large ensemble (organizational Amiga at orchestra scale), Berry (degree 5) is a self-contained ensemble (physical Amiga at solo scale), Bown (degree 6) leads a small group (organizational Amiga at trio scale). The spectrum is no longer a bracket; it is a gradient. Bown's position is between Jones and Berry — she directs others (like Jones) but from the instrument itself (like Berry)."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-003", "S36-005", "CDS", "MUS"],
+  "seattle_connection": "Born and raised in the Central District. Studied at Seattle University. Left for New York City in the mid-1950s. Became one of the first Black women to lead a hard bop piano trio. Recorded Patti Bown Plays Big Piano (Columbia, 1958). Worked with Quincy Jones, Oliver Nelson, Duke Pearson. Session pianist for Motown. Died 2008 in Philadelphia, largely forgotten by the city that produced her. The Erasure pattern: exported, succeeded, erased.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Hard bop piano voicings — rootless, compact, collaborative; assumes rhythm section; opposite of Berry's self-sufficient stride voicings",
+      "Call-and-response — gospel-derived dialogic form; episodic left hand vs. Berry's continuous stride; Central District church tradition secularized",
+      "Hard bop rhythmic drive — fifth position on rhythmic spectrum; insistent, percussive, blues-rooted; pianist as rhythmic driver",
+      "Pianist as bandleader — trio leadership as authority assertion; Amiga Principle at small-group scale; gender dimension of bandstand authority"
+    ],
+    "immediate_items": [
+      "Degree 7 must rotate away from Central District and/or jazz. Seven consecutive degrees in one neighborhood, six of seven jazz artists. The cluster is exhaustively documented. Rotation is mandatory.",
+      "Gender dimension now live: two women in seven degrees (Anderson vocalist, Bown instrumentalist). The instrumentalist barrier was higher. Track at every subsequent degree.",
+      "The Erasure pattern: Bown's career documents a failure mode in the industry's memory system. Track whether subsequent artists were erased or preserved, and what variables determined the outcome.",
+      "Columbia Records label connection: Bown's debut on Columbia adds a second major-label data point (Mercury for Jones and Anderson). Track all label connections.",
+      "Piano lineage: seven nodes across two degrees (Berry 3 + Bown 4). Every dimension inverts between Berry and Bown. Extend at subsequent piano degrees.",
+      "Session-pianist labor mode: Bown introduces the anonymous professional as a third pianistic labor mode (architect/Jones, venue anchor/Berry, session pianist/Bown). Track at subsequent degrees."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: seven named patterns (Export, Draw, Exile, Stay, Teacher, Persistence, Erasure). Bown adds the exported-and-forgotten. Classify every subsequent artist.",
+      "Composition-improvisation spectrum: Bown maps to interpretation with compositional authority (trio leader who selects and shapes repertoire). Five positions remain stable.",
+      "Chromaticism thread: six deployments now — Bown extends with hard bop chromatic approach tones and altered-dominant voicings. Continue tracking.",
+      "Artist-as-institution spectrum: seven positions (industry, community, performer, presence, educator, persistence, erasure). Bown adds the erased institution — significant during career, absent from memory.",
+      "Central District geographic thread: 7 degrees, 6 directly connected artists. Densest geographic cluster in S36. ROTATION MANDATORY at degree 7.",
+      "Amiga Principle gradient: three scales — large ensemble (Jones, 0°), small group (Bown, 6°), solo (Berry, 5°). No longer a bracket; it is a spectrum. Track subsequent expressions.",
+      "Gender-barrier gradient: vocalist (permeable barrier, Anderson 3°) vs. instrumentalist (higher barrier, Bown 6°). Track at all subsequent female artist degrees.",
+      "Body-as-sound-source thread: four instruments now — voice (Anderson, 3°), trumpet (Standifer, 4°), piano-as-percussion (Berry, 5°), piano-as-percussive-comping (Bown, 6°). Two piano modes.",
+      "Local-artist documentation challenge vs. national-label documentation: Berry (local, no discography) vs. Bown (Columbia, discography exists but out of print). National label does not guarantee memory preservation.",
+      "Jackson Street corridor categories: primary participant (Jones, Anderson, Standifer), inheritor (Berry), settler (Frisell, Horvitz), post-corridor (Bown — left Seattle before or during corridor's decline). Classify all future artists.",
+      "Educational pipeline diversity: seven pipelines (Garfield, Berklee, UC Santa Cruz, UW, bandstand apprenticeship, self-taught, Seattle University). No two identical across seven degrees.",
+      "Formal/informal pedagogy axis extended: Standifer (formal UW), Berry (informal performance), Bown (formal Seattle University + informal session work). Three pedagogical modes."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Patti Bown Plays Big Piano",
+      "year": 1958,
+      "label": "Columbia",
+      "format": "LP",
+      "status": "out of print",
+      "significance": "Debut album on the most prestigious jazz label of the era. One of the first hard bop piano trio recordings led by a Black woman. Favorably reviewed in DownBeat. Title is a declaration of scope — 'Big Piano' means the player commands the instrument's full range."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Quincy Jones", "relationship": "Central District, both exported to NYC. Arranger connections — Bown worked within Jones's professional orbit. Same neighborhood, same departure, opposite visibility outcomes (Export vs. Erasure).", "future_degree": 0},
+    {"name": "Ernestine Anderson", "relationship": "Gender thread — the two women in the first seven degrees. Anderson: vocalist, recognized. Bown: instrumentalist, erased. The gender barrier was higher for instrumentalists. Both from the Central District.", "future_degree": 3},
+    {"name": "Overton Berry", "relationship": "Piano lineage — stride to hard bop, same neighborhood, opposite trajectories. Stayed/left, recognized/erased, male/female. First consecutive instrument pair in S36. Every dimension inverts.", "future_degree": 5}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones — attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson — attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer — Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry — Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown — Central District native, Seattle University (not Garfield). Seventh educational pipeline. Formal training via Jesuit university on Capitol Hill.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": true,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": true,
+    "native_born": true,
+    "self_taught": false,
+    "institution_type": "erasure",
+    "amiga_principle": "organizational_small_group",
+    "gender": "female",
+    "instrumentalist": true,
+    "gender_barrier": "triple — race, gender, instrumental role"
+  },
+  "sources_count": 13,
+  "word_count_research": 3200,
+  "release_date": "2026-03-28"
+}
