@@ -1,0 +1,1174 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology domain color scheme
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{okgreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{DHCP Full Protocol Specification}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={DHCP Full Protocol Specification -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{DHCP\\[0.3em]Full Protocol Specification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Every Wire-Level Detail, Every State Transition, Every Byte}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026\ \ |\ \ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)\ \ |\ \ Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{DHCP Full Protocol Specification --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Research Completed --- Ready for Mission Execution}
+\metafield{RFC Authority:}{RFC 2131 (DHCPv4), RFC 2132 (Options), RFC 8415 (DHCPv6), RFC 3118 (Auth)}
+\metafield{Domain:}{Network Protocols --- Internet Infrastructure Layer}
+\metafield{Depends on:}{GSD Mesh Prototype Spec (gsdmeshprototypespec.pdf)}
+\metafield{Context:}{Protocol specification mapping for implementation, security analysis, and GSD infrastructure work}
+
+\subsection{Vision}
+
+Every network-connected device in the modern world begins its participation in a network through a brief, elegant conversation with a server it cannot yet fully address. Before it has an identity --- before it knows its own IP address --- it broadcasts into the void: \textit{Who am I? Where am I? What are my parameters?} This is DHCP, the Dynamic Host Configuration Protocol, and understanding it at the wire level is essential to everything built on top of IP.
+
+DHCP is not glamorous. It operates in the background of every Wi-Fi join, every server boot, every container spin-up. It is the protocol that makes large-scale networking operationally viable --- without it, every device would require manual configuration of its IP address, subnet mask, default gateway, DNS servers, and dozens of other parameters. The Amiga Principle applies perfectly here: DHCP achieves staggering operational leverage through an architecturally simple, deterministic message exchange. Four message types (DISCOVER, OFFER, REQUEST, ACK) in the basic flow. A fixed-format packet with a 236-byte base followed by a variable options field. A lease lifecycle with precisely defined timers. Small building blocks. Massive operational consequence.
+
+This mission maps DHCP completely: every field in the packet, every option code in the catalog, every state in the client state machine, every attack vector in the security surface, and the full evolution from DHCPv4 to DHCPv6. The goal is a definitive implementation and analysis reference --- the kind of document you hand to an agent building a DHCP-aware mesh network component, a security analyzer auditing a campus network, or an educator teaching TCP/IP from the ground up.
+
+The spaces between the packet fields are where the protocol's intelligence lives. The \texttt{xid} (transaction ID) that ties a stateless exchange together. The \texttt{ciaddr} vs \texttt{yiaddr} distinction that encodes the difference between ``my current address'' and ``the address being offered to you.'' The magic cookie bytes (99.130.83.99) that guard the options field. Understanding these gaps is the entire point.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Wire-level opacity:} Most DHCP documentation describes the protocol conceptually but omits precise byte offsets, field widths, and encoding rules. Implementers and packet analyzers need the full wire format to build correct clients, servers, and sniffers.
+  \item \textbf{Options sprawl:} RFC 2132 defines the base option set, but hundreds of additional options have been standardized across dozens of subsequent RFCs. The complete option space is scattered across IANA registries and individual RFCs with no single synthesis document.
+  \item \textbf{State machine ambiguity:} The client state machine (INIT $\to$ SELECTING $\to$ REQUESTING $\to$ BOUND $\to$ RENEWING $\to$ REBINDING) has precise timer semantics (T1 at 50\%, T2 at 87.5\%, exponential backoff) that are rarely documented together with the transition conditions and retransmission rules.
+  \item \textbf{Security surface underappreciated:} DHCP has no built-in authentication. The attack surface --- starvation, rogue server, spoofing, MITM --- is well-known in security circles but poorly understood by network engineers who configure DHCP daily. The gap between RFC 3118's authentication option and its near-zero deployment is a critical finding.
+  \item \textbf{DHCPv4/DHCPv6 divergence:} DHCPv6 (RFC 8415, 2018) is architecturally different from DHCPv4 in ways that matter for dual-stack deployments --- different ports (546/547 vs 67/68), DUID vs MAC-based client identity, multicast instead of broadcast, prefix delegation as a first-class operation, and coexistence with SLAAC. These differences are rarely mapped side-by-side.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{DHCP as a Stateless Lease Negotiation Protocol:} A client with no configured address uses UDP broadcast to locate a server, negotiate a time-limited lease on a network address, and receive all parameters needed to participate in the IP network. The lease lifecycle --- allocation, renewal at T1, rebinding at T2, expiry --- is governed by deterministic timers that ensure address reuse without collision.
+
+\subsubsection{DORA Exchange Architecture}
+
+\begin{asciibox}
+CLIENT                          SERVER(S)
+  |                                |
+  |---[DHCPDISCOVER]-------------->|  UDP src:68, dst:67
+  |   broadcast (0.0.0.0 -> 255.255.255.255)
+  |                                |
+  |<--[DHCPOFFER]------------------|  Unicast or broadcast
+  |   yiaddr = offered IP          |  Server offers lease
+  |                                |
+  |---[DHCPREQUEST]--------------->|  Still broadcast
+  |   Selects one offer, declines others
+  |                                |
+  |<--[DHCPACK]-------------------|  Confirmed
+  |   Final parameters + T1/T2    |
+  |                                |
+  |... T1 timer (50% lease) ...    |
+  |                                |
+  |---[DHCPREQUEST unicast]------->|  Renew with original server
+  |<--[DHCPACK]--------------------|
+  |                                |
+  |... T2 timer (87.5% lease) ... |
+  |                                |
+  |---[DHCPREQUEST broadcast]----->|  Rebind with ANY server
+  |<--[DHCPACK]--------------------|
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
++------------------------------------------------------------------+
+| DHCP FULL PROTOCOL SPECIFICATION MISSION                         |
++------------------+------------------+---------------------------+
+| MODULE 01        | MODULE 02        | MODULE 03                  |
+| Wire Format &    | Options Catalog  | Lease Lifecycle &          |
+| Message Types    | RFC 2132 + Exts  | State Machine              |
++------------------+------------------+---------------------------+
+| MODULE 04        | MODULE 05                                     |
+| Security &       | DHCPv6 & Modern                               |
+| Attack Surface   | Extensions (RFC 8415)                         |
++------------------+-----------------------------------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Wire Format and Message Types}
+Full byte-by-byte layout of the DHCP packet: \texttt{op}, \texttt{htype}, \texttt{hlen}, \texttt{hops}, \texttt{xid}, \texttt{secs}, \texttt{flags}, \texttt{ciaddr}, \texttt{yiaddr}, \texttt{siaddr}, \texttt{giaddr}, \texttt{chaddr}, \texttt{sname}, \texttt{file}, options. All eight message types documented: DISCOVER, OFFER, REQUEST, DECLINE, ACK, NAK, RELEASE, INFORM. Transport semantics: UDP ports 67/68, broadcast vs unicast rules, minimum packet size (576 bytes per RFC 1122), overloaded \texttt{sname}/\texttt{file} fields.
+
+\subsubsection{Module 02 --- Options Catalog}
+Complete mapping of IANA-registered DHCP options from RFC 2132 and subsequent RFCs. Six option categories: RFC 1497 Vendor Extensions (codes 1--18), IP Layer Parameters per Host (19--25), IP Layer Parameters per Interface (26--33), Link Layer Parameters (34--36), TCP Parameters (37--39), Application and Service Parameters (40--78), DHCP-specific Extensions (50--61). Option encoding: Type-Length-Value (TLV) format, magic cookie (99.130.83.99), pad (code 0) and end (code 255) options. Site-specific range 128--254.
+
+\subsubsection{Module 03 --- Lease Lifecycle and State Machine}
+Three address allocation mechanisms: automatic (permanent), dynamic (time-limited), manual (pre-assigned). Complete client state machine: INIT, REBOOTING, SELECTING, REQUESTING, BOUND, RENEWING, REBINDING, INIT-REBOOT states. Timer semantics: T1 (renewal at 50\% of lease), T2 (rebinding at 87.5\%), lease expiry. Retransmission rules: exponential backoff in SELECTING (1, 2, 4, 8, 16, 32s max 60s), linear backoff in RENEWING (2, 4, 6, 8s max 20s). ARP conflict detection during REQUESTING state.
+
+\subsubsection{Module 04 --- Security Architecture and Attack Surface}
+Three primary attack classes: rogue DHCP server (MITM via gateway/DNS substitution), DHCP starvation (MAC address spoofing to exhaust IP pool), replay attacks. RFC 3118 authentication option: delayed authentication mechanism, shared-secret tokens, algorithm identifiers, limited real-world adoption analysis. Defensive mechanisms: DHCP snooping (Layer 2 switch feature), Dynamic ARP Inspection (DAI), IP Source Guard, port security (MAC address limiting), VLAN ACLs (VACLs).
+
+\subsubsection{Module 05 --- DHCPv6 and Modern Extensions}
+RFC 8415 (2018, obsoletes RFC 3315) architecture: SOLICIT/ADVERTISE/REQUEST/REPLY exchange, UDP ports 546/547, multicast addresses (ff02::1:2 link-local, ff05::1:3 site-local). DUID (DHCP Unique Identifier) types: DUID-LLT, DUID-EN, DUID-LL, DUID-UUID. Stateful vs stateless (information-only) modes. Prefix delegation (IA\_PD) as first-class operation. IA\_NA (non-temporary) vs IA\_TA (temporary) address assignments. SLAAC coexistence model. 16-bit option code space vs DHCPv4's 8-bit. Option 6 (ORO) for client-requested parameters.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# DHCP Mission Chipset YAML
+chipset:
+  agnus:  # Orchestration / context management
+    model: claude-opus-4-6
+    role: FLIGHT + PLAN
+    owns:
+      - Security analysis (Module 04) -- judgment-heavy
+      - DHCPv6 architectural comparison (Module 05)
+      - Synthesis wave cross-module integration
+    context_budget: 180k tokens
+
+  denise:  # Document assembly / output rendering
+    model: claude-sonnet-4-6
+    role: EXEC x2 + VERIFY
+    owns:
+      - Wire format documentation (Module 01)
+      - Options catalog compilation (Module 02)
+      - State machine documentation (Module 03)
+      - PDF assembly and table formatting
+    context_budget: 120k tokens per instance
+
+  paula:   # Scaffolding / shared schemas
+    model: claude-haiku-4-5
+    role: BUDGET + LOG + shared templates
+    owns:
+      - LaTeX table templates
+      - Option code index generation
+      - Commit message formatting
+    context_budget: 32k tokens
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Complete wire-level packet format documentation with field-by-field breakdown
+  \item All 8 DHCPv4 message types with encoding rules
+  \item Full IANA option registry through RFC 2132 plus critical extensions
+  \item Client state machine with all states, transitions, and timer semantics
+  \item Retransmission and backoff algorithms
+  \item Three primary attack classes with mechanism analysis
+  \item DHCP snooping, DAI, and IP Source Guard as defensive architectures
+  \item RFC 3118 authentication option analysis including adoption failure analysis
+  \item DHCPv6 (RFC 8415) full architecture including DUID types, IA types, and prefix delegation
+  \item DHCPv4 vs DHCPv6 side-by-side comparison matrix
+  \item SLAAC and DHCPv6 coexistence model
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item BOOTP (RFC 951) in depth --- covered only as DHCP ancestry
+  \item DNS Dynamic Update integration (RFC 2136) --- separate mission
+  \item DHCP failover protocol (never standardized)
+  \item Vendor-specific option spaces (Cisco, Microsoft) beyond catalog entry
+  \item IPv6 SLAAC protocol details (NDP, Router Advertisements) in depth
+  \item DHCPv4-over-DHCPv6 (RFC 7341) deployment scenarios
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Packet format section documents all 15 named fields with correct byte widths, offsets, and encoding rules per RFC 2131 Table 1.
+  \item All 8 message types documented with their valid field usage, option requirements, and transport rules (unicast vs broadcast conditions).
+  \item Options catalog includes all RFC 2132 options (codes 1--61 plus pad/end) with code, length, and data type for each.
+  \item Options catalog extends to cover at least 20 post-RFC 2132 options from IANA registry and critical RFCs (3046, 3397, 3442, 4361, 8925).
+  \item Client state machine documents all 8 states with labeled transition conditions, triggering events, and retransmission behavior.
+  \item T1, T2, and lease expiry timer semantics documented with default percentages, configurable range, and reset conditions.
+  \item Security section documents the starvation $\to$ rogue server $\to$ MITM attack chain with mechanism detail.
+  \item All four defensive architectures (DHCP snooping, DAI, IP Source Guard, port security) documented with mechanism and scope.
+  \item RFC 3118 authentication option analyzed including the \textit{reason for non-adoption} as a protocol design lesson.
+  \item DHCPv6 section covers SOLICIT/ADVERTISE/REQUEST/REPLY exchange, all four DUID types, IA\_NA/IA\_TA/IA\_PD distinction.
+  \item Comparative table maps every significant DHCPv4 concept to its DHCPv6 equivalent or absence.
+  \item All numerical claims (port numbers, byte counts, timer percentages, option codes) attributed to specific RFC sections.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Mesh Prototype Spec & Downstream consumer & Mesh nodes use DHCP for address acquisition; this spec informs the mesh DHCP layer \\
+Fox Infrastructure Group Plan & Infrastructure context & FoxCompute / FoxFiber node provisioning depends on DHCP at scale \\
+GSD-OS Vision & Implementation context & GSD-OS networking stack will interface with DHCP at boot \\
+RFC 2131 & Primary authority & All DHCPv4 wire format and behavior \\
+RFC 2132 & Options authority & All DHCPv4 option definitions \\
+RFC 8415 & DHCPv6 authority & Complete DHCPv6 specification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+DHCP is a protocol built entirely on trust without authentication --- and for thirty years, that has been fine. The reason is architectural: DHCP operates within the defended perimeter of a local network segment, where the threat model is limited to insider attacks. The original designers made a deliberate trade: simplicity and operational efficiency in exchange for inherent vulnerability to local adversaries.
+
+This trade-off perfectly illustrates a principle running through all of Tibsfox's work: the spaces between design choices are where the real decisions live. The gap between RFC 2131's stateless simplicity and RFC 3118's authentication extension is a gap that was deliberately left open for three decades and then effectively abandoned. The gap between DHCPv4's broadcast model and DHCPv6's multicast model reflects twenty years of learning about network scaling. Understanding these gaps --- why they exist, what they cost, what it would take to close them --- is the entire intellectual content of a deep protocol study.
+
+For GSD infrastructure work, DHCP is not just a background service. It is the first protocol a node speaks on a new network. Getting it right at the wire level is the prerequisite for everything else.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{DHCP Full Protocol Specification --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference section provides the detailed findings supporting each research module. All claims are sourced to specific RFC sections or IANA registry entries. Agents executing Module 01--05 should use the relevant subsections as their primary briefing material before producing deliverables.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item IETF RFC Editor (rfc-editor.org) --- Primary authority for all RFC documents
+  \item IANA (iana.org) --- Authoritative DHCP/BOOTP parameter registry
+  \item IETF IETF Datatracker (datatracker.ietf.org) --- Active RFC working group status
+  \item LwIP project (deepwiki.com/stm32duino/LwIP) --- Reference state machine implementation
+\end{itemize}
+
+\subsection{Module 01 Reference: Wire Format and Message Types}
+
+\subsubsection{Packet Field Layout (RFC 2131, Section 2)}
+
+All DHCP messages share a common fixed-format base of 236 bytes followed by a variable-length options field. Multi-octet fields are in network (big-endian) byte order.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Size} & \tableheader{Offset} & \tableheader{Description} \\
+\midrule
+op & 1 byte & 0 & Message opcode: 1=BOOTREQUEST (client), 2=BOOTREPLY (server) \\
+htype & 1 byte & 1 & Hardware address type (1 = 10Mb Ethernet per ARP parameters) \\
+hlen & 1 byte & 2 & Hardware address length in bytes (6 for Ethernet MAC) \\
+hops & 1 byte & 3 & Client sets to 0; relay agents increment on each hop \\
+xid & 4 bytes & 4 & Transaction ID: random 32-bit value set by client to correlate messages \\
+secs & 2 bytes & 8 & Seconds elapsed since client began acquisition or renewal \\
+flags & 2 bytes & 10 & Broadcast flag (MSB): if set, server must broadcast reply \\
+ciaddr & 4 bytes & 12 & Client IP address (only filled if client is in BOUND/RENEWING/REBINDING) \\
+yiaddr & 4 bytes & 16 & Your (client) IP address: address being offered or confirmed by server \\
+siaddr & 4 bytes & 20 & Next server IP (for bootstrap); also in option 54 (server identifier) \\
+giaddr & 4 bytes & 24 & Gateway IP: set by relay agent; server uses to select address pool \\
+chaddr & 16 bytes & 28 & Client hardware address (e.g., 6-byte MAC padded to 16) \\
+sname & 64 bytes & 44 & Optional server host name, null-terminated. May be overloaded (option 52) \\
+file & 128 bytes & 108 & Boot file name, null-terminated. May be overloaded (option 52) \\
+options & variable & 236 & Options field. First 4 bytes: magic cookie (99.130.83.99) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Minimum packet size:} RFC 1122 requires IP hosts accept datagrams of at least 576 bytes. DHCP messages must be at least this size; clients pad if necessary. Maximum message size negotiated via option 57 (Maximum DHCP Message Size).
+
+\textbf{Magic cookie:} The first four bytes of the options field are always 99, 130, 83, 99 (hex: 63.82.53.63). This 32-bit value distinguishes DHCP/BOOTP vendor extensions from other uses of the field.
+
+\subsubsection{Message Types (RFC 2131, Section 3; Option 53)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Code} & \tableheader{Message} & \tableheader{op field} & \tableheader{Semantics} \\
+\midrule
+1 & DHCPDISCOVER & 1 (REQUEST) & Client broadcast to locate available servers. ciaddr=0, yiaddr=0. \\
+2 & DHCPOFFER & 2 (REPLY) & Server offers a lease. yiaddr = offered IP. Options include server ID, lease time. \\
+3 & DHCPREQUEST & 1 (REQUEST) & Client selects an offer and requests it (broadcast); or renews lease (unicast to original server); or rebinds (broadcast to any server). \\
+4 & DHCPDECLINE & 1 (REQUEST) & Client rejects offered address (usually because ARP probe reveals it is in use). \\
+5 & DHCPACK & 2 (REPLY) & Server acknowledges and confirms lease parameters. Final authority. \\
+6 & DHCPNAK & 2 (REPLY) & Server refuses request (address not available, lease expired, wrong subnet). Client must restart from INIT. \\
+7 & DHCPRELEASE & 1 (REQUEST) & Client voluntarily relinquishes lease. Server may return address to pool. \\
+8 & DHCPINFORM & 1 (REQUEST) & Client already has IP, requests only other configuration parameters (no address assignment). Added in RFC 2131, updating RFC 1541. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Transport Rules}
+
+\begin{itemize}[noitemsep]
+  \item UDP port 67 (server), UDP port 68 (client). Shared with BOOTP for backward compatibility.
+  \item DISCOVER and early REQUEST messages: source 0.0.0.0:68, destination 255.255.255.255:67 (limited broadcast).
+  \item OFFER: server may unicast to \texttt{yiaddr}:\texttt{chaddr} if broadcast flag clear, else must broadcast. If \texttt{giaddr} set, unicast to relay on port 67.
+  \item RENEWING REQUEST: unicast to original server's IP (identified from option 54).
+  \item REBINDING REQUEST: broadcast (original server unreachable).
+  \item Options \texttt{sname} and \texttt{file} fields can be ``overloaded'' to carry additional options when the 312-byte options field is insufficient (option 52 signals this).
+\end{itemize}
+
+\subsection{Module 02 Reference: Options Catalog}
+
+\subsubsection{Option Encoding (RFC 2132, Section 2)}
+
+Options use Type-Length-Value (TLV) format: one byte tag, one byte length (count of subsequent data bytes), then the data. The Pad option (code 0) and End option (code 255) are single-byte exceptions with no length or value field. All multi-octet quantities in options are in network byte order.
+
+\textbf{Example: DHCP Message Type option for OFFER:}
+
+\begin{asciibox}
+| 0x35 | 0x01 | 0x02 |
+  tag=53  len=1   value=2 (DHCPOFFER)
+\end{asciibox}
+
+\subsubsection{Critical Option Codes Reference}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{longtable}{C{1.2cm}L{3.5cm}C{1.2cm}L{5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Code} & \tableheader{Name} & \tableheader{Length} & \tableheader{Description / Source} \\
+\midrule
+\endhead
+0 & Pad & --- & Alignment filler (no length/value) \\
+255 & End & --- & Marks end of valid options \\
+\midrule
+\rowcolor{lightsecondary}
+\multicolumn{4}{l}{\textbf{RFC 1497 / RFC 2132 Vendor Extensions}} \\
+1 & Subnet Mask & 4 & Client's subnet mask (RFC 950). Must precede Router option. \\
+2 & Time Offset & 4 & Seconds offset from UTC (signed 32-bit) \\
+3 & Router & 4n & List of routers on client subnet, preference order \\
+4 & Time Server & 4n & RFC 868 time servers \\
+5 & Name Server & 4n & IEN 116 name servers \\
+6 & Domain Server & 4n & DNS servers (RFC 1035) \\
+7 & Log Server & 4n & MIT-LCS UDP log servers \\
+12 & Host Name & n & Client's hostname \\
+15 & Domain Name & n & Client's domain name for DNS resolution \\
+28 & Broadcast Addr & 4 & Broadcast address for client's subnet \\
+\midrule
+\rowcolor{lightsecondary}
+\multicolumn{4}{l}{\textbf{DHCP-Specific Extensions (RFC 2132, Section 9)}} \\
+50 & Requested IP & 4 & Client's preferred IP address (in DISCOVER or REQUEST) \\
+51 & IP Lease Time & 4 & Lease duration in seconds (32-bit unsigned) \\
+52 & Option Overload & 1 & 1=\texttt{file}, 2=\texttt{sname}, 3=both contain options \\
+53 & DHCP Msg Type & 1 & Required in ALL DHCP messages (values 1--8, see table above) \\
+54 & Server ID & 4 & Server's IP address; used by client to select offer \\
+55 & Param Req List & n & Client's requested option list (1 byte per option code) \\
+56 & Message & n & Error message in DHCPNAK/DHCPDECLINE \\
+57 & Max Msg Size & 2 & Maximum DHCP message size client will accept (min 576) \\
+58 & Renewal Time & 4 & T1: seconds until renewal attempt (default: 50\% of lease) \\
+59 & Rebinding Time & 4 & T2: seconds until rebind attempt (default: 87.5\% of lease) \\
+60 & Vendor Class ID & n & Client's vendor/class identifier string \\
+61 & Client ID & n & Unique client identifier (overrides chaddr for server tracking) \\
+\midrule
+\rowcolor{lightsecondary}
+\multicolumn{4}{l}{\textbf{Post-RFC 2132 Critical Options}} \\
+66 & TFTP Server & n & TFTP server hostname for PXE boot (RFC 2132 ext) \\
+67 & Bootfile Name & n & Boot file name for PXE (RFC 2132 ext) \\
+82 & Relay Agent Info & n & Sub-options from relay agent (circuit ID, remote ID) --- RFC 3046 \\
+119 & Domain Search & n & Domain search list (RFC 3397) \\
+121 & Classless Route & n & Classless static routes, supercedes option 33 (RFC 3442) \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsubsection{Option Categories (RFC 2132 Structure)}
+
+RFC 2132 organizes options into seven groups: RFC 1497 Vendor Extensions (historical compatibility), IP Layer Parameters per Host (forwarding, TTL, MTU), IP Layer Parameters per Interface (broadcast, subnet mask, ARP), Link Layer Parameters per Interface (trailer encapsulation, ARP cache timeout), TCP Parameters (TTL, keepalive), Application and Service Parameters (NIS, NTP, NETBIOS, TFTP), and DHCP Extensions (codes 50--61). Site-specific options occupy codes 128--254.
+
+\subsection{Module 03 Reference: Lease Lifecycle and State Machine}
+
+\subsubsection{Address Allocation Mechanisms (RFC 2131, Section 2.1)}
+
+RFC 2131 defines three mechanisms: \textit{Automatic allocation} assigns a permanent IP address. \textit{Dynamic allocation} assigns an IP address for a limited time (lease), enabling address reuse. \textit{Manual allocation} assigns an administrator-configured address; the server merely communicates it to the client. Most deployments use dynamic allocation.
+
+\subsubsection{Client State Machine}
+
+\begin{asciibox}
+                    +----------+
+         Power on   |          |
+     +------------->|   INIT   |
+     |               |          |
+     |    +----------|----------+
+     |    |  Send DHCPDISCOVER (broadcast)
+     |    v           Exp. backoff: 1,2,4,8,16,32s (max 60s)
+     |  +----------+
+     |  | SELECTING |  Collect DHCPOFFER responses
+     |  +----+-----+
+     |       | Select best offer, send DHCPREQUEST (broadcast)
+     |       v
+     |  +----------+  Retry: up to 5 times (wait for DHCPACK/DHCPNAK)
+     |  |REQUESTING|  ARP probe for offered address
+     |  +----+-----+
+     |       | DHCPACK received + ARP clean
+     |       v
+     |  +-------+     Start T1 timer (50% lease)
+     |  | BOUND |     Start T2 timer (87.5% lease)
+     |  +---+---+     Normal IP operation
+     |       |
+     |    T1 fires
+     |       v
+     |  +---------+   Unicast DHCPREQUEST to original server
+     |  | RENEWING|   Linear backoff: 2,4,6,8s (max 20s)
+     |  +----+----+   DHCPACK -> reset T1/T2, back to BOUND
+     |       |        DHCPNAK -> INIT
+     |    T2 fires (server not responding)
+     |       v
+     |  +----------+  Broadcast DHCPREQUEST to any server
+     |  |REBINDING |  DHCPACK -> reset, back to BOUND
+     |  +----+-----+  DHCPNAK -> INIT
+     |       | Lease expires (no response)
+     +--------+  -> INIT (address revoked)
+\end{asciibox}
+
+\textbf{INIT-REBOOT state:} When a client reboots with a previously assigned address, it skips DISCOVER and sends a DHCPREQUEST directly (broadcasting the previously assigned IP in option 50). Server responds with DHCPACK (confirmed) or DHCPNAK (wrong subnet or address reassigned). This is the \texttt{REBOOTING} state.
+
+\subsubsection{Timer Semantics (RFC 2131, Section 4.4.5)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Timer} & \tableheader{Default \%} & \tableheader{Option Code} & \tableheader{Behavior on Expiry} \\
+\midrule
+T1 (Renewal) & 50\% of lease & Option 58 & Unicast DHCPREQUEST to original server \\
+T2 (Rebinding) & 87.5\% of lease & Option 59 & Broadcast DHCPREQUEST to any server \\
+Lease (T0) & Configured & Option 51 & Address revoked; return to INIT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+T1 must be less than T2, which must be less than the lease time. If server omits options 58/59, clients apply the 50\%/87.5\% defaults. On successful renewal or rebinding, both T1 and T2 reset from the new lease start time.
+
+\subsection{Module 04 Reference: Security Architecture and Attack Surface}
+
+\subsubsection{Fundamental Vulnerability}
+
+DHCP has no built-in authentication by default. All messages are cleartext UDP broadcast/unicast. Any host on the local network segment can send or receive DHCP messages. This is by design --- the protocol was engineered for trusted LAN segments where BOOTP relay agents block external interference. The threat model per RFC 3118 is explicitly \textit{insider threat}.
+
+\subsubsection{Attack Class 1: Rogue DHCP Server}
+
+An attacker brings a DHCP server onto the network. Since DHCP clients accept the first OFFER received, a faster or more aggressive rogue server will configure clients with attacker-controlled parameters. Critical attacker-controlled parameters: default gateway (all traffic routed through attacker's machine), DNS server (all hostname resolution hijackable). The result is a persistent man-in-the-middle position for all traffic from victimized clients.
+
+\subsubsection{Attack Class 2: DHCP Starvation}
+
+An attacker sends continuous DHCPDISCOVER messages with spoofed (random) MAC addresses in the \texttt{chaddr} field. The server allocates a lease for each unique ``client,'' depleting the address pool. Legitimate clients receive DHCPNAK or no response. Starvation attacks typically precede rogue server deployment --- exhausting the legitimate server sets the stage for the rogue server to be the only responder.
+
+\subsubsection{Attack Class 3: Replay Attacks}
+
+An attacker captures legitimate DHCP exchanges and replays them. Without message authentication, replayed DHCPREQUEST messages can interfere with lease state or consume server resources.
+
+\subsubsection{Defense Architecture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mechanism} & \tableheader{Layer} & \tableheader{How It Works} \\
+\midrule
+DHCP Snooping & Layer 2 (switch) & Switch inspects all DHCP traffic. Only ``trusted'' ports (uplinks, DHCP server ports) allowed to send DHCPOFFER/DHCPACK. All other ports (client access) blocked from server responses. Builds binding table (MAC:IP:port:VLAN). \\
+Dynamic ARP Inspection (DAI) & Layer 2 (switch) & Validates ARP packets against DHCP snooping binding table. Blocks ARP spoofing attacks often used in conjunction with rogue DHCP. \\
+IP Source Guard & Layer 2 (switch) & Uses DHCP snooping bindings to filter IP traffic. Only allows IP packets with source IP matching the DHCP-assigned IP for that port. \\
+Port Security & Layer 2 (switch) & Limits number of MAC addresses per port. Prevents MAC address spoofing at scale (starvation requires thousands of spoofed MACs). \\
+RFC 3118 Auth & Application & Shared-secret authentication option. Delayed authentication mechanism. Not widely deployed due to key management complexity. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{RFC 3118 Authentication --- Why It Failed}
+
+RFC 3118 (Authentication for DHCP Messages, 2001) defined an authentication option (option code not standardized widely) that adds a message authentication code to DHCP packets. The ``delayed authentication'' mechanism requires pre-shared secrets distributed to all DHCP clients before they can authenticate. As of 2002, RFC 3118 had seen little adoption. A 2007 analysis of DSL technologies noted ``numerous security vulnerabilities'' in RFC 3118's approach plus the introduction of 802.1X as a competing solution. The key management problem for large DHCP client populations remains unsolved. Modern deployments rely on switch-based controls (DHCP snooping) rather than protocol-level authentication.
+
+\subsection{Module 05 Reference: DHCPv6 and Modern Extensions}
+
+\subsubsection{DHCPv6 Architecture (RFC 8415, November 2018)}
+
+RFC 8415 consolidates DHCPv6, obsoleting RFC 3315 (original DHCPv6), RFC 3633 (prefix delegation), RFC 3736 (stateless DHCPv6), RFC 4242, RFC 7083, RFC 7283, and RFC 7550. The exchange uses four messages: SOLICIT (client locates servers), ADVERTISE (server responds to SOLICIT), REQUEST (client selects server and requests addresses/options), REPLY (server confirms). A two-message rapid exchange is possible with the Rapid Commit option.
+
+\subsubsection{Transport and Addressing}
+
+DHCPv6 uses UDP port 546 (client) and port 547 (server/relay). Clients send to multicast address \texttt{ff02::1:2} (all DHCP relay agents and servers, link-local scope). Relay agents forward to \texttt{ff05::1:3} (all DHCP servers, site-local scope) or unicast to a configured server. Every IPv6 interface has a link-local address; DHCPv6 can operate immediately without a configured global address.
+
+\subsubsection{DUID Types (DHCP Unique Identifier)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Name} & \tableheader{Construction} \\
+\midrule
+1 & DUID-LLT & Link-layer address + time of first assignment. Most common. \\
+2 & DUID-EN & Enterprise number (IANA-assigned) + vendor-defined identifier. \\
+3 & DUID-LL & Link-layer address only (for devices without stable clock). \\
+4 & DUID-UUID & 128-bit UUID from firmware/platform configuration (RFC 6355). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Identity Association Types}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{IA\_NA (Non-temporary Address):} Standard IPv6 address assignment. Has T1 (renewal) and T2 (rebinding) timers analogous to DHCPv4.
+  \item \textbf{IA\_TA (Temporary Address):} Short-lived addresses for privacy (per RFC 4941 temporary address extension). Generally not renewed.
+  \item \textbf{IA\_PD (Prefix Delegation):} Entire IPv6 prefix delegated to a requesting router, which then sub-delegates to its LAN segment. Unique to DHCPv6; no DHCPv4 equivalent. Used extensively in ISP CPE provisioning.
+\end{itemize}
+
+\subsubsection{DHCPv4 vs DHCPv6 Comparison Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{DHCPv4 (RFC 2131)} & \tableheader{DHCPv6 (RFC 8415)} \\
+\midrule
+Transport & UDP 67/68 & UDP 546/547 \\
+Discovery & Broadcast & Multicast (ff02::1:2) \\
+Client ID & MAC (chaddr) & DUID (stable, link-independent) \\
+Exchange & DORA (4 msg) & SARR (4 msg) or 2-msg rapid \\
+Address type & Single IP/lease & IA\_NA, IA\_TA, IA\_PD \\
+Prefix delegation & Not supported & IA\_PD, first-class feature \\
+Option codes & 8-bit (0--255) & 16-bit (0--65535) \\
+Stateless mode & DHCPINFORM only & Full stateless DHCPv6 mode \\
+Auto-config complement & No equivalent & Coexists with SLAAC \\
+Relay agent & giaddr field & Relay-forward/reply messages \\
+Server reconfigure & Not supported & RECONFIGURE message type \\
+Authentication & RFC 3118 (rare) & Still challenging; similar issues \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Stateless DHCPv6}
+
+When a network uses SLAAC (Stateless Address Autoconfiguration via Router Advertisements) for address assignment, DHCPv6 can be used in stateless mode to distribute other configuration parameters (DNS servers, NTP servers, domain search lists) that SLAAC cannot carry. The server assigns no addresses and tracks no state. This mode requires minimal server infrastructure and is common in enterprise IPv6 deployments.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk Level} & \tableheader{Guideline} \\
+\midrule
+Attack mechanism detail & Medium & Document attack mechanics for defensive understanding only; no operational exploitation instructions (SC-SEC applies) \\
+Numerical claims & Low & All port numbers, byte counts, timer percentages attributed to specific RFC sections \\
+Source quality & Low & All references to IETF RFCs, IANA registries, and academic analysis only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary RFC Authority}
+
+\begin{itemize}[noitemsep]
+  \item RFC 2131 (Droms, Bucknell University, March 1997) --- Dynamic Host Configuration Protocol. IETF Standards Track. Core DHCPv4 specification. Retrieved from rfc-editor.org.
+  \item RFC 2132 (Alexander \& Droms, March 1997) --- DHCP Options and BOOTP Vendor Extensions. IETF Standards Track. Retrieved from rfc-editor.org.
+  \item RFC 3118 (Droms \& Arbaugh, June 2001) --- Authentication for DHCP Messages. IETF Standards Track. Retrieved from datatracker.ietf.org.
+  \item RFC 3046 (Patrick, January 2001) --- DHCP Relay Agent Information Option. Retrieved from rfc-editor.org.
+  \item RFC 3397 (Aboba \& Cheshire, November 2002) --- DHCP Domain Search Option. Retrieved from rfc-editor.org.
+  \item RFC 3442 (Lemon, Cheshire \& Volz, December 2002) --- Classless Static Route Option for DHCPv4. Retrieved from rfc-editor.org.
+  \item RFC 8415 (Mrugalski et al., November 2018) --- Dynamic Host Configuration Protocol for IPv6. IETF Standards Track. Retrieved from datatracker.ietf.org.
+  \item RFC 4361 (Lemon \& Sommerfield, February 2006) --- Node-specific Client Identifiers for DHCPv4. Retrieved from rfc-editor.org.
+\end{itemize}
+
+\subsubsection{IANA Registries}
+\begin{itemize}[noitemsep]
+  \item IANA BOOTP Vendor Extensions and DHCP Options Registry. Updated 2026-02-02. Retrieved from iana.org/assignments/bootp-dhcp-parameters.
+\end{itemize}
+
+\subsubsection{Technical Reference Sources}
+\begin{itemize}[noitemsep]
+  \item LwIP DHCP State Machine documentation. DeepWiki / stm32duino, October 2025.
+  \item Wikipedia, ``Dynamic Host Configuration Protocol.'' Updated February 2026. Secondary reference for historical context and RFC enumeration.
+  \item Wikipedia, ``DHCPv6.'' Updated March 2026. Secondary reference for DHCPv6 architecture overview.
+  \item Infoblox IPv6 CoE. ``DHCP and DHCPv6: Options Differences.'' July 2024. Technical comparison reference.
+  \item Pentera. ``Understanding and Preventing DHCP Spoofing Attacks.'' November 2021. Security analysis reference.
+  \item Abdulghaffar et al. ``An Analysis of DHCP Vulnerabilities, Attacks, and Countermeasures.'' IEEE-published peer review, 2023. Retrieved from infotheory.ca.
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a definitive, implementation-grade reference document covering the complete DHCP protocol stack: DHCPv4 (RFC 2131) wire format, all message types, the full options catalog (RFC 2132 plus extensions), the client state machine with all timer semantics, the complete security attack surface and defensive architecture, and DHCPv6 (RFC 8415) with comparative mapping to DHCPv4. The output is a single publication-quality PDF suitable for use as a briefing document by GSD agents implementing DHCP-aware infrastructure components.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Haiku] Shared schemas, option code index, LaTeX templates
+  [Haiku] Source index: RFC 2131, 2132, 3118, 8415, IANA registry
+  Output: schemas.yaml, source_index.json, template.tex
+  Sequential --- Duration: ~0.5 sessions
+
+WAVE 1: Parallel Research Tracks
+  [Track A - Sonnet] Module 01 + 02 (Wire Format + Options Catalog)
+  [Track B - Sonnet] Module 03 + 04 (State Machine + Security)
+  Parallel --- Duration: ~2 sessions total
+
+WAVE 1.5: CAPCOM GATE
+  Human review of wire format accuracy + security sensitivity
+  BLOCK on: incorrect byte offsets, unsafe exploitation detail
+
+WAVE 2: Synthesis + Module 05
+  [Opus] DHCPv6 comparative analysis (Module 05)
+  [Opus] Cross-module integration (security <-> wire format connections)
+  Sequential --- Duration: ~1 session
+
+WAVE 3: Publication
+  [Sonnet] Full document assembly, LaTeX compilation (3 passes)
+  [Sonnet] Test plan execution, verification matrix completion
+  Sequential --- Duration: ~0.5 sessions
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Foundation Layer} --- Shared schemas (option type definitions, state machine states), source index with RFC sections pre-mapped, LaTeX template instantiated
+  \item \textbf{Wire Format Layer} --- Packet field table, message type table, transport rule documentation (Module 01)
+  \item \textbf{Options Layer} --- Complete TLV catalog with all codes, lengths, categories (Module 02)
+  \item \textbf{Lifecycle Layer} --- State machine diagram + prose, timer table, retransmission algorithm documentation (Module 03)
+  \item \textbf{Security Layer} --- Attack class analysis, defense mechanism documentation, RFC 3118 failure analysis (Module 04)
+  \item \textbf{DHCPv6 Layer} --- Full RFC 8415 coverage, DUID types, IA types, comparative matrix (Module 05)
+  \item \textbf{Publication Layer} --- PDF assembly, test plan, verification matrix, index.html
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Wire Format Reference & All 15 packet fields documented with byte widths and offsets & Module 01 complete \\
+D2 & Message Type Table & All 8 types with op field, semantics, and transport rules & Module 01 complete \\
+D3 & Options Catalog & All RFC 2132 options + 20+ post-2132 options & Module 02 complete \\
+D4 & State Machine Document & 8 states, all transitions, timer semantics, retransmission rules & Module 03 complete \\
+D5 & Security Analysis & 3 attack classes + 5 defense mechanisms + RFC 3118 analysis & Module 04 complete \\
+D6 & DHCPv6 Reference & SARR exchange, all DUID types, IA types, comparative matrix & Module 05 complete \\
+D7 & Master PDF & XeLaTeX, 3-pass compile, TOC, page-numbered, all 3 stages & Publication complete \\
+D8 & .tex Source & Fully commented, recompilable without modification & Publication complete \\
+D9 & index.html & Download cards for D7/D8, contents summary, usage guide & Publication complete \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.5cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema + source index & None & Haiku & 8k \\
+LaTeX template instantiation & None & Haiku & 5k \\
+Wire format documentation & Source index & Sonnet & 25k \\
+Message type table & Source index & Sonnet & 15k \\
+Options catalog (RFC 2132) & Source index & Sonnet & 40k \\
+Options catalog (post-2132) & RFC 2132 catalog & Sonnet & 25k \\
+State machine documentation & Source index & Sonnet & 30k \\
+Attack class analysis & Source index & Sonnet & 20k \\
+Defense mechanism analysis & Attack analysis & Sonnet & 20k \\
+RFC 3118 failure analysis & Attack + defense & Opus & 15k \\
+DHCPv6 architecture & Source index & Opus & 35k \\
+DHCPv4/v6 comparison & Both prior & Opus & 20k \\
+Cross-module synthesis & All modules & Opus & 25k \\
+LaTeX compilation (3 passes) & All content & Sonnet & 30k \\
+Test plan execution & All deliverables & Sonnet & 15k \\
+index.html production & Master PDF & Sonnet & 8k \\
+\midrule
+\rowcolor{rowgray}
+\textbf{Total} & & & \textbf{$\sim$336k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Category} & \tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+Synthesis, architectural comparison, RFC 3118 failure analysis & Opus & $\sim$28\% & Judgment-heavy analysis; cross-RFC pattern recognition; architectural insight \\
+Wire format, options catalog, state machine, security mechanism docs & Sonnet & $\sim$62\% & Structured content from clear sources; table formatting; LaTeX assembly \\
+Schemas, templates, index, scaffolding & Haiku & $\sim$10\% & Deterministic formatting tasks; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & schemas.yaml, source\_index.json, template.tex \\
+1A & Wire Format + Options & Parallel & Sonnet & D1, D2, D3 drafts \\
+1B & State Machine + Security & Parallel & Sonnet & D4, D5 drafts \\
+GATE & CAPCOM Review & Human & --- & Approval or revision directive \\
+2 & DHCPv6 + Synthesis & Sequential & Opus & D6, cross-module connections \\
+3 & Publication & Sequential & Sonnet & D7 (PDF), D8 (.tex), D9 (HTML) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define option code schema (TLV model) & Haiku & schemas.yaml \\
+Map RFC section references to module numbers & Haiku & source\_index.json \\
+Instantiate LaTeX template with DHCP color scheme & Haiku & dhcp\_mission.tex (skeleton) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Wire Format + Options) --- Sonnet:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} \\
+\midrule
+Document all 15 packet fields from RFC 2131 Table 1 & D1 draft \\
+Document all 8 message types with op field and transport rules & D2 draft \\
+Compile RFC 2132 options catalog (codes 0--61 + pad/end) & D3 draft (part 1) \\
+Extend catalog with 20+ post-RFC 2132 options from IANA registry & D3 draft (part 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (State Machine + Security) --- Sonnet:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} \\
+\midrule
+Document 8-state client FSM with ASCII diagram & D4 draft \\
+Document all timer semantics and retransmission algorithms & D4 supplement \\
+Analyze 3 attack classes (starvation, rogue, replay) & D5 draft (attacks) \\
+Document 5 defense mechanisms & D5 draft (defenses) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1.5: CAPCOM Gate}
+
+Human review required before synthesis. Review checklist:
+\begin{itemize}[noitemsep]
+  \item Verify byte offsets in wire format table against RFC 2131 Table 1 manually
+  \item Confirm no operational exploitation details in security section (SC-SEC test)
+  \item Confirm all option codes traceable to RFC 2132 or IANA registry
+  \item Approve or return Track A/B deliverables before Wave 2 proceeds
+\end{itemize}
+
+\subsection{Wave 2: Synthesis (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} \\
+\midrule
+DHCPv6 full architecture (RFC 8415) & D6 draft \\
+DHCPv4/v6 comparative matrix & D6 supplement \\
+RFC 3118 failure analysis (judgment-heavy) & D5 supplement \\
+Cross-module integration: security $\to$ wire format connections & Synthesis section \\
+Through-line narrative (Amiga Principle connection) & Vision through-line \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} \\
+\midrule
+Assemble all draft sections into dhcp\_mission.tex & Master .tex \\
+XeLaTeX compilation pass 1 & PDF (incomplete refs) \\
+XeLaTeX compilation pass 2 & PDF (TOC populated) \\
+XeLaTeX compilation pass 3 & PDF (final, D7) \\
+Execute test plan, populate verification matrix & Test results \\
+Generate index.html with download cards & D9 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item RFC section references pre-computed in source\_index.json (Wave 0) and reused by all Track agents within the 5-minute TTL window
+  \item LaTeX table templates (column specs, rowcolors, tableheader macros) defined once in template.tex and included by both Track A and Track B
+  \item Option schema (TLV type definitions) computed once in schemas.yaml; Track A references it for options catalog, Track B references it for state machine option parsing
+  \item Opus synthesis wave receives complete Track A/B output in one prompt (batch input), maximizing cache hit for shared section preamble
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model(s)} & \tableheader{Input k} & \tableheader{Output k} \\
+\midrule
+Wave 0 & Haiku & 15k & 13k \\
+Wave 1A & Sonnet & 60k & 80k \\
+Wave 1B & Sonnet & 55k & 65k \\
+Wave 2 & Opus & 80k & 80k \\
+Wave 3 & Sonnet & 120k & 40k \\
+\midrule
+\rowcolor{rowgray}
+\textbf{Total} & \textbf{Mixed} & \textbf{330k} & \textbf{278k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+schemas.yaml ----+---> Track A (Sonnet) ---+
+                 |                          |
+source_index  ---+---> Track B (Sonnet) ---+--> CAPCOM Gate --> Opus Synthesis
+                 |                                                    |
+template.tex ----+                                                    v
+                                                              Final LaTeX Assembly
+                                                                      |
+                                                                 3x xelatex
+                                                                      |
+                                                                 Master PDF
+                                                                  + index.html
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target Area} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, security sensitivity, attribution \\
+Core functionality & 18 & Required & BLOCK & All 12 success criteria verified \\
+Integration & 5 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 6 & Best-effort & LOG & Ambiguous encoding, missing RFC data \\
+\midrule
+\rowcolor{rowgray}
+\textbf{Total} & \textbf{34} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to IETF RFCs, IANA registry, or peer-reviewed academic analysis. Zero entertainment/blog sources. \\
+SC-NUM & Numerical attribution & Every port number, byte count, timer percentage, and option code cites specific RFC section or IANA entry. \\
+SC-ADV & No policy advocacy & Security section presents mechanisms and findings without advocating for specific vendor or legislative position. \\
+SC-SEC & Security sensitivity & Attack mechanism descriptions at conceptual level only. No exploitation scripts, no tool configurations, no proof-of-concept code. \\
+SC-RFC & RFC accuracy & All protocol behavior claims verified against primary RFC text (not secondary summaries). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Packet field count & Wire format table contains exactly 15 named fields matching RFC 2131 Table 1 \\
+CF-02 & Byte offset accuracy & Field offsets in table sum correctly (last field at offset 236 for options) \\
+CF-03 & Message type count & All 8 message types documented with option 53 code values 1--8 \\
+CF-04 & Magic cookie value & Options magic cookie documented as 99.130.83.99 per RFC 2132 Section 2 \\
+CF-05 & Options completeness & At least 35 option codes documented (RFC 2132 baseline 0--61 plus pad/end) \\
+CF-06 & TLV encoding documented & Options section explains tag-length-value format with example encoding \\
+CF-07 & State count & State machine documents exactly 8 states per RFC 2131 Section 4.4 \\
+CF-08 & T1/T2 percentages & Timer table shows T1=50\% and T2=87.5\% with option 58/59 code references \\
+CF-09 & Attack class count & Security section documents at least 3 distinct attack classes with mechanism \\
+CF-10 & Defense mechanism count & At least 4 defensive architectures documented \\
+CF-11 & RFC 3118 analysis & Non-adoption analysis cites specific technical reasons (key management, 802.1X competition) \\
+CF-12 & DHCPv6 port numbers & DHCPv6 section correctly states UDP 546 (client) and 547 (server) \\
+CF-13 & DUID type count & All 4 DUID types documented (DUID-LLT, DUID-EN, DUID-LL, DUID-UUID) \\
+CF-14 & IA type coverage & IA\_NA, IA\_TA, and IA\_PD all documented with semantic distinction \\
+CF-15 & Comparative matrix & DHCPv4 vs DHCPv6 matrix covers at least 10 feature dimensions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Wire format $\to$ security cascade & Security section references specific packet fields (chaddr for starvation, giaddr for relay agent attack surface) \\
+IN-02 & Options $\to$ state machine connection & State machine section references option codes (53 for message type, 58/59 for timers, 54 for server ID in RENEWING unicast) \\
+IN-03 & DHCPv4 $\to$ DHCPv6 consistency & Comparative matrix uses same terminology as DHCPv4 sections (not introducing new names for equivalent concepts) \\
+IN-04 & Cross-module data consistency & Option code 58 documented as ``T1'' in both options catalog and state machine sections without contradiction \\
+IN-05 & Self-containment & Document is readable without external RFC access; all key terms defined; no unexplained acronyms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 15 packet fields with byte widths and offsets & CF-01, CF-02 & Pending \\
+2. All 8 message types with transport rules & CF-03, CF-04 & Pending \\
+3. All RFC 2132 options (codes 1--61 plus pad/end) & CF-05, CF-06 & Pending \\
+4. 20+ post-RFC 2132 options from IANA & CF-05 (extended) & Pending \\
+5. 8-state FSM with all transitions and timers & CF-07, CF-08 & Pending \\
+6. T1, T2, lease expiry semantics with reset conditions & CF-08 & Pending \\
+7. Starvation $\to$ rogue $\to$ MITM attack chain & CF-09, IN-01 & Pending \\
+8. All 4 defensive architectures documented & CF-10 & Pending \\
+9. RFC 3118 failure analysis & CF-11 & Pending \\
+10. DHCPv6 SARR exchange + all DUID/IA types & CF-12, CF-13, CF-14 & Pending \\
+11. Comparative DHCPv4 vs DHCPv6 matrix & CF-15, IN-03 & Pending \\
+12. All numerical claims attributed to RFCs & SC-NUM, SC-RFC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; wave go/no-go gates; RFC accuracy judgment \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization; dependency ordering \\
+SCOUT & Research Agent (Sonnet) & RFC text retrieval; IANA registry queries; source gap analysis \\
+EXEC-A & Track A Executor (Sonnet) & Wire format + options catalog production \\
+EXEC-B & Track B Executor (Sonnet) & State machine + security analysis production \\
+CRAFT-PROTO & Protocol Specialist (Opus) & DHCPv6 architectural analysis; RFC 8415 deep coverage \\
+CRAFT-SEC & Security Specialist (Opus) & RFC 3118 failure analysis; attack chain analysis \\
+VERIFY & Verification Agent (Sonnet) & RFC cross-checking; byte offset validation; option code audit \\
+INTEG & Integration Agent (Sonnet) & Cross-module consistency; in-document reference validation \\
+CAPCOM & HITL Interface & Human approval at Wave 1.5 gate \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+LOG & Chronicle Agent (Haiku) & Commit messages; wave completion summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+CAPCOM Gates & 1 (post-Wave 1) \\
+Estimated Sessions & 2--3 \\
+Total Token Budget & $\sim$608k (input + output) \\
+Primary RFC Sources & RFC 2131, 2132, 3118, 8415 + 8 extension RFCs \\
+IANA Registry & bootp-dhcp-parameters (updated 2026-02-02) \\
+Output Deliverables & 9 (PDF, .tex, HTML, 5 draft modules, 2 schemas) \\
+Test Count & 34 (5 safety + 18 core + 5 integration + 6 edge) \\
+Safety-Critical Tests & 5 (all mandatory-pass BLOCK) \\
+Model Split & Opus 28\% / Sonnet 62\% / Haiku 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``DHCP is the protocol that hands you your identity before you have one. Every byte in those first four messages is an act of provisional trust --- the client announcing its existence into a broadcast void, the server extending a lease on belonging. The packet is small. The consequences are total. This is the Amiga Principle expressed at the protocol layer: a 236-byte fixed header, a magic cookie, and a variable options field that between them configure every networked device on earth. The spaces between the fields --- the gap between ciaddr and yiaddr, between T1 and T2, between RFC 3118's promise and its zero adoption --- are where the real protocol lives.''}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- GSD DHCP Mission Package, March 2026}}
+\end{quotebox}
+
+\end{document}

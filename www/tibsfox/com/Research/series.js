@@ -36,6 +36,7 @@
     { id: 'CWC', name: 'Cooking with Claude', path: 'CWC/index.html' },
     { id: 'DAA', name: 'Deep Audio', path: 'DAA/index.html' },
     { id: 'DFQ', name: 'Dead Frequencies', path: 'DFQ/index.html' },
+    { id: 'DHP', name: 'DHCP Protocol', path: 'DHP/index.html' },
     { id: 'DNS', name: 'DNS Protocol', path: 'DNS/index.html' },
     { id: 'DPM', name: 'Depeche Mode', path: 'DPM/index.html' },
     { id: 'DRN', name: 'Duran Duran', path: 'DRN/index.html' },
