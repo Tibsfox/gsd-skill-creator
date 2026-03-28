@@ -138,6 +138,7 @@
     { id: 'STE', name: 'Storage Forensics', path: 'STE/index.html' },
     { id: 'SVB', name: 'Student Voice', path: 'SVB/index.html' },
     { id: 'SHE', name: 'Smart Home', path: 'SHE/index.html' },
+    { id: 'SMB', name: 'SMBH Growth', path: 'SMB/index.html' },
     { id: 'SMF', name: 'SMOFcon', path: 'SMF/index.html' },
     { id: 'SMP', name: 'Smashing Pumpkins', path: 'SMP/index.html' },
     { id: 'SNL', name: 'Sensing Layer', path: 'SNL/index.html' },
