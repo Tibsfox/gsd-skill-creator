@@ -2,6 +2,7 @@
 // Injected into all sub-project HTML files
 (function() {
   var projects = [
+    { id: 'AAR', name: 'Architecture Alignment', path: 'AAR/index.html' },
     { id: 'ACC', name: 'Accounting', path: 'ACC/index.html' },
     { id: 'ACE', name: 'Compute Engine', path: 'ACE/index.html' },
     { id: 'ANM', name: '90s Animation', path: 'ANM/index.html' },
