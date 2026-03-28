@@ -1,0 +1,365 @@
+{
+  "degree": 4,
+  "species": "Northern Spotted Owl",
+  "scientific_name": "Strix occidentalis caurina",
+  "subspecies": "S. o. caurina (northern subspecies)",
+  "sound_type": "four-note territorial hoot",
+  "energy": 2,
+  "ecosystem": "old-growth Douglas fir",
+  "season": "resident",
+  "family": "Strigidae",
+  "order": "Strigiformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle / Puget Sound lowlands"
+  },
+  "physical": {
+    "length_in": "16-19",
+    "wingspan_in": "42-45",
+    "weight_g": "490-700"
+  },
+  "plumage": {
+    "overall": "Rich chocolate-brown",
+    "spots": "White spots on head and breast",
+    "underparts": "Barred",
+    "eyes": "Dark brown (no ear tufts)",
+    "facial_disk": "Rounded, pale-bordered, parabolic reflector for auditory localization"
+  },
+  "frequency_range": {
+    "primary_hoot_hz_low": 300,
+    "primary_hoot_hz_high": 700,
+    "note_1_hz": "400-500",
+    "note_2_hz": "400-500",
+    "note_3_hz": "400-500",
+    "note_4_hz": "380-480 (slight descent)",
+    "register": "bass-baritone"
+  },
+  "vocalization_metrics": {
+    "primary_call": {
+      "name": "Four-note territorial hoot",
+      "transcription": "hoo...hoo-hoo...hooooo",
+      "note_count": 4,
+      "phrase_duration_s": "2-3",
+      "rhythm_pattern": "long-short/short-long (choriamb)",
+      "note_1_duration_s": "0.3-0.5",
+      "note_2_3_duration_s": "0.2-0.3 each",
+      "note_4_duration_s": "0.4-0.8",
+      "temporal_consistency": "Remarkably consistent within individuals (Forsman et al. 1984)",
+      "calling_period": "nocturnal",
+      "peak_activity": "First 3 hours after sunset, last hour before sunrise"
+    },
+    "secondary_calls": [
+      {
+        "name": "Barking call",
+        "description": "3-7 sharp staccato 'whup' notes",
+        "function": "Alarm / agitation",
+        "rate": "2-3 per second"
+      },
+      {
+        "name": "Contact call",
+        "description": "Rising 'cooo-weep' or 'co-WEEE'",
+        "function": "Pair bond maintenance",
+        "range": "Short range, low amplitude"
+      },
+      {
+        "name": "Female series hoot",
+        "description": "Higher-pitched variant with additional notes",
+        "function": "Female territorial / pair coordination"
+      }
+    ]
+  },
+  "theory_nodes": [
+    {
+      "concept": "Rhythmic motif (4-note cell as compositional building block)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/motif/",
+      "examples": [
+        "Four notes with distinctive rhythmic profile: long-short/short-long (choriamb)",
+        "Minimal pitch variation — identity through rhythm, not melody",
+        "Parallels Beethoven's Fifth: small number of notes, distinctive rhythm, immediately identifiable",
+        "The motif is the seed from which larger musical structures grow through repetition, variation, development"
+      ],
+      "music_theory_parallel": "The rhythmic motif — the smallest recognizable musical idea. Four notes with internal structure (downbeat, couplet, terminal sustain). The fundamental building block of composition."
+    },
+    {
+      "concept": "Nocturnal temporal niche (time-division multiplexing)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/temporal/",
+      "examples": [
+        "First nocturnal species in the circle — calls when diurnal species are silent",
+        "300-700 Hz band overlaps heron's 200-800 Hz — no interference because different time slots",
+        "Time-division multiplexing: same frequency channel, different temporal occupancy",
+        "The forest's acoustic environment is a frequency-time grid, not just a frequency spectrum"
+      ],
+      "music_theory_parallel": "Time-division multiplexing — the acoustic engineering principle. In a studio, two bass instruments share a frequency range by playing at different times (verse vs. chorus). The forest does the same: heron by day, owl by night."
+    },
+    {
+      "concept": "Indicator species as key change (modulation)",
+      "level": "advanced",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/indicators/",
+      "examples": [
+        "Presence = old-growth forest with full food webs; absence = degraded ecosystem",
+        "The owl's presence/absence reharmonizes the entire system — not one note but the key signature",
+        "Loss of the owl is not removal of one instrument but modulation to a diminished key",
+        "ESA listing (1990) recognized the owl as proxy for ecosystem health"
+      ],
+      "music_theory_parallel": "Key change (modulation) — the frame that determines what all other notes mean. The owl is not a note in the chord. It is the key signature. Its loss reharmonizes everything."
+    },
+    {
+      "concept": "Low-frequency territorial broadcast (propagation physics)",
+      "level": "foundational",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/propagation/",
+      "examples": [
+        "300-700 Hz optimized for propagation through dense old-growth canopy",
+        "Low frequencies attenuated less by foliage and moisture than high frequencies",
+        "Heron is low because it is large; owl is low because it needs to be heard across 3,000 acres in darkness",
+        "Overlaps degree 0 heron range but with entirely different communicative architecture"
+      ],
+      "music_theory_parallel": "Low-frequency broadcast — same register as degree 0, fundamentally different purpose. The heron's low frequency is incidental (body size). The owl's is intentional (propagation distance through canopy)."
+    },
+    {
+      "concept": "Ostinato — repetition as identity",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/ostinato/",
+      "examples": [
+        "Four-note pattern repeated with high temporal fidelity across calling bouts",
+        "Stated, silence (listening), stated, silence — call-and-response with the forest",
+        "Repetition is the mechanism by which a motif becomes a theme",
+        "A motif stated once is a fragment; repeated is a theme; persistently repeated is an ostinato"
+      ],
+      "music_theory_parallel": "Ostinato — a persistently repeated musical figure. The owl's territorial call is a nocturnal ostinato: the same four-note pattern, repeated across hours, asserting identity through iteration."
+    },
+    {
+      "concept": "Old-growth forest as acoustic instrument",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/acoustic-ecology/",
+      "examples": [
+        "Multi-layered canopy creates diffuse reverberation and low ambient noise",
+        "Owl's low-frequency hoot adapted to the acoustic properties of old-growth structure",
+        "Remove old growth → different reverberation, more wind noise, less efficient propagation",
+        "The forest is the resonating chamber — not background but part of the instrument"
+      ],
+      "music_theory_parallel": "The acoustic instrument — the forest shapes the owl's sound the way a concert hall shapes an orchestra. The architecture is part of the performance. Replace the hall and the sound changes."
+    },
+    {
+      "concept": "Silence as attention (structured absence in rhythm)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rests/",
+      "examples": [
+        "Long silences (30s to minutes) between hoot repetitions — the owl listens for responses",
+        "Silence between hoots is functional: the receiving end of territorial broadcast",
+        "Connects to degree 0: heron's silence was absence; owl's silence is attention",
+        "In music, rests between notes are as structurally important as the notes themselves"
+      ],
+      "music_theory_parallel": "Structured silence — the rests define the rhythm as surely as the notes. The owl's silence is not empty; it is the listening phase of a call-and-response dialogue. Degree 0's silence was foundation; degree 4's silence is function."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Raptor/owl taxonomy and distribution; this release adds rhythmic motif analysis, temporal niche mapping, and Timber Wars history"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Old-growth forest ecology, mycorrhizal networks, flying squirrel prey chain, indicator species concept"
+    },
+    {
+      "project": "LFR",
+      "title": "Living Forest",
+      "connection": "Old-growth Douglas fir as acoustic instrument. Forest structure creates the reverberation environment the owl's call is adapted to."
+    },
+    {
+      "project": "WYR",
+      "title": "Weyerhaeuser",
+      "connection": "Timber Wars context. The owl's ESA listing changed Weyerhaeuser's business model and federal timber supply."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Floyd Standifer at degree 4 — both are territorial residents defending place through persistent, recognizable, repeated presence."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Shared low-frequency register (200-800 Hz / 300-700 Hz). Temporal separation: heron diurnal, owl nocturnal. Same channel, different time slots."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Old-growth habitat overlap. Wren in understory by day, owl in canopy by night. Same forest, different floors, different shifts. FM cascade vs. rhythmic motif: maximum density vs. maximum spacing."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Both forest-interior species dependent on mature structure. Low-density vocalizations. Thrush crepuscular, owl nocturnal — temporal niche deepens."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "Direct predecessor. Chickadee's combinatorial syntax carries referential meaning. Owl's four-note motif carries territorial identity through rhythm. From language to composition."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Floyd Standifer",
+    "degree": 4,
+    "genre": "Jazz / Trumpet",
+    "shared_principle": "Both are territorial residents defending place. Standifer held his position in Seattle's jazz scene for decades; the owl holds its territory in old growth. Both define their space through persistent, recognizable, repeated presence.",
+    "resonance_points": [
+      "Territorial residency: Standifer stayed in Seattle and held his ground in the jazz scene for decades; the owl holds the same territory in old-growth forest year after year — both are defined by staying and defending place",
+      "Recognizable signature: Standifer's trumpet tone was immediately identifiable to anyone in Seattle's jazz community; the owl's four-note hoot is the most recognizable nocturnal vocalization in PNW old growth — both have a signature that announces who they are",
+      "Persistent presence as authority: Standifer's decades of presence gave him standing that newcomers could not match; the owl's long-term territory occupancy establishes priority over competing owls — seniority through persistence",
+      "Place-specific identity: Standifer was a Seattle musician in a way that could not be transplanted; the owl is an old-growth species whose existence is bound to the specific forest it inhabits — both are inseparable from their location"
+    ]
+  },
+  "degree_arc": {
+    "position": "Rhythmic motif — the nocturnal temporal niche",
+    "progression": "Silence (0°) → cascade complexity (1°) → sustained tone (2°) → referential syntax (3°) → rhythmic motif (4°)",
+    "key_insight": "Degree 4 introduces the TIME dimension to the species engine. Degrees 0-3 partitioned acoustic space by frequency, density, and meaning. Degree 4 partitions by WHEN — the nocturnal niche that opens when the diurnal chorus falls silent. The four-note hoot is a rhythmic cell: the building block of composition, the smallest unit of musical identity. The circle has moved from sound (0-2) to language (3) to composition (4).",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif — 4 notes with internal temporal structure)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz — returns to low register)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern, this is my time)"
+    },
+    "temporal_progression": {
+      "degree_0": "Diurnal (day-active)",
+      "degree_1": "Dawn chorus (crepuscular peak)",
+      "degree_2": "Crepuscular (dusk/dawn emphasis)",
+      "degree_3": "Diurnal (daytime alarm system)",
+      "degree_4": "Nocturnal (first night species — time as territory)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Old-growth or late-successional forest",
+    "territory_size_acres": "2,400-14,200",
+    "primary_prey": "Northern flying squirrel (Glaucomys sabrinus) — 50-80% of diet",
+    "prey_chain": "Old-growth trees → mycorrhizal fungi → truffles → flying squirrels → Spotted Owl",
+    "nesting": "Large cavities, broken-top snags, platform nests, witch's broom deformities (trees >200 years)",
+    "roosting": "Thermal refugia under multi-layered old-growth canopy (Barrows 1981)",
+    "pair_bond": "Monogamous, long-lived (years to decades)"
+  },
+  "conservation": {
+    "federal_status": "Threatened (ESA 1990; 55 FR 26114)",
+    "iucn_status": "Near Threatened",
+    "washington_population": "~500 breeding pairs (WDFW 2020)",
+    "decline_rate": "~3.8% per year in Washington monitoring areas (Dugger et al. 2016)",
+    "primary_threats": [
+      "Barred Owl competition and displacement (most acute current threat)",
+      "Habitat loss (70% of original habitat logged; continued state/private harvest)",
+      "Climate change (increased wildfire frequency in remaining old-growth)",
+      "Habitat fragmentation reducing territory connectivity"
+    ],
+    "conservation_actions": [
+      "Northwest Forest Plan (1994) — 24.5 million acres of federal forest protected",
+      "USFWS Revised Recovery Plan (2011)",
+      "Barred Owl lethal removal program (USFWS 2024)",
+      "Critical Habitat designation (USFWS)"
+    ],
+    "historical_significance": "Most politically significant bird in PNW history. ESA listing precipitated the Timber Wars (1989-1994) and the Northwest Forest Plan — the largest landscape-scale conservation plan in US history."
+  },
+  "timber_wars": {
+    "timeline": [
+      "1989: Federal court injunctions halt timber sales in owl habitat",
+      "1990-06-22: USFWS lists Northern Spotted Owl as Threatened (55 FR 26114)",
+      "1991: God Squad convened to consider ESA exemptions",
+      "1993: Clinton Forest Conference in Portland, Oregon",
+      "1994-04-13: Northwest Forest Plan Record of Decision signed"
+    ],
+    "nwfp_area_acres": 24500000,
+    "harvest_reduction": "~80% from 1980s levels on federal land",
+    "lead_scientists": ["Jerry Franklin", "Jack Ward Thomas"]
+  },
+  "barred_owl_threat": {
+    "species": "Strix varia",
+    "origin": "Eastern North America; expanded westward across boreal Canada",
+    "first_washington_record": "1960s",
+    "advantages": [
+      "Larger body size (17-24 in vs. 16-19 in)",
+      "More aggressive territorial behavior",
+      "More generalist diet and habitat use",
+      "Higher fecundity (larger clutch, shorter generation time)"
+    ],
+    "management": "USFWS authorized lethal removal in key recovery areas (2024 FEIS)"
+  },
+  "key_sites": [
+    {
+      "name": "Olympic National Forest",
+      "type": "breeding/resident",
+      "description": "Large tracts of old-growth and mature forest supporting Spotted Owl territories",
+      "region": "Olympic Peninsula, WA"
+    },
+    {
+      "name": "Mount Baker-Snoqualmie National Forest",
+      "type": "breeding/resident",
+      "description": "Cascade Range old-growth with monitored Spotted Owl study areas",
+      "region": "Western Cascades, WA"
+    },
+    {
+      "name": "Gifford Pinchot National Forest",
+      "type": "breeding/resident",
+      "description": "Southern Washington Cascades; mixed old-growth and late-successional forest",
+      "region": "Southern Cascades, WA"
+    },
+    {
+      "name": "Olympic National Park",
+      "type": "breeding/resident",
+      "description": "Protected old-growth rainforest; no timber harvest; long-term monitoring site",
+      "region": "Olympic Peninsula, WA"
+    }
+  ],
+  "sources": [
+    "Gutiérrez, R.J., Franklin, A.B. & LaHaye, W.S. (1995). Birds of the World. Cornell Lab of Ornithology. [Spotted Owl species account.]",
+    "Forsman, E.D., Meslow, E.C. & Wight, H.M. (1984). Wildlife Monographs 87. [Foundational Spotted Owl field study.]",
+    "Forsman, E.D. (1983). USDA Forest Service GTR PNW-162. [Standardized survey protocol.]",
+    "Thomas, J.W. et al. (1990). ISC Report. [Conservation strategy — scientific basis for ESA listing.]",
+    "USFWS (1990). Federal Register 55: 26114. [Threatened status determination.]",
+    "USDA/USDI (1994). Record of Decision: Northwest Forest Plan.",
+    "USFWS (2011). Revised Recovery Plan for the Northern Spotted Owl.",
+    "Dugger, K.M. et al. (2016). Condor 118(1). [Long-term demographic study.]",
+    "Forsman, E.D. et al. (2002). Studies in Avian Biology 25. [Population demography.]",
+    "Forsman, E.D. et al. (2004). J Raptor Research 38(3). [Diet — flying squirrel as primary prey.]",
+    "Barrows, C.W. (1981). Condor 83(4). [Thermal refugia roost selection.]",
+    "Livezey, K.B. (2009). American Midland Naturalist 161(1). [Barred Owl range expansion.]",
+    "Wiens, J.D. et al. (2014). Wildlife Monographs 185. [Barred Owl competitive interactions.]",
+    "USFWS (2024). Final EIS: Barred Owl Management Strategy.",
+    "Franklin, A.B. et al. (1996). Studies in Avian Biology 17. [Survey methodology.]",
+    "Cornell Lab of Ornithology. All About Birds: Spotted Owl.",
+    "National Audubon Society. Guide to North American Birds: Spotted Owl.",
+    "Macaulay Library. Northern Spotted Owl recordings. Cornell Lab of Ornithology.",
+    "Washington Department of Fish and Wildlife. Northern Spotted Owl status review.",
+    "Partners in Flight (2020). Population estimates."
+  ],
+  "release_metadata": {
+    "release_number": "004",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

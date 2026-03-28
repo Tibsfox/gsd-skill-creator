@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 4&deg; &mdash; Northern Spotted Owl &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.motif { background: #7B1FA2; }
+    .theory-icon.temporal { background: #1565C0; }
+    .theory-icon.indicator { background: #C62828; }
+    .theory-icon.lowfreq { background: var(--puget-dark); }
+    .theory-icon.ostinato { background: var(--earth-mid); }
+    .theory-icon.instrument { background: var(--forest-green); }
+    .theory-icon.tdm { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; }
+    .progression-table th { font-size: 0.78rem; }
+    .progression-table td { font-size: 0.85rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">4&deg;</div>
+      <div class="release-title-block">
+        <h2>Northern Spotted Owl</h2>
+        <div class="scientific">Strix occidentalis caurina &middot; Family Strigidae (Typical Owls)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Four-Note Territorial Hoot &middot; Old-Growth Douglas Fir &middot; Nocturnal &middot; Energy 2</div>
+
+    <blockquote>
+      The forest does not stop singing at night. It changes singers. The Northern Spotted Owl hoots
+      four notes into the darkness &mdash; a rhythmic motif repeated across thousands of acres
+      of old-growth forest, in the temporal niche that opens when the diurnal chorus falls silent.
+      Degree 4 introduces time as territory.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Northern Spotted Owl is a medium-large owl of the family <strong>Strigidae</strong>
+          within the order Strigiformes. The subspecies <em>caurina</em> (Merriam 1898) is the
+          northernmost of three recognized subspecies. At <strong>16&ndash;19 inches</strong>
+          and <strong>490&ndash;700 grams</strong>, it is significantly larger than any species
+          in degrees 0&ndash;3. Rich chocolate-brown plumage with white spots on the head and
+          breast. Dark eyes. Rounded facial disk functioning as a <strong>parabolic reflector</strong>
+          for auditory localization of prey in complete darkness.
+        </p>
+        <p>
+          The most <strong>politically significant bird in PNW history</strong>. Its listing as
+          Threatened under the ESA in 1990 precipitated the Timber Wars and the Northwest Forest
+          Plan (1994) &mdash; the largest landscape-scale conservation plan in US history, setting
+          aside 24.5 million acres of federal forest.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Four-Note Territorial Hoot</h2>
+        <h3>A Rhythmic Cell in the Darkness</h3>
+        <p>
+          The primary vocalization is a <strong>four-note territorial hoot</strong>:
+          &ldquo;hoo...hoo-hoo...hooooo.&rdquo; The structure is rhythmically precise:
+        </p>
+        <ul>
+          <li><strong>Note 1 (&ldquo;hoo&rdquo;):</strong> Introductory hoot, 0.3&ndash;0.5 s, ~400&ndash;500 Hz. Downbeat.</li>
+          <li><strong>Notes 2&ndash;3 (&ldquo;hoo-hoo&rdquo;):</strong> Closely spaced couplet, 0.2&ndash;0.3 s each. Paired rhythmic unit.</li>
+          <li><strong>Note 4 (&ldquo;hooooo&rdquo;):</strong> Terminal sustain, 0.4&ndash;0.8 s, slight descending pitch. Emphatic close.</li>
+        </ul>
+        <p>
+          The timing between notes is <strong>remarkably consistent</strong> within individuals
+          (Forsman et al. 1984). The pattern functions as a <strong>temporal signature</strong>
+          &mdash; not a melody (pitch barely varies), but a <strong>rhythm</strong>. The entire
+          phrase spans 2&ndash;3 seconds in the <strong>300&ndash;700 Hz</strong> band &mdash;
+          deep, low-frequency, optimized for propagation through old-growth canopy.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Note</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Rhythmic Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Note 1 (&ldquo;hoo&rdquo;)</td><td>400&ndash;500 Hz</td><td>0.3&ndash;0.5 s</td><td>Downbeat &mdash; opens phrase</td></tr>
+            <tr><td>Note 2 (&ldquo;hoo&rdquo;)</td><td>400&ndash;500 Hz</td><td>0.2&ndash;0.3 s</td><td>First half of couplet</td></tr>
+            <tr><td>Note 3 (&ldquo;hoo&rdquo;)</td><td>400&ndash;500 Hz</td><td>0.2&ndash;0.3 s</td><td>Second half of couplet</td></tr>
+            <tr><td>Note 4 (&ldquo;hooooo&rdquo;)</td><td>380&ndash;480 Hz</td><td>0.4&ndash;0.8 s</td><td>Terminal sustain &mdash; closes phrase</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Secondary Vocalizations</h3>
+        <ul>
+          <li><strong>Barking call:</strong> 3&ndash;7 sharp staccato &ldquo;whup&rdquo; notes. Alarm/agitation. Higher intensity than hoot.</li>
+          <li><strong>Contact call:</strong> Rising &ldquo;cooo-weep&rdquo; between mated pairs. Low amplitude, short range, intimate.</li>
+          <li><strong>Female series hoot:</strong> Higher-pitched variant with additional notes. Distinguishable from male by frequency and rhythm.</li>
+        </ul>
+
+        <!-- Nocturnal Temporal Niche -->
+        <h2>The Nocturnal Temporal Niche</h2>
+        <p>
+          Degrees 0&ndash;3 are diurnal or crepuscular. The Spotted Owl is <strong>nocturnal</strong>.
+          Peak calling: first three hours after sunset and last hour before sunrise (Forsman et al. 1984;
+          Franklin et al. 1996). This is the first species in the circle that partitions acoustic
+          space by <strong>time</strong> rather than frequency, location, or habitat.
+        </p>
+        <p>
+          The owl&rsquo;s 300&ndash;700 Hz band overlaps the heron&rsquo;s 200&ndash;800 Hz band.
+          They do not interfere because they do not call simultaneously. Heron by day, owl by night.
+          This is <strong>time-division multiplexing</strong> &mdash; multiple signals sharing
+          the same frequency channel by occupying different time slots. The forest&rsquo;s acoustic
+          environment is a <strong>frequency-time grid</strong>, and degree 4 occupies the
+          nocturnal slot.
+        </p>
+
+        <!-- Progression Card -->
+        <div class="progression-card">
+          <h3>The Arc: Silence &rarr; Cascade &rarr; Drone &rarr; Language &rarr; Rhythmic Motif</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 4 adds the TIME dimension. The first four degrees partitioned by frequency, density,
+            and meaning. Degree 4 partitions by when &mdash; the nocturnal niche that opens when the
+            diurnal chorus falls silent.
+          </p>
+          <table class="progression-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg; Heron</th>
+                <th>1&deg; Wren</th>
+                <th>2&deg; Thrush</th>
+                <th>3&deg; Chickadee</th>
+                <th>4&deg; Spotted Owl</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Sustained tone</td><td>Named call + syntax</td><td><strong>4-note motif</strong></td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combinatorial</td><td><strong>Rhythmic cell</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td>Referential info</td><td><strong>Territory (rhythm)</strong></td></tr>
+              <tr><td><strong>Time slot</strong></td><td>Diurnal</td><td>Dawn</td><td>Crepuscular</td><td>Diurnal</td><td><strong>Nocturnal</strong></td></tr>
+              <tr><td><strong>Theory</strong></td><td>Rests/Cage</td><td>FM/Baroque</td><td>AM/Drone</td><td>Chord voicing</td><td><strong>Motif/Ostinato</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Timber Wars -->
+        <h2>Old-Growth Dependency &amp; the Timber Wars</h2>
+        <p>
+          The Spotted Owl requires <strong>old-growth or late-successional forest</strong> &mdash;
+          minimum territory of <strong>2,400&ndash;14,200 acres</strong> depending on habitat quality.
+          It needs old growth for nesting (large cavities, broken-top snags), roosting (thermal refugia
+          under multi-layered canopy), and foraging (northern flying squirrel as primary prey, itself
+          an old-growth obligate dependent on mycorrhizal fungi).
+        </p>
+        <p>
+          The ESA listing in 1990 and subsequent <strong>Northwest Forest Plan (1994)</strong>
+          reduced federal timber harvest by ~80% from 1980s levels, set aside 24.5 million acres,
+          and fundamentally restructured PNW land management. The owl&rsquo;s biology made it the
+          <strong>indicator species</strong> for an entire ecosystem being logged to exhaustion.
+        </p>
+        <p>
+          Today, the primary threat is the <strong>Barred Owl</strong> invasion &mdash; a larger,
+          more aggressive, more generalist congener expanding westward since the 1960s. Spotted Owl
+          populations in Washington have declined 50&ndash;75% since the 1990s. USFWS has authorized
+          <strong>lethal removal of Barred Owls</strong> in recovery areas (2024). The owl wars
+          have changed combatants but not ended.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon motif">M</div>
+            <div class="theory-content">
+              <h4>Rhythmic Motif (4-Note Cell) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Four notes with distinctive rhythmic profile: long-short/short-long. The building block of composition. Beethoven&rsquo;s Fifth in owl form &mdash; identity through rhythm, not melody.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon temporal">T</div>
+            <div class="theory-content">
+              <h4>Nocturnal Temporal Niche <span class="theory-level advanced">Advanced</span></h4>
+              <p>First nocturnal species in the circle. Time-division multiplexing: same frequency channel as the heron, different time slot. The forest&rsquo;s acoustic space is a frequency-time grid.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon indicator">K</div>
+            <div class="theory-content">
+              <h4>Indicator Species as Key Change <span class="theory-level advanced">Advanced</span></h4>
+              <p>Presence/absence reharmonizes the ecosystem. The owl is not a note in the chord &mdash; it is the key signature. Its loss modulates the entire forest to a diminished key.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon lowfreq">F</div>
+            <div class="theory-content">
+              <h4>Low-Frequency Territorial Broadcast <span class="theory-level foundational">Foundational</span></h4>
+              <p>300&ndash;700 Hz overlaps degree 0 heron range. Low frequency propagates through dense old-growth canopy. The owl is low because it needs to be heard across 3,000 acres in the dark.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ostinato">O</div>
+            <div class="theory-content">
+              <h4>Ostinato &mdash; Repetition as Identity <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The four-note pattern repeated with high temporal fidelity. Stated, silence, stated, silence. A nocturnal ostinato &mdash; persistent repetition that establishes identity through iteration.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon instrument">I</div>
+            <div class="theory-content">
+              <h4>Old-Growth Forest as Acoustic Instrument <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Multi-layered canopy creates diffuse reverberation, low ambient noise, minimal wind. The forest is the owl&rsquo;s resonating chamber &mdash; the instrument through which the signal is transmitted.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tdm">D</div>
+            <div class="theory-content">
+              <h4>Time-Division Multiplexing <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Heron by day, owl by night. Same low-frequency channel, different time slots. The acoustic engineering principle that allows the forest to support overlapping frequency users.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Rhythmic motif as compositional building block.</strong> The four-note hoot is a
+          rhythmic cell &mdash; the smallest unit of musical identity. Long-short/short-long
+          (choriamb). Developed through repetition (stated, silence, stated). This is
+          <strong>ostinato</strong> &mdash; a persistently repeated figure that establishes identity
+          through iteration. The owl&rsquo;s territorial call is a nocturnal ostinato.
+        </p>
+        <p>
+          <strong>Nocturnal temporal niche.</strong> The diurnal species at degrees 0&ndash;3 occupy
+          daylight time slots. The owl occupies the same frequency band as the heron but at night.
+          This is <strong>time-division multiplexing</strong> &mdash; in a studio, you would not
+          layer two bass instruments in the same frequency range simultaneously. You give them
+          different time slots. The forest does the same thing.
+        </p>
+        <p>
+          <strong>Indicator species as key change.</strong> The owl&rsquo;s presence or absence
+          changes the ecological key of the forest. Present = old-growth, full food webs, structurally
+          complex. Absent = degraded. Not a note in the chord, but the <strong>key signature</strong>
+          that determines what all the other notes mean.
+        </p>
+        <p>
+          <strong>Old-growth as instrument.</strong> The multi-layered canopy creates the acoustic
+          environment the owl&rsquo;s call is adapted to &mdash; diffuse reverberation, low ambient
+          noise, efficient low-frequency propagation. Remove the old growth and the acoustic
+          properties change. The forest is not background. It is part of the instrument.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Raptor/owl taxonomy. This release adds rhythmic motif analysis, temporal niche mapping, and Timber Wars history.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Old-growth forest ecology, mycorrhizal networks, flying squirrel prey chain, indicator species concept.</p>
+          </div>
+          <div class="xref-card">
+            <strong>LFR</strong> &mdash; Living Forest
+            <p>Old-growth Douglas fir as acoustic instrument. Forest structure creates the reverberation the owl&rsquo;s call is adapted to.</p>
+          </div>
+          <div class="xref-card">
+            <strong>WYR</strong> &mdash; Weyerhaeuser
+            <p>Timber Wars context. The owl&rsquo;s ESA listing changed Weyerhaeuser&rsquo;s business model and federal timber supply.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Floyd Standifer at degree 4&deg;. Both are territorial residents defending place through persistent, recognizable presence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Shared low-frequency register (200&ndash;800 Hz / 300&ndash;700 Hz). Temporal separation: heron diurnal, owl nocturnal. Same channel, different time slots.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Old-growth habitat overlap. Wren in understory by day, owl in canopy by night. Same forest, different floors, different shifts.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Both are forest-interior species dependent on mature structure. Low-density vocalizations. Thrush crepuscular, owl nocturnal &mdash; temporal niche deepens.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>Direct predecessor. Chickadee&rsquo;s combinatorial syntax carries meaning. Owl&rsquo;s four-note motif carries identity through rhythm. From language to composition.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Guti&eacute;rrez, R.J., Franklin, A.B. &amp; LaHaye, W.S. (1995). &ldquo;Spotted Owl.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Forsman, E.D., Meslow, E.C. &amp; Wight, H.M. (1984). Distribution and biology of the Spotted Owl. <em>Wildlife Monographs</em> 87.</li>
+          <li>Forsman, E.D. (1983). Methods for locating Spotted Owls. USDA Forest Service GTR PNW-162.</li>
+          <li>Thomas, J.W. et al. (1990). Conservation strategy for the Northern Spotted Owl. ISC Report.</li>
+          <li>USFWS (1990). Threatened status determination. <em>Federal Register</em> 55: 26114.</li>
+          <li>USDA/USDI (1994). Record of Decision: Northwest Forest Plan.</li>
+          <li>USFWS (2011). Revised Recovery Plan for the Northern Spotted Owl.</li>
+          <li>Dugger, K.M. et al. (2016). Effects of habitat, climate, and Barred Owls on demography. <em>Condor</em> 118(1).</li>
+          <li>Livezey, K.B. (2009). Barred Owl range expansion. <em>American Midland Naturalist</em> 161(1).</li>
+          <li>Wiens, J.D. et al. (2014). Competitive interactions with Barred Owls. <em>Wildlife Monographs</em> 185.</li>
+          <li>Franklin, A.B. et al. (1996). Population estimation methods. <em>Studies in Avian Biology</em> 17.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Spotted Owl. allaboutbirds.org</li>
+          <li>Macaulay Library. Northern Spotted Owl recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Strigidae</div>
+          <div class="stat-detail">Typical owls</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>caurina</em></div>
+          <div class="stat-detail">Northern subspecies (Merriam 1898)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">16&ndash;19 in</div>
+          <div class="stat-detail">41&ndash;48 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">490&ndash;700 g</div>
+          <div class="stat-detail">Females larger</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">42&ndash;45 in</div>
+          <div class="stat-detail">107&ndash;114 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Primary Vocalization</div>
+          <div class="stat-value">300&ndash;700 Hz</div>
+          <div class="stat-detail">Four-note territorial hoot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Phrase Duration</div>
+          <div class="stat-value">2&ndash;3 seconds</div>
+          <div class="stat-detail">Long-short/short-long rhythm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Count</div>
+          <div class="stat-value">4 notes</div>
+          <div class="stat-detail">Rhythmic motif (choriamb)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Calling Period</div>
+          <div class="stat-value">Nocturnal</div>
+          <div class="stat-detail">Peak: dusk + 3 hrs, dawn &minus; 1 hr</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Rhythmic Identity</div>
+          <div class="stat-detail">Temporal signature, not melody</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">4&deg;</div>
+          <div class="stat-detail">Rhythmic motif &mdash; nocturnal temporal niche</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Low-energy persistent broadcast</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Old-Growth Douglas Fir</div>
+          <div class="stat-detail">Late-successional obligate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ESA Status</div>
+          <div class="stat-value">Threatened</div>
+          <div class="stat-detail">Listed 1990 (55 FR 26114)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 4&deg; &mdash; S36</div>
+          <div class="parallel-name">Floyd Standifer</div>
+          <div class="parallel-detail">Both are territorial residents defending place. Standifer held his position in Seattle&rsquo;s jazz scene for decades. The owl holds its territory in old growth. Both define their space through persistent, recognizable, repeated presence.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 004 of 360 &middot;
+      <a href="../003-black-capped-chickadee/index.html">Degree 3&deg;: Black-capped Chickadee</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
