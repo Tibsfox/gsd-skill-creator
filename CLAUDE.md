@@ -6,8 +6,8 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
 - **Build:** `npm run build`
-- **Test:** `npm test` (Vitest, 20600+ tests)
-- **Lint:** `npm run lint`
+- **Test:** `npm test` (Vitest, 21,298 tests)
+- **Lint:** (no lint script configured)
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
 
@@ -23,7 +23,8 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
-- `docs/` -- 158+ markdown files, canonical documentation
+- `docs/` -- 435+ markdown files, canonical documentation and release notes
+- `www/tibsfox/com/Research/` -- 168 research projects (179 dirs), PNW Research Series
 
 ## Commit Convention
 
