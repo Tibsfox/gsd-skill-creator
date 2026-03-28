@@ -1,0 +1,134 @@
+{
+  "degree": 4,
+  "artist": "Floyd Standifer",
+  "slug": "004-floyd-standifer",
+  "genre": "Jazz (trumpet, saxophone, vocal — swing, bebop)",
+  "energy": 2,
+  "era": "1950s-2000s",
+  "location": {
+    "origin": "Wilmington, NC",
+    "formative": "Seattle, WA — Central District, Jackson Street corridor",
+    "career": "Seattle, WA — Central District clubs, University of Washington faculty"
+  },
+  "born": "1929",
+  "died": "2007-01",
+  "labels": ["local"],
+  "theory_nodes": [
+    {
+      "concept": "Swing rhythm and triplet feel",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/swing-triplet-feel.md",
+      "examples": [
+        "Jazz by Standifer sessions (KNKX/KPLU archives) — explicit demonstration of swing subdivision mechanics",
+        "Central District club performances (1960s-1990s) — swing feel in live small-ensemble context",
+        "UW student recitals under Standifer's direction — pedagogical transmission of swing feel"
+      ],
+      "description": "Swing as asymmetric eighth-note subdivision, approximately 2:1 long-short ratio varying by tempo and style. The triplet underpinning (beat divided into three, first two tied) is the theoretical model; the reality is a fluid range of ratios navigated by ear. Standifer's pedagogical contribution: making implicit swing knowledge explicit — articulating the exact placement of the offbeat, the forward momentum of the long note, the propulsion of the short note into the next beat.",
+      "genealogy": {
+        "ancestors": ["Swing rhythm — behind-the-beat phrasing (degree 3)"],
+        "relationship": "complementary perspective — Anderson (degree 3) introduced swing as elastic time felt by the performer. Standifer provides the analytical mechanics: how the feel works, why the ratio shifts, what the body is doing. Anderson is the practitioner; Standifer is the analyst. Together, degrees 3 and 4 complete the swing picture."
+      }
+    },
+    {
+      "concept": "Brass articulation and embouchure",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/brass/articulation-embouchure.md",
+      "examples": [
+        "Jazz by Standifer session recordings — warm, lyrical trumpet tone demonstrating soft tonguing",
+        "Live Central District performances — trumpet leading small ensemble with melodic clarity",
+        "UW faculty recitals — concert-level brass technique in academic context"
+      ],
+      "description": "Embouchure: the configuration of lips, jaw, and facial muscles against the mouthpiece that determines tone quality, range, endurance, and expressive capacity. Articulation: tonguing technique (hard vs. soft) that determines note onset character. Standifer's approach prioritized melodic singing quality over pyrotechnic display — lyrical, connected phrasing that made the trumpet sound almost vocal. First brass-specific theory node in S36.",
+      "genealogy": {
+        "ancestors": [],
+        "relationship": "new branch — first brass-specific theory node. Shares the embodied-instrument principle with Anderson's vocal theory (degree 3): both trumpet and voice produce sound through the vibration of the player's own body (lips for trumpet, vocal cords for voice). The body-as-sound-source thread connects degrees 3 and 4."
+      }
+    },
+    {
+      "concept": "Bebop vocabulary (chromatic approach notes, enclosure patterns)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/melody/bebop-chromatic-approach.md",
+      "examples": [
+        "Standifer trumpet solos on Jackson Street era recordings — chromatic approach in live improvisation",
+        "Jazz by Standifer bebop demonstrations — enclosure patterns deconstructed for audience",
+        "UW performance archives — bebop vocabulary taught as systematic method"
+      ],
+      "description": "Chromatic approach note: a note one half-step above or below a target chord tone, connecting scale tones with chromatic passing motion. Enclosure pattern: target note approached from both above and below in sequence, creating the characteristic zigzag contour of bebop melody. Standifer taught these as explicit, repeatable techniques — demonstrating the pattern, deconstructing it (upper approach, lower approach, target resolution), and rebuilding it over ii-V-I progressions. Chromaticism as curriculum.",
+      "genealogy": {
+        "ancestors": ["Chromatic bass lines (degree 0)", "Chromaticism in upper register (degree 1)", "Embodied chromaticism — vocal pitch bending (degree 3)"],
+        "relationship": "chromaticism thread extended — Jones (compositional choice, bass), Frisell (compositional choice, upper register), Anderson (intuitive inflection, voice), Standifer (codified method, melody). Four deployments: two intuitive (Anderson, Frisell), two systematic (Jones, Standifer). Standifer's contribution is making chromaticism teachable as a repeatable technique."
+      }
+    },
+    {
+      "concept": "The jazz educator as bridge between practice and theory",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/pedagogy/jazz-educator-bridge.md",
+      "examples": [
+        "Jazz by Standifer sessions — performance interleaved with explanation (the format itself is the example)",
+        "UW jazz history and theory courses — formal curriculum translating oral tradition into academic framework",
+        "Standifer's mentorship of UW students — pedagogical chain extending Jackson Street knowledge to post-corridor generations"
+      ],
+      "description": "Translation of implicit musical knowledge into explicit, teachable form. Jazz has historically transmitted through oral tradition (bandstand apprenticeship, listening, sitting in). Standifer added articulation: naming what other musicians felt, explaining why phrases swing, why substitutions work, why voicings create tension. Fifth position on the composition-improvisation spectrum: pedagogy. The educator's output is not performance or composition but understanding — the student's ability to generate their own music because they possess the theoretical framework.",
+      "genealogy": {
+        "ancestors": ["Composed improvisation (degree 2)", "The singer as interpreter (degree 3)"],
+        "relationship": "fifth position on composition-improvisation spectrum — Jones (full composition), Horvitz (composed improvisation), Frisell (free improvisation), Anderson (interpretation), Standifer (pedagogy). The educator does not create new material; he transmits existing material with explanatory context. Output is understanding, not artifact."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-003", "S36-005", "CDS", "RBH"],
+  "seattle_connection": "Central District (arrived post-WWII). Jackson Street corridor — direct participation as working musician for decades. University of Washington music faculty — jazz history, theory, and performance courses. Hosted 'Jazz by Standifer' performance-education sessions. KNKX/KPLU radio broadcasts. Died in Seattle, January 2007.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Swing rhythm and triplet feel — analytical complement to Anderson's elastic swing (degree 3)",
+      "Brass articulation and embouchure — first brass-specific node, body-as-sound-source shared with vocal theory",
+      "Bebop vocabulary (chromatic approach, enclosures) — chromaticism as codified, teachable method",
+      "Jazz educator as bridge — fifth position on composition-improvisation spectrum (pedagogy)"
+    ],
+    "immediate_items": [
+      "Overton Berry (degree 5) inherits: Central District elder-statesman parallel, formal/informal pedagogy axis — Standifer as professor, Berry as practitioner, both transmitting the same tradition through different mechanisms",
+      "The Garfield pipeline: Standifer's educational path (not confirmed Garfield) vs. Jones/Anderson (confirmed Garfield). Track alternative Central District educational paths.",
+      "The Teacher pattern established — classify subsequent artists: do they teach, perform, compose, build, or export?",
+      "Body-as-sound-source thread (trumpet lips + vocal cords) — track whether subsequent brass or wind players extend this connection",
+      "Bebop vocabulary as codified method — track whether subsequent artists treat chromaticism as intuitive or systematic"
+    ],
+    "pattern_items": [
+      "Composition-improvisation spectrum now has five positions: full composition (Jones), composed improvisation (Horvitz), free improvisation (Frisell), interpretation (Anderson), pedagogy (Standifer). Continue tracking.",
+      "Rhythmic spectrum: four positions remain (regular, polymetric, rubato, elastic swing). Standifer reinforces swing from the analytical side but does not add a new position.",
+      "Chromaticism thread now has four deployments: bass-line (Jones), upper-register (Frisell), embodied/vocal (Anderson), codified/melodic (Standifer). Two intuitive, two systematic.",
+      "Artist-city taxonomy now has five named patterns: Export (Jones), Draw (Frisell/Horvitz), Exile (Anderson mid-career), Stay (Anderson late career), Teacher (Standifer). Classify every subsequent artist.",
+      "Artist-as-institution spectrum now has five positions: industry (Jones), community (Horvitz), performer (Frisell), presence (Anderson), educator (Standifer).",
+      "Central District geographic thread: 5 degrees, 4 artists directly connected (Jones, Anderson, Standifer + Berry upcoming). Densest geographic cluster in S36.",
+      "Jackson Street primary participants: 3 confirmed (Jones, Anderson, Standifer). Track all future Jackson Street-connected artists.",
+      "Brass theory branch introduced (first). Track at subsequent brass/wind player degrees.",
+      "Pedagogy as knowledge-transmission chain: Standifer → UW students → their students. Track pedagogical lineages when they appear.",
+      "Formal/informal pedagogy axis: Standifer (formal — UW, structured sessions) vs. Anderson (informal — presence) vs. Berry (informal — performance). Track the axis."
+    ]
+  },
+  "key_albums": [],
+  "degree_neighbors": [
+    {"name": "Overton Berry", "relationship": "Central District contemporary, parallel elder-statesman, formal/informal pedagogy axis", "future_degree": 5},
+    {"name": "Quincy Jones", "relationship": "Central District peer during Jones's Seattle years, Jackson Street corridor, direct personal overlap", "future_degree": 0},
+    {"name": "Ernestine Anderson", "relationship": "Central District contemporary, parallel Seattle jazz anchor — Anderson through performance, Standifer through teaching", "future_degree": 3}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones — attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson — attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer — Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": true,
+    "the_teacher": true,
+    "institution_type": "educator"
+  },
+  "sources_count": 12,
+  "word_count_research": 3200,
+  "release_date": "2026-03-28"
+}

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 4&deg; &mdash; Floyd Standifer &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">4&deg;</div>
+      <div>
+        <h1>Floyd Standifer</h1>
+        <div class="subtitle">Jazz &middot; Trumpet &middot; Saxophone &middot; Vocal &middot; Swing &middot; Bebop &mdash; Central District 1950s &rarr; Seattle 2007</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Jones composed. Anderson sang. Frisell reimagined. Horvitz built.
+          Standifer taught. He is the one who made sure the next generation
+          understood why all of it mattered.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY & CENTRAL DISTRICT ROOTS
+             ======================================== -->
+
+        <h2>Biography &amp; Central District Roots</h2>
+
+        <p>Floyd Standifer was born in 1929 in Wilmington, North Carolina. After World War II, he
+        moved to Seattle and settled in the <strong>Central District</strong> &mdash; the same
+        neighborhood that had shaped <a href="../000-quincy-jones/index.html">Quincy Jones</a>
+        (degree 0&deg;) and <a href="../003-ernestine-anderson/index.html">Ernestine Anderson</a>
+        (degree 3&deg;). He became a fixture on the <strong>Jackson Street jazz corridor</strong>
+        &mdash; not a transit player using the scene as a launching pad, but a permanent resident
+        who made the corridor his home base for decades.</p>
+
+        <p>Standifer was a true <strong>multi-instrumentalist</strong>: trumpet, saxophone, and
+        vocals. His trumpet tone was warm and full, rooted in swing but capable of the precision
+        bebop demanded. He played every section of a small ensemble &mdash; leading from the front
+        (trumpet), filling from the middle (saxophone), or communicating directly with audiences
+        through lyrics (voice). The first multi-instrumentalist in the S36 engine.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: HistoryLink.org, Essay #20023;
+        Paul de Barros, <em>Jackson Street After Hours</em> (1993); Seattle Times obituary, January 2007;
+        UW Music Department archives</p>
+
+        <h3>The Teacher: University of Washington &amp; &ldquo;Jazz by Standifer&rdquo;</h3>
+
+        <p>Standifer joined the <strong>University of Washington</strong> music faculty, teaching jazz
+        history, jazz theory, and performance. His courses were not academic abstraction &mdash; when he
+        taught swing rhythm, he was describing something he had played thousands of times in clubs where
+        the rhythm section was ten feet away and the audience was dancing. When he taught bebop vocabulary,
+        he was teaching patterns learned on the bandstand, not transcribed from recordings in a practice room.</p>
+
+        <p>His <strong>&ldquo;Jazz by Standifer&rdquo;</strong> sessions blurred the line between concert
+        and class: Standifer would play, explain what he was playing, demonstrate the technique, trace the
+        lineage of a phrase back to its source, and play again. The audience heard the music and understood
+        it simultaneously. By the 1980s and 1990s, with the Jackson Street corridor demolished by urban
+        renewal, these sessions kept the corridor&rsquo;s musical language alive &mdash; not as a museum
+        piece but as a living practice demonstrated by someone who had been there.</p>
+
+        <!-- ========================================
+             GARFIELD-CENTRAL DISTRICT THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>The Central District Thread: Degrees 0&deg; through 4&deg;</h4>
+          <table>
+            <tr>
+              <td>0&deg; Quincy Jones</td>
+              <td>Arrived Central District age 10. Garfield class of 1950. Jackson Street. Left Seattle for the world. <strong>The Export.</strong></td>
+            </tr>
+            <tr>
+              <td>1&deg; Bill Frisell</td>
+              <td>Arrived Seattle 1989. No Garfield/Jackson Street connection. Inherited infrastructure. <strong>The Draw.</strong></td>
+            </tr>
+            <tr>
+              <td>2&deg; Wayne Horvitz</td>
+              <td>Arrived Seattle 1988. No Garfield/Jackson Street connection. Built new infrastructure (Royal Room). <strong>The Builder.</strong></td>
+            </tr>
+            <tr>
+              <td>3&deg; Ernestine Anderson</td>
+              <td>Arrived Central District age 16. Garfield, same era as Jones. Jackson Street performer. Left, returned, stayed. <strong>The One Who Came Home.</strong></td>
+            </tr>
+            <tr>
+              <td>4&deg; Floyd Standifer</td>
+              <td>Arrived Central District post-WWII. Jackson Street performer. Never left. UW faculty. <strong>The Teacher.</strong></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CAREER ARC — TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1940s &mdash; Arrival &amp; Jackson Street</div>
+          <p>Moved to Seattle post-WWII. Settled in the Central District. Joined the Jackson Street
+          jazz corridor as a working musician &mdash; trumpet, saxophone, vocals. Became a permanent
+          fixture on the scene.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1950s&ndash;1970s &mdash; Central District Scene</div>
+          <p>Regular performer on the Central District club circuit. Played with <strong>Quincy Jones</strong>
+          during Jones&rsquo;s Seattle years, <strong>Ernestine Anderson</strong>, <strong>Overton Berry</strong>,
+          and the core of Seattle&rsquo;s jazz community. Held his own in cutting sessions with visiting
+          national artists. Chose Seattle over a touring career.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">UW Faculty &mdash; Jazz Educator</div>
+          <p>Joined the <strong>University of Washington</strong> music faculty. Taught jazz history,
+          theory, and performance. Built curriculum bridging the oral tradition of Jackson Street with
+          academic music study. Created the &ldquo;Jazz by Standifer&rdquo; performance-education format.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1980s&ndash;2000s &mdash; Elder Statesman &amp; Radio</div>
+          <p>Performances broadcast on <strong>KPLU</strong> (now KNKX). Provided commentary for local
+          television and documentary segments on Seattle jazz history. Became the city&rsquo;s primary
+          jazz interpreter &mdash; the person media producers called when they needed Seattle jazz explained.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">January 2007</div>
+          <p>Died in Seattle. More than fifty years in the Central District. One of the last direct links
+          to the Jackson Street corridor&rsquo;s living tradition.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; two extending existing branches (swing rhythm, chromaticism) and
+        two opening new branches (brass technique, jazz pedagogy). Degree 4 is the first to introduce
+        pedagogy itself as a theory contribution.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Swing Rhythm &amp; Triplet Feel</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Asymmetric eighth-note subdivision (approximately 2:1 long-short). The triplet
+            model is theoretical; the reality is a fluid range navigated by ear. Standifer made
+            implicit swing knowledge explicit &mdash; articulating the mechanics that most musicians
+            learn only through immersion.</p>
+            <div class="examples">Jazz by Standifer sessions, Central District club recordings</div>
+            <div class="genealogy"><strong>From 3&deg;:</strong> Anderson = how swing feels. Standifer = how swing works. Complementary.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Brass Articulation &amp; Embouchure</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Embouchure (lip/jaw/muscle configuration) determines tone, range, endurance.
+            Articulation (tonguing technique) determines note onset. Standifer&rsquo;s warm, lyrical
+            trumpet tone prioritized melodic clarity over pyrotechnics. Body as sound source &mdash;
+            trumpet lips vibrate like vocal cords.</p>
+            <div class="examples">Jazz by Standifer trumpet demonstrations, UW faculty recitals</div>
+            <div class="genealogy"><strong>New at 4&deg;:</strong> First brass theory node. Body-as-sound-source shared with vocal theory (3&deg;).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Bebop Vocabulary</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Chromatic approach notes (half-step above/below target chord tone) and enclosure
+            patterns (target approached from both sides). Creates bebop&rsquo;s characteristic zigzag
+            contour. Standifer taught these as explicit, repeatable method &mdash; deconstructing
+            patterns over ii-V-I progressions. Chromaticism as curriculum.</p>
+            <div class="examples">Standifer trumpet solos, Jazz by Standifer bebop demonstrations</div>
+            <div class="genealogy"><strong>Thread:</strong> Jones (bass) &rarr; Frisell (upper) &rarr; Anderson (voice) &rarr; Standifer (codified method)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Jazz Educator as Bridge</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Translation of implicit musical knowledge into explicit, teachable form. Fifth position
+            on the composition-improvisation spectrum: <strong>pedagogy</strong>. The educator&rsquo;s output
+            is not performance or composition but understanding &mdash; the student&rsquo;s ability to
+            generate their own music because they possess the theoretical framework.</p>
+            <div class="examples">Jazz by Standifer format (performance + explanation), UW curricula</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Jones (compose) &rarr; Horvitz (compose+improv) &rarr; Frisell (improv) &rarr; Anderson (interpret) &rarr; Standifer (teach)</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             THE TEACHER PATTERN
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Teacher Pattern</h2>
+
+        <p>The S36 engine has tracked four artist-city relationships through degrees 0&ndash;3.
+        Standifer introduces the fifth: <strong>The Teacher</strong>. This is not the same as The Stay.
+        Anderson stayed and performed. Standifer stayed and <em>taught</em>. The distinction is output:
+        the performer&rsquo;s output is the performance itself, experienced in real time. The teacher&rsquo;s
+        output is the student &mdash; a living carrier of knowledge who will produce their own performances,
+        teach their own students, and extend the chain.</p>
+
+        <p>The institution spectrum now has five confirmed positions:</p>
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as resident anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;3&deg;</h4>
+          <ul>
+            <li><strong>Central District thread:</strong> Fifth degree, fourth artist directly connected. Standifer is the third primary Jackson Street participant (after Jones and Anderson). The geographic concentration is now five degrees deep.</li>
+            <li><strong>Chromaticism thread:</strong> Four deployments &mdash; Jones (bass-line), Frisell (upper-register), Anderson (embodied/vocal), Standifer (codified/melodic). Two intuitive, two systematic.</li>
+            <li><strong>Composition-improvisation spectrum:</strong> Five positions &mdash; composition (Jones), composed improvisation (Horvitz), free improvisation (Frisell), interpretation (Anderson), pedagogy (Standifer).</li>
+            <li><strong>Artist-as-institution spectrum:</strong> Five positions &mdash; industry (Jones), community (Horvitz), performer (Frisell), presence (Anderson), educator (Standifer).</li>
+            <li><strong>Body-as-sound-source:</strong> New thread connecting brass (trumpet lips) and vocal (vocal cords). Degrees 3 and 4 share the embodied-instrument principle.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a></li>
+            <li><a href="../../../CDS/index.html">CDS &mdash; Central District</a></li>
+            <li><a href="../../../RBH/index.html">RBH &mdash; Radio Broadcast History</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>University of Washington Music Department. Course catalogs and faculty records.</li>
+          <li>KNKX/KPLU. Jazz Northwest archives. &ldquo;Jazz by Standifer&rdquo; session recordings and broadcast logs.</li>
+          <li>Standifer, Floyd. Jazz education materials (UW course syllabi, lecture notes &mdash; institutional archives).</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="4">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>de Barros, Paul. Floyd Standifer profiles and reviews. Seattle Times.</li>
+          <li>HistoryLink.org. Essay #20023: &ldquo;Floyd Standifer.&rdquo;</li>
+          <li>Earshot Jazz. Floyd Standifer profiles and concert reviews.</li>
+          <li>Seattle Times. Obituary, January 2007.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="9">
+          <li>Seattle Civil Rights &amp; Labor History Project, University of Washington.</li>
+          <li>KNKX (formerly KPLU). Jazz programming archives.</li>
+          <li>Earshot Jazz Festival. Archives, 1988&ndash;present.</li>
+          <li>Dimitriou&rsquo;s Jazz Alley. Performance records.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR — STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1929</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">January 2007</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Wilmington, NC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">Late 1940s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">Trumpet, Sax, Voice</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">4&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (trumpet/vocal)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s&ndash;2000s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Local</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Roles</h4>
+          <div class="stat-row">
+            <span class="stat-label">Performer</span>
+            <span class="stat-value">50+ years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Educator</span>
+            <span class="stat-value">UW Faculty</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Radio</span>
+            <span class="stat-value">KNKX/KPLU</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Span</span>
+            <span class="stat-value">~55 years</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Branches</span>
+            <span class="stat-value">Brass, Pedagogy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Central District Thread</h4>
+          <div class="stat-row">
+            <span class="stat-label">Depth</span>
+            <span class="stat-value">5 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Primary JS</span>
+            <span class="stat-value">3 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jones</span>
+            <span class="stat-value">The Export</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Anderson</span>
+            <span class="stat-value">The Stay</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Standifer</span>
+            <span class="stat-value">The Teacher</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Patterns</h4>
+          <div class="stat-row">
+            <span class="stat-label">Export</span>
+            <span class="stat-value">No</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Stay</span>
+            <span class="stat-value">Yes (lifetime)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Teacher</span>
+            <span class="stat-value">Yes (new pattern)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Institution Type</span>
+            <span class="stat-value">Educator</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;3&deg; &rarr; 4&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carry Items</span>
+            <span class="stat-value">5 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">5 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern Items</span>
+            <span class="stat-value">10 extended</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Patterns</span>
+            <span class="stat-value">Teacher, Pedagogy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">Overton Berry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 4&deg; / 360 &middot;
+      <a href="../003-ernestine-anderson/index.html">Prev: 3&deg; Anderson</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
