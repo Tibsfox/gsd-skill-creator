@@ -1,0 +1,303 @@
+{
+  "degree": 3,
+  "species": "Black-capped Chickadee",
+  "scientific_name": "Poecile atricapillus",
+  "subspecies": "P. a. occidentalis (western subspecies)",
+  "sound_type": "fee-bee song / chick-a-dee alarm",
+  "energy": 2,
+  "ecosystem": "mixed woodland",
+  "season": "resident",
+  "family": "Paridae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle urban/suburban"
+  },
+  "physical": {
+    "length_in": "4.7-5.9",
+    "wingspan_in": "6.3-8.3",
+    "weight_g": "9-14"
+  },
+  "plumage": {
+    "cap": "Solid black crown from bill to nape",
+    "bib": "Solid black throat patch",
+    "cheeks": "Broad white patches",
+    "back": "Gray-blue dorsal",
+    "flanks": "Buffy-tan wash",
+    "breast": "Clean white below bib"
+  },
+  "frequency_range": {
+    "fee_bee_high_hz": 4500,
+    "fee_bee_low_hz": 3000,
+    "fee_bee_interval": "minor third (~3 semitones, ~6:5 ratio)",
+    "alarm_a_hz": ">5000",
+    "alarm_b_hz": "3000-5000",
+    "alarm_c_hz": "broadband FM sweep",
+    "alarm_d_hz": "2000-5000 broadband",
+    "register": "alto-soprano"
+  },
+  "alarm_call_metrics": {
+    "note_types": 4,
+    "note_type_labels": ["A (chick)", "B (-a-)", "C (sweep)", "D (dee)"],
+    "ordering_rule": "Alphabetical (A before B before C before D); invariant",
+    "optional_constituency": "Any note type can be omitted",
+    "d_note_range": "2-12+",
+    "d_note_encoding": "Inversely correlated with predator size; more D = higher threat",
+    "referential": true,
+    "combinatorial": true,
+    "interspecific_receivers": ["Red-breasted Nuthatch", "Downy Woodpecker", "Hairy Woodpecker", "Dark-eyed Junco", "Song Sparrow", "Pacific Wren"]
+  },
+  "theory_nodes": [
+    {
+      "concept": "Combinatorial syntax",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/syntax/",
+      "examples": [
+        "Four discrete note types (A, B, C, D) combined by ordering rules",
+        "Any element optional; ordering invariant (always alphabetical)",
+        "D-note count variable — encodes predator threat level (Templeton et al. 2005, Science)",
+        "Parallels chord voicing: discrete elements + combination rules = open-ended meaning"
+      ],
+      "music_theory_parallel": "Combinatorial structure — finite elements combined by rules to produce open-ended meaningful output. The defining property of both language (Hockett 1960) and music theory (chords from notes, phrases from motifs)."
+    },
+    {
+      "concept": "Referential signaling (D-note threat encoding)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/semantics/",
+      "examples": [
+        "More D notes = smaller, more agile predator = higher threat to chickadee-sized birds",
+        "Fewer D notes = larger, slower predator = lower threat",
+        "Experimentally verified: taxidermic mount presentations produce reproducible D-note counts",
+        "Playback of high-D-note calls elicits stronger mobbing response"
+      ],
+      "music_theory_parallel": "Dynamics as encoded information — D-note count functions as a dynamic marking (intensity encoded through repetition count, not amplitude). More sophisticated than simple volume variation."
+    },
+    {
+      "concept": "The minor third interval (fee-bee song)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/intervals/",
+      "examples": [
+        "Descending minor third (~6:5 frequency ratio) between fee and bee notes",
+        "Most common interval in infant-directed speech across cultures (Fernald 1989)",
+        "Default interval in children's taunts and calls worldwide (Brandt, Gebrian & Slevc 2012)",
+        "Most frequent interval in simplest musical systems globally (Nettl 1983)",
+        "Convergent acoustic solution — bird and human arrive at same basin of attraction"
+      ],
+      "music_theory_parallel": "The minor third as cognitive universal — the interval that requires minimal neural processing to produce and perceive. A physical constant of vocal production, not a cultural invention."
+    },
+    {
+      "concept": "Interspecies broadcast network (audio bus)",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/communication/",
+      "examples": [
+        "Alarm call broadcast on shared acoustic channel — open protocol, multiple receivers",
+        "Red-breasted Nuthatches decode D-note count (Templeton & Greene 2007, PNAS)",
+        "Pacific Wrens reduce singing on elevated-threat alarms",
+        "Chickadee as nuclear species in mixed-species flocks — hub of information network",
+        "Audio bus analogy: one source, shared medium, species-specific decoding chains"
+      ],
+      "music_theory_parallel": "Broadcast bus — signal from one source routed to multiple receivers simultaneously. Each receiver processes with its own channel strip. The mixer/bus of the forest acoustic network."
+    },
+    {
+      "concept": "Dynamics as encoded information (not amplitude)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/dynamics/",
+      "examples": [
+        "D-note count = communicative intensity level (not volume)",
+        "More repetitions = higher urgency = stronger mobbing response",
+        "Piano/forte as information in music — dynamic markings encode structural and emotional meaning",
+        "Chickadee encodes through count, not decibels — more sophisticated dynamic system"
+      ],
+      "music_theory_parallel": "Dynamic encoding through structural repetition rather than amplitude variation. Information in the pattern, not the loudness."
+    },
+    {
+      "concept": "Onomatopoeia as acoustic identity",
+      "level": "foundational",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/naming/",
+      "examples": [
+        "The bird's English name IS a transcription of its call: 'chick-a-dee'",
+        "Sound becoming language becoming taxonomy — the name is the sound",
+        "One of few birds whose common name is an onomatopoeic rendering of its primary vocalization",
+        "The ambassador species: most PNW residents learn this bird by name AND sound simultaneously"
+      ],
+      "music_theory_parallel": "Sound as identity — the call IS the name. In music: a leitmotif that is so recognizable it becomes the character's name (as Wagner's motifs became shorthand for the characters they represent)."
+    },
+    {
+      "concept": "The sound-to-language leap (biosemiotics)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/biosemiotics/",
+      "examples": [
+        "Degrees 0-2: physics of sound (silence, FM, AM) — how sound is produced",
+        "Degree 3: meaning in sound (referential syntax) — what sound means",
+        "The transition from bioacoustics to biosemiotics",
+        "Largest structural leap in the first four degrees — crosses from sound domain to language domain"
+      ],
+      "music_theory_parallel": "The transition from sound design to composition — from the physics of timbres and waveforms to the arrangement of meaningful structures. The same leap a DAW user makes from synthesis to songwriting."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Passerine taxonomy and distribution; this release adds combinatorial syntax, alarm broadcast, and music-theory mapping"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mixed woodland ecology, mixed-species flock dynamics, food caching and spatial memory"
+    },
+    {
+      "project": "BPS",
+      "title": "Bio-Physics Sensing",
+      "connection": "Information encoding — D-note count as measured variable encoding predator threat. Biological sensor with encoded output signal."
+    },
+    {
+      "project": "SHE",
+      "title": "Smart Home Electronics",
+      "connection": "Biological sensor network parallel: detect event → encode info → broadcast to receivers. Same architecture, biological implementation."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Ernestine Anderson at degree 3 — both are communicators who stayed while others moved. Resident voices whose constancy defines the community."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Non-referential silence at degree 0 → referential syntax at degree 3. From absence of meaning to encoded meaning in three degrees."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Degree 1 eavesdrops on degree 3: wrens reduce singing on chickadee alarm. First cross-degree information dependency in the circle."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Direct predecessor. AM sustain (territorial presence, no referent) → combinatorial syntax (specific, decoded threat information). Sound-as-presence to sound-as-language."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Ernestine Anderson",
+    "degree": 3,
+    "genre": "Jazz / Blues",
+    "shared_principle": "Both are communicators who stayed while others moved. Anderson stayed in Seattle when jazz moved to New York. The chickadee stays year-round when other species migrate. Both are resident voices whose constancy defines the community.",
+    "resonance_points": [
+      "Resident communicator: Anderson's voice defined Seattle jazz; the chickadee's alarm defines the forest's information network — both stay, both broadcast, both are infrastructure",
+      "Clear, named, immediately recognizable: Anderson's voice was unmistakable; the chickadee's call is the most immediately identifiable bird sound in the PNW — 'chick-a-dee' IS its name",
+      "Community anchor: Anderson held the Seattle jazz community together through decades; the chickadee is the nuclear species that holds mixed-species flocks together — remove either and the community degrades",
+      "Meaning in delivery: Anderson communicated emotion through phrasing and dynamics, not pyrotechnics; the chickadee communicates threat level through D-note count, not volume — both encode meaning in structure"
+    ]
+  },
+  "degree_arc": {
+    "position": "First language — the sound-to-meaning transition",
+    "progression": "Silence (0°) → cascade complexity (1°) → sustained tone (2°) → referential syntax (3°)",
+    "key_insight": "Degree 3 breaks out of the acoustic-physics domain that defined degrees 0-2. The circle has moved from HOW sound is produced to WHAT sound MEANS. This is the largest structural leap so far — not a quantitative increase in acoustic complexity, but a qualitative shift into the domain of language and meaning.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules + variable repetition)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz, multiple note types spanning range)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous is it)"
+    },
+    "audience_progression": {
+      "degree_0": "None",
+      "degree_1": "Conspecific",
+      "degree_2": "Conspecific",
+      "degree_3": "Interspecific (forest-wide broadcast)"
+    }
+  },
+  "cognition": {
+    "hippocampal_neurogenesis": "Seasonal neuron production for spatial memory of food cache locations (Barnea & Nottebohm 1994)",
+    "cache_sites": "Thousands per individual per autumn",
+    "brain_plasticity": "Hippocampus expands in autumn (caching season), contracts in spring",
+    "implication": "Combinatorial syntax emerges from a cognitively complex organism — not simple reflexive signaling"
+  },
+  "conservation": {
+    "federal_status": "Not listed (ESA)",
+    "iucn_status": "Least Concern",
+    "population_estimate": "~42 million (North America; Partners in Flight 2020)",
+    "state_status": "Common, stable, well-distributed across all woodland habitats with woody cover",
+    "protection": "Migratory Bird Treaty Act (16 U.S.C. 703-712)",
+    "primary_threats": [
+      "West Nile virus (documented mortality in some populations)",
+      "Window strikes (urban/suburban)",
+      "Habitat fragmentation reducing mixed-species flock connectivity"
+    ],
+    "ecosystem_note": "Chickadee abundance is infrastructure — mixed-species flock early-warning system depends on chickadees being common. Decline would cascade through flock community."
+  },
+  "key_sites": [
+    {
+      "name": "Seattle urban parks and residential neighborhoods",
+      "type": "year-round resident",
+      "description": "Common backyard bird throughout Seattle metro; uses feeders, nest boxes, ornamental plantings",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Discovery Park",
+      "type": "breeding/foraging",
+      "description": "Mixed woodland with mature conifers and deciduous edge",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Washington Park Arboretum",
+      "type": "year-round foraging",
+      "description": "Diverse woodland plantings supporting dense chickadee populations",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park",
+      "type": "breeding/foraging",
+      "description": "Old-growth remnant with mixed-species flocks including chickadee as nuclear species",
+      "city": "Seattle, WA"
+    }
+  ],
+  "sources": [
+    "Smith, S.M. (1993). Birds of the World. Cornell Lab of Ornithology. [Black-capped Chickadee species account.]",
+    "Templeton, C.N., Greene, E. & Davis, K. (2005). Science 308(5730). [D-note encoding of predator threat.]",
+    "Templeton, C.N. & Greene, E. (2007). PNAS 104(13). [Interspecific eavesdropping on D-note count.]",
+    "Hailman, J.P., Ficken, M.S. & Ficken, R.W. (1985). Semiotica 56(3/4). [Combinatorial syntax analysis.]",
+    "Hailman, J.P. (1989). Wilson Bulletin 101(2). [Paridae vocalization organization.]",
+    "Gill, F.B., Slikas, B. & Sheldon, F.H. (2005). MPE 35(1). [Poecile phylogenetics.]",
+    "Barnea, A. & Nottebohm, F. (1994). PNAS 91(23). [Hippocampal neurogenesis.]",
+    "Smulders, T.V. et al. (1995). J Neurobiol 27(1). [Seasonal hippocampal volume.]",
+    "Mennill, D.J. & Otter, K.A. (2007). Oxford University Press. [Status signaling in chickadees.]",
+    "Christie, P.J. et al. (2004). Behav Ecol Sociobiol 55(4). [Pitch shifts in dawn chorus.]",
+    "Nettl, B. (1983). The Study of Ethnomusicology. University of Illinois Press.",
+    "Brandt, A., Gebrian, M. & Slevc, L.R. (2012). Frontiers in Psychology 3:327.",
+    "Hockett, C.F. (1960). Scientific American 203(3). [Design features of language.]",
+    "Fernald, A. (1989). Behavioral and Brain Sciences 12(3).",
+    "Cornell Lab of Ornithology. All About Birds: Black-capped Chickadee.",
+    "Seattle Audubon Society. BirdWeb: Black-capped Chickadee.",
+    "Partners in Flight (2020). Population estimates.",
+    "Washington Department of Fish and Wildlife. Species account.",
+    "Macaulay Library. Black-capped Chickadee recordings. Cornell Lab of Ornithology."
+  ],
+  "release_metadata": {
+    "release_number": "003",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
