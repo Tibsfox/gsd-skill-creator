@@ -1,0 +1,196 @@
+/* NEH — Green Matrix / OpenGL Indigo / Shader Purple theme, NeHe OpenGL
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --gl-green: #1B5E20;
+  --gl-light: #E8F5E9;
+  --gl-mid: #2E7D32;
+  --gl-dark: #0D3B0F;
+  --indigo: #1A237E;
+  --indigo-light: #E8EAF6;
+  --indigo-mid: #283593;
+  --shader-purple: #4A148C;
+  --shader-light: #F3E5F5;
+  --shader-mid: #6A1B9A;
+  --viewport-dark: #0d1117;
+  --viewport-mid: #1a2332;
+  --viewport-light: #ECEFF1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--gl-green);
+  --link-hover: var(--gl-dark);
+  --accent: var(--gl-green);
+  --accent-light: var(--gl-light);
+  --accent-dark: var(--gl-dark);
+  --card-bg: white;
+  --card-border: #A5D6A7;
+  --card-shadow: rgba(27,94,32,0.12);
+  --border: #A5D6A7;
+  --parchment: var(--viewport-light);
+}
+
+/* ===================================================
+   2. HEADER -- viewport-dark/gl-green gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #0d1117 0%, #0d2818 35%, #1a237e 70%, #0d1117 100%);
+  border-bottom: 4px solid var(--gl-green);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(27,94,32,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(74,20,140,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #C8E6C9; }
+header .subtitle { color: #81C784; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--indigo);
+  border-bottom-color: var(--indigo-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--gl-green); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--gl-light);
+  border-left: 4px solid var(--gl-green);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--indigo); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(27,94,32,0.04); }
+tr:hover { background: rgba(27,94,32,0.08); }
+
+pre {
+  background: #0d1117;
+  color: #81C784;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--gl-green);
+}
+code {
+  background: var(--gl-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--gl-green);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #A5D6A7;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(27,94,32,0.12); border-color: var(--gl-green); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #A5D6A7;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--gl-green);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-taxonomy { background: var(--gl-light); color: var(--gl-green); }
+.tag-foundation { background: var(--indigo-light); color: var(--indigo); }
+.tag-intermediate { background: #E0F7FA; color: #00838F; }
+.tag-advanced { background: var(--shader-light); color: var(--shader-purple); }
+.tag-expert { background: #FFF3E0; color: #E65100; }
+.tag-upstream { background: #ECEFF1; color: #37474F; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #A5D6A7;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--gl-green); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--gl-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--gl-green);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #A5D6A7; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

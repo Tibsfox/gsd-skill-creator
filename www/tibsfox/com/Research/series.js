@@ -92,6 +92,7 @@
     { id: 'MRW', name: 'MC Weather', path: 'MRW/index.html' },
     { id: 'MTB', name: 'Moontribe', path: 'MTB/index.html' },
     { id: 'MWC', name: 'Millwork Co-op', path: 'MWC/index.html' },
+    { id: 'NEH', name: 'NeHe OpenGL', path: 'NEH/index.html' },
     { id: 'MIX', name: 'Sir Mix-A-Lot', path: 'MIX/index.html' },
     { id: 'MPC', name: 'Math Co-Proc.', path: 'MPC/index.html' },
     { id: 'NND', name: 'New New Deal', path: 'NND/index.html' },

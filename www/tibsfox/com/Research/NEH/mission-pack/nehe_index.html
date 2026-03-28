@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeHe OpenGL Intelligence Pack — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --primary-light: #E8EAF6;
+    --secondary: #01579B;
+    --secondary-light: #E1F5FE;
+    --accent: #0288D1;
+    --tertiary: #4A148C;
+    --dark: #212121;
+    --subtle: #757575;
+    --border: #BDBDBD;
+    --bg: #FAFAFA;
+    --card-bg: #F0F0F8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #283593 50%, var(--secondary) 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(255,255,255,0.025) 40px, rgba(255,255,255,0.025) 80px
+    );
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: #90CAF9;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #BBDEFB;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-pipeline {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: #90CAF9;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .hero-pipeline span { color: #E3F2FD; }
+
+  .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  .meta-strip {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 2.5rem;
+    font-size: 0.82rem;
+    color: var(--subtle);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .meta-strip span strong { color: var(--primary); }
+
+  .files-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid #C5CAE9;
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.18s ease;
+    border-left: 4px solid var(--accent);
+  }
+
+  .file-card:hover {
+    background: #E8EAF6;
+    border-left-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26,35,126,0.12);
+  }
+
+  .file-card .file-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .file-card .file-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-bottom: 0.3rem;
+  }
+
+  .file-card .file-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .file-card .file-desc {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    line-height: 1.4;
+  }
+
+  .contents-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stage-block {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .stage-header {
+    background: var(--primary);
+    color: white;
+    padding: 0.55rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  .stage-body { padding: 0.8rem 1rem; }
+
+  .stage-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .stage-body li {
+    font-size: 0.85rem;
+    color: var(--dark);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .stage-body li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .usage-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  .usage-steps {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .usage-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.8rem 1rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .step-num {
+    min-width: 28px;
+    height: 28px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .step-text { font-size: 0.87rem; line-height: 1.5; }
+
+  .step-text code {
+    font-family: 'DM Mono', monospace;
+    background: var(--secondary-light);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.82em;
+    color: var(--secondary);
+  }
+
+  .compile-block {
+    background: #1A1A2E;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .compile-block .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: #7986CB;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .compile-block code {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: #A5D6A7;
+    line-height: 2;
+  }
+
+  .quote-block {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .quote-block p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--primary);
+    line-height: 1.7;
+  }
+
+  .lesson-count {
+    display: inline-flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+
+  .tier-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .tier-foundation { background: #C8E6C9; color: #1B5E20; }
+  .tier-intermediate { background: #B3E5FC; color: #01579B; }
+  .tier-advanced { background: #F3E5F5; color: #4A148C; }
+  .tier-expert { background: #FFE0B2; color: #BF360C; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-label">GSD Research Mission Package</div>
+    <h1>NeHe OpenGL<br>Intelligence Pack</h1>
+    <p class="hero-subtitle">48 Lessons · 43 Platform Ports · Full Upstream Integration · Working Python Examples</p>
+    <div class="hero-pipeline">
+      <span>Vision</span> → <span>Research</span> → <span>Mission</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="meta-strip">
+    <div><strong>Date:</strong> March 27, 2026</div>
+    <div><strong>Status:</strong> Ready for GSD Orchestrator</div>
+    <div><strong>Profile:</strong> Fleet (17 roles)</div>
+    <div><strong>Windows:</strong> 8–12 context windows</div>
+    <div><strong>Source:</strong> nehe.gamedev.net</div>
+  </div>
+
+  <div class="files-section">
+    <h2>Package Files</h2>
+    <div class="files-grid">
+      <a href="nehe_mission.pdf" download class="file-card">
+        <div class="file-icon">📄</div>
+        <div class="file-name">nehe_mission.pdf</div>
+        <div class="file-title">Mission Package (PDF)</div>
+        <div class="file-desc">Complete 3-stage document: Vision Guide · Research Reference · Mission Package. 35 pages, publication quality.</div>
+      </a>
+      <a href="nehe_mission.tex" download class="file-card">
+        <div class="file-icon">⚙️</div>
+        <div class="file-name">nehe_mission.tex</div>
+        <div class="file-title">LaTeX Source</div>
+        <div class="file-desc">Full XeLaTeX source. Modify and recompile with three-pass xelatex. Requires DejaVu fonts.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="contents-section">
+    <h2>Document Contents</h2>
+
+    <div class="stage-block">
+      <div class="stage-header">STAGE 1 — VISION DOCUMENT</div>
+      <div class="stage-body">
+        <ul>
+          <li>Vision narrative — NeHe as pedagogy, the corpus as compositional grammar of 3D space</li>
+          <li>5-problem problem statement (skill-creator knowledge gap, legacy code, missing taxonomy, API evolution, no DACP schemas)</li>
+          <li>Core concept: Lesson-as-Skill-Node, Corpus-as-DAG — the Rendering Knowledge Graph</li>
+          <li>ASCII domain map: all 48 lessons across 5 tiers with prerequisite edges</li>
+          <li>6 research modules: Taxonomy · Foundation · Intermediate · Advanced · Expert · Integration</li>
+          <li>Fleet chipset YAML (Agnus/Opus · Denise/Sonnet · Paula/Haiku)</li>
+          <li>12 testable success criteria</li>
+          <li>Through-line: Amiga Principle, spaces between, compositional intelligence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-header">STAGE 2 — RESEARCH REFERENCE</div>
+      <div class="stage-body">
+        <ul>
+          <li>Complete 48-lesson taxonomy table: title, tier, complexity, key concepts, key APIs</li>
+          <li>
+            Tier overview:
+            <div class="lesson-count" style="margin-top:0.4rem">
+              <span class="tier-badge tier-foundation">L01–12 Foundation</span>
+              <span class="tier-badge tier-intermediate">L13–24 Intermediate</span>
+              <span class="tier-badge tier-advanced">L25–36 Advanced</span>
+              <span class="tier-badge tier-expert">L37–48 Expert</span>
+            </div>
+          </li>
+          <li>Modern Python patterns: GLFW window setup, Pillow texture loading, PyOpenGL extension detection</li>
+          <li>Particle engine data structure (L19), stencil buffer pattern (L26–27), height map terrain (L34)</li>
+          <li>VBO + VAO pattern (L45), ArcBall quaternion math (L48), FreeType glyph atlas (L43)</li>
+          <li>DACP bundle schema for OpenGL lesson handoffs (three-part: intent + metadata + executable code)</li>
+          <li>Deprecation map: 15 legacy OpenGL patterns → modern OpenGL 3.3+ equivalents with severity</li>
+          <li>Safety and sensitivity table (licensing, platform stubs, GPU driver variability)</li>
+          <li>Source bibliography (primary archive, Python refs, Khronos spec, FreeType, ODE, ArcBall paper)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-header">STAGE 3 — MISSION PACKAGE</div>
+      <div class="stage-body">
+        <ul>
+          <li>Milestone specification: objective, 4-wave architecture overview (ASCII), 6 system layers</li>
+          <li>12 deliverables table with acceptance criteria</li>
+          <li>Component breakdown: 14 components with model assignments and token estimates (~359k total)</li>
+          <li>Wave execution plan: Wave 0 (Foundation) + 3 parallel Wave 1 tracks + Wave 2 (Synthesis) + Wave 3 (Publication)</li>
+          <li>Cache optimization: shared GLFW boilerplate, texture loader, taxonomy TTL preload</li>
+          <li>Token budget table: Opus 23% · Sonnet 70% · Haiku 7%</li>
+          <li>Dependency graph (ASCII): clean DAG from schemas → parallel code tracks → synthesis → publication</li>
+          <li>Test plan: 4 BLOCK-level safety tests, 24 core tests, 12 integration tests, verification matrix</li>
+          <li>Fleet crew manifest: 17 named roles (FLIGHT, PLAN, TOPO, ARCH, SCOUT, EXEC×3, CRAFT-IMPL, CRAFT-ARCH, ANALYST, VERIFY, INTEG, SURGEON, SECURE, CAPCOM, RETRO, LOG)</li>
+          <li>2 CAPCOM gates: post Wave 1 visual checks + post Wave 2 final review</li>
+          <li>Closing quotebox: Amiga Principle echo, spaces between as compositional intelligence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="usage-section">
+    <h2>How to Use This Package</h2>
+    <div class="usage-steps">
+      <div class="usage-step">
+        <div class="step-num">1</div>
+        <div class="step-text">Open <code>nehe_mission.pdf</code> and read Stage 1 (Vision) to confirm the scope matches your intent. The 12 success criteria define the acceptance boundary.</div>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">2</div>
+        <div class="step-text">Hand the PDF to the GSD orchestrator (Claude Code, dev branch): <code>gsd execute nehe_mission.pdf</code> — the orchestrator reads the wave plan and begins Wave 0.</div>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">3</div>
+        <div class="step-text">Confirm CAPCOM Gate 1 after Wave 1 completes: review the visual spot-checks for L01–L12 and the test results for L01–L20. Go/no-go before Wave 2.</div>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">4</div>
+        <div class="step-text">Confirm CAPCOM Gate 2 after Wave 2: review the DACP bundle schemas, the deprecation map, and the documentation index accuracy (30-query spot-check). Go/no-go before Wave 3.</div>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">5</div>
+        <div class="step-text">After Wave 3: drop the output directory into the skill-creator dev branch and run <code>python -m pytest tests/</code> in a fresh venv. All 4 safety-critical tests must pass before merge.</div>
+      </div>
+    </div>
+
+    <h2>Recompile the LaTeX</h2>
+    <div class="compile-block">
+      <div class="label">Three-pass XeLaTeX (required for TOC + lastpage)</div>
+      <code>xelatex -interaction=nonstopmode nehe_mission.tex</code>
+      <code>xelatex -interaction=nonstopmode nehe_mission.tex</code>
+      <code>xelatex -interaction=nonstopmode nehe_mission.tex</code>
+    </div>
+
+    <div class="quote-block">
+      <p>"Both are about the spaces between. The magic of a textured cube isn't in any individual vertex — it's in the mapping between texture coordinate and geometry. The magic of a particle system isn't in any individual particle — it's in the emergent field they form. This is the intelligence this pack adds to skill-creator: not a lookup table, but a compositional grammar of 3D space."</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package · NeHe OpenGL Intelligence Pack · March 27, 2026 · nehe.gamedev.net (MIT) · Tibsfox / GSD Ecosystem
+</footer>
+
+</body>
+</html>
