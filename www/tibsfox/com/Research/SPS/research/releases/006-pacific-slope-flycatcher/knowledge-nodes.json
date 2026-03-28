@@ -1,0 +1,358 @@
+{
+  "degree": 6,
+  "species": "Pacific-slope Flycatcher",
+  "scientific_name": "Empidonax difficilis",
+  "subspecies": "Monotypic (split from Cordilleran Flycatcher E. occidentalis in 1989)",
+  "sound_type": "upslurred wheeet",
+  "energy": 2,
+  "ecosystem": "riparian alder",
+  "season": "spring-fall (neotropical migrant)",
+  "family": "Tyrannidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle / Puget Sound lowlands"
+  },
+  "physical": {
+    "length_in": "5.5",
+    "wingspan_in": "~8",
+    "weight_g": "8-12"
+  },
+  "plumage": {
+    "upperparts": "Olive-green to olive-brown",
+    "underparts": "Yellowish (palest on throat, brightest on belly)",
+    "eye_ring": "Conspicuous teardrop-shaped, yellowish to whitish",
+    "wing_bars": "Two pale (buffy to whitish)",
+    "bill": "Broad and flat -- flycatcher bill for aerial insect capture; lower mandible pale orange-pink",
+    "diagnostic_visual": "UNRELIABLE -- overlaps with at least 4 other Empidonax species"
+  },
+  "frequency_range": {
+    "onset_hz_low": 2500,
+    "onset_hz_high": 3000,
+    "peak_hz_low": 3500,
+    "peak_hz_high": 4500,
+    "sweep_direction": "ascending (upslurred)",
+    "register": "alto (2.5-4.5 kHz ascending sweep)"
+  },
+  "vocalization_metrics": {
+    "primary_call": {
+      "name": "Upslurred wheeet / ptseet",
+      "transcription": "ptseet / su-wheet",
+      "note_duration_s": "0.3-0.5",
+      "frequency_contour": "Smooth continuous upward glide",
+      "timbre": "Thin, whistled, slightly buzzy at onset",
+      "key_property": "THE diagnostic character -- only reliable ID for the species",
+      "calling_period": "Diurnal (spring through early fall only)"
+    },
+    "dawn_song": {
+      "name": "Three-phrase dawn song",
+      "transcription": "ptseet... ptsik... suweet",
+      "structure": "Ternary form (A-B-C) -- three distinct phrase types in fixed order",
+      "phrase_1": "ptseet -- upslurred whistle (ascending)",
+      "phrase_2": "ptsik / tsik -- sharp downslurred chip (descending)",
+      "phrase_3": "suweet / suwee -- burry, slightly descending two-part note",
+      "delivery": "Repeated cyclically from consistent dawn perch",
+      "significance": "First multi-section formal structure in the circle"
+    }
+  },
+  "voice_as_identity": {
+    "principle": "Voice is the PRIMARY identification character -- not supplementary, not confirmatory, but constitutive",
+    "taxonomic_basis": "The 1989 AOU split from Cordilleran Flycatcher was justified almost entirely by vocal differences",
+    "field_identification": "Visual identification unreliable -- overlaps with 4+ Empidonax species. One upslurred whistle = instant certainty. Silence = permanent ambiguity.",
+    "birder_convention": "Empids (Empidonax flycatchers) are collectively acknowledged as visually unidentifiable without voice",
+    "inversion": "Reverses the normal identification hierarchy: hear first, see second (vs. see first, hear second for all previous degrees)",
+    "jazz_parallel": "Knowing Coltrane by a single note on the tenor saxophone -- the tone IS the identity. No visual shortcut."
+  },
+  "migration": {
+    "status": "Neotropical migrant",
+    "breeding_range": "Pacific Northwest (western British Columbia to central California)",
+    "wintering_range": "Western Mexico (southern Sonora to Oaxaca)",
+    "arrival": "April",
+    "departure": "September",
+    "round_trip_distance": "2,000+ miles each way",
+    "significance": "First neotropical migrant in the circle (all previous degrees are residents). Introduces temporal presence/absence as a concept.",
+    "seasonal_form": {
+      "spring": "Arrival -- the opening phrase",
+      "summer": "Breeding -- the chorus (maximum vocal activity)",
+      "fall": "Departure -- the closing phrase",
+      "winter": "Absence -- the rest between movements"
+    }
+  },
+  "theory_nodes": [
+    {
+      "concept": "Upslurred question (ascending pitch contour as half cadence)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/cadence/half-cadence/",
+      "examples": [
+        "Rising pitch signals continuation, incompleteness -- a question mark in tonal language",
+        "The 'ptseet' rises from 2.5 kHz to 4.5 kHz and stops -- no resolution, no descent",
+        "In music, a half cadence ends on the dominant, creating tension that demands the tonic",
+        "Every previous species either resolves, sustains, or repeats at level pitch. This one ascends and opens."
+      ],
+      "music_theory_parallel": "The half cadence -- a phrase ending on the dominant that creates unresolved tension. The flycatcher's upslurred call is the acoustic equivalent of a question mark: it rises, stops, and waits. The first species in the circle whose primary vocalization does not close or resolve."
+    },
+    {
+      "concept": "Ternary form (three-phrase dawn song as simplest formal structure)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/ternary/",
+      "examples": [
+        "Dawn song: ptseet (up), ptsik (down), suweet (level-to-down) -- A-B-C in fixed order",
+        "Minuet and trio, da capo aria, verse-chorus-verse -- the simplest complete formal structure",
+        "Previous species contributed single elements; the flycatcher introduces distinct SECTIONS",
+        "Three phrases with different contours create a micro-melody with internal shape: rise, fall, resolution"
+      ],
+      "music_theory_parallel": "Ternary form (ABA or ABC) -- the simplest multi-section formal structure in music. The dawn song's three distinct phrases, each with its own contour, create the building block from which all larger forms are constructed. The first species in the circle with multi-section song architecture."
+    },
+    {
+      "concept": "Voice as primary identity (personal tone -- knowing by sound alone)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/identity/tone/",
+      "examples": [
+        "Coltrane's sound IS Coltrane -- one note on the tenor sax and you know who it is",
+        "The Empidonax genus forces the listener into the same relationship as a jazz audience: know the sound or don't know the player",
+        "Species exists as a distinct taxon BECAUSE of its call (1989 split was voice-driven)",
+        "Every species in degrees 0-5 has reliable visual ID. This one has ONLY voice."
+      ],
+      "music_theory_parallel": "Personal tone as primary identity -- the jazz concept that a musician's sound is more identifying than their appearance. Miles Davis on trumpet, Billie Holiday on vocals, Thelonious Monk on piano. The Empidonax flycatcher teaches the same lesson: the ear knows what the eye cannot distinguish."
+    },
+    {
+      "concept": "Seasonal presence as temporal form (annual cycle as musical movement)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/temporal/",
+      "examples": [
+        "Spring arrival = exposition, summer breeding = development, fall departure = coda, winter = rest",
+        "First species with a temporal envelope -- fades in, sustains, fades out over months",
+        "Residents play continuously. The migrant plays one movement per year.",
+        "The return of the ptseet in April marks spring as reliably as salmonberry bloom"
+      ],
+      "music_theory_parallel": "Large-scale temporal form -- the concept that musical structure operates across time scales from the phrase (seconds) to the movement (minutes) to the annual cycle (months). The migrant's annual presence/absence maps to the distinction between movements in a multi-movement work: each has a beginning, middle, end, and the rests between them are structural."
+    },
+    {
+      "concept": "Half cadence (unresolved tension as structural device)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/cadence/tension/",
+      "examples": [
+        "A phrase ending on the dominant creates expectation -- the listener waits for resolution",
+        "The upslurred ptseet ends at its highest pitch, leaving the phrase open",
+        "Thrush's drone is a statement (tonic). Owl's motif resolves. Nuthatch's beat is neutral. Flycatcher's upslur creates tension.",
+        "In speech prosody, rising intonation at phrase end = question. Falling = statement. The flycatcher rises."
+      ],
+      "music_theory_parallel": "The half cadence is a structural pause on the dominant that creates forward momentum -- the listener expects resolution to the tonic. The flycatcher's ascending call is the first tension-creating voice in the ensemble. It does not resolve; it opens. This is the harmonic function of the question."
+    },
+    {
+      "concept": "Pitch sweep as synthesis type (continuous frequency glide)",
+      "level": "intermediate",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/synthesis/sweep/",
+      "examples": [
+        "Not FM (frequency modulation around a center) like the wren's cascade",
+        "Not AM (amplitude modulation of a steady frequency) like the thrush's drone",
+        "Not metronomic (repeated level note) like the nuthatch's beat",
+        "A controlled directional pitch change -- from low to high in a single smooth glide"
+      ],
+      "music_theory_parallel": "The pitch sweep is a distinct synthesis type: a continuous, directional frequency change. In electronic music, this is the 'sweep' or 'glide' -- a filter or oscillator moving from one frequency to another. It is directional (has a start and end pitch) and continuous (not stepped). A new entry in the synthesis taxonomy of the circle."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Passerine and flycatcher taxonomy. This release adds voice-as-identity analysis, neotropical migrant ecology, and upslurred-question music theory mapping."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Riparian ecology, alder corridor ecosystem services, insect prey base, stream temperature regulation. Flycatcher as riparian indicator species connects to ECO's watershed modules."
+    },
+    {
+      "project": "BPS",
+      "title": "BPS Sensor Network",
+      "connection": "Seasonal acoustic signal as binary indicator for BPS sensors. Presence = breeding season (April-September), absence = winter (October-March). Arrival date tracking as phenological data."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Patti Brown at degree 6. Both are underrecognized despite defining characteristics -- known by those who listen, invisible to those who only look."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "Direct predecessor. Nuthatch's steady beat (level pitch, continuous, metronomic) contrasts with flycatcher's upslurred question (ascending pitch, seasonal, phrase-based). Metronome vs. question. Always-on vs. seasonal."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "Both face habitat-related population pressure. Owl requires old-growth canopy; flycatcher requires riparian understory. Owl's four-note motif resolves downward; flycatcher's upslur does not resolve. Two kinds of forest dependence."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "Chickadee established voice as meaningful (combinatorial syntax encoding threat level). Flycatcher establishes voice as identity -- not what the call means, but that the call is the only way to know who is calling. Meaning vs. identity."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Both occupy shaded PNW forest but different ecosystems (conifer vs. riparian). Thrush's sustained tone = declaration (flat contour). Flycatcher's upslur = question (ascending contour). Statement vs. inquiry."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Both small, insectivorous, dense understory. Wren's 100+ note cascade = maximum complexity. Flycatcher's 3-phrase dawn song = simplest formal structure. Both demonstrate vocal complexity scales independently of body size."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Heron's silence = chosen absence of sound (behavioral). Flycatcher's winter absence = physical departure (migratory). Two kinds of acoustic absence: stillness vs. migration."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Patti Brown",
+    "degree": 6,
+    "genre": "Jazz / Vocals",
+    "shared_principle": "Both are underrecognized despite defining characteristics. Brown's vocal artistry was overshadowed by flashier names on the Seattle jazz scene, yet those who heard her knew immediately. The flycatcher's identity is invisible without its call, yet one note resolves all ambiguity. Known by those who listen. Invisible to those who only look.",
+    "resonance_points": [
+      "Underrecognition despite excellence: Brown was not the name casual listeners knew, yet working musicians recognized her artistry instantly; the flycatcher is not the bird casual birders notice, yet experienced birders identify it from a single note -- both are known by practitioners, overlooked by observers",
+      "Voice as defining characteristic: Brown's voice WAS her instrument -- her tone, phrasing, and delivery were unmistakable to anyone who listened; the flycatcher's voice IS its identity -- the only reliable diagnostic character for the species",
+      "Overshadowed by visual spectacle: Brown worked alongside more visually prominent performers; the flycatcher shares habitat with more visually distinctive species (tanagers, warblers). In both cases, the ear catches what the eye misses",
+      "Seasonal presence as artistic cycle: Brown appeared on stages, performed, then the set ended -- the performance was temporal, bounded. The flycatcher arrives, breeds, departs -- the presence is seasonal, bounded. Both leave silence when they go."
+    ]
+  },
+  "taxonomic_split": {
+    "year": 1989,
+    "authority": "American Ornithologists' Union, 37th supplement",
+    "former_species": "Western Flycatcher (Empidonax difficilis sensu lato)",
+    "resulting_species": [
+      "Pacific-slope Flycatcher (Empidonax difficilis)",
+      "Cordilleran Flycatcher (Empidonax occidentalis)"
+    ],
+    "basis": "Vocal differences (call contour), contact zone behavior, genetic divergence (Johnson & Marten 1988)",
+    "significance": "Species exists as a recognized taxon primarily because of vocal differences. Plumage-based taxonomy could not sustain the split."
+  },
+  "degree_arc": {
+    "position": "The upslurred question -- voice as primary identity, ascending pitch contour, seasonal presence",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6)",
+    "key_insight": "Degree 6 introduces three new dimensions simultaneously: (1) voice as PRIMARY identity (not supplementary), inverting the normal see-first/hear-second hierarchy; (2) the first neotropical migrant, introducing temporal presence/absence -- the concept of a seasonal voice that arrives and departs; (3) the first ascending, unresolved pitch contour -- a half cadence, a question mark in the acoustic landscape. Additionally, degree 6 is the first riparian species, expanding the circle's ecosystem diversity beyond conifer forest and estuary.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern, this is my time)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species -- voice as constitutive, not supplementary)"
+    },
+    "temporal_progression": {
+      "degree_0": "Diurnal (day-active)",
+      "degree_1": "Dawn chorus (crepuscular peak)",
+      "degree_2": "Crepuscular (dusk/dawn emphasis)",
+      "degree_3": "Diurnal (daytime alarm system)",
+      "degree_4": "Nocturnal (first night species -- time as territory)",
+      "degree_5": "Diurnal (year-round daytime pulse -- returns to daylight)",
+      "degree_6": "Diurnal/seasonal (FIRST MIGRANT -- present spring-fall only, absent winter)"
+    },
+    "season_progression": {
+      "degree_0": "Resident",
+      "degree_1": "Resident",
+      "degree_2": "Resident (partially migratory)",
+      "degree_3": "Resident",
+      "degree_4": "Resident",
+      "degree_5": "Resident (occasionally irruptive)",
+      "degree_6": "Neotropical migrant (FIRST non-resident species)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor (FIRST deciduous/riparian habitat)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Riparian corridors -- red alder, bigleaf maple, sword fern understory along streams and creeks",
+    "foraging_strategy": "Sally-gleaner and aerial hawker -- perches, waits, launches to capture flying insects mid-air",
+    "diet": "Almost entirely invertebrate during breeding season: flies, mosquitoes, small moths, beetles, wasps, spiders",
+    "nesting": "Sheltered surfaces near water: cliff faces, stream bank cutouts, undersides of bridges, root wads, occasionally human structures",
+    "bill_adaptation": "Broad, flat bill with rictal bristles -- adapted for snapping shut on fast-moving aerial prey",
+    "indicator_species": "Presence indicates intact riparian habitat with appropriate vegetative structure, moisture regime, and insect productivity",
+    "ecosystem_services": "Insect pest regulation in riparian corridors; riparian corridors provide stream shade (salmon temperature regulation), sediment filtering, bank stabilization"
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~6.5 million (Partners in Flight 2020)",
+    "trend": "Declining -- approximately 2-3% per year since 1970s (BBS data)",
+    "threats": "Riparian forest degradation in PNW, tropical forest loss in Mexico wintering grounds, streamside development",
+    "vulnerability": "Dependent on intact riparian corridors -- cannot persist in degraded suburban habitat (unlike nuthatch or chickadee)",
+    "significance": "Trajectory species -- not yet endangered but declining. First species in the circle with negative population trend as a defining conservation feature."
+  },
+  "key_sites": [
+    {
+      "name": "Western Washington riparian corridors",
+      "type": "breeding",
+      "description": "Red alder stands along streams and creeks throughout Puget Sound lowlands",
+      "region": "Puget Sound lowlands"
+    },
+    {
+      "name": "Olympic and Cascade mountain stream valleys",
+      "type": "breeding",
+      "description": "Montane riparian corridors with dense deciduous understory",
+      "region": "Olympic Peninsula, western Cascades"
+    },
+    {
+      "name": "Western Mexico (Sonora to Oaxaca)",
+      "type": "wintering",
+      "description": "Tropical and subtropical forest; non-breeding range",
+      "region": "Pacific slope of Mexico"
+    }
+  ],
+  "sources": [
+    "Lowther, P.E. (2000). Birds of the World. Cornell Lab of Ornithology. [Pacific-slope Flycatcher species account.]",
+    "Cornell Lab of Ornithology. All About Birds: Pacific-slope Flycatcher. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Pacific-slope Flycatcher. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Pacific-slope Flycatcher species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Empidonax identification.]",
+    "Johnson, N.K. & Marten, J.A. (1988). Auk 105(1): 177-191. [Genetic and vocal evidence for the difficilis split.]",
+    "American Ornithologists' Union. (1989). Auk 106(3): 532-538. [37th supplement -- Western Flycatcher split.]",
+    "Rush, S.A., Cannings, R.J. & Irwin, D.E. (2009). Condor 111(4): 789-795. [Cryptic diversity in Western Flycatcher.]",
+    "Ralph, C.J. (1994). Birds of North America, No. 556. [Pacific-slope Flycatcher ecology and behavior.]",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey Results 1966-2019. USGS Patuxent.",
+    "Macaulay Library. Pacific-slope Flycatcher recordings. Cornell Lab of Ornithology.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov",
+    "Washington Department of Fish and Wildlife. Pacific-slope Flycatcher. wdfw.wa.gov",
+    "eBird. Pacific-slope Flycatcher observation data, Pacific Northwest. ebird.org/species/pasfly"
+  ],
+  "release_metadata": {
+    "release_number": "006",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

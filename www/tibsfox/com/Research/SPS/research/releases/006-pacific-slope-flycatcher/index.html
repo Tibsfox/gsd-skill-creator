@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 6&deg; &mdash; Pacific-slope Flycatcher &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.question { background: #E65100; }
+    .theory-icon.ternary { background: #7B1FA2; }
+    .theory-icon.voice-id { background: var(--puget-dark); }
+    .theory-icon.seasonal { background: #1565C0; }
+    .theory-icon.half-cadence { background: #C62828; }
+    .theory-icon.tone { background: var(--earth-mid); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; }
+    .progression-table th { font-size: 0.78rem; }
+    .progression-table td { font-size: 0.85rem; }
+
+    /* Migration card */
+    .migration-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%);
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .migration-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+    .season-bar {
+      display: flex;
+      margin: 0.75rem 0;
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .season-bar .present {
+      background: #66BB6A;
+      color: white;
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+    }
+    .season-bar .absent {
+      background: #E0E0E0;
+      color: #757575;
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">6&deg;</div>
+      <div class="release-title-block">
+        <h2>Pacific-slope Flycatcher</h2>
+        <div class="scientific">Empidonax difficilis &middot; Family Tyrannidae (Tyrant Flycatchers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Upslurred Wheeet &middot; Riparian Alder &middot; Spring&ndash;Fall (Neotropical Migrant) &middot; Energy 2</div>
+
+    <blockquote>
+      The Pacific-slope Flycatcher lifts a single upslurred whistle from the riparian alder &mdash;
+      &ldquo;ptseet&rdquo; &mdash; an ascending question that hangs in the air, unresolved. You cannot
+      see this bird and know its name. You must hear it. Degree 6 adds the question &mdash; and for the
+      first time, the voice arrives in spring and departs in fall.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Pacific-slope Flycatcher is a small passerine of the family <strong>Tyrannidae</strong>
+          (tyrant flycatchers), order Passeriformes &mdash; the largest bird family in the Americas.
+          The genus <em>Empidonax</em> (&ldquo;king of the gnats&rdquo;) contains 15 North American
+          species, all nearly identical in plumage. The species epithet <strong>difficilis</strong>
+          means &ldquo;difficult&rdquo; &mdash; named for the genus&rsquo;s notorious visual
+          indistinguishability. At <strong>5.5 inches</strong> and <strong>8&ndash;12 grams</strong>,
+          olive-green above, yellowish below, with a teardrop-shaped eye-ring and two pale wing bars.
+        </p>
+        <p>
+          <strong>The 1989 split.</strong> Until 1989, this bird and the Cordilleran Flycatcher
+          (<em>E. occidentalis</em>) were a single species: the Western Flycatcher. The AOU split them
+          based almost entirely on <strong>vocal differences</strong>. The species exists as a recognized
+          taxon <em>because of its call</em>. Remove the voice, and the taxonomy collapses. Among birders,
+          Empidonax flycatchers are known as &ldquo;Empids&rdquo; &mdash; the standard advice is:
+          <em>if you cannot hear it, you cannot identify it.</em>
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Upslurred Wheeet</h2>
+        <h3>The Ascending Question</h3>
+        <p>
+          The diagnostic call is a sharp, upslurred <strong>&ldquo;ptseet&rdquo;</strong> or
+          <strong>&ldquo;su-wheet&rdquo;</strong> &mdash; a single whistle that rises from approximately
+          <strong>2.5&ndash;3.0 kHz</strong> to <strong>3.5&ndash;4.5 kHz</strong> over
+          <strong>0.3&ndash;0.5 seconds</strong>. The frequency contour is a smooth, continuous upward
+          glide &mdash; not a step, not a jump, but a sweep. The attack is crisp, sometimes preceded by
+          a faint consonant-like &ldquo;pt-&rdquo; or &ldquo;ts-&rdquo; noise.
+        </p>
+        <p>
+          This upslurred whistle is <strong>the</strong> diagnostic character. Not the plumage, not the
+          eye-ring, not the wing bars. One note, and identification is certain. Silence, and the bird
+          becomes &ldquo;<em>Empidonax</em> sp.&rdquo;
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency onset</td><td>2.5&ndash;3.0 kHz</td></tr>
+            <tr><td>Frequency peak</td><td>3.5&ndash;4.5 kHz</td></tr>
+            <tr><td>Sweep direction</td><td>Ascending (upslurred)</td></tr>
+            <tr><td>Note duration</td><td>0.3&ndash;0.5 s</td></tr>
+            <tr><td>Timbre</td><td>Thin, whistled, slightly buzzy at onset</td></tr>
+            <tr><td>Dawn song</td><td>3-phrase: ptseet&hellip; ptsik&hellip; suweet (ternary form)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Dawn Song: Three-Phrase Signature</h3>
+        <p>
+          The male&rsquo;s dawn song delivers three distinct phrases in a fixed order:
+          <strong>ptseet</strong> (upslurred whistle), <strong>ptsik</strong> (sharp downslurred chip),
+          <strong>suweet</strong> (burry descending two-part note). This creates a micro-melody with
+          internal shape &mdash; rise, fall, resolution &mdash; the simplest possible
+          <strong>ternary form</strong> (A-B-C). The first species in the circle with multi-section
+          formal structure.
+        </p>
+
+        <!-- Migration Card -->
+        <div class="migration-card">
+          <h3>First Neotropical Migrant &mdash; Seasonal Presence</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Pacific-slope Flycatcher <strong>arrives in April and departs by September</strong>.
+            It winters in western Mexico (Sonora to Oaxaca). This is the first species in the circle
+            whose acoustic contribution has a <strong>temporal envelope</strong> &mdash; it fades in,
+            sustains through the breeding season, then fades out. All previous degrees are year-round residents.
+          </p>
+          <div class="season-bar">
+            <div class="absent" style="flex: 3;">Jan&ndash;Mar</div>
+            <div class="present" style="flex: 6;">Apr&ndash;Sep</div>
+            <div class="absent" style="flex: 3;">Oct&ndash;Dec</div>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            Spring arrival = acoustic event. Fall departure = seasonal silence. Winter = the rest
+            between movements. The return of the &ldquo;ptseet&rdquo; marks spring as reliably as
+            salmonberry bloom.
+          </p>
+        </div>
+
+        <!-- Voice as Identity -->
+        <h2>Voice as Identity &mdash; The Inversion</h2>
+        <p>
+          In most bird species, the identification pathway is: <strong>see first, hear second</strong>.
+          Field guides are organized by plumage. Sound is supplementary. In Empidonax flycatchers,
+          this hierarchy is <strong>completely inverted</strong>. Visual identification is unreliable
+          or impossible. The ONLY reliable diagnostic character is the call. Voice is not supplementary.
+          <strong>Voice IS identity.</strong>
+        </p>
+        <p>
+          Every species in degrees 0&ndash;5 has visual or behavioral features that establish identity
+          before sound is considered. The heron&rsquo;s size, the wren&rsquo;s skulking behavior, the
+          thrush&rsquo;s plumage, the chickadee&rsquo;s black cap, the owl&rsquo;s facial disk, the
+          nuthatch&rsquo;s head-first descent. The Pacific-slope Flycatcher has <strong>none that are
+          reliable</strong>. One upslurred whistle &mdash; instant certainty. Silence &mdash; permanent
+          ambiguity. The bird teaches you that your eyes are insufficient. The forest has a species
+          that can only be known by ear.
+        </p>
+
+        <!-- Progression Card -->
+        <div class="progression-card">
+          <h3>The Arc: Silence &rarr; Cascade &rarr; Drone &rarr; Language &rarr; Motif &rarr; Metronome &rarr; Question</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 6 adds the UPSLURRED QUESTION. The ascending pitch contour that implies
+            continuation &mdash; a half cadence in the acoustic landscape. And for the first time,
+            the voice is seasonal: present in spring-fall, absent in winter.
+          </p>
+          <table class="progression-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg; Heron</th>
+                <th>1&deg; Wren</th>
+                <th>2&deg; Thrush</th>
+                <th>3&deg; Chickadee</th>
+                <th>4&deg; Owl</th>
+                <th>5&deg; Nuthatch</th>
+                <th>6&deg; Flycatcher</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Sustained tone</td><td>Named call</td><td>4-note motif</td><td>Steady beat</td><td><strong>Upslurred wheeet</strong></td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combinatorial</td><td>Rhythmic cell</td><td>Metronomic</td><td><strong>Pitch sweep</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td>Referential</td><td>Territory</td><td>Temporal grid</td><td><strong>Question / identity</strong></td></tr>
+              <tr><td><strong>Role</strong></td><td>Rest</td><td>Soloist</td><td>Drone</td><td>Vocalist</td><td>Ostinato</td><td>Click track</td><td><strong>Half cadence</strong></td></tr>
+              <tr><td><strong>Season</strong></td><td>Resident</td><td>Resident</td><td>Resident</td><td>Resident</td><td>Resident</td><td>Resident</td><td><strong>Migrant</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Riparian Habitat -->
+        <h2>Riparian Alder &mdash; A New Ecosystem</h2>
+        <p>
+          The Pacific-slope Flycatcher is strongly associated with <strong>riparian corridors</strong>
+          &mdash; the narrow bands of red alder, bigleaf maple, and sword fern along streams and
+          creeks. This is a <strong>different ecosystem</strong> from degrees 0&ndash;5: not the
+          estuary (heron), not conifer forest (wren, thrush, owl, nuthatch), but the
+          <strong>riparian transition zone</strong> where water meets forest and deciduous alder
+          replaces evergreen conifer.
+        </p>
+        <p>
+          Riparian corridors shade streams (regulating temperature for salmon), filter sediment,
+          stabilize banks, and support disproportionately high biodiversity. The flycatcher is an
+          <strong>indicator species</strong> for intact riparian habitat &mdash; its presence confirms
+          the stream corridor has maintained the structure a small aerial insectivore requires.
+          A <strong>sally-gleaner</strong>, it perches, waits, launches to capture flying insects
+          mid-air, and returns. An ambush predator of the air column.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon question">Q</div>
+            <div class="theory-content">
+              <h4>Upslurred Question (Ascending Pitch Contour) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Rising pitch signals continuation, not completion. The flycatcher&rsquo;s &ldquo;ptseet&rdquo; is a half cadence &mdash; an ascending gesture that hangs unresolved, like a question mark in tonal language.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ternary">T</div>
+            <div class="theory-content">
+              <h4>Ternary Form (Three-Phrase Dawn Song) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Ptseet&hellip; ptsik&hellip; suweet: A-B-C structure. The simplest complete formal structure in music &mdash; minuet and trio, da capo aria. First multi-section song form in the circle.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon voice-id">V</div>
+            <div class="theory-content">
+              <h4>Voice as Primary Identity (Personal Tone) <span class="theory-level foundational">Foundational</span></h4>
+              <p>Knowing a musician by their sound, not their face. Coltrane&rsquo;s tone IS Coltrane. The flycatcher&rsquo;s call IS the flycatcher. Visual inspection fails; only the ear resolves identity.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon seasonal">S</div>
+            <div class="theory-content">
+              <h4>Seasonal Presence as Temporal Form <span class="theory-level advanced">Advanced</span></h4>
+              <p>Spring = verse, summer = chorus, fall = verse, winter = rest. The annual cycle as song form. The first species whose contribution has a temporal envelope &mdash; fade in, sustain, fade out.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon half-cadence">H</div>
+            <div class="theory-content">
+              <h4>Half Cadence (Unresolved Tension) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>A phrase ending on the dominant &mdash; tension that demands resolution. The upslurred call ends at its highest pitch, creating expectation. Every previous species either resolves or sustains. This one opens.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tone">P</div>
+            <div class="theory-content">
+              <h4>Pitch Sweep as Synthesis Type <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>A continuous frequency glide from low to high &mdash; not FM modulation, not AM modulation, but a <em>sweep</em>. A new synthesis type: controlled directional pitch change.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The upslur as musical question.</strong> An ascending pitch contour at the end of a
+          phrase signals incompleteness in both speech and music. The flycatcher&rsquo;s
+          &ldquo;ptseet&rdquo; is a half cadence &mdash; it rises and stops without resolution. In
+          the ensemble, every previous voice either resolves (owl&rsquo;s motif), sustains (thrush&rsquo;s
+          drone), or repeats without pitch change (nuthatch&rsquo;s beat). The flycatcher adds the
+          <strong>unresolved ascending gesture</strong>.
+        </p>
+        <p>
+          <strong>Voice as identity: the jazz parallel.</strong> In jazz, you recognize Coltrane by
+          a single note on the tenor saxophone &mdash; the tone IS the player. The Empidonax genus
+          forces the same relationship: know the sound or don&rsquo;t know the bird. No visual shortcut
+          exists. Degree 6 teaches the ear to lead the eye.
+        </p>
+        <p>
+          <strong>Ternary form.</strong> The three-phrase dawn song (ptseet&hellip; ptsik&hellip; suweet)
+          is the simplest formal structure &mdash; A-B-C in fixed order. Previous species contributed
+          single elements (one note, one cascade, one motif). The flycatcher introduces
+          <strong>sections</strong> &mdash; distinct phrases arranged deliberately, the building block
+          of musical form.
+        </p>
+        <p>
+          <strong>Seasonal presence as temporal form.</strong> The migrant&rsquo;s annual cycle maps to
+          large-scale musical form: exposition (arrival), development (breeding), coda (departure),
+          rest (winter absence). No previous species has this temporal architecture. The residents
+          play continuously. The migrant plays one movement per year.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Passerine and flycatcher sections. This release adds voice-as-identity analysis, neotropical migrant ecology, and upslurred-question theory mapping.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Riparian ecology, alder corridors, stream temperature regulation, salmon habitat connection. Flycatcher as riparian indicator species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; BPS Sensor Network
+            <p>Seasonal acoustic signal as binary indicator: present = breeding season, absent = winter. Arrival date tracking as phenological data for acoustic sensors.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Patti Brown at degree 6&deg;. Both are underrecognized despite defining characteristics. Known by those who listen, invisible to those who only look.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>Direct predecessor. Nuthatch&rsquo;s steady beat (level, continuous) vs. flycatcher&rsquo;s ascending question (upslurred, seasonal). Metronome vs. phrase. Always-on vs. seasonal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004</strong> &mdash; Northern Spotted Owl
+            <p>Both face habitat-related pressure. Owl requires old-growth canopy; flycatcher requires riparian understory. Owl&rsquo;s motif resolves; flycatcher&rsquo;s upslur does not.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>Chickadee established voice as meaningful (syntax). Flycatcher establishes voice as identity itself &mdash; the call is the only way to know who is calling.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Thrush&rsquo;s sustained tone = declaration. Flycatcher&rsquo;s upslur = question. Statement vs. inquiry. Flat contour vs. ascending contour.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Both small, insectivorous, dense understory. Wren&rsquo;s cascade = maximum complexity. Flycatcher&rsquo;s dawn song = simplest formal structure. Complexity scales independently of body size.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Heron&rsquo;s silence = chosen absence of sound. Flycatcher&rsquo;s winter absence = physical departure. Two kinds of acoustic absence: stillness vs. migration.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Lowther, P.E. (2000). &ldquo;Pacific-slope Flycatcher.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Johnson, N.K. &amp; Marten, J.A. (1988). Evolutionary genetics of <em>Empidonax difficilis</em> complex. <em>Auk</em> 105(1): 177&ndash;191.</li>
+          <li>AOU (1989). 37th supplement: split of Western Flycatcher. <em>Auk</em> 106(3): 532&ndash;538.</li>
+          <li>Rush, S.A., Cannings, R.J. &amp; Irwin, D.E. (2009). Cryptic diversity in Western Flycatcher. <em>Condor</em> 111(4): 789&ndash;795.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Ralph, C.J. (1994). Pacific-slope Flycatcher. <em>Birds of North America</em>, No. 556.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Pacific-slope Flycatcher. allaboutbirds.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Pacific-slope Flycatcher. birdweb.org</li>
+          <li>Macaulay Library. Pacific-slope Flycatcher recordings. Cornell Lab of Ornithology.</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov</li>
+          <li>Sauer, J.R. et al. (2020). BBS Results 1966&ndash;2019. USGS Patuxent.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Tyrannidae</div>
+          <div class="stat-detail">Tyrant Flycatchers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Empidonax</div>
+          <div class="stat-detail">&ldquo;King of the gnats&rdquo; &mdash; the &ldquo;difficult&rdquo; genus</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">5.5 in</div>
+          <div class="stat-detail">14 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">8&ndash;12 g</div>
+          <div class="stat-detail">Comparable to chickadee</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">~8 in</div>
+          <div class="stat-detail">~20 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Primary Call</div>
+          <div class="stat-value">2.5&ndash;4.5 kHz</div>
+          <div class="stat-detail">Upslurred &ldquo;ptseet&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Duration</div>
+          <div class="stat-value">0.3&ndash;0.5 s</div>
+          <div class="stat-detail">Single ascending sweep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dawn Song</div>
+          <div class="stat-value">3-phrase</div>
+          <div class="stat-detail">ptseet&hellip; ptsik&hellip; suweet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sweep Direction</div>
+          <div class="stat-value">Ascending</div>
+          <div class="stat-detail">Upslurred &mdash; rises from start to end</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Voice = Identity</div>
+          <div class="stat-detail">Only reliable ID character for the species</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">6&deg;</div>
+          <div class="stat-detail">The question &mdash; upslurred whistle</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Low-energy seasonal voice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Riparian Alder</div>
+          <div class="stat-detail">Stream-adjacent deciduous corridor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Spring&ndash;Fall</div>
+          <div class="stat-detail">Neotropical migrant (first in circle)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">~6.5M &mdash; declining 2&ndash;3%/yr</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ID Method</div>
+          <div class="stat-value">Voice Only</div>
+          <div class="stat-detail">Visual ID unreliable &mdash; Empid problem</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 6&deg; &mdash; S36</div>
+          <div class="parallel-name">Patti Brown</div>
+          <div class="parallel-detail">Both are underrecognized despite defining characteristics. Brown&rsquo;s vocal artistry was overshadowed by flashier names on the Seattle scene, yet those who heard her knew immediately. The flycatcher&rsquo;s identity is invisible without its call, yet one note resolves all ambiguity. Known by those who listen. Invisible to those who only look.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 006 of 360 &middot;
+      <a href="../005-red-breasted-nuthatch/index.html">Degree 5&deg;: Red-breasted Nuthatch</a> &middot;
+      <a href="../004-spotted-owl/index.html">Degree 4&deg;: Northern Spotted Owl</a> &middot;
+      <a href="../003-black-capped-chickadee/index.html">Degree 3&deg;: Black-capped Chickadee</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
