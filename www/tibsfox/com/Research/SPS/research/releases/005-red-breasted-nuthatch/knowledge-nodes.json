@@ -1,0 +1,328 @@
+{
+  "degree": 5,
+  "species": "Red-breasted Nuthatch",
+  "scientific_name": "Sitta canadensis",
+  "subspecies": "Monotypic (no subspecies recognized)",
+  "sound_type": "nasal yank-yank tin horn",
+  "energy": 2,
+  "ecosystem": "conifer canopy",
+  "season": "resident",
+  "family": "Sittidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle / Puget Sound lowlands"
+  },
+  "physical": {
+    "length_in": "4.3",
+    "wingspan_in": "7.1-7.9",
+    "weight_g": "9-11"
+  },
+  "plumage": {
+    "upperparts": "Blue-gray",
+    "underparts": "Rusty-orange (cinnamon-rust; deeper in males, paler in females)",
+    "eye_line": "Bold black stripe from bill through eye to nape",
+    "supercilium": "White eyebrow stripe",
+    "crown": "Dark gray-black (darker in males, grayer in females)",
+    "bill": "Long, straight, slightly upturned -- precision bark probe"
+  },
+  "frequency_range": {
+    "fundamental_hz_low": 1500,
+    "fundamental_hz_high": 3500,
+    "harmonic_content_hz": "Extends to 4+ kHz",
+    "register": "mid-range (1.5-3.5 kHz fundamental, harmonics higher)"
+  },
+  "vocalization_metrics": {
+    "primary_call": {
+      "name": "Nasal yank-yank tin horn",
+      "transcription": "yank-yank-yank",
+      "note_duration_s": "0.1-0.15",
+      "repetition_rate": "2-3 notes per second",
+      "bout_length": "3-15 notes per bout",
+      "timbre": "Nasal, tin-horn, brass-like harmonic stack",
+      "inter_note_interval": "Highly regular (metronomic)",
+      "key_property": "Temporal regularity -- steady beat",
+      "calling_period": "Diurnal (year-round)"
+    },
+    "secondary_calls": [
+      {
+        "name": "Ank contact call",
+        "description": "Softer, shorter single-note version of yank",
+        "function": "Pair coordination during foraging",
+        "range": "Short range, low amplitude"
+      },
+      {
+        "name": "Agitation call",
+        "description": "More rapid, higher-pitched 'nyeh-nyeh-nyeh'",
+        "function": "Heightened alert / alarm",
+        "rate": "Increased tempo under threat"
+      }
+    ]
+  },
+  "interspecies_network": {
+    "role": "client",
+    "broadcaster": "Black-capped Chickadee (Degree 3)",
+    "mechanism": "Extracts threat-level information from chickadee D-note alarm calls",
+    "evidence": "Templeton & Greene 2007, PNAS 104(13): 5479-5482",
+    "behavior_response": "Increased vigilance and altered foraging when exposed to chickadee calls with more D notes (higher-threat predators)",
+    "network_edges": [
+      {
+        "from": "SPS-003 (Black-capped Chickadee)",
+        "to": "SPS-005 (Red-breasted Nuthatch)",
+        "type": "alarm broadcast -> behavioral response",
+        "direction": "directed"
+      }
+    ]
+  },
+  "theory_nodes": [
+    {
+      "concept": "Metronomic pulse (steady beat as temporal foundation)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/metronome/",
+      "examples": [
+        "Identical notes at a steady rate of 2-3 per second -- the temporal grid of the canopy",
+        "In a studio, the click track is the first thing laid down; all instruments sync to it",
+        "The nuthatch's yank-yank functions as a temporal landmark in forest recordings",
+        "No variation in pitch, duration, timbre, or amplitude -- pure temporal reference"
+      ],
+      "music_theory_parallel": "The metronome / click track -- the steady beat that provides the temporal grid against which all other rhythms are measured. Not a melody, not an improvisation, not a chord -- pure temporal reference. The hi-hat that holds the groove."
+    },
+    {
+      "concept": "Nasal timbre (tin-horn overtone structure)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/timbre/brass/",
+      "examples": [
+        "Fundamental frequency with strong, closely spaced overtones creating buzzy quality",
+        "High harmonic-to-fundamental ratio -- many overtones contributing significant energy",
+        "Brass-like: oboe, muted trumpet, French horn -- instruments that cut through orchestral texture",
+        "Rich harmonic content activates wider spectral band, improving audibility against broadband noise"
+      ],
+      "music_theory_parallel": "Brass-like timbre -- the spectral signature of instruments that cut through texture. The nasal quality is not a deficiency; it is a penetration strategy. A pure tone would be masked by canopy noise. The rich harmonic stack of the yank call ensures audibility."
+    },
+    {
+      "concept": "Repetition as identity (invariance)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/identity/repetition/",
+      "examples": [
+        "Recognizable through consistency, not complexity or meaning",
+        "The same note, same tempo, same timbre, repeated -- identity through never changing",
+        "In music, the most memorable hooks are often the simplest: a repeated riff, a persistent bass line",
+        "The wren is known by complexity; the chickadee by meaning; the nuthatch by consistency"
+      ],
+      "music_theory_parallel": "Identity through invariance -- being recognizable because you never change. The groove that holds. The reliable presence that everyone synchronizes to without noticing until it stops."
+    },
+    {
+      "concept": "Inverted perspective as retrograde (direction-reversal as discovery)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/counterpoint/retrograde/",
+      "examples": [
+        "Head-first trunk descent = same sequence read in reverse direction",
+        "Retrograde in counterpoint reveals hidden structures invisible in forward playback",
+        "Inverted foraging reveals hidden food in bark crevices invisible from ascending perspective",
+        "Both are direction-reversal applied to the same substrate -- different viewing angle, different discoveries"
+      ],
+      "music_theory_parallel": "Retrograde -- playing a musical sequence in reverse. The same notes, same intervals, but read right-to-left. A Bach fugue subject and its retrograde contain the same material but different contours. The nuthatch's head-first descent and the ascending creeper see the same bark from opposite directions."
+    },
+    {
+      "concept": "Interspecies eavesdropping (network client -- cross-degree dependency)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/network/",
+      "examples": [
+        "Confirmed receiver of chickadee D-note alarm broadcast (Templeton & Greene 2007)",
+        "Extracts threat-level information -- not just responding to alarm presence but decoding content",
+        "First cross-degree dependency in the species engine: degree 5 functionally depends on degree 3",
+        "The network graph gains its first directed edge: chickadee -> nuthatch"
+      ],
+      "music_theory_parallel": "The interspecies network is a communication bus -- the chickadee broadcasts, the nuthatch receives and acts on the encoded information. Like a bandleader's cue system: one player signals, others respond with appropriate changes in their own performance."
+    },
+    {
+      "concept": "Ostinato bass (pure single-note repetition as harmonic/temporal anchor)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/ostinato/",
+      "examples": [
+        "Simplest form of ostinato: one note, repeated (vs. owl's 4-note motif ostinato at degree 4)",
+        "Pachelbel's Canon, Purcell's Dido's Lament -- repeated bass line anchoring upper voices",
+        "The basso ostinato of the conifer canopy: steady pulse while wren, thrush, chickadee elaborate above",
+        "Ground bass tradition: harmonic/temporal anchor that does not change while everything else does"
+      ],
+      "music_theory_parallel": "Basso ostinato / ground bass -- the simplest possible repeated figure, providing the harmonic and temporal foundation over which other voices elaborate. The owl's ostinato had internal structure (4 notes). The nuthatch's is reduced to essence: one note, repeated."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Passerine taxonomy and distribution; this release adds metronome analysis, eavesdropping network node, and inverted-perspective ecology"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Conifer forest ecology, seed caching/dispersal, insect pest regulation, mixed-species flock dynamics"
+    },
+    {
+      "project": "BPS",
+      "title": "BPS Sensor Network",
+      "connection": "Steady temporal signal maps to BPS clock synchronization concepts. Metronomic natural pulse as reference clock for acoustic monitoring."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Overton Berry at degree 5 -- both are persistent, reliable presences. Consistency as defining trait."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "Interspecies eavesdropping network. Nuthatch is confirmed client of chickadee alarm broadcast (Templeton & Greene 2007). First directed edge in the network graph: chickadee -> nuthatch."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Heron's silence is the blank canvas. Nuthatch's steady beat is the temporal grid drawn on that canvas. Six degrees in, the forest has both silence and pulse."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Both are small year-round conifer forest residents. Wren's 100+ note cascade vs. nuthatch's single-note repetition: maximum variety vs. maximum consistency. Both instantly recognized -- wren by complexity, nuthatch by simplicity."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Both occupy conifer canopy. Thrush sustains one tone; nuthatch repeats one note. Sustain vs. pulse. AM vs. metronomic. Minimalist aesthetic in both cases."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "Direct predecessor. Owl introduced rhythm (4-note motif with internal structure). Nuthatch reduces rhythm to essence: one note, steady beat. The motif has complexity; the metronome has purity. Both contribute to temporal structure; they serve different functions."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Overton Berry",
+    "degree": 5,
+    "genre": "Jazz / Piano",
+    "shared_principle": "Both are persistent, reliable presences -- Berry at the piano in Seattle's jazz clubs for decades, the nuthatch on the conifer trunks year after year. Consistency as defining trait. Neither is the flashiest voice in the room, but both are the pulse that holds the ensemble together.",
+    "resonance_points": [
+      "Persistent presence: Berry played Seattle jazz clubs for over 50 years, always there, always dependable; the nuthatch is a year-round resident always calling from the conifers -- both define themselves through sustained reliability over time",
+      "Steady pulse: Berry's piano style was groove-centered -- laying down the rhythmic and harmonic foundation for other players to solo over; the nuthatch's metronomic yank-yank provides the temporal grid for the canopy acoustic ensemble",
+      "Unflashy excellence: Berry was not the loudest or most virtuosic player -- he was the one everyone wanted on the bandstand because he held things together; the nuthatch is not the most complex singer -- it is the most reliable",
+      "Consistency as identity: Berry was recognizable by his presence, his dependability, his decades of showing up; the nuthatch is recognizable by never changing its call -- same note, same tempo, same timbre, year after year"
+    ]
+  },
+  "head_first_descent": {
+    "description": "Descends tree trunks head-first -- unique among North American bark-foraging birds",
+    "biomechanics": "Alternating foot-hold system; long hind claw (hallux) hooks above center of gravity; body rotates around gripping foot",
+    "ecological_advantage": "Inverted perspective reveals insects, spiders, and seeds in bark crevices invisible from ascending approach angle",
+    "music_theory_analog": "Retrograde -- same sequence, opposite direction. Direction-reversal as discovery technique."
+  },
+  "resin_defense": {
+    "description": "Smears conifer resin (pitch) around nesting cavity entrance",
+    "agents": "Both male and female apply resin, carrying it on bills from fresh wounds on nearby conifers",
+    "function": "Sticky barrier deters nest predators (squirrels, other cavity-nesters) and nest parasites",
+    "entry_technique": "Dives straight through resin ring without touching it -- precision maneuver"
+  },
+  "degree_arc": {
+    "position": "The metronome -- steady beat as temporal foundation",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5)",
+    "key_insight": "Degree 5 completes a critical gap in the ensemble: the PULSE. Degrees 0-4 established silence, melody, harmony, language, and motif. The nuthatch provides the temporal grid -- the click track against which all other rhythms are located. The ensemble now has both rhythmic figure (owl's motif) and rhythmic ground (nuthatch's metronome). Additionally, degree 5 establishes the first cross-degree dependency through the interspecies eavesdropping network (chickadee -> nuthatch), making the species engine a graph rather than a list.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern, this is my time)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)"
+    },
+    "temporal_progression": {
+      "degree_0": "Diurnal (day-active)",
+      "degree_1": "Dawn chorus (crepuscular peak)",
+      "degree_2": "Crepuscular (dusk/dawn emphasis)",
+      "degree_3": "Diurnal (daytime alarm system)",
+      "degree_4": "Nocturnal (first night species -- time as territory)",
+      "degree_5": "Diurnal (year-round daytime pulse -- returns to daylight)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Conifer forest (mature or second-growth; not old-growth obligate)",
+    "foraging_strategy": "Head-first trunk descent on conifers; omnidirectional bark-foraging",
+    "diet": "Conifer seeds, insects (bark beetles, spruce budworm), spiders",
+    "seed_caching": "Scatter hoarder -- caches thousands of conifer seeds in bark crevices each autumn",
+    "seed_dispersal": "Forgotten caches may germinate -- minor seed dispersal agent for conifers",
+    "nesting": "Excavates own cavity in dead/decaying wood; applies conifer resin around entrance",
+    "pair_bond": "Monogamous; ank contact call maintains pair coordination during foraging",
+    "irruptive_migration": "Year-round resident in most range; irruptive southward/downslope movement in poor cone crop years (Bock & Lepthien 1972; Koenig & Knops 2001)"
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~20 million (Partners in Flight 2020)",
+    "trend": "Stable to slightly increasing (BBS data, western Washington)",
+    "threats": "Minimal -- common, widespread, adaptable",
+    "significance": "Deliberately low conservation concern (contrast with degree 4 Threatened owl). Value is reliability, not rarity."
+  },
+  "key_sites": [
+    {
+      "name": "Western Washington conifer forests",
+      "type": "breeding/resident",
+      "description": "Most abundant nuthatch in Douglas fir, western hemlock, and Sitka spruce forests",
+      "region": "Puget Sound lowlands through Cascades"
+    },
+    {
+      "name": "Urban/suburban areas with conifers",
+      "type": "resident/feeder visitor",
+      "description": "Common in neighborhoods with large conifers; visits suet and seed feeders",
+      "region": "Seattle metropolitan area"
+    },
+    {
+      "name": "Olympic and Cascade National Forests",
+      "type": "breeding/resident",
+      "description": "Common throughout conifer zones; often in mixed-species flocks with chickadees and kinglets",
+      "region": "Olympic Peninsula, western Cascades"
+    }
+  ],
+  "sources": [
+    "Ghalambor, C.K. & Martin, T.E. (1999). Birds of the World. Cornell Lab of Ornithology. [Red-breasted Nuthatch species account.]",
+    "Cornell Lab of Ornithology. All About Birds: Red-breasted Nuthatch. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Red-breasted Nuthatch. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Red-breasted Nuthatch species account. birdweb.org",
+    "Templeton, C.N. & Greene, E. (2007). PNAS 104(13): 5479-5482. [Nuthatch eavesdropping on chickadee alarm calls.]",
+    "Templeton, C.N., Greene, E. & Davis, K. (2005). Science 308(5730): 1934-1937. [Chickadee D-note threat encoding.]",
+    "Matthysen, E. (1998). The Nuthatches. T & AD Poyser, London. [Comprehensive nuthatch monograph.]",
+    "Kilham, L. (1968). Auk 85(1): 135-145. [Resin application behavior.]",
+    "Bock, C.E. & Lepthien, L.W. (1972). American Birds 26: 558-561. [Irruptive migration.]",
+    "Koenig, W.D. & Knops, J.M.H. (2001). J Animal Ecology 70(4): 609-620. [Cone crop and eruptions.]",
+    "Macaulay Library. Red-breasted Nuthatch recordings. Cornell Lab of Ornithology.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov",
+    "Washington Department of Fish and Wildlife. Red-breasted Nuthatch. wdfw.wa.gov",
+    "eBird. Red-breasted Nuthatch observation data, Pacific Northwest. ebird.org/species/rebnut"
+  ],
+  "release_metadata": {
+    "release_number": "005",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
