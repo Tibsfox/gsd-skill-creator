@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seattle 360 — Continuous Artist Release Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #1A237E;
+    --cranberry: #880E4F;
+    --green:     #2E7D32;
+    --sky:       #1565C0;
+    --light-navy:#E8EAF6;
+    --light-cran:#FCE4EC;
+    --light-grn: #E8F5E9;
+    --gray:      #F5F5F5;
+    --border:    #BDBDBD;
+    --subtle:    #757575;
+    --dark:      #212121;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+    background: #FAFAFA;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, #0D1459 60%, var(--cranberry) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(136,14,79,0.15);
+    border: 1px solid rgba(136,14,79,0.2);
+  }
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+  header h2 {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.2rem;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+  }
+  .meta-pill strong { color: rgba(255,255,255,0.6); font-weight: 500; margin-right: 4px; }
+
+  /* ── Main content ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  /* ── Section headings ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  /* ── File cards ── */
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  .file-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .file-card:hover {
+    box-shadow: 0 6px 24px rgba(26,35,126,0.12);
+    transform: translateY(-2px);
+    border-color: var(--navy);
+  }
+  .file-card.primary-card {
+    border-left: 4px solid var(--navy);
+    background: var(--light-navy);
+  }
+  .file-card.cranberry-card {
+    border-left: 4px solid var(--cranberry);
+    background: var(--light-cran);
+  }
+  .file-card.green-card {
+    border-left: 4px solid var(--green);
+    background: var(--light-grn);
+  }
+  .file-type {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .primary-card .file-type { color: var(--navy); }
+  .cranberry-card .file-type { color: var(--cranberry); }
+  .green-card .file-type { color: var(--green); }
+  .file-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .file-desc {
+    font-size: 0.85rem;
+    color: var(--subtle);
+    line-height: 1.45;
+  }
+  .dl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sky);
+  }
+  .dl-badge::before { content: '↓'; font-size: 0.9em; }
+
+  /* ── Contents breakdown ── */
+  .contents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 700px) { .contents-grid { grid-template-columns: 1fr; } }
+  .stage-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .stage-header {
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+  }
+  .stage-1 .stage-header { background: var(--navy); }
+  .stage-2 .stage-header { background: var(--cranberry); }
+  .stage-3 .stage-header { background: var(--green); }
+  .stage-items {
+    padding: 0.8rem 1rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .stage-items li {
+    font-size: 0.82rem;
+    color: var(--subtle);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .stage-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+
+  /* ── Component table ── */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-bottom: 2.5rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .comp-table thead tr { background: var(--navy); color: white; }
+  .comp-table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; }
+  .comp-table td { padding: 9px 14px; border-bottom: 1px solid var(--gray); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:nth-child(even) td { background: var(--gray); }
+  .model-opus { color: var(--cranberry); font-weight: 600; }
+  .model-sonnet { color: var(--sky); font-weight: 600; }
+  .model-haiku { color: var(--green); font-weight: 600; }
+  .wave-0 { background: #E3F2FD !important; }
+  .wave-3a { background: #FCE4EC !important; }
+
+  /* ── Usage instructions ── */
+  .instructions {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .instructions h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    counter-reset: step-counter;
+  }
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    counter-increment: step-counter;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .step-body { font-size: 0.88rem; line-height: 1.55; }
+  code {
+    background: #F0F0F8;
+    border: 1px solid #D0D0E8;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 0.82em;
+    color: var(--navy);
+  }
+  pre {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    border-radius: 6px;
+    padding: 1rem;
+    font-size: 0.78rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+
+  /* ── Safety callout ── */
+  .safety-callout {
+    background: #FFF3E0;
+    border-left: 4px solid #E65100;
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .safety-callout strong { color: #BF360C; }
+
+  /* ── Quote ── */
+  .through-line {
+    background: var(--light-navy);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .through-line p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--navy);
+  }
+  .through-line cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    font-style: normal;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">GSD Research Mission Package · Fleet Activation</div>
+    <h1>Seattle 360</h1>
+    <h2>Continuous Artist Release Engine · 360° of Seattle's Music Universe</h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.6;max-width:620px;">
+      An autonomous pipeline that processes all 360 artists in <code style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9)">seattle_360_geo.csv</code>
+      sequentially — one Fleet research mission pack per artist, with music theory curriculum mapping,
+      deep College of Knowledge integration, and retrospective-driven knowledge accumulation.
+    </p>
+    <div class="header-meta">
+      <div class="meta-pill"><strong>Artists:</strong> 360 (degrees 0°–359°)</div>
+      <div class="meta-pill"><strong>Profile:</strong> Fleet · 10 Roles</div>
+      <div class="meta-pill"><strong>Budget:</strong> ~20.7M tokens</div>
+      <div class="meta-pill"><strong>Safety Gates:</strong> 22 mandatory-pass</div>
+      <div class="meta-pill"><strong>Date:</strong> 2026-03-28</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Primary Downloads ── -->
+  <p class="section-label">Mission Package Files</p>
+  <div class="file-grid">
+    <a href="seattle-360-mission.pdf" download class="file-card primary-card">
+      <span class="file-type">PDF · 20 pages</span>
+      <span class="file-name">Full Mission Package</span>
+      <span class="file-desc">Three-stage Vision → Research → Mission document compiled with XeLaTeX. Music-domain color scheme. Complete component specs, wave plan, test matrix.</span>
+      <span class="dl-badge">Download PDF</span>
+    </a>
+    <a href="seattle-360-mission.tex" download class="file-card cranberry-card">
+      <span class="file-type">LaTeX · XeLaTeX Source</span>
+      <span class="file-name">Recompilable Source</span>
+      <span class="file-desc">Full .tex source for modification and recompilation. Run three XeLaTeX passes. DejaVu font stack. Modify sections, recompile, hand to Claude Code.</span>
+      <span class="dl-badge">Download .tex</span>
+    </a>
+    <a href="#components" class="file-card green-card" style="cursor:default;">
+      <span class="file-type">Markdown · 9 files</span>
+      <span class="file-name">Component Specs</span>
+      <span class="file-desc">Nine self-contained component specifications in <code>components/</code>. Each spec is a complete Claude Code flight plan. Hand directly to GSD orchestrator.</span>
+      <span class="dl-badge" style="color:var(--green);">See components below</span>
+    </a>
+  </div>
+
+  <!-- ── Stage Contents ── -->
+  <p class="section-label">Document Contents</p>
+  <div class="contents-grid">
+    <div class="stage-block stage-1">
+      <div class="stage-header">Stage 1 — Vision Guide</div>
+      <ul class="stage-items">
+        <li>Narrative vision (the 360° unit circle)</li>
+        <li>5 concrete problem statements</li>
+        <li>Release cycle architecture (ASCII)</li>
+        <li>8 research module descriptions</li>
+        <li>Chipset YAML configuration</li>
+        <li>12 testable success criteria</li>
+        <li>Ecosystem relationship table</li>
+        <li>The through-line (GSD philosophy)</li>
+      </ul>
+    </div>
+    <div class="stage-block stage-2">
+      <div class="stage-header">Stage 2 — Research Reference</div>
+      <ul class="stage-items">
+        <li>Seattle music history timeline</li>
+        <li>Genre → theory curriculum maps</li>
+        <li>Jazz, Blues, Grunge, Folk, Punk tables</li>
+        <li>College department mapping</li>
+        <li>Unit circle mathematics bridge</li>
+        <li>Cultural attribution standards</li>
+        <li>Sensitivity considerations</li>
+        <li>Full source bibliography</li>
+      </ul>
+    </div>
+    <div class="stage-block stage-3">
+      <div class="stage-header">Stage 3 — Mission Package</div>
+      <ul class="stage-items">
+        <li>Milestone specification</li>
+        <li>9-component breakdown table</li>
+        <li>Deliverables acceptance matrix</li>
+        <li>Wave execution plan (ASCII)</li>
+        <li>148-test test plan (22 safety-critical)</li>
+        <li>Mission crew manifest (10 PNW roles)</li>
+        <li>Execution summary table</li>
+        <li>Closing through-line quotebox</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Component table ── -->
+  <p class="section-label" id="components">Component Specifications</p>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Component</th>
+        <th>Wave</th>
+        <th>Model</th>
+        <th>Tokens/Artist</th>
+        <th>Agent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="wave-0"><td>0</td><td>Shared Types (schemas, validators)</td><td>0</td><td class="model-haiku">Haiku</td><td>~4K (once)</td><td>—</td></tr>
+      <tr class="wave-0"><td>1</td><td>CSV Intake Engine</td><td>0</td><td class="model-haiku">Haiku</td><td>~2K</td><td>SALMON</td></tr>
+      <tr><td>2</td><td>Music Theory Mapper</td><td>1A ‖</td><td class="model-sonnet">Sonnet</td><td>~8K</td><td>CEDAR</td></tr>
+      <tr><td>4</td><td>College Knowledge Linker</td><td>1B ‖</td><td class="model-sonnet">Sonnet</td><td>~6K</td><td>ORCA</td></tr>
+      <tr><td>3</td><td>Fleet Research Generator</td><td>2</td><td class="model-opus">Opus</td><td>~20K</td><td>HAWK</td></tr>
+      <tr class="wave-3a"><td>8</td><td>Safety Warden (BLOCK authority)</td><td>3a</td><td class="model-opus">Opus</td><td>~6.5K</td><td>WARDEN</td></tr>
+      <tr><td>5</td><td>Release Pipeline</td><td>3b</td><td class="model-sonnet">Sonnet</td><td>~3K</td><td>HERON</td></tr>
+      <tr><td>6</td><td>Retrospective Engine</td><td>3c</td><td class="model-opus">Opus</td><td>~8K</td><td>OWL</td></tr>
+      <tr><td>7</td><td>Carry-Forward Controller</td><td>3d</td><td class="model-sonnet">Sonnet</td><td>~4K</td><td>DOUGLAS-FIR</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ── Safety callout ── -->
+  <div class="safety-callout">
+    <strong>Safety Warden (SC-01 through SC-22 — All Mandatory Pass)</strong><br>
+    22 safety-critical gates run on every release before publication. Key gates: attribution completeness (SC-01),
+    Indigenous nation-specific language — Duwamish/Muckleshoot/Suquamish (SC-02),
+    Black American musical attribution explicit (SC-03), Mia Zapata dignity protocol (SC-06),
+    XeLaTeX compilation success (SC-09), atomic write integrity (SC-11), OCAP® compliance (SC-22).
+    Any BLOCK-level finding halts the pipeline and escalates to CAPCOM (human review).
+    <strong>The Safety Warden cannot be bypassed.</strong>
+  </div>
+
+  <!-- ── Usage instructions ── -->
+  <div class="instructions">
+    <h3>How to Hand This to Claude Code / GSD Orchestrator</h3>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          Place <code>seattle_360_geo.csv</code> in the project's <code>.gsd/inputs/</code> directory.<br>
+          Ensure <code>gsd-skill-creator</code> is on the <strong>dev branch</strong>.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          Execute Wave 0 — load the shared types and CSV intake:
+          <pre>claude --new-task "$(cat 01-vision-doc.md)
+
+Begin Wave 0.
+Read components/00-shared-types.md then components/01-csv-intake-engine.md.
+Input: .gsd/inputs/seattle_360_geo.csv
+Output root: releases/seattle-360/"</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          Feed the wave execution plan to the orchestrator for wave sequencing:
+          <pre>claude --task "Read 04-wave-execution-plan.md and begin the continuous release loop.
+Start at the last COMPLETE entry in progress.json (or degree 0 if none).
+Process artists sequentially. Do not proceed past Wave 3a without PASS signal."</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          The engine runs autonomously through all 360 artists. Monitor <code>releases/seattle-360/progress.json</code>
+          and <code>releases/seattle-360/safety-audit-log.jsonl</code>. Respond to any CAPCOM escalations
+          (BLOCK-level findings written to <code>releases/seattle-360/capcom-queue.json</code>).
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          Completion: when degree 359 (Unwound) publishes and <code>CYCLE-COMPLETE</code> signal is emitted,
+          review <code>releases/seattle-360/theory-genealogy.json</code> — the connected theoretical lineage
+          from Quincy Jones at 0° to Unwound at 359° is the final artifact.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Recompile ── -->
+  <div class="instructions">
+    <h3>Recompile the PDF</h3>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          Modify <code>seattle-360-mission.tex</code> as needed. Then compile with three XeLaTeX passes:
+          <pre>xelatex -interaction=nonstopmode seattle-360-mission.tex
+xelatex -interaction=nonstopmode seattle-360-mission.tex
+xelatex -interaction=nonstopmode seattle-360-mission.tex</pre>
+          Three passes are required for TOC page numbers, cross-references, and <code>lastpage</code> counter.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Through-line ── -->
+  <div class="through-line">
+    <p>"Jackson Street was once the Harlem of the West — a corridor where Ray Charles,
+    Quincy Jones, Ernestine Anderson, and dozens more learned their craft before any of them
+    were famous. The engine completes its rotation when the knowledge state can show, in
+    verifiable connected steps, how Quincy Jones at 0° and Unwound at 359° are teaching
+    the same mathematics in different languages. The thread never broke. It just changed key."</p>
+    <cite>Through-line · Seattle 360 Continuous Release Engine · GSD Ecosystem · 2026</cite>
+  </div>
+
+</main>
+
+<footer>
+  Seattle 360 — Continuous Artist Release Engine · GSD Mission Package · 2026-03-28<br>
+  Miles Tiberius Foxglove · github.com/Tibsfox · Vision → Research → Mission
+</footer>
+
+</body>
+</html>

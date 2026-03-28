@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 0&deg; &mdash; Great Blue Heron &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.silence { background: var(--puget-dark); }
+    .theory-icon.call { background: var(--puget-mid); }
+    .theory-icon.freq { background: var(--forest-green); }
+    .theory-icon.tempo { background: var(--earth-mid); }
+    .theory-icon.ecology { background: #1565C0; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">0&deg;</div>
+      <div class="release-title-block">
+        <h2>Great Blue Heron</h2>
+        <div class="scientific">Ardea herodias &middot; subspecies <em>fannini</em> (Pacific Northwest resident)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Stalking Silence &middot; Pterodactyl Croak &middot; Puget Sound Estuary &middot; Energy 1</div>
+
+    <blockquote>
+      Before there is sound, there is the discipline of silence, and no creature in the Pacific
+      Northwest embodies that discipline more completely than the Great Blue Heron. The circle begins here.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Great Blue Heron is the largest heron in North America and one of the most immediately
+          recognizable wading birds on the continent. It belongs to the family <strong>Ardeidae</strong>
+          (herons, egrets, and bitterns) within the order <strong>Pelecaniformes</strong>. Adults stand
+          3.2&ndash;4.5 feet tall with a wingspan of 5.5&ndash;6.6 feet and a body weight of 4.6&ndash;5.5
+          pounds &mdash; a bird built for patience, not speed.
+        </p>
+        <p>
+          The bird at degree 0&deg; is <em>Ardea herodias fannini</em> &mdash; the Pacific Northwest
+          resident subspecies described by Chapman in 1901. Unlike the nominate <em>A. h. herodias</em>,
+          the <em>fannini</em> subspecies is <strong>non-migratory</strong>, exhibits darker overall
+          plumage, and averages slightly smaller in body size. It is a year-round resident of the
+          Pacific coast from southeast Alaska to Puget Sound. It does not leave. It is always present,
+          always foundational.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &amp; Sound Profile</h2>
+        <h3>The Silence Is the Sound</h3>
+        <p>
+          The Great Blue Heron is defined more by its silence than by any call it produces. A stalking
+          heron stands motionless in shallow water for minutes to hours, the embodiment of structured
+          absence. This silence is not passive &mdash; it is active predatory strategy. The entire organism
+          is optimized for stillness. In compositional terms, the heron&rsquo;s stalking silence is
+          analogous to a whole rest in music: not the absence of sound, but the structured, intentional
+          use of non-sound as a compositional element.
+        </p>
+        <p>
+          John Cage&rsquo;s <em>4&prime;33&Prime;</em> (1952) argued that silence is not empty but filled
+          with incidental sound that becomes the composition. The heron&rsquo;s hunt makes the same
+          argument &mdash; except it has been making it for roughly 1.8 million years.
+        </p>
+
+        <h3>Primary Vocalizations</h3>
+        <p>
+          When the Great Blue Heron does vocalize, the result is startling precisely because it breaks
+          the silence. The calls are low-pitched, harsh, and unmistakably prehistoric:
+        </p>
+        <ul>
+          <li><strong>Flight call (&ldquo;frawnk&rdquo;):</strong> A deep, hoarse, guttural croak uttered in
+          flight or when flushed. Frequency: 200&ndash;600 Hz fundamental with harmonics to 1.5 kHz.
+          Carries over 500 meters across open water.</li>
+          <li><strong>Landing call (&ldquo;roh-roh-roh&rdquo;):</strong> A series of low-frequency clucks
+          delivered upon arriving at the nest. Frequency: 150&ndash;500 Hz, rhythmically spaced at
+          0.3&ndash;0.5 second intervals.</li>
+          <li><strong>Bill clapping:</strong> Non-vocal mechanical percussion produced by snapping the
+          mandibles. Sharp, broadband transient below 2 kHz. The body is the instrument.</li>
+          <li><strong>Nestling begging:</strong> High-pitched repetitive calls at 1&ndash;3 kHz from chicks
+          in the nest.</li>
+        </ul>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Fundamental (Hz)</th>
+              <th>Bandwidth</th>
+              <th>Duration</th>
+              <th>Music Parallel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Flight call (frawnk)</td><td>200&ndash;600</td><td>To 1.5 kHz</td><td>0.3&ndash;0.8 s</td><td>Bass-register accent</td></tr>
+            <tr><td>Landing call (roh-roh)</td><td>150&ndash;500</td><td>To 1.0 kHz</td><td>1.5&ndash;3.0 s series</td><td>Rhythmic ostinato</td></tr>
+            <tr><td>Bill clap</td><td>Broadband</td><td>To 2.0 kHz</td><td>&lt;0.1 s transient</td><td>Percussive hit</td></tr>
+            <tr><td>Nestling begging</td><td>1,000&ndash;3,000</td><td>Narrow</td><td>Continuous</td><td>Tremolo / trill</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Colony Acoustics</h3>
+        <p>
+          In stark contrast to solitary stalking silence, heronries are among the noisiest avian habitats
+          in the Pacific Northwest. A large colony produces continuous, layered polyphonic texture &mdash;
+          landing calls, bill clapping, nestling begging, wing flaps, and alarm calls triggered by eagle
+          overflights. The same species that embodies silence individually produces overwhelming textural
+          density socially. The solo heron is a John Cage rest; the heronry is a Charles Ives tone cluster.
+        </p>
+
+        <!-- Ecology -->
+        <h2>Ecology &amp; Behavior in Puget Sound</h2>
+        <h3>Stand-and-Wait Predation</h3>
+        <p>
+          The Great Blue Heron is a stand-and-wait predator &mdash; a strategy that maximizes energy
+          efficiency at the cost of time. The bird wades into shallow water, assumes a motionless posture
+          with neck coiled, and waits. When prey moves within strike range (~50 cm), the neck uncoils and
+          the bill drives through the water surface in less than 0.1 seconds. Diet in Puget Sound: small
+          fish (sculpins, gunnels, perch, juvenile salmonids), Dungeness crab, shore crab, shrimp, and
+          occasionally small mammals.
+        </p>
+        <h3>The Kiwanis Ravine Heronry</h3>
+        <p>
+          The most significant urban heronry in the Puget Sound region is in <strong>Kiwanis Ravine</strong>
+          within Seattle&rsquo;s Discovery Park &mdash; approximately 80&ndash;100 active nests. Nesting
+          begins in February, with chicks fledging by June&ndash;July. The colony has experienced
+          significant disturbance from Bald Eagle predation, a well-documented predator-prey dynamic
+          monitored by Seattle Audubon Society and WDFW.
+        </p>
+        <h3>Year-Round Residency</h3>
+        <p>
+          The <em>fannini</em> subspecies does not migrate. The maritime climate of the Salish Sea keeps
+          water temperatures above freezing year-round, providing continuous access to prey. This
+          year-round presence is why the Great Blue Heron occupies degree 0&deg; &mdash; the species
+          that is always present, always foundational, always the first thing you see when you walk to
+          the water&rsquo;s edge in any month.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon silence">S</div>
+            <div class="theory-content">
+              <h4>Silence as Compositional Element <span class="theory-level foundational">Foundational</span></h4>
+              <p>Stalking silence as structured absence &mdash; the whole rest that shapes music by its presence. Cage&rsquo;s <em>4&prime;33&Prime;</em> enacted by a predator for 1.8 million years.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon call">C</div>
+            <div class="theory-content">
+              <h4>Call-and-Response <span class="theory-level foundational">Foundational</span></h4>
+              <p>Landing call triggers mate response at heronry &mdash; the same structure underlying jazz improvisation, gospel music, and the ii-V-I progression.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon freq">F</div>
+            <div class="theory-content">
+              <h4>Low-Frequency Foundation <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>200&ndash;800 Hz range occupies the bass register. The frequency that tells you what key you are in. Degree 0&deg; IS the root note of the chord.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tempo">T</div>
+            <div class="theory-content">
+              <h4>Patience as Temporal Structure <span class="theory-level foundational">Foundational</span></h4>
+              <p>0&ndash;1 acoustic events per hour. The whole note beneath all smaller subdivisions. Slower than <em>Largo</em>.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ecology">E</div>
+            <div class="theory-content">
+              <h4>Stand-and-Wait Predation <span class="theory-level foundational">Foundational</span></h4>
+              <p>Patience as energy-efficient hunting strategy in estuarine habitat. Silence as functional adaptation.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          The heron&rsquo;s stalking silence maps directly to the concept of <strong>rests</strong> in music
+          notation. A whole rest is not nothing &mdash; it is structured absence. It occupies time. It
+          shapes the music around it. John Cage&rsquo;s <em>4&prime;33&Prime;</em> formalized this
+          principle: silence is impossible; the act of framing silence reveals the sounds already present.
+        </p>
+        <p>
+          At the heronry, the <strong>landing call triggers a predictable response</strong> from the mate
+          &mdash; call-and-response in its most ancient biological form. This is the foundational structure
+          underlying jazz, gospel, West African drumming, and the ii-V-I chord progression.
+        </p>
+        <p>
+          The heron&rsquo;s 200&ndash;800 Hz range occupies the <strong>bass register</strong> &mdash; the
+          frequency range that provides harmonic foundation in orchestration. Degree 0&deg; IS the root note.
+          Quincy Jones at degree 0&deg; of Part A is also the foundational voice &mdash; the arranger who
+          builds the harmonic bed. Both are bass. Both are foundation.
+        </p>
+        <p>
+          If a Pacific Wren (degree 1&deg;) sings at 120+ notes per minute, the heron&rsquo;s
+          &ldquo;rhythm&rdquo; is 0&ndash;1 events per hour. This is the <strong>temporal foundation</strong>
+          of the circle: the whole note beneath all smaller subdivisions.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Wading bird taxonomy and distribution. This release adds bioacoustic and music-theory depth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Estuarine ecology, trophic cascades, indicator species status.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Bio-Physics Sensing
+            <p>Visual hunting, low-light adaptation, strike biomechanics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>COL</strong> &mdash; Columbia Valley
+            <p>Riverine heron habitat across the Columbia Basin.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM</strong> &mdash; Fur, Fin &amp; Fang
+            <p>Shared estuarine food web: forage fish and crab prey species overlap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Quincy Jones at degree 0&deg;. Call-and-response. Bass-register foundation.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Poole, A.F. et al. (2020). &ldquo;Great Blue Heron (<em>Ardea herodias</em>).&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Great Blue Heron. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Great Blue Heron. birdweb.org</li>
+          <li>National Audubon Society. Field Guide: Great Blue Heron. audubon.org</li>
+          <li>Butler, R.W. (1997). <em>The Great Blue Heron</em>. UBC Press.</li>
+          <li>Washington Department of Fish and Wildlife. Heronry monitoring reports. wdfw.wa.gov</li>
+          <li>Puget Sound Partnership. Vital Signs: Birds. psp.wa.gov</li>
+          <li>Hilbert, Vi. (1985). <em>Haboo: Native American Stories from Puget Sound</em>. University of Washington Press.</li>
+          <li>First Nations Information Governance Centre. OCAP Principles. fnigc.ca</li>
+          <li>McCracken &amp; Sheldon (1998). Heron phylogenetics. <em>Auk</em> 115(1).</li>
+          <li>Hackett, S.J. et al. (2008). Phylogenomic study of birds. <em>Science</em> 320.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Ardeidae</div>
+          <div class="stat-detail">Herons, egrets, bitterns</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>fannini</em></div>
+          <div class="stat-detail">Pacific NW resident (non-migratory)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">5.5&ndash;6.6 ft</div>
+          <div class="stat-detail">167&ndash;201 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">4.6&ndash;5.5 lbs</div>
+          <div class="stat-detail">2.1&ndash;2.5 kg</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Height</div>
+          <div class="stat-value">3.2&ndash;4.5 ft</div>
+          <div class="stat-detail">97&ndash;137 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Frequency Range</div>
+          <div class="stat-value">200&ndash;800 Hz</div>
+          <div class="stat-detail">Bass register (fundamental)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Primary Sound</div>
+          <div class="stat-value">Silence</div>
+          <div class="stat-detail">Stalking silence / pterodactyl croak</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">0&deg;</div>
+          <div class="stat-detail">Origin &mdash; silence as foundation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">1</div>
+          <div class="stat-detail">Lowest &mdash; quiet, foundational</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Estuary</div>
+          <div class="stat-detail">Puget Sound marine/coastal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round (non-migratory)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 0&deg; &mdash; S36</div>
+          <div class="parallel-name">Quincy Jones</div>
+          <div class="parallel-detail">Call-and-response; structured silence as foundation. Both are bass. Both are foundation.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 000 of 360 &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

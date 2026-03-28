@@ -1,0 +1,192 @@
+/* SPS — Puget Teal / Forest Green / Earth Brown theme, Sound of Puget Sound
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --puget-teal: #00695C;
+  --puget-light: #E0F2F1;
+  --puget-mid: #00897B;
+  --puget-dark: #004D40;
+  --forest-green: #1B5E20;
+  --forest-light: #E8F5E9;
+  --forest-mid: #2E7D32;
+  --earth-brown: #3E2723;
+  --earth-mid: #5D4037;
+  --earth-light: #EFEBE9;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--puget-teal);
+  --link-hover: var(--puget-dark);
+  --accent: var(--puget-teal);
+  --accent-light: var(--puget-light);
+  --accent-dark: var(--puget-dark);
+  --card-bg: white;
+  --card-border: #B2DFDB;
+  --card-shadow: rgba(0,105,92,0.12);
+  --border: #B2DFDB;
+  --parchment: var(--puget-light);
+}
+
+/* ===================================================
+   2. HEADER -- dark teal/forest/earth gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #002420 0%, #00695C 35%, #1B5E20 70%, #3E2723 100%);
+  border-bottom: 4px solid #00897B;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(0,105,92,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(27,94,32,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #E0F2F1; }
+header .subtitle { color: #80CBC4; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--earth-brown);
+  border-bottom-color: var(--puget-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--puget-teal); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: #E0F2F1;
+  border-left: 4px solid #00695C;
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: #00695C; }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(0,105,92,0.04); }
+tr:hover { background: rgba(0,105,92,0.08); }
+
+pre {
+  background: #002420;
+  color: #80CBC4;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid #00897B;
+}
+code {
+  background: #E0F2F1;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #00897B;
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #B2DFDB;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(0,105,92,0.12); border-color: var(--puget-teal); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #B2DFDB;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--puget-teal);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-bio { background: var(--puget-light); color: var(--puget-teal); }
+.tag-music { background: #F3E5F5; color: #7B1FA2; }
+.tag-eco { background: var(--forest-light); color: var(--forest-green); }
+.tag-data { background: #E3F2FD; color: #1565C0; }
+.tag-synth { background: var(--earth-light); color: var(--earth-brown); }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #B2DFDB;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--puget-teal); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--puget-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--puget-teal);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #80CBC4; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

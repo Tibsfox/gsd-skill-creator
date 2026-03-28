@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seattle 360 &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-s36">
+  <header>
+    <h1>Seattle 360</h1>
+    <div class="subtitle">360 Artists &middot; 360 Degrees &middot; One Unit Circle &mdash; Continuous Artist Release Engine</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-vision-doc">Vision</a>
+      <a href="page.html?doc=02-research-reference">Research</a>
+      <a href="page.html?doc=03-milestone-spec">Milestone</a>
+      <a href="page.html?doc=04-wave-execution-plan">Wave Plan</a>
+      <a href="page.html?doc=05-test-plan">Test Plan</a>
+      <a href="page.html?doc=components/00-shared-types">Components</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      There is a moment every music teacher knows: a student finally hears the ii-V-I in a
+      Bill Evans chord, or feels the tritone substitution drop in a Quincy Jones arrangement,
+      and something irreversible happens. Theory stops being notation on a page and becomes
+      a living thing &mdash; audible, tactile, theirs.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">360</span><span class="stat-label">Artists</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Components</span></div>
+      <div class="stat"><span class="stat-value">22</span><span class="stat-label">Safety Tests</span></div>
+      <div class="stat"><span class="stat-value">~22M</span><span class="stat-label">Tokens</span></div>
+      <div class="stat"><span class="stat-value">720</span><span class="stat-label">Context Windows</span></div>
+      <div class="stat"><span class="stat-value">7+</span><span class="stat-label">College Depts</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-vision-doc" class="card" style="text-decoration:none;color:inherit">
+        <h3>Vision</h3>
+        <div class="meta"><span class="tag tag-vision">Vision</span> Foundation &middot; Architecture</div>
+        <p>The 360&deg; Seattle music education engine &mdash; unit circle mapping, release cycle architecture, College of Knowledge integration.</p>
+      </a>
+
+      <a href="page.html?doc=02-research-reference" class="card" style="text-decoration:none;color:inherit">
+        <h3>Research Reference</h3>
+        <div class="meta"><span class="tag tag-theory">Theory</span> History &middot; Curriculum</div>
+        <p>Seattle music history timeline, genre-to-theory curriculum maps (Jazz, Blues, Grunge/Metal), unit circle mathematics bridge.</p>
+      </a>
+
+      <a href="page.html?doc=03-milestone-spec" class="card" style="text-decoration:none;color:inherit">
+        <h3>Milestone Specification</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Deliverables &middot; Crew</div>
+        <p>Architecture overview, 9-component breakdown, deliverables table, crew manifest.</p>
+      </a>
+
+      <a href="page.html?doc=04-wave-execution-plan" class="card" style="text-decoration:none;color:inherit">
+        <h3>Wave Execution Plan</h3>
+        <div class="meta"><span class="tag tag-exec">Execution</span> Waves &middot; Budget</div>
+        <p>Wave structure, parallel tracks, token budget, dependency graph.</p>
+      </a>
+
+      <a href="page.html?doc=05-test-plan" class="card" style="text-decoration:none;color:inherit">
+        <h3>Test Plan</h3>
+        <div class="meta"><span class="tag tag-test">Testing</span> 148 Tests &middot; Safety</div>
+        <p>148 tests across 5 categories, 22 safety-critical BLOCK-level gates, verification matrix.</p>
+      </a>
+
+      <a href="page.html?doc=components/00-shared-types" class="card" style="text-decoration:none;color:inherit">
+        <h3>Components</h3>
+        <div class="meta"><span class="tag tag-comp">Components</span> 9 Specs &middot; Pipeline</div>
+        <p>9 component specifications &mdash; CSV intake, music theory mapper, fleet research generator, college linker, release pipeline, retrospective engine, carry-forward, safety warden.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Unit circle / mathematics bridge</td><td>Vision, Research, Milestone</td><td>OCT, WAL, FLS</td></tr>
+        <tr><td>Seattle music history timeline</td><td>Research, Vision</td><td>GRV, PJM, MDB, GRG</td></tr>
+        <tr><td>Genre-to-theory curriculum</td><td>Research, Components</td><td>WAL, ABL, FLS, OCT</td></tr>
+        <tr><td>Fleet research generation</td><td>Milestone, Components, Wave Plan</td><td>WAL, DAA</td></tr>
+        <tr><td>College of Knowledge integration</td><td>Vision, Components</td><td>WAL, HFE, ABL</td></tr>
+        <tr><td>Release pipeline architecture</td><td>Milestone, Components</td><td>WAL, DAA, GRV</td></tr>
+        <tr><td>Safety warden / attribution</td><td>Test Plan, Components</td><td>WAL, ABL, FLS</td></tr>
+        <tr><td>Retrospective / carry-forward</td><td>Components, Wave Plan</td><td>WAL, DAA</td></tr>
+        <tr><td>CSV intake / artist profiles</td><td>Components, Milestone</td><td>WAL, MDB, GRG</td></tr>
+        <tr><td>Amiga Principle / chipset model</td><td>Vision, Milestone</td><td>WAL, ABL, OCT</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+SEATTLE 360 -- RELEASE CYCLE ARCHITECTURE
+===============================================================
+
+  CSV INPUT            INTAKE ENGINE         THEORY MAPPER
+  +---------------+    +----------------+    +----------------+
+  | 360 Artists   |    | Parse CSV      |    | Artist -&gt; Genre|
+  | Name, Genre,  |---&gt;| Validate       |---&gt;| Genre -&gt; Theory|
+  | Era, Inst.    |    | ArtistProfile[]|    | Curriculum Node|
+  +---------------+    +----------------+    +----------------+
+                                                    |
+                                                    v
+  CARRY-FORWARD        RETROSPECTIVE         FLEET RESEARCH
+  +---------------+    +----------------+    +----------------+
+  | Seed Next     |    | NASA SE L.L.   |    | Full PDF per   |
+  | Mission Pack  |&lt;---| Score + Review |&lt;---| Artist         |
+  | Context Carry |    | Pattern Detect |    | Mission Pack   |
+  +---------------+    +----------------+    +----------------+
+        |                                          |
+        v                                          v
+  +---------------+    +----------------+    +----------------+
+  | NEXT ARTIST   |    | RELEASE        |    | COLLEGE LINKER |
+  | (degree N+1)  |&lt;---| PIPELINE       |&lt;---| Department Map |
+  | 0-359 cycle   |    | State Machine  |    | Cross-Links    |
+  +---------------+    +----------------+    +----------------+
+
+  CSV Input --&gt; Intake --&gt; Theory Mapper --&gt; Fleet Research
+  --&gt; College Linker --&gt; Release --&gt; Retrospective
+  --&gt; Carry-Forward --&gt; Next Artist
+    </pre>
+
+    <h2>Component Dependency Graph</h2>
+
+    <pre>
+COMPONENT DEPENDENCY GRAPH
+===============================================================
+
+  [00: Shared Types] --------&gt; ALL COMPONENTS
+       (ArtistProfile, MissionPack, RetrospectiveRecord)
+
+  [01: CSV Intake] --------&gt; [02: Music Theory Mapper]
+       |                              |
+       v                              v
+  [03: Fleet Research] --------&gt; [04: College Linker]
+       |                              |
+       v                              v
+  [05: Release Pipeline] --------&gt; [06: Retrospective]
+       |                              |
+       v                              v
+  [08: Safety Warden]          [07: Carry-Forward]
+       (gates all releases)    (seeds next artist)
+
+  Parallel tracks:
+    Track A: 01 + 02 + 03 + 04 (intake through college)
+    Track B: 05 + 06 + 07 (release through carry-forward)
+    Cross-cut: 08 Safety Warden (gates all outputs)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

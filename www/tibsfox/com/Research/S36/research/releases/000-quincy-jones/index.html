@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 0&deg; &mdash; Quincy Jones &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">0&deg;</div>
+      <div>
+        <h1>Quincy Jones</h1>
+        <div class="subtitle">Jazz &middot; R&amp;B &middot; Production &middot; Film Score &mdash; Seattle 1943 &rarr; Global</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../page.html?doc=02-research-reference">Research Ref</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          There is a moment every music teacher knows: a student finally <em>hears</em> the ii-V-I
+          in a Bill Evans chord, or feels the tritone substitution drop in a Quincy Jones
+          arrangement, and something irreversible happens. Theory stops being notation on a page
+          and becomes a living thing &mdash; audible, tactile, <em>theirs</em>.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY & SEATTLE ORIGINS
+             ======================================== -->
+
+        <h2>Biography &amp; Seattle Origins</h2>
+
+        <p>Quincy Delight Jones Jr. was born March 14, 1933, in Chicago, Illinois. His early
+        childhood on Chicago's South Side during the Great Depression was marked by instability &mdash;
+        his mother was committed to a state institution when he was seven, a rupture he referenced
+        throughout his life as both wound and motivating force.</p>
+
+        <p>In 1943, at age ten, Quincy moved with his father and stepmother to Bremerton, Washington,
+        where wartime work at the Puget Sound Naval Shipyard had drawn the family west. They soon
+        relocated to Seattle proper, settling in the <strong>Central District</strong> &mdash; the
+        geographic and cultural heart of Seattle's Black community. This move placed the young Quincy
+        at the intersection of two forces that would define American music: the <strong>Jackson Street
+        jazz corridor</strong> and Garfield High School's rigorous music program.</p>
+
+        <h3>Garfield High School</h3>
+
+        <p>Garfield High School, at 400 23rd Avenue in the Central District, maintained a music program
+        of conservatory caliber under directors Frank Waldron and Parker Cook. The program emphasized
+        reading, theory, and arranging alongside performance &mdash; a pedagogical approach that gave
+        Jones the technical vocabulary he would deploy for sixty years. Garfield produced not only Jones
+        but also Ernestine Anderson, Buddy Catlett, and &mdash; a decade later &mdash; Jimi Hendrix.</p>
+
+        <h3>Ray Charles: The Pivotal Meeting</h3>
+
+        <p>In 1947, fourteen-year-old Quincy met sixteen-year-old Ray Charles Robinson on the Jackson
+        Street scene. Charles had arrived from Florida the previous year, already blind, already a
+        formidable pianist. The two became close friends and musical collaborators, practicing arrangements
+        together, learning by doing on the nightly club circuit. Jones would later call this meeting the
+        single most important event of his musical life. Charles taught him that the feeling in music was
+        not separate from the theory but <em>expressed through it</em>.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Quincy Jones, <em>Q: The Autobiography</em> (2001);
+        Paul de Barros, <em>Jackson Street After Hours</em> (1993); Seattle Civil Rights &amp; Labor History Project, UW</p>
+
+        <h3>Berklee &amp; Lionel Hampton</h3>
+
+        <p>In 1951, Jones received a scholarship to the Schillinger House of Music in Boston (later
+        Berklee College of Music), becoming one of the school's first Black students. He absorbed the
+        Schillinger System of Musical Composition &mdash; a mathematical approach treating musical
+        parameters as independent variables combined through permutation. Before completing his studies,
+        he was recruited by Lionel Hampton to join his big band as trumpeter and arranger. He was eighteen.</p>
+
+        <!-- ========================================
+             CAREER ARC — TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1950s-1960s &mdash; The Arranger's Decade</div>
+          <p>Established as one of America's most sought-after arrangers. Wrote for <strong>Count Basie</strong>
+          (modernizing the band's sound with chromatic harmony and extended voicings), <strong>Dinah Washington</strong>
+          (bridging jazz and pop), and <strong>Frank Sinatra</strong> (the landmark <em>Sinatra at the Sands</em> with
+          the Basie Orchestra, 1966). In 1964, became the <strong>first Black vice president of a major record
+          label</strong> at Mercury Records.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s-1970s &mdash; Film Scoring</div>
+          <p>Scored 35+ films including <em>In the Heat of the Night</em> (1967), <em>The Italian Job</em> (1969),
+          <em>Roots</em> (1977), and <em>The Wiz</em> (1978). Pioneered through-composed narrative scoring using
+          leitmotif technique &mdash; treating the film score as architectural structure, not decoration.
+          <em>The Wiz</em> introduced Jones to the young Michael Jackson.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1979-1987 &mdash; The Thriller Era</div>
+          <p>Produced Michael Jackson's <strong>Off the Wall</strong> (1979, 20M copies), <strong>Thriller</strong>
+          (1982, 70M+ copies &mdash; best-selling album in history), and <strong>Bad</strong> (1987, 45M copies).
+          Each album fused jazz harmony with pop production in ways that had no precedent. Produced and co-wrote
+          <strong>"We Are the World"</strong> (1985) with Jackson and Lionel Richie, raising $63M+ for famine relief.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1990s-2024 &mdash; Empire &amp; Legacy</div>
+          <p>Founded Qwest Records, Vibe Magazine, and Quincy Jones Productions. Produced <em>The Fresh Prince
+          of Bel-Air</em> (1990-1996). Received the Kennedy Center Honor (2001), National Medal of Arts (2010),
+          and Rock and Roll Hall of Fame Ahmet Ertegun Award (2013). Died November 3, 2024, in Bel Air,
+          Los Angeles, at age 91.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Jones's work maps to six core theory concepts that form the curricular foundation for
+        degree 0. Each concept is directly audible in his recordings &mdash; theory made tangible
+        through the music.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>ii-V-I Progression</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>The foundational cadential motion of Western tonal harmony. Jones's arrangements
+            for Basie and Sinatra are saturated with ii-V-I motion decorated with chromatic
+            approach chords and inner-voice leading.</p>
+            <div class="examples">Basie arrangements (1958-64), Sinatra at the Sands (1966)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Tritone Substitution</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Replacing V7 with bII7, exploiting the shared tritone between the 3rd and 7th of
+            both chords. Jones used this as a signature reharmonization technique in brass voicings
+            that sound inevitable rather than academic.</p>
+            <div class="examples">Sinatra arrangements, walking bass reharmonization</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Big Band Orchestration</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Each instrument section as a module in a larger system. Brass carries foreground;
+            reeds provide inner-voice movement; rhythm section anchors the temporal foundation.
+            The Amiga Principle: 13 musicians producing orchestral complexity.</p>
+            <div class="examples">Hampton band charts (1951-53), Basie modernization</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Cross-Genre Production</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Jazz harmony functioning inside pop/R&amp;B production without losing theoretical
+            depth or commercial accessibility. Architectural translation &mdash; theory made
+            invisible while remaining structurally essential.</p>
+            <div class="examples">Off the Wall, Thriller, Bad</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Film Score Architecture</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Through-composed scoring as continuous musical narrative. Leitmotif technique
+            organizes the score as a system of relationships rather than a sequence of moods.
+            Requires understanding the whole before writing any part.</p>
+            <div class="examples">In the Heat of the Night (1967), Roots (1977)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Chromatic Bass Lines</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Bass parts moving by half-steps through a progression, creating smooth voice-leading
+            in the lowest register. A jazz reharmonization technique deployed in pop contexts where
+            the theory is invisible but structurally essential.</p>
+            <div class="examples">Billie Jean (1982), Don't Stop 'Til You Get Enough (1979)</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             SEATTLE CONTEXT
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Seattle Context</h2>
+
+        <h3>Jackson Street Jazz Corridor</h3>
+
+        <p>The Jackson Street corridor functioned as a self-contained musical ecosystem created by
+        and for Seattle's Black community. Segregation-era restrictions barred Black performers from
+        downtown venues, concentrating talent, audiences, and venues in the Central District. The
+        resulting hothouse environment produced musicians who developed rapidly through nightly performance.</p>
+
+        <table>
+          <thead>
+            <tr><th>Venue</th><th>Location</th><th>Significance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Black and Tan Club</td><td>12th &amp; Jackson</td><td>Premier jazz venue; mixed-race audiences tolerated earlier than most Seattle clubs</td></tr>
+            <tr><td>Washington Social &amp; Ed. Club</td><td>Jackson Street</td><td>Black social club hosting regular jazz performances and jam sessions</td></tr>
+            <tr><td>Black Elks Club</td><td>667 Jackson St</td><td>Elks Lodge No. 109; dances, performances, community music showcases</td></tr>
+            <tr><td>The Rocking Chair</td><td>Jackson Street</td><td>Smaller club featuring experimental and bebop-oriented performances</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The Export Pattern</h3>
+
+        <p>Jones's departure from Seattle to New York and Los Angeles mirrors a pattern repeated across
+        the Central District's musical history: the neighborhood produced extraordinary talent, but the
+        local economy could not sustain careers at the level these artists were capable of. The talent
+        was exported. Jones, Charles, Anderson, and others left Seattle to find the studios, labels, and
+        audiences that could support their ambitions. This pattern &mdash; local cultivation, global export
+        &mdash; recurs across all 360 degrees of Seattle's musical history.</p>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../../../GRV/index.html">GRV &mdash; Green River / Seattle Scene</a></li>
+            <li><a href="../../../PJM/index.html">PJM &mdash; Pearl Jam / Seattle Geography</a></li>
+            <li><a href="../../../RBH/index.html">RBH &mdash; Radio Broadcast History</a></li>
+            <li><a href="../../../DAA/index.html">DAA &mdash; Deep Audio Analysis</a></li>
+            <li><a href="../../../HFE/index.html">HFE &mdash; Audio Engineering</a></li>
+            <li><a href="../../../MDB/index.html">MDB &mdash; Moody Blues / Genre Bridging</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Jones, Quincy. <em>Q: The Autobiography of Quincy Jones</em>. Doubleday, 2001.</li>
+          <li>Charles, Ray, and David Ritz. <em>Brother Ray: Ray Charles' Own Story</em>. Dial Press, 1978.</li>
+          <li>Grammy.com. &ldquo;Quincy Jones: Career Retrospective.&rdquo; Recording Academy.</li>
+          <li>Rock &amp; Roll Hall of Fame. &ldquo;Quincy Jones: Ahmet Ertegun Award, 2013.&rdquo;</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="5">
+          <li>de Barros, Paul. <em>Jackson Street After Hours: The Roots of Jazz in Seattle</em>. Sasquatch Books, 1993.</li>
+          <li>Taylor, Quintard. <em>The Forging of a Black Community: Seattle's Central District</em>. U of Washington Press, 1994.</li>
+          <li>Gioia, Ted. <em>The History of Jazz</em>. 2nd ed. Oxford University Press, 2011.</li>
+          <li>Vogel, Joseph. <em>Man in the Music: The Creative Life and Work of Michael Jackson</em>. Sterling, 2011.</li>
+          <li>Smith, Jeff. <em>The Sounds of Commerce: Marketing Popular Film Music</em>. Columbia University Press, 1998.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="10">
+          <li>Seattle Civil Rights &amp; Labor History Project, University of Washington.</li>
+          <li>HistoryLink.org. Essays #1952 and #3944.</li>
+          <li>Berklee College of Music. Institutional history and alumni records.</li>
+          <li>Billboard. Chart data for <em>Off the Wall</em>, <em>Thriller</em>, <em>Bad</em>.</li>
+          <li>Guinness World Records. &ldquo;Best-selling album&rdquo; certification for <em>Thriller</em>.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR — STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">March 14, 1933</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">November 3, 2024</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Age</span>
+            <span class="stat-value">91</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Chicago, IL</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Central District</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">0&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">1-3 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz / R&amp;B / Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s-2024</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Awards</h4>
+          <div class="stat-row">
+            <span class="stat-label">Grammys</span>
+            <span class="stat-value">28</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Nominations</span>
+            <span class="stat-value">80</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Films Scored</span>
+            <span class="stat-value">35+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kennedy Center</span>
+            <span class="stat-value">2001</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">RR Hall of Fame</span>
+            <span class="stat-value">2013</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Departments</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">7 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Thriller (1982)</h4>
+          <div class="stat-row">
+            <span class="stat-label">Sales</span>
+            <span class="stat-value">70M+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Best-selling album</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 0&deg; / 360 &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
