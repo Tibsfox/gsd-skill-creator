@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenStack Cloud Platform &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ops">
+  <header>
+    <h1>OpenStack Cloud Platform</h1>
+    <div class="subtitle">NASA Engineering Rigor &middot; IaaS Self-Hosting &middot; OpenStack &middot; Kolla-Ansible &middot; Cloud Primitives</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-openstack-architecture">Architecture</a>
+      <a href="page.html?doc=02-nasa-se-cloud-ops">NASA SE Rigor</a>
+      <a href="page.html?doc=03-iaas-self-hosting">IaaS Self-Hosting</a>
+      <a href="page.html?doc=04-networking-orchestration">Networking &amp; Orchestration</a>
+      <a href="page.html?doc=05-cloud-comparison-sovereignty">Cloud Comparison</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      In 2010, NASA's Nebula cloud platform and Rackspace's Cloud Files merged into OpenStack.
+      The decision was not a business strategy &mdash; it was a statement about the nature of
+      infrastructure knowledge. NASA had built something that worked. They could have contracted
+      it exclusively, licensed it commercially, or kept it internal. Instead, they open-sourced it,
+      because the code &mdash; like the Systems Engineering Handbook, like every mishap report &mdash;
+      was created with public investment for public benefit. Understanding OpenStack means
+      understanding every cloud platform on earth, because OpenStack names the primitives that
+      every other platform obscures behind product branding.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">42</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Core Services</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-openstack-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: OpenStack Architecture &amp; Core Services</h3>
+        <div class="meta"><span class="tag tag-infra">Infrastructure</span> Track A &middot; Service primitives</div>
+        <p>Keystone identity, Nova compute, Glance images, Horizon dashboard. Service catalog and API contracts. Containerized deployment via Kolla-Ansible. The integration dependency chain from identity through orchestration. Message queue architecture with RabbitMQ and database backends.</p>
+      </a>
+
+      <a href="page.html?doc=02-nasa-se-cloud-ops" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: NASA Systems Engineering Applied to Cloud Ops</h3>
+        <div class="meta"><span class="tag tag-nasa">NASA SE</span> Track A &middot; Engineering rigor</div>
+        <p>The SE Engine's 17 processes mapped to cloud deployment. Life-cycle reviews from MCR through PLAR as deployment gates. ConOps, SEMP, and RVM document types. NPR 7123.1D requirements traceability. Tailoring NASA methodology for lab-scale infrastructure. Verification methods: Test, Analysis, Inspection, Demonstration (TAID).</p>
+      </a>
+
+      <a href="page.html?doc=03-iaas-self-hosting" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: IaaS Self-Hosting &amp; Ceph Integration</h3>
+        <div class="meta"><span class="tag tag-store">Storage</span> Track B &middot; Data sovereignty</div>
+        <p>Cinder block storage with LVM and Ceph backends. Swift object storage ring architecture. Ceph RADOS integration: OSDs, MONs, CRUSH maps. Storage replication and erasure coding. Why self-hosted storage matters for data sovereignty. Backup strategies and disaster recovery procedures.</p>
+      </a>
+
+      <a href="page.html?doc=04-networking-orchestration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Neutron Networking &amp; Heat Orchestration</h3>
+        <div class="meta"><span class="tag tag-net">Networking</span> Track B &middot; SDN + orchestration</div>
+        <p>Neutron ML2 plugin architecture. OVS vs. OVN backends. Software-defined networking: tenant isolation, security groups, floating IPs, DHCP. Heat orchestration templates (HOT format), stack lifecycle, auto-scaling. Network design patterns for single-node and multi-node topologies.</p>
+      </a>
+
+      <a href="page.html?doc=05-cloud-comparison-sovereignty" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Cloud Comparison &amp; Digital Sovereignty</h3>
+        <div class="meta"><span class="tag tag-ops">Operations</span> Track C &middot; Strategic analysis</div>
+        <p>OpenStack vs. AWS vs. GCP vs. Azure: the primitive translation table. When self-hosted makes sense and when it does not. TCO analysis frameworks. Kubernetes and OpenStack: complementary layers. The GSD-OS cloud layer. Digital sovereignty, vendor lock-in economics, and the open infrastructure commons.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>NASA SE Engine (17 processes)</td><td>M2, M1, M5</td><td>GSD2, CMH, ACE</td></tr>
+        <tr><td>Keystone identity / RBAC</td><td>M1, M2, M3</td><td>K8S, SYS, NND</td></tr>
+        <tr><td>Nova compute scheduling</td><td>M1, M4</td><td>K8S, MCF, SYS</td></tr>
+        <tr><td>Neutron SDN / OVN</td><td>M4, M1, M5</td><td>K8S, NND, OCN</td></tr>
+        <tr><td>Ceph distributed storage</td><td>M3, M1</td><td>K8S, SYS, OCN</td></tr>
+        <tr><td>Heat orchestration / IaC</td><td>M4, M5</td><td>K8S, GSD2, ACE</td></tr>
+        <tr><td>Kolla-Ansible deployment</td><td>M1, M2, M3</td><td>SYS, K8S, CMH</td></tr>
+        <tr><td>Life-cycle reviews (MCR-PLAR)</td><td>M2, M5</td><td>GSD2, CMH, ACE</td></tr>
+        <tr><td>Cloud primitive translation</td><td>M5, M1, M4</td><td>K8S, SYS, OCN</td></tr>
+        <tr><td>Data sovereignty / self-hosting</td><td>M5, M3</td><td>NND, OCN, SYS</td></tr>
+        <tr><td>Monitoring (Prometheus/Grafana)</td><td>M1, M2, M5</td><td>SYS, K8S, MCF</td></tr>
+        <tr><td>V&amp;V methodology (TAID)</td><td>M2</td><td>GSD2, CMH, ACE</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+GSD OPENSTACK CLOUD PLATFORM -- DOMAIN MAP
+===============================================================
+
+  IDENTITY LAYER            COMPUTE LAYER           STORAGE LAYER
+  +---------------+        +----------------+      +---------------+
+  | Keystone      |        | Nova           |      | Cinder        |
+  | Auth/RBAC     |-------&gt;| Scheduler      |-----&gt;| Block Storage |
+  | Service Cat.  |        | Hypervisor     |      | LVM / Ceph    |
+  | Federation    |        | Instance Mgmt  |      | Snapshots     |
+  +---------------+        +----------------+      +---------------+
+        |                        |                       |
+        v                        v                       v
+  +---------------+        +----------------+      +---------------+
+  | Token Mgmt    |        | Glance         |      | Swift         |
+  | Fernet Keys   |        | Image Registry |      | Object Store  |
+  | Policy Files  |        | Format Convert |      | Ring Topology |
+  | LDAP/SAML     |        | Metadata       |      | Replication   |
+  +---------------+        +----------------+      +---------------+
+        |                        |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   NETWORK + CONTROL   |
+                    |                       |
+                    |  Neutron SDN (OVN)    |
+                    |  Security Groups      |
+                    |  Floating IPs / DHCP  |
+                    |  Heat Orchestration   |
+                    |  Horizon Dashboard    |
+                    +-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   NASA SE FRAMEWORK   |
+                    |                       |
+                    |  NPR 7123.1D Reqs    |
+                    |  SP-6105 Handbook     |
+                    |  Life-Cycle Reviews   |
+                    |  V&amp;V / TAID Methods   |
+                    |  ConOps / SEMP / RVM  |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Architecture &amp; Core] --------&gt; [M2: NASA SE Rigor]
+         |                                    |
+         |                                    |
+         v                                    v
+  [M3: IaaS &amp; Ceph] --------&gt; [M4: Networking &amp; Orchestration]
+                                              |
+                                              v
+                               [M5: Comparison &amp; Sovereignty]
+
+  Parallel tracks:
+    Track A: M1 + M2 (infrastructure + methodology)
+    Track B: M3 + M4 (storage + networking)
+    Track C: M5 (strategic analysis, synthesis)
+    </pre>
+  </main>
+
+  <footer>
+    <p>OpenStack Cloud Platform &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
