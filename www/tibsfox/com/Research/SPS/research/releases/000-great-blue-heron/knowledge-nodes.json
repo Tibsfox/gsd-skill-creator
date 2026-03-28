@@ -1,0 +1,206 @@
+{
+  "degree": 0,
+  "species": "Great Blue Heron",
+  "scientific_name": "Ardea herodias",
+  "subspecies": "A. h. fannini (Pacific Northwest resident)",
+  "sound_type": "stalking silence / pterodactyl croak",
+  "energy": 1,
+  "ecosystem": "Puget Sound estuary",
+  "season": "resident",
+  "family": "Ardeidae",
+  "order": "Pelecaniformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle waterfront area"
+  },
+  "physical": {
+    "height_ft": "3.2-4.5",
+    "wingspan_ft": "5.5-6.6",
+    "weight_lbs": "4.6-5.5"
+  },
+  "frequency_range": {
+    "fundamental_hz_low": 200,
+    "fundamental_hz_high": 800,
+    "harmonics_hz_max": 1500,
+    "register": "bass"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Silence as compositional element",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/",
+      "examples": [
+        "4'33'' (Cage, 1952)",
+        "Stalking silence as structured absence",
+        "Whole rest as compositional intention, not absence"
+      ],
+      "music_theory_parallel": "Rest / structured silence in notation. The space between sounds carries information."
+    },
+    {
+      "concept": "Call-and-response",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/call-response.md",
+      "examples": [
+        "Landing call at heronry triggers mate response",
+        "Mate greeting sequence (vocalization + bill clap)",
+        "ii-V-I progression as tension-call / resolution-response"
+      ],
+      "music_theory_parallel": "Foundational structure of jazz improvisation, gospel, West African drumming traditions."
+    },
+    {
+      "concept": "Low-frequency foundation",
+      "level": "intermediate",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/",
+      "examples": [
+        "200-800 Hz fundamental frequency",
+        "Bass register as harmonic root in orchestration",
+        "Cello/bassoon range — the voice that defines the key"
+      ],
+      "music_theory_parallel": "Bass voice provides harmonic foundation. Degree 0 IS the root note of the chord."
+    },
+    {
+      "concept": "Patience as temporal structure",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/",
+      "examples": [
+        "Whole-note rhythm (semibreve)",
+        "0-1 acoustic events per hour vs. Pacific Wren 120+ notes/min",
+        "Slower than Largo (40-66 BPM) — geological tempo"
+      ],
+      "music_theory_parallel": "The slowest tempo on the circle. Every faster rhythm at higher degrees is a subdivision of this silence."
+    },
+    {
+      "concept": "Stand-and-wait predation",
+      "level": "foundational",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/",
+      "examples": [
+        "Estuarine fishing strategy — patience as hunting technique",
+        "Energy conservation through stillness",
+        "Strike velocity: 60+ body lengths per second"
+      ],
+      "music_theory_parallel": "Energy efficiency as compositional economy. Maximum effect from minimum events."
+    },
+    {
+      "concept": "Solitary vs. colonial acoustic contrast",
+      "level": "intermediate",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/",
+      "examples": [
+        "Solitary hunting: near-total silence",
+        "Heronry: polyphonic cacophony (100+ nests)",
+        "Same species, opposite acoustic behaviors"
+      ],
+      "music_theory_parallel": "Solo instrument (silence) vs. full ensemble (texture). Dynamic range of behavioral context."
+    },
+    {
+      "concept": "Mechanical sound production",
+      "level": "foundational",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/",
+      "examples": [
+        "Bill clapping — percussion without vocal apparatus",
+        "Broadband transient sound",
+        "Body as instrument (parallel: woodpecker drumming)"
+      ],
+      "music_theory_parallel": "Percussion — sound produced by physical impact rather than vocal/reed vibration."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Wading bird taxonomy and distribution"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Estuarine ecology, trophic cascades, indicator species"
+    },
+    {
+      "project": "BPS",
+      "title": "Bio-Physics Sensing",
+      "connection": "Visual hunting, low-light adaptation, strike biomechanics"
+    },
+    {
+      "project": "COL",
+      "title": "Columbia Valley",
+      "connection": "Riverine heron habitat across the Columbia Basin"
+    },
+    {
+      "project": "MAM",
+      "title": "Fur, Fin & Fang",
+      "connection": "Shared estuarine food web: forage fish and crab prey overlap"
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Quincy Jones at degree 0 — call-and-response, bass-register foundation"
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Quincy Jones",
+    "degree": 0,
+    "genre": "Jazz",
+    "shared_principle": "Call-and-response; structured silence as foundation. Both are bass. Both are foundation.",
+    "resonance_points": [
+      "Bass-register thinking: the arranger who shapes silence into form",
+      "Call-and-response as foundational compositional structure",
+      "Patience and economy: maximum effect from measured placement",
+      "Foundational voice that all other voices build upon"
+    ]
+  },
+  "conservation": {
+    "federal_status": "Not listed (ESA)",
+    "state_status": "Monitored (WDFW); fannini subspecies of conservation concern",
+    "protection": "Migratory Bird Treaty Act (16 U.S.C. 703-712)",
+    "primary_threats": [
+      "Bald Eagle predation at heronries",
+      "Shoreline habitat loss and development",
+      "Disturbance at colonial nesting sites",
+      "Bioaccumulation of contaminants (mercury, PCBs, PAHs)"
+    ]
+  },
+  "key_sites": [
+    {
+      "name": "Kiwanis Ravine (Discovery Park)",
+      "type": "heronry",
+      "description": "80-100 active nests; one of the largest urban heronries in the PNW",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Samish Island",
+      "type": "heronry",
+      "county": "Skagit County, WA"
+    },
+    {
+      "name": "San Juan Islands",
+      "type": "heronry",
+      "county": "San Juan County, WA"
+    }
+  ],
+  "sources": [
+    "Poole et al. (2020). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds.",
+    "Seattle Audubon Society. BirdWeb.",
+    "Butler, R.W. (1997). The Great Blue Heron. UBC Press.",
+    "Washington Department of Fish and Wildlife. Heronry monitoring.",
+    "Puget Sound Partnership. Vital Signs: Birds.",
+    "McCracken & Sheldon (1998). Auk 115(1).",
+    "Hilbert, Vi (1985). Haboo. University of Washington Press.",
+    "OCAP Principles. First Nations Information Governance Centre."
+  ],
+  "release_metadata": {
+    "release_number": "000",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
