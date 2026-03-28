@@ -1,0 +1,1118 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color scheme: Infrastructure / Urgent Human Domain ──────────────────────
+\definecolor{primary}{HTML}{1A237E}      % Deep navy — infrastructure gravitas
+\definecolor{secondary}{HTML}{0277BD}    % Medium blue — networks, technology
+\definecolor{tertiary}{HTML}{BF360C}     % Deep amber/rust — urgency, human element
+\definecolor{accent}{HTML}{1565C0}       % Pipeline arrows, highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom environments ──────────────────────────────────────────────────────
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{FoxEdu Gap-Fill Research Mission}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Fox Infrastructure Group},
+  pdftitle={FoxEdu Gap-Fill Research Mission -- Module 04 \& 06 Expansion},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{FoxEdu Gap-Fill\\[0.3em]Research Mission}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Disaster Response Architecture \& Housing Cost Models}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Module 04 \& 06 Expansion — Fox Infrastructure Group}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{subtlegray}{Retrospective-Driven Gap-Fill Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 6--8 context windows across 2 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Depends on: Fox Infrastructure Group Master Plan, FoxEdu Vision}}
+\end{center}
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% =============================================================================
+% STAGE 1 — VISION DOCUMENT
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{FoxEdu Gap-Fill --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Gap-Fill Research / Retrospective-Driven}
+\metafield{Depends on:}{Fox Infrastructure Group Master Plan; FoxEdu Housing Proposal; Module 06 Disaster Response (original)}
+\metafield{Context:}{This mission addresses two specific gaps identified in the post-production retrospective of the Fox Infrastructure Group deep research mission. It is not a revision of that document --- it is the targeted research required to strengthen two modules and prepare one of them for a clean split in a future expansion.}
+
+\subsection{Vision}
+
+The retrospective revealed two kinds of productive tension. Module~06 --- disaster response --- ran long not because the research wandered, but because it was carrying two distinct bodies of knowledge: the probabilistic risk landscape of the Pacific corridor, and the architectural logic of a resilient network built to survive it. These are related but separable concerns. One is a threat model; the other is a design response. Bundling them into a single module produced comprehensive coverage at the cost of navigability. The length was not a failure --- it was a signal that the seam had been found.
+
+Module~04 --- housing --- revealed a different kind of gap. The three-model framework (military, Job Corps, construction camps) provided sound structural scaffolding, but the cost data was thin. A housing proposal that cannot answer ``how much per bed, amortized over twenty years'' cannot be taken to a co-op board, a tribal council, or a development finance institution. The three models exist in the literature with substantial documented cost histories. This mission retrieves them.
+
+Taken together, these two gap-fills serve the same deeper purpose that animates the entire Fox Infrastructure Group: giving people their lives back by reducing the friction between vision and execution. A disaster response plan that is not navigable does not get used. A housing proposal without cost data does not get funded. This mission removes both obstacles.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Module 06 exceeds its navigability threshold.} At 484 lines, the disaster response module surpasses the 300--400 line design target. The excess is not padding --- it is a second module's worth of Pacific network architecture embedded inside a risk-assessment module. Splitting it requires clean boundary research so both halves are self-contained.
+
+  \item \textbf{Module 04 housing cost data is insufficient for proposal use.} The three-model framework was identified (military barracks, Job Corps residential, construction camps) but detailed per-unit cost breakdowns were not produced. Without this data, the FoxEdu housing proposal lacks the financial specificity needed for institutional engagement.
+
+  \item \textbf{The connection between housing site selection and disaster resilience is underdeveloped.} A FoxEdu campus sited near the Electric City thesis anchor (Grand Coulee area) faces specific hazard profiles. Housing design decisions and disaster response planning should inform each other --- this cross-module link was not established in the original document.
+
+  \item \textbf{Pacific network topology has no dedicated research home.} The Pacific Intertie, BPA grid architecture, and mesh communication redundancy design are currently embedded in Module~06 but belong in a dedicated infrastructure resilience module. Separating them requires a focused survey of Pacific corridor infrastructure interdependencies.
+
+  \item \textbf{Job Corps residential model data is underrepresented in the literature synthesis.} The Department of Labor's Job Corps program operates 125 residential centers serving approximately 56{,}000 enrolled students annually. This is the closest operational precedent to the FoxEdu residential learning model, yet it received less treatment than the military housing model in the original research.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Targeted gap-fill as precision maintenance.} Rather than revising the original document, this mission adds the missing content in a form that can be integrated at the module boundary level --- discrete, self-contained expansions that slot into the existing architecture without disturbing what works.
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+GAP-FILL MISSION ARCHITECTURE
+==============================
+
+  DISASTER RESPONSE ARM          HOUSING ARM
+  ─────────────────────────      ──────────────────────────
+  M06-A: Risk Tier Framework     M04-A: Military Housing Costs
+    · Hazard probability tables    · MILCON cost per unit
+    · Return period data           · Privatized housing programs
+    · Service outage timelines     · Modular/expeditionary models
+    · NIMS tier framework          · Per-bed amortization tables
+
+  M06-B: Pacific Network         M04-B: Job Corps & Camp Models
+    Design                         · Job Corps 125-center data
+    · Pacific Intertie topology    · Cost per student per year
+    · BPA grid interdependencies   · Construction camp models
+    · Mesh comm redundancy         · ANSI/OSHA housing standards
+    · Electric City anchor role    · FoxEdu application mapping
+
+  ─────────────────────────────────────────────────────────
+  SYNTHESIS LAYER
+    · Housing site selection ↔ disaster resilience criteria
+    · FoxEdu campus design informed by both arms
+    · Cross-module integration with original document
+\end{asciibox}
+
+\subsubsection{Module 06 Split Boundary}
+
+\begin{asciibox}
+ORIGINAL MODULE 06 (484 lines)
+  ├── Part A: Risk Assessment ──────────► M06-A (standalone, ~220 lines)
+  │     Probability tables
+  │     Service outage timelines
+  │     FEMA/NIMS tier structure
+  │
+  └── Part B: Network Architecture ─────► M06-B (standalone, ~260 lines)
+        Pacific Intertie topology
+        BPA grid design
+        Mesh communication redundancy
+        Electric City anchor thesis
+
+Split criterion: Part A answers "what can go wrong and when."
+                 Part B answers "how the network survives it."
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module M06-A: Disaster Response Risk Tiers}
+Produces a standalone probability and timeline framework for Pacific Northwest hazard scenarios. Covers Cascadia Subduction Zone event probabilities, crustal earthquake data, wildfire risk escalation, and cascading grid failure timelines. Anchored in USGS, PNSN, and FEMA source data. Output: probability table, service outage timeline matrix, NIMS tier reference table.
+
+\subsubsection{Module M06-B: Pacific Network Resilience Architecture}
+Documents the physical and logical topology of the Pacific corridor's critical infrastructure. Covers Pacific Intertie HVDC transmission, BPA grid structure, Columbia River Treaty interdependencies, and mesh communication redundancy design patterns. Situates the Electric City (Grand Coulee) thesis within this network as a resilience anchor. Output: network topology reference, interdependency map, communication redundancy design spec.
+
+\subsubsection{Module M04-A: Military Housing Cost Models}
+Produces detailed cost analysis for three military residential program types: standard barracks construction (MILCON program), privatized military housing (Residential Communities Initiative), and modular/expeditionary deployable units. Each model includes per-unit construction cost, operating cost, amenity standards, and amortization benchmarks. Cited from DOD, AFCEC, and Government Accountability Office sources.
+
+\subsubsection{Module M04-B: Job Corps \& Industrial Camp Housing}
+Produces the deepest available case study on the Job Corps residential model (DOL) and industrial construction camp housing (oil sands, pipeline, mining). Covers capacity ranges, cost-per-bed, amenity standards, regulatory frameworks (ANSI/OSHA 1910.142), and operational precedents. Closes with an explicit FoxEdu application mapping: how each model informs the 60--120 resident learner campus design.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: foxedu-gapfill-research
+  profile: squadron
+  modules: [M06-A, M06-B, M04-A, M04-B]
+  parallel_tracks: 2
+  model_allocation:
+    opus:   30%   # Synthesis, housing-disaster integration, FoxEdu application
+    sonnet: 60%   # Module surveys, document assembly, cost table production
+    haiku:  10%   # Schemas, templates, citation scaffolding
+
+  wave_structure:
+    wave_0: foundation          # Sequential, Haiku
+    wave_1: parallel_survey     # M06 track + M04 track, Sonnet
+    wave_2: synthesis           # Cross-arm integration, Opus
+    wave_3: publication         # Assembly + verification, Sonnet
+
+  cache_strategy:
+    ttl_window: 5min
+    reuse: [source_index, hazard_schema, housing_schema]
+    session_boundary: between wave_2 and wave_3
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Pacific Northwest hazard probability data (Cascadia, crustal, wildfire, grid)
+  \item FEMA/NIMS service outage timeline framework
+  \item Pacific Intertie and BPA grid topology documentation
+  \item Military housing cost models: MILCON, RCI privatization, modular/expeditionary
+  \item Job Corps residential facility data: 125 centers, cost-per-student, DOL program structure
+  \item Industrial construction camp models: oil sands, pipeline, mining (BC/PNW focus)
+  \item FoxEdu residential application: 60--120 bed campus design synthesis
+  \item Cross-module: housing site selection criteria informed by M06-A hazard data
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Full revision of the original Fox Infrastructure Group document (this is an addendum, not a replacement)
+  \item Emergency management operational procedures (covered in original M06)
+  \item Indigenous housing models (addressed in the Foxfire Heritage module)
+  \item International disaster response frameworks outside Pacific corridor
+  \item Architectural drawings or engineering specifications for FoxEdu campus
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Probability tables produced for at least five Pacific Northwest hazard scenarios with sourced return periods from USGS or equivalent government agency.
+  \item Service outage timeline matrix covers 72-hour, 7-day, 14-day, and 30-day windows with sourced recovery benchmarks for each tier.
+  \item M06 split boundary documented: both M06-A and M06-B are verifiably self-contained with no dangling cross-references.
+  \item Pacific network topology identifies at minimum: Pacific Intertie HVDC routes, BPA control areas, Columbia River hydro dependency, and Grand Coulee anchor role.
+  \item Military housing cost model covers at least three program types with per-unit construction cost and per-year operating cost in 2020s dollars, cited from DOD/GAO sources.
+  \item Job Corps residential model documents: total centers (national), average capacity, cost-per-enrolled-student-per-year, and amenity standards, cited from DOL sources.
+  \item Industrial camp housing covers at least three deployment models with cost-per-bed-per-night and regulatory standard citations.
+  \item All three housing models explicitly mapped to FoxEdu 60--120 resident learner campus design parameters.
+  \item Cross-module synthesis explicitly connects M06-A hazard probability data to M04 housing site selection criteria.
+  \item All numerical claims attributed to specific government agencies, peer-reviewed research, or professional organizations. Zero unsourced statistics.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent document & M04 and M06 are modules within this plan; this gap-fill strengthens both \\
+FoxEdu Vision & Primary consumer & Housing cost models feed directly into FoxEdu campus financial proposal \\
+GSD Mesh Prototype Spec & Parallel reference & M06-B network topology complements mesh cluster design \\
+Foxfire Heritage Mission Package & Adjacent module & Indigenous housing models are out of scope here; cross-reference only \\
+Electric City thesis & Anchor concept & Grand Coulee's role as resilience node appears in M06-B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable outcomes emerge from architectural elegance --- specialized execution paths producing staggering complexity through faithful, principled iteration. Module 06 grew long because it was doing two things well simultaneously. The retrospective named the seam. This mission cuts along it, not because the content was wrong, but because navigability is a design value. A document that cannot be used as a reference is not a reference --- it is a monument.
+
+The housing gap is a simpler story: specificity is kindness. A proposal without cost data asks an institutional partner to imagine the numbers themselves. That is too much friction. This mission removes it by going to the ground-truth sources --- the Department of Labor's own Job Corps cost records, the Department of Defense's own MILCON program data --- and bringing those numbers back in a form that survives a board meeting.
+
+Both arms of this gap-fill serve the same people: the future students living in FoxEdu residences, and the communities whose infrastructure will either hold or fail when the next Cascadia event arrives. The spaces between good intention and executable plan are where projects go to die. This mission closes two of those spaces.
+
+% =============================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =============================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{FoxEdu Gap-Fill --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides the ground-truth data for all four gap-fill modules. Agents should consume the relevant module section as their primary briefing before beginning document production. The synthesis section (Section 2.6) is mandatory reading for the Wave~2 integration agent.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item U.S. Geological Survey (USGS) and Pacific Northwest Seismic Network (PNSN) --- hazard probabilities
+  \item Federal Emergency Management Agency (FEMA) / National Incident Management System (NIMS) --- response tier frameworks
+  \item Bonneville Power Administration (BPA) --- Pacific grid topology
+  \item U.S. Department of Defense, Air Force Civil Engineer Center (AFCEC) --- military housing costs
+  \item U.S. Government Accountability Office (GAO) --- program cost audits
+  \item U.S. Department of Labor (DOL), Job Corps Program --- residential facility data
+  \item Occupational Safety and Health Administration (OSHA) --- temporary labor housing standards
+  \item Natural Resources Canada (NRCan) --- BC/Pacific corridor seismic and infrastructure data
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{M06-A Reference: Disaster Response Risk Tiers}
+
+\subsubsection{Pacific Northwest Hazard Probability Data}
+
+The Pacific Northwest sits at the convergence of three seismic systems: the Cascadia Subduction Zone (CSZ), shallow crustal faults underlying Seattle and Portland, and the diffuse seismicity of the Basin and Range transition. Each carries distinct probability profiles and consequence models.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Hazard} & \tableheader{Return Period} & \tableheader{50-Year Prob.} & \tableheader{Primary Source} \\
+\midrule
+CSZ Full-Margin Rupture (M8.7--9.2) & 200--500 yrs & 10--14\% & USGS, Oregon OEM \\
+CSZ Partial-Margin Rupture (M7.5--8.0) & 100--200 yrs & 22--39\% & USGS \\
+Seattle Fault Zone (M6.5--7.0) & 1,000--5,000 yrs & 1--5\% & PNSN / USGS \\
+Deep Intraslab Event (M6.5--7.0) & 30--50 yrs & 63--80\% & PNSN \\
+Cascades Volcanic (significant) & 100--500 yrs & 10--39\% & USGS CVO \\
+Columbia Basin Wildfire (large) & 3--7 yrs & 99\%+ & USFS Region 6 \\
+Grid Cascading Failure & 10--20 yrs & 40--65\% & NERC Reliability Reports \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Note: Probability values reflect published ranges from USGS National Seismic Hazard Model (2023 update) and PNSN annual reports. ``50-Year Prob.'' is the Poisson probability of at least one occurrence within a 50-year window given the stated return period.}
+
+\subsubsection{Service Outage Timeline Framework}
+
+FEMA's National Response Framework and NIMS establish a four-tier recovery model. The following matrix represents documented benchmark ranges drawn from post-event analyses of the 2001 Nisqually earthquake (M6.8), the 2011 Tohoku earthquake (analogue event), and FEMA worst-case CSZ scenario planning (Cascadia Subduction Zone Earthquake and Tsunami Operational Plan, 2022).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Window} & \tableheader{NIMS Phase} & \tableheader{Critical Services Status} \\
+\midrule
+1 & 0--72 hrs & Immediate Response & Life safety only; grid down west of Cascades; roads impassable; comms degraded 60--80\% \\
+2 & 72 hrs--7 days & Sustained Operations & Emergency power at hospitals/EOCs; water restored to 30--50\% of metro area; I-5 partially reopened \\
+3 & 7--30 days & Extended Recovery & Power restored to 60--80\% of unaffected zones; water treatment at 70\%; schools/businesses begin reopening \\
+4 & 30--365 days & Infrastructure Reconstruction & Cascades bridge repair; port restoration; full utility restoration; FEMA IA programs active \\
+CSZ Outlier & 1--3 yrs & Catastrophic Rebuild & Western WA/OR: bridge replacement, soil liquefaction remediation, coastal zone rebuilding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: FEMA CSZ Operational Plan (2022); Applied Technology Council ATC-20; Oregon Office of Emergency Management Cascadia Playbook (2021).}
+
+\subsubsection{NIMS Tier Structure for Self-Sufficient Communities}
+
+FEMA's Community Lifelines framework (updated 2019) identifies seven critical lifelines: Safety/Security, Food/Water/Shelter, Health/Medical, Energy, Communications, Transportation, and Hazardous Materials. For communities operating under the Fox Infrastructure Group's self-sufficiency design philosophy, the priority ordering during a CSZ event is:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Energy} (on-site generation and storage; Tier 1 independence target: 72 hours minimum)
+  \item \textbf{Water} (captured and stored; Tier 1 target: 14 gallons per person per day for 14 days)
+  \item \textbf{Communications} (mesh radio + satellite backup; target: never fully offline)
+  \item \textbf{Food/Shelter} (on-site stores + resilient structures; 30-day supply target)
+  \item \textbf{Health/Medical} (first responder training + basic clinic; trauma stabilization capability)
+\end{enumerate}
+
+This ordering diverges from standard NIMS priority in that Energy precedes Food because without power, refrigeration, water pumping, and communications all fail simultaneously.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{M06-B Reference: Pacific Network Resilience Architecture}
+
+\subsubsection{Pacific Intertie Topology}
+
+The Pacific Intertie is a set of high-voltage direct current (HVDC) and high-voltage alternating current (HVAC) transmission lines connecting the Pacific Northwest to Southern California, carrying between 3,100 and 7,900 megawatts depending on configuration. It is operated under a joint agreement between BPA, Los Angeles Department of Water and Power (LADWP), and several intermediate utilities.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Line Segment} & \tableheader{Type} & \tableheader{Capacity (MW)} & \tableheader{Key Nodes} \\
+\midrule
+Celilo--Sylmar (PDCI) & HVDC & 3,100 & The Dalles (OR), Sylmar (CA) \\
+Celilo--Sylmar (PDCI+) & HVDC & 3,100 & Upgrade corridor same route \\
+AC Intertie (COI) & HVAC & 4,800 & Multiple PNW--CA substations \\
+BC Hydro--BPA Interconnect & HVAC & 3,150 & Blaine (WA), Boundary (BC) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: Bonneville Power Administration Transmission System Map (2024); WECC Regional Transmission Plan.}
+
+\subsubsection{BPA Control Area and Grand Coulee Anchor Role}
+
+BPA operates the federal transmission system across a 300,000 square mile service territory covering the Pacific Northwest. Its generation base is dominated by Columbia River hydroelectric projects, of which Grand Coulee Dam (6,809 MW installed capacity) is the largest. For the Electric City thesis:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Grand Coulee provides approximately 40\% of BPA's firm generating capacity and serves as the frequency regulation anchor for the entire Pacific Northwest grid.
+  \item In a CSZ event scenario, Grand Coulee's location east of the Cascades (outside the worst liquefaction and coastal flooding zones) makes it the most resilient large generating asset in the Pacific Northwest.
+  \item The Columbia Basin's distance from the primary fault rupture zone (CSZ runs offshore, 50--100 miles west of the coast) means Grand Coulee facilities have a substantially lower probability of direct structural damage than coastal or Puget Sound region facilities.
+  \item A community sited in the Grand Coulee area has direct access to this energy anchor through the local distribution system, subject to transmission line integrity between the dam and distribution points.
+\end{itemize}
+
+\subsubsection{Mesh Communication Redundancy Design}
+
+A resilient communication architecture for a Fox Infrastructure Group node must survive the failure of commercial cellular, commercial internet, and commercial power simultaneously --- the realistic Tier~1 scenario. The layered redundancy design draws from amateur radio emergency communications (AREC/ARES), FEMA's Integrated Public Alert and Warning System (IPAWS), and emerging low-earth-orbit (LEO) satellite services.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Layer} & \tableheader{Technology} & \tableheader{Range} & \tableheader{Failure Mode} \\
+\midrule
+Primary & Fiber/commercial internet & Regional & Fails at Tier 1 (grid/infra damage) \\
+Secondary & LEO satellite (Starlink) & Global & Survives if terminals undamaged; ~40ms latency \\
+Tertiary & LoRa mesh (915 MHz) & 2--15 km & Battery/solar powered; survives grid failure \\
+Quaternary & HF amateur radio & Continental & Survives anything; slow; requires licensed operators \\
+Emergency & NOAA Weather Radio + IPAWS & Regional & Receive-only broadcast; always available \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: ARRL Emergency Communication Handbook (8th ed.); Semtech LoRa Alliance Technical Specifications; FCC IPAWS documentation.}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{M04-A Reference: Military Housing Cost Models}
+
+\subsubsection{Military Construction (MILCON) Program}
+
+The Department of Defense's Military Construction program funds permanent barracks and family housing through annual appropriations. MILCON cost data is published in the DOD Budget Justification Books submitted to Congress annually.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Facility Type} & \tableheader{Construction Cost/Bed} & \tableheader{Annual Op Cost/Bed} & \tableheader{Notes} \\
+\midrule
+Standard Barracks (new) & \$180,000--\$250,000 & \$8,000--\$12,000 & 2020--2024 MILCON data; includes utility infrastructure \\
+Barracks Renovation & \$80,000--\$130,000 & \$8,000--\$12,000 & Per DOD FY2023 Budget; existing structure assumed \\
+Privatized (RCI) & \$120,000--\$180,000 & \$14,000--\$20,000 & Private developer; higher op cost includes management fee \\
+Modular/Deployable & \$50,000--\$80,000 & \$6,000--\$9,000 & AFCEC expeditionary; 20-yr design life \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: DOD Military Construction Budget Justification Books FY2022--FY2025; GAO-21-261 ``Military Housing: DOD Has Taken Steps to Address Privatized Housing Problems''; AFCEC Facility Investment and Sustainment Program data.}
+
+\subsubsection{Residential Communities Initiative (RCI) Model}
+
+Privatized Military Housing under RCI (established 1996) transferred management of approximately 200{,}000 housing units to private developers under 50-year ground leases. The program is the closest analogue to a public-private co-op housing model at scale. Key structural features:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Funding mechanism:} DOD provides land (ground lease at \$1/year); private developer builds, owns, and manages for 50 years; revenue is tenant's Basic Allowance for Housing (BAH).
+  \item \textbf{BAH rates (PNW, 2024):} E-5 with dependents: \$2,400--\$3,100/month depending on duty station; E-1 without dependents: \$1,100--\$1,600/month.
+  \item \textbf{Cost recovery:} Developers typically achieve cost recovery in 15--25 years under BAH revenue streams.
+  \item \textbf{Lesson for FoxEdu:} The ground lease / student stipend revenue structure is directly adaptable to tribal land + scholarship/stipend funded resident learners.
+\end{itemize}
+
+\subsubsection{Modular and Expeditionary Housing}
+
+The Air Force Civil Engineer Center's contingency construction program provides the most cost-transparent modular housing data in the federal government. AFCEC Harvest Falcon and BEAR (Base Expeditionary Airfield Resources) systems document per-unit costs extensively because they are deployed as equipment, not as construction.
+
+Key benchmarks (AFCEC FY2023):
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Harvest Eagle tent system:} \$8,000--\$15,000/bed; not suitable for permanent residential
+  \item \textbf{ISO container conversion:} \$35,000--\$60,000/bed; 20-year design life; utility infrastructure \$15,000--\$25,000 per unit additional
+  \item \textbf{Modular prefab barracks:} \$65,000--\$90,000/bed; 30--40 year design life; meets IBC residential code
+  \item \textbf{FoxEdu relevance:} Modular prefab at \$65,000--\$90,000/bed with 35-year amortization = \$1,900--\$2,600/bed/year capital cost (excluding operations)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{M04-B Reference: Job Corps \& Industrial Camp Housing}
+
+\subsubsection{Job Corps Residential Model}
+
+The Department of Labor's Job Corps program is the largest federally funded residential education and training program in the United States. With 125 centers operating continuously since 1964, it represents six decades of operational data on the residential learning model.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Program Parameter} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Active residential centers & 125 & DOL Job Corps FY2024 \\
+Enrolled students (annual) & $\sim$52,000--56,000 & DOL Annual Report 2023 \\
+Average center capacity & 250--350 students & DOL facility data \\
+Cost per student per year & \$36,000--\$46,000 & DOL OIG Audit 2022 \\
+Residential component (\% of total) & $\sim$35--40\% & GAO analysis \\
+Residential cost/student/year & $\sim$\$13,000--\$18,000 & Derived from above \\
+Average length of stay & 8--11 months & DOL Annual Report 2023 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: DOL Job Corps Annual Report FY2023; DOL OIG Audit Report 26-22-001-03-370 (2022); GAO-17-82 ``Job Corps: Actions Needed to Improve Accountability for Center Performance.''}
+
+\textbf{Physical plant characteristics} (derived from DOL facility standards and OIG inspection reports):
+\begin{itemize}[leftmargin=1.5em]
+  \item Dormitory buildings: typically 2--4 stories, 40--80 beds per building, shared bath facilities
+  \item Cafeteria: institutional, 300--400 seat capacity, commercial kitchen
+  \item Recreation: gymnasium or multi-use court, outdoor areas
+  \item Health clinic: on-site nurse/EMT, physician on contract
+  \item Administrative: central administration building, career counseling offices
+  \item Security: controlled entry; residential students sign in/out
+\end{itemize}
+
+\subsubsection{Industrial Construction Camp Models}
+
+Industrial ``man camp'' or lodge-style worker accommodation provides a useful cost benchmark for rapid-build residential infrastructure. Three primary models are documented in Canadian and U.S. energy sector project records:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Cost/Bed/Night} & \tableheader{Build Cost/Bed} & \tableheader{Context} \\
+\midrule
+Oil sands lodge (permanent) & \$85--\$130 & \$35,000--\$55,000 & Fort McMurray; includes food, utilities; 500--1,500 capacity \\
+Pipeline camp (temporary) & \$60--\$95 & \$15,000--\$30,000 & ANSI/OSHA-compliant; modular; demobilized after project \\
+Remote mining camp (BC) & \$90--\$140 & \$40,000--\$65,000 & Fly-in/fly-out; high utility cost included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: Alberta Energy Regulator lodging facility disclosure data (2019--2024); Primoris Services Corporation Camp Operations Reports; BC Ministry of Energy permit filings; ANSI/ASSE Z4.4-2015 Temporary Worker Housing standard.}
+
+\textbf{Regulatory standards (ANSI/OSHA 1910.142):} Temporary labor camps must provide minimum 50 sq ft per occupant in sleeping quarters, potable water at 35 gallons per person per day, approved sanitary facilities, and adequate heating for climate. These are floor standards; Job Corps and military models substantially exceed them.
+
+\subsubsection{FoxEdu Application Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Military Model} & \tableheader{Job Corps Model} & \tableheader{FoxEdu Target} \\
+\midrule
+Capacity & 200--500 bed & 250--350 bed & 60--120 bed \\
+Build cost/bed & \$65,000--\$250,000 & \$50,000--\$120,000 & \$60,000--\$100,000 \\
+Op cost/bed/yr & \$8,000--\$20,000 & \$13,000--\$18,000 & \$10,000--\$15,000 \\
+Funding model & Federal appropriation & Federal contract & Tribal land + grants + stipends \\
+Program length & 2--4 yrs (education) & 8--11 months & 12--24 months \\
+Land ownership & Federal (DOD/GSA) & Federal lease & Tribal sovereign \\
+Governance & Military chain & DOL contractor & Co-op board + tribal council \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key insight:} At 60--120 beds, FoxEdu is smaller than either Job Corps or typical military facilities but falls within the range of successful smaller Job Corps centers (some centers operate at 150--200 beds). The per-bed cost at smaller scale is typically 10--20\% higher due to fixed overhead; a \$75,000--\$110,000/bed build cost is a realistic target for a 90-bed campus with good design.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Cross-Module Synthesis Reference}
+
+\subsubsection{Housing Site Selection Informed by Disaster Risk Data}
+
+The connection between M06-A hazard probabilities and M04 housing design is most direct at the site selection level. A FoxEdu campus sited in the Columbia Basin (Electric City thesis area) has a materially different risk profile than one sited west of the Cascades:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{3cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Hazard} & \tableheader{West of Cascades} & \tableheader{Columbia Basin} \\
+\midrule
+CSZ ground shaking & Severe (MMI VIII--X) & Moderate (MMI V--VII) \\
+Liquefaction risk & High (coastal/valley soils) & Low (basalt/glacial till) \\
+Tsunami inundation & Applicable (coastal sites) & Not applicable \\
+Wildfire (summer) & Moderate & High (dry ponderosa) \\
+Grid disruption & Severe (depends on Pacific Intertie) & Moderate (near generation source) \\
+Post-event road access & Severe (bridge failures) & Moderate (fewer river crossings) \\
+Energy resilience & Low (grid-dependent) & High (proximity to Grand Coulee) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Design implication:} A Columbia Basin site trades wildfire risk (manageable with defensible space and sprinkler systems) for substantially reduced seismic, liquefaction, and energy resilience risk. For a residential learning community designed around long-term self-sufficiency, this trade is favorable. Wildfire risk is a design problem (site selection, defensible space, materials); CSZ liquefaction risk is a geology problem (much harder to engineer around at reasonable cost).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling Requirement} \\
+\midrule
+Hazard probability claims & GATE & All probabilities must cite specific USGS, PNSN, or equivalent agency source and publication year \\
+Grid vulnerability data & ANNOTATE & Infrastructure interdependency mapping should avoid operational detail that could aid exploitation \\
+Indigenous land context & ABSOLUTE & Any reference to tribal land for FoxEdu siting must name specific nation; never ``Indigenous land'' generically \\
+Cost projections & GATE & All per-unit costs must be attributed to specific program and fiscal year; inflation adjustments noted \\
+Job Corps quality concerns & ANNOTATE & DOL OIG audits document significant quality variation across centers; present evidence without policy advocacy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item U.S. Geological Survey. \textit{National Seismic Hazard Model for the Conterminous U.S., 2023 Update.} USGS Open-File Report 2023-1030.
+  \item Pacific Northwest Seismic Network (PNSN). \textit{Annual Seismicity Reports, 2020--2024.} University of Washington.
+  \item Oregon Office of Emergency Management. \textit{Cascadia Subduction Zone Earthquake and Tsunami Operational Plan.} 2022.
+  \item FEMA. \textit{National Response Framework, 4th Edition.} 2019. \textit{Community Lifelines Implementation Toolkit v2.0.} 2019.
+  \item Bonneville Power Administration. \textit{Transmission Asset Management Plan.} 2023. \textit{Columbia River Power System.} Annual data.
+  \item Western Electricity Coordinating Council (WECC). \textit{Regional Transmission Plan 2024.}
+  \item U.S. Department of Defense. \textit{Military Construction Budget Justification Books, FY2022--FY2025.}
+  \item Air Force Civil Engineer Center (AFCEC). \textit{Expeditionary Combat Support: Contingency Construction Standards.} 2023.
+  \item U.S. Government Accountability Office. GAO-21-261. \textit{Military Housing: DOD Has Taken Steps to Address Privatized Housing Problems But More Oversight Is Needed.} 2021.
+  \item U.S. Department of Labor, Job Corps Program. \textit{Annual Report FY2023.}
+  \item DOL Office of Inspector General. Audit Report 26-22-001-03-370. \textit{Job Corps Residential Support Services Cost Review.} 2022.
+  \item GAO-17-82. \textit{Job Corps: Actions Needed to Improve Accountability for Center Performance.} 2017.
+  \item Alberta Energy Regulator. \textit{Workers' Accommodation Standards.} 2019.
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Technical Standards}
+\begin{itemize}[leftmargin=1.5em]
+  \item American Radio Relay League (ARRL). \textit{Emergency Communication Handbook, 8th Edition.}
+  \item Semtech / LoRa Alliance. \textit{LoRa and LoRaWAN: A Technical Overview.} 2020.
+  \item ANSI/ASSE Z4.4-2015. \textit{Temporary Worker Housing.} American Society of Safety Professionals.
+  \item OSHA 1910.142. \textit{Temporary Labor Camps.} Code of Federal Regulations.
+  \item Applied Technology Council. \textit{ATC-20: Procedures for Postearthquake Safety Evaluation of Buildings.} 2005 (revised).
+\end{itemize}
+
+% =============================================================================
+% STAGE 3 — MISSION PACKAGE
+% =============================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce four targeted research documents (M06-A, M06-B, M04-A, M04-B) that fill the gaps identified in the Fox Infrastructure Group retrospective: a clean module split for the disaster response content, and detailed cost-model case studies for the FoxEdu housing proposal. All four documents must be immediately usable as standalone appendices to the Fox Infrastructure Group Master Plan without requiring revision of the original document.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+  WAVE 0: FOUNDATION (Sequential, Haiku, ~30 min)
+  ─────────────────────────────────────────────────
+  [SCHEMA] Shared data structures: cost tables, hazard tables
+  [INDEX]  Source index with citation templates
+  [TMPL]   Document templates for all four output modules
+
+  WAVE 1: PARALLEL SURVEY (2 tracks simultaneous, Sonnet, ~90 min)
+  ──────────────────────────────────────────────────────────────────
+  TRACK A: DISASTER            TRACK B: HOUSING
+  ─────────────────────        ─────────────────────
+  [M06-A] Risk tiers           [M04-A] Military costs
+  [M06-B] Pacific network      [M04-B] Job Corps + camps
+           ↓                            ↓
+  WAVE 2: SYNTHESIS (Sequential, Opus, ~60 min)
+  ─────────────────────────────────────────────
+  [SYNTH] Housing-disaster site selection integration
+  [SPLIT] M06 boundary verification (both halves self-contained)
+  [MAP]   FoxEdu application mapping across all four modules
+
+  WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet, ~45 min)
+  ─────────────────────────────────────────────────────────────────
+  [COMPILE] Assemble final four module documents
+  [VERIFY]  Source attribution audit; numerical claim check
+  [DELIVER] Four appendix-ready PDFs + integration notes
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Foundation Layer} --- Shared schemas and source index ensuring consistent citation format and data structure across all four modules.
+  \item \textbf{Disaster Response Layer} --- M06-A (risk tiers) and M06-B (network architecture) as separable, self-contained documents.
+  \item \textbf{Housing Cost Layer} --- M04-A (military models) and M04-B (Job Corps + camps) with full cost breakdown tables.
+  \item \textbf{Synthesis Layer} --- Cross-module integration connecting hazard risk to site selection and housing design criteria.
+  \item \textbf{Publication Layer} --- Final assembly, verification, and delivery in appendix-ready format.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & M06-A Risk Tiers & 5+ hazard probability tables; 4-tier outage matrix; NIMS lifeline priority order; \textless300 lines & Standalone appendix; no dangling references to M06-B \\
+2 & M06-B Pacific Network & Pacific Intertie topology; BPA control area; Grand Coulee role; mesh comm stack; \textless300 lines & Standalone appendix; no dangling references to M06-A \\
+3 & M04-A Military Housing & 3+ program types; per-unit build + op costs; amortization benchmarks; 2020s cost data & Standalone appendix; FoxEdu application table included \\
+4 & M04-B Job Corps \& Camps & Job Corps program stats; cost/student/year; 3 camp models; FoxEdu mapping table; ANSI/OSHA refs & Standalone appendix; stronger than original M04 treatment \\
+5 & Synthesis Note & Housing-disaster site selection matrix; cross-module integration memo & 1--2 pages; designed to accompany the four appendices \\
+6 & Integration Guide & Notes on where each appendix connects to original Fox Infrastructure Group document & \textless1 page; section-by-section cross-reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.8cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Token Est.} \\
+\midrule
+W0-SCHEMA & None & Haiku & 8K \\
+W0-SOURCE-INDEX & None & Haiku & 6K \\
+W0-TEMPLATES & None & Haiku & 5K \\
+W1-M06A & W0-SCHEMA, W0-SOURCE-INDEX & Sonnet & 28K \\
+W1-M06B & W0-SCHEMA, W0-SOURCE-INDEX & Sonnet & 32K \\
+W1-M04A & W0-SCHEMA, W0-SOURCE-INDEX & Sonnet & 24K \\
+W1-M04B & W0-SCHEMA, W0-SOURCE-INDEX & Opus & 36K \\
+W2-SYNTHESIS & W1-M06A, W1-M06B, W1-M04A, W1-M04B & Opus & 40K \\
+W2-SPLIT-VERIFY & W1-M06A, W1-M06B & Opus & 16K \\
+W3-COMPILE & All W1+W2 & Sonnet & 30K \\
+W3-VERIFY & All W3 & Sonnet & 18K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$243K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Synthesis wave requires cross-domain judgment (connecting seismology to housing economics); M04-B Job Corps analysis benefits from nuanced evaluation of DOL OIG audit data quality concerns \\
+Sonnet & $\sim$60\% & All four module surveys are structured document production tasks; verification is systematic \\
+Haiku & $\sim$10\% & Foundation schemas and templates are mechanical scaffolding; no domain judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}C{1.5cm}C{1.8cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Duration} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 30 min & Auto-pass if schemas validate \\
+1 & Parallel Survey & Parallel & Sonnet+Opus & 90 min & CAPCOM review at track completion \\
+2 & Synthesis & Sequential & Opus & 60 min & CAPCOM approval required \\
+3 & Publication & Sequential & Sonnet & 45 min & Human final review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & Haiku & JSON schema for cost tables (build\_cost, op\_cost, amortization, source) and hazard tables (hazard, return\_period, prob\_50yr, source) \\
+W0-SOURCE-INDEX & Haiku & YAML index of all primary sources with citation template, URL where applicable, reliability tier \\
+W0-TEMPLATES & Haiku & Markdown document templates for all four modules (headers, table placeholders, appendix formatting) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Disaster Response (Sonnet):}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W1-M06A & Sonnet & Complete M06-A document: hazard probability tables, service outage timeline matrix, NIMS lifeline priority framework. \textless300 lines. Verified standalone. \\
+W1-M06B & Sonnet & Complete M06-B document: Pacific Intertie topology, BPA control area, Grand Coulee anchor role, mesh comm redundancy stack. \textless300 lines. Verified standalone. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Housing (Sonnet + Opus):}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W1-M04A & Sonnet & Complete M04-A document: MILCON cost tables, RCI privatization model, modular/expeditionary benchmarks, amortization analysis. FoxEdu application table. \\
+W1-M04B & Opus & Complete M04-B document: Job Corps program statistics, cost/student/year analysis, three industrial camp models with cost/bed data. Full FoxEdu application mapping. Note: Opus assigned because DOL OIG audit quality concerns require nuanced handling. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W2-SYNTHESIS & Opus & Synthesis Note: housing-disaster site selection matrix; cross-module narrative connecting M06-A hazard data to M04 housing design parameters; FoxEdu Columbia Basin siting analysis \\
+W2-SPLIT-VERIFY & Opus & M06 split verification: confirm M06-A and M06-B are each self-contained; identify and resolve any cross-reference dependencies; confirm both are \textless300 lines \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Cache optimization:} All four Wave~1 documents plus source index should be in active context at Wave~2 start. The 5-minute cache TTL window means Wave~2 tasks must be issued within the same session as the final Wave~1 completion. Session boundary is acceptable between Wave~2 and Wave~3.
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+W3-COMPILE & Sonnet & Assemble all six deliverables into appendix-ready format with consistent headers, citation style, and cross-reference links \\
+W3-VERIFY & Sonnet & Source attribution audit: every numerical claim mapped to source; no unsourced statistics; all Indigenous references nation-specific \\
+W3-DELIVER & Sonnet & Integration Guide: section-by-section notes on where each appendix slots into the Fox Infrastructure Group Master Plan \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  W0-SCHEMA ─────────────────┬────────────────── W0-SOURCE-INDEX
+         │                   │                          │
+         └──── W0-TEMPLATES  │                          │
+                    │        │                          │
+                    ▼        ▼                          ▼
+              W1-M06A    W1-M06B      W1-M04A        W1-M04B
+                 │           │           │               │
+                 └─────┬─────┘           └──────┬────────┘
+                       │                        │
+                       ▼                        │
+                 W2-SPLIT-VERIFY                │
+                       │                        │
+                       └──────────┬─────────────┘
+                                  │
+                                  ▼
+                            W2-SYNTHESIS
+                                  │
+                                  ▼
+                            W3-COMPILE
+                                  │
+                                  ▼
+                            W3-VERIFY
+                                  │
+                                  ▼
+                            W3-DELIVER
+\end{asciibox}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Task Tokens} & \tableheader{Running Total} \\
+\midrule
+Wave 0 & Haiku & 19K & 19K \\
+Wave 1 & Sonnet + Opus & 120K & 139K \\
+Wave 2 & Opus & 56K & 195K \\
+Wave 3 & Sonnet & 48K & 243K \\
+\midrule
+\textbf{Total} & & \textbf{243K} & \textbf{$\sim$6--8 context windows} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Failure} & \tableheader{Coverage Target} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & 15\% \\
+Core functionality & 20 & Required & BLOCK & 50\% \\
+Integration & 10 & Required & BLOCK & 25\% \\
+Edge cases & 4 & Best-effort & LOG & 10\% \\
+\midrule
+\textbf{Total} & \textbf{40} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to USGS, PNSN, FEMA, BPA, DOD, DOL, GAO, or peer-reviewed equivalent. Zero entertainment media or unsourced claims. BLOCK. \\
+SC-NUM & Numerical attribution & Every probability percentage, cost figure, capacity number, and timeline attributed to a specific source with fiscal year or publication date. BLOCK. \\
+SC-ADV & No policy advocacy & Document presents disaster response evidence and housing cost data without advocating for specific legislation, political position, or policy. BLOCK. \\
+SC-IND & Indigenous attribution & Any reference to tribal land for FoxEdu siting names the specific nation (e.g., Colville Confederated Tribes); never generic ``Indigenous land'' or ``Indigenous peoples.'' BLOCK. \\
+SC-SEC & Infrastructure security & Network topology documentation describes functional architecture and design principles only; no operational details about control system vulnerabilities, access credentials, or exploitable configurations. BLOCK. \\
+SC-MOD & Module self-containment & M06-A and M06-B each verified to contain no unresolved references to the other module. A reader of M06-A alone can understand it completely. BLOCK. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Hazard table completeness & M06-A probability table contains $\geq$5 distinct hazard scenarios with return period, 50-year probability, and source \\
+CF-02 & Outage tier coverage & Service outage matrix covers all four NIMS tiers (0--72hr, 72hr--7day, 7--30day, 30+day) with at least three service domains per tier \\
+CF-03 & NIMS lifeline priority & Five lifeline priorities documented in order with rationale for FoxEdu self-sufficiency deviation from standard NIMS ordering \\
+CF-04 & Pacific Intertie data & M06-B includes all major transmission segments with capacity (MW), voltage type (HVDC/HVAC), and key terminal nodes \\
+CF-05 & Grand Coulee anchor role & M06-B explicitly documents Grand Coulee's percentage share of BPA firm capacity and post-CSZ resilience rationale \\
+CF-06 & Mesh comm stack & M06-B documents $\geq$4 communication layers with technology, range, power source, and failure mode for each \\
+CF-07 & Military cost tiers & M04-A includes $\geq$3 program types with both construction and operating costs in 2020s dollars \\
+CF-08 & Cost amortization & M04-A includes per-bed-per-year capital cost calculation for at least the modular/prefab model \\
+CF-09 & RCI funding structure & M04-A documents ground lease mechanism, BAH revenue model, and cost recovery timeline \\
+CF-10 & Job Corps program stats & M04-B includes active center count, annual enrollment, average cost per student per year, all sourced from DOL \\
+CF-11 & Job Corps facility specs & M04-B documents physical plant characteristics: dorm capacity, cafeteria, health clinic, security model \\
+CF-12 & Industrial camp models & M04-B includes $\geq$3 camp deployment types with cost/bed/night, build cost/bed, and regulatory standard \\
+CF-13 & ANSI/OSHA reference & M04-B cites ANSI/OSHA 1910.142 minimum standards and notes that Job Corps/military models exceed them \\
+CF-14 & FoxEdu mapping table & M04-B includes the application mapping table comparing all three models to FoxEdu 60--120 bed target parameters \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M06-A $\rightarrow$ M04 site selection & Synthesis Note explicitly connects at least three M06-A hazard types to M04 housing site selection criteria \\
+IN-02 & Columbia Basin risk matrix & Cross-module table compares hazard profiles for west-of-Cascades vs.\ Columbia Basin FoxEdu siting \\
+IN-03 & M06-B $\rightarrow$ energy resilience & M06-B Pacific network analysis connects to M04 on-site energy requirements for residential campus \\
+IN-04 & Cost model internal consistency & Build cost and op cost figures in M04-A and M04-B use consistent units and fiscal year references; no contradictions \\
+IN-05 & M06 split bidirectional test & A reader of M06-B alone can understand the network design without needing M06-A, and vice versa \\
+IN-06 & FIG master plan connection & Integration Guide correctly identifies the section in the original Fox Infrastructure Group document where each appendix inserts \\
+IN-07 & Self-containment (all four) & Each of the four module documents is independently readable by someone who has not read the Fox Infrastructure Group master plan \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. 5+ hazard probability tables with sourced return periods & CF-01, SC-NUM & Pending \\
+2. Service outage matrix: 72hr / 7day / 14day / 30day & CF-02 & Pending \\
+3. M06 split boundary: both halves self-contained & SC-MOD, IN-05 & Pending \\
+4. Pacific network topology: Intertie, BPA, Grand Coulee & CF-04, CF-05 & Pending \\
+5. Military housing: 3+ types, build + op costs, 2020s data & CF-07, CF-08 & Pending \\
+6. Job Corps: centers, capacity, cost/student/year & CF-10, CF-11 & Pending \\
+7. Industrial camps: 3+ models, cost/bed, regulatory refs & CF-12, CF-13 & Pending \\
+8. All three models mapped to FoxEdu design parameters & CF-14, IN-07 & Pending \\
+9. Housing-disaster cross-module synthesis explicit & IN-01, IN-02 & Pending \\
+10. All numerical claims attributed to specific sources & SC-NUM, SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries; session planning \\
+PLAN & Planner & Wave decomposition; parallel track scheduling; dependency management \\
+SCOUT & Research Agent & Source validation; retrieval of DOL/DOD/USGS data; bibliography assembly \\
+EXEC-A & Executor Alpha & Disaster response track: M06-A and M06-B document production \\
+EXEC-B & Executor Beta & Housing track: M04-A document production \\
+CRAFT-INFRA & Infrastructure Specialist & Pacific network topology analysis; BPA grid architecture; mesh comm design \\
+CRAFT-HOUSING & Housing Economics Specialist & Military cost model analysis; Job Corps program evaluation; camp model benchmarking \\
+VERIFY & Verification Agent & Source attribution audit; numerical claim verification; SC-* test execution \\
+INTEG & Integration Agent & Cross-module synthesis; M06 split verification; housing-disaster connection \\
+CAPCOM & HITL Interface & Human approval at Wave~1 completion and Wave~2 completion; only channel crossing the human-machine boundary \\
+BUDGET & Resource Manager & Token budget tracking across waves; session boundary management \\
+LOG & Chronicle Agent & Commit messages; wave completion summaries; retrospective capture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & foxedu-gapfill-v1.0 \\
+Activation profile & Squadron (12 roles) \\
+Modules & 4 (M06-A, M06-B, M04-A, M04-B) \\
+Deliverables & 6 (4 module docs + synthesis note + integration guide) \\
+Parallel tracks & 2 (disaster arm + housing arm) \\
+Total waves & 4 (0 foundation, 1 survey, 2 synthesis, 3 publication) \\
+Estimated tokens & $\sim$243K \\
+Context windows & 6--8 \\
+Sessions & 2 (Wave~0--2 in session 1; Wave~3 in session 2) \\
+Model split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Human checkpoints & 3 (end of Wave~0, Wave~1, Wave~2) \\
+Blocking tests & 36 of 40 (SC-* and CF-* and IN-* categories) \\
+Critical path & W0-SCHEMA $\rightarrow$ W1-M04B $\rightarrow$ W2-SYNTHESIS $\rightarrow$ W3-DELIVER \\
+Parent document & Fox Infrastructure Group Master Plan \\
+Integration target & FIG M04 and M06 appendix layer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The retrospective is the instrument. The seam it found in Module~06 was always there --- the document just revealed it. A 484-line module that contains two clean bodies of knowledge is not a failure of discipline; it is a signal that the architecture is working. The map drew its own borders. This mission cuts along them.''}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{subtlegray}{--- From the GSD Retrospective Note, March 2026. The Amiga Principle: architectural signals over brute-force revision.}}
+\end{quotebox}
+
+\end{document}
