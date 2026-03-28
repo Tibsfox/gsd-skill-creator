@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCP/IP Full Protocol Specification — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --accent: #0277BD;
+    --tertiary: #37474F;
+    --light: #ECEFF1;
+    --border: #B0BEC5;
+    --subtle: #546E7A;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --code-bg: #ECEFF1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--primary);
+    line-height: 1.6;
+  }
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    border-bottom: 4px solid var(--accent);
+  }
+  .header-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #90A4AE;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  header h1 span { color: #90CAF9; }
+  .header-sub {
+    font-size: 1.05rem;
+    color: #B0BEC5;
+    margin-bottom: 1.5rem;
+  }
+  .header-meta {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    font-size: 0.82rem; color: #78909C;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--secondary);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .files-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+  @media (max-width: 600px) { .files-grid { grid-template-columns: 1fr; } }
+
+  .file-card {
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s, border-color 0.15s;
+    display: block;
+  }
+  .file-card:hover { background: #BBDEFB; border-color: var(--secondary); }
+  .file-card .file-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+  .file-card .file-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+  }
+  .file-card .file-desc { font-size: 0.82rem; color: var(--subtle); }
+  .file-card.source { background: #ECEFF1; border-color: var(--border); }
+  .file-card.source:hover { background: #CFD8DC; }
+  .file-card.source .file-name { color: var(--tertiary); }
+
+  .contents { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; }
+  .stage {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--light);
+  }
+  .stage:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .stage-label {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.6rem;
+  }
+  .stage-label.s2 { background: var(--secondary); }
+  .stage-label.s3 { background: var(--tertiary); }
+  .stage h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .stage ul { list-style: none; padding: 0; }
+  .stage ul li {
+    font-size: 0.85rem;
+    color: var(--subtle);
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    position: relative;
+  }
+  .stage ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+
+  .usage { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; }
+  .usage ol { padding-left: 1.5rem; }
+  .usage ol li { margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--subtle); }
+  .usage ol li strong { color: var(--primary); }
+
+  .compile {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .compile h2 { margin-top: 0; }
+  pre {
+    background: var(--primary);
+    color: #B0BEC5;
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.82rem;
+    overflow-x: auto;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+  pre .cmd { color: #80CBC4; }
+  pre .comment { color: #546E7A; }
+
+  .quote {
+    background: var(--light);
+    border-left: 4px solid var(--primary);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--tertiary);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .quote cite { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.8rem; color: var(--subtle); font-family: 'DM Sans', sans-serif; }
+
+  footer {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--border);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>TCP/IP Full<br><span>Protocol Specification</span></h1>
+  <div class="header-sub">Every Detail Mapped — RFC-by-RFC</div>
+  <div class="header-meta">
+    <span><span class="dot"></span> March 27, 2026</span>
+    <span><span class="dot"></span> Squadron Profile (12 roles)</span>
+    <span><span class="dot"></span> 5 Modules · 27 RFCs · 30 Pages</span>
+    <span><span class="dot"></span> Ready for GSD Orchestrator</span>
+  </div>
+</header>
+
+<main>
+
+  <h2>Package Files</h2>
+  <div class="files-grid">
+    <a href="tcpip_mission.pdf" download class="file-card">
+      <div class="file-icon">📄</div>
+      <div class="file-name">tcpip_mission.pdf</div>
+      <div class="file-desc">30-page publication-quality reference. Compiled with XeLaTeX, three passes. Contains all three stages.</div>
+    </a>
+    <a href="tcpip_mission.tex" download class="file-card source">
+      <div class="file-icon">📝</div>
+      <div class="file-name">tcpip_mission.tex</div>
+      <div class="file-desc">Full LaTeX source. Modify and recompile to update. XeLaTeX required (DejaVu fonts).</div>
+    </a>
+  </div>
+
+  <h2>Contents</h2>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-label">Stage 1 — Vision</div>
+      <h3>TCP/IP Protocol Specification — Vision Guide</h3>
+      <ul>
+        <li>5-problem problem statement: fragmentation, IPv4/IPv6 duality, congestion landscape, FSM completeness, transport evolution</li>
+        <li>Full 4-layer protocol suite ASCII architecture diagram</li>
+        <li>5-module architecture diagram with dependency arrows</li>
+        <li>Module descriptions: IP Layer, TCP Core, Congestion Control, Companion Protocols, Transport Evolution</li>
+        <li>GSD Chipset YAML (Agnus/Denise/Paula model assignments)</li>
+        <li>12 testable success criteria</li>
+        <li>Relationship table: Mesh Prototype, Chipset Architecture, Fox Infrastructure, The Space Between</li>
+        <li>Through-line: DACP as TCP's lesson applied to agent communication</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label s2">Stage 2 — Research Reference</div>
+      <h3>Field-Level RFC Reference — 5 Modules</h3>
+      <ul>
+        <li>IPv4 complete header (13 fields, bit widths, RFC 791 behavioral notes)</li>
+        <li>IPv6 fixed header (8 fields) + all 6 extension header types (RFC 8200)</li>
+        <li>TCP segment format — all fields + options registry (Kind 0–8, SACK, Timestamps)</li>
+        <li>TCP 11-state FSM table with state descriptions and transition notes</li>
+        <li>Congestion control: Slow Start/AIMD equations, CUBIC cubic formula, BBR BtlBw/RTprop model</li>
+        <li>BBR quantitative data: 2,700× over CUBIC at 1% loss; 4% YouTube throughput improvement</li>
+        <li>SACK block format, ECN IP/TCP flag interactions, RTO SRTT/RTTVAR formulas</li>
+        <li>UDP 8-byte header; ICMP v4 type table; ICMPv6 + NDP messages</li>
+        <li>ARP/NDP mechanics; DNS query format; DHCP 4-step lifecycle</li>
+        <li>QUIC core design: UDP carrier, mandatory TLS 1.3, connection IDs, stream mux, 0-RTT</li>
+        <li>HTTP/3 (RFC 9114); QPACK (RFC 9204); TCP Fast Open; MPTCP</li>
+        <li>Security sensitivity review: ARP spoofing, SYN flood, sequence prediction</li>
+        <li>Bibliography: 27 primary RFCs + 5 peer-reviewed papers</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-label s3">Stage 3 — Mission Package</div>
+      <h3>Squadron Execution Plan — 4 Waves, 43 Tests</h3>
+      <ul>
+        <li>System layers: 8 layers from Foundation through Publication</li>
+        <li>10 deliverables with acceptance criteria and wave assignments</li>
+        <li>Component breakdown with model assignments (Opus/Sonnet/Haiku) and token budgets</li>
+        <li>Wave 0: Foundation (Haiku) → Wave 1: Parallel tracks A+B (Sonnet/Opus) → CAPCOM Gate 1 → Wave 2: Synthesis (Opus) → Wave 3: Publication (Sonnet)</li>
+        <li>Cache optimization strategy exploiting 5-minute TTL</li>
+        <li>Token budget: ~160k total (43% Opus / 53% Sonnet / 4% Haiku)</li>
+        <li>ASCII dependency graph</li>
+        <li>43 tests: 5 safety-critical BLOCK, 22 core BLOCK, 8 integration BLOCK, 8 edge LOG</li>
+        <li>Verification matrix: all 12 success criteria mapped to test IDs</li>
+        <li>12-role crew manifest: FLIGHT, PLAN, SCOUT, EXEC-A/B, CRAFT-IP/TCP/CC/PROTO, VERIFY, CAPCOM, SECURE</li>
+        <li>Execution summary table: 8–10 context windows across 3–4 sessions</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Usage Instructions</h2>
+  <div class="usage">
+    <ol>
+      <li><strong>Hand to gsd-skill-creator:</strong> Feed <code>tcpip_mission.pdf</code> as the mission specification to the GSD orchestrator in Claude Code.</li>
+      <li><strong>Start Wave 0:</strong> Instruct the Haiku scaffolding agent to produce the RFC citation schema (F-01) and LaTeX table templates (F-02).</li>
+      <li><strong>Launch Wave 1 parallel tracks:</strong> Track A (CRAFT-IP + CRAFT-PROTO) and Track B (CRAFT-TCP + CRAFT-CC) run simultaneously in separate context windows.</li>
+      <li><strong>CAPCOM Gate 1:</strong> Review Module 02 FSM completeness and Module 03 mathematical formulas before proceeding to Wave 2.</li>
+      <li><strong>Wave 2 Synthesis (Opus):</strong> QUIC + TLS 1.3 documentation, cross-protocol comparison table, GSD Mesh applicability notes.</li>
+      <li><strong>Wave 3 Publication:</strong> Document assembly, bibliography validation, test execution, 3-pass XeLaTeX compilation.</li>
+    </ol>
+  </div>
+
+  <h2>Recompilation</h2>
+  <div class="compile">
+    <p style="font-size:0.85rem;color:var(--subtle);margin-bottom:0.5rem;">Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu 24). Three passes required for TOC, cross-references, and page count.</p>
+    <pre><span class="comment"># Three-pass XeLaTeX compilation</span>
+<span class="cmd">xelatex</span> -interaction=nonstopmode tcpip_mission.tex
+<span class="cmd">xelatex</span> -interaction=nonstopmode tcpip_mission.tex
+<span class="cmd">xelatex</span> -interaction=nonstopmode tcpip_mission.tex</pre>
+  </div>
+
+  <div class="quote">
+    "We are screwing up in our design of Internet protocols by violating the principle of layering."
+    <cite>— Jonathan Postel, 1977 · The insight that split TCP from IP and gave us the internet we have.</cite>
+  </div>
+
+</main>
+
+<footer>GSD Research Mission Package · TCP/IP Full Protocol Specification · March 27, 2026 · Vision → Research → Mission</footer>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>States, Symbols, and Tape — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #311B92;
+    --primary-light: #EDE7F6;
+    --secondary: #0277BD;
+    --secondary-light: #E1F5FE;
+    --accent: #7B1FA2;
+    --tertiary: #E65100;
+    --text: #1a1a2e;
+    --muted: #5f5f7a;
+    --border: rgba(49, 27, 146, 0.15);
+    --card-bg: #fafafa;
+    --card-bg-dark: #f0edf9;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f5fe;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1A0F6B 0%, #311B92 50%, #4527A0 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(123,31,162,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(2,119,189,0.25) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(237,231,246,0.8);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: #CE93D8;
+  }
+  .header .subtitle {
+    font-size: 1.05rem;
+    color: rgba(225,245,254,0.85);
+    margin-bottom: 0.4rem;
+    font-weight: 300;
+  }
+  .header .tagline {
+    font-size: 0.9rem;
+    color: rgba(237,231,246,0.6);
+    font-style: italic;
+  }
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .pipe-step {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #CE93D8;
+    text-transform: uppercase;
+  }
+  .pipe-arrow { color: rgba(206,147,216,0.5); font-size: 1rem; }
+
+  /* Main content */
+  .main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* Meta strip */
+  .meta-strip {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .meta-item strong { color: var(--primary); font-weight: 600; }
+
+  /* Files */
+  .files-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .file-card {
+    background: var(--card-bg-dark);
+    border: 1px solid rgba(49,27,146,0.2);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(49,27,146,0.12);
+    background: #e8e3f8;
+  }
+  .file-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 0.9rem;
+  }
+  .icon-pdf { background: rgba(230,81,0,0.12); }
+  .icon-tex { background: rgba(49,27,146,0.1); }
+  .file-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+  .file-card p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .file-dl {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+  }
+
+  /* Contents breakdown */
+  .section-heading {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .stage-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .stage-header {
+    padding: 0.8rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .stage-header.s1 { background: var(--primary-light); color: var(--primary); }
+  .stage-header.s2 { background: var(--secondary-light); color: var(--secondary); }
+  .stage-header.s3 { background: #FFF3E0; color: var(--tertiary); }
+  .stage-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .stage-items {
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .stage-item {
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.5rem;
+  }
+  .stage-item::before {
+    content: '·';
+    color: var(--border);
+    font-size: 1.2rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  /* Usage instructions */
+  .instructions {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .instructions ol {
+    padding-left: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .instructions li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .instructions li strong { color: var(--text); }
+  .code-block {
+    background: #f0edf9;
+    border: 1px solid rgba(49,27,146,0.1);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--primary);
+    margin-top: 0.8rem;
+    line-height: 1.8;
+  }
+
+  /* Quote */
+  .closing-quote {
+    background: var(--primary-light);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 1.4rem 1.6rem;
+    margin-top: 2.5rem;
+  }
+  .closing-quote p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.92rem;
+    color: var(--primary);
+    line-height: 1.75;
+    font-style: italic;
+  }
+  .closing-quote .attribution {
+    margin-top: 0.6rem;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--accent);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">GSD Research Mission Package</div>
+  <h1>States, Symbols,<br>and <em>Tape</em></h1>
+  <p class="subtitle">A Deep Study in Computational Trade-offs</p>
+  <p class="tagline">Shannon's Fungibility Theorem and the GSD Context Window Architecture</p>
+  <div class="pipeline">
+    <span class="pipe-step">Vision</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-step">Research</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-step">Mission</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="meta-strip">
+    <span><strong>Date:</strong> March 28, 2026</span>
+    <span><strong>Profile:</strong> Squadron (12 roles)</span>
+    <span><strong>Modules:</strong> 5</span>
+    <span><strong>Tokens:</strong> ~288K across 5 sessions</span>
+    <span><strong>Status:</strong> Ready for GSD Orchestrator</span>
+  </div>
+
+  <p class="files-heading">Package Files</p>
+  <div class="file-grid">
+    <a href="mission.pdf" download class="file-card">
+      <div class="file-icon icon-pdf">📄</div>
+      <h3>mission.pdf</h3>
+      <p>24-page compiled research package. Three-stage pipeline: Vision → Research Reference → Mission Package.</p>
+      <span class="file-dl">↓ Download PDF</span>
+    </a>
+    <a href="mission.tex" download class="file-card">
+      <div class="file-icon icon-tex">⌨</div>
+      <h3>mission.tex</h3>
+      <p>Full XeLaTeX source. Modify and recompile with three passes to regenerate the PDF.</p>
+      <span class="file-dl">↓ Download Source</span>
+    </a>
+  </div>
+
+  <h2 class="section-heading">Contents Breakdown</h2>
+
+  <div class="stage-block">
+    <div class="stage-header s1">
+      <span class="stage-badge">Stage 1</span>
+      Vision Document
+    </div>
+    <div class="stage-items">
+      <div class="stage-item">Vision narrative — the vibe that Shannon proved</div>
+      <div class="stage-item">5-problem problem statement</div>
+      <div class="stage-item">Computational hierarchy ASCII map (TM → LBA → PDA → FSM)</div>
+      <div class="stage-item">Module architecture ASCII diagram with wave assignments</div>
+      <div class="stage-item">5 research module descriptions (Foundations, Shannon, Hierarchy, Limits, GSD Synthesis)</div>
+      <div class="stage-item">Chipset YAML configuration (Agnus/Denise/Paula/Gary 68000)</div>
+      <div class="stage-item">12 testable success criteria</div>
+      <div class="stage-item">Relationship to other GSD documents</div>
+      <div class="stage-item">The Through-Line: Shannon's theorem as GSD philosophy</div>
+    </div>
+  </div>
+
+  <div class="stage-block">
+    <div class="stage-header s2">
+      <span class="stage-badge">Stage 2</span>
+      Research Reference
+    </div>
+    <div class="stage-items">
+      <div class="stage-item">Module 1 — Formal Foundations: Turing machine definition, configuration space, FSM as special case</div>
+      <div class="stage-item">Module 2 — Shannon Trade-off: both theorem directions, complete UTM frontier table, Wolfram (2,3) caveat</div>
+      <div class="stage-item">Module 3 — Tape-Length Hierarchy: LBA, Chomsky hierarchy, configuration counting argument</div>
+      <div class="stage-item">Module 4 — Limits and Undecidability: halting problem, Rice's theorem, tape necessity</div>
+      <div class="stage-item">Module 5 — GSD Architectural Synthesis: context window as bounded tape, three strategies, DACP formalization</div>
+      <div class="stage-item">Safety and sensitivity considerations table</div>
+      <div class="stage-item">Full source bibliography (Shannon 1956, Turing 1936, SEP, Wikipedia, GeeksforGeeks)</div>
+    </div>
+  </div>
+
+  <div class="stage-block">
+    <div class="stage-header s3">
+      <span class="stage-badge">Stage 3</span>
+      Mission Package
+    </div>
+    <div class="stage-items">
+      <div class="stage-item">Milestone specification with system layers and deliverables table (D1–D7)</div>
+      <div class="stage-item">Component breakdown with model assignments and token estimates</div>
+      <div class="stage-item">Wave execution plan: Wave 0 (Foundation) → Wave 1A/1B (parallel) → Wave 2 (Synthesis) → Wave 3 (Publication)</div>
+      <div class="stage-item">Cache optimization strategy (5-minute TTL exploitation, parallel track layout)</div>
+      <div class="stage-item">Token budget table: 288K total across 5 sessions</div>
+      <div class="stage-item">Dependency graph ASCII diagram</div>
+      <div class="stage-item">Test plan: 40 tests (4 SC + 24 CF + 6 IN + 6 EC)</div>
+      <div class="stage-item">Verification matrix mapping all 14 success criteria to test IDs</div>
+      <div class="stage-item">Squadron crew manifest (12 roles: FLIGHT, PLAN, SCOUT, EXEC×2, CRAFT-THEORY, CRAFT-ARCH, VERIFY, INTEG, CAPCOM, BUDGET, LOG)</div>
+      <div class="stage-item">Execution summary table</div>
+    </div>
+  </div>
+
+  <h2 class="section-heading">How to Run This Mission</h2>
+
+  <div class="instructions">
+    <ol>
+      <li><strong>Hand the PDF to your GSD orchestrator</strong> in Claude Code. The document is self-contained — no additional context required.</li>
+      <li><strong>Start with Wave 0</strong> (Haiku / PLAN agent). Let it produce the terminology schema and source index before launching the parallel tracks.</li>
+      <li><strong>CAPCOM gate after Wave 0:</strong> review the terminology schema before proceeding. This is where you can adjust scope or add terms.</li>
+      <li><strong>Launch Waves 1A and 1B in parallel.</strong> Track A handles MOD-1 (Foundations) and MOD-2 (Shannon). Track B handles MOD-3 (Hierarchy) and MOD-4 (Limits). Both use the Wave 0 schemas as shared prefix — cache hit guaranteed.</li>
+      <li><strong>CAPCOM gate after Wave 2:</strong> review the GSD Architectural Synthesis and integration pass before publication. This is the judgment-heavy output.</li>
+      <li><strong>Wave 3 publication:</strong> Sonnet assembles, verifies sources against the bibliography, runs the test suite, and produces the final document.</li>
+    </ol>
+  </div>
+
+  <h2 class="section-heading">Recompile the LaTeX</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.85rem; color: var(--muted); margin-bottom: 0.6rem;">Three XeLaTeX passes required to resolve TOC, cross-references, and page count:</p>
+    <div class="code-block">
+      xelatex -interaction=nonstopmode mission.tex<br>
+      xelatex -interaction=nonstopmode mission.tex<br>
+      xelatex -interaction=nonstopmode mission.tex
+    </div>
+    <p style="font-size:0.78rem; color: var(--muted); margin-top: 0.6rem;">Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu). Packages: fontspec, xcolor, titlesec, fancyhdr, tabularx, colortbl, booktabs, tcolorbox, hyperref, lastpage.</p>
+  </div>
+
+  <div class="closing-quote">
+    <p>The complexity budget is conserved. Only its denomination changes. A machine with two states and eighteen symbols, a two-subagent pipeline with a structured handoff bundle, a skill-creator that compresses recurring computation into reusable procedures: these are not different philosophies. They are the same insight in different registers.</p>
+    <p class="attribution">— The Through-Line, Stage 1</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Eskimo North BBS</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+  <style>
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.5rem 0; }
+    .mission-card {
+      background: white; border: 1px solid #C8E6C9; border-radius: 6px;
+      padding: 1.2rem; text-decoration: none; color: inherit; transition: box-shadow 0.2s, border-color 0.2s;
+      display: block;
+    }
+    .mission-card:hover { box-shadow: 0 2px 12px rgba(46,125,50,0.12); border-color: var(--terminal); }
+    .mission-card .file-type { font-size: 0.72rem; font-weight: 700; color: var(--terminal); text-transform: uppercase; letter-spacing: 0.05em; }
+    .mission-card h3 { font-size: 1rem; margin: 0.3rem 0; color: var(--crt); }
+    .mission-card p { font-size: 0.85rem; color: #757575; margin: 0; }
+    .verification-matrix { margin: 2rem 0; }
+    .vm-title { font-weight: 700; color: var(--terminal-dark); margin-bottom: 0.5rem; font-family: system-ui, sans-serif; }
+    @media (max-width: 600px) { .mission-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="project-enb">
+  <header>
+    <h1>Eskimo North BBS</h1>
+    <div class="subtitle">BBS History &middot; Community Computing &middot; Dial-Up to Shell &middot; Digital Commons &middot; The Dial-Up Log</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-origins-and-technical-foundations">Origins</a>
+      <a href="page.html?doc=02-unix-transition-and-community-growth">Unix Transition</a>
+      <a href="page.html?doc=03-isp-pivot-and-commercial-era">ISP Pivot</a>
+      <a href="page.html?doc=04-long-term-survival-and-adaptation">Survival</a>
+      <a href="page.html?doc=05-bbs-historical-context-and-ecosystem">BBS Context</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Dial-Up Log &mdash; a deep research study into the history, architecture, and community
+      philosophy of Eskimo North BBS, from its 1982 founding through forty-four years of continuous
+      operation. The anchor case study for the GSD BBS Educational Pack.
+    </blockquote>
+
+    <div class="mission-grid">
+      <a href="mission-pack/eskimonorth-mission.tex" download class="mission-card">
+        <div class="file-type">TEX &middot; XeLaTeX Source</div>
+        <h3>Mission Package (.tex)</h3>
+        <p>Complete three-stage document: vision, research reference, and mission specification. Compile with XeLaTeX (3 passes).</p>
+      </a>
+      <a href="mission-pack/eskimonorth-mission-index.html" class="mission-card">
+        <div class="file-type">HTML &middot; Mission Index</div>
+        <h3>Mission Index</h3>
+        <p>Download hub with file cards, table of contents, usage instructions, and recompilation guide.</p>
+      </a>
+    </div>
+
+    <h2>Verification Matrix: The Dial-Up Log</h2>
+
+    <div class="verification-matrix">
+      <table>
+        <thead>
+          <tr>
+            <th>Success Criterion</th>
+            <th>Test ID(s)</th>
+            <th>Module(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Sourced timeline, 20+ events</td><td>CF-01, CF-02</td><td>M1, M2, M3, M4</td></tr>
+          <tr><td>Six hardware generations documented</td><td>CF-03, CF-04</td><td>M1, M2, M4</td></tr>
+          <tr><td>BBS-to-ISP transition as teaching model</td><td>CF-05, CF-06</td><td>M3</td></tr>
+          <tr><td>Five operator philosophy principles</td><td>CF-07</td><td>M4</td></tr>
+          <tr><td>National BBS context with quantitative data</td><td>CF-08, CF-09</td><td>M5</td></tr>
+          <tr><td>Three comparative cases documented</td><td>CF-10</td><td>M5</td></tr>
+          <tr><td>Six design patterns with GSD mapping</td><td>CF-11, IN-01</td><td>M4, M5</td></tr>
+          <tr><td>Eight BBS Educational Pack items</td><td>CF-12</td><td>All</td></tr>
+          <tr><td>All numerical claims attributed</td><td>SC-NUM</td><td>All</td></tr>
+          <tr><td>Document self-contained</td><td>IN-02</td><td>All</td></tr>
+          <tr><td>Primary source integrity</td><td>SC-SRC, SC-PRIV</td><td>All</td></tr>
+          <tr><td>Through-line articulated</td><td>IN-03</td><td>M1, M4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Safety-Critical Tests</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Test ID</th>
+          <th>Verifies</th>
+          <th>Expected Behavior</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to eskimo.com, IEEE Spectrum, ETHW, Wikipedia, Library of Congress, Boardwatch. Zero entertainment media.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every date, system count, bandwidth figure attributed to named source.</td></tr>
+        <tr><td>SC-PRIV</td><td>Privacy boundary</td><td>No non-public personal details about Robert Dinse beyond what he has published.</td></tr>
+        <tr><td>SC-CULT</td><td>Cultural sensitivity</td><td>The &ldquo;Eskimo&rdquo; naming context documented historically without endorsement.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Execution Summary</h2>
+
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Activation Profile</td><td>Fleet (17 roles)</td></tr>
+        <tr><td>Research Modules</td><td>5 (web) + 6 (mission .tex)</td></tr>
+        <tr><td>Parallel Tracks</td><td>2 (Wave 1A and 1B)</td></tr>
+        <tr><td>Token Budget</td><td>109K input / 53K output</td></tr>
+        <tr><td>Context Windows</td><td>6&ndash;8</td></tr>
+        <tr><td>Sessions</td><td>3&ndash;4</td></tr>
+        <tr><td>Primary Sources</td><td>9</td></tr>
+        <tr><td>Secondary Sources</td><td>8</td></tr>
+        <tr><td>Success Criteria</td><td>12</td></tr>
+        <tr><td>Test Cases</td><td>32 (4 safety-critical)</td></tr>
+        <tr><td>CAPCOM Gates</td><td>1 (post Wave 1)</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Eskimo North BBS &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

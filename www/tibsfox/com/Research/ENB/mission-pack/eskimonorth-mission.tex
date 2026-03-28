@@ -1,0 +1,1091 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% History domain color scheme
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — Section headers
+\definecolor{secondary}{HTML}{E65100}     % Burnt amber — Subsection headers
+\definecolor{tertiary}{HTML}{4E342E}      % Warm brown — Subsubsection headers
+\definecolor{accent}{HTML}{7B1FA2}        % Mid purple — Highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Pale lavender — Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Pale amber
+\definecolor{lighttertiary}{HTML}{EFEBE9} % Pale brown
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\color{darktext}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Eskimo North BBS --- History \& Community System Analysis}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Eskimo North BBS -- Full History and Community System Analysis -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ──────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Eskimo North BBS\\[0.3em]History \& Community System Analysis}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Seattle, Washington --- 1982 to Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ───────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Eskimo North BBS --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-bbs-educational-pack-vision.md, gsd-skill-creator-analysis.md}
+\metafield{Context:}{Deep research into Eskimo North BBS --- the Seattle-area system founded in 1982 by Robert Dinse (``Nanook'') that survived every disruption in computing history to become a still-operating ISP and shell service provider in Shoreline, WA. The study examines Eskimo North as a primary example for the GSD BBS Educational Pack and as a case study in community longevity, operator philosophy, and the BBS-to-ISP evolutionary path.}
+
+\subsection{Vision}
+
+In late 1981, a man named Robert Dinse bought a Tandy TRS-80 Model III to produce a newsletter. He added a 300-baud modem so collaborators could access the machine remotely. War dialers found it almost immediately. He put up a primitive BBS front-end to stop them from wrecking his files. He didn't know that casual act of self-defense was the founding moment of a system that would still be running forty-four years later.
+
+That system became Eskimo North --- named after a friendly argument about geography between two Seattle BBS sysops trying to prevent their users from confusing two systems called ``Minibin.'' The name came from Frank Zappa and a practical joke about what lives up north. The handle ``Nanook'' came from the same source, and Dinse has used it on every system he's ever administered since.
+
+This is not the story of a venture-backed platform or a corporate infrastructure play. Eskimo North is a sole proprietorship that incorporated in 1995. It ran 256 phone lines from a man's basement. It was so popular by late 1984 that someone would connect the instant a modem was freed up at 4 AM. It got mentioned in a book about BBSes --- ``a strange system; you must call at least once even if it's long distance'' --- and that endorsement made the name permanent. It rode out the Unix transition, the Internet transition, co-location, hardware generation after hardware generation, and the near-total collapse of the BBS industry, and it is still answering the phone.
+
+For the GSD BBS Educational Pack and the broader College of Knowledge, Eskimo North is the anchor case study: a living primary source proving that the principles behind BBS architecture --- tight community, operator-as-steward, services adapted to user needs, structured conversation over noisy broadcast --- are not nostalgic artifacts. They are design wisdom. The ``spaces between'' that made Eskimo North more than a file server are the same spaces that make skill-creator more than a YAML parser. Community lives in the connections.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Primary source scarcity:} Most BBS history is reconstructed from secondary accounts, Textfiles.com archives, and Jason Scott's documentary work. Eskimo North is unusual in having a living sysop who wrote his own history and whose system is still accessible. That primary source richness is not yet fully documented for educational use.
+
+  \item \textbf{Survival mechanisms undocumented:} Eskimo North survived the 1994--1995 BBS collapse, the DSL transition, the dial-up sunset, and two co-location relocations. The architectural and philosophical decisions that enabled this survival have not been systematically analyzed as design patterns for community systems.
+
+  \item \textbf{BBS-to-ISP transition poorly understood:} Industry statistics show 95\% of ISPs formed in 1993--1995 were former BBSes. Eskimo North is one of the oldest surviving examples of this metamorphosis, yet the specific decision sequence (BBS 1982 $\rightarrow$ Unix timeshare 1985 $\rightarrow$ ISP 1992 $\rightarrow$ incorporation 1995) has not been analyzed as a replicable model.
+
+  \item \textbf{Operator philosophy not extracted:} Robert Dinse's operating philosophy --- ``knowledgeable human assistance, not telephone trees or script readers'' --- is repeated consistently across four decades but has never been mapped to specific architectural decisions (shell accounts, human-answered support, community-directed development).
+
+  \item \textbf{GSD BBS Educational Pack lacks a concrete anchor:} The existing BBS Educational Pack vision describes the era in the abstract. It needs a specific, deeply-researched case study that can ground the educational modules in a real system with real decisions and real consequences. Eskimo North is that anchor.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Community system longevity as a function of operator philosophy plus adaptive architecture.
+
+The core insight is that Eskimo North did not survive by being a technology leader. It survived by being a community steward. The technology served the community; the community justified the technology upgrades; the operator's philosophy held both together. This tripartite structure --- community, technology, philosophy --- and the ways each layer reinforced the others across six decades of disruption is the core subject of this research mission.
+
+\subsubsection{Timeline Map}
+
+\begin{asciibox}
+1981   Late 81: TRS-80 Model III, newsletter, 300-baud modem, "STIX"
+        |
+1982   BBS goes live. War dialers force formal BBS front-end.
+        |        Minibin South / Minibin North naming dispute.
+        |        "Eskimo North" coined. Diverges from Minibin codebase.
+        |        3MB storage (4x 80K drives) -- enormous for era.
+        |        ~13 Infocom games online. ~20 BBS's in Seattle area.
+        |
+1984   By year-end: someone connects INSTANTLY when modem freed at 4AM.
+        |        Multi-user capability becomes unavoidable.
+        |
+1985   --------> UNIX TRANSITION
+        |        Tandy Model 16B (first Unix host)
+        |        -> Tandy 6000
+        |        Handle "Nanook" adopted (Frank Zappa reference).
+        |
+1991   Sun 3/180 -> Sun 3/280 -> Sun 4/280
+        |        News split to dedicated 4/330 + second 4/330.
+        |        NW-Nexus / "Connected" dial-up Internet access.
+        |
+1992   --------> INTERNET / ISP TRANSITION
+        |        CIX membership. Sprint T1 ordered.
+        |        Grows to three T1's.
+        |
+1993-  4x 64-port comms servers, 256 phone lines, modems in basement.
+1995   Sole proprietorship -> INCORPORATED 1995.
+        |        Dinse leaves Qwest/US West to run Eskimo full-time.
+        |
+Late   Move to Electric Lightwave co-location facility.
+1990s  SunOS -> Linux. Ultra-2 64-bit Sparc platforms.
+        |
+2000s  Sun Sparc -> Intel i7-2600 homebrew servers.
+        |        DSL outsourced via GlobalPOPs -> Ikano/Mammoth.
+        |
+2012   Move to Isomedia co-location (December 28, 2012).
+        |        Citadel BBS launched (telnet + web).
+        |        phpBB-based web BBS launched.
+        |
+2025+  Still operating: eskimo.com
+        Shell accounts, email, hosting, web apps.
+        P.O. Box 55816, Shoreline, WA 98155. (206) 812-0051.
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+  MODULE 01          MODULE 02          MODULE 03
+  Origins &          Unix Transition    ISP Pivot &
+  Technical          & Community        Commercial Era
+  Foundations        Growth             (1992-2000)
+  (1978-1985)        (1985-1992)
+       |                  |                  |
+       +------------------+------------------+
+                          |
+             MODULE 04          MODULE 05
+             Long-Term          BBS Historical
+             Survival           Context &
+             (2000-Present)     Ecosystem
+                  |                  |
+                  +------------------+
+                          |
+                     MODULE 06
+                     Legacy, Design
+                     Patterns &
+                     GSD Integration
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Origins and Technical Foundations (1978--1985)}
+
+The pre-history of Eskimo North: pirate radio, Pacific Northwest Bell employment, the newsletter, the TRS-80, the accidental BBS. Covers: COMBASIC assembly driver, Minibin software relationship with Glenn Gorman, the STIX-to-Eskimo-North naming sequence, the 3MB storage acquisition and Infocom game library, and the broader Seattle BBS ecosystem of the early 1980s. Contextualizes against the national BBS landscape: CBBS (1978), the Hayes Smartmodem (1981), and the conditions that made sysops like Dinse possible.
+
+\subsubsection{Module 02 --- Unix Transition and Community Growth (1985--1992)}
+
+The decision to go multi-user and why Unix won over CP/M and OS/9. Hardware progression through Tandy Model 16B, Tandy 6000, and the Sun 3/x series. The Pirates of Puget Sound as a multi-player inspiration. CompuServe as a motivation model. The ``Nanook'' handle origin. Community culture during the transition: what users expected, what the Unix environment offered, and how the messaging/community layer was preserved (mmbbs, room-based news). Access patterns and the early hints of Internet connectivity via Kirk Moore's ``Connected'' service.
+
+\subsubsection{Module 03 --- ISP Pivot and Commercial Era (1992--2000)}
+
+The CIX formation in 1992 as the critical external event. The progression from dial-up Internet access to Sprint T1 to three T1s. The peak infrastructure moment: 4 x 64-port communications servers, 256 dedicated phone lines, modems filling a basement. The incorporation decision in 1995. Departure from US West/Qwest to run Eskimo full-time. The move to Electric Lightwave co-location. Industry context: the BBS collapse of 1994--1995, and how Eskimo North executed the ISP metamorphosis that 95\% of surviving BBS operators attempted but fewer completed.
+
+\subsubsection{Module 04 --- Long-Term Survival and Adaptation (2000--Present)}
+
+Hardware generation transitions: Sun SPARC $\rightarrow$ Intel i7-2600. The Isomedia co-location move (December 2012, under two hours of downtime). DSL outsourcing to GlobalPOPs, then Ikano and Mammoth. The phpBB web BBS launch (circa 2012). The Citadel BBS revival (telnet + web, 2012). Website modernization for mobile. The current service model: email (anti-virus, spam filtering, mail automation), shell accounts with full remote desktop, web hosting, web development, programming environments. The operator philosophy as expressed in current marketing: ``Knowledgeable human assistance, not telephone trees or script readers.''
+
+\subsubsection{Module 05 --- BBS Historical Context and National Ecosystem}
+
+The full arc of BBS history as context for Eskimo North's significance. CBBS 1978, the Smartmodem effect, the golden age (1985--1994), the 60,000-system peak. FidoNet, ANSI art, door games, Usenet gateways. The Mosaic/NCSA browser impact beginning 1993. The 1994--1995 collapse: from 60,000 to 10,000 active systems in two years. The ISP metamorphosis: Jack Rickard's 1995 estimate that 95\% of new ISPs were former BBSes. The long tail of BBS survival: from phone lines to telnet, from telnet to hobbyist communities. Comparative cases: The WELL (Sausalito), Halcyon (Seattle), the PTT Bulletin Board System (Taiwan, still dominant). Textfiles.com and Jason Scott's documentary preservation work.
+
+\subsubsection{Module 06 --- Legacy, Design Patterns, and GSD Integration}
+
+Extraction of generalizable design patterns from the Eskimo North case study. The ``steward operator'' model versus the ``product manager'' model. Community-directed development as a longevity mechanism. The architectural decisions that enabled survival: early Unix adoption (hardware-agnostic), early Internet adoption (pre-commercial), co-location (scale without capital intensity), service diversification (shell + email + hosting as complementary revenue streams). Mapping to GSD principles: the Amiga Principle in sysop practice, ``spaces between'' in BBS community architecture, DACP as the modern equivalent of clean protocol discipline. Recommendations for the GSD BBS Educational Pack: which Eskimo North artifacts, decisions, and community patterns to include as teaching material.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml -- Eskimo North History Research Mission
+chipset:
+  name: "eskimo-north-history-mission"
+  version: "1.0.0"
+  description: "Full history and community system analysis of Eskimo North BBS"
+  derived_from: "research-mission-generator"
+  category: "history-research"
+
+agnus:          # Orchestration / context management (Opus)
+  role: FLIGHT
+  model: claude-opus-4-6
+  responsibility: "Mission direction; wave go/no-go; synthesis oversight"
+
+denise:         # Output rendering (Sonnet)
+  role: EXEC
+  model: claude-sonnet-4-6
+  responsibility: "Document assembly; table formatting; section production"
+
+paula:          # I/O and research anticipation (Sonnet)
+  role: SCOUT
+  model: claude-sonnet-4-6
+  responsibility: "Source gathering; web research; citation verification"
+
+agents:
+  CRAFT-HIST:   # Technical computing history specialist (Opus)
+    model: claude-opus-4-6
+    focus: "BBS era, Unix history, early ISP formation"
+  CRAFT-COMM:   # Community systems specialist (Sonnet)
+    model: claude-sonnet-4-6
+    focus: "Community governance, operator philosophy, user culture"
+  CRAFT-ARCH:   # System architecture analyst (Sonnet)
+    model: claude-sonnet-4-6
+    focus: "Hardware progression, software transitions, co-lo decisions"
+  INTEG:        # Cross-module integration (Opus)
+    model: claude-opus-4-6
+    focus: "Pattern extraction, GSD mapping, design principle synthesis"
+  VERIFY:       # Source validation (Sonnet)
+    model: claude-sonnet-4-6
+    focus: "Citation accuracy, date verification, claim attribution"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Complete organizational timeline from pre-1982 origins to 2025 operating status
+  \item Technical architecture evolution: hardware platforms, software stack, network infrastructure
+  \item Operator biography (Robert Dinse / ``Nanook''): background, decisions, philosophy
+  \item Community culture: user base, governance model, community-directed development
+  \item BBS national context: CBBS origins through industry collapse and ISP metamorphosis
+  \item Comparative cases: The WELL, Halcyon (Seattle), PTT (Taiwan), as counterpoints
+  \item Design pattern extraction: survival mechanisms mapped to generalizable principles
+  \item GSD integration: specific recommendations for BBS Educational Pack anchor material
+  \item Primary sources: eskimo.com history page, Dinse's own writing, Yelp/BBB records as corroboration
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Current subscriber counts or financial details (private, not disclosed)
+  \item Personal biographical details about Robert Dinse beyond what he has published
+  \item Technical implementation of GSD BBS Educational Pack itself (separate mission)
+  \item Comprehensive FidoNet network history (reference only, not primary subject)
+  \item International BBS history beyond PTT as a comparative case
+  \item Legal or regulatory history of BBS-era computer law (e.g., Steve Jackson Games raid)
+  \item Hardware vendor histories (Tandy, Sun, Intel) beyond operational context
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A complete, sourced organizational timeline from 1981 to 2025 with at least 20 documented events, each attributed to primary or authoritative secondary sources.
+  \item Technical architecture evolution documented across all six hardware generations (TRS-80 $\rightarrow$ Tandy 16B $\rightarrow$ Sun 3 $\rightarrow$ Sun 4 $\rightarrow$ SPARC $\rightarrow$ Intel i7), with dates and motivations for each transition.
+  \item The BBS-to-ISP transition sequence (1991--1995) documented in sufficient detail that it can serve as a teaching model: what triggered the pivot, what infrastructure decisions were made, and what the result looked like at peak (256 lines).
+  \item Operator philosophy extracted and documented as at least five named principles, each grounded in specific documented decisions or statements by Dinse.
+  \item National BBS context documented with quantitative data: peak system counts, user estimates, industry collapse timeline, and the ISP metamorphosis statistic (95\% figure from Boardwatch).
+  \item At least three comparative cases (The WELL, Halcyon, PTT) documented with sufficient detail to support contrast with Eskimo North's survival model.
+  \item Six generalizable design patterns extracted from the case study, each with: a name, a one-sentence definition, Eskimo North evidence, and a GSD ecosystem mapping.
+  \item GSD BBS Educational Pack integration section specifying at least eight concrete artifacts, narrative elements, or teaching modules that Eskimo North history should contribute.
+  \item All numerical claims (dates, system counts, bandwidth figures, phone line counts) attributed to named sources.
+  \item Document is self-contained: a reader with no prior BBS knowledge can read Stage 2 and understand the full story without external references.
+  \item Primary source integrity maintained: all quotes from Robert Dinse's own writing clearly attributed and paraphrased to avoid reproduction of substantial passages.
+  \item The through-line between Eskimo North's longevity principles and GSD ecosystem design philosophy is explicitly articulated in the synthesis section.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+gsd-bbs-educational-pack-vision.md & Primary consumer --- Eskimo North becomes the anchor case study for the educational pack \\
+gsd-skill-creator-analysis.md & Community-directed development as a parallel to skill-creator's observation loop \\
+gsd-amiga-vision-architectural-leverage.md & Amiga Principle expressed in sysop practice: clever architecture over raw resources \\
+gsd-os-desktop-vision.md & GSD-OS shell panel as the modern equivalent of the BBS terminal interface \\
+gsd-fair-use-educational-mission.md & Governs how Dinse's writing and Eskimo North materials are referenced and attributed \\
+the-space-between.docx & Mathematical and philosophical spine --- the ``spaces between'' as a lens for BBS community architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Robert Dinse did not build a technology product. He built a place. From the moment war dialers found his newsletter machine and he responded by making it a welcoming front door rather than a locked gate, every subsequent decision was a place-making decision. More storage meant more things to explore. Unix meant more users could be there at the same time. The Internet meant the place could grow without the phone bill. Co-location meant the place could survive a power outage in the operator's house. The philosophy didn't change across four decades --- ``knowledgeable human assistance, not telephone trees or script readers'' --- because the philosophy was never about the technology. It was about the relationship between the steward and the community.
+
+This is what the GSD BBS Educational Pack ultimately teaches, and why Eskimo North is the right anchor. The ``spaces between'' is not a metaphor when applied to community systems. It is literal: the value was never in the files, never in the message boards, never in the Infocom games. The value was in the connections those things made possible. The modem screaming through a negotiation wasn't protocol noise. It was a handshake. It was two machines agreeing, in structured ceremony, to understand each other. Eskimo North understood that and held it for forty-four years. The GSD skill-creator ecosystem, in its own way, is trying to do the same thing --- to build places where agents and humans can make that handshake, and then get to work.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Eskimo North BBS --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section compiles sourced research findings organized by module. It is the ground-truth reference for any agent producing the final deliverable. Every claim is attributed. All primary sources are listed in the bibliography.
+
+\textbf{Key source organizations and primary sources:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{eskimo.com/information/history/} --- Robert Dinse's own written history of Eskimo North, the primary source for all origin and evolution data
+  \item \textbf{IEEE Spectrum} --- ``Social Media's Dial-Up Ancestor: The Bulletin Board System'' (authoritative historical overview)
+  \item \textbf{Engineering and Technology History Wiki (ETHW)} --- Bulletin Board Systems entry with quantitative data on system counts and adoption
+  \item \textbf{Wikipedia / Bulletin board system} --- Secondary synthesis with citations, used for corroboration of counts and dates
+  \item \textbf{Boardwatch Magazine} (via IEEE Spectrum citation) --- Jack Rickard's 1995 ISP/BBS statistic
+  \item \textbf{LinkedIn / Robert Dinse profile} --- Corroboration of incorporation and key dates
+  \item \textbf{Yelp / BBB records} --- Business status corroboration (still operating as of June 2025)
+  \item \textbf{Narkive Usenet archive} --- Dinse's own newsgroup posts announcing phpBB BBS, community forums list
+\end{itemize}
+
+\subsection{Module 01 Reference --- Origins and Technical Foundations (1978--1985)}
+
+\subsubsection{Pre-BBS Background}
+
+Robert Dinse developed a lifelong interest in electronic communications beginning in early childhood, shaped by a transistor radio given to him during a hospital stay for pneumonia. This progressed through pirate AM radio operation in junior high and high school (including stations running up to approximately 1 kW), obtaining an FCC First Class Radio Telephone Operators license, and employment with Pacific Northwest Bell / US West, where he gained familiarity with computers and printers.
+
+In late 1981, Dinse purchased a Tandy TRS-80 Model III (with Scriptsit word processing software and an LPR VIII dot matrix printer) to produce a community newsletter. He connected a 300-baud modem to enable remote access for newsletter collaborators. Initially, the system had no login or security.
+
+\subsubsection{The STIX-to-Eskimo-North Transition}
+
+War dialing --- automated sequential phone number scanning to find accessible systems --- quickly found the unprotected machine. Dinse responded by installing a BBS front-end. He named the system \textbf{STIX} (Soft Touch Information Exchange), chosen partly because his assigned telephone number was 527-SOFT, with the coincidental voice number 527-HARD. The ``soft touch'' also referred to a UI innovation: Dinse used the BASIC \texttt{\$INKEY} function for menus that responded immediately on keypress rather than requiring a Return keystroke.
+
+Dinse wrote an assembly language driver for the TRS-80 and developed a modified BASIC he called \textbf{COMBASIC}, which included keywords and functions designed specifically for BBS operation. A contemporary named Glenn Gorman had written a BBS program called \textbf{Minibin}. The two worked out an arrangement: Dinse would port COMBASIC to Gorman's hardware, Gorman would sell the combined package and they'd split returns. The commercial arrangement did not succeed; Dinse lost interest in selling the software and focused on running the board.
+
+When the two systems were both running under the ``Minibin'' name (with Gorman's board gaining a ``South'' designation and Dinse's a ``North'' designation), users were confused about why their accounts didn't transfer between systems. Gorman renamed his system ``Jamaica South.'' Dinse's reasoning: \textit{what's up north? Eskimos.} The system became \textbf{Eskimo North}. A book on BBS systems published by an Alaskan author mentioned it as ``a strange system; you must call at least once even if it's long distance'' --- and the name stuck.
+
+\subsubsection{Hardware and Capabilities}
+
+The founding hardware: 2 MHz Z-80 processor (TRS-80 Model III), 48 KB RAM, two single-sided 40-track floppy drives (approximately 180 KB each). Dinse subsequently acquired four double-sided 80 KB drives cheaply, yielding approximately 3 MB of total storage --- described by Dinse himself as ``BIG for a BBS'' in the 1982--83 time frame. A user modified an Infocom game driver to use a UID number (stored in memory) to create per-user save files. The system carried approximately 13 Infocom games. Approximately 20 BBS systems operated in the greater Seattle area at this time.
+
+By the end of 1984, Eskimo North had grown to the point where disconnecting the modem at 4 AM and reconnecting it immediately resulted in an instant connection from a waiting user.
+
+\subsubsection{National BBS Context (1978--1985)}
+
+The first public dial-up BBS, \textbf{CBBS} (Computerized Bulletin Board System), was created by Ward Christensen and Randy Suess of the Chicago Area Computer Hobbyists' Exchange (CACHE) during the blizzard of February 1978. CBBS logged 253,301 callers before retirement. The Hayes Smartmodem (1981) was the critical enabling hardware: it used the serial port and allowed software to send dial commands, dramatically reducing setup complexity. By 1988, an estimated 5,000 BBSes operated in the United States, growing to approximately 25,000 by 1992.
+
+\subsection{Module 02 Reference --- Unix Transition and Community Growth (1985--1992)}
+
+\subsubsection{The Decision for Unix}
+
+With Eskimo North at capacity on its single-line TRS-80 architecture, Dinse evaluated multi-user operating systems. He eliminated CP/M (limited to 64 KB address space) and OS/9 (limited hardware architecture reach). Unix offered hardware independence and adequate address space. Motivation sources cited by Dinse include: a trial CompuServe account (multi-user capabilities as a model), the \textbf{Pirates of Puget Sound} system (PPS, run by Dan Cascioppo, Rich Williamson, Ron McCrae, Tony Gorton, and others --- multi-player adventure games running across Apple computers via multi-serial cards), and a CP/M system called Mu-Mon operated by HeathKit featuring editors and programming languages online.
+
+\subsubsection{Hardware Progression}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Era} & \tableheader{Platform} & \tableheader{Notes} \\
+\midrule
+1982--1985 & TRS-80 Model III & 2 MHz Z-80, 48 KB RAM, 300-baud modem, single-line BBS \\
+1985 & Tandy Model 16B & First Unix host; outgrown \\
+Mid-1980s & Tandy 6000 & Outgrown \\
+Fall 1991 & Sun 3/180 & Major capability step; later upgraded to 3/280 \\
+Early 1990s & Sun 4/280 & News split to separate Sun 4/330; second 4/330 added \\
+Late 1990s & Sun Ultra-2 (64-bit SPARC) & Transition from SunOS to Linux; 32-bit instability issues \\
+2000s--2010s & Intel i7-2600 (homebrew) & ``Extremely stable'' on Linux; currently serving as primary platform \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The ``Nanook'' Handle}
+
+When Dinse moved to a Unix platform, he needed a login handle. The only Eskimo name he knew was ``Nanook,'' from Frank Zappa's song ``Don't Eat the Yellow Snow.'' He has used that handle --- and it has been used by others to address him --- on every system he has administered since.
+
+\subsubsection{Community Continuity Through Transition}
+
+When moving to Unix, the BBS message/room interface was initially lost. Dinse eventually ran a system called \textbf{mmbbs} which provided a room-based interface for news. As the Internet era began and shell-based text interfaces became less popular among general users, the traditional BBS community layer gradually migrated to other forms (web forums, then phpBB, then Citadel).
+
+\subsection{Module 03 Reference --- ISP Pivot and Commercial Era (1992--2000)}
+
+\subsubsection{Path to Internet Access}
+
+In 1991, prior to the formation of the first Commercial Internet Exchange (CIX), Nw-Nexus obtained Internet access. Kirk Moore got access through Nw-Nexus via his service ``Connected.'' Dinse obtained access through Moore's service. This progressed from dial-up to a 56 Kbps dedicated circuit, then to a T1.
+
+The CIX was formed in 1992. Dinse ordered a Sprint T1 and purchased CIX membership. Over time, the operation grew to three T1 lines.
+
+\subsubsection{Peak Infrastructure}
+
+At peak dial-up capacity, Eskimo North operated:
+\begin{itemize}[leftmargin=1.5em]
+  \item 4 × 64-port communications servers (256 total modem ports)
+  \item 256 dedicated phone lines and modems, routed into Dinse's basement
+  \item Three T1 lines (bandwidth saturation was the trigger for co-location consideration)
+\end{itemize}
+
+\subsubsection{Incorporation and Full-Time Operation}
+
+Eskimo North operated as a sole proprietorship until 1995, when it was incorporated. That same period, Dinse left his employment with US West / Qwest to run Eskimo North full-time. He had toured Electric Lightwave's co-location facilities during his Qwest tenure and was impressed by their redundancy and organization. The move to Electric Lightwave co-location was driven by: (1) T1 bandwidth saturation in the basement operation, (2) poor Qwest line quality due to 25,000-foot cable distance from the central office causing severe signal attenuation, and (3) MUX equipment incompatibility with 56 Kbps service.
+
+\subsubsection{National BBS Industry Context (1992--1995)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value and Source} \\
+\midrule
+US BBSes at peak (1994) & Approximately 60,000 (InfoWorld estimate, cited in Wikipedia/BBS article) \\
+US BBS users at peak & Approximately 17 million (InfoWorld, 1994) \\
+US BBSes by 1997 & Approximately 10,000 (ETHW, down from 45,000 in 1995) \\
+ISPs formed 1993--1995 that were former BBSes & Over 95\% of 3,240 ISPs (Jack Rickard, Boardwatch, December 1995, via IEEE Spectrum) \\
+Total BBSes ever operated & Estimated 106,418 between 1978 and 2004 (Jason Scott, BBS: The Documentary) \\
+Active telnet BBSes today & Approximately 373--982 (Telnet BBS Guide, various dates) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Mosaic browser (1993) and inexpensive dial-up ISP access triggered a rapid market collapse beginning late 1994. Most leading BBS software providers went bankrupt within a year. Tens of thousands of systems shut down. Eskimo North executed the ISP metamorphosis successfully by having already adopted Unix (1985) and Internet access (1991--1992) before the mass-market disruption hit.
+
+\subsection{Module 04 Reference --- Long-Term Survival and Adaptation (2000--Present)}
+
+\subsubsection{Hardware and Infrastructure Transitions}
+
+The transition from Sun Ultra-2 SPARC to Intel i7-2600 homebrew servers represented Eskimo North's final major hardware platform change. Dinse described the i7-2600 as serving ``extremely well'' with Linux optimized for the architecture.
+
+The co-location at Integra became untenable by 2012 due to cost escalation (Integra raised rates from 1.5x to 2.5x the competitor rate without explanation) and reliability problems (generator failure during a commercial power outage, temperature reaching 108°F in the facility during an AC loss). On December 28, 2012, Eskimo North moved to an Isomedia co-location facility with less than two hours of downtime.
+
+\subsubsection{Service Evolution}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Service} & \tableheader{Description} \\
+\midrule
+Shell accounts & Full remote desktop access, office suite, IRC, program development, web development \\
+Email & Anti-virus scanning, customizable spam filtering, mail automation; multiple webmail clients (RoundCube, RainLoop, ownCloud) \\
+Web hosting & Custom content \\
+phpBB web BBS & Launched circa 2012; free to all, no Eskimo account required; forums include The Bar, Web Development, Photography, Unix Shell, Politics, Religion/Spirituality, Flame, and others \\
+Citadel BBS & Launched December 2012; accessible via telnet (citadel.eskimo.com) and web (port 8080); user-created rooms \\
+Dial-up (legacy) & Outsourced through GlobalPOPs; DSL outsourced via Ikano, Mammoth, and others \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Current address: P.O. Box 55816, Shoreline, WA 98155. Tel: (206) 812-0051. Business hours as listed (Yelp, updated June 2025): Monday--Sunday, 9 AM -- 9 PM. Business status: still operating as of the date of this research (March 2026).
+
+\subsubsection{Operator Philosophy Statements}
+
+Dinse's documented philosophy statements, drawn from his own writing:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Principle} & \tableheader{Direct Quotation Context and Paraphrase} \\
+\midrule
+Human-first support & Marketing tagline consistent across decades: ``Knowledgeable human assistance, not telephone trees or script readers'' \\
+Community direction & Dinse wrote that he has ``always tried to let your needs direct the future of Eskimo North's development'' and that community input is essential because his own predictive abilities are limited \\
+Service breadth & Goal of providing the most flexible email available, with services users can customize to their actual needs \\
+Incremental openness & New community features (phpBB, Citadel) launched with open registration, seeded by existing community, inviting user-created content and topics \\
+Iterative modernization & Website repeatedly re-done for accessibility, then for mobile; stated goal of web-authenticated Linux account management \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05 Reference --- BBS Historical Context and National Ecosystem}
+
+\subsubsection{Origins: CBBS (1978)}
+
+Ward Christensen and Randy Suess of CACHE created CBBS during the Chicago blizzard of February 16, 1978. Christensen's prior ``bulletin board'' concept was adapted from the club's physical push-pin board. Randy Suess's house was chosen for placement to maximize local-call reach. The system logged 253,301 callers before retirement. The CBBS software design --- modular, message-centric, permission-layered --- influenced virtually all subsequent BBS software.
+
+\subsubsection{The Golden Age (1985--1994)}
+
+The BBS golden age is broadly identified as 1985--1994, with peak density in 1987--1994. Enabling factors: the Hayes Smartmodem (1981) making modem operation accessible; affordable 1200-baud and 2400-baud modems; falling hard drive prices enabling large file libraries; dedicated BBS software ecosystems (TBBS, PCBoard, Wildcat!, Synchronet, VBBS); and the emergence of FidoNet (Tom Jennings, 1984) enabling inter-BBS echomail and netmail.
+
+By 1994, \textit{InfoWorld} estimated 60,000 BBSes serving 17 million US users --- a user base larger than major commercial online services including CompuServe. Three monthly magazines served the industry: Boardwatch, BBS Magazine, and (in Asia/Australia) Chips 'n Bits.
+
+\subsubsection{The Collapse and ISP Metamorphosis (1993--1997)}
+
+Mosaic (1993) and affordable consumer Internet access began the collapse late 1994. Most BBS software vendors went bankrupt within twelve months. The estimated US active system count fell from approximately 45,000 in 1995 to approximately 10,000 by 1997. However, the story is not simply destruction: in December 1995, Boardwatch editor Jack Rickard estimated that over 95\% of the 3,240 ISPs created in the previous two years were former BBSes. The modem infrastructure, community management expertise, and customer relationships built by sysops translated directly into viable ISP businesses.
+
+\subsubsection{Comparative Cases}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{System} & \tableheader{Location / Era} & \tableheader{Notes} \\
+\midrule
+The WELL & Sausalito, CA (1985--present) & Whole Earth 'Lectronic Link; Grateful Dead community; influential on internet community design; still operating as commercial service \\
+Halcyon & Seattle, WA (1980s) & Contemporary of Eskimo North in the Seattle BBS scene; referenced in MPU Talk nostalgia thread \\
+PTT Bulletin Board System & Taiwan (1995--present) & Still enormously popular; millions of active users; text-based; demonstrates that BBS model survives in right cultural context \\
+The Outer Limits / Challenge & Seattle, WA area (early 1980s) & Contemporaries of Eskimo North mentioned in Seattle BBS nostalgia discussions \\
+Software Creations & Clinton, MA & File-distribution BBS; early Doom level sharing; example of niche-community BBS model \\
+The Back Door & San Francisco, CA & LGBT community BBS; example of identity-community BBS model \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Preservation Efforts}
+
+Jason Scott's \textit{BBS: The Documentary} (2005) estimated at least 106,418 BBSes operated between 1978 and 2004. Textfiles.com archives BBS text files and documentation. The Telnet BBS Guide tracks active systems accessible via Telnet (373--982 active as of various recent counts). The Internet Archive holds historical BBS content.
+
+\subsection{Module 06 Reference --- Legacy, Design Patterns, and GSD Integration}
+
+\subsubsection{Generalizable Design Patterns from Eskimo North}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pattern Name} & \tableheader{Definition} & \tableheader{GSD Mapping} \\
+\midrule
+Steward Operator & The system operator is a community steward, not a product manager; decisions prioritize community need over revenue optimization & Skill-creator's observation loop serves the user's working patterns, not a predetermined feature roadmap \\
+Defense as Welcome Mat & Security mechanisms should not block legitimate users; the BBS front-end was defensive but remained inviting & GSD's safety-by-structure principle: sandboxing and push.default=nothing protect without blocking the flow of work \\
+Platform Independence First & Adopting hardware-agnostic platforms (Unix over CP/M) enables survival across hardware generations & GSD's fresh-context subagent architecture: agents communicate via structured bundles (DACP) not platform-specific state \\
+Community-Directed Development & Feature roadmap follows observed user needs; ``I've always tried to let your needs direct the future'' & Skill-creator's Observe $\rightarrow$ Detect $\rightarrow$ Suggest loop: the system watches what users do and proposes abstractions \\
+Incremental Internet Adoption & Internet access added as a capability layer before it became an existential threat; not reactive but proactive & GSD's wave-based execution: new capability layers added systematically without disrupting working baselines \\
+Human Interface Preservation & Each platform transition found a way to preserve the human conversational interface (BBS rooms $\rightarrow$ mmbbs $\rightarrow$ phpBB $\rightarrow$ Citadel) & GSD-OS shell panel and BBS educational pack: the terminal aesthetic is not nostalgia; it is clarity of interface \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GSD BBS Educational Pack Integration Recommendations}
+
+\begin{enumerate}
+  \item \textbf{Eskimo North as startup scenario:} The founding story (newsletter $\rightarrow$ war dialers $\rightarrow$ BBS front-end $\rightarrow$ community) should be the opening narrative of the educational pack, demonstrating that the greatest BBS systems emerged from practical problem-solving, not grand plans.
+  \item \textbf{COMBASIC as ``the first skill creator'':} Dinse's custom BASIC extension, built specifically to make BBS operation possible, maps directly to the GSD skill-creator concept: a layer of domain-specific capability built on top of a general-purpose foundation.
+  \item \textbf{The naming sequence:} STIX $\rightarrow$ Minibin North $\rightarrow$ Eskimo North illustrates how community identity crystallizes around a name. Include in the ``community culture'' module.
+  \item \textbf{The 3 MB milestone:} The pride in 3 MB of storage (``BIG for a BBS in 1982--83'') is a perfect calibration exercise for the hardware timeline module, connecting directly to the Amiga Principle.
+  \item \textbf{The Nanook handle:} A Frank Zappa song from 1974 (\textit{Don't Eat the Yellow Snow}) became a forty-year identity. Include in the ``sysop identity and community personas'' section.
+  \item \textbf{The 4 AM instant-connect moment:} The system growing to the point where someone connects instantly at 4 AM is the clearest possible user-experience evidence of community health. Use as the threshold metric for BBS vitality.
+  \item \textbf{The ISP transition decision tree:} Eskimo North's 1991--1995 Internet adoption sequence is a teaching model for the ``BBS to ISP'' module, showing the specific decision points and their consequences.
+  \item \textbf{The Isomedia move narrative:} The December 2012 move (less than two hours of downtime after decades of operation) demonstrates operational discipline and the real costs of infrastructure decisions. Include in the advanced ``sysop operations'' section.
+\end{enumerate}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Robert Dinse personal details & Privacy & Use only what Dinse has published. His history page, LinkedIn profile, and newsgroup posts are fair game. Do not speculate on personal finances, health, or relationships. \\
+``Eskimo'' name appropriateness & Cultural sensitivity & The name was coined in 1982 and predates modern consensus that ``Eskimo'' is often considered offensive to Inuit and Yupik peoples. Document historically without endorsement. Use the system's historical name accurately, and note the context. \\
+Security topics (war dialing, etc.) & Educational scope & Historical context only. No operational instructions for war dialing or other intrusion techniques. \\
+User data / community members & Privacy & No attempt to identify individual users of Eskimo North. Dinse's own public posts are the only named source. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Dinse, Robert (``Nanook''). ``History.'' \textit{Eskimo North Information}. \url{https://www.eskimo.com/information/history/} [Accessed March 2026]
+  \item Dinse, Robert. Newsgroup post: ``Eskimo North BBS.'' \textit{alt.bbs.internet} via Narkive archive. \url{https://alt.bbs.internet.narkive.com/tnGUk8wY/eskimo-north-bbs} [Accessed March 2026]
+  \item Dinse, Robert. ``Citadel.'' \textit{Eskimo North}, December 2012. \url{https://www.eskimo.com/2012/12/citadel/} [Accessed March 2026]
+  \item Dinse, Robert. LinkedIn profile. \url{https://www.linkedin.com/in/robert-dinse-aabb0186/} [Accessed March 2026]
+  \item Eskimo North main website. \url{https://www.eskimo.com/} [Accessed March 2026]
+  \item Eskimo North Yelp listing (established 1982; updated June 2025). \url{https://www.yelp.com/biz/eskimo-north-shoreline}
+\end{itemize}
+
+\subsubsection{Authoritative Secondary Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Driscoll, Kevin. ``Social Media's Dial-Up Ancestor: The Bulletin Board System.'' \textit{IEEE Spectrum}. \url{https://spectrum.ieee.org/social-medias-dialup-ancestor-the-bulletin-board-system} [Accessed March 2026]
+  \item Driscoll, Kevin. ``History of the BBS: Social Media's Dial-up Roots.'' \textit{IEEE Spectrum}. \url{https://spectrum.ieee.org/bulletin-board-system-bbs-history} [Accessed March 2026]
+  \item Engineering and Technology History Wiki. ``Bulletin Board Systems.'' \url{https://ethw.org/Bulletin_Board_Systems} [Accessed March 2026]
+  \item Wikipedia. ``Bulletin board system.'' \url{https://en.wikipedia.org/wiki/Bulletin_board_system} [Accessed March 2026]
+  \item Blank, Matt. ``Before You Were Born: We Had Online Communities.'' \textit{The Signal, Library of Congress}, June 2013. \url{https://blogs.loc.gov/thesignal/2013/06/before-you-were-born-we-had-online-communities/}
+  \item Bunk History. ``The Lost Civilization of Dial-Up Bulletin Board Systems.'' \url{https://www.bunkhistory.org/resources/the-lost-civilization-of-dial-up-bulletin-board-systems}
+\end{itemize}
+
+\subsubsection{Preservation and Documentary Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Scott, Jason (director). \textit{BBS: The Documentary}. 2005. (Cited via IEEE Spectrum and Library of Congress sources for the 106,418 figure and preservation context)
+  \item Textfiles.com. BBS text file archive. \url{https://textfiles.com/}
+  \item Rickard, Jack. \textit{Boardwatch Magazine}, December 1995. (Cited via IEEE Spectrum for the 95\% ISP/BBS figure)
+  \item MPU Talk forum. ``Nostalgia --- The 80's BBS --- Minibin and The Outer Limits.'' August 2018. \url{https://talk.macpowerusers.com/t/nostalgia-the-80s-bbs-minibin-and-the-outer-limits/6083}
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, fully-sourced research document on the complete history of Eskimo North BBS --- from its 1981 pirate-radio-era origins through its four-decade evolution into a still-operating ISP and community hosting service --- that serves as the primary anchor case study for the GSD BBS Educational Pack. The document must extract generalizable design patterns from the Eskimo North survival story, map those patterns to GSD ecosystem principles, and deliver concrete integration recommendations for the educational pack.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION
+  [Haiku] Shared schemas, source index, citation templates, module stubs
+
+WAVE 1A: ORIGINS + UNIX + ISP (parallel)         WAVE 1B: CONTEXT + SURVIVAL (parallel)
+  [CRAFT-HIST/Sonnet] Module 01 Origins              [CRAFT-COMM/Sonnet] Module 05 BBS Context
+  [CRAFT-ARCH/Sonnet] Module 02 Unix Transition      [CRAFT-ARCH/Sonnet] Module 04 Long-term Survival
+  [CRAFT-HIST/Sonnet] Module 03 ISP Pivot
+
+              CAPCOM GATE (human review of modules 01-05)
+
+WAVE 2: SYNTHESIS
+  [INTEG/Opus] Module 06 Design Patterns + GSD Integration
+  [CRAFT-HIST/Opus] Cross-module narrative consistency
+  [Opus] Through-line synthesis
+
+WAVE 3: PUBLICATION + VERIFICATION
+  [VERIFY/Sonnet] Source audit + citation check
+  [EXEC/Sonnet] Final document assembly (LaTeX PDF)
+  [LOG/Sonnet] Commit messages + milestone summary
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation layer:} Shared citation schema, source index (9 primary + 8 secondary sources), module stubs with section headers
+  \item \textbf{Historical survey layer:} Five research modules (01--05) compiled in parallel tracks with sourced findings
+  \item \textbf{Synthesis layer:} Design pattern extraction, GSD mapping, integration recommendations
+  \item \textbf{Publication layer:} Full LaTeX document with all stages, bibliography, and test verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Section} \\
+\midrule
+1 & Stage 1 Vision & Narrative, 5 problems, 6 modules, 12 criteria, through-line & Section 1 \\
+2 & Stage 2 Research Reference & All 6 modules with sourced findings; 20+ timeline events; 6 data tables & Section 2 \\
+3 & Stage 3 Mission Package & Complete wave plan, test plan, crew manifest, verification matrix & Section 3 \\
+4 & Compiled PDF & XeLaTeX, three passes, under 0 errors, all cross-refs resolved & This document \\
+5 & LaTeX source (.tex) & Compilable source for user modification & Companion file \\
+6 & index.html & Download hub with file cards and usage instructions & Companion file \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema + source index & None & Haiku & 2K \\
+Module 01 Origins & Source index & Sonnet & 6K \\
+Module 02 Unix Transition & Module 01 & Sonnet & 5K \\
+Module 03 ISP Pivot & Module 02 & Sonnet & 6K \\
+Module 04 Long-term Survival & Module 03 & Sonnet & 5K \\
+Module 05 BBS Context & Source index & Sonnet & 7K \\
+Module 06 Synthesis + GSD & Modules 01--05 & Opus & 8K \\
+Cross-module narrative check & Modules 01--06 & Opus & 4K \\
+Source audit & All modules & Sonnet & 3K \\
+Document assembly (LaTeX) & All components & Sonnet & 6K \\
+\midrule
+\textbf{Total (estimated)} & & & \textbf{52K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned Work} \\
+\midrule
+Opus & $\sim$30\% & Mission orchestration, design pattern synthesis, GSD integration mapping, cross-module narrative coherence \\
+Sonnet & $\sim$60\% & All five historical survey modules, source audit, document assembly, citation verification, LaTeX production \\
+Haiku & $\sim$10\% & Foundation layer: shared schemas, source index, citation templates, module stub generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index, schemas, module stubs \\
+1A & Historical Track A & Parallel & Sonnet + CRAFT-HIST & Modules 01, 02, 03 \\
+1B & Historical Track B & Parallel & Sonnet + CRAFT-COMM & Modules 04, 05 \\
+-- & CAPCOM Gate & Human review & -- & Approval to proceed to synthesis \\
+2 & Synthesis & Sequential & Opus + INTEG & Module 06, narrative coherence, through-line \\
+3 & Publication & Sequential & Sonnet + VERIFY & Source audit, LaTeX assembly, final PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Build source index & BUDGET/Haiku & Numbered list of 17 sources with URL, type, and access date \\
+Define citation schema & PLAN/Haiku & Standard citation format for all modules \\
+Generate module stubs & PLAN/Haiku & Six .md stubs with section headers and source index references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Historical Research}
+
+\textbf{Track A (Modules 01--03): Origins, Unix, ISP}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module 01: Origins & CRAFT-HIST/Sonnet & Pre-BBS background, STIX-to-Eskimo naming, TRS-80 hardware, Infocom games, 1982--85 timeline \\
+Module 02: Unix Transition & CRAFT-ARCH/Sonnet & Decision rationale, hardware progression table, Nanook handle origin, community continuity \\
+Module 03: ISP Pivot & CRAFT-HIST/Sonnet & NW-Nexus access chain, CIX formation, T1 growth, 256-line peak, incorporation, co-lo move \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 04--05): Survival + National Context}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module 04: Long-term Survival & CRAFT-COMM/Sonnet & Hardware transitions, Isomedia move, service evolution table, philosophy statements \\
+Module 05: BBS National Context & CRAFT-HIST/Sonnet & CBBS origins, golden age data, collapse timeline, ISP metamorphosis statistics, comparative cases table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{CAPCOM Gate}
+
+Human review of Modules 01--05 before synthesis proceeds. Review for:
+\begin{itemize}[leftmargin=1.5em]
+  \item Factual accuracy against primary sources (especially eskimo.com history page)
+  \item Appropriate handling of the ``Eskimo'' name sensitivity
+  \item Privacy boundary compliance (no non-public personal details about Dinse)
+  \item Completeness: are all 12 success criteria addressable from the compiled research?
+\end{itemize}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module 06: Design Patterns + GSD Integration & INTEG/Opus & Six named patterns, GSD mappings, 8 educational pack integration recommendations \\
+Cross-module narrative coherence & CRAFT-HIST/Opus & Verify date consistency, terminology consistency, no contradictions across modules \\
+Through-line synthesis & FLIGHT/Opus & Stage 1 through-line paragraphs connecting Eskimo North longevity to GSD philosophy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Source audit & VERIFY/Sonnet & All 17 sources checked: URL active, content matches citation, no entertainment media \\
+Numerical attribution check & VERIFY/Sonnet & Every date, count, and metric traced to named source \\
+LaTeX assembly & EXEC/Sonnet & Three-pass XeLaTeX compilation, zero errors, all cross-refs resolved \\
+Index.html generation & EXEC/Sonnet & Download hub with file cards, usage instructions, recompilation guide \\
+Commit message + milestone summary & LOG/Sonnet & Conventional commit for dev branch; milestone summary for \texttt{.planning/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Source index compiled in Wave 0 and shared across all Wave 1 agents via cache (5-minute TTL exploitation at wave start)
+  \item Citation schema defined once and referenced by all modules (reduces citation format divergence)
+  \item Module stubs pre-populated with section headers so agents fill structured templates rather than producing free-form text
+  \item Tracks A and B are independent: no cross-track dependency until CAPCOM gate
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave / Component} & \tableheader{Input K} & \tableheader{Output K} & \tableheader{Model} \\
+\midrule
+Wave 0: Foundation & 2K & 4K & Haiku \\
+Wave 1A: Modules 01--03 & 12K & 17K & Sonnet \\
+Wave 1B: Modules 04--05 & 10K & 12K & Sonnet \\
+Wave 2: Synthesis & 35K & 12K & Opus \\
+Wave 3: Publication & 50K & 8K & Sonnet \\
+\midrule
+\textbf{Total (estimated)} & \textbf{109K} & \textbf{53K} & \textbf{Mixed} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[SOURCE INDEX / SCHEMAS]  <-- Wave 0 (Haiku)
+         |
+    +---------+
+    |         |
+[TRACK A] [TRACK B]        <-- Wave 1 Parallel (Sonnet)
+  Mod 01    Mod 04
+  Mod 02    Mod 05
+  Mod 03
+    |         |
+    +---------+
+         |
+   [CAPCOM GATE]           <-- Human Review
+         |
+  [MODULE 06 SYNTHESIS]    <-- Wave 2 (Opus)
+  [NARRATIVE COHERENCE]
+  [THROUGH-LINE]
+         |
+  [SOURCE AUDIT]           <-- Wave 3 (Sonnet)
+  [LATEX ASSEMBLY]
+  [INDEX.HTML]
+         |
+  [FINAL PDF DELIVERABLE]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & Source quality, privacy, numerical attribution, cultural sensitivity \\
+Core functionality & 18 & Required & BLOCK & One per success criterion (2 for major criteria) \\
+Integration & 5 & Required & BLOCK & Cross-module consistency, self-containment, GSD mapping \\
+Edge cases & 5 & Best-effort & LOG & Disputed data, temporal currency, data gaps \\
+\midrule
+\textbf{Total} & \textbf{32} & -- & -- & -- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to eskimo.com primary sources, IEEE Spectrum, ETHW, Wikipedia, Library of Congress, Boardwatch (cited secondhand via IEEE). Zero entertainment media, zero blog posts without institutional affiliation. \\
+SC-NUM & Numerical attribution & Every date, system count, bandwidth figure, and user count attributed to a named source. The 60,000-BBS figure cites InfoWorld. The 95\%-ISP figure cites Boardwatch via Rickard via IEEE Spectrum. \\
+SC-PRIV & Privacy boundary & No non-public personal details about Robert Dinse beyond what he has published. No user identification. \\
+SC-CULT & Cultural sensitivity & The ``Eskimo'' naming context is documented historically without endorsement. The sensitivity note is present in the sensitivity table. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Sourced timeline, 20+ events & CF-01, CF-02 & Pending \\
+2. Six hardware generations with dates and motivations & CF-03, CF-04 & Pending \\
+3. BBS-to-ISP transition documented as teaching model & CF-05, CF-06 & Pending \\
+4. Five named operator philosophy principles & CF-07 & Pending \\
+5. National BBS context with quantitative data & CF-08, CF-09 & Pending \\
+6. Three comparative cases documented & CF-10 & Pending \\
+7. Six generalizable design patterns with GSD mapping & CF-11, IN-01 & Pending \\
+8. Eight BBS Educational Pack integration items & CF-12 & Pending \\
+9. All numerical claims attributed & SC-NUM & Pending \\
+10. Document self-contained for new reader & IN-02 & Pending \\
+11. Primary source integrity maintained & SC-SRC, SC-PRIV & Pending \\
+12. Through-line articulated & IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; wave go/no-go gates; synthesis oversight \\
+PLAN & Planner (Sonnet) & Wave decomposition; dependency management; schema design \\
+SCOUT & Research Agent (Sonnet) & Source gathering; web research; citation verification \\
+EXEC-1 & Track A Executor (Sonnet) & Document production for Modules 01--03 \\
+EXEC-2 & Track B Executor (Sonnet) & Document production for Modules 04--05 \\
+CRAFT-HIST & History Specialist (Opus) & BBS era, early computing context, ISP formation \\
+CRAFT-COMM & Community Specialist (Sonnet) & Community governance, operator philosophy, user culture \\
+CRAFT-ARCH & Architecture Analyst (Sonnet) & Hardware transitions, software stack, co-lo decisions \\
+VERIFY & Verification Agent (Sonnet) & Source validation; accuracy checking; citation audit \\
+INTEG & Integration Agent (Opus) & Design pattern extraction; GSD ecosystem mapping; synthesis \\
+CAPCOM & HITL Interface & Human approval between Wave 1 and Wave 2 \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+SURGEON & Health Monitor (Sonnet) & Research quality degradation detection \\
+LOG & Chronicle Agent (Sonnet) & Audit trail; commit messages; milestone summaries \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent (Opus) & Cross-cutting structural decisions for document organization \\
+RETRO & Retrospective Agent (Sonnet) & Post-wave analysis; lessons learned for future BBS research missions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Research Modules & 6 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Estimated Token Budget & 109K input / 53K output \\
+Context Windows & 6--8 \\
+Sessions & 3--4 \\
+Primary Sources & 9 (eskimo.com primary + corroboration records) \\
+Secondary/Reference Sources & 8 \\
+Total Sources & 17 \\
+Success Criteria & 12 \\
+Test Cases & 32 \\
+CAPCOM Gates & 1 (post Wave 1, pre synthesis) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Deliverable Length & 35--45 pages \\
+Target Handoff & gsd-skill-creator, dev branch & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``I also acquired 4 double-sided 80K drives really cheap. 3MB ain't diddly now, but in 1982--83 time frame, it was BIG for a BBS.''}
+
+\medskip
+--- Robert Dinse (``Nanook''), Eskimo North History, eskimo.com/information/history/
+
+\medskip
+\textit{Every system that has ever mattered was built by someone who was excited about 3 megabytes. Not because 3 megabytes was the destination, but because it meant the community could grow. The measure of a well-designed system is not its ceiling. It is what it made possible before the ceiling was even visible. This is the Amiga Principle. This is what Eskimo North has been practicing since 1982.}
+\end{quotebox}
+
+\end{document}

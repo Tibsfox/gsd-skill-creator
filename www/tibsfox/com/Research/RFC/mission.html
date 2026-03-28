@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; RFC Archive &amp; Authorship</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rfc">
+  <header>
+    <h1>RFC Archive &amp; Authorship</h1>
+    <div class="subtitle">Internet Standards Corpus &middot; Local Mirror &middot; Draft Creation &middot; The Standards Track</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-rfc-history-governance">History &amp; Governance</a>
+      <a href="page.html?doc=02-rfc-archive-local-mirror">Archive &amp; Mirror</a>
+      <a href="page.html?doc=03-rfc-streams-maturity">Streams &amp; Maturity</a>
+      <a href="page.html?doc=04-authoring-tools-workflow">Authoring Tools</a>
+      <a href="page.html?doc=05-internet-draft-submission">I-D Submission</a>
+      <a href="page.html?doc=06-rfc-template-style-guide">Template &amp; Style</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The RFC series embodies what the Amiga Principle looks like at civilizational scale: not a
+      monolithic standards body issuing proclamations from on high, but a flat, rough-consensus
+      community producing small, precise, immutable documents that compose upward into the entire
+      Internet. Each RFC is a completed unit. Its relationships to other RFCs &mdash; Obsoletes,
+      Updates, normative references &mdash; form the complex plane of the technical web. The
+      &ldquo;spaces between&rdquo; RFC 791 (IPv4) and RFC 8200 (IPv6) is not emptiness; it is forty
+      years of implementation experience, failure, learning, and deliberate improvement, all traceable.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~188K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/rfc-mission.tex">Mission Package</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/rfc-mission-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Source index, shared schema, xml2rfc skeleton</td><td>Sequential</td><td>13K</td></tr>
+        <tr><td>1</td><td>Parallel Survey A</td><td>Track A (M1+M2) &middot; Track B (M3) &middot; Track C (M3)</td><td>Parallel</td><td>47K</td></tr>
+        <tr><td>2</td><td>Parallel Survey B</td><td>Track A (M4) &middot; Track B (M5) &middot; Track C (M6)</td><td>Parallel</td><td>75K</td></tr>
+        <tr><td>3</td><td>Synthesis</td><td>Cross-module integration, stream decision tree, rsync reference</td><td>Sequential</td><td>38K</td></tr>
+        <tr><td>4</td><td>Publication</td><td>Final assembly, verification, source audit</td><td>Sequential</td><td>15K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration &amp; synthesis</td><td>Opus</td><td>Cross-module dependency graph, stream analysis, HITL gates</td></tr>
+        <tr><td>Denise</td><td>Survey &amp; assembly</td><td>Sonnet</td><td>MOD-01 through MOD-05 surveys, document assembly</td></tr>
+        <tr><td>Paula</td><td>Foundation &amp; validation</td><td>Haiku</td><td>Source index, schema, citation validation, token budget</td></tr>
+        <tr><td>M68000</td><td>Template &amp; integration</td><td>Opus</td><td>MOD-06 template, synthesis wave, stream decision tree</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>xml2rfc v3 template passes idnits</td><td>Zero errors; zero nits in idnits output</td></tr>
+        <tr><td>SC-02</td><td>All required boilerplate sections present</td><td>Status of This Memo, Copyright, Abstract, Introduction, IANA, Security Considerations, Author's Address all present</td></tr>
+        <tr><td>SC-03</td><td>IPR disclosure statement correct</td><td>Correct boilerplate text for ipr="trust200902" present; no modification</td></tr>
+        <tr><td>SC-04</td><td>RFC 2119 requirements language cited</td><td>Both RFC 2119 and RFC 8174 cited; BCP 14 tag referenced; capitalization guidance included</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: The Standards Track</h2>
+
+    <table>
+      <thead><tr><th>Success Criterion</th><th>Test IDs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Explain 5 streams + stream selection</td><td>CA-02</td><td>PENDING</td></tr>
+        <tr><td>Build local rsync mirror offline</td><td>CA-01</td><td>PENDING</td></tr>
+        <tr><td>Locate RFC by number/keyword without network</td><td>CA-01 + INT-01</td><td>PENDING</td></tr>
+        <tr><td>Install xml2rfc v3 and produce output</td><td>CA-07</td><td>PENDING</td></tr>
+        <tr><td>Create I-D passing idnits with zero errors</td><td>SC-01 + SC-02 + SC-03 + SC-04</td><td>PENDING</td></tr>
+        <tr><td>Apply RFC 2119 language correctly</td><td>SC-04 + CA-08</td><td>PENDING</td></tr>
+        <tr><td>Identify all required RFC sections</td><td>SC-02 + CA-03</td><td>PENDING</td></tr>
+        <tr><td>Submit I-D to Datatracker</td><td>CA-04</td><td>PENDING</td></tr>
+        <tr><td>Explain maturity levels</td><td>CA-03</td><td>PENDING</td></tr>
+        <tr><td>Describe AUTH48</td><td>CA-05</td><td>PENDING</td></tr>
+        <tr><td>Local archive includes rfc-index.xml; cron-refreshable</td><td>CA-01 + INT-02</td><td>PENDING</td></tr>
+        <tr><td>Template includes mandatory boilerplate</td><td>SC-02 + SC-03</td><td>PENDING</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Reader can explain the difference between all five RFC publication streams</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Reader can build a complete local rsync mirror using only commands in this package</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Reader can locate any RFC by number, title, or keyword using local index without network</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Reader can install xml2rfc v3 and produce valid TXT, HTML, and PDF outputs</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Reader can create an I-D from template that passes idnits with zero errors</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Reader can correctly apply RFC 2119 requirements language per BCP 14</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Reader can identify all required RFC sections per RFC 7322</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Reader can submit an I-D to the Datatracker and receive confirmation</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Reader can explain Proposed Standard vs Internet Standard vs BCP vs Informational</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Reader can describe the AUTH48 process and required author actions</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>Local archive mirrors include rfc-index.xml and can be kept current with cron</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>xml2rfc v3 template includes all mandatory boilerplate per RFC 7841</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Internet was assembled from small, immutable, precisely specified documents, each one doing
+    one job well and linking explicitly to its dependencies. GSD assembles capabilities the same way.
+    The RFC corpus is not just a reference library &mdash; it is a working proof that the Amiga Principle
+    scales: simple, composable, trust-based building blocks, faithfully iterated over decades, producing
+    civilizational infrastructure. Every Internet-Draft is a pull request against that infrastructure.
+    The path is open. The tooling is free. Rough consensus is achievable. <em>Run the code.</em></p>
+  </main>
+
+  <footer>
+    <p>RFC Archive &amp; Authorship &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

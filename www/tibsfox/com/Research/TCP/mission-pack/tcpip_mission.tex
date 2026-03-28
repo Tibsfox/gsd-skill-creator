@@ -1,0 +1,1134 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── Color Scheme: Technology (Steel/Electric/Graphite) ─────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{successgreen}{HTML}{1B5E20}
+
+%% ── Section Formatting ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── Custom Environments ─────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── Headers and Footers ─────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{TCP/IP Protocol Specification}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={TCP/IP Full Protocol Specification -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%%  TITLE PAGE
+%% ═══════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{TCP/IP\\[0.3em]Full Protocol Specification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Every Detail Mapped — RFC-by-RFC}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--10 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% ── Table of Contents ───────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%%  STAGE 1 — VISION DOCUMENT
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{TCP/IP Full Protocol Specification --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Research Complete / Ready for Execution}
+\metafield{Depends On:}{GSD Ecosystem Core; gsd-skill-creator v1.49+}
+\metafield{Amiga Principle Context:}{The TCP/IP stack is the canonical proof of the Amiga Principle at internet scale --- four abstraction layers, each doing one thing, composing into the connective tissue of civilization.}
+
+\subsection{Vision}
+
+The Internet Protocol Suite is not a monolith. It is a composition of exquisitely small contracts, each protocol doing one thing deterministically, each layer exposing only what the layer above needs to know. In 1978, Jon Postel split what had been a single Transmission Control Program into two: IP for routing packets, TCP for reliable delivery. That split --- a separation of concerns executed with surgical precision --- is what the Amiga Principle looks like at civilizational scale.
+
+The TCP/IP suite has grown into something vast: dozens of RFCs, four generations of congestion control, two versions of IP, and now QUIC threatening to rewrite the transport layer entirely. Yet the architecture beneath it all remains faithful to the original layered insight. Each protocol is a boundary, and boundaries are where the interesting mathematics lives.
+
+This mission maps the entire stack with the same rigor that \textit{The Space Between} brings to mathematical structures: from the bit-level header format up through the stateful connection lifecycle, through congestion dynamics that are essentially differential equations running in every kernel on earth, and out through the modern evolution into QUIC and HTTP/3. The goal is not a tutorial. The goal is a complete, citable, implementation-grade reference that a GSD agent crew can use as primary source material for anything from protocol implementation to network security analysis to the GSD Mesh Prototype's transport layer.
+
+The ``spaces between'' are everywhere in this stack. The gap between a SYN and its ACK is where a three-way handshake lives. The space between a packet sent and its acknowledgment received is where the congestion window breathes. The 2MSL wait of TIME\_WAIT is the protocol's insistence that the past be honored before the future begins. TCP is, in a sense, a protocol that lives entirely in the spaces between packets.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Specification fragmentation.} TCP has been amended across forty-plus years through dozens of RFCs. RFC 9293 (2022) consolidated the core, but congestion control, options, security extensions, and modern features are scattered across RFC 879, RFC 1323, RFC 2018 (SACK), RFC 2581, RFC 3168 (ECN), RFC 4614, RFC 7414, and many more. No single synthesis maps the full picture.
+
+  \item \textbf{IPv4/IPv6 duality.} Most production networks now operate dual-stack, but the transition semantics, header differences, and NAT implications are poorly documented in a unified format. IPv6 extension headers, NDP replacing ARP, and the Flow Label field are often treated as afterthoughts.
+
+  \item \textbf{Congestion control landscape complexity.} The progression from Reno to CUBIC to BBR represents fundamentally different mathematical models of network behavior --- loss-based vs.\ latency-based vs.\ model-based. These cannot be understood without formal treatment of their underlying equations and fairness properties.
+
+  \item \textbf{State machine completeness.} The TCP finite state machine with 11 states is frequently documented incompletely, with simultaneous close, half-open recovery, and RST handling omitted. Implementation bugs consistently trace back to edge-state handling.
+
+  \item \textbf{Transport evolution gap.} QUIC (RFC 9000, 2021) represents the most significant transport protocol shift since TCP v4. Its relationship to TLS 1.3, its multiplexed stream model, 0-RTT resumption, and congestion control plug-in architecture are not well-synthesized against classical TCP.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} The TCP/IP suite as a layered composition of deterministic contracts, where each layer exposes a minimal interface and encapsulates all complexity below it.
+
+The defining specifications are RFC 1122 and RFC 1123, which describe four abstraction layers: Link, Internet, Transport, and Application. Within this architecture, each protocol is a precisely bounded finite state machine or datagram processor. The GSD Mesh Prototype depends on a thorough understanding of this stack; this mission produces the reference that makes mesh transport design decisions traceable to RFCs.
+
+\subsubsection{Protocol Suite Architecture}
+
+\begin{asciibox}
+APPLICATION LAYER
+  HTTP/1.1 (RFC 9112) | HTTP/2 (RFC 9113) | HTTP/3 (RFC 9114)
+  DNS (RFC 1035) | DHCP (RFC 2131) | TLS 1.3 (RFC 8446)
+  SSH | FTP | SMTP | ...
+─────────────────────────────────────────────────────────────────
+TRANSPORT LAYER
+  TCP (RFC 9293)            UDP (RFC 768)
+  [3-way handshake]         [connectionless]
+  [flow + congestion ctrl]  [8-byte header]
+  [11-state FSM]            [no state machine]
+  QUIC (RFC 9000) ── UDP-based, TLS-integrated, stream-muxed
+─────────────────────────────────────────────────────────────────
+INTERNET LAYER
+  IPv4 (RFC 791)            IPv6 (RFC 8200)
+  [20-60 byte header]       [40-byte fixed header]
+  [fragmentation at router] [fragmentation at source only]
+  ICMP (RFC 792)            ICMPv6 (RFC 4443) + NDP
+  ARP (RFC 826)             NDP / SLAAC (RFC 4861/4862)
+  Routing: BGP/OSPF/IS-IS
+─────────────────────────────────────────────────────────────────
+LINK LAYER
+  Ethernet (IEEE 802.3)    Wi-Fi (IEEE 802.11)
+  PPP | DSL | Fiber | ...
+  [MAC addressing, framing, CRC]
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 01: IP LAYER           MODULE 02: TCP CORE
+  IPv4 header (RFC 791)         Segment format (RFC 9293)
+  IPv6 header (RFC 8200)        3-way handshake
+  Fragmentation / PMTUD         11-state FSM
+  ARP / NDP                     Flow control / window scaling
+  Addressing / CIDR             Options (SACK, timestamps, MSS)
+         │                              │
+         └──────────┬───────────────────┘
+                    ▼
+MODULE 03: CONGESTION CTRL    MODULE 04: COMPANION PROTOS
+  Slow Start / AIMD             UDP (RFC 768)
+  CUBIC (RFC 8312)              ICMP v4/v6
+  BBR (Google / RFC 9002)       DNS (RFC 1035)
+  ECN (RFC 3168)                DHCP / NDP / SLAAC
+  SACK / FACK                   ARP mechanics
+         │                              │
+         └──────────┬───────────────────┘
+                    ▼
+         MODULE 05: TRANSPORT EVOLUTION
+           TLS 1.3 + TCP (RFC 8446)
+           QUIC (RFC 9000/9001/9002)
+           HTTP/3 (RFC 9114)
+           0-RTT / Connection Migration
+           TCP Fast Open / MPTCP
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- IP Layer}
+IP is the universal datagram. This module covers the complete IPv4 header (20--60 bytes, 13 fields), IPv6's streamlined 40-byte fixed header and extension header chain, fragmentation mechanics (at-source for IPv6, at-router for IPv4), Path MTU Discovery (RFC 1191/8201), ARP for IPv4 address resolution, and NDP/SLAAC for IPv6. Addressing architecture (CIDR, private ranges, special blocks, IPv6 types: unicast/anycast/multicast) is fully mapped.
+
+\subsubsection{Module 02 --- TCP Core}
+The complete TCP segment format per RFC 9293: source/destination ports (16-bit), sequence number (32-bit), acknowledgment number (32-bit), data offset (4-bit), control flags (6+3 bits: URG/ACK/PSH/RST/SYN/FIN/ECE/CWR/NS), window size (16-bit, scaling via RFC 7323), checksum (16-bit, pseudo-header construction), urgent pointer (16-bit), and options (up to 40 bytes). The 11-state FSM (LISTEN, SYN-SENT, SYN-RECEIVED, ESTABLISHED, FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, TIME-WAIT, CLOSED) with all transitions, including simultaneous close and half-open recovery. Three-way handshake mechanics and ISN generation.
+
+\subsubsection{Module 03 --- Congestion Control}
+The mathematical progression from Van Jacobson's 1988 algorithms (slow start, congestion avoidance, fast retransmit, fast recovery) through Reno/NewReno, CUBIC's cubic window function, and Google's BBR model-based algorithm (BtlBw and RTprop estimation). Selective acknowledgment (SACK, RFC 2018), forward acknowledgment (FACK), Explicit Congestion Notification (ECN, RFC 3168), and retransmission timeout computation (RFC 6298 SRTT/RTTVAR). Fairness analysis between CUBIC and BBR flows.
+
+\subsubsection{Module 04 --- Companion Protocols}
+UDP's minimal 8-byte header (src port, dst port, length, checksum). ICMP v4 (RFC 792) and ICMPv6 (RFC 4443) message types, especially Type 3 (Destination Unreachable), Type 11 (Time Exceeded), and Echo Request/Reply. DNS query/response format (RFC 1035), record types, and recursive/iterative resolution. DHCP lease lifecycle (RFC 2131). ARP request/reply mechanics, gratuitous ARP, and ARP spoofing attack surface.
+
+\subsubsection{Module 05 --- Transport Evolution}
+TLS 1.3 over TCP (RFC 8446): 1-RTT and 0-RTT handshake, record protocol, AEAD cipher suites. QUIC (RFC 9000): UDP-based, TLS 1.3 integrated, stream multiplexing, connection ID-based migration, 0-RTT resumption, connection IDs, and QUIC-specific congestion control (RFC 9002). HTTP/3 (RFC 9114): QPACK header compression (RFC 9204), stream types, server push removal. Comparison: TCP+TLS latency overhead vs.\ QUIC 1-RTT/0-RTT. TCP Fast Open (RFC 7413) and Multipath TCP (MPTCP, RFC 8684) as TCP evolution paths.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML — TCP/IP Protocol Specification Mission
+chipset:
+  agnus:                          # Orchestration / DMA / Context Management
+    model: claude-opus-4-5
+    role: synthesis + judgment
+    tasks:
+      - cross-module protocol integration (Modules 01-05)
+      - congestion control mathematical analysis
+      - QUIC vs TCP architectural comparison
+      - RFC conflict resolution and canon determination
+    context_budget: "32k per synthesis wave"
+
+  denise:                         # Display / Output Rendering
+    model: claude-sonnet-4-5
+    role: document production
+    tasks:
+      - Module 01-04 reference sections
+      - table construction (header field tables, state tables)
+      - bibliography formatting
+      - wave execution document assembly
+    context_budget: "20k per module"
+
+  paula:                          # Audio / I/O / Anticipatory
+    model: claude-haiku-4-5
+    role: scaffolding + schema
+    tasks:
+      - shared RFC citation schemas
+      - header field templates
+      - test scaffolding
+    context_budget: "8k per scaffolding pass"
+
+  cpu_68000:                      # Logic / Glue / Routing
+    allocation: "30% Opus / 60% Sonnet / 10% Haiku"
+    safety_warden: ACTIVE
+    push_default: nothing         # No direct commits without CAPCOM gate
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Complete IPv4 and IPv6 header field documentation with bit-level specifications
+  \item TCP segment format, all options, and pseudo-header checksum construction
+  \item Full 11-state TCP FSM with all transitions including edge cases (simultaneous close, RST handling, half-open)
+  \item Three-way handshake and four-way connection teardown mechanics
+  \item Flow control (window size, window scaling RFC 7323) and congestion control (Reno, CUBIC, BBR)
+  \item SACK (RFC 2018), ECN (RFC 3168), and retransmission timeout (RFC 6298)
+  \item UDP header format and semantics
+  \item ICMP v4 (RFC 792) and ICMPv6 (RFC 4443) complete message type catalogues
+  \item ARP (RFC 826) and NDP (RFC 4861) mechanics
+  \item DNS query/response format (RFC 1035) and resolution process
+  \item DHCP (RFC 2131) lease lifecycle
+  \item QUIC (RFC 9000/9001/9002) complete protocol specification
+  \item HTTP/3 (RFC 9114) and QPACK (RFC 9204) overview
+  \item TLS 1.3 handshake mechanics (RFC 8446) as they interact with TCP and QUIC
+  \item Full RFC bibliography with canonization status
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Routing protocol internals (BGP, OSPF, IS-IS) beyond packet-forwarding semantics
+  \item Link-layer protocols below IP (detailed Ethernet/Wi-Fi frame internals)
+  \item Application protocol internals (HTTP semantics, DNS record types beyond basics)
+  \item Network hardware implementation details
+  \item Kernel implementation specifics (Linux tcp.c, BSD network stack)
+  \item IPv6 transition mechanisms (6to4, Teredo, NAT64) in depth
+  \item IPsec (AH/ESP) beyond mentions as a QUIC comparison point
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{IPv4 header complete}: All 13 IPv4 fields documented with bit width, RFC 791 definition, and behavioral notes for each.
+  \item \textbf{IPv6 header complete}: IPv6 fixed header (8 fields) and all six standard extension header types (Hop-by-Hop, Routing, Fragment, Destination Options, Authentication, ESP) documented.
+  \item \textbf{TCP segment complete}: All TCP header fields documented per RFC 9293, including options registry (kind, length, data semantics for MSS/SACK/Timestamps/Window Scale/Nop).
+  \item \textbf{FSM complete}: All 11 TCP states and all legal transitions documented, including simultaneous open, simultaneous close, and RST-from-each-state behavior.
+  \item \textbf{Congestion control mathematically specified}: Slow start threshold, AIMD equations, CUBIC's cubic window formula, and BBR's BtlBw/RTprop model each specified with their governing equations or pseudocode.
+  \item \textbf{Companion protocols catalogued}: UDP, ICMP (v4+v6 message type tables), ARP/NDP, DNS query format, and DHCP lifecycle each documented with field-level detail.
+  \item \textbf{QUIC specification mapped}: QUIC packet types, frame types, stream multiplexing, connection ID architecture, 0-RTT/1-RTT handshake, and connection migration documented per RFC 9000.
+  \item \textbf{RFC canon established}: A complete bibliography mapping every referenced RFC to its canonical status (current standard, obsoleted by, updated by) as of 2026.
+  \item \textbf{Performance data quantified}: Concrete quantitative comparisons between CUBIC and BBR under varying loss and latency conditions sourced from published research.
+  \item \textbf{Protocol ossification documented}: TCP ossification mechanisms (middlebox interference, cleartext wire image) and QUIC's architectural response documented with specific examples.
+  \item \textbf{GSD Mesh applicability}: Each module includes a ``Mesh Relevance'' note identifying which findings bear directly on the GSD Mesh Prototype transport layer design.
+  \item \textbf{Zero unsourced numerical claims}: Every throughput figure, latency value, bit width, and count traces to a specific RFC section number or peer-reviewed publication.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Mesh Prototype Spec & Transport layer design decisions trace to this mission & Informs \\
+GSD Chipset Architecture & Agnus/Paula/Denise model maps to TCP layering metaphor & Parallel \\
+GSD Silicon Layer Spec & Low-level protocol handling; socket API boundaries & Informs \\
+Fox Infrastructure Group & Pacific Rim compute mesh will use QUIC/HTTP3 transport & Downstream \\
+The Space Between (TSB) & FSM formalism; layer composition as category theory & Foundation \\
+Deep Audio Analyzer Mission & Uses TCP sockets; benefits from transport-layer understanding & Downstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The TCP/IP suite is not elegant in the way that a mathematical proof is elegant. It is elegant the way a living ecosystem is elegant: through evolutionary pressure, through accumulated wisdom encoded as RFCs, through the willingness of protocol designers to split things apart when a monolith was failing. Postel's 1978 split of the Transmission Control Program is the founding act of the Amiga Principle applied to networks.
+
+What the GSD ecosystem inherits from this stack is structural: the insight that each layer should communicate through minimal interfaces, that determinism at the boundary enables creativity above it, that DACP --- the Deterministic Agent Communication Protocol --- is just TCP's lesson applied to agent-to-agent communication. Markdown is UDP with no retransmission. DACP is TCP: structured, sequenced, acknowledged.
+
+The spaces between packets are where TCP lives. The spaces between agents are where GSD lives.
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%%  STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{TCP/IP Full Protocol Specification --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage contains field-level reference material harvested from authoritative IETF sources and peer-reviewed research. Each module section corresponds to a research agent assignment in Stage 3. Agents should treat this as primary source material and conduct targeted gap-fill searches before document production.
+
+\textbf{Key source organizations:}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{IETF RFC Editor} (rfc-editor.org) --- all canonical RFC specifications
+  \item \textbf{IETF Datatracker} (datatracker.ietf.org) --- draft status and RFC relationships
+  \item \textbf{IETF QUIC Working Group} (quicwg.org) --- QUIC maintenance and evolution
+  \item \textbf{ACM Queue / ACM SIGCOMM} --- peer-reviewed congestion control research
+  \item \textbf{Google Research Blog} --- BBR algorithm technical documentation
+  \item \textbf{ESnet / Internet2} --- high-performance networking research
+  \item \textbf{W3Techs} --- protocol deployment statistics
+\end{itemize}
+
+\subsection{Module 01 Reference --- IP Layer}
+
+\subsubsection{IPv4 Header Fields (RFC 791, September 1981)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}C{1.4cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Bits} & \tableheader{Range} & \tableheader{Description} \\
+\midrule
+Version & 4 & 4 & IP version number; always 4 for IPv4 \\
+IHL (Header Length) & 4 & 5--15 & Header length in 32-bit words; min 5 (20 bytes), max 15 (60 bytes) \\
+DSCP (formerly ToS) & 6 & 0--63 & Differentiated Services Code Point; QoS marking (RFC 2474) \\
+ECN & 2 & 0--3 & Explicit Congestion Notification (RFC 3168): 00=Non-ECT, 01/10=ECT, 11=CE \\
+Total Length & 16 & 20--65535 & Complete packet length in bytes including header and data \\
+Identification & 16 & 0--65535 & Fragment group identifier; same value across all fragments \\
+Flags & 3 & — & Bit 0: reserved; Bit 1: DF (Don't Fragment); Bit 2: MF (More Fragments) \\
+Fragment Offset & 13 & 0--8191 & Offset in 8-byte units of this fragment within original datagram \\
+TTL & 8 & 0--255 & Hop count limit; decremented by each router; packet discarded at 0 \\
+Protocol & 8 & 0--255 & Upper layer protocol: TCP=6, UDP=17, ICMP=1, OSPF=89 \\
+Header Checksum & 16 & — & One's complement of one's complement sum of header only; recomputed at each hop \\
+Source Address & 32 & — & IPv4 address of originating host \\
+Destination Address & 32 & — & IPv4 address of destination host \\
+Options (variable) & 0--320 & — & Optional fields; must be padded to 32-bit boundary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{IPv6 Header Fields (RFC 8200, July 2017)}
+
+IPv6 replaces the variable-length IPv4 header with a fixed 40-byte structure, pushing optional functions to extension headers. Key improvements: no checksum (error detection delegated to transport/link layers), no in-router fragmentation (sources use PMTUD), and a Flow Label field for QoS.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Bits} & \tableheader{Description} \\
+\midrule
+Version & 4 & Always 6 \\
+Traffic Class & 8 & DSCP (6 bits) + ECN (2 bits); same semantics as IPv4 ToS/DSCP \\
+Flow Label & 20 & Identifies a flow for QoS; allows routers to fast-path related packets \\
+Payload Length & 16 & Length of everything after the 40-byte IPv6 header in bytes \\
+Next Header & 8 & Identifies type of following header; same values as IPv4 Protocol field \\
+Hop Limit & 8 & Equivalent to IPv4 TTL; decremented by 1 at each forwarding node \\
+Source Address & 128 & 128-bit originating address \\
+Destination Address & 128 & 128-bit destination address (may be intermediate with Routing header) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{IPv6 Extension Headers}: Hop-by-Hop Options (Next Header = 0, processed by every node), Routing (type 0 deprecated by RFC 5095), Fragment (source-initiated fragmentation only), Destination Options, Authentication Header (AH), and Encapsulating Security Payload (ESP). Extension headers chain via the Next Header field.
+
+\subsubsection{Fragmentation and PMTUD}
+
+IPv4 allows fragmentation at any router; IPv6 requires sources to perform Path MTU Discovery (PMTUD) before sending. IPv4 PMTUD (RFC 1191) sets the DF bit and uses ICMP Type 3 Code 4 (Fragmentation Needed) feedback. IPv6 PMTUD (RFC 8201) uses ICMPv6 Type 2 (Packet Too Big). The minimum MTU is 576 bytes for IPv4 (RFC 1122) and 1280 bytes for IPv6.
+
+\subsection{Module 02 Reference --- TCP Core}
+
+\subsubsection{TCP Segment Format (RFC 9293, August 2022)}
+
+RFC 9293 consolidates RFC 793 (1981) with all amendments, obsoleting RFCs 879, 2873, 6093, 6429, 6528, and 6691. The TCP segment header:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Bits} & \tableheader{Description} \\
+\midrule
+Source Port & 16 & Originating port number (0--65535) \\
+Destination Port & 16 & Destination port number \\
+Sequence Number & 32 & Byte-stream position of first data byte in this segment (or ISN with SYN) \\
+Acknowledgment Number & 32 & Next expected byte from the other direction (valid only when ACK flag set) \\
+Data Offset & 4 & Header length in 32-bit words; options length = (DataOffset - 5) × 4 bytes \\
+Reserved & 3 & Must be zero \\
+Control Flags & 9 & NS, CWR, ECE, URG, ACK, PSH, RST, SYN, FIN \\
+Window Size & 16 & Receive window advertised (bytes); scaled by Window Scale option \\
+Checksum & 16 & Covers pseudo-header (src IP, dst IP, protocol=6, TCP length) + segment \\
+Urgent Pointer & 16 & Byte offset from SEQ to last urgent byte; only valid when URG flag set \\
+Options & 0--320 & Variable; must be padded to 32-bit boundary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{TCP Options (selected):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}C{1.4cm}C{1.4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Kind} & \tableheader{Name} & \tableheader{Length} & \tableheader{RFC / Purpose} \\
+\midrule
+0 & End of List & 1 byte & Marks end of options \\
+1 & NOP & 1 byte & Padding / alignment \\
+2 & MSS & 4 bytes & RFC 9293: Maximum Segment Size; exchanged in SYN only \\
+3 & Window Scale & 3 bytes & RFC 7323: Shifts window field left by 0--14 bits; SYN only \\
+4 & SACK Permitted & 2 bytes & RFC 2018: Announces SACK capability; SYN only \\
+5 & SACK & var & RFC 2018: Reports out-of-order received blocks (up to 4 blocks per segment) \\
+8 & Timestamps & 10 bytes & RFC 7323: RTT measurement and PAWS (Protection Against Wrapped Sequences) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Three-Way Handshake and ISN Generation}
+
+Connection establishment requires sequence number synchronization. An endpoint selects an Initial Sequence Number (ISN) chosen to reduce risk of segments from a prior connection being accepted. RFC 9293 recommends a time-based ISN generator (32-bit clock incremented at ~1 MHz). The handshake sequence: (1) Client sends SYN with ISN=X; (2) Server replies SYN-ACK with ISN=Y, ACK=X+1; (3) Client sends ACK=Y+1. The server enters ESTABLISHED after step 2; the client after step 3.
+
+\subsubsection{TCP State Machine --- 11 States}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{State} & \tableheader{Side} & \tableheader{Description} \\
+\midrule
+CLOSED & Both & No connection; fictional initial/final state (no TCB exists) \\
+LISTEN & Server & Waiting for incoming SYN; passive open performed \\
+SYN-SENT & Client & SYN transmitted; awaiting SYN-ACK \\
+SYN-RECEIVED & Server & SYN received and SYN-ACK sent; awaiting ACK \\
+ESTABLISHED & Both & Data transfer phase; connection fully open \\
+FIN-WAIT-1 & Active closer & FIN sent; awaiting ACK or FIN from remote \\
+FIN-WAIT-2 & Active closer & Own FIN acknowledged; awaiting remote FIN \\
+CLOSE-WAIT & Passive closer & Remote FIN received and ACKed; awaiting local close \\
+CLOSING & Both & Simultaneous close; both FINs sent; awaiting ACK \\
+LAST-ACK & Passive closer & Own FIN sent; awaiting final ACK \\
+TIME-WAIT & Active closer & 2×MSL wait (typically 60--120s) before CLOSED; prevents delayed segments contaminating new connections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The TIME-WAIT state serves two purposes: (1) ensuring the final ACK reaches the passive closer even if it is lost, triggering retransmission of FIN; and (2) preventing delayed segments from a prior connection quadruplet from being accepted by a new connection using the same (src IP, src port, dst IP, dst port).
+
+\subsubsection{Flow Control}
+
+TCP uses a sliding window mechanism. The receiver advertises its available buffer in the Window Size field. The sender cannot transmit beyond \texttt{SND.UNA + SND.WND}. Window scaling (RFC 7323, option Kind=3) extends the effective window to up to $65535 \times 2^{14} = 1{,}073{,}725{,}440$ bytes. Zero-window probing prevents deadlock when the receiver's buffer fills: the sender transmits 1-byte probes (or zero-length, implementation-defined) until the window reopens.
+
+\subsection{Module 03 Reference --- Congestion Control}
+
+\subsubsection{Slow Start and Congestion Avoidance (RFC 5681)}
+
+Van Jacobson (1988) introduced the fundamental TCP congestion control framework. On connection start and after timeout, \texttt{cwnd} (congestion window) begins at 1--4 MSS and doubles each RTT (slow start) until \texttt{cwnd} reaches \texttt{ssthresh} or packet loss is detected. Above \texttt{ssthresh}, congestion avoidance increments \texttt{cwnd} by $\frac{MSS^2}{cwnd}$ per ACK (approximately +1 MSS per RTT). On loss (triple duplicate ACK), \texttt{ssthresh = cwnd/2}, \texttt{cwnd} is halved (fast recovery), and the lost segment is retransmitted (fast retransmit). On timeout (retransmission timeout), \texttt{cwnd} returns to 1 MSS.
+
+\subsubsection{Retransmission Timeout (RFC 6298)}
+
+The RTO is computed from the Smoothed Round-Trip Time (SRTT) and RTT variance (RTTVAR):
+
+\begin{center}
+\texttt{SRTT = (1 - α) × SRTT + α × RTT} \quad (α = 1/8)\\[0.3em]
+\texttt{RTTVAR = (1 - β) × RTTVAR + β × |SRTT - RTT|} \quad (β = 1/4)\\[0.3em]
+\texttt{RTO = SRTT + max(G, 4 × RTTVAR)} \quad (G = clock granularity, min RTO = 1s)
+\end{center}
+
+\subsubsection{CUBIC (RFC 8312, 2017; Default in Linux and Android)}
+
+CUBIC replaces Reno's linear window growth with a cubic function of elapsed time since the last congestion event. The window target $W(t) = C(t - K)^3 + W_{max}$ where $C$ is the cubic scaling factor, $K = \sqrt[3]{W_{max} \cdot \beta / C}$, and $\beta = 0.7$ is the multiplicative decrease factor. This makes window growth faster far from $W_{max}$ and slower near it, providing TCP-friendliness and high throughput on high-BDP paths. CUBIC became the default in Linux 2.6.19 (2006).
+
+\subsubsection{BBR --- Bottleneck Bandwidth and Round-trip Propagation Time}
+
+Developed at Google and available in Linux since kernel 4.9. BBR shifts from loss-based to model-based congestion control. It continuously estimates two network parameters: BtlBw (bottleneck bandwidth, measured as delivery rate maximum over a 10-RTT window) and RTprop (minimum RTT over a 10-second window). The pacing rate is set to BtlBw; the congestion window is set to $2 \times BtlBw \times RTprop$ (2 BDP). Four phases: Startup (exponential growth), Drain (pacing rate reduction to empty the queue built during Startup), ProbeBW (8-RTT cycle probing for bandwidth gains), and ProbeRTT (cwnd reduced to 4 packets for 200ms to measure minimum RTT). 
+
+\textbf{Performance evidence (ACM Queue, Google, 2017):} On a 100 Mbps / 100ms path with 1\% random packet loss, BBR achieves $\sim$9,100 Mbps goodput vs.\ CUBIC's $\sim$3.3 Mbps --- a 2,700$\times$ improvement. YouTube deployment yielded 4\% average throughput improvement globally and up to 14\% in some countries, with 33\% reduction in RTT. BBR reduces reliance on loss as a congestion signal; CUBIC requires loss rate $< \frac{1}{\sqrt{BDP}}$ to maintain full bandwidth.
+
+\textbf{BBR fairness}: BBRv1 exhibits unfairness when competing with CUBIC flows (BBR can dominate a shared bottleneck). BBRv2 adds loss sensitivity and a cwnd cap to improve fairness.
+
+\subsubsection{SACK and ECN}
+
+\textbf{SACK (RFC 2018)}: Selective ACK allows a receiver to report non-contiguous blocks of received data, enabling the sender to retransmit only lost segments rather than everything from the loss point. Up to 4 SACK blocks per segment; each block is a (left edge, right edge) byte range pair. Forward Acknowledgment (FACK) uses SACK to estimate the amount of data between the highest SACKed byte and \texttt{SND.UNA}.
+
+\textbf{ECN (RFC 3168)}: Routers can mark packets with the CE (Congestion Experienced) codepoint in the IP header when buffers approach capacity, rather than dropping the packet. TCP receivers report CE marks via the ECE flag; senders respond by reducing \texttt{cwnd} as if a loss occurred (but without a retransmission). ECN requires router support and sender/receiver negotiation during the SYN/SYN-ACK exchange.
+
+\subsection{Module 04 Reference --- Companion Protocols}
+
+\subsubsection{UDP (RFC 768, August 1980)}
+
+The User Datagram Protocol provides a minimal 8-byte header: Source Port (16-bit), Destination Port (16-bit), Length (16-bit, includes header, minimum 8), Checksum (16-bit, covers UDP pseudo-header; optional for IPv4, mandatory for IPv6). No connection state, no retransmission, no ordering guarantees. Used for DNS, DHCP, VoIP, gaming, and as the carrier for QUIC.
+
+\subsubsection{ICMP (RFC 792) and ICMPv6 (RFC 4443)}
+
+ICMP provides network-layer diagnostics and error reporting. Key message types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Code} & \tableheader{Name} & \tableheader{Purpose} \\
+\midrule
+0 & 0 & Echo Reply & Ping response \\
+3 & 0--15 & Dest.\ Unreachable & Net/Host/Port unreachable; DF bit violation \\
+4 & 0 & Source Quench & Obsolete congestion signal (deprecated) \\
+8 & 0 & Echo Request & Ping request \\
+11 & 0,1 & Time Exceeded & TTL expired; traceroute mechanism \\
+12 & 0,1 & Parameter Problem & Header field error \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+ICMPv6 (RFC 4443) additionally carries Neighbor Discovery Protocol (NDP) messages, replacing ARP: Router Solicitation (133), Router Advertisement (134), Neighbor Solicitation (135), Neighbor Advertisement (136), Redirect (137).
+
+\subsubsection{ARP (RFC 826) and NDP (RFC 4861)}
+
+ARP resolves IPv4 addresses to MAC addresses via broadcast/reply on a local segment. ARP cache entries have a time-to-live (typically 20 minutes). Gratuitous ARP announces ownership of an IP address; exploited for ARP spoofing/poisoning attacks.
+
+NDP (RFC 4861) provides the same resolution function for IPv6 via ICMPv6 messages (Neighbor Solicitation/Advertisement), eliminates broadcast (uses solicited-node multicast), and also handles router discovery, address autoconfiguration (SLAAC), and duplicate address detection (DAD).
+
+\subsubsection{DNS (RFC 1035) and DHCP (RFC 2131)}
+
+DNS query/response packets use a 12-byte fixed header (ID, Flags, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT) followed by variable-length question and resource record sections. DNS-over-UDP (port 53) for queries under 512 bytes; DNS-over-TCP for larger responses and zone transfers. Modern extensions: DNSSEC, DoH (RFC 8484), DoT (RFC 7858), DoQ (RFC 9250 --- DNS-over-QUIC).
+
+DHCP (RFC 2131) uses a four-step lease process over UDP: DISCOVER (broadcast), OFFER (server unicast), REQUEST (client broadcast), ACK (server unicast). Lease includes IP address, subnet mask, default gateway, DNS servers, and lease duration.
+
+\subsection{Module 05 Reference --- Transport Evolution}
+
+\subsubsection{TLS 1.3 over TCP (RFC 8446, August 2018)}
+
+TLS 1.3 adds 1-RTT connection establishment (vs.\ TLS 1.2's 2-RTT). Handshake: Client sends ClientHello with key share; server responds with ServerHello, certificate, and key; client sends Finished. 0-RTT resumption is possible via pre-shared keys (PSK) but is non-forward-secret for the 0-RTT data. TLS 1.3 removes vulnerable cipher suites (RC4, DES, 3DES, MD5-HMAC), mandates AEAD (AES-GCM, ChaCha20-Poly1305), and forward secrecy (ECDHE/DHE only). Represents 1 extra RTT on top of TCP's 3-way handshake for new connections: total 2 RTT before first request.
+
+\subsubsection{QUIC (RFC 9000, May 2021)}
+
+QUIC is a UDP-based, stream-multiplexing, encrypted transport protocol. Core design decisions:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{UDP carrier}: Bypasses kernel TCP ossification; QUIC logic runs in user space (updatable without kernel changes).
+  \item \textbf{Mandatory encryption}: All QUIC packets except version negotiation are encrypted. TLS 1.3 is mandatory (RFC 9001); there is no unencrypted QUIC.
+  \item \textbf{Connection IDs}: Connections identified by Connection IDs, not 4-tuple. Enables connection migration (e.g., mobile handoff between Wi-Fi and cellular) without reconnection.
+  \item \textbf{Stream multiplexing}: Multiple independent streams within one connection; head-of-line blocking eliminated (loss on one stream does not block others).
+  \item \textbf{0-RTT resumption}: Prior connections can be resumed with 0 additional RTT for the handshake (1-RTT for new connections), integrated with TLS 1.3 session tickets.
+  \item \textbf{Packet number spaces}: Initial, Handshake, and Application Data --- each with independent packet numbers and ACK tracking.
+\end{itemize}
+
+Deployment: HTTP/3 (RFC 9114) uses QUIC. As of late 2023, QUIC carries approximately 7.6\% of all web traffic. As of September 2024, HTTP/3 is supported by more than 95\% of major browsers and 34\% of the top 10 million websites. Used by Google (gmail, YouTube, Maps), Facebook, and Cloudflare.
+
+\textbf{Latency comparison}:
+TCP + TLS 1.3 (new): 2 RTT minimum before first data.
+QUIC (new): 1 RTT (handshake + TLS integrated).
+QUIC (resumed): 0 RTT (0-RTT data sent with first packet).
+
+\subsubsection{TCP Fast Open and MPTCP}
+
+\textbf{TCP Fast Open (TFO, RFC 7413, 2014)}: Allows data to be sent in the SYN packet on resumed connections, reducing new-connection latency by 1 RTT. Uses a TFO cookie issued by the server on the first connection. Deployment has been impeded by middlebox interference that drops packets with data in SYN.
+
+\textbf{Multipath TCP (MPTCP, RFC 8684, 2020)}: Allows a single TCP connection to use multiple paths simultaneously (e.g., both Wi-Fi and cellular). Provides path failover and bandwidth aggregation. Apple uses MPTCP for Siri traffic. Each subflow appears as a regular TCP connection to the network; MPTCP is transparent to applications.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk} & \tableheader{Mitigation} \\
+\midrule
+ARP spoofing / poisoning & Security attack enablement & Document mechanics for defensive understanding only; no operational exploit scripts \\
+TCP SYN flood (DoS) & Attack documentation & Describe SYN cookies defense (RFC 4987) without amplification details \\
+TCP sequence prediction & Historical attack vector & Note ISN randomization as mitigation; no prediction algorithm \\
+ECN misuse / ossification & Protocol integrity & Document as historical problem; cite RFC 3168 compliant behavior \\
+0-RTT replay attacks (QUIC) & Security nuance & RFC 9000 Section 8 explicitly documents replay risks; cite requirements \\
+BGP routing (adjacent) & Critical infrastructure & Out of scope; do not provide route hijacking technical details \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{IETF RFC Standards (Primary)}
+
+\begin{itemize}[noitemsep]
+  \item RFC 768 --- UDP (Postel, 1980). Status: Internet Standard.
+  \item RFC 791 --- Internet Protocol IPv4 (Postel, 1981). Status: Internet Standard (STD 5).
+  \item RFC 792 --- ICMP (Postel, 1981). Status: Internet Standard (STD 5).
+  \item RFC 826 --- ARP (Plummer, 1982). Status: Internet Standard (STD 37).
+  \item RFC 1035 --- DNS (Mockapetris, 1987). Status: Internet Standard (STD 13).
+  \item RFC 1122 --- Requirements for Internet Hosts --- Communication Layers (Braden, 1989). Status: Internet Standard (STD 3).
+  \item RFC 1191 --- Path MTU Discovery (Mogul \& Deering, 1990).
+  \item RFC 2018 --- TCP SACK (Mathis et al., 1996). Status: Proposed Standard.
+  \item RFC 2131 --- DHCP (Droms, 1997). Status: Draft Standard.
+  \item RFC 3168 --- ECN (Ramakrishnan et al., 2001). Status: Proposed Standard.
+  \item RFC 4443 --- ICMPv6 (Conta et al., 2006). Status: Internet Standard (STD 89).
+  \item RFC 4861 --- NDP for IPv6 (Narten et al., 2007). Status: Draft Standard.
+  \item RFC 5681 --- TCP Congestion Control (Allman et al., 2009). Status: Draft Standard.
+  \item RFC 6298 --- RTO Computation (Paxson et al., 2011). Status: Proposed Standard.
+  \item RFC 7323 --- TCP Extensions for High Performance (Borman et al., 2014). Status: Proposed Standard. Obsoletes RFC 1323.
+  \item RFC 7413 --- TCP Fast Open (Cheng et al., 2014). Status: Experimental.
+  \item RFC 7414 --- TCP Roadmap (Duke et al., 2015). Status: Informational.
+  \item RFC 8200 --- IPv6 Specification (Deering \& Hinden, 2017). Status: Internet Standard (STD 86).
+  \item RFC 8312 --- CUBIC (Ha et al., 2017 [replaces 2008 paper]). Status: Informational.
+  \item RFC 8446 --- TLS 1.3 (Rescorla, 2018). Status: Proposed Standard.
+  \item RFC 8684 --- Multipath TCP (Ford et al., 2020). Status: Proposed Standard.
+  \item RFC 8999 --- Version-Independent Properties of QUIC (Thomson, 2021).
+  \item RFC 9000 --- QUIC: A UDP-Based Multiplexed and Secure Transport (Iyengar \& Thomson, 2021). Status: Proposed Standard.
+  \item RFC 9001 --- Using TLS to Secure QUIC (Thomson \& Turner, 2021).
+  \item RFC 9002 --- QUIC Loss Detection and Congestion Control (Iyengar \& Swett, 2021).
+  \item RFC 9114 --- HTTP/3 (Bishop, 2022). Status: Proposed Standard.
+  \item RFC 9204 --- QPACK Header Compression for HTTP/3 (Krasic et al., 2022).
+  \item RFC 9293 --- Transmission Control Protocol (Eddy, 2022). Status: Internet Standard. Obsoletes RFC 793.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[noitemsep]
+  \item Cardwell, N. et al. (2017). \textit{BBR: Congestion-Based Congestion Control}. ACM Queue, 14(5).
+  \item Ha, S., Rhee, I., \& Xu, L. (2008). \textit{CUBIC: a new TCP-friendly high-speed TCP variant}. ACM SIGOPS OS Review, 42(5).
+  \item Chen, Y. et al. (2024). \textit{RFC 9000 and its Siblings: An Overview of QUIC Standards}. TU Munich.
+  \item Tierney, B. et al. (2022). \textit{Exploring the BBRv2 Congestion Control Algorithm for Data Transfer Nodes}. ESnet / Internet2 TechEx.
+  \item Comer, D.E. (1988). \textit{Internetworking with TCP/IP: Principles, Protocols, and Architecture}. Prentice Hall.
+\end{itemize}
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%%  STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, RFC-traceable reference document covering the complete TCP/IP protocol suite: IPv4/IPv6 at the internet layer, TCP and UDP at the transport layer, ICMP/ARP/DNS/DHCP as companion protocols, and QUIC/HTTP3/TLS 1.3 as the modern transport evolution layer. The output must meet the fidelity required for GSD Mesh Prototype transport design decisions and serve as the canonical internal reference for any GSD component that opens a socket.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential — Haiku)
+  └── Shared RFC citation schema
+  └── Header field table templates
+  └── Module assignment YAML + context budgets
+
+WAVE 1: Parallel Research Tracks (Parallel — Sonnet + Opus)
+  Track A: Module 01 (IP Layer) + Module 04 (Companion Protocols)
+  Track B: Module 02 (TCP Core) + Module 03 (Congestion Control)
+  ──> CAPCOM GATE: Review Module 02 FSM completeness; confirm Mod 03 math ──>
+
+WAVE 2: Synthesis (Sequential — Opus)
+  └── Module 05 (Transport Evolution: QUIC + TLS 1.3 + HTTP/3)
+  └── Cross-module integration (QUIC vs TCP comparison table)
+  └── Security sensitivity review
+  └── GSD Mesh applicability notes
+
+WAVE 3: Publication + Verification (Sequential — Sonnet)
+  └── Document assembly
+  └── Bibliography validation
+  └── Test plan execution
+  └── RFC canonization audit
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer}: RFC citation schema, module templates, shared header field types
+  \item \textbf{IP Layer}: IPv4 (RFC 791), IPv6 (RFC 8200), PMTUD, addressing, fragmentation
+  \item \textbf{Transport Layer}: TCP (RFC 9293) full spec; UDP (RFC 768); TCP FSM; flow/congestion control
+  \item \textbf{Congestion Control Layer}: Slow Start, CUBIC (RFC 8312), BBR, SACK (RFC 2018), ECN (RFC 3168)
+  \item \textbf{Companion Protocol Layer}: ICMP, ARP/NDP, DNS, DHCP
+  \item \textbf{Transport Evolution Layer}: TLS 1.3, QUIC (RFC 9000), HTTP/3, TCP Fast Open, MPTCP
+  \item \textbf{Synthesis Layer}: Cross-protocol comparison, security analysis, GSD Mesh applicability
+  \item \textbf{Publication Layer}: Document assembly, bibliography, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+D1 & RFC Citation Schema & All 27 RFCs indexed with status, supersedes, and superseded-by & Wave 0 \\
+D2 & IPv4/IPv6 Reference & Complete field tables (bit-level); extension header chain; PMTUD & Wave 1A \\
+D3 & TCP Core Reference & Segment format; 11-state FSM; handshake; all options & Wave 1B \\
+D4 & Congestion Control Reference & Reno/CUBIC/BBR equations; SACK; ECN; RTO algorithm & Wave 1B \\
+D5 & Companion Protocols Reference & UDP; ICMP type tables; ARP/NDP; DNS; DHCP & Wave 1A \\
+D6 & Transport Evolution Reference & QUIC spec; HTTP/3; TLS 1.3; TCP FO; MPTCP & Wave 2 \\
+D7 & Cross-Protocol Comparison Table & TCP vs QUIC: latency, multiplexing, security, migration & Wave 2 \\
+D8 & GSD Mesh Applicability Notes & Per-module ``Mesh Relevance'' annotations & Wave 2 \\
+D9 & Verified Bibliography & 27+ RFCs + 5 peer-reviewed papers, all status-verified & Wave 3 \\
+D10 & Test Plan Execution Report & All BLOCK tests passing; edge cases logged & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{1.8cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ kTokens} \\
+\midrule
+RFC Schema (D1) & None & Haiku & 4k \\
+IPv4/IPv6 Module (D2) & D1 & Sonnet & 18k \\
+TCP Core Module (D3) & D1 & Sonnet & 22k \\
+Congestion Control (D4) & D1, D3 & Opus & 20k \\
+Companion Protocols (D5) & D1 & Sonnet & 14k \\
+Transport Evolution (D6) & D2, D3, D4 & Opus & 24k \\
+Cross-Protocol Table (D7) & D3, D6 & Opus & 8k \\
+Mesh Applicability (D8) & All modules & Opus & 10k \\
+Bibliography Validation (D9) & All modules & Sonnet & 8k \\
+Test Execution (D10) & D1--D9 & Sonnet & 10k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{3cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Outputs} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+0 & Foundation & D1 (RFC schema, templates) & Sequential & Haiku \\
+1A & IP + Companions & D2, D5 & Parallel & Sonnet \\
+1B & TCP + Congestion & D3, D4 & Parallel & Sonnet/Opus \\
+2 & Evolution + Synthesis & D6, D7, D8 & Sequential & Opus \\
+3 & Publication & D9, D10 & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0 --- Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Owner} \\
+\midrule
+F-01 & Build RFC citation index: 27 RFCs, status, supersedes, superseded-by & PAULA (Haiku) \\
+F-02 & Create header field table template (LaTeX tabularx) & PAULA (Haiku) \\
+F-03 & Create module assignment YAML & PAULA (Haiku) \\
+F-04 & Establish FSM state enumeration constants & PAULA (Haiku) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1 --- Parallel Tracks}
+
+\textbf{Track A (Modules 01 + 04):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Owner} \\
+\midrule
+1A-01 & Produce IPv4 complete header field table (13 fields, bit-level) & CRAFT-IP (Sonnet) \\
+1A-02 & Produce IPv6 complete header table + extension header chain & CRAFT-IP (Sonnet) \\
+1A-03 & Document fragmentation mechanics: IPv4 vs IPv6, PMTUD & CRAFT-IP (Sonnet) \\
+1A-04 & Document ARP (RFC 826) and NDP (RFC 4861) mechanics & CRAFT-PROTO (Sonnet) \\
+1A-05 & Document ICMP v4 message type table (RFC 792) & CRAFT-PROTO (Sonnet) \\
+1A-06 & Document ICMPv6 message types including NDP (RFC 4443) & CRAFT-PROTO (Sonnet) \\
+1A-07 & Document UDP header, checksum semantics (RFC 768) & CRAFT-PROTO (Sonnet) \\
+1A-08 & Document DNS query/response format (RFC 1035) + DoH/DoT/DoQ & CRAFT-PROTO (Sonnet) \\
+1A-09 & Document DHCP lease lifecycle (RFC 2131) & CRAFT-PROTO (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 02 + 03):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Owner} \\
+\midrule
+1B-01 & Produce TCP segment format table (RFC 9293, all fields) & CRAFT-TCP (Sonnet) \\
+1B-02 & Document all TCP options (Kind 0--8, SACK, Timestamps, Window Scale) & CRAFT-TCP (Sonnet) \\
+1B-03 & Document three-way handshake + ISN generation & CRAFT-TCP (Sonnet) \\
+1B-04 & Produce complete 11-state FSM table with all legal transitions & CRAFT-TCP (Opus) \\
+1B-05 & Document simultaneous close and half-open recovery paths & CRAFT-TCP (Opus) \\
+1B-06 & Document flow control: window, scaling, zero-window probing & CRAFT-TCP (Sonnet) \\
+1B-07 & Document slow start + congestion avoidance equations (RFC 5681) & CRAFT-CC (Sonnet) \\
+1B-08 & Document CUBIC cubic window formula and parameters (RFC 8312) & CRAFT-CC (Opus) \\
+1B-09 & Document BBR BtlBw/RTprop model and four phases & CRAFT-CC (Opus) \\
+1B-10 & Document SACK (RFC 2018) block format and FACK & CRAFT-CC (Sonnet) \\
+1B-11 & Document ECN mechanics and IP/TCP flag interactions (RFC 3168) & CRAFT-CC (Sonnet) \\
+1B-12 & Document RTO computation (RFC 6298) SRTT/RTTVAR formulas & CRAFT-CC (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 1}: Review Module 02 FSM for completeness (simultaneous close, RST handling); verify Module 03 mathematical formulas for accuracy. HITL approval required before Wave 2.
+
+\subsubsection{Wave 2 --- Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Owner} \\
+\midrule
+2-01 & Document TLS 1.3 over TCP: 1-RTT handshake, AEAD ciphers & AGNUS (Opus) \\
+2-02 & Document QUIC complete packet/frame type catalog (RFC 9000) & AGNUS (Opus) \\
+2-03 & Document QUIC stream multiplexing and flow control & AGNUS (Opus) \\
+2-04 & Document QUIC connection migration and Connection ID architecture & AGNUS (Opus) \\
+2-05 & Document QUIC 0-RTT/1-RTT handshake vs TCP+TLS latency & AGNUS (Opus) \\
+2-06 & Document HTTP/3 (RFC 9114) and QPACK (RFC 9204) & AGNUS (Opus) \\
+2-07 & Produce cross-protocol comparison table: TCP vs QUIC & AGNUS (Opus) \\
+2-08 & Add GSD Mesh Relevance notes to all five modules & AGNUS (Opus) \\
+2-09 & Security sensitivity review: ARP spoofing, SYN flood, sequence prediction & SECURE (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3 --- Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Owner} \\
+\midrule
+3-01 & Assemble full document from module outputs & DENISE (Sonnet) \\
+3-02 & Validate bibliography: verify RFC status, obsoletes, updates & VERIFY (Sonnet) \\
+3-03 & Execute test plan; log results & VERIFY (Sonnet) \\
+3-04 & Three-pass XeLaTeX compilation & DENISE (Sonnet) \\
+3-05 & Final review: all BLOCK tests passing; deliver PDF + .tex + index.html & LOG (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 RFC schema loaded once and shared as a context prefix across all Wave 1 tasks.
+  \item Track A and Track B in Wave 1 share no dependencies; run in parallel with separate context windows.
+  \item BBR and CUBIC documentation (1B-08, 1B-09) share a congestion control framework prefix; compose together to exploit 5-minute cache TTL.
+  \item QUIC tasks (2-02 through 2-06) share an RFC 9000 document prefix; load once.
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (kTokens)} & \tableheader{Sonnet (kTokens)} & \tableheader{Haiku (kTokens)} \\
+\midrule
+Wave 0 & 0 & 0 & 4 \\
+Wave 1A & 0 & 32 & 0 \\
+Wave 1B & 28 & 28 & 0 \\
+Wave 2 & 42 & 0 & 0 \\
+Wave 3 & 0 & 26 & 0 \\
+\midrule
+\textbf{Total} & \textbf{70k} & \textbf{86k} & \textbf{4k} \\
+\textbf{Approx.\ split} & \textbf{43\%} & \textbf{53\%} & \textbf{4\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+F-01 (RFC Schema) ──────────────┬──────────────────────────────────┐
+F-02 (Templates)  ──────────────┤                                  │
+                                ▼                                  ▼
+                      Track A (1A-01..09)            Track B (1B-01..12)
+                      [IP Layer + Companions]         [TCP + Congestion Ctrl]
+                                │                                  │
+                                └──────────┬───────────────────────┘
+                                           │
+                                   CAPCOM GATE 1
+                                           │
+                                           ▼
+                                   Wave 2 Synthesis
+                                   (QUIC + TLS + Integration)
+                                           │
+                                           ▼
+                                   Wave 3 Publication
+                                   (Assembly + Tests + PDF)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} \\
+\midrule
+Safety-Critical & Non-negotiable content boundaries & 5 & Mandatory & BLOCK \\
+Core Functionality & Deliverable acceptance & 22 & Required & BLOCK \\
+Integration & Cross-module validation & 8 & Required & BLOCK \\
+Edge Cases & Robustness and completeness & 8 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & & \textbf{43} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to IETF RFCs, peer-reviewed journals, or professional organizations; zero blog posts or untraceable sources \\
+SC-NUM & Numerical attribution & Every throughput figure, latency measurement, and bit-width traces to specific RFC section number or cited publication \\
+SC-SEC & Security sensitivity & Attack mechanics (ARP spoofing, SYN flood, sequence prediction) documented for defensive understanding; no operational exploit detail, no code for malicious use \\
+SC-ADV & No policy advocacy & Document presents protocol mechanics and tradeoffs without advocating for specific deployment mandates \\
+SC-CANon & RFC canonization accuracy & Every RFC listed as ``current standard'' actually is; obsoleted RFCs are correctly labeled; no RFC presented as current that has been superseded \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. IPv4 header complete (13 fields, bit-level) & CF-01, CF-02 & Pending \\
+2. IPv6 header complete (8 fields + extension headers) & CF-03, CF-04 & Pending \\
+3. TCP segment complete (RFC 9293, all fields + options) & CF-05, CF-06, CF-07 & Pending \\
+4. FSM complete (11 states, all transitions, edge cases) & CF-08, CF-09, CF-10 & Pending \\
+5. Congestion control mathematically specified & CF-11, CF-12, CF-13 & Pending \\
+6. Companion protocols catalogued & CF-14, CF-15, CF-16 & Pending \\
+7. QUIC specification mapped & CF-17, CF-18, CF-19 & Pending \\
+8. RFC canon established & SC-CANON, CF-20 & Pending \\
+9. Performance data quantified & CF-21, SC-NUM & Pending \\
+10. Protocol ossification documented & CF-22, IN-04 & Pending \\
+11. GSD Mesh applicability noted & IN-05, IN-06 & Pending \\
+12. Zero unsourced numerical claims & SC-NUM, SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Opus & Mission direction; go/no-go gates; CAPCOM Gate management \\
+PLAN & Planner & Sonnet & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Sonnet & Gap-fill web research; RFC validation; deployment statistics \\
+EXEC-A & Executor Alpha & Sonnet & Track A production: IPv4/IPv6, companion protocols \\
+EXEC-B & Executor Beta & Sonnet & Track B production: TCP core, flow control \\
+CRAFT-IP & IP Specialist & Sonnet & IPv4/IPv6 header fields; fragmentation; PMTUD; addressing \\
+CRAFT-TCP & TCP Specialist & Opus & TCP FSM; segment format; handshake; simultaneous-close paths \\
+CRAFT-CC & Congestion Ctrl & Opus & Slow Start; CUBIC formula; BBR model; SACK; ECN; RTO \\
+CRAFT-PROTO & Protocol Analyst & Sonnet & UDP; ICMP; ARP/NDP; DNS; DHCP \\
+VERIFY & Verification & Sonnet & RFC status validation; numerical attribution audit; test execution \\
+CAPCOM & HITL Interface & --- & Human approval at CAPCOM Gate 1 and final delivery gate \\
+SECURE & Security Warden & Opus & Attack vector review; ensure no operational exploit documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+CAPCOM Gates & 1 (between Wave 1 and Wave 2) \\
+Estimated Context Windows & 8--10 \\
+Estimated Sessions & 3--4 \\
+Estimated Token Budget & $\sim$160k tokens total \\
+Opus Share & $\sim$43\% \\
+Sonnet Share & $\sim$53\% \\
+Haiku Share & $\sim$4\% \\
+Primary Authority & IETF RFC Editor + IETF Datatracker \\
+RFC Count & 27 primary RFCs \\
+Peer-Reviewed Sources & 5 papers \\
+Safety Tests (BLOCK) & 5 \\
+Core Functionality Tests (BLOCK) & 22 \\
+Integration Tests (BLOCK) & 8 \\
+Edge Case Tests (LOG) & 8 \\
+Total Tests & 43 \\
+Key Deliverable & PDF research reference (publication-quality) \\
+GSD Downstream Use & GSD Mesh Prototype transport design \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily The Through-Line --- Carried Forward}
+
+\medskip
+
+Postel's 1978 split of the Transmission Control Program into IP and TCP is the founding act of architectural leverage in computer networking. The same insight drives DACP: when you separate routing from reliability, when you separate intent from delivery, when you separate the human message from the structured bundle, you create a space between layers where composability lives.
+
+\medskip
+
+QUIC does not abandon this principle --- it compresses it. The handshake and the transport and the security layer collapse into a single 1-RTT exchange, and stream multiplexing eliminates head-of-line blocking. TCP's 40-year ossification made this necessary. The lesson: even the most elegant architecture accumulates barnacles. Design for replaceability.
+
+\medskip
+
+The GSD Mesh Prototype that draws on this reference inherits not just the protocol specifications but the design philosophy: deterministic contracts at every boundary, minimal interfaces between layers, and the humility to know that today's architecture is tomorrow's legacy system.
+
+\medskip
+
+\textit{``We are screwing up in our design of Internet protocols by violating the principle of layering.''} --- Jonathan Postel, 1977
+\end{quotebox}
+
+\end{document}

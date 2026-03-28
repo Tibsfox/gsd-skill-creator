@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; TCP/IP Protocol</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-tcp">
+  <header>
+    <h1>TCP/IP Protocol</h1>
+    <div class="subtitle">IP Layer &middot; TCP Core &middot; Congestion Control &middot; Companion Protocols &middot; Transport Evolution</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-ip-layer">IP Layer</a>
+      <a href="page.html?doc=02-tcp-core">TCP Core</a>
+      <a href="page.html?doc=03-congestion-control">Congestion Control</a>
+      <a href="page.html?doc=04-companion-protocols">Companion Protocols</a>
+      <a href="page.html?doc=05-transport-evolution">Transport Evolution</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      Postel's 1978 split of the Transmission Control Program into IP and TCP is the founding act of
+      architectural leverage in computer networking. The same insight drives DACP: when you separate
+      routing from reliability, when you separate intent from delivery, when you separate the human
+      message from the structured bundle, you create a space between layers where composability lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~160K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/tcpip_mission.pdf">Mission Package</a></td><td>PDF &middot; 30 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/tcpip_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/tcpip_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>RFC schema, templates, module assignment</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>IP + Companions</td><td>Track A: M1 (IP Layer) + M4 (Companion Protocols)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>TCP + Congestion</td><td>Track B: M2 (TCP Core) + M3 (Congestion Control)</td><td>Parallel</td><td>Sonnet/Opus</td></tr>
+        <tr><td>2</td><td>Evolution + Synthesis</td><td>M5 (QUIC, TLS, HTTP/3), cross-protocol table, Mesh notes</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Assembly, bibliography validation, test execution</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus</td><td>Cross-module integration, congestion math, QUIC vs TCP comparison, RFC conflict resolution</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet</td><td>Module 01-04 reference sections, table construction, bibliography formatting</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku</td><td>Shared RFC citation schemas, header field templates, test scaffolding</td></tr>
+        <tr><td>M68000</td><td>Logic / glue / routing</td><td>30% Opus / 60% Sonnet / 10% Haiku</td><td>Safety warden, push gating</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to IETF RFCs, peer-reviewed journals, or professional organizations. Zero blog posts or untraceable sources.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every throughput figure, latency measurement, and bit-width traces to specific RFC section number or cited publication.</td></tr>
+        <tr><td>SC-SEC</td><td>Security sensitivity</td><td>Attack mechanics (ARP spoofing, SYN flood, sequence prediction) documented for defensive understanding only. No operational exploit detail.</td></tr>
+        <tr><td>SC-ADV</td><td>No policy advocacy</td><td>Document presents protocol mechanics and tradeoffs without advocating for specific deployment mandates.</td></tr>
+        <tr><td>SC-CANON</td><td>RFC canonization accuracy</td><td>Every RFC listed as current actually is; obsoleted RFCs correctly labeled; no RFC presented as current that has been superseded.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: The Packet Trace</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>IPv4 header complete (13 fields, bit-level)</td><td>CF-01, CF-02</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>IPv6 header complete (8 fields + extension headers)</td><td>CF-03, CF-04</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>TCP segment complete (RFC 9293, all fields + options)</td><td>CF-05, CF-06, CF-07</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>FSM complete (11 states, all transitions, edge cases)</td><td>CF-08, CF-09, CF-10</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Congestion control mathematically specified (CUBIC, BBR)</td><td>CF-11, CF-12, CF-13</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Companion protocols catalogued (UDP, ICMP, DNS, DHCP)</td><td>CF-14, CF-15, CF-16</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>QUIC specification mapped (RFC 9000)</td><td>CF-17, CF-18, CF-19</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>RFC canon established (27+ RFCs status-verified)</td><td>SC-CANON, CF-20</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Performance data quantified (CUBIC vs BBR)</td><td>CF-21, SC-NUM</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Protocol ossification documented</td><td>CF-22, IN-04</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>GSD Mesh applicability noted per module</td><td>IN-05, IN-06</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Zero unsourced numerical claims</td><td>SC-NUM, SC-SRC</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The TCP/IP suite is not elegant in the way that a mathematical proof is elegant. It is elegant
+    the way a living ecosystem is elegant: through evolutionary pressure, through accumulated wisdom
+    encoded as RFCs, through the willingness of protocol designers to split things apart when a monolith
+    was failing. QUIC does not abandon this principle &mdash; it compresses it. The handshake and the
+    transport and the security layer collapse into a single 1-RTT exchange, and stream multiplexing
+    eliminates head-of-line blocking. TCP's 40-year ossification made this necessary. The lesson:
+    even the most elegant architecture accumulates barnacles. Design for replaceability.</p>
+
+    <p>The GSD Mesh Prototype that draws on this reference inherits not just the protocol specifications
+    but the design philosophy: deterministic contracts at every boundary, minimal interfaces between
+    layers, and the humility to know that today's architecture is tomorrow's legacy system.</p>
+
+    <p><em>&ldquo;We are screwing up in our design of Internet protocols by violating the principle
+    of layering.&rdquo;</em> &mdash; Jonathan Postel, 1977</p>
+  </main>
+
+  <footer>
+    <p>TCP/IP Protocol &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
