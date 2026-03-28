@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Seed Catalog — 128 Future Installations</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1a12; color: #e8dcc8; font-family: 'Georgia','Times New Roman',serif; min-height: 100vh; }
+
+    /* Nav */
+    .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; flex-wrap: wrap; }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 3.5rem 2rem 2rem; background: radial-gradient(ellipse at 50% 80%, rgba(122,154,90,0.08) 0%, transparent 60%); }
+    .hero h1 { font-size: 2.4rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+    .hero .subtitle { font-size: 0.95rem; color: rgba(232,220,200,0.5); font-style: italic; margin-bottom: 1.5rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+    .hero-stats { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; font-size: 0.78rem; color: rgba(232,220,200,0.4); margin-bottom: 1.5rem; }
+    .hero-stats span { white-space: nowrap; }
+    .hero-stats .num { color: #c8b890; font-weight: 600; }
+
+    /* Filters */
+    .controls { max-width: 64rem; margin: 0 auto; padding: 0 2rem; }
+    .filter-row { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1rem; }
+    .filter-btn { background: rgba(26,42,32,0.6); border: 1px solid rgba(122,154,90,0.15); color: rgba(232,220,200,0.6); padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.78rem; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: rgba(122,154,90,0.4); color: #e8dcc8; }
+    .filter-btn.active { background: rgba(122,154,90,0.2); border-color: rgba(122,154,90,0.5); color: #e8dcc8; }
+
+    /* Grove tabs */
+    .grove-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .grove-tab { background: rgba(26,42,32,0.5); border: 1px solid rgba(200,184,144,0.1); color: rgba(232,220,200,0.55); padding: 0.4rem 0.9rem; border-radius: 6px; font-size: 0.78rem; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+    .grove-tab:hover { border-color: rgba(200,184,144,0.3); color: #e8dcc8; }
+    .grove-tab.active { background: rgba(200,184,144,0.12); border-color: rgba(200,184,144,0.35); color: #c8b890; }
+
+    /* Garden canvas */
+    .garden-wrap { text-align: center; margin: 1.5rem auto; }
+    .garden-wrap canvas { border: 1px solid rgba(122,154,90,0.12); border-radius: 8px; cursor: crosshair; max-width: 100%; }
+    .garden-label { font-size: 0.72rem; color: rgba(232,220,200,0.3); margin-top: 0.4rem; }
+
+    /* Seed cards grid */
+    .seed-grid { max-width: 64rem; margin: 0 auto; padding: 1rem 2rem 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem; }
+
+    .seed-card { background: rgba(26,42,32,0.55); border: 1px solid rgba(122,154,90,0.12); border-radius: 8px; padding: 1.1rem 1.2rem; transition: all 0.25s; position: relative; }
+    .seed-card:hover { border-color: rgba(122,154,90,0.35); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .seed-card.hidden { display: none; }
+
+    .seed-head { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .seed-num { font-size: 0.7rem; color: rgba(232,220,200,0.3); font-family: 'Courier New',monospace; min-width: 1.8rem; }
+    .seed-name { font-size: 1rem; font-weight: 400; flex: 1; }
+    .seed-muse { font-size: 0.7rem; color: rgba(200,184,144,0.5); }
+
+    .seed-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .badge { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 10px; border: 1px solid; }
+    .badge-type { border-color: rgba(94,184,196,0.3); color: rgba(94,184,196,0.7); }
+    .badge-diff { border-color: rgba(122,154,90,0.3); color: rgba(122,154,90,0.7); }
+
+    .seed-desc { font-size: 0.8rem; color: rgba(232,220,200,0.55); line-height: 1.6; margin-bottom: 0.5rem; }
+    .seed-teaches { font-size: 0.75rem; color: rgba(200,184,144,0.5); font-style: italic; margin-bottom: 0.5rem; }
+    .seed-teaches em { color: rgba(200,184,144,0.7); font-style: normal; }
+
+    .seed-links { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .seed-link { font-size: 0.68rem; color: rgba(122,154,90,0.5); background: rgba(122,154,90,0.08); padding: 0.1rem 0.4rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .seed-link:hover { color: #7a9a5a; background: rgba(122,154,90,0.15); }
+
+    /* Domain accent stripe */
+    .seed-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 8px 8px 0 0; }
+    .seed-card[data-domain="science"]::before { background: #5eb8c4; }
+    .seed-card[data-domain="math"]::before { background: #b07ae0; }
+    .seed-card[data-domain="art"]::before { background: #c75b3a; }
+    .seed-card[data-domain="music"]::before { background: #d4881a; }
+    .seed-card[data-domain="philosophy"]::before { background: #7a9a5a; }
+    .seed-card[data-domain="infrastructure"]::before { background: #8a8a8a; }
+    .seed-card[data-domain="ecology"]::before { background: #4a7c3f; }
+    .seed-card[data-domain="culture"]::before { background: #c8a060; }
+
+    /* Footer */
+    .camp-footer { max-width: 42rem; margin: 0 auto; text-align: center; padding: 2rem 2rem 3rem; font-size: 0.82rem; color: rgba(232,220,200,0.4); line-height: 1.8; }
+    .camp-footer p { margin-bottom: 1rem; }
+    .camp-footer .cta { color: rgba(232,220,200,0.6); font-style: italic; }
+    .camp-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+    .camp-footer a:hover { color: #7a9a5a; }
+    .camp-footer .links { margin-top: 1.5rem; font-size: 0.78rem; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .seed-grid { grid-template-columns: 1fr; }
+      .grove-tabs { gap: 0.3rem; }
+      .grove-tab { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <a href="seeds.html" class="active">Seed Catalog</a>
+</div>
+
+<div class="hero">
+  <h1>The Seed Catalog</h1>
+  <div class="subtitle">128 future installations waiting to grow &mdash; each one a clearing that doesn't exist yet</div>
+  <div class="hero-stats">
+    <span><span class="num">128</span> seeds</span>
+    <span><span class="num">8</span> groves</span>
+    <span><span class="num">3</span> difficulty levels</span>
+    <span>seedling &middot; sapling &middot; old-growth</span>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="filter-row">
+    <button class="filter-btn active" data-diff="all">All</button>
+    <button class="filter-btn" data-diff="seedling">&#127793; Seedling</button>
+    <button class="filter-btn" data-diff="sapling">&#127807; Sapling</button>
+    <button class="filter-btn" data-diff="old-growth">&#127794; Old-growth</button>
+  </div>
+  <div class="grove-tabs">
+    <button class="grove-tab active" data-grove="all">All Groves</button>
+    <button class="grove-tab" data-grove="1">Observatory</button>
+    <button class="grove-tab" data-grove="2">Library</button>
+    <button class="grove-tab" data-grove="3">Studio</button>
+    <button class="grove-tab" data-grove="4">Concert Hall</button>
+    <button class="grove-tab" data-grove="5">Philosophy Garden</button>
+    <button class="grove-tab" data-grove="6">Workshop</button>
+    <button class="grove-tab" data-grove="7">Commons</button>
+    <button class="grove-tab" data-grove="8">Frontier</button>
+  </div>
+</div>
+
+<div class="garden-wrap">
+  <canvas id="garden" width="600" height="400"></canvas>
+  <div class="garden-label">hover to identify &middot; click to jump</div>
+</div>
+
+<div class="seed-grid" id="seedGrid"></div>
+
+<div class="camp-footer">
+  <p>These are seeds, not trees. Each one is a description of something that could be built. Some are simple &mdash; a single canvas widget. Some are complex &mdash; full simulations with multiple systems. All of them are waiting for someone to build them. The forest grows when someone picks up a seed and plants it.</p>
+  <p class="cta">Fork the repo. Pick a seed. Build it. The clearing is yours.</p>
+  <div class="links">
+    <a href="index.html">Center Camp</a> &middot;
+    <a href="../compass.html">The Compass</a> &middot;
+    <a href="../index.html">Research Series</a>
+  </div>
+</div>
+
+<script src="seeds.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var GROVES = [
+    { id: 1, name: 'The Observatory', range: [1,16] },
+    { id: 2, name: 'The Library', range: [17,32] },
+    { id: 3, name: 'The Studio', range: [33,48] },
+    { id: 4, name: 'The Concert Hall', range: [49,64] },
+    { id: 5, name: 'The Philosophy Garden', range: [65,80] },
+    { id: 6, name: 'The Workshop', range: [81,96] },
+    { id: 7, name: 'The Commons', range: [97,112] },
+    { id: 8, name: 'The Frontier', range: [113,128] }
+  ];
+
+  var DOMAIN_COLORS = {
+    science: '#5eb8c4', math: '#b07ae0', art: '#c75b3a', music: '#d4881a',
+    philosophy: '#7a9a5a', infrastructure: '#8a8a8a', ecology: '#4a7c3f', culture: '#c8a060'
+  };
+
+  var DIFF_LABEL = { seedling: '\u{1F331} Seedling', sapling: '\u{1F33F} Sapling', 'old-growth': '\u{1F332} Old-growth' };
+  var DIFF_SIZE = { seedling: 3, sapling: 5, 'old-growth': 7 };
+
+  var activeGrove = 'all';
+  var activeDiff = 'all';
+
+  // --- Build cards ---
+  var grid = document.getElementById('seedGrid');
+  SEEDS.forEach(function(s) {
+    var grove = Math.ceil(s.id / 16);
+    var card = document.createElement('div');
+    card.className = 'seed-card';
+    card.id = 'seed-' + s.id;
+    card.setAttribute('data-domain', s.domain);
+    card.setAttribute('data-grove', grove);
+    card.setAttribute('data-diff', s.difficulty);
+
+    var links = s.connections.map(function(cid) {
+      var target = SEEDS.find(function(x) { return x.id === cid; });
+      var label = target ? '#' + cid + ' ' + target.name : '#' + cid;
+      return '<a class="seed-link" href="#seed-' + cid + '">' + label + '</a>';
+    }).join('');
+
+    card.innerHTML =
+      '<div class="seed-head">' +
+        '<span class="seed-num">#' + s.id + '</span>' +
+        '<span class="seed-name">' + s.name + '</span>' +
+        '<span class="seed-muse">' + s.muse + '</span>' +
+      '</div>' +
+      '<div class="seed-badges">' +
+        '<span class="badge badge-type">' + s.type + '</span>' +
+        '<span class="badge badge-diff">' + DIFF_LABEL[s.difficulty] + '</span>' +
+      '</div>' +
+      '<div class="seed-desc">' + s.description + '</div>' +
+      '<div class="seed-teaches"><em>Teaches:</em> ' + s.teaches + '</div>' +
+      '<div class="seed-links">' + links + '</div>';
+
+    grid.appendChild(card);
+  });
+
+  // --- Filtering ---
+  function applyFilters() {
+    var cards = grid.querySelectorAll('.seed-card');
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      var gMatch = activeGrove === 'all' || c.getAttribute('data-grove') === activeGrove;
+      var dMatch = activeDiff === 'all' || c.getAttribute('data-diff') === activeDiff;
+      c.classList.toggle('hidden', !(gMatch && dMatch));
+    }
+  }
+
+  document.querySelectorAll('.grove-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.grove-tab').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeGrove = btn.getAttribute('data-grove');
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeDiff = btn.getAttribute('data-diff');
+      applyFilters();
+    });
+  });
+
+  // --- Garden canvas ---
+  var canvas = document.getElementById('garden');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var cx = W / 2, cy = H / 2;
+  var dots = [];
+  var hoveredSeed = null;
+
+  SEEDS.forEach(function(s) {
+    var grove = Math.ceil(s.id / 16);
+    var posInGrove = ((s.id - 1) % 16);
+    var r = 30 + grove * 22;
+    var angle = (posInGrove / 16) * Math.PI * 2 - Math.PI / 2;
+    var jitter = (s.id * 7 % 13 - 6) * 0.8;
+    dots.push({
+      x: cx + Math.cos(angle) * (r + jitter),
+      y: cy + Math.sin(angle) * (r + jitter),
+      seed: s,
+      r: DIFF_SIZE[s.difficulty],
+      color: DOMAIN_COLORS[s.domain] || '#7a9a5a'
+    });
+  });
+
+  function drawGarden() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0d1a12';
+    ctx.fillRect(0, 0, W, H);
+
+    // ring guides
+    for (var g = 1; g <= 8; g++) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, 30 + g * 22, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(122,154,90,0.07)';
+      ctx.stroke();
+    }
+
+    // connection lines for hovered
+    if (hoveredSeed) {
+      hoveredSeed.connections.forEach(function(cid) {
+        var from = dots.find(function(d) { return d.seed.id === hoveredSeed.id; });
+        var to = dots.find(function(d) { return d.seed.id === cid; });
+        if (from && to) {
+          ctx.beginPath();
+          ctx.moveTo(from.x, from.y);
+          ctx.lineTo(to.x, to.y);
+          ctx.strokeStyle = 'rgba(200,184,144,0.15)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+    }
+
+    // dots
+    dots.forEach(function(d) {
+      var isHovered = hoveredSeed && d.seed.id === hoveredSeed.id;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, isHovered ? d.r + 2 : d.r, 0, Math.PI * 2);
+      ctx.fillStyle = isHovered ? '#e8dcc8' : d.color;
+      ctx.globalAlpha = isHovered ? 1 : 0.7;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // label
+    if (hoveredSeed) {
+      var hd = dots.find(function(d) { return d.seed.id === hoveredSeed.id; });
+      if (hd) {
+        var label = '#' + hoveredSeed.id + ' ' + hoveredSeed.name;
+        ctx.font = '11px Georgia, serif';
+        var tw = ctx.measureText(label).width;
+        var lx = Math.min(Math.max(hd.x - tw / 2, 4), W - tw - 4);
+        var ly = hd.y - hd.r - 8;
+        if (ly < 14) ly = hd.y + hd.r + 14;
+        ctx.fillStyle = 'rgba(13,26,18,0.85)';
+        ctx.fillRect(lx - 4, ly - 11, tw + 8, 15);
+        ctx.fillStyle = '#e8dcc8';
+        ctx.fillText(label, lx, ly);
+      }
+    }
+  }
+
+  function findDot(mx, my) {
+    for (var i = dots.length - 1; i >= 0; i--) {
+      var d = dots[i];
+      var dx = mx - d.x, dy = my - d.y;
+      if (dx * dx + dy * dy <= (d.r + 4) * (d.r + 4)) return d;
+    }
+    return null;
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = W / rect.width, scaleY = H / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var my = (e.clientY - rect.top) * scaleY;
+    var hit = findDot(mx, my);
+    hoveredSeed = hit ? hit.seed : null;
+    drawGarden();
+  });
+
+  canvas.addEventListener('click', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = W / rect.width, scaleY = H / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var my = (e.clientY - rect.top) * scaleY;
+    var hit = findDot(mx, my);
+    if (hit) {
+      var el = document.getElementById('seed-' + hit.seed.id);
+      if (el) {
+        // reveal if filtered
+        var grove = Math.ceil(hit.seed.id / 16);
+        if (activeGrove !== 'all' && activeGrove !== '' + grove) {
+          document.querySelectorAll('.grove-tab').forEach(function(b) { b.classList.remove('active'); });
+          document.querySelector('.grove-tab[data-grove="all"]').classList.add('active');
+          activeGrove = 'all';
+        }
+        if (activeDiff !== 'all' && activeDiff !== hit.seed.difficulty) {
+          document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+          document.querySelector('.filter-btn[data-diff="all"]').classList.add('active');
+          activeDiff = 'all';
+        }
+        applyFilters();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  });
+
+  canvas.addEventListener('mouseleave', function() { hoveredSeed = null; drawGarden(); });
+
+  drawGarden();
+})();
+</script>
+
+</body>
+</html>
