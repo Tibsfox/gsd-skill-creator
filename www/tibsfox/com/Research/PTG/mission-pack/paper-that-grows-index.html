@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper That Grows — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #4E342E;
+  --secondary: #2E7D32;
+  --tertiary: #5D4037;
+  --accent: #F9A825;
+  --light-bg: #EFEBE9;
+  --card-bg: #D7CCC8;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAF5; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 60%, var(--secondary) 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: var(--accent); letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--secondary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--tertiary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Paper That Grows</h1>
+  <h2>The Living Community Newsletter</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="paper-that-grows-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification. Recompile with three XeLaTeX passes.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Domain architecture and module dependency diagrams</li>
+          <li>5 research modules: Material Science, Ecosystem Integration, Eco-Printing, Publishing, Circular Economy</li>
+          <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Seed paper manufacturing: pulp chemistry, pH, binder systems, seed integration</li>
+          <li>PNW native plant palettes: 3 microclimate zones, 7 species per zone</li>
+          <li>Soy/algae ink chemistry: SoySeal certification, VOC profiles, soil toxicology</li>
+          <li>Hyperlocal publishing: advertiser tiers, revenue model, digital edition architecture</li>
+          <li>Circular economy: junk mail baseline, lifecycle comparison, carbon accounting</li>
+          <li>Safety considerations and full source bibliography (30+ sources)</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>10 deliverables, 4-wave execution plan with 2 parallel tracks</li>
+          <li>Squadron activation profile: 12 roles</li>
+          <li>20 tests (4 safety-critical), verification matrix: The Fiber Report</li>
+          <li>~108K token budget, 3-4 sessions estimated</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the document</li>
+      <li>Wave 0 produces shared seed schema YAML and source index</li>
+      <li>Wave 1 executes two parallel tracks (A: Material+Ecology, B: Printing+Publishing+Lifecycle)</li>
+      <li>Wave 2 synthesizes seed-ink compatibility, lifecycle validation, and pilot community spec</li>
+      <li>Wave 3 assembles, verifies, and delivers the final specification package</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode paper-that-grows-mission.tex
+xelatex -interaction=nonstopmode paper-that-grows-mission.tex
+xelatex -interaction=nonstopmode paper-that-grows-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "The newsletter does not die when you are done reading it. It waits. It needs only to be placed on the ground, where it becomes the ground, and then becomes the meadow. The space between the mailbox and the soil is smaller than it seems &mdash; it is exactly the width of one deliberate decision."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Paper That Grows &middot; March 2026
+</footer>
+
+</body>
+</html>

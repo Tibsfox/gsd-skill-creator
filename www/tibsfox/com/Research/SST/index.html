@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>States, Symbols &amp; Tape &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sst">
+  <header>
+    <h1>States, Symbols &amp; Tape</h1>
+    <div class="subtitle">Turing Machines &middot; Shannon Fungibility &middot; Chomsky Hierarchy &middot; Undecidability &middot; GSD Synthesis</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-formal-foundations">Foundations</a>
+      <a href="page.html?doc=02-shannon-tradeoff">Shannon</a>
+      <a href="page.html?doc=03-tape-hierarchy">Hierarchy</a>
+      <a href="page.html?doc=04-limits-undecidability">Limits</a>
+      <a href="page.html?doc=05-gsd-synthesis">GSD Synthesis</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The insight arrived as a vibe: a finite state machine with infinite tape is the same as an
+      infinite state machine with finite tape. Shannon turned this exact intuition into a theorem
+      in 1956. States and tape alphabet richness are fungible. The complexity budget of computation
+      can be denominated in either currency. But tape length is a different resource entirely &mdash;
+      restrict it and you lose real computational power, provably and permanently.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">40</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">288K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Crew Roles</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-formal-foundations" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Formal Foundations</h3>
+        <div class="meta"><span class="tag tag-theory">Theory</span> Track A &middot; Turing 1936</div>
+        <p>Turing's original computing machine: finite state control, one-way infinite tape, read-write head, transition function. Configuration triples, Church-Turing thesis, deterministic vs. nondeterministic machines. Finite state machines as the no-tape special case.</p>
+      </a>
+
+      <a href="page.html?doc=02-shannon-tradeoff" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Shannon Trade-off</h3>
+        <div class="meta"><span class="tag tag-shannon">Shannon</span> Track A &middot; Fungibility</div>
+        <p>Shannon (1956): both directions of the fungibility theorem. The UTM size frontier from (15,2) to (2,18). Minsky's 7-state 4-symbol machine. Wolfram's (2,3) conjecture and Smith's 2007 weak-universality proof. The complexity budget metaphor.</p>
+      </a>
+
+      <a href="page.html?doc=03-tape-hierarchy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Tape-Length Hierarchy</h3>
+        <div class="meta"><span class="tag tag-hierarchy">Hierarchy</span> Track B &middot; Chomsky 1956</div>
+        <p>Chomsky hierarchy Type 0 through Type 3. Linear bounded automata: Myhill 1960, Landweber 1963. Configuration space argument: bounded tape implies finite configurations implies decidability. The LBA open problem.</p>
+      </a>
+
+      <a href="page.html?doc=04-limits-undecidability" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Limits &amp; Undecidability</h3>
+        <div class="meta"><span class="tag tag-limits">Limits</span> Track B &middot; Turing 1936</div>
+        <p>Halting problem by diagonalization. Why infinite tape is necessary for undecidability. Rice's theorem: no non-trivial property of TM output is decidable. Contrast with bounded-tape decidability. G&ouml;del's incompleteness connection.</p>
+      </a>
+
+      <a href="page.html?doc=05-gsd-synthesis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: GSD Architectural Synthesis</h3>
+        <div class="meta"><span class="tag tag-gsd">GSD</span> Synthesis &middot; Opus</div>
+        <p>Context window as bounded tape. LLMs as bounded-tape machines. Fresh-context subagents as tape-reset strategy. DACP three-part bundle as valid state serialization. The Amiga Principle as Shannon's theorem applied to agent architecture.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Turing machine formal definition</td><td>M1, M2, M4</td><td>GSD2, MPC, GSA</td></tr>
+        <tr><td>Shannon fungibility theorem</td><td>M2, M5</td><td>DAA, FQC, HFR</td></tr>
+        <tr><td>Chomsky hierarchy / tape resources</td><td>M3, M4, M5</td><td>GSD2, MGU, ICS</td></tr>
+        <tr><td>Configuration space argument</td><td>M1, M3, M4</td><td>MPC, GRD</td></tr>
+        <tr><td>Halting problem / Rice's theorem</td><td>M4, M5</td><td>GSD2, GSA</td></tr>
+        <tr><td>UTM size frontier</td><td>M2</td><td>MPC, BHK</td></tr>
+        <tr><td>Context window as bounded tape</td><td>M5</td><td>GSA, M05, CGI</td></tr>
+        <tr><td>DACP / agent architecture</td><td>M5</td><td>GSD2, GSA, CGI, M05</td></tr>
+        <tr><td>Amiga Principle</td><td>M2, M5</td><td>GSD2, ICS</td></tr>
+        <tr><td>Information theory foundations</td><td>M2</td><td>DAA, FQC, HFR, HFE</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Computational Hierarchy</h2>
+
+    <pre>
+COMPUTATIONAL POWER HIERARCHY
+=======================================================
+  TURING MACHINE                [Infinite tape]
+  Finite states + unbounded write tape
+  Recognizes: Recursively Enumerable languages (Type 0)
+  Halting: Undecidable
+     |
+     | restrict tape to O(n) cells (input length)
+     v
+  LINEAR BOUNDED AUTOMATON      [Tape ~ input length]
+  Finite states + tape = f(|input|)
+  Recognizes: Context-Sensitive languages (Type 1)
+  Halting: Decidable per input
+     |
+     | restrict to stack or O(log n) scratch tape
+     v
+  PUSHDOWN / LOG-SPACE          [Bounded aux tape]
+  Finite states + auxiliary bounded tape
+  Recognizes: Context-Free languages (Type 2)
+     |
+     | remove writable tape entirely
+     v
+  FINITE STATE MACHINE          [No tape]
+  Finite states + read-only left-to-right scan
+  Recognizes: Regular languages (Type 3)
+=======================================================
+  Shannon (1956): within ANY row, states &lt;-&gt; symbols
+  Moving DOWN: permanent, provable power loss
+=======================================================
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+=======================================================
+  [Schema] ----+---- [Source Index]
+               |
+       +-------+-------+
+       |               |
+   [MOD-1]         [MOD-3]
+   Foundations      Hierarchy
+       |               |
+   [MOD-2]         [MOD-4]
+   Shannon          Limits
+       |               |
+       +-------+-------+
+               |
+           [MOD-5]
+        GSD Synthesis
+               |
+        [Integration]
+               |
+        [Publication]
+
+  Parallel tracks:
+    Track A: M1 + M2 (Foundations + Shannon)
+    Track B: M3 + M4 (Hierarchy + Limits)
+    Synthesis: M5 (GSD Architectural Synthesis)
+    </pre>
+  </main>
+
+  <footer>
+    <p>States, Symbols &amp; Tape &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

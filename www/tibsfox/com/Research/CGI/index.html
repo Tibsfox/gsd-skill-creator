@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caliber Integration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cgi">
+  <header>
+    <h1>Caliber Integration</h1>
+    <div class="subtitle">Measurement Frameworks &middot; Skill Quality Scoring &middot; Calibration Loops &middot; Drift Detection &middot; Bridge Architecture</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-caliber-architecture-analysis">Caliber Architecture</a>
+      <a href="page.html?doc=02-gsd-skill-creator-architecture">GSD Architecture</a>
+      <a href="page.html?doc=03-integration-mapping">Integration Mapping</a>
+      <a href="page.html?doc=04-calibration-loops-quality-metrics">Calibration Loops</a>
+      <a href="page.html?doc=05-risk-compatibility-bridge">Risk &amp; Bridge</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Two TypeScript CLIs share the same gravity well. Caliber approaches the problem from the outside
+      in: given any codebase, score its AI agent configuration quality, generate missing pieces, and
+      keep everything synchronized as the code evolves. The gsd-skill-creator approaches from the inside
+      out: given a developer's actual working patterns, observe what they do repeatedly, crystallize
+      those patterns into reusable skills. They are not competitors. They are complements operating at
+      different layers of the same stack. The integration lives in the spaces between them.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">53</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Execution Waves</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Direct Ports</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-caliber-architecture-analysis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Caliber Architecture Analysis</h3>
+        <div class="meta"><span class="tag tag-score">Scoring</span> Track A &middot; External system</div>
+        <p>Caliber's deterministic, LLM-free scoring engine. 100-point rubric across five categories: Existence, Quality, Grounding, Accuracy, Freshness. Session learning pipeline. Score regression guards. Structured fix data injection. Two-tier model system.</p>
+      </a>
+
+      <a href="page.html?doc=02-gsd-skill-creator-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: GSD Skill-Creator Architecture</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Track A &middot; Internal system</div>
+        <p>DACP protocol three-part bundle structure. Skill lifecycle from detection through refinement. Bounded learning constraints: 20% cap, 3-correction minimum, 7-day cooldown. Module map of integration touch points across src/ directories.</p>
+      </a>
+
+      <a href="page.html?doc=03-integration-mapping" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Integration Mapping</h3>
+        <div class="meta"><span class="tag tag-bridge">Bridge</span> Track B &middot; Port analysis</div>
+        <p>Three-tier port taxonomy: 6 direct ports (highest confidence), 5 adapted patterns (medium confidence), 3 GSD-native enhancements (new ground). Caliber TODOS roadmap analysis. Cross-repo skill registry patterns.</p>
+      </a>
+
+      <a href="page.html?doc=04-calibration-loops-quality-metrics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Calibration Loops &amp; Quality Metrics</h3>
+        <div class="meta"><span class="tag tag-learn">Learning</span> Track B &middot; Feedback systems</div>
+        <p>Skill quality lifecycle: score, refine, re-score, gate. CALIBER_LEARNINGS taxonomy (6 categories). Session learning pipeline. Skill metrics JSONL schema. Trend analysis and ROI tracking. The self-improving skill ecosystem.</p>
+      </a>
+
+      <a href="page.html?doc=05-risk-compatibility-bridge" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Risk, Compatibility &amp; The Bridge</h3>
+        <div class="meta"><span class="tag tag-risk">Risk</span> Track C &middot; Synthesis</div>
+        <p>Scoring semantic mismatch. Token budget gating. PR #28 surgical partial merge analysis. Lock file race conditions. Compatibility wins: shared TypeScript/vitest/JSONL stack. The Amiga Principle: specialization as architectural strategy.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Deterministic scoring (LLM-free)</td><td>M1, M3, M4</td><td>GSD2, ACE, PMG</td></tr>
+        <tr><td>Skill lifecycle management</td><td>M2, M3, M4</td><td>GSD2, GSA, MGU</td></tr>
+        <tr><td>DACP protocol bundles</td><td>M2, M5</td><td>GSD2, CMH, MCF</td></tr>
+        <tr><td>Session learning / taxonomy</td><td>M1, M4</td><td>GSA, K8S, CMH</td></tr>
+        <tr><td>Git diff analysis / drift</td><td>M1, M3, M5</td><td>GSD2, ACE</td></tr>
+        <tr><td>Bounded refinement (20% cap)</td><td>M2, M4</td><td>GSD2, MGU</td></tr>
+        <tr><td>Multi-platform output</td><td>M1, M3</td><td>K8S, MCF, OCN</td></tr>
+        <tr><td>Score regression guard</td><td>M1, M4, M5</td><td>ACE, PMG</td></tr>
+        <tr><td>Chipset model assignment</td><td>M2, M3</td><td>GSD2, CMH</td></tr>
+        <tr><td>Feedback category enum</td><td>M1, M2, M4</td><td>GSA, GSD2</td></tr>
+        <tr><td>Lock file management</td><td>M1, M5</td><td>K8S, MCF</td></tr>
+        <tr><td>Vitest / test architecture</td><td>M2, M5</td><td>GSD2, ACE, PMG</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+CALIBER x GSD SKILL-CREATOR -- INTEGRATION MAP
+===============================================================
+
+  CALIBER (ai-setup)                    GSD-SKILL-CREATOR
+  =================                     =================
+
+  [Scoring Engine]  ─────────────────>  skill-creator score
+  LLM-free, 100-pt                      SKILL.md quality
+  filesystem cross-ref                  Trigger precision
+  5 categories                          Codebase grounding
+                                        [PORT: deterministic]
+
+  [Drift Detector]  ─────────────────>  skill-creator refresh
+  git diff analysis                     file trigger staleness
+  staged + unstaged                     path reference check
+  committed changes                     [PORT: adapted]
+
+  [Learning Taxonomy] ───────────────>  FeedbackCategory enum
+  correction / gotcha                   feedback-store.ts
+  fix / pattern                         30+ validated patterns
+  env / convention                      [PORT: enrichment]
+
+  [Score History]   ─────────────────>  skill-metrics.jsonl
+  trend analysis                        activation rate
+  delta arrows                          correction rate
+  cooldown guard                        token ROI
+                                        [PORT: adapted]
+
+  [Multi-platform]  ─────────────────>  --agent flag
+  --agent flag                          strip extension fields
+  claude/cursor/codex                   multi-target output
+                                        [PORT: new feature]
+
+  GSD-NATIVE (no Caliber equivalent)
+  ====================================
+  DACP bundles carry skill score payload
+  Bounded learning (20% cap, 7-day cooldown)
+  Co-activation tracking -> agent emergence
+  Kahn's algorithm cycle detection (extends:)
+  .planning/ staging layer (deposit_mission MCP)
+  Chipset YAML model assignment
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Caliber Architecture] ──────> [M2: GSD Architecture]
+         |                                    |
+         |                                    |
+         v                                    v
+  [M3: Integration Mapping] ─────> [M4: Calibration Loops]
+                                             |
+                                             v
+                              [M5: Risk &amp; The Bridge]
+
+  Parallel tracks:
+    Track A: M1 + M2 (architecture analysis -- both systems)
+    Track B: M3 + M4 (integration mapping + quality metrics)
+    Track C: M5 (risk synthesis, requires A + B complete)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Caliber Integration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1467 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Technology color scheme ──────────────────────────────────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1976D2}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{codeblue}{HTML}{0277BD}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{okgreen}{HTML}{2E7D32}
+
+% ── Section formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{codebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=1pt, boxrule=0.5pt,
+  left=8pt, right=8pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily\color{codeblue},
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table helpers ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{RFC Archive \& Authorship}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={RFC Archive and Authorship -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ── Document ─────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{RFC Archive\\[0.3em]\& Authorship}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Internet Standards Corpus, Local Mirror, Draft Creation \& Submission}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 $|$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) $|$ Estimated: 8--10 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% =============================================================================
+% STAGE 1 — VISION DOCUMENT
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{RFC Archive \& Authorship --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Ready for GSD Orchestrator}
+\metafield{Depends On:}{GSD Ecosystem core (skill-creator, DACP, wave execution)}
+\metafield{Context:}{Cold-start research mission; no prior conversation on topic}
+\metafield{Activation Profile:}{Fleet (17 roles, 6 modules)}
+
+\subsection{Vision}
+
+The Request for Comments series is one of the most quietly remarkable knowledge artifacts in the history of human communication. Born in 1969 as a literal invitation for informal feedback among ARPANET researchers, it has evolved over five decades into the canonical corpus of how the Internet works---every protocol, every addressing scheme, every security convention that undergirds global digital infrastructure exists somewhere in those sequentially numbered documents. There are now more than 9,000 RFCs. The series predates the IETF that now stewards it.
+
+What makes the RFC tradition resonate with the Amiga Principle is precisely its architecture: rough consensus and running code over committee politics. Small, tightly-scoped documents. Immutability once published---if you made a mistake, you publish a new document and say so. No version drift. No ambiguity about which copy is authoritative. The spaces between the documents are as meaningful as the documents themselves: the chain of Obsoletes and Updates links, the normative reference web, the path from Proposed Standard to Internet Standard across months or years of implementation experience.
+
+For anyone building systems that speak to the Internet---or who simply wants to understand how the technical layer of civilization was assembled---having a complete, queryable, offline-accessible local archive of all RFCs is a foundational act of sovereignty over one's own knowledge environment. And for anyone who has identified a gap, a better approach, or an insight worth preserving, the path to authoring and submitting an Internet-Draft is more open than most people realize. You do not need organizational sponsorship. You need technical precision and enough community engagement to achieve rough consensus.
+
+This mission packages everything needed to: (1) understand the RFC corpus and its governance; (2) build and maintain a full local archive; (3) author a well-formed Internet-Draft using modern tooling; and (4) navigate the submission and publication pipeline from first draft to RFC number.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Opacity of the corpus.} The RFC series spans 9,000+ documents across 56 years, five publication streams, multiple maturity levels, and both current and obsoleted standards. Navigating this without a mental model or local tools leads to citation errors, use of superseded specifications, and missed normative dependencies.
+
+  \item \textbf{Archive fragility under connectivity constraints.} All major IETF and RFC Editor properties are public and freely accessible---but only online. Anyone operating in air-gapped environments, intermittent connectivity, or bandwidth-constrained infrastructure has no documented path to a complete, maintainable local mirror. The rsync interface exists but is underdocumented outside specialist circles.
+
+  \item \textbf{Authoring tool fragmentation.} The RFC production toolchain has shifted significantly: NROFF gave way to xml2rfc v2, then v3 (RFCXML), with plaintext now deprecated for new submissions. The official tooling (xml2rfc, idnits, author-tools.ietf.org) is excellent but scattered across multiple sites without a single consolidated authoring guide from first document to submitted I-D.
+
+  \item \textbf{Submission process mystification.} The path from ``I have a good idea'' to ``my document has an RFC number'' involves Internet-Drafts, Working Groups, IESG review, rough consensus mechanics, AUTH48, and stream selection (IETF / IAB / IRTF / Independent / Editorial). Each step is documented but in separate BCPs, FAQs, and web pages that assume prior familiarity with IETF culture.
+
+  \item \textbf{Template and style gap.} RFC 7322 (the Style Guide) and the RFC 2119 requirements language are well-known by name but rarely internalized by first-time authors. Without a complete, annotated, working xml2rfc v3 template---including all required boilerplate, normative/informative reference separation, IANA and Security sections---first drafts routinely fail idnits validation and require multiple revision cycles before editorial acceptance.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The RFC series is the Internet's source code. A local archive is your offline IDE. An Internet-Draft is a pull request against civilizational infrastructure.}
+
+Understanding the RFC ecosystem at depth means understanding three interlocking systems: the \textit{archive} (the full corpus, its structure, and how to mirror it), the \textit{process} (governance, streams, maturity levels, and rough consensus mechanics), and the \textit{authoring stack} (RFCXML, xml2rfc v3, idnits, Datatracker submission). Mastery of all three is the mission.
+
+\subsubsection{Domain Map (RFC Ecosystem Architecture)}
+
+\begin{asciibox}
+RFC ECOSYSTEM ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════
+
+  GOVERNANCE LAYER
+  ┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────────┐
+  │   IETF     │   │    IAB     │   │   IRTF     │   │   Editorial    │
+  │  Stream    │   │  Stream    │   │  Stream    │   │    Stream      │
+  │ (Standards │   │  (Policy / │   │ (Research) │   │  (RFC Series   │
+  │  + BCP)    │   │  Arch.)    │   │            │   │   Governance)  │
+  └─────┬──────┘   └─────┬──────┘   └─────┬──────┘   └───────┬────────┘
+        │                │                │                   │
+        │         ┌──────┴──────────────┬─┘                   │
+        │         │  Independent Stream │                     │
+        │         │  (rfc-ise@rfc-      │                     │
+        │         │   editor.org)       │                     │
+        │         └──────────┬──────────┘                     │
+        └──────────────┬─────┘                                │
+                       ▼                                      │
+              ┌─────────────────┐                             │
+              │   IESG Review   │◄────────────────────────────┘
+              │  (conflict      │
+              │   check)        │
+              └────────┬────────┘
+                       ▼
+              ┌─────────────────┐
+              │   RFC Editor    │
+              │  (editorial     │
+              │   process)      │
+              └────────┬────────┘
+                       ▼
+              ┌─────────────────┐
+              │  rfc-editor.org │  ← canonical archive
+              │  (AUTH48,       │
+              │   publication)  │
+              └─────────────────┘
+
+  ARCHIVE LAYER
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  rsync.rfc-editor.org  /  rsync.ietf.org                        │
+  │  Modules: rfcs-text-only  │  rfcs  │  rfcs-pdfs  │  rfcs-html  │
+  │  Formats: .txt │ .html │ .pdf │ .xml │ .epub                    │
+  │  Index:   rfc-index.xml  │  rfc-index.txt                       │
+  └──────────────────────────────────────────────────────────────────┘
+
+  AUTHORING STACK
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  Write       │ xml2rfc v3 (RFCXML) / Markdown / plaintext       │
+  │  Convert     │ id2xml (text→XML)  /  xml2rfc --v2v3             │
+  │  Validate    │ idnits (nit checker) / author-tools.ietf.org     │
+  │  Submit      │ datatracker.ietf.org/submit/                     │
+  │  Track       │ datatracker.ietf.org  (Datatracker states)       │
+  └──────────────────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+═══════════════════════════════════════════════════════════════════
+
+  MOD-01: RFC History & Governance
+  │  Origins (1969), Steve Crocker, ARPANET, IETF formation (1986)
+  │  IAB / IRTF / IESG / ISOC / RFC Editor roles
+  └─ Rough consensus and running code philosophy
+
+  MOD-02: RFC Archive & Local Mirror
+  │  rfc-editor.org structure, rfc-index.xml, formats
+  │  rsync modules (rfcs-text-only, rfcs, rfcs-pdfs, rfcs-html)
+  └─ Bulk download, cron refresh, search indexing strategies
+
+  MOD-03: RFC Streams & Maturity Levels
+  │  Five streams: IETF / IAB / IRTF / Independent / Editorial
+  │  Status types: Proposed Std → Internet Std / BCP / Exp / Info / Historic
+  └─ STD and BCP subseries numbering
+
+  MOD-04: Authoring Tools & Workflow
+  │  xml2rfc v3 (RFCXML vocabulary, RFC 7991/9280)
+  │  author-tools.ietf.org (web + API), pip install xml2rfc
+  └─ idnits, id2xml, ietf-gitwg GitHub integration
+
+  MOD-05: Internet-Draft Submission Process
+  │  I-D naming conventions (draft-{author}-{wg}-{topic}-{ver})
+  │  Datatracker submission, 185-day expiry, WG adoption
+  └─ IESG review, AUTH48, five-author limit
+
+  MOD-06: RFC Document Template & Style Guide
+  │  RFC 7322 required sections, boilerplate (RFC 7841/5741)
+  │  RFC 2119 requirements language (MUST/SHOULD/MAY)
+  └─ Complete annotated xml2rfc v3 template
+
+  Cross-module: Archive ↔ Authoring (local citation libraries)
+  Cross-module: Streams ↔ Submission (choosing the right stream)
+  Cross-module: Style Guide ↔ Tools (template drives toolchain)
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml — RFC Archive & Authorship Mission
+chipset:
+  agnus:   # Orchestration / DMA / Context
+    model:  claude-opus-4-6
+    role:   FLIGHT + PLAN + INTEG + TOPO + ARCH
+    tasks:
+      - Cross-module dependency graph resolution
+      - Stream selection analysis (which path suits each use case)
+      - Synthesis: archive + authoring + process into unified guide
+      - HITL gate management at wave boundaries
+
+  denise:  # Display / Output Rendering
+    model:  claude-sonnet-4-6
+    role:   EXEC-1 + EXEC-2 + CRAFT-ARCH + CRAFT-PROC + LOG
+    tasks:
+      - Module survey compilation (MOD-01 through MOD-05)
+      - Complete annotated xml2rfc v3 template (MOD-06)
+      - rsync command reference table
+      - Datatracker submission step-by-step guide
+      - Document assembly and LaTeX rendering
+
+  paula:   # Audio / I/O / Anticipatory
+    model:  claude-haiku-4-5-20251001
+    role:   SCOUT + BUDGET + VERIFY + SURGEON + SECURE + RETRO + ANALYST
+    tasks:
+      - Shared source index (rfc-editor.org, IETF, authors.ietf.org)
+      - Shared schema: rsync module table, boilerplate text fragments
+      - Token budget tracking per wave
+      - Source citation validation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Complete RFC corpus history from RFC 1 (1969) to present
+  \item All five publication streams and their governance bodies
+  \item All maturity levels and status types (including Historic/Unknown)
+  \item Full rsync-based local archive setup for all formats (TXT, HTML, PDF, XML)
+  \item rfc-index.xml parsing and local search indexing
+  \item xml2rfc v3 installation (pip), web service, and CLI usage
+  \item Complete annotated xml2rfc v3 template with all required sections
+  \item idnits validation workflow and common error remediation
+  \item Internet-Draft naming conventions, versioning, and 185-day expiry rules
+  \item Datatracker submission process (web UI and email fallback)
+  \item Working Group engagement strategy and rough consensus mechanics
+  \item Independent Stream submission path (for those outside IETF WGs)
+  \item RFC 2119 / BCP 14 requirements language (MUST/SHOULD/MAY/etc.)
+  \item AUTH48 process (final author approval before publication)
+  \item IANA Considerations and Security Considerations section requirements
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Protocol design methodology (out of scope; separate mission)
+  \item YANG/MIB module authoring specifics
+  \item W3C, ISO, ITU-T standards processes (comparative only)
+  \item RFC errata submission and management procedures
+  \item IETF meeting logistics and in-person participation
+  \item IPR (Intellectual Property Rights) legal analysis
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A reader can explain the difference between all five RFC publication streams and which stream to choose for a given document type.
+  \item A reader can build a complete local rsync mirror of the RFC archive (all formats) using only the commands in this package.
+  \item A reader can locate any RFC by number, title, or keyword using a local index without network access.
+  \item A reader can install xml2rfc v3 locally and produce valid TXT, HTML, and PDF outputs from a source XML file.
+  \item A reader can create a new Internet-Draft from the provided template that passes idnits validation with zero errors.
+  \item A reader can correctly apply RFC 2119 requirements language (MUST, SHOULD, MAY, MUST NOT, SHOULD NOT, RECOMMENDED, OPTIONAL) in accordance with BCP 14.
+  \item A reader can identify all required sections of an RFC (per RFC 7322) and explain the purpose of each.
+  \item A reader can submit an Internet-Draft to the IETF Datatracker and receive a confirmation email.
+  \item A reader can explain the difference between Proposed Standard, Internet Standard, BCP, Informational, Experimental, and Historic status.
+  \item A reader can describe the AUTH48 process and knows what actions are required from an author during that stage.
+  \item The local archive mirrors include rfc-index.xml and can be kept current with a scheduled cron job.
+  \item The xml2rfc v3 template includes all mandatory boilerplate text per RFC 7841 (Status of This Memo, Copyright Notice).
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Skill Creator (dev) & Peer & Skills modeled as complex numbers; RFC corpus as knowledge substrate for College of Knowledge \\
+DACP Specification & Peer & DACP's deterministic three-part bundle architecture echoes RFC's immutable archival philosophy \\
+Fox Infrastructure Group & Consumer & FIG entities need protocol standards literacy for network infrastructure design \\
+The Space Between & Philosophical & Mathematical precision in RFC language (ABNF, formal notation) parallels mathematical foundations \\
+College of Knowledge & Consumer & RFC archive is a primary seed corpus for the knowledge layer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The RFC series embodies what the Amiga Principle looks like at civilizational scale: not a monolithic standards body issuing proclamations from on high, but a flat, rough-consensus community producing small, precise, immutable documents that compose upward into the entire Internet. Each RFC is a completed unit. Its relationships to other RFCs---Obsoletes, Updates, normative references---form the complex plane of the technical web. The ``spaces between'' RFC 791 (IPv4) and RFC 8200 (IPv6) is not emptiness; it is forty years of implementation experience, failure, learning, and deliberate improvement, all traceable.
+
+For GSD, the RFC process is a mirror. Internet-Drafts are like subagent specs: provisional, subject to revision, not authoritative until rough consensus is established. The Datatracker is a kind of mission dashboard. AUTH48 is a HITL gate. And the principle that \textit{running code} outweighs theoretical elegance is the same principle that made the skill-creator's observe-detect-suggest loop more useful than a perfectly designed but untested schema. The Internet was not planned. It was grown through faithful iteration of small, well-specified, widely-tested building blocks. So is GSD.
+
+\newpage
+
+% =============================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =============================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{RFC Archive \& Authorship --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides sourced findings for each research module. It is organized to match the module architecture defined in Stage 1. All numerical claims are attributed to primary sources.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item \textbf{IETF} --- \url{https://www.ietf.org} --- Internet Engineering Task Force; stewards the IETF stream and rough consensus process
+  \item \textbf{RFC Editor} --- \url{https://www.rfc-editor.org} --- Canonical archive; publication process; rsync mirrors; Style Guide
+  \item \textbf{IETF Datatracker} --- \url{https://datatracker.ietf.org} --- I-D submission, tracking, WG states, RFC publication transparency
+  \item \textbf{Internet-Draft Author Resources} --- \url{https://authors.ietf.org} --- Authoritative authoring guide; xml2rfc documentation; id-guidelines
+  \item \textbf{IAB} --- \url{https://www.iab.org} --- Internet Architecture Board; IAB stream; RFC Editor oversight
+  \item \textbf{IRTF} --- \url{https://www.irtf.org} --- Internet Research Task Force; IRTF stream
+\end{itemize}
+
+\subsection{Module 01: RFC History \& Governance}
+
+\subsubsection{Origins (1969)}
+
+The RFC system was invented by Steve Crocker in 1969 to record informal notes on the development of ARPANET. The RFC series predates the IETF; RFC 1 was published in 1969. Early RFCs were literal requests for comments---informal memos circulated among a small community of researchers who had no established playbook for building an internetwork. They used ``Request for Comments'' in the title specifically to avoid sounding declarative and to encourage open discussion.
+
+\subsubsection{IETF Formation and Governance Structure}
+
+The first IETF meeting was held on January 16, 1986, attended by 21 US federal government-funded researchers. The IETF has no formal membership; anyone can participate by joining a working group mailing list or registering for a meeting. The governance hierarchy is:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Body} & \tableheader{Role} & \tableheader{Relationship to RFCs} \\
+\midrule
+ISOC & Administrative umbrella & Hosts IETF as fiscally sponsored project since 1992 \\
+IAB & Architecture board & Approves IESG appointments; IAB stream publications; RFC Editor oversight \\
+IESG & Engineering Steering Group & Approves all IETF-stream RFCs; chairs each of the 8 IETF areas \\
+Working Groups & Technical production & Draft and iterate I-Ds; primary locus of RFC production \\
+RFC Editor & Publication function & Editorial review, assignment of RFC numbers, canonical archive \\
+IANA & Number authority & IANA Considerations sections are reviewed in parallel with editing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Rough Consensus and Running Code}
+
+The IETF's operating principle---``rough consensus and running code''---means decisions within WGs are not made by formal vote. The working group chairs determine when rough consensus exists: ``a very large majority of those who care must agree.'' The IETF standards process is explicitly designed to encourage standardization driven by practice rather than theory and to require multiple interoperable implementations before a specification advances to Internet Standard.
+
+\subsection{Module 02: RFC Archive \& Local Mirror}
+
+\subsubsection{Archive Structure at rfc-editor.org}
+
+The RFC Editor maintains the canonical archive at \url{https://www.rfc-editor.org}. RFCs are sequentially numbered from RFC 1. Once published, an RFC is never revised; corrections are issued as errata or a new RFC. The archive is freely available to download, copy, publish, display, and distribute under the IETF Trust License.
+
+\textbf{Available formats:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Extension} & \tableheader{Notes} \\
+\midrule
+Plain text & .txt & Historical primary format; still available for all RFCs \\
+HTML & .html & Modern rendering; generated by rfc2html for pre-v3 RFCs \\
+PDF & .pdf & Paginated; generated by xml2rfc v3 for post-transition RFCs \\
+XML (v3) & .xml & Source canonical format for RFCs published after v3 transition \\
+EPUB & (planned) & Announced but not yet in primary distribution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{rsync Archive Modules}
+
+The RFC Editor and IETF both support rsync for bulk download. The base command pattern is:
+
+\begin{codebox}
+rsync -avz --delete rsync.rfc-editor.org::<Module-Name> <Target-Directory>
+\end{codebox}
+
+\textbf{Available rsync modules at rsync.rfc-editor.org:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module Name} & \tableheader{Contents} \\
+\midrule
+\texttt{rfcs-text-only} & All RFCs as .txt files; also includes bcp/, fyi/, ien/, std/ subdirectories \\
+\texttt{rfcs} & All RFCs in all formats (txt + html + pdf + xml where available) \\
+\texttt{rfcs-pdfs} & PDF versions only \\
+\texttt{rfcs-html} & HTML versions only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Full text-only mirror example:}
+
+\begin{codebox}
+rsync -avz --delete rsync.rfc-editor.org::rfcs-text-only ./my-rfc-mirror/
+\end{codebox}
+
+\textbf{All formats mirror example:}
+
+\begin{codebox}
+rsync -avz --delete rsync.rfc-editor.org::rfcs ./my-rfc-mirror-full/
+\end{codebox}
+
+\textbf{IETF rsync endpoint} (for I-Ds and additional materials):
+
+\begin{codebox}
+# Use rsync.ietf.org as source for IETF-hosted content
+rsync -avz rsync.ietf.org::<module> <target>
+\end{codebox}
+
+\subsubsection{EPUB and eBook Formats}
+
+For epub and mobi format I-Ds (IETF working documents), the IETF tools rsync endpoint provides them:
+
+\begin{codebox}
+# All epub RFCs/I-Ds
+rsync -avz --include="*.epub" --exclude="*" \
+  rsync.tools.ietf.org::tools/ebook/ ./rfc-ebooks/
+
+# Filtered by working group (create filter.txt with include rules)
+rsync -avz --include-from="/path/to/filter.txt" --exclude="*" \
+  rsync.tools.ietf.org::tools/ebook/ ./rfc-ebooks/
+\end{codebox}
+
+\subsubsection{rfc-index.xml and Search}
+
+The archive includes \texttt{rfc-index.xml} and \texttt{rfc-index.txt}, which contain metadata for every RFC (number, title, authors, date, status, Obsoletes/Updates links). These are the foundation for building a local search index. The rfc-index.xml file is included in the rsync modules.
+
+\textbf{Cron job for daily sync:}
+
+\begin{codebox}
+#!/bin/bash
+# /etc/cron.daily/rfc-sync
+rsync -avz --delete rsync.rfc-editor.org::rfcs-text-only \
+  /srv/rfc-archive/text/ >> /var/log/rfc-sync.log 2>&1
+\end{codebox}
+
+\textbf{Bulk download alternative} (browser-based, no rsync): The RFC Editor maintains zip and tar archives of all RFCs in TXT and PDF formats at \url{https://www.rfc-editor.org/retrieve/bulk/}.
+
+\subsection{Module 03: RFC Streams \& Maturity Levels}
+
+\subsubsection{Five Publication Streams}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Stream} & \tableheader{Manager} & \tableheader{Scope and Notes} \\
+\midrule
+IETF Stream & IESG (Area Directors) & Only stream that publishes Standards Track and BCP. All IETF-stream RFCs require rough consensus. By far the largest stream. \\
+IAB Stream & Internet Architecture Board & Policy and architecture documents. Informational only; no standards. \\
+IRTF Stream & IRSG / IRTF Chair & Research results. May be Informational or Experimental. Reviewed by IESG for IETF conflicts. \\
+Independent Submissions & Independent Submissions Editor (ISE; currently Eliot Lear, rfc-ise@rfc-editor.org) & Relevant documents outside IETF/IAB/IRTF processes. Informational or Experimental only. Do not carry community consensus. \\
+Editorial Stream & RFC Series Working Group / RSAB & RFC 9920. Used to publish RFC Series governance policies. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Maturity Levels and Status Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Status} & \tableheader{Track} & \tableheader{Definition} \\
+\midrule
+Proposed Standard & Standards Track & Initial standards-track publication. Stable and peer-reviewed; may be implemented. Still subject to change through a new RFC. \\
+Internet Standard (STD) & Standards Track & Highest maturity. Multiple interoperable implementations required. Assigned an STD number; retains RFC number. \\
+Best Current Practice (BCP) & BCP subseries & Mandatory IETF operational or process guidelines. Not standards per se, but binding for community operation. \\
+Informational & Off-track & Published for general community information. No standards implications. Includes humor RFCs (April 1). \\
+Experimental & Off-track & Research or development specification. Not recommended for deployment but preserved as archival record. \\
+Historic & Off-track & Superseded or obsolete specification. Formerly labeled ``Historical'' but the historical misspelling is itself historical. \\
+Unknown & Off-track & Applied to very early RFCs where status is unclear by modern definitions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{STD and BCP Subseries}
+
+When an RFC becomes an Internet Standard, it is assigned an STD number but \textit{retains} its RFC number. When the standard is updated (e.g., a new RFC replaces an old one), the STD number remains the same but now points to the new RFC. Multiple RFCs may share a single STD number.
+
+\subsection{Module 04: Authoring Tools \& Workflow}
+
+\subsubsection{xml2rfc v3 (RFCXML)}
+
+xml2rfc is the primary authoring tool for Internet-Drafts and RFCs. Version 3 (RFCXML, vocabulary defined in RFC 7991 and RFC 9280) is the current standard. It accepts an XML source file and produces TXT, HTML, and PDF outputs.
+
+\textbf{Installation:}
+
+\begin{codebox}
+pip install xml2rfc        # Local installation
+pip install xml2rfc --upgrade   # Upgrade to latest
+xml2rfc --version          # Verify installation
+\end{codebox}
+
+\textbf{Output generation:}
+
+\begin{codebox}
+xml2rfc --text    draft-example-00.xml    # Plain text output
+xml2rfc --html    draft-example-00.xml    # HTML output
+xml2rfc --pdf     draft-example-00.xml    # PDF output (requires weasyprint)
+xml2rfc --v2v3    old-v2-draft.xml        # Convert v2 XML to v3 vocabulary
+\end{codebox}
+
+\textbf{Web service:} \url{https://author-tools.ietf.org} provides xml2rfc as a web service (UI and API) without local installation.
+
+\subsubsection{id2xml (plaintext to XML)}
+
+Authors submitting plaintext may use id2xml to convert to the XML format required by the RFC Editor:
+
+\begin{codebox}
+pip install id2xml
+id2xml draft-example.txt   # Produces draft-example.xml
+\end{codebox}
+
+\subsubsection{idnits (Nit Checker)}
+
+idnits checks I-Ds for formatting problems before submission. It is available at \url{https://author-tools.ietf.org} or as a standalone tool. It validates IPR notices, boilerplate, required sections, version numbers, and creation dates.
+
+\begin{codebox}
+# Web check (recommended)
+# Upload at: https://author-tools.ietf.org
+
+# CLI (if installed locally)
+idnits draft-example-00.txt
+\end{codebox}
+
+\subsubsection{GitHub Integration}
+
+The IETF maintains guidance for hosting I-Ds on GitHub at \url{https://ietf-gitwg.github.io/}. Many working groups use GitHub for collaborative editing of I-Ds, with automated builds using GitHub Actions to regenerate outputs on each commit.
+
+\subsection{Module 05: Internet-Draft Submission Process}
+
+\subsubsection{I-D Naming Conventions}
+
+Internet-Drafts follow a strict naming convention:
+
+\begin{codebox}
+draft-{author-identifier}-{optional-wgname}-{topic}-{version}
+
+Examples:
+  draft-tibsfox-gsd-protocol-00.xml    # Individual submission
+  draft-ietf-quic-transport-00.xml     # After WG adoption (prefix: draft-ietf-)
+
+Version:  Always two-digit, zero-padded (00, 01, 02 ...)
+Revision: A new I-D after WG adoption restarts at 00
+"bis":    Drafts revising existing RFCs often include "bis"
+          e.g., draft-someone-rfc2345bis-00.txt
+\end{codebox}
+
+\subsubsection{Submission to the Datatracker}
+
+All I-D submissions go through \url{https://datatracker.ietf.org/submit/}. The process:
+
+\begin{enumerate}
+  \item Run idnits to clear validation errors before submission.
+  \item Upload the XML (preferred) or plaintext file at the submission tool.
+  \item Tool parses metadata and displays extracted information for verification.
+  \item Authenticate via email confirmation or IETF Datatracker login.
+  \item Confirm metadata and submit.
+  \item I-D is placed in the IETF Internet-Drafts repository.
+  \item Manual posting fallback: send to \texttt{support@ietf.org} with the I-D as an attachment.
+\end{enumerate}
+
+\textbf{Expiry:} An I-D expires 185 days after posting unless updated, replaced by another I-D, published as an RFC, or in an active state that prevents expiry. Expired I-Ds are removed from the active repository.
+
+\subsubsection{Working Group Engagement}
+
+The IETF operates approximately 130 Working Groups across 8 area topics. I-Ds gain standing by being adopted by a WG. WG adoption changes the I-D name from \texttt{draft-{author}-...} to \texttt{draft-ietf-{wgname}-...}. Decisions are by rough consensus on the WG mailing list, not at meetings.
+
+The IETF has no formal membership. Participation is open to anyone. Onsite meeting registration (3 meetings/year) is between US\$875--\$1,200; significant discounts for students and remote participants.
+
+\subsubsection{Independent Stream Submission}
+
+For documents outside IETF/IAB/IRTF work, the Independent Submissions stream provides an alternative path:
+
+\begin{enumerate}
+  \item Publish as an Internet-Draft at the Datatracker.
+  \item Email the ISE at \texttt{rfc-ise@rfc-editor.org} with: filename, desired category (Informational or Experimental), any relevant WG discussion summary, IANA allocation assertion, and a statement of purpose/merits.
+  \item ISE arranges external review; IESG checks for IETF conflicts.
+  \item If accepted, document enters RFC Editor publication queue.
+\end{enumerate}
+
+\subsubsection{AUTH48}
+
+Before publication, the RFC Editor sends the near-final document to authors for a final review period (AUTH48). Authors must approve the document, respond to any final editorial changes, and provide written sign-off. Indefinite delays are not allowed; the RFC Editor prefers to publish correctly rather than quickly.
+
+\subsection{Module 06: RFC Document Template \& Style Guide}
+
+\subsubsection{Required Document Structure (RFC 7322)}
+
+Every RFC must contain, in order:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Element} & \tableheader{Required} & \tableheader{Notes} \\
+\midrule
+First-page header & Yes & Author(s), org, stream, category, date, ISSN (2070-1721) \\
+Title & Yes & Full document title \\
+Abstract & Yes & Concise summary; no references \\
+Status of This Memo & Yes* & RFC Editor supplies per RFC 7841; stream-specific boilerplate \\
+Copyright Notice & Yes* & RFC Editor supplies; IETF Trust \\
+Table of Contents & Yes* & RFC Editor supplies \\
+Introduction & Yes & First numbered section \\
+Requirements Language & Conditional & Include if RFC 2119/BCP 14 language used \\
+Main body sections & Yes & Numbered; application-specific \\
+IANA Considerations & Yes (I-D) & Required in I-D; may say ``no actions'' \\
+Internationalization & Optional & If applicable \\
+Security Considerations & Yes & BCP 72; must discuss security implications \\
+References & Yes & Split into Normative and Informative subsections \\
+Appendices & Optional & Labeled A, B, C (not numbered) \\
+Acknowledgements & Optional & After appendices; not numbered \\
+Contributors & Optional & Significant contributors not listed as authors \\
+Author's Address & Yes & Postal address, phone, and/or long-lived email \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+* Supplied by RFC Editor during editorial process; must be present in I-D as a placeholder.
+
+\subsubsection{RFC 2119 Requirements Language}
+
+The keywords defined in RFC 2119 (BCP 14) carry precise interoperability meaning. They \textbf{MUST} be used consistently:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Keyword} & \tableheader{Meaning} \\
+\midrule
+\textbf{MUST} / \textbf{REQUIRED} / \textbf{SHALL} & Absolute requirement \\
+\textbf{MUST NOT} / \textbf{SHALL NOT} & Absolute prohibition \\
+\textbf{SHOULD} / \textbf{RECOMMENDED} & Strong recommendation; valid reasons to deviate may exist \\
+\textbf{SHOULD NOT} / \textbf{NOT RECOMMENDED} & Strong recommendation against; valid exceptions exist \\
+\textbf{MAY} / \textbf{OPTIONAL} & Truly optional; implementations may or may not include \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+These keywords must be capitalized when used in their RFC 2119 sense. RFC 8174 (BCP 14 update) clarifies that lowercase versions do NOT have the normative meaning.
+
+\subsubsection{Complete Annotated xml2rfc v3 Template}
+
+The following is a minimal complete xml2rfc v3 Internet-Draft template with annotations. All required sections are included.
+
+\begin{codebox}
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc [
+  <!-- Citation entity references -->
+  <!ENTITY RFC2119 SYSTEM
+    "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+  <!ENTITY RFC8174 SYSTEM
+    "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+]>
+
+<!--
+  Processing instructions for xml2rfc:
+  toc="yes"       → Generate table of contents
+  sortrefs="yes"  → Sort reference list
+  symrefs="yes"   → Use symbolic refs ([RFC2119]) not numbers ([1])
+  strict="yes"    → Enforce nit checking during conversion
+  compact="yes"   → Tighter spacing
+-->
+<?rfc toc="yes"?>
+<?rfc sortrefs="yes" symrefs="yes"?>
+<?rfc strict="yes" compact="yes"?>
+
+<rfc
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  category="info"
+  <!-- category options: std | bcp | info | exp | historic -->
+
+  docName="draft-yourname-wgname-topic-00"
+  <!-- Filename WITHOUT .xml extension; version appended here -->
+
+  ipr="trust200902"
+  <!-- ipr options: trust200902 (standard), noModificationTrust200902,
+       noDerivativesTrust200902, pre5378Trust200902 -->
+
+  submissionType="IETF"
+  <!-- submissionType: IETF | IAB | IRTF | independent -->
+
+  consensus="true"
+  <!-- consensus: true if WG consensus; false for individual/independent -->
+
+  obsoletes=""
+  <!-- Comma-separated RFC numbers this doc obsoletes, e.g., "2345, 3456" -->
+
+  updates=""
+  <!-- Comma-separated RFC numbers this doc partially updates -->
+>
+
+<!-- ═══════════════════════════════════════════════════════ FRONT MATTER -->
+<front>
+  <title abbrev="Short Title">Full Document Title Here</title>
+  <!-- abbrev is used in running headers; keep under ~40 chars -->
+
+  <seriesInfo name="Internet-Draft"
+              value="draft-yourname-wgname-topic-00"/>
+  <!-- For RFCs: name="RFC" value="XXXX" -->
+
+  <!-- AUTHORS: max 5 on first page; use editor="yes" for editors -->
+  <author fullname="Miles Tiberius Foxglove" initials="M." surname="Foxglove">
+    <organization>Fox Infrastructure Group</organization>
+    <address>
+      <postal>
+        <city>Seattle</city>
+        <region>WA</region>
+        <country>US</country>
+      </postal>
+      <email>miles@tibsfox.com</email>
+    </address>
+  </author>
+
+  <date year="2026" month="March" day="27"/>
+
+  <!-- AREA: Which IETF area? Optional for individual submissions. -->
+  <area>General</area>
+
+  <!-- WORKGROUP: WG name if applicable; omit for individual submissions. -->
+  <!-- <workgroup>Example Working Group</workgroup> -->
+
+  <keyword>RFC</keyword>
+  <keyword>Internet-Draft</keyword>
+
+  <abstract>
+    <t>
+      This document describes [brief description of what the document
+      specifies or proposes]. [One or two sentences of scope.] This
+      document [does / does not] define any new protocol elements.
+    </t>
+    <!-- No normative references in abstract. No citations. -->
+  </abstract>
+</front>
+
+<!-- ════════════════════════════════════════════════════════ MIDDLE (BODY) -->
+<middle>
+
+  <!-- REQUIRED: Section 1 must be Introduction -->
+  <section anchor="intro" numbered="true" toc="default">
+    <name>Introduction</name>
+    <t>
+      [Introductory text. Describe the problem, existing approaches,
+      and what this document adds.]
+    </t>
+    <t>
+      The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
+      and "OPTIONAL" in this document are to be interpreted as described
+      in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when,
+      and only when, they appear in all capitals, as shown here.
+    </t>
+    <!-- Include the Requirements Language paragraph if you use RFC 2119 terms -->
+  </section>
+
+  <!-- MAIN BODY SECTIONS -->
+  <section anchor="overview" numbered="true" toc="default">
+    <name>Overview</name>
+    <t>
+      [Main technical content. Use subsections as needed.]
+    </t>
+
+    <section anchor="overview-sub" numbered="true" toc="default">
+      <name>Subsection Title</name>
+      <t>[Subsection content.]</t>
+    </section>
+  </section>
+
+  <!-- Example: Definitions section -->
+  <section anchor="definitions" numbered="true" toc="default">
+    <name>Definitions</name>
+    <dl newline="false" spacing="normal">
+      <!-- Definition list -->
+      <dt>Term One:</dt>
+      <dd>Definition of term one.</dd>
+      <dt>Term Two:</dt>
+      <dd>Definition of term two.</dd>
+    </dl>
+  </section>
+
+  <!-- Example: Figure / ASCII art -->
+  <section anchor="architecture" numbered="true" toc="default">
+    <name>Architecture</name>
+    <figure anchor="fig-arch">
+      <name>System Architecture</name>
+      <artwork type="ascii-art"><![CDATA[
+  ┌────────────┐         ┌────────────┐
+  │  Component │────────▶│  Component │
+  │     A      │         │     B      │
+  └────────────┘         └────────────┘
+      ]]></artwork>
+    </figure>
+    <t>
+      <xref target="fig-arch"/> shows the high-level architecture.
+    </t>
+  </section>
+
+  <!-- REQUIRED: IANA Considerations -->
+  <section anchor="iana" numbered="true" toc="default">
+    <name>IANA Considerations</name>
+    <t>
+      This document has no IANA actions.
+    </t>
+    <!-- OR: describe any new registries, registry entries, or code points -->
+  </section>
+
+  <!-- REQUIRED: Security Considerations (BCP 72) -->
+  <section anchor="security" numbered="true" toc="default">
+    <name>Security Considerations</name>
+    <t>
+      [All RFCs MUST contain a Security Considerations section.
+       Describe threats, vulnerabilities, and mitigations relevant
+       to this specification. If no security implications exist,
+       state that explicitly and explain why.]
+    </t>
+  </section>
+
+</middle>
+
+<!-- ══════════════════════════════════════════════════════════════ BACK -->
+<back>
+
+  <!-- REQUIRED: References — split into Normative and Informative -->
+  <references>
+    <name>References</name>
+
+    <references>
+      <name>Normative References</name>
+      <!-- Normative = MUST read to implement or understand this RFC -->
+      &RFC2119;
+      &RFC8174;
+    </references>
+
+    <references>
+      <name>Informative References</name>
+      <!-- Informative = background, related work, not required -->
+      <reference anchor="RFC7322">
+        <front>
+          <title>RFC Style Guide</title>
+          <author initials="H." surname="Flanagan" fullname="H. Flanagan"/>
+          <author initials="S." surname="Ginoza" fullname="S. Ginoza"/>
+          <date year="2014" month="September"/>
+        </front>
+        <seriesInfo name="RFC" value="7322"/>
+        <seriesInfo name="DOI" value="10.17487/RFC7322"/>
+      </reference>
+    </references>
+  </references>
+
+  <!-- OPTIONAL: Appendix (labeled A, B, ...; not numbered) -->
+  <section anchor="appendix-a" numbered="false" toc="default">
+    <name>Example Appendix</name>
+    <t>[Appendix content. Appendices are not numbered.]</t>
+  </section>
+
+  <!-- OPTIONAL: Acknowledgements -->
+  <section anchor="acknowledgements" numbered="false" toc="default">
+    <name>Acknowledgements</name>
+    <t>
+      The author would like to thank [names] for their valuable
+      feedback and review.
+    </t>
+  </section>
+
+  <!-- OPTIONAL: Contributors -->
+  <!--
+  <section anchor="contributors" numbered="false" toc="default">
+    <name>Contributors</name>
+    <t>[Contributors who are not listed as authors.]</t>
+  </section>
+  -->
+
+</back>
+</rfc>
+\end{codebox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+IPR disclosure & GATE & Authors MUST disclose known patents covering the draft's technology per BCP 79 (RFC 8179) \\
+Copyright in contributions & GATE & By submitting an I-D, authors grant the IETF Trust the rights described in BCP 78 (RFC 5378) \\
+Five-author limit & ANNOTATE & RFCs are limited to five authors on the first page; additional contributors go in Contributors section \\
+Immutability principle & ANNOTATE & Once published, an RFC is never changed; errors require a new RFC with a new number \\
+Standards claim prohibition & ABSOLUTE & Implementers and vendors MUST NOT claim conformance to an I-D; I-Ds have no standards status \\
+Security Considerations required & ABSOLUTE & Every RFC must contain a Security Considerations section (BCP 72); this is non-negotiable \\
+IANA coordination & GATE & Any new code points, registries, or protocol parameters require IANA review; do not allocate privately \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Standards Body Sources}
+
+\begin{itemize}[noitemsep]
+  \item IETF. \textit{Introduction to the IETF}. \url{https://www.ietf.org/about/introduction/}
+  \item IETF. \textit{RFCs}. \url{https://www.ietf.org/process/rfcs/}
+  \item IETF. \textit{Internet Standards Process}. \url{https://www.ietf.org/standards/process/}
+  \item IETF. \textit{Internet-Drafts}. \url{https://www.ietf.org/participate/ids/}
+  \item IETF. \textit{Open Records}. \url{https://www.ietf.org/about/open-records/}
+  \item RFC Editor. \textit{Downloading RFCs (rsync)}. \url{https://www.rfc-editor.org/retrieve/bulk/}
+  \item RFC Editor. \textit{How to use rsync}. \url{https://www.rfc-editor.org/retrieve/rsync/}
+  \item RFC Editor. \textit{Publication Process}. \url{https://www.rfc-editor.org/pubprocess/}
+  \item RFC Editor. \textit{Style Guide}. \url{https://www.rfc-editor.org/styleguide/}
+  \item RFC Editor. \textit{Independent Submissions}. \url{https://www.rfc-editor.org/about/independent/}
+  \item RFC Editor. \textit{RFC Format Change FAQ}. \url{https://www.rfc-editor.org/rse/format-faq/}
+  \item IETF. \textit{Internet-Draft Author Resources}. \url{https://authors.ietf.org/}
+  \item IETF. \textit{I-D Guidelines}. \url{https://ietf.github.io/id-guidelines/}
+  \item IETF Datatracker. \textit{Submission Tool Instructions}. \url{https://datatracker.ietf.org/submit/tool-instructions/}
+  \item IRTF. \textit{Policies and Procedures}. \url{https://www.irtf.org/policies/}
+\end{itemize}
+
+\subsubsection{Key RFCs (Primary References)}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{RFC 2026} (BCP 9) --- The Internet Standards Process, Revision 3 (Bradner, 1996)
+  \item \textbf{RFC 2119} (BCP 14) --- Key words for use in RFCs to Indicate Requirement Levels (Bradner, 1997)
+  \item \textbf{RFC 4844} --- The RFC Series and RFC Editor (Daigle, 2007)
+  \item \textbf{RFC 5378} (BCP 78) --- Rights Contributors Provide to the IETF Trust (Bradner \& Contreras, 2008)
+  \item \textbf{RFC 5741} --- RFC Streams, Headers, and Boilerplates (obsoleted by RFC 7841)
+  \item \textbf{RFC 5742} (BCP 92) --- IESG Procedures for Independent and IRTF Stream Submissions (2009)
+  \item \textbf{RFC 7322} --- RFC Style Guide (Flanagan \& Ginoza, 2014)
+  \item \textbf{RFC 7841} --- RFC Streams, Headers, and Boilerplates (2016)
+  \item \textbf{RFC 7991} --- The ``xml2rfc'' Version 3 Vocabulary (Hoffman, 2016)
+  \item \textbf{RFC 8174} (BCP 14) --- Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words (Leiba, 2017)
+  \item \textbf{RFC 8179} (BCP 79) --- Intellectual Property Rights in IETF Technology (2017)
+  \item \textbf{RFC 9280} --- RFC Editor Model, Version 3 (Saint-Andre, 2022)
+  \item \textbf{RFC 9920} --- Establishing the Editorial Stream (2024)
+\end{itemize}
+
+\newpage
+
+% =============================================================================
+% STAGE 3 — MISSION PACKAGE
+% =============================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research package covering the RFC archive corpus, local mirror infrastructure, authoring toolchain (xml2rfc v3), Internet-Draft submission process, and a complete annotated RFC document template. The package must be directly executable by a GSD orchestrator as a Fleet-profile multi-wave mission producing six module deliverables plus a synthesized authoritative guide.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+═══════════════════════════════════════════════════════════════════════
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  Shared source index (rfc-editor.org, IETF, Datatracker)        │
+  │  Shared schema: module table, rsync commands, boilerplate        │
+  │  xml2rfc v3 template skeleton                                    │
+  └───────────────────────────────┬──────────────────────────────────┘
+                                  │
+                    ┌─────────────┼──────────────┐
+                    ▼             ▼              ▼
+  WAVE 1A: HISTORY       WAVE 1B: ARCHIVE    WAVE 1C: STREAMS
+  MOD-01 History &       MOD-02 Archive &    MOD-03 Streams &
+  Governance (Sonnet)    Local Mirror        Maturity Levels
+                         (Sonnet)            (Sonnet)
+                    └─────────────┬──────────────┘
+                                  │ HITL GATE 1 (scope confirm)
+                    ┌─────────────┼──────────────┐
+                    ▼             ▼              ▼
+  WAVE 2A: TOOLS       WAVE 2B: SUBMISSION  WAVE 2C: TEMPLATE
+  MOD-04 Authoring     MOD-05 I-D           MOD-06 RFC Template
+  Tools (Sonnet)       Submission           & Style Guide
+                       (Sonnet)             (Opus)
+                    └─────────────┬──────────────┘
+                                  │ HITL GATE 2 (content review)
+                                  ▼
+  WAVE 3: SYNTHESIS (Sequential, Opus)
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  Cross-module integration: archive ↔ authoring ↔ process        │
+  │  Stream selection decision tree                                  │
+  │  Annotated xml2rfc v3 template (final)                          │
+  │  rsync command reference (complete)                              │
+  └───────────────────────────────┬──────────────────────────────────┘
+                                  │ HITL GATE 3 (final review)
+                                  ▼
+  WAVE 4: PUBLICATION (Sequential, Sonnet)
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  Final document assembly + LaTeX compilation                     │
+  │  Source index verification                                       │
+  │  idnits validation of template                                   │
+  └──────────────────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, xml2rfc skeleton
+  \item \textbf{Survey Layer} --- Six parallel module surveys (MOD-01 through MOD-06)
+  \item \textbf{Synthesis Layer} --- Cross-module integration, stream decision tree, unified guide
+  \item \textbf{Template Layer} --- Complete annotated xml2rfc v3 document with all required sections
+  \item \textbf{Publication Layer} --- Final PDF, source archive, idnits-validated template file
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criteria} & \tableheader{Spec} \\
+\midrule
+1 & RFC History \& Governance Guide & All governance bodies, roles, and rough consensus explained & MOD-01 \\
+2 & Local Archive Setup Guide & rsync commands, cron job, index parsing working offline & MOD-02 \\
+3 & Streams \& Maturity Reference & All 5 streams, 7 status types, STD/BCP subseries documented & MOD-03 \\
+4 & Authoring Tools Handbook & xml2rfc install, convert, validate workflow end-to-end & MOD-04 \\
+5 & I-D Submission Playbook & Naming conventions through AUTH48, step-by-step & MOD-05 \\
+6 & Annotated xml2rfc v3 Template & Passes idnits, all required sections, correct boilerplate & MOD-06 \\
+7 & Synthesized Authoritative Guide & Cross-module integration, stream decision tree, rsync reference & SYNTH \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared source index & None & Haiku & 4K \\
+Shared schema / boilerplate & None & Haiku & 3K \\
+MOD-01: History \& Gov. & Source index & Sonnet & 15K \\
+MOD-02: Archive \& Mirror & Source index & Sonnet & 20K \\
+MOD-03: Streams \& Status & Source index & Sonnet & 12K \\
+MOD-04: Authoring Tools & Source index, schema & Sonnet & 22K \\
+MOD-05: I-D Submission & MOD-03, MOD-04 & Sonnet & 18K \\
+MOD-06: RFC Template & MOD-04, MOD-05, RFC 7322 & Opus & 35K \\
+Synthesis \& Integration & MOD-01 through MOD-06 & Opus & 30K \\
+Stream Decision Tree & MOD-03, MOD-05 & Opus & 8K \\
+Document Assembly & All modules & Sonnet & 15K \\
+Verification \& Validation & All outputs & Haiku & 6K \\
+\textbf{TOTAL} & & & \textbf{$\sim$188K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & $\sim$31\% & RFC Template (MOD-06; requires full RFC 7322 + xml2rfc v3 synthesis), Synthesis wave (cross-module integration), Stream Decision Tree (judgment-heavy routing logic) \\
+Sonnet & $\sim$59\% & MOD-01 through MOD-05 surveys, document assembly, source verification, publication \\
+Haiku & $\sim$10\% & Shared schemas, source index, boilerplate text fragments, final validation pass \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index, shared schema, template skeleton \\
+1 & Parallel Survey A & Parallel (3 tracks) & Sonnet & MOD-01, MOD-02, MOD-03 \\
+GATE 1 & HITL Review & --- & Human & Scope confirmation; proceed/adjust \\
+2 & Parallel Survey B & Parallel (3 tracks) & Sonnet+Opus & MOD-04, MOD-05, MOD-06 \\
+GATE 2 & HITL Review & --- & Human & Content review; template validation \\
+3 & Synthesis & Sequential & Opus & Integrated guide, decision tree, rsync reference \\
+GATE 3 & HITL Review & --- & Human & Final approval \\
+4 & Publication & Sequential & Sonnet & PDF, .tex, .xml template, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+Compile source index & source-index.yaml & URLs, access methods, last-checked dates for all 15+ primary sources \\
+Generate shared schema & schema.yaml & rsync module table, status type enum, stream enum, required-sections list \\
+xml2rfc skeleton & template-bare.xml & Minimal valid xml2rfc v3 document; validated against schema \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks A}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Track A: MOD-01 & RFC History \& Governance document & CRAFT-ARCH (Sonnet) \\
+Track B: MOD-02 & Archive \& Local Mirror setup guide with all rsync commands & EXEC-1 (Sonnet) \\
+Track C: MOD-03 & Streams \& Maturity reference tables & CRAFT-PROC (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL GATE 1:} Review MOD-01 through MOD-03 for accuracy. Confirm rsync module names are current. Confirm stream governance table is complete. Approve to proceed to Wave 2.
+
+\subsection{Wave 2: Parallel Survey Tracks B}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Track A: MOD-04 & Authoring Tools Handbook (xml2rfc install, CLI, web service, idnits) & EXEC-2 (Sonnet) \\
+Track B: MOD-05 & I-D Submission Playbook (naming, Datatracker, WG engagement, AUTH48) & CRAFT-PROC (Sonnet) \\
+Track C: MOD-06 & Complete annotated xml2rfc v3 template; RFC 7322 required sections & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL GATE 2:} Validate MOD-06 template against idnits. Confirm all required boilerplate sections present. Verify RFC 2119 requirements language block is correctly stated. Approve synthesis.
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Shared source index} computed once in Wave 0; cached for 5-minute TTL across all Wave 1/2 agents
+  \item \textbf{Boilerplate text fragments} (Status of This Memo, Copyright Notice text per RFC 7841) pre-rendered in Wave 0; injected by reference in MOD-06
+  \item \textbf{rsync module table} generated once in Wave 0; referenced by MOD-02 and Synthesis
+  \item \textbf{RFC 2119 keyword table} generated once; referenced by MOD-05, MOD-06, and Synthesis
+  \item \textbf{xml2rfc skeleton} from Wave 0 becomes the base for MOD-06 template expansion
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & Haiku & 13K & Foundation; shared artifacts \\
+Wave 1 (3 tracks) & Sonnet & 47K & Survey tracks run in parallel; total not additive to context \\
+Wave 2A+B & Sonnet & 40K & Two Sonnet tracks parallel \\
+Wave 2C & Opus & 35K & Template generation; most token-intensive single task \\
+Wave 3 Synthesis & Opus & 38K & Cross-module integration \\
+Wave 4 Publication & Sonnet & 15K & Assembly and output \\
+\textbf{TOTAL} & & \textbf{$\sim$188K} & Across 3 sessions (context resets between sessions) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+═══════════════════════════════════════════════════════════════════
+
+  source-index.yaml ────┬──────────────────────────────────┐
+  schema.yaml ──────────┤                                  │
+  template-bare.xml ────┤                                  │
+                        │                                  │
+          ┌─────────────┼──────────────┐                   │
+          ▼             ▼              ▼                   │
+        MOD-01        MOD-02        MOD-03                  │
+          │             │              │                   │
+          └─────────────┼──────────────┘                   │
+                        │ (GATE 1)                         │
+          ┌─────────────┼──────────────┐                   │
+          ▼             ▼              ▼                   │
+        MOD-04        MOD-05        MOD-06 ◄───────────────┘
+          │             │              │
+          └─────────────┼──────────────┘
+                        │ (GATE 2)
+                        ▼
+                   SYNTHESIS
+                        │ (GATE 3)
+                        ▼
+                  PUBLICATION
+                    (Final PDF)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & BLOCK & Mandatory-pass; mission halts on any failure \\
+Core Accuracy & 8 & HIGH & Revise before publication \\
+Integration & 5 & MEDIUM & Document gap; continue \\
+Edge Cases & 4 & LOW & Annotate; future work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & xml2rfc v3 template passes idnits validation & Zero errors; zero nits in idnits output \\
+SC-02 & All required boilerplate sections present in template & Status of This Memo, Copyright, Abstract, Introduction, IANA, Security Considerations, Author's Address all present \\
+SC-03 & IPR disclosure statement (BCP 78/79) present in template & Correct boilerplate text for \texttt{ipr="trust200902"} present; no modification \\
+SC-04 & RFC 2119 requirements language block cited correctly & Both RFC 2119 and RFC 8174 cited; BCP 14 tag referenced; capitalization guidance included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Accuracy Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+CA-01 & rsync module names are current & Commands verified against rfc-editor.org/retrieve/rsync/ \\
+CA-02 & Five-stream taxonomy complete & IETF, IAB, IRTF, Independent, Editorial all described correctly \\
+CA-03 & Maturity level definitions match RFC 2026 & Proposed Standard, Internet Standard, BCP, Info, Exp, Historic all defined correctly \\
+CA-04 & Datatracker submission URL current & \url{https://datatracker.ietf.org/submit/} resolves; tool instructions match reality \\
+CA-05 & AUTH48 process accurately described & Steps match RFC Editor publication process documentation \\
+CA-06 & I-D naming convention correct & \texttt{draft-{author}-{wg}-{topic}-{ver}} pattern verified against id-guidelines \\
+CA-07 & xml2rfc pip install command correct & \texttt{pip install xml2rfc} produces working installation \\
+CA-08 & RFC 2119 keyword table complete & All 7 canonical keywords (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY, REQUIRED, OPTIONAL + RECOMMENDED/NOT RECOMMENDED) present \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Explain 5 streams + stream selection & CA-02 & PENDING \\
+Build local rsync mirror offline & CA-01 & PENDING \\
+Locate RFC by number/keyword without network & CA-01 + INT-01 & PENDING \\
+Install xml2rfc v3 and produce output & CA-07 & PENDING \\
+Create I-D passing idnits with zero errors & SC-01 + SC-02 + SC-03 + SC-04 & PENDING \\
+Apply RFC 2119 language correctly & SC-04 + CA-08 & PENDING \\
+Identify all required RFC sections & SC-02 + CA-03 & PENDING \\
+Submit I-D to Datatracker & CA-04 & PENDING \\
+Explain maturity levels & CA-03 & PENDING \\
+Describe AUTH48 & CA-05 & PENDING \\
+Local archive includes rfc-index.xml; cron-refreshable & CA-01 + INT-02 & PENDING \\
+Template includes mandatory boilerplate & SC-02 + SC-03 & PENDING \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Overall mission direction; go/no-go gates; resource allocation \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization; dependency management \\
+TOPO & Topology Manager (Opus) & Agent team structure; inter-wave continuity \\
+ARCH & Architecture (Opus) & Cross-cutting structural decisions; synthesis design \\
+INTEG & Integration (Opus) & Cross-module relationship validation; stream decision tree \\
+EXEC-1 & Executor 1 (Sonnet) & MOD-01 History, MOD-02 Archive production \\
+EXEC-2 & Executor 2 (Sonnet) & MOD-04 Tools, MOD-05 Submission production \\
+CRAFT-ARCH & Domain Specialist (Sonnet) & Technical architecture analysis (IETF governance, rough consensus) \\
+CRAFT-PROC & Domain Specialist (Sonnet) & Process analysis (submission flow, streams, AUTH48) \\
+SCOUT & Research Agent (Haiku) & Source gathering; web research for gap-fill \\
+VERIFY & Verification (Haiku) & Source citation validation; rsync command verification \\
+SURGEON & Health Monitor (Haiku) & Research quality degradation detection \\
+SECURE & Security Warden (Haiku) & Safety boundary enforcement (IPR, boilerplate, standards claims) \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+ANALYST & Pattern Analyst (Haiku) & Cross-module pattern detection; cache optimization \\
+RETRO & Retrospective (Haiku) & Post-wave analysis; lessons learned \\
+LOG & Chronicle Agent (Sonnet) & Audit trail; commit messages; milestone summaries \\
+CAPCOM & HITL Interface (Sonnet) & Human approval at all three HITL gates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 active roles) \\
+Research Modules & 6 (History, Archive, Streams, Tools, Submission, Template) \\
+Parallel Tracks & 3 in Wave 1; 3 in Wave 2 \\
+HITL Gates & 3 (scope, content, final) \\
+Estimated Context Windows & 8--10 across 3 sessions \\
+Estimated Total Tokens & $\sim$188K \\
+Model Split & Opus 31\% / Sonnet 59\% / Haiku 10\% \\
+Safety-Critical Tests & 4 (all mandatory-pass / BLOCK) \\
+Primary Sources & 15+ (IETF, RFC Editor, IAB, IRTF, Datatracker, authors.ietf.org) \\
+Key Deliverable & idnits-validated xml2rfc v3 template + authoritative guide \\
+Domain & Standards / Protocols / Internet Governance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The goal of these policies is to make the RFC series the most useful to the Internet community.''} --- RFC Editor, Publication Process
+
+\vspace{0.8em}
+\noindent The Internet was assembled from small, immutable, precisely specified documents, each one doing one job well and linking explicitly to its dependencies. GSD assembles capabilities the same way. The RFC corpus is not just a reference library---it is a working proof that the Amiga Principle scales: simple, composable, trust-based building blocks, faithfully iterated over decades, producing civilizational infrastructure. Every Internet-Draft is a pull request against that infrastructure. The path is open. The tooling is free. Rough consensus is achievable. \textit{Run the code.}
+\end{quotebox}
+
+\end{document}

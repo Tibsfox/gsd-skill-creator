@@ -1,0 +1,206 @@
+/* CGI — Caliber Navy / Integration Teal / Bridge Gold theme, Caliber Integration
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
+:root {
+  --caliber-navy: #1A237E;
+  --caliber-navy-light: #E8EAF6;
+  --caliber-navy-mid: #283593;
+  --caliber-navy-dark: #0D1642;
+  --integration-teal: #00838F;
+  --integration-teal-light: #E0F7FA;
+  --integration-teal-mid: #00ACC1;
+  --bridge-gold: #F9A825;
+  --bridge-gold-light: #FFF8E1;
+  --bridge-gold-dark: #F57F17;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--caliber-navy);
+  --link-hover: var(--integration-teal);
+  --accent: var(--caliber-navy);
+  --accent-light: var(--caliber-navy-light);
+  --accent-dark: var(--caliber-navy-dark);
+  --card-bg: white;
+  --card-border: #C5CAE9;
+  --card-shadow: rgba(26,35,126,0.12);
+  --border: #C5CAE9;
+  --parchment: var(--caliber-navy-light);
+}
+
+/* ═══════════════════════════════════════════
+   2. HEADER — caliber navy / teal gradient
+   ═══════════════════════════════════════════ */
+
+header {
+  background: linear-gradient(135deg, #0D1642 0%, #1A237E 40%, #004D40 100%);
+  border-bottom: 4px solid var(--bridge-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0,131,143,0.2) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(249,168,37,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #E8EAF6; }
+header .subtitle { color: #80DEEA; }
+
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
+
+h2 {
+  color: var(--caliber-navy);
+  border-bottom-color: var(--caliber-navy-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--integration-teal); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
+
+blockquote {
+  background: var(--caliber-navy-light);
+  border-left: 4px solid var(--bridge-gold);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--caliber-navy); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(26,35,126,0.04); }
+tr:hover { background: rgba(0,131,143,0.08); }
+
+pre {
+  background: #0D1642;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--bridge-gold);
+}
+code {
+  background: var(--caliber-navy-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--caliber-navy);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ═══════════════════════════════════════════
+   5. CARDS — border-color hover
+   ═══════════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #C5CAE9;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(26,35,126,0.12); border-color: var(--integration-teal); }
+
+/* ═══════════════════════════════════════════
+   6. STATS — grid layout
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #C5CAE9;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--caliber-navy);
+}
+
+/* ═══════════════════════════════════════════
+   7. TAGS
+   ═══════════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-score { background: var(--caliber-navy-light); color: var(--caliber-navy); }
+.tag-learn { background: var(--integration-teal-light); color: var(--integration-teal); }
+.tag-bridge { background: var(--bridge-gold-light); color: var(--bridge-gold-dark); }
+.tag-arch { background: #F3E5F5; color: #7B1FA2; }
+.tag-risk { background: #FBE9E7; color: #BF360C; }
+
+/* ═══════════════════════════════════════════
+   8. SPECIAL COMPONENTS
+   ═══════════════════════════════════════════ */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.bridge-diagram {
+  background: #0D1642;
+  color: #80DEEA;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid var(--bridge-gold);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #C5CAE9;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--integration-teal); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--caliber-navy-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--caliber-navy);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #C5CAE9; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
