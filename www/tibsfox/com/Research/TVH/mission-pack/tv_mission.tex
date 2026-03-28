@@ -1,0 +1,1021 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── Color Scheme: Broadcast / History / Technology ───────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Broadcast Navy
+\definecolor{secondary}{HTML}{B71C1C}     % Signal Red
+\definecolor{tertiary}{HTML}{37474F}      % Analog Gray
+\definecolor{accent}{HTML}{283593}        % Deep Indigo
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FFEBEE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ─── Table Helpers ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── Headers/Footers ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Television Era --- Deep Research}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={The Television Era -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+% ─── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{THE TELEVISION ERA\\[0.4em]A DEEP BROADCAST HISTORY}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{United States Broadcasting 1920s--2026\\Pacific Northwest Stations \textbullet{} FCC Law \textbullet{} The Streamer Bridge}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.8cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Activation Profile}}
+
+\vspace{2.8cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17--20 roles) \quad|\quad Est: 6--9 context windows across 3--4 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Modules: 6 \quad|\quad Parallel Tracks: 3 \quad|\quad Author: Miles Tiberius Foxglove (Tibsfox)}}
+\end{center}
+
+\newpage
+
+% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 --- VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Television Era --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Mission --- Fully Researched}
+\metafield{Depends On:}{GSD Ecosystem Core, Research Mission Generator Skill}
+\metafield{Context:}{PNW-centric deep history with operational pathway to terrestrial broadcasting entry}
+
+\subsection{Vision}
+
+Television did not arrive fully formed. It emerged the way the best systems always do --- from the spaces between disciplines, between inventors, between eras. Philo Farnsworth drew his image dissector in a potato field in Idaho; a radio engineer at KOMO in Seattle televised the ace of hearts to a one-inch screen in 1929; a fishing community in rural Pennsylvania strung wire up a mountain to receive Philadelphia's three channels and accidentally invented cable. The medium was never one thing. It was always a negotiation between transmission and reception, between centralized broadcast authority and the restless desire of local communities to see themselves reflected in the glass.
+
+The Pacific Northwest occupied a strange position in this history. Geographically isolated by the Cascades and the Olympics, the region's broadcasters built empires of community trust. Dorothy Bullitt's KING-TV held a five-year monopoly during the FCC's post-war license freeze, airing all four networks simultaneously --- a circumstance impossible to replicate but which shaped a culture of editorial independence that persists in the region's broadcasting DNA. The story of KOMO engineer Francis Brott televising card suits to a handful of viewers in 1929 is not merely a footnote: it is the Amiga Principle in embryo, achieved with parts in a radio shack.
+
+The Streamer Bridge idea --- the central innovation this mission investigates --- is a natural extension of that local-expression impulse. LPTV (Low Power Television), established by the FCC in 1982 and now encompassing over 5,300 licensed stations, was always intended as a vehicle for community voice. ATSC 3.0's IP-native architecture, now reaching 76\% of U.S. households, collapses the distinction between internet and antenna. A creator who builds an audience on a streaming platform and then acquires an LPTV license is not departing from broadcasting tradition --- they are completing the circuit Philo Farnsworth started. The signal returns to the air. The space between internet and antenna closes.
+
+This mission packages the full arc: from the first broadcast pixel to the LPTV filing window, from the FCC's 1934 Communications Act to the December 2025 LPTV rule changes, from ``Video Killed the Radio Star'' to a future where the same creator who streams on the internet can reach the non-wired viewer through a repurposed UHF channel in their home market.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The history is fragmented.} No single authoritative year-by-year account integrates the national broadcast chronology with Pacific Northwest regional history, technical standards evolution, regulatory changes, and the cultural eras (Golden Age, Cable Era, MTV Era, YouTube Era) into one coherent research corpus.
+
+  \item \textbf{The FCC's regulatory landscape is inaccessible to new entrants.} LPTV licensing, Class A conversion windows, 47 CFR Part 73/74, OPIF requirements, and the December 2025 rule changes are scattered across Federal Register documents, FCC advisories, and legal summaries. Independent creators and community groups who could most benefit from low-power TV access have no actionable pathway document.
+
+  \item \textbf{ATSC 3.0's hybrid potential is underexplored for community use.} The standard's IP-native backbone enables internet producers to bridge terrestrial broadcast, but no published guide synthesizes the technical requirements, licensing pathway, content obligations, and production workflow for a streamer-to-LPTV transition.
+
+  \item \textbf{Pacific Northwest broadcasting history lacks a consolidated record.} The stories of King Broadcasting, Fisher Communications, KCTS's founding, the Columbus Day Storm transmission collapse, and KOMO's 1929 experimental broadcast are scattered across Wikipedia articles and oral history archives. A mission-quality synthesis does not exist.
+
+  \item \textbf{The community channel model is under threat but has untapped infrastructure.} Over 1,600 PEG access operations manage 3,000+ cable channels nationwide. As cord-cutting erodes their cable franchise fee funding base, these organizations --- which have studio infrastructure, community relationships, and First Amendment protections --- represent a natural landing zone for the Streamer Bridge. The convergence pathway is not being explored.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{Signal Always Finds Its Way Home.} Every era of broadcast technology has been defined by the distance between a signal's origin and its community of reception. The Streamer Bridge closes that distance again --- using ATSC 3.0's IP backbone and the LPTV regulatory framework to route internet-native creators back into terrestrial spectrum, serving the households that an antenna, not a subscription, still reaches.
+\end{quotebox}
+
+\subsubsection{Domain Map: US Television Eras}
+
+\begin{asciibox}
+MECHANICAL ERA        ALL-ELECTRONIC ERA       NETWORK GOLDEN AGE
+1920--1939            1939--1952               1952--1975
+Nipkow disc           RCA/NBC World's Fair      Big Three dominance
+W2XBS (Felix Cat)     FCC freeze 1948--52       VHF Channels 2--13
+KOMO 1929 exp.        KING-TV monopoly          Color 1954 (NTSC)
+|                     |                         |
+v                     v                         v
+CABLE & UHF ERA       MTV & PREMIUM ERA         STREAMING ERA
+1975--1996            1981--2005                2005--2026
+CATV --> cable MSOs   MTV Aug 1, 1981           YouTube 2005
+UHF Ch 14--51 opens   ESPN/CNN/HBO expansion    Netflix streaming
+LPTV created 1982     1984 Cable Act            ATSC 3.0 rollout
+PEG channels mandated 1996 Telecom Act          5,300+ LPTV stations
+                                                Streamer Bridge NOW
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+[Module A]              [Module B]              [Module C]
+Television History      Pacific Northwest        Technical Standards
+Year-by-Year 1920-2026  Broadcasting Heritage   NTSC/ATSC/UHF/5G
+Parallel Track A -----> Parallel Track B -----> Synthesis
+                                                        |
+[Module D]              [Module E]              [Module F]
+FCC Licensing &         The Cable Era &         Community Voice &
+Legal Framework         Cultural Eras           The Streamer Bridge
+Parallel Track A -----> Parallel Track B -----> Synthesis
+                                                        |
+                                          [Wave 2: Integration]
+                                          [Wave 3: Publication]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A --- Television History Chronology (1920s--2026)}
+A year-by-year annotated timeline of US broadcast television from the first mechanical transmissions to the current ATSC 3.0 era. Covers: Farnsworth/Zworykin patents; the 1939 World's Fair launch; WWII freeze; post-war expansion; the 1948--1952 FCC freeze; NTSC color standard 1953; the Big Three network era; Moon landing 1969; UHF mandate 1963; digital transition 2009; ATSC 3.0 voluntary rollout 2017--present.
+
+\subsubsection{Module B --- Pacific Northwest Broadcasting Heritage}
+Station-by-station history of PNW television, anchored by King Broadcasting's KING-TV (Seattle's first, November 1948) and Fisher Communications. Includes KOMO's 1929 experimental broadcast; KCTS/9 educational television (December 1954); Portland's KPTV, KGW, KOIN, KATU; the Columbus Day Storm of 1962; KOMO's Mount St. Helens eruption coverage 1980; Spokane and Tri-Cities markets; current consolidation under Sinclair and Tegna.
+
+\subsubsection{Module C --- Technical Standards and Spectrum}
+Full technical survey: mechanical scanning systems; NTSC (1941 monochrome, 1953 color); VHF band (Channels 2--13, 54--216 MHz); UHF band (Channels 14--51 post-auction, 470--698 MHz); the 1963 all-channel receiver mandate; HDTV development; ATSC 1.0 digital standard (DTV transition June 12, 2009); ATSC 3.0 IP-native architecture (FCC voluntary adoption November 2017); 5G Broadcast (Band 108); power limits by station class.
+
+\subsubsection{Module D --- FCC Licensing and Legal Framework}
+Comprehensive regulatory reference: Communications Act of 1934; FCC structure; 47 CFR Parts 73 and 74; broadcast station classes (full power, Class A, LPTV, TV translator); license application process (Form 2100); construction permits; EEO obligations; political broadcasting rules; Online Public Inspection File (OPIF) requirements; license renewal schedules (2028--2031); the Low Power Protection Act (January 2023); Class A conversion window (May 2024--May 2025); December 2025 LPTV rule changes.
+
+\subsubsection{Module E --- The Cable Era, MTV, and Streaming Disruption}
+Cultural and industry arc: CATV origins (1948, Pennsylvania mountain towns); 1975 HBO satellite launch; cable explosion 1980--1990 (16M to 50M homes); CNN (1980), ESPN (1979), Nickelodeon (1979), MTV (August 1, 1981); the 1984 Cable Communications Policy Act; TCI/John Malone MSO consolidation; 1992 Cable Act; digital cable 1990s; Fox News/MSNBC 1996; peak cable 2000 (68.5M subscriptions); YouTube 2005; Netflix streaming 2007; cord-cutting acceleration; 5M households dropping cable in 2023 alone.
+
+\subsubsection{Module F --- Community Voice and the Streamer Bridge}
+The convergence pathway: PEG access television (FCC 1969, codified 1984); 2,500 PEG operations at peak; 1,600+ active today with 3,000 channels; LPTV secondary spectrum status and community origination mission; ATSC 3.0 Run3TV platform (virtual channels via internet); 5G Broadcast LPTV petitions (HC2 Broadcasting, XGen Network); operational model for internet producers acquiring LPTV licenses; content obligations and minimum operation requirements; the Class A upgrade pathway for small-market LPTV operators serving audiences under 95,000 TV households.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset Configuration --- Television Era Mission
+chipset:
+  agnus:                    # Orchestration / DMA / Context
+    model: claude-opus-4-6
+    role: FLIGHT + TOPO
+    responsibilities:
+      - Mission direction and go/no-go gates
+      - Cross-module synthesis (Wave 2)
+      - Cultural sensitivity (Indigenous station history)
+      - Module F Streamer Bridge integration logic
+
+  denise:                   # Display / Output Rendering
+    model: claude-sonnet-4-6
+    role: EXEC + CRAFT (x3)
+    responsibilities:
+      - Module production (A, B, C, D, E, F)
+      - Table construction and formatting
+      - LaTeX document assembly
+      - Source bibliography compilation
+
+  paula:                    # Audio / I-O / Anticipatory
+    model: claude-haiku-4-5
+    role: SCOUT + LOG + BUDGET
+    responsibilities:
+      - Shared schema generation (Wave 0)
+      - Source index scaffolding
+      - Token budget tracking
+      - Commit messages and audit trail
+
+  gary:                     # Glue Logic / CPU
+    model: claude-sonnet-4-6
+    role: VERIFY + SECURE + SURGEON
+    responsibilities:
+      - Citation accuracy (FCC documents, CFR citations)
+      - Safety boundary enforcement
+      - Research quality monitoring
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Year-by-year US television broadcast history from 1920s--2026
+  \item All Pacific Northwest major markets: Seattle, Tacoma, Portland, Spokane, Bellingham, Tri-Cities, Eugene/Medford
+  \item Full FCC regulatory framework: 47 CFR Parts 73 and 74 as of December 2025
+  \item Technical standards: NTSC, ATSC 1.0, ATSC 3.0, VHF/UHF spectrum allocation
+  \item LPTV/Class A licensing pathway including December 2025 rule changes
+  \item PEG access channel history and current state
+  \item Cable television history through streaming disruption
+  \item MTV/YouTube cultural eras and their regulatory impacts
+  \item Operational model for the Streamer-to-Terrestrial Bridge
+  \item Available channels/frequencies for new LPTV applications in PNW markets
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item International broadcasting systems (DVB, ISDB) except as ATSC comparators
+  \item Radio broadcasting (except as historical context for TV station lineages)
+  \item Satellite television (DirecTV, DISH) except in regulatory contrast
+  \item Specific production costs or equipment vendor comparisons
+  \item Legal advice or FCC filing assistance (research only; consult broadcast attorney)
+  \item Programming content analysis (focus is regulatory, historical, technical)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A complete year-by-year annotated timeline from 1928 to 2026 with at least one verifiable milestone per year (sourced from FCC, NAB, PBS, or peer-reviewed history).
+  \item Every major PNW broadcast station documented with: call sign, channel, network affiliation, founding date, ownership lineage, and at least one notable event.
+  \item All relevant FCC regulations cited with correct 47 CFR section numbers and effective dates current as of December 2025.
+  \item The LPTV licensing pathway documented as a step-by-step operational guide: from spectrum search through Form 2100 filing through construction permit through license grant.
+  \item ATSC 3.0 hybrid (OTA + internet) architecture documented with sufficient technical detail for a producer to evaluate deployment feasibility.
+  \item PEG/LPTV community channel model documented with current active count, funding mechanisms, and convergence threats/opportunities.
+  \item The Streamer Bridge operational model articulated as a concrete decision tree: internet producer with existing audience + LPTV license + ATSC 3.0 infrastructure = terrestrial reach.
+  \item All station histories sourced from HistoryLink.org, University of Washington archives, FCC license database, or station-specific records --- no entertainment media.
+  \item Technical standards sourced exclusively from ATSC, FCC, or NAB official documentation.
+  \item Legal framework sourced from Federal Register, CFR (title 47), or published FCC orders.
+  \item Document compiles cleanly with XeLaTeX (three passes, zero fatal errors, correct page count in footer).
+  \item Module F delivers an actionable ``Streamer-to-Terrestrial'' guide suitable for handoff to a GSD mission execution crew.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Intersection} \\
+\midrule
+Fox Infrastructure Group Plan & Parallel infrastructure work & Fiber/spectrum as community infrastructure; FoxFiber connectivity to PNW broadcast tower sites \\
+Seattle Hip-Hop Cultural Module & Cultural ecosystem overlap & KUBE/KJR radio + MTV ``Yo! MTV Raps'' Seattle connection; Black radio heritage feeds into TV \\
+GSD BBS Educational Pack Vision & Delivery mechanism & BBS-style local content distribution as precursor to PEG/LPTV community channel model \\
+The Space Between (TSB) & Philosophical grounding & ``Spaces between'' as the gap between internet and antenna that ATSC 3.0 closes \\
+GSD-OS / Amiga Vision & Technical philosophy & LPTV's Amiga Principle: small stations achieving community reach through architectural leverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Broadcasting has always been a politics of the signal. Who owns the spectrum? Who decides what communities can see of themselves? The FCC's 1934 mandate that stations operate ``in the public interest, convenience, and necessity'' was always a promise the industry partially kept. Public access channels were the correction --- written into the 1984 Cable Act as a tax on the private monopoly of cable rights-of-way. LPTV was the correction's correction, extending the promise to the over-the-air spectrum where the antenna still lives.
+
+The Amiga Principle runs through all of it. A 50-watt UHF transmitter on a hill can serve 20,000 households. A single creator with a streaming audience and a Class A LPTV license can reach every home with an antenna in a 30-mile radius --- households that broadband economics have left behind, households where the antenna on the roof is not nostalgia but necessity. ATSC 3.0 makes that transmitter IP-native. The spaces between internet and broadcast, between creator and community, between the 1929 ace of hearts on a one-inch screen and a 4K HDR stream on a NextGen TV, finally close.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 --- RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Television Era --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides sourced research findings for each of the six modules. All agents should load the relevant module section before beginning production. Numbers and dates are cited to specific sources; check citations before publishing.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item Federal Communications Commission (fcc.gov) --- licensing, regulations, CFR
+  \item Advanced Television Systems Committee (atsc.org) --- ATSC 1.0 and 3.0 standards
+  \item National Association of Broadcasters (nab.org) --- industry data, NextGen TV
+  \item HistoryLink.org --- Washington State broadcast history
+  \item University of Washington / Archives West --- King Broadcasting records
+  \item PBS American Experience (pbs.org) --- national television milestones
+  \item Federal Register (federalregister.gov) --- FCC rulemaking documents
+  \item Alliance for Community Media --- PEG channel data
+\end{itemize}
+
+\subsection{Module A: Television History Chronology}
+
+\subsubsection{The Experimental Era (1920s--1938)}
+
+The first television-like transmissions in the United States were mechanical. Charles Francis Jenkins demonstrated moving silhouette images in 1923, and by 1928 his station W3XK became what many credit as the first commercially licensed US television station. That same year, radio station WGY in Schenectady, New York launched America's first regularly scheduled television broadcasts, airing thirty-minute programs three days a week from 1:30 PM.
+
+Philo Farnsworth, who had described the image dissector as a teenager in Utah, built the first working all-electronic television camera tube in San Francisco in 1927. Vladimir Zworykin at RCA independently developed the iconoscope; a patent battle followed for years before RCA paid Farnsworth royalties. Meanwhile, W2XBS (predecessor to NBC) began continuous test broadcasts from New York, most famously rotating a papier-mâché Felix the Cat doll on a turntable for hours as engineers calibrated signals.
+
+\subsubsection{The All-Electronic Era and World's Fair (1939--1947)}
+
+In April 1939, RCA's National Broadcasting Company introduced the first regularly scheduled all-electronic television broadcasting in America, anchored by the dedication of the RCA pavilion at the New York World's Fair. David Sarnoff himself introduced the broadcast. Television advertising began formally on July 1, 1941, when WNBT (later WNBC) aired a ten-second Bulova watch advertisement during a Brooklyn Dodgers game --- establishing the commercial-broadcast economic model that would define the medium for seventy years.
+
+World War II halted civilian television development. The post-war years brought rapid expansion: by the late 1940s, stations were appearing in every major city, and RCA's 1947 decision to manufacture affordable consumer television sets triggered the mass-market adoption that made television, by the early 1950s, the dominant American home medium.
+
+\subsubsection{The FCC Freeze and Post-Freeze Expansion (1948--1962)}
+
+In September 1948, the FCC placed a freeze on new television station license applications, halting growth at 108 stations while engineers worked out co-channel interference and technical standards. The freeze lasted until April 1952. Its lifting, under the Sixth Report and Order, opened hundreds of new VHF and UHF channels and reserved spectrum for non-commercial educational broadcasting. This document established the table of TV allotments that allocated specific channels to specific communities --- the structural framework that still governs US broadcasting.
+
+The NTSC color standard --- RCA's system --- was approved by the FCC in December 1953 and went to air in January 1954. The Communications Act of 1934 had already established the foundational regulatory framework, creating the FCC and mandating that all broadcast stations operate in the ``public interest, convenience, and necessity.'' In January 1963, Congress mandated that all television sets manufactured in the US include UHF tuners, a critical act that opened UHF spectrum to meaningful viewership.
+
+\subsubsection{Network Golden Age and Cultural Milestones (1952--1980)}
+
+The Big Three (NBC, CBS, ABC) dominated from the freeze's lifting until cable's rise. Key milestones included: the 1963 Kennedy assassination (four days of continuous TV coverage, the first); the 1969 Moon landing (Apollo 11 broadcast to a global audience); the 1972 introduction of HBO via satellite (first premium cable service); the 1983 MASH finale (still among the most-watched programs in US history); and the 1979 launch of ESPN, which demonstrated cable's capacity for niche programming.
+
+The Corporation for Public Broadcasting was established in 1967, funding the Public Broadcasting Service (PBS) and creating a non-commercial alternative to the three networks. The FCC's Fairness Doctrine, requiring balanced coverage of controversial public issues, was enforced from 1949 until its repeal in 1987 in the spirit of Reagan-era deregulation.
+
+\subsubsection{The Digital Transition and ATSC Era (1996--2009)}
+
+The Telecommunications Act of 1996 initiated the digital television transition, allocating spectrum for digital broadcasting while allowing analog broadcasts to continue. The DTV transition deadline was eventually set for June 12, 2009 for full-power stations, after a Congressional delay from the original February 2009 date. The transition moved broadcasters from NTSC analog to ATSC 1.0 digital, freeing the 700 MHz band (Channels 52--69) for wireless broadband use. LPTV and translator stations were not required to complete their analog-to-digital transition until July 31, 2021.
+
+\subsubsection{The Streaming Era and ATSC 3.0 (2005--2026)}
+
+YouTube launched in 2005; Netflix began streaming in 2007. The shift of video viewership from linear broadcast and cable to on-demand streaming accelerated through the 2010s. Traditional cable subscriptions peaked at approximately 68.5 million around 2000 and have declined steadily since, with over 5 million households cutting cable in 2023 alone. In response to this structural shift, the FCC in November 2017 permitted US broadcasters to voluntarily adopt ATSC 3.0 (NextGen TV), the first IP-based terrestrial broadcast standard. As of October 2024, NextGen TV signals reached 76\% of US television households across more than 70 markets. Over 14 million NextGen TV-capable devices had shipped by end of 2024, and the CTA projects 50\% of TV shipments will be NextGen-capable by 2025.
+
+\subsection{Module B: Pacific Northwest Broadcasting Heritage}
+
+\subsubsection{The Founding Era: King Broadcasting's Five-Year Monopoly}
+
+Seattle's first television station was KRSC-TV (Channel 5), which went on the air in November 1948, just before the FCC freeze. Owned by radio entrepreneurs Palmer Leberman and Robert Priebe, it struggled commercially; within a year they sold to KING Radio owner Dorothy Stimson Bullitt, who renamed it KING-TV. Due to the FCC freeze, KING-TV held a five-year monopoly on Seattle television --- simultaneously airing programming from all four networks (NBC, CBS, ABC, and DuMont). This period shaped KING into a community institution of unusual depth and editorial independence. Under Dorothy Bullitt's leadership, KING-TV won the first Peabody Award ever given to a locally-produced station program (for children's show Wunda Wunda, 1957).
+
+\subsubsection{KOMO: Seattle's Experimental Pioneer}
+
+KOMO-TV (Channel 4) carries a lesser-known distinction: on June 3, 1929, KOMO radio engineer Francis J. Brott televised images of a heart, a diamond, a question mark, letters, and numbers over electrical lines to small sets with one-inch screens --- one of the earliest television transmissions in the Pacific Northwest, predating KOMO-TV's regular broadcasts by 24 years. KOMO-TV signed on December 10--11, 1953 as an NBC affiliate, the fourth-oldest station in the Seattle--Tacoma area. Fisher Broadcasting --- named for the Fisher Flouring Mills family that had owned KOMO radio since 1926 --- built KOMO into a flagship operation that would later extend to Portland's KATU (1962). In 1984, KOMO became the first US television station to broadcast daily programming in full stereo sound.
+
+\subsubsection{Portland's Competitive Landscape}
+
+Oregon's oldest television station is KPTV (Channel 12), which preceded the FCC freeze. When the freeze lifted in 1952, Portland was assigned three commercial VHF channels: 6, 8, and 12. KGW-TV (Channel 8) went to King Broadcasting after a contested FCC hearing process. KOIN (Channel 6) became Portland's CBS affiliate. The 1959 King Broadcasting group affiliation deal with NBC reshuffled affiliations across Seattle and Portland simultaneously. KATU (Channel 2) launched in March 1962 as a Fisher Broadcasting independent, became Portland's ABC affiliate in 1964, and was the first Portland commercial station to broadcast digitally (1998). The Columbus Day Storm of October 12, 1962 toppled the KGW-TV tower; the station was off the air for four days during the 1962 World Series.
+
+\subsubsection{KCTS: Educational Television and Community Service}
+
+KCTS/9 (Channel 9) in Seattle was founded in December 1954 with a gift from Dorothy Bullitt (of King Broadcasting) and grants from Emerson Corporation and Ford's Fund for the Advancement of Adult Education. Its call letters stand for Community Television Service. Licensed to the University of Washington Board of Regents, KCTS became the seventh-ranked public broadcasting station nationally. In 1966, KCTS presented the first State of the Union Address on educational television and pioneered interconnected public television using telephone lines --- a technological precursor to internet content distribution.
+
+\subsubsection{Ownership Consolidation: From Bullitt to Sinclair}
+
+King Broadcasting was sold by Dorothy Bullitt's daughters (Harriet Bullitt and Priscilla Bullitt Collins) in 1992 to the Providence Journal Company (ProJo). ProJo merged with Belo in 1997; Belo was acquired by Gannett/Tegna in 2013. Fisher Communications sold KOMO-TV and KATU to Sinclair Broadcast Group in April 2013. As of 2026, Sinclair owns KOMO (Ch. 4), KUNS (Ch. 51) in Seattle, and KATU (Ch. 2) in Portland. KING-TV (Ch. 5) remains under Tegna. KIRO-TV (Ch. 7) is owned by Cox Media Group.
+
+\subsubsection{Notable PNW Stations Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{1.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Call Sign} & \tableheader{Ch.} & \tableheader{Network} & \tableheader{Owner} & \tableheader{Founded / Notable} \\
+\midrule
+KING-TV & 5 & NBC & Tegna & Nov 1948; first PNW TV; 5-yr monopoly \\
+KOMO-TV & 4 & ABC & Sinclair & Dec 1953; 1929 experimental; stereo pioneer 1984 \\
+KIRO-TV & 7 & CBS & Cox Media & 1958; Hearst originally \\
+KCTS/9 & 9 & PBS & KCTS/9 & Dec 1954; first PNW educational TV \\
+KPTV & 12 & Fox & Nexstar & Pre-freeze; Oregon's oldest TV station \\
+KGW-TV & 8 & NBC & Tegna/KGW & 1956; Columbus Day Storm 1962 \\
+KOIN & 6 & CBS & Nexstar & 1953; Portland CBS flagship \\
+KATU & 2 & ABC & Sinclair & Mar 1962; first Portland digital 1998 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module C: Technical Standards and Spectrum}
+
+\subsubsection{NTSC: The Analog Standard (1941--2009)}
+
+The National Television System Committee (NTSC) standard was first established in 1941 for monochrome television (525 scan lines, 60 Hz field rate, 6 MHz channel bandwidth). The color NTSC standard was finalized in December 1953 (FCC approval) and went to air January 1954, using the RCA compatible color system that allowed color broadcasts to be received in black-and-white on older sets. NTSC remained the analog standard for all US full-power television until June 12, 2009, when the DTV transition mandated the shift to ATSC 1.0 digital.
+
+\subsubsection{VHF and UHF Band Allocation}
+
+VHF (Very High Frequency) television occupied two sub-bands: Low VHF (Channels 2--6, 54--88 MHz) and High VHF (Channels 7--13, 174--216 MHz). UHF (Ultra High Frequency) television occupied Channels 14--83 (470--890 MHz) before the spectrum was progressively reclaimed. In 1963 legislation mandated that all new television sets include UHF tuners, opening Channels 14--83 to meaningful commercial use. LPTV stations were subsequently established on UHF channels beginning in 1982. The 2009 DTV transition and subsequent spectrum auctions compressed the UHF television band to Channels 14--36 (470--608 MHz); Channels 37--51 were repurposed for wireless broadband (600 MHz band) in the 2017 broadcast incentive auction. As of the December 2025 FCC rule changes, LPTV/TV Translator stations are prohibited from operating above Channel 36.
+
+\subsubsection{ATSC 1.0: The Digital Standard (2009--present)}
+
+ATSC 1.0 (A/53) replaced NTSC for full-power and Class A stations on June 12, 2009. The standard supports up to 1080i resolution at 720p/1080i, uses MPEG-2 video compression and Dolby AC-3 audio, and transmits at up to approximately 19.39 Mbps on a 6 MHz channel using 8-VSB modulation. ATSC 1.0 enables multicast: a single 6 MHz channel can carry multiple sub-channels simultaneously (e.g., a station's main HD feed plus secondary standard-definition subchannels).
+
+\subsubsection{ATSC 3.0: NextGen TV (2017--present)}
+
+ATSC 3.0 was approved by the FCC for voluntary adoption in November 2017. The standard is fully IP-based, enabling a fundamental convergence between terrestrial broadcast and internet delivery. Key specifications include: HEVC (H.265) video at up to 4K (2160p) at 120 fps; wide color gamut (WCG); high dynamic range (HDR10+, Dolby Vision); Dolby AC-4 and MPEG-H 3D Audio with Dolby Atmos support; OFDM modulation (same as Wi-Fi and LTE) for improved indoor and mobile reception; throughput ranging from 1 Mbps (high-robustness mode) to over 57 Mbps (high-capacity mode). The IP backbone enables: virtual channels delivered via internet connection (Run3TV platform); targeted advertising; interactive applications; datacasting; and Single Frequency Networks (SFN) where multiple transmitters share a channel for gap coverage.
+
+As of October 2024, NextGen TV signals reached 76\% of US television households. More than 200 NextGen TV services include HDR; over 80 million viewers have access to HDR broadcast content. The standard is deployed in the US, South Korea (from May 2017), Jamaica, and is recommended for Brazil's DTV+ service.
+
+\subsubsection{LPTV Power Limits and Channel Rules}
+
+LPTV stations operate as a secondary service with lower power than full-power stations. Maximum effective radiated power (ERP): 3 kilowatts on VHF (Channels 2--13); 15 kilowatts on UHF (Channels 14--36). Class A stations (elevated LPTV with primary-service protections) follow the same power limits but gain interference protection rights unavailable to standard LPTV. As of July 31, 2021, all LPTV and TV translator stations completed the mandatory digital transition (ATSC 1.0 minimum; ATSC 3.0 optional).
+
+\subsection{Module D: FCC Licensing and Legal Framework}
+
+\subsubsection{The Communications Act of 1934}
+
+The Communications Act of 1934 created the Federal Communications Commission and established that broadcast licenses are grants of spectrum use, not ownership, governed by the public interest standard. The Act requires all commercial broadcast stations to ``operate in the public interest, convenience, and necessity.'' Television fell under the Act's scope from the beginning; all FCC broadcast regulation flows from this foundation. Title 47 of the Code of Federal Regulations (CFR) implements the Act; television broadcasting is primarily governed by 47 CFR Part 73 (full power and Class A) and 47 CFR Part 74 (LPTV, TV translators, auxiliary services).
+
+\subsubsection{Station Classes and Spectrum Priority}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Class} & \tableheader{CFR Part} & \tableheader{Priority} & \tableheader{Key Requirements} \\
+\midrule
+Full Power & 73 & Primary & 18+ hrs/day; EEO; OPIF; political file; license renewal \\
+Class A & 73/74 & Primary & 18 hrs/day min; 3 hrs/wk local; same Part 73 rules as full power; interference protection \\
+LPTV & 74 & Secondary & 14 hrs/wk min; no commercial limits; no local programming quota; yields to full power \\
+TV Translator & 74 & Secondary & No original programming; rebroadcasts full-power signal only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Licensing Process for New LPTV Stations}
+
+New LPTV and TV translator applications are only accepted during designated FCC filing windows announced at least 30 days in advance via Public Notice. Applications are filed electronically through the FCC's Licensing and Management System (LMS) on Form 2100, Schedule C. Key steps: (1) Monitor fcc.gov/media for window announcements; (2) Conduct interference analysis using FCC's OET Bulletin 69 methodology; (3) File Form 2100 with technical parameters and ownership disclosure; (4) Receive Construction Permit; (5) Build station per permit specifications; (6) File for license grant (Form 2100). The FCC does not maintain a list of stations for sale; station acquisitions require filing Form 314 (Assignment of License) or Form 315 (Transfer of Control).
+
+\subsubsection{Low Power Protection Act and Class A Conversion (2023--2025)}
+
+The Low Power Protection Act (signed January 5, 2023) directed the FCC to create a one-year window for qualifying LPTV stations to convert to Class A status, gaining primary spectrum protection. To qualify, a station must have: operated in a Designated Market Area (DMA) with fewer than 95,000 TV households as of January 5, 2023; broadcast at least 18 hours per day between October 7 and January 5, 2023; aired at least 3 hours per week of locally produced programming in that period; and operated in compliance with FCC LPTV rules. The filing window ran from May 31, 2024 through May 30, 2025, with a \$425 application fee.
+
+\subsubsection{December 2025 FCC LPTV Rule Changes}
+
+On December 18, 2025, the FCC adopted a Report and Order implementing changes to LPTV/TV Translator rules (effective 30 days after Federal Register publication). Key provisions: LPTV stations must broadcast at least one video program signal (test patterns and still pictures do not count); stations operating above Channel 36 are prohibited; TV Translator call signs must follow alphanumeric format (K/W + channel number + two letters + ``-D'' suffix); new LPTV stations must use four-letter call signs with ``-LD'' suffix; Class A call signs use ``-CD'' suffix; channel-sharing and displacement calculations now use antenna location rather than community of license. The FCC declined to limit how often LPTV stations may change their community of license, providing operational flexibility.
+
+\subsubsection{Public Interest Obligations and Content Rules}
+
+LPTV stations face minimal content regulation compared to full-power stations: no prescribed amounts of local or non-entertainment programming; no commercial limits; no minimum hours (beyond 14 hours/week). However: obscene material is prohibited at all times; indecent and profane material is prohibited between 6 AM and 10 PM; Class A stations face political broadcasting rules (lowest unit rate, reasonable access for federal candidates); all stations must maintain FCC correspondence and license documents on site or online. License renewals for TV, Class A TV, LPTV, and translator stations are scheduled to expire between 2028 and 2031; renewal applications (Form 2100, Schedule 303-S) must be filed four months prior to expiration.
+
+\subsubsection{EEO and Ownership Reporting}
+
+Commercial broadcast stations (full power and Class A) must file Broadcast Equal Employment Opportunity Program Reports (Form 2100, Schedule 396) simultaneously with license renewal applications. Ownership reports are filed on FCC Form 323 (commercial) or 323-E (noncommercial). There is no limit on the number of LPTV/translator stations any one entity may own. Current broadcast licensees, cable operators, and newspapers may own LPTV stations.
+
+\subsection{Module E: The Cable Era, MTV, and Streaming Disruption}
+
+\subsubsection{CATV Origins: Mountain Towns and Signal Gaps (1948--1975)}
+
+Cable television was born from geography. The earliest Community Antenna Television (CATV) systems appeared in 1948 in Pennsylvania mountain towns like Mahanov City and Lansford, where local businesses who sold television sets were unable to demonstrate their products because broadcast signals from Philadelphia could not penetrate the terrain. Entrepreneurs erected antennas on mountain peaks and ran coaxial cable into the valleys. By 1950, there were small CATV operations in Oregon and Washington as well, serving rural areas blocked from broadcast signals by the Cascades and Olympics. Cable's original function was retransmission, not origination. The origination era began when HBO launched via satellite on September 30, 1975, delivering the Muhammad Ali vs. Joe Frazier ``Thrilla in Manila'' to cable systems. This single event transformed cable from a signal relay service into an alternative medium.
+
+\subsubsection{The Cable Explosion (1980--1996)}
+
+Cable homes grew from an estimated 16 million in 1980 to 50 million in 1990. The 1984 Cable Communications Policy Act deregulated the industry, spurring investment, and established the PEG access channel framework. Ted Turner's CNN (1980) demonstrated that cable could sustain a 24-hour programming format. ESPN (September 1979) had done the same for sports. Nickelodeon (April 1979) established children's cable. On August 1, 1981, at 12:01 AM Eastern Time, MTV launched with ``Video Killed the Radio Star'' by the Buggles, followed by the words ``Ladies and gentlemen, rock and roll.'' MTV's original five VJs (Nina Blackwood, Mark Goodman, Alan Hunter, J.J. Jackson, and Martha Quinn) hosted a format modeled on AOR radio. Within two years, MTV had become a primary vehicle for music marketing; acts like The Human League and Men at Work, with minimal radio play, saw immediate sales increases upon MTV rotation. Nirvana's ``Smells Like Teen Spirit'' premiered on MTV in September 1991 and, in the words of MTV's Amy Finnerty, ``changed the entire look of MTV.''
+
+Cable homes: 16 million (1980) $\to$ 50 million (1990) $\to$ 67.7 million (2000) $\to$ peak 68.5 million (c.2000) $\to$ declining to present.
+
+\subsubsection{The 1992 Cable Act and Consolidation}
+
+The Cable Television Consumer Protection and Competition Act of 1992 froze cable rates and restored local government authority over cable franchise agreements. TCI (Tele-Communications Inc.), under John Malone, became the dominant multi-system operator (MSO), eventually reaching 48 states with cash flow exceeding the three broadcast networks combined by 1989. Fox News and MSNBC both launched in 1996. The Telecommunications Act of 1996 restructured the entire landscape, initiating the digital television transition and allowing telephone companies to compete with cable.
+
+\subsubsection{The YouTube Era and Streaming Disruption (2005--2026)}
+
+YouTube launched in February 2005; Google acquired it in October 2006 for \$1.65 billion. Netflix began streaming in January 2007. These two events reconfigured the economics of video content. The creator economy that YouTube enabled --- by 2023, over 50 million creators worldwide monetizing content on the platform --- represents a structural parallel to LPTV: individuals producing programming for specific communities, outside the major network apparatus, at low capital cost. MTV's music-video format collapsed in the face of YouTube (music videos migrated online); MTV responded by pivoting to reality programming, beginning with The Real World (1992) and accelerating through Jersey Shore and its successors. By 2023, MTV was available to approximately 67 million US pay-TV households, down from its 2011 peak of 99 million.
+
+\subsection{Module F: Community Voice and the Streamer Bridge}
+
+\subsubsection{PEG Access Television: The Community Channel Infrastructure}
+
+Public, Educational, and Governmental (PEG) access television channels were created by the Cable Communications Policy Act of 1984, which authorized local franchising authorities to require cable operators to set aside channels for PEG use as a condition of their public rights-of-way franchise. The legal basis was established by FCC First Report and Order (1969), which required CATV systems with 3,500 or more subscribers to ``operate to a significant extent as a local outlet.'' At peak, approximately 2,500 PEG operations existed in the US. As of the early 2020s, over 1,600 organizations across all 50 states manage approximately 3,000 PEG channels, producing 20,000 hours of new programming weekly. Three-quarters of PEG operations today are small (1--3 employees). PEG channels are funded by cable franchise fees (capped at 5\% of annual gross revenue under the 1984 Act). Cord-cutting erodes this funding: as pay-TV subscriptions decline at approximately 4\% annually, the cable fee base shrinks.
+
+\subsubsection{LPTV as Community Platform}
+
+The LPTV service, established in 1982, was explicitly designed for community voice. The FCC's founding language: ``primarily intended to provide opportunities for locally-oriented television service in small communities, both rural and individual, within larger urban areas.'' Over 2,450 licensed LPTV stations operate in the US today, operated by a diverse range of entities: high schools and colleges, churches, local governments, businesses, and individual citizens. There is no limit on commercial content. There is no local programming requirement at the LPTV level (though Class A requires 3 hours/week locally produced). This minimal regulatory burden, combined with secondary spectrum status and the low-cost entry point of UHF digital transmitters, makes LPTV the most accessible entry point into terrestrial broadcasting for new entrants.
+
+\subsubsection{ATSC 3.0's Hybrid Architecture: The Technical Bridge}
+
+ATSC 3.0's IP-native backbone enables what no previous broadcast standard permitted: a live broadcast signal combined with internet-delivered content on the same receiving device. The Run3TV platform, deployed by stations including FOX affiliates in Las Vegas and other NextGen TV markets, functions as a streaming portal embedded within the broadcast signal. When a NextGen TV set is connected to the internet, viewers can access: on-demand content from local stations, 24/7 streaming channels, interactive applications, live weather and news streams, and program restart. Broadcasters can also launch ``virtual channels'' using only internet bandwidth, carried within their ATSC 3.0 transmission. This means an LPTV operator with a 15 kW UHF transmitter and an internet connection can carry their own OTA programming plus virtualize additional channels for internet subscribers, effectively operating a hybrid broadcast/streaming service from a single license.
+
+\subsubsection{5G Broadcast: The Emerging LPTV Play}
+
+HC2 Broadcasting (operator of 250+ LPTV stations) has petitioned the FCC to adopt the LTE-based 5G Terrestrial Broadcast standard as an authorized transmission standard for US LPTV stations, operating in Band 108 (470--698 MHz, which overlaps the TV UHF band). XGen Network, representing more than 5,300 LPTV stations, is pursuing 5G Broadcast deployment targeting smartphones and tablets directly. HC2's WODP-LD (Channel 36, Fort Wayne, Indiana) has demonstrated 5G Broadcast signals ``strong as far as 20+ miles'' and stable at highway speeds. If the FCC adopts 5G Broadcast for LPTV, a single LPTV license could serve both traditional TV receivers via ATSC 3.0 and mobile smartphone users via 5G Broadcast on the same 6 MHz channel --- transforming an LPTV license into a local mobile broadcast node.
+
+\subsubsection{The Streamer-to-Terrestrial Operational Model}
+
+A content creator or community media organization seeking terrestrial reach can follow this pathway:
+
+Step 1: Establish an online audience and production infrastructure (streaming platform + consistent content schedule). Step 2: Monitor FCC Media Bureau for LPTV filing windows (announced via Public Notice at fcc.gov/media). Step 3: Conduct interference analysis for available UHF channels in target market (Channels 14--36 only as of December 2025). Step 4: File FCC Form 2100, Schedule C during the window; pay filing fee; obtain Construction Permit. Step 5: Deploy ATSC 1.0 or ATSC 3.0 transmitter (15 kW maximum UHF; tower/antenna required). Step 6: Begin broadcasting; maintain 14-hour/week minimum operation; carry at least one live video program signal. Step 7: If market has fewer than 95,000 TV households: evaluate Class A conversion eligibility for interference protection. Step 8: Integrate ATSC 3.0 Run3TV or similar platform to simultaneously serve OTA viewers and internet-connected viewers from the same license and transmitter.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+FCC regulatory citations & GATE & All 47 CFR section numbers must be verified against current CFR (2024 edition). Rules changed December 2025; note effective dates. \\
+LPTV licensing guidance & ANNOTATE & Research only; not legal advice. All mission output must include: ``Consult a licensed broadcast attorney before filing.'' \\
+Indigenous radio/TV station history & ABSOLUTE & PNW Indigenous-operated stations must be named by specific nation/community, never generically. \\
+Station ownership claims & GATE & Verify all current ownership through FCC license database (fcc.gov/media) before publishing. Sinclair acquisitions ongoing. \\
+Financial projections & ANNOTATE & Any cost estimates for transmitter/studio deployment must be labeled as illustrative only; actual costs vary enormously by market. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Federal Communications Commission, \textit{Low Power Television Service} (fcc.gov/media/television/low-power-television-lptv)
+  \item Federal Communications Commission, \textit{How to Apply for a Radio or Television Broadcast Station} (fcc.gov/media/radio/how-to-apply)
+  \item Federal Communications Commission, \textit{License Renewal Applications for Television Broadcast Stations} (fcc.gov/media/television/broadcast-television-license-renewal)
+  \item Federal Register, \textit{Establishing Rules for Full Power Television and Class A Television Stations}, FR Doc. 2023-24626 (February 1, 2024)
+  \item Federal Register, \textit{Establishing Rules for Digital Low Power Television and Television Translator Stations}, FR Doc. 2023-09843 (May 12, 2023)
+  \item FCC Report and Order, \textit{LPTV Service Rule Changes}, FCC 24-65 (June 2024 NPRM)
+  \item FCC Report and Order, \textit{Changes to LPTV Rules} (December 18, 2025)
+  \item \textit{47 CFR Part 73} --- Television Broadcast Stations (US Government Publishing Office, 2024 edition)
+  \item \textit{47 CFR Part 74} --- Experimental, Auxiliary, Special Broadcast Services (US Government Publishing Office, 2024 edition)
+  \item Advanced Television Systems Committee, \textit{ATSC 3.0 Standards Suite} (atsc.org/atsc-documents/type/3-0-standards/)
+  \item ATSC, \textit{New NextGen TV Receivers and Expanded Services}, CES 2025 Press Release (January 6, 2025)
+  \item National Association of Broadcasters, \textit{NextGen TV Initiative} (nab.org/innovation/nextgentv.asp)
+\end{itemize}
+
+\subsubsection{Historical \& Archival Sources}
+\begin{itemize}[leftmargin=2em]
+  \item HistoryLink.org, \textit{Radio in Washington} (historylink.org/file/22494)
+  \item University of Washington / Archives West, \textit{King Broadcasting Public Affairs Collection} (archiveswest.orbiscascade.org)
+  \item University of Washington Department of History, \textit{Birth of a Television Station: KCTS} (depts.washington.edu/sthp)
+  \item PBS American Experience, \textit{TV Milestones} (pbs.org/wgbh/americanexperience)
+  \item Elon University, \textit{1920s--1960s: Television, Imagining the Internet} (elon.edu/imagining)
+  \item American Heritage Magazine, \textit{The Very First TV Broadcast} (Volume 54, Issue 2, April/May 2003)
+  \item Encyclopedia.com, \textit{Television Broadcasting, History of}
+  \item Wikipedia (KOMO-TV, KATU, KGW, KING-TV, KCTS) --- used for structural data only; cross-referenced against primary sources
+\end{itemize}
+
+\subsubsection{Industry \& Policy Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Lerman Senter PLLC, \textit{Changes and Opportunities Coming for LPTV, Class A, and TV Translator Stations} (June 12, 2024)
+  \item Wiley Law, \textit{FCC Approves Changes to Rules Governing LPTV, TV Translator, and Class A Stations} (December 2025)
+  \item TV Technology, \textit{FCC Media Bureau Opens LPTV Application Window for Class A Status} (June 3, 2024)
+  \item TV Technology, \textit{Updated ATSC 3.0 Deployments} (January 23, 2025)
+  \item Light Reading, \textit{Top Low-Power TV Station Owner Makes Big Push for 5G Broadcast} (April 1, 2025)
+  \item Nieman Journalism Lab, \textit{Public Access Television Channels: Untapped Resource for Local Journalism} (November 2021)
+  \item Governing Magazine, \textit{The Uncertain Future of Public Access Television} (April 27, 2022)
+  \item CRS Report R42044, \textit{Public, Educational, and Governmental (PEG) Access Cable Television Channels}
+  \item Alliance for Community Media (communitymediation.org) --- PEG station database
+  \item QZVX Broadcast History (qzvx.com/television) --- PNW station histories
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 --- MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research corpus documenting the complete history of US television broadcasting (1920s--2026) with special depth on Pacific Northwest stations, technical standards (NTSC/ATSC/UHF/VHF/5G Broadcast), FCC licensing and legal requirements, and the convergence of internet streaming with terrestrial broadcasting via the LPTV/ATSC 3.0 Streamer Bridge model. Deliver as a suite of six structured research documents (one per module), a master index, and an operational Streamer Bridge Guide for immediate use by community broadcasters and independent content creators in the PNW.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential, Haiku)
+  |-- Shared schema definitions
+  |-- Source index with URL verification
+  |-- Module template scaffolding
+  |-- FCC CFR citation format standard
+  v
+WAVE 1A: History + PNW (Parallel, Sonnet+Opus)
+  Module A: TV Chronology Timeline  <-->  Module B: PNW Stations
+  [HITL CAPCOM Gate: Fact-check PNW station founding dates]
+  v
+WAVE 1B: Technical + Legal (Parallel, Sonnet+Opus)
+  Module C: Technical Standards   <-->  Module D: FCC Legal Framework
+  [HITL CAPCOM Gate: Verify CFR citations + December 2025 rule dates]
+  v
+WAVE 1C: Culture + Community (Parallel, Sonnet)
+  Module E: Cable/MTV/Streaming   <-->  Module F: Streamer Bridge
+  [HITL CAPCOM Gate: Review Streamer Bridge operational guide accuracy]
+  v
+WAVE 2: Synthesis (Sequential, Opus)
+  Cross-module integration: PNW x LPTV x ATSC3 x Streamer Bridge
+  Timeline synthesis from all six modules
+  Connection to Fox Infrastructure Group (FoxFiber/FoxCompute)
+  v
+WAVE 3: Publication (Sequential, Sonnet)
+  LaTeX compilation (three passes, XeLaTeX)
+  Index page generation
+  Delivery package assembly
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Research Layer} --- Six independent module documents, each self-contained and sourced
+  \item \textbf{Integration Layer} --- Cross-module timeline and regulatory overlay (Wave 2 Opus synthesis)
+  \item \textbf{Operational Layer} --- Streamer Bridge Guide (Module F output, standalone deliverable)
+  \item \textbf{Publication Layer} --- Master LaTeX PDF + module PDFs + index.html
+  \item \textbf{Verification Layer} --- All FCC citations cross-checked against current CFR + Federal Register
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module A: TV Chronology & Verifiable milestone every year 1928--2026 & Year-by-year annotated PDF, sourced \\
+2 & Module B: PNW Stations & All major PNW stations documented & Station table + narrative histories \\
+3 & Module C: Tech Standards & NTSC/ATSC/UHF complete technical survey & Standards cited from ATSC/FCC docs \\
+4 & Module D: FCC Legal & All CFR sections current as of Dec 2025 & Operational licensing guide + CFR table \\
+5 & Module E: Cable/Cultural Era & Cable + MTV + YouTube arc documented & Sourced narrative with data tables \\
+6 & Module F: Streamer Bridge & Actionable 8-step LPTV entry guide & Step-by-step operational model \\
+7 & Master Synthesis PDF & All six modules + synthesis integrated & Full LaTeX compilation \\
+8 & Index.html & HTML landing page with download links & Matching broadcast color scheme \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Schema + Index & None & Haiku & 12K \\
+Module A Production & Wave 0 schema & Sonnet & 35K \\
+Module B Production & Wave 0 schema & Sonnet+Opus & 30K \\
+Module C Production & Wave 0 schema & Sonnet & 25K \\
+Module D Production & Wave 0 schema & Sonnet+Opus & 30K \\
+Module E Production & Wave 0 schema & Sonnet & 28K \\
+Module F Production & Modules C+D & Opus+Sonnet & 32K \\
+Wave 2 Synthesis & All modules & Opus & 40K \\
+Wave 3 Publication & Wave 2 output & Sonnet & 20K \\
+Verification Pass & All modules & Sonnet & 15K \\
+\midrule
+\rowcolor{lightprimary}
+\multicolumn{3}{l}{\textbf{Total Estimated}} & \textbf{267K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Wave 2 synthesis; Module B/D judgment (PNW station attribution; FCC regulatory complexity); Module F Streamer Bridge integration; cultural sensitivity review \\
+Sonnet & 60\% & All six module production; table construction; bibliography formatting; LaTeX assembly; verification pass \\
+Haiku & 10\% & Wave 0 scaffolding (shared schemas, source index template, module headers, citation format rules) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index, module templates \\
+1A & History + PNW & Parallel & Sonnet+Opus & Modules A and B \\
+1B & Technical + Legal & Parallel & Sonnet+Opus & Modules C and D \\
+1C & Culture + Bridge & Parallel & Sonnet & Modules E and F \\
+2 & Synthesis & Sequential & Opus & Integrated master document \\
+3 & Publication & Sequential & Sonnet & Final PDFs + index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Shared schema: Station record & SCOUT/Haiku & call sign, channel, network, owner, founded, notable events, sources \\
+Shared schema: FCC regulation record & SCOUT/Haiku & CFR section, rule name, effective date, summary, filing form \\
+Shared schema: Technical standard record & SCOUT/Haiku & standard name, year, key specs, channel bandwidth, authority \\
+Source index seed & LOG/Haiku & 30+ pre-verified URLs from bibliography above \\
+Module template & EXEC/Haiku & LaTeX section template with standard headings per module type \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Television History + PNW Heritage (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+A & Module A: TV History & CRAFT-HIST/Sonnet & Year-by-year timeline; PBS American Experience; FCC history; Wikipedia list-of-years cross-check \\
+B & Module B: PNW Stations & CRAFT-PNW/Sonnet+Opus & HistoryLink.org; Archives West KING collection; station Wikipedia cross-check; FCC license database \\
+\midrule
+\multicolumn{4}{l}{\textit{HITL Gate: CAPCOM presents founding dates, ownership claims, and notable events for Tibsfox verification before Wave 1B}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Technical Standards + FCC Legal (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+A & Module C: Tech Standards & CRAFT-TECH/Sonnet & ATSC standards suite; FCC OET bulletins; NAB technical docs; ATSC 3.0 deployment map \\
+B & Module D: FCC Legal & CRAFT-LAW/Sonnet+Opus & 47 CFR Parts 73+74; Dec 2025 R\&O; Federal Register; Wiley/Lerman Senter legal summaries \\
+\midrule
+\multicolumn{4}{l}{\textit{HITL Gate: CAPCOM presents all CFR citations + effective dates for Tibsfox verification; legal safety check}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1C: Cultural Era + Streamer Bridge (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+A & Module E: Cable/Cultural & CRAFT-CULT/Sonnet & Cable TV history; MTV Wikipedia + Britannica; Nirvana/MTV milestone; cord-cutting data \\
+B & Module F: Streamer Bridge & CRAFT-BRIDGE/Opus+Sonnet & LPTV operational model; ATSC 3.0 Run3TV; HC2/XGen 5G Broadcast; PEG convergence; operational step-by-step guide \\
+\midrule
+\multicolumn{4}{l}{\textit{HITL Gate: CAPCOM presents Streamer Bridge operational guide for Tibsfox review; scope confirmation for Fox Infrastructure alignment}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Shared attribute layer:} Station schema, CFR citation format, and source index computed once in Wave 0 and cached across all six module production tasks (5-minute TTL exploitation).
+  \item \textbf{Research Reference as cache:} Stage 2 of this document serves as the primary research cache; module agents load their relevant Stage 2 section before beginning production to avoid redundant web research.
+  \item \textbf{HITL gate positioning:} Three HITL gates placed between parallel waves to verify accuracy before synthesis; prevents synthesis-stage rework caused by factual errors propagating across modules.
+  \item \textbf{Parallel track separation:} Waves 1A, 1B, and 1C run as separate parallel tracks, enabling simultaneous context windows without cross-contamination.
+  \item \textbf{FCC legal library pre-load:} All December 2025 LPTV rule changes and 47 CFR citations are staged in Wave 0 source index for Module D to load directly without web research.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Session} & \tableheader{Waves} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Session 1 & 0 + 1A & 77K & Foundation + History/PNW; HITL gate at end \\
+Session 2 & 1B & 55K & Tech Standards + Legal; HITL gate at end \\
+Session 3 & 1C + 2 & 100K & Culture/Bridge + Synthesis; HITL gate at 1C close \\
+Session 4 & 3 & 35K & Publication + verification \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & \textbf{267K} & Across 4 sessions, 6--9 context windows \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: Foundation
+  (Haiku: schema, index, templates)
+         |
+    +---------+
+    |         |
+  Wave 1A   Wave 1B   [Wave 1C runs in parallel with both]
+  (Mod A/B) (Mod C/D)  (Mod E/F)
+    |         |           |
+    +----+----+           |
+         |                |
+    [HITL x3]            |
+         |                |
+    Wave 2: Synthesis ----+
+    (Opus: integration)
+         |
+    Wave 3: Publication
+    (Sonnet: PDF + index)
+         |
+    FINAL DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & BLOCK & Stop wave; do not proceed \\
+Core Accuracy & 8 & HIGH & Rework module; re-gate \\
+Integration & 4 & MED & Flag in synthesis; annotate \\
+Edge Cases & 3 & LOW & Document; flag for follow-up \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result / Pass Condition} \\
+\midrule
+SC-01 & No legal advice published & All Module D output includes explicit disclaimer: ``This is research, not legal advice. Consult a licensed broadcast attorney before filing any FCC application.'' \\
+SC-02 & FCC CFR citations current & All 47 CFR section numbers verified against 2024 CFR edition with December 2025 rule changes noted; no obsolete rule numbers published as current \\
+SC-03 & No Indigenous generalization & Any Indigenous-operated PNW broadcast station is named by specific tribal nation, never as ``Indigenous'' or ``Native American'' generically \\
+SC-04 & LaTeX compilation clean & Document compiles with zero fatal errors in three XeLaTeX passes; page count renders correctly in footer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Year-by-year timeline 1928--2026 & Core-01, Core-02 & Pending \\
+All major PNW stations documented & Core-03; SC-03 & Pending \\
+CFR citations current as of Dec 2025 & SC-02; Core-04 & Pending \\
+LPTV licensing pathway step-by-step & Core-05; SC-01 & Pending \\
+ATSC 3.0 hybrid architecture documented & Core-06; Integ-01 & Pending \\
+PEG channel model current & Core-07 & Pending \\
+Streamer Bridge operational model & Core-08; Integ-02 & Pending \\
+All station sources from approved orgs & Core-09 & Pending \\
+Technical standards from ATSC/FCC only & Core-10; SC-02 & Pending \\
+Legal framework from Federal Register/CFR & Core-11; SC-01 & Pending \\
+LaTeX compiles clean & SC-04 & Pending \\
+Module F actionable standalone guide & Core-12; Integ-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go at each HITL gate \\
+TOPO & Topology Manager & Team structure; mid-mission restructuring if scope expands \\
+PLAN & Planner & Wave decomposition; dependency scheduling; parallel track optimization \\
+ARCH & Architecture & Cross-cutting structural decisions; LaTeX document architecture \\
+SCOUT & Research Agent & Source verification; web research for gap-fill; FCC database queries \\
+EXEC-A & Executor A & Modules A and B production (history + PNW) \\
+EXEC-B & Executor B & Modules C and D production (technical + legal) \\
+EXEC-C & Executor C & Modules E and F production (culture + bridge) \\
+CRAFT-HIST & History Specialist & TV chronology authority; timeline accuracy \\
+CRAFT-PNW & PNW Domain Specialist & Pacific Northwest station histories; King Broadcasting \\
+CRAFT-TECH & Technical Specialist & ATSC/NTSC/UHF standards; spectrum allocation \\
+CRAFT-LAW & Legal Specialist & 47 CFR navigation; FCC rulemaking interpretation \\
+CRAFT-BRIDGE & Bridge Specialist & Streamer-to-Terrestrial operational model; LPTV + ATSC 3.0 convergence \\
+VERIFY & Verification Agent & Citation accuracy; source quality; CFR cross-check \\
+INTEG & Integration Agent & Cross-module relationship validation; timeline consistency \\
+SECURE & Security/Safety & Legal disclaimer enforcement; SC-01/SC-02/SC-03 gates \\
+CAPCOM & HITL Interface & Three HITL gates: only channel crossing human-machine boundary \\
+SURGEON & Health Monitor & Research quality degradation detection; module completeness \\
+BUDGET & Resource Manager & Token budget tracking across 4 sessions \\
+RETRO & Retrospective & Post-wave analysis; lessons captured for v1.51+ integration \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (21 roles) \\
+Module Count & 6 \\
+Parallel Tracks & 3 (Waves 1A, 1B, 1C) \\
+HITL Gates & 3 (post-1A, post-1B, post-1C) \\
+Estimated Sessions & 4 \\
+Estimated Token Budget & 267K \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Primary Authority Sources & FCC.gov, ATSC.org, NAB.org, HistoryLink.org, Archives West, Federal Register \\
+Safety-Critical Tests & 4 (BLOCK-level) \\
+Core Accuracy Tests & 8 \\
+Deliverables & 8 (6 module PDFs + master PDF + index.html) \\
+PNW Coverage & Seattle, Tacoma, Portland, Spokane, Bellingham, Tri-Cities, Eugene/Medford \\
+Regulatory Horizon & December 2025 LPTV rule changes (effective early 2026) \\
+Target Audience & Community broadcasters, independent creators, PNW media historians, GSD operators \\
+Downstream Use & Fox Infrastructure Group (FoxFiber/FoxCompute broadcast node feasibility), Seattle Hip-Hop Cultural Module (media landscape context), GSD BBS Educational Pack \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{Closing Through-Line}
+
+``Ladies and gentlemen, rock and roll.'' Those four words opened MTV and, by extension, the era that proved content could drive infrastructure. The antenna preceded the cable. The streamer preceded the LPTV license. The signal, as it always has, is looking for a way home.
+
+The Television Era mission exists because the spaces between matter --- between the radio shack where Francis Brott televised a playing card to a one-inch screen in 1929 and the UHF tower that could today carry that same signal to 20,000 households in 4K HDR. Between the FCC's 1934 mandate for the public interest and the 2025 rule changes that keep the LPTV window open for new voices. Between the YouTube creator with a loyal audience and the community that only has an antenna.
+
+The Amiga Principle runs through all of it: elegant architecture, specialized execution paths, faithful iteration. Small transmitters. Big reach. The spaces between close.
+\end{quotebox}
+
+\end{document}
