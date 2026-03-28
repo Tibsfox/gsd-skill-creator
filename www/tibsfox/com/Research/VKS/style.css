@@ -1,0 +1,193 @@
+/* VKS — Dark Purple / Shader theme, Vulkan Screensaver Engine
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --gpu-purple: #1A237E;
+  --gpu-light: #E8EAF6;
+  --gpu-mid: #283593;
+  --gpu-dark: #0D1452;
+  --shader-blue: #0277BD;
+  --shader-light: #E1F5FE;
+  --shader-mid: #0288D1;
+  --compute-dark: #37474F;
+  --compute-mid: #455A64;
+  --compute-light: #ECEFF1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--gpu-purple);
+  --link-hover: var(--gpu-dark);
+  --accent: var(--gpu-purple);
+  --accent-light: var(--gpu-light);
+  --accent-dark: var(--gpu-dark);
+  --card-bg: white;
+  --card-border: #B0BEC5;
+  --card-shadow: rgba(26,35,126,0.12);
+  --border: #B0BEC5;
+  --parchment: var(--compute-light);
+}
+
+/* ===================================================
+   2. HEADER -- deep indigo/shader gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a3e 35%, #0d1452 70%, #1a0a2e 100%);
+  border-bottom: 4px solid var(--shader-blue);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(26,35,126,0.25) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(2,119,189,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #E8EAF6; }
+header .subtitle { color: #90CAF9; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--compute-dark);
+  border-bottom-color: var(--compute-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--gpu-purple); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--gpu-light);
+  border-left: 4px solid var(--gpu-purple);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--compute-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(26,35,126,0.04); }
+tr:hover { background: rgba(26,35,126,0.08); }
+
+pre {
+  background: #0d0d1a;
+  color: #C5CAE9;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--shader-blue);
+}
+code {
+  background: var(--gpu-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--gpu-purple);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #B0BEC5;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(26,35,126,0.12); border-color: var(--gpu-purple); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--gpu-purple);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-catalog { background: var(--gpu-light); color: var(--gpu-purple); }
+.tag-engine { background: var(--shader-light); color: var(--shader-blue); }
+.tag-nehe { background: #F3E5F5; color: #7B1FA2; }
+.tag-sascha { background: #E8F5E9; color: #2E7D32; }
+.tag-cuda { background: #FFF3E0; color: #E65100; }
+.tag-ai { background: var(--compute-light); color: var(--compute-dark); }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--gpu-purple); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--gpu-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--gpu-purple);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #C5CAE9; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
