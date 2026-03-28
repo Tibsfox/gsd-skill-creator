@@ -1,0 +1,1068 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Literary / History ===
+\definecolor{primary}{HTML}{4A148C}       % Burgundy-purple
+\definecolor{secondary}{HTML}{F57F17}     % Gold
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown
+\definecolor{accent}{HTML}{6A1B9A}        % Lighter purple
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light lavender
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Light gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Light parchment
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Orson Scott Card}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Orson Scott Card -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ==========================================
+% TITLE PAGE
+% ==========================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Orson Scott Card\\[0.3em]The Maker \& the Mirror}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{American Science Fiction \& the Architecture of Empathy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ==========================================
+% TABLE OF CONTENTS
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% STAGE 1 --- VISION DOCUMENT
+% ==========================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Orson Scott Card --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{Deep literary study of one of science fiction's most accomplished and controversial figures}
+
+\subsection{Vision}
+
+There is a paradox at the heart of Orson Scott Card's career that makes him one of the most fascinating case studies in modern American letters: the writer whose fiction radiates empathy---whose defining creation learns to love his enemies in the very act of destroying them---is also the public figure whose statements on homosexuality have alienated a generation of readers. Understanding Card means holding both truths simultaneously, refusing the simplicity of either hagiography or cancellation.
+
+Card emerged from a deeply specific cultural matrix---Mormon pioneer heritage stretching back to Brigham Young himself, a childhood steeped in Great Books and Broadway musicals, a missionary sojourn in Brazil that colored his imagination permanently. His genius was to transmute that specificity into universality: \textit{Ender's Game} speaks to every child who has felt manipulated by systems larger than themselves, every leader who discovered that understanding and destruction are terrifyingly close cousins.
+
+But Card is far more than Ender. The Tales of Alvin Maker reimagine Joseph Smith as frontier fantasy. The Homecoming Saga transposes the Book of Mormon into far-future science fiction. \textit{Speaker for the Dead} tackles xenocide and radical empathy across species boundaries. His MICE quotient (Milieu, Idea, Character, Event) has become a foundational framework taught in writing programs worldwide. His Literary Boot Camp produced Brandon Sanderson, Stephenie Meyer, and a generation of working writers.
+
+This research mission maps the full territory: the life, the works, the craft philosophy, the religious architecture embedded in the fiction, and the public controversies that have made ``separating the art from the artist'' a live question for millions of readers. The goal is not judgment but comprehension---the kind of deep reading Card himself demanded in \textit{Speaker for the Dead}.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Biographical complexity is underexplored.} Most accounts reduce Card to ``Ender's Game author'' or ``anti-gay Mormon writer.'' The full arc---from theater student to Campbell Award winner to prolific cross-genre novelist to controversial public intellectual---has never been synthesized into a comprehensive research document.
+  \item \textbf{The religious architecture of his fiction is invisible to most readers.} Card's Mormon theology permeates his work at structural levels (plan of salvation in Speaker for the Dead, Book of Mormon in Homecoming Saga, Joseph Smith in Alvin Maker) but non-LDS readers rarely perceive these layers, losing significant meaning.
+  \item \textbf{His craft contributions are overshadowed by controversy.} The MICE quotient, his writing pedagogy, and the lineage of writers he trained represent a substantial contribution to the field that deserves systematic documentation.
+  \item \textbf{The controversy itself is poorly contextualized.} Card's public statements span three decades and shift considerably in tone and specificity. A research-grade timeline of positions, institutional affiliations, and professional consequences does not exist in one place.
+  \item \textbf{The art-artist separation question needs evidence, not opinion.} Card is a critical test case for how readers, publishers, and institutions navigate the relationship between a creator's public positions and their creative work.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Card's career is a sustained exploration of empathy's architecture---how understanding another consciousness transforms both the knower and the known---conducted through fiction that is structurally encoded with Mormon theology and delivered by an author whose public positions on homosexuality contradict the empathic ethos of his own best work.
+\end{quotebox}
+
+The research treats Card as a \textit{system}, not merely an author. His biography, theology, craft philosophy, fiction, and public controversies form an interconnected network where each element illuminates the others. The study region is the full corpus (50+ novels, 45+ short stories, 2 craft books, decades of columns) mapped against the biographical and cultural timeline.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+   ORSON SCOTT CARD: THE MAKER & THE MIRROR
+   ==========================================
+
+   [BIOGRAPHY & FORMATION]          [LITERARY UNIVERSE]
+    Mormon Heritage                  Ender Saga (17+ books)
+    Brazil Mission                   Alvin Maker (8 books)
+    Theater -> Fiction               Homecoming (5 books)
+    Literary Boot Camp               Pathfinder / Mithermages
+            |                        Standalone novels
+            |                               |
+            v                               v
+   [CRAFT PHILOSOPHY]  <-------->  [FAITH & FICTION]
+    MICE Quotient                   Plan of Salvation
+    Character-driven SF             Book of Mormon parallels
+    How to Write SF&F               Joseph Smith reimagined
+    Writing pedagogy                Communitarian values
+            |                               |
+            v                               v
+   [PUBLIC CONTROVERSY & LEGACY]
+    Anti-LGBTQ statements (1990-present)
+    NOM Board (2009-2013)
+    DC Comics / Ender film boycott (2013)
+    Art vs. Artist debate
+    Influence on Meyer, Sanderson, et al.
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1: BIOGRAPHY        Module 2: ENDER UNIVERSE
+  (Formation & Life)         (Core Literary Achievement)
+       |                          |
+       +----------+---------------+
+                  |
+  Module 3: BEYOND ENDER     Module 4: CRAFT & PEDAGOGY
+  (Other Major Works)        (MICE, Boot Camp, Legacy)
+       |                          |
+       +----------+---------------+
+                  |
+          Module 5: FAITH, CONTROVERSY & LEGACY
+          (Mormon Architecture, LGBTQ, Art/Artist)
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Biography \& Formative Influences}
+
+Card's life from Richland, Washington (1951) through Mormon pioneer heritage, Brazil mission, theater career, early publications in \textit{Analog}, Campbell Award (1978), the lean recession years, relocation to Greensboro, 2011 stroke, and current position at Southern Virginia University. Emphasis on formative reading (Asimov's \textit{Foundation}, Bruce Catton, Great Books), family musical tradition, and the transition from playwright to novelist.
+
+\subsubsection{Module 2: The Ender Universe}
+
+Comprehensive analysis of the Ender Saga (\textit{Ender's Game}, \textit{Speaker for the Dead}, \textit{Xenocide}, \textit{Children of the Mind}), the Shadow Series (\textit{Ender's Shadow} through \textit{Shadows in Flight}), the Formic Wars prequels (with Aaron Johnston), and the 2013 film adaptation. Key themes: games as reality, empathy as weapon, child soldiers, xenocide ethics, the Speaker vocation. Critical reception from Hugo/Nebula wins through Radford's ``Ender and Hitler'' critique and Kessel's ``Creating the Innocent Killer.''
+
+\subsubsection{Module 3: Beyond Ender --- Major Series \& Works}
+
+The Tales of Alvin Maker (alternate American frontier fantasy, Joseph Smith parallel), Homecoming Saga (Book of Mormon as far-future SF), Mithermages trilogy, Pathfinder series, Women of Genesis biblical novels, \textit{Saints} (historical Mormon fiction), \textit{Pastwatch}, \textit{Enchantment}, \textit{Lost Boys}, \textit{Empire}, the Worthing series, and the new \textit{Extinct} trilogy. Card's range across genres: SF, fantasy, horror, historical fiction, biblical fiction, comic books, video game dialogue.
+
+\subsubsection{Module 4: Craft Philosophy \& Pedagogy}
+
+Card's MICE quotient (Milieu, Idea, Character, Event) as a story-classification framework. \textit{How to Write Science Fiction and Fantasy} (1990) and \textit{Characters and Viewpoint} (1988). The Literary Boot Camp model and its alumni (Brandon Sanderson, Stephenie Meyer, Dave Wolverton, Eric James Stone, Jamie Ford, Brian McClellan). Card's ``invisible audience'' improvisation method from his theater roots. Writers of the Future judging. \textit{InterGalactic Medicine Show} (2005--2019). Southern Virginia University teaching.
+
+\subsubsection{Module 5: Faith, Controversy \& Legacy}
+
+Mormon theology as structural architecture in fiction (plan of salvation, communitarian sacrifice, messiah figures). The controversy timeline: ``Hypocrites of Homosexuality'' essay (1990), escalating statements through the 2000s, NOM board membership (2009--2013), DC Comics Superman cancellation (2013), \textit{Ender's Game} film boycott, \textit{Hamlet's Father} novella backlash. Card's self-identification as a Democrat. The art-vs-artist question as cultural watershed. Professional consequences and legacy assessment.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  designation: "osc-deep-research"
+  activation_profile: squadron
+  parallel_tracks: 2
+
+  agnus:  # Memory/coordination
+    role: source_index_and_bibliography
+    model: haiku
+    context: "Build shared source registry across all modules"
+
+  denise: # Display/output
+    role: document_assembly
+    model: sonnet
+    context: "Compile module outputs into unified research doc"
+
+  paula:  # I/O/audio
+    role: cross_module_synthesis
+    model: opus
+    context: "Identify theological/biographical/critical threads"
+
+  m68000: # CPU/execution
+    role: module_research_execution
+    model: sonnet
+    context: "Execute parallel survey tracks"
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+  \item Complete biographical timeline from birth through 2026
+  \item All major novel series and standalone works (bibliography)
+  \item Literary analysis of core themes across the Ender Universe
+  \item Mormon theological architecture in fiction (with specific parallels)
+  \item MICE quotient and craft philosophy documentation
+  \item Literary Boot Camp alumni and pedagogical influence
+  \item Comprehensive controversy timeline with primary sources
+  \item Critical reception history (awards, reviews, academic criticism)
+  \item The art-vs-artist question as applied to Card specifically
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+  \item Full-text literary analysis of every novel (survey depth, not monograph depth)
+  \item Card's political columns (referenced but not systematically analyzed)
+  \item Comparative analysis with other controversial authors (brief context only)
+  \item Video game dialogue work (mentioned but not analyzed)
+  \item Foreign-language reception and translation history
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Biographical timeline covers all major life events from 1951 through 2026 with sourced dates
+  \item All major novel series (Ender Saga, Shadow, Alvin Maker, Homecoming, Mithermages, Pathfinder, Women of Genesis, Worthing) documented with publication dates and synopses
+  \item At least 8 distinct literary themes identified and traced across multiple works
+  \item Mormon theological parallels explicitly mapped for Ender Saga, Alvin Maker, and Homecoming Saga
+  \item MICE quotient framework explained with examples from Card's own fiction
+  \item Literary Boot Camp alumni list with at least 6 named writers and their achievements
+  \item Controversy timeline includes at least 8 dated events with primary-source attribution
+  \item Critical reception spans from Campbell Award (1978) through most recent publications
+  \item Art-vs-artist analysis presents multiple perspectives without advocacy
+  \item All numerical claims (publication dates, award years, sales figures) attributed to specific sources
+  \item Document is self-contained: a reader unfamiliar with Card can understand the full scope
+  \item Through-line connects Card's empathy-architecture theme to GSD ecosystem philosophy
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+The Space Between & Card's empathy-as-understanding maps to ``meaning lives in the spaces between'' \\
+GSD Skill Creator & Research output feeds educational knowledge pack pipeline \\
+BBS Educational Pack & Card study could become a Literature knowledge pack \\
+Hundred Voices & Card's 50+ novels and multiple voices parallel the polyphonic structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Card wrote that in the moment of truly understanding an enemy, you also love them. This is the paradox of the Speaker for the Dead: to speak someone's life truthfully requires inhabiting their perspective so completely that judgment dissolves into comprehension. It is also, at its core, the paradox of research itself---and the paradox at the heart of the GSD ecosystem's commitment to ``the spaces between.''
+
+The Amiga Principle says you achieve remarkable outcomes through architectural elegance rather than brute force. Card's fiction demonstrates this at the narrative level: \textit{Ender's Game} works not because of its battle sequences but because of its architecture of empathy---the structural decision to make the deadliest warrior also the most compassionate child. The research mission inherits this principle: we map Card's full system (biography, theology, craft, controversy) not to reduce complexity but to reveal the architecture that connects it all.
+
+\newpage
+
+% ==========================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ==========================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Orson Scott Card --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from professional sources, biographical archives, literary criticism, and Card's own published statements. Each module provides source-attributed evidence for the mission's research agents to synthesize into the final deliverable.
+
+Key source organizations and archives:
+
+\begin{itemize}[leftmargin=2em]
+  \item Harold B. Lee Library, BYU (Orson Scott Card Papers, MSS 1756)
+  \item Science Fiction Encyclopedia (sf-encyclopedia.com)
+  \item Internet Speculative Fiction Database (isfdb.org)
+  \item GLAAD Commentator Accountability Project
+  \item Association for Mormon Letters
+  \item Hugo Awards Archive / Nebula Awards Archive
+  \item Hatrack River (hatrack.com) --- Card's official website
+  \item Macmillan Publishers author records
+  \item Dialogue: A Journal of Mormon Thought
+\end{itemize}
+
+\subsection{Module 1: Biography \& Formative Influences}
+
+\subsubsection{Origins and Heritage}
+
+Orson Scott Card was born August 24, 1951, in Richland, Washington. He is a great-great-grandson of Brigham Young through the lineage of Charles Ora Card, founder of the Mormon colony in Cardston, Alberta, Canada, and Zina Young Card. He is the third of six children born to Willard Richards Card and Peggy Jane Park Card. His younger brother Arlen Card became a composer and arranger.
+
+The family moved frequently during Card's childhood: San Mateo, California (infancy), Salt Lake City (age 3, for father's bachelor's degree), Santa Clara, California (age 6, for seven years), Mesa, Arizona (1964, father's faculty position at Arizona State), and Orem, Utah (age 16, father's position at BYU).
+
+\subsubsection{Early Intellectual Formation}
+
+Card was a voracious reader from childhood. He read the entire children's section of the Santa Clara library and moved into adult fiction, discovering science fiction along the way. Key formative texts include: Mark Twain's \textit{The Prince and the Pauper} (age 8), Bruce Catton's \textit{Army of the Potomac} (age 10), William L. Shirer's \textit{The Rise and Fall of the Third Reich}, the Great Books (Plato, Aristotle, Euclid, Plutarch---introduced by a family friend), Isaac Asimov's \textit{Foundation} trilogy (age 16, which sparked his interest in cyclical history and human agency), and the Book of Mormon and Bible.
+
+Card's family was deeply musical; he played clarinet, French horn, tuba, E-flat alto horn, and sousaphone. Broadway musicals were central to family life.
+
+\subsubsection{Education and Mission}
+
+Card graduated early from Brigham Young High School after his junior year and entered BYU as an archaeology major, switching to theater. He began writing as a theater student, later saying he still ``improvises his novels in front of an invisible audience.'' Before completing his degree, he volunteered for a two-year LDS mission in Brazil (early 1970s), serving in S\~{a}o Paulo, Ribeir\~{a}o Pr\^{e}to, Araraquara, Araçatuba, Campinas, and Itu---cities that became settings for his Shadow series novels. He graduated from BYU with honors in 1975.
+
+\subsubsection{Early Career}
+
+After BYU, Card founded the Utah Valley Repertory Theatre Company, producing plays in an outdoor amphitheater near Provo. The company was artistically successful but financially ruinous. Card took work as a copy editor at BYU Press. Under financial pressure, he turned to fiction writing. His first published fiction appeared in 1977: the short story ``Gert Fram'' in \textit{The Ensign} (July) and the novelette ``Ender's Game'' in \textit{Analog} (August). He won the John W. Campbell Award for best new writer in 1978 and had 27 short stories published between 1978 and 1979.
+
+He married Kristine Allen in 1977. He earned a master's degree in English from the University of Utah in 1981 and began doctoral work at the University of Notre Dame, but the early-1980s recession forced him to seek employment. He took a position as book editor at \textit{Compute!} magazine in Greensboro, North Carolina (1983), staying nine months before Tom Doherty's contract for the Alvin Maker series allowed him to return to full-time writing.
+
+\subsubsection{Greensboro and Beyond}
+
+Card has lived in Greensboro, NC, for most of his adult life. His children---Geoffrey, Emily, Charles, Zina Margaret, and Erin Louisa (named after Chaucer, Bront\"{e}, Dickens, Mitchell, and Alcott)---were raised there. Two of their children died. Card suffered a mild stroke in 2011, which caused impairment to his left hand. He holds a permanent appointment as Distinguished Professor at Southern Virginia University in Buena Vista, Virginia.
+
+\subsection{Module 2: The Ender Universe}
+
+\subsubsection{Genesis of Ender's Game}
+
+The concept originated in Card's interest in military history (influenced by his brother's Army service and Bruce Catton's works) and his speculation about how future commanders might train for three-dimensional space warfare. The ``Battle Room'' concept incubated for nearly a decade before Card wrote it as a short story for \textit{Analog} in 1977. Years later, while developing \textit{Speaker for the Dead}, Card realized the novel required Ender Wiggin's backstory to be fully elaborated, prompting the novel-length expansion of \textit{Ender's Game} (published January 15, 1985, Tor Books).
+
+\subsubsection{The Ender Saga}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Title} & \tableheader{Year} & \tableheader{Key Themes} \\
+\midrule
+Ender's Game & 1985 & Games as reality, child soldiers, empathy as weapon \\
+Speaker for the Dead & 1986 & Xenocide, radical empathy, truth-telling, alien biology \\
+Xenocide & 1991 & Obsessive-compulsive behavior as divine gift, descolada virus \\
+Children of the Mind & 1996 & Consciousness, artificial intelligence, identity \\
+Ender in Exile & 2008 & Colonization, transition between Ender/Speaker timelines \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Shadow Series}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Title} & \tableheader{Year} & \tableheader{Focus} \\
+\midrule
+Ender's Shadow & 1999 & Bean's parallel perspective at Battle School \\
+Shadow of the Hegemon & 2000 & Earth geopolitics post-Ender \\
+Shadow Puppets & 2002 & Political manipulation, genetic engineering \\
+Shadow of the Giant & 2003 & Global unification under Peter Wiggin \\
+Shadows in Flight & 2012 & Bean's children in space, genetic destiny \\
+The Last Shadow & 2021 & Conclusion bridging Ender and Shadow series \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Formic Wars \& Ancillary Works}
+
+Card collaborated with Aaron Johnston on the First Formic War trilogy (\textit{Earth Unaware}, \textit{Earth Afire}, \textit{Earth Awakens}) and the Second Formic War trilogy. Additional works include novellas \textit{A War of Gifts} (2007), \textit{First Meetings} (2002), the audio drama \textit{Ender's Game Alive} (2013), and Marvel Comics adaptations beginning in 2008.
+
+\subsubsection{Awards and Critical Reception}
+
+\textit{Ender's Game} won the 1985 Nebula Award and the 1986 Hugo Award. \textit{Speaker for the Dead} won both awards the following year. Card remains the only author to win both the Hugo and Nebula for best novel in consecutive years. The novel has become suggested reading for the United States Marine Corps. Card received the ALA Margaret Edwards Award (2008) for significant contribution to young adult literature and the Edward E. Smith Memorial Award (1992).
+
+Critical perspectives range from admiration for Card's empathic characterization (Michael R. Collings, \textit{In the Image of God}, 1990) to sharp critiques: Elaine Radford's ``Ender and Hitler: Sympathy for the Superman'' (1987) drew parallels between Ender and Adolf Hitler; John Kessel's ``Creating the Innocent Killer'' argued the novel allows Ender to commit violence while remaining morally clean. Science fiction scholar Mike Ryder has more recently rebutted these critiques, arguing Ender is exploited by powers beyond his control.
+
+\subsubsection{The 2013 Film}
+
+The feature film adaptation, directed by Gavin Hood and starring Asa Butterfield, Harrison Ford, Ben Kingsley, Hailee Steinfeld, and Viola Davis, was released in October 2013. Card co-produced. The film's release coincided with heightened controversy over Card's anti-LGBTQ statements, prompting a boycott campaign by Geeks OUT and a public distancing by Lionsgate. Rotten Tomatoes critical consensus acknowledged the film as offering ``commendable'' sci-fi thrills while not matching the book's depth.
+
+\subsection{Module 3: Beyond Ender --- Major Series \& Works}
+
+\subsubsection{Tales of Alvin Maker (1987--2003+)}
+
+An eight-book alternate-history American frontier fantasy series reimagining the life of Joseph Smith. In Card's world, folk magic works---Alvin is a ``Maker,'' a seventh son of a seventh son with the power to reshape matter. The series translates LDS history into fantasy: Alvin parallels Joseph Smith, Taleswapper parallels Benjamin Franklin, and the Crystal City parallels the New Jerusalem. Won the Locus Award for Fantasy (Seventh Son, 1988) and the Mythopoeic Fantasy Award (1988). A concluding volume, \textit{Master Alvin}, is announced for April 2026.
+
+\subsubsection{Homecoming Saga (1992--1995)}
+
+A five-volume science fiction series explicitly patterned on the Book of Mormon, set forty million years in the future on a planet called Harmony governed by an AI called the Oversoul. Characters map to Book of Mormon figures: Nafai corresponds to Nephi, the Oversoul to God. Critic Michael Collings identified Mormon theology as ``vital to completely understanding Card's works.'' Eugene England called the first five novels ``good literature.'' Non-LDS reviewers often found the series readable but derivative; one, unaware of its source material, noted similarities to the Bible.
+
+\subsubsection{Other Major Series}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Series} & \tableheader{Books} & \tableheader{Description} \\
+\midrule
+Mithermages & 3 & Contemporary magical fantasy (Lost Gate, Gate Thief, Gatefather) \\
+Pathfinder & 3 & YA science fiction exploring time manipulation and alien worlds \\
+Women of Genesis & 5 & Biblical novels (Sarah, Rebekah, Rachel \& Leah) \\
+Worthing & 4 & Early SF exploring godlike power and ethical responsibility \\
+Pastwatch & 2 & Time-travel SF exploring alternate histories \\
+Extinct & 1+ & New trilogy (2024+) about resurrected humanity in alien war \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Standalone Novels and Cross-Genre Work}
+
+Card's range extends far beyond science fiction: \textit{Saints} (1984, historical fiction about Mormon polygamy, AML Best Novel 1985), \textit{Lost Boys} (1992, semi-autobiographical horror set in Greensboro), \textit{Enchantment} (1999, fairy-tale fantasy), \textit{Magic Street} (2005, contemporary urban fantasy), \textit{Empire} (2006, political thriller about American civil war). He wrote video game dialogue for LucasArts titles including \textit{The Secret of Monkey Island}, \textit{Loom}, and \textit{The Dig}. He adapted comics for Marvel (Ultimate Iron Man) and was briefly hired by DC Comics for a Superman anthology before controversy forced the project's cancellation.
+
+\subsection{Module 4: Craft Philosophy \& Pedagogy}
+
+\subsubsection{The MICE Quotient}
+
+Card's most enduring contribution to writing pedagogy is the MICE quotient, introduced in \textit{How to Write Science Fiction and Fantasy} (1990, Writer's Digest Books). MICE classifies stories by their dominant structural element:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Milieu:} Story driven by a strange, fascinating world (begins with entry, ends with departure or transformation of the world)
+  \item \textbf{Idea:} Story driven by a question or puzzle (begins with the question, ends with the answer)
+  \item \textbf{Character:} Story driven by a character's transformation (begins with dissatisfaction, ends with new role or acceptance)
+  \item \textbf{Event:} Story driven by a disruption to order (begins with the disruption, ends with restoration or new order)
+\end{itemize}
+
+The framework has been widely adopted in writing workshops and cited by authors including Brandon Sanderson in his university lectures.
+
+\subsubsection{Writing Books}
+
+Card authored two influential craft books: \textit{How to Write Science Fiction and Fantasy} (1990) and \textit{Characters and Viewpoint} (1988). The former covers world-building, exposition management, story construction via MICE, and the business of publishing. Card's emphasis on ``keeping the level of diction appropriate to the story's imagined world'' and leading readers into strangeness ``step by step'' reflects his theater training.
+
+\subsubsection{Literary Boot Camp}
+
+Card runs an annual intensive writing workshop called ``Literary Boot Camp,'' a week-long course for aspiring writers. Notable alumni include Brandon Sanderson (Mistborn, Stormlight Archive), Stephenie Meyer (Twilight), Dave Wolverton/David Farland, Eric James Stone (Nebula Award winner), Jamie Ford (\textit{Hotel on the Corner of Bitter and Sweet}), Brian McClellan (Powder Mage trilogy), Mette Ivie Harrison, and John Brown. Card also taught at Pepperdine University, Antioch, Clarion, Clarion West, and the Cape Cod Writers Workshop.
+
+\subsubsection{InterGalactic Medicine Show}
+
+Card launched \textit{Orson Scott Card's InterGalactic Medicine Show} (IGMS) in late 2005, an online SF/fantasy magazine co-edited with Edmund R. Schubert. The magazine ran for 14 years, publishing emerging and established writers. All issues are now freely available at IntergalacticMedicineShow.com.
+
+\subsubsection{Writers of the Future}
+
+Card has served as a judge for the Writers of the Future contest since 1994, a science fiction and fantasy story contest for amateur writers established by L. Ron Hubbard.
+
+\subsection{Module 5: Faith, Controversy \& Legacy}
+
+\subsubsection{Mormon Theology as Structural Architecture}
+
+Card's LDS faith operates at multiple levels in his fiction:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Work} & \tableheader{LDS Parallel} & \tableheader{Nature of Mapping} \\
+\midrule
+Speaker for the Dead & Plan of Salvation (Piggy life stages) & Structural (identified by Collings, 1990) \\
+Alvin Maker series & Life of Joseph Smith & Narrative (alternate history) \\
+Homecoming Saga & Book of Mormon (1 Nephi onward) & Explicit (character names, plot structure) \\
+Worthing stories & Theodicy, divine power ethics & Thematic \\
+Saints & Mormon polygamy history & Historical fiction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Science fiction scholar Susanne Reid observed that Card's religious background is evident in his frequent messiah protagonists and ``moral seriousness.'' Card has stated that speculative fiction is ``the genre best suited to exploring theological and moral issues'' and that his LDS membership influences his communitarian values---individuals making sacrifices for their community is a recurring theme.
+
+\subsubsection{Controversy Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} \\
+\midrule
+1990 & Published ``The Hypocrites of Homosexuality'' in \textit{Sunstone}, arguing for maintaining laws against homosexual behavior while advocating discretion in enforcement \\
+2004 & Reaffirmed the main points of the 1990 essay in public statements \\
+2008 & Published \textit{Hamlet's Father}, a novella linking homosexuality to pedophilia (per \textit{Publishers Weekly} critique); wrote opinion piece calling marriage equality an existential threat \\
+2009 & Joined the board of the National Organization for Marriage (NOM), a leading opponent of same-sex marriage \\
+2012 & Published column describing homosexuality as ``a reproductive dysfunction'' \\
+2013 (Feb) & Hired by DC Comics for Superman anthology; 16,000+ petition signatures demanded removal; illustrator Chris Sprouse withdrew; story put on indefinite hold \\
+2013 (Jun) & Following Supreme Court DOMA ruling, stated the marriage issue is ``moot'' \\
+2013 (Jul--Nov) & Geeks OUT organized boycott of \textit{Ender's Game} film; Lionsgate publicly distanced from Card's views \\
+2013 & Left NOM board \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Professional Consequences}
+
+Card's views have resulted in: cancelled creative projects (DC Comics Superman), boycott campaigns (Ender's Game film), publisher distancing (Lionsgate), and ongoing reader boycotts. His self-identification as a ``Moynihan Democrat'' or ``Blue Dog Democrat'' complicates simple left-right categorization. He supported Republican John McCain in 2008 and Newt Gingrich in 2012.
+
+\subsubsection{The Art-vs-Artist Question}
+
+Card is a critical test case for the broader cultural question of whether consumers should financially support creators whose public positions they find harmful. Defenders argue for separating art from artist, noting the fiction itself often treats marginalized characters sympathetically (the gay character Zdorab in the Homecoming Saga is depicted positively). Critics argue that financial support enables continued advocacy. The question remains unresolved in broader cultural discourse.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Boundary} & \tableheader{Handling} \\
+\midrule
+LGBTQ content & ANNOTATE & Present Card's statements and responses factually; include multiple perspectives; no advocacy \\
+LDS theology & ANNOTATE & Accurate representation of theological parallels; no theological judgment \\
+Child soldiers theme & ANNOTATE & Literary analysis context; note military adoption of the novel \\
+Art-vs-artist debate & ANNOTATE & Present as unresolved cultural question with evidence from multiple positions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources \& Author Archives}
+
+\begin{itemize}[leftmargin=2em]
+  \item Card, Orson Scott. Official website: hatrack.com
+  \item Orson Scott Card Papers, MSS 1756, Harold B. Lee Library, Brigham Young University
+  \item Card, Orson Scott. \textit{How to Write Science Fiction and Fantasy}. Writer's Digest, 1990.
+  \item Card, Orson Scott. \textit{Characters and Viewpoint}. Writer's Digest, 1988.
+  \item Card, Orson Scott. ``The Hypocrites of Homosexuality.'' \textit{Sunstone}, February 1990.
+\end{itemize}
+
+\subsubsection{Literary Criticism \& Scholarship}
+
+\begin{itemize}[leftmargin=2em]
+  \item Collings, Michael R. \textit{In the Image of God: Theme, Characterization, and Landscape in the Fiction of Orson Scott Card}. Greenwood Press, 1990.
+  \item Collings, Michael R. \textit{Storyteller: The Official Orson Scott Card Bibliography and Guide}. Overlook Connection Press, 2001.
+  \item Tyson, Edith. \textit{Orson Scott Card}. Scarecrow Press, 2003.
+  \item Willett, Edward. \textit{Orson Scott Card: Architect of Alternate Worlds}. Enslow Publishers, 2006.
+  \item Kessel, John. ``Creating the Innocent Killer: Ender's Game, Intention, and Morality.''
+  \item Radford, Elaine. ``Ender and Hitler: Sympathy for the Superman.'' \textit{Fantasy Review}, 1987.
+  \item Ryder, Mike. Rebuttal to Kessel/Radford critiques (academic publication).
+  \item Smith, Christopher C. ``Life Stages in Speaker for the Dead.'' \textit{Sunstone}.
+  \item Science Fiction Encyclopedia entry: sf-encyclopedia.com/entry/card\_orson\_scott
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Registries}
+
+\begin{itemize}[leftmargin=2em]
+  \item Hugo Awards Archive (thehugoawards.org)
+  \item Nebula Awards Archive (nebulas.sfwa.org)
+  \item Internet Speculative Fiction Database (isfdb.org)
+  \item GLAAD Commentator Accountability Project (glaad.org)
+  \item Association for Mormon Letters (associationmormonletters.org)
+  \item Dialogue: A Journal of Mormon Thought (dialoguejournal.com)
+  \item BYU Library Literary Worlds Exhibit (exhibits.lib.byu.edu)
+\end{itemize}
+
+\newpage
+
+% ==========================================
+% STAGE 3 --- MISSION PACKAGE
+% ==========================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Orson Scott Card that synthesizes biography, literary analysis, craft philosophy, Mormon theological architecture, and public controversy into a unified study. The document must be self-contained, factually attributed, and present the art-vs-artist question with evidentiary rigor rather than advocacy.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE 0          WAVE 1              WAVE 2         WAVE 3
+  Foundation      Parallel Research   Synthesis       Publication
+  [Sequential]    [2 Parallel Tracks] [Sequential]   [Sequential]
+      |                |                  |              |
+  Schemas +       Track A:            Cross-module   Final assembly
+  Source Index    Bio + Ender +        synthesis +    + verification
+      |          Beyond Ender         theological     + test suite
+      |               |              threading          |
+      |          Track B:                |              |
+      |          Craft + Faith/          |              |
+      |          Controversy             |              |
+      |               |                  |              |
+      +--------->-----+-------->---------+-------->-----+
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Source Index Layer} --- Shared bibliography and source registry
+  \item \textbf{Survey Layer} --- Five parallel-capable research modules
+  \item \textbf{Synthesis Layer} --- Cross-module theological/biographical threading
+  \item \textbf{Publication Layer} --- Document assembly, formatting, verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}X L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Source Index & All sources catalogued with quality ratings & W0-SOURCE \\
+2 & Biography Module & Complete timeline, sourced dates, 1951--2026 & W1A-BIO \\
+3 & Ender Universe Module & All series documented, themes analyzed & W1A-ENDER \\
+4 & Beyond Ender Module & All major series surveyed & W1A-BEYOND \\
+5 & Craft \& Pedagogy Module & MICE documented, Boot Camp alumni listed & W1B-CRAFT \\
+6 & Faith/Controversy Module & Timeline sourced, multiple perspectives & W1B-FAITH \\
+7 & Synthesis Chapter & Cross-module threads identified & W2-SYNTH \\
+8 & Final Research Document & Self-contained, publication quality & W3-PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SOURCE & None & Haiku & 3,000 \\
+W1A-BIO & W0-SOURCE & Sonnet & 8,000 \\
+W1A-ENDER & W0-SOURCE & Sonnet & 10,000 \\
+W1A-BEYOND & W0-SOURCE & Sonnet & 8,000 \\
+W1B-CRAFT & W0-SOURCE & Sonnet & 6,000 \\
+W1B-FAITH & W0-SOURCE & Opus & 10,000 \\
+W2-SYNTH & All W1 & Opus & 8,000 \\
+W3-PUB & W2-SYNTH & Sonnet & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis, controversy sensitivity, theological analysis, judgment-heavy cross-module integration \\
+Sonnet & 60\% & Survey compilation, document assembly, bibliography, structured content production \\
+Haiku & 10\% & Source index, schemas, scaffolding templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & Sequential & 1 & 3,000 \\
+1 & Parallel Research & Parallel (2 tracks) & 5 & 42,000 \\
+2 & Synthesis & Sequential & 1 & 8,000 \\
+3 & Publication & Sequential & 1 & 6,000 \\
+\midrule
+& \textbf{Total} & & \textbf{8} & \textbf{59,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+Source Index & Haiku & Build shared bibliography with quality ratings, URL registry, citation format standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A --- Literary (Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+W1A-BIO & Sonnet & Complete biographical timeline with sourced dates \\
+W1A-ENDER & Sonnet & Ender Universe analysis: series, themes, critical reception \\
+W1A-BEYOND & Sonnet & Survey of all non-Ender major series and standalone works \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Cultural (Opus + Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+W1B-CRAFT & Sonnet & MICE quotient documentation, Boot Camp alumni, writing pedagogy \\
+W1B-FAITH & Opus & Mormon theological mapping, controversy timeline, art-vs-artist analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+W2-SYNTH & Opus & Identify cross-module threads: how biography shapes theology shapes fiction shapes controversy. Produce unified narrative framework. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+W3-PUB & Sonnet & Assemble final document, run verification matrix, generate executive summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Source Index (W0) cached and reused across all W1 components (5-minute TTL window)
+  \item Track A components share biographical data cache
+  \item Track B components share source index + controversy timeline cache
+  \item W2-SYNTH receives all W1 outputs in single context load
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Opus & 12,000 & 18,000 & 30,000 \\
+Sonnet & 20,000 & 24,000 & 44,000 \\
+Haiku & 1,000 & 2,000 & 3,000 \\
+\midrule
+\textbf{Total} & \textbf{33,000} & \textbf{44,000} & \textbf{77,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0-SOURCE
+      |
+      +---> W1A-BIO ---+
+      |                 |
+      +---> W1A-ENDER --+---> W2-SYNTH ---> W3-PUB
+      |                 |
+      +---> W1A-BEYOND -+
+      |                 |
+      +---> W1B-CRAFT --+
+      |                 |
+      +---> W1B-FAITH --+
+
+  Legend:
+  ---> = dependency (must complete before)
+  Tracks A and B execute in parallel
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 4 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{30} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to professional sources. Zero entertainment media as primary evidence. \\
+SC-NUM & Numerical attribution & Every date, award year, and publication year attributed to a specific source \\
+SC-ADV & No advocacy & Controversy section presents evidence without advocating for or against Card's positions \\
+SC-BAL & Balanced perspectives & Both defenders and critics of Card's positions represented with comparable detail \\
+SC-REL & Religious accuracy & Mormon theological parallels accurately represented per LDS scholarship \\
+SC-FAI & Fair representation & Card's own stated positions quoted or paraphrased accurately, not strawmanned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Bio timeline completeness & Covers birth (1951) through 2026 with $\geq$15 dated events \\
+CF-02 & Ender Saga documentation & All 5 core novels + Shadow series + Formic Wars listed with dates \\
+CF-03 & Theme identification & $\geq$8 distinct themes identified across multiple works \\
+CF-04 & Mormon parallel mapping & Explicit parallels for Ender Saga, Alvin Maker, and Homecoming \\
+CF-05 & MICE framework & All four elements defined with Card-specific examples \\
+CF-06 & Boot Camp alumni & $\geq$6 named writers with achievements listed \\
+CF-07 & Controversy timeline & $\geq$8 dated events with primary-source attribution \\
+CF-08 & Critical reception span & Covers 1978 Campbell Award through most recent publications \\
+CF-09 & Art-vs-artist analysis & Multiple perspectives presented without advocacy \\
+CF-10 & Series survey & All 8 major series documented \\
+CF-11 & Awards catalog & Hugo, Nebula, Campbell, Edwards, Smith awards documented \\
+CF-12 & Writing pedagogy & Boot Camp, IGMS, Writers of the Future, SVU teaching documented \\
+CF-13 & Film adaptation & 2013 film covered including boycott context \\
+CF-14 & Cross-genre range & SF, fantasy, horror, historical, biblical fiction documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Bio $\rightarrow$ Fiction cascade & At least 3 biographical events linked to specific fictional works \\
+IN-02 & Theology $\rightarrow$ Fiction cascade & Mormon parallels traced from source theology to fictional expression \\
+IN-03 & Craft $\rightarrow$ Fiction cascade & MICE categories applied to Card's own novels \\
+IN-04 & Controversy $\rightarrow$ Career cascade & Professional consequences linked to specific statements \\
+IN-05 & Cross-module consistency & No contradictions in dates, titles, or facts between modules \\
+IN-06 & Self-containment & Reader unfamiliar with Card can understand complete document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Pseudonym coverage & At least 2 of Card's pseudonyms mentioned (Byron Walley, etc.) \\
+EC-02 & Data gap acknowledgment & Areas of incomplete scholarship explicitly noted \\
+EC-03 & Temporal currency & Most recent available publications referenced \\
+EC-04 & Minority works & At least 2 lesser-known works beyond major series mentioned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Bio timeline 1951--2026 & CF-01 & Pending \\
+2. All major series documented & CF-02, CF-10 & Pending \\
+3. $\geq$8 themes identified & CF-03 & Pending \\
+4. Mormon parallels mapped & CF-04, IN-02 & Pending \\
+5. MICE documented with examples & CF-05, IN-03 & Pending \\
+6. $\geq$6 Boot Camp alumni & CF-06 & Pending \\
+7. $\geq$8 controversy events & CF-07 & Pending \\
+8. Reception from 1978 onward & CF-08, CF-11 & Pending \\
+9. Art-vs-artist: multiple perspectives & CF-09, SC-ADV, SC-BAL & Pending \\
+10. All claims attributed & SC-NUM, SC-SRC & Pending \\
+11. Self-contained document & IN-06 & Pending \\
+12. Through-line to GSD philosophy & IN-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; web research \\
+EXEC-A & Executor (Track A) & Literary modules: Bio, Ender, Beyond Ender \\
+EXEC-B & Executor (Track B) & Cultural modules: Craft, Faith/Controversy \\
+CRAFT-LIT & Literary Specialist & Theme analysis, critical reception, genre classification \\
+CRAFT-THEO & Theology Specialist & Mormon theological mapping, sensitivity review \\
+VERIFY & Verification & Source validation; date/fact accuracy checking \\
+INTEG & Integration Agent & Cross-module thread identification and validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Waves & 4 (W0--W3) \\
+Parallel Tracks & 2 (Wave 1) \\
+Research Modules & 5 \\
+Deliverables & 8 \\
+Estimated Token Budget & 77,000 \\
+Estimated Context Windows & 12 \\
+Estimated Sessions & 4 \\
+Test Count & 30 (6 safety + 14 core + 6 integration + 4 edge) \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textit{``In the moment when I truly understand my enemy, understand him well enough to defeat him, then in that very moment I also love him.''} --- Andrew ``Ender'' Wiggin
+
+\vspace{0.5em}
+
+The architecture of empathy is also the architecture of research: to understand a subject fully is to hold its contradictions without flinching. Card built fictional worlds where understanding transforms both the knower and the known. This mission inherits that principle---not to judge, but to map the full territory of a remarkable and contradictory career, finding meaning in the spaces between the maker and the mirror.
+\end{quotebox}
+
+\end{document}
