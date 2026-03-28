@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tide Pool — Star's Art</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a1520;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    .nav-bar {
+      background: #0d1e2e;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 1.5rem;
+      background: radial-gradient(ellipse at 50% 80%, rgba(26,74,90,0.15) 0%, transparent 60%),
+                  linear-gradient(180deg, #0a1520 0%, #0d2030 50%, #0a1520 100%);
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #e8dcc8;
+      margin-bottom: 0.3rem;
+    }
+    .hero .subtitle {
+      font-size: 0.95rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    /* Pool container */
+    .pool-container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 20px 2rem;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      border: 2px solid rgba(26,74,90,0.4);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(26,74,90,0.15), inset 0 0 60px rgba(0,0,0,0.3);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      cursor: default;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(10,21,32,0.92);
+      color: #d4e8f0;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      pointer-events: none;
+      border: 1px solid rgba(26,74,90,0.5);
+      display: none;
+      white-space: nowrap;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.2rem 0;
+    }
+    .controls button {
+      background: rgba(26,74,90,0.3);
+      border: 1px solid rgba(26,74,90,0.5);
+      color: #d4e8f0;
+      padding: 0.5rem 1.4rem;
+      font-family: Georgia, serif;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .controls button:hover {
+      background: rgba(26,74,90,0.5);
+      border-color: rgba(26,74,90,0.8);
+    }
+    .controls button.danger {
+      border-color: rgba(200,80,60,0.5);
+      background: rgba(200,80,60,0.15);
+    }
+    .controls button.danger:hover {
+      background: rgba(200,80,60,0.3);
+    }
+    .controls button.restore {
+      border-color: rgba(90,180,120,0.5);
+      background: rgba(90,180,120,0.15);
+    }
+    .controls button.restore:hover {
+      background: rgba(90,180,120,0.3);
+    }
+    .controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    /* Info panel */
+    .info-panel {
+      background: rgba(13,30,46,0.6);
+      border: 1px solid rgba(26,74,90,0.25);
+      border-radius: 6px;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1rem;
+      min-height: 5rem;
+    }
+    .info-panel p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.75);
+    }
+    .info-panel .narration {
+      color: #d4e8f0;
+      font-style: italic;
+    }
+
+    /* Quote */
+    .quote {
+      text-align: center;
+      padding: 2.5rem 2rem 3rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.4);
+      font-size: 0.9rem;
+      max-width: 32rem;
+      margin: 0 auto;
+      border-top: 1px solid rgba(26,74,90,0.15);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+  <span class="sep">/</span>
+  <span style="color: rgba(255,255,255,0.35);">The Tide Pool</span>
+</nav>
+
+<div class="hero">
+  <h1>The Tide Pool</h1>
+  <p class="subtitle">Star's Art — remove the keystone and watch the world change</p>
+</div>
+
+<div class="pool-container">
+  <div class="canvas-wrap">
+    <canvas id="pool" width="700" height="500"></canvas>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+
+  <div class="controls">
+    <button id="btnRemove" class="danger" onclick="removeStar()">Remove Star</button>
+    <button id="btnRestore" class="restore" onclick="restoreStar()" disabled>Restore</button>
+  </div>
+
+  <div class="info-panel">
+    <p id="infoText">The ochre sea star controls mussel populations, maintaining space for 300+ species. This is the ecosystem Robert Paine studied at Tatoosh Island in 1966 — the experiment that gave ecology the word "keystone."</p>
+  </div>
+</div>
+
+<div class="quote">
+  "Your role is revealed by what happens when you are gone."
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// The Tide Pool — an interactive keystone species simulation
+// ═══════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('pool');
+const ctx = canvas.getContext('2d');
+const tooltipEl = document.getElementById('tooltip');
+const infoText = document.getElementById('infoText');
+const btnRemove = document.getElementById('btnRemove');
+const btnRestore = document.getElementById('btnRestore');
+
+const W = 700, H = 500;
+
+// ── Zone boundaries (y-coords) ──
+const zones = [
+  { name: 'Splash Zone',      y0: 0,   y1: 70,  color: '#2a3040' },
+  { name: 'High Intertidal',  y0: 70,  y1: 170, color: '#1e2838' },
+  { name: 'Mid Intertidal',   y0: 170, y1: 300, color: '#152535' },
+  { name: 'Low Intertidal',   y0: 300, y1: 400, color: '#0f2030' },
+  { name: 'Subtidal',         y0: 400, y1: 500, color: '#0a1828' },
+];
+
+// ── Time ──
+let t = 0;
+
+// ── State ──
+let starPresent = true;
+let cascadeTime = -1;   // -1 = no cascade
+let restoreTime = -1;   // -1 = no restore
+let cascadePhase = 0;   // 0-5
+let hoveredSpecies = null;
+let dragging = null;
+let dragOffX = 0, dragOffY = 0;
+
+// ── Rock formations ──
+const rocks = [];
+function initRocks() {
+  const seed = [
+    { x: 0, y: 65, w: 120, h: 30 },
+    { x: 100, y: 160, w: 160, h: 35 },
+    { x: 580, y: 155, w: 120, h: 30 },
+    { x: 0, y: 290, w: 140, h: 35 },
+    { x: 350, y: 285, w: 200, h: 40 },
+    { x: 550, y: 390, w: 150, h: 35 },
+    { x: 0, y: 395, w: 110, h: 30 },
+    { x: 200, y: 392, w: 180, h: 33 },
+  ];
+  seed.forEach(r => {
+    rocks.push({
+      ...r,
+      color1: `hsl(${25 + Math.random() * 20}, ${10 + Math.random() * 8}%, ${22 + Math.random() * 10}%)`,
+      color2: `hsl(${20 + Math.random() * 15}, ${8 + Math.random() * 6}%, ${18 + Math.random() * 8}%)`,
+    });
+  });
+}
+initRocks();
+
+// ── Species ──
+// Each species: { type, x, y, zone, name, visible, scale, ... }
+const species = [];
+
+function addBarnacles() {
+  const clusters = [[60, 100], [180, 120], [320, 95], [480, 110], [600, 130]];
+  clusters.forEach(([cx, cy]) => {
+    const n = 5 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < n; i++) {
+      species.push({
+        type: 'barnacle', name: 'Barnacle (Balanus glandula)',
+        x: cx + (Math.random() - 0.5) * 30,
+        y: cy + (Math.random() - 0.5) * 20,
+        zone: 'high', size: 4 + Math.random() * 3,
+        visible: 1, phase: Math.random() * Math.PI * 2,
+      });
+    }
+  });
+}
+
+function addPeriwinkles() {
+  const spots = [[140, 90], [400, 105], [550, 85], [260, 115]];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'periwinkle', name: 'Periwinkle (Littorina scutulata)',
+      x: x + (Math.random() - 0.5) * 20,
+      y: y + (Math.random() - 0.5) * 15,
+      zone: 'high', size: 5, visible: 1,
+      phase: Math.random() * Math.PI * 2,
+      wanderX: 0, wanderY: 0,
+    });
+  });
+}
+
+function addMussels() {
+  // Dense bed in mid intertidal
+  const baseY = 210;
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 18; col++) {
+      const x = 30 + col * 36 + (row % 2) * 18 + (Math.random() - 0.5) * 8;
+      const y = baseY + row * 16 + (Math.random() - 0.5) * 6;
+      species.push({
+        type: 'mussel', name: 'California Mussel (Mytilus californianus)',
+        x, y, zone: 'mid', size: 8 + Math.random() * 3,
+        visible: 1, angle: -0.3 + Math.random() * 0.6,
+        expanding: 0, // 0-1 for cascade expansion
+      });
+    }
+  }
+}
+
+function addStar() {
+  species.push({
+    type: 'star', name: 'Ochre Sea Star (Pisaster ochraceus)',
+    x: 340, y: 250, zone: 'mid', size: 28,
+    visible: 1, angle: 0, glow: 0,
+    originalX: 340, originalY: 250,
+  });
+}
+
+function addLimpets() {
+  const spots = [[200, 240], [480, 230], [120, 260], [560, 245]];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'limpet', name: 'Limpet (Lottia digitalis)',
+      x, y, zone: 'mid', size: 6 + Math.random() * 2,
+      visible: 1,
+    });
+  });
+}
+
+function addAnemones() {
+  const spots = [[100, 340], [280, 350], [450, 330], [600, 360]];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'anemone', name: 'Giant Green Anemone (Anthopleura xanthogrammica)',
+      x, y, zone: 'low', size: 16 + Math.random() * 4,
+      visible: 1, phase: Math.random() * Math.PI * 2,
+      tentacles: 12 + Math.floor(Math.random() * 4),
+    });
+  });
+}
+
+function addUrchins() {
+  const spots = [[180, 370], [400, 365], [550, 345]];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'urchin', name: 'Purple Sea Urchin (Strongylocentrotus purpuratus)',
+      x, y, zone: 'low', size: 12 + Math.random() * 3,
+      visible: 1, phase: Math.random() * Math.PI * 2,
+      multiplied: 0, // extra urchins during cascade
+    });
+  });
+}
+
+function addChitons() {
+  const spots = [[320, 380], [150, 355], [510, 375]];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'chiton', name: 'Lined Chiton (Tonicella lineata)',
+      x, y, zone: 'low', size: 14,
+      visible: 1,
+    });
+  });
+}
+
+function addKelp() {
+  const spots = [80, 200, 340, 480, 600];
+  spots.forEach(x => {
+    species.push({
+      type: 'kelp', name: 'Bull Kelp (Nereocystis luetkeana)',
+      x: x + (Math.random() - 0.5) * 30,
+      y: 490, zone: 'subtidal', size: 1,
+      visible: 1, height: 140 + Math.random() * 60,
+      phase: Math.random() * Math.PI * 2,
+    });
+  });
+}
+
+function addCrab() {
+  species.push({
+    type: 'crab', name: 'Dungeness Crab (Metacarcinus magister)',
+    x: 520, y: 460, zone: 'subtidal', size: 18,
+    visible: 1, walkPhase: 0,
+  });
+}
+
+function addCucumber() {
+  species.push({
+    type: 'cucumber', name: 'California Sea Cucumber (Apostichopus californicus)',
+    x: 160, y: 465, zone: 'subtidal', size: 1,
+    visible: 1,
+  });
+}
+
+// Initialize all species
+addBarnacles();
+addPeriwinkles();
+addMussels();
+addStar();
+addLimpets();
+addAnemones();
+addUrchins();
+addChitons();
+addKelp();
+addCrab();
+addCucumber();
+
+// Extra urchins for cascade (hidden initially)
+function addExtraUrchins() {
+  const spots = [
+    [120, 340], [220, 360], [320, 345], [420, 370], [520, 350],
+    [170, 380], [290, 375], [370, 340], [470, 360], [600, 380],
+    [80, 360], [250, 345], [500, 340], [350, 365], [440, 375],
+  ];
+  spots.forEach(([x, y]) => {
+    species.push({
+      type: 'urchin-extra', name: 'Purple Sea Urchin (Strongylocentrotus purpuratus)',
+      x, y, zone: 'low', size: 10 + Math.random() * 4,
+      visible: 0, phase: Math.random() * Math.PI * 2,
+    });
+  });
+}
+addExtraUrchins();
+
+// Extra mussels for expansion (hidden initially)
+function addExtraMussels() {
+  const rows = [];
+  // Expand downward into low intertidal
+  for (let row = 0; row < 5; row++) {
+    for (let col = 0; col < 18; col++) {
+      const x = 30 + col * 36 + (row % 2) * 18 + (Math.random() - 0.5) * 8;
+      const y = 290 + row * 18 + (Math.random() - 0.5) * 6;
+      species.push({
+        type: 'mussel-extra', name: 'California Mussel (Mytilus californianus)',
+        x, y, zone: 'low', size: 7 + Math.random() * 3,
+        visible: 0, angle: -0.3 + Math.random() * 0.6,
+      });
+    }
+  }
+}
+addExtraMussels();
+
+// ── Get the star ──
+function getStar() {
+  return species.find(s => s.type === 'star');
+}
+
+// ── Hit testing ──
+function hitTest(mx, my) {
+  // Reverse order so top-drawn items hit first
+  for (let i = species.length - 1; i >= 0; i--) {
+    const s = species[i];
+    if (s.visible < 0.1) continue;
+    let r = s.size || 10;
+    if (s.type === 'star') r = s.size + 5;
+    if (s.type === 'kelp') {
+      // Tall rectangle
+      if (mx > s.x - 8 && mx < s.x + 8 && my > s.y - s.height && my < s.y) return s;
+      continue;
+    }
+    const dx = mx - s.x, dy = my - s.y;
+    if (dx * dx + dy * dy < r * r) return s;
+  }
+  return null;
+}
+
+// ── Drawing ──
+
+function drawZones() {
+  zones.forEach(z => {
+    ctx.fillStyle = z.color;
+    ctx.fillRect(0, z.y0, W, z.y1 - z.y0);
+  });
+}
+
+function drawZoneLabels() {
+  ctx.save();
+  ctx.font = '10px Georgia';
+  ctx.fillStyle = 'rgba(212,232,240,0.2)';
+  ctx.textAlign = 'left';
+  zones.forEach(z => {
+    if (z.name === 'Splash Zone') return;
+    ctx.fillText(z.name, 8, z.y0 + 16);
+  });
+  ctx.restore();
+}
+
+function drawRocks() {
+  rocks.forEach(r => {
+    ctx.save();
+    ctx.beginPath();
+    // Irregular rock shape
+    const steps = 12;
+    for (let i = 0; i <= steps; i++) {
+      const frac = i / steps;
+      const bx = r.x + frac * r.w;
+      const by = r.y + r.h * 0.5 + Math.sin(frac * Math.PI) * r.h * 0.5
+                 + Math.sin(frac * 7.3 + r.x * 0.1) * 4;
+      if (i === 0) ctx.moveTo(bx, by);
+      else ctx.lineTo(bx, by);
+    }
+    // Close back along top
+    for (let i = steps; i >= 0; i--) {
+      const frac = i / steps;
+      const bx = r.x + frac * r.w;
+      const by = r.y - Math.sin(frac * Math.PI) * r.h * 0.3
+                 + Math.sin(frac * 5.1 + r.x * 0.07) * 3;
+      ctx.lineTo(bx, by);
+    }
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(r.x, r.y - r.h * 0.3, r.x, r.y + r.h);
+    grad.addColorStop(0, r.color1);
+    grad.addColorStop(1, r.color2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.restore();
+  });
+}
+
+function drawWaterRipples() {
+  ctx.save();
+  ctx.globalAlpha = 0.04;
+  for (let y = 70; y < H; y += 3) {
+    const depth = (y - 70) / (H - 70);
+    ctx.strokeStyle = `rgba(212,232,240,${0.3 + depth * 0.2})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let x = 0; x < W; x += 2) {
+      const wave = Math.sin(x * 0.02 + t * 0.02 + y * 0.01) * 2
+                 + Math.sin(x * 0.05 + t * 0.015 - y * 0.005) * 1;
+      if (x === 0) ctx.moveTo(x, y + wave);
+      else ctx.lineTo(x, y + wave);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawCaustics() {
+  ctx.save();
+  ctx.globalAlpha = 0.015;
+  for (let i = 0; i < 8; i++) {
+    const cx = (Math.sin(t * 0.008 + i * 1.7) * 0.5 + 0.5) * W;
+    const cy = 200 + (Math.cos(t * 0.006 + i * 2.3) * 0.5 + 0.5) * 250;
+    const r = 40 + Math.sin(t * 0.01 + i) * 15;
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    grad.addColorStop(0, 'rgba(212,232,240,0.6)');
+    grad.addColorStop(1, 'rgba(212,232,240,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+  }
+  ctx.restore();
+}
+
+// ── Species renderers ──
+
+function drawBarnacle(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  ctx.fillStyle = '#c8c0b0';
+  ctx.strokeStyle = '#8a8070';
+  ctx.lineWidth = 0.5;
+  // Small cone/triangle
+  ctx.beginPath();
+  ctx.moveTo(s.x, s.y - s.size);
+  ctx.lineTo(s.x - s.size * 0.7, s.y + s.size * 0.3);
+  ctx.lineTo(s.x + s.size * 0.7, s.y + s.size * 0.3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawPeriwinkle(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  const wx = Math.sin(t * 0.01 + s.phase) * 0.3;
+  const x = s.x + s.wanderX;
+  const y = s.y + s.wanderY;
+  // Spiral shell
+  ctx.strokeStyle = '#9a9080';
+  ctx.fillStyle = '#706858';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let a = 0; a < Math.PI * 3; a += 0.15) {
+    const r = a * 1.2 + 1;
+    const px = x + Math.cos(a + wx) * r;
+    const py = y + Math.sin(a + wx) * r;
+    if (a === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  // Body dot
+  ctx.beginPath();
+  ctx.arc(x, y, 2, 0, Math.PI * 2);
+  ctx.fillStyle = '#504838';
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawMussel(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.angle);
+  // Elongated oval
+  ctx.beginPath();
+  ctx.ellipse(0, 0, s.size * 0.4, s.size, 0, 0, Math.PI * 2);
+  ctx.fillStyle = '#1a1a30';
+  ctx.fill();
+  ctx.strokeStyle = '#2a2a48';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+  // Highlight
+  ctx.beginPath();
+  ctx.ellipse(-s.size * 0.1, -s.size * 0.3, s.size * 0.15, s.size * 0.4, 0, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(60,60,100,0.4)';
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawStar(s) {
+  if (s.visible < 0.01) return;
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.angle);
+
+  // Glow
+  const glowR = s.size + 10 + Math.sin(t * 0.03) * 3;
+  const grad = ctx.createRadialGradient(0, 0, s.size * 0.3, 0, 0, glowR);
+  grad.addColorStop(0, 'rgba(220,140,50,0.25)');
+  grad.addColorStop(0.6, 'rgba(220,120,40,0.08)');
+  grad.addColorStop(1, 'rgba(220,100,30,0)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, glowR, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Five arms
+  ctx.beginPath();
+  const arms = 5;
+  for (let i = 0; i < arms * 2; i++) {
+    const angle = (i * Math.PI) / arms - Math.PI / 2;
+    const r = i % 2 === 0 ? s.size : s.size * 0.42;
+    const px = Math.cos(angle) * r;
+    const py = Math.sin(angle) * r;
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.closePath();
+
+  // Orange-ochre gradient
+  const bodyGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, s.size);
+  bodyGrad.addColorStop(0, '#e89040');
+  bodyGrad.addColorStop(0.5, '#d07030');
+  bodyGrad.addColorStop(1, '#b85a28');
+  ctx.fillStyle = bodyGrad;
+  ctx.fill();
+
+  // Texture dots
+  ctx.fillStyle = 'rgba(255,200,100,0.3)';
+  for (let i = 0; i < 15; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.random() * s.size * 0.7;
+    ctx.beginPath();
+    ctx.arc(Math.cos(a) * r, Math.sin(a) * r, 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Hover highlight
+  if (hoveredSpecies === s) {
+    ctx.strokeStyle = 'rgba(255,200,100,0.6)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i < arms * 2; i++) {
+      const angle = (i * Math.PI) / arms - Math.PI / 2;
+      const r = i % 2 === 0 ? s.size + 2 : s.size * 0.42 + 1;
+      const px = Math.cos(angle) * r;
+      const py = Math.sin(angle) * r;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawLimpet(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  // Small dome
+  ctx.beginPath();
+  ctx.ellipse(s.x, s.y + 2, s.size, s.size * 0.4, 0, Math.PI, Math.PI * 2);
+  ctx.lineTo(s.x + s.size, s.y + 2);
+  ctx.ellipse(s.x, s.y + 2, s.size, 2, 0, 0, Math.PI);
+  ctx.closePath();
+  ctx.fillStyle = '#6a7a6a';
+  ctx.fill();
+  ctx.strokeStyle = '#4a5a4a';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawAnemone(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  // Tentacles
+  const tentWave = Math.sin(t * 0.015 + s.phase);
+  for (let i = 0; i < s.tentacles; i++) {
+    const angle = (i / s.tentacles) * Math.PI * 2;
+    const len = s.size * 0.8 + Math.sin(t * 0.02 + i * 0.5 + s.phase) * 3;
+    const cx1 = s.x + Math.cos(angle) * s.size * 0.3;
+    const cy1 = s.y + Math.sin(angle) * s.size * 0.3;
+    const ex = s.x + Math.cos(angle + tentWave * 0.15) * (s.size + len);
+    const ey = s.y + Math.sin(angle + tentWave * 0.15) * (s.size + len);
+    ctx.beginPath();
+    ctx.moveTo(s.x + Math.cos(angle) * s.size * 0.5, s.y + Math.sin(angle) * s.size * 0.5);
+    ctx.quadraticCurveTo(cx1 + tentWave * 2, cy1 + tentWave * 1.5, ex, ey);
+    ctx.strokeStyle = 'rgba(80,180,100,0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Tip
+    ctx.beginPath();
+    ctx.arc(ex, ey, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(150,220,150,0.6)';
+    ctx.fill();
+  }
+  // Body
+  ctx.beginPath();
+  ctx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
+  const aGrad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 0.5);
+  aGrad.addColorStop(0, '#4a9a5a');
+  aGrad.addColorStop(1, '#2a6a3a');
+  ctx.fillStyle = aGrad;
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawUrchin(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  // Spines
+  const spines = 16;
+  for (let i = 0; i < spines; i++) {
+    const angle = (i / spines) * Math.PI * 2;
+    const len = s.size * 0.9 + Math.sin(t * 0.02 + i * 0.7 + s.phase) * 2;
+    const ex = s.x + Math.cos(angle) * (s.size * 0.4 + len);
+    const ey = s.y + Math.sin(angle) * (s.size * 0.4 + len);
+    ctx.beginPath();
+    ctx.moveTo(
+      s.x + Math.cos(angle) * s.size * 0.35,
+      s.y + Math.sin(angle) * s.size * 0.35
+    );
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = 'rgba(120,60,140,0.6)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  // Body
+  ctx.beginPath();
+  ctx.arc(s.x, s.y, s.size * 0.4, 0, Math.PI * 2);
+  const uGrad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 0.4);
+  uGrad.addColorStop(0, '#7a40a0');
+  uGrad.addColorStop(1, '#4a2060');
+  ctx.fillStyle = uGrad;
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawChiton(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  // Oval body with segments
+  ctx.beginPath();
+  ctx.ellipse(s.x, s.y, s.size * 0.7, s.size * 0.35, 0, 0, Math.PI * 2);
+  ctx.fillStyle = '#6a4a3a';
+  ctx.fill();
+  ctx.strokeStyle = '#4a3028';
+  ctx.lineWidth = 0.7;
+  ctx.stroke();
+  // 8 segment lines
+  for (let i = 1; i < 8; i++) {
+    const sx = s.x - s.size * 0.7 + (i / 8) * s.size * 1.4;
+    ctx.beginPath();
+    ctx.moveTo(sx, s.y - s.size * 0.3);
+    ctx.lineTo(sx, s.y + s.size * 0.3);
+    ctx.strokeStyle = 'rgba(90,60,50,0.5)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  // Colored patches
+  ctx.fillStyle = 'rgba(180,100,80,0.3)';
+  for (let i = 0; i < 4; i++) {
+    const px = s.x - s.size * 0.4 + i * s.size * 0.25;
+    ctx.beginPath();
+    ctx.ellipse(px, s.y, s.size * 0.1, s.size * 0.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawKelp(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  const baseX = s.x;
+  const baseY = s.y;
+  const topY = baseY - s.height;
+
+  // Stipe (stem) — wavy
+  ctx.beginPath();
+  ctx.moveTo(baseX, baseY);
+  for (let y = baseY; y > topY; y -= 3) {
+    const frac = (baseY - y) / s.height;
+    const wave = Math.sin(y * 0.03 + t * 0.02 + s.phase) * (8 + frac * 12);
+    ctx.lineTo(baseX + wave, y);
+  }
+  ctx.strokeStyle = '#3a6a3a';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Bulb at top
+  const bulbX = baseX + Math.sin(topY * 0.03 + t * 0.02 + s.phase) * 20;
+  ctx.beginPath();
+  ctx.arc(bulbX, topY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#5a8a40';
+  ctx.fill();
+
+  // Fronds from bulb
+  for (let f = 0; f < 3; f++) {
+    ctx.beginPath();
+    const fAngle = (f - 1) * 0.5 + Math.sin(t * 0.015 + s.phase + f) * 0.2;
+    ctx.moveTo(bulbX, topY);
+    const fx = bulbX + Math.cos(fAngle - Math.PI / 2) * 25;
+    const fy = topY + Math.sin(fAngle - Math.PI / 2) * -5 + 15;
+    ctx.quadraticCurveTo(
+      bulbX + Math.cos(fAngle) * 15 + Math.sin(t * 0.02 + f) * 5,
+      topY + 8,
+      fx + Math.sin(t * 0.018 + s.phase + f) * 8,
+      fy
+    );
+    ctx.strokeStyle = 'rgba(70,120,50,0.7)';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawCrab(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  const wobble = Math.sin(t * 0.03 + s.walkPhase) * 1.5;
+  const x = s.x + wobble;
+  const y = s.y;
+
+  // Body
+  ctx.beginPath();
+  ctx.ellipse(x, y, s.size, s.size * 0.6, 0, 0, Math.PI * 2);
+  ctx.fillStyle = '#8a5a3a';
+  ctx.fill();
+  ctx.strokeStyle = '#6a4028';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Claws
+  const clawAngle = Math.sin(t * 0.02) * 0.15;
+  [-1, 1].forEach(side => {
+    ctx.beginPath();
+    const cx = x + side * (s.size + 6);
+    const cy = y - 4;
+    ctx.moveTo(x + side * s.size, y - 2);
+    ctx.lineTo(cx, cy - 3);
+    ctx.lineTo(cx + side * 5, cy - 6 + clawAngle * side * 8);
+    ctx.moveTo(cx, cy - 3);
+    ctx.lineTo(cx + side * 5, cy + 2 - clawAngle * side * 5);
+    ctx.strokeStyle = '#8a5a3a';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  });
+
+  // Eyes
+  [-1, 1].forEach(side => {
+    ctx.beginPath();
+    ctx.arc(x + side * 5, y - s.size * 0.5 - 3, 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fill();
+  });
+
+  // Legs
+  for (let i = 0; i < 4; i++) {
+    [-1, 1].forEach(side => {
+      const legAngle = (i * 0.4 + 0.3) * side;
+      const legWave = Math.sin(t * 0.04 + i * 0.8 + (side > 0 ? Math.PI : 0)) * 2;
+      ctx.beginPath();
+      ctx.moveTo(x + side * s.size * 0.6, y + 2 + i * 2);
+      ctx.lineTo(
+        x + side * (s.size + 8 + i * 2),
+        y + 6 + i * 3 + legWave
+      );
+      ctx.strokeStyle = '#7a4a2a';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+  }
+  ctx.restore();
+}
+
+function drawCucumber(s) {
+  ctx.save();
+  ctx.globalAlpha = s.visible;
+  const wave = Math.sin(t * 0.01) * 2;
+  // Long body
+  ctx.beginPath();
+  ctx.moveTo(s.x - 25, s.y + 3);
+  ctx.bezierCurveTo(
+    s.x - 15, s.y - 5 + wave,
+    s.x + 15, s.y - 5 - wave,
+    s.x + 25, s.y + 2
+  );
+  ctx.bezierCurveTo(
+    s.x + 15, s.y + 10 - wave,
+    s.x - 15, s.y + 10 + wave,
+    s.x - 25, s.y + 3
+  );
+  ctx.closePath();
+  const cGrad = ctx.createLinearGradient(s.x, s.y - 6, s.x, s.y + 10);
+  cGrad.addColorStop(0, '#a06060');
+  cGrad.addColorStop(0.5, '#c08080');
+  cGrad.addColorStop(1, '#905555');
+  ctx.fillStyle = cGrad;
+  ctx.fill();
+  // Bumps
+  ctx.fillStyle = 'rgba(180,120,120,0.4)';
+  for (let i = 0; i < 6; i++) {
+    const bx = s.x - 18 + i * 7;
+    const by = s.y + Math.sin(i * 1.2 + t * 0.01) * 2;
+    ctx.beginPath();
+    ctx.arc(bx, by, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+// ── Hover glow wrapper ──
+function drawWithHover(s, drawFn) {
+  if (hoveredSpecies === s && s.type !== 'star') {
+    ctx.save();
+    ctx.shadowColor = 'rgba(212,232,240,0.4)';
+    ctx.shadowBlur = 12;
+    drawFn(s);
+    ctx.restore();
+  } else {
+    drawFn(s);
+  }
+}
+
+// ── Cascade logic ──
+
+const narration = [
+  { time: 0, text: 'Without the star, mussels spread unchecked. They are competitive dominants — they outgrow everything in their path.' },
+  { time: 2, text: 'Anemones lose their footholds as mussels blanket the rock. With no open space, they cannot anchor.' },
+  { time: 3, text: 'Urchin populations explode without their primary predator. They graze in roving fronts.' },
+  { time: 4, text: 'The kelp forest collapses. Urchins chew through the holdfasts, toppling the canopy. Fish, invertebrates, and mammals lose their shelter.' },
+  { time: 5, text: 'This is an urchin barren. Remove one species and the entire community structure changes. The star\'s role was only visible after it was gone.' },
+];
+
+const defaultInfo = 'The ochre sea star controls mussel populations, maintaining space for 300+ species. This is the ecosystem Robert Paine studied at Tatoosh Island in 1966 \u2014 the experiment that gave ecology the word \u201ckeystone.\u201d';
+
+function updateCascade(dt) {
+  if (cascadeTime < 0) return;
+  cascadeTime += dt;
+  const ct = cascadeTime;
+
+  // Phase 1: mussels expand (0-2s)
+  if (ct >= 0) {
+    const expand = Math.min(ct / 2, 1);
+    species.filter(s => s.type === 'mussel-extra').forEach(s => {
+      s.visible = expand;
+    });
+  }
+
+  // Phase 2: anemones disappear (2-3s)
+  if (ct >= 2) {
+    const fade = Math.min((ct - 2) / 1, 1);
+    species.filter(s => s.type === 'anemone').forEach(s => {
+      s.visible = 1 - fade;
+    });
+    species.filter(s => s.type === 'chiton').forEach(s => {
+      s.visible = 1 - fade * 0.8;
+    });
+  }
+
+  // Phase 3: urchins multiply (3-4s)
+  if (ct >= 3) {
+    const multiply = Math.min((ct - 3) / 1, 1);
+    species.filter(s => s.type === 'urchin-extra').forEach(s => {
+      s.visible = multiply;
+    });
+  }
+
+  // Phase 4: kelp disappears (4-5s)
+  if (ct >= 4) {
+    const kelpFade = Math.min((ct - 4) / 1, 1);
+    species.filter(s => s.type === 'kelp').forEach(s => {
+      s.visible = 1 - kelpFade;
+    });
+    species.filter(s => s.type === 'cucumber').forEach(s => {
+      s.visible = 1 - kelpFade * 0.7;
+    });
+  }
+
+  // Update narration
+  let currentNarration = narration[0].text;
+  for (const n of narration) {
+    if (ct >= n.time) currentNarration = n.text;
+  }
+  infoText.innerHTML = '<span class="narration">' + currentNarration + '</span>';
+
+  // Phase tracking
+  if (ct >= 5) cascadePhase = 5;
+  else if (ct >= 4) cascadePhase = 4;
+  else if (ct >= 3) cascadePhase = 3;
+  else if (ct >= 2) cascadePhase = 2;
+  else cascadePhase = 1;
+}
+
+function updateRestore(dt) {
+  if (restoreTime < 0) return;
+  restoreTime += dt;
+  const rt = restoreTime;
+
+  // Reverse: kelp returns, urchins recede, anemones return, mussels recede, star appears
+  if (rt >= 0) {
+    const kelpReturn = Math.min(rt / 1, 1);
+    species.filter(s => s.type === 'kelp').forEach(s => { s.visible = kelpReturn; });
+    species.filter(s => s.type === 'cucumber').forEach(s => { s.visible = 0.3 + kelpReturn * 0.7; });
+  }
+  if (rt >= 1) {
+    const urchinFade = Math.min((rt - 1) / 1, 1);
+    species.filter(s => s.type === 'urchin-extra').forEach(s => { s.visible = 1 - urchinFade; });
+  }
+  if (rt >= 2) {
+    const anemoneReturn = Math.min((rt - 2) / 1, 1);
+    species.filter(s => s.type === 'anemone').forEach(s => { s.visible = anemoneReturn; });
+    species.filter(s => s.type === 'chiton').forEach(s => { s.visible = 0.2 + anemoneReturn * 0.8; });
+  }
+  if (rt >= 3) {
+    const musselRecede = Math.min((rt - 3) / 1, 1);
+    species.filter(s => s.type === 'mussel-extra').forEach(s => { s.visible = 1 - musselRecede; });
+  }
+  if (rt >= 4) {
+    const star = getStar();
+    const starReturn = Math.min((rt - 4) / 1, 1);
+    star.visible = starReturn;
+    star.x = star.originalX;
+    star.y = star.originalY;
+  }
+
+  // Narration during restore
+  let msg = 'Balance returns. The kelp forest regrows...';
+  if (rt >= 1) msg = 'With the star back, urchin populations fall to sustainable levels...';
+  if (rt >= 2) msg = 'Anemones reclaim their footholds on open rock...';
+  if (rt >= 3) msg = 'Mussels retreat to their niche. Space opens for the community...';
+  if (rt >= 4) msg = 'The keystone species restores equilibrium. Three hundred species can thrive again.';
+  if (rt >= 5) {
+    msg = defaultInfo;
+    restoreTime = -1;
+    starPresent = true;
+    cascadePhase = 0;
+    btnRemove.disabled = false;
+    btnRestore.disabled = true;
+  }
+  infoText.innerHTML = rt >= 5 ? '<p>' + msg + '</p>' : '<span class="narration">' + msg + '</span>';
+}
+
+// ── Interaction ──
+
+function removeStar() {
+  if (!starPresent) return;
+  starPresent = false;
+  const star = getStar();
+  star.visible = 0;
+  cascadeTime = 0;
+  restoreTime = -1;
+  cascadePhase = 0;
+  btnRemove.disabled = true;
+  btnRestore.disabled = false;
+}
+
+function restoreStar() {
+  if (starPresent) return;
+  cascadeTime = -1;
+  restoreTime = 0;
+  btnRestore.disabled = true;
+}
+
+// Make these global
+window.removeStar = removeStar;
+window.restoreStar = restoreStar;
+
+// ── Mouse handling ──
+
+function getCanvasPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = W / rect.width;
+  const scaleY = H / rect.height;
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top) * scaleY,
+  };
+}
+
+canvas.addEventListener('mousemove', e => {
+  const pos = getCanvasPos(e);
+
+  if (dragging) {
+    dragging.x = pos.x - dragOffX;
+    dragging.y = pos.y - dragOffY;
+    return;
+  }
+
+  const hit = hitTest(pos.x, pos.y);
+  hoveredSpecies = hit;
+  canvas.style.cursor = hit ? 'pointer' : 'default';
+
+  if (hit) {
+    tooltipEl.style.display = 'block';
+    tooltipEl.textContent = hit.name;
+    const rect = canvas.getBoundingClientRect();
+    const tx = e.clientX - rect.left + 12;
+    const ty = e.clientY - rect.top - 8;
+    tooltipEl.style.left = tx + 'px';
+    tooltipEl.style.top = ty + 'px';
+  } else {
+    tooltipEl.style.display = 'none';
+  }
+});
+
+canvas.addEventListener('mousedown', e => {
+  const pos = getCanvasPos(e);
+  const star = getStar();
+  if (!star || star.visible < 0.1) return;
+
+  const dx = pos.x - star.x, dy = pos.y - star.y;
+  if (dx * dx + dy * dy < (star.size + 5) * (star.size + 5)) {
+    dragging = star;
+    dragOffX = dx;
+    dragOffY = dy;
+    canvas.style.cursor = 'grabbing';
+  }
+});
+
+canvas.addEventListener('mouseup', () => {
+  if (dragging) {
+    const star = dragging;
+    dragging = null;
+    canvas.style.cursor = 'default';
+
+    // If dragged far from original position, trigger removal
+    const dx = star.x - star.originalX;
+    const dy = star.y - star.originalY;
+    if (Math.sqrt(dx * dx + dy * dy) > 80 && starPresent) {
+      removeStar();
+    }
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredSpecies = null;
+  tooltipEl.style.display = 'none';
+  if (dragging) {
+    const star = dragging;
+    dragging = null;
+    const dx = star.x - star.originalX;
+    const dy = star.y - star.originalY;
+    if (Math.sqrt(dx * dx + dy * dy) > 80 && starPresent) {
+      removeStar();
+    }
+  }
+});
+
+// Touch support
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  const pos = getCanvasPos(touch);
+  const star = getStar();
+  if (!star || star.visible < 0.1) return;
+  const dx = pos.x - star.x, dy = pos.y - star.y;
+  if (dx * dx + dy * dy < (star.size + 10) * (star.size + 10)) {
+    dragging = star;
+    dragOffX = dx;
+    dragOffY = dy;
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (!dragging) return;
+  const touch = e.touches[0];
+  const pos = getCanvasPos(touch);
+  dragging.x = pos.x - dragOffX;
+  dragging.y = pos.y - dragOffY;
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  if (dragging) {
+    const star = dragging;
+    dragging = null;
+    const dx = star.x - star.originalX;
+    const dy = star.y - star.originalY;
+    if (Math.sqrt(dx * dx + dy * dy) > 80 && starPresent) {
+      removeStar();
+    }
+  }
+});
+
+// ── Main loop ──
+
+let lastTime = performance.now();
+
+function draw(now) {
+  const dt = (now - lastTime) / 1000;
+  lastTime = now;
+  t++;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background zones
+  drawZones();
+  drawRocks();
+  drawWaterRipples();
+  drawCaustics();
+  drawZoneLabels();
+
+  // Update cascade/restore
+  updateCascade(dt);
+  updateRestore(dt);
+
+  // Slowly rotate star
+  const star = getStar();
+  if (star && !dragging) {
+    star.angle += 0.002;
+  }
+
+  // Animate periwinkle wander
+  species.filter(s => s.type === 'periwinkle').forEach(s => {
+    s.wanderX = Math.sin(t * 0.005 + s.phase) * 4;
+    s.wanderY = Math.cos(t * 0.004 + s.phase * 1.3) * 2;
+  });
+
+  // Draw order: back to front
+  // Kelp first (behind everything)
+  species.filter(s => s.type === 'kelp').forEach(s => drawWithHover(s, drawKelp));
+
+  // Subtidal creatures
+  species.filter(s => s.type === 'cucumber').forEach(s => drawWithHover(s, drawCucumber));
+  species.filter(s => s.type === 'crab').forEach(s => drawWithHover(s, drawCrab));
+
+  // Low intertidal
+  species.filter(s => s.type === 'chiton').forEach(s => drawWithHover(s, drawChiton));
+  species.filter(s => s.type === 'urchin').forEach(s => drawWithHover(s, drawUrchin));
+  species.filter(s => s.type === 'urchin-extra').forEach(s => {
+    if (s.visible > 0.01) drawWithHover(s, drawUrchin);
+  });
+  species.filter(s => s.type === 'anemone').forEach(s => drawWithHover(s, drawAnemone));
+
+  // Mid intertidal
+  species.filter(s => s.type === 'mussel').forEach(s => drawWithHover(s, drawMussel));
+  species.filter(s => s.type === 'mussel-extra').forEach(s => {
+    if (s.visible > 0.01) drawWithHover(s, drawMussel);
+  });
+  species.filter(s => s.type === 'limpet').forEach(s => drawWithHover(s, drawLimpet));
+
+  // The star — always on top of mid intertidal
+  if (star) drawStar(star);
+
+  // High intertidal
+  species.filter(s => s.type === 'barnacle').forEach(s => drawWithHover(s, drawBarnacle));
+  species.filter(s => s.type === 'periwinkle').forEach(s => drawWithHover(s, drawPeriwinkle));
+
+  // Surface shimmer
+  ctx.save();
+  ctx.globalAlpha = 0.03;
+  const shimGrad = ctx.createLinearGradient(0, 0, W, 0);
+  const shimOff = (t * 0.5) % W;
+  shimGrad.addColorStop(0, 'transparent');
+  shimGrad.addColorStop(Math.max(0, (shimOff - 50) / W), 'transparent');
+  shimGrad.addColorStop(shimOff / W, 'rgba(212,232,240,0.5)');
+  shimGrad.addColorStop(Math.min(1, (shimOff + 50) / W), 'transparent');
+  shimGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = shimGrad;
+  ctx.fillRect(0, 60, W, H);
+  ctx.restore();
+
+  requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>

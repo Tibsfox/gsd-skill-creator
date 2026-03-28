@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Living Web — Foxy's Installation</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0d1a12;
+    --text: #e8dcc8;
+    --canopy: #1a3a2a;
+    --forest: #2d5a3a;
+    --moss: #7a9a5a;
+    --salmon: #c75b3a;
+    --parchment: #c8b890;
+    --amber: #d4881a;
+    --teal: #2a8a96;
+    --purple: #9b59b6;
+    --warm: #e0a07a;
+    --meadow: #4a7c3f;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(180deg, rgba(13,26,18,0.95) 0%, rgba(13,26,18,0.7) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(122,154,90,0.15);
+  }
+  nav a {
+    color: var(--parchment);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--moss); }
+  nav .sep { color: rgba(200,184,144,0.3); font-size: 0.8rem; }
+
+  /* --- HEADER --- */
+  header {
+    text-align: center;
+    padding: 5rem 2rem 1.5rem;
+    position: relative;
+  }
+  header h1 {
+    font-size: 2.6rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 40px rgba(122,154,90,0.25);
+  }
+  header .subtitle {
+    font-size: 1rem;
+    color: var(--parchment);
+    opacity: 0.7;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  header .quote {
+    font-size: 0.95rem;
+    color: var(--moss);
+    opacity: 0.6;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* --- CANVAS CONTAINER --- */
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    aspect-ratio: 4 / 3;
+  }
+  #canvas-wrap canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: default;
+    border-radius: 4px;
+  }
+
+  /* --- INFO PANEL (overlay on canvas) --- */
+  #info-panel {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 280px;
+    background: rgba(13,26,18,0.92);
+    border: 1px solid rgba(122,154,90,0.2);
+    border-radius: 6px;
+    padding: 1.2rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(6px);
+  }
+  #info-panel.visible { opacity: 1; }
+  #info-panel h3 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+  }
+  #info-panel .info-id {
+    font-size: 0.75rem;
+    color: var(--parchment);
+    opacity: 0.5;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  #info-panel .info-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--parchment);
+    margin-bottom: 0.8rem;
+  }
+  #info-panel .info-threads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  #info-panel .thread-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    border: 1px solid;
+    opacity: 0.85;
+  }
+
+  /* --- LEGEND --- */
+  #legend {
+    max-width: 1200px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .legend-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(26,58,42,0.4);
+    border: 1px solid rgba(122,154,90,0.15);
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    color: var(--parchment);
+    font-family: Georgia, serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .legend-btn:hover {
+    background: rgba(26,58,42,0.7);
+    border-color: rgba(122,154,90,0.4);
+  }
+  .legend-btn.active {
+    border-color: currentColor;
+    background: rgba(26,58,42,0.8);
+  }
+  .legend-btn .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-btn .count {
+    opacity: 0.5;
+    font-size: 0.7rem;
+  }
+  #show-all-btn {
+    background: rgba(45,90,58,0.3);
+    border: 1px solid rgba(122,154,90,0.25);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    color: var(--moss);
+    font-family: Georgia, serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #show-all-btn:hover {
+    background: rgba(45,90,58,0.5);
+  }
+
+  /* --- BOTTOM TEXT --- */
+  #essay {
+    max-width: 800px;
+    margin: 2.5rem auto 3rem;
+    padding: 0 2rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--parchment);
+    opacity: 0.7;
+    text-align: left;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    #info-panel { width: 220px; top: 0.5rem; right: 0.5rem; padding: 0.8rem; }
+    #legend { gap: 0.35rem; }
+    .legend-btn { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">The Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</nav>
+
+<header>
+  <h1>The Living Web</h1>
+  <div class="subtitle">Foxy's Installation &mdash; the mycorrhizal network beneath the research forest</div>
+  <div class="quote">&ldquo;The network is the forest. Grandmother Cedar provisions the seedlings.&rdquo;</div>
+</header>
+
+<div id="canvas-wrap">
+  <canvas id="web-canvas"></canvas>
+  <div id="info-panel">
+    <h3 id="info-name"></h3>
+    <div class="info-id" id="info-id"></div>
+    <div class="info-desc" id="info-desc"></div>
+    <div class="info-threads" id="info-threads"></div>
+  </div>
+</div>
+
+<div id="legend"></div>
+
+<section id="essay">
+  Seven threads connect thirteen research projects into a single living system. The salmon carry nitrogen from the ocean into the forest. The mycorrhizal network distributes it underground. The vertical gradient determines where each species can thrive. Fire resets and regenerates. Pollinators move genetic material between plants. Water connects watershed to ocean. And the heritage thread reminds us that Indigenous peoples have understood these connections for millennia &mdash; the documentation is catching up to what was already known.
+</section>
+
+<script>
+// ============================================================
+//  DATA
+// ============================================================
+
+const NODES = [
+  { id:'ECO', name:'Living Systems',          desc:'Ecology hub connecting all PNW research. Keystone node — every thread passes through here.', r:38, hint:[0.50,0.45] },
+  { id:'COL', name:'Columbia Valley',          desc:'The great river basin — old-growth temperate rainforest, salmon runs, and the spine of the PNW watershed.', r:32, hint:[0.28,0.44] },
+  { id:'CAS', name:'Cascade Range',            desc:'Volcanic backbone of the PNW. Elevation gradients from subalpine meadow to lowland forest floor.', r:28, hint:[0.45,0.22] },
+  { id:'GDN', name:'Gardening',                desc:'Cultivation, pollinators, and the human-plant symbiosis. Where ecology meets stewardship.', r:24, hint:[0.70,0.62] },
+  { id:'AVI', name:'Wings of the PNW',         desc:'250+ avian species across 7 ecoregions. The vertical gradient made audible.', r:30, hint:[0.72,0.20] },
+  { id:'MAM', name:'Fur, Fin & Fang',          desc:'169+ mammal species. Bears distribute salmon carcasses. Elk wear the trails.', r:28, hint:[0.78,0.44] },
+  { id:'SAL', name:'Salmon Heritage',          desc:'Anadromous keystone species. Marine-derived nitrogen carried from ocean to canopy.', r:24, hint:[0.42,0.70] },
+  { id:'CRV', name:'Corvid Intelligence',      desc:'Ravens, crows, jays — tool-users and cultural transmitters. The forest\'s memory.', r:24, hint:[0.18,0.22] },
+  { id:'AGR', name:'PNW Agriculture',          desc:'Farming systems shaped by rain, soil, and deep ecological knowledge.', r:22, hint:[0.22,0.68] },
+  { id:'LFR', name:'The Living Forest',        desc:'Old-growth dynamics, mother trees, and the common mycorrhizal network.', r:28, hint:[0.35,0.34] },
+  { id:'WYR', name:'Weyerhaeuser',             desc:'Industrial forestry and its ecological consequences. Disturbance at scale.', r:22, hint:[0.15,0.48] },
+  { id:'AWF', name:'Clean Air, Water & Food',  desc:'Environmental quality — the intersection of watershed, atmosphere, and food systems.', r:22, hint:[0.55,0.72] },
+  { id:'PGP', name:'Pacific Garbage Patch',    desc:'Where the water thread reaches the ocean — and what comes back.', r:22, hint:[0.50,0.88] },
+];
+
+const THREADS = [
+  { id:'salmon',      name:'The Salmon Thread',      color:'#c75b3a', nodes:['COL','CAS','ECO','SAL','MAM'] },
+  { id:'mycorrhizal', name:'The Mycorrhizal Web',     color:'#7a9a5a', nodes:['COL','CAS','ECO','GDN','LFR'] },
+  { id:'vertical',    name:'The Vertical Gradient',   color:'#4a7c3f', nodes:['CAS','ECO','AVI','MAM','LFR'] },
+  { id:'fire',        name:'The Fire Succession',     color:'#d4881a', nodes:['ECO','CAS','WYR','LFR'] },
+  { id:'pollinator',  name:'The Pollinator Web',      color:'#e0a07a', nodes:['GDN','AVI','ECO','AGR','CRV'] },
+  { id:'water',       name:'The Water Thread',        color:'#2a8a96', nodes:['COL','AWF','SAL','PGP','ECO'] },
+  { id:'heritage',    name:'The Heritage Thread',     color:'#9b59b6', nodes:['CRV','SAL','ECO','AGR','LFR'] },
+];
+
+// Build edge list from threads
+const EDGES = [];
+THREADS.forEach(t => {
+  for (let i = 0; i < t.nodes.length - 1; i++) {
+    EDGES.push({ from: t.nodes[i], to: t.nodes[i+1], thread: t.id, color: t.color });
+  }
+});
+
+// ============================================================
+//  CANVAS SETUP
+// ============================================================
+const canvas = document.getElementById('web-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, dpr;
+let mouse = { x: -9999, y: -9999 };
+let hoveredNode = null;
+let activeThread = null;   // null = show all
+let time = 0;
+
+function resize() {
+  const wrap = document.getElementById('canvas-wrap');
+  const rect = wrap.getBoundingClientRect();
+  dpr = window.devicePixelRatio || 1;
+  W = rect.width;
+  H = rect.height;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  // (Re)position nodes from hints
+  NODES.forEach(n => {
+    n.x = n.hint[0] * W;
+    n.y = n.hint[1] * H;
+    // Velocity for breathing
+    if (n.vx === undefined) {
+      n.vx = (Math.random() - 0.5) * 0.15;
+      n.vy = (Math.random() - 0.5) * 0.15;
+    }
+  });
+}
+
+// ============================================================
+//  PHYSICS — gentle drift / breathing
+// ============================================================
+function physics(dt) {
+  const pad = 50;
+  NODES.forEach(n => {
+    // Breathing oscillation
+    n.x += n.vx;
+    n.y += n.vy;
+
+    // Soft attraction back to hint position
+    const tx = n.hint[0] * W;
+    const ty = n.hint[1] * H;
+    const dx = tx - n.x;
+    const dy = ty - n.y;
+    n.vx += dx * 0.0004;
+    n.vy += dy * 0.0004;
+
+    // Light damping
+    n.vx *= 0.992;
+    n.vy *= 0.992;
+
+    // Boundaries
+    n.x = Math.max(pad, Math.min(W - pad, n.x));
+    n.y = Math.max(pad, Math.min(H - pad, n.y));
+  });
+}
+
+// ============================================================
+//  DRAWING
+// ============================================================
+function nodeById(id) { return NODES.find(n => n.id === id); }
+
+function threadsForNode(nodeId) {
+  return THREADS.filter(t => t.nodes.includes(nodeId));
+}
+
+function isEdgeConnectedToHovered(e) {
+  if (!hoveredNode) return false;
+  return e.from === hoveredNode.id || e.to === hoveredNode.id;
+}
+
+function isNodeConnectedToHovered(n) {
+  if (!hoveredNode) return false;
+  if (n.id === hoveredNode.id) return true;
+  return EDGES.some(e =>
+    (e.from === hoveredNode.id && e.to === n.id) ||
+    (e.to === hoveredNode.id && e.from === n.id)
+  );
+}
+
+// Organic bezier edge
+function drawEdge(e, alpha) {
+  const a = nodeById(e.from);
+  const b = nodeById(e.to);
+  if (!a || !b) return;
+
+  const mx = (a.x + b.x) / 2;
+  const my = (a.y + b.y) / 2;
+
+  // Perpendicular offset for organic curve
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const len = Math.sqrt(dx*dx + dy*dy) || 1;
+  const nx = -dy / len;
+  const ny = dx / len;
+
+  // Deterministic but varied offset using node positions as seed
+  const seed = (a.hint[0] * 1000 + b.hint[1] * 777 + THREADS.findIndex(t => t.id === e.thread) * 137) % 1;
+  const curve = (seed - 0.5) * len * 0.35;
+  const breathe = Math.sin(time * 0.0008 + seed * 6.28) * 3;
+
+  const cpx = mx + nx * (curve + breathe);
+  const cpy = my + ny * (curve + breathe);
+
+  // Varying thickness
+  const baseWidth = 1.2 + seed * 1.4;
+
+  ctx.beginPath();
+  ctx.moveTo(a.x, a.y);
+  ctx.quadraticCurveTo(cpx, cpy, b.x, b.y);
+  ctx.strokeStyle = hexAlpha(e.color, alpha);
+  ctx.lineWidth = baseWidth * (alpha > 0.3 ? 1.3 : 1);
+  ctx.stroke();
+
+  // Glow for bright edges
+  if (alpha > 0.4) {
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.quadraticCurveTo(cpx, cpy, b.x, b.y);
+    ctx.strokeStyle = hexAlpha(e.color, alpha * 0.25);
+    ctx.lineWidth = baseWidth * 4;
+    ctx.stroke();
+  }
+}
+
+function drawNode(n, highlight, threadColor) {
+  const isHovered = hoveredNode && hoveredNode.id === n.id;
+  const connected = isNodeConnectedToHovered(n);
+  const inThread = activeThread && THREADS.find(t => t.id === activeThread)?.nodes.includes(n.id);
+
+  let r = n.r;
+  let glowAlpha = 0;
+  let fillColor = '#1a3a2a';
+  let strokeColor = '#2d5a3a';
+  let labelAlpha = 0.6;
+
+  if (isHovered) {
+    r *= 1.18;
+    glowAlpha = 0.5;
+    fillColor = '#2d5a3a';
+    strokeColor = '#7a9a5a';
+    labelAlpha = 1;
+  } else if (connected && hoveredNode) {
+    r *= 1.06;
+    glowAlpha = 0.2;
+    fillColor = '#1e4430';
+    strokeColor = '#4a7c3f';
+    labelAlpha = 0.85;
+  } else if (inThread) {
+    glowAlpha = 0.35;
+    fillColor = '#1e4430';
+    strokeColor = threadColor || '#4a7c3f';
+    labelAlpha = 0.9;
+  } else if (activeThread && !inThread) {
+    labelAlpha = 0.2;
+    fillColor = '#111e15';
+    strokeColor = '#1a3a2a';
+  }
+
+  // Breathing pulse
+  const pulse = Math.sin(time * 0.001 + n.hint[0] * 10) * 0.03 + 1;
+  r *= pulse;
+
+  // Outer glow
+  if (glowAlpha > 0) {
+    const grad = ctx.createRadialGradient(n.x, n.y, r * 0.5, n.x, n.y, r * 2.5);
+    grad.addColorStop(0, hexAlpha(threadColor || '#7a9a5a', glowAlpha * 0.4));
+    grad.addColorStop(1, hexAlpha(threadColor || '#7a9a5a', 0));
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  // Node body
+  const bodyGrad = ctx.createRadialGradient(n.x - r*0.25, n.y - r*0.25, r*0.1, n.x, n.y, r);
+  bodyGrad.addColorStop(0, lighten(fillColor, 30));
+  bodyGrad.addColorStop(1, fillColor);
+  ctx.beginPath();
+  ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+  ctx.fillStyle = bodyGrad;
+  ctx.fill();
+  ctx.strokeStyle = hexAlpha(strokeColor, 0.6);
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Inner shimmer
+  const shimmer = ctx.createRadialGradient(n.x - r*0.3, n.y - r*0.3, 0, n.x, n.y, r * 0.8);
+  shimmer.addColorStop(0, hexAlpha('#ffffff', 0.06));
+  shimmer.addColorStop(1, hexAlpha('#ffffff', 0));
+  ctx.beginPath();
+  ctx.arc(n.x, n.y, r * 0.8, 0, Math.PI * 2);
+  ctx.fillStyle = shimmer;
+  ctx.fill();
+
+  // Label
+  ctx.fillStyle = hexAlpha('#e8dcc8', labelAlpha);
+  ctx.font = `${r < 24 ? 11 : 13}px Georgia, serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(n.id, n.x, n.y - 1);
+
+  // Name below
+  if (isHovered || inThread) {
+    ctx.fillStyle = hexAlpha('#c8b890', labelAlpha * 0.7);
+    ctx.font = '10px Georgia, serif';
+    ctx.fillText(n.name, n.x, n.y + r + 14);
+  }
+}
+
+// ECO ripples
+function drawRipples() {
+  const eco = nodeById('ECO');
+  if (!eco) return;
+  const period = 4000;
+  const numRings = 3;
+  for (let i = 0; i < numRings; i++) {
+    const phase = ((time + i * (period / numRings)) % period) / period;
+    const radius = phase * Math.min(W, H) * 0.45;
+    const alpha = (1 - phase) * 0.06;
+    ctx.beginPath();
+    ctx.arc(eco.x, eco.y, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = hexAlpha('#7a9a5a', alpha);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+}
+
+// Background particles — spores / fireflies
+const particles = [];
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random(),
+    y: Math.random(),
+    s: Math.random() * 0.8 + 0.4,
+    speed: Math.random() * 0.00005 + 0.00002,
+    phase: Math.random() * Math.PI * 2,
+    drift: (Math.random() - 0.5) * 0.0001,
+  });
+}
+
+function drawParticles() {
+  particles.forEach(p => {
+    p.y -= p.speed;
+    p.x += p.drift + Math.sin(time * 0.0003 + p.phase) * 0.00008;
+    if (p.y < -0.02) { p.y = 1.02; p.x = Math.random(); }
+    if (p.x < 0) p.x = 1;
+    if (p.x > 1) p.x = 0;
+
+    const flicker = Math.sin(time * 0.002 + p.phase) * 0.5 + 0.5;
+    const alpha = flicker * 0.12;
+    ctx.beginPath();
+    ctx.arc(p.x * W, p.y * H, p.s, 0, Math.PI * 2);
+    ctx.fillStyle = hexAlpha('#7a9a5a', alpha);
+    ctx.fill();
+  });
+}
+
+// ============================================================
+//  RENDER LOOP
+// ============================================================
+function render(ts) {
+  time = ts || 0;
+  physics(16);
+
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  const bg = ctx.createRadialGradient(W * 0.5, H * 0.45, 0, W * 0.5, H * 0.45, Math.max(W, H) * 0.7);
+  bg.addColorStop(0, '#112218');
+  bg.addColorStop(1, '#0d1a12');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawParticles();
+  drawRipples();
+
+  // Draw edges
+  EDGES.forEach(e => {
+    let alpha = 0.12; // default dim
+
+    if (activeThread) {
+      alpha = (e.thread === activeThread) ? 0.85 : 0.04;
+    }
+
+    if (hoveredNode) {
+      if (isEdgeConnectedToHovered(e)) {
+        alpha = 0.9;
+      } else if (!activeThread) {
+        alpha = 0.06;
+      }
+    }
+
+    drawEdge(e, alpha);
+  });
+
+  // Draw nodes
+  const threadObj = activeThread ? THREADS.find(t => t.id === activeThread) : null;
+  NODES.forEach(n => drawNode(n, false, threadObj?.color));
+
+  requestAnimationFrame(render);
+}
+
+// ============================================================
+//  INTERACTION
+// ============================================================
+function getMouseNode(mx, my) {
+  for (let i = NODES.length - 1; i >= 0; i--) {
+    const n = NODES[i];
+    const dx = mx - n.x;
+    const dy = my - n.y;
+    if (dx*dx + dy*dy < (n.r + 6) * (n.r + 6)) return n;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+  const prev = hoveredNode;
+  hoveredNode = getMouseNode(mouse.x, mouse.y);
+  if (hoveredNode !== prev) updateInfoPanel();
+  canvas.style.cursor = hoveredNode ? 'pointer' : 'default';
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredNode = null;
+  updateInfoPanel();
+  canvas.style.cursor = 'default';
+});
+
+canvas.addEventListener('click', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const node = getMouseNode(mx, my);
+  if (node) {
+    window.location.href = `../${node.id}/index.html`;
+  }
+});
+
+// Touch support
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const t = e.touches[0];
+  mouse.x = t.clientX - rect.left;
+  mouse.y = t.clientY - rect.top;
+  hoveredNode = getMouseNode(mouse.x, mouse.y);
+  updateInfoPanel();
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  if (hoveredNode) {
+    window.location.href = `../${hoveredNode.id}/index.html`;
+  }
+  hoveredNode = null;
+  updateInfoPanel();
+});
+
+// ============================================================
+//  INFO PANEL
+// ============================================================
+const infoPanel = document.getElementById('info-panel');
+const infoName = document.getElementById('info-name');
+const infoId = document.getElementById('info-id');
+const infoDesc = document.getElementById('info-desc');
+const infoThreads = document.getElementById('info-threads');
+
+function updateInfoPanel() {
+  if (!hoveredNode) {
+    infoPanel.classList.remove('visible');
+    return;
+  }
+  const n = hoveredNode;
+  infoName.textContent = n.name;
+  infoId.textContent = n.id;
+  infoDesc.textContent = n.desc;
+
+  const threads = threadsForNode(n.id);
+  infoThreads.innerHTML = threads.map(t =>
+    `<span class="thread-tag" style="color:${t.color}; border-color:${t.color}">${t.name.replace('The ','')}</span>`
+  ).join('');
+
+  infoPanel.classList.add('visible');
+}
+
+// ============================================================
+//  LEGEND
+// ============================================================
+function buildLegend() {
+  const legend = document.getElementById('legend');
+
+  THREADS.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'legend-btn';
+    btn.innerHTML = `<span class="dot" style="background:${t.color}"></span>${t.name} <span class="count">${t.nodes.length}</span>`;
+    btn.addEventListener('click', () => {
+      if (activeThread === t.id) {
+        activeThread = null;
+        document.querySelectorAll('.legend-btn').forEach(b => b.classList.remove('active'));
+      } else {
+        activeThread = t.id;
+        document.querySelectorAll('.legend-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      updateThreadInfoPanel();
+    });
+    legend.appendChild(btn);
+  });
+
+  const showAll = document.createElement('button');
+  showAll.id = 'show-all-btn';
+  showAll.textContent = 'Show All';
+  showAll.addEventListener('click', () => {
+    activeThread = null;
+    document.querySelectorAll('.legend-btn').forEach(b => b.classList.remove('active'));
+    infoPanel.classList.remove('visible');
+  });
+  legend.appendChild(showAll);
+}
+
+const THREAD_DESCRIPTIONS = {
+  salmon: 'Marine-derived nitrogen pathway. Salmon carry nutrients from the Pacific into forest watersheds. Bears, eagles, and fungi distribute carcass nitrogen to the canopy.',
+  mycorrhizal: 'Underground fungal networks connecting root systems. Mother trees provision seedlings through the common mycorrhizal network. The wood wide web.',
+  vertical: 'Elevation stratification from subalpine meadow to lowland forest floor. Each altitude band hosts distinct species assemblages.',
+  fire: 'Disturbance and regeneration. Fire opens canopy, returns nutrients to soil, and triggers succession. Industrial forestry disrupts the natural cycle.',
+  pollinator: 'Insects, birds, and wind moving pollen and seeds between plants. The invisible traffic that sustains genetic diversity.',
+  water: 'Watershed to ocean. Rain feeds rivers, rivers feed estuaries, currents carry consequences to the open Pacific and back.',
+  heritage: 'Indigenous knowledge and cultural ecology. Millennia of observation encoded in practice, story, and relationship. The documentation catching up to what was already known.',
+};
+
+function updateThreadInfoPanel() {
+  if (!activeThread) return;
+  const t = THREADS.find(th => th.id === activeThread);
+  if (!t) return;
+  infoName.textContent = t.name;
+  infoId.textContent = t.nodes.join(' \u2192 ');
+  infoDesc.textContent = THREAD_DESCRIPTIONS[t.id] || '';
+  infoThreads.innerHTML = `<span class="thread-tag" style="color:${t.color}; border-color:${t.color}">${t.nodes.length} connections</span>`;
+  infoPanel.classList.add('visible');
+}
+
+// ============================================================
+//  UTILITIES
+// ============================================================
+function hexAlpha(hex, a) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function lighten(hex, amt) {
+  let r = parseInt(hex.slice(1,3), 16);
+  let g = parseInt(hex.slice(3,5), 16);
+  let b = parseInt(hex.slice(5,7), 16);
+  r = Math.min(255, r + amt);
+  g = Math.min(255, g + amt);
+  b = Math.min(255, b + amt);
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+window.addEventListener('resize', resize);
+resize();
+buildLegend();
+requestAnimationFrame(render);
+</script>
+</body>
+</html>

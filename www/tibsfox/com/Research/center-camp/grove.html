@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Groves — Personal Installations of the 48 Muses</title>
+  <script src="teams.js"></script>
+  <script src="guides.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* ═══ Nav ═══ */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* ═══ Gallery Mode ═══ */
+    .gallery-hero {
+      text-align: center;
+      padding: 3.5rem 2rem 2rem;
+      background: radial-gradient(ellipse at 50% 80%, rgba(74,124,63,0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%);
+    }
+    .gallery-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
+    }
+    .gallery-hero .subtitle {
+      font-size: 1rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .gallery-hero .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .gallery-hero .ornament-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,184,144,0.3), transparent);
+    }
+    .gallery-hero .ornament-dot {
+      width: 6px;
+      height: 6px;
+      background: #4a7c3f;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(74,124,63,0.5);
+    }
+
+    .gallery-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      padding: 1rem 1rem 1rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-left: 3px solid var(--accent);
+    }
+    .gallery-card:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-2px);
+    }
+    .gallery-card .card-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .gallery-card .card-role {
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .gallery-card .card-badges {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .gallery-card .badge {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(232,220,200,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .gallery-card .card-voice {
+      font-size: 0.8rem;
+      color: rgba(232,220,200,0.4);
+      font-style: italic;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* ═══ Single Muse Mode ═══ */
+    .muse-view { display: none; }
+    .muse-view.active { display: block; }
+    .gallery-view { display: none; }
+    .gallery-view.active { display: block; }
+
+    .muse-header {
+      text-align: center;
+      padding: 4rem 2rem 2.5rem;
+      background: radial-gradient(ellipse at 50% 70%, var(--glow) 0%, transparent 55%),
+                  linear-gradient(180deg, #0d1a12 0%, #0f1e15 100%);
+    }
+    .muse-header h1 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.2rem;
+    }
+    .muse-header .role-line {
+      font-size: 1.2rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .muse-header .badge-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .muse-header .badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .muse-header .badge-type {
+      background: rgba(255,255,255,0.08);
+      color: var(--accent-text);
+    }
+    .muse-header .badge-zone {
+      background: rgba(255,255,255,0.05);
+      color: rgba(232,220,200,0.6);
+    }
+
+    /* ═══ Sections ═══ */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    .section + .section {
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(232,220,200,0.3);
+      margin-bottom: 1rem;
+    }
+
+    /* Voice */
+    .voice-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .voice-quote {
+      flex: 1;
+      min-width: 300px;
+      font-size: 1.6rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: rgba(232,220,200,0.7);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .voice-quote::before {
+      content: '\201C';
+      position: absolute;
+      left: -0.2rem;
+      top: -0.4rem;
+      font-size: 3.5rem;
+      color: var(--accent-text);
+      opacity: 0.4;
+      font-style: normal;
+    }
+    .mini-compass {
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+
+    /* Teaching */
+    .teaching-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: rgba(232,220,200,0.8);
+    }
+
+    /* Root */
+    .root-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.6);
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.8rem;
+    }
+    .team-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      padding: 0.8rem;
+      border-left: 2px solid var(--accent-text);
+    }
+    .team-card .tc-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+    .team-card .tc-sci {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.4);
+      margin-bottom: 0.3rem;
+    }
+    .team-card .tc-role {
+      font-size: 0.8rem;
+      color: var(--accent-text);
+      margin-bottom: 0.15rem;
+    }
+    .team-card .tc-why {
+      font-size: 0.75rem;
+      color: rgba(232,220,200,0.45);
+      line-height: 1.4;
+    }
+
+    /* Connected */
+    .connected-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .connected-link {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      color: rgba(232,220,200,0.6);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .connected-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: #e8dcc8;
+    }
+    .connected-link .cl-role {
+      font-size: 0.7rem;
+      color: rgba(232,220,200,0.35);
+      font-style: italic;
+    }
+
+    /* Canvas */
+    .canvas-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    #grove-canvas {
+      width: 100%;
+      max-width: 700px;
+      height: 350px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* Navigation */
+    .muse-nav {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .muse-nav a {
+      color: rgba(232,220,200,0.5);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .muse-nav a:hover { color: #e8dcc8; }
+    .muse-nav .nav-arrow {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .muse-nav .nav-arrow:hover { background: rgba(255,255,255,0.08); }
+
+    /* Footer */
+    .grove-footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .grove-footer .footer-voice {
+      font-style: italic;
+      color: rgba(232,220,200,0.3);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .grove-footer .footer-tag {
+      font-size: 0.75rem;
+      color: rgba(232,220,200,0.2);
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; padding: 1rem; }
+      .gallery-hero h1 { font-size: 1.6rem; }
+      .muse-header h1 { font-size: 2.2rem; }
+      .voice-quote { font-size: 1.2rem; min-width: 0; }
+      .voice-section { gap: 1.5rem; }
+      .section { padding: 1.5rem 1rem; }
+      .team-grid { grid-template-columns: 1fr; }
+      .muse-nav { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- NAV BAR                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<nav class="nav-bar" id="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">|</span>
+  <a href="terrain.html">Compass</a>
+  <span class="sep">|</span>
+  <a href="bestiary.html">Bestiary</a>
+  <span class="sep">|</span>
+  <a href="grove.html" class="active">Groves</a>
+  <span class="sep" id="nav-muse-sep" style="display:none">|</span>
+  <span id="nav-muse-links" style="font-size:0.8rem"></span>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- GALLERY VIEW                                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="gallery-view" id="gallery-view">
+  <div class="gallery-hero">
+    <h1>The Groves</h1>
+    <div class="subtitle">Personal Installations of the 48 Muses</div>
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-dot"></div>
+      <div class="ornament-line"></div>
+    </div>
+    <div style="font-size:0.85rem; color:rgba(232,220,200,0.35); margin-top:1rem; letter-spacing:0.05em;">
+      Each muse has built a grove in the forest. Click to enter.
+    </div>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+  <div style="text-align:center; padding:2rem; font-size:0.75rem; color:rgba(232,220,200,0.2);">
+    48 groves &middot; Center Camp &mdash; where all trails meet
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SINGLE MUSE VIEW                                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="muse-view" id="muse-view">
+  <div class="muse-header" id="muse-header">
+    <h1 id="muse-name"></h1>
+    <div class="role-line" id="muse-role"></div>
+    <div class="badge-row">
+      <span class="badge badge-type" id="badge-type"></span>
+      <span class="badge badge-zone" id="badge-zone"></span>
+    </div>
+  </div>
+
+  <!-- Voice + Compass -->
+  <div class="voice-section">
+    <div class="voice-quote" id="muse-voice"></div>
+    <canvas class="mini-compass" id="mini-compass" width="240" height="240"></canvas>
+  </div>
+
+  <!-- Teaching -->
+  <div class="section">
+    <div class="section-label">What I Teach</div>
+    <div class="teaching-text" id="muse-teaching"></div>
+  </div>
+
+  <!-- Root -->
+  <div class="section">
+    <div class="section-label">Where I Come From</div>
+    <div class="root-text" id="muse-root"></div>
+  </div>
+
+  <!-- Team -->
+  <div class="section" id="team-section">
+    <div class="section-label">Who Works With Me</div>
+    <div class="team-grid" id="team-grid"></div>
+  </div>
+
+  <!-- Connected -->
+  <div class="section">
+    <div class="section-label">Who I'm Connected To</div>
+    <div class="connected-list" id="connected-list"></div>
+  </div>
+
+  <!-- Canvas Visualization -->
+  <div class="canvas-section">
+    <canvas id="grove-canvas" width="1400" height="700"></canvas>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="muse-nav">
+    <a href="#" class="nav-arrow" id="prev-muse">&larr; Previous Grove</a>
+    <a href="grove.html">Back to Gallery</a>
+    <a href="#" id="compass-link">Find me on the Compass</a>
+    <a href="#" class="nav-arrow" id="next-muse">Next Grove &rarr;</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="grove-footer">
+    <div class="footer-voice" id="footer-voice"></div>
+    <div class="footer-tag">This grove is part of Center Camp &mdash; where all trails meet</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// MUSE DATA (48 muses, sorted by theta)
+// ═══════════════════════════════════════════════════════════════
+var MUSES = [
+  { id:'cedar', name:'Cedar', role:'the record', theta:0, r:0.95, type:'tree', zone:'montane', voice:'the record shows', teaching:'True leadership is measured by your descendants\' survival.', root:'Western red cedar \u2014 Tree of Life, 1,500+ year lifespan, nurse log for 8\u201310 generations' },
+  { id:'lex', name:'Lex', role:'the specification', theta:5, r:0.90, type:'concept', zone:'lowlands', voice:'measure twice', teaching:'The constraint is the craft.', root:'Execution discipline \u2014 pipeline rigor, verification, near the real axis' },
+  { id:'moss', name:'Moss', role:'the carpet', theta:6, r:0.58, type:'bryophyte', zone:'underground', voice:'I ask nothing but moisture and time', teaching:'The most foundational work grows on what others build.', root:'Hypnum/Hylocomium \u2014 defines PNW visual, carpets every old-growth floor' },
+  { id:'lichen', name:'Lichen', role:'the breath', theta:8, r:0.60, type:'symbiosis', zone:'underground', voice:'I am three, and we breathe for you', teaching:'The most profound partnerships are ones where no partner can exist alone.', root:'Lobaria oregana \u2014 three organisms merged, fixes nitrogen from air' },
+  { id:'sturgeon', name:'Sturgeon', role:'the ancient', theta:9, r:0.68, type:'fish', zone:'water', voice:'I keep the river\'s deepest memory', teaching:'Some memories can only be kept by those who stay in the deep.', root:'White sturgeon \u2014 largest NA freshwater fish, 100+ years, 600 kg' },
+  { id:'fern', name:'Fern', role:'the foundation', theta:10, r:0.65, type:'plant', zone:'underground', voice:'I was here before the trees', teaching:'The most foundational work is invisible and continuous.', root:'Sword fern \u2014 200 million year lineage, reproduces by spores' },
+  { id:'chanterelle', name:'Chanterelle', role:'the network', theta:12, r:0.72, type:'fungus', zone:'underground', voice:'what you can\'t see is doing the most work', teaching:'You cannot manufacture this \u2014 only create conditions where it grows.', root:'Pacific golden chanterelle \u2014 fruits only in mature forests, cannot be cultivated' },
+  { id:'star', name:'Star', role:'the keystone', theta:14, r:0.64, type:'echinoderm', zone:'coast', voice:'remove me and the whole world changes', teaching:'Your role is revealed by what happens when you are gone.', root:'Ochre sea star \u2014 Paine 1966 keystone study, Tatoosh Island' },
+  { id:'crab', name:'Crab', role:'the harvest', theta:15, r:0.62, type:'crustacean', zone:'coast', voice:'the ocean feeds those who tend it', teaching:'Harvest with care and the ocean provides forever.', root:'Dungeness crab \u2014 keystone of PNW seafood economy and marine food web' },
+  { id:'beaver', name:'Beaver', role:'the maker', theta:16, r:0.78, type:'mammal', zone:'foothills', voice:'let me show you how it works', teaching:'Your survival work becomes the foundation for others\' thriving.', root:'Castor canadensis \u2014 ecosystem engineer, one dam = habitat for hundreds' },
+  { id:'salamander', name:'Salamander', role:'the headwater', theta:18, r:0.66, type:'amphibian', zone:'montane', voice:'I live where nothing else can reach', teaching:'The apex predator isn\'t always the largest.', root:'Pacific giant salamander \u2014 only vocalizing PNW salamander, fishless stream apex' },
+  { id:'hemlock', name:'Hemlock', role:'the standard', theta:20, r:0.85, type:'tree', zone:'montane', voice:'the standard holds', teaching:'The bar was set by someone who cared whether the next person could stand on it.', root:'Western hemlock \u2014 shade-tolerant climax species of the montane canopy' },
+  { id:'fire', name:'Fire', role:'the renewal', theta:22, r:0.72, type:'force', zone:'all', voice:'the forest still calls my name', teaching:'Suppression creates catastrophe. Small fires prevent large ones.', root:'Ecological fire \u2014 Kalapuya burns, Douglas fir succession, century of suppression' },
+  { id:'cougar', name:'Cougar', role:'the ghost', theta:23, r:0.76, type:'mammal', zone:'montane', voice:'you know I am here because the deer are afraid', teaching:'Presence without visibility is the deepest kind of influence.', root:'Puma concolor \u2014 solitary apex, ecology of fear, restructures behavior by existing' },
+  { id:'wolf', name:'Wolf', role:'the return', theta:24, r:0.80, type:'mammal', zone:'montane', voice:'I teach the patience of reestablishment', teaching:'What was lost can return if the territory remembers.', root:'Gray wolf \u2014 trophic cascade, pack dynamics, returning to Cascades' },
+  { id:'rain', name:'Rain', role:'the cycle', theta:25, r:0.64, type:'force', zone:'atmosphere', voice:'nine months of me made everything you see', teaching:'The pattern of precipitation IS the pattern of life.', root:'80\u2013120 inches annually west of Cascades, reversed Mediterranean cycle' },
+  { id:'fog', name:'Fog', role:'the invisible', theta:26, r:0.62, type:'force', zone:'foothills', voice:'I am the rain between the rains', teaching:'The most essential systems are often invisible.', root:'Pacific stratus \u2014 30\u201350% of summer moisture for coastal forest' },
+  { id:'bear', name:'Bear', role:'the season', theta:28, r:0.78, type:'mammal', zone:'montane', voice:'I walk between ice and forest, between seasons', teaching:'Carry the ocean into the forest through your body.', root:'Grizzly \u2014 50\u201390% pre-hibernation calories from salmon, N-15 distribution' },
+  { id:'waterfall', name:'Waterfall', role:'the descent', theta:29, r:0.66, type:'force', zone:'foothills', voice:'I create worlds in my mist', teaching:'Falling creates microhabitats that stillness never could.', root:'Columbia Gorge falls \u2014 spray-zone endemic species in perpetual mist' },
+  { id:'foxy', name:'Foxy', role:'the map', theta:30, r:0.75, type:'animal', zone:'foothills', voice:'maps and stories', teaching:'The cartographer maps from home because they ARE the territory.', root:'The fox at center camp \u2014 PNW, Salish heritage, decades in these forests' },
+  { id:'sitka', name:'Sitka', role:'the root', theta:32, r:0.82, type:'tree', zone:'foothills', voice:'stay \u2014 the place will speak through you', teaching:'The constraint IS the quality.', root:'Sitka spruce \u2014 coastal fog belt only, guitar tops, piano soundboards' },
+  { id:'steelhead', name:'Steelhead', role:'the twice-born', theta:33, r:0.66, type:'fish', zone:'water', voice:'I spawn and survive to spawn again', teaching:'Resilience means you get a second chance to complete the journey.', root:'Oncorhynchus mykiss \u2014 only Pacific salmonid that survives spawning' },
+  { id:'eulachon', name:'Eulachon', role:'the first gift', theta:34, r:0.68, type:'fish', zone:'coast', voice:'I arrive before everything else', teaching:'Energy is the foundation of economy. The first signal matters most.', root:'Candlefish \u2014 grease trails as PNW trade highways, Nuxalk/Nisga\'a rights' },
+  { id:'dipper', name:'Dipper', role:'the water-walker', theta:34, r:0.65, type:'bird', zone:'water', voice:'I dive into currents and read what flows beneath', teaching:'Walk where no one else can walk.', root:'American dipper \u2014 only NA songbird that walks underwater' },
+  { id:'chinook', name:'Chinook', role:'the current', theta:35, r:0.70, type:'salmon', zone:'water', voice:'follow the water', teaching:'Connection flows downhill. The salmon proves the path by swimming it.', root:'King salmon, warm wind, trade language \u2014 three currents, one name' },
+  { id:'orca', name:'Orca', role:'the elder', theta:38, r:0.85, type:'marine', zone:'coast', voice:'I have been listening longer than you have been speaking', teaching:'Knowledge deepens with time. The elders\' expertise is irreplaceable.', root:'Southern Resident \u2014 73 individuals, matriarch knowledge, biosonar' },
+  { id:'sam', name:'Sam', role:'the question', theta:40, r:0.60, type:'animal', zone:'lowlands', voice:'what if we tried', teaching:'Curiosity needs no justification.', root:'The good boy \u2014 explorer of every trail, bringer of pinecones' },
+  { id:'coyote', name:'Coyote', role:'the trickster', theta:42, r:0.68, type:'canid', zone:'lowlands', voice:'the garbage becomes the feast', teaching:'Flexibility beats strength. Adapt to whatever the world offers.', root:'Canis latrans \u2014 Trickster across all PNW Indigenous traditions' },
+  { id:'dragonfly', name:'Dragonfly', role:'the iridescent', theta:43, r:0.62, type:'insect', zone:'air', voice:'I hunt in air and water both', teaching:'Master two worlds and you are apex in both.', root:'Odonata \u2014 300 million year lineage, top predator in both media' },
+  { id:'octopus', name:'Octopus', role:'the reinventor', theta:44, r:0.74, type:'marine', zone:'coast', voice:'I think with eight arms', teaching:'Intelligence doesn\'t require lineage. Every generation reinvents itself.', root:'Giant Pacific Octopus \u2014 individual personalities, 6-month egg guard then death' },
+  { id:'willow', name:'Willow', role:'the welcome', theta:45, r:1.00, type:'tree', zone:'lowlands', voice:'come as you are', teaching:'The seat next to Willow is always the easiest one to take.', root:'Canopy boundary \u2014 where inside meets outside, unit circle' },
+  { id:'bee', name:'Bee', role:'the pollinator', theta:47, r:0.66, type:'insect', zone:'lowlands', voice:'I carry the pollen between worlds', teaching:'The bridge species lets forests fruit and meadows seed.', root:'Bombus vosnesenskii \u2014 native bumblebee, 90% of native bees are specialists' },
+  { id:'otter', name:'Otter', role:'the play', theta:48, r:0.72, type:'mustelid', zone:'water', voice:'play is work and work is play', teaching:'Joy and sustenance in the same moment.', root:'River otter \u2014 social, playful, slides while hunting' },
+  { id:'hawk', name:'Hawk', role:'the formation', theta:50, r:0.80, type:'bird', zone:'lowlands', voice:'I see where everyone is', teaching:'The one who sees the whole clearing at once.', root:'Red-tailed hawk \u2014 formation reader, positional awareness' },
+  { id:'eagle', name:'Eagle', role:'the guardian', theta:52, r:0.82, type:'bird', zone:'lowlands', voice:'I hold the heights and read the wind', teaching:'Guard from the heights. Read the wind before it changes.', root:'Bald eagle \u2014 PNW icon, salmon feeder, recovered from DDT' },
+  { id:'madrone', name:'Madrone', role:'the hearth', theta:53, r:0.65, type:'tree', zone:'lowlands', voice:'the fire was already here', teaching:'Gathering can\'t be forced. Create conditions. Keep showing up.', root:'Pacific madrone \u2014 warm bark, can\'t be transplanted, evergreen when bare' },
+  { id:'owl', name:'Owl', role:'the clock', theta:55, r:0.80, type:'bird', zone:'subalpine', voice:'there is time', teaching:'Time is a gift when someone keeps it for you.', root:'Temporal synchronization \u2014 sequence, cadence, momentum' },
+  { id:'marten', name:'Marten', role:'the signal', theta:56, r:0.68, type:'mammal', zone:'montane', voice:'the signal is still here', teaching:'Your presence proves the infrastructure is intact.', root:'Pacific marten \u2014 obligate old-growth dependent, indicator species' },
+  { id:'bat', name:'Bat', role:'the echolocator', theta:57, r:0.66, type:'mammal', zone:'montane', voice:'I see with sound what eyes cannot find', teaching:'When one sense fails, build another. Sound reveals what light conceals.', root:'Little brown bat \u2014 FM sweeps 20\u201380 kHz, 600 insects per night' },
+  { id:'raven', name:'Raven', role:'the pattern', theta:60, r:0.70, type:'bird', zone:'montane', voice:'I have seen this before', teaching:'What repeats reveals what\'s true.', root:'Corvus corax \u2014 1.5 billion neurons, future planning, perspective-taking' },
+  { id:'thrush', name:'Thrush', role:'the tone', theta:62, r:0.66, type:'bird', zone:'montane', voice:'one sustained note holds the whole forest still', teaching:'The simplest sound can carry the most meaning.', root:'Varied thrush \u2014 single-note whistle defining old-growth acoustic ecology' },
+  { id:'nutcracker', name:'Nutcracker', role:'the cache', theta:64, r:0.68, type:'bird', zone:'subalpine', voice:'my forgotten stores become forests', teaching:'What you forget to retrieve will grow into something greater than what you planned.', root:'Clark\'s nutcracker \u2014 30,000 cached seeds/year, whitebark pine mutualism' },
+  { id:'wren', name:'Wren', role:'the song', theta:65, r:0.68, type:'bird', zone:'foothills', voice:'I don\'t need to be loud \u2014 I need to be precise', teaching:'The smallest body can hold the most complex song.', root:'Pacific wren \u2014 10g, 36 notes/sec, most complex song relative to body size' },
+  { id:'kelp', name:'Kelp', role:'the tide forest', theta:68, r:0.72, type:'alga', zone:'marine', voice:'I grow two feet a day and die in a season', teaching:'Nothing permanent supports the temporary \u2014 and the temporary feeds everything.', root:'Bull kelp \u2014 annual marine forest, foundation ecosystem, collapsing' },
+  { id:'alder', name:'Alder', role:'the resonance', theta:70, r:0.75, type:'tree', zone:'foothills', voice:'the wood remembers the forest', teaching:'The material shapes the sound. The sound carries the place.', root:'Red alder \u2014 nitrogen fixer, Fender Strat body wood, Seattle Sound instrument' },
+  { id:'osprey', name:'Osprey', role:'the horizon', theta:78, r:0.80, type:'bird', zone:'alpine', voice:'I can see it from here \u2014 now watch me dive', teaching:'The highest view demands the deepest dive.', root:'Pandion haliaetus \u2014 only raptor that dives fully underwater, largest nests' },
+  { id:'pika', name:'Pika', role:'the sentinel', theta:80, r:0.55, type:'mammal', zone:'alpine', voice:'the world is warming and I am the first to know', teaching:'The smallest voice from the highest place carries the most urgent message.', root:'American pika \u2014 alpine talus, cannot tolerate warmth, disappearing' },
+  { id:'glacier', name:'Glacier', role:'the archive', theta:82, r:0.70, type:'force', zone:'alpine', voice:'I remember what rain forgets', teaching:'Some memories can only be kept in ice. When I melt, the archive is gone.', root:'Cascade glaciers \u2014 50%+ volume lost since 1960s, rivers depend on melt' }
+];
+
+// ═══════════════════════════════════════════════════════════════
+// TYPE -> ACCENT COLOR MAP
+// ═══════════════════════════════════════════════════════════════
+var TYPE_COLORS = {
+  tree:'#4a7c3f', bird:'#5eb8c4', mammal:'#c8a060', fish:'#2a8a96',
+  salmon:'#2a8a96', marine:'#1b5a8a', echinoderm:'#1b5a8a', crustacean:'#1b5a8a',
+  alga:'#1b5a8a', insect:'#d4881a', force:'#c75b3a', fungus:'#7a6040',
+  symbiosis:'#7a6040', bryophyte:'#7a6040', plant:'#7a6040',
+  amphibian:'#7a6040', concept:'#7a8a8a', canid:'#c8a060', mustelid:'#c8a060',
+  animal:'#c8a060'
+};
+
+function accentFor(type) { return TYPE_COLORS[type] || '#7a8a8a'; }
+
+// ═══════════════════════════════════════════════════════════════
+// ROUTER
+// ═══════════════════════════════════════════════════════════════
+var museParam = new URLSearchParams(window.location.search).get('muse');
+var sortedMuses = MUSES.slice().sort(function(a,b){ return a.theta - b.theta; });
+
+if (museParam) {
+  var muse = MUSES.find(function(m){ return m.id === museParam; });
+  if (muse) showMuse(muse);
+  else showGallery();
+} else {
+  showGallery();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GALLERY
+// ═══════════════════════════════════════════════════════════════
+function showGallery() {
+  document.getElementById('gallery-view').classList.add('active');
+  document.getElementById('muse-view').classList.remove('active');
+  document.title = 'The Groves \u2014 Personal Installations of the 48 Muses';
+
+  var grid = document.getElementById('gallery-grid');
+  var html = '';
+  sortedMuses.forEach(function(m) {
+    var c = accentFor(m.type);
+    html += '<a class="gallery-card" href="grove.html?muse=' + m.id + '" style="--accent:' + c + '">'
+      + '<div class="card-name" style="color:' + c + '">' + m.name + '</div>'
+      + '<div class="card-role">' + m.role + '</div>'
+      + '<div class="card-badges">'
+      + '<span class="badge">' + m.type + '</span>'
+      + '<span class="badge">' + m.zone + '</span>'
+      + '</div>'
+      + '<div class="card-voice">\u201C' + m.voice + '\u201D</div>'
+      + '</a>';
+  });
+  grid.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SINGLE MUSE
+// ═══════════════════════════════════════════════════════════════
+function showMuse(m) {
+  document.getElementById('gallery-view').classList.remove('active');
+  document.getElementById('muse-view').classList.add('active');
+  document.title = m.name + ' \u2014 ' + m.role;
+
+  var c = accentFor(m.type);
+  var glow = c.replace('#','');
+  var r = parseInt(glow.substr(0,2),16), g = parseInt(glow.substr(2,2),16), b = parseInt(glow.substr(4,2),16);
+  var glowRgba = 'rgba(' + r + ',' + g + ',' + b + ',0.06)';
+
+  // CSS custom properties
+  var root = document.documentElement;
+  root.style.setProperty('--accent-text', c);
+  root.style.setProperty('--glow', glowRgba);
+
+  // Header
+  document.getElementById('muse-name').textContent = m.name;
+  document.getElementById('muse-name').style.color = c;
+  document.getElementById('muse-role').textContent = m.role;
+  document.getElementById('badge-type').textContent = m.type;
+  document.getElementById('badge-type').style.borderColor = c;
+  document.getElementById('badge-zone').textContent = m.zone;
+
+  // Nav muse links
+  var idx = sortedMuses.findIndex(function(x){ return x.id === m.id; });
+  var prevIdx = (idx - 1 + sortedMuses.length) % sortedMuses.length;
+  var nextIdx = (idx + 1) % sortedMuses.length;
+
+  document.getElementById('nav-muse-sep').style.display = '';
+  document.getElementById('nav-muse-links').innerHTML =
+    '<a href="grove.html?muse=' + sortedMuses[prevIdx].id + '" style="color:rgba(255,255,255,0.6);text-decoration:none">&larr; ' + sortedMuses[prevIdx].name + '</a>'
+    + ' &nbsp; '
+    + '<a href="grove.html?muse=' + sortedMuses[nextIdx].id + '" style="color:rgba(255,255,255,0.6);text-decoration:none">' + sortedMuses[nextIdx].name + ' &rarr;</a>';
+
+  // Voice
+  document.getElementById('muse-voice').textContent = m.voice;
+
+  // Teaching
+  document.getElementById('muse-teaching').textContent = m.teaching;
+
+  // Root
+  document.getElementById('muse-root').textContent = m.root;
+
+  // Footer
+  document.getElementById('footer-voice').textContent = '\u201C' + m.voice + '\u201D';
+
+  // Prev / Next
+  document.getElementById('prev-muse').href = 'grove.html?muse=' + sortedMuses[prevIdx].id;
+  document.getElementById('prev-muse').textContent = '\u2190 ' + sortedMuses[prevIdx].name + '\'s Grove';
+  document.getElementById('next-muse').href = 'grove.html?muse=' + sortedMuses[nextIdx].id;
+  document.getElementById('next-muse').textContent = sortedMuses[nextIdx].name + '\'s Grove \u2192';
+
+  // Compass link
+  document.getElementById('compass-link').href = 'terrain.html';
+
+  // Team
+  buildTeam(m);
+
+  // Connected
+  buildConnected(m);
+
+  // Mini compass
+  drawMiniCompass(m);
+
+  // Canvas visualization
+  startVisualization(m);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TEAM SECTION
+// ═══════════════════════════════════════════════════════════════
+function buildTeam(m) {
+  var section = document.getElementById('team-section');
+  var grid = document.getElementById('team-grid');
+  var team = (typeof MUSE_TEAMS !== 'undefined') ? MUSE_TEAMS[m.id] : null;
+
+  if (!team || !team.assistants || team.assistants.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+  var html = '';
+  team.assistants.forEach(function(a) {
+    html += '<div class="team-card">'
+      + '<div class="tc-name">' + a.name + '</div>'
+      + '<div class="tc-sci">' + a.sci + '</div>'
+      + '<div class="tc-role">' + a.role + '</div>'
+      + '<div class="tc-why">' + a.why + '</div>'
+      + '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONNECTED MUSES (by proximity in theta + same type)
+// ═══════════════════════════════════════════════════════════════
+function buildConnected(m) {
+  var list = document.getElementById('connected-list');
+  // Find nearest 6 muses by theta distance + type affinity
+  var scored = sortedMuses.filter(function(x){ return x.id !== m.id; }).map(function(x) {
+    var d = Math.abs(x.theta - m.theta);
+    if (d > 45) d = 90 - d;
+    var bonus = (x.type === m.type) ? -5 : 0;
+    var zoneBonus = (x.zone === m.zone) ? -3 : 0;
+    return { muse: x, score: d + bonus + zoneBonus };
+  });
+  scored.sort(function(a,b){ return a.score - b.score; });
+  var neighbors = scored.slice(0, 6);
+
+  var html = '';
+  neighbors.forEach(function(n) {
+    var nc = accentFor(n.muse.type);
+    html += '<a class="connected-link" href="grove.html?muse=' + n.muse.id + '">'
+      + '<span style="color:' + nc + '">' + n.muse.name + '</span> '
+      + '<span class="cl-role">' + n.muse.role + '</span>'
+      + '</a>';
+  });
+  list.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MINI COMPASS
+// ═══════════════════════════════════════════════════════════════
+function drawMiniCompass(m) {
+  var canvas = document.getElementById('mini-compass');
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  var cx = w/2, cy = h/2, rad = w*0.4;
+
+  ctx.clearRect(0,0,w,h);
+
+  // Orbit ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, rad, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(232,220,200,0.08)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Inner ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, rad*0.5, 0, Math.PI*2);
+  ctx.stroke();
+
+  // All muses as dim dots
+  sortedMuses.forEach(function(other) {
+    var a = (other.theta / 90) * Math.PI * 2 - Math.PI/2;
+    var rr = other.r * rad;
+    var ox = cx + Math.cos(a) * rr;
+    var oy = cy + Math.sin(a) * rr;
+    ctx.beginPath();
+    ctx.arc(ox, oy, 2, 0, Math.PI*2);
+    ctx.fillStyle = (other.id === m.id) ? accentFor(m.type) : 'rgba(232,220,200,0.12)';
+    ctx.fill();
+  });
+
+  // Current muse — larger, glowing
+  var angle = (m.theta / 90) * Math.PI * 2 - Math.PI/2;
+  var mr = m.r * rad;
+  var mx = cx + Math.cos(angle) * mr;
+  var my = cy + Math.sin(angle) * mr;
+  var c = accentFor(m.type);
+
+  ctx.beginPath();
+  ctx.arc(mx, my, 6, 0, Math.PI*2);
+  ctx.fillStyle = c;
+  ctx.shadowColor = c;
+  ctx.shadowBlur = 12;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Name label
+  ctx.font = '11px Georgia';
+  ctx.fillStyle = 'rgba(232,220,200,0.5)';
+  ctx.textAlign = 'center';
+  ctx.fillText(m.name, mx, my - 11);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CANVAS VISUALIZATIONS — type-based
+// ═══════════════════════════════════════════════════════════════
+var animFrame = null;
+
+function startVisualization(m) {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  var canvas = document.getElementById('grove-canvas');
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  var c = accentFor(m.type);
+  var t = m.type;
+  var startTime = performance.now();
+
+  function loop(now) {
+    var elapsed = (now - startTime) / 1000;
+    ctx.clearRect(0, 0, w, h);
+
+    if (t === 'tree') drawTree(ctx, w, h, c, m, elapsed);
+    else if (t === 'bird') drawFlight(ctx, w, h, c, m, elapsed);
+    else if (t === 'mammal' || t === 'canid' || t === 'mustelid' || t === 'animal') drawTerritory(ctx, w, h, c, m, elapsed);
+    else if (t === 'fish' || t === 'salmon') drawMigration(ctx, w, h, c, m, elapsed);
+    else if (t === 'marine' || t === 'echinoderm' || t === 'crustacean' || t === 'alga') drawUnderwater(ctx, w, h, c, m, elapsed);
+    else if (t === 'insect') drawInsect(ctx, w, h, c, m, elapsed);
+    else if (t === 'force') drawForce(ctx, w, h, c, m, elapsed);
+    else if (t === 'fungus' || t === 'symbiosis' || t === 'bryophyte' || t === 'plant') drawNetwork(ctx, w, h, c, m, elapsed);
+    else if (t === 'amphibian') drawAmphibian(ctx, w, h, c, m, elapsed);
+    else if (t === 'concept') drawConcept(ctx, w, h, c, m, elapsed);
+    else drawNetwork(ctx, w, h, c, m, elapsed);
+
+    animFrame = requestAnimationFrame(loop);
+  }
+  animFrame = requestAnimationFrame(loop);
+}
+
+// ── TREE ──
+function drawTree(ctx, w, h, c, m, t) {
+  var growth = Math.min(t / 5, 1);
+  var windFactor = m.theta / 90; // 0=upright, 1=windswept
+  var cx = w/2, ground = h * 0.88;
+
+  // Ground line
+  ctx.beginPath();
+  ctx.moveTo(0, ground);
+  ctx.lineTo(w, ground);
+  ctx.strokeStyle = 'rgba(232,220,200,0.06)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Trunk
+  var trunkH = h * 0.5 * growth;
+  var lean = windFactor * 40 * growth;
+  ctx.beginPath();
+  ctx.moveTo(cx - 4, ground);
+  ctx.lineTo(cx + lean - 3, ground - trunkH);
+  ctx.lineTo(cx + lean + 3, ground - trunkH);
+  ctx.lineTo(cx + 4, ground);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(122,96,64,0.6)';
+  ctx.fill();
+
+  // Branches — recursive
+  function branch(x, y, len, angle, depth, maxDepth) {
+    if (depth > maxDepth || len < 4) return;
+    var growthAtDepth = Math.max(0, Math.min(1, (growth * 5 - depth) / 1));
+    if (growthAtDepth <= 0) return;
+    var ex = x + Math.cos(angle) * len * growthAtDepth;
+    var ey = y + Math.sin(angle) * len * growthAtDepth;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = c;
+    ctx.globalAlpha = 0.15 + 0.15 * (1 - depth/maxDepth);
+    ctx.lineWidth = Math.max(1, 3 - depth * 0.5);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // Leaf nodes
+    if (depth >= maxDepth - 1 && growthAtDepth > 0.8) {
+      var pulse = Math.sin(t * 1.5 + x * 0.05 + y * 0.03) * 0.15 + 0.85;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 3 + Math.random(), 0, Math.PI * 2);
+      ctx.fillStyle = c;
+      ctx.globalAlpha = 0.2 * pulse;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    var spread = 0.45 + windFactor * 0.2;
+    var windBias = windFactor * 0.15;
+    branch(ex, ey, len * 0.7, angle - spread + windBias + Math.sin(t * 0.3 + depth) * 0.05, depth+1, maxDepth);
+    branch(ex, ey, len * 0.65, angle + spread + windBias + Math.sin(t * 0.4 + depth) * 0.05, depth+1, maxDepth);
+  }
+
+  var topX = cx + lean;
+  var topY = ground - trunkH;
+  branch(topX, topY, trunkH * 0.4, -Math.PI/2 + windFactor * 0.1, 0, 6);
+}
+
+// ── BIRD FLIGHT ──
+function drawFlight(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+  var radius = Math.min(w, h) * 0.3;
+
+  // Territory circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(232,220,200,0.04)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Flight trail
+  var trailLen = 60;
+  for (var i = 0; i < trailLen; i++) {
+    var tt = t - i * 0.03;
+    var angle = tt * 1.2;
+    var r = radius * (0.7 + 0.3 * Math.sin(tt * 0.5));
+    var bx = cx + Math.cos(angle) * r;
+    var by = cy + Math.sin(angle) * r * 0.6;
+    var alpha = (1 - i/trailLen) * 0.4;
+    ctx.beginPath();
+    ctx.arc(bx, by, 2, 0, Math.PI*2);
+    ctx.fillStyle = c;
+    ctx.globalAlpha = alpha;
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // Bird shape at head
+  var bAngle = t * 1.2;
+  var bR = radius * (0.7 + 0.3 * Math.sin(t * 0.5));
+  var bx = cx + Math.cos(bAngle) * bR;
+  var by = cy + Math.sin(bAngle) * bR * 0.6;
+  var wingSpan = 14 + Math.sin(t * 8) * 6;
+
+  ctx.beginPath();
+  ctx.moveTo(bx - wingSpan, by - wingSpan * 0.3);
+  ctx.quadraticCurveTo(bx, by - 4, bx + wingSpan, by - wingSpan * 0.3);
+  ctx.quadraticCurveTo(bx, by + 2, bx - wingSpan, by - wingSpan * 0.3);
+  ctx.fillStyle = c;
+  ctx.globalAlpha = 0.6;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Center marker
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(232,220,200,0.15)';
+  ctx.fill();
+}
+
+// ── TERRITORY MAP ──
+function drawTerritory(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+
+  // Landscape — dark rolling hills
+  ctx.beginPath();
+  ctx.moveTo(0, h);
+  for (var x = 0; x <= w; x += 5) {
+    var y = cy + Math.sin(x * 0.008 + 1) * 40 + Math.sin(x * 0.015) * 25;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(w, h);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(232,220,200,0.02)';
+  ctx.fill();
+
+  // Territory glow — pulsing region
+  var regions = 5;
+  for (var i = 0; i < regions; i++) {
+    var angle = (i / regions) * Math.PI * 2 + t * 0.2;
+    var dist = 80 + Math.sin(t * 0.5 + i * 1.3) * 30;
+    var rx = cx + Math.cos(angle) * dist;
+    var ry = cy + Math.sin(angle) * dist * 0.5;
+    var grad = ctx.createRadialGradient(rx, ry, 0, rx, ry, 60);
+    grad.addColorStop(0, c.replace(')', ',0.08)').replace('rgb', 'rgba'));
+    var cc = hexToRgba(c, 0.08);
+    var cc0 = hexToRgba(c, 0);
+    grad.addColorStop(0, cc);
+    grad.addColorStop(1, cc0);
+    ctx.beginPath();
+    ctx.arc(rx, ry, 60, 0, Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  // Territory boundary
+  ctx.beginPath();
+  for (var i = 0; i <= 64; i++) {
+    var a = (i / 64) * Math.PI * 2;
+    var rr = 120 + Math.sin(a * 3 + t * 0.3) * 25 + Math.sin(a * 5) * 15;
+    var px = cx + Math.cos(a) * rr;
+    var py = cy + Math.sin(a) * rr * 0.55;
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = hexToRgba(c, 0.15);
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Paw prints
+  for (var i = 0; i < 8; i++) {
+    var angle = t * 0.15 + i * 0.8;
+    var dist = 40 + i * 15;
+    var px = cx + Math.cos(angle) * dist;
+    var py = cy + Math.sin(angle) * dist * 0.5;
+    drawPaw(ctx, px, py, c, 0.15 + (1 - i/8) * 0.2);
+  }
+}
+
+function drawPaw(ctx, x, y, c, alpha) {
+  ctx.globalAlpha = alpha;
+  // Pad
+  ctx.beginPath();
+  ctx.ellipse(x, y, 4, 5, 0, 0, Math.PI*2);
+  ctx.fillStyle = c;
+  ctx.fill();
+  // Toes
+  var toes = [[-4,-5],[-1.5,-7],[1.5,-7],[4,-5]];
+  toes.forEach(function(t) {
+    ctx.beginPath();
+    ctx.arc(x + t[0], y + t[1], 2, 0, Math.PI*2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// ── FISH MIGRATION ──
+function drawMigration(ctx, w, h, c, m, t) {
+  // River path
+  var riverPts = [];
+  for (var x = 0; x <= w; x += 10) {
+    var y = h/2 + Math.sin(x * 0.006 + 0.5) * 60 + Math.sin(x * 0.012) * 30;
+    riverPts.push({x: x, y: y});
+  }
+
+  // River banks
+  ctx.beginPath();
+  riverPts.forEach(function(p, i) {
+    if (i === 0) ctx.moveTo(p.x, p.y - 50); else ctx.lineTo(p.x, p.y - 50);
+  });
+  for (var i = riverPts.length - 1; i >= 0; i--) {
+    ctx.lineTo(riverPts[i].x, riverPts[i].y + 50);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(42,138,150,0.04)';
+  ctx.fill();
+
+  // Current particles flowing downstream
+  for (var i = 0; i < 40; i++) {
+    var seed = i * 137.5;
+    var px = ((seed + t * 30) % (w + 40)) - 20;
+    var idx = Math.floor(px / 10);
+    idx = Math.max(0, Math.min(idx, riverPts.length - 1));
+    var baseY = riverPts[idx].y;
+    var py = baseY + Math.sin(seed * 0.1) * 35;
+    ctx.beginPath();
+    ctx.arc(px, py, 1.5, 0, Math.PI*2);
+    ctx.fillStyle = hexToRgba(c, 0.1);
+    ctx.fill();
+  }
+
+  // Fish swimming upstream
+  for (var i = 0; i < 6; i++) {
+    var seed = i * 234.7;
+    var fishX = w - ((seed + t * (40 + i * 8)) % (w + 100)) + 50;
+    var idx = Math.floor(Math.max(0, Math.min(fishX, w)) / 10);
+    idx = Math.max(0, Math.min(idx, riverPts.length - 1));
+    var baseY = riverPts[idx].y;
+    var fishY = baseY + Math.sin(seed + t * 3) * 20;
+
+    ctx.beginPath();
+    ctx.ellipse(fishX, fishY, 8, 3, 0, 0, Math.PI*2);
+    ctx.fillStyle = c;
+    ctx.globalAlpha = 0.4;
+    ctx.fill();
+    // Tail
+    ctx.beginPath();
+    ctx.moveTo(fishX + 8, fishY);
+    ctx.lineTo(fishX + 14, fishY - 4);
+    ctx.lineTo(fishX + 14, fishY + 4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // Ocean label (right) and spawning ground label (left)
+  ctx.font = '11px Georgia';
+  ctx.fillStyle = 'rgba(232,220,200,0.15)';
+  ctx.textAlign = 'right';
+  ctx.fillText('ocean', w - 20, h - 20);
+  ctx.textAlign = 'left';
+  ctx.fillText('spawning ground', 20, h - 20);
+}
+
+// ── UNDERWATER ──
+function drawUnderwater(ctx, w, h, c, m, t) {
+  // Water gradient
+  var grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(27,90,138,0.03)');
+  grad.addColorStop(1, 'rgba(27,90,138,0.08)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // Floating particles (plankton)
+  for (var i = 0; i < 60; i++) {
+    var seed = i * 97.3;
+    var px = (seed * 7.1 + Math.sin(t * 0.3 + i) * 30) % w;
+    var py = (seed * 3.7 + t * (5 + (i % 3) * 3)) % h;
+    var sz = 1 + (i % 3);
+    ctx.beginPath();
+    ctx.arc(px, py, sz, 0, Math.PI*2);
+    ctx.fillStyle = hexToRgba(c, 0.08 + Math.sin(t + i) * 0.04);
+    ctx.fill();
+  }
+
+  // Gentle current lines
+  for (var i = 0; i < 8; i++) {
+    var y = h * 0.15 + i * h * 0.1;
+    ctx.beginPath();
+    for (var x = 0; x <= w; x += 8) {
+      var yy = y + Math.sin(x * 0.005 + t * 0.5 + i * 0.7) * 12;
+      if (x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+    }
+    ctx.strokeStyle = hexToRgba(c, 0.04);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Creature at center with gentle motion
+  var cx = w/2 + Math.sin(t * 0.7) * 20;
+  var cy = h/2 + Math.sin(t * 0.5) * 15;
+  var glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50);
+  glow.addColorStop(0, hexToRgba(c, 0.2));
+  glow.addColorStop(1, hexToRgba(c, 0));
+  ctx.beginPath();
+  ctx.arc(cx, cy, 50, 0, Math.PI*2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, 12, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba(c, 0.4);
+  ctx.fill();
+
+  // Tentacles/legs for variety
+  for (var i = 0; i < 5; i++) {
+    var a = (i / 5) * Math.PI * 2 + t * 0.3;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    var ex = cx + Math.cos(a) * (25 + Math.sin(t * 2 + i) * 8);
+    var ey = cy + Math.sin(a) * (25 + Math.sin(t * 2 + i) * 8);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = hexToRgba(c, 0.15);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+// ── INSECT ──
+function drawInsect(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+
+  // Iridescent trail
+  var trailLen = 80;
+  for (var i = 0; i < trailLen; i++) {
+    var tt = t - i * 0.02;
+    var ix = cx + Math.sin(tt * 4.3) * 150 + Math.cos(tt * 2.1) * 100;
+    var iy = cy + Math.cos(tt * 3.7) * 80 + Math.sin(tt * 1.9) * 60;
+    var alpha = (1 - i/trailLen) * 0.3;
+    var hue = ((t * 60 + i * 3) % 360);
+    ctx.beginPath();
+    ctx.arc(ix, iy, 2, 0, Math.PI*2);
+    ctx.fillStyle = 'hsla(' + hue + ',60%,50%,' + alpha + ')';
+    ctx.fill();
+  }
+
+  // Current position
+  var bx = cx + Math.sin(t * 4.3) * 150 + Math.cos(t * 2.1) * 100;
+  var by = cy + Math.cos(t * 3.7) * 80 + Math.sin(t * 1.9) * 60;
+
+  // Wings
+  var wingA = Math.sin(t * 25) * 0.4;
+  ctx.save();
+  ctx.translate(bx, by);
+
+  // Left wing
+  ctx.beginPath();
+  ctx.ellipse(-6, -2, 10, 5, -0.5 + wingA, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba(c, 0.25);
+  ctx.fill();
+
+  // Right wing
+  ctx.beginPath();
+  ctx.ellipse(6, -2, 10, 5, 0.5 - wingA, 0, Math.PI*2);
+  ctx.fill();
+
+  // Body
+  ctx.beginPath();
+  ctx.ellipse(0, 0, 4, 6, 0, 0, Math.PI*2);
+  ctx.fillStyle = c;
+  ctx.globalAlpha = 0.5;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  ctx.restore();
+}
+
+// ── FORCE ──
+function drawForce(ctx, w, h, c, m, t) {
+  if (m.id === 'fire') drawFire(ctx, w, h, c, t);
+  else if (m.id === 'fog') drawFog(ctx, w, h, c, t);
+  else if (m.id === 'rain') drawRain(ctx, w, h, c, t);
+  else if (m.id === 'waterfall') drawWaterfall(ctx, w, h, c, t);
+  else if (m.id === 'glacier') drawGlacier(ctx, w, h, c, t);
+  else drawFire(ctx, w, h, c, t); // fallback
+}
+
+function drawFire(ctx, w, h, c, t) {
+  var cx = w/2, ground = h * 0.85;
+
+  // Ground
+  ctx.beginPath();
+  ctx.moveTo(0, ground);
+  ctx.lineTo(w, ground);
+  ctx.strokeStyle = 'rgba(232,220,200,0.06)';
+  ctx.stroke();
+
+  // Embers and sparks
+  for (var i = 0; i < 80; i++) {
+    var seed = i * 73.1;
+    var age = (t * (0.3 + (i%5)*0.1) + seed) % 4;
+    var px = cx + Math.sin(seed) * (60 + seed % 80) + Math.sin(t + i * 0.5) * 10;
+    var py = ground - age * (h * 0.2) - Math.sin(age * 2) * 20;
+    var sz = Math.max(0.5, 2.5 - age * 0.5);
+    var alpha = Math.max(0, 0.6 - age * 0.15);
+
+    // Color shift: orange -> red -> dim
+    var r = 199 + (age < 1 ? 56 : 0);
+    var g = 91 - age * 20;
+    var b = 58 - age * 10;
+    ctx.beginPath();
+    ctx.arc(px, py, sz, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(' + Math.min(255,r) + ',' + Math.max(0,g) + ',' + Math.max(0,b) + ',' + alpha + ')';
+    ctx.fill();
+  }
+
+  // Fire glow at base
+  var glow = ctx.createRadialGradient(cx, ground, 0, cx, ground, 100);
+  glow.addColorStop(0, 'rgba(199,91,58,0.12)');
+  glow.addColorStop(1, 'rgba(199,91,58,0)');
+  ctx.beginPath();
+  ctx.arc(cx, ground, 100, 0, Math.PI*2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+}
+
+function drawFog(ctx, w, h, c, t) {
+  for (var layer = 0; layer < 6; layer++) {
+    var y = h * 0.2 + layer * h * 0.12;
+    var speed = 0.3 + layer * 0.1;
+    var offset = t * speed * 40 + layer * 200;
+
+    for (var i = 0; i < 12; i++) {
+      var seed = layer * 1000 + i * 137;
+      var px = ((seed + offset) % (w + 300)) - 150;
+      var py = y + Math.sin(seed * 0.01 + t * 0.3) * 20;
+      var rx = 80 + (seed % 60);
+      var ry = 15 + (seed % 10);
+      var alpha = 0.03 + Math.sin(t * 0.5 + seed * 0.1) * 0.015;
+
+      ctx.beginPath();
+      ctx.ellipse(px, py, rx, ry, 0, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(200,200,210,' + alpha + ')';
+      ctx.fill();
+    }
+  }
+}
+
+function drawRain(ctx, w, h, c, t) {
+  for (var i = 0; i < 120; i++) {
+    var seed = i * 47.3;
+    var px = (seed * 11.7) % w;
+    var py = ((seed * 3.1 + t * 300) % (h + 30)) - 15;
+    var len = 8 + (seed % 12);
+
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px - 1, py + len);
+    ctx.strokeStyle = 'rgba(150,180,200,0.12)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Puddle ripples at bottom
+  for (var i = 0; i < 6; i++) {
+    var seed = i * 271;
+    var px = (seed * 7) % w;
+    var py = h * 0.85 + (seed % 30);
+    var rippleAge = (t * 2 + seed * 0.01) % 2;
+    var rippleR = rippleAge * 20;
+    var alpha = Math.max(0, 0.1 - rippleAge * 0.05);
+    ctx.beginPath();
+    ctx.ellipse(px, py, rippleR, rippleR * 0.3, 0, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(150,180,200,' + alpha + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+}
+
+function drawWaterfall(ctx, w, h, c, t) {
+  var cx = w/2, top = h * 0.1, bottom = h * 0.75;
+
+  // Cliff edges
+  ctx.beginPath();
+  ctx.moveTo(cx - 60, top);
+  ctx.lineTo(cx - 60, bottom);
+  ctx.moveTo(cx + 60, top);
+  ctx.lineTo(cx + 60, bottom);
+  ctx.strokeStyle = 'rgba(232,220,200,0.06)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Falling water particles
+  for (var i = 0; i < 80; i++) {
+    var seed = i * 31.7;
+    var px = cx + (Math.sin(seed) * 40);
+    var age = (t * (1.5 + (seed % 5) * 0.2) + seed * 0.1) % 3;
+    var py = top + age * (bottom - top) / 3 * 1.5;
+    if (py > bottom + 30) continue;
+    var spread = (py > bottom) ? (py - bottom) * 2 : 0;
+    px += Math.sin(seed * 3) * spread;
+    var alpha = 0.15 - age * 0.03;
+
+    ctx.beginPath();
+    ctx.arc(px, Math.min(py, bottom + 20), 2, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(150,190,220,' + Math.max(0, alpha) + ')';
+    ctx.fill();
+  }
+
+  // Mist at base
+  for (var i = 0; i < 8; i++) {
+    var seed = i * 197;
+    var mx = cx + Math.sin(t * 0.5 + seed) * (60 + i * 15);
+    var my = bottom + 10 + Math.sin(seed) * 15;
+    ctx.beginPath();
+    ctx.ellipse(mx, my, 40 + i * 5, 10, 0, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(200,210,220,0.02)';
+    ctx.fill();
+  }
+
+  // Pool
+  ctx.beginPath();
+  ctx.ellipse(cx, bottom + 30, 120, 20, 0, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(42,138,150,0.04)';
+  ctx.fill();
+}
+
+function drawGlacier(ctx, w, h, c, t) {
+  var cx = w/2, cy = h/2;
+
+  // Ice crystal growth
+  function crystal(x, y, size, angle, depth) {
+    if (depth > 4 || size < 3) return;
+    var growth = Math.min(1, t / (3 + depth));
+    var ex = x + Math.cos(angle) * size * growth;
+    var ey = y + Math.sin(angle) * size * growth;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = hexToRgba('#a0c0e0', 0.1 + 0.05 * (1 - depth/5));
+    ctx.lineWidth = Math.max(0.5, 2 - depth * 0.4);
+    ctx.stroke();
+
+    if (growth > 0.5) {
+      var branches = 6;
+      for (var i = 0; i < branches; i++) {
+        var ba = angle + (i - branches/2 + 0.5) * (Math.PI / 3 / branches);
+        crystal(ex, ey, size * 0.5, ba, depth + 1);
+      }
+    }
+  }
+
+  // Multiple crystals
+  for (var i = 0; i < 5; i++) {
+    var seed = i * 444;
+    var sx = cx + Math.cos(seed) * 150;
+    var sy = cy + Math.sin(seed) * 80;
+    for (var a = 0; a < 6; a++) {
+      crystal(sx, sy, 40 + i * 5, a * Math.PI / 3, 0);
+    }
+  }
+
+  // Slow shimmer
+  for (var i = 0; i < 20; i++) {
+    var seed = i * 83;
+    var px = (seed * 13) % w;
+    var py = (seed * 7) % h;
+    var shimmer = Math.sin(t * 1.5 + seed * 0.1) * 0.5 + 0.5;
+    ctx.beginPath();
+    ctx.arc(px, py, 1, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(180,210,240,' + (shimmer * 0.15) + ')';
+    ctx.fill();
+  }
+}
+
+// ── NETWORK (fungus/symbiosis/bryophyte/plant) ──
+function drawNetwork(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+  var growth = Math.min(1, t / 4);
+
+  // Mycelial network from center
+  function branch(x, y, len, angle, depth, maxD) {
+    if (depth > maxD || len < 5) return;
+    var g = Math.max(0, Math.min(1, (growth * (maxD + 1) - depth)));
+    if (g <= 0) return;
+
+    var ex = x + Math.cos(angle) * len * g;
+    var ey = y + Math.sin(angle) * len * g;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = hexToRgba(c, 0.08 + 0.08 * (1 - depth/maxD));
+    ctx.lineWidth = Math.max(0.5, 2.5 - depth * 0.4);
+    ctx.stroke();
+
+    // Node
+    if (g > 0.8) {
+      var pulse = Math.sin(t * 2 + depth + x * 0.01) * 0.1 + 0.15;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 2 + (maxD - depth), 0, Math.PI*2);
+      ctx.fillStyle = hexToRgba(c, pulse);
+      ctx.fill();
+    }
+
+    var spread = 0.5 + Math.sin(depth * 1.5) * 0.2;
+    var jitter = Math.sin(t * 0.2 + depth * 2) * 0.08;
+    branch(ex, ey, len * 0.65, angle - spread + jitter, depth + 1, maxD);
+    branch(ex, ey, len * 0.6, angle + spread + jitter, depth + 1, maxD);
+    if (depth < 2) {
+      branch(ex, ey, len * 0.5, angle + jitter, depth + 1, maxD);
+    }
+  }
+
+  // Multiple root directions
+  var arms = 8;
+  for (var i = 0; i < arms; i++) {
+    var a = (i / arms) * Math.PI * 2;
+    branch(cx, cy, 80, a, 0, 5);
+  }
+
+  // Center node
+  ctx.beginPath();
+  ctx.arc(cx, cy, 5, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba(c, 0.3);
+  ctx.fill();
+}
+
+// ── AMPHIBIAN ──
+function drawAmphibian(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+
+  // Water region (right half)
+  ctx.fillStyle = 'rgba(42,138,150,0.03)';
+  ctx.fillRect(w * 0.55, 0, w * 0.45, h);
+
+  // Land region (left half)
+  ctx.fillStyle = 'rgba(74,124,63,0.03)';
+  ctx.fillRect(0, 0, w * 0.45, h);
+
+  // Boundary (stream)
+  ctx.beginPath();
+  for (var y = 0; y <= h; y += 5) {
+    var x = cx + Math.sin(y * 0.015 + t * 0.3) * 30;
+    if (y === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(100,160,180,0.1)';
+  ctx.lineWidth = 40;
+  ctx.stroke();
+  ctx.lineWidth = 1;
+
+  // Creature moving between land and water
+  var phase = t * 0.4;
+  var creatureX = cx + Math.sin(phase) * 150;
+  var creatureY = cy + Math.cos(phase * 0.7) * 60;
+
+  // Body
+  ctx.beginPath();
+  ctx.ellipse(creatureX, creatureY, 12, 8, Math.sin(phase) * 0.3, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba(c, 0.35);
+  ctx.fill();
+
+  // Eyes
+  ctx.beginPath();
+  ctx.arc(creatureX - 4, creatureY - 5, 2, 0, Math.PI*2);
+  ctx.arc(creatureX + 4, creatureY - 5, 2, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba(c, 0.5);
+  ctx.fill();
+
+  // Legs with motion
+  var legPhase = Math.sin(t * 3) * 0.3;
+  [[-10, 4, legPhase], [10, 4, -legPhase], [-8, -3, -legPhase], [8, -3, legPhase]].forEach(function(leg) {
+    ctx.beginPath();
+    ctx.moveTo(creatureX + leg[0], creatureY + leg[1]);
+    ctx.lineTo(creatureX + leg[0] * 1.8 + leg[2] * 10, creatureY + leg[1] * 1.5);
+    ctx.strokeStyle = hexToRgba(c, 0.25);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  });
+
+  // Ripples in water
+  if (creatureX > cx) {
+    var ripAge = (t * 2) % 3;
+    ctx.beginPath();
+    ctx.ellipse(creatureX, creatureY + 10, ripAge * 10, ripAge * 3, 0, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(100,160,180,' + Math.max(0, 0.1 - ripAge * 0.03) + ')';
+    ctx.stroke();
+  }
+
+  // Labels
+  ctx.font = '11px Georgia';
+  ctx.fillStyle = 'rgba(232,220,200,0.12)';
+  ctx.textAlign = 'center';
+  ctx.fillText('land', w * 0.2, h - 20);
+  ctx.fillText('water', w * 0.8, h - 20);
+}
+
+// ── CONCEPT ──
+function drawConcept(ctx, w, h, c, m, t) {
+  var cx = w/2, cy = h/2;
+
+  // Blueprint grid
+  ctx.strokeStyle = 'rgba(122,138,138,0.04)';
+  ctx.lineWidth = 1;
+  var gridSize = 40;
+  for (var x = 0; x <= w; x += gridSize) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, h);
+    ctx.stroke();
+  }
+  for (var y = 0; y <= h; y += gridSize) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+
+  // Geometric construction — drawing lines with precision
+  var shapes = 5;
+  for (var s = 0; s < shapes; s++) {
+    var sideCount = 3 + s;
+    var radius = 40 + s * 30;
+    var drawProgress = Math.min(1, Math.max(0, (t - s * 0.8) / 2));
+    var rotation = t * 0.1 * (s % 2 === 0 ? 1 : -1);
+
+    ctx.beginPath();
+    var totalSides = sideCount;
+    var drawnSides = drawProgress * totalSides;
+    for (var i = 0; i <= Math.min(totalSides, Math.ceil(drawnSides)); i++) {
+      var frac = (i === Math.ceil(drawnSides)) ? (drawnSides % 1) : 1;
+      if (i === 0 && frac === 0) continue;
+      var a0 = ((i - 1) / totalSides) * Math.PI * 2 + rotation;
+      var a1 = (i / totalSides) * Math.PI * 2 + rotation;
+      var actualAngle = a0 + (a1 - a0) * frac;
+
+      if (i === 0 || (i === 1 && frac < 1)) {
+        var startA = (0 / totalSides) * Math.PI * 2 + rotation;
+        ctx.moveTo(cx + Math.cos(startA) * radius, cy + Math.sin(startA) * radius);
+      }
+      ctx.lineTo(cx + Math.cos(actualAngle) * radius, cy + Math.sin(actualAngle) * radius);
+    }
+    ctx.strokeStyle = hexToRgba(c, 0.1 + s * 0.03);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Vertices
+    if (drawProgress > 0) {
+      for (var i = 0; i < Math.min(totalSides, Math.floor(drawnSides) + 1); i++) {
+        var a = (i / totalSides) * Math.PI * 2 + rotation;
+        ctx.beginPath();
+        ctx.arc(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius, 2, 0, Math.PI*2);
+        ctx.fillStyle = hexToRgba(c, 0.3);
+        ctx.fill();
+      }
+    }
+  }
+
+  // Center crosshair
+  ctx.beginPath();
+  ctx.moveTo(cx - 10, cy);
+  ctx.lineTo(cx + 10, cy);
+  ctx.moveTo(cx, cy - 10);
+  ctx.lineTo(cx, cy + 10);
+  ctx.strokeStyle = hexToRgba(c, 0.2);
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UTILITY
+// ═══════════════════════════════════════════════════════════════
+function hexToRgba(hex, alpha) {
+  hex = hex.replace('#', '');
+  var r = parseInt(hex.substr(0,2), 16);
+  var g = parseInt(hex.substr(2,2), 16);
+  var b = parseInt(hex.substr(4,2), 16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+</script>
+</body>
+</html>

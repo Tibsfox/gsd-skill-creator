@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bestiary — Cedar's Illuminated Manuscript</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* ═══ Nav ═══ */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* ═══ Hero ═══ */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.06) 0%, transparent 60%),
+                  linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: #e8dcc8;
+      margin-bottom: 0.3rem;
+    }
+    .hero .subtitle {
+      font-size: 1rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    .hero .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .hero .ornament-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,184,144,0.3), transparent);
+    }
+    .hero .ornament-dot {
+      width: 6px;
+      height: 6px;
+      background: #c75b3a;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(199,91,58,0.5);
+    }
+    .hero .count-line {
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.35);
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    /* ═══ Filter Bar ═══ */
+    .filter-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 0.5rem;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+      align-items: center;
+    }
+    .filter-label {
+      font-size: 0.7rem;
+      color: rgba(232,220,200,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-right: 0.5rem;
+      min-width: 50px;
+    }
+    .filter-btn {
+      background: rgba(26,58,42,0.4);
+      border: 1px solid rgba(200,184,144,0.12);
+      color: rgba(232,220,200,0.5);
+      padding: 0.3rem 0.65rem;
+      font-size: 0.72rem;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.25s;
+      letter-spacing: 0.02em;
+    }
+    .filter-btn:hover {
+      background: rgba(26,58,42,0.7);
+      color: rgba(232,220,200,0.8);
+      border-color: rgba(200,184,144,0.25);
+    }
+    .filter-btn.active {
+      background: rgba(26,58,42,0.8);
+      color: #e8dcc8;
+      border-color: rgba(200,184,144,0.35);
+    }
+
+    /* ═══ Grid ═══ */
+    .grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem 3rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ═══ Cards ═══ */
+    .card {
+      background: linear-gradient(145deg, rgba(26,58,42,0.25) 0%, rgba(13,26,18,0.6) 100%);
+      border: 1px solid rgba(200,184,144,0.08);
+      border-radius: 4px;
+      padding: 1.3rem 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--type-color);
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .card:hover {
+      border-color: rgba(200,184,144,0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card:hover::before {
+      opacity: 0.9;
+    }
+    .card.expanded {
+      border-color: rgba(200,184,144,0.25);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.15rem;
+    }
+    .card-name {
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--type-color);
+      letter-spacing: 0.04em;
+    }
+    .card-theta {
+      font-size: 0.65rem;
+      color: rgba(232,220,200,0.25);
+      font-style: italic;
+    }
+    .card-role {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.55);
+      margin-bottom: 0.75rem;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.6rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'Courier New', monospace;
+    }
+    .badge-type {
+      background: var(--type-color);
+      color: #0d1a12;
+      opacity: 0.85;
+    }
+    .badge-zone {
+      background: rgba(200,184,144,0.12);
+      color: rgba(232,220,200,0.55);
+      border: 1px solid rgba(200,184,144,0.15);
+    }
+
+    .card-voice {
+      font-style: italic;
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.65);
+      padding: 0.5rem 0;
+      border-top: 1px solid rgba(200,184,144,0.06);
+      line-height: 1.5;
+    }
+    .card-voice::before {
+      content: '\201C';
+      color: var(--type-color);
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+    .card-voice::after {
+      content: '\201D';
+      color: var(--type-color);
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+
+    /* ═══ Expanded Details ═══ */
+    .card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .card.expanded .card-details {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .detail-section {
+      padding-top: 0.7rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(200,184,144,0.06);
+    }
+    .detail-label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(232,220,200,0.3);
+      margin-bottom: 0.25rem;
+    }
+    .detail-teaching {
+      font-size: 0.85rem;
+      color: #e8dcc8;
+      line-height: 1.6;
+      margin-bottom: 0.7rem;
+    }
+    .detail-root {
+      font-size: 0.78rem;
+      color: rgba(232,220,200,0.6);
+      line-height: 1.55;
+      margin-bottom: 0.7rem;
+    }
+    .trails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .trail-chip {
+      font-size: 0.6rem;
+      padding: 0.15rem 0.4rem;
+      background: rgba(26,58,42,0.5);
+      border: 1px solid rgba(200,184,144,0.1);
+      border-radius: 2px;
+      color: rgba(232,220,200,0.5);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .trail-chip:hover {
+      background: rgba(26,58,42,0.8);
+      color: #e8dcc8;
+      border-color: rgba(200,184,144,0.25);
+    }
+
+    /* ═══ Footer ═══ */
+    .footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,184,144,0.2), transparent);
+      margin: 0 auto 2rem;
+    }
+    .footer-text {
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.4);
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+    .footer-link {
+      color: rgba(199,91,58,0.7);
+      text-decoration: none;
+      font-style: italic;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: #c75b3a;
+    }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 2rem; }
+      .grid { grid-template-columns: 1fr; }
+      .grid-container { padding: 1rem 1rem 3rem; }
+      .filter-section { padding: 1rem 1rem 0.5rem; }
+    }
+
+    /* ═══ Illuminated Drop Cap Effect ═══ */
+    .card-name::first-letter {
+      font-size: 1.05em;
+    }
+
+    /* ═══ No Results ═══ */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: rgba(232,220,200,0.3);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    /* ═══ Scroll-to-top ═══ */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 36px;
+      height: 36px;
+      background: rgba(26,58,42,0.8);
+      border: 1px solid rgba(200,184,144,0.15);
+      border-radius: 50%;
+      color: rgba(232,220,200,0.5);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 100;
+    }
+    .scroll-top:hover {
+      background: rgba(26,58,42,1);
+      color: #e8dcc8;
+      border-color: rgba(200,184,144,0.3);
+    }
+    .scroll-top.visible { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a class="active" href="bestiary.html">The Bestiary</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">The Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="ornament">
+    <span class="ornament-line"></span>
+    <span class="ornament-dot"></span>
+    <span class="ornament-line"></span>
+  </div>
+  <h1>The Bestiary</h1>
+  <p class="subtitle">Cedar's Illuminated Manuscript — forty-one voices of the PNW forest</p>
+  <p class="count-line">Arranged by compass bearing from true north</p>
+</section>
+
+<!-- ═══ Filters ═══ -->
+<section class="filter-section">
+  <div class="filter-row">
+    <span class="filter-label">Type</span>
+    <button class="filter-btn active" data-filter="type" data-value="all">All</button>
+    <button class="filter-btn" data-filter="type" data-value="tree">Trees (6)</button>
+    <button class="filter-btn" data-filter="type" data-value="bird">Birds (7)</button>
+    <button class="filter-btn" data-filter="type" data-value="mammal">Mammals (5)</button>
+    <button class="filter-btn" data-filter="type" data-value="fish">Fish (2)</button>
+    <button class="filter-btn" data-filter="type" data-value="marine">Marine (2)</button>
+    <button class="filter-btn" data-filter="type" data-value="insect">Insects (2)</button>
+    <button class="filter-btn" data-filter="type" data-value="force">Forces (3)</button>
+    <button class="filter-btn" data-filter="type" data-value="plant">Plants (2)</button>
+    <button class="filter-btn" data-filter="type" data-value="underground">Underground (4)</button>
+    <button class="filter-btn" data-filter="type" data-value="other">Other (8)</button>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Zone</span>
+    <button class="filter-btn active" data-filter="zone" data-value="all">All Zones</button>
+    <button class="filter-btn" data-filter="zone" data-value="alpine">Alpine</button>
+    <button class="filter-btn" data-filter="zone" data-value="subalpine">Subalpine</button>
+    <button class="filter-btn" data-filter="zone" data-value="montane">Montane</button>
+    <button class="filter-btn" data-filter="zone" data-value="foothills">Foothills</button>
+    <button class="filter-btn" data-filter="zone" data-value="lowlands">Lowlands</button>
+    <button class="filter-btn" data-filter="zone" data-value="coast">Coast</button>
+    <button class="filter-btn" data-filter="zone" data-value="water">Water</button>
+    <button class="filter-btn" data-filter="zone" data-value="underground">Underground</button>
+    <button class="filter-btn" data-filter="zone" data-value="air">Air</button>
+    <button class="filter-btn" data-filter="zone" data-value="marine">Marine</button>
+    <button class="filter-btn" data-filter="zone" data-value="all-zones">All Elevations</button>
+  </div>
+</section>
+
+<!-- ═══ Card Grid ═══ -->
+<section class="grid-container">
+  <div class="grid" id="bestiary-grid"></div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<section class="footer">
+  <div class="footer-divider"></div>
+  <p class="footer-text">
+    Forty-one voices. Six trees. Seven birds. Five mammals. Two fish. Two marine creatures.
+    Two insects. Three forces. Two plants. One fungus. One lichen. One bryophyte. One macro-alga.
+    One amphibian. One cephalopod. One echinoderm. One canid. One mustelid. One salmon. One concept.
+    Two animals. One presence. One symbiosis.<br><br>
+    Every layer of the Pacific Northwest ecosystem from the glacial archive to the underground network.
+    Each one teaches something the others cannot.
+  </p>
+  <a class="footer-link" href="../compass.html">Explore their positions on The Compass &rarr;</a>
+</section>
+
+<!-- ═══ Scroll to Top ═══ -->
+<button class="scroll-top" id="scroll-top" title="Back to top">&uarr;</button>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// The Bestiary — 41 Muses of the PNW Forest
+// ═══════════════════════════════════════════════════════════════════
+
+const TYPE_COLORS = {
+  tree:         '#4a7c3f',
+  bird:         '#5eb8c4',
+  mammal:       '#c8a060',
+  fish:         '#2a8a96',
+  marine:       '#1b5a8a',
+  insect:       '#d4881a',
+  force:        '#c75b3a',
+  plant:        '#4a7c3f',
+  fungus:       '#7a6040',
+  symbiosis:    '#7a6040',
+  bryophyte:    '#7a6040',
+  'macro-alga': '#7a6040',
+  amphibian:    '#2a8a96',
+  cephalopod:   '#1b5a8a',
+  echinoderm:   '#1b5a8a',
+  canid:        '#c8a060',
+  mustelid:     '#c8a060',
+  salmon:       '#2a8a96',
+  concept:      '#7a8a8a',
+  animal:       '#c8a060',
+  presence:     '#7a8a8a'
+};
+
+// Filter groupings: which types belong to which filter button
+const TYPE_GROUPS = {
+  tree:        ['tree'],
+  bird:        ['bird'],
+  mammal:      ['mammal'],
+  fish:        ['fish', 'salmon'],
+  marine:      ['marine', 'macro-alga', 'echinoderm'],
+  insect:      ['insect'],
+  force:       ['force'],
+  plant:       ['plant'],
+  underground: ['fungus', 'symbiosis', 'bryophyte'],
+  other:       ['concept', 'animal', 'presence', 'canid', 'mustelid', 'cephalopod', 'amphibian']
+};
+
+const MUSES = [
+  { id:'cedar', name:'Cedar', role:'the record', theta:0, r:0.95, type:'tree', zone:'montane',
+    voice:'the record shows', teaching:'True leadership is measured by your descendants\u2019 survival.',
+    root:'Western red cedar \u2014 Tree of Life, 1,500+ year lifespan, nurse log for 8\u201310 generations',
+    trails:['Hemlock','Raven','Owl','Foxy','Chinook','Moss','Chanterelle','Sturgeon'] },
+  { id:'lex', name:'Lex', role:'the specification', theta:5, r:0.90, type:'concept', zone:'lowlands',
+    voice:'measure twice', teaching:'The constraint is the craft.',
+    root:'Execution discipline \u2014 pipeline rigor, verification, near the real axis',
+    trails:['Hemlock'] },
+  { id:'moss', name:'Moss', role:'the carpet', theta:6, r:0.58, type:'bryophyte', zone:'underground',
+    voice:'I ask nothing but moisture and time', teaching:'The most foundational work grows on what others build.',
+    root:'Hypnum/Hylocomium \u2014 defines PNW visual, carpets every old-growth floor, old-growth indicator',
+    trails:['Lichen','Cedar','Fog'] },
+  { id:'lichen', name:'Lichen', role:'the breath', theta:8, r:0.60, type:'symbiosis', zone:'underground',
+    voice:'I am three, and we breathe for you', teaching:'The most profound partnerships are ones where no partner can exist alone.',
+    root:'Lobaria oregana \u2014 three organisms merged, fixes nitrogen from air, forest transparency indicator',
+    trails:['Moss'] },
+  { id:'sturgeon', name:'Sturgeon', role:'the ancient', theta:9, r:0.68, type:'fish', zone:'water',
+    voice:'I keep the river\u2019s deepest memory', teaching:'Some memories can only be kept by those who stay in the deep.',
+    root:'White sturgeon \u2014 largest NA freshwater fish, 100+ years, 600 kg, river bottom dweller',
+    trails:['Cedar'] },
+  { id:'fern', name:'Fern', role:'the foundation', theta:10, r:0.65, type:'plant', zone:'underground',
+    voice:'I was here before the trees', teaching:'The most foundational work is invisible and continuous.',
+    root:'Sword fern \u2014 200 million year lineage, evergreen understory, reproduces by spores',
+    trails:['Chanterelle','Bee'] },
+  { id:'chanterelle', name:'Chanterelle', role:'the network', theta:12, r:0.72, type:'fungus', zone:'underground',
+    voice:'what you can\u2019t see is doing the most work', teaching:'You cannot manufacture this \u2014 only create conditions where it grows.',
+    root:'Pacific golden chanterelle \u2014 fruits only in mature forests, cannot be cultivated, network proof',
+    trails:['Cedar','Fern'] },
+  { id:'star', name:'Star', role:'the keystone', theta:14, r:0.64, type:'echinoderm', zone:'coast',
+    voice:'remove me and the whole world changes', teaching:'Your role is revealed by what happens when you are gone.',
+    root:'Ochre sea star \u2014 Paine 1966 keystone species study, Tatoosh Island, intertidal architect',
+    trails:['Kelp'] },
+  { id:'beaver', name:'Beaver', role:'the maker', theta:16, r:0.78, type:'mammal', zone:'foothills',
+    voice:'let me show you how it works', teaching:'Your survival work becomes the foundation for others\u2019 thriving.',
+    root:'Castor canadensis \u2014 ecosystem engineer, one dam creates habitat for hundreds of species',
+    trails:['Salamander','Otter'] },
+  { id:'salamander', name:'Salamander', role:'the headwater', theta:18, r:0.66, type:'amphibian', zone:'montane',
+    voice:'I live where nothing else can reach', teaching:'The apex predator isn\u2019t always the largest.',
+    root:'Pacific giant salamander \u2014 only vocalizing PNW salamander, fishless stream apex, old-growth indicator',
+    trails:['Beaver','Waterfall'] },
+  { id:'hemlock', name:'Hemlock', role:'the standard', theta:20, r:0.85, type:'tree', zone:'montane',
+    voice:'the standard holds', teaching:'The bar was set by someone who cared whether the next person could stand on it.',
+    root:'Western hemlock \u2014 shade-tolerant climax species, the standard of the montane canopy',
+    trails:['Cedar','Lex','Fire'] },
+  { id:'fire', name:'Fire', role:'the renewal', theta:22, r:0.72, type:'force', zone:'all',
+    voice:'the forest still calls my name', teaching:'Suppression creates catastrophe. Small fires prevent large ones.',
+    root:'Ecological fire \u2014 Kalapuya camas burns, Douglas fir succession, century of suppression paradox',
+    trails:['Hemlock','Alder'] },
+  { id:'wolf', name:'Wolf', role:'the return', theta:24, r:0.80, type:'mammal', zone:'montane',
+    voice:'I teach the patience of reestablishment', teaching:'What was lost can return if the territory remembers.',
+    root:'Gray wolf \u2014 apex predator returning to Cascades, trophic cascade, pack dynamics, salmon nitrogen carrier',
+    trails:['Bear','Coyote'] },
+  { id:'fog', name:'Fog', role:'the invisible', theta:26, r:0.62, type:'presence', zone:'foothills',
+    voice:'I am the rain between the rains', teaching:'The most essential systems are often invisible.',
+    root:'Pacific stratus \u2014 30\u201350% of summer moisture, Sitka spruce depends on it, the PNW character',
+    trails:['Sitka','Moss','Waterfall'] },
+  { id:'bear', name:'Bear', role:'the season', theta:28, r:0.78, type:'mammal', zone:'montane',
+    voice:'I walk between ice and forest, between seasons', teaching:'Carry the ocean into the forest through your body.',
+    root:'Grizzly bear \u2014 50\u201390% pre-hibernation calories from salmon, N-15 nutrient distribution 500m from streams',
+    trails:['Wolf','Chinook'] },
+  { id:'waterfall', name:'Waterfall', role:'the descent', theta:29, r:0.66, type:'force', zone:'foothills',
+    voice:'I create worlds in my mist', teaching:'Falling creates microhabitats that stillness never could.',
+    root:'Columbia Gorge falls \u2014 Multnomah, Wahkeena, Latourell, spray-zone endemic species',
+    trails:['Fog','Salamander'] },
+  { id:'foxy', name:'Foxy', role:'the map', theta:30, r:0.75, type:'animal', zone:'foothills',
+    voice:'maps and stories', teaching:'The cartographer maps from home because they ARE the territory.',
+    root:'The fox at center camp \u2014 PNW, Salish heritage, decades in these forests',
+    trails:['Cedar','Sam','Chinook'] },
+  { id:'sitka', name:'Sitka', role:'the root', theta:32, r:0.82, type:'tree', zone:'foothills',
+    voice:'stay \u2014 the place will speak through you', teaching:'The constraint IS the quality.',
+    root:'Sitka spruce \u2014 largest spruce, coastal fog belt only, guitar tops, piano soundboards',
+    trails:['Fog'] },
+  { id:'eulachon', name:'Eulachon', role:'the first gift', theta:34, r:0.68, type:'fish', zone:'coast',
+    voice:'I arrive before everything else', teaching:'Energy is the foundation of economy. The first signal matters most.',
+    root:'Candlefish \u2014 so oil-rich it burns, grease trails as PNW trade highways, Nuxalk/Nisga\u2019a/Haisla rights',
+    trails:['Chinook','Otter'] },
+  { id:'dipper', name:'Dipper', role:'the water-walker', theta:33, r:0.65, type:'bird', zone:'water',
+    voice:'I dive into currents and read what flows beneath', teaching:'Walk where no one else can walk.',
+    root:'American dipper \u2014 only NA songbird that walks underwater, year-round salmon stream resident',
+    trails:['Chinook'] },
+  { id:'chinook', name:'Chinook', role:'the current', theta:35, r:0.70, type:'salmon', zone:'water',
+    voice:'follow the water', teaching:'Connection flows downhill. The salmon proves the path by swimming it.',
+    root:'King salmon, warm wind, trade language \u2014 three currents, one name',
+    trails:['Foxy','Cedar','Eulachon','Orca','Bear','Eagle','Dipper'] },
+  { id:'orca', name:'Orca', role:'the elder', theta:38, r:0.85, type:'marine', zone:'coast',
+    voice:'I have been listening longer than you have been speaking', teaching:'Knowledge deepens with time. The elders\u2019 expertise is irreplaceable.',
+    root:'Southern Resident orca \u2014 73 individuals, matriarch knowledge, biosonar, J/K/L pods',
+    trails:['Chinook','Kelp'] },
+  { id:'sam', name:'Sam', role:'the question', theta:40, r:0.60, type:'animal', zone:'lowlands',
+    voice:'what if we tried', teaching:'Curiosity needs no justification.',
+    root:'The good boy \u2014 explorer of every trail, bringer of pinecones, asker of questions',
+    trails:['Foxy','Coyote','Osprey'] },
+  { id:'coyote', name:'Coyote', role:'the trickster', theta:42, r:0.68, type:'canid', zone:'lowlands',
+    voice:'the garbage becomes the feast', teaching:'Flexibility beats strength. Adapt to whatever the world offers.',
+    root:'Canis latrans \u2014 Trickster in Sahaptin, Chinook, Coast Salish, Klamath, Nez Perce traditions',
+    trails:['Raven','Sam','Wolf'] },
+  { id:'dragonfly', name:'Dragonfly', role:'the iridescent', theta:43, r:0.62, type:'insect', zone:'air',
+    voice:'I hunt in air and water both', teaching:'Master two worlds and you are apex in both.',
+    root:'Odonata \u2014 aquatic larvae, aerial adults, top predator in both media, 300 million year lineage',
+    trails:['Bee'] },
+  { id:'octopus', name:'Octopus', role:'the reinventor', theta:44, r:0.74, type:'cephalopod', zone:'coast',
+    voice:'I think with eight arms', teaching:'Intelligence doesn\u2019t require lineage. Every generation reinvents itself.',
+    root:'Giant Pacific Octopus \u2014 individual personalities, problem-solving, 6-month egg guarding then death',
+    trails:['Wren'] },
+  { id:'willow', name:'Willow', role:'the welcome', theta:45, r:1.00, type:'tree', zone:'lowlands',
+    voice:'come as you are', teaching:'The seat next to Willow is always the easiest one to take.',
+    root:'Willow \u2014 canopy boundary, where inside meets outside, unit circle',
+    trails:['Hawk','Madrone'] },
+  { id:'bee', name:'Bee', role:'the pollinator', theta:47, r:0.66, type:'insect', zone:'lowlands',
+    voice:'I carry the pollen between worlds', teaching:'The bridge species lets forests fruit and meadows seed.',
+    root:'Bombus vosnesenskii \u2014 native bumblebee, wild specialist, 90% of native bees are specialists',
+    trails:['Fern','Dragonfly'] },
+  { id:'otter', name:'Otter', role:'the play', theta:48, r:0.72, type:'mustelid', zone:'water',
+    voice:'play is work and work is play', teaching:'Joy and sustenance in the same moment.',
+    root:'River otter \u2014 social, playful, slides while hunting, aquatic athlete',
+    trails:['Beaver','Eulachon'] },
+  { id:'hawk', name:'Hawk', role:'the formation', theta:50, r:0.80, type:'bird', zone:'lowlands',
+    voice:'I see where everyone is', teaching:'The one who sees the whole clearing at once.',
+    root:'Red-tailed hawk \u2014 formation reader, positional awareness',
+    trails:['Willow','Eagle','Madrone'] },
+  { id:'eagle', name:'Eagle', role:'the guardian', theta:52, r:0.82, type:'bird', zone:'lowlands',
+    voice:'I hold the heights and read the wind', teaching:'Guard from the heights. Read the wind before it changes.',
+    root:'Bald eagle \u2014 PNW icon, salmon feeder, recovered from DDT, 2007 delisting',
+    trails:['Hawk','Chinook'] },
+  { id:'madrone', name:'Madrone', role:'the hearth', theta:53, r:0.65, type:'tree', zone:'lowlands',
+    voice:'the fire was already here', teaching:'Gathering can\u2019t be forced. Create conditions. Keep showing up.',
+    root:'Pacific madrone \u2014 warm bark, can\u2019t be transplanted, keeps leaves when all else is bare',
+    trails:['Willow','Hawk'] },
+  { id:'owl', name:'Owl', role:'the clock', theta:55, r:0.80, type:'bird', zone:'subalpine',
+    voice:'there is time', teaching:'Time is a gift when someone keeps it for you.',
+    root:'Temporal synchronization \u2014 sequence, cadence, momentum',
+    trails:['Cedar','Alder','Pika'] },
+  { id:'marten', name:'Marten', role:'the signal', theta:56, r:0.68, type:'mammal', zone:'montane',
+    voice:'the signal is still here', teaching:'Your presence proves the infrastructure is intact.',
+    root:'Pacific marten \u2014 obligate old-growth dependent, indicator species',
+    trails:['Wren'] },
+  { id:'raven', name:'Raven', role:'the pattern', theta:60, r:0.70, type:'bird', zone:'montane',
+    voice:'I have seen this before', teaching:'What repeats reveals what\u2019s true.',
+    root:'Corvus corax \u2014 1.5 billion neurons, future planning, perspective-taking, trickster in Indigenous traditions',
+    trails:['Cedar','Alder','Coyote'] },
+  { id:'wren', name:'Wren', role:'the song', theta:65, r:0.68, type:'bird', zone:'foothills',
+    voice:'I don\u2019t need to be loud \u2014 I need to be precise', teaching:'The smallest body can hold the most complex song.',
+    root:'Pacific wren \u2014 10g, 36 notes/sec, old-growth understory, most complex song relative to body size',
+    trails:['Marten','Octopus'] },
+  { id:'kelp', name:'Kelp', role:'the tide forest', theta:68, r:0.72, type:'macro-alga', zone:'marine',
+    voice:'I grow two feet a day and die in a season', teaching:'Nothing permanent supports the temporary \u2014 and the temporary feeds everything.',
+    root:'Bull kelp \u2014 annual marine forest, collapsing due to sea star wasting disease, foundation ecosystem',
+    trails:['Star','Orca'] },
+  { id:'alder', name:'Alder', role:'the resonance', theta:70, r:0.75, type:'tree', zone:'foothills',
+    voice:'the wood remembers the forest', teaching:'The material shapes the sound. The sound carries the place.',
+    root:'Red alder \u2014 first colonizer, nitrogen fixer, Fender Stratocaster body wood, Seattle Sound instrument',
+    trails:['Raven','Owl','Fire','Osprey'] },
+  { id:'osprey', name:'Osprey', role:'the horizon', theta:78, r:0.80, type:'bird', zone:'alpine',
+    voice:'I can see it from here \u2014 now watch me dive', teaching:'The highest view demands the deepest dive.',
+    root:'Pandion haliaetus \u2014 only raptor that dives fully underwater, largest nests, generational builder',
+    trails:['Sam','Alder','Glacier'] },
+  { id:'pika', name:'Pika', role:'the sentinel', theta:80, r:0.55, type:'mammal', zone:'alpine',
+    voice:'the world is warming and I am the first to know', teaching:'The smallest voice from the highest place carries the most urgent message.',
+    root:'American pika \u2014 alpine talus specialist, cannot tolerate warmth, disappearing from lower elevations',
+    trails:['Glacier','Owl'] },
+  { id:'glacier', name:'Glacier', role:'the archive', theta:82, r:0.70, type:'force', zone:'alpine',
+    voice:'I remember what rain forgets', teaching:'Some memories can only be kept in ice. When I melt, the archive is gone.',
+    root:'Cascade glaciers \u2014 50%+ volume lost since 1960s, frozen atmospheric archive, rivers depend on melt',
+    trails:['Pika','Osprey'] }
+];
+
+// ═══ Rendering ═══
+
+function getTypeColor(type) {
+  return TYPE_COLORS[type] || '#7a8a8a';
+}
+
+function getTypeLabel(type) {
+  const labels = {
+    tree:'Tree', bird:'Bird', mammal:'Mammal', fish:'Fish', marine:'Marine',
+    insect:'Insect', force:'Force', plant:'Plant', fungus:'Fungus',
+    symbiosis:'Symbiosis', bryophyte:'Bryophyte', 'macro-alga':'Macro-alga',
+    amphibian:'Amphibian', cephalopod:'Cephalopod', echinoderm:'Echinoderm',
+    canid:'Canid', mustelid:'Mustelid', salmon:'Salmon', concept:'Concept',
+    animal:'Animal', presence:'Presence'
+  };
+  return labels[type] || type;
+}
+
+function getZoneLabel(zone) {
+  const labels = {
+    alpine:'Alpine', subalpine:'Subalpine', montane:'Montane',
+    foothills:'Foothills', lowlands:'Lowlands', coast:'Coast',
+    water:'Water', underground:'Underground', air:'Air',
+    marine:'Marine', all:'All Elevations'
+  };
+  return labels[zone] || zone;
+}
+
+function getFilterGroup(type) {
+  for (const [group, types] of Object.entries(TYPE_GROUPS)) {
+    if (types.includes(type)) return group;
+  }
+  return 'other';
+}
+
+function renderCard(muse) {
+  const color = getTypeColor(muse.type);
+  const trailChips = muse.trails.map(t => {
+    const target = MUSES.find(m => m.name === t);
+    const targetId = target ? target.id : t.toLowerCase();
+    return '<span class="trail-chip" data-trail="' + targetId + '">' + t + '</span>';
+  }).join('');
+
+  return '<div class="card" data-id="' + muse.id + '" data-type="' + muse.type + '" data-zone="' + muse.zone + '" data-group="' + getFilterGroup(muse.type) + '" style="--type-color: ' + color + '">' +
+    '<div class="card-header">' +
+      '<span class="card-name">' + muse.name + '</span>' +
+      '<span class="card-theta">\u03B8 ' + muse.theta + '\u00B0</span>' +
+    '</div>' +
+    '<div class="card-role">' + muse.role + '</div>' +
+    '<div class="badges">' +
+      '<span class="badge badge-type">' + getTypeLabel(muse.type) + '</span>' +
+      '<span class="badge badge-zone">' + getZoneLabel(muse.zone) + '</span>' +
+    '</div>' +
+    '<div class="card-voice">' + muse.voice + '</div>' +
+    '<div class="card-details">' +
+      '<div class="detail-section">' +
+        '<div class="detail-label">Teaching</div>' +
+        '<div class="detail-teaching">' + muse.teaching + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+        '<div class="detail-label">PNW Root</div>' +
+        '<div class="detail-root">' + muse.root + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+        '<div class="detail-label">Connected Trails</div>' +
+        '<div class="trails">' + trailChips + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderGrid() {
+  const grid = document.getElementById('bestiary-grid');
+  grid.innerHTML = MUSES.map(renderCard).join('');
+  attachCardListeners();
+  applyFilters();
+}
+
+// ═══ Interactions ═══
+
+let activeTypeFilter = 'all';
+let activeZoneFilter = 'all';
+
+function attachCardListeners() {
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Don't toggle if clicking a trail chip
+      if (e.target.classList.contains('trail-chip')) return;
+      this.classList.toggle('expanded');
+    });
+  });
+
+  document.querySelectorAll('.trail-chip').forEach(chip => {
+    chip.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const targetId = this.dataset.trail;
+      const targetCard = document.querySelector('.card[data-id="' + targetId + '"]');
+      if (targetCard) {
+        // Clear filters first
+        activeTypeFilter = 'all';
+        activeZoneFilter = 'all';
+        updateFilterButtons();
+        applyFilters();
+        // Scroll and highlight
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetCard.classList.add('expanded');
+        targetCard.style.transition = 'box-shadow 0.3s';
+        targetCard.style.boxShadow = '0 0 20px rgba(199,91,58,0.3)';
+        setTimeout(function() {
+          targetCard.style.boxShadow = '';
+        }, 1500);
+      }
+    });
+  });
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.card');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const cardGroup = card.dataset.group;
+    const cardType = card.dataset.type;
+    const cardZone = card.dataset.zone;
+
+    const typeMatch = activeTypeFilter === 'all' || cardGroup === activeTypeFilter;
+    const zoneMatch = activeZoneFilter === 'all' ||
+                      (activeZoneFilter === 'all-zones' && cardZone === 'all') ||
+                      cardZone === activeZoneFilter;
+
+    if (typeMatch && zoneMatch) {
+      card.style.display = '';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Show no-results message
+  const existing = document.querySelector('.no-results');
+  if (existing) existing.remove();
+
+  if (visibleCount === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'no-results';
+    msg.textContent = 'No voices match these filters. The forest is quiet here.';
+    document.getElementById('bestiary-grid').appendChild(msg);
+  }
+}
+
+function updateFilterButtons() {
+  document.querySelectorAll('.filter-btn[data-filter="type"]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.value === activeTypeFilter);
+  });
+  document.querySelectorAll('.filter-btn[data-filter="zone"]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.value === activeZoneFilter);
+  });
+}
+
+// Filter button listeners
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const filterType = this.dataset.filter;
+    const value = this.dataset.value;
+
+    if (filterType === 'type') {
+      activeTypeFilter = value;
+    } else if (filterType === 'zone') {
+      activeZoneFilter = value;
+    }
+
+    updateFilterButtons();
+    applyFilters();
+  });
+});
+
+// Scroll-to-top
+const scrollBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', function() {
+  scrollBtn.classList.toggle('visible', window.scrollY > 600);
+});
+scrollBtn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ═══ Initialize ═══
+renderGrid();
+</script>
+
+</body>
+</html>

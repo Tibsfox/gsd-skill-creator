@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Frequency Dial — Raven's Installation</title>
+  <style>
+    /* ═══════════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(122, 154, 90, 0.4);
+      color: #e8dcc8;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       NAV BAR
+       ═══════════════════════════════════════════════════ */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      background: rgba(10, 20, 14, 0.95);
+      border-bottom: 1px solid rgba(122, 154, 90, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: #7a9a5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+    nav a:hover { color: #c8b890; }
+    nav .nav-left a + a { margin-left: 1.5rem; }
+    nav .nav-right {
+      font-size: 0.75rem;
+      color: rgba(232, 220, 200, 0.35);
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════════ */
+    header {
+      background: linear-gradient(135deg, #0a1a10 0%, #1a3a2a 40%, #2a4a3a 70%, #1a2a20 100%);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(122, 154, 90, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(199, 91, 58, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      color: #e8dcc8;
+      letter-spacing: 0.1em;
+      font-weight: 400;
+      text-shadow: 0 2px 20px rgba(199, 91, 58, 0.2);
+    }
+    header .subtitle {
+      font-size: 0.95rem;
+      color: rgba(232, 220, 200, 0.55);
+      margin-top: 0.5rem;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       DIAL AREA
+       ═══════════════════════════════════════════════════ */
+    .dial-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+    }
+
+    /* Ambient glow behind dial */
+    .dial-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      transform: translate(-50%, -55%);
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow-color, rgba(45, 90, 58, 0.25)) 0%, transparent 70%);
+      transition: background 0.8s ease;
+      pointer-events: none;
+      filter: blur(30px);
+      z-index: 0;
+    }
+
+    .dial-container {
+      position: relative;
+      z-index: 1;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .dial-container:active { cursor: grabbing; }
+
+    canvas#dial {
+      border-radius: 50%;
+      box-shadow:
+        0 0 60px rgba(199, 91, 58, 0.12),
+        0 0 120px rgba(45, 90, 58, 0.08),
+        inset 0 0 80px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.3s ease;
+    }
+    canvas#dial:hover {
+      box-shadow:
+        0 0 70px rgba(199, 91, 58, 0.18),
+        0 0 140px rgba(45, 90, 58, 0.12),
+        inset 0 0 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .dial-instruction {
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      color: rgba(232, 220, 200, 0.35);
+      font-style: italic;
+      letter-spacing: 0.04em;
+      z-index: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       STATION INFO PANEL
+       ═══════════════════════════════════════════════════ */
+    .station-panel {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .station-card {
+      background: rgba(26, 42, 32, 0.7);
+      border: 1px solid rgba(122, 154, 90, 0.25);
+      border-radius: 10px;
+      padding: 2rem;
+      min-height: 160px;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .station-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--genre-color, rgba(122, 154, 90, 0.5));
+      transition: background 0.5s ease;
+    }
+
+    .station-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .station-id {
+      font-family: 'Courier New', monospace;
+      font-size: 1.4rem;
+      color: #c8b890;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+    }
+    .station-freq {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: rgba(199, 91, 58, 0.8);
+    }
+    .station-era {
+      font-size: 0.8rem;
+      color: rgba(232, 220, 200, 0.4);
+      font-style: italic;
+    }
+
+    .station-name {
+      font-size: 1.15rem;
+      color: #e8dcc8;
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .station-desc {
+      font-size: 0.88rem;
+      color: rgba(232, 220, 200, 0.65);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .station-type {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+    }
+    .station-type.radio {
+      background: rgba(199, 91, 58, 0.2);
+      color: rgba(199, 91, 58, 0.9);
+      border: 1px solid rgba(199, 91, 58, 0.3);
+    }
+    .station-type.music {
+      background: rgba(106, 27, 154, 0.2);
+      color: rgba(186, 127, 234, 0.9);
+      border: 1px solid rgba(106, 27, 154, 0.3);
+    }
+
+    .station-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #7a9a5a;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .station-link:hover {
+      color: #c8b890;
+      border-bottom-color: rgba(200, 184, 144, 0.4);
+    }
+
+    /* Static noise overlay on card */
+    .static-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(232, 220, 200, 0.015) 2px,
+        rgba(232, 220, 200, 0.015) 4px
+      );
+      pointer-events: none;
+      opacity: var(--static-opacity, 0);
+      transition: opacity 0.3s ease;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONTINUUM SECTION
+       ═══════════════════════════════════════════════════ */
+    .continuum-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+      border-top: 1px solid rgba(122, 154, 90, 0.15);
+    }
+    .continuum-section h2 {
+      font-size: 1.3rem;
+      color: #c8b890;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .continuum-section p {
+      font-size: 0.92rem;
+      color: rgba(232, 220, 200, 0.6);
+      line-height: 1.9;
+      text-align: center;
+    }
+    .continuum-section .freq-numbers {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .freq-number {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: rgba(199, 91, 58, 0.5);
+      text-align: center;
+    }
+    .freq-number span {
+      display: block;
+      font-size: 0.65rem;
+      color: rgba(232, 220, 200, 0.3);
+      margin-top: 0.2rem;
+      font-family: Georgia, serif;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(122, 154, 90, 0.1);
+      font-size: 0.75rem;
+      color: rgba(232, 220, 200, 0.25);
+    }
+    footer a {
+      color: rgba(122, 154, 90, 0.5);
+      text-decoration: none;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.6rem; }
+      .dial-area { padding: 2rem 1rem 1.5rem; }
+      .station-card { padding: 1.5rem; }
+      .continuum-section { padding: 2rem 1.5rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../center-camp/">Center Camp</a>
+      <a href="../compass.html">The Compass</a>
+      <a href="../index.html">Research Series</a>
+    </div>
+    <div class="nav-right">Raven's Installation</div>
+  </nav>
+
+  <header>
+    <h1>The Frequency Dial</h1>
+    <div class="subtitle">tune the cultural spectrum of the Pacific Northwest</div>
+  </header>
+
+  <div class="dial-area">
+    <div class="dial-glow" id="dialGlow"></div>
+    <div class="dial-container" id="dialContainer">
+      <canvas id="dial" width="400" height="400"></canvas>
+    </div>
+    <div class="dial-instruction" id="dialInstruction">click and drag to tune</div>
+  </div>
+
+  <div class="station-panel">
+    <div class="station-card" id="stationCard">
+      <div class="static-overlay" id="staticOverlay"></div>
+      <div id="stationContent">
+        <div class="station-type radio" id="stationType">FM RADIO</div>
+        <div class="station-header">
+          <span class="station-id" id="stationId">---</span>
+          <span class="station-freq" id="stationFreq"></span>
+          <span class="station-era" id="stationEra"></span>
+        </div>
+        <div class="station-name" id="stationName">Turn the dial to find a station...</div>
+        <div class="station-desc" id="stationDesc">The needle searches between frequencies. Static and silence. Somewhere on the dial, a signal waits.</div>
+        <a class="station-link" id="stationLink" href="#" style="display:none;">Visit this clearing &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="continuum-section">
+    <h2>The Frequency Continuum Thread</h2>
+    <p>
+      From the 89.5 MHz signal leaving KNHC's antenna to the 17.4 Hz hum of a blue whale,
+      from the 440 Hz concert A to the 3 GHz carrier of your phone, the same physics governs
+      every signal. The Frequency Continuum (FQC) traces this thread from cosmic wavelengths
+      through radio bands through audio frequencies to the microtonal intervals of a guitar's
+      harmonics. Every station on this dial, every song in this series, is a particular vibration
+      in the same continuum.
+    </p>
+    <div class="freq-numbers">
+      <div class="freq-number">17.4 Hz<span>blue whale</span></div>
+      <div class="freq-number">55 Hz<span>power hum</span></div>
+      <div class="freq-number">440 Hz<span>concert A</span></div>
+      <div class="freq-number">4,186 Hz<span>piano top</span></div>
+      <div class="freq-number">20 kHz<span>hearing limit</span></div>
+      <div class="freq-number">89.5 MHz<span>C89 signal</span></div>
+      <div class="freq-number">108 MHz<span>FM ceiling</span></div>
+      <div class="freq-number">3 GHz<span>cell carrier</span></div>
+    </div>
+  </div>
+
+  <footer>
+    Raven &mdash; pattern detector muse &mdash; <a href="../center-camp/">Center Camp</a>
+  </footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ═══════════════════════════════════════════════════
+  // STATION DATA
+  // ═══════════════════════════════════════════════════
+  const stations = [
+    // Radio stations (filled circles on dial)
+    {
+      id: 'C89', type: 'radio', freq: '89.5 FM', era: 'est. 1971',
+      name: 'C89.5 FM / KNHC Seattle',
+      desc: 'Community radio from Nathan Hale High School. Dance music, broadcast engineering, a student-run signal reaching across Puget Sound. The first frequency on the dial, the entry point into the spectrum.',
+      genre: 'electronic', angle: 0, color: '#1e88e5',
+      link: '../C89/index.html'
+    },
+    {
+      id: 'KSM', type: 'radio', freq: '92.9 FM', era: 'Bellingham',
+      name: 'KISM 92.9 FM Bellingham',
+      desc: 'Classic rock broadcast from the shadow of Mount Constitution. The signal bounces off San Juan ridgelines, carrying decades of guitar through the islands. A northern anchor.',
+      genre: 'rock', angle: 33, color: '#37474f',
+      link: '../KSM/index.html'
+    },
+    {
+      id: 'KUB', type: 'radio', freq: '93.3 FM', era: 'Seattle',
+      name: 'KUBE 93.3 FM Seattle',
+      desc: 'Hip-hop and culture at 100 kilowatts from Cougar Mountain. The signal that defined a generation of Seattle sound beyond grunge. Bass that travels through concrete.',
+      genre: 'hiphop', angle: 60, color: '#4a148c',
+      link: '../KUB/index.html'
+    },
+    {
+      id: 'WLF', type: 'radio', freq: '100.7 FM', era: 'Seattle',
+      name: '100.7 The Wolf / KKWF',
+      desc: 'Country radio from the emerald city. Steel guitar and storytelling where you least expect it. The signal that proves the PNW is bigger than any single genre.',
+      genre: 'country', angle: 110, color: '#d4881a',
+      link: '../WLF/index.html'
+    },
+    {
+      id: 'KPZ', type: 'radio', freq: '101.5 / 104.9 FM', era: 'heritage',
+      name: 'KPLZ / Star 101.5 / 104.9',
+      desc: 'Seattle radio heritage and the signal wars. Frequencies traded hands, formats shifted, call signs changed. The archaeology of the dial itself. Every frequency has a history.',
+      genre: 'radio', angle: 145, color: '#c75b3a',
+      link: '../KPZ/index.html'
+    },
+    {
+      id: 'RBH', type: 'radio', freq: 'AM/FM', era: 'full story',
+      name: 'Radio Broadcast History',
+      desc: 'The whole PNW radio story, from spark-gap transmitters on Puget Sound to digital streams. How signals shaped communities before the internet connected everything. The infrastructure of culture.',
+      genre: 'radio', angle: 175, color: '#c75b3a',
+      link: '../RBH/index.html'
+    },
+
+    // Music projects (diamond markers on dial)
+    {
+      id: 'GRV', type: 'music', freq: null, era: '1984',
+      name: 'Green River',
+      desc: 'Jackson Street to Sub Pop. The band that split into Pearl Jam and Mudhoney, seeding the entire grunge ecosystem. The underground river that surfaced a movement.',
+      genre: 'rock', angle: 20, color: '#37474f',
+      link: '../GRV/index.html'
+    },
+    {
+      id: 'PJM', type: 'music', freq: null, era: '1990',
+      name: 'Pearl Jam',
+      desc: 'From Green River to Ten to thirty years of not selling out. The band that fought Ticketmaster, bootlegged their own shows, and proved integrity scales. Seattle bedrock.',
+      genre: 'rock', angle: 45, color: '#37474f',
+      link: '../PJM/index.html'
+    },
+    {
+      id: 'SNY', type: 'music', freq: null, era: '1981',
+      name: 'Sonic Youth',
+      desc: '50 tunings, 30 years, the bridge that made grunge possible. They signed Nirvana to DGC and taught a generation that noise was a color, not an accident.',
+      genre: 'experimental', angle: 75, color: '#6a1b9a',
+      link: '../SNY/index.html'
+    },
+    {
+      id: 'MIX', type: 'music', freq: null, era: '1983',
+      name: 'Sir Mix-A-Lot',
+      desc: 'Auburn, Central District, NastyMix, DIY King. Built his own label, his own studio, his own sound. Proved you could do it all from the Pacific Northwest with a drum machine and vision.',
+      genre: 'hiphop', angle: 90, color: '#4a148c',
+      link: '../MIX/index.html'
+    },
+    {
+      id: 'GGT', type: 'music', freq: null, era: '1994',
+      name: 'Geggy Tah',
+      desc: 'Postmodernism, the spaces between genres. Signed to Luaka Bop, produced by Susan Rogers. The sound of what happens when you stop trying to fit a category and let the music decide.',
+      genre: 'experimental', angle: 125, color: '#6a1b9a',
+      link: '../GGT/index.html'
+    },
+    {
+      id: 'GTP', type: 'music', freq: null, era: 'craft',
+      name: 'Geggy Tah Production',
+      desc: 'The craft behind the sound. Microphone placement, tape saturation, the decisions that happen between the performance and the playback. Production as its own instrument.',
+      genre: 'experimental', angle: 140, color: '#6a1b9a',
+      link: '../GTP/index.html'
+    },
+    {
+      id: 'KGX', type: 'music', freq: null, era: '1980',
+      name: "King's X",
+      desc: "Three sides of one, the power trio. Doug Pinnick's bass, Ty Tabor's guitar, Jerry Gaskill's drums. Gospel roots through Marshall stacks. The band that every musician loves and the industry forgot.",
+      genre: 'rock', angle: 190, color: '#37474f',
+      link: '../KGX/index.html'
+    },
+    {
+      id: 'CDP', type: 'music', freq: null, era: '1996',
+      name: 'Coldplay',
+      desc: 'Deliberate constraint as architecture. Every album a conscious reinvention within self-imposed limits. The discipline of knowing what to leave out, applied at stadium scale.',
+      genre: 'rock', angle: 215, color: '#37474f',
+      link: '../CDP/index.html'
+    },
+    {
+      id: 'COI', type: 'music', freq: null, era: '1982',
+      name: 'Coil',
+      desc: 'Sonic alchemy. Music, magick, and the spaces that open when you abandon conventional structure entirely. The influence that runs underneath everything experimental since the 1980s.',
+      genre: 'experimental', angle: 245, color: '#6a1b9a',
+      link: '../COI/index.html'
+    },
+    {
+      id: 'DDA', type: 'music', freq: null, era: '1992',
+      name: 'dada',
+      desc: 'Wordplay, subversion, California sound. "Dizz Knee Land" as cultural commentary delivered as a pop hook. The art of saying something serious while sounding like you\'re having the time of your life.',
+      genre: 'rock', angle: 275, color: '#37474f',
+      link: '../DDA/index.html'
+    },
+    {
+      id: 'FQC', type: 'music', freq: 'all', era: 'always',
+      name: 'Frequency Continuum',
+      desc: 'Cosmic wavelengths to microtonal intervals. The thread that ties them all. Every station, every project, every sound on this dial is a node in the same continuum. The physics underneath the culture.',
+      genre: 'cosmic', angle: 320, color: 'prismatic',
+      link: '../FQC/index.html'
+    }
+  ];
+
+  // ═══════════════════════════════════════════════════
+  // GENRE COLORS (for glow)
+  // ═══════════════════════════════════════════════════
+  const genreGlows = {
+    rock:         'rgba(55, 71, 79, 0.35)',
+    hiphop:       'rgba(74, 20, 140, 0.3)',
+    electronic:   'rgba(30, 136, 229, 0.25)',
+    country:      'rgba(212, 136, 26, 0.3)',
+    experimental: 'rgba(106, 27, 154, 0.3)',
+    radio:        'rgba(199, 91, 58, 0.25)',
+    cosmic:       'rgba(120, 80, 200, 0.3)'
+  };
+
+  const genreCardColors = {
+    rock:         'rgba(55, 71, 79, 0.6)',
+    hiphop:       'rgba(74, 20, 140, 0.5)',
+    electronic:   'rgba(30, 136, 229, 0.4)',
+    country:      'rgba(212, 136, 26, 0.5)',
+    experimental: 'rgba(106, 27, 154, 0.5)',
+    radio:        'rgba(199, 91, 58, 0.4)',
+    cosmic:       'rgba(120, 80, 200, 0.4)'
+  };
+
+  // ═══════════════════════════════════════════════════
+  // CANVAS SETUP
+  // ═══════════════════════════════════════════════════
+  const canvas = document.getElementById('dial');
+  const ctx = canvas.getContext('2d');
+  const size = 400;
+  const cx = size / 2;
+  const cy = size / 2;
+  const outerR = 190;
+  const innerR = 100;
+  const tickR = 175;
+  const labelR = 158;
+  const markerR = 168;
+  const freqLabelR = 185;
+
+  let dialAngle = 0;           // current rotation in degrees
+  let dialVelocity = 0;        // momentum
+  let isDragging = false;
+  let lastDragAngle = 0;
+  let selectedStation = null;
+  let staticNoise = 0;         // 0-1 noise level between stations
+  let hasInteracted = false;
+
+  // Pixel ratio for sharp rendering
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = size * dpr;
+  canvas.height = size * dpr;
+  canvas.style.width = size + 'px';
+  canvas.style.height = size + 'px';
+  ctx.scale(dpr, dpr);
+
+  // ═══════════════════════════════════════════════════
+  // DRAWING
+  // ═══════════════════════════════════════════════════
+
+  function drawDial() {
+    ctx.clearRect(0, 0, size, size);
+
+    // --- Outer ring (brushed metal/wood) ---
+    const outerGrad = ctx.createRadialGradient(cx, cy, outerR - 15, cx, cy, outerR);
+    outerGrad.addColorStop(0, '#1a2a20');
+    outerGrad.addColorStop(0.3, '#2a3a2a');
+    outerGrad.addColorStop(0.6, '#1e2e22');
+    outerGrad.addColorStop(0.8, '#253525');
+    outerGrad.addColorStop(1, '#0d1a12');
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+    ctx.fillStyle = outerGrad;
+    ctx.fill();
+
+    // Outer ring border
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(200, 184, 144, 0.15)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Inner rim border
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR - 2, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(122, 154, 90, 0.08)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    // --- Inner dial face ---
+    const innerGrad = ctx.createRadialGradient(cx - 20, cy - 20, 10, cx, cy, innerR + 40);
+    innerGrad.addColorStop(0, '#1e2e24');
+    innerGrad.addColorStop(0.5, '#15251a');
+    innerGrad.addColorStop(1, '#0d1a12');
+    ctx.beginPath();
+    ctx.arc(cx, cy, innerR + 40, 0, Math.PI * 2);
+    ctx.fillStyle = innerGrad;
+    ctx.fill();
+
+    // Concentric rings on face
+    for (let r = innerR + 35; r > 30; r -= 12) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(122, 154, 90, ${0.03 + (r / 1800)})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+
+    // --- Frequency scale around outer ring (fixed, doesn't rotate) ---
+    drawFrequencyScale();
+
+    // --- Station markers (rotate with dial) ---
+    for (let i = 0; i < stations.length; i++) {
+      drawStationMarker(stations[i], i === getSelectedIndex());
+    }
+
+    // --- Needle indicator (fixed at top) ---
+    drawNeedle();
+
+    // --- Center hub ---
+    const hubGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 25);
+    hubGrad.addColorStop(0, '#3a4a3a');
+    hubGrad.addColorStop(0.5, '#2a3a2a');
+    hubGrad.addColorStop(1, '#1a2a1a');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+    ctx.fillStyle = hubGrad;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(200, 184, 144, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Center dot
+    ctx.beginPath();
+    ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(199, 91, 58, 0.6)';
+    ctx.fill();
+  }
+
+  function drawFrequencyScale() {
+    ctx.save();
+    ctx.font = '8px Courier New';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // FM band labels (88-108 on first ~180 degrees)
+    const fmFreqs = [88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108];
+    for (let i = 0; i < fmFreqs.length; i++) {
+      const t = i / (fmFreqs.length - 1);
+      const a = (-Math.PI / 2) + (t * Math.PI);  // top to bottom on right side
+      const x = cx + Math.cos(a) * freqLabelR;
+      const y = cy + Math.sin(a) * freqLabelR;
+
+      ctx.fillStyle = 'rgba(199, 91, 58, 0.25)';
+      ctx.fillText(fmFreqs[i].toString(), x, y);
+
+      // Small tick mark
+      const tx1 = cx + Math.cos(a) * (outerR - 4);
+      const ty1 = cy + Math.sin(a) * (outerR - 4);
+      const tx2 = cx + Math.cos(a) * (outerR - 9);
+      const ty2 = cy + Math.sin(a) * (outerR - 9);
+      ctx.beginPath();
+      ctx.moveTo(tx1, ty1);
+      ctx.lineTo(tx2, ty2);
+      ctx.strokeStyle = 'rgba(199, 91, 58, 0.15)';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    }
+
+    // Beyond FM: metaphorical freq markers
+    const metaFreqs = ['kHz', 'MHz', 'GHz', 'THz', 'light'];
+    for (let i = 0; i < metaFreqs.length; i++) {
+      const t = (i + 1) / (metaFreqs.length + 1);
+      const a = (Math.PI / 2) + (t * Math.PI);  // bottom-left arc
+      const x = cx + Math.cos(a) * freqLabelR;
+      const y = cy + Math.sin(a) * freqLabelR;
+
+      ctx.fillStyle = 'rgba(122, 154, 90, 0.2)';
+      ctx.fillText(metaFreqs[i], x, y);
+    }
+
+    ctx.restore();
+  }
+
+  function drawStationMarker(station, isSelected) {
+    const a = degToRad(station.angle + dialAngle) - Math.PI / 2;
+    const mx = cx + Math.cos(a) * markerR;
+    const my = cy + Math.sin(a) * markerR;
+
+    ctx.save();
+
+    if (isSelected) {
+      // Glow for selected
+      ctx.beginPath();
+      ctx.arc(mx, my, 12, 0, Math.PI * 2);
+      const glowColor = station.color === 'prismatic'
+        ? 'rgba(180, 120, 255, 0.3)'
+        : hexToRgba(station.color, 0.3);
+      ctx.fillStyle = glowColor;
+      ctx.fill();
+    }
+
+    if (station.type === 'radio') {
+      // Filled circle for radio
+      ctx.beginPath();
+      ctx.arc(mx, my, isSelected ? 5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = isSelected
+        ? '#e8dcc8'
+        : (station.color === 'prismatic' ? '#ba7fea' : station.color);
+      ctx.globalAlpha = isSelected ? 1 : 0.6;
+      ctx.fill();
+    } else {
+      // Diamond for music projects
+      const s = isSelected ? 6 : 4;
+      ctx.beginPath();
+      ctx.moveTo(mx, my - s);
+      ctx.lineTo(mx + s, my);
+      ctx.lineTo(mx, my + s);
+      ctx.lineTo(mx - s, my);
+      ctx.closePath();
+      ctx.fillStyle = isSelected
+        ? '#e8dcc8'
+        : (station.color === 'prismatic' ? '#ba7fea' : station.color);
+      ctx.globalAlpha = isSelected ? 1 : 0.5;
+      ctx.fill();
+    }
+
+    // Station ID label
+    if (isSelected) {
+      const lx = cx + Math.cos(a) * (markerR - 18);
+      const ly = cy + Math.sin(a) * (markerR - 18);
+      ctx.globalAlpha = 1;
+      ctx.font = 'bold 9px Courier New';
+      ctx.fillStyle = '#e8dcc8';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(station.id, lx, ly);
+    }
+
+    ctx.restore();
+  }
+
+  function drawNeedle() {
+    // Needle at the top center, pointing inward
+    const nx = cx;
+    const ny = cy - outerR + 5;
+
+    ctx.save();
+
+    // Needle glow
+    ctx.beginPath();
+    ctx.arc(nx, ny - 2, 8, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(199, 91, 58, 0.25)';
+    ctx.fill();
+
+    // Needle triangle
+    ctx.beginPath();
+    ctx.moveTo(nx, ny + 8);
+    ctx.lineTo(nx - 4, ny - 6);
+    ctx.lineTo(nx + 4, ny - 6);
+    ctx.closePath();
+    ctx.fillStyle = '#c75b3a';
+    ctx.fill();
+
+    // Bright tip
+    ctx.beginPath();
+    ctx.arc(nx, ny + 6, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff9a6c';
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  // ═══════════════════════════════════════════════════
+  // SELECTION LOGIC
+  // ═══════════════════════════════════════════════════
+
+  function getSelectedIndex() {
+    // The needle is at the top (angle = 0 degrees in our layout)
+    // Find which station is closest to the needle
+    let bestIdx = -1;
+    let bestDist = Infinity;
+
+    for (let i = 0; i < stations.length; i++) {
+      // Effective angle of this station in dial space
+      let effectiveAngle = (stations[i].angle + dialAngle) % 360;
+      if (effectiveAngle < 0) effectiveAngle += 360;
+
+      // Needle is at 0 degrees (top)
+      let dist = Math.abs(effectiveAngle);
+      if (dist > 180) dist = 360 - dist;
+
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIdx = i;
+      }
+    }
+
+    // Compute static noise based on distance from nearest station
+    staticNoise = Math.min(1, bestDist / 20);
+
+    return bestDist < 12 ? bestIdx : -1;
+  }
+
+  function updateStationPanel(idx) {
+    const card = document.getElementById('stationCard');
+    const overlay = document.getElementById('staticOverlay');
+
+    overlay.style.setProperty('--static-opacity', staticNoise.toFixed(2));
+
+    if (idx < 0) {
+      if (selectedStation !== null) {
+        // Between stations
+        document.getElementById('stationType').textContent = '...';
+        document.getElementById('stationType').className = 'station-type';
+        document.getElementById('stationId').textContent = '---';
+        document.getElementById('stationFreq').textContent = '';
+        document.getElementById('stationEra').textContent = '';
+        document.getElementById('stationName').textContent = 'Between stations...';
+        document.getElementById('stationDesc').textContent = 'Static. The space between signals where patterns dissolve and reform. Keep turning.';
+        document.getElementById('stationLink').style.display = 'none';
+        card.style.setProperty('--genre-color', 'rgba(122, 154, 90, 0.2)');
+        document.getElementById('dialGlow').style.setProperty('--glow-color', 'rgba(45, 90, 58, 0.15)');
+        selectedStation = null;
+      }
+      return;
+    }
+
+    const s = stations[idx];
+    if (selectedStation === idx) return;
+    selectedStation = idx;
+
+    // Type badge
+    const typeEl = document.getElementById('stationType');
+    typeEl.textContent = s.type === 'radio' ? 'FM RADIO' : 'MUSIC PROJECT';
+    typeEl.className = 'station-type ' + s.type;
+
+    // Header
+    document.getElementById('stationId').textContent = s.id;
+    document.getElementById('stationFreq').textContent = s.freq ? s.freq : '';
+    document.getElementById('stationEra').textContent = s.era;
+
+    // Content
+    document.getElementById('stationName').textContent = s.name;
+    document.getElementById('stationDesc').textContent = s.desc;
+
+    // Link
+    const linkEl = document.getElementById('stationLink');
+    linkEl.href = s.link;
+    linkEl.style.display = 'inline-block';
+
+    // Genre color on card accent
+    const gc = genreCardColors[s.genre] || 'rgba(122, 154, 90, 0.5)';
+    card.style.setProperty('--genre-color', gc);
+
+    // Dial glow
+    const glow = genreGlows[s.genre] || 'rgba(45, 90, 58, 0.25)';
+
+    if (s.genre === 'cosmic') {
+      // Prismatic gradient for FQC
+      document.getElementById('dialGlow').style.background =
+        'radial-gradient(circle, rgba(180,120,255,0.2) 0%, rgba(30,136,229,0.15) 30%, rgba(199,91,58,0.1) 60%, transparent 70%)';
+    } else {
+      document.getElementById('dialGlow').style.background =
+        'radial-gradient(circle, ' + glow + ' 0%, transparent 70%)';
+    }
+  }
+
+  // ═══════════════════════════════════════════════════
+  // INTERACTION: DRAG TO ROTATE
+  // ═══════════════════════════════════════════════════
+
+  function getAngleFromEvent(e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left - rect.width / 2;
+    const y = (e.clientY || e.touches[0].clientY) - rect.top - rect.height / 2;
+    return Math.atan2(y, x) * (180 / Math.PI);
+  }
+
+  function onPointerDown(e) {
+    e.preventDefault();
+    isDragging = true;
+    dialVelocity = 0;
+    lastDragAngle = getAngleFromEvent(e);
+    if (!hasInteracted) {
+      hasInteracted = true;
+      document.getElementById('dialInstruction').style.opacity = '0';
+    }
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    const currentAngle = getAngleFromEvent(e);
+    let delta = currentAngle - lastDragAngle;
+
+    // Handle wrap-around
+    if (delta > 180) delta -= 360;
+    if (delta < -180) delta += 360;
+
+    dialAngle += delta;
+    dialVelocity = delta;
+    lastDragAngle = currentAngle;
+  }
+
+  function onPointerUp(e) {
+    isDragging = false;
+    // Momentum: keep last velocity, friction applied in animation loop
+  }
+
+  // Mouse events
+  canvas.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  // Touch events
+  canvas.addEventListener('touchstart', onPointerDown, { passive: false });
+  window.addEventListener('touchmove', onPointerMove, { passive: false });
+  window.addEventListener('touchend', onPointerUp);
+
+  // Scroll wheel
+  canvas.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    dialAngle += e.deltaY * 0.15;
+    dialVelocity = e.deltaY * 0.1;
+    if (!hasInteracted) {
+      hasInteracted = true;
+      document.getElementById('dialInstruction').style.opacity = '0';
+    }
+  }, { passive: false });
+
+  // ═══════════════════════════════════════════════════
+  // ANIMATION LOOP
+  // ═══════════════════════════════════════════════════
+
+  let lastTime = performance.now();
+
+  function animate(now) {
+    const dt = Math.min((now - lastTime) / 16.67, 3); // cap at ~3 frames
+    lastTime = now;
+
+    // Apply momentum with friction
+    if (!isDragging && Math.abs(dialVelocity) > 0.01) {
+      dialAngle += dialVelocity * dt;
+      dialVelocity *= 0.94; // friction
+    } else if (!isDragging) {
+      dialVelocity = 0;
+
+      // Snap to nearest station if close enough
+      const idx = getSelectedIndex();
+      if (idx >= 0) {
+        let effectiveAngle = (stations[idx].angle + dialAngle) % 360;
+        if (effectiveAngle < 0) effectiveAngle += 360;
+        if (effectiveAngle > 180) effectiveAngle -= 360;
+
+        // Gentle snap
+        if (Math.abs(effectiveAngle) > 0.3) {
+          dialAngle -= effectiveAngle * 0.06 * dt;
+        }
+      }
+    }
+
+    // Normalize angle
+    dialAngle = ((dialAngle % 360) + 360) % 360;
+
+    // Update selection
+    const idx = getSelectedIndex();
+    updateStationPanel(idx);
+
+    // Draw
+    drawDial();
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+
+  // ═══════════════════════════════════════════════════
+  // UTILITY
+  // ═══════════════════════════════════════════════════
+
+  function degToRad(d) {
+    return d * Math.PI / 180;
+  }
+
+  function hexToRgba(hex, alpha) {
+    if (hex === 'prismatic') return 'rgba(180, 120, 255, ' + alpha + ')';
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+  }
+
+})();
+</script>
+
+</body>
+</html>

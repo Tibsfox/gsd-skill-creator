@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cache — Nutcracker's Game</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ═══ Nav ═══ */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+      position: relative;
+      z-index: 100;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* ═══ Forest Background ═══ */
+    .forest-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .forest-layer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+    }
+    .forest-far {
+      opacity: 0.06;
+    }
+    .forest-mid {
+      opacity: 0.04;
+    }
+    .tree-shape {
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: solid transparent;
+      border-right: solid transparent;
+      border-bottom: solid;
+    }
+
+    /* ═══ Content ═══ */
+    .content {
+      position: relative;
+      z-index: 10;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ═══ Hero ═══ */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 1.5rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #e8dcc8;
+      margin-bottom: 0.3rem;
+    }
+    .hero .subtitle {
+      font-size: 0.95rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ═══ Stats Bar ═══ */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 0.8rem 0 1.5rem;
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.6);
+    }
+    .stats-bar .stat-label {
+      color: rgba(232,220,200,0.35);
+      margin-right: 0.4rem;
+    }
+    .stats-bar .stat-value {
+      color: #d4dce8;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ═══ Grid ═══ */
+    .grid-container {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 1.5rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    /* ═══ Cards ═══ */
+    .card {
+      aspect-ratio: 3 / 4;
+      perspective: 800px;
+      cursor: pointer;
+      position: relative;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+      transform-style: preserve-3d;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card.matched .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Card Back — tree pattern */
+    .card-back {
+      background: #1a2a1f;
+      border: 1px solid rgba(45,90,58,0.4);
+      flex-direction: column;
+      gap: 2px;
+    }
+    .card-back-pattern {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      opacity: 0.35;
+    }
+    .card-back-pattern .tree-top {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 14px solid #2d5a3a;
+    }
+    .card-back-pattern .tree-mid {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 12px solid #2d5a3a;
+      margin-top: -4px;
+    }
+    .card-back-pattern .tree-trunk {
+      width: 4px;
+      height: 6px;
+      background: #5c4033;
+    }
+    .card:hover .card-back {
+      border-color: rgba(45,90,58,0.7);
+      background: #1e2e23;
+    }
+
+    /* Card Front — name card */
+    .card-front {
+      background: #1c1a16;
+      border: 1px solid rgba(232,220,200,0.15);
+      transform: rotateY(180deg);
+      padding: 6px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-front.name-card {
+      background: linear-gradient(160deg, #1c1a16 0%, #201e18 100%);
+    }
+    .card-front.voice-card {
+      background: linear-gradient(160deg, #0d1a12 0%, #111e14 100%);
+    }
+
+    .card-front .muse-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: #e8dcc8;
+      line-height: 1.2;
+    }
+    .card-front .muse-accent {
+      width: 20px;
+      height: 2px;
+      border-radius: 1px;
+      margin: 2px auto;
+    }
+    .card-front .voice-text {
+      font-size: 0.6rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.75);
+      line-height: 1.35;
+      padding: 0 2px;
+    }
+
+    /* Matched glow */
+    .card.matched .card-front {
+      box-shadow: 0 0 12px var(--glow-color, rgba(45,90,58,0.5));
+      border-color: var(--glow-color, rgba(45,90,58,0.5));
+    }
+    .card.matched {
+      cursor: default;
+    }
+
+    /* ═══ Seed Layer ═══ */
+    .seed-layer {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 50;
+    }
+    .seed {
+      position: absolute;
+      font-size: 6px;
+      opacity: 0;
+      animation: seedDrop 0.6s ease-out forwards;
+      color: #5c4033;
+    }
+    @keyframes seedDrop {
+      0% { opacity: 0; transform: translateY(-6px) scale(0.5); }
+      100% { opacity: 0.7; transform: translateY(0) scale(1); }
+    }
+
+    /* Sprouting tree */
+    .sprout {
+      position: absolute;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: bottom center;
+    }
+    .sprout .s-trunk {
+      width: 2px;
+      height: 0;
+      background: #5c4033;
+      transition: height 1.5s ease-out;
+    }
+    .sprout .s-canopy {
+      width: 0;
+      height: 0;
+      border-left: 0px solid transparent;
+      border-right: 0px solid transparent;
+      border-bottom: 0px solid #2d5a3a;
+      transition: all 1.5s ease-out 0.8s;
+    }
+    .sprout.growing {
+      opacity: 1;
+    }
+    .sprout.growing .s-trunk {
+      height: 12px;
+    }
+    .sprout.growing .s-canopy {
+      border-left-width: 6px;
+      border-right-width: 6px;
+      border-bottom-width: 10px;
+      margin-bottom: 0;
+    }
+
+    /* ═══ Controls ═══ */
+    .controls {
+      text-align: center;
+      padding: 0.5rem 0 2rem;
+    }
+    .btn-new-game {
+      background: transparent;
+      color: rgba(232,220,200,0.6);
+      border: 1px solid rgba(45,90,58,0.4);
+      padding: 0.5rem 1.5rem;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-new-game:hover {
+      border-color: rgba(45,90,58,0.8);
+      color: #e8dcc8;
+      background: rgba(45,90,58,0.1);
+    }
+
+    /* ═══ Completion ═══ */
+    .completion-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(13,26,18,0.92);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .completion-overlay.visible {
+      display: flex;
+      opacity: 1;
+    }
+    .completion-overlay h2 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #e8dcc8;
+      margin-bottom: 1.5rem;
+    }
+    .completion-message {
+      max-width: 500px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(232,220,200,0.7);
+      margin-bottom: 2rem;
+    }
+    .completion-message em {
+      color: #e8dcc8;
+      font-style: italic;
+    }
+    .completion-stats {
+      font-size: 0.8rem;
+      color: rgba(232,220,200,0.4);
+      margin-bottom: 2rem;
+    }
+    .completion-overlay .btn-new-game {
+      margin-top: 1rem;
+    }
+
+    /* ═══ Footer Quote ═══ */
+    .footer-quote {
+      text-align: center;
+      padding: 1rem 2rem 3rem;
+      font-size: 0.8rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.3);
+    }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 520px) {
+      .card-grid {
+        gap: 5px;
+      }
+      .hero h1 { font-size: 1.8rem; }
+      .card-front .muse-name { font-size: 0.6rem; }
+      .card-front .voice-text { font-size: 0.5rem; }
+      .stats-bar { gap: 1.2rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav-bar">
+    <a href="index.html">Center Camp</a>
+    <span class="sep">/</span>
+    <a href="../index.html">Research Series</a>
+    <span class="sep">/</span>
+    <span class="active">The Cache</span>
+  </nav>
+
+  <!-- Forest Background -->
+  <div class="forest-bg" id="forestBg"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="hero">
+      <h1>The Cache</h1>
+      <div class="subtitle">Nutcracker's Game &mdash; remember the voices, plant the forest</div>
+    </div>
+
+    <div class="stats-bar">
+      <div>
+        <span class="stat-label">Matched</span>
+        <span class="stat-value" id="matchCount">0</span>
+        <span class="stat-label"> / 18</span>
+      </div>
+      <div>
+        <span class="stat-label">Moves</span>
+        <span class="stat-value" id="moveCount">0</span>
+      </div>
+      <div>
+        <span class="stat-label">Time</span>
+        <span class="stat-value" id="timerDisplay">0:00</span>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="card-grid" id="cardGrid">
+        <div class="seed-layer" id="seedLayer"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-new-game" id="btnNewGame">New Game</button>
+    </div>
+
+    <div class="footer-quote">
+      "My forgotten stores become forests."
+    </div>
+  </div>
+
+  <!-- Completion Overlay -->
+  <div class="completion-overlay" id="completionOverlay">
+    <h2>The Forest Remembers</h2>
+    <div class="completion-message" id="completionMessage"></div>
+    <div class="completion-stats" id="completionStats"></div>
+    <button class="btn-new-game" id="btnNewGameOverlay">Play Again</button>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    // The Cache — Nutcracker's Memory Game
+    // ═══════════════════════════════════════════════
+
+    const PAIRS = [
+      { id: 1,  name: 'Cedar',       voice: 'the record shows',                                         color: '#5c4033' },
+      { id: 2,  name: 'Orca',        voice: 'I have been listening longer than you have been speaking',  color: '#2d4a6a' },
+      { id: 3,  name: 'Wren',        voice: "I don't need to be loud \u2014 I need to be precise",      color: '#7a8a5a' },
+      { id: 4,  name: 'Glacier',     voice: 'I remember what rain forgets',                             color: '#d4dce8' },
+      { id: 5,  name: 'Pika',        voice: 'the world is warming and I am the first to know',          color: '#a0876a' },
+      { id: 6,  name: 'Cougar',      voice: 'you know I am here because the deer are afraid',           color: '#8a6a4a' },
+      { id: 7,  name: 'Coyote',      voice: 'the garbage becomes the feast',                            color: '#9a8a6a' },
+      { id: 8,  name: 'Octopus',     voice: 'I think with eight arms',                                  color: '#6a4a7a' },
+      { id: 9,  name: 'Sitka',       voice: 'stay \u2014 the place will speak through you',             color: '#2d5a3a' },
+      { id: 10, name: 'Chanterelle', voice: "what you can't see is doing the most work",                 color: '#c4942a' },
+      { id: 11, name: 'Star',        voice: 'remove me and the whole world changes',                    color: '#d4dce8' },
+      { id: 12, name: 'Rain',        voice: 'nine months of me made everything you see',                color: '#7a8a8a' },
+      { id: 13, name: 'Bat',         voice: 'I see with sound what eyes cannot find',                   color: '#4a4a5a' },
+      { id: 14, name: 'Thrush',      voice: 'one sustained note holds the whole forest still',          color: '#6a7a5a' },
+      { id: 15, name: 'Steelhead',   voice: 'I spawn and survive to spawn again',                       color: '#5a7a8a' },
+      { id: 16, name: 'Fog',         voice: 'I am the rain between the rains',                          color: '#8a9a9a' },
+      { id: 17, name: 'Willow',      voice: 'come as you are',                                          color: '#6a9a5a' },
+      { id: 18, name: 'Sam',         voice: 'what if we tried',                                         color: '#8a7a5a' },
+    ];
+
+    // ═══ State ═══
+    let cards = [];
+    let flippedCards = [];
+    let matchedCount = 0;
+    let moveCount = 0;
+    let locked = false;
+    let timerInterval = null;
+    let startTime = null;
+    let seeds = []; // { x, y } positions of forgotten seeds
+
+    // ═══ Forest Background ═══
+    function buildForest() {
+      const bg = document.getElementById('forestBg');
+      bg.innerHTML = '';
+
+      // Far trees
+      const farLayer = document.createElement('div');
+      farLayer.className = 'forest-layer forest-far';
+      for (let i = 0; i < 30; i++) {
+        const tree = document.createElement('div');
+        tree.className = 'tree-shape';
+        const h = 60 + Math.random() * 140;
+        const w = 12 + Math.random() * 20;
+        tree.style.left = (i * 3.3 + Math.random() * 2) + '%';
+        tree.style.borderLeftWidth = w + 'px';
+        tree.style.borderRightWidth = w + 'px';
+        tree.style.borderBottomWidth = h + 'px';
+        tree.style.borderBottomColor = '#1a2a1f';
+        farLayer.appendChild(tree);
+      }
+      bg.appendChild(farLayer);
+
+      // Mid trees
+      const midLayer = document.createElement('div');
+      midLayer.className = 'forest-layer forest-mid';
+      for (let i = 0; i < 20; i++) {
+        const tree = document.createElement('div');
+        tree.className = 'tree-shape';
+        const h = 100 + Math.random() * 200;
+        const w = 16 + Math.random() * 30;
+        tree.style.left = (i * 5 + Math.random() * 3) + '%';
+        tree.style.borderLeftWidth = w + 'px';
+        tree.style.borderRightWidth = w + 'px';
+        tree.style.borderBottomWidth = h + 'px';
+        tree.style.borderBottomColor = '#162218';
+        midLayer.appendChild(tree);
+      }
+      bg.appendChild(midLayer);
+    }
+
+    // Subtle parallax
+    document.addEventListener('mousemove', (e) => {
+      const layers = document.querySelectorAll('.forest-layer');
+      const xRatio = e.clientX / window.innerWidth;
+      if (layers[0]) layers[0].style.transform = `translateX(${-xRatio * 15}px)`;
+      if (layers[1]) layers[1].style.transform = `translateX(${-xRatio * 30}px)`;
+    });
+
+    // ═══ Card Generation ═══
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function createCards() {
+      const deck = [];
+      PAIRS.forEach(pair => {
+        deck.push({ pairId: pair.id, type: 'name', name: pair.name, color: pair.color });
+        deck.push({ pairId: pair.id, type: 'voice', voice: pair.voice, color: pair.color });
+      });
+      return shuffle(deck);
+    }
+
+    function renderCard(cardData, index) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.index = index;
+
+      const inner = document.createElement('div');
+      inner.className = 'card-inner';
+
+      // Back face
+      const back = document.createElement('div');
+      back.className = 'card-face card-back';
+      const pattern = document.createElement('div');
+      pattern.className = 'card-back-pattern';
+      pattern.innerHTML = '<div class="tree-top"></div><div class="tree-mid"></div><div class="tree-trunk"></div>';
+      back.appendChild(pattern);
+
+      // Front face
+      const front = document.createElement('div');
+      front.className = 'card-face card-front ' + (cardData.type === 'name' ? 'name-card' : 'voice-card');
+      front.style.setProperty('--glow-color', cardData.color + '80');
+
+      if (cardData.type === 'name') {
+        const accent = document.createElement('div');
+        accent.className = 'muse-accent';
+        accent.style.background = cardData.color;
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'muse-name';
+        nameEl.textContent = cardData.name;
+
+        front.appendChild(nameEl);
+        front.appendChild(accent);
+      } else {
+        const voiceEl = document.createElement('div');
+        voiceEl.className = 'voice-text';
+        voiceEl.textContent = '\u201C' + cardData.voice + '\u201D';
+
+        front.appendChild(voiceEl);
+      }
+
+      inner.appendChild(back);
+      inner.appendChild(front);
+      card.appendChild(inner);
+
+      card.addEventListener('click', () => onCardClick(card, index));
+      return card;
+    }
+
+    // ═══ Game Logic ═══
+    function onCardClick(cardEl, index) {
+      if (locked) return;
+      if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+      if (flippedCards.length >= 2) return;
+
+      cardEl.classList.add('flipped');
+      flippedCards.push({ el: cardEl, index: index, data: cards[index] });
+
+      // Start timer on first flip
+      if (!startTime) {
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+
+      if (flippedCards.length === 2) {
+        moveCount++;
+        document.getElementById('moveCount').textContent = moveCount;
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const [a, b] = flippedCards;
+      locked = true;
+
+      if (a.data.pairId === b.data.pairId && a.data.type !== b.data.type) {
+        // Match found
+        setTimeout(() => {
+          a.el.classList.add('matched');
+          b.el.classList.add('matched');
+
+          // Set glow color
+          a.el.querySelector('.card-front').style.setProperty('--glow-color', a.data.color + '80');
+          b.el.querySelector('.card-front').style.setProperty('--glow-color', b.data.color + '80');
+
+          matchedCount++;
+          document.getElementById('matchCount').textContent = matchedCount;
+          flippedCards = [];
+          locked = false;
+
+          if (matchedCount === 18) {
+            onGameComplete();
+          }
+        }, 400);
+      } else {
+        // No match — plant a seed
+        plantSeed(a.el, b.el);
+
+        setTimeout(() => {
+          a.el.classList.remove('flipped');
+          b.el.classList.remove('flipped');
+          flippedCards = [];
+          locked = false;
+        }, 1500);
+      }
+    }
+
+    // ═══ Seeds ═══
+    function plantSeed(cardA, cardB) {
+      const grid = document.getElementById('cardGrid');
+      const seedLayer = document.getElementById('seedLayer');
+      const gridRect = grid.getBoundingClientRect();
+
+      const rectA = cardA.getBoundingClientRect();
+      const rectB = cardB.getBoundingClientRect();
+
+      // Midpoint between the two cards, relative to the grid
+      const mx = ((rectA.left + rectA.right) / 2 + (rectB.left + rectB.right) / 2) / 2 - gridRect.left;
+      const my = ((rectA.top + rectA.bottom) / 2 + (rectB.top + rectB.bottom) / 2) / 2 - gridRect.top;
+
+      // Add some jitter so seeds don't stack
+      const jx = mx + (Math.random() - 0.5) * 16;
+      const jy = my + (Math.random() - 0.5) * 16;
+
+      const seed = document.createElement('div');
+      seed.className = 'seed';
+      seed.textContent = '\u2022'; // bullet dot as seed
+      seed.style.left = jx + 'px';
+      seed.style.top = jy + 'px';
+      seed.style.fontSize = '8px';
+      seedLayer.appendChild(seed);
+
+      seeds.push({ x: jx, y: jy, el: seed });
+    }
+
+    // ═══ Tree Sprouting ═══
+    function sproutForest() {
+      const seedLayer = document.getElementById('seedLayer');
+
+      seeds.forEach((s, i) => {
+        // Hide the seed dot
+        s.el.style.display = 'none';
+
+        // Create a sprout
+        const sprout = document.createElement('div');
+        sprout.className = 'sprout';
+        sprout.style.left = (s.x - 6) + 'px';
+        sprout.style.top = (s.y - 22) + 'px';
+
+        const canopy = document.createElement('div');
+        canopy.className = 's-canopy';
+
+        const trunk = document.createElement('div');
+        trunk.className = 's-trunk';
+
+        sprout.appendChild(canopy);
+        sprout.appendChild(trunk);
+        seedLayer.appendChild(sprout);
+
+        // Stagger the growth
+        setTimeout(() => {
+          sprout.classList.add('growing');
+        }, 200 + i * 120);
+      });
+    }
+
+    // ═══ Timer ═══
+    function updateTimer() {
+      if (!startTime) return;
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = (elapsed % 60).toString().padStart(2, '0');
+      document.getElementById('timerDisplay').textContent = mins + ':' + secs;
+    }
+
+    // ═══ Completion ═══
+    function onGameComplete() {
+      clearInterval(timerInterval);
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = (elapsed % 60).toString().padStart(2, '0');
+
+      // Sprout the forgotten seeds first
+      sproutForest();
+
+      // Show overlay after sprouts grow
+      setTimeout(() => {
+        const overlay = document.getElementById('completionOverlay');
+        const msg = document.getElementById('completionMessage');
+        const stats = document.getElementById('completionStats');
+
+        const seedCount = seeds.length;
+
+        if (seedCount === 0) {
+          msg.innerHTML = 'You remembered every voice.<br><br>' +
+            '<em>Clark\'s Nutcracker caches 30,000 seeds a year and remembers where most of them are.</em><br><br>' +
+            'Today, you forgot none. A perfect memory. But forests grow from what is forgotten.';
+        } else {
+          msg.innerHTML = 'Clark\'s Nutcracker caches 30,000 seeds a year and remembers where most of them are.<br><br>' +
+            '<em>The ones it forgets become forests.</em><br><br>' +
+            'You planted <strong>' + seedCount + '</strong> seed' + (seedCount === 1 ? '' : 's') + ' from your mistakes. ' +
+            'Look behind you \u2014 the trees are already growing.';
+        }
+
+        stats.textContent = moveCount + ' moves \u00B7 ' + mins + ':' + secs;
+
+        overlay.style.display = 'flex';
+        // Force reflow
+        overlay.offsetHeight;
+        overlay.classList.add('visible');
+      }, seeds.length > 0 ? 2500 : 800);
+    }
+
+    // ═══ Init ═══
+    function newGame() {
+      // Reset state
+      cards = createCards();
+      flippedCards = [];
+      matchedCount = 0;
+      moveCount = 0;
+      locked = false;
+      seeds = [];
+      clearInterval(timerInterval);
+      startTime = null;
+
+      document.getElementById('matchCount').textContent = '0';
+      document.getElementById('moveCount').textContent = '0';
+      document.getElementById('timerDisplay').textContent = '0:00';
+
+      // Hide overlay
+      const overlay = document.getElementById('completionOverlay');
+      overlay.classList.remove('visible');
+      setTimeout(() => { overlay.style.display = 'none'; }, 500);
+
+      // Render grid
+      const grid = document.getElementById('cardGrid');
+      // Keep the seed layer
+      const seedLayer = document.getElementById('seedLayer');
+      grid.innerHTML = '';
+      seedLayer.innerHTML = '';
+      grid.appendChild(seedLayer);
+
+      cards.forEach((cardData, i) => {
+        grid.appendChild(renderCard(cardData, i));
+      });
+    }
+
+    document.getElementById('btnNewGame').addEventListener('click', newGame);
+    document.getElementById('btnNewGameOverlay').addEventListener('click', newGame);
+
+    // Start
+    buildForest();
+    newGame();
+  </script>
+</body>
+</html>

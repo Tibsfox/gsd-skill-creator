@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Guides — Eleven Trails into the Research Forest</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      background: radial-gradient(ellipse at 50% 80%, rgba(74,124,63,0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: #e8dcc8;
+      margin-bottom: 0.3rem;
+    }
+    .hero .subtitle {
+      font-size: 1rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    /* Trailhead marker */
+    .trailhead-marker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .trailhead-marker .line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(122,154,90,0.4), transparent);
+    }
+    .trailhead-marker .diamond {
+      width: 8px;
+      height: 8px;
+      background: #7a9a5a;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px rgba(122,154,90,0.4);
+    }
+
+    /* Intro text */
+    .intro {
+      max-width: 42rem;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: rgba(232,220,200,0.6);
+      text-align: center;
+    }
+
+    /* Controls */
+    .controls {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0 2rem;
+    }
+    .controls button {
+      background: rgba(26,42,32,0.6);
+      border: 1px solid rgba(122,154,90,0.25);
+      color: rgba(232,220,200,0.65);
+      padding: 0.5rem 1.2rem;
+      font-family: 'Georgia', serif;
+      font-size: 0.82rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .controls button:hover {
+      border-color: rgba(122,154,90,0.5);
+      color: #e8dcc8;
+      background: rgba(26,42,32,0.8);
+    }
+    .controls button.active {
+      border-color: rgba(122,154,90,0.5);
+      color: #e8dcc8;
+      background: rgba(26,58,42,0.6);
+    }
+
+    /* Trail Grid */
+    .trail-grid {
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Trail Card */
+    .trail-card {
+      background: rgba(20,32,24,0.7);
+      border: 1px solid rgba(122,154,90,0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      position: relative;
+    }
+    .trail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    .trail-card:hover {
+      border-color: rgba(122,154,90,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .trail-card.expanded {
+      grid-column: 1 / -1;
+    }
+    .trail-card.expanded .card-expand {
+      max-height: 800px;
+      opacity: 1;
+      padding: 0 1.8rem 1.8rem;
+    }
+
+    /* Card Header (always visible) */
+    .card-header {
+      padding: 1.5rem 1.8rem 1.2rem;
+      position: relative;
+    }
+    .card-species {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+    .card-species h3 {
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .card-sci {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.35);
+    }
+    .card-role {
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.5);
+      margin-bottom: 0.6rem;
+    }
+    .card-cluster-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .card-cluster {
+      font-size: 0.78rem;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .card-count {
+      font-size: 0.75rem;
+      color: rgba(232,220,200,0.4);
+      font-family: 'Courier New', monospace;
+    }
+    .card-voice {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(232,220,200,0.45);
+      line-height: 1.5;
+      padding-left: 0.8rem;
+      border-left: 2px solid rgba(232,220,200,0.1);
+    }
+
+    /* Card Expand (hidden until active) */
+    .card-expand {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
+      padding: 0 1.8rem;
+    }
+    .card-expand-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(122,154,90,0.2), transparent);
+      margin-bottom: 1.5rem;
+    }
+    .expand-section {
+      margin-bottom: 1.2rem;
+    }
+    .expand-section h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(232,220,200,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .expand-section p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.6);
+    }
+    .greeting-text {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(232,220,200,0.65);
+      font-style: italic;
+      padding: 1rem 1.2rem;
+      background: rgba(26,42,32,0.4);
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .greeting-text::before {
+      content: '\201C';
+      font-size: 2.5rem;
+      position: absolute;
+      top: -0.2rem;
+      left: 0.4rem;
+      color: rgba(232,220,200,0.15);
+      font-family: Georgia, serif;
+    }
+
+    /* Project waypoints */
+    .waypoints {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .waypoint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.7rem;
+      background: rgba(26,42,32,0.5);
+      border: 1px solid rgba(122,154,90,0.15);
+      border-radius: 4px;
+      text-decoration: none;
+      color: rgba(232,220,200,0.6);
+      font-size: 0.78rem;
+      font-family: 'Courier New', monospace;
+      transition: all 0.25s;
+    }
+    .waypoint:hover {
+      border-color: rgba(122,154,90,0.4);
+      color: #e8dcc8;
+      background: rgba(26,58,42,0.5);
+      transform: translateY(-1px);
+    }
+    .waypoint .wp-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Begin trail button */
+    .begin-trail {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(122,154,90,0.3);
+      border-radius: 5px;
+      text-decoration: none;
+      color: #e8dcc8;
+      font-family: 'Georgia', serif;
+      font-size: 0.88rem;
+      transition: all 0.3s;
+      background: rgba(26,42,32,0.4);
+    }
+    .begin-trail:hover {
+      background: rgba(26,58,42,0.6);
+      border-color: rgba(122,154,90,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    /* Closing text */
+    .closing {
+      max-width: 42rem;
+      margin: 1rem auto 0;
+      padding: 2rem 2rem 3rem;
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: rgba(232,220,200,0.45);
+      text-align: center;
+      border-top: 1px solid rgba(122,154,90,0.08);
+    }
+
+    /* Footer */
+    .camp-footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: rgba(232,220,200,0.25);
+      line-height: 1.8;
+      border-top: 1px solid rgba(122,154,90,0.08);
+    }
+    .camp-footer a {
+      color: rgba(122,154,90,0.5);
+      text-decoration: none;
+    }
+    .camp-footer a:hover { color: #7a9a5a; }
+
+    /* Show-all mode */
+    .trail-grid.show-all .trail-card .card-expand {
+      max-height: 800px;
+      opacity: 1;
+      padding: 0 1.8rem 1.8rem;
+    }
+    .trail-grid.show-all .trail-card {
+      grid-column: auto;
+    }
+
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2rem; }
+      .trail-grid { grid-template-columns: 1fr; }
+      .trail-card.expanded { grid-column: auto; }
+      .card-species { flex-direction: column; gap: 0.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">The Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <a href="guides.html" class="active">The Guides</a>
+</div>
+
+<div class="hero">
+  <h1>The Guides</h1>
+  <div class="subtitle">Eleven species, eleven paths &mdash; choose a trail and let your guide lead you through the research</div>
+  <div class="trailhead-marker">
+    <div class="line"></div>
+    <div class="diamond"></div>
+    <div class="line"></div>
+  </div>
+</div>
+
+<div class="intro">
+  Center Camp sits at the heart of the forest. Eleven trails lead outward into the research &mdash;
+  ecology, electronics, infrastructure, energy, creative arts, business, vision, music, radio,
+  community, and science fiction. Each trail has a guide &mdash; a PNW species that knows the way.
+  Pick a trail. The guide will introduce themselves and show you what&rsquo;s ahead.
+</div>
+
+<div class="controls">
+  <button id="btn-show-all">Show all trails</button>
+</div>
+
+<div class="trail-grid" id="trail-grid"></div>
+
+<div class="closing">
+  Every guide was chosen from the research itself &mdash; species documented in the ecology,
+  biology, and natural history of the Pacific Northwest. They guide because guiding is what
+  they do in the wild: elk make trails, moles build tunnels, swans follow thermal gradients,
+  loons carry sound across water. The forest teaches through its own inhabitants.
+</div>
+
+<div class="camp-footer">
+  <a href="../compass.html">The Compass</a> &middot;
+  <a href="bestiary.html">The Bestiary</a> &middot;
+  <a href="index.html">Center Camp</a>
+</div>
+
+<script src="guides.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  // Project display names (fallback to ID if not listed)
+  var PROJECT_NAMES = {
+    COL: 'Columbia Valley Rainforest', CAS: 'Cascade Range', ECO: 'PNW Ecology',
+    GDN: 'Garden Ecology', AVI: 'Wings of the PNW', MAM: 'Fur, Fin & Fang',
+    SAL: 'Salmon & Watersheds', CRV: 'Corvid Intelligence', AGR: 'Agricultural Roots',
+    LFR: 'Living Forest', WYR: 'Wildfire & Recovery', AWF: 'Aquatic & Wetland Fauna',
+    PGP: 'Pacific Garbage Patch',
+    LED: 'LED & Photonics', SHE: 'Shelter Electronics', T55: 'The 555 Timer',
+    EMG: 'Electromagnetic Geology', BPS: 'Bio-Physics Sensors',
+    SYS: 'Systems Administration', K8S: 'Kubernetes Patterns', CMH: 'Computer History',
+    GSD2: 'GSD Framework', MPC: 'Math Co-Processor', OCN: 'Ocean Computing',
+    VAV: 'Valve Computing', PMG: 'Package Management', SAN: 'SAN & Storage',
+    SYN: 'Synchronization', TSL: 'TLS & Security', MCM: 'Maritime Compute',
+    THE: 'Thermodynamics', HGE: 'Hydroelectric', ROF: 'Ring of Fire',
+    FFA: 'Fur & Fiber Arts', TIBS: 'Animal Speak', ARC: 'Architecture & Design',
+    BRC: 'Burning Man', DAA: 'Digital Art & Animation', SPA: 'Spatial Computing',
+    FDR: 'Fursuit Design & Research', ATC: 'Art & Technique Compendium',
+    LKR: 'Locker Room', WAL: 'Weird Al Yankovic', STA: 'Stage & Theater Arts',
+    MCR: 'Macro Photography', GRD: 'Graphic Design',
+    BCM: 'Building Codes', ACC: 'Accounting Standards', WSB: 'Small Business',
+    BLA: 'Business Law',
+    NND: 'New New Deal', PSG: 'Pacific Spine Gateway',
+    GRV: 'Green River', PJM: 'Pearl Jam', SNY: 'Sunny Day Real Estate',
+    MIX: 'Mix-A-Lot', GGT: 'Gorilla Gardens/The Tropicana',
+    GTP: 'Guitar Techniques & Pedagogy', KGX: 'KEXP Legacy',
+    CDP: 'CDP & Tape Culture', COI: 'Coil', DDA: 'DDA & Industrial',
+    FQC: 'Frequency Continuum',
+    C89: 'C89.5 FM', KUB: 'KUBB Radio', KSM: 'KISM FM',
+    KPZ: 'KNKX/KPLU/Jazz', WLF: 'Wolf FM', RBH: 'Radio Broadcast History',
+    NWC: 'Norwescon', WCN: 'Westercon', SMF: 'SMOFcon',
+    OTM: 'Odyssey of the Mind', JNS: 'JanSport',
+    LNV: 'Larry Niven'
+  };
+
+  var grid = document.getElementById('trail-grid');
+  var showAllBtn = document.getElementById('btn-show-all');
+  var expandedId = null;
+  var showAllMode = false;
+
+  function buildCard(guide) {
+    var card = document.createElement('div');
+    card.className = 'trail-card';
+    card.dataset.id = guide.id;
+    card.style.setProperty('--accent', guide.color);
+
+    // Left border accent
+    card.style.cssText += ';';
+    var style = card.style;
+
+    var projectCount = guide.projects.length;
+    var countLabel = projectCount === 1 ? '1 project' : projectCount + ' projects';
+
+    // Build waypoint HTML
+    var waypointsHtml = '';
+    for (var i = 0; i < guide.projects.length; i++) {
+      var pid = guide.projects[i];
+      var pname = PROJECT_NAMES[pid] || pid;
+      waypointsHtml += '<a href="../' + pid + '/index.html" class="waypoint" onclick="event.stopPropagation()">' +
+        '<span class="wp-dot" style="background:' + guide.color + '"></span>' +
+        '<span>' + pid + '</span>' +
+        '</a>';
+    }
+
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div class="card-species">' +
+          '<h3>' + guide.name + '</h3>' +
+          '<span class="card-sci">' + guide.sci + '</span>' +
+        '</div>' +
+        '<div class="card-role" style="color:' + guide.color + '">' + guide.role + '</div>' +
+        '<div class="card-cluster-line">' +
+          '<span class="card-cluster" style="color:' + guide.color + '">' + guide.clusterName + '</span>' +
+          '<span class="card-count">' + countLabel + '</span>' +
+        '</div>' +
+        '<div class="card-voice">&ldquo;' + guide.voice + '&rdquo;</div>' +
+      '</div>' +
+      '<div class="card-expand">' +
+        '<div class="card-expand-divider"></div>' +
+        '<div class="greeting-text">' + guide.greeting + '</div>' +
+        '<div class="expand-section">' +
+          '<h4>Teaching</h4>' +
+          '<p>' + guide.teaching + '</p>' +
+        '</div>' +
+        '<div class="expand-section">' +
+          '<h4>PNW Root</h4>' +
+          '<p>' + guide.pnw + '</p>' +
+        '</div>' +
+        '<div class="expand-section">' +
+          '<h4>Trail Waypoints</h4>' +
+          '<div class="waypoints">' + waypointsHtml + '</div>' +
+        '</div>' +
+        '<a href="../' + guide.hub + '/index.html" class="begin-trail" onclick="event.stopPropagation()">Begin this trail &rarr;</a>' +
+      '</div>';
+
+    // Apply left border
+    card.querySelector('.card-header').style.borderLeft = 'none';
+    card.style.borderLeft = '4px solid ' + guide.color;
+
+    card.addEventListener('click', function() {
+      if (showAllMode) return;
+      toggleCard(guide.id);
+    });
+
+    return card;
+  }
+
+  function toggleCard(id) {
+    var cards = grid.querySelectorAll('.trail-card');
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (c.dataset.id === id) {
+        if (c.classList.contains('expanded')) {
+          c.classList.remove('expanded');
+          expandedId = null;
+        } else {
+          c.classList.add('expanded');
+          expandedId = id;
+          // Scroll into view after animation starts
+          setTimeout(function() {
+            c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+        }
+      } else {
+        c.classList.remove('expanded');
+      }
+    }
+  }
+
+  // Build all cards
+  for (var i = 0; i < PATH_GUIDES.length; i++) {
+    grid.appendChild(buildCard(PATH_GUIDES[i]));
+  }
+
+  // Show all toggle
+  showAllBtn.addEventListener('click', function() {
+    showAllMode = !showAllMode;
+    if (showAllMode) {
+      grid.classList.add('show-all');
+      showAllBtn.textContent = 'Collapse all trails';
+      showAllBtn.classList.add('active');
+      // Clear single-expanded state
+      expandedId = null;
+      var cards = grid.querySelectorAll('.trail-card');
+      for (var j = 0; j < cards.length; j++) {
+        cards[j].classList.remove('expanded');
+      }
+    } else {
+      grid.classList.remove('show-all');
+      showAllBtn.textContent = 'Show all trails';
+      showAllBtn.classList.remove('active');
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

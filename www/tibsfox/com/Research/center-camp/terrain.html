@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Terrain — Foxy's Cartography</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0d1a12;
+    --text: #e8dcc8;
+    --canopy: #1a3a2a;
+    --forest: #2d5a3a;
+    --moss: #7a9a5a;
+    --salmon: #c75b3a;
+    --parchment: #c8b890;
+    --alpine: #d4dce8;
+    --subalpine: #78909c;
+    --montane: #2d5a3a;
+    --foothills: #4a7c3f;
+    --lowlands: #5c7a3f;
+    --coast: #2a6496;
+    --ocean: #1b3a4b;
+    --underground: #3d2b1f;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(122, 154, 90, 0.4);
+    color: var(--text);
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(180deg, rgba(13,26,18,0.95) 0%, rgba(13,26,18,0.7) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(122,154,90,0.15);
+  }
+  nav a {
+    color: var(--parchment);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--moss); }
+  nav .sep { color: rgba(200,184,144,0.3); font-size: 0.8rem; }
+
+  /* --- HEADER --- */
+  header {
+    text-align: center;
+    padding: 5rem 2rem 1.5rem;
+    position: relative;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 80%, rgba(42,100,150,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-size: 2.8rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 40px rgba(122,154,90,0.2);
+  }
+  header .subtitle {
+    font-size: 1rem;
+    color: var(--parchment);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* --- TERRAIN CANVAS --- */
+  #terrain-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+  }
+  #terrain-canvas {
+    width: 100%;
+    height: 600px;
+    display: block;
+    cursor: crosshair;
+    border-radius: 4px;
+  }
+
+  /* --- TOOLTIP --- */
+  #tooltip {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    background: rgba(13, 26, 18, 0.95);
+    border: 1px solid rgba(122,154,90,0.4);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    max-width: 280px;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  #tooltip .tt-name {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  #tooltip .tt-role {
+    font-size: 0.8rem;
+    color: var(--moss);
+    font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+  #tooltip .tt-detail {
+    font-size: 0.78rem;
+    color: rgba(232,220,200,0.6);
+    line-height: 1.4;
+  }
+  #tooltip .tt-link {
+    font-size: 0.72rem;
+    color: var(--salmon);
+    margin-top: 0.3rem;
+    opacity: 0.7;
+  }
+
+  /* --- LEGEND --- */
+  .legend {
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    font-size: 0.78rem;
+    color: rgba(232,220,200,0.5);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .legend-icon {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .legend-icon.diamond {
+    width: 10px; height: 10px;
+    background: var(--moss);
+    transform: rotate(45deg);
+  }
+  .legend-icon.circle {
+    width: 10px; height: 10px;
+    background: var(--salmon);
+    border-radius: 50%;
+  }
+  .legend-icon.tower {
+    width: 4px; height: 14px;
+    background: var(--alpine);
+    border-radius: 1px;
+    position: relative;
+  }
+  .legend-icon.building {
+    width: 10px; height: 10px;
+    background: var(--parchment);
+    opacity: 0.6;
+    border-radius: 1px;
+  }
+  .legend-zones {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .zone-chip {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* --- BOTTOM TEXT --- */
+  .bottom-text {
+    max-width: 700px;
+    margin: 2rem auto 3rem;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: rgba(232,220,200,0.45);
+    border-top: 1px solid rgba(122,154,90,0.15);
+    border-bottom: 1px solid rgba(122,154,90,0.15);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.72rem;
+    color: rgba(232,220,200,0.2);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+  <span class="sep">/</span>
+  <a href="rosetta-table.html">Rosetta</a>
+  <span class="sep">/</span>
+  <a href="frequency-dial.html">Frequency Dial</a>
+  <span class="sep">/</span>
+  <a href="living-web.html">Living Web</a>
+</nav>
+
+<header>
+  <h1>The Terrain</h1>
+  <p class="subtitle">Foxy's Cartography &mdash; where everything lives in the PNW landscape</p>
+</header>
+
+<div id="terrain-wrap">
+  <canvas id="terrain-canvas"></canvas>
+</div>
+
+<div id="tooltip">
+  <div class="tt-name"></div>
+  <div class="tt-role"></div>
+  <div class="tt-detail"></div>
+  <div class="tt-link">click to visit</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-icon diamond"></span> Muse</div>
+  <div class="legend-item"><span class="legend-icon circle"></span> Band / Project</div>
+  <div class="legend-item"><span class="legend-icon tower"></span> Radio Transmitter</div>
+  <div class="legend-item"><span class="legend-icon building"></span> Music Neighborhood</div>
+  <div class="legend-zones">
+    <span class="zone-chip" style="background:#d4dce8;color:#1a2a1f;">Alpine</span>
+    <span class="zone-chip" style="background:#78909c;color:#fff;">Subalpine</span>
+    <span class="zone-chip" style="background:#2d5a3a;color:#cde;">Montane</span>
+    <span class="zone-chip" style="background:#4a7c3f;color:#e8dcc8;">Foothills</span>
+    <span class="zone-chip" style="background:#5c7a3f;color:#e8dcc8;">Lowlands</span>
+    <span class="zone-chip" style="background:#2a6496;color:#d4dce8;">Coast</span>
+    <span class="zone-chip" style="background:#1b3a4b;color:#7ab;">Ocean</span>
+    <span class="zone-chip" style="background:#3d2b1f;color:#c8a870;">Underground</span>
+  </div>
+</div>
+
+<div class="bottom-text">
+  The Cascade Range divides everything. Radio signals propagate from mountaintop transmitters
+  into the valleys where people live. Salmon carry ocean nutrients up the rivers into the forest.
+  Music grows from the neighborhoods at sea level and broadcasts from the peaks.
+  The mycorrhizal network connects it all underground. The terrain is the map. The map is the forest.
+</div>
+
+<footer>Center Camp &mdash; The Terrain &mdash; 2026</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// THE TERRAIN — Canvas-based PNW cross-section visualization
+// ═══════════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('terrain-canvas');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+// Hi-DPI support
+let W, H, dpr;
+
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  W = rect.width;
+  H = rect.height;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+// ═══ COLOR PALETTE ═══
+const C = {
+  bg: '#0d1a12',
+  text: '#e8dcc8',
+  canopy: '#1a3a2a',
+  forest: '#2d5a3a',
+  moss: '#7a9a5a',
+  salmon: '#c75b3a',
+  parchment: '#c8b890',
+  alpine: '#d4dce8',
+  subalpine: '#78909c',
+  montane: '#2d5a3a',
+  foothills: '#4a7c3f',
+  lowlands: '#5c7a3f',
+  coast: '#2a6496',
+  ocean: '#1b3a4b',
+  underground: '#3d2b1f',
+};
+
+// ═══ TERRAIN GEOMETRY ═══
+// Elevation profile: ocean → coast → lowlands → foothills → montane → cascade peak → rain shadow
+// We map 14,411 ft (Rainier) to canvas coords
+const MAX_ELEV = 14411; // ft
+const SEA_LEVEL_Y = 0.68;  // where sea level sits on canvas (fraction from top)
+const PEAK_Y = 0.08;       // cascade crest
+const OCEAN_FLOOR_Y = 0.82; // ocean bottom
+const UNDERGROUND_Y = 0.92; // underground layer base
+
+// Convert elevation (ft) to canvas Y
+function elevToY(ft) {
+  const frac = ft / MAX_ELEV;
+  return SEA_LEVEL_Y - frac * (SEA_LEVEL_Y - PEAK_Y);
+}
+
+// Convert a fractional X position (0-1) to canvas X
+function fracX(f) { return f * W; }
+function fracY(f) { return f * H; }
+
+// Terrain profile as a smooth curve
+// X positions: 0=far ocean, 0.12=coast, 0.22=lowlands, 0.38=foothills, 0.52=montane, 0.62=peak, 0.72=east montane, 0.85=rain shadow, 1.0=east desert
+function terrainY(xFrac) {
+  // Orcas Island bump at 0.06
+  if (xFrac < 0.03) return SEA_LEVEL_Y + 0.04 + 0.08 * Math.sin(xFrac / 0.03 * Math.PI);
+  if (xFrac < 0.055) {
+    const t = (xFrac - 0.03) / 0.025;
+    const rise = 0.015 * Math.sin(t * Math.PI); // small island
+    return SEA_LEVEL_Y - rise;
+  }
+  if (xFrac < 0.09) {
+    return SEA_LEVEL_Y + 0.02 * Math.sin((xFrac - 0.055) / 0.035 * Math.PI);
+  }
+
+  // Main coastline starts around 0.10
+  if (xFrac < 0.12) {
+    const t = (xFrac - 0.09) / 0.03;
+    return SEA_LEVEL_Y * (1 - t * 0.01);
+  }
+
+  // Coast to lowlands (0.12 - 0.22)
+  if (xFrac < 0.22) {
+    const t = (xFrac - 0.12) / 0.10;
+    const elev = 300 * t;
+    return elevToY(elev);
+  }
+
+  // Lowlands to foothills (0.22 - 0.38)
+  if (xFrac < 0.38) {
+    const t = (xFrac - 0.22) / 0.16;
+    const elev = 300 + 1700 * easeInQuad(t);
+    return elevToY(elev);
+  }
+
+  // Foothills to montane (0.38 - 0.50)
+  if (xFrac < 0.50) {
+    const t = (xFrac - 0.38) / 0.12;
+    const elev = 2000 + 2500 * easeInQuad(t);
+    return elevToY(elev);
+  }
+
+  // Montane to cascade crest (0.50 - 0.62)
+  if (xFrac < 0.62) {
+    const t = (xFrac - 0.50) / 0.12;
+    const elev = 4500 + 9911 * easeInOutQuad(t);
+    return elevToY(elev);
+  }
+
+  // Cascade crest to east montane (0.62 - 0.72) — steeper east side
+  if (xFrac < 0.72) {
+    const t = (xFrac - 0.62) / 0.10;
+    const elev = 14411 - 10411 * easeOutQuad(t);
+    return elevToY(elev);
+  }
+
+  // East foothills to rain shadow (0.72 - 0.88)
+  if (xFrac < 0.88) {
+    const t = (xFrac - 0.72) / 0.16;
+    const elev = 4000 - 2800 * easeOutQuad(t);
+    return elevToY(elev);
+  }
+
+  // Rain shadow plateau (0.88 - 1.0)
+  const t = (xFrac - 0.88) / 0.12;
+  const elev = 1200 - 200 * t;
+  return elevToY(elev);
+}
+
+function easeInQuad(t) { return t * t; }
+function easeOutQuad(t) { return t * (2 - t); }
+function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+// ═══ ANIMATION STATE ═══
+let time = 0;
+let stars = [];
+let raindrops = [];
+let clouds = [];
+let spores = [];
+let mycorrhiza = [];
+
+function initParticles() {
+  // Stars
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random() * 0.35,
+      r: 0.3 + Math.random() * 1.2,
+      twinkle: Math.random() * Math.PI * 2,
+      speed: 0.5 + Math.random() * 2,
+    });
+  }
+
+  // Rain (west side only)
+  raindrops = [];
+  for (let i = 0; i < 120; i++) {
+    raindrops.push({
+      x: 0.05 + Math.random() * 0.55,
+      y: Math.random(),
+      speed: 0.003 + Math.random() * 0.005,
+      length: 8 + Math.random() * 16,
+      opacity: 0.05 + Math.random() * 0.12,
+    });
+  }
+
+  // Clouds at subalpine level
+  clouds = [];
+  for (let i = 0; i < 6; i++) {
+    clouds.push({
+      x: Math.random(),
+      y: elevToY(5000 + Math.random() * 1500),
+      w: 60 + Math.random() * 120,
+      h: 8 + Math.random() * 14,
+      speed: 0.00008 + Math.random() * 0.00015,
+      opacity: 0.06 + Math.random() * 0.08,
+    });
+  }
+
+  // Underground spores
+  spores = [];
+  for (let i = 0; i < 30; i++) {
+    spores.push({
+      x: 0.15 + Math.random() * 0.7,
+      y: 0,
+      speed: 0.0003 + Math.random() * 0.0006,
+      opacity: 0.1 + Math.random() * 0.2,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  // Mycorrhizal network lines
+  mycorrhiza = [];
+  const numRoots = 18;
+  for (let i = 0; i < numRoots; i++) {
+    const startX = 0.12 + Math.random() * 0.7;
+    const segments = [];
+    let cx = startX;
+    let cy = SEA_LEVEL_Y + 0.03;
+    for (let s = 0; s < 5 + Math.floor(Math.random() * 6); s++) {
+      cx += (Math.random() - 0.5) * 0.06;
+      cy += 0.005 + Math.random() * 0.01;
+      segments.push({ x: cx, y: cy });
+    }
+    mycorrhiza.push({ segments, pulse: Math.random() * Math.PI * 2 });
+  }
+}
+
+// ═══ DATA: 26 MUSES ═══
+const muses = [
+  // ALPINE
+  { name: 'Osprey', theta: 78, role: 'the horizon', zone: 'alpine', elev: 8500, xFrac: 0.60, id: null },
+  // SUBALPINE
+  { name: 'Owl', theta: 55, role: 'the clock', zone: 'subalpine', elev: 5500, xFrac: 0.54, id: null },
+  // MONTANE
+  { name: 'Salamander', theta: 18, role: 'the headwater', zone: 'montane', elev: 2800, xFrac: 0.35, id: null },
+  { name: 'Hemlock', theta: 20, role: 'the standard', zone: 'montane', elev: 3800, xFrac: 0.48, id: 'CAS' },
+  { name: 'Fire', theta: 22, role: 'the renewal', zone: 'montane', elev: 2200, xFrac: 0.38, id: null, force: true },
+  { name: 'Cedar', theta: 0, role: 'the record', zone: 'montane', elev: 3200, xFrac: 0.44, id: 'MUS' },
+  { name: 'Marten', theta: 56, role: 'the signal', zone: 'montane', elev: 4000, xFrac: 0.51, id: null },
+  { name: 'Raven', theta: 60, role: 'the pattern', zone: 'montane', elev: 3500, xFrac: 0.46, id: null },
+  // FOOTHILLS
+  { name: 'Fog', theta: 26, role: 'the invisible', zone: 'foothills', elev: 800, xFrac: 0.15, id: null, atmospheric: true },
+  { name: 'Foxy', theta: 30, role: 'the map', zone: 'foothills', elev: 1600, xFrac: 0.36, id: 'ECO' },
+  { name: 'Sitka', theta: 32, role: 'the root', zone: 'foothills', elev: 1200, xFrac: 0.33, id: null },
+  { name: 'Alder', theta: 70, role: 'the resonance', zone: 'foothills', elev: 1400, xFrac: 0.35, id: null },
+  { name: 'Beaver', theta: 16, role: 'the maker', zone: 'foothills', elev: 900, xFrac: 0.31, id: null },
+  { name: 'Wren', theta: 65, role: 'the song', zone: 'foothills', elev: 1100, xFrac: 0.34, id: null },
+  // LOWLANDS
+  { name: 'Willow', theta: 45, role: 'the welcome', zone: 'lowlands', elev: 350, xFrac: 0.24, id: 'COL' },
+  { name: 'Sam', theta: 40, role: 'the question', zone: 'lowlands', elev: 280, xFrac: 0.22, id: 'GDN' },
+  { name: 'Madrone', theta: 53, role: 'the hearth', zone: 'lowlands', elev: 400, xFrac: 0.26, id: null },
+  { name: 'Hawk', theta: 50, role: 'the formation', zone: 'lowlands', elev: 320, xFrac: 0.23, id: null },
+  { name: 'Lex', theta: 5, role: 'the specification', zone: 'lowlands', elev: 200, xFrac: 0.20, id: 'UNI' },
+  { name: 'Chinook', theta: 35, role: 'the current', zone: 'lowlands', elev: 150, xFrac: 0.18, id: null },
+  // COAST
+  { name: 'Eulachon', theta: 34, role: 'the first gift', zone: 'coast', elev: 20, xFrac: 0.12, id: 'SAL' },
+  { name: 'Orca', theta: 38, role: 'the elder', zone: 'coast', elev: 0, xFrac: 0.12, id: null },
+  { name: 'Octopus', theta: 44, role: 'the reinventor', zone: 'coast', elev: -30, xFrac: 0.08, id: null },
+  // UNDERGROUND
+  { name: 'Chanterelle', theta: 12, role: 'the network', zone: 'underground', elev: -200, xFrac: 0.30, id: null },
+  { name: 'Lichen', theta: 8, role: 'the breath', zone: 'underground', elev: -300, xFrac: 0.40, id: null },
+  { name: 'Fern', theta: 10, role: 'the foundation', zone: 'underground', elev: -150, xFrac: 0.50, id: null },
+];
+
+// ═══ DATA: TRANSMITTERS ═══
+const transmitters = [
+  { name: 'Cougar Mountain', elev: 1220, xFrac: 0.30, labels: 'C89.5 \u00b7 KUBE \u00b7 KPLZ', id: 'C89' },
+  { name: 'Tiger Mountain', elev: 3000, xFrac: 0.42, labels: 'The Wolf \u00b7 KISW', id: null },
+  { name: 'Mount Constitution', elev: 2409, xFrac: 0.045, labels: 'KISM 92.9', id: null },
+];
+
+// ═══ DATA: MUSIC NEIGHBORHOODS ═══
+const neighborhoods = [
+  { name: 'Jackson Street Corridor', label: 'Jazz \u00b7 Blues \u00b7 Ancestral Sounds (1918-)', elev: 50, xFrac: 0.16 },
+  { name: 'Central District', label: 'Hip-Hop \u00b7 Mix-A-Lot \u00b7 Community', elev: 80, xFrac: 0.18 },
+  { name: 'U-District / KEXP', label: 'College Radio \u00b7 Sub Pop \u00b7 10 Watts', elev: 60, xFrac: 0.20 },
+  { name: 'Capitol Hill / Reciprocal', label: 'Grunge \u00b7 $10/hour \u00b7 Green River', elev: 450, xFrac: 0.28 },
+  { name: 'Auburn', label: 'NastyMix \u00b7 Home Studio \u00b7 DIY King', elev: 70, xFrac: 0.25 },
+];
+
+// ═══ DATA: BANDS ═══
+const bands = [
+  { name: 'Green River', zone: 'Capitol Hill', elev: 500, xFrac: 0.29, id: 'GRV' },
+  { name: 'Pearl Jam', zone: 'Foothills', elev: 1500, xFrac: 0.37, id: null },
+  { name: 'Sir Mix-A-Lot', zone: 'Auburn/Central', elev: 90, xFrac: 0.26, id: null },
+  { name: 'Sonic Youth', zone: 'East Visitors', elev: 600, xFrac: 0.96, arrow: 'east', id: null },
+  { name: "King's X", zone: 'Deep Root', elev: -100, xFrac: 0.45, arrow: 'up', id: null },
+  { name: 'Coldplay', zone: 'Atmosphere', elev: 10000, xFrac: 0.55, arrow: 'down', id: 'CDP' },
+  { name: 'Coil', zone: 'Underground', elev: -250, xFrac: 0.38, id: 'COI' },
+  { name: 'dada', zone: 'Coastal Fog', elev: 30, xFrac: 0.13, id: 'DDA' },
+  { name: 'Geggy Tah', zone: 'Trading Post', elev: 250, xFrac: 0.21, id: 'GGT' },
+  { name: 'FQC', zone: 'ALL ZONES', elev: null, xFrac: 0.68, vertical: true, id: 'FQC' },
+];
+
+// ═══ HITBOX REGISTRY ═══
+let hitboxes = [];
+
+function registerHitbox(x, y, w, h, data) {
+  hitboxes.push({ x, y, w, h, data });
+}
+
+function hitTest(mx, my) {
+  for (let i = hitboxes.length - 1; i >= 0; i--) {
+    const b = hitboxes[i];
+    if (mx >= b.x - b.w/2 && mx <= b.x + b.w/2 && my >= b.y - b.h/2 && my <= b.y + b.h/2) {
+      return b.data;
+    }
+  }
+  return null;
+}
+
+// ═══ DRAWING HELPERS ═══
+
+function getMuseY(muse) {
+  if (muse.zone === 'underground') {
+    const depthFrac = Math.abs(muse.elev) / 400;
+    return fracY(SEA_LEVEL_Y + 0.04 + depthFrac * 0.06);
+  }
+  return fracY(elevToY(muse.elev));
+}
+
+function getElementY(elev) {
+  if (elev < 0) {
+    const depthFrac = Math.abs(elev) / 400;
+    return fracY(SEA_LEVEL_Y + 0.04 + depthFrac * 0.06);
+  }
+  return fracY(elevToY(elev));
+}
+
+function zoneColor(zone) {
+  const map = {
+    alpine: C.alpine,
+    subalpine: C.subalpine,
+    montane: '#5a9a6a',
+    foothills: C.foothills,
+    lowlands: C.lowlands,
+    coast: C.coast,
+    underground: '#c8a870',
+  };
+  return map[zone] || C.moss;
+}
+
+// ═══ DRAW FUNCTIONS ═══
+
+function drawSky() {
+  // Night sky gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, fracY(0.35));
+  grad.addColorStop(0, '#050d14');
+  grad.addColorStop(0.4, '#0a1520');
+  grad.addColorStop(0.7, '#0d1a12');
+  grad.addColorStop(1, '#0d1a12');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, fracY(0.35));
+
+  // Stars
+  for (const s of stars) {
+    const flicker = 0.5 + 0.5 * Math.sin(time * s.speed + s.twinkle);
+    ctx.beginPath();
+    ctx.arc(fracX(s.x), fracY(s.y), s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(212, 220, 232, ${0.2 + 0.6 * flicker})`;
+    ctx.fill();
+    // Glow
+    if (s.r > 0.8) {
+      ctx.beginPath();
+      ctx.arc(fracX(s.x), fracY(s.y), s.r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212, 220, 232, ${0.04 * flicker})`;
+      ctx.fill();
+    }
+  }
+}
+
+function drawTerrainFill() {
+  // Draw filled elevation zones from bottom up
+
+  // Ocean
+  const oceanGrad = ctx.createLinearGradient(0, fracY(SEA_LEVEL_Y), 0, fracY(OCEAN_FLOOR_Y));
+  oceanGrad.addColorStop(0, '#1b4a5b');
+  oceanGrad.addColorStop(0.4, '#163a4a');
+  oceanGrad.addColorStop(1, C.ocean);
+  ctx.fillStyle = oceanGrad;
+  ctx.beginPath();
+  ctx.moveTo(0, fracY(SEA_LEVEL_Y));
+  ctx.lineTo(fracX(0.12), fracY(SEA_LEVEL_Y));
+  ctx.lineTo(fracX(0.12), fracY(OCEAN_FLOOR_Y));
+  ctx.lineTo(0, fracY(OCEAN_FLOOR_Y));
+  ctx.closePath();
+  ctx.fill();
+
+  // Also fill under Orcas Island channel
+  ctx.fillStyle = oceanGrad;
+  ctx.beginPath();
+  ctx.moveTo(0, fracY(SEA_LEVEL_Y));
+  ctx.lineTo(fracX(0.10), fracY(SEA_LEVEL_Y));
+  ctx.lineTo(fracX(0.10), fracY(OCEAN_FLOOR_Y));
+  ctx.lineTo(0, fracY(OCEAN_FLOOR_Y));
+  ctx.closePath();
+  ctx.fill();
+
+  // Water surface shimmer
+  const shimmerY = fracY(SEA_LEVEL_Y);
+  for (let i = 0; i < 15; i++) {
+    const sx = fracX(0.01 + Math.random() * 0.10);
+    const sw = 10 + Math.random() * 30;
+    const shimmer = 0.08 + 0.06 * Math.sin(time * 0.8 + i * 1.3);
+    ctx.strokeStyle = `rgba(100, 180, 220, ${shimmer})`;
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(sx, shimmerY + Math.sin(time * 0.5 + i) * 1.5);
+    ctx.lineTo(sx + sw, shimmerY + Math.sin(time * 0.5 + i + 1) * 1.5);
+    ctx.stroke();
+  }
+
+  // Underground layer
+  const ugGrad = ctx.createLinearGradient(0, fracY(SEA_LEVEL_Y + 0.02), 0, fracY(UNDERGROUND_Y));
+  ugGrad.addColorStop(0, '#2a1f14');
+  ugGrad.addColorStop(0.3, C.underground);
+  ugGrad.addColorStop(1, '#1a0f08');
+  ctx.fillStyle = ugGrad;
+  ctx.beginPath();
+  ctx.moveTo(fracX(0.10), fracY(SEA_LEVEL_Y + 0.02));
+  // Follow terrain surface just below
+  for (let xf = 0.10; xf <= 1.0; xf += 0.005) {
+    const ty = terrainY(xf);
+    ctx.lineTo(fracX(xf), fracY(ty + 0.02));
+  }
+  ctx.lineTo(fracX(1.0), fracY(UNDERGROUND_Y));
+  ctx.lineTo(fracX(0.10), fracY(UNDERGROUND_Y));
+  ctx.closePath();
+  ctx.fill();
+
+  // Main terrain mass with zone gradients
+  // Build terrain path
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(fracX(0.10), fracY(SEA_LEVEL_Y));
+  // Orcas Island
+  ctx.lineTo(fracX(0.03), fracY(SEA_LEVEL_Y));
+  for (let xf = 0.03; xf <= 0.055; xf += 0.002) {
+    ctx.lineTo(fracX(xf), fracY(terrainY(xf)));
+  }
+  ctx.lineTo(fracX(0.07), fracY(SEA_LEVEL_Y));
+  ctx.lineTo(fracX(0.10), fracY(SEA_LEVEL_Y));
+
+  // Main coastline
+  for (let xf = 0.10; xf <= 1.0; xf += 0.003) {
+    ctx.lineTo(fracX(xf), fracY(terrainY(xf)));
+  }
+  ctx.lineTo(fracX(1.0), fracY(SEA_LEVEL_Y + 0.02));
+  ctx.lineTo(fracX(0.10), fracY(SEA_LEVEL_Y + 0.02));
+  ctx.closePath();
+  ctx.clip();
+
+  // Fill with layered elevation zone gradients
+  const terrGrad = ctx.createLinearGradient(0, fracY(PEAK_Y), 0, fracY(SEA_LEVEL_Y + 0.02));
+  terrGrad.addColorStop(0, C.alpine);
+  terrGrad.addColorStop(0.08, '#a8b8cc');
+  terrGrad.addColorStop(0.15, C.subalpine);
+  terrGrad.addColorStop(0.25, '#3a6a4a');
+  terrGrad.addColorStop(0.35, C.montane);
+  terrGrad.addColorStop(0.50, '#3a6a3f');
+  terrGrad.addColorStop(0.65, C.foothills);
+  terrGrad.addColorStop(0.80, C.lowlands);
+  terrGrad.addColorStop(0.92, '#3a6a4a');
+  terrGrad.addColorStop(1.0, '#2a4a3a');
+  ctx.fillStyle = terrGrad;
+  ctx.fillRect(0, fracY(PEAK_Y), W, fracY(SEA_LEVEL_Y + 0.02) - fracY(PEAK_Y));
+
+  // Add horizontal contour lines
+  ctx.strokeStyle = 'rgba(232, 220, 200, 0.04)';
+  ctx.lineWidth = 0.5;
+  for (let elev = 0; elev <= 14000; elev += 500) {
+    const cy = fracY(elevToY(elev));
+    ctx.beginPath();
+    ctx.moveTo(0, cy);
+    ctx.lineTo(W, cy);
+    ctx.stroke();
+  }
+
+  // East side: drier, more amber
+  const dryGrad = ctx.createLinearGradient(fracX(0.62), 0, fracX(1.0), 0);
+  dryGrad.addColorStop(0, 'rgba(61, 43, 31, 0)');
+  dryGrad.addColorStop(0.3, 'rgba(80, 65, 40, 0.15)');
+  dryGrad.addColorStop(1, 'rgba(100, 80, 45, 0.25)');
+  ctx.fillStyle = dryGrad;
+  ctx.fillRect(fracX(0.62), fracY(PEAK_Y), fracX(0.38), fracY(SEA_LEVEL_Y + 0.02) - fracY(PEAK_Y));
+
+  ctx.restore();
+
+  // Snow cap on the peak
+  const peakX = fracX(0.62);
+  const peakYpos = fracY(terrainY(0.62));
+  const snowGrad = ctx.createRadialGradient(peakX, peakYpos, 0, peakX, peakYpos, 40);
+  snowGrad.addColorStop(0, 'rgba(212, 220, 232, 0.6)');
+  snowGrad.addColorStop(0.5, 'rgba(212, 220, 232, 0.2)');
+  snowGrad.addColorStop(1, 'rgba(212, 220, 232, 0)');
+  ctx.fillStyle = snowGrad;
+  ctx.beginPath();
+  ctx.arc(peakX, peakYpos, 40, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawTerrainOutline() {
+  // Main terrain outline — woodcut style, slightly thicker
+  ctx.strokeStyle = 'rgba(200, 184, 144, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+
+  // Orcas Island
+  ctx.moveTo(fracX(0.03), fracY(SEA_LEVEL_Y));
+  for (let xf = 0.03; xf <= 0.055; xf += 0.002) {
+    ctx.lineTo(fracX(xf), fracY(terrainY(xf)));
+  }
+  ctx.moveTo(fracX(0.10), fracY(SEA_LEVEL_Y));
+
+  // Main profile
+  for (let xf = 0.10; xf <= 1.0; xf += 0.002) {
+    ctx.lineTo(fracX(xf), fracY(terrainY(xf)));
+  }
+  ctx.stroke();
+
+  // Sea level line
+  ctx.strokeStyle = 'rgba(42, 100, 150, 0.25)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]);
+  ctx.beginPath();
+  ctx.moveTo(0, fracY(SEA_LEVEL_Y));
+  ctx.lineTo(W, fracY(SEA_LEVEL_Y));
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Sea level label
+  ctx.font = '10px Georgia';
+  ctx.fillStyle = 'rgba(42, 100, 150, 0.35)';
+  ctx.textAlign = 'right';
+  ctx.fillText('sea level', W - 10, fracY(SEA_LEVEL_Y) - 4);
+}
+
+function drawElevationLabels() {
+  ctx.font = '9px Georgia';
+  ctx.fillStyle = 'rgba(232, 220, 200, 0.18)';
+  ctx.textAlign = 'right';
+  const elevLabels = [2000, 4000, 6000, 8000, 10000, 12000, 14000];
+  for (const e of elevLabels) {
+    const y = fracY(elevToY(e));
+    ctx.fillText(`${(e/1000).toFixed(0)}k ft`, W - 8, y + 3);
+  }
+}
+
+function drawRain() {
+  // Rain on the west (wet) side
+  for (const r of raindrops) {
+    const ry = r.y + time * r.speed;
+    const yMod = ry % 1;
+    const px = fracX(r.x);
+    const py = fracY(yMod * SEA_LEVEL_Y);
+
+    // Only draw if above terrain
+    const tSurface = fracY(terrainY(r.x));
+    if (py < tSurface) {
+      ctx.strokeStyle = `rgba(160, 200, 220, ${r.opacity})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(px - 1, py + r.length);
+      ctx.stroke();
+    }
+  }
+}
+
+function drawClouds() {
+  for (const c of clouds) {
+    const cx = ((c.x + time * c.speed) % 1.2) - 0.1;
+    const px = fracX(cx);
+    const py = fracY(c.y);
+    const grad = ctx.createRadialGradient(px, py, 0, px, py, c.w / 2);
+    grad.addColorStop(0, `rgba(180, 200, 210, ${c.opacity})`);
+    grad.addColorStop(0.5, `rgba(150, 170, 190, ${c.opacity * 0.5})`);
+    grad.addColorStop(1, 'rgba(150, 170, 190, 0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.ellipse(px, py, c.w / 2, c.h / 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawMycorrhiza() {
+  for (const m of mycorrhiza) {
+    const pulse = 0.3 + 0.3 * Math.sin(time * 0.5 + m.pulse);
+    ctx.strokeStyle = `rgba(200, 168, 112, ${0.08 * pulse})`;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    if (m.segments.length > 0) {
+      ctx.moveTo(fracX(m.segments[0].x), fracY(m.segments[0].y));
+      for (let i = 1; i < m.segments.length; i++) {
+        const prev = m.segments[i-1];
+        const seg = m.segments[i];
+        const cpx = (prev.x + seg.x) / 2 + (Math.random() - 0.5) * 0.01;
+        const cpy = (prev.y + seg.y) / 2;
+        ctx.quadraticCurveTo(fracX(prev.x), fracY(prev.y), fracX(cpx), fracY(cpy));
+      }
+    }
+    ctx.stroke();
+
+    // Nodes/junctions glow
+    for (const seg of m.segments) {
+      if (Math.random() > 0.7) {
+        const np = 0.15 + 0.15 * Math.sin(time * 0.8 + seg.x * 20);
+        ctx.beginPath();
+        ctx.arc(fracX(seg.x), fracY(seg.y), 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200, 168, 112, ${np})`;
+        ctx.fill();
+      }
+    }
+  }
+}
+
+function drawSpores() {
+  for (const s of spores) {
+    const surfaceY = terrainY(s.x);
+    const baseY = surfaceY + 0.02;
+    const rise = (time * s.speed + s.phase) % 0.06;
+    const sy = baseY - rise;
+    if (sy < surfaceY - 0.01) continue; // above ground already
+
+    const wobble = Math.sin(time * 2 + s.phase) * 0.003;
+    const px = fracX(s.x + wobble);
+    const py = fracY(sy);
+    const fade = 1 - (rise / 0.06);
+    ctx.beginPath();
+    ctx.arc(px, py, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200, 168, 112, ${s.opacity * fade})`;
+    ctx.fill();
+  }
+}
+
+function drawTransmitters() {
+  for (const t of transmitters) {
+    let tx, ty;
+    if (t.name === 'Mount Constitution') {
+      // On Orcas Island
+      tx = fracX(t.xFrac);
+      ty = fracY(terrainY(t.xFrac));
+    } else {
+      tx = fracX(t.xFrac);
+      ty = fracY(elevToY(t.elev));
+    }
+
+    // Tower structure
+    const towerH = 24;
+    ctx.strokeStyle = 'rgba(212, 220, 232, 0.7)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(tx, ty - towerH);
+    ctx.stroke();
+
+    // Tower base
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(tx - 4, ty);
+    ctx.lineTo(tx + 4, ty);
+    ctx.stroke();
+
+    // Tower top beacon
+    const beacon = 0.5 + 0.5 * Math.sin(time * 2 + t.xFrac * 10);
+    ctx.beginPath();
+    ctx.arc(tx, ty - towerH - 2, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(199, 91, 58, ${0.6 + 0.4 * beacon})`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(tx, ty - towerH - 2, 5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(199, 91, 58, ${0.15 * beacon})`;
+    ctx.fill();
+
+    // Radio wave rings
+    for (let ring = 1; ring <= 4; ring++) {
+      const ringPhase = (time * 0.8 + ring * 0.8) % 3;
+      const ringR = 15 + ringPhase * 25;
+      const ringAlpha = Math.max(0, 0.2 - ringPhase * 0.07);
+      ctx.strokeStyle = `rgba(199, 91, 58, ${ringAlpha})`;
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.arc(tx, ty - towerH - 2, ringR, -Math.PI * 0.8, -Math.PI * 0.2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(tx, ty - towerH - 2, ringR, Math.PI * 0.2, Math.PI * 0.8);
+      ctx.stroke();
+    }
+
+    // Labels
+    ctx.font = '9px Georgia';
+    ctx.fillStyle = 'rgba(232, 220, 200, 0.6)';
+    ctx.textAlign = 'center';
+    ctx.fillText(t.name, tx, ty + 12);
+    ctx.font = 'italic 8px Georgia';
+    ctx.fillStyle = 'rgba(199, 91, 58, 0.5)';
+    ctx.fillText(t.labels, tx, ty + 22);
+
+    registerHitbox(tx, ty - towerH / 2, 60, towerH + 30, {
+      type: 'transmitter',
+      name: t.name,
+      role: 'Radio Transmitter',
+      detail: `${t.elev.toLocaleString()} ft | ${t.labels}`,
+      id: t.id,
+    });
+  }
+}
+
+function drawMuseDiamond(x, y, size, color) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(Math.PI / 4);
+  ctx.fillStyle = color;
+  ctx.fillRect(-size/2, -size/2, size, size);
+  // Glow
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 8;
+  ctx.fillRect(-size/2, -size/2, size, size);
+  ctx.restore();
+}
+
+function drawMuses() {
+  for (const m of muses) {
+    const mx = fracX(m.xFrac);
+    const my = getMuseY(m);
+    const color = zoneColor(m.zone);
+
+    // Diamond marker
+    drawMuseDiamond(mx, my, 6, color);
+
+    // Name label
+    ctx.font = '11px Georgia';
+    ctx.fillStyle = color;
+    ctx.textAlign = 'left';
+    const labelX = mx + 8;
+    ctx.fillText(m.name, labelX, my + 3);
+
+    // Role subtitle
+    ctx.font = 'italic 8px Georgia';
+    ctx.fillStyle = `rgba(232, 220, 200, 0.35)`;
+    ctx.fillText(`\u03b8=${m.theta}\u00b0 \u2014 ${m.role}`, labelX, my + 14);
+
+    registerHitbox(mx + 30, my + 4, 80, 22, {
+      type: 'muse',
+      name: m.name,
+      role: m.role,
+      detail: `\u03b8=${m.theta}\u00b0 | ${m.zone.charAt(0).toUpperCase() + m.zone.slice(1)} zone | ${m.elev >= 0 ? m.elev.toLocaleString() + ' ft' : Math.abs(m.elev) + ' ft below surface'}`,
+      id: m.id,
+    });
+  }
+}
+
+function drawNeighborhoods() {
+  for (const n of neighborhoods) {
+    const nx = fracX(n.xFrac);
+    const ny = getElementY(n.elev);
+
+    // Small building icon
+    ctx.fillStyle = 'rgba(200, 184, 144, 0.35)';
+    ctx.fillRect(nx - 4, ny - 8, 8, 8);
+    // Roof
+    ctx.beginPath();
+    ctx.moveTo(nx - 5, ny - 8);
+    ctx.lineTo(nx, ny - 13);
+    ctx.lineTo(nx + 5, ny - 8);
+    ctx.closePath();
+    ctx.fill();
+
+    // Label
+    ctx.font = '9px Georgia';
+    ctx.fillStyle = 'rgba(200, 184, 144, 0.5)';
+    ctx.textAlign = 'center';
+    ctx.fillText(n.name, nx, ny + 10);
+    ctx.font = 'italic 7px Georgia';
+    ctx.fillStyle = 'rgba(200, 184, 144, 0.3)';
+    ctx.fillText(n.label, nx, ny + 19);
+
+    registerHitbox(nx, ny, 80, 30, {
+      type: 'neighborhood',
+      name: n.name,
+      role: 'Music Neighborhood',
+      detail: n.label,
+      id: null,
+    });
+  }
+}
+
+function drawBands() {
+  for (const b of bands) {
+    const bx = fracX(b.xFrac);
+
+    // FQC special: prismatic vertical line spanning all zones
+    if (b.vertical) {
+      const topY = fracY(PEAK_Y + 0.02);
+      const botY = fracY(UNDERGROUND_Y - 0.02);
+      const grad = ctx.createLinearGradient(0, topY, 0, botY);
+      grad.addColorStop(0, 'rgba(148, 103, 189, 0.5)');    // violet
+      grad.addColorStop(0.15, 'rgba(55, 120, 200, 0.5)');   // blue
+      grad.addColorStop(0.30, 'rgba(42, 160, 150, 0.5)');   // teal
+      grad.addColorStop(0.45, 'rgba(90, 180, 80, 0.5)');    // green
+      grad.addColorStop(0.60, 'rgba(220, 200, 60, 0.5)');   // yellow
+      grad.addColorStop(0.75, 'rgba(220, 140, 50, 0.5)');   // orange
+      grad.addColorStop(0.90, 'rgba(199, 91, 58, 0.5)');    // salmon
+      grad.addColorStop(1, 'rgba(148, 60, 100, 0.5)');      // deep rose
+
+      const pulse = 0.5 + 0.3 * Math.sin(time * 0.6);
+      ctx.globalAlpha = pulse;
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(bx, topY);
+      ctx.lineTo(bx, botY);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // FQC label
+      ctx.font = 'bold 11px Georgia';
+      ctx.fillStyle = 'rgba(220, 200, 60, 0.7)';
+      ctx.textAlign = 'center';
+      ctx.fillText('FQC', bx, topY - 6);
+      ctx.font = 'italic 8px Georgia';
+      ctx.fillStyle = 'rgba(220, 200, 60, 0.4)';
+      ctx.fillText('crosses everything', bx, topY - 16);
+
+      registerHitbox(bx, (topY + botY) / 2, 30, botY - topY, {
+        type: 'band',
+        name: 'FQC',
+        role: 'Vertical Line',
+        detail: 'Spans ALL zones \u2014 the frequency that crosses everything',
+        id: b.id,
+      });
+      continue;
+    }
+
+    const by = b.elev !== null ? getElementY(b.elev) : fracY(0.5);
+
+    // Circle marker
+    ctx.beginPath();
+    ctx.arc(bx, by, 4, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(199, 91, 58, 0.6)`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(bx, by, 4, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(199, 91, 58, 0.3)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Name
+    ctx.font = '9px Georgia';
+    ctx.fillStyle = 'rgba(199, 91, 58, 0.6)';
+    ctx.textAlign = 'left';
+    ctx.fillText(b.name, bx + 7, by + 3);
+
+    // Arrow indicators for off-map elements
+    if (b.arrow === 'east') {
+      ctx.strokeStyle = 'rgba(199, 91, 58, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(bx + 6, by);
+      ctx.lineTo(W - 10, by);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      // Arrowhead
+      ctx.beginPath();
+      ctx.moveTo(W - 10, by);
+      ctx.lineTo(W - 16, by - 3);
+      ctx.lineTo(W - 16, by + 3);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(199, 91, 58, 0.3)';
+      ctx.fill();
+      ctx.font = 'italic 7px Georgia';
+      ctx.fillStyle = 'rgba(199, 91, 58, 0.35)';
+      ctx.textAlign = 'right';
+      ctx.fillText('Visitors from the East', W - 20, by - 6);
+      ctx.textAlign = 'left';
+    }
+    if (b.arrow === 'up') {
+      ctx.strokeStyle = 'rgba(199, 91, 58, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(bx, by - 6);
+      ctx.lineTo(bx, fracY(UNDERGROUND_Y) + 5);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = 'italic 7px Georgia';
+      ctx.fillStyle = 'rgba(199, 91, 58, 0.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Deep Root Visitors', bx, fracY(UNDERGROUND_Y) + 14);
+      ctx.textAlign = 'left';
+    }
+    if (b.arrow === 'down') {
+      ctx.strokeStyle = 'rgba(199, 91, 58, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(bx, by + 6);
+      ctx.lineTo(bx, fracY(0.04));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = 'italic 7px Georgia';
+      ctx.fillStyle = 'rgba(199, 91, 58, 0.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Weather System', bx, fracY(0.03));
+      ctx.textAlign = 'left';
+    }
+
+    registerHitbox(bx + 20, by, 60, 18, {
+      type: 'band',
+      name: b.name,
+      role: b.zone,
+      detail: b.elev !== null ? (b.elev >= 0 ? `${b.elev.toLocaleString()} ft` : `${Math.abs(b.elev)} ft underground`) : 'All elevations',
+      id: b.id,
+    });
+  }
+}
+
+function drawZoneLabels() {
+  ctx.save();
+  ctx.font = '10px Georgia';
+  ctx.textAlign = 'right';
+
+  const zones = [
+    { name: 'ALPINE', elev: 9000, color: C.alpine },
+    { name: 'SUBALPINE', elev: 5500, color: C.subalpine },
+    { name: 'MONTANE', elev: 3500, color: '#5a9a6a' },
+    { name: 'FOOTHILLS', elev: 1400, color: C.foothills },
+    { name: 'LOWLANDS', elev: 250, color: C.lowlands },
+    { name: 'COAST', elev: 0, color: C.coast },
+  ];
+
+  for (const z of zones) {
+    const zy = fracY(elevToY(z.elev));
+    ctx.fillStyle = z.color;
+    ctx.globalAlpha = 0.25;
+    ctx.fillText(z.name, fracX(0.98), zy + 3);
+  }
+
+  // Underground label
+  ctx.fillStyle = '#c8a870';
+  ctx.globalAlpha = 0.25;
+  ctx.fillText('UNDERGROUND', fracX(0.98), fracY(SEA_LEVEL_Y + 0.06));
+
+  // Ocean label
+  ctx.fillStyle = C.coast;
+  ctx.globalAlpha = 0.2;
+  ctx.fillText('OCEAN', fracX(0.08), fracY(SEA_LEVEL_Y + 0.05));
+
+  ctx.restore();
+}
+
+function drawOrcasLabel() {
+  const ox = fracX(0.043);
+  const oy = fracY(terrainY(0.043)) - 12;
+  ctx.font = 'italic 8px Georgia';
+  ctx.fillStyle = 'rgba(42, 100, 150, 0.5)';
+  ctx.textAlign = 'center';
+  ctx.fillText('Orcas Island', ox, oy);
+}
+
+function drawCascadeLabel() {
+  const cx = fracX(0.62);
+  const cy = fracY(terrainY(0.62)) - 16;
+  ctx.font = '10px Georgia';
+  ctx.fillStyle = 'rgba(212, 220, 232, 0.4)';
+  ctx.textAlign = 'center';
+  ctx.fillText('Cascade Crest', cx, cy);
+  ctx.font = 'italic 8px Georgia';
+  ctx.fillStyle = 'rgba(212, 220, 232, 0.25)';
+  ctx.fillText('14,411 ft', cx, cy + 12);
+}
+
+function drawRainShadow() {
+  // "Rain Shadow" label on east side
+  ctx.font = 'italic 9px Georgia';
+  ctx.fillStyle = 'rgba(200, 184, 144, 0.2)';
+  ctx.textAlign = 'center';
+  ctx.fillText('Rain Shadow', fracX(0.82), fracY(elevToY(2000)));
+
+  // Dry indicator: no rain, clear sky on east
+  // Small sun/clear indicator
+  const sx = fracX(0.85);
+  const sy = fracY(0.15);
+  ctx.beginPath();
+  ctx.arc(sx, sy, 8, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(220, 200, 100, 0.08)';
+  ctx.fill();
+  for (let r = 0; r < 8; r++) {
+    const angle = (r / 8) * Math.PI * 2;
+    ctx.strokeStyle = 'rgba(220, 200, 100, 0.06)';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(sx + Math.cos(angle) * 10, sy + Math.sin(angle) * 10);
+    ctx.lineTo(sx + Math.cos(angle) * 16, sy + Math.sin(angle) * 16);
+    ctx.stroke();
+  }
+}
+
+// ═══ MAIN RENDER ═══
+function render() {
+  hitboxes = [];
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawSky();
+  drawTerrainFill();
+  drawMycorrhiza();
+  drawSpores();
+  drawTerrainOutline();
+  drawElevationLabels();
+  drawZoneLabels();
+  drawRain();
+  drawClouds();
+  drawNeighborhoods();
+  drawTransmitters();
+  drawMuses();
+  drawBands();
+  drawOrcasLabel();
+  drawCascadeLabel();
+  drawRainShadow();
+
+  time += 0.016;
+  requestAnimationFrame(render);
+}
+
+// ═══ INTERACTION ═══
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const hit = hitTest(mx, my);
+  if (hit) {
+    tooltip.style.display = 'block';
+    tooltip.querySelector('.tt-name').textContent = hit.name;
+    tooltip.querySelector('.tt-role').textContent = hit.role;
+    tooltip.querySelector('.tt-detail').textContent = hit.detail;
+    tooltip.querySelector('.tt-link').style.display = hit.id ? 'block' : 'none';
+
+    // Position tooltip
+    let tx = e.clientX + 16;
+    let ty = e.clientY - 10;
+    if (tx + 280 > window.innerWidth) tx = e.clientX - 296;
+    if (ty + 100 > window.innerHeight) ty = e.clientY - 100;
+    tooltip.style.left = tx + 'px';
+    tooltip.style.top = ty + 'px';
+    canvas.style.cursor = hit.id ? 'pointer' : 'crosshair';
+  } else {
+    tooltip.style.display = 'none';
+    canvas.style.cursor = 'crosshair';
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  tooltip.style.display = 'none';
+});
+
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const hit = hitTest(mx, my);
+  if (hit && hit.id) {
+    window.location.href = `../${hit.id}/index.html`;
+  }
+});
+
+// ═══ INIT ═══
+window.addEventListener('resize', () => { resize(); initParticles(); });
+resize();
+initParticles();
+render();
+</script>
+</body>
+</html>

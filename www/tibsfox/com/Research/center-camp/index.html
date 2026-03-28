@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Center Camp — Where All Trails Meet</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* ═══ Nav ═══ */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* ═══ Hero ═══ */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #e8dcc8;
+      margin-bottom: 0.3rem;
+    }
+    .hero .subtitle {
+      font-size: 1rem;
+      color: rgba(232,220,200,0.5);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .fire {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #c75b3a;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(199,91,58,0.6), 0 0 30px rgba(199,91,58,0.3);
+      animation: pulse 3s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(199,91,58,0.6), 0 0 30px rgba(199,91,58,0.3); }
+      50% { box-shadow: 0 0 18px rgba(199,91,58,0.8), 0 0 45px rgba(199,91,58,0.4); }
+    }
+    .hero-text {
+      max-width: 38rem;
+      margin: 0 auto;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(232,220,200,0.6);
+    }
+
+    /* ═══ Compass Link ═══ */
+    .compass-link {
+      display: block;
+      max-width: 28rem;
+      margin: 2rem auto 0;
+      padding: 1rem 1.5rem;
+      background: rgba(26,58,42,0.4);
+      border: 1px solid rgba(122,154,90,0.25);
+      border-radius: 8px;
+      text-decoration: none;
+      color: #e8dcc8;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .compass-link:hover {
+      background: rgba(26,58,42,0.6);
+      border-color: rgba(122,154,90,0.5);
+      transform: translateY(-2px);
+    }
+    .compass-link .diamond {
+      color: #c8b890;
+      font-size: 1.2rem;
+    }
+    .compass-link .label {
+      display: block;
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+    .compass-link .sub {
+      display: block;
+      font-size: 0.78rem;
+      color: rgba(232,220,200,0.4);
+      margin-top: 0.2rem;
+    }
+
+    /* ═══ Installations Grid ═══ */
+    .installations {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    .installations h2 {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #c8b890;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.06em;
+    }
+    .installations .section-sub {
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.35);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .install-card {
+      display: block;
+      background: rgba(26,42,32,0.6);
+      border: 1px solid rgba(122,154,90,0.15);
+      border-radius: 10px;
+      padding: 0;
+      text-decoration: none;
+      color: #e8dcc8;
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+    .install-card:hover {
+      border-color: rgba(122,154,90,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .install-banner {
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .install-banner .glow {
+      position: absolute;
+      inset: 0;
+      opacity: 0.6;
+    }
+    .install-banner .icon {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      font-size: 2rem;
+      opacity: 0.7;
+    }
+    .install-banner .muse-tag {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 0.7rem;
+      color: rgba(232,220,200,0.5);
+      background: rgba(0,0,0,0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .install-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+    .install-body h3 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .install-body p {
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.55);
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+    .install-body .stats {
+      font-size: 0.75rem;
+      color: rgba(122,154,90,0.6);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ═══ Muse Ring ═══ */
+    .muse-ring {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
+      text-align: center;
+    }
+    .muse-ring h2 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #c8b890;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.06em;
+    }
+    .muse-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .muse-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(26,42,32,0.5);
+      border: 1px solid rgba(200,184,144,0.12);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: rgba(232,220,200,0.65);
+      transition: all 0.2s;
+    }
+    .muse-chip:hover {
+      border-color: rgba(200,184,144,0.3);
+      color: #e8dcc8;
+    }
+    .muse-chip .dot {
+      width: 6px;
+      height: 6px;
+      background: #c8b890;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .muse-chip .role {
+      color: rgba(232,220,200,0.35);
+      font-size: 0.72rem;
+    }
+
+    /* ═══ Stats Bar ═══ */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(122,154,90,0.1);
+      border-bottom: 1px solid rgba(122,154,90,0.1);
+      margin: 1rem 0 2rem;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-val {
+      display: block;
+      font-size: 1.6rem;
+      color: #c8b890;
+      font-weight: 300;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: rgba(232,220,200,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══ Footer ═══ */
+    .camp-footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: rgba(232,220,200,0.25);
+      line-height: 1.8;
+    }
+    .camp-footer a {
+      color: rgba(122,154,90,0.5);
+      text-decoration: none;
+    }
+    .camp-footer a:hover { color: #7a9a5a; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .install-grid { grid-template-columns: 1fr; }
+      .stats-bar { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="../index.html">Research Series</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">The Compass</a>
+  <span class="sep">/</span>
+  <a href="index.html" class="active">Center Camp</a>
+</div>
+
+<div class="hero">
+  <div class="fire"></div>
+  <h1>Center Camp</h1>
+  <div class="subtitle">Where all trails meet</div>
+
+  <div class="hero-text">
+    Seventy-five research projects radiate outward from this fire like trails through old growth.
+    Each clearing is a place to learn, explore, and discover something you didn't know you wanted to know.
+    Thirteen muses built these installations to make the connections visible &mdash;
+    the patterns between music and mycorrhizal networks, between radio frequencies and salmon runs,
+    between building codes and web-of-trust protocols. Walk the trails. Turn the dial. Read the table.
+    Watch the web glow beneath your feet.
+  </div>
+
+  <a href="../compass.html" class="compass-link">
+    <span class="diamond">&#9830;</span>
+    <span class="label">Open the Compass</span>
+    <span class="sub">75 projects on the complex plane &mdash; the forest map</span>
+  </a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">75</span><span class="stat-label">Research Projects</span></div>
+  <div class="stat"><span class="stat-val">11</span><span class="stat-label">Clusters</span></div>
+  <div class="stat"><span class="stat-val">48</span><span class="stat-label">Muse Landmarks</span></div>
+  <div class="stat"><span class="stat-val">7</span><span class="stat-label">Ecological Threads</span></div>
+  <div class="stat"><span class="stat-val">8</span><span class="stat-label">Rosetta Concepts</span></div>
+  <div class="stat"><span class="stat-val">10</span><span class="stat-label">Art Installations</span></div>
+</div>
+
+<div class="installations">
+  <h2>Art Installations</h2>
+  <div class="section-sub">Interactive explorations built by the muses</div>
+
+  <div class="install-grid">
+
+    <a href="frequency-dial.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #1a1a2e 0%, #4a148c 40%, #1e88e5 70%, #37474f 100%)"></div>
+        <div class="icon">&#9738;</div>
+        <div class="muse-tag">Raven's Installation</div>
+      </div>
+      <div class="install-body">
+        <h3>The Frequency Dial</h3>
+        <p>Turn the dial. Tune through radio stations and music projects across the cultural spectrum of the Pacific Northwest. From C89.5 FM to Coil's sonic alchemy, from Sir Mix-A-Lot's basement to the cosmic wavelengths of the Frequency Continuum.</p>
+        <div class="stats">17 stations &middot; 6 FM frequencies &middot; 11 music projects &middot; interactive dial</div>
+      </div>
+    </a>
+
+    <a href="rosetta-table.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #1a2a20 0%, #4a7c3f 30%, #d4881a 50%, #2a8a96 70%, #9b59b6 100%)"></div>
+        <div class="icon">&#9041;</div>
+        <div class="muse-tag">Cedar's Installation</div>
+      </div>
+      <div class="install-body">
+        <h3>The Rosetta Table</h3>
+        <p>The same truth written in seven languages. Pick a concept &mdash; Signal, Trust, Gradient, Feedback &mdash; and watch it translate across ecology, electronics, infrastructure, energy, creative arts, business, and vision. The parody method proves deep understanding.</p>
+        <div class="stats">8 concepts &times; 7 domains &middot; 56 translations &middot; cross-linked to all 75 projects</div>
+      </div>
+    </a>
+
+    <a href="living-web.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:radial-gradient(ellipse at 50% 70%, rgba(122,154,90,0.4) 0%, rgba(26,58,42,0.6) 50%, #0d1a12 100%)"></div>
+        <div class="icon">&#9672;</div>
+        <div class="muse-tag">Foxy's Installation</div>
+      </div>
+      <div class="install-body">
+        <h3>The Living Web</h3>
+        <p>The mycorrhizal network beneath the research forest, made visible. Thirteen ecology projects connected by seven ecological threads &mdash; salmon, fungi, elevation, fire, pollinators, water, heritage. Hover to see the connections glow beneath the forest floor.</p>
+        <div class="stats">13 nodes &middot; 7 threads &middot; force-directed graph &middot; bioluminescent edges</div>
+      </div>
+    </a>
+
+    <a href="terrain.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:radial-gradient(ellipse at 30% 60%, rgba(42,100,150,0.3) 0%, rgba(45,90,58,0.4) 40%, rgba(61,43,31,0.4) 80%, #0d1a12 100%)"></div>
+        <div class="icon">&#9650;</div>
+        <div class="muse-tag">Foxy's Cartography</div>
+      </div>
+      <div class="install-body">
+        <h3>The Terrain</h3>
+        <p>A living cross-section of the PNW landscape &mdash; ocean floor to Cascade crest. Every muse placed at natural altitude, radio transmitters pulsing from mountaintops, music neighborhoods at sea level, mycorrhizal networks glowing underground. Rain on the west side, clear skies in the rain shadow.</p>
+        <div class="stats">21 muses &middot; 3 transmitters &middot; 5 neighborhoods &middot; 10 bands &middot; 8 elevation zones</div>
+      </div>
+    </a>
+
+    <a href="bestiary.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #1a2a20 0%, #c8a060 30%, #4a7c3f 50%, #5eb8c4 70%, #c75b3a 100%)"></div>
+        <div class="icon">&#9758;</div>
+        <div class="muse-tag">Cedar's Manuscript</div>
+      </div>
+      <div class="install-body">
+        <h3>The Bestiary</h3>
+        <p>An illuminated manuscript of every voice in the forest. Forty-eight muses &mdash; trees, birds, mammals, fish, forces, fungi &mdash; each with their teaching, their PNW root, their voice signature, and their trails to other voices. Filter by type, zone, or just browse.</p>
+        <div class="stats">48 muses &middot; filterable by type &amp; zone &middot; connected trails &middot; illuminated cards</div>
+      </div>
+    </a>
+
+    <a href="tide-pool.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #0a1520 0%, #1a4a5a 40%, #c75b3a 60%, #0d2a3a 100%)"></div>
+        <div class="icon">&#10038;</div>
+        <div class="muse-tag">Star's Art</div>
+      </div>
+      <div class="install-body">
+        <h3>The Tide Pool</h3>
+        <p>An interactive intertidal ecosystem. Eleven species in five elevation bands. Remove the sea star and watch the trophic cascade unfold &mdash; mussels spread, anemones vanish, urchins explode, kelp collapses. Restore it and watch life return. The keystone's role is revealed by what happens when it's gone.</p>
+        <div class="stats">11 species &middot; 5 tidal zones &middot; keystone removal &middot; cascade simulation</div>
+      </div>
+    </a>
+
+    <a href="salmon-run.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #0a1a15 0%, #1a5a6a 30%, #c75b3a 50%, #1a3a2a 80%, #0d1a12 100%)"></div>
+        <div class="icon">&#9832;</div>
+        <div class="muse-tag">Chinook's Art</div>
+      </div>
+      <div class="install-body">
+        <h3>The Salmon Run</h3>
+        <p>Watch the ocean feed the forest through the body of a fish. Salmon swim upstream, bears carry carcasses into the trees, nitrogen enters the soil, mycorrhizal networks glow underground. Follow one salmon through its entire journey. The cycle never stops.</p>
+        <div class="stats">5 stages &middot; particle animation &middot; nutrient tracking &middot; follow one salmon</div>
+      </div>
+    </a>
+
+    <a href="cache.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #0d1a12 0%, #2d5a3a 30%, #d4dce8 50%, #5c4033 70%, #7a8a8a 100%)"></div>
+        <div class="icon">&#9670;</div>
+        <div class="muse-tag">Nutcracker's Game</div>
+      </div>
+      <div class="install-body">
+        <h3>The Cache</h3>
+        <p>A memory game played at the edge of the treeline. Match eighteen muses to their voice signatures. Every wrong guess plants a seed. When you finish, the seeds sprout into trees. Clark's Nutcracker forgets where it buried 30,000 seeds a year &mdash; the forgotten ones become forests.</p>
+        <div class="stats">18 pairs &middot; 6&times;6 grid &middot; seeds sprout from mistakes &middot; contemplative</div>
+      </div>
+    </a>
+
+    <a href="guides.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:linear-gradient(135deg, #0d1a12 0%, #4a7c3f 25%, #d4881a 45%, #2a8a96 60%, #9b59b6 75%, #5eb8c4 100%)"></div>
+        <div class="icon">&#9776;</div>
+        <div class="muse-tag">Elk's Trailhead</div>
+      </div>
+      <div class="install-body">
+        <h3>The Guides</h3>
+        <p>An interactive trail map where eleven PNW species lead visitors through the research forest. Elk make trails, moles build tunnels, loons carry sound across water. Pick a guide, hear their greeting, and follow the path they know. Every trail was worn in by something alive.</p>
+        <div class="stats">11 guides &middot; 11 clusters &middot; 75 projects &middot; species-led navigation</div>
+      </div>
+    </a>
+
+    <a href="grove.html" class="install-card">
+      <div class="install-banner">
+        <div class="glow" style="background:radial-gradient(ellipse at 50% 70%, rgba(200,184,144,0.25) 0%, rgba(74,124,63,0.2) 30%, rgba(42,138,150,0.15) 60%, #0d1a12 100%)"></div>
+        <div class="icon">&#9752;</div>
+        <div class="muse-tag">All 48 Muses</div>
+      </div>
+      <div class="install-body">
+        <h3>The Groves</h3>
+        <p>Every muse has built a personal grove in the forest. Forty-eight immersive installations &mdash; each with their teaching, their team, their PNW root, and a living canvas visualization unique to their type. Trees grow, birds trace flight paths, salmon run upstream, fire throws sparks.</p>
+        <div class="stats">48 groves &middot; 17 visualization types &middot; team rosters &middot; compass navigation</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<div class="muse-ring">
+  <h2>The Muses Around the Fire</h2>
+  <div class="muse-grid">
+    <div class="muse-chip"><div class="dot"></div> Cedar <span class="role">the record</span></div>
+    <div class="muse-chip"><div class="dot"></div> Lex <span class="role">the specification</span></div>
+    <div class="muse-chip"><div class="dot"></div> Moss <span class="role">the carpet</span></div>
+    <div class="muse-chip"><div class="dot"></div> Lichen <span class="role">the breath</span></div>
+    <div class="muse-chip"><div class="dot"></div> Sturgeon <span class="role">the ancient</span></div>
+    <div class="muse-chip"><div class="dot"></div> Fern <span class="role">the foundation</span></div>
+    <div class="muse-chip"><div class="dot"></div> Chanterelle <span class="role">the network</span></div>
+    <div class="muse-chip"><div class="dot"></div> Star <span class="role">the keystone</span></div>
+    <div class="muse-chip"><div class="dot"></div> Crab <span class="role">the harvest</span></div>
+    <div class="muse-chip"><div class="dot"></div> Beaver <span class="role">the maker</span></div>
+    <div class="muse-chip"><div class="dot"></div> Salamander <span class="role">the headwater</span></div>
+    <div class="muse-chip"><div class="dot"></div> Hemlock <span class="role">the standard</span></div>
+    <div class="muse-chip"><div class="dot"></div> Fire <span class="role">the renewal</span></div>
+    <div class="muse-chip"><div class="dot"></div> Cougar <span class="role">the ghost</span></div>
+    <div class="muse-chip"><div class="dot"></div> Wolf <span class="role">the return</span></div>
+    <div class="muse-chip"><div class="dot"></div> Rain <span class="role">the cycle</span></div>
+    <div class="muse-chip"><div class="dot"></div> Fog <span class="role">the invisible</span></div>
+    <div class="muse-chip"><div class="dot"></div> Bear <span class="role">the season</span></div>
+    <div class="muse-chip"><div class="dot"></div> Waterfall <span class="role">the descent</span></div>
+    <div class="muse-chip"><div class="dot"></div> Foxy <span class="role">the map</span></div>
+    <div class="muse-chip"><div class="dot"></div> Sitka <span class="role">the root</span></div>
+    <div class="muse-chip"><div class="dot"></div> Eulachon <span class="role">the first gift</span></div>
+    <div class="muse-chip"><div class="dot"></div> Steelhead <span class="role">the twice-born</span></div>
+    <div class="muse-chip"><div class="dot"></div> Dipper <span class="role">the water-walker</span></div>
+    <div class="muse-chip"><div class="dot"></div> Chinook <span class="role">the current</span></div>
+    <div class="muse-chip"><div class="dot"></div> Orca <span class="role">the elder</span></div>
+    <div class="muse-chip"><div class="dot"></div> Sam <span class="role">the question</span></div>
+    <div class="muse-chip"><div class="dot"></div> Coyote <span class="role">the trickster</span></div>
+    <div class="muse-chip"><div class="dot"></div> Dragonfly <span class="role">the iridescent</span></div>
+    <div class="muse-chip"><div class="dot"></div> Octopus <span class="role">the reinventor</span></div>
+    <div class="muse-chip"><div class="dot"></div> Willow <span class="role">the welcome</span></div>
+    <div class="muse-chip"><div class="dot"></div> Bee <span class="role">the pollinator</span></div>
+    <div class="muse-chip"><div class="dot"></div> Otter <span class="role">the play</span></div>
+    <div class="muse-chip"><div class="dot"></div> Hawk <span class="role">the formation</span></div>
+    <div class="muse-chip"><div class="dot"></div> Eagle <span class="role">the guardian</span></div>
+    <div class="muse-chip"><div class="dot"></div> Madrone <span class="role">the hearth</span></div>
+    <div class="muse-chip"><div class="dot"></div> Owl <span class="role">the clock</span></div>
+    <div class="muse-chip"><div class="dot"></div> Marten <span class="role">the signal</span></div>
+    <div class="muse-chip"><div class="dot"></div> Bat <span class="role">the echolocator</span></div>
+    <div class="muse-chip"><div class="dot"></div> Raven <span class="role">the pattern</span></div>
+    <div class="muse-chip"><div class="dot"></div> Thrush <span class="role">the tone</span></div>
+    <div class="muse-chip"><div class="dot"></div> Nutcracker <span class="role">the cache</span></div>
+    <div class="muse-chip"><div class="dot"></div> Wren <span class="role">the song</span></div>
+    <div class="muse-chip"><div class="dot"></div> Kelp <span class="role">the tide forest</span></div>
+    <div class="muse-chip"><div class="dot"></div> Alder <span class="role">the resonance</span></div>
+    <div class="muse-chip"><div class="dot"></div> Osprey <span class="role">the horizon</span></div>
+    <div class="muse-chip"><div class="dot"></div> Pika <span class="role">the sentinel</span></div>
+    <div class="muse-chip"><div class="dot"></div> Glacier <span class="role">the archive</span></div>
+  </div>
+</div>
+
+<div class="camp-footer">
+  The work is public. The fire is ours.<br>
+  <a href="../index.html">Research Series</a> &middot;
+  <a href="../compass.html">The Compass</a> &middot;
+  <a href="../ROSETTA.md">Rosetta Stone</a>
+</div>
+
+</body>
+</html>

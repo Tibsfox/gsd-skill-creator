@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Salmon Run — Chinook's Art</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a1a15;
+    --text: #e8dcc8;
+    --river-deep: #1a5a6a;
+    --river-light: #2a8a96;
+    --forest: #1a3a2a;
+    --salmon: #c75b3a;
+    --salmon-bright: #e07040;
+    --nitrogen: #4a9a5a;
+    --mycelium: #7a9a5a;
+    --mountain: #2a3a35;
+    --bear: #1a1a18;
+    --eagle: #3a3a38;
+    --gravel: #5a5a4a;
+    --ocean: #0a2a3a;
+    --rain: rgba(150,200,220,0.3);
+    --parchment: #c8b890;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(26,90,106,0.4);
+    color: var(--text);
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(180deg, rgba(10,26,21,0.95) 0%, rgba(10,26,21,0.7) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(42,138,150,0.15);
+    font-size: 0.8rem;
+  }
+  nav a {
+    color: rgba(232,220,200,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--text); }
+  nav .sep { color: rgba(255,255,255,0.15); user-select: none; }
+
+  /* --- HERO --- */
+  .hero {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 90%, rgba(26,90,106,0.1) 0%, transparent 60%);
+  }
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+  .hero .subtitle {
+    font-size: 0.95rem;
+    color: rgba(232,220,200,0.45);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .hero .quote {
+    font-size: 0.85rem;
+    color: rgba(232,220,200,0.35);
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  /* --- CANVAS CONTAINER --- */
+  .canvas-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(42,138,150,0.15);
+    background: var(--ocean);
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 500px;
+    cursor: crosshair;
+  }
+
+  /* --- STAGE INFO OVERLAY --- */
+  .stage-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(0deg, rgba(10,26,21,0.92) 0%, rgba(10,26,21,0.6) 70%, transparent 100%);
+    pointer-events: none;
+    min-height: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .stage-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--river-light);
+    margin-bottom: 0.2rem;
+  }
+  .stage-text {
+    font-size: 0.85rem;
+    color: rgba(232,220,200,0.7);
+    line-height: 1.5;
+    max-width: 50rem;
+  }
+  .stage-counter {
+    font-size: 0.75rem;
+    color: var(--salmon);
+    font-variant-numeric: tabular-nums;
+    margin-top: 0.2rem;
+  }
+
+  /* --- CONTROLS --- */
+  .controls {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: rgba(232,220,200,0.5);
+  }
+  .controls button {
+    background: rgba(26,90,106,0.25);
+    border: 1px solid rgba(42,138,150,0.3);
+    color: var(--text);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .controls button:hover {
+    background: rgba(26,90,106,0.4);
+    border-color: rgba(42,138,150,0.5);
+  }
+  .controls button.active {
+    background: rgba(199,91,58,0.25);
+    border-color: rgba(199,91,58,0.5);
+    color: var(--salmon-bright);
+  }
+  .speed-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .speed-group input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 4px;
+    background: rgba(42,138,150,0.3);
+    border-radius: 2px;
+    outline: none;
+  }
+  .speed-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--river-light);
+    cursor: pointer;
+  }
+
+  /* --- NARRATIVE --- */
+  .narrative {
+    max-width: 42rem;
+    margin: 2rem auto 0;
+    padding: 2rem 2rem 3rem;
+  }
+  .narrative h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .narrative p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(232,220,200,0.6);
+    margin-bottom: 1rem;
+  }
+  .narrative .accent {
+    color: var(--salmon);
+  }
+  .narrative .nitrogen {
+    color: var(--nitrogen);
+  }
+
+  .stats {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    border-top: 1px solid rgba(42,138,150,0.12);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 1.4rem;
+    color: var(--river-light);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: rgba(232,220,200,0.35);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.7rem;
+    color: rgba(232,220,200,0.2);
+    border-top: 1px solid rgba(42,138,150,0.08);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+  <span class="sep">/</span>
+  <span style="color: rgba(232,220,200,0.7);">The Salmon Run</span>
+</nav>
+
+<div class="hero">
+  <h1>The Salmon Run</h1>
+  <p class="subtitle">Chinook's Art — the ocean feeds the forest through the body of a fish</p>
+  <p class="quote">"Follow the water — it already knows the way."</p>
+</div>
+
+<div class="canvas-wrap">
+  <canvas id="river"></canvas>
+  <div class="stage-info">
+    <div class="stage-label" id="stageLabel">The Cycle Begins</div>
+    <div class="stage-text" id="stageText">Salmon emerge from the Pacific, carrying ocean nitrogen upstream into the forest.</div>
+    <div class="stage-counter" id="stageCounter"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="btnPause">Pause</button>
+  <button id="btnFollow">Follow One Salmon</button>
+  <div class="speed-group">
+    <span>Slow</span>
+    <input type="range" id="speedSlider" min="0.2" max="3" step="0.1" value="1">
+    <span>Fast</span>
+  </div>
+  <span id="speedLabel" style="min-width:2.5rem; text-align:center;">1.0x</span>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value" id="statSpawned">0</div>
+    <div class="stat-label">Salmon Spawned</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" id="statCaught">0</div>
+    <div class="stat-label">Bear Catches</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" id="statReached">0</div>
+    <div class="stat-label">Reached Gravel</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" id="statNitrogen">0</div>
+    <div class="stat-label">N-15 Transferred</div>
+  </div>
+</div>
+
+<div class="narrative">
+  <h2>The Nutrient Cycle Made Visible</h2>
+  <p>
+    Every autumn, <span class="accent">Chinook salmon</span> return from the Pacific Ocean to the rivers
+    where they were born. They carry with them <span class="nitrogen">marine-derived nitrogen</span> — the
+    isotope N-15, concentrated through years of ocean feeding. This nitrogen is the ocean's gift to the forest.
+  </p>
+  <p>
+    Bears intercept the run, dragging carcasses up to <span class="accent">500 meters</span> into the forest.
+    Eagles scatter remains across the canopy. The salmon die on the gravel beds where they spawned, and their
+    bodies dissolve into the stream. In every case, the nitrogen enters the soil.
+  </p>
+  <p>
+    Beneath the forest floor, <span class="nitrogen">mycorrhizal networks</span> — the fungal web connecting
+    root to root — distribute this marine nitrogen to trees that have never touched the river. Cedar seedlings
+    kilometers from the stream carry ocean signatures in their rings. The forest feeds on the sea.
+  </p>
+  <p>
+    Rain falls. Water gathers. It flows downhill through the roots, through the gravel, back to the river.
+    Young salmon — fry, parr, smolt — ride this water out to the Pacific. In three to five years, they will
+    return, and the cycle completes. The water already knows the way.
+  </p>
+</div>
+
+<footer>
+  The Salmon Run — an interactive art installation by Chinook
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// THE SALMON RUN — Chinook's Art
+// The nutrient cycle made visible
+// ═══════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('river');
+const ctx = canvas.getContext('2d');
+
+// High-DPI support
+let W, H, dpr;
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  W = rect.width;
+  H = rect.height;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  buildLandscape();
+}
+window.addEventListener('resize', resize);
+
+// ── Landscape geometry ──
+// Zones (fraction of width): ocean 0-0.18, estuary 0.18-0.28, river 0.28-0.75, gravel 0.75-0.88, mountain 0.88-1.0
+const OCEAN_END = 0.18;
+const ESTUARY_END = 0.28;
+const GRAVEL_START = 0.75;
+const MOUNTAIN_START = 0.88;
+
+// River surface Y (varies across width)
+function riverY(x) {
+  const frac = x / W;
+  // River flows from ocean (left, low) gently up toward mountains (right, higher)
+  const base = H * 0.62;
+  const rise = H * 0.08;
+  // Gentle curve upward to the right
+  const t = Math.max(0, (frac - OCEAN_END) / (MOUNTAIN_START - OCEAN_END));
+  return base - rise * Math.pow(t, 0.7) + Math.sin(frac * 12) * 3;
+}
+
+// River bottom
+function riverBottom(x) {
+  return riverY(x) + H * 0.12 + Math.sin(x * 0.02) * 4;
+}
+
+// Tree data
+let trees = [];
+let bears = [];
+let mountainPts = [];
+
+function buildLandscape() {
+  // Generate trees
+  trees = [];
+  const treeCount = Math.floor(W / 12);
+  for (let i = 0; i < treeCount; i++) {
+    const tx = (ESTUARY_END + Math.random() * (1.0 - ESTUARY_END)) * W;
+    const frac = tx / W;
+    if (frac > OCEAN_END && frac < 1.0) {
+      const ry = riverY(tx);
+      const isForestZone = frac > ESTUARY_END && frac < MOUNTAIN_START;
+      const isMountain = frac >= MOUNTAIN_START;
+      const groundY = isForestZone ? ry - 8 - Math.random() * 30 : (isMountain ? ry - 40 - Math.random() * 60 : ry - 5);
+      if (groundY > H * 0.08) {
+        const h = 20 + Math.random() * 55;
+        const w = 6 + Math.random() * 12;
+        // Douglas fir profile: tall narrow triangle with slight curve
+        trees.push({
+          x: tx, y: groundY, h, w,
+          type: Math.random() < 0.6 ? 'fir' : 'cedar',
+          brightness: 0.4 + Math.random() * 0.3,
+          nitrogenGlow: 0
+        });
+      }
+    }
+  }
+  trees.sort((a, b) => a.y - b.y); // depth sort
+
+  // Bears on riverbank (2-4)
+  bears = [];
+  const bearCount = 2 + Math.floor(Math.random() * 3);
+  for (let i = 0; i < bearCount; i++) {
+    const bx = (0.35 + Math.random() * 0.35) * W;
+    bears.push({
+      x: bx,
+      y: riverY(bx) - 8,
+      catching: 0, // animation timer for catch
+      hasCatch: false
+    });
+  }
+
+  // Mountain profile points
+  mountainPts = [];
+  const mStart = MOUNTAIN_START * W;
+  for (let mx = mStart; mx <= W + 10; mx += 8) {
+    const t = (mx - mStart) / (W - mStart);
+    const mh = H * 0.55 * Math.pow(t, 0.6) * (1 + 0.15 * Math.sin(t * 8));
+    mountainPts.push({ x: mx, y: riverY(mx) - 20 - mh });
+  }
+}
+
+// ── Particle systems ──
+
+// Salmon
+const salmon = [];
+const MAX_SALMON = 60;
+let spawnTimer = 0;
+
+// Carried-to-forest particles (bear catches)
+const forestParticles = [];
+
+// Nitrogen glow spots in forest
+const nitrogenSpots = [];
+
+// Rain
+const rain = [];
+const MAX_RAIN = 120;
+
+// Juvenile salmon (swimming downstream)
+const juveniles = [];
+
+// Eagles
+const eagles = [];
+const MAX_EAGLES = 4;
+
+// Current lines (river flow visualization)
+const currents = [];
+
+// Stats
+let stats = { spawned: 0, caught: 0, reached: 0, nitrogen: 0 };
+
+// Tracked salmon
+let followSalmon = null;
+let followMode = false;
+
+// Stage info cycling
+const stages = [
+  { label: 'Stage 1: The Ocean', text: 'The salmon has spent 1-5 years feeding in the Pacific, accumulating ocean nitrogen. Each fish carries the isotope N-15 — a marine signature that will mark every tree it touches.', counter: 'Marine-derived nitrogen: N-15' },
+  { label: 'Stage 2: The River', text: 'Salmon swim upstream against the current. Bears carry carcasses up to 500 meters into the forest. Eagles scatter remains across the canopy.', counter: '' },
+  { label: 'Stage 3: Spawning Grounds', text: 'The salmon reaches the gravel beds where it was born. It spawns, flashes bright, and dies. Its body becomes the forest.', counter: '' },
+  { label: 'Stage 4: The Forest Response', text: 'Marine nitrogen enters the soil, moves through mycorrhizal networks, feeds cedar seedlings kilometers from the stream. The underground web glows with borrowed ocean.', counter: '' },
+  { label: 'Stage 5: The Cycle', text: 'Rain falls. Water flows back to the river. Young salmon emerge from the gravel and ride the current to the Pacific. In 3-5 years, they will return.', counter: '' },
+];
+let stageIdx = 0;
+let stageTimer = 0;
+const STAGE_DURATION = 6000; // ms per stage
+
+function updateStageDisplay() {
+  const s = stages[stageIdx];
+  document.getElementById('stageLabel').textContent = s.label;
+  document.getElementById('stageText').textContent = s.text;
+  document.getElementById('stageCounter').textContent = s.counter;
+}
+updateStageDisplay();
+
+// ── Spawn helpers ──
+
+function spawnSalmon() {
+  const y = riverY(0) + Math.random() * (riverBottom(0) - riverY(0));
+  const s = {
+    x: -5,
+    y: y,
+    vx: 0.6 + Math.random() * 0.4,
+    vy: 0,
+    phase: 'ocean', // ocean, river, spawning, dead, caught
+    brightness: 0.7 + Math.random() * 0.3,
+    size: 2.5 + Math.random() * 1.5,
+    wiggle: Math.random() * Math.PI * 2,
+    wiggleSpeed: 2 + Math.random() * 2,
+    life: 1.0,
+    spawnFlash: 0,
+    id: Math.random()
+  };
+  salmon.push(s);
+  stats.spawned++;
+}
+
+function spawnEagle() {
+  if (eagles.length >= MAX_EAGLES) return;
+  eagles.push({
+    x: (0.3 + Math.random() * 0.5) * W,
+    y: H * 0.08 + Math.random() * H * 0.15,
+    angle: Math.random() * Math.PI * 2,
+    radius: 30 + Math.random() * 50,
+    speed: 0.005 + Math.random() * 0.01,
+    cx: (0.3 + Math.random() * 0.5) * W,
+    cy: H * 0.12 + Math.random() * H * 0.1
+  });
+}
+
+function spawnRain() {
+  if (rain.length >= MAX_RAIN) return;
+  rain.push({
+    x: Math.random() * W,
+    y: -5,
+    vy: 1.5 + Math.random() * 2,
+    length: 4 + Math.random() * 8,
+    alpha: 0.1 + Math.random() * 0.15
+  });
+}
+
+function spawnJuvenile() {
+  const gx = (GRAVEL_START + Math.random() * 0.1) * W;
+  const ry = riverY(gx);
+  const rb = riverBottom(gx);
+  juveniles.push({
+    x: gx,
+    y: ry + (rb - ry) * (0.3 + Math.random() * 0.4),
+    vx: -(0.3 + Math.random() * 0.3),
+    size: 1 + Math.random() * 0.8,
+    alpha: 0.6
+  });
+}
+
+// ── Controls ──
+let paused = false;
+let speed = 1.0;
+
+document.getElementById('btnPause').addEventListener('click', function() {
+  paused = !paused;
+  this.textContent = paused ? 'Play' : 'Pause';
+});
+
+document.getElementById('btnFollow').addEventListener('click', function() {
+  followMode = !followMode;
+  this.classList.toggle('active', followMode);
+  if (followMode) {
+    // Pick a salmon near the start of its journey
+    followSalmon = salmon.find(s => s.phase === 'ocean' || s.phase === 'river') || null;
+    if (!followSalmon && salmon.length > 0) followSalmon = salmon[0];
+    this.textContent = 'Following...';
+  } else {
+    followSalmon = null;
+    this.textContent = 'Follow One Salmon';
+  }
+});
+
+const speedSlider = document.getElementById('speedSlider');
+speedSlider.addEventListener('input', function() {
+  speed = parseFloat(this.value);
+  document.getElementById('speedLabel').textContent = speed.toFixed(1) + 'x';
+});
+
+// ── Draw helpers ──
+
+function drawMountains() {
+  if (mountainPts.length < 2) return;
+  ctx.beginPath();
+  ctx.moveTo(W, H);
+  ctx.lineTo(mountainPts[0].x, mountainPts[0].y + 20);
+  for (let i = 0; i < mountainPts.length; i++) {
+    ctx.lineTo(mountainPts[i].x, mountainPts[i].y);
+  }
+  ctx.lineTo(W + 10, mountainPts[mountainPts.length - 1].y);
+  ctx.lineTo(W + 10, H);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(MOUNTAIN_START * W, 0, W, 0);
+  grad.addColorStop(0, '#1a2a25');
+  grad.addColorStop(0.5, '#2a3a35');
+  grad.addColorStop(1, '#1e2e28');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Snow caps
+  ctx.beginPath();
+  for (let i = 0; i < mountainPts.length; i++) {
+    const p = mountainPts[i];
+    if (p.y < H * 0.15) {
+      ctx.moveTo(p.x - 4, p.y + 6);
+      ctx.lineTo(p.x, p.y);
+      ctx.lineTo(p.x + 4, p.y + 5);
+    }
+  }
+  ctx.strokeStyle = 'rgba(220,230,240,0.15)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function drawOcean(time) {
+  const oEnd = OCEAN_END * W;
+  const grad = ctx.createLinearGradient(0, 0, oEnd, 0);
+  grad.addColorStop(0, '#08202e');
+  grad.addColorStop(0.7, '#0c2a3a');
+  grad.addColorStop(1, '#0f3040');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, oEnd + 20, H);
+
+  // Ocean waves
+  ctx.beginPath();
+  const waveY = riverY(0);
+  for (let x = 0; x < oEnd + 20; x += 2) {
+    const wy = waveY + Math.sin(x * 0.03 + time * 0.001) * 3 + Math.sin(x * 0.07 + time * 0.002) * 1.5;
+    if (x === 0) ctx.moveTo(x, wy); else ctx.lineTo(x, wy);
+  }
+  ctx.strokeStyle = 'rgba(42,138,150,0.2)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+function drawRiver(time) {
+  // River body
+  ctx.beginPath();
+  for (let x = OCEAN_END * W; x <= W; x += 3) {
+    const y = riverY(x);
+    if (x === Math.floor(OCEAN_END * W)) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  for (let x = W; x >= OCEAN_END * W; x -= 3) {
+    const y = riverBottom(x);
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, riverY(W * 0.5) - 10, 0, riverBottom(W * 0.5) + 10);
+  grad.addColorStop(0, 'rgba(26,90,106,0.5)');
+  grad.addColorStop(0.4, 'rgba(26,90,106,0.35)');
+  grad.addColorStop(1, 'rgba(16,60,76,0.45)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Current lines (flow from right to left — water flowing downstream)
+  ctx.strokeStyle = 'rgba(42,138,150,0.12)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < 18; i++) {
+    const cx = ((i * 73 + time * 0.03 * speed) % (W * 0.7)) + OCEAN_END * W;
+    const cy = riverY(cx) + 5 + (i % 5) * (H * 0.02);
+    if (cy < riverBottom(cx) - 3) {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx - 12 - Math.sin(time * 0.002 + i) * 5, cy + Math.sin(time * 0.003 + i * 0.7) * 2);
+      ctx.stroke();
+    }
+  }
+
+  // Gravel bed
+  const gStart = GRAVEL_START * W;
+  const gEnd = MOUNTAIN_START * W;
+  ctx.fillStyle = 'rgba(90,90,74,0.3)';
+  for (let gx = gStart; gx < gEnd; gx += 6) {
+    const gy = riverBottom(gx) - 2 + Math.sin(gx * 0.1) * 2;
+    const ry = riverY(gx);
+    if (gy > ry) {
+      ctx.beginPath();
+      ctx.arc(gx + Math.sin(gx) * 2, gy, 1 + Math.random() * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function drawTree(t, time) {
+  const { x, y, h, w, type, brightness, nitrogenGlow } = t;
+
+  // Trunk
+  ctx.fillStyle = `rgba(40,30,20,${brightness * 0.6})`;
+  ctx.fillRect(x - 1, y, 2, h * 0.3);
+
+  // Canopy
+  const green = brightness + nitrogenGlow * 0.3;
+  if (type === 'fir') {
+    // Douglas fir: narrow triangle, layered
+    for (let layer = 0; layer < 4; layer++) {
+      const ly = y - h * (0.2 + layer * 0.2);
+      const lw = w * (1 - layer * 0.2) * 0.5;
+      ctx.beginPath();
+      ctx.moveTo(x, ly - h * 0.2);
+      ctx.lineTo(x - lw, ly);
+      ctx.lineTo(x + lw, ly);
+      ctx.closePath();
+      const g = Math.floor(40 + green * 50 + nitrogenGlow * 40);
+      ctx.fillStyle = `rgba(${15 + layer * 5},${g},${20 + layer * 3},${0.7 + layer * 0.05})`;
+      ctx.fill();
+    }
+  } else {
+    // Cedar: wider, drooping
+    ctx.beginPath();
+    ctx.moveTo(x, y - h);
+    ctx.quadraticCurveTo(x - w * 0.6, y - h * 0.4, x - w * 0.3, y);
+    ctx.lineTo(x + w * 0.3, y);
+    ctx.quadraticCurveTo(x + w * 0.6, y - h * 0.4, x, y - h);
+    ctx.closePath();
+    const g = Math.floor(45 + green * 55 + nitrogenGlow * 40);
+    ctx.fillStyle = `rgba(20,${g},25,0.75)`;
+    ctx.fill();
+  }
+
+  // Nitrogen glow
+  if (nitrogenGlow > 0.01) {
+    ctx.beginPath();
+    ctx.arc(x, y - h * 0.4, w * 0.8, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(74,154,90,${nitrogenGlow * 0.15})`;
+    ctx.fill();
+  }
+}
+
+function drawForestFloor(time) {
+  // Ground above river
+  for (let x = ESTUARY_END * W; x < W; x += 1) {
+    const ry = riverY(x);
+    const groundY = ry - 4;
+    if (groundY > 0) {
+      ctx.fillStyle = `rgba(26,58,42,${0.6 + Math.sin(x * 0.01) * 0.1})`;
+      ctx.fillRect(x, 0, 1, groundY);
+    }
+  }
+
+  // Ground below river
+  for (let x = ESTUARY_END * W; x < W; x += 1) {
+    const rb = riverBottom(x);
+    ctx.fillStyle = `rgba(20,40,30,${0.7 + Math.sin(x * 0.02) * 0.1})`;
+    ctx.fillRect(x, rb, 1, H - rb);
+  }
+}
+
+function drawMycelium(time) {
+  // Underground network between trees with nitrogen
+  const glowingTrees = trees.filter(t => t.nitrogenGlow > 0.05);
+  if (glowingTrees.length < 2) return;
+
+  ctx.strokeStyle = `rgba(122,154,90,${0.08 + Math.sin(time * 0.001) * 0.03})`;
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([3, 5]);
+
+  for (let i = 0; i < glowingTrees.length - 1; i++) {
+    for (let j = i + 1; j < glowingTrees.length; j++) {
+      const a = glowingTrees[i];
+      const b = glowingTrees[j];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      if (dist < 120) {
+        const alpha = Math.min(a.nitrogenGlow, b.nitrogenGlow) * 0.4;
+        ctx.strokeStyle = `rgba(122,154,90,${alpha})`;
+        ctx.beginPath();
+        // Underground path: below the trees
+        const midY = Math.max(a.y, b.y) + 15 + Math.sin(time * 0.002 + i + j) * 3;
+        ctx.moveTo(a.x, a.y + 5);
+        ctx.quadraticCurveTo((a.x + b.x) / 2, midY, b.x, b.y + 5);
+        ctx.stroke();
+      }
+    }
+  }
+  ctx.setLineDash([]);
+}
+
+function drawBears(time) {
+  for (const b of bears) {
+    const size = 10;
+    ctx.fillStyle = 'rgba(26,26,24,0.85)';
+    // Body
+    ctx.beginPath();
+    ctx.ellipse(b.x, b.y, size, size * 0.65, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Head
+    ctx.beginPath();
+    ctx.arc(b.x + size * 0.7, b.y - size * 0.3, size * 0.4, 0, Math.PI * 2);
+    ctx.fill();
+    // Ears
+    ctx.beginPath();
+    ctx.arc(b.x + size * 0.55, b.y - size * 0.6, 2.5, 0, Math.PI * 2);
+    ctx.arc(b.x + size * 0.9, b.y - size * 0.55, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Catch animation
+    if (b.catching > 0) {
+      ctx.fillStyle = `rgba(199,91,58,${b.catching * 0.4})`;
+      ctx.beginPath();
+      ctx.arc(b.x + size * 0.8, b.y - size * 0.1, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function drawEagles(time) {
+  for (const e of eagles) {
+    // V-shape
+    const wing = 8;
+    const ex = e.cx + Math.cos(e.angle) * e.radius;
+    const ey = e.cy + Math.sin(e.angle) * e.radius * 0.4;
+    const flapOffset = Math.sin(time * 0.004 + e.angle * 3) * 3;
+
+    ctx.strokeStyle = 'rgba(58,58,56,0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(ex - wing, ey + flapOffset);
+    ctx.lineTo(ex, ey);
+    ctx.lineTo(ex + wing, ey + flapOffset);
+    ctx.stroke();
+
+    // White head dot
+    ctx.fillStyle = 'rgba(240,240,230,0.4)';
+    ctx.beginPath();
+    ctx.arc(ex, ey, 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawSalmon(s, time, isFollowed) {
+  if (s.life <= 0) return;
+
+  const wiggle = Math.sin(time * 0.005 * s.wiggleSpeed + s.wiggle) * 2;
+  const px = s.x;
+  const py = s.y + wiggle;
+
+  // Glow
+  const glowSize = s.size * (isFollowed ? 4 : 2.5);
+  const alpha = s.life * s.brightness * (s.spawnFlash > 0 ? 1.5 : 0.6);
+  ctx.beginPath();
+  ctx.arc(px, py, glowSize, 0, Math.PI * 2);
+  const glowColor = s.phase === 'dead'
+    ? `rgba(74,154,90,${alpha * 0.4})`
+    : `rgba(199,91,58,${alpha * 0.3})`;
+  ctx.fillStyle = glowColor;
+  ctx.fill();
+
+  // Body
+  const bodyAlpha = s.life * s.brightness;
+  let bodyColor;
+  if (s.spawnFlash > 0) {
+    bodyColor = `rgba(255,180,100,${bodyAlpha})`;
+  } else if (s.phase === 'dead') {
+    bodyColor = `rgba(74,154,90,${bodyAlpha * 0.6})`;
+  } else {
+    const bright = s.phase === 'spawning' ? 1.2 : 1.0;
+    bodyColor = `rgba(${Math.floor(199 * bright)},${Math.floor(91 * bright)},${Math.floor(58 * bright)},${bodyAlpha})`;
+  }
+  ctx.fillStyle = bodyColor;
+  ctx.beginPath();
+  ctx.ellipse(px, py, s.size * 1.2, s.size * 0.6, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Tail flick
+  if (s.phase !== 'dead') {
+    const tailAngle = Math.sin(time * 0.008 * s.wiggleSpeed + s.wiggle) * 0.4;
+    ctx.beginPath();
+    ctx.moveTo(px - s.size * 1.2, py);
+    ctx.lineTo(px - s.size * 2, py - s.size * 0.5 + tailAngle * 3);
+    ctx.lineTo(px - s.size * 2, py + s.size * 0.5 + tailAngle * 3);
+    ctx.closePath();
+    ctx.fillStyle = bodyColor;
+    ctx.fill();
+  }
+
+  // Follow highlight ring
+  if (isFollowed) {
+    ctx.strokeStyle = `rgba(255,200,100,${0.4 + Math.sin(time * 0.005) * 0.2})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(px, py, s.size * 3, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+// ── Update logic ──
+
+function update(dt, time) {
+  const spd = speed * dt / 16;
+
+  // Stage cycling
+  stageTimer += dt * speed;
+  if (stageTimer > STAGE_DURATION) {
+    stageTimer = 0;
+    stageIdx = (stageIdx + 1) % stages.length;
+    updateStageDisplay();
+  }
+
+  // Spawn salmon
+  spawnTimer += dt * speed;
+  if (spawnTimer > 800 && salmon.length < MAX_SALMON) {
+    spawnTimer = 0;
+    spawnSalmon();
+  }
+
+  // Spawn rain
+  if (Math.random() < 0.3 * speed) spawnRain();
+
+  // Spawn eagles
+  if (eagles.length < MAX_EAGLES && Math.random() < 0.002) spawnEagle();
+
+  // Spawn juveniles
+  if (Math.random() < 0.02 * speed) spawnJuvenile();
+
+  // Update salmon
+  for (let i = salmon.length - 1; i >= 0; i--) {
+    const s = salmon[i];
+    const frac = s.x / W;
+
+    // Phase transitions
+    if (s.phase === 'ocean' && frac > ESTUARY_END) {
+      s.phase = 'river';
+    }
+    if (s.phase === 'river' && frac > GRAVEL_START) {
+      s.phase = 'spawning';
+      s.vx *= 0.3;
+    }
+
+    // Movement
+    if (s.phase === 'ocean' || s.phase === 'river') {
+      // Swim upstream (right)
+      s.x += s.vx * spd;
+      // Stay in river
+      const ry = riverY(s.x);
+      const rb = riverBottom(s.x);
+      const mid = (ry + rb) / 2;
+      s.y += (mid - s.y) * 0.01 * spd + (Math.random() - 0.5) * 0.3 * spd;
+      s.y = Math.max(ry + 3, Math.min(rb - 3, s.y));
+
+      // Brightness increases as they approach spawning
+      if (s.phase === 'river') {
+        s.brightness = Math.min(1.0, s.brightness + 0.0003 * spd);
+      }
+
+      // Bear catch check
+      for (const b of bears) {
+        if (Math.abs(s.x - b.x) < 15 && Math.abs(s.y - (b.y + 10)) < 15 && Math.random() < 0.003 * spd) {
+          s.phase = 'caught';
+          b.catching = 1.0;
+          b.hasCatch = true;
+          stats.caught++;
+
+          // Create forest particle
+          forestParticles.push({
+            x: b.x,
+            y: b.y,
+            targetX: b.x + (Math.random() - 0.3) * 200,
+            targetY: b.y - 30 - Math.random() * 80,
+            progress: 0,
+            alpha: 1.0
+          });
+          break;
+        }
+      }
+    } else if (s.phase === 'spawning') {
+      s.x += s.vx * spd * 0.5;
+      s.vx *= (1 - 0.005 * spd);
+
+      if (s.vx < 0.05) {
+        // Spawn flash
+        s.spawnFlash = 1.0;
+        s.phase = 'dead';
+        stats.reached++;
+        stats.nitrogen += 15;
+
+        // Feed nearby trees
+        for (const t of trees) {
+          const dist = Math.hypot(t.x - s.x, t.y - (s.y - 30));
+          if (dist < 80) {
+            t.nitrogenGlow = Math.min(1.0, t.nitrogenGlow + 0.3 / (1 + dist * 0.02));
+          }
+        }
+      }
+    } else if (s.phase === 'dead') {
+      s.spawnFlash *= (1 - 0.02 * spd);
+      s.life -= 0.003 * spd;
+      // Color shifts to green (handled in draw)
+    } else if (s.phase === 'caught') {
+      s.life -= 0.05 * spd;
+    }
+
+    // Remove dead salmon
+    if (s.life <= 0) {
+      if (followSalmon === s) {
+        followSalmon = null;
+        followMode = false;
+        document.getElementById('btnFollow').textContent = 'Follow One Salmon';
+        document.getElementById('btnFollow').classList.remove('active');
+      }
+      salmon.splice(i, 1);
+    }
+  }
+
+  // Update bears
+  for (const b of bears) {
+    if (b.catching > 0) {
+      b.catching -= 0.01 * spd;
+      if (b.catching <= 0) {
+        b.catching = 0;
+        b.hasCatch = false;
+      }
+    }
+  }
+
+  // Update forest particles (bear carry)
+  for (let i = forestParticles.length - 1; i >= 0; i--) {
+    const fp = forestParticles[i];
+    fp.progress += 0.008 * spd;
+    if (fp.progress >= 1) {
+      // Deposit nitrogen
+      for (const t of trees) {
+        const dist = Math.hypot(t.x - fp.targetX, t.y - fp.targetY);
+        if (dist < 60) {
+          t.nitrogenGlow = Math.min(1.0, t.nitrogenGlow + 0.4 / (1 + dist * 0.02));
+          stats.nitrogen += 5;
+        }
+      }
+      // Add nitrogen spot
+      nitrogenSpots.push({ x: fp.targetX, y: fp.targetY, life: 1.0 });
+      forestParticles.splice(i, 1);
+    }
+  }
+
+  // Update nitrogen spots
+  for (let i = nitrogenSpots.length - 1; i >= 0; i--) {
+    nitrogenSpots[i].life -= 0.001 * spd;
+    if (nitrogenSpots[i].life <= 0) nitrogenSpots.splice(i, 1);
+  }
+
+  // Update tree nitrogen (slow decay)
+  for (const t of trees) {
+    t.nitrogenGlow *= (1 - 0.0005 * spd);
+  }
+
+  // Update rain
+  for (let i = rain.length - 1; i >= 0; i--) {
+    rain[i].y += rain[i].vy * spd;
+    if (rain[i].y > H) rain.splice(i, 1);
+  }
+
+  // Update eagles
+  for (const e of eagles) {
+    e.angle += e.speed * spd;
+  }
+
+  // Update juveniles
+  for (let i = juveniles.length - 1; i >= 0; i--) {
+    const j = juveniles[i];
+    j.x += j.vx * spd;
+    const ry = riverY(j.x);
+    const rb = riverBottom(j.x);
+    j.y = Math.max(ry + 2, Math.min(rb - 2, j.y + (Math.random() - 0.5) * 0.5));
+    if (j.x < -10) juveniles.splice(i, 1);
+  }
+
+  // Update stats display
+  document.getElementById('statSpawned').textContent = stats.spawned;
+  document.getElementById('statCaught').textContent = stats.caught;
+  document.getElementById('statReached').textContent = stats.reached;
+  document.getElementById('statNitrogen').textContent = stats.nitrogen;
+}
+
+// ── Main draw ──
+
+function draw(time) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.3);
+  skyGrad.addColorStop(0, '#060e0a');
+  skyGrad.addColorStop(1, '#0a1a15');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Dawn glow on horizon
+  ctx.beginPath();
+  const dawnX = W * 0.5;
+  const dawnY = H * 0.15;
+  const dawnGrad = ctx.createRadialGradient(dawnX, dawnY, 0, dawnX, dawnY, W * 0.5);
+  dawnGrad.addColorStop(0, 'rgba(199,140,80,0.04)');
+  dawnGrad.addColorStop(0.5, 'rgba(199,120,70,0.02)');
+  dawnGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = dawnGrad;
+  ctx.fillRect(0, 0, W, H * 0.4);
+
+  // Forest floor (background)
+  drawForestFloor(time);
+
+  // Mountains
+  drawMountains();
+
+  // Trees (back layer — those above river)
+  for (const t of trees) {
+    if (t.y < riverY(t.x)) drawTree(t, time);
+  }
+
+  // Mycelial network (underground)
+  drawMycelium(time);
+
+  // Ocean
+  drawOcean(time);
+
+  // River
+  drawRiver(time);
+
+  // Rain
+  ctx.lineWidth = 0.5;
+  for (const r of rain) {
+    ctx.strokeStyle = `rgba(150,200,220,${r.alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(r.x, r.y);
+    ctx.lineTo(r.x - 0.5, r.y + r.length);
+    ctx.stroke();
+  }
+
+  // Nitrogen spots
+  for (const ns of nitrogenSpots) {
+    ctx.beginPath();
+    ctx.arc(ns.x, ns.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(74,154,90,${ns.life * 0.3})`;
+    ctx.fill();
+  }
+
+  // Forest particles (being carried by bears)
+  for (const fp of forestParticles) {
+    const t = fp.progress;
+    const cx = fp.x + (fp.targetX - fp.x) * t;
+    const cy = fp.y + (fp.targetY - fp.y) * t - Math.sin(t * Math.PI) * 40;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(199,91,58,${(1 - t) * 0.7})`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(199,91,58,${(1 - t) * 0.15})`;
+    ctx.fill();
+  }
+
+  // Salmon
+  for (const s of salmon) {
+    drawSalmon(s, time, followMode && followSalmon === s);
+  }
+
+  // Juveniles
+  for (const j of juveniles) {
+    ctx.fillStyle = `rgba(180,200,210,${j.alpha * 0.5})`;
+    ctx.beginPath();
+    ctx.ellipse(j.x, j.y, j.size * 0.8, j.size * 0.4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Tiny tail
+    ctx.beginPath();
+    ctx.moveTo(j.x + j.size * 0.8, j.y);
+    ctx.lineTo(j.x + j.size * 1.4, j.y - j.size * 0.3);
+    ctx.lineTo(j.x + j.size * 1.4, j.y + j.size * 0.3);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Trees (front layer — those below/at river level)
+  for (const t of trees) {
+    if (t.y >= riverY(t.x)) drawTree(t, time);
+  }
+
+  // Bears
+  drawBears(time);
+
+  // Eagles
+  drawEagles(time);
+}
+
+// ── Animation loop ──
+
+let lastTime = 0;
+
+function frame(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const dt = Math.min(timestamp - lastTime, 50); // cap delta
+  lastTime = timestamp;
+
+  if (!paused) {
+    update(dt, timestamp);
+  }
+  draw(timestamp);
+
+  requestAnimationFrame(frame);
+}
+
+// ── Init ──
+resize();
+// Pre-spawn a few eagles
+for (let i = 0; i < 3; i++) spawnEagle();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

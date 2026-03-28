@@ -106,4 +106,10 @@
 
   document.head.appendChild(style);
   document.body.insertBefore(bar, document.body.firstChild);
+
+  // Load fractal details script (self-similar structure at every scale)
+  var fractal = document.createElement('script');
+  fractal.src = (current ? '../' : '') + 'fractal.js';
+  fractal.defer = true;
+  document.head.appendChild(fractal);
 })();

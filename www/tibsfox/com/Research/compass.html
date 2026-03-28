@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Compass — Center Camp Forest Map</title>
+  <link rel="stylesheet" href="../brand.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1a12;
+      color: #e8dcc8;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════ */
+    header {
+      background: linear-gradient(135deg, #0a1a10 0%, #1a3a2a 40%, #2a4a3a 70%, #1a2a20 100%);
+      padding: 2rem 2rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(122, 154, 90, 0.4);
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #e8dcc8;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+    header .subtitle {
+      font-size: 0.95rem;
+      color: rgba(232, 220, 200, 0.6);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════
+       COMPASS CONTAINER
+       ═══════════════════════════════════════════ */
+    .compass-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .compass-container {
+      position: relative;
+      flex-shrink: 0;
+    }
+    canvas#compass {
+      border-radius: 50%;
+      box-shadow:
+        0 0 40px rgba(122, 154, 90, 0.15),
+        0 0 80px rgba(42, 100, 150, 0.08),
+        inset 0 0 60px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════
+       INFO PANEL
+       ═══════════════════════════════════════════ */
+    .info-panel {
+      max-width: 360px;
+      min-width: 280px;
+      flex: 1;
+    }
+    .info-card {
+      background: rgba(26, 42, 32, 0.8);
+      border: 1px solid rgba(122, 154, 90, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .info-card h2 {
+      font-size: 1.1rem;
+      color: #c8b890;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+    .info-card p {
+      font-size: 0.85rem;
+      color: rgba(232, 220, 200, 0.7);
+      line-height: 1.6;
+    }
+    .info-card .coords {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: rgba(122, 154, 90, 0.8);
+      margin-top: 0.5rem;
+    }
+    .info-card a {
+      display: inline-block;
+      margin-top: 0.8rem;
+      color: #7a9a5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(122, 154, 90, 0.3);
+      transition: all 0.2s;
+    }
+    .info-card a:hover {
+      color: #a4c47a;
+      border-color: #a4c47a;
+    }
+    .hover-prompt {
+      text-align: center;
+      color: rgba(232, 220, 200, 0.4);
+      font-style: italic;
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       LEGEND
+       ═══════════════════════════════════════════ */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      padding: 0 2rem 1.5rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: rgba(232, 220, 200, 0.6);
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .legend-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e8dcc8;
+    }
+    .legend-item.dimmed { opacity: 0.3; }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       QUOTE
+       ═══════════════════════════════════════════ */
+    .compass-quote {
+      text-align: center;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1rem 2rem 2rem;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(232, 220, 200, 0.45);
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAV BAR
+       ═══════════════════════════════════════════ */
+    .nav-bar {
+      background: #1a2a1f;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .nav-bar a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+
+    @media (max-width: 800px) {
+      .compass-wrap { flex-direction: column; align-items: center; }
+      .info-panel { max-width: 100%; min-width: auto; }
+      canvas#compass { max-width: 95vw; height: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Research Series</a>
+  <span style="color:rgba(255,255,255,0.2)">/</span>
+  <a href="center-camp/index.html">Center Camp</a>
+  <span style="color:rgba(255,255,255,0.2)">/</span>
+  <a href="compass.html" class="active">The Compass</a>
+</div>
+
+<header>
+  <h1>The Compass</h1>
+  <div class="subtitle">Center Camp Forest Map &mdash; every trail placed on the complex plane</div>
+</header>
+
+<div class="compass-wrap">
+  <div class="compass-container">
+    <canvas id="compass" width="700" height="700"></canvas>
+  </div>
+  <div class="info-panel">
+    <div id="info-content">
+      <div class="hover-prompt">Hover over a point to explore the forest</div>
+      <div class="info-card">
+        <h2>Reading the Compass</h2>
+        <p>The horizontal axis is <strong>precision</strong> &mdash; measurement, standards, execution. The vertical axis is <strong>imagination</strong> &mdash; creativity, narrative, culture.</p>
+        <p style="margin-top:0.5rem">Forty-eight muses are the landmarks. Seventy-five research projects are the clearings. The closer a project is to a muse, the more it shares that muse's nature.</p>
+        <p style="margin-top:0.5rem">Distance from center is depth &mdash; how far the research reaches into its subject.</p>
+        <div class="coords">&theta; = angle from precision &nbsp;&middot;&nbsp; r = depth of research</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div class="compass-quote">
+  The real axis is where we measure. The imaginary axis is where we dream.<br>
+  The forest lives in both. The compass maps the space between.
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// THE COMPASS — Complex Plane Forest Map
+// ═══════════════════════════════════════════════════════════════
+
+// ── Rosetta Clusters (colors from the forest palette) ──
+var CLUSTERS = {
+  ecology:        { name: 'PNW Ecology',           color: '#4a7c3f', hub: 'ECO' },
+  electronics:    { name: 'Electronics',            color: '#d4881a', hub: 'LED' },
+  infrastructure: { name: 'Infrastructure',         color: '#2a8a96', hub: 'SYS' },
+  energy:         { name: 'Energy & Environment',   color: '#c75b3a', hub: 'THE' },
+  creative:       { name: 'Creative & Cultural',    color: '#9b59b6', hub: 'FFA' },
+  business:       { name: 'Business & Regulatory',  color: '#7a8a8a', hub: 'BCM' },
+  vision:         { name: 'Infrastructure Vision',  color: '#d4a017', hub: 'NND' },
+  music:          { name: 'Music & Sound',          color: '#e074a8', hub: 'GRV' },
+  radio:          { name: 'Radio & Broadcast',      color: '#a07ae0', hub: 'RBH' },
+  community:      { name: 'Community & Convention', color: '#e0a07a', hub: 'NWC' },
+  science:        { name: 'Science & Fiction',      color: '#5eb8c4', hub: 'LNV' }
+};
+
+// ── Muse Positions (from muse-ecosystem.chipset.yaml) ──
+var MUSES = [
+  { id: 'cedar',      name: 'Cedar',      role: 'the record',      theta: 0,  r: 0.95 },
+  { id: 'lex',        name: 'Lex',        role: 'the specification',theta: 5,  r: 0.90 },
+  { id: 'moss',       name: 'Moss',       role: 'the carpet',      theta: 6,  r: 0.58 },
+  { id: 'lichen',     name: 'Lichen',     role: 'the breath',      theta: 8,  r: 0.60 },
+  { id: 'sturgeon',   name: 'Sturgeon',   role: 'the ancient',     theta: 9,  r: 0.68 },
+  { id: 'fern',       name: 'Fern',       role: 'the foundation',  theta: 10, r: 0.65 },
+  { id: 'chanterelle',name: 'Chanterelle', role: 'the network',    theta: 12, r: 0.72 },
+  { id: 'star',       name: 'Star',       role: 'the keystone',    theta: 14, r: 0.64 },
+  { id: 'crab',       name: 'Crab',       role: 'the harvest',     theta: 15, r: 0.62 },
+  { id: 'beaver',     name: 'Beaver',     role: 'the maker',       theta: 16, r: 0.78 },
+  { id: 'salamander', name: 'Salamander', role: 'the headwater',   theta: 18, r: 0.66 },
+  { id: 'hemlock',    name: 'Hemlock',    role: 'the standard',    theta: 20, r: 0.85 },
+  { id: 'fire',       name: 'Fire',       role: 'the renewal',     theta: 22, r: 0.72 },
+  { id: 'cougar',     name: 'Cougar',     role: 'the ghost',       theta: 23, r: 0.76 },
+  { id: 'wolf',       name: 'Wolf',       role: 'the return',      theta: 24, r: 0.80 },
+  { id: 'rain',       name: 'Rain',       role: 'the cycle',       theta: 25, r: 0.64 },
+  { id: 'fog',        name: 'Fog',        role: 'the invisible',   theta: 26, r: 0.62 },
+  { id: 'bear',       name: 'Bear',       role: 'the season',      theta: 28, r: 0.78 },
+  { id: 'waterfall',  name: 'Waterfall',  role: 'the descent',     theta: 29, r: 0.66 },
+  { id: 'foxy',       name: 'Foxy',       role: 'the map',         theta: 30, r: 0.75 },
+  { id: 'sitka',      name: 'Sitka',      role: 'the root',        theta: 32, r: 0.82 },
+  { id: 'eulachon',   name: 'Eulachon',   role: 'the first gift',  theta: 34, r: 0.68 },
+  { id: 'steelhead',  name: 'Steelhead',  role: 'the twice-born',  theta: 33, r: 0.66 },
+  { id: 'dipper',     name: 'Dipper',     role: 'the water-walker', theta: 34, r: 0.65 },
+  { id: 'chinook',    name: 'Chinook',    role: 'the current',     theta: 35, r: 0.70 },
+  { id: 'orca',       name: 'Orca',       role: 'the elder',       theta: 38, r: 0.85 },
+  { id: 'sam',        name: 'Sam',        role: 'the question',    theta: 40, r: 0.60 },
+  { id: 'coyote',     name: 'Coyote',     role: 'the trickster',   theta: 42, r: 0.68 },
+  { id: 'octopus',    name: 'Octopus',    role: 'the reinventor',  theta: 44, r: 0.74 },
+  { id: 'dragonfly',  name: 'Dragonfly',  role: 'the iridescent',  theta: 43, r: 0.62 },
+  { id: 'willow',     name: 'Willow',     role: 'the welcome',     theta: 45, r: 1.00 },
+  { id: 'bee',        name: 'Bee',        role: 'the pollinator',  theta: 47, r: 0.66 },
+  { id: 'otter',      name: 'Otter',      role: 'the play',        theta: 48, r: 0.72 },
+  { id: 'hawk',       name: 'Hawk',       role: 'the formation',   theta: 50, r: 0.80 },
+  { id: 'eagle',      name: 'Eagle',      role: 'the guardian',    theta: 52, r: 0.82 },
+  { id: 'madrone',    name: 'Madrone',     role: 'the hearth',     theta: 53, r: 0.65 },
+  { id: 'owl',        name: 'Owl',        role: 'the clock',       theta: 55, r: 0.80 },
+  { id: 'bat',        name: 'Bat',        role: 'the echolocator', theta: 57, r: 0.66 },
+  { id: 'marten',     name: 'Marten',     role: 'the signal',      theta: 56, r: 0.68 },
+  { id: 'raven',      name: 'Raven',      role: 'the pattern',     theta: 60, r: 0.70 },
+  { id: 'thrush',     name: 'Thrush',     role: 'the tone',        theta: 62, r: 0.66 },
+  { id: 'nutcracker', name: 'Nutcracker', role: 'the cache',       theta: 64, r: 0.68 },
+  { id: 'wren',       name: 'Wren',       role: 'the song',        theta: 65, r: 0.68 },
+  { id: 'kelp',       name: 'Kelp',       role: 'the tide forest', theta: 68, r: 0.72 },
+  { id: 'alder',      name: 'Alder',      role: 'the resonance',   theta: 70, r: 0.75 },
+  { id: 'osprey',     name: 'Osprey',     role: 'the horizon',     theta: 78, r: 0.80 },
+  { id: 'pika',       name: 'Pika',       role: 'the sentinel',    theta: 80, r: 0.55 },
+  { id: 'glacier',    name: 'Glacier',    role: 'the archive',     theta: 82, r: 0.70 }
+];
+
+// ── Research Projects on the Complex Plane ──
+// theta: 0° = pure precision/measurement, 90° = pure imagination/culture
+// r: depth of research (0 = shallow, 1 = deepest)
+var PROJECTS = [
+  // ─── Cluster: PNW Ecology (greens) ───
+  { id: 'COL', name: 'Columbia Valley Rainforest', theta: 34, r: 0.88, cluster: 'ecology',
+    desc: 'Olympic Peninsula rainforests, 1000+ species, salmon-forest N-15 pathway' },
+  { id: 'CAS', name: 'Cascade Range', theta: 26, r: 0.82, cluster: 'ecology',
+    desc: 'Biodiversity stratified by elevation. Oak savanna to alpine krummholz' },
+  { id: 'ECO', name: 'Living Systems', theta: 30, r: 0.88, cluster: 'ecology',
+    desc: 'Full ecosystem taxonomy — 8 elevation bands, 189 species, heritage bridge' },
+  { id: 'GDN', name: 'Gardening', theta: 38, r: 0.78, cluster: 'ecology',
+    desc: 'Maritime PNW gardening — 12-month calendar, native plant integration, soil science' },
+  { id: 'AVI', name: 'Wings of the PNW', theta: 36, r: 0.90, cluster: 'ecology',
+    desc: '250+ avian species, evolutionary biology, ecological networks, 88 sources' },
+  { id: 'MAM', name: 'Fur, Fin & Fang', theta: 33, r: 0.85, cluster: 'ecology',
+    desc: '169+ mammals — carnivores to cetaceans, alpine pika to deep-diving orca' },
+  { id: 'SAL', name: 'Salmon Heritage', theta: 35, r: 0.78, cluster: 'ecology',
+    desc: 'Pacific salmon — the thread that ties ocean to forest' },
+  { id: 'CRV', name: 'Corvid Intelligence', theta: 42, r: 0.76, cluster: 'ecology',
+    desc: 'Crows and ravens — ecology, intelligence, cultural significance in Cascadia' },
+  { id: 'AGR', name: 'PNW Agriculture', theta: 32, r: 0.72, cluster: 'ecology',
+    desc: 'Cosmic Crisp, Willamette Pinot, Grand Coulee water — the land that feeds' },
+  { id: 'LFR', name: 'The Living Forest', theta: 28, r: 0.82, cluster: 'ecology',
+    desc: 'Grandmother Cedar provisions the seedlings. The network is the forest.' },
+  { id: 'WYR', name: 'Weyerhaeuser', theta: 25, r: 0.74, cluster: 'ecology',
+    desc: 'From the 900,000-acre purchase to the working forest — timber, ecology, and the land between' },
+  { id: 'AWF', name: 'Clean Air, Water & Food', theta: 30, r: 0.72, cluster: 'ecology',
+    desc: 'Six coupled living filter systems — atmosphere to table, PNW wildfire smoke, PFAS' },
+  { id: 'PGP', name: 'Pacific Garbage Patch', theta: 28, r: 0.68, cluster: 'ecology',
+    desc: 'North Pacific Subtropical Gyre — oceanography, ecology, cleanup technology' },
+
+  // ─── Cluster: Electronics & Instrumentation (amber) ───
+  { id: 'LED', name: 'LED & Controllers', theta: 16, r: 0.82, cluster: 'electronics',
+    desc: 'From Ohm\'s Law to PLC ladder logic. 5 MCU platforms, addressable LEDs, smart lighting' },
+  { id: 'SHE', name: 'Smart Home & DIY Electronics', theta: 20, r: 0.82, cluster: 'electronics',
+    desc: '36 hands-on projects across 6 tiers, 10 protocols, 22 sensors, 14 actuators' },
+  { id: 'T55', name: '555 Timer', theta: 12, r: 0.66, cluster: 'electronics',
+    desc: 'The most manufactured integrated circuit in history — timing circuits made simple' },
+  { id: 'EMG', name: 'Electric Motors & Generators', theta: 18, r: 0.68, cluster: 'electronics',
+    desc: 'Electromechanical conversion — motors, generators, drives, control systems' },
+  { id: 'BPS', name: 'Bio-Physics Sensing', theta: 24, r: 0.88, cluster: 'electronics',
+    desc: 'Sonar, magnetoreception, quantum compass — 17 physics phenomena in biology' },
+
+  // ─── Cluster: Infrastructure & Computing (teal) ───
+  { id: 'SYS', name: 'Systems Administration', theta: 4, r: 0.86, cluster: 'infrastructure',
+    desc: 'Linux foundations, TCP/IP, structured logging, trust-based access control, working PoC' },
+  { id: 'K8S', name: 'Kubernetes Ecosystem', theta: 6, r: 0.74, cluster: 'infrastructure',
+    desc: 'Architecture, edge computing, AI/ML, security, operations' },
+  { id: 'CMH', name: 'Computational Mesh', theta: 15, r: 0.72, cluster: 'infrastructure',
+    desc: 'Mesh networking, distributed compute, peer-to-peer infrastructure' },
+  { id: 'GSD2', name: 'GSD-2 Architecture', theta: 8, r: 0.72, cluster: 'infrastructure',
+    desc: 'Next-generation orchestration — the codec that encodes intent into work packets' },
+  { id: 'MPC', name: 'Math Co-Processor', theta: 3, r: 0.80, cluster: 'infrastructure',
+    desc: '5 chips, 18 MCP tools, CUDA stream isolation — the Deep Root beneath all groves' },
+  { id: 'OCN', name: 'Open Compute', theta: 10, r: 0.72, cluster: 'infrastructure',
+    desc: 'Open Compute Project — hardware disaggregation, OCP rack design' },
+  { id: 'VAV', name: 'Voxel as Vessel', theta: 14, r: 0.86, cluster: 'infrastructure',
+    desc: 'Ceph RADOS ↔ Minecraft blocks. FlatBuffers 1111x speedup, Nyquist confirmed' },
+  { id: 'PMG', name: 'Pi-Mono + GSD', theta: 8, r: 0.66, cluster: 'infrastructure',
+    desc: 'Ecosystem integration — Pi SDK, GSD v1/v2, bridge architecture, the 20th extension' },
+  { id: 'SAN', name: 'SANS Institute', theta: 7, r: 0.76, cluster: 'infrastructure',
+    desc: 'The people who train the people who defend the networks. Since 1989.' },
+  { id: 'SYN', name: 'Synsor Corp', theta: 12, r: 0.72, cluster: 'infrastructure',
+    desc: 'AI sensing & sensor fusion — where the process meets the pixel' },
+  { id: 'TSL', name: 'Tessl Review', theta: 10, r: 0.62, cluster: 'infrastructure',
+    desc: 'When a skill creator\'s skills get reviewed by an external quality tool — the recursive loop' },
+  { id: 'MCM', name: 'Maritime Compute', theta: 18, r: 0.76, cluster: 'infrastructure',
+    desc: 'Floating infrastructure, ocean energy, maglev transport, global knowledge distribution' },
+
+  // ─── Cluster: Energy & Environment (red-orange) ───
+  { id: 'THE', name: 'Thermal & Hydrogen Energy', theta: 20, r: 0.78, cluster: 'energy',
+    desc: 'Every technology as a boundary condition — intercepting gradients' },
+  { id: 'HGE', name: 'Hydro-Geothermal Energy', theta: 22, r: 0.72, cluster: 'energy',
+    desc: 'PNW geothermal and hydroelectric — the gradient beneath the surface' },
+  { id: 'ROF', name: 'Ring of Fire', theta: 25, r: 0.72, cluster: 'energy',
+    desc: 'Pacific Rim volcanic and tectonic systems — geology as energy source' },
+
+  // ─── Cluster: Creative & Cultural (purple) ───
+  { id: 'FFA', name: 'Fur, Feathers & Animation', theta: 48, r: 0.82, cluster: 'creative',
+    desc: 'Biology to craft — keratin to PBR rendering, fursuit fabrication, stop motion' },
+  { id: 'TIBS', name: 'Animal Speak', theta: 56, r: 0.82, cluster: 'creative',
+    desc: 'Ted Andrews, PNW Indigenous shamanic traditions, comparative epistemology' },
+  { id: 'ARC', name: 'Shapes & Colors', theta: 46, r: 0.66, cluster: 'creative',
+    desc: 'Visual perception, sacred geometry, color theory, form language' },
+  { id: 'BRC', name: 'Black Rock City', theta: 54, r: 0.88, cluster: 'creative',
+    desc: 'Virtual Burning Man — 10 principles, 30 roles, stamps, camps, federation' },
+  { id: 'DAA', name: 'Deep Audio Analysis', theta: 44, r: 0.72, cluster: 'creative',
+    desc: 'Audio signal analysis, psychoacoustics, production techniques' },
+  { id: 'SPA', name: 'Spatial Awareness', theta: 42, r: 0.72, cluster: 'creative',
+    desc: 'Spatial cognition, wayfinding, environmental perception' },
+  { id: 'FDR', name: 'Year of the Fire Dragon', theta: 62, r: 0.72, cluster: 'creative',
+    desc: '丙辰 — cosmology, culture, and the sixty-year flame' },
+  { id: 'ATC', name: 'Aries-Taurus Cusp', theta: 64, r: 0.66, cluster: 'creative',
+    desc: 'Mars meets Venus at the threshold — where fire becomes earth' },
+  { id: 'LKR', name: 'Lion King Roots', theta: 58, r: 0.74, cluster: 'creative',
+    desc: 'From the Osiris myth to the roots beneath — Africa & cultural lineage' },
+  { id: 'WAL', name: 'Weird Al Yankovic', theta: 52, r: 0.82, cluster: 'creative',
+    desc: 'The Rosetta Stone framework — the parody method proves deep understanding' },
+  { id: 'STA', name: 'Steve Allen', theta: 50, r: 0.76, cluster: 'creative',
+    desc: 'The original — entertainment history, innovation, the long thread' },
+  { id: 'MCR', name: 'Minecraft RAG', theta: 40, r: 0.72, cluster: 'creative',
+    desc: 'Retrieval-augmented generation meets voxel worlds — knowledge in blocks' },
+  { id: 'GRD', name: 'Gradient Engine', theta: 18, r: 0.72, cluster: 'creative',
+    desc: 'Mathematical gradients — the universal operator from calculus to neural nets' },
+
+  // ─── Cluster: Business & Regulatory (steel) ───
+  { id: 'BCM', name: 'Building Construction', theta: 22, r: 0.82, cluster: 'business',
+    desc: '6 trades at 5 levels — NEC 2023, seismic design, dual-state code mapping' },
+  { id: 'ACC', name: 'Accounting', theta: 6, r: 0.58, cluster: 'business',
+    desc: 'Financial compliance, accounting standards, business fundamentals' },
+  { id: 'WSB', name: 'Small Business', theta: 38, r: 0.58, cluster: 'business',
+    desc: 'Washington State small business — permits, planning, the paperwork trail' },
+  { id: 'BLA', name: 'Business Law', theta: 10, r: 0.58, cluster: 'business',
+    desc: 'Legal frameworks, contracts, liability — the rules of the game' },
+
+  // ─── Cluster: Infrastructure Vision (gold) ───
+  { id: 'NND', name: 'New New Deal', theta: 28, r: 0.76, cluster: 'vision',
+    desc: 'Large-scale infrastructure corridors — the vision that connects everything' },
+  { id: 'PSG', name: 'Pacific Spine', theta: 24, r: 0.78, cluster: 'vision',
+    desc: 'Ground truth — trade network, Sno-Isle, Boeing, housing, compute, disaster response' },
+
+  // ─── Cluster: Music & Sound (pink) ───
+  { id: 'GRV', name: 'Green River & the Seattle Sound', theta: 62, r: 0.78, cluster: 'music',
+    desc: 'From Jackson Street to Sub Pop — the geography that made the music' },
+  { id: 'PJM', name: 'Pearl Jam', theta: 64, r: 0.82, cluster: 'music',
+    desc: 'Green River to Ten to thirty years of not selling out' },
+  { id: 'SNY', name: 'Sonic Youth', theta: 68, r: 0.78, cluster: 'music',
+    desc: '50 tunings, 30 years, and the bridge that made grunge possible' },
+  { id: 'MIX', name: 'Sir Mix-A-Lot', theta: 60, r: 0.72, cluster: 'music',
+    desc: 'Auburn, Central District, NastyMix — the DIY King of West Coast hip-hop' },
+  { id: 'GGT', name: 'Geggy Tah', theta: 66, r: 0.72, cluster: 'music',
+    desc: 'Postmodernism and the spaces between genres — Luaka Bop, Susan Rogers' },
+  { id: 'GTP', name: 'Geggy Tah Production', theta: 65, r: 0.66, cluster: 'music',
+    desc: 'The craft behind the sound — production techniques, studio alchemy' },
+  { id: 'KGX', name: "King's X", theta: 68, r: 0.72, cluster: 'music',
+    desc: 'Three sides of one — the power trio that lived in every space between' },
+  { id: 'CDP', name: 'Coldplay', theta: 58, r: 0.72, cluster: 'music',
+    desc: 'From UCL to the most-attended tour in history — deliberate constraint as architecture' },
+  { id: 'COI', name: 'Coil', theta: 72, r: 0.74, cluster: 'music',
+    desc: 'Sonic alchemy — music, magick, and legacy. The boundary-dissolving signal.' },
+  { id: 'DDA', name: 'dada', theta: 66, r: 0.68, cluster: 'music',
+    desc: '"I just ran away from home, now I\'m going to Dizz Knee Land"' },
+  { id: 'FQC', name: 'Frequency Continuum', theta: 50, r: 0.78, cluster: 'music',
+    desc: 'Cosmic wavelengths to microtonal intervals — the thread that ties them all' },
+  { id: 'WLF', name: '100.7 The Wolf', theta: 56, r: 0.62, cluster: 'radio',
+    desc: 'Country radio from Seattle — KKWF' },
+
+  // ─── Cluster: Radio & Broadcast (violet) ───
+  { id: 'C89', name: 'C89.5 FM', theta: 54, r: 0.68, cluster: 'radio',
+    desc: 'KNHC Seattle — community radio, dance music, broadcast engineering' },
+  { id: 'KUB', name: 'KUBE 93.3', theta: 58, r: 0.68, cluster: 'radio',
+    desc: 'A frequency, a culture, the spaces between — 1964 to now, Cougar Mountain, 100 kW' },
+  { id: 'KSM', name: 'KISM 92.9', theta: 55, r: 0.62, cluster: 'radio',
+    desc: 'Classic rock from Mount Constitution — cross-border signal, Bellingham' },
+  { id: 'KPZ', name: 'KPLZ Seattle', theta: 56, r: 0.62, cluster: 'radio',
+    desc: 'Seattle radio heritage — the signal wars, Star 101.5, frequency history' },
+  { id: 'RBH', name: 'Radio Broadcast History', theta: 52, r: 0.74, cluster: 'radio',
+    desc: 'PNW pioneers, golden age, community radio, grunge era, digital future' },
+
+  // ─── Cluster: Community & Convention (warm amber) ───
+  { id: 'NWC', name: 'Norwescon', theta: 54, r: 0.72, cluster: 'community',
+    desc: '48 years of books, science, art, and the people who imagine what comes next' },
+  { id: 'WCN', name: 'Westercon', theta: 52, r: 0.68, cluster: 'community',
+    desc: 'Since 1948 — the traveling convention that built West Coast fandom' },
+  { id: 'SMF', name: 'SMOFcon', theta: 56, r: 0.66, cluster: 'community',
+    desc: 'Secret Masters of Fandom — preserving the knowledge that keeps conventions alive' },
+  { id: 'OTM', name: 'Odyssey of the Mind', theta: 48, r: 0.68, cluster: 'community',
+    desc: 'Creative problem solving — competition, coaching, educational impact' },
+  { id: 'JNS', name: 'JanSport', theta: 44, r: 0.66, cluster: 'community',
+    desc: 'Seattle 1967 — from Cascade trails to every campus on earth' },
+
+  // ─── Cluster: Science & Fiction (cyan) ───
+  { id: 'LNV', name: 'Larry Niven', theta: 46, r: 0.78, cluster: 'science',
+    desc: 'Hard science fiction — one premise, followed to its logical conclusion' }
+];
+
+// ═══════════════════════════════════════════════════════════════
+// COMPASS RENDERER
+// ═══════════════════════════════════════════════════════════════
+
+var canvas = document.getElementById('compass');
+var ctx = canvas.getContext('2d');
+var W = canvas.width, H = canvas.height;
+var CX = W / 2, CY = H / 2;
+var R = Math.min(W, H) * 0.44; // max radius for r=1.0
+
+var hoveredProject = null;
+var hoveredMuse = null;
+var activeCluster = null;
+
+function toCanvas(theta_deg, r) {
+  var rad = theta_deg * Math.PI / 180;
+  return {
+    x: CX + r * R * Math.cos(rad),
+    y: CY - r * R * Math.sin(rad) // canvas Y is inverted
+  };
+}
+
+function drawCompass() {
+  // ── Background ──
+  var bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, R * 1.15);
+  bg.addColorStop(0, '#0d1a12');
+  bg.addColorStop(0.7, '#0f1e15');
+  bg.addColorStop(1, '#081210');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── Concentric rings (r = 0.2, 0.4, 0.6, 0.8, 1.0) ──
+  for (var i = 1; i <= 5; i++) {
+    var rr = (i / 5) * R;
+    ctx.beginPath();
+    ctx.arc(CX, CY, rr, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(122, 154, 90, ' + (0.06 + i * 0.02) + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // ── Radial lines every 15° from 0° to 90° ──
+  for (var deg = 0; deg <= 90; deg += 15) {
+    var rad = deg * Math.PI / 180;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.lineTo(CX + R * 1.08 * Math.cos(rad), CY - R * 1.08 * Math.sin(rad));
+    ctx.strokeStyle = 'rgba(122, 154, 90, 0.08)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // ── Faint grid for full circle ──
+  for (var deg = 105; deg < 360; deg += 15) {
+    var rad = deg * Math.PI / 180;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.lineTo(CX + R * 0.3 * Math.cos(rad), CY - R * 0.3 * Math.sin(rad));
+    ctx.strokeStyle = 'rgba(122, 154, 90, 0.03)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // ── Axis labels ──
+  ctx.font = '11px Georgia';
+  ctx.fillStyle = 'rgba(200, 184, 144, 0.5)';
+  ctx.textAlign = 'left';
+  ctx.fillText('Precision →', CX + R + 12, CY + 4);
+  ctx.save();
+  ctx.translate(CX - 4, CY - R - 12);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'left';
+  ctx.fillText('Imagination →', 0, 0);
+  ctx.restore();
+
+  // ── Degree labels on the arc ──
+  ctx.font = '9px "Courier New"';
+  ctx.fillStyle = 'rgba(200, 184, 144, 0.25)';
+  for (var deg = 0; deg <= 90; deg += 15) {
+    var rad = deg * Math.PI / 180;
+    var lx = CX + (R + 22) * Math.cos(rad);
+    var ly = CY - (R + 22) * Math.sin(rad);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(deg + '°', lx, ly);
+  }
+
+  // ── Trails between muse groves (subtle arcs) ──
+  var trails = [
+    // ── Original grove trails ──
+    ['cedar', 'raven'],      // Pattern-Witnessing
+    ['cedar', 'owl'],        // Temporal-Boundary
+    ['sam', 'foxy'],         // Biomass-Cartography
+    ['hemlock', 'cedar'],    // Validation-Record
+    ['foxy', 'cedar'],       // Fire-Succession
+    ['willow', 'hawk'],      // Canopy bridge
+    ['lex', 'hemlock'],      // Precision corridor
+    // ── PNW Heritage trails ──
+    ['chinook', 'foxy'],     // Navigation-Cartography
+    ['chinook', 'cedar'],    // Salmon-Memory
+    ['madrone', 'willow'],   // Welcome-Gathering
+    ['madrone', 'hawk'],     // Formation-Hearth
+    ['alder', 'raven'],      // Resonance-Pattern
+    ['alder', 'owl'],        // Frequency-Time
+    ['osprey', 'sam'],       // Speculation-Exploration
+    ['osprey', 'alder'],     // Horizon-Sound
+    // ── Underground network ──
+    ['chanterelle', 'cedar'],// Mycorrhizal-Record (roots feed the grandmother)
+    ['chanterelle', 'fern'], // Fungal-Foundation (mycelium meets root)
+    ['lichen', 'moss'],      // Breath-Carpet (symbiosis meets surface)
+    ['moss', 'cedar'],       // Carpet-Record (moss covers the grandmother)
+    // ── Water thread ──
+    ['chinook', 'eulachon'], // Current-First Gift (salmon follows candlefish)
+    ['chinook', 'orca'],     // Current-Elder (orca follows chinook)
+    ['eulachon', 'otter'],   // First Gift-Play (otter eats eulachon)
+    ['otter', 'beaver'],     // Play-Maker (aquatic mammal corridor)
+    ['kelp', 'orca'],        // Tide Forest-Elder (kelp shelters prey)
+    // ── Fire & weather ──
+    ['fire', 'hemlock'],     // Renewal-Standard (fire tests the standard)
+    ['fire', 'alder'],       // Renewal-Resonance (alder colonizes after fire)
+    ['fog', 'sitka'],        // Invisible-Root (fog feeds the fog-belt spruce)
+    ['fog', 'moss'],         // Invisible-Carpet (fog feeds the moss)
+    // ── Creature web ──
+    ['salamander', 'beaver'],// Headwater-Maker (beaver dams create salamander habitat)
+    ['bee', 'fern'],         // Pollinator-Foundation (meadow meets understory)
+    ['coyote', 'raven'],     // Trickster-Pattern (both see what others miss)
+    ['coyote', 'sam'],       // Trickster-Question (both explore edges)
+    ['octopus', 'wren'],     // Reinventor-Song (distributed intelligence meets complexity)
+    ['wren', 'marten'],      // Song-Signal (understory voice meets canopy indicator)
+    // ── Pass 4: Predator-prey & deep time ──
+    ['wolf', 'bear'],        // Return-Season (apex predators, salmon corridor)
+    ['wolf', 'coyote'],      // Return-Trickster (wolf displaces coyote ecologically)
+    ['bear', 'chinook'],     // Season-Current (bear carries salmon nitrogen into forest)
+    ['eagle', 'hawk'],       // Guardian-Formation (raptors reading the same field)
+    ['eagle', 'chinook'],    // Guardian-Current (eagle feeds on salmon)
+    ['sturgeon', 'cedar'],   // Ancient-Record (100-year fish meets 1500-year tree)
+    ['star', 'kelp'],        // Keystone-Tide Forest (star controls urchins, protects kelp)
+    ['dipper', 'chinook'],   // Water-walker-Current (dipper reads salmon streams)
+    ['dragonfly', 'bee'],    // Iridescent-Pollinator (aerial insect corridor)
+    ['waterfall', 'fog'],    // Descent-Invisible (spray zones create microhabitats)
+    ['waterfall', 'salamander'], // Descent-Headwater (falls create cold pools)
+    ['glacier', 'pika'],     // Archive-Sentinel (both measure climate)
+    ['glacier', 'osprey'],   // Archive-Horizon (ice and sky meet at the peak)
+    ['pika', 'owl'],         // Sentinel-Clock (both keep watch from altitude)
+    // ── Pass 5: Final seven voices ──
+    ['cougar', 'wolf'],      // Ghost-Return (solitary vs pack apex)
+    ['cougar', 'marten'],    // Ghost-Signal (both old-growth obligate)
+    ['rain', 'fog'],         // Cycle-Invisible (precipitation sisters)
+    ['rain', 'waterfall'],   // Cycle-Descent (rain feeds the falls)
+    ['steelhead', 'chinook'],// Twice-born-Current (the one that survives spawning)
+    ['bat', 'owl'],          // Echolocator-Clock (night hunters, different senses)
+    ['bat', 'wren'],         // Echolocator-Song (frequency specialists)
+    ['thrush', 'wren'],      // Tone-Song (acoustic ecology, two songs of old-growth)
+    ['nutcracker', 'pika'],  // Cache-Sentinel (alpine mutualists)
+    ['nutcracker', 'glacier'],// Cache-Archive (memory systems at altitude)
+    ['crab', 'star'],        // Harvest-Keystone (intertidal economy)
+    ['crab', 'kelp'],        // Harvest-Tide Forest (nearshore web)
+  ];
+
+  trails.forEach(function(trail) {
+    var m1 = MUSES.find(function(m) { return m.id === trail[0]; });
+    var m2 = MUSES.find(function(m) { return m.id === trail[1]; });
+    if (!m1 || !m2) return;
+    var p1 = toCanvas(m1.theta, m1.r);
+    var p2 = toCanvas(m2.theta, m2.r);
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
+    // Subtle curved trail
+    var mx = (p1.x + p2.x) / 2 + (p2.y - p1.y) * 0.15;
+    var my = (p1.y + p2.y) / 2 + (p1.x - p2.x) * 0.15;
+    ctx.quadraticCurveTo(mx, my, p2.x, p2.y);
+    ctx.strokeStyle = 'rgba(200, 184, 144, 0.08)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // ── Project dots ──
+  PROJECTS.forEach(function(p) {
+    var pos = toCanvas(p.theta, p.r);
+    var cluster = CLUSTERS[p.cluster];
+    var alpha = 0.7;
+    var size = 4;
+
+    if (activeCluster && p.cluster !== activeCluster) {
+      alpha = 0.12;
+    }
+    if (hoveredProject && hoveredProject.id === p.id) {
+      alpha = 1.0;
+      size = 7;
+    }
+
+    // Glow
+    if (alpha > 0.3) {
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, size + 6, 0, Math.PI * 2);
+      var glow = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, size + 6);
+      glow.addColorStop(0, hexToRGBA(cluster.color, alpha * 0.3));
+      glow.addColorStop(1, hexToRGBA(cluster.color, 0));
+      ctx.fillStyle = glow;
+      ctx.fill();
+    }
+
+    // Dot
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRGBA(cluster.color, alpha);
+    ctx.fill();
+
+    // Label for hovered
+    if (hoveredProject && hoveredProject.id === p.id) {
+      ctx.font = '11px Georgia';
+      ctx.fillStyle = '#e8dcc8';
+      ctx.textAlign = 'left';
+      ctx.fillText(p.id, pos.x + 12, pos.y + 4);
+    }
+  });
+
+  // ── Muse landmarks ──
+  MUSES.forEach(function(m) {
+    var pos = toCanvas(m.theta, m.r);
+    var isHovered = hoveredMuse && hoveredMuse.id === m.id;
+    var size = isHovered ? 10 : 7;
+    var alpha = isHovered ? 1.0 : 0.85;
+
+    // Muse glow — warm parchment
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, size + 12, 0, Math.PI * 2);
+    var glow = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, size + 12);
+    glow.addColorStop(0, 'rgba(200, 184, 144, ' + (alpha * 0.25) + ')');
+    glow.addColorStop(0.6, 'rgba(200, 184, 144, ' + (alpha * 0.08) + ')');
+    glow.addColorStop(1, 'rgba(200, 184, 144, 0)');
+    ctx.fillStyle = glow;
+    ctx.fill();
+
+    // Muse diamond
+    ctx.save();
+    ctx.translate(pos.x, pos.y);
+    ctx.rotate(Math.PI / 4);
+    ctx.beginPath();
+    ctx.rect(-size / 2, -size / 2, size, size);
+    ctx.fillStyle = 'rgba(200, 184, 144, ' + alpha + ')';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(232, 220, 200, ' + (alpha * 0.5) + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
+
+    // Muse name
+    ctx.font = isHovered ? 'bold 12px Georgia' : '11px Georgia';
+    ctx.fillStyle = 'rgba(232, 220, 200, ' + alpha + ')';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(m.name, pos.x, pos.y - size - 6);
+  });
+
+  // ── Center point — the fire ──
+  ctx.beginPath();
+  ctx.arc(CX, CY, 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#c75b3a';
+  ctx.fill();
+  var fireGlow = ctx.createRadialGradient(CX, CY, 0, CX, CY, 20);
+  fireGlow.addColorStop(0, 'rgba(199, 91, 58, 0.2)');
+  fireGlow.addColorStop(1, 'rgba(199, 91, 58, 0)');
+  ctx.beginPath();
+  ctx.arc(CX, CY, 20, 0, Math.PI * 2);
+  ctx.fillStyle = fireGlow;
+  ctx.fill();
+}
+
+function hexToRGBA(hex, alpha) {
+  var r = parseInt(hex.slice(1, 3), 16);
+  var g = parseInt(hex.slice(3, 5), 16);
+  var b = parseInt(hex.slice(5, 7), 16);
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════════════════
+
+var infoEl = document.getElementById('info-content');
+
+canvas.addEventListener('mousemove', function(e) {
+  var rect = canvas.getBoundingClientRect();
+  var scaleX = W / rect.width;
+  var scaleY = H / rect.height;
+  var mx = (e.clientX - rect.left) * scaleX;
+  var my = (e.clientY - rect.top) * scaleY;
+
+  hoveredProject = null;
+  hoveredMuse = null;
+  canvas.style.cursor = 'default';
+
+  // Check muses first (larger hit area)
+  for (var i = 0; i < MUSES.length; i++) {
+    var m = MUSES[i];
+    var pos = toCanvas(m.theta, m.r);
+    var dist = Math.sqrt((mx - pos.x) ** 2 + (my - pos.y) ** 2);
+    if (dist < 18) {
+      hoveredMuse = m;
+      canvas.style.cursor = 'pointer';
+      showMuseInfo(m);
+      drawCompass();
+      return;
+    }
+  }
+
+  // Check projects
+  for (var i = 0; i < PROJECTS.length; i++) {
+    var p = PROJECTS[i];
+    var pos = toCanvas(p.theta, p.r);
+    var dist = Math.sqrt((mx - pos.x) ** 2 + (my - pos.y) ** 2);
+    if (dist < 14) {
+      hoveredProject = p;
+      canvas.style.cursor = 'pointer';
+      showProjectInfo(p);
+      drawCompass();
+      return;
+    }
+  }
+
+  drawCompass();
+});
+
+canvas.addEventListener('click', function(e) {
+  if (hoveredProject) {
+    window.location.href = hoveredProject.id + '/index.html';
+  }
+});
+
+canvas.addEventListener('mouseleave', function() {
+  hoveredProject = null;
+  hoveredMuse = null;
+  infoEl.innerHTML =
+    '<div class="hover-prompt">Hover over a point to explore the forest</div>' +
+    '<div class="info-card"><h2>Reading the Compass</h2>' +
+    '<p>The horizontal axis is <strong>precision</strong> — measurement, standards, execution. ' +
+    'The vertical axis is <strong>imagination</strong> — creativity, narrative, culture.</p>' +
+    '<p style="margin-top:0.5rem">Forty-eight muses are the landmarks. Seventy-five research projects are the clearings. ' +
+    'The closer a project is to a muse, the more it shares that muse\'s nature.</p>' +
+    '<p style="margin-top:0.5rem">Distance from center is depth — how far the research reaches into its subject.</p>' +
+    '<div class="coords">&theta; = angle from precision &middot; r = depth of research</div></div>';
+  drawCompass();
+});
+
+function showProjectInfo(p) {
+  var cluster = CLUSTERS[p.cluster];
+  var nearestMuse = findNearestMuse(p);
+  infoEl.innerHTML =
+    '<div class="info-card">' +
+    '<h2 style="color:' + cluster.color + '">' + p.name + '</h2>' +
+    '<p>' + p.desc + '</p>' +
+    '<div class="coords">θ = ' + p.theta + '° &nbsp;·&nbsp; r = ' + p.r.toFixed(2) +
+    ' &nbsp;·&nbsp; ' + cluster.name + '</div>' +
+    '<p style="margin-top:0.6rem;font-size:0.8rem;color:rgba(232,220,200,0.5)">Nearest muse: <strong>' +
+    nearestMuse.name + '</strong> (' + nearestMuse.role + ')</p>' +
+    '<a href="' + p.id + '/index.html">Enter this clearing →</a>' +
+    '</div>';
+}
+
+function showMuseInfo(m) {
+  // Find projects nearest to this muse
+  var nearby = PROJECTS.map(function(p) {
+    return { p: p, dist: museDist(m, p) };
+  }).sort(function(a, b) { return a.dist - b.dist; }).slice(0, 5);
+
+  infoEl.innerHTML =
+    '<div class="info-card">' +
+    '<h2>◆ ' + m.name + '</h2>' +
+    '<p style="color:rgba(200,184,144,0.8)">' + m.role + '</p>' +
+    '<div class="coords">θ = ' + m.theta + '° &nbsp;·&nbsp; r = ' + m.r.toFixed(2) + '</div>' +
+    '<p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(232,220,200,0.5)">Nearest clearings:</p>' +
+    nearby.map(function(n) {
+      var c = CLUSTERS[n.p.cluster];
+      return '<p style="font-size:0.82rem;margin-top:0.3rem">' +
+        '<span style="color:' + c.color + '">●</span> ' +
+        '<a href="' + n.p.id + '/index.html" style="margin:0;border:none;color:rgba(232,220,200,0.75)">' +
+        n.p.name + '</a></p>';
+    }).join('') +
+    '</div>';
+}
+
+function museDist(m, p) {
+  var m_rad = m.theta * Math.PI / 180;
+  var p_rad = p.theta * Math.PI / 180;
+  var mx = m.r * Math.cos(m_rad), my = m.r * Math.sin(m_rad);
+  var px = p.r * Math.cos(p_rad), py = p.r * Math.sin(p_rad);
+  return Math.sqrt((mx - px) ** 2 + (my - py) ** 2);
+}
+
+function findNearestMuse(p) {
+  var best = null, bestDist = Infinity;
+  MUSES.forEach(function(m) {
+    var d = museDist(m, p);
+    if (d < bestDist) { bestDist = d; best = m; }
+  });
+  return best;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LEGEND — clickable cluster filter
+// ═══════════════════════════════════════════════════════════════
+
+var legendEl = document.getElementById('legend');
+Object.keys(CLUSTERS).forEach(function(key) {
+  var c = CLUSTERS[key];
+  var count = PROJECTS.filter(function(p) { return p.cluster === key; }).length;
+  var item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = '<div class="legend-dot" style="background:' + c.color + '"></div>' +
+    c.name + ' <span style="opacity:0.4">(' + count + ')</span>';
+  item.addEventListener('click', function() {
+    if (activeCluster === key) {
+      activeCluster = null;
+      document.querySelectorAll('.legend-item').forEach(function(el) { el.classList.remove('dimmed'); });
+    } else {
+      activeCluster = key;
+      document.querySelectorAll('.legend-item').forEach(function(el) { el.classList.add('dimmed'); });
+      item.classList.remove('dimmed');
+    }
+    drawCompass();
+  });
+  legendEl.appendChild(item);
+});
+
+// ── Initial draw ──
+drawCompass();
+</script>
+
+</body>
+</html>

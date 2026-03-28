@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rosetta Table — Cedar's Installation</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root {
+    --bg: #0d1a12;
+    --text: #e8dcc8;
+    --canopy: #1a3a2a;
+    --forest: #2d5a3a;
+    --moss: #7a9a5a;
+    --salmon: #c75b3a;
+    --parchment: #c8b890;
+    --ecology: #4a7c3f;
+    --electronics: #d4881a;
+    --infrastructure: #2a8a96;
+    --energy: #c75b3a;
+    --creative: #9b59b6;
+    --business: #7a8a8a;
+    --vision: #d4a017;
+  }
+
+  html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* --- Texture overlay: faint stone grain --- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(200,184,144,0.015) 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 30%, rgba(122,154,90,0.01) 0%, transparent 60%);
+  }
+
+  /* --- Navigation --- */
+  nav {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: rgba(13,26,18,0.95);
+    border-bottom: 1px solid rgba(200,184,144,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  nav a {
+    color: var(--parchment);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  nav a:hover { opacity: 1; }
+  nav a::before { content: '\2190\00a0'; opacity: 0.4; }
+
+  /* --- Header --- */
+  header {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment), transparent);
+    margin: 2rem auto 0;
+    opacity: 0.3;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--parchment);
+    text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(200,184,144,0.15);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--moss);
+    opacity: 0.8;
+    letter-spacing: 0.08em;
+  }
+
+  .epigraph {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    opacity: 0.55;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .epigraph .attr {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+  }
+
+  /* --- Legend bar --- */
+  .legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding: 1.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
+    cursor: default;
+    transition: opacity 0.3s;
+  }
+  .legend-item:hover { opacity: 1; }
+  .legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  /* --- Table Container --- */
+  .table-wrap {
+    max-width: 1300px;
+    margin: 1rem auto 3rem;
+    padding: 0 1rem;
+    overflow-x: auto;
+  }
+
+  /* --- The Table --- */
+  .rosetta {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    table-layout: fixed;
+  }
+
+  .rosetta th,
+  .rosetta td {
+    padding: 0.75rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* --- Column headers --- */
+  .rosetta thead th {
+    background: var(--canopy);
+    color: var(--parchment);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-top: 3px solid transparent;
+    padding: 0.9rem 0.65rem;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+  .rosetta thead th:first-child {
+    background: transparent;
+    border-top-color: transparent;
+    cursor: default;
+  }
+  .rosetta thead th .hub-list {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    opacity: 0.5;
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+  .rosetta thead th:hover:not(:first-child) {
+    background: rgba(26,58,42,0.9);
+  }
+
+  /* Cluster-colored top borders */
+  th[data-cluster="ecology"]       { border-top-color: var(--ecology) !important; }
+  th[data-cluster="electronics"]   { border-top-color: var(--electronics) !important; }
+  th[data-cluster="infrastructure"]{ border-top-color: var(--infrastructure) !important; }
+  th[data-cluster="energy"]        { border-top-color: var(--energy) !important; }
+  th[data-cluster="creative"]      { border-top-color: var(--creative) !important; }
+  th[data-cluster="business"]      { border-top-color: var(--business) !important; }
+  th[data-cluster="vision"]        { border-top-color: var(--vision) !important; }
+
+  /* --- Row headers --- */
+  .rosetta tbody th {
+    background: var(--canopy);
+    color: var(--parchment);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    width: 95px;
+    min-width: 95px;
+    position: relative;
+  }
+  .rosetta tbody th:hover {
+    background: rgba(26,58,42,0.9);
+  }
+  .rosetta tbody th .concept-icon {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.15rem;
+    opacity: 0.6;
+  }
+
+  /* --- Data cells --- */
+  .rosetta td {
+    background: rgba(13,26,18,0.6);
+    border: 1px solid rgba(200,184,144,0.06);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cluster glow on cells */
+  td[data-cluster="ecology"]       { box-shadow: inset 0 0 20px rgba(74,124,63,0.08); }
+  td[data-cluster="electronics"]   { box-shadow: inset 0 0 20px rgba(212,136,26,0.08); }
+  td[data-cluster="infrastructure"]{ box-shadow: inset 0 0 20px rgba(42,138,150,0.08); }
+  td[data-cluster="energy"]        { box-shadow: inset 0 0 20px rgba(199,91,58,0.08); }
+  td[data-cluster="creative"]      { box-shadow: inset 0 0 20px rgba(155,89,182,0.08); }
+  td[data-cluster="business"]      { box-shadow: inset 0 0 20px rgba(122,138,138,0.08); }
+  td[data-cluster="vision"]        { box-shadow: inset 0 0 20px rgba(212,160,23,0.08); }
+
+  /* Brief keyword visible by default */
+  .cell-brief {
+    font-size: 0.8rem;
+    color: var(--text);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  /* Full text hidden by default */
+  .cell-full {
+    font-size: 0.78rem;
+    color: var(--text);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    line-height: 1.5;
+    margin-top: 0;
+  }
+
+  /* Hover: expand cell */
+  .rosetta td:hover {
+    background: rgba(26,58,42,0.5);
+    border-color: rgba(200,184,144,0.15);
+    box-shadow:
+      0 4px 20px rgba(0,0,0,0.3),
+      inset 0 0 30px rgba(200,184,144,0.04);
+    z-index: 2;
+  }
+  .rosetta td:hover .cell-brief { opacity: 0.4; font-size: 0.7rem; }
+  .rosetta td:hover .cell-full {
+    opacity: 0.9;
+    max-height: 120px;
+    margin-top: 0.3rem;
+  }
+
+  /* --- Active states --- */
+
+  /* Selected cell: warm parchment glow */
+  .rosetta td.active {
+    background: rgba(200,184,144,0.08) !important;
+    border-color: rgba(200,184,144,0.25) !important;
+    box-shadow:
+      0 0 25px rgba(200,184,144,0.1),
+      inset 0 0 30px rgba(200,184,144,0.05) !important;
+  }
+  .rosetta td.active .cell-brief { opacity: 0.45; font-size: 0.7rem; }
+  .rosetta td.active .cell-full {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 0.3rem;
+  }
+
+  /* Row highlight */
+  .rosetta tr.row-active td {
+    background: rgba(200,184,144,0.04);
+    border-color: rgba(200,184,144,0.1);
+  }
+  .rosetta tr.row-active th {
+    background: rgba(200,184,144,0.1);
+  }
+
+  /* Column highlight */
+  .rosetta td.col-active {
+    background: rgba(200,184,144,0.04);
+    border-color: rgba(200,184,144,0.1);
+  }
+  .rosetta thead th.col-active {
+    background: rgba(200,184,144,0.1);
+  }
+
+  /* Read-across sweep animation */
+  @keyframes sweepReveal {
+    0%   { opacity: 0; transform: translateX(-8px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  .rosetta tr.sweep td {
+    animation: sweepReveal 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  .rosetta tr.sweep td:nth-child(2) { animation-delay: 0.05s; }
+  .rosetta tr.sweep td:nth-child(3) { animation-delay: 0.15s; }
+  .rosetta tr.sweep td:nth-child(4) { animation-delay: 0.25s; }
+  .rosetta tr.sweep td:nth-child(5) { animation-delay: 0.35s; }
+  .rosetta tr.sweep td:nth-child(6) { animation-delay: 0.45s; }
+  .rosetta tr.sweep td:nth-child(7) { animation-delay: 0.55s; }
+  .rosetta tr.sweep td:nth-child(8) { animation-delay: 0.65s; }
+
+  .rosetta tr.sweep td .cell-full {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 0.3rem;
+  }
+  .rosetta tr.sweep td .cell-brief { opacity: 0.45; font-size: 0.7rem; }
+  .rosetta tr.sweep th {
+    background: rgba(200,184,144,0.12);
+  }
+
+  /* --- Project tags on active cell --- */
+  .cell-projects {
+    display: none;
+    margin-top: 0.4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+  }
+  .cell-projects span {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    margin: 0.1rem 0.15rem;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+  }
+  .rosetta td.active .cell-projects { display: block; }
+
+  .tag-ecology        { background: rgba(74,124,63,0.2); color: #8abf78; }
+  .tag-electronics    { background: rgba(212,136,26,0.2); color: #e8b050; }
+  .tag-infrastructure { background: rgba(42,138,150,0.2); color: #5dc4d0; }
+  .tag-energy         { background: rgba(199,91,58,0.2); color: #e8885a; }
+  .tag-creative       { background: rgba(155,89,182,0.2); color: #c48edb; }
+  .tag-business       { background: rgba(122,138,138,0.2); color: #a8baba; }
+  .tag-vision         { background: rgba(212,160,23,0.2); color: #e8c84a; }
+
+  /* --- Explanation section --- */
+  .explanation {
+    max-width: 780px;
+    margin: 0 auto 4rem;
+    padding: 3rem 2rem;
+    position: relative;
+  }
+  .explanation::before {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment), transparent);
+    margin: 0 auto 2.5rem;
+    opacity: 0.2;
+  }
+  .explanation h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--parchment);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+  .explanation p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text);
+    opacity: 0.65;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* --- Instructions tooltip --- */
+  .instructions {
+    text-align: center;
+    padding: 0 2rem 1rem;
+    font-size: 0.78rem;
+    color: var(--moss);
+    opacity: 0.45;
+    letter-spacing: 0.04em;
+  }
+  .instructions kbd {
+    display: inline-block;
+    padding: 0.1rem 0.35rem;
+    background: rgba(200,184,144,0.08);
+    border: 1px solid rgba(200,184,144,0.15);
+    border-radius: 3px;
+    font-family: Georgia, serif;
+    font-size: 0.75rem;
+    margin: 0 0.1rem;
+  }
+
+  /* --- Footer --- */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: var(--text);
+    opacity: 0.25;
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(200,184,144,0.06);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 900px) {
+    h1 { font-size: 2rem; }
+    .rosetta th, .rosetta td { padding: 0.5rem 0.4rem; font-size: 0.75rem; }
+    .rosetta tbody th { width: 70px; min-width: 70px; }
+    .cell-brief { font-size: 0.72rem; }
+    .cell-full { font-size: 0.7rem; }
+    .rosetta thead th .hub-list { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.5rem; letter-spacing: 0.08em; }
+    .subtitle { font-size: 0.85rem; }
+    .table-wrap { padding: 0 0.25rem; }
+    .rosetta { border-spacing: 2px; }
+    .rosetta th, .rosetta td { padding: 0.4rem 0.3rem; }
+    .rosetta tbody th { width: 55px; min-width: 55px; font-size: 0.7rem; }
+    .legend { gap: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Center Camp</a>
+  <a href="../compass.html">The Compass</a>
+  <a href="../index.html">Research Series</a>
+</nav>
+
+<header>
+  <h1>The Rosetta Table</h1>
+  <p class="subtitle">Cedar's Installation &mdash; every concept translated across seven domains</p>
+  <p class="epigraph">
+    &ldquo;You can&rsquo;t parody something you don&rsquo;t deeply understand.&rdquo;
+    <span class="attr">&mdash; The Weird Al Principle</span>
+  </p>
+</header>
+
+<div class="legend" id="legend"></div>
+
+<p class="instructions">
+  <kbd>hover</kbd> a cell to reveal its translation &middot;
+  <kbd>click</kbd> a cell to see related projects &middot;
+  <kbd>click</kbd> a row header to read across all domains &middot;
+  <kbd>click</kbd> a column header to see all concepts in one domain &middot;
+  <kbd>Esc</kbd> to clear
+</p>
+
+<div class="table-wrap">
+  <table class="rosetta" id="rosetta">
+    <thead><tr id="header-row"></tr></thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<section class="explanation">
+  <h2>Seven Languages, One Truth</h2>
+  <p>
+    The same patterns repeat across domains. Sampling appears in BPS (Nyquist), LED (oscilloscope),
+    DAA (audio), ECO (survey methodology). Trust appears in SYS (access control), BRC (web of trust),
+    BCM (code compliance), TIBS (knowledge authority). The Rosetta Table maps these translations &mdash;
+    the same idea expressed in different languages. Like Weird Al's parodies, which translate a song's
+    melody into a new context while preserving its structure, these translations preserve the underlying
+    principle while changing the subject matter.
+  </p>
+</section>
+
+<footer>
+  The Rosetta Table &mdash; Center Camp Installation &mdash; Cedar, Scribe &amp; Oracle Muse
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ─── Data ───────────────────────────────────────────────────────────
+
+  var clusters = [
+    {
+      id: 'ecology', name: 'PNW Ecology', color: '#4a7c3f',
+      hubs: ['COL','CAS','ECO','GDN','AVI','MAM','SAL','CRV','AGR','LFR','WYR','AWF','PGP']
+    },
+    {
+      id: 'electronics', name: 'Electronics', color: '#d4881a',
+      hubs: ['LED','SHE','T55','EMG','BPS']
+    },
+    {
+      id: 'infrastructure', name: 'Infrastructure', color: '#2a8a96',
+      hubs: ['SYS','K8S','CMH','GSD2','MPC','OCN','VAV','PMG','SAN','SYN','TSL','MCM']
+    },
+    {
+      id: 'energy', name: 'Energy', color: '#c75b3a',
+      hubs: ['THE','HGE','ROF']
+    },
+    {
+      id: 'creative', name: 'Creative', color: '#9b59b6',
+      hubs: ['FFA','TIBS','ARC','BRC','DAA','SPA','FDR','ATC','LKR','WAL','STA','MCR','GRD']
+    },
+    {
+      id: 'business', name: 'Business', color: '#7a8a8a',
+      hubs: ['BCM','ACC','WSB','BLA']
+    },
+    {
+      id: 'vision', name: 'Vision', color: '#d4a017',
+      hubs: ['NND','PSG']
+    }
+  ];
+
+  var concepts = [
+    {
+      name: 'Signal',
+      icon: '\u2248',
+      cells: [
+        { brief: 'Bird song, pheromone', full: 'Bird song, whale click, pheromone trail', projects: ['AVI','MAM','ECO'] },
+        { brief: 'Voltage, PWM', full: 'Voltage waveform, PWM duty cycle', projects: ['LED','EMG'] },
+        { brief: 'Packet, heartbeat', full: 'Network packet, log entry, heartbeat', projects: ['SYS','GSD2','OCN'] },
+        { brief: 'Thermal gradient', full: 'Thermal gradient, pressure differential', projects: ['THE','HGE'] },
+        { brief: 'Color, frequency', full: 'Color wavelength, audio frequency', projects: ['DAA','FFA','ARC'] },
+        { brief: 'Financial indicator', full: 'Financial indicator, compliance flag', projects: ['ACC','BCM'] },
+        { brief: 'Trade flow volume', full: 'Trade flow volume, corridor utilization', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Sampling',
+      icon: '\u2261',
+      cells: [
+        { brief: 'Transect, survey', full: 'Population survey, transect counting', projects: ['ECO','AVI','MAM','SAL'] },
+        { brief: 'Nyquist, ADC', full: 'Nyquist theorem, ADC resolution, oscilloscope', projects: ['BPS','LED','T55'] },
+        { brief: 'Log aggregation', full: 'Log aggregation, metrics collection', projects: ['SYS','CMH','MPC'] },
+        { brief: 'Sensor polling', full: 'Sensor polling, SCADA readings', projects: ['THE','ROF'] },
+        { brief: 'Frame rate, sample rate', full: 'Frame rate, audio sample rate', projects: ['DAA','FFA','STA'] },
+        { brief: 'Audit sampling', full: 'Audit sampling, spot checks', projects: ['ACC','BCM','WSB'] },
+        { brief: 'Satellite cadence', full: 'Satellite imagery cadence', projects: ['NND'] }
+      ]
+    },
+    {
+      name: 'Noise',
+      icon: '\u2307',
+      cells: [
+        { brief: 'Interference, fragmentation', full: 'Environmental interference, habitat fragmentation', projects: ['ECO','AWF','CRV'] },
+        { brief: 'EMI, ground loops', full: 'EMI, ground loops, aliasing', projects: ['EMG','LED','SHE'] },
+        { brief: 'Congestion, log spam', full: 'Network congestion, log spam', projects: ['SYS','OCN','VAV'] },
+        { brief: 'Heat loss, friction', full: 'Heat loss, friction, inefficiency', projects: ['THE','HGE','ROF'] },
+        { brief: 'Clutter, artifacts', full: 'Visual clutter, compression artifacts', projects: ['DAA','ARC','SPA'] },
+        { brief: 'Regulatory ambiguity', full: 'Regulatory ambiguity, paperwork overhead', projects: ['BCM','ACC','BLA'] },
+        { brief: 'Political interference', full: 'Political interference, funding gaps', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Network',
+      icon: '\u2609',
+      cells: [
+        { brief: 'Mycorrhizal web', full: 'Mycorrhizal web, food chain, nutrient cycle', projects: ['ECO','COL','GDN'] },
+        { brief: 'Circuit topology', full: 'Circuit topology, bus architecture', projects: ['LED','T55','EMG'] },
+        { brief: 'TCP/IP, mesh', full: 'TCP/IP, mesh, federation', projects: ['SYS','CMH','GSD2','OCN'] },
+        { brief: 'Power grid, pipeline', full: 'Power grid, pipeline, distribution', projects: ['THE','HGE'] },
+        { brief: 'Community, influence', full: 'Community connections, artistic influence', projects: ['BRC','FFA','TIBS','WAL'] },
+        { brief: 'Supply chain', full: 'Supply chain, business relationships', projects: ['BCM','WSB','BLA'] },
+        { brief: 'Trade corridor', full: 'Trade corridor, transport network', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Trust',
+      icon: '\u2662',
+      cells: [
+        { brief: 'Symbiosis, mutualism', full: 'Symbiosis, mutualism, co-evolution', projects: ['ECO','COL','MAM'] },
+        { brief: 'Integrity, checksum', full: 'Signal integrity, checksum, ECC', projects: ['BPS','SHE','T55'] },
+        { brief: 'TLS, access control', full: 'TLS, firewall, access control', projects: ['SYS','GSD2','MPC'] },
+        { brief: 'Safety interlock', full: 'Safety interlock, code compliance', projects: ['THE','ROF'] },
+        { brief: 'Web of trust', full: 'Web of trust, reputation, community', projects: ['BRC','TIBS','FFA','GRD'] },
+        { brief: 'Audit trail, bonding', full: 'Audit trail, insurance, bonding', projects: ['BCM','ACC','WSB'] },
+        { brief: 'Treaty, federation', full: 'Treaty, sovereignty, federation agreement', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Gradient',
+      icon: '\u2015',
+      cells: [
+        { brief: 'Elevation, moisture', full: 'Elevation bands, temperature cline, moisture gradient', projects: ['ECO','CAS','COL','AWF'] },
+        { brief: 'Voltage divider', full: 'Voltage divider, thermal dissipation', projects: ['LED','EMG','T55'] },
+        { brief: 'Load balancing', full: 'Load balancing, traffic shaping', projects: ['SYS','OCN','VAV'] },
+        { brief: 'Thermal, pressure', full: 'Thermal gradient, pressure head, fuel cell potential', projects: ['THE','HGE','ROF'] },
+        { brief: 'Color, dynamic range', full: 'Color gradient, dynamic range, narrative arc', projects: ['DAA','ARC','SPA','MCR'] },
+        { brief: 'Risk, segmentation', full: 'Risk gradient, market segmentation', projects: ['BCM','ACC','WSB'] },
+        { brief: 'Economic corridor', full: 'Economic gradient, development corridor', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Feedback',
+      icon: '\u21BA',
+      cells: [
+        { brief: 'Predator-prey, fire', full: 'Predator-prey cycles, fire succession', projects: ['ECO','AVI','MAM','AWF'] },
+        { brief: 'Op-amp, PID', full: 'Op-amp feedback, PID control', projects: ['EMG','BPS','LED'] },
+        { brief: 'Alerts, auto-scaling', full: 'Monitoring alerts, auto-scaling', projects: ['SYS','CMH','GSD2'] },
+        { brief: 'Thermostat, governor', full: 'Thermostat, governor, grid frequency', projects: ['THE','HGE'] },
+        { brief: 'Audience, remix', full: 'Audience response, peer review, remix', projects: ['WAL','FFA','DAA','BRC'] },
+        { brief: 'Market feedback', full: 'Market feedback, regulatory response', projects: ['BCM','WSB','BLA'] },
+        { brief: 'Policy adjustment', full: 'Policy adjustment, democratic process', projects: ['NND','PSG'] }
+      ]
+    },
+    {
+      name: 'Boundary',
+      icon: '\u2502',
+      cells: [
+        { brief: 'Ecotone, treeline', full: 'Ecotone, riparian zone, treeline', projects: ['ECO','COL','CAS','AWF'] },
+        { brief: 'Impedance, shielding', full: 'Input impedance, filtering, shielding', projects: ['SHE','EMG','LED'] },
+        { brief: 'Firewall, DMZ', full: 'Firewall, DMZ, container isolation', projects: ['SYS','GSD2','MPC'] },
+        { brief: 'Heat exchanger', full: 'Heat exchanger surface, turbine blade', projects: ['THE','HGE','ROF'] },
+        { brief: 'Genre, medium', full: 'Genre boundary, medium transition', projects: ['FFA','ARC','SPA','WAL'] },
+        { brief: 'Jurisdiction, license', full: 'Jurisdiction, licensing territory', projects: ['BCM','ACC','BLA'] },
+        { brief: 'Border, trade zone', full: 'State line, international border, trade zone', projects: ['NND','PSG'] }
+      ]
+    }
+  ];
+
+  // Map project -> cluster id for tag coloring
+  var projectCluster = {};
+  clusters.forEach(function (c) {
+    c.hubs.forEach(function (h) { projectCluster[h] = c.id; });
+  });
+
+  // ─── Build Legend ───────────────────────────────────────────────────
+
+  var legendEl = document.getElementById('legend');
+  clusters.forEach(function (c) {
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = '<span class="legend-swatch" style="background:' + c.color + '"></span>' + c.name;
+    legendEl.appendChild(item);
+  });
+
+  // ─── Build Table Header ─────────────────────────────────────────────
+
+  var headerRow = document.getElementById('header-row');
+  var cornerTh = document.createElement('th');
+  cornerTh.textContent = '';
+  headerRow.appendChild(cornerTh);
+
+  clusters.forEach(function (c, ci) {
+    var th = document.createElement('th');
+    th.setAttribute('data-cluster', c.id);
+    th.setAttribute('data-col', ci);
+    th.innerHTML = c.name + '<span class="hub-list">' + c.hubs.slice(0, 5).join(', ') +
+      (c.hubs.length > 5 ? ' +' + (c.hubs.length - 5) : '') + '</span>';
+    th.addEventListener('click', function () { toggleColumn(ci); });
+    headerRow.appendChild(th);
+  });
+
+  // ─── Build Table Body ───────────────────────────────────────────────
+
+  var tbody = document.getElementById('table-body');
+  concepts.forEach(function (concept, ri) {
+    var tr = document.createElement('tr');
+    tr.setAttribute('data-row', ri);
+
+    var th = document.createElement('th');
+    th.innerHTML = '<span class="concept-icon">' + concept.icon + '</span>' + concept.name;
+    th.addEventListener('click', function () { toggleRow(ri); });
+    tr.appendChild(th);
+
+    concept.cells.forEach(function (cell, ci) {
+      var td = document.createElement('td');
+      td.setAttribute('data-cluster', clusters[ci].id);
+      td.setAttribute('data-row', ri);
+      td.setAttribute('data-col', ci);
+
+      // Build project tags
+      var tags = '';
+      cell.projects.forEach(function (p) {
+        var cls = projectCluster[p] || 'ecology';
+        tags += '<span class="tag-' + cls + '">' + p + '</span>';
+      });
+
+      td.innerHTML =
+        '<div class="cell-brief">' + cell.brief + '</div>' +
+        '<div class="cell-full">' + cell.full + '</div>' +
+        '<div class="cell-projects">' + tags + '</div>';
+
+      td.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleCell(ri, ci);
+      });
+
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  // ─── Interaction State ──────────────────────────────────────────────
+
+  var activeRow = -1;
+  var activeCol = -1;
+  var activeCell = null; // {row, col}
+  var sweepRow = -1;
+
+  function clearAll() {
+    // Clear cell active
+    var cells = document.querySelectorAll('.rosetta td.active');
+    for (var i = 0; i < cells.length; i++) cells[i].classList.remove('active');
+
+    // Clear row active
+    var rows = document.querySelectorAll('.rosetta tr.row-active, .rosetta tr.sweep');
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].classList.remove('row-active');
+      rows[i].classList.remove('sweep');
+    }
+
+    // Clear col active
+    var colCells = document.querySelectorAll('.col-active');
+    for (var i = 0; i < colCells.length; i++) colCells[i].classList.remove('col-active');
+
+    activeRow = -1;
+    activeCol = -1;
+    activeCell = null;
+    sweepRow = -1;
+  }
+
+  function toggleCell(row, col) {
+    if (activeCell && activeCell.row === row && activeCell.col === col) {
+      clearAll();
+      return;
+    }
+    clearAll();
+    activeCell = { row: row, col: col };
+
+    // Highlight entire row
+    var tr = tbody.children[row];
+    tr.classList.add('row-active');
+
+    // Mark specific cell as active
+    var td = tr.querySelector('td[data-col="' + col + '"]');
+    if (td) td.classList.add('active');
+  }
+
+  function toggleRow(row) {
+    if (sweepRow === row) {
+      clearAll();
+      return;
+    }
+    clearAll();
+    sweepRow = row;
+
+    var tr = tbody.children[row];
+    // Remove then re-add to restart animation
+    tr.classList.remove('sweep');
+    void tr.offsetWidth; // force reflow
+    tr.classList.add('sweep');
+  }
+
+  function toggleColumn(col) {
+    if (activeCol === col) {
+      clearAll();
+      return;
+    }
+    clearAll();
+    activeCol = col;
+
+    // Highlight header
+    var ths = headerRow.children;
+    if (ths[col + 1]) ths[col + 1].classList.add('col-active');
+
+    // Highlight all cells in column
+    for (var r = 0; r < tbody.children.length; r++) {
+      var tds = tbody.children[r].querySelectorAll('td');
+      if (tds[col]) {
+        tds[col].classList.add('col-active');
+        tds[col].classList.add('active');
+      }
+    }
+  }
+
+  // Escape key clears
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') clearAll();
+  });
+
+  // Click outside table clears
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.rosetta')) clearAll();
+  });
+
+})();
+</script>
+
+</body>
+</html>
