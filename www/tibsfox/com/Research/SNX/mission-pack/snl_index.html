@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live From New York — GSD Research Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #4A148C;
+      --primary-light: #6A1B9A;
+      --secondary: #E65100;
+      --tertiary: #4E342E;
+      --gold: #F9A825;
+      --light-primary: #F3E5F5;
+      --light-secondary: #FFF3E0;
+      --bg: #FAF8FC;
+      --card-bg: #FFFFFF;
+      --card-dark: #F0EAF7;
+      --text: #212121;
+      --subtle: #757575;
+      --border: #BDBDBD;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2A0050 60%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: rgba(249,168,37,0.12);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px; left: 10%;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-badge {
+      display: inline-block;
+      background: rgba(249,168,37,0.25);
+      border: 1px solid rgba(249,168,37,0.6);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 0.4rem;
+    }
+
+    header .tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.2rem;
+    }
+
+    .pipeline-label {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline-label span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* FILE CARDS */
+    .files-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 600px) { .file-grid { grid-template-columns: 1fr; } }
+
+    .file-card {
+      background: var(--card-dark);
+      border: 1px solid #D1C4E9;
+      border-radius: 6px;
+      padding: 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .file-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 3px 12px rgba(74,20,140,0.12);
+    }
+
+    .file-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .file-card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .file-card p {
+      font-size: 0.8rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    .file-badge {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background: var(--primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* CONTENTS */
+    .contents-section { margin-bottom: 2.5rem; }
+
+    .contents-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .stage-block {
+      border-left: 3px solid var(--border);
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 0.8rem;
+      background: white;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .stage-block.stage-1 { border-left-color: var(--primary); }
+    .stage-block.stage-2 { border-left-color: var(--secondary); }
+    .stage-block.stage-3 { border-left-color: var(--tertiary); }
+
+    .stage-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .stage-1 .stage-label { color: var(--primary); }
+    .stage-2 .stage-label { color: var(--secondary); }
+    .stage-3 .stage-label { color: var(--tertiary); }
+
+    .stage-block h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .stage-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .stage-block ul li {
+      font-size: 0.82rem;
+      color: var(--subtle);
+      padding: 0.1rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .stage-block ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    /* USAGE */
+    .usage-section { margin-bottom: 2.5rem; }
+
+    .usage-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .usage-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+
+    .usage-steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .usage-steps li::before {
+      content: counter(step);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.6rem;
+      height: 1.6rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .code-block {
+      background: #1A0030;
+      color: #E1BEE7;
+      font-family: 'DM Mono', 'DejaVu Sans Mono', monospace;
+      font-size: 0.78rem;
+      padding: 1rem 1.2rem;
+      border-radius: 4px;
+      margin-top: 0.6rem;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* META TABLE */
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      margin-bottom: 2rem;
+    }
+
+    .meta-table tr:nth-child(even) { background: var(--light-primary); }
+
+    .meta-table td {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .meta-table td:first-child {
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+      width: 35%;
+    }
+
+    /* QUOTE */
+    .closing-quote {
+      background: var(--light-primary);
+      border-left: 4px solid var(--primary);
+      padding: 1.2rem 1.5rem;
+      margin-top: 2rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .closing-quote p {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .closing-quote .attribution {
+      font-size: 0.78rem;
+      color: var(--subtle);
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="mission-badge">GSD Research Mission Package</div>
+    <h1>Live From New York,<br>It's Saturday Night</h1>
+    <p class="subtitle">A Complete History of SNL Sketch Comedy</p>
+    <p class="tagline">Fifty Years of the American Comedy Conscience</p>
+    <div class="pipeline-label">
+      <span>Vision</span> → <span>Research</span> → <span>Mission</span>
+      &nbsp;|&nbsp; Squadron Profile · March 27, 2026
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="files-section">
+    <h2>Package Files</h2>
+    <div class="file-grid">
+      <a class="file-card" href="snl_mission.pdf" download>
+        <div class="file-icon">📄</div>
+        <h3>SNL Mission Package</h3>
+        <p>30-page research document · Three-stage pipeline · All sources cited · XeLaTeX compiled</p>
+        <span class="file-badge">PDF · Download</span>
+      </a>
+      <a class="file-card" href="snl_mission.tex" download>
+        <div class="file-icon">🔧</div>
+        <h3>LaTeX Source</h3>
+        <p>Full .tex source · XeLaTeX · Three-pass compilation · Modify and recompile at will</p>
+        <span class="file-badge">.tex · Download</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--primary);margin-bottom:1rem;padding-bottom:0.4rem;border-bottom:2px solid var(--primary);">Mission Metadata</h2>
+    <table class="meta-table">
+      <tr><td>Topic</td><td>Complete history of Saturday Night Live, 1975–2025</td></tr>
+      <tr><td>Activation Profile</td><td>Squadron (12 roles)</td></tr>
+      <tr><td>Research Modules</td><td>5 modules: Origins · Eras · Production Machine · Political Satire · Legacy Ecosystem</td></tr>
+      <tr><td>Est. Token Budget</td><td>~123,000 (input + output combined)</td></tr>
+      <tr><td>Est. Sessions</td><td>3 sessions · 8–10 context windows</td></tr>
+      <tr><td>Model Split</td><td>30% Opus / 60% Sonnet / 10% Haiku</td></tr>
+      <tr><td>CAPCOM Gates</td><td>2 (post Wave 1A; post Wave 2)</td></tr>
+      <tr><td>Test Coverage</td><td>36 tests across 4 categories · 5 mandatory safety-critical BLOCK tests</td></tr>
+      <tr><td>Status</td><td>Ready for GSD Orchestrator handoff</td></tr>
+    </table>
+  </section>
+
+  <section class="contents-section">
+    <h2>Document Contents</h2>
+
+    <div class="stage-block stage-1">
+      <div class="stage-label">Stage 1 — Vision Document</div>
+      <h3>Live From New York — Vision Guide</h3>
+      <ul>
+        <li>Vision narrative (the Regenerating Machine concept)</li>
+        <li>Five-problem statement: incomplete treatment, political under-documentation, invisible production machine, misunderstood talent pipeline, SNL50 contextualization</li>
+        <li>Domain architecture and module architecture (ASCII diagrams)</li>
+        <li>Five research modules with descriptions</li>
+        <li>Chipset configuration (Agnus/Denise/Paula/Gary YAML)</li>
+        <li>Scope boundaries and 12 success criteria</li>
+        <li>The Through-Line: the Amiga Principle and liveness as design</li>
+      </ul>
+    </div>
+
+    <div class="stage-block stage-2">
+      <div class="stage-label">Stage 2 — Research Reference</div>
+      <h3>SNL Research Reference</h3>
+      <ul>
+        <li>Module 01: Origins and Founding — NBC mandate, Lorne Michaels, Studio 8H, founding cast table, premiere night</li>
+        <li>Module 02: Era-by-Era Performance History — six eras, 1975–2025, cast members, signature sketches, cast statistics</li>
+        <li>Module 03: The Production Machine — six-day weekly cycle table, writers room, talent sourcing pipeline</li>
+        <li>Module 04: Political Satire — presidential impersonation table (12 entries), the SNL Effect, Weekend Update anchor succession</li>
+        <li>Module 05: Legacy Ecosystem — sketch-to-film table, SNL50 data table, SNL UK</li>
+        <li>Safety and sensitivity considerations · Full source bibliography</li>
+      </ul>
+    </div>
+
+    <div class="stage-block stage-3">
+      <div class="stage-label">Stage 3 — Mission Package</div>
+      <h3>Milestone Specification and Execution Plan</h3>
+      <ul>
+        <li>Mission objective · Wave architecture diagram</li>
+        <li>Component breakdown with model assignments and token estimates</li>
+        <li>Wave execution plan (Wave 0 through Wave 3) with cache strategy</li>
+        <li>Dependency graph · Token budget table</li>
+        <li>Test plan: 36 tests · Safety-critical, core, integration, edge case categories</li>
+        <li>Full verification matrix mapping criteria to test IDs</li>
+        <li>Mission crew manifest (12 Squadron roles)</li>
+        <li>Execution summary · Closing quote box</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="usage-section">
+    <h2>Usage Instructions</h2>
+    <ol class="usage-steps">
+      <li>Download the PDF and review the Stage 1 Vision and Stage 2 Research Reference to orient yourself on scope and key findings.</li>
+      <li>Open Stage 3 Mission Package and hand it to your GSD orchestrator (Claude Code) with the directive: <em>"Execute this research mission as specified."</em></li>
+      <li>Confirm scope at CAPCOM Gate 1 (after Wave 1A) before parallel research tracks proceed.</li>
+      <li>Review synthesis output at CAPCOM Gate 2 (after Wave 2) before publication assembly begins.</li>
+      <li>Receive final deliverables: comprehensive SNL history document + source index.</li>
+    </ol>
+
+    <h2 style="font-family:'Libre Baskerville',serif;font-size:1.05rem;color:var(--primary);margin:1.8rem 0 0.8rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);">Recompile the LaTeX Source</h2>
+    <div class="code-block">xelatex -interaction=nonstopmode snl_mission.tex
+xelatex -interaction=nonstopmode snl_mission.tex
+xelatex -interaction=nonstopmode snl_mission.tex</div>
+    <p style="font-size:0.8rem;color:var(--subtle);margin-top:0.5rem;">Three passes required for TOC, cross-references, and page count. Requires XeLaTeX with DejaVu fonts and standard packages (tcolorbox, tabularx, fontspec, booktabs, colortbl, fancyhdr, lastpage).</p>
+  </section>
+
+  <div class="closing-quote">
+    <p>"The year 1975 was a hinge moment in America... It was a moment of chaos, doubt, and, of course, opportunity. The perfect time to start a new comedy show."</p>
+    <div class="attribution">— Lorne Michaels, Vanity Fair, 2013</div>
+  </div>
+
+</main>
+
+<footer>GSD Research Mission Package · Live From New York · March 2026 · Ready for Orchestrator</footer>
+
+</body>
+</html>
