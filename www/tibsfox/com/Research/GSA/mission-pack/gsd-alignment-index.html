@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD Alignment — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1B5E20;
+  --secondary: #E65100;
+  --tertiary: #1A237E;
+  --accent: #2E7D32;
+  --light-bg: #E8F5E9;
+  --card-bg: #C8E6C9;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, #2E7D32 60%, var(--tertiary) 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #A5D6A7; letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--primary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: #37474F; font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>GSD Alignment</h1>
+  <h2>Yegge Ecosystem, Control Surface Bus Architecture &amp; Prompts to Silicon</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="gsd-alignment-mission.pdf" download class="file-card">
+      <div class="ext">PDF &middot; 30 pages</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification ready for GSD orchestrator.</div>
+    </a>
+    <a href="gsd-alignment-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable source file. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Full-stack abstraction diagram (5 levels) and Yegge ecosystem state</li>
+          <li>6 research modules: Yegge Delta, Gas City Bridge, Wire Harness, ISA+Bus, Intent Router, GPU Silicon</li>
+          <li>Chipset configuration (fleet mode, 17 roles), scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Gastown v0.10.0 delta: Trust Tier Escalation Engine, prior attempt injection, Gas City</li>
+          <li>Gas City / chipset YAML bridge: 7 role mappings, two-way specification, YAML examples</li>
+          <li>GSD-OS wire harness: bus signal types, priority levels, VRAM budget architecture</li>
+          <li>ISA five-layer stack: register mapping (ARM/RISC-V/x86-64/68000), FPGA synthesis pipeline</li>
+          <li>Intent classifier: 3-tier architecture, vLLM/LoRAX/NVIDIA NIM integration</li>
+          <li>GPU silicon: LoRAFusion (EuroSys 2026), LoRA-Switch, RTX 4060 Ti benchmarks</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>7 deliverables, 4-wave execution plan with 3 parallel tracks</li>
+          <li>Fleet activation profile: 17 roles across Opus/Sonnet/Haiku</li>
+          <li>37 tests (5 safety-critical), verification matrix: The Alignment Report</li>
+          <li>~218K token budget, 3-4 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the PDF</li>
+      <li>Wave 0 produces shared schema, source index, adapter format spec</li>
+      <li>Wave 1 executes three parallel tracks (A: Yegge+Bridge, B: ISA+GPU, C: Bus+Router)</li>
+      <li>Wave 2 synthesizes cross-module integration and the full-stack diagram</li>
+      <li>CAPCOM gate: human reviews Gas City bridge specification</li>
+      <li>Wave 3 assembles, verifies, and delivers the final documents</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode gsd-alignment-mission.tex
+xelatex -interaction=nonstopmode gsd-alignment-mission.tex
+xelatex -interaction=nonstopmode gsd-alignment-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "The spaces between &mdash; between a prompt and a silicon tile, between a Gas Town polecat and a GSD wave plan, between the bus signal and the CUDA kernel &mdash; are not gaps. They are the architecture."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; GSD Alignment &middot; March 2026
+</footer>
+
+</body>
+</html>
