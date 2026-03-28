@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 5&deg; &mdash; Overton Berry &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .concentration-alert {
+      background: #FCE4EC;
+      border: 1px solid #EF9A9A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .concentration-alert h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #C62828;
+      font-family: system-ui, sans-serif;
+    }
+    .concentration-alert p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">5&deg;</div>
+      <div>
+        <h1>Overton Berry</h1>
+        <div class="subtitle">Jazz &middot; Piano &middot; Stride &middot; Swing &middot; Cocktail &mdash; Central District 1936 &rarr; Present</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Jones left. Anderson left and came back. Standifer arrived and stayed.
+          Berry was born here and never left. Sixty years, one city, one piano.
+          Seattle&rsquo;s Piano Man is the persistence the Central District earned.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Central District Kid</h2>
+
+        <p>Overton Berry was born in 1936 in Seattle, Washington, and raised in the
+        <strong>Central District</strong> &mdash; the same neighborhood that shaped
+        <a href="../000-quincy-jones/index.html">Quincy Jones</a> (0&deg;),
+        <a href="../003-ernestine-anderson/index.html">Ernestine Anderson</a> (3&deg;), and
+        <a href="../004-floyd-standifer/index.html">Floyd Standifer</a> (4&deg;). But Berry&rsquo;s
+        relationship to the Central District is unique among the six degrees: he did not arrive.
+        He was <strong>born there</strong>. The Central District is not his adopted home &mdash;
+        it is his origin. Berry is the first native-born Central District artist in the S36 engine.</p>
+
+        <p>Berry taught himself piano. No conservatory, no formal instruction, no institutional
+        pipeline. He listened, practiced, and absorbed the stride and swing vocabulary that saturated
+        the Central District&rsquo;s clubs, churches, and living rooms. By the early 1960s he was
+        performing professionally &mdash; and has not stopped. Over <strong>sixty years of continuous
+        performance</strong> in the same city. Known as <strong>&ldquo;Seattle&rsquo;s Piano Man,&rdquo;</strong>
+        Berry is the longest-serving active jazz musician in the city&rsquo;s history, still performing
+        in his late eighties.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Seattle Times profiles;
+        HistoryLink.org; KNKX/KPLU Jazz Northwest; Earshot Jazz; Paul de Barros, <em>Jackson Street
+        After Hours</em> (1993)</p>
+
+        <h3>The Autodidact Path</h3>
+
+        <p>The S36 engine has tracked several educational pipelines: Garfield High School (Jones, Anderson),
+        UW (Standifer), Berklee (Frisell), UC Santa Cruz (Horvitz). Berry introduces the sixth: <strong>none</strong>.
+        Self-taught. No institutional pipeline, no mentor-student chain through school records. Berry learned
+        piano by ear, by watching, by playing along with recordings and other musicians in the room.
+        His knowledge is entirely embodied &mdash; in the hands, in the relationship between ear and keyboard.</p>
+
+        <p>This positions Berry as the informal counterpart to Standifer&rsquo;s formal pedagogy.
+        Standifer taught at UW with curriculum and structured sessions. Berry teaches by example &mdash;
+        sixty years of visible, consistent, nightly performance. The lesson <em>is</em> the performance.</p>
+
+        <!-- ========================================
+             GARFIELD-CENTRAL DISTRICT THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>The Central District Thread: Degrees 0&deg; through 5&deg;</h4>
+          <table>
+            <tr>
+              <td>0&deg; Quincy Jones</td>
+              <td>Arrived Central District age 10. Garfield class of 1950. Jackson Street. Left Seattle for the world. <strong>The Export.</strong></td>
+            </tr>
+            <tr>
+              <td>1&deg; Bill Frisell</td>
+              <td>Arrived Seattle 1989. No Garfield/Jackson Street connection. Inherited infrastructure. <strong>The Draw.</strong></td>
+            </tr>
+            <tr>
+              <td>2&deg; Wayne Horvitz</td>
+              <td>Arrived Seattle 1988. No Garfield/Jackson Street connection. Built new infrastructure (Royal Room). <strong>The Builder.</strong></td>
+            </tr>
+            <tr>
+              <td>3&deg; Ernestine Anderson</td>
+              <td>Arrived Central District age 16. Garfield, same era as Jones. Jackson Street performer. Left, returned, stayed. <strong>The Stay.</strong></td>
+            </tr>
+            <tr>
+              <td>4&deg; Floyd Standifer</td>
+              <td>Arrived Central District post-WWII. Jackson Street performer. Never left. UW faculty. <strong>The Teacher.</strong></td>
+            </tr>
+            <tr>
+              <td>5&deg; Overton Berry</td>
+              <td>Born in Central District. Self-taught. Never left. Still performing in his late 80s. <strong>The Persistence.</strong></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="concentration-alert">
+          <h4>Geographic Concentration Alert: 5 of 6 Degrees = Central District Jazz</h4>
+          <p>Five of the first six degrees are Central District jazz artists. The sole exception &mdash;
+          degree 1 (Bill Frisell) &mdash; is a guitarist who settled in Seattle from the East Coast.
+          Even Frisell is Seattle-connected. This is the densest geographic/genre cluster possible
+          in the S36 engine&rsquo;s first quadrant. <strong>Emerging question: when does the circle
+          leave the Central District?</strong></p>
+        </div>
+
+        <!-- ========================================
+             THE PERSISTENCE PATTERN
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Persistence Pattern</h2>
+
+        <p>The S36 engine has classified five artist-city patterns across degrees 0&ndash;4. Berry
+        introduces the sixth: <strong>The Persistence</strong>. This is not The Stay (Anderson returned
+        after exile). This is not The Teacher (Standifer built institutional pedagogy). This is pure
+        duration &mdash; born here, still here, still playing. No departure to give The Stay its meaning.
+        No classroom to give The Teacher its structure. Only the performance, repeated nightly, for sixty
+        years, in the same community.</p>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as resident anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CAREER ARC — TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1936 &mdash; Born in the Central District</div>
+          <p>Born and raised in Seattle&rsquo;s Central District. Self-taught pianist. Absorbed stride,
+          swing, blues, and gospel vocabulary from the neighborhood&rsquo;s musical environment &mdash;
+          clubs, churches, recordings, older musicians.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Early 1960s &mdash; Professional Career Begins</div>
+          <p>Began performing on the Central District club circuit &mdash; the successor venues to
+          the demolished Jackson Street corridor. Inherited the tradition environmentally, through
+          proximity to the community, not through apprenticeship on the original corridor.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970s&ndash;1990s &mdash; Hotel Lounges &amp; Supper Clubs</div>
+          <p>Became house pianist at the <strong>Sorrento Hotel</strong> and regular performer at
+          <strong>El Gaucho</strong>. Moved between Central District clubs and downtown establishments,
+          adapting the same music to different rooms without compromising its substance.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2000s&ndash;Present &mdash; Living Legend</div>
+          <p>Still performing in his late eighties. Featured in Seattle Times profiles, KNKX broadcasts,
+          Earshot Jazz Festival appearances. Berry&rsquo;s longevity is itself the story &mdash;
+          sixty years of continuous performance in one city. No national discography, no Grammy
+          nominations. Recognition from the people who were in the room.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; three opening new piano-specific branches (blue notes, stride,
+        cocktail harmony) and one completing an engine-wide thread (the Amiga Principle fully realized
+        in solo piano performance).</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Blue Notes (b3, b5, b7)</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Micro-tonal inflections that fall between the keys. On piano &mdash; a fixed-pitch
+            instrument &mdash; blue notes are evoked through grace notes, simultaneous major/minor
+            thirds, and rhythmic displacement. Berry&rsquo;s crush technique suggests the pitch
+            ambiguity the keyboard cannot literally produce.</p>
+            <div class="examples">Berry&rsquo;s left-hand grace notes, Sorrento Hotel performances, stride tradition (Waller, Tatum)</div>
+            <div class="genealogy"><strong>Thread:</strong> Anderson (vocal bend) &rarr; Standifer (embouchure lip) &rarr; Berry (pianistic crush). Three solutions to the same micro-tonal problem on three different instruments.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Stride Piano Technique</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Left-hand alternation between bass note (beats 1, 3) and chord (beats 2, 4).
+            The &ldquo;stride&rdquo; &mdash; the physical leap of 12&ndash;18 inches per beat &mdash;
+            gives the technique its name. Berry&rsquo;s stride is functional, providing complete
+            rhythm-section accompaniment from one hand. Maintained for 60+ years.</p>
+            <div class="examples">Berry solo performances, James P. Johnson and Fats Waller (historical precedent)</div>
+            <div class="genealogy"><strong>New at 5&deg;:</strong> First piano-specific technique node. The left hand as self-contained rhythm section.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Cocktail Jazz Harmony</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Lush extended chords (9ths, 11ths, 13ths, altered dominants) with smooth voice
+            leading. Walking bass in left hand provides harmonic motion and rhythmic pulse
+            simultaneously. Same voicings as bebop &mdash; different deployment. The cocktail
+            pianist solves a harder problem: making complex music sound effortless.</p>
+            <div class="examples">Sorrento Hotel ballad performances, El Gaucho supper club sets</div>
+            <div class="genealogy"><strong>Thread:</strong> Jones (arranging voicings) &rarr; Horvitz (quartal clusters) &rarr; Berry (extended chords in intimate setting). Three harmonic vocabularies, three contexts.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Solo Piano &mdash; Amiga Principle</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>One musician, one instrument, all four ensemble voices (bass, harmony, melody, rhythm)
+            produced simultaneously. Both hands independent &mdash; different rhythm, register,
+            articulation, dynamic. The brain runs two independent processes synchronized at the
+            bar line. <strong>The Amiga Principle at its most literal in the music series.</strong></p>
+            <div class="examples">Any Berry solo performance (all four voices audible), Erroll Garner, Art Tatum</div>
+            <div class="genealogy"><strong>Bracket:</strong> Jones (0&deg;, organizational Amiga &mdash; one person controlling many) &rarr; Berry (5&deg;, physical Amiga &mdash; one person BEING all). Five degrees of partial expression, fully realized at 5&deg;.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             FORMAL/INFORMAL PEDAGOGY AXIS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Formal/Informal Pedagogy Axis</h2>
+
+        <p>Standifer and Berry are the Central District&rsquo;s complementary elder statesmen &mdash;
+        the formal and informal poles of jazz pedagogy in one neighborhood.</p>
+
+        <table>
+          <thead>
+            <tr><th></th><th>Standifer (4&deg;)</th><th>Berry (5&deg;)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Venue</strong></td><td>University of Washington</td><td>Sorrento Hotel, El Gaucho, clubs</td></tr>
+            <tr><td><strong>Format</strong></td><td>Structured sessions, curriculum</td><td>Nightly performance</td></tr>
+            <tr><td><strong>Transmission</strong></td><td>Explicit &mdash; the lesson is the explanation</td><td>Implicit &mdash; the lesson is the performance</td></tr>
+            <tr><td><strong>Student</strong></td><td>Walks out with theoretical frameworks</td><td>Walks out having felt the music&rsquo;s effect</td></tr>
+            <tr><td><strong>Duration</strong></td><td>~50 years (post-WWII to 2007)</td><td>60+ years (1960s to present)</td></tr>
+          </tbody>
+        </table>
+
+        <p>Both transmit the Central District&rsquo;s jazz tradition. Both serve as living links to the
+        Jackson Street era and its aftermath. Theory without practice is academic exercise. Practice
+        without theory is inarticulate beauty. Together, Standifer and Berry represent the complete
+        pedagogy of jazz in the Central District.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;4&deg;</h4>
+          <ul>
+            <li><strong>Central District thread:</strong> Sixth degree, fifth directly connected artist. Berry is the first native-born. The thread has now documented every possible relationship to the neighborhood: incubator, destination, homecoming, permanent post, birthplace.</li>
+            <li><strong>Chromaticism &rarr; blue note thread:</strong> Five deployments. Jones (bass-line), Frisell (upper-register), Anderson (vocal bend), Standifer (codified method), Berry (pianistic crush between the keys). Berry extends chromaticism into micro-tonality.</li>
+            <li><strong>Artist-city taxonomy:</strong> Six named patterns &mdash; Export, Draw, Exile, Stay, Teacher, Persistence. Berry adds the native-who-never-left.</li>
+            <li><strong>Amiga Principle:</strong> Fully realized. Jones (organizational, 0&deg;) and Berry (physical, 5&deg;) bracket the first six degrees. Five intervening degrees showed partial expression.</li>
+            <li><strong>Formal/informal pedagogy axis:</strong> Confirmed. Standifer (formal, UW) and Berry (informal, performance) as complementary elder statesmen documented and paired.</li>
+            <li><strong>Piano theory branch:</strong> Three new nodes (stride, blue notes, cocktail harmony). First piano-specific technique in S36.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a></li>
+            <li><a href="../004-floyd-standifer/index.html">S36-004 &mdash; Floyd Standifer (Degree 4&deg;)</a></li>
+            <li><a href="../../../CDS/index.html">CDS &mdash; Central District</a></li>
+            <li><a href="../../../MUS/index.html">MUS &mdash; Music Research</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Berry, Overton. Live performance recordings and interviews. KNKX/KPLU Jazz Northwest archives.</li>
+          <li>KNKX/KPLU. Jazz Northwest broadcasts featuring Overton Berry, various dates.</li>
+          <li>Earshot Jazz Festival. Performance archives and programs.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="4">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>de Barros, Paul. Overton Berry profiles and reviews. Seattle Times.</li>
+          <li>Seattle Times. Overton Berry profiles, &ldquo;Seattle&rsquo;s Piano Man&rdquo; feature coverage.</li>
+          <li>HistoryLink.org. Seattle jazz community essays and Central District cultural history.</li>
+          <li>Earshot Jazz. Overton Berry profiles and concert reviews.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="9">
+          <li>Seattle Civil Rights &amp; Labor History Project, University of Washington.</li>
+          <li>KNKX (formerly KPLU). Jazz programming archives.</li>
+          <li>Earshot Jazz Festival. Archives, 1988&ndash;present.</li>
+          <li>Sorrento Hotel. Event archives and historical records.</li>
+          <li>El Gaucho. Historical performance listings.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR — STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1936</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active Since</span>
+            <span class="stat-value">Early 1960s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Piano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Training</span>
+            <span class="stat-value">Self-taught</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">5&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (piano)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Local</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Venues</h4>
+          <div class="stat-row">
+            <span class="stat-label">Sorrento Hotel</span>
+            <span class="stat-value">House pianist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">El Gaucho</span>
+            <span class="stat-value">Regular</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Central District</span>
+            <span class="stat-value">Club circuit</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Span</span>
+            <span class="stat-value">60+ years</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Branches</span>
+            <span class="stat-value">Piano (3 nodes)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Central District Thread</h4>
+          <div class="stat-row">
+            <span class="stat-label">Depth</span>
+            <span class="stat-value">6 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Artists</span>
+            <span class="stat-value">5 of 6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Native-born</span>
+            <span class="stat-value">Berry (first)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">6 named</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Patterns</h4>
+          <div class="stat-row">
+            <span class="stat-label">Export</span>
+            <span class="stat-value">No</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Persistence</span>
+            <span class="stat-value">Yes (new pattern)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Native</span>
+            <span class="stat-value">Yes (first in S36)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Institution Type</span>
+            <span class="stat-value">Persistence</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Amiga Principle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Fully realized</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Physical</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bracket</span>
+            <span class="stat-value">Jones (0&deg;) &harr; Berry (5&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Voices</span>
+            <span class="stat-value">4 simultaneous</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;4&deg; &rarr; 5&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carry Items</span>
+            <span class="stat-value">6 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">6 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Patterns</span>
+            <span class="stat-value">Persistence, Amiga</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Nodes</span>
+            <span class="stat-value">3 new</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">TBD (degree 6)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 5&deg; / 360 &middot;
+      <a href="../004-floyd-standifer/index.html">Prev: 4&deg; Standifer</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

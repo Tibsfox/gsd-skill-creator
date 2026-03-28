@@ -1,0 +1,141 @@
+{
+  "degree": 5,
+  "artist": "Overton Berry",
+  "slug": "005-overton-berry",
+  "genre": "Jazz (piano — stride, swing, cocktail)",
+  "energy": 2,
+  "era": "1960s-present",
+  "location": {
+    "origin": "Seattle, WA — Central District",
+    "formative": "Seattle, WA — Central District, self-taught",
+    "career": "Seattle, WA — Central District clubs, Sorrento Hotel, El Gaucho, citywide venues"
+  },
+  "born": "1936",
+  "died": null,
+  "labels": ["local"],
+  "theory_nodes": [
+    {
+      "concept": "Blue notes (b3, b5, b7 — micro-tonal inflection)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/blue-notes-micro-tonal.md",
+      "examples": [
+        "Berry's left-hand grace notes at Sorrento Hotel performances — crush technique evoking micro-tonal pitch on a fixed-pitch instrument",
+        "Central District club recordings — simultaneous major/minor third sounding creating pitch ambiguity",
+        "Stride piano tradition (Fats Waller, Art Tatum) — historical precedent for pianistic blue-note solutions"
+      ],
+      "description": "Blue notes (flatted 3rd, 5th, 7th) are micro-tonal inflections that fall between the piano's fixed pitches. On keyboard, blue notes must be evoked through surrogate techniques: grace notes that crush into the target pitch, simultaneous sounding of major and minor third, and rhythmic displacement that creates the feeling of pitch ambiguity. Berry's approach uses the crush, the simultaneous sounding, and rhythmic displacement to suggest the micro-tonal quality the keyboard cannot literally produce. Extends the chromaticism thread into territory beyond the twelve-tone equal-tempered system.",
+      "genealogy": {
+        "ancestors": ["Embodied chromaticism — vocal pitch bending (degree 3)", "Brass embouchure micro-adjustment (degree 4)", "Chromatic bass lines (degree 0)"],
+        "relationship": "three solutions to the same micro-tonal problem on three instruments — Anderson bends pitch with the voice (degree 3), Standifer lips notes flat with embouchure (degree 4), Berry crushes grace notes on piano (degree 5). The blue note is the same target; the instrument determines the technique. Berry's piano solution is the most constrained (fixed-pitch instrument) and therefore the most inventive."
+      }
+    },
+    {
+      "concept": "Stride piano technique (left-hand bass-chord alternation)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/piano/stride-technique.md",
+      "examples": [
+        "Berry solo performances — left-hand stride providing complete rhythm-section accompaniment",
+        "James P. Johnson and Fats Waller — historical Harlem stride tradition (1920s-1930s)",
+        "Berry's Sorrento Hotel sets — functional stride maintaining bass + harmony at tempo over multi-hour performances"
+      ],
+      "description": "Left-hand alternation between bass note (or octave) on beats 1 and 3 and chord (or cluster) on beats 2 and 4. The stride — the physical leap of 12-18 inches of keyboard per beat — gives the technique its name. Berry's stride is functional rather than virtuosic: it provides the rhythmic and harmonic foundation a solo pianist needs when there is no bassist or drummer. The left hand IS the rhythm section. Maintained for 60+ years — a physical accomplishment given that stride's demands increase with age as hand speed and accuracy decline.",
+      "genealogy": {
+        "ancestors": [],
+        "relationship": "new branch — first piano-specific technique node in S36. The left hand as self-contained rhythm section introduces a new dimension of instrumental independence not previously tracked. Connects to the Amiga Principle: the left hand runs an independent process (bass + harmony) while the right hand runs another (melody + improvisation)."
+      }
+    },
+    {
+      "concept": "Cocktail jazz harmony (extended chords, walking bass, voice leading)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/piano/cocktail-jazz-harmony.md",
+      "examples": [
+        "Berry's Sorrento Hotel performances — extended chord voicings (9ths, 11ths, 13ths) in ballad context",
+        "El Gaucho supper club sets — walking bass in left hand + lush chords, calibrated for intimate room dynamics",
+        "Hotel lounge recordings across six decades — smooth voice leading connecting extended harmonies"
+      ],
+      "description": "Cocktail jazz requires lush extended chords (ninths, elevenths, thirteenths, altered dominants), smooth voice leading that avoids angular motion, and a walking bass line in the left hand providing harmonic motion and rhythmic pulse simultaneously. The harmonic vocabulary is as complex as bebop — same voicings, different deployment. Bebop throws chords against uptempo rhythms; cocktail jazz unfolds them slowly, letting each voicing breathe. The cocktail pianist solves a harder problem: making complex music sound effortless in a room that does not want to be interrupted. Berry navigates this dynamic balance nightly — too loud and the room pushes back, too soft and the music disappears.",
+      "genealogy": {
+        "ancestors": ["ii-V-I progression mastery (degree 0)", "Quartal/cluster voicings (degree 2)"],
+        "relationship": "three harmonic vocabularies, three contexts — Jones (arranging voicings for large ensemble, degree 0), Horvitz (quartal clusters for composed improvisation, degree 2), Berry (extended chords for intimate solo setting, degree 5). The voicing complexity is comparable; the deployment context determines the character. Berry's cocktail harmony is Jones's arranging vocabulary compressed into two hands."
+      }
+    },
+    {
+      "concept": "The solo pianist as self-contained ensemble (Amiga Principle)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/piano/solo-pianist-amiga-principle.md",
+      "examples": [
+        "Any Berry solo performance — all four ensemble voices (bass, harmony, melody, rhythm) audible simultaneously from one musician at one instrument",
+        "Erroll Garner and Art Tatum — historical precedent for solo piano as complete ensemble",
+        "Stride + cocktail jazz combined — left hand (stride bass-chord) + right hand (melody + improvisation) = four independent voices"
+      ],
+      "description": "The solo pianist produces all four elements of a jazz ensemble — rhythm, harmony, melody, bass — from one person at one instrument. Both hands operate independently: different register, rhythm, articulation, dynamic. The pianist's brain runs two independent processes synchronized at the bar line. This is the Amiga Principle at its most literal expression in the music series. Jones (degree 0) embodied the Amiga Principle organizationally — one person controlling many instruments. Berry embodies it physically — one person BEING all the instruments. The intervening degrees (1-4) showed partial expression. Berry is the only artist who plays multiple voices simultaneously and continuously.",
+      "genealogy": {
+        "ancestors": ["Arranging-as-architecture / Amiga Principle (degree 0)"],
+        "relationship": "full realization — Jones (0°) and Berry (5°) bracket the first six degrees as organizational and physical Amiga respectively. Degrees 1-4 showed partial expression: Frisell (one instrument with effects), Horvitz (one composer coordinating groups), Anderson (one voice as singular instrument), Standifer (multiple instruments played serially). Berry is the completion: multiple voices played simultaneously and continuously. The Amiga Principle, after five degrees of partial expression, is fully realized at degree 5."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-003", "S36-004", "CDS", "MUS"],
+  "seattle_connection": "Born and raised in the Central District. Entire career based in Seattle — never left. Self-taught pianist performing since the early 1960s. House pianist at Sorrento Hotel, regular at El Gaucho, performer at Central District clubs and citywide venues for 60+ years. Known as 'Seattle's Piano Man.' Still performing in his late 80s. First native-born Central District artist in S36.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Blue notes (b3, b5, b7) — micro-tonal inflection on fixed-pitch instrument, pianistic crush technique, extends chromaticism thread beyond equal temperament",
+      "Stride piano — left-hand bass-chord alternation as self-contained rhythm section, first piano-specific technique node",
+      "Cocktail jazz harmony — extended chords in intimate setting, same complexity as bebop with different deployment",
+      "Solo pianist as self-contained ensemble — Amiga Principle fully realized, Jones (organizational) + Berry (physical) bracket degrees 0-5"
+    ],
+    "immediate_items": [
+      "Degree 6 inherits: the Central District concentration question — when does the circle leave the Central District? Five of six degrees are CD jazz artists. The geographic cluster must eventually diversify.",
+      "Gender dimension: queued since degree 3 for degree 6 (Patti Bown). If Bown is degree 6, this is the resolution point.",
+      "The autodidact educational path: Berry is the first self-taught artist. Track whether subsequent artists follow institutional or autodidact paths.",
+      "Cocktail jazz as undervalued form: Berry's cocktail jazz is as harmonically complex as bebop. Track critical revaluation of cocktail jazz at subsequent piano degrees.",
+      "The Persistence pattern: requires a lifetime to identify. Track whether any subsequent artist demonstrates 40+ years of continuous local performance.",
+      "Piano theory branch now has three nodes (stride, blue notes, cocktail harmony). Extend at subsequent piano degrees."
+    ],
+    "pattern_items": [
+      "Composition-improvisation spectrum: five positions remain stable (compose, composed-improvisation, free-improvisation, interpretation, pedagogy). Berry maps to interpretation — he performs standards and jazz repertoire without composing or teaching. Continue tracking.",
+      "Rhythmic spectrum: four positions remain (regular, polymetric, rubato, elastic swing). Berry reinforces swing from the stride side — left-hand regularity supporting right-hand swing elasticity. Does not add a new position.",
+      "Chromaticism thread extended to five deployments: bass-line (Jones), upper-register (Frisell), embodied/vocal (Anderson), codified/melodic (Standifer), pianistic crush/blue note (Berry). Two intuitive, two systematic, one physical-constraint. Continue tracking.",
+      "Artist-city taxonomy: six named patterns (Export, Draw, Exile, Stay, Teacher, Persistence). Berry adds the native-who-never-left. Classify every subsequent artist.",
+      "Artist-as-institution spectrum: six positions (industry, community, performer, presence, educator, persistence). Continue tracking.",
+      "Central District geographic thread: 6 degrees, 5 directly connected artists. Densest geographic cluster in S36. Monitor for saturation.",
+      "Formal/informal pedagogy axis: confirmed at degree 5. Standifer (formal, UW) and Berry (informal, performance). Both transmit the same tradition through different mechanisms.",
+      "Amiga Principle bracket: Jones (0°, organizational) and Berry (5°, physical). Track all subsequent Amiga Principle expressions for positioning within or beyond this bracket.",
+      "Body-as-sound-source thread: three instruments now — voice (Anderson, 3°), trumpet (Standifer, 4°), piano-as-percussion (Berry, 5° — the crush technique is a percussive approach to pitch). Track at subsequent degrees.",
+      "Local-artist documentation challenge: Berry, like Standifer, has no national discography. Two consecutive local-label artists confirms the pattern for Central District 'stay' musicians.",
+      "Jackson Street corridor: Berry is NOT a primary Jackson Street participant — he played the successor venues. Four categories: primary participant (Jones, Anderson, Standifer), inheritor (Berry), settler (Frisell, Horvitz), unconnected. Track at all subsequent degrees."
+    ]
+  },
+  "key_albums": [],
+  "degree_neighbors": [
+    {"name": "Floyd Standifer", "relationship": "Central District elder-statesman pair, formal/informal pedagogy axis — Standifer taught at UW, Berry teaches by performing", "future_degree": 4},
+    {"name": "Quincy Jones", "relationship": "Central District origin (Jones arrived, Berry was born), Jackson Street tradition inherited by Berry from the generation Jones helped create", "future_degree": 0},
+    {"name": "Ernestine Anderson", "relationship": "Central District contemporaries, both anchored Seattle jazz through sustained local presence — Anderson through vocal performance, Berry through piano", "future_degree": 3}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones — attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson — attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer — Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry — Central District native, self-taught. No institutional music education. Autodidact path introduces the sixth educational pipeline: none.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": true,
+    "native_born": true,
+    "self_taught": true,
+    "institution_type": "persistence",
+    "amiga_principle": "full_physical"
+  },
+  "sources_count": 13,
+  "word_count_research": 3700,
+  "release_date": "2026-03-28"
+}
