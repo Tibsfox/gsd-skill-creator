@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XScreenSaver / Vulkan Screensaver Engine — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #0277BD;
+      --tertiary: #37474F;
+      --accent: #0288D1;
+      --light-primary: #E8EAF6;
+      --light-secondary: #E1F5FE;
+      --border: #90A4AE;
+      --bg: #0A0E1A;
+      --surface: #111827;
+      --surface2: #1C2333;
+      --text: #E8ECF0;
+      --subtext: #90A4AE;
+      --code-bg: #0D1117;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0A0E2A 0%, #0D1A3A 40%, #0A1428 100%);
+      border-bottom: 1px solid rgba(2, 119, 189, 0.3);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(2, 136, 209, 0.03) 2px,
+        rgba(2, 136, 209, 0.03) 4px
+      );
+      pointer-events: none;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(2, 119, 189, 0.15);
+      border: 1px solid rgba(2, 119, 189, 0.4);
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .header-title span {
+      color: var(--accent);
+    }
+
+    .header-subtitle {
+      font-size: 1rem;
+      color: var(--subtext);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--subtext);
+      border-top: 1px solid rgba(2, 119, 189, 0.2);
+      padding-top: 1rem;
+    }
+
+    .header-meta span { color: var(--accent); }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── PIPELINE BAR ── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      background: var(--surface);
+      border: 1px solid rgba(2, 119, 189, 0.25);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .pipeline-step {
+      flex: 1;
+      text-align: center;
+      padding: 0.9rem 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--subtext);
+      position: relative;
+    }
+
+    .pipeline-step.active {
+      background: rgba(2, 136, 209, 0.12);
+      color: var(--accent);
+    }
+
+    .pipeline-step::after {
+      content: '→';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(2, 119, 189, 0.4);
+      font-size: 1rem;
+      z-index: 1;
+    }
+
+    .pipeline-step:last-child::after { display: none; }
+
+    /* ── FILE CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface2);
+      border: 1px solid rgba(2, 119, 189, 0.25);
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      background: rgba(2, 119, 189, 0.1);
+      padding: 1rem 1.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(2, 119, 189, 0.15);
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .card-ext {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(2, 136, 209, 0.15);
+      padding: 0.1rem 0.45rem;
+      border-radius: 2px;
+      margin-left: auto;
+    }
+
+    .card-body {
+      padding: 1rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--subtext);
+      line-height: 1.5;
+    }
+
+    /* ── CONTENTS SECTION ── */
+    .section-title {
+      font-size: 0.7rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(2, 119, 189, 0.2);
+    }
+
+    .contents {
+      margin-bottom: 2.5rem;
+    }
+
+    .stage-block {
+      margin-bottom: 1.25rem;
+      background: var(--surface);
+      border: 1px solid rgba(55, 71, 79, 0.5);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stage-label {
+      background: var(--tertiary);
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .stage-label.s1 { background: var(--primary); }
+    .stage-label.s2 { background: var(--secondary); }
+    .stage-label.s3 { background: var(--tertiary); }
+
+    .stage-items {
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .stage-item {
+      font-size: 0.85rem;
+      color: var(--subtext);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .stage-item::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── USAGE ── */
+    .usage {
+      margin-bottom: 2.5rem;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid rgba(2, 119, 189, 0.15);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+    }
+
+    .step-num {
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .step-text { color: var(--subtext); line-height: 1.5; }
+    .step-text strong { color: var(--text); }
+
+    /* ── COMPILE BLOCK ── */
+    .compile-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(2, 119, 189, 0.2);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .compile-block pre {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: #7FDBCA;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.8;
+    }
+
+    .compile-block .comment { color: #4A5568; }
+    .compile-block .cmd { color: #81CFFA; }
+
+    /* ── QUOTE ── */
+    .closing-quote {
+      background: var(--light-primary);
+      background: rgba(26, 35, 126, 0.2);
+      border-left: 3px solid var(--primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+      color: #B0BEC5;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .closing-quote cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--subtext);
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--subtext);
+      border-top: 1px solid rgba(2, 119, 189, 0.1);
+    }
+
+    footer span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-badge">GSD Research Mission Package</div>
+    <h1 class="header-title">XScreenSaver Catalog<br>
+      <span>&amp; Vulkan Screensaver Engine</span>
+    </h1>
+    <p class="header-subtitle">
+      Full Hack Inventory · Upstream Intelligence · Modern GPU Architecture · AI Evolutionary Art
+    </p>
+    <div class="header-meta">
+      <div>Date: <span>March 27, 2026</span></div>
+      <div>Status: <span>Ready for GSD Orchestrator</span></div>
+      <div>Profile: <span>Fleet (18 roles)</span></div>
+      <div>Windows: <span>12–15 context windows / 3–4 sessions</span></div>
+      <div>Pages: <span>29 pages</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Pipeline bar -->
+  <div class="pipeline">
+    <div class="pipeline-step active">Vision</div>
+    <div class="pipeline-step active">Research</div>
+    <div class="pipeline-step active">Mission</div>
+    <div class="pipeline-step">Execution</div>
+    <div class="pipeline-step">Publication</div>
+  </div>
+
+  <!-- File cards -->
+  <div class="section-title">Deliverables</div>
+  <div class="cards">
+    <a class="card" href="vulkan_screensaver_mission.pdf" download>
+      <div class="card-header">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Mission Package</div>
+        <div class="card-ext">PDF</div>
+      </div>
+      <div class="card-body">
+        Complete 29-page research mission: Vision Guide, Research Reference, and Mission Package
+        with wave execution plan, test plan, crew manifest, and execution summary.
+      </div>
+    </a>
+    <a class="card" href="vulkan_screensaver_mission.tex" download>
+      <div class="card-header">
+        <div class="card-icon">📝</div>
+        <div class="card-title">LaTeX Source</div>
+        <div class="card-ext">TEX</div>
+      </div>
+      <div class="card-body">
+        Full XeLaTeX source for the mission package. Modify and recompile with three passes
+        to update tables, wave plans, or add new modules.
+      </div>
+    </a>
+  </div>
+
+  <!-- Contents breakdown -->
+  <div class="contents">
+    <div class="section-title">Document Contents</div>
+
+    <div class="stage-block">
+      <div class="stage-label s1">STAGE 1 — VISION GUIDE</div>
+      <div class="stage-items">
+        <div class="stage-item">Vision narrative: the idle screen as GPU laboratory</div>
+        <div class="stage-item">5-problem statement: catalog gap, no Vulkan framework, no NeHe→Vulkan translation, CUDA/AI disconnect, skill-creator GPU blind spot</div>
+        <div class="stage-item">Domain architecture and module architecture ASCII diagrams</div>
+        <div class="stage-item">Chipset YAML (Agnus/Denise/Paula model assignment)</div>
+        <div class="stage-item">Scope boundaries: v1.0 in-scope / out-of-scope</div>
+        <div class="stage-item">12 testable success criteria</div>
+        <div class="stage-item">Relationship to other GSD ecosystem documents</div>
+        <div class="stage-item">Through-line: the Amiga Principle applied to screensavers</div>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-label s2">STAGE 2 — RESEARCH REFERENCE</div>
+      <div class="stage-items">
+        <div class="stage-item">Module 01: XScreenSaver catalog — 240+ hacks, 4 API families, technique taxonomy (13 categories), upstream intelligence schema (10 fields per hack)</div>
+        <div class="stage-item">Module 02: Vulkan 1.3+ architecture — Vulkan 1.4 feature table, CUDA interop memory model (VK_KHR_external_memory), Wayland/X11 surface bridge</div>
+        <div class="stage-item">Module 03: NeHe Vulkan translation — 20-lesson table mapping NeHe concept → Vulkan/SPIR-V equivalent; lessons 21–48 overview</div>
+        <div class="stage-item">Module 04: Sascha Willems gallery — 14 compute-suitable examples with screensaver adaptation description</div>
+        <div class="stage-item">Module 05: CUDA generative math — CUDA-X library reference, 6 generative effects table, GPU evolutionary algorithm research summary</div>
+        <div class="stage-item">Module 06: skill-creator upstream intelligence — GPU domain feed schema, ZFC compliance / Wasteland integration path</div>
+        <div class="stage-item">Safety and sensitivity table (7 risk areas with mitigations)</div>
+        <div class="stage-item">Complete source bibliography (18 citations)</div>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-label s3">STAGE 3 — MISSION PACKAGE</div>
+      <div class="stage-items">
+        <div class="stage-item">Milestone specification: objective, architecture diagram, 6 system layers, 10 deliverables table</div>
+        <div class="stage-item">Component breakdown: 19 components with dependencies, model assignment, token estimates</div>
+        <div class="stage-item">Wave execution plan: Wave 0 + 1A (parallel) + 1B (parallel) + 1C + 2 + 3 — 6 waves, 3 CAPCOM gates</div>
+        <div class="stage-item">Cache optimization strategy: shared attribute layer, NeHe batching, Willems context reuse</div>
+        <div class="stage-item">Token budget: ~580K total (Opus 115K / Sonnet 427K / Haiku 38K)</div>
+        <div class="stage-item">Dependency graph ASCII diagram</div>
+        <div class="stage-item">Test plan: 44 tests across 4 categories; 6 safety-critical mandatory-pass tests</div>
+        <div class="stage-item">Verification matrix: all 12 success criteria mapped to test IDs</div>
+        <div class="stage-item">Mission crew manifest: 18 roles, Fleet profile</div>
+        <div class="stage-item">Execution summary table</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="usage">
+    <div class="section-title">How to Use This Package</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Open the PDF</strong> — Read the Vision section to confirm scope alignment with your
+          current gsd-skill-creator dev branch state (v1.49+, DACP milestone).
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Hand to GSD Orchestrator</strong> — Feed the PDF to Claude Code as a mission spec.
+          The Stage 3 wave plan is self-contained: each wave task has model assignment, dependencies,
+          and expected outputs. No additional context required.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Wave 0 first</strong> — Start Claude Code with: <em>"Execute Wave 0 of the Vulkan
+          Screensaver Engine mission. Produce catalog schema YAML, plugin API header, shared types
+          header, root CMakeLists.txt, and CI workflow skeleton."</em>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>CAPCOM gates</strong> — Review and approve at each gate (after Wave 1B, after Wave 1C,
+          after Wave 2 synthesis). The CAPCOM agent will surface issues; your approval is required
+          before proceeding to the next wave.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text">
+          <strong>skill-creator upstream PR</strong> — Wave 3 produces the upstream intelligence YAML
+          diff ready for a PR to the gsd-skill-creator dev branch. Review before merging.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recompile -->
+  <div class="compile-block">
+    <div class="section-title">LaTeX Recompilation</div>
+    <pre><span class="comment"># Three passes required for TOC, cross-refs, and page counts</span>
+<span class="cmd">xelatex</span> -interaction=nonstopmode vulkan_screensaver_mission.tex
+<span class="cmd">xelatex</span> -interaction=nonstopmode vulkan_screensaver_mission.tex
+<span class="cmd">xelatex</span> -interaction=nonstopmode vulkan_screensaver_mission.tex
+
+<span class="comment"># Requires: xelatex, DejaVu fonts (pre-installed on Ubuntu 24)</span>
+<span class="comment"># Packages: fontspec, tcolorbox, tabularx, longtable, colortbl, lastpage</span></pre>
+  </div>
+
+  <!-- Closing quote -->
+  <div class="closing-quote">
+    "Any program that can be made to render on an X window created by another process can be used
+    as a screen saver. Just get the window ID out of $XSCREENSAVER_WINDOW, draw on that, and you're done."
+    <cite>— JWZ, README.hacking, 1992 — still the entire specification, thirty-four years later</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · XScreenSaver / Vulkan Screensaver Engine ·
+  <span>March 27, 2026</span> · gsd-skill-creator dev branch
+</footer>
+
+</body>
+</html>
