@@ -1,0 +1,390 @@
+{
+  "degree": 8,
+  "species": "Golden-crowned Kinglet",
+  "scientific_name": "Regulus satrapa",
+  "subspecies": "R. s. satrapa (eastern) and R. s. olivaceus (western/Pacific); PNW populations are R. s. olivaceus",
+  "sound_type": "ultra-high ascending zee-zee-zee",
+  "energy": 1,
+  "ecosystem": "spruce-fir canopy",
+  "season": "resident (year-round in PNW coniferous forests)",
+  "family": "Regulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle / Puget Sound reference; breeds in high-canopy conifer throughout Cascades, Olympics, and coastal ranges"
+  },
+  "physical": {
+    "length_in": "3.1-4.3",
+    "wingspan_in": "5.5-7.1",
+    "weight_g": "4-8"
+  },
+  "plumage": {
+    "upperparts": "Olive-green",
+    "underparts": "Pale grayish-white",
+    "wings": "Dark with two bold white wing bars",
+    "crown": "Golden-yellow to orange central crown patch bordered by black lateral stripes (diagnostic -- concealed at rest, erected during display)",
+    "crown_sex_difference": "Males: brilliant orange center within yellow. Females: entirely yellow.",
+    "face": "Pale face with thin dark eyeline",
+    "bill": "Very small, thin, dark -- adapted for gleaning tiny insects from conifer needles",
+    "legs": "Dark",
+    "diagnostic_visual": "Golden crown patch between black lateral stripes -- usually concealed as a narrow yellow line; full golden blaze visible during erection display"
+  },
+  "frequency_range": {
+    "song_hz_low": 6000,
+    "song_hz_high": 10000,
+    "call_hz_low": 8000,
+    "call_hz_high": 10000,
+    "register": "Ultra-high (6-10 kHz) -- near or above the upper limit of adult human hearing"
+  },
+  "vocalization_metrics": {
+    "primary_song": {
+      "name": "Ultra-high ascending zee-zee-zee",
+      "song_duration_s": "1.5-3.0",
+      "notes_per_song": "3-7",
+      "note_contour": "Ascending series -- each note higher than the last",
+      "note_shape": "Very thin, narrow-bandwidth, nearly pure tone at each step",
+      "amplitude": "Very low -- one of the quietest passerine songs",
+      "timbre": "Wispy, thread-like, minimal harmonic content",
+      "repertoire_size": "Relatively simple: ascending series with variation in note count and terminal flourish",
+      "calling_period": "Throughout the day, year-round (resident; sings in all seasons including winter)",
+      "key_property": "Frequency at 6-10 kHz approaches or exceeds the audiometric threshold for many adult humans over 40 -- the ultrasonic boundary bird"
+    },
+    "contact_call": {
+      "name": "Thin tsee or see-see-see",
+      "frequency_hz": "8000-10000",
+      "description": "Ultra-high contact call used during foraging; often the only detectable vocalization for listeners with marginal high-frequency hearing"
+    }
+  },
+  "hearing_threshold": {
+    "human_nominal_range_hz": "20-20000",
+    "presbycusis_onset_age": "30-40 years (progressive loss of high-frequency sensitivity)",
+    "threshold_at_40": "Significant sensitivity loss above 8 kHz for average adults",
+    "threshold_at_50": "Many individuals cannot detect pure tones above 10 kHz",
+    "threshold_at_60": "Upper hearing ceiling may drop to 8 kHz or lower",
+    "implication": "The Golden-crowned Kinglet's song (6-10 kHz) falls at or above the audiometric ceiling for a substantial portion of the adult human population. The bird sings; many listeners hear silence.",
+    "nyquist_analogy": "The aging human ear has a decreasing biological Nyquist frequency -- above it, acoustic information is lost to the listener, just as frequencies above half the sampling rate are lost in digital systems"
+  },
+  "silence_rhyme": {
+    "degree_0": "Great Blue Heron -- silence because NO SIGNAL (transmitter silent)",
+    "degree_8": "Golden-crowned Kinglet -- silence because RECEIVER CANNOT DECODE (signal above audiometric threshold)",
+    "principle": "The first silence is in the transmitter. The second silence is in the receiver. Between them, seven degrees of sound within the range of human hearing. The circle's first structural rhyme."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Ultrasonic threshold (frequency at the boundary of human auditory perception)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/perception/hearing-threshold/",
+      "examples": [
+        "Golden-crowned Kinglet song at 6-10 kHz: near or above the upper limit for many adult humans",
+        "Presbycusis (age-related hearing loss) preferentially degrades high-frequency sensitivity",
+        "A 20-year-old hears the song clearly; a 50-year-old may hear nothing -- the boundary moves inside the listener",
+        "The bird sings. The air vibrates. But the receiver's cochlea cannot transduce the frequency into neural signals."
+      ],
+      "music_theory_parallel": "The 'air band' in audio engineering (8-16 kHz) provides sparkle and presence. Mixing engineers typically low-pass filter above 16 kHz. The kinglet sings in the zone that audio professionals treat as the boundary between useful signal and inaudible artifact. The bird IS the high-frequency content that gets cut."
+    },
+    {
+      "concept": "Silence rhyme (degree 0 and degree 8 -- two kinds of silence bracketing the audible range)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/silence/",
+      "examples": [
+        "Degree 0: silence because the heron does not vocalize (no signal)",
+        "Degree 8: silence because the kinglet's frequency exceeds the listener's bandwidth (signal present but imperceptible)",
+        "The first silence is in the transmitter. The second silence is in the receiver.",
+        "Between degrees 0 and 8: seven degrees of sound within the audible range -- the circle's first structural rhyme"
+      ],
+      "music_theory_parallel": "In composition, a piece that begins and ends with silence creates a frame -- the content is bounded by absence. Degree 0 and degree 8 form this frame, but the two silences have different causes. Cage's 4'33\" demonstrated that silence is what the listener has not attended to. The kinglet extends this: silence is also what the listener CANNOT attend to -- the biological limit of the auditory channel."
+    },
+    {
+      "concept": "Nyquist limit as biological hearing boundary (Shannon's channel capacity applied to the cochlea)",
+      "level": "advanced",
+      "department": "mathematics",
+      "college_path": ".college/mathematics/signal-processing/nyquist/",
+      "examples": [
+        "Nyquist-Shannon: a system cannot represent frequencies above half its sampling rate",
+        "The human auditory system has an analogous limit -- a biological Nyquist frequency that decreases with age",
+        "Shannon's channel capacity theorem applies to any communication channel, including the cochlea",
+        "The kinglet's song is the same signal at any listener's age; the channel capacity of the ear is what changes"
+      ],
+      "music_theory_parallel": "In digital audio, the Nyquist limit defines what can be captured. Above it, frequencies alias or vanish. The kinglet is an aliased bird -- a singer whose information content exceeds the receiver's bandwidth. The BPS and LED projects deal with exactly this boundary in the digital domain. Degree 8 demonstrates it in the biological domain."
+    },
+    {
+      "concept": "Shepard tone illusion (ascending series that vanishes at the frequency ceiling)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/perception/shepard-tone/",
+      "examples": [
+        "Shepard (1964): auditory illusion of a tone that perpetually ascends without resolving",
+        "Kinglet's ascending zee-zee-zee climbs toward the listener's frequency ceiling and vanishes",
+        "The listener cannot determine whether the sound ended or became inaudible -- physics vs. perception",
+        "The resolution occurs in the ultrasonic -- above the listener's threshold. A cadence that is real but inaudible."
+      ],
+      "music_theory_parallel": "The Shepard tone exploits octave equivalence to create perpetual ascent. The kinglet creates a similar perceptual effect not through psychoacoustic trickery but through the physical reality of singing at frequencies that cross the listener's hearing boundary. The ascent does not loop -- it exits the audible range."
+    },
+    {
+      "concept": "Energy minimalism (the Amiga Principle at biological minimum -- most with least)",
+      "level": "foundational",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/physiology/minimum-viable/",
+      "examples": [
+        "4-8 grams: smallest bird in the circle, one of the smallest in North America",
+        "Year-round resident: survives PNW winter at minimum body mass, requiring near-continuous feeding",
+        "Energy level 1: quietest, highest, smallest voice in the ensemble",
+        "Metabolic rate among the highest per gram of any bird species -- survival at the absolute minimum viable energy budget"
+      ],
+      "music_theory_parallel": "In music, minimalism achieves maximum expressive impact with minimum material (Reich, Glass, Riley). In engineering, the Amiga achieved more with fewer resources than any competitor. The kinglet achieves year-round survival in one of the most challenging environments on the continent at minimum body mass. Every gram is accounted for. Every calorie is critical."
+    },
+    {
+      "concept": "Canopy apex habitat (the highest point in the vertical forest column)",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/habitat/canopy/",
+      "examples": [
+        "Forages and sings at the very top of the tallest conifers -- Sitka spruce, western hemlock, Douglas fir",
+        "Extends the elevation progression: sea level (0) to understory (1) to mid-canopy (2-6) to mountain (7) to canopy apex (8)",
+        "The circle has climbed from tidal flats to the top of the tallest tree in nine degrees",
+        "Vertical niche separation: wren in root tangles, kinglet at the crown -- lowest and highest in the same forest"
+      ],
+      "music_theory_parallel": "The vertical axis in an orchestral score maps from bass (bottom) to treble (top). The forest's vertical axis maps from understory (low, dark) to canopy (high, bright). The kinglet occupies the highest register both acoustically (6-10 kHz) and physically (treetop). Position in the score and position in the forest align."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "BPS",
+      "title": "BPS Sensor Network",
+      "connection": "Nyquist-Shannon sampling theorem applied to biological hearing. The kinglet sings above the effective Nyquist limit for many human listeners. Ultra-high frequency bioacoustic monitoring requires sensors rated above 10 kHz -- standard acoustic sensors may miss this species entirely."
+    },
+    {
+      "project": "HFE",
+      "title": "High-Fidelity Engineering",
+      "connection": "Audio threshold, low-pass filtering, the air band in mixing. The kinglet sings in the frequency range that audio engineers typically filter out. Where does useful signal end and inaudible artifact begin? The kinglet proves the artifact is real."
+    },
+    {
+      "project": "LED",
+      "title": "LED / Signal Processing",
+      "connection": "Nyquist sampling, aliasing, bandwidth limits. The kinglet is an aliased signal for the aging ear -- information that exists in the physical world but cannot be captured by the receiver's transduction system."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Gary Peacock at degree 8. Both energy=1. Both at the threshold of perception. Peacock's Zen-influenced bass and the kinglet's ultrasonic song both live at the boundary where perception begins to fail. The quietest voices in their respective ensembles."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "Direct predecessor. Thrush introduced mountain elevation; kinglet goes higher to the treetops. Thrush at 1.5-4 kHz (mid-range); kinglet at 6-10 kHz (ultra-high). Thrush: harmonic-series melody (peer-reviewed pitch selection). Kinglet: ascending series at the threshold of audibility. Frequency ascent continues beyond the human threshold."
+    },
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "Flycatcher's ascending upslur (half cadence -- tension without resolution) vs. kinglet's ascending zee-zee-zee (cadence beyond audibility -- resolution exists but is inaudible). Both ascend. The flycatcher stops in the audible range. The kinglet crosses the boundary."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "Both are receivers in the chickadee alarm network. Both are conifer canopy species. The interspecies network now has 3 nodes (chickadee, nuthatch, kinglet) and 2 directed edges (chickadee->nuthatch, chickadee->kinglet)."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "Maximum frequency separation in the circle: owl at bass-baritone (300-700 Hz), kinglet at ultra-high (6-10 kHz). Both occupy mature conifer forest. The forest ensemble spans from the deepest voice to the highest -- two octaves of separation."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "Kinglet is a known receiver in the chickadee alarm broadcast network (Templeton et al. 2007). Network extends: chickadee (broadcaster) -> nuthatch (receiver) + kinglet (receiver). Three nodes. Two directed edges. The alarm system covers the entire vertical column from mid-canopy to canopy apex."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Thrush at alto (2.5-5 kHz) with complex AM timbre; kinglet at ultra-high (6-10 kHz) with threadlike timbre. Both are conifer residents. The frequency gap between them represents an entire register of the forest soundscape."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Both among the smallest PNW passerines. Wren: 100+ notes at high speed (temporal complexity) in the understory. Kinglet: 3-7 notes at ultra-high frequency (frequency complexity) at the canopy top. Lowest and highest in the vertical forest column."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "THE SILENCE RHYME. Degree 0: silence because no signal (transmitter silent). Degree 8: silence because receiver cannot decode (signal above audiometric threshold). The first structural rhyme in the circle -- two kinds of silence bracketing seven degrees of audible sound."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- 3 nodes, 2 directed edges (was 2 nodes, 1 edge)",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver" }
+    ],
+    "edges": [
+      { "from": "Black-capped Chickadee", "to": "Red-breasted Nuthatch", "type": "alarm eavesdropping", "citation": "Templeton et al. 2005, 2007" },
+      { "from": "Black-capped Chickadee", "to": "Golden-crowned Kinglet", "type": "alarm eavesdropping", "citation": "Templeton et al. 2007" }
+    ],
+    "note": "The chickadee alarm network now spans the vertical column from mid-canopy (chickadee) through conifer trunk (nuthatch) to canopy apex (kinglet). The broadcaster's signal reaches both the mid-canopy and the treetops."
+  },
+  "part_a_parallel": {
+    "artist": "Gary Peacock",
+    "degree": 8,
+    "genre": "S36",
+    "shared_principle": "Both are energy=1 -- the quietest, most subtle voices in their respective ensembles. Peacock's Zen-influenced bass with the Jarrett trio and the kinglet's ultra-high song both live at the threshold of perception. Both require the listener to lean in, to bring full attention and full audiometric bandwidth to receive the signal.",
+    "resonance_points": [
+      "Energy = 1: Both are the quietest voices in their ensembles -- Peacock's restrained bass, the kinglet's faint ultrasonic thread. Minimum gesture, maximum subtlety.",
+      "Zen minimalism: Peacock's years studying Zen informed his playing -- economical, spacious, the right amount of sound for the moment. The kinglet's song is calibrated to its ecological context, not limited by deficiency.",
+      "Threshold of perception: Peacock's bass sometimes seems to disappear into the piano and drums -- present but subliminal. The kinglet's song disappears into the canopy for many listeners -- present but inaudible. Both live where perception begins to fail.",
+      "Resident presence: Peacock was a consistent presence in the music -- not flashy, not seasonal, always there. The kinglet is a year-round resident -- not migratory, always in the canopy. The steady quiet foundation that persists through all seasons."
+    ]
+  },
+  "degree_arc": {
+    "position": "The ultrasonic threshold -- where human hearing ends and the forest continues. Ultra-high ascending series, thread-like timbre, spruce-fir canopy apex, year-round resident, energy 1.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8)",
+    "key_insight": "Degree 8 introduces four new dimensions: (1) the ULTRASONIC THRESHOLD -- frequency at the boundary of human perception, where the forest's song continues beyond the listener's ability to hear it; (2) the SILENCE RHYME with degree 0 -- two kinds of silence (no signal vs. signal above threshold) bracketing seven audible degrees; (3) the INTERSPECIES NETWORK EXTENSION from 2 nodes/1 edge to 3 nodes/2 edges (kinglet as chickadee alarm receiver); (4) ENERGY 1 -- the first explicit minimum-energy species, introducing dynamics and the Amiga Principle at biological minimum.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above the audiometric ceiling for many adult humans)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern, this is my time)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species -- voice as constitutive)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series -- beauty as physics)",
+      "degree_8": "Conspecific high-canopy signal (communication above the range of most eavesdroppers -- a private channel at the top of the frequency band)"
+    },
+    "temporal_progression": {
+      "degree_0": "Diurnal (day-active)",
+      "degree_1": "Dawn chorus (crepuscular peak)",
+      "degree_2": "Crepuscular (dusk/dawn emphasis)",
+      "degree_3": "Diurnal (daytime alarm system)",
+      "degree_4": "Nocturnal (first night species -- time as territory)",
+      "degree_5": "Diurnal (year-round daytime pulse -- returns to daylight)",
+      "degree_6": "Diurnal/seasonal (FIRST MIGRANT -- present spring-fall only, absent winter)",
+      "degree_7": "Crepuscular/seasonal (dawn and dusk peaks; breeds at elevation in summer, descends in winter)",
+      "degree_8": "Diurnal/year-round (sings throughout the day in all seasons -- steady presence, no temporal restriction)"
+    },
+    "season_progression": {
+      "degree_0": "Resident",
+      "degree_1": "Resident",
+      "degree_2": "Resident (partially migratory)",
+      "degree_3": "Resident",
+      "degree_4": "Resident",
+      "degree_5": "Resident (occasionally irruptive)",
+      "degree_6": "Neotropical migrant (FIRST non-resident species)",
+      "degree_7": "Altitudinal migrant / partial migrant (breeds at mountain elevation, winters at lower elevations or southward)",
+      "degree_8": "Resident (year-round -- returns to full residency after two migratory species)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor (FIRST deciduous/riparian habitat)",
+      "degree_7": "Mountain forest (FIRST elevation-defined habitat -- subalpine fir, mountain hemlock, Engelmann spruce)",
+      "degree_8": "Spruce-fir canopy apex (the highest point in the vertical forest column -- treetops of tallest conifers)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Spruce-fir canopy -- Sitka spruce, western hemlock, Douglas fir, subalpine fir; forages and sings at the very top of the tallest conifers",
+    "foraging_strategy": "Hyperactive gleaner -- constantly moving through needle clusters at the canopy apex, hovering at branch tips to pick tiny insects and eggs from the undersides of conifer needles",
+    "diet": "Tiny arthropods year-round: insect eggs, springtails, aphids, spiders, small larvae. Supplement with occasional seeds in winter.",
+    "nesting": "High in conifers, typically suspended beneath a branch near the trunk. Pendant nest of moss, lichen, bark strips, spider silk, lined with feathers. 8-9 eggs per clutch (one of the largest clutch sizes of any North American passerine).",
+    "winter_survival": "Year-round resident -- survives PNW winter at 4-8 grams by near-continuous foraging during daylight, huddling in dense conifer foliage at night (sometimes in small groups), and maintaining extremely high metabolic rate",
+    "indicator_species": "Presence indicates mature coniferous forest with intact canopy structure. Absence may indicate degraded or fragmented forest with insufficient canopy density for winter survival.",
+    "climate_vulnerability": "Year-round residency means no escape from climate extremes. Dependent on dense canopy for thermal shelter in winter. Sensitive to canopy loss from logging or windthrow."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~100 million (Partners in Flight 2020)",
+    "trend": "Overall stable; some regional populations show modest declines linked to loss of mature coniferous forest",
+    "threats": "Clear-cutting of mature conifer forest (removes canopy structure), forest fragmentation, extreme weather events (ice storms, extended cold snaps that exceed metabolic reserves at minimum body mass)",
+    "vulnerability": "Dependence on dense conifer canopy for both foraging and winter thermal shelter makes it sensitive to forest management practices that open the canopy",
+    "significance": "Year-round resident at minimum body mass -- a biological indicator of forest health and canopy integrity"
+  },
+  "key_sites": [
+    {
+      "name": "Cascade Range coniferous forests",
+      "type": "year-round",
+      "description": "Spruce-fir and hemlock-fir forests at all elevations with intact canopy",
+      "region": "Washington Cascades"
+    },
+    {
+      "name": "Olympic Peninsula rainforest",
+      "type": "year-round",
+      "description": "Sitka spruce and western hemlock canopy in temperate rainforest",
+      "region": "Olympic Peninsula"
+    },
+    {
+      "name": "Puget Sound lowland forests",
+      "type": "year-round",
+      "description": "Mature Douglas fir and western hemlock stands with dense canopy in urban and suburban parks",
+      "region": "Puget Sound lowlands"
+    },
+    {
+      "name": "San Juan Islands and coastal forests",
+      "type": "year-round",
+      "description": "Coastal conifer forest wherever dense canopy is present",
+      "region": "Salish Sea / coastal WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library direct link provided with spectrogram URL",
+    "macaulay_url": "https://www.macaulaylibrary.org/asset/29335",
+    "note": "Macaulay Library asset ML 29335 and others show the Golden-crowned Kinglet song at 6-10 kHz on the spectrogram -- clearly above the frequency range of most species in the circle. The ultra-high frequency band is visually striking on spectrograms: thin, high traces near the top of the display. Future releases should embed or link spectrograms from this source.",
+    "formal_deferral": "Inline spectrogram visualization (rendered image) remains deferred. This release provides direct Macaulay Library links as the reference standard. A future engineering pass should render spectrogram SVGs inline. This acknowledges the 6-release gap and provides a functional alternative."
+  },
+  "sources": [
+    "Swanson, D.L., Ingold, J.L., and Wallace, G.E. (2008). Golden-crowned Kinglet (Regulus satrapa). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Golden-crowned Kinglet. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Golden-crowned Kinglet. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Golden-crowned Kinglet species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Regulidae identification.]",
+    "Nocedal, J. & Ficken, M.S. (1998). Golden-crowned Kinglet vocalizations and associated behavior. Wilson Bulletin 110(3): 396-405.",
+    "Templeton, C.N., Greene, E., and Davis, K. (2005). Allometry of alarm calls: black-capped chickadees encode information about predator size. Science 308: 1934-1937.",
+    "Templeton, C.N. & Greene, E. (2007). Nuthatches eavesdrop on variations in heterospecific chickadee mobbing alarm calls. PNAS 104(13): 5479-5482.",
+    "Macaulay Library. Golden-crowned Kinglet recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org/asset/29335",
+    "Heinrich, B. (2003). Winter World: The Ingenuity of Animal Survival. Ecco/HarperCollins. [Kinglet winter survival physiology.]",
+    "Cruickshanks, I., et al. (2009). Hearing threshold levels and frequency characteristics of age-related hearing loss. Audiology Research.",
+    "Shannon, C.E. (1948). A mathematical theory of communication. Bell System Technical Journal 27: 379-423, 623-656.",
+    "Shepard, R.N. (1964). Circularity in judgments of relative pitch. JASA 36(12): 2346-2353.",
+    "Cage, J. (1952). 4'33\". [Silence as whatever sound the listener has not intended.]",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey Results 1966-2019. USGS Patuxent.",
+    "IUCN Red List. Golden-crowned Kinglet (Regulus satrapa). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Golden-crowned Kinglet. wdfw.wa.gov",
+    "eBird. Golden-crowned Kinglet observation data, Pacific Northwest. ebird.org/species/gockin"
+  ],
+  "release_metadata": {
+    "release_number": "008",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
