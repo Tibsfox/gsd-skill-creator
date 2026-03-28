@@ -123,6 +123,7 @@
     { id: 'SGL', name: 'Signal & Light', path: 'SGL/index.html' },
     { id: 'SGM', name: 'Sacred Geometry', path: 'SGM/index.html' },
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
+    { id: 'SCR', name: 'Source Code Review', path: 'SCR/index.html' },
     { id: 'SRG', name: 'Susan Rogers', path: 'SRG/index.html' },
     { id: 'SRD', name: 'SSH & RDP', path: 'SRD/index.html' },
     { id: 'SSM', name: 'Street Music', path: 'SSM/index.html' },
